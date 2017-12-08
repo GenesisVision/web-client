@@ -1,0 +1,7 @@
+.trader-profile {   
+}
+
+.trader-profile__description {
+    max-height: 3rem;
+    overflow: hidden;
+}
