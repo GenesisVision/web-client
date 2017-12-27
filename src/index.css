@@ -7,3 +7,7 @@ body {
 main{
   padding-top: 2rem;
 }
+
+.loading{
+  background-color: --info
+}

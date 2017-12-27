@@ -3,8 +3,7 @@ import { routerMiddleware } from 'react-router-redux'
 import { loadingBarMiddleware } from 'react-redux-loading-bar'
 import thunk from 'redux-thunk'
 import createHistory from 'history/createBrowserHistory'
-import rootReducer from './reducers'
-import { fetchTraders } from './actions/index';
+import rootReducer from '../reducers'
 
 export const history = createHistory()
 
@@ -29,7 +28,5 @@ const store = createStore(
   initialState,
   composedEnhancers
 )
-
-store.dispatch(fetchTraders())
 
 export default store

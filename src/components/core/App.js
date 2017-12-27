@@ -3,9 +3,10 @@ import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'react-router-redux'
 import { Route } from 'react-router-dom'
 import store, { history } from '../../store'
-import Header from './Header';
-import TraderScene from '../TradersScene/TraderScene'
-import InvestorAccount from '../InvestorAccount/InvestorAccount'
+import Header from './Header/Header'
+import TradersScene from '../TradersScene/TradersScene'
+import InvestorScene from '../InvestorScene/InvestorScene'
+import LoginScene from '../LoginScene/LoginScene'
 
 class App extends Component {
   render() {
@@ -15,8 +16,9 @@ class App extends Component {
           <div>
             <Header />
             <main role='main' className='container'>
-              <Route exact path='/' component={TraderScene} />
-              <Route exact path='/dashboard' component={InvestorAccount} />
+              <Route exact path='/' component={TradersScene} />
+              <Route exact path='/dashboard' component={InvestorScene} />
+              <Route exact path='/login' component={LoginScene} />
             </main>
           </div>
         </ConnectedRouter>

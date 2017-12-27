@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Button } from 'reactstrap'
 import TraderBuyModal from './TraderBuyModal/TraderBuyModal'
-import {buyToken} from '../../../../../../actions';
+import {buyToken} from '../../../../../../actions/tradersActions';
 
 
 class TraderBuyToken extends Component {

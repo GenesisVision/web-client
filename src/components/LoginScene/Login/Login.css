@@ -1,0 +1,4 @@
+.login{}
+.login__email-addon, .login__password-addon{
+  width: 2.6rem;
+}
