@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import './TraderProfile.css'
+import Link from 'react-router-dom/Link'
 
 class TraderProfile extends Component {
   state = {
@@ -23,7 +24,9 @@ class TraderProfile extends Component {
           </div>
           <div className='col-sm-8'>
             <div className='card-block'>
-              <h5 className='card-title'>{this.props.name}</h5>
+              <h5 className='card-title'>
+                <Link className='trader-profile__name' to={`/traders/${this.props.id}`}>{this.props.name}</Link>
+              </h5>
               <p className='card-text trader-profile__description'>{this.props.description}</p>
             </div>
           </div>

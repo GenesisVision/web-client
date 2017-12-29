@@ -2,10 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-const MenuLink = props => {
+const MenuLink = ({ url, name, match }) => {
 
-  const { url, name } = props;
-  const isActive = window.location.pathname === url;
+  const isActive = match.url.match(url);
   if (isActive) {
     return (
       <li className='nav-item active'>
@@ -22,7 +21,7 @@ const MenuLink = props => {
 
 MenuLink.propTypes = {
   url: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired
+  name: PropTypes.string.isRequired,
 }
 
 export default MenuLink

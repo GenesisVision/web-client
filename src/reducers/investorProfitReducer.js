@@ -1,5 +1,5 @@
-import { BUY_TOKEN_REQUEST_SUCCESS } from '../actions/tradersActions'
-import { INVESTOR_PROFIT_REQUEST, INVESTOR_PROFIT_REQUEST_SUCCESS } from '../actions/investorProfitActions'
+import { BUY_TOKEN_SUCCESS } from '../actions/buyTokensActions';
+import { INVESTOR_PROFIT_REQUEST, INVESTOR_PROFIT_SUCCESS } from '../actions/investorProfitActions'
 
 const initialState = {
   isFetching: false,
@@ -14,7 +14,7 @@ const investorProfitReducer = (state = initialState, action) => {
         isFetching: true,
         isRequested: true
       }
-    case INVESTOR_PROFIT_REQUEST_SUCCESS:
+    case INVESTOR_PROFIT_SUCCESS:
       return {
         ...state,
         isFetching: false,
@@ -22,7 +22,7 @@ const investorProfitReducer = (state = initialState, action) => {
         trades: action.trades,
         lastUpdated: action.lastUpdated
       }
-    case BUY_TOKEN_REQUEST_SUCCESS:
+    case BUY_TOKEN_SUCCESS:
       const newTrade = {
         traderName: action.traderName,
         tokens: action.tokens,

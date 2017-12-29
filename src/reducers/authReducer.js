@@ -1,11 +1,11 @@
-import { AUTH_TOKEN } from '../utils/const'
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from '../actions/auth/loginActions'
+import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS } from '../actions/auth/loginActions'
+
 import { LOGOUT_SUCCESS } from '../actions/auth/logoutActions'
-import { isAuthenticated } from '../services/authService';
+import { isAuthenticated } from '../services/authService'
 
 const initialState = {
   isFetching: false,
-  isAuthenticated: isAuthenticated(localStorage.getItem(AUTH_TOKEN))
+  isAuthenticated: isAuthenticated()
 };
 
 const authReducer = (state = initialState, action) => {

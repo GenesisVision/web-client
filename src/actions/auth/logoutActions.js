@@ -1,19 +1,19 @@
-import { AUTH_TOKEN } from '../../utils/const'
+import { logout } from '../../services/authService'
 
 export const LOGOUT_REQUEST = 'LOGOUT_REQUEST'
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
 export const LOGOUT_FAILURE = 'LOGOUT_FAILURE'
 
-const requestLogout = () => ({
+const logoutRequest = () => ({
     type: LOGOUT_REQUEST
 })
 
-const receiveLogout = () => ({
+const logoutSuccess = () => ({
     type: LOGOUT_SUCCESS
 })
 
 export const logoutUser = () => dispatch => {
-    dispatch(requestLogout());
-    localStorage.removeItem(AUTH_TOKEN);
-    dispatch(receiveLogout());
+    dispatch(logoutRequest());
+    logout();
+    dispatch(logoutSuccess());
 }

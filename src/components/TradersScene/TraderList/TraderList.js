@@ -2,17 +2,17 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Trader from './Trader/Trader'
 
-const TraderList = props => {  
-  if(props.tradersInfo.isFetching){
+const TraderList = ({ tradersInfo }) => {
+  if (tradersInfo.isFetching) {
     return (null);
   }
 
-  const traderComponets = props.tradersInfo.items.map(trader => (
-      <Trader
-        key={'trader' + trader.id}
-        {...trader}
-      />
-    ));
+  const traderComponets = tradersInfo.items.map(trader => (
+    <Trader
+      key={'trader' + trader.id}
+      {...trader}
+    />
+  ));
 
   return (
     <div className='list-group'>

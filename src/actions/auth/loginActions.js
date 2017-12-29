@@ -1,7 +1,4 @@
-import { AUTH_TOKEN } from '../../utils/const'
-// eslint-disable-next-line
-import { isAuthenticated } from '../../services/authService';
-import httpClient from '../../utils/httpClient';
+import { login } from '../../services/authService'
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
@@ -26,14 +23,8 @@ const loginError = (message) => ({
 export const loginUser = ({ email, password }, history) => async dispatch => {
   dispatch(requestLogin(email))
   try{
-    const data = await httpClient.post('/api/login', {email, password});
-    localStorage.setItem(AUTH_TOKEN, data.token);
+    const data = await login(email, password);    
     dispatch(receiveLogin(data.token));
-    /*if (isAuthenticated(data.token)) {
-        dispatch(receiveLogin(data.token));
-      } else {
-        dispatch(loginError('Token is expired'));
-      }*/
   }
   catch(e){
     dispatch(loginError(e));

@@ -1,10 +1,9 @@
 import {
-  BUY_TOKEN_REQUEST,
-  BUY_TOKEN_REQUEST_SUCCESS,
   TRADERS_REQUEST,
   TRADERS_REQUEST_SUCCESS,
   TRADERS_REQUEST_FAILURE
 } from '../actions/tradersActions'
+import { BUY_TOKEN_REQUEST, BUY_TOKEN_SUCCESS } from '../actions/buyTokensActions';
 
 const initialState = {
   isRequested: false,
@@ -37,7 +36,7 @@ const tradersReducer = (state = initialState, action) => {
       }
     case BUY_TOKEN_REQUEST:
       return state;
-    case BUY_TOKEN_REQUEST_SUCCESS:
+    case BUY_TOKEN_SUCCESS:
       const traders = state.items.map(trader => {
         if (trader.id === action.traderId) {
           return {
