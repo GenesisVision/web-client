@@ -1,31 +1,35 @@
-import { Redirect, Route, Switch } from 'react-router-dom'
-import store, { history } from '../../store'
-
 import { ConnectedRouter } from 'react-router-redux'
+import { Provider } from 'react-redux'
+import { Redirect, Route, Switch } from 'react-router-dom'
+import React from 'react'
+
+import history from '../../utils/history'
+import PrivateRoute from '../common/PrivateRoute'
+import AlertMessageList from '../common/AlertMessageList/AlertMessageList'
 import Header from './Header/Header'
 import InvestorScene from '../InvestorScene/InvestorScene'
 import LoginScene from '../LoginScene/LoginScene'
 import NotFoundPage from './NotFoundPage'
-import { PrivateRoute } from '../common/PrivateRoute'
-import { Provider } from 'react-redux'
-import React from 'react'
+import RegisterScene from '../RegisterScene/RegisterScene'
+import routes from '../../utils/constants/routes'
+import store from '../../store'
 import TradersRoute from '../TradersRoute/TradersRoute'
-
-const renderHeader = () => (
-  <Route path='/:rest' render={({ match }) => (<Header match={match} />)} />
-)
 
 const App = () => (
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <div>
-        {renderHeader()}
-        <main role='main' className='container'>
+        <Route path='/:rest' component={Header} />
+        <div className="col-sm-2 offset-10 fixed-bottom">
+          <AlertMessageList />
+        </div>
+        <main className='container'>
           <Switch>
-            <Route path='/login' component={LoginScene} />
-            <Route path='/traders' component={TradersRoute} />
-            <PrivateRoute path='/dashboard' component={InvestorScene} />
-            <Route exact path='/' render={() => (<Redirect to='/traders' />)} />
+            <Route path={routes.login} component={LoginScene} />
+            <Route path={routes.signup} component={RegisterScene} />
+            <Route path={routes.traders} component={TradersRoute} />
+            <PrivateRoute path={routes.dashboard} component={InvestorScene} />
+            <Route exact path={routes.index} render={() => (<Redirect to={routes.traders} />)} />
             <Route component={NotFoundPage} />
           </Switch>
         </main>

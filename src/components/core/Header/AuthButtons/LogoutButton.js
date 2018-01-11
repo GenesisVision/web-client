@@ -1,12 +1,25 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import loginActions from '../../../../actions/loginActions'
 
-const LogoutButton = ({ onLogoutClick }) => (
+const LogoutButton = ({ username, logoutUser }) => (
   <div>
-    <span>UserName</span>
-    <button className='btn btn-outline-success my-2 my-sm-0' onClick={onLogoutClick}>
+    <span>{username}</span>
+    <button className='btn btn-outline-success my-2 my-sm-0' onClick={() => { logoutUser() }}>
       Log Out
     </button>
-  </div>
+  </div >
 )
 
-export default LogoutButton
+const mapStateToProps = state => {
+  const { username } = state.authData;
+  return { username };
+}
+
+const mapDispatchToProps = (dispatch) => ({
+  logoutUser: () => {
+    dispatch(loginActions.logoutUser());
+  }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(LogoutButton)

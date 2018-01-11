@@ -1,4 +1,4 @@
-import { AUTH_TOKEN } from '../utils/const'
+import { AUTH_TOKEN } from '../utils/constants'
 
 const callApi = (url, options, authenticated) => {
   let token = localStorage.getItem(AUTH_TOKEN);

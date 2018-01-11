@@ -16,11 +16,11 @@ const buyTokensReceive = (traderId, traderName, tokens, date) => ({
   lastUpdated: Date.now()
 })
 
-export const buyToken = (traderId, tokens) => dispatch => {
+const buyToken = (traderId, tokens) => dispatch => {
   dispatch(buyTokensRequest(traderId, tokens));
   return new Promise((resolve, reject) => {
     const promiseTimeout = setTimeout(() => {
-      clearTimeout(promiseTimeout); 
+      clearTimeout(promiseTimeout);
       resolve({ traderId, traderName: `${traderId}Name`, tokens, date: new Date() });
     }, 1000);
   })
@@ -28,3 +28,7 @@ export const buyToken = (traderId, tokens) => dispatch => {
       dispatch(buyTokensReceive(data.traderId, data.traderName, data.tokens, data.date));
     })
 }
+
+const buyTokenActions = { buyToken }
+
+export default buyTokenActions

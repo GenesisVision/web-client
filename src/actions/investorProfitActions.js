@@ -1,4 +1,5 @@
-import httpClient from "../utils/httpClient";
+import httpClient from '../utils/httpClient'
+import alertMessageActions from '../actions/alertMessageActions'
 
 export const INVESTOR_PROFIT_REQUEST = 'INVESTOR_PROFIT_REQUEST'
 export const INVESTOR_PROFIT_SUCCESS = 'INVESTOR_PROFIT_SUCCESS'
@@ -21,13 +22,17 @@ const investorProfitFailure = (message) => ({
   lastUpdated: Date.now()
 })
 
-export const fetchInvestorProfit = () => async dispatch => {
+const fetch = () => async dispatch => {
   dispatch(investorProfitRequest());
-  try{
+  try {
     const data = await httpClient.get('/api/investor-profit', null, true);
     dispatch(investorProfitSuccess(data));
   }
-  catch(e){
+  catch (e) {
     dispatch(investorProfitFailure(e));
+    dispatch(alertMessageActions.error('Internal Server Error'));
   }
 }
+
+const investorProfitActions = { fetch }
+export default investorProfitActions

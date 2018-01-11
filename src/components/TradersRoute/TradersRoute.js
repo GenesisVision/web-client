@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import TraderScene from '../TraderScene/TraderScene'
-import TradersScene from '../TradersScene/TradersScene'
+import TraderScene from './TraderScene/TraderScene'
+import TradersScene from './TradersScene/TradersScene'
 
 const TradersRoute = ({match}) => (
   <Switch>

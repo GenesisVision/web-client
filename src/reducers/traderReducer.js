@@ -5,8 +5,7 @@ import {
 } from '../actions/traderActions'
 
 const initialState = {
-  isRequested: false,
-  isFetching: false
+  isFetching: true
 };
 
 const traderReducer = (state = initialState, action) => {
@@ -14,8 +13,7 @@ const traderReducer = (state = initialState, action) => {
     case TRADER_REQUEST:
       return {
         ...state,
-        isFetching: true,
-        isRequested: true
+        isFetching: true
       }
     case TRADER_REQUEST_SUCCESS:
       return {

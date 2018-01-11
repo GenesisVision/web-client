@@ -1,11 +1,10 @@
 import { createStore, applyMiddleware, compose } from 'redux'
-import { routerMiddleware } from 'react-router-redux'
 import { loadingBarMiddleware } from 'react-redux-loading-bar'
+import { routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
-import createHistory from 'history/createBrowserHistory'
-import rootReducer from '../reducers'
 
-export const history = createHistory()
+import history from '../utils/history'
+import rootReducer from '../reducers'
 
 const initialState = {
 }

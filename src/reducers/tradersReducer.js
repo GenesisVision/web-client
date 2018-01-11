@@ -6,9 +6,8 @@ import {
 import { BUY_TOKEN_REQUEST, BUY_TOKEN_SUCCESS } from '../actions/buyTokensActions';
 
 const initialState = {
-  isRequested: false,
-  isFetching: false,
-  items: []
+  isFetching: true,
+  traders: []
 };
 
 const tradersReducer = (state = initialState, action) => {
@@ -16,28 +15,27 @@ const tradersReducer = (state = initialState, action) => {
     case TRADERS_REQUEST:
       return {
         ...state,
-        isFetching: true,
-        isRequested: true
+        isFetching: true
       }
     case TRADERS_REQUEST_SUCCESS:
       return {
         ...state,
         isFetching: false,
-        items: action.items,
+        traders: action.traders,
         lastUpdated: action.lastUpdated
       }
     case TRADERS_REQUEST_FAILURE:
       return {
         ...state,
         isFetching: false,
-        items: [],
+        traders: [],
         error: action.message,
         lastUpdated: action.lastUpdated
       }
     case BUY_TOKEN_REQUEST:
       return state;
     case BUY_TOKEN_SUCCESS:
-      const traders = state.items.map(trader => {
+      const traders = state.traders.map(trader => {
         if (trader.id === action.traderId) {
           return {
             ...trader,
@@ -49,7 +47,7 @@ const tradersReducer = (state = initialState, action) => {
       })
       return {
         ...state,
-        items: traders,
+        traders: traders,
         lastUpdated: action.lastUpdated
       }
     default:

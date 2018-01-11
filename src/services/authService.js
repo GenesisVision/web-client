@@ -1,4 +1,4 @@
-import { AUTH_TOKEN } from '../utils/const'
+import { AUTH_TOKEN } from '../utils/constants'
 import httpClient from '../utils/httpClient'
 
 const jwt_decode = require('jwt-decode')
@@ -28,9 +28,16 @@ const isAuthenticated = () => {
   return decodedToken.exp < dateNow;
 }
 
-const login = async (email, password) => {
+const getUserName = () => {
+  const token = localStorage.getItem(AUTH_TOKEN);
+  return isAuthenticated()
+    ? decodeToken(token).username
+    : '';
+}
+
+const login = async (user) => {
   try {
-    const data = await httpClient.post('/api/login', { email, password });
+    const data = await httpClient.post('/api/login', user);
     localStorage.setItem(AUTH_TOKEN, data.token);
     return data;
   } catch (e) {
@@ -42,4 +49,15 @@ const logout = () => {
   localStorage.removeItem(AUTH_TOKEN);
 }
 
-export { isAuthenticated, login, logout }
+const register = async (user) => {
+  try {
+    const data = await httpClient.post('/api/login', user);
+    localStorage.setItem(AUTH_TOKEN, data.token);
+    return data;
+  } catch (e) {
+    throw new Error('Register Error');
+  }
+}
+
+const authService = { isAuthenticated, getUserName, login, logout, register }
+export default authService

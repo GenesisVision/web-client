@@ -1,4 +1,5 @@
-import httpClient from "../utils/httpClient"
+import httpClient from '../utils/httpClient'
+import alertMessageActions from '../actions/alertMessageActions'
 
 export const TRADER_REQUEST = 'TRADER_REQUEST'
 export const TRADER_REQUEST_SUCCESS = 'TRADER_REQUEST_SUCCESS'
@@ -20,13 +21,17 @@ const traderFailure = (message) => ({
   lastUpdated: Date.now()
 })
 
-export const fetchTrader = (id) => async dispatch => {
+const fetch = (id) => async dispatch => {
   dispatch(traderRequest());
-  try{
+  try {
     const data = await httpClient.get(`/api/traders/${id}`, null);
     dispatch(traderReceive(data));
   }
-  catch(e){
+  catch (e) {
     dispatch(traderFailure(e));
+    dispatch(alertMessageActions.error('Internal Server Error'));
   }
 }
+
+const traderActions = { fetch }
+export default traderActions

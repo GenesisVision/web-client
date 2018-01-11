@@ -4,22 +4,23 @@
   "private": true,
   "proxy": "http://localhost:3001",
   "dependencies": {
-    "bootstrap": "4.0.0-beta.2",
+    "bootstrap": "^4.0.0-beta.3",
     "install": "^0.10.2",
     "jwt-decode": "^2.2.0",
     "open-iconic": "^1.1.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-number-format": "^3.1.2",
-    "react-popper": "^0.7.4",
+    "react-number-format": "^3.1.3",
+    "react-popper": "^0.7.5",
     "react-redux": "^5.0.6",
-    "react-redux-loading-bar": "^3.1.0",
+    "react-redux-loading-bar": "^3.1.1",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.9",
     "react-scripts": "1.0.17",
     "reactstrap": "^5.0.0-alpha.4",
-    "recharts": "^1.0.0-beta.7",
+    "recharts": "^1.0.0-beta.9",
     "redux": "^3.7.2",
+    "redux-form": "^7.2.0",
     "redux-thunk": "^2.2.0"
   },
   "scripts": {
@@ -29,7 +30,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "enzyme": "^3.2.0",
+    "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "react-test-renderer": "^16.2.0",
     "redux-devtools": "^3.4.1"

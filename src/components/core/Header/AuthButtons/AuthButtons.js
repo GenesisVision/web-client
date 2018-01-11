@@ -1,22 +1,32 @@
 import LoginButton from './LoginButton'
 import LogoutButton from './LogoutButton'
 import React from 'react'
-import { logoutUser } from '../../../../actions/auth/logoutActions'
+import { connect } from 'react-redux'
+import routes from '../../../../utils/constants/routes'
 
-const AuthButtons = ({ dispatch, auth, match }) => {
-
-  const onLogoutClick = () => {
-    dispatch(logoutUser());
-  }
+const AuthButtons = ({ match, isAuthenticated }) => {
   
-  if (match.url.match('/login')) {
+  const authRoutes = [routes.login, routes.signup];
+  if (authRoutes.some(x=> match.url.match(x))) {
     return null;
   }
-  if (auth.isAuthenticated) {
-    return (<LogoutButton onLogoutClick={onLogoutClick} />);
+
+  if (isAuthenticated) {
+    return (<LogoutButton />);
   }
   return (<LoginButton />)
-
 }
 
-export default AuthButtons
+const mapStateToProps = (state) => {
+  const { authData } = state;
+  const { isAuthenticated } = authData;
+  
+  return {
+    isAuthenticated
+  }
+}
+
+export default connect(
+  mapStateToProps
+)(AuthButtons)
+

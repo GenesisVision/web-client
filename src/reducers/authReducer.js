@@ -1,41 +1,31 @@
-import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS } from '../actions/auth/loginActions'
-
-import { LOGOUT_SUCCESS } from '../actions/auth/logoutActions'
-import { isAuthenticated } from '../services/authService'
+import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from '../actions/loginActions'
+import authService from '../services/authService'
+import { REGISTER_SUCCESS } from '../actions/registerActions';
 
 const initialState = {
-  isFetching: false,
-  isAuthenticated: isAuthenticated()
+  isAuthenticated: authService.isAuthenticated(),
+  username: authService.getUserName()
 };
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOGIN_REQUEST:
-      return {
-        ...state,
-        isFetching: true,
-        isAuthenticated: false,
-        email: action.email
-      }
     case LOGIN_SUCCESS:
       return {
         ...state,
-        isFetching: false,
         isAuthenticated: true,
-        errorMessage: ''
+        username: action.username
       }
-    case LOGIN_FAILURE:
+    case REGISTER_SUCCESS:
       return {
         ...state,
-        isFetching: false,
-        isAuthenticated: false,
-        errorMessage: action.message
+        isAuthenticated: true,
+        username: action.username
       }
     case LOGOUT_SUCCESS:
       return {
         ...state,
-        isFetching: true,
-        isAuthenticated: false
+        isAuthenticated: false,
+        username: ''
       }
     default:
       return state
