@@ -1,7 +1,22 @@
 import { AUTH_TOKEN } from '../utils/constants'
+import * as jwt_decode from 'jwt-decode'
+import { apiUrl } from '../utils/constants/apiUrl'
+
+const shouldRefreshToken = () => {
+  const token = localStorage.getItem(AUTH_TOKEN);
+  if (token === null) return false;
+
+  const dateNowSec = Math.floor(Date.now() / 1000);
+  const decodedToken = jwt_decode(token);
+  return decodedToken.exp - dateNowSec < 60;
+}
+
+const refreshToken = async () => {
+  const newToken = httpClient.post(apiUrl.refreshToken, {}, true);
+  localStorage.setItem(AUTH_TOKEN, newToken);
+}
 
 const callApi = (url, options, authenticated) => {
-  let token = localStorage.getItem(AUTH_TOKEN);
   let headers = {
     'Accept': 'application/json',
   };
@@ -12,9 +27,7 @@ const callApi = (url, options, authenticated) => {
   }
 
   if (authenticated) {
-    if(token === null){
-      throw new Error('Token is absent');
-    };
+    const token = localStorage.getItem(AUTH_TOKEN);
 
     options = {
       ...options,
@@ -23,34 +36,56 @@ const callApi = (url, options, authenticated) => {
   }
 
   return fetch(url, options)
-    .then(checkStatus)
     .then(parseJSON)
+    .then(handleResponse)
 }
 
-const checkStatus = response => {
-  if (response.status >= 200 && response.status < 300) {
-    return response;
-  } else {
-    const error = new Error(`HTTP Error ${response.statusText}`);
-    error.status = response.statusText;
-    error.response = response;
+const handleResponse = (responseWithData) => {
+  if (responseWithData.response.ok) {
+    return responseWithData.data;
+  }
+  else {
+    const error = new Error(responseWithData.data);
+    error.response = responseWithData.response;
     throw error;
   }
 }
 
-const parseJSON = response => {
-  return response.json();
+const parseJSON = (response) => {
+  return response.text()
+    .then((text) => {
+      let data = '';
+      try {
+        data = JSON.parse(text)
+      }
+      catch (ex) {
+        data = text;
+      }
+
+      return {
+        response,
+        data
+      }
+    })
 }
 
 const httpClient = {
-  get: (url, data = null, authenticated = false) => {
+  get: async (url, data = null, authenticated = false) => {
+    if (authenticated && shouldRefreshToken()) {
+      await refreshToken();
+    }
+
     if (data) {
       url = url + `?q=${encodeURIComponent(data)}`;
     }
 
     return callApi(url, {}, authenticated);
   },
-  post: (url, data, authenticated = false) => {
+  post: async (url, data, authenticated = false) => {
+    if (authenticated && shouldRefreshToken()) {
+      await refreshToken();
+    }
+
     const options = {
       method: 'post',
       body: JSON.stringify(data),

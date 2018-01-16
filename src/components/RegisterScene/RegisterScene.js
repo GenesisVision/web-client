@@ -1,17 +1,17 @@
 import { connect } from 'react-redux'
 import React from 'react'
 
-import registerActions from '../../actions/registerActions'
+import { registerActions } from '../../actions/registerActions/registerActions'
 import RegisterForm from './RegisterForm/RegisterForm'
 import authActions from '../../actions/authActions'
 
 const RegisterScene = ({ isAuthenticated, isPending, errorMessage, register, alreadyAuthenticated }) => {
-  
-  if(isAuthenticated){
+
+  if (isAuthenticated) {
     alreadyAuthenticated();
     return null;
   }
-  
+
   const handleSubmit = (user) => {
     register(user);
   }

@@ -2,7 +2,7 @@ import { Alert } from 'reactstrap'
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
 
-import alertMessageActions from '../../../actions/alertMessageActions'
+import { alertMessageActions } from '../../../actions/alertMessageActions/alertMessageActions'
 import history from '../../../utils/history';
 
 const ClearAllButton = ({ onClick }) => (
@@ -19,7 +19,7 @@ const AlertMessage = ({ text, color, onDismiss }) => (
   </Alert>
 )
 
-class AlertMessageList extends Component {
+export class AlertMessageList extends Component {
   constructor(props) {
     super(props);
 
@@ -29,7 +29,7 @@ class AlertMessageList extends Component {
   }
 
   render() {
-    const { messages, onDismiss, clearAllMessages } = this.props;
+    const { messages, removeMessage, clearAllMessages } = this.props;
 
     if (messages.length === 0) {
       return null;
@@ -41,7 +41,7 @@ class AlertMessageList extends Component {
         key={idx}
         color={message.className}
         text={message.text}
-        onDismiss={onDismiss(idx)} />
+        onDismiss={removeMessage(idx)} />
     ))
 
     return (
@@ -53,14 +53,14 @@ class AlertMessageList extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+export const mapStateToProps = (state) => {
   const messages = state.alertMessages;
   return { messages };
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  onDismiss: (idx) => () => {
-    dispatch(alertMessageActions.clearMessage(idx));
+export const mapDispatchToProps = (dispatch) => ({
+  removeMessage: (idx) => () => {
+    dispatch(alertMessageActions.removeAt(idx));
   },
   clearAllMessages: () => {
     dispatch(alertMessageActions.clearAll());

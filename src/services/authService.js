@@ -1,7 +1,7 @@
 import { AUTH_TOKEN } from '../utils/constants'
+import { apiUrl } from '../utils/constants/apiUrl'
 import httpClient from '../utils/httpClient'
-
-const jwt_decode = require('jwt-decode')
+import * as jwt_decode from 'jwt-decode'
 
 const canParseToken = token => {
   try {
@@ -13,7 +13,6 @@ const canParseToken = token => {
   }
 }
 
-// eslint-disable-next-line
 const decodeToken = token => {
   if (!canParseToken(token)) return false;
   return jwt_decode(token);
@@ -23,26 +22,22 @@ const isAuthenticated = () => {
   const token = localStorage.getItem(AUTH_TOKEN);
 
   if (!canParseToken(token)) return false;
-  const dateNow = new Date().getTime();
+  const dateNowSec = Math.floor(Date.now() / 1000);
   const decodedToken = jwt_decode(token);
-  return decodedToken.exp < dateNow;
+  return decodedToken.exp < dateNowSec;
 }
 
 const getUserName = () => {
   const token = localStorage.getItem(AUTH_TOKEN);
   return isAuthenticated()
-    ? decodeToken(token).username
+    ? decodeToken(token).unique_name
     : '';
 }
 
 const login = async (user) => {
-  try {
-    const data = await httpClient.post('/api/login', user);
-    localStorage.setItem(AUTH_TOKEN, data.token);
-    return data;
-  } catch (e) {
-    throw new Error('Login Error');
-  }
+  const data = await httpClient.post(apiUrl.login, user);
+  localStorage.setItem(AUTH_TOKEN, data);
+  return data;
 }
 
 const logout = () => {
@@ -51,7 +46,7 @@ const logout = () => {
 
 const register = async (user) => {
   try {
-    const data = await httpClient.post('/api/login', user);
+    const data = await httpClient.post(apiUrl.register, user);
     localStorage.setItem(AUTH_TOKEN, data.token);
     return data;
   } catch (e) {

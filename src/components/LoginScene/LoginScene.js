@@ -1,37 +1,43 @@
 import { connect } from 'react-redux'
+import { SubmissionError } from 'redux-form';
 import React from 'react'
 
+import authActions from '../../actions/authActions'
 import loginActions from '../../actions/loginActions'
 import LoginForm from './LoginForm/LoginForm'
 import routes from '../../utils/constants/routes'
-import authActions from '../../actions/authActions'
 
 const LoginScene = ({ location, isAuthenticated, isPending, errorMessage, login, alreadyAuthenticated }) => {
-  
-  if(isAuthenticated){
+
+  if (isAuthenticated) {
     alreadyAuthenticated();
     return null;
   }
 
   const { from } = location.state || { from: { pathname: routes.index } }
-  const handleSubmit = (user) => {
-    login(user, from);
-  }
+  const handleSubmit = async (user, dispatch) => { await login(user, from); }
 
   return (
-      <LoginForm onSubmit={handleSubmit} />
+    <LoginForm onSubmit={handleSubmit} error={errorMessage} />
   )
 }
 
 const mapStateToProps = (state) => {
-  const { isPending, errorMessage } = state.loginData;  
+  const { isPending, errorMessage } = state.loginData;
   const { isAuthenticated } = state.authData;
   return { isAuthenticated, isPending, errorMessage };
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  login: ({ username, password }, from) => {
-    dispatch(loginActions.loginUser({ username, password }, from));
+  login: async ({ username, password }, from) => {
+    try {
+      await dispatch(loginActions.loginUser({ username, password }, from));
+    }
+    catch (e) {
+      throw new SubmissionError({
+        _error: e.message
+      });
+    }
   },
   alreadyAuthenticated: () => {
     dispatch(authActions.alreadyAuthenticated());

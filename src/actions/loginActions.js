@@ -30,6 +30,7 @@ const loginUser = (user, from) => async dispatch => {
   }
   catch (e) {
     dispatch(loginError(e.message));
+    throw e;
   }
 }
 

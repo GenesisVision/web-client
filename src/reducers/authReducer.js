@@ -1,6 +1,6 @@
 import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from '../actions/loginActions'
 import authService from '../services/authService'
-import { REGISTER_SUCCESS } from '../actions/registerActions';
+import { registerActionTypes} from '../actions/registerActions/registerActions'
 
 const initialState = {
   isAuthenticated: authService.isAuthenticated(),
@@ -15,7 +15,7 @@ const authReducer = (state = initialState, action) => {
         isAuthenticated: true,
         username: action.username
       }
-    case REGISTER_SUCCESS:
+    case registerActionTypes.success:
       return {
         ...state,
         isAuthenticated: true,

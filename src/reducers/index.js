@@ -3,11 +3,11 @@ import { loadingBarReducer } from 'react-redux-loading-bar'
 import { reducer as formReducer } from 'redux-form'
 import { routerReducer } from 'react-router-redux'
 
-import alertMessagesReducer from './alertMessagesReducer'
+import alertMessagesReducer from './alertMessagesReducer/alertMessagesReducer'
 import authReducer from './authReducer'
 import investorProfitReducer from './investorProfitReducer'
 import loginReducer from './loginReducer'
-import registerReducer from './registerReducer'
+import registerReducer from './registerReducer/registerReducer'
 import traderReducer from './traderReducer'
 import tradersReducer from './tradersReducer'
 

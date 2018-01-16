@@ -1,5 +1,5 @@
 import httpClient from '../utils/httpClient'
-import alertMessageActions from '../actions/alertMessageActions'
+import { alertMessageActions } from '../actions/alertMessageActions/alertMessageActions'
 
 export const TRADER_REQUEST = 'TRADER_REQUEST'
 export const TRADER_REQUEST_SUCCESS = 'TRADER_REQUEST_SUCCESS'
