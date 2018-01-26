@@ -2,8 +2,9 @@
 
 # editor
 .vscode
+.idea
 
-#extensiions
+# extensiions
 .history
 
 # dependencies
