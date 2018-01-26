@@ -1,5 +1,5 @@
 import httpClient from '../utils/httpClient'
-import { alertMessageActions } from '../actions/alertMessageActions/alertMessageActions'
+import {alertMessageActions} from "../shared/alert-message/actions";
 
 export const INVESTOR_PROFIT_REQUEST = 'INVESTOR_PROFIT_REQUEST'
 export const INVESTOR_PROFIT_SUCCESS = 'INVESTOR_PROFIT_SUCCESS'
