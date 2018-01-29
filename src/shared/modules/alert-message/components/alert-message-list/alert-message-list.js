@@ -2,8 +2,8 @@ import { Alert } from "reactstrap";
 import { connect } from "react-redux";
 import React, { Component } from "react";
 
-import { alertMessageActions } from "../../actions";
-import history from "../../../../utils/history";
+import { alertMessageActions } from "../../actions/alert-message-actions";
+import history from "../../../../../utils/history";
 
 const ClearAllButton = ({ onClick }) => (
   <div className="clearfix">

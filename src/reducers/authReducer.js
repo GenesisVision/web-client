@@ -1,7 +1,7 @@
 
 import authService from '../services/authService'
-import {LOGIN_SUCCESS, LOGOUT_SUCCESS} from "../shared/login/actions/constants";
-import {REGISTER_SUCCESS} from "../shared/register/actions/constants";
+import {LOGIN_SUCCESS, LOGOUT_SUCCESS} from "../shared/modules/login/actions/login-actions.constants";
+import {REGISTER_SUCCESS} from "../shared/modules/register/actions/register-actions.constants";
 
 const initialState = {
   isAuthenticated: authService.isAuthenticated(),

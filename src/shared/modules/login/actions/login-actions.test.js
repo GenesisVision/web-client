@@ -1,6 +1,6 @@
 import ApimanagerApi from "gv-api-web";
 import authService from "../../../services/authService";
-import loginActions, { loginSuccess } from "./index";
+import loginActions, { loginSuccess } from "./login-actions";
 
 jest.mock("gv-api-web");
 jest.mock("../../../utils/history");

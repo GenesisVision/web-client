@@ -3,7 +3,7 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGOUT_SUCCESS
-} from "../actions/constants";
+} from "../actions/login-actions.constants";
 
 const initialState = {
   isPending: false,

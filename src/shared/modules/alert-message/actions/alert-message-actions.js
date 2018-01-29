@@ -1,4 +1,4 @@
-import * as alertMessageActionTypes from "./constants";
+import * as alertMessageActionTypes from "./alert-message-actions.constants";
 
 const success = text => ({
   type: alertMessageActionTypes.ALERT_MESSAGE_SUCCESS,

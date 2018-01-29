@@ -1,10 +1,10 @@
-import * as actionTypes from "./constants";
-import { apiClientPublic } from "../../../services/api-client/swagger-custom-client";
+import * as actionTypes from "./login-actions.constants";
+import { apiClientPublic } from "../../../../services/api-client/swagger-custom-client";
 
 import { ManagerApi, LoginViewModel } from "gv-api-web";
-import authService from "../../../services/authService";
-import history from "../../../utils/history";
-import routes from "../../../utils/constants/routes";
+import authService from "../../../../services/authService";
+import history from "../../../../utils/history";
+import routes from "../../../../utils/constants/routes";
 
 const composePromise = user => {
   const api = new ManagerApi(apiClientPublic());

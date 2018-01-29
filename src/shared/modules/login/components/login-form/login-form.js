@@ -3,9 +3,9 @@ import { withFormik } from "formik";
 import classnames from "classnames";
 import React from "react";
 
-import FieldInput from "../../../components/FieldInput/FieldInput";
-import routes from "../../../../utils/constants/routes";
-import validationSchema from "./validators";
+import FieldInput from "../../../../components/FieldInput/FieldInput";
+import routes from "../../../../../utils/constants/routes";
+import validationSchema from "./login-form.validators";
 
 const LoginForm = ({
   values,

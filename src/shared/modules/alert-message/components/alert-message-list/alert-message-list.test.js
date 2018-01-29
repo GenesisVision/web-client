@@ -1,8 +1,8 @@
 import Enzyme, { shallow } from 'enzyme'
 import React from 'react'
 
-import { AlertMessageList, mapStateToProps, mapDispatchToProps } from './index'
-import { alertMessageActions, alertMessageActionTypes } from '../../actions/index';
+import { AlertMessageList, mapStateToProps, mapDispatchToProps } from './alert-message-list'
+import { alertMessageActions, alertMessageActionTypes } from '../../actions/alert-message-actions';
 
 describe('AlertMessageList', () => {
 

@@ -1,7 +1,7 @@
 import {
   registerActions
-} from "./index";
-import authService from "../../../services/authService";
+} from "./register-actions";
+import authService from "../../../../services/authService";
 jest.mock("../../utils/history");
 
 describe("registerActions", () => {

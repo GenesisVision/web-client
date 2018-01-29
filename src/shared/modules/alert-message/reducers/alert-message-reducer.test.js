@@ -1,5 +1,5 @@
-import alertMessagesReducer from "./index"
-import { alertMessageActions } from "../actions/index"
+import alertMessagesReducer from "./alert-message-reducers"
+import { alertMessageActions } from "../actions/alert-message-actions"
 
 describe('alertMessageReducer', () => {
   const text = 'New text';

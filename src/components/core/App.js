@@ -7,13 +7,13 @@ import history from "../../utils/history";
 import PrivateRoute from "../common/PrivateRoute";
 import Header from "./Header/Header";
 import InvestorScene from "../InvestorScene/InvestorScene";
-import LoginScene from "../LoginScene/index";
+import LoginScene from "../login-scene/login-scene";
 import NotFoundPage from "./NotFoundPage";
 import RegisterScene from "../RegisterScene/index";
 import routes from "../../utils/constants/routes";
 import store from "../../store";
 import TradersRoute from "../TradersRoute/TradersRoute";
-import AlertMessageList from "../../shared/alert-message/components/AlertMessageList";
+import AlertMessageList from "../../shared/modules/alert-message/components/alert-message-list/alert-message-list";
 
 const App = () => (
   <Provider store={store}>

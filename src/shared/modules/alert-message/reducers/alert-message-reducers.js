@@ -1,4 +1,4 @@
-import * as actionTypes from "../actions/constants"
+import * as actionTypes from "../actions/alert-message-actions.constants"
 
 const initialState = [];
 

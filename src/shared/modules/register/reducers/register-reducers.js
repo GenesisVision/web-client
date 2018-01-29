@@ -1,4 +1,4 @@
-import * as actionTypes from "../actions/constants"
+import * as actionTypes from "../actions/register-actions.constants"
 
 const initialState = {
   isPending: false,
