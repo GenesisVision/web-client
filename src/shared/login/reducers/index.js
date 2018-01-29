@@ -1,8 +1,13 @@
-import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_SUCCESS } from '../actions/constants'
+import {
+  LOGIN_FAILURE,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGOUT_SUCCESS
+} from "../actions/constants";
 
 const initialState = {
   isPending: false,
-  errorMessage: ''
+  errorMessage: ""
 };
 
 const loginReducer = (state = initialState, action) => {
@@ -11,27 +16,27 @@ const loginReducer = (state = initialState, action) => {
       return {
         ...state,
         isPending: true
-      }
+      };
     case LOGIN_SUCCESS:
       return {
         ...state,
         isPending: false,
-        errorMessage: ''
-      }
+        errorMessage: ""
+      };
     case LOGIN_FAILURE:
       return {
         ...state,
         isPending: false,
-        errorMessage: action.message
-      }
+        errorMessage: action.payload.response.body.errors[0].message
+      };
     case LOGOUT_SUCCESS:
       return {
         ...state,
         isPending: false
-      }
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default loginReducer
+export default loginReducer;
