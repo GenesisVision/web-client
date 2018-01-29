@@ -6,14 +6,17 @@ import thunk from "redux-thunk";
 
 import history from "../utils/history";
 import rootReducer from "../reducers";
+import apiErrorHandlerMiddleware from "../shared/middleware/api-error-handler-middleware/api-error-handler-middleware";
 
-const suffixes = ["REQUEST", "SUCCESS", "FAILURE"];
+const failureSuffix = "FAILURE";
+const suffixes = ["REQUEST", "SUCCESS", failureSuffix];
 
 const initialState = {};
 const enhancers = [];
 const middleware = [
   thunk,
   promiseMiddleware({ promiseTypeSuffixes: suffixes }),
+  apiErrorHandlerMiddleware({ failureSuffix: failureSuffix }),
   routerMiddleware(history),
   loadingBarMiddleware({
     promiseTypeSuffixes: suffixes
