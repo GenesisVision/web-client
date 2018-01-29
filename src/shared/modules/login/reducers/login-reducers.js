@@ -1,45 +1,7 @@
-import {
-  LOGIN_FAILURE,
-  LOGIN_REQUEST,
-  LOGIN_SUCCESS,
-  LOGOUT_SUCCESS
-} from "../actions/login-actions.constants";
+import apiReducerFactory from "../../../reducers/api-reducer/api-reducer";
 
-const initialState = {
-  isPending: false,
-  errorMessage: ""
-};
+import { LOGIN } from "../actions/login-actions.constants";
 
-const loginReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case LOGIN_REQUEST:
-      return {
-        ...state,
-        isPending: true
-      };
-    case LOGIN_SUCCESS:
-      return {
-        ...state,
-        isPending: false,
-        errorMessage: ""
-      };
-    case LOGIN_FAILURE:
-      return {
-        ...state,
-        isPending: false,
-        errorMessage: action.payload
-          .filter(x => !x.property)
-          .map(x => x.message)
-          .join(", ")
-      };
-    case LOGOUT_SUCCESS:
-      return {
-        ...state,
-        isPending: false
-      };
-    default:
-      return state;
-  }
-};
+const loginReducer = apiReducerFactory({ apiType: LOGIN });
 
 export default loginReducer;

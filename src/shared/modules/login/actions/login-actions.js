@@ -21,19 +21,12 @@ const loginUser = (loginFormData, from) => {
   };
 };
 
-const logoutRequest = () => ({
-  type: actionTypes.LOGOUT_REQUEST
-});
-
-const logoutSuccess = () => ({
-  type: actionTypes.LOGOUT_SUCCESS
-});
-
 const logoutUser = () => dispatch => {
-  dispatch(logoutRequest());
-  authService.logout();
+  authService.removeToken();
   history.push(routes.index);
-  dispatch(logoutSuccess());
+  dispatch({
+    type: actionTypes.LOGOUT_SUCCESS
+  });
 };
 
 const loginActions = {
