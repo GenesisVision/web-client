@@ -1,8 +1,8 @@
-import * as actionTypes from "../actions/register-actions.constants"
+import * as actionTypes from "../actions/register-actions.constants";
 
 const initialState = {
   isPending: false,
-  errorMessage: ''
+  errorMessage: ""
 };
 
 const registerReducer = (state = initialState, action) => {
@@ -10,23 +10,26 @@ const registerReducer = (state = initialState, action) => {
     case actionTypes.REGISTER_REQUEST:
       return {
         ...state,
-        isPending: true,
-      }
+        isPending: true
+      };
     case actionTypes.REGISTER_SUCCESS:
       return {
         ...state,
         isPending: false,
-        errorMessage: ''
-      }
+        errorMessage: ""
+      };
     case actionTypes.REGISTER_FAILURE:
       return {
         ...state,
         isPending: false,
-        errorMessage: action.message
-      }
+        errorMessage: action.payload
+          .filter(x => !x.property)
+          .map(x => x.message)
+          .join(", ")
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default registerReducer
+export default registerReducer;

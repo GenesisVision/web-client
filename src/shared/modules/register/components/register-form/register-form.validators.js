@@ -1,27 +1,18 @@
-const validateEmail = email => {
-  var regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@(([[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return regex.test(email.toLowerCase());
-};
+import Yup from "yup";
 
-const validate = values => {
-  const errors = {};
+import {
+  emailValidator,
+  passwordValidator
+} from "../../../../validators/validators";
 
-  if (!values.password) {
-    errors.password = "Required";
-  }
+const confirmPasswordValidator = Yup.string()
+  .oneOf([Yup.ref("password")], "Passwords don't match.")
+  .required("Confirm Password is required");
 
-  if (!values.confirmPassword) {
-    errors.confirmPassword = "Required";
-  } else if (values.password !== values.confirmPassword) {
-    errors.confirmPassword = "Passwords must match";
-  }
+const validationSchema = Yup.object().shape({
+  email: emailValidator,
+  password: passwordValidator,
+  confirmPassword: confirmPasswordValidator
+});
 
-  if (!values.email) {
-    errors.email = "Required";
-  } else if (!validateEmail(values.email)) {
-    errors.email = "Email is invalid";
-  }
-  return errors;
-};
-
-export default validate;
+export default validationSchema;

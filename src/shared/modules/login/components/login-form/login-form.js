@@ -100,7 +100,7 @@ export default withFormik({
     password: ""
   }),
   validationSchema: validationSchema,
-  handleSubmit: (values, { props, setError, setSubmitting }) => {
-    props.onSubmit(values, setError, setSubmitting);
+  handleSubmit: (values, { props, setSubmitting }) => {
+    props.onSubmit(values, setSubmitting);
   }
 })(LoginForm);

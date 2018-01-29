@@ -9,7 +9,7 @@ import Header from "./Header/Header";
 import InvestorScene from "../InvestorScene/InvestorScene";
 import LoginScene from "../login-scene/login-scene";
 import NotFoundPage from "./NotFoundPage";
-import RegisterScene from "../RegisterScene/index";
+import RegisterScene from "../register-scene/register-scene";
 import routes from "../../utils/constants/routes";
 import store from "../../store";
 import TradersRoute from "../TradersRoute/TradersRoute";

@@ -7,12 +7,16 @@ import swaggerManagerApi from "../../../../services/api-client/swagger-manager-a
 
 import * as actionTypes from "./login-actions.constants";
 
-const loginUser = (user, from) => {
+const loginUser = (loginFormData, from) => {
   return {
-    type: "LOGIN",
-    payload: swaggerManagerApi.apiManagerAuthSignInPostWithHttpInfo({
-      model: LoginViewModel.constructFromObject(user)
-    })
+    type: actionTypes.LOGIN,
+    payload: swaggerManagerApi
+      .apiManagerAuthSignInPostWithHttpInfo({
+        model: LoginViewModel.constructFromObject(loginFormData)
+      })
+      .then(() => {
+        history.push(from);
+      })
   };
 };
 

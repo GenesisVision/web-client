@@ -1,6 +1,5 @@
 import { combineReducers } from "redux";
 import { loadingBarReducer } from "react-redux-loading-bar";
-import { reducer as formReducer } from "redux-form";
 import { routerReducer } from "react-router-redux";
 
 import alertMessagesReducer from "../shared/modules/alert-message/reducers/alert-message-reducers";
@@ -13,7 +12,6 @@ import tradersReducer from "./tradersReducer";
 
 export default combineReducers({
   routing: routerReducer,
-  form: formReducer,
   loadingBar: loadingBarReducer,
   tradersInfo: tradersReducer,
   traderData: traderReducer,

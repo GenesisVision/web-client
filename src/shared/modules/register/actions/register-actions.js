@@ -1,41 +1,23 @@
 import { RegisterManagerViewModel } from "gv-api-web";
+
 import history from "../../../../utils/history";
 import routes from "../../../../utils/constants/routes";
-import * as actionTypes from "./register-actions.constants";
 import swaggerManagerApi from "../../../../services/api-client/swagger-manager-api";
 
-export const registerRequest = () => ({
-  type: actionTypes.REGISTER_REQUEST
-});
+import * as actionTypes from "./register-actions.constants";
 
-export const registerSuccess = email => ({
-  type: actionTypes.REGISTER_SUCCESS,
-  email
-});
-
-export const registerError = message => ({
-  type: actionTypes.REGISTER_FAILURE,
-  message
-});
-
-const registerUser = user => async dispatch => {
-  const { email } = user;
-  dispatch(registerRequest());
-  try {
-    const api = swaggerManagerApi;
-    const opts = {
-      model: RegisterManagerViewModel.constructFromObject(user)
-    };
-
-    await api.apiManagerAuthSignUpPostWithHttpInfo(opts);
-    history.push(routes.index);
-    dispatch(registerSuccess(email));
-  } catch (e) {
-    const error = JSON.parse(e.response.text);
-    dispatch(registerError(error.errors[0].message));
-    throw new Error(error.errors[0].message);
-  }
+const registerUser = registerFormData => {
+  return {
+    type: actionTypes.REGISTER,
+    payload: swaggerManagerApi
+      .apiManagerAuthSignUpPostWithHttpInfo({
+        model: RegisterManagerViewModel.constructFromObject(registerFormData)
+      })
+      .then(() => {
+        history.push(routes.index);
+      })
+  };
 };
 
 const registerActions = { registerUser };
-export { registerActions };
+export default registerActions;

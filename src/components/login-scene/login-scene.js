@@ -20,7 +20,7 @@ const LoginScene = ({
   }
 
   const { from } = location.state || { from: { pathname: routes.index } };
-  const handleSubmit = (loginFormData, setError, setSubmitting) => {
+  const handleSubmit = (loginFormData, setSubmitting) => {
     login(loginFormData, from, setSubmitting);
   };
 

@@ -1,19 +1,23 @@
-import { Field, reduxForm } from "redux-form";
 import { Link } from "react-router-dom";
+import { withFormik } from "formik";
 import React from "react";
 
 import FieldInput from "../../../../components/FieldInput/FieldInput";
 import routes from "../../../../../utils/constants/routes";
 
-import validate from "./register-form.validators";
+import validationSchema from "./register-form.validators";
 
 const RegisterForm = ({
-  error,
+  values,
+  touched,
+  errors,
+  isSubmitting,
+  handleChange,
+  handleBlur,
   handleSubmit,
-  pristine,
-  reset,
-  submitting,
-  login
+  handleReset,
+  dirty,
+  error
 }) => {
   return (
     <div className="container login">
@@ -28,36 +32,48 @@ const RegisterForm = ({
         <div className="row">
           <div className="col-md-3" />
           <div className="col-md-6">
-            <Field
+            <FieldInput
+              type="text"
+              id="email"
               name="email"
-              component={FieldInput}
-              type="email"
               placeholder="Email"
+              touched={touched.email}
+              error={errors.email}
               addon="fa fa-envelope"
+              onChange={handleChange}
+              onBlur={handleBlur}
             />
           </div>
         </div>
         <div className="row">
           <div className="col-md-3" />
           <div className="col-md-6">
-            <Field
+            <FieldInput
+              type="password"
+              id="passport"
               name="password"
-              component={FieldInput}
-              type="password"
               placeholder="Password"
+              touched={touched.password}
+              error={errors.password}
               addon="fa fa-lock"
+              onChange={handleChange}
+              onBlur={handleBlur}
             />
           </div>
         </div>
         <div className="row">
           <div className="col-md-3" />
           <div className="col-md-6">
-            <Field
-              name="confirmPassword"
-              component={FieldInput}
+            <FieldInput
               type="password"
+              id="confirmPassword"
+              name="confirmPassword"
               placeholder="Confirm Password"
+              touched={touched.confirmPassword}
+              error={errors.confirmPassword}
               addon="fa fa-lock"
+              onChange={handleChange}
+              onBlur={handleBlur}
             />
           </div>
         </div>
@@ -83,7 +99,15 @@ const RegisterForm = ({
   );
 };
 
-export default reduxForm({
-  form: "register",
-  validate
+export default withFormik({
+  displayName: "register",
+  mapPropsToValues: () => ({
+    email: "",
+    password: "",
+    confirmPassword: ""
+  }),
+  validationSchema: validationSchema,
+  handleSubmit: (values, { props, setSubmitting }) => {
+    props.onSubmit(values, setSubmitting);
+  }
 })(RegisterForm);
