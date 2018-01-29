@@ -23,7 +23,8 @@
     "redux": "^3.7.2",
     "redux-form": "^7.2.1",
     "redux-promise-middleware": "^5.0.0",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "yup": "^0.24.0"
   },
   "scripts": {
     "start": "react-scripts start",

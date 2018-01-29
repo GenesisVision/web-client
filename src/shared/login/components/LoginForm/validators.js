@@ -1,13 +1,16 @@
-const validate = values => {
-  const errors = {};
-  if (!values.email) {
-    errors.email = "Required";
-  }
+import Yup from "yup";
 
-  if (!values.password) {
-    errors.password = "Required";
-  }
-  return errors;
-};
+const emailValidator = Yup.string()
+  .email("Invalid email address")
+  .required("Email is required!");
 
-export default validate;
+const passwordValidator = Yup.string()
+  .min(6, "Password is weak.")
+  .required("First name is required.");
+
+const validationSchema = Yup.object().shape({
+  email: emailValidator,
+  password: passwordValidator
+});
+
+export default validationSchema;

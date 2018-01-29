@@ -1,20 +1,23 @@
-import { Field, reduxForm } from "redux-form";
 import { Link } from "react-router-dom";
-import * as classnames from "classnames";
+import { withFormik } from "formik";
+import classnames from "classnames";
 import React from "react";
 
 import FieldInput from "../../../components/FieldInput/FieldInput";
 import routes from "../../../../utils/constants/routes";
-
-import validate from "./validators";
+import validationSchema from "./validators";
 
 const LoginForm = ({
-  error,
+  values,
+  touched,
+  errors,
+  isSubmitting,
+  handleChange,
+  handleBlur,
   handleSubmit,
-  pristine,
-  reset,
-  submitting,
-  login
+  handleReset,
+  dirty,
+  error
 }) => {
   return (
     <div className="container login">
@@ -29,24 +32,32 @@ const LoginForm = ({
         <div className="row">
           <div className="col-md-3" />
           <div className="col-md-6">
-            <Field
-              name="email"
-              component={FieldInput}
+            <FieldInput
               type="text"
+              id="email"
+              name="email"
               placeholder="Email"
+              touched={touched.email}
+              error={errors.email}
               addon="fa fa-envelope"
+              onChange={handleChange}
+              onBlur={handleBlur}
             />
           </div>
         </div>
         <div className="row">
           <div className="col-md-3" />
           <div className="col-md-6">
-            <Field
-              name="password"
-              component={FieldInput}
+            <FieldInput
               type="password"
+              id="passport"
+              name="password"
               placeholder="Password"
+              touched={touched.password}
+              error={errors.password}
               addon="fa fa-lock"
+              onChange={handleChange}
+              onBlur={handleBlur}
             />
           </div>
         </div>
@@ -63,13 +74,13 @@ const LoginForm = ({
             <button
               type="submit"
               className="btn btn-success"
-              disabled={submitting}
+              disabled={isSubmitting}
             >
               <span
                 className={classnames({
                   oi: true,
-                  "oi-account-login": !submitting,
-                  "oi-aperture": submitting
+                  "oi-account-login": !isSubmitting,
+                  "oi-aperture": isSubmitting
                 })}
               />&nbsp;Login
             </button>
@@ -82,7 +93,14 @@ const LoginForm = ({
   );
 };
 
-export default reduxForm({
-  form: "login",
-  validate
+export default withFormik({
+  displayName: "login",
+  mapPropsToValues: () => ({
+    email: "",
+    password: ""
+  }),
+  validationSchema: validationSchema,
+  handleSubmit: (values, { props, setError, setSubmitting }) => {
+    props.onSubmit(values, setError, setSubmitting);
+  }
 })(LoginForm);

@@ -1,13 +1,7 @@
 import React from "react";
 import "./FieldInput.css";
 
-const FieldInput = ({
-  input,
-  placeholder,
-  type,
-  addon,
-  meta: { touched, error }
-}) => {
+const FieldInput = ({ addon, touched, error, ...props }) => {
   const showError = touched && error;
   const validationClass = touched ? (error ? " is-invalid" : " is-valid") : "";
 
@@ -20,11 +14,9 @@ const FieldInput = ({
           </span>
         </div>
         <input
-          {...input}
-          placeholder={placeholder}
-          type={type}
           className={`form-control${validationClass}`}
           autoComplete="off"
+          {...props}
         />
         {showError && <div className="invalid-feedback">{error}</div>}
       </div>
