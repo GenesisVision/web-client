@@ -2,7 +2,7 @@ import Yup from "yup";
 import {
   emailValidator,
   passwordValidator
-} from "../../../../validators/validators";
+} from "../../../../utils/validators/validators";
 
 const validationSchema = Yup.object().shape({
   email: emailValidator,

@@ -14,7 +14,8 @@ const loginUser = (loginFormData, from) => {
       .apiManagerAuthSignInPostWithHttpInfo({
         model: LoginViewModel.constructFromObject(loginFormData)
       })
-      .then(() => {
+      .then(response => {
+        authService.storeToken(response.data);
         history.push(from);
       })
   };

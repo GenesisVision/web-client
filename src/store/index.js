@@ -6,7 +6,7 @@ import thunk from "redux-thunk";
 
 import history from "../utils/history";
 import rootReducer from "../reducers";
-import apiErrorHandlerMiddleware from "../shared/middleware/api-error-handler-middleware/api-error-handler-middleware";
+import apiErrorHandlerMiddleware from "../shared/middlewares/api-error-handler-middleware/api-error-handler-middleware";
 
 const failureSuffix = "FAILURE";
 const suffixes = ["REQUEST", "SUCCESS", failureSuffix];
