@@ -1,11 +1,8 @@
-import {
-  ManagerApi,
-  RegisterManagerViewModel
-} from "gv-api-web";
-import { apiClientPublic } from "../../../../services/api-client/swagger-custom-client";
+import { RegisterManagerViewModel } from "gv-api-web";
 import history from "../../../../utils/history";
 import routes from "../../../../utils/constants/routes";
 import * as actionTypes from "./register-actions.constants";
+import swaggerManagerApi from "../../../../services/api-client/swagger-manager-api";
 
 export const registerRequest = () => ({
   type: actionTypes.REGISTER_REQUEST
@@ -25,7 +22,7 @@ const registerUser = user => async dispatch => {
   const { email } = user;
   dispatch(registerRequest());
   try {
-    const api = new ManagerApi(apiClientPublic());
+    const api = swaggerManagerApi;
     const opts = {
       model: RegisterManagerViewModel.constructFromObject(user)
     };

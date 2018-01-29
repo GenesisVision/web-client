@@ -1,22 +1,20 @@
-import * as actionTypes from "./login-actions.constants";
-import { apiClientPublic } from "../../../../services/api-client/swagger-custom-client";
+import { LoginViewModel } from "gv-api-web";
 
-import { ManagerApi, LoginViewModel } from "gv-api-web";
 import authService from "../../../../services/authService";
 import history from "../../../../utils/history";
 import routes from "../../../../utils/constants/routes";
+import swaggerManagerApi from "../../../../services/api-client/swagger-manager-api";
 
-const composePromise = user => {
-  const api = new ManagerApi(apiClientPublic());
-  const opts = {
-    model: LoginViewModel.constructFromObject(user)
+import * as actionTypes from "./login-actions.constants";
+
+const loginUser = (user, from) => {
+  return {
+    type: "LOGIN",
+    payload: swaggerManagerApi.apiManagerAuthSignInPostWithHttpInfo({
+      model: LoginViewModel.constructFromObject(user)
+    })
   };
-  return api.apiManagerAuthSignInPostWithHttpInfo(opts);
 };
-const loginUser = (user, from) => ({
-  type: "LOGIN",
-  payload: composePromise(user)
-});
 
 const logoutRequest = () => ({
   type: actionTypes.LOGOUT_REQUEST

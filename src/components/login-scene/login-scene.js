@@ -21,10 +21,10 @@ const LoginScene = ({
 
   const { from } = location.state || { from: { pathname: routes.index } };
   const handleSubmit = (loginFormData, setError, setSubmitting) => {
-    login(loginFormData, from, setError, setSubmitting);
+    login(loginFormData, from, setSubmitting);
   };
 
-  return <LoginForm onSubmit={handleSubmit} />;
+  return <LoginForm onSubmit={handleSubmit} error={errorMessage} />;
 };
 
 const mapStateToProps = state => {
@@ -34,14 +34,10 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  login: (loginFormData, from, setError, setSubmitting) => {
-    dispatch(loginActions.loginUser(loginFormData, from))
-      .catch(e => {
-        setError(e.message);
-      })
-      .finally(() => {
-        setSubmitting(false);
-      });
+  login: (loginFormData, from, setSubmitting) => {
+    dispatch(loginActions.loginUser(loginFormData, from)).finally(() => {
+      setSubmitting(false);
+    });
   },
   alreadyAuthenticated: () => {
     dispatch(authActions.alreadyAuthenticated());

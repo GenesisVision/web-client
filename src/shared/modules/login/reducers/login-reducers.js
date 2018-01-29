@@ -27,7 +27,10 @@ const loginReducer = (state = initialState, action) => {
       return {
         ...state,
         isPending: false,
-        errorMessage: action.payload.response.body.errors[0].message
+        errorMessage: action.payload
+          .filter(x => !x.property)
+          .map(x => x.message)
+          .join(", ")
       };
     case LOGOUT_SUCCESS:
       return {
