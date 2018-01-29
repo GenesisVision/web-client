@@ -1,8 +1,6 @@
 import * as jwt_decode from "jwt-decode";
 
-import { apiUrl } from "../utils/constants/apiUrl";
 import { AUTH_TOKEN } from "../utils/constants";
-import httpClient from "../utils/httpClient";
 
 const canParseToken = token => {
   try {
@@ -40,33 +38,16 @@ const getUserName = () => {
   return isAuthenticated() ? decodeToken(token).unique_name : "";
 };
 
-const login = async user => {
-  const data = await httpClient.post(apiUrl.login, user);
-  storeToken(data);
-  return data;
-};
-
-const logout = () => {
+const removeToken = () => {
   localStorage.removeItem(AUTH_TOKEN);
-};
-
-const register = async user => {
-  try {
-    const data = await httpClient.post(apiUrl.register, user);
-    storeToken(data.token);
-    return data;
-  } catch (e) {
-    throw new Error("Register Error");
-  }
 };
 
 const authService = {
   isAuthenticated,
   getToken,
   storeToken,
-  getUserName,
-  login,
-  logout,
-  register
+  removeToken,
+  getUserName
 };
+
 export default authService;
