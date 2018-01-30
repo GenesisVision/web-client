@@ -24,15 +24,10 @@ const refreshTokenMiddleware = (
 
     timeoutId = setTimeout(() => {
       if (isAuthenticated) {
-        refreshToken(authService.getAuthArg()).then(
-          token => {
-            isDelayed = false;
-            authService.storeToken(token);
-          },
-          e => {
-            var t = e;
-          }
-        );
+        refreshToken(authService.getAuthArg()).then(token => {
+          isDelayed = false;
+          authService.storeToken(token);
+        });
       }
       clearTimeout(timeoutId);
     }, delay * 1000);
