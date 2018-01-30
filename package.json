@@ -7,7 +7,7 @@
     "classnames": "^2.2.5",
     "font-awesome": "^4.7.0",
     "formik": "^0.10.5",
-    "gv-api-web": "^1.0.3",
+    "gv-api-web": "^1.0.4",
     "jwt-decode": "^2.2.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
