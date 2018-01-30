@@ -6,6 +6,7 @@ import alertMessagesReducer from "../shared/modules/alert-message/reducers/alert
 import authReducer from "./authReducer";
 import investorProfitReducer from "./investorProfitReducer";
 import loginReducer from "../shared/modules/login/reducers/login-reducers";
+import profileFormReducer from "../modules/profile/reducers/profile-form-reducers";
 import profileReducer from "../modules/profile/reducers/profile-reducers";
 import registerReducer from "../shared/modules/register/reducers/register-reducers";
 import traderReducer from "./traderReducer";
@@ -21,5 +22,6 @@ export default combineReducers({
   registerData: registerReducer,
   authData: authReducer,
   alertMessages: alertMessagesReducer,
-  profileData: profileReducer
+  profileData: profileReducer,
+  profileFormData: profileFormReducer
 });

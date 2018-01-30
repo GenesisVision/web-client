@@ -9,7 +9,8 @@ const ProfileContainer = props => {
 };
 
 const mapStateToProps = state => {
-  const { isFetching, profile } = state.profileData;
+  const { isFetching } = state.profileData;
+  const profile = state.profileData.data;
   return { isFetching, profile };
 };
 

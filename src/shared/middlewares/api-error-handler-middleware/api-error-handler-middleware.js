@@ -9,7 +9,10 @@ const apiErrorHandlerMiddleware = (
   var isRejected = new RegExp(REJECTED + "$", "g");
 
   if (isRejected && action.error) {
-    if (action.payload.response !== undefined) {
+    if (
+      action.payload.response !== undefined &&
+      action.payload.response.body !== null
+    ) {
       action.payload = action.payload.response.body.errors;
     } else {
       const error = "Server Error. Please contact administrator.";

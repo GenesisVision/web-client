@@ -1,14 +1,7 @@
-import { ProfileFullViewModel } from "gv-api-web";
-
 import SwaggerInvestorApi from "../../../services/api-client/swagger-investor-api";
+import withAuthorization from "../../../shared/utils/wrappers/with-authorization";
 
 import * as actionTypes from "./profile-actions.constants";
-import authService from "../../../services/authService";
-
-const withAuthorization = (promise, ...args) => {
-  const authorization = `Bearer ${authService.getToken()}`;
-  return promise(authorization, ...args);
-};
 
 const fetchProfile = () => {
   return {
