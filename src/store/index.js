@@ -7,6 +7,9 @@ import thunk from "redux-thunk";
 import history from "../utils/history";
 import rootReducer from "../reducers";
 import apiErrorHandlerMiddleware from "../shared/middlewares/api-error-handler-middleware/api-error-handler-middleware";
+import refreshTokenMiddleware from "../shared/middlewares/refresh-token-middleware/refresh-token-middleware";
+import authService from "../services/authService";
+import SwaggerInvestorApi from "../services/api-client/swagger-investor-api";
 
 const failureSuffix = "FAILURE";
 const suffixes = ["REQUEST", "SUCCESS", failureSuffix];
@@ -15,6 +18,10 @@ const initialState = {};
 const enhancers = [];
 const middleware = [
   thunk,
+  refreshTokenMiddleware(
+    authService,
+    SwaggerInvestorApi.apiInvestorAuthUpdateTokenGet.bind(SwaggerInvestorApi)
+  ),
   promiseMiddleware({ promiseTypeSuffixes: suffixes }),
   apiErrorHandlerMiddleware({ failureSuffix: failureSuffix }),
   routerMiddleware(history),
