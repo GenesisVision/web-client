@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { withFormik } from "formik";
 import React from "react";
 
-import FieldInput from "../../../../components/FieldInput/FieldInput";
+import FieldInput from "../../../../components/field-input/field-input";
 import routes from "../../../../../utils/constants/routes";
 
 import validationSchema from "./register-form.validators";

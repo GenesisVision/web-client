@@ -1,5 +1,5 @@
 import React from "react";
-import "./FieldInput.css";
+import "./field-input.css";
 
 const FieldInput = ({ addon, touched, error, ...props }) => {
   const showError = touched && error;

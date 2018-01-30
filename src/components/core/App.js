@@ -9,7 +9,7 @@ import history from "../../utils/history";
 import InvestorScene from "../InvestorScene/InvestorScene";
 import LoginScene from "../login-scene/login-scene";
 import NotFoundPage from "./NotFoundPage";
-import PrivateRoute from "../../shared/components/PrivateRoute";
+import PrivateRoute from "../../shared/components/private-route";
 import RegisterScene from "../register-scene/register-scene";
 import routes from "../../utils/constants/routes";
 import store from "../../store";

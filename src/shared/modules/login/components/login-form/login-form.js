@@ -3,7 +3,7 @@ import { withFormik } from "formik";
 import classnames from "classnames";
 import React from "react";
 
-import FieldInput from "../../../../components/FieldInput/FieldInput";
+import FieldInput from "../../../../components/field-input/field-input";
 import routes from "../../../../../utils/constants/routes";
 import validationSchema from "./login-form.validators";
 
