@@ -1,16 +1,19 @@
+// @flow
 import { Link } from "react-router-dom";
 import React, { Component } from "react";
 
+import type { IProfile, IProfileFullProps } from "./profile.type";
+
 import { PROFILE_EDIT_ROUTE } from "../../../profile.constants";
 
-class Profile extends Component {
+class Profile extends Component<IProfileFullProps> {
   componentDidMount() {
     this.props.fetchProfile();
   }
 
   render() {
-    const { isFetching, profile } = this.props;
-    if (!profile || isFetching) return null;
+    const { isPending, profile } = this.props;
+    if (!profile || isPending) return null;
     const fullName = `${profile.firstName || "FirstName"} ${profile.lastName ||
       "LastName"}`;
     return (
@@ -23,7 +26,7 @@ class Profile extends Component {
           />
         </div>
         <div className="col-sm-6 col-md-8">
-          <h1>{fullName}</h1>
+          <h1>{profile.fullName}</h1>
           <div>Birthday: {profile.birthday.toDateString()}</div>
           <div className="mb-4">Passport No: {profile.documentNumber}</div>
           <Link to={PROFILE_EDIT_ROUTE} className="btn btn-primary">
