@@ -9,7 +9,6 @@ import routes from "../../utils/constants/routes";
 const LoginScene = ({
   location,
   isAuthenticated,
-  isPending,
   errorMessage,
   login,
   alreadyAuthenticated
@@ -28,9 +27,9 @@ const LoginScene = ({
 };
 
 const mapStateToProps = state => {
-  const { isPending, errorMessage } = state.loginData;
+  const { errorMessage } = state.loginData;
   const { isAuthenticated } = state.authData;
-  return { isAuthenticated, isPending, errorMessage };
+  return { isAuthenticated, errorMessage };
 };
 
 const mapDispatchToProps = dispatch => ({

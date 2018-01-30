@@ -24,6 +24,8 @@ const getToken = () => {
   return localStorage.getItem(AUTH_TOKEN);
 };
 
+const getAuthArg = () => `Bearer ${getToken()}`;
+
 const isAuthenticated = () => {
   const token = getToken();
 
@@ -44,6 +46,7 @@ const removeToken = () => {
 
 const authService = {
   isAuthenticated,
+  getAuthArg,
   getToken,
   storeToken,
   removeToken,
