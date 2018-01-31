@@ -6,7 +6,6 @@ import React from "react";
 import AlertMessageList from "../../shared/modules/alert-message/components/alert-message-list/alert-message-list";
 import Header from "./Header/Header";
 import history from "../../utils/history";
-import InvestorScene from "../InvestorScene/InvestorScene";
 import LoginScene from "../login-scene/login-scene";
 import NotFoundPage from "./NotFoundPage";
 import PrivateRoute from "../../shared/components/private-route";
@@ -17,6 +16,8 @@ import TradersRoute from "../TradersRoute/TradersRoute";
 
 import { PROFILE_ROUTE } from "../../modules/profile/profile.constants";
 import ProfileRoutes from "../../modules/profile/profile.routes";
+import { DASHBOARD_ROUTE } from "../../modules/dashboard/dashboard.constants";
+import DashboardRoutes from "../../modules/dashboard/dashboard.routes";
 
 const App = () => (
   <Provider store={store}>
@@ -32,7 +33,7 @@ const App = () => (
             <Route path={routes.signup} component={RegisterScene} />
             <Route path={routes.traders} component={TradersRoute} />
             <PrivateRoute path={PROFILE_ROUTE} component={ProfileRoutes} />
-            <PrivateRoute path={routes.dashboard} component={InvestorScene} />
+            <PrivateRoute path={DASHBOARD_ROUTE} component={DashboardRoutes} />
             <Route
               exact
               path={routes.index}

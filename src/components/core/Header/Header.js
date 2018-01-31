@@ -5,6 +5,7 @@ import LoadingBar from "react-redux-loading-bar";
 import MenuLink from "./MenuLink";
 import AuthButtons from "./AuthButtons/AuthButtons";
 import {PROFILE_ROUTE} from "../../../modules/profile/profile.constants";
+import {DASHBOARD_ROUTE} from "../../../modules/dashboard/dashboard.constants";
 
 const Header = props => {
   const { match } = props;
@@ -16,7 +17,7 @@ const Header = props => {
           <ul className="navbar-nav mr-auto">
             <MenuLink url="/traders" name="Traders" match={match} />
             <MenuLink url={PROFILE_ROUTE} name="Profile" match={match} />
-            <MenuLink url="/dashboard" name="Dashboard" match={match} />
+            <MenuLink url={DASHBOARD_ROUTE} name="Dashboard" match={match} />
           </ul>
           <AuthButtons {...props} />
         </div>
