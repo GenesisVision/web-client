@@ -1,10 +1,10 @@
 // @flow
 export default class ProfileModel<IProfile> {
-  firstName: string = "";
-  lastName: string = "";
+  firstName: string = "Your";
+  lastName: string = "Name";
   documentNumber: string = "";
   birthday: Date = new Date();
-  avatar: string = "";
+  avatar: string = "http://via.placeholder.com/350x650";
   email: string = "";
   balance: number = 0;
 

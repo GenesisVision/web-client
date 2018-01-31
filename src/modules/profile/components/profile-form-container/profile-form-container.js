@@ -4,6 +4,9 @@ import React from "react";
 import ProfileForm from "./profile-form/profile-form";
 import profileFormActions from "../../actions/profile-form-actions";
 import profileActions from "../../actions/profile-actions";
+import ProfileModel, {
+  constructFromObject
+} from "../profile-container/profile/profile.model";
 
 const ProfileFormContainer = ({
   profile,
@@ -13,7 +16,7 @@ const ProfileFormContainer = ({
   updateProfile,
   cancelChanges
 }) => {
-  if (profile === undefined) {
+  if (profile === null) {
     fetchProfile();
     return null;
   }
@@ -36,7 +39,10 @@ const mapStateToProps = state => {
     ...state.profileData,
     ...state.profileFormData
   };
-  const profile = state.profileData.data;
+  const profile = constructFromObject(
+    new ProfileModel(),
+    state.profileData.data
+  );
   return { isPending, errorMessage, profile };
 };
 

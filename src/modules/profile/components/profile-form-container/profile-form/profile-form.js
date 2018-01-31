@@ -20,6 +20,32 @@ const ProfileForm = ({
       <h1>Edit Profile</h1>
       <FieldInput
         type="text"
+        id="firstName"
+        name="firstName"
+        placeholder="First Name"
+        touched={touched.firstName}
+        error={errors.firstName}
+        addon="fa fa-pencil"
+        value={values.firstName}
+        onChange={handleChange}
+        onBlur={handleBlur}
+      />
+
+      <FieldInput
+        type="text"
+        id="lastName"
+        name="lastName"
+        placeholder="Last Name"
+        touched={touched.lastName}
+        error={errors.lastName}
+        addon="fa fa-pencil"
+        value={values.lastName}
+        onChange={handleChange}
+        onBlur={handleBlur}
+      />
+
+      <FieldInput
+        type="text"
         id="email"
         name="email"
         placeholder="Email"
@@ -32,7 +58,7 @@ const ProfileForm = ({
       />
 
       <FieldInput
-        type="text"
+        type="date"
         id="birthday"
         name="birthday"
         placeholder="Birthday"
@@ -56,6 +82,20 @@ const ProfileForm = ({
         onChange={handleChange}
         onBlur={handleBlur}
       />
+
+      <FieldInput
+        type="text"
+        id="avatar"
+        name="avatar"
+        placeholder="Avatar Url"
+        touched={touched.avatar}
+        error={errors.avatar}
+        addon="fa fa-pencil"
+        value={values.avatar}
+        onChange={handleChange}
+        onBlur={handleBlur}
+      />
+
       <span className="text-danger">{error && <strong>{error}</strong>}</span>
       <div>
         <button
@@ -81,9 +121,12 @@ const ProfileForm = ({
 export default withFormik({
   displayName: "profileForm",
   mapPropsToValues: ({ profile }) => ({
-    email: profile.email || "",
-    birthday: profile.birthday || "",
-    documentNumber: profile.documentNumber || ""
+    firstName: profile.firstName,
+    lastName: profile.lastName,
+    email: profile.email,
+    birthday: profile.birthday,
+    documentNumber: profile.documentNumber,
+    avatar: profile.avatar
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
     props.onSubmit(values, setSubmitting);
