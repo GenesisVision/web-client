@@ -1,47 +1,49 @@
-import { alertMessageActions, alertMessageActionTypes } from "./alert-message-actions"
+import { alertMessageActions } from "./alert-message-actions";
 
-describe('alertMessageActions', () => {
-  const text = 'New text';
-  it('should create an action with a text about success', () => {
+import * as alertMessageActionTypes from "./alert-message-actions.constants";
+
+describe("alertMessageActions", () => {
+  const text = "New text";
+  it("should create an action with a text about success", () => {
     const expectedAction = {
-      type: alertMessageActionTypes.success,
-      className: 'success',
+      type: alertMessageActionTypes.ALERT_MESSAGE_SUCCESS,
+      className: "success",
       text
     };
-    expect(alertMessageActions.success(text)).toEqual(expectedAction)
+    expect(alertMessageActions.success(text)).toEqual(expectedAction);
   });
 
-  it('should create an action with a text about error', () => {
+  it("should create an action with a text about error", () => {
     const expectedAction = {
-      type: alertMessageActionTypes.error,
-      className: 'danger',
+      type: alertMessageActionTypes.ALERT_MESSAGE_ERROR,
+      className: "danger",
       text
     };
-    expect(alertMessageActions.error(text)).toEqual(expectedAction)
+    expect(alertMessageActions.error(text)).toEqual(expectedAction);
   });
 
-  it('should create an action with a text about warning', () => {
+  it("should create an action with a text about warning", () => {
     const expectedAction = {
-      type: alertMessageActionTypes.warning,
-      className: 'warning',
+      type: alertMessageActionTypes.ALERT_MESSAGE_WARNING,
+      className: "warning",
       text
     };
-    expect(alertMessageActions.warning(text)).toEqual(expectedAction)
+    expect(alertMessageActions.warning(text)).toEqual(expectedAction);
   });
 
-  it('should create an action for removing text', () => {
+  it("should create an action for removing text", () => {
     const removeAtIdx = 0;
     const expectedAction = {
-      type: alertMessageActionTypes.removeAt,
+      type: alertMessageActionTypes.ALERT_MESSAGE_REMOVE_AT,
       idx: removeAtIdx
     };
-    expect(alertMessageActions.removeAt(removeAtIdx)).toEqual(expectedAction)
+    expect(alertMessageActions.removeAt(removeAtIdx)).toEqual(expectedAction);
   });
 
-  it('should create an action for removing text', () => {
+  it("should create an action for removing text", () => {
     const expectedAction = {
-      type: alertMessageActionTypes.clearAll
+      type: alertMessageActionTypes.ALERT_MESSAGE_CLEAR_ALL
     };
-    expect(alertMessageActions.clearAll()).toEqual(expectedAction)
+    expect(alertMessageActions.clearAll()).toEqual(expectedAction);
   });
 });

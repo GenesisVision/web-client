@@ -29,4 +29,4 @@ const clearAll = idx => ({
 
 const alertMessageActions = { success, warning, error, removeAt, clearAll };
 
-export { alertMessageActions, alertMessageActionTypes };
+export { alertMessageActions };
