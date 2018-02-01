@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 import React, { Component } from "react";
 
-import type { IProfile, IProfileFullProps } from "./profile.type";
+import { IProfileFullProps } from "./profile.type";
 
 import { PROFILE_EDIT_ROUTE } from "../../../profile.constants";
 

@@ -7,15 +7,20 @@ import profileActions from "../../actions/profile-actions";
 
 import ProfileModel, { constructFromObject } from "./profile/profile.model";
 
-import type {
-  IProfile,
+import {
   IProfileProps,
   IProfileActions,
   IProfileFullProps
 } from "./profile/profile.type";
 
 const ProfileContainer = (props: IProfileFullProps) => {
-  return <Profile {...props} />;
+  return (
+    <Profile
+      isPending={props.isPending}
+      profile={props.profile}
+      fetchProfile={props.fetchProfile}
+    />
+  );
 };
 
 const mapStateToProps = (state): IProfileProps => {

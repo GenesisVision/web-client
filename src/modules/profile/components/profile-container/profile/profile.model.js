@@ -1,5 +1,7 @@
 // @flow
-export default class ProfileModel<IProfile> {
+import { IProfile } from "./profile.type";
+
+export default class ProfileModel implements IProfile {
   firstName: string = "Your";
   lastName: string = "Name";
   documentNumber: string = "";
