@@ -1,8 +1,10 @@
 import { connect } from "react-redux";
 import React from "react";
 
+import InvestmentProgram from "./investment-programs/investment-programs";
+
 const InvestmentProgramsContainer = () => {
-  return <div>Investment Programs</div>;
+  return <InvestmentProgram />;
 };
 
 const mapStateToProps = state => {
