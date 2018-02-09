@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import TraderProfile from './TraderProfile/TraderProfile'
 import TraderOverallStats from './TraderOverallStats/TraderOverallStats'
 import TraderChart from './TraderChart/TraderChart'
-import './Trader.css';
 
 const Trader = (props) => (
   <div className='list-group-item'>
