@@ -28,9 +28,9 @@
     "yup": "^0.24.0"
   },
   "scripts": {
-    "build-css": "node-sass-chokidar src/ -o src/",
+    "build-css": "node-sass-chokidar --include-path ./src src/ -o src/",
     "watch-css":
-      "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+      "npm run build-css && node-sass-chokidar --include-path ./src src/ -o src/ --watch --recursive",
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
     "build-js": "react-scripts build",
