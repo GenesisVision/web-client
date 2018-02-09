@@ -39,7 +39,7 @@ const RegisterForm = ({
               placeholder="Email"
               touched={touched.email}
               error={errors.email}
-              addon="fa fa-envelope"
+              addon="fas fa-envelope"
               onChange={handleChange}
               onBlur={handleBlur}
             />
@@ -55,7 +55,7 @@ const RegisterForm = ({
               placeholder="Password"
               touched={touched.password}
               error={errors.password}
-              addon="fa fa-lock"
+              addon="fas fa-lock"
               onChange={handleChange}
               onBlur={handleBlur}
             />
@@ -71,7 +71,7 @@ const RegisterForm = ({
               placeholder="Confirm Password"
               touched={touched.confirmPassword}
               error={errors.confirmPassword}
-              addon="fa fa-lock"
+              addon="fas fa-lock"
               onChange={handleChange}
               onBlur={handleBlur}
             />

@@ -5,7 +5,8 @@ import registerServiceWorker from "./registerServiceWorker";
 
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "font-awesome/css/font-awesome.min.css";
+import "@fortawesome/fontawesome-free-webfonts/css/fa-solid.css";
+import "@fortawesome/fontawesome-free-webfonts/css/fontawesome.css";
 
 ReactDOM.render(<App />, document.getElementById("root"));
 registerServiceWorker();

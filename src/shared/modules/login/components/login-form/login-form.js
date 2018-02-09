@@ -39,7 +39,7 @@ const LoginForm = ({
               placeholder="Email"
               touched={touched.email}
               error={errors.email}
-              addon="fa fa-envelope"
+              addon="fas fa-envelope"
               onChange={handleChange}
               onBlur={handleBlur}
             />
@@ -55,7 +55,7 @@ const LoginForm = ({
               placeholder="Password"
               touched={touched.password}
               error={errors.password}
-              addon="fa fa-lock"
+              addon="fas fa-lock"
               onChange={handleChange}
               onBlur={handleBlur}
             />
