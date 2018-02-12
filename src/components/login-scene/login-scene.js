@@ -34,7 +34,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   login: (loginFormData, from, setSubmitting) => {
-    dispatch(loginActions.loginUser(loginFormData, from)).finally(() => {
+    dispatch(loginActions.loginUser(loginFormData, from)).catch(() => {
       setSubmitting(false);
     });
   },

@@ -1,7 +1,19 @@
-.navbar-brand {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  font-size: 1rem;
-  background-color: rgba(0, 0, 0, 0.25);
-  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.25);
+@import "styles/_colors.scss";
+
+.header {
+  box-shadow: 0 0.25rem 0.75rem rgba($main-color, 0.05);
+  border-bottom: 1px solid rgba($main-color, 0.2);
+}
+
+.header__link {
+  color: $text-color;
+  &:hover {
+    color: $text-color-light;
+  }
+}
+.nav-link__profile {
+  color: $text-color !important;
+  &:hover {
+    color: $text-color-light !important;
+  }
 }
