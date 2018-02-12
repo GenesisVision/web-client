@@ -1,6 +1,7 @@
 @import "styles/_colors.scss";
 
 .header {
+  background: white;
   box-shadow: 0 0.25rem 0.75rem rgba($main-color, 0.05);
   border-bottom: 1px solid rgba($main-color, 0.2);
 }

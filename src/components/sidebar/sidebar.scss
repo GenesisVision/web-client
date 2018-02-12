@@ -1,0 +1,26 @@
+@import "styles/_colors.scss";
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  padding: 0;
+  box-shadow: 0 0.25rem 0.75rem rgba($main-color, 0.05);
+  border-right: 1px solid rgba($main-color, 0.2);
+}
+
+.sidebar--sticky {
+  position: sticky;
+  top: 48px;
+  height: calc(100vh - 48px);
+  padding-top: 1rem;
+  overflow-x: hidden;
+}
+
+.sidebar__item {
+  .active {
+    color: $text-color-light;
+  }
+}

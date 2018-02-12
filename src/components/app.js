@@ -11,23 +11,23 @@ import NotFoundPage from "../shared/components/not-found/not-found";
 import PrivateRoute from "../shared/components/private-route/private-route";
 import RegisterScene from "./register-scene/register-scene";
 import routes from "../utils/constants/routes";
+import Sidebar from "./sidebar/sidebar";
 import store from "../store/index";
 import TradersRoute from "./TradersRoute/TradersRoute";
 
-import { PROFILE_ROUTE } from "../modules/profile/profile.constants";
-import ProfileRoutes from "../modules/profile/profile.routes";
 import { DASHBOARD_ROUTE } from "../modules/dashboard/dashboard.constants";
+import { PROFILE_ROUTE } from "../modules/profile/profile.constants";
 import DashboardRoutes from "../modules/dashboard/dashboard.routes";
-import Sidebar from "./sidebar/sidebar";
+import ProfileRoutes from "../modules/profile/profile.routes";
 
 const App = () => (
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <div>
-        <Route path="/:rest" component={Header} />
+        <Route component={Header} />
         <div className="container-fluid">
           <div className="row">
-            <Sidebar className="bg-light col-md-2 d-md-block sidebar" />
+            <Sidebar className="col-md-2 d-md-block" />
             <main className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
               <Switch>
                 <Route path={routes.login} component={LoginScene} />
