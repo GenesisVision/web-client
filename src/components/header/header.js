@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
+import LoadingBar from "react-redux-loading-bar";
 import React from "react";
 
 import loginActions from "../../shared/modules/login/actions/login-actions";
@@ -50,17 +51,20 @@ const unAuthorizedControl = () => (
 
 const Header = ({ isAuthenticated, signOut }) => {
   return (
-    <nav className="header navbar sticky-top flex-md-nowrap">
-      <NavLink
-        className="navbar-brand header__link col-sm-3 col-md-2 mr-0"
-        title="Home"
-        to={HOME_ROUTE}
-      >
-        Investor portal
-      </NavLink>
-      <div className="w-100">&nbsp;</div>
-      {isAuthenticated ? authorizedControl(signOut) : unAuthorizedControl()}
-    </nav>
+    <header>
+      <nav className="header navbar sticky-top flex-md-nowrap">
+        <NavLink
+          className="navbar-brand header__link col-sm-3 col-md-2 mr-0"
+          title="Home"
+          to={HOME_ROUTE}
+        >
+          Investor portal
+        </NavLink>
+        <div className="w-100">&nbsp;</div>
+        {isAuthenticated ? authorizedControl(signOut) : unAuthorizedControl()}
+      </nav>
+      <LoadingBar className="header__loading-bar" />
+    </header>
   );
 };
 

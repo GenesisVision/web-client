@@ -10,12 +10,12 @@ import profileFormReducer from "../modules/profile/reducers/profile-form-reducer
 import profileReducer from "../modules/profile/reducers/profile-reducers";
 import registerReducer from "../shared/modules/register/reducers/register-reducers";
 import traderReducer from "./traderReducer";
-import tradersReducer from "./tradersReducer";
+import tradersReducer from "../modules/traders/reducers/traders-reducers";
 
 export default combineReducers({
   routing: routerReducer,
   loadingBar: loadingBarReducer,
-  tradersInfo: tradersReducer,
+  tradersData: tradersReducer,
   traderData: traderReducer,
   investorProfit: investorProfitReducer,
   loginData: loginReducer,
