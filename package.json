@@ -13,7 +13,7 @@
     "npm-run-all": "^4.1.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-number-format": "^3.1.4",
+    "react-number-format": "^3.1.5",
     "react-popper": "^0.8.2",
     "react-redux": "^5.0.6",
     "react-redux-loading-bar": "^3.1.1",
@@ -29,8 +29,7 @@
   },
   "scripts": {
     "build-css": "node-sass-chokidar --include-path ./src src/ -o src/",
-    "watch-css":
-      "npm run build-css && node-sass-chokidar --include-path ./src src/ -o src/ --watch --recursive",
+    "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src src/ -o src/ --watch --recursive",
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
     "build-js": "react-scripts build",
