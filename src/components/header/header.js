@@ -51,8 +51,8 @@ const unAuthorizedControl = () => (
 
 const Header = ({ isAuthenticated, signOut }) => {
   return (
-    <header>
-      <nav className="header navbar sticky-top flex-md-nowrap">
+    <header className="sticky-top">
+      <nav className="header navbar flex-md-nowrap">
         <NavLink
           className="navbar-brand header__link col-sm-3 col-md-2 mr-0"
           title="Home"
