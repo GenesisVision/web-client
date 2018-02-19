@@ -1,6 +1,8 @@
+import { Link } from "react-router-dom";
 import React from "react";
 
 import "./wallet-info.css";
+import { WALLET_DEPOSIT_ROUTE } from "../../../wallet.constants";
 import gvtLogo from "./logo.png";
 
 const WalletInfo = () => {
@@ -17,7 +19,12 @@ const WalletInfo = () => {
         $120 000 <span className="wallet__currency">usd</span>
       </div>
       <div className="wallet__operations">
-        <button className="wallet__button btn btn-primary">Deposit</button>
+        <Link
+          to={WALLET_DEPOSIT_ROUTE}
+          className="wallet__button btn btn-primary"
+        >
+          Deposit
+        </Link>
         <button className="wallet__button btn btn-outline-secondary">
           Withdraw
         </button>
