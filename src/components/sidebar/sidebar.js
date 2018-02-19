@@ -12,13 +12,17 @@ const Sidebar = ({ className }) => {
       <div className="sidebar--sticky">
         <ul className="nav flex-column">
           <li className="nav-item sidebar__item">
-            <NavLink className="nav-link" title="Home" to={TRADERS_ROUTE}>
-              <span className="fa fa-pencil-alt" /> Traders
+            <NavLink className="nav-link" title="Traders" to={TRADERS_ROUTE}>
+              <span className="fa fa-list-ol" /> Traders
             </NavLink>
           </li>
           <li className="nav-item sidebar__item">
-            <NavLink className="nav-link" title="Home" to={DASHBOARD_ROUTE}>
-              <span className="fa fa-pencil-alt" /> Dashboard
+            <NavLink
+              className="nav-link"
+              title="Dashboard"
+              to={DASHBOARD_ROUTE}
+            >
+              <span className="fa fa-chart-pie" /> Dashboard
             </NavLink>
           </li>
         </ul>

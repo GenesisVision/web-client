@@ -1,0 +1,28 @@
+@import "styles/_colors.scss";
+
+.fund {
+  .recharts-rectangle {
+    fill: $alternate-color;
+    stroke: $main-color;
+  }
+}
+
+.profit {
+  .recharts-rectangle {
+    fill: white;
+    stroke: $main-color;
+  }
+}
+
+.lose {
+  .recharts-rectangle {
+    fill: $main-color;
+    stroke: $main-color;
+  }
+}
+
+.total-profit {
+  .recharts-line-curve {
+    stroke: $main-color;
+  }
+}
