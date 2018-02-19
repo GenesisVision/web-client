@@ -1,0 +1,11 @@
+h1 {
+  font-size: 48px;
+  font-weight: 900;
+  color: $text-color;
+  margin-bottom: 10px;
+  line-height: 1;
+  &::after {
+    content: ".";
+    color: $text-color-light;
+  }
+}
