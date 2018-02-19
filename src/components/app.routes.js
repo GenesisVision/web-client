@@ -10,9 +10,11 @@ import routes from "../utils/constants/routes";
 import { DASHBOARD_ROUTE } from "../modules/dashboard/dashboard.constants";
 import { PROFILE_ROUTE } from "../modules/profile/profile.constants";
 import { TRADERS_ROUTE } from "../modules/traders/traders.constants";
+import { WALLET_ROUTE } from "../modules/wallet/wallet.constants";
 import DashboardRoutes from "../modules/dashboard/dashboard.routes";
 import ProfileRoutes from "../modules/profile/profile.routes";
 import TradersRoutes from "../modules/traders/traders.routes";
+import WalletRoutes from "../modules/wallet/wallet.routes";
 
 const AppRoutes = () => (
   <Switch>
@@ -21,6 +23,7 @@ const AppRoutes = () => (
     <Route path={TRADERS_ROUTE} component={TradersRoutes} />
     <PrivateRoute path={PROFILE_ROUTE} component={ProfileRoutes} />
     <PrivateRoute path={DASHBOARD_ROUTE} component={DashboardRoutes} />
+    <Route path={WALLET_ROUTE} component={WalletRoutes} />
     <Route
       exact
       path={routes.index}

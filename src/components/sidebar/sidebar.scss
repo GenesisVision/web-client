@@ -20,7 +20,12 @@
 }
 
 .sidebar__item {
-  .active {
-    color: $text-color-light;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  .nav-link {
+    color: $text-color;
+    &.active {
+      color: $text-color-light;
+    }
   }
 }

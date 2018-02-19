@@ -4,6 +4,7 @@ import React from "react";
 
 import "./sidebar.css";
 import { DASHBOARD_ROUTE } from "../../modules/dashboard/dashboard.constants";
+import { WALLET_ROUTE } from "../../modules/wallet/wallet.constants";
 
 const TRADERS_ROUTE = "/traders";
 const Sidebar = ({ className }) => {
@@ -23,6 +24,11 @@ const Sidebar = ({ className }) => {
               to={DASHBOARD_ROUTE}
             >
               <span className="fa fa-chart-pie" /> Dashboard
+            </NavLink>
+          </li>
+          <li className="nav-item sidebar__item">
+            <NavLink className="nav-link" title="Wallet" to={WALLET_ROUTE}>
+              <span className="fa fa-credit-card" /> Wallet
             </NavLink>
           </li>
         </ul>

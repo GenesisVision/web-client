@@ -1,3 +1,4 @@
 @import "./_colors.scss";
-$primary: $main-color !default;
+$secondary: $main-color;
+$primary: $alternate-color;
 @import "node_modules/bootstrap/scss/bootstrap.scss";
