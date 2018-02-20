@@ -22,7 +22,7 @@ const AppRoutes = () => (
     <Route path={routes.signup} component={RegisterScene} />
     <Route path={TRADERS_ROUTE} component={TradersRoutes} />
     <PrivateRoute path={PROFILE_ROUTE} component={ProfileRoutes} />
-    <PrivateRoute path={DASHBOARD_ROUTE} component={DashboardRoutes} />
+    <Route path={DASHBOARD_ROUTE} component={DashboardRoutes} />
     <Route path={WALLET_ROUTE} component={WalletRoutes} />
     <Route
       exact
