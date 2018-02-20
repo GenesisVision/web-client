@@ -24,13 +24,16 @@ const ProfileFormContainer = ({
     return null;
   }
   return (
-    <ProfileForm
-      profile={profile}
-      fetchProfile={fetchProfile}
-      onSubmit={updateProfile}
-      onCancel={cancelChanges}
-      error={errorMessage}
-    />
+    <div>
+      <h1>Profile Edit</h1>
+      <ProfileForm
+        profile={profile}
+        fetchProfile={fetchProfile}
+        onSubmit={updateProfile}
+        onCancel={cancelChanges}
+        error={errorMessage}
+      />
+    </div>
   );
 };
 

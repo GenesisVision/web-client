@@ -17,7 +17,6 @@ const ProfileForm = ({
 }) => {
   return (
     <form onSubmit={handleSubmit} noValidate>
-      <h1>Edit Profile</h1>
       <FieldInput
         type="text"
         id="firstName"

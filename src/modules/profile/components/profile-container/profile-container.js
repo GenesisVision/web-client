@@ -15,11 +15,14 @@ import {
 
 const ProfileContainer = (props: IProfileFullProps) => {
   return (
-    <Profile
-      isPending={props.isPending}
-      profile={props.profile}
-      fetchProfile={props.fetchProfile}
-    />
+    <div>
+      <h1>Profile</h1>
+      <Profile
+        isPending={props.isPending}
+        profile={props.profile}
+        fetchProfile={props.fetchProfile}
+      />
+    </div>
   );
 };
 
