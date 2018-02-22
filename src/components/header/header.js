@@ -8,19 +8,9 @@ import loginActions from "../../shared/modules/login/actions/login-actions";
 import "./header.css";
 import { HOME_ROUTE } from "../app.constants";
 import { LOGIN_ROUTE } from "../login-scene/login-scene.constants";
-import { PROFILE_ROUTE } from "../../modules/profile/profile.constants";
 
 const authorizedControl = signOut => (
   <ul className="navbar-nav px-3 flex-row">
-    <li className="nav-item text-nowrap">
-      <Link
-        className="nav-link nav-link__profile px-3"
-        title="Profile"
-        to={PROFILE_ROUTE}
-      >
-        <span className="fas fa-user-circle" />
-      </Link>
-    </li>
     <li className="nav-item text-nowrap">
       <button
         className="btn btn-outline-primary"

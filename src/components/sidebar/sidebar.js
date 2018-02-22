@@ -5,6 +5,7 @@ import React from "react";
 import "./sidebar.css";
 import { DASHBOARD_ROUTE } from "../../modules/dashboard/dashboard.constants";
 import { WALLET_ROUTE } from "../../modules/wallet/wallet.constants";
+import { PROFILE_ROUTE } from "../../modules/profile/profile.constants";
 
 const TRADERS_ROUTE = "/traders";
 const Sidebar = ({ className }) => {
@@ -29,6 +30,11 @@ const Sidebar = ({ className }) => {
           <li className="nav-item sidebar__item">
             <NavLink className="nav-link" title="Wallet" to={WALLET_ROUTE}>
               <span className="fa fa-credit-card" /> Wallet
+            </NavLink>
+          </li>
+          <li className="nav-item sidebar__item">
+            <NavLink className="nav-link" title="Profile" to={PROFILE_ROUTE}>
+              <span className="fa fa-user" /> Profile
             </NavLink>
           </li>
         </ul>
