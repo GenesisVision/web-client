@@ -11,6 +11,9 @@ import profileReducer from "../modules/profile/reducers/profile-reducers";
 import registerReducer from "../shared/modules/register/reducers/register-reducers";
 import traderReducer from "./traderReducer";
 import tradersReducer from "../modules/traders/reducers/traders-reducers";
+import walletAddressReducer from "../modules/wallet/reducers/wallet-address-reducer";
+import walletReducer from "../modules/wallet/reducers/wallet-reducers";
+import walletTransactionsReducer from "../modules/wallet/reducers/wallet-transactions-reducer";
 
 export default combineReducers({
   routing: routerReducer,
@@ -23,5 +26,8 @@ export default combineReducers({
   authData: authReducer,
   alertMessages: alertMessagesReducer,
   profileData: profileReducer,
-  profileFormData: profileFormReducer
+  profileFormData: profileFormReducer,
+  walletData: walletReducer,
+  walletTransactionsData: walletTransactionsReducer,
+  walletAddressData: walletAddressReducer
 });

@@ -1,29 +1,23 @@
 import React, { Component } from "react";
 
-const WHTransactionDescription = ({ isOpen, description }) => {
+const WalletTransactionDetail = ({ isOpen, equivalent, transactionId }) => {
   if (!isOpen) return null;
 
   return (
     <div className="row wh-transaction-description mt-4">
-      <div className="col-3">
-        <div className="wh-transaction-description__header">Status</div>
-        <div className="wh-transaction-description__value">Pending</div>
+      <div className="col-2">
+        <div className="wh-transaction-description__header">Equivalent</div>
+        <div className="wh-transaction-description__value">${equivalent}</div>
       </div>
-      <div className="col-3">
-        <div className="wh-transaction-description__header">Date</div>
-        <div className="wh-transaction-description__value">2018-02-14</div>
-      </div>
-      <div className="col-3">
+      <div className="col-2">
         <div className="wh-transaction-description__header">Transaction Id</div>
-        <div className="wh-transaction-description__value">
-          0x777f620f020b4c6765d600ea7832fb94286d9462acbfef30b2e49df6220f2fe8
-        </div>
+        <div className="wh-transaction-description__value">{transactionId}</div>
       </div>
     </div>
   );
 };
 
-class WHTransaction extends Component {
+class WalletTransaction extends Component {
   state = {
     isDescriptionOpen: false
   };
@@ -41,7 +35,7 @@ class WHTransaction extends Component {
     return (
       <div className="list-group-item">
         <div className="row">
-          <div className="col-2">{transaction.direction}</div>
+          <div className="col-2">{transaction.type}</div>
           <div className="col-7">
             {transaction.programName} (<span
               className="link"
@@ -50,15 +44,18 @@ class WHTransaction extends Component {
               {transaction.amount} gvt
             </span>)
           </div>
-          <div className="col-3">{transaction.date}</div>
+          <div className="col-3">
+            {new Date(transaction.date).toDateString()}
+          </div>
         </div>
-        <WHTransactionDescription
+        <WalletTransactionDetail
           isOpen={this.state.isDescriptionOpen}
-          description={transaction.description}
+          equivalent={transaction.amount * transaction.rate}
+          transactionId={transaction.transactionId}
         />
       </div>
     );
   }
 }
 
-export default WHTransaction;
+export default WalletTransaction;
