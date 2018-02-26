@@ -1,7 +1,7 @@
 import { withFormik } from "formik";
 import React from "react";
 
-import FieldInput from "../../../../../shared/components/field-input/field-input";
+import FieldInput from "../../../../../shared/components/form/input-text/input-text";
 
 const ProfileForm = ({
   values,

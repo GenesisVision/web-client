@@ -1,7 +1,8 @@
 import React from "react";
-import "./field-input.css";
 
-const FieldInput = ({ addon, touched, error, ...props }) => {
+import "./input-text.css";
+
+const InputText = ({ addon, touched, error, ...props }) => {
   const showError = touched && error;
   const validationClass = touched ? (error ? " is-invalid" : " is-valid") : "";
 
@@ -24,4 +25,4 @@ const FieldInput = ({ addon, touched, error, ...props }) => {
   );
 };
 
-export default FieldInput;
+export default InputText;
