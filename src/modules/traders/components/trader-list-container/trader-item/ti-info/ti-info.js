@@ -1,4 +1,7 @@
+import { Link } from "react-router-dom";
 import React from "react";
+
+import { TRADER_ROUTE } from "../../../../traders.constants";
 import avatar from "./avatar.png";
 
 const TIInfo = () => {
@@ -10,7 +13,9 @@ const TIInfo = () => {
         </div>
         <div className="col-6">
           <div className="card-block">
-            <h5 className="card-title">title</h5>
+            <h5 className="card-title">
+              <Link to={TRADER_ROUTE}>title</Link>
+            </h5>
             <p className="card-text trader-profile__description">description</p>
           </div>
         </div>
