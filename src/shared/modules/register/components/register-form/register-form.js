@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { withFormik } from "formik";
+import { withFormik, Field } from "formik";
 import React from "react";
 
-import FieldInput from "../../../../components/form/input-text/input-text";
+import InputText from "../../../../components/form/input-text/input-text";
 import routes from "../../../../../utils/constants/routes";
 
 import validationSchema from "./register-form.validators";
@@ -32,48 +32,36 @@ const RegisterForm = ({
         <div className="row">
           <div className="col-md-3" />
           <div className="col-md-6">
-            <FieldInput
-              type="text"
-              id="email"
+            <Field
+              type="email"
               name="email"
               placeholder="Email"
-              touched={touched.email}
-              error={errors.email}
               addon="fas fa-envelope"
-              onChange={handleChange}
-              onBlur={handleBlur}
+              component={InputText}
             />
           </div>
         </div>
         <div className="row">
           <div className="col-md-3" />
           <div className="col-md-6">
-            <FieldInput
+            <Field
               type="password"
-              id="passport"
               name="password"
               placeholder="Password"
-              touched={touched.password}
-              error={errors.password}
               addon="fas fa-lock"
-              onChange={handleChange}
-              onBlur={handleBlur}
+              component={InputText}
             />
           </div>
         </div>
         <div className="row">
           <div className="col-md-3" />
           <div className="col-md-6">
-            <FieldInput
+            <Field
               type="password"
-              id="confirmPassword"
               name="confirmPassword"
               placeholder="Confirm Password"
-              touched={touched.confirmPassword}
-              error={errors.confirmPassword}
               addon="fas fa-lock"
-              onChange={handleChange}
-              onBlur={handleBlur}
+              component={InputText}
             />
           </div>
         </div>

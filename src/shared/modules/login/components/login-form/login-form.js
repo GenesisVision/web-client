@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
-import { withFormik } from "formik";
+import { withFormik, Field } from "formik";
 import classnames from "classnames";
 import React from "react";
 
-import FieldInput from "../../../../components/form/input-text/input-text";
+import FormError from "../../../../components/form/form-error/form-error";
+import InputText from "../../../../components/form/input-text/input-text";
 import routes from "../../../../../utils/constants/routes";
+
 import validationSchema from "./login-form.validators";
 
 const LoginForm = ({
@@ -32,41 +34,31 @@ const LoginForm = ({
         <div className="row">
           <div className="col-md-3" />
           <div className="col-md-6">
-            <FieldInput
-              type="text"
-              id="email"
+            <Field
+              type="email"
               name="email"
               placeholder="Email"
-              touched={touched.email}
-              error={errors.email}
               addon="fas fa-envelope"
-              onChange={handleChange}
-              onBlur={handleBlur}
+              component={InputText}
             />
           </div>
         </div>
         <div className="row">
           <div className="col-md-3" />
           <div className="col-md-6">
-            <FieldInput
+            <Field
               type="password"
-              id="passport"
               name="password"
               placeholder="Password"
-              touched={touched.password}
-              error={errors.password}
               addon="fas fa-lock"
-              onChange={handleChange}
-              onBlur={handleBlur}
+              component={InputText}
             />
           </div>
         </div>
         <div className="row">
           <div className="col-md-3" />
           <div className="col-md-6">
-            <span className="text-danger">
-              {error && <strong>{error}</strong>}
-            </span>
+            <FormError error={error} />
           </div>
         </div>
         <div className="row form-group">
