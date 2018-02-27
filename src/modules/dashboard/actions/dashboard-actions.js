@@ -11,13 +11,14 @@ const fetchDashboard = () => {
         investedTokens: 10,
         name: "Program A",
         level: 4,
-        avatar: 100,
+        avatar: null,
         balance: 15,
         investorsCount: 2,
         endOfPeriod: "2018-02-27T10:33:45.802Z",
         avgProfit: 22,
         avaibleInvestments: 100,
         totalProfit: 10,
+        profitForLastPeriod: 1,
         chart: [
           { name: "01/01", profit: 4000, fund: 2000, totalProfit: 4000 },
           {
@@ -41,17 +42,18 @@ const fetchDashboard = () => {
         ]
       },
       {
-        id: 1,
+        id: 2,
         investedTokens: 100,
         name: "Program B",
         level: 5,
-        avatar: 100,
+        avatar: "http://via.placeholder.com/100x100",
         balance: 15,
         investorsCount: 2,
         endOfPeriod: "2018-02-27T10:33:45.802Z",
         avgProfit: 22,
         avaibleInvestments: 100,
         totalProfit: 40,
+        profitForLastPeriod: 5,
         chart: [
           { name: "01/01", profit: 4000, fund: 2000, totalProfit: 4000 },
           {
@@ -78,5 +80,14 @@ const fetchDashboard = () => {
   };
 };
 
-const dashboardActions = { fetchDashboard };
+const openDashboardDepositModal = () => ({
+  type: actionTypes.DASHBOARD_LAYOUT_DEPOSIT,
+  isOpen: true
+});
+
+const closeDashboardDepositModal = dispatch => {
+  dispatch({ type: actionTypes.DASHBOARD_LAYOUT_DEPOSIT, isOpen: false });
+};
+
+const dashboardActions = { fetchDashboard, openDashboardDepositModal };
 export default dashboardActions;

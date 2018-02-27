@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import React from "react";
 
 import { TRADER_ROUTE } from "../../../../traders.constants";
-import avatar from "./avatar.png";
+import  avatar  from "../../../../../../shared/media/avatar.png";
 
 const TIInfo = () => {
   return (
