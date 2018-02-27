@@ -1,14 +1,23 @@
+import { connect } from "react-redux";
 import React from "react";
 
-const WalletWithdraw = () => {
-  return (
-    <div className="d-flex flex-column align-items-center">
-      <h1 className="m-4">Withdraw</h1>
-      <div className="m-3">
-        <input type="text" value="123" />
-      </div>
-    </div>
-  );
+import walletActions from "../../actions/wallet-actions";
+import WalletWithdrawForm from "./wallet-withdraw-form/wallet-withdraw-form";
+
+const WalletWithdraw = ({ withdraw }) => {
+  const handleWithdraw = (withdrawFormData, setSubmitting) => {
+    withdraw(withdrawFormData, setSubmitting);
+  };
+  return <WalletWithdrawForm onSubmit={handleWithdraw} />;
 };
 
-export default WalletWithdraw;
+const mapDispatchToProps = dispatch => ({
+  withdraw: (withdrawFormData, setSubmitting) => {
+    const { address, amount } = withdrawFormData;
+    dispatch(walletActions.walletWithdraw(address, amount)).catch(() => {
+      setSubmitting(false);
+    });
+  }
+});
+
+export default connect(null, mapDispatchToProps)(WalletWithdraw);
