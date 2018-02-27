@@ -4,6 +4,7 @@ import { routerReducer } from "react-router-redux";
 
 import alertMessagesReducer from "../shared/modules/alert-message/reducers/alert-message-reducers";
 import authReducer from "./authReducer";
+import dashboardReducer from "../modules/dashboard/reducers/dashboard-reducers";
 import investorProfitReducer from "./investorProfitReducer";
 import loginReducer from "../shared/modules/login/reducers/login-reducers";
 import profileFormReducer from "../modules/profile/reducers/profile-form-reducers";
@@ -29,5 +30,6 @@ export default combineReducers({
   profileFormData: profileFormReducer,
   walletData: walletReducer,
   walletTransactionsData: walletTransactionsReducer,
-  walletAddressData: walletAddressReducer
+  walletAddressData: walletAddressReducer,
+  dashboardData: dashboardReducer
 });

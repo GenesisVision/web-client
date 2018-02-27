@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import React from "react";
 
-import DInvestmentProgramList from "./d-investment-program-list/d-investment-program-list";
+import DInvestmentProgramList from "../d-investment-program-list/d-investment-program-list";
 
 const DInvestmentProgramListContainer = ({ programs }) => {
   return <DInvestmentProgramList programs={programs} />;

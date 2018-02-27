@@ -101,6 +101,7 @@ class DChart extends Component {
           innerRadius={90}
           outerRadius={150}
           onMouseEnter={this.onPieEnter}
+          isAnimationActive={false}
         >
           {this.props.data.map((entry, index) => (
             <Cell key={index} fill={COLORS[index % COLORS.length]} />
