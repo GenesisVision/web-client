@@ -19,11 +19,12 @@ const TraderDepositModal = ({
   isOpen,
   availableTokens,
   availableInvestments,
-  buyTokens,
+  isSubmitting,
+  handleSubmit,
   closeModal
 }) => {
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <Modal isOpen={isOpen}>
         <ModalHeader>Buy Tokens</ModalHeader>
         <ModalBody>
@@ -56,9 +57,14 @@ const TraderDepositModal = ({
           </FormGroup>
         </ModalBody>
         <ModalFooter>
-          <Button color="outline-success" onClick={buyTokens}>
+          <button
+            type="submit"
+            className="btn btn-outline-primary"
+            onClick={handleSubmit}
+            disabled={isSubmitting}
+          >
             Buy
-          </Button>
+          </button>
           <Button color="outline-secondary" onClick={closeModal}>
             Cancel
           </Button>

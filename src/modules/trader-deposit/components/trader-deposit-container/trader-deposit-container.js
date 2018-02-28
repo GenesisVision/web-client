@@ -11,6 +11,7 @@ const TraderDepositContainer = ({
   isPending,
   deposit,
   fetchDeposit,
+  submitDeposit,
   closeModal
 }) => {
   if (isPending) {
@@ -24,10 +25,17 @@ const TraderDepositContainer = ({
   const handleCloseModal = () => {
     closeModal(from);
   };
+  const handleDepositSubmit = ({ amount }, setSubmitting) => {
+    submitDeposit(deposit.traderId, amount, from, setSubmitting);
+  };
 
   return (
     <div>
-      <TraderDepositModal isOpen={true} closeModal={handleCloseModal} />
+      <TraderDepositModal
+        isOpen={true}
+        onSubmit={handleDepositSubmit}
+        closeModal={handleCloseModal}
+      />
     </div>
   );
 };
@@ -48,6 +56,13 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   fetchDeposit: traderId => {
     dispatch(traderDepositActions.fetchTraderDeposit(traderId));
+  },
+  submitDeposit: (traderId, amount, from, setSubmitting) => {
+    dispatch(traderDepositActions.submitTraderDeposit(traderId, amount))
+      .then(() => traderDepositActions.closeTraderDepositModal(from))
+      .catch(() => {
+        setSubmitting(false);
+      });
   },
   closeModal: from => {
     traderDepositActions.closeTraderDepositModal(from);

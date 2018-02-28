@@ -14,9 +14,20 @@ const fetchTraderDeposit = traderId => {
   };
 };
 
+const submitTraderDeposit = (traderId, amount, onCatch) => {
+  return {
+    type: actionTypes.TRADER_DEPOSIT_SUBMIT,
+    payload: Promise.resolve()
+  };
+};
+
 const closeTraderDepositModal = from => {
   history.push(from);
 };
 
-const traderDepositActions = { fetchTraderDeposit, closeTraderDepositModal };
+const traderDepositActions = {
+  fetchTraderDeposit,
+  closeTraderDepositModal,
+  submitTraderDeposit
+};
 export default traderDepositActions;

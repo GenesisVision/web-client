@@ -8,14 +8,8 @@ import "./wallet-withdraw-form.css";
 import walletWithdrawValidationSchema from "./wallet-withdraw-form.validators";
 
 const WalletWithdrawForm = ({
-  values,
-  touched,
-  errors,
   isSubmitting,
-  handleChange,
-  handleBlur,
   handleSubmit,
-  handleCancel,
   error,
   onCancel
 }) => {
