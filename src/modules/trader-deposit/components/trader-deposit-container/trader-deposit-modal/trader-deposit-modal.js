@@ -16,9 +16,9 @@ import Yup from "yup";
 import InputText from "../../../../../shared/components/form/input-text/input-text";
 
 const TraderDepositModal = ({
+  values,
   isOpen,
-  availableTokens,
-  availableInvestments,
+  traderDeposit,
   isSubmitting,
   handleSubmit,
   closeModal
@@ -28,33 +28,22 @@ const TraderDepositModal = ({
       <Modal isOpen={isOpen}>
         <ModalHeader>Buy Tokens</ModalHeader>
         <ModalBody>
-          <p>Program A</p>
-          <FormGroup row>
-            <Label for="availToken" sm={4}>
-              Available Tokens
-            </Label>
-            <Col sm={8}>{availableInvestments}</Col>
-          </FormGroup>
-          <FormGroup row>
-            <Label for="buyTokens" sm={4}>
-              Buy Tokens
-            </Label>
-            <Col sm={8}>
-              <Field
-                name="amount"
-                placeholder="Amount"
-                addon="fas fa-barcode"
-                component={InputText}
-                autoFocus
-              />
-            </Col>
-          </FormGroup>
-          <FormGroup row>
-            <Label for="costToken" sm={4}>
-              Cost (GVT)
-            </Label>
-            <Col sm={8}>100</Col>
-          </FormGroup>
+          <h2>{traderDeposit.name}</h2>
+          <p>
+            <span>Available GVT: </span>
+            <span>{traderDeposit.available}</span>
+          </p>
+          <Field
+            name="amount"
+            type="number"
+            placeholder="Amount"
+            addon="fas fa-barcode"
+            component={InputText}
+          />
+          <p>
+            <span>You'll get: </span>
+            <span>{(values.amount || 0) * traderDeposit.rate} Tokens</span>
+          </p>
         </ModalBody>
         <ModalFooter>
           <button

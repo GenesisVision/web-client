@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import React from "react";
 
+import routes from "../../../../utils/constants/routes";
 import traderDepositActions from "../../actions/trader-deposit-actions";
 import TraderDepositModal from "./trader-deposit-modal/trader-deposit-modal";
 
@@ -9,7 +10,7 @@ const TraderDepositContainer = ({
   location,
   match,
   isPending,
-  deposit,
+  traderDeposit,
   fetchDeposit,
   submitDeposit,
   closeModal
@@ -17,22 +18,23 @@ const TraderDepositContainer = ({
   if (isPending) {
     return null;
   }
-  if (deposit === undefined) {
+  if (traderDeposit === undefined) {
     fetchDeposit();
     return null;
   }
-  const { from } = location.state || { from: { pathname: "/" } };
+  const { from } = location.state || { from: { pathname: routes.index } };
   const handleCloseModal = () => {
     closeModal(from);
   };
   const handleDepositSubmit = ({ amount }, setSubmitting) => {
-    submitDeposit(deposit.traderId, amount, from, setSubmitting);
+    submitDeposit(traderDeposit.id, amount, from, setSubmitting);
   };
 
   return (
     <div>
       <TraderDepositModal
         isOpen={true}
+        traderDeposit={traderDeposit}
         onSubmit={handleDepositSubmit}
         closeModal={handleCloseModal}
       />
@@ -43,14 +45,14 @@ const TraderDepositContainer = ({
 const mapStateToProps = state => {
   const { isPending, errorMessage, data } = state.traderDepositData;
 
-  let deposit;
+  let traderDeposit;
   if (data) {
-    deposit = data;
+    traderDeposit = data;
   }
   if (errorMessage !== "") {
-    deposit = {};
+    traderDeposit = {};
   }
-  return { isPending, deposit, errorMessage };
+  return { isPending, traderDeposit, errorMessage };
 };
 
 const mapDispatchToProps = dispatch => ({

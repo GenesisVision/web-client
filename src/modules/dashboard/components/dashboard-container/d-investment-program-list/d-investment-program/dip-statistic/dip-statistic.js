@@ -42,7 +42,7 @@ const DIPStatistic = ({ program }) => {
           }}
           className="btn btn-outline-primary"
         >
-          Sell tokens
+          Buy tokens
         </Link>
         <Link
           to={{
