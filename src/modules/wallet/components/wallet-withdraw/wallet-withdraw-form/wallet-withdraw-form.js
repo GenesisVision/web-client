@@ -25,7 +25,6 @@ const WalletWithdrawForm = ({
         <div className="">
           <h1 className="m-4">Withdraw</h1>
         </div>
-
         <Field
           name="address"
           placeholder="To"

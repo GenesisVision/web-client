@@ -1,10 +1,19 @@
 import { Route } from "react-router-dom";
 import React from "react";
-import { DASHBOARD_ROUTE } from "./dashboard.constants";
+
 import DashboardContainer from "./components/dashboard-container/dashboard-container";
+import TraderDepositContainer from "../trader-deposit/components/trader-deposit-container/trader-deposit-container";
+
+import {
+  DASHBOARD_ROUTE,
+  DASHBOARD_DEPOSIT_ROUTE
+} from "./dashboard.constants";
 
 const DashboardRoutes = () => (
-  <Route path={DASHBOARD_ROUTE} component={DashboardContainer} />
+  <div>
+    <Route path={DASHBOARD_ROUTE} component={DashboardContainer} />
+    <Route path={DASHBOARD_DEPOSIT_ROUTE} component={TraderDepositContainer} />
+  </div>
 );
 
 export default DashboardRoutes;

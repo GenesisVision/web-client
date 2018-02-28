@@ -4,7 +4,7 @@ import DIPChart from "./dip-chart/dip-chart";
 import DIPInfo from "./dip-info/dip-info";
 import DIPStatistic from "./dip-statistic/dip-statistic";
 
-const DInvestmentProgram = ({ program, openDepositModal }) => (
+const DInvestmentProgram = ({ program }) => (
   <div className="list-group-item">
     <div className="row">
       <div className="col-md-1">
@@ -14,7 +14,7 @@ const DInvestmentProgram = ({ program, openDepositModal }) => (
         <DIPChart data={program.chart} />
       </div>
       <div className="col-md-8">
-        <DIPStatistic program={program} openDepositModal={openDepositModal} />
+        <DIPStatistic program={program} />
       </div>
     </div>
   </div>

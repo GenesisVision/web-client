@@ -1,6 +1,17 @@
+import { Link } from "react-router-dom";
 import React from "react";
 
-const DIPStatistic = ({ program, openDepositModal }) => {
+import replaceParams from "../../../../../../../utils/replace-params";
+
+import {
+  DASHBOARD_ROUTE,
+  DASHBOARD_DEPOSIT_ROUTE
+} from "../../../../../dashboard.constants";
+
+const DIPStatistic = ({ program }) => {
+  const traderDepositUrl = replaceParams(DASHBOARD_DEPOSIT_ROUTE, {
+    ":traderId": program.id
+  });
   return (
     <div className="row">
       <div className="col-4">
@@ -20,9 +31,15 @@ const DIPStatistic = ({ program, openDepositModal }) => {
         <p>Investors: {program.investors}</p>
       </div>
       <div className="col-2">
-        <button className="btn btn-outline-primary" onClick={openDepositModal}>
+        <Link
+          to={{
+            pathname: traderDepositUrl,
+            state: { from: DASHBOARD_ROUTE }
+          }}
+          className="btn btn-outline-primary"
+        >
           Buy tokens
-        </button>
+        </Link>
         <button className="btn btn-outline-secondary mt-4">Sell tokens</button>
       </div>
     </div>

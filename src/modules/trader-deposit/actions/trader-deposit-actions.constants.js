@@ -1,0 +1,1 @@
+export const TRADER_DEPOSIT = "TRADER_DEPOSIT";

@@ -10,6 +10,7 @@ import loginReducer from "../shared/modules/login/reducers/login-reducers";
 import profileFormReducer from "../modules/profile/reducers/profile-form-reducers";
 import profileReducer from "../modules/profile/reducers/profile-reducers";
 import registerReducer from "../shared/modules/register/reducers/register-reducers";
+import traderDepositReducer from "../modules/trader-deposit/reducers/trader-deposit-reducers";
 import traderReducer from "./traderReducer";
 import tradersReducer from "../modules/traders/reducers/traders-reducers";
 import walletAddressReducer from "../modules/wallet/reducers/wallet-address-reducer";
@@ -31,5 +32,6 @@ export default combineReducers({
   walletData: walletReducer,
   walletTransactionsData: walletTransactionsReducer,
   walletAddressData: walletAddressReducer,
-  dashboardData: dashboardReducer
+  dashboardData: dashboardReducer,
+  traderDepositData: traderDepositReducer
 });

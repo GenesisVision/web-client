@@ -80,14 +80,5 @@ const fetchDashboard = () => {
   };
 };
 
-const openDashboardDepositModal = () => ({
-  type: actionTypes.DASHBOARD_LAYOUT_DEPOSIT,
-  isOpen: true
-});
-
-const closeDashboardDepositModal = dispatch => {
-  dispatch({ type: actionTypes.DASHBOARD_LAYOUT_DEPOSIT, isOpen: false });
-};
-
-const dashboardActions = { fetchDashboard, openDashboardDepositModal };
+const dashboardActions = { fetchDashboard };
 export default dashboardActions;

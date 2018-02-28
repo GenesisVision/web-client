@@ -9,20 +9,25 @@ import {
   Col,
   Input
 } from "reactstrap";
+import { withFormik, Field } from "formik";
 import React, { Component } from "react";
+import Yup from "yup";
+
+import InputText from "../../../../../shared/components/form/input-text/input-text";
 
 const TraderDepositModal = ({
   isOpen,
   availableTokens,
   availableInvestments,
   buyTokens,
-  toggleModal
+  closeModal
 }) => {
   return (
     <form>
       <Modal isOpen={isOpen}>
-        <ModalHeader>Investing</ModalHeader>
+        <ModalHeader>Buy Tokens</ModalHeader>
         <ModalBody>
+          <p>Program A</p>
           <FormGroup row>
             <Label for="availToken" sm={4}>
               Available Tokens
@@ -33,12 +38,12 @@ const TraderDepositModal = ({
             <Label for="buyTokens" sm={4}>
               Buy Tokens
             </Label>
-            <Col sm={4}>
-              <Input
-                type="number"
-                id="buyTokens"
-                value={0}
-                onChange={buyTokens}
+            <Col sm={8}>
+              <Field
+                name="amount"
+                placeholder="Amount"
+                addon="fas fa-barcode"
+                component={InputText}
                 autoFocus
               />
             </Col>
@@ -54,7 +59,7 @@ const TraderDepositModal = ({
           <Button color="outline-success" onClick={buyTokens}>
             Buy
           </Button>
-          <Button color="outline-secondary" onClick={toggleModal}>
+          <Button color="outline-secondary" onClick={closeModal}>
             Cancel
           </Button>
         </ModalFooter>
@@ -63,4 +68,18 @@ const TraderDepositModal = ({
   );
 };
 
-export default TraderDepositModal;
+export default withFormik({
+  displayName: "traderDepositForm",
+  mapPropsToValues: () => ({
+    amount: 0
+  }),
+  validationSchema: Yup.object().shape({
+    amount: Yup.number()
+      .typeError("Amount must be a number.")
+      .moreThan(0, "Amount must be greater than zero")
+      .required("Amount is required.")
+  }),
+  handleSubmit: (values, { props, setSubmitting }) => {
+    props.onSubmit(values, setSubmitting);
+  }
+})(TraderDepositModal);
