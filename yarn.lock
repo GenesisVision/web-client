@@ -2881,9 +2881,9 @@ formidable@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/formidable/-/formidable-1.1.1.tgz#96b8886f7c3c3508b932d6bd70c4d3a88f35f1a9"
 
-formik@^0.11.9:
-  version "0.11.9"
-  resolved "https://registry.yarnpkg.com/formik/-/formik-0.11.9.tgz#41da6e5b5ddaf1474eab29a992c9ef8623d40d00"
+formik@^0.11.11:
+  version "0.11.11"
+  resolved "https://registry.yarnpkg.com/formik/-/formik-0.11.11.tgz#4b02838133c0196b1ef443aa973766cd097ec4a5"
   dependencies:
     lodash.clonedeep "^4.5.0"
     lodash.isequal "4.5.0"

@@ -5,11 +5,15 @@ import replaceParams from "../../../../../../../utils/replace-params";
 
 import {
   DASHBOARD_ROUTE,
-  DASHBOARD_DEPOSIT_ROUTE
+  DASHBOARD_DEPOSIT_ROUTE,
+  DASHBOARD_WITHDRAW_ROUTE
 } from "../../../../../dashboard.constants";
 
 const DIPStatistic = ({ program }) => {
   const traderDepositUrl = replaceParams(DASHBOARD_DEPOSIT_ROUTE, {
+    ":traderId": program.id
+  });
+  const traderWithdrawUrl = replaceParams(DASHBOARD_WITHDRAW_ROUTE, {
     ":traderId": program.id
   });
   return (
@@ -38,9 +42,17 @@ const DIPStatistic = ({ program }) => {
           }}
           className="btn btn-outline-primary"
         >
-          Buy tokens
+          Sell tokens
         </Link>
-        <button className="btn btn-outline-secondary mt-4">Sell tokens</button>
+        <Link
+          to={{
+            pathname: traderWithdrawUrl,
+            state: { from: DASHBOARD_ROUTE }
+          }}
+          className="btn btn-outline-secondary mt-4"
+        >
+          Sell tokens
+        </Link>
       </div>
     </div>
   );
