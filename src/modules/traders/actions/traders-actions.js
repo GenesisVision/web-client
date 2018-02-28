@@ -5,7 +5,7 @@ import * as actionTypes from "./traders-actions.constants";
 const fetchTraders = () => {
   return {
     type: actionTypes.TRADERS,
-    payload: SwaggerInvestorApi.apiInvestorInvestmentsPost()
+    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramsPost()
   };
 };
 

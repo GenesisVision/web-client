@@ -16,11 +16,9 @@ class TraderListContainer extends Component {
       <div>
         <h1>Traders</h1>
         <div className="row">
-          <div className="col-2">
-            <TraderFilter />
-          </div>
+          <div className="col-2">{/*<TraderFilter />*/}</div>
           <div className="col-10">
-            <TraderList traders={traders.investments} />
+            <TraderList traders={traders.investmentPrograms} />
           </div>
         </div>
       </div>

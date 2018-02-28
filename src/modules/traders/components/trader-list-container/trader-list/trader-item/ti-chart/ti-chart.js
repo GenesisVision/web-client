@@ -35,7 +35,7 @@ const data2 = [
 let i = 1;
 const TIChart = () => {
   return (
-    <ResponsiveContainer height={120}>
+    <ResponsiveContainer height="100%">
       <ComposedChart data={i++ % 2 ? data : data2} stackOffset="sign">
         <XAxis dataKey="name" />
         <YAxis />

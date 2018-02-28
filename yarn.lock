@@ -3134,9 +3134,9 @@ growly@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/growly/-/growly-1.3.0.tgz#f10748cbe76af964b7c96c93c6bcc28af120c081"
 
-gv-api-web@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/gv-api-web/-/gv-api-web-1.0.5.tgz#cdf5a1878e8306a12addf360a0f5e560d6023f2a"
+gv-api-web@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/gv-api-web/-/gv-api-web-1.0.6.tgz#284b2878dd055ea8ffaaf270feadd86790098b9f"
   dependencies:
     superagent "3.5.2"
 
