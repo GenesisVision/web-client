@@ -25,7 +25,7 @@ const WalletDeposit = ({
   }
 
   const handleCopyAddress = () => {
-    copy(address);
+    copy(address.address);
     showSuccessCopyMessage();
   };
 
@@ -36,7 +36,7 @@ const WalletDeposit = ({
         <QRCode value={address} size={400} />
       </div>
       <h2>Your wallet address</h2>
-      <p>{address}</p>
+      <p>{address.address}</p>
       <button className="btn btn-primary" onClick={handleCopyAddress}>
         Copy
       </button>
@@ -45,7 +45,7 @@ const WalletDeposit = ({
 };
 
 const mapStateToProps = state => {
-  const { isPending, data } = state.walletAddressData;
+  const { isPending, data } = state.walletData.address;
   let address;
   if (data) {
     address = data;

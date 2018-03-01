@@ -20,7 +20,9 @@ const fetchWallet = () => {
 const fetchWalletAddress = () => {
   return {
     type: actionTypes.WALLET_ADDRESS,
-    payload: Promise.resolve("0x0000000000000000000000000000000000000gv")
+    payload: SwaggerInvestorApi.apiInvestorWalletAddressGet(
+      authService.getAuthArg()
+    )
   };
 };
 
