@@ -13,7 +13,7 @@ Promise.all([
 const fetchWallet = () => {
   return {
     type: actionTypes.WALLET,
-    payload: Promise.resolve({ amount: 100, rate: 22 })
+    payload: SwaggerInvestorApi.apiInvestorWalletGet(authService.getAuthArg())
   };
 };
 
@@ -27,30 +27,22 @@ const fetchWalletAddress = () => {
 const fetchWalletTransactions = () => {
   return {
     type: actionTypes.WALLET_TRANSACTIONS,
-    payload: Promise.resolve({
-      transactions: [
-        {
-          id: "1",
-          type: "Deposit",
-          amount: 10,
-          rate: 22,
-          programName: "Program A",
-          date: "2018-02-26T12:47:40.983Z",
-          transactionId:
-            "0x777f620f020b4c6765d600ea7832fb94286d9462acbfef30b2e49df6220f2fe8"
-        }
-      ]
-    })
+    payload: SwaggerInvestorApi.apiInvestorWalletTransactionsPost(
+      authService.getAuthArg()
+    )
   };
 };
 
-const walletWithdraw = ({ address, amount }) => {
+const walletWithdraw = withdrawData => {
+  const data = {
+    request: withdrawData
+  };
   return {
     type: actionTypes.WALLET_WITHDRAW,
-    payload: Promise.resolve(1).then(response => {
-      history.push(WALLET_ROUTE);
-      return response;
-    })
+    payload: SwaggerInvestorApi.apiInvestorWalletWithdrawRequestPost(
+      authService.getAuthArg(),
+      data
+    )
   };
 };
 

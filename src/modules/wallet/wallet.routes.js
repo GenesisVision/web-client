@@ -1,9 +1,9 @@
 import { Route, Switch } from "react-router-dom";
 import React from "react";
 
-import WalletContainer from "./components/wallet-container/wallet-container";
 import WalletDeposit from "./components/wallet-deposit/wallet-deposit";
 import WalletWithdraw from "./components/wallet-withdraw/wallet-withdraw";
+import Wallet from "./components/wallet/wallet";
 
 import {
   WALLET_ROUTE,
@@ -13,7 +13,7 @@ import {
 
 const WalletRoutes = () => (
   <Switch>
-    <Route exact path={WALLET_ROUTE} component={WalletContainer} />
+    <Route exact path={WALLET_ROUTE} component={Wallet} />
     <Route path={WALLET_DEPOSIT_ROUTE} component={WalletDeposit} />
     <Route path={WALLET_WITHDRAW_ROUTE} component={WalletWithdraw} />
   </Switch>

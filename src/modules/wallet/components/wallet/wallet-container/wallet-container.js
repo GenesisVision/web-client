@@ -1,43 +1,36 @@
 import { connect } from "react-redux";
 import React from "react";
 
-import walletActions from "../../actions/wallet-actions";
-import WalletHistory from "../wallet-transaction-list-container/wallet-transaction-list-container";
+import walletActions from "../../../actions/wallet-actions";
 import WalletInfo from "./wallet-info/wallet-info";
 
 const WalletContainer = ({
   isPending,
-  wallet,
+  wallets,
   fetchWallet,
   showSuccessCopyMessage
 }) => {
   if (isPending) {
     return null;
   }
-  if (wallet === undefined) {
+  if (wallets === undefined) {
     fetchWallet();
     return null;
   }
-  return (
-    <div>
-      <h1>Wallet</h1>
-      <WalletInfo balance={wallet} />
-      <WalletHistory />
-    </div>
-  );
+  return <WalletInfo wallet={wallets[0]} />;
 };
 
 const mapStateToProps = state => {
-  const { isPending, errorMessage, data } = state.walletData;
+  const { isPending, errorMessage, data } = state.walletData.wallet;
 
-  let wallet;
+  let wallets;
   if (data) {
-    wallet = data;
+    wallets = data.wallets;
   }
   if (errorMessage !== "") {
-    wallet = {};
+    wallets = [];
   }
-  return { isPending, wallet, errorMessage };
+  return { isPending, wallets, errorMessage };
 };
 
 const mapDispatchToProps = dispatch => ({

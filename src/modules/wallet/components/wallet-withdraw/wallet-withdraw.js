@@ -4,20 +4,28 @@ import React from "react";
 import walletActions from "../../actions/wallet-actions";
 import WalletWithdrawForm from "./wallet-withdraw-form/wallet-withdraw-form";
 
-const WalletWithdraw = ({ withdraw }) => {
+const WalletWithdraw = ({ errorMessage, withdraw }) => {
   const handleWithdraw = (withdrawFormData, setSubmitting) => {
-    withdraw(withdrawFormData, setSubmitting);
+    var data = {
+      amount: withdrawFormData.amount,
+      blockchainAddress: withdrawFormData.address
+    };
+    withdraw(data, setSubmitting);
   };
-  return <WalletWithdrawForm onSubmit={handleWithdraw} />;
+  return <WalletWithdrawForm onSubmit={handleWithdraw} error={errorMessage} />;
+};
+
+const mapStateToProps = state => {
+  const { errorMessage } = state.walletData.withdraw;
+  return { errorMessage };
 };
 
 const mapDispatchToProps = dispatch => ({
   withdraw: (withdrawFormData, setSubmitting) => {
-    const { address, amount } = withdrawFormData;
-    dispatch(walletActions.walletWithdraw(address, amount)).catch(() => {
+    dispatch(walletActions.walletWithdraw(withdrawFormData)).catch(() => {
       setSubmitting(false);
     });
   }
 });
 
-export default connect(null, mapDispatchToProps)(WalletWithdraw);
+export default connect(mapStateToProps, mapDispatchToProps)(WalletWithdraw);

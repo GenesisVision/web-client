@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import React from "react";
 
 import WalletTransactionList from "./wallet-transaction-list/wallet-transaction-list";
-import walletActions from "../../actions/wallet-actions";
+import walletActions from "../../../actions/wallet-actions";
 
 const WalletTransactionListContainer = ({
   isPending,
@@ -22,7 +22,7 @@ const WalletTransactionListContainer = ({
 };
 
 const mapStateToProps = state => {
-  const { isPending, data } = state.walletTransactionsData;
+  const { isPending, data } = state.walletData.transactions;
   let transactions;
   if (data) {
     transactions = {
