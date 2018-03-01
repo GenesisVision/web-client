@@ -5,13 +5,12 @@ import { routerReducer } from "react-router-redux";
 import alertMessagesReducer from "../shared/modules/alert-message/reducers/alert-message-reducers";
 import authReducer from "./authReducer";
 import dashboardReducer from "../modules/dashboard/reducers/dashboard-reducers";
-import investorProfitReducer from "./investorProfitReducer";
 import loginReducer from "../shared/modules/login/reducers/login-reducers";
 import profileFormReducer from "../modules/profile/reducers/profile-form-reducers";
 import profileReducer from "../modules/profile/reducers/profile-reducers";
 import registerReducer from "../shared/modules/register/reducers/register-reducers";
 import traderDepositReducer from "../modules/trader-deposit/reducers/trader-deposit-reducers";
-import traderReducer from "./traderReducer";
+import traderReducer from "../modules/traders/reducers/trader-reducers";
 import tradersReducer from "../modules/traders/reducers/traders-reducers";
 import traderWithdrawReducer from "../modules/trader-withdraw/reducers/trader-withdraw-reducers";
 import walletAddressReducer from "../modules/wallet/reducers/wallet-address-reducer";
@@ -23,7 +22,6 @@ export default combineReducers({
   loadingBar: loadingBarReducer,
   tradersData: tradersReducer,
   traderData: traderReducer,
-  investorProfit: investorProfitReducer,
   loginData: loginReducer,
   registerData: registerReducer,
   authData: authReducer,

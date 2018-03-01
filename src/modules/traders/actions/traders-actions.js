@@ -9,5 +9,12 @@ const fetchTraders = () => {
   };
 };
 
-const tradersActions = { fetchTraders };
+const fetchTrader = traderId => {
+  return {
+    type: actionTypes.TRADER,
+    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramGet(traderId)
+  };
+};
+
+const tradersActions = { fetchTraders, fetchTrader };
 export default tradersActions;

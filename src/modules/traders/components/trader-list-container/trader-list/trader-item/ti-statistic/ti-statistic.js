@@ -5,16 +5,16 @@ import React from "react";
 import replaceParams from "../../../../../../../utils/replace-params";
 
 import {
-  TRADERS_DEPOSIT_ROUTE,
-  TRADERS_WITHDRAW_ROUTE,
-  TRADERS_ROUTE
+  TRADERS_ROUTE,
+  TRADER_DEPOSIT_ROUTE,
+  TRADER_WITHDRAW_ROUTE
 } from "../../../../../traders.constants";
 
 const TIStatistic = ({ trader }) => {
-  const traderDepositUrl = replaceParams(TRADERS_DEPOSIT_ROUTE, {
+  const traderDepositUrl = replaceParams(TRADER_DEPOSIT_ROUTE, {
     ":traderId": trader.id
   });
-  const traderWithdrawUrl = replaceParams(TRADERS_WITHDRAW_ROUTE, {
+  const traderWithdrawUrl = replaceParams(TRADER_WITHDRAW_ROUTE, {
     ":traderId": trader.id
   });
   return (
