@@ -1,10 +1,14 @@
 .ti-info__badge {
   position: absolute;
-  right: -5px;
-  bottom: -5px;
+  top: -5px;
+  left: -5px;
   font-size: inherit;
 }
 
 .ti-info__image {
   position: relative;
+  img {
+    max-width: 130px;
+    max-height: 130px;
+  }
 }

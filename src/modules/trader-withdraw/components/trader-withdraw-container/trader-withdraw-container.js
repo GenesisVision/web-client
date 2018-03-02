@@ -22,12 +22,13 @@ const TraderWithdrawContainer = ({
     fetchWithdraw();
     return null;
   }
+  const { traderId } = match.params;
   const { from } = location.state || { from: { pathname: routes.index } };
   const handleCloseModal = () => {
     closeModal(from);
   };
   const handleWithdrawSubmit = ({ amount }, setSubmitting) => {
-    submitWithdraw(traderWithdraw.id, amount, from, setSubmitting);
+    submitWithdraw(traderId, amount, from, setSubmitting);
   };
 
   return (

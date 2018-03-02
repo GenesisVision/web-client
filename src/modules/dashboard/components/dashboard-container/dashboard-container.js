@@ -36,10 +36,10 @@ const mapStateToProps = state => {
 
   let dashboard;
   if (data) {
-    dashboard = data;
+    dashboard = data.investmentPrograms;
   }
   if (errorMessage !== "") {
-    dashboard = {};
+    dashboard = [];
   }
   return { isPending, dashboard, errorMessage };
 };

@@ -22,12 +22,13 @@ const TraderDepositContainer = ({
     fetchDeposit();
     return null;
   }
+  const { traderId } = match.params;
   const { from } = location.state || { from: { pathname: routes.index } };
   const handleCloseModal = () => {
     closeModal(from);
   };
   const handleDepositSubmit = ({ amount }, setSubmitting) => {
-    submitDeposit(traderDeposit.id, amount, from, setSubmitting);
+    submitDeposit(traderId, amount, from, setSubmitting);
   };
 
   return (

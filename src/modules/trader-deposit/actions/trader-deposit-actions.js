@@ -1,4 +1,6 @@
+import authService from "../../../services/authService";
 import history from "../../../utils/history";
+import SwaggerInvestorApi from "../../../services/api-client/swagger-investor-api";
 
 import * as actionTypes from "./trader-deposit-actions.constants";
 
@@ -15,9 +17,16 @@ const fetchTraderDeposit = traderId => {
 };
 
 const submitTraderDeposit = (traderId, amount, onCatch) => {
+  const model = {
+    investmentProgramId: traderId,
+    amount
+  };
   return {
     type: actionTypes.TRADER_DEPOSIT_SUBMIT,
-    payload: Promise.resolve()
+    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramsInvestPost(
+      authService.getAuthArg(),
+      { model }
+    )
   };
 };
 
