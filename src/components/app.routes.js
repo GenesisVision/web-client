@@ -24,8 +24,8 @@ const AppRoutes = () => (
     <Route path={REGISTER_ROUTE} component={RegisterRoutes} />
     <Route path={TRADERS_ROUTE} component={TradersRoutes} />
     <PrivateRoute path={PROFILE_ROUTE} component={ProfileRoutes} />
-    <Route path={DASHBOARD_ROUTE} component={DashboardRoutes} />
-    <Route path={WALLET_ROUTE} component={WalletRoutes} />
+    <PrivateRoute path={DASHBOARD_ROUTE} component={DashboardRoutes} />
+    <PrivateRoute path={WALLET_ROUTE} component={WalletRoutes} />
     <Route
       exact
       path={HOME_ROUTE}
