@@ -24,15 +24,14 @@ const DIPStatistic = ({ program }) => {
         <p>Last Period Prfit: {program.profitForLastPeriod} GVT</p>
       </div>
       <div className="col-3">
-        <p>Total profit: {program.totalProfit} GVT</p>
-        <p>Avg profit: {program.avgProfit} GVT</p>
+        <p>Total profit: {program.profitTotal} GVT</p>
+        <p>Avg profit: {program.profitAvg} GVT</p>
         <p>Balance: {program.balance} GVT</p>
-        <p>Avg profit: {program.avgProfit} %</p>
       </div>
       <div className="col-3">
         <p>Avaible Investments: {program.availableInvestment} GVT</p>
-        <p>Trades: {program.trades} GVT</p>
-        <p>Investors: {program.investors}</p>
+        <p>Trades: {program.tradesCount}</p>
+        <p>Investors: {program.investorsCount}</p>
       </div>
       <div className="col-2">
         <Link

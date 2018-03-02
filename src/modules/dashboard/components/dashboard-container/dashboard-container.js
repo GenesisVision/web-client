@@ -19,8 +19,8 @@ const DashboardContainer = ({
     return null;
   }
   const chartData = dashboard.map(x => ({
-    name: x.name,
-    value: x.totalProfit
+    name: x.title,
+    value: x.profitTotal
   }));
   return (
     <div>

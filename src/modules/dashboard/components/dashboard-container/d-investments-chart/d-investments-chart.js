@@ -9,9 +9,7 @@ const DInvestmentsChart = ({ data }) => {
       <div className="col-md-6">
         <DChart data={data} />
       </div>
-      <div className="col-md-6">
-        <DActiveProgram />
-      </div>
+      <div className="col-md-6">{/*<DActiveProgram />*/}</div>
     </div>
   );
 };
