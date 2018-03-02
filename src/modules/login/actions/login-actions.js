@@ -1,17 +1,17 @@
 import { LoginViewModel } from "gv-api-web";
 
-import authService from "../../../../services/authService";
-import history from "../../../../utils/history";
-import routes from "../../../../utils/constants/routes";
-import swaggerManagerApi from "../../../../services/api-client/swagger-manager-api";
+import authService from "../../../services/authService";
+import history from "../../../utils/history";
+import swaggerInvestorApi from "../../../services/api-client/swagger-investor-api";
 
+import { HOME_ROUTE } from "../../../components/app.constants";
 import * as actionTypes from "./login-actions.constants";
 
 const loginUser = (loginFormData, from) => {
   return {
     type: actionTypes.LOGIN,
-    payload: swaggerManagerApi
-      .apiManagerAuthSignInPostWithHttpInfo({
+    payload: swaggerInvestorApi
+      .apiInvestorAuthSignInPostWithHttpInfo({
         model: LoginViewModel.constructFromObject(loginFormData)
       })
       .then(response => {
@@ -23,7 +23,7 @@ const loginUser = (loginFormData, from) => {
 
 const logoutUser = () => dispatch => {
   authService.removeToken();
-  history.push(routes.index);
+  history.push(HOME_ROUTE);
   dispatch({
     type: actionTypes.LOGOUT_SUCCESS
   });

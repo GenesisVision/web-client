@@ -2,15 +2,17 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import React from "react";
 
-import routes from "../../../../utils/constants/routes";
 import traderWithdrawActions from "../../actions/trader-withdraw-actions";
 import TraderWithdrawModal from "./trader-withdraw-modal/trader-withdraw-modal";
+
+import { HOME_ROUTE } from "../../../../components/app.constants";
 
 const TraderWithdrawContainer = ({
   location,
   match,
   isPending,
   traderWithdraw,
+  errorMessage,
   fetchWithdraw,
   submitWithdraw,
   closeModal
@@ -23,7 +25,7 @@ const TraderWithdrawContainer = ({
     return null;
   }
   const { traderId } = match.params;
-  const { from } = location.state || { from: { pathname: routes.index } };
+  const { from } = location.state || { from: { pathname: HOME_ROUTE } };
   const handleCloseModal = () => {
     closeModal(from);
   };
@@ -32,20 +34,24 @@ const TraderWithdrawContainer = ({
   };
 
   return (
-    <div>
-      <TraderWithdrawModal
-        isOpen={true}
-        traderWithdraw={traderWithdraw}
-        onSubmit={handleWithdrawSubmit}
-        closeModal={handleCloseModal}
-      />
-    </div>
+    <TraderWithdrawModal
+      isOpen={true}
+      traderWithdraw={traderWithdraw}
+      error={errorMessage}
+      onSubmit={handleWithdrawSubmit}
+      closeModal={handleCloseModal}
+    />
   );
 };
 
 const mapStateToProps = state => {
-  const { isPending, errorMessage, data } = state.traderWithdrawData;
-
+  const {
+    isPending,
+    errorMessage,
+    data
+  } = state.traderWithdrawData.traderWithdraw;
+  const errorMessageSubmit =
+    state.traderWithdrawData.traderWithdrawSubmit.errorMessage;
   let traderWithdraw;
   if (data) {
     traderWithdraw = data;
@@ -53,7 +59,11 @@ const mapStateToProps = state => {
   if (errorMessage !== "") {
     traderWithdraw = {};
   }
-  return { isPending, traderWithdraw, errorMessage };
+  return {
+    isPending,
+    traderWithdraw,
+    errorMessage: errorMessage || errorMessageSubmit
+  };
 };
 
 const mapDispatchToProps = dispatch => ({

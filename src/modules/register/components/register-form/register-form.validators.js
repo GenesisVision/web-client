@@ -3,7 +3,7 @@ import Yup from "yup";
 import {
   emailValidator,
   passwordValidator
-} from "../../../../utils/validators/validators";
+} from "../../../../shared/utils/validators/validators";
 
 /*const confirmPasswordValidator = Yup.string()
   .oneOf([Yup.ref("password")], "Passwords don't match.")

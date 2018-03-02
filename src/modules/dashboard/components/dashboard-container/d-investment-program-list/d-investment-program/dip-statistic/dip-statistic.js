@@ -20,7 +20,7 @@ const DIPStatistic = ({ program }) => {
     <div className="row">
       <div className="col-4">
         <p>Invested: {program.investedTokens} GVT</p>
-        <p>EOP: {program.endOfPeriod}</p>
+        <p>EOP: {/*program.endOfPeriod*/}</p>
         <p>Last Period Prfit: {program.profitForLastPeriod} GVT</p>
       </div>
       <div className="col-3">

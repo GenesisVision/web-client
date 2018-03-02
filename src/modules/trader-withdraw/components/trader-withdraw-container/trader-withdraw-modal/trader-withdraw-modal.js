@@ -13,6 +13,7 @@ import { withFormik, Field } from "formik";
 import React from "react";
 import Yup from "yup";
 
+import FormError from "../../../../../shared/components/form/form-error/form-error";
 import InputText from "../../../../../shared/components/form/input-text/input-text";
 
 const TraderWithdrawModal = ({
@@ -20,6 +21,7 @@ const TraderWithdrawModal = ({
   setFieldValue,
   isOpen,
   traderWithdraw,
+  error,
   isSubmitting,
   handleSubmit,
   closeModal
@@ -56,6 +58,7 @@ const TraderWithdrawModal = ({
             <span>Equivalent: </span>
             <span>{(values.amount || 0) * traderWithdraw.rate} GVT</span>
           </p>
+          <FormError error={error} />
         </ModalBody>
         <ModalFooter>
           <button

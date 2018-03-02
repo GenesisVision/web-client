@@ -1,11 +1,11 @@
 import { connect } from "react-redux";
 import React from "react";
 
-import registerActions from "../../shared/modules/register/actions/register-actions";
-import authActions from "../../actions/authActions";
-import RegisterForm from "../../shared/modules/register/components/register-form/register-form";
+import authActions from "../../../actions/authActions";
+import registerActions from "../actions/register-actions";
+import RegisterForm from "./register-form/register-form";
 
-const RegisterScene = ({
+const RegisterContainer = ({
   isAuthenticated,
   isPending,
   errorMessage,
@@ -41,4 +41,4 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(RegisterScene);
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterContainer);

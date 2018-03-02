@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import { withFormik, Field } from "formik";
 import React from "react";
 
-import InputText from "../../../../components/form/input-text/input-text";
-import routes from "../../../../../utils/constants/routes";
+import InputText from "../../../../shared/components/form/input-text/input-text";
 
+import { LOGIN_ROUTE } from "../../../login/login.constants";
 import validationSchema from "./register-form.validators";
 
 const RegisterForm = ({
@@ -79,7 +79,7 @@ const RegisterForm = ({
               <span className="oi oi-account-login" /> Sing Up
             </button>
             &nbsp;
-            <Link to={routes.login}>or login</Link>
+            <Link to={LOGIN_ROUTE}>or login</Link>
           </div>
         </div>
       </form>

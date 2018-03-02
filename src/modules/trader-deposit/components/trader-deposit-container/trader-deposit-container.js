@@ -2,9 +2,10 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import React from "react";
 
-import routes from "../../../../utils/constants/routes";
 import traderDepositActions from "../../actions/trader-deposit-actions";
 import TraderDepositModal from "./trader-deposit-modal/trader-deposit-modal";
+
+import { HOME_ROUTE } from "../../../../components/app.constants";
 
 const TraderDepositContainer = ({
   location,
@@ -23,7 +24,7 @@ const TraderDepositContainer = ({
     return null;
   }
   const { traderId } = match.params;
-  const { from } = location.state || { from: { pathname: routes.index } };
+  const { from } = location.state || { from: { pathname: HOME_ROUTE } };
   const handleCloseModal = () => {
     closeModal(from);
   };

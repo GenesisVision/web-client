@@ -3,10 +3,10 @@ import { withFormik, Field } from "formik";
 import classnames from "classnames";
 import React from "react";
 
-import FormError from "../../../../components/form/form-error/form-error";
-import InputText from "../../../../components/form/input-text/input-text";
-import routes from "../../../../../utils/constants/routes";
+import FormError from "../../../../shared/components/form/form-error/form-error";
+import InputText from "../../../../shared/components/form/input-text/input-text";
 
+import { REGISTER_ROUTE } from "../../../register/register.constants";
 import validationSchema from "./login-form.validators";
 
 const LoginForm = ({
@@ -77,7 +77,7 @@ const LoginForm = ({
               />&nbsp;Login
             </button>
             &nbsp;
-            <Link to={routes.signup}>or register</Link>
+            <Link to={REGISTER_ROUTE}>or register</Link>
           </div>
         </div>
       </form>

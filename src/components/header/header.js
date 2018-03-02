@@ -3,11 +3,11 @@ import { Link, NavLink } from "react-router-dom";
 import LoadingBar from "react-redux-loading-bar";
 import React from "react";
 
-import loginActions from "../../shared/modules/login/actions/login-actions";
+import loginActions from "../../modules/login/actions/login-actions";
 
 import "./header.css";
 import { HOME_ROUTE } from "../app.constants";
-import { LOGIN_ROUTE } from "../login-scene/login-scene.constants";
+import { LOGIN_ROUTE } from "../../modules/login/login.constants";
 
 const authorizedControl = signOut => (
   <ul className="navbar-nav px-3 flex-row">

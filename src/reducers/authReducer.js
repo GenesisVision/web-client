@@ -1,7 +1,10 @@
+import authService from "../services/authService";
 
-import authService from '../services/authService'
-import {LOGIN_SUCCESS, LOGOUT_SUCCESS} from "../shared/modules/login/actions/login-actions.constants";
-import {REGISTER_SUCCESS} from "../shared/modules/register/actions/register-actions.constants";
+import {
+  LOGIN_SUCCESS,
+  LOGOUT_SUCCESS
+} from "../modules/login/actions/login-actions.constants";
+import { REGISTER_SUCCESS } from "../modules/register/actions/register-actions.constants";
 
 const initialState = {
   isAuthenticated: authService.isAuthenticated(),
@@ -15,22 +18,22 @@ const authReducer = (state = initialState, action) => {
         ...state,
         isAuthenticated: true,
         username: action.username
-      }
+      };
     case REGISTER_SUCCESS:
       return {
         ...state,
         isAuthenticated: true,
         username: action.username
-      }
+      };
     case LOGOUT_SUCCESS:
       return {
         ...state,
         isAuthenticated: false,
-        username: ''
-      }
+        username: ""
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default authReducer
+export default authReducer;

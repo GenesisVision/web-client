@@ -1,12 +1,13 @@
 import { connect } from "react-redux";
 import React from "react";
 
-import authActions from "../../actions/authActions";
-import loginActions from "../../shared/modules/login/actions/login-actions";
-import LoginForm from "../../shared/modules/login/components/login-form/login-form";
-import routes from "../../utils/constants/routes";
+import authActions from "../../../actions/authActions";
+import loginActions from "../actions/login-actions";
+import LoginForm from "./login-form/login-form";
 
-const LoginScene = ({
+import { HOME_ROUTE } from "../../../components/app.constants";
+
+const LoginContainer = ({
   location,
   isAuthenticated,
   errorMessage,
@@ -18,7 +19,7 @@ const LoginScene = ({
     return null;
   }
 
-  const { from } = location.state || { from: { pathname: routes.index } };
+  const { from } = location.state || { from: { pathname: HOME_ROUTE } };
   const handleSubmit = (loginFormData, setSubmitting) => {
     login(loginFormData, from, setSubmitting);
   };
@@ -43,4 +44,4 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginScene);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);
