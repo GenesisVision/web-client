@@ -32,7 +32,7 @@ const TIStatistic = ({ trader }) => {
         <p>Fee Success: {trader.feeSuccess}</p>
         <p>Fee Management: {trader.feeManagement}</p>
       </div>
-      <div className="col-2">
+      {/*<div className="col-2">
         <Link
           to={{
             pathname: traderDepositUrl,
@@ -51,7 +51,7 @@ const TIStatistic = ({ trader }) => {
         >
           Sell tokens
         </Link>
-      </div>
+        </div>*/}
     </div>
   );
 };
