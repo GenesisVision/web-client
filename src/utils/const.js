@@ -1,2 +1,2 @@
-const AUTH_TOKEN = 'authToken';
+const AUTH_TOKEN = "gvInvestorAuthToken";
 export { AUTH_TOKEN };

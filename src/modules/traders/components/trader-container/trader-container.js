@@ -25,7 +25,7 @@ class TraderContainer extends Component {
     if (isPendingTraderRequests || traderRequests === undefined) {
       return null;
     }
-    return <TraderRequestList requests={traderRequests} />;
+    return <TraderRequestList requests={traderRequests.requests} />;
   };
 
   render() {

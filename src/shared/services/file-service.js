@@ -1,5 +1,5 @@
 const getFileUrl = id => {
-  if (id === undefined) return "";
+  if (id === null) return "";
   return `${process.env.REACT_APP_API_URL}/api/files/${id}`;
 };
 
