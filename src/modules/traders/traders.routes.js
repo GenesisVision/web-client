@@ -9,8 +9,6 @@ import TraderWithdrawContainer from "../trader-withdraw/components/trader-withdr
 import {
   TRADERS_ROUTE,
   TRADER_ROUTE,
-  TRADERS_DEPOSIT_ROUTE,
-  TRADERS_WITHDRAW_ROUTE,
   TRADER_DEPOSIT_ROUTE,
   TRADER_WITHDRAW_ROUTE
 } from "./traders.constants";
