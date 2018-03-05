@@ -16,7 +16,7 @@ const DIPInfo = ({ program }) => {
         </span>
       </div>
       <h5 className="card-title mt-4">
-        <Link to={traderRoute}>{program.name}</Link>
+        <Link to={traderRoute}>{program.title}</Link>
       </h5>
     </div>
   );

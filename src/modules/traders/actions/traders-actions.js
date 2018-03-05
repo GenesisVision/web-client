@@ -1,3 +1,4 @@
+import authService from "../../../services/authService";
 import filesService from "../../../shared/services/file-service";
 import SwaggerInvestorApi from "../../../services/api-client/swagger-investor-api";
 
@@ -31,5 +32,18 @@ const fetchTrader = traderId => {
   };
 };
 
-const tradersActions = { fetchTraders, fetchTrader };
+const fetchTraderRequests = traderId => {
+  const data = {
+    filter: { investmentProgramId: traderId }
+  };
+  return {
+    type: actionTypes.TRADER_REQUESTS,
+    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramRequestsPost(
+      authService.getAuthArg(),
+      data
+    )
+  };
+};
+
+const tradersActions = { fetchTraders, fetchTrader, fetchTraderRequests };
 export default tradersActions;
