@@ -1,98 +1,67 @@
-import { withFormik } from "formik";
+import { withFormik, Field } from "formik";
 import React from "react";
 
 import FieldInput from "../../../../../shared/components/form/input-text/input-text";
+import InputText from "../../../../../shared/components/form/input-text/input-text";
 
 const ProfileForm = ({
-  values,
-  touched,
-  errors,
+  profile,
   isSubmitting,
-  handleChange,
-  handleBlur,
   handleSubmit,
-  handleCancel,
   error,
   onCancel
 }) => {
   return (
     <form onSubmit={handleSubmit} noValidate>
-      <FieldInput
-        type="text"
-        id="firstName"
+      <Field
+        name="userName"
+        placeholder="Username"
+        addon="fas fa-edit"
+        component={InputText}
+      />
+
+      <Field
         name="firstName"
         placeholder="First Name"
-        touched={touched.firstName}
-        error={errors.firstName}
-        addon="fa fa-pencil"
-        value={values.firstName}
-        onChange={handleChange}
-        onBlur={handleBlur}
+        addon="fas fa-edit"
+        component={InputText}
       />
 
-      <FieldInput
-        type="text"
-        id="lastName"
+      <Field
         name="lastName"
         placeholder="Last Name"
-        touched={touched.lastName}
-        error={errors.lastName}
-        addon="fa fa-pencil"
-        value={values.lastName}
-        onChange={handleChange}
-        onBlur={handleBlur}
+        addon="fas fa-edit"
+        component={InputText}
       />
 
-      <FieldInput
-        type="text"
-        id="email"
+      <Field
+        type="email"
         name="email"
         placeholder="Email"
-        touched={touched.email}
-        error={errors.email}
-        addon="fa fa-pencil"
-        value={values.email}
-        onChange={handleChange}
-        onBlur={handleBlur}
+        addon="fas fa-edit"
+        component={InputText}
       />
 
-      <FieldInput
+      <Field
         type="date"
-        id="birthday"
         name="birthday"
         placeholder="Birthday"
-        touched={touched.birthday}
-        error={errors.birthday}
-        addon="fa fa-pencil"
-        value={values.birthday}
-        onChange={handleChange}
-        onBlur={handleBlur}
+        addon="fas fa-edit"
+        component={InputText}
       />
 
-      <FieldInput
-        type="text"
-        id="documentNumber"
+      <Field
         name="documentNumber"
         placeholder="Passport Number"
-        touched={touched.birthday}
-        error={errors.birthday}
-        addon="fa fa-pencil"
-        value={values.documentNumber}
-        onChange={handleChange}
-        onBlur={handleBlur}
+        addon="fas fa-edit"
+        component={InputText}
       />
 
-      <FieldInput
-        type="text"
-        id="avatar"
+      <Field
         name="avatar"
         placeholder="Avatar Url"
-        touched={touched.avatar}
-        error={errors.avatar}
-        addon="fa fa-pencil"
-        value={values.avatar}
-        onChange={handleChange}
-        onBlur={handleBlur}
+        addon="fas fa-edit"
+        component={InputText}
       />
 
       <span className="text-danger">{error && <strong>{error}</strong>}</span>
@@ -120,6 +89,7 @@ const ProfileForm = ({
 export default withFormik({
   displayName: "profileForm",
   mapPropsToValues: ({ profile }) => ({
+    userName: profile.userName,
     firstName: profile.firstName,
     lastName: profile.lastName,
     email: profile.email,

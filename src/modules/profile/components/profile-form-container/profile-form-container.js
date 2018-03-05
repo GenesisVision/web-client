@@ -1,52 +1,63 @@
 import { connect } from "react-redux";
-import React from "react";
+import React, { Component } from "react";
 
+import profileActions from "../../actions/profile-actions";
 import ProfileForm from "./profile-form/profile-form";
 import profileFormActions from "../../actions/profile-form-actions";
-import profileActions from "../../actions/profile-actions";
+
 import ProfileModel, {
   constructFromObject
 } from "../profile-container/profile/profile.model";
 
-const ProfileFormContainer = ({
-  profile,
-  isPending,
-  errorMessage,
-  fetchProfile,
-  updateProfile,
-  cancelChanges
-}) => {
-  if (profile === null) {
-    fetchProfile();
-    return null;
+class ProfileFormContainer extends Component {
+  componentWillMount() {
+    if (this.props.profile === undefined) {
+      this.props.fetchProfile();
+    }
   }
-  if (isPending) {
-    return null;
+
+  render() {
+    const {
+      isPending,
+      profile,
+      errorMessage,
+      updateProfile,
+      cancelChanges
+    } = this.props;
+
+    if (isPending || profile === undefined) {
+      return null;
+    }
+    return (
+      <div>
+        <h1>Profile Edit</h1>
+        <ProfileForm
+          profile={profile}
+          onSubmit={updateProfile}
+          onCancel={cancelChanges}
+          error={errorMessage}
+        />
+      </div>
+    );
   }
-  return (
-    <div>
-      <h1>Profile Edit</h1>
-      <ProfileForm
-        profile={profile}
-        fetchProfile={fetchProfile}
-        onSubmit={updateProfile}
-        onCancel={cancelChanges}
-        error={errorMessage}
-      />
-    </div>
-  );
-};
+}
 
 const mapStateToProps = state => {
-  const { isPending, errorMessage } = {
-    ...state.profileData,
-    ...state.profileFormData
+  const {
+    isPending: isPendingView,
+    errorMessage: errorMessageView,
+    data
+  } = state.profileData.view;
+  const {
+    isPending: isPendingForm,
+    errorMessage: errorMessageForm
+  } = state.profileData.form;
+  const profile = constructFromObject(new ProfileModel(), data);
+  return {
+    isPending: isPendingView || isPendingForm,
+    errorMessage: errorMessageView || errorMessageForm,
+    profile
   };
-  const profile = constructFromObject(
-    new ProfileModel(),
-    state.profileData.data
-  );
-  return { isPending, errorMessage, profile };
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -54,7 +65,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(profileActions.fetchProfile());
   },
   updateProfile: (profile, setSubmitting) => {
-    dispatch(profileFormActions.updateProfile(profile)).finally(() => {
+    dispatch(profileFormActions.updateProfile(profile)).catch(() => {
       setSubmitting(false);
     });
   },

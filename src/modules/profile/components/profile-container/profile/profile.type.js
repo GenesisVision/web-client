@@ -1,5 +1,6 @@
 // @flow
 export interface IProfile {
+  userName: string;
   firstName: string;
   lastName: string;
   documentNumber: string;

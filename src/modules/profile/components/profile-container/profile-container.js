@@ -1,6 +1,6 @@
 // @flow
 import { connect } from "react-redux";
-import React from "react";
+import React, { Component } from "react";
 
 import Profile from "./profile/profile";
 import profileActions from "../../actions/profile-actions";
@@ -13,24 +13,31 @@ import {
   IProfileFullProps
 } from "./profile/profile.type";
 
-const ProfileContainer = (props: IProfileFullProps) => {
-  return (
-    <div>
-      <h1>Profile</h1>
-      <Profile
-        isPending={props.isPending}
-        profile={props.profile}
-        fetchProfile={props.fetchProfile}
-      />
-    </div>
-  );
-};
+class ProfileContainer extends Component<IProfileFullProps> {
+  componentWillMount() {
+    this.props.fetchProfile();
+  }
+
+  render() {
+    const { isPending, profile } = this.props;
+    if (this.props.isPending || this.props.profile === undefined) {
+      return null;
+    }
+
+    return (
+      <div>
+        <h1>Profile</h1>
+        <Profile profile={this.props.profile} />
+      </div>
+    );
+  }
+}
 
 const mapStateToProps = (state): IProfileProps => {
-  const { isPending } = state.profileData;
+  const { isPending } = state.profileData.view;
   const profile = constructFromObject(
     new ProfileModel(),
-    state.profileData.data
+    state.profileData.view.data
   );
   return { isPending, profile };
 };

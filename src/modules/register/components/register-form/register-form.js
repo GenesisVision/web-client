@@ -7,18 +7,7 @@ import InputText from "../../../../shared/components/form/input-text/input-text"
 import { LOGIN_ROUTE } from "../../../login/login.constants";
 import validationSchema from "./register-form.validators";
 
-const RegisterForm = ({
-  values,
-  touched,
-  errors,
-  isSubmitting,
-  handleChange,
-  handleBlur,
-  handleSubmit,
-  handleReset,
-  dirty,
-  error
-}) => {
+const RegisterForm = ({ isSubmitting, handleSubmit, error }) => {
   return (
     <div className="container login">
       <form onSubmit={handleSubmit} className="form-horizontal" noValidate>

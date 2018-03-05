@@ -2,6 +2,7 @@
 import { IProfile } from "./profile.type";
 
 export default class ProfileModel implements IProfile {
+  userName: string = "Username";
   firstName: string = "Your";
   lastName: string = "Name";
   documentNumber: string = "";
@@ -16,7 +17,7 @@ export default class ProfileModel implements IProfile {
 }
 
 export function constructFromObject(data: Object, obj: Object) {
-  if (obj === undefined) return null;
+  if (obj === undefined) return obj;
   Object.keys(obj).forEach(x => {
     if (obj[x] !== null && data[x] !== undefined) {
       data[x] = obj[x];

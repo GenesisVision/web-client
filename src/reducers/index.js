@@ -6,7 +6,6 @@ import alertMessagesReducer from "../shared/modules/alert-message/reducers/alert
 import authReducer from "./authReducer";
 import dashboardReducer from "../modules/dashboard/reducers/dashboard-reducers";
 import loginReducer from "../modules/login/reducers/login-reducers";
-import profileFormReducer from "../modules/profile/reducers/profile-form-reducers";
 import profileReducer from "../modules/profile/reducers/profile-reducers";
 import registerReducer from "../modules/register/reducers/register-reducers";
 import traderDepositReducer from "../modules/trader-deposit/reducers/trader-deposit-reducers";
@@ -25,7 +24,6 @@ export default combineReducers({
   authData: authReducer,
   alertMessages: alertMessagesReducer,
   profileData: profileReducer,
-  profileFormData: profileFormReducer,
   walletData: walletReducer,
   dashboardData: dashboardReducer,
   traderDepositData: traderDepositReducer,
