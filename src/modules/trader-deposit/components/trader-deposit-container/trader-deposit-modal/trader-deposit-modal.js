@@ -28,11 +28,11 @@ const TraderDepositModal = ({
       <Modal isOpen={isOpen}>
         <ModalHeader>Buy Tokens</ModalHeader>
         <ModalBody>
-          <h2>{traderDeposit.name}</h2>
-          <p>
+          {/* <h2>{traderDeposit.name}</h2>
+           <p>
             <span>Available GVT: </span>
             <span>{traderDeposit.available}</span>
-          </p>
+          </p> */}
           <Field
             name="amount"
             type="number"
@@ -40,10 +40,10 @@ const TraderDepositModal = ({
             addon="fas fa-barcode"
             component={InputText}
           />
-          <p>
+          {/* <p>
             <span>You'll get: </span>
             <span>{(values.amount || 0) * traderDeposit.rate} Tokens</span>
-          </p>
+          </p> */}
         </ModalBody>
         <ModalFooter>
           <button

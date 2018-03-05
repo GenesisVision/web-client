@@ -34,7 +34,7 @@ const TraderWithdrawModal = ({
       <Modal isOpen={isOpen}>
         <ModalHeader>Sell Tokens</ModalHeader>
         <ModalBody>
-          <h2>{traderWithdraw.name}</h2>
+          {/* <h2>{traderWithdraw.name}</h2>
           <p>
             <span>Available funds: </span>
             <span>{traderWithdraw.available} Tokens</span>
@@ -45,7 +45,7 @@ const TraderWithdrawModal = ({
             >
               Withdraw all available funds
             </button>
-          </p>
+          </p> */}
           <p>How much would you like to withdraw?</p>
           <Field
             name="amount"
@@ -54,10 +54,10 @@ const TraderWithdrawModal = ({
             addon="fas fa-barcode"
             component={InputText}
           />
-          <p>
+          {/* <p>
             <span>Equivalent: </span>
             <span>{(values.amount || 0) * traderWithdraw.rate} GVT</span>
-          </p>
+          </p> */}
           <FormError error={error} />
         </ModalBody>
         <ModalFooter>
