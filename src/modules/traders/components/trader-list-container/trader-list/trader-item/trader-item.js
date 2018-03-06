@@ -12,7 +12,7 @@ const TraderItem = ({ trader }) => {
           <TIInfo trader={trader} />
         </div>
         <div className="col-3">
-          <TIChart />
+          <TIChart data={trader.chart} />
         </div>
         <div className="col-8">
           <TIStatistic trader={trader} />

@@ -33,10 +33,10 @@ const data2 = [
 ];
 
 let i = 1;
-const TIChart = () => {
+const TIChart = ({ data }) => {
   return (
     <ResponsiveContainer height="100%">
-      <ComposedChart data={i++ % 2 ? data : data2} stackOffset="sign">
+      <ComposedChart data={data} stackOffset="sign">
         <XAxis dataKey="name" />
         <YAxis />
         <CartesianGrid strokeDasharray="3 3" />
