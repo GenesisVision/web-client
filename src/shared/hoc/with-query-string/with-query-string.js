@@ -4,9 +4,9 @@ import { withRouter } from "react-router-dom";
 
 const withQueryString = Component =>
   withRouter(({ match, location, history, staticContext, ...rest }) => {
-    const params = qs.parse(location.search);
+    const queryParams = qs.parse(location.search);
 
-    return <Component params={params} {...rest} />;
+    return <Component queryParams={queryParams} {...rest} />;
   });
 
 export default withQueryString;
