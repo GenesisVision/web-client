@@ -8,7 +8,8 @@ const WalletWithdraw = ({ errorMessage, withdraw }) => {
   const handleWithdraw = (withdrawFormData, setSubmitting) => {
     var data = {
       amount: withdrawFormData.amount,
-      blockchainAddress: withdrawFormData.address
+      blockchainAddress: withdrawFormData.address,
+      currency: "GVT"
     };
     withdraw(data, setSubmitting);
   };
@@ -22,9 +23,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   withdraw: (withdrawFormData, setSubmitting) => {
-    dispatch(walletActions.walletWithdraw(withdrawFormData)).catch(() => {
-      setSubmitting(false);
-    });
+    dispatch(walletActions.walletWithdraw(withdrawFormData))
+      .then(() => walletActions.openWallet())
+      .catch(() => {
+        setSubmitting(false);
+      });
   }
 });
 

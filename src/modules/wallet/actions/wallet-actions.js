@@ -1,6 +1,8 @@
 import authService from "../../../services/authService";
+import history from "../../../utils/history";
 import SwaggerInvestorApi from "../../../services/api-client/swagger-investor-api";
 
+import { WALLET_ROUTE } from "../wallet.constants";
 import * as actionTypes from "./wallet-actions.constants";
 
 /*
@@ -61,11 +63,16 @@ const walletWithdraw = withdrawData => {
   };
 };
 
+const openWallet = () => {
+  history.push(WALLET_ROUTE);
+};
+
 const walletActions = {
   fetchWallet,
   fetchWalletTransactions,
   fetchWalletAddress,
   walletWithdraw,
-  fetchWalletTransactionProgramFilter
+  fetchWalletTransactionProgramFilter,
+  openWallet
 };
 export default walletActions;
