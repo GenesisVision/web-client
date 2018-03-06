@@ -10,6 +10,38 @@ import {
 } from "../../../../../dashboard.constants";
 
 const DIPStatistic = ({ program }) => {
+  const buttons = () => {
+    return (
+      <div className="col-2">
+        {program.isInvestEnable ? (
+          <Link
+            to={{
+              pathname: traderDepositUrl,
+              state: { from: DASHBOARD_ROUTE }
+            }}
+            className="btn btn-outline-primary"
+          >
+            Buy tokens
+          </Link>
+        ) : (
+          <span>Can not invest</span>
+        )}
+        {program.isWithdrawEnable ? (
+          <Link
+            to={{
+              pathname: traderWithdrawUrl,
+              state: { from: DASHBOARD_ROUTE }
+            }}
+            className="btn btn-outline-secondary mt-4"
+          >
+            Sell tokens
+          </Link>
+        ) : (
+          <span>Can not withdraw</span>
+        )}
+      </div>
+    );
+  };
   const traderDepositUrl = replaceParams(DASHBOARD_DEPOSIT_ROUTE, {
     ":traderId": program.id
   });
@@ -33,26 +65,7 @@ const DIPStatistic = ({ program }) => {
         <p>Trades: {program.tradesCount}</p>
         <p>Investors: {program.investorsCount}</p>
       </div>
-      <div className="col-2">
-        <Link
-          to={{
-            pathname: traderDepositUrl,
-            state: { from: DASHBOARD_ROUTE }
-          }}
-          className="btn btn-outline-primary"
-        >
-          Buy tokens
-        </Link>
-        <Link
-          to={{
-            pathname: traderWithdrawUrl,
-            state: { from: DASHBOARD_ROUTE }
-          }}
-          className="btn btn-outline-secondary mt-4"
-        >
-          Sell tokens
-        </Link>
-      </div>
+      {buttons()}
     </div>
   );
 };

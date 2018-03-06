@@ -45,5 +45,23 @@ const fetchTraderRequests = traderId => {
   };
 };
 
-const tradersActions = { fetchTraders, fetchTrader, fetchTraderRequests };
+const cancelRequest = requestId => {
+  const data = {
+    requestId
+  };
+  return {
+    type: actionTypes.TRADER_REQUESTS,
+    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramsCancelInvestmentRequestPost(
+      requestId,
+      authService.getAuthArg()
+    )
+  };
+};
+
+const tradersActions = {
+  fetchTraders,
+  fetchTrader,
+  fetchTraderRequests,
+  cancelRequest
+};
 export default tradersActions;

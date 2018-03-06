@@ -21,11 +21,21 @@ class TraderContainer extends Component {
   };
 
   renderTraderRequests = () => {
-    const { isPendingTraderRequests, traderRequests } = this.props;
+    const { traderId } = this.props.match.params;
+    const {
+      isPendingTraderRequests,
+      traderRequests,
+      cancelRequest
+    } = this.props;
     if (isPendingTraderRequests || traderRequests === undefined) {
       return null;
     }
-    return <TraderRequestList requests={traderRequests.requests} />;
+    return (
+      <TraderRequestList
+        requests={traderRequests.requests}
+        cancelRequest={cancelRequest(traderId)}
+      />
+    );
   };
 
   render() {
@@ -67,6 +77,13 @@ const mapDispatchToProps = dispatch => ({
   },
   fetchTraderRequests: traderId => {
     dispatch(tradersActions.fetchTraderRequests(traderId));
+  },
+  cancelRequest: traderId => requestId => () => {
+    dispatch(tradersActions.cancelRequest(requestId))
+      .then(dispatch(tradersActions.fetchTraderRequests(traderId)))
+      .catch(e => {
+        var t = 1;
+      });
   }
 });
 

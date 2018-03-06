@@ -20,6 +20,38 @@ const TraderStatistic = ({ trader }) => {
   const traderUrl = replaceParams(TRADER_ROUTE, {
     ":traderId": trader.id
   });
+  const buttons = () => {
+    return (
+      <div className="col-1">
+        {trader.isInvestEnable ? (
+          <Link
+            to={{
+              pathname: traderDepositUrl,
+              state: { from: traderUrl }
+            }}
+            className="btn btn-outline-primary"
+          >
+            Buy tokens
+          </Link>
+        ) : (
+          <div>Can not invest</div>
+        )}
+        {trader.isWithdrawEnable ? (
+          <Link
+            to={{
+              pathname: traderWithdrawUrl,
+              state: { from: traderUrl }
+            }}
+            className="btn btn-outline-secondary mt-4"
+          >
+            Sell tokens
+          </Link>
+        ) : (
+          <div>Can not withdraw</div>
+        )}
+      </div>
+    );
+  };
   return (
     <div>
       <TSCards
@@ -39,26 +71,7 @@ const TraderStatistic = ({ trader }) => {
           <p>Management Fee: {trader.feeManagement} %</p>
           <p>Success Fee: {trader.feeSuccess} %</p>
         </div>
-        <div className="col-1">
-          <Link
-            to={{
-              pathname: traderDepositUrl,
-              state: { from: traderUrl }
-            }}
-            className="btn btn-outline-primary"
-          >
-            Buy tokens
-          </Link>
-          <Link
-            to={{
-              pathname: traderWithdrawUrl,
-              state: { from: traderUrl }
-            }}
-            className="btn btn-outline-secondary mt-4"
-          >
-            Sell tokens
-          </Link>
-        </div>
+        {buttons()}
       </div>
     </div>
   );
