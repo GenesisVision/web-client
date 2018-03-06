@@ -1,2 +1,2 @@
-export const AUTH_TOKEN = "authToken";
+export const AUTH_TOKEN = "gvInvestorAuthToken";
 export const API_VERSION = 1.0;
