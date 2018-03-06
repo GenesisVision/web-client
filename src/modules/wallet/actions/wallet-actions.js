@@ -24,11 +24,17 @@ const fetchWalletAddress = () => {
   };
 };
 
-const fetchWalletTransactions = () => {
+const fetchWalletTransactions = filter => {
+  const data = {
+    filter: {
+      type: filter
+    }
+  };
   return {
     type: actionTypes.WALLET_TRANSACTIONS,
     payload: SwaggerInvestorApi.apiInvestorWalletTransactionsPost(
-      authService.getAuthArg()
+      authService.getAuthArg(),
+      data
     )
   };
 };

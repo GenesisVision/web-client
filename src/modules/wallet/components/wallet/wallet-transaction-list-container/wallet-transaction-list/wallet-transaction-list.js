@@ -1,6 +1,6 @@
 import React from "react";
 
-import WalletTransaction from "../wallet-transaction/wallet-transaction";
+import WalletTransaction from "./wallet-transaction/wallet-transaction";
 
 const WalletTransactionList = ({ transactions }) => {
   return (

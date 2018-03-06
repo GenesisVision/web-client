@@ -1,26 +1,50 @@
 import { connect } from "react-redux";
-import React from "react";
+import { withRouter } from "react-router-dom";
+import qs from "query-string";
+import React, { Component } from "react";
 
-import WalletTransactionList from "./wallet-transaction-list/wallet-transaction-list";
 import walletActions from "../../../actions/wallet-actions";
+import WalletTransactionFilter from "./wallet-transaction-filter/wallet-transaction-filter";
+import WalletTransactionList from "./wallet-transaction-list/wallet-transaction-list";
+import withQueryString from "../../../../../shared/hoc/with-query-string/with-query-string";
 
-const WalletTransactionListContainer = ({
-  isPending,
-  transactions,
-  fetchTransactions
-}) => {
-  if (isPending) {
-    return null;
+class WalletTransactionListContainer extends Component {
+  getFilter = props => props.params.filter || "All";
+
+  state = {
+    filter: this.getFilter(this.props)
+  };
+
+  componentWillMount() {
+    this.props.fetchTransactions(this.state.filter);
   }
 
-  if (transactions === undefined) {
-    fetchTransactions();
-    return null;
+  componentWillReceiveProps(nextProps) {
+    const filter = this.getFilter(nextProps);
+    if (this.state.filter !== filter) {
+      this.setState({ filter: filter });
+      this.props.fetchTransactions(filter);
+    }
   }
 
-  return <WalletTransactionList transactions={transactions.items} />;
-};
+  render() {
+    const { params, isPending, transactions, fetchTransactions } = this.props;
+    if (isPending) {
+      return <WalletTransactionFilter />;
+    }
 
+    if (transactions === undefined) {
+      return null;
+    }
+
+    return (
+      <div>
+        <WalletTransactionFilter />
+        <WalletTransactionList transactions={transactions.items} />
+      </div>
+    );
+  }
+}
 const mapStateToProps = state => {
   const { isPending, data } = state.walletData.transactions;
   let transactions;
@@ -34,11 +58,11 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchTransactions: () => {
-    dispatch(walletActions.fetchWalletTransactions());
+  fetchTransactions: filter => {
+    dispatch(walletActions.fetchWalletTransactions(filter));
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  WalletTransactionListContainer
+export default withQueryString(
+  connect(mapStateToProps, mapDispatchToProps)(WalletTransactionListContainer)
 );
