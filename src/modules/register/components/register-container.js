@@ -32,7 +32,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   register: (registerFormData, setSubmitting) => {
-    dispatch(registerActions.registerUser(registerFormData)).finally(() => {
+    dispatch(registerActions.registerUser(registerFormData)).catch(() => {
       setSubmitting(false);
     });
   },
