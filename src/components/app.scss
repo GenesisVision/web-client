@@ -1,0 +1,12 @@
+.app__main {
+  display: flex;
+}
+
+.app__sidebar {
+  flex: 1 1 65px;
+  max-width: 65px;
+}
+
+.app__body {
+  flex: 1 1 100%;
+}

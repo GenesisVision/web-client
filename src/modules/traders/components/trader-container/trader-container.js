@@ -43,7 +43,7 @@ class TraderContainer extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container-fluid">
         {this.renderTrader()}
         {this.renderTraderRequests()}
         {this.props.errorMessage}

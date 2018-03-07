@@ -9,6 +9,7 @@ import history from "../utils/history";
 import Sidebar from "./sidebar/sidebar";
 import store from "../store/index";
 
+import "./app.css";
 import AppRoutes from "./app.routes";
 
 const App = () => (
@@ -16,16 +17,16 @@ const App = () => (
     <ConnectedRouter history={history}>
       <div>
         <Route component={Header} />
-        <div className="container-fluid">
-          <div className="row">
-            <Sidebar className="col-md-2 d-md-block" />
-            <main className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-              <AppRoutes />
-            </main>
+        <div className="app__main">
+          <div className="app__sidebar">
+            <Sidebar />
           </div>
-          <div className="col-sm-2 offset-10 fixed-bottom">
-            <AlertMessageList />
+          <div className="app__body">
+            <AppRoutes />
           </div>
+        </div>
+        <div className="col-sm-2 offset-10 fixed-bottom">
+          <AlertMessageList />
         </div>
       </div>
     </ConnectedRouter>
