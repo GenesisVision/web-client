@@ -8,8 +8,11 @@ import tradersActions from "../../actions/traders-actions";
 class TraderContainer extends Component {
   componentWillMount() {
     const { traderId } = this.props.match.params;
+    const { isAuthenticated } = this.props;
     this.props.fetchTrader(traderId);
-    this.props.fetchTraderRequests(traderId);
+    if (isAuthenticated) {
+      this.props.fetchTraderRequests(traderId);
+    }
   }
 
   renderTrader = () => {
@@ -62,7 +65,10 @@ const mapStateToProps = state => {
     data: traderRequests
   } = state.traderData.requests;
 
+  const { isAuthenticated } = state.authData;
+
   return {
+    isAuthenticated,
     isPendingTrader,
     trader,
     isPendingTraderRequests,

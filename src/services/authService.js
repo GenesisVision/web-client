@@ -26,7 +26,14 @@ const getToken = () => {
 
 const getTokenData = () => decodeToken(getToken());
 
-const getAuthArg = () => `Bearer ${getToken()}`;
+const getAuthArg = () => {
+  const token = getToken();
+  if (token === null) {
+    return null;
+  }
+
+  return `Bearer ${token}`;
+};
 
 const isAuthenticated = () => {
   const token = getToken();

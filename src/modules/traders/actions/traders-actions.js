@@ -20,15 +20,21 @@ const fetchTraders = () => {
 };
 
 const fetchTrader = traderId => {
+  const data = {};
+  if (authService.getAuthArg()) {
+    data.authorization = authService.getAuthArg();
+  }
+
   return {
     type: actionTypes.TRADER,
-    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramGet(traderId).then(
-      response => {
-        const trader = response.investmentProgram;
-        trader.logo = filesService.getFileUrl(trader.logo);
-        return response;
-      }
-    )
+    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramGet(
+      traderId,
+      data
+    ).then(response => {
+      const trader = response.investmentProgram;
+      trader.logo = filesService.getFileUrl(trader.logo);
+      return response;
+    })
   };
 };
 
