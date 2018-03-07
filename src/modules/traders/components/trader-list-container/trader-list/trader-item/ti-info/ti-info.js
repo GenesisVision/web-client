@@ -7,21 +7,26 @@ import "./ti-info.css";
 import { TRADER_ROUTE } from "../../../../../traders.constants";
 import avatarStub from "../../../../../../../shared/media/avatar.png";
 
-const TIInfo = ({ trader }) => {
-  const traderRoute = replaceParams(TRADER_ROUTE, {
-    ":traderId": trader.id
-  });
+const TIInfo = ({ idx, trader }) => {
   return (
     <div className="ti-info">
+      <div className="ti-info__order">{idx}</div>
       <div className="ti-info__image">
-        <img src={trader.logo || avatarStub} alt="Trader Avatar" />
-        <span className="badge badge-secondary ti-info__badge">
-          {trader.level}
-        </span>
+        <img
+          className="ti-image"
+          src={trader.logo || avatarStub}
+          alt="Trader Avatar"
+        />
+        <span className="ti-image__badge">{trader.level}</span>
       </div>
-      <h5 className="card-title mt-4">
-        <Link to={traderRoute}>{trader.title}</Link>
-      </h5>
+      <div className="ti-info__name ti-name">
+        <h5 className="ti-name__title">{trader.title}</h5>
+        <p className="ti-name__description">
+          Replace The Negatives In Your Life With Positives And Move Your Life
+          Ahead
+        </p>
+        <p className="ti-name__eop">42 days left</p>
+      </div>
     </div>
   );
 };

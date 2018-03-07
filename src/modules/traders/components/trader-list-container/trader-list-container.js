@@ -12,18 +12,7 @@ class TraderListContainer extends Component {
   render() {
     const { isPending, traders } = this.props;
     if (isPending || !traders) return null;
-    return (
-      <div>
-        <h1>Traders</h1>
-        {/*<div className="row">
-          <div className="col-2"><TraderFilter /></div>
-          <div className="col-10">
-            <TraderList traders={traders.investmentPrograms} />
-          </div>
-        </div>*/}
-        <TraderList traders={traders.investmentPrograms} />
-      </div>
-    );
+    return <TraderList traders={traders.investmentPrograms} />;
   }
 }
 

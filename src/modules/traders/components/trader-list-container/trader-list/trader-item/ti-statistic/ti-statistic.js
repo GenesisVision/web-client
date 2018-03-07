@@ -4,6 +4,8 @@ import React from "react";
 
 import replaceParams from "../../../../../../../utils/replace-params";
 
+import "./ti-statisctic.css";
+
 import {
   TRADERS_ROUTE,
   TRADER_DEPOSIT_ROUTE,
@@ -18,20 +20,16 @@ const TIStatistic = ({ trader }) => {
     ":traderId": trader.id
   });
   return (
-    <div className="row">
-      <div className="col-4">
-        <p>Balance: {trader.balance} GVT</p>
-        <p>Trades: {trader.tradesCount}</p>
-        <p>Investors: {trader.investorsCount}</p>
-        <p>Total Profit: {trader.profitTotal} GVT</p>
-        <p>Avg Profit: {trader.profitAvg} %</p>
-      </div>
-      <div className="col-6">
-        <p>Period Duration: {trader.periodDuration}</p>
-        <p>EOP: {/*trader.endOfPeriod*/}</p>
-        <p>Fee Success: {trader.feeSuccess}</p>
-        <p>Fee Management: {trader.feeManagement}</p>
-      </div>
+    <div className="ti-statistic">
+      <p>Balance: {trader.balance} GVT</p>
+      <p>Trades: {trader.tradesCount}</p>
+      <p>Investors: {trader.investorsCount}</p>
+      <p>Total Profit: {trader.profitTotal} GVT</p>
+      <p>Avg Profit: {trader.profitAvg} %</p>
+      <p>Period Duration: {trader.periodDuration}</p>
+      <p>EOP: {/*trader.endOfPeriod*/}</p>
+      <p>Fee Success: {trader.feeSuccess}</p>
+      <p>Fee Management: {trader.feeManagement}</p>
       {/*<div className="col-2">
         <Link
           to={{

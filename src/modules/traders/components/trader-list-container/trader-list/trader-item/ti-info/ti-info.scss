@@ -1,14 +1,54 @@
-.ti-info__badge {
-  position: absolute;
-  top: -5px;
-  left: -5px;
-  font-size: inherit;
+@import "styles/_colors.scss";
+
+.ti-info {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1 1 28%;
+  max-width: 28%;
+}
+
+.ti-info__order {
+  font-size: 1.4rem;
 }
 
 .ti-info__image {
   position: relative;
-  img {
-    max-width: 130px;
-    max-height: 130px;
-  }
+  min-width: 100px;
+  text-align: center;
+}
+
+.ti-image {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.ti-image__badge {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  font-size: inherit;
+  color: white;
+  background-color: $alternate-color;
+  display: inline-block;
+  padding: 0.1em 0.5em;
+}
+
+.ti-info__name {
+  max-width: 20rem;
+}
+
+.ti-name__title {
+  font-size: 1.6rem;
+  color: $text-color;
+}
+
+.ti-name__description {
+  font-size: 0.8rem;
+  color: $text-sub-color;
+}
+
+.ti-name__eop {
+  color: $text-sub-color;
 }
