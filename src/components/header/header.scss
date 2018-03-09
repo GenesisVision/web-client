@@ -1,9 +1,26 @@
 @import "styles/_colors.scss";
+.header-wrapper {
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+}
 
 .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
   background: white;
   border-bottom: 1px solid $border-color;
-  height: 70px;
+}
+
+.header__sorting {
+  display: flex;
+}
+
+.header-filtering {
+  display: flex;
+  align-items: center;
 }
 
 .header__link {
@@ -25,4 +42,10 @@
   &:hover {
     color: $text-color-light !important;
   }
+}
+
+.h-sorting {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-left: 2rem;
 }

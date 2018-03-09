@@ -8,7 +8,7 @@ import loginActions from "../../modules/login/actions/login-actions";
 import "./header.css";
 import { HOME_ROUTE } from "../app.constants";
 import { LOGIN_ROUTE } from "../../modules/login/login.constants";
-
+import gvLogo from "./gv-logo.svg";
 const authorizedControl = signOut => (
   <ul className="navbar-nav px-3 flex-row">
     <li className="nav-item text-nowrap">
@@ -41,20 +41,26 @@ const unAuthorizedControl = () => (
 
 const Header = ({ isAuthenticated, signOut }) => {
   return (
-    <header className="sticky-top">
-      <nav className="header navbar flex-md-nowrap">
-        <NavLink
-          className="navbar-brand header__link col-sm-3 col-md-2 mr-0"
-          title="Home"
-          to={HOME_ROUTE}
-        >
-          Investor portal
-        </NavLink>
-        <div className="w-100">&nbsp;</div>
-        {isAuthenticated ? authorizedControl(signOut) : unAuthorizedControl()}
-      </nav>
+    <div className="header-wrapper">
+      <header className="header">
+        <div className="header__sorting">
+          <NavLink title="Home" to={HOME_ROUTE}>
+            <img src={gvLogo} />
+          </NavLink>
+          <div className="h-sorting">
+            Traders Name <span className="fas fa-caret-down" />
+          </div>
+        </div>
+        <div className="header-filtering">
+          <div className="h-filtering">
+            <span className="fas fa-filter" />
+          </div>
+          {isAuthenticated ? authorizedControl(signOut) : unAuthorizedControl()}
+        </div>
+      </header>
+
       <LoadingBar className="header__loading-bar" />
-    </header>
+    </div>
   );
 };
 
