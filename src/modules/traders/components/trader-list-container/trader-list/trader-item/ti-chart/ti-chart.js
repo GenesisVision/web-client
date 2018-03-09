@@ -18,12 +18,10 @@ const TIChart = ({ data }) => {
   return (
     <div className="ti-chart">
       <ResponsiveContainer>
-        <ComposedChart data={data} stackOffset="sign">
-          <XAxis dataKey="name" />
-          <YAxis />
-          <CartesianGrid strokeDasharray="3 3" />
+        <ComposedChart data={data.splice(0, 7)} stackOffset="sign">
+          <XAxis dataKey="date" hide />
+          <YAxis hide />
           <Tooltip />
-          <ReferenceLine y={0} stroke="#000" />
           <Bar
             className="fund"
             dataKey="fund"
