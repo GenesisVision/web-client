@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import React from "react";
 
 import InputRange from "../../../../../shared/components/form/input-range/input-range";
@@ -6,9 +7,14 @@ const TraderListFilter = () => {
   return (
     <div>
       <div>
-        <h4>Level</h4>
+        <h4>Min Level</h4>
         <div>
-          <InputRange />
+          <Link to={{ pathname: "/traders", search: `?levelMin=1` }}>
+            level 1
+          </Link>
+          <Link to={{ pathname: "/traders", search: `?levelMin=2` }}>
+            level 2
+          </Link>
         </div>
       </div>
       <div>

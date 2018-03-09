@@ -3,13 +3,12 @@ import { Link, NavLink } from "react-router-dom";
 import LoadingBar from "react-redux-loading-bar";
 import React from "react";
 
-import FilterContainer from "../../modules/filter/components/filter-container";
+import filterActions from "../../modules/filter/actions/filter-actions";
 import loginActions from "../../modules/login/actions/login-actions";
 
 import "./header.css";
 import { HOME_ROUTE } from "../app.constants";
 import { LOGIN_ROUTE } from "../../modules/login/login.constants";
-import filterActions from "../../modules/filter/actions/filter-actions";
 import gvLogo from "./gv-logo.svg";
 
 const authorizedControl = signOut => (

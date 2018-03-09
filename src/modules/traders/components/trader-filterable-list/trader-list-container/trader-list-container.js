@@ -5,36 +5,17 @@ import {
   composeFilter,
   filterCompare
 } from "../../../../../shared/services/filter-service";
-import FilterContainer from "../../../../filter/components/filter-container";
 import TraderList from "./trader-list/trader-list";
 import tradersActions from "../../../actions/traders-actions";
 
 class TraderListContainer extends Component {
-  defaultFilterValues = {
-    levelMin: 0,
-    levelMax: 10,
-    profiAvg: 0
-  };
-
   componentWillMount() {
-    const filter = composeFilter(
-      this.props.queryParams,
-      this.defaultFilterValues
-    );
-    this.props.fetchTraders(filter);
+    this.props.fetchTraders(this.props.queryParams);
   }
 
   componentWillUpdate(nextProps) {
-    const prevFilter = composeFilter(
-      this.props.queryParams,
-      this.defaultFilterValues
-    );
-    const nextFilter = composeFilter(
-      nextProps.queryParams,
-      this.defaultFilterValues
-    );
-    if (!filterCompare(prevFilter, nextFilter)) {
-      this.props.fetchTraders(nextFilter);
+    if (nextProps.isNewFilter) {
+      this.props.fetchTraders(nextProps.queryParams);
     }
   }
 
