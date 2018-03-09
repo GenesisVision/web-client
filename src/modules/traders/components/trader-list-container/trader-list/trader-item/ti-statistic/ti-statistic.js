@@ -21,15 +21,30 @@ const TIStatistic = ({ trader }) => {
   });
   return (
     <div className="ti-statistic">
-      <p>Balance: {trader.balance} GVT</p>
-      <p>Trades: {trader.tradesCount}</p>
-      <p>Investors: {trader.investorsCount}</p>
-      <p>Total Profit: {trader.profitTotal} GVT</p>
-      <p>Avg Profit: {trader.profitAvg} %</p>
-      <p>Period Duration: {trader.periodDuration}</p>
-      <p>EOP: {/*trader.endOfPeriod*/}</p>
-      <p>Fee Success: {trader.feeSuccess}</p>
-      <p>Fee Management: {trader.feeManagement}</p>
+      <div className="tis-item">
+        <div className="tis-item__value">{trader.profitAvg} %</div>
+        <div className="tis-item__label">Avg Profit</div>
+      </div>
+      <div className="tis-item">
+        <div className="tis-item__value">{trader.currency}</div>
+        <div className="tis-item__label">currency</div>
+      </div>
+      <div className="tis-item">
+        <div className="tis-item__value">{trader.tradesCount}</div>
+        <div className="tis-item__label">Trades</div>
+      </div>
+      <div className="tis-item">
+        <div className="tis-item__value">{trader.investorsCount}</div>
+        <div className="tis-item__label">Investors</div>
+      </div>
+      <div className="tis-item">
+        <div className="tis-item__value">{trader.balance}</div>
+        <div className="tis-item__label">Balance</div>
+      </div>
+      <div className="tis-item">
+        <div className="tis-item__value">{trader.profitTotal}</div>
+        <div className="tis-item__label">Total Profit</div>
+      </div>
       {/*<div className="col-2">
         <Link
           to={{

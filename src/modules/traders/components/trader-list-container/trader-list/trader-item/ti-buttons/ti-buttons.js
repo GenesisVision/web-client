@@ -3,6 +3,7 @@ import React from "react";
 
 import replaceParams from "../../../../../../../utils/replace-params";
 
+import "./ti-buttons.css";
 import { TRADER_ROUTE } from "../../../../../traders.constants";
 
 const TIButtons = ({ traderId }) => {
@@ -11,9 +12,10 @@ const TIButtons = ({ traderId }) => {
   });
   return (
     <div className="ti-buttons">
-      <Link className="btn" to={traderRoute}>
-        View
+      <Link className="ti-button btn btn-outline-primary" to={traderRoute}>
+        View Profile
       </Link>
+      <button className="ti-button btn btn-outline-secondary">Invest</button>
     </div>
   );
 };
