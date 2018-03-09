@@ -40,16 +40,34 @@
   max-width: 20rem;
 }
 
+.ti-name {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .ti-name__title {
   font-size: 1.6rem;
   color: $text-color;
 }
 
 .ti-name__description {
-  font-size: 0.8rem;
   color: $text-sub-color;
+  line-height: 1.2;
+  margin: 1.4rem 0;
 }
 
 .ti-name__eop {
+  display: flex;
+  align-items: center;
   color: $text-sub-color;
+}
+
+.eop__text {
+  flex: 1 1 40%;
+}
+
+.eop__progress {
+  flex: 1 1 40%;
+  margin-right: 5rem;
 }

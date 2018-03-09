@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import React from "react";
 
+import Progress from "../../../../../../../shared/components/progress/progress";
 import replaceParams from "../../../../../../../utils/replace-params";
 
 import "./ti-info.css";
@@ -20,12 +21,17 @@ const TIInfo = ({ idx, trader }) => {
         <span className="ti-image__badge">{trader.level}</span>
       </div>
       <div className="ti-info__name ti-name">
-        <h5 className="ti-name__title">{trader.title}</h5>
-        <p className="ti-name__description">
+        <div className="ti-name__title">{trader.title}</div>
+        <div className="ti-name__description">
           Replace The Negatives In Your Life With Positives And Move Your Life
           Ahead
-        </p>
-        <p className="ti-name__eop">42 days left</p>
+        </div>
+        <div className="ti-name__eop eop">
+          <div className="eop__text">42 days left</div>
+          <div className="eop__progress">
+            <Progress value={42} />
+          </div>
+        </div>
       </div>
     </div>
   );
