@@ -22,7 +22,14 @@ const TIStatistic = ({ trader }) => {
   return (
     <div className="ti-statistic">
       <div className="tis-item">
-        <div className="tis-item__value">{trader.profitAvg} %</div>
+        <div className="tis-item__value">
+          <NumberFormat
+            value={trader.profitAvg}
+            suffix=" %"
+            decimalScale={2}
+            displayType="text"
+          />
+        </div>
         <div className="tis-item__label">Avg Profit</div>
       </div>
       <div className="tis-item">
@@ -38,33 +45,25 @@ const TIStatistic = ({ trader }) => {
         <div className="tis-item__label">Investors</div>
       </div>
       <div className="tis-item">
-        <div className="tis-item__value">{trader.balance}</div>
+        <div className="tis-item__value">
+          <NumberFormat
+            value={trader.balance}
+            decimalScale={2}
+            displayType="text"
+          />
+        </div>
         <div className="tis-item__label">Balance</div>
       </div>
       <div className="tis-item">
-        <div className="tis-item__value">{trader.profitTotal}</div>
+        <div className="tis-item__value">
+          <NumberFormat
+            value={trader.profitTotal}
+            decimalScale={2}
+            displayType="text"
+          />
+        </div>
         <div className="tis-item__label">Total Profit</div>
       </div>
-      {/*<div className="col-2">
-        <Link
-          to={{
-            pathname: traderDepositUrl,
-            state: { from: TRADERS_ROUTE }
-          }}
-          className="btn btn-outline-primary"
-        >
-          Buy tokens
-        </Link>
-        <Link
-          to={{
-            pathname: traderWithdrawUrl,
-            state: { from: TRADERS_ROUTE }
-          }}
-          className="btn btn-outline-secondary mt-4"
-        >
-          Sell tokens
-        </Link>
-        </div>*/}
     </div>
   );
 };
