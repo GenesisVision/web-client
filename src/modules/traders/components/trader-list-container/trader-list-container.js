@@ -1,8 +1,9 @@
 import { connect } from "react-redux";
 import React, { Component } from "react";
+
+import FilterContainer from "../../../filter/components/filter-container";
 import TraderList from "./trader-list/trader-list";
 import tradersActions from "../../actions/traders-actions";
-import TraderFilter from "./trader-filter/trader-filter";
 
 class TraderListContainer extends Component {
   componentWillMount() {
@@ -12,7 +13,12 @@ class TraderListContainer extends Component {
   render() {
     const { isPending, traders } = this.props;
     if (isPending || !traders) return null;
-    return <TraderList traders={traders.investmentPrograms} />;
+    return (
+      <div>
+        <FilterContainer isOpen={true}>123</FilterContainer>
+        <TraderList traders={traders.investmentPrograms} />
+      </div>
+    );
   }
 }
 

@@ -1,0 +1,11 @@
+@import "styles/_colors.scss";
+.filter {
+  position: fixed;
+  top: 71px;
+  left: 0;
+  width: 100%;
+  background: white;
+  min-height: 200px;
+  border-bottom: 1px solid $border-color;
+  z-index: 1020;
+}

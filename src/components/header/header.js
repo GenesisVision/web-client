@@ -3,12 +3,15 @@ import { Link, NavLink } from "react-router-dom";
 import LoadingBar from "react-redux-loading-bar";
 import React from "react";
 
+import FilterContainer from "../../modules/filter/components/filter-container";
 import loginActions from "../../modules/login/actions/login-actions";
 
 import "./header.css";
 import { HOME_ROUTE } from "../app.constants";
 import { LOGIN_ROUTE } from "../../modules/login/login.constants";
+import filterActions from "../../modules/filter/actions/filter-actions";
 import gvLogo from "./gv-logo.svg";
+
 const authorizedControl = signOut => (
   <ul className="navbar-nav px-3 flex-row">
     <li className="nav-item text-nowrap">
@@ -39,7 +42,7 @@ const unAuthorizedControl = () => (
   </ul>
 );
 
-const Header = ({ isAuthenticated, signOut }) => {
+const Header = ({ isAuthenticated, signOut, toggleFilter }) => {
   return (
     <div className="header-wrapper">
       <header className="header">
@@ -53,7 +56,9 @@ const Header = ({ isAuthenticated, signOut }) => {
         </div>
         <div className="header-filtering">
           <div className="h-filtering">
-            <span className="fas fa-filter" />
+            <a className="link" onClick={toggleFilter}>
+              <span className="fas fa-filter" />
+            </a>
           </div>
           {isAuthenticated ? authorizedControl(signOut) : unAuthorizedControl()}
         </div>
@@ -70,6 +75,9 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
+  toggleFilter: () => {
+    dispatch(filterActions.toggleFilter());
+  },
   signOut: () => {
     dispatch(loginActions.logoutUser());
   }
