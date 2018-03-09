@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import NumberFormat from "react-number-format";
 import React from "react";
 
-import replaceParams from "../../../../../../../utils/replace-params";
+import replaceParams from "../../../../../../../../utils/replace-params";
 
 import "./ti-statisctic.css";
 
@@ -10,7 +10,7 @@ import {
   TRADERS_ROUTE,
   TRADER_DEPOSIT_ROUTE,
   TRADER_WITHDRAW_ROUTE
-} from "../../../../../traders.constants";
+} from "../../../../../../traders.constants";
 
 const TIStatistic = ({ trader }) => {
   const traderDepositUrl = replaceParams(TRADER_DEPOSIT_ROUTE, {

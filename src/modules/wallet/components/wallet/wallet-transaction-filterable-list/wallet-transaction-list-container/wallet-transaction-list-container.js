@@ -6,7 +6,6 @@ import React, { Component } from "react";
 import walletActions from "../../../../actions/wallet-actions";
 import WalletTransactionFilter from "../wallet-transaction-filter-container/wallet-transaction-filter/wallet-transaction-filter";
 import WalletTransactionList from "./wallet-transaction-list/wallet-transaction-list";
-import withQueryString from "../../../../../../shared/hoc/with-query-string/with-query-string";
 
 class WalletTransactionListContainer extends Component {
   getFilter = props => props.queryParams.filter || "All";

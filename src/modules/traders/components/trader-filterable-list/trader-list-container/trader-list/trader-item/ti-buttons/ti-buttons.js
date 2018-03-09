@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import React from "react";
 
-import replaceParams from "../../../../../../../utils/replace-params";
+import replaceParams from "../../../../../../../../utils/replace-params";
 
 import "./ti-buttons.css";
-import { TRADER_ROUTE } from "../../../../../traders.constants";
+import { TRADER_ROUTE } from "../../../../../../traders.constants";
 
 const TIButtons = ({ traderId }) => {
   const traderRoute = replaceParams(TRADER_ROUTE, {

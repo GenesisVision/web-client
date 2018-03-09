@@ -13,4 +13,4 @@ const mapStateToProps = state => {
   return { isOpen };
 };
 
-export default connect(mapStateToProps)(FilterContainer);
+export default connect(mapStateToProps, null)(FilterContainer);

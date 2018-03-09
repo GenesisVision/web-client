@@ -2,7 +2,7 @@ import React from "react";
 
 import WalletTransactionFilterContainer from "./wallet-transaction-filter-container/wallet-transaction-filter-container";
 import WalletTransactionListContainer from "./wallet-transaction-list-container/wallet-transaction-list-container";
-import withQueryString from "../../../../../shared/hoc/with-query-string/with-query-string";
+import withQueryParams from "../../../../../shared/hoc/with-query-params/with-query-params";
 
 const WalletTransactionFilterableList = ({ queryParams }) => (
   <div>
@@ -11,4 +11,4 @@ const WalletTransactionFilterableList = ({ queryParams }) => (
   </div>
 );
 
-export default withQueryString(WalletTransactionFilterableList);
+export default withQueryParams(WalletTransactionFilterableList);

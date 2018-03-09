@@ -3,7 +3,7 @@ import React from "react";
 
 import TraderContainer from "./components/trader-container/trader-container";
 import TraderDepositContainer from "../trader-deposit/components/trader-deposit-container/trader-deposit-container";
-import TraderListContainer from "./components/trader-list-container/trader-list-container";
+import TraderFilterableListContainer from "./components/trader-filterable-list/trader-filterable-list";
 import TraderWithdrawContainer from "../trader-withdraw/components/trader-withdraw-container/trader-withdraw-container";
 
 import {
@@ -17,7 +17,7 @@ const TradersRoutes = () => (
   <div>
     <Switch>
       <Route path={TRADER_ROUTE} component={TraderContainer} />
-      <Route path={TRADERS_ROUTE} component={TraderListContainer} />
+      <Route path={TRADERS_ROUTE} component={TraderFilterableListContainer} />
     </Switch>
     <Route path={TRADER_DEPOSIT_ROUTE} component={TraderDepositContainer} />
     <Route path={TRADER_WITHDRAW_ROUTE} component={TraderWithdrawContainer} />

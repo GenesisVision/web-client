@@ -2,7 +2,7 @@ import React from "react";
 
 import InputRange from "../../../../../shared/components/form/input-range/input-range";
 
-const TraderFilter = () => {
+const TraderListFilter = () => {
   return (
     <div>
       <div>
@@ -29,4 +29,4 @@ const TraderFilter = () => {
   );
 };
 
-export default TraderFilter;
+export default TraderListFilter;
