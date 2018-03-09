@@ -18,7 +18,7 @@ const TIChart = ({ data }) => {
   return (
     <div className="ti-chart">
       <ResponsiveContainer>
-        <ComposedChart data={data.splice(0, 7)} stackOffset="sign">
+        <ComposedChart data={data.slice(-7)} stackOffset="sign">
           <XAxis dataKey="date" hide />
           <YAxis hide />
           <Tooltip />
