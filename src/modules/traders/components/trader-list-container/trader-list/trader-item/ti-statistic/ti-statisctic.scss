@@ -17,7 +17,7 @@
   padding: 0.5rem;
   text-align: center;
   &:nth-of-type(odd) {
-    border-bottom: 1px solid #7d9299;
+    border-bottom: 2px solid $border-color;
   }
 }
 
