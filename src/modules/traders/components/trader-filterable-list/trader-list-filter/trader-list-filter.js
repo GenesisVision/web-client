@@ -1,36 +1,39 @@
 import { Link } from "react-router-dom";
 import React from "react";
 
+import FilterItem from "../../../../../shared/components/filters/filter-item/filter-item";
 import InputRange from "../../../../../shared/components/form/input-range/input-range";
+
+import "./trader-list-filter.css";
 
 const TraderListFilter = () => {
   return (
-    <div>
-      <div>
-        <h4>Min Level</h4>
-        <div>
-          <Link to={{ pathname: "/traders", search: `?levelMin=1` }}>
-            level 1
-          </Link>
-          <Link to={{ pathname: "/traders", search: `?levelMin=2` }}>
-            level 2
-          </Link>
-        </div>
-      </div>
-      <div>
-        <h4>Avg profit</h4>
-        <div>
-          <InputRange />
-        </div>
-      </div>
-      <div>
-        <h4>Available investments</h4>
-        <div>
-          <InputRange />
-        </div>
-      </div>
-      <button>Apply</button>
-      <button>Reset</button>
+    <div className="trader-list-filter">
+      <FilterItem
+        title="Level"
+        description="Select Trader Level"
+        component={() => (
+          <div>
+            <Link to={{ pathname: "/traders", search: `?levelMin=1` }}>
+              level 1
+            </Link>
+            <Link to={{ pathname: "/traders", search: `?levelMin=2` }}>
+              level 2
+            </Link>
+          </div>
+        )}
+      />
+      <FilterItem
+        title="Average Profit"
+        description="Select Average Profit"
+        component={() => (
+          <div>
+            <Link to={{ pathname: "/traders", search: `?levelMin=1` }}>
+              level 1
+            </Link>
+          </div>
+        )}
+      />
     </div>
   );
 };

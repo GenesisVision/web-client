@@ -5,7 +5,7 @@ import { routerReducer } from "react-router-redux";
 import alertMessagesReducer from "../shared/modules/alert-message/reducers/alert-message-reducers";
 import authReducer from "./authReducer";
 import dashboardReducer from "../modules/dashboard/reducers/dashboard-reducers";
-import filterReducer from "../modules/filter/reducers/filter-reducers";
+import filterReducer from "../modules/filter-pane/reducers/filter-reducers";
 import loginReducer from "../modules/login/reducers/login-reducers";
 import profileReducer from "../modules/profile/reducers/profile-reducers";
 import registerReducer from "../modules/register/reducers/register-reducers";

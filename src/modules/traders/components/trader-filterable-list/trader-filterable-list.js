@@ -1,6 +1,6 @@
 import React from "react";
 
-import FilterContainer from "../../../filter/components/filter-container";
+import FilterContainer from "../../../filter-pane/components/filter-pane-container";
 import TraderListContainer from "./trader-list-container/trader-list-container";
 import TraderListFilter from "./trader-list-filter/trader-list-filter";
 
@@ -10,7 +10,12 @@ const TraderFilterableList = ({ queryParams }) => {
       <FilterContainer>
         <TraderListFilter />
       </FilterContainer>
-      <TraderListContainer />
+      <div className="wallet-pane-wrapper">
+        <div>
+          <TraderListContainer />
+        </div>
+        <div className="wallet-pane">Wallet</div>
+      </div>
     </div>
   );
 };

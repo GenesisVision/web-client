@@ -1,10 +1,10 @@
 import { connect } from "react-redux";
 import React from "react";
 
-import Filter from "./filter/filter";
+import FilterPane from "./filter-pane/filter-pane";
 
 const FilterContainer = ({ isOpen, children }) => {
-  return <Filter isOpen={isOpen}>{children}</Filter>;
+  return <FilterPane isOpen={isOpen}>{children}</FilterPane>;
 };
 
 const mapStateToProps = state => {

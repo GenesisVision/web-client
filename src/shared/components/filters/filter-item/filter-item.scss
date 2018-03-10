@@ -1,0 +1,25 @@
+@import "styles/_colors.scss";
+
+.filter-item {
+  display: flex;
+  flex: 1 1 20%;
+  max-width: 20%;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem 2rem;
+  margin-left: 0;
+  padding: 2rem 4rem;
+  padding-right: 6rem;
+  border-right: 2px solid $border-color;
+}
+
+.filter-item__title {
+  font-size: 1.2rem;
+}
+
+.filter-item__description {
+  color: $text-sub-color;
+  font-size: 0.9rem;
+  line-height: 0.9;
+  margin-bottom: 1rem;
+}
