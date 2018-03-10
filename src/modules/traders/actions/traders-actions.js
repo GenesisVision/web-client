@@ -51,6 +51,17 @@ const fetchTraderRequests = traderId => {
   };
 };
 
+const shouldFetchTraders = traders => {
+  return true;
+};
+
+const fetchTradersIfNeeded = traderId => (dispatch, getState) => {
+  const traders = getState().tradersData.data;
+  if (shouldFetchTraders(traders)) {
+    return dispatch(fetchTraders());
+  }
+};
+
 const cancelRequest = requestId => {
   const data = {
     requestId
@@ -65,7 +76,7 @@ const cancelRequest = requestId => {
 };
 
 const tradersActions = {
-  fetchTraders,
+  fetchTradersIfNeeded,
   fetchTrader,
   fetchTraderRequests,
   cancelRequest
