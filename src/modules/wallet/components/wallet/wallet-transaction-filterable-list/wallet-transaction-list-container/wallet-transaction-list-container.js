@@ -1,10 +1,7 @@
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
-import qs from "query-string";
 import React, { Component } from "react";
 
 import walletActions from "../../../../actions/wallet-actions";
-import WalletTransactionFilter from "../wallet-transaction-filter-container/wallet-transaction-filter/wallet-transaction-filter";
 import WalletTransactionList from "./wallet-transaction-list/wallet-transaction-list";
 
 class WalletTransactionListContainer extends Component {
@@ -21,17 +18,13 @@ class WalletTransactionListContainer extends Component {
   }
 
   render() {
-    const { params, isPending, transactions, fetchTransactions } = this.props;
+    const { isPending, transactions } = this.props;
 
     if (isPending || transactions === undefined) {
       return null;
     }
 
-    return (
-      <div>
-        <WalletTransactionList transactions={transactions.items} />
-      </div>
-    );
+    return <WalletTransactionList transactions={transactions.items} />;
   }
 }
 const mapStateToProps = state => {

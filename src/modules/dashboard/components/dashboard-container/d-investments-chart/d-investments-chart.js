@@ -1,6 +1,5 @@
 import React from "react";
 
-import DActiveProgram from "./dic-active-program/dic-active-program";
 import DChart from "./dic-chart/dic-chart";
 
 const DInvestmentsChart = ({ data }) => {

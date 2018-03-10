@@ -1,6 +1,4 @@
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
-import qs from "query-string";
 import React, { Component } from "react";
 
 import walletActions from "../../../../actions/wallet-actions";
@@ -12,7 +10,7 @@ class WalletTransactionListContainer extends Component {
   }
 
   render() {
-    const { isPending, errorMessage, programs, queryParams } = this.props;
+    const { isPending, programs, queryParams } = this.props;
     if (isPending || programs === undefined) {
       return null;
     }

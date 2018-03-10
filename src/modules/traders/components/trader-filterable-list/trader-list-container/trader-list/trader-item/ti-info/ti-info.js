@@ -1,11 +1,8 @@
-import { Link } from "react-router-dom";
 import React from "react";
 
 import Progress from "../../../../../../../../shared/components/progress/progress";
-import replaceParams from "../../../../../../../../utils/replace-params";
 
 import "./ti-info.css";
-import { TRADER_ROUTE } from "../../../../../../traders.constants";
 import avatarStub from "../../../../../../../../shared/media/avatar.png";
 
 const TIInfo = ({ idx, trader }) => {

@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
-import { Field } from "formik";
 import React from "react";
 
 import { WALLET_ROUTE } from "../../../../../wallet.constants";

@@ -10,7 +10,7 @@ import loginReducer from "../modules/login/reducers/login-reducers";
 import profileReducer from "../modules/profile/reducers/profile-reducers";
 import registerReducer from "../modules/register/reducers/register-reducers";
 import traderDepositReducer from "../modules/trader-deposit/reducers/trader-deposit-reducers";
-import traderReducer from "../modules/traders/reducers/trader-reducers";
+import traderReducer from "../modules/trader/reducers/trader-reducers";
 import tradersReducer from "../modules/traders/reducers/traders-reducers";
 import traderWithdrawReducer from "../modules/trader-withdraw/reducers/trader-withdraw-reducers";
 import walletReducer from "../modules/wallet/reducers/wallet-reducers";

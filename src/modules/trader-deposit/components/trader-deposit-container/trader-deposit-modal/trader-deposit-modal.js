@@ -1,16 +1,6 @@
-import {
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  FormGroup,
-  Label,
-  Col,
-  Input
-} from "reactstrap";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { withFormik, Field } from "formik";
-import React, { Component } from "react";
+import React from "react";
 import Yup from "yup";
 
 import InputText from "../../../../../shared/components/form/input-text/input-text";

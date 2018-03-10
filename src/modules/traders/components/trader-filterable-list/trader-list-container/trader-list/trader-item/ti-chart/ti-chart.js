@@ -5,10 +5,8 @@ import "./ti-chart.css";
 import {
   Bar,
   Line,
-  ReferenceLine,
   XAxis,
   YAxis,
-  CartesianGrid,
   Tooltip,
   ResponsiveContainer,
   ComposedChart

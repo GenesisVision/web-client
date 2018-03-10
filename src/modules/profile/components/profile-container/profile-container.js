@@ -20,7 +20,7 @@ class ProfileContainer extends Component<IProfileFullProps> {
 
   render() {
     const { isPending, profile } = this.props;
-    if (this.props.isPending || this.props.profile === undefined) {
+    if (isPending || profile === undefined) {
       return null;
     }
 

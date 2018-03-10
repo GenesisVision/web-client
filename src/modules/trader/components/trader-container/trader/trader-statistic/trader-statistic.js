@@ -7,7 +7,7 @@ import {
   TRADER_DEPOSIT_ROUTE,
   TRADER_WITHDRAW_ROUTE,
   TRADER_ROUTE
-} from "../../../../traders.constants";
+} from "../../../../../trader/trader.constants";
 import { Link } from "react-router-dom";
 
 const TraderStatistic = ({ trader }) => {

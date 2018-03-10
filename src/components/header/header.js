@@ -47,7 +47,7 @@ const Header = ({ isAuthenticated, signOut, toggleFilter }) => {
       <header className="header">
         <div className="header__sorting">
           <NavLink title="Home" to={HOME_ROUTE}>
-            <img src={gvLogo} />
+            <img src={gvLogo} alt="Genesis Vision" />
           </NavLink>
           <div className="h-sorting">
             Traders Name <span className="fas fa-caret-down" />

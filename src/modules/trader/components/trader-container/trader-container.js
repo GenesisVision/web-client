@@ -3,7 +3,7 @@ import React, { Component } from "react";
 
 import Trader from "./trader/trader";
 import TraderRequestList from "./trader-request-list/trader-request-list";
-import tradersActions from "../../actions/traders-actions";
+import traderActions from "../../actions/trader-actions";
 
 class TraderContainer extends Component {
   componentWillMount() {
@@ -79,14 +79,14 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   fetchTrader: traderId => {
-    dispatch(tradersActions.fetchTrader(traderId));
+    dispatch(traderActions.fetchTrader(traderId));
   },
   fetchTraderRequests: traderId => {
-    dispatch(tradersActions.fetchTraderRequests(traderId));
+    dispatch(traderActions.fetchTraderRequests(traderId));
   },
   cancelRequest: traderId => requestId => () => {
-    dispatch(tradersActions.cancelRequest(requestId)).then(
-      dispatch(tradersActions.fetchTraderRequests(traderId))
+    dispatch(traderActions.cancelRequest(requestId)).then(
+      dispatch(traderActions.fetchTraderRequests(traderId))
     );
   }
 });

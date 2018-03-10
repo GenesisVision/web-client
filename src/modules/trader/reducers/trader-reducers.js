@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 
 import apiReducerFactory from "../../../shared/reducers/api-reducer/api-reducer";
 
-import { TRADER, TRADER_REQUESTS } from "../actions/traders-actions.constants";
+import { TRADER, TRADER_REQUESTS } from "../actions/trader-actions.constants";
 
 const traderReducer = combineReducers({
   traders: apiReducerFactory({ apiType: TRADER }),

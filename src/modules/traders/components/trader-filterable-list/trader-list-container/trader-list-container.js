@@ -1,10 +1,6 @@
 import { connect } from "react-redux";
 import React, { Component } from "react";
 
-import {
-  composeFilter,
-  filterCompare
-} from "../../../../../shared/services/filter-service";
 import TraderList from "./trader-list/trader-list";
 import tradersActions from "../../../actions/traders-actions";
 import withQueryParams from "../../../../../shared/hoc/with-query-params/with-query-params";
@@ -26,7 +22,7 @@ class TraderListContainer extends Component {
   }
 
   render() {
-    const { isPending, traders, queryParams } = this.props;
+    const { isPending, traders } = this.props;
     if (isPending || !traders) return null;
     return <TraderList traders={traders.investmentPrograms} />;
   }

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import React from "react";
 
 import "./dip-info.css";
-import { TRADER_ROUTE } from "../../../../../../traders/traders.constants";
+import { TRADER_ROUTE } from "../../../../../../trader/trader.constants";
 import avatarStub from "../../../../../../../shared/media/avatar.png";
 
 const DIPInfo = ({ program }) => {

@@ -1,14 +1,4 @@
-import {
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  FormGroup,
-  Label,
-  Col,
-  Input
-} from "reactstrap";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { withFormik, Field } from "formik";
 import React from "react";
 import Yup from "yup";
@@ -26,9 +16,9 @@ const TraderWithdrawModal = ({
   handleSubmit,
   closeModal
 }) => {
-  const handleWithdrawAll = () => {
+  /*const handleWithdrawAll = () => {
     setFieldValue("amount", traderWithdraw.available);
-  };
+  };*/
   return (
     <form onSubmit={handleSubmit}>
       <Modal isOpen={isOpen}>
