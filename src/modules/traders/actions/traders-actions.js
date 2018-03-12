@@ -1,4 +1,7 @@
+import QueryString from "query-string";
+
 import filesService from "../../../shared/services/file-service";
+import history from "../../../utils/history";
 import SwaggerInvestorApi from "../../../services/api-client/swagger-investor-api";
 
 import * as actionTypes from "./traders-actions.constants";
@@ -29,7 +32,28 @@ const fetchTradersIfNeeded = traderId => (dispatch, getState) => {
   }
 };
 
+const composeFilter = filter => {
+  switch (filter.name) {
+    case "traderLevel":
+      return {
+        levelMin: filter.value.min,
+        levelMax: filter.value.max
+      };
+    default:
+      return {
+        [filter.name]: filter.value
+      };
+  }
+};
+
+const updateFilters = (filter, location) => {
+  const queryParams = QueryString.parse(location.search);
+  const newFilters = { ...queryParams, ...composeFilter(filter) };
+  history.push(`${location.pathname}?${QueryString.stringify(newFilters)}`);
+};
+
 const tradersActions = {
-  fetchTradersIfNeeded
+  fetchTradersIfNeeded,
+  updateFilters
 };
 export default tradersActions;

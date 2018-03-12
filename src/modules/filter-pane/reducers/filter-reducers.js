@@ -1,7 +1,7 @@
 import { FILTER } from "../actions/filter-actions.constants";
 
 const initialState = {
-  isOpen: false
+  isOpen: true
 };
 
 const filterReducer = (state = initialState, action) => {

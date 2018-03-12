@@ -1,0 +1,20 @@
+@import "styles/_colors.scss";
+$input-range-primary-color: $alternate-color;
+$input-range-neutral-color: $border-color;
+$input-range-neutral-light-color: $border-color;
+$input-range-disabled-color: $border-color;
+$input-range-slider-height: 0.8rem;
+$input-range-slider-width: 0.8rem;
+$input-range-slider-active-transform: none;
+$input-range-label-color: $main-color;
+$input-range-label-value-position-top: 0.5rem;
+$input-range-label-position-bottom: -0.2rem;
+
+@import "node_modules/react-input-range/src/scss/index.scss";
+.input-range__label--max {
+  right: -1.4rem;
+}
+
+.input-range__label--min {
+  left: -1.4rem;
+}
