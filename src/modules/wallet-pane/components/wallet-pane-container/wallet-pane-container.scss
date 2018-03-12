@@ -1,0 +1,12 @@
+.wallet-pane-container {
+  display: flex;
+}
+
+.wallet-pane-container__component {
+  flex: 1;
+}
+
+.wallet-pane-container__wallet {
+  flex: 1 1 20%;
+  max-width: 20%;
+}
