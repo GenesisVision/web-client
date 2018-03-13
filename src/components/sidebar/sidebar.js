@@ -5,6 +5,12 @@ import "./sidebar.css";
 import { DASHBOARD_ROUTE } from "../../modules/dashboard/dashboard.constants";
 import { PROFILE_ROUTE } from "../../modules/profile/profile.constants";
 import { WALLET_ROUTE } from "../../modules/wallet/wallet.constants";
+import {
+  DashboardIcon,
+  SettingsIcon,
+  WalletIcon,
+  TradersIcon
+} from "./media/icons.js";
 
 const TRADERS_ROUTE = "/traders";
 const Sidebar = () => {
@@ -12,22 +18,22 @@ const Sidebar = () => {
     <div className="sidebar">
       <div className="nav-item sidebar__item">
         <NavLink className="nav-link" title="Traders" to={TRADERS_ROUTE}>
-          <span className="fa fa-list-ol" />
+          <TradersIcon />
         </NavLink>
       </div>
       <div className="nav-item sidebar__item">
         <NavLink className="nav-link" title="Dashboard" to={DASHBOARD_ROUTE}>
-          <span className="fa fa-chart-pie" />
+          <DashboardIcon />
         </NavLink>
       </div>
       <div className="nav-item sidebar__item">
         <NavLink className="nav-link" title="Wallet" to={WALLET_ROUTE}>
-          <span className="fa fa-credit-card" />
+          <WalletIcon />
         </NavLink>
       </div>
       <div className="nav-item sidebar__item">
         <NavLink className="nav-link" title="Profile" to={PROFILE_ROUTE}>
-          <span className="fa fa-cog" />
+          <SettingsIcon />
         </NavLink>
       </div>
     </div>

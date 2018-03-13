@@ -26,10 +26,29 @@
   .nav-link {
     color: $text-color;
     box-sizing: content-box;
+    padding: 1.3rem 1rem;
     border-left: 4px solid transparent;
+    &:hover {
+      .dashboard,
+      .wallet {
+        fill: $text-color-light;
+      }
+      .settings,
+      .traders {
+        stroke: $text-color-light;
+      }
+    }
     &.active {
       border-left: 4px solid;
       color: $text-color-light;
+      .dashboard,
+      .wallet {
+        fill: $text-color-light;
+      }
+      .settings,
+      .traders {
+        stroke: $text-color-light;
+      }
     }
   }
 }
