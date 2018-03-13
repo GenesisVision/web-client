@@ -1,0 +1,8 @@
+@import "styles/_colors.scss";
+
+$select-input-height: 32px;
+$select-input-border-radius: 0;
+$select-link-hover-color: $main-color;
+$select-arrow-color-hover: $alternate-color;
+
+@import "node_modules/react-select/scss/default.scss";

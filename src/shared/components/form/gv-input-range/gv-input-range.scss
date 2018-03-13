@@ -11,6 +11,11 @@ $input-range-label-value-position-top: 0.5rem;
 $input-range-label-position-bottom: -0.2rem;
 
 @import "node_modules/react-input-range/src/scss/index.scss";
+
+.input-range {
+  margin-top: 0.5rem;
+}
+
 .input-range__label--max {
   right: -1.4rem;
 }
