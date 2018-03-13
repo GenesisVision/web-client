@@ -1,9 +1,11 @@
 import { connect } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
+import classnames from "classnames";
 import LoadingBar from "react-redux-loading-bar";
 import React from "react";
 
 import filterActions from "../../modules/filter-pane/actions/filter-actions";
+import FilterIcon from "./filter-icon";
 import loginActions from "../../modules/login/actions/login-actions";
 
 import "./header.css";
@@ -41,7 +43,7 @@ const unAuthorizedControl = () => (
   </ul>
 );
 
-const Header = ({ isAuthenticated, signOut, toggleFilter }) => {
+const Header = ({ isAuthenticated, signOut, isFilterOpen, toggleFilter }) => {
   return (
     <div className="header-wrapper">
       <header className="header">
@@ -55,9 +57,14 @@ const Header = ({ isAuthenticated, signOut, toggleFilter }) => {
         </div>
         <div className="header-filtering">
           <div className="h-filtering">
-            <a className="link" onClick={toggleFilter}>
-              <span className="fas fa-filter" />
-            </a>
+            <span
+              className={classnames({
+                "h-filtering--open": isFilterOpen
+              })}
+              onClick={toggleFilter}
+            >
+              <FilterIcon />
+            </span>
           </div>
           {isAuthenticated ? authorizedControl(signOut) : unAuthorizedControl()}
         </div>
@@ -70,7 +77,8 @@ const Header = ({ isAuthenticated, signOut, toggleFilter }) => {
 
 const mapStateToProps = state => {
   const { isAuthenticated } = state.authData;
-  return { isAuthenticated };
+  const { isOpen } = state.filterData;
+  return { isAuthenticated, isFilterOpen: isOpen };
 };
 
 const mapDispatchToProps = dispatch => ({

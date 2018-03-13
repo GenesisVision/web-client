@@ -49,3 +49,24 @@
   font-weight: 700;
   margin-left: 2rem;
 }
+
+.h-filtering {
+  display: flex;
+  span {
+    display: flex;
+  }
+
+  &:hover,
+  .h-filtering--open {
+    cursor: pointer;
+    .filter--border,
+    .filter--outer {
+      fill: $alternate-color;
+      stroke: $alternate-color;
+    }
+    .filter--inner {
+      fill: white;
+      stroke: white;
+    }
+  }
+}
