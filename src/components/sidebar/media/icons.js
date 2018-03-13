@@ -132,7 +132,7 @@ export function TradersIcon() {
       <g
         id="Genesis-WebApp"
         stroke="none"
-        stroke-width="1"
+        strokeWidth="1"
         fill="none"
         fillRule="evenodd"
         strokeLinecap="round"
@@ -142,7 +142,7 @@ export function TradersIcon() {
           id="Elements"
           transform="translate(-772.000000, -4070.000000)"
           stroke="#CCD5D4"
-          stroke-width="3"
+          strokeWidth="3"
         >
           <g id="Side" transform="translate(743.000000, 3531.000000)">
             <g

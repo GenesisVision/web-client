@@ -3,7 +3,9 @@
 }
 
 .wallet-pane-container__component {
-  flex: 1;
+  flex: 1 1 80%;
+  max-width: 80%;
+  margin: auto;
 }
 
 .wallet-pane-container__wallet {
