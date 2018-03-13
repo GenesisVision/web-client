@@ -1,0 +1,34 @@
+@import "styles/_colors.scss";
+.wp-transaction {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 0;
+  border-bottom: 1px solid $border-color;
+}
+
+.wp-transaction__info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.wp-transaction__name {
+  font-size: 1.3rem;
+}
+
+.wp-transaction__program {
+  color: $text-sub-color;
+  font-size: 0.8rem;
+  line-height: 0.8;
+}
+
+.wp-transaction__amount {
+  font-size: 1.5rem;
+}
+
+.wp-transaction__date {
+  color: $text-sub-color;
+  font-size: 0.6rem;
+  line-height: 0.6;
+}
