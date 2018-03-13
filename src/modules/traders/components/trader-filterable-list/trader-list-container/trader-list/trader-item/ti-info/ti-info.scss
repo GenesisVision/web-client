@@ -37,7 +37,7 @@
 }
 
 .ti-info__name {
-  max-width: 20rem;
+  max-width: 14rem;
 }
 
 .ti-name {
@@ -52,9 +52,10 @@
 }
 
 .ti-name__description {
+  font-size: 0.9em;
   color: $text-sub-color;
   line-height: 1.2;
-  margin: 1.4rem 0;
+  margin: 1rem 0;
 }
 
 .ti-name__eop {
@@ -64,10 +65,11 @@
 }
 
 .eop__text {
-  flex: 1 1 40%;
+  font-size: 0.9em;
+  flex: 1 1 50%;
 }
 
 .eop__progress {
-  flex: 1 1 40%;
-  margin-right: 5rem;
+  flex: 1 1 50%;
+  margin-right: 4rem;
 }
