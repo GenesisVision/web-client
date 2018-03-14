@@ -11,7 +11,7 @@ import {
 //   if (!isOpen) return null;
 
 //   return (
-//     <div className="wallet-transaction">
+//     <div className="wallet-pane-transaction">
 //       <div className="wh-transaction-description__header">Equivalent</div>
 //       <div className="wh-transaction-description__value">${equivalent}</div>
 //       <div className="wh-transaction-description__header">Transaction Id</div>

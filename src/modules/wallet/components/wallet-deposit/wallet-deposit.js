@@ -60,7 +60,7 @@ const mapDispatchToProps = dispatch => ({
   showSuccessCopyMessage: () => {
     dispatch(
       alertMessageActions.success(
-        "Your wallet number was copied to the clipboard successfully."
+        "Your wallet-pane number was copied to the clipboard successfully."
       )
     );
   }

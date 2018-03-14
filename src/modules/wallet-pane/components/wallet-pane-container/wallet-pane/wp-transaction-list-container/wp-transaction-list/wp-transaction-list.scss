@@ -1,0 +1,20 @@
+.wp-transaction-list {
+  margin-top: 2rem;
+}
+
+.wp-transaction-list__header {
+  font-family: "NeuzeitGroBol";
+  font-size: 1.3rem;
+  line-height: 1.2;
+}
+
+.wp-transaction-list__items {
+  max-height: calc(100vh - 470px);
+  overflow: hidden;
+}
+
+.wp-transaction-list__all-transactions {
+  font-size: 0.8rem;
+  text-align: center;
+  margin-top: 2rem;
+}

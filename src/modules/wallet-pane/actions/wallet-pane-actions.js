@@ -5,7 +5,7 @@ import * as actionTypes from "./wallet-pane-actions.constants";
 const fetchWalletPaneTransactions = () => {
   const data = {
     filter: {
-      take: 4
+      take: 5
     }
   };
   return {
@@ -17,7 +17,24 @@ const fetchWalletPaneTransactions = () => {
   };
 };
 
+const fetchWalletPaneChart = () => {
+  const data = {
+    filter: {
+      type: "Internal",
+      isFull: false
+    }
+  };
+  return {
+    type: actionTypes.WALLET_PANE_CHART,
+    payload: SwaggerInvestorApi.apiInvestorWalletStatisticPost(
+      authService.getAuthArg(),
+      data
+    )
+  };
+};
+
 const walletPaneActions = {
-  fetchWalletPaneTransactions
+  fetchWalletPaneTransactions,
+  fetchWalletPaneChart
 };
 export default walletPaneActions;

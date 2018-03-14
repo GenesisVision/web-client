@@ -5,7 +5,7 @@ import "./wp-transaction.css";
 import {
   getProgramName,
   getTransactionTypeText
-} from "../../../../../../wallet/helpers/transaction-helper";
+} from "../../../../../../../wallet/helpers/transaction-helper";
 
 const WPTransaction = ({ transaction }) => {
   const renderTransactionInfo = transaction => {

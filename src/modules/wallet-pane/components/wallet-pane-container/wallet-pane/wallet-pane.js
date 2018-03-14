@@ -1,15 +1,17 @@
 import React from "react";
 
-import WPInfo from "./wp-info/wp-info";
-import WPTransactionList from "./wp-transaction-list/wp-transaction-list";
+import WalletContainer from "../../../../wallet/components/wallet/wallet-container/wallet-container";
+import WPChartContainer from "./wp-chart-container/wp-chart-container";
+import WPTransactionListContainer from "./wp-transaction-list-container/wp-transaction-list-container";
 
 import "./wallet-pane.css";
 
-const WalletPane = ({ transactions }) => {
+const WalletPane = () => {
   return (
     <div className="wallet-pane">
-      <WPInfo />
-      <WPTransactionList transactions={transactions} />
+      <WPChartContainer />
+      <WalletContainer />
+      <WPTransactionListContainer />
     </div>
   );
 };
