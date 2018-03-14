@@ -1,6 +1,6 @@
 import React from "react";
 
-import TraderItem from "./trader-item/trader-item";
+import TraderItem from "../../../../../../components/trader-item/trader-item";
 
 const TraderList = ({ traders }) => {
   return traders.map((x, idx) => (

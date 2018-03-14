@@ -1,9 +1,9 @@
 import React from "react";
 
-import Progress from "../../../../../../../../shared/components/progress/progress";
+import Progress from "../../../shared/components/progress/progress";
 
 import "./ti-info.css";
-import avatarStub from "../../../../../../../../shared/media/avatar.png";
+import avatarStub from "../../../shared/media/avatar.png";
 
 const TIInfo = ({ idx, trader }) => {
   return (

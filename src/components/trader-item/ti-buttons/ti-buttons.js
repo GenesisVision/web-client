@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import React from "react";
 
-import { TRADER_ROUTE } from "../../../../../../../trader/trader.constants";
-import replaceParams from "../../../../../../../../utils/replace-params";
+import { TRADER_ROUTE } from "../../../modules/trader/trader.constants";
+import replaceParams from "../../../utils/replace-params";
 
 import "./ti-buttons.css";
 
