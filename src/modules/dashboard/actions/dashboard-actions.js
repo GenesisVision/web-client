@@ -3,14 +3,29 @@ import SwaggerInvestorApi from "../../../services/api-client/swagger-investor-ap
 
 import * as actionTypes from "./dashboard-actions.constants";
 
-const fetchDashboard = () => {
+const fetchDashboardPrograms = () => {
   return {
-    type: actionTypes.DASHBOARD,
+    type: actionTypes.DASHBOARD_PROGRAMS,
     payload: SwaggerInvestorApi.apiInvestorDashboardGet(
       authService.getAuthArg()
     )
   };
 };
 
-const dashboardActions = { fetchDashboard };
+const fetchDashboardChart = () => {
+  const data = {
+    filter: {
+      type: "Internal"
+    }
+  };
+  return {
+    type: actionTypes.DASHBOARD_CHART,
+    payload: SwaggerInvestorApi.apiInvestorWalletStatisticPost(
+      authService.getAuthArg(),
+      data
+    )
+  };
+};
+
+const dashboardActions = { fetchDashboardPrograms, fetchDashboardChart };
 export default dashboardActions;

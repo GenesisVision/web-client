@@ -1,6 +1,10 @@
-import apiReducerFactory from "../../../shared/reducers/api-reducer/api-reducer";
+import { combineReducers } from "redux";
 
-import { DASHBOARD } from "../actions/dashboard-actions.constants";
+import dashboardChartReducer from "./dashboard-chart-reducer";
+import dashboardProgramsReducer from "./dashboard-program-reducer";
 
-const dashboardReducer = apiReducerFactory({ apiType: DASHBOARD });
+const dashboardReducer = combineReducers({
+  programs: dashboardProgramsReducer,
+  chart: dashboardChartReducer
+});
 export default dashboardReducer;

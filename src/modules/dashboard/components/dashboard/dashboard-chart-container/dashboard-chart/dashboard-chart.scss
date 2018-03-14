@@ -1,0 +1,13 @@
+@import "styles/_colors.scss";
+
+.dashboard-chart {
+  padding: 2rem;
+  background: white;
+  width: 100%;
+}
+
+.dashboard-chart__line {
+  .recharts-line-curve {
+    stroke: $alternate-color;
+  }
+}
