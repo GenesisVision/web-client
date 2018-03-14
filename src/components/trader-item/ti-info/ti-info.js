@@ -1,3 +1,4 @@
+import moment from "moment";
 import React from "react";
 
 import Progress from "../../../shared/components/progress/progress";
@@ -6,6 +7,15 @@ import "./ti-info.css";
 import avatarStub from "../../../shared/media/avatar.png";
 
 const TIInfo = ({ idx, trader }) => {
+  const dateNow = moment(new Date());
+
+  const daysPassed = startOfPeriod => {
+    const startDate = moment(startOfPeriod);
+    return dateNow.diff(startDate, "days");
+  };
+  const daysLeft = (startOfPeriod, periodDuration) => {
+    return periodDuration - daysPassed(startOfPeriod);
+  };
   return (
     <div className="ti-info">
       <div className="ti-info__order">{idx}</div>
@@ -24,9 +34,14 @@ const TIInfo = ({ idx, trader }) => {
           Ahead
         </div>
         <div className="ti-name__eop eop">
-          <div className="eop__text">42 days left</div>
+          <div className="eop__text">
+            {daysLeft(trader.startOfPeriod, trader.periodDuration)} days left
+          </div>
           <div className="eop__progress">
-            <Progress value={42} />
+            <Progress
+              value={daysPassed(trader.startOfPeriod)}
+              max={trader.periodDuration}
+            />
           </div>
         </div>
       </div>
