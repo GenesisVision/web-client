@@ -1,7 +1,14 @@
 @import "styles/_colors.scss";
 
 @font-face {
-  font-family: "Neuzeit";
+  font-family: "NeuzeitGroLig";
+  src: url(./fonts/NeuzeitGro-Lig.ttf);
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "NeuzeitGroReg";
   src: url(./fonts/NeuzeitGro-Reg.woff2), url(./fonts/NeuzeitGro-Reg.ttf),
     url(./fonts/NeuzeitGro-Reg.woff);
   font-weight: 400;
@@ -9,7 +16,7 @@
 }
 
 @font-face {
-  font-family: "Neuzeit";
+  font-family: "NeuzeitGroBol";
   src: url(./fonts/NeuzeitGro-Bol.woff2), url(./fonts/NeuzeitGro-Bol.ttf),
     url(./fonts/NeuzeitGro-Bol.woff);
   font-weight: 700;
@@ -17,7 +24,7 @@
 }
 
 @font-face {
-  font-family: "Neuzeit";
+  font-family: "NeuzeitGroBla";
   src: url(./fonts/NeuzeitGro-Bla.woff2), url(./fonts/NeuzeitGro-Bla.ttf),
     url(./fonts/NeuzeitGro-Bla.woff);
   font-weight: 900;
@@ -26,7 +33,7 @@
 
 body {
   margin: 0;
-  font-family: "Neuzeit";
+  font-family: "NeuzeitGroReg";
   background: #f8f8f8;
   color: $main-color;
 }
