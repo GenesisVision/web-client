@@ -18,8 +18,9 @@ const initialState = {};
 const enhancers = [];
 const middleware = [
   thunk,
-  refreshTokenMiddleware(authService, () =>
-    SwaggerInvestorApi.apiInvestorAuthUpdateTokenGet()
+  refreshTokenMiddleware(
+    authService,
+    SwaggerInvestorApi.apiInvestorAuthUpdateTokenGet.bind(SwaggerInvestorApi)
   ),
   promiseMiddleware({ promiseTypeSuffixes: suffixes }),
   apiErrorHandlerMiddleware({ failureSuffix: failureSuffix }),

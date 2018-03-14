@@ -17,7 +17,7 @@ const authorizedControl = signOut => (
   <ul className="navbar-nav px-3 flex-row">
     <li className="nav-item text-nowrap">
       <button
-        className="btn btn-outline-primary"
+        className="gv-btn gv-btn-secondary"
         title="Sign out"
         onClick={() => {
           signOut();
@@ -33,7 +33,7 @@ const unAuthorizedControl = () => (
   <ul className="navbar-nav px-3 flex-row">
     <li className="nav-item text-nowrap">
       <Link
-        className="btn btn-outline-primary"
+        className="gv-btn gv-btn-secondary"
         title="Sign In"
         to={LOGIN_ROUTE}
       >

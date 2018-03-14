@@ -5,8 +5,8 @@ import "./wp-buttons.css";
 const WPButtons = () => {
   return (
     <div className="wp-buttons">
-      <button className="btn btn-outline-secondary">Deposit</button>
-      <button className="btn btn-outline-secondary">Withdraw</button>
+      <button className="gv-btn gv-btn-secondary">Deposit</button>
+      <button className="gv-btn gv-btn-secondary">Withdraw</button>
     </div>
   );
 };

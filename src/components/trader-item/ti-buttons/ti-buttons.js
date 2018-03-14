@@ -12,10 +12,10 @@ const TIButtons = ({ traderId }) => {
   });
   return (
     <div className="ti-buttons">
-      <Link className="ti-button btn btn-outline-primary" to={traderRoute}>
+      <Link className="ti-button gv-btn gv-btn-secondary" to={traderRoute}>
         View Profile
       </Link>
-      <button className="ti-button btn btn-outline-secondary">Invest</button>
+      <button className="ti-button gv-btn gv-btn-primary">Invest</button>
     </div>
   );
 };

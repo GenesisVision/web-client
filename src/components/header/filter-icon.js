@@ -9,6 +9,34 @@ export default function FilterIcon() {
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
     >
+      <defs>
+        <rect id="path-1" x="0" y="0" width="37" height="37" rx="5" />
+        <filter
+          x="-94.6%"
+          y="-75.7%"
+          width="289.2%"
+          height="289.2%"
+          filterUnits="objectBoundingBox"
+          id="filter-2"
+        >
+          <feOffset
+            dx="0"
+            dy="7"
+            in="SourceAlpha"
+            result="shadowOffsetOuter1"
+          />
+          <feGaussianBlur
+            stdDeviation="10.5"
+            in="shadowOffsetOuter1"
+            result="shadowBlurOuter1"
+          />
+          <feColorMatrix
+            values="0 0 0 0 0.0862745098   0 0 0 0 0.717647059   0 0 0 0 0.678431373  0 0 0 0.281929348 0"
+            type="matrix"
+            in="shadowBlurOuter1"
+          />
+        </filter>
+      </defs>
       <g
         id="Genesis-WebApp"
         className="filter--outer"
@@ -34,6 +62,13 @@ export default function FilterIcon() {
                     width="36"
                     height="36"
                     rx="5"
+                  />
+                  <use
+                    className="filter--shadow"
+                    fill="black"
+                    fillOpacity="0"
+                    filter="url(#filter-2)"
+                    xlinkHref="#path-1"
                   />
                 </g>
                 <g
