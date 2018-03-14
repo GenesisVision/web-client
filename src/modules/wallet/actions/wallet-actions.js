@@ -50,6 +50,15 @@ const fetchWalletTransactionProgramFilter = () => {
   };
 };
 
+const fetchWalletChart = () => {
+  return {
+    type: actionTypes.WALLET_CHART,
+    payload: SwaggerInvestorApi.apiInvestorWalletStatisticPost(
+      authService.getAuthArg()
+    )
+  };
+};
+
 const walletWithdraw = withdrawData => {
   const data = {
     request: withdrawData
@@ -71,6 +80,7 @@ const walletActions = {
   fetchWallet,
   fetchWalletTransactions,
   fetchWalletAddress,
+  fetchWalletChart,
   walletWithdraw,
   fetchWalletTransactionProgramFilter,
   openWallet

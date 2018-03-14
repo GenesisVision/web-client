@@ -1,28 +1,18 @@
 @import "styles/_colors.scss";
 
-.wallet__amount {
+.wallet-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wallet-info__amount {
   color: $main-color;
-  &.wallet__amount--gvt {
-    font-size: 5rem;
-    font-weight: 700;
-    line-height: 1;
-  }
-  &.wallet__amount--usd {
-    font-size: 2rem;
-  }
+  font-size: 3rem;
+  line-height: 1;
 }
 
-.wallet__currency {
+.wallet-info__currency {
   text-transform: uppercase;
-  &.wallet__currency--gvt {
-    font-size: 2rem;
-  }
-}
-
-.wallet__button {
-  padding: 0.8rem 1.5rem;
-  margin: 1rem;
-  font-size: 2rem;
-  line-height: 1.4;
-  border-radius: 0.5rem;
+  font-size: 1rem;
 }

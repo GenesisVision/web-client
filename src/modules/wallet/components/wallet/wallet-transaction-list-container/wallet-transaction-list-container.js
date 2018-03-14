@@ -1,11 +1,11 @@
 import { connect } from "react-redux";
 import React, { Component } from "react";
 
-import walletActions from "../../../../actions/wallet-actions";
+import walletActions from "../../../actions/wallet-actions";
 import WalletTransactionList from "./wallet-transaction-list/wallet-transaction-list";
 
 class WalletTransactionListContainer extends Component {
-  getFilter = props => props.queryParams.filter || "All";
+  getFilter = props => (props.queryParams ? props.queryParams.filter : "All");
 
   componentWillMount() {
     this.props.fetchTransactions(this.getFilter(this.props));

@@ -1,21 +1,11 @@
 import React from "react";
+
 import "./wp-transaction.css";
 
-const getTransactionTypeText = type => {
-  var regex = /([A-Z])([A-Z])([a-z])|([a-z])([A-Z])/g;
-  return type.replace(regex, "$1$4 $2$3$5");
-};
-
-const getProgramName = transaction => {
-  if (transaction.investmentProgram) {
-    return (
-      <div className="wp-transaction__program">
-        {transaction.investmentProgram.title}
-      </div>
-    );
-  }
-  return null;
-};
+import {
+  getProgramName,
+  getTransactionTypeText
+} from "../../../../../../wallet/helpers/transaction-helper";
 
 const WPTransaction = ({ transaction }) => {
   const renderTransactionInfo = transaction => {

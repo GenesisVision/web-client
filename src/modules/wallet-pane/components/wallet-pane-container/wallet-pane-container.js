@@ -14,7 +14,7 @@ class WalletPaneContainer extends Component {
   }
 
   render() {
-    const { isAuthenticated, transactions, isPending, children } = this.props;
+    const { isAuthenticated, transactions, isPending } = this.props;
     if (!isAuthenticated || !transactions) {
       return null;
     }
@@ -43,7 +43,7 @@ const mapStateToProps = state => {
       total: data.total
     };
   }
-  return { isAuthenticated, transactions };
+  return { isAuthenticated, isPending, transactions };
 };
 
 const mapDispatchToProps = dispatch => ({

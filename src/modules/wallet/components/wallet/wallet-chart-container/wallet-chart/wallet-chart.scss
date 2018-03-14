@@ -1,0 +1,11 @@
+@import "styles/_colors.scss";
+
+.wallet-chart {
+  margin: 2rem;
+}
+
+.wallet-chart__line {
+  .recharts-line-curve {
+    stroke: $alternate-color;
+  }
+}
