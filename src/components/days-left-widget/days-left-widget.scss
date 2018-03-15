@@ -1,0 +1,17 @@
+.days-left-widget {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+}
+
+.days-left-widget__text {
+  font-size: 0.9em;
+  flex: 1;
+  white-space: nowrap;
+}
+
+.days-left-widget__progress {
+  flex: 1;
+  margin: 0.5rem 0;
+}
