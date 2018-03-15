@@ -1,6 +1,8 @@
 import { Modal } from "reactstrap";
 import React from "react";
 
+import "./popup.css";
+
 import {
   TRADER_DEPOSIT_POPUP,
   TRADER_WITHDRAW_POPUP
@@ -15,7 +17,7 @@ const POPUP_COMPONENTS = {
 const Popup = ({ isOpen, type, onClosePopup, popupProps }) => {
   const SpecificPopup = POPUP_COMPONENTS[type];
   return (
-    <Modal isOpen={isOpen} toggle={onClosePopup}>
+    <Modal isOpen={isOpen} toggle={onClosePopup} className="popup-dialog">
       <SpecificPopup closeModal={onClosePopup} {...popupProps} />
     </Modal>
   );

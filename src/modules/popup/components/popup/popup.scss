@@ -1,0 +1,9 @@
+.popup {
+  padding: 2rem 3rem;
+}
+
+.popup-dialog {
+  @media (min-width: 576px) {
+    max-width: 664px;
+  }
+}

@@ -1,5 +1,4 @@
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
 import React, { PureComponent } from "react";
 
 import TraderDeposit from "./trader-deposit/trader-deposit";
@@ -22,13 +21,11 @@ class TraderDepositContainer extends PureComponent {
     }
 
     return (
-      <div>
-        <TraderDeposit
-          traderDeposit={traderDeposit}
-          onSubmit={handleDepositSubmit}
-          closeModal={closeModal}
-        />
-      </div>
+      <TraderDeposit
+        traderDeposit={traderDeposit}
+        onSubmit={handleDepositSubmit}
+        closeModal={closeModal}
+      />
     );
   }
 }
@@ -59,6 +56,6 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(TraderDepositContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(
+  TraderDepositContainer
 );

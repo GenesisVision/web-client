@@ -3,6 +3,8 @@ import React from "react";
 import Yup from "yup";
 
 import InputText from "../../../../../shared/components/form/input-text/input-text";
+import PopupHeader from "../../../../popup/components/popup-header/popup-header";
+import PopupButtons from "../../../../popup/components/popup-buttons/popup-buttons";
 
 const TraderDepositModal = ({
   values,
@@ -13,35 +15,26 @@ const TraderDepositModal = ({
   closeModal
 }) => {
   return (
-    <form onSubmit={handleSubmit}>
-      {/* <h2>{traderDeposit.name}</h2>
-           <p>
-            <span>Available GVT: </span>
-            <span>{traderDeposit.available}</span>
-          </p> */}
-      <Field
-        name="amount"
-        type="number"
-        placeholder="Amount"
-        addon="fas fa-barcode"
-        component={InputText}
-      />
-      {/* <p>
-            <span>You'll get: </span>
-            <span>{(values.amount || 0) * traderDeposit.rate} Tokens</span>
-          </p> */}
-      <button
-        type="submit"
-        className="gv-btn gv-btn-primary"
-        onClick={handleSubmit}
-        disabled={isSubmitting}
-      >
-        Buy
-      </button>
-      <button className="gv-btn gv-btn-secondary" onClick={closeModal}>
-        Cancel
-      </button>
-    </form>
+    <div className="popup">
+      <PopupHeader header="Buy Tokens" onClose={closeModal} />
+      <form onSubmit={handleSubmit}>
+        image | name : days left
+        <Field
+          name="amount"
+          type="number"
+          placeholder="Amount"
+          addon="fas fa-barcode"
+          component={InputText}
+        />
+        amount in usd
+        <PopupButtons
+          submitLabel="Buy Tokens"
+          isSubmitting={isSubmitting}
+          onSubmit={handleSubmit}
+          onCancel={closeModal}
+        />
+      </form>
+    </div>
   );
 };
 
