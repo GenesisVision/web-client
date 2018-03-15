@@ -18,12 +18,15 @@ const TraderDepositModal = ({
   handleSubmit,
   closeModal
 }) => {
+  const calculateUsd = () => {
+    return (values.amount * traderDeposit.gvtUsdRate).toFixed(2);
+  };
   return (
     <div className="popup">
       <PopupHeader header="Buy Tokens" onClose={closeModal} />
       <form onSubmit={handleSubmit}>
-        <div className="trader-deposit__row">
-          <div className="trader-deposit__cell">
+        <div className="trader-deposit__info">
+          <div className="trader-deposit__info-cell">
             <div className="trader-deposit__trader">
               <div className="trader-deposit__avatar">
                 <TraderAvatar
@@ -34,7 +37,7 @@ const TraderDepositModal = ({
               <div className="trader-deposit__name">{traderDeposit.title}</div>
             </div>
           </div>
-          <div className="trader-deposit__cell">
+          <div className="trader-deposit__info-cell">
             <div className="trader-deposit__days-left">
               <DaysLeftWidget
                 start={traderDeposit.startOfPeriod}
@@ -42,7 +45,7 @@ const TraderDepositModal = ({
               />
             </div>
           </div>
-          <div className="trader-deposit__cell">
+          <div className="trader-deposit__info-cell">
             <div className="quantitative-characteristic">
               <div className="quantitative-characteristic__value">
                 {traderDeposit.gvtWalletAmount}
@@ -53,13 +56,30 @@ const TraderDepositModal = ({
             </div>
           </div>
         </div>
-        <Field
-          name="amount"
-          type="number"
-          placeholder="Amount"
-          component={InputText}
-        />
-        amount in usd
+        <div className="trader-deposit__calculator">
+          <div className="trader-deposit__calculator-cell input-gvt">
+            <div className="input-gvt__value">
+              <Field
+                name="amount"
+                type="number"
+                placeholder=""
+                controllClass="input-gvt__amount"
+                component={InputText}
+              />
+            </div>
+            <div className="input-gvt__description">Enter GVT amount</div>
+          </div>
+          <div className="trader-deposit__calculator-cell calculated-usd">
+            <div className="quantitative-characteristic">
+              <div className="quantitative-characteristic__value label-usd__value">
+                {calculateUsd()}
+              </div>
+              <div className="quantitative-characteristic__description">
+                Amount in USD
+              </div>
+            </div>
+          </div>
+        </div>
         <PopupButtons
           submitLabel="Buy Tokens"
           isSubmitting={isSubmitting}

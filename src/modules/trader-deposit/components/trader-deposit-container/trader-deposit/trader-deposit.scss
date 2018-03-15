@@ -1,11 +1,13 @@
-.trader-deposit__row {
+@import "styles/_colors.scss";
+
+.trader-deposit__info {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 2rem 0;
 }
 
-.trader-deposit__cell {
+.trader-deposit__info-cell {
   flex: 1 1 32%;
   max-width: 32%;
   text-align: center;
@@ -24,4 +26,54 @@
 .trader-deposit__days-left {
   max-width: 5rem;
   margin: auto;
+  .days-left-widget {
+    flex-direction: column;
+  }
+}
+
+.trader-deposit__calculator {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.trader-deposit__calculator-cell {
+  flex: 1 1 30%;
+  max-width: 30%;
+  text-align: center;
+  border: 1px solid $border-color;
+  padding: 1rem;
+}
+
+.input-gvt {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-gvt__amount {
+  color: $text-sub-color;
+  border: 0;
+  max-width: 10rem;
+  text-align: center;
+  font-size: 2rem;
+  outline: none;
+  height: 2rem;
+}
+
+.input-gvt__description {
+  color: $text-sub-color;
+  font-size: 0.9rem;
+  line-height: 0.5;
+}
+
+.calculated-usd {
+  background-color: $background-color;
+}
+
+.label-usd__value {
+  max-width: 10rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

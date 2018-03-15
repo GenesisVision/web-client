@@ -1,3 +1,10 @@
 .field-input__addon {
   min-width: 1rem;
 }
+
+.field-input__invalid {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;
+}
