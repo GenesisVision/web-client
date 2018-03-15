@@ -7,6 +7,7 @@ import authReducer from "./authReducer";
 import dashboardReducer from "../modules/dashboard/reducers/dashboard-reducers";
 import filterReducer from "../modules/filter-pane/reducers/filter-reducers";
 import loginReducer from "../modules/login/reducers/login-reducers";
+import popupReducer from "../modules/popup/reducers/popup-reducers";
 import profileReducer from "../modules/profile/reducers/profile-reducers";
 import registerReducer from "../modules/register/reducers/register-reducers";
 import traderDepositReducer from "../modules/trader-deposit/reducers/trader-deposit-reducers";
@@ -31,5 +32,6 @@ export default combineReducers({
   dashboardData: dashboardReducer,
   traderDepositData: traderDepositReducer,
   traderWithdrawData: traderWithdrawReducer,
-  filterData: filterReducer
+  filterData: filterReducer,
+  popupData: popupReducer
 });

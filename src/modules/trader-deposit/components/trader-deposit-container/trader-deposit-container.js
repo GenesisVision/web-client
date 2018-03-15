@@ -1,48 +1,37 @@
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import React from "react";
+import React, { PureComponent } from "react";
 
+import TraderDeposit from "./trader-deposit/trader-deposit";
 import traderDepositActions from "../../actions/trader-deposit-actions";
-import TraderDepositModal from "./trader-deposit-modal/trader-deposit-modal";
 
-import { HOME_ROUTE } from "../../../../components/app.constants";
-
-const TraderDepositContainer = ({
-  location,
-  match,
-  isPending,
-  traderDeposit,
-  fetchDeposit,
-  submitDeposit,
-  closeModal
-}) => {
-  if (isPending) {
-    return null;
+class TraderDepositContainer extends PureComponent {
+  componentWillMount() {
+    this.props.fetchDeposit();
   }
-  if (traderDeposit === undefined) {
-    fetchDeposit();
-    return null;
-  }
-  const { traderId } = match.params;
-  const { from } = location.state || { from: { pathname: HOME_ROUTE } };
-  const handleCloseModal = () => {
-    closeModal(from);
-  };
-  const handleDepositSubmit = ({ amount }, setSubmitting) => {
-    submitDeposit(traderId, amount, from, setSubmitting);
-  };
 
-  return (
-    <div>
-      <TraderDepositModal
-        isOpen={true}
-        traderDeposit={traderDeposit}
-        onSubmit={handleDepositSubmit}
-        closeModal={handleCloseModal}
-      />
-    </div>
-  );
-};
+  render() {
+    const { isPending, traderDeposit, submitDeposit, closeModal } = this.props;
+
+    const handleDepositSubmit = ({ amount }, setSubmitting) => {
+      submitDeposit(amount, setSubmitting);
+    };
+
+    if (isPending || traderDeposit === undefined) {
+      return null;
+    }
+
+    return (
+      <div>
+        <TraderDeposit
+          traderDeposit={traderDeposit}
+          onSubmit={handleDepositSubmit}
+          closeModal={closeModal}
+        />
+      </div>
+    );
+  }
+}
 
 const mapStateToProps = state => {
   const { isPending, errorMessage, data } = state.traderDepositData;
@@ -67,9 +56,6 @@ const mapDispatchToProps = dispatch => ({
       .catch(() => {
         setSubmitting(false);
       });
-  },
-  closeModal: from => {
-    traderDepositActions.closeTraderDepositModal(from);
   }
 });
 

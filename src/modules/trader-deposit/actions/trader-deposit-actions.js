@@ -5,14 +5,13 @@ import SwaggerInvestorApi from "../../../services/api-client/swagger-investor-ap
 import * as actionTypes from "./trader-deposit-actions.constants";
 
 const fetchTraderDeposit = traderId => {
+  //8b9128ea-6f8c-4741-8043-585cf34e6a17
   return {
     type: actionTypes.TRADER_DEPOSIT,
-    payload: Promise.resolve({
-      id: "1",
-      name: "Program A",
-      rate: 22,
-      available: 100
-    })
+    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramBuyTokensGet(
+      "8b9128ea-6f8c-4741-8043-585cf34e6a17",
+      authService.getAuthArg()
+    )
   };
 };
 

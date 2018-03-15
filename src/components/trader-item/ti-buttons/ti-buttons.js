@@ -6,7 +6,7 @@ import replaceParams from "../../../utils/replace-params";
 
 import "./ti-buttons.css";
 
-const TIButtons = ({ traderId }) => {
+const TIButtons = ({ traderId, openInvestPopup }) => {
   const traderRoute = replaceParams(TRADER_ROUTE, {
     ":traderId": traderId
   });
@@ -15,7 +15,12 @@ const TIButtons = ({ traderId }) => {
       <Link className="ti-button gv-btn gv-btn-secondary" to={traderRoute}>
         View Profile
       </Link>
-      <button className="ti-button gv-btn gv-btn-primary">Invest</button>
+      <button
+        className="ti-button gv-btn gv-btn-primary"
+        onClick={openInvestPopup(traderId)}
+      >
+        Invest
+      </button>
     </div>
   );
 };

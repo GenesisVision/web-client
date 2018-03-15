@@ -6,6 +6,7 @@ import React from "react";
 import AlertMessageList from "../shared/modules/alert-message/components/alert-message-list/alert-message-list";
 import Header from "./header/header";
 import history from "../utils/history";
+import PopupContainer from "../modules/popup/components/popup-container";
 import Sidebar from "./sidebar/sidebar";
 import store from "../store/index";
 
@@ -28,6 +29,7 @@ const App = () => (
         <div className="col-sm-2 offset-10 fixed-bottom">
           <AlertMessageList />
         </div>
+        <PopupContainer />
       </div>
     </ConnectedRouter>
   </Provider>

@@ -1,4 +1,3 @@
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { withFormik, Field } from "formik";
 import React from "react";
 import Yup from "yup";
@@ -15,40 +14,33 @@ const TraderDepositModal = ({
 }) => {
   return (
     <form onSubmit={handleSubmit}>
-      <Modal isOpen={isOpen}>
-        <ModalHeader>Buy Tokens</ModalHeader>
-        <ModalBody>
-          {/* <h2>{traderDeposit.name}</h2>
+      {/* <h2>{traderDeposit.name}</h2>
            <p>
             <span>Available GVT: </span>
             <span>{traderDeposit.available}</span>
           </p> */}
-          <Field
-            name="amount"
-            type="number"
-            placeholder="Amount"
-            addon="fas fa-barcode"
-            component={InputText}
-          />
-          {/* <p>
+      <Field
+        name="amount"
+        type="number"
+        placeholder="Amount"
+        addon="fas fa-barcode"
+        component={InputText}
+      />
+      {/* <p>
             <span>You'll get: </span>
             <span>{(values.amount || 0) * traderDeposit.rate} Tokens</span>
           </p> */}
-        </ModalBody>
-        <ModalFooter>
-          <button
-            type="submit"
-            className="btn btn-outline-primary"
-            onClick={handleSubmit}
-            disabled={isSubmitting}
-          >
-            Buy
-          </button>
-          <Button color="outline-secondary" onClick={closeModal}>
-            Cancel
-          </Button>
-        </ModalFooter>
-      </Modal>
+      <button
+        type="submit"
+        className="gv-btn gv-btn-primary"
+        onClick={handleSubmit}
+        disabled={isSubmitting}
+      >
+        Buy
+      </button>
+      <button className="gv-btn gv-btn-secondary" onClick={closeModal}>
+        Cancel
+      </button>
     </form>
   );
 };
