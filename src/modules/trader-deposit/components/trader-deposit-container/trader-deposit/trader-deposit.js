@@ -3,6 +3,7 @@ import React from "react";
 import Yup from "yup";
 
 import DaysLeftWidget from "../../../../../components/days-left-widget/days-left-widget";
+import FormError from "../../../../../shared/components/form/form-error/form-error";
 import InputText from "../../../../../shared/components/form/input-text/input-text";
 import PopupButtons from "../../../../popup/components/popup-buttons/popup-buttons";
 import PopupHeader from "../../../../popup/components/popup-header/popup-header";
@@ -16,7 +17,8 @@ const TraderDepositModal = ({
   traderDeposit,
   isSubmitting,
   handleSubmit,
-  closeModal
+  closeModal,
+  error
 }) => {
   const calculateUsd = () => {
     return (values.amount * traderDeposit.gvtUsdRate).toFixed(2);
@@ -80,6 +82,8 @@ const TraderDepositModal = ({
             </div>
           </div>
         </div>
+
+        <FormError error={error} />
         <PopupButtons
           submitLabel="Buy Tokens"
           isSubmitting={isSubmitting}

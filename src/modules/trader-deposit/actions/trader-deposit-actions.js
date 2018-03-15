@@ -1,6 +1,5 @@
 import authService from "../../../services/authService";
 import filesService from "../../../shared/services/file-service";
-import history from "../../../utils/history";
 import SwaggerInvestorApi from "../../../services/api-client/swagger-investor-api";
 
 import * as actionTypes from "./trader-deposit-actions.constants";
@@ -19,10 +18,11 @@ const fetchTraderDeposit = traderId => {
   };
 };
 
-const submitTraderDeposit = (traderId, amount, onCatch) => {
+const submitTraderDeposit = (traderId, amount) => {
   const model = {
     investmentProgramId: traderId,
-    amount
+    amount,
+    currency: "GVT"
   };
   return {
     type: actionTypes.TRADER_DEPOSIT_SUBMIT,
@@ -33,13 +33,8 @@ const submitTraderDeposit = (traderId, amount, onCatch) => {
   };
 };
 
-const closeTraderDepositModal = from => {
-  history.push(from);
-};
-
 const traderDepositActions = {
   fetchTraderDeposit,
-  closeTraderDepositModal,
   submitTraderDeposit
 };
 export default traderDepositActions;

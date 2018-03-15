@@ -3,6 +3,8 @@ import React, { PureComponent } from "react";
 
 import TraderDeposit from "./trader-deposit/trader-deposit";
 import traderDepositActions from "../../actions/trader-deposit-actions";
+import popupActions from "../../../popup/actions/popup-actions";
+import { alertMessageActions } from "../../../../shared/modules/alert-message/actions/alert-message-actions";
 
 class TraderDepositContainer extends PureComponent {
   componentWillMount() {
@@ -10,10 +12,16 @@ class TraderDepositContainer extends PureComponent {
   }
 
   render() {
-    const { isPending, traderDeposit, submitDeposit, closeModal } = this.props;
+    const {
+      isPending,
+      traderDeposit,
+      errorMessage,
+      submitDeposit,
+      closeModal
+    } = this.props;
 
     const handleDepositSubmit = ({ amount }, setSubmitting) => {
-      submitDeposit(amount, setSubmitting);
+      submitDeposit(this.props.traderId, amount, setSubmitting);
     };
 
     if (isPending || traderDeposit === undefined) {
@@ -25,31 +33,46 @@ class TraderDepositContainer extends PureComponent {
         traderDeposit={traderDeposit}
         onSubmit={handleDepositSubmit}
         closeModal={closeModal}
+        error={errorMessage}
       />
     );
   }
 }
 
 const mapStateToProps = state => {
-  const { isPending, errorMessage, data } = state.traderDepositData;
+  const {
+    isPending,
+    errorMessage: errorMessageRequest,
+    data
+  } = state.traderDepositData.requestData;
+  const {
+    errorMessage: errorMessageSubmit
+  } = state.traderDepositData.submitData;
 
+  const errorMessage = errorMessageRequest || errorMessageSubmit;
   let traderDeposit;
   if (data) {
     traderDeposit = data;
   }
-  if (errorMessage !== "") {
-    traderDeposit = {};
-  }
-  return { isPending, traderDeposit, errorMessage };
+  return {
+    isPending,
+    traderDeposit,
+    errorMessage
+  };
 };
 
 const mapDispatchToProps = dispatch => ({
   fetchDeposit: traderId => {
     dispatch(traderDepositActions.fetchTraderDeposit(traderId));
   },
-  submitDeposit: (traderId, amount, from, setSubmitting) => {
+  submitDeposit: (traderId, amount, setSubmitting) => {
     dispatch(traderDepositActions.submitTraderDeposit(traderId, amount))
-      .then(() => traderDepositActions.closeTraderDepositModal(from))
+      .then(() => dispatch(popupActions.closePopup()))
+      .then(() =>
+        dispatch(
+          alertMessageActions.success("Request to buy tokens sent successfully")
+        )
+      )
       .catch(() => {
         setSubmitting(false);
       });
