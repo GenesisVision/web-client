@@ -2,9 +2,9 @@ import moment from "moment";
 import React from "react";
 
 import Progress from "../../../shared/components/progress/progress";
+import TraderAvatar from "../../trader-avatar/trader-avatar";
 
 import "./ti-info.css";
-import avatarStub from "../../../shared/media/avatar.png";
 
 const TIInfo = ({ idx, trader }) => {
   const dateNow = moment(new Date());
@@ -20,12 +20,7 @@ const TIInfo = ({ idx, trader }) => {
     <div className="ti-info">
       <div className="ti-info__order">{idx}</div>
       <div className="ti-info__image">
-        <img
-          className="ti-image"
-          src={trader.logo || avatarStub}
-          alt="Trader Avatar"
-        />
-        <span className="ti-image__badge">{trader.level}</span>
+        <TraderAvatar imgUrl={trader.logo} level={trader.level} />
       </div>
       <div className="ti-info__name ti-name">
         <div className="ti-name__title">{trader.title}</div>
