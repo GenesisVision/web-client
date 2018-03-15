@@ -1,21 +1,11 @@
-import moment from "moment";
 import React from "react";
 
-import Progress from "../../../shared/components/progress/progress";
+import DaysLeftWidget from "../../days-left-widget/days-left-widget";
 import TraderAvatar from "../../trader-avatar/trader-avatar";
 
 import "./ti-info.css";
 
 const TIInfo = ({ idx, trader }) => {
-  const dateNow = moment(new Date());
-
-  const daysPassed = startOfPeriod => {
-    const startDate = moment(startOfPeriod);
-    return dateNow.diff(startDate, "days");
-  };
-  const daysLeft = (startOfPeriod, periodDuration) => {
-    return periodDuration - daysPassed(startOfPeriod);
-  };
   return (
     <div className="ti-info">
       <div className="ti-info__order">{idx}</div>
@@ -28,16 +18,11 @@ const TIInfo = ({ idx, trader }) => {
           Replace The Negatives In Your Life With Positives And Move Your Life
           Ahead
         </div>
-        <div className="ti-name__eop eop">
-          <div className="eop__text">
-            {daysLeft(trader.startOfPeriod, trader.periodDuration)} days left
-          </div>
-          <div className="eop__progress">
-            <Progress
-              value={daysPassed(trader.startOfPeriod)}
-              max={trader.periodDuration}
-            />
-          </div>
+        <div className="ti-name__eop">
+          <DaysLeftWidget
+            start={trader.startOfPeriod}
+            duration={trader.periodDuration}
+          />
         </div>
       </div>
     </div>

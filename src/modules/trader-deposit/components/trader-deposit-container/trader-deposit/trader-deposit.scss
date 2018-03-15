@@ -1,0 +1,27 @@
+.trader-deposit__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+.trader-deposit__cell {
+  flex: 1 1 32%;
+  max-width: 32%;
+  text-align: center;
+}
+
+.trader-deposit__trader {
+  display: flex;
+  align-items: center;
+}
+
+.trader-deposit__name {
+  font-size: 2rem;
+  margin: 0.5rem;
+}
+
+.trader-deposit__days-left {
+  max-width: 5rem;
+  margin: auto;
+}

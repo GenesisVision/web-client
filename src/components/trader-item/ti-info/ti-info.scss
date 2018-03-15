@@ -46,14 +46,5 @@
   display: flex;
   align-items: center;
   color: $text-sub-color;
-}
-
-.eop__text {
-  font-size: 0.9em;
-  flex: 1 1 50%;
-}
-
-.eop__progress {
-  flex: 1 1 50%;
-  margin-right: 4rem;
+  max-width: 12rem;
 }

@@ -1,5 +1,10 @@
 @import "styles/_colors.scss";
 
+.trader-avatar {
+  position: relative;
+  max-width: 100px;
+}
+
 .trader-avatar__image {
   max-width: 100px;
   max-height: 100px;

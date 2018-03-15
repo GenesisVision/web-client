@@ -25,11 +25,12 @@ class TraderListContainer extends Component {
   }
 
   render() {
-    const { isPending, traders, openInvestPopup } = this.props;
+    const { isPending, traders, isAuthenticated, openInvestPopup } = this.props;
     if (isPending || !traders) return null;
     return (
       <TraderList
         traders={traders.investmentPrograms}
+        isAuthenticated={isAuthenticated}
         openInvestPopup={openInvestPopup}
       />
     );
@@ -37,8 +38,9 @@ class TraderListContainer extends Component {
 }
 
 const mapStateToProps = state => {
+  const { isAuthenticated } = state.authData;
   const { isPending, data } = state.tradersData;
-  return { isPending, traders: data };
+  return { isPending, traders: data, isAuthenticated };
 };
 
 const mapDispatchToProps = dispatch => ({

@@ -6,7 +6,7 @@ import traderDepositActions from "../../actions/trader-deposit-actions";
 
 class TraderDepositContainer extends PureComponent {
   componentWillMount() {
-    this.props.fetchDeposit();
+    this.props.fetchDeposit(this.props.traderId);
   }
 
   render() {

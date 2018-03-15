@@ -7,13 +7,17 @@ import TIStatistic from "./ti-statistic/ti-statistic";
 
 import "./trader-item.css";
 
-const TraderItem = ({ idx, trader, openInvestPopup }) => {
+const TraderItem = ({ idx, trader, isAuthenticated, openInvestPopup }) => {
   return (
     <div className="trader-item">
       <TIInfo idx={idx} trader={trader} />
       <TIChart data={trader.chart} />
       <TIStatistic trader={trader} />
-      <TIButtons traderId={trader.id} openInvestPopup={openInvestPopup} />
+      <TIButtons
+        traderId={trader.id}
+        isAuthenticated={isAuthenticated}
+        openInvestPopup={openInvestPopup}
+      />
     </div>
   );
 };
