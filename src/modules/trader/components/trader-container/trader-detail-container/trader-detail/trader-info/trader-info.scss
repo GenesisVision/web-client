@@ -1,7 +1,8 @@
 .trader-info {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-evenly;
-  padding: 3rem;
+  align-items: center;
 }
 
 .trader-info__avatar {

@@ -1,7 +1,7 @@
 .trader-cards {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  margin: 2rem;
 }
 
 .trader-card {
@@ -9,6 +9,12 @@
   margin: 2rem;
   border-color: white;
   box-shadow: 0 70px 70px 0 rgba(194, 207, 212, 0.32);
+  &:first-of-type {
+    margin-left: 0;
+  }
+  &:last-of-type {
+    margin-right: 0;
+  }
 }
 
 .trader-card__body {

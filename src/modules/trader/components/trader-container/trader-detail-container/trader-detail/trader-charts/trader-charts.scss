@@ -1,0 +1,24 @@
+.trader-charts {
+  margin-top: 2rem;
+}
+
+.trader-charts__charts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  min-height: 400px;
+}
+
+.trader-chart__bar {
+  flex: 2;
+  max-width: 75%;
+}
+
+.trader-chart__pie {
+  flex: 1;
+}
+
+.trader-charts__header {
+  font-family: "NeuzeitGroBol";
+  font-size: 1.5rem;
+}

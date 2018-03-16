@@ -4,6 +4,8 @@ import React, { Component } from "react";
 import TraderDetailContainer from "./trader-detail-container/trader-detail-container";
 import TraderRequestListContainer from "./trader-request-list-container/trader-request-list-container";
 
+import "./trader-container.css";
+
 class TraderContainer extends Component {
   render() {
     const { traderId } = this.props.match.params;
