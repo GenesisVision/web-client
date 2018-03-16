@@ -10,3 +10,22 @@
   border-color: white;
   box-shadow: 0 70px 70px 0 rgba(194, 207, 212, 0.32);
 }
+
+.trader-card__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem;
+}
+
+.trader-card__image {
+  width: 100%;
+  min-height: 150px;
+  text-align: center;
+}
+.trader-card__value {
+  font-size: 4rem;
+}
+.trader-card__description {
+  line-height: 0;
+}

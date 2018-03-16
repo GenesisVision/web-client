@@ -15,6 +15,7 @@ const TraderItem = ({ idx, trader, isAuthenticated, openInvestPopup }) => {
       <TIStatistic trader={trader} />
       <TIButtons
         traderId={trader.id}
+        isInvestEnable={trader.isInvestEnable}
         isAuthenticated={isAuthenticated}
         openInvestPopup={openInvestPopup}
       />

@@ -5,7 +5,7 @@ import SwaggerInvestorApi from "../../../services/api-client/swagger-investor-ap
 import * as actionTypes from "./trader-actions.constants";
 
 const fetchTrader = traderId => {
-  const data = {};
+  let data = {};
   if (authService.getAuthArg()) {
     data.authorization = authService.getAuthArg();
   }

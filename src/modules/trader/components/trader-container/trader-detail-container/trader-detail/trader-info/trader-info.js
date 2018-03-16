@@ -18,6 +18,8 @@ const TraderInfo = ({ trader, isAuthenticated }) => {
         <div className="trader-info__buttons">
           <TraderButtons
             traderId={trader.id}
+            isInvestEnable={trader.isInvestEnable}
+            isWithdrawEnable={trader.isWithdrawEnable}
             openInvestPopup={() => () => {
               console.log(123);
             }}

@@ -1,8 +1,9 @@
-.ti-buttons {
+.trader-buttons {
   display: flex;
-  flex-direction: column;
 }
 
-.ti-button {
+.trader-button {
   margin: 1rem;
+  min-width: 8rem;
+  min-height: 2.7rem;
 }

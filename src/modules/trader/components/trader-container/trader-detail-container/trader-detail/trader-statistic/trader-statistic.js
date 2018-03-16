@@ -7,11 +7,7 @@ const TraderStatistic = ({ trader }) => {
   return (
     <div>
       <TSShortStatistic trader={trader} />
-      <TSCards
-        totalProfit={trader.profitTotal}
-        avgProfit={trader.profitAvg}
-        investors={trader.investorsCount}
-      />
+      <TSCards trader={trader} />
     </div>
   );
 };

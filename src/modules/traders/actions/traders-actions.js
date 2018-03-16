@@ -1,5 +1,6 @@
 import QueryString from "query-string";
 
+import authService from "../../../services/authService";
 import filesService from "../../../shared/services/file-service";
 import history from "../../../utils/history";
 import SwaggerInvestorApi from "../../../services/api-client/swagger-investor-api";
@@ -7,9 +8,13 @@ import SwaggerInvestorApi from "../../../services/api-client/swagger-investor-ap
 import * as actionTypes from "./traders-actions.constants";
 
 const fetchTraders = () => {
+  let data = {};
+  if (authService.getAuthArg()) {
+    data.authorization = authService.getAuthArg();
+  }
   return {
     type: actionTypes.TRADERS,
-    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramsPost().then(
+    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramsPost(data).then(
       response => {
         response.investmentPrograms.forEach(x => {
           x.logo = filesService.getFileUrl(x.logo);

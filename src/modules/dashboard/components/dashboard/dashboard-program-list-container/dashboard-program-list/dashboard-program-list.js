@@ -1,8 +1,6 @@
 import React from "react";
 
 import TraderItem from "../../../../../../components/trader-item/trader-item";
-import { Link } from "react-router-dom";
-import { TRADERS_ROUTE } from "../../../../../traders/traders.constants";
 
 const DashboardProgramList = ({ programs, openInvestPopup }) => {
   const renderPrograms = () => {
