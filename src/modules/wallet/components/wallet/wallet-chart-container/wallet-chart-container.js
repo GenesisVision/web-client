@@ -1,7 +1,8 @@
 import { connect } from "react-redux";
 import React, { PureComponent } from "react";
-import WalletChart from "./wallet-chart/wallet-chart";
+
 import walletActions from "../../../actions/wallet-actions";
+import WalletChart from "./wallet-chart/wallet-chart";
 
 class WalletChartContainer extends PureComponent {
   componentWillMount() {
@@ -22,9 +23,6 @@ const mapStateToProps = state => {
   let chart;
   if (data) {
     chart = data;
-  }
-  if (errorMessage !== "") {
-    chart = [];
   }
   return { isPending, chart, errorMessage };
 };
