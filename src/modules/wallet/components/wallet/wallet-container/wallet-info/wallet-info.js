@@ -7,7 +7,7 @@ const WalletInfo = ({ wallet }) => {
   return (
     <div className="wallet-info">
       <div className="wallet-info__amount">
-        {wallet.amount}
+        {+wallet.amount.toFixed(2)}
         <span className="wallet-info__currency">{wallet.currency}</span>
       </div>
       <WalletButtons />
