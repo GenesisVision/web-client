@@ -32,9 +32,9 @@ const Sidebar = () => {
         </NavLink>
       </div>
       <div className="nav-item sidebar__item">
-        <NavLink className="nav-link" title="Profile" to={PROFILE_ROUTE}>
+        {/* <NavLink className="nav-link" title="Profile" to={PROFILE_ROUTE}>
           <SettingsIcon />
-        </NavLink>
+        </NavLink> */}
       </div>
     </div>
   );
