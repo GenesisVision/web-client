@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import { withFormik, Field } from "formik";
-import classnames from "classnames";
 import React from "react";
 
 import FormError from "../../../../shared/components/form/form-error/form-error";
 import InputText from "../../../../shared/components/form/input-text/input-text";
 
+import "./login-form.css";
 import { REGISTER_ROUTE } from "../../../register/register.constants";
 import validationSchema from "./login-form.validators";
 
@@ -22,66 +22,48 @@ const LoginForm = ({
   error
 }) => {
   return (
-    <div className="container login">
-      <form onSubmit={handleSubmit} className="form-horizontal" noValidate>
-        <div className="row">
-          <div className="col-md-3" />
-          <div className="col-md-6">
-            <h2>Please Login</h2>
-            <hr />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-3" />
-          <div className="col-md-6">
-            <Field
-              type="email"
-              name="email"
-              placeholder="Email"
-              addon="fas fa-envelope"
-              component={InputText}
-            />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-3" />
-          <div className="col-md-6">
-            <Field
-              type="password"
-              name="password"
-              placeholder="Password"
-              addon="fas fa-lock"
-              component={InputText}
-            />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-3" />
-          <div className="col-md-6">
-            <FormError error={error} />
-          </div>
-        </div>
-        <div className="row form-group">
-          <div className="offset-md-3 col-md-6">
-            <button
-              type="submit"
-              className="btn btn-success"
-              disabled={isSubmitting}
-            >
-              <span
-                className={classnames({
-                  oi: true,
-                  "oi-account-login": !isSubmitting,
-                  "oi-aperture": isSubmitting
-                })}
-              />&nbsp;Login
-            </button>
-            &nbsp;
-            <Link to={REGISTER_ROUTE}>or register</Link>
-          </div>
-        </div>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit} noValidate>
+      <div className="login">
+        <div className="login__header">Login</div>
+
+        <Field
+          type="email"
+          name="email"
+          placeholder="Email"
+          addon="fas fa-envelope"
+          component={InputText}
+        />
+        <Field
+          type="password"
+          name="password"
+          placeholder="Password"
+          addon="fas fa-lock"
+          component={InputText}
+        />
+        <FormError error={error} />
+
+        <button
+          type="submit"
+          className="gv-btn gv-btn-primary"
+          disabled={isSubmitting}
+        >
+          Sign in
+        </button>
+        <div className="login__separator" />
+        <a
+          href={process.env.REACT_APP_MANAGER_PORTAL_URL}
+          className="login__btn gv-btn gv-btn-secondary"
+        >
+          Login as Manager
+        </a>
+        <Link
+          to={REGISTER_ROUTE}
+          className="login__btn gv-btn gv-btn-secondary"
+        >
+          Don’t jave an account? Sign Up!
+        </Link>
+      </div>
+    </form>
   );
 };
 

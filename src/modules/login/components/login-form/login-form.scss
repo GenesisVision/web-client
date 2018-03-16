@@ -1,0 +1,26 @@
+@import "styles/_colors.scss";
+.login {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  max-height: 50vh;
+  margin: auto;
+  margin-top: 5rem;
+}
+
+.login__header {
+  font-size: 1.5rem;
+  font-family: "NeuzeitGroBol";
+  align-self: center;
+  margin: 2rem;
+}
+
+.login__btn {
+  margin-top: 0.5rem;
+  min-height: 0.5rem;
+}
+
+.login__separator {
+  border-top: 1px dashed $border-color;
+  margin: 2rem 0;
+}

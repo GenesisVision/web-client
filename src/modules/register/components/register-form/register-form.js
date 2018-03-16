@@ -2,77 +2,54 @@ import { Link } from "react-router-dom";
 import { withFormik, Field } from "formik";
 import React from "react";
 
+import FormError from "../../../../shared/components/form/form-error/form-error";
 import InputText from "../../../../shared/components/form/input-text/input-text";
 
+import "./register-form.css";
 import { LOGIN_ROUTE } from "../../../login/login.constants";
 import validationSchema from "./register-form.validators";
 
 const RegisterForm = ({ isSubmitting, handleSubmit, error }) => {
   return (
-    <div className="container login">
-      <form onSubmit={handleSubmit} className="form-horizontal" noValidate>
-        <div className="row">
-          <div className="col-md-3" />
-          <div className="col-md-6">
-            <h2>Sign Up</h2>
-            <hr />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-3" />
-          <div className="col-md-6">
-            <Field
-              type="email"
-              name="email"
-              placeholder="Email"
-              addon="fas fa-envelope"
-              component={InputText}
-            />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-3" />
-          <div className="col-md-6">
-            <Field
-              type="password"
-              name="password"
-              placeholder="Password"
-              addon="fas fa-lock"
-              component={InputText}
-            />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-3" />
-          <div className="col-md-6">
-            <Field
-              type="password"
-              name="confirmPassword"
-              placeholder="Confirm Password"
-              addon="fas fa-lock"
-              component={InputText}
-            />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-3" />
-          <div className="col-md-6">
-            <span className="text-danger">
-              {error && <strong>{error}</strong>}
-            </span>
-          </div>
-        </div>
-        <div className="row form-group">
-          <div className="offset-md-3 col-md-6">
-            <button type="submit" className="btn btn-success">
-              <span className="oi oi-account-login" /> Sing Up
-            </button>
-            &nbsp;
-            <Link to={LOGIN_ROUTE}>or login</Link>
-          </div>
-        </div>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit} noValidate>
+      <div className="register">
+        <div className="register__header">Sign Up</div>
+
+        <Field
+          type="email"
+          name="email"
+          placeholder="Email"
+          addon="fas fa-envelope"
+          component={InputText}
+        />
+
+        <Field
+          type="password"
+          name="password"
+          placeholder="Password"
+          addon="fas fa-lock"
+          component={InputText}
+        />
+
+        <Field
+          type="password"
+          name="confirmPassword"
+          placeholder="Confirm Password"
+          addon="fas fa-lock"
+          component={InputText}
+        />
+        <FormError error={error} />
+
+        <button type="submit" className="gv-btn gv-btn-primary">
+          Sign Up
+        </button>
+        <div className="register__separator" />
+
+        <Link to={LOGIN_ROUTE} className="login__btn gv-btn gv-btn-secondary">
+          Already have an account? Sing In!
+        </Link>
+      </div>
+    </form>
   );
 };
 
