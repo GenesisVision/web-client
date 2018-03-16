@@ -1,0 +1,17 @@
+@import "styles/_colors.scss";
+.dashboard-statistic {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  background: white;
+}
+
+.dashboard-statistic__cell {
+  flex: 1 1 15rem;
+  max-width: 15rem;
+  padding: 1rem;
+  border-left: 2px dashed $border-color;
+  &:last-of-type {
+    border-right: 2px dashed $border-color;
+  }
+}

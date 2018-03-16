@@ -3,11 +3,11 @@ import React from "react";
 
 import "./sidebar.css";
 import { DASHBOARD_ROUTE } from "../../modules/dashboard/dashboard.constants";
-import { PROFILE_ROUTE } from "../../modules/profile/profile.constants";
+//import { PROFILE_ROUTE } from "../../modules/profile/profile.constants";
 import { WALLET_ROUTE } from "../../modules/wallet/wallet.constants";
 import {
   DashboardIcon,
-  SettingsIcon,
+  //SettingsIcon,
   WalletIcon,
   TradersIcon
 } from "./media/icons.js";

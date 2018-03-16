@@ -14,8 +14,7 @@ class DashboardChartContainer extends PureComponent {
       return null;
     }
 
-    const data = chart.chart.map(x => ({ x: x }));
-    return <DashboardChart data={data} />;
+    return <DashboardChart data={chart.chart} />;
   }
 }
 const mapStateToProps = state => {

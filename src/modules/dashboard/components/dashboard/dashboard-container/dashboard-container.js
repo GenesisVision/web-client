@@ -3,11 +3,12 @@ import React, { PureComponent } from "react";
 
 import dashboardActions from "../../../actions/dashboard-actions";
 import DashboardProgramList from "./dashboard-program-list/dashboard-program-list";
+import DashboardStatistic from "./dashboard-statistic/dashboard-statistic";
 import popupActions from "../../../../popup/actions/popup-actions";
 
 import { TRADER_DEPOSIT_POPUP } from "../../../../popup/actions/popup-actions.constants";
 
-class DashboardProgramListContainer extends PureComponent {
+class DashboardContainer extends PureComponent {
   componentWillMount() {
     this.props.fetchDashboardPrograms();
   }
@@ -18,10 +19,16 @@ class DashboardProgramListContainer extends PureComponent {
     }
 
     return (
-      <DashboardProgramList
-        programs={dashboard}
-        openInvestPopup={openInvestPopup}
-      />
+      <div>
+        <DashboardStatistic
+          profitFromPrograms={dashboard.profitFromPrograms}
+          investedAmount={dashboard.investedAmount}
+        />
+        <DashboardProgramList
+          programs={dashboard.investmentPrograms}
+          openInvestPopup={openInvestPopup}
+        />
+      </div>
     );
   }
 }
@@ -31,7 +38,7 @@ const mapStateToProps = state => {
 
   let dashboard;
   if (data) {
-    dashboard = data.investmentPrograms;
+    dashboard = data;
   }
   if (errorMessage !== "") {
     dashboard = [];
@@ -48,6 +55,4 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  DashboardProgramListContainer
-);
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardContainer);
