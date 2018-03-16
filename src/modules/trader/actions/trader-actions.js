@@ -11,7 +11,7 @@ const fetchTrader = traderId => {
   }
 
   return {
-    type: actionTypes.TRADER,
+    type: actionTypes.TRADER_DETAIL,
     payload: SwaggerInvestorApi.apiInvestorInvestmentProgramGet(
       traderId,
       data

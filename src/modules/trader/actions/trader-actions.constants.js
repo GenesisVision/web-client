@@ -1,2 +1,2 @@
-export const TRADER = "TRADER";
+export const TRADER_DETAIL = "TRADER_DETAIL";
 export const TRADER_REQUESTS = "TRADER_REQUESTS";

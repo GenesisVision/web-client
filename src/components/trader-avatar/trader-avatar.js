@@ -1,14 +1,14 @@
 import React from "react";
 
 import "./trader-avatar.css";
-import avatarStub from "../../shared/media/avatar.png";
+import managerAvatar from "../../shared/media/investor-avatar.png";
 
 const TraderAvatar = ({ imgUrl, level }) => {
   return (
     <div className="trader-avatar">
       <img
         className="trader-avatar__image"
-        src={imgUrl || avatarStub}
+        src={imgUrl || managerAvatar}
         alt="Trader Avatar"
       />
       <span className="trader-avatar__level">{level}</span>

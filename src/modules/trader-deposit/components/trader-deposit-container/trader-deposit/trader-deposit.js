@@ -48,13 +48,11 @@ const TraderDepositModal = ({
             </div>
           </div>
           <div className="trader-deposit__info-cell">
-            <div className="quantitative-characteristic">
-              <div className="quantitative-characteristic__value">
+            <div className="metric">
+              <div className="metric__value">
                 {traderDeposit.gvtWalletAmount}
               </div>
-              <div className="quantitative-characteristic__description">
-                Avaialble GVT
-              </div>
+              <div className="metric__description">Avaialble GVT</div>
             </div>
           </div>
         </div>
@@ -72,13 +70,11 @@ const TraderDepositModal = ({
             <div className="input-gvt__description">Enter GVT amount</div>
           </div>
           <div className="trader-deposit__calculator-cell calculated-usd">
-            <div className="quantitative-characteristic">
-              <div className="quantitative-characteristic__value label-usd__value">
+            <div className="metric">
+              <div className="metric__value label-usd__value">
                 {calculateUsd()}
               </div>
-              <div className="quantitative-characteristic__description">
-                Amount in USD
-              </div>
+              <div className="metric__description">Amount in USD</div>
             </div>
           </div>
         </div>

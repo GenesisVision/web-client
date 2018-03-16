@@ -1,0 +1,12 @@
+.trader-cards {
+  display: flex;
+  justify-content: center;
+  margin: 2rem;
+}
+
+.trader-card {
+  flex: 1;
+  margin: 2rem;
+  border-color: white;
+  box-shadow: 0 70px 70px 0 rgba(194, 207, 212, 0.32);
+}

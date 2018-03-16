@@ -1,16 +1,16 @@
-.quantitative-characteristic {
+.metric {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.quantitative-characteristic__value {
+.metric__value {
   font-size: 1.7rem;
   font-family: "NeuzeitGroLig";
 }
 
-.quantitative-characteristic__description {
+.metric__description {
   color: $text-sub-color;
   font-size: 0.9rem;
   line-height: 0.5;

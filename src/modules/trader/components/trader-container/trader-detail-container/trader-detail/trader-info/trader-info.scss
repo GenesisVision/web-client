@@ -1,0 +1,22 @@
+.trader-info {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 3rem;
+}
+
+.trader-info__avatar {
+  flex: 1;
+}
+
+.trader-info__name {
+  flex: 5;
+}
+
+.trader-info__buttons {
+  flex: 1;
+}
+
+.trader-info__title {
+  font-family: "NeuzeitGroBol";
+  font-size: 3rem;
+}
