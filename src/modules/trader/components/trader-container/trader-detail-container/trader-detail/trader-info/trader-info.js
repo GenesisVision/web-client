@@ -2,7 +2,7 @@ import React from "react";
 
 import "./trader-info.css";
 import TraderAvatar from "../../../../../../../components/trader-avatar/trader-avatar";
-import TraderButtons from "../trader-buttons/trader-buttons";
+import TraderButtons from "./trader-buttons/trader-buttons";
 
 const TraderInfo = ({ trader, isAuthenticated, openInvestPopup }) => {
   return (
