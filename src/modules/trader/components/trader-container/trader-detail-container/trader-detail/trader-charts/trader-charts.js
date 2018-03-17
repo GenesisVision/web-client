@@ -26,7 +26,7 @@ const TraderCharts = ({ chart, profitDiagram }) => {
   ];
   return (
     <div className="trader-charts">
-      <div className="trader-charts__header">Last Periods</div>
+      <div className="trader-container__header">Last Periods</div>
       <div className="trader-charts__charts">
         <div className="trader-chart__bar">
           <TraderChartBar data={chart} />

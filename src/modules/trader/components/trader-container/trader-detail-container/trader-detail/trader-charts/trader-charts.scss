@@ -6,19 +6,15 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  min-height: 400px;
+  min-height: 430px;
+  padding: 2rem;
 }
 
 .trader-chart__bar {
   flex: 2;
-  max-width: 75%;
+  max-width: 60%;
 }
 
 .trader-chart__pie {
   flex: 1;
-}
-
-.trader-charts__header {
-  font-family: "NeuzeitGroBol";
-  font-size: 1.5rem;
 }

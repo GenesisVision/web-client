@@ -1,0 +1,11 @@
+.trader-history-card {
+  border-color: white;
+  box-shadow: 0 70px 70px 0 rgba(194, 207, 212, 0.32);
+}
+
+.trader-history-card__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem;
+}

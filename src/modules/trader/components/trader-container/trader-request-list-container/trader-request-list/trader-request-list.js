@@ -2,6 +2,8 @@ import React from "react";
 
 import TraderRequest from "./trader-request/trader-request";
 
+import "./trader-request-list.css";
+
 const TraderRequestList = ({ requests, cancelRequest }) => {
   const renderRequestList = () => {
     if (requests.length === 0) {
@@ -13,8 +15,8 @@ const TraderRequestList = ({ requests, cancelRequest }) => {
     ));
   };
   return (
-    <div>
-      <h2>Deal List</h2>
+    <div className="trader-request-list">
+      <div className="trader-container__header">Deals List</div>
       {renderRequestList()}
     </div>
   );
