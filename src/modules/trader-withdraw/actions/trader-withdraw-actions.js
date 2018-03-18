@@ -1,10 +1,9 @@
 import authService from "../../../services/authService";
-import history from "../../../utils/history";
 import SwaggerInvestorApi from "../../../services/api-client/swagger-investor-api";
 
 import * as actionTypes from "./trader-withdraw-actions.constants";
 
-const fetchTraderWithdraw = traderId => {
+/*const fetchTraderWithdraw = traderId => {
   return {
     type: actionTypes.TRADER_WITHDRAW,
     payload: Promise.resolve({
@@ -14,7 +13,7 @@ const fetchTraderWithdraw = traderId => {
       available: 100
     })
   };
-};
+};*/
 
 const submitTraderWithdraw = (traderId, amount) => {
   const model = {
@@ -30,13 +29,8 @@ const submitTraderWithdraw = (traderId, amount) => {
   };
 };
 
-const closeTraderWithdrawModal = from => {
-  history.push(from);
-};
-
 const traderWithdrawActions = {
-  fetchTraderWithdraw,
-  closeTraderWithdrawModal,
+  /*fetchTraderWithdraw,*/
   submitTraderWithdraw
 };
 export default traderWithdrawActions;

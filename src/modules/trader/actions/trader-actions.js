@@ -53,7 +53,7 @@ const fetchTraderHistory = traderId => {
 
 const cancelTraderRequest = requestId => {
   return {
-    type: actionTypes.TRADER_REQUESTS,
+    type: actionTypes.TRADER_CANCEL_REQUEST,
     payload: SwaggerInvestorApi.apiInvestorInvestmentProgramsCancelInvestmentRequestPost(
       requestId,
       authService.getAuthArg()

@@ -9,9 +9,10 @@ import {
 } from "../../actions/popup-actions.constants";
 
 import TraderDepositContainer from "../../../trader-deposit/components/trader-deposit-container/trader-deposit-container";
+import traderWithdrawContainer from "../../../trader-withdraw/components/trader-withdraw-container/trader-withdraw-container";
 const POPUP_COMPONENTS = {
   [TRADER_DEPOSIT_POPUP]: TraderDepositContainer,
-  [TRADER_WITHDRAW_POPUP]: ""
+  [TRADER_WITHDRAW_POPUP]: traderWithdrawContainer
 };
 
 const Popup = ({ isOpen, type, onClosePopup, popupProps }) => {

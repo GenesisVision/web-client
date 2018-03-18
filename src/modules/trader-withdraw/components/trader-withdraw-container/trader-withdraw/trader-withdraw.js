@@ -9,78 +9,83 @@ import PopupButtons from "../../../../popup/components/popup-buttons/popup-butto
 import PopupHeader from "../../../../popup/components/popup-header/popup-header";
 import TraderAvatar from "../../../../../components/trader-avatar/trader-avatar";
 
-import "./trader-deposit.css";
+import "./trader-withdraw.css";
 
-const TraderDeposit = ({
+const TraderWithdraw = ({
   values,
-  traderDeposit,
-  isSubmitting,
+  traderWithdraw,
   handleSubmit,
   closeModal,
-  error
+  error,
+  isSubmitting,
+  setFieldValue
 }) => {
-  const calculateUsd = () => {
-    return (values.amount * traderDeposit.gvtUsdRate).toFixed(2);
+  const handleWithdrawAll = () => {
+    setFieldValue("amount", traderWithdraw.investedTokens);
   };
   return (
     <div className="popup">
-      <PopupHeader header="Buy Tokens" onClose={closeModal} />
+      <PopupHeader header="Sell Tokens" onClose={closeModal} />
       <form onSubmit={handleSubmit}>
-        <div className="trader-deposit__info">
-          <div className="trader-deposit__info-cell">
-            <div className="trader-deposit__trader">
-              <div className="trader-deposit__avatar">
+        <div className="trader-withdraw__info">
+          <div className="trader-withdraw__info-cell">
+            <div className="trader-withdraw__trader">
+              <div className="trader-withdraw__avatar">
                 <TraderAvatar
-                  imgUrl={traderDeposit.logo}
-                  level={traderDeposit.level}
+                  imgUrl={traderWithdraw.logo}
+                  level={traderWithdraw.level}
                 />
               </div>
-              <div className="trader-deposit__name">{traderDeposit.title}</div>
+              <div className="trader-withdraw__name">
+                {traderWithdraw.title}
+              </div>
             </div>
           </div>
-          <div className="trader-deposit__info-cell">
-            <div className="trader-deposit__days-left">
+          <div className="trader-withdraw__info-cell">
+            <div className="trader-withdraw__days-left">
               <DaysLeftWidget
-                start={traderDeposit.startOfPeriod}
-                duration={traderDeposit.periodDuration}
+                start={traderWithdraw.startOfPeriod}
+                duration={traderWithdraw.periodDuration}
               />
             </div>
           </div>
-          <div className="trader-deposit__info-cell">
+          <div className="trader-withdraw__info-cell">
             <div className="metric">
               <div className="metric__value">
-                {+traderDeposit.gvtWalletAmount.toFixed(2)}
+                {+traderWithdraw.investedTokens.toFixed(2)}
               </div>
-              <div className="metric__description">Avaialble GVT</div>
+              <div className="metric__description">
+                Invested {traderWithdraw.currency}
+              </div>
             </div>
           </div>
         </div>
-        <div className="trader-deposit__calculator">
-          <div className="trader-deposit__calculator-cell input-gvt">
-            <div className="input-gvt__value">
+        <div className="trader-withdraw__calculator">
+          <div>How much would you like to withdraw?</div>
+          <div className="trader-withdraw__calculator-cell input-token">
+            <div className="input-gvt__token">
               <Field
                 name="amount"
                 type="number"
                 placeholder=""
-                controllClass="input-gvt__amount"
+                controllClass="input-token__amount"
                 component={InputText}
               />
             </div>
-            <div className="input-gvt__description">Enter GVT amount</div>
-          </div>
-          <div className="trader-deposit__calculator-cell calculated-usd">
-            <div className="metric">
-              <div className="metric__value label-usd__value">
-                {calculateUsd()}
-              </div>
-              <div className="metric__description">Amount in USD</div>
+            <div className="input-token__description">
+              Enter {traderWithdraw.currency} amount
             </div>
+          </div>
+          <div>
+            <span className="link" onClick={handleWithdrawAll}>
+              Withdraw all invested tokens
+            </span>
           </div>
         </div>
 
         <FormError error={error} />
         <PopupButtons
-          submitLabel="Buy Tokens"
+          submitLabel="Sell Tokens"
           isSubmitting={isSubmitting}
           onSubmit={handleSubmit}
           onCancel={closeModal}
@@ -91,7 +96,7 @@ const TraderDeposit = ({
 };
 
 export default withFormik({
-  displayName: "traderDepositForm",
+  displayName: "traderWithdrawForm",
   mapPropsToValues: () => ({
     amount: 0
   }),
@@ -104,4 +109,4 @@ export default withFormik({
   handleSubmit: (values, { props, setSubmitting }) => {
     props.onSubmit(values, setSubmitting);
   }
-})(TraderDeposit);
+})(TraderWithdraw);

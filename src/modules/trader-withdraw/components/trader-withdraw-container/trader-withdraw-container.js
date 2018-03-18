@@ -1,68 +1,44 @@
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
-import React from "react";
+import React, { PureComponent } from "react";
 
+import { alertMessageActions } from "../../../../shared/modules/alert-message/actions/alert-message-actions";
+import popupActions from "../../../popup/actions/popup-actions";
+import TraderWithdraw from "./trader-withdraw/trader-withdraw";
 import traderWithdrawActions from "../../actions/trader-withdraw-actions";
-import TraderWithdrawModal from "./trader-withdraw-modal/trader-withdraw-modal";
 
-import { HOME_ROUTE } from "../../../../components/app.constants";
+class TraderWithdrawContainer extends PureComponent {
+  render() {
+    const {
+      traderWithdraw,
+      errorMessage,
+      submitWithdraw,
+      closeModal
+    } = this.props;
 
-const TraderWithdrawContainer = ({
-  location,
-  match,
-  isPending,
-  traderWithdraw,
-  errorMessage,
-  fetchWithdraw,
-  submitWithdraw,
-  closeModal
-}) => {
-  if (isPending) {
-    return null;
+    if (traderWithdraw === undefined) {
+      return null;
+    }
+
+    const handleWithdrawSubmit = ({ amount }, setSubmitting) => {
+      submitWithdraw(traderWithdraw.id, amount, setSubmitting);
+    };
+
+    return (
+      <TraderWithdraw
+        traderWithdraw={traderWithdraw}
+        error={errorMessage}
+        onSubmit={handleWithdrawSubmit}
+        closeModal={closeModal}
+      />
+    );
   }
-  if (traderWithdraw === undefined) {
-    fetchWithdraw();
-    return null;
-  }
-  const { traderId } = match.params;
-  const { from } = location.state || { from: { pathname: HOME_ROUTE } };
-  const handleCloseModal = () => {
-    closeModal(from);
-  };
-  const handleWithdrawSubmit = ({ amount }, setSubmitting) => {
-    submitWithdraw(traderId, amount, from, setSubmitting);
-  };
-
-  return (
-    <TraderWithdrawModal
-      isOpen={true}
-      traderWithdraw={traderWithdraw}
-      error={errorMessage}
-      onSubmit={handleWithdrawSubmit}
-      closeModal={handleCloseModal}
-    />
-  );
-};
+}
 
 const mapStateToProps = state => {
-  const {
-    isPending,
-    errorMessage,
-    data
-  } = state.traderWithdrawData.traderWithdraw;
-  const errorMessageSubmit =
-    state.traderWithdrawData.traderWithdrawSubmit.errorMessage;
-  let traderWithdraw;
-  if (data) {
-    traderWithdraw = data;
-  }
-  if (errorMessage !== "") {
-    traderWithdraw = {};
-  }
+  const { errorMessage } = state.traderWithdrawData.submitData;
+
   return {
-    isPending,
-    traderWithdraw,
-    errorMessage: errorMessage || errorMessageSubmit
+    errorMessage
   };
 };
 
@@ -70,18 +46,22 @@ const mapDispatchToProps = dispatch => ({
   fetchWithdraw: traderId => {
     dispatch(traderWithdrawActions.fetchTraderWithdraw(traderId));
   },
-  submitWithdraw: (traderId, amount, from, setSubmitting) => {
+  submitWithdraw: (traderId, amount, setSubmitting) => {
     dispatch(traderWithdrawActions.submitTraderWithdraw(traderId, amount))
-      .then(() => traderWithdrawActions.closeTraderWithdrawModal(from))
+      .then(() => dispatch(popupActions.closePopup()))
+      .then(() =>
+        dispatch(
+          alertMessageActions.success(
+            "Request to sell tokens sent successfully"
+          )
+        )
+      )
       .catch(() => {
         setSubmitting(false);
       });
-  },
-  closeModal: from => {
-    traderWithdrawActions.closeTraderWithdrawModal(from);
   }
 });
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(TraderWithdrawContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(
+  TraderWithdrawContainer
 );

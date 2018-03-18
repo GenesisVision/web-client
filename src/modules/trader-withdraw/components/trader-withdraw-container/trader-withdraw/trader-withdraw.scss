@@ -1,29 +1,29 @@
 @import "styles/_colors.scss";
 
-.trader-deposit__info {
+.trader-withdraw__info {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 2rem 0;
 }
 
-.trader-deposit__info-cell {
+.trader-withdraw__info-cell {
   flex: 1 1 32%;
   max-width: 32%;
   text-align: center;
 }
 
-.trader-deposit__trader {
+.trader-withdraw__trader {
   display: flex;
   align-items: center;
 }
 
-.trader-deposit__name {
+.trader-withdraw__name {
   font-size: 1.3rem;
   margin: 0.5rem;
 }
 
-.trader-deposit__days-left {
+.trader-withdraw__days-left {
   max-width: 5rem;
   margin: auto;
   .days-left-widget {
@@ -31,28 +31,32 @@
   }
 }
 
-.trader-deposit__calculator {
+.trader-withdraw__calculator {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   margin: 2rem 0;
 }
 
-.trader-deposit__calculator-cell {
+.trader-withdraw__calculator-cell {
   flex: 1 1 30%;
   max-width: 30%;
   text-align: center;
   border: 1px solid $border-color;
   padding: 1rem;
+  margin: 1rem;
 }
 
-.input-gvt {
+.input-token {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-width: 15rem;
 }
 
-.input-gvt__amount {
+.input-token__amount {
   color: $text-sub-color;
   border: 0;
   max-width: 10rem;
@@ -62,18 +66,8 @@
   height: 2rem;
 }
 
-.input-gvt__description {
+.input-token__description {
   color: $text-sub-color;
   font-size: 0.9rem;
   line-height: 0.5;
-}
-
-.calculated-usd {
-  background-color: $background-color;
-}
-
-.label-usd__value {
-  max-width: 10rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }

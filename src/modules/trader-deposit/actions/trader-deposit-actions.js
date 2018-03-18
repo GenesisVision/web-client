@@ -21,8 +21,7 @@ const fetchTraderDeposit = traderId => {
 const submitTraderDeposit = (traderId, amount) => {
   const model = {
     investmentProgramId: traderId,
-    amount,
-    currency: "GVT"
+    amount
   };
   return {
     type: actionTypes.TRADER_DEPOSIT_SUBMIT,

@@ -14,6 +14,7 @@ class TraderDepositContainer extends PureComponent {
   render() {
     const {
       isPending,
+      traderId,
       traderDeposit,
       errorMessage,
       submitDeposit,
@@ -21,7 +22,7 @@ class TraderDepositContainer extends PureComponent {
     } = this.props;
 
     const handleDepositSubmit = ({ amount }, setSubmitting) => {
-      submitDeposit(this.props.traderId, amount, setSubmitting);
+      submitDeposit(traderId, amount, setSubmitting);
     };
 
     if (isPending || traderDeposit === undefined) {

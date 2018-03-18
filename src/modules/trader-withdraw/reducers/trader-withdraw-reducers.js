@@ -8,7 +8,7 @@ import {
 } from "../actions/trader-withdraw-actions.constants";
 
 const traderWithdrawReducer = combineReducers({
-  traderWithdraw: apiReducerFactory({ apiType: TRADER_WITHDRAW }),
-  traderWithdrawSubmit: apiReducerFactory({ apiType: TRADER_WITHDRAW_SUBMIT })
+  requestData: apiReducerFactory({ apiType: TRADER_WITHDRAW }),
+  submitData: apiReducerFactory({ apiType: TRADER_WITHDRAW_SUBMIT })
 });
 export default traderWithdrawReducer;

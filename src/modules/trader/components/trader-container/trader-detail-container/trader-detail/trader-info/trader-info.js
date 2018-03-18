@@ -4,7 +4,12 @@ import "./trader-info.css";
 import TraderAvatar from "../../../../../../../components/trader-avatar/trader-avatar";
 import TraderButtons from "./trader-buttons/trader-buttons";
 
-const TraderInfo = ({ trader, isAuthenticated, openInvestPopup }) => {
+const TraderInfo = ({
+  trader,
+  isAuthenticated,
+  openInvestPopup,
+  openWithdrawPopup
+}) => {
   return (
     <div className="trader-info">
       <div className="trader-info__avatar">
@@ -21,9 +26,7 @@ const TraderInfo = ({ trader, isAuthenticated, openInvestPopup }) => {
             isInvestEnable={trader.isInvestEnable}
             isWithdrawEnable={trader.isWithdrawEnable}
             openInvestPopup={openInvestPopup}
-            openWithdrawPopup={() => () => {
-              console.log(123);
-            }}
+            openWithdrawPopup={openWithdrawPopup}
           />
         </div>
       )}

@@ -1,10 +1,14 @@
 import { connect } from "react-redux";
 import React, { PureComponent } from "react";
 
-import TraderDetail from "./trader-detail/trader-detail";
-import traderActions from "../../../actions/trader-actions";
 import popupActions from "../../../../popup/actions/popup-actions";
-import { TRADER_DEPOSIT_POPUP } from "../../../../popup/actions/popup-actions.constants";
+import traderActions from "../../../actions/trader-actions";
+import TraderDetail from "./trader-detail/trader-detail";
+
+import {
+  TRADER_DEPOSIT_POPUP,
+  TRADER_WITHDRAW_POPUP
+} from "../../../../popup/actions/popup-actions.constants";
 
 class TraderDetailContainer extends PureComponent {
   componentWillMount() {
@@ -16,16 +20,36 @@ class TraderDetailContainer extends PureComponent {
       isAuthenticated,
       isPending,
       traderDetail,
-      openInvestPopup
+      openInvestPopup,
+      openWithdrawPopup
     } = this.props;
     if (isPending || traderDetail === undefined) {
       return <div>Loading statistic...</div>;
     }
+
+    const handleOpenWithdrawPopup = traderId => () => {
+      const traderWithdraw = {
+        id: traderId,
+        title: traderDetail.title,
+        logo: traderDetail.logo,
+        level: traderDetail.level,
+        startOfPeriod: traderDetail.startOfPeriod,
+        periodDuration: traderDetail.periodDuration,
+        investedTokens: traderDetail.investedTokens,
+        currency: traderDetail.currency
+      };
+      const popupProps = {
+        traderWithdraw
+      };
+      return openWithdrawPopup(popupProps);
+    };
+
     return (
       <TraderDetail
-        trader={traderDetail.investmentProgram}
+        trader={traderDetail}
         isAuthenticated={isAuthenticated}
         openInvestPopup={openInvestPopup}
+        openWithdrawPopup={handleOpenWithdrawPopup}
       />
     );
   }
@@ -36,7 +60,7 @@ const mapStateToProps = state => {
 
   let traderDetail;
   if (data) {
-    traderDetail = data;
+    traderDetail = data.investmentProgram;
   }
 
   return {
@@ -52,6 +76,9 @@ const mapDispatchToProps = dispatch => ({
   },
   openInvestPopup: traderId => () => {
     dispatch(popupActions.openPopup(TRADER_DEPOSIT_POPUP, { traderId }));
+  },
+  openWithdrawPopup: popupProps => {
+    dispatch(popupActions.openPopup(TRADER_WITHDRAW_POPUP, popupProps));
   }
 });
 
