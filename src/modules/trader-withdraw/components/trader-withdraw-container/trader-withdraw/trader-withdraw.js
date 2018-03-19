@@ -15,7 +15,7 @@ const TraderWithdraw = ({
   values,
   traderWithdraw,
   handleSubmit,
-  closeModal,
+  closePopup,
   error,
   isSubmitting,
   setFieldValue
@@ -25,7 +25,7 @@ const TraderWithdraw = ({
   };
   return (
     <div className="popup">
-      <PopupHeader header="Sell Tokens" onClose={closeModal} />
+      <PopupHeader header="Sell Tokens" onClose={closePopup} />
       <form onSubmit={handleSubmit}>
         <div className="trader-withdraw__info">
           <div className="trader-withdraw__info-cell">
@@ -88,7 +88,7 @@ const TraderWithdraw = ({
           submitLabel="Sell Tokens"
           isSubmitting={isSubmitting}
           onSubmit={handleSubmit}
-          onCancel={closeModal}
+          onCancel={closePopup}
         />
       </form>
     </div>
@@ -107,6 +107,6 @@ export default withFormik({
       .required("Amount is required.")
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
-    props.onSubmit(values, setSubmitting);
+    props.submitPopup(values, setSubmitting);
   }
 })(TraderWithdraw);

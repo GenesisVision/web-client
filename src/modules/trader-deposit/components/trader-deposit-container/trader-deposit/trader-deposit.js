@@ -16,7 +16,7 @@ const TraderDeposit = ({
   traderDeposit,
   isSubmitting,
   handleSubmit,
-  closeModal,
+  closePopup,
   error
 }) => {
   const calculateUsd = () => {
@@ -24,7 +24,7 @@ const TraderDeposit = ({
   };
   return (
     <div className="popup">
-      <PopupHeader header="Buy Tokens" onClose={closeModal} />
+      <PopupHeader header="Buy Tokens" onClose={closePopup} />
       <form onSubmit={handleSubmit}>
         <div className="trader-deposit__info">
           <div className="trader-deposit__info-cell">
@@ -83,7 +83,7 @@ const TraderDeposit = ({
           submitLabel="Buy Tokens"
           isSubmitting={isSubmitting}
           onSubmit={handleSubmit}
-          onCancel={closeModal}
+          onCancel={closePopup}
         />
       </form>
     </div>
@@ -102,6 +102,6 @@ export default withFormik({
       .required("Amount is required.")
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
-    props.onSubmit(values, setSubmitting);
+    props.submitPopup(values, setSubmitting);
   }
 })(TraderDeposit);

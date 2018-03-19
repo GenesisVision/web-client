@@ -1,10 +1,11 @@
 import * as actionTypes from "./popup-actions.constants";
 
-const openPopup = (popupType, popupProps) => dispatch => {
+const openPopup = (popupType, popupProps, onSubmitPopup) => dispatch => {
   dispatch({
     type: actionTypes.SHOW_POPUP,
     popupType,
-    popupProps
+    popupProps,
+    onSubmitPopup
   });
 };
 

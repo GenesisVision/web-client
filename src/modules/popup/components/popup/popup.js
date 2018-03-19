@@ -15,11 +15,15 @@ const POPUP_COMPONENTS = {
   [TRADER_WITHDRAW_POPUP]: traderWithdrawContainer
 };
 
-const Popup = ({ isOpen, type, onClosePopup, popupProps }) => {
+const Popup = ({ isOpen, type, onSubmitPopup, onClosePopup, popupProps }) => {
   const SpecificPopup = POPUP_COMPONENTS[type];
   return (
     <Modal isOpen={isOpen} toggle={onClosePopup} className="popup-dialog">
-      <SpecificPopup closeModal={onClosePopup} {...popupProps} />
+      <SpecificPopup
+        submitPopup={onSubmitPopup}
+        closePopup={onClosePopup}
+        {...popupProps}
+      />
     </Modal>
   );
 };

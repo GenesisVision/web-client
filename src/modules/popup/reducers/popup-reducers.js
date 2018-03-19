@@ -4,7 +4,8 @@ const initialState = {
   type: null,
   isOpen: false,
   popupType: null,
-  popupProps: {}
+  popupProps: {},
+  onSubmitPopup: () => Promise.resolve()
 };
 
 const popupReducer = (state = initialState, action) => {
@@ -13,7 +14,8 @@ const popupReducer = (state = initialState, action) => {
       return {
         isOpen: true,
         popupType: action.popupType,
-        popupProps: action.popupProps
+        popupProps: action.popupProps,
+        onSubmitPopup: action.onSubmitPopup || initialState.onSubmitPopup
       };
     case HIDE_POPUP:
       return initialState;

@@ -16,7 +16,7 @@ const TraderButtons = ({
         onClick={openWithdrawPopup(traderId)}
         disabled={!isWithdrawEnable}
       >
-        Sell Tokens
+        Withdraw
       </button>
       <button
         className="trader-button gv-btn gv-btn-primary"

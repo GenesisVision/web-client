@@ -47,11 +47,32 @@ const mapDispatchToProps = dispatch => ({
   fetchTradersIfNeeded: queryParams => {
     dispatch(tradersActions.fetchTradersIfNeeded(queryParams));
   },
-  openInvestPopup: traderId => () => {
-    dispatch(popupActions.openPopup(TRADER_DEPOSIT_POPUP, { traderId }));
-  }
+  dispatch
 });
 
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+  const { dispatch, ...otherDispathProps } = dispatchProps;
+  const closeInvestPopup = () => {
+    dispatch(tradersActions.fetchTradersIfNeeded({}));
+  };
+  return {
+    ...stateProps,
+    ...otherDispathProps,
+    ...ownProps,
+    openInvestPopup: traderId => () => {
+      dispatch(
+        popupActions.openPopup(
+          TRADER_DEPOSIT_POPUP,
+          {
+            traderId
+          },
+          closeInvestPopup
+        )
+      );
+    }
+  };
+};
+
 export default withQueryParams(
-  connect(mapStateToProps, mapDispatchToProps)(TraderListContainer)
+  connect(mapStateToProps, mapDispatchToProps, mergeProps)(TraderListContainer)
 );

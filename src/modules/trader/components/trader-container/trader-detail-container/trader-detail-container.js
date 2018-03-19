@@ -74,14 +74,48 @@ const mapDispatchToProps = dispatch => ({
   fetchTraderDetail: traderId => {
     dispatch(traderActions.fetchTrader(traderId));
   },
-  openInvestPopup: traderId => () => {
-    dispatch(popupActions.openPopup(TRADER_DEPOSIT_POPUP, { traderId }));
-  },
-  openWithdrawPopup: popupProps => {
-    dispatch(popupActions.openPopup(TRADER_WITHDRAW_POPUP, popupProps));
-  }
+  dispatch
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+  const { dispatch, ...otherDispathProps } = dispatchProps;
+  const submitPopup = traderId => () =>
+    traderActions.fetchTraderRequests(traderId);
+
+  // {
+  //   return Promise.all([
+  //     () => dispatch(traderActions.fetchTrader(traderId)),
+  //     () => dispatch(traderActions.fetchTraderRequests(traderId)),
+  //     () => dispatch(traderActions.fetchTraderHistory(traderId))
+  //   ]);
+  // };
+  return {
+    ...stateProps,
+    ...otherDispathProps,
+    ...ownProps,
+    openInvestPopup: traderId => () => {
+      dispatch(
+        popupActions.openPopup(
+          TRADER_DEPOSIT_POPUP,
+          {
+            traderId
+          },
+          submitPopup(traderId)
+        )
+      );
+    },
+    openWithdrawPopup: popupProps => {
+      dispatch(
+        popupActions.openPopup(
+          TRADER_WITHDRAW_POPUP,
+          popupProps,
+          submitPopup(popupProps.traderWithdraw.id)
+        )
+      );
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
   TraderDetailContainer
 );

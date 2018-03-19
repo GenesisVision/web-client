@@ -1,10 +1,9 @@
 import { connect } from "react-redux";
 import React, { PureComponent } from "react";
 
+import { alertMessageActions } from "../../../../shared/modules/alert-message/actions/alert-message-actions";
 import TraderDeposit from "./trader-deposit/trader-deposit";
 import traderDepositActions from "../../actions/trader-deposit-actions";
-import popupActions from "../../../popup/actions/popup-actions";
-import { alertMessageActions } from "../../../../shared/modules/alert-message/actions/alert-message-actions";
 
 class TraderDepositContainer extends PureComponent {
   componentWillMount() {
@@ -18,11 +17,11 @@ class TraderDepositContainer extends PureComponent {
       traderDeposit,
       errorMessage,
       submitDeposit,
-      closeModal
+      closePopup
     } = this.props;
 
     const handleDepositSubmit = ({ amount }, setSubmitting) => {
-      submitDeposit(traderId, amount, setSubmitting);
+      return submitDeposit(traderId, amount, setSubmitting);
     };
 
     if (isPending || traderDeposit === undefined) {
@@ -32,8 +31,8 @@ class TraderDepositContainer extends PureComponent {
     return (
       <TraderDeposit
         traderDeposit={traderDeposit}
-        onSubmit={handleDepositSubmit}
-        closeModal={closeModal}
+        submitPopup={handleDepositSubmit}
+        closePopup={closePopup}
         error={errorMessage}
       />
     );
@@ -66,20 +65,32 @@ const mapDispatchToProps = dispatch => ({
   fetchDeposit: traderId => {
     dispatch(traderDepositActions.fetchTraderDeposit(traderId));
   },
-  submitDeposit: (traderId, amount, setSubmitting) => {
-    dispatch(traderDepositActions.submitTraderDeposit(traderId, amount))
-      .then(() => dispatch(popupActions.closePopup()))
-      .then(() =>
-        dispatch(
-          alertMessageActions.success("Request to buy tokens sent successfully")
-        )
-      )
-      .catch(() => {
-        setSubmitting(false);
-      });
-  }
+  dispatch
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+  const { dispatch, ...otherDispathProps } = dispatchProps;
+  return {
+    ...stateProps,
+    ...otherDispathProps,
+    ...ownProps,
+    submitDeposit: (traderId, amount, setSubmitting) =>
+      dispatch(traderDepositActions.submitTraderDeposit(traderId, amount))
+        .then(() => ownProps.submitPopup())
+        .then(() => {
+          dispatch(
+            alertMessageActions.success(
+              "Request to buy tokens sent successfully"
+            )
+          );
+          return Promise.resolve();
+        })
+        .catch(() => {
+          setSubmitting(false);
+        })
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
   TraderDepositContainer
 );

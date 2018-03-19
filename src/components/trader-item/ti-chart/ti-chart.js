@@ -30,12 +30,14 @@ const TIChart = ({ data }) => {
             className="profit"
             dataKey="profit"
             stackId="stack"
+            fill="#15bbaf"
             isAnimationActive={false}
           />
           <Bar
             className="loss"
             dataKey="loss"
             stackId="stack"
+            fill="#28768d"
             isAnimationActive={false}
           />
           <Line

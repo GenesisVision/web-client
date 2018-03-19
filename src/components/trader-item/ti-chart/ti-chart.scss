@@ -10,21 +10,21 @@
 
 .fund {
   .recharts-rectangle {
-    fill: $alternate-color;
+    fill: white;
     stroke: $main-color;
   }
 }
 
 .profit {
   .recharts-rectangle {
-    fill: white;
+    fill: #15bbaf;
     stroke: $main-color;
   }
 }
 
 .loss {
   .recharts-rectangle {
-    fill: $main-color;
+    fill: #28768d;
     stroke: $main-color;
   }
 }
