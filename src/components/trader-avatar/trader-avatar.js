@@ -1,7 +1,7 @@
 import React from "react";
 
 import "./trader-avatar.css";
-import managerAvatar from "../../shared/media/investor-avatar.png";
+import managerAvatar from "../../shared/media/manager-avatar.png";
 
 const TraderAvatar = ({ imgUrl, level }) => {
   return (
