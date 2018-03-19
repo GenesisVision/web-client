@@ -1,6 +1,6 @@
 import React from "react";
 
-import TraderItem from "../../../../../../components/trader-item/trader-item";
+import DPTraderItem from "./dp-trader-item/dp-trader-item";
 
 const DashboardProgramList = ({ programs, openInvestPopup }) => {
   const renderPrograms = () => {
@@ -8,7 +8,7 @@ const DashboardProgramList = ({ programs, openInvestPopup }) => {
       return <div>There are no programs in which you have invested</div>;
     }
     return programs.map((x, idx) => (
-      <TraderItem
+      <DPTraderItem
         key={x.id}
         idx={idx + 1}
         trader={x}

@@ -1,4 +1,5 @@
 import authService from "../../../services/authService";
+import filesService from "../../../shared/services/file-service";
 import SwaggerInvestorApi from "../../../services/api-client/swagger-investor-api";
 
 import * as actionTypes from "./dashboard-actions.constants";
@@ -8,7 +9,13 @@ const fetchDashboardPrograms = () => {
     type: actionTypes.DASHBOARD_PROGRAMS,
     payload: SwaggerInvestorApi.apiInvestorDashboardGet(
       authService.getAuthArg()
-    )
+    ).then(response => {
+      response.investmentPrograms.forEach(x => {
+        x.logo = filesService.getFileUrl(x.logo);
+      });
+
+      return response;
+    })
   };
 };
 

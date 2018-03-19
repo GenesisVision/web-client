@@ -1,6 +1,6 @@
 import React from "react";
 
-import TraderItem from "../../../../../../components/trader-item/trader-item";
+import TraderItem from "./trader-item/trader-item";
 
 const TraderList = ({ traders, isAuthenticated, openInvestPopup }) => {
   const renderTraderList = () => {

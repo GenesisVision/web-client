@@ -1,8 +1,8 @@
 import React from "react";
 
-import TIButtons from "./ti-buttons/ti-buttons";
-import TIChart from "./ti-chart/ti-chart";
-import TIInfo from "./ti-info/ti-info";
+import TIButtons from "../../../../../../../components/trader-item/ti-buttons/ti-buttons";
+import TIChart from "../../../../../../../components/trader-item/ti-chart/ti-chart";
+import TIInfo from "../../../../../../../components/trader-item/ti-info/ti-info";
 import TIStatistic from "./ti-statistic/ti-statistic";
 
 import "./trader-item.css";
