@@ -25,7 +25,7 @@ const fetchTrader = traderId => {
 
 const fetchTraderRequests = traderId => {
   const data = {
-    filter: { investmentProgramId: traderId }
+    filter: { investmentProgramId: traderId, take: 10 }
   };
   return {
     type: actionTypes.TRADER_REQUESTS,
@@ -51,6 +51,19 @@ const fetchTraderHistory = traderId => {
   };
 };
 
+const fetchTraderDealList = traderId => {
+  const data = {
+    filter: { investmentProgramId: traderId, take: 10 }
+  };
+  return {
+    type: actionTypes.TRADER_DEALS,
+    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramTradesPost(
+      authService.getAuthArg(),
+      data
+    )
+  };
+};
+
 const cancelTraderRequest = requestId => {
   return {
     type: actionTypes.TRADER_CANCEL_REQUEST,
@@ -65,7 +78,8 @@ const traderActions = {
   fetchTrader,
   fetchTraderRequests,
   cancelTraderRequest,
-  fetchTraderHistory
+  fetchTraderHistory,
+  fetchTraderDealList
 };
 
 export default traderActions;

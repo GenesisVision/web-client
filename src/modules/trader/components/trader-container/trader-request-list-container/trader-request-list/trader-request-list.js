@@ -7,7 +7,7 @@ import "./trader-request-list.css";
 const TraderRequestList = ({ requests, cancelRequest }) => {
   const renderRequestList = () => {
     if (requests.length === 0) {
-      return <div>There are no deals.</div>;
+      return <div>There are no requests.</div>;
     }
 
     return requests.map(x => (
@@ -16,7 +16,7 @@ const TraderRequestList = ({ requests, cancelRequest }) => {
   };
   return (
     <div className="trader-request-list">
-      <div className="trader-container__header">Deals List</div>
+      <div className="trader-container__header">My Requests</div>
       {renderRequestList()}
     </div>
   );
