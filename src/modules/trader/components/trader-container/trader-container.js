@@ -14,11 +14,11 @@ class TraderContainer extends Component {
     const { isAuthenticated } = this.props;
     return (
       <div className="trader-container">
-        {/* <TraderDetailContainer
+        <TraderDetailContainer
           traderId={traderId}
           isAuthenticated={isAuthenticated}
         />
-        {isAuthenticated && <TraderHistoryContainer traderId={traderId} />} */}
+        {isAuthenticated && <TraderHistoryContainer traderId={traderId} />}
         {isAuthenticated && <TraderDealListContainer traderId={traderId} />}
         {isAuthenticated && <TraderRequestListContainer traderId={traderId} />}
       </div>
