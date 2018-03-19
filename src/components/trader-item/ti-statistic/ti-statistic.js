@@ -45,6 +45,7 @@ const TIStatistic = ({ trader }) => {
             value={trader.profitTotal}
             decimalScale={2}
             displayType="text"
+            prefix="$"
           />
         </div>
         <div className="tis-item__label">Total Profit</div>
