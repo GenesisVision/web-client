@@ -9,11 +9,6 @@ import SwaggerInvestorApi from "../../../services/api-client/swagger-investor-ap
 import { WALLET_ROUTE } from "../wallet.constants";
 import * as actionTypes from "./wallet-actions.constants";
 
-/*
-Promise.all([
-  Promise.resolve({ amount: 100, rate: 22 }),
-  Promise.resolve("0x0000000000000000000000000000000000000gv")
-]) */
 const fetchWallet = () => {
   return {
     type: actionTypes.WALLET,
@@ -53,7 +48,24 @@ const fetchWalletTransactions = () => (dispatch, getState) => {
     )
   }).then(response => {
     const totalPages = calculateTotalPages(response.value.total);
-    dispatch(updateWalletTransactionsPaging({ totalPages }));
+    const hidePaging = response.value.total === 0;
+
+    dispatch(updateWalletTransactionsPaging({ totalPages, hidePaging }));
+  });
+};
+
+const fetchWalletChart = () => (dispatch, getState) => {
+  const { filtering } = getState().walletData.transactions;
+  let filter = {};
+  if (filtering.type) {
+    filter.type = filtering.type;
+  }
+  dispatch({
+    type: actionTypes.WALLET_CHART,
+    payload: SwaggerInvestorApi.apiInvestorWalletStatisticPost(
+      authService.getAuthArg(),
+      { filter }
+    )
   });
 };
 
@@ -82,6 +94,7 @@ const updateFiltering = filter => dispatch => {
   dispatch(updateWalletTransactionsFiltering(filter));
   dispatch(updateWalletTransactionsPaging({ currentPage: 0 }));
   dispatch(fetchWalletTransactions());
+  dispatch(fetchWalletChart());
 };
 
 const updateWalletTransactionsFiltering = filter => {
@@ -96,15 +109,6 @@ const updateWalletTransactionsFiltering = filter => {
   return {
     type: actionTypes.WALLET_TRANSACTIONS_FILTERING,
     filtering
-  };
-};
-
-const fetchWalletChart = () => {
-  return {
-    type: actionTypes.WALLET_CHART,
-    payload: SwaggerInvestorApi.apiInvestorWalletStatisticPost(
-      authService.getAuthArg()
-    )
   };
 };
 

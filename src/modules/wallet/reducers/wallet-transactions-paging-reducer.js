@@ -3,7 +3,8 @@ import { WALLET_TRANSACTIONS_PAGING } from "../actions/wallet-actions.constants"
 const initialState = {
   currentPage: 0,
   itemsOnPage: 10,
-  totalPages: 1
+  totalPages: 1,
+  hidePaging: false
 };
 
 const walletTransactionsPagingReducer = (state = initialState, action) => {

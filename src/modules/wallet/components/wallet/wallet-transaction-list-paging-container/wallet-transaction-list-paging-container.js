@@ -19,6 +19,7 @@ class WalletTransactionListPagingContainer extends PureComponent {
 
   render() {
     const { paging } = this.props;
+    if (paging.hidePaging) return null;
 
     return (
       <Pager
