@@ -1,6 +1,5 @@
 import { connect } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
-import { withRouter } from "react-router-dom";
 import classnames from "classnames";
 import LoadingBar from "react-redux-loading-bar";
 import React from "react";
@@ -16,12 +15,12 @@ import { TRADERS_ROUTE } from "../../modules/traders/traders.constants";
 import { WALLET_FILTER_PANE } from "../../modules/wallet/actions/wallet-actions.constants";
 import { WALLET_ROUTE } from "../../modules/wallet/wallet.constants";
 import gvLogo from "./gv-logo.svg";
-import {TRADERS_FILTER_PANE} from "../../modules/traders/actions/traders-actions.constants";
+import { TRADERS_FILTER_PANE } from "../../modules/traders/actions/traders-actions.constants";
 
 const PAGES_WITH_FILTER = {
   [TRADERS_ROUTE]: {
-      actionType: TRADERS_FILTER_PANE,
-      getStateData: state => state.tradersData
+    actionType: TRADERS_FILTER_PANE,
+    getStateData: state => state.tradersData
   },
   [WALLET_ROUTE]: {
     actionType: WALLET_FILTER_PANE,
@@ -152,6 +151,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   };
 };
 
-export default
-  connect(mapStateToProps, mapDispatchToProps, mergeProps)(Header)
-;
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Header);

@@ -4,13 +4,13 @@ import React from "react";
 import GVSelect from "../../../../../../shared/components/form/gv-select/gv-select";
 
 import "./wallet-transaction-list-filter.css";
-const sortingOptions = [
-  { value: "Name", label: "Name" },
-  { value: "DaysLeft", label: "Days Left" }
-];
-const sortingDirectionOptions = [
-  { value: "Asc", label: "Ascending" },
-  { value: "Desc", label: "Descending" }
+const programOptions = programs =>
+  programs.map(x => ({ value: x.id, label: x.title }));
+
+const transactionTypeOptions = [
+  { value: "All", label: "All" },
+  { value: "Internal", label: "Internal" },
+  { value: "External", label: "External" }
 ];
 const WalletTransactionListFilter = ({
   programs,
@@ -22,17 +22,17 @@ const WalletTransactionListFilter = ({
   return (
     <form className="wallet-transaction-list-filter">
       <div className="filter-item">
-        <div className="filter-item__title">Sorting</div>
-        <div className="filter-item__description">Select column</div>
+        <div className="filter-item__title">Program</div>
+        <div className="filter-item__description">Select Program</div>
         <div className="filter-item__component">
           <Field
-            name="sorting"
-            value={values.sorting}
-            onChange={onChangeComplete("sorting")}
+            name="program"
+            value={values.program}
+            onChange={onChangeComplete("program")}
             setFieldValue={setFieldValue}
             onBlur={setFieldTouched}
             component={GVSelect}
-            options={sortingOptions}
+            options={programOptions(programs)}
           />
         </div>
       </div>
@@ -41,13 +41,13 @@ const WalletTransactionListFilter = ({
         <div className="filter-item__description">Select sorting direction</div>
         <div className="filter-item__component">
           <Field
-            name="sortingDirection"
-            value={values.sortingDirection}
-            onChange={onChangeComplete("sortingDirection")}
+            name="transactionType"
+            value={values.transactionType}
+            onChange={onChangeComplete("transactionType")}
             setFieldValue={setFieldValue}
             onBlur={setFieldTouched}
             component={GVSelect}
-            options={sortingDirectionOptions}
+            options={transactionTypeOptions}
           />
         </div>
       </div>
@@ -57,8 +57,8 @@ const WalletTransactionListFilter = ({
 
 export default withFormik({
   displayName: "walletTransactionListFilterForm",
-  mapPropsToValues: () => ({
-    sorting: "",
-    sortingDirection: ""
+  mapPropsToValues: props => ({
+    program: props.filtering.investmentProgramId,
+    transactionType: props.filtering.type
   })
 })(WalletTransactionListFilter);

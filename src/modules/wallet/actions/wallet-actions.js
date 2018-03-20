@@ -30,27 +30,30 @@ const fetchWalletAddress = () => {
   };
 };
 
-const fetchWalletTransactions = (filter, paging) => dispatch => {
+const fetchWalletTransactions = () => (dispatch, getState) => {
+  const { paging, filtering } = getState().walletData.transactions;
   const { skip, take } = calculateSkipAndTake(paging);
 
-  const data = {
-    filter: {
-      type: filter,
-      skip,
-      take
-    }
+  let filter = {
+    skip,
+    take
   };
+  if (filtering.investmentProgramId) {
+    filter.investmentProgramId = filtering.investmentProgramId;
+  }
+  if (filtering.type) {
+    filter.type = filtering.type;
+  }
 
   dispatch({
     type: actionTypes.WALLET_TRANSACTIONS,
     payload: SwaggerInvestorApi.apiInvestorWalletTransactionsPost(
       authService.getAuthArg(),
-      data
+      { filter }
     )
   }).then(response => {
     const totalPages = calculateTotalPages(response.value.total);
-    paging.totalPages = totalPages;
-    dispatch(updateWalletTransactionsPaging(paging));
+    dispatch(updateWalletTransactionsPaging({ totalPages }));
   });
 };
 
@@ -63,10 +66,36 @@ const fetchWalletTransactionProgramFilter = () => {
   };
 };
 
+const updatePaging = paging => dispatch => {
+  dispatch(updateWalletTransactionsPaging(paging));
+  dispatch(fetchWalletTransactions());
+};
+
 const updateWalletTransactionsPaging = paging => {
   return {
     type: actionTypes.WALLET_TRANSACTIONS_PAGING,
     paging
+  };
+};
+
+const updateFiltering = filter => dispatch => {
+  dispatch(updateWalletTransactionsFiltering(filter));
+  dispatch(updateWalletTransactionsPaging({ currentPage: 0 }));
+  dispatch(fetchWalletTransactions());
+};
+
+const updateWalletTransactionsFiltering = filter => {
+  let filtering = {};
+  if (filter.name === "program") {
+    filtering.investmentProgramId = filter.value;
+  }
+  if (filter.name === "transactionType") {
+    filtering.type = filter.value;
+  }
+
+  return {
+    type: actionTypes.WALLET_TRANSACTIONS_FILTERING,
+    filtering
   };
 };
 
@@ -104,6 +133,7 @@ const walletActions = {
   walletWithdraw,
   fetchWalletTransactionProgramFilter,
   openWallet,
-  updateWalletTransactionsPaging
+  updatePaging,
+  updateFiltering
 };
 export default walletActions;

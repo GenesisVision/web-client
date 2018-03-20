@@ -4,7 +4,8 @@ import apiReducerFactory from "../../../shared/reducers/api-reducer/api-reducer"
 import walletAddressReducer from "./wallet-address-reducer";
 import walletChartReducer from "./wallet-chart-reducer";
 import walletFilterPaneReducer from "./wallet-filter-pane-reducer";
-import walletTransactionProgramFilterReducer from "./wallet-transaction-filter-reducer";
+import walletTransactionProgramFilterRequestReducer from "./wallet-transaction-filter-reducer";
+import walletTransactionsFilteringReducer from "./wallet-transactions-filtering-reducer";
 import walletTransactionsPagingReducer from "./wallet-transactions-paging-reducer";
 import walletTransactionsReducer from "./wallet-transactions-reducer";
 import walletWithdrawReducer from "./wallet-withdraw-reducer";
@@ -18,11 +19,12 @@ const walletReducer = combineReducers({
   chart: walletChartReducer,
   transactions: combineReducers({
     items: walletTransactionsReducer,
-    paging: walletTransactionsPagingReducer
+    paging: walletTransactionsPagingReducer,
+    filtering: walletTransactionsFilteringReducer
   }),
   filtering: combineReducers({
     filterPane: walletFilterPaneReducer,
-    transactionPrograms: walletTransactionProgramFilterReducer
+    transactionPrograms: walletTransactionProgramFilterRequestReducer
   })
 });
 export default walletReducer;

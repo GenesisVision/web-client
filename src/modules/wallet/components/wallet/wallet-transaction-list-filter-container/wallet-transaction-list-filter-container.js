@@ -13,6 +13,7 @@ class TraderTransactionListFilterContainer extends PureComponent {
       errorMessage,
       isFilterOpen,
       programs,
+      filtering,
       handleFilterChange,
       fetchTransactionFilter
     } = this.props;
@@ -31,6 +32,7 @@ class TraderTransactionListFilterContainer extends PureComponent {
     return (
       <FilterPane isOpen={isFilterOpen}>
         <WalletTransactionListFilter
+          filtering={filtering}
           programs={programs.investmentPrograms}
           onChangeComplete={onFilterChange}
         />
@@ -40,25 +42,24 @@ class TraderTransactionListFilterContainer extends PureComponent {
   }
 }
 const mapStateToProps = state => {
-  const t = 1;
   const {
     isPending,
     errorMessage,
     data
   } = state.walletData.filtering.transactionPrograms;
   const { isFilterOpen } = state.walletData.filtering.filterPane;
+  const { filtering } = state.walletData.transactions;
   let programs;
   if (data) {
     programs = data;
   }
 
-  return { isPending, isFilterOpen, programs, errorMessage };
+  return { isPending, isFilterOpen, programs, filtering, errorMessage };
 };
 
 const mapDispatchToProps = dispatch => ({
   handleFilterChange: filter => {
-    //tradersActions.updateFilters(filter, location);
-    console.log(filter);
+    dispatch(walletActions.updateFiltering(filter));
   },
   fetchTransactionFilter: () => {
     dispatch(walletActions.fetchWalletTransactionProgramFilter());

@@ -8,7 +8,7 @@ class WalletTransactionListPagingContainer extends PureComponent {
   handlePageChanged = nextPage => {
     const paging = { ...this.props.paging };
     paging.currentPage = nextPage;
-    this.props.fetchTransactions(this.props.propsfiltering, paging);
+    this.props.updatePaging(paging);
   };
 
   componentWillUnmount() {
@@ -37,11 +37,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchTransactions: (filter, paging) => {
-    dispatch(walletActions.fetchWalletTransactions(filter, paging));
-  },
   updatePaging: paging => {
-    dispatch(walletActions.updateWalletTransactionsPaging(paging));
+    dispatch(walletActions.updatePaging(paging));
   }
 });
 
