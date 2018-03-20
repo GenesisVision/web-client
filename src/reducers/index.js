@@ -5,7 +5,6 @@ import { routerReducer } from "react-router-redux";
 import alertMessagesReducer from "../shared/modules/alert-message/reducers/alert-message-reducers";
 import authReducer from "./authReducer";
 import dashboardReducer from "../modules/dashboard/reducers/dashboard-reducers";
-import filterReducer from "../modules/filter-pane/reducers/filter-reducers";
 import loginReducer from "../modules/login/reducers/login-reducers";
 import popupReducer from "../modules/popup/reducers/popup-reducers";
 import profileReducer from "../modules/profile/reducers/profile-reducers";
@@ -32,6 +31,5 @@ export default combineReducers({
   dashboardData: dashboardReducer,
   traderDepositData: traderDepositReducer,
   traderWithdrawData: traderWithdrawReducer,
-  filterData: filterReducer,
   popupData: popupReducer
 });

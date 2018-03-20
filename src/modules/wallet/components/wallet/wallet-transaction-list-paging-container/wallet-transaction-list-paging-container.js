@@ -1,8 +1,9 @@
 import { connect } from "react-redux";
+import Pager from "react-pager";
 import React, { PureComponent } from "react";
 
 import walletActions from "../../../actions/wallet-actions";
-import Pager from "react-pager";
+
 class WalletTransactionListPagingContainer extends PureComponent {
   handlePageChanged = nextPage => {
     const paging = { ...this.props.paging };
@@ -32,7 +33,7 @@ class WalletTransactionListPagingContainer extends PureComponent {
 const mapStateToProps = state => {
   const paging = state.walletData.transactions.paging;
   const filtering = state.walletData.filter;
-  return { paging };
+  return { paging, filtering };
 };
 
 const mapDispatchToProps = dispatch => ({

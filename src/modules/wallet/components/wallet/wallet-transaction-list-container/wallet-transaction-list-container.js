@@ -3,7 +3,7 @@ import React, { Component } from "react";
 
 import walletActions from "../../../actions/wallet-actions";
 import WalletTransactionList from "./wallet-transaction-list/wallet-transaction-list";
-import Pager from "react-pager";
+
 class WalletTransactionListContainer extends Component {
   getFilter = props => (props.queryParams ? props.queryParams.filter : "All");
 

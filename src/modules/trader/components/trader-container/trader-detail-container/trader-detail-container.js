@@ -78,7 +78,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-  const { dispatch, ...otherDispathProps } = dispatchProps;
+  const { dispatch, ...otherDispatchProps } = dispatchProps;
   const submitPopup = traderId => () =>
     traderActions.fetchTraderRequests(traderId);
 
@@ -91,7 +91,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   // };
   return {
     ...stateProps,
-    ...otherDispathProps,
+    ...otherDispatchProps,
     ...ownProps,
     openInvestPopup: traderId => () => {
       dispatch(

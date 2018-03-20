@@ -1,28 +1,32 @@
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
 import React from "react";
 
-import FilterPaneContainer from "../../../../filter-pane/components/filter-pane-container";
+import FilterPane from "../../../../filter-pane/components/filter-pane/filter-pane";
 import TraderListFilter from "./trader-list-filter/trader-list-filter";
 import tradersActions from "../../../actions/traders-actions";
 
-const TraderListFilterContainer = ({ location, handleFilterChange }) => {
+const TraderListFilterContainer = ({ handleFilterChange, isFilterOpen }) => {
   const onFilterChange = name => value => {
-    handleFilterChange({ name, value }, location);
+    handleFilterChange({ name, value });
   };
   return (
-    <FilterPaneContainer>
+    <FilterPane isOpen={isFilterOpen}>
       <TraderListFilter onChangeComplete={onFilterChange} />
-    </FilterPaneContainer>
+    </FilterPane>
   );
 };
 
+const mapStateToProps = state => {
+  const { isFilterOpen } = state.tradersData.filtering.filterPane;
+  return { isFilterOpen };
+};
+
 const mapDispatchToProps = dispatch => ({
-  handleFilterChange: (filter, location) => {
-    tradersActions.updateFilters(filter, location);
+  handleFilterChange: filter => {
+    tradersActions.updateFilters(filter);
   }
 });
 
-export default withRouter(
-  connect(null, mapDispatchToProps)(TraderListFilterContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(
+  TraderListFilterContainer
 );

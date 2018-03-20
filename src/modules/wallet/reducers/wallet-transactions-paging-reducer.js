@@ -9,11 +9,10 @@ const initialState = {
 const walletTransactionsPagingReducer = (state = initialState, action) => {
   switch (action.type) {
     case WALLET_TRANSACTIONS_PAGING:
-      var t =  {
-          ...state,
-          ...action.paging
-      }
-      return t;
+      return {
+        ...state,
+        ...action.paging
+      };
     default:
       return state;
   }

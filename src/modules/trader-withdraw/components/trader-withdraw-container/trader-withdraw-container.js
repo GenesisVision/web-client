@@ -49,10 +49,10 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-  const { dispatch, ...otherDispathProps } = dispatchProps;
+  const { dispatch, ...otherDispatchProps } = dispatchProps;
   return {
     ...stateProps,
-    ...otherDispathProps,
+    ...otherDispatchProps,
     ...ownProps,
     submitWithdraw: (traderId, amount, setSubmitting) =>
       dispatch(traderWithdrawActions.submitTraderWithdraw(traderId, amount))

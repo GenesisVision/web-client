@@ -1,1 +1,2 @@
 export const TRADERS = "TRADERS";
+export const TRADERS_FILTER_PANE = "TRADERS_FILTER_PANE";

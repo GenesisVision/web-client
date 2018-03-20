@@ -39,7 +39,7 @@ class TraderListContainer extends Component {
 
 const mapStateToProps = state => {
   const { isAuthenticated } = state.authData;
-  const { isPending, data } = state.tradersData;
+  const { isPending, data } = state.tradersData.traders;
   return { isPending, traders: data, isAuthenticated };
 };
 
@@ -51,13 +51,13 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-  const { dispatch, ...otherDispathProps } = dispatchProps;
+  const { dispatch, ...otherDispatchProps } = dispatchProps;
   const closeInvestPopup = () => {
     dispatch(tradersActions.fetchTradersIfNeeded({}));
   };
   return {
     ...stateProps,
-    ...otherDispathProps,
+    ...otherDispatchProps,
     ...ownProps,
     openInvestPopup: traderId => () => {
       dispatch(

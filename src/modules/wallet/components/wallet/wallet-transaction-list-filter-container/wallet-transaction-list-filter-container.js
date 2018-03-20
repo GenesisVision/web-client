@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import React, { PureComponent } from "react";
 
-import FilterPaneContainer from "../../../../filter-pane/components/filter-pane-container";
+import FilterPane from "../../../../filter-pane/components/filter-pane/filter-pane";
 import walletActions from "../../../actions/wallet-actions";
 import WalletTransactionListFilter from "./wallet-transaction-list-filter/wallet-transaction-list-filter";
 
@@ -11,6 +11,7 @@ class TraderTransactionListFilterContainer extends PureComponent {
     const {
       isPending,
       errorMessage,
+      isFilterOpen,
       programs,
       handleFilterChange,
       fetchTransactionFilter
@@ -28,28 +29,30 @@ class TraderTransactionListFilterContainer extends PureComponent {
       handleFilterChange({ name, value });
     };
     return (
-      <FilterPaneContainer>
+      <FilterPane isOpen={isFilterOpen}>
         <WalletTransactionListFilter
           programs={programs.investmentPrograms}
           onChangeComplete={onFilterChange}
         />
         {errorMessage}
-      </FilterPaneContainer>
+      </FilterPane>
     );
   }
 }
 const mapStateToProps = state => {
+  const t = 1;
   const {
     isPending,
     errorMessage,
     data
-  } = state.walletData.transactionProgramFilters;
+  } = state.walletData.filtering.transactionPrograms;
+  const { isFilterOpen } = state.walletData.filtering.filterPane;
   let programs;
   if (data) {
     programs = data;
   }
 
-  return { isPending, programs, errorMessage };
+  return { isPending, isFilterOpen, programs, errorMessage };
 };
 
 const mapDispatchToProps = dispatch => ({

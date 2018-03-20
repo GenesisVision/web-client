@@ -3,6 +3,7 @@ import { combineReducers } from "redux";
 import apiReducerFactory from "../../../shared/reducers/api-reducer/api-reducer";
 import walletAddressReducer from "./wallet-address-reducer";
 import walletChartReducer from "./wallet-chart-reducer";
+import walletFilterPaneReducer from "./wallet-filter-pane-reducer";
 import walletTransactionProgramFilterReducer from "./wallet-transaction-filter-reducer";
 import walletTransactionsPagingReducer from "./wallet-transactions-paging-reducer";
 import walletTransactionsReducer from "./wallet-transactions-reducer";
@@ -19,6 +20,9 @@ const walletReducer = combineReducers({
     items: walletTransactionsReducer,
     paging: walletTransactionsPagingReducer
   }),
-  transactionProgramFilters: walletTransactionProgramFilterReducer
+  filtering: combineReducers({
+    filterPane: walletFilterPaneReducer,
+    transactionPrograms: walletTransactionProgramFilterReducer
+  })
 });
 export default walletReducer;
