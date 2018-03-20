@@ -3,12 +3,12 @@ import React, { Component } from "react";
 
 import walletActions from "../../../actions/wallet-actions";
 import WalletTransactionList from "./wallet-transaction-list/wallet-transaction-list";
-
+import Pager from "react-pager";
 class WalletTransactionListContainer extends Component {
   getFilter = props => (props.queryParams ? props.queryParams.filter : "All");
 
   componentWillMount() {
-    this.props.fetchTransactions(this.getFilter(this.props));
+    this.props.fetchTransactions(this.getFilter(this.props), this.props.paging);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -24,25 +24,23 @@ class WalletTransactionListContainer extends Component {
       return null;
     }
 
-    return <WalletTransactionList transactions={transactions.items} />;
+    return <WalletTransactionList transactions={transactions} />;
   }
 }
 const mapStateToProps = state => {
-  const { isPending, data } = state.walletData.transactions;
+  const paging = state.walletData.transactions.paging;
+  const { isPending, data } = state.walletData.transactions.items;
 
   let transactions;
   if (data) {
-    transactions = {
-      items: data.transactions,
-      total: data.total
-    };
+    transactions = data.transactions;
   }
-  return { isPending, transactions };
+  return { isPending, transactions, paging };
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchTransactions: filter => {
-    dispatch(walletActions.fetchWalletTransactions(filter));
+  fetchTransactions: (filter, paging) => {
+    dispatch(walletActions.fetchWalletTransactions(filter, paging));
   }
 });
 

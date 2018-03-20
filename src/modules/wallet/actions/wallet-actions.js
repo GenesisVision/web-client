@@ -1,3 +1,7 @@
+import {
+  calculateTotalPages,
+  calculateSkipAndTake
+} from "../helpers/paging-helper";
 import authService from "../../../services/authService";
 import history from "../../../utils/history";
 import SwaggerInvestorApi from "../../../services/api-client/swagger-investor-api";
@@ -26,19 +30,28 @@ const fetchWalletAddress = () => {
   };
 };
 
-const fetchWalletTransactions = filter => {
+const fetchWalletTransactions = (filter, paging) => dispatch => {
+  const { skip, take } = calculateSkipAndTake(paging);
+
   const data = {
     filter: {
-      type: filter
+      type: filter,
+      skip,
+      take
     }
   };
-  return {
+
+  dispatch({
     type: actionTypes.WALLET_TRANSACTIONS,
     payload: SwaggerInvestorApi.apiInvestorWalletTransactionsPost(
       authService.getAuthArg(),
       data
     )
-  };
+  }).then(response => {
+    const totalPages = calculateTotalPages(response.value.total);
+    paging.totalPages = totalPages;
+    dispatch(updateWalletTransactionsPaging(paging));
+  });
 };
 
 const fetchWalletTransactionProgramFilter = () => {
@@ -47,6 +60,13 @@ const fetchWalletTransactionProgramFilter = () => {
     payload: SwaggerInvestorApi.apiInvestorWalletTransactionsInvestmentProgramsListGet(
       authService.getAuthArg()
     )
+  };
+};
+
+const updateWalletTransactionsPaging = paging => {
+  return {
+    type: actionTypes.WALLET_TRANSACTIONS_PAGING,
+    paging
   };
 };
 
@@ -83,6 +103,7 @@ const walletActions = {
   fetchWalletChart,
   walletWithdraw,
   fetchWalletTransactionProgramFilter,
-  openWallet
+  openWallet,
+  updateWalletTransactionsPaging
 };
 export default walletActions;
