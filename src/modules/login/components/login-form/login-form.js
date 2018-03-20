@@ -60,7 +60,7 @@ const LoginForm = ({
           to={REGISTER_ROUTE}
           className="login__btn gv-btn gv-btn-secondary"
         >
-          Don’t jave an account? Sign Up!
+          Don’t have an account? Sign Up!
         </Link>
       </div>
     </form>

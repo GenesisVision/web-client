@@ -37,8 +37,8 @@ const WalletTransactionListFilter = ({
         </div>
       </div>
       <div className="filter-item">
-        <div className="filter-item__title">Sorting direction</div>
-        <div className="filter-item__description">Select sorting direction</div>
+        <div className="filter-item__title">Transactions Type</div>
+        <div className="filter-item__description">Select Transactions Type</div>
         <div className="filter-item__component">
           <Field
             name="transactionType"
