@@ -8,7 +8,9 @@ const closeFilter = filterActionType => ({
   isOpen: false
 });
 
-export default {
+const filterPaneActions = {
   openFilter,
   closeFilter
 };
+
+export default filterPaneActions;

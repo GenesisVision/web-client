@@ -3,8 +3,11 @@ import { withRouter } from "react-router-dom";
 import React, { PureComponent } from "react";
 
 import FilterPane from "../../../../filter-pane/components/filter-pane/filter-pane";
+import filterPaneActions from "../../../../filter-pane/actions/filter-pane-actions";
 import walletActions from "../../../actions/wallet-actions";
 import WalletTransactionListFilter from "./wallet-transaction-list-filter/wallet-transaction-list-filter";
+
+import { WALLET_FILTER_PANE } from "../../../actions/wallet-actions.constants";
 
 class TraderTransactionListFilterContainer extends PureComponent {
   render() {
@@ -14,6 +17,7 @@ class TraderTransactionListFilterContainer extends PureComponent {
       isFilterOpen,
       programs,
       filtering,
+      closeFilter,
       handleFilterChange,
       fetchTransactionFilter
     } = this.props;
@@ -30,7 +34,7 @@ class TraderTransactionListFilterContainer extends PureComponent {
       handleFilterChange({ name, value });
     };
     return (
-      <FilterPane isOpen={isFilterOpen}>
+      <FilterPane isOpen={isFilterOpen} onFilterClose={closeFilter}>
         <WalletTransactionListFilter
           filtering={filtering}
           programs={programs.investmentPrograms}
@@ -63,6 +67,9 @@ const mapDispatchToProps = dispatch => ({
   },
   fetchTransactionFilter: () => {
     dispatch(walletActions.fetchWalletTransactionProgramFilter());
+  },
+  closeFilter: () => {
+    dispatch(filterPaneActions.closeFilter(WALLET_FILTER_PANE));
   }
 });
 

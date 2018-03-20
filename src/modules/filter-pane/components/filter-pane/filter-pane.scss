@@ -1,14 +1,22 @@
 @import "styles/_colors.scss";
-.filter-pane {
+.filter-pane-wrapper {
   position: fixed;
   top: 71px;
   left: 0;
   width: 100%;
+  z-index: 1020;
+}
+
+.filter-pane-backdrop {
+  height: 100vh;
+  opacity: 0.5;
+  background-color: black;
+}
+
+.filter-pane {
   background: white;
   border-bottom: 1px solid $border-color;
-
   box-shadow: 0 1px 4px 0 rgba(227, 235, 237, 0.86);
-  z-index: 1020;
 }
 
 .filter-item {
