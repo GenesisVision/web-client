@@ -9,7 +9,7 @@ const TIStatistic = ({ trader }) => {
       <div className="tis-item">
         <div className="tis-item__value">
           <NumberFormat
-            value={trader.profitAvg}
+            value={trader.profitAvgPercent}
             suffix=" %"
             decimalScale={2}
             displayType="text"

@@ -12,7 +12,7 @@ const TSCards = ({ trader }) => {
           <div className="trader-card__image">
             <TSProfitChart data={trader.chart} />
           </div>
-          <div className="trader-card__value">{trader.profitTotalPercent}%</div>
+          <div className="trader-card__value">${trader.profitTotal}</div>
           <div className="trader-card__description">Profit</div>
         </div>
       </div>
