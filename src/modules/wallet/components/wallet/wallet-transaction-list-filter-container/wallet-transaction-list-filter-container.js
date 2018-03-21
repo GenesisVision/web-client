@@ -43,10 +43,10 @@ class TraderTransactionListFilterContainer extends PureComponent {
   }
 }
 const mapStateToProps = state => {
-  const { filterPane } = state.walletData;
+  const { filterPane, transactions } = state.walletData;
   const { isPending, errorMessage, data } = filterPane.programs;
   const { isFilterOpen } = filterPane.state;
-  const { filtering } = state.walletData.transactions;
+  const { filtering } = transactions;
   let programs;
   if (data) {
     programs = data;

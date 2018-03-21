@@ -6,31 +6,37 @@ import TraderListFilter from "./trader-list-filter/trader-list-filter";
 import tradersActions from "../../../actions/traders-actions";
 
 const TraderListFilterContainer = ({
+  isFilterOpen,
+  filtering,
   handleFilterChange,
-  closeFilter,
-  isFilterOpen
+  closeFilter
 }) => {
   const onFilterChange = name => value => {
     handleFilterChange({ name, value });
   };
   return (
     <FilterPane isOpen={isFilterOpen} onFilterClose={closeFilter}>
-      <TraderListFilter onChangeComplete={onFilterChange} />
+      <TraderListFilter
+        filtering={filtering}
+        onChangeComplete={onFilterChange}
+      />
     </FilterPane>
   );
 };
 
 const mapStateToProps = state => {
-  const { isFilterOpen } = state.tradersData.filterPane.state;
-  return { isFilterOpen };
+  const { filterPane, traders } = state.tradersData;
+  const { isFilterOpen } = filterPane.state;
+  const { filtering } = traders;
+  return { isFilterOpen, filtering };
 };
 
 const mapDispatchToProps = dispatch => ({
   handleFilterChange: filter => {
-    tradersActions.updateFilters(filter);
+    dispatch(tradersActions.updateFiltering(filter));
   },
   closeFilter: () => {
-    dispatch(/*filterPaneActions.closeFilter()*/);
+    dispatch(tradersActions.closeFilterPane());
   }
 });
 

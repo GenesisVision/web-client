@@ -1,18 +1,33 @@
-import QueryString from "query-string";
-
 import authService from "../../../services/authService";
 import filesService from "../../../shared/services/file-service";
-import history from "../../../utils/history";
+import filteringActionsFactory from "../../filtering/actions/filtering-actions";
+import filterPaneActionsFactory from "../../filter-pane/actions/filter-pane-actions";
 import SwaggerInvestorApi from "../../../services/api-client/swagger-investor-api";
 
 import * as actionTypes from "./traders-actions.constants";
 
-const fetchTraders = () => {
-  let data = {};
+const fetchTraders = () => (dispatch, getState) => {
+  const { filtering } = getState().tradersData.traders;
+  let data = {
+    filter: {}
+  };
   if (authService.getAuthArg()) {
     data.authorization = authService.getAuthArg();
   }
-  return {
+  if (filtering.levelMin) {
+    data.filter.levelMin = filtering.levelMin;
+  }
+  if (filtering.levelMax) {
+    data.filter.levelMax = filtering.levelMax;
+  }
+  if (filtering.profitAvgMax) {
+    data.filter.profitAvgMax = filtering.profitAvgMax;
+  }
+  if (filtering.sorting) {
+    data.filter.sorting = filtering.sorting + filtering.sortingDirection;
+  }
+
+  dispatch({
     type: actionTypes.TRADERS,
     payload: SwaggerInvestorApi.apiInvestorInvestmentProgramsPost(data).then(
       response => {
@@ -23,42 +38,49 @@ const fetchTraders = () => {
         return response;
       }
     )
-  };
+  });
 };
 
 const shouldFetchTraders = traders => {
   return true;
 };
 
-const fetchTradersIfNeeded = traderId => (dispatch, getState) => {
+const fetchTradersIfNeeded = () => (dispatch, getState) => {
   const traders = getState().tradersData.data;
   if (shouldFetchTraders(traders)) {
     return dispatch(fetchTraders());
   }
 };
 
-const composeFilter = filter => {
+const composeFiltering = filter => {
+  const filteringActions = filteringActionsFactory(actionTypes.TRADERS);
+  let filtering = {};
   switch (filter.name) {
-    case "traderLevel":
-      return {
-        levelMin: filter.value.min,
-        levelMax: filter.value.max
-      };
-    default:
-      return {
-        [filter.name]: filter.value
-      };
+    case "traderLevel": {
+      filtering.levelMin = filter.value.min;
+      filtering.levelMax = filter.value.max;
+      break;
+    }
+    default: {
+      filtering[filter.name] = filter.value;
+    }
   }
+  return filteringActions.updateFiltering(filtering);
 };
 
-const updateFilters = (filter, location) => {
-  const queryParams = QueryString.parse(location.search);
-  const newFilters = { ...queryParams, ...composeFilter(filter) };
-  history.push(`${location.pathname}?${QueryString.stringify(newFilters)}`);
+const updateFiltering = filter => dispatch => {
+  dispatch(composeFiltering(filter));
+  dispatch(fetchTradersIfNeeded());
+};
+
+const closeFilterPane = () => {
+  const filterPaneActions = filterPaneActionsFactory(actionTypes.TRADERS);
+  return filterPaneActions.closeFilter();
 };
 
 const tradersActions = {
   fetchTradersIfNeeded,
-  updateFilters
+  updateFiltering,
+  closeFilterPane
 };
 export default tradersActions;

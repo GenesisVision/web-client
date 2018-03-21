@@ -39,7 +39,7 @@ class TraderListContainer extends Component {
 
 const mapStateToProps = state => {
   const { isAuthenticated } = state.authData;
-  const { isPending, data } = state.tradersData.traders;
+  const { isPending, data } = state.tradersData.traders.items;
   return { isPending, traders: data, isAuthenticated };
 };
 

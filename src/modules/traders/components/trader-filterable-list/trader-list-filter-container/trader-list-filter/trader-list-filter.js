@@ -6,8 +6,9 @@ import GVSelect from "../../../../../../shared/components/form/gv-select/gv-sele
 
 import "./trader-list-filter.css";
 const sortingOptions = [
-  { value: "Name", label: "Name" },
-  { value: "DaysLeft", label: "Days Left" }
+  { value: "ByLevel", label: "Level" },
+  { value: "ByProfit", label: "Profit" },
+  { value: "ByEndOfPeriod", label: "End Of Period" }
 ];
 const sortingDirectionOptions = [
   { value: "Asc", label: "Ascending" },
@@ -43,10 +44,10 @@ const TraderListFilter = ({
           <Field
             minValue={0}
             maxValue={100}
-            name="profitAvg"
-            value={values.profitAvg}
+            name="profitAvgMax"
+            value={values.profitAvgMax}
             formatLabel={value => `${value}%`}
-            onChangeComplete={onChangeComplete("profitAvg")}
+            onChangeComplete={onChangeComplete("profitAvgMax")}
             setFieldValue={setFieldValue}
             component={GVInputRange}
           />
@@ -78,6 +79,7 @@ const TraderListFilter = ({
             setFieldValue={setFieldValue}
             onBlur={setFieldTouched}
             component={GVSelect}
+            clearable={false}
             options={sortingDirectionOptions}
           />
         </div>
@@ -88,9 +90,13 @@ const TraderListFilter = ({
 
 export default withFormik({
   displayName: "traderListFilterForm",
-  mapPropsToValues: () => ({
-    traderLevel: { min: 1, max: 7 },
-    profitAvg: 20,
-    sorting: ""
-  })
+  mapPropsToValues: props => {
+    const { filtering } = props;
+    return {
+      traderLevel: { min: filtering.levelMin, max: filtering.levelMax },
+      profitAvgMax: filtering.profitAvgMax,
+      sorting: filtering.sorting,
+      sortingDirection: filtering.sortingDirection
+    };
+  }
 })(TraderListFilter);
