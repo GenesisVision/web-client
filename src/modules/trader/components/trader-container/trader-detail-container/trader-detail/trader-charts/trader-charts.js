@@ -9,19 +9,31 @@ const TraderCharts = ({ chart, profitDiagram }) => {
   const profitChartData = [
     {
       name: "Manager`s Fund",
-      value: profitDiagram.managerFund
+      value: profitDiagram.managerFund,
+      percent:
+        profitDiagram.managerFund /
+        (profitDiagram.managerFund + profitDiagram.investorsFund)
     },
     {
       name: "Investor`s Fund",
-      value: profitDiagram.investorsFund
+      value: profitDiagram.investorsFund,
+      percent:
+        profitDiagram.investorsFund /
+        (profitDiagram.managerFund + profitDiagram.investorsFund)
     },
     {
       name: "Profit",
-      value: profitDiagram.profitIsPositive && profitDiagram.profit
+      value: profitDiagram.profitIsPositive && profitDiagram.profit,
+      percent:
+        profitDiagram.profit /
+        (profitDiagram.managerFund + profitDiagram.investorsFund)
     },
     {
       name: "Loss",
-      value: profitDiagram.profitIsPositive || profitDiagram.profit
+      value: profitDiagram.profitIsPositive || profitDiagram.profit,
+      percent:
+        profitDiagram.profit /
+        (profitDiagram.managerFund + profitDiagram.investorsFund)
     }
   ];
   return (

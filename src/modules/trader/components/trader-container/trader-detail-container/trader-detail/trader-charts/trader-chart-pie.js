@@ -98,8 +98,8 @@ class TraderChartPie extends Component {
             data={this.props.data}
             cx={300}
             cy={200}
-            innerRadius={90}
-            outerRadius={150}
+            innerRadius={70}
+            outerRadius={130}
             onMouseEnter={this.onPieEnter}
             isAnimationActive={false}
           >
