@@ -14,10 +14,7 @@ const TIInfo = ({ idx, trader }) => {
       </div>
       <div className="ti-info__name ti-name">
         <div className="ti-name__title">{trader.title}</div>
-        <div className="ti-name__description">
-          Replace The Negatives In Your Life With Positives And Move Your Life
-          Ahead
-        </div>
+        <div className="ti-name__description">{trader.description}</div>
         <div className="ti-name__eop">
           <DaysLeftWidget
             start={trader.startOfPeriod}
