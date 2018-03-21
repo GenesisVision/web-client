@@ -1,3 +1,5 @@
+import { composeFilteringActionType } from "../helpers/filtering-helpers";
+
 const filteringActionsFactory = actionType => {
   const filteringActionType = composeFilteringActionType(actionType);
 

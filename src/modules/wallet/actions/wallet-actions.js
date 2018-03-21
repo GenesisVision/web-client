@@ -8,6 +8,7 @@ import pagingActionsFactory from "../../paging/actions/paging-actions";
 import SwaggerInvestorApi from "../../../services/api-client/swagger-investor-api";
 
 import * as actionTypes from "./wallet-actions.constants";
+import filteringActionsFactory from "../../filtering/actions/filtering-actions";
 
 const fetchWallet = () => {
   return {
@@ -101,6 +102,9 @@ const updateFiltering = filter => dispatch => {
 };
 
 const updateWalletTransactionsFiltering = filter => {
+  const filteringActions = filteringActionsFactory(
+    actionTypes.WALLET_TRANSACTIONS
+  );
   let filtering = {};
   if (filter.name === "program") {
     filtering.investmentProgramId = filter.value;
@@ -109,10 +113,7 @@ const updateWalletTransactionsFiltering = filter => {
     filtering.type = filter.value;
   }
 
-  return {
-    type: actionTypes.WALLET_TRANSACTIONS_FILTERING,
-    filtering
-  };
+  return filteringActions.updateFiltering(filtering);
 };
 
 const walletWithdraw = withdrawData => {

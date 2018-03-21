@@ -1,20 +1,11 @@
-import { WALLET_TRANSACTIONS_FILTERING } from "../actions/wallet-actions.constants";
+import filteringReducerFactory from "../../filtering/reducers/filtering-reducers";
 
-const initialState = {
-  investmentProgramId: "",
-  type: "All"
-};
+import { WALLET_TRANSACTIONS } from "../actions/wallet-actions.constants";
+import { WALLET_FILTERS } from "../helpers/wallet-constants";
 
-const walletTransactionsFilteringReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case WALLET_TRANSACTIONS_FILTERING:
-      return {
-        ...state,
-        ...action.filtering
-      };
-    default:
-      return state;
-  }
-};
+const walletTransactionsFilteringReducer = filteringReducerFactory({
+  api: WALLET_TRANSACTIONS,
+  filters: WALLET_FILTERS
+});
 
 export default walletTransactionsFilteringReducer;
