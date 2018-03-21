@@ -21,7 +21,7 @@ const DPStatistic = ({ trader }) => {
         <div className="tis-item__label">currency</div>
       </div>
       <div className="tis-item">
-        <div className="tis-item__value">{trader.investorProfit}</div>
+        <div className="tis-item__value">{trader.profitFromProgram}</div>
         <div className="tis-item__label">My Profit</div>
       </div>
       <div className="tis-item">
