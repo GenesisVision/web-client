@@ -1,11 +1,13 @@
 const ITEMS_ON_PAGE = 10;
 
+export const composePaingActionType = actionType => `${actionType}_PAGING`;
+
 export const calculateTotalPages = (
   itemsCount,
   itemsOnPage = ITEMS_ON_PAGE
 ) => {
   if (itemsCount === 0) return 0;
-  return Math.floor(itemsCount / itemsOnPage);
+  return Math.ceil(itemsCount / itemsOnPage);
 };
 
 export const calculateSkipAndTake = paging => {

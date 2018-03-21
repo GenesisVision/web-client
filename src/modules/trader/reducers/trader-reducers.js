@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 
 import apiReducerFactory from "../../../shared/reducers/api-reducer/api-reducer";
+import pagingReducerFactory from "../../paging/reducers/paging-reducers";
 
 import {
   TRADER_DETAIL,
@@ -12,7 +13,10 @@ import {
 const traderReducer = combineReducers({
   traderDetail: apiReducerFactory({ apiType: TRADER_DETAIL }),
   requests: apiReducerFactory({ apiType: TRADER_REQUESTS }),
-  deals: apiReducerFactory({ apiType: TRADER_DEALS }),
+  deals: combineReducers({
+    items: apiReducerFactory({ apiType: TRADER_DEALS }),
+    paging: pagingReducerFactory(TRADER_DEALS)
+  }),
   history: apiReducerFactory({ apiType: TRADER_HISTORY })
 });
 

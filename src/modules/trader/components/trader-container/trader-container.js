@@ -1,8 +1,8 @@
 import { connect } from "react-redux";
 import React, { Component } from "react";
 
-import TraderDealListContainer from "./trader-deal-list-container/trader-deal-list-container";
 import TraderDetailContainer from "./trader-detail-container/trader-detail-container";
+import TraderFilterableDealList from "./trader-filterable-deal-list/trader-filterable-deal-list";
 import TraderHistoryContainer from "./trader-history-container/trader-history-container";
 import TraderRequestListContainer from "./trader-request-list-container/trader-request-list-container";
 
@@ -19,7 +19,7 @@ class TraderContainer extends Component {
           isAuthenticated={isAuthenticated}
         />
         {isAuthenticated && <TraderHistoryContainer traderId={traderId} />}
-        {isAuthenticated && <TraderDealListContainer traderId={traderId} />}
+        {isAuthenticated && <TraderFilterableDealList traderId={traderId} />}
         {isAuthenticated && <TraderRequestListContainer traderId={traderId} />}
       </div>
     );

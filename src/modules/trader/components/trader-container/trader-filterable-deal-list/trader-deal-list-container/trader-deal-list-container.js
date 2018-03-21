@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import React, { PureComponent } from "react";
 
-import traderActions from "../../../actions/trader-actions";
+import traderActions from "../../../../actions/trader-actions";
 import TraderDealList from "./trader-deal-list/trader-deal-list";
 
 class TraderDealListContainer extends PureComponent {
@@ -20,7 +20,7 @@ class TraderDealListContainer extends PureComponent {
 }
 
 const mapStateToProps = state => {
-  const { isPending, errorMessage, data } = state.traderData.deals;
+  const { isPending, errorMessage, data } = state.traderData.deals.items;
 
   let dealList, serverType;
   if (data) {

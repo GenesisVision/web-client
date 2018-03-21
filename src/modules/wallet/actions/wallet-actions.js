@@ -1,9 +1,10 @@
 import {
   calculateTotalPages,
   calculateSkipAndTake
-} from "../helpers/paging-helper";
+} from "../../paging/helpers/paging-helpers";
 import authService from "../../../services/authService";
 import history from "../../../utils/history";
+import pagingActionsFactory from "../../paging/actions/paging-actions";
 import SwaggerInvestorApi from "../../../services/api-client/swagger-investor-api";
 
 import { WALLET_ROUTE } from "../wallet.constants";
@@ -48,9 +49,7 @@ const fetchWalletTransactions = () => (dispatch, getState) => {
     )
   }).then(response => {
     const totalPages = calculateTotalPages(response.value.total);
-    const hidePaging = response.value.total === 0;
-
-    dispatch(updateWalletTransactionsPaging({ totalPages, hidePaging }));
+    dispatch(updateWalletTransactionsPaging({ totalPages }));
   });
 };
 
@@ -78,16 +77,16 @@ const fetchWalletTransactionProgramFilter = () => {
   };
 };
 
-const updatePaging = paging => dispatch => {
-  dispatch(updateWalletTransactionsPaging(paging));
-  dispatch(fetchWalletTransactions());
+const updateWalletTransactionsPaging = paging => {
+  const pagingActionsDealList = pagingActionsFactory(
+    actionTypes.WALLET_TRANSACTIONS
+  );
+  return pagingActionsDealList.updatePaging(paging);
 };
 
-const updateWalletTransactionsPaging = paging => {
-  return {
-    type: actionTypes.WALLET_TRANSACTIONS_PAGING,
-    paging
-  };
+const updateWalletTransactionsPagingAndFetch = paging => dispatch => {
+  dispatch(updateWalletTransactionsPaging(paging));
+  dispatch(fetchWalletTransactions());
 };
 
 const updateFiltering = filter => dispatch => {
@@ -137,7 +136,8 @@ const walletActions = {
   walletWithdraw,
   fetchWalletTransactionProgramFilter,
   openWallet,
-  updatePaging,
+  updateWalletTransactionsPaging,
+  updateWalletTransactionsPagingAndFetch,
   updateFiltering
 };
 export default walletActions;
