@@ -6,6 +6,7 @@ import GVSelect from "../../../../../../shared/components/form/gv-select/gv-sele
 
 import "./trader-list-filter.css";
 const sortingOptions = [
+  { value: "ByTitle", label: "Name" },
   { value: "ByLevel", label: "Level" },
   { value: "ByProfit", label: "Profit" },
   { value: "ByEndOfPeriod", label: "End Of Period" }
