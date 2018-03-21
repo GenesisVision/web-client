@@ -12,7 +12,10 @@ import {
 
 const traderReducer = combineReducers({
   traderDetail: apiReducerFactory({ apiType: TRADER_DETAIL }),
-  requests: apiReducerFactory({ apiType: TRADER_REQUESTS }),
+  requests: combineReducers({
+    items: apiReducerFactory({ apiType: TRADER_REQUESTS }),
+    paging: pagingReducerFactory(TRADER_REQUESTS)
+  }),
   deals: combineReducers({
     items: apiReducerFactory({ apiType: TRADER_DEALS }),
     paging: pagingReducerFactory(TRADER_DEALS)

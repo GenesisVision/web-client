@@ -28,19 +28,6 @@ const fetchTrader = traderId => {
   };
 };
 
-const fetchTraderRequests = traderId => {
-  const data = {
-    filter: { investmentProgramId: traderId, take: 10 }
-  };
-  return {
-    type: actionTypes.TRADER_REQUESTS,
-    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramRequestsPost(
-      authService.getAuthArg(),
-      data
-    )
-  };
-};
-
 const fetchTraderHistory = traderId => {
   const data = {
     filter: { investmentProgramId: traderId }
@@ -56,6 +43,39 @@ const fetchTraderHistory = traderId => {
   };
 };
 
+const fetchTraderRequests = traderId => (dispatch, getState) => {
+  const { paging } = getState().traderData.requests;
+  const { skip, take } = calculateSkipAndTake(paging);
+
+  const filter = { investmentProgramId: traderId, skip, take };
+
+  return dispatch({
+    type: actionTypes.TRADER_REQUESTS,
+    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramRequestsPost(
+      authService.getAuthArg(),
+      { filter }
+    )
+  }).then(response => {
+    const totalPages = calculateTotalPages(response.value.total);
+    dispatch(updateTraderRequestListPaging({ totalPages }));
+  });
+};
+
+const updateTraderRequestListPaging = paging => {
+  const pagingActionsDealList = pagingActionsFactory(
+    actionTypes.TRADER_REQUESTS
+  );
+  return pagingActionsDealList.updatePaging(paging);
+};
+
+const updateTraderRequestListPagingAndFetch = (
+  traderId,
+  paging
+) => dispatch => {
+  dispatch(updateTraderRequestListPaging(paging));
+  dispatch(fetchTraderRequests(traderId));
+};
+
 const fetchTraderDealList = traderId => (dispatch, getState) => {
   const { paging } = getState().traderData.deals;
   const { skip, take } = calculateSkipAndTake(paging);
@@ -69,7 +89,6 @@ const fetchTraderDealList = traderId => (dispatch, getState) => {
     )
   }).then(response => {
     const totalPages = calculateTotalPages(response.value.total);
-
     dispatch(updateTraderDealListPaging({ totalPages }));
   });
 };
@@ -96,9 +115,11 @@ const cancelTraderRequest = requestId => {
 
 const traderActions = {
   fetchTrader,
+  fetchTraderHistory,
   fetchTraderRequests,
   cancelTraderRequest,
-  fetchTraderHistory,
+  updateTraderRequestListPaging,
+  updateTraderRequestListPagingAndFetch,
   fetchTraderDealList,
   updateTraderDealListPaging,
   updateTraderDealListPagingAndFetch
