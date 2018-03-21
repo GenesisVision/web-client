@@ -29,15 +29,13 @@ const fetchTrader = traderId => {
 };
 
 const fetchTraderHistory = traderId => {
-  const data = {
-    filter: { investmentProgramId: traderId }
-  };
+  const filter = { investmentProgramId: traderId };
+
   return {
     type: actionTypes.TRADER_HISTORY,
-    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramTradesPost(
-      authService.getAuthArg(),
-      data
-    ).then(response => {
+    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramTradesPost({
+      filter
+    }).then(response => {
       return response.trades.map(x => ({ profit: x.profit, date: x.date }));
     })
   };
@@ -80,13 +78,17 @@ const fetchTraderDealList = traderId => (dispatch, getState) => {
   const { paging } = getState().traderData.deals;
   const { skip, take } = calculateSkipAndTake(paging);
 
-  const filter = { investmentProgramId: traderId, skip, take };
+  const filter = {
+    investmentProgramId: traderId,
+    sorting: "ByDateDesc",
+    skip,
+    take
+  };
   return dispatch({
     type: actionTypes.TRADER_DEALS,
-    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramTradesPost(
-      authService.getAuthArg(),
-      { filter }
-    )
+    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramTradesPost({
+      filter
+    })
   }).then(response => {
     const totalPages = calculateTotalPages(response.value.total);
     dispatch(updateTraderDealListPaging({ totalPages }));

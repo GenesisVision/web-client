@@ -21,10 +21,21 @@ class TraderHistoryContainer extends PureComponent {
 
 const mapStateToProps = state => {
   const { isPending, errorMessage, data } = state.traderData.history;
+  const { data: traderDetail } = state.traderData.traderDetail;
 
   let history;
   if (data) {
     history = data;
+  }
+
+  if (history && traderDetail && traderDetail.investmentProgram) {
+    history = [
+      {
+        profit: 0,
+        date: traderDetail.investmentProgram.programStartDate
+      },
+      ...history
+    ];
   }
 
   return {
