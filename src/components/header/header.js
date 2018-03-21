@@ -129,8 +129,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const shouldShowFilterControl = pageWithFilter !== undefined;
   const { isFilterOpen } =
     shouldShowFilterControl &&
-    PAGES_WITH_FILTER[pageWithFilter].getStateData(stateProps).filtering
-      .filterPane;
+    PAGES_WITH_FILTER[pageWithFilter].getStateData(stateProps).filterPane.state;
   return {
     isAuthenticated,
     ...otherDispatchProps,

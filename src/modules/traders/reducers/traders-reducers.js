@@ -7,8 +7,8 @@ import { TRADERS } from "../actions/traders-actions.constants";
 
 const tradersReducer = combineReducers({
   traders: apiReducerFactory({ apiType: TRADERS }),
-  filtering: combineReducers({
-    filterPane: tradersFilterPaneReducer
+  filterPane: combineReducers({
+    state: tradersFilterPaneReducer
   })
 });
 

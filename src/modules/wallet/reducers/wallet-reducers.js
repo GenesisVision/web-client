@@ -22,8 +22,8 @@ const walletReducer = combineReducers({
     paging: walletTransactionsPagingReducer,
     filtering: walletTransactionsFilteringReducer
   }),
-  filtering: combineReducers({
-    filterPane: walletFilterPaneReducer,
+  filterPane: combineReducers({
+    state: walletFilterPaneReducer,
     transactionPrograms: walletTransactionProgramFilterRequestReducer
   })
 });
