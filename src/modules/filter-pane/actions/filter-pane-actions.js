@@ -1,16 +1,22 @@
-const openFilter = filterActionType => ({
-  type: filterActionType,
-  isOpen: true
-});
+import { composeFilterPaneActionType } from "../helpers/filter-pane-helpers";
 
-const closeFilter = filterActionType => ({
-  type: filterActionType,
-  isOpen: false
-});
+const filterPaneActionsFactory = actionType => {
+  const filterPaneActionType = composeFilterPaneActionType(actionType);
 
-const filterPaneActions = {
-  openFilter,
-  closeFilter
+  const openFilter = () => ({
+    type: filterPaneActionType,
+    isOpen: true
+  });
+
+  const closeFilter = () => ({
+    type: filterPaneActionType,
+    isOpen: false
+  });
+
+  return {
+    openFilter,
+    closeFilter
+  };
 };
 
-export default filterPaneActions;
+export default filterPaneActionsFactory;

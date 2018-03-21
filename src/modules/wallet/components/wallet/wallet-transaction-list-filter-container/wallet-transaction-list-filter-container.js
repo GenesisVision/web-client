@@ -3,11 +3,8 @@ import { withRouter } from "react-router-dom";
 import React, { PureComponent } from "react";
 
 import FilterPane from "../../../../filter-pane/components/filter-pane/filter-pane";
-import filterPaneActions from "../../../../filter-pane/actions/filter-pane-actions";
 import walletActions from "../../../actions/wallet-actions";
 import WalletTransactionListFilter from "./wallet-transaction-list-filter/wallet-transaction-list-filter";
-
-import { WALLET_FILTER_PANE } from "../../../actions/wallet-actions.constants";
 
 class TraderTransactionListFilterContainer extends PureComponent {
   render() {
@@ -47,7 +44,7 @@ class TraderTransactionListFilterContainer extends PureComponent {
 }
 const mapStateToProps = state => {
   const { filterPane } = state.walletData;
-  const { isPending, errorMessage, data } = filterPane.transactionPrograms;
+  const { isPending, errorMessage, data } = filterPane.programs;
   const { isFilterOpen } = filterPane.state;
   const { filtering } = state.walletData.transactions;
   let programs;
@@ -66,7 +63,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(walletActions.fetchWalletTransactionProgramFilter());
   },
   closeFilter: () => {
-    dispatch(filterPaneActions.closeFilter(WALLET_FILTER_PANE));
+    dispatch(walletActions.closeFilterPane());
   }
 });
 

@@ -1,7 +1,7 @@
 import filterPaneReducerFactory from "../../filter-pane/reducers/filter-pane-reducers";
 
-import { WALLET_FILTER_PANE } from "../actions/wallet-actions.constants";
+import { WALLET } from "../actions/wallet-actions.constants";
 
-const walletFilterPaneReducer = filterPaneReducerFactory(WALLET_FILTER_PANE);
+const walletFilterPaneReducer = filterPaneReducerFactory(WALLET);
 
 export default walletFilterPaneReducer;

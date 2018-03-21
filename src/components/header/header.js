@@ -4,26 +4,26 @@ import classnames from "classnames";
 import LoadingBar from "react-redux-loading-bar";
 import React from "react";
 
-import filterActions from "../../modules/filter-pane/actions/filter-pane-actions";
 import FilterIcon from "./filter-icon";
+import filterPaneActionsFactory from "../../modules/filter-pane/actions/filter-pane-actions";
 import loginActions from "../../modules/login/actions/login-actions";
 
 import "./header.css";
 import { HOME_ROUTE } from "../app.constants";
 import { LOGIN_ROUTE } from "../../modules/login/login.constants";
+import { TRADERS } from "../../modules/traders/actions/traders-actions.constants";
 import { TRADERS_ROUTE } from "../../modules/traders/traders.constants";
-import { WALLET_FILTER_PANE } from "../../modules/wallet/actions/wallet-actions.constants";
+import { WALLET } from "../../modules/wallet/actions/wallet-actions.constants";
 import { WALLET_ROUTE } from "../../modules/wallet/wallet.constants";
 import gvLogo from "./gv-logo.svg";
-import { TRADERS_FILTER_PANE } from "../../modules/traders/actions/traders-actions.constants";
 
 const PAGES_WITH_FILTER = {
   [TRADERS_ROUTE]: {
-    actionType: TRADERS_FILTER_PANE,
+    actionType: TRADERS,
     getStateData: state => state.tradersData
   },
   [WALLET_ROUTE]: {
-    actionType: WALLET_FILTER_PANE,
+    actionType: WALLET,
     getStateData: state => state.walletData
   }
 };
@@ -130,6 +130,9 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const { isFilterOpen } =
     shouldShowFilterControl &&
     PAGES_WITH_FILTER[pageWithFilter].getStateData(stateProps).filterPane.state;
+  const filterPaneActions =
+    shouldShowFilterControl &&
+    filterPaneActionsFactory(PAGES_WITH_FILTER[pageWithFilter].actionType);
   return {
     isAuthenticated,
     ...otherDispatchProps,
@@ -139,12 +142,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     toggleFilter: () => {
       dispatch(
         isFilterOpen
-          ? filterActions.closeFilter(
-              PAGES_WITH_FILTER[pageWithFilter].actionType
-            )
-          : filterActions.openFilter(
-              PAGES_WITH_FILTER[pageWithFilter].actionType
-            )
+          ? filterPaneActions.closeFilter()
+          : filterPaneActions.openFilter()
       );
     }
   };
