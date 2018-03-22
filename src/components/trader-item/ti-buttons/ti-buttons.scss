@@ -1,6 +1,13 @@
+@import "styles/_breakpoint.scss";
 .ti-buttons {
   display: flex;
+  order: 4;
   flex-direction: column;
+  max-width: 150px;
+
+  @include media-breakpoint-desktop() {
+    order: 3;
+  }
 }
 
 .ti-button {

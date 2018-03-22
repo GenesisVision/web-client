@@ -1,13 +1,18 @@
 @import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
 
 .ti-info {
   display: flex;
+  order: 1;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
   flex: 1 1 28%;
   max-width: 28%;
   min-width: 300px;
+
+  @include media-breakpoint-desktop() {
+    max-width: 380px;
+  }
 }
 
 .ti-info__order {
@@ -16,7 +21,8 @@
 
 .ti-info__image {
   position: relative;
-  min-width: 100px;
+  width: 100px;
+  margin: 0 1rem;
   text-align: center;
 }
 

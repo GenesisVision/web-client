@@ -1,9 +1,10 @@
 .wallet-buttons {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   margin: 1rem;
   .gv-btn {
-    margin: 0 1rem;
+    margin: 0.5rem;
     min-width: 7rem;
   }
 }

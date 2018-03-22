@@ -1,11 +1,17 @@
 @import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
 
 .ti-chart {
   display: flex;
+  order: 2;
   flex-wrap: wrap;
-  flex: 1 1 15%;
-  max-width: 15%;
+  flex: 1;
+  max-width: 200px;
   height: 80px;
+
+  @include media-breakpoint-desktop() {
+    max-width: 40%;
+  }
 }
 
 .fund {

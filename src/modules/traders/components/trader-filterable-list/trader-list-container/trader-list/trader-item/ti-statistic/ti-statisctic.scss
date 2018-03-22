@@ -1,7 +1,9 @@
 @import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
 
 .ti-statistic {
   display: flex;
+  order: 3;
   flex: 1;
   flex-wrap: wrap;
   flex-direction: column;
@@ -9,25 +11,45 @@
   margin: 0 1rem;
   max-height: 160px;
   min-width: 300px;
+
+  @include media-breakpoint-desktop() {
+    order: 4;
+    min-width: 100%;
+    max-height: 80px;
+  }
 }
 
 .tis-item {
-  //width: 7rem;
   height: 4.5rem;
   padding: 0.5rem;
   text-align: center;
   &:nth-of-type(odd) {
     border-bottom: 2px solid $border-color;
   }
+  @include media-breakpoint-desktop() {
+    padding: 0.5rem 5%;
+    &:not(:last-of-type) {
+      border-right: 2px solid $border-color;
+    }
+    &:nth-of-type(odd) {
+      border-bottom: 0;
+    }
+  }
 }
 
 .tis-item__value {
   font-size: 1.7rem;
   font-family: "NeuzeitGroLig";
+  @include media-breakpoint-desktop() {
+    font-size: 1.5rem;
+  }
 }
 
 .tis-item__label {
   color: $text-sub-color;
   font-size: 0.9rem;
   line-height: 0.5;
+  @include media-breakpoint-desktop() {
+    font-size: 0.7rem;
+  }
 }

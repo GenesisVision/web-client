@@ -1,0 +1,11 @@
+@mixin media-breakpoint-desktop() {
+  @media (max-width: 1919.98px) {
+    @content;
+  }
+}
+
+@mixin media-breakpoint-phone() {
+  @media (max-width: 1199.98px) {
+    @content;
+  }
+}

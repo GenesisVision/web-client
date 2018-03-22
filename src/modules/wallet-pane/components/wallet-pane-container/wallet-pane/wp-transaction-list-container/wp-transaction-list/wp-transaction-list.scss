@@ -1,11 +1,19 @@
+@import "styles/_breakpoint.scss";
+
 .wp-transaction-list {
   margin-top: 2rem;
+  @include media-breakpoint-desktop() {
+    margin-top: 0;
+  }
 }
 
 .wp-transaction-list__header {
   font-family: "NeuzeitGroBol";
   font-size: 1.3rem;
   line-height: 1.2;
+  @include media-breakpoint-desktop() {
+    font-size: 1rem;
+  }
 }
 
 .wp-transaction-list__items {

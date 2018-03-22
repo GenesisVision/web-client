@@ -1,4 +1,5 @@
 @import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
 
 .wallet-info {
   display: flex;
@@ -10,6 +11,10 @@
   color: $main-color;
   font-size: 3rem;
   line-height: 1;
+
+  @include media-breakpoint-desktop() {
+    font-size: 2rem;
+  }
 }
 
 .wallet-info__currency {
