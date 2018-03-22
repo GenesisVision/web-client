@@ -5,6 +5,9 @@
   position: sticky;
   top: 0;
   z-index: 1020;
+  @include media-breakpoint-phone() {
+    position: initial;
+  }
 }
 
 .header {
@@ -54,6 +57,9 @@
   font-size: 1.2rem;
   font-weight: 700;
   margin-left: 2rem;
+  @include media-breakpoint-phone() {
+    margin-left: 1rem;
+  }
 }
 
 .h-filtering {

@@ -7,12 +7,18 @@
   left: 0;
   width: 100%;
   z-index: 1020;
+  @include media-breakpoint-phone() {
+    position: initial;
+  }
 }
 
 .filter-pane-backdrop {
   height: 100vh;
   opacity: 0.5;
   background-color: black;
+  @include media-breakpoint-desktop() {
+    display: none;
+  }
 }
 
 .filter-pane {
@@ -37,6 +43,12 @@
   @include media-breakpoint-desktop() {
     min-width: 285px;
     padding: 3rem 4rem;
+  }
+  @include media-breakpoint-phone() {
+    min-width: 100%;
+    &:not(:last-of-type) {
+      border-right: none;
+    }
   }
 }
 
