@@ -17,6 +17,10 @@
     min-width: 100%;
     max-height: 80px;
   }
+  @include media-breakpoint-phone() {
+    max-height: 160px;
+    margin: 0;
+  }
 }
 
 .tis-item {
@@ -33,6 +37,13 @@
     }
     &:nth-of-type(odd) {
       border-bottom: 0;
+    }
+  }
+
+  @include media-breakpoint-phone() {
+    padding: 0;
+    &:not(:last-of-type) {
+      border-right: 0;
     }
   }
 }

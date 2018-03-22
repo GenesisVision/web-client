@@ -1,4 +1,6 @@
 @import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
+
 .wallet-pane-container {
   display: flex;
 }
@@ -7,9 +9,15 @@
   flex: 1 1 80%;
   max-width: 80%;
   margin: auto;
+  @include media-breakpoint-phone() {
+    max-width: 100%;
+  }
 }
 
 .wallet-pane-container__wallet {
   flex: 1 1 20%;
   max-width: 20%;
+  @include media-breakpoint-phone() {
+    display: none;
+  }
 }

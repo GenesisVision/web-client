@@ -8,8 +8,14 @@
   @include media-breakpoint-desktop() {
     order: 3;
   }
+  @include media-breakpoint-phone() {
+    flex-direction: row;
+    min-width: 100%;
+    justify-content: center;
+  }
 }
 
 .ti-button {
   margin: 1rem;
+  min-width: 110px;
 }

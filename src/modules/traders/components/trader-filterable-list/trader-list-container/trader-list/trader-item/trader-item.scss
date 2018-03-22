@@ -1,4 +1,5 @@
 @import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
 
 .trader-item {
   display: flex;
@@ -8,4 +9,7 @@
   min-height: 190px;
   padding: 1rem 2rem;
   border-bottom: 1px solid $border-color;
+  @include media-breakpoint-phone() {
+    padding: 0.5rem;
+  }
 }

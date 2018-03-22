@@ -17,6 +17,9 @@
 
 .ti-info__order {
   font-size: 1.4rem;
+  @include media-breakpoint-phone() {
+    font-size: 1rem;
+  }
 }
 
 .ti-info__image {
@@ -24,6 +27,9 @@
   width: 100px;
   margin: 0 1rem;
   text-align: center;
+  @include media-breakpoint-phone() {
+    margin: 0.5rem;
+  }
 }
 
 .ti-info__name {
@@ -49,6 +55,9 @@
   height: 4rem;
   width: 225px;
   overflow: hidden;
+  @include media-breakpoint-phone() {
+    height: initial;
+  }
 }
 
 .ti-name__eop {

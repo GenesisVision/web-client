@@ -10,7 +10,10 @@
   height: 80px;
 
   @include media-breakpoint-desktop() {
-    max-width: 40%;
+    min-width: 40%;
+  }
+  @include media-breakpoint-phone() {
+    min-width: 100%;
   }
 }
 

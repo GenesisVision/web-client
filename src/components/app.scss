@@ -1,3 +1,5 @@
+@import "styles/_breakpoint.scss";
+
 .app__main {
   display: flex;
 }
@@ -5,6 +7,9 @@
 .app__sidebar {
   flex: 1 1 65px;
   max-width: 65px;
+  @include media-breakpoint-phone() {
+    display: none;
+  }
 }
 
 .app__body {

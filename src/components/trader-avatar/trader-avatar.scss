@@ -1,22 +1,28 @@
 @import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
 
 .trader-avatar {
   position: relative;
-  max-width: 100px;
 }
 
 .trader-avatar__image {
   max-width: 100px;
   max-height: 100px;
+  @include media-breakpoint-phone() {
+    max-width: 62px;
+    max-height: 62px;
+  }
 }
 
 .trader-avatar__level {
   position: absolute;
   bottom: 0px;
   right: 0px;
-  font-size: inherit;
   color: white;
   background-color: $alternate-color;
   display: inline-block;
   padding: 0.1em 0.5em;
+  @include media-breakpoint-phone() {
+    font-size: 0.8rem;
+  }
 }
