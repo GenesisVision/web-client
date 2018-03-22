@@ -6,19 +6,18 @@ import Progress from "../../shared/components/progress/progress";
 import "./days-left-widget.css";
 
 const DaysLeftWidget = ({ start, end, duration }) => {
-  const dateNow = moment(new Date());
+  const dateNow = moment();
   const startDate = moment(start);
 
   const periodDuration = duration
     ? duration
-    : startDate.diff(moment(end, "days"));
+    : startDate.diff(moment(end), "days");
 
   const daysPassed = () => {
-    const startDate = moment(start);
     return dateNow.diff(startDate, "days");
   };
   const daysLeft = () => {
-    return periodDuration - daysPassed(start);
+    return periodDuration - daysPassed();
   };
   return (
     <div className="days-left-widget">
