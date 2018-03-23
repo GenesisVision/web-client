@@ -6,7 +6,11 @@ import FilterPane from "../../../../filter-pane/components/filter-pane/filter-pa
 import walletActions from "../../../actions/wallet-actions";
 import WalletTransactionListFilter from "./wallet-transaction-list-filter/wallet-transaction-list-filter";
 
-class TraderTransactionListFilterContainer extends PureComponent {
+class WalletTransactionListFilterContainer extends PureComponent {
+  componentWillMount() {
+    this.props.fetchTransactionFilter();
+  }
+
   render() {
     const {
       isPending,
@@ -15,15 +19,10 @@ class TraderTransactionListFilterContainer extends PureComponent {
       programs,
       filtering,
       closeFilter,
-      handleFilterChange,
-      fetchTransactionFilter
+      handleFilterChange
     } = this.props;
-    if (!isPending && !programs) {
-      fetchTransactionFilter();
-      return null;
-    }
 
-    if (isPending) {
+    if (isPending || programs === undefined) {
       return null;
     }
 
@@ -69,6 +68,6 @@ const mapDispatchToProps = dispatch => ({
 
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(
-    TraderTransactionListFilterContainer
+    WalletTransactionListFilterContainer
   )
 );
