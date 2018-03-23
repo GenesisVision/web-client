@@ -40,9 +40,12 @@
 }
 
 .trader-card__image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   width: 100%;
   min-height: 150px;
-  text-align: center;
   @include media-breakpoint-phone() {
     min-height: initial;
     img {

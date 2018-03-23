@@ -1,6 +1,7 @@
 import React from "react";
 
 import "./ts-cards.css";
+import walletIcon from "../../../../../../media/wallet-icon.svg";
 import investorAvatar from "../../../../../../../../shared/media/investor-avatar.png";
 import TSProfitChart from "./ts-profit-chart";
 
@@ -18,7 +19,9 @@ const TSCards = ({ trader }) => {
       </div>
       <div className="trader-card card">
         <div className="trader-card__body card-body">
-          <div className="trader-card__image" />
+          <div className="trader-card__image">
+            <img src={walletIcon} height="100" alt="Avg Profit" />
+          </div>
           <div className="trader-card__value">{trader.profitAvgPercent}%</div>
           <div className="trader-card__description">Avg Profit</div>
         </div>
