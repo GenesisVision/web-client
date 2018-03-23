@@ -1,11 +1,15 @@
 @import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
 
 .mobile-nav {
-  display: flex;
+  display: none;
   justify-content: center;
   background-color: white;
   border-bottom: 1px solid $border-color;
   box-shadow: 0 1px 4px 0 rgba(227, 235, 237, 0.86);
+  @include media-breakpoint-phone() {
+    display: flex;
+  }
 }
 
 .mobile-nav__item {
