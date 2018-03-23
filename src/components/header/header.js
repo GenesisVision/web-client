@@ -7,6 +7,7 @@ import React from "react";
 import FilterIcon from "./filter-icon";
 import filterPaneActionsFactory from "../../modules/filter-pane/actions/filter-pane-actions";
 import loginActions from "../../modules/login/actions/login-actions";
+import MobileNav from "./mobile-nav";
 
 import "./header.css";
 import { HOME_ROUTE } from "../app.constants";
@@ -94,7 +95,7 @@ const Header = ({
           </NavLink>
           <div className="h-sorting">Investor Portal</div>
         </div>
-        <div className="header-filtering">
+        <div className="header__filtering">
           {filterPaneControl(
             shouldShowFilterControl,
             isFilterOpen,
@@ -103,7 +104,7 @@ const Header = ({
           {isAuthenticated ? authorizedControl(signOut) : unauthorizedControl()}
         </div>
       </header>
-
+      <MobileNav />
       <LoadingBar className="header__loading-bar" />
     </div>
   );

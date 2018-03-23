@@ -1,4 +1,6 @@
 @import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
+
 .register {
   display: flex;
   flex-direction: column;
@@ -6,6 +8,9 @@
   max-height: 50vh;
   margin: auto;
   margin-top: 5rem;
+  @include media-breakpoint-phone() {
+    margin-top: 2rem;
+  }
 }
 
 .register__header {
