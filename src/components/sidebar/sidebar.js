@@ -3,8 +3,9 @@ import React from "react";
 
 import "./sidebar.css";
 import { DASHBOARD_ROUTE } from "../../modules/dashboard/dashboard.constants";
-//import { PROFILE_ROUTE } from "../../modules/profile/profile.constants";
+import { TRADERS_ROUTE } from "../../modules/traders/traders.constants";
 import { WALLET_ROUTE } from "../../modules/wallet/wallet.constants";
+//import { PROFILE_ROUTE } from "../../modules/profile/profile.constants";
 import {
   DashboardIcon,
   //SettingsIcon,
@@ -12,12 +13,11 @@ import {
   TradersIcon
 } from "./media/icons.js";
 
-const TRADERS_ROUTE = "/traders";
 const Sidebar = () => {
   return (
     <div className="sidebar">
       <div className="nav-item sidebar__item">
-        <NavLink className="nav-link" title="Traders" to={TRADERS_ROUTE}>
+        <NavLink className="nav-link" title="Programs" to={TRADERS_ROUTE}>
           <TradersIcon />
         </NavLink>
       </div>

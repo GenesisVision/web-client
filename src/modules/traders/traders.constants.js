@@ -1,1 +1,1 @@
-export const TRADERS_ROUTE = "/traders";
+export const TRADERS_ROUTE = "/programs";
