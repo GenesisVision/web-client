@@ -1,3 +1,5 @@
+@import "styles/_breakpoint.scss";
+
 .trader-charts {
   margin-top: 2rem;
 }
@@ -13,6 +15,10 @@
 .trader-chart__bar {
   flex: 2;
   max-width: 60%;
+  @include media-breakpoint-desktop() {
+    min-width: 100%;
+    max-width: 100%;
+  }
 }
 
 .trader-chart__pie {

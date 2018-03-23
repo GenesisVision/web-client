@@ -18,8 +18,8 @@ class TraderContainer extends Component {
           traderId={traderId}
           isAuthenticated={isAuthenticated}
         />
-        {isAuthenticated && <TraderHistoryContainer traderId={traderId} />}
-        {isAuthenticated && <TraderFilterableDealList traderId={traderId} />}
+        <TraderHistoryContainer traderId={traderId} />
+        <TraderFilterableDealList traderId={traderId} />
         {isAuthenticated && <TraderFilterableRequestList traderId={traderId} />}
       </div>
     );

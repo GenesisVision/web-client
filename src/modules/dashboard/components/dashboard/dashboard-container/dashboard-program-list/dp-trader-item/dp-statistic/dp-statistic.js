@@ -1,8 +1,6 @@
 import NumberFormat from "react-number-format";
 import React from "react";
 
-import "./dp-statisctic.css";
-
 const DPStatistic = ({ trader }) => {
   return (
     <div className="ti-statistic">
