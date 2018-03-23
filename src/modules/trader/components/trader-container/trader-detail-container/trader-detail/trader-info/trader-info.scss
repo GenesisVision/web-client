@@ -1,3 +1,5 @@
+@import "styles/_breakpoint.scss";
+
 .trader-info {
   display: flex;
   flex-wrap: wrap;
@@ -16,9 +18,21 @@
 
 .trader-info__buttons {
   flex: 1;
+  @include media-breakpoint-phone() {
+    min-width: 100%;
+  }
 }
 
 .trader-info__title {
   font-family: "NeuzeitGroBol";
   font-size: 3rem;
+  @include media-breakpoint-phone() {
+    font-size: 2rem;
+  }
+}
+
+.trader-info__description {
+  @include media-breakpoint-phone() {
+    font-size: 0.7rem;
+  }
 }

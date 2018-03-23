@@ -27,6 +27,11 @@
   box-shadow: 0 1px 4px 0 rgba(227, 235, 237, 0.86);
 }
 
+.filter-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .filter-item {
   display: flex;
   flex-direction: column;

@@ -96,10 +96,10 @@ class TraderChartPie extends Component {
             activeIndex={this.state.activeIndex}
             activeShape={renderActiveShape}
             data={this.props.data}
-            cx={300}
-            cy={200}
+            //cx={300}
+            // cy={200}
             innerRadius={70}
-            outerRadius={130}
+            //outerRadius={130}
             onMouseEnter={this.onPieEnter}
             isAnimationActive={false}
           >

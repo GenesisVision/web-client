@@ -10,6 +10,12 @@
   justify-content: space-between;
   min-height: 430px;
   padding: 2rem;
+  @include media-breakpoint-desktop() {
+    padding: 1rem;
+  }
+  @include media-breakpoint-phone() {
+    min-height: 250px;
+  }
 }
 
 .trader-chart__bar {
@@ -17,10 +23,20 @@
   max-width: 60%;
   @include media-breakpoint-desktop() {
     min-width: 100%;
-    max-width: 100%;
+    min-height: 430px;
+  }
+  @include media-breakpoint-phone() {
+    min-height: 250px;
   }
 }
 
 .trader-chart__pie {
   flex: 1;
+  @include media-breakpoint-desktop() {
+    min-width: 100%;
+    min-height: 430px;
+  }
+  @include media-breakpoint-phone() {
+    display: none;
+  }
 }

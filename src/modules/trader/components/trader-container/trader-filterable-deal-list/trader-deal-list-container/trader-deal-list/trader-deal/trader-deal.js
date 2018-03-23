@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ExpandIcon from "./expand-icon";
 import classnames from "classnames";
 import TraderDealDetail from "./trader-deal-detail/trader-deal-detail";
+import moment from "moment";
 
 import "./trader-deal.css";
 
@@ -58,7 +59,9 @@ class TraderDeal extends Component {
             </div>
           </div>
           <div className="trader-deal__date">
-            {new Date(deal.date).toDateString()}
+            <span className="trader-deal__date-val">
+              {moment(deal.date).format("MMM Do YYYY")}
+            </span>
           </div>
         </div>
         {isOpen && (

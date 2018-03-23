@@ -11,6 +11,7 @@ const TSProfitChart = ({ data }) => {
             dataKey="totalProfit"
             stroke="#03bdaf"
             isAnimationActive={false}
+            dot={false}
           />
         </LineChart>
       </ResponsiveContainer>

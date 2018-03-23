@@ -1,4 +1,5 @@
 @import "styles/_colors";
+@import "styles/_breakpoint.scss";
 
 .wallet-transaction {
   display: flex;
@@ -9,12 +10,18 @@
   background: $background-color;
   border: 1px solid $border-color;
   border-bottom: 0;
+  @include media-breakpoint-phone() {
+    flex-direction: column;
+  }
 }
 
 .wallet-transaction__info {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  @include media-breakpoint-phone() {
+    margin-top: 0.5rem;
+  }
 }
 
 .wallet-transaction__name {

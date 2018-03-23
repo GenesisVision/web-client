@@ -1,4 +1,6 @@
 @import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
+
 .trader-statistic {
   display: flex;
   flex-wrap: wrap;
@@ -13,5 +15,12 @@
 
   &:not(:last-of-type) {
     border-right: 2px dashed $border-color;
+  }
+
+  @include media-breakpoint-phone() {
+    max-width: 6rem;
+    &:not(:last-of-type) {
+      border-right: 0;
+    }
   }
 }

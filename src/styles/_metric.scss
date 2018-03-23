@@ -1,3 +1,5 @@
+@import "styles/_breakpoint.scss";
+
 .metric {
   display: flex;
   flex-direction: column;
@@ -8,10 +10,18 @@
 .metric__value {
   font-size: 1.7rem;
   font-family: "NeuzeitGroLig";
+  line-height: 1;
+  @include media-breakpoint-phone() {
+    font-size: 1.2rem;
+  }
 }
 
 .metric__description {
   color: $text-sub-color;
   font-size: 0.9rem;
-  line-height: 0.5;
+  line-height: 1;
+  text-align: center;
+  @include media-breakpoint-phone() {
+    font-size: 0.6rem;
+  }
 }

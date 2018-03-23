@@ -1,9 +1,17 @@
+@import "styles/_breakpoint.scss";
+
 .trader-container {
   margin: 3rem;
+  @include media-breakpoint-phone() {
+    margin: 0.5rem;
+  }
 }
 
 .trader-container__header {
   font-family: "NeuzeitGroBol";
   font-size: 1.5rem;
   padding: 2rem;
+  @include media-breakpoint-phone() {
+    padding: 0 2rem;
+  }
 }

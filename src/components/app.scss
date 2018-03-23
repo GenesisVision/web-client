@@ -14,4 +14,7 @@
 
 .app__body {
   flex: 1 1 100%;
+  @include media-breakpoint-phone() {
+    max-width: 100%;
+  }
 }

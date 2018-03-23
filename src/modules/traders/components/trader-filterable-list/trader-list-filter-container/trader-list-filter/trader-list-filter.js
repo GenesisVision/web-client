@@ -4,7 +4,6 @@ import React from "react";
 import GVInputRange from "../../../../../../shared/components/form/gv-input-range/gv-input-range";
 import GVSelect from "../../../../../../shared/components/form/gv-select/gv-select";
 
-import "./trader-list-filter.css";
 const sortingOptions = [
   { value: "ByTitle", label: "Name" },
   { value: "ByLevel", label: "Level" },
@@ -22,7 +21,7 @@ const TraderListFilter = ({
   onChangeComplete
 }) => {
   return (
-    <form className="trader-list-filter">
+    <form className="filter-list">
       <div className="filter-item">
         <div className="filter-item__title">Level</div>
         <div className="filter-item__description">Select Trader Level</div>

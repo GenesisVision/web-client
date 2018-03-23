@@ -1,5 +1,6 @@
 import React from "react";
 import "./trader-deal-detail.css";
+import moment from "moment";
 
 const TraderDealDetailMT4 = ({ deal }) => {
   return (
@@ -27,7 +28,7 @@ const TraderDealDetailMT4 = ({ deal }) => {
       <div className="trader-deal__cell">
         <div className="metric">
           <div className="metric__value">
-            {new Date(deal.dateOpen).toDateString()}
+            {moment(deal.dateOpen).format("L")}
           </div>
           <div className="metric__description">Date Open</div>
         </div>
@@ -36,7 +37,7 @@ const TraderDealDetailMT4 = ({ deal }) => {
         <div className="trader-deal__cell">
           <div className="metric">
             <div className="metric__value">
-              {new Date(deal.dateClose).toDateString()}
+              {moment(deal.dateClose).format("L")}
             </div>
             <div className="metric__description">Date Close</div>
           </div>
@@ -63,9 +64,7 @@ const TraderDealDetailMT5 = ({ deal }) => {
       </div>
       <div className="trader-deal__cell">
         <div className="metric">
-          <div className="metric__value">
-            {new Date(deal.date).toDateString()}
-          </div>
+          <div className="metric__value">{moment(deal.date).format("L")}</div>
           <div className="metric__description">Date</div>
         </div>
       </div>

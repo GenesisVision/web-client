@@ -3,7 +3,6 @@ import React from "react";
 
 import GVSelect from "../../../../../../shared/components/form/gv-select/gv-select";
 
-import "./wallet-transaction-list-filter.css";
 const programOptions = programs =>
   programs.map(x => ({ value: x.id, label: x.title }));
 
@@ -20,7 +19,7 @@ const WalletTransactionListFilter = ({
   onChangeComplete
 }) => {
   return (
-    <form className="wallet-transaction-list-filter">
+    <form className="filter-list">
       <div className="filter-item">
         <div className="filter-item__title">Program</div>
         <div className="filter-item__description">Select Program</div>

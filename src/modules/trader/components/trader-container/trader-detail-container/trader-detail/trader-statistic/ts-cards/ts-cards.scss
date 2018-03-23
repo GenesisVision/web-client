@@ -1,3 +1,4 @@
+@import "styles/_breakpoint.scss";
 .trader-cards {
   display: flex;
   flex-wrap: wrap;
@@ -15,6 +16,17 @@
   &:last-of-type {
     margin-right: 0;
   }
+
+  @include media-breakpoint-phone() {
+    min-width: 100px;
+    &:first-of-type {
+      min-width: 300px;
+      margin-left: 2rem;
+    }
+    &:last-of-type {
+      margin-right: 2rem;
+    }
+  }
 }
 
 .trader-card__body {
@@ -22,15 +34,27 @@
   flex-direction: column;
   align-items: center;
   padding: 3rem;
+  @include media-breakpoint-phone() {
+    padding: 1rem;
+  }
 }
 
 .trader-card__image {
   width: 100%;
   min-height: 150px;
   text-align: center;
+  @include media-breakpoint-phone() {
+    min-height: initial;
+    img {
+      height: 50px;
+    }
+  }
 }
 .trader-card__value {
   font-size: 4rem;
+  @include media-breakpoint-phone() {
+    font-size: 2rem;
+  }
 }
 .trader-card__description {
   line-height: 0;

@@ -1,24 +1,27 @@
 import React from "react";
+import moment from "moment";
+
+import "./trader-request.css";
 
 const TraderRequest = ({ request, cancelRequest }) => {
   return (
-    <div className="list-group-item">
-      <div className="row">
-        <div className="col-2">{request.type}</div>
-        <div className="col-5">{request.amount} gvt</div>
-        <div className="col-2">{request.status}</div>
-        <div className="col-2">{new Date(request.date).toDateString()}</div>
-        <div className="col-1">
-          {request.status === "New" ? (
-            <button
-              className="btn btn-outline-primary"
-              onClick={cancelRequest(request.id)}
-            >
-              Cancel
-            </button>
-          ) : null}
-        </div>
+    <div className="trader-request__row">
+      <div className="trader-request__type">{request.type}</div>
+      <div className="trader-request__amount">{request.amount} GVT</div>
+      <div className="trader-request__status">{request.status}</div>
+      <div className="trader-request__date">
+        {moment(request.date).format("L")}
       </div>
+      {request.status === "New" ? (
+        <div className="trader-request__cancel">
+          <button
+            className="gv-btn gv-btn-primary"
+            onClick={cancelRequest(request.id)}
+          >
+            Cancel
+          </button>
+        </div>
+      ) : null}
     </div>
   );
 };
