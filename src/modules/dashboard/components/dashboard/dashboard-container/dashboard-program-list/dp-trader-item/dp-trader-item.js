@@ -8,10 +8,16 @@ import DPStatistic from "./dp-statistic/dp-statistic";
 import "./dp-trader-item.css";
 
 const DPTraderItem = ({ idx, trader, isAuthenticated, openInvestPopup }) => {
+  const traderChartData = trader.chart.map(x => ({
+    fund: x.investorFund + x.managerFund,
+    profit: x.prfit,
+    loss: x.loss,
+    totalProfit: x.totalProfit
+  }));
   return (
     <div className="dp-trader-item">
       <TIInfo idx={idx} trader={trader} />
-      <TIChart data={trader.chart} />
+      <TIChart data={traderChartData} />
       <DPStatistic trader={trader} />
       <TIButtons
         traderId={trader.id}

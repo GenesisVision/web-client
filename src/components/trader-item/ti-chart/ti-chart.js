@@ -24,6 +24,7 @@ const TIChart = ({ data }) => {
             className="fund"
             dataKey="fund"
             stackId="stack"
+            fill="#184f61"
             isAnimationActive={false}
           />
           <Bar
@@ -37,7 +38,7 @@ const TIChart = ({ data }) => {
             className="loss"
             dataKey="loss"
             stackId="stack"
-            fill="#28768d"
+            fill="#e00463"
             isAnimationActive={false}
           />
           <Line

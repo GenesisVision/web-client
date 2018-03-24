@@ -17,20 +17,30 @@ const TraderChartBar = ({ data }) => {
         <YAxis hide />
         <Tooltip />
         <Bar
-          className="fund"
-          dataKey="fund"
+          className="manager-fund"
+          dataKey="managerFund"
+          fill="#184f61"
+          stackId="stack"
+          isAnimationActive={false}
+        />
+        <Bar
+          className="investor-fund"
+          dataKey="investorFund"
+          fill="#aaa"
           stackId="stack"
           isAnimationActive={false}
         />
         <Bar
           className="profit"
           dataKey="profit"
+          fill="#03bdaf"
           stackId="stack"
           isAnimationActive={false}
         />
         <Bar
           className="loss"
           dataKey="loss"
+          fill="#e00463"
           stackId="stack"
           isAnimationActive={false}
         />

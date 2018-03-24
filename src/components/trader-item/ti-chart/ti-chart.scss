@@ -26,14 +26,14 @@
 
 .profit {
   .recharts-rectangle {
-    fill: #15bbaf;
+    fill: $alternate-color;
     stroke: $main-color;
   }
 }
 
 .loss {
   .recharts-rectangle {
-    fill: #28768d;
+    fill: $danger-color;
     stroke: $main-color;
   }
 }

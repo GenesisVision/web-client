@@ -8,10 +8,16 @@ import TIStatistic from "./ti-statistic/ti-statistic";
 import "./trader-item.css";
 
 const TraderItem = ({ idx, trader, isAuthenticated, openInvestPopup }) => {
+  const traderChartData = trader.chart.map(x => ({
+    fund: x.investorFund + x.managerFund,
+    profit: x.prfit,
+    loss: x.loss,
+    totalProfit: x.totalProfit
+  }));
   return (
     <div className="trader-item">
       <TIInfo idx={idx} trader={trader} />
-      <TIChart data={trader.chart} />
+      <TIChart data={traderChartData} />
       <TIStatistic trader={trader} />
       <TIButtons
         traderId={trader.id}
