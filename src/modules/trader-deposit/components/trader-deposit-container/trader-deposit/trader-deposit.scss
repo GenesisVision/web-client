@@ -1,16 +1,27 @@
 @import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
 
 .trader-deposit__info {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   margin: 2rem 0;
+  @include media-breakpoint-phone() {
+    display: none;
+  }
 }
 
 .trader-deposit__info-cell {
   flex: 1 1 32%;
   max-width: 32%;
   text-align: center;
+}
+
+.trader-deposit__available {
+  @include media-breakpoint-phone() {
+    min-width: 100%;
+  }
 }
 
 .trader-deposit__trader {
@@ -35,14 +46,23 @@
   display: flex;
   justify-content: center;
   margin: 2rem 0;
+  @include media-breakpoint-phone() {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .trader-deposit__calculator-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex: 1 1 30%;
   max-width: 30%;
-  text-align: center;
   border: 1px solid $border-color;
   padding: 1rem;
+  @include media-breakpoint-phone() {
+    min-width: 12rem;
+  }
 }
 
 .input-gvt {
@@ -52,6 +72,14 @@
   align-items: center;
 }
 
+.input-gvt__value {
+  @include media-breakpoint-phone() {
+    .form-group {
+      margin-bottom: 0;
+    }
+  }
+}
+
 .input-gvt__amount {
   color: $text-sub-color;
   border: 0;
@@ -59,13 +87,12 @@
   text-align: center;
   font-size: 2rem;
   outline: none;
-  height: 2rem;
 }
 
 .input-gvt__description {
   color: $text-sub-color;
   font-size: 0.9rem;
-  line-height: 0.5;
+  line-height: 1;
 }
 
 .calculated-usd {

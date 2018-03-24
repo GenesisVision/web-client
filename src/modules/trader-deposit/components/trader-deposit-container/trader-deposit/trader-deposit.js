@@ -46,7 +46,7 @@ const TraderDeposit = ({
               />
             </div>
           </div>
-          <div className="trader-deposit__info-cell">
+          <div className="trader-deposit__info-cell trader-deposit__available">
             <div className="metric">
               <div className="metric__value">
                 {+traderDeposit.gvtWalletAmount.toFixed(2)}

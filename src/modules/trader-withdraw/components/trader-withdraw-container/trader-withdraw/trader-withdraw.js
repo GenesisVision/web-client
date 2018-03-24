@@ -61,7 +61,9 @@ const TraderWithdraw = ({
           </div>
         </div>
         <div className="trader-withdraw__calculator">
-          <div>How much would you like to withdraw?</div>
+          <div className="trader-withdraw__calculator-header">
+            How much would you like to withdraw?
+          </div>
           <div className="trader-withdraw__calculator-cell input-token">
             <div className="input-gvt__token">
               <Field
