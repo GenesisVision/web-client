@@ -56,6 +56,9 @@
 .trader-card__value {
   display: flex;
   font-size: 4rem;
+  @include media-breakpoint-desktop() {
+    font-size: 3rem;
+  }
   @include media-breakpoint-phone() {
     font-size: 2rem;
   }
