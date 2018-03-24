@@ -6,17 +6,16 @@ import swaggerInvestorApi from "../../../services/api-client/swagger-investor-ap
 import { HOME_ROUTE } from "../../../components/app.constants";
 import * as actionTypes from "./register-actions.constants";
 
-const registerUser = registerFormData => {
-  return {
+const registerUser = registerFormData => dispatch => {
+  return dispatch({
     type: actionTypes.REGISTER,
-    payload: swaggerInvestorApi
-      .apiInvestorAuthSignUpPostWithHttpInfo({
-        model: RegisterManagerViewModel.constructFromObject(registerFormData)
-      })
-      .then(() => {
-        history.push(HOME_ROUTE);
-      })
-  };
+    payload: swaggerInvestorApi.apiInvestorAuthSignUpPostWithHttpInfo({
+      model: RegisterManagerViewModel.constructFromObject(registerFormData)
+    })
+  }).then(response => {
+    history.push(HOME_ROUTE);
+    return response;
+  });
 };
 
 const registerActions = { registerUser };

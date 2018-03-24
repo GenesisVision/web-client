@@ -7,8 +7,8 @@ import swaggerInvestorApi from "../../../services/api-client/swagger-investor-ap
 import { HOME_ROUTE } from "../../../components/app.constants";
 import * as actionTypes from "./login-actions.constants";
 
-const loginUser = (loginFormData, from) => {
-  return {
+const loginUser = (loginFormData, from) => dispatch => {
+  return dispatch({
     type: actionTypes.LOGIN,
     payload: swaggerInvestorApi
       .apiInvestorAuthSignInPostWithHttpInfo({
@@ -16,9 +16,12 @@ const loginUser = (loginFormData, from) => {
       })
       .then(response => {
         authService.storeToken(response.data);
-        history.push(from);
+        return response;
       })
-  };
+  }).then(response => {
+    history.push(from);
+    return response;
+  });
 };
 
 const logoutUser = () => dispatch => {

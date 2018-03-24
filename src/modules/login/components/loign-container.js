@@ -1,24 +1,12 @@
 import { connect } from "react-redux";
 import React from "react";
 
-import authActions from "../../../actions/authActions";
 import loginActions from "../actions/login-actions";
 import LoginForm from "./login-form/login-form";
 
 import { HOME_ROUTE } from "../../../components/app.constants";
 
-const LoginContainer = ({
-  location,
-  isAuthenticated,
-  errorMessage,
-  login,
-  alreadyAuthenticated
-}) => {
-  if (isAuthenticated) {
-    alreadyAuthenticated();
-    return null;
-  }
-
+const LoginContainer = ({ location, isAuthenticated, errorMessage, login }) => {
   const { from } = location.state || { from: { pathname: HOME_ROUTE } };
   const handleSubmit = (loginFormData, setSubmitting) => {
     login(loginFormData, from, setSubmitting);
@@ -38,9 +26,6 @@ const mapDispatchToProps = dispatch => ({
     dispatch(loginActions.loginUser(loginFormData, from)).catch(() => {
       setSubmitting(false);
     });
-  },
-  alreadyAuthenticated: () => {
-    dispatch(authActions.alreadyAuthenticated());
   }
 });
 
