@@ -18,12 +18,6 @@ class TraderListContainer extends Component {
     this.fetchTraders();
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.queryParams !== this.props.queryParams) {
-      this.fetchTraders();
-    }
-  }
-
   render() {
     const { isPending, traders, isAuthenticated, openInvestPopup } = this.props;
     if (isPending || !traders) return null;

@@ -1,24 +1,23 @@
 import { connect } from "react-redux";
-import React from "react";
+import React, { Component } from "react";
 
 import walletActions from "../../../actions/wallet-actions";
 import WalletInfo from "./wallet-info/wallet-info";
 
-const WalletContainer = ({
-  isPending,
-  wallets,
-  fetchWallet,
-  showSuccessCopyMessage
-}) => {
-  if (isPending) {
-    return null;
+class WalletContainer extends Component {
+  componentWillMount() {
+    this.props.fetchWallet();
   }
-  if (wallets === undefined) {
-    fetchWallet();
-    return null;
+
+  render() {
+    const { isPending, wallets } = this.props;
+
+    if (isPending || wallets === undefined) {
+      return null;
+    }
+    return <WalletInfo wallet={wallets[0]} />;
   }
-  return <WalletInfo wallet={wallets[0]} />;
-};
+}
 
 const mapStateToProps = state => {
   const { isPending, errorMessage, data } = state.walletData.wallet;
@@ -26,9 +25,6 @@ const mapStateToProps = state => {
   let wallets;
   if (data) {
     wallets = data.wallets;
-  }
-  if (errorMessage !== "") {
-    wallets = [];
   }
   return { isPending, wallets, errorMessage };
 };
