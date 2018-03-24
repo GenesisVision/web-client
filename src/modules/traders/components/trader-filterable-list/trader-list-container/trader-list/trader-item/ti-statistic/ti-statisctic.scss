@@ -30,6 +30,7 @@
   &:nth-of-type(odd) {
     border-bottom: 2px solid $border-color;
   }
+
   @include media-breakpoint-desktop() {
     padding: 0.5rem 5%;
     &:not(:last-of-type) {
@@ -44,6 +45,19 @@
     padding: 0;
     &:not(:last-of-type) {
       border-right: 0;
+    }
+  }
+  .metric__value {
+    line-height: 1.5;
+    @include media-breakpoint-desktop() {
+      font-size: 1.5rem;
+    }
+  }
+
+  .metric__description {
+    line-height: 0.5;
+    @include media-breakpoint-desktop() {
+      font-size: 0.7rem;
     }
   }
 }
