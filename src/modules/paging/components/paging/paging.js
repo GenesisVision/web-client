@@ -1,5 +1,6 @@
 import Pager from "react-pager";
 import React, { PureComponent } from "react";
+import "./paging.css";
 
 class Paging extends PureComponent {
   handlePageChanged = nextPage => {
