@@ -1,4 +1,6 @@
 @import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
+
 .dashboard-statistic {
   display: flex;
   justify-content: center;
@@ -13,5 +15,9 @@
   border-left: 2px dashed $border-color;
   &:last-of-type {
     border-right: 2px dashed $border-color;
+  }
+
+  @include media-breakpoint-desktop() {
+    max-width: initial;
   }
 }
