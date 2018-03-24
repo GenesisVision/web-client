@@ -11,7 +11,7 @@ const DashboardStatistic = ({ profitFromPrograms, investedAmount }) => {
           <div className="metric__value">
             <NumberFormat
               value={profitFromPrograms}
-              decimalScale={2}
+              // decimalScale={2}
               displayType="text"
             />
             <div className="metric__bubble">GVT</div>
@@ -24,7 +24,7 @@ const DashboardStatistic = ({ profitFromPrograms, investedAmount }) => {
           <div className="metric__value">
             <NumberFormat
               value={investedAmount}
-              decimalScale={2}
+              // decimalScale={2}
               displayType="text"
             />
             <div className="metric__bubble">GVT</div>

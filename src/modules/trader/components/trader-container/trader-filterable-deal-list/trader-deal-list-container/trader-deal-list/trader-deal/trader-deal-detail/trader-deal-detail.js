@@ -17,7 +17,7 @@ const TraderDealDetailMT4 = ({ deal }) => {
           <div className="metric__value">
             <NumberFormat
               value={deal.priceOpen}
-              decimalScale={2}
+              // decimalScale={2}
               displayType="text"
             />
           </div>
@@ -30,7 +30,7 @@ const TraderDealDetailMT4 = ({ deal }) => {
             <div className="metric__value">
               <NumberFormat
                 value={deal.priceClose}
-                decimalScale={2}
+                // decimalScale={2}
                 displayType="text"
               />
             </div>
@@ -74,7 +74,7 @@ const TraderDealDetailMT5 = ({ deal }) => {
           <div className="metric__value">
             <NumberFormat
               value={deal.price}
-              decimalScale={2}
+              //decimalScale={2}
               displayType="text"
             />
           </div>

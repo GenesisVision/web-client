@@ -18,7 +18,7 @@
   }
 
   @include media-breakpoint-phone() {
-    max-width: 6rem;
+    max-width: 9rem;
     &:not(:last-of-type) {
       border-right: 0;
     }

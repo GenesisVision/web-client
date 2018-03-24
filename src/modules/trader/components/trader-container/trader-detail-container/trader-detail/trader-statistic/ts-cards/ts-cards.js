@@ -17,7 +17,7 @@ const TSCards = ({ trader }) => {
           <div className="trader-card__value">
             <NumberFormat
               value={trader.profitTotal}
-              decimalScale={4}
+              // decimalScale={4}
               displayType="text"
             />
             <div className="trader-card__bubble metric__bubble">GVT</div>

@@ -52,7 +52,7 @@ class TraderDeal extends Component {
                 <div className="metric__value">
                   <NumberFormat
                     value={deal.profit}
-                    decimalScale={2}
+                    // decimalScale={2}
                     displayType="text"
                   />
                   <div className="metric__bubble">{currency}</div>
@@ -68,9 +68,7 @@ class TraderDeal extends Component {
             </div>
           </div>
           <div className="trader-deal__date">
-            <span className="trader-deal__date-val">
-              {moment(deal.date).format("MMM Do YYYY")}
-            </span>
+            {moment(deal.date).format("MMM Do YYYY")}
           </div>
         </div>
         {isOpen && (

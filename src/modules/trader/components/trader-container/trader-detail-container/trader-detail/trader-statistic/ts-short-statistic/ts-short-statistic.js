@@ -10,7 +10,7 @@ const TSShortStatistic = ({ trader }) => {
           <div className="metric__value">
             <NumberFormat
               value={trader.balance}
-              decimalScale={2}
+              // decimalScale={2}
               displayType="text"
             />
             <div className="metric__bubble">{trader.currency}</div>
@@ -23,7 +23,7 @@ const TSShortStatistic = ({ trader }) => {
           <div className="metric__value">
             <NumberFormat
               value={trader.ownBalance}
-              decimalScale={2}
+              // decimalScale={2}
               displayType="text"
             />
             <div className="metric__bubble">{trader.currency}</div>
