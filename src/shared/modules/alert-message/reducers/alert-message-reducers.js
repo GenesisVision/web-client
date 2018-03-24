@@ -1,25 +1,25 @@
-import * as actionTypes from "../actions/alert-message-actions.constants"
+import uuid from "uuid";
+
+import * as actionTypes from "../actions/alert-message-actions.constants";
 
 const initialState = [];
 
 const addMessage = (state, action) => {
   const newMessage = {
+    id: uuid.v4(),
     text: action.text,
     className: action.className
-  }  
-  return [
-    ...state,
-    newMessage
-  ]
-}
+  };
+  return [...state.slice(-2), newMessage];
+};
 
 const removeMessage = (state, action) => {
-  return state.filter((v, i) => i !== action.idx);
-}
+  return state.filter(message => message.id !== action.id);
+};
 
-const removeAllMessages = (state) => {
+const removeAllMessages = state => {
   return [];
-}
+};
 
 const alertMessagesReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -34,6 +34,6 @@ const alertMessagesReducer = (state = initialState, action) => {
     default:
       return state;
   }
-}
+};
 
-export default alertMessagesReducer
+export default alertMessagesReducer;

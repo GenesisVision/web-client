@@ -2,31 +2,31 @@ import * as alertMessageActionTypes from "./alert-message-actions.constants";
 
 const success = text => ({
   type: alertMessageActionTypes.ALERT_MESSAGE_SUCCESS,
-  className: "success",
+  className: "alert-message--success",
   text
 });
 
 const warning = text => ({
   type: alertMessageActionTypes.ALERT_MESSAGE_WARNING,
-  className: "warning",
+  className: "alert-message--warning",
   text
 });
 
 const error = text => ({
   type: alertMessageActionTypes.ALERT_MESSAGE_ERROR,
-  className: "danger",
+  className: "alert-message--danger",
   text
 });
 
-const removeAt = idx => ({
+const remove = id => ({
   type: alertMessageActionTypes.ALERT_MESSAGE_REMOVE_AT,
-  idx
+  id
 });
 
-const clearAll = idx => ({
+const clearAll = () => ({
   type: alertMessageActionTypes.ALERT_MESSAGE_CLEAR_ALL
 });
 
-const alertMessageActions = { success, warning, error, removeAt, clearAll };
+const alertMessageActions = { success, warning, error, remove, clearAll };
 
 export { alertMessageActions };

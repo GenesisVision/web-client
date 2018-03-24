@@ -32,12 +32,12 @@ describe("alertMessageActions", () => {
   });
 
   it("should create an action for removing text", () => {
-    const removeAtIdx = 0;
+    const removeAtId = 0;
     const expectedAction = {
       type: alertMessageActionTypes.ALERT_MESSAGE_REMOVE_AT,
-      idx: removeAtIdx
+      id: removeAtId
     };
-    expect(alertMessageActions.removeAt(removeAtIdx)).toEqual(expectedAction);
+    expect(alertMessageActions.remove(removeAtIdx)).toEqual(expectedAction);
   });
 
   it("should create an action for removing text", () => {

@@ -1,8 +1,14 @@
 $main-color: #184f61;
 $alternate-color: #03bdaf;
+$danger-color: #e00463;
+$warning-color: #f9f3dd;
 $border-color: #e3ebed;
 $background-color: #f8f8f8;
 
 $text-color: $main-color;
 $text-sub-color: #28768d;
 $text-color-light: $alternate-color;
+
+$box-shadow-primary-color: rgba(22, 183, 173, 0.28);
+$box-shadow-danger-color: rgba(224, 4, 99, 0.28);
+$box-shadow-warning-color: rgba(249, 243, 221, 0.28);

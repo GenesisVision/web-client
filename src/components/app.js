@@ -26,9 +26,7 @@ const App = () => (
             <AppRoutes />
           </div>
         </div>
-        <div className="col-sm-2 offset-10 fixed-bottom">
-          <AlertMessageList />
-        </div>
+        <AlertMessageList />
         <PopupContainer />
       </div>
     </ConnectedRouter>

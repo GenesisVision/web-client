@@ -1,0 +1,58 @@
+@import "styles/_breakpoint.scss";
+@import "styles/_colors.scss";
+
+.alert-message-list {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  @include media-breakpoint-phone() {
+    bottom: 0;
+    right: 0;
+  }
+}
+
+.alert-message {
+  flex: 1;
+  min-width: 300px;
+  max-width: 300px;
+
+  color: white;
+  font-family: "NeuzeitGroBol";
+  font-weight: 400;
+
+  @include media-breakpoint-phone() {
+    min-width: 100vw;
+    max-width: 100vw;
+  }
+}
+
+.alert-message--success {
+  background-color: $alternate-color;
+  border-color: $alternate-color;
+  box-shadow: 0 5px 15px 0 $box-shadow-primary-color;
+}
+
+.alert-message--danger {
+  background-color: $danger-color;
+  border-color: $danger-color;
+  box-shadow: 0 5px 15px 0 $box-shadow-danger-color;
+}
+
+.alert-message--warning {
+  color: $text-color;
+  background-color: $warning-color;
+  border-color: $warning-color;
+  box-shadow: 0 5px 15px 0 $box-shadow-warning-color;
+}
+
+.alert-message__clear-all {
+  margin-bottom: 0.5rem;
+  .gv-btn {
+    font-size: 0.9rem;
+    line-height: 1;
+    padding: 0 0.9rem;
+  }
+}
