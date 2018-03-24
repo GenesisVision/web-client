@@ -13,7 +13,7 @@ const TraderButtons = ({
     <div className="trader-buttons">
       <button
         className="trader-button gv-btn gv-btn-secondary"
-        onClick={openWithdrawPopup(traderId)}
+        onClick={openWithdrawPopup}
         disabled={!isWithdrawEnable}
       >
         Withdraw

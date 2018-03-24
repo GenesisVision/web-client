@@ -4,14 +4,19 @@ import TraderRequest from "./trader-request/trader-request";
 
 import "./trader-request-list.css";
 
-const TraderRequestList = ({ requests, cancelRequest }) => {
+const TraderRequestList = ({ requests, token, cancelRequest }) => {
   const renderRequestList = () => {
     if (requests.length === 0) {
       return <div>There are no requests.</div>;
     }
 
     return requests.map(x => (
-      <TraderRequest key={x.id} request={x} cancelRequest={cancelRequest} />
+      <TraderRequest
+        key={x.id}
+        request={x}
+        token={token}
+        cancelRequest={cancelRequest}
+      />
     ));
   };
   return (

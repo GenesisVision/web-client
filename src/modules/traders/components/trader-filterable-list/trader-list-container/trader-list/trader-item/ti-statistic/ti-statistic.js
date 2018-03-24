@@ -11,7 +11,7 @@ const TIStatistic = ({ trader }) => {
           <div className="metric__value">
             <NumberFormat
               value={trader.profitAvgPercent}
-              suffix=" %"
+              suffix="%"
               decimalScale={2}
               displayType="text"
             />
@@ -45,6 +45,7 @@ const TIStatistic = ({ trader }) => {
               decimalScale={2}
               displayType="text"
             />
+            <div className="metric__bubble">{trader.currency}</div>
           </div>
           <div className="metric__description">Balance</div>
         </div>
@@ -57,7 +58,7 @@ const TIStatistic = ({ trader }) => {
               decimalScale={2}
               displayType="text"
             />
-            <div className="metric__bubble">{trader.currency}</div>
+            <div className="metric__bubble">GVT</div>
           </div>
           <div className="metric__description">Total Profit</div>
         </div>

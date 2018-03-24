@@ -19,8 +19,8 @@ const TraderDeposit = ({
   closePopup,
   error
 }) => {
-  const calculateUsd = () => {
-    return (values.amount * traderDeposit.gvtUsdRate).toFixed(2);
+  const calculateManagerCurrency = () => {
+    return (values.amount * traderDeposit.gvtRate).toFixed(2);
   };
   return (
     <div className="popup">
@@ -71,9 +71,11 @@ const TraderDeposit = ({
           <div className="trader-deposit__calculator-cell calculated-usd">
             <div className="metric">
               <div className="metric__value label-usd__value">
-                {calculateUsd()}
+                {calculateManagerCurrency()}
               </div>
-              <div className="metric__description">Amount in USD</div>
+              <div className="metric__description">
+                Amount in {traderDeposit.currency}
+              </div>
             </div>
           </div>
         </div>

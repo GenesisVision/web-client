@@ -1,4 +1,5 @@
 import React from "react";
+import NumberFormat from "react-number-format";
 
 import "./ts-cards.css";
 import walletIcon from "../../../../../../media/wallet-icon.svg";
@@ -13,7 +14,14 @@ const TSCards = ({ trader }) => {
           <div className="trader-card__image">
             <TSProfitChart data={trader.chart} />
           </div>
-          <div className="trader-card__value">${trader.profitTotal}</div>
+          <div className="trader-card__value">
+            <NumberFormat
+              value={trader.profitTotal}
+              decimalScale={4}
+              displayType="text"
+            />
+            <div className="trader-card__bubble metric__bubble">GVT</div>
+          </div>
           <div className="trader-card__description">Profit</div>
         </div>
       </div>

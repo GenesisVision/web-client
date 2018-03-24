@@ -55,7 +55,7 @@ const TraderWithdraw = ({
                 {+traderWithdraw.investedTokens.toFixed(2)}
               </div>
               <div className="metric__description">
-                Invested {traderWithdraw.currency}
+                Invested {traderWithdraw.token.tokenSymbol}
               </div>
             </div>
           </div>
@@ -75,7 +75,7 @@ const TraderWithdraw = ({
               />
             </div>
             <div className="input-token__description">
-              Enter {traderWithdraw.currency} amount
+              Enter {traderWithdraw.token.tokenSymbol} amount
             </div>
           </div>
           <div>

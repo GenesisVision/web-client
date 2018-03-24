@@ -5,47 +5,68 @@ const DPStatistic = ({ trader }) => {
   return (
     <div className="ti-statistic">
       <div className="tis-item">
-        <div className="tis-item__value">
-          <NumberFormat
-            value={trader.investedTokens}
-            decimalScale={2}
-            displayType="text"
-          />
+        <div className="metric">
+          <div className="metric__value">
+            <NumberFormat
+              value={trader.investedTokens}
+              decimalScale={2}
+              displayType="text"
+            />
+            <div className="metric__bubble">{trader.token.tokenSymbol}</div>
+          </div>
+          <div className="metric__description">My Tokens</div>
         </div>
-        <div className="tis-item__label">Invested Tokens</div>
       </div>
       <div className="tis-item">
-        <div className="tis-item__value">{trader.currency}</div>
-        <div className="tis-item__label">currency</div>
-      </div>
-      <div className="tis-item">
-        <div className="tis-item__value">{trader.profitFromProgram}</div>
-        <div className="tis-item__label">My Profit</div>
-      </div>
-      <div className="tis-item">
-        <div className="tis-item__value">{trader.investorsCount}</div>
-        <div className="tis-item__label">Investors</div>
-      </div>
-      <div className="tis-item">
-        <div className="tis-item__value">
-          <NumberFormat
-            value={trader.balance}
-            decimalScale={2}
-            displayType="text"
-          />
+        <div className="metric">
+          <div className="metric__value">{trader.currency}</div>
+          <div className="metric__description">Currency</div>
         </div>
-        <div className="tis-item__label">Balance</div>
       </div>
       <div className="tis-item">
-        <div className="tis-item__value">
-          <NumberFormat
-            value={trader.profitTotal}
-            decimalScale={2}
-            displayType="text"
-            prefix="$"
-          />
+        <div className="metric">
+          <div className="metric__value">
+            <NumberFormat
+              value={trader.profitFromProgram}
+              decimalScale={2}
+              displayType="text"
+            />
+            <div className="metric__bubble">GVT</div>
+          </div>
+          <div className="metric__description">My Profit</div>
         </div>
-        <div className="tis-item__label">Total Profit</div>
+      </div>
+      <div className="tis-item">
+        <div className="metric">
+          <div className="metric__value">{trader.investorsCount}</div>
+          <div className="metric__description">Investors</div>
+        </div>
+      </div>
+      <div className="tis-item">
+        <div className="metric">
+          <div className="metric__value">
+            <NumberFormat
+              value={trader.balance}
+              decimalScale={2}
+              displayType="text"
+            />
+            <div className="metric__bubble">{trader.currency}</div>
+          </div>
+          <div className="metric__description">Balance</div>
+        </div>
+      </div>
+      <div className="tis-item">
+        <div className="metric">
+          <div className="metric__value">
+            <NumberFormat
+              value={trader.profitTotal}
+              decimalScale={2}
+              displayType="text"
+            />
+            <div className="metric__bubble">GVT</div>
+          </div>
+          <div className="metric__description">Total Profit</div>
+        </div>
       </div>
     </div>
   );

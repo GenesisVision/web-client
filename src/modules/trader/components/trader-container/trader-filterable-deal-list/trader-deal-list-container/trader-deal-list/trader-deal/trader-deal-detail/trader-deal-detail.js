@@ -1,6 +1,7 @@
 import React from "react";
 import "./trader-deal-detail.css";
 import moment from "moment";
+import NumberFormat from "react-number-format";
 
 const TraderDealDetailMT4 = ({ deal }) => {
   return (
@@ -13,14 +14,26 @@ const TraderDealDetailMT4 = ({ deal }) => {
       </div>
       <div className="trader-deal__cell">
         <div className="metric">
-          <div className="metric__value">{deal.priceOpen}</div>
+          <div className="metric__value">
+            <NumberFormat
+              value={deal.priceOpen}
+              decimalScale={2}
+              displayType="text"
+            />
+          </div>
           <div className="metric__description">Price Open</div>
         </div>
       </div>
       {deal.priceClose && (
         <div className="trader-deal__cell">
           <div className="metric">
-            <div className="metric__value">{deal.priceClose}</div>
+            <div className="metric__value">
+              <NumberFormat
+                value={deal.priceClose}
+                decimalScale={2}
+                displayType="text"
+              />
+            </div>
             <div className="metric__description">Price Close</div>
           </div>
         </div>
@@ -58,7 +71,13 @@ const TraderDealDetailMT5 = ({ deal }) => {
       </div>
       <div className="trader-deal__cell">
         <div className="metric">
-          <div className="metric__value">{deal.price}</div>
+          <div className="metric__value">
+            <NumberFormat
+              value={deal.price}
+              decimalScale={2}
+              displayType="text"
+            />
+          </div>
           <div className="metric__description">Price</div>
         </div>
       </div>

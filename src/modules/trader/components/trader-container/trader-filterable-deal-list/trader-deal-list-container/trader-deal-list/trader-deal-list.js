@@ -4,14 +4,19 @@ import TraderDeal from "./trader-deal/trader-deal";
 
 import "./trader-deal-list.css";
 
-const TraderDealList = ({ deals, serverType }) => {
+const TraderDealList = ({ deals, serverType, currency }) => {
   const renderDealList = () => {
     if (deals.length === 0) {
       return <div>There are no deals.</div>;
     }
 
     return deals.map(x => (
-      <TraderDeal key={x.id} deal={x} serverType={serverType} />
+      <TraderDeal
+        key={x.id}
+        deal={x}
+        serverType={serverType}
+        currency={currency}
+      />
     ));
   };
   return (

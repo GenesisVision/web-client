@@ -1,4 +1,5 @@
 import React from "react";
+import NumberFormat from "react-number-format";
 import "./ts-short-statistic.css";
 
 const TSShortStatistic = ({ trader }) => {
@@ -6,13 +7,27 @@ const TSShortStatistic = ({ trader }) => {
     <div className="trader-statistic">
       <div className="trader-statistic__cell">
         <div className="metric">
-          <div className="metric__value">{trader.balance}</div>
+          <div className="metric__value">
+            <NumberFormat
+              value={trader.balance}
+              decimalScale={2}
+              displayType="text"
+            />
+            <div className="metric__bubble">{trader.currency}</div>
+          </div>
           <div className="metric__description">Balance</div>
         </div>
       </div>
       <div className="trader-statistic__cell">
         <div className="metric">
-          <div className="metric__value">{trader.ownBalance}</div>
+          <div className="metric__value">
+            <NumberFormat
+              value={trader.ownBalance}
+              decimalScale={2}
+              displayType="text"
+            />
+            <div className="metric__bubble">{trader.currency}</div>
+          </div>
           <div className="metric__description">Own Balance</div>
         </div>
       </div>
@@ -24,19 +39,35 @@ const TSShortStatistic = ({ trader }) => {
       </div>
       <div className="trader-statistic__cell">
         <div className="metric">
-          <div className="metric__value">{trader.periodDuration}</div>
+          <div className="metric__value">
+            {trader.periodDuration} <div className="metric__bubble">days</div>
+          </div>
           <div className="metric__description">Period Duration</div>
         </div>
       </div>
       <div className="trader-statistic__cell">
         <div className="metric">
-          <div className="metric__value">{trader.feeManagement}</div>
+          <div className="metric__value">
+            <NumberFormat
+              value={trader.feeManagement}
+              suffix="%"
+              decimalScale={2}
+              displayType="text"
+            />
+          </div>
           <div className="metric__description">Management Fee</div>
         </div>
       </div>
       <div className="trader-statistic__cell">
         <div className="metric">
-          <div className="metric__value">{trader.feeSuccess}</div>
+          <div className="metric__value">
+            <NumberFormat
+              value={trader.feeSuccess}
+              suffix="%"
+              decimalScale={2}
+              displayType="text"
+            />
+          </div>
           <div className="metric__description">Success Fee</div>
         </div>
       </div>

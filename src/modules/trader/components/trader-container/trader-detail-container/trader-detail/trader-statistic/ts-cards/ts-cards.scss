@@ -54,6 +54,7 @@
   }
 }
 .trader-card__value {
+  display: flex;
   font-size: 4rem;
   @include media-breakpoint-phone() {
     font-size: 2rem;
@@ -61,4 +62,8 @@
 }
 .trader-card__description {
   line-height: 0;
+}
+
+.trader-card__bubble {
+  margin-top: 1rem;
 }

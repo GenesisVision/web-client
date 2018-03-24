@@ -27,29 +27,12 @@ class TraderDetailContainer extends PureComponent {
       return <div>Loading statistic...</div>;
     }
 
-    const handleOpenWithdrawPopup = traderId => () => {
-      const traderWithdraw = {
-        id: traderId,
-        title: traderDetail.title,
-        logo: traderDetail.logo,
-        level: traderDetail.level,
-        startOfPeriod: traderDetail.startOfPeriod,
-        periodDuration: traderDetail.periodDuration,
-        investedTokens: traderDetail.investedTokens,
-        currency: traderDetail.currency
-      };
-      const popupProps = {
-        traderWithdraw
-      };
-      return openWithdrawPopup(popupProps);
-    };
-
     return (
       <TraderDetail
         trader={traderDetail}
         isAuthenticated={isAuthenticated}
         openInvestPopup={openInvestPopup}
-        openWithdrawPopup={handleOpenWithdrawPopup}
+        openWithdrawPopup={openWithdrawPopup}
       />
     );
   }
@@ -104,7 +87,21 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
         )
       );
     },
-    openWithdrawPopup: popupProps => {
+    openWithdrawPopup: () => {
+      const { traderDetail } = stateProps;
+      const traderWithdraw = {
+        id: traderDetail.id,
+        title: traderDetail.title,
+        logo: traderDetail.logo,
+        level: traderDetail.level,
+        startOfPeriod: traderDetail.startOfPeriod,
+        periodDuration: traderDetail.periodDuration,
+        investedTokens: traderDetail.investedTokens,
+        token: traderDetail.token
+      };
+      const popupProps = {
+        traderWithdraw
+      };
       dispatch(
         popupActions.openPopup(
           TRADER_WITHDRAW_POPUP,

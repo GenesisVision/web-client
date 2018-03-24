@@ -1,8 +1,10 @@
-import React, { Component } from "react";
-import ExpandIcon from "./expand-icon";
 import classnames from "classnames";
-import TraderDealDetail from "./trader-deal-detail/trader-deal-detail";
 import moment from "moment";
+import NumberFormat from "react-number-format";
+import React, { Component } from "react";
+
+import ExpandIcon from "./expand-icon";
+import TraderDealDetail from "./trader-deal-detail/trader-deal-detail";
 
 import "./trader-deal.css";
 
@@ -17,7 +19,7 @@ class TraderDeal extends Component {
   };
 
   render() {
-    const { deal, serverType } = this.props;
+    const { deal, serverType, currency } = this.props;
     const { isOpen } = this.state;
 
     return (
@@ -47,7 +49,14 @@ class TraderDeal extends Component {
             </div>
             <div className="trader-deal__cell">
               <div className="metric">
-                <div className="metric__value">{deal.profit}</div>
+                <div className="metric__value">
+                  <NumberFormat
+                    value={deal.profit}
+                    decimalScale={2}
+                    displayType="text"
+                  />
+                  <div className="metric__bubble">{currency}</div>
+                </div>
                 <div className="metric__description">Profit</div>
               </div>
             </div>

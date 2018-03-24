@@ -3,11 +3,13 @@ import moment from "moment";
 
 import "./trader-request.css";
 
-const TraderRequest = ({ request, cancelRequest }) => {
+const TraderRequest = ({ request, token, cancelRequest }) => {
   return (
     <div className="trader-request__row">
       <div className="trader-request__type">{request.type}</div>
-      <div className="trader-request__amount">{request.amount} GVT</div>
+      <div className="trader-request__amount">
+        {request.amount} {token.tokenSymbol}
+      </div>
       <div className="trader-request__status">{request.status}</div>
       <div className="trader-request__date">
         {moment(request.date).format("L")}

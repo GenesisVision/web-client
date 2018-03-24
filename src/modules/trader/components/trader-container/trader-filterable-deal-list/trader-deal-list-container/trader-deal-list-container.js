@@ -10,28 +10,40 @@ class TraderDealListContainer extends PureComponent {
   }
 
   render() {
-    const { isPending, dealList, serverType } = this.props;
+    const { isPending, dealList, serverType, currency } = this.props;
     if (isPending || dealList === undefined) {
       return null;
     }
 
-    return <TraderDealList deals={dealList} serverType={serverType} />;
+    return (
+      <TraderDealList
+        deals={dealList}
+        serverType={serverType}
+        currency={currency}
+      />
+    );
   }
 }
 
 const mapStateToProps = state => {
   const { isPending, errorMessage, data } = state.traderData.deals.items;
+  const { data: traderDetail } = state.traderData.traderDetail;
 
-  let dealList, serverType;
+  let dealList, serverType, currency;
   if (data) {
     dealList = data.trades;
     serverType = data.serverType;
+  }
+
+  if (traderDetail && traderDetail.investmentProgram) {
+    currency = traderDetail.investmentProgram.currency;
   }
 
   return {
     isPending,
     dealList,
     serverType,
+    currency,
     errorMessage
   };
 };
