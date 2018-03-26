@@ -38,8 +38,15 @@ const DPStatistic = ({ trader }) => {
       </div>
       <div className="tis-item">
         <div className="metric">
-          <div className="metric__value">{trader.investorsCount}</div>
-          <div className="metric__description">Investors</div>
+          <div className="metric__value">
+            <NumberFormat
+              value={trader.investedTokens * trader.token.initialPrice}
+              prefix="$"
+              decimalScale={2}
+              displayType="text"
+            />
+          </div>
+          <div className="metric__description">Est. value</div>
         </div>
       </div>
       <div className="tis-item">
