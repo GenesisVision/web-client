@@ -20,7 +20,7 @@ const fetchWalletPaneTransactions = () => {
 const fetchWalletPaneChart = () => {
   const data = {
     filter: {
-      type: "Internal",
+      type: "All",
       isFull: false
     }
   };
