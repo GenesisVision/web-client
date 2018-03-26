@@ -6,7 +6,6 @@ import emailConfirmService from "../service/email-confirm-service";
 
 class EmailConfirmContainer extends PureComponent {
   componentWillMount() {
-    var t = 1;
     const queryParams = QueryString.parse(this.props.location.search);
     if (queryParams.userId || queryParams.code) {
       this.props.emailConfirm(queryParams.userId, queryParams.code);

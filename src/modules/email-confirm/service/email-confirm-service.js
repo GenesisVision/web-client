@@ -9,7 +9,7 @@ import { HOME_ROUTE } from "../../../components/app.constants";
 const confirmEmail = (userId, code) => dispatch => {
   return dispatch(emailConfirmActions.emailConfirm(userId, code)).then(
     response => {
-      authService.storeToken(response.value.data);
+      authService.storeToken(response.value);
       dispatch(authActions.updateToken());
       history.push(HOME_ROUTE);
       dispatch(
