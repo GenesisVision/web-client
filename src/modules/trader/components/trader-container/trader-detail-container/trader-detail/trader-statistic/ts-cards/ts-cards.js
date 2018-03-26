@@ -6,13 +6,25 @@ import walletIcon from "../../../../../../media/wallet-icon.svg";
 import investorAvatar from "../../../../../../../../shared/media/investor-avatar.png";
 import TSProfitChart from "./ts-profit-chart";
 
+const profitChartData = (chartData, programStartDate) => {
+  return [
+    {
+      totalProfit: 0,
+      date: programStartDate
+    },
+    ...chartData
+  ];
+};
+
 const TSCards = ({ trader }) => {
   return (
     <div className="trader-cards">
       <div className="trader-card card">
         <div className="trader-card__body  card-body">
           <div className="trader-card__image">
-            <TSProfitChart data={trader.chart} />
+            <TSProfitChart
+              data={profitChartData(trader.chart, trader.programStartDate)}
+            />
           </div>
           <div className="trader-card__value">
             <NumberFormat

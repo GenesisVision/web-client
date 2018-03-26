@@ -9,8 +9,8 @@ import "./dp-trader-item.css";
 
 const DPTraderItem = ({ idx, trader, isAuthenticated, openInvestPopup }) => {
   const traderChartData = trader.chart.map(x => ({
-    fund: x.investorFund + x.managerFund,
-    profit: x.prfit,
+    fund: +(x.investorFund + x.managerFund).toFixed(8),
+    profit: x.profit,
     loss: x.loss,
     totalProfit: x.totalProfit
   }));

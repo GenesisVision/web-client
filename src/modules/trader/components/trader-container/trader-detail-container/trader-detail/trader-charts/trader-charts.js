@@ -5,8 +5,8 @@ import TraderChartPie from "./trader-chart-pie";
 
 import "./trader-charts.css";
 
-const TraderCharts = ({ chart, profitDiagram }) => {
-  const profitChartData = [
+const composeProfitChartData = profitDiagram => {
+  return [
     {
       name: "Manager`s Fund",
       value: profitDiagram.managerFund,
@@ -36,6 +36,9 @@ const TraderCharts = ({ chart, profitDiagram }) => {
         (profitDiagram.managerFund + profitDiagram.investorsFund)
     }
   ];
+};
+
+const TraderCharts = ({ chart, profitDiagram }) => {
   return (
     <div className="trader-charts">
       <div className="trader-container__header">Last Periods</div>
@@ -44,7 +47,7 @@ const TraderCharts = ({ chart, profitDiagram }) => {
           <TraderChartBar data={chart} />
         </div>
         <div className="trader-chart__pie">
-          <TraderChartPie data={profitChartData} />
+          <TraderChartPie data={composeProfitChartData(profitDiagram)} />
         </div>
       </div>
     </div>
