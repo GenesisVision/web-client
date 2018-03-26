@@ -5,7 +5,10 @@ import SwaggerInvestorApi from "../../../services/api-client/swagger-investor-ap
 const emailConfirm = (userId, code) => {
   return {
     type: actionTypes.EMAIL_CONFIRM,
-    payload: SwaggerInvestorApi.apiInvestorAuthConfirmEmailGet({ userId, code })
+    payload: SwaggerInvestorApi.apiInvestorAuthConfirmEmailPost({
+      userId,
+      code
+    })
   };
 };
 
