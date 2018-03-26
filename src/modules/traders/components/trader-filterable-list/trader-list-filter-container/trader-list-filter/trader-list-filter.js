@@ -4,6 +4,13 @@ import React from "react";
 import GVInputRange from "../../../../../../shared/components/form/gv-input-range/gv-input-range";
 import GVSelect from "../../../../../../shared/components/form/gv-select/gv-select";
 
+import {
+  LEVEL_MAX,
+  LEVEL_MIN,
+  PROFIT_PROGRAM_PROCENT_MAX,
+  PROFIT_PROGRAM_PROCENT_MIN
+} from "../../../../traders.constants";
+
 const sortingOptions = [
   { value: "ByTitle", label: "Name" },
   { value: "ByLevel", label: "Level" },
@@ -27,8 +34,8 @@ const TraderListFilter = ({
         <div className="filter-item__description">Select Trader Level</div>
         <div className="filter-item__component">
           <Field
-            minValue={1}
-            maxValue={7}
+            minValue={LEVEL_MIN}
+            maxValue={LEVEL_MAX}
             name="traderLevel"
             value={values.traderLevel}
             onChangeComplete={onChangeComplete("traderLevel")}
@@ -42,12 +49,12 @@ const TraderListFilter = ({
         <div className="filter-item__description">Select Average Profit</div>
         <div className="filter-item__component">
           <Field
-            minValue={0}
-            maxValue={100}
-            name="profitAvgMax"
-            value={values.profitAvgMax}
+            minValue={PROFIT_PROGRAM_PROCENT_MIN}
+            maxValue={PROFIT_PROGRAM_PROCENT_MAX}
+            name="profitAvgPercent"
+            value={values.profitAvgPercent}
             formatLabel={value => `${value}%`}
-            onChangeComplete={onChangeComplete("profitAvgMax")}
+            onChangeComplete={onChangeComplete("profitAvgPercent")}
             setFieldValue={setFieldValue}
             component={GVInputRange}
           />
@@ -94,7 +101,10 @@ export default withFormik({
     const { filtering } = props;
     return {
       traderLevel: { min: filtering.levelMin, max: filtering.levelMax },
-      profitAvgMax: filtering.profitAvgMax,
+      profitAvgPercent: {
+        min: filtering.profitAvgPercentMin,
+        max: filtering.profitAvgPercentMax
+      },
       sorting: filtering.sorting,
       sortingDirection: filtering.sortingDirection
     };

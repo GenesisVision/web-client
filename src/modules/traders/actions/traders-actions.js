@@ -5,6 +5,12 @@ import filterPaneActionsFactory from "../../filter-pane/actions/filter-pane-acti
 import SwaggerInvestorApi from "../../../services/api-client/swagger-investor-api";
 
 import * as actionTypes from "./traders-actions.constants";
+import {
+  LEVEL_MAX,
+  LEVEL_MIN,
+  PROFIT_PROGRAM_PROCENT_MAX,
+  PROFIT_PROGRAM_PROCENT_MIN
+} from "../traders.constants";
 
 const fetchTraders = () => (dispatch, getState) => {
   const { filtering } = getState().tradersData.traders;
@@ -14,14 +20,23 @@ const fetchTraders = () => (dispatch, getState) => {
   if (authService.getAuthArg()) {
     data.authorization = authService.getAuthArg();
   }
-  if (filtering.levelMin) {
+  if (filtering.levelMin && filtering.levelMin !== LEVEL_MIN) {
     data.filter.levelMin = filtering.levelMin;
   }
-  if (filtering.levelMax) {
+  if (filtering.levelMax && filtering.levelMax !== LEVEL_MAX) {
     data.filter.levelMax = filtering.levelMax;
   }
-  if (filtering.profitAvgMax) {
-    data.filter.profitAvgPercentMax = filtering.profitAvgMax;
+  if (
+    filtering.profitAvgPercentMin &&
+    filtering.profitAvgPercentMin !== PROFIT_PROGRAM_PROCENT_MIN
+  ) {
+    data.filter.profitAvgPercentMin = filtering.profitAvgPercentMin;
+  }
+  if (
+    filtering.profitAvgPercentMax &&
+    filtering.profitAvgPercentMax !== PROFIT_PROGRAM_PROCENT_MAX
+  ) {
+    data.filter.profitAvgPercentMax = filtering.profitAvgPercentMax;
   }
   if (filtering.sorting) {
     data.filter.sorting = filtering.sorting + filtering.sortingDirection;
@@ -59,6 +74,11 @@ const composeFiltering = filter => {
     case "traderLevel": {
       filtering.levelMin = filter.value.min;
       filtering.levelMax = filter.value.max;
+      break;
+    }
+    case "profitAvgPercent": {
+      filtering.profitAvgPercentMin = filter.value.min;
+      filtering.profitAvgPercentMax = filter.value.max;
       break;
     }
     default: {

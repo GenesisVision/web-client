@@ -1,4 +1,4 @@
-import { TRADERS_FILTERS } from "../helpers/traders-constants";
+import { TRADERS_FILTERS } from "../traders.constants";
 import filteringReducerFactory from "../../filtering/reducers/filtering-reducers";
 
 import { TRADERS } from "../actions/traders-actions.constants";
