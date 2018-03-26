@@ -91,7 +91,7 @@ const fetchTraderDealList = traderId => (dispatch, getState) => {
     })
   }).then(response => {
     const totalPages = calculateTotalPages(response.value.total);
-    dispatch(updateTraderDealListPaging({ totalPages }));
+    return dispatch(updateTraderDealListPaging({ totalPages }));
   });
 };
 
@@ -105,14 +105,16 @@ const updateTraderDealListPagingAndFetch = (traderId, paging) => dispatch => {
   dispatch(fetchTraderDealList(traderId));
 };
 
-const cancelTraderRequest = requestId => {
-  return {
+const cancelTraderRequest = (traderId, requestId) => dispatch => {
+  return dispatch({
     type: actionTypes.TRADER_CANCEL_REQUEST,
     payload: SwaggerInvestorApi.apiInvestorInvestmentProgramsCancelInvestmentRequestPost(
       requestId,
       authService.getAuthArg()
     )
-  };
+  })
+    .then(() => dispatch(traderActions.fetchTraderRequests(traderId)))
+    .then(() => dispatch(traderActions.fetchTrader(traderId)));
 };
 
 const traderActions = {

@@ -57,9 +57,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(traderActions.fetchTraderRequests(traderId));
   },
   cancelRequest: traderId => requestId => () => {
-    dispatch(traderActions.cancelTraderRequest(requestId)).then(
-      dispatch(traderActions.fetchTraderRequests(traderId))
-    );
+    dispatch(traderActions.cancelTraderRequest(traderId, requestId));
   }
 });
 

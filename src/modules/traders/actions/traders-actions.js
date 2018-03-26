@@ -27,7 +27,7 @@ const fetchTraders = () => (dispatch, getState) => {
     data.filter.sorting = filtering.sorting + filtering.sortingDirection;
   }
 
-  dispatch({
+  return dispatch({
     type: actionTypes.TRADERS,
     payload: SwaggerInvestorApi.apiInvestorInvestmentProgramsPost(data).then(
       response => {

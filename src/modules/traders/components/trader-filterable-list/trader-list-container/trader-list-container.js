@@ -4,14 +4,15 @@ import React, { Component } from "react";
 import popupActions from "../../../../popup/actions/popup-actions";
 import TraderList from "./trader-list/trader-list";
 import tradersActions from "../../../actions/traders-actions";
+import tradersService from "../../../service/traders-service";
 import withQueryParams from "../../../../../shared/hoc/with-query-params/with-query-params";
 
 import { TRADER_DEPOSIT_POPUP } from "../../../../popup/actions/popup-actions.constants";
 
 class TraderListContainer extends Component {
   fetchTraders = () => {
-    const { queryParams, fetchTradersIfNeeded } = this.props;
-    fetchTradersIfNeeded(queryParams);
+    const { fetchTradersIfNeeded } = this.props;
+    fetchTradersIfNeeded();
   };
 
   componentWillMount() {
@@ -38,8 +39,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchTradersIfNeeded: queryParams => {
-    dispatch(tradersActions.fetchTradersIfNeeded(queryParams));
+  fetchTradersIfNeeded: () => {
+    dispatch(tradersActions.fetchTradersIfNeeded());
   },
   dispatch
 });
@@ -47,7 +48,7 @@ const mapDispatchToProps = dispatch => ({
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const { dispatch, ...otherDispatchProps } = dispatchProps;
   const closeInvestPopup = () => {
-    dispatch(tradersActions.fetchTradersIfNeeded({}));
+    return tradersService.updateAfterInvestment();
   };
   return {
     ...stateProps,

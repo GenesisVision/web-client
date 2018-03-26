@@ -9,6 +9,7 @@ import {
   TRADER_DEPOSIT_POPUP,
   TRADER_WITHDRAW_POPUP
 } from "../../../../popup/actions/popup-actions.constants";
+import traderService from "../../../service/trader-service";
 
 class TraderDetailContainer extends PureComponent {
   componentWillMount() {
@@ -62,16 +63,10 @@ const mapDispatchToProps = dispatch => ({
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const { dispatch, ...otherDispatchProps } = dispatchProps;
-  const submitPopup = traderId => () =>
-    traderActions.fetchTraderRequests(traderId);
+  const closeInvestPopup = traderId => () => {
+    return traderService.updateAfterInvestment(traderId);
+  };
 
-  // {
-  //   return Promise.all([
-  //     () => dispatch(traderActions.fetchTrader(traderId)),
-  //     () => dispatch(traderActions.fetchTraderRequests(traderId)),
-  //     () => dispatch(traderActions.fetchTraderHistory(traderId))
-  //   ]);
-  // };
   return {
     ...stateProps,
     ...otherDispatchProps,
@@ -83,7 +78,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
           {
             traderId
           },
-          submitPopup(traderId)
+          closeInvestPopup(traderId)
         )
       );
     },
@@ -106,7 +101,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
         popupActions.openPopup(
           TRADER_WITHDRAW_POPUP,
           popupProps,
-          submitPopup(popupProps.traderWithdraw.id)
+          closeInvestPopup(popupProps.traderWithdraw.id)
         )
       );
     }
