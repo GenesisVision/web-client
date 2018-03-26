@@ -21,7 +21,7 @@ const fetchTraders = () => (dispatch, getState) => {
     data.filter.levelMax = filtering.levelMax;
   }
   if (filtering.profitAvgMax) {
-    data.filter.profitAvgMax = filtering.profitAvgMax;
+    data.filter.profitAvgPercentMax = filtering.profitAvgMax;
   }
   if (filtering.sorting) {
     data.filter.sorting = filtering.sorting + filtering.sortingDirection;
