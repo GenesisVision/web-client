@@ -1,5 +1,5 @@
 import React from "react";
-import EmailConfirmIcon from "../media/confirm-email-icon.svg";
+import EmailConfirmIcon from "../../media/confirm-email-icon.svg";
 import "./email-confirm-pending.css";
 
 const EmailConfirmPending = () => {

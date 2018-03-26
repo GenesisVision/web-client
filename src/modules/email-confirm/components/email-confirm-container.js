@@ -1,19 +1,24 @@
-import QueryString from "query-string";
-import React from "react";
 import { connect } from "react-redux";
+import QueryString from "query-string";
+import React, { PureComponent } from "react";
 
-import NotFoundPage from "../../../shared/components/not-found/not-found";
-import emailConfirmActions from "../actions/email-confirm-actions";
+import emailConfirmService from "../service/email-confirm-service";
 
-const EmailConfirmContainer = ({ location, emailConfirm }) => {
-  const queryParams = QueryString.parse(location.search);
-  if (!queryParams.userId || !queryParams.code) {
-    return <NotFoundPage />;
+class EmailConfirmContainer extends PureComponent {
+  componentWillMount() {
+    var t = 1;
+    const queryParams = QueryString.parse(this.props.location.search);
+    if (queryParams.userId || queryParams.code) {
+      this.props.emailConfirm(queryParams.userId, queryParams.code);
+    }
   }
 
-  emailConfirm(queryParams.userId, queryParams.code);
-  return null;
-};
+  render() {
+    const { isPending, errorMessage } = this.props;
+    if (isPending) return null;
+    return <div>{errorMessage}</div>;
+  }
+}
 
 const mapStateToProps = state => {
   const { isPending, errorMessage } = state.emailConfirmData;
@@ -22,9 +27,11 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  emailConfirm: () => {
-    dispatch(emailConfirmActions.emailConfirm());
+  emailConfirm: (userId, code) => {
+    dispatch(emailConfirmService.confirmEmail(userId, code));
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(EmailConfirmContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  EmailConfirmContainer
+);

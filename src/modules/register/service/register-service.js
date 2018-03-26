@@ -1,15 +1,11 @@
-import authActions from "../../../actions/auth-actions";
 import history from "../../../utils/history";
-
-import { HOME_ROUTE } from "../../../components/app.constants";
 import registerActions from "../actions/register-actions";
 
+import { EMAIL_CONFIRM_PENDING_ROUTE } from "../../email-confirm/email-confirm.constants";
+
 const register = registerData => dispatch => {
-  return dispatch(
-    //registerActions.registerUser(registerData)
-    Promise.resolve(true)
-  ).then(response => {
-    history.push(HOME_ROUTE);
+  return dispatch(registerActions.registerUser(registerData)).then(() => {
+    history.push(EMAIL_CONFIRM_PENDING_ROUTE);
   });
 };
 
