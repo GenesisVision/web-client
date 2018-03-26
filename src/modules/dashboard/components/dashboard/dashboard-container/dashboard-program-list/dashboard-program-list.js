@@ -12,7 +12,7 @@ const DashboardProgramList = ({ programs, openInvestPopup }) => {
     if (programs.length === 0) {
       return (
         <div className="dashboard-empty">
-          <img src={PortfolioIcon} width="150" />
+          <img src={PortfolioIcon} width="150" alt="Portfolio" />
           <div className="dashboard-empty__text">
             There are no programs in which you have invested
           </div>
