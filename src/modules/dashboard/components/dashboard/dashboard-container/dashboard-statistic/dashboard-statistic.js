@@ -3,7 +3,12 @@ import React from "react";
 
 import "./dashboard-statistic.css";
 
-const DashboardStatistic = ({ profitFromPrograms, investedAmount }) => {
+const DashboardStatistic = ({
+  hasPrograms,
+  profitFromPrograms,
+  investedAmount
+}) => {
+  if (!hasPrograms) return null;
   return (
     <div className="dashboard-statistic">
       <div className="dashboard-statistic__cell">
