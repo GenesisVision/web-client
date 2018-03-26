@@ -2,7 +2,7 @@ import {
   calculateTotalPages,
   calculateSkipAndTake
 } from "../../paging/helpers/paging-helpers";
-import authService from "../../../services/authService";
+import authService from "../../../services/auth-service";
 import filterPaneActionsFactory from "../../filter-pane/actions/filter-pane-actions";
 import pagingActionsFactory from "../../paging/actions/paging-actions";
 import SwaggerInvestorApi from "../../../services/api-client/swagger-investor-api";

@@ -1,4 +1,4 @@
-import authService from "../../../services/authService";
+import authService from "../../../services/auth-service";
 import SwaggerInvestorApi from "../../../services/api-client/swagger-investor-api";
 
 import * as actionTypes from "./profile-actions.constants";

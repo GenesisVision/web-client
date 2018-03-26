@@ -1,8 +1,8 @@
 import { connect } from "react-redux";
 import React from "react";
 
-import loginActions from "../actions/login-actions";
 import LoginForm from "./login-form/login-form";
+import loginService from "../service/login-service";
 
 import { HOME_ROUTE } from "../../../components/app.constants";
 
@@ -23,7 +23,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   login: (loginFormData, from, setSubmitting) => {
-    dispatch(loginActions.loginUser(loginFormData, from)).catch(() => {
+    dispatch(loginService.login(loginFormData, from)).catch(() => {
       setSubmitting(false);
     });
   }

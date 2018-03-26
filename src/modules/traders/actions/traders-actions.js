@@ -1,4 +1,4 @@
-import authService from "../../../services/authService";
+import authService from "../../../services/auth-service";
 import filesService from "../../../shared/services/file-service";
 import filteringActionsFactory from "../../filtering/actions/filtering-actions";
 import filterPaneActionsFactory from "../../filter-pane/actions/filter-pane-actions";

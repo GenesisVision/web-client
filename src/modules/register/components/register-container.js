@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import React from "react";
 
-import registerActions from "../actions/register-actions";
+import registerService from "../service/register-service";
 import RegisterForm from "./register-form/register-form";
 
 const RegisterContainer = ({
@@ -26,7 +26,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   register: (registerFormData, setSubmitting) => {
-    dispatch(registerActions.registerUser(registerFormData)).catch(() => {
+    dispatch(registerService.register(registerFormData)).catch(() => {
       setSubmitting(false);
     });
   }

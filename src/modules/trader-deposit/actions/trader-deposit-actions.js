@@ -1,4 +1,4 @@
-import authService from "../../../services/authService";
+import authService from "../../../services/auth-service";
 import filesService from "../../../shared/services/file-service";
 import SwaggerInvestorApi from "../../../services/api-client/swagger-investor-api";
 

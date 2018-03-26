@@ -19,9 +19,12 @@ import RegisterRoutes from "../modules/register/register.routes";
 import TraderRoutes from "../modules/trader/trader.routes";
 import TradersRoutes from "../modules/traders/traders.routes";
 import WalletRoutes from "../modules/wallet/wallet.routes";
+import {EMAIL_CONFIRM_ROUTE} from "../modules/email-confirm/email-confirm.constants";
+import EmailConfirmRoutes from "../modules/email-confirm/email-confirm.routes";
 
 const AppRoutes = () => (
   <Switch>
+    <Route path={EMAIL_CONFIRM_ROUTE} component={EmailConfirmRoutes} />
     <Route path={LOGIN_ROUTE} component={LoginRoutes} />
     <Route path={REGISTER_ROUTE} component={RegisterRoutes} />
     <Route path={TRADER_ROUTE} component={TraderRoutes} />

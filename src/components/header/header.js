@@ -6,7 +6,7 @@ import React from "react";
 
 import FilterIcon from "./filter-icon";
 import filterPaneActionsFactory from "../../modules/filter-pane/actions/filter-pane-actions";
-import loginActions from "../../modules/login/actions/login-actions";
+import loginService from "../../modules/login/service/login-service";
 import MobileNav from "./mobile-nav";
 
 import "./header.css";
@@ -114,7 +114,7 @@ const mapStateToProps = state => state;
 
 const mapDispatchToProps = dispatch => ({
   signOut: () => {
-    dispatch(loginActions.logoutUser());
+    dispatch(loginService.logout());
   },
   dispatch
 });

@@ -8,7 +8,7 @@ import history from "../utils/history";
 import rootReducer from "../reducers";
 import apiErrorHandlerMiddleware from "../shared/middlewares/api-error-handler-middleware/api-error-handler-middleware";
 import refreshTokenMiddleware from "../shared/middlewares/refresh-token-middleware/refresh-token-middleware";
-import authService from "../services/authService";
+import authService from "../services/auth-service";
 import SwaggerInvestorApi from "../services/api-client/swagger-investor-api";
 
 const failureSuffix = "FAILURE";

@@ -3,7 +3,7 @@ import { loadingBarReducer } from "react-redux-loading-bar";
 import { routerReducer } from "react-router-redux";
 
 import alertMessagesReducer from "../shared/modules/alert-message/reducers/alert-message-reducers";
-import authReducer from "./authReducer";
+import authReducer from "./auth-reducer";
 import dashboardReducer from "../modules/dashboard/reducers/dashboard-reducers";
 import loginReducer from "../modules/login/reducers/login-reducers";
 import popupReducer from "../modules/popup/reducers/popup-reducers";
