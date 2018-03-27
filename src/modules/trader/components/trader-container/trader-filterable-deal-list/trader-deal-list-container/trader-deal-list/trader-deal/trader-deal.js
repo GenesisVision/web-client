@@ -68,7 +68,8 @@ class TraderDeal extends Component {
             </div>
           </div>
           <div className="trader-deal__date">
-            {moment(deal.date).format("MMM Do YYYY")}
+            {deal.date && moment(deal.date).format("MMM Do YYYY")}
+            {deal.dateOpen && moment(deal.dateOpen).format("MMM Do YYYY")}
           </div>
         </div>
         {isOpen && (

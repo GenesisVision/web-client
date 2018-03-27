@@ -32,7 +32,7 @@ const mapStateToProps = state => {
   let dealList, serverType, currency;
   if (data) {
     dealList = data.trades;
-    serverType = data.serverType;
+    serverType = data.tradeServerType;
   }
 
   if (traderDetail && traderDetail.investmentProgram) {
