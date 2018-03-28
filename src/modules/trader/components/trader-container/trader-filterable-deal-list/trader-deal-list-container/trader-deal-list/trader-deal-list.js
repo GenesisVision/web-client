@@ -21,7 +21,7 @@ const TraderDealList = ({ deals, serverType, currency }) => {
   };
   return (
     <div className="trader-deal-list">
-      <div className="trader-container__header">Deal List</div>
+      <div className="trader-container__header">Trades History</div>
       {renderDealList()}
     </div>
   );
