@@ -19,18 +19,18 @@ const TSShortStatistic = ({ trader }) => {
         </div>
       </div>
       <div className="trader-statistic__cell">
-        <div className="metric">
-          <div className="metric__value">
-            <NumberFormat
-              value={trader.ownBalance}
-              // decimalScale={2}
-              displayType="text"
-            />
-            <div className="metric__bubble">{trader.currency}</div>
-          </div>
-          <div className="metric__description">Own Balance</div>
+      <div className="metric">
+        <div className="metric__value">
+          <NumberFormat
+            value={trader.ownBalance / trader.balance * 100}
+            suffix="%"
+            decimalScale={2}
+            displayType="text"
+          />
         </div>
+        <div className="metric__description">Manager's Share</div>
       </div>
+    </div>
       <div className="trader-statistic__cell">
         <div className="metric">
           <div className="metric__value">{trader.tradesCount}</div>
