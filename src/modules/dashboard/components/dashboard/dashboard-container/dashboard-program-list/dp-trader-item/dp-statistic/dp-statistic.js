@@ -79,7 +79,7 @@ const DPStatistic = ({ trader }) => {
                 displayType="text"
               />
           </div>
-          <div className="metric__description">Your Share</div>
+          <div className="metric__description">My Share</div>
         </div>
       </div>    
     </div>
