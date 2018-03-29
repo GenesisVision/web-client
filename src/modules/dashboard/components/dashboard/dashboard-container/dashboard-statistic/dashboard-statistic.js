@@ -6,7 +6,8 @@ import "./dashboard-statistic.css";
 const DashboardStatistic = ({
   hasPrograms,
   profitFromPrograms,
-  investedAmount
+  investedAmount,
+  totalPortfolioAmount
 }) => {
   if (!hasPrograms) return null;
   return (

@@ -24,6 +24,7 @@ class DashboardContainer extends PureComponent {
           profitFromPrograms={dashboard.profitFromPrograms}
           investedAmount={dashboard.investedAmount}
           hasPrograms={dashboard.investmentPrograms.length > 0}
+          totalPortfolioAmount={dashboard.totalPortfolioAmount}
         />
         <DashboardProgramList
           programs={dashboard.investmentPrograms}
