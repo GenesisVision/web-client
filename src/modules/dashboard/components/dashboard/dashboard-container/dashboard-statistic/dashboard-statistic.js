@@ -15,6 +15,19 @@ const DashboardStatistic = ({
         <div className="metric">
           <div className="metric__value">
             <NumberFormat
+              value={totalPortfolioAmount}
+              decimalScale={2}
+              displayType="text"
+            />
+            <div className="metric__bubble">USD</div>
+          </div>
+          <div className="metric__description">Portfolio Value</div>
+        </div>
+      </div>
+      <div className="dashboard-statistic__cell">
+        <div className="metric">
+          <div className="metric__value">
+            <NumberFormat
               value={profitFromPrograms}
               // decimalScale={2}
               displayType="text"
