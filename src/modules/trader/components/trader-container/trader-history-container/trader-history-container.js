@@ -25,7 +25,7 @@ const mapStateToProps = state => {
 
   let history;
   if (data) {
-    history = data;
+    history = data.chart;
   }
 
   if (history && traderDetail && traderDetail.investmentProgram) {

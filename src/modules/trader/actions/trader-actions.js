@@ -29,15 +29,11 @@ const fetchTrader = traderId => {
 };
 
 const fetchTraderHistory = traderId => {
-  const filter = { investmentProgramId: traderId };
-
   return {
     type: actionTypes.TRADER_HISTORY,
-    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramTradesPost({
-      filter
-    }).then(response => {
-      return response.trades.map(x => ({ profit: x.profit, date: x.date }));
-    })
+    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramTradesChartGet(
+      traderId
+    )
   };
 };
 
