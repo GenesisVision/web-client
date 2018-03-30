@@ -45,6 +45,9 @@
 .ti-name__title {
   font-size: 1.6rem;
   color: $text-color;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .ti-name__description {
@@ -55,6 +58,7 @@
   height: 4rem;
   width: 225px;
   overflow: hidden;
+  word-wrap: break-word;
   @include media-breakpoint-phone() {
     height: initial;
   }

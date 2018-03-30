@@ -26,12 +26,16 @@
 .trader-info__title {
   font-family: "NeuzeitGroBol";
   font-size: 3rem;
+  max-width: 20em;
+  overflow: hidden;
   @include media-breakpoint-phone() {
     font-size: 2rem;
   }
 }
 
 .trader-info__description {
+  word-break: break-word;
+  max-width: 100%;
   @include media-breakpoint-phone() {
     font-size: 0.7rem;
   }
