@@ -50,7 +50,12 @@ class WalletTransaction extends Component {
         {renderTransactionInfo(transaction)}
         <div className="wallet-transaction__info">
           <div className="wallet-transaction__amount">
-            {transaction.amount} {transaction.currency}
+            <div className="metric">
+              <div className="metric__value">
+                {transaction.amount}
+                <div className="metric__bubble">{transaction.currency}</div>
+              </div>
+            </div>
           </div>
           <div className="wallet-transaction__date">
             {new Date(transaction.date).toDateString()}
