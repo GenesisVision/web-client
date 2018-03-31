@@ -25,6 +25,7 @@ const TIChart = ({ data }) => {
             dataKey="fund"
             stackId="stack"
             fill="#184f61"
+            stroke="#184f61"
             isAnimationActive={false}
           />
           <Bar
@@ -32,6 +33,7 @@ const TIChart = ({ data }) => {
             dataKey="profit"
             stackId="stack"
             fill="#15bbaf"
+            stroke="#184f61"
             isAnimationActive={false}
           />
           <Bar
@@ -39,6 +41,7 @@ const TIChart = ({ data }) => {
             dataKey="loss"
             stackId="stack"
             fill="#e00463"
+            stroke="#184f61"
             isAnimationActive={false}
           />
           <Line
