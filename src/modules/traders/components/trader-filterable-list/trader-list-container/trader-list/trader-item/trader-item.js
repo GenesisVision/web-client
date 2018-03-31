@@ -1,3 +1,4 @@
+import classnames from "classnames";
 import React from "react";
 
 import TIButtons from "../../../../../../../components/trader-item/ti-buttons/ti-buttons";
@@ -15,7 +16,11 @@ const TraderItem = ({ idx, trader, isAuthenticated, openInvestPopup }) => {
     totalProfit: x.totalProfit
   }));
   return (
-    <div className="trader-item">
+    <div
+      className={classnames("trader-item", {
+        "trader-item--inactive": !trader.isEnabled
+      })}
+    >
       <TIInfo idx={idx} trader={trader} />
       <TIChart data={traderChartData} />
       <TIStatistic trader={trader} />

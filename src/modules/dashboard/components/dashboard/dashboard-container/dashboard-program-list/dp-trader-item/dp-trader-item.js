@@ -1,9 +1,10 @@
+import classnames from "classnames";
 import React from "react";
 
+import DPStatistic from "./dp-statistic/dp-statistic";
 import TIButtons from "../../../../../../../components/trader-item/ti-buttons/ti-buttons";
 import TIChart from "../../../../../../../components/trader-item/ti-chart/ti-chart";
 import TIInfo from "../../../../../../../components/trader-item/ti-info/ti-info";
-import DPStatistic from "./dp-statistic/dp-statistic";
 
 import "./dp-trader-item.css";
 
@@ -15,7 +16,11 @@ const DPTraderItem = ({ idx, trader, isAuthenticated, openInvestPopup }) => {
     totalProfit: x.totalProfit
   }));
   return (
-    <div className="dp-trader-item">
+    <div
+      className={classnames("dp-trader-item", {
+        "dp-trader-item--inactive": !trader.isEnabled
+      })}
+    >
       <TIInfo idx={idx} trader={trader} />
       <TIChart data={traderChartData} />
       <DPStatistic trader={trader} />
