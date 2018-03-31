@@ -48,6 +48,9 @@
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 .ti-name__description {
