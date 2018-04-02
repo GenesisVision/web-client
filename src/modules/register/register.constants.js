@@ -1,1 +1,1 @@
-export const REGISTER_ROUTE = "/singup";
+export const REGISTER_ROUTE = "/signup";
