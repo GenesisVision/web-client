@@ -8,16 +8,17 @@
   <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
   <title>Investor Web Portal</title>
   <!-- Google Tag Manager -->
-  <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/CB85BFFE-F5CF-9F45-84D5-87A1BACA4BAC/main.js"
-    charset="UTF-8"></script>
-  <script>(function (w, d, s, l, i) {
-      w[l] = w[l] || []; w[l].push({
-        'gtm.start':
-          new Date().getTime(), event: 'gtm.js'
-      }); var f = d.getElementsByTagName(s)[0],
-        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', 'GTM-NJLM6BD');</script>
+  <script>
+    if ('%NODE_ENV%' === 'production') {
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || []; w[l].push({
+          'gtm.start':
+            new Date().getTime(), event: 'gtm.js'
+        }); var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+            'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', 'GTM-NJLM6BD');
+    }</script>
   <!-- End Google Tag Manager -->
 </head>
 
