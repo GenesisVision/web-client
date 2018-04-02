@@ -8,7 +8,7 @@
     "classnames": "^2.2.5",
     "copy-to-clipboard": "^3.0.8",
     "formik": "^0.11.11",
-    "gv-api-web": "^1.0.28",
+    "gv-api-web": "^1.0.31",
     "jwt-decode": "^2.2.0",
     "moment": "^2.21.0",
     "node-sass-chokidar": "^0.0.3",
