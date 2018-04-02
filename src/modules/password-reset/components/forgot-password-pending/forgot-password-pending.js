@@ -1,20 +1,20 @@
 import React from "react";
 import EmailConfirmIcon from "../../../../shared/media/email-image.svg";
-import "./email-confirm-pending.css";
+import "./forgot-password-pending.css";
 
-const EmailConfirmPending = () => {
+const ForgotPasswordPending = () => {
   return (
-    <div className="email-confirm-pending">
+    <div className="forgot-password-pending">
       <img
-        className="email-confirm-pending__image"
+        className="forgot-password-pending__image"
         src={EmailConfirmIcon}
         alt="Confirm email"
       />
       <div className="email-confirm-pending__text">
-        Please, confirm your email.
+        We just sent you a new email.
       </div>
     </div>
   );
 };
 
-export default EmailConfirmPending;
+export default ForgotPasswordPending;

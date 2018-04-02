@@ -6,6 +6,7 @@ import FormError from "../../../../shared/components/form/form-error/form-error"
 import InputText from "../../../../shared/components/form/input-text/input-text";
 
 import "./login-form.css";
+import { FORGOT_PASSWORD_ROUTE } from "../../../password-reset/password-reset.constants";
 import { REGISTER_ROUTE } from "../../../register/register.constants";
 import validationSchema from "./login-form.validators";
 
@@ -40,6 +41,9 @@ const LoginForm = ({
           addon="fas fa-lock"
           component={InputText}
         />
+        <Link className="login__forgot-passowrd" to={FORGOT_PASSWORD_ROUTE}>
+          Forgot password
+        </Link>
         <FormError error={error} />
 
         <button
