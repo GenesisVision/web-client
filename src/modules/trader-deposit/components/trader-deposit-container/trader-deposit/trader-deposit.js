@@ -59,11 +59,12 @@ const TraderDeposit = ({
           <div className="trader-deposit__calculator-cell input-gvt">
             <div className="input-gvt__value">
               <Field
+                number
                 name="amount"
-                type="number"
                 placeholder=""
                 controllClass="input-gvt__amount"
                 component={InputText}
+                decimalScale={2}
               />
             </div>
             <div className="input-gvt__description">Enter GVT amount</div>

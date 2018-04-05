@@ -1,3 +1,4 @@
+import NumberFormat from "react-number-format";
 import React from "react";
 
 import "./input-text.css";
@@ -5,8 +6,9 @@ import "./input-text.css";
 const InputText = ({
   field, // { name, value, onChange, onBlur }
   addon,
+  number,
   controllClass,
-  form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+  form: { touched, errors, setFieldValue }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
   ...props
 }) => {
   const showError = () =>
@@ -30,17 +32,36 @@ const InputText = ({
   const validationClass = touched[field.name]
     ? errors[field.name] ? "is-invalid" : "is-valid"
     : "";
+
+  const renderInput = () => {
+    if (number) {
+      return (
+        <NumberFormat
+          className={`${controllClass || "form-control"} ${validationClass}`}
+          value={field.value}
+          onValueChange={(values, e) => {
+            setFieldValue(field.name, values.value || 0);
+          }}
+          {...props}
+        />
+      );
+    }
+    return (
+      <input
+        type="text"
+        className={`${controllClass || "form-control"} ${validationClass}`}
+        autoComplete="off"
+        {...field}
+        {...props}
+      />
+    );
+  };
+
   return (
     <div className="form-group">
       <div className="input-group">
         {renderAddon()}
-        <input
-          type="text"
-          className={`${controllClass || "form-control"} ${validationClass}`}
-          autoComplete="off"
-          {...field}
-          {...props}
-        />
+        {renderInput()}
         {showError()}
       </div>
     </div>
