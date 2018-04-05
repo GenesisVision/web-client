@@ -28,9 +28,9 @@ const TIInfo = ({ idx, trader }) => {
   return (
     <div className="ti-info">
       <div className="ti-info__order">{idx}</div>
-      <div className="ti-info__image">
+      <Link className="ti-info__image" to={traderRoute}>
         <TraderAvatar imgUrl={trader.logo} level={trader.level} />
-      </div>
+      </Link>
       <div className="ti-info__name ti-name">
         <Link className="ti-name__title" to={traderRoute}>
           {trader.title}
