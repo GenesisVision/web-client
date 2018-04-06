@@ -3,6 +3,7 @@ import React from "react";
 
 import DaysLeftWidget from "../../days-left-widget/days-left-widget";
 import replaceParams from "../../../utils/replace-params";
+import TokensWidget from "../../tokens-widget/tokens-widget";
 import TraderAvatar from "../../trader-avatar/trader-avatar";
 
 import "./ti-info.css";
@@ -22,6 +23,20 @@ const TIInfo = ({ idx, trader }) => {
     return <div>The program is not enabled</div>;
   };
 
+  const renderTokens = () => {
+    if (trader.isEnabled) {
+      return (
+        <TokensWidget
+          invested={trader.freeTokens.investorsTokens}
+          requested={trader.freeTokens.requestsTokens}
+          total={trader.freeTokens.total}
+        />
+      );
+    }
+
+    return null;
+  };
+
   const traderRoute = replaceParams(TRADER_ROUTE, {
     ":traderId": trader.id
   });
@@ -37,6 +52,7 @@ const TIInfo = ({ idx, trader }) => {
         </Link>
         <div className="ti-name__description">{trader.description}</div>
         <div className="ti-name__eop">{renderDaysLeft()}</div>
+        <div className="ti-name__eop">{renderTokens()}</div>
       </div>
     </div>
   );
