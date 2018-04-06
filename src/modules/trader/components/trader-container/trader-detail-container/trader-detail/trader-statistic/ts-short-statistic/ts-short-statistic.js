@@ -1,5 +1,8 @@
-import React from "react";
 import NumberFormat from "react-number-format";
+import React from "react";
+
+import TokensWidget from "../../../../../../../../components/tokens-widget/tokens-widget";
+
 import "./ts-short-statistic.css";
 
 const TSShortStatistic = ({ trader }) => {
@@ -19,18 +22,18 @@ const TSShortStatistic = ({ trader }) => {
         </div>
       </div>
       <div className="trader-statistic__cell">
-      <div className="metric">
-        <div className="metric__value">
-          <NumberFormat
-            value={trader.ownBalance / trader.balance * 100}
-            suffix="%"
-            decimalScale={2}
-            displayType="text"
-          />
+        <div className="metric">
+          <div className="metric__value">
+            <NumberFormat
+              value={trader.ownBalance / trader.balance * 100}
+              suffix="%"
+              decimalScale={2}
+              displayType="text"
+            />
+          </div>
+          <div className="metric__description">Manager's Share</div>
         </div>
-        <div className="metric__description">Manager's Share</div>
       </div>
-    </div>
       <div className="trader-statistic__cell">
         <div className="metric">
           <div className="metric__value">{trader.tradesCount}</div>
@@ -69,6 +72,19 @@ const TSShortStatistic = ({ trader }) => {
             />
           </div>
           <div className="metric__description">Success Fee</div>
+        </div>
+      </div>
+      <div className="trader-statistic__cell">
+        <div className="metric">
+          <div className="metric__value">
+            <TokensWidget
+              invested={trader.freeTokens.investorsTokens}
+              requested={trader.freeTokens.requestsTokens}
+              total={trader.freeTokens.total}
+              showHeader={false}
+            />
+          </div>
+          <div className="metric__description">Tokens</div>
         </div>
       </div>
     </div>
