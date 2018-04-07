@@ -9,7 +9,7 @@ import TraderAvatar from "../../trader-avatar/trader-avatar";
 import "./ti-info.css";
 import { TRADER_ROUTE } from "../../../modules/trader/trader.constants";
 
-const TIInfo = ({ idx, trader }) => {
+const TIInfo = ({ idx, trader, showTokensWidget }) => {
   const renderDaysLeft = () => {
     if (trader.isEnabled) {
       return (
@@ -52,7 +52,7 @@ const TIInfo = ({ idx, trader }) => {
         </Link>
         <div className="ti-name__description">{trader.description}</div>
         <div className="ti-name__eop">{renderDaysLeft()}</div>
-        <div className="ti-name__eop">{renderTokens()}</div>
+        {showTokensWidget && <div className="ti-name__eop">{renderTokens()}</div>}
       </div>
     </div>
   );

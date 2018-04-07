@@ -21,7 +21,7 @@ const TraderItem = ({ idx, trader, isAuthenticated, openInvestPopup }) => {
         "trader-item--inactive": !trader.isEnabled
       })}
     >
-      <TIInfo idx={idx} trader={trader} />
+      <TIInfo idx={idx} trader={trader} showTokensWidget/>
       <TIChart data={traderChartData} />
       <TIStatistic trader={trader} />
       <TIButtons
