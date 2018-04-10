@@ -9,7 +9,7 @@ import validationSchema from "./reset-password.validators";
 
 const ResetPassword = ({ isSubmitting, handleSubmit, error }) => {
   return (
-    <form onSubmit={handleSubmit} noValidate>
+    <form id="resetPasswordForm" onSubmit={handleSubmit} noValidate>
       <div className="reset-password">
         <div className="reset-password__header">Reset Password</div>
         <Field
@@ -27,7 +27,11 @@ const ResetPassword = ({ isSubmitting, handleSubmit, error }) => {
           component={InputText}
         />
         <FormError error={error} />
-        <button type="submit" className="gv-btn gv-btn-primary">
+        <button
+          type="submit"
+          id="resetPasswordSubmit"
+          className="gv-btn gv-btn-primary"
+        >
           Submit
         </button>
       </div>

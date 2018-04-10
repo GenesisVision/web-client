@@ -25,7 +25,7 @@ const TraderDeposit = ({
   return (
     <div className="popup">
       <PopupHeader header="Buy Tokens" onClose={closePopup} />
-      <form onSubmit={handleSubmit}>
+      <form id="programDepositForm" onSubmit={handleSubmit}>
         <div className="trader-deposit__info">
           <div className="trader-deposit__info-cell">
             <div className="trader-deposit__trader">
@@ -87,6 +87,7 @@ const TraderDeposit = ({
           isSubmitting={isSubmitting}
           onSubmit={handleSubmit}
           onCancel={closePopup}
+          submitButtonId="programWithdrawSubmit"
         />
       </form>
     </div>

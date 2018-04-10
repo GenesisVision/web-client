@@ -23,7 +23,7 @@ const LoginForm = ({
   error
 }) => {
   return (
-    <form onSubmit={handleSubmit} noValidate>
+    <form id="loginForm" onSubmit={handleSubmit} noValidate>
       <div className="login">
         <div className="login__header">Login</div>
 
@@ -48,6 +48,7 @@ const LoginForm = ({
 
         <button
           type="submit"
+          id="loginSubmit"
           className="gv-btn gv-btn-primary"
           disabled={isSubmitting}
         >

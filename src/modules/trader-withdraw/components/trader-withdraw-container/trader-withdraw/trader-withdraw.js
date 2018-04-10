@@ -26,7 +26,7 @@ const TraderWithdraw = ({
   return (
     <div className="popup">
       <PopupHeader header="Sell Tokens" onClose={closePopup} />
-      <form onSubmit={handleSubmit}>
+      <form id="programWithdrawForm" onSubmit={handleSubmit}>
         <div className="trader-withdraw__info">
           <div className="trader-withdraw__info-cell">
             <div className="trader-withdraw__trader">
@@ -91,6 +91,7 @@ const TraderWithdraw = ({
           isSubmitting={isSubmitting}
           onSubmit={handleSubmit}
           onCancel={closePopup}
+          submitButtonId="programWithdrawSubmit"
         />
       </form>
     </div>

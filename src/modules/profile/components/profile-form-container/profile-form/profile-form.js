@@ -11,7 +11,7 @@ const ProfileForm = ({
   onCancel
 }) => {
   return (
-    <form onSubmit={handleSubmit} noValidate>
+    <form id="editProfileForm" onSubmit={handleSubmit} noValidate>
       <Field
         name="userName"
         placeholder="Username"
@@ -67,6 +67,7 @@ const ProfileForm = ({
       <div>
         <button
           type="submit"
+          id="editProfileSubmit"
           disabled={isSubmitting}
           className="btn btn-primary"
         >

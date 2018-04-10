@@ -11,7 +11,7 @@ import validationSchema from "./register-form.validators";
 
 const RegisterForm = ({ isSubmitting, handleSubmit, error }) => {
   return (
-    <form onSubmit={handleSubmit} noValidate>
+    <form id="registerForm" onSubmit={handleSubmit} noValidate>
       <div className="register">
         <div className="register__header">Sign Up</div>
 
@@ -40,7 +40,11 @@ const RegisterForm = ({ isSubmitting, handleSubmit, error }) => {
         />
         <FormError error={error} />
 
-        <button type="submit" className="gv-btn gv-btn-primary">
+        <button
+          type="submit"
+          id="registerFormSubmit"
+          className="gv-btn gv-btn-primary"
+        >
           Sign Up
         </button>
         <div className="register__separator" />

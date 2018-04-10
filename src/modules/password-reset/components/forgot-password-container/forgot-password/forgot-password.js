@@ -9,7 +9,7 @@ import validationSchema from "./forgot-password.validators";
 
 const ForgotPasswordForm = ({ values, isSubmitting, handleSubmit, error }) => {
   return (
-    <form onSubmit={handleSubmit} noValidate>
+    <form id="forgotPasswordForm" onSubmit={handleSubmit} noValidate>
       <div className="forgot-password">
         <div className="forgot-password__header">Forgot Password</div>
         <Field
@@ -22,6 +22,7 @@ const ForgotPasswordForm = ({ values, isSubmitting, handleSubmit, error }) => {
         <FormError error={error} />
         <button
           type="submit"
+          id="forgotPasswordSubmit"
           className="gv-btn gv-btn-primary"
           disabled={isSubmitting}
         >
