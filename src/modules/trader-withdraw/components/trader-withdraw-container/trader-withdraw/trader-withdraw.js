@@ -52,7 +52,7 @@ const TraderWithdraw = ({
           <div className="trader-withdraw__info-cell">
             <div className="metric">
               <div className="metric__value">
-                {+traderWithdraw.investedTokens.toFixed(2)}
+                {traderWithdraw.investedTokens}
               </div>
               <div className="metric__description">
                 Invested {traderWithdraw.token.tokenSymbol}

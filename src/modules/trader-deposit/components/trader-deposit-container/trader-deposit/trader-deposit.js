@@ -49,7 +49,7 @@ const TraderDeposit = ({
           <div className="trader-deposit__info-cell trader-deposit__available">
             <div className="metric">
               <div className="metric__value">
-                {+traderDeposit.gvtWalletAmount.toFixed(2)}
+                {traderDeposit.gvtWalletAmount}
               </div>
               <div className="metric__description">Avaialble GVT</div>
             </div>
