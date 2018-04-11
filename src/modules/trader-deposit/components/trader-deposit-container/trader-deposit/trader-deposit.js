@@ -51,7 +51,7 @@ const TraderDeposit = ({
               <div className="metric__value">
                 {traderDeposit.gvtWalletAmount}
               </div>
-              <div className="metric__description">Avaialble GVT</div>
+              <div className="metric__description">Available GVT</div>
             </div>
           </div>
         </div>
