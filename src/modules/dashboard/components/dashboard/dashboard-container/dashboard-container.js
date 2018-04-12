@@ -52,8 +52,8 @@ const mapDispatchToProps = dispatch => ({
   fetchDashboardPrograms: () => {
     dispatch(dashboardActions.fetchDashboardPrograms());
   },
-  openInvestPopup: traderId => () => {
-    dispatch(popupActions.openPopup(TRADER_DEPOSIT_POPUP, { traderId }));
+  openInvestPopup: programId => () => {
+    dispatch(popupActions.openPopup(TRADER_DEPOSIT_POPUP, { programId }));
   }
 });
 

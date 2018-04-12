@@ -3,9 +3,9 @@ import SwaggerInvestorApi from "../../../services/api-client/swagger-investor-ap
 
 import * as actionTypes from "./program-withdraw-actions.constants";
 
-const submitProgramWithdraw = (traderId, amount) => {
+const submitProgramWithdraw = (programId, amount) => {
   const model = {
-    investmentProgramId: traderId,
+    investmentProgramId: programId,
     amount
   };
   return {

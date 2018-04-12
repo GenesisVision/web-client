@@ -25,7 +25,7 @@ const DPTraderItem = ({ idx, trader, isAuthenticated, openInvestPopup }) => {
       <TIChart data={traderChartData} />
       <DPStatistic trader={trader} />
       <TIButtons
-        traderId={trader.id}
+        programId={trader.id}
         isInvestEnable={trader.isInvestEnable}
         isAuthenticated={isAuthenticated}
         openInvestPopup={openInvestPopup}

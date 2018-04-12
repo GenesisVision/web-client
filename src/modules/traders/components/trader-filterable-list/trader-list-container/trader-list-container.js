@@ -54,12 +54,12 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     ...stateProps,
     ...otherDispatchProps,
     ...ownProps,
-    openInvestPopup: traderId => () => {
+    openInvestPopup: programId => () => {
       dispatch(
         popupActions.openPopup(
           TRADER_DEPOSIT_POPUP,
           {
-            traderId
+            programId
           },
           closeInvestPopup
         )

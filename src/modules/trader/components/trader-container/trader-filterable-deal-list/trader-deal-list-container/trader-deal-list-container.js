@@ -6,7 +6,7 @@ import TraderDealList from "./trader-deal-list/trader-deal-list";
 
 class TraderDealListContainer extends PureComponent {
   componentWillMount() {
-    this.props.fetchTraderDealList(this.props.traderId);
+    this.props.fetchTraderDealList(this.props.programId);
   }
 
   render() {
@@ -49,8 +49,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchTraderDealList: traderId => {
-    dispatch(traderActions.fetchTraderDealList(traderId));
+  fetchTraderDealList: programId => {
+    dispatch(traderActions.fetchTraderDealList(programId));
   }
 });
 

@@ -27,20 +27,20 @@ const mapDispatchToProps = dispatch => ({
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const { dispatch } = dispatchProps;
-  const { traderId } = ownProps;
+  const { programId } = ownProps;
   return {
     ...stateProps,
     updatePaging: paging => {
-      dispatch(traderActions.updateTraderRequestListPaging(traderId, paging));
+      dispatch(traderActions.updateTraderRequestListPaging(programId, paging));
     },
     updatePagingAndFetch: paging => {
       dispatch(
-        traderActions.updateTraderRequestListPagingAndFetch(traderId, paging)
+        traderActions.updateTraderRequestListPagingAndFetch(programId, paging)
       );
     }
   };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
-    TraderRequestListPagingContainer
+  TraderRequestListPagingContainer
 );

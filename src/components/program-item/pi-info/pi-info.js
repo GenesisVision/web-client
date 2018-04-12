@@ -39,7 +39,7 @@ const PIInfo = ({ idx, trader, showTokensWidget }) => {
   };
 
   const traderRoute = replaceParams(TRADER_ROUTE, {
-    ":traderId": trader.id
+    ":programId": trader.id
   });
   return (
     <div className="pi-info">

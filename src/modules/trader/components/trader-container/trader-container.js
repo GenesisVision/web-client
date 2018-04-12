@@ -10,17 +10,19 @@ import "./trader-container.css";
 
 class TraderContainer extends Component {
   render() {
-    const { traderId } = this.props.match.params;
+    const { programId } = this.props.match.params;
     const { isAuthenticated } = this.props;
     return (
       <div className="trader-container">
         <TraderDetailContainer
-          traderId={traderId}
+          programId={programId}
           isAuthenticated={isAuthenticated}
         />
-        <TraderHistoryContainer traderId={traderId} />
-        <TraderFilterableDealList traderId={traderId} />
-        {isAuthenticated && <TraderFilterableRequestList traderId={traderId} />}
+        <TraderHistoryContainer programId={programId} />
+        <TraderFilterableDealList programId={programId} />
+        {isAuthenticated && (
+          <TraderFilterableRequestList programId={programId} />
+        )}
       </div>
     );
   }

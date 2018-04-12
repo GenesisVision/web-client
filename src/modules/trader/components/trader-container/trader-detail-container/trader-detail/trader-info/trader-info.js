@@ -22,7 +22,7 @@ const TraderInfo = ({
       {isAuthenticated && (
         <div className="trader-info__buttons">
           <TraderButtons
-            traderId={trader.id}
+            programId={trader.id}
             isInvestEnable={trader.isInvestEnable}
             isWithdrawEnable={trader.isWithdrawEnable}
             openInvestPopup={openInvestPopup}

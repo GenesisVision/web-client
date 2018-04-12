@@ -9,7 +9,7 @@ import SwaggerInvestorApi from "../../../services/api-client/swagger-investor-ap
 
 import * as actionTypes from "./trader-actions.constants";
 
-const fetchTrader = traderId => {
+const fetchTrader = programId => {
   let data = {};
   if (authService.getAuthArg()) {
     data.authorization = authService.getAuthArg();
@@ -18,7 +18,7 @@ const fetchTrader = traderId => {
   return {
     type: actionTypes.TRADER_DETAIL,
     payload: SwaggerInvestorApi.apiInvestorInvestmentProgramGet(
-      traderId,
+      programId,
       data
     ).then(response => {
       const trader = response.investmentProgram;
@@ -28,20 +28,20 @@ const fetchTrader = traderId => {
   };
 };
 
-const fetchTraderHistory = traderId => {
+const fetchTraderHistory = programId => {
   return {
     type: actionTypes.TRADER_HISTORY,
     payload: SwaggerInvestorApi.apiInvestorInvestmentProgramTradesChartGet(
-      traderId
+      programId
     )
   };
 };
 
-const fetchTraderRequests = traderId => (dispatch, getState) => {
+const fetchTraderRequests = programId => (dispatch, getState) => {
   const { paging } = getState().traderData.requests;
   const { skip, take } = calculateSkipAndTake(paging);
 
-  const filter = { investmentProgramId: traderId, skip, take };
+  const filter = { investmentProgramId: programId, skip, take };
 
   return dispatch({
     type: actionTypes.TRADER_REQUESTS,
@@ -63,19 +63,19 @@ const updateTraderRequestListPaging = paging => {
 };
 
 const updateTraderRequestListPagingAndFetch = (
-  traderId,
+  programId,
   paging
 ) => dispatch => {
   dispatch(updateTraderRequestListPaging(paging));
-  dispatch(fetchTraderRequests(traderId));
+  dispatch(fetchTraderRequests(programId));
 };
 
-const fetchTraderDealList = traderId => (dispatch, getState) => {
+const fetchTraderDealList = programId => (dispatch, getState) => {
   const { paging } = getState().traderData.deals;
   const { skip, take } = calculateSkipAndTake(paging);
 
   const filter = {
-    investmentProgramId: traderId,
+    investmentProgramId: programId,
     sorting: "ByDateDesc",
     skip,
     take
@@ -96,12 +96,12 @@ const updateTraderDealListPaging = paging => {
   return pagingActionsDealList.updatePaging(paging);
 };
 
-const updateTraderDealListPagingAndFetch = (traderId, paging) => dispatch => {
+const updateTraderDealListPagingAndFetch = (programId, paging) => dispatch => {
   dispatch(updateTraderDealListPaging(paging));
-  dispatch(fetchTraderDealList(traderId));
+  dispatch(fetchTraderDealList(programId));
 };
 
-const cancelTraderRequest = (traderId, requestId) => dispatch => {
+const cancelTraderRequest = (programId, requestId) => dispatch => {
   return dispatch({
     type: actionTypes.TRADER_CANCEL_REQUEST,
     payload: SwaggerInvestorApi.apiInvestorInvestmentProgramsCancelInvestmentRequestPost(
@@ -109,8 +109,8 @@ const cancelTraderRequest = (traderId, requestId) => dispatch => {
       authService.getAuthArg()
     )
   })
-    .then(() => dispatch(traderActions.fetchTraderRequests(traderId)))
-    .then(() => dispatch(traderActions.fetchTrader(traderId)));
+    .then(() => dispatch(traderActions.fetchTraderRequests(programId)))
+    .then(() => dispatch(traderActions.fetchTrader(programId)));
 };
 
 const traderActions = {

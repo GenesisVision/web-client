@@ -13,7 +13,7 @@ import traderService from "../../../service/trader-service";
 
 class TraderDetailContainer extends PureComponent {
   componentWillMount() {
-    this.props.fetchTraderDetail(this.props.traderId);
+    this.props.fetchTraderDetail(this.props.programId);
   }
 
   render() {
@@ -55,30 +55,30 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchTraderDetail: traderId => {
-    dispatch(traderActions.fetchTrader(traderId));
+  fetchTraderDetail: programId => {
+    dispatch(traderActions.fetchTrader(programId));
   },
   dispatch
 });
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const { dispatch, ...otherDispatchProps } = dispatchProps;
-  const closeInvestPopup = traderId => () => {
-    return traderService.updateAfterInvestment(traderId);
+  const closeInvestPopup = programId => () => {
+    return traderService.updateAfterInvestment(programId);
   };
 
   return {
     ...stateProps,
     ...otherDispatchProps,
     ...ownProps,
-    openInvestPopup: traderId => () => {
+    openInvestPopup: programId => () => {
       dispatch(
         popupActions.openPopup(
           TRADER_DEPOSIT_POPUP,
           {
-            traderId
+            programId
           },
-          closeInvestPopup(traderId)
+          closeInvestPopup(programId)
         )
       );
     },

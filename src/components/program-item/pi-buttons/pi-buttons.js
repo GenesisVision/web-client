@@ -8,12 +8,12 @@ import "./pi-buttons.css";
 
 const PIButtons = ({
   isAuthenticated,
-  traderId,
+  programId,
   isInvestEnable,
   openInvestPopup
 }) => {
   const traderRoute = replaceParams(TRADER_ROUTE, {
-    ":traderId": traderId
+    ":programId": programId
   });
   return (
     <div className="pi-buttons">
@@ -23,7 +23,7 @@ const PIButtons = ({
       {isAuthenticated && (
         <button
           className="pi-button gv-btn gv-btn-primary"
-          onClick={openInvestPopup(traderId)}
+          onClick={openInvestPopup(programId)}
           disabled={!isInvestEnable}
         >
           Invest

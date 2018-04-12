@@ -5,12 +5,12 @@ import TraderDealListPagingContainer from "./trader-deal-list-paging-container/t
 
 import "./trader-filterable-deal-list.css";
 
-const TraderFilterableDealList = ({ traderId }) => {
+const TraderFilterableDealList = ({ programId }) => {
   return (
     <div className="trader-filterable-deal-list">
-      <TraderDealListContainer traderId={traderId} />
+      <TraderDealListContainer programId={programId} />
       <div className="trader-filterable-deal-list__paging">
-        <TraderDealListPagingContainer traderId={traderId} />
+        <TraderDealListPagingContainer programId={programId} />
       </div>
     </div>
   );

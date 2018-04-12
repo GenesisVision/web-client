@@ -27,15 +27,15 @@ const mapDispatchToProps = dispatch => ({
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const { dispatch } = dispatchProps;
-  const { traderId } = ownProps;
+  const { programId } = ownProps;
   return {
     ...stateProps,
     updatePaging: paging => {
-      dispatch(traderActions.updateTraderDealListPaging(traderId, paging));
+      dispatch(traderActions.updateTraderDealListPaging(programId, paging));
     },
     updatePagingAndFetch: paging => {
       dispatch(
-        traderActions.updateTraderDealListPagingAndFetch(traderId, paging)
+        traderActions.updateTraderDealListPagingAndFetch(programId, paging)
       );
     }
   };

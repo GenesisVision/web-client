@@ -1,9 +1,9 @@
 import traderActions from "../actions/trader-actions";
 
-const updateAfterInvestment = traderId => dispatch => {
+const updateAfterInvestment = programId => dispatch => {
   return Promise.all([
-    dispatch(traderActions.fetchTrader(traderId)),
-    dispatch(traderActions.fetchTraderRequests(traderId))
+    dispatch(traderActions.fetchTrader(programId)),
+    dispatch(traderActions.fetchTraderRequests(programId))
   ]);
 };
 

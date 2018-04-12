@@ -6,7 +6,7 @@ import TraderRequestList from "./trader-request-list/trader-request-list";
 
 class TraderRequestListContainer extends PureComponent {
   componentWillMount() {
-    this.props.fetchTraderRequests(this.props.traderId);
+    this.props.fetchTraderRequests(this.props.programId);
   }
 
   render() {
@@ -14,7 +14,7 @@ class TraderRequestListContainer extends PureComponent {
       isPending,
       traderRequests,
       cancelRequest,
-      traderId,
+      programId,
       token
     } = this.props;
     if (isPending || traderRequests === undefined) {
@@ -24,7 +24,7 @@ class TraderRequestListContainer extends PureComponent {
       <TraderRequestList
         requests={traderRequests.requests}
         token={token}
-        cancelRequest={cancelRequest(traderId)}
+        cancelRequest={cancelRequest(programId)}
       />
     );
   }
@@ -53,11 +53,11 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchTraderRequests: traderId => {
-    dispatch(traderActions.fetchTraderRequests(traderId));
+  fetchTraderRequests: programId => {
+    dispatch(traderActions.fetchTraderRequests(programId));
   },
-  cancelRequest: traderId => requestId => () => {
-    dispatch(traderActions.cancelTraderRequest(traderId, requestId));
+  cancelRequest: programId => requestId => () => {
+    dispatch(traderActions.cancelTraderRequest(programId, requestId));
   }
 });
 
