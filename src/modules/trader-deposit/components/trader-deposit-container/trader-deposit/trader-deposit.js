@@ -7,7 +7,7 @@ import FormError from "../../../../../shared/components/form/form-error/form-err
 import InputText from "../../../../../shared/components/form/input-text/input-text";
 import PopupButtons from "../../../../popup/components/popup-buttons/popup-buttons";
 import PopupHeader from "../../../../popup/components/popup-header/popup-header";
-import TraderAvatar from "../../../../../components/trader-avatar/trader-avatar";
+import TraderAvatar from "../../../../../components/program-avatar/program-avatar";
 
 import "./trader-deposit.css";
 

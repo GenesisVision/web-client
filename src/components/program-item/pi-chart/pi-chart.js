@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./ti-chart.css";
+import "./pi-chart.css";
 
 import {
   Bar,
@@ -12,9 +12,9 @@ import {
   ComposedChart
 } from "recharts";
 
-const TIChart = ({ data }) => {
+const PIChart = ({ data }) => {
   return (
-    <div className="ti-chart">
+    <div className="pi-chart">
       <ResponsiveContainer>
         <ComposedChart data={data} stackOffset="sign">
           <XAxis dataKey="date" hide />
@@ -58,4 +58,4 @@ const TIChart = ({ data }) => {
   );
 };
 
-export default TIChart;
+export default PIChart;

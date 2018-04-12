@@ -4,9 +4,9 @@ import React from "react";
 import { TRADER_ROUTE } from "../../../modules/trader/trader.constants";
 import replaceParams from "../../../utils/replace-params";
 
-import "./ti-buttons.css";
+import "./pi-buttons.css";
 
-const TIButtons = ({
+const PIButtons = ({
   isAuthenticated,
   traderId,
   isInvestEnable,
@@ -16,13 +16,13 @@ const TIButtons = ({
     ":traderId": traderId
   });
   return (
-    <div className="ti-buttons">
-      <Link className="ti-button gv-btn gv-btn-secondary" to={traderRoute}>
+    <div className="pi-buttons">
+      <Link className="pi-button gv-btn gv-btn-secondary" to={traderRoute}>
         View Profile
       </Link>
       {isAuthenticated && (
         <button
-          className="ti-button gv-btn gv-btn-primary"
+          className="pi-button gv-btn gv-btn-primary"
           onClick={openInvestPopup(traderId)}
           disabled={!isInvestEnable}
         >
@@ -33,4 +33,4 @@ const TIButtons = ({
   );
 };
 
-export default TIButtons;
+export default PIButtons;

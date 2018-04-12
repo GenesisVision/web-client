@@ -1,7 +1,7 @@
 import React from "react";
 
 import "./trader-info.css";
-import TraderAvatar from "../../../../../../../components/trader-avatar/trader-avatar";
+import TraderAvatar from "../../../../../../../components/program-avatar/program-avatar";
 import TraderButtons from "./trader-buttons/trader-buttons";
 
 const TraderInfo = ({

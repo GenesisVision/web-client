@@ -1,5 +1,5 @@
 @import "styles/_breakpoint.scss";
-.ti-buttons {
+.pi-buttons {
   display: flex;
   order: 4;
   flex-direction: column;
@@ -15,7 +15,7 @@
   }
 }
 
-.ti-button {
+.pi-button {
   margin: 1rem;
   min-width: 110px;
 }

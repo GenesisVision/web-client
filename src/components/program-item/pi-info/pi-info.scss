@@ -1,7 +1,7 @@
 @import "styles/_colors.scss";
 @import "styles/_breakpoint.scss";
 
-.ti-info {
+.pi-info {
   display: flex;
   order: 1;
   flex-wrap: wrap;
@@ -15,14 +15,14 @@
   }
 }
 
-.ti-info__order {
+.pi-info__order {
   font-size: 1.4rem;
   @include media-breakpoint-phone() {
     font-size: 1rem;
   }
 }
 
-.ti-info__image {
+.pi-info__image {
   position: relative;
   width: 100px;
   margin: 0 0.5rem;
@@ -32,17 +32,17 @@
   }
 }
 
-.ti-info__name {
+.pi-info__name {
   max-width: 14rem;
 }
 
-.ti-name {
+.pi-name {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.ti-name__title {
+.pi-name__title {
   font-size: 1.6rem;
   color: $text-color;
   max-width: 100%;
@@ -53,7 +53,7 @@
   }
 }
 
-.ti-name__description {
+.pi-name__description {
   font-size: 0.9em;
   color: $text-sub-color;
   line-height: 1.2;
@@ -67,7 +67,7 @@
   }
 }
 
-.ti-name__eop {
+.pi-name__eop {
   display: flex;
   align-items: center;
   color: $text-sub-color;

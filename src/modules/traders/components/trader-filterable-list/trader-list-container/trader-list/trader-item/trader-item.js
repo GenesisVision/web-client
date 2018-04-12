@@ -1,9 +1,9 @@
 import classnames from "classnames";
 import React from "react";
 
-import TIButtons from "../../../../../../../components/trader-item/ti-buttons/ti-buttons";
-import TIChart from "../../../../../../../components/trader-item/ti-chart/ti-chart";
-import TIInfo from "../../../../../../../components/trader-item/ti-info/ti-info";
+import TIButtons from "../../../../../../../components/program-item/pi-buttons/pi-buttons";
+import TIChart from "../../../../../../../components/program-item/pi-chart/pi-chart";
+import TIInfo from "../../../../../../../components/program-item/pi-info/pi-info";
 import TIStatistic from "./ti-statistic/ti-statistic";
 
 import "./trader-item.css";
@@ -21,7 +21,7 @@ const TraderItem = ({ idx, trader, isAuthenticated, openInvestPopup }) => {
         "trader-item--inactive": !trader.isEnabled
       })}
     >
-      <TIInfo idx={idx} trader={trader} showTokensWidget/>
+      <TIInfo idx={idx} trader={trader} showTokensWidget />
       <TIChart data={traderChartData} />
       <TIStatistic trader={trader} />
       <TIButtons
