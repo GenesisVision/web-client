@@ -27,6 +27,7 @@ const PIInfo = ({ idx, trader, showTokensWidget }) => {
     if (trader.isEnabled) {
       return (
         <TokensWidget
+          id={trader.id}
           invested={trader.freeTokens.investorsTokens}
           requested={trader.freeTokens.requestsTokens}
           total={trader.freeTokens.total}
@@ -52,7 +53,9 @@ const PIInfo = ({ idx, trader, showTokensWidget }) => {
         </Link>
         <div className="pi-name__description">{trader.description}</div>
         <div className="pi-name__eop">{renderDaysLeft()}</div>
-        {showTokensWidget && <div className="pi-name__eop">{renderTokens()}</div>}
+        {showTokensWidget && (
+          <div className="pi-name__eop">{renderTokens()}</div>
+        )}
       </div>
     </div>
   );

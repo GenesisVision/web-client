@@ -25,7 +25,11 @@ const TSShortStatistic = ({ trader }) => {
         <div className="metric">
           <div className="metric__value">
             <NumberFormat
-              value={trader.balance === 0 ? 0 : trader.ownBalance / trader.balance * 100}
+              value={
+                trader.balance === 0
+                  ? 0
+                  : trader.ownBalance / trader.balance * 100
+              }
               suffix="%"
               decimalScale={2}
               displayType="text"
@@ -78,6 +82,7 @@ const TSShortStatistic = ({ trader }) => {
         <div className="metric">
           <div className="metric__value">
             <TokensWidget
+              id={trader.id}
               invested={trader.freeTokens.investorsTokens}
               requested={trader.freeTokens.requestsTokens}
               total={trader.freeTokens.total}

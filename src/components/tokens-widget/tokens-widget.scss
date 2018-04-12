@@ -18,7 +18,6 @@
   height: 0.3rem;
   overflow: hidden;
   font-size: 0.75rem;
-  background-color: $alternate-color;
   border-radius: 0.25rem;
   margin: 0.5rem 0;
 }
@@ -33,9 +32,15 @@
 
 .tokens-widget__value--invested {
   background-color: $main-color;
+  border-radius: 0;
 }
 
 .tokens-widget__value--requested {
   background-color: $border-color;
+  border-radius: 0;
+}
+
+.tokens-widget__value--free {
+  background-color: $alternate-color;
   border-radius: 0;
 }
