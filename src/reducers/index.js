@@ -10,11 +10,11 @@ import loginReducer from "../modules/login/reducers/login-reducers";
 import passwordResetReducer from "../modules/password-reset/reducers/password-reset-reducers";
 import popupReducer from "../modules/popup/reducers/popup-reducers";
 import profileReducer from "../modules/profile/reducers/profile-reducers";
-import registerReducer from "../modules/register/reducers/register-reducers";
 import programDepositReducer from "../modules/program-deposit/reducers/trader-deposit-reducers";
+import programWithdrawReducer from "../modules/program-withdraw/reducers/program-withdraw-reducers";
+import registerReducer from "../modules/register/reducers/register-reducers";
 import traderReducer from "../modules/trader/reducers/trader-reducers";
 import tradersReducer from "../modules/traders/reducers/traders-reducers";
-import traderWithdrawReducer from "../modules/trader-withdraw/reducers/trader-withdraw-reducers";
 import walletPaneReducer from "../modules/wallet-pane/reducers/wallet-pane-reducers";
 import walletReducer from "../modules/wallet/reducers/wallet-reducers";
 
@@ -34,6 +34,6 @@ export default combineReducers({
   walletPaneData: walletPaneReducer,
   dashboardData: dashboardReducer,
   programDepositData: programDepositReducer,
-  traderWithdrawData: traderWithdrawReducer,
+  programWithdrawData: programWithdrawReducer,
   popupData: popupReducer
 });

@@ -1,7 +1,7 @@
 @import "styles/_colors.scss";
 @import "styles/_breakpoint.scss";
 
-.trader-withdraw__info {
+.program-withdraw__info {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -11,23 +11,23 @@
   }
 }
 
-.trader-withdraw__info-cell {
+.program-withdraw__info-cell {
   flex: 1 1 32%;
   max-width: 32%;
   text-align: center;
 }
 
-.trader-withdraw__trader {
+.program-withdraw__trader {
   display: flex;
   align-items: center;
 }
 
-.trader-withdraw__name {
+.program-withdraw__name {
   font-size: 1.3rem;
   margin: 0.5rem;
 }
 
-.trader-withdraw__days-left {
+.program-withdraw__days-left {
   max-width: 5rem;
   margin: auto;
   .days-left-widget {
@@ -35,7 +35,7 @@
   }
 }
 
-.trader-withdraw__calculator {
+.program-withdraw__calculator {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -46,13 +46,13 @@
   }
 }
 
-.trader-withdraw__calculator-header {
+.program-withdraw__calculator-header {
   @include media-breakpoint-phone() {
     font-size: 0.9rem;
   }
 }
 
-.trader-withdraw__calculator-cell {
+.program-withdraw__calculator-cell {
   flex: 1 1 30%;
   max-width: 30%;
   text-align: center;

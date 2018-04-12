@@ -2,8 +2,8 @@ import { connect } from "react-redux";
 import React, { PureComponent } from "react";
 
 import { alertMessageActions } from "../../../../shared/modules/alert-message/actions/alert-message-actions";
-import TraderWithdraw from "./trader-withdraw/trader-withdraw";
-import traderWithdrawActions from "../../actions/trader-withdraw-actions";
+import ProgramWithdraw from "./program-withdraw/program-withdraw";
+import programWithdrawActions from "../../actions/program-withdraw-actions";
 
 class TraderWithdrawContainer extends PureComponent {
   render() {
@@ -23,8 +23,8 @@ class TraderWithdrawContainer extends PureComponent {
     };
 
     return (
-      <TraderWithdraw
-        traderWithdraw={traderWithdraw}
+      <ProgramWithdraw
+        programWithdraw={traderWithdraw}
         error={errorMessage}
         submitPopup={handleWithdrawSubmit}
         closePopup={closePopup}
@@ -34,7 +34,7 @@ class TraderWithdrawContainer extends PureComponent {
 }
 
 const mapStateToProps = state => {
-  const { errorMessage } = state.traderWithdrawData.submitData;
+  const { errorMessage } = state.programWithdrawData.submitData;
 
   return {
     errorMessage
@@ -42,8 +42,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchWithdraw: traderId => {
-    dispatch(traderWithdrawActions.fetchTraderWithdraw(traderId));
+  fetchWithdraw: programId => {
+    dispatch(programWithdrawActions.fetchTraderWithdraw(programId));
   },
   dispatch
 });
@@ -54,8 +54,9 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     ...stateProps,
     ...otherDispatchProps,
     ...ownProps,
-    submitWithdraw: (traderId, amount, setSubmitting) =>
-      dispatch(traderWithdrawActions.submitTraderWithdraw(traderId, amount))
+    submitWithdraw: (programId, amount, setSubmitting) =>
+
+      dispatch(programWithdrawActions.submitProgramWithdraw(programId, amount))
         .then(() => ownProps.submitPopup())
         .then(() => {
           dispatch(
