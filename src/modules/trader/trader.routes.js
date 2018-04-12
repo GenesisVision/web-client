@@ -2,7 +2,7 @@ import { Route } from "react-router-dom";
 import React from "react";
 
 import TraderContainer from "../trader/components/trader-container/trader-container";
-import TraderDepositContainer from "../trader-deposit/components/trader-deposit-container/trader-deposit-container";
+import TraderDepositContainer from "../program-deposit/components/program-deposit-container/program-deposit-container";
 import TraderWithdrawContainer from "../trader-withdraw/components/trader-withdraw-container/trader-withdraw-container";
 
 import {

@@ -1,7 +1,7 @@
 @import "styles/_colors.scss";
 @import "styles/_breakpoint.scss";
 
-.trader-deposit__info {
+.program-deposit__info {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -12,29 +12,29 @@
   }
 }
 
-.trader-deposit__info-cell {
+.program-deposit__info-cell {
   flex: 1 1 32%;
   max-width: 32%;
   text-align: center;
 }
 
-.trader-deposit__available {
+.program-deposit__available {
   @include media-breakpoint-phone() {
     min-width: 100%;
   }
 }
 
-.trader-deposit__trader {
+.program-deposit__trader {
   display: flex;
   align-items: center;
 }
 
-.trader-deposit__name {
+.program-deposit__name {
   font-size: 1.3rem;
   margin: 0.5rem;
 }
 
-.trader-deposit__days-left {
+.program-deposit__days-left {
   max-width: 5rem;
   margin: auto;
   .days-left-widget {
@@ -42,7 +42,7 @@
   }
 }
 
-.trader-deposit__calculator {
+.program-deposit__calculator {
   display: flex;
   justify-content: center;
   margin: 2rem 0;
@@ -52,7 +52,7 @@
   }
 }
 
-.trader-deposit__calculator-cell {
+.program-deposit__calculator-cell {
   display: flex;
   align-items: center;
   justify-content: center;

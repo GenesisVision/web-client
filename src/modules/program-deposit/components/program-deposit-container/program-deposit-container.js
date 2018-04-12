@@ -2,8 +2,8 @@ import { connect } from "react-redux";
 import React, { PureComponent } from "react";
 
 import { alertMessageActions } from "../../../../shared/modules/alert-message/actions/alert-message-actions";
-import TraderDeposit from "./trader-deposit/trader-deposit";
-import traderDepositActions from "../../actions/trader-deposit-actions";
+import ProgramDeposit from "./program-deposit/program-deposit";
+import programDepositActions from "../../actions/program-deposit-actions";
 
 class TraderDepositContainer extends PureComponent {
   componentWillMount() {
@@ -14,7 +14,7 @@ class TraderDepositContainer extends PureComponent {
     const {
       isPending,
       traderId,
-      traderDeposit,
+      programDeposit,
       errorMessage,
       submitDeposit,
       closePopup
@@ -24,13 +24,13 @@ class TraderDepositContainer extends PureComponent {
       return submitDeposit(traderId, amount, setSubmitting);
     };
 
-    if (isPending || traderDeposit === undefined) {
+    if (isPending || programDeposit === undefined) {
       return null;
     }
 
     return (
-      <TraderDeposit
-        traderDeposit={traderDeposit}
+      <ProgramDeposit
+        programDeposit={programDeposit}
         submitPopup={handleDepositSubmit}
         closePopup={closePopup}
         error={errorMessage}
@@ -44,26 +44,26 @@ const mapStateToProps = state => {
     isPending,
     errorMessage: errorMessageRequest,
     data
-  } = state.traderDepositData.requestData;
+  } = state.programDepositData.requestData;
   const {
     errorMessage: errorMessageSubmit
-  } = state.traderDepositData.submitData;
+  } = state.programDepositData.submitData;
 
   const errorMessage = errorMessageRequest || errorMessageSubmit;
-  let traderDeposit;
+  let programDeposit;
   if (data) {
-    traderDeposit = data;
+    programDeposit = data;
   }
   return {
     isPending,
-    traderDeposit,
+    programDeposit,
     errorMessage
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   fetchDeposit: traderId => {
-    dispatch(traderDepositActions.fetchTraderDeposit(traderId));
+    dispatch(programDepositActions.fetchProgramDeposit(traderId));
   },
   dispatch
 });
@@ -74,8 +74,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     ...stateProps,
     ...otherDispatchProps,
     ...ownProps,
-    submitDeposit: (traderId, amount, setSubmitting) =>
-      dispatch(traderDepositActions.submitTraderDeposit(traderId, amount))
+    submitDeposit: (programId, amount, setSubmitting) =>
+      dispatch(programDepositActions.submitProgramDeposit(programId, amount))
         .then(() => ownProps.submitPopup())
         .then(() => {
           dispatch(
