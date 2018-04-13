@@ -8,8 +8,8 @@ import TIStatistic from "./pi-statistic/pi-statistic";
 
 import "./program-item.css";
 
-const TraderItem = ({ idx, trader, isAuthenticated, openInvestPopup }) => {
-  const traderChartData = trader.chart.map(x => ({
+const ProgramItem = ({ idx, program, isAuthenticated, openInvestPopup }) => {
+  const traderChartData = program.chart.map(x => ({
     fund: +(x.investorFund + x.managerFund).toFixed(8),
     profit: x.profit,
     loss: x.loss,
@@ -18,15 +18,15 @@ const TraderItem = ({ idx, trader, isAuthenticated, openInvestPopup }) => {
   return (
     <div
       className={classnames("program-item", {
-        "program-item--inactive": !trader.isEnabled
+        "program-item--inactive": !program.isEnabled
       })}
     >
-      <TIInfo idx={idx} trader={trader} showTokensWidget />
+      <TIInfo idx={idx} trader={program} showTokensWidget />
       <TIChart data={traderChartData} />
-      <TIStatistic trader={trader} />
+      <TIStatistic trader={program} />
       <TIButtons
-        programId={trader.id}
-        isInvestEnable={trader.isInvestEnable}
+        programId={program.id}
+        isInvestEnable={program.isInvestEnable}
         isAuthenticated={isAuthenticated}
         openInvestPopup={openInvestPopup}
       />
@@ -34,4 +34,4 @@ const TraderItem = ({ idx, trader, isAuthenticated, openInvestPopup }) => {
   );
 };
 
-export default TraderItem;
+export default ProgramItem;

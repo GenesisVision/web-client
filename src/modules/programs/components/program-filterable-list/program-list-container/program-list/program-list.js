@@ -9,7 +9,7 @@ const TraderList = ({ programs, isAuthenticated, openInvestPopup }) => {
       <TraderItem
         key={x.id}
         idx={idx + 1}
-        trader={x}
+        program={x}
         isAuthenticated={isAuthenticated}
         openInvestPopup={openInvestPopup}
       />

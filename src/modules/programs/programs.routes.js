@@ -1,7 +1,7 @@
 import { Route } from "react-router-dom";
 import React from "react";
 
-import ProgramsFilterableListContainer from "./components/program-filterable-list/trader-filterable-list";
+import ProgramsFilterableListContainer from "./components/program-filterable-list/program-filterable-list";
 
 import { PROGRAMS_ROUTE } from "./programs.constants";
 

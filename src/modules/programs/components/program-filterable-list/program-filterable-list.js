@@ -4,7 +4,7 @@ import ProgramListContainer from "./program-list-container/program-list-containe
 import ProgramListFilterContainer from "./program-list-filter-container/program-list-filter-container";
 import WalletPaneContainer from "../../../wallet-pane/components/wallet-pane-container/wallet-pane-container";
 
-const TraderFilterableList = () => {
+const ProgramFilterableList = () => {
   return (
     <div>
       <ProgramListFilterContainer />
@@ -18,4 +18,4 @@ const TraderFilterableList = () => {
   );
 };
 
-export default TraderFilterableList;
+export default ProgramFilterableList;
