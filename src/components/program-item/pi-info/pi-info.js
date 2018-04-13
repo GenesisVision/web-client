@@ -9,13 +9,13 @@ import TraderAvatar from "../../program-avatar/program-avatar";
 import "./pi-info.css";
 import { PROGRAM_ROUTE } from "../../../modules/trader/trader.constants";
 
-const PIInfo = ({ idx, trader, showTokensWidget }) => {
+const PIInfo = ({ order, program, showTokensWidget }) => {
   const renderDaysLeft = () => {
-    if (trader.isEnabled) {
+    if (program.isEnabled) {
       return (
         <DaysLeftWidget
-          start={trader.startOfPeriod}
-          duration={trader.periodDuration}
+          start={program.startOfPeriod}
+          duration={program.periodDuration}
         />
       );
     }
@@ -24,13 +24,13 @@ const PIInfo = ({ idx, trader, showTokensWidget }) => {
   };
 
   const renderTokens = () => {
-    if (trader.isEnabled) {
+    if (program.isEnabled) {
       return (
         <TokensWidget
-          id={trader.id}
-          invested={trader.freeTokens.investorsTokens}
-          requested={trader.freeTokens.requestsTokens}
-          total={trader.freeTokens.total}
+          id={program.id}
+          invested={program.freeTokens.investorsTokens}
+          requested={program.freeTokens.requestsTokens}
+          total={program.freeTokens.total}
         />
       );
     }
@@ -38,20 +38,20 @@ const PIInfo = ({ idx, trader, showTokensWidget }) => {
     return null;
   };
 
-  const traderRoute = replaceParams(PROGRAM_ROUTE, {
-    ":programId": trader.id
+  const programRoute = replaceParams(PROGRAM_ROUTE, {
+    ":programId": program.id
   });
   return (
     <div className="pi-info">
-      <div className="pi-info__order">{idx}</div>
-      <Link className="pi-info__image" to={traderRoute}>
-        <TraderAvatar imgUrl={trader.logo} level={trader.level} />
+      <div className="pi-info__order">{order}</div>
+      <Link className="pi-info__image" to={programRoute}>
+        <TraderAvatar imgUrl={program.logo} level={program.level} />
       </Link>
       <div className="pi-info__name pi-name">
-        <Link className="pi-name__title" to={traderRoute}>
-          {trader.title}
+        <Link className="pi-name__title" to={programRoute}>
+          {program.title}
         </Link>
-        <div className="pi-name__description">{trader.description}</div>
+        <div className="pi-name__description">{program.description}</div>
         <div className="pi-name__eop">{renderDaysLeft()}</div>
         {showTokensWidget && (
           <div className="pi-name__eop">{renderTokens()}</div>

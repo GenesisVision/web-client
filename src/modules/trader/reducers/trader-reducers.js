@@ -14,11 +14,11 @@ const traderReducer = combineReducers({
   traderDetail: apiReducerFactory({ apiType: TRADER_DETAIL }),
   requests: combineReducers({
     items: apiReducerFactory({ apiType: TRADER_REQUESTS }),
-    paging: pagingReducerFactory(TRADER_REQUESTS)
+    paging: pagingReducerFactory({ type: TRADER_REQUESTS })
   }),
   deals: combineReducers({
     items: apiReducerFactory({ apiType: TRADER_DEALS }),
-    paging: pagingReducerFactory(TRADER_DEALS)
+    paging: pagingReducerFactory({ type: TRADER_DEALS })
   }),
   history: apiReducerFactory({ apiType: TRADER_HISTORY })
 });

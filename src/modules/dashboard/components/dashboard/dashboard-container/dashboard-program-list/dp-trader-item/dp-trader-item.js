@@ -17,11 +17,11 @@ const DPTraderItem = ({ idx, trader, isAuthenticated, openInvestPopup }) => {
   }));
   return (
     <div
-      className={classnames("dp-program-item", {
+      className={classnames("dp-trader-item", {
         "dp-trader-item--inactive": !trader.isEnabled
       })}
     >
-      <TIInfo idx={idx} trader={trader} />
+      <TIInfo order={idx} program={trader} />
       <TIChart data={traderChartData} />
       <DPStatistic trader={trader} />
       <TIButtons

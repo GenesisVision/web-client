@@ -1,13 +1,14 @@
 import { composePaingActionType } from "../helpers/paging-helpers";
 
-const initialState = {
+export const dafaultState = {
   currentPage: 0,
   itemsOnPage: 10,
   totalPages: 0
 };
 
-const pagingReducerFactory = actionType => {
-  const pagingActionType = composePaingActionType(actionType);
+const pagingReducerFactory = ({ type, paging }) => {
+  const initialState = { ...dafaultState, ...paging };
+  const pagingActionType = composePaingActionType(type);
   return (state = initialState, action) => {
     switch (action.type) {
       case pagingActionType:

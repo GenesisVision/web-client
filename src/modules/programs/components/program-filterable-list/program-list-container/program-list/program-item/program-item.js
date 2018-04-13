@@ -1,15 +1,15 @@
 import classnames from "classnames";
 import React from "react";
 
-import TIButtons from "../../../../../../../components/program-item/pi-buttons/pi-buttons";
-import TIChart from "../../../../../../../components/program-item/pi-chart/pi-chart";
-import TIInfo from "../../../../../../../components/program-item/pi-info/pi-info";
-import TIStatistic from "./pi-statistic/pi-statistic";
+import PTIButtons from "../../../../../../../components/program-item/pi-buttons/pi-buttons";
+import PIChart from "../../../../../../../components/program-item/pi-chart/pi-chart";
+import PIInfo from "../../../../../../../components/program-item/pi-info/pi-info";
+import PIStatistic from "./pi-statistic/pi-statistic";
 
 import "./program-item.css";
 
-const ProgramItem = ({ idx, program, isAuthenticated, openInvestPopup }) => {
-  const traderChartData = program.chart.map(x => ({
+const ProgramItem = ({ program, isAuthenticated, openInvestPopup }) => {
+  const programChartData = program.chart.map(x => ({
     fund: +(x.investorFund + x.managerFund).toFixed(8),
     profit: x.profit,
     loss: x.loss,
@@ -21,10 +21,10 @@ const ProgramItem = ({ idx, program, isAuthenticated, openInvestPopup }) => {
         "program-item--inactive": !program.isEnabled
       })}
     >
-      <TIInfo idx={idx} trader={program} showTokensWidget />
-      <TIChart data={traderChartData} />
-      <TIStatistic trader={program} />
-      <TIButtons
+      <PIInfo order={program.order} program={program} showTokensWidget />
+      <PIChart data={programChartData} />
+      <PIStatistic trader={program} />
+      <PTIButtons
         programId={program.id}
         isInvestEnable={program.isInvestEnable}
         isAuthenticated={isAuthenticated}
