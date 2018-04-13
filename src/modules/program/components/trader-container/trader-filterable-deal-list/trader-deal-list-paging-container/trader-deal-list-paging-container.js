@@ -2,19 +2,13 @@ import { connect } from "react-redux";
 import React from "react";
 
 import PagingContainer from "../../../../../paging/components/paging/paging";
-import traderActions from "../../../../actions/trader-actions";
+import programService from "../../../../service/program-service";
 
 const TraderDealListPagingContainer = ({
   paging,
   updatePaging,
   updatePagingAndFetch
-}) => (
-  <PagingContainer
-    paging={paging}
-    updatePaging={updatePaging}
-    updatePagingAndFetch={updatePagingAndFetch}
-  />
-);
+}) => <PagingContainer paging={paging} updatePaging={updatePaging} />;
 
 const mapStateToProps = state => {
   const { paging } = state.programData.deals;
@@ -31,12 +25,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   return {
     ...stateProps,
     updatePaging: paging => {
-      dispatch(traderActions.updateTraderDealListPaging(programId, paging));
-    },
-    updatePagingAndFetch: paging => {
-      dispatch(
-        traderActions.updateTraderDealListPagingAndFetch(programId, paging)
-      );
+      dispatch(programService.changeProgramDealsPage(programId, paging));
     }
   };
 };

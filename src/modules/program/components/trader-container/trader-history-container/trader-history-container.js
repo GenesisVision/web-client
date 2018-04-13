@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import React, { PureComponent } from "react";
 
-import traderActions from "../../../actions/trader-actions";
+import traderActions from "../../../actions/program-actions";
 import TraderHistory from "./trader-history/trader-history";
 
 class TraderHistoryContainer extends PureComponent {
@@ -47,7 +47,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   fetchTraderHistory: programId => {
-    dispatch(traderActions.fetchTraderHistory(programId));
+    dispatch(traderActions.fetchProgramHistory(programId));
   }
 });
 

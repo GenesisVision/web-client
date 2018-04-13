@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import React, { PureComponent } from "react";
 
-import traderActions from "../../../../actions/trader-actions";
+import programService from "../../../../service/program-service";
 import TraderRequestList from "./trader-request-list/trader-request-list";
 
 class TraderRequestListContainer extends PureComponent {
@@ -54,10 +54,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   fetchTraderRequests: programId => {
-    dispatch(traderActions.fetchTraderRequests(programId));
+    dispatch(programService.getProgramRequests(programId));
   },
   cancelRequest: programId => requestId => () => {
-    dispatch(traderActions.cancelTraderRequest(programId, requestId));
+    dispatch(programService.cancelProgramRequest(programId, requestId));
   }
 });
 

@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import React, { Component } from "react";
 
+import programService from "../../service/program-service";
 import TraderDetailContainer from "./trader-detail-container/trader-detail-container";
 import TraderFilterableDealList from "./trader-filterable-deal-list/trader-filterable-deal-list";
 import TraderFilterableRequestList from "./trader-filterable-request-list/trader-filterable-request-list";
@@ -9,6 +10,9 @@ import TraderHistoryContainer from "./trader-history-container/trader-history-co
 import "./trader-container.css";
 
 class TraderContainer extends Component {
+  componentWillUnmount() {
+    this.props.clearProgram();
+  }
   render() {
     const { programId } = this.props.match.params;
     const { isAuthenticated } = this.props;
@@ -33,4 +37,8 @@ const mapStateToProps = state => {
   return { isAuthenticated };
 };
 
-export default connect(mapStateToProps)(TraderContainer);
+const mapDispatchToProps = {
+  clearProgram: programService.clearProgram
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TraderContainer);
