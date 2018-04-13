@@ -7,7 +7,7 @@ import TraderDetail from "./trader-detail/trader-detail";
 
 import {
   PROGRAM_DEPOSIT_POPUP,
-  TRADER_WITHDRAW_POPUP
+  PROGRAM_WITHDRAW_POPUP
 } from "../../../../popup/actions/popup-actions.constants";
 import traderService from "../../../service/trader-service";
 
@@ -99,7 +99,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
       };
       dispatch(
         popupActions.openPopup(
-          TRADER_WITHDRAW_POPUP,
+          PROGRAM_WITHDRAW_POPUP,
           popupProps,
           closeInvestPopup(popupProps.traderWithdraw.id)
         )

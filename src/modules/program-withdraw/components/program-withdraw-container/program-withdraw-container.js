@@ -5,7 +5,7 @@ import { alertMessageActions } from "../../../../shared/modules/alert-message/ac
 import ProgramWithdraw from "./program-withdraw/program-withdraw";
 import programWithdrawActions from "../../actions/program-withdraw-actions";
 
-class TraderWithdrawContainer extends PureComponent {
+class ProgramWithdrawContainer extends PureComponent {
   render() {
     const {
       traderWithdraw,
@@ -55,13 +55,12 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     ...otherDispatchProps,
     ...ownProps,
     submitWithdraw: (programId, amount, setSubmitting) =>
-
       dispatch(programWithdrawActions.submitProgramWithdraw(programId, amount))
         .then(() => ownProps.submitPopup())
         .then(() => {
           dispatch(
             alertMessageActions.success(
-              "Request to buy tokens sent successfully"
+              "Request to withdrawal tokens sent successfully"
             )
           );
           return Promise.resolve();
@@ -73,5 +72,5 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
-  TraderWithdrawContainer
+  ProgramWithdrawContainer
 );
