@@ -26,8 +26,8 @@ class TraderDealListContainer extends PureComponent {
 }
 
 const mapStateToProps = state => {
-  const { isPending, errorMessage, data } = state.traderData.deals.items;
-  const { data: traderDetail } = state.traderData.traderDetail;
+  const { isPending, errorMessage, data } = state.programData.deals.items;
+  const { data: traderDetail } = state.programData.traderDetail;
 
   let dealList, serverType, currency;
   if (data) {

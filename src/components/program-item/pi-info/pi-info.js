@@ -7,7 +7,7 @@ import TokensWidget from "../../tokens-widget/tokens-widget";
 import TraderAvatar from "../../program-avatar/program-avatar";
 
 import "./pi-info.css";
-import { PROGRAM_ROUTE } from "../../../modules/trader/trader.constants";
+import { PROGRAM_ROUTE } from "../../../modules/program/program.constants";
 
 const PIInfo = ({ order, program, showTokensWidget }) => {
   const renderDaysLeft = () => {

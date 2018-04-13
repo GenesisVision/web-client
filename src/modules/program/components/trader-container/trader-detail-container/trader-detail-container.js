@@ -40,7 +40,7 @@ class TraderDetailContainer extends PureComponent {
 }
 
 const mapStateToProps = state => {
-  const { isPending, errorMessage, data } = state.traderData.traderDetail;
+  const { isPending, errorMessage, data } = state.programData.traderDetail;
 
   let traderDetail;
   if (data) {

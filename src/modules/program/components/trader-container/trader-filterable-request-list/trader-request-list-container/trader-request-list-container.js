@@ -31,8 +31,8 @@ class TraderRequestListContainer extends PureComponent {
 }
 
 const mapStateToProps = state => {
-  const { isPending, errorMessage, data } = state.traderData.requests.items;
-  const { data: traderDetail } = state.traderData.traderDetail;
+  const { isPending, errorMessage, data } = state.programData.requests.items;
+  const { data: traderDetail } = state.programData.traderDetail;
 
   let traderRequests,
     token = {};

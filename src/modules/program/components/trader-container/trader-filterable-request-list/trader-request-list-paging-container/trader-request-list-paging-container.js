@@ -4,7 +4,7 @@ import React from "react";
 import PagingContainer from "../../../../../paging/components/paging/paging";
 import traderActions from "../../../../actions/trader-actions";
 
-const TraderDealListPagingContainer = ({
+const TraderRequestListPagingContainer = ({
   paging,
   updatePaging,
   updatePagingAndFetch
@@ -17,7 +17,7 @@ const TraderDealListPagingContainer = ({
 );
 
 const mapStateToProps = state => {
-  const { paging } = state.traderData.deals;
+  const { paging } = state.programData.requests;
   return { paging };
 };
 
@@ -31,16 +31,16 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   return {
     ...stateProps,
     updatePaging: paging => {
-      dispatch(traderActions.updateTraderDealListPaging(programId, paging));
+      dispatch(traderActions.updateTraderRequestListPaging(programId, paging));
     },
     updatePagingAndFetch: paging => {
       dispatch(
-        traderActions.updateTraderDealListPagingAndFetch(programId, paging)
+        traderActions.updateTraderRequestListPagingAndFetch(programId, paging)
       );
     }
   };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
-  TraderDealListPagingContainer
+  TraderRequestListPagingContainer
 );

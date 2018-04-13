@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import React from "react";
 
-import { PROGRAM_ROUTE } from "../../../modules/trader/trader.constants";
+import { PROGRAM_ROUTE } from "../../../modules/program/program.constants";
 import replaceParams from "../../../utils/replace-params";
 
 import "./pi-buttons.css";

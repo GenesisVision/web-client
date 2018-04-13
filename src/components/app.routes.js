@@ -20,12 +20,12 @@ import {
   ForgotPasswordRoutes,
   ResetPasswordRoutes
 } from "../modules/password-reset/password-reset.routes";
-import { PROGRAM_ROUTE } from "../modules/trader/trader.constants";
+import { PROGRAM_ROUTE } from "../modules/program/program.constants";
 import DashboardRoutes from "../modules/dashboard/dashboard.routes";
 import LoginRoutes from "../modules/login/login.routes";
 import ProfileRoutes from "../modules/profile/profile.routes";
 import RegisterRoutes from "../modules/register/register.routes";
-import TraderRoutes from "../modules/trader/trader.routes";
+import ProgramRoutes from "../modules/program/program.routes";
 import ProgramsRoutes from "../modules/programs/programs.routes";
 import WalletRoutes from "../modules/wallet/wallet.routes";
 import { EMAIL_CONFIRM_ROUTE } from "../modules/email-confirm/email-confirm.constants";
@@ -38,7 +38,7 @@ const AppRoutes = () => (
     <Route path={RESET_PASSWORD_ROUTE} component={ResetPasswordRoutes} />
     <Route path={LOGIN_ROUTE} component={LoginRoutes} />
     <Route path={REGISTER_ROUTE} component={RegisterRoutes} />
-    <Route path={PROGRAM_ROUTE} component={TraderRoutes} />
+    <Route path={PROGRAM_ROUTE} component={ProgramRoutes} />
     <Route path={PROGRAMS_ROUTE} component={ProgramsRoutes} />
     <PrivateRoute path={PROFILE_ROUTE} component={ProfileRoutes} />
     <PrivateRoute path={DASHBOARD_ROUTE} component={DashboardRoutes} />
