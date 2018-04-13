@@ -9,7 +9,7 @@ import {
   LEVEL_MIN,
   PROFIT_PROGRAM_PROCENT_MAX,
   PROFIT_PROGRAM_PROCENT_MIN
-} from "../../../../traders.constants";
+} from "../../../../programs.constants";
 
 const sortingOptions = [
   { value: "ByTitle", label: "Name" },
@@ -21,7 +21,7 @@ const sortingDirectionOptions = [
   { value: "Asc", label: "Ascending" },
   { value: "Desc", label: "Descending" }
 ];
-const TraderListFilter = ({
+const ProgramListFilter = ({
   values,
   setFieldValue,
   setFieldTouched,
@@ -96,7 +96,7 @@ const TraderListFilter = ({
 };
 
 export default withFormik({
-  displayName: "traderListFilterForm",
+  displayName: "programListFilterForm",
   mapPropsToValues: props => {
     const { filtering } = props;
     return {
@@ -109,4 +109,4 @@ export default withFormik({
       sortingDirection: filtering.sortingDirection
     };
   }
-})(TraderListFilter);
+})(ProgramListFilter);

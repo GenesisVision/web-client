@@ -3,8 +3,9 @@ import React from "react";
 
 import "./sidebar.css";
 import { DASHBOARD_ROUTE } from "../../modules/dashboard/dashboard.constants";
-import { TRADERS_ROUTE } from "../../modules/traders/traders.constants";
+import { PROGRAMS_ROUTE } from "../../modules/programs/programs.constants";
 import { WALLET_ROUTE } from "../../modules/wallet/wallet.constants";
+
 //import { PROFILE_ROUTE } from "../../modules/profile/profile.constants";
 import {
   DashboardIcon,
@@ -17,7 +18,7 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <div className="nav-item sidebar__item">
-        <NavLink className="nav-link" title="Programs" to={TRADERS_ROUTE}>
+        <NavLink className="nav-link" title="Programs" to={PROGRAMS_ROUTE}>
           <TradersIcon />
         </NavLink>
       </div>

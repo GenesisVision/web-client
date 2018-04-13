@@ -4,7 +4,7 @@ import React from "react";
 import DPTraderItem from "./dp-trader-item/dp-trader-item";
 
 import "./dashboard-program-list.css";
-import { TRADERS_ROUTE } from "../../../../../traders/traders.constants";
+import { PROGRAMS_ROUTE } from "../../../../../programs/programs.constants";
 import PortfolioIcon from "../../../../media/portfolio-icon.svg";
 
 const DashboardProgramList = ({ programs, openInvestPopup }) => {
@@ -16,7 +16,7 @@ const DashboardProgramList = ({ programs, openInvestPopup }) => {
           <div className="dashboard-empty__text">
             There are no programs in which you have invested
           </div>
-          <Link className="gv-btn gv-btn-primary" to={TRADERS_ROUTE}>
+          <Link className="gv-btn gv-btn-primary" to={PROGRAMS_ROUTE}>
             Browse Programs
           </Link>
         </div>

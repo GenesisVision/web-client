@@ -4,9 +4,9 @@ import React from "react";
 import TIButtons from "../../../../../../../components/program-item/pi-buttons/pi-buttons";
 import TIChart from "../../../../../../../components/program-item/pi-chart/pi-chart";
 import TIInfo from "../../../../../../../components/program-item/pi-info/pi-info";
-import TIStatistic from "./ti-statistic/ti-statistic";
+import TIStatistic from "./pi-statistic/pi-statistic";
 
-import "./trader-item.css";
+import "./program-item.css";
 
 const TraderItem = ({ idx, trader, isAuthenticated, openInvestPopup }) => {
   const traderChartData = trader.chart.map(x => ({
@@ -17,8 +17,8 @@ const TraderItem = ({ idx, trader, isAuthenticated, openInvestPopup }) => {
   }));
   return (
     <div
-      className={classnames("trader-item", {
-        "trader-item--inactive": !trader.isEnabled
+      className={classnames("program-item", {
+        "program-item--inactive": !trader.isEnabled
       })}
     >
       <TIInfo idx={idx} trader={trader} showTokensWidget />

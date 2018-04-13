@@ -1,7 +1,7 @@
 @import "styles/_colors.scss";
 @import "styles/_breakpoint.scss";
 
-.ti-statistic {
+.pi-statistic {
   display: flex;
   order: 3;
   flex: 1;
@@ -23,7 +23,7 @@
   }
 }
 
-.tis-item {
+.pis-item {
   min-width: 15%;
   max-width: 15%;
   height: 4.5rem;
@@ -63,7 +63,7 @@
   }
 }
 
-.tis-item__value {
+.pis-item__value {
   font-size: 1.7rem;
   font-family: "NeuzeitGroLig";
   @include media-breakpoint-desktop() {
@@ -71,7 +71,7 @@
   }
 }
 
-.tis-item__label {
+.pis-item__label {
   color: $text-sub-color;
   font-size: 0.9rem;
   line-height: 0.5;

@@ -1,11 +1,11 @@
 import React from "react";
 
-import TraderItem from "./trader-item/trader-item";
+import TraderItem from "./program-item/program-item";
 
-const TraderList = ({ traders, isAuthenticated, openInvestPopup }) => {
+const TraderList = ({ programs, isAuthenticated, openInvestPopup }) => {
   const renderTraderList = () => {
-    if (traders.length === 0) return <div>There are no traders</div>;
-    return traders.map((x, idx) => (
+    if (programs.length === 0) return <div>There are no traders</div>;
+    return programs.map((x, idx) => (
       <TraderItem
         key={x.id}
         idx={idx + 1}

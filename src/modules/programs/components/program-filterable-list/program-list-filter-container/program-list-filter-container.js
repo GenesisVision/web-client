@@ -2,10 +2,10 @@ import { connect } from "react-redux";
 import React from "react";
 
 import FilterPane from "../../../../filter-pane/components/filter-pane/filter-pane";
-import TraderListFilter from "./trader-list-filter/trader-list-filter";
-import tradersActions from "../../../actions/traders-actions";
+import ProgramListFilter from "./program-list-filter/program-list-filter";
+import programsService from "../../../service/programs-service";
 
-const TraderListFilterContainer = ({
+const ProgramListFilterContainer = ({
   isFilterOpen,
   filtering,
   handleFilterChange,
@@ -16,7 +16,7 @@ const TraderListFilterContainer = ({
   };
   return (
     <FilterPane isOpen={isFilterOpen} onFilterClose={closeFilter}>
-      <TraderListFilter
+      <ProgramListFilter
         filtering={filtering}
         onChangeComplete={onFilterChange}
       />
@@ -25,21 +25,21 @@ const TraderListFilterContainer = ({
 };
 
 const mapStateToProps = state => {
-  const { filterPane, traders } = state.tradersData;
+  const { filterPane, programs } = state.programsData;
   const { isFilterOpen } = filterPane.state;
-  const { filtering } = traders;
+  const { filtering } = programs;
   return { isFilterOpen, filtering };
 };
 
 const mapDispatchToProps = dispatch => ({
   handleFilterChange: filter => {
-    dispatch(tradersActions.updateFiltering(filter));
+    dispatch(programsService.updateFiltering(filter));
   },
   closeFilter: () => {
-    dispatch(tradersActions.closeFilterPane());
+    dispatch(programsService.closeFilterPane());
   }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  TraderListFilterContainer
+  ProgramListFilterContainer
 );

@@ -6,7 +6,7 @@ import traderActions from "../../../actions/trader-actions";
 import TraderDetail from "./trader-detail/trader-detail";
 
 import {
-  TRADER_DEPOSIT_POPUP,
+  PROGRAM_DEPOSIT_POPUP,
   TRADER_WITHDRAW_POPUP
 } from "../../../../popup/actions/popup-actions.constants";
 import traderService from "../../../service/trader-service";
@@ -74,7 +74,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     openInvestPopup: programId => () => {
       dispatch(
         popupActions.openPopup(
-          TRADER_DEPOSIT_POPUP,
+          PROGRAM_DEPOSIT_POPUP,
           {
             programId
           },

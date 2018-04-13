@@ -3,8 +3,8 @@ import React from "react";
 
 const DPStatistic = ({ trader }) => {
   return (
-    <div className="ti-statistic">
-      <div className="tis-item">
+    <div className="pi-statistic">
+      <div className="pis-item">
         <div className="metric">
           <div className="metric__value">
             <NumberFormat
@@ -17,7 +17,7 @@ const DPStatistic = ({ trader }) => {
           <div className="metric__description">My Tokens</div>
         </div>
       </div>
-      <div className="tis-item">
+      <div className="pis-item">
         <div className="metric">
           <div className="metric__value">
             <NumberFormat
@@ -30,7 +30,7 @@ const DPStatistic = ({ trader }) => {
           <div className="metric__description">Est. value</div>
         </div>
       </div>      
-      <div className="tis-item">
+      <div className="pis-item">
         <div className="metric">
           <div className="metric__value">
             <NumberFormat
@@ -43,7 +43,7 @@ const DPStatistic = ({ trader }) => {
           <div className="metric__description">My Profit</div>
         </div>
       </div>
-      <div className="tis-item">
+      <div className="pis-item">
         <div className="metric">
           <div className="metric__value">
             <NumberFormat
@@ -56,7 +56,7 @@ const DPStatistic = ({ trader }) => {
           <div className="metric__description">Total Profit</div>
         </div>
       </div>
-      <div className="tis-item">
+      <div className="pis-item">
         <div className="metric">
           <div className="metric__value">
             <NumberFormat
@@ -69,7 +69,7 @@ const DPStatistic = ({ trader }) => {
           <div className="metric__description">Balance</div>
         </div>
       </div>
-      <div className="tis-item">
+      <div className="pis-item">
         <div className="metric">
           <div className="metric__value">
             <NumberFormat

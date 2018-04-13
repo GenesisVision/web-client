@@ -6,7 +6,7 @@ import DashboardProgramList from "./dashboard-program-list/dashboard-program-lis
 import DashboardStatistic from "./dashboard-statistic/dashboard-statistic";
 import popupActions from "../../../../popup/actions/popup-actions";
 
-import { TRADER_DEPOSIT_POPUP } from "../../../../popup/actions/popup-actions.constants";
+import { PROGRAM_DEPOSIT_POPUP } from "../../../../popup/actions/popup-actions.constants";
 
 class DashboardContainer extends PureComponent {
   componentWillMount() {
@@ -53,7 +53,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(dashboardActions.fetchDashboardPrograms());
   },
   openInvestPopup: programId => () => {
-    dispatch(popupActions.openPopup(TRADER_DEPOSIT_POPUP, { programId }));
+    dispatch(popupActions.openPopup(PROGRAM_DEPOSIT_POPUP, { programId }));
   }
 });
 

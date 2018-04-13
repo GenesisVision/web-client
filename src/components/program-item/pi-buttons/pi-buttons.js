@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import React from "react";
 
-import { TRADER_ROUTE } from "../../../modules/trader/trader.constants";
+import { PROGRAM_ROUTE } from "../../../modules/trader/trader.constants";
 import replaceParams from "../../../utils/replace-params";
 
 import "./pi-buttons.css";
@@ -12,7 +12,7 @@ const PIButtons = ({
   isInvestEnable,
   openInvestPopup
 }) => {
-  const traderRoute = replaceParams(TRADER_ROUTE, {
+  const traderRoute = replaceParams(PROGRAM_ROUTE, {
     ":programId": programId
   });
   return (

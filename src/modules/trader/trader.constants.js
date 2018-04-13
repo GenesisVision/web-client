@@ -1,3 +1,3 @@
-import { TRADERS_ROUTE } from "../traders/traders.constants";
+import { PROGRAMS_ROUTE } from "../programs/programs.constants";
 
-export const TRADER_ROUTE = `${TRADERS_ROUTE}/:programId`;
+export const PROGRAM_ROUTE = `${PROGRAMS_ROUTE}/:programId`;

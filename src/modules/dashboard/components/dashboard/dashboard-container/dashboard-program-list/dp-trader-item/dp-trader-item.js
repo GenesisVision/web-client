@@ -17,7 +17,7 @@ const DPTraderItem = ({ idx, trader, isAuthenticated, openInvestPopup }) => {
   }));
   return (
     <div
-      className={classnames("dp-trader-item", {
+      className={classnames("dp-program-item", {
         "dp-trader-item--inactive": !trader.isEnabled
       })}
     >

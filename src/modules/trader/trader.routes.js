@@ -3,10 +3,10 @@ import React from "react";
 
 import TraderContainer from "../trader/components/trader-container/trader-container";
 
-import { TRADER_ROUTE } from "./trader.constants";
+import { PROGRAM_ROUTE } from "./trader.constants";
 
 const TraderRoutes = () => (
-  <Route path={TRADER_ROUTE} component={TraderContainer} />
+  <Route path={PROGRAM_ROUTE} component={TraderContainer} />
 );
 
 export default TraderRoutes;
