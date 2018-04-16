@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import React, { Component } from "react";
 
-import walletActions from "../../../actions/wallet-actions";
+import walletService from "../../../service/wallet-service";
 import WalletTransactionList from "./wallet-transaction-list/wallet-transaction-list";
 
 class WalletTransactionListContainer extends Component {
@@ -40,7 +40,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   fetchTransactions: (filter, paging) => {
-    dispatch(walletActions.fetchWalletTransactions(filter, paging));
+    dispatch(walletService.getWalletTransactions(filter, paging));
   }
 });
 

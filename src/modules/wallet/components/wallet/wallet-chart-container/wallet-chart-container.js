@@ -1,8 +1,8 @@
 import { connect } from "react-redux";
 import React, { PureComponent } from "react";
 
-import walletActions from "../../../actions/wallet-actions";
 import WalletChart from "./wallet-chart/wallet-chart";
+import walletService from "../../../service/wallet-service";
 
 class WalletChartContainer extends PureComponent {
   componentWillMount() {
@@ -29,7 +29,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   fetchWalletChart: () => {
-    dispatch(walletActions.fetchWalletChart());
+    dispatch(walletService.getWalletChart());
   }
 });
 

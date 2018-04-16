@@ -1,20 +1,19 @@
 import { connect } from "react-redux";
-import React from "react";
+import React, { PureComponent } from "react";
 
-import PagingContainer from "../../../../paging/components/paging/paging";
-import walletActions from "../../../actions/wallet-actions";
+import Paging from "../../../../paging/components/paging/paging";
+import walletService from "../../../service/wallet-service";
 
-const WalletTransactionListPagingContainer = ({
-  paging,
-  updatePaging,
-  updatePagingAndFetch
-}) => (
-  <PagingContainer
-    paging={paging}
-    updatePaging={updatePaging}
-    updatePagingAndFetch={updatePagingAndFetch}
-  />
-);
+class WalletTransactionListPagingContainer extends PureComponent {
+  componentWillUnmount() {
+    this.props.clearPaging();
+  }
+
+  render() {
+    const { paging, updatePaging } = this.props;
+    return <Paging paging={paging} updatePaging={updatePaging} />;
+  }
+}
 
 const mapStateToProps = state => {
   const { paging } = state.walletData.transactions;
@@ -23,11 +22,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   updatePaging: paging => {
-    dispatch(walletActions.updateWalletTransactionsPaging(paging));
+    dispatch(walletService.changePage(paging));
   },
-  updatePagingAndFetch: paging => {
-    dispatch(walletActions.updateWalletTransactionsPagingAndFetch(paging));
-  }
+  clearPaging: () => dispatch(walletService.clearPaging())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(

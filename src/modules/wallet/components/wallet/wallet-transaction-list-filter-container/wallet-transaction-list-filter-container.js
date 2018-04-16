@@ -5,6 +5,7 @@ import React, { PureComponent } from "react";
 import FilterPane from "../../../../filter-pane/components/filter-pane/filter-pane";
 import walletActions from "../../../actions/wallet-actions";
 import WalletTransactionListFilter from "./wallet-transaction-list-filter/wallet-transaction-list-filter";
+import walletService from "../../../service/wallet-service";
 
 class WalletTransactionListFilterContainer extends PureComponent {
   componentWillMount() {
@@ -56,7 +57,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   handleFilterChange: filter => {
-    dispatch(walletActions.updateFiltering(filter));
+    dispatch(walletService.changeFilter(filter));
   },
   fetchTransactionFilter: () => {
     dispatch(walletActions.fetchWalletTransactionProgramFilter());
