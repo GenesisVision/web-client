@@ -4,12 +4,16 @@ import React, { PureComponent } from "react";
 
 import FilterPane from "../../../../filter-pane/components/filter-pane/filter-pane";
 import walletActions from "../../../actions/wallet-actions";
-import WalletTransactionListFilter from "./wallet-transaction-list-filter/wallet-transaction-list-filter";
 import walletService from "../../../service/wallet-service";
+import WalletTransactionListFilter from "./wallet-transaction-list-filter/wallet-transaction-list-filter";
 
 class WalletTransactionListFilterContainer extends PureComponent {
   componentWillMount() {
     this.props.fetchTransactionFilter();
+  }
+
+  componentWillUnmount() {
+    this.props.clearFiltering();
   }
 
   render() {
@@ -63,7 +67,10 @@ const mapDispatchToProps = dispatch => ({
     dispatch(walletActions.fetchWalletTransactionProgramFilter());
   },
   closeFilter: () => {
-    dispatch(walletActions.closeFilterPane());
+    dispatch(walletService.closeFilterPane());
+  },
+  clearFiltering: () => {
+    dispatch(walletService.clearFiltering());
   }
 });
 

@@ -3,6 +3,7 @@ import {
   calculateTotalPages,
   composePaingActionType
 } from "../../paging/helpers/paging-helpers";
+import { composeFilteringActionType } from "../../filtering/helpers/filtering-helpers";
 import authService from "../../../services/auth-service";
 import filteringActionsFactory from "../../filtering/actions/filtering-actions";
 import filterPaneActionsFactory from "../../filter-pane/actions/filter-pane-actions";
@@ -101,13 +102,22 @@ const clearPaging = () => dispatch => {
   );
 };
 
+const clearFiltering = () => dispatch => {
+  dispatch(
+    clearDataActionFactory(
+      composeFilteringActionType(actionTypes.WALLET_TRANSACTIONS)
+    ).clearData()
+  );
+};
+
 const walletService = {
   getWalletTransactions,
   getWalletChart,
   closeFilterPane,
   changeFilter,
   changePage,
-  clearPaging
+  clearPaging,
+  clearFiltering
 };
 
 export default walletService;
