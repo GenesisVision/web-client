@@ -1,7 +1,7 @@
 @import "styles/_colors.scss";
 @import "styles/_breakpoint.scss";
 
-.dp-trader-item {
+.dp-program-item {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -12,7 +12,4 @@
   @include media-breakpoint-phone() {
     padding: 0.5rem;
   }
-}
-
-.dp-trader-item--inactive {
 }

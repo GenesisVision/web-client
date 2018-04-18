@@ -26,7 +26,7 @@ const getPrograms = () => (dispatch, getState) => {
   const { filtering } = getState().programsData.programs;
 
   let data = {
-    filter: { skip, take }
+    filter: { skip, take, equityChartLength: 365 }
   };
   if (authService.getAuthArg()) {
     data.authorization = authService.getAuthArg();

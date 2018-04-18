@@ -8,7 +8,8 @@ const fetchDashboardPrograms = () => {
   return {
     type: actionTypes.DASHBOARD_PROGRAMS,
     payload: SwaggerInvestorApi.apiInvestorDashboardGet(
-      authService.getAuthArg()
+      authService.getAuthArg(),
+      { equityChartLength: 365 }
     ).then(response => {
       response.investmentPrograms.forEach(x => {
         x.logo = filesService.getFileUrl(x.logo);

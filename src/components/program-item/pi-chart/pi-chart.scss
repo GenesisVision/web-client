@@ -7,7 +7,7 @@
   flex-wrap: wrap;
   flex: 1;
   max-width: 200px;
-  height: 80px;
+  height: 150px;
 
   @include media-breakpoint-desktop() {
     min-width: 40%;
@@ -20,26 +20,23 @@
 .fund {
   .recharts-rectangle {
     fill: white;
-    //stroke: $main-color;
   }
 }
 
 .profit {
   .recharts-rectangle {
     fill: $alternate-color;
-    //stroke: $main-color;
   }
 }
 
 .loss {
   .recharts-rectangle {
     fill: $danger-color;
-    //stroke: $main-color;
   }
 }
 
 .total-profit {
   .recharts-line-curve {
-    stroke: $main-color;
+    stroke: $alternate-color;
   }
 }

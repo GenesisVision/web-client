@@ -1,58 +1,49 @@
 import React from "react";
-
-import "./pi-chart.css";
-
 import {
-  Bar,
   Line,
   XAxis,
   YAxis,
   Tooltip,
   ResponsiveContainer,
-  ComposedChart
+  LineChart
 } from "recharts";
+import moment from "moment";
+
+import "./pi-chart.css";
 
 const PIChart = ({ data }) => {
+  const tooltipWrapperStyle = { opacity: 0.9 };
+  const programChartData = data.map(x => ({
+    date: x.date.getTime(),
+    value: x.value
+  }));
   return (
     <div className="pi-chart">
       <ResponsiveContainer>
-        <ComposedChart data={data} stackOffset="sign">
-          <XAxis dataKey="date" hide />
-          <YAxis hide />
-          <Tooltip />
-          <Bar
-            className="fund"
-            dataKey="fund"
-            stackId="stack"
-            fill="#184f61"
-            stroke="#184f61"
-            isAnimationActive={false}
+        <LineChart data={programChartData}>
+          <XAxis
+            dataKey="date"
+            tickCount={3}
+            domain={["dataMin", "dataMax"]}
+            type="number"
+            axisLine={false}
+            tickFormatter={date => moment(date).format("MM/DD")}
           />
-          <Bar
-            className="profit"
-            dataKey="profit"
-            stackId="stack"
-            fill="#15bbaf"
-            stroke="#184f61"
-            isAnimationActive={false}
-          />
-          <Bar
-            className="loss"
-            dataKey="loss"
-            stackId="stack"
-            fill="#e00463"
-            stroke="#184f61"
-            isAnimationActive={false}
+          <YAxis dataKey="value" tickCount={3} axisLine={false} />
+          <Tooltip
+            wrapperStyle={tooltipWrapperStyle}
+            labelFormatter={date => moment(date).format("MMMM Do HH:mm")}
           />
           <Line
-            className="total-profit"
             type="monotone"
-            dataKey="totalProfit"
+            dataKey="value"
             strokeWidth={3}
             dot={false}
+            activeDot={{ stroke: "#184f61" }}
             isAnimationActive={false}
+            stroke="#03bdaf"
           />
-        </ComposedChart>
+        </LineChart>
       </ResponsiveContainer>
     </div>
   );
