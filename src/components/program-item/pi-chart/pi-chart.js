@@ -7,27 +7,31 @@ import {
   ResponsiveContainer,
   LineChart
 } from "recharts";
+import moment from "moment";
 
 import "./pi-chart.css";
 
 const PIChart = ({ data }) => {
-  const wrapperStyle = { background: "rgba(255,255,255,0.6)" };
-  const LineChartMargin = { top: 20, right: 40, left: 40, bottom: 5 };
+  const tooltipWrapperStyle = { background: "rgba(255,255,255,0.6)" };
+  const lineChartMargin = { top: 20, right: 40, left: 40, bottom: 5 };
   const interval = data.length - 2;
+  const programChartData = data.map(x => ({
+    date: x.date.getTime(),
+    value: x.value
+  }));
   return (
     <div className="pi-chart">
       <ResponsiveContainer>
-        <LineChart
-          data={data}
-          stackOffset="sign"
-          margin={LineChartMargin}
-        >
-          <XAxis dataKey="name" interval={interval} axisLine={false} />
-          <YAxis hide />
-          <Tooltip
-            offset={20}
-            wrapperStyle={wrapperStyle}
+        <LineChart data={programChartData} margin={lineChartMargin}>
+          <XAxis
+            dataKey="date"
+            interval={interval}
+            type="category"
+            axisLine={false}
+            tickFormatter={date => moment(date).format("MMMM Do")}
           />
+          <YAxis dataKey="value" axisLine={false} />
+          <Tooltip wrapperStyle={tooltipWrapperStyle} />
           <Line
             className="total-profit"
             type="monotone"
