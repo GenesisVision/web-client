@@ -1,58 +1,42 @@
 import React from "react";
-
-import "./pi-chart.css";
-
 import {
-  Bar,
   Line,
   XAxis,
   YAxis,
   Tooltip,
   ResponsiveContainer,
-  ComposedChart
+  LineChart
 } from "recharts";
 
+import "./pi-chart.css";
+
 const PIChart = ({ data }) => {
+  const wrapperStyle = { background: "rgba(255,255,255,0.6)" };
+  const LineChartMargin = { top: 20, right: 40, left: 40, bottom: 5 };
+  const interval = data.length - 2;
   return (
     <div className="pi-chart">
       <ResponsiveContainer>
-        <ComposedChart data={data} stackOffset="sign">
-          <XAxis dataKey="date" hide />
+        <LineChart
+          data={data}
+          stackOffset="sign"
+          margin={LineChartMargin}
+        >
+          <XAxis dataKey="name" interval={interval} />
           <YAxis hide />
-          <Tooltip />
-          <Bar
-            className="fund"
-            dataKey="fund"
-            stackId="stack"
-            fill="#184f61"
-            stroke="#184f61"
-            isAnimationActive={false}
-          />
-          <Bar
-            className="profit"
-            dataKey="profit"
-            stackId="stack"
-            fill="#15bbaf"
-            stroke="#184f61"
-            isAnimationActive={false}
-          />
-          <Bar
-            className="loss"
-            dataKey="loss"
-            stackId="stack"
-            fill="#e00463"
-            stroke="#184f61"
-            isAnimationActive={false}
+          <Tooltip
+            offset={20}
+            wrapperStyle={wrapperStyle}
           />
           <Line
             className="total-profit"
             type="monotone"
-            dataKey="totalProfit"
+            dataKey="value"
             strokeWidth={3}
             dot={false}
             isAnimationActive={false}
           />
-        </ComposedChart>
+        </LineChart>
       </ResponsiveContainer>
     </div>
   );

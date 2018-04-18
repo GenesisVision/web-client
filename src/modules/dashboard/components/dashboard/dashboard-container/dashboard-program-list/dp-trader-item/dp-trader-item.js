@@ -1,5 +1,6 @@
 import classnames from "classnames";
 import React from "react";
+import moment from 'moment';
 
 import DPStatistic from "./dp-statistic/dp-statistic";
 import TIButtons from "../../../../../../../components/program-item/pi-buttons/pi-buttons";
@@ -9,11 +10,9 @@ import TIInfo from "../../../../../../../components/program-item/pi-info/pi-info
 import "./dp-trader-item.css";
 
 const DPTraderItem = ({ idx, trader, isAuthenticated, openInvestPopup }) => {
-  const traderChartData = trader.chart.map(x => ({
-    fund: +(x.investorFund + x.managerFund).toFixed(8),
-    profit: x.profit,
-    loss: x.loss,
-    totalProfit: x.totalProfit
+  const traderChartData = trader.chart.map(x => ({ //FIXME: change to equityChart
+    value: x.totalProfit,
+    name: moment(x.date).format(" MMMM Do")
   }));
   return (
     <div
