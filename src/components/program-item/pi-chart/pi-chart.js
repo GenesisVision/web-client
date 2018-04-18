@@ -22,7 +22,7 @@ const PIChart = ({ data }) => {
           stackOffset="sign"
           margin={LineChartMargin}
         >
-          <XAxis dataKey="name" interval={interval} />
+          <XAxis dataKey="name" interval={interval} axisLine={false} />
           <YAxis hide />
           <Tooltip
             offset={20}

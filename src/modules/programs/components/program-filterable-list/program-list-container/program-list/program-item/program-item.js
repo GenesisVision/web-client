@@ -9,8 +9,8 @@ import PIStatistic from "./pi-statistic/pi-statistic";
 import "./program-item.css";
 
 const ProgramItem = ({ program, isAuthenticated, openInvestPopup }) => {
-  const programChartData = program.chart.map(x => ({ //FIXME: change to equityChart
-    value: x.totalProfit,
+  const programChartData = program.equityChart.map(x => ({
+    value: x.value,
     name: moment(x.date).format('MMM Do')
   }));
   return (
