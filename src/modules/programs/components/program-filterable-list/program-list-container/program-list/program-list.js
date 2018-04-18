@@ -5,10 +5,10 @@ import ProgramItem from "./program-item/program-item";
 const ProgramList = ({ programs, isAuthenticated, openInvestPopup }) => {
   const renderProgramList = () => {
     if (programs.length === 0) return <div>There are no traders</div>;
-    return programs.map(x => (
+    return programs.map(program => (
       <ProgramItem
-        key={x.id}
-        program={x}
+        key={program.id}
+        program={program}
         isAuthenticated={isAuthenticated}
         openInvestPopup={openInvestPopup}
       />
