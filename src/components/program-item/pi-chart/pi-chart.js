@@ -12,8 +12,7 @@ import moment from "moment";
 import "./pi-chart.css";
 
 const PIChart = ({ data }) => {
-  const tooltipWrapperStyle = { background: "rgba(255,255,255,0.6)" };
-  const lineChartMargin = { top: 20, right: 40, left: 40, bottom: 5 };
+  const tooltipWrapperStyle = { opacity: 0.9 };
   const programChartData = data.map(x => ({
     date: x.date.getTime(),
     value: x.value
@@ -21,27 +20,28 @@ const PIChart = ({ data }) => {
   return (
     <div className="pi-chart">
       <ResponsiveContainer>
-        <LineChart data={programChartData} margin={lineChartMargin}>
+        <LineChart data={programChartData}>
           <XAxis
             dataKey="date"
             tickCount={3}
             domain={["dataMin", "dataMax"]}
             type="number"
             axisLine={false}
-            tickFormatter={date => moment(date).format("MMMM Do")}
+            tickFormatter={date => moment(date).format("MM/DD")}
           />
-          <YAxis dataKey="value" axisLine={false} hide />
+          <YAxis dataKey="value" tickCount={3} axisLine={false} />
           <Tooltip
             wrapperStyle={tooltipWrapperStyle}
             labelFormatter={date => moment(date).format("MMMM Do HH:mm")}
           />
           <Line
-            className="total-profit"
             type="monotone"
             dataKey="value"
             strokeWidth={3}
             dot={false}
+            activeDot={{ stroke: "#184f61" }}
             isAnimationActive={false}
+            stroke="#03bdaf"
           />
         </LineChart>
       </ResponsiveContainer>

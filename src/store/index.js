@@ -15,9 +15,7 @@ const failureSuffix = "FAILURE";
 const suffixes = ["REQUEST", "SUCCESS", failureSuffix];
 
 const initialState = {};
-const enhancers = [
-  // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-];
+const enhancers = [];
 const middleware = [
   thunk,
   refreshTokenMiddleware(

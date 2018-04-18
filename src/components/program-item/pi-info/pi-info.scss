@@ -6,8 +6,8 @@
   order: 1;
   flex-wrap: wrap;
   align-items: center;
-  flex: 1 1 28%;
-  max-width: 28%;
+  flex: 1 1 400px;
+  max-width: 400px;
   min-width: 300px;
 
   @include media-breakpoint-desktop() {

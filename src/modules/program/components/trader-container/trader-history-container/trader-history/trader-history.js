@@ -36,8 +36,12 @@ class TraderHistory extends React.Component {
                 tickFormatter={this.dateFormatter}
               />
               <YAxis dataKey="profit" axisLine={false} />
-              <Tooltip labelFormatter={this.dateFormatter}/>
-              <Brush dataKey="date" startIndex={brushStartIndex} />
+              <Tooltip labelFormatter={this.dateFormatter} />
+              <Brush
+                dataKey="date"
+                startIndex={brushStartIndex}
+                tickFormatter={this.dateFormatter}
+              />
               <Line
                 type="monotone"
                 dataKey="profit"
