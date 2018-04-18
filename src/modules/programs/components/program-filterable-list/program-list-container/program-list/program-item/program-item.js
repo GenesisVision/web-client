@@ -9,12 +9,6 @@ import PIStatistic from "./pi-statistic/pi-statistic";
 import "./program-item.css";
 
 const ProgramItem = ({ program, isAuthenticated, openInvestPopup }) => {
-  const programChartData = program.chart.map(x => ({
-    fund: +(x.investorFund + x.managerFund).toFixed(8),
-    profit: x.profit,
-    loss: x.loss,
-    totalProfit: x.totalProfit
-  }));
   return (
     <div
       className={classnames("program-item", {
@@ -22,7 +16,7 @@ const ProgramItem = ({ program, isAuthenticated, openInvestPopup }) => {
       })}
     >
       <PIInfo order={program.order} program={program} showTokensWidget />
-      <PIChart data={programChartData} />
+      <PIChart data={program.equityChart} />
       <PIStatistic trader={program} />
       <PTIButtons
         programId={program.id}

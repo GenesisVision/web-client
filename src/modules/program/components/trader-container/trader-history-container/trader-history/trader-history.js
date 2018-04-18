@@ -15,7 +15,7 @@ import "./trader-history.css";
 const TraderHistory = ({ data }) => {
   const chartData = data.map(x => ({
     profit: x.profit,
-    date: moment(+new Date(x.date)).format("MMMM Do HH:mm")
+    date: x.date.getTime()
   }));
   const brushStartIndex =
     chartData.length - 200 > 0 ? chartData.length - 200 : 0;
@@ -25,7 +25,12 @@ const TraderHistory = ({ data }) => {
       <div className="trader-history__body card-body">
         <ResponsiveContainer height={400}>
           <LineChart data={chartData}>
-            <XAxis dataKey="date" type="category" axisLine={false} />
+            <XAxis
+              dataKey="date"
+              type="category"
+              axisLine={false}
+              tickFormatter={date => moment(date).format("MMMM Do HH:mm")}
+            />
             <YAxis dataKey="profit" axisLine={false} />
             <Tooltip />
             <Brush dataKey="date" startIndex={brushStartIndex} />
