@@ -5,7 +5,8 @@ import {
   YAxis,
   Tooltip,
   ResponsiveContainer,
-  LineChart
+  LineChart,
+  ReferenceLine
 } from "recharts";
 import moment from "moment";
 
@@ -15,28 +16,30 @@ const PIChart = ({ data }) => {
   const tooltipWrapperStyle = { opacity: 0.9 };
   const programChartData = data.map(x => ({
     date: x.date.getTime(),
-    value: x.value
+    equity: x.value
   }));
   return (
     <div className="pi-chart">
       <ResponsiveContainer>
         <LineChart data={programChartData}>
+          <ReferenceLine y={0} strokeDasharray="5 5" />
           <XAxis
             dataKey="date"
-            tickCount={3}
+            tick={false}
             domain={["dataMin", "dataMax"]}
             type="number"
             axisLine={false}
             tickFormatter={date => moment(date).format("MM/DD")}
           />
-          <YAxis dataKey="value" tickCount={3} axisLine={false} />
+          <YAxis dataKey="equity" axisLine={false} hide/>
           <Tooltip
             wrapperStyle={tooltipWrapperStyle}
+            formatter={(value) => (`${value}%`)}
             labelFormatter={date => moment(date).format("MMMM Do HH:mm")}
           />
           <Line
             type="monotone"
-            dataKey="value"
+            dataKey="equity"
             strokeWidth={3}
             dot={false}
             activeDot={{ stroke: "#184f61" }}
