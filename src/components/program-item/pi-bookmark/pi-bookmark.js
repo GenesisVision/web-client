@@ -9,7 +9,7 @@ const PIBookmark = ({ isFavorite, onClick }) => {
     <i
       onClick={onClick}
       className={classnames("fas fa-bookmark", "pi-bookmark", {
-        "pi-bookmark_active": isFavorite
+        "pi-bookmark--active": isFavorite
       })}
     />
   );
