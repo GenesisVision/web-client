@@ -1,9 +1,9 @@
 import { CLEAR_SUFFIX } from "../../actions/clear-data.factory";
 
-const API_TYPE = "API";
-const REQUEST_SUFFIX = "REQUEST";
-const SUCCESS_SUFFIX = "SUCCESS";
-const FAILURE_SUFFIX = "FAILURE";
+export const API_TYPE = "API";
+export const REQUEST_SUFFIX = "REQUEST";
+export const SUCCESS_SUFFIX = "SUCCESS";
+export const FAILURE_SUFFIX = "FAILURE";
 
 const initialState = {
   isPending: false,
@@ -14,7 +14,8 @@ const apiReducerFactory = (
   config = {
     apiType: API_TYPE,
     suffixes: [REQUEST_SUFFIX, SUCCESS_SUFFIX, FAILURE_SUFFIX]
-  }
+  },
+  subReducer
 ) => (state = initialState, action) => {
   const apiType = config.apiType || API_TYPE;
   const suffixes = config.suffixes || [
@@ -52,6 +53,9 @@ const apiReducerFactory = (
     case CLEAR:
       return initialState;
     default:
+      if(subReducer) {
+        return subReducer(state, action);
+      }
       return state;
   }
 };
