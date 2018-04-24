@@ -18,7 +18,9 @@ class ProgramListContainer extends Component {
       isPending,
       programs,
       isAuthenticated,
-      openInvestPopup
+      openInvestPopup,
+      addFavoriteProgram,
+      removeFavoriteProgram
     } = this.props;
     if (isPending || !programs) return null;
     return (
@@ -26,6 +28,8 @@ class ProgramListContainer extends Component {
         programs={programs.investmentPrograms}
         isAuthenticated={isAuthenticated}
         openInvestPopup={openInvestPopup}
+        addFavoriteProgram={addFavoriteProgram}
+        removeFavoriteProgram={removeFavoriteProgram}
       />
     );
   }
@@ -40,6 +44,12 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   getPrograms: () => {
     dispatch(programsService.getPrograms());
+  },
+  addFavoriteProgram: id => {
+    dispatch(programsService.addFavoriteProgram(id));
+  },
+  removeFavoriteProgram: id => {
+    dispatch(programsService.removeFavoriteProgram(id));
   },
   dispatch
 });

@@ -8,14 +8,27 @@ import PIStatistic from "./pi-statistic/pi-statistic";
 
 import "./program-item.css";
 
-const ProgramItem = ({ program, isAuthenticated, openInvestPopup }) => {
+const ProgramItem = ({
+  program,
+  isAuthenticated,
+  openInvestPopup,
+  addFavoriteProgram,
+  removeFavoriteProgram
+}) => {
   return (
     <div
       className={classnames("program-item", {
         "program-item--inactive": !program.isEnabled
       })}
     >
-      <PIInfo order={program.order} program={program} showTokensWidget />
+      <PIInfo
+        order={program.order}
+        program={program}
+        showTokensWidget
+        isAuthenticated={isAuthenticated}
+        addFavoriteProgram={addFavoriteProgram}
+        removeFavoriteProgram={removeFavoriteProgram}
+      />
       <PIChart data={program.equityChart} />
       <PIStatistic trader={program} />
       <PTIButtons

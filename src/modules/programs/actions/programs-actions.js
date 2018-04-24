@@ -14,7 +14,35 @@ const fetchPrograms = (
   };
 };
 
+const addFavoriteProgram = (
+  { programId, authorization },
+  onResolve = response => Promise.resolve(response)
+) => dispatch => {
+  return dispatch({
+    type: actionTypes.PROGRAMS_FAVORITE,
+    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramsFavoritesAddPost(
+      programId,
+      authorization
+    ).then(() => Promise.resolve({ id: programId }))
+  });
+};
+
+const removeFavoriteProgram = (
+  { programId, authorization },
+  onResolve = response => Promise.resolve(response)
+) => dispatch => {
+  return dispatch({
+    type: actionTypes.PROGRAMS_FAVORITE,
+    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramsFavoritesRemovePost(
+      programId,
+      authorization
+    ).then(() => Promise.resolve({ id: programId }))
+  });
+};
+
 const programsActions = {
+  addFavoriteProgram,
+  removeFavoriteProgram,
   fetchPrograms
 };
 export default programsActions;
