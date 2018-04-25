@@ -1,0 +1,20 @@
+@import "styles/_colors.scss";
+
+.dashboard-program-list-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.dashboard-program-tab {
+  cursor: pointer;
+  color: $text-color;
+  margin: 0 2rem;
+  padding: 0.5rem 1rem;
+}
+
+.dashboard-program-tab--active {
+  color: $alternate-color;
+  border-bottom: 3px solid $alternate-color;
+}

@@ -20,6 +20,13 @@ const fetchDashboardPrograms = () => {
   };
 };
 
+const fetchFavoritesPrograms = () => {
+  return {
+    type: actionTypes.FAVORITES_PROGRAMS,
+    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramsPost({ showMyFavorites: true }, authService.getAuthArg())
+  }
+}
+
 const fetchDashboardChart = () => {
   const data = {
     filter: {
@@ -35,5 +42,5 @@ const fetchDashboardChart = () => {
   };
 };
 
-const dashboardActions = { fetchDashboardPrograms, fetchDashboardChart };
+const dashboardActions = { fetchDashboardPrograms, fetchDashboardChart, fetchFavoritesPrograms };
 export default dashboardActions;
