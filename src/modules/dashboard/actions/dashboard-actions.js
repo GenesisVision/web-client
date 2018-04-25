@@ -21,11 +21,28 @@ const fetchDashboardPrograms = () => {
 };
 
 const fetchFavoritesPrograms = () => {
+  const data = {
+    filter: { equityChartLength: 365, showMyFavorites: true },
+    authorization: authService.getAuthArg()
+  };
   return {
     type: actionTypes.FAVORITES_PROGRAMS,
-    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramsPost({ showMyFavorites: true }, authService.getAuthArg())
+    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramsPost(data)
   }
 }
+
+const removeFavoriteProgram = (
+  { programId, authorization },
+  onResolve = response => Promise.resolve(response)
+) => dispatch => {
+  return dispatch({
+    type: actionTypes.REMOVE_FAVORITE_PROGRAM,
+    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramsFavoritesRemovePost(
+      programId,
+      authorization
+    ).then(() => Promise.resolve({ id: programId }))
+  });
+};
 
 const fetchDashboardChart = () => {
   const data = {
@@ -42,5 +59,5 @@ const fetchDashboardChart = () => {
   };
 };
 
-const dashboardActions = { fetchDashboardPrograms, fetchDashboardChart, fetchFavoritesPrograms };
+const dashboardActions = { fetchDashboardPrograms, fetchDashboardChart, fetchFavoritesPrograms, removeFavoriteProgram };
 export default dashboardActions;
