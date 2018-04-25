@@ -1,8 +1,5 @@
 import React, { Component } from "react";
-import { connect } from 'react-redux'
-import classnames from "classnames";
-
-import dashboardActions from "../../../actions/dashboard-actions";
+import { NavLink } from "react-router-dom";
 
 import "./dashboard-filters.css";
 
@@ -10,34 +7,25 @@ class DashboardFilters extends Component {
   render() {
     return (
       <div className="dashboard-program-list-tabs">
-        <span
-          className={classnames("dashboard-program-tab", {
-            "dashboard-program-tab--active": true
-          })}
-          onClick={this.props.fetchDashboardPrograms}
+        <NavLink
+          exact
+          to="/dashboard"
+          activeClassName="dashboard-program-tab--active"
+          className={"dashboard-program-tab"}
         >
           Portfolio
-        </span>
-        <span
-          className={classnames("dashboard-program-tab", {
-            "dashboard-program-tab--active": true
-          })}
-          onClick={this.props.fetchFavoritePrograms}
+        </NavLink>
+        <NavLink
+          exact
+          to="/dashboard/favorite"
+          activeClassName="dashboard-program-tab--active"
+          className={"dashboard-program-tab"}
         >
           Favorite Programms
-        </span>
+        </NavLink>
       </div>
     );
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  fetchDashboardPrograms: () => {
-    dispatch(dashboardActions.fetchDashboardPrograms());
-  },
-  fetchFavoritePrograms: () => {
-    dispatch(dashboardActions.fetchFavoritesPrograms());
-  },
-});
-
-export default connect(undefined, mapDispatchToProps)(DashboardFilters);
+export default DashboardFilters;
