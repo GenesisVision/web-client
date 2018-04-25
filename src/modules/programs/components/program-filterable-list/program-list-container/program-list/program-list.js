@@ -12,7 +12,7 @@ const ProgramList = ({
   const renderProgramList = () => {
     if (programs.length === 0) return <div>There are no traders</div>;
     return programs.map(program => (
-      <ProgramItem
+      program.isFavorite && <ProgramItem
         key={program.id}
         program={program}
         isAuthenticated={isAuthenticated}
