@@ -20,18 +20,16 @@ class FavoritePrograms extends Component {
       programs,
       isAuthenticated,
       openInvestPopup,
-      addFavoriteProgram,
       removeFavoriteProgram
     } = this.props;
     if (isPending || !programs) return null;
     return (
-      <ProgramList
+      programs.investmentPrograms.length ? <ProgramList
         programs={programs.investmentPrograms}
         isAuthenticated={isAuthenticated}
         openInvestPopup={openInvestPopup}
-        addFavoriteProgram={addFavoriteProgram}
         removeFavoriteProgram={removeFavoriteProgram}
-      />
+      /> : <div className="text-center">There are no favorite programs</div>
     );
   }
 }

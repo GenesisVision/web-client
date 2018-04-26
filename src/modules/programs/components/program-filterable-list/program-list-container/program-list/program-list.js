@@ -11,16 +11,19 @@ const ProgramList = ({
 }) => {
   const renderProgramList = () => {
     if (programs.length === 0) return <div>There are no traders</div>;
-    return programs.map(program => (
-      program.isFavorite && <ProgramItem
-        key={program.id}
-        program={program}
-        isAuthenticated={isAuthenticated}
-        openInvestPopup={openInvestPopup}
-        addFavoriteProgram={addFavoriteProgram}
-        removeFavoriteProgram={removeFavoriteProgram}
-      />
-    ));
+    return programs.map((program, idx) => {
+      program.order = program.order || idx + 1;
+      return (
+        <ProgramItem
+          key={program.id}
+          program={program}
+          isAuthenticated={isAuthenticated}
+          openInvestPopup={openInvestPopup}
+          addFavoriteProgram={addFavoriteProgram}
+          removeFavoriteProgram={removeFavoriteProgram}
+        />
+      );
+    });
   };
   return renderProgramList();
 };

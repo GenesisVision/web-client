@@ -10,8 +10,10 @@ import {
 function investmentPrograms(state, action) {
   switch (action.type) {
     case `${REMOVE_FAVORITE_PROGRAM}_${SUCCESS_SUFFIX}`:
-        console.info(state);
-      return state;
+      const investmentPrograms = state.data.investmentPrograms.filter(
+        program => action.payload.id !== program.id
+      );
+      return { ...state, data: { ...state.data, investmentPrograms } };
     default:
       return state;
   }
