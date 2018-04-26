@@ -12,9 +12,15 @@
   color: $text-color;
   margin: 0 2rem;
   padding: 0.5rem 1rem;
+
+  &:hover {
+    color: inherit;
+    text-decoration: none;
+  }
+  
 }
 
 .dashboard-program-tab--active {
-  color: $alternate-color;
+  color: $alternate-color!important;
   border-bottom: 3px solid $alternate-color;
 }
