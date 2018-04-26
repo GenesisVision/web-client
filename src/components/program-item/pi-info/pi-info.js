@@ -5,11 +5,19 @@ import DaysLeftWidget from "../../days-left-widget/days-left-widget";
 import replaceParams from "../../../utils/replace-params";
 import TokensWidget from "../../tokens-widget/tokens-widget";
 import TraderAvatar from "../../program-avatar/program-avatar";
+import PIBookmark from "../pi-bookmark/pi-bookmark";
 
 import "./pi-info.css";
 import { PROGRAM_ROUTE } from "../../../modules/program/program.constants";
 
-const PIInfo = ({ order, program, showTokensWidget }) => {
+const PIInfo = ({
+  order,
+  program,
+  showTokensWidget,
+  isAuthenticated,
+  addFavoriteProgram,
+  removeFavoriteProgram
+}) => {
   const renderDaysLeft = () => {
     if (program.isEnabled) {
       return (
@@ -38,6 +46,11 @@ const PIInfo = ({ order, program, showTokensWidget }) => {
     return null;
   };
 
+  const toggleFavorite = () => {
+    const { id, isFavorite } = program;
+    isFavorite ? addFavoriteProgram(id) : removeFavoriteProgram(id);
+  };
+
   const programRoute = replaceParams(PROGRAM_ROUTE, {
     ":programId": program.id
   });
@@ -48,9 +61,15 @@ const PIInfo = ({ order, program, showTokensWidget }) => {
         <TraderAvatar imgUrl={program.logo} level={program.level} />
       </Link>
       <div className="pi-info__name pi-name">
-        <Link className="pi-name__title" to={programRoute}>
-          {program.title}
-        </Link>
+        <div className="pi-name__title">
+          <Link to={programRoute}>{program.title}</Link>
+          {isAuthenticated && (
+            <PIBookmark
+              isFavorite={program.isFavorite}
+              onClick={toggleFavorite}
+            />
+          )}
+        </div>
         <div className="pi-name__description">{program.description}</div>
         <div className="pi-name__eop">{renderDaysLeft()}</div>
         {showTokensWidget && (
