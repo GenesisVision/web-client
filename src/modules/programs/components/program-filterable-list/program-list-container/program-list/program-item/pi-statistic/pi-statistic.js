@@ -12,6 +12,28 @@ const TIStatistic = ({ t, trader }) => {
         <div className="metric">
           <div className="metric__value">
             <NumberFormat
+              value={trader.availableInvestment}
+              displayType="text"
+            />
+            <div className="metric__bubble">GVT</div>
+          </div>
+          <div className="metric__description">
+            <span id={`availableToInvestment_${trader.id}`}>
+              {t("program-statistic.available-to-invest.text")}
+            </span>
+            <UncontrolledTooltip
+              placement="bottom"
+              target={`availableToInvestment_${trader.id}`}
+            >
+              {t("program-statistic.available-to-invest.tooltip")}
+            </UncontrolledTooltip>
+          </div>
+        </div>
+      </div>
+      <div className="pis-item">
+        <div className="metric">
+          <div className="metric__value">
+            <NumberFormat
               value={trader.profitAvgPercent}
               suffix="%"
               decimalScale={2}
@@ -19,12 +41,6 @@ const TIStatistic = ({ t, trader }) => {
             />
           </div>
           <div className="metric__description">Avg Profit</div>
-        </div>
-      </div>
-      <div className="pis-item">
-        <div className="metric">
-          <div className="metric__value">{trader.currency}</div>
-          <div className="metric__description">Currency</div>
         </div>
       </div>
       <div className="pis-item">
