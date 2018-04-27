@@ -3342,8 +3342,8 @@ growly@^1.3.0:
   resolved "https://registry.yarnpkg.com/growly/-/growly-1.3.0.tgz#f10748cbe76af964b7c96c93c6bcc28af120c081"
 
 "gv-api-web@git+https://github.com/GenesisVision/gv-api-web.git":
-  version "1.0.43"
-  resolved "git+https://github.com/GenesisVision/gv-api-web.git#d1236afc77ad8b960e770d7bcff82a2ed3450062"
+  version "1.0.44"
+  resolved "git+https://github.com/GenesisVision/gv-api-web.git#f49f9c2d371f0bf57844795534ed528159016812"
   dependencies:
     superagent "3.5.2"
 
