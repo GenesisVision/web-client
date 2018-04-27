@@ -69,9 +69,10 @@ const TraderWithdraw = ({
               <Field
                 name="amount"
                 type="number"
-                placeholder=""
+                placeholder="0"
                 controllClass="input-token__amount"
                 component={InputText}
+                allowNegative={false}
               />
             </div>
             <div className="input-token__description">
@@ -101,7 +102,7 @@ const TraderWithdraw = ({
 export default withFormik({
   displayName: "programWithdrawForm",
   mapPropsToValues: () => ({
-    amount: 0
+    amount: ""
   }),
   validationSchema: Yup.object().shape({
     amount: Yup.number()

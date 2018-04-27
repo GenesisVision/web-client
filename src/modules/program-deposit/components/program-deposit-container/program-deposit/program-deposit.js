@@ -1,8 +1,8 @@
 import { withFormik, Field } from "formik";
+import NumberFormat from "react-number-format";
 import React from "react";
 import Yup from "yup";
 
-import DaysLeftWidget from "../../../../../components/days-left-widget/days-left-widget";
 import FormError from "../../../../../shared/components/form/form-error/form-error";
 import InputText from "../../../../../shared/components/form/input-text/input-text";
 import PopupButtons from "../../../../popup/components/popup-buttons/popup-buttons";
@@ -20,7 +20,7 @@ const ProgramDeposit = ({
   error
 }) => {
   const calculateManagerCurrency = () => {
-    return (values.amount * programDeposit.gvtRate).toFixed(2);
+    return ((+values.amount || 0) * programDeposit.gvtRate).toFixed(2);
   };
   return (
     <div className="popup">
@@ -41,19 +41,29 @@ const ProgramDeposit = ({
             </div>
           </div>
           <div className="program-deposit__info-cell">
-            <div className="program-deposit__days-left">
-              <DaysLeftWidget
-                start={programDeposit.startOfPeriod}
-                duration={programDeposit.periodDuration}
-              />
+            <div className="metric">
+              <div className="metric__value">
+                <NumberFormat
+                  value={programDeposit.availableInvestments}
+                  decimalScale={4}
+                  displayType="text"
+                />
+                <div className="metric__bubble">GVT</div>
+              </div>
+              <div className="metric__description">Available To Invest</div>
             </div>
           </div>
           <div className="program-deposit__info-cell program-deposit__available">
             <div className="metric">
               <div className="metric__value">
-                {programDeposit.gvtWalletAmount}
+                <NumberFormat
+                  value={programDeposit.gvtWalletAmount}
+                  decimalScale={4}
+                  displayType="text"
+                />
+                <div className="metric__bubble">GVT</div>
               </div>
-              <div className="metric__description">Available GVT</div>
+              <div className="metric__description">Your GVT</div>
             </div>
           </div>
         </div>
@@ -63,10 +73,11 @@ const ProgramDeposit = ({
               <Field
                 number
                 name="amount"
-                placeholder=""
+                placeholder="0"
                 controllClass="input-gvt__amount"
                 component={InputText}
                 decimalScale={2}
+                allowNegative={false}
               />
             </div>
             <div className="input-gvt__description">Enter GVT amount</div>
@@ -99,14 +110,25 @@ const ProgramDeposit = ({
 export default withFormik({
   displayName: "programDepositForm",
   mapPropsToValues: () => ({
-    amount: 0
+    amount: ""
   }),
-  validationSchema: Yup.object().shape({
-    amount: Yup.number()
-      .typeError("Amount must be a number.")
-      .moreThan(0, "Amount must be greater than zero")
-      .required("Amount is required.")
-  }),
+  validationSchema: ({
+    programDeposit: { gvtWalletAmount, availableInvestments }
+  }) => {
+    const maxVal = Math.min(gvtWalletAmount, availableInvestments);
+    const maxValText =
+      gvtWalletAmount < availableInvestments
+        ? "Available GVT"
+        : "Available To Invest";
+    const scheme = Yup.object().shape({
+      amount: Yup.number()
+        .typeError("Amount must be a number.")
+        .moreThan(0, "Amount must be greater than zero")
+        .max(maxVal, "Amount must not be greater than " + maxValText)
+        .required("Amount is required.")
+    });
+    return scheme;
+  },
   handleSubmit: (values, { props, setSubmitting }) => {
     props.submitPopup(values, setSubmitting);
   }

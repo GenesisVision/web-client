@@ -30,7 +30,9 @@ const InputText = ({
     return null;
   };
   const validationClass = touched[field.name]
-    ? errors[field.name] ? "is-invalid" : "is-valid"
+    ? errors[field.name]
+      ? "is-invalid"
+      : "is-valid"
     : "";
 
   const renderInput = () => {
@@ -40,7 +42,7 @@ const InputText = ({
           className={`${controllClass || "form-control"} ${validationClass}`}
           value={field.value}
           onValueChange={(values, e) => {
-            setFieldValue(field.name, values.value || 0);
+            setFieldValue(field.name, values.value);
           }}
           {...props}
         />
