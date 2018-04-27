@@ -3,13 +3,12 @@ import React from "react";
 
 import DaysLeftWidget from "../../days-left-widget/days-left-widget";
 import replaceParams from "../../../utils/replace-params";
-import TokensWidget from "../../tokens-widget/tokens-widget";
 import TraderAvatar from "../../program-avatar/program-avatar";
 
 import "./pi-info.css";
 import { PROGRAM_ROUTE } from "../../../modules/program/program.constants";
 
-const PIInfo = ({ order, program, showTokensWidget }) => {
+const PIInfo = ({ order, program }) => {
   const renderDaysLeft = () => {
     if (program.isEnabled) {
       return (
@@ -21,21 +20,6 @@ const PIInfo = ({ order, program, showTokensWidget }) => {
     }
 
     return <div>The program is not enabled</div>;
-  };
-
-  const renderTokens = () => {
-    if (program.isEnabled) {
-      return (
-        <TokensWidget
-          id={program.id}
-          invested={program.freeTokens.investorsTokens}
-          requested={program.freeTokens.requestsTokens}
-          total={program.freeTokens.total}
-        />
-      );
-    }
-
-    return null;
   };
 
   const programRoute = replaceParams(PROGRAM_ROUTE, {
@@ -53,9 +37,6 @@ const PIInfo = ({ order, program, showTokensWidget }) => {
         </Link>
         <div className="pi-name__description">{program.description}</div>
         <div className="pi-name__eop">{renderDaysLeft()}</div>
-        {showTokensWidget && (
-          <div className="pi-name__eop">{renderTokens()}</div>
-        )}
       </div>
     </div>
   );

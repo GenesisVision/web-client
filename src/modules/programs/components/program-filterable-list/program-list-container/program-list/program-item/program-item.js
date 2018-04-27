@@ -15,7 +15,7 @@ const ProgramItem = ({ program, isAuthenticated, openInvestPopup }) => {
         "program-item--inactive": !program.isEnabled
       })}
     >
-      <PIInfo order={program.order} program={program} showTokensWidget />
+      <PIInfo order={program.order} program={program} />
       <PIChart data={program.equityChart} />
       <PIStatistic trader={program} />
       <PTIButtons

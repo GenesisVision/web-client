@@ -1,8 +1,6 @@
 import NumberFormat from "react-number-format";
 import React from "react";
 
-import TokensWidget from "../../../../../../../../components/tokens-widget/tokens-widget";
-
 import "./ts-short-statistic.css";
 
 const TSShortStatistic = ({ trader }) => {
@@ -76,20 +74,6 @@ const TSShortStatistic = ({ trader }) => {
             />
           </div>
           <div className="metric__description">Success Fee</div>
-        </div>
-      </div>
-      <div className="trader-statistic__cell">
-        <div className="metric">
-          <div className="metric__value">
-            <TokensWidget
-              id={trader.id}
-              invested={trader.freeTokens.investorsTokens}
-              requested={trader.freeTokens.requestsTokens}
-              total={trader.freeTokens.total}
-              showHeader={false}
-            />
-          </div>
-          <div className="metric__description">Tokens</div>
         </div>
       </div>
     </div>
