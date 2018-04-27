@@ -1,0 +1,161 @@
+{
+  "app": {
+    "header": "Investor Portal"
+  },
+  "days-left-widget": {
+    "text": "Day left",
+    "text_plural": "Days left"
+  },
+  "program-actions": {
+    "invest": "Invest",
+    "withdraw": "Withdraw",
+    "create-program": "Create Program",
+    "edit-program": "Edit Program",
+    "close-program": "Close Program",
+    "close-period": "Close Period"
+  },
+  "program-statistic": {
+    "avg-profit": {
+      "text": "Avg Profit",
+      "tooltip":
+        "Avg. profit – is the average profit for the period in relation to the starting balance."
+    },
+    "available-to-invest": {
+      "text": "Available to Invest",
+      "tooltip":
+        "Available to invest - is the number of manager's tokens which are available to purchase."
+    },
+    "trades": {
+      "text": "Trades",
+      "tooltip":
+        "Trades show the number of financial operations conducted by the manager."
+    },
+    "investors": {
+      "text": "Investor",
+      "text_plural": "Investors",
+      "tooltip":
+        "Investor - is a Genesis Vision client, investors choose a manager in the Program Ratings and invest money in their investment programs."
+    },
+    "program-item-balance": {
+      "text": "Balance",
+      "tooltip": "Balance – is the amount of funds on a trading account."
+    },
+    "total-profit": {
+      "text": "Total Profit",
+      "tooltip": "Total profit - is the all-time total manager’s profit."
+    },
+    "balance": {
+      "text": "Balance",
+      "tooltip":
+        "Balance - is the total USD value of funds that are managed in the investment program."
+    },
+    "own-balance": {
+      "text": "Own Balance",
+      "tooltip":
+        "Own balance - is an amount of money which belongs to the manager."
+    },
+    "period-duration": {
+      "text": "Period Duration",
+      "bubble": "day",
+      "bubble_plural": "days",
+      "tooltip":
+        "Period duration - is a period that is defined by a manager at the end of which all trading positions are closed with a subsequent profit distribution."
+    },
+    "success-fee": {
+      "text": "Success Fee",
+      "tooltip":
+        "Success fee is an additional successful trading fee that is charged from the investor’s profit at the end of the reporting period."
+    },
+    "managers-fee": {
+      "text": "Manager’s Fee",
+      "tooltip":
+        "Manager’s fee - is an obligatory annual fee, charged at the end of the reporting period from the total amount of funds invested in this investment program."
+    }
+  },
+  "program-deal-list": {
+    "symbol": {
+      "text": "Symbol",
+      "tooltip":
+        "Symbol is a trading instrument which was used by a manager in a trade."
+    },
+    "volume": {
+      "text": "Volume",
+      "tooltip":
+        "Volume is the number of units offered for sale or purchase. Usually, volume measured in \"lots\" - the number of currency units you will buy or sell."
+    },
+    "ticket": {
+      "text": "Ticket",
+      "tooltip": "Ticket is a unique trade id."
+    },
+    "price": {
+      "text": "Price",
+      "tooltip":
+        "Price is a price of base trading instrument unit the value of quoted currency (in case of a currency pair)."
+    },
+    "price-open": {
+      "text": "Price Open",
+      "tooltip":
+        "Price open – is a price which was at the opening moment of the trade."
+    },
+    "price-close": {
+      "text": "Price Close",
+      "tooltip":
+        "Price close – is a price which was at the closing moment of the trade."
+    },
+    "profit": {
+      "text": "Profit",
+      "tooltip": "Profit is a profit which gets from the particular trade."
+    },
+    "direction": {
+      "text": "Direction",
+      "tooltip":
+        "Direction is an indicator of the direction of the trade (i.e. \"Buy\" or \"Sell\")."
+    },
+    "date": {
+      "text": "Date",
+      "tooltip": "Date - is a date of the trade."
+    },
+    "date-open": {
+      "text": "Date Open",
+      "tooltip": "Date open – is a date when the trade was opened."
+    },
+    "date-close": {
+      "text": "Date Close",
+      "tooltip": "Date close – is a date when the trade was closed."
+    },
+    "entry": {
+      "text": "Entry",
+      "tooltip": "Entry is a status of the trade (i.e. “Out” or “In”)."
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "analytics": "Analytics",
+    "programs": "Programs"
+  },
+  "dashboard-statistic": {
+    "funds": {
+      "text": "Funds",
+      "tooltip":
+        "Funds – is the amount of money which is managed by the trader."
+    },
+    "investors": {
+      "text": "Investors",
+      "tooltip":
+        "Investors show the amount of investors who invested in the manager."
+    },
+    "end-of-next-period": {
+      "text": "End of next period",
+      "tooltip":
+        "End of next period shows the amount of days until the end of the nearest next trading period."
+    },
+    "profit": {
+      "text": "Profit",
+      "tooltip": "Profit is the total manager’s profit."
+    },
+    "my-profit": {
+      "text": "My profit",
+      "tooltip": "My profit is the total profit earned by all programs."
+    }
+  }
+}

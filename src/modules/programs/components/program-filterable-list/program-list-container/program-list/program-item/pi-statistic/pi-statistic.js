@@ -1,9 +1,11 @@
-import NumberFormat from "react-number-format";
 import React from "react";
+import { translate } from "react-i18next";
+import NumberFormat from "react-number-format";
+import { UncontrolledTooltip } from "reactstrap";
 
 import "./pi-statisctic.css";
 
-const TIStatistic = ({ trader }) => {
+const TIStatistic = ({ t, trader }) => {
   return (
     <div className="pi-statistic">
       <div className="pis-item">
@@ -47,7 +49,17 @@ const TIStatistic = ({ trader }) => {
             />
             <div className="metric__bubble">{trader.currency}</div>
           </div>
-          <div className="metric__description">Balance</div>
+          <div className="metric__description">
+            <span id={`balance_${trader.id}`}>
+              {t("program-statistic.program-item-balance.text")}
+            </span>
+            <UncontrolledTooltip
+              placement="bottom"
+              target={`balance_${trader.id}`}
+            >
+              {t("program-statistic.program-item-balance.tooltip")}
+            </UncontrolledTooltip>
+          </div>
         </div>
       </div>
       <div className="pis-item">
@@ -67,4 +79,4 @@ const TIStatistic = ({ trader }) => {
   );
 };
 
-export default TIStatistic;
+export default translate()(TIStatistic);
