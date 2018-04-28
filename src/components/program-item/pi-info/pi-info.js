@@ -39,6 +39,11 @@ const PIInfo = ({
     isFavorite ? removeFavoriteProgram(id) : addFavoriteProgram(id);
   };
 
+  const toggleFavorite = () => {
+    const { id, isFavorite } = program;
+    isFavorite ? removeFavoriteProgram(id) : addFavoriteProgram(id);
+  };
+
   const programRoute = replaceParams(PROGRAM_ROUTE, {
     ":programId": program.id
   });
