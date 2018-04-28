@@ -122,11 +122,27 @@ const closeFilterPane = () => {
   return filterPaneActions.closeFilter();
 };
 
+const toggleFavoriteProgram = program => dispatch => {
+  const { id: programId, isFavorite } = program;
+  const requestData = {
+    programId
+  };
+  if (authService.getAuthArg()) {
+    requestData.authorization = authService.getAuthArg();
+  }
+  dispatch(
+    isFavorite
+      ? programsActions.removeFavoriteProgram(requestData)
+      : programsActions.addFavoriteProgram(requestData)
+  );
+};
+
 const programsService = {
   getPrograms,
   changeProgramListPage,
   updateAfterInvestment,
   closeFilterPane,
-  updateFiltering
+  updateFiltering,
+  toggleFavoriteProgram
 };
 export default programsService;

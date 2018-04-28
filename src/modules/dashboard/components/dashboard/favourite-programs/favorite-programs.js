@@ -1,13 +1,16 @@
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import React, { Component } from "react";
 
+import dashboardActions from "../../../actions/dashboard-actions";
 import popupActions from "../../../../popup/actions/popup-actions";
-import ProgramList from "./program-list/program-list";
-import programsService from "../../../service/programs-service";
+import ProgramList from "../../../../programs/components/program-filterable-list/program-list-container/program-list/program-list";
+import programsService from "../../../../programs/service/programs-service";
 
 import { PROGRAM_DEPOSIT_POPUP } from "../../../../popup/actions/popup-actions.constants";
+import { PROGRAMS_ROUTE } from "../../../../programs/programs.constants";
 
-class ProgramListContainer extends Component {
+class FavoritePrograms extends Component {
   componentWillMount() {
     const { getPrograms } = this.props;
     getPrograms();
@@ -22,6 +25,17 @@ class ProgramListContainer extends Component {
       toggleFavoriteProgram
     } = this.props;
     if (isPending || !programs) return null;
+
+    if (programs.investmentPrograms.length === 0)
+      return (
+        <div className="dashboard-empty__text">
+          Add your first favourite program on{" "}
+          <Link className="link" to={PROGRAMS_ROUTE}>
+            the program list page
+          </Link>.
+        </div>
+      );
+
     return (
       <ProgramList
         programs={programs.investmentPrograms}
@@ -35,17 +49,18 @@ class ProgramListContainer extends Component {
 
 const mapStateToProps = state => {
   const { isAuthenticated } = state.authData;
-  const { isPending, data } = state.programsData.programs.items;
+  const { isPending, data } = state.dashboardData.favoritePrograms;
   return { isPending, programs: data, isAuthenticated };
 };
 
 const mapDispatchToProps = dispatch => ({
   getPrograms: () => {
-    dispatch(programsService.getPrograms());
+    dispatch(dashboardActions.fetchFavoritesPrograms());
   },
   toggleFavoriteProgram: program => () => {
-    dispatch(programsService.toggleFavoriteProgram(program));
-  }
+    dispatch(dashboardActions.removeFavoriteProgram(program));
+  },
+  dispatch
 });
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
@@ -72,5 +87,5 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
-  ProgramListContainer
+  FavoritePrograms
 );

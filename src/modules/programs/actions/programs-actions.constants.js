@@ -1,1 +1,2 @@
 export const PROGRAMS = "PROGRAMS";
+export const PROGRAMS_FAVORITE = "PROGRAMS_FAVORITE";
