@@ -1,11 +1,11 @@
 import { connect } from "react-redux";
 import React, { PureComponent } from "react";
 
-import dashboardActions from "../../../actions/dashboard-actions";
+import dashboardActions from "../../../../actions/dashboard-actions";
 import DashboardProgramList from "./dashboard-program-list/dashboard-program-list";
 import DashboardStatistic from "./dashboard-statistic/dashboard-statistic";
-import popupActions from "../../../../popup/actions/popup-actions";
-import { PROGRAM_DEPOSIT_POPUP } from "../../../../popup/actions/popup-actions.constants";
+import popupActions from "../../../../../popup/actions/popup-actions";
+import { PROGRAM_DEPOSIT_POPUP } from "../../../../../popup/actions/popup-actions.constants";
 
 class DashboardContainer extends PureComponent {
   componentWillMount() {

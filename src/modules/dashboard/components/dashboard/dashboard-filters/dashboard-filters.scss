@@ -5,6 +5,7 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  padding: 1rem;
 }
 
 .dashboard-program-tab {
@@ -17,10 +18,9 @@
     color: inherit;
     text-decoration: none;
   }
-  
 }
 
 .dashboard-program-tab--active {
-  color: $alternate-color!important;
+  color: $alternate-color !important;
   border-bottom: 3px solid $alternate-color;
 }

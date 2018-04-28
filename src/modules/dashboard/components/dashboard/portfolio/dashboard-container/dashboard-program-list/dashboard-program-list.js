@@ -4,8 +4,8 @@ import React from "react";
 import DPTraderItem from "./dp-trader-item/dp-trader-item";
 
 import "./dashboard-program-list.css";
-import { PROGRAMS_ROUTE } from "../../../../../programs/programs.constants";
-import PortfolioIcon from "../../../../media/portfolio-icon.svg";
+import { PROGRAMS_ROUTE } from "../../../../../../programs/programs.constants";
+import PortfolioIcon from "../../../../../media/portfolio-icon.svg";
 
 const DashboardProgramList = ({ programs, openInvestPopup }) => {
   const renderPrograms = () => {

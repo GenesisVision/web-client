@@ -2,22 +2,24 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 
 import "./dashboard-filters.css";
+import {
+  DASHBOARD_PORTFOLIO_ROUTE,
+  DASHBOARD_FAVOURITES_ROUTE
+} from "../../../dashboard.constants";
 
 class DashboardFilters extends Component {
   render() {
     return (
       <div className="dashboard-program-list-tabs">
         <NavLink
-          exact
-          to="/dashboard"
+          to={DASHBOARD_PORTFOLIO_ROUTE}
           activeClassName="dashboard-program-tab--active"
           className={"dashboard-program-tab"}
         >
           Portfolio
         </NavLink>
         <NavLink
-          exact
-          to="/dashboard/favorite"
+          to={DASHBOARD_FAVOURITES_ROUTE}
           activeClassName="dashboard-program-tab--active"
           className={"dashboard-program-tab"}
         >
