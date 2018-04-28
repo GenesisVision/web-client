@@ -40,7 +40,7 @@ const PIInfo = ({
       </Link>
       <div className="pi-info__name pi-name">
         <div className="pi-name__title">
-          <Link to={programRoute}>{program.title}</Link>
+          <Link className="pi-name__link" to={programRoute}>{program.title}</Link>
           {isAuthenticated && (
             <PIBookmark
               isFavorite={program.isFavorite}

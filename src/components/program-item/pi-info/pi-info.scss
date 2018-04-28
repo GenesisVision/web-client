@@ -43,6 +43,11 @@
 }
 
 .pi-name__title {
+  display: flex;
+  align-items: center;
+}
+
+.pi-name__link {
   font-size: 1.6rem;
   color: $text-color;
   max-width: 100%;

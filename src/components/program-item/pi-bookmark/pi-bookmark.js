@@ -4,11 +4,11 @@ import classnames from "classnames";
 
 import "./pi-bookmark.css";
 
-const PIBookmark = ({ isFavorite, onClick }) => {
+const PIBookmark = ({ isFavorite, onClick, className }) => {
   return (
     <i
       onClick={onClick}
-      className={classnames("fas fa-bookmark", "pi-bookmark", {
+      className={classnames("fas fa-bookmark", "pi-bookmark", className, {
         "pi-bookmark--active": isFavorite
       })}
     />
