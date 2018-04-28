@@ -122,24 +122,19 @@ const closeFilterPane = () => {
   return filterPaneActions.closeFilter();
 };
 
-const addFavoriteProgram = programId => dispatch => {
+const toggleFavoriteProgram = program => dispatch => {
+  const { id: programId, isFavorite } = program;
   const requestData = {
     programId
   };
   if (authService.getAuthArg()) {
     requestData.authorization = authService.getAuthArg();
   }
-  dispatch(programsActions.addFavoriteProgram(requestData));
-};
-
-const removeFavoriteProgram = programId => dispatch => {
-  const requestData = {
-    programId
-  };
-  if (authService.getAuthArg()) {
-    requestData.authorization = authService.getAuthArg();
-  }
-  dispatch(programsActions.removeFavoriteProgram(requestData));
+  dispatch(
+    isFavorite
+      ? programsActions.removeFavoriteProgram(requestData)
+      : programsActions.addFavoriteProgram(requestData)
+  );
 };
 
 const programsService = {
@@ -148,7 +143,6 @@ const programsService = {
   updateAfterInvestment,
   closeFilterPane,
   updateFiltering,
-  addFavoriteProgram,
-  removeFavoriteProgram
+  toggleFavoriteProgram
 };
 export default programsService;

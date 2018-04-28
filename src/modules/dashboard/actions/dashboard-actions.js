@@ -36,7 +36,7 @@ const fetchFavoritesPrograms = () => {
 };
 
 const removeFavoriteProgram = (
-  id,
+  { id },
   onResolve = response => Promise.resolve(response)
 ) => dispatch => {
   return dispatch({

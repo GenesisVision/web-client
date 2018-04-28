@@ -4,6 +4,7 @@
   color: #ccd5d4;
   font-size: 1rem;
   margin-left: 1rem;
+  cursor: pointer;
 
   &:hover {
     text-shadow: 0px 0px 2px lighten($text-color-light, 5%);

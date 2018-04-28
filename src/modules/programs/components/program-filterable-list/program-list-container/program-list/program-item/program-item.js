@@ -12,8 +12,7 @@ const ProgramItem = ({
   program,
   isAuthenticated,
   openInvestPopup,
-  addFavoriteProgram,
-  removeFavoriteProgram
+  toggleFavoriteProgram
 }) => {
   return (
     <div
@@ -25,8 +24,7 @@ const ProgramItem = ({
         order={program.order}
         program={program}
         isAuthenticated={isAuthenticated}
-        addFavoriteProgram={addFavoriteProgram}
-        removeFavoriteProgram={removeFavoriteProgram}
+        toggleFavoriteProgram={toggleFavoriteProgram}
       />
       <PIChart data={program.equityChart} />
       <PIStatistic trader={program} />

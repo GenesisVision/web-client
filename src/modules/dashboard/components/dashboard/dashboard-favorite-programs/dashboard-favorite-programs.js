@@ -20,7 +20,7 @@ class FavoritePrograms extends Component {
       programs,
       isAuthenticated,
       openInvestPopup,
-      removeFavoriteProgram
+      toggleFavoriteProgram
     } = this.props;
     if (isPending || !programs) return null;
     return (
@@ -28,7 +28,7 @@ class FavoritePrograms extends Component {
         programs={programs.investmentPrograms}
         isAuthenticated={isAuthenticated}
         openInvestPopup={openInvestPopup}
-        removeFavoriteProgram={removeFavoriteProgram}
+        toggleFavoriteProgram={toggleFavoriteProgram}
       /> : <div className="text-center">There are no favorite programs</div>
     );
   }
@@ -44,8 +44,8 @@ const mapDispatchToProps = dispatch => ({
   getPrograms: () => {
     dispatch(dashboardActions.fetchFavoritesPrograms());
   },
-  removeFavoriteProgram: id => {
-    dispatch(dashboardActions.removeFavoriteProgram(id));
+  toggleFavoriteProgram: program => () => {
+    dispatch(dashboardActions.removeFavoriteProgram(program));
   },
   dispatch
 });

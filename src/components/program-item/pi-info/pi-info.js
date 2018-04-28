@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import React from "react";
 
 import DaysLeftWidget from "../../days-left-widget/days-left-widget";
+import PIBookmark from "../pi-bookmark/pi-bookmark";
 import replaceParams from "../../../utils/replace-params";
 import TraderAvatar from "../../program-avatar/program-avatar";
-import PIBookmark from "../pi-bookmark/pi-bookmark";
 
 import "./pi-info.css";
 import { PROGRAM_ROUTE } from "../../../modules/program/program.constants";
@@ -13,8 +13,7 @@ const PIInfo = ({
   order,
   program,
   isAuthenticated,
-  addFavoriteProgram,
-  removeFavoriteProgram
+  toggleFavoriteProgram
 }) => {
   const renderDaysLeft = () => {
     if (program.isEnabled) {
@@ -29,24 +28,10 @@ const PIInfo = ({
     return <div>The program is not enabled</div>;
   };
 
-  const toggleFavorite = () => {
-    const { id, isFavorite } = program;
-    isFavorite ? addFavoriteProgram(id) : removeFavoriteProgram(id);
-  };
-
-  const toggleFavorite = () => {
-    const { id, isFavorite } = program;
-    isFavorite ? removeFavoriteProgram(id) : addFavoriteProgram(id);
-  };
-
-  const toggleFavorite = () => {
-    const { id, isFavorite } = program;
-    isFavorite ? removeFavoriteProgram(id) : addFavoriteProgram(id);
-  };
-
   const programRoute = replaceParams(PROGRAM_ROUTE, {
     ":programId": program.id
   });
+
   return (
     <div className="pi-info">
       <div className="pi-info__order">{order}</div>
@@ -59,7 +44,7 @@ const PIInfo = ({
           {isAuthenticated && (
             <PIBookmark
               isFavorite={program.isFavorite}
-              onClick={toggleFavorite}
+              onClick={toggleFavoriteProgram(program)}
             />
           )}
         </div>

@@ -6,8 +6,7 @@ const ProgramList = ({
   programs,
   isAuthenticated,
   openInvestPopup,
-  addFavoriteProgram,
-  removeFavoriteProgram
+  toggleFavoriteProgram
 }) => {
   const renderProgramList = () => {
     if (programs.length === 0) return <div>There are no traders</div>;
@@ -19,8 +18,7 @@ const ProgramList = ({
           program={program}
           isAuthenticated={isAuthenticated}
           openInvestPopup={openInvestPopup}
-          addFavoriteProgram={addFavoriteProgram}
-          removeFavoriteProgram={removeFavoriteProgram}
+          toggleFavoriteProgram={toggleFavoriteProgram}
         />
       );
     });
