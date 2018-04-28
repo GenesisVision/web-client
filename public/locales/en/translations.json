@@ -15,6 +15,10 @@
     "close-period": "Close Period"
   },
   "program-statistic": {
+    "manager-share": {
+      "text": "Manager's Share",
+      "tooltip": "Manager’s funds share – a percentage showing the proportion of funds belonging to the manager."
+    },
     "avg-profit": {
       "text": "Avg Profit",
       "tooltip":
