@@ -17,14 +17,14 @@ const DPStatistic = ({ t, trader }) => {
             <div className="metric__bubble">{trader.token.tokenSymbol}</div>
           </div>
           <div className="metric__description">
-            <span id={`program-my-tokens_${trader.id}`}>
-              {t("investor-dashboard.program-my-tokens.text")}
+            <span id={`my-tokens_${trader.id}`}>
+              {t("dashboard-statistic.my-tokens.text")}
             </span>
             <UncontrolledTooltip
               placement="bottom"
-              target={`program-my-tokens_${trader.id}`}
+              target={`my-tokens_${trader.id}`}
             >
-              {t("investor-dashboard.program-my-tokens.tooltip")}
+              {t("dashboard-statistic.my-tokens.tooltip")}
             </UncontrolledTooltip>
           </div>
         </div>
@@ -40,14 +40,14 @@ const DPStatistic = ({ t, trader }) => {
             />
           </div>
           <div className="metric__description">
-            <span id={`program-est-value_${trader.id}`}>
-              {t("investor-dashboard.program-est-value.text")}
+            <span id={`est-value_${trader.id}`}>
+              {t("dashboard-statistic.est-value.text")}
             </span>
             <UncontrolledTooltip
               placement="bottom"
-              target={`program-est-value_${trader.id}`}
+              target={`est-value_${trader.id}`}
             >
-              {t("investor-dashboard.program-est-value.tooltip")}
+              {t("dashboard-statistic.est-value.tooltip")}
             </UncontrolledTooltip>
           </div>
         </div>
@@ -63,14 +63,14 @@ const DPStatistic = ({ t, trader }) => {
             <div className="metric__bubble">GVT</div>
           </div>
           <div className="metric__description">
-            <span id={`program-my-profit_${trader.id}`}>
-              {t("investor-dashboard.program-my-profit.text")}
+            <span id={`my-profit_${trader.id}`}>
+              {t("dashboard-statistic.my-profit.text")}
             </span>
             <UncontrolledTooltip
               placement="bottom"
-              target={`program-my-profit_${trader.id}`}
+              target={`my-profit_${trader.id}`}
             >
-              {t("investor-dashboard.program-my-profit.tooltip")}
+              {t("dashboard-statistic.my-profit.tooltip")}
             </UncontrolledTooltip>
           </div>
         </div>
@@ -86,14 +86,14 @@ const DPStatistic = ({ t, trader }) => {
             <div className="metric__bubble">GVT</div>
           </div>
           <div className="metric__description">
-            <span id={`program-total-profit_${trader.id}`}>
-              {t("investor-dashboard.program-total-profit.text")}
+            <span id={`total-profit_${trader.id}`}>
+              {t("program-statistic.total-profit.text")}
             </span>
             <UncontrolledTooltip
               placement="bottom"
-              target={`program-total-profit_${trader.id}`}
+              target={`total-profit_${trader.id}`}
             >
-              {t("investor-dashboard.program-total-profit.tooltip")}
+              {t("program-statistic.total-profit.tooltip")}
             </UncontrolledTooltip>
           </div>
         </div>
@@ -103,20 +103,20 @@ const DPStatistic = ({ t, trader }) => {
           <div className="metric__value">
             <NumberFormat
               value={trader.balance}
-              // decimalScale={2}
+              decimalScale={4}
               displayType="text"
             />
             <div className="metric__bubble">{trader.currency}</div>
           </div>
           <div className="metric__description">
             <span id={`program-balance_${trader.id}`}>
-              {t("investor-dashboard.program-balance.text")}
+              {t("program-statistic.balance.text")}
             </span>
             <UncontrolledTooltip
               placement="bottom"
               target={`program-balance_${trader.id}`}
             >
-              {t("investor-dashboard.program-balance.tooltip")}
+              {t("program-statistic.balance.tooltip")}
             </UncontrolledTooltip>
           </div>
         </div>
@@ -139,14 +139,14 @@ const DPStatistic = ({ t, trader }) => {
             />
           </div>
           <div className="metric__description">
-            <span id={`program-my-share_${trader.id}`}>
-              {t("investor-dashboard.program-my-share.text")}
+            <span id={`my-share_${trader.id}`}>
+              {t("dashboard-statistic.my-share.text")}
             </span>
             <UncontrolledTooltip
               placement="bottom"
-              target={`program-my-share_${trader.id}`}
+              target={`my-share_${trader.id}`}
             >
-              {t("investor-dashboard.program-my-share.tooltip")}
+              {t("dashboard-statistic.my-share.tooltip")}
             </UncontrolledTooltip>
           </div>
         </div>

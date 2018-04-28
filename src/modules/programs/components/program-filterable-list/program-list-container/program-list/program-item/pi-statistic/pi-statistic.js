@@ -92,7 +92,7 @@ const TIStatistic = ({ t, trader }) => {
           <div className="metric__value">
             <NumberFormat
               value={trader.balance}
-              // decimalScale={2}
+              decimalScale={4}
               displayType="text"
             />
             <div className="metric__bubble">{trader.currency}</div>
@@ -115,7 +115,7 @@ const TIStatistic = ({ t, trader }) => {
           <div className="metric__value">
             <NumberFormat
               value={trader.profitTotal}
-              // decimalScale={2}
+              decimalScale={4}
               displayType="text"
             />
             <div className="metric__bubble">GVT</div>

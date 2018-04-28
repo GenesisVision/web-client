@@ -25,8 +25,6 @@
 
 .pis-item {
   min-width: 15%;
-  // max-width: 15%;
-  // height: 4.5rem;
   padding: 0.5rem;
   text-align: center;
   &:nth-of-type(odd) {
@@ -49,14 +47,12 @@
     }
   }
   .metric__value {
-    // line-height: 1.5;
     @include media-breakpoint-desktop() {
       font-size: 1.5rem;
     }
   }
 
   .metric__description {
-    // line-height: 0.5;
     @include media-breakpoint-desktop() {
       font-size: 0.7rem;
     }

@@ -26,10 +26,10 @@ const DashboardStatistic = ({
           </div>
           <div className="metric__description">
             <span id={`portfolio-value`}>
-              {t("investor-dashboard.portfolio-value.text")}
+              {t("dashboard-statistic.portfolio-value.text")}
             </span>
             <UncontrolledTooltip placement="bottom" target={`portfolio-value`}>
-              {t("investor-dashboard.portfolio-value.tooltip")}
+              {t("dashboard-statistic.portfolio-value.tooltip")}
             </UncontrolledTooltip>
           </div>
         </div>
@@ -45,9 +45,9 @@ const DashboardStatistic = ({
             <div className="metric__bubble">GVT</div>
           </div>
           <div className="metric__description">
-            <span id={`profit`}>{t("investor-dashboard.profit.text")}</span>
+            <span id={`profit`}>{t("dashboard-statistic.profit.text")}</span>
             <UncontrolledTooltip placement="bottom" target={`profit`}>
-              {t("investor-dashboard.profit.tooltip")}
+              {t("dashboard-statistic.profit.tooltip")}
             </UncontrolledTooltip>
           </div>
         </div>
@@ -63,9 +63,11 @@ const DashboardStatistic = ({
             <div className="metric__bubble">GVT</div>
           </div>
           <div className="metric__description">
-            <span id={`invested`}>{t("investor-dashboard.invested.text")}</span>
+            <span id={`invested`}>
+              {t("dashboard-statistic.invested.text")}
+            </span>
             <UncontrolledTooltip placement="bottom" target={`invested`}>
-              {t("investor-dashboard.invested.tooltip")}
+              {t("dashboard-statistic.invested.tooltip")}
             </UncontrolledTooltip>
           </div>
         </div>
