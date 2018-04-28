@@ -126,10 +126,12 @@ const DPStatistic = ({ t, trader }) => {
           <div className="metric__value">
             <NumberFormat
               value={
-                trader.investedTokens *
-                trader.token.initialPrice /
-                trader.balance *
-                100
+                trader.balance === 0
+                  ? 0
+                  : trader.investedTokens *
+                    trader.token.initialPrice /
+                    trader.balance *
+                    100
               }
               suffix="%"
               decimalScale={2}
