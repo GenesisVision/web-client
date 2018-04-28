@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import QueryString from "query-string";
+import qs from "qs";
 import React from "react";
 import ResetPassword from "./reset-password/reset-password";
 
@@ -11,7 +11,7 @@ const ResetPasswordContainer = ({
   errorMessage,
   resetPassword
 }) => {
-  const queryParams = QueryString.parse(location.search);
+  const queryParams = qs.parse(location.search.slice(1));
 
   const handleSubmit = (formData, setSubmitting) => {
     resetPassword(
