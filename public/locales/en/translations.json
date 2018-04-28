@@ -167,31 +167,6 @@
     "analytics": "Analytics",
     "programs": "Programs"
   },
-  "dashboard-statistic": {
-    "funds": {
-      "text": "Funds",
-      "tooltip":
-        "Funds – is the amount of money which is managed by the trader."
-    },
-    "investors": {
-      "text": "Investors",
-      "tooltip":
-        "Investors show the amount of investors who invested in the manager."
-    },
-    "end-of-next-period": {
-      "text": "End of next period",
-      "tooltip":
-        "End of next period shows the amount of days until the end of the nearest next trading period."
-    },
-    "profit": {
-      "text": "Profit",
-      "tooltip": "Profit is the total manager’s profit."
-    },
-    "my-profit": {
-      "text": "My profit",
-      "tooltip": "My profit is the total profit earned by all programs."
-    }
-  },
   "investor-dashboard": {
     "portfolio-value": {
       "text": "Portfolio Value",
