@@ -18,15 +18,15 @@
     max-height: 80px;
   }
   @include media-breakpoint-phone() {
-    max-height: 160px;
+    max-height: 100px;
     margin: 0;
   }
 }
 
 .pis-item {
   min-width: 15%;
-  max-width: 15%;
-  height: 4.5rem;
+  // max-width: 15%;
+  // height: 4.5rem;
   padding: 0.5rem;
   text-align: center;
   &:nth-of-type(odd) {
@@ -43,20 +43,20 @@
   }
 
   @include media-breakpoint-phone() {
-    padding: 0;
+    padding: 0.2rem;
     &:not(:last-of-type) {
       border-right: 0;
     }
   }
   .metric__value {
-    line-height: 1.5;
+    // line-height: 1.5;
     @include media-breakpoint-desktop() {
       font-size: 1.5rem;
     }
   }
 
   .metric__description {
-    line-height: 0.5;
+    // line-height: 0.5;
     @include media-breakpoint-desktop() {
       font-size: 0.7rem;
     }
