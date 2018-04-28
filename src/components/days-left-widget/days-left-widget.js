@@ -1,11 +1,12 @@
 import moment from "moment";
 import React from "react";
+import { translate } from "react-i18next";
 
 import Progress from "../../shared/components/progress/progress";
 
 import "./days-left-widget.css";
 
-const DaysLeftWidget = ({ start, end, duration }) => {
+const DaysLeftWidget = ({ t, start, end, duration }) => {
   const dateNow = moment();
   const startDate = moment(start);
 
@@ -19,9 +20,10 @@ const DaysLeftWidget = ({ start, end, duration }) => {
   const daysLeft = () => {
     return periodDuration - daysPassed();
   };
+  const days = daysLeft();
   return (
     <div className="days-left-widget">
-      <div className="days-left-widget__text">{daysLeft()} Days left</div>
+      <div className="days-left-widget__text">{days} {t("days-left-widget.text", { count: days })}</div>
       <div className="days-left-widget__progress">
         <Progress value={daysPassed()} max={periodDuration} />
       </div>
@@ -29,4 +31,4 @@ const DaysLeftWidget = ({ start, end, duration }) => {
   );
 };
 
-export default DaysLeftWidget;
+export default translate()(DaysLeftWidget);

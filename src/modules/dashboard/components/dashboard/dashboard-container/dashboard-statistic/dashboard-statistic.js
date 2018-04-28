@@ -1,13 +1,15 @@
 import NumberFormat from "react-number-format";
 import React from "react";
-
+import { translate } from "react-i18next";
+import { UncontrolledTooltip } from "reactstrap";
 import "./dashboard-statistic.css";
 
 const DashboardStatistic = ({
   hasPrograms,
   profitFromPrograms,
   investedAmount,
-  totalPortfolioAmount
+  totalPortfolioAmount,
+  t
 }) => {
   if (!hasPrograms) return null;
   return (
@@ -22,7 +24,14 @@ const DashboardStatistic = ({
             />
             <div className="metric__bubble">USD</div>
           </div>
-          <div className="metric__description">Portfolio Value</div>
+          <div className="metric__description">
+            <span id={`portfolio-value`}>
+              {t("dashboard-statistic.portfolio-value.text")}
+            </span>
+            <UncontrolledTooltip placement="bottom" target={`portfolio-value`}>
+              {t("dashboard-statistic.portfolio-value.tooltip")}
+            </UncontrolledTooltip>
+          </div>
         </div>
       </div>
       <div className="dashboard-statistic__cell">
@@ -35,7 +44,12 @@ const DashboardStatistic = ({
             />
             <div className="metric__bubble">GVT</div>
           </div>
-          <div className="metric__description">Profit</div>
+          <div className="metric__description">
+            <span id={`profit`}>{t("dashboard-statistic.profit.text")}</span>
+            <UncontrolledTooltip placement="bottom" target={`profit`}>
+              {t("dashboard-statistic.profit.tooltip")}
+            </UncontrolledTooltip>
+          </div>
         </div>
       </div>
       <div className="dashboard-statistic__cell">
@@ -48,11 +62,18 @@ const DashboardStatistic = ({
             />
             <div className="metric__bubble">GVT</div>
           </div>
-          <div className="metric__description">Invested</div>
+          <div className="metric__description">
+            <span id={`invested`}>
+              {t("dashboard-statistic.invested.text")}
+            </span>
+            <UncontrolledTooltip placement="bottom" target={`invested`}>
+              {t("dashboard-statistic.invested.tooltip")}
+            </UncontrolledTooltip>
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default DashboardStatistic;
+export default translate()(DashboardStatistic);
