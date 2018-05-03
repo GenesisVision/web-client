@@ -160,5 +160,14 @@
       "tooltip":
         "Est.value - the estimated USD value of your tokens from this investment program."
     }
+  },
+  "program-deposit": {
+    "header": "Buy Tokens",
+    "notification":
+      "Your request will be processed at the end of the reporting period.",
+    "available-to-invest": "Available To Invest",
+    "your-gvt": "Your GVT",
+    "enter-gvt-amount": "Enter GVT amount",
+    "amount-in-usd": "Amount in USD"
   }
 }
