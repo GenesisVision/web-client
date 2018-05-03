@@ -45,7 +45,8 @@ const mapDispatchToProps = dispatch => ({
   },
   toggleFavoriteProgram: program => () => {
     dispatch(programsService.toggleFavoriteProgram(program));
-  }
+  },
+  dispatch
 });
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
