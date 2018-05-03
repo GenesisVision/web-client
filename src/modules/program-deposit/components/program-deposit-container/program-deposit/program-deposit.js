@@ -86,7 +86,9 @@ const ProgramDeposit = ({
                 allowNegative={false}
               />
             </div>
-            <div className="input-gvt__description">Enter GVT amount</div>
+            <div className="input-gvt__description">
+              {t("program-deposit.enter-gvt-amount")}
+            </div>
           </div>
           <div className="program-deposit__calculator-cell calculated-usd">
             <div className="metric">
@@ -94,7 +96,7 @@ const ProgramDeposit = ({
                 {calculateManagerCurrency()}
               </div>
               <div className="metric__description">
-                Amount in {programDeposit.currency}
+                {t("program-deposit.amount-in")} {programDeposit.currency}
               </div>
             </div>
           </div>

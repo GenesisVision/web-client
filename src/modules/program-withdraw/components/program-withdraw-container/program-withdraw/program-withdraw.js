@@ -1,3 +1,4 @@
+import { translate } from "react-i18next";
 import { withFormik, Field } from "formik";
 import React from "react";
 import Yup from "yup";
@@ -12,6 +13,7 @@ import ProgramAvatar from "../../../../../components/program-avatar/program-avat
 import "./program-withdraw.css";
 
 const TraderWithdraw = ({
+  t,
   values,
   programWithdraw,
   handleSubmit,
@@ -25,7 +27,7 @@ const TraderWithdraw = ({
   };
   return (
     <div className="popup">
-      <PopupHeader header="Sell Tokens" onClose={closePopup} />
+      <PopupHeader header={t("program-withdraw.header")} onClose={closePopup} />
       <form id="programWithdrawForm" onSubmit={handleSubmit}>
         <div className="program-withdraw__info">
           <div className="program-withdraw__info-cell">
@@ -55,14 +57,15 @@ const TraderWithdraw = ({
                 {programWithdraw.investedTokens}
               </div>
               <div className="metric__description">
-                Invested {programWithdraw.token.tokenSymbol}
+                {t("program-withdraw.invested")}{" "}
+                {programWithdraw.token.tokenSymbol}
               </div>
             </div>
           </div>
         </div>
         <div className="program-withdraw__calculator">
           <div className="program-withdraw__calculator-header">
-            How much would you like to withdraw?
+            {t("program-withdraw.how-much-withdraw")}
           </div>
           <div className="program-withdraw__calculator-cell input-token">
             <div className="input-gvt__token">
@@ -76,12 +79,14 @@ const TraderWithdraw = ({
               />
             </div>
             <div className="input-token__description">
-              Enter {programWithdraw.token.tokenSymbol} amount
+              {t("program-withdraw.enter-amount", {
+                token: programWithdraw.token.tokenSymbol
+              })}
             </div>
           </div>
           <div>
             <span className="link" onClick={handleWithdrawAll}>
-              Withdraw all invested tokens
+              {t("program-withdraw.withdraw-all")}
             </span>
           </div>
         </div>
@@ -113,4 +118,4 @@ export default withFormik({
   handleSubmit: (values, { props, setSubmitting }) => {
     props.submitPopup(values, setSubmitting);
   }
-})(TraderWithdraw);
+})(translate()(TraderWithdraw));
