@@ -8,7 +8,7 @@ const fetchPrograms = (
 ) => {
   return {
     type: actionTypes.TOURNAMENT_PROGRAMS,
-    payload: SwaggerInvestorApi.apiInvestorPlatformStatusGet(filters).then(
+    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramsPost(filters).then(
       onResolve
     )
   };

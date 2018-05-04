@@ -1,10 +1,8 @@
 import { connect } from "react-redux";
+import Paging from "paging/components/paging/paging";
 import React from "react";
 
-import Paging from "paging/components/paging/paging";
-//import programsService from "../../../service/programs-service";
-
-//import "./program-list-paging-container.css";
+import tournamentService from "../../service/tournament-service";
 
 const TournamentPagingContainer = ({ paging, isPending, updatePaging }) => (
   <div className="tournament-paging-container">
@@ -19,8 +17,8 @@ const mapStateToProps = ({ programsData }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  /*updatePaging: paging =>
-    dispatch(tournamentService.changeProgramListPage(paging))*/
+  updatePaging: paging =>
+    dispatch(tournamentService.changeProgramListPage(paging))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(

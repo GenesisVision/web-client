@@ -1,5 +1,4 @@
 import { connect } from "react-redux";
-import { NOT_FOUND_PAGE_ROUTE } from "shared/components/not-found/not-found";
 import { Route, Redirect, Switch } from "react-router-dom";
 import React from "react";
 
@@ -9,7 +8,8 @@ import {
   TOURNAMENT_ROUTE,
   TOURNAMENT_ROUND_ROUTE
 } from "./tournament.constants";
-import replaceParams from "utils/replace-params";
+import { NOT_FOUND_PAGE_ROUTE } from "../../shared/components/not-found/not-found";
+import replaceParams from "../../utils/replace-params";
 
 const TournamentRoutes = ({ platformData }) => {
   const { data: platformSettings } = platformData;
@@ -39,5 +39,5 @@ const TournamentRoutes = ({ platformData }) => {
 };
 
 export default connect(state => ({
-  platformData: state.platforamData.settings
+  platformData: state.platformData.settings
 }))(TournamentRoutes);

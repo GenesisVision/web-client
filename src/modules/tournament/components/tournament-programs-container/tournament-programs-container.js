@@ -9,11 +9,6 @@ import tournamentService from "../../service/tournament-service";
 import { PROGRAM_DEPOSIT_POPUP } from "../../../popup/actions/popup-actions.constants";
 
 class TournamentContainer extends Component {
-  componentWillMount() {
-    const { getPrograms } = this.props;
-    getPrograms();
-  }
-
   render() {
     const {
       isPending,
@@ -41,9 +36,6 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  getPrograms: () => {
-    dispatch(tournamentService.getPrograms());
-  },
   toggleFavoriteProgram: program => () => {
     dispatch(programsService.toggleFavoriteProgram(program));
   },

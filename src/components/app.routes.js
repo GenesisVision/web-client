@@ -1,9 +1,7 @@
 import { Switch, Route, Redirect } from "react-router-dom";
 import React from "react";
 
-import NotFoundPage, {
-  NOT_FOUND_PAGE_ROUTE
-} from "../shared/components/not-found/not-found";
+import NotFoundPage from "../shared/components/not-found/not-found";
 import PrivateRoute from "../shared/components/private-route/private-route";
 
 import { DASHBOARD_ROUTE } from "../modules/dashboard/dashboard.constants";

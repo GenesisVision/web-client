@@ -1,9 +1,48 @@
+import {
+  calculateSkipAndTake,
+  calculateTotalPages
+} from "../../paging/helpers/paging-helpers";
+import authService from "../../../services/auth-service";
+import filesService from "../../../shared/services/file-service";
+import filteringActionsFactory from "../../filtering/actions/filtering-actions";
 import pagingActionsFactory from "../../paging/actions/paging-actions";
+import tournamentActions from "../actions/tournament-actions";
 
 import { TOURNAMENT_PROGRAMS } from "../actions/tournament-actions.constants";
-import filteringActionsFactory from "../../filtering/actions/filtering-actions";
 
-const getPrograms = () => dispatch => {};
+const getPrograms = () => (dispatch, getState) => {
+  const { paging } = getState().tournamentData.programs;
+  const { skip, take } = calculateSkipAndTake(paging);
+
+  const { filtering } = getState().tournamentData.programs;
+
+  let data = {
+    filter: { skip, take, equityChartLength: 365 }
+  };
+  if (authService.getAuthArg()) {
+    data.authorization = authService.getAuthArg();
+  }
+  if (filtering.round) {
+    data.filter.roundNumber = filtering.round;
+  }
+
+  const setLogoAndOrder = response => {
+    response.investmentPrograms.forEach((x, idx) => {
+      x.logo = filesService.getFileUrl(x.logo);
+      x.order = skip + idx + 1;
+    });
+
+    return response;
+  };
+
+  return dispatch(tournamentActions.fetchPrograms(data, setLogoAndOrder)).then(
+    response => {
+      const totalPages = calculateTotalPages(response.value.total, take);
+      dispatch(updateProgramListPaging({ totalPages }));
+      return response;
+    }
+  );
+};
 
 const updateProgramListPaging = paging => {
   const pagingActionsProgramList = pagingActionsFactory(TOURNAMENT_PROGRAMS);
@@ -32,5 +71,10 @@ const changeFilter = filter => dispatch => {
   dispatch(getPrograms());
 };
 
-const tournamentService = { getPrograms, changeProgramListPage, changeFilter };
+const tournamentService = {
+  getPrograms,
+  changeProgramListPage,
+  changeFilter,
+  updateFiltering
+};
 export default tournamentService;

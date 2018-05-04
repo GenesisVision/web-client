@@ -10,16 +10,16 @@ function tournamentProgramsSubReducer(state, action) {
       return {
         ...state,
         data: {
-          ...state.data
-          // investmentPrograms: state.data.investmentPrograms.map(program => {
-          //   if (program.id === action.payload.id) {
-          //     return {
-          //       ...program,
-          //       isFavorite: !program.isFavorite
-          //     };
-          //   }
-          //   return program;
-          // })
+          ...state.data,
+          investmentPrograms: state.data.investmentPrograms.map(program => {
+            if (program.id === action.payload.id) {
+              return {
+                ...program,
+                isFavorite: !program.isFavorite
+              };
+            }
+            return program;
+          })
         }
       };
     default:

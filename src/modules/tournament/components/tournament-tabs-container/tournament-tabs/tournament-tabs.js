@@ -3,27 +3,25 @@ import React from "react";
 
 import "./tournament-tabs.css";
 
-const TournamentTab = ({ isActive, text, onFilterChange }) => (
+const TournamentTab = ({ roundNo, activeRound, onFilterChange }) => (
   <span
     className={classnames("tournament-tab", {
-      "tournament-tab--active": isActive
+      "tournament-tab--active": activeRound === roundNo
     })}
-    onClick={onFilterChange()}
+    onClick={onFilterChange(roundNo)}
   >
-    {text}
+    {`Round ${roundNo}`}
   </span>
 );
 
-const TournamentTabs = ({ activeRound, onFilterChange }) => {
-  const roundsCount = 4;
-
+const TournamentTabs = ({ activeRound, roundsCount, onFilterChange }) => {
   return (
     <div className="tournament-tabs">
       {[...Array(roundsCount).keys()].map(x => (
         <TournamentTab
           key={x}
-          text={`Round ${x + 1}`}
-          isActive={activeRound === x + 1}
+          roundNo={x + 1}
+          activeRound={activeRound}
           onFilterChange={onFilterChange}
         />
       ))}

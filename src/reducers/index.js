@@ -23,7 +23,7 @@ import walletReducer from "../modules/wallet/reducers/wallet-reducers";
 export default combineReducers({
   routing: routerReducer,
   loadingBar: loadingBarReducer,
-  platforamData: platformReducer,
+  platformData: platformReducer,
   tournamentData: tournamentReducer,
   programsData: programsReducer,
   programData: programReducer,

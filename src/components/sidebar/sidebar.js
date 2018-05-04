@@ -59,7 +59,7 @@ const Sidebar = ({ platformData }) => {
 
 export default connect(
   state => ({
-    platformData: state.platforamData.settings
+    platformData: state.platformData.settings
   }),
   null,
   null,

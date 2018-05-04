@@ -4,7 +4,7 @@ import { TOURNAMENT_PROGRAMS } from "../actions/tournament-actions.constants";
 
 const tournamentProgramsPagingReducer = pagingReducerFactory({
   type: TOURNAMENT_PROGRAMS,
-  paging: { itemsOnPage: 100 }
+  paging: { itemsOnPage: 10 }
 });
 
 export default tournamentProgramsPagingReducer;
