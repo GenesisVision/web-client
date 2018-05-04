@@ -23,7 +23,7 @@ class DashboardFilters extends Component {
           activeClassName="dashboard-program-tab--active"
           className={"dashboard-program-tab"}
         >
-          Favorite Programms
+          Favorite programs
         </NavLink>
       </div>
     );
