@@ -11,8 +11,8 @@ import clearDataActionFactory from "../../../shared/actions/clear-data.factory";
 
 const updateAfterInvestment = programId => dispatch => {
   return Promise.all([
-    dispatch(programActions.fetchTrader(programId)),
-    dispatch(programActions.fetchTraderRequests(programId))
+    dispatch(programActions.fetchProgram(programId)),
+    dispatch(getProgramRequests(programId))
   ]);
 };
 
