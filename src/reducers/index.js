@@ -8,6 +8,7 @@ import dashboardReducer from "../modules/dashboard/reducers/dashboard-reducers";
 import emailConfirmReducer from "../modules/email-confirm/reducers/email-confirm-reducers";
 import loginReducer from "../modules/login/reducers/login-reducers";
 import passwordResetReducer from "../modules/password-reset/reducers/password-reset-reducers";
+import platformReducer from "./platform-reducer";
 import popupReducer from "../modules/popup/reducers/popup-reducers";
 import profileReducer from "../modules/profile/reducers/profile-reducers";
 import programDepositReducer from "../modules/program-deposit/reducers/trader-deposit-reducers";
@@ -21,6 +22,7 @@ import walletReducer from "../modules/wallet/reducers/wallet-reducers";
 export default combineReducers({
   routing: routerReducer,
   loadingBar: loadingBarReducer,
+  platforamData: platformReducer,
   programsData: programsReducer,
   programData: programReducer,
   loginData: loginReducer,

@@ -4,11 +4,19 @@ import React from "react";
 import "./mobile-nav.css";
 import { DASHBOARD_ROUTE } from "../../modules/dashboard/dashboard.constants";
 import { PROGRAMS_ROUTE } from "../../modules/programs/programs.constants";
+import { TOURNAMENT_ROUTE } from "../../modules/tournament/tournament.constants";
 import { WALLET_ROUTE } from "../../modules/wallet/wallet.constants";
 
 const MobileNav = () => {
   return (
     <div className="mobile-nav">
+      <NavLink
+        className="mobile-nav__item"
+        title="Tournament"
+        to={TOURNAMENT_ROUTE}
+      >
+        Tournament
+      </NavLink>
       <NavLink
         className="mobile-nav__item"
         title="Programs"

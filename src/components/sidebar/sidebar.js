@@ -1,3 +1,4 @@
+import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import React from "react";
 
@@ -13,10 +14,25 @@ import {
   WalletIcon,
   TradersIcon
 } from "./media/icons.js";
+import { TOURNAMENT_ROUTE } from "../../modules/tournament/tournament.constants";
 
-const Sidebar = () => {
+const Sidebar = ({ platformData }) => {
+  const { data: platformSettings } = platformData;
+  const shouldRenderTournament =
+    platformSettings && platformSettings.isTournamentActive;
   return (
     <div className="sidebar">
+      {shouldRenderTournament && (
+        <div className="nav-item sidebar__item">
+          <NavLink
+            className="nav-link"
+            title="Tournament"
+            to={TOURNAMENT_ROUTE}
+          >
+            <i className="fas fa-trophy" />
+          </NavLink>
+        </div>
+      )}
       <div className="nav-item sidebar__item">
         <NavLink className="nav-link" title="Programs" to={PROGRAMS_ROUTE}>
           <TradersIcon />
@@ -41,4 +57,11 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default connect(
+  state => ({
+    platformData: state.platforamData.settings
+  }),
+  null,
+  null,
+  { pure: false }
+)(Sidebar);
