@@ -30,6 +30,10 @@
   color: $text-sub-color;
   font-size: 0.8rem;
   line-height: 0.8;
+  &:hover {
+    cursor: pointer;
+    text-decoration: none;
+  }
   @include media-breakpoint-desktop() {
     font-size: 0.8rem;
   }

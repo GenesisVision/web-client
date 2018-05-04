@@ -161,6 +161,10 @@
         "Est.value - the estimated USD value of your tokens from this investment program."
     }
   },
+  "dashboard": {
+    "portfolio": "Portfolio",
+    "favorite-programs": "Favorite programs"
+  },
   "program-deposit": {
     "header": "Buy Tokens",
     "notification":
