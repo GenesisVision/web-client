@@ -1,8 +1,10 @@
 import { connect } from "react-redux";
-import Paging from "paging/components/paging/paging";
 import React from "react";
 
+import Paging from "../../../paging/components/paging/paging";
 import tournamentService from "../../service/tournament-service";
+
+import "./tournament-paging-container.css";
 
 const TournamentPagingContainer = ({ paging, isPending, updatePaging }) => (
   <div className="tournament-paging-container">
@@ -10,9 +12,9 @@ const TournamentPagingContainer = ({ paging, isPending, updatePaging }) => (
   </div>
 );
 
-const mapStateToProps = ({ programsData }) => {
-  const { paging } = programsData.programs;
-  const { isPending } = programsData.programs.items;
+const mapStateToProps = ({ tournamentData }) => {
+  const { paging } = tournamentData.programs;
+  const { isPending } = tournamentData.programs.items;
   return { paging, isPending };
 };
 

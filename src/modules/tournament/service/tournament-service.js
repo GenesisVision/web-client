@@ -71,10 +71,14 @@ const changeFilter = filter => dispatch => {
   dispatch(getPrograms());
 };
 
+const updateAfterInvestment = () => dispatch => {
+  return Promise.all([dispatch(getPrograms())]);
+};
+
 const tournamentService = {
   getPrograms,
   changeProgramListPage,
   changeFilter,
-  updateFiltering
+  updateAfterInvestment
 };
 export default tournamentService;

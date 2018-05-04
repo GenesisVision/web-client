@@ -45,7 +45,7 @@ const mapDispatchToProps = dispatch => ({
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const { dispatch, ...otherDispatchProps } = dispatchProps;
   const closeInvestPopup = () => {
-    return programsService.updateAfterInvestment();
+    return tournamentService.updateAfterInvestment();
   };
   return {
     ...stateProps,
