@@ -15,6 +15,11 @@ const TournamentRoutes = ({ platformData }) => {
   const { data: platformSettings } = platformData;
   const isTournamentActive =
     platformSettings && platformSettings.isTournamentActive;
+
+  if (!platformSettings || platformData.isPending) {
+    return null;
+  }
+
   if (!isTournamentActive) {
     return <Redirect to={NOT_FOUND_PAGE_ROUTE} />;
   }

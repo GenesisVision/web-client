@@ -16,6 +16,7 @@ import programReducer from "../modules/program/reducers/trader-reducers";
 import programsReducer from "../modules/programs/reducers/programs-reducers";
 import programWithdrawReducer from "../modules/program-withdraw/reducers/program-withdraw-reducers";
 import registerReducer from "../modules/register/reducers/register-reducers";
+import tournamentReducer from "../modules/tournament/reducers/tournament-reducers";
 import walletPaneReducer from "../modules/wallet-pane/reducers/wallet-pane-reducers";
 import walletReducer from "../modules/wallet/reducers/wallet-reducers";
 
@@ -23,6 +24,7 @@ export default combineReducers({
   routing: routerReducer,
   loadingBar: loadingBarReducer,
   platforamData: platformReducer,
+  tournamentData: tournamentReducer,
   programsData: programsReducer,
   programData: programReducer,
   loginData: loginReducer,
