@@ -37,20 +37,6 @@ const PIInfo = ({ order, program, isAuthenticated, toggleFavoriteProgram }) => {
           isTournament={program.isTournament}
         />
       </Link>
-      <div className="pi-info__name pi-name">
-        <div className="pi-name__title">
-          {isAuthenticated && (
-            <PIBookmark
-              isFavorite={program.isFavorite}
-              onClick={toggleFavoriteProgram(program)}
-            />
-          )}
-          <Link className="pi-name__link" to={programRoute}>
-            {program.title}
-          </Link>
-        </div>
-        <div className="pi-name__eop">{renderDaysLeft()}</div>
-      </div>
     </div>
   );
 };
