@@ -29,6 +29,7 @@
   text-align: center;
   @include media-breakpoint-phone() {
     margin: 0.5rem;
+    width: 62px;
   }
 }
 
@@ -45,17 +46,17 @@
 .pi-name__title {
   display: flex;
   align-items: center;
+  margin-bottom: 0.5rem;
+  position: relative;
 }
 
 .pi-name__link {
   font-size: 1.6rem;
+  line-height: 1.1;
   color: $text-color;
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
-  &:hover {
-    text-decoration: none;
-  }
 }
 
 .pi-name__description {

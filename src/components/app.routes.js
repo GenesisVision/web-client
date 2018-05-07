@@ -30,6 +30,8 @@ import ProgramsRoutes from "../modules/programs/programs.routes";
 import WalletRoutes from "../modules/wallet/wallet.routes";
 import { EMAIL_CONFIRM_ROUTE } from "../modules/email-confirm/email-confirm.constants";
 import EmailConfirmRoutes from "../modules/email-confirm/email-confirm.routes";
+import { TOURNAMENT_ROUTE } from "../modules/tournament/tournament.constants";
+import TournamentRoutes from "../modules/tournament/tournament.routes";
 
 const AppRoutes = () => (
   <Switch>
@@ -39,15 +41,12 @@ const AppRoutes = () => (
     <Route path={LOGIN_ROUTE} component={LoginRoutes} />
     <Route path={REGISTER_ROUTE} component={RegisterRoutes} />
     <Route path={PROGRAM_ROUTE} component={ProgramRoutes} />
+    <Route path={TOURNAMENT_ROUTE} component={TournamentRoutes} />
     <Route path={PROGRAMS_ROUTE} component={ProgramsRoutes} />
     <PrivateRoute path={PROFILE_ROUTE} component={ProfileRoutes} />
     <PrivateRoute path={DASHBOARD_ROUTE} component={DashboardRoutes} />
     <PrivateRoute path={WALLET_ROUTE} component={WalletRoutes} />
-    <Route
-      exact
-      path={HOME_ROUTE}
-      render={() => <Redirect to={PROGRAMS_ROUTE} />}
-    />
+    <Redirect exact from={HOME_ROUTE} to={PROGRAMS_ROUTE} />
     <Route component={NotFoundPage} />
   </Switch>
 );

@@ -1,0 +1,21 @@
+@import "styles/_colors.scss";
+
+.tournament-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  background: white;
+}
+
+.tournament-tab {
+  cursor: pointer;
+  color: $text-color;
+  margin: 0 2rem;
+  padding: 0.5rem 1rem;
+}
+
+.tournament-tab--active {
+  color: $alternate-color;
+  border-bottom: 3px solid $alternate-color;
+}

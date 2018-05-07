@@ -9,12 +9,7 @@ import TraderAvatar from "../../program-avatar/program-avatar";
 import "./pi-info.css";
 import { PROGRAM_ROUTE } from "../../../modules/program/program.constants";
 
-const PIInfo = ({
-  order,
-  program,
-  isAuthenticated,
-  toggleFavoriteProgram
-}) => {
+const PIInfo = ({ order, program, isAuthenticated, toggleFavoriteProgram }) => {
   const renderDaysLeft = () => {
     if (program.isEnabled) {
       return (
@@ -40,7 +35,9 @@ const PIInfo = ({
       </Link>
       <div className="pi-info__name pi-name">
         <div className="pi-name__title">
-          <Link className="pi-name__link" to={programRoute}>{program.title}</Link>
+          <Link className="pi-name__link" to={programRoute}>
+            {program.title}
+          </Link>
           {isAuthenticated && (
             <PIBookmark
               isFavorite={program.isFavorite}

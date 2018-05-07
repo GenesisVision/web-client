@@ -1,7 +1,7 @@
-import React from 'react'
+import React from "react";
 
-const NotFoundPage = () => (
-  <div>Page Not Found</div>
-)
+export const NOT_FOUND_PAGE_ROUTE = "/404";
 
-export default NotFoundPage
+const NotFoundPage = () => <div>Page Not Found</div>;
+
+export default NotFoundPage;

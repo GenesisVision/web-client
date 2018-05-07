@@ -1,3 +1,4 @@
+@import "styles/_breakpoint.scss";
 @import "styles/_colors.scss";
 
 .sidebar {
@@ -24,10 +25,15 @@
     margin-bottom: 0;
   }
   .nav-link {
-    color: $text-color;
+    color: $inactive-icon-color;
     box-sizing: content-box;
     padding: 1.3rem 1rem;
     border-left: 4px solid transparent;
+
+    @include media-breakpoint-phone() {
+      color: $text-color;
+    }
+
     &:hover {
       .dashboard,
       .wallet {
