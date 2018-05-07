@@ -1,21 +1,15 @@
 @import "styles/_breakpoint.scss";
 .pi-buttons {
   display: flex;
-  order: 4;
-  flex-direction: column;
-  max-width: 150px;
-
   @include media-breakpoint-desktop() {
     order: 3;
   }
   @include media-breakpoint-phone() {
-    flex-direction: row;
-    min-width: 100%;
-    justify-content: center;
+    width: 100%;
+    justify-content: space-between;
   }
 }
 
 .pi-button {
   margin: 1rem;
-  min-width: 110px;
 }
