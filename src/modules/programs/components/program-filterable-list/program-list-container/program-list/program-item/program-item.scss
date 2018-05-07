@@ -3,12 +3,25 @@
 
 .program-item {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 190px;
-  padding: 1rem 2rem;
-  border-bottom: 1px solid $border-color;
+  flex-wrap: nowrap;
+  align-items: flex-start;  
+  margin-top: 10px;
+  background-color: white;
+  border: 1px solid $border-color;
+
+  hr {
+    min-width: 100%;
+  }
+
+  &__content {
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    padding: 1rem 0;
+  }
+
+
+
   @include media-breakpoint-phone() {
     padding: 0.5rem;
   }

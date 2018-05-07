@@ -1,9 +1,7 @@
 @import "styles/_breakpoint.scss";
 .pi-buttons {
   display: flex;
-  @include media-breakpoint-desktop() {
-    order: 3;
-  }
+  flex-wrap: nowrap;
   @include media-breakpoint-phone() {
     width: 100%;
     justify-content: space-between;
@@ -11,5 +9,5 @@
 }
 
 .pi-button {
-  margin: 1rem;
+  margin: 0 1rem;
 }
