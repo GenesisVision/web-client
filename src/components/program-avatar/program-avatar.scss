@@ -20,6 +20,20 @@
   }
 }
 
+.program-avatar__tournament {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  color: $main-color;
+  background-color: $background-color;
+  display: inline-block;
+  padding: 0.3em;
+  line-height: 1;
+  @include media-breakpoint-phone() {
+    font-size: 0.8rem;
+  }
+}
+
 .program-avatar__level {
   position: absolute;
   bottom: 0px;

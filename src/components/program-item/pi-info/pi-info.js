@@ -31,7 +31,11 @@ const PIInfo = ({ order, program, isAuthenticated, toggleFavoriteProgram }) => {
     <div className="pi-info">
       <div className="pi-info__order">{order}</div>
       <Link className="pi-info__image" to={programRoute}>
-        <TraderAvatar imgUrl={program.logo} level={program.level} />
+        <TraderAvatar
+          imgUrl={program.logo}
+          level={program.level}
+          isTournament={program.isTournament}
+        />
       </Link>
       <div className="pi-info__name pi-name">
         <div className="pi-name__title">
