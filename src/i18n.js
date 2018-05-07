@@ -18,6 +18,10 @@ i18n
     },
     react: {
       wait: true
+    },
+    detection: {
+      lookupLocalStorage: "i18next_investor",
+      excludeCacheFor: ["en"]
     }
   });
 
