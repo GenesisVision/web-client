@@ -19,9 +19,8 @@ i18n
     react: {
       wait: true
     },
-    detection: {
-      lookupLocalStorage: "i18next_investor",
-      excludeCacheFor: ["en"]
+    backend: {
+      queryStringParams: { v: "0.0.1" }
     }
   });
 
