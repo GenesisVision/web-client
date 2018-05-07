@@ -1,18 +1,19 @@
 @import "styles/_colors.scss";
 
 .pi-bookmark {
-  color: #ccd5d4;
+  color: $inactive-icon-color;
   font-size: 1rem;
-  margin-left: 1rem;
   cursor: pointer;
+  position: absolute;
+  right: -14px;
+  line-height: 2;
 
   &:hover {
     text-shadow: 0px 0px 2px lighten($text-color-light, 5%);
   }
 
   &:active {
-    color: darken( $alternate-color, 5% )
-    ;
+    color: darken($alternate-color, 5%);
   }
 
   &--active {
