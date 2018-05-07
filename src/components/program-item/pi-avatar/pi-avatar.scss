@@ -1,0 +1,46 @@
+@import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
+
+$avatar-size: 112px;
+$mobile-avatar-size: 62px;
+
+.pi-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: $avatar-size;
+  height: $avatar-size;
+  position: relative;
+
+  &__label {
+    position: absolute;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 28px;
+    width: 28px;
+  }
+
+  &__tournament {
+    top: 0;
+    left: 0;
+    color: $main-color;
+    background-color: $background-color;
+  }
+
+  &__level {
+    bottom: 0;
+    right: 0;
+    color: white;
+    background-color: $alternate-color;
+  }
+
+  &__image {
+    max-height: 100%;
+    max-width: 100%;
+    @include media-breakpoint-phone() {
+      max-width: $mobile-avatar-size;
+      max-height: $mobile-avatar-size;
+    }
+  }
+}

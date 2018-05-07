@@ -26,7 +26,7 @@ const ProgramItem = ({
         isAuthenticated={isAuthenticated}
         toggleFavoriteProgram={toggleFavoriteProgram}
       />
-      <PIChart data={program.equityChart} />
+      {/* <PIChart data={program.equityChart} /> */}
       <PIStatistic trader={program} />
       <PTIButtons
         programId={program.id}
