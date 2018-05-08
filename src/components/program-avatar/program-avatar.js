@@ -7,11 +7,9 @@ import "./program-avatar.css";
 const ProgramAvatar = ({ url, className }) => {
   const src = url ? fileService.getFileUrl(url) : avatarStub;
   return (
-    <img
-      className={classnames("program-avatar__image", className)}
-      src={src}
-      alt="Trader Avatar"
-    />
+    <div className={classnames("program-avatar", className)}>
+      <img className="program-avatar__image" src={src} alt="Trader Avatar" />
+    </div>
   );
 };
 
