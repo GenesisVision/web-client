@@ -1,6 +1,4 @@
 import programsActions from "../actions/programs-actions";
-import walletActions from "../../wallet/actions/wallet-actions";
-import walletPaneActions from "../../wallet-pane/actions/wallet-pane-actions";
 
 import {
   LEVEL_MAX,
@@ -109,12 +107,7 @@ const updateFiltering = filter => dispatch => {
 };
 
 const updateAfterInvestment = () => dispatch => {
-  return Promise.all([
-    dispatch(getPrograms()),
-    dispatch(walletPaneActions.fetchWalletPaneChart()),
-    dispatch(walletPaneActions.fetchWalletPaneTransactions()),
-    dispatch(walletActions.fetchWallet())
-  ]);
+  return Promise.all([dispatch(getPrograms())]);
 };
 
 const closeFilterPane = () => {
