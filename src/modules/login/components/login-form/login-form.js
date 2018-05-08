@@ -4,7 +4,7 @@ import React from "react";
 
 import FormError from "../../../../shared/components/form/form-error/form-error";
 import InputText from "../../../../shared/components/form/input-text/input-text";
-
+import Button from "../../../../components/button/button";
 import "./login-form.css";
 import { FORGOT_PASSWORD_ROUTE } from "../../../password-reset/password-reset.constants";
 import { REGISTER_ROUTE } from "../../../register/register.constants";
@@ -45,28 +45,26 @@ const LoginForm = ({
           Forgot password
         </Link>
         <FormError error={error} />
-
-        <button
-          type="submit"
+        <Button
+          label="Sign in"
           id="loginSubmit"
-          className="gv-btn gv-btn-primary"
+          primary
           disabled={isSubmitting}
-        >
-          Sign in
-        </button>
+        />
         <div className="login__separator" />
-        <a
+        <Button
+          label="Login as Manager"
           href={process.env.REACT_APP_MANAGER_PORTAL_URL}
-          className="login__btn gv-btn gv-btn-secondary"
-        >
-          Login as Manager
-        </a>
-        <Link
-          to={REGISTER_ROUTE}
-          className="login__btn gv-btn gv-btn-secondary"
-        >
-          Don’t have an account? Sign Up!
-        </Link>
+          className="login__btn"
+          secondary
+        />
+        <Button
+          fullWidth
+          label="Don’t have an account? Sign Up!"
+          href={REGISTER_ROUTE}
+          secondary
+          className="login__btn"
+        />
       </div>
     </form>
   );
