@@ -39,16 +39,6 @@
     "uuid": "^3.2.1",
     "yup": "^0.24.1"
   },
-  "scripts": {
-    "build-css": "node-sass-chokidar --include-path ./src src/ -o src/",
-    "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src src/ -o src/ --watch --recursive",
-    "start-js": "react-scripts start",
-    "start": "npm-run-all -p watch-css start-js",
-    "build-js": "react-scripts build",
-    "build": "npm-run-all build-css build-js",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  },
   "devDependencies": {
     "babel-jest": "22.4.3",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
@@ -56,7 +46,26 @@
     "babel-preset-react": "^6.24.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
+    "eslint-plugin-prettier": "^2.6.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.1.0",
+    "prettier": "^1.12.1",
     "react-test-renderer": "^16.2.0",
     "redux-devtools": "^3.4.1"
+  },
+  "scripts": {
+    "precommit": "lint-staged",
+    "build-css": "node-sass-chokidar --include-path ./src src/ -o src/",
+    "watch-css":
+      "npm run build-css && node-sass-chokidar --include-path ./src src/ -o src/ --watch --recursive",
+    "start-js": "react-scripts start",
+    "start": "npm-run-all -p watch-css start-js",
+    "build-js": "react-scripts build",
+    "build": "npm-run-all build-css build-js",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "lint-staged": {
+    "*.{js,json,scss,md}": ["prettier --write", "git add"]
   }
 }

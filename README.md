@@ -1,6 +1,6 @@
 # investor-web-portal
 
-Genesis Vision Platform Investor SPA. 
+Genesis Vision Platform Investor SPA.
 
 ### Getting started
 
@@ -25,3 +25,9 @@ Launches the test runner in the interactive watch mode.
 #### `yarn build`
 
 Builds the app for production to the `build` folder.
+
+###Code formatter
+
+This project uses Prettier code formatter.
+<br>Code formatting will be applied on every commit.
+<br>Install [extension](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) if you want to apply code formatting on file save.
