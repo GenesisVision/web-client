@@ -1,12 +1,11 @@
 @import "styles/_colors.scss";
 
 .pi-bookmark {
+  margin-right: 1rem;
   color: $inactive-icon-color;
-  font-size: 1rem;
   cursor: pointer;
-  position: absolute;
-  right: -14px;
-  line-height: 2;
+  font-size: 1rem;
+  line-height: 1.4;
 
   &:hover {
     text-shadow: 0px 0px 2px lighten($text-color-light, 5%);
