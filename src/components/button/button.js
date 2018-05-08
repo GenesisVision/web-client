@@ -1,7 +1,8 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import classnames from "classnames";
 import PropTypes from "prop-types";
-import './button.css';
+import "./button.css";
 
 export default class Button extends Component {
   static propTypes = {
@@ -10,7 +11,9 @@ export default class Button extends Component {
     disabled: PropTypes.bool,
     fullWidth: PropTypes.bool,
     primary: PropTypes.bool,
-    secondary: PropTypes.bool
+    secondary: PropTypes.bool,
+    onClick: PropTypes.func,
+    href: PropTypes.string
   };
 
   static defaultProps = {
@@ -28,17 +31,30 @@ export default class Button extends Component {
       disabled,
       primary,
       secondary,
-      style
+      style,
+      href,
+      onClick,
+      fullWidth,
+      ...other
     } = this.props;
-    return (
+    const cn = classnames("gv-btn", className, {
+      "gv-btn--full-width": fullWidth,
+      "gv-btn--disabled": disabled,
+      "gv-btn--primary": primary,
+      "gv-btn--secondary": secondary
+    });
+    return href ? (
+      <Link className={cn} to={href} title={label} {...other}>
+        {label}
+      </Link>
+    ) : (
       <button
         disabled={disabled}
-        className={classnames("gv-btn", className, {
-          "gv-btn--disabled": disabled,
-          "gv-btn--primary": primary,
-          "gv-btn--secondary": secondary
-        })}
+        className={cn}
+        onClick={onClick}
         style={style}
+        title={label}
+        {...other}
       >
         {label}
       </button>
