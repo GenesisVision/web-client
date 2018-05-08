@@ -38,9 +38,16 @@ $mobile-avatar-size: 62px;
   &__image {
     max-height: 100%;
     max-width: 100%;
-    @include media-breakpoint-phone() {
-      max-width: $mobile-avatar-size;
-      max-height: $mobile-avatar-size;
+  }
+
+  @include media-breakpoint-phone() {
+    width: $mobile-avatar-size;
+    height: $mobile-avatar-size;
+
+    &__label {
+      font-size: 13px;
+      height: 22px;
+      width: 22pX;
     }
   }
 }

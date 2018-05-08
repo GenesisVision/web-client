@@ -1,13 +1,14 @@
 import React, { Component } from "react";
+import classnames from "classnames";
 import ProgramAvatar from "../../program-avatar/program-avatar";
 
 import "./pi-avatar.css";
 
-export default class PIAvatar extends Component {
+class PIAvatar extends Component {
   render() {
-    const { url, level } = this.props;
+    const { url, level, className } = this.props;
     return (
-      <div className="pi-avatar">
+      <div className={classnames("pi-avatar", className)}>
         {true && (
           <span className="pi-avatar__label pi-avatar__tournament">
             <i className="fas fa-trophy" />
@@ -19,3 +20,5 @@ export default class PIAvatar extends Component {
     );
   }
 }
+
+export default PIAvatar;
