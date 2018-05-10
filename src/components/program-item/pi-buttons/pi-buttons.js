@@ -20,9 +20,14 @@ const PIButtons = ({
   return (
     <div className="pi-buttons">
       <Link to={traderRoute}>
-        <Button disabled primary className="pi-button" label="View Profile"/>
+        <Button disabled primary className="pi-button" label="View Profile" />
       </Link>
-      <Button primary className="pi-button" label="Invest" onClick={openInvestPopup(programId)} />
+      <Button
+        primary
+        className="pi-button"
+        label="Invest"
+        onClick={openInvestPopup(programId)}
+      />
     </div>
   );
 };
