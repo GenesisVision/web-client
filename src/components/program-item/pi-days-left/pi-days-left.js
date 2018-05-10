@@ -1,0 +1,28 @@
+import React from "react";
+import PropTypes from "prop-types";
+import classnames from 'classnames';
+import DaysLeftWidget from "../../days-left-widget/days-left-widget";
+
+const propTypes = {
+  isEnabled: PropTypes.bool.isRequired,
+  startOfPeriod: PropTypes.string.isRequired,
+	periodDuration: PropTypes.string.isRequired,
+	className: PropTypes.string
+};
+
+const defaultProps = {
+	className: ""
+}
+
+const DaysLeft = props => {
+  const { isEnabled, startOfPeriod, periodDuration, className } = props;
+  if (isEnabled) {
+    return <DaysLeftWidget className={className} start={startOfPeriod} duration={periodDuration} />;
+  }
+
+  return <div>The program is not enabled</div>;
+};
+
+DaysLeft.propTypes = propTypes;
+DaysLeft.defaultProps = defaultProps;
+export default DaysLeft;
