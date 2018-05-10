@@ -1,6 +1,6 @@
 import authService from "../../../services/auth-service";
 import filesService from "../../../shared/services/file-service";
-import SwaggerManagerApi from "../../../services/api-client/swagger-manager-api";
+import SwaggerInvestorApi from "../../../services/api-client/swagger-investor-api";
 
 import * as actionTypes from "./program-actions.constants";
 
@@ -12,7 +12,7 @@ const fetchProgram = programId => {
 
   return {
     type: actionTypes.PROGRAM_DETAIL,
-    payload: SwaggerManagerApi.apiManagerInvestmentProgramGet(
+    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramGet(
       programId,
       data
     ).then(response => {
@@ -26,7 +26,7 @@ const fetchProgram = programId => {
 const fetchProgramHistory = programId => {
   return {
     type: actionTypes.PROGRAM_HISTORY,
-    payload: SwaggerManagerApi.apiManagerInvestmentProgramTradesChartGet(
+    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramTradesChartGet(
       programId
     )
   };
@@ -35,7 +35,7 @@ const fetchProgramHistory = programId => {
 const fetchProgramRequests = filter => {
   return {
     type: actionTypes.PROGRAM_REQUESTS,
-    payload: SwaggerManagerApi.apiManagerInvestmentProgramRequestsPost(
+    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramRequestsPost(
       authService.getAuthArg(),
       { filter }
     )
@@ -45,7 +45,7 @@ const fetchProgramRequests = filter => {
 const fetchProgramDeals = filter => {
   return {
     type: actionTypes.PROGRAM_DEALS,
-    payload: SwaggerManagerApi.apiManagerInvestmentProgramTradesPost({
+    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramTradesPost({
       filter
     })
   };
@@ -54,7 +54,7 @@ const fetchProgramDeals = filter => {
 const cancelProgramRequest = requestId => {
   return {
     type: actionTypes.PROGRAM_CANCEL_REQUEST,
-    payload: SwaggerManagerApi.apiManagerInvestmentCancelInvestmentRequestPost(
+    payload: SwaggerInvestorApi.apiInvestorInvestmentCancelInvestmentRequestPost(
       requestId,
       authService.getAuthArg()
     )
