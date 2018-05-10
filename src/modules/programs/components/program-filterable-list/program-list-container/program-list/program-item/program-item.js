@@ -61,7 +61,10 @@ const ProgramItem = ({
             periodDuration={program.periodDuration}
           />
         </div>
-
+        <div className="program-item__chart">
+          <PIChart data={program.equityChart} />
+        </div>
+        <hr />
         <div className="program-item__buttons">
           <Button
             primary
@@ -77,7 +80,9 @@ const ProgramItem = ({
             href={isAuthenticated ? "" : LOGIN_ROUTE}
           />
         </div>
-        <PIStatistic className="program-item__stats" trader={program} />
+        <div className="program-item__stats">
+          <PIStatistic trader={program} />
+        </div>
       </div>
     </div>
   );

@@ -5,9 +5,9 @@ import { UncontrolledTooltip } from "reactstrap";
 
 import "./pi-statisctic.css";
 
-const TIStatistic = ({ t, trader }) => {
+const TIStatistic = ({ t, trader, className = "" }) => {
   return (
-    <div className="pi-statistic">
+    <div className={`pi-statistic ${className}`}>
       <div className="pis-item">
         <div className="metric">
           <div className="metric__value">
@@ -69,6 +69,7 @@ const TIStatistic = ({ t, trader }) => {
           </div>
         </div>
       </div>
+      <hr/>
       <div className="pis-item">
         <div className="metric">
           <div className="metric__value">{trader.investorsCount}</div>
