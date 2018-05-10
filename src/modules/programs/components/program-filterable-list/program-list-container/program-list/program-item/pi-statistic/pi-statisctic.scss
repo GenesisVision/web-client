@@ -6,29 +6,39 @@
   flex: 1;
   flex-direction: row;
   align-items: center;
-  // margin: 0 1rem;
+  justify-content: space-between;
+
+  hr {
+    display: none;
+  }
 
   @include media-breakpoint-desktop() {
     // min-width: 100%;
     // max-height: 80px;
   }
   @include media-breakpoint-phone() {
+    flex-wrap: wrap;
     max-height: 100px;
-    margin: 0;
+    margin: 1rem 0;
+    hr {
+      display: flex;
+      flex: 1 0 100%;
+    }
   }
+
 }
 
 .pis-item {
   min-width: 15%;
-  padding: 0.5rem;
+  // padding: 0.5rem;
   text-align: center;
   &:nth-of-type(odd) {
-    border-bottom: 2px solid $border-color;
+    border-bottom: 1px solid $border-color;
   }
 
   @include media-breakpoint-desktop() {
     &:not(:last-of-type) {
-      border-right: 2px solid $border-color;
+      border-right: 1px solid $border-color;
     }
     &:nth-of-type(odd) {
       border-bottom: 0;
@@ -36,7 +46,6 @@
   }
 
   @include media-breakpoint-phone() {
-    padding: 0.2rem;
     &:not(:last-of-type) {
       border-right: 0;
     }
@@ -48,9 +57,7 @@
   }
 
   .metric__description {
-    @include media-breakpoint-desktop() {
-      font-size: 0.7rem;
-    }
+    font-size: 0.875rem;
   }
 }
 
