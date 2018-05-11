@@ -6,23 +6,29 @@ import { push } from "react-router-redux";
 import tournamentService from "../../service/tournament-service";
 import TournamentTabs from "./tournament-tabs/tournament-tabs";
 import replaceParams from "../../../../utils/replace-params";
-import { TOURNAMENT_ROUND_ROUTE } from "../../tournament.constants";
+import {
+  TOURNAMENT_ROUND_ROUTE,
+  ROUND_NUMBER_FILTER_NAME
+} from "../../tournament.constants";
+import { normalizeFilteringSelector } from "../../../filtering/selectors/filtering-selectors";
 
 class TournamentTabsContainer extends Component {
   componentDidMount() {
     const { match } = this.props;
     this.props.handleFilterChange({
-      name: "round",
+      name: ROUND_NUMBER_FILTER_NAME,
       value: +match.params.round
     });
   }
 
   componentWillUpdate(nextProps) {
-    const { match } = nextProps;
-    const { filtering } = this.props;
-    if (+match.params.round !== filtering.round) {
+    const { match, filtering } = nextProps;
+    if (
+      filtering.filters[ROUND_NUMBER_FILTER_NAME] &&
+      +match.params.round !== filtering.filters[ROUND_NUMBER_FILTER_NAME]
+    ) {
       this.props.handleFilterChange({
-        name: "round",
+        name: ROUND_NUMBER_FILTER_NAME,
         value: +match.params.round
       });
     }
@@ -34,9 +40,10 @@ class TournamentTabsContainer extends Component {
 
   render() {
     const { filtering, tournamentSettings } = this.props;
+    if (!filtering.filters) return null;
     return (
       <TournamentTabs
-        activeRound={filtering.round}
+        activeRound={filtering.filters[ROUND_NUMBER_FILTER_NAME]}
         roundsCount={tournamentSettings.tournamentTotalRounds}
         onFilterChange={this.onFilterChange}
       />
@@ -46,16 +53,13 @@ class TournamentTabsContainer extends Component {
 
 const mapStateToProps = state => {
   const { data: tournamentSettings } = state.platformData.settings;
-  const { filtering } = state.tournamentData.programs;
+  const filtering = normalizeFilteringSelector(state.tournamentData.programs);
   return { tournamentSettings, filtering };
 };
 
 const mapDispatchToProps = dispatch => ({
   handleFilterChange: filter => {
     dispatch(tournamentService.changeFilter(filter));
-  },
-  setFilter: roundNo => {
-    dispatch(tournamentService.updateFiltering(roundNo));
   },
   pushRoute: roundNo => {
     dispatch(

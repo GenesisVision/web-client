@@ -9,6 +9,7 @@ import pagingActionsFactory from "../../paging/actions/paging-actions";
 import tournamentActions from "../actions/tournament-actions";
 
 import { TOURNAMENT_PROGRAMS } from "../actions/tournament-actions.constants";
+import { composeApiFiltering } from "../../filtering/helpers/filtering-helpers";
 
 const getPrograms = () => (dispatch, getState) => {
   const { paging } = getState().tournamentData.programs;
@@ -22,9 +23,7 @@ const getPrograms = () => (dispatch, getState) => {
   if (authService.getAuthArg()) {
     data.authorization = authService.getAuthArg();
   }
-  if (filtering.round) {
-    data.filter.roundNumber = filtering.round;
-  }
+  data.filter = { ...data.filter, ...composeApiFiltering(filtering) };
 
   const setLogoAndOrder = response => {
     response.investmentPrograms.forEach((x, idx) => {
@@ -56,13 +55,13 @@ const changeProgramListPage = paging => dispatch => {
 
 const updateFiltering = filter => {
   const filteringActions = filteringActionsFactory(TOURNAMENT_PROGRAMS);
-  let filtering = {};
+  /*let filtering = {};
   switch (filter.name) {
     default: {
       filtering[filter.name] = filter.value;
     }
-  }
-  return filteringActions.updateFiltering(filtering);
+  }*/
+  return filteringActions.updateFilter(filter);
 };
 
 const changeFilter = filter => dispatch => {

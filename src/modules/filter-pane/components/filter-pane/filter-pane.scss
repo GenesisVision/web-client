@@ -1,30 +1,16 @@
 @import "styles/_colors.scss";
 @import "styles/_breakpoint.scss";
 
-.filter-pane-wrapper {
-  position: fixed;
-  top: 74px;
-  left: 0;
-  width: 100%;
-  z-index: 1020;
-  @include media-breakpoint-phone() {
-    position: initial;
-  }
-}
-
-.filter-pane-backdrop {
-  height: 100vh;
-  opacity: 0.5;
-  background-color: black;
-  @include media-breakpoint-desktop() {
-    display: none;
-  }
-}
-
 .filter-pane {
   background: white;
-  border-bottom: 1px solid $border-color;
-  box-shadow: 0 1px 4px 0 rgba(227, 235, 237, 0.86);
+  min-height: calc(100vh - 72px);
+  @include media-breakpoint-phone() {
+    position: fixed;
+    top: 74px;
+    left: 0;
+    width: 100%;
+    z-index: 1020;
+  }
 }
 
 .filter-list {
@@ -41,9 +27,6 @@
   min-width: 300px;
   margin: 1rem 0;
   padding: 3rem 5rem;
-  &:not(:last-of-type) {
-    border-right: 2px solid $border-color;
-  }
 
   @include media-breakpoint-desktop() {
     min-width: 285px;
@@ -51,9 +34,6 @@
   }
   @include media-breakpoint-phone() {
     min-width: 100%;
-    &:not(:last-of-type) {
-      border-right: none;
-    }
   }
 }
 

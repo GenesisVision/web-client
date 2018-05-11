@@ -5,11 +5,18 @@ import GVInputRange from "../../../../../../shared/components/form/gv-input-rang
 import GVSelect from "../../../../../../shared/components/form/gv-select/gv-select";
 
 import {
-  LEVEL_MAX,
-  LEVEL_MIN,
-  PROFIT_PROGRAM_PROCENT_MAX,
-  PROFIT_PROGRAM_PROCENT_MIN
+  LEVEL_MAX_FILTER_VALUE,
+  LEVEL_MIN_FILTER_VALUE,
+  AVG_PROFIT_MAX_FILTER_VALUE,
+  AVG_PROFIT_MIN_FILTER_VALUE,
+  LEVEL_FILTER_NAME,
+  AVG_PROFIT_FILTER_NAME
 } from "../../../../programs.constants";
+import { composeFormikFiltering } from "../../../../../filtering/helpers/filtering-helpers";
+import { RANGE_FILTER_TYPE } from "../../../../../filtering/filtering.constants";
+
+export const TRADER_LEVEL_FILTER_FORM = "traderLevel";
+export const PROFIT_AVG_FILTER_FORM = "profitAvg";
 
 const sortingOptions = [
   { value: "ByTitle", label: "Name" },
@@ -34,11 +41,11 @@ const ProgramListFilter = ({
         <div className="filter-item__description">Select Trader Level</div>
         <div className="filter-item__component">
           <Field
-            minValue={LEVEL_MIN}
-            maxValue={LEVEL_MAX}
-            name="traderLevel"
-            value={values.traderLevel}
-            onChangeComplete={onChangeComplete("traderLevel")}
+            minValue={LEVEL_MIN_FILTER_VALUE}
+            maxValue={LEVEL_MAX_FILTER_VALUE}
+            name={LEVEL_FILTER_NAME}
+            value={values[LEVEL_FILTER_NAME]}
+            onChangeComplete={onChangeComplete(LEVEL_FILTER_NAME)}
             setFieldValue={setFieldValue}
             component={GVInputRange}
           />
@@ -49,12 +56,12 @@ const ProgramListFilter = ({
         <div className="filter-item__description">Select Average Profit</div>
         <div className="filter-item__component">
           <Field
-            minValue={PROFIT_PROGRAM_PROCENT_MIN}
-            maxValue={PROFIT_PROGRAM_PROCENT_MAX}
-            name="profitAvgPercent"
-            value={values.profitAvgPercent}
+            minValue={AVG_PROFIT_MIN_FILTER_VALUE}
+            maxValue={AVG_PROFIT_MAX_FILTER_VALUE}
+            name={AVG_PROFIT_FILTER_NAME}
+            value={values[AVG_PROFIT_FILTER_NAME]}
             formatLabel={value => `${value}%`}
-            onChangeComplete={onChangeComplete("profitAvgPercent")}
+            onChangeComplete={onChangeComplete(AVG_PROFIT_FILTER_NAME)}
             setFieldValue={setFieldValue}
             component={GVInputRange}
           />
@@ -98,15 +105,19 @@ const ProgramListFilter = ({
 export default withFormik({
   displayName: "programListFilterForm",
   mapPropsToValues: props => {
-    const { filtering } = props;
     return {
-      traderLevel: { min: filtering.levelMin, max: filtering.levelMax },
-      profitAvgPercent: {
-        min: filtering.profitAvgPercentMin,
-        max: filtering.profitAvgPercentMax
-      },
-      sorting: filtering.sorting,
-      sortingDirection: filtering.sortingDirection
+      [LEVEL_FILTER_NAME]: composeFormikFiltering(
+        RANGE_FILTER_TYPE,
+        LEVEL_FILTER_NAME,
+        props.filtering
+      ),
+      [AVG_PROFIT_FILTER_NAME]: composeFormikFiltering(
+        RANGE_FILTER_TYPE,
+        AVG_PROFIT_FILTER_NAME,
+        props.filtering
+      ),
+      sorting: "", //filters.sorting,
+      sortingDirection: "" //filters.sortingDirection
     };
   }
 })(ProgramListFilter);

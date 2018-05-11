@@ -1,0 +1,12 @@
+.program-filterable-list {
+  display: flex;
+}
+
+.program-filterable-list__programs {
+  flex: 1;
+}
+
+.program-filterable-list__filters {
+  flex: 1;
+  max-width: 300px;
+}
