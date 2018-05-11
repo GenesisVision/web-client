@@ -19,8 +19,9 @@
   @include media-breakpoint-phone() {
     flex-wrap: wrap;
     max-height: 100px;
-    margin: 1rem 0;
+    margin-top: 1rem;
     hr {
+      margin: 0.5rem 0;
       display: flex;
       flex: 1 0 100%;
     }
@@ -28,52 +29,55 @@
 
 }
 
-.pis-item {
-  min-width: 15%;
-  // padding: 0.5rem;
-  text-align: center;
-  &:nth-of-type(odd) {
-    border-bottom: 1px solid $border-color;
-  }
+// .pis-item {
+//   min-width: 15%;
+//   // padding: 0.5rem;
+//   text-align: center;
+//   &:nth-of-type(odd) {
+//     border-bottom: 1px solid $border-color;
+//   }
 
-  @include media-breakpoint-desktop() {
-    &:not(:last-of-type) {
-      border-right: 1px solid $border-color;
-    }
-    &:nth-of-type(odd) {
-      border-bottom: 0;
-    }
-  }
+//   @include media-breakpoint-desktop() {
+//     &:not(:last-of-type) {
+//       border-right: 1px solid $border-color;
+//     }
+//     &:nth-of-type(odd) {
+//       border-bottom: 0;
+//     }
+//   }
 
-  @include media-breakpoint-phone() {
-    &:not(:last-of-type) {
-      border-right: 0;
-    }
-  }
-  .metric__value {
-    @include media-breakpoint-desktop() {
-      font-size: 1.5rem;
-    }
-  }
+//   @include media-breakpoint-phone() {
+//     // border-right: 1px solid black;
+//     &:nth-of-type(3n) {
+//       padding: 0 1rem/2;
+//       border-right: 0px;
+//     }
 
-  .metric__description {
-    font-size: 0.875rem;
-  }
-}
+//   }
+//   .metric__value {
+//     @include media-breakpoint-desktop() {
+//       font-size: 1.5rem;
+//     }
+//   }
 
-.pis-item__value {
-  font-size: 1.7rem;
-  font-family: "NeuzeitGroLig";
-  @include media-breakpoint-desktop() {
-    font-size: 1.5rem;
-  }
-}
+//   .metric__description {
+//     font-size: 0.875rem;
+//   }
+// }
 
-.pis-item__label {
-  color: $text-sub-color;
-  font-size: 0.9rem;
-  line-height: 0.5;
-  @include media-breakpoint-desktop() {
-    font-size: 0.7rem;
-  }
-}
+// .pis-item__value {
+//   font-size: 1.7rem;
+//   font-family: "NeuzeitGroLig";
+//   @include media-breakpoint-desktop() {
+//     font-size: 1.5rem;
+//   }
+// }
+
+// .pis-item__label {
+//   color: $text-sub-color;
+//   font-size: 0.9rem;
+//   line-height: 0.5;
+//   @include media-breakpoint-desktop() {
+//     font-size: 0.7rem;
+//   }
+// }
