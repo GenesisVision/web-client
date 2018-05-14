@@ -1,7 +1,7 @@
 import { composeFilterPaneActionType } from "../helpers/filter-pane-helpers";
 
 const initialState = {
-  isFilterOpen: false
+  isFilterOpen: true
 };
 
 const filterPaneReducerFactory = actionType => {

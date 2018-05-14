@@ -1,7 +1,9 @@
 import { withFormik, Field } from "formik";
 import React from "react";
+import Slider, { Range, Handle } from "rc-slider";
+import "rc-slider/assets/index.css";
+import "shared/components/form/gv-range/gv-range.css";
 
-import GVInputRange from "../../../../../../shared/components/form/gv-input-range/gv-input-range";
 import GVSelect from "../../../../../../shared/components/form/gv-select/gv-select";
 
 import {
@@ -14,6 +16,7 @@ import {
 } from "../../../../programs.constants";
 import { composeFormikFiltering } from "../../../../../filtering/helpers/filtering-helpers";
 import { RANGE_FILTER_TYPE } from "../../../../../filtering/filtering.constants";
+import FilterItem from "../../../../../filter-pane/components/filter-item/filter-item";
 
 export const TRADER_LEVEL_FILTER_FORM = "traderLevel";
 export const PROFIT_AVG_FILTER_FORM = "profitAvg";
@@ -28,6 +31,20 @@ const sortingDirectionOptions = [
   { value: "Asc", label: "Ascending" },
   { value: "Desc", label: "Descending" }
 ];
+// const style = { width: 400, margin: 50 };
+const values2 = [0, 1, 2];
+const powerOfTen = n => Math.pow(10, n);
+const generateMarks = values => {
+  const result = {};
+  values.forEach(value => {
+    result[powerOfTen(value)] = value;
+  });
+  return result;
+};
+function log(value) {
+  console.log(value); //eslint-disable-line
+}
+
 const ProgramListFilter = ({
   values,
   setFieldValue,
@@ -40,14 +57,35 @@ const ProgramListFilter = ({
         <div className="filter-item__title">Level</div>
         <div className="filter-item__description">Select Trader Level</div>
         <div className="filter-item__component">
-          <Field
-            minValue={LEVEL_MIN_FILTER_VALUE}
-            maxValue={LEVEL_MAX_FILTER_VALUE}
-            name={LEVEL_FILTER_NAME}
-            value={values[LEVEL_FILTER_NAME]}
-            onChangeComplete={onChangeComplete(LEVEL_FILTER_NAME)}
-            setFieldValue={setFieldValue}
-            component={GVInputRange}
+          <Range
+            dots
+            min={LEVEL_MIN_FILTER_VALUE}
+            max={LEVEL_MAX_FILTER_VALUE}
+            marks={new Array(LEVEL_MAX_FILTER_VALUE)
+              .fill(0)
+              .reduce((prev, curr, idx) => {
+                prev[idx + 1] = idx + 1;
+                return prev;
+              }, {})}
+            defaultValue={[LEVEL_MIN_FILTER_VALUE, LEVEL_MAX_FILTER_VALUE]}
+            onAfterChange={log}
+            pushable
+            handle={props => {
+              return (
+                <div key={props.index}>
+                  <span
+                    style={{
+                      position: "absolute",
+                      top: "-20px",
+                      left: `${props.offset - 3}%`
+                    }}
+                  >
+                    {props.value}
+                  </span>
+                  <Handle {...props} dragging="false" />
+                </div>
+              );
+            }}
           />
         </div>
       </div>
@@ -55,15 +93,26 @@ const ProgramListFilter = ({
         <div className="filter-item__title">Average Profit</div>
         <div className="filter-item__description">Select Average Profit</div>
         <div className="filter-item__component">
-          <Field
-            minValue={AVG_PROFIT_MIN_FILTER_VALUE}
-            maxValue={AVG_PROFIT_MAX_FILTER_VALUE}
-            name={AVG_PROFIT_FILTER_NAME}
-            value={values[AVG_PROFIT_FILTER_NAME]}
-            formatLabel={value => `${value}%`}
-            onChangeComplete={onChangeComplete(AVG_PROFIT_FILTER_NAME)}
-            setFieldValue={setFieldValue}
-            component={GVInputRange}
+          <Slider
+            min={values2[0]}
+            max={powerOfTen(values2[values2.length - 1])}
+            marks={generateMarks(values2)}
+            included={false}
+            onChange={log}
+            handle={props => (
+              <div>
+                <span
+                  style={{
+                    position: "absolute",
+                    top: "-20px",
+                    left: `${props.offset}%`
+                  }}
+                >
+                  {props.value}
+                </span>
+                <Slider.Handle {...props} dragging="false" />
+              </div>
+            )}
           />
         </div>
       </div>

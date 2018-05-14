@@ -1,0 +1,22 @@
+@import "styles/_colors.scss";
+
+.rc-slider-track {
+  background-color: $alternate-color;
+}
+
+.rc-slider-handle {
+  border-color: $alternate-color;
+}
+
+.rc-slider-handle:hover {
+  border-color: $alternate-color;
+}
+.rc-slider-handle:active,
+.rc-slider-handle:focus {
+  border-color: $alternate-color;
+  box-shadow: 0 0 5px $alternate-color;
+}
+
+.rc-slider-dot-active {
+  border-color: $alternate-color;
+}
