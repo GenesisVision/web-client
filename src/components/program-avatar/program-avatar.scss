@@ -2,9 +2,13 @@
 @import "styles/_breakpoint.scss";
 
 $avatar-size: 112px;
-$mobile-avatar-size: 62px;
+$mobile-avatar-size: 48px;
 
 .program-avatar {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: $avatar-size;
   width: $avatar-size;
 
@@ -18,49 +22,3 @@ $mobile-avatar-size: 62px;
     max-height: $mobile-avatar-size;
   }
 }
-
-// .program-avatar {
-//   position: relative;
-//   max-width: 100px;
-//   max-height: 100px;
-//   @include media-breakpoint-phone() {
-//     max-width: 62px;
-//     max-height: 62px;
-//   }
-// }
-
-// .program-avatar__image {
-//   max-width: 100px;
-//   max-height: 100px;
-//   @include media-breakpoint-phone() {
-//     max-width: 62px;
-//     max-height: 62px;
-//   }
-// }
-
-// .program-avatar__tournament {
-//   position: absolute;
-//   top: 0px;
-//   left: 0px;
-//   color: $main-color;
-//   background-color: $background-color;
-//   display: inline-block;
-//   padding: 0.3em;
-//   line-height: 1;
-//   @include media-breakpoint-phone() {
-//     font-size: 0.8rem;
-//   }
-// }
-
-// .program-avatar__level {
-//   position: absolute;
-//   bottom: 0px;
-//   right: 0px;
-//   color: white;
-//   background-color: $alternate-color;
-//   display: inline-block;
-//   padding: 0.1em 0.5em;
-//   @include media-breakpoint-phone() {
-//     font-size: 0.8rem;
-//   }
-// }

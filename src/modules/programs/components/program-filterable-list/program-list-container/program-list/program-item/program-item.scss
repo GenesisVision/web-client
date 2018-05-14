@@ -83,7 +83,7 @@
     flex: 1;
   }
 
-  @include media-breakpoint-phone() {
+  @include media-breakpoint-tablet() {
     flex-direction: column;
 
     &::after,
@@ -103,6 +103,10 @@
       align-items: flex-start;
     }
 
+    &__days-left{
+      width: 50%;
+    }
+
     &__content {
       & > hr  {
         display: none;
@@ -112,13 +116,68 @@
     &__info {
       position: absolute;
       top: 1rem;
-      left: calc(1rem + 1rem/2 + 62px);
-      width: calc(75% - 1rem - 1rem/2 - 62px);
+      left: calc(1rem + 1rem/2 + 48px);
+      width: calc(75% - 1rem - 1rem/2 - 62px - 195px);
     }
 
     &__bookmark {
       margin-right: calc(1rem / 2);
     }
+
+    &__chart {
+      position: absolute;
+      top: 1rem;
+      right: calc(195px + 1rem);
+      width: calc(25% - 1rem);
+      height: 62px;
+    }
+
+    &__buttons {
+      position: absolute;
+      right: 1rem;
+      top: 1rem;
+    }
+
+    &__stats {
+      margin-top: 1rem;
+    }
+
+    &__button {
+      // width: calc(50% - 0.5rem);
+    }
+  }
+
+  @include media-breakpoint-phone() {
+    // flex-direction: column;
+
+    // &::after,
+    // &::before {
+    //   content: "";
+    //   width: 100%;
+    //   order: 1;
+    // }
+
+    // &__info,
+    // &__days-left {
+    //   flex-direction: column;
+    //   align-items: flex-start;
+    // }
+
+    // &__content {
+    //   & > hr  {
+    //     display: none;
+    //   } 
+    // }
+
+    &__info {
+      width: calc(75% - 1rem - 1rem/2 - 62px);
+    }
+    &__link {
+      font-size: 1.4rem;
+    }
+    // &__bookmark {
+    //   margin-right: calc(1rem / 2);
+    // }
 
     &__chart {
       position: absolute;
@@ -129,6 +188,9 @@
     }
 
     &__buttons {
+      position: relative;
+      right: 0;
+      top: 0;
       display: flex;
       order: 2;
       width: 100%;
