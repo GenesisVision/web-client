@@ -1,7 +1,6 @@
 import classnames from "classnames";
 import React from "react";
 
-// import PTIButtons from "../../../../../../../components/program-item/pi-buttons/pi-buttons";
 import PIChart from "../../../../../../../components/program-item/pi-chart/pi-chart";
 import PIInfo from "../../../../../../../components/program-item/pi-info/pi-info";
 import PIStatistic from "./pi-statistic/pi-statistic";
@@ -40,49 +39,47 @@ const ProgramItem = ({
           isTournament={program.isTournament}
         />
       </Link>
-      <div className="program-item__content">
-        <div className="program-item__info">
-          <div className="program-item__title">
-            {isAuthenticated && (
-              <PIBookmark
-                className="program-item__bookmark"
-                isFavorite={program.isFavorite}
-                onClick={toggleFavoriteProgram(program)}
-              />
-            )}
-            <Link className="program-item__link" to={programRoute}>
-              {program.title}
-            </Link>
-          </div>
-          <DaysLeft
-            className="program-item__days-left"
-            isEnabled={program.isEnabled}
-            startOfPeriod={program.startOfPeriod}
-            periodDuration={program.periodDuration}
-          />
+      <div className="program-item__info">
+        <div className="program-item__title">
+          {isAuthenticated && (
+            <PIBookmark
+              className="program-item__bookmark"
+              isFavorite={program.isFavorite}
+              onClick={toggleFavoriteProgram(program)}
+            />
+          )}
+          <Link className="program-item__link" to={programRoute}>
+            {program.title}
+          </Link>
         </div>
-        <div className="program-item__chart">
-          <PIChart data={program.equityChart} />
-        </div>
-        <hr />
-        <div className="program-item__buttons">
-          <Button
-            primary
-            href={programRoute}
-            className="program-item__button"
-            label="View Profile"
-          />
-          <Button
-            primary
-            className="program-item__button"
-            label="Invest"
-            onClick={openInvestPopup(program.id)}
-            href={isAuthenticated ? "" : LOGIN_ROUTE}
-          />
-        </div>
-        <div className="program-item__stats">
-          <PIStatistic trader={program} />
-        </div>
+        <DaysLeft
+          className="program-item__days-left"
+          isEnabled={program.isEnabled}
+          startOfPeriod={program.startOfPeriod}
+          periodDuration={program.periodDuration}
+        />
+      </div>
+      <div className="program-item__chart">
+        <PIChart data={program.equityChart} />
+      </div>
+      <hr className="program-item__hr" />
+      <div className="program-item__buttons">
+        <Button
+          primary
+          href={programRoute}
+          className="program-item__button"
+          label="View Profile"
+        />
+        <Button
+          primary
+          className="program-item__button"
+          label="Invest"
+          onClick={openInvestPopup(program.id)}
+          href={isAuthenticated ? "" : LOGIN_ROUTE}
+        />
+      </div>
+      <div className="program-item__stats">
+        <PIStatistic trader={program} />
       </div>
     </div>
   );
