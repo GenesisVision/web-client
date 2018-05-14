@@ -21,7 +21,7 @@ const PIChart = ({ data }) => {
   return (
     <div className="pi-chart">
       <ResponsiveContainer>
-        <LineChart data={programChartData}>
+        <LineChart data={programChartData} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
           <ReferenceLine y={0} strokeDasharray="5 5" />
           <XAxis
             dataKey="date"
