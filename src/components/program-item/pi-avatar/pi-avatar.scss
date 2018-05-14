@@ -14,8 +14,8 @@ $mobile-avatar-size: 48px;
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    height: 28px;
-    width: 28px;
+    height: 22px;
+    width: 22px;
     z-index: 2;
   }
 
@@ -39,14 +39,14 @@ $mobile-avatar-size: 48px;
     z-index: 1;
   }
 
-  @include media-breakpoint-tablet() {
-    width: $mobile-avatar-size;
-    height: $mobile-avatar-size;
+  @include breakpoint-deskop() {
+    width: $avatar-size;
+    height: $avatar-size;
 
     &__label {
       font-size: 13px;
-      height: 22px;
-      width: 22pX;
+      height: 28px;
+      width: 28px;
     }
   }
 }

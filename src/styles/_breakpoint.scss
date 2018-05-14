@@ -15,3 +15,15 @@
     @content;
   }
 }
+
+@mixin breakpoint-tablet() {
+  @media (min-width: 48rem) {
+    @content;
+  }
+}
+
+@mixin breakpoint-desktop() {
+  @media (min-width: 75rem) {
+    @content;
+  }
+}

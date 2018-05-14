@@ -6,12 +6,8 @@
 }
 
 .wallet-pane-container__component {
-  width: calc(100% - 2rem);
-  max-width: 1570px;
+  width: 100%;
   margin: auto;
-  @include media-breakpoint-phone() {
-    width: 100%;
-  }
 }
 
 .wallet-pane-container__wallet {
