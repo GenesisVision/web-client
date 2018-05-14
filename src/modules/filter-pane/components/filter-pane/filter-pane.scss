@@ -4,6 +4,7 @@
 .filter-pane {
   background: white;
   min-height: calc(100vh - 72px);
+  overflow: hidden;
   @include media-breakpoint-phone() {
     position: fixed;
     top: 74px;

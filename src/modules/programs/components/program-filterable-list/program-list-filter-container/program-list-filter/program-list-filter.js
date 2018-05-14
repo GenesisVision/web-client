@@ -45,18 +45,21 @@ function log(value) {
   console.log(value); //eslint-disable-line
 }
 
-const ProgramListFilter = ({
-  values,
-  setFieldValue,
-  setFieldTouched,
-  onChangeComplete
-}) => {
+const ProgramListFilter = ({}) => {
   return (
-    <form className="filter-list">
+    <div className="filter-list">
       <div className="filter-item">
-        <div className="filter-item__title">Level</div>
-        <div className="filter-item__description">Select Trader Level</div>
-        <div className="filter-item__component">
+        <div className="filter-header">Add filters</div>
+        <div className="filter-clear">
+          <button className="gv-btn gv-btn-secondary">1</button>
+        </div>
+      </div>
+      <FilterItem
+        name="Level"
+        description="Select Trader Level"
+        defaultValue={[LEVEL_MIN_FILTER_VALUE, LEVEL_MAX_FILTER_VALUE]}
+      >
+        {(onChange, value) => (
           <Range
             dots
             min={LEVEL_MIN_FILTER_VALUE}
@@ -67,45 +70,26 @@ const ProgramListFilter = ({
                 prev[idx + 1] = idx + 1;
                 return prev;
               }, {})}
-            defaultValue={[LEVEL_MIN_FILTER_VALUE, LEVEL_MAX_FILTER_VALUE]}
-            onAfterChange={log}
+            value={value}
+            onChange={onChange}
             pushable
-            handle={props => {
-              return (
-                <div key={props.index}>
-                  <span
-                    style={{
-                      position: "absolute",
-                      top: "-20px",
-                      left: `${props.offset - 3}%`
-                    }}
-                  >
-                    {props.value}
-                  </span>
-                  <Handle {...props} dragging="false" />
-                </div>
-              );
-            }}
           />
-        </div>
-      </div>
-      <div className="filter-item">
-        <div className="filter-item__title">Average Profit</div>
-        <div className="filter-item__description">Select Average Profit</div>
-        <div className="filter-item__component">
+        )}
+      </FilterItem>
+
+      <FilterItem name="Average Profit" description="Select Average Profit">
+        {onChange => (
           <Slider
             min={values2[0]}
             max={powerOfTen(values2[values2.length - 1])}
             marks={generateMarks(values2)}
-            included={false}
-            onChange={log}
+            onChange={onChange}
             handle={props => (
-              <div>
+              <div key={props.index}>
                 <span
+                  className="gv-hangle__text"
                   style={{
-                    position: "absolute",
-                    top: "-20px",
-                    left: `${props.offset}%`
+                    left: `${props.offset - 2}%`
                   }}
                 >
                   {props.value}
@@ -114,59 +98,10 @@ const ProgramListFilter = ({
               </div>
             )}
           />
-        </div>
-      </div>
-      <div className="filter-item">
-        <div className="filter-item__title">Sorting</div>
-        <div className="filter-item__description">Select column</div>
-        <div className="filter-item__component">
-          <Field
-            name="sorting"
-            value={values.sorting}
-            onChange={onChangeComplete("sorting")}
-            setFieldValue={setFieldValue}
-            onBlur={setFieldTouched}
-            component={GVSelect}
-            options={sortingOptions}
-          />
-        </div>
-      </div>
-      <div className="filter-item">
-        <div className="filter-item__title">Sorting direction</div>
-        <div className="filter-item__description">Select sorting direction</div>
-        <div className="filter-item__component">
-          <Field
-            name="sortingDirection"
-            value={values.sortingDirection}
-            onChange={onChangeComplete("sortingDirection")}
-            setFieldValue={setFieldValue}
-            onBlur={setFieldTouched}
-            component={GVSelect}
-            clearable={false}
-            options={sortingDirectionOptions}
-          />
-        </div>
-      </div>
-    </form>
+        )}
+      </FilterItem>
+    </div>
   );
 };
 
-export default withFormik({
-  displayName: "programListFilterForm",
-  mapPropsToValues: props => {
-    return {
-      [LEVEL_FILTER_NAME]: composeFormikFiltering(
-        RANGE_FILTER_TYPE,
-        LEVEL_FILTER_NAME,
-        props.filtering
-      ),
-      [AVG_PROFIT_FILTER_NAME]: composeFormikFiltering(
-        RANGE_FILTER_TYPE,
-        AVG_PROFIT_FILTER_NAME,
-        props.filtering
-      ),
-      sorting: "", //filters.sorting,
-      sortingDirection: "" //filters.sortingDirection
-    };
-  }
-})(ProgramListFilter);
+export default ProgramListFilter;
