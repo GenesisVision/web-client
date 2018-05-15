@@ -8,13 +8,14 @@ import "./program-active-filter-list-container.css";
 
 class ProgramActiveFilterListContainer extends Component {
   render() {
-    const { filtering, openFilterPane } = this.props;
+    const { filtering, openFilterPane, clearFilters } = this.props;
     const { filters } = filtering;
     return (
       <div className="program-active-filter-list-container">
         <ProgramActiveFilterList
           filters={filters}
           openFilterPane={openFilterPane}
+          clearFilters={clearFilters}
         />
       </div>
     );
@@ -28,7 +29,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  openFilterPane: () => dispatch(programsService.openFilterPane())
+  openFilterPane: () => dispatch(programsService.openFilterPane()),
+  clearFilters: () => dispatch(programsService.clearProgramListFilters())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(

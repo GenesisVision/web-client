@@ -21,6 +21,19 @@
   font-size: 0.9rem;
 }
 
+.filter-badge__name {
+  font-family: NeuzeitGroBol;
+  &:not(:last-of-type) {
+    &::after {
+      content: ":";
+    }
+  }
+}
+
+.filter-badge__value {
+  margin-left: 0.5rem;
+}
+
 .filter-badge--button {
   cursor: pointer;
   min-width: 100px;

@@ -1,4 +1,4 @@
-import { withFormik, Field } from "formik";
+import { translate } from "react-i18next";
 import React from "react";
 import Slider, { Range, Handle } from "rc-slider";
 import "rc-slider/assets/index.css";
@@ -31,7 +31,7 @@ const sortingDirectionOptions = [
   { value: "Asc", label: "Ascending" },
   { value: "Desc", label: "Descending" }
 ];
-// const style = { width: 400, margin: 50 };
+
 const values2 = [0, 1, 2];
 const powerOfTen = n => Math.pow(10, n);
 const generateMarks = values => {
@@ -41,11 +41,8 @@ const generateMarks = values => {
   });
   return result;
 };
-function log(value) {
-  console.log(value); //eslint-disable-line
-}
 
-const ProgramListFilter = ({}) => {
+const ProgramListFilter = ({ t, filtering, onChangeComplete }) => {
   return (
     <div className="filter-list">
       <div className="filter-item">
@@ -55,9 +52,11 @@ const ProgramListFilter = ({}) => {
         </div>
       </div>
       <FilterItem
-        name="Level"
-        description="Select Trader Level"
-        defaultValue={[LEVEL_MIN_FILTER_VALUE, LEVEL_MAX_FILTER_VALUE]}
+        name={t(`programs-filtering.${LEVEL_FILTER_NAME}.name`)}
+        description={t(`programs-filtering.${LEVEL_FILTER_NAME}.description`)}
+        value={filtering.filters[LEVEL_FILTER_NAME]}
+        defaultValue={filtering.defaultFilters[LEVEL_FILTER_NAME]}
+        onFilterChange={onChangeComplete(LEVEL_FILTER_NAME)}
       >
         {(onChange, value) => (
           <Range
@@ -104,4 +103,4 @@ const ProgramListFilter = ({}) => {
   );
 };
 
-export default ProgramListFilter;
+export default translate()(ProgramListFilter);

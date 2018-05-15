@@ -11,8 +11,8 @@ export const composeProgramsFilters = filtering => {
   return filtering.filters.reduce((prev, curr) => {
     switch (curr.name) {
       case LEVEL_FILTER_NAME:
-        prev[LEVEL_MIN_FILTER_NAME] = curr.value.min;
-        prev[LEVEL_MAX_FILTER_NAME] = curr.value.max;
+        prev[LEVEL_MIN_FILTER_NAME] = curr.value[0];
+        prev[LEVEL_MAX_FILTER_NAME] = curr.value[1];
         break;
       case AVG_PROFIT_FILTER_NAME:
         prev[AVG_PROFIT_MIN_FILTER_NAME] = curr.value.min;

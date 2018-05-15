@@ -12,6 +12,10 @@ import {
 import pagingActionsFactory from "../../paging/actions/paging-actions";
 import filesService from "../../../shared/services/file-service";
 import { composeProgramsFilters } from "./programs-helpers";
+import clearDataActionFactory from "../../../shared/actions/clear-data.factory";
+import { composeFilteringActionType } from "../../filtering/helpers/filtering-helpers";
+
+const filteringActions = filteringActionsFactory(actionTypes.PROGRAMS);
 
 const getPrograms = () => (dispatch, getState) => {
   const { paging } = getState().programsData.programs;
@@ -57,7 +61,7 @@ const changeProgramListPage = paging => dispatch => {
 };
 
 const changeProgramListFilter = filter => dispatch => {
-  dispatch(filteringActionsFactory(actionTypes.PROGRAMS).updateFilter(filter));
+  dispatch(filteringActions.updateFilter(filter));
   dispatch(
     updateProgramListPaging({
       currentPage: 0
@@ -90,12 +94,27 @@ const toggleFavoriteProgram = program => dispatch => {
   );
 };
 
+const clearProgramListFilters = () => dispatch => {
+  dispatch(
+    clearDataActionFactory(
+      composeFilteringActionType(actionTypes.PROGRAMS)
+    ).clearData()
+  );
+  dispatch(
+    updateProgramListPaging({
+      currentPage: 0
+    })
+  );
+  dispatch(getPrograms());
+};
+
 const programsService = {
   getPrograms,
   changeProgramListPage,
   updateAfterInvestment,
   openFilterPane,
   changeProgramListFilter,
+  clearProgramListFilters,
   toggleFavoriteProgram
 };
 export default programsService;

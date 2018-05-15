@@ -14,7 +14,12 @@ i18n
     preload: ["en"],
     whitelist: ["en"],
     interpolation: {
-      escapeValue: false
+      escapeValue: false,
+      format: function(value, format, lng) {
+        if (format === "array") {
+        }
+        return value;
+      }
     },
     react: {
       wait: true

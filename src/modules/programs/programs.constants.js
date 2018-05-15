@@ -27,7 +27,7 @@ export const SHOW_AVAILABLE_FILTER_VALUE = false;
 export const PROGRAMS_DEFAULT_FILTERS = [
   {
     name: LEVEL_FILTER_NAME,
-    value: { min: LEVEL_MIN_FILTER_VALUE, max: LEVEL_MAX_FILTER_VALUE }
+    value: [LEVEL_MIN_FILTER_VALUE, LEVEL_MAX_FILTER_VALUE]
   },
   {
     name: AVG_PROFIT_FILTER_NAME,

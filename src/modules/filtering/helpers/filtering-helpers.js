@@ -7,14 +7,12 @@ export const composeFormikFiltering = (filterType, filterName, filtering) => {
   const { filters, defaultFilters } = filtering;
   switch (filterType) {
     case RANGE_FILTER_TYPE:
-      return {
-        min:
-          (filters[filterName] && filters[filterName].min) ||
-          defaultFilters[filterName].min,
-        max:
-          (filters[filterName] && filters[filterName].max) ||
-          defaultFilters[filterName].max
-      };
+      return [
+        (filters[filterName] && filters[filterName][0]) ||
+          defaultFilters[filterName][0],
+        (filters[filterName] && filters[filterName][1]) ||
+          defaultFilters[filterName][1]
+      ];
     case GENERAL_FILTER_TYPE:
     default:
       return filters[filterName] || defaultFilters[filterName];

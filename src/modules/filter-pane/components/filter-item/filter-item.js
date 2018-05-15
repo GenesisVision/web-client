@@ -3,7 +3,16 @@ import classnames from "classnames";
 import "./filter-item.css";
 
 class FilterItem extends Component {
-  state = { isOpen: true, value: this.props.defaultValue };
+  getInitialValue = () => this.props.value || this.props.defaultValue;
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return {
+      value: nextProps.value || nextProps.defaultValue
+    };
+  }
+
+  state = { isOpen: true, value: this.getInitialValue() };
+
   toggleOpenState = () => {
     this.setState(state => ({ isOpen: !state.isOpen }));
   };
@@ -13,13 +22,25 @@ class FilterItem extends Component {
   };
 
   handleApply = () => {
-    console.log(this.state.value);
+    this.props.onFilterChange(this.state.value);
+  };
+
+  handleClear = () => {
+    this.handleChange(this.props.defaultValue);
+    this.props.onFilterChange(this.props.defaultValue);
   };
 
   handleCancel = () => {
-    var t = this.props;
-    this.setState({ value: this.props.defaultValue });
+    this.handleChange(this.getInitialValue());
   };
+
+  canClear = () =>
+    JSON.stringify(this.state.value) ===
+    JSON.stringify(this.props.defaultValue);
+
+  showCancelButton = () =>
+    JSON.stringify(this.state.value) !== JSON.stringify(this.getInitialValue());
+
   render() {
     const { isOpen, value } = this.state;
     const { name, description } = this.props;
@@ -41,7 +62,7 @@ class FilterItem extends Component {
           </div>
         </div>
 
-        {isOpen ? (
+        {isOpen && (
           <div className="filter-item__component">
             {this.props.children(this.handleChange, value)}
             <div className="filter-item__buttons">
@@ -51,16 +72,24 @@ class FilterItem extends Component {
               >
                 Add filter
               </button>
-              <button
-                className="gv-btn gv-btn-secondary filter-item__button"
-                onClick={this.handleCancel}
-              >
-                Clear
-              </button>
+              {this.showCancelButton() ? (
+                <button
+                  className="gv-btn gv-btn-secondary filter-item__button"
+                  onClick={this.handleCancel}
+                >
+                  Cancel
+                </button>
+              ) : (
+                <button
+                  className="gv-btn gv-btn-secondary filter-item__button"
+                  onClick={this.handleClear}
+                  disabled={this.canClear()}
+                >
+                  Clear
+                </button>
+              )}
             </div>
           </div>
-        ) : (
-          <div />
         )}
       </div>
     );
