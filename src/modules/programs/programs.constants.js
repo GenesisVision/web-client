@@ -16,7 +16,7 @@ export const SHOW_AVAILABLE_FILTER_NAME = "showAvailable";
 
 export const LEVEL_MIN_FILTER_VALUE = 1;
 export const LEVEL_MAX_FILTER_VALUE = 7;
-export const AVG_PROFIT_MIN_FILTER_VALUE = 0;
+export const AVG_PROFIT_MIN_FILTER_VALUE = -10;
 export const AVG_PROFIT_MAX_FILTER_VALUE = 1000;
 export const TOTAL_PROFIT_MIN_FILTER_VALUE = 0;
 export const TOTAL_PROFIT_MAX_FILTER_VALUE = 1000;

@@ -6,9 +6,14 @@ class FilterItem extends Component {
   getInitialValue = () => this.props.value || this.props.defaultValue;
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    return {
-      value: nextProps.value || nextProps.defaultValue
-    };
+    const initialValue = nextProps.value || nextProps.defaultValue;
+    if (JSON.stringify(prevState.value) !== JSON.stringify(initialValue)) {
+      return {
+        value: nextProps.value || nextProps.defaultValue
+      };
+    }
+
+    return null;
   }
 
   state = { isOpen: true, value: this.getInitialValue() };
@@ -64,7 +69,7 @@ class FilterItem extends Component {
 
         {isOpen && (
           <div className="filter-item__component">
-            {this.props.children(this.handleChange, value)}
+            {this.props.children(value, this.handleChange)}
             <div className="filter-item__buttons">
               <button
                 className="gv-btn gv-btn-secondary filter-item__button"

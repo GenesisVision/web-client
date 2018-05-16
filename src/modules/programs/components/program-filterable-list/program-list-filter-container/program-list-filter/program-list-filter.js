@@ -1,45 +1,37 @@
 import { translate } from "react-i18next";
 import React from "react";
-import Slider, { Range, Handle } from "rc-slider";
+import { Range, Handle } from "rc-slider";
 import "rc-slider/assets/index.css";
 import "shared/components/form/gv-range/gv-range.css";
-
-import GVSelect from "../../../../../../shared/components/form/gv-select/gv-select";
 
 import {
   LEVEL_MAX_FILTER_VALUE,
   LEVEL_MIN_FILTER_VALUE,
-  AVG_PROFIT_MAX_FILTER_VALUE,
-  AVG_PROFIT_MIN_FILTER_VALUE,
   LEVEL_FILTER_NAME,
   AVG_PROFIT_FILTER_NAME
 } from "../../../../programs.constants";
-import { composeFormikFiltering } from "../../../../../filtering/helpers/filtering-helpers";
-import { RANGE_FILTER_TYPE } from "../../../../../filtering/filtering.constants";
 import FilterItem from "../../../../../filter-pane/components/filter-item/filter-item";
 
 export const TRADER_LEVEL_FILTER_FORM = "traderLevel";
 export const PROFIT_AVG_FILTER_FORM = "profitAvg";
 
-const sortingOptions = [
-  { value: "ByTitle", label: "Name" },
-  { value: "ByLevel", label: "Level" },
-  { value: "ByProfit", label: "Profit" },
-  { value: "ByEndOfPeriod", label: "End Of Period" }
-];
-const sortingDirectionOptions = [
-  { value: "Asc", label: "Ascending" },
-  { value: "Desc", label: "Descending" }
-];
+// const sortingOptions = [
+//   { value: "ByTitle", label: "Name" },
+//   { value: "ByLevel", label: "Level" },
+//   { value: "ByProfit", label: "Profit" },
+//   { value: "ByEndOfPeriod", label: "End Of Period" }
+// ];
+// const sortingDirectionOptions = [
+//   { value: "Asc", label: "Ascending" },
+//   { value: "Desc", label: "Descending" }
+// ];
 
-const values2 = [0, 1, 2];
-const powerOfTen = n => Math.pow(10, n);
-const generateMarks = values => {
-  const result = {};
-  values.forEach(value => {
-    result[powerOfTen(value)] = value;
-  });
-  return result;
+const marks = {
+  "-10": "-10%",
+  "0": "0%",
+  "10": "10%",
+  "100": "100%",
+  "1000": "1k%"
 };
 
 const ProgramListFilter = ({ t, filtering, onChangeComplete }) => {
@@ -52,13 +44,13 @@ const ProgramListFilter = ({ t, filtering, onChangeComplete }) => {
         </div>
       </div>
       <FilterItem
-        name={t(`programs-filtering.${LEVEL_FILTER_NAME}.name`)}
-        description={t(`programs-filtering.${LEVEL_FILTER_NAME}.description`)}
+        name={t("programs-filtering.LEVEL_FILTER_NAME.name")}
+        description={t("programs-filtering.LEVEL_FILTER_NAME.description")}
         value={filtering.filters[LEVEL_FILTER_NAME]}
         defaultValue={filtering.defaultFilters[LEVEL_FILTER_NAME]}
         onFilterChange={onChangeComplete(LEVEL_FILTER_NAME)}
       >
-        {(onChange, value) => (
+        {(value, onChange) => (
           <Range
             dots
             min={LEVEL_MIN_FILTER_VALUE}
@@ -76,24 +68,32 @@ const ProgramListFilter = ({ t, filtering, onChangeComplete }) => {
         )}
       </FilterItem>
 
-      <FilterItem name="Average Profit" description="Select Average Profit">
-        {onChange => (
-          <Slider
-            min={values2[0]}
-            max={powerOfTen(values2[values2.length - 1])}
-            marks={generateMarks(values2)}
+      <FilterItem
+        name={t("programs-filtering.AVG_PROFIT_FILTER_NAME.name")}
+        description={t("programs-filtering.AVG_PROFIT_FILTER_NAME.description")}
+        value={filtering.filters[AVG_PROFIT_FILTER_NAME]}
+        defaultValue={[-10, 1000]}
+        onFilterChange={onChangeComplete(AVG_PROFIT_FILTER_NAME)}
+      >
+        {(value, onChange) => (
+          <Range
+            min={-10}
+            max={1000}
+            marks={marks}
+            value={value}
             onChange={onChange}
+            pushable
             handle={props => (
               <div key={props.index}>
                 <span
                   className="gv-hangle__text"
                   style={{
-                    left: `${props.offset - 2}%`
+                    left: `${props.offset - 5}%`
                   }}
                 >
                   {props.value}
                 </span>
-                <Slider.Handle {...props} dragging="false" />
+                <Handle {...props} dragging="false" />
               </div>
             )}
           />
