@@ -11,8 +11,8 @@ const ProgramListFilterContainer = ({
   filtering,
   handleFilterChange
 }) => {
-  const onFilterChange = name => value => {
-    handleFilterChange({ name, value });
+  const onFilterChange = (name, type) => value => {
+    handleFilterChange({ name, type, value });
   };
   return (
     <FilterPane

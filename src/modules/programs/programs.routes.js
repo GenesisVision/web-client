@@ -6,7 +6,11 @@ import ProgramsFilterableListContainer from "./components/program-filterable-lis
 import { PROGRAMS_ROUTE } from "./programs.constants";
 
 const TradersRoutes = () => (
-  <Route exact path={PROGRAMS_ROUTE} component={ProgramsFilterableListContainer} />
+  <Route
+    exact
+    path={PROGRAMS_ROUTE}
+    component={ProgramsFilterableListContainer}
+  />
 );
 
 export default TradersRoutes;

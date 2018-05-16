@@ -7,15 +7,19 @@ import {
   LEVEL_FILTER_NAME,
   LEVEL_MAX_FILTER_VALUE
 } from "../../../../../programs.constants";
+import { RANGE_FILTER_TYPE } from "../../../../../../filtering/filtering.constants";
 
 const LevelFilter = ({ t, filtering, onFilterChange }) => {
+  const handleFilterChange = value =>
+    onFilterChange(LEVEL_FILTER_NAME, RANGE_FILTER_TYPE)(value);
+
   return (
     <FilterItem
       name={t(`programs-filtering.${LEVEL_FILTER_NAME}.name`)}
       description={t(`programs-filtering.${LEVEL_FILTER_NAME}.description`)}
       value={filtering.filters[LEVEL_FILTER_NAME]}
       defaultValue={filtering.defaultFilters[LEVEL_FILTER_NAME]}
-      onFilterChange={onFilterChange(LEVEL_FILTER_NAME)}
+      onFilterChange={handleFilterChange}
     >
       {(value, onChange) => (
         <Range

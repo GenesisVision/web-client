@@ -191,6 +191,11 @@
       "name": "Average Profit",
       "description": "Select Average Profit",
       "value-pattern": "{{value.0}}% - {{value.1}}%"
+    },
+    "profitTotal": {
+      "name": "Total Profit",
+      "description": "Select Total Profit",
+      "value-pattern": "{{value.0}}GVT - {{value.1}}GVT"
     }
   }
 }

@@ -1,11 +1,11 @@
 import { translate } from "react-i18next";
 import React from "react";
 import FilterItem from "../../../../../../filter-pane/components/filter-item/filter-item";
-import { AVG_PROFIT_FILTER_NAME } from "../../../../../programs.constants";
 import { Range, Handle } from "rc-slider";
 import { RANGE_FILTER_TYPE } from "../../../../../../filtering/filtering.constants";
+import { TOTAL_PROFIT_FILTER_NAME } from "../../../../../programs.constants";
 
-const pointsCount = 4;
+const pointsCount = 5;
 
 const mPointFromSPoint = x => x - 1;
 const sPointFromMPoint = x => x + 1;
@@ -15,12 +15,12 @@ const mPoints = sPoints.map(mPointFromSPoint);
 
 const mPointValue = x => {
   if (x === 0) return 0;
-  const value = Math.pow(10, Math.abs(x));
+  const value = 100 * Math.pow(10, Math.abs(x));
   return x > 0 ? value : -value;
 };
 const mPointFromMPointValue = x => {
   if (x === 0) return 0;
-  const value = Math.log10(Math.abs(x));
+  const value = Math.log10(Math.abs(x) / 100);
   return x > 0 ? value : -value;
 };
 
@@ -33,18 +33,17 @@ const sPointFromSPointValue = x => {
   return x / gap;
 };
 
-const mPointFormattedValue = mPointValue => {
-  let markFormattedValue = mPointValue;
-  if (mPointValue / Math.pow(10, 3) > 1) {
-    markFormattedValue = mPointValue / Math.pow(10, 3) + "k";
-  }
-  return `${markFormattedValue}`;
+const formatValue = value => {
+  if (value === 0) return 0;
+  const suffixes = ["", "k", "M"];
+  const power = Math.floor(Math.log10(Math.abs(value)) / Math.log10(1000));
+  let formattedValue = +(value / Math.pow(1000, power)).toFixed(2);
+  formattedValue += suffixes[power];
+  return formattedValue;
 };
 
 const mPointsValues = mPoints.reduce((prev, curr) => {
-  prev[sPointValue(sPointFromMPoint(curr))] = mPointFormattedValue(
-    mPointValue(curr)
-  );
+  prev[sPointValue(sPointFromMPoint(curr))] = formatValue(mPointValue(curr));
   return prev;
 }, {});
 
@@ -85,17 +84,17 @@ const getSValues = ([min, max] = [undefined, undefined]) => {
 const AvgProfitFilter = ({ t, filtering, onFilterChange }) => {
   const handleFilterChange = value => {
     const mValues = getMValues(value);
-    return onFilterChange(AVG_PROFIT_FILTER_NAME, RANGE_FILTER_TYPE)(mValues);
+    return onFilterChange(TOTAL_PROFIT_FILTER_NAME, RANGE_FILTER_TYPE)(mValues);
   };
   return (
     <FilterItem
-      name={t(`programs-filtering.${AVG_PROFIT_FILTER_NAME}.name`)}
+      name={t(`programs-filtering.${TOTAL_PROFIT_FILTER_NAME}.name`)}
       description={t(
-        `programs-filtering.${AVG_PROFIT_FILTER_NAME}.description`
+        `programs-filtering.${TOTAL_PROFIT_FILTER_NAME}.description`
       )}
-      value={getSValues(filtering.filters[AVG_PROFIT_FILTER_NAME])}
+      value={getSValues(filtering.filters[TOTAL_PROFIT_FILTER_NAME])}
       defaultValue={getSValues(
-        filtering.defaultFilters[AVG_PROFIT_FILTER_NAME]
+        filtering.defaultFilters[TOTAL_PROFIT_FILTER_NAME]
       )}
       onFilterChange={handleFilterChange}
     >
@@ -113,7 +112,7 @@ const AvgProfitFilter = ({ t, filtering, onFilterChange }) => {
                   left: `${props.offset - 5}%`
                 }}
               >
-                {`${getMValue(props.value)}%`}
+                {`${formatValue(getMValue(props.value))}GVT`}
               </span>
               <Handle {...props} dragging="false" />
             </div>
