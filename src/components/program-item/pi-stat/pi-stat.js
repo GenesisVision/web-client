@@ -10,9 +10,7 @@ export default class PIStat extends Component {
     value: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
     tooltip: PropTypes.string,
-    bubble: PropTypes.string,
-    id: PropTypes.string.isRequired
-  };
+    bubble: PropTypes.string  };
 
   static defaultTypes = {
     tooltip: "",

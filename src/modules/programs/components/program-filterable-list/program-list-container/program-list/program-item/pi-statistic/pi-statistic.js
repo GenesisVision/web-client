@@ -20,7 +20,6 @@ const TIStatistic = ({ t, trader, className = "" }) => {
         }
         bubble="GVT"
         description={t("program-statistic.available-to-invest.text")}
-        id={trader.id}
         tooltip={t("program-statistic.available-to-invest.tooltip")}
       />
       <PIStat
@@ -33,13 +32,11 @@ const TIStatistic = ({ t, trader, className = "" }) => {
           />
         }
         description={t("program-statistic.avg-profit.text")}
-        id={trader.id}
         tooltip={t("program-statistic.avg-profit.tooltip")}
       />
       <PIStat
         value={trader.tradesCount}
         description={t("program-statistic.trades.text")}
-        id={trader.id}
         tooltip={t("program-statistic.trades.tooltip")}
       />
       <hr />
@@ -48,7 +45,6 @@ const TIStatistic = ({ t, trader, className = "" }) => {
         description={t("program-statistic.investors.text", {
           count: trader.investorsCount
         })}
-        id={trader.id}
         tooltip={t("program-statistic.investors.tooltip")}
       />
       <PIStat
@@ -61,7 +57,6 @@ const TIStatistic = ({ t, trader, className = "" }) => {
         }
         bubble={trader.currency}
         description={t("program-statistic.program-item-balance.text")}
-        id={trader.id}
         tooltip={t("program-statistic.program-item-balance.tooltip")}
       />
       <PIStat
@@ -74,7 +69,6 @@ const TIStatistic = ({ t, trader, className = "" }) => {
         }
         bubble="GVT"
         description={t("program-statistic.total-profit.text")}
-        id={trader.id}
         tooltip={t("program-statistic.total-profit.tooltip")}
       />
     </div>
