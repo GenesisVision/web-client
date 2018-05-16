@@ -8,6 +8,9 @@
 .wallet-pane-container__component {
   width: 100%;
   margin: auto;
+  @include breakpoint-desktop() {
+    max-width: 80%;
+  }
 }
 
 .wallet-pane-container__wallet {
