@@ -6,7 +6,7 @@ const ProgramActiveFilterList = ({ filters, openFilterPane, clearFilters }) => {
   const showFilterActions = filters.length > 0;
   return (
     <div>
-      {filters.map(x => <FilterBadge key={x} filter={x} />)}
+      {filters.map(x => <FilterBadge key={x.name} filter={x} />)}
       <FilterBadgeButton text="Add New" onClick={openFilterPane} />
       {showFilterActions && (
         <FilterBadgeButton text="Clear All" onClick={clearFilters} />
