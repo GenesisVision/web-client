@@ -25,8 +25,8 @@ const DashboardProgramList = ({ programs, openInvestPopup }) => {
     return programs.map((x, idx) => (
       <DPTraderItem
         key={x.id}
-        idx={idx + 1}
-        trader={x}
+        order={idx + 1}
+        program={x}
         openInvestPopup={openInvestPopup}
       />
     ));

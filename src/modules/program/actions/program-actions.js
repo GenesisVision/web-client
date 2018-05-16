@@ -12,14 +12,7 @@ const fetchProgram = programId => {
 
   return {
     type: actionTypes.PROGRAM_DETAIL,
-    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramGet(
-      programId,
-      data
-    ).then(response => {
-      const program = response.investmentProgram;
-      program.logo = filesService.getFileUrl(program.logo);
-      return response;
-    })
+    payload: SwaggerManagerApi.apiManagerInvestmentProgramGet(programId, data)
   };
 };
 
