@@ -1,7 +1,9 @@
-import React from "react";
-import { translate } from "react-i18next";
-import FilterItem from "../../../../../../filter-pane/components/filter-item/filter-item";
 import { Range } from "rc-slider";
+import { translate } from "react-i18next";
+import React from "react";
+
+import FilterItem from "../../../../../../filter-pane/components/filter-item/filter-item";
+
 import {
   LEVEL_MIN_FILTER_VALUE,
   LEVEL_FILTER_NAME,

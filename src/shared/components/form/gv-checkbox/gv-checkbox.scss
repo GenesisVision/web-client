@@ -1,0 +1,45 @@
+.gv-checkbox__container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: NeuzeitGroBol;
+  user-select: none;
+  &:hover .gv-checkbox__check-container {
+    background-color: #ccc;
+  }
+}
+
+.gv-checkbox__input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  &:checked ~ .gv-checkbox__check-container {
+    background-color: #03bdaf;
+    box-shadow: 0 5px 15px 0 rgba(22, 183, 173, 0.28);
+    .gv-checkbox__check {
+      display: block;
+    }
+  }
+}
+
+.gv-checkbox__check-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  border-radius: 0.25rem;
+  background-color: #eee;
+}
+
+.gv-checkbox__check {
+  display: none;
+  color: white;
+  top: 5px;
+  left: 5px;
+  position: relative;
+  font-size: 14px;
+}

@@ -6,6 +6,7 @@ import "shared/components/form/gv-range/gv-range.css";
 import LevelFilter from "./program-filters/level-filter";
 import AvgProfitFilter from "./program-filters/avg-profit-filter";
 import TotalProfitFilter from "./program-filters/total-profit-filter";
+import AvailableInvestment from "./program-filters/available-investment";
 
 export const TRADER_LEVEL_FILTER_FORM = "traderLevel";
 export const PROFIT_AVG_FILTER_FORM = "profitAvg";
@@ -50,6 +51,10 @@ const ProgramListFilter = ({
         onFilterChange={onChangeComplete}
       />
       <TotalProfitFilter
+        filtering={filtering}
+        onFilterChange={onChangeComplete}
+      />
+      <AvailableInvestment
         filtering={filtering}
         onFilterChange={onChangeComplete}
       />
