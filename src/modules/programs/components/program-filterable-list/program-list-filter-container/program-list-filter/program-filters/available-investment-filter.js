@@ -6,7 +6,7 @@ import GVCheckbox from "../../../../../../../shared/components/form/gv-checkbox/
 
 import { AVAILABLE_INVESTMENT_FILTER_NAME } from "../../../../../programs.constants";
 
-const AvailableInvestment = ({ t, filtering, onFilterChange }) => {
+const AvailableInvestmentFilter = ({ t, filtering, onFilterChange }) => {
   const handleFilterChange = value =>
     onFilterChange(AVAILABLE_INVESTMENT_FILTER_NAME, null)(value);
   return (
@@ -33,4 +33,4 @@ const AvailableInvestment = ({ t, filtering, onFilterChange }) => {
   );
 };
 
-export default translate()(AvailableInvestment);
+export default translate()(AvailableInvestmentFilter);

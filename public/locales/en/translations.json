@@ -197,6 +197,11 @@
       "description": "Select Total Profit",
       "value-pattern": "{{value.0}}GVT - {{value.1}}GVT"
     },
+    "balance": {
+      "name": "Balance",
+      "description": "Select Balance",
+      "value-pattern": "${{value.0}} - ${{value.1}}"
+    },
     "hasAvailableInvestment": {
       "name": "Available To Invest",
       "description": "Show only the programs you can invest in",
