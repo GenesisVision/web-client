@@ -10,12 +10,6 @@
   margin: 0 1.5rem;
   padding: 1rem 0;
   border-bottom: 1px dashed $border-color;
-
-  @include media-breakpoint-desktop() {
-  }
-  @include media-breakpoint-phone() {
-    min-width: 100%;
-  }
 }
 
 .filter-item__header-wrapper {
@@ -46,7 +40,7 @@
 }
 
 .filter-item__component {
-  padding: 0.5rem 0;
+  padding: 0.5rem 0.5rem;
   width: 100%;
 }
 
@@ -60,11 +54,12 @@
 
 .filter-item__buttons {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
 }
 
 .filter-item__button {
   font-size: 0.9rem;
-  padding: 0rem 0.75rem;
+  padding: 0 0.75rem;
+  margin: 0 0.75rem;
   min-height: 2rem;
 }
