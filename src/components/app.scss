@@ -1,11 +1,5 @@
 @import "styles/_breakpoint.scss";
 
-html {
-  @include media-breakpoint-phone() {
-    font-size: 0.875rem;
-  }
-}
-
 .app__main {
   display: flex;
 }

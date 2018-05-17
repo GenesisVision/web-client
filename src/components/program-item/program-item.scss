@@ -20,13 +20,29 @@
     display: none;
   }
 
-  &__avatar,
+  &__avatar {
+    margin-right: 0.5rem;
+  }
+
   &__bookmark {
+    font-size: 1rem;
+    line-height: 1;
     margin-right: 0.5rem;
   }
 
   &__info {
     width: calc(70% - 2rem);
+  }
+
+  &__title {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  &__link {
+    font-size: 1.4rem;
+    line-height: 1;
+    color: #1b4f64;
   }
 
   &__days-left {
@@ -56,12 +72,16 @@
   }
 
   @include breakpoint-tablet() {
+    &__bookmark {
+      margin-right: 1rem;
+    }
+
     &__info {
       width: calc(50% - 2rem);
     }
 
     &__chart {
-      width: calc(20% - 3rem);
+      width: calc(20% - 2rem);
       margin-right: 1rem;
     }
 
