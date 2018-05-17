@@ -3,7 +3,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import PIChart from "./pi-chart/pi-chart";
-import PIInfo from "./pi-info/pi-info";
 import PIBookmark from "./pi-bookmark/pi-bookmark";
 import { PROGRAM_ROUTE } from "../../modules/program/program.constants";
 import { LOGIN_ROUTE } from "../../modules/login/login.constants";

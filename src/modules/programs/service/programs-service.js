@@ -17,7 +17,6 @@ import {
   calculateTotalPages
 } from "../../paging/helpers/paging-helpers";
 import pagingActionsFactory from "../../paging/actions/paging-actions";
-import filesService from "../../../shared/services/file-service";
 
 const getPrograms = () => (dispatch, getState) => {
   const { paging } = getState().programsData.programs;

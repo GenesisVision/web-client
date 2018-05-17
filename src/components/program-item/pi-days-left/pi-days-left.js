@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import classnames from 'classnames';
 import DaysLeftWidget from "../../days-left-widget/days-left-widget";
 
 const propTypes = {
