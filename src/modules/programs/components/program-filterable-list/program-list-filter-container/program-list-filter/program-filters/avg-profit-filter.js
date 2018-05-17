@@ -20,8 +20,8 @@ const mPointValue = x => {
 };
 const mPointFromMPointValue = x => {
   if (x === 0) return 0;
-  const value = Math.log10(Math.abs(x));
-  return x > 0 ? value : -value;
+  const value = Math.abs(Math.log10(Math.abs(x) / 100));
+  return Math.sign(x) * value;
 };
 
 const sPointValue = x => {
