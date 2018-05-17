@@ -6,8 +6,8 @@ $mobile-avatar-size: 48px;
 
 .pi-avatar {
   position: relative;
-  width: $avatar-size;
-  height: $avatar-size;
+  width: $mobile-avatar-size;
+  height: $mobile-avatar-size;
 
   &__label {
     position: absolute;
@@ -39,7 +39,7 @@ $mobile-avatar-size: 48px;
     z-index: 1;
   }
 
-  @include breakpoint-deskop() {
+  @include breakpoint-desktop() {
     width: $avatar-size;
     height: $avatar-size;
 
