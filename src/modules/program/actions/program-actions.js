@@ -1,5 +1,5 @@
 import authService from "../../../services/auth-service";
-import SwaggerManagerApi from "../../../services/api-client/swagger-manager-api";
+import SwaggerInvestorApi from "../../../services/api-client/swagger-investor-api";
 
 import * as actionTypes from "./program-actions.constants";
 
@@ -11,7 +11,7 @@ const fetchProgram = programId => {
 
   return {
     type: actionTypes.PROGRAM_DETAIL,
-    payload: SwaggerManagerApi.apiManagerInvestmentProgramGet(programId, data)
+    payload: SwaggerInvestorApi.apiManagerInvestmentProgramGet(programId, data)
   };
 };
 
