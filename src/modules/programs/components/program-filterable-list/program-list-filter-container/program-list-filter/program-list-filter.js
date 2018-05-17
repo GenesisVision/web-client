@@ -21,13 +21,27 @@ export const PROFIT_AVG_FILTER_FORM = "profitAvg";
 //   { value: "Desc", label: "Descending" }
 // ];
 
-const ProgramListFilter = ({ t, filtering, onChangeComplete }) => {
+const ProgramListFilter = ({
+  t,
+  filtering,
+  onChangeComplete,
+  onClearFilters
+}) => {
   return (
     <div className="filter-list">
       <div className="filter-item">
-        <div className="filter-header">Add filters</div>
-        <div className="filter-clear">
-          <button className="gv-btn gv-btn-secondary">1</button>
+        <div className="filter-item__header-wrapper filter-pane__header-wrapper">
+          <div className="filter-item__header">
+            <div className="filter-pane__header">Add filters</div>
+          </div>
+          <div className="filter-item__handler">
+            <button
+              className="gv-btn gv-btn-secondary filter-item__button"
+              onClick={onClearFilters}
+            >
+              Clear All
+            </button>
+          </div>
         </div>
       </div>
       <LevelFilter filtering={filtering} onFilterChange={onChangeComplete} />

@@ -9,10 +9,11 @@ import programsService from "../../../service/programs-service";
 const ProgramListFilterContainer = ({
   isFilterOpen,
   filtering,
-  handleFilterChange
+  onFilterChange,
+  onClearFilters
 }) => {
-  const onFilterChange = (name, type) => value => {
-    handleFilterChange({ name, type, value });
+  const handleFilterChange = (name, type) => value => {
+    onFilterChange({ name, type, value });
   };
   return (
     <FilterPane
@@ -21,7 +22,8 @@ const ProgramListFilterContainer = ({
     >
       <ProgramListFilter
         filtering={filtering}
-        onChangeComplete={onFilterChange}
+        onChangeComplete={handleFilterChange}
+        onClearFilters={onClearFilters}
       />
     </FilterPane>
   );
@@ -35,8 +37,9 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  handleFilterChange: filter =>
-    dispatch(programsService.changeProgramListFilter(filter))
+  onFilterChange: filter =>
+    dispatch(programsService.changeProgramListFilter(filter)),
+  onClearFilters: () => dispatch(programsService.clearProgramListFilters())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(

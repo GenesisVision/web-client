@@ -12,7 +12,6 @@
   border-bottom: 1px dashed $border-color;
 
   @include media-breakpoint-desktop() {
-    padding: 3rem 4rem;
   }
   @include media-breakpoint-phone() {
     min-width: 100%;
@@ -29,11 +28,11 @@
   flex: 1;
   text-align: right;
   cursor: pointer;
-  max-width: 20px;
 }
 
 .filter-item__header {
   flex: 1;
+  min-width: 60%;
 }
 
 .filter-item__title {
@@ -65,6 +64,7 @@
 }
 
 .filter-item__button {
+  font-size: 0.9rem;
   padding: 0rem 0.75rem;
   min-height: 2rem;
 }
