@@ -70,6 +70,32 @@ const changeProgramListFilter = filter => dispatch => {
   dispatch(getPrograms());
 };
 
+const clearProgramListFilter = filterName => (dispatch, getState) => {
+  const { filtering } = getState().programsData.programs;
+  const filter = filtering.defaultFilters.find(x => x.name === filterName);
+  dispatch(filteringActions.updateFilter(filter));
+  dispatch(
+    updateProgramListPaging({
+      currentPage: 0
+    })
+  );
+  dispatch(getPrograms());
+};
+
+const clearProgramListFilters = () => dispatch => {
+  dispatch(
+    clearDataActionFactory(
+      composeFilteringActionType(actionTypes.PROGRAMS)
+    ).clearData()
+  );
+  dispatch(
+    updateProgramListPaging({
+      currentPage: 0
+    })
+  );
+  dispatch(getPrograms());
+};
+
 const updateAfterInvestment = () => dispatch => {
   return Promise.all([dispatch(getPrograms())]);
 };
@@ -94,26 +120,13 @@ const toggleFavoriteProgram = program => dispatch => {
   );
 };
 
-const clearProgramListFilters = () => dispatch => {
-  dispatch(
-    clearDataActionFactory(
-      composeFilteringActionType(actionTypes.PROGRAMS)
-    ).clearData()
-  );
-  dispatch(
-    updateProgramListPaging({
-      currentPage: 0
-    })
-  );
-  dispatch(getPrograms());
-};
-
 const programsService = {
   getPrograms,
   changeProgramListPage,
   updateAfterInvestment,
   openFilterPane,
   changeProgramListFilter,
+  clearProgramListFilter,
   clearProgramListFilters,
   toggleFavoriteProgram
 };
