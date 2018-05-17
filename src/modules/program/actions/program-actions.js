@@ -1,6 +1,5 @@
 import authService from "../../../services/auth-service";
-import filesService from "../../../shared/services/file-service";
-import SwaggerInvestorApi from "../../../services/api-client/swagger-investor-api";
+import SwaggerManagerApi from "../../../services/api-client/swagger-manager-api";
 
 import * as actionTypes from "./program-actions.constants";
 

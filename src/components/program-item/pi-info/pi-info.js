@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import React from "react";
 
-import DaysLeftWidget from "../../days-left-widget/days-left-widget";
-import PIBookmark from "../pi-bookmark/pi-bookmark";
 import replaceParams from "../../../utils/replace-params";
 import TraderAvatar from "../../program-item/pi-avatar/pi-avatar";
 
@@ -10,19 +8,6 @@ import "./pi-info.css";
 import { PROGRAM_ROUTE } from "../../../modules/program/program.constants";
 
 const PIInfo = ({ order, program, isAuthenticated, toggleFavoriteProgram }) => {
-  const renderDaysLeft = () => {
-    if (program.isEnabled) {
-      return (
-        <DaysLeftWidget
-          start={program.startOfPeriod}
-          duration={program.periodDuration}
-        />
-      );
-    }
-
-    return <div>The program is not enabled</div>;
-  };
-
   const programRoute = replaceParams(PROGRAM_ROUTE, {
     ":programId": program.id
   });

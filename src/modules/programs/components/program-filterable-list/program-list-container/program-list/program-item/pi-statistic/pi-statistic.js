@@ -1,7 +1,6 @@
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { UncontrolledTooltip } from "reactstrap";
 
 import PIStat from "../../../../../../../../components/program-item/pi-stat/pi-stat";
 

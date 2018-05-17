@@ -3,7 +3,6 @@ import {
   calculateTotalPages
 } from "../../paging/helpers/paging-helpers";
 import authService from "../../../services/auth-service";
-import filesService from "../../../shared/services/file-service";
 import filteringActionsFactory from "../../filtering/actions/filtering-actions";
 import pagingActionsFactory from "../../paging/actions/paging-actions";
 import tournamentActions from "../actions/tournament-actions";
