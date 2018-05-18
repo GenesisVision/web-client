@@ -35,8 +35,9 @@
   }
 
   @include media-breakpoint-phone() {
-    position: absolute;
-    top: 89px;
+    margin-top: 89px; /*fix for iphone*/
+    padding-bottom: 100px; /*fix for iphone*/
+    top: 0;
     max-width: 100%;
   }
 }
