@@ -11,7 +11,7 @@ const fetchProgram = programId => {
 
   return {
     type: actionTypes.PROGRAM_DETAIL,
-    payload: SwaggerInvestorApi.apiManagerInvestmentProgramGet(programId, data)
+    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramGet(programId, data)
   };
 };
 
