@@ -1,18 +1,28 @@
+@import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
+
 .days-left-widget {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   width: 100%;
-}
 
-.days-left-widget__text {
-  font-size: 0.9em;
-  flex: 1;
-  white-space: nowrap;
-}
+  &__text {
+    font-size: 0.875rem;
+    white-space: nowrap;
+  }
 
-.days-left-widget__progress {
-  flex: 1;
-  margin: 0.5rem 0;
-  width: 100%;
+  &__progress {
+    flex: 1;
+    margin: 4px 0;
+    width: 100%;
+  }
+
+  @include breakpoint-desktop() {
+    &__progress {
+      flex: 1;
+      margin: 1rem;
+      max-width: 122px;
+    }
+  }
 }

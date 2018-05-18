@@ -25,22 +25,21 @@ const PIChart = ({ data }) => {
           <ReferenceLine y={0} strokeDasharray="5 5" />
           <XAxis
             dataKey="date"
-            tick={false}
             domain={["dataMin", "dataMax"]}
             type="number"
-            axisLine={false}
+            hide
             tickFormatter={date => moment(date).format("MM/DD")}
           />
-          <YAxis dataKey="equity" axisLine={false} hide/>
+          <YAxis dataKey="equity" axisLine={false} hide />
           <Tooltip
             wrapperStyle={tooltipWrapperStyle}
-            formatter={(value) => (`${value}%`)}
+            formatter={value => `${value}%`}
             labelFormatter={date => moment(date).format("MMMM Do HH:mm")}
           />
           <Line
             type="monotone"
             dataKey="equity"
-            strokeWidth={3}
+            strokeWidth={2}
             dot={false}
             activeDot={{ stroke: "#184f61" }}
             isAnimationActive={false}

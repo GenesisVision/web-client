@@ -1,22 +1,14 @@
 import React from "react";
-
-import "./program-avatar.css";
+import classnames from "classnames";
 import avatarStub from "../../shared/media/manager-avatar.png";
+import fileService from "../../shared/services/file-service";
+import "./program-avatar.css";
 
-const ProgramAvatar = ({ imgUrl, level, isTournament }) => {
+const ProgramAvatar = ({ url, className }) => {
+  const src = url ? fileService.getFileUrl(url) : avatarStub;
   return (
-    <div className="program-avatar">
-      {isTournament && (
-        <span className="program-avatar__tournament">
-          <i className="fas fa-trophy" />
-        </span>
-      )}
-      <img
-        className="program-avatar__image"
-        src={imgUrl || avatarStub}
-        alt="Trader Avatar"
-      />
-      <span className="program-avatar__level">{level}</span>
+    <div className={classnames("program-avatar", className)}>
+      <img className="program-avatar__image" src={src} alt="Trader Avatar" />
     </div>
   );
 };

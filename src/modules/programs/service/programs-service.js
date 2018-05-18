@@ -34,7 +34,6 @@ const getPrograms = () => (dispatch, getState) => {
 
   const setLogoAndOrder = response => {
     response.investmentPrograms.forEach((x, idx) => {
-      x.logo = filesService.getFileUrl(x.logo);
       x.order = skip + idx + 1;
     });
 

@@ -3,15 +3,9 @@
 
 .pi-chart {
   display: flex;
-  order: 2;
-  flex-wrap: wrap;
-  flex: 1;
-  max-width: 200px;
-  height: 150px;
+  width: 100%;
+  height: 50px;
 
-  @include media-breakpoint-desktop() {
-    min-width: 40%;
-  }
   @include media-breakpoint-phone() {
     min-width: 100%;
   }

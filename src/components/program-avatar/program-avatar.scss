@@ -1,48 +1,40 @@
 @import "styles/_colors.scss";
 @import "styles/_breakpoint.scss";
 
+$avatar-size: 112px;
+$mobile-avatar-size: 48px;
+
 .program-avatar {
   position: relative;
-  max-width: 100px;
-  max-height: 100px;
-  @include media-breakpoint-phone() {
-    max-width: 62px;
-    max-height: 62px;
-  }
-}
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: $avatar-size;
+  width: $avatar-size;
+  overflow: hidden;
 
-.program-avatar__image {
-  max-width: 100px;
-  max-height: 100px;
-  @include media-breakpoint-phone() {
-    max-width: 62px;
-    max-height: 62px;
-  }
-}
+  &__image {
+    max-width: 100%;
+    max-height: 100%;
+    font-size: 0;
 
-.program-avatar__tournament {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  color: $main-color;
-  background-color: $background-color;
-  display: inline-block;
-  padding: 0.3em;
-  line-height: 1;
-  @include media-breakpoint-phone() {
-    font-size: 0.8rem;
+    &:after {
+      content: "";
+      background-image: url("../../shared/media/manager-avatar.png");
+      background-color: white;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
   }
-}
 
-.program-avatar__level {
-  position: absolute;
-  bottom: 0px;
-  right: 0px;
-  color: white;
-  background-color: $alternate-color;
-  display: inline-block;
-  padding: 0.1em 0.5em;
   @include media-breakpoint-phone() {
-    font-size: 0.8rem;
+    max-width: $mobile-avatar-size;
+    max-height: $mobile-avatar-size;
   }
 }

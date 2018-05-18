@@ -1,0 +1,52 @@
+@import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
+
+$avatar-size: 112px;
+$mobile-avatar-size: 48px;
+
+.pi-avatar {
+  position: relative;
+  width: $mobile-avatar-size;
+  height: $mobile-avatar-size;
+
+  &__label {
+    position: absolute;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 22px;
+    width: 22px;
+    z-index: 2;
+  }
+
+  &__tournament {
+    top: 0;
+    left: 0;
+    color: $main-color;
+    background-color: white;
+  }
+
+  &__level {
+    bottom: 0;
+    right: 0;
+    color: white;
+    background-color: $alternate-color;
+  }
+
+  &__image {
+    max-height: 100%;
+    max-width: 100%;
+    z-index: 1;
+  }
+
+  @include breakpoint-desktop() {
+    width: $avatar-size;
+    height: $avatar-size;
+
+    &__label {
+      font-size: 13px;
+      height: 28px;
+      width: 28px;
+    }
+  }
+}

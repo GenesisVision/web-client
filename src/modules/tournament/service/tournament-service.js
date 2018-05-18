@@ -3,7 +3,6 @@ import {
   calculateTotalPages
 } from "../../paging/helpers/paging-helpers";
 import authService from "../../../services/auth-service";
-import filesService from "../../../shared/services/file-service";
 import filteringActionsFactory from "../../filtering/actions/filtering-actions";
 import pagingActionsFactory from "../../paging/actions/paging-actions";
 import tournamentActions from "../actions/tournament-actions";
@@ -27,7 +26,6 @@ const getPrograms = () => (dispatch, getState) => {
 
   const setLogoAndOrder = response => {
     response.investmentPrograms.forEach((x, idx) => {
-      x.logo = filesService.getFileUrl(x.logo);
       x.order = skip + idx + 1;
     });
 

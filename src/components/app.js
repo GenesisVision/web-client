@@ -17,6 +17,7 @@ import AppRoutes from "./app.routes";
 
 class AppContainer extends Component {
   componentDidMount() {
+    this.props.initEnvironment();
     this.props.fetchPlatformSettings();
   }
   render() {
@@ -41,7 +42,9 @@ class AppContainer extends Component {
 AppContainer = connect(
   null,
   dispatch => ({
-    fetchPlatformSettings: () => dispatch(platformActions.fetchPlatformSettings)
+    fetchPlatformSettings: () =>
+      dispatch(platformActions.fetchPlatformSettings),
+    initEnvironment: () => dispatch(platformActions.initEnvironment())
   }),
   null,
   { pure: false }

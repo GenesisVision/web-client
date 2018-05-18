@@ -13,7 +13,7 @@ const TraderInfo = ({
   return (
     <div className="trader-info">
       <div className="trader-info__avatar">
-        <TraderAvatar imgUrl={trader.logo} level={trader.level} />
+        <TraderAvatar url={trader.logo} level={trader.level} />
       </div>
       <div className="trader-info__name">
         <div className="trader-info__title">{trader.title}</div>

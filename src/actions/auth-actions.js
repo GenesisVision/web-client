@@ -1,6 +1,6 @@
 import history from "../utils/history";
 import authService from "../services/auth-service";
-import {HOME_ROUTE} from "../components/app.constants";
+import { HOME_ROUTE } from "../components/app.constants";
 
 export const UPDATE_TOKEN = "UPDATE_TOKEN";
 
