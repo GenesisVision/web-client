@@ -16,11 +16,11 @@ const mPoints = sPoints.map(mPointFromSPoint);
 const mPointValue = x => {
   if (x === 0) return 0;
   const value = Math.pow(10, Math.abs(x));
-  return x > 0 ? value : -value;
+  return Math.sign(x) * value;
 };
 const mPointFromMPointValue = x => {
   if (x === 0) return 0;
-  const value = Math.abs(Math.log10(Math.abs(x) / 100));
+  const value = Math.abs(Math.log10(Math.abs(x)));
   return Math.sign(x) * value;
 };
 

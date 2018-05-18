@@ -187,7 +187,7 @@
       "description": "Select Trader Level",
       "value-pattern": "{{value.0}} - {{value.1}}"
     },
-    "profitAvg": {
+    "profitAvgPercent": {
       "name": "Average Profit",
       "description": "Select Average Profit",
       "value-pattern": "{{value.0}}% - {{value.1}}%"

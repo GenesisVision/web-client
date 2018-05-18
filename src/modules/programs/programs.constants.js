@@ -1,7 +1,7 @@
 export const PROGRAMS_ROUTE = "/programs";
 
 export const LEVEL_FILTER_NAME = "level";
-export const AVG_PROFIT_FILTER_NAME = "profitAvg";
+export const AVG_PROFIT_FILTER_NAME = "profitAvgPercent";
 export const TOTAL_PROFIT_FILTER_NAME = "profitTotal";
 export const BALANCE_FILTER_NAME = "balance";
 export const AVAILABLE_INVESTMENT_FILTER_NAME = "hasAvailableInvestment";
