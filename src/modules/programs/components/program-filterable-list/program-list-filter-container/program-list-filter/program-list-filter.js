@@ -6,6 +6,7 @@ import "shared/components/form/gv-range/gv-range.css";
 
 import AvailableInvestmentFilter from "./program-filters/available-investment-filter";
 import AvgProfitFilter from "./program-filters/avg-profit-filter";
+import Button from "../../../../../../components/button/button";
 import BalanceFilter from "./program-filters/balance-filter";
 import LevelFilter from "./program-filters/level-filter";
 import TotalProfitFilter from "./program-filters/total-profit-filter";
@@ -38,12 +39,12 @@ const ProgramListFilter = ({
             <div className="filter-pane__header">Add filters</div>
           </div>
           <div className="filter-item__handler">
-            <button
-              className="gv-btn gv-btn-secondary filter-item__button"
+            <Button
+              secondary
+              className="filter-item__button"
               onClick={onClearFilters}
-            >
-              Clear All
-            </button>
+              label="Clear All"
+            />
           </div>
         </div>
       </div>

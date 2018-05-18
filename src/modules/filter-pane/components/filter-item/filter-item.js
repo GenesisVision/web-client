@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import classnames from "classnames";
+import Button from "../../../../components/button/button";
 import "./filter-item.css";
 
 class FilterItem extends Component {
@@ -71,27 +72,27 @@ class FilterItem extends Component {
           <div className="filter-item__component">
             {this.props.children(value, this.handleChange)}
             <div className="filter-item__buttons">
-              <button
-                className="gv-btn gv-btn-secondary filter-item__button"
+              <Button
+                className="filter-item__button"
+                label="Add filter"
+                secondary
                 onClick={this.handleApply}
-              >
-                Add filter
-              </button>
+              />
               {this.showCancelButton() ? (
-                <button
-                  className="gv-btn gv-btn-secondary filter-item__button"
+                <Button
+                  className="filter-item__button"
+                  label="Cancel"
+                  secondary
                   onClick={this.handleCancel}
-                >
-                  Cancel
-                </button>
+                />
               ) : (
-                <button
-                  className="gv-btn gv-btn-secondary filter-item__button"
-                  onClick={this.handleClear}
+                <Button
+                  className="filter-item__button"
+                  label="Clear"
+                  secondary
                   disabled={this.canClear()}
-                >
-                  Clear
-                </button>
+                  onClick={this.handleClear}
+                />
               )}
             </div>
           </div>
