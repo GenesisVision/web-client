@@ -10,7 +10,6 @@ import {
   calculateTotalPages
 } from "../../paging/helpers/paging-helpers";
 import pagingActionsFactory from "../../paging/actions/paging-actions";
-import filesService from "../../../shared/services/file-service";
 import { composeProgramsFilters } from "./programs-helpers";
 import clearDataActionFactory from "../../../shared/actions/clear-data.factory";
 import { composeFilteringActionType } from "../../filtering/helpers/filtering-helpers";

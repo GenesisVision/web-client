@@ -5,17 +5,9 @@
   min-width: 15%;
   text-align: center;
   flex-grow: 1;
-  &:nth-of-type(odd) {
-    border-bottom: 1px solid $border-color;
-  }
 
-  @include media-breakpoint-desktop() {
-    &:not(:last-of-type) {
-      border-right: 1px solid $border-color;
-    }
-    &:nth-of-type(odd) {
-      border-bottom: 0;
-    }
+  &:not(:last-of-type) {
+    border-right: 1px solid $border-color;
   }
 
   @include media-breakpoint-phone() {
