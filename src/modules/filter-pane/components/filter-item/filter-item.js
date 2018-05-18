@@ -16,7 +16,7 @@ class FilterItem extends Component {
     return null;
   }
 
-  state = { isOpen: true, value: this.getInitialValue() };
+  state = { isOpen: false, value: this.getInitialValue() };
 
   toggleOpenState = () => {
     this.setState(state => ({ isOpen: !state.isOpen }));
