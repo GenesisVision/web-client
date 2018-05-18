@@ -24,7 +24,7 @@ const PAGES_WITH_FILTER = {
 };
 
 const authorizedControl = signOut => (
-  <ul className="navbar-nav px-3 flex-row">
+  <ul className="navbar-nav flex-row">
     <li className="nav-item text-nowrap">
       <Button label="Sign Out" secondary onClick={signOut} />
     </li>
@@ -32,7 +32,7 @@ const authorizedControl = signOut => (
 );
 
 const unauthorizedControl = () => (
-  <ul className="navbar-nav px-3 flex-row">
+  <ul className="navbar-nav flex-row">
     <li className="nav-item text-nowrap">
       <Button label="Sign In" secondary href={LOGIN_ROUTE} />
     </li>
