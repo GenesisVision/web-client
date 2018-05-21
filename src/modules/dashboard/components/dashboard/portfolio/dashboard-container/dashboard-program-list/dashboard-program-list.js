@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import React from "react";
 import Button from "../../../../../../../components/button/button";
 import DPTraderItem from "./dp-trader-item/dp-trader-item";

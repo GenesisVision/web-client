@@ -4,8 +4,8 @@ import DaysLeftWidget from "../../days-left-widget/days-left-widget";
 
 const propTypes = {
   isEnabled: PropTypes.bool.isRequired,
-  startOfPeriod: PropTypes.string.isRequired,
-  periodDuration: PropTypes.string.isRequired,
+  startOfPeriod: PropTypes.instanceOf(Date).isRequired,
+  periodDuration: PropTypes.number.isRequired,
   className: PropTypes.string
 };
 

@@ -7,7 +7,7 @@ import "./pi-stat.css";
 
 export default class PIStat extends Component {
   static propTypes = {
-    value: PropTypes.number.isRequired,
+    value: PropTypes.any.isRequired,
     description: PropTypes.string.isRequired,
     tooltip: PropTypes.string,
     bubble: PropTypes.string
