@@ -7,6 +7,7 @@
   z-index: 1080;
   @include media-breakpoint-phone() {
     position: fixed;
+    width: 100%;
   }
 }
 

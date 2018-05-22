@@ -1,5 +1,10 @@
+@import "styles/_breakpoint.scss";
+
 .dashboard {
   margin-top: 4rem;
+  @include media-breakpoint-phone() {
+    margin-top: 5rem;
+  }
 }
 
 .dashboard-subheader {
