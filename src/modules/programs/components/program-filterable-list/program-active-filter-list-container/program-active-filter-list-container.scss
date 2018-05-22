@@ -1,0 +1,9 @@
+@import "styles/_breakpoint.scss";
+
+.program-active-filter-list-container {
+  margin: 2rem 1rem 0.5rem 1rem;
+  @include media-breakpoint-phone() {
+    margin-top: 89px;
+    margin-bottom: 0;
+  }
+}

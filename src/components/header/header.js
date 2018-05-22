@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import classnames from "classnames";
 import LoadingBar from "react-redux-loading-bar";
 import React from "react";
@@ -8,53 +8,33 @@ import FilterIcon from "./filter-icon";
 import filterPaneActionsFactory from "../../modules/filter-pane/actions/filter-pane-actions";
 import loginService from "../../modules/login/service/login-service";
 import MobileNav from "./mobile-nav";
-
+import Button from "../../components/button/button";
 import "./header.css";
 import { HOME_ROUTE } from "../app.constants";
 import { LOGIN_ROUTE } from "../../modules/login/login.constants";
 import { PROGRAMS } from "../../modules/programs/actions/programs-actions.constants";
 import { PROGRAMS_ROUTE } from "../../modules/programs/programs.constants";
-import { WALLET } from "../../modules/wallet/actions/wallet-actions.constants";
-import { WALLET_ROUTE } from "../../modules/wallet/wallet.constants";
 import gvLogo from "./gv-logo.svg";
 
 const PAGES_WITH_FILTER = {
   [PROGRAMS_ROUTE]: {
     actionType: PROGRAMS,
     getStateData: state => state.programsData
-  },
-  [WALLET_ROUTE]: {
-    actionType: WALLET,
-    getStateData: state => state.walletData
   }
 };
 
 const authorizedControl = signOut => (
-  <ul className="navbar-nav px-3 flex-row">
+  <ul className="navbar-nav flex-row">
     <li className="nav-item text-nowrap">
-      <button
-        className="gv-btn gv-btn-secondary"
-        title="Sign out"
-        onClick={() => {
-          signOut();
-        }}
-      >
-        Sign Out
-      </button>
+      <Button label="Sign Out" secondary onClick={signOut} />
     </li>
   </ul>
 );
 
 const unauthorizedControl = () => (
-  <ul className="navbar-nav px-3 flex-row">
+  <ul className="navbar-nav flex-row">
     <li className="nav-item text-nowrap">
-      <Link
-        className="gv-btn gv-btn-secondary"
-        title="Sign In"
-        to={LOGIN_ROUTE}
-      >
-        Sign In
-      </Link>
+      <Button label="Sign In" secondary href={LOGIN_ROUTE} />
     </li>
   </ul>
 );

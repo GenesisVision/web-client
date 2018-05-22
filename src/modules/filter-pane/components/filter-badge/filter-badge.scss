@@ -1,0 +1,46 @@
+@import "styles/_colors.scss";
+
+.filter-badge {
+  position: relative;
+  display: inline-block;
+  margin: 0.5rem;
+  max-width: 300px;
+  padding: 0.2rem 1rem;
+  border-radius: 10rem;
+  color: white;
+  background-color: $alternate-color;
+  box-shadow: 0 5px 15px 0 $box-shadow-primary-color;
+}
+
+.filter-badge__remove {
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+.filter-badge__filter-text {
+  font-size: 0.9rem;
+}
+
+.filter-badge__name {
+  font-family: NeuzeitGroBol;
+  &:not(:last-of-type) {
+    &::after {
+      content: ":";
+    }
+  }
+}
+
+.filter-badge__value {
+  margin-left: 0.5rem;
+}
+
+.filter-badge--button {
+  cursor: pointer;
+  min-width: 100px;
+  text-align: center;
+  color: $alternate-color;
+  background-color: white;
+  border: solid 1px $border-color;
+  box-shadow: 0 1px 4px 0 $border-color;
+  font-family: NeuzeitGroBol;
+}

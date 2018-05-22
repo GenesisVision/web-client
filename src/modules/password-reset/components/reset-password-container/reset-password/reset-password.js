@@ -1,6 +1,6 @@
 import { withFormik, Field } from "formik";
 import React from "react";
-
+import Button from "../../../../../components/button/button";
 import FormError from "../../../../../shared/components/form/form-error/form-error";
 import InputText from "../../../../../shared/components/form/input-text/input-text";
 
@@ -27,13 +27,7 @@ const ResetPassword = ({ isSubmitting, handleSubmit, error }) => {
           component={InputText}
         />
         <FormError error={error} />
-        <button
-          type="submit"
-          id="resetPasswordSubmit"
-          className="gv-btn gv-btn-primary"
-        >
-          Submit
-        </button>
+        <Button type="submit" id="resetPasswordSubmit" label="Submit" primary />
       </div>
     </form>
   );

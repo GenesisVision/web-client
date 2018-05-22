@@ -4,9 +4,10 @@
 .header-wrapper {
   position: sticky;
   top: 0;
-  z-index: 1020;
+  z-index: 1080;
   @include media-breakpoint-phone() {
-    position: initial;
+    position: fixed;
+    width: 100%;
   }
 }
 
@@ -58,7 +59,7 @@
   font-weight: 700;
   margin-left: 2rem;
   @include media-breakpoint-phone() {
-    margin-left: 1rem;
+    display: none;
   }
 }
 

@@ -3,15 +3,15 @@ import { composeFilteringActionType } from "../helpers/filtering-helpers";
 const filteringActionsFactory = actionType => {
   const filteringActionType = composeFilteringActionType(actionType);
 
-  const updateFiltering = filtering => {
+  const updateFilter = filter => {
     return {
       type: filteringActionType,
-      filtering
+      payload: filter
     };
   };
 
   return {
-    updateFiltering
+    updateFilter
   };
 };
 

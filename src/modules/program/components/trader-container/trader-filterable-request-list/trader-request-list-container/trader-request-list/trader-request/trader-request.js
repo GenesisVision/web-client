@@ -1,6 +1,6 @@
 import moment from "moment";
 import React from "react";
-
+import Button from "../../../../../../../../components/button/button";
 import "./trader-request.css";
 
 const TraderRequest = ({ request, token, cancelRequest }) => {
@@ -26,12 +26,7 @@ const TraderRequest = ({ request, token, cancelRequest }) => {
 
       <div className="trader-request__cancel trader-request__cell">
         {request.canCancelRequest ? (
-          <button
-            className="gv-btn gv-btn-primary"
-            onClick={cancelRequest(request.id)}
-          >
-            Cancel
-          </button>
+          <Button primary label="Cancel" onClick={cancelRequest(request.id)} />
         ) : null}
       </div>
     </div>

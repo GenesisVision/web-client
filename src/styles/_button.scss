@@ -1,7 +1,7 @@
 .gv-btn {
   display: inline-block;
   font-family: "NeuzeitGroBol";
-  font-weight: 400;
+  font-weight: 300;
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
@@ -41,7 +41,7 @@
   }
 }
 
-.gv-btn-primary {
+.gv-btn--primary {
   color: #fff;
   background-color: #03bdaf;
   border-color: #03bdaf;
@@ -49,7 +49,6 @@
 
   &:not(:disabled):not(.disabled):active,
   &:not(:disabled):not(.disabled).active {
-    color: #fff;
     background-color: #028b81;
     border-color: #027e75;
   }
@@ -60,20 +59,18 @@
   }
 
   &:hover {
-    color: #fff;
     background-color: #02978c;
     border-color: #028b81;
   }
 
   &.disabled,
   &:disabled {
-    color: #fff;
     background-color: #03bdaf;
     border-color: #03bdaf;
   }
 }
 
-.gv-btn-secondary {
+.gv-btn--secondary {
   color: #184f61;
   background-color: #fff;
   background-image: none;

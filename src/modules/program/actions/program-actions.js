@@ -1,5 +1,4 @@
 import authService from "../../../services/auth-service";
-import filesService from "../../../shared/services/file-service";
 import SwaggerInvestorApi from "../../../services/api-client/swagger-investor-api";
 
 import * as actionTypes from "./program-actions.constants";
@@ -12,14 +11,7 @@ const fetchProgram = programId => {
 
   return {
     type: actionTypes.PROGRAM_DETAIL,
-    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramGet(
-      programId,
-      data
-    ).then(response => {
-      const program = response.investmentProgram;
-      program.logo = filesService.getFileUrl(program.logo);
-      return response;
-    })
+    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramGet(programId, data)
   };
 };
 

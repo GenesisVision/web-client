@@ -1,7 +1,6 @@
-import { Link } from "react-router-dom";
 import { withFormik, Field } from "formik";
 import React from "react";
-
+import Button from "../../../../components/button/button";
 import FormError from "../../../../shared/components/form/form-error/form-error";
 import InputText from "../../../../shared/components/form/input-text/input-text";
 
@@ -39,19 +38,14 @@ const RegisterForm = ({ isSubmitting, handleSubmit, error }) => {
           component={InputText}
         />
         <FormError error={error} />
-
-        <button
-          type="submit"
-          id="registerFormSubmit"
-          className="gv-btn gv-btn-primary"
-        >
-          Sign Up
-        </button>
+        <Button type="submit" id="registerFormSubmit" primary label="Sign Up" />
         <div className="register__separator" />
-
-        <Link to={LOGIN_ROUTE} className="login__btn gv-btn gv-btn-secondary">
-          Already have an account? Sign In!
-        </Link>
+        <Button
+          className="login__btn"
+          href={LOGIN_ROUTE}
+          label="Already have an account? Sign In!"
+          secondary
+        />
       </div>
     </form>
   );

@@ -18,24 +18,12 @@ const fetchWalletAddress = () => {
   };
 };
 
-const fetchWalletTransactionProgramFilter = () => {
-  return {
-    type: actionTypes.WALLET_FILER_PANE_PROGRAMS,
-    payload: SwaggerInvestorApi.apiInvestorWalletTransactionsInvestmentProgramsListGet(
-      authService.getAuthArg()
-    )
-  };
-};
-
-const walletWithdraw = withdrawData => {
-  const data = {
-    request: withdrawData
-  };
+const walletWithdraw = request => {
   return {
     type: actionTypes.WALLET_WITHDRAW,
     payload: SwaggerInvestorApi.apiInvestorWalletWithdrawRequestPost(
       authService.getAuthArg(),
-      data
+      { request }
     )
   };
 };
@@ -43,7 +31,6 @@ const walletWithdraw = withdrawData => {
 const walletActions = {
   fetchWallet,
   fetchWalletAddress,
-  walletWithdraw,
-  fetchWalletTransactionProgramFilter
+  walletWithdraw
 };
 export default walletActions;

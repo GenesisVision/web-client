@@ -3,15 +3,13 @@ import { connect } from "react-redux";
 import React, { Component } from "react";
 import classnames from "classnames";
 import "./alert-message-list.css";
-
+import Button from "../../../../../components/button/button";
 import { alertMessageActions } from "../../actions/alert-message-actions";
 import history from "../../../../../utils/history";
 
 const ClearAllButton = ({ onClick }) => (
   <div className="alert-message__clear-all">
-    <button className="gv-btn gv-btn-secondary" onClick={onClick}>
-      Clear
-    </button>
+    <Button secondary onClick={onClick} label="Clear" />
   </div>
 );
 

@@ -1,16 +1,7 @@
 import authService from "../../../services/auth-service";
-import filesService from "../../../shared/services/file-service";
 import SwaggerInvestorApi from "../../../services/api-client/swagger-investor-api";
 
 import * as actionTypes from "./dashboard-actions.constants";
-
-const getProgramLogoFileUrl = response => {
-  response.investmentPrograms.forEach(x => {
-    x.logo = filesService.getFileUrl(x.logo);
-  });
-
-  return response;
-};
 
 const fetchDashboardPrograms = () => {
   return {
@@ -18,7 +9,7 @@ const fetchDashboardPrograms = () => {
     payload: SwaggerInvestorApi.apiInvestorDashboardGet(
       authService.getAuthArg(),
       { equityChartLength: 365 }
-    ).then(getProgramLogoFileUrl)
+    )
   };
 };
 
@@ -29,9 +20,7 @@ const fetchFavoritesPrograms = () => {
   };
   return {
     type: actionTypes.FAVORITES_PROGRAMS,
-    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramsPost(data).then(
-      getProgramLogoFileUrl
-    )
+    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramsPost(data)
   };
 };
 

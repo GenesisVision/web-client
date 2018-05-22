@@ -1,0 +1,65 @@
+@import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
+
+.filter-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+  min-width: 240px;
+  margin: 0 1.5rem;
+  padding: 1rem 0;
+  border-bottom: 1px dashed $border-color;
+}
+
+.filter-item__header-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.filter-item__handler {
+  flex: 1;
+  text-align: right;
+  cursor: pointer;
+}
+
+.filter-item__header {
+  flex: 1;
+  min-width: 65%;
+}
+
+.filter-item__title {
+  font-size: 1.1rem;
+}
+
+.filter-item__description {
+  color: $text-sub-color;
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+.filter-item__component {
+  padding: 0.5rem 0.5rem;
+  width: 100%;
+}
+
+.filter-handler {
+  color: $inactive-icon-color;
+}
+
+.filter-handler--is-open {
+  color: $alternate-color;
+}
+
+.filter-item__buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.filter-item__button {
+  font-size: 0.9rem;
+  padding: 0 0.75rem;
+  margin: 0 0.75rem;
+  min-height: 2rem;
+}

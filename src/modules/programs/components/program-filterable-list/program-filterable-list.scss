@@ -1,0 +1,43 @@
+@import "styles/_breakpoint.scss";
+
+.program-filterable-list {
+  display: flex;
+}
+
+.program-filterable-list__programs {
+  flex: 1;
+  max-width: 1570px;
+  margin: 0 auto;
+  &:not(:last-child) {
+    @include media-breakpoint-desktop() {
+      opacity: 0.3;
+      height: calc(100vh - 72px);
+      overflow: hidden;
+    }
+
+    @include media-breakpoint-phone() {
+      display: none;
+      height: calc(100vh - 89px);
+    }
+  }
+}
+
+.program-filterable-list__filters {
+  flex: 1;
+  max-width: 300px;
+  @include media-breakpoint-desktop() {
+    position: fixed;
+    top: 72px;
+    bottom: 0;
+    right: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  @include media-breakpoint-phone() {
+    margin-top: 89px; /*fix for iphone*/
+    padding-bottom: 100px; /*fix for iphone*/
+    top: 0;
+    max-width: 100%;
+  }
+}

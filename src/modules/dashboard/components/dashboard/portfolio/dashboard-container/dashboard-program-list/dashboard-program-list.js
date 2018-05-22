@@ -1,6 +1,5 @@
-import { Link } from "react-router-dom";
 import React from "react";
-
+import Button from "../../../../../../../components/button/button";
 import DPTraderItem from "./dp-trader-item/dp-trader-item";
 
 import "./dashboard-program-list.css";
@@ -16,17 +15,15 @@ const DashboardProgramList = ({ programs, openInvestPopup }) => {
           <div className="dashboard-empty__text">
             There are no programs in which you have invested
           </div>
-          <Link className="gv-btn gv-btn-primary" to={PROGRAMS_ROUTE}>
-            Browse Programs
-          </Link>
+          <Button primary href={PROGRAMS_ROUTE} label="Browse Programs" />
         </div>
       );
     }
     return programs.map((x, idx) => (
       <DPTraderItem
         key={x.id}
-        idx={idx + 1}
-        trader={x}
+        order={idx + 1}
+        program={x}
         openInvestPopup={openInvestPopup}
       />
     ));

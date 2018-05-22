@@ -1,5 +1,5 @@
 import React from "react";
-
+import Button from "../../../../../../../../components/button/button";
 import "./trader-buttons.css";
 
 const TraderButtons = ({
@@ -11,20 +11,20 @@ const TraderButtons = ({
 }) => {
   return (
     <div className="trader-buttons">
-      <button
-        className="trader-button gv-btn gv-btn-secondary"
+      <Button
+        className="trader-button"
         onClick={openWithdrawPopup}
         disabled={!isWithdrawEnable}
-      >
-        Withdraw
-      </button>
-      <button
-        className="trader-button gv-btn gv-btn-primary"
+        label="Withdraw"
+        secondary
+      />
+      <Button
+        primary
+        className="trader-button"
+        label="Invest"
         onClick={openInvestPopup(programId)}
         disabled={!isInvestEnable}
-      >
-        Invest
-      </button>
+      />
     </div>
   );
 };

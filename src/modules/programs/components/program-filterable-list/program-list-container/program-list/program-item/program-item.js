@@ -1,41 +1,11 @@
-import classnames from "classnames";
 import React from "react";
 
-import PTIButtons from "../../../../../../../components/program-item/pi-buttons/pi-buttons";
-import PIChart from "../../../../../../../components/program-item/pi-chart/pi-chart";
-import PIInfo from "../../../../../../../components/program-item/pi-info/pi-info";
 import PIStatistic from "./pi-statistic/pi-statistic";
-
+import ProgramItem from "../../../../../../../components/program-item/program-item";
 import "./program-item.css";
 
-const ProgramItem = ({
-  program,
-  isAuthenticated,
-  openInvestPopup,
-  toggleFavoriteProgram
-}) => {
-  return (
-    <div
-      className={classnames("program-item", {
-        "program-item--inactive": !program.isEnabled
-      })}
-    >
-      <PIInfo
-        order={program.order}
-        program={program}
-        isAuthenticated={isAuthenticated}
-        toggleFavoriteProgram={toggleFavoriteProgram}
-      />
-      <PIChart data={program.equityChart} />
-      <PIStatistic trader={program} />
-      <PTIButtons
-        programId={program.id}
-        isInvestEnable={program.isInvestEnable}
-        isAuthenticated={isAuthenticated}
-        openInvestPopup={openInvestPopup}
-      />
-    </div>
-  );
+const ProgramListItem = props => {
+  return <ProgramItem statistic={PIStatistic} {...props} />;
 };
 
-export default ProgramItem;
+export default ProgramListItem;

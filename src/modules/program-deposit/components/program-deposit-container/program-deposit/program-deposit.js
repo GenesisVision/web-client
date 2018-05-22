@@ -33,7 +33,7 @@ const ProgramDeposit = ({
             <div className="program-deposit__trader">
               <div className="program-deposit__avatar">
                 <ProgramAvatar
-                  imgUrl={programDeposit.logo}
+                  url={programDeposit.logo}
                   level={programDeposit.level}
                 />
               </div>

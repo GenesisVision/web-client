@@ -1,112 +1,69 @@
-import { withFormik, Field } from "formik";
+import { translate } from "react-i18next";
 import React from "react";
 
-import GVInputRange from "../../../../../../shared/components/form/gv-input-range/gv-input-range";
-import GVSelect from "../../../../../../shared/components/form/gv-select/gv-select";
+import "rc-slider/assets/index.css";
+import "shared/components/form/gv-range/gv-range.css";
 
-import {
-  LEVEL_MAX,
-  LEVEL_MIN,
-  PROFIT_PROGRAM_PROCENT_MAX,
-  PROFIT_PROGRAM_PROCENT_MIN
-} from "../../../../programs.constants";
+import AvailableInvestmentFilter from "./program-filters/available-investment-filter";
+import AvgProfitFilter from "./program-filters/avg-profit-filter";
+import Button from "../../../../../../components/button/button";
+import BalanceFilter from "./program-filters/balance-filter";
+import LevelFilter from "./program-filters/level-filter";
+import TotalProfitFilter from "./program-filters/total-profit-filter";
 
-const sortingOptions = [
-  { value: "ByTitle", label: "Name" },
-  { value: "ByLevel", label: "Level" },
-  { value: "ByProfit", label: "Profit" },
-  { value: "ByEndOfPeriod", label: "End Of Period" }
-];
-const sortingDirectionOptions = [
-  { value: "Asc", label: "Ascending" },
-  { value: "Desc", label: "Descending" }
-];
+export const TRADER_LEVEL_FILTER_FORM = "traderLevel";
+export const PROFIT_AVG_FILTER_FORM = "profitAvg";
+
+// const sortingOptions = [
+//   { value: "ByTitle", label: "Name" },
+//   { value: "ByLevel", label: "Level" },
+//   { value: "ByProfit", label: "Profit" },
+//   { value: "ByEndOfPeriod", label: "End Of Period" }
+// ];
+// const sortingDirectionOptions = [
+//   { value: "Asc", label: "Ascending" },
+//   { value: "Desc", label: "Descending" }
+// ];
+
 const ProgramListFilter = ({
-  values,
-  setFieldValue,
-  setFieldTouched,
-  onChangeComplete
+  t,
+  filtering,
+  onChangeComplete,
+  onClearFilters
 }) => {
   return (
-    <form className="filter-list">
+    <div className="filter-list">
       <div className="filter-item">
-        <div className="filter-item__title">Level</div>
-        <div className="filter-item__description">Select Trader Level</div>
-        <div className="filter-item__component">
-          <Field
-            minValue={LEVEL_MIN}
-            maxValue={LEVEL_MAX}
-            name="traderLevel"
-            value={values.traderLevel}
-            onChangeComplete={onChangeComplete("traderLevel")}
-            setFieldValue={setFieldValue}
-            component={GVInputRange}
-          />
+        <div className="filter-item__header-wrapper filter-pane__header-wrapper">
+          <div className="filter-item__header">
+            <div className="filter-pane__header">Add filters</div>
+          </div>
+          <div className="filter-item__handler">
+            <Button
+              secondary
+              className="filter-item__button"
+              onClick={onClearFilters}
+              label="Clear All"
+            />
+          </div>
         </div>
       </div>
-      <div className="filter-item">
-        <div className="filter-item__title">Average Profit</div>
-        <div className="filter-item__description">Select Average Profit</div>
-        <div className="filter-item__component">
-          <Field
-            minValue={PROFIT_PROGRAM_PROCENT_MIN}
-            maxValue={PROFIT_PROGRAM_PROCENT_MAX}
-            name="profitAvgPercent"
-            value={values.profitAvgPercent}
-            formatLabel={value => `${value}%`}
-            onChangeComplete={onChangeComplete("profitAvgPercent")}
-            setFieldValue={setFieldValue}
-            component={GVInputRange}
-          />
-        </div>
-      </div>
-      <div className="filter-item">
-        <div className="filter-item__title">Sorting</div>
-        <div className="filter-item__description">Select column</div>
-        <div className="filter-item__component">
-          <Field
-            name="sorting"
-            value={values.sorting}
-            onChange={onChangeComplete("sorting")}
-            setFieldValue={setFieldValue}
-            onBlur={setFieldTouched}
-            component={GVSelect}
-            options={sortingOptions}
-          />
-        </div>
-      </div>
-      <div className="filter-item">
-        <div className="filter-item__title">Sorting direction</div>
-        <div className="filter-item__description">Select sorting direction</div>
-        <div className="filter-item__component">
-          <Field
-            name="sortingDirection"
-            value={values.sortingDirection}
-            onChange={onChangeComplete("sortingDirection")}
-            setFieldValue={setFieldValue}
-            onBlur={setFieldTouched}
-            component={GVSelect}
-            clearable={false}
-            options={sortingDirectionOptions}
-          />
-        </div>
-      </div>
-    </form>
+      <LevelFilter filtering={filtering} onFilterChange={onChangeComplete} />
+      <AvgProfitFilter
+        filtering={filtering}
+        onFilterChange={onChangeComplete}
+      />
+      <TotalProfitFilter
+        filtering={filtering}
+        onFilterChange={onChangeComplete}
+      />
+      <BalanceFilter filtering={filtering} onFilterChange={onChangeComplete} />
+      <AvailableInvestmentFilter
+        filtering={filtering}
+        onFilterChange={onChangeComplete}
+      />
+    </div>
   );
 };
 
-export default withFormik({
-  displayName: "programListFilterForm",
-  mapPropsToValues: props => {
-    const { filtering } = props;
-    return {
-      traderLevel: { min: filtering.levelMin, max: filtering.levelMax },
-      profitAvgPercent: {
-        min: filtering.profitAvgPercentMin,
-        max: filtering.profitAvgPercentMax
-      },
-      sorting: filtering.sorting,
-      sortingDirection: filtering.sortingDirection
-    };
-  }
-})(ProgramListFilter);
+export default translate()(ProgramListFilter);

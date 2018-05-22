@@ -6,11 +6,10 @@
 }
 
 .wallet-pane-container__component {
-  flex: 1 1 80%;
-  max-width: 80%;
+  width: 100%;
   margin: auto;
-  @include media-breakpoint-phone() {
-    max-width: 100%;
+  @include breakpoint-desktop() {
+    max-width: 80%;
   }
 }
 
