@@ -5,12 +5,12 @@
   background: white;
   min-height: calc(100vh - 72px);
   overflow: hidden;
+  z-index: 1090;
   @include media-breakpoint-phone() {
     position: fixed;
     top: 74px;
     left: 0;
     width: 100%;
-    z-index: 1020;
   }
 }
 
