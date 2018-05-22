@@ -6,10 +6,10 @@ import "./pi-avatar.css";
 
 class PIAvatar extends Component {
   render() {
-    const { url, level, className } = this.props;
+    const { url, level, isTournament, className } = this.props;
     return (
       <div className={classnames("pi-avatar", className)}>
-        {true && (
+        {isTournament && (
           <span className="pi-avatar__label pi-avatar__tournament">
             <i className="fas fa-trophy" />
           </span>
