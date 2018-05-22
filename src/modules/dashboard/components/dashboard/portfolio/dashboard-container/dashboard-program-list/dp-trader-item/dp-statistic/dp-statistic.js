@@ -19,7 +19,7 @@ const DPStatistic = ({ t, trader, className = "" }) => {
           <NumberFormat
             value={trader.investedTokens * trader.token.initialPrice}
             prefix="$"
-            decimalScale={2}
+            decimalScale={0}
             displayType="text"
           />
         }
@@ -30,7 +30,7 @@ const DPStatistic = ({ t, trader, className = "" }) => {
         value={
           <NumberFormat
             value={trader.profitFromProgram}
-            // decimalScale={2}
+            decimalScale={0}
             displayType="text"
           />
         }
@@ -43,7 +43,7 @@ const DPStatistic = ({ t, trader, className = "" }) => {
         value={
           <NumberFormat
             value={trader.profitTotal}
-            // decimalScale={2}
+            decimalScale={0}
             displayType="text"
           />
         }
@@ -55,7 +55,7 @@ const DPStatistic = ({ t, trader, className = "" }) => {
         value={
           <NumberFormat
             value={trader.balance}
-            decimalScale={4}
+            decimalScale={0}
             displayType="text"
           />
         }
@@ -75,7 +75,7 @@ const DPStatistic = ({ t, trader, className = "" }) => {
                   100
             }
             suffix="%"
-            decimalScale={2}
+            decimalScale={0}
             displayType="text"
           />
         }
