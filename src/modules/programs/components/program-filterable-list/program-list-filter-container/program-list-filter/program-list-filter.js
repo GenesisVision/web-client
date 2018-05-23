@@ -4,7 +4,7 @@ import React from "react";
 import "rc-slider/assets/index.css";
 import "shared/components/form/gv-range/gv-range.css";
 
-import AvailableInvestmentFilter from "./program-filters/available-investment-filter";
+// import AvailableInvestmentFilter from "./program-filters/available-investment-filter";
 import AvgProfitFilter from "./program-filters/avg-profit-filter";
 import Button from "../../../../../../components/button/button";
 import BalanceFilter from "./program-filters/balance-filter";
@@ -58,10 +58,10 @@ const ProgramListFilter = ({
         onFilterChange={onChangeComplete}
       />
       <BalanceFilter filtering={filtering} onFilterChange={onChangeComplete} />
-      <AvailableInvestmentFilter
+      {/* <AvailableInvestmentFilter
         filtering={filtering}
         onFilterChange={onChangeComplete}
-      />
+      /> */}
     </div>
   );
 };
