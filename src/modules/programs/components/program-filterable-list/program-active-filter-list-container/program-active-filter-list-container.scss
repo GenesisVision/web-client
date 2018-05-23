@@ -2,8 +2,4 @@
 
 .program-active-filter-list-container {
   margin: 0.5rem 1rem;
-  @include media-breakpoint-phone() {
-    margin-top: 80px;
-    margin-bottom: 0;
-  }
 }
