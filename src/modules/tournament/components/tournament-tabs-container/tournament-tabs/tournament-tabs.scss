@@ -1,3 +1,4 @@
+@import "styles/_breakpoint.scss";
 @import "styles/_colors.scss";
 
 .tournament-tabs {
@@ -6,6 +7,9 @@
   align-items: center;
   justify-content: center;
   background: white;
+  @include media-breakpoint-phone {
+    margin-top: 75px;
+  }
 }
 
 .tournament-tab {
