@@ -5,7 +5,14 @@ import ProgramItem from "../../../../../../../../components/program-item/program
 import "./dp-trader-item.css";
 
 const DPTraderItem = ({ ...props }) => {
-  return <ProgramItem {...props} statistic={DPStatistic} />;
+  return (
+    <ProgramItem
+      {...props}
+      isAuthenticated={true}
+      showBookmark={false}
+      statistic={DPStatistic}
+    />
+  );
 };
 
 export default DPTraderItem;
