@@ -26,6 +26,7 @@
   justify-content: flex-end;
   flex: 1;
   background-color: rgba(252, 252, 252, 0.7);
+  z-index: 1080;
   @include media-breakpoint-desktop() {
     position: fixed;
     top: 72px;

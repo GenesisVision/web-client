@@ -4,7 +4,7 @@
 .filter-pane {
   min-height: calc(100vh - 72px);
   overflow: hidden;
-  z-index: 1090;
+  // z-index: 1090;
   @include media-breakpoint-phone() {
     position: fixed;
     top: 74px;
@@ -24,9 +24,11 @@
 .filter-list {
   width: 300px;
   background-color: white;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
   height: 100%;
-
+  overflow: auto;
   @include media-breakpoint-phone() {
     width: 100%;
+    box-shadow: none;
   }
 }
