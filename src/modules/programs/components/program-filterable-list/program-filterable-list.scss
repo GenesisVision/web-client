@@ -10,7 +10,6 @@
   margin: 0 auto;
   &:not(:last-child) {
     @include media-breakpoint-desktop() {
-      opacity: 0.3;
       height: calc(100vh - 72px);
       overflow: hidden;
     }
@@ -23,13 +22,16 @@
 }
 
 .program-filterable-list__filters {
+  display: flex;
+  justify-content: flex-end;
   flex: 1;
-  max-width: 300px;
+  background-color: rgba(255, 255, 255, 0.7);
   @include media-breakpoint-desktop() {
     position: fixed;
     top: 72px;
     bottom: 0;
     right: 0;
+    left: 0;
     overflow-y: auto;
     overflow-x: hidden;
   }
@@ -38,6 +40,5 @@
     margin-top: 89px; /*fix for iphone*/
     padding-bottom: 100px; /*fix for iphone*/
     top: 0;
-    max-width: 100%;
   }
 }

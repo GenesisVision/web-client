@@ -14,6 +14,12 @@ import SwaggerInvestorApi from "../services/api-client/swagger-investor-api";
 const failureSuffix = "FAILURE";
 const suffixes = ["REQUEST", "SUCCESS", failureSuffix];
 
+const devTools =
+  process.env.NODE_ENV === "development"
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
+      window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__()
+    : null;
+
 const initialState = {};
 const enhancers = [];
 const middleware = [
@@ -30,7 +36,11 @@ const middleware = [
   })
 ];
 
-const composedEnhancers = compose(applyMiddleware(...middleware), ...enhancers);
+const composedEnhancers = compose(
+  applyMiddleware(...middleware),
+  ...enhancers
+  // devTools
+);
 
 const store = createStore(rootReducer, initialState, composedEnhancers);
 

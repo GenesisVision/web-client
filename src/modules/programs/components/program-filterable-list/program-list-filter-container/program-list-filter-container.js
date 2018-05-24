@@ -5,26 +5,38 @@ import { normalizeFilteringSelector } from "../../../../filtering/selectors/filt
 import FilterPane from "../../../../filter-pane/components/filter-pane/filter-pane";
 import ProgramListFilter from "./program-list-filter/program-list-filter";
 import programsService from "../../../service/programs-service";
+import filterPaneActionsFactory from "../../../../filter-pane/actions/filter-pane-actions";
+import { PROGRAMS } from "../../../actions/programs-actions.constants";
+
+const filterPaneActions = filterPaneActionsFactory(PROGRAMS);
 
 const ProgramListFilterContainer = ({
   isFilterOpen,
   filtering,
   onFilterChange,
-  onClearFilters
+  onClearFilters,
+  closeFilterPane
 }) => {
   const handleFilterChange = (name, type) => value => {
     onFilterChange({ name, type, value });
   };
+  const handleCloseFilterPane = e => {
+    if (e.currentTarget === e.target) {
+      closeFilterPane();
+    }
+  };
   return (
-    <FilterPane
-      isOpen={isFilterOpen}
-      className="program-filterable-list__filters"
-    >
-      <ProgramListFilter
-        filtering={filtering}
-        onChangeComplete={handleFilterChange}
-        onClearFilters={onClearFilters}
-      />
+    <FilterPane isOpen={isFilterOpen}>
+      <div
+        className="program-filterable-list__filters"
+        onClick={handleCloseFilterPane}
+      >
+        <ProgramListFilter
+          filtering={filtering}
+          onChangeComplete={handleFilterChange}
+          onClearFilters={onClearFilters}
+        />
+      </div>
     </FilterPane>
   );
 };
@@ -39,7 +51,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   onFilterChange: filter =>
     dispatch(programsService.changeProgramListFilter(filter)),
-  onClearFilters: () => dispatch(programsService.clearProgramListFilters())
+  onClearFilters: () => dispatch(programsService.clearProgramListFilters()),
+  closeFilterPane: () => dispatch(filterPaneActions.closeFilter())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(

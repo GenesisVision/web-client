@@ -23,6 +23,14 @@
 }
 
 .filter-list {
-  display: flex;
-  flex-wrap: wrap;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: flex-start;
+  width: 300px;
+  background-color: white;
+  height: 100%;
+
+  @include media-breakpoint-phone() {
+    width: 100%;
+  }
 }
