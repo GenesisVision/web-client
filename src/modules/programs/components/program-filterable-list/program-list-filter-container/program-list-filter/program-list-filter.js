@@ -58,10 +58,10 @@ const ProgramListFilter = ({
         onFilterChange={onChangeComplete}
       />
       <BalanceFilter filtering={filtering} onFilterChange={onChangeComplete} />
-      <AvailableInvestmentFilter
+      {/* <AvailableInvestmentFilter
         filtering={filtering}
         onFilterChange={onChangeComplete}
-      />
+      /> */}
     </div>
   );
 };

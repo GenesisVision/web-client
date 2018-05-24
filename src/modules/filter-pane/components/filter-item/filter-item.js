@@ -54,7 +54,7 @@ class FilterItem extends Component {
     return (
       <div className="filter-item">
         <div className="filter-item__header-wrapper">
-          <div className="filter-item__header">
+          <div className="filter-item__header" onClick={this.toggleOpenState}>
             <div className="filter-item__title">{name}</div>
             <div className="filter-item__description">{description}</div>
           </div>

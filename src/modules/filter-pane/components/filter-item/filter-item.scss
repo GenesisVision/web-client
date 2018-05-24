@@ -15,6 +15,7 @@
   display: flex;
   align-items: center;
   width: 100%;
+  cursor: pointer;
   @include media-breakpoint-phone {
     padding: 0;
   }
@@ -23,7 +24,6 @@
 .filter-item__handler {
   flex: 1;
   text-align: right;
-  cursor: pointer;
 }
 
 .filter-item__header {
