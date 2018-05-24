@@ -50,7 +50,7 @@ const TIStatistic = ({ t, trader, className = "" }) => {
         value={
           <NumberFormat
             value={trader.balance}
-            decimalScale={0}
+            decimalScale={trader.balance < 1000 ? 2 : 0}
             displayType="text"
           />
         }
