@@ -197,7 +197,7 @@
       "description": "Select Total Profit",
       "value-pattern": "{{value.0}}GVT - {{value.1}}GVT"
     },
-    "balance": {
+    "balanceUSD": {
       "name": "Balance",
       "description": "Select Balance",
       "value-pattern": "${{value.0}} - ${{value.1}}"
