@@ -2,7 +2,6 @@
 @import "styles/_breakpoint.scss";
 
 .filter-pane {
-  background: white;
   min-height: calc(100vh - 72px);
   overflow: hidden;
   z-index: 1090;
@@ -23,9 +22,6 @@
 }
 
 .filter-list {
-  // display: flex;
-  // flex-direction: column;
-  // justify-content: flex-start;
   width: 300px;
   background-color: white;
   height: 100%;
