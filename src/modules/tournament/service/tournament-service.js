@@ -9,6 +9,12 @@ import tournamentActions from "../actions/tournament-actions";
 
 import { TOURNAMENT_PROGRAMS } from "../actions/tournament-actions.constants";
 import { composeApiFiltering } from "../../filtering/helpers/filtering-helpers";
+import programsActions from "../../programs/actions/programs-actions";
+import { TOURNAMENT_FAVOURITE } from "../actions/tournament-actions.constants";
+
+const favoritePrograms = programsActions.favoriteProgramCreator(
+  TOURNAMENT_FAVOURITE
+);
 
 const getPrograms = () => (dispatch, getState) => {
   const { paging } = getState().tournamentData.programs;
@@ -72,10 +78,26 @@ const updateAfterInvestment = () => dispatch => {
   return Promise.all([dispatch(getPrograms())]);
 };
 
+const toggleFavoriteProgram = program => dispatch => {
+  const { id: programId, isFavorite } = program;
+  const requestData = {
+    programId
+  };
+  if (authService.getAuthArg()) {
+    requestData.authorization = authService.getAuthArg();
+  }
+  dispatch(
+    isFavorite
+      ? favoritePrograms.removeFavoriteProgram(requestData)
+      : favoritePrograms.addFavoriteProgram(requestData)
+  );
+};
+
 const tournamentService = {
   getPrograms,
   changeProgramListPage,
   changeFilter,
-  updateAfterInvestment
+  updateAfterInvestment,
+  toggleFavoriteProgram
 };
 export default tournamentService;

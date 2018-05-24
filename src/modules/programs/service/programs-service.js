@@ -14,6 +14,10 @@ import { composeProgramsFilters } from "./programs-helpers";
 import clearDataActionFactory from "../../../shared/actions/clear-data.factory";
 import { composeFilteringActionType } from "../../filtering/helpers/filtering-helpers";
 
+const favoritePrograms = programsActions.favoriteProgramCreator(
+  actionTypes.PROGRAMS_FAVORITE
+);
+
 const filteringActions = filteringActionsFactory(actionTypes.PROGRAMS);
 
 const getPrograms = () => (dispatch, getState) => {
@@ -113,8 +117,8 @@ const toggleFavoriteProgram = program => dispatch => {
   }
   dispatch(
     isFavorite
-      ? programsActions.removeFavoriteProgram(requestData)
-      : programsActions.addFavoriteProgram(requestData)
+      ? favoritePrograms.removeFavoriteProgram(requestData)
+      : favoritePrograms.addFavoriteProgram(requestData)
   );
 };
 

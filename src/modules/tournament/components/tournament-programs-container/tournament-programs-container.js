@@ -3,7 +3,6 @@ import React, { Component } from "react";
 
 import popupActions from "../../../popup/actions/popup-actions";
 import ProgramList from "../../../programs/components/program-filterable-list/program-list-container/program-list/program-list";
-import programsService from "../../../programs/service/programs-service";
 import tournamentService from "../../service/tournament-service";
 
 import { PROGRAM_DEPOSIT_POPUP } from "../../../popup/actions/popup-actions.constants";
@@ -37,7 +36,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   toggleFavoriteProgram: program => () => {
-    dispatch(programsService.toggleFavoriteProgram(program));
+    dispatch(tournamentService.toggleFavoriteProgram(program));
   },
   dispatch
 });

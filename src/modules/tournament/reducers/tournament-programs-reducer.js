@@ -1,12 +1,14 @@
 import { SUCCESS_SUFFIX } from "../../../shared/reducers/api-reducer/api-reducer";
 import apiReducerFactory from "../../../shared/reducers/api-reducer/api-reducer";
 
-import { PROGRAMS_FAVORITE } from "../../programs/actions/programs-actions.constants";
-import { TOURNAMENT_PROGRAMS } from "../actions/tournament-actions.constants";
+import {
+  TOURNAMENT_PROGRAMS,
+  TOURNAMENT_FAVOURITE
+} from "../actions/tournament-actions.constants";
 
 function tournamentProgramsSubReducer(state, action) {
   switch (action.type) {
-    case `${PROGRAMS_FAVORITE}_${SUCCESS_SUFFIX}`:
+    case `${TOURNAMENT_FAVOURITE}_${SUCCESS_SUFFIX}`:
       return {
         ...state,
         data: {

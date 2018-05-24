@@ -14,35 +14,41 @@ const fetchPrograms = (
   };
 };
 
-const addFavoriteProgram = (
-  { programId, authorization },
-  onResolve = response => Promise.resolve(response)
-) => dispatch => {
-  return dispatch({
-    type: actionTypes.PROGRAMS_FAVORITE,
-    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramsFavoritesAddPost(
-      programId,
-      authorization
-    ).then(() => Promise.resolve({ id: programId }))
-  });
-};
+const favoriteProgramCreator = ACTION_SUFFIX => {
+  const addFavoriteProgram = (
+    { programId, authorization },
+    onResolve = response => Promise.resolve(response)
+  ) => dispatch => {
+    return dispatch({
+      type: ACTION_SUFFIX,
+      payload: SwaggerInvestorApi.apiInvestorInvestmentProgramsFavoritesAddPost(
+        programId,
+        authorization
+      ).then(() => Promise.resolve({ id: programId }))
+    });
+  };
 
-const removeFavoriteProgram = (
-  { programId, authorization },
-  onResolve = response => Promise.resolve(response)
-) => dispatch => {
-  return dispatch({
-    type: actionTypes.PROGRAMS_FAVORITE,
-    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramsFavoritesRemovePost(
-      programId,
-      authorization
-    ).then(() => Promise.resolve({ id: programId }))
-  });
+  const removeFavoriteProgram = (
+    { programId, authorization },
+    onResolve = response => Promise.resolve(response)
+  ) => dispatch => {
+    return dispatch({
+      type: ACTION_SUFFIX,
+      payload: SwaggerInvestorApi.apiInvestorInvestmentProgramsFavoritesRemovePost(
+        programId,
+        authorization
+      ).then(() => Promise.resolve({ id: programId }))
+    });
+  };
+
+  return {
+    addFavoriteProgram,
+    removeFavoriteProgram
+  };
 };
 
 const programsActions = {
-  addFavoriteProgram,
-  removeFavoriteProgram,
-  fetchPrograms
+  fetchPrograms,
+  favoriteProgramCreator
 };
 export default programsActions;
