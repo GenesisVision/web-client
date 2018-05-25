@@ -4,6 +4,7 @@ import FilterItem from "../../../../../../filter-pane/components/filter-item/fil
 import { AVG_PROFIT_FILTER_NAME } from "../../../../../programs.constants";
 import { Range, Handle } from "rc-slider";
 import { RANGE_FILTER_TYPE } from "../../../../../../filtering/filtering.constants";
+import { connect } from "react-redux";
 
 const pointsCount = 4;
 
@@ -82,28 +83,35 @@ const getSValues = ([min, max] = [undefined, undefined]) => {
   return [getSValue(min), getSValue(max)];
 };
 
-const AvgProfitFilter = ({ t, filtering, onFilterChange }) => {
+const AvgProfitFilter = ({
+  t,
+  filtering,
+  onFilterChange,
+  maxValue,
+  minValue
+}) => {
   const handleFilterChange = value => {
-    const mValues = getMValues(value);
-    return onFilterChange(AVG_PROFIT_FILTER_NAME, RANGE_FILTER_TYPE)(mValues);
+    // const mValues = getMValues(value);
+    return onFilterChange(AVG_PROFIT_FILTER_NAME, RANGE_FILTER_TYPE)(value);
   };
+
   return (
     <FilterItem
       name={t(`programs-filtering.${AVG_PROFIT_FILTER_NAME}.name`)}
       description={t(
         `programs-filtering.${AVG_PROFIT_FILTER_NAME}.description`
       )}
-      value={getSValues(filtering.filters[AVG_PROFIT_FILTER_NAME])}
-      defaultValue={getSValues(
-        filtering.defaultFilters[AVG_PROFIT_FILTER_NAME]
-      )}
+      value={filtering.filters[AVG_PROFIT_FILTER_NAME]}
+      defaultValue={[minValue, maxValue]}
       onFilterChange={handleFilterChange}
     >
       {(value, onChange) => (
         <Range
-          marks={mPointsValues}
+          // marks={mPointsValues}
           value={value}
           onChange={onChange}
+          min={minValue}
+          max={maxValue}
           pushable
           handle={props => (
             <div key={props.index}>
@@ -113,7 +121,7 @@ const AvgProfitFilter = ({ t, filtering, onFilterChange }) => {
                   left: `${props.offset - 5}%`
                 }}
               >
-                {`${getMValue(props.value)}%`}
+                {`${props.value}%`}
               </span>
               <Handle {...props} dragging="false" />
             </div>
@@ -124,4 +132,13 @@ const AvgProfitFilter = ({ t, filtering, onFilterChange }) => {
   );
 };
 
-export default translate()(AvgProfitFilter);
+const mapStateToProps = ({
+  platformData: {
+    settings: { data = {} }
+  }
+}) => ({
+  minValue: data.programsMinAvgProfit,
+  maxValue: data.programsMaxAvgProfit
+});
+
+export default connect(mapStateToProps)(translate()(AvgProfitFilter));
