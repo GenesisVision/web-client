@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import React from "react";
+import React, { Component } from "react";
 
 import { normalizeFilteringSelector } from "../../../../filtering/selectors/filtering-selectors";
 import FilterPane from "../../../../filter-pane/components/filter-pane/filter-pane";
@@ -10,36 +10,40 @@ import { PROGRAMS } from "../../../actions/programs-actions.constants";
 
 const filterPaneActions = filterPaneActionsFactory(PROGRAMS);
 
-const ProgramListFilterContainer = ({
-  isFilterOpen,
-  filtering,
-  onFilterChange,
-  onClearFilters,
-  closeFilterPane
-}) => {
-  const handleFilterChange = (name, type) => value => {
-    onFilterChange({ name, type, value });
+class ProgramListFilterContainer extends Component {
+  handleFilterChange = (name, type) => value => {
+    this.props.onFilterChange({ name, type, value });
   };
-  const handleCloseFilterPane = e => {
-    if (e.currentTarget === e.target) {
-      closeFilterPane();
+
+  handleMouseDown = e => {
+    this.target = e.target;
+  };
+
+  handleMouseUp = e => {
+    if (e.currentTarget === this.target && e.target === this.target) {
+      this.props.closeFilterPane();
     }
   };
-  return (
-    <FilterPane isOpen={isFilterOpen}>
-      <div
-        className="program-filterable-list__filters"
-        onClick={handleCloseFilterPane}
-      >
-        <ProgramListFilter
-          filtering={filtering}
-          onChangeComplete={handleFilterChange}
-          onClearFilters={onClearFilters}
-        />
-      </div>
-    </FilterPane>
-  );
-};
+
+  render() {
+    const { isFilterOpen, filtering, closeFilterPane } = this.props;
+    return (
+      <FilterPane isOpen={isFilterOpen}>
+        <div
+          className="program-filterable-list__filters"
+          onMouseDown={this.handleMouseDown}
+          onMouseUp={this.handleMouseUp}
+        >
+          <ProgramListFilter
+            filtering={filtering}
+            onChangeComplete={this.handleFilterChange}
+            onClearFilters={this.onClearFilters}
+          />
+        </div>
+      </FilterPane>
+    );
+  }
+}
 
 const mapStateToProps = state => {
   const { filterPane } = state.programsData;
