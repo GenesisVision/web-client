@@ -7,6 +7,7 @@ import { RANGE_FILTER_TYPE } from "../../../../../../filtering/filtering.constan
 import { connect } from "react-redux";
 
 const pointsCount = 4;
+const sPointsCount = 10 * 3 * 9;
 
 const mPointFromSPoint = x => x - 1;
 const sPointFromMPoint = x => x + 1;
@@ -26,26 +27,16 @@ const mPointFromMPointValue = x => {
 };
 
 const sPointValue = x => {
-  const gap = 100 / (pointsCount - 1);
+  const gap = sPointsCount / (pointsCount - 1);
   return x * gap;
 };
 const sPointFromSPointValue = x => {
-  const gap = 100 / (pointsCount - 1);
+  const gap = sPointsCount / (pointsCount - 1);
   return x / gap;
 };
 
-const mPointFormattedValue = mPointValue => {
-  let markFormattedValue = mPointValue;
-  if (mPointValue / Math.pow(10, 3) > 1) {
-    markFormattedValue = mPointValue / Math.pow(10, 3) + "k";
-  }
-  return `${markFormattedValue}`;
-};
-
 const mPointsValues = mPoints.reduce((prev, curr) => {
-  prev[sPointValue(sPointFromMPoint(curr))] = mPointFormattedValue(
-    mPointValue(curr)
-  );
+  prev[sPointValue(sPointFromMPoint(curr))] = mPointValue(curr);
   return prev;
 }, {});
 
@@ -58,7 +49,7 @@ const getSValue = mValue => {
       ? 1
       : (mValue - minMPointValue) / (maxMPointValue - minMPointValue);
 
-  const gap = 100 / (pointsCount - 1);
+  const gap = sPointsCount / (pointsCount - 1);
   const minSPoint = sPointFromMPoint(minMPoint);
   return sPointValue(minSPoint) + gap * rate;
 };
