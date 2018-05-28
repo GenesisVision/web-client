@@ -5,7 +5,7 @@ import TraderDealList from "./trader-deal-list/trader-deal-list";
 import programService from "../../../../service/program-service";
 
 class TraderDealListContainer extends PureComponent {
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchTraderDealList(this.props.programId);
   }
 
@@ -54,6 +54,7 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  TraderDealListContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TraderDealListContainer);

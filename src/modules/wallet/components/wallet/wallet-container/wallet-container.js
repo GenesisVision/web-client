@@ -5,7 +5,7 @@ import walletActions from "../../../actions/wallet-actions";
 import WalletInfo from "./wallet-info/wallet-info";
 
 class WalletContainer extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchWallet();
   }
 
@@ -35,4 +35,7 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(WalletContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(WalletContainer);

@@ -5,16 +5,8 @@ import walletService from "../../../service/wallet-service";
 import WalletTransactionList from "./wallet-transaction-list/wallet-transaction-list";
 
 class WalletTransactionListContainer extends Component {
-  getFilter = props => (props.queryParams ? props.queryParams.filter : "All");
-
-  componentWillMount() {
-    this.props.fetchTransactions(this.getFilter(this.props), this.props.paging);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.getFilter(this.props) !== this.getFilter(nextProps)) {
-      this.props.fetchTransactions(this.getFilter(nextProps));
-    }
+  componentDidMount() {
+    this.props.fetchTransactions("All", this.props.paging);
   }
 
   render() {
@@ -44,6 +36,7 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  WalletTransactionListContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(WalletTransactionListContainer);

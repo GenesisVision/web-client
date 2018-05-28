@@ -5,7 +5,7 @@ import dashboardActions from "../../../../actions/dashboard-actions";
 import DashboardChart from "./dashboard-chart/dashboard-chart";
 
 class DashboardChartContainer extends PureComponent {
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchDashboardChart();
   }
   render() {
@@ -33,6 +33,7 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  DashboardChartContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DashboardChartContainer);

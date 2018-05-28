@@ -12,7 +12,7 @@ import {
 import traderService from "../../../service/program-service";
 
 class TraderDetailContainer extends PureComponent {
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchTraderDetail(this.props.programId);
   }
 
@@ -108,6 +108,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
-  TraderDetailContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  mergeProps
+)(TraderDetailContainer);

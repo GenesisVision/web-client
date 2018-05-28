@@ -6,7 +6,7 @@ import ProgramDeposit from "./program-deposit/program-deposit";
 import programDepositActions from "../../actions/program-deposit-actions";
 
 class TraderDepositContainer extends PureComponent {
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchDeposit(this.props.programId);
   }
 
@@ -91,6 +91,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
-  TraderDepositContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  mergeProps
+)(TraderDepositContainer);

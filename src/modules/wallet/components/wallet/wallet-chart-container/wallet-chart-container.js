@@ -5,7 +5,7 @@ import WalletChart from "./wallet-chart/wallet-chart";
 import walletService from "../../../service/wallet-service";
 
 class WalletChartContainer extends PureComponent {
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchWalletChart();
   }
   render() {
@@ -33,6 +33,7 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  WalletChartContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(WalletChartContainer);
