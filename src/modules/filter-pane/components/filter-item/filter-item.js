@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import classnames from "classnames";
 import Button from "../../../../components/button/button";
 import "./filter-item.css";
@@ -6,15 +7,15 @@ import "./filter-item.css";
 class FilterItem extends Component {
   getInitialValue = () => this.props.value || this.props.defaultValue;
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const initialValue = nextProps.value || nextProps.defaultValue;
-    if (JSON.stringify(prevState.value) !== JSON.stringify(initialValue)) {
-      return {
-        value: nextProps.value || nextProps.defaultValue
-      };
-    }
+  static getDerivedStateFromProps(props, state) {
+    if (!props.value) return null;
 
-    return null;
+    if (JSON.stringify(props.value) === JSON.stringify(state.value))
+      return null;
+
+    return {
+      value: props.value
+    };
   }
 
   state = { isOpen: false, value: this.getInitialValue() };
@@ -101,5 +102,15 @@ class FilterItem extends Component {
     );
   }
 }
+
+FilterItem.propTypes = {
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  onFilterChange: PropTypes.func.isRequired,
+  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
+    .isRequired,
+
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
+};
 
 export default FilterItem;
