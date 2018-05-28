@@ -1,6 +1,5 @@
 import { translate } from "react-i18next";
 import React from "react";
-import { connect } from "react-redux";
 
 import FilterItem from "../../../../../../filter-pane/components/filter-item/filter-item";
 import { Range, Handle } from "rc-slider";
@@ -82,13 +81,7 @@ const getSValues = ([min, max] = [undefined, undefined]) => {
   return [getSValue(min), getSValue(max)];
 };
 
-const AvgProfitFilter = ({
-  t,
-  filtering,
-  onFilterChange,
-  minValue,
-  maxValue
-}) => {
+const AvgProfitFilter = ({ t, filtering, onFilterChange }) => {
   const handleFilterChange = value => {
     const mValues = getMValues(value);
     return onFilterChange(TOTAL_PROFIT_FILTER_NAME, RANGE_FILTER_TYPE)(value);
@@ -100,7 +93,7 @@ const AvgProfitFilter = ({
         `programs-filtering.${TOTAL_PROFIT_FILTER_NAME}.description`
       )}
       value={filtering.filters[TOTAL_PROFIT_FILTER_NAME]}
-      defaultValue={[minValue, maxValue]}
+      defaultValue={filtering.defaultFilters[TOTAL_PROFIT_FILTER_NAME]}
       onFilterChange={handleFilterChange}
     >
       {(value, onChange) => (
@@ -108,8 +101,8 @@ const AvgProfitFilter = ({
           // marks={mPointsValues}
           value={value}
           onChange={onChange}
-          min={minValue}
-          max={maxValue}
+          min={filtering.defaultFilters[TOTAL_PROFIT_FILTER_NAME][0]}
+          max={filtering.defaultFilters[TOTAL_PROFIT_FILTER_NAME][1]}
           pushable
           handle={props => (
             <div key={props.index}>
@@ -130,13 +123,4 @@ const AvgProfitFilter = ({
   );
 };
 
-const mapStateToProps = ({
-  platformData: {
-    settings: { data = {} }
-  }
-}) => ({
-  minValue: data.programsMinTotalProfit,
-  maxValue: data.programsMaxTotalProfit
-});
-
-export default connect(mapStateToProps)(translate()(AvgProfitFilter));
+export default translate()(AvgProfitFilter);

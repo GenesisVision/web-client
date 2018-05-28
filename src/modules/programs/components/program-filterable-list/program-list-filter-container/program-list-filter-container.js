@@ -12,13 +12,18 @@ const ProgramListFilterContainer = ({
   isFilterOpen,
   filtering,
   onFilterChange,
-  onClearFilters
+  onClearFilters,
+  closeFilterPane
 }) => {
   const handleFilterChange = (name, type) => value => {
     onFilterChange({ name, type, value });
   };
   return (
-    <FilterPane isOpen={isFilterOpen} className="program-list-filter-pane">
+    <FilterPane
+      isOpen={isFilterOpen}
+      className="program-list-filter-pane"
+      onBackdropClick={closeFilterPane}
+    >
       <ProgramFilters
         filtering={filtering}
         onChangeComplete={handleFilterChange}
@@ -42,6 +47,7 @@ const mapDispatchToProps = dispatch => ({
   closeFilterPane: () => dispatch(programsService.closeFilterPane())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  ProgramListFilterContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProgramListFilterContainer);

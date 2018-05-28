@@ -6,6 +6,30 @@ export const TOTAL_PROFIT_FILTER_NAME = "profitTotal";
 export const BALANCE_FILTER_NAME = "balanceUSD";
 export const AVAILABLE_INVESTMENT_FILTER_NAME = "hasAvailableInvestment";
 
+export const DEFAULT_AVG_PROFIT_MIN_FILTER_NAME = "programsMinAvgProfit";
+export const DEFAULT_AVG_PROFIT_MAX_FILTER_NAME = "programsMaxAvgProfit";
+export const DEFAULT_TOTAL_PROFIT_MIN_FILTER_NAME = "programsMinTotalProfit";
+export const DEFAULT_TOTAL_PROFIT_MAX_FILTER_NAME = "programsMaxTotalProfit";
+
+export const MAP_DEFAULT_FILTERS_FROM_SERVER = {
+  [DEFAULT_AVG_PROFIT_MIN_FILTER_NAME]: {
+    name: AVG_PROFIT_FILTER_NAME,
+    variableName: "0"
+  },
+  [DEFAULT_AVG_PROFIT_MAX_FILTER_NAME]: {
+    name: AVG_PROFIT_FILTER_NAME,
+    variableName: "1"
+  },
+  [DEFAULT_TOTAL_PROFIT_MIN_FILTER_NAME]: {
+    name: TOTAL_PROFIT_FILTER_NAME,
+    variableName: "0"
+  },
+  [DEFAULT_TOTAL_PROFIT_MAX_FILTER_NAME]: {
+    name: TOTAL_PROFIT_FILTER_NAME,
+    variableName: "1"
+  }
+};
+
 export const LEVEL_MIN_FILTER_VALUE = 1;
 export const LEVEL_MAX_FILTER_VALUE = 7;
 export const AVG_PROFIT_MIN_FILTER_VALUE = -10;

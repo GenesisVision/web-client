@@ -6,7 +6,12 @@ export const dafaultState = {
   defaultFilters: []
 };
 
-const filteringReducerFactory = ({ type, filters, updateFilterReducer }) => {
+const filteringReducerFactory = ({
+  type,
+  filters,
+  updateReducer,
+  childReducer
+}) => {
   const filteringActionType = composeFilteringActionType(type);
   const clearDataActionType = composeClearDataActionType(filteringActionType);
   const initialState = {
@@ -16,8 +21,8 @@ const filteringReducerFactory = ({ type, filters, updateFilterReducer }) => {
   return (state = initialState, action) => {
     switch (action.type) {
       case filteringActionType: {
-        if (updateFilterReducer) {
-          return updateFilterReducer(state, action);
+        if (updateReducer) {
+          return updateReducer(state, action);
         }
 
         if (state.filters.some(x => x.name === action.payload.name)) {
@@ -41,6 +46,9 @@ const filteringReducerFactory = ({ type, filters, updateFilterReducer }) => {
       case clearDataActionType:
         return initialState;
       default:
+        if (childReducer) {
+          return childReducer(state, action);
+        }
         return state;
     }
   };

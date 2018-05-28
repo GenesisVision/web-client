@@ -21,11 +21,11 @@ const ProgramListSorting = () => {
         clearable={false}
         searchable={false}
         valueRenderer={v => {
-          console.log(v);
+          //console.log(v);
           return <span>Order by {v.label}</span>;
         }}
         arrowRenderer={a => {
-          console.log(a);
+          //console.log(a);
           return (
             <span
               className={classnames(
