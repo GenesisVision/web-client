@@ -1,8 +1,8 @@
-import Yup from "yup";
+import { object } from "yup";
 
 import { emailValidator } from "../../../../../shared/utils/validators/validators";
 
-const validationSchema = Yup.object().shape({
+const validationSchema = object().shape({
   email: emailValidator
 });
 

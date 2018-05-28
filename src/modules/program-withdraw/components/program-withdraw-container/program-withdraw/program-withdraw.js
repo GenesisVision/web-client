@@ -1,7 +1,7 @@
 import { translate } from "react-i18next";
 import { withFormik, Field } from "formik";
 import React from "react";
-import Yup from "yup";
+import { object as yupObject, number as yupNumber } from "yup";
 
 import DaysLeftWidget from "../../../../../components/days-left-widget/days-left-widget";
 import FormError from "../../../../../shared/components/form/form-error/form-error";
@@ -109,8 +109,8 @@ export default withFormik({
   mapPropsToValues: () => ({
     amount: ""
   }),
-  validationSchema: Yup.object().shape({
-    amount: Yup.number()
+  validationSchema: yupObject().shape({
+    amount: yupNumber()
       .typeError("Amount must be a number.")
       .moreThan(0, "Amount must be greater than zero")
       .required("Amount is required.")
