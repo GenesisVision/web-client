@@ -8,22 +8,19 @@ const ProgramList = ({
   openInvestPopup,
   toggleFavoriteProgram
 }) => {
-  const renderProgramList = () => {
-    if (programs.length === 0) return <div>There are no programs</div>;
-    return programs.map((program, idx) => {
-      program.order = program.order || idx + 1;
-      return (
-        <ProgramItem
-          key={program.id}
-          program={program}
-          isAuthenticated={isAuthenticated}
-          openInvestPopup={openInvestPopup}
-          toggleFavoriteProgram={toggleFavoriteProgram}
-        />
-      );
-    });
-  };
-  return renderProgramList();
+  if (programs.length === 0) return <div>There are no programs</div>;
+  return programs.map((program, idx) => {
+    program.order = program.order || idx + 1;
+    return (
+      <ProgramItem
+        key={program.id}
+        program={program}
+        isAuthenticated={isAuthenticated}
+        openInvestPopup={openInvestPopup}
+        toggleFavoriteProgram={toggleFavoriteProgram}
+      />
+    );
+  });
 };
 
 export default ProgramList;

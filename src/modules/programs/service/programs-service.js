@@ -19,6 +19,7 @@ const favoritePrograms = programsActions.favoriteProgramCreator(
 );
 
 const filteringActions = filteringActionsFactory(actionTypes.PROGRAMS);
+const filterPaneActions = filterPaneActionsFactory(actionTypes.PROGRAMS);
 
 const getPrograms = () => (dispatch, getState) => {
   const { paging } = getState().programsData.programs;
@@ -103,8 +104,11 @@ const updateAfterInvestment = () => dispatch => {
 };
 
 const openFilterPane = () => {
-  const filterPaneActions = filterPaneActionsFactory(actionTypes.PROGRAMS);
   return filterPaneActions.openFilter();
+};
+
+const closeFilterPane = () => {
+  return filterPaneActions.closeFilter();
 };
 
 const toggleFavoriteProgram = program => dispatch => {
@@ -127,6 +131,7 @@ const programsService = {
   changeProgramListPage,
   updateAfterInvestment,
   openFilterPane,
+  closeFilterPane,
   changeProgramListFilter,
   clearProgramListFilter,
   clearProgramListFilters,

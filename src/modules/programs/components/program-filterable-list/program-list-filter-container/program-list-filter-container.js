@@ -1,49 +1,32 @@
 import { connect } from "react-redux";
-import React, { Component } from "react";
+import React from "react";
 
 import { normalizeFilteringSelector } from "../../../../filtering/selectors/filtering-selectors";
 import FilterPane from "../../../../filter-pane/components/filter-pane/filter-pane";
-import ProgramListFilter from "./program-list-filter/program-list-filter";
+import ProgramFilters from "./program-list-filters/program-list-filters";
 import programsService from "../../../service/programs-service";
-import filterPaneActionsFactory from "../../../../filter-pane/actions/filter-pane-actions";
-import { PROGRAMS } from "../../../actions/programs-actions.constants";
 
-const filterPaneActions = filterPaneActionsFactory(PROGRAMS);
+import "./program-list-filter-container.css";
 
-class ProgramListFilterContainer extends Component {
-  handleFilterChange = (name, type) => value => {
-    this.props.onFilterChange({ name, type, value });
+const ProgramListFilterContainer = ({
+  isFilterOpen,
+  filtering,
+  onFilterChange,
+  onClearFilters
+}) => {
+  const handleFilterChange = (name, type) => value => {
+    onFilterChange({ name, type, value });
   };
-
-  handleMouseDown = e => {
-    this.target = e.target;
-  };
-
-  handleMouseUp = e => {
-    if (e.currentTarget === this.target && e.target === this.target) {
-      this.props.closeFilterPane();
-    }
-  };
-
-  render() {
-    const { isFilterOpen, filtering, closeFilterPane } = this.props;
-    return (
-      <FilterPane isOpen={isFilterOpen}>
-        <div
-          className="program-filterable-list__filters"
-          onMouseDown={this.handleMouseDown}
-          onMouseUp={this.handleMouseUp}
-        >
-          <ProgramListFilter
-            filtering={filtering}
-            onChangeComplete={this.handleFilterChange}
-            onClearFilters={this.onClearFilters}
-          />
-        </div>
-      </FilterPane>
-    );
-  }
-}
+  return (
+    <FilterPane isOpen={isFilterOpen} className="program-list-filter-pane">
+      <ProgramFilters
+        filtering={filtering}
+        onChangeComplete={handleFilterChange}
+        onClearFilters={onClearFilters}
+      />
+    </FilterPane>
+  );
+};
 
 const mapStateToProps = state => {
   const { filterPane } = state.programsData;
@@ -56,7 +39,7 @@ const mapDispatchToProps = dispatch => ({
   onFilterChange: filter =>
     dispatch(programsService.changeProgramListFilter(filter)),
   onClearFilters: () => dispatch(programsService.clearProgramListFilters()),
-  closeFilterPane: () => dispatch(filterPaneActions.closeFilter())
+  closeFilterPane: () => dispatch(programsService.closeFilterPane())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(

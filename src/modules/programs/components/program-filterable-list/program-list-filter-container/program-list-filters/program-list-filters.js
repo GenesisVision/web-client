@@ -25,12 +25,7 @@ export const PROFIT_AVG_FILTER_FORM = "profitAvg";
 //   { value: "Desc", label: "Descending" }
 // ];
 
-const ProgramListFilter = ({
-  t,
-  filtering,
-  onChangeComplete,
-  onClearFilters
-}) => {
+const ProgramFilters = ({ t, filtering, onChangeComplete, onClearFilters }) => {
   return (
     <div className="filter-list">
       <div className="filter-item">
@@ -66,4 +61,4 @@ const ProgramListFilter = ({
   );
 };
 
-export default translate()(ProgramListFilter);
+export default translate()(ProgramFilters);
