@@ -14,17 +14,6 @@ import TotalProfitFilter from "./program-filters/total-profit-filter";
 export const TRADER_LEVEL_FILTER_FORM = "traderLevel";
 export const PROFIT_AVG_FILTER_FORM = "profitAvg";
 
-// const sortingOptions = [
-//   { value: "ByTitle", label: "Name" },
-//   { value: "ByLevel", label: "Level" },
-//   { value: "ByProfit", label: "Profit" },
-//   { value: "ByEndOfPeriod", label: "End Of Period" }
-// ];
-// const sortingDirectionOptions = [
-//   { value: "Asc", label: "Ascending" },
-//   { value: "Desc", label: "Descending" }
-// ];
-
 const ProgramFilters = ({ t, filtering, onChangeComplete, onClearFilters }) => {
   return (
     <div className="filter-list">

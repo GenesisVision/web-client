@@ -1,31 +1,40 @@
-import React from "react";
+import React, { Fragment } from "react";
 import Select from "react-select";
 import classnames from "classnames";
 
 import "./program-list-sorting.css";
 
-const ProgramListSorting = () => {
-  setTimeout(() => {
-    this.select.state.isOpen = true;
-  }, 0);
+const ProgramListSorting = ({ sorting, onSortingChange }) => {
+  const fullValue = sorting.value || sorting.defaultValue;
+  const value = (sorting.value || sorting.defaultValue).replace(
+    /(.*)Asc|Desc$/,
+    "$1"
+  );
+  const isAsc = /.*Asc$/.test(fullValue);
+  const isDesc = /.*Desc$/.test(fullValue);
+  const handleSortingChange = option => {
+    onSortingChange(option.value + (isAsc ? "Asc" : "Desc"));
+  };
+  const handleDirectionChange = isAsc => {
+    onSortingChange(value + (isAsc ? "Asc" : "Desc"));
+  };
   return (
     <div className="program-list-sorting">
       <Select
-        ref={r => {
-          this.select = r;
-        }}
         className="sorting__container"
-        optionClassName="option__container"
-        value="Total Profit"
+        value={value}
+        onChange={handleSortingChange}
         options={options}
         clearable={false}
         searchable={false}
         valueRenderer={v => {
-          //console.log(v);
-          return <span>Order by {v.label}</span>;
+          return (
+            <Fragment>
+              Order by <span className="sorting__value">{v.label}</span>
+            </Fragment>
+          );
         }}
         arrowRenderer={a => {
-          //console.log(a);
           return (
             <span
               className={classnames(
@@ -36,12 +45,22 @@ const ProgramListSorting = () => {
           );
         }}
       />
-      <button type="button" className="btn btn-secondary">
-        1
-      </button>
-      <button type="button" className="btn btn-secondary">
-        2
-      </button>
+      <div
+        className={classnames("sorting__order", {
+          "sorting__order--selected": isAsc
+        })}
+        onClick={() => handleDirectionChange(true)}
+      >
+        Asc
+      </div>
+      <div
+        className={classnames("sorting__order", {
+          "sorting__order--selected": isDesc
+        })}
+        onClick={() => handleDirectionChange(false)}
+      >
+        Desc
+      </div>
     </div>
   );
 };
@@ -50,19 +69,11 @@ export default ProgramListSorting;
 
 const options = [
   {
-    value: "level",
+    value: "ByLevel",
     label: "Level"
   },
   {
-    value: "Avg. Profit",
+    value: "ByAvgProfit",
     label: "Avg. Profit"
-  },
-  {
-    value: "Total Profit",
-    label: "Total Profit"
-  },
-  {
-    value: "Balance",
-    label: "Balance"
   }
 ];

@@ -13,12 +13,15 @@ import pagingActionsFactory from "../../paging/actions/paging-actions";
 import { composeProgramsFilters } from "./programs-helpers";
 import clearDataActionFactory from "../../../shared/actions/clear-data.factory";
 import { composeFilteringActionType } from "../../filtering/helpers/filtering-helpers";
+import sortingActionsFactory from "../../sorting/actions/sorting-actions";
+import { SORTING_FILTER_NAME } from "../programs.constants";
 
 const favoritePrograms = programsActions.favoriteProgramCreator(
   actionTypes.PROGRAMS_FAVORITE
 );
 
 const filteringActions = filteringActionsFactory(actionTypes.PROGRAMS);
+const sortingActions = sortingActionsFactory(actionTypes.PROGRAMS);
 const filterPaneActions = filterPaneActionsFactory(actionTypes.PROGRAMS);
 
 const getPrograms = () => (dispatch, getState) => {
@@ -26,6 +29,7 @@ const getPrograms = () => (dispatch, getState) => {
   const { skip, take } = calculateSkipAndTake(paging);
 
   const { filtering } = getState().programsData.programs;
+  const { sorting } = getState().programsData.programs;
 
   let data = {
     filter: { skip, take, equityChartLength: 365 }
@@ -35,6 +39,10 @@ const getPrograms = () => (dispatch, getState) => {
   }
 
   data.filter = { ...data.filter, ...composeProgramsFilters(filtering) };
+  data.filter = {
+    ...data.filter,
+    [SORTING_FILTER_NAME]: sorting.value || sorting.defaultValue
+  };
 
   const setLogoAndOrder = response => {
     response.investmentPrograms.forEach((x, idx) => {
@@ -65,6 +73,16 @@ const changeProgramListPage = paging => dispatch => {
 
 const changeProgramListFilter = filter => dispatch => {
   dispatch(filteringActions.updateFilter(filter));
+  dispatch(
+    updateProgramListPaging({
+      currentPage: 0
+    })
+  );
+  dispatch(getPrograms());
+};
+
+const changeProgramListSorting = sorting => dispatch => {
+  dispatch(sortingActions.updateSorting(sorting));
   dispatch(
     updateProgramListPaging({
       currentPage: 0
@@ -133,6 +151,7 @@ const programsService = {
   openFilterPane,
   closeFilterPane,
   changeProgramListFilter,
+  changeProgramListSorting,
   clearProgramListFilter,
   clearProgramListFilters,
   toggleFavoriteProgram

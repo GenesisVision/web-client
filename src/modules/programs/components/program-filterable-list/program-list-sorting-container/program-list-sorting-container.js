@@ -4,21 +4,30 @@ import React from "react";
 import ProgramListSorting from "./program-list-sorting.js/program-list-sorting";
 import programsService from "../../../service/programs-service";
 
-const ProgramSortingContainer = ({ sorting, isPending, updateSorting }) => (
-  <ProgramListSorting sorting={sorting} updateSorting={updateSorting} />
-);
+const ProgramSortingContainer = ({
+  sorting,
+  showFiltering,
+  onSortingChange
+}) => {
+  if (!showFiltering) return null;
+  return (
+    <ProgramListSorting sorting={sorting} onSortingChange={onSortingChange} />
+  );
+};
 
-const mapStateToProps = ({ programsData }) => {
-  const { sorting } = programsData.programs;
-  const { isPending } = programsData.programs.items;
-  return { sorting, isPending };
+const mapStateToProps = state => {
+  const { sorting } = state.programsData.programs;
+  const { data } = state.programsData.programs.items;
+  const showFiltering = data && data.total > 0;
+  return { sorting, showFiltering };
 };
 
 const mapDispatchToProps = dispatch => ({
-  updatePaging: sorting =>
-    dispatch(programsService.changeProgramListSort(sorting))
+  onSortingChange: sorting =>
+    dispatch(programsService.changeProgramListSorting(sorting))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  ProgramSortingContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProgramSortingContainer);
