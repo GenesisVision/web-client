@@ -34,12 +34,17 @@
 }
 
 .filter-pane-backdrop {
-  opacity: 0.5;
-  background-color: #000;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 300px;
-  z-index: 2;
+  @include media-breakpoint-desktop() {
+    opacity: 0.5;
+    background-color: #000;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 300px;
+    z-index: 2;
+  }
+  @include media-breakpoint-phone() {
+    display: none;
+  }
 }
