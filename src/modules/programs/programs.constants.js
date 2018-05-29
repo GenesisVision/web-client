@@ -42,6 +42,25 @@ export const BALANCE_MAX_FILTER_VALUE = 100000;
 export const AVAILABLE_INVESTMENT_FILTER_VALUE = false;
 export const SORTING_FILTER_VALUE = "ByLevelAsc";
 
+export const SORTING_OPTIONS = [
+  {
+    value: "ByLevel",
+    label: "Level"
+  },
+  {
+    value: "ByAvgProfit",
+    label: "Avg. Profit"
+  },
+  {
+    value: "ByTotalProfit",
+    label: "Total Profit"
+  },
+  {
+    value: "ByBalance",
+    label: "Balance"
+  }
+];
+
 export const PROGRAMS_DEFAULT_FILTERS = [
   {
     name: LEVEL_FILTER_NAME,

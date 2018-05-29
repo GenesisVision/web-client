@@ -3,6 +3,7 @@ import Select from "react-select";
 import classnames from "classnames";
 
 import "./program-list-sorting.css";
+import { SORTING_OPTIONS } from "../../../../programs.constants";
 
 const ProgramListSorting = ({ sorting, onSortingChange }) => {
   const fullValue = sorting.value || sorting.defaultValue;
@@ -24,7 +25,7 @@ const ProgramListSorting = ({ sorting, onSortingChange }) => {
         className="sorting__container"
         value={value}
         onChange={handleSortingChange}
-        options={options}
+        options={SORTING_OPTIONS}
         clearable={false}
         searchable={false}
         valueRenderer={v => {
@@ -66,14 +67,3 @@ const ProgramListSorting = ({ sorting, onSortingChange }) => {
 };
 
 export default ProgramListSorting;
-
-const options = [
-  {
-    value: "ByLevel",
-    label: "Level"
-  },
-  {
-    value: "ByAvgProfit",
-    label: "Avg. Profit"
-  }
-];
