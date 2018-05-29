@@ -14,7 +14,7 @@ import {
 } from "./profile/profile.type";
 
 class ProfileContainer extends Component<IProfileFullProps> {
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchProfile();
   }
 
@@ -48,4 +48,7 @@ const mapDispatchToProps = (dispatch): IProfileActions => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProfileContainer);

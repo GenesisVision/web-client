@@ -18,10 +18,8 @@ import programWithdrawReducer from "../modules/program-withdraw/reducers/program
 import registerReducer from "../modules/register/reducers/register-reducers";
 import tournamentReducer from "../modules/tournament/reducers/tournament-reducers";
 import walletReducer from "../modules/wallet/reducers/wallet-reducers";
-import environmentReducer from "./environment-reducer";
 
 export default combineReducers({
-  environment: environmentReducer,
   routing: routerReducer,
   loadingBar: loadingBarReducer,
   platformData: platformReducer,

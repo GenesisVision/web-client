@@ -5,6 +5,7 @@ import pagingReducerFactory from "../../paging/reducers/paging-reducers";
 import programsFilteringReducer from "./programs-filtering-reducer";
 import programsFilterPaneReducer from "./programs-filter-pane-reducer";
 import programsDataReducer from "./programs-data-reducer";
+import programsSortingReducer from "./programs-sorting-reducer";
 
 import { PROGRAMS } from "../actions/programs-actions.constants";
 
@@ -12,6 +13,7 @@ const programsReducer = combineReducers({
   programs: combineReducers({
     items: apiReducerFactory({ apiType: PROGRAMS }, programsDataReducer),
     filtering: programsFilteringReducer,
+    sorting: programsSortingReducer,
     paging: pagingReducerFactory({
       type: PROGRAMS,
       paging: { itemsOnPage: 100 }

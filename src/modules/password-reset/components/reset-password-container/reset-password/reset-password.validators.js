@@ -1,12 +1,12 @@
-import Yup from "yup";
+import { object, string, ref } from "yup";
 
 import { passwordValidator } from "../../../../../shared/utils/validators/validators";
 
-const confirmPasswordValidator = Yup.string()
-  .oneOf([Yup.ref("password")], "Passwords don't match.")
+const confirmPasswordValidator = string()
+  .oneOf([ref("password")], "Passwords don't match.")
   .required("Confirm Password is required");
 
-const validationSchema = Yup.object().shape({
+const validationSchema = object().shape({
   password: passwordValidator,
   confirmPassword: confirmPasswordValidator
 });

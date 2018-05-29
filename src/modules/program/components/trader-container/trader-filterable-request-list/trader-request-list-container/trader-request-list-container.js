@@ -5,7 +5,7 @@ import programService from "../../../../service/program-service";
 import TraderRequestList from "./trader-request-list/trader-request-list";
 
 class TraderRequestListContainer extends PureComponent {
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchTraderRequests(this.props.programId);
   }
 
@@ -61,6 +61,7 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  TraderRequestListContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TraderRequestListContainer);

@@ -1,0 +1,144 @@
+@import "styles/_colors.scss";
+
+.program-list-sorting {
+  display: flex;
+  flex: 1;
+  max-width: 285px;
+  text-align: center;
+  color: $alternate-color;
+  background-color: white;
+  border: solid 1px #e3ebed;
+  border-radius: 10rem;
+  box-shadow: 0 1px 4px 0 #e3ebed;
+  margin: 0.5rem;
+}
+
+.sorting__container {
+  position: relative;
+  width: 100%;
+  padding: 0.2rem 0.4rem;
+}
+
+.sorting__order {
+  cursor: pointer;
+  display: inline-block;
+  border-left: 1px solid $border-color;
+  padding: 0.2rem 0rem 0.2rem 0.2rem;
+  min-width: 3rem;
+
+  &:last-of-type {
+    border-top-right-radius: 10rem;
+    border-bottom-right-radius: 10rem;
+    padding-right: 0.6rem;
+  }
+
+  &:not(&--selected) {
+    color: $main-color;
+  }
+  &--selected {
+    cursor: default;
+    font-family: NeuzeitGroBol;
+  }
+}
+
+.sorting__value {
+  color: $alternate-color;
+  font-family: NeuzeitGroBol;
+}
+
+.Select-control {
+  min-width: 174px;
+  cursor: default;
+  display: table;
+  border-spacing: 0;
+  border-collapse: separate;
+  outline: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.Select--single > .Select-control .Select-value,
+.Select-placeholder {
+  bottom: 0;
+  left: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  max-width: 100%;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.Select.has-value.Select--single
+  > .Select-control
+  .Select-value
+  .Select-value-label,
+.Select.has-value.is-pseudo-focused.Select--single
+  > .Select-control
+  .Select-value
+  .Select-value-label {
+  color: $main-color;
+}
+
+.Select-arrow-zone {
+  cursor: pointer;
+  display: table-cell;
+  position: relative;
+  text-align: right;
+  vertical-align: middle;
+  width: 25px;
+  color: $main-color;
+}
+
+.Select,
+.Select div,
+.Select input,
+.Select span {
+  box-sizing: border-box;
+}
+
+.Select-menu-outer {
+  background-color: #fff;
+  border-top-color: #e6e6e6;
+  box-sizing: border-box;
+  margin-top: 1px;
+  max-height: 200px;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  width: 110px;
+  z-index: 1;
+  -webkit-overflow-scrolling: touch;
+  box-shadow: 0 100px 100px 0 rgba(194, 207, 212, 0.32);
+}
+
+.Select-menu {
+  max-height: 198px;
+  overflow-y: auto;
+  box-shadow: 0 1px 4px 0 #e3ebed;
+}
+
+.Select-option {
+  box-sizing: border-box;
+  background-color: #fff;
+  color: #666;
+  cursor: pointer;
+  display: block;
+  padding: 8px 10px;
+  &:not(:last-of-type) {
+    border-bottom: 1px solid #eaecf7;
+  }
+}
+
+.Select-option.is-selected {
+  background-color: rgba(22, 183, 173, 0.08);
+  color: #333;
+}
+
+.Select-option.is-focused {
+  color: #333;
+}

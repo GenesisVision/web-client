@@ -2,9 +2,10 @@
 
 .program-filterable-list {
   display: flex;
+  overflow: hidden;
 }
 
-.program-filterable-list__programs {
+.program-filterable-list__wrapper {
   flex: 1;
   max-width: 1570px;
   margin: 0 auto;
@@ -21,26 +22,12 @@
   }
 }
 
-.program-filterable-list__filters {
+.program-filterable-list__header {
   display: flex;
-  justify-content: flex-end;
-  flex: 1;
-  background-color: rgba(252, 252, 252, 0.7);
-  z-index: 1080;
-  height: 100%;
-  @include media-breakpoint-desktop() {
-    position: fixed;
-    top: 72px;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    overflow-y: auto;
-    overflow-x: hidden;
-    height: auto;
-  }
-
+  margin: 2rem 1rem 0.5rem 1rem;
+  align-items: center;
+  justify-content: space-between;
   @include media-breakpoint-phone() {
-    margin-top: 78px; /*fix for iphone*/
-    top: 0;
+    flex-direction: column;
   }
 }

@@ -8,7 +8,7 @@ import popupActions from "../../../../../popup/actions/popup-actions";
 import { PROGRAM_DEPOSIT_POPUP } from "../../../../../popup/actions/popup-actions.constants";
 
 class DashboardContainer extends PureComponent {
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchDashboardPrograms();
   }
   render() {
@@ -56,4 +56,7 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(DashboardContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DashboardContainer);

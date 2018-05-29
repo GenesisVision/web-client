@@ -2,7 +2,12 @@ import { normalizeFilteringSelector } from "../../filtering/selectors/filtering-
 import filteringReducerFactory from "../../filtering/reducers/filtering-reducers";
 
 import { PROGRAMS } from "../actions/programs-actions.constants";
-import { PROGRAMS_DEFAULT_FILTERS } from "../programs.constants";
+import {
+  PROGRAMS_DEFAULT_FILTERS,
+  MAP_DEFAULT_FILTERS_FROM_SERVER
+} from "../programs.constants";
+import { PLATFORM_SETTINGS } from "../../../actions/platform-actions";
+import { SUCCESS_SUFFIX } from "../../../shared/reducers/api-reducer/api-reducer";
 
 const updateFilter = (state, filter) => {
   if (state.filters.some(x => x.name === filter.name)) {
@@ -43,12 +48,47 @@ const updateFilterReducer = (state, action) => {
   return updateFilter(state, newFilter);
 };
 
+const constructDefaultFilterReducer = (state, action) => {
+  switch (action.type) {
+    case `${PLATFORM_SETTINGS}_${SUCCESS_SUFFIX}`: {
+      const defaultFilterNames = Object.keys(MAP_DEFAULT_FILTERS_FROM_SERVER);
+      let defaultFilters = state.defaultFilters;
+      defaultFilterNames.forEach(x => {
+        const mappedFilter = MAP_DEFAULT_FILTERS_FROM_SERVER[x];
+        const filter = defaultFilters.find(f => f.name === mappedFilter.name);
+
+        const value = JSON.parse(JSON.stringify(filter.value));
+        const newValue = mappedFilter.variableName
+          ? ((value[mappedFilter.variableName] = action.payload[x]), value)
+          : action.payload[x];
+
+        defaultFilters = defaultFilters.map(df => {
+          if (df.name === filter.name)
+            return {
+              ...filter,
+              value: newValue
+            };
+          return df;
+        });
+      });
+
+      return {
+        ...state,
+        defaultFilters: defaultFilters
+      };
+    }
+    default:
+      return state;
+  }
+};
+
 const programsFilteringReducer = filteringReducerFactory({
   type: PROGRAMS,
   filters: {
     defaultFilters: PROGRAMS_DEFAULT_FILTERS
   },
-  updateFilterReducer
+  updateReducer: updateFilterReducer,
+  childReducer: constructDefaultFilterReducer
 });
 
 export default programsFilteringReducer;

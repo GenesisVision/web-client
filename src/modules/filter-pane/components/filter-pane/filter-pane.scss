@@ -4,7 +4,6 @@
 .filter-pane {
   min-height: calc(100vh - 72px);
   overflow: hidden;
-  // z-index: 1090;
   @include media-breakpoint-phone() {
     position: fixed;
     top: 74px;
@@ -31,5 +30,21 @@
   @include media-breakpoint-phone() {
     width: 100%;
     box-shadow: none;
+  }
+}
+
+.filter-pane-backdrop {
+  @include media-breakpoint-desktop() {
+    opacity: 0.5;
+    background-color: #000;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 300px;
+    z-index: 2;
+  }
+  @include media-breakpoint-phone() {
+    display: none;
   }
 }

@@ -11,7 +11,7 @@ import { PROGRAM_DEPOSIT_POPUP } from "../../../../popup/actions/popup-actions.c
 import { PROGRAMS_ROUTE } from "../../../../programs/programs.constants";
 
 class FavoritePrograms extends Component {
-  componentWillMount() {
+  componentDidMount() {
     const { getPrograms } = this.props;
     getPrograms();
   }
@@ -86,6 +86,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
-  FavoritePrograms
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  mergeProps
+)(FavoritePrograms);

@@ -8,7 +8,7 @@ import programsService from "../../../service/programs-service";
 import { PROGRAM_DEPOSIT_POPUP } from "../../../../popup/actions/popup-actions.constants";
 
 class ProgramListContainer extends Component {
-  componentWillMount() {
+  componentDidMount() {
     const { getPrograms } = this.props;
     getPrograms();
   }
@@ -72,6 +72,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
-  ProgramListContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  mergeProps
+)(ProgramListContainer);

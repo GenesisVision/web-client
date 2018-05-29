@@ -1,5 +1,7 @@
 @import "styles/_breakpoint.scss";
 
 .program-active-filter-list-container {
-  margin: 0.5rem 1rem;
+  @include media-breakpoint-phone() {
+    order: 1;
+  }
 }

@@ -5,7 +5,7 @@ import traderActions from "../../../actions/program-actions";
 import TraderHistory from "./trader-history/trader-history";
 
 class TraderHistoryContainer extends PureComponent {
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchTraderHistory(this.props.programId);
   }
 
@@ -51,6 +51,7 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  TraderHistoryContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TraderHistoryContainer);

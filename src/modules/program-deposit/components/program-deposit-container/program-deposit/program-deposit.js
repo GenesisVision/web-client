@@ -2,7 +2,7 @@ import { translate } from "react-i18next";
 import { withFormik, Field } from "formik";
 import NumberFormat from "react-number-format";
 import React from "react";
-import Yup from "yup";
+import { object as yupObject, number as yupNumber } from "yup";
 
 import FormError from "../../../../../shared/components/form/form-error/form-error";
 import InputText from "../../../../../shared/components/form/input-text/input-text";
@@ -130,8 +130,8 @@ export default withFormik({
       gvtWalletAmount < availableInvestments
         ? "Available GVT"
         : "Available To Invest";
-    const scheme = Yup.object().shape({
-      amount: Yup.number()
+    const scheme = yupObject().shape({
+      amount: yupNumber()
         .typeError("Amount must be a number.")
         .moreThan(0, "Amount must be greater than zero")
         .max(maxVal, "Amount must not be greater than " + maxValText)
