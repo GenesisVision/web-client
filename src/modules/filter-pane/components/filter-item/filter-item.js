@@ -7,17 +7,6 @@ import "./filter-item.css";
 class FilterItem extends Component {
   getInitialValue = () => this.props.value || this.props.defaultValue;
 
-  static getDerivedStateFromProps(props, state) {
-    if (!props.value) return null;
-
-    if (JSON.stringify(props.value) === JSON.stringify(state.value))
-      return null;
-
-    return {
-      value: props.value
-    };
-  }
-
   state = { isOpen: false, value: this.getInitialValue() };
 
   toggleOpenState = () => {
