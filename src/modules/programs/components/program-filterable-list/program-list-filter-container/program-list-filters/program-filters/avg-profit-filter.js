@@ -5,74 +5,6 @@ import { AVG_PROFIT_FILTER_NAME } from "../../../../../programs.constants";
 import { Range, Handle } from "rc-slider";
 import { RANGE_FILTER_TYPE } from "../../../../../../filtering/filtering.constants";
 
-const pointsCount = 4;
-const sPointsCount = 10 * 3 * 9;
-
-const mPointFromSPoint = x => x - 1;
-const sPointFromMPoint = x => x + 1;
-
-const sPoints = new Array(pointsCount).fill(0).map((x, idx) => idx);
-const mPoints = sPoints.map(mPointFromSPoint);
-
-const mPointValue = x => {
-  if (x === 0) return 0;
-  const value = Math.pow(10, Math.abs(x));
-  return Math.sign(x) * value;
-};
-const mPointFromMPointValue = x => {
-  if (x === 0) return 0;
-  const value = Math.abs(Math.log10(Math.abs(x)));
-  return Math.sign(x) * value;
-};
-
-const sPointValue = x => {
-  const gap = sPointsCount / (pointsCount - 1);
-  return x * gap;
-};
-const sPointFromSPointValue = x => {
-  const gap = sPointsCount / (pointsCount - 1);
-  return x / gap;
-};
-
-const mPointsValues = mPoints.reduce((prev, curr) => {
-  prev[sPointValue(sPointFromMPoint(curr))] = mPointValue(curr);
-  return prev;
-}, {});
-
-const getSValue = mValue => {
-  const minMPoint = Math.floor(mPointFromMPointValue(mValue));
-  const minMPointValue = mPointValue(minMPoint);
-  const maxMPointValue = mPointValue(minMPoint + 1);
-  const rate =
-    minMPoint === mValue
-      ? 1
-      : (mValue - minMPointValue) / (maxMPointValue - minMPointValue);
-
-  const gap = sPointsCount / (pointsCount - 1);
-  const minSPoint = sPointFromMPoint(minMPoint);
-  return sPointValue(minSPoint) + gap * rate;
-};
-const getMValue = sValue => {
-  const sPoint = sPointFromSPointValue(sValue);
-  const minMPoint = mPointFromSPoint(Math.floor(sPoint));
-  const rate = sPoint % 1;
-  const minMPointValue = mPointValue(minMPoint);
-  const maxMPointValue = mPointValue(minMPoint + 1);
-
-  return +(minMPointValue + (maxMPointValue - minMPointValue) * rate).toFixed(
-    2
-  );
-};
-
-const getMValues = ([min, max]) => {
-  return [getMValue(min), getMValue(max)];
-};
-
-const getSValues = ([min, max] = [undefined, undefined]) => {
-  if (min === undefined || max === undefined) return undefined;
-  return [getSValue(min), getSValue(max)];
-};
-
 const AvgProfitFilter = ({
   t,
   filtering,
@@ -81,7 +13,6 @@ const AvgProfitFilter = ({
   minValue
 }) => {
   const handleFilterChange = value => {
-    // const mValues = getMValues(value);
     return onFilterChange(AVG_PROFIT_FILTER_NAME, RANGE_FILTER_TYPE)(value);
   };
 
@@ -97,7 +28,6 @@ const AvgProfitFilter = ({
     >
       {(value, onChange) => (
         <Range
-          // marks={mPointsValues}
           value={value}
           onChange={onChange}
           min={filtering.defaultFilters[AVG_PROFIT_FILTER_NAME][0]}
