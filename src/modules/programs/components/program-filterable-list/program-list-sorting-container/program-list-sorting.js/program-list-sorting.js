@@ -14,10 +14,12 @@ const ProgramListSorting = ({ sorting, onSortingChange }) => {
   const isAsc = /.*Asc$/.test(fullValue);
   const isDesc = /.*Desc$/.test(fullValue);
   const handleSortingChange = option => {
+    if (value === option.value) return;
     onSortingChange(option.value + (isAsc ? "Asc" : "Desc"));
   };
-  const handleDirectionChange = isAsc => {
-    onSortingChange(value + (isAsc ? "Asc" : "Desc"));
+  const handleDirectionChange = isAscDirection => {
+    if (isAsc === isAscDirection) return;
+    onSortingChange(value + (isAscDirection ? "Asc" : "Desc"));
   };
   return (
     <div className="program-list-sorting">
