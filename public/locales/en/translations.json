@@ -11,7 +11,7 @@
     "minute_plural": "Minutes left",
     "second": "Second left",
     "second_plural": "Seconds left",
-    "end-less-than-now": "The end came"
+    "end-less-than-now": "The period is being restarted."
   },
   "program-actions": {
     "invest": "Invest",

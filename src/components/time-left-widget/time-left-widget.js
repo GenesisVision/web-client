@@ -39,10 +39,9 @@ const TimeLeftWidget = ({ t, start, end, className }) => {
       })}`;
 
     const secondsLeft = dateEnd.diff(dateNow, "seconds");
-    if (secondsLeft >= 0)
-      return `${secondsLeft} ${t("time-left-widget.second", {
-        count: secondsLeft
-      })}`;
+    return `${secondsLeft} ${t("time-left-widget.second", {
+      count: secondsLeft
+    })}`;
   };
 
   return (
