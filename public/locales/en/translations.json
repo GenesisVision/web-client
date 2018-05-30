@@ -2,9 +2,16 @@
   "app": {
     "header": "Manager Portal"
   },
-  "days-left-widget": {
-    "text": "Day left",
-    "text_plural": "Days left"
+  "time-left-widget": {
+    "day": "Day left",
+    "day_plural": "Days left",
+    "hour": "Hour left",
+    "hour_plural": "Hours left",
+    "minute": "Minute left",
+    "minute_plural": "Minutes left",
+    "second": "Second left",
+    "second_plural": "Seconds left",
+    "end-less-than-now": "The end came"
   },
   "program-actions": {
     "invest": "Invest",

@@ -45,7 +45,7 @@
     color: #1b4f64;
   }
 
-  &__days-left {
+  &__time-left {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -137,7 +137,7 @@
       margin-right: 1rem;
     }
 
-    &__days-left {
+    &__time-left {
       flex-direction: row;
       width: 30%;
       justify-content: flex-end;

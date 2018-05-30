@@ -9,7 +9,7 @@ import { LOGIN_ROUTE } from "../../modules/login/login.constants";
 import replaceParams from "../../utils/replace-params";
 import Button from "../button/button";
 import "./program-item.css";
-import DaysLeft from "./pi-days-left/pi-days-left";
+import PeriodLeft from "./period-left/period-left";
 import PIAvatar from "./pi-avatar/pi-avatar";
 
 const ProgramItem = ({
@@ -54,11 +54,11 @@ const ProgramItem = ({
             {program.title}
           </Link>
         </div>
-        <DaysLeft
-          className="program-item__days-left"
+        <PeriodLeft
+          className="program-item__time-left"
           isEnabled={program.isEnabled}
           startOfPeriod={program.startOfPeriod}
-          periodDuration={program.periodDuration}
+          endOfPeriod={program.endOfPeriod}
         />
       </div>
       <div className="program-item__chart">

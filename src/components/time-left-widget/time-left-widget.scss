@@ -1,7 +1,7 @@
 @import "styles/_colors.scss";
 @import "styles/_breakpoint.scss";
 
-.days-left-widget {
+.time-left-widget {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -10,6 +10,10 @@
   &__text {
     font-size: 0.875rem;
     white-space: nowrap;
+    min-width: 95px;
+    @include breakpoint-desktop() {
+      text-align: right;
+    }
   }
 
   &__progress {

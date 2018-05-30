@@ -3,7 +3,7 @@ import { withFormik, Field } from "formik";
 import React from "react";
 import { object as yupObject, number as yupNumber } from "yup";
 
-import DaysLeftWidget from "../../../../../components/days-left-widget/days-left-widget";
+import TimeLeftWidget from "../../../../../components/time-left-widget/time-left-widget";
 import FormError from "../../../../../shared/components/form/form-error/form-error";
 import InputText from "../../../../../shared/components/form/input-text/input-text";
 import PopupButtons from "../../../../popup/components/popup-buttons/popup-buttons";
@@ -44,10 +44,10 @@ const TraderWithdraw = ({
             </div>
           </div>
           <div className="program-withdraw__info-cell">
-            <div className="program-withdraw__days-left">
-              <DaysLeftWidget
+            <div className="program-withdraw__time-left">
+              <TimeLeftWidget
                 start={programWithdraw.startOfPeriod}
-                duration={programWithdraw.periodDuration}
+                end={programWithdraw.endOfPeriod}
               />
             </div>
           </div>

@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import DaysLeftWidget from "../../days-left-widget/days-left-widget";
+import TimeLeftWidget from "components/time-left-widget/time-left-widget";
 
 const propTypes = {
   isEnabled: PropTypes.bool.isRequired,
   startOfPeriod: PropTypes.instanceOf(Date).isRequired,
-  periodDuration: PropTypes.number.isRequired,
+  endOfPeriod: PropTypes.instanceOf(Date).isRequired,
   className: PropTypes.string
 };
 
@@ -13,14 +13,14 @@ const defaultProps = {
   className: ""
 };
 
-const DaysLeft = props => {
-  const { isEnabled, startOfPeriod, periodDuration, className } = props;
+const PeriodLeft = props => {
+  const { isEnabled, startOfPeriod, endOfPeriod, className } = props;
   if (isEnabled) {
     return (
-      <DaysLeftWidget
+      <TimeLeftWidget
         className={className}
         start={startOfPeriod}
-        duration={periodDuration}
+        end={endOfPeriod}
       />
     );
   }
@@ -28,6 +28,6 @@ const DaysLeft = props => {
   return <div>The program is not enabled</div>;
 };
 
-DaysLeft.propTypes = propTypes;
-DaysLeft.defaultProps = defaultProps;
-export default DaysLeft;
+PeriodLeft.propTypes = propTypes;
+PeriodLeft.defaultProps = defaultProps;
+export default PeriodLeft;

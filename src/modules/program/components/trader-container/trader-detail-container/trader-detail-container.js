@@ -90,7 +90,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
         logo: traderDetail.logo,
         level: traderDetail.level,
         startOfPeriod: traderDetail.startOfPeriod,
-        periodDuration: traderDetail.periodDuration,
+        endOfPeriod: traderDetail.endOfPeriod,
         investedTokens: traderDetail.investedTokens,
         token: traderDetail.token
       };

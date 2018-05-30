@@ -13,7 +13,7 @@
 
 .program-withdraw__info-cell {
   flex: 1 1 32%;
-  max-width: 32%;
+  max-width: 50%;
   text-align: center;
 }
 
@@ -25,13 +25,18 @@
 .program-withdraw__name {
   font-size: 1.3rem;
   margin: 0.5rem;
+  max-width: 10rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.program-withdraw__days-left {
-  max-width: 5rem;
+.program-withdraw__time-left {
   margin: auto;
-  .days-left-widget {
+  .time-left-widget {
     flex-direction: column;
+    &__text {
+      text-align: center;
+    }
   }
 }
 
