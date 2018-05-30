@@ -74,7 +74,7 @@ const TraderDealDetailMT4 = ({ deal, t }) => {
       <div className="trader-deal__cell">
         <div className="metric">
           <div className="metric__value">
-            {moment(deal.dateOpen).format("L")}
+            {moment(deal.dateOpen).format("LLL")}
           </div>
           <div className="metric__description">
             <span id={`date-open_${deal.ticket}`}>
@@ -93,7 +93,7 @@ const TraderDealDetailMT4 = ({ deal, t }) => {
         <div className="trader-deal__cell">
           <div className="metric">
             <div className="metric__value">
-              {moment(deal.dateClose).format("L")}
+              {moment(deal.dateClose).format("LLL")}
             </div>
             <div className="metric__description">
               <span id={`date-close_${deal.ticket}`}>
@@ -156,7 +156,7 @@ const TraderDealDetailMT5 = ({ deal, t }) => {
       </div>
       <div className="trader-deal__cell">
         <div className="metric">
-          <div className="metric__value">{moment(deal.date).format("L")}</div>
+          <div className="metric__value">{moment(deal.date).format("LLL")}</div>
           <div className="metric__description">
             <span id={`date_${deal.ticket}`}>
               {t("program-deal-list.date.text")}
