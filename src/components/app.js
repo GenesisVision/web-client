@@ -9,7 +9,6 @@ import Header from "./header/header";
 import history from "../utils/history";
 import platformActions from "../actions/platform-actions";
 import PopupContainer from "../modules/popup/components/popup-container";
-import Sidebar from "./sidebar/sidebar";
 import store from "../store/index";
 
 import "./app.css";
@@ -24,9 +23,6 @@ class AppContainer extends Component {
       <div>
         <Route component={Header} />
         <div className="app__main">
-          <div className="app__sidebar">
-            <Sidebar />
-          </div>
           <div className="app__body">
             <AppRoutes />
           </div>

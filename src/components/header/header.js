@@ -16,6 +16,8 @@ import { PROGRAMS } from "../../modules/programs/actions/programs-actions.consta
 import { PROGRAMS_ROUTE } from "../../modules/programs/programs.constants";
 import gvLogo from "./gv-logo.svg";
 
+import Navigation from "../navigation/navigation";
+
 const PAGES_WITH_FILTER = {
   [PROGRAMS_ROUTE]: {
     actionType: PROGRAMS,
@@ -73,7 +75,9 @@ const Header = ({
           <NavLink title="Home" to={HOME_ROUTE}>
             <img src={gvLogo} alt="Genesis Vision" />
           </NavLink>
-          <div className="h-sorting">Investor Portal</div>
+        </div>
+        <div className="header__nav">
+          <Navigation />
         </div>
         <div className="header__filtering">
           {filterPaneControl(
@@ -84,7 +88,6 @@ const Header = ({
           {isAuthenticated ? authorizedControl(signOut) : unauthorizedControl()}
         </div>
       </header>
-      <MobileNav />
       <LoadingBar className="header__loading-bar" />
     </div>
   );
