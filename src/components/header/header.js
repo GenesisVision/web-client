@@ -25,22 +25,6 @@ const PAGES_WITH_FILTER = {
   }
 };
 
-const authorizedControl = signOut => (
-  <ul className="navbar-nav flex-row">
-    <li className="nav-item text-nowrap">
-      <Button label="Sign Out" secondary onClick={signOut} />
-    </li>
-  </ul>
-);
-
-const unauthorizedControl = () => (
-  <ul className="navbar-nav flex-row">
-    <li className="nav-item text-nowrap">
-      <Button label="Sign In" secondary href={LOGIN_ROUTE} />
-    </li>
-  </ul>
-);
-
 const filterPaneControl = (
   shouldShowFilterControl,
   isFilterOpen,
@@ -68,6 +52,7 @@ const Header = ({
   isFilterOpen,
   toggleFilter
 }) => {
+  console.info("render");
   return (
     <div className="header-wrapper">
       <header className="header">
@@ -76,7 +61,7 @@ const Header = ({
             <img src={gvLogo} alt="Genesis Vision" />
           </NavLink>
         </div>
-        <div className="header__nav">
+        <div className="header__navigation">
           <Navigation />
         </div>
         <div className="header__filtering">
@@ -85,7 +70,6 @@ const Header = ({
             isFilterOpen,
             toggleFilter
           )}
-          {isAuthenticated ? authorizedControl(signOut) : unauthorizedControl()}
         </div>
       </header>
       <LoadingBar className="header__loading-bar" />
