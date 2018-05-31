@@ -40,7 +40,7 @@ export const TOTAL_PROFIT_MAX_FILTER_VALUE = 100000;
 export const BALANCE_MIN_FILTER_VALUE = -1000;
 export const BALANCE_MAX_FILTER_VALUE = 100000;
 export const AVAILABLE_INVESTMENT_FILTER_VALUE = false;
-export const SORTING_FILTER_VALUE = "ByLevelAsc";
+export const SORTING_FILTER_VALUE = "ByProfitDesc";
 
 export const SORTING_OPTIONS = [
   {
