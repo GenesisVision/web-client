@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import Select from "react-select";
 import classnames from "classnames";
 
@@ -23,6 +23,7 @@ const ProgramListSorting = ({ sorting, onSortingChange }) => {
   };
   return (
     <div className="program-list-sorting">
+      <div className="sorting__label">Order by</div>
       <Select
         className="sorting__container"
         value={value}
@@ -31,11 +32,7 @@ const ProgramListSorting = ({ sorting, onSortingChange }) => {
         clearable={false}
         searchable={false}
         valueRenderer={v => {
-          return (
-            <Fragment>
-              Order by <span className="sorting__value">{v.label}</span>
-            </Fragment>
-          );
+          return <span className="sorting__value">{v.label}</span>;
         }}
         arrowRenderer={a => {
           return (
