@@ -8,11 +8,34 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: $background-color;
     transform: translateX(-100%);
 
     &--open {
       transform: translateX(0);
     }
+
+    @include breakpoint-desktop() {
+      transform: none;
+      position: relative;
+      display: flex;
+      flex-direction: row;
+    }
+  }
+
+  @include breakpoint-desktop() {
+    &__item {
+      padding: 0.2rem 2rem;
+      border-left: 1px solid $border-color;
+    }
+    &__button {
+      display: none;
+    }
+    & .header {
+      display: none;
+    }
+  }
+
+  & .gv-btn {
+    color: $alternate-color;
   }
 }

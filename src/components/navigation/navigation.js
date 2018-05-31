@@ -8,13 +8,20 @@ import { DASHBOARD_ROUTE } from "../../modules/dashboard/dashboard.constants";
 import { PROGRAMS_ROUTE } from "../../modules/programs/programs.constants";
 import { WALLET_ROUTE } from "../../modules/wallet/wallet.constants";
 
-import { DashboardIcon, WalletIcon, TradersIcon } from "./media/icons.js";
+import {
+  DashboardIcon,
+  WalletIcon,
+  TradersIcon,
+  CloseIcon,
+  MenuIcon
+} from "./media/icons.js";
 import { TOURNAMENT_ROUTE } from "../../modules/tournament/tournament.constants";
 
 import { navigationClose, navigationOpen } from "./actions/navigation-actions";
 
 import AuthControls from "../../modules/authorization-controls/authorization-controls";
 import history from "../../utils/history";
+import Button from "../button/button";
 
 class Navigation extends Component {
   componentDidMount() {
@@ -31,15 +38,24 @@ class Navigation extends Component {
     return (
       <div className="navigation">
         <div className="navigation__button">
-          <button onClick={this.props.navigationOpen}>=</button>
+          <Button
+            icon={<MenuIcon />}
+            onClick={this.props.navigationOpen}
+            secondary
+          />
         </div>
         <div
           className={classnames("navigation__menu", {
             "navigation__menu--open": this.props.isOpen
           })}
         >
-          <AuthControls />
-          <button onClick={this.props.navigationClose}>x</button>
+          <div className="header">
+            <Button
+              icon={<CloseIcon />}
+              onClick={this.props.navigationClose}
+              secondary
+            />
+          </div>
           {shouldRenderTournament && (
             <div className="navigation__item">
               <NavLink
@@ -85,6 +101,9 @@ class Navigation extends Component {
               <WalletIcon />
               Wallet
             </NavLink>
+          </div>
+          <div className="navigation__item">
+            <AuthControls />
           </div>
         </div>
       </div>
