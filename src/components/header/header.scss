@@ -26,11 +26,23 @@
 
 .header__sorting {
   display: flex;
+  @include media-breakpoint-phone() {
+    order: 2;
+  }
 }
 
 .header__filtering {
   display: flex;
   align-items: center;
+  @include media-breakpoint-phone() {
+    order: 3;
+  }
+}
+
+.navigation {
+  @include media-breakpoint-phone() {
+    order: 1;
+  }
 }
 
 .header__link {
