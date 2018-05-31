@@ -13,7 +13,8 @@ export default class Button extends Component {
     primary: PropTypes.bool,
     secondary: PropTypes.bool,
     onClick: PropTypes.func,
-    href: PropTypes.string
+    href: PropTypes.string,
+    icon: PropTypes.Component
   };
 
   static defaultProps = {
@@ -35,6 +36,7 @@ export default class Button extends Component {
       href,
       onClick,
       fullWidth,
+      icon,
       ...other
     } = this.props;
     const cn = classnames("gv-btn", className, {
@@ -56,6 +58,7 @@ export default class Button extends Component {
         title={label}
         {...other}
       >
+        {icon && icon}
         {label}
       </button>
     );
