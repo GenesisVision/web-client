@@ -18,10 +18,12 @@ const ProgramActiveFilterList = ({
           onRemoveFilter={clearFilter(x.name)}
         />
       ))}
-      <FilterBadgeButton text="Add Filter" onClick={openFilterPane} />
-      {showFilterActions && (
-        <FilterBadgeButton text="Clear Filter" onClick={clearFilters} />
-      )}
+      <span className="filter-badge--buttons">
+        <FilterBadgeButton text="Add Filter" onClick={openFilterPane} />
+        {showFilterActions && (
+          <FilterBadgeButton text="Clear Filter" onClick={clearFilters} />
+        )}
+      </span>
     </div>
   );
 };

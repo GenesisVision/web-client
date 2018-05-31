@@ -5,8 +5,12 @@
   display: inline-block;
   margin: 0.5rem;
   max-width: 300px;
-  padding: 0.2rem 1rem;
+  padding: 6px 15px;
   border-radius: 10rem;
+  font-size: 12px;
+
+  font-family: NeuzeitGroBol;
+  text-transform: uppercase;
   color: white;
   background-color: $alternate-color;
   box-shadow: 0 5px 15px 0 $box-shadow-primary-color;
@@ -17,12 +21,7 @@
   margin-right: 0.5rem;
 }
 
-.filter-badge__filter-text {
-  font-size: 0.9rem;
-}
-
 .filter-badge__name {
-  font-family: NeuzeitGroBol;
   &:not(:last-of-type) {
     &::after {
       content: ":";
@@ -31,7 +30,13 @@
 }
 
 .filter-badge__value {
+  font-family: NeuzeitGroLig;
   margin-left: 0.5rem;
+}
+
+.filter-badge--buttons {
+  min-width: 300px;
+  white-space: nowrap;
 }
 
 .filter-badge--button {
