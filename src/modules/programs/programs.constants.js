@@ -47,12 +47,12 @@ export const SORTING_OPTIONS = [
     value: "ByLevel",
     label: "Level"
   },
+  // {
+  //   value: "ByAvgProfit",
+  //   label: "Avg. Profit"
+  // },
   {
-    value: "ByAvgProfit",
-    label: "Avg. Profit"
-  },
-  {
-    value: "ByTotalProfit",
+    value: "ByProfit",
     label: "Total Profit"
   },
   {
