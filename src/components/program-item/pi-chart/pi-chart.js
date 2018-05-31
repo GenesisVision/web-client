@@ -39,7 +39,7 @@ const PIChart = ({ data }) => {
           <Line
             type="monotone"
             dataKey="equity"
-            strokeWidth={2}
+            strokeWidth={3}
             dot={false}
             activeDot={{ stroke: "#184f61" }}
             isAnimationActive={false}

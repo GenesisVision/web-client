@@ -11,6 +11,7 @@ import Button from "../button/button";
 import "./program-item.css";
 import PeriodLeft from "./period-left/period-left";
 import PIAvatar from "./pi-avatar/pi-avatar";
+import TagList from "./tag-list/tag-list";
 
 const ProgramItem = ({
   program,
@@ -25,6 +26,8 @@ const ProgramItem = ({
     ":programId": program.id
   });
 
+  const tags = Math.random() > 0.5 ? ["Forex", "Crypto", "Genesis Market"] : [];
+
   return (
     <div
       className={classnames("program-item", {
@@ -32,15 +35,19 @@ const ProgramItem = ({
       })}
     >
       <div className="program-item__order">{order || program.order}</div>
-      <Link to={programRoute}>
+      <Link to={programRoute} className="program-item__avatar">
         <PIAvatar
-          className="program-item__avatar"
+          className=""
           url={program.logo}
           level={program.level}
           isTournament={program.isTournament}
         />
       </Link>
-      <div className="program-item__info">
+      <div
+        className={classnames("program-item__info", {
+          "program-item__info--no-tags": tags.length === 0
+        })}
+      >
         <div className="program-item__title">
           {showBookmark &&
             isAuthenticated && (
@@ -54,17 +61,20 @@ const ProgramItem = ({
             {program.title}
           </Link>
         </div>
-        <PeriodLeft
-          className="program-item__time-left"
-          isEnabled={program.isEnabled}
-          startOfPeriod={program.startOfPeriod}
-          endOfPeriod={program.endOfPeriod}
-        />
       </div>
+      <div className="program-item__tags">
+        <TagList tags={tags} />
+      </div>
+      <PeriodLeft
+        className="program-item__time-left"
+        isEnabled={program.isEnabled}
+        startOfPeriod={program.startOfPeriod}
+        endOfPeriod={program.endOfPeriod}
+      />
+      <div className="program-item__hr" />
       <div className="program-item__chart">
         <PIChart data={program.equityChart} />
       </div>
-      <hr className="program-item__hr" />
       <div className="program-item__buttons">
         <Button
           primary
