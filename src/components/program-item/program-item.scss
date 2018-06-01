@@ -4,7 +4,7 @@
 .program-item {
   display: grid;
   grid-template-rows: [r-start] 1fr [r-tags] 1fr [r-middle] 2fr [r-end];
-  grid-template-columns: [c-order] 40px [c-image] 140px [c-info] 4fr [c-stats] 5fr [c-time-left] 5fr [c-buttons] 4fr [c-end];
+  grid-template-columns: [c-order] 40px [c-image] 140px [c-info] 1fr [c-stats] 1fr [c-time-left] 1fr [c-buttons] 1fr [c-end];
   align-items: center;
 
   min-height: 172px;
@@ -84,19 +84,23 @@
 
   &__time-left {
     grid-area: r-start / c-time-left / r-middle / c-buttons;
+    padding: 0 1rem;
     @include media-breakpoint-tablet() {
       grid-area: r-time-left / c-info / r-tags / c-chart;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       max-width: 122px;
+      padding: 0;
     }
   }
 
   &__buttons {
     grid-area: r-start / c-buttons / r-middle / c-end;
+    justify-self: center;
     @include media-breakpoint-tablet() {
       grid-area: r-start / c-buttons / r-tags / c-end;
+      justify-self: stretch;
       display: flex;
       justify-content: space-between;
       margin: 0.5rem 0;
@@ -147,6 +151,9 @@
 
   &__button {
     min-width: 120px;
+    @media (max-width: 1400px) {
+      min-width: auto;
+    }
     @include media-breakpoint-tablet() {
       min-width: 48%;
       & + & {

@@ -62,12 +62,13 @@ const ProgramItem = ({
       <div className="program-item__tags">
         <TagList tags={program.tags || []} />
       </div>
-      <PeriodLeft
-        className="program-item__time-left"
-        isEnabled={program.isEnabled}
-        startOfPeriod={program.startOfPeriod}
-        endOfPeriod={program.endOfPeriod}
-      />
+      <div className="program-item__time-left">
+        <PeriodLeft
+          isEnabled={program.isEnabled}
+          startOfPeriod={program.startOfPeriod}
+          endOfPeriod={program.endOfPeriod}
+        />
+      </div>
       <div className="program-item__hr" />
       <div className="program-item__chart">
         <PIChart data={program.equityChart} />
