@@ -1,8 +1,10 @@
 @import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
 
 $soring-background-color: rgba(242, 246, 247, 0.53);
 $soring-color: #7d9399;
 $sorting-padding: 6px 15px;
+$sorting-padding-mobile: 6px;
 
 .program-list-sorting {
   display: flex;
@@ -27,6 +29,9 @@ $sorting-padding: 6px 15px;
   width: 100%;
   padding: $sorting-padding;
   background-color: white;
+  @include media-breakpoint-small-phone() {
+    padding: $sorting-padding-mobile;
+  }
 }
 
 .sorting__label {
@@ -34,6 +39,9 @@ $sorting-padding: 6px 15px;
   white-space: nowrap;
   border-right: 1px solid $border-color;
   padding: $sorting-padding;
+  @include media-breakpoint-small-phone() {
+    padding: $sorting-padding-mobile;
+  }
 }
 
 .sorting__order {
@@ -41,6 +49,9 @@ $sorting-padding: 6px 15px;
   display: inline-block;
   border-left: 1px solid $border-color;
   padding: $sorting-padding;
+  @include media-breakpoint-small-phone() {
+    padding: $sorting-padding-mobile;
+  }
 
   &:last-of-type {
     border-top-right-radius: 10rem;
