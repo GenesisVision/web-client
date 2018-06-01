@@ -16,6 +16,12 @@
   }
 }
 
+@mixin media-breakpoint-small-phone() {
+  @media (max-width: 321.98px) {
+    @content;
+  }
+}
+
 @mixin breakpoint-tablet() {
   @media (min-width: 48rem) {
     @content;
