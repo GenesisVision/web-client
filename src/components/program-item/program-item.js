@@ -26,8 +26,6 @@ const ProgramItem = ({
     ":programId": program.id
   });
 
-  const tags = Math.random() > 0.5 ? ["Forex", "Crypto", "Genesis Market"] : [];
-
   return (
     <div
       className={classnames("program-item", {
@@ -37,7 +35,6 @@ const ProgramItem = ({
       <div className="program-item__order">{order || program.order}</div>
       <Link to={programRoute} className="program-item__avatar">
         <PIAvatar
-          className=""
           url={program.logo}
           level={program.level}
           isTournament={program.isTournament}
@@ -45,7 +42,7 @@ const ProgramItem = ({
       </Link>
       <div
         className={classnames("program-item__info", {
-          "program-item__info--no-tags": tags.length === 0
+          "program-item__info--has-tags": (program.tags || []).length > 0
         })}
       >
         <div className="program-item__title">
@@ -63,7 +60,7 @@ const ProgramItem = ({
         </div>
       </div>
       <div className="program-item__tags">
-        <TagList tags={tags} />
+        <TagList tags={program.tags || []} />
       </div>
       <PeriodLeft
         className="program-item__time-left"

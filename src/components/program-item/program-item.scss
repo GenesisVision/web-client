@@ -40,12 +40,11 @@
   }
 
   &__info {
-    grid-area: r-start / c-info / r-tags / c-time-left;
+    grid-area: r-start / c-info / r-middle / c-time-left;
     align-self: center;
-    &--no-tags {
-      @include breakpoint-tablet() {
-        grid-area: r-start / c-info / r-middle / c-time-left;
-      }
+    &--has-tags {
+      align-self: end;
+      grid-area: r-start / c-info / r-tags / c-time-left;
     }
     @include media-breakpoint-tablet() {
       grid-area: r-start / c-info / r-time-left / c-chart;
@@ -55,12 +54,31 @@
   &__tags {
     grid-area: r-tags / c-info / r-middle / c-time-left;
     justify-self: start;
-    align-self: start;
+    align-self: center;
+    margin-left: 30px;
+    width: 100%;
     @include media-breakpoint-tablet() {
       grid-area: r-tags / c-start / r-middle / c-end;
+      margin-left: 0;
     }
     @include media-breakpoint-phone() {
       grid-area: r-tags / c-start / r-buttons / c-end;
+    }
+
+    .tag-list {
+      @include media-breakpoint-phone() {
+        justify-content: space-between;
+        margin-left: 0em;
+        margin-right: 0em;
+      }
+
+      .tag {
+        @include media-breakpoint-phone() {
+          min-width: 48%;
+          max-width: 48%;
+          margin-left: 0;
+        }
+      }
     }
   }
 
@@ -81,7 +99,7 @@
       grid-area: r-start / c-buttons / r-tags / c-end;
       display: flex;
       justify-content: space-between;
-      margin: 0.5rem 0 1rem;
+      margin: 0.5rem 0;
     }
     @include media-breakpoint-phone() {
       grid-area: r-buttons / c-start / r-middle / c-end;
@@ -114,6 +132,7 @@
     justify-self: stretch;
     @include media-breakpoint-tablet() {
       grid-area: r-middle / c-start / r-end / c-end;
+      margin-top: 0.5rem;
     }
   }
 
@@ -129,7 +148,7 @@
   &__button {
     min-width: 120px;
     @include media-breakpoint-tablet() {
-      min-width: 47%;
+      min-width: 48%;
       & + & {
         margin-left: 0;
       }
