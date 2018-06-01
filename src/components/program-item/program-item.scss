@@ -2,105 +2,6 @@
 @import "styles/_breakpoint.scss";
 
 .program-item {
-  // display: flex;
-  // flex-direction: row;
-  // flex-wrap: wrap;
-  // padding: 1rem;
-  // margin-bottom: 9px;
-  // background-color: white;
-  // border-top: 1px solid $border-color;
-  // border-bottom: 1px solid $border-color;
-  // justify-content: space-between;
-
-  // &__hr {
-  //   display: none;
-  // }
-
-  // &__order {
-  //   display: none;
-  // }
-
-  // &__avatar {
-  //   margin-right: 0.5rem;
-  // }
-
-  // &__bookmark {
-  //   font-size: 1rem;
-  //   line-height: 1;
-  //   margin-right: 0.5rem;
-  // }
-
-  // &__info {
-  //   width: calc(70% - 2rem);
-  // }
-
-  // &__title {
-  //   display: flex;
-  //   align-items: flex-start;
-  // }
-
-  // &__link {
-  //   font-size: 1.4rem;
-  //   line-height: 1;
-  //   color: #1b4f64;
-  // }
-
-  // &__time-left {
-  //   display: flex;
-  //   flex-direction: column;
-  //   align-items: flex-start;
-  //   width: 50%;
-  // }
-
-  // &__chart {
-  //   width: calc(30% - 2rem);
-  // }
-
-  // &__button {
-  //   width: calc(50% - 0.5rem);
-  // }
-
-  // &__buttons {
-  //   margin-top: 0.5rem;
-  //   width: 100%;
-  //   justify-content: space-between;
-  // }
-
-  // &__stats {
-  //   width: 100%;
-  //   order: 5;
-  // }
-
-  @include breakpoint-tablet() {
-    // &__bookmark {
-    //   margin-right: 1rem;
-    // }
-
-    // &__info {
-    //   width: calc(50% - 2rem);
-    // }
-
-    // &__chart {
-    //   width: calc(20% - 2rem);
-    //   margin-right: 1rem;
-    // }
-
-    // &__button {
-    //   width: auto;
-    // }
-
-    // &__buttons {
-    //   margin-top: 0;
-    //   width: auto;
-    //   justify-content: space-between;
-    // }
-
-    // &__stats {
-    //   margin-top: 1rem;
-    //   width: 100%;
-    // }
-  }
-
   display: grid;
   grid-template-rows: [r-start] 1fr [r-tags] 1fr [r-middle] 2fr [r-end];
   grid-template-columns: [c-order] 40px [c-image] 140px [c-info] 4fr [c-stats] 5fr [c-time-left] 5fr [c-buttons] 4fr [c-end];
@@ -112,8 +13,13 @@
   border: 1px solid $border-color;
 
   @include media-breakpoint-tablet() {
-    grid-template-rows: [r-start] 2fr [r-time-left] 2fr [r-tags] 1fr [r-middle] 3fr [r-end];
-    grid-template-columns: [c-start] 1fr [c-info] 3fr [c-chart] 1fr [c-end];
+    grid-template-rows: [r-start-padding] 1rem [r-start] 2fr [r-time-left] 2fr [r-tags] auto [r-middle] auto [r-end] 1rem [r-end-padding];
+    grid-template-columns: [c-start-padding] 1rem [c-start] 60px [c-info] 2fr [c-chart] 1fr [c-buttons] 2fr [c-end] 1rem [c-end-padding];
+  }
+
+  @include media-breakpoint-phone() {
+    grid-template-rows: [r-start-padding] 1rem [r-start] 2fr [r-time-left] 2fr [r-tags] auto [r-buttons] auto [r-middle] auto [r-end] 1rem [r-end-padding];
+    grid-template-columns: [c-start-padding] 1rem [c-start] 70px [c-info] auto [c-chart] 20% [c-end] 1rem [c-end-padding];
   }
 
   &__order {
@@ -135,11 +41,10 @@
 
   &__info {
     grid-area: r-start / c-info / r-tags / c-time-left;
-    align-self: end;
+    align-self: center;
     &--no-tags {
       @include breakpoint-tablet() {
         grid-area: r-start / c-info / r-middle / c-time-left;
-        align-self: center;
       }
     }
     @include media-breakpoint-tablet() {
@@ -154,16 +59,32 @@
     @include media-breakpoint-tablet() {
       grid-area: r-tags / c-start / r-middle / c-end;
     }
+    @include media-breakpoint-phone() {
+      grid-area: r-tags / c-start / r-buttons / c-end;
+    }
   }
 
   &__time-left {
-    grid-area: r-time-left / c-info / r-tags / c-chart;
+    grid-area: r-start / c-time-left / r-middle / c-buttons;
+    @include media-breakpoint-tablet() {
+      grid-area: r-time-left / c-info / r-tags / c-chart;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      max-width: 122px;
+    }
   }
 
   &__buttons {
     grid-area: r-start / c-buttons / r-middle / c-end;
     @include media-breakpoint-tablet() {
-      display: none;
+      grid-area: r-start / c-buttons / r-tags / c-end;
+      display: flex;
+      justify-content: space-between;
+      margin: 0.5rem 0 1rem;
+    }
+    @include media-breakpoint-phone() {
+      grid-area: r-buttons / c-start / r-middle / c-end;
     }
   }
 
@@ -179,7 +100,12 @@
   &__chart {
     grid-area: r-middle / c-info / r-end / c-stats;
     @include media-breakpoint-tablet() {
+      grid-area: r-start / c-chart / r-tags / c-buttons;
+      padding: 0 1rem;
+    }
+    @include media-breakpoint-phone() {
       grid-area: r-start / c-chart / r-tags / c-end;
+      padding: 0;
     }
   }
 
@@ -192,6 +118,8 @@
   }
 
   &__link {
+    word-break: break-all;
+    word-wrap: break-word;
     font-family: NeuzeitGroBol;
     font-size: 1.4rem;
     line-height: 1;
@@ -200,5 +128,15 @@
 
   &__button {
     min-width: 120px;
+    @include media-breakpoint-tablet() {
+      min-width: 47%;
+      & + & {
+        margin-left: 0;
+      }
+    }
+  }
+
+  &__title {
+    display: flex;
   }
 }
