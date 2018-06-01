@@ -26,7 +26,7 @@ Launches the test runner in the interactive watch mode.
 
 Builds the app for production to the `build` folder.
 
-###Code formatter
+### Code formatter
 
 This project uses Prettier code formatter.
 <br>Code formatting will be applied on every commit.
