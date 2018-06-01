@@ -4,7 +4,7 @@
 .program-item {
   display: grid;
   grid-template-rows: [r-start] 1fr [r-tags] 1fr [r-middle] 2fr [r-end];
-  grid-template-columns: [c-order] 40px [c-image] 140px [c-info] 1fr [c-stats] 1fr [c-time-left] 1fr [c-buttons] 1fr [c-end];
+  grid-template-columns: [c-order] 40px [c-image] 140px [c-info] 1fr [c-stats c-time-left] 2fr [c-buttons] 300px [c-end];
   align-items: center;
 
   min-height: 172px;
@@ -84,14 +84,25 @@
 
   &__time-left {
     grid-area: r-start / c-time-left / r-middle / c-buttons;
+    justify-self: end;
     padding: 0 1rem;
+    max-width: 330px;
+    width: 100%;
+
     @include media-breakpoint-tablet() {
       grid-area: r-time-left / c-info / r-tags / c-chart;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
+      justify-self: stretch;
       max-width: 122px;
       padding: 0;
+    }
+
+    .time-left-widget {
+      @include media-breakpoint-tablet() {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        align-items: flex-start;
+      }
     }
   }
 
@@ -151,9 +162,6 @@
 
   &__button {
     min-width: 120px;
-    @media (max-width: 1400px) {
-      min-width: auto;
-    }
     @include media-breakpoint-tablet() {
       min-width: 48%;
       & + & {
