@@ -4,6 +4,17 @@ import classnames from "classnames";
 import PropTypes from "prop-types";
 import "./button.css";
 
+const GVLink = ({ isExternal, children, href, ...other }) =>
+  isExternal ? (
+    <a href={href} {...other}>
+      {children}
+    </a>
+  ) : (
+    <Link to={href} {...other}>
+      {children}
+    </Link>
+  );
+
 export default class Button extends Component {
   static propTypes = {
     label: PropTypes.string.isRequired,
@@ -13,7 +24,9 @@ export default class Button extends Component {
     primary: PropTypes.bool,
     secondary: PropTypes.bool,
     onClick: PropTypes.func,
-    href: PropTypes.string
+    href: PropTypes.string,
+    icon: PropTypes.Component,
+    isExternal: PropTypes.bool
   };
 
   static defaultProps = {
@@ -21,7 +34,8 @@ export default class Button extends Component {
     disabled: false,
     fullWidth: false,
     primary: false,
-    secondary: false
+    secondary: false,
+    isExternal: false
   };
 
   render() {
@@ -31,7 +45,6 @@ export default class Button extends Component {
       disabled,
       primary,
       secondary,
-      style,
       href,
       onClick,
       fullWidth,
@@ -44,15 +57,14 @@ export default class Button extends Component {
       "gv-btn--secondary": secondary
     });
     return href ? (
-      <Link className={cn} to={href} title={label} {...other}>
+      <GVLink className={cn} href={href} {...other}>
         {label}
-      </Link>
+      </GVLink>
     ) : (
       <button
         disabled={disabled}
         className={cn}
         onClick={onClick}
-        style={style}
         title={label}
         {...other}
       >
