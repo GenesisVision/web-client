@@ -48,6 +48,7 @@ export default class Button extends Component {
       href,
       onClick,
       fullWidth,
+      isExternal,
       ...other
     } = this.props;
     const cn = classnames("gv-btn", className, {
@@ -57,7 +58,7 @@ export default class Button extends Component {
       "gv-btn--secondary": secondary
     });
     return href ? (
-      <GVLink className={cn} href={href} {...other}>
+      <GVLink isExternal={isExternal} className={cn} href={href} {...other}>
         {label}
       </GVLink>
     ) : (
