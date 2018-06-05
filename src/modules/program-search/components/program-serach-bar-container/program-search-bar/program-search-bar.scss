@@ -1,0 +1,19 @@
+.program-search-bar {
+  //position: relative;
+  display: flex;
+  align-items: center;
+  margin: 0 10px;
+
+  &__input {
+    border: none;
+    border-radius: 3px;
+    box-sizing: border-box;
+    outline: none;
+    width: 300px;
+    margin: 0 10px;
+  }
+
+  &__icon {
+    cursor: pointer;
+  }
+}

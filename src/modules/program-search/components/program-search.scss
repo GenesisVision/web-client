@@ -1,0 +1,13 @@
+.program-search {
+  &__backdrop {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    position: fixed;
+    z-index: 0;
+    opacity: 0.5;
+    left: 0;
+    top: 0;
+  }
+}

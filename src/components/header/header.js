@@ -15,6 +15,7 @@ import { LOGIN_ROUTE } from "../../modules/login/login.constants";
 import { PROGRAMS } from "../../modules/programs/actions/programs-actions.constants";
 import { PROGRAMS_ROUTE } from "../../modules/programs/programs.constants";
 import gvLogo from "./gv-logo.svg";
+import ProgramSearch from "../../modules/program-search/components/program-search";
 
 const PAGES_WITH_FILTER = {
   [PROGRAMS_ROUTE]: {
@@ -76,6 +77,7 @@ const Header = ({
           <div className="h-sorting">Investor Portal</div>
         </div>
         <div className="header__filtering">
+          <ProgramSearch />
           {filterPaneControl(
             shouldShowFilterControl,
             isFilterOpen,
@@ -130,4 +132,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Header);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  mergeProps
+)(Header);
