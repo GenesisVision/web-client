@@ -25,7 +25,6 @@ export default class Button extends Component {
     secondary: PropTypes.bool,
     onClick: PropTypes.func,
     href: PropTypes.string,
-    icon: PropTypes.Component,
     isExternal: PropTypes.bool
   };
 
