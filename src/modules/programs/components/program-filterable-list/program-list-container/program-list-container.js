@@ -5,7 +5,7 @@ import popupActions from "../../../../popup/actions/popup-actions";
 import ProgramList from "./program-list/program-list";
 import programsService from "../../../service/programs-service";
 
-import { PROGRAM_DEPOSIT_POPUP } from "../../../../popup/actions/popup-actions.constants";
+import ProgramDepositContainer from "../../../../program-deposit/components/program-deposit-container/program-deposit-container";
 
 class ProgramListContainer extends Component {
   componentDidMount() {
@@ -60,13 +60,13 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     ...ownProps,
     openInvestPopup: programId => () => {
       dispatch(
-        popupActions.openPopup(
-          PROGRAM_DEPOSIT_POPUP,
-          {
+        popupActions.openPopup({
+          component: ProgramDepositContainer,
+          popupProps: {
             programId
           },
-          closeInvestPopup
-        )
+          onSubmitPopup: closeInvestPopup
+        })
       );
     }
   };

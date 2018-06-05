@@ -3,7 +3,7 @@ import { SHOW_POPUP, HIDE_POPUP } from "../actions/popup-actions.constants";
 const initialState = {
   type: null,
   isOpen: false,
-  popupType: null,
+  component: null,
   popupProps: {},
   onSubmitPopup: () => Promise.resolve()
 };
@@ -13,7 +13,7 @@ const popupReducer = (state = initialState, action) => {
     case SHOW_POPUP:
       return {
         isOpen: true,
-        popupType: action.popupType,
+        component: action.component,
         popupProps: action.popupProps,
         onSubmitPopup: action.onSubmitPopup || initialState.onSubmitPopup
       };

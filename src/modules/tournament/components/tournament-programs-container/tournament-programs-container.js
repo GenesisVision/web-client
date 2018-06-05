@@ -5,7 +5,7 @@ import popupActions from "../../../popup/actions/popup-actions";
 import ProgramList from "../../../programs/components/program-filterable-list/program-list-container/program-list/program-list";
 import tournamentService from "../../service/tournament-service";
 
-import { PROGRAM_DEPOSIT_POPUP } from "../../../popup/actions/popup-actions.constants";
+import ProgramDepositContainer from "../../../program-deposit/components/program-deposit-container/program-deposit-container";
 
 class TournamentContainer extends Component {
   render() {
@@ -52,18 +52,20 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     ...ownProps,
     openInvestPopup: programId => () => {
       dispatch(
-        popupActions.openPopup(
-          PROGRAM_DEPOSIT_POPUP,
-          {
+        popupActions.openPopup({
+          component: ProgramDepositContainer,
+          popupProps: {
             programId
           },
-          closeInvestPopup
-        )
+          onSubmitPopup: closeInvestPopup
+        })
       );
     }
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
-  TournamentContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  mergeProps
+)(TournamentContainer);

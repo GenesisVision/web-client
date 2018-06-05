@@ -5,11 +5,9 @@ import popupActions from "../../../../popup/actions/popup-actions";
 import traderActions from "../../../actions/program-actions";
 import TraderDetail from "./trader-detail/trader-detail";
 
-import {
-  PROGRAM_DEPOSIT_POPUP,
-  PROGRAM_WITHDRAW_POPUP
-} from "../../../../popup/actions/popup-actions.constants";
 import traderService from "../../../service/program-service";
+import ProgramDepositContainer from "../../../../program-deposit/components/program-deposit-container/program-deposit-container";
+import ProgramWithdrawContainer from "../../../../program-withdraw/components/program-withdraw-container/program-withdraw-container";
 
 class TraderDetailContainer extends PureComponent {
   componentDidMount() {
@@ -73,13 +71,13 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     ...ownProps,
     openInvestPopup: programId => () => {
       dispatch(
-        popupActions.openPopup(
-          PROGRAM_DEPOSIT_POPUP,
-          {
+        popupActions.openPopup({
+          component: ProgramDepositContainer,
+          popupProps: {
             programId
           },
-          closeInvestPopup(programId)
-        )
+          onSubmitPopup: closeInvestPopup(programId)
+        })
       );
     },
     openWithdrawPopup: () => {
@@ -98,11 +96,11 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
         traderWithdraw
       };
       dispatch(
-        popupActions.openPopup(
-          PROGRAM_WITHDRAW_POPUP,
+        popupActions.openPopup({
+          component: ProgramWithdrawContainer,
           popupProps,
-          closeInvestPopup(popupProps.traderWithdraw.id)
-        )
+          onSubmitPopup: closeInvestPopup(popupProps.traderWithdraw.id)
+        })
       );
     }
   };
