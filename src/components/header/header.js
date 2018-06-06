@@ -61,9 +61,7 @@ const Header = ({
             <img src={gvLogo} alt="Genesis Vision" />
           </NavLink>
         </div>
-        <div className="header__navigation">
-          <Navigation />
-        </div>
+        <Navigation className="header__navigation" />
         <div className="header__filtering">
           {filterPaneControl(
             shouldShowFilterControl,

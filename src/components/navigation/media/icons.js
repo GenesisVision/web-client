@@ -1,7 +1,9 @@
 import React from "react";
+import "./icons.css";
 export function DashboardIcon() {
   return (
     <svg
+      id="dashboard-icon"
       width="24px"
       height="17px"
       viewBox="0 0 24 17"
@@ -40,6 +42,7 @@ export function DashboardIcon() {
 export function SettingsIcon() {
   return (
     <svg
+      id="settings-icon"
       width="24px"
       height="24px"
       viewBox="0 0 24 24"
@@ -82,6 +85,7 @@ export function SettingsIcon() {
 export function WalletIcon() {
   return (
     <svg
+      id="wallet-icon"
       width="24px"
       height="24px"
       viewBox="0 0 24 24"
@@ -123,6 +127,7 @@ export function WalletIcon() {
 export function TradersIcon() {
   return (
     <svg
+      id="traders-icon"
       width="27px"
       height="15px"
       viewBox="0 0 27 15"
@@ -166,6 +171,7 @@ export function TradersIcon() {
 export function CloseIcon() {
   return (
     <svg
+      id="close-icon"
       xmlns="http://www.w3.org/2000/svg"
       width="14"
       height="14"

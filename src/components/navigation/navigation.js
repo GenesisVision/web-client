@@ -31,12 +31,11 @@ class Navigation extends Component {
   }
 
   render() {
-    console.info("render nav");
     const { data: platformSettings } = this.props.platformData;
     const shouldRenderTournament =
       platformSettings && platformSettings.isTournamentActive;
     return (
-      <div className="navigation">
+      <div className={classnames("navigation", this.props.className)}>
         <div className="navigation__button">
           <Button
             icon={<MenuIcon />}
@@ -56,7 +55,7 @@ class Navigation extends Component {
               secondary
             />
           </div>
-          {shouldRenderTournament && (
+          {/* {shouldRenderTournament && (
             <div className="navigation__item">
               <NavLink
                 className="navigation__link"
@@ -68,18 +67,7 @@ class Navigation extends Component {
                 Tournament
               </NavLink>
             </div>
-          )}
-          <div className="navigation__item">
-            <NavLink
-              className="navigation__link"
-              activeClassName="navigation__link--active"
-              title="Programs"
-              to={PROGRAMS_ROUTE}
-            >
-              <TradersIcon />
-              Programs
-            </NavLink>
-          </div>
+          )} */}
           <div className="navigation__item">
             <NavLink
               className="navigation__link"
@@ -87,8 +75,23 @@ class Navigation extends Component {
               title="Dashboard"
               to={DASHBOARD_ROUTE}
             >
-              <DashboardIcon />
+              <i className="navigation__icon nav-dashboard">
+                <DashboardIcon />
+              </i>
               Dashboard
+            </NavLink>
+          </div>
+          <div className="navigation__item">
+            <NavLink
+              className="navigation__link"
+              activeClassName="navigation__link--active"
+              title="Programs"
+              to={PROGRAMS_ROUTE}
+            >
+              <i className="navigation__icon nav-traders">
+                <TradersIcon />
+              </i>
+              Programs
             </NavLink>
           </div>
           <div className="navigation__item">
@@ -98,13 +101,15 @@ class Navigation extends Component {
               title="Wallet"
               to={WALLET_ROUTE}
             >
-              <WalletIcon />
+              <i className="navigation__icon nav-wallet">
+                <WalletIcon />
+              </i>
               Wallet
             </NavLink>
           </div>
-          <div className="navigation__item">
+          {/* <div className="navigation__item">
             <AuthControls />
-          </div>
+          </div> */}
         </div>
       </div>
     );

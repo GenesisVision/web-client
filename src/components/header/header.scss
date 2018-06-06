@@ -15,17 +15,22 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem;
+  padding: 1rem 2rem;
   background: white;
   border-bottom: 1px solid $border-color;
   box-shadow: 0 1px 4px 0 rgba(227, 235, 237, 0.86);
   @include media-breakpoint-phone() {
     padding: 0.5rem 1rem;
   }
+
+  &__navigation {
+    flex: 1;
+  }
 }
 
 .header__sorting {
   display: flex;
+  margin-right: 2rem;
   @include media-breakpoint-phone() {
     order: 2;
   }

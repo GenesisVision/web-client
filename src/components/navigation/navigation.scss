@@ -2,6 +2,41 @@
 @import "styles/_colors.scss";
 
 .navigation {
+  display: flex;
+
+  &__icon {
+    margin-right: 1rem;
+
+    & > * {
+      height: 100%;
+    }
+  }
+
+  &__link {
+    display: inline-flex;
+    align-items: flex-start;
+    font-family: NeuzeitGroBol;
+    height: 24px;
+    font-size: 18px;
+    color: #1b4f64;
+
+    &:hover {
+      color: #15bbaf;
+    }
+
+    &--active {
+      .dashboard {
+        fill: #15bbaf;
+      }
+      .traders {
+        stroke: #15bbaf;
+      }
+      .wallet {
+        fill: #15bbaf;
+      }
+    }
+  }
+
   &__menu {
     position: fixed;
     top: 0;
@@ -23,7 +58,10 @@
   }
 
   @include breakpoint-desktop() {
+    flex-direction: row;
     &__item {
+      display: flex;
+      align-items: center;
       padding: 0.2rem 2rem;
       border-left: 1px solid $border-color;
     }
