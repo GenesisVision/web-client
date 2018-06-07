@@ -20,9 +20,9 @@ class AppContainer extends Component {
   }
   render() {
     return (
-      <div>
-        <MobileNav />
+      <div className="app">
         <Route component={Header} />
+        <MobileNav />
         <div className="app__main">
           <div className="app__body">
             <AppRoutes />

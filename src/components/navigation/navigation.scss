@@ -20,6 +20,10 @@
     }
   }
 
+  &__auth {
+    display: none;
+  }
+
   &__link {
     display: inline-flex;
     align-items: flex-start;

@@ -84,6 +84,9 @@ class Navigation extends Component {
             Wallet
           </NavLink>
         </div>
+        <div className="navigation__item navigation__auth">
+          <AuthControls className="navigation__link" />
+        </div>
       </div>
     );
   }

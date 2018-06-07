@@ -6,15 +6,42 @@
   display: none;
   height: 100vh;
   width: 100%;
-  max-width: 382px;
-  padding: 1rem;
   top: 0;
   left: 0;
-  background-color: #fff;
   z-index: 1051;
 
-  &__open {
-    display: block;
+  &__wrapper {
+    width: 100%;
+    height: 100%;
+    max-width: 382px;
+    padding: 1rem;
+    background-color: #fff;
+  }
+
+  &__backdrop {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+  }
+
+  &__header {
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+    border-bottom: 1px solid #eef3f5;
+  }
+
+  @include media-breakpoint-tablet() {
+    &__open {
+      display: block;
+
+      & + .app__main {
+        position: fixed;
+      }
+    }
   }
 }
 
@@ -23,6 +50,10 @@
   .navigation__item {
     border: none;
     min-height: 59px;
+    padding-left: 1.5rem;
     border-bottom: 1px solid #eef3f5;
+  }
+  .navigation__auth {
+    display: flex;
   }
 }

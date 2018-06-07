@@ -76,7 +76,11 @@ const Header = ({
           )}
         </div>
         <div className="header__auth">
-          <AuthControls />
+          <ul className="navbar-nav flex-row">
+            <li className="nav-item text-nowrap">
+              <AuthControls />
+            </li>
+          </ul>
         </div>
       </header>
       <LoadingBar className="header__loading-bar" />

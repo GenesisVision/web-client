@@ -4,19 +4,19 @@ import loginService from "../../modules/login/service/login-service";
 import Button from "../../components/button/button";
 import { LOGIN_ROUTE } from "../../modules/login/login.constants";
 
-const SignOut = ({ onClick }) => (
-  <Button label="Sign Out" secondary onClick={onClick} />
+const SignOut = ({ onClick, ...props }) => (
+  <Button label="Sign Out" secondary onClick={onClick} {...props} />
 );
 
-const SignIn = () => <Button label="Sign In" secondary href={LOGIN_ROUTE} />;
+const SignIn = props => (
+  <Button label="Sign In" secondary href={LOGIN_ROUTE} {...props} />
+);
 
-const AuthorizationControls = ({ isAuthenticated, signOut }) => {
-  return (
-    <ul className="navbar-nav flex-row">
-      <li className="nav-item text-nowrap">
-        {isAuthenticated ? <SignOut onClick={signOut} /> : <SignIn />}
-      </li>
-    </ul>
+const AuthorizationControls = ({ isAuthenticated, signOut, ...props }) => {
+  return isAuthenticated ? (
+    <SignOut onClick={signOut} {...props} />
+  ) : (
+    <SignIn {...props} />
   );
 };
 
