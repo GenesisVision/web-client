@@ -1,41 +1,26 @@
 import { NavLink } from "react-router-dom";
 import React from "react";
+import classnames from "classnames";
+import Navigation from "../navigation/navigation";
+import NavButton from "../navigation/button/button";
+import { connect } from "react-redux";
 
 import "./mobile-nav.css";
-import { DASHBOARD_ROUTE } from "../../modules/dashboard/dashboard.constants";
-import { PROGRAMS_ROUTE } from "../../modules/programs/programs.constants";
-import { TOURNAMENT_ROUTE } from "../../modules/tournament/tournament.constants";
-import { WALLET_ROUTE } from "../../modules/wallet/wallet.constants";
 
-const MobileNav = () => {
+const MobileNav = ({ isOpen }) => {
   return (
-    <div className="mobile-nav">
-      <NavLink
-        className="mobile-nav__item"
-        title="Tournament"
-        to={TOURNAMENT_ROUTE}
-      >
-        Tournament
-      </NavLink>
-      <NavLink
-        className="mobile-nav__item"
-        title="Programs"
-        to={PROGRAMS_ROUTE}
-      >
-        Programs
-      </NavLink>
-      <NavLink
-        className="mobile-nav__item"
-        title="Dashboard"
-        to={DASHBOARD_ROUTE}
-      >
-        Dashboard
-      </NavLink>
-      <NavLink className="mobile-nav__item" title="Dashboard" to={WALLET_ROUTE}>
-        Wallet
-      </NavLink>
+    <div className={classnames("mobile-nav", { "mobile-nav__open": isOpen })}>
+      <div className="mobile-nav__header">
+        <NavButton />
+      </div>
+      <Navigation className="mobile-navigation" />
     </div>
   );
 };
 
-export default MobileNav;
+const mapStateToProps = state => ({
+  isOpen: state.navigationData.isOpen
+});
+
+const ConnectedMobileNav = connect(mapStateToProps)(MobileNav);
+export default ConnectedMobileNav;

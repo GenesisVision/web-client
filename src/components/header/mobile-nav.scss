@@ -2,25 +2,27 @@
 @import "styles/_breakpoint.scss";
 
 .mobile-nav {
+  position: fixed;
   display: none;
-  justify-content: center;
-  background-color: white;
-  border-bottom: 1px solid $border-color;
-  box-shadow: 0 1px 4px 0 rgba(227, 235, 237, 0.86);
-  @include media-breakpoint-phone() {
-    display: flex;
+  height: 100vh;
+  width: 100%;
+  max-width: 382px;
+  padding: 1rem;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  z-index: 1051;
+
+  &__open {
+    display: block;
   }
 }
 
-.mobile-nav__item {
-  margin: 0.2rem 1rem;
-  font-size: 0.75rem;
-  color: $main-color;
-  &:hover,
-  &:focus {
-    text-decoration: none;
-  }
-  &.active {
-    color: $alternate-color;
+.mobile-navigation {
+  flex-direction: column;
+  .navigation__item {
+    border: none;
+    min-height: 59px;
+    border-bottom: 1px solid #eef3f5;
   }
 }

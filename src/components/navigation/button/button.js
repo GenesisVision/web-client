@@ -7,14 +7,15 @@ import { navigationClose, navigationOpen } from "../actions/navigation-actions";
 
 const propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  navigationToggle: PropTypes.func.isRequired
+  navigationOpen: PropTypes.func.isRequired,
+  navigationClose: PropTypes.func.isRequired
 };
 
 function NavButton({ navigationClose, isOpen, navigationOpen }) {
   const navigationToggle = () =>
     isOpen ? navigationClose() : navigationOpen();
-  const Icon = isOpen ? CloseIcon : MenuIcon;
-  return <Button onClick={navigationToggle} icon={<Icon />} secondary />;
+  const Icon = isOpen ? <i class="fas fa-times" /> : <i class="fas fa-bars" />;
+  return <Button onClick={navigationToggle} icon={Icon} secondary />;
 }
 
 NavButton.propTypes = propTypes;
