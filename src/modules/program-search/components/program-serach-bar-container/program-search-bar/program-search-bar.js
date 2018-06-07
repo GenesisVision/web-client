@@ -1,4 +1,6 @@
+import PropTypes from "prop-types";
 import React, { PureComponent } from "react";
+
 import "./program-search-bar.css";
 
 class ProgramSearchBar extends PureComponent {
@@ -12,7 +14,20 @@ class ProgramSearchBar extends PureComponent {
     this.inputRef.current.focus();
   };
 
+  handleChange = e => {
+    this.props.onChange(e.target.value);
+  };
+
+  canClearQuery = () => {
+    return this.props.query && this.props.query.length > 0;
+  };
+
+  clearQuery = () => {
+    this.props.onChange("");
+  };
+
   render() {
+    const { query } = this.props;
     return (
       <div className="program-search-bar">
         <i
@@ -22,13 +37,25 @@ class ProgramSearchBar extends PureComponent {
         <input
           type="text"
           className="program-search-bar__input"
+          value={query}
+          onChange={this.handleChange}
           ref={this.inputRef}
           placeholder="Search here"
         />
-        <i className="fas fa-times program-search-bar__icon" />
+        {this.canClearQuery() && (
+          <i
+            className="fas fa-times program-search-bar__icon program-search-bar__icon--clear"
+            onClick={this.clearQuery}
+          />
+        )}
       </div>
     );
   }
 }
+
+ProgramSearchBar.propTypes = {
+  query: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired
+};
 
 export default ProgramSearchBar;

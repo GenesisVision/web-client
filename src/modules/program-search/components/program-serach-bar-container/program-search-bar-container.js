@@ -1,17 +1,22 @@
-import React from "react";
 import { connect } from "react-redux";
+import React from "react";
+
 import ProgramSearchBar from "./program-search-bar/program-search-bar";
 import programSearchService from "../../service/program-search-service";
 
-const ProgramSearchBarContainer = ({ getPrograms }) => {
-  return <ProgramSearchBar onChange={getPrograms} />;
+const ProgramSearchBarContainer = ({ query, updateQuery }) => {
+  return <ProgramSearchBar query={query} onChange={updateQuery} />;
+};
+
+const mapStateToProps = state => {
+  const { query } = state.programSearchData.query;
+  return { query };
 };
 
 const mapDispatchToProps = dispatch => ({
-  getPrograms: query => dispatch(programSearchService.getPrograms(query))
+  updateQuery: query => dispatch(programSearchService.updateQuery(query))
 });
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(ProgramSearchBarContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  ProgramSearchBarContainer
+);

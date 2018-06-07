@@ -1,5 +1,5 @@
 .program-search-bar {
-  //position: relative;
+  position: relative;
   display: flex;
   align-items: center;
   margin: 0 10px;
@@ -9,11 +9,16 @@
     border-radius: 3px;
     box-sizing: border-box;
     outline: none;
-    width: 300px;
+    width: 500px;
     margin: 0 10px;
   }
 
   &__icon {
     cursor: pointer;
+
+    &--clear {
+      position: absolute;
+      right: 0;
+    }
   }
 }

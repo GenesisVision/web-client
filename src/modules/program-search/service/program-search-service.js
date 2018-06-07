@@ -21,12 +21,23 @@ const getPrograms = query => (dispatch, getState) => {
   };
 
   return dispatch(
-    programSearchActions.fetchPrograms(data).then(setLogoAndOrder)
+    programSearchActions.fetchPrograms(data, () => {
+      var t = getState().programsData.programs.items;
+      return t.data;
+    })
   );
 };
 
+const updateQuery = query => (dispatch, getState) => {
+  const { query: prevQuery } = getState().programSearchData.query;
+  if (query === prevQuery) return;
+
+  dispatch(getPrograms(query));
+  return dispatch(programSearchActions.updateQuery(query));
+};
+
 const programSearchService = {
-  getPrograms
+  updateQuery
 };
 
 export default programSearchService;

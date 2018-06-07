@@ -1,14 +1,24 @@
+import { connect } from "react-redux";
 import React from "react";
+
+import ClickOutside from "../../../components/click-outside/click-outside";
 import ProgramSearchBarContainer from "./program-serach-bar-container/program-search-bar-container";
+import ProgramSearchPopupContainer from "./program-search-popup-container/program-search-popup-container";
+import programSearchService from "../service/program-search-service";
+
 import "./program-search.css";
 
-const ProgramSearch = () => {
+const ProgramSearch = ({ onClickOutside }) => {
   return (
-    <div className="program-search">
-      <div className="program-search__backdrop1" />
+    <ClickOutside className="program-search" onClickOutside={onClickOutside}>
       <ProgramSearchBarContainer />
-    </div>
+      <ProgramSearchPopupContainer />
+    </ClickOutside>
   );
 };
 
-export default ProgramSearch;
+const mapDispatchToProps = dispatch => ({
+  onClickOutside: query => dispatch(programSearchService.updateQuery(""))
+});
+
+export default connect(null, mapDispatchToProps)(ProgramSearch);

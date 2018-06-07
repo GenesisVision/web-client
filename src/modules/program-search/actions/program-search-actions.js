@@ -8,11 +8,17 @@ const fetchPrograms = (
 ) => {
   return {
     type: actionTypes.PROGRAM_SEARCH,
-    payload: Promise.resolve(true) //.then(onResolve)
+    payload: Promise.resolve(true).then(onResolve)
   };
 };
 
+const updateQuery = query => ({
+  type: actionTypes.PROGRAM_SEARCH_QUERY_UPDATE,
+  payload: query
+});
+
 const programSearchActions = {
+  updateQuery,
   fetchPrograms
 };
 

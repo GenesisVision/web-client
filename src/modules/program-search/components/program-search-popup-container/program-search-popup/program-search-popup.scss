@@ -1,0 +1,12 @@
+@import "styles/_colors.scss";
+
+.program-search-popup {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 2rem;
+  height: 500px;
+  background: white;
+  border: 1px solid $border-color;
+  box-shadow: 1px 2px 5px 0 rgba(227, 235, 237, 0.86);
+}

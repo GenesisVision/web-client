@@ -16,7 +16,7 @@ const programsReducer = combineReducers({
     sorting: programsSortingReducer,
     paging: pagingReducerFactory({
       type: PROGRAMS,
-      paging: { itemsOnPage: 100 }
+      paging: { itemsOnPage: 10 }
     })
   }),
   filterPane: combineReducers({
