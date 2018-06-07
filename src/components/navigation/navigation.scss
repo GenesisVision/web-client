@@ -3,6 +3,14 @@
 
 .navigation {
   display: flex;
+  flex-direction: row;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    padding: 0.2rem 2rem;
+    border-left: 1px solid $border-color;
+  }
 
   &__icon {
     margin-right: 1rem;
@@ -24,6 +32,10 @@
       color: #15bbaf;
     }
 
+    .fa-trophy {
+      color: #ccd5d4;
+    }
+
     &--active {
       .dashboard {
         fill: #15bbaf;
@@ -35,45 +47,5 @@
         fill: #15bbaf;
       }
     }
-  }
-
-  &__menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    transform: translateX(-100%);
-
-    &--open {
-      transform: translateX(0);
-    }
-
-    @include breakpoint-desktop() {
-      transform: none;
-      position: relative;
-      display: flex;
-      flex-direction: row;
-    }
-  }
-
-  @include breakpoint-desktop() {
-    flex-direction: row;
-    &__item {
-      display: flex;
-      align-items: center;
-      padding: 0.2rem 2rem;
-      border-left: 1px solid $border-color;
-    }
-    &__button {
-      display: none;
-    }
-    & .header {
-      display: none;
-    }
-  }
-
-  & .gv-btn {
-    color: $alternate-color;
   }
 }

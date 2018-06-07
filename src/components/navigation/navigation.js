@@ -36,80 +36,59 @@ class Navigation extends Component {
       platformSettings && platformSettings.isTournamentActive;
     return (
       <div className={classnames("navigation", this.props.className)}>
-        <div className="navigation__button">
-          <Button
-            icon={<MenuIcon />}
-            onClick={this.props.navigationOpen}
-            secondary
-          />
-        </div>
-        <div
-          className={classnames("navigation__menu", {
-            "navigation__menu--open": this.props.isOpen
-          })}
-        >
-          <div className="header">
-            <Button
-              icon={<CloseIcon />}
-              onClick={this.props.navigationClose}
-              secondary
-            />
-          </div>
-          {/* {shouldRenderTournament && (
-            <div className="navigation__item">
-              <NavLink
-                className="navigation__link"
-                activeClassName="navigation__link--active"
-                title="Tournament"
-                to={TOURNAMENT_ROUTE}
-              >
-                <i className="fas fa-trophy" />
-                Tournament
-              </NavLink>
-            </div>
-          )} */}
+        {shouldRenderTournament && (
           <div className="navigation__item">
             <NavLink
               className="navigation__link"
               activeClassName="navigation__link--active"
-              title="Dashboard"
-              to={DASHBOARD_ROUTE}
+              title="Tournament"
+              to={TOURNAMENT_ROUTE}
             >
               <i className="navigation__icon nav-dashboard">
-                <DashboardIcon />
+                <i className="fas fa-trophy" />
               </i>
-              Dashboard
+              Tournament
             </NavLink>
           </div>
-          <div className="navigation__item">
-            <NavLink
-              className="navigation__link"
-              activeClassName="navigation__link--active"
-              title="Programs"
-              to={PROGRAMS_ROUTE}
-            >
-              <i className="navigation__icon nav-traders">
-                <TradersIcon />
-              </i>
-              Programs
-            </NavLink>
-          </div>
-          <div className="navigation__item">
-            <NavLink
-              className="navigation__link"
-              activeClassName="navigation__link--active"
-              title="Wallet"
-              to={WALLET_ROUTE}
-            >
-              <i className="navigation__icon nav-wallet">
-                <WalletIcon />
-              </i>
-              Wallet
-            </NavLink>
-          </div>
-          {/* <div className="navigation__item">
-            <AuthControls />
-          </div> */}
+        )}
+        <div className="navigation__item">
+          <NavLink
+            className="navigation__link"
+            activeClassName="navigation__link--active"
+            title="Programs"
+            to={PROGRAMS_ROUTE}
+          >
+            <i className="navigation__icon nav-traders">
+              <TradersIcon />
+            </i>
+            Traders
+          </NavLink>
+        </div>
+        <div className="navigation__item">
+          <NavLink
+            className="navigation__link"
+            activeClassName="navigation__link--active"
+            title="Dashboard"
+            to={DASHBOARD_ROUTE}
+          >
+            <i className="navigation__icon nav-dashboard">
+              <DashboardIcon />
+            </i>
+            Dashboard
+          </NavLink>
+        </div>
+        <div className="navigation__item">
+          <NavLink
+            className="navigation__link"
+            activeClassName="navigation__link--active"
+            title="Wallet"
+            to={WALLET_ROUTE}
+          >
+            <i className="navigation__icon nav-wallet">
+              <WalletIcon />
+            </i>
+            Wallet
+          </NavLink>
         </div>
       </div>
     );

@@ -15,6 +15,7 @@ import { LOGIN_ROUTE } from "../../modules/login/login.constants";
 import { PROGRAMS } from "../../modules/programs/actions/programs-actions.constants";
 import { PROGRAMS_ROUTE } from "../../modules/programs/programs.constants";
 import gvLogo from "./gv-logo.svg";
+import AuthControls from "../../modules/authorization-controls/authorization-controls";
 
 import Navigation from "../navigation/navigation";
 
@@ -68,6 +69,9 @@ const Header = ({
             isFilterOpen,
             toggleFilter
           )}
+        </div>
+        <div className="header__auth">
+          <AuthControls />
         </div>
       </header>
       <LoadingBar className="header__loading-bar" />

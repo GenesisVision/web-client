@@ -44,6 +44,12 @@
   }
 }
 
+.header__auth {
+  border-left: 1px solid #e3ebed;
+  padding-left: 2rem;
+  margin-left: 1rem;
+}
+
 .navigation {
   @include media-breakpoint-phone() {
     order: 1;
