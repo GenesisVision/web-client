@@ -16,7 +16,7 @@ import { PROGRAMS } from "../../modules/programs/actions/programs-actions.consta
 import { PROGRAMS_ROUTE } from "../../modules/programs/programs.constants";
 import gvLogo from "./gv-logo.svg";
 import AuthControls from "../../modules/authorization-controls/authorization-controls";
-
+import NavButton from "../navigation/button/button";
 import Navigation from "../navigation/navigation";
 
 const PAGES_WITH_FILTER = {
@@ -61,6 +61,9 @@ const Header = ({
           <NavLink title="Home" to={HOME_ROUTE}>
             <img src={gvLogo} alt="Genesis Vision" />
           </NavLink>
+        </div>
+        <div className="header__nav-button">
+          <NavButton />
         </div>
         <div className="header__navigation">
           <Navigation />

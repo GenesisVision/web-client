@@ -25,12 +25,19 @@
     flex: 1;
   }
 
+  &__nav-button {
+    display: none;
+  }
+
   &__logo {
     margin-right: 2rem;
   }
 
   @include media-breakpoint-tablet() {
-    flex-direction: row-reverse;
+    &__nav-button {
+      display: block;
+      z-index: 1;
+    }
     &__navigation {
       display: none;
     }
