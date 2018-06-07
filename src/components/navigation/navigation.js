@@ -24,12 +24,6 @@ import history from "../../utils/history";
 import Button from "../button/button";
 
 class Navigation extends Component {
-  componentDidMount() {
-    history.listen(() => {
-      this.props.navigationClose();
-    });
-  }
-
   render() {
     const { data: platformSettings } = this.props.platformData;
     const shouldRenderTournament =
@@ -97,11 +91,9 @@ class Navigation extends Component {
 
 export default connect(
   state => ({
-    platformData: state.platformData.settings,
-    location: state.routing.location,
-    isOpen: state.navigationData.isOpen
+    platformData: state.platformData.settings
   }),
-  { navigationClose, navigationOpen },
+  null,
   null,
   { pure: false }
 )(Navigation);

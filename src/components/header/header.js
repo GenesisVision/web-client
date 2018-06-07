@@ -57,12 +57,14 @@ const Header = ({
   return (
     <div className="header-wrapper">
       <header className="header">
-        <div className="header__sorting">
+        <div className="header__logo">
           <NavLink title="Home" to={HOME_ROUTE}>
             <img src={gvLogo} alt="Genesis Vision" />
           </NavLink>
         </div>
-        <Navigation className="header__navigation" />
+        <div className="header__navigation">
+          <Navigation />
+        </div>
         <div className="header__filtering">
           {filterPaneControl(
             shouldShowFilterControl,
