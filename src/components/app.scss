@@ -2,6 +2,9 @@
 
 .body--disabled {
   overflow: hidden;
+  @include breakpoint-desktop {
+    overflow: auto;
+  }
 }
 
 .app__main {

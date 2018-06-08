@@ -3,7 +3,6 @@
 
 .mobile-nav {
   position: fixed;
-  display: none;
   height: 100vh;
   width: 100%;
   top: 0;
@@ -34,14 +33,8 @@
     border-bottom: 1px solid #eef3f5;
   }
 
-  @include media-breakpoint-tablet() {
-    &__open {
-      display: block;
-
-      & + .app__main {
-        position: fixed;
-      }
-    }
+  @include breakpoint-desktop() {
+    display: none;
   }
 }
 

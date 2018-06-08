@@ -7,11 +7,8 @@ import React from "react";
 import FilterIcon from "./filter-icon";
 import filterPaneActionsFactory from "../../modules/filter-pane/actions/filter-pane-actions";
 import loginService from "../../modules/login/service/login-service";
-import MobileNav from "./mobile-nav";
-import Button from "../../components/button/button";
 import "./header.css";
 import { HOME_ROUTE } from "../app.constants";
-import { LOGIN_ROUTE } from "../../modules/login/login.constants";
 import { PROGRAMS } from "../../modules/programs/actions/programs-actions.constants";
 import { PROGRAMS_ROUTE } from "../../modules/programs/programs.constants";
 import gvLogo from "./gv-logo.svg";
@@ -53,7 +50,6 @@ const Header = ({
   isFilterOpen,
   toggleFilter
 }) => {
-  console.info("render");
   return (
     <div className="header-wrapper">
       <header className="header">

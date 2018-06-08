@@ -8,20 +8,10 @@ import { DASHBOARD_ROUTE } from "../../modules/dashboard/dashboard.constants";
 import { PROGRAMS_ROUTE } from "../../modules/programs/programs.constants";
 import { WALLET_ROUTE } from "../../modules/wallet/wallet.constants";
 
-import {
-  DashboardIcon,
-  WalletIcon,
-  TradersIcon,
-  CloseIcon,
-  MenuIcon
-} from "./media/icons.js";
+import { DashboardIcon, WalletIcon, TradersIcon } from "./media/icons.js";
 import { TOURNAMENT_ROUTE } from "../../modules/tournament/tournament.constants";
 
-import { navigationClose, navigationOpen } from "./actions/navigation-actions";
-
 import AuthControls from "../../modules/authorization-controls/authorization-controls";
-import history from "../../utils/history";
-import Button from "../button/button";
 
 class Navigation extends Component {
   render() {

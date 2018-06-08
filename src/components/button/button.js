@@ -6,15 +6,15 @@ import "./button.css";
 
 export default class Button extends Component {
   static propTypes = {
-    label: PropTypes.string.isRequired,
-    class: PropTypes.string,
+    label: PropTypes.string,
+    className: PropTypes.string,
     disabled: PropTypes.bool,
     fullWidth: PropTypes.bool,
     primary: PropTypes.bool,
     secondary: PropTypes.bool,
     onClick: PropTypes.func,
     href: PropTypes.string,
-    icon: PropTypes.Component
+    icon: PropTypes.element
   };
 
   static defaultProps = {
@@ -22,7 +22,8 @@ export default class Button extends Component {
     disabled: false,
     fullWidth: false,
     primary: false,
-    secondary: false
+    secondary: false,
+    label: ""
   };
 
   render() {

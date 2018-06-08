@@ -10,7 +10,7 @@ import history from "../utils/history";
 import platformActions from "../actions/platform-actions";
 import PopupContainer from "../modules/popup/components/popup-container";
 import store from "../store/index";
-import MobileNav from "./header/mobile-nav";
+import MobileNav from "./mobile-nav/mobile-nav-container";
 import "./app.css";
 import AppRoutes from "./app.routes";
 

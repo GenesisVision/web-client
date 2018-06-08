@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Button from "../../button/button";
-import { MenuIcon, CloseIcon } from "../media/icons";
 import { connect } from "react-redux";
 import { navigationClose, navigationOpen } from "../actions/navigation-actions";
 
@@ -14,7 +13,11 @@ const propTypes = {
 function NavButton({ navigationClose, isOpen, navigationOpen }) {
   const navigationToggle = () =>
     isOpen ? navigationClose() : navigationOpen();
-  const Icon = isOpen ? <i class="fas fa-times" /> : <i class="fas fa-bars" />;
+  const Icon = isOpen ? (
+    <i className="fas fa-times" />
+  ) : (
+    <i className="fas fa-bars" />
+  );
   return <Button onClick={navigationToggle} icon={Icon} secondary />;
 }
 
