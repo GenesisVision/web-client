@@ -63,6 +63,23 @@
   }
 }
 
+.h-button {
+  height: 37px;
+  width: 37px;
+  color: $alternate-color;
+
+  &--active,
+  &:hover {
+    color: white;
+    background: $alternate-color;
+    border-color: $alternate-color;
+
+    svg path {
+      fill: white;
+    }
+  }
+}
+
 .header__filtering {
   display: flex;
   align-items: center;

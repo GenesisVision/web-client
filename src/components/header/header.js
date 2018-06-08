@@ -14,6 +14,7 @@ import { PROGRAMS_ROUTE } from "../../modules/programs/programs.constants";
 import gvLogo from "./gv-logo.svg";
 import AuthControls from "../../modules/authorization-controls/authorization-controls";
 import NavButton from "../navigation/button/button";
+import Button from "../button/button";
 import Navigation from "../navigation/navigation";
 
 const PAGES_WITH_FILTER = {
@@ -30,16 +31,14 @@ const filterPaneControl = (
 ) => {
   if (!shouldShowFilterControl) return null;
   return (
-    <div className="h-filtering">
-      <span
-        className={classnames({
-          "h-filtering--open": isFilterOpen
-        })}
-        onClick={toggleFilter}
-      >
-        <FilterIcon />
-      </span>
-    </div>
+    <Button
+      icon={<FilterIcon />}
+      onClick={toggleFilter}
+      className={classnames("h-button", {
+        "h-button--active": isFilterOpen
+      })}
+      secondary
+    />
   );
 };
 
@@ -59,7 +58,7 @@ const Header = ({
           </NavLink>
         </div>
         <div className="header__nav-button">
-          <NavButton />
+          <NavButton className="h-button" />
         </div>
         <div className="header__navigation">
           <Navigation />

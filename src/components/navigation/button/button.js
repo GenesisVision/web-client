@@ -10,7 +10,7 @@ const propTypes = {
   navigationClose: PropTypes.func.isRequired
 };
 
-function NavButton({ navigationClose, isOpen, navigationOpen }) {
+function NavButton({ navigationClose, isOpen, navigationOpen, ...props }) {
   const navigationToggle = () =>
     isOpen ? navigationClose() : navigationOpen();
   const Icon = isOpen ? (
@@ -18,7 +18,7 @@ function NavButton({ navigationClose, isOpen, navigationOpen }) {
   ) : (
     <i className="fas fa-bars" />
   );
-  return <Button onClick={navigationToggle} icon={Icon} secondary />;
+  return <Button onClick={navigationToggle} icon={Icon} secondary {...props} />;
 }
 
 NavButton.propTypes = propTypes;

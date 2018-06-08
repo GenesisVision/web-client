@@ -19,7 +19,7 @@ class MobileNav extends Component {
       <div className={classnames("mobile-nav")}>
         <div className="mobile-nav__wrapper">
           <div className="mobile-nav__header">
-            <NavButton />
+            <NavButton className="h-button" />
           </div>
           <Navigation className="mobile-navigation" />
         </div>
