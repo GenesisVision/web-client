@@ -7,6 +7,7 @@ import ProgramSearchPopup from "./program-search-popup/program-search-popup";
 import programSearchService from "../service/program-search-service";
 
 import "./program-search.css";
+import LoadingBar from "react-redux-loading-bar";
 
 const ProgramSearch = ({ query, programsData, updateQuery, clearInput }) => {
   const shouldShowResults = () => {
@@ -19,6 +20,11 @@ const ProgramSearch = ({ query, programsData, updateQuery, clearInput }) => {
       onClickOutside={clearInput}
     >
       <ProgramSearchBar query={query} onChange={updateQuery} />
+      <LoadingBar
+        className="header__loading-bar"
+        scope="qqq"
+        style={{ bottom: "-23px" }}
+      />
       {shouldShowResults() && (
         <ProgramSearchPopup
           programsData={programsData}

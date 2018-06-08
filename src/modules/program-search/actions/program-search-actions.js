@@ -1,4 +1,4 @@
-//import SwaggerInvestorApi from "../../../services/api-client/swagger-investor-api";
+import SwaggerInvestorApi from "../../../services/api-client/swagger-investor-api";
 
 import * as actionTypes from "./program-search-actions.constants";
 
@@ -8,9 +8,28 @@ const fetchPrograms = (
 ) => {
   return {
     type: actionTypes.PROGRAM_SEARCH,
-    payload: Promise.resolve(true).then(onResolve)
+    payload: () =>
+      SwaggerInvestorApi.apiInvestorInvestmentProgramsPost(filters).then(
+        onResolve
+      ),
+    meta: {
+      scope: "qqq",
+      debounce: {
+        time: 300
+      },
+      once: ["debounce"]
+    }
   };
 };
+
+const cancelFetchPrograms = () => ({
+  type: actionTypes.PROGRAM_SEARCH,
+  meta: {
+    debounce: {
+      cancel: true
+    }
+  }
+});
 
 const updateQuery = query => ({
   type: actionTypes.PROGRAM_SEARCH_QUERY_UPDATE,
@@ -19,7 +38,8 @@ const updateQuery = query => ({
 
 const programSearchActions = {
   updateQuery,
-  fetchPrograms
+  fetchPrograms,
+  cancelFetchPrograms
 };
 
 export default programSearchActions;

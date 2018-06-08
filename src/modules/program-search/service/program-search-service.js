@@ -1,8 +1,10 @@
 import authService from "../../../services/auth-service";
 import programSearchActions from "../actions/program-search-actions";
+import { PROGRAM_SEARCH } from "../actions/program-search-actions.constants";
+import clearDataActionFactory from "../../../shared/actions/clear-data.factory";
 
 const getPrograms = query => (dispatch, getState) => {
-  const [skip, take, sorting, name] = [0, 10, "ByTitleAsc", query];
+  const [skip, take, sorting, name] = [0, 20, "ByTitleAsc", query];
 
   let data = {
     filter: { skip, take, sorting, name }
@@ -20,20 +22,18 @@ const getPrograms = query => (dispatch, getState) => {
     return response;
   };
 
-  return dispatch(
-    programSearchActions.fetchPrograms(data, () => {
-      var t = getState().programsData.programs.items;
-      return t.data;
-    })
-  );
+  return dispatch(programSearchActions.fetchPrograms(data, setLogoAndOrder));
 };
 
-const updateQuery = query => (dispatch, getState) => {
-  const { query: prevQuery } = getState().programSearchData.query;
-  if (query === prevQuery) return;
-
+const updateQuery = query => dispatch => {
+  dispatch(programSearchActions.updateQuery(query));
   dispatch(getPrograms(query));
-  return dispatch(programSearchActions.updateQuery(query));
+
+  if (!query) {
+    dispatch(programSearchActions.cancelFetchPrograms());
+    const clearDataActions = clearDataActionFactory(PROGRAM_SEARCH);
+    dispatch(clearDataActions.clearData());
+  }
 };
 
 const programSearchService = {

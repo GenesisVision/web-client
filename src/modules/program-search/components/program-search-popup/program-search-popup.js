@@ -1,18 +1,19 @@
-import React, { PureComponent } from "react";
+import React, { Fragment, PureComponent } from "react";
 import ProgramSearchProgram from "./program-search-program/program-search-program";
 
 import "./program-search-popup.css";
 
 class ProgramSearchPopup extends PureComponent {
-  render() {
+  renderPrograms = () => {
     const { programsData, onProgramClick } = this.props;
-    const { isPending, data: programs } = programsData;
-    if (isPending) {
-      return <div>Loading...</div>;
-    }
+    const { data: programs } = programsData;
+    if (!programs) return null;
+    if (programs.total === 0)
+      return <div>Your search did not match any programs.</div>;
 
     return (
-      <div className="program-search-popup">
+      <Fragment>
+        Found: {programs.total}
         {programs.investmentPrograms.map(x => (
           <ProgramSearchProgram
             key={x.id}
@@ -20,8 +21,11 @@ class ProgramSearchPopup extends PureComponent {
             onProgramClick={onProgramClick}
           />
         ))}
-      </div>
+      </Fragment>
     );
+  };
+  render() {
+    return <div className="program-search-popup">{this.renderPrograms()}</div>;
   }
 }
 

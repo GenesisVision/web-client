@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import { loadingBarMiddleware } from "react-redux-loading-bar";
 import { routerMiddleware } from "react-router-redux";
+import debounceMiddleware from "redux-debounced";
 import promiseMiddleware from "redux-promise-middleware";
 import thunk from "redux-thunk";
 
@@ -8,6 +9,7 @@ import history from "../utils/history";
 import rootReducer from "../reducers";
 import apiErrorHandlerMiddleware from "../shared/middlewares/api-error-handler-middleware/api-error-handler-middleware";
 import refreshTokenMiddleware from "../shared/middlewares/refresh-token-middleware/refresh-token-middleware";
+import clearOnceMetaMiddleware from "../shared/middlewares/clear-once-meta-middleware/clear-once-meta-middleware";
 import authService from "../services/auth-service";
 import SwaggerInvestorApi from "../services/api-client/swagger-investor-api";
 
@@ -25,23 +27,24 @@ if (reduxDevTools) {
   enhancers.push(reduxDevTools);
 }
 const middleware = [
+  debounceMiddleware(),
   thunk,
+  promiseMiddleware({ promiseTypeSuffixes: suffixes }),
   refreshTokenMiddleware(
     authService,
     SwaggerInvestorApi.apiInvestorAuthUpdateTokenGet.bind(SwaggerInvestorApi)
   ),
-  promiseMiddleware({ promiseTypeSuffixes: suffixes }),
   apiErrorHandlerMiddleware({ failureSuffix: failureSuffix }),
   routerMiddleware(history),
   loadingBarMiddleware({
     promiseTypeSuffixes: suffixes
-  })
+  }),
+  clearOnceMetaMiddleware()
 ];
 
 const composedEnhancers = compose(
   applyMiddleware(...middleware),
   ...enhancers
-  // devTools
 );
 
 const store = createStore(rootReducer, initialState, composedEnhancers);
