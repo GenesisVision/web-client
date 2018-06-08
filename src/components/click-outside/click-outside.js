@@ -8,13 +8,29 @@ class ClickOutside extends Component {
   }
 
   componentDidMount() {
-    document.addEventListener("touchend", this.handleClick);
-    document.addEventListener("click", this.handleClick);
+    if (this.props.shouldHandleClick) {
+      this.toggleClickOutsideEvent(true);
+    }
   }
 
   componentWillUnmount() {
-    document.removeEventListener("touchend", this.handleClick);
-    document.removeEventListener("click", this.handleClick);
+    this.toggleClickOutsideEvent(false);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.shouldHandleClick !== this.props.shouldHandleClick) {
+      this.toggleClickOutsideEvent(this.props.shouldHandleClick);
+    }
+  }
+
+  toggleClickOutsideEvent(enabled) {
+    if (enabled) {
+      document.addEventListener("touchend", this.handleClick);
+      document.addEventListener("click", this.handleClick);
+    } else {
+      document.removeEventListener("touchend", this.handleClick);
+      document.removeEventListener("click", this.handleClick);
+    }
   }
 
   handleClick = e => {
@@ -26,9 +42,8 @@ class ClickOutside extends Component {
   };
 
   render() {
-    const { children, onClickOutside, ...props } = this.props;
     return (
-      <div ref={this.containerRef} {...props}>
+      <div ref={this.containerRef} className={this.props.className}>
         {this.props.children}
       </div>
     );
@@ -36,7 +51,12 @@ class ClickOutside extends Component {
 }
 
 ClickOutside.propTypes = {
+  shouldHandleClick: PropTypes.bool,
   onClickOutside: PropTypes.func.isRequired
+};
+
+ClickOutside.defaultProps = {
+  shouldHandleClick: true
 };
 
 export default ClickOutside;

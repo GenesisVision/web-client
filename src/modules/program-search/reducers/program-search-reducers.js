@@ -1,4 +1,4 @@
-import { combineReducers } from "../../../../../../Users/nkrivous/AppData/Local/Microsoft/TypeScript/2.9/node_modules/redux";
+import { combineReducers } from "redux";
 import apiReducerFactory from "../../../shared/reducers/api-reducer/api-reducer";
 import programSearchQueryReducer from "./program-search-query-reducer";
 

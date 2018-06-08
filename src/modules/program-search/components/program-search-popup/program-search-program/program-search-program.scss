@@ -1,0 +1,16 @@
+@import "styles/_colors.scss";
+
+.program-search-programs {
+  //display: flex;
+}
+
+.program-search-program {
+  display: flex;
+  margin: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid $border-color;
+  &__avatar {
+    width: 70px;
+    height: 70px;
+  }
+}

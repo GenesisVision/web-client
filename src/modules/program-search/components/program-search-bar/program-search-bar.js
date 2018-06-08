@@ -18,6 +18,12 @@ class ProgramSearchBar extends PureComponent {
     this.props.onChange(e.target.value);
   };
 
+  handleKeyPress = e => {
+    if (e.key === "Enter") {
+      this.inputRef.current.blur();
+    }
+  };
+
   canClearQuery = () => {
     return this.props.query && this.props.query.length > 0;
   };
@@ -33,19 +39,22 @@ class ProgramSearchBar extends PureComponent {
         <i
           className="fas fa-search program-search-bar__icon"
           onClick={this.handleSearch}
+          title="Search"
         />
         <input
           type="text"
           className="program-search-bar__input"
           value={query}
           onChange={this.handleChange}
+          onKeyPress={this.handleKeyPress}
           ref={this.inputRef}
-          placeholder="Search here"
+          placeholder="Program search"
         />
         {this.canClearQuery() && (
           <i
             className="fas fa-times program-search-bar__icon program-search-bar__icon--clear"
             onClick={this.clearQuery}
+            title="Clear input"
           />
         )}
       </div>
