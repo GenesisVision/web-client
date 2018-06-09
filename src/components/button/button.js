@@ -4,16 +4,14 @@ import classnames from "classnames";
 import PropTypes from "prop-types";
 import "./button.css";
 
-const GVLink = ({ isExternal, children, href, ...other }) =>
-  isExternal ? (
-    <a href={href} {...other}>
-      {children}
-    </a>
-  ) : (
-    <Link to={href} {...other}>
+const GVLink = ({ isExternal, children, href, ...other }) => {
+  const target = isExternal ? "_self" : null;
+  return (
+    <Link to={href} target={target} {...other}>
       {children}
     </Link>
   );
+};
 
 export default class Button extends Component {
   static propTypes = {
