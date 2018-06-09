@@ -53,6 +53,7 @@ const LoginForm = ({
         />
         <div className="login__separator" />
         <Button
+          isExternal
           label="Login as Manager"
           href={process.env.REACT_APP_MANAGER_PORTAL_URL}
           className="login__btn"

@@ -2,7 +2,8 @@
 @import "styles/_breakpoint.scss";
 
 $avatar-size: 112px;
-$mobile-avatar-size: 48px;
+$tablet-avatar-size: 48px;
+$mobile-avatar-size: 61px;
 
 .program-avatar {
   position: relative;
@@ -12,6 +13,36 @@ $mobile-avatar-size: 48px;
   height: $avatar-size;
   width: $avatar-size;
   overflow: hidden;
+
+  &__label {
+    position: absolute;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 28px;
+    width: 28px;
+
+    &--tournament {
+      top: 0;
+      left: 0;
+      color: $main-color;
+      background-color: white;
+    }
+
+    &--level {
+      bottom: 0;
+      right: 0;
+      color: white;
+      background-color: $alternate-color;
+    }
+
+    @include media-breakpoint-tablet() {
+      font-size: 0.8rem;
+      height: 16px;
+      width: 16px;
+    }
+  }
 
   &__image {
     max-width: 100%;
@@ -31,10 +62,20 @@ $mobile-avatar-size: 48px;
       top: 0;
       left: 0;
     }
+
+    @include media-breakpoint-phone() {
+      max-width: $mobile-avatar-size;
+      max-height: $mobile-avatar-size;
+    }
+  }
+
+  @include media-breakpoint-tablet() {
+    height: $tablet-avatar-size;
+    width: $tablet-avatar-size;
   }
 
   @include media-breakpoint-phone() {
-    max-width: $mobile-avatar-size;
-    max-height: $mobile-avatar-size;
+    height: $mobile-avatar-size;
+    width: $mobile-avatar-size;
   }
 }

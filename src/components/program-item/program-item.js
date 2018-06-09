@@ -1,17 +1,17 @@
 import classnames from "classnames";
 import React from "react";
 import { Link } from "react-router-dom";
-
 import PIChart from "./pi-chart/pi-chart";
 import PIBookmark from "./pi-bookmark/pi-bookmark";
 import { PROGRAM_ROUTE } from "../../modules/program/program.constants";
 import { LOGIN_ROUTE } from "../../modules/login/login.constants";
 import replaceParams from "../../utils/replace-params";
 import Button from "../button/button";
-import "./program-item.css";
 import PeriodLeft from "./period-left/period-left";
-import PIAvatar from "./pi-avatar/pi-avatar";
+import ProgramAvatar from "components/program-avatar/program-avatar";
 import TagList from "./tag-list/tag-list";
+
+import "./program-item.css";
 
 const ProgramItem = ({
   program,
@@ -34,7 +34,7 @@ const ProgramItem = ({
     >
       <div className="program-item__order">{order || program.order}</div>
       <Link to={programRoute} className="program-item__avatar">
-        <PIAvatar
+        <ProgramAvatar
           url={program.logo}
           level={program.level}
           isTournament={program.isTournament}
