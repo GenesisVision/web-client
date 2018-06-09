@@ -1,8 +1,7 @@
 import React from "react";
-
-import "./trader-info.css";
-import TraderAvatar from "../../../../../../../components/program-item/pi-avatar/pi-avatar";
+import ProgramAvatar from "components/program-avatar/program-avatar";
 import TraderButtons from "./trader-buttons/trader-buttons";
+import "./trader-info.css";
 
 const TraderInfo = ({
   trader,
@@ -13,7 +12,11 @@ const TraderInfo = ({
   return (
     <div className="trader-info">
       <div className="trader-info__avatar">
-        <TraderAvatar url={trader.logo} level={trader.level} />
+        <ProgramAvatar
+          url={trader.logo}
+          level={trader.level}
+          isTournament={trader.isTournament}
+        />
       </div>
       <div className="trader-info__name">
         <div className="trader-info__title">{trader.title}</div>
