@@ -28,6 +28,7 @@ if (reduxDevTools) {
 }
 const middleware = [
   debounceMiddleware(),
+  clearOnceMetaMiddleware(),
   thunk,
   promiseMiddleware({ promiseTypeSuffixes: suffixes }),
   refreshTokenMiddleware(
@@ -38,8 +39,7 @@ const middleware = [
   routerMiddleware(history),
   loadingBarMiddleware({
     promiseTypeSuffixes: suffixes
-  }),
-  clearOnceMetaMiddleware()
+  })
 ];
 
 const composedEnhancers = compose(
