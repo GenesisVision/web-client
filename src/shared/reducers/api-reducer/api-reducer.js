@@ -53,7 +53,7 @@ const apiReducerFactory = (
     case CLEAR:
       return initialState;
     default:
-      if(subReducer) {
+      if (subReducer) {
         return subReducer(state, action);
       }
       return state;

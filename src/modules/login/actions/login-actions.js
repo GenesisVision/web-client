@@ -11,8 +11,18 @@ const loginUser = loginData => ({
   })
 });
 
+const storeTwoFactor = ({ email, password, from }) => ({
+  type: actionTypes.LOGIN_TWO_FACTOR,
+  payload: {
+    email,
+    password,
+    from
+  }
+});
+
 const loginActions = {
-  loginUser
+  loginUser,
+  storeTwoFactor
 };
 
 export default loginActions;
