@@ -1,7 +1,9 @@
 import { object, string } from "yup";
 
 const validationSchema = object().shape({
-  recovery: string().required("Recovery code is required.")
+  recoveryCode: string()
+    .trim()
+    .required("Recovery code is required.")
 });
 
 export default validationSchema;

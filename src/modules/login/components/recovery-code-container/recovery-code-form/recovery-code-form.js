@@ -5,16 +5,16 @@ import InputText from "shared/components/form/input-text/input-text";
 import React from "react";
 
 import "../../login-container/login-form/login-form.css";
-import validationSchema from "./recovery-form.validators";
+import validationSchema from "./recovery-code-form.validators";
 
-const RecoveryForm = ({ handleSubmit, isSubmitting, error }) => {
+const RecoveryCodeForm = ({ handleSubmit, isSubmitting, error }) => {
   return (
     <form id="recoveryForm" onSubmit={handleSubmit} noValidate>
       <div className="login">
         <div className="login__header">Recovery code</div>
         <Field
           type="text"
-          name="recovery"
+          name="recoveryCode"
           placeholder="Recovery code"
           addon="fas fa-key"
           component={InputText}
@@ -39,10 +39,10 @@ const RecoveryForm = ({ handleSubmit, isSubmitting, error }) => {
 export default withFormik({
   displayName: "recoveryForm",
   mapPropsToValues: () => ({
-    recovery: ""
+    recoveryCode: ""
   }),
   validationSchema: validationSchema,
   handleSubmit: (values, { props, setSubmitting }) => {
-    props.onSubmit(values.recovery, setSubmitting);
+    props.onSubmit(values.recoveryCode, setSubmitting);
   }
-})(RecoveryForm);
+})(RecoveryCodeForm);

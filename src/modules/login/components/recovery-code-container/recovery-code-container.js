@@ -3,10 +3,12 @@ import { NOT_FOUND_PAGE_ROUTE } from "shared/components/not-found/not-found";
 import { replace } from "react-router-redux";
 import React, { Component } from "react";
 
-import RecoveryForm from "./recovery-form/recovery-form";
 import loginService from "../../service/login-service";
+import RecoveryCodeForm from "./recovery-code-form/recovery-code-form";
 
-class RecoveryContainer extends Component {
+import { RECOVERY_CODE } from "../../login.constants";
+
+class RecoveryCodeContainer extends Component {
   componentDidMount() {
     const { email, password, showNotFoundPage } = this.props;
     if (email === "" || password === "") {
@@ -18,13 +20,13 @@ class RecoveryContainer extends Component {
     this.props.clearLoginData();
   }
 
-  handleSubmit = (twoFactor, setSubmitting) => {
-    this.props.twoFactorLogin(twoFactor, setSubmitting);
+  handleSubmit = (recoveryCode, setSubmitting) => {
+    this.props.twoFactorLogin(recoveryCode, setSubmitting);
   };
 
   render() {
     return (
-      <RecoveryForm
+      <RecoveryCodeForm
         onSubmit={this.handleSubmit}
         error={this.props.errorMessage}
       />
@@ -39,11 +41,11 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  twoFactorLogin: (twoFactor, setSubmitting) => {
+  twoFactorLogin: (code, setSubmitting) => {
     const onCatch = () => {
       setSubmitting(false);
     };
-    dispatch(loginService.twoFactorLogin(twoFactor, "recoveryCode", onCatch));
+    dispatch(loginService.twoFactorLogin(code, RECOVERY_CODE, onCatch));
   },
   showNotFoundPage: () => dispatch(replace(NOT_FOUND_PAGE_ROUTE)),
   clearLoginData: () => {
@@ -54,4 +56,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(RecoveryContainer);
+)(RecoveryCodeContainer);

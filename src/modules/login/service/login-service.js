@@ -4,8 +4,12 @@ import history from "../../../utils/history";
 import loginActions from "../actions/login-actions";
 
 import { HOME_ROUTE } from "../../../components/app.constants";
-import { LOGIN } from "../actions/login-actions.constants";
-import { LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "../login.constants";
+import {
+  LOGIN_ROUTE_TWO_FACTOR_ROUTE,
+  TWO_FACTOR_CODE,
+  RECOVERY_CODE
+} from "../login.constants";
+import { LOGIN, LOGIN_TWO_FACTOR } from "../actions/login-actions.constants";
 import clearDataActionFactory from "../../../shared/actions/clear-data.factory";
 
 const login = (loginData, from, onCatch) => dispatch => {
@@ -41,10 +45,10 @@ const twoFactorLogin = (code, type, onCatch) => (dispatch, getState) => {
     email,
     password
   };
-  if (type === "twoFactorCode") {
+  if (type === TWO_FACTOR_CODE) {
     model.twoFactorCode = code;
   }
-  if (type === "recoveryCode") {
+  if (type === RECOVERY_CODE) {
     model.recoveryCode = code;
   }
 
@@ -52,6 +56,7 @@ const twoFactorLogin = (code, type, onCatch) => (dispatch, getState) => {
     .then(response => {
       authService.storeToken(response.value.data);
       dispatch(authActions.updateToken());
+      dispatch(clearTwoFactorData());
       history.push(from);
     })
     .catch(onCatch);
@@ -66,6 +71,11 @@ const logout = () => dispatch => {
 const clearLoginData = () => dispatch => {
   const clearLoginDataAction = clearDataActionFactory(LOGIN);
   dispatch(clearLoginDataAction.clearData());
+};
+
+const clearTwoFactorData = () => dispatch => {
+  const clearTwoFactorAction = clearDataActionFactory(LOGIN_TWO_FACTOR);
+  dispatch(clearTwoFactorAction.clearData());
 };
 
 const loginService = { login, logout, twoFactorLogin, clearLoginData };

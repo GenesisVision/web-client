@@ -6,16 +6,16 @@ import React from "react";
 
 import "../../login-container/login-form/login-form.css";
 import { LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE } from "../../../login.constants";
-import validationSchema from "./two-factor-form.validators";
+import validationSchema from "./two-factor-code-form.validators";
 
-const TwoFactorForm = ({ handleSubmit, isSubmitting, error }) => {
+const TwoFactorCodeForm = ({ handleSubmit, isSubmitting, error }) => {
   return (
     <form id="twoFactorForm" onSubmit={handleSubmit} noValidate>
       <div className="login">
         <div className="login__header">Two-factor authentication</div>
         <Field
           type="text"
-          name="twoFactor"
+          name="twoFactorCode"
           placeholder="Authentiacation code"
           addon="fas fa-key"
           component={InputText}
@@ -47,10 +47,10 @@ const TwoFactorForm = ({ handleSubmit, isSubmitting, error }) => {
 export default withFormik({
   displayName: "twoFactorForm",
   mapPropsToValues: () => ({
-    twoFactor: ""
+    twoFactorCode: ""
   }),
   validationSchema: validationSchema,
   handleSubmit: (values, { props, setSubmitting }) => {
-    props.onSubmit(values.twoFactor, setSubmitting);
+    props.onSubmit(values.twoFactorCode, setSubmitting);
   }
-})(TwoFactorForm);
+})(TwoFactorCodeForm);

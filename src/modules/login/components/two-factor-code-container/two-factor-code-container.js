@@ -3,10 +3,12 @@ import { NOT_FOUND_PAGE_ROUTE } from "shared/components/not-found/not-found";
 import { replace } from "react-router-redux";
 import React, { Component } from "react";
 
-import TwoFactorForm from "./two-factor-form/two-factor-form";
 import loginService from "../../service/login-service";
+import TwoFactorCodeForm from "./two-factor-code-form/two-factor-code-form";
 
-class TwoFactorContainer extends Component {
+import { TWO_FACTOR_CODE } from "../../login.constants";
+
+class TwoFactorCodeContainer extends Component {
   componentDidMount() {
     const { email, password, showNotFoundPage } = this.props;
     if (email === "" || password === "") {
@@ -24,7 +26,7 @@ class TwoFactorContainer extends Component {
 
   render() {
     return (
-      <TwoFactorForm
+      <TwoFactorCodeForm
         onSubmit={this.handleSubmit}
         error={this.props.errorMessage}
       />
@@ -39,11 +41,11 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  twoFactorLogin: (twoFactor, setSubmitting) => {
+  twoFactorLogin: (code, setSubmitting) => {
     const onCatch = () => {
       setSubmitting(false);
     };
-    dispatch(loginService.twoFactorLogin(twoFactor, "twoFactorCode", onCatch));
+    dispatch(loginService.twoFactorLogin(code, TWO_FACTOR_CODE, onCatch));
   },
   showNotFoundPage: () => dispatch(replace(NOT_FOUND_PAGE_ROUTE)),
   clearLoginData: () => {
@@ -54,4 +56,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(TwoFactorContainer);
+)(TwoFactorCodeContainer);
