@@ -11,11 +11,13 @@ import { WALLET_ROUTE } from "../../modules/wallet/wallet.constants";
 import { DashboardIcon, WalletIcon, TradersIcon } from "./media/icons.js";
 import { TOURNAMENT_ROUTE } from "../../modules/tournament/tournament.constants";
 
-import AuthControls from "../../modules/authorization-controls/authorization-controls";
+import loginService from "../../modules/login/service/login-service";
+import { LOGIN_ROUTE } from "../../modules/login/login.constants";
 
 class Navigation extends Component {
   render() {
-    const { data: platformSettings } = this.props.platformData;
+    const { isAuthenticated, platformData } = this.props;
+    const { data: platformSettings } = platformData;
     const shouldRenderTournament =
       platformSettings && platformSettings.isTournamentActive;
     return (
@@ -75,7 +77,30 @@ class Navigation extends Component {
           </NavLink>
         </div>
         <div className="navigation__item navigation__auth">
-          <AuthControls className="navigation__link" />
+          {isAuthenticated ? (
+            <button
+              className="navigation__link"
+              href="/"
+              onClick={this.props.signOut}
+            >
+              <i className="navigation__icon nav-dashboard">
+                <i className="fas fa-sign-out-alt" />
+              </i>
+              Sign Out
+            </button>
+          ) : (
+            <NavLink
+              className="navigation__link"
+              activeClassName="navigation__link--active"
+              title="sign in"
+              to={LOGIN_ROUTE}
+            >
+              <i className="navigation__icon nav-dashboard">
+                <i className="fas fa-sign-in-alt" />
+              </i>
+              Sign In
+            </NavLink>
+          )}
         </div>
       </div>
     );
@@ -84,9 +109,14 @@ class Navigation extends Component {
 
 export default connect(
   state => ({
-    platformData: state.platformData.settings
+    platformData: state.platformData.settings,
+    isAuthenticated: state.authData.isAuthenticated
   }),
-  null,
+  dispatch => ({
+    signOut: () => {
+      dispatch(loginService.logout());
+    }
+  }),
   null,
   { pure: false }
 )(Navigation);
