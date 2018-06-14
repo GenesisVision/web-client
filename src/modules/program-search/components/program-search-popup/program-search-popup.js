@@ -13,7 +13,10 @@ class ProgramSearchPopup extends PureComponent {
 
     return (
       <Fragment>
-        Found: {programs.total}
+        <div className="program-search-popup__result">
+          Found {programs.total}
+          {programs.total > 10 && <span> / first 10 displayed</span>}
+        </div>
         {programs.investmentPrograms.map(x => (
           <ProgramSearchProgram
             key={x.id}

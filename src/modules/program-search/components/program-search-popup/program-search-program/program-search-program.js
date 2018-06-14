@@ -21,10 +21,11 @@ const ProgramSearchProgram = ({ t, program, onProgramClick }) => {
     >
       <ProgramAvatar
         url={program.logo}
+        level={program.level}
         className="program-search-program__avatar"
       />
       <div className="program-search-program__info">
-        <div>{program.title}</div>
+        <div className="program-search-program__name">{program.title}</div>
         <div className="program-search-program__statistic">
           <Metric
             value={

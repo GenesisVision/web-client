@@ -6,16 +6,56 @@
 
 .program-search-program {
   display: flex;
-  color: #184f61;
+  color: $main-color;
   margin: 20px;
   padding-bottom: 20px;
   border-bottom: 1px solid $border-color;
   &__avatar {
     width: 70px;
     height: 70px;
+
+    .program-avatar__label {
+      font-size: 0.8rem;
+      height: 18px;
+      width: 18px;
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex: 1;
+    flex-flow: column wrap;
+    justify-content: space-between;
+    padding-left: 1rem;
+  }
+
+  &__name {
+    word-break: break-all;
+    word-wrap: break-word;
+    font-family: NeuzeitGroBol;
+    font-size: 1.4rem;
+    line-height: 1;
   }
 
   &__statistic {
     display: flex;
+    justify-content: space-between;
+
+    .metric {
+      align-items: flex-start;
+      &__value {
+        justify-content: flex-start;
+        font-size: 1.6rem;
+      }
+
+      &__description {
+        font-size: 0.7rem;
+      }
+
+      &__bubble {
+        font-size: 0.5rem;
+        line-height: 0.7;
+      }
+    }
   }
 }

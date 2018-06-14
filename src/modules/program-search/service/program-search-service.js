@@ -4,7 +4,7 @@ import { PROGRAM_SEARCH } from "../actions/program-search-actions.constants";
 import clearDataActionFactory from "../../../shared/actions/clear-data.factory";
 
 const getPrograms = query => (dispatch, getState) => {
-  const [skip, take, sorting, name] = [0, 20, "ByTitleAsc", query];
+  const [skip, take, sorting, name] = [0, 10, "ByTitleAsc", query];
 
   let data = {
     filter: { skip, take, sorting, name }
