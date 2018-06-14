@@ -34,6 +34,7 @@
   }
 
   @include media-breakpoint-tablet() {
+    padding: 1rem;
     &__nav-button {
       display: block;
       z-index: 1;
