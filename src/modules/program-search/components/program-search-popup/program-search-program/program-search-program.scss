@@ -6,11 +6,16 @@
 
 .program-search-program {
   display: flex;
+  color: #184f61;
   margin: 20px;
   padding-bottom: 20px;
   border-bottom: 1px solid $border-color;
   &__avatar {
     width: 70px;
     height: 70px;
+  }
+
+  &__statistic {
+    display: flex;
   }
 }
