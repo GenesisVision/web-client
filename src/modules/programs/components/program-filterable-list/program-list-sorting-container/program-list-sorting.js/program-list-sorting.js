@@ -1,6 +1,6 @@
+import classnames from "classnames";
 import React from "react";
 import Select from "react-select";
-import classnames from "classnames";
 
 import "./program-list-sorting.css";
 import { SORTING_OPTIONS } from "../../../../programs.constants";
@@ -17,9 +17,8 @@ const ProgramListSorting = ({ sorting, onSortingChange }) => {
     if (value === option.value) return;
     onSortingChange(option.value + (isAsc ? "Asc" : "Desc"));
   };
-  const handleDirectionChange = isAscDirection => {
-    if (isAsc === isAscDirection) return;
-    onSortingChange(value + (isAscDirection ? "Asc" : "Desc"));
+  const handleDirectionChange = () => {
+    onSortingChange(value + (isDesc ? "Asc" : "Desc"));
   };
   return (
     <div className="program-list-sorting">
@@ -49,17 +48,14 @@ const ProgramListSorting = ({ sorting, onSortingChange }) => {
         className={classnames("sorting__order", {
           "sorting__order--selected": isAsc
         })}
-        onClick={() => handleDirectionChange(true)}
+        onClick={() => handleDirectionChange()}
       >
-        Asc
-      </div>
-      <div
-        className={classnames("sorting__order", {
-          "sorting__order--selected": isDesc
-        })}
-        onClick={() => handleDirectionChange(false)}
-      >
-        Desc
+        <i
+          className={classnames("fas", {
+            "fa-sort-amount-up": isAsc,
+            "fa-sort-amount-down": isDesc
+          })}
+        />
       </div>
     </div>
   );
