@@ -1,15 +1,14 @@
-import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-
-import PIStat from "../../../../../../../../components/program-item/pi-stat/pi-stat";
+import ProgramMetric from "components/program-metric/program-metric";
+import React from "react";
 
 import "./pi-statisctic.css";
 
 const TIStatistic = ({ t, trader, className = "" }) => {
   return (
     <div className={`pi-statistic ${className}`}>
-      <PIStat
+      <ProgramMetric
         value={
           <NumberFormat
             value={trader.availableInvestment}
@@ -21,7 +20,7 @@ const TIStatistic = ({ t, trader, className = "" }) => {
         description={t("program-statistic.available-to-invest.text")}
         tooltip={t("program-statistic.available-to-invest.tooltip")}
       />
-      <PIStat
+      <ProgramMetric
         value={
           <NumberFormat
             value={trader.profitAvgPercent}
@@ -33,20 +32,20 @@ const TIStatistic = ({ t, trader, className = "" }) => {
         description={t("program-statistic.avg-profit.text")}
         tooltip={t("program-statistic.avg-profit.tooltip")}
       />
-      <PIStat
+      <ProgramMetric
         value={trader.tradesCount}
         description={t("program-statistic.trades.text")}
         tooltip={t("program-statistic.trades.tooltip")}
       />
       <hr />
-      <PIStat
+      <ProgramMetric
         value={trader.investorsCount}
         description={t("program-statistic.investors.text", {
           count: trader.investorsCount
         })}
         tooltip={t("program-statistic.investors.tooltip")}
       />
-      <PIStat
+      <ProgramMetric
         value={
           <NumberFormat
             value={trader.balance}
@@ -58,7 +57,7 @@ const TIStatistic = ({ t, trader, className = "" }) => {
         description={t("program-statistic.program-item-balance.text")}
         tooltip={t("program-statistic.program-item-balance.tooltip")}
       />
-      <PIStat
+      <ProgramMetric
         value={
           <NumberFormat
             value={trader.profitTotal}
