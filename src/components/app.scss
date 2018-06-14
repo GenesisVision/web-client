@@ -9,9 +9,9 @@
 
 .app__main {
   display: flex;
-  height: calc(100% - 68px);
+  height: calc(100% - 70px);
   @include media-breakpoint-phone() {
-    margin-top: 80px;
+    margin-top: 70px;
   }
 }
 

@@ -30,25 +30,30 @@
     font-family: NeuzeitGroBol;
     height: 24px;
     font-size: 18px;
-    color: #1b4f64;
+    color: $main-color;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
 
     &:hover {
-      color: #15bbaf;
+      color: $alternate-color;
     }
 
-    .fa-trophy {
+    .fas {
       color: #ccd5d4;
     }
 
     &--active {
-      .dashboard {
-        fill: #15bbaf;
+      .fas {
+        color: $alternate-color;
       }
       .traders {
-        stroke: #15bbaf;
+        stroke: $alternate-color;
       }
-      .wallet {
-        fill: #15bbaf;
+      .wallet,
+      .dashboard {
+        fill: $alternate-color;
       }
     }
   }

@@ -11,7 +11,7 @@
   margin: 0 auto;
   &:not(:last-child) {
     @include media-breakpoint-desktop() {
-      height: calc(100vh - 72px);
+      height: calc(100vh - 70px);
       overflow: hidden;
     }
 

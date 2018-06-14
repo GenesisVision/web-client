@@ -5,7 +5,7 @@
   max-width: 300px;
   @include media-breakpoint-desktop() {
     position: fixed;
-    top: 72px;
+    top: 70px;
     bottom: 0;
     right: 0;
     overflow-y: auto;
@@ -13,7 +13,7 @@
   }
 
   @include media-breakpoint-phone() {
-    margin-top: 89px; /*fix for iphone*/
+    margin-top: 70px; /*fix for iphone*/
     padding-bottom: 100px; /*fix for iphone*/
     top: 0;
     max-width: 100%;

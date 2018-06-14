@@ -2,7 +2,7 @@
 @import "styles/_breakpoint.scss";
 
 .filter-pane {
-  min-height: calc(100vh - 72px);
+  min-height: calc(100vh - 70px);
   overflow: hidden;
   @include media-breakpoint-phone() {
     position: fixed;
