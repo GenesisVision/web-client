@@ -12,9 +12,13 @@ import refreshTokenMiddleware from "../shared/middlewares/refresh-token-middlewa
 import clearOnceMetaMiddleware from "../shared/middlewares/clear-once-meta-middleware/clear-once-meta-middleware";
 import authService from "../services/auth-service";
 import SwaggerInvestorApi from "../services/api-client/swagger-investor-api";
+import {
+  FAILURE_SUFFIX,
+  SUCCESS_SUFFIX,
+  REQUEST_SUFFIX
+} from "../shared/reducers/api-reducer/api-reducer";
 
-const failureSuffix = "FAILURE";
-const suffixes = ["REQUEST", "SUCCESS", failureSuffix];
+const suffixes = [REQUEST_SUFFIX, SUCCESS_SUFFIX, FAILURE_SUFFIX];
 
 const reduxDevTools =
   process.env.NODE_ENV === "development" &&
@@ -30,12 +34,12 @@ const middleware = [
   debounceMiddleware(),
   clearOnceMetaMiddleware(),
   thunk,
-  promiseMiddleware({ promiseTypeSuffixes: suffixes }),
   refreshTokenMiddleware(
     authService,
     SwaggerInvestorApi.apiInvestorAuthUpdateTokenGet.bind(SwaggerInvestorApi)
   ),
-  apiErrorHandlerMiddleware({ failureSuffix: failureSuffix }),
+  promiseMiddleware({ promiseTypeSuffixes: suffixes }),
+  apiErrorHandlerMiddleware({ failureSuffix: FAILURE_SUFFIX }),
   routerMiddleware(history),
   loadingBarMiddleware({
     promiseTypeSuffixes: suffixes

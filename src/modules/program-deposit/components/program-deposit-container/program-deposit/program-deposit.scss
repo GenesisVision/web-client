@@ -3,7 +3,6 @@
 
 .program-deposit__info {
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   margin: 2rem 0;
@@ -14,14 +13,8 @@
 
 .program-deposit__info-cell {
   flex: 1 1 32%;
-  max-width: 32%;
+  max-width: 50%;
   text-align: center;
-}
-
-.program-deposit__available {
-  @include media-breakpoint-phone() {
-    min-width: 100%;
-  }
 }
 
 .program-deposit__trader {
@@ -32,6 +25,9 @@
 .program-deposit__name {
   font-size: 1.3rem;
   margin: 0.5rem;
+  max-width: 10rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .program-deposit__notification {

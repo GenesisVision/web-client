@@ -6,6 +6,7 @@ import {
   getProgramName,
   getTransactionTypeText
 } from "../../../../../helpers/transaction-helper";
+import Metric from "components/metric/metric";
 
 // const WalletTransactionDetail = ({ isOpen, equivalent, transactionId }) => {
 //   if (!isOpen) return null;
@@ -50,12 +51,7 @@ class WalletTransaction extends Component {
         {renderTransactionInfo(transaction)}
         <div className="wallet-transaction__info">
           <div className="wallet-transaction__amount">
-            <div className="metric">
-              <div className="metric__value">
-                {transaction.amount}
-                <div className="metric__bubble">{transaction.currency}</div>
-              </div>
-            </div>
+            <Metric value={transaction.amount} bubble={transaction.currency} />
           </div>
           <div className="wallet-transaction__date">
             {new Date(transaction.date).toDateString()}

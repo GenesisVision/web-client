@@ -17,7 +17,7 @@
   font-size: 1.5rem;
   font-family: "NeuzeitGroBol";
   align-self: center;
-  margin: 2rem;
+  margin: 2rem 0;
 }
 
 .login__forgot-passowrd {
@@ -27,6 +27,11 @@
   &:hover {
     text-decoration: none;
   }
+}
+
+.login__recovery-link {
+  text-align: left;
+  padding: 0;
 }
 
 .login__btn {

@@ -1,8 +1,9 @@
+import { object as yupObject, number as yupNumber } from "yup";
 import { translate } from "react-i18next";
 import { withFormik, Field } from "formik";
+import Metric from "components/metric/metric";
 import NumberFormat from "react-number-format";
 import React from "react";
-import { object as yupObject, number as yupNumber } from "yup";
 
 import FormError from "../../../../../shared/components/form/form-error/form-error";
 import InputText from "../../../../../shared/components/form/input-text/input-text";
@@ -43,34 +44,30 @@ const ProgramDeposit = ({
             </div>
           </div>
           <div className="program-deposit__info-cell">
-            <div className="metric">
-              <div className="metric__value">
+            <Metric
+              value={
                 <NumberFormat
                   value={programDeposit.availableInvestments}
                   decimalScale={4}
                   displayType="text"
                 />
-                <div className="metric__bubble">GVT</div>
-              </div>
-              <div className="metric__description">
-                {t("program-deposit.available-to-invest")}
-              </div>
-            </div>
+              }
+              bubble="GVT"
+              description={t("program-deposit.available-to-invest")}
+            />
           </div>
           <div className="program-deposit__info-cell program-deposit__available">
-            <div className="metric">
-              <div className="metric__value">
+            <Metric
+              value={
                 <NumberFormat
                   value={programDeposit.gvtWalletAmount}
                   decimalScale={4}
                   displayType="text"
                 />
-                <div className="metric__bubble">GVT</div>
-              </div>
-              <div className="metric__description">
-                {t("program-deposit.your-gvt")}
-              </div>
-            </div>
+              }
+              bubble="GVT"
+              description={t("program-deposit.your-gvt")}
+            />
           </div>
         </div>
         <div className="program-deposit__calculator">
