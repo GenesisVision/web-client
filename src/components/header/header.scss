@@ -21,31 +21,28 @@
   border-bottom: 1px solid $border-color;
   box-shadow: 0 1px 4px 0 rgba(227, 235, 237, 0.86);
 
+  @include media-breakpoint-tablet() {
+    padding: 1rem;
+  }
+
   &__navigation {
     flex: 1;
+    @include media-breakpoint-tablet() {
+      display: none;
+    }
   }
 
   &__nav-button {
     display: none;
+    @include media-breakpoint-tablet() {
+      display: block;
+      z-index: 1;
+    }
   }
 
   &__logo {
     margin-right: 2rem;
-  }
-
-  @include media-breakpoint-tablet() {
-    padding: 1rem;
-    &__nav-button {
-      display: block;
-      z-index: 1;
-    }
-    &__navigation {
-      display: none;
-    }
-    &__auth {
-      display: none;
-    }
-    &__logo {
+    @include media-breakpoint-tablet() {
       margin: 0;
       position: absolute;
       top: 0;
@@ -57,8 +54,16 @@
       align-items: center;
       z-index: 0;
     }
+  }
 
-    &__filtering {
+  &__auth {
+    @include media-breakpoint-tablet() {
+      display: none;
+    }
+  }
+
+  &__filtering {
+    @include media-breakpoint-tablet() {
       z-index: 1;
     }
   }
