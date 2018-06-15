@@ -76,15 +76,9 @@ const Header = ({
           </NavLink>
           <div className="h-sorting">Investor Portal</div>
         </div>
-        <div className="header__filtering">
-          <ProgramSearchContainer />
-          {filterPaneControl(
-            shouldShowFilterControl,
-            isFilterOpen,
-            toggleFilter
-          )}
-          {isAuthenticated ? authorizedControl(signOut) : unauthorizedControl()}
-        </div>
+        <ProgramSearchContainer />
+        {filterPaneControl(shouldShowFilterControl, isFilterOpen, toggleFilter)}
+        {isAuthenticated ? authorizedControl(signOut) : unauthorizedControl()}
       </header>
       <MobileNav />
       <LoadingBar className="header__loading-bar" />

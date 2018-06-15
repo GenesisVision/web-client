@@ -36,10 +36,16 @@ const updateQuery = query => ({
   payload: query
 });
 
+const toggleState = isOpen => ({
+  type: actionTypes.PROGRAM_SEARCH_STATE,
+  isOpen
+});
+
 const programSearchActions = {
   updateQuery,
   fetchPrograms,
-  cancelFetchPrograms
+  cancelFetchPrograms,
+  toggleState
 };
 
 export default programSearchActions;
