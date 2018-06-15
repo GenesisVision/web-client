@@ -1,4 +1,6 @@
 import React, { Fragment, PureComponent } from "react";
+
+import ProgramSearchContentLoader from "./program-search-content-loader/program-search-content-loader";
 import ProgramSearchProgram from "./program-search-program/program-search-program";
 
 import "./program-search-popup.css";
@@ -7,7 +9,7 @@ class ProgramSearchPopup extends PureComponent {
   renderPrograms = () => {
     const { programsData, onProgramClick } = this.props;
     const { data: programs } = programsData;
-    if (!programs) return null;
+    if (!programs) return <ProgramSearchContentLoader />;
     if (programs.total === 0)
       return <div>Your search did not match any programs.</div>;
 
