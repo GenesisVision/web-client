@@ -10,7 +10,7 @@ import history from "../utils/history";
 import platformActions from "../actions/platform-actions";
 import PopupContainer from "../modules/popup/components/popup-container";
 import store from "../store/index";
-import MobileNav from "./mobile-nav/mobile-nav-container";
+import MobileNavContainer from "./mobile-nav/mobile-nav-container";
 import "./app.css";
 import AppRoutes from "./app.routes";
 
@@ -22,7 +22,7 @@ class AppContainer extends Component {
     return (
       <div className="app">
         <Route component={Header} />
-        <MobileNav />
+        <MobileNavContainer />
         <div className="app__main">
           <div className="app__body">
             <AppRoutes />

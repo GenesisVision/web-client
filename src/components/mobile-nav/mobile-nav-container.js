@@ -12,8 +12,11 @@ const mapStateToProps = state => ({
   isOpen: state.navigationData.isOpen
 });
 
-const ConnectedMobileNav = connect(mapStateToProps, {
-  navigationClose
-})(MobileNavContainer);
+const ConnectedMobileNav = connect(
+  mapStateToProps,
+  {
+    navigationClose
+  }
+)(MobileNavContainer);
 
 export default ConnectedMobileNav;
