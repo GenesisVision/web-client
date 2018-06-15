@@ -41,7 +41,7 @@ class Navigation extends Component {
           <NavLink
             className="navigation__link"
             activeClassName="navigation__link--active"
-            title="Programs"
+            title="Traders"
             to={PROGRAMS_ROUTE}
           >
             <i className="navigation__icon nav-traders">
