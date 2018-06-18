@@ -15,7 +15,7 @@ const GVLink = ({ isExternal, children, href, ...other }) => {
 
 export default class Button extends Component {
   static propTypes = {
-    label: PropTypes.string.isRequired,
+    label: PropTypes.any.isRequired,
     class: PropTypes.string,
     disabled: PropTypes.bool,
     fullWidth: PropTypes.bool,

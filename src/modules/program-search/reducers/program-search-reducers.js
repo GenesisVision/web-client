@@ -1,14 +1,12 @@
 import { combineReducers } from "redux";
 
-import apiReducerFactory from "../../../shared/reducers/api-reducer/api-reducer";
 import programSearchQueryReducer from "./program-search-query-reducer";
 import programSearchStateReducer from "./program-search-state-reducer";
-
-import { PROGRAM_SEARCH } from "../actions/program-search-actions.constants";
+import programSearchProgramsReducer from "./program-search-programs-reducer";
 
 const programSearchReducer = combineReducers({
   query: programSearchQueryReducer,
-  programs: apiReducerFactory({ apiType: PROGRAM_SEARCH }),
+  programs: programSearchProgramsReducer,
   state: programSearchStateReducer
 });
 

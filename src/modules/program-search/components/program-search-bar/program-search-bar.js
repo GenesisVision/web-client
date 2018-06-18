@@ -9,9 +9,20 @@ class ProgramSearchBar extends PureComponent {
     this.inputRef = React.createRef();
   }
 
-  handleSearch = () => {
-    console.log(this.inputRef);
+  componentDidMount() {
     this.inputRef.current.focus();
+  }
+
+  componentDidUpdate() {
+    if (this.props.isFocused) {
+      this.inputRef.current.focus();
+    } else {
+      this.inputRef.current.blur();
+    }
+  }
+
+  handleSearch = () => {
+    this.props.toggleFocus(true);
   };
 
   handleChange = e => {
@@ -20,7 +31,19 @@ class ProgramSearchBar extends PureComponent {
 
   handleKeyPress = e => {
     if (e.key === "Enter") {
-      this.inputRef.current.blur();
+      this.props.toggleFocus(false);
+    }
+  };
+
+  handleFocus = () => {
+    if (!this.props.isFocused) {
+      this.props.toggleFocus(true);
+    }
+  };
+
+  handleBlur = () => {
+    if (this.props.isFocused) {
+      this.props.toggleFocus(false);
     }
   };
 
@@ -47,6 +70,8 @@ class ProgramSearchBar extends PureComponent {
           value={query}
           onChange={this.handleChange}
           onKeyPress={this.handleKeyPress}
+          onFocus={this.handleFocus}
+          onBlur={this.handleBlur}
           ref={this.inputRef}
           placeholder="Program search"
         />
@@ -64,7 +89,9 @@ class ProgramSearchBar extends PureComponent {
 
 ProgramSearchBar.propTypes = {
   query: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired
+  isFocused: PropTypes.bool.isRequired,
+  onChange: PropTypes.func.isRequired,
+  toggleFocus: PropTypes.func.isRequired
 };
 
 export default ProgramSearchBar;

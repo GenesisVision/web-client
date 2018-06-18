@@ -16,17 +16,20 @@ const ProgramSearch = ({
   query,
   programsData,
   isOpen,
+  isFocused,
   updateQuery,
   clearInput,
-  toggleState
+  openSearchBar,
+  closeSearchBar,
+  toggleFocusedState
 }) => {
-  const shouldShowResults = () => {
-    return query !== "";
+  const shouldShowResults = query !== "";
+
+  const handleClickOutside = () => {
+    clearInput();
+    toggleFocusedState(false);
   };
 
-  const handleToggleState = () => {
-    toggleState(!isOpen);
-  };
   return (
     <div
       className={classnames("program-search-wrapper", {
@@ -37,20 +40,25 @@ const ProgramSearch = ({
         secondary
         className="program-search__open"
         label={<i className="fas fa-search" title="Search" />}
-        onClick={handleToggleState}
+        onClick={openSearchBar}
       />
       <ClickOutside
         className="program-search"
-        shouldHandleClick={shouldShowResults()}
-        onClickOutside={clearInput}
+        shouldHandleClick={shouldShowResults}
+        onClickOutside={handleClickOutside}
       >
-        <ProgramSearchBar query={query} onChange={updateQuery} />
+        <ProgramSearchBar
+          query={query}
+          onChange={updateQuery}
+          isFocused={isFocused}
+          toggleFocus={toggleFocusedState}
+        />
         <LoadingBar
           className="header__loading-bar"
           scope="qqq"
           style={{ bottom: "-23px" }}
         />
-        {shouldShowResults() && (
+        {shouldShowResults && (
           <ProgramSearchPopup
             programsData={programsData}
             onProgramClick={clearInput}
@@ -61,7 +69,7 @@ const ProgramSearch = ({
         secondary
         className="program-search__close"
         label="Close"
-        onClick={handleToggleState}
+        onClick={closeSearchBar}
       />
     </div>
   );
@@ -70,15 +78,21 @@ const ProgramSearch = ({
 const mapStateToProps = state => {
   const { query } = state.programSearchData.query;
   const programsData = state.programSearchData.programs;
-  const { isOpen } = state.programSearchData.state;
-  return { query, programsData, isOpen };
+  const { isOpen, isFocused } = state.programSearchData.state;
+  return { query, programsData, isOpen, isFocused };
 };
 
 const mapDispatchToProps = dispatch => ({
   updateQuery: query => dispatch(programSearchService.updateQuery(query)),
-  clearInput: query => dispatch(programSearchService.updateQuery("")),
-  toggleState: isOpen => {
-    dispatch(programSearchActions.toggleState(isOpen));
+  clearInput: () => dispatch(programSearchService.updateQuery("")),
+  openSearchBar: () => {
+    dispatch(programSearchService.openSearchBar());
+  },
+  closeSearchBar: () => {
+    dispatch(programSearchService.closeSearchBar());
+  },
+  toggleFocusedState: isFocused => {
+    dispatch(programSearchActions.toggleFocusedState(isFocused));
   }
 });
 

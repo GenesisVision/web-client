@@ -1,3 +1,4 @@
+import { LOCATION_CHANGE } from "react-router-redux";
 import { PROGRAM_SEARCH_QUERY_UPDATE } from "../actions/program-search-actions.constants";
 
 const initialState = {
@@ -11,6 +12,9 @@ const programSearchQueryReducer = (state = initialState, action) => {
         ...state,
         query: action.payload
       };
+    case LOCATION_CHANGE: {
+      return initialState;
+    }
     default:
       return state;
   }

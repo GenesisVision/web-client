@@ -36,8 +36,20 @@ const updateQuery = query => dispatch => {
   }
 };
 
+const openSearchBar = () => dispatch => {
+  dispatch(programSearchActions.toggleOpenState(true));
+  dispatch(programSearchActions.toggleFocusedState(true));
+};
+
+const closeSearchBar = () => dispatch => {
+  dispatch(programSearchActions.toggleFocusedState(false));
+  dispatch(programSearchActions.toggleOpenState(false));
+};
+
 const programSearchService = {
-  updateQuery
+  updateQuery,
+  openSearchBar,
+  closeSearchBar
 };
 
 export default programSearchService;
