@@ -13,9 +13,9 @@ import { PROGRAMS } from "../../modules/programs/actions/programs-actions.consta
 import { PROGRAMS_ROUTE } from "../../modules/programs/programs.constants";
 import gvLogo from "./gv-logo.svg";
 import AuthControls from "../../modules/authorization-controls/authorization-controls";
-import NavButton from "../navigation/button/button";
+import NavButton from "../../modules/navigation/nav-button/nav-button";
+import Navigation from "../../modules/navigation/navigation";
 import Button from "../button/button";
-import Navigation from "../navigation/navigation";
 
 const PAGES_WITH_FILTER = {
   [PROGRAMS_ROUTE]: {
@@ -123,4 +123,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Header);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  mergeProps
+)(Header);

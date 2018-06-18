@@ -107,16 +107,20 @@ class Navigation extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  platformData: state.platformData.settings,
+  isAuthenticated: state.authData.isAuthenticated
+});
+
+const mapDispatchToProps = dispatch => ({
+  signOut: () => {
+    dispatch(loginService.logout());
+  }
+});
+
 export default connect(
-  state => ({
-    platformData: state.platformData.settings,
-    isAuthenticated: state.authData.isAuthenticated
-  }),
-  dispatch => ({
-    signOut: () => {
-      dispatch(loginService.logout());
-    }
-  }),
+  mapStateToProps,
+  mapDispatchToProps,
   null,
   { pure: false }
 )(Navigation);

@@ -29,7 +29,7 @@
 
   &__header {
     padding-bottom: 1rem;
-    border-bottom: 1px solid #eef3f5;
+    border-bottom: 1px solid $border-color;
   }
 
   @include breakpoint-desktop() {
@@ -43,7 +43,7 @@
     border: none;
     min-height: 59px;
     padding-left: 0.5rem;
-    border-bottom: 1px solid #eef3f5;
+    border-bottom: 1px solid $border-color;
   }
   .navigation__auth {
     display: flex;

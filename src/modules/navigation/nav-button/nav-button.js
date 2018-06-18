@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Button from "../../button/button";
+import Button from "../../../components/button/button";
 import { connect } from "react-redux";
 import { navigationClose, navigationOpen } from "../actions/navigation-actions";
 
@@ -32,8 +32,9 @@ const mapDispatchToProp = {
   navigationOpen
 };
 
-const ConnectedNavButton = connect(mapStateToProps, mapDispatchToProp)(
-  NavButton
-);
+const ConnectedNavButton = connect(
+  mapStateToProps,
+  mapDispatchToProp
+)(NavButton);
 
 export default ConnectedNavButton;

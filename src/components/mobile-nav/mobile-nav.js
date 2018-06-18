@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import classnames from "classnames";
-import Navigation from "../navigation/navigation";
-import NavButton from "../navigation/button/button";
+import Navigation from "../../modules/navigation/navigation";
+import NavButton from "../../modules/navigation/nav-button/nav-button";
 import history from "../../utils/history";
 import bodyDisableHOC from "../../shared/HOC/body-disable-HOC";
 import "./mobile-nav.css";

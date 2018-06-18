@@ -5,7 +5,7 @@ import {
 
 const initialState = { isOpen: false };
 
-function navigationData(state = initialState, action) {
+const navigationData = (state = initialState, action) => {
   if (action.type === NAVIGATION_OPEN) {
     return { isOpen: true };
   }
@@ -13,6 +13,6 @@ function navigationData(state = initialState, action) {
     return { isOpen: false };
   }
   return state;
-}
+};
 
 export default navigationData;

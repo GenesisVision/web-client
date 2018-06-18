@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import MobileNav from "./mobile-nav";
-import { navigationClose } from "../navigation/actions/navigation-actions";
+import { navigationClose } from "../../modules/navigation/actions/navigation-actions";
 
 const MobileNavContainer = ({ isOpen, navigationClose }) => {
   return isOpen ? <MobileNav navigationClose={navigationClose} /> : null;
