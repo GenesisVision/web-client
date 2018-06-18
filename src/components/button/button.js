@@ -23,7 +23,8 @@ export default class Button extends Component {
     fullWidth: false,
     primary: false,
     secondary: false,
-    label: ""
+    label: null,
+    icon: null
   };
 
   render() {
@@ -59,7 +60,7 @@ export default class Button extends Component {
         title={label}
         {...other}
       >
-        {icon && icon}
+        {icon}
         {label}
       </button>
     );
