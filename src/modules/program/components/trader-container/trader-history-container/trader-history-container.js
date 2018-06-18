@@ -9,6 +9,12 @@ class TraderHistoryContainer extends PureComponent {
     this.props.fetchTraderHistory(this.props.programId);
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.programId !== this.props.programId) {
+      this.props.fetchTraderHistory(this.props.programId);
+    }
+  }
+
   render() {
     const { isPending, history } = this.props;
     if (isPending || history === undefined) {

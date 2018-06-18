@@ -9,6 +9,12 @@ class TraderRequestListContainer extends PureComponent {
     this.props.fetchTraderRequests(this.props.programId);
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.programId !== this.props.programId) {
+      this.props.fetchTraderRequests(this.props.programId);
+    }
+  }
+
   render() {
     const {
       isPending,
