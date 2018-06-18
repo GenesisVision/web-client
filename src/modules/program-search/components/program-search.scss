@@ -7,17 +7,21 @@
     @include media-breakpoint-phone() {
       display: none;
     }
-  }
 
-  .program-search__open {
-    display: none;
-    @include media-breakpoint-phone() {
-      display: inline-block;
+    &__open {
+      display: none;
+      @include media-breakpoint-phone() {
+        display: inline-block;
+      }
     }
-  }
 
-  .program-search__close {
-    display: none;
+    &__close {
+      display: none;
+    }
+
+    &__loading-bar {
+      bottom: -23px;
+    }
   }
 
   &--is-open {
@@ -35,17 +39,17 @@
       @include media-breakpoint-phone() {
         display: block;
       }
-    }
 
-    .program-search__open {
-      @include media-breakpoint-phone() {
-        display: none;
+      &__open {
+        @include media-breakpoint-phone() {
+          display: none;
+        }
       }
-    }
 
-    .program-search__close {
-      @include media-breakpoint-phone() {
-        display: inline-block;
+      &__close {
+        @include media-breakpoint-phone() {
+          display: inline-block;
+        }
       }
     }
   }

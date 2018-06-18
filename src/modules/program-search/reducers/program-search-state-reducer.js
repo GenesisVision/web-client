@@ -6,7 +6,7 @@ import {
 
 const initialState = {
   isOpen: false,
-  isFocused: true
+  isFocused: false
 };
 
 const programSearchStateReducer = (state = initialState, action) => {

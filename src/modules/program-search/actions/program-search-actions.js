@@ -1,6 +1,7 @@
 import SwaggerInvestorApi from "../../../services/api-client/swagger-investor-api";
 
 import * as actionTypes from "./program-search-actions.constants";
+import { PROGRAM_SEARCH_LOADING_BAR_SCOPE } from "../program.search.constants";
 
 const fetchPrograms = (
   filters,
@@ -13,7 +14,7 @@ const fetchPrograms = (
         onResolve
       ),
     meta: {
-      scope: "qqq",
+      scope: PROGRAM_SEARCH_LOADING_BAR_SCOPE,
       debounce: {
         time: 300
       },

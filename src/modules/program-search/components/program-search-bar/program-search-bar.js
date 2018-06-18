@@ -9,10 +9,6 @@ class ProgramSearchBar extends PureComponent {
     this.inputRef = React.createRef();
   }
 
-  componentDidMount() {
-    this.inputRef.current.focus();
-  }
-
   componentDidUpdate() {
     if (this.props.isFocused) {
       this.inputRef.current.focus();

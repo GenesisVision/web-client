@@ -11,6 +11,7 @@ import ProgramSearchPopup from "./program-search-popup/program-search-popup";
 import programSearchService from "../service/program-search-service";
 
 import "./program-search.css";
+import { PROGRAM_SEARCH_LOADING_BAR_SCOPE } from "../program.search.constants";
 
 const ProgramSearch = ({
   query,
@@ -54,9 +55,8 @@ const ProgramSearch = ({
           toggleFocus={toggleFocusedState}
         />
         <LoadingBar
-          className="header__loading-bar"
-          scope="qqq"
-          style={{ bottom: "-23px" }}
+          className="header__loading-bar program-search__loading-bar"
+          scope={PROGRAM_SEARCH_LOADING_BAR_SCOPE}
         />
         {shouldShowResults && (
           <ProgramSearchPopup
