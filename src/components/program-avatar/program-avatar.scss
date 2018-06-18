@@ -62,11 +62,6 @@ $mobile-avatar-size: 61px;
       top: 0;
       left: 0;
     }
-
-    @include media-breakpoint-phone() {
-      max-width: $mobile-avatar-size;
-      max-height: $mobile-avatar-size;
-    }
   }
 
   @include media-breakpoint-tablet() {

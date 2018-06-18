@@ -1,3 +1,4 @@
+@import "styles/_breakpoint.scss";
 @import "styles/_colors.scss";
 
 .program-search-programs {
@@ -14,6 +15,11 @@
     min-width: 70px;
     width: 70px;
     height: 70px;
+    @include media-breakpoint-tablet() {
+      min-width: 48px;
+      width: 48px;
+      height: 48px;
+    }
 
     .program-avatar__label {
       font-size: 0.8rem;
@@ -36,6 +42,9 @@
     font-family: NeuzeitGroBol;
     font-size: 1.4rem;
     line-height: 1;
+    @include media-breakpoint-tablet() {
+      font-size: 1.2rem;
+    }
   }
 
   &__statistic {
@@ -44,18 +53,13 @@
 
     .metric {
       align-items: flex-start;
+      font-size: 0.8rem;
+
       &__value {
         justify-content: flex-start;
-        font-size: 1.6rem;
-      }
-
-      &__description {
-        font-size: 0.7rem;
-      }
-
-      &__bubble {
-        font-size: 0.5rem;
-        line-height: 0.7;
+        @include media-breakpoint-tablet() {
+          min-width: 2em;
+        }
       }
     }
   }

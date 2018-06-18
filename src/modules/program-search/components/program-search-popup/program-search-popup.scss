@@ -15,6 +15,7 @@
   @include media-breakpoint-phone() {
     right: initial;
     width: 100vw;
+    max-height: calc(100vh - 62px);
   }
 
   &__result {
