@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import { withFormik, Field } from "formik";
+import Button from "components/button/button";
+import FormError from "shared/components/form/form-error/form-error";
+import InputText from "shared/components/form/input-text/input-text";
 import React from "react";
 
-import FormError from "../../../../shared/components/form/form-error/form-error";
-import InputText from "../../../../shared/components/form/input-text/input-text";
-import Button from "../../../../components/button/button";
+import { FORGOT_PASSWORD_ROUTE } from "modules/password-reset/password-reset.constants";
+import { REGISTER_ROUTE } from "modules/register/register.constants";
+
 import "./login-form.css";
-import { FORGOT_PASSWORD_ROUTE } from "../../../password-reset/password-reset.constants";
-import { REGISTER_ROUTE } from "../../../register/register.constants";
 import validationSchema from "./login-form.validators";
 
 const LoginForm = ({
@@ -53,6 +54,7 @@ const LoginForm = ({
         />
         <div className="login__separator" />
         <Button
+          isExternal
           label="Login as Manager"
           href={process.env.REACT_APP_MANAGER_PORTAL_URL}
           className="login__btn"

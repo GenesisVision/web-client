@@ -1,14 +1,15 @@
+import { object as yupObject, number as yupNumber } from "yup";
 import { translate } from "react-i18next";
 import { withFormik, Field } from "formik";
+import Metric from "components/metric/metric";
 import React from "react";
-import { object as yupObject, number as yupNumber } from "yup";
 
-import TimeLeftWidget from "../../../../../components/time-left-widget/time-left-widget";
 import FormError from "../../../../../shared/components/form/form-error/form-error";
 import InputText from "../../../../../shared/components/form/input-text/input-text";
 import PopupButtons from "../../../../popup/components/popup-buttons/popup-buttons";
 import PopupHeader from "../../../../popup/components/popup-header/popup-header";
 import ProgramAvatar from "../../../../../components/program-avatar/program-avatar";
+import TimeLeftWidget from "../../../../../components/time-left-widget/time-left-widget";
 
 import "./program-withdraw.css";
 
@@ -52,15 +53,12 @@ const TraderWithdraw = ({
             </div>
           </div>
           <div className="program-withdraw__info-cell">
-            <div className="metric">
-              <div className="metric__value">
-                {programWithdraw.investedTokens}
-              </div>
-              <div className="metric__description">
-                {t("program-withdraw.invested")}{" "}
-                {programWithdraw.token.tokenSymbol}
-              </div>
-            </div>
+            <Metric
+              value={programWithdraw.investedTokens}
+              description={`${t("program-withdraw.invested")} ${
+                programWithdraw.token.tokenSymbol
+              }`}
+            />
           </div>
         </div>
         <div className="program-withdraw__calculator">

@@ -7,8 +7,8 @@ import popupActions from "../../../../popup/actions/popup-actions";
 import ProgramList from "../../../../programs/components/program-filterable-list/program-list-container/program-list/program-list";
 import programsService from "../../../../programs/service/programs-service";
 
-import { PROGRAM_DEPOSIT_POPUP } from "../../../../popup/actions/popup-actions.constants";
 import { PROGRAMS_ROUTE } from "../../../../programs/programs.constants";
+import ProgramDepositContainer from "modules/program-deposit/components/program-deposit-container/program-deposit-container";
 
 class FavoritePrograms extends Component {
   componentDidMount() {
@@ -74,13 +74,13 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     ...ownProps,
     openInvestPopup: programId => () => {
       dispatch(
-        popupActions.openPopup(
-          PROGRAM_DEPOSIT_POPUP,
-          {
+        popupActions.openPopup({
+          component: ProgramDepositContainer,
+          popupProps: {
             programId
           },
-          closeInvestPopup
-        )
+          onSubmitPopup: closeInvestPopup
+        })
       );
     }
   };

@@ -5,7 +5,7 @@ import dashboardActions from "../../../../actions/dashboard-actions";
 import DashboardProgramList from "./dashboard-program-list/dashboard-program-list";
 import DashboardStatistic from "./dashboard-statistic/dashboard-statistic";
 import popupActions from "../../../../../popup/actions/popup-actions";
-import { PROGRAM_DEPOSIT_POPUP } from "../../../../../popup/actions/popup-actions.constants";
+import ProgramDepositContainer from "modules/program-deposit/components/program-deposit-container/program-deposit-container";
 
 class DashboardContainer extends PureComponent {
   componentDidMount() {
@@ -52,7 +52,12 @@ const mapDispatchToProps = dispatch => ({
     dispatch(dashboardActions.fetchDashboardPrograms());
   },
   openInvestPopup: programId => () => {
-    dispatch(popupActions.openPopup(PROGRAM_DEPOSIT_POPUP, { programId }));
+    dispatch(
+      popupActions.openPopup({
+        component: ProgramDepositContainer,
+        popupProps: { programId }
+      })
+    );
   }
 });
 

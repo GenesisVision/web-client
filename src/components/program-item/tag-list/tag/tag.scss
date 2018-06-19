@@ -1,0 +1,14 @@
+$tag-background-color: #dfe8ea;
+
+.tag {
+  padding: 0.4em 1em;
+  margin-bottom: 0.4em;
+  white-space: nowrap;
+  background-color: $tag-background-color;
+  font-family: NeuzeitGroLig;
+  font-size: 0.7em;
+  line-height: 1;
+  vertical-align: baseline;
+  text-align: center;
+  margin: 0 0.4em 0.4em;
+}

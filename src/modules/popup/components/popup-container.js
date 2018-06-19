@@ -6,18 +6,18 @@ import popupActions from "../actions/popup-actions";
 
 const PopupContainer = ({
   isOpen,
-  popupType,
+  component,
   popupProps,
   submitPopup,
   closePopup
 }) => {
-  if (!popupType) {
+  if (!component) {
     return null;
   }
   return (
     <Popup
       isOpen={isOpen}
-      type={popupType}
+      component={component}
       onSubmitPopup={submitPopup}
       onClosePopup={closePopup}
       popupProps={popupProps}
@@ -49,6 +49,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
-  PopupContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  mergeProps
+)(PopupContainer);

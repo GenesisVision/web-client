@@ -14,10 +14,9 @@
 
   @include media-breakpoint-phone() {
     flex-wrap: wrap;
-    max-height: 100px;
-    margin-top: 1rem;
+
     hr {
-      margin: 0.5rem 0;
+      margin: 1rem 0;
       display: flex;
       flex: 1 0 100%;
     }

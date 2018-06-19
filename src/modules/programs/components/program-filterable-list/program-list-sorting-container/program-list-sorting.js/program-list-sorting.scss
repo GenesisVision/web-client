@@ -9,7 +9,7 @@ $sorting-padding-mobile: 6px;
 .program-list-sorting {
   display: flex;
   flex: 1;
-  max-width: 338px;
+  max-width: 275px;
   font-size: 12px;
   text-align: center;
   text-transform: uppercase;
@@ -46,22 +46,15 @@ $sorting-padding-mobile: 6px;
 
 .sorting__order {
   cursor: pointer;
+  color: $alternate-color;
+  background-color: white;
   display: inline-block;
   border-left: 1px solid $border-color;
   padding: $sorting-padding;
+  border-top-right-radius: 10rem;
+  border-bottom-right-radius: 10rem;
   @include media-breakpoint-small-phone() {
     padding: $sorting-padding-mobile;
-  }
-
-  &:last-of-type {
-    border-top-right-radius: 10rem;
-    border-bottom-right-radius: 10rem;
-  }
-
-  &--selected {
-    cursor: default;
-    color: $alternate-color;
-    background-color: white;
   }
 }
 

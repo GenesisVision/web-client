@@ -25,7 +25,7 @@ const PeriodLeft = props => {
     );
   }
 
-  return <div>The program is not enabled</div>;
+  return <div className={className}>The program is not enabled</div>;
 };
 
 PeriodLeft.propTypes = propTypes;
