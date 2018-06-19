@@ -3,10 +3,9 @@ import classnames from "classnames";
 import Navigation from "../../modules/navigation/navigation";
 import NavButton from "../../modules/navigation/nav-button/nav-button";
 import history from "../../utils/history";
-import bodyDisableHOC from "../../shared/HOC/body-disable-HOC";
 import "./mobile-nav.css";
 
-class MobileNav extends Component {
+export default class MobileNav extends Component {
   componentDidMount() {
     history.listen(() => {
       this.props.navigationClose();
@@ -14,21 +13,19 @@ class MobileNav extends Component {
   }
 
   render() {
-    const { navigationClose } = this.props;
+    const { navigationClose, isOpen } = this.props;
     return (
-      <div className={classnames("mobile-nav")}>
-        <div className="mobile-nav__wrapper">
-          <div className="mobile-nav__header">
-            <NavButton className="h-button" />
+      isOpen && (
+        <div className={classnames("mobile-nav")}>
+          <div className="mobile-nav__wrapper">
+            <div className="mobile-nav__header">
+              <NavButton className="h-button" />
+            </div>
+            <Navigation className="mobile-navigation" />
           </div>
-          <Navigation className="mobile-navigation" />
+          <div className="mobile-nav__backdrop" onClick={navigationClose} />
         </div>
-        <div className="mobile-nav__backdrop" onClick={navigationClose} />
-      </div>
+      )
     );
   }
 }
-
-const MobileNavWrapped = bodyDisableHOC(MobileNav);
-
-export default MobileNavWrapped;

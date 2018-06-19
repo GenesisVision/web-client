@@ -1,22 +1,18 @@
-import React from "react";
 import { connect } from "react-redux";
-
 import MobileNav from "./mobile-nav";
 import { navigationClose } from "../../modules/navigation/actions/navigation-actions";
-
-const MobileNavContainer = ({ isOpen, navigationClose }) => {
-  return isOpen ? <MobileNav navigationClose={navigationClose} /> : null;
-};
 
 const mapStateToProps = state => ({
   isOpen: state.navigationData.isOpen
 });
 
-const ConnectedMobileNav = connect(
-  mapStateToProps,
-  {
-    navigationClose
-  }
-)(MobileNavContainer);
+const mapDispatchToProps = {
+  navigationClose
+};
 
-export default ConnectedMobileNav;
+const MobileNavContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MobileNav);
+
+export default MobileNavContainer;
