@@ -13,8 +13,8 @@ import { PROGRAMS } from "../../modules/programs/actions/programs-actions.consta
 import { PROGRAMS_ROUTE } from "../../modules/programs/programs.constants";
 import gvLogo from "./gv-logo.svg";
 import AuthControls from "../../modules/authorization-controls/authorization-controls";
-import NavButton from "../../modules/navigation/nav-button/nav-button";
-import Navigation from "../../modules/navigation/navigation";
+import NavButtonContainer from "../../modules/navigation/components/nav-button/nav-button-container";
+import NavigationContainer from "../../modules/navigation/components/navigation-container/navigation-container";
 import Button from "../button/button";
 
 const PAGES_WITH_FILTER = {
@@ -58,10 +58,10 @@ const Header = ({
           </NavLink>
         </div>
         <div className="header__nav-button">
-          <NavButton className="h-button" />
+          <NavButtonContainer className="h-button" />
         </div>
         <div className="header__navigation">
-          <Navigation />
+          <NavigationContainer />
         </div>
         <div className="header__filtering">
           {filterPaneControl(

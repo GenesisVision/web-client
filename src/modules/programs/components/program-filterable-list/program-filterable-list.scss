@@ -1,4 +1,5 @@
 @import "styles/_breakpoint.scss";
+@import "styles/_constants.scss";
 
 .program-filterable-list {
   display: flex;
@@ -11,13 +12,12 @@
   margin: 0 auto;
   &:not(:last-child) {
     @include media-breakpoint-desktop() {
-      height: calc(100vh - 70px);
+      height: calc(100vh - $header-height);
       overflow: hidden;
     }
 
     @include media-breakpoint-phone() {
       display: none;
-      height: calc(100vh - 89px);
     }
   }
 }

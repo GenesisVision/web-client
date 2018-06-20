@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import MobileNav from "./mobile-nav";
-import { navigationClose } from "../../modules/navigation/actions/navigation-actions";
+import { navigationClose } from "../../actions/navigation-actions";
 
 const mapStateToProps = state => ({
   isOpen: state.navigationData.isOpen

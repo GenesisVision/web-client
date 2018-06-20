@@ -1,31 +1,8 @@
 @import "styles/_breakpoint.scss";
-
-.body--disabled {
-  overflow: hidden;
-  @include breakpoint-desktop {
-    overflow: auto;
-  }
-}
-
-.app__main {
-  display: flex;
-  height: calc(100% - 70px);
-  @include media-breakpoint-phone() {
-    margin-top: 70px;
-  }
-}
-
-.app__sidebar {
-  flex: 1 0 65px;
-  max-width: 65px;
-  @include media-breakpoint-phone() {
-    display: none;
-  }
-}
+@import "styles/_constants.scss";
 
 .app__body {
-  flex: 1 1 100%;
   @include media-breakpoint-phone() {
-    max-width: 100%;
+    margin-top: $header-height;
   }
 }

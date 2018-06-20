@@ -1,18 +1,20 @@
-import { connect } from "react-redux";
 import classnames from "classnames";
 import { NavLink } from "react-router-dom";
 import React, { Component } from "react";
 
 import "./navigation.css";
-import { DASHBOARD_ROUTE } from "../../modules/dashboard/dashboard.constants";
-import { PROGRAMS_ROUTE } from "../../modules/programs/programs.constants";
-import { WALLET_ROUTE } from "../../modules/wallet/wallet.constants";
+import { DASHBOARD_ROUTE } from "modules/dashboard/dashboard.constants";
+import { PROGRAMS_ROUTE } from "modules/programs/programs.constants";
+import { WALLET_ROUTE } from "modules/wallet/wallet.constants";
 
-import { DashboardIcon, WalletIcon, TradersIcon } from "./media/icons.js";
-import { TOURNAMENT_ROUTE } from "../../modules/tournament/tournament.constants";
+import {
+  DashboardIcon,
+  WalletIcon,
+  TradersIcon
+} from "../../../media/icons.js";
+import { TOURNAMENT_ROUTE } from "modules/tournament/tournament.constants";
 
-import loginService from "../../modules/login/service/login-service";
-import { LOGIN_ROUTE } from "../../modules/login/login.constants";
+import { LOGIN_ROUTE } from "modules/login/login.constants";
 
 class Navigation extends Component {
   render() {
@@ -107,20 +109,4 @@ class Navigation extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  platformData: state.platformData.settings,
-  isAuthenticated: state.authData.isAuthenticated
-});
-
-const mapDispatchToProps = dispatch => ({
-  signOut: () => {
-    dispatch(loginService.logout());
-  }
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-  null,
-  { pure: false }
-)(Navigation);
+export default Navigation;
