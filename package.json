@@ -51,6 +51,9 @@
     "enzyme-adapter-react-16": "^1.1.1",
     "eslint-plugin-prettier": "^2.6.0",
     "husky": "^0.14.3",
+    "import-sort-cli": "^4.2.0",
+    "import-sort-parser-babylon": "^4.2.0",
+    "import-sort-style-module": "^4.2.0",
     "lint-staged": "^7.1.0",
     "prettier": "^1.12.1",
     "react-test-renderer": "^16.2.0",
@@ -68,9 +71,18 @@
     "eject": "react-scripts eject"
   },
   "lint-staged": {
+    "*.js": [
+      "import-sort --write"
+    ],
     "*.{js,json,scss,md}": [
       "prettier --write",
       "git add"
     ]
+  },
+  "importSort": {
+    ".js": {
+      "parser": "babylon",
+      "style": "module"
+    }
   }
 }
