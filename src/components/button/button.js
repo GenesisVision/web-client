@@ -15,15 +15,16 @@ const GVLink = ({ isExternal, children, href, ...other }) => {
 
 export default class Button extends Component {
   static propTypes = {
-    label: PropTypes.string.isRequired,
-    class: PropTypes.string,
+    label: PropTypes.string,
+    className: PropTypes.string,
     disabled: PropTypes.bool,
     fullWidth: PropTypes.bool,
     primary: PropTypes.bool,
     secondary: PropTypes.bool,
     onClick: PropTypes.func,
     href: PropTypes.string,
-    isExternal: PropTypes.bool
+    isExternal: PropTypes.bool,
+    icon: PropTypes.element
   };
 
   static defaultProps = {
@@ -32,7 +33,9 @@ export default class Button extends Component {
     fullWidth: false,
     primary: false,
     secondary: false,
-    isExternal: false
+    isExternal: false,
+    label: null,
+    icon: null
   };
 
   render() {
@@ -46,6 +49,7 @@ export default class Button extends Component {
       onClick,
       fullWidth,
       isExternal,
+      icon,
       ...other
     } = this.props;
     const cn = classnames("gv-btn", className, {
@@ -66,6 +70,7 @@ export default class Button extends Component {
         title={label}
         {...other}
       >
+        {icon}
         {label}
       </button>
     );

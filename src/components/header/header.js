@@ -7,14 +7,15 @@ import React from "react";
 import FilterIcon from "./filter-icon";
 import filterPaneActionsFactory from "../../modules/filter-pane/actions/filter-pane-actions";
 import loginService from "../../modules/login/service/login-service";
-import MobileNav from "./mobile-nav";
-import Button from "../../components/button/button";
 import "./header.css";
 import { HOME_ROUTE } from "../app.constants";
-import { LOGIN_ROUTE } from "../../modules/login/login.constants";
 import { PROGRAMS } from "../../modules/programs/actions/programs-actions.constants";
 import { PROGRAMS_ROUTE } from "../../modules/programs/programs.constants";
 import gvLogo from "./gv-logo.svg";
+import AuthControls from "../../modules/authorization-controls/authorization-controls";
+import NavButtonContainer from "../../modules/navigation/components/nav-button/nav-button-container";
+import NavigationContainer from "../../modules/navigation/components/navigation-container/navigation-container";
+import Button from "../button/button";
 
 const PAGES_WITH_FILTER = {
   [PROGRAMS_ROUTE]: {
@@ -23,22 +24,6 @@ const PAGES_WITH_FILTER = {
   }
 };
 
-const authorizedControl = signOut => (
-  <ul className="navbar-nav flex-row">
-    <li className="nav-item text-nowrap">
-      <Button label="Sign Out" secondary onClick={signOut} />
-    </li>
-  </ul>
-);
-
-const unauthorizedControl = () => (
-  <ul className="navbar-nav flex-row">
-    <li className="nav-item text-nowrap">
-      <Button label="Sign In" secondary href={LOGIN_ROUTE} />
-    </li>
-  </ul>
-);
-
 const filterPaneControl = (
   shouldShowFilterControl,
   isFilterOpen,
@@ -46,16 +31,14 @@ const filterPaneControl = (
 ) => {
   if (!shouldShowFilterControl) return null;
   return (
-    <div className="h-filtering">
-      <span
-        className={classnames({
-          "h-filtering--open": isFilterOpen
-        })}
-        onClick={toggleFilter}
-      >
-        <FilterIcon />
-      </span>
-    </div>
+    <Button
+      icon={<FilterIcon />}
+      onClick={toggleFilter}
+      className={classnames("h-button", {
+        "h-button--active": isFilterOpen
+      })}
+      secondary
+    />
   );
 };
 
@@ -69,11 +52,16 @@ const Header = ({
   return (
     <div className="header-wrapper">
       <header className="header">
-        <div className="header__sorting">
+        <div className="header__logo">
           <NavLink title="Home" to={HOME_ROUTE}>
             <img src={gvLogo} alt="Genesis Vision" />
           </NavLink>
-          <div className="h-sorting">Investor Portal</div>
+        </div>
+        <div className="header__nav-button">
+          <NavButtonContainer className="h-button" />
+        </div>
+        <div className="header__navigation">
+          <NavigationContainer />
         </div>
         <div className="header__filtering">
           {filterPaneControl(
@@ -81,10 +69,15 @@ const Header = ({
             isFilterOpen,
             toggleFilter
           )}
-          {isAuthenticated ? authorizedControl(signOut) : unauthorizedControl()}
+        </div>
+        <div className="header__auth">
+          <ul className="navbar-nav flex-row">
+            <li className="nav-item text-nowrap">
+              <AuthControls />
+            </li>
+          </ul>
         </div>
       </header>
-      <MobileNav />
       <LoadingBar className="header__loading-bar" />
     </div>
   );
@@ -130,4 +123,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Header);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  mergeProps
+)(Header);

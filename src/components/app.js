@@ -9,9 +9,8 @@ import Header from "./header/header";
 import history from "../utils/history";
 import platformActions from "../actions/platform-actions";
 import PopupContainer from "../modules/popup/components/popup-container";
-import Sidebar from "./sidebar/sidebar";
 import store from "../store/index";
-
+import MobileNavContainer from "../modules/navigation/components/mobile-nav/mobile-nav-container";
 import "./app.css";
 import AppRoutes from "./app.routes";
 
@@ -21,15 +20,11 @@ class AppContainer extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="app">
         <Route component={Header} />
-        <div className="app__main">
-          <div className="app__sidebar">
-            <Sidebar />
-          </div>
-          <div className="app__body">
-            <AppRoutes />
-          </div>
+        <MobileNavContainer />
+        <div className="app__body">
+          <AppRoutes />
         </div>
         <AlertMessageList />
         <PopupContainer />
