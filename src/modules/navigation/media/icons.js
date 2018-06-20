@@ -1,7 +1,9 @@
 import React from "react";
+import "./icons.css";
 export function DashboardIcon() {
   return (
     <svg
+      id="dashboard-icon"
       width="24px"
       height="17px"
       viewBox="0 0 24 17"
@@ -40,6 +42,7 @@ export function DashboardIcon() {
 export function SettingsIcon() {
   return (
     <svg
+      id="settings-icon"
       width="24px"
       height="24px"
       viewBox="0 0 24 24"
@@ -82,6 +85,7 @@ export function SettingsIcon() {
 export function WalletIcon() {
   return (
     <svg
+      id="wallet-icon"
       width="24px"
       height="24px"
       viewBox="0 0 24 24"
@@ -123,6 +127,7 @@ export function WalletIcon() {
 export function TradersIcon() {
   return (
     <svg
+      id="traders-icon"
       width="27px"
       height="15px"
       viewBox="0 0 27 15"
@@ -159,6 +164,40 @@ export function TradersIcon() {
           </g>
         </g>
       </g>
+    </svg>
+  );
+}
+
+export function CloseIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="14"
+      height="14"
+      viewBox="0 0 14 14"
+    >
+      <path
+        fill="#15BBAF"
+        fill-rule="nonzero"
+        d="M13.7.3c-.4-.4-1-.4-1.4 0L7 5.6 1.7.3C1.3-.1.7-.1.3.3c-.4.4-.4 1 0 1.4L5.6 7 .3 12.3c-.4.4-.4 1 0 1.4.2.2.4.3.7.3.3 0 .5-.1.7-.3L7 8.4l5.3 5.3c.2.2.5.3.7.3.2 0 .5-.1.7-.3.4-.4.4-1 0-1.4L8.4 7l5.3-5.3c.4-.4.4-1 0-1.4z"
+      />
+    </svg>
+  );
+}
+
+export function MenuIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="18"
+      height="12"
+      viewBox="0 0 18 12"
+    >
+      <path
+        fill="#15BBAF"
+        fill-rule="evenodd"
+        d="M1 0h16a1 1 0 0 1 0 2H1a1 1 0 0 1 0-2zm0 10h16a1 1 0 0 1 0 2H1a1 1 0 0 1 0-2zm0-5h16a1 1 0 0 1 0 2H1a1 1 0 0 1 0-2z"
+      />
     </svg>
   );
 }

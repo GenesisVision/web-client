@@ -40,6 +40,7 @@ const ProgramItem = ({
           isTournament={program.isTournament}
         />
       </Link>
+      <div className="program-item__hr" />
       <div
         className={classnames("program-item__info", {
           "program-item__info--has-tags": (program.tags || []).length > 0
@@ -69,7 +70,6 @@ const ProgramItem = ({
           endOfPeriod={program.endOfPeriod}
         />
       </div>
-      <div className="program-item__hr" />
       <div className="program-item__chart">
         <PIChart data={program.equityChart} />
       </div>

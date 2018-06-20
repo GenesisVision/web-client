@@ -1,8 +1,9 @@
 @import "styles/_colors.scss";
 @import "styles/_breakpoint.scss";
+@import "styles/_constants.scss";
 
 .filter-pane {
-  min-height: calc(100vh - 72px);
+  min-height: calc(100vh - $header-heigh);
   overflow: hidden;
   @include media-breakpoint-phone() {
     position: fixed;
