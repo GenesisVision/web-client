@@ -30,6 +30,7 @@
     }
 
     &__loading-bar {
+      left: 0;
       bottom: -23px;
     }
   }
@@ -48,6 +49,11 @@
     .program-search {
       @include media-breakpoint-tablet() {
         display: block;
+        max-width: 100%;
+      }
+
+      @include media-breakpoint-phone() {
+        min-width: calc(100% - 65px);
       }
 
       &__open {
