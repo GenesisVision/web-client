@@ -1,16 +1,26 @@
 @import "styles/_breakpoint.scss";
 
 .program-search-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+
+  &:not(:last-child) {
+    padding-right: 0.5rem;
+  }
   .program-search {
     position: relative;
-    flex: 1;
-    @include media-breakpoint-phone() {
+    display: flex;
+    width: 100%;
+    min-width: 530px;
+    max-width: 600px;
+    @include media-breakpoint-tablet() {
       display: none;
     }
 
     &__open {
       display: none;
-      @include media-breakpoint-phone() {
+      @include media-breakpoint-tablet() {
         display: inline-block;
       }
     }
@@ -25,7 +35,7 @@
   }
 
   &--is-open {
-    @include media-breakpoint-phone() {
+    @include media-breakpoint-tablet() {
       position: absolute;
       display: flex;
       left: 0;
@@ -36,19 +46,20 @@
     }
 
     .program-search {
-      @include media-breakpoint-phone() {
+      @include media-breakpoint-tablet() {
         display: block;
       }
 
       &__open {
-        @include media-breakpoint-phone() {
+        @include media-breakpoint-tablet() {
           display: none;
         }
       }
 
       &__close {
-        @include media-breakpoint-phone() {
+        @include media-breakpoint-tablet() {
           display: inline-block;
+          margin-right: 0.5rem;
         }
       }
     }

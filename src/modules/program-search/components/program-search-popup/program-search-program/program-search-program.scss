@@ -57,6 +57,7 @@
 
       &__value {
         justify-content: flex-start;
+        min-width: 4em;
         @include media-breakpoint-tablet() {
           min-width: 2em;
         }

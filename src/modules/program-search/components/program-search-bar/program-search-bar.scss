@@ -1,6 +1,7 @@
 @import "styles/_breakpoint.scss";
 
 .program-search-bar {
+  flex: 1;
   position: relative;
   display: flex;
   align-items: center;
@@ -11,14 +12,10 @@
     border-radius: 3px;
     box-sizing: border-box;
     outline: none;
-    width: 500px;
     margin: 0 10px;
+    width: 100%;
 
     @include media-breakpoint-tablet() {
-      width: 400px;
-    }
-
-    @include media-breakpoint-phone() {
       width: 100%;
     }
   }

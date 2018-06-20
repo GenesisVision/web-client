@@ -1,17 +1,17 @@
-import { connect } from "react-redux";
-import Button from "components/button/button";
+import "./program-search.css";
+
 import classnames from "classnames";
+import Button from "components/button/button";
 import ClickOutside from "components/click-outside/click-outside";
-import LoadingBar from "react-redux-loading-bar";
 import React from "react";
+import { connect } from "react-redux";
+import LoadingBar from "react-redux-loading-bar";
 
 import programSearchActions from "../actions/program-search-actions";
+import { PROGRAM_SEARCH_LOADING_BAR_SCOPE } from "../program.search.constants";
+import programSearchService from "../service/program-search-service";
 import ProgramSearchBar from "./program-search-bar/program-search-bar";
 import ProgramSearchPopup from "./program-search-popup/program-search-popup";
-import programSearchService from "../service/program-search-service";
-
-import "./program-search.css";
-import { PROGRAM_SEARCH_LOADING_BAR_SCOPE } from "../program.search.constants";
 
 const ProgramSearch = ({
   query,
@@ -39,7 +39,7 @@ const ProgramSearch = ({
     >
       <Button
         secondary
-        className="program-search__open"
+        className="program-search__open header__button"
         label={<i className="fas fa-search" title="Search" />}
         onClick={openSearchBar}
       />

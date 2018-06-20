@@ -1,15 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
-import NavButton from "./nav-button";
-import navigationService from "../../services/navigation-service";
 
-const NavButtonContainer = ({ isOpen, toggleNavigationState, className }) => {
+import navigationService from "../../services/navigation-service";
+import NavButton from "./nav-button";
+
+const NavButtonContainer = ({ isOpen, toggleNavigationState }) => {
   return (
-    <NavButton
-      isOpen={isOpen}
-      toggleNavigationState={toggleNavigationState}
-      className={className}
-    />
+    <NavButton isOpen={isOpen} toggleNavigationState={toggleNavigationState} />
   );
 };
 
