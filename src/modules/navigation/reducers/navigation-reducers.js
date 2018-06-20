@@ -6,7 +6,7 @@ import {
 
 const initialState = { isOpen: false };
 
-const navigationData = (state = initialState, action) => {
+const navigationReduser = (state = initialState, action) => {
   switch (action.type) {
     case NAVIGATION_OPEN:
       return { isOpen: true };
@@ -18,4 +18,4 @@ const navigationData = (state = initialState, action) => {
   }
 };
 
-export default navigationData;
+export default navigationReduser;
