@@ -26,7 +26,6 @@
   }
 
   &__navigation {
-    flex: 1;
     @include media-breakpoint-tablet() {
       display: none;
     }
@@ -63,99 +62,54 @@
   }
 
   &__filtering {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    //border-left: 1px solid $border-color;
+    border-right: 1px solid $border-color;
+    padding: 0 2rem;
+
     @include media-breakpoint-tablet() {
       z-index: 1;
+      border: 0;
+      padding: 0;
+    }
+    @include media-breakpoint-phone() {
+      order: 3;
     }
   }
-}
 
-.h-button {
-  height: 37px;
-  width: 37px;
-  color: $alternate-color;
+  &__button {
+    height: 35px;
+    width: 35px;
+    padding: 0.5rem 0.5rem;
+    color: $alternate-color;
 
-  &--active,
-  &:hover {
-    color: white;
-    background: $alternate-color;
-    border-color: $alternate-color;
+    & > & {
+      padding-left: 1rem;
+    }
 
-    svg path {
-      fill: white;
+    &--active,
+    &:hover {
+      color: white;
+      background: $alternate-color;
+      border-color: $alternate-color;
+
+      svg path {
+        fill: white;
+      }
     }
   }
-}
 
-.header__filtering {
-  display: flex;
-  align-items: center;
-  @include media-breakpoint-phone() {
-    order: 3;
-  }
-}
-
-.header__auth {
-  border-left: 1px solid $border-color;
-  padding-left: 2rem;
-  margin-left: 1rem;
-}
-
-.navigation {
-  @include media-breakpoint-phone() {
-    order: 1;
-  }
-}
-
-.header__link {
-  color: $text-color;
-  &:hover {
-    color: $text-color-light;
-  }
-}
-
-.header__loading-bar {
-  position: absolute;
-  height: 3px;
-  background: $main-color;
-  background: linear-gradient(to right, $main-color, $alternate-color);
-}
-
-.nav-link__profile {
-  color: $text-color !important;
-  &:hover {
-    color: $text-color-light !important;
-  }
-}
-
-.h-sorting {
-  font-size: 1.2rem;
-  font-weight: 700;
-  margin-left: 2rem;
-  @include media-breakpoint-phone() {
-    display: none;
-  }
-}
-
-.h-filtering {
-  display: flex;
-  span {
-    display: flex;
+  &__auth {
+    padding-left: 2rem;
   }
 
-  &:hover,
-  .h-filtering--open {
-    cursor: pointer;
-    .filter--border,
-    .filter--outer {
-      fill: $alternate-color;
-      stroke: $alternate-color;
-    }
-    .filter--inner {
-      fill: white;
-      stroke: white;
-    }
-    .filter--shadow {
-      fill-opacity: 1;
-    }
+  &__loading-bar {
+    position: absolute;
+    height: 3px;
+    background: $main-color;
+    background: linear-gradient(to right, $main-color, $alternate-color);
   }
 }

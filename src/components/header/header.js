@@ -1,21 +1,23 @@
-import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
-import classnames from "classnames";
-import LoadingBar from "react-redux-loading-bar";
-import React from "react";
+import "./header.css";
 
-import FilterIcon from "./filter-icon";
+import classnames from "classnames";
+import React from "react";
+import { connect } from "react-redux";
+import LoadingBar from "react-redux-loading-bar";
+import { NavLink } from "react-router-dom";
+
+import AuthControls from "../../modules/authorization-controls/authorization-controls";
 import filterPaneActionsFactory from "../../modules/filter-pane/actions/filter-pane-actions";
 import loginService from "../../modules/login/service/login-service";
-import "./header.css";
-import { HOME_ROUTE } from "../app.constants";
-import { PROGRAMS } from "../../modules/programs/actions/programs-actions.constants";
-import { PROGRAMS_ROUTE } from "../../modules/programs/programs.constants";
-import gvLogo from "./gv-logo.svg";
-import AuthControls from "../../modules/authorization-controls/authorization-controls";
 import NavButtonContainer from "../../modules/navigation/components/nav-button/nav-button-container";
 import NavigationContainer from "../../modules/navigation/components/navigation-container/navigation-container";
+import ProgramSearchContainer from "../../modules/program-search/components/program-search-container";
+import { PROGRAMS } from "../../modules/programs/actions/programs-actions.constants";
+import { PROGRAMS_ROUTE } from "../../modules/programs/programs.constants";
+import { HOME_ROUTE } from "../app.constants";
 import Button from "../button/button";
+import FilterIcon from "./filter-icon";
+import gvLogo from "./gv-logo.svg";
 
 const PAGES_WITH_FILTER = {
   [PROGRAMS_ROUTE]: {
@@ -34,8 +36,8 @@ const filterPaneControl = (
     <Button
       icon={<FilterIcon />}
       onClick={toggleFilter}
-      className={classnames("h-button", {
-        "h-button--active": isFilterOpen
+      className={classnames("header__button", {
+        "header__button--active": isFilterOpen
       })}
       secondary
     />
@@ -58,12 +60,14 @@ const Header = ({
           </NavLink>
         </div>
         <div className="header__nav-button">
-          <NavButtonContainer className="h-button" />
+          <NavButtonContainer />
         </div>
         <div className="header__navigation">
           <NavigationContainer />
         </div>
+
         <div className="header__filtering">
+          <ProgramSearchContainer />
           {filterPaneControl(
             shouldShowFilterControl,
             isFilterOpen,

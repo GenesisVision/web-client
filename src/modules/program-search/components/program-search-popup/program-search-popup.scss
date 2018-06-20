@@ -1,0 +1,28 @@
+@import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
+
+.program-search-popup {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 3rem;
+  min-height: 10rem;
+  max-height: 37rem;
+  overflow-y: auto;
+  background: white;
+  box-shadow: 0 100px 100px 0 rgba(194, 207, 212, 0.32);
+
+  @include media-breakpoint-phone() {
+    right: initial;
+    width: 100vw;
+    min-height: calc(100vh - 62px);
+    max-height: calc(100vh - 62px);
+  }
+
+  &__result {
+    text-align: right;
+    color: $main-color;
+    font-size: 0.7rem;
+    padding: 0.5rem 1rem 0;
+  }
+}

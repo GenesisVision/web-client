@@ -1,0 +1,31 @@
+@import "styles/_breakpoint.scss";
+
+.program-search-bar {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 0 10px;
+
+  &__input {
+    border: none;
+    border-radius: 3px;
+    box-sizing: border-box;
+    outline: none;
+    margin: 0 10px;
+    width: 100%;
+
+    @include media-breakpoint-tablet() {
+      width: 100%;
+    }
+  }
+
+  &__icon {
+    cursor: pointer;
+
+    &--clear {
+      position: absolute;
+      right: 0;
+    }
+  }
+}

@@ -30,6 +30,7 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  AuthorizationControls
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AuthorizationControls);

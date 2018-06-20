@@ -8,8 +8,11 @@
   &__item {
     display: flex;
     align-items: center;
-    padding: 0.2rem 2rem;
+    padding: 0 2rem;
     border-left: 1px solid $border-color;
+    &:nth-of-type(3) {
+      border-right: 1px solid $border-color;
+    }
   }
 
   &__icon {
@@ -17,6 +20,12 @@
 
     & > * {
       height: 100%;
+    }
+  }
+
+  &__label {
+    @media (min-width: 1200px) and (max-width: 1350px) {
+      display: none;
     }
   }
 
@@ -41,7 +50,7 @@
     }
 
     .fas {
-      color: #ccd5d4;
+      color: $inactive-icon-color;
     }
 
     &--active {

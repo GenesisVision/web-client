@@ -1,8 +1,10 @@
-import React from "react";
-import classnames from "classnames";
-import NavigationContainer from "../navigation-container/navigation-container";
-import NavButtonContainer from "../nav-button/nav-button-container";
 import "./mobile-nav.css";
+
+import classnames from "classnames";
+import React from "react";
+
+import NavButtonContainer from "../nav-button/nav-button-container";
+import NavigationContainer from "../navigation-container/navigation-container";
 
 const MobileNav = ({ navigationClose, isOpen }) => {
   if (!isOpen) return null;
@@ -11,7 +13,7 @@ const MobileNav = ({ navigationClose, isOpen }) => {
     <div className={classnames("mobile-nav")}>
       <div className="mobile-nav__wrapper">
         <div className="mobile-nav__header">
-          <NavButtonContainer className="h-button" />
+          <NavButtonContainer />
         </div>
         <NavigationContainer className="mobile-navigation" />
       </div>

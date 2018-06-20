@@ -9,6 +9,12 @@ class TraderDealListContainer extends PureComponent {
     this.props.fetchTraderDealList(this.props.programId);
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.programId !== this.props.programId) {
+      this.props.fetchTraderDealList(this.props.programId);
+    }
+  }
+
   render() {
     const { isPending, dealList, serverType, currency } = this.props;
     if (isPending || dealList === undefined) {

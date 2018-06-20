@@ -20,6 +20,7 @@
     "qs": "^6.5.1",
     "rc-slider": "^8.6.1",
     "react": "^16.3.2",
+    "react-content-loader": "^3.1.2",
     "react-dom": "^16.2.0",
     "react-i18next": "^7.6.0",
     "react-number-format": "^3.3.3",
@@ -34,6 +35,7 @@
     "reactstrap": "^6.0.1",
     "recharts": "^1.0.0-beta.10",
     "redux": "^4.0.0",
+    "redux-debounced": "^0.5.0",
     "redux-promise-middleware": "^5.1.1",
     "redux-thunk": "^2.2.0",
     "reselect": "^3.0.1",
@@ -49,6 +51,9 @@
     "enzyme-adapter-react-16": "^1.1.1",
     "eslint-plugin-prettier": "^2.6.0",
     "husky": "^0.14.3",
+    "import-sort-cli": "^4.2.0",
+    "import-sort-parser-babylon": "^4.2.0",
+    "import-sort-style-module": "^4.2.0",
     "lint-staged": "^7.1.0",
     "prettier": "^1.12.1",
     "react-test-renderer": "^16.2.0",
@@ -66,9 +71,18 @@
     "eject": "react-scripts eject"
   },
   "lint-staged": {
+    "*.js": [
+      "import-sort --write"
+    ],
     "*.{js,json,scss,md}": [
       "prettier --write",
       "git add"
     ]
+  },
+  "importSort": {
+    ".js": {
+      "parser": "babylon",
+      "style": "module"
+    }
   }
 }
