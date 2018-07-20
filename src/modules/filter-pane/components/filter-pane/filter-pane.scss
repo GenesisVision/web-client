@@ -28,6 +28,10 @@
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
   height: 100%;
   overflow: auto;
+  position: fixed;
+  @include media-breakpoint-desktop() {
+    position: relative;
+  }
   @include media-breakpoint-phone() {
     width: 100%;
     box-shadow: none;
@@ -38,7 +42,7 @@
   @include media-breakpoint-desktop() {
     opacity: 0.5;
     background-color: #000;
-    position: absolute;
+    position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
