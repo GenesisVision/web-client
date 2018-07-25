@@ -16,6 +16,7 @@
     "moment": "^2.22.1",
     "node-sass-chokidar": "^1.2.2",
     "npm-run-all": "^4.1.2",
+    "prop-types": "^15.6.2",
     "qrcode.react": "^0.8.0",
     "qs": "^6.5.1",
     "rc-slider": "^8.6.1",
@@ -72,7 +73,8 @@
   },
   "lint-staged": {
     "*.js": [
-      "import-sort --write"
+      "import-sort --write",
+      "git add"
     ],
     "*.{js,json,scss,md}": [
       "prettier --write",
