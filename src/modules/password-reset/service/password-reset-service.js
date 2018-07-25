@@ -1,11 +1,10 @@
-import { alertMessageActions } from "../../../shared/modules/alert-message/actions/alert-message-actions";
 import authActions from "../../../actions/auth-actions";
+import { HOME_ROUTE } from "../../../pages/root.constants";
 import authService from "../../../services/auth-service";
+import { alertMessageActions } from "../../../shared/modules/alert-message/actions/alert-message-actions";
 import history from "../../../utils/history";
 import passwordResetActions from "../actions/password-reset-actions";
-
 import { FORGOT_PASSWORD_PENDING_ROUTE } from "../password-reset.constants";
-import { HOME_ROUTE } from "../../../components/app.constants";
 
 const forgotPassword = data => dispatch => {
   return dispatch(passwordResetActions.forgotPassword(data)).then(() => {

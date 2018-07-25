@@ -1,8 +1,9 @@
+import { LOGIN_ROUTE } from "pages/login/login.routes";
 import React from "react";
 import { connect } from "react-redux";
-import loginService from "../../modules/login/service/login-service";
+
 import Button from "../../components/button/button";
-import { LOGIN_ROUTE } from "../../modules/login/login.constants";
+import loginService from "../../modules/login/service/login-service";
 
 const SignOut = ({ onClick, ...props }) => (
   <Button label="Sign Out" secondary onClick={onClick} {...props} />

@@ -14,7 +14,7 @@ import NavigationContainer from "../../modules/navigation/components/navigation-
 import ProgramSearchContainer from "../../modules/program-search/components/program-search-container";
 import { PROGRAMS } from "../../modules/programs/actions/programs-actions.constants";
 import { PROGRAMS_ROUTE } from "../../modules/programs/programs.constants";
-import { HOME_ROUTE } from "../app.constants";
+import { HOME_ROUTE } from "../../pages/root.constants";
 import Button from "../button/button";
 import FilterIcon from "./filter-icon";
 import gvLogo from "./gv-logo.svg";
@@ -127,8 +127,10 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   };
 };
 
-export default connect(
+const HeaderContainer = connect(
   mapStateToProps,
   mapDispatchToProps,
   mergeProps
 )(Header);
+
+export default HeaderContainer;

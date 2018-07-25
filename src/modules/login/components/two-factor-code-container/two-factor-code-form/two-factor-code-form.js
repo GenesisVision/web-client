@@ -1,11 +1,12 @@
-import { withFormik, Field } from "formik";
+import "../../login-container/login-form/login-form.css";
+
 import Button from "components/button/button";
+import { Field, withFormik } from "formik";
+import { LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE } from "pages/login/login.routes";
+import React from "react";
 import FormError from "shared/components/form/form-error/form-error";
 import InputText from "shared/components/form/input-text/input-text";
-import React from "react";
 
-import "../../login-container/login-form/login-form.css";
-import { LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE } from "../../../login.constants";
 import validationSchema from "./two-factor-code-form.validators";
 
 const TwoFactorCodeForm = ({ handleSubmit, isSubmitting, error }) => {

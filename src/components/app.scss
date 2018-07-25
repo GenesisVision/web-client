@@ -1,8 +1,0 @@
-@import "styles/_breakpoint.scss";
-@import "styles/_constants.scss";
-
-.app__body {
-  @include media-breakpoint-phone() {
-    margin-top: $header-height;
-  }
-}
