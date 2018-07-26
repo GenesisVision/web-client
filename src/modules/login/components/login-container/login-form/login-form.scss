@@ -7,10 +7,6 @@
   max-width: 300px;
   max-height: 100vh;
   margin: auto;
-  margin-top: 5rem;
-  @include media-breakpoint-phone() {
-    margin-top: 2rem;
-  }
 }
 
 .login__header {

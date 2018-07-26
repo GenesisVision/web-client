@@ -1,10 +1,9 @@
-import { connect } from "react-redux";
+import { HOME_ROUTE } from "pages/root.constants";
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
-import { HOME_ROUTE } from "components/app.constants";
-
-import LoginForm from "./login-form/login-form";
 import loginService from "../../service/login-service";
+import LoginForm from "./login-form/login-form";
 
 class LoginContainer extends Component {
   componentWillUnmount() {

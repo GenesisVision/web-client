@@ -27,10 +27,10 @@ $sorting-padding-mobile: 6px;
   cursor: pointer;
   white-space: nowrap;
   width: 100%;
-  padding: $sorting-padding;
   background-color: white;
-  @include media-breakpoint-small-phone() {
-    padding: $sorting-padding-mobile;
+  padding: $sorting-padding-mobile;
+  @include media-breakpoint-tablet() {
+    padding: $sorting-padding;
   }
 }
 
@@ -38,9 +38,9 @@ $sorting-padding-mobile: 6px;
   display: inline-block;
   white-space: nowrap;
   border-right: 1px solid $border-color;
-  padding: $sorting-padding;
-  @include media-breakpoint-small-phone() {
-    padding: $sorting-padding-mobile;
+  padding: $sorting-padding-mobile;
+  @include media-breakpoint-tablet() {
+    padding: $sorting-padding;
   }
 }
 
@@ -50,11 +50,11 @@ $sorting-padding-mobile: 6px;
   background-color: white;
   display: inline-block;
   border-left: 1px solid $border-color;
-  padding: $sorting-padding;
   border-top-right-radius: 10rem;
   border-bottom-right-radius: 10rem;
-  @include media-breakpoint-small-phone() {
-    padding: $sorting-padding-mobile;
+  padding: $sorting-padding-mobile;
+  @include media-breakpoint-tablet() {
+    padding: $sorting-padding;
   }
 }
 
@@ -129,7 +129,7 @@ $sorting-padding-mobile: 6px;
   box-sizing: border-box;
   background-color: #fff;
   color: #666;
-  cursor: posinter;
+  cursor: pointer;
   display: block;
   padding: 8px 10px;
   &:not(:last-of-type) {

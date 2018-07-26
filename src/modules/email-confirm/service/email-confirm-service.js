@@ -1,10 +1,9 @@
-import { alertMessageActions } from "../../../shared/modules/alert-message/actions/alert-message-actions";
 import authActions from "../../../actions/auth-actions";
+import { HOME_ROUTE } from "../../../pages/root.constants";
 import authService from "../../../services/auth-service";
-import emailConfirmActions from "../actions/email-confirm-actions";
+import { alertMessageActions } from "../../../shared/modules/alert-message/actions/alert-message-actions";
 import history from "../../../utils/history";
-
-import { HOME_ROUTE } from "../../../components/app.constants";
+import emailConfirmActions from "../actions/email-confirm-actions";
 
 const confirmEmail = (userId, code) => dispatch => {
   return dispatch(emailConfirmActions.emailConfirm(userId, code)).then(

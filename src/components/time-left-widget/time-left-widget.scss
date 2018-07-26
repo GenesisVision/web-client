@@ -11,7 +11,7 @@
     font-size: 0.875rem;
     white-space: nowrap;
     min-width: 95px;
-    @include breakpoint-desktop() {
+    @include media-breakpoint-desktop() {
       text-align: right;
     }
   }
@@ -22,7 +22,7 @@
     width: 100%;
   }
 
-  @include breakpoint-desktop() {
+  @include media-breakpoint-desktop() {
     &__progress {
       flex: 1;
       margin: 1rem;

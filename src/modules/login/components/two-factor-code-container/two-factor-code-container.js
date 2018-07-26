@@ -1,12 +1,11 @@
-import { connect } from "react-redux";
-import { NOT_FOUND_PAGE_ROUTE } from "shared/components/not-found/not-found";
-import { replace } from "react-router-redux";
+import { NOT_FOUND_PAGE_ROUTE } from "pages/not-found/not-found";
 import React, { Component } from "react";
-
-import loginService from "../../service/login-service";
-import TwoFactorCodeForm from "./two-factor-code-form/two-factor-code-form";
+import { connect } from "react-redux";
+import { replace } from "react-router-redux";
 
 import { TWO_FACTOR_CODE } from "../../login.constants";
+import loginService from "../../service/login-service";
+import TwoFactorCodeForm from "./two-factor-code-form/two-factor-code-form";
 
 class TwoFactorCodeContainer extends Component {
   componentDidMount() {

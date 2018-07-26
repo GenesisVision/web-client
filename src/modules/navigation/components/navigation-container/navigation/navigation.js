@@ -2,10 +2,9 @@ import "./navigation.css";
 
 import classnames from "classnames";
 import { DASHBOARD_ROUTE } from "modules/dashboard/dashboard.constants";
-import { LOGIN_ROUTE } from "modules/login/login.constants";
 import { PROGRAMS_ROUTE } from "modules/programs/programs.constants";
-import { TOURNAMENT_ROUTE } from "modules/tournament/tournament.constants";
 import { WALLET_ROUTE } from "modules/wallet/wallet.constants";
+import { LOGIN_ROUTE } from "pages/login/login.routes";
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 
@@ -17,27 +16,9 @@ import {
 
 class Navigation extends Component {
   render() {
-    const { isAuthenticated, platformData } = this.props;
-    const { data: platformSettings } = platformData;
-    const shouldRenderTournament =
-      platformSettings && platformSettings.isTournamentActive;
+    const { isAuthenticated } = this.props;
     return (
       <div className={classnames("navigation", this.props.className)}>
-        {shouldRenderTournament && (
-          <div className="navigation__item">
-            <NavLink
-              className="navigation__link"
-              activeClassName="navigation__link--active"
-              title="Tournament"
-              to={TOURNAMENT_ROUTE}
-            >
-              <i className="navigation__icon nav-dashboard">
-                <i className="fas fa-trophy" />
-              </i>
-              <span className="navigation__label">Tournament</span>
-            </NavLink>
-          </div>
-        )}
         <div className="navigation__item">
           <NavLink
             className="navigation__link"
