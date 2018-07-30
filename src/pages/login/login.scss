@@ -1,0 +1,77 @@
+@import "../../styles/_colors";
+@import "../../styles/_constants";
+@import "../../styles/_breakpoint";
+
+.login {
+  box-sizing: border-box;
+
+  &__left,
+  &__right {
+    display: flex;
+    position: relative;
+  }
+
+  &__right {
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__left,
+  &__header {
+    display: none;
+  }
+
+  &__header {
+    display: none;
+  }
+
+  .form,
+  &__tabs,
+  &__header {
+    padding: 0 33px;
+  }
+
+  @include media-breakpoint-tablet {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 80px 100px;
+    background: url(bgnd.svg) no-repeat bottom;
+
+    &__left {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__right {
+      justify-content: flex-end;
+      padding: 30px;
+      width: 500px;
+      border-radius: $border-radius;
+      background-color: $background-color;
+    }
+
+    &__header {
+      display: block;
+    }
+
+    &__logo {
+      display: flex;
+      width: 127px;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    &__description {
+      font-weight: 300;
+      font-size: 44px;
+      margin-top: 50%;
+    }
+
+    &__buttons {
+      margin-top: 240px;
+    }
+  }
+}

@@ -1,9 +1,9 @@
-import "./login-form.css";
-
-import { Field, withFormik } from "formik";
+import Form from "components/form/form";
+import Input from "components/form/input/input";
+import { withFormik } from "formik";
+import { GVButton } from "gv-react-components";
+import { FORGOT_PASSWORD_ROUTE } from "modules/password-reset/password-reset.constants";
 import React from "react";
-import FormError from "shared/components/form/form-error/form-error";
-import InputText from "shared/components/form/input-text/input-text";
 
 import validationSchema from "./login-form.validators";
 
@@ -20,31 +20,48 @@ const LoginForm = ({
   error
 }) => {
   return (
-    <form id="loginForm" onSubmit={handleSubmit} noValidate>
-      <div className="login">
-        <div className="login__header">Login</div>
-        <Field
-          type="email"
-          name="email"
-          placeholder="Email"
-          addon="fas fa-envelope"
-          component={InputText}
-        />
-        <Field
-          type="password"
-          name="password"
-          placeholder="Password"
-          addon="fas fa-lock"
-          component={InputText}
-        />
-        <FormError error={error} />
-      </div>
-    </form>
+    <Form
+      className={"login-form"}
+      id="loginForm"
+      onSubmit={handleSubmit}
+      noValidate
+    >
+      <Input
+        id={"loginEmail"}
+        type="email"
+        name="email"
+        onChange={handleChange}
+        placeholder="Email address"
+        value={values.email}
+        autoComplete="email"
+      />
+      <Input
+        id={"loginPassword"}
+        type="password"
+        name="password"
+        onChange={handleChange}
+        placeholder="Password"
+        value={values.password}
+        autoComplete="current-password"
+      />
+      <GVButton
+        id="loginSubmit"
+        title="submit login form"
+        color="primary"
+        variant="contained"
+        disabled={isSubmitting}
+      >
+        login
+      </GVButton>
+      <GVButton variant="text" color="secondary" href={FORGOT_PASSWORD_ROUTE}>
+        Forgot?
+      </GVButton>
+    </Form>
   );
 };
 
 export default withFormik({
-  displayName: "login",
+  displayName: "loginForm",
   mapPropsToValues: () => ({
     email: "",
     password: ""

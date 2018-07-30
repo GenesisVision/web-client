@@ -1,5 +1,3 @@
-import "../../login-container/login-form/login-form.css";
-
 import Button from "components/button/button";
 import { Field, withFormik } from "formik";
 import { LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE } from "pages/login/login.routes";
