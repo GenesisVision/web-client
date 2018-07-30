@@ -50,6 +50,7 @@ const LoginForm = ({
         color="primary"
         variant="contained"
         disabled={isSubmitting}
+        type="submit"
       >
         login
       </GVButton>

@@ -15,13 +15,7 @@ class Root extends Component {
     this.props.fetchPlatformSettings();
   }
   render() {
-    return (
-      <div className="app">
-        <div className="app__body">
-          <RootRoutes />
-        </div>
-      </div>
-    );
+    return <RootRoutes />;
   }
 }
 
