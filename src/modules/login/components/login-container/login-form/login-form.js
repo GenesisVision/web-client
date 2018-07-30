@@ -42,6 +42,7 @@ const LoginForm = ({ t, isSubmitting, handleSubmit }) => {
         color="primary"
         variant="contained"
         disabled={isSubmitting}
+        type="submit"
       >
         {t("login-form.login")}
       </GVButton>
