@@ -1,0 +1,2 @@
+export const PROFILE_HEADER = "PROFILE_HEADER";
+export const PROFILE_REQUEST_TIMEOUT = 1000 * 60;
