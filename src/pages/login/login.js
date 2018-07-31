@@ -1,9 +1,9 @@
 import "./login.scss";
 
-import GenesisVision from "components/genesis-vision/genesis-vision";
-import Logo from "components/logo/logo";
+import GvBrand from "components/gv-brand/gv-brand";
+import GvLogo from "components/gv-logo/gv-logo";
 import Page from "components/page/page";
-import { GVButton } from "gv-react-components";
+import { GVButton, GVTab, GVTabs } from "gv-react-components";
 import LoginRoutes from "pages/login/login.routes";
 import React from "react";
 
@@ -12,23 +12,28 @@ const Login = () => {
     <Page className={"login"} title={"Login"}>
       <div className="login__left">
         <div className="login__logo">
-          <Logo />
-          <GenesisVision />
+          <GvLogo />
+          <GvBrand />
         </div>
         <h2 className="login__description">
-          A Brief History<br /> Of Creation
+          A Brief History
+          <br /> Of Creation
         </h2>
       </div>
       <div className="login__right">
         <h1 className="login__header">Login</h1>
-        <div className="tab-list login__tabs">
-          <span className={"tab-list__item tab-list__item--active"}>
-            Investor
-          </span>
-          <span className={"tab-list__item"}>
-            <a href={process.env.REACT_APP_MANAGER_PORTAL_URL}>Manager</a>
-          </span>
+        <div className="login__tabs">
+          <GVTabs value={"investor"}>
+            <GVTab value={"investor"} label={"Investor"} />
+            <GVTab
+              value={"manager"}
+              label={
+                <a href={process.env.REACT_APP_MANAGER_PORTAL_URL}>Manager</a>
+              }
+            />
+          </GVTabs>
         </div>
+
         <LoginRoutes />
 
         <div className="login__buttons">
