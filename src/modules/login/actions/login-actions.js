@@ -1,9 +1,10 @@
-import swaggerInvestorApi from "../../../services/api-client/swagger-investor-api";
+import authApi from "services/api-client/auth-api";
+
 import * as actionTypes from "./login-actions.constants";
 
 const loginUser = loginData => ({
   type: actionTypes.LOGIN,
-  payload: swaggerInvestorApi.apiInvestorAuthSignInPostWithHttpInfo({
+  payload: authApi.v10AuthSigninInvestorPost({
     model: loginData
   })
 });
