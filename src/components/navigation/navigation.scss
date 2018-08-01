@@ -21,13 +21,8 @@
   }
 
   &__link {
-    &:after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-    }
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
   }
 }
