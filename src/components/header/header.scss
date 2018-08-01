@@ -1,2 +1,10 @@
 @import "styles/_colors.scss";
 @import "styles/_breakpoint.scss";
+
+.header {
+  display: flex;
+
+  &__navigation {
+    //margin-left: 32px;
+  }
+}
