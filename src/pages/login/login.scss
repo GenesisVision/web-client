@@ -12,7 +12,6 @@
   }
 
   &__right {
-    height: 100%;
     flex-direction: column;
     justify-content: space-between;
   }
@@ -32,12 +31,13 @@
     padding: 0 33px;
   }
 
-  @include media-breakpoint-tablet {
+  @include media-breakpoint-desktop {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     padding: 80px 100px;
     background: url(bgnd.svg) no-repeat bottom;
+    background-size: 100%;
 
     &__left {
       display: flex;
@@ -45,11 +45,21 @@
     }
 
     &__right {
+      display: flex;
       justify-content: flex-end;
       padding: 30px;
-      width: 500px;
+      width: 400px;
       border-radius: $border-radius;
       background-color: $background-color;
+    }
+
+    &__content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: scroll;
+      height: 100%;
+      max-height: 650px;
     }
 
     &__header {
@@ -68,10 +78,42 @@
       font-weight: 300;
       font-size: 44px;
       margin-top: 50%;
+      max-width: 330px;
+      letter-spacing: 0.3px;
     }
+  }
 
-    &__buttons {
-      margin-top: 240px;
+  @include media-breakpoint-desktop-large {
+    &__right {
+      width: 550px;
     }
+  }
+
+  .sign-up {
+    margin-left: 33px;
+    font-size: 11px;
+
+    &__desc {
+      margin-right: 30px;
+    }
+  }
+
+  .login-input {
+    margin-bottom: 16px;
+  }
+
+  .login-button {
+    margin-top: 50px;
+  }
+
+  .gv-text-field__wrapper {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+  }
+
+  .gv-text-field__error {
+    bottom: 0;
   }
 }
