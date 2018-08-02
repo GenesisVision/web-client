@@ -1,9 +1,9 @@
-import React from "react";
+import "./facets.scss";
+
 import PropTypes from "prop-types";
+import React from "react";
 
 import Facet, { facetShape } from "./facet";
-
-import "./facets.scss";
 
 const Facets = ({ facets }) => {
   facets = [
