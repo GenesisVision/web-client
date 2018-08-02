@@ -2,6 +2,26 @@
   "app": {
     "header": "Manager Portal"
   },
+  "login-page": {
+    "text": "A Brief History Of Creation",
+    "header": "Login",
+    "tabs": {
+      "investor": "Investor",
+      "manager": "Manager"
+    },
+    "signup": {
+      "text": "Don’t have an account?",
+      "title": "Sign up"
+    }
+  },
+  "login-form": {
+    "placeholder": {
+      "email": "Email address",
+      "password": "Password"
+    },
+    "forgot": "forgot?",
+    "login": "Login"
+  },
   "time-left-widget": {
     "day": "Day left",
     "day_plural": "Days left",
@@ -20,29 +40,24 @@
   "program-statistic": {
     "manager-share": {
       "text": "Manager's Share",
-      "tooltip":
-        "Manager’s funds share – a percentage showing the proportion of funds belonging to the manager."
+      "tooltip": "Manager’s funds share – a percentage showing the proportion of funds belonging to the manager."
     },
     "avg-profit": {
       "text": "Avg Profit",
-      "tooltip":
-        "Avg. profit – is the average profit for the period in relation to the starting balance."
+      "tooltip": "Avg. profit – is the average profit for the period in relation to the starting balance."
     },
     "available-to-invest": {
       "text": "Available to Invest",
-      "tooltip":
-        "Available to invest - is the number of manager's tokens which are available to purchase."
+      "tooltip": "Available to invest - is the number of manager's tokens which are available to purchase."
     },
     "trades": {
       "text": "Trades",
-      "tooltip":
-        "Trades show the number of financial operations conducted by the manager."
+      "tooltip": "Trades show the number of financial operations conducted by the manager."
     },
     "investors": {
       "text": "Investor",
       "text_plural": "Investors",
-      "tooltip":
-        "Investor - is a Genesis Vision client, investors choose a manager in the Program Ratings and invest money in their investment programs."
+      "tooltip": "Investor - is a Genesis Vision client, investors choose a manager in the Program Ratings and invest money in their investment programs."
     },
     "program-item-balance": {
       "text": "Balance",
@@ -54,20 +69,17 @@
     },
     "balance": {
       "text": "Balance",
-      "tooltip":
-        "Balance - is the total USD value of funds that are managed in the investment program."
+      "tooltip": "Balance - is the total USD value of funds that are managed in the investment program."
     }
   },
   "program-deal-list": {
     "symbol": {
       "text": "Symbol",
-      "tooltip":
-        "Symbol is a trading instrument which was used by a manager in a trade."
+      "tooltip": "Symbol is a trading instrument which was used by a manager in a trade."
     },
     "volume": {
       "text": "Volume",
-      "tooltip":
-        "Volume is the number of units offered for sale or purchase. Usually, volume measured in \"lots\" - the number of currency units you will buy or sell."
+      "tooltip": "Volume is the number of units offered for sale or purchase. Usually, volume measured in \"lots\" - the number of currency units you will buy or sell."
     },
     "ticket": {
       "text": "Ticket",
@@ -75,18 +87,15 @@
     },
     "price": {
       "text": "Price",
-      "tooltip":
-        "Price is a price of base trading instrument unit the value of quoted currency (in case of a currency pair)."
+      "tooltip": "Price is a price of base trading instrument unit the value of quoted currency (in case of a currency pair)."
     },
     "price-open": {
       "text": "Price Open",
-      "tooltip":
-        "Price open – is a price which was at the opening moment of the trade."
+      "tooltip": "Price open – is a price which was at the opening moment of the trade."
     },
     "price-close": {
       "text": "Price Close",
-      "tooltip":
-        "Price close – is a price which was at the closing moment of the trade."
+      "tooltip": "Price close – is a price which was at the closing moment of the trade."
     },
     "profit": {
       "text": "Profit",
@@ -94,8 +103,7 @@
     },
     "direction": {
       "text": "Direction",
-      "tooltip":
-        "Direction is an indicator of the direction of the trade (i.e. \"Buy\" or \"Sell\")."
+      "tooltip": "Direction is an indicator of the direction of the trade (i.e. \"Buy\" or \"Sell\")."
     },
     "date": {
       "text": "Date",
@@ -119,30 +127,25 @@
       "text": "Period Duration",
       "bubble": "day",
       "bubble_plural": "days",
-      "tooltip":
-        "Period duration - is a period that is defined by a manager at the end of which all trading positions are closed with a subsequent profit distribution."
+      "tooltip": "Period duration - is a period that is defined by a manager at the end of which all trading positions are closed with a subsequent profit distribution."
     },
     "success-fee": {
       "text": "Success Fee",
-      "tooltip":
-        "Success fee is an additional successful trading fee that is charged from the investor’s profit at the end of the reporting period."
+      "tooltip": "Success fee is an additional successful trading fee that is charged from the investor’s profit at the end of the reporting period."
     },
     "management-fee": {
       "text": "Management Fee",
-      "tooltip":
-        "Management fee - is an obligatory annual fee, charged at the end of the reporting period from the total amount of funds invested in this investment program."
+      "tooltip": "Management fee - is an obligatory annual fee, charged at the end of the reporting period from the total amount of funds invested in this investment program."
     }
   },
   "dashboard-statistic": {
     "portfolio-value": {
       "text": "Portfolio Value",
-      "tooltip":
-        "Portfolio value is the value of all your tokens from all investment programs."
+      "tooltip": "Portfolio value is the value of all your tokens from all investment programs."
     },
     "profit": {
       "text": "Profit",
-      "tooltip":
-        "Profit is your total profit from all investment programs in GVT value."
+      "tooltip": "Profit is your total profit from all investment programs in GVT value."
     },
     "invested": {
       "text": "Invested",
@@ -154,18 +157,15 @@
     },
     "my-profit": {
       "text": "My Profit",
-      "tooltip":
-        "My profit -  the total profit that you earned from this program."
+      "tooltip": "My profit -  the total profit that you earned from this program."
     },
     "my-share": {
       "text": "My Share",
-      "tooltip":
-        "My share is the percentage of your invested funds in relation to the total amount of funds managed in the program."
+      "tooltip": "My share is the percentage of your invested funds in relation to the total amount of funds managed in the program."
     },
     "est-value": {
       "text": "Est. value",
-      "tooltip":
-        "Est.value - the estimated USD value of your tokens from this investment program."
+      "tooltip": "Est.value - the estimated USD value of your tokens from this investment program."
     }
   },
   "dashboard": {
@@ -174,8 +174,7 @@
   },
   "program-deposit": {
     "header": "Buy Tokens",
-    "notification":
-      "Your request will be processed at the end of the reporting period.",
+    "notification": "Your request will be processed at the end of the reporting period.",
     "available-to-invest": "Available To Invest",
     "your-gvt": "Your GVT",
     "enter-gvt-amount": "Enter GVT amount",

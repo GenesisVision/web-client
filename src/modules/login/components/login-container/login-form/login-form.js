@@ -1,56 +1,69 @@
-import "./login-form.css";
-
-import { Field, withFormik } from "formik";
+import Form from "components/form/form";
+import { withFormik } from "formik";
+import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
+import { FORGOT_PASSWORD_ROUTE } from "modules/password-reset/password-reset.constants";
 import React from "react";
-import FormError from "shared/components/form/form-error/form-error";
-import InputText from "shared/components/form/input-text/input-text";
+import { translate } from "react-i18next";
+import { compose } from "redux";
 
 import validationSchema from "./login-form.validators";
 
-const LoginForm = ({
-  values,
-  touched,
-  errors,
-  isSubmitting,
-  handleChange,
-  handleBlur,
-  handleSubmit,
-  handleReset,
-  dirty,
-  error
-}) => {
+const LoginForm = ({ t, isSubmitting, handleSubmit, error }) => {
   return (
-    <form id="loginForm" onSubmit={handleSubmit} noValidate>
-      <div className="login">
-        <div className="login__header">Login</div>
-        <Field
-          type="email"
-          name="email"
-          placeholder="Email"
-          addon="fas fa-envelope"
-          component={InputText}
-        />
-        <Field
-          type="password"
-          name="password"
-          placeholder="Password"
-          addon="fas fa-lock"
-          component={InputText}
-        />
-        <FormError error={error} />
-      </div>
-    </form>
+    <Form
+      className={"login-form"}
+      id="loginForm"
+      onSubmit={handleSubmit}
+      noValidate
+    >
+      <GVFormikField
+        id={"loginEmail"}
+        type="email"
+        name="email"
+        placeholder={t("login-form.placeholder.email")}
+        autoComplete="email"
+        className={"login-input gv-text-field"}
+        CustomComponent={GVTextField}
+      />
+      <GVFormikField
+        id={"loginPassword"}
+        type="password"
+        name="password"
+        placeholder={t("login-form.placeholder.password")}
+        autoComplete="current-password"
+        className={"login-input gv-text-field"}
+        adornment={<a href={FORGOT_PASSWORD_ROUTE}>{t("login-form.forgot")}</a>}
+        CustomComponent={GVTextField}
+      />
+      <div className={"form__error"}>{error}</div>
+      <GVButton
+        className="login-button"
+        id="loginSubmit"
+        title="submit login form"
+        color="primary"
+        variant="contained"
+        disabled={isSubmitting}
+        type="submit"
+      >
+        {t("login-form.login")}
+      </GVButton>
+    </Form>
   );
 };
 
-export default withFormik({
-  displayName: "login",
-  mapPropsToValues: () => ({
-    email: "",
-    password: ""
-  }),
-  validationSchema: validationSchema,
-  handleSubmit: (values, { props, setSubmitting }) => {
-    props.onSubmit(values, setSubmitting);
-  }
-})(LoginForm);
+const withTranslationAndFormik = compose(
+  translate(),
+  withFormik({
+    displayName: "loginForm",
+    mapPropsToValues: () => ({
+      email: "",
+      password: ""
+    }),
+    validationSchema: validationSchema,
+    handleSubmit: (values, { props, setSubmitting }) => {
+      props.onSubmit(values, setSubmitting);
+    }
+  })
+)(LoginForm);
+
+export default withTranslationAndFormik;

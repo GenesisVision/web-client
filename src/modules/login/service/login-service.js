@@ -12,7 +12,7 @@ import { RECOVERY_CODE, TWO_FACTOR_CODE } from "../login.constants";
 const login = (loginData, from, onCatch) => dispatch => {
   return dispatch(loginActions.loginUser(loginData))
     .then(response => {
-      authService.storeToken(response.value.data);
+      authService.storeToken(response.value);
       dispatch(authActions.updateToken());
       history.push(from);
     })
