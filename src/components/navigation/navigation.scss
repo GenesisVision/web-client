@@ -1,0 +1,28 @@
+@import "../../styles/colors";
+
+.navigation {
+  display: flex;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    color: $main-color;
+    text-decoration: none;
+    position: relative;
+    opacity: 0.4;
+    margin-left: 80px;
+    &--active {
+      opacity: 1;
+    }
+  }
+
+  &__icon {
+    margin-right: 24px;
+  }
+
+  &__link {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+  }
+}
