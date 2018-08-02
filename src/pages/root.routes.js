@@ -3,6 +3,7 @@ import AppPrivateRoute from "pages/app-routes/app-private-route";
 import { AppRoute } from "pages/app-routes/app-route";
 import Dashboard from "pages/dashboard/dashboard";
 import Login from "pages/login/login";
+import { HOME_ROUTE } from "pages/root.constants";
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 
@@ -15,7 +16,7 @@ const RootRoutes = () => (
     <Route path={LOGIN_ROUTE} component={Login} />
     <AppRoute path={PROGRAMS_ROUTE} component={ProgramsRoutes} />
     <AppPrivateRoute path={DASHBOARD_ROUTE} component={Dashboard} />
-    <Redirect from="/" to={PROGRAMS_ROUTE} />
+    <Redirect from={HOME_ROUTE} to={PROGRAMS_ROUTE} />
     <Route component={NotFoundPage} />
   </Switch>
 );
