@@ -1,12 +1,11 @@
-import { Redirect, Route, Switch } from "react-router-dom";
 import Login from "pages/login/login";
 import React from "react";
-
-import NotFoundPage from "./not-found/not-found";
-import Programs from "./programs/programs";
+import { Redirect, Route, Switch } from "react-router-dom";
 
 import { LOGIN_ROUTE } from "./login/login.routes";
+import NotFoundPage from "./not-found/not-found";
 import ProgramsRoutes, { PROGRAMS_ROUTE } from "./programs/program.routes";
+import Programs from "./programs/programs";
 
 const RootRoutes = () => (
   <Switch>
