@@ -8,7 +8,7 @@ import { compose } from "redux";
 
 import validationSchema from "./login-form.validators";
 
-const LoginForm = ({ t, isSubmitting, handleSubmit }) => {
+const LoginForm = ({ t, isSubmitting, handleSubmit, error }) => {
   return (
     <Form
       className={"login-form"}
@@ -35,6 +35,7 @@ const LoginForm = ({ t, isSubmitting, handleSubmit }) => {
         adornment={<a href={FORGOT_PASSWORD_ROUTE}>{t("login-form.forgot")}</a>}
         CustomComponent={GVTextField}
       />
+      <div className={"form__error"}>{error}</div>
       <GVButton
         className="login-button"
         id="loginSubmit"
