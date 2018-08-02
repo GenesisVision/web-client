@@ -6,3 +6,5 @@ const fetchHeaderInfo = () => ({
   type: PROFILE_HEADER,
   payload: profileApi.v10ProfileHeaderGet(authService.getAuthArg())
 });
+
+export { fetchHeaderInfo };
