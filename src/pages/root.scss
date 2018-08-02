@@ -1,2 +1,10 @@
 @import "../styles/_breakpoint.scss";
 @import "../styles/_constants.scss";
+
+#root,
+.app,
+.app__body,
+.page {
+  height: 100%;
+  color: white;
+}
