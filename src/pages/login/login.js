@@ -16,7 +16,7 @@ const Login = ({ t }) => {
           <GvLogo />
           <GvBrand />
         </div>
-        <h2 className="login__description">{t("login-page.desc")}</h2>
+        <h2 className="login__description">{t("login-page.text")}</h2>
       </div>
       <div className="login__right">
         <div className="login__content">
@@ -38,7 +38,7 @@ const Login = ({ t }) => {
           <LoginRoutes />
 
           <div className="sign-up">
-            <span className="sign-up__desc">{t("login-page.signup.desc")}</span>
+            <span className="sign-up__desc">{t("login-page.signup.text")}</span>
             <GVButton variant="outlined" color="secondary">
               {t("login-page.signup.title")}
             </GVButton>
