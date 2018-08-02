@@ -1,3 +1,4 @@
+import profileHeaderReducer from "modules/profile-header/reducer/profile-header-reducer";
 import { loadingBarReducer } from "react-redux-loading-bar";
 import { routerReducer } from "react-router-redux";
 import { combineReducers } from "redux";
@@ -33,6 +34,7 @@ export default combineReducers({
   emailConfirmData: emailConfirmReducer,
   passwordResetData: passwordResetReducer,
   alertMessages: alertMessagesReducer,
+  profileHeader: profileHeaderReducer,
   profileData: profileReducer,
   walletData: walletReducer,
   dashboardData: dashboardReducer,
