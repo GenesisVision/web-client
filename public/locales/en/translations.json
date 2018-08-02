@@ -3,14 +3,14 @@
     "header": "Manager Portal"
   },
   "login-page": {
-    "desc": "A Brief History Of Creation",
+    "text": "A Brief History Of Creation",
     "header": "Login",
     "tabs": {
       "investor": "Investor",
       "manager": "Manager"
     },
     "signup": {
-      "desc": "Don’t have an account?",
+      "text": "Don’t have an account?",
       "title": "Sign up"
     }
   },
