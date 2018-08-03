@@ -2,11 +2,8 @@ import { PLATFORM_SETTINGS } from "../../../actions/platform-actions";
 import { SUCCESS_SUFFIX } from "../../../shared/reducers/api-reducer/api-reducer";
 import filteringReducerFactory from "../../filtering/reducers/filtering-reducers";
 import { normalizeFilteringSelector } from "../../filtering/selectors/filtering-selectors";
-import { PROGRAMS } from "../actions/programs-actions.constants";
-import {
-  MAP_DEFAULT_FILTERS_FROM_SERVER,
-  PROGRAMS_DEFAULT_FILTERS
-} from "../programs.constants";
+import { PROGRAMS } from "../actions/programs-actions";
+import { PROGRAMS_DEFAULT_FILTERS } from "../programs.constants";
 
 const updateFilter = (state, filter) => {
   if (state.filters.some(x => x.name === filter.name)) {

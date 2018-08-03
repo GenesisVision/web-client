@@ -1,5 +1,5 @@
 import sortingReducerFactory from "../../sorting/reducers/sorting-reducers";
-import { PROGRAMS } from "../actions/programs-actions.constants";
+import { PROGRAMS } from "../actions/programs-actions";
 import { SORTING_FILTER_VALUE } from "../programs.constants";
 
 const programsSortingReducer = sortingReducerFactory({
