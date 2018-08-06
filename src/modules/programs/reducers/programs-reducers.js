@@ -3,13 +3,13 @@ import apiReducerFactory from "shared/reducers/api-reducer/api-reducer";
 
 import pagingReducerFactory from "../../paging/reducers/paging-reducers";
 import { PROGRAMS } from "../actions/programs-actions";
-import programsDataReducer from "./programs-data-reducer";
+import programsFavoritesReducer from "./programs-favorites-reducer";
 import programsFilteringReducer from "./programs-filtering-reducer";
 import programsSortingReducer from "./programs-sorting-reducer";
 
 const programsReducer = combineReducers({
   programs: combineReducers({
-    items: apiReducerFactory({ apiType: PROGRAMS }, programsDataReducer),
+    items: apiReducerFactory({ apiType: PROGRAMS }, programsFavoritesReducer),
     filtering: programsFilteringReducer,
     sorting: programsSortingReducer,
     paging: pagingReducerFactory({
