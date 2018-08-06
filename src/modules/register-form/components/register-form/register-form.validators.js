@@ -1,4 +1,4 @@
-import { string, object, ref } from "yup";
+import { object, ref, string } from "yup";
 
 import {
   emailValidator,

@@ -1,38 +1,49 @@
-import "./reset-password.css";
+import "./register-form.css";
 
 import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import React from "react";
 
-import FormError from "../../../../../shared/components/form/form-error/form-error";
-import validationSchema from "./reset-password.validators";
+import FormError from "../../../../shared/components/form/form-error/form-error";
+import validationSchema from "./register-form.validators";
 
-const ResetPassword = ({ isSubmitting, handleSubmit, error }) => {
+const RegisterForm = ({ isSubmitting, handleSubmit, error }) => {
   return (
-    <form id="resetPasswordForm" onSubmit={handleSubmit} noValidate>
+    <form id="registerForm" onSubmit={handleSubmit} noValidate>
+      <GVFormikField
+        type="email"
+        name="email"
+        placeholder="Email"
+        component={GVTextField}
+      />
+
       <GVFormikField
         type="new-password"
         name="password"
-        placeholder="New Password"
+        placeholder="Password"
         component={GVTextField}
       />
+
       <GVFormikField
         type="new-password"
         name="confirmPassword"
-        placeholder="Confirm New Password"
+        placeholder="Confirm Password"
         component={GVTextField}
       />
+
       <FormError error={error} />
-      <GVButton type="submit" id="resetPasswordSubmit">
-        Submit
+
+      <GVButton type="submit" id="registerFormSubmit">
+        Sign Up
       </GVButton>
     </form>
   );
 };
 
 export default withFormik({
-  displayName: "resetPassword",
+  displayName: "register",
   mapPropsToValues: () => ({
+    email: "",
     password: "",
     confirmPassword: ""
   }),
@@ -40,4 +51,4 @@ export default withFormik({
   handleSubmit: (values, { props, setSubmitting }) => {
     props.onSubmit(values, setSubmitting);
   }
-})(ResetPassword);
+})(RegisterForm);

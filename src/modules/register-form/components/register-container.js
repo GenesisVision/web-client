@@ -1,5 +1,5 @@
-import { connect } from "react-redux";
 import React from "react";
+import { connect } from "react-redux";
 
 import registerService from "../service/register-service";
 import RegisterForm from "./register-form/register-form";
@@ -8,8 +8,7 @@ const RegisterContainer = ({
   isAuthenticated,
   isPending,
   errorMessage,
-  register,
-  alreadyAuthenticated
+  register
 }) => {
   const handleSubmit = (registerFormData, setSubmitting) => {
     register(registerFormData, setSubmitting);
@@ -18,9 +17,9 @@ const RegisterContainer = ({
   return <RegisterForm onSubmit={handleSubmit} error={errorMessage} />;
 };
 
-const mapStateToProps = state => {
-  const { isPending, errorMessage } = state.registerData;
-  const { isAuthenticated } = state.authData;
+const mapStateToProps = ({ registerData, authData }) => {
+  const { isPending, errorMessage } = registerData;
+  const { isAuthenticated } = authData;
   return { isAuthenticated, isPending, errorMessage };
 };
 
@@ -32,4 +31,7 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(RegisterContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RegisterContainer);
