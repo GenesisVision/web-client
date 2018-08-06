@@ -1,4 +1,4 @@
-import authService from "/services/auth-service";
+import authService from "services/auth-service";
 
 const getPrograms = () => (dispatch, getState) => {
   const filters = {};

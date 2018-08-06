@@ -1,19 +1,30 @@
 import PropTypes from "prop-types";
 import React from "react";
+import { Link } from "react-router-dom";
 
-const Facet = ({ facet }) => {
+const FacetCard = ({ facet, onSelectFacet }) => {
   const renderImage = src => {
     if (src === null) return null;
     return <img className="facet__logo" src={src} alt={facet.title} />;
   };
+
+  const handleClick = e => {
+    e.preventDefault();
+    onSelectFacet(facet.id);
+  };
+
   return (
-    <div className="facet">
+    <Link
+      className="facet"
+      to={`/programs/facet/${facet.id}`}
+      onClick={handleClick}
+    >
       <div className="facet__logo-wrapper">{renderImage(facet.logo)}</div>
       <div className="facet__info">
         <div className="facet__title">{facet.title}</div>
         <div className="facet__description">{facet.description}</div>
       </div>
-    </div>
+    </Link>
   );
 };
 
@@ -24,8 +35,8 @@ export const facetShape = PropTypes.shape({
   logo: PropTypes.string.isRequired
 });
 
-Facet.propTypes = {
+FacetCard.propTypes = {
   facet: facetShape
 };
 
-export default Facet;
+export default FacetCard;

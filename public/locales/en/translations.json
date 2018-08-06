@@ -2,6 +2,12 @@
   "app": {
     "header": "Manager Portal"
   },
+  "programs-page": {
+    "tabs": {
+      "explore": "Explore",
+      "favorites": "Favorites"
+    }
+  },
   "login-page": {
     "text": "A Brief History Of Creation",
     "header": "Login",

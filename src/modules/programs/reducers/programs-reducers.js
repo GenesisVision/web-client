@@ -8,14 +8,24 @@ import programsFilteringReducer from "./programs-filtering-reducer";
 import programsSortingReducer from "./programs-sorting-reducer";
 
 const programsReducer = combineReducers({
-  programs: combineReducers({
-    items: apiReducerFactory({ apiType: PROGRAMS }, programsFavoritesReducer),
+  tab: "explore",
+  facet: "",
+  items: apiReducerFactory({ apiType: PROGRAMS }, programsFavoritesReducer),
+  allProgramsGrid: combineReducers({
     filtering: programsFilteringReducer,
     sorting: programsSortingReducer,
     paging: pagingReducerFactory({
       type: PROGRAMS,
       paging: { itemsOnPage: 50 }
     })
+  }),
+  favoriteProgramsGrid: combineReducers({
+    filtering: programsFilteringReducer,
+    sorting: programsSortingReducer
+  }),
+  facetProgramsGrid: combineReducers({
+    filtering: programsFilteringReducer,
+    sorting: programsSortingReducer
   })
 });
 

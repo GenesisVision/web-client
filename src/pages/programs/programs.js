@@ -1,12 +1,13 @@
-import FacetsContainer from "modules/facets/fasets-container";
+import FacetCardsContainer from "modules/programs/components/facet-cards/faset-cards-container";
+import ProgramsTabsContainer from "modules/programs/components/programs-tabs/programs-tabs-container";
 import React from "react";
 
 const Programs = () => {
   return (
     <div>
-      <span>Explore</span>
-      <span>Favorites</span>
-      <FacetsContainer />
+      <ProgramsTabsContainer />
+      <FacetCardsContainer />
+      program list
     </div>
   );
 };

@@ -1,11 +1,11 @@
-import "./facets.scss";
+import "./facet-cards.scss";
 
 import PropTypes from "prop-types";
 import React from "react";
 
-import Facet, { facetShape } from "./facet";
+import FacetCard, { facetShape } from "./facet-card";
 
-const Facets = ({ facets }) => {
+const FacetCards = ({ facets, changeFacet }) => {
   facets = [
     {
       id: "1",
@@ -23,13 +23,15 @@ const Facets = ({ facets }) => {
   if (facets.length === 0) return null;
   return (
     <div className="facets">
-      {facets.map(x => <Facet key={x.id} facet={x} />)}
+      {facets.map(x => (
+        <FacetCard key={x.id} facet={x} onSelectFacet={changeFacet} />
+      ))}
     </div>
   );
 };
 
-Facets.propTypes = {
+FacetCards.propTypes = {
   facet: PropTypes.arrayOf(facetShape)
 };
 
-export default Facets;
+export default FacetCards;
