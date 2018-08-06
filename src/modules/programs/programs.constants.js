@@ -1,5 +1,3 @@
-export const PROGRAMS_ROUTE = "/programs";
-
 export const LEVEL_FILTER_NAME = "level";
 export const AVG_PROFIT_FILTER_NAME = "profitAvgPercent";
 export const TOTAL_PROFIT_FILTER_NAME = "profitTotal";

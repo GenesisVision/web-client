@@ -1,7 +1,7 @@
 import Form from "components/form/form";
 import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
-import { FORGOT_PASSWORD_ROUTE } from "modules/password-reset/password-reset.constants";
+import { FORGOT_PASSWORD_ROUTE } from "pages/forgot-password/forgot-password.constants";
 import React from "react";
 import { translate } from "react-i18next";
 import { compose } from "redux";
@@ -23,7 +23,7 @@ const LoginForm = ({ t, isSubmitting, handleSubmit, error }) => {
         placeholder={t("login-form.placeholder.email")}
         autoComplete="email"
         className={"login-input gv-text-field"}
-        CustomComponent={GVTextField}
+        component={GVTextField}
       />
       <GVFormikField
         id={"loginPassword"}
@@ -32,9 +32,9 @@ const LoginForm = ({ t, isSubmitting, handleSubmit, error }) => {
         placeholder={t("login-form.placeholder.password")}
         autoComplete="current-password"
         className={"login-input gv-text-field"}
-        adornment={<a href={FORGOT_PASSWORD_ROUTE}>{t("login-form.forgot")}</a>}
-        CustomComponent={GVTextField}
+        component={GVTextField}
       />
+      <a href={FORGOT_PASSWORD_ROUTE}>{t("login-form.forgot")}</a>
       <div className={"form__error"}>{error}</div>
       <GVButton
         className="login-button"

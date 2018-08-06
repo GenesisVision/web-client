@@ -34,7 +34,10 @@ const middleware = [
   debounceMiddleware(),
   clearOnceMetaMiddleware(),
   thunk,
-  refreshTokenMiddleware(authService, authApi.v10AuthTokenUpdatePost),
+  refreshTokenMiddleware(
+    authService,
+    authApi.v10AuthTokenUpdatePost.bind(authApi)
+  ),
   promiseMiddleware({ promiseTypeSuffixes: suffixes }),
   apiErrorHandlerMiddleware({ failureSuffix: FAILURE_SUFFIX }),
   routerMiddleware(history),

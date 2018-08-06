@@ -1,7 +1,6 @@
 import history from "../../../utils/history";
-import registerActions from "../actions/register-actions";
-
 import { EMAIL_CONFIRM_PENDING_ROUTE } from "../../email-confirm/email-confirm.constants";
+import registerActions from "../actions/register-actions";
 
 const register = registerData => dispatch => {
   return dispatch(registerActions.registerUser(registerData)).then(() => {

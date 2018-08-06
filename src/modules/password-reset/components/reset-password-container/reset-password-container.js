@@ -1,18 +1,15 @@
-import { connect } from "react-redux";
-import qs from "qs";
 import React from "react";
-import ResetPassword from "./reset-password/reset-password";
+import { connect } from "react-redux";
 
 import passwordResetService from "../../service/password-reset-service";
+import ResetPassword from "./reset-password/reset-password";
 
 const ResetPasswordContainer = ({
-  location,
+  queryParams,
   isPending,
   errorMessage,
   resetPassword
 }) => {
-  const queryParams = qs.parse(location.search.slice(1));
-
   const handleSubmit = (formData, setSubmitting) => {
     resetPassword(
       queryParams.userId,
@@ -27,7 +24,6 @@ const ResetPasswordContainer = ({
 
 const mapStateToProps = state => {
   const { isPending, errorMessage } = state.passwordResetData.reset;
-
   return { isPending, errorMessage };
 };
 
@@ -41,6 +37,7 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  ResetPasswordContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ResetPasswordContainer);
