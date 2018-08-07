@@ -1,14 +1,14 @@
-import React from "react";
+import React, { Fragment } from "react";
 
 import FacetsContainer from "../../modules/facets/fasets-container";
 
 const Programs = () => {
   return (
-    <div>
+    <Fragment>
       <span>Explore</span>
       <span>Favorites</span>
       <FacetsContainer />
-    </div>
+    </Fragment>
   );
 };
 

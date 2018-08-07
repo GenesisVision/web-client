@@ -1,7 +1,10 @@
 import LoginLayout from "components/login-layout/login-layout";
 import React from "react";
 
-const EmailConfirm = () => {
+export const EMAIL_CONFIRM_ROUTE = "/email-confirm";
+export const EMAIL_CONFIRM_PENDING_ROUTE = "/email-confirm/pending";
+
+const EmailConfirmRoutes = () => {
   return (
     <LoginLayout>
       <div className={"email-confirm"}>
@@ -12,4 +15,4 @@ const EmailConfirm = () => {
   );
 };
 
-export default EmailConfirm;
+export default EmailConfirmRoutes;

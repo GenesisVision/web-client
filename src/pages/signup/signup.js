@@ -4,6 +4,8 @@ import { LOGIN_ROUTE } from "pages/login/login.routes";
 import React from "react";
 import { Link } from "react-router-dom";
 
+export const REGISTER_ROUTE = "/signup";
+
 const Signup = () => {
   return (
     <LoginLayout>
