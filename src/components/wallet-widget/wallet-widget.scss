@@ -1,0 +1,14 @@
+@import "styles/_colors.scss";
+@import "styles/_constants.scss";
+
+.wallet-widget {
+  display: flex;
+  align-items: center;
+  background-color: $background-color;
+  padding: 10px 25px;
+  border-radius: 22px;
+
+  &__icon {
+    margin-right: 15px;
+  }
+}

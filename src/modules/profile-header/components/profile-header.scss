@@ -1,0 +1,10 @@
+.profile-header {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  letter-spacing: 0.2px;
+
+  &__notifications {
+    margin: 0 50px 0 25px;
+  }
+}

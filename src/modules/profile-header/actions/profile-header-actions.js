@@ -7,4 +7,5 @@ const fetchHeaderInfo = () => ({
   payload: profileApi.v10ProfileHeaderGet(authService.getAuthArg())
 });
 
-export { fetchHeaderInfo };
+const profileHeaderAction = { fetchHeaderInfo };
+export default profileHeaderAction;

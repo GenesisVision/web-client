@@ -10,4 +10,14 @@
   &--dashboard {
     background-image: url("../../shared/media/icons/dashboard.svg");
   }
+  &--ring {
+    background-image: url("../../shared/media/ring.svg");
+  }
+  &--ring-circle {
+    background-image: url("../../shared/media/ring-circle.svg");
+  }
+  &--wallet {
+    height: 20px;
+    background-image: url("../../shared/media/wallet.svg");
+  }
 }
