@@ -1,7 +1,7 @@
 import Form from "components/form/form";
 import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
-import { FORGOT_PASSWORD_ROUTE } from "pages/forgot-password/forgot-password.constants";
+import { FORGOT_PASSWORD_ROUTE } from "pages/forgot-password/forgot-password.routes";
 import React from "react";
 import { translate } from "react-i18next";
 import { compose } from "redux";
