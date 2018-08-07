@@ -8,10 +8,10 @@ import programsFilteringReducer from "./programs-filtering-reducer";
 import programsSortingReducer from "./programs-sorting-reducer";
 
 const programsReducer = combineReducers({
-  tab: "explore",
-  facet: "",
-  items: apiReducerFactory({ apiType: PROGRAMS }, programsFavoritesReducer),
-  allProgramsGrid: combineReducers({
+  /*tab: "explore",
+  facet: "",*/
+  items: apiReducerFactory({ apiType: PROGRAMS }, programsFavoritesReducer)
+  /*allProgramsGrid: combineReducers({
     filtering: programsFilteringReducer,
     sorting: programsSortingReducer,
     paging: pagingReducerFactory({
@@ -26,7 +26,7 @@ const programsReducer = combineReducers({
   facetProgramsGrid: combineReducers({
     filtering: programsFilteringReducer,
     sorting: programsSortingReducer
-  })
+  })*/
 });
 
 export default programsReducer;

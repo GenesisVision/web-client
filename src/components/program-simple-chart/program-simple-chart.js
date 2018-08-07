@@ -1,18 +1,18 @@
+import "./program-simple-chart.css";
+
+import moment from "moment";
 import React from "react";
 import {
   Line,
-  XAxis,
-  YAxis,
-  Tooltip,
-  ResponsiveContainer,
   LineChart,
-  ReferenceLine
+  ReferenceLine,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis
 } from "recharts";
-import moment from "moment";
 
-import "./pi-chart.css";
-
-const PIChart = ({ data }) => {
+const ProgramSimpleChart = ({ data }) => {
   const tooltipWrapperStyle = { opacity: 0.9 };
   const programChartData = data.map(x => ({
     date: x.date.getTime(),
@@ -51,4 +51,4 @@ const PIChart = ({ data }) => {
   );
 };
 
-export default PIChart;
+export default ProgramSimpleChart;

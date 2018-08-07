@@ -1,0 +1,57 @@
+.programs-header {
+  cursor: default;
+  display: flex;
+  padding: 0 1rem;
+  opacity: 0.3;
+  letter-spacing: 0.4px;
+  &__title {
+    width: 26%;
+  }
+  &__balance {
+    width: 12%;
+  }
+  &__currency {
+    width: 10%;
+  }
+  &__investors {
+    width: 5%;
+  }
+}
+
+.program {
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  opacity: 0.7;
+  height: 64px;
+  padding: 0 1rem;
+
+  &:hover {
+    opacity: 1;
+    background-color: #212c34;
+  }
+
+  &__statistic {
+    font-size: 0.8em;
+    letter-spacing: 0.3px;
+  }
+
+  &__title {
+    width: 20%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-weight: 600;
+  }
+
+  &__balance {
+    width: 12%;
+  }
+
+  &__currency {
+    width: 5%;
+  }
+  &__investors {
+    width: 5%;
+  }
+}
