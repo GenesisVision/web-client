@@ -2,6 +2,8 @@ import profileHeaderAction from "modules/profile-header/actions/profile-header-a
 import ProfileHeader from "modules/profile-header/components/profile-header";
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { compose } from "redux";
+import isAuthenticated from "shared/decorators/is-authenticated";
 
 class ProfileHeaderContainer extends Component {
   componentDidMount() {
@@ -9,19 +11,18 @@ class ProfileHeaderContainer extends Component {
   }
 
   render() {
-    return this.props.isAuthenticated && <ProfileHeader />;
+    return <ProfileHeader />;
   }
 }
-
-const mapStateToProps = state => ({
-  isAuthenticated: state.authData.isAuthenticated
-});
 
 const mapDispatchToProps = dispatch => ({
   fetchHeaderInfo: () => dispatch(profileHeaderAction.fetchHeaderInfo())
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+export default compose(
+  isAuthenticated,
+  connect(
+    null,
+    mapDispatchToProps
+  )
 )(ProfileHeaderContainer);
