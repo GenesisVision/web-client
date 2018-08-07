@@ -2,8 +2,13 @@
 
 .app {
   margin: 0 auto;
+
   @include media-breakpoint-desktop {
     max-width: 1200px;
+  }
+
+  @include media-breakpoint-desktop-large {
+    max-width: 1360px;
   }
 
   &__header {
