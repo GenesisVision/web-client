@@ -4,7 +4,6 @@
   },
   "login-page": {
     "text": "A Brief History Of Creation",
-    "header": "Login",
     "tabs": {
       "investor": "Investor",
       "manager": "Manager"
@@ -12,6 +11,10 @@
     "signup": {
       "text": "Don’t have an account?",
       "title": "Sign up"
+    },
+    "login": {
+      "text": "Do you have account?",
+      "title": "Login"
     }
   },
   "login-form": {

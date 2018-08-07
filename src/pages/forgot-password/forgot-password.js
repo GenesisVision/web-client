@@ -3,7 +3,7 @@ import React from "react";
 
 const ForgotPassword = () => {
   return (
-    <div>
+    <div className={"forgot-password"}>
       <h1>Restore Password</h1>
       <p>Just enter the email address you used to create your account.</p>
       <ForgotPasswordContainer />

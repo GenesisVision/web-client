@@ -25,12 +25,6 @@
     display: none;
   }
 
-  .form,
-  &__tabs,
-  &__header {
-    padding: 0 33px;
-  }
-
   @include media-breakpoint-desktop {
     display: flex;
     flex-direction: row;
@@ -89,20 +83,11 @@
     }
   }
 
-  .sign-up {
-    margin-left: 33px;
-    font-size: 11px;
-
-    &__desc {
-      margin-right: 30px;
-    }
-  }
-
-  .login-input {
+  .gv-text-field {
     margin-bottom: 16px;
   }
 
-  .login-button {
+  .gv-btn--primary {
     margin-top: 50px;
   }
 

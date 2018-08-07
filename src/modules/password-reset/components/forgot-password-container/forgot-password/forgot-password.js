@@ -1,5 +1,3 @@
-import "./forgot-password.css";
-
 import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import React from "react";
