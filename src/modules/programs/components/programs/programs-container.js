@@ -15,13 +15,17 @@ class ProgramsContainer extends Component {
   }
 
   render() {
-    const { isPending, data } = this.props;
+    const { isPending, data, openProgramDetail } = this.props;
     if (isPending || !data) return null;
     return (
       <Surface>
-        Title Filtering
+        All Programs Filtering
         <ProgramsHeader />
-        <Programs programs={data.programs} />
+        <Programs
+          programs={data.programs}
+          current
+          openProgramDetail={openProgramDetail}
+        />
         Paging
       </Surface>
     );

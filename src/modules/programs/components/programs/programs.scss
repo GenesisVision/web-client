@@ -55,3 +55,17 @@
     width: 5%;
   }
 }
+
+.program-detailed {
+  position: relative;
+  margin: 0 -1rem;
+  padding: 2rem;
+  background-color: #212c34;
+
+  &__collapse {
+    cursor: pointer;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+}

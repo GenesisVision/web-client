@@ -1,53 +1,38 @@
-import FavoriteIcon from "components/favorite-icon/favorite-icon";
-import { GVProgramAvatar } from "gv-react-components/dist";
-import React from "react";
-import gvLogo from "shared/media/logo.svg";
-import fileService from "shared/services/file-service";
+import React, { Component } from "react";
 
-import ProgramSimpleChart from "../../../../components/program-simple-chart/program-simple-chart";
+import ProgramDetailed from "./program-detailed";
+import ProgramRow from "./program-row";
 
-const Program = ({ program }) => {
-  return (
-    <div className="program">
-      <GVProgramAvatar
-        url={fileService.getFileUrl(program.avatar)}
-        level={program.level}
-        alt={program.title}
-        errorImage={gvLogo}
-      />
-      <div className="program__title">{program.title}</div>
-      <div className="program__statistic program__balance">
-        {program.statistic.balanceInGVT.amount} GVT
-      </div>
-      <div className="program__statistic program__currency">
-        {program.currency}
-      </div>
-      <div className="program__statistic program__currency">
-        {program.statistic.investorsCount}
-      </div>
-      <div className="program__statistic program__currency">
-        {program.availableForInvestment}
-      </div>
-      <div className="program__statistic program__currency">
-        {program.statistic.tradesCount}
-      </div>
-      <div className="program__statistic program__currency">
-        {program.period}
-      </div>
-      <div className="program__statistic program__currency">
-        {program.statistic.drawdownPercent}%
-      </div>
-      <div className="program__statistic program__currency">
-        {program.statistic.profitPercent}%
-      </div>
-      <div className="program__statistic program__currency">
-        <ProgramSimpleChart data={program.chart} />
-      </div>
-      <div className="program__statistic program__currency">
-        <FavoriteIcon />
-      </div>
-    </div>
-  );
-};
+class Program extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isDetailed: true
+    };
+  }
+
+  openProgramDetail = () => {
+    this.setState({ isDetailed: true });
+  };
+
+  closeProgramDetail = () => {
+    this.setState({ isDetailed: false });
+  };
+
+  render() {
+    const { program } = this.props;
+    const { isDetailed } = this.state;
+    if (isDetailed)
+      return (
+        <ProgramDetailed
+          program={program}
+          onCollapseClick={this.closeProgramDetail}
+        />
+      );
+    return (
+      <ProgramRow program={program} onExpandClick={this.openProgramDetail} />
+    );
+  }
+}
 
 export default Program;

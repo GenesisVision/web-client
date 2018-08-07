@@ -3,8 +3,13 @@ import "./icon.scss";
 import classnames from "classnames";
 import React from "react";
 
-export const Icon = ({ type, className }) => {
-  return <span className={classnames("icon", `icon--${type}`, className)} />;
+export const Icon = ({ type, className, onClick }) => {
+  return (
+    <span
+      className={classnames("icon", `icon--${type}`, className)}
+      onClick={onClick}
+    />
+  );
 };
 
 export const ProgramIcon = props => {
