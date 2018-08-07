@@ -14,6 +14,24 @@ class ProgramsContainer extends Component {
     getPrograms();
   }
 
+  componentDidUpdate(prevProps) {
+    const { getPrograms, isLocationChanged } = this.props;
+    if (
+      isLocationChanged(
+        {
+          params: prevProps.match.params,
+          search: prevProps.location.search
+        },
+        {
+          params: this.props.match.params,
+          search: this.props.location.search
+        }
+      )
+    ) {
+      getPrograms();
+    }
+  }
+
   render() {
     const { isPending, data, openProgramDetail } = this.props;
     if (isPending || !data) return null;
@@ -39,8 +57,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   getPrograms: () => {
-    var t = 1;
     dispatch(programsService.getPrograms());
+  },
+  isLocationChanged: (prev, curr) => {
+    return programsService.isLocationChanged(prev, curr);
   }
 });
 
