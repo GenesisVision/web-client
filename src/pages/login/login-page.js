@@ -1,7 +1,7 @@
 import "./login.scss";
 
 import LoginTabs from "components/login-tabs/login-tabs";
-import { GVButton, GVTab, GVTabs } from "gv-react-components";
+import { GVButton } from "gv-react-components";
 import LoginContainer from "modules/login/components/login-container/login-container";
 import { HOME_ROUTE } from "pages/root.routes";
 import { REGISTER_ROUTE } from "pages/signup/signup.routes";
