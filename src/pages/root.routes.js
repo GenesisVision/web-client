@@ -11,14 +11,14 @@ import LoginRoutes, { LOGIN_ROUTE } from "./login/login.routes";
 import ResetPassword, {
   RESET_PASSWORD_ROUTE
 } from "./reset-password/reset-password";
-import Signup, { REGISTER_ROUTE } from "./signup/signup";
+import SignupRoutes, { REGISTER_ROUTE } from "./signup/signup";
 
 export const HOME_ROUTE = "/";
 
 const RootRoutes = () => (
   <Switch>
     <Route path={LOGIN_ROUTE} component={LoginRoutes} />
-    <Route path={REGISTER_ROUTE} component={Signup} />
+    <Route path={REGISTER_ROUTE} component={SignupRoutes} />
     <Route path={FORGOT_PASSWORD_ROUTE} component={ForgotPasswordRoutes} />
     <Route path={RESET_PASSWORD_ROUTE} component={ResetPassword} />
     <Route path={EMAIL_CONFIRM_PENDING_ROUTE} component={EmailConfirmRoutes} />

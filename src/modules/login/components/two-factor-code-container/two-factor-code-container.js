@@ -9,7 +9,6 @@ import TwoFactorCodeForm from "./two-factor-code-form/two-factor-code-form";
 
 class TwoFactorCodeContainer extends Component {
   componentDidMount() {
-    console.info(this.props);
     const { email, password, showNotFoundPage } = this.props;
     if (email === "" || password === "") {
       showNotFoundPage();
@@ -37,7 +36,7 @@ class TwoFactorCodeContainer extends Component {
 const mapStateToProps = state => {
   const { errorMessage } = state.loginData.login;
   const { email, password } = state.loginData.twoFactor;
-  return { errorMessage };
+  return { errorMessage, email, password };
 };
 
 const mapDispatchToProps = dispatch => ({

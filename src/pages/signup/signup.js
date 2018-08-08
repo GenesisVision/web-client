@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 export const REGISTER_ROUTE = "/signup";
 
-const Signup = ({ t }) => {
+const SignupRoutes = ({ t }) => {
   return (
     <LoginLayout>
       <div className="login__header">
@@ -31,4 +31,4 @@ const Signup = ({ t }) => {
   );
 };
 
-export default translate()(Signup);
+export default translate()(SignupRoutes);

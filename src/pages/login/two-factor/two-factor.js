@@ -11,10 +11,7 @@ const TwoFactor = () => {
         Open the two-factor authentication app on your device to view your
         authentication code and verify your identity.
       </p>
-      <TwoFactorCodeContainer
-        email={"e.grebenshikov@genesis.vision"}
-        password={"qwerty"}
-      />
+      <TwoFactorCodeContainer />
       <h5>Don’t have your phone?</h5>
       <Link to={LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE}>
         Enter a two-factor recovery code

@@ -36,7 +36,7 @@ class RecoveryCodeContainer extends Component {
 const mapStateToProps = state => {
   const { errorMessage } = state.loginData.login;
   const { email, password } = state.loginData.twoFactor;
-  return { errorMessage, email: "e", password: "123" };
+  return { errorMessage, email, password };
 };
 
 const mapDispatchToProps = dispatch => ({
