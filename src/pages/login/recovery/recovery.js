@@ -1,4 +1,4 @@
-import RecoveryCodeContainer from "modules/login/components/recovery-code-container/recovery-code-container";
+import RecoveryCodeContainer from "modules/login/components/recovery-code/recovery-code-container";
 import React from "react";
 const Recovery = () => {
   return (

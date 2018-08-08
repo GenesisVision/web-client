@@ -2,7 +2,7 @@ import "./login.scss";
 
 import LoginTabs from "components/login-tabs/login-tabs";
 import { GVButton } from "gv-react-components";
-import LoginContainer from "modules/login/components/login-container/login-container";
+import LoginContainer from "modules/login/components/login/login-container";
 import { HOME_ROUTE } from "pages/root.routes";
 import { REGISTER_ROUTE } from "pages/signup/signup.routes";
 import React, { Fragment } from "react";

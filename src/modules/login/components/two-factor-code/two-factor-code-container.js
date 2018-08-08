@@ -5,7 +5,7 @@ import { replace } from "react-router-redux";
 
 import { TWO_FACTOR_CODE } from "../../login.constants";
 import loginService from "../../service/login-service";
-import TwoFactorCodeForm from "./two-factor-code-form/two-factor-code-form";
+import TwoFactorCodeForm from "./two-factor-code-form";
 
 class TwoFactorCodeContainer extends Component {
   componentDidMount() {

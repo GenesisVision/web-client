@@ -5,7 +5,7 @@ import { replace } from "react-router-redux";
 
 import { RECOVERY_CODE } from "../../login.constants";
 import loginService from "../../service/login-service";
-import RecoveryCodeForm from "./recovery-code-form/recovery-code-form";
+import RecoveryCodeForm from "./recovery-code-form";
 
 class RecoveryCodeContainer extends Component {
   componentDidMount() {

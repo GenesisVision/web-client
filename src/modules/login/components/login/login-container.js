@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import loginService from "../../service/login-service";
-import LoginForm from "./login-form/login-form";
+import LoginForm from "./login-form";
 
 class LoginContainer extends Component {
   componentWillUnmount() {
