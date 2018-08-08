@@ -1,7 +1,7 @@
 import AppLayout from "components/app-layout/app-layout";
 import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import DashboardRoutes from "pages/dashboard/dashboard.routes";
-import NotFoundPage from "pages/not-found/not-found";
+import NotFoundPage from "pages/not-found/not-found.routes";
 import PrivateRoute from "pages/private-route";
 import ProgramsRoutes, { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
 import { HOME_ROUTE } from "pages/root.routes";
