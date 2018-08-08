@@ -1,8 +1,8 @@
-import { connect } from "react-redux";
 import React from "react";
+import { connect } from "react-redux";
 
-import ForgotPassword from "./forgot-password/forgot-password";
 import passwordResetService from "../../service/password-reset-service";
+import ForgotPassword from "./forgot-password/forgot-password";
 
 const ForgotPasswordContainer = ({
   isPending,
@@ -29,6 +29,7 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  ForgotPasswordContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ForgotPasswordContainer);

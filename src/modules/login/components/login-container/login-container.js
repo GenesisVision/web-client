@@ -1,4 +1,3 @@
-import { HOME_ROUTE } from "pages/root.constants";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
@@ -10,10 +9,7 @@ class LoginContainer extends Component {
     this.props.clearLoginData();
   }
   handleSubmit = (loginFormData, setSubmitting) => {
-    const { from } = this.props.location.state || {
-      from: { pathname: HOME_ROUTE }
-    };
-    this.props.login(loginFormData, from, setSubmitting);
+    this.props.login(loginFormData, this.props.from, setSubmitting);
   };
   render() {
     const { errorMessage } = this.props;
