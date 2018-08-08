@@ -1,21 +1,25 @@
 import Surface from "components/surface/surface";
+import Paging from "modules/paging/components/paging/paging";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 
-import programsService from "../../services/programs-service";
+import {
+  programsServiceGetPrograms,
+  programsServiceIsLocationChanged
+} from "../../services/programs-service";
 import Programs from "./programs";
 import ProgramsHeader from "./programs-header";
 
 class ProgramsContainer extends Component {
   componentDidMount() {
-    const { getPrograms } = this.props;
-    getPrograms();
+    const { programsServiceGetPrograms } = this.props;
+    programsServiceGetPrograms();
   }
 
   componentDidUpdate(prevProps) {
-    const { getPrograms, isLocationChanged } = this.props;
+    const { programsServiceGetPrograms, isLocationChanged } = this.props;
     if (
       isLocationChanged(
         {
@@ -28,12 +32,18 @@ class ProgramsContainer extends Component {
         }
       )
     ) {
-      getPrograms();
+      programsServiceGetPrograms();
     }
   }
 
   render() {
-    const { isPending, data, openProgramDetail } = this.props;
+    const {
+      isPending,
+      data,
+      paging,
+      openProgramDetail,
+      updatePaging
+    } = this.props;
     if (isPending || !data) return null;
     return (
       <Surface>
@@ -44,7 +54,7 @@ class ProgramsContainer extends Component {
           current
           openProgramDetail={openProgramDetail}
         />
-        Paging
+        {/* <Paging paging={paging} hide={isPending} updatePaging={updatePaging} /> */}
       </Surface>
     );
   }
@@ -55,19 +65,31 @@ const mapStateToProps = state => {
   return { isPending, data };
 };
 
-const mapDispatchToProps = dispatch => ({
-  getPrograms: () => {
-    dispatch(programsService.getPrograms());
-  },
-  isLocationChanged: (prev, curr) => {
-    return programsService.isLocationChanged(prev, curr);
-  }
-});
+const mapDispatchToProps = {
+  programsServiceGetPrograms
+};
+
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+  const { location, history, match } = ownProps;
+  const isLocationChanged = () => {
+    return location.pathname !== history.location.pathname;
+  };
+  return {
+    ...stateProps,
+    ...dispatchProps,
+    ...ownProps,
+    isLocationChanged,
+    updatePaging: paging => {
+      //dispatch(programService.changeProgramRequestsPage(programId, paging));
+    }
+  };
+};
 
 export default compose(
   withRouter,
   connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
+    mergeProps
   )
 )(ProgramsContainer);

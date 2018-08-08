@@ -7,7 +7,7 @@ import authService from "services/auth-service";
 
 import programActions from "../actions/programs-actions";
 
-const getPrograms = () => (dispatch, getState) => {
+export const programsServiceGetPrograms = () => (dispatch, getState) => {
   const { routing } = getState();
   const filters = composeFilters(routing.location);
   if (authService.getAuthArg()) {
@@ -32,12 +32,12 @@ const getParams = (pathname, route) => {
   return (matchProfile && matchProfile.params) || {};
 };
 
-const isLocationChanged = (prev, curr) => {
+export const programsServiceIsLocationChanged = (prev, curr) => {
   return JSON.stringify(prev) !== JSON.stringify(curr);
 };
 
-const programsService = {
+/*const programsService = {
   getPrograms,
   isLocationChanged
-};
-export default programsService;
+};*/
+//export default programsService;
