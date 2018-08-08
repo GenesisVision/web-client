@@ -5,7 +5,7 @@ import React from "react";
 
 export const RESET_PASSWORD_ROUTE = "/reset-password";
 
-const ResetPassword = ({ location }) => {
+const ResetPasswordRoutes = ({ location }) => {
   const queryParams = qs.parse(location.search.slice(1));
   return (
     <RestorePasswordLayout>
@@ -15,4 +15,4 @@ const ResetPassword = ({ location }) => {
   );
 };
 
-export default ResetPassword;
+export default ResetPasswordRoutes;
