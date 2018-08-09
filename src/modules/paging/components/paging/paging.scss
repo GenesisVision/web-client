@@ -1,28 +1,38 @@
 @import "styles/_colors.scss";
-.btn-first-page,
-.btn-prev-page,
-.btn-prev-more,
-.btn-numbered-page,
-.btn-next-more,
-.btn-next-page,
-.btn-last-page {
-  a {
-    position: relative;
-    display: block;
-    padding: 0.5rem 0.75rem;
-    margin-left: -1px;
-    line-height: 1.25;
-    background-color: white;
-    border: 1px solid $border-color;
-  }
 
-  a:not(:disabled):not(.disabled) {
+.pagination {
+  display: flex;
+  justify-content: center;
+  padding-left: 0;
+  list-style: none;
+  border-radius: 0.25rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+
+  .btn-first-page,
+  .btn-prev-page,
+  .btn-prev-more,
+  .btn-numbered-page,
+  .btn-next-more,
+  .btn-next-page,
+  .btn-last-page {
     cursor: pointer;
-  }
-
-  &.active a {
-    z-index: 1;
-    color: $alternate-color;
-    background-color: $background-color;
+    a {
+      position: relative;
+      display: block;
+      padding: 0.5rem 0.75rem;
+      margin-left: -1px;
+      line-height: 1.25;
+      border: 1px solid $border-color;
+    }
+    &.disabled {
+      opacity: 0.5;
+      cursor: default;
+    }
+    &.active a {
+      z-index: 1;
+      color: $text-color;
+      background-color: $background-color;
+    }
   }
 }

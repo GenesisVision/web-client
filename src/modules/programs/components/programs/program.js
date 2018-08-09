@@ -7,7 +7,7 @@ class Program extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isDetailed: true
+      isDetailed: false
     };
   }
 

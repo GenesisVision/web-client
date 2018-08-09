@@ -6,8 +6,9 @@ import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 
 import {
-  programsServiceGetPrograms,
-  programsServiceIsLocationChanged
+  programsServiceChangePage,
+  programsServiceGetFilteringFromUrl,
+  programsServiceGetPrograms
 } from "../../services/programs-service";
 import Programs from "./programs";
 import ProgramsHeader from "./programs-header";
@@ -40,21 +41,25 @@ class ProgramsContainer extends Component {
     const {
       isPending,
       data,
-      paging,
+      filters,
       openProgramDetail,
-      updatePaging
+      programsServiceChangePage
     } = this.props;
     if (isPending || !data) return null;
     return (
       <Surface>
         All Programs Filtering
+        <Paging
+          paging={{ total: data.total, current: filters.page }}
+          hide={isPending}
+          updatePaging={next => programsServiceChangePage(next.currentPage)}
+        />
         <ProgramsHeader />
         <Programs
           programs={data.programs}
           current
           openProgramDetail={openProgramDetail}
         />
-        {/* <Paging paging={paging} hide={isPending} updatePaging={updatePaging} /> */}
       </Surface>
     );
   }
@@ -66,7 +71,9 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  programsServiceGetPrograms
+  programsServiceGetPrograms,
+  programsServiceGetFilteringFromUrl,
+  programsServiceChangePage
 };
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
@@ -74,10 +81,12 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const isLocationChanged = () => {
     return location.pathname !== history.location.pathname;
   };
+  const filters = dispatchProps.programsServiceGetFilteringFromUrl();
   return {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
+    filters,
     isLocationChanged,
     updatePaging: paging => {
       //dispatch(programService.changeProgramRequestsPage(programId, paging));
