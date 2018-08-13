@@ -11,7 +11,8 @@ class ProfileHeaderContainer extends Component {
   }
 
   render() {
-    return <ProfileHeader />;
+    if (!this.props.info.data) return null;
+    return <ProfileHeader info={this.props.info.data} />;
   }
 }
 
@@ -19,10 +20,14 @@ const mapDispatchToProps = dispatch => ({
   fetchHeaderInfo: () => dispatch(profileHeaderAction.fetchHeaderInfo())
 });
 
+const mapStateToProps = state => ({
+  ...state.profileHeader
+});
+
 export default compose(
   isAuthenticated,
   connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
   )
 )(ProfileHeaderContainer);
