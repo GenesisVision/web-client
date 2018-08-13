@@ -40,28 +40,26 @@ export const PROGRAMS_COLUMNS = [
     sortingName: "ByBalance"
   },
   {
-    name: "currency",
-    isSortable: false
+    name: "currency"
   },
   {
     name: "investors",
-    isSortable: true
+    sortingName: "ByInvestors"
   },
   {
-    name: "available-to-invest",
-    isSortable: false
+    name: "available-to-invest"
   },
   {
     name: "trades",
-    isSortable: true
+    sortingName: " ByTrades"
   },
   {
     name: "period",
-    isSortable: true
+    sortingName: "ByEndOfPeriod"
   },
   {
     name: "drawdown",
-    isSortable: true
+    sortingName: "ByDrawdown"
   },
   {
     name: "profit",

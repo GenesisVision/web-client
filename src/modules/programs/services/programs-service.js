@@ -5,9 +5,13 @@ import {
 import qs from "qs";
 import { matchPath } from "react-router-dom";
 import { push } from "react-router-redux";
+import { filter } from "rsvp";
 import authService from "services/auth-service";
 
-import { calculateTotalPages } from "../../paging/helpers/paging-helpers";
+import {
+  calculateSkipAndTake,
+  calculateTotalPages
+} from "../../paging/helpers/paging-helpers";
 import { getSortingColumnName } from "../../sorting/helpers/sorting-helpers";
 import programActions from "../actions/programs-actions";
 import { PROGRAMS_COLUMNS, SORTING_FILTER_VALUE } from "../programs.constants";
@@ -17,21 +21,11 @@ const sortableColums = PROGRAMS_COLUMNS.filter(
 ).map(x => x.sortingName);
 
 export const getPrograms = () => (dispatch, getState) => {
-  const { routing } = getState();
-  const filters = composeQueryParams(routing.location);
+  const requestFilters = dispatch(composeRequestFilters());
   if (authService.getAuthArg()) {
-    filters.authorization = authService.getAuthArg();
+    requestFilters.authorization = authService.getAuthArg();
   }
-  dispatch(programActions.fetchPrograms(filters));
-};
-
-const composeQueryParams = location => {
-  const filters = { take: 10 };
-  const { tab } = getParams(location.pathname, PROGRAMS_TAB_ROUTE);
-  if (tab === PROGRAMS_FAVORITES_TAB_NAME) {
-    filters.isFavorite = true;
-  }
-  return filters;
+  dispatch(programActions.fetchPrograms(requestFilters));
 };
 
 const getParams = (pathname, route) => {
@@ -41,16 +35,44 @@ const getParams = (pathname, route) => {
   return (matchProfile && matchProfile.params) || {};
 };
 
+const composeRequestFilters = () => (dispatch, getState) => {
+  const { routing } = getState();
+  let filters = {};
+  const { tab } = getParams(routing.location.pathname, PROGRAMS_TAB_ROUTE);
+  if (tab === PROGRAMS_FAVORITES_TAB_NAME) {
+    filters.isFavorite = true;
+  }
+
+  const existingFilters = dispatch(getProgramsFiltering());
+
+  const { skip, take } = calculateSkipAndTake({
+    itemsOnPage: 10,
+    currentPage: existingFilters.page - 1
+  });
+  filters = {
+    ...filters,
+    skip,
+    take,
+    sorting: existingFilters.sorting
+  };
+
+  return filters;
+};
+
 export const getProgramsFiltering = () => (dispatch, getState) => {
   const { routing, programsData } = getState();
   const queryParams = qs.parse(routing.location.search.slice(1));
-  const page = +queryParams.page || 1;
+
   let pages = 0;
   if (programsData.items && programsData.items.data) {
     pages = calculateTotalPages(programsData.items.data.total, 10);
   }
+  let page = +queryParams.page || 1;
+  if (page > pages) {
+    page = 1;
+  }
 
-  const sortingName = getSortingColumnName(queryParams.sorting);
+  const sortingName = getSortingColumnName(queryParams.sorting || "");
   const sorting = sortableColums.includes(sortingName)
     ? queryParams.sorting
     : SORTING_FILTER_VALUE;
