@@ -5,7 +5,6 @@ import {
 import qs from "qs";
 import { matchPath } from "react-router-dom";
 import { push } from "react-router-redux";
-import { filter } from "rsvp";
 import authService from "services/auth-service";
 
 import {

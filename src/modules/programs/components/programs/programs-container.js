@@ -53,7 +53,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-  const { location, history, match } = ownProps;
+  const { location } = ownProps;
   const isLocationChanged = prevLocation => {
     return location.key !== prevLocation.key;
   };
