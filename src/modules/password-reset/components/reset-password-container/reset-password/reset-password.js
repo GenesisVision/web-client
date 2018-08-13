@@ -13,13 +13,13 @@ const ResetPassword = ({ isSubmitting, handleSubmit, error }) => {
       <GVFormikField
         type="new-password"
         name="password"
-        placeholder="New Password"
+        label="New Password"
         component={GVTextField}
       />
       <GVFormikField
         type="new-password"
         name="confirmPassword"
-        placeholder="Confirm New Password"
+        label="Confirm New Password"
         component={GVTextField}
       />
       <FormError error={error} />
