@@ -22,6 +22,17 @@ const resetPassword = (userId, code, rpForm) => {
   };
 };
 
-const passwordResetActions = { forgotPassword, resetPassword };
+const storeEmailResetPassword = ({ email }) => ({
+  type: actionTypes.EMAIL_RESET_PASSWORD,
+  payload: {
+    email
+  }
+});
+
+const passwordResetActions = {
+  forgotPassword,
+  resetPassword,
+  storeEmailResetPassword
+};
 
 export default passwordResetActions;
