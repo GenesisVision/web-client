@@ -19,16 +19,16 @@ const ProgramsHeader = ({ t, sorting, updateSorting }) => {
     return updateSorting(sortingName + "Asc");
   };
   return (
-    <div className="programs-header-wrapper">
+    <tr className="programs-header-wrapper">
       {PROGRAMS_COLUMNS.map(
         x =>
           x.sortingName === undefined ? (
-            <div
+            <th
               key={x.name}
               className={`programs-header programs-header__${x.name}`}
             >
               {t(`programs-page.programs-header.${x.name}`)}
-            </div>
+            </th>
           ) : (
             <SortingHeader
               key={x.name}
@@ -41,7 +41,7 @@ const ProgramsHeader = ({ t, sorting, updateSorting }) => {
             </SortingHeader>
           )
       )}
-    </div>
+    </tr>
   );
 };
 

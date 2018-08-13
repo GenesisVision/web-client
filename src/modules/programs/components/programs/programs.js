@@ -15,6 +15,7 @@ const Programs = ({ data }) => {
     });
   };
 
+  return renderPrograms();
   return <div className="programs">{renderPrograms()}</div>;
 };
 

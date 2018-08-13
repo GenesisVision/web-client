@@ -13,6 +13,7 @@ import {
 } from "recharts";
 
 const ProgramSimpleChart = ({ data }) => {
+  if (data.length === 0) return null;
   const tooltipWrapperStyle = { opacity: 0.9 };
   const programChartData = data.map(x => ({
     date: x.date.getTime(),

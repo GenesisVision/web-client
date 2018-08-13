@@ -5,7 +5,7 @@ import React from "react";
 
 const SortingHeader = ({ isSelected, isAsc, className, onClick, children }) => {
   return (
-    <div
+    <th
       className={classnames("sorting-header", className, {
         "sorting-header--asc": isSelected && isAsc,
         "sorting-header--desc": isSelected && !isAsc
@@ -13,7 +13,7 @@ const SortingHeader = ({ isSelected, isAsc, className, onClick, children }) => {
       onClick={onClick}
     >
       {children}
-    </div>
+    </th>
   );
 };
 

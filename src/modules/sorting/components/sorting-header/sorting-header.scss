@@ -9,6 +9,7 @@
 .sorting-header {
   cursor: pointer;
   opacity: 0.3;
+  padding-right: 15px;
   &:hover {
     opacity: 0.5;
   }
@@ -16,7 +17,7 @@
   &--desc {
     opacity: 1;
     position: relative;
-    padding-right: 15px;
+
     &:hover {
       opacity: 1;
     }

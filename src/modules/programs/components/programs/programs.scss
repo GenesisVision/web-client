@@ -1,5 +1,5 @@
 .programs-header-wrapper {
-  display: flex;
+  //display: flex;
 }
 
 .programs-header {
@@ -8,25 +8,25 @@
   padding: 0 1rem;
   letter-spacing: 0.4px;
   white-space: nowrap;
-  &__title {
-    width: 26%;
-  }
-  &__balance {
-    width: 12%;
-  }
-  &__currency {
-    width: 10%;
-  }
-  &__investors {
-    width: 5%;
-  }
+  // &__title {
+  //   width: 26%;
+  // }
+  // &__balance {
+  //   width: 12%;
+  // }
+  // &__currency {
+  //   width: 10%;
+  // }
+  // &__investors {
+  //   width: 5%;
+  // }
 }
 
 .program {
   cursor: pointer;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  //display: flex;
+  //justify-content: flex-start;
+  //align-items: center;
   opacity: 0.7;
   height: 64px;
   padding: 0 1rem;
@@ -42,22 +42,22 @@
   }
 
   &__title {
-    width: 20%;
+    //width: 20%;
     text-overflow: ellipsis;
     overflow: hidden;
     font-weight: 600;
   }
 
-  &__balance {
-    width: 12%;
-  }
+  // &__balance {
+  //   width: 12%;
+  // }
 
-  &__currency {
-    width: 5%;
-  }
-  &__investors {
-    width: 5%;
-  }
+  // &__currency {
+  //   width: 5%;
+  // }
+  // &__investors {
+  //   width: 5%;
+  // }
 }
 
 .program-detailed {
