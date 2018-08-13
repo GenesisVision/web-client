@@ -3,63 +3,38 @@ import Paging from "modules/paging/components/paging/paging";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { compose } from "redux";
+import { bindActionCreators, compose } from "redux";
 
-import {
-  programsServiceChangePage,
-  programsServiceGetFilteringFromUrl,
-  programsServiceGetPrograms
-} from "../../services/programs-service";
+import * as programsService from "../../services/programs-service";
 import Programs from "./programs";
 import ProgramsHeader from "./programs-header";
 
 class ProgramsContainer extends Component {
   componentDidMount() {
-    const { programsServiceGetPrograms } = this.props;
-    programsServiceGetPrograms();
+    const { service } = this.props;
+    service.getPrograms();
   }
 
   componentDidUpdate(prevProps) {
-    const { programsServiceGetPrograms, isLocationChanged } = this.props;
-    if (
-      isLocationChanged(
-        {
-          params: prevProps.match.params,
-          search: prevProps.location.search
-        },
-        {
-          params: this.props.match.params,
-          search: this.props.location.search
-        }
-      )
-    ) {
-      programsServiceGetPrograms();
+    const { service, isLocationChanged } = this.props;
+    if (isLocationChanged(prevProps.location)) {
+      service.getPrograms();
     }
   }
 
   render() {
-    const {
-      isPending,
-      data,
-      filters,
-      openProgramDetail,
-      programsServiceChangePage
-    } = this.props;
-    if (isPending || !data) return null;
+    const { isPending, data, filters, service } = this.props;
+    if (!data) return <div>Loading...</div>;
     return (
       <Surface>
-        All Programs Filtering
+        All Programs
         <Paging
-          paging={{ total: data.total, current: filters.page }}
+          paging={{ total: filters.pages, current: filters.page }}
           hide={isPending}
-          updatePaging={next => programsServiceChangePage(next.currentPage)}
+          updatePaging={next => service.programsChangePage(next.currentPage)}
         />
         <ProgramsHeader />
-        <Programs
-          programs={data.programs}
-          current
-          openProgramDetail={openProgramDetail}
-        />
+        <Programs data={data} />
       </Surface>
     );
   }
@@ -70,27 +45,22 @@ const mapStateToProps = state => {
   return { isPending, data };
 };
 
-const mapDispatchToProps = {
-  programsServiceGetPrograms,
-  programsServiceGetFilteringFromUrl,
-  programsServiceChangePage
-};
+const mapDispatchToProps = dispatch => ({
+  service: bindActionCreators(programsService, dispatch)
+});
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const { location, history, match } = ownProps;
-  const isLocationChanged = () => {
-    return location.pathname !== history.location.pathname;
+  const isLocationChanged = prevLocation => {
+    return location.key !== prevLocation.key;
   };
-  const filters = dispatchProps.programsServiceGetFilteringFromUrl();
+  const filters = dispatchProps.service.getProgramsFiltering();
   return {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
     filters,
-    isLocationChanged,
-    updatePaging: paging => {
-      //dispatch(programService.changeProgramRequestsPage(programId, paging));
-    }
+    isLocationChanged
   };
 };
 

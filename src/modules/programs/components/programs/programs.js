@@ -4,19 +4,14 @@ import React from "react";
 
 import Program from "./program";
 
-const Programs = ({ programs, openProgramDetail }) => {
+const Programs = ({ data }) => {
   const renderPrograms = () => {
-    if (programs.length === 0) return "There are no programs";
+    if (!data) return null;
+    if (data.total === 0) return "There are no programs";
 
-    return programs.map((program, idx) => {
+    return data.programs.map((program, idx) => {
       program.order = program.order || idx + 1;
-      return (
-        <Program
-          key={program.id}
-          program={program}
-          openProgramDetail={openProgramDetail}
-        />
-      );
+      return <Program key={program.id} program={program} />;
     });
   };
 

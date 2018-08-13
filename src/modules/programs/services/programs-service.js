@@ -7,18 +7,24 @@ import { matchPath } from "react-router-dom";
 import { push } from "react-router-redux";
 import authService from "services/auth-service";
 
+import { calculateTotalPages } from "../../paging/helpers/paging-helpers";
 import programActions from "../actions/programs-actions";
+import { PROGRAMS_COLUMNS, SORTING_FILTER_VALUE } from "../programs.constants";
 
-export const programsServiceGetPrograms = () => (dispatch, getState) => {
+const sortableColums = PROGRAMS_COLUMNS.filter(x => x.isSortable).map(
+  x => x.name
+);
+
+export const getPrograms = () => (dispatch, getState) => {
   const { routing } = getState();
-  const filters = composeFilters(routing.location);
+  const filters = composeQueryParams(routing.location);
   if (authService.getAuthArg()) {
     filters.authorization = authService.getAuthArg();
   }
   dispatch(programActions.fetchPrograms(filters));
 };
 
-const composeFilters = location => {
+const composeQueryParams = location => {
   const filters = { take: 10 };
   const { tab } = getParams(location.pathname, PROGRAMS_TAB_ROUTE);
   if (tab === PROGRAMS_FAVORITES_TAB_NAME) {
@@ -34,34 +40,32 @@ const getParams = (pathname, route) => {
   return (matchProfile && matchProfile.params) || {};
 };
 
-export const programsServiceIsLocationChanged = (prev, curr) => {
-  return JSON.stringify(prev) !== JSON.stringify(curr);
-};
-
-export const programsServiceGetFilteringFromUrl = () => (
-  dispatch,
-  getState
-) => {
-  const { routing } = getState();
+export const getProgramsFiltering = () => (dispatch, getState) => {
+  const { routing, programsData } = getState();
   const queryParams = qs.parse(routing.location.search.slice(1));
+  const page = +queryParams.page || 1;
+  let pages = 0;
+  if (programsData.items && programsData.items.data) {
+    pages = calculateTotalPages(programsData.items.data.total, 10);
+  }
+
+  const sorting = sortableColums.includes(queryParams.sorting)
+    ? queryParams.sorting
+    : SORTING_FILTER_VALUE;
+
   const filtering = {
-    page: +queryParams.page || 0,
-    sorting: queryParams.sorting || "name",
-    levels: "all",
-    currency: "all"
+    page,
+    pages,
+    sorting: sorting
   };
   return filtering;
 };
 
-export const programsServiceChangePage = nextPage => (dispatch, getState) => {
+export const programsChangePage = nextPage => (dispatch, getState) => {
   const { routing } = getState();
-  const filtering = dispatch(programsServiceGetFilteringFromUrl);
-  const newUrl = routing.location.pathname + "&" + qs.stringify(filtering);
+  const queryParams = qs.parse(routing.location.search.slice(1));
+  const page = nextPage + 1 || 1;
+  queryParams.page = page;
+  const newUrl = routing.location.pathname + "?" + qs.stringify(queryParams);
   dispatch(push(newUrl));
 };
-
-/*const programsService = {
-  getPrograms,
-  isLocationChanged
-};*/
-//export default programsService;

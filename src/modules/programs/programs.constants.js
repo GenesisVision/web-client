@@ -30,3 +30,14 @@ export const PROGRAMS_DEFAULT_FILTERS = [
     value: [undefined, undefined]
   }
 ];
+
+export const PROGRAMS_COLUMNS = [
+  {
+    name: "name",
+    isSortable: false
+  },
+  {
+    name: "balance",
+    isSortable: true
+  }
+];
