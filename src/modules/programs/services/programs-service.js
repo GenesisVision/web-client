@@ -8,12 +8,13 @@ import { push } from "react-router-redux";
 import authService from "services/auth-service";
 
 import { calculateTotalPages } from "../../paging/helpers/paging-helpers";
+import { getSortingColumnName } from "../../sorting/helpers/sorting-helpers";
 import programActions from "../actions/programs-actions";
 import { PROGRAMS_COLUMNS, SORTING_FILTER_VALUE } from "../programs.constants";
 
-const sortableColums = PROGRAMS_COLUMNS.filter(x => x.isSortable).map(
-  x => x.name
-);
+const sortableColums = PROGRAMS_COLUMNS.filter(
+  x => x.sortingName !== undefined
+).map(x => x.sortingName);
 
 export const getPrograms = () => (dispatch, getState) => {
   const { routing } = getState();
@@ -49,14 +50,15 @@ export const getProgramsFiltering = () => (dispatch, getState) => {
     pages = calculateTotalPages(programsData.items.data.total, 10);
   }
 
-  const sorting = sortableColums.includes(queryParams.sorting)
+  const sortingName = getSortingColumnName(queryParams.sorting);
+  const sorting = sortableColums.includes(sortingName)
     ? queryParams.sorting
     : SORTING_FILTER_VALUE;
 
   const filtering = {
     page,
     pages,
-    sorting: sorting
+    sorting
   };
   return filtering;
 };
@@ -66,6 +68,14 @@ export const programsChangePage = nextPage => (dispatch, getState) => {
   const queryParams = qs.parse(routing.location.search.slice(1));
   const page = nextPage + 1 || 1;
   queryParams.page = page;
+  const newUrl = routing.location.pathname + "?" + qs.stringify(queryParams);
+  dispatch(push(newUrl));
+};
+
+export const programsChangeSorting = sorting => (dispatch, getState) => {
+  const { routing } = getState();
+  const queryParams = qs.parse(routing.location.search.slice(1));
+  queryParams.sorting = sorting;
   const newUrl = routing.location.pathname + "?" + qs.stringify(queryParams);
   dispatch(push(newUrl));
 };

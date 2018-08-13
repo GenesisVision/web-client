@@ -1,9 +1,13 @@
+.programs-header-wrapper {
+  display: flex;
+}
+
 .programs-header {
   cursor: default;
-  display: flex;
-  padding: 0 1rem;
   opacity: 0.3;
+  padding: 0 1rem;
   letter-spacing: 0.4px;
+  white-space: nowrap;
   &__title {
     width: 26%;
   }

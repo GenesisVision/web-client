@@ -1,39 +1,46 @@
+import SortingHeader from "modules/sorting/components/sorting-header/sorting-header";
+import {
+  getSortingColumnName,
+  isSortingAsc
+} from "modules/sorting/helpers/sorting-helpers";
 import React from "react";
 import { translate } from "react-i18next";
 
-const ProgramsHeader = ({ t, sorting }) => {
+import { PROGRAMS_COLUMNS } from "../../programs.constants";
+
+const ProgramsHeader = ({ t, sorting, updateSorting }) => {
+  const sortingColumnName = getSortingColumnName(sorting);
+  const isAsc = isSortingAsc(sorting);
+  const handleSorting = sortingName => () => {
+    if (sortingName !== sortingColumnName)
+      return updateSorting(sortingName + "Asc");
+
+    if (isAsc) return updateSorting(sortingName + "Desc");
+    return updateSorting(sortingName + "Asc");
+  };
   return (
-    <div className="programs-header">
-      <div className="programs-header__title">
-        {t("programs-page.programs-header.title")}
-      </div>
-      <div className="programs-header__balance">
-        {t("programs-page.programs-header.balance")}
-      </div>
-      <div className="programs-header__currency">
-        {t("programs-page.programs-header.currency")}
-      </div>
-      <div className="programs-header__currency">
-        {t("programs-page.programs-header.investors")}
-      </div>
-      <div className="programs-header__currency">
-        {t("programs-page.programs-header.available-to-invest")}
-      </div>
-      <div className="programs-header__currency">
-        {t("programs-page.programs-header.trades")}
-      </div>
-      <div className="programs-header__currency">
-        {t("programs-page.programs-header.period")}
-      </div>
-      <div className="programs-header__currency">
-        {t("programs-page.programs-header.drawdown")}
-      </div>
-      <div className="programs-header__currency">
-        {t("programs-page.programs-header.profit")}
-      </div>
-      <div className="programs-header__currency">
-        {t("programs-page.programs-header.chart")}
-      </div>
+    <div className="programs-header-wrapper">
+      {PROGRAMS_COLUMNS.map(
+        x =>
+          x.sortingName === undefined ? (
+            <div
+              key={x.name}
+              className={`programs-header programs-header__${x.name}`}
+            >
+              {t(`programs-page.programs-header.${x.name}`)}
+            </div>
+          ) : (
+            <SortingHeader
+              key={x.name}
+              className={`programs-header programs-header__${x.name}`}
+              isSelected={x.sortingName === sortingColumnName}
+              isAsc={isAsc}
+              onClick={handleSorting(x.sortingName)}
+            >
+              {t(`programs-page.programs-header.${x.name}`)}
+            </SortingHeader>
+          )
+      )}
     </div>
   );
 };

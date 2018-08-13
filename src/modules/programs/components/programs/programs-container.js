@@ -33,7 +33,10 @@ class ProgramsContainer extends Component {
           hide={isPending}
           updatePaging={next => service.programsChangePage(next.currentPage)}
         />
-        <ProgramsHeader />
+        <ProgramsHeader
+          sorting={filters.sorting}
+          updateSorting={service.programsChangeSorting}
+        />
         <Programs data={data} />
       </Surface>
     );

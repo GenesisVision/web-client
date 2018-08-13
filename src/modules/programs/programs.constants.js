@@ -33,11 +33,42 @@ export const PROGRAMS_DEFAULT_FILTERS = [
 
 export const PROGRAMS_COLUMNS = [
   {
-    name: "name",
-    isSortable: false
+    name: "title"
   },
   {
     name: "balance",
+    sortingName: "ByBalance"
+  },
+  {
+    name: "currency",
+    isSortable: false
+  },
+  {
+    name: "investors",
     isSortable: true
+  },
+  {
+    name: "available-to-invest",
+    isSortable: false
+  },
+  {
+    name: "trades",
+    isSortable: true
+  },
+  {
+    name: "period",
+    isSortable: true
+  },
+  {
+    name: "drawdown",
+    isSortable: true
+  },
+  {
+    name: "profit",
+    sortingName: "ByProfit"
+  },
+  {
+    name: "chart",
+    isSortable: false
   }
 ];
