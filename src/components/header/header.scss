@@ -3,8 +3,6 @@
 
 .header {
   display: flex;
-
-  &__navigation {
-    //margin-left: 32px;
-  }
+  justify-content: space-between;
+  width: 100%;
 }
