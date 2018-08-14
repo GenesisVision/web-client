@@ -27,6 +27,9 @@ class WalletWidget extends React.Component {
           <WalletIcon />
         </span>
         <span className={"wallet-widget__value"}>{`${availableGvt} GVT`}</span>
+        <button className={"wallet-widget__add profile-header__label"}>
+          +
+        </button>
         <Popover anchorEl={this.state.anchorEl} onClose={this.handleClose}>
           <div className="ww-details">
             <div className="ww-details__item">

@@ -4,6 +4,17 @@
   font-size: 13px;
   letter-spacing: 0.2px;
 
+  &__label {
+    height: 32px;
+    min-width: 32px;
+    border-radius: 8px;
+    padding: 0 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
   &__notifications {
     margin: 0 50px 0 25px;
   }

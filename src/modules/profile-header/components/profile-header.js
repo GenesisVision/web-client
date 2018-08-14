@@ -10,7 +10,7 @@ const ProfileHeader = props => {
     <div className={"profile-header"}>
       <WalletWidget {...props.info} />
       <NotificationWidget
-        hasNotifications={props.info.hasNotifications}
+        notificationsAmount={props.info.notificationsAmount}
         className={"profile-header__notifications"}
       />
       <ProfileWidget avatar={props.info.avatar} />

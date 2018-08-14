@@ -1,24 +1,23 @@
 import "./notifications-widget.scss";
 
 import classnames from "classnames";
-import { RingCircleIcon, RingIcon } from "components/icon/icon";
+import { RingIcon } from "components/icon/icon";
 import React from "react";
 
-const NotificationWidget = ({
-  hasNotifications = true,
-  count = 23,
-  className
-}) => {
+const NotificationWidget = ({ notificationsAmount, className }) => {
+  const hasNotifications = notificationsAmount > 0;
   return (
     <div
       className={classnames("notifications", className, {
-        "notification--has": hasNotifications
+        "notifications--has": hasNotifications
       })}
     >
       <span className="notifications__icon">
-        {hasNotifications ? <RingCircleIcon /> : <RingIcon />}
+        <RingIcon />
       </span>
-      <span className="notifications__count">{count}</span>
+      <span className="notifications__count profile-header__label">
+        {notificationsAmount}
+      </span>
     </div>
   );
 };

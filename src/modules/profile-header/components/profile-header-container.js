@@ -1,4 +1,4 @@
-import profileHeaderAction from "modules/profile-header/actions/profile-header-actions";
+import { fetchProfileHeaderInfo } from "modules/profile-header/actions/profile-header-actions";
 import ProfileHeader from "modules/profile-header/components/profile-header";
 import React, { Component } from "react";
 import { connect } from "react-redux";
@@ -7,7 +7,7 @@ import isAuthenticated from "shared/decorators/is-authenticated";
 
 class ProfileHeaderContainer extends Component {
   componentDidMount() {
-    this.props.fetchHeaderInfo();
+    this.props.fetchProfileHeaderInfo();
   }
 
   render() {
@@ -16,9 +16,9 @@ class ProfileHeaderContainer extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  fetchHeaderInfo: () => dispatch(profileHeaderAction.fetchHeaderInfo())
-});
+const mapDispatchToProps = {
+  fetchProfileHeaderInfo
+};
 
 const mapStateToProps = state => ({
   ...state.profileHeader
