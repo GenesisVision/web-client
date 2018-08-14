@@ -8,7 +8,7 @@ import history from "../../../utils/history";
 import passwordResetActions from "../actions/password-reset-actions";
 import clearDataActionFactory from "../../../shared/actions/clear-data.factory";
 import { EMAIL_RESET_PASSWORD } from "../actions/password-reset-actions.constants";
-import { RESET_PASSWORD_ROUTE } from "pages/reset-password/reset-password.routes";
+import { RESET_PASSWORD_ROUTE } from "pages/forgot-password/reset-password/reset-password";
 
 const forgotPassword = data => dispatch => {
   return dispatch(passwordResetActions.forgotPassword(data)).then(() => {
