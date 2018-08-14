@@ -7,7 +7,7 @@ export const initialState = {
 
 const clearDataActionType = composeClearDataActionType(EMAIL_RESET_PASSWORD);
 
-const resetPasswordPendingReducer = (state = initialState, action) => {
+const emailPendingReducer = (state = initialState, action) => {
   switch (action.type) {
     case EMAIL_RESET_PASSWORD: {
       return {
@@ -21,4 +21,4 @@ const resetPasswordPendingReducer = (state = initialState, action) => {
   }
 };
 
-export default resetPasswordPendingReducer;
+export default emailPendingReducer;

@@ -1,8 +1,8 @@
 import React from "react";
-import "./pending.scss";
-import PendingContainer from "../../../modules/password-reset/components/pending-container/pending-container";
+import "./email-pending.scss";
+import EmailPendingContainer from "../../../modules/password-reset/components/email-pending-container/email-pending-container";
 
-const ResetPasswordPending = () => {
+const EmailPending = () => {
   return (
     <div>
       <h1 className="password-pending__title">Restore password</h1>
@@ -11,9 +11,9 @@ const ResetPasswordPending = () => {
         email to create new password.
       </p>
       <p className="password-pending__text">After you confirm click Continue</p>
-      <PendingContainer />
+      <EmailPendingContainer />
     </div>
   );
 };
 
-export default ResetPasswordPending;
+export default EmailPending;

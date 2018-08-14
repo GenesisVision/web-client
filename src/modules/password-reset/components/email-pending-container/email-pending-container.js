@@ -2,10 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 
 import passwordResetService from "../../service/password-reset-service";
-import Pending from "./pending/pending";
+import EmailPending from "./email-pending/email-pending";
 
-const PendingContainer = ({ sendEmail, continueResetPassword }) => (
-  <Pending onResendEmail={sendEmail} onContinue={continueResetPassword} />
+const EmailPendingContainer = ({ sendEmail, continueResetPassword }) => (
+  <EmailPending onResendEmail={sendEmail} onContinue={continueResetPassword} />
 );
 
 const mapDispatchToProps = dispatch => ({
@@ -20,4 +20,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   null,
   mapDispatchToProps
-)(PendingContainer);
+)(EmailPendingContainer);

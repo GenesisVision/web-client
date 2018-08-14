@@ -2,16 +2,16 @@ import { GVButton } from "gv-react-components";
 import React from "react";
 import { Link } from "react-router-dom";
 import { FORGOT_PASSWORD_ROUTE } from "pages/forgot-password/forgot-password.routes";
-import "./pending.scss";
+import "./email-pending.scss";
 
-const Pending = ({ onResendEmail, onContinue }) => {
+const EmailPending = ({ onResendEmail, onContinue }) => {
   return (
     <React.Fragment>
-      <div className="pending__resend-email-btn" onClick={onResendEmail}>
+      <div className="email-pending__resend-btn" onClick={onResendEmail}>
         Resend email
       </div>
 
-      <Link to={FORGOT_PASSWORD_ROUTE} className="pending__btn-back">
+      <Link to={FORGOT_PASSWORD_ROUTE} className="email-pending__btn-back">
         <GVButton color>&larr; Back</GVButton>
       </Link>
       <GVButton
@@ -28,4 +28,4 @@ const Pending = ({ onResendEmail, onContinue }) => {
   );
 };
 
-export default Pending;
+export default EmailPending;

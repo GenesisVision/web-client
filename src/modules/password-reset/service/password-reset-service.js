@@ -1,4 +1,4 @@
-import { FORGOT_PASSWORD_PENDING_ROUTE } from "pages/forgot-password/forgot-password.routes";
+import { EMAIL_PENDING_ROUTE } from "pages/forgot-password/forgot-password.routes";
 import { HOME_ROUTE } from "pages/root.routes";
 
 import authActions from "../../../actions/auth-actions";
@@ -15,7 +15,7 @@ const forgotPassword = data => dispatch => {
     dispatch(
       passwordResetActions.storeEmailResetPassword({ email: data.email })
     );
-    history.push(FORGOT_PASSWORD_PENDING_ROUTE);
+    history.push(EMAIL_PENDING_ROUTE);
   });
 };
 
