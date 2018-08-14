@@ -13,21 +13,21 @@ const RegisterForm = ({ isSubmitting, handleSubmit, error }) => {
       <GVFormikField
         type="email"
         name="email"
-        placeholder="Email"
+        label="Email address"
         component={GVTextField}
       />
 
       <GVFormikField
         type="new-password"
-        name="password"
-        placeholder="Password"
+        name="Password"
+        label="Password"
         component={GVTextField}
       />
 
       <GVFormikField
         type="new-password"
         name="confirmPassword"
-        placeholder="Confirm Password"
+        label="Confirm password"
         component={GVTextField}
       />
 

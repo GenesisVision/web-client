@@ -20,6 +20,7 @@ import walletReducer from "../modules/wallet/reducers/wallet-reducers";
 import alertMessagesReducer from "../shared/modules/alert-message/reducers/alert-message-reducers";
 import authReducer from "./auth-reducer";
 import platformReducer from "./platform-reducer";
+import emailPendingReducer from "./email-pending-reducer";
 
 export default combineReducers({
   routing: routerReducer,
@@ -41,5 +42,6 @@ export default combineReducers({
   programDepositData: programDepositReducer,
   programWithdrawData: programWithdrawReducer,
   popupData: popupReducer,
-  navigationData: navigationReducer
+  navigationData: navigationReducer,
+  emailPending: emailPendingReducer
 });

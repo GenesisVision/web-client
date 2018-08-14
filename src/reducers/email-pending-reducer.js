@@ -1,19 +1,18 @@
+import { EMAIL_PENDING } from "../actions/email-pending.actions";
 import { composeClearDataActionType } from "shared/actions/clear-data.factory";
-import { EMAIL_RESET_PASSWORD } from "../actions/password-reset-actions.constants";
 
-export const initialState = {
+const initialState = {
   email: ""
 };
 
-const clearDataActionType = composeClearDataActionType(EMAIL_RESET_PASSWORD);
+const clearDataActionType = composeClearDataActionType(EMAIL_PENDING);
 
 const emailPendingReducer = (state = initialState, action) => {
   switch (action.type) {
-    case EMAIL_RESET_PASSWORD: {
+    case EMAIL_PENDING:
       return {
         email: action.payload.email
       };
-    }
     case clearDataActionType:
       return initialState;
     default:
