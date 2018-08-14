@@ -10,7 +10,7 @@ const ResetPassword = ({ location }) => {
   const queryParams = qs.parse(location.search.slice(1));
   return (
     <div>
-      <h1 className="reset-password__title">Restore Password</h1>
+      <h1 className="reset-password__title">Restore password</h1>
       <p className="reset-password__text">Just enter new password</p>
       <ResetPasswordContainer queryParams={queryParams} />
     </div>
