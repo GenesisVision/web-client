@@ -1,7 +1,7 @@
 %border-icon {
   position: absolute;
-  right: 0;
-  bottom: 5px;
+  right: -15px;
+  bottom: 3px;
   content: "";
   border-top: 1px solid white;
 }
@@ -24,7 +24,7 @@
 
     &::before {
       @extend %border-icon;
-      height: 5px;
+      height: 4px;
     }
     &::after {
       @extend %border-icon;

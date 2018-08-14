@@ -1,70 +1,128 @@
-.programs-header-wrapper {
-  //display: flex;
-}
+.programs-table {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
 
-.programs-header {
-  cursor: default;
-  opacity: 0.3;
-  padding: 0 1rem;
-  letter-spacing: 0.4px;
-  white-space: nowrap;
-  // &__title {
-  //   width: 26%;
-  // }
-  // &__balance {
-  //   width: 12%;
-  // }
-  // &__currency {
-  //   width: 10%;
-  // }
-  // &__investors {
-  //   width: 5%;
-  // }
-}
-
-.program {
-  cursor: pointer;
-  //display: flex;
-  //justify-content: flex-start;
-  //align-items: center;
-  opacity: 0.7;
-  height: 64px;
-  padding: 0 1rem;
-
-  &:hover {
-    opacity: 1;
-    background-color: #212c34;
+  &__row {
+    width: 100%;
+    display: flex;
+    padding: 0 1.5rem;
+    opacity: 0.7;
+    &:not(.programs-table__row--header):hover {
+      opacity: 1;
+      background-color: #212c34;
+    }
   }
 
-  &__statistic {
-    font-size: 0.8em;
-    letter-spacing: 0.3px;
-  }
+  &__cell {
+    cursor: default;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    flex-grow: 1;
+    padding: 1em 0;
+    overflow: hidden; // Or flex might break
+    list-style: none;
+    font-size: 13px;
+    font-weight: normal;
+    letter-spacing: 0.4px;
+    white-space: nowrap;
 
-  &__title {
-    //width: 20%;
+    &--header {
+      cursor: default;
+      opacity: 0.3;
+    }
+  }
+}
+
+.programs-table__cell {
+  &--title {
+    width: 25%;
     text-overflow: ellipsis;
     overflow: hidden;
-    font-weight: 600;
   }
-
-  // &__balance {
-  //   width: 12%;
-  // }
-
-  // &__currency {
-  //   width: 5%;
-  // }
-  // &__investors {
-  //   width: 5%;
-  // }
+  &--balance {
+    width: 10%;
+  }
+  &--currency {
+    width: 5%;
+  }
+  &--investors {
+    width: 5%;
+  }
+  &--available-to-invest {
+    width: 6%;
+  }
+  &--trades {
+    width: 5%;
+  }
+  &--period {
+    width: 5%;
+  }
+  &--drawdown {
+    width: 5%;
+  }
+  &--profit {
+    width: 15%;
+  }
+  &--chart {
+    width: 5%;
+  }
+  &--favorite {
+    width: auto;
+    min-width: 30px;
+  }
 }
 
 .program-detailed {
+  display: flex;
   position: relative;
   margin: 0 -1rem;
   padding: 2rem;
   background-color: #212c34;
+
+  &__info {
+    flex: 1;
+    padding-right: 1.5rem;
+  }
+
+  &__statistic {
+    flex: 3;
+    padding-left: 1.5rem;
+  }
+
+  &__avatar {
+    display: flex;
+  }
+
+  &__title {
+    font-size: 16px;
+    letter-spacing: 0.2px;
+  }
+
+  &__manager {
+    font-size: 13px;
+    letter-spacing: 0.2px;
+    color: #15bbaf;
+  }
+
+  &__strategy {
+    opacity: 0.9;
+    font-size: 13px;
+    line-height: 1.85;
+    letter-spacing: 0.4px;
+    color: #e8eff3;
+  }
+
+  &__chart {
+    width: 856px;
+    height: 200px;
+    background: black;
+  }
+
+  &__statistic-data {
+    display: flex;
+  }
 
   &__collapse {
     cursor: pointer;

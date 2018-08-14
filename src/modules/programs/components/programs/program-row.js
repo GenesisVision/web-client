@@ -9,8 +9,8 @@ import ProgramStatistic from "./program-statistic";
 
 const ProgramRow = ({ program, onExpandClick }) => {
   return (
-    <tr className="program" onClick={onExpandClick}>
-      <td>
+    <div className="programs-table__row" onClick={onExpandClick}>
+      <div className="programs-table__cell programs-table__cell--title">
         <GVProgramAvatar
           url={fileService.getFileUrl(program.avatar)}
           level={program.level}
@@ -19,15 +19,15 @@ const ProgramRow = ({ program, onExpandClick }) => {
         />
 
         {program.title}
-      </td>
+      </div>
       <ProgramStatistic program={program} />
-      <td className="program__statistic program__chart">
+      <div className="programs-table__cell programs-table__cell--chart">
         <ProgramSimpleChart data={program.chart} />
-      </td>
-      <td>
+      </div>
+      <div className="programs-table__cell programs-table__cell--favorite">
         <FavoriteIcon toggleSelected={() => {}} selected />
-      </td>
-    </tr>
+      </div>
+    </div>
   );
 };
 

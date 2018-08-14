@@ -19,20 +19,24 @@ const ProgramsHeader = ({ t, sorting, updateSorting }) => {
     return updateSorting(sortingName + "Asc");
   };
   return (
-    <tr className="programs-header-wrapper">
+    <div className="programs-table__row programs-table__row--header">
       {PROGRAMS_COLUMNS.map(
         x =>
           x.sortingName === undefined ? (
-            <th
+            <div
               key={x.name}
-              className={`programs-header programs-header__${x.name}`}
+              className={`programs-table__cell programs-table__cell--header programs-table__cell--${
+                x.name
+              }`}
             >
               {t(`programs-page.programs-header.${x.name}`)}
-            </th>
+            </div>
           ) : (
             <SortingHeader
               key={x.name}
-              className={`programs-header programs-header__${x.name}`}
+              className={`programs-table__cell programs-table__cell--header programs-table__cell--${
+                x.name
+              }`}
               isSelected={x.sortingName === sortingColumnName}
               isAsc={isAsc}
               onClick={handleSorting(x.sortingName)}
@@ -41,7 +45,10 @@ const ProgramsHeader = ({ t, sorting, updateSorting }) => {
             </SortingHeader>
           )
       )}
-    </tr>
+      <div className="programs-table__cell programs-table__cell--header programs-table__cell--favorite">
+        &nbsp;
+      </div>
+    </div>
   );
 };
 

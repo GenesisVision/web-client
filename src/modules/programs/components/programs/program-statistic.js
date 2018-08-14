@@ -3,28 +3,30 @@ import React, { Fragment } from "react";
 const ProgramStatistic = ({ program }) => {
   return (
     <Fragment>
-      <td className="program__statistic program__balance">
+      <div className="programs-table__cell programs-table__cell--balance">
         {program.statistic.balanceInGVT.amount}
-      </td>
-      <td className="program__statistic program__currency">
+      </div>
+      <div className="programs-table__cell programs-table__cell--currency">
         {program.currency}
-      </td>
-      <td className="program__statistic program__investors">
+      </div>
+      <div className="programs-table__cell programs-table__cell--investors">
         {program.statistic.investorsCount}
-      </td>
-      <td className="program__statistic program__available-to-invest">
+      </div>
+      <div className="programs-table__cell programs-table__cell--available-to-invest">
         {program.availableForInvestment}
-      </td>
-      <td className="program__statistic program__trades">
+      </div>
+      <div className="programs-table__cell programs-table__cell--trades">
         {program.statistic.tradesCount}
-      </td>
-      <td className="program__statistic program__period">{program.period}</td>
-      <td className="program__statistic program__drawdown">
+      </div>
+      <div className="programs-table__cell programs-table__cell--period">
+        {program.period}
+      </div>
+      <div className="programs-table__cell programs-table__cell--drawdown">
         {program.statistic.drawdownPercent}%
-      </td>
-      <td className="program__statistic program__profit">
+      </div>
+      <div className="programs-table__cell programs-table__cell--profit">
         {program.statistic.profitPercent}%
-      </td>
+      </div>
     </Fragment>
   );
 };

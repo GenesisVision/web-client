@@ -8,6 +8,7 @@ import { bindActionCreators, compose } from "redux";
 import * as programsService from "../../services/programs-service";
 import Programs from "./programs";
 import ProgramsHeader from "./programs-header";
+import ProgramsTable from "./programs-table";
 
 class ProgramsContainer extends Component {
   componentDidMount() {
@@ -33,15 +34,11 @@ class ProgramsContainer extends Component {
           hide={isPending}
           updatePaging={next => service.programsChangePage(next.currentPage)}
         />
-        <table>
-          <tbody>
-            <ProgramsHeader
-              sorting={filters.sorting}
-              updateSorting={service.programsChangeSorting}
-            />
-            <Programs data={data} />
-          </tbody>
-        </table>
+        <ProgramsTable
+          data={data}
+          sorting={filters.sorting}
+          updateSorting={service.programsChangeSorting}
+        />
       </Surface>
     );
   }
