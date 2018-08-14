@@ -2,6 +2,8 @@ import ResetPasswordContainer from "modules/password-reset/components/reset-pass
 import qs from "qs";
 import React from "react";
 
+import "./reset-password.scss";
+
 export const RESET_PASSWORD_ROUTE = "/reset-password";
 
 const ResetPassword = ({ location }) => {

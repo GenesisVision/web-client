@@ -15,22 +15,24 @@ const ResetPassword = ({ isSubmitting, handleSubmit, error }) => {
       <GVFormikField
         type="new-password"
         name="password"
-        label="New Password"
+        label="Password"
         component={GVTextField}
       />
       <GVFormikField
         type="new-password"
         name="confirmPassword"
-        label="Confirm New Password"
+        label="Confirm password"
         component={GVTextField}
       />
       <FormError error={error} />
-      <Link to={FORGOT_PASSWORD_ROUTE} className="email-pending__btn-back">
-        <GVButton color>&larr; Back</GVButton>
-      </Link>
-      <GVButton type="submit" id="resetPasswordSubmit">
-        Submit
-      </GVButton>
+      <div className="reset-password__navigation">
+        <Link to={FORGOT_PASSWORD_ROUTE} className="reset-password__btn-back">
+          <GVButton>&larr; Back</GVButton>
+        </Link>
+        <GVButton type="submit" id="resetPasswordSubmit">
+          Submit
+        </GVButton>
+      </div>
     </form>
   );
 };

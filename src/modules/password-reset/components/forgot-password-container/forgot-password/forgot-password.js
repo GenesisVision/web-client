@@ -18,21 +18,21 @@ const ForgotPasswordForm = ({ values, isSubmitting, handleSubmit, error }) => {
         component={GVTextField}
       />
       <FormError error={error} />
-      <Link to={LOGIN_ROUTE} className="forgot-password__btn-back">
-        <GVButton color="secondary" variant="outlined">
-          &larr; Back
+      <div className="forgot-password__navigation">
+        <Link to={LOGIN_ROUTE} className="forgot-password__btn-back">
+          <GVButton variant="text">&larr; Back</GVButton>
+        </Link>
+        <GVButton
+          id="forgotPassword"
+          title="submit restore form"
+          color="primary"
+          variant="contained"
+          disabled={isSubmitting}
+          type="submit"
+        >
+          Restore
         </GVButton>
-      </Link>
-      <GVButton
-        id="forgotPassword"
-        title="submit restore form"
-        color="primary"
-        variant="contained"
-        disabled={isSubmitting}
-        type="submit"
-      >
-        Restore
-      </GVButton>
+      </div>
     </form>
   );
 };
