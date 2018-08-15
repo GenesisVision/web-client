@@ -1,5 +1,3 @@
-export const PROGRAMS_ROUTE = "/programs";
-
 export const LEVEL_FILTER_NAME = "level";
 export const CURRENCY_FILTER_NAME = "currency";
 export const DATE_RANGE_FILTER_NAME = "dateRange";

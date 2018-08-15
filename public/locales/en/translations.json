@@ -22,7 +22,6 @@
   },
   "login-page": {
     "text": "A Brief History Of Creation",
-    "header": "Login",
     "tabs": {
       "investor": "Investor",
       "manager": "Manager"
@@ -30,6 +29,10 @@
     "signup": {
       "text": "Don’t have an account?",
       "title": "Sign up"
+    },
+    "login": {
+      "text": "Do you have account?",
+      "title": "Login"
     }
   },
   "login-form": {
@@ -37,7 +40,7 @@
       "email": "Email address",
       "password": "Password"
     },
-    "forgot": "forgot?",
+    "forgot": "Forgot?",
     "login": "Login"
   },
   "time-left-widget": {

@@ -1,6 +1,6 @@
-@import "../../styles/_colors";
-@import "../../styles/_constants";
-@import "../../styles/_breakpoint";
+@import "styles/_colors.scss";
+@import "styles/_constants.scss";
+@import "styles/_breakpoint.scss";
 
 .login {
   box-sizing: border-box;
@@ -25,18 +25,11 @@
     display: none;
   }
 
-  .form,
-  &__tabs,
-  &__header {
-    padding: 0 33px;
-  }
-
   @include media-breakpoint-desktop {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     padding: 80px 100px;
-    background: url(bgnd.svg) no-repeat bottom;
     background-size: 100%;
 
     &__left {
@@ -60,6 +53,7 @@
       overflow: auto;
       height: 100%;
       max-height: 650px;
+      padding: 0 30px;
     }
 
     &__header {
@@ -90,7 +84,6 @@
   }
 
   .sign-up {
-    margin-left: 33px;
     font-size: 11px;
 
     &__desc {
@@ -98,19 +91,8 @@
     }
   }
 
-  .login-input {
-    margin-bottom: 16px;
-  }
-
   .login-button {
     margin-top: 50px;
-  }
-
-  .gv-text-field__wrapper {
-    width: 100%;
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
   }
 
   .gv-text-field__error {

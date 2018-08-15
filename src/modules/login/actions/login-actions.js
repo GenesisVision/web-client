@@ -1,16 +1,17 @@
 import authApi from "services/api-client/auth-api";
 
-import * as actionTypes from "./login-actions.constants";
+export const LOGIN = "LOGIN";
+export const LOGIN_TWO_FACTOR = "LOGIN_TWO_FACTOR";
 
 const loginUser = loginData => ({
-  type: actionTypes.LOGIN,
+  type: LOGIN,
   payload: authApi.v10AuthSigninInvestorPost({
     model: loginData
   })
 });
 
 const storeTwoFactor = ({ email, password, from }) => ({
-  type: actionTypes.LOGIN_TWO_FACTOR,
+  type: LOGIN_TWO_FACTOR,
   payload: {
     email,
     password,

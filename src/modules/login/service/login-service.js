@@ -1,12 +1,12 @@
 import { LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "pages/login/login.routes";
+import { HOME_ROUTE } from "pages/root.routes";
 
 import authActions from "../../../actions/auth-actions";
-import { HOME_ROUTE } from "../../../pages/root.constants";
 import authService from "../../../services/auth-service";
 import clearDataActionFactory from "../../../shared/actions/clear-data.factory";
 import history from "../../../utils/history";
+import { LOGIN, LOGIN_TWO_FACTOR } from "../actions/login-actions";
 import loginActions from "../actions/login-actions";
-import { LOGIN, LOGIN_TWO_FACTOR } from "../actions/login-actions.constants";
 import { RECOVERY_CODE, TWO_FACTOR_CODE } from "../login.constants";
 
 const login = (loginData, from, onCatch) => dispatch => {
