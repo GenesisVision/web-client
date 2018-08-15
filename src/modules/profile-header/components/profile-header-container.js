@@ -12,7 +12,7 @@ class ProfileHeaderContainer extends Component {
 
   render() {
     if (!this.props.info.data) return null;
-    return <ProfileHeader info={this.props.info.data} />;
+    return <ProfileHeader {...this.props.info.data} />;
   }
 }
 

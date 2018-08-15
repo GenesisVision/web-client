@@ -1,9 +1,26 @@
 @import "styles/_colors.scss";
 @import "styles/_constants.scss";
 .popover {
-  position: absolute;
-  background-color: rgba(33, 44, 52, 0.9);
-  padding: 32px;
-  border-radius: $border-radius;
-  margin-top: 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  &__dropdown {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+  }
+
+  &__content {
+    position: absolute;
+    background-color: rgba(33, 44, 52, 0.9);
+    padding: 32px;
+    border-radius: $border-radius;
+    margin-top: 10px;
+  }
 }

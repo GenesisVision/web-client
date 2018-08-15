@@ -4,11 +4,13 @@
 .wallet-widget {
   display: flex;
   align-items: center;
-  padding: 10px 25px;
+  padding: 10px 0;
   color: white;
+  margin-right: 15px;
+  cursor: pointer;
 
   &__value {
-    margin: 0 15px;
+    margin-left: 15px;
   }
 
   &__add {
@@ -21,5 +23,26 @@
     &:focus {
       outline: none;
     }
+  }
+}
+
+.wallet-details {
+  color: white;
+
+  &__item:not(:last-child) {
+    margin-bottom: 23px;
+  }
+
+  &__title {
+    opacity: 0.4;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+    margin-bottom: 6px;
+  }
+
+  &__value {
+    font-weight: 600;
+    letter-spacing: 0.4px;
   }
 }

@@ -10,6 +10,12 @@ const getAnchorEl = el => {
 };
 
 class Popover extends Component {
+  static getDerivedStateFromProps() {
+    return {
+      windowWidth: window.innerWidth
+    };
+  }
+
   getAnchorBounds = () => {
     const anchorEl = getAnchorEl(this.props.anchorEl);
     return anchorEl.getBoundingClientRect();
@@ -48,18 +54,16 @@ class Popover extends Component {
   };
 
   handleWindowResize = () => {
-    this.setState({
-      windowWidth: window.innerWidth
-    });
+    this.setState({ windowWidth: window.innerWidth });
   };
 
-  handleDocumentClick = () => {
-    this.handleClose();
+  handleDropdownClick = event => {
+    this.handleClose(event);
   };
 
-  handleClose = () => {
+  handleClose = event => {
     if (this.props.onClose) {
-      this.props.onClose();
+      this.props.onClose(event);
     }
   };
 
@@ -67,10 +71,15 @@ class Popover extends Component {
     const position = this.getPosition();
     return (
       <Portal open={Boolean(this.props.anchorEl)}>
-        <div className="popover" style={position}>
+        <div className="popover">
           <EventListener target="window" onResize={this.handleWindowResize} />
-          <EventListener target="document" onClick={this.handleDocumentClick} />
-          {this.props.children}
+          <div
+            className="popover__dropdown"
+            onClick={this.handleDropdownClick}
+          />
+          <div className="popover__content" style={position}>
+            {this.props.children}
+          </div>
         </div>
       </Portal>
     );

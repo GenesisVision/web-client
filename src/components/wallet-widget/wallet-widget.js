@@ -1,23 +1,80 @@
 import "./wallet-widget.scss";
 
 import { WalletIcon } from "components/icon/icon";
-import React from "react";
+import Popover from "components/popover/popover";
+import { WALLET_ROUTE } from "modules/wallet/wallet.constants";
+import PropTypes from "prop-types";
+import React, { Fragment } from "react";
+import { translate } from "react-i18next";
+import { Link } from "react-router-dom";
 
 class WalletWidget extends React.Component {
+  state = {
+    anchorEl: null
+  };
+  handleOpenDetails = event => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
+  handleCloseDetails = () => {
+    this.setState({ anchorEl: null });
+  };
   render() {
-    const { availableGvt } = this.props;
+    const { availableGvt, investedGvt, totalBalanceGvt, t } = this.props;
     return (
-      <div className={"wallet-widget"}>
-        <span className={"wallet-widget__icon"}>
+      <Fragment>
+        <div className={"wallet-widget"} onClick={this.handleOpenDetails}>
           <WalletIcon />
-        </span>
-        <span className={"wallet-widget__value"}>{`${availableGvt} GVT`}</span>
-        <button className={"wallet-widget__add profile-header__label"}>
-          +
-        </button>
-      </div>
+          <span
+            className={"wallet-widget__value"}
+          >{`${availableGvt} GVT`}</span>
+        </div>
+        <Popover
+          anchorEl={this.state.anchorEl}
+          onClose={this.handleCloseDetails}
+        >
+          <div className="wallet-details">
+            <div className="wallet-details__item">
+              <div className="wallet-details__title">
+                {t("wallet-widget.details.total-balance")}
+              </div>
+              <div className="wallet-details__value">{`${totalBalanceGvt} GVT`}</div>
+            </div>
+            <div className="wallet-details__item">
+              <div className="wallet-details__title">
+                {t("wallet-widget.details.invested-value")}
+              </div>
+              <div className="wallet-details__value">{`${investedGvt} GVT`}</div>
+            </div>
+            <div className="wallet-details__item">
+              <div className="wallet-details__title">
+                {t("wallet-widget.details.available")}
+              </div>
+              <div className="wallet-details__value">{`${availableGvt} GVT`}</div>
+            </div>
+            <div className="wallet-details__item">
+              <div className="wallet-details__value">
+                <Link to={WALLET_ROUTE} onClick={this.handleCloseDetails}>
+                  {t("wallet-widget.details.details")}
+                </Link>
+              </div>
+            </div>
+          </div>
+        </Popover>
+      </Fragment>
     );
   }
 }
 
-export default WalletWidget;
+WalletWidget.propTypes = {
+  availableGvt: PropTypes.number,
+  investedGvt: PropTypes.number,
+  totalBalanceGvt: PropTypes.number
+};
+
+WalletWidget.defaultProps = {
+  availableGvt: 0,
+  investedGvt: 0,
+  totalBalanceGvt: 0
+};
+
+export default translate()(WalletWidget);

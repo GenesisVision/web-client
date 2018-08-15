@@ -43,6 +43,14 @@
     "forgot": "Forgot?",
     "login": "Login"
   },
+  "wallet-widget": {
+    "details": {
+      "total-balance": "Total balance",
+      "invested-value": "Invested value",
+      "available": "Available",
+      "details": "Details"
+    }
+  },
   "time-left-widget": {
     "day": "Day left",
     "day_plural": "Days left",

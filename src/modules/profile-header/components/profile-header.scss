@@ -15,7 +15,29 @@
     box-sizing: border-box;
   }
 
-  &__notifications {
-    margin: 0 50px 0 25px;
+  &__add {
+    border: none;
+    color: rgb(0, 255, 0);
+    background-color: rgba(0, 255, 0, 0.3);
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.notifications-widget {
+  display: flex;
+  align-items: center;
+  margin: 0 25px;
+
+  &__count {
+    margin-left: 10px;
+  }
+
+  &--has &__count {
+    color: red;
+    background-color: rgba(255, 0, 0, 0.2);
   }
 }
