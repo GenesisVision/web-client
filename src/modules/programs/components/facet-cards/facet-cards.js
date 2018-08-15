@@ -17,7 +17,19 @@ const FacetCards = ({ facets, changeFacet }) => {
       id: "2",
       title: "title 2",
       description: "description 2",
-      logo: null
+      logo: "http://via.placeholder.com/315x140"
+    },
+    {
+      id: "3",
+      title: "title 3",
+      description: "description 3",
+      logo: "http://via.placeholder.com/315x140"
+    },
+    {
+      id: "4",
+      title: "title 4",
+      description: "description 4",
+      logo: "http://via.placeholder.com/315x140"
     }
   ];
   if (facets.length === 0) return null;

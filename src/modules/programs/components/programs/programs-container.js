@@ -6,8 +6,6 @@ import { withRouter } from "react-router-dom";
 import { bindActionCreators, compose } from "redux";
 
 import * as programsService from "../../services/programs-service";
-import Programs from "./programs";
-import ProgramsHeader from "./programs-header";
 import ProgramsTable from "./programs-table";
 
 class ProgramsContainer extends Component {
