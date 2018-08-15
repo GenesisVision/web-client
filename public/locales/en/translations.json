@@ -2,18 +2,22 @@
   "app": {
     "header": "Manager Portal"
   },
-  "login-page": {
+  "auth": {
     "text": "A Brief History Of Creation",
     "tabs": {
       "investor": "Investor",
       "manager": "Manager"
     },
     "signup": {
-      "text": "Don’t have an account?",
-      "title": "Sign up"
+      "footer-text": "Do you have an account?",
+      "title": "Sign up",
+      "email-field-text": "Email address",
+      "password-field-text": "Password",
+      "password-confirm-field-text": "Confirm password",
+      "email-confirm-title": "Confirm your Email"
     },
     "login": {
-      "text": "Do you have account?",
+      "footer-text": "Don't you have account?",
       "title": "Login"
     }
   },
@@ -24,6 +28,29 @@
     },
     "forgot": "Forgot?",
     "login": "Login"
+  },
+  "password-restore": {
+    "title": "Restore password",
+    "forgot-password": {
+      "text": "Just enter the email address you used to create your account.",
+      "email-field-text": "Email address",
+      "confirm-button-text": "Restore",
+      "back-button-text": "Back"
+    },
+    "new-password": {
+      "text": "Just enter new password.",
+      "password-field-text": "Password",
+      "password-confirm-field-text": "Confirm password",
+      "confirm-button-text": "Submit",
+      "back-button-text": "Back"
+    }
+  },
+  "email-pending": {
+    "text-section-1": "Please check your inbox for a confirmation email. Click the link in the email to create new password.",
+    "text-section-2": "After you confirm click Continue.",
+    "email-resend-button-text": "Resend email",
+    "confirm-button-text": "Continue",
+    "back-button-text": "Back"
   },
   "time-left-widget": {
     "day": "Day left",

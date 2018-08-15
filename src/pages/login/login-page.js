@@ -14,17 +14,17 @@ const LoginPage = ({ t, location }) => {
   return (
     <Fragment>
       <div className="login__header">
-        <h1>{t("login-page.login.title")}</h1>
+        <h1>{t("auth.login.title")}</h1>
         <LoginTabs />
       </div>
 
       <LoginContainer from={from} />
 
       <div className="sign-up">
-        <span className={"sign-up__desc"}>{t("login-page.signup.text")}</span>
+        <span className={"sign-up__desc"}>{t("auth.login.footer-text")}</span>
         <Link to={REGISTER_ROUTE} className="sign-up__desc">
           <GVButton color="secondary" variant="outlined">
-            {t("login-page.signup.title")}
+            {t("auth.signup.title")}
           </GVButton>
         </Link>
       </div>

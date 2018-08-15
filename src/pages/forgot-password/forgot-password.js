@@ -1,17 +1,19 @@
-import ForgotPasswordContainer from "modules/password-reset/components/forgot-password-container/forgot-password-container";
 import React from "react";
-import "./forgot-password.scss";
+import { translate } from "react-i18next";
 
-const ForgotPassword = () => {
+import "./forgot-password.scss";
+import ForgotPasswordContainer from "modules/password-reset/components/forgot-password-container/forgot-password-container";
+
+const ForgotPassword = ({ t }) => {
   return (
     <div className="forgot-password">
-      <h1 className="forgot-password__title">Restore password</h1>
+      <h1 className="forgot-password__title">{t("password-restore.title")}</h1>
       <p className="forgot-password__text">
-        Just enter the email address you used to create your account.
+        {t("password-restore.forgot-password.text")}
       </p>
       <ForgotPasswordContainer />
     </div>
   );
 };
 
-export default ForgotPassword;
+export default translate()(ForgotPassword);

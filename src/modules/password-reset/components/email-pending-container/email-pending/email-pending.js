@@ -3,8 +3,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FORGOT_PASSWORD_ROUTE } from "pages/forgot-password/forgot-password.routes";
 import "./email-pending.scss";
+import { translate } from "react-i18next";
 
-const EmailPending = ({ onResendEmail, onContinue }) => {
+const EmailPending = ({ onResendEmail, onContinue, t }) => {
   return (
     <React.Fragment>
       <GVButton
@@ -12,11 +13,13 @@ const EmailPending = ({ onResendEmail, onContinue }) => {
         variant="text"
         onClick={onResendEmail}
       >
-        Resend email
+        {t("password-restore.email-pending.email-resend-button-text")}
       </GVButton>
       <div className="email-pending__navigation">
         <Link to={FORGOT_PASSWORD_ROUTE} className="email-pending__btn-back">
-          <GVButton variant="text">&larr; Back</GVButton>
+          <GVButton variant="text">
+            &larr; {t("password-restore.email-pending.back-button-text")}
+          </GVButton>
         </Link>
         <GVButton
           id="forgotPassword"
@@ -26,11 +29,11 @@ const EmailPending = ({ onResendEmail, onContinue }) => {
           type="submit"
           onClick={onContinue}
         >
-          Continue
+          {t("password-restore.email-pending.confirm-button-text")}
         </GVButton>
       </div>
     </React.Fragment>
   );
 };
 
-export default EmailPending;
+export default translate()(EmailPending);

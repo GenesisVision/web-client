@@ -10,17 +10,17 @@ const SignUp = ({ t }) => {
   return (
     <Fragment>
       <div className="login__header">
-        <h1>{t("login-page.signup.title")}</h1>
+        <h1>{t("auth.signup.title")}</h1>
         <LoginTabs />
       </div>
 
       <RegisterContainer />
 
       <div className="sign-up">
-        <span className="sign-up__desc">{t("login-page.login.text")}</span>
+        <span className="sign-up__desc">{t("auth.signup.footer-text")}</span>
         <Link to={LOGIN_ROUTE}>
           <GVButton variant="outlined" color="secondary">
-            {t("login-page.login.title")}
+            {t("auth.login.title")}
           </GVButton>
         </Link>
       </div>

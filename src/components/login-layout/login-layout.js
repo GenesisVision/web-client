@@ -13,7 +13,7 @@ const LoginLayout = ({ t, children }) => {
           <GvLogo />
           <GvBrand />
         </div>
-        <h2 className="login__description">{t("login-page.text")}</h2>
+        <h2 className="login__description">{t("auth.text")}</h2>
       </div>
       <div className="login__right">
         <div className="login__content">{children}</div>
