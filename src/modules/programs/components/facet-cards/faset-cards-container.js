@@ -1,4 +1,4 @@
-import { PROGRAMS_FACET_ROUTE } from "pages/programs/program.routes";
+import { PROGRAMS_FACET_ROUTE } from "pages/programs/programs.routes";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
 import replaceParams from "utils/replace-params";

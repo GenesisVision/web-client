@@ -1,9 +1,9 @@
-import { GVTab, GVTabs } from "gv-react-components/dist";
-import { PROGRAMS_TAB_ROUTE } from "pages/programs/program.routes";
+import { GVTab, GVTabs } from "gv-react-components";
 import {
   PROGRAMS_EXPLORE_TAB_NAME,
-  PROGRAMS_FAVORITES_TAB_NAME
-} from "pages/programs/program.routes";
+  PROGRAMS_FAVORITES_TAB_NAME,
+  PROGRAMS_TAB_ROUTE
+} from "pages/programs/programs.routes";
 import React from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";

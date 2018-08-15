@@ -1,7 +1,7 @@
 import {
   PROGRAMS_FAVORITES_TAB_NAME,
   PROGRAMS_TAB_ROUTE
-} from "pages/programs/program.routes";
+} from "pages/programs/programs.routes";
 import qs from "qs";
 import { matchPath } from "react-router-dom";
 import { push } from "react-router-redux";
