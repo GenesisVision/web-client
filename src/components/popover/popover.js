@@ -1,5 +1,6 @@
 import "./popover.scss";
 
+import classnames from "classnames";
 import Portal from "components/portal/portal";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
@@ -57,7 +58,7 @@ class Popover extends Component {
     this.setState({ windowWidth: window.innerWidth });
   };
 
-  handleDropdownClick = event => {
+  handleBackdropClick = event => {
     this.handleClose(event);
   };
 
@@ -71,12 +72,18 @@ class Popover extends Component {
     const position = this.getPosition();
     return (
       <Portal open={Boolean(this.props.anchorEl)}>
-        <div className="popover">
+        <div
+          className={classnames("popover", {
+            "popover--fixed": !this.props.disableBackdrop
+          })}
+        >
           <EventListener target="window" onResize={this.handleWindowResize} />
-          <div
-            className="popover__dropdown"
-            onClick={this.handleDropdownClick}
-          />
+          {!this.props.disableBackdrop && (
+            <div
+              className="popover__backdrop"
+              onClick={this.handleBackdropClick}
+            />
+          )}
           <div className="popover__content" style={position}>
             {this.props.children}
           </div>
@@ -90,7 +97,8 @@ Popover.propTypes = {
   onClose: PropTypes.func,
   horizontal: PropTypes.oneOf(["left", "right"]),
   vertical: PropTypes.oneOf(["top", "bottom"]),
-  anchorEl: PropTypes.oneOfType([PropTypes.object, PropTypes.func])
+  anchorEl: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+  disableBackdrop: PropTypes.bool
 };
 
 Popover.defaultProps = {

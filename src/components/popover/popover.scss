@@ -1,18 +1,16 @@
 @import "styles/_colors.scss";
 @import "styles/_constants.scss";
 .popover {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-
-  &__dropdown {
+  &--fixed,
+  &__backdrop {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
+  }
+
+  &__backdrop {
     z-index: -1;
   }
 
