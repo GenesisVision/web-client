@@ -3,16 +3,15 @@
 .facets {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
+  margin: 2em 0;
 }
 
 .facet {
   cursor: pointer;
-  margin: 1em;
   width: 315px;
   height: 280px;
-  background-color: #1b252d;
-  border-radius: 0.5em;
+
   overflow: hidden;
 
   &__logo-wrapper {
