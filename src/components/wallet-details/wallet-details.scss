@@ -1,0 +1,20 @@
+.wallet-details {
+  color: white;
+
+  &__item:not(:last-child) {
+    margin-bottom: 23px;
+  }
+
+  &__title {
+    opacity: 0.4;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+    margin-bottom: 6px;
+  }
+
+  &__value {
+    font-weight: 600;
+    letter-spacing: 0.4px;
+  }
+}
