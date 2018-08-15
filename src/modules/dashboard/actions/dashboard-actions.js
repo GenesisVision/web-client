@@ -1,61 +1,41 @@
-import authService from "../../../services/auth-service";
-import SwaggerInvestorApi from "../../../services/api-client/swagger-investor-api";
+export const DASHBOARD_PROGRAMS = "DASHBOARD_PROGRAMS";
+export const DASHBOARD_FUNDS = "DASHBOARD_FUNDS";
+export const DASHBOARD_CHART_COMMON = "DASHBOARD_CHART_COMMON";
+export const DASHBOARD_CHART = "DASHBOARD_CHART";
+export const DASHBOARD_PORTFOLIO_EVENTS = "DASHBOARD_PORTFOLIO_EVENTS";
 
-import * as actionTypes from "./dashboard-actions.constants";
-
-const fetchDashboardPrograms = () => {
+export const fetchChartCommon = data => {
   return {
-    type: actionTypes.DASHBOARD_PROGRAMS,
-    payload: SwaggerInvestorApi.apiInvestorDashboardGet(
-      authService.getAuthArg(),
-      { equityChartLength: 365 }
-    )
+    type: DASHBOARD_CHART_COMMON,
+    payload: 1 /* SwaggerInvestorApi.apiInvestorDashboardGet(
+     data
+    ) */
   };
 };
 
-const fetchFavoritesPrograms = () => {
-  const data = {
-    filter: { equityChartLength: 365, showMyFavorites: true },
-    authorization: authService.getAuthArg()
-  };
+export const fetchPrograms = data => {
   return {
-    type: actionTypes.FAVORITES_PROGRAMS,
-    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramsPost(data)
-  };
-};
-
-const removeFavoriteProgram = (
-  { id },
-  onResolve = response => Promise.resolve(response)
-) => dispatch => {
-  return dispatch({
-    type: actionTypes.REMOVE_FAVORITE_PROGRAM,
-    payload: SwaggerInvestorApi.apiInvestorInvestmentProgramsFavoritesRemovePost(
-      id,
-      authService.getAuthArg()
-    ).then(() => Promise.resolve({ id }))
-  });
-};
-
-const fetchDashboardChart = () => {
-  const data = {
-    filter: {
-      type: "Internal"
-    }
-  };
-  return {
-    type: actionTypes.DASHBOARD_CHART,
-    payload: SwaggerInvestorApi.apiInvestorWalletStatisticPost(
-      authService.getAuthArg(),
+    type: DASHBOARD_PROGRAMS,
+    payload: 1 /* SwaggerInvestorApi.apiInvestorDashboardGet(
       data
-    )
+    ) */
   };
 };
 
-const dashboardActions = {
-  fetchDashboardPrograms,
-  fetchDashboardChart,
-  fetchFavoritesPrograms,
-  removeFavoriteProgram
+export const fetchFunds = data => {
+  return {
+    type: DASHBOARD_FUNDS,
+    payload: 1 /* SwaggerInvestorApi.apiInvestorDashboardGet(
+     data
+    ) */
+  };
 };
-export default dashboardActions;
+
+export const fetchPortfolioEvents = data => {
+  return {
+    type: DASHBOARD_PORTFOLIO_EVENTS,
+    payload: 1 /* SwaggerInvestorApi.apiInvestorDashboardGet(
+   data
+  ) */
+  };
+};

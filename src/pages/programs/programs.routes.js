@@ -1,4 +1,4 @@
-import NotFoundPage from "pages/not-found/not-found";
+import NotFoundPage from "pages/not-found/not-found.routes";
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 
