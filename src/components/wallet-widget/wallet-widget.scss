@@ -1,0 +1,25 @@
+@import "styles/_colors.scss";
+@import "styles/_constants.scss";
+
+.wallet-widget {
+  display: flex;
+  align-items: center;
+  padding: 10px 25px;
+  color: white;
+
+  &__value {
+    margin: 0 15px;
+  }
+
+  &__add {
+    color: #0f0;
+    background-color: rgba(0, 255, 0, 0.2);
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
