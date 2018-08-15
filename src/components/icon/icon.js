@@ -19,3 +19,15 @@ export const ProgramIcon = props => {
 export const DashboardIcon = props => {
   return <Icon type={"dashboard"} {...props} />;
 };
+
+export const RingIcon = props => {
+  return <Icon type={"ring"} {...props} />;
+};
+
+export const RingCircleIcon = props => {
+  return <Icon type={"ring-circle"} {...props} />;
+};
+
+export const WalletIcon = props => {
+  return <Icon type={"wallet"} {...props} />;
+};
