@@ -38,7 +38,7 @@ class ProfileHeader extends React.Component {
             {notificationsAmount}
           </span>
         </div>
-        <ProfileWidget avatar={avatar} name={name}/>
+        <ProfileWidget avatar={avatar} name={name} />
       </div>
     );
   }
