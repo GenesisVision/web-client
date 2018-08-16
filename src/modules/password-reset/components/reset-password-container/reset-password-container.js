@@ -18,7 +18,7 @@ const ResetPasswordContainer = ({
       setSubmitting
     );
   };
-  // if (!queryParams.userId || !queryParams.code) return null;
+  if (!queryParams.userId || !queryParams.code) return null;
   return <ResetPassword error={errorMessage} onSubmit={handleSubmit} />;
 };
 

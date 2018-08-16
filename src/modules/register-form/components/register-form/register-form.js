@@ -11,7 +11,12 @@ import validationSchema from "./register-form.validators";
 
 const RegisterForm = ({ isSubmitting, handleSubmit, error, t }) => {
   return (
-    <form id="registerForm" onSubmit={handleSubmit} noValidate>
+    <form
+      id="registerForm"
+      className="register-form"
+      onSubmit={handleSubmit}
+      noValidate
+    >
       <GVFormikField
         type="email"
         name="email"
@@ -35,7 +40,11 @@ const RegisterForm = ({ isSubmitting, handleSubmit, error, t }) => {
 
       <FormError error={error} />
 
-      <GVButton type="submit" id="registerFormSubmit">
+      <GVButton
+        type="submit"
+        id="registerFormSubmit"
+        className="register-form__submit-button"
+      >
         {t("auth.signup.title")}
       </GVButton>
     </form>

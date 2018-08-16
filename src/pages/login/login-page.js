@@ -20,9 +20,11 @@ const LoginPage = ({ t, location }) => {
 
       <LoginContainer from={from} />
 
-      <div className="sign-up">
-        <span className={"sign-up__desc"}>{t("auth.login.footer-text")}</span>
-        <Link to={REGISTER_ROUTE} className="sign-up__desc">
+      <div className="auth-footer">
+        <span className={"auth-footer__desc"}>
+          {t("auth.login.footer-text")}
+        </span>
+        <Link to={REGISTER_ROUTE} className="auth-footer__desc">
           <GVButton color="secondary" variant="outlined">
             {t("auth.signup.title")}
           </GVButton>

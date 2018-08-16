@@ -9,7 +9,7 @@
       "manager": "Manager"
     },
     "signup": {
-      "footer-text": "Do you have an account?",
+      "footer-text": "Have an account already?",
       "title": "Sign up",
       "email-field-text": "Email address",
       "password-field-text": "Password",
