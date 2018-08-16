@@ -21,7 +21,7 @@ const RegisterForm = ({ isSubmitting, handleSubmit, error, t }) => {
 
       <GVFormikField
         type="new-password"
-        name="Password"
+        name="password"
         label={t("auth.signup.password-field-text")}
         component={GVTextField}
       />
