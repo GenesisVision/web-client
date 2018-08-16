@@ -7,5 +7,10 @@ const registerUser = model => ({
   payload: authApi.v10AuthSignupInvestorPost({ model })
 });
 
-const registerActions = { registerUser };
+const resendConfirmationLink = model => ({
+  type: actionTypes.RESEND_CONFIRMATION_LINK,
+  payload: authApi.v10AuthResendconfirmationlinkPost({ model })
+});
+
+const registerActions = { registerUser, resendConfirmationLink };
 export default registerActions;

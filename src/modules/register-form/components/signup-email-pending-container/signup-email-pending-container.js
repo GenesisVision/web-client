@@ -10,7 +10,7 @@ const EmailPendingContainer = ({ sendEmail, continueConfirmEmail }) => (
 
 const mapDispatchToProps = dispatch => ({
   sendEmail: () => {
-    dispatch(registerService.sendForgotPasswordEmail());
+    dispatch(registerService.resendConfirmationLink());
   },
   continueConfirmEmail: () => {
     dispatch(registerService.confirmEmail());

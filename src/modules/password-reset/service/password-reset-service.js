@@ -2,14 +2,14 @@ import { EMAIL_PENDING_ROUTE } from "pages/forgot-password/forgot-password.route
 import { HOME_ROUTE } from "pages/root.routes";
 
 import authActions from "../../../actions/auth-actions";
+import emailPendingActions from "../../../actions/email-pending.actions";
+import { EMAIL_PENDING } from "../../../actions/email-pending.actions";
+import { RESET_PASSWORD_ROUTE } from "../../../pages/forgot-password/forgot-password.routes";
 import authService from "../../../services/auth-service";
+import clearDataActionFactory from "../../../shared/actions/clear-data.factory";
 import { alertMessageActions } from "../../../shared/modules/alert-message/actions/alert-message-actions";
 import history from "../../../utils/history";
 import passwordResetActions from "../actions/password-reset-actions";
-import emailPendingActions from "../../../actions/email-pending.actions";
-import clearDataActionFactory from "../../../shared/actions/clear-data.factory";
-import { EMAIL_PENDING } from "../../../actions/email-pending.actions";
-import { RESET_PASSWORD_ROUTE } from "../../../pages/forgot-password/forgot-password.routes";
 
 const forgotPassword = data => dispatch => {
   return dispatch(passwordResetActions.forgotPassword(data)).then(() => {
@@ -34,7 +34,7 @@ const resetPassword = (userId, code, data) => dispatch => {
 const sendForgotPasswordEmail = () => (dispatch, getState) => {
   let { email } = getState().emailPending;
 
-  passwordResetActions.forgotPassword({ email });
+  dispatch(passwordResetActions.forgotPassword({ email }));
 };
 
 const allowResetPassword = () => (dispatch, getState) => {

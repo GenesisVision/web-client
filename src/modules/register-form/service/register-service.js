@@ -1,27 +1,22 @@
-import history from "../../../utils/history";
-import { EMAIL_CONFIRM_PENDING_ROUTE } from "../../email-confirm/email-confirm.constants";
-import registerActions from "../actions/register-actions";
-import clearDataActionFactory from "../../../shared/actions/clear-data.factory";
 import emailPendingActions, {
   EMAIL_PENDING
 } from "../../../actions/email-pending.actions";
 import { DASHBOARD_ROUTE } from "../../../pages/dashboard/dashboard.routes";
+import { REGISTER_ROUTE_PENDING } from "../../../pages/signup/signup.routes";
+import clearDataActionFactory from "../../../shared/actions/clear-data.factory";
+import history from "../../../utils/history";
+import registerActions from "../actions/register-actions";
 
 const register = registerData => dispatch => {
-  console.log("данные, которые летят в регистрацию");
-  console.dir(registerData);
-  dispatch(emailPendingActions.saveEmail(registerData));
   return dispatch(registerActions.registerUser(registerData)).then(() => {
     dispatch(emailPendingActions.saveEmail(registerData));
-    history.push(EMAIL_CONFIRM_PENDING_ROUTE);
+    history.push(REGISTER_ROUTE_PENDING);
   });
 };
 
-const sendSignUpEmail = () => (dispatch, getState) => {
+const resendConfirmationLink = () => (dispatch, getState) => {
   let { email } = getState().emailPending;
-
-  // тут будет отправка емеила как в sign-up
-  // passwordResetActions.forgotPassword({ email });
+  dispatch(registerActions.resendConfirmationLink({ email }));
 };
 
 const confirmEmail = () => (dispatch, getState) => {
@@ -29,5 +24,5 @@ const confirmEmail = () => (dispatch, getState) => {
   history.push(DASHBOARD_ROUTE);
 };
 
-const registerService = { register, sendSignUpEmail, confirmEmail };
+const registerService = { register, resendConfirmationLink, confirmEmail };
 export default registerService;
