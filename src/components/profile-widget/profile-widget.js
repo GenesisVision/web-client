@@ -1,6 +1,7 @@
 import "./profile-widget.scss";
 
 import Popover from "components/popover/popover";
+import { GVButton } from "gv-react-components";
 import { PROFILE_ROUTE } from "modules/profile/profile.constants";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
@@ -35,7 +36,13 @@ class ProfileWidget extends Component {
             <Link to={PROFILE_ROUTE}>Profile</Link>
           </div>
           <div>
-            <a href={"/"}>Logout</a>
+            <GVButton
+              onClick={this.props.logout}
+              variant="text"
+              color="secondary"
+            >
+              Logout
+            </GVButton>
           </div>
         </Popover>
       </div>
@@ -45,7 +52,8 @@ class ProfileWidget extends Component {
 
 ProfileWidget.propTypes = {
   avatar: PropTypes.string,
-  name: PropTypes.string
+  name: PropTypes.string,
+  logout: PropTypes.func.isRequired
 };
 
 export default ProfileWidget;

@@ -1,3 +1,4 @@
+import { loginServicelogout } from "modules/login/service/login-service";
 import { fetchProfileHeaderInfo } from "modules/profile-header/actions/profile-header-actions";
 import ProfileHeader from "modules/profile-header/components/profile-header";
 import React, { Component } from "react";
@@ -12,12 +13,18 @@ class ProfileHeaderContainer extends Component {
 
   render() {
     if (!this.props.info.data) return null;
-    return <ProfileHeader {...this.props.info.data} />;
+    return (
+      <ProfileHeader
+        {...this.props.info.data}
+        logout={this.props.loginServicelogout}
+      />
+    );
   }
 }
 
 const mapDispatchToProps = {
-  fetchProfileHeaderInfo
+  fetchProfileHeaderInfo,
+  loginServicelogout
 };
 
 const mapStateToProps = state => ({
