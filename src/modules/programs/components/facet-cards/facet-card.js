@@ -13,7 +13,7 @@ const FacetCard = ({ facet }) => {
 
   const composeFacetLink = facetId => {
     return replaceParams(PROGRAMS_FACET_ROUTE, {
-      ":facet": facetId
+      ":facetId": facetId
     });
   };
 

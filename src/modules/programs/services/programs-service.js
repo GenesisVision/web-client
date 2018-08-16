@@ -3,6 +3,7 @@ import {
   calculateTotalPages
 } from "modules/paging/helpers/paging-helpers";
 import {
+  PROGRAMS_FACET_ROUTE,
   PROGRAMS_FAVORITES_TAB_NAME,
   PROGRAMS_TAB_ROUTE
 } from "pages/programs/programs.routes";
@@ -99,4 +100,19 @@ export const programsChangeSorting = sorting => (dispatch, getState) => {
   queryParams.sorting = sorting;
   const newUrl = routing.location.pathname + "?" + qs.stringify(queryParams);
   dispatch(push(newUrl));
+};
+
+export const getCurrentFacet = () => (dispatch, getState) => {
+  const { routing, platformData } = getState();
+
+  if (!platformData.data) return { isPending: true };
+
+  const { facets } = platformData.data;
+  const { facetId } = getParams(
+    routing.location.pathname,
+    PROGRAMS_FACET_ROUTE
+  );
+  const facet = facets.find(x => x.id === facetId);
+  if (!facet) return { notFound: true };
+  return { facet };
 };
