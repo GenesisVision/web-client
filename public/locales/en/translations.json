@@ -44,12 +44,10 @@
     "login": "Login"
   },
   "wallet-widget": {
-    "details": {
-      "total-balance": "Total balance",
-      "invested-value": "Invested value",
-      "available": "Available",
-      "details": "Details"
-    }
+    "total-balance": "Total balance",
+    "invested-value": "Invested value",
+    "available": "Available",
+    "details": "Details"
   },
   "profile-widget": {
     "personal-details": "Personal details",

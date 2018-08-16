@@ -20,14 +20,14 @@ class ProfileWidget extends Component {
   handleClose = () => this.setState({ anchor: null });
 
   render() {
-    const { t } = this.props;
+    const { t, avatar, email, logout } = this.props;
     return (
-      <div className={"profile-widget"}>
-        <div className={"profile-widget__avatar"} onClick={this.handleOpen}>
+      <div className="profile-widget">
+        <div className="profile-widget__avatar" onClick={this.handleOpen}>
           <img
-            alt={this.props.name}
-            className={"profile-widget__image"}
-            src={this.props.avatar || UserIcon}
+            alt={email}
+            className="profile-widget__image"
+            src={avatar || UserIcon}
           />
         </div>
         <Popover
@@ -36,7 +36,7 @@ class ProfileWidget extends Component {
           horizontal={"right"}
         >
           <div className="profile-menu">
-            <div className={"profile-menu__header"}>{this.props.email}</div>
+            <div className="profile-menu__header">{email}</div>
             <div className="profile-menu__item profile-menu__item--details">
               <Link to={PROFILE_ROUTE}>
                 <DetailsIcon />
@@ -50,7 +50,7 @@ class ProfileWidget extends Component {
               </Link>
             </div>
             <div className="profile-menu__item profile-menu__item--logout">
-              <GVButton variant="text">
+              <GVButton variant="text" onClick={logout}>
                 <LogoutIcon />
                 {t("profile-widget.logout")}
               </GVButton>
@@ -64,7 +64,6 @@ class ProfileWidget extends Component {
 
 ProfileWidget.propTypes = {
   avatar: PropTypes.string,
-  name: PropTypes.string,
   logout: PropTypes.func.isRequired,
   email: PropTypes.string.isRequired
 };

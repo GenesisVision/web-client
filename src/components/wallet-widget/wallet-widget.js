@@ -19,14 +19,12 @@ class WalletWidget extends React.Component {
     this.setState({ anchorEl: null });
   };
   render() {
-    const { availableGvt, investedGvt, totalBalanceGvt, t } = this.props;
+    const { t, availableGvt, investedGvt, totalBalanceGvt } = this.props;
     return (
       <Fragment>
-        <div className={"wallet-widget"} onClick={this.handleOpenDetails}>
+        <div className="wallet-widget" onClick={this.handleOpenDetails}>
           <WalletIcon />
-          <span
-            className={"wallet-widget__value"}
-          >{`${availableGvt} GVT`}</span>
+          <span className="wallet-widget__value">{`${availableGvt} GVT`}</span>
         </div>
         <Popover
           anchorEl={this.state.anchorEl}
@@ -35,26 +33,26 @@ class WalletWidget extends React.Component {
           <div className="wallet-details">
             <div className="wallet-details__item">
               <div className="wallet-details__title">
-                {t("wallet-widget.details.total-balance")}
+                {t("wallet-widget.total-balance")}
               </div>
               <div className="wallet-details__value">{`${totalBalanceGvt} GVT`}</div>
             </div>
             <div className="wallet-details__item">
               <div className="wallet-details__title">
-                {t("wallet-widget.details.invested-value")}
+                {t("wallet-widget.invested-value")}
               </div>
               <div className="wallet-details__value">{`${investedGvt} GVT`}</div>
             </div>
             <div className="wallet-details__item">
               <div className="wallet-details__title">
-                {t("wallet-widget.details.available")}
+                {t("wallet-widget.available")}
               </div>
               <div className="wallet-details__value">{`${availableGvt} GVT`}</div>
             </div>
             <div className="wallet-details__item">
               <div className="wallet-details__value">
                 <Link to={WALLET_ROUTE} onClick={this.handleCloseDetails}>
-                  {t("wallet-widget.details.details")}
+                  {t("wallet-widget.details")}
                 </Link>
               </div>
             </div>

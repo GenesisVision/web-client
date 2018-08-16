@@ -19,11 +19,13 @@
 }
 
 .profile-menu {
+  * {
+    color: $main-color !important;
+  }
   &__header {
     margin: -32px -32px 32px -32px;
     padding: 32px;
     background-color: #1c2730;
-    color: $main-color;
   }
 
   .icon {
@@ -56,15 +58,13 @@
       }
     }
     &--logout {
+      margin-top: 30px;
       .icon {
         height: 11px;
       }
       .gv-btn {
         font-size: 1em;
         padding: 0;
-        &:hover {
-          color: $alternate-color !important;
-        }
       }
     }
   }
