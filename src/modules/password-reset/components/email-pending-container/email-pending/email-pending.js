@@ -1,9 +1,10 @@
-import { GVButton } from "gv-react-components";
-import React from "react";
-import { Link } from "react-router-dom";
-import { FORGOT_PASSWORD_ROUTE } from "pages/forgot-password/forgot-password.routes";
 import "./email-pending.scss";
+
+import { GVButton } from "gv-react-components";
+import { FORGOT_PASSWORD_ROUTE } from "pages/forgot-password/forgot-password.routes";
+import React from "react";
 import { translate } from "react-i18next";
+import { Link } from "react-router-dom";
 
 const EmailPending = ({ onResendEmail, onContinue, t }) => {
   return (
@@ -13,12 +14,12 @@ const EmailPending = ({ onResendEmail, onContinue, t }) => {
         variant="text"
         onClick={onResendEmail}
       >
-        {t("password-restore.email-pending.email-resend-button-text")}
+        {t("email-pending.email-resend-button-text")}
       </GVButton>
       <div className="email-pending__navigation">
         <Link to={FORGOT_PASSWORD_ROUTE} className="email-pending__btn-back">
           <GVButton variant="text">
-            &larr; {t("password-restore.email-pending.back-button-text")}
+            &larr; {t("email-pending.back-button-text")}
           </GVButton>
         </Link>
         <GVButton
@@ -29,7 +30,7 @@ const EmailPending = ({ onResendEmail, onContinue, t }) => {
           type="submit"
           onClick={onContinue}
         >
-          {t("password-restore.email-pending.confirm-button-text")}
+          {t("email-pending.confirm-button-text")}
         </GVButton>
       </div>
     </React.Fragment>
