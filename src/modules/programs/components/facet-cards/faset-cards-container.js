@@ -1,28 +1,23 @@
-import { PROGRAMS_FACET_ROUTE } from "pages/programs/programs.routes";
+import React, { Component } from "react";
 import { connect } from "react-redux";
-import { push } from "react-router-redux";
-import replaceParams from "utils/replace-params";
 
 import FacetCards from "./facet-cards";
+import FacetCardsStub from "./facet-cards-stub";
 
-const mapStateToProps = state => ({
-  facets: state.platformData.facets
-});
+class FacetCardsContainer extends Component {
+  render() {
+    const { isPending, facets } = this.props;
+    if (!facets) return null;
+    if (isPending) return <FacetCardsStub />;
+    return <FacetCards facets={facets} />;
+  }
+}
 
-const mapDispatchToProps = dispatch => ({
-  changeFacet: facetId =>
-    dispatch(
-      push(
-        replaceParams(PROGRAMS_FACET_ROUTE, {
-          ":facet": facetId
-        })
-      )
-    )
-});
+const mapStateToProps = state => {
+  const { isPending, data } = state.platformData;
+  let facets = null;
+  if (data) facets = data.facets;
+  return { isPending, facets };
+};
 
-const FacetCardsContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(FacetCards);
-
-export default FacetCardsContainer;
+export default connect(mapStateToProps)(FacetCardsContainer);

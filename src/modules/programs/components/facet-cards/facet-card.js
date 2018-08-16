@@ -1,23 +1,25 @@
+import Surface from "components/surface/surface";
+import { PROGRAMS_FACET_ROUTE } from "pages/programs/programs.routes";
 import PropTypes from "prop-types";
 import React from "react";
 import { Link } from "react-router-dom";
+import replaceParams from "utils/replace-params";
 
-import Surface from "../../../../components/surface/surface";
-
-const FacetCard = ({ facet, onSelectFacet }) => {
+const FacetCard = ({ facet }) => {
   const renderImage = src => {
     if (src === null) return null;
     return <img className="facet__logo" src={src} alt={facet.title} />;
   };
 
-  const handleClick = e => {
-    e.preventDefault();
-    onSelectFacet(facet.id);
+  const composeFacetLink = facetId => {
+    return replaceParams(PROGRAMS_FACET_ROUTE, {
+      ":facet": facetId
+    });
   };
 
   return (
     <Surface className="facet">
-      <Link to={`/programs/facet/${facet.id}`} onClick={handleClick}>
+      <Link to={composeFacetLink(facet.id)}>
         <div className="facet__logo-wrapper">{renderImage(facet.logo)}</div>
         <div className="facet__info">
           <div className="facet__title">{facet.title}</div>

@@ -1,4 +1,8 @@
 import {
+  calculateSkipAndTake,
+  calculateTotalPages
+} from "modules/paging/helpers/paging-helpers";
+import {
   PROGRAMS_FAVORITES_TAB_NAME,
   PROGRAMS_TAB_ROUTE
 } from "pages/programs/programs.routes";
@@ -7,12 +11,8 @@ import { matchPath } from "react-router-dom";
 import { push } from "react-router-redux";
 import authService from "services/auth-service";
 
-import {
-  calculateSkipAndTake,
-  calculateTotalPages
-} from "../../paging/helpers/paging-helpers";
 import { getSortingColumnName } from "../../sorting/helpers/sorting-helpers";
-import programActions from "../actions/programs-actions";
+import * as programActions from "../actions/programs-actions";
 import { PROGRAMS_COLUMNS, SORTING_FILTER_VALUE } from "../programs.constants";
 
 const sortableColums = PROGRAMS_COLUMNS.filter(
