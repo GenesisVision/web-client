@@ -1,5 +1,6 @@
-import { EMAIL_PENDING } from "../actions/email-pending.actions";
 import { composeClearDataActionType } from "shared/actions/clear-data.factory";
+
+import { EMAIL_PENDING } from "../actions/email-pending-actions";
 
 const initialState = {
   email: ""

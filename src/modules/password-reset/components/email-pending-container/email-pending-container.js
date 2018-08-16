@@ -13,7 +13,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(passwordResetService.sendForgotPasswordEmail());
   },
   continueResetPassword: () => {
-    dispatch(passwordResetService.allowResetPassword());
+    dispatch(passwordResetService.navigateToResetPassword());
   }
 });
 

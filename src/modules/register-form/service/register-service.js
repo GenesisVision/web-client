@@ -1,6 +1,6 @@
 import emailPendingActions, {
   EMAIL_PENDING
-} from "../../../actions/email-pending.actions";
+} from "../../../actions/email-pending-actions";
 import { DASHBOARD_ROUTE } from "../../../pages/dashboard/dashboard.routes";
 import { REGISTER_ROUTE_PENDING } from "../../../pages/signup/signup.routes";
 import clearDataActionFactory from "../../../shared/actions/clear-data.factory";

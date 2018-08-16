@@ -7,11 +7,11 @@ import React from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
+import FormError from "shared/components/form/form-error/form-error";
 
-import FormError from "../../../../../shared/components/form/form-error/form-error";
 import validationSchema from "./reset-password.validators";
 
-const ResetPassword = ({ isSubmitting, handleSubmit, error, t }) => {
+const ResetPassword = ({ t, isSubmitting, handleSubmit, error }) => {
   return (
     <form id="resetPasswordForm" onSubmit={handleSubmit} noValidate>
       <GVFormikField

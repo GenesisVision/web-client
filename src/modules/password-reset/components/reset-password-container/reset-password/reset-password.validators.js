@@ -1,6 +1,5 @@
-import { object, string, ref } from "yup";
-
-import { passwordValidator } from "../../../../../shared/utils/validators/validators";
+import { passwordValidator } from "shared/utils/validators/validators";
+import { object, ref, string } from "yup";
 
 const confirmPasswordValidator = string()
   .oneOf([ref("password")], "Passwords don't match.")

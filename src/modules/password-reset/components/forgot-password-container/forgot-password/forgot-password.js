@@ -5,8 +5,8 @@ import React from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
+import FormError from "shared/components/form/form-error/form-error";
 
-import FormError from "../../../../../shared/components/form/form-error/form-error";
 import validationSchema from "./forgot-password.validators";
 
 const ForgotPasswordForm = ({

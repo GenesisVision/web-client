@@ -1,11 +1,10 @@
 import "./signup-email-pending.scss";
 
 import { GVButton } from "gv-react-components";
+import { REGISTER_ROUTE } from "pages/signup/signup.routes";
 import React from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
-
-import { REGISTER_ROUTE } from "../../../../../pages/signup/signup.routes";
 
 const EmailPending = ({ t, onResendEmail, onContinue }) => {
   return (
