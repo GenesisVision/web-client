@@ -5,11 +5,23 @@ import { withRouter } from "react-router-dom";
 import { goBack } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
 
-import { getCurrentFacet } from "../../services/programs-service";
+import { getCurrentFacet, getPrograms } from "../../services/programs-service";
 import ProgramsFacet from "./programs-facet";
 import ProgramsFacetStub from "./programs-facet-stub";
 
 class ProgramsFacetContainer extends Component {
+  componentDidMount() {
+    const { service } = this.props;
+    service.getPrograms();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { service, isLocationChanged } = this.props;
+    if (isLocationChanged(prevProps.location)) {
+      service.getPrograms();
+    }
+  }
+
   render() {
     const { facetData, goBack } = this.props;
     if (facetData.isPending) return <ProgramsFacetStub />;
@@ -27,7 +39,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   goBack: () => dispatch(goBack()),
-  service: bindActionCreators({ getCurrentFacet }, dispatch)
+  service: bindActionCreators({ getCurrentFacet, getPrograms }, dispatch)
 });
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {

@@ -36,18 +36,30 @@ const getParams = (pathname, route) => {
 };
 
 const composeRequestFilters = () => (dispatch, getState) => {
-  const { routing } = getState();
+  let itemsOnPage = 10;
+  const existingFilters = dispatch(getProgramsFiltering());
+  let { page } = existingFilters;
   let filters = {};
+
+  const { routing } = getState();
   const { tab } = getParams(routing.location.pathname, PROGRAMS_TAB_ROUTE);
   if (tab === PROGRAMS_FAVORITES_TAB_NAME) {
     filters.isFavorite = true;
   }
 
-  const existingFilters = dispatch(getProgramsFiltering());
+  const { facetId } = getParams(
+    routing.location.pathname,
+    PROGRAMS_FACET_ROUTE
+  );
+  if (facetId) {
+    filters.facet = facetId;
+    itemsOnPage = 100;
+    page = 1;
+  }
 
   const { skip, take } = calculateSkipAndTake({
-    itemsOnPage: 10,
-    currentPage: existingFilters.page - 1
+    itemsOnPage: itemsOnPage,
+    currentPage: page - 1
   });
   filters = {
     ...filters,
