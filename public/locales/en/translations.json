@@ -51,6 +51,11 @@
       "details": "Details"
     }
   },
+  "profile-widget": {
+    "personal-details": "Personal details",
+    "settings": "Settings",
+    "logout": "Logout"
+  },
   "time-left-widget": {
     "day": "Day left",
     "day_plural": "Days left",

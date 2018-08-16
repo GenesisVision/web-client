@@ -31,3 +31,15 @@ export const RingCircleIcon = props => {
 export const WalletIcon = props => {
   return <Icon type={"wallet"} {...props} />;
 };
+
+export const DetailsIcon = props => {
+  return <Icon type={"details"} {...props} />;
+};
+
+export const SettingsIcon = props => {
+  return <Icon type={"settings"} {...props} />;
+};
+
+export const LogoutIcon = props => {
+  return <Icon type={"logout"} {...props} />;
+};

@@ -1,4 +1,4 @@
-import "./program-simple-chart.css";
+import "./program-simple-chart.scss";
 
 import moment from "moment";
 import React from "react";

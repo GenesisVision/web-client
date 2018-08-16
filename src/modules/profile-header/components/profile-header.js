@@ -16,7 +16,8 @@ class ProfileHeader extends React.Component {
       notificationsAmount,
       avatar,
       name,
-      logout
+      logout,
+      email
     } = this.props;
     const hasNotifications = notificationsAmount > 0;
     return (
@@ -39,7 +40,12 @@ class ProfileHeader extends React.Component {
             {notificationsAmount}
           </span>
         </div>
-        <ProfileWidget avatar={avatar} name={name} logout={logout} />
+        <ProfileWidget
+          avatar={avatar}
+          name={name}
+          logout={logout}
+          email={email}
+        />
       </div>
     );
   }
@@ -52,6 +58,7 @@ ProfileHeader.propTypes = {
   id: PropTypes.string,
   investedGvt: PropTypes.number,
   name: PropTypes.string,
+  email: PropTypes.string,
   notificationsAmount: PropTypes.number,
   totalBalanceGvt: PropTypes.number,
   logout: PropTypes.func.isRequired
