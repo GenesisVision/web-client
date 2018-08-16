@@ -15,12 +15,12 @@ const EmailPending = ({ t, onResendEmail, onContinue }) => {
         variant="text"
         onClick={onResendEmail}
       >
-        {t("email-pending.email-resend-button-text")}
+        {t("auth.email-pending.email-resend-button-text")}
       </GVButton>
       <div className="signup-email-pending__navigation">
         <Link to={REGISTER_ROUTE} className="signup-email-pending__btn-back">
           <GVButton variant="text">
-            &larr; {t("email-pending.back-button-text")}
+            &larr; {t("auth.email-pending.back-button-text")}
           </GVButton>
         </Link>
         <GVButton
@@ -30,7 +30,7 @@ const EmailPending = ({ t, onResendEmail, onContinue }) => {
           type="submit"
           onClick={onContinue}
         >
-          {t("email-pending.confirm-button-text")}
+          {t("auth.email-pending.confirm-button-text")}
         </GVButton>
       </div>
     </React.Fragment>
