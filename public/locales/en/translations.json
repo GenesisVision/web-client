@@ -2,46 +2,53 @@
   "app": {
     "header": "Manager Portal"
   },
-  "programs-page": {
-    "tabs": {
-      "explore": "Explore",
-      "favorites": "Favorites"
-    },
-    "programs-header": {
-      "title": "Name",
-      "balance": "Balance, gvt.",
-      "currency": "Curr.",
-      "investors": "Investors",
-      "available-to-invest": "Av. to invest",
-      "trades": "Trades",
-      "period": "Period",
-      "drawdown": "D.down",
-      "profit": "Profit",
-      "chart": "Chart"
-    }
-  },
-  "login-page": {
+  "auth": {
     "text": "A Brief History Of Creation",
     "tabs": {
       "investor": "Investor",
       "manager": "Manager"
     },
     "signup": {
-      "text": "Don’t have an account?",
-      "title": "Sign up"
+      "footer-text": "Have an account already?",
+      "title": "Sign up",
+      "email-field-text": "Email address",
+      "password-field-text": "Password",
+      "password-confirm-field-text": "Confirm password",
+      "email-confirm-title": "Confirm your Email"
     },
     "login": {
-      "text": "Do you have account?",
-      "title": "Login"
-    }
-  },
-  "login-form": {
-    "placeholder": {
-      "email": "Email address",
-      "password": "Password"
+      "footer-text": "Don't you have account?",
+      "title": "Login",
+      "forgot": "Forgot?",
+      "confirm-button-text": "Login",
+      "placeholder": {
+        "email": "Email address",
+        "password": "Password"
+      }
     },
-    "forgot": "Forgot?",
-    "login": "Login"
+    "password-restore": {
+      "title": "Restore password",
+      "forgot-password": {
+        "text": "Just enter the email address you used to create your account.",
+        "email-field-text": "Email address",
+        "confirm-button-text": "Restore",
+        "back-button-text": "Back"
+      },
+      "new-password": {
+        "text": "Just enter new password.",
+        "password-field-text": "Password",
+        "password-confirm-field-text": "Confirm password",
+        "confirm-button-text": "Submit",
+        "back-button-text": "Back"
+      }
+    },
+    "email-pending": {
+      "text-section-1": "Please check your inbox for a confirmation email. Click the link in the email to create new password.",
+      "text-section-2": "After you confirm click Continue.",
+      "email-resend-button-text": "Resend email",
+      "confirm-button-text": "Continue",
+      "back-button-text": "Back"
+    }
   },
   "wallet-widget": {
     "total-balance": "Total balance",
@@ -64,6 +71,24 @@
     "second": "Second left",
     "second_plural": "Seconds left",
     "end-less-than-now": "The period is being restarted."
+  },
+  "programs-page": {
+    "tabs": {
+      "explore": "Explore",
+      "favorites": "Favorites"
+    },
+    "programs-header": {
+      "title": "Name",
+      "balance": "Balance, gvt.",
+      "currency": "Curr.",
+      "investors": "Investors",
+      "available-to-invest": "Av. to invest",
+      "trades": "Trades",
+      "period": "Period",
+      "drawdown": "D.down",
+      "profit": "Profit",
+      "chart": "Chart"
+    }
   },
   "program-actions": {
     "invest": "Invest",

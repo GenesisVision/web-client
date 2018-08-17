@@ -1,12 +1,29 @@
-import history from "../../../utils/history";
-import { EMAIL_CONFIRM_PENDING_ROUTE } from "../../email-confirm/email-confirm.constants";
+import { push } from "react-router-redux";
+
+import emailPendingActions, {
+  EMAIL_PENDING
+} from "../../../actions/email-pending-actions";
+import { DASHBOARD_ROUTE } from "../../../pages/dashboard/dashboard.routes";
+import { REGISTER_ROUTE_PENDING } from "../../../pages/signup/signup.routes";
+import clearDataActionFactory from "../../../shared/actions/clear-data.factory";
 import registerActions from "../actions/register-actions";
 
 const register = registerData => dispatch => {
   return dispatch(registerActions.registerUser(registerData)).then(() => {
-    history.push(EMAIL_CONFIRM_PENDING_ROUTE);
+    dispatch(emailPendingActions.saveEmail(registerData));
+    dispatch(push(REGISTER_ROUTE_PENDING));
   });
 };
 
-const registerService = { register };
+const resendConfirmationLink = () => (dispatch, getState) => {
+  let { email } = getState().emailPending;
+  dispatch(registerActions.resendConfirmationLink({ email }));
+};
+
+const confirmEmail = () => (dispatch, getState) => {
+  dispatch(clearDataActionFactory(EMAIL_PENDING).clearData());
+  dispatch(push(DASHBOARD_ROUTE));
+};
+
+const registerService = { register, resendConfirmationLink, confirmEmail };
 export default registerService;

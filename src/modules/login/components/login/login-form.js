@@ -19,29 +19,28 @@ const LoginForm = ({ t, isSubmitting, handleSubmit, error }) => {
       <GVFormikField
         type="email"
         name="email"
-        placeholder={t("login-form.placeholder.email")}
+        placeholder={t("auth.login.placeholder.email")}
         autoComplete="email"
         component={GVTextField}
       />
       <GVFormikField
         type="password"
         name="password"
-        placeholder={t("login-form.placeholder.password")}
+        placeholder={t("auth.login.placeholder.password")}
         autoComplete="current-password"
         component={GVTextField}
       />
-      <a href={FORGOT_PASSWORD_ROUTE}>{t("login-form.forgot")}</a>
+      <a href={FORGOT_PASSWORD_ROUTE}>{t("auth.login.forgot")}</a>
       <div className={"form__error"}>{error}</div>
       <GVButton
         className="login-button"
         id="loginSubmit"
-        title="submit login form"
         color="primary"
         variant="contained"
         disabled={isSubmitting}
         type="submit"
       >
-        {t("login-form.login")}
+        {t("auth.login.confirm-button-text")}
       </GVButton>
     </Form>
   );

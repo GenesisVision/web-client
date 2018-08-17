@@ -1,6 +1,6 @@
-import * as actionTypes from "./email-confirm-actions.constants";
+import SwaggerInvestorApi from "services/api-client/swagger-investor-api";
 
-import SwaggerInvestorApi from "../../../services/api-client/swagger-investor-api";
+import * as actionTypes from "./email-confirm-actions.constants";
 
 const emailConfirm = (userId, code) => {
   return {

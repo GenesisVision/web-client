@@ -3,52 +3,68 @@ import "./register-form.css";
 import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import React from "react";
+import { translate } from "react-i18next";
+import { compose } from "redux";
 
 import FormError from "../../../../shared/components/form/form-error/form-error";
 import validationSchema from "./register-form.validators";
 
-const RegisterForm = ({ isSubmitting, handleSubmit, error }) => {
+const RegisterForm = ({ isSubmitting, handleSubmit, error, t }) => {
   return (
-    <form id="registerForm" onSubmit={handleSubmit} noValidate>
+    <form
+      id="registerForm"
+      className="register-form"
+      onSubmit={handleSubmit}
+      noValidate
+    >
       <GVFormikField
         type="email"
         name="email"
-        placeholder="Email"
+        label={t("auth.signup.email-field-text")}
         component={GVTextField}
       />
 
       <GVFormikField
         type="new-password"
         name="password"
-        placeholder="Password"
+        label={t("auth.signup.password-field-text")}
         component={GVTextField}
       />
 
       <GVFormikField
         type="new-password"
         name="confirmPassword"
-        placeholder="Confirm Password"
+        label={t("auth.signup.password-confirm-field-text")}
         component={GVTextField}
       />
 
       <FormError error={error} />
 
-      <GVButton type="submit" id="registerFormSubmit">
-        Sign Up
+      <GVButton
+        type="submit"
+        id="registerFormSubmit"
+        className="register-form__submit-button"
+      >
+        {t("auth.signup.title")}
       </GVButton>
     </form>
   );
 };
 
-export default withFormik({
-  displayName: "register",
-  mapPropsToValues: () => ({
-    email: "",
-    password: "",
-    confirmPassword: ""
-  }),
-  validationSchema: validationSchema,
-  handleSubmit: (values, { props, setSubmitting }) => {
-    props.onSubmit(values, setSubmitting);
-  }
-})(RegisterForm);
+const withTranslationAndFormik = compose(
+  translate(),
+  withFormik({
+    displayName: "register",
+    mapPropsToValues: () => ({
+      email: "",
+      password: "",
+      confirmPassword: ""
+    }),
+    validationSchema: validationSchema,
+    handleSubmit: (values, { props, setSubmitting }) => {
+      props.onSubmit(values, setSubmitting);
+    }
+  })
+)(RegisterForm);
+
+export default withTranslationAndFormik;
