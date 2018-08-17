@@ -7,7 +7,7 @@ import dashboardReducer from "../modules/dashboard/reducers/dashboard-reducers";
 import emailConfirmReducer from "../modules/email-confirm/reducers/email-confirm-reducers";
 import loginReducer from "../modules/login/reducers/login-reducers";
 import navigationReducer from "../modules/navigation/reducers/navigation-reducers";
-import passwordResetReducer from "../modules/password-reset/reducers/password-reset-reducers";
+import passwordRestoreReducer from "../modules/password-restore/reducers/password-restore-reducers";
 import popupReducer from "../modules/popup/reducers/popup-reducers";
 import profileReducer from "../modules/profile/reducers/profile-reducers";
 import programDepositReducer from "../modules/program-deposit/reducers/trader-deposit-reducers";
@@ -19,8 +19,8 @@ import registerReducer from "../modules/register-form/reducers/register-reducers
 import walletReducer from "../modules/wallet/reducers/wallet-reducers";
 import alertMessagesReducer from "../shared/modules/alert-message/reducers/alert-message-reducers";
 import authReducer from "./auth-reducer";
-import platformReducer from "./platform-reducer";
 import emailPendingReducer from "./email-pending-reducer";
+import platformReducer from "./platform-reducer";
 
 export default combineReducers({
   routing: routerReducer,
@@ -33,7 +33,7 @@ export default combineReducers({
   registerData: registerReducer,
   authData: authReducer,
   emailConfirmData: emailConfirmReducer,
-  passwordResetData: passwordResetReducer,
+  passwordRestoreData: passwordRestoreReducer,
   alertMessages: alertMessagesReducer,
   profileHeader: profileHeaderReducer,
   profileData: profileReducer,

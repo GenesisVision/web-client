@@ -1,6 +1,6 @@
 import AuthApi from "services/api-client/auth-api";
 
-import * as actionTypes from "./password-reset-actions.constants";
+import * as actionTypes from "./password-restore-actions.constants";
 
 const forgotPassword = fpForm => {
   const model = { ...fpForm };
@@ -10,21 +10,21 @@ const forgotPassword = fpForm => {
   };
 };
 
-const resetPassword = (userId, code, rpForm) => {
+const restorePassword = (userId, code, rpForm) => {
   const model = {
     userId,
     code,
     ...rpForm
   };
   return {
-    type: actionTypes.RESET_PASSWORD,
+    type: actionTypes.PASSWORD_RESTORE,
     payload: AuthApi.v10AuthPasswordResetPost({ model })
   };
 };
 
-const passwordResetActions = {
+const passwordRestoreActions = {
   forgotPassword,
-  resetPassword
+  restorePassword
 };
 
-export default passwordResetActions;
+export default passwordRestoreActions;

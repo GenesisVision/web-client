@@ -3,7 +3,7 @@ import "./email-pending.scss";
 import React from "react";
 import { translate } from "react-i18next";
 
-import EmailPendingContainer from "../../../modules/password-reset/components/email-pending-container/email-pending-container";
+import EmailPendingContainer from "../../../modules/password-restore/components/email-pending-container/email-pending-container";
 
 const EmailPending = ({ t }) => {
   return (

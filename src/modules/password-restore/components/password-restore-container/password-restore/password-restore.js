@@ -1,4 +1,4 @@
-import "./reset-password.css";
+import "./password-restore.css";
 
 import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
@@ -9,11 +9,11 @@ import { Link } from "react-router-dom";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
 
-import validationSchema from "./reset-password.validators";
+import validationSchema from "./password-restore.validators";
 
-const ResetPassword = ({ t, isSubmitting, handleSubmit, error }) => {
+const RestorePassword = ({ t, isSubmitting, handleSubmit, error }) => {
   return (
-    <form id="resetPasswordForm" onSubmit={handleSubmit} noValidate>
+    <form id="passwordRestoreForm" onSubmit={handleSubmit} noValidate>
       <GVFormikField
         type="new-password"
         name="password"
@@ -29,13 +29,13 @@ const ResetPassword = ({ t, isSubmitting, handleSubmit, error }) => {
         component={GVTextField}
       />
       <FormError error={error} />
-      <div className="reset-password__navigation">
-        <Link to={FORGOT_PASSWORD_ROUTE} className="reset-password__btn-back">
+      <div className="password-restore__navigation">
+        <Link to={FORGOT_PASSWORD_ROUTE} className="password-restore__btn-back">
           <GVButton variant="text">
             &larr; {t("auth.password-restore.new-password.back-button-text")}
           </GVButton>
         </Link>
-        <GVButton type="submit" id="resetPasswordSubmit">
+        <GVButton type="submit" id="passwordRestoreSubmit">
           {t("auth.password-restore.new-password.confirm-button-text")}
         </GVButton>
       </div>
@@ -46,7 +46,7 @@ const ResetPassword = ({ t, isSubmitting, handleSubmit, error }) => {
 const withTranslationAndFormik = compose(
   translate(),
   withFormik({
-    displayName: "resetPassword",
+    displayName: "passwordRestore",
     mapPropsToValues: () => ({
       password: "",
       confirmPassword: ""
@@ -56,6 +56,6 @@ const withTranslationAndFormik = compose(
       props.onSubmit(values, setSubmitting);
     }
   })
-)(ResetPassword);
+)(RestorePassword);
 
 export default withTranslationAndFormik;

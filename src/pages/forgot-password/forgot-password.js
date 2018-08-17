@@ -1,6 +1,6 @@
 import "./forgot-password.scss";
 
-import ForgotPasswordContainer from "modules/password-reset/components/forgot-password-container/forgot-password-container";
+import ForgotPasswordContainer from "modules/password-restore/components/forgot-password-container/forgot-password-container";
 import React from "react";
 import { translate } from "react-i18next";
 
