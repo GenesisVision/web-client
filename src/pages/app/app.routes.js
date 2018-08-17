@@ -13,7 +13,7 @@ const AppRoutes = () => {
     <AppLayout>
       <Switch>
         <Redirect exact from={HOME_ROUTE} to={PROGRAMS_ROUTE} />
-        <Route exact path={PROGRAMS_ROUTE} component={ProgramsRoutes} />
+        <Route path={PROGRAMS_ROUTE} component={ProgramsRoutes} />
         <PrivateRoute path={DASHBOARD_ROUTE} component={DashboardRoutes} />
         <Route component={NotFoundPage} />
       </Switch>

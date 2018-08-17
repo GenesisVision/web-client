@@ -1,0 +1,48 @@
+@import "styles/_colors.scss";
+@import "styles/_constants.scss";
+
+.wallet-widget {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  color: white;
+  margin-right: 15px;
+  cursor: pointer;
+
+  &__value {
+    margin-left: 15px;
+  }
+
+  &__add {
+    color: #0f0;
+    background-color: rgba(0, 255, 0, 0.2);
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.wallet-details {
+  color: white;
+
+  &__item:not(:last-child) {
+    margin-bottom: 23px;
+  }
+
+  &__title {
+    opacity: 0.4;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+    margin-bottom: 6px;
+  }
+
+  &__value {
+    font-weight: 600;
+    letter-spacing: 0.4px;
+  }
+}

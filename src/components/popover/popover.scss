@@ -1,0 +1,25 @@
+@import "styles/_colors.scss";
+@import "styles/_constants.scss";
+.popover {
+  &--fixed,
+  &__backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  &__backdrop {
+    z-index: -1;
+  }
+
+  &__content {
+    position: absolute;
+    background-color: rgba(33, 44, 52, 0.9);
+    padding: 32px;
+    border-radius: $border-radius;
+    margin-top: 10px;
+    overflow: auto;
+  }
+}

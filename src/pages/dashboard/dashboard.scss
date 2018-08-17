@@ -1,0 +1,18 @@
+.dashboard {
+  &__row {
+    display: flex;
+  }
+
+  &__chart {
+    flex: 3;
+  }
+
+  &__portfolio-events {
+    flex: 1;
+    margin-left: 2rem;
+  }
+
+  &__assets {
+    margin-top: 2rem;
+  }
+}
