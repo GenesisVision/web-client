@@ -1,6 +1,7 @@
 import "./root.scss";
 
 import React, { Component } from "react";
+import { Scrollbars } from "react-custom-scrollbars";
 import { connect } from "react-redux";
 import { Provider } from "react-redux";
 import { ConnectedRouter } from "react-router-redux";
@@ -15,7 +16,15 @@ class Root extends Component {
     this.props.fetchPlatformSettings();
   }
   render() {
-    return <RootRoutes />;
+    return (
+      <Scrollbars
+        autoHide
+        autoHideTimeout={1000}
+        style={{ width: "100%", height: "100%" }}
+      >
+        <RootRoutes />
+      </Scrollbars>
+    );
   }
 }
 

@@ -28,3 +28,43 @@ export const PROGRAMS_DEFAULT_FILTERS = [
     value: [undefined, undefined]
   }
 ];
+
+export const PROGRAMS_COLUMNS = [
+  {
+    name: "title"
+  },
+  {
+    name: "balance",
+    sortingName: "ByBalance"
+  },
+  {
+    name: "currency"
+  },
+  {
+    name: "investors",
+    sortingName: "ByInvestors"
+  },
+  {
+    name: "available-to-invest"
+  },
+  {
+    name: "trades",
+    sortingName: " ByTrades"
+  },
+  {
+    name: "period",
+    sortingName: "ByEndOfPeriod"
+  },
+  {
+    name: "drawdown",
+    sortingName: "ByDrawdown"
+  },
+  {
+    name: "profit",
+    sortingName: "ByProfit"
+  },
+  {
+    name: "chart",
+    isSortable: false
+  }
+];

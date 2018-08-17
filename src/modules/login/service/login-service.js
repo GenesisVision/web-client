@@ -59,7 +59,7 @@ const twoFactorLogin = (code, type, onCatch) => (dispatch, getState) => {
     .catch(onCatch);
 };
 
-const logout = () => dispatch => {
+export const loginServicelogout = () => dispatch => {
   authService.removeToken();
   dispatch(authActions.updateToken());
   dispatch(push(HOME_ROUTE));
@@ -75,5 +75,10 @@ const clearTwoFactorData = () => dispatch => {
   dispatch(clearTwoFactorAction.clearData());
 };
 
-const loginService = { login, logout, twoFactorLogin, clearLoginData };
+const loginService = {
+  login,
+  logout: loginServicelogout,
+  twoFactorLogin,
+  clearLoginData
+};
 export default loginService;

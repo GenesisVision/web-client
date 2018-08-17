@@ -50,6 +50,17 @@
       "back-button-text": "Back"
     }
   },
+  "wallet-widget": {
+    "total-balance": "Total balance",
+    "invested-value": "Invested value",
+    "available": "Available",
+    "details": "Details"
+  },
+  "profile-widget": {
+    "personal-details": "Personal details",
+    "settings": "Settings",
+    "logout": "Logout"
+  },
   "time-left-widget": {
     "day": "Day left",
     "day_plural": "Days left",
@@ -60,6 +71,24 @@
     "second": "Second left",
     "second_plural": "Seconds left",
     "end-less-than-now": "The period is being restarted."
+  },
+  "programs-page": {
+    "tabs": {
+      "explore": "Explore",
+      "favorites": "Favorites"
+    },
+    "programs-header": {
+      "title": "Name",
+      "balance": "Balance, gvt.",
+      "currency": "Curr.",
+      "investors": "Investors",
+      "available-to-invest": "Av. to invest",
+      "trades": "Trades",
+      "period": "Period",
+      "drawdown": "D.down",
+      "profit": "Profit",
+      "chart": "Chart"
+    }
   },
   "program-actions": {
     "invest": "Invest",

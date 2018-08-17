@@ -1,6 +1,7 @@
 import programApi from "services/api-client/program-api";
 
 export const PROGRAMS = "PROGRAMS";
+export const PROGRAMS_CHANGE_TAB = "PROGRAMS_CHANGE_TAB";
 
 const fetchPrograms = filters => {
   return {

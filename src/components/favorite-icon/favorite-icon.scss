@@ -1,0 +1,16 @@
+@import "styles/_colors.scss";
+
+.favorite-icon {
+  fill: white;
+  cursor: pointer;
+  opacity: 0.2;
+
+  &:hover,
+  &__selected {
+    fill: $alternate-color;
+  }
+
+  &__selected {
+    opacity: 1;
+  }
+}
