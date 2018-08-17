@@ -10,7 +10,7 @@ import React from "react";
 
 class ProfileHeader extends React.Component {
   state = {
-    isOpenSidebar: true
+    isOpenSidebar: false
   };
   openSidebar = () => {
     this.setState({ isOpenSidebar: true });
