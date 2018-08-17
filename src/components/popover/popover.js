@@ -58,18 +58,19 @@ class Popover extends Component {
   };
 
   render() {
+    const { anchorEl, horizontal, vertical, children, ...props } = this.props;
     const position = this.getPosition();
     return (
       <Modal
-        open={Boolean(this.props.anchorEl)}
+        open={Boolean(anchorEl)}
         backdropStyle={{
           backgroundColor: "transparent"
         }}
-        onClose={this.props.onClose}
+        {...props}
       >
         <EventListener target="window" onResize={this.handleWindowResize} />
         <div className="popover" style={position}>
-          {this.props.children}
+          {children}
         </div>
       </Modal>
     );
@@ -80,7 +81,8 @@ Popover.propTypes = {
   onClose: PropTypes.func,
   horizontal: PropTypes.oneOf(["left", "right"]),
   vertical: PropTypes.oneOf(["top", "bottom"]),
-  anchorEl: PropTypes.oneOfType([PropTypes.object, PropTypes.func])
+  anchorEl: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+  disabledBackdrop: PropTypes.bool
 };
 
 Popover.defaultProps = {
