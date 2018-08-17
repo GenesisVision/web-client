@@ -1,7 +1,6 @@
 import "./popover.scss";
 
-import classnames from "classnames";
-import Portal from "components/portal/portal";
+import Modal from "components/modal/modal";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import EventListener from "react-event-listener";
@@ -58,37 +57,21 @@ class Popover extends Component {
     this.setState({ windowWidth: window.innerWidth });
   };
 
-  handleBackdropClick = event => {
-    this.handleClose(event);
-  };
-
-  handleClose = event => {
-    if (this.props.onClose) {
-      this.props.onClose(event);
-    }
-  };
-
   render() {
     const position = this.getPosition();
     return (
-      <Portal open={Boolean(this.props.anchorEl)}>
-        <div
-          className={classnames("popover", {
-            "popover--fixed": !this.props.disableBackdrop
-          })}
-        >
-          <EventListener target="window" onResize={this.handleWindowResize} />
-          {!this.props.disableBackdrop && (
-            <div
-              className="popover__backdrop"
-              onClick={this.handleBackdropClick}
-            />
-          )}
-          <div className="popover__content" style={position}>
-            {this.props.children}
-          </div>
+      <Modal
+        open={Boolean(this.props.anchorEl)}
+        backdropStyle={{
+          backgroundColor: "transparent"
+        }}
+        onClose={this.props.onClose}
+      >
+        <EventListener target="window" onResize={this.handleWindowResize} />
+        <div className="popover" style={position}>
+          {this.props.children}
         </div>
-      </Portal>
+      </Modal>
     );
   }
 }
@@ -97,8 +80,7 @@ Popover.propTypes = {
   onClose: PropTypes.func,
   horizontal: PropTypes.oneOf(["left", "right"]),
   vertical: PropTypes.oneOf(["top", "bottom"]),
-  anchorEl: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-  disableBackdrop: PropTypes.bool
+  anchorEl: PropTypes.oneOfType([PropTypes.object, PropTypes.func])
 };
 
 Popover.defaultProps = {
