@@ -1,0 +1,33 @@
+@import "styles/_colors.scss";
+
+.tag {
+  height: 32px;
+  min-width: 32px;
+  border-radius: 8px;
+  padding: 0 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  font-size: 13px;
+  background-color: rgba(255, 255, 255, 0.1);
+
+  &--danger {
+    color: $danger-color;
+    background-color: $danger-background-color;
+  }
+
+  &--success {
+    color: $success-color;
+    background-color: $success-background-color;
+  }
+
+  &--warning {
+    color: $warning-color;
+    background-color: $warning-background-color;
+  }
+
+  &--round {
+    border-radius: 100%;
+  }
+}
