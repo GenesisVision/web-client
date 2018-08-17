@@ -1,0 +1,21 @@
+@import "styles/_colors.scss";
+
+.sidebar {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 360px;
+  background-color: #1c2730;
+  padding: 32px;
+  box-sizing: border-box;
+  color: $main-color;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 32px;
+  }
+}

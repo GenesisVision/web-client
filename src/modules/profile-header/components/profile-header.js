@@ -3,11 +3,21 @@ import "./profile-header.scss";
 import classnames from "classnames";
 import { RingIcon } from "components/icon/icon";
 import ProfileWidget from "components/profile-widget/profile-widget";
+import Sidebar from "components/sidebar/sidebar";
 import WalletWidget from "components/wallet-widget/wallet-widget";
 import PropTypes from "prop-types";
 import React from "react";
 
 class ProfileHeader extends React.Component {
+  state = {
+    isOpenSidebar: true
+  };
+  openSidebar = () => {
+    this.setState({ isOpenSidebar: true });
+  };
+  closeSidebar = () => {
+    this.setState({ isOpenSidebar: false });
+  };
   render() {
     const {
       availableGvt,
@@ -28,6 +38,7 @@ class ProfileHeader extends React.Component {
         />
         <button className="profile-header__add profile-header__label">+</button>
         <div
+          onClick={this.openSidebar}
           className={classnames("notifications-widget", {
             "notifications-widget--has": hasNotifications
           })}
@@ -38,6 +49,7 @@ class ProfileHeader extends React.Component {
           </span>
         </div>
         <ProfileWidget avatar={avatar} logout={logout} email={email} />
+        <Sidebar open={this.state.isOpenSidebar} onClose={this.closeSidebar} />
       </div>
     );
   }
