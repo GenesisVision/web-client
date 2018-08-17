@@ -13,4 +13,26 @@
   &--collapse {
     background-image: url("../../shared/media/icons/collapse.svg");
   }
+  &--ring {
+    background-image: url("../../shared/media/ring.svg");
+  }
+  &--ring-circle {
+    background-image: url("../../shared/media/ring-circle.svg");
+  }
+  &--wallet {
+    height: 20px;
+    background-image: url("../../shared/media/wallet.svg");
+  }
+  &--details {
+    height: 20px;
+    background-image: url("../../shared/media/user-avatar.svg");
+  }
+  &--logout {
+    height: 20px;
+    background-image: url("../../shared/media/logout.svg");
+  }
+  &--settings {
+    height: 20px;
+    background-image: url("../../shared/media/settings.svg");
+  }
 }

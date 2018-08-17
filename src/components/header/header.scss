@@ -3,8 +3,12 @@
 
 .header {
   display: flex;
+  justify-content: space-between;
+  width: 100%;
 
-  &__navigation {
-    //margin-left: 32px;
+  &__buttons {
+    .gv-btn {
+      margin-right: 10px;
+    }
   }
 }

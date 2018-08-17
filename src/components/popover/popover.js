@@ -1,5 +1,6 @@
 import "./popover.scss";
 
+import classnames from "classnames";
 import Portal from "components/portal/portal";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
@@ -10,6 +11,12 @@ const getAnchorEl = el => {
 };
 
 class Popover extends Component {
+  static getDerivedStateFromProps() {
+    return {
+      windowWidth: window.innerWidth
+    };
+  }
+
   getAnchorBounds = () => {
     const anchorEl = getAnchorEl(this.props.anchorEl);
     return anchorEl.getBoundingClientRect();
@@ -48,18 +55,16 @@ class Popover extends Component {
   };
 
   handleWindowResize = () => {
-    this.setState({
-      windowWidth: window.innerWidth
-    });
+    this.setState({ windowWidth: window.innerWidth });
   };
 
-  handleDocumentClick = () => {
-    this.handleClose();
+  handleBackdropClick = event => {
+    this.handleClose(event);
   };
 
-  handleClose = () => {
+  handleClose = event => {
     if (this.props.onClose) {
-      this.props.onClose();
+      this.props.onClose(event);
     }
   };
 
@@ -67,10 +72,21 @@ class Popover extends Component {
     const position = this.getPosition();
     return (
       <Portal open={Boolean(this.props.anchorEl)}>
-        <div className="popover" style={position}>
+        <div
+          className={classnames("popover", {
+            "popover--fixed": !this.props.disableBackdrop
+          })}
+        >
           <EventListener target="window" onResize={this.handleWindowResize} />
-          <EventListener target="document" onClick={this.handleDocumentClick} />
-          {this.props.children}
+          {!this.props.disableBackdrop && (
+            <div
+              className="popover__backdrop"
+              onClick={this.handleBackdropClick}
+            />
+          )}
+          <div className="popover__content" style={position}>
+            {this.props.children}
+          </div>
         </div>
       </Portal>
     );
@@ -81,7 +97,8 @@ Popover.propTypes = {
   onClose: PropTypes.func,
   horizontal: PropTypes.oneOf(["left", "right"]),
   vertical: PropTypes.oneOf(["top", "bottom"]),
-  anchorEl: PropTypes.oneOfType([PropTypes.object, PropTypes.func])
+  anchorEl: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+  disableBackdrop: PropTypes.bool
 };
 
 Popover.defaultProps = {

@@ -1,0 +1,71 @@
+@import "styles/_colors.scss";
+
+.profile-widget {
+  &__avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 44px;
+    width: 44px;
+    border-radius: 100%;
+    overflow: hidden;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  &__image {
+    max-height: 100%;
+    max-width: 100%;
+  }
+}
+
+.profile-menu {
+  * {
+    color: $main-color !important;
+  }
+  &__header {
+    margin: -32px -32px 32px -32px;
+    padding: 32px;
+    background-color: #1c2730;
+  }
+
+  .icon {
+    opacity: 0.2;
+    background-position: center;
+    margin-right: 20px;
+  }
+
+  &__item {
+    margin-bottom: 20px;
+
+    &:hover {
+      .icon {
+        opacity: 0.5;
+      }
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &--details {
+      .icon {
+        height: 13px;
+      }
+    }
+    &--settings {
+      .icon {
+        height: 12px;
+      }
+    }
+    &--logout {
+      margin-top: 30px;
+      .icon {
+        height: 11px;
+      }
+      .gv-btn {
+        font-size: 1em;
+        padding: 0;
+      }
+    }
+  }
+}
