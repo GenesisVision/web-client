@@ -1,6 +1,7 @@
 $main-color: #fff;
 $alternate-color: #03bdaf;
 $danger-color: red;
+$success-color: rgba(0, 255, 0, 1);
 $warning-color: #f9f3dd;
 $border-color: #313a41;
 $background-color: #1c252d;
@@ -15,3 +16,7 @@ $text-color-light: $alternate-color;
 $box-shadow-primary-color: rgba(22, 183, 173, 0.28);
 $box-shadow-danger-color: rgba(224, 4, 99, 0.28);
 $box-shadow-warning-color: rgba(249, 243, 221, 0.28);
+
+$danger-background-color: rgba(255, 0, 0, 0.1);
+$success-background-color: rgba(0, 255, 0, 0.1);
+$warning-background-color: #f9f3dd;
