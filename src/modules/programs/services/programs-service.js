@@ -8,9 +8,9 @@ import {
   PROGRAMS_TAB_ROUTE
 } from "pages/programs/programs.routes";
 import qs from "qs";
-import { matchPath } from "react-router-dom";
 import { push } from "react-router-redux";
 import authService from "services/auth-service";
+import getParams from "utils/get-params";
 
 import { getSortingColumnName } from "../../sorting/helpers/sorting-helpers";
 import * as programActions from "../actions/programs-actions";
@@ -26,13 +26,6 @@ export const getPrograms = () => (dispatch, getState) => {
     requestFilters.authorization = authService.getAuthArg();
   }
   dispatch(programActions.fetchPrograms(requestFilters));
-};
-
-const getParams = (pathname, route) => {
-  const matchProfile = matchPath(pathname, {
-    path: route
-  });
-  return (matchProfile && matchProfile.params) || {};
 };
 
 const composeRequestFilters = () => (dispatch, getState) => {
@@ -112,19 +105,4 @@ export const programsChangeSorting = sorting => (dispatch, getState) => {
   queryParams.sorting = sorting;
   const newUrl = routing.location.pathname + "?" + qs.stringify(queryParams);
   dispatch(push(newUrl));
-};
-
-export const getCurrentFacet = () => (dispatch, getState) => {
-  const { routing, platformData } = getState();
-
-  if (!platformData.data) return { isPending: true };
-
-  const { facets } = platformData.data;
-  const { facetId } = getParams(
-    routing.location.pathname,
-    PROGRAMS_FACET_ROUTE
-  );
-  const facet = facets.find(x => x.id === facetId);
-  if (!facet) return { notFound: true };
-  return { facet };
 };
