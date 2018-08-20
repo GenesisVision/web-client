@@ -7,20 +7,20 @@ import React, { Component } from "react";
 import TableRow from "./table-row";
 
 class TableHead extends Component {
-  sortingName = () => getSortingColumnName(this.props.sorting);
+  sortingName = () => getSortingColumnName(this.props.sorting.value);
 
-  isAsc = () => isSortingAsc(this.props.sorting);
+  isAsc = () => isSortingAsc(this.props.sorting.value);
 
   handleSorting = sortingName => e => {
     if (sortingName !== this.sortingName() || this.isAsc()) {
-      return this.props.updateSorting(sortingName + "Desc");
+      return this.props.sorting.updateSorting(sortingName + "Desc");
     }
 
-    return this.props.updateSorting(sortingName + "Asc");
+    return this.props.sorting.updateSorting(sortingName + "Asc");
   };
 
   renderChildren = () => {
-    if (this.props.sorting !== undefined) {
+    if (this.props.sorting.value !== undefined) {
       return this.props.children({
         sortingName: this.sortingName(),
         isAsc: this.isAsc(),

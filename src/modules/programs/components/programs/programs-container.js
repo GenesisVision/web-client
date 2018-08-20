@@ -1,5 +1,4 @@
 import Surface from "components/surface/surface";
-import Paging from "modules/paging/components/paging/paging";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -27,15 +26,18 @@ class ProgramsContainer extends Component {
     return (
       <Surface>
         All Programs
-        <Paging
-          paging={{ total: filters.pages, current: filters.page }}
-          hide={isPending}
-          updatePaging={next => service.programsChangePage(next.currentPage)}
-        />
         <ProgramsTable
           data={data}
-          sorting={filters.sorting}
-          updateSorting={service.programsChangeSorting}
+          isPending={isPending}
+          sorting={{
+            value: filters.sorting,
+            updateSorting: service.programsChangeSorting
+          }}
+          paging={{
+            total: filters.pages,
+            current: filters.page,
+            updatePaging: service.programsChangePage
+          }}
         />
       </Surface>
     );

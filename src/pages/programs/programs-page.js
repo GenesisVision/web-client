@@ -6,8 +6,8 @@ import React, { Fragment } from "react";
 const ProgramsPage = () => {
   return (
     <Fragment>
-      {/* <ProgramsTabsContainer />
-      <FacetCardsContainer /> */}
+      <ProgramsTabsContainer />
+      <FacetCardsContainer />
       <ProgramsContainer />
     </Fragment>
   );

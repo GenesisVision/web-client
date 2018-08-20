@@ -7,9 +7,9 @@ import { PROGRAMS_COLUMNS } from "../../programs.constants";
 
 class ProgramsTableHead extends Component {
   render() {
-    const { t, sorting, updateSorting } = this.props;
+    const { t, sorting } = this.props;
     return (
-      <TableHead sorting={sorting} updateSorting={updateSorting}>
+      <TableHead sorting={sorting}>
         {({ sortingName, isAsc, handleSorting }) => (
           <Fragment>
             {PROGRAMS_COLUMNS.map(x => {
