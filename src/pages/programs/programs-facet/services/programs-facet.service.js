@@ -1,4 +1,4 @@
-import { PROGRAMS_FACET_ROUTE } from "routes/programs.routes";
+import { PROGRAMS_FACET_ROUTE } from "pages/programs/programs.routes";
 import getParams from "utils/get-params";
 
 export const getCurrentFacet = () => (dispatch, getState) => {

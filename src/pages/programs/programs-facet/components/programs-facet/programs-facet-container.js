@@ -1,5 +1,4 @@
-import { getCurrentFacet } from "modules/programs/services/programs-facet-service";
-import { getPrograms } from "modules/programs/services/programs-service";
+import { getPrograms } from "modules/programs-table/services/programs-table.service";
 import NotFoundPage from "pages/not-found/not-found.routes";
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
@@ -7,6 +6,7 @@ import { withRouter } from "react-router-dom";
 import { goBack } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
 
+import { getCurrentFacet } from "../../services/programs-facet.service";
 import ProgramsFacet from "./programs-facet";
 import ProgramsFacetStub from "./programs-facet-stub";
 

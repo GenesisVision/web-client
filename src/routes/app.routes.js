@@ -7,7 +7,9 @@ import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { HOME_ROUTE } from "routes/root.routes";
 
-import ProgramsRoutes, { PROGRAMS_ROUTE } from "./programs.routes";
+import ProgramsRoutes, {
+  PROGRAMS_ROUTE
+} from "../pages/programs/programs.routes";
 
 const AppRoutes = () => {
   return (

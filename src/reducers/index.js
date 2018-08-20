@@ -1,4 +1,5 @@
 import profileHeaderReducer from "modules/profile-header/reducer/profile-header-reducer";
+import programsReducer from "modules/programs-table/reducers/programs-table.reducers";
 import { loadingBarReducer } from "react-redux-loading-bar";
 import { routerReducer } from "react-router-redux";
 import { combineReducers } from "redux";
@@ -14,7 +15,6 @@ import programDepositReducer from "../modules/program-deposit/reducers/trader-de
 import programSearchReducer from "../modules/program-search/reducers/program-search-reducers";
 import programWithdrawReducer from "../modules/program-withdraw/reducers/program-withdraw-reducers";
 import programReducer from "../modules/program/reducers/trader-reducers";
-import programsReducer from "../modules/programs/reducers/programs-reducers";
 import registerReducer from "../modules/register-form/reducers/register-reducers";
 import walletReducer from "../modules/wallet/reducers/wallet-reducers";
 import alertMessagesReducer from "../shared/modules/alert-message/reducers/alert-message-reducers";

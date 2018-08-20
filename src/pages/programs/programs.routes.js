@@ -1,8 +1,9 @@
 import NotFoundPage from "pages/not-found/not-found.routes";
-import ProgramsFacetPage from "pages/programs-facet/programs-facet.page";
-import ProgramsPage from "pages/programs/programs.page";
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
+
+import ProgramsFacetPage from "./programs-facet/programs-facet.page";
+import ProgramsPage from "./programs/programs.page";
 
 export const PROGRAMS_FAVORITES_TAB_NAME = "favorites";
 export const PROGRAMS_EXPLORE_TAB_NAME = "explore";

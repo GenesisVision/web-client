@@ -2,18 +2,18 @@ import {
   calculateSkipAndTake,
   calculateTotalPages
 } from "modules/paging/helpers/paging-helpers";
-import qs from "qs";
-import { push } from "react-router-redux";
 import {
   PROGRAMS_FACET_ROUTE,
   PROGRAMS_FAVORITES_TAB_NAME,
   PROGRAMS_TAB_ROUTE
-} from "routes/programs.routes";
+} from "pages/programs/programs.routes";
+import qs from "qs";
+import { push } from "react-router-redux";
 import authService from "services/auth-service";
 import getParams from "utils/get-params";
 
 import { getSortingColumnName } from "../../sorting/helpers/sorting-helpers";
-import * as programActions from "../actions/programs-actions";
+import * as programTableActions from "../actions/programs-table.actions";
 import { PROGRAMS_COLUMNS, SORTING_FILTER_VALUE } from "../programs.constants";
 
 const sortableColums = PROGRAMS_COLUMNS.filter(
@@ -25,7 +25,7 @@ export const getPrograms = () => (dispatch, getState) => {
   if (authService.getAuthArg()) {
     requestFilters.authorization = authService.getAuthArg();
   }
-  dispatch(programActions.fetchPrograms(requestFilters));
+  dispatch(programTableActions.fetchPrograms(requestFilters));
 };
 
 const composeRequestFilters = () => (dispatch, getState) => {

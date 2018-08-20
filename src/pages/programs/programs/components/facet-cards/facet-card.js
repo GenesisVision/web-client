@@ -1,8 +1,8 @@
 import Surface from "components/surface/surface";
+import { PROGRAMS_FACET_ROUTE } from "pages/programs/programs.routes";
 import PropTypes from "prop-types";
 import React from "react";
 import { Link } from "react-router-dom";
-import { PROGRAMS_FACET_ROUTE } from "routes/programs.routes";
 import replaceParams from "utils/replace-params";
 
 const FacetCard = ({ facet }) => {

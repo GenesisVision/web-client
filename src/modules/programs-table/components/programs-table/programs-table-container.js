@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { bindActionCreators, compose } from "redux";
 
-import * as programsService from "../../services/programs-service";
+import * as programsService from "../../services/programs-table.service";
 import ProgramsTable from "./programs-table";
 
 class ProgramsContainer extends Component {
