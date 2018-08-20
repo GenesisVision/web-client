@@ -1,3 +1,5 @@
+import { getCurrentFacet } from "modules/programs/services/programs-facet-service";
+import { getPrograms } from "modules/programs/services/programs-service";
 import NotFoundPage from "pages/not-found/not-found.routes";
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
@@ -5,11 +7,10 @@ import { withRouter } from "react-router-dom";
 import { goBack } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
 
-import { getCurrentFacet } from "../../services/programs-facet-service";
-import { getPrograms } from "../../services/programs-service";
-import ProgramsFacet from "../programs-facet/programs-facet";
-import ProgramsFacetStub from "../programs-facet/programs-facet-stub";
-import ProgramsContainer from "../programs/programs-container";
+import ProgramsFacet from "./programs-facet";
+import ProgramsFacetStub from "./programs-facet-stub";
+
+// import ProgramsContainer from "./components/programs/programs-container";
 
 class ProgramsFacetPage extends Component {
   state = {
@@ -38,7 +39,7 @@ class ProgramsFacetPage extends Component {
     return (
       <Fragment>
         <ProgramsFacet facet={facetData.facet} goBack={goBack} />
-        <ProgramsContainer />
+        {/* <ProgramsContainer /> */}
       </Fragment>
     );
   }

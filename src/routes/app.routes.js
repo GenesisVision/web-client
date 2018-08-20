@@ -3,10 +3,11 @@ import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import DashboardRoutes from "pages/dashboard/dashboard.routes";
 import NotFoundPage from "pages/not-found/not-found.routes";
 import PrivateRoute from "pages/private-route";
-import ProgramsRoutes, { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
-import { HOME_ROUTE } from "pages/root.routes";
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
+import { HOME_ROUTE } from "routes/root.routes";
+
+import ProgramsRoutes, { PROGRAMS_ROUTE } from "./programs.routes";
 
 const AppRoutes = () => {
   return (

@@ -1,12 +1,12 @@
 import { GVTab, GVTabs } from "gv-react-components";
+import React from "react";
+import { translate } from "react-i18next";
+import { Link } from "react-router-dom";
 import {
   PROGRAMS_EXPLORE_TAB_NAME,
   PROGRAMS_FAVORITES_TAB_NAME,
   PROGRAMS_TAB_ROUTE
-} from "pages/programs/programs.routes";
-import React from "react";
-import { translate } from "react-i18next";
-import { Link } from "react-router-dom";
+} from "routes/programs.routes";
 import replaceParams from "utils/replace-params";
 
 const ProgramsTabs = ({ t, tab }) => {

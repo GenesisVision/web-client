@@ -1,5 +1,3 @@
-import "./root.scss";
-
 import React, { Component } from "react";
 import { Scrollbars } from "react-custom-scrollbars";
 import { connect } from "react-redux";
@@ -7,9 +5,9 @@ import { Provider } from "react-redux";
 import { ConnectedRouter } from "react-router-redux";
 
 import platformActions from "../actions/platform-actions";
+import RootRoutes from "../routes/root.routes";
 import store from "../store/index";
 import history from "../utils/history";
-import RootRoutes from "./root.routes";
 
 class Root extends Component {
   componentDidMount() {

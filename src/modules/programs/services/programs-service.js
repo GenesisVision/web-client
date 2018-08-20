@@ -2,13 +2,13 @@ import {
   calculateSkipAndTake,
   calculateTotalPages
 } from "modules/paging/helpers/paging-helpers";
+import qs from "qs";
+import { push } from "react-router-redux";
 import {
   PROGRAMS_FACET_ROUTE,
   PROGRAMS_FAVORITES_TAB_NAME,
   PROGRAMS_TAB_ROUTE
-} from "pages/programs/programs.routes";
-import qs from "qs";
-import { push } from "react-router-redux";
+} from "routes/programs.routes";
 import authService from "services/auth-service";
 import getParams from "utils/get-params";
 

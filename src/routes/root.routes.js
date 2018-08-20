@@ -1,14 +1,14 @@
-import AppRoutes from "pages/app/app.routes";
 import { EMAIL_CONFIRM_PENDING_ROUTE } from "pages/email-confirm/email-confirm.routes";
 import EmailConfirmRoutes from "pages/email-confirm/email-confirm.routes";
+import ForgotPasswordRoutes, {
+  FORGOT_PASSWORD_ROUTE
+} from "pages/forgot-password/forgot-password.routes";
+import LoginRoutes, { LOGIN_ROUTE } from "pages/login/login.routes";
 import SignupRoutes, { REGISTER_ROUTE } from "pages/signup/signup.routes";
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
-import ForgotPasswordRoutes, {
-  FORGOT_PASSWORD_ROUTE
-} from "./forgot-password/forgot-password.routes";
-import LoginRoutes, { LOGIN_ROUTE } from "./login/login.routes";
+import AppRoutes from "./app.routes";
 
 export const HOME_ROUTE = "/";
 

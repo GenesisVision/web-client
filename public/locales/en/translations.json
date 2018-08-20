@@ -1,6 +1,6 @@
 {
   "app": {
-    "header": "Manager Portal"
+    "title": "Investor Portal: "
   },
   "auth": {
     "text": "A Brief History Of Creation",
@@ -73,6 +73,7 @@
     "end-less-than-now": "The period is being restarted."
   },
   "programs-page": {
+    "title": "Programs",
     "tabs": {
       "explore": "Explore",
       "favorites": "Favorites"

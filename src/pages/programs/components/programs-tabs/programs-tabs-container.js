@@ -1,9 +1,9 @@
-import { PROGRAMS_TAB_ROUTE } from "pages/programs/programs.routes";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { push } from "react-router-redux";
 import { compose } from "redux";
+import { PROGRAMS_TAB_ROUTE } from "routes/programs.routes";
 import replaceParams from "utils/replace-params";
 
 import ProgramsTabs from "./programs-tabs";
