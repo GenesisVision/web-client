@@ -1,7 +1,6 @@
 import React from "react";
 
 import { TableContext } from "./table";
-import TableRow from "./table-row";
 
 const TableBody = ({ children }) => {
   const renderBody = context => {
