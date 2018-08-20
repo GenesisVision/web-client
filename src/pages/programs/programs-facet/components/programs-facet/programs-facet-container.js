@@ -1,3 +1,4 @@
+import ProgramsContainer from "modules/programs-table/components/programs-table/programs-table-container";
 import { getPrograms } from "modules/programs-table/services/programs-table.service";
 import NotFoundPage from "pages/not-found/not-found.routes";
 import React, { Component, Fragment } from "react";
@@ -7,10 +8,8 @@ import { goBack } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
 
 import { getCurrentFacet } from "../../services/programs-facet.service";
-import ProgramsFacet from "./programs-facet";
+import ProgramsFacetInfo from "./programs-facet-info";
 import ProgramsFacetStub from "./programs-facet-stub";
-
-// import ProgramsContainer from "./components/programs/programs-container";
 
 class ProgramsFacetPage extends Component {
   state = {
@@ -38,8 +37,8 @@ class ProgramsFacetPage extends Component {
     if (facetData.notFound) return <NotFoundPage />;
     return (
       <Fragment>
-        <ProgramsFacet facet={facetData.facet} goBack={goBack} />
-        {/* <ProgramsContainer /> */}
+        <ProgramsFacetInfo facet={facetData.facet} goBack={goBack} />
+        <ProgramsContainer />
       </Fragment>
     );
   }
