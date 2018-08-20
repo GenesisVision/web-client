@@ -1,6 +1,6 @@
 import { GVButton } from "gv-react-components";
 import { LOGIN_ROUTE } from "pages/login/login.routes";
-import { REGISTER_ROUTE } from "pages/signup/signup.routes";
+import { SIGNUP_ROUTE } from "pages/signup/signup.routes";
 import React from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
@@ -16,7 +16,7 @@ const AuthorizationControls = ({ t, isAuthenticated, className = "" }) => {
             {t("login-page.login.title")}
           </GVButton>
         </Link>
-        <Link to={REGISTER_ROUTE}>
+        <Link to={SIGNUP_ROUTE}>
           <GVButton variant="contained" color="primary">
             {t("login-page.signup.title")}
           </GVButton>

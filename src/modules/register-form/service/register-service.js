@@ -4,14 +4,14 @@ import emailPendingActions, {
   EMAIL_PENDING
 } from "../../../actions/email-pending-actions";
 import { DASHBOARD_ROUTE } from "../../../pages/dashboard/dashboard.routes";
-import { REGISTER_ROUTE_PENDING } from "../../../pages/signup/signup.routes";
+import { SIGNUP_ROUTE_PENDING } from "../../../pages/signup/signup.routes";
 import clearDataActionFactory from "../../../shared/actions/clear-data.factory";
 import registerActions from "../actions/register-actions";
 
 const register = registerData => dispatch => {
   return dispatch(registerActions.registerUser(registerData)).then(() => {
     dispatch(emailPendingActions.saveEmail(registerData));
-    dispatch(push(REGISTER_ROUTE_PENDING));
+    dispatch(push(SIGNUP_ROUTE_PENDING));
   });
 };
 
