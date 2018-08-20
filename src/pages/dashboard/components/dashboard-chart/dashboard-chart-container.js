@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { getChartCommon } from "../../services/dashboard-service";
+import { getChartCommon } from "../../services/dashboard.service";
 import DashboardChart from "./dashboard-chart";
 
 class DashboardChartContainer extends Component {

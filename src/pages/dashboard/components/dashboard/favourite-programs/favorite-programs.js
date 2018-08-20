@@ -1,14 +1,13 @@
+import ProgramDepositContainer from "modules/program-deposit/components/program-deposit-container/program-deposit-container";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import React, { Component } from "react";
 
-import dashboardActions from "../../../actions/dashboard-actions";
 import popupActions from "../../../../popup/actions/popup-actions";
 import ProgramList from "../../../../programs/components/program-filterable-list/program-list-container/program-list/program-list";
-import programsService from "../../../../programs/service/programs-service";
-
 import { PROGRAMS_ROUTE } from "../../../../programs/programs.constants";
-import ProgramDepositContainer from "modules/program-deposit/components/program-deposit-container/program-deposit-container";
+import programsService from "../../../../programs/service/programs-service";
+import dashboardActions from "../../../actions/dashboard-actions";
 
 class FavoritePrograms extends Component {
   componentDidMount() {
@@ -32,7 +31,8 @@ class FavoritePrograms extends Component {
           Add your first favourite program on{" "}
           <Link className="link" to={PROGRAMS_ROUTE}>
             the program list page
-          </Link>.
+          </Link>
+          .
         </div>
       );
 

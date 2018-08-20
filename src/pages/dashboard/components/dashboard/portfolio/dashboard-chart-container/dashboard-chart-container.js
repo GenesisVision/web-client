@@ -1,5 +1,5 @@
-import { connect } from "react-redux";
 import React, { PureComponent } from "react";
+import { connect } from "react-redux";
 
 import dashboardActions from "../../../../actions/dashboard-actions";
 import DashboardChart from "./dashboard-chart/dashboard-chart";

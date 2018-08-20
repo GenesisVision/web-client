@@ -1,9 +1,10 @@
 import "./dashboard.scss";
 
-import DashboardAssetsContainer from "modules/dashboard/components/dashboard-assets/dashboard-assets-container";
-import DashboardChartContainer from "modules/dashboard/components/dashboard-chart/dashboard-chart-container";
-import DashboardPortfolioEventsContainer from "modules/dashboard/components/dashboard-portfolio-events/dashboard-portfolio-events-container";
 import React from "react";
+
+import DashboardAssetsContainer from "./components/dashboard-assets/dashboard-assets-container";
+import DashboardChartContainer from "./components/dashboard-chart/dashboard-chart-container";
+import DashboardPortfolioEventsContainer from "./components/dashboard-portfolio-events/dashboard-portfolio-events-container";
 
 const DashboardPage = () => {
   return (

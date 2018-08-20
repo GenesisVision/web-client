@@ -1,8 +1,9 @@
-import NumberFormat from "react-number-format";
+import "./dashboard-statistic.css";
+
 import React from "react";
 import { translate } from "react-i18next";
+import NumberFormat from "react-number-format";
 import { UncontrolledTooltip } from "reactstrap";
-import "./dashboard-statistic.css";
 
 const DashboardStatistic = ({
   hasPrograms,

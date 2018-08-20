@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { getPortfolioEvents } from "../../services/dashboard-service";
+import { getPortfolioEvents } from "../../services/dashboard.service";
 import DashboardPortfolioEvents from "./dashboard-portfolio-events";
 
 class DashboardPortfolioEventsContainer extends Component {

@@ -1,11 +1,11 @@
-import { connect } from "react-redux";
+import ProgramDepositContainer from "modules/program-deposit/components/program-deposit-container/program-deposit-container";
 import React, { PureComponent } from "react";
+import { connect } from "react-redux";
 
+import popupActions from "../../../../../popup/actions/popup-actions";
 import dashboardActions from "../../../../actions/dashboard-actions";
 import DashboardProgramList from "./dashboard-program-list/dashboard-program-list";
 import DashboardStatistic from "./dashboard-statistic/dashboard-statistic";
-import popupActions from "../../../../../popup/actions/popup-actions";
-import ProgramDepositContainer from "modules/program-deposit/components/program-deposit-container/program-deposit-container";
 
 class DashboardContainer extends PureComponent {
   componentDidMount() {

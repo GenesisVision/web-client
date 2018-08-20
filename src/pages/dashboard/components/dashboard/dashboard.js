@@ -1,16 +1,16 @@
-import { Switch, Route, Redirect } from "react-router-dom";
-import React from "react";
+import "./dashboard.css";
 
-import DashboardFilters from "./dashboard-filters/dashboard-filters";
-import FavoritePrograms from "./favourite-programs/favorite-programs";
+import React from "react";
+import { Redirect, Route, Switch } from "react-router-dom";
 
 import {
   DASHBOARD_FAVOURITES_ROUTE,
   DASHBOARD_PORTFOLIO_ROUTE,
   DASHBOARD_ROUTE
 } from "../../dashboard.constants";
+import DashboardFilters from "./dashboard-filters/dashboard-filters";
+import FavoritePrograms from "./favourite-programs/favorite-programs";
 import Portfolio from "./portfolio/portfolio";
-import "./dashboard.css";
 
 const DashboardSections = () => (
   <Switch>

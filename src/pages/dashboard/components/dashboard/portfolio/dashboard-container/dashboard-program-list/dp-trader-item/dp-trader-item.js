@@ -1,8 +1,9 @@
+import "./dp-trader-item.css";
+
 import React from "react";
 
-import DPStatistic from "./dp-statistic/dp-statistic";
 import ProgramItem from "../../../../../../../../components/program-item/program-item";
-import "./dp-trader-item.css";
+import DPStatistic from "./dp-statistic/dp-statistic";
 
 const DPTraderItem = ({ ...props }) => {
   return (

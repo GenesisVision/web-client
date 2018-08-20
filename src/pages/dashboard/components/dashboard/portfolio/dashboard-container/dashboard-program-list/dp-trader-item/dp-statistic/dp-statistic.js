@@ -1,7 +1,7 @@
-import { translate } from "react-i18next";
-import NumberFormat from "react-number-format";
 import ProgramMetric from "components/program-metric/program-metric";
 import React from "react";
+import { translate } from "react-i18next";
+import NumberFormat from "react-number-format";
 
 const DPStatistic = ({ t, trader, className = "" }) => {
   return (

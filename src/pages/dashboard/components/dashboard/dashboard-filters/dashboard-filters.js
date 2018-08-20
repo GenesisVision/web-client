@@ -1,11 +1,13 @@
+import "./dashboard-filters.css";
+
 import React from "react";
 import { translate } from "react-i18next";
 import { NavLink } from "react-router-dom";
+
 import {
   DASHBOARD_FAVOURITES_ROUTE,
   DASHBOARD_PORTFOLIO_ROUTE
 } from "../../../dashboard.constants";
-import "./dashboard-filters.css";
 
 const DashboardFilters = ({ t }) => (
   <div className="dashboard-program-list-tabs">

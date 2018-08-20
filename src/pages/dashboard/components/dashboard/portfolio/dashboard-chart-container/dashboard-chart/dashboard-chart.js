@@ -1,15 +1,15 @@
+import "./dashboard-chart.css";
+
+import moment from "moment";
+import React from "react";
 import {
-  LineChart,
   Line,
+  LineChart,
   ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis
 } from "recharts";
-import React from "react";
-import moment from "moment";
-
-import "./dashboard-chart.css";
 
 const DashboardChart = ({ data }) => {
   if (data.length === 0) return null;

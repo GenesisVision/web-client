@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { getAssets } from "../../services/dashboard-service";
+import { getAssets } from "../../services/dashboard.service";
 import DashboardAssets from "./dashboard-assets";
 
 class DashboardAssetsContainer extends Component {
