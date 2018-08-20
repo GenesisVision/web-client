@@ -91,6 +91,9 @@
       "chart": "Chart"
     }
   },
+  "dashboard-page": {
+    "title": "Dashboard"
+  },
   "program-actions": {
     "invest": "Invest",
     "withdraw": "Withdraw"
