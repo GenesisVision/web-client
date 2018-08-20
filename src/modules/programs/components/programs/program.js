@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 
+import TableRow from "../../../../components/table/table-row";
 import ProgramDetailed from "./program-detailed";
-import ProgramRow from "./program-row";
+import ProgramRow from "./program-table-row";
 
 class Program extends Component {
   constructor(props) {
@@ -30,7 +31,9 @@ class Program extends Component {
         />
       );
     return (
-      <ProgramRow program={program} onExpandClick={this.openProgramDetail} />
+      <TableRow>
+        <ProgramRow program={program} onExpandClick={this.openProgramDetail} />
+      </TableRow>
     );
   }
 }

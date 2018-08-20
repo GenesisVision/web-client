@@ -1,33 +1,5 @@
 .programs-table {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-
-  &__row {
-    width: 100%;
-    display: flex;
-    padding: 0 1.5rem;
-    opacity: 0.7;
-    &:not(.programs-table__row--header):hover {
-      opacity: 1;
-      background-color: #212c34;
-    }
-  }
-
   &__cell {
-    cursor: default;
-    box-sizing: border-box;
-    display: inline-flex;
-    align-items: center;
-    flex-grow: 1;
-    padding: 1em 0;
-    overflow: hidden; // Or flex might break
-    list-style: none;
-    font-size: 13px;
-    font-weight: normal;
-    letter-spacing: 0.4px;
-    white-space: nowrap;
-
     &--header {
       cursor: default;
       opacity: 0.3;

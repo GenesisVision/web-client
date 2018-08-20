@@ -1,15 +1,28 @@
+import "./programs.scss";
+
+import Table from "components/table/table";
+import TableBody from "components/table/table-body";
 import React from "react";
+import { translate } from "react-i18next";
 
-import Programs from "./programs";
-import ProgramsHeader from "./programs-header";
+import { PROGRAMS_COLUMNS } from "../../programs.constants";
+import ProgramTableRow from "./program-table-row";
+import ProgramsTableHead from "./programs-table-head";
 
-const ProgramsTable = ({ data, sorting, updateSorting }) => {
+const ProgramsTable = ({ t, data, sorting, updateSorting }) => {
   return (
-    <div className="programs-table">
-      <ProgramsHeader sorting={sorting} updateSorting={updateSorting} />
-      <Programs data={data} />
-    </div>
+    <Table
+      columns={PROGRAMS_COLUMNS}
+      items={data.programs}
+      isPending={data.isPending}
+    >
+      <ProgramsTableHead updateSorting={updateSorting} sorting={sorting} />
+      <TableBody>
+        {program => <ProgramTableRow key={program.id} program={program} />}
+      </TableBody>
+      {/* <TableFooter /> */}
+    </Table>
   );
 };
 
-export default ProgramsTable;
+export default translate()(ProgramsTable);

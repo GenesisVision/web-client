@@ -49,7 +49,7 @@ export const PROGRAMS_COLUMNS = [
   },
   {
     name: "trades",
-    sortingName: " ByTrades"
+    sortingName: "ByTrades"
   },
   {
     name: "period",
