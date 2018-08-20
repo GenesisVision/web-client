@@ -1,20 +1,12 @@
+import { GVButton } from "gv-react-components";
 import React from "react";
-import { Link } from "react-router-dom";
 
-const ProgramsFacet = ({ goBack }) => {
-  const handleClick = e => {
-    e.preventDefault();
-    goBack();
-  };
+const ProgramsFacet = ({ facet, goBack }) => {
   return (
     <div>
-      <Link to="" onClick={handleClick}>
-        back
-      </Link>
-      <br />
-      <br />
-      <div>FacetName</div>
-      <div>FacetPrograms</div>
+      <GVButton variant="text" onClick={goBack}>
+        &larr; Back
+      </GVButton>
     </div>
   );
 };

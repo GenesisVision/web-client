@@ -8,7 +8,6 @@
 }
 
 .facet {
-  cursor: pointer;
   width: 315px;
   height: 280px;
 
@@ -37,5 +36,9 @@
     line-height: 1.57;
     letter-spacing: 0.2px;
     color: $alternate-color;
+  }
+
+  &:not(.facet--stub) {
+    cursor: pointer;
   }
 }

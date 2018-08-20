@@ -1,18 +1,19 @@
 import {
+  calculateSkipAndTake,
+  calculateTotalPages
+} from "modules/paging/helpers/paging-helpers";
+import {
+  PROGRAMS_FACET_ROUTE,
   PROGRAMS_FAVORITES_TAB_NAME,
   PROGRAMS_TAB_ROUTE
 } from "pages/programs/programs.routes";
 import qs from "qs";
-import { matchPath } from "react-router-dom";
 import { push } from "react-router-redux";
 import authService from "services/auth-service";
+import getParams from "utils/get-params";
 
-import {
-  calculateSkipAndTake,
-  calculateTotalPages
-} from "../../paging/helpers/paging-helpers";
 import { getSortingColumnName } from "../../sorting/helpers/sorting-helpers";
-import programActions from "../actions/programs-actions";
+import * as programActions from "../actions/programs-actions";
 import { PROGRAMS_COLUMNS, SORTING_FILTER_VALUE } from "../programs.constants";
 
 const sortableColums = PROGRAMS_COLUMNS.filter(
@@ -27,26 +28,31 @@ export const getPrograms = () => (dispatch, getState) => {
   dispatch(programActions.fetchPrograms(requestFilters));
 };
 
-const getParams = (pathname, route) => {
-  const matchProfile = matchPath(pathname, {
-    path: route
-  });
-  return (matchProfile && matchProfile.params) || {};
-};
-
 const composeRequestFilters = () => (dispatch, getState) => {
-  const { routing } = getState();
+  let itemsOnPage = 10;
+  const existingFilters = dispatch(getProgramsFiltering());
+  let { page } = existingFilters;
   let filters = {};
+
+  const { routing } = getState();
   const { tab } = getParams(routing.location.pathname, PROGRAMS_TAB_ROUTE);
   if (tab === PROGRAMS_FAVORITES_TAB_NAME) {
     filters.isFavorite = true;
   }
 
-  const existingFilters = dispatch(getProgramsFiltering());
+  const { facetId } = getParams(
+    routing.location.pathname,
+    PROGRAMS_FACET_ROUTE
+  );
+  if (facetId) {
+    filters.facet = facetId;
+    itemsOnPage = 100;
+    page = 1;
+  }
 
   const { skip, take } = calculateSkipAndTake({
-    itemsOnPage: 10,
-    currentPage: existingFilters.page - 1
+    itemsOnPage: itemsOnPage,
+    currentPage: page - 1
   });
   filters = {
     ...filters,
