@@ -1,2 +1,2 @@
-export const REGISTER = "REGISTER";
+export const SIGN_UP = "SIGN_UP";
 export const RESEND_CONFIRMATION_LINK = "RESEND_CONFIRMATION_LINK";

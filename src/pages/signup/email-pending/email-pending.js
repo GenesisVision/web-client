@@ -1,6 +1,6 @@
 import "./email-pending.scss";
 
-import EmailPendingContainer from "modules/register-form/components/signup-email-pending-container/signup-email-pending-container";
+import EmailPendingContainer from "modules/signup/components/signup-email-pending-container/signup-email-pending-container";
 import React from "react";
 import { translate } from "react-i18next";
 

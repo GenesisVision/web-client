@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import registerService from "../../service/register-service";
+import signUpService from "../../service/signup-service";
 import EmailPending from "./signup-email-pending/signup-email-pending";
 
 const EmailPendingContainer = ({ sendEmail, continueConfirmEmail }) => (
@@ -10,10 +10,10 @@ const EmailPendingContainer = ({ sendEmail, continueConfirmEmail }) => (
 
 const mapDispatchToProps = dispatch => ({
   sendEmail: () => {
-    dispatch(registerService.resendConfirmationLink());
+    dispatch(signUpService.resendConfirmationLink());
   },
   continueConfirmEmail: () => {
-    dispatch(registerService.confirmEmail());
+    dispatch(signUpService.confirmEmail());
   }
 });
 
