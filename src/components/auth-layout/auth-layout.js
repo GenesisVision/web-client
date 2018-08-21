@@ -17,9 +17,11 @@ const AuthLayout = ({ t, children, Footer }) => {
       </div>
       <div className="auth__right">
         <div className="auth__content">{children}</div>
-        <div className="auth__footer">
-          <Footer />
-        </div>
+        {Footer && (
+          <div className="auth__footer">
+            <Footer />
+          </div>
+        )}
       </div>
     </div>
   );

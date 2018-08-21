@@ -1,5 +1,14 @@
+@import "styles/_colors.scss";
+
 .signup {
   &__heading {
     margin: 0 0 35px 0;
   }
+}
+
+.signup-footer {
+  padding: 28px 80px;
+  display: flex;
+  flex-direction: row;
+  background-color: $secondary-background-color;
 }

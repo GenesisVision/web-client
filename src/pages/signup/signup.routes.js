@@ -3,7 +3,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 
 import EmailPending from "./email-pending/email-pending";
-import SignUpFooter from "./signup-footer/signup-footer";
+import SignUpFooter from "./signup-footer";
 import SignUp from "./signup-page";
 
 export const SIGNUP_ROUTE = "/signup";

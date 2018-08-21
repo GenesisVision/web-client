@@ -12,25 +12,13 @@ import { Link } from "react-router-dom";
 const LoginPage = ({ t, location }) => {
   const { from } = location.state || { from: { pathname: HOME_ROUTE } };
   return (
-    <Fragment>
+    <div className="login">
       <div className="login__header">
-        <h1>{t("auth.login.title")}</h1>
+        <h1 className="login__heading">{t("auth.login.title")}</h1>
         <AuthTabs />
       </div>
-
       <LoginContainer from={from} />
-
-      <div className="auth-footer">
-        <span className={"auth-footer__desc"}>
-          {t("auth.login.footer-text")}
-        </span>
-        <Link to={SIGNUP_ROUTE} className="auth-footer__desc">
-          <GVButton color="secondary" variant="outlined">
-            {t("auth.signup.title")}
-          </GVButton>
-        </Link>
-      </div>
-    </Fragment>
+    </div>
   );
 };
 
