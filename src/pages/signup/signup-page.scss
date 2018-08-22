@@ -1,8 +1,6 @@
 @import "styles/_colors.scss";
-@import "styles/_constants.scss";
-@import "styles/_breakpoint.scss";
 
-.login {
+.signup {
   &__header {
     margin-bottom: 30px;
   }
@@ -10,13 +8,9 @@
   &__heading {
     margin: 0 0 35px 0;
   }
-
-  &__submit-button {
-    margin-top: 145px;
-  }
 }
 
-.login-footer {
+.signup-footer {
   box-sizing: border-box;
   height: 100%;
   padding: 28px 80px;

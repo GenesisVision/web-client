@@ -1,6 +1,7 @@
-import LoginLayout from "components/login-layout/login-layout";
+import AuthLayout from "components/auth-layout/auth-layout";
 import EmailPending from "pages/forgot-password/email-pending/email-pending";
 import ForgotPassword from "pages/forgot-password/forgot-password";
+import ForgotPasswordFooter from "pages/forgot-password/forgot-password-footer";
 import PasswordRestore from "pages/forgot-password/password-restore/password-restore";
 import React from "react";
 import { Route, Switch } from "react-router-dom";
@@ -11,13 +12,13 @@ export const PASSWORD_RESTORE_ROUTE = `${FORGOT_PASSWORD_ROUTE}/password-restore
 
 const ForgotPasswordRoutes = () => {
   return (
-    <LoginLayout>
+    <AuthLayout Footer={ForgotPasswordFooter}>
       <Switch>
         <Route path={EMAIL_PENDING_ROUTE} component={EmailPending} />
         <Route exact path={FORGOT_PASSWORD_ROUTE} component={ForgotPassword} />
         <Route path={PASSWORD_RESTORE_ROUTE} component={PasswordRestore} />
       </Switch>
-    </LoginLayout>
+    </AuthLayout>
   );
 };
 

@@ -18,5 +18,5 @@ const Tabs = ({ t }) => {
   );
 };
 
-const LoginTabs = translate()(Tabs);
-export default LoginTabs;
+const AuthTabs = translate()(Tabs);
+export default AuthTabs;

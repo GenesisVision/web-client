@@ -14,7 +14,7 @@ import programSearchReducer from "../modules/program-search/reducers/program-sea
 import programWithdrawReducer from "../modules/program-withdraw/reducers/program-withdraw-reducers";
 import programReducer from "../modules/program/reducers/trader-reducers";
 import programsReducer from "../modules/programs-table/reducers/programs-table.reducers";
-import registerReducer from "../modules/register-form/reducers/register-reducers";
+import signUpReducer from "../modules/signup/reducers/signup-reducers";
 import walletReducer from "../modules/wallet/reducers/wallet-reducers";
 import dashboardReducer from "../pages/dashboard/reducers/dashboard.reducers";
 import alertMessagesReducer from "../shared/modules/alert-message/reducers/alert-message-reducers";
@@ -30,7 +30,7 @@ export default combineReducers({
   programsData: programsReducer,
   programData: programReducer,
   loginData: loginReducer,
-  registerData: registerReducer,
+  signUpData: signUpReducer,
   authData: authReducer,
   emailConfirmData: emailConfirmReducer,
   passwordRestoreData: passwordRestoreReducer,

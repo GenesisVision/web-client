@@ -1,7 +1,7 @@
 import "./signup-email-pending.scss";
 
 import { GVButton } from "gv-react-components";
-import { REGISTER_ROUTE } from "pages/signup/signup.routes";
+import { SIGNUP_ROUTE } from "pages/signup/signup.routes";
 import React from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -17,8 +17,8 @@ const EmailPending = ({ t, onResendEmail, onContinue }) => {
         {t("auth.email-pending.email-resend-button-text")}
       </GVButton>
       <div className="signup-email-pending__navigation">
-        <Link to={REGISTER_ROUTE} className="signup-email-pending__btn-back">
-          <GVButton variant="text">
+        <Link to={SIGNUP_ROUTE} className="signup-email-pending__btn-back">
+          <GVButton variant="text" color="secondary">
             &larr; {t("auth.email-pending.back-button-text")}
           </GVButton>
         </Link>

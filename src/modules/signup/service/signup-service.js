@@ -4,20 +4,20 @@ import emailPendingActions, {
   EMAIL_PENDING
 } from "../../../actions/email-pending-actions";
 import { DASHBOARD_ROUTE } from "../../../pages/dashboard/dashboard.routes";
-import { REGISTER_ROUTE_PENDING } from "../../../pages/signup/signup.routes";
+import { SIGNUP_ROUTE_PENDING } from "../../../pages/signup/signup.routes";
 import clearDataActionFactory from "../../../shared/actions/clear-data.factory";
-import registerActions from "../actions/register-actions";
+import signUpActions from "../actions/signup-actions";
 
-const register = registerData => dispatch => {
-  return dispatch(registerActions.registerUser(registerData)).then(() => {
-    dispatch(emailPendingActions.saveEmail(registerData));
-    dispatch(push(REGISTER_ROUTE_PENDING));
+const signUp = signUpData => dispatch => {
+  return dispatch(signUpActions.signUpUser(signUpData)).then(() => {
+    dispatch(emailPendingActions.saveEmail(signUpData));
+    dispatch(push(SIGNUP_ROUTE_PENDING));
   });
 };
 
 const resendConfirmationLink = () => (dispatch, getState) => {
   let { email } = getState().emailPending;
-  dispatch(registerActions.resendConfirmationLink({ email }));
+  dispatch(signUpActions.resendConfirmationLink({ email }));
 };
 
 const confirmEmail = () => (dispatch, getState) => {
@@ -25,5 +25,5 @@ const confirmEmail = () => (dispatch, getState) => {
   dispatch(push(DASHBOARD_ROUTE));
 };
 
-const registerService = { register, resendConfirmationLink, confirmEmail };
-export default registerService;
+const signUpService = { signUp, resendConfirmationLink, confirmEmail };
+export default signUpService;

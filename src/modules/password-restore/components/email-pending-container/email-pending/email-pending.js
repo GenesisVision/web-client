@@ -9,16 +9,12 @@ import { Link } from "react-router-dom";
 const EmailPending = ({ onResendEmail, onContinue, t }) => {
   return (
     <React.Fragment>
-      <GVButton
-        className="email-pending__resend-btn"
-        variant="text"
-        onClick={onResendEmail}
-      >
+      <GVButton variant="text" onClick={onResendEmail}>
         {t("auth.email-pending.email-resend-button-text")}
       </GVButton>
-      <div className="email-pending__navigation">
-        <Link to={FORGOT_PASSWORD_ROUTE} className="email-pending__btn-back">
-          <GVButton variant="text">
+      <div className="password-pending__navigation">
+        <Link to={FORGOT_PASSWORD_ROUTE} className="password-restore__btn-back">
+          <GVButton variant="text" color="secondary">
             &larr; {t("auth.email-pending.back-button-text")}
           </GVButton>
         </Link>

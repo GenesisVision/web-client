@@ -33,7 +33,7 @@ const LoginForm = ({ t, isSubmitting, handleSubmit, error }) => {
       <a href={FORGOT_PASSWORD_ROUTE}>{t("auth.login.forgot")}</a>
       <div className={"form__error"}>{error}</div>
       <GVButton
-        className="login-button"
+        className="login__submit-button"
         id="loginSubmit"
         color="primary"
         variant="contained"

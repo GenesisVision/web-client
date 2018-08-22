@@ -1,4 +1,4 @@
-import "./register-form.css";
+import "./signup-form.scss";
 
 import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
@@ -7,13 +7,13 @@ import { translate } from "react-i18next";
 import { compose } from "redux";
 
 import FormError from "../../../../shared/components/form/form-error/form-error";
-import validationSchema from "./register-form.validators";
+import validationSchema from "./signup-form.validators";
 
-const RegisterForm = ({ isSubmitting, handleSubmit, error, t }) => {
+const SignUpForm = ({ isSubmitting, handleSubmit, error, t }) => {
   return (
     <form
-      id="registerForm"
-      className="register-form"
+      id="signUpForm"
+      className="signup-form"
       onSubmit={handleSubmit}
       noValidate
     >
@@ -42,8 +42,8 @@ const RegisterForm = ({ isSubmitting, handleSubmit, error, t }) => {
 
       <GVButton
         type="submit"
-        id="registerFormSubmit"
-        className="register-form__submit-button"
+        id="signUpFormSubmit"
+        className="signup-form__submit-button"
       >
         {t("auth.signup.title")}
       </GVButton>
@@ -54,7 +54,7 @@ const RegisterForm = ({ isSubmitting, handleSubmit, error, t }) => {
 const withTranslationAndFormik = compose(
   translate(),
   withFormik({
-    displayName: "register",
+    displayName: "signup-form",
     mapPropsToValues: () => ({
       email: "",
       password: "",
@@ -65,6 +65,6 @@ const withTranslationAndFormik = compose(
       props.onSubmit(values, setSubmitting);
     }
   })
-)(RegisterForm);
+)(SignUpForm);
 
 export default withTranslationAndFormik;

@@ -1,20 +1,21 @@
-import LoginLayout from "components/login-layout/login-layout";
+import AuthLayout from "components/auth-layout/auth-layout";
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
-import SignUp from "./signup-page";
 import EmailPending from "./email-pending/email-pending";
+import SignUpFooter from "./signup-footer";
+import SignUp from "./signup-page";
 
-export const REGISTER_ROUTE = "/signup";
-export const REGISTER_ROUTE_PENDING = `${REGISTER_ROUTE}/pending`;
+export const SIGNUP_ROUTE = "/signup";
+export const SIGNUP_ROUTE_PENDING = `${SIGNUP_ROUTE}/pending`;
 
-const LoginRoutes = () => (
-  <LoginLayout>
+const SignUpRoutes = () => (
+  <AuthLayout Footer={SignUpFooter}>
     <Switch>
-      <Route path={REGISTER_ROUTE_PENDING} component={EmailPending} />
-      <Route path={REGISTER_ROUTE} component={SignUp} />
+      <Route path={SIGNUP_ROUTE_PENDING} component={EmailPending} />
+      <Route path={SIGNUP_ROUTE} component={SignUp} />
     </Switch>
-  </LoginLayout>
+  </AuthLayout>
 );
 
-export default LoginRoutes;
+export default SignUpRoutes;
