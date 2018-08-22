@@ -24,7 +24,7 @@ const mapStateToProps = ({ signUpData, authData }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  signup: (signUpFormData, setSubmitting) => {
+  signUp: (signUpFormData, setSubmitting) => {
     dispatch(signUpService.signUp(signUpFormData)).catch(() => {
       setSubmitting(false);
     });
