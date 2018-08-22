@@ -14,7 +14,7 @@ const TableHeadCell = ({
       className={classnames("table__cell table__cell--head", className, {
         "table__cell--sortable": sortable
       })}
-      onClick={sortable && onClick}
+      onClick={sortable ? onClick : undefined}
     >
       <span
         className={classnames({
