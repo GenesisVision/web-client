@@ -1,11 +1,11 @@
+import { SIGNUP_ROUTE_PENDING } from "pages/auth/signup/signup.routes";
+import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import { push } from "react-router-redux";
+import clearDataActionFactory from "shared/actions/clear-data.factory";
 
 import emailPendingActions, {
   EMAIL_PENDING
 } from "../../../actions/email-pending-actions";
-import { DASHBOARD_ROUTE } from "../../../pages/dashboard/dashboard.routes";
-import { SIGNUP_ROUTE_PENDING } from "../../../pages/signup/signup.routes";
-import clearDataActionFactory from "../../../shared/actions/clear-data.factory";
 import signUpActions from "../actions/signup-actions";
 
 const signUp = signUpData => dispatch => {

@@ -1,6 +1,6 @@
-import AuthLayout from "components/auth-layout/auth-layout";
-import Recovery from "pages/login/recovery/recovery";
-import TwoFactor from "pages/login/two-factor/two-factor";
+import AuthLayout from "components/layout/auth-layout/auth-layout";
+import Recovery from "pages/auth/login/recovery/recovery";
+import TwoFactor from "pages/auth/login/two-factor/two-factor";
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 

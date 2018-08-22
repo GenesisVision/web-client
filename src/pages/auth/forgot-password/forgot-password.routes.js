@@ -1,10 +1,11 @@
-import AuthLayout from "components/auth-layout/auth-layout";
-import EmailPending from "pages/forgot-password/email-pending/email-pending";
-import ForgotPassword from "pages/forgot-password/forgot-password";
-import ForgotPasswordFooter from "pages/forgot-password/forgot-password-footer";
-import PasswordRestore from "pages/forgot-password/password-restore/password-restore";
+import AuthLayout from "components/layout/auth-layout/auth-layout";
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+
+import EmailPending from "./email-pending/email-pending";
+import ForgotPassword from "./forgot-password";
+import ForgotPasswordFooter from "./forgot-password-footer";
+import PasswordRestore from "./password-restore/password-restore";
 
 export const FORGOT_PASSWORD_ROUTE = "/forgot-password";
 export const EMAIL_PENDING_ROUTE = `${FORGOT_PASSWORD_ROUTE}/pending`;

@@ -1,6 +1,6 @@
 import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
-import { FORGOT_PASSWORD_ROUTE } from "pages/forgot-password/forgot-password.routes";
+import { FORGOT_PASSWORD_ROUTE } from "pages/auth/forgot-password/forgot-password.routes";
 import React from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";

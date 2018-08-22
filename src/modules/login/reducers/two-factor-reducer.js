@@ -1,4 +1,4 @@
-import { HOME_ROUTE } from "routes/root.routes";
+import { HOME_ROUTE } from "pages/app/app.routes";
 import { composeClearDataActionType } from "shared/actions/clear-data.factory";
 
 import { LOGIN_TWO_FACTOR } from "../actions/login-actions";

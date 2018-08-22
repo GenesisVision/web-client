@@ -1,5 +1,5 @@
 import TwoFactorCodeContainer from "modules/login/components/two-factor-code/two-factor-code-container";
-import { LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE } from "pages/login/login.routes";
+import { LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE } from "pages/auth/login/login.routes";
 import React from "react";
 import { Link } from "react-router-dom";
 

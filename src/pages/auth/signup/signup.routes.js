@@ -1,4 +1,4 @@
-import AuthLayout from "components/auth-layout/auth-layout";
+import AuthLayout from "components/layout/auth-layout/auth-layout";
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 

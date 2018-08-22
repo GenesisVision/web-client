@@ -1,10 +1,12 @@
 import authActions from "actions/auth-actions";
-import emailPendingActions from "actions/email-pending-actions";
 import { EMAIL_PENDING } from "actions/email-pending-actions";
-import { EMAIL_PENDING_ROUTE } from "pages/forgot-password/forgot-password.routes";
-import { PASSWORD_RESTORE_ROUTE } from "pages/forgot-password/forgot-password.routes";
+import emailPendingActions from "actions/email-pending-actions";
+import { HOME_ROUTE } from "pages/app/app.routes";
+import {
+  EMAIL_PENDING_ROUTE,
+  PASSWORD_RESTORE_ROUTE
+} from "pages/auth/forgot-password/forgot-password.routes";
 import { push } from "react-router-redux";
-import { HOME_ROUTE } from "routes/root.routes";
 import authService from "services/auth-service";
 import clearDataActionFactory from "shared/actions/clear-data.factory";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";

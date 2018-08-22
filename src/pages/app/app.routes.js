@@ -1,15 +1,14 @@
-import AppLayout from "components/app-layout/app-layout";
+import AppLayout from "components/layout/app-layout/app-layout";
 import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import DashboardRoutes from "pages/dashboard/dashboard.routes";
 import NotFoundPage from "pages/not-found/not-found.routes";
 import PrivateRoute from "pages/private-route";
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import { HOME_ROUTE } from "routes/root.routes";
 
-import ProgramsRoutes, {
-  PROGRAMS_ROUTE
-} from "../pages/programs/programs.routes";
+import ProgramsRoutes, { PROGRAMS_ROUTE } from "../programs/programs.routes";
+
+export const HOME_ROUTE = "/";
 
 const AppRoutes = () => {
   return (

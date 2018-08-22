@@ -2,9 +2,9 @@ import "./login.scss";
 
 import AuthTabs from "components/auth-tabs/auth-tabs";
 import LoginContainer from "modules/login/components/login/login-container";
+import { HOME_ROUTE } from "pages/app/app.routes";
 import React from "react";
 import { translate } from "react-i18next";
-import { HOME_ROUTE } from "routes/root.routes";
 
 const LoginPage = ({ t, location }) => {
   const { from } = location.state || { from: { pathname: HOME_ROUTE } };

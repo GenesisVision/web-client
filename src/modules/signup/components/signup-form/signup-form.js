@@ -25,17 +25,19 @@ const SignUpForm = ({ isSubmitting, handleSubmit, error, t }) => {
       />
 
       <GVFormikField
-        type="new-password"
+        type="password"
         name="password"
         label={t("auth.signup.password-field-text")}
         component={GVTextField}
+        autocomplete="new-password"
       />
 
       <GVFormikField
-        type="new-password"
+        type="password"
         name="confirmPassword"
         label={t("auth.signup.password-confirm-field-text")}
         component={GVTextField}
+        autocomplete="new-password"
       />
 
       <FormError error={error} />

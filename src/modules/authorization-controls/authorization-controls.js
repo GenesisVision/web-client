@@ -1,6 +1,6 @@
 import { GVButton } from "gv-react-components";
-import { LOGIN_ROUTE } from "pages/login/login.routes";
-import { SIGNUP_ROUTE } from "pages/signup/signup.routes";
+import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
+import { SIGNUP_ROUTE } from "pages/auth/signup/signup.routes";
 import React from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
