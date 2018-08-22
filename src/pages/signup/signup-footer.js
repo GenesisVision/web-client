@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const signUpFooter = ({ t }) => (
   <div className="signup-footer">
-    <span className="auth-footer__desc">{t("auth.signup.footer-text")}</span>
+    <span className="signup-footer__desc">{t("auth.signup.footer-text")}</span>
     <Link to={LOGIN_ROUTE}>
       <GVButton variant="outlined" color="secondary">
         {t("auth.login.title")}

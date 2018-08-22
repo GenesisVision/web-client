@@ -10,13 +10,13 @@ const EmailPending = ({ onResendEmail, onContinue, t }) => {
   return (
     <React.Fragment>
       <GVButton
-        className="email-pending__resend-btn"
+        className="password-pending__resend-btn"
         variant="text"
         onClick={onResendEmail}
       >
         {t("auth.email-pending.email-resend-button-text")}
       </GVButton>
-      <div className="email-pending__navigation">
+      <div className="password-pending__navigation">
         <Link to={FORGOT_PASSWORD_ROUTE} className="email-pending__btn-back">
           <GVButton variant="text">
             &larr; {t("auth.email-pending.back-button-text")}

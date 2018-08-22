@@ -20,6 +20,7 @@
   &__right {
     display: flex;
     position: relative;
+    overflow: hidden;
     flex-direction: column;
     justify-content: space-between;
     width: 476px;
@@ -29,11 +30,12 @@
   }
 
   &__content {
-    padding: 110px 80px 0px 80px;
+    padding: 110px 80px 58px 80px;
+    height: 805px;
   }
 
   &__footer {
-    height: 105px;
+    height: 100px;
   }
 
   &__logo {
