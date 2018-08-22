@@ -1,4 +1,4 @@
-import { HOME_ROUTE } from "pages/root.routes";
+import { HOME_ROUTE } from "routes/root.routes";
 import authService from "services/auth-service";
 
 import history from "../utils/history";
