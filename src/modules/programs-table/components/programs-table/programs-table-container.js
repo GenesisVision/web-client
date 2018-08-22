@@ -25,7 +25,6 @@ class ProgramsContainer extends Component {
     if (!data) return <div>Loading...</div>;
     return (
       <Surface>
-        All Programs
         <ProgramsTable
           data={data}
           isPending={isPending}
