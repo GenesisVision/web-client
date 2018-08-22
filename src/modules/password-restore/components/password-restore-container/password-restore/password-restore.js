@@ -1,4 +1,4 @@
-import "./password-restore.css";
+import "./password-restore.scss";
 
 import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";

@@ -1,0 +1,83 @@
+%sortable-border-icon {
+  position: absolute;
+  right: -15px;
+  bottom: 3px;
+  content: "";
+  border-top: 1px solid white;
+}
+
+.table {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+
+  &__head,
+  &__body {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__row {
+    width: 100%;
+    display: flex;
+    padding: 0 1.5rem;
+    opacity: 0.7;
+    &:not(.table__row--head):hover {
+      opacity: 1;
+      background-color: #212c34;
+    }
+  }
+
+  &__cell {
+    cursor: default;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    flex-grow: 1;
+    padding: 1em 0;
+    overflow: hidden; // Or flex might break
+    list-style: none;
+    font-size: 13px;
+    font-weight: normal;
+    letter-spacing: 0.4px;
+    white-space: nowrap;
+    &#{&} {
+      &--head {
+        padding-right: 15px;
+      }
+      &--sortable {
+        cursor: pointer;
+        padding-right: 15px;
+        .table__cell--sortable-asc,
+        .table__cell--sortable-desc {
+          position: relative;
+          &::before {
+            @extend %sortable-border-icon;
+            height: 4px;
+          }
+          &::after {
+            @extend %sortable-border-icon;
+          }
+        }
+        .table__cell--sortable-desc {
+          &::before {
+            width: 10px;
+          }
+          &::after {
+            width: 5px;
+          }
+        }
+
+        .table__cell--sortable-asc {
+          &::before {
+            width: 5px;
+          }
+          &::after {
+            width: 10px;
+          }
+        }
+      }
+    }
+  }
+}
