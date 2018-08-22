@@ -10,6 +10,10 @@ const getAnchorEl = el => {
 };
 
 class Popover extends Component {
+  state = {
+    windowWidth: undefined
+  };
+
   static getDerivedStateFromProps() {
     return {
       windowWidth: window.innerWidth

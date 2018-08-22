@@ -1,6 +1,6 @@
 import "./i18n";
 import "./styles/gv-bootstrap/gv-bootstrap.css";
-import "./styles/gv-styles.css";
+import "./styles/gv-styles.scss";
 import "./index.scss";
 
 import React from "react";

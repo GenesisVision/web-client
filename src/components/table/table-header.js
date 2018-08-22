@@ -6,7 +6,7 @@ import React, { Component } from "react";
 
 import TableRow from "./table-row";
 
-class TableHead extends Component {
+class TableHeader extends Component {
   sortingName = () => getSortingColumnName(this.props.sorting.value);
 
   isAsc = () => isSortingAsc(this.props.sorting.value);
@@ -41,4 +41,4 @@ class TableHead extends Component {
   }
 }
 
-export default TableHead;
+export default TableHeader;

@@ -46,8 +46,7 @@ Modal.propTypes = {
   onClose: PropTypes.func,
   open: PropTypes.bool,
   backdropStyle: PropTypes.object,
-  disabledBackdrop: PropTypes.bool,
-  children: PropTypes.oneOfType([PropTypes.func, PropTypes.object]).isRequired
+  disabledBackdrop: PropTypes.bool
 };
 
 export default Modal;
