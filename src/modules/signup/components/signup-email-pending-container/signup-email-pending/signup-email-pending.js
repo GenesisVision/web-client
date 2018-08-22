@@ -18,7 +18,7 @@ const EmailPending = ({ t, onResendEmail, onContinue }) => {
       </GVButton>
       <div className="signup-email-pending__navigation">
         <Link to={SIGNUP_ROUTE} className="signup-email-pending__btn-back">
-          <GVButton variant="text">
+          <GVButton variant="text" color="secondary">
             &larr; {t("auth.email-pending.back-button-text")}
           </GVButton>
         </Link>

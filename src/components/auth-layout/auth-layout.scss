@@ -33,7 +33,7 @@
 
   &__content {
     box-sizing: border-box;
-    padding: 12.5% 16.8% 7% 16.8%;
+    padding: 21% 16.8% 12.2% 16.8%;
     height: 87.5%;
   }
 
@@ -70,5 +70,9 @@
 
   .gv-text-field__error {
     bottom: 0;
+  }
+
+  & .gv-btn.gv-btn--text {
+    padding: 0;
   }
 }

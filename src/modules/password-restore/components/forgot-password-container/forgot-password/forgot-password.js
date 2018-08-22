@@ -29,7 +29,7 @@ const ForgotPasswordForm = ({
       <FormError error={error} />
       <div className="forgot-password__navigation">
         <Link to={LOGIN_ROUTE} className="forgot-password__btn-back">
-          <GVButton variant="text">
+          <GVButton variant="text" color="secondary">
             &larr; {t("auth.password-restore.forgot-password.back-button-text")}
           </GVButton>
         </Link>

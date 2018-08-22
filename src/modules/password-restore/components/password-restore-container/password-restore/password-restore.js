@@ -1,5 +1,3 @@
-import "./password-restore.scss";
-
 import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import { FORGOT_PASSWORD_ROUTE } from "pages/forgot-password/forgot-password.routes";
@@ -31,7 +29,7 @@ const RestorePassword = ({ t, isSubmitting, handleSubmit, error }) => {
       <FormError error={error} />
       <div className="password-restore__navigation">
         <Link to={FORGOT_PASSWORD_ROUTE} className="password-restore__btn-back">
-          <GVButton variant="text">
+          <GVButton variant="text" color="secondary">
             &larr; {t("auth.password-restore.new-password.back-button-text")}
           </GVButton>
         </Link>
