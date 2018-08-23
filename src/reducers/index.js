@@ -2,10 +2,7 @@ import { loadingBarReducer } from "react-redux-loading-bar";
 import { routerReducer } from "react-router-redux";
 import { combineReducers } from "redux";
 
-import emailConfirmReducer from "../modules/email-confirm/reducers/email-confirm-reducers";
-import loginReducer from "../modules/login/reducers/login-reducers";
 import navigationReducer from "../modules/navigation/reducers/navigation-reducers";
-import passwordRestoreReducer from "../modules/password-restore/reducers/password-restore-reducers";
 import popupReducer from "../modules/popup/reducers/popup-reducers";
 import profileHeaderReducer from "../modules/profile-header/reducer/profile-header-reducer";
 import profileReducer from "../modules/profile/reducers/profile-reducers";
@@ -14,8 +11,11 @@ import programSearchReducer from "../modules/program-search/reducers/program-sea
 import programWithdrawReducer from "../modules/program-withdraw/reducers/program-withdraw-reducers";
 import programReducer from "../modules/program/reducers/trader-reducers";
 import programsReducer from "../modules/programs-table/reducers/programs-table.reducers";
-import signUpReducer from "../modules/signup/reducers/signup-reducers";
 import walletReducer from "../modules/wallet/reducers/wallet-reducers";
+import emailConfirmReducer from "../pages/auth/email-confirm/reducers/email-confirm.reducers";
+import loginReducer from "../pages/auth/login/reducers/login.reducers";
+import passwordRestoreReducer from "../pages/auth/password-restore/reducers/password-restore-reducers";
+import signUpReducer from "../pages/auth/signup/reducers/signup.reducers";
 import dashboardReducer from "../pages/dashboard/reducers/dashboard.reducers";
 import alertMessagesReducer from "../shared/modules/alert-message/reducers/alert-message-reducers";
 import authReducer from "./auth-reducer";

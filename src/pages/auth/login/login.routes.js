@@ -1,11 +1,11 @@
-import AuthLayout from "components/layout/auth-layout/auth-layout";
-import Recovery from "pages/auth/login/recovery/recovery";
-import TwoFactor from "pages/auth/login/two-factor/two-factor";
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
-import LoginFooter from "./login-footer";
-import Login from "./login-page";
+import AuthLayout from "../components/auth-layout/auth-layout";
+import LoginFooter from "../components/login-footer/login-footer";
+import LoginPage from "./login/login.page";
+import Recovery from "./recovery/recovery.page";
+import TwoFactor from "./two-factor/two-factor.page";
 
 export const LOGIN_ROUTE = "/login";
 export const LOGIN_ROUTE_TWO_FACTOR_ROUTE = `${LOGIN_ROUTE}/two-factor`;
@@ -19,7 +19,7 @@ const LoginRoutes = () => (
         component={Recovery}
       />
       <Route path={LOGIN_ROUTE_TWO_FACTOR_ROUTE} component={TwoFactor} />
-      <Route path={LOGIN_ROUTE} component={Login} />
+      <Route path={LOGIN_ROUTE} component={LoginPage} />
     </Switch>
   </AuthLayout>
 );

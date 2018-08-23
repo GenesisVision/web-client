@@ -1,9 +1,10 @@
 import "./password-restore.scss";
 
-import PasswordRestoreContainer from "modules/password-restore/components/password-restore-container/password-restore-container";
 import qs from "qs";
 import React from "react";
 import { translate } from "react-i18next";
+
+import PasswordRestoreContainer from "./components/password-restore-container";
 
 const PasswordRestore = ({ location, t }) => {
   const queryParams = qs.parse(location.search.slice(1));

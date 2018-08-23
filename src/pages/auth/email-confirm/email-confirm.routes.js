@@ -1,18 +1,18 @@
-import AuthLayout from "components/auth-layout/auth-layout";
 import React from "react";
+import { Route, Switch } from "react-router-dom";
 
-export const EMAIL_CONFIRM_ROUTE = "/email-confirm";
-export const EMAIL_CONFIRM_PENDING_ROUTE = "/email-confirm/pending";
+import EmailConfirmContainer from "./components/email-confirm-container";
+import EmailConfirmPending from "./components/email-confirm-pending/email-confirm-pending";
+import {
+  EMAIL_CONFIRM_PENDING_ROUTE,
+  EMAIL_CONFIRM_ROUTE
+} from "./email-confirm.constants";
 
-const EmailConfirmRoutes = () => {
-  return (
-    <AuthLayout>
-      <div className={"email-confirm"}>
-        <h1>Confirm your Email</h1>
-        <p>Please check your inbox for a confirmation email.</p>
-      </div>
-    </AuthLayout>
-  );
-};
+const EmailConfirmRoutes = () => (
+  <Switch>
+    <Route path={EMAIL_CONFIRM_PENDING_ROUTE} component={EmailConfirmPending} />
+    <Route path={EMAIL_CONFIRM_ROUTE} component={EmailConfirmContainer} />
+  </Switch>
+);
 
 export default EmailConfirmRoutes;
