@@ -1,0 +1,87 @@
+@import "styles/_colors.scss";
+
+.portfolio-event {
+  display: flex;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 24px;
+  padding-top: 24px;
+  align-items: center;
+
+  &__info {
+    flex-grow: 3.5;
+    margin-left: 36px;
+  }
+
+  &__time {
+    color: $text-color-dark-grey;
+    margin-bottom: 17px;
+    font-size: 12px;
+  }
+
+  &__description {
+    line-height: 1.69;
+    letter-spacing: 0.2px;
+    margin-bottom: 17px;
+    font-size: 13px;
+  }
+
+  &__value {
+    letter-spacing: 0.4px;
+  }
+
+  &__art {
+    width: 44px;
+    height: 44px;
+    position: relative;
+  }
+
+  &__logo-photo {
+    box-sizing: border-box;
+    width: 32px;
+    height: 32px;
+    border: solid 2px #1c2730;
+    border-radius: 18px;
+    background-color: #27323a;
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    line-height: 28px;
+    text-align: center;
+  }
+
+  &__logo-type {
+    box-sizing: border-box;
+    width: 28px;
+    height: 28px;
+    border-radius: 18px;
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    z-index: 1;
+    line-height: 28px;
+    text-align: center;
+  }
+
+  &--positive {
+    & .portfolio-event__value {
+      color: $positive-color;
+    }
+
+    & .portfolio-event__logo-type {
+      background-color: $positive-background-color;
+      color: $positive-color;
+    }
+  }
+
+  &--negative {
+    & .portfolio-event__value {
+      color: $negative-color;
+    }
+
+    & .portfolio-event__logo-type {
+      background-color: $negative-background-color;
+      color: $negative-color;
+    }
+  }
+}

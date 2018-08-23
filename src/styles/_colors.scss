@@ -13,7 +13,13 @@ $text-color: $main-color;
 $text-sub-color: #28768d;
 $text-color-light: $alternate-color;
 $text-color-grey: rgba(255, 255, 255, 0.43);
+$text-color-dark-grey: rgba(255, 255, 255, 0.3);
 
 $box-shadow-primary-color: rgba(22, 183, 173, 0.28);
 $box-shadow-danger-color: rgba(224, 4, 99, 0.28);
 $box-shadow-warning-color: rgba(249, 243, 221, 0.28);
+
+$positive-color: #2ebd85;
+$positive-background-color: #1d383a;
+$negative-color: #eb3b5a;
+$negative-background-color: #312934;

@@ -1,4 +1,28 @@
+@import "styles/_colors.scss";
+
 .dashboard-portfolio-events {
-  padding: 1rem;
-  min-height: 400px;
+  min-height: 683px;
+  padding: 0 9.52%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  &__title {
+    margin: 0;
+    font-size: 17px;
+    margin-top: 26px;
+  }
+
+  &__footer {
+    text-align: center;
+  }
+
+  &__see-all {
+    width: 60px;
+    margin: 0 auto 12px;
+
+    & .gv-btn.gv-btn--text {
+      padding: 0;
+    }
+  }
 }
