@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import passwordRestoreService from "../../../password-restore/service/password-restore-service";
+import forgotPasswordService from "../../services/forgot-password.service";
 import EmailPending from "./email-pending";
 
 const EmailPendingContainer = ({ sendEmail, continuePasswordRestore }) => (
@@ -13,10 +13,10 @@ const EmailPendingContainer = ({ sendEmail, continuePasswordRestore }) => (
 
 const mapDispatchToProps = dispatch => ({
   sendEmail: () => {
-    dispatch(passwordRestoreService.sendForgotPasswordEmail());
+    dispatch(forgotPasswordService.sendForgotPasswordEmail());
   },
   continuePasswordRestore: () => {
-    dispatch(passwordRestoreService.navigateToPasswordRestore());
+    dispatch(forgotPasswordService.navigateToPasswordRestore());
   }
 });
 

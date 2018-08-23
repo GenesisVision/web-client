@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import passwordRestoreService from "../../../password-restore/service/password-restore-service";
+import forgotPasswordService from "../../services/forgot-password.service";
 import ForgotPassword from "./forgot-password";
 
 const ForgotPasswordContainer = ({
@@ -23,7 +23,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   forgotPassword: (formData, setSubmitting) => {
-    dispatch(passwordRestoreService.forgotPassword(formData)).catch(() => {
+    dispatch(forgotPasswordService.forgotPassword(formData)).catch(() => {
       setSubmitting(false);
     });
   }

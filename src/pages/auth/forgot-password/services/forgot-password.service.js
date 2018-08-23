@@ -11,7 +11,7 @@ import authService from "services/auth-service";
 import clearDataActionFactory from "shared/actions/clear-data.factory";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
-import passwordRestoreActions from "../actions/password-restore-actions";
+import passwordRestoreActions from "../actions/forgot-password.actions";
 
 const forgotPassword = data => dispatch => {
   return dispatch(passwordRestoreActions.forgotPassword(data)).then(() => {
@@ -44,11 +44,11 @@ const navigateToPasswordRestore = () => (dispatch, getState) => {
   dispatch(push(PASSWORD_RESTORE_ROUTE));
 };
 
-const passwordRestoreService = {
+const forgotPasswordService = {
   forgotPassword,
   restorePassword,
   sendForgotPasswordEmail,
   navigateToPasswordRestore
 };
 
-export default passwordRestoreService;
+export default forgotPasswordService;

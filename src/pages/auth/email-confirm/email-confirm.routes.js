@@ -3,10 +3,9 @@ import { Route, Switch } from "react-router-dom";
 
 import EmailConfirmContainer from "./components/email-confirm-container";
 import EmailConfirmPending from "./components/email-confirm-pending/email-confirm-pending";
-import {
-  EMAIL_CONFIRM_PENDING_ROUTE,
-  EMAIL_CONFIRM_ROUTE
-} from "./email-confirm.constants";
+
+export const EMAIL_CONFIRM_ROUTE = "/email-confirm";
+export const EMAIL_CONFIRM_PENDING_ROUTE = "/email-confirm/pending";
 
 const EmailConfirmRoutes = () => (
   <Switch>
