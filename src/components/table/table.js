@@ -3,12 +3,12 @@ import "./table.scss";
 import React from "react";
 
 import TableBody from "./table-body";
-import TableFilters from "./table-filters";
 import TableFooter from "./table-footer";
 import TableHeader from "./table-header";
+import TableToolbar from "./table-toolbar";
 
 const Table = ({
-  name,
+  title,
   items,
   isPending,
   sorting,
@@ -20,8 +20,11 @@ const Table = ({
 }) => {
   return (
     <div className="table">
-      <div className="table__name">{name}</div>
-      <TableFilters filtering={filtering}>{renderFilters}</TableFilters>
+      <TableToolbar
+        title={title}
+        filtering={filtering}
+        renderFilters={renderFilters}
+      />
       <TableHeader sorting={sorting}>{renderHeader}</TableHeader>
       <TableBody items={items}>{renderBodyRow}</TableBody>
       <TableFooter paging={paging} isPending={isPending} />

@@ -1,6 +1,7 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 
 import Popover from "../popover/popover";
+import FilterArrow from "./filter-arrow";
 
 class TableFilter extends Component {
   state = {
@@ -11,20 +12,23 @@ class TableFilter extends Component {
   handleClose = () => this.setState({ anchor: null });
 
   render() {
-    const { name, label, value, onChange } = this.props;
+    const { name, label, value, onChange, children } = this.props;
+    const { anchor } = this.state;
     return (
-      <div className="table-filter">
-        <div>{label}</div>
-        <div onClick={this.handleOpen}>{value}</div>
-        <div>^</div>
+      <Fragment>
+        <div className="table-filter" onClick={this.handleOpen}>
+          <div className="table-filter__label">{label}</div>
+          <div className="table-filter__value">{value}</div>
+          <FilterArrow isOpen={anchor !== null} />
+        </div>
         <Popover
-          anchorEl={this.state.anchor}
+          anchorEl={anchor}
           onClose={this.handleClose}
           horizontal={"right"}
         >
-          Popover
+          {children}
         </Popover>
-      </div>
+      </Fragment>
     );
   }
 }
