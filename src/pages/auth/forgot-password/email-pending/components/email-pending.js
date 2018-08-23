@@ -18,7 +18,7 @@ const EmailPending = ({ onResendEmail, onContinue, t }) => {
             &larr; {t("auth.email-pending.back-button-text")}
           </GVButton>
         </Link>
-        <GVButton
+        {/* <GVButton
           id="forgotPassword"
           color="primary"
           variant="contained"
@@ -26,7 +26,7 @@ const EmailPending = ({ onResendEmail, onContinue, t }) => {
           onClick={onContinue}
         >
           {t("auth.email-pending.confirm-button-text")}
-        </GVButton>
+        </GVButton> */}
       </div>
     </React.Fragment>
   );
