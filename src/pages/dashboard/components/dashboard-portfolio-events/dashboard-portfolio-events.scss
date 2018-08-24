@@ -2,7 +2,7 @@
 
 .dashboard-portfolio-events {
   min-height: 683px;
-  padding: 0 9.52%;
+  padding: 0 18px 0 30px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -10,19 +10,30 @@
   &__title {
     margin: 0;
     font-size: 17px;
-    margin-top: 26px;
+    margin-top: 41px;
+    margin-bottom: 39px;
   }
 
   &__scroll-container {
     &:after {
       position: absolute;
+      z-index: 3;
       content: "";
       bottom: 0;
       left: 0;
-      width: 100%;
+      width: 267px;
       height: 120px;
       background: linear-gradient(transparent, $background-surface-color);
     }
+  }
+
+  & .portfolio-event:first-child {
+    padding-top: 0;
+  }
+
+  &__thumb-vertical {
+    background-color: rgba(255, 255, 255, 0.1);
+    width: 5px !important;
   }
 
   &__see-all {
@@ -33,6 +44,8 @@
     background-size: 4px;
     background-position: 50px 5px;
     font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.1px;
 
     & .gv-btn.gv-btn--text {
       padding: 0;

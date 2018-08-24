@@ -6,6 +6,7 @@
   padding-bottom: 24px;
   padding-top: 24px;
   align-items: center;
+  width: 252px;
 
   &__info {
     flex-grow: 3.5;
@@ -21,12 +22,14 @@
   &__description {
     line-height: 1.69;
     letter-spacing: 0.2px;
-    margin-bottom: 17px;
+    margin-bottom: 14px;
     font-size: 13px;
   }
 
   &__value {
     letter-spacing: 0.4px;
+    font-size: 13px;
+    font-weight: 600;
   }
 
   &__art {

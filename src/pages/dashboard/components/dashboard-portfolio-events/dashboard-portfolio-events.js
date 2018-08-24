@@ -10,20 +10,30 @@ import { Link } from "react-router-dom";
 
 import DashboardPortfolioEvent from "./dashboard-portfolio-event/dashboard-portfolio-event";
 
-const DashboardPortfolioEvents = ({ t, events, urlToRedirect }) => (
+const DashboardPortfolioEvents = ({ t, events, fullEventsUrl }) => (
   <Surface className="dashboard-portfolio-events">
-    <h2 className="dashboard-portfolio-events__title">Portfolio Events</h2>
+    <h2 className="dashboard-portfolio-events__title">
+      {t("dashboard.portfolio-events.title")}
+    </h2>
     <Scrollbars
       autoHide
       autoHideTimeout={1000}
-      style={{ width: "100%", height: "583px" }}
+      style={{ width: "265px", height: "541px", paddingRight: "10px" }}
+      renderThumbVertical={props => (
+        <div
+          {...props}
+          className="dashboard-portfolio-events__thumb-vertical"
+        />
+      )}
       className="dashboard-portfolio-events__scroll-container"
     >
-      {events.map(event => (
-        <DashboardPortfolioEvent event={event} key={event.date} />
-      ))}
+      <div className="dashboard-portfolio-events__list">
+        {events.map(event => (
+          <DashboardPortfolioEvent event={event} key={event.date} />
+        ))}
+      </div>
     </Scrollbars>
-    <Link to={urlToRedirect} className="dashboard-portfolio-events__see-all">
+    <Link to={fullEventsUrl} className="dashboard-portfolio-events__see-all">
       <GVButton variant="text" color="secondary">
         {t("dashboard.portfolio-events.see-all-button")}
       </GVButton>

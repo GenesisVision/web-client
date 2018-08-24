@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { DASHBOARD_EVENTS_FULL_ROUTE } from "../../dashboard.routes";
+import { DASHBOARD_EVENTS_ROUTE } from "../../dashboard.routes";
 import { getPortfolioEvents } from "../../services/dashboard.service";
 import DashboardPortfolioEvents from "./dashboard-portfolio-events";
 
@@ -20,7 +20,7 @@ class DashboardPortfolioEventsContainer extends Component {
     return (
       <DashboardPortfolioEvents
         events={events}
-        urlToRedirect={DASHBOARD_EVENTS_FULL_ROUTE}
+        fullEventsUrl={DASHBOARD_EVENTS_ROUTE}
       />
     );
   }

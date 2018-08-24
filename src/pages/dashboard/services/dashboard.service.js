@@ -7,7 +7,7 @@ export const getChartCommon = () => (dispatch, getState) => {
 };
 
 export const getPortfolioEvents = () => (dispatch, getState) => {
-  let authorization = authService.getAuthArg();
+  const authorization = authService.getAuthArg();
 
   dispatch(actions.fetchPortfolioEvents(authorization));
 };
