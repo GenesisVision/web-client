@@ -2,7 +2,10 @@ import React, { Component } from "react";
 
 class TableFilters extends Component {
   render() {
-    return <div className="table__filters">{this.props.children()}</div>;
+    const { filtering, children } = this.props;
+    return (
+      <div className="table__filters">{children(filtering.updateFilter)}</div>
+    );
   }
 }
 

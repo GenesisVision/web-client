@@ -102,32 +102,3 @@
     }
   }
 }
-
-.table-filter {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  font-size: 13px;
-
-  & + & {
-    padding-left: 1.5rem;
-  }
-
-  &__label {
-    letter-spacing: 0.2px;
-    color: $text-color;
-  }
-
-  &__value {
-    letter-spacing: 0.2px;
-    color: $text-color;
-    padding: 0 0.4rem;
-  }
-
-  .filter-arrow {
-    stroke: #d8d8d8;
-    &__is-open {
-      stroke: $alternate-color;
-    }
-  }
-}

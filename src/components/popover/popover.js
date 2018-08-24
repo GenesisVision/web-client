@@ -1,5 +1,6 @@
 import "./popover.scss";
 
+import classnames from "classnames";
 import Modal from "components/modal/modal";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
@@ -62,7 +63,14 @@ class Popover extends Component {
   };
 
   render() {
-    const { anchorEl, horizontal, vertical, children, ...props } = this.props;
+    const {
+      anchorEl,
+      horizontal,
+      vertical,
+      noPadding,
+      children,
+      ...props
+    } = this.props;
     const position = this.getPosition();
     return (
       <Modal
@@ -73,7 +81,12 @@ class Popover extends Component {
         {...props}
       >
         <EventListener target="window" onResize={this.handleWindowResize} />
-        <div className="popover" style={position}>
+        <div
+          className={classnames("popover", {
+            "popover--no-padding": noPadding
+          })}
+          style={position}
+        >
           {children}
         </div>
       </Modal>
@@ -86,6 +99,7 @@ Popover.propTypes = {
   horizontal: PropTypes.oneOf(["left", "right"]),
   vertical: PropTypes.oneOf(["top", "bottom"]),
   anchorEl: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+  noPadding: PropTypes.bool,
   disabledBackdrop: PropTypes.bool
 };
 

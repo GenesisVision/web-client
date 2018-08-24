@@ -1,11 +1,11 @@
 import classnames from "classnames";
 import React from "react";
 
-const FilterArrow = ({ isOpen }) => {
+const FilterArrowIcon = ({ isOpen }) => {
   return (
     <svg
-      className={classnames("filter-arrow", {
-        "filter-arrow__is-open": isOpen
+      className={classnames("filter__arrow", {
+        "filter__arrow__is-open": isOpen
       })}
       width="6"
       height="4"
@@ -23,4 +23,4 @@ const FilterArrow = ({ isOpen }) => {
   );
 };
 
-export default FilterArrow;
+export default FilterArrowIcon;

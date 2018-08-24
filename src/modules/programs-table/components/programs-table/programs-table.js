@@ -1,44 +1,52 @@
 import "./programs.scss";
 
-import classnames from "classnames";
 import Table from "components/table/table";
+import TableHeadCell from "components/table/table-head-cell";
+import Filter from "modules/filtering/components/filter";
+import SelectFilter from "modules/filtering/components/select-filter";
 import React, { Fragment } from "react";
 import { translate } from "react-i18next";
 
-import TableFilter from "../../../../components/table/table-filter";
-import TableHeadCell from "../../../../components/table/table-head-cell";
-import { PROGRAMS_COLUMNS } from "../../programs.constants";
+import LevelFilter from "../../../filtering/components/level-filter";
+import {
+  CURRENCY_FILTER_VALUES,
+  PROGRAMS_COLUMNS
+} from "../../programs.constants";
 import ProgramTableRow from "./program-table-row";
 
-const ProgramsTable = ({ t, data, isPending, sorting, paging }) => {
+const ProgramsTable = ({ t, data, isPending, sorting, filtering, paging }) => {
   return (
     <Table
       title="All programs"
       sorting={sorting}
-      filtering="123"
+      filtering={filtering}
       paging={paging}
       columns={PROGRAMS_COLUMNS}
       items={data.programs}
       isPending={data.isPending}
-      renderFilters={() => (
+      renderFilters={handleFilterChange => (
         <Fragment>
-          <TableFilter label="Levels" value="All">
-            <div>
-              <div value="All" className={classnames({ "is-selected": true })}>
-                All
-              </div>
-              <div>1</div>
-              <div>2</div>
-              <div>3</div>
-              <div>4</div>
-              <div>5</div>
-              <div>6</div>
-              <div>7</div>
-            </div>
-          </TableFilter>
-          <TableFilter label="Currency" value="All">
-            Currency
-          </TableFilter>
+          <Filter
+            label="Levels"
+            name="level"
+            value={filtering["level"].value}
+            changeFilter={handleFilterChange}
+          >
+            <LevelFilter />
+          </Filter>
+          <Filter
+            label="Currency"
+            name="currency"
+            value={filtering["currency"].value}
+            changeFilter={handleFilterChange}
+          >
+            <SelectFilter
+              values={[
+                { value: undefined, label: "All" },
+                ...CURRENCY_FILTER_VALUES.map(x => ({ value: x, label: x }))
+              ]}
+            />
+          </Filter>
         </Fragment>
       )}
       renderHeader={({ sortingName, isAsc, handleSorting }) => (

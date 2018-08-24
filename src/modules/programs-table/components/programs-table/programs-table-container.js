@@ -32,6 +32,10 @@ class ProgramsContainer extends Component {
             value: filters.sorting,
             updateSorting: service.programsChangeSorting
           }}
+          filtering={{
+            ...filters.filtering,
+            updateFilter: service.programsChangeFilter
+          }}
           paging={{
             total: filters.pages,
             current: filters.page,
@@ -57,7 +61,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const isLocationChanged = prevLocation => {
     return location.key !== prevLocation.key;
   };
-  const filters = dispatchProps.service.getProgramsFiltering();
+  const filters = dispatchProps.service.getProgramsFilters();
   return {
     ...stateProps,
     ...dispatchProps,
