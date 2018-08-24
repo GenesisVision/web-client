@@ -16,9 +16,9 @@ const formatDate = date => {
   return eventCreationDate.fromNow();
 };
 
-const DashboardPortfolioEvent = eventModel => {
-  const isPositive = eventModel.value > 0;
-  const isNegative = eventModel.value < 0;
+const DashboardPortfolioEvent = ({ event }) => {
+  const isPositive = event.value > 0;
+  const isNegative = event.value < 0;
 
   const className = classnames("portfolio-event", {
     "portfolio-event--positive": isPositive,
@@ -26,19 +26,16 @@ const DashboardPortfolioEvent = eventModel => {
   });
 
   return (
-    <div className={className} key={eventModel.date}>
+    <div className={className}>
       <div className="portfolio-event__art">
         <div className="portfolio-event__logo-photo">P</div>
         <div className="portfolio-event__logo-type">T</div>
       </div>
       <div className="portfolio-event__info">
-        <span className="portfolio-event__time">
-          {formatDate(eventModel.date)}
-        </span>
-        <p className="portfolio-event__description">{eventModel.description}</p>
+        <span className="portfolio-event__time">{formatDate(event.date)}</span>
+        <p className="portfolio-event__description">{event.description}</p>
         <span className="portfolio-event__value">
-          {isPositive && "+"} {isNegative && "-"}{" "}
-          {Math.abs(eventModel.value) + " "}
+          {isPositive && "+"} {isNegative && "-"} {Math.abs(event.value) + " "}
           GVT
         </span>
       </div>

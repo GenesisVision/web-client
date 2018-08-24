@@ -2,7 +2,6 @@ import "./dashboard-portfolio-events.scss";
 
 import Surface from "components/surface/surface";
 import { GVButton } from "gv-react-components";
-import * as moment from "moment";
 import PropTypes from "prop-types";
 import React from "react";
 import { Scrollbars } from "react-custom-scrollbars";
@@ -18,14 +17,15 @@ const DashboardPortfolioEvents = ({ t, events, urlToRedirect }) => (
       autoHide
       autoHideTimeout={1000}
       style={{ width: "100%", height: "583px" }}
+      className="dashboard-portfolio-events__scroll-container"
     >
       {events.map(event => (
-        <DashboardPortfolioEvent event={event} />
+        <DashboardPortfolioEvent event={event} key={event.date} />
       ))}
     </Scrollbars>
     <Link to={urlToRedirect} className="dashboard-portfolio-events__see-all">
       <GVButton variant="text" color="secondary">
-        {t("dashboard.portfolio-events.see-all-button")} &#62;
+        {t("dashboard.portfolio-events.see-all-button")}
       </GVButton>
     </Link>
   </Surface>

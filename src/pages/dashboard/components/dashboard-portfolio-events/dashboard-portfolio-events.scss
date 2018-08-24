@@ -13,13 +13,26 @@
     margin-top: 26px;
   }
 
-  &__footer {
-    text-align: center;
+  &__scroll-container {
+    &:after {
+      position: absolute;
+      content: "";
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 120px;
+      background: linear-gradient(transparent, $background-surface-color);
+    }
   }
 
   &__see-all {
     width: 60px;
     margin: 0 auto 12px;
+    background-image: url("./see-all-arrow.svg.svg");
+    background-repeat: no-repeat;
+    background-size: 4px;
+    background-position: 50px 5px;
+    font-size: 13px;
 
     & .gv-btn.gv-btn--text {
       padding: 0;

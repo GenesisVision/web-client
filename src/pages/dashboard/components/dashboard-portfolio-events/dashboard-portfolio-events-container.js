@@ -13,7 +13,7 @@ class DashboardPortfolioEventsContainer extends Component {
   }
 
   render() {
-    const { isPending, events } = this.props;
+    const { events } = this.props;
 
     if (!events) return null;
 
@@ -27,8 +27,8 @@ class DashboardPortfolioEventsContainer extends Component {
 }
 
 const mapStateToProps = state => {
-  const { isPending, data } = state.dashboardData.dashboardEvents;
-  return { isPending, events: data ? data.events : null };
+  const { data } = state.dashboardData.dashboardEvents;
+  return { events: data ? data.events : null };
 };
 
 const mapDispatchToProps = dispatch => ({

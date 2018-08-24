@@ -1,4 +1,6 @@
+@import "styles/_colors.scss";
+
 .surface {
-  background-color: #1b252d;
+  background-color: $background-surface-color;
   border-radius: 0.5em;
 }
