@@ -25,13 +25,16 @@ class ProgramsContainer extends Component {
     if (!data) return <div>Loading...</div>;
     return (
       <Surface>
-        All Programs
         <ProgramsTable
           data={data}
           isPending={isPending}
           sorting={{
             value: filters.sorting,
             updateSorting: service.programsChangeSorting
+          }}
+          filtering={{
+            ...filters.filtering,
+            updateFilter: service.programsChangeFilter
           }}
           paging={{
             total: filters.pages,
@@ -58,7 +61,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const isLocationChanged = prevLocation => {
     return location.key !== prevLocation.key;
   };
-  const filters = dispatchProps.service.getProgramsFiltering();
+  const filters = dispatchProps.service.getProgramsFilters();
   return {
     ...stateProps,
     ...dispatchProps,
