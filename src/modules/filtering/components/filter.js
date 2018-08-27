@@ -1,3 +1,5 @@
+import "rc-slider/assets/index.css";
+
 import "./filter.scss";
 
 import Popover from "components/popover/popover";
@@ -18,17 +20,18 @@ class Filter extends Component {
   };
 
   render() {
-    const { label, value, children } = this.props;
+    const { label, value, renderValueText, children } = this.props;
     const { anchor } = this.state;
     const child = React.cloneElement(children, {
       value,
-      changeFilter: this.handleChangeFilter
+      changeFilter: this.handleChangeFilter,
+      cancel: this.handleClosePopover
     });
     return (
       <Fragment>
         <div className="filter" onClick={this.handleOpenPopover}>
           <div className="filter__label">{label}</div>
-          <div className="filter__value">{value}</div>
+          <div className="filter__value">{renderValueText(value)}</div>
           <FilterArrowIcon isOpen={anchor !== null} />
         </div>
         <Popover

@@ -29,36 +29,6 @@
   }
 }
 
-.filter-select {
-  display: flex;
-  flex-direction: column;
-}
-
-.rc-slider {
-  margin: 1.5rem 0;
-}
-
-.rc-slider-track {
-  background-color: $alternate-color;
-}
-
-.rc-slider-handle {
-  border-color: $alternate-color;
-}
-
-.rc-slider-handle:hover {
-  border-color: $alternate-color;
-}
-.rc-slider-handle:active,
-.rc-slider-handle:focus {
-  border-color: $alternate-color;
-  box-shadow: 0 0 5px $alternate-color;
-}
-
-.rc-slider-dot-active {
-  border-color: $alternate-color;
-}
-
 .gv-hangle__text {
   position: absolute;
   top: -20px;

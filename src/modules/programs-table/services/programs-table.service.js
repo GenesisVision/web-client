@@ -19,6 +19,7 @@ import {
   PROGRAMS_DEFAULT_FILTERS,
   SORTING_FILTER_VALUE
 } from "../programs.constants";
+import { composeProgramsFilters } from "./programs-helpers";
 
 const sortableColums = PROGRAMS_COLUMNS.filter(
   x => x.sortingName !== undefined
@@ -58,11 +59,15 @@ const composeRequestFilters = () => (dispatch, getState) => {
     itemsOnPage: itemsOnPage,
     currentPage: page - 1
   });
+
+  const filtering = composeProgramsFilters(existingFilters.filtering);
+
   filters = {
     ...filters,
     skip,
     take,
-    sorting: existingFilters.sorting
+    sorting: existingFilters.sorting,
+    ...filtering
   };
 
   return filters;
@@ -135,7 +140,6 @@ export const programsChangeFilter = filter => (dispatch, getState) => {
     delete queryParams[filter.name];
   } else {
     queryParams[filter.name] = filter.value;
-    queryParams["level"] = [1, 2];
   }
   const newUrl = routing.location.pathname + "?" + qs.stringify(queryParams);
   dispatch(push(newUrl));

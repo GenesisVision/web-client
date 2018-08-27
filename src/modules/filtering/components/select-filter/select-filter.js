@@ -1,3 +1,5 @@
+import "./select-filter.scss";
+
 import classnames from "classnames";
 import { GVButton } from "gv-react-components";
 import React, { Component } from "react";
@@ -11,7 +13,7 @@ class SelectFilter extends Component {
     const { values, value } = this.props;
 
     return (
-      <div className="filter-select">
+      <div className="select-filter">
         {values.map(x => {
           const selected = x.value === value;
           return (

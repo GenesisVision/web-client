@@ -28,7 +28,7 @@ export const CURRENCY_FILTER_VALUES = [
 export const PROGRAMS_DEFAULT_FILTERS = [
   {
     name: LEVEL_FILTER_NAME,
-    type: FilterType.general,
+    type: FilterType.range,
     value: [LEVEL_MIN_FILTER_VALUE, LEVEL_MAX_FILTER_VALUE],
     validate: value => {
       const levelRegex = /[0-7]/;
@@ -44,11 +44,11 @@ export const PROGRAMS_DEFAULT_FILTERS = [
     type: FilterType.general,
     value: CURRENCY_FILTER_VALUE,
     validate: value => CURRENCY_FILTER_VALUES.includes(value)
-  },
+  } /*,
   {
     name: DATE_RANGE_FILTER_NAME,
     value: [undefined, undefined]
-  }
+  }*/
 ];
 
 export const PROGRAMS_COLUMNS = [
