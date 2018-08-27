@@ -63,7 +63,7 @@ const ProgramsTable = ({ t, data, isPending, sorting, filtering, paging }) => {
                 sortable={x.sortingName !== undefined}
                 active={x.sortingName === sortingName}
                 isAsc={isAsc}
-                onCdivck={handleSorting(x.sortingName)}
+                onClick={handleSorting(x.sortingName)}
               >
                 {t(`programs-page.programs-header.${x.name}`)}
               </TableHeadCell>
