@@ -1,20 +1,16 @@
 import Paging from "modules/paging/components/paging/paging";
 import React from "react";
 
-import { TableContext } from "./table";
+const TableFooter = ({ isPending, paging }) => {
+  if (paging.total <= 1) return null;
 
-const TableFooter = ({ paging }) => {
   return (
     <div className="table__footer">
-      <TableContext.Consumer>
-        {context => (
-          <Paging
-            paging={{ total: paging.total, current: paging.current }}
-            hide={context.isPending}
-            updatePaging={next => paging.updatePaging(next.currentPage)}
-          />
-        )}
-      </TableContext.Consumer>
+      <Paging
+        paging={{ total: paging.total, current: paging.current }}
+        hide={isPending}
+        updatePaging={next => paging.updatePaging(next.currentPage)}
+      />
     </div>
   );
 };

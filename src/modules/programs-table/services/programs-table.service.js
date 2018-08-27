@@ -14,7 +14,12 @@ import getParams from "utils/get-params";
 
 import { getSortingColumnName } from "../../sorting/helpers/sorting-helpers";
 import * as programTableActions from "../actions/programs-table.actions";
-import { PROGRAMS_COLUMNS, SORTING_FILTER_VALUE } from "../programs.constants";
+import {
+  PROGRAMS_COLUMNS,
+  PROGRAMS_DEFAULT_FILTERS,
+  SORTING_FILTER_VALUE
+} from "../programs.constants";
+import { composeProgramsFilters } from "./programs-helpers";
 
 const sortableColums = PROGRAMS_COLUMNS.filter(
   x => x.sortingName !== undefined
@@ -30,7 +35,7 @@ export const getPrograms = () => (dispatch, getState) => {
 
 const composeRequestFilters = () => (dispatch, getState) => {
   let itemsOnPage = 10;
-  const existingFilters = dispatch(getProgramsFiltering());
+  const existingFilters = dispatch(getProgramsFilters());
   let { page } = existingFilters;
   let filters = {};
 
@@ -54,17 +59,21 @@ const composeRequestFilters = () => (dispatch, getState) => {
     itemsOnPage: itemsOnPage,
     currentPage: page - 1
   });
+
+  const filtering = composeProgramsFilters(existingFilters.filtering);
+
   filters = {
     ...filters,
     skip,
     take,
-    sorting: existingFilters.sorting
+    sorting: existingFilters.sorting,
+    ...filtering
   };
 
   return filters;
 };
 
-export const getProgramsFiltering = () => (dispatch, getState) => {
+export const getProgramsFilters = () => (dispatch, getState) => {
   const { routing, programsData } = getState();
   const queryParams = qs.parse(routing.location.search.slice(1));
 
@@ -82,12 +91,29 @@ export const getProgramsFiltering = () => (dispatch, getState) => {
     ? queryParams.sorting
     : SORTING_FILTER_VALUE;
 
-  const filtering = {
+  const filtering = PROGRAMS_DEFAULT_FILTERS.reduce((accum, cur) => {
+    const { name, type, value, validate = value => true } = cur;
+    if (!queryParams[name] || !validate(queryParams[name])) {
+      accum[name] = {
+        type,
+        value
+      };
+    } else {
+      accum[name] = {
+        type,
+        value: queryParams[name]
+      };
+    }
+    return accum;
+  }, {});
+
+  const filters = {
     page,
     pages,
-    sorting
+    sorting,
+    filtering
   };
-  return filtering;
+  return filters;
 };
 
 export const programsChangePage = nextPage => (dispatch, getState) => {
@@ -103,6 +129,18 @@ export const programsChangeSorting = sorting => (dispatch, getState) => {
   const { routing } = getState();
   const queryParams = qs.parse(routing.location.search.slice(1));
   queryParams.sorting = sorting;
+  const newUrl = routing.location.pathname + "?" + qs.stringify(queryParams);
+  dispatch(push(newUrl));
+};
+
+export const programsChangeFilter = filter => (dispatch, getState) => {
+  const { routing } = getState();
+  const queryParams = qs.parse(routing.location.search.slice(1));
+  if (filter.value === undefined) {
+    delete queryParams[filter.name];
+  } else {
+    queryParams[filter.name] = filter.value;
+  }
   const newUrl = routing.location.pathname + "?" + qs.stringify(queryParams);
   dispatch(push(newUrl));
 };
