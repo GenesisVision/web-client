@@ -16,7 +16,7 @@ const DashboardPage = ({ t }) => {
           <div className="dashboard__chart">
             <DashboardChartContainer />
           </div>
-          <div className="dashboard__portfolio-events">
+          <div className="dashboard__portfolio-events-aside">
             <DashboardPortfolioEventsContainer />
           </div>
         </div>

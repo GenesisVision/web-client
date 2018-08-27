@@ -1,7 +1,9 @@
 import { combineReducers } from "redux";
 
-const dashboardReducer = (state = {}, action) => state;
-combineReducers({
-  chart: {}
+import dashboardEvents from "./dashboard-events.reducer";
+
+const dashboardReducer = combineReducers({
+  chart: {},
+  dashboardEvents
 });
 export default dashboardReducer;
