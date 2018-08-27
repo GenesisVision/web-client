@@ -8,7 +8,7 @@ import { Scrollbars } from "react-custom-scrollbars";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
 
-import DashboardPortfolioEvent from "./dashboard-portfolio-event/dashboard-portfolio-event";
+import DashboardPortfolioEvent from "../dashboard-portfolio-event/dashboard-portfolio-event";
 
 const DashboardPortfolioEvents = ({ t, events, fullEventsUrl }) => (
   <Surface className="dashboard-portfolio-events">

@@ -3,22 +3,41 @@ import "./dashboard-portfolio-event-logo.scss";
 import classnames from "classnames";
 import React from "react";
 
+import icons from "./icons";
+
+export const logoTypes = {
+  PROFIT: "PROFIT",
+  LOSE: "LOSE",
+  REINVEST: "REINVEST"
+};
+
+const getTypeSVG = type => {
+  switch (type) {
+    case logoTypes.PROFIT:
+      return icons.EventProfitIcon;
+    case logoTypes.LOSE:
+      return icons.EventLoseIcon;
+    case logoTypes.REINVEST:
+      return icons.EventReinvestIcon;
+    default:
+      return null;
+  }
+};
+
 const PortfolioEventLogo = ({ isPositive, type }) => {
-  const className = classnames("portfolio-event", {
-    "portfolio-event--positive": isPositive,
-    "portfolio-event--negative": !isPositive
+  const className = classnames("portfolio-event-logo", {
+    "portfolio-event-logo--positive": isPositive,
+    "portfolio-event-logo--negative": !isPositive
   });
 
-  const typeClassName = classnames("portfolio-event-logo__type", {
-    "portfolio-event-logo__type--profit": isPositive && type === "",
-    "portfolio-event-logo__type--lose": !isPositive && type === "",
-    "portfolio-event-logo__type--reinvest": type === ""
-  });
+  const TypeSVG = getTypeSVG(type);
 
   return (
     <div className={className}>
       <div className="portfolio-event-logo__photo">P</div>
-      <div className={typeClassName}>T</div>
+      <div className={"portfolio-event-logo__type"}>
+        <TypeSVG />
+      </div>
     </div>
   );
 };

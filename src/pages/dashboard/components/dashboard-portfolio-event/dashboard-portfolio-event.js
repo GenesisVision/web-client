@@ -4,6 +4,10 @@ import classnames from "classnames";
 import * as moment from "moment";
 import React from "react";
 
+import PortfolioEventLogo, {
+  logoTypes
+} from "../dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
+
 const formatDate = date => {
   const now = moment(new Date());
   const eventCreationDate = moment(date);
@@ -27,10 +31,10 @@ const DashboardPortfolioEvent = ({ event }) => {
 
   return (
     <div className={className}>
-      <div className="portfolio-event__art">
-        <div className="portfolio-event__logo-photo">P</div>
-        <div className="portfolio-event__logo-type">T</div>
-      </div>
+      <PortfolioEventLogo
+        isPositive={isPositive}
+        type={isPositive ? logoTypes.PROFIT : logoTypes.LOSE}
+      />
       <div className="portfolio-event__info">
         <span className="portfolio-event__time">{formatDate(event.date)}</span>
         <p className="portfolio-event__description">{event.description}</p>
