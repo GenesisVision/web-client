@@ -6,6 +6,7 @@ import { push } from "react-router-redux";
 import { compose } from "redux";
 import replaceParams from "utils/replace-params";
 
+import isAuthenticated from "../../../../../shared/decorators/is-authenticated";
 import ProgramsTabs from "./programs-tabs";
 
 class ProgramsTabsContainer extends Component {
@@ -33,6 +34,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default compose(
+  isAuthenticated,
   withRouter,
   connect(
     null,

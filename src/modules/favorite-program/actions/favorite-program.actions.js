@@ -2,7 +2,7 @@ import programApi from "services/api-client/program-api";
 
 export const SET_FAVORITE_PROGRAM = "SET_FAVORITE_PROGRAM";
 
-const addFavoriteProgram = (programId, authorization) => {
+export const addFavoriteProgram = ({ programId, authorization }) => {
   return {
     type: SET_FAVORITE_PROGRAM,
     payload: programApi.v10ProgramByIdFavoriteAddPost(programId, authorization),
@@ -13,7 +13,7 @@ const addFavoriteProgram = (programId, authorization) => {
   };
 };
 
-const removeFavoriteProgram = (programId, authorization) => {
+export const removeFavoriteProgram = ({ programId, authorization }) => {
   return {
     type: SET_FAVORITE_PROGRAM,
     payload: programApi.v10ProgramByIdFavoriteRemovePost(
@@ -26,7 +26,3 @@ const removeFavoriteProgram = (programId, authorization) => {
     }
   };
 };
-
-const favoriteActions = { addFavoriteProgram, removeFavoriteProgram };
-
-export default favoriteActions;

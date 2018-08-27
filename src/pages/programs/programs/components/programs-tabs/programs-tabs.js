@@ -13,7 +13,7 @@ const ProgramsTabs = ({ t, tab }) => {
   return (
     <GVTabs value={tab}>
       <GVTab
-        value={"explore"}
+        value={PROGRAMS_EXPLORE_TAB_NAME}
         label={
           <Link
             to={replaceParams(PROGRAMS_TAB_ROUTE, {
@@ -25,7 +25,7 @@ const ProgramsTabs = ({ t, tab }) => {
         }
       />
       <GVTab
-        value={"favorites"}
+        value={PROGRAMS_FAVORITES_TAB_NAME}
         label={
           <Link
             to={replaceParams(PROGRAMS_TAB_ROUTE, {

@@ -6,7 +6,7 @@ import React, { Component } from "react";
 class FavoriteIcon extends Component {
   handleClick = e => {
     e.stopPropagation();
-    this.props.toggleSelected();
+    this.props.toggleSelected(this.props.programId, this.props.selected);
   };
 
   render() {

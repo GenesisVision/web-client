@@ -19,7 +19,16 @@ const selectFilterValues = [
   ...CURRENCY_FILTER_VALUES.map(x => ({ value: x, label: x }))
 ];
 
-const ProgramsTable = ({ t, data, isPending, sorting, filtering, paging }) => {
+const ProgramsTable = ({
+  t,
+  data,
+  isPending,
+  sorting,
+  filtering,
+  paging,
+  toggleFavorite,
+  isAuthenticated
+}) => {
   return (
     <Table
       title="All programs"
@@ -69,10 +78,18 @@ const ProgramsTable = ({ t, data, isPending, sorting, filtering, paging }) => {
               </TableHeadCell>
             );
           })}
-          <TableHeadCell className="programs-table__cell--favorite" />
+          {isAuthenticated && (
+            <TableHeadCell className="programs-table__cell--favorite" />
+          )}
         </Fragment>
       )}
-      renderBodyRow={program => <ProgramTableRow program={program} />}
+      renderBodyRow={program => (
+        <ProgramTableRow
+          program={program}
+          toggleFavorite={toggleFavorite}
+          isAuthenticated={isAuthenticated}
+        />
+      )}
     />
   );
 };
