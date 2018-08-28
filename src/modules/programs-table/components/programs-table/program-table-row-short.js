@@ -1,13 +1,18 @@
-import FavoriteIcon from "components/favorite-icon/favorite-icon";
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
 import TableCell from "components/table/table-cell";
 import TableRow from "components/table/table-row";
 import { GVProgramAvatar } from "gv-react-components";
+import FavoriteIcon from "modules/favorite-program/components/favorite-icon/favorite-icon";
 import React from "react";
 import gvLogo from "shared/media/logo.svg";
 import fileService from "shared/services/file-service";
 
-const ProgramTableRowShort = ({ program, onExpandClick }) => {
+const ProgramTableRowShort = ({
+  program,
+  isAuthenticated,
+  toggleFavorite,
+  onExpandClick
+}) => {
   return (
     <TableRow className="programs-table__row" onClick={onExpandClick}>
       <TableCell className="programs-table__cell--title">
@@ -46,9 +51,16 @@ const ProgramTableRowShort = ({ program, onExpandClick }) => {
       <TableCell className="programs-table__cell--chart">
         <ProgramSimpleChart data={program.chart} />
       </TableCell>
-      <TableCell className="programs-table__cell--favorite">
-        <FavoriteIcon toggleSelected={() => {}} selected />
-      </TableCell>
+      {isAuthenticated &&
+        program.personalProgramDetails && (
+          <TableCell className="programs-table__cell--favorite">
+            <FavoriteIcon
+              toggleSelected={toggleFavorite}
+              programId={program.id}
+              selected={program.personalProgramDetails.isFavorite}
+            />
+          </TableCell>
+        )}
     </TableRow>
   );
 };

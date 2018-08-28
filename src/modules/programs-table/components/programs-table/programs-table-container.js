@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { bindActionCreators, compose } from "redux";
 
+import { toggleFavoriteProgram } from "../../../favorite-program/services/favorite-program.service";
 import * as programsService from "../../services/programs-table.service";
 import ProgramsTable from "./programs-table";
 
@@ -20,8 +21,12 @@ class ProgramsContainer extends Component {
     }
   }
 
+  toggleFavorite = (programId, isFavorite) => () => {
+    console.log(isFavorite);
+  };
+
   render() {
-    const { isPending, data, filters, service } = this.props;
+    const { isPending, data, filters, service, isAuthenticated } = this.props;
     if (!data) return <div>Loading...</div>;
     return (
       <Surface>
@@ -41,6 +46,8 @@ class ProgramsContainer extends Component {
             current: filters.page,
             updatePaging: service.programsChangePage
           }}
+          toggleFavorite={service.toggleFavoriteProgram}
+          isAuthenticated={isAuthenticated}
         />
       </Surface>
     );
@@ -48,12 +55,16 @@ class ProgramsContainer extends Component {
 }
 
 const mapStateToProps = state => {
+  const { isAuthenticated } = state.authData;
   const { isPending, data } = state.programsData.items;
-  return { isPending, data };
+  return { isPending, data, isAuthenticated };
 };
 
 const mapDispatchToProps = dispatch => ({
-  service: bindActionCreators(programsService, dispatch)
+  service: bindActionCreators(
+    { ...programsService, toggleFavoriteProgram },
+    dispatch
+  )
 });
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {

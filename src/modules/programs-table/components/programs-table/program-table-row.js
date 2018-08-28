@@ -20,19 +20,22 @@ class ProgramTableRow extends Component {
   };
 
   render() {
-    const { program } = this.props;
+    const { program, isAuthenticated, toggleFavorite } = this.props;
     const { isDetailed } = this.state;
     if (isDetailed)
       return (
         <ProgramTableRowDetailed
           program={program}
           onCollapseClick={this.closeProgramDetail}
+          isAuthenticated={isAuthenticated}
         />
       );
     return (
       <ProgramTableRowShort
         program={program}
         onExpandClick={this.openProgramDetail}
+        toggleFavorite={toggleFavorite}
+        isAuthenticated={isAuthenticated}
       />
     );
   }
