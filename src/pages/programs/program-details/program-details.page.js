@@ -1,9 +1,9 @@
 import "./program-details.scss";
 
+import Page from "components/page/page";
 import React from "react";
 import { translate } from "react-i18next";
 
-import Page from "../../components/page/page";
 import ProgramDetailsChartContainer from "./components/program-details-chart/program-details-chart-container";
 import ProgramDetailsDescriptionContainer from "./components/program-details-description/program-details-description-container";
 import ProgramDetailsHistoryContainer from "./components/program-details-history/program-details-history-container";

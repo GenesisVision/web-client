@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import programDetailsService from "../../services/program-details.service";
+import * as programDetailsService from "../../services/program-details.service";
 import ProgramDetailsDescription from "./program-details-description";
 
 class ProgramDetailsDescriptionContainer extends Component {

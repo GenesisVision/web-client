@@ -2,9 +2,6 @@ import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import DashboardRoutes from "pages/dashboard/dashboard.routes";
 import NotFoundPage from "pages/not-found/not-found.routes";
 import PrivateRoute from "pages/private-route";
-import ProgramDetails, {
-  PROGRAM_DETAILS_ROUTE
-} from "pages/program-details/program-details.routes";
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 
@@ -20,7 +17,6 @@ const AppRoutes = () => {
         <Redirect exact from={HOME_ROUTE} to={PROGRAMS_ROUTE} />
         <Route path={PROGRAMS_ROUTE} component={ProgramsRoutes} />
         <PrivateRoute path={DASHBOARD_ROUTE} component={DashboardRoutes} />
-        <PrivateRoute path={PROGRAM_DETAILS_ROUTE} component={ProgramDetails} />
         <Route component={NotFoundPage} />
       </Switch>
     </AppLayout>

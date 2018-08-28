@@ -6,7 +6,6 @@ import { translate } from "react-i18next";
 
 // import { Link } from "react-router-dom";
 
-
 const ProgramDetailsStatistics = ({ t }) => (
   <Surface className="program-details-statistics">
     program-details-statistics

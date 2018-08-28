@@ -2,16 +2,16 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import programDetailsService from "../../services/program-details.service";
-import ProgramDetailsStatistics from "./program-details-statistics";
+import * as programDetailsService from "../../services/program-details.service";
+import ProgramDetailsHistory from "./program-details-history";
 
-class ProgramDetailsStatisticsContainer extends Component {
+class ProgramDetailsHistoryContainer extends Component {
   componentDidMount() {
     const { service } = this.props;
   }
 
   render() {
-    return <ProgramDetailsStatistics />;
+    return <ProgramDetailsHistory />;
   }
 }
 
@@ -26,4 +26,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ProgramDetailsStatisticsContainer);
+)(ProgramDetailsHistoryContainer);
