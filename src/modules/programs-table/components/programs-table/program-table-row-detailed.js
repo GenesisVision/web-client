@@ -7,7 +7,12 @@ import React from "react";
 import gvLogo from "shared/media/logo.svg";
 import fileService from "shared/services/file-service";
 
-const ProgramTableRowDetailed = ({ program, onCollapseClick }) => {
+const ProgramTableRowDetailed = ({
+  program,
+  isAuthenticated,
+  toggleFavorite,
+  onCollapseClick
+}) => {
   return (
     <TableRow>
       <Surface className="program-detailed">
@@ -64,9 +69,17 @@ const ProgramTableRowDetailed = ({ program, onCollapseClick }) => {
           <GVButton variant="text" color="secondary">
             Details >
           </GVButton>
-          <span style={{ float: "right" }}>
-            Add to favorites <FavoriteIcon selected />
-          </span>
+          {isAuthenticated &&
+            program.personalProgramDetails && (
+              <span style={{ float: "right" }}>
+                Add to favorites{" "}
+                <FavoriteIcon
+                  toggleSelected={toggleFavorite}
+                  programId={program.id}
+                  selected={program.personalProgramDetails.isFavorite}
+                />
+              </span>
+            )}
         </div>
       </Surface>
     </TableRow>

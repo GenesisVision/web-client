@@ -51,15 +51,16 @@ const ProgramTableRowShort = ({
       <TableCell className="programs-table__cell--chart">
         <ProgramSimpleChart data={program.chart} />
       </TableCell>
-      {isAuthenticated && (
-        <TableCell className="programs-table__cell--favorite">
-          <FavoriteIcon
-            toggleSelected={toggleFavorite}
-            programId={program.id}
-            selected={program.personalProgramDetails.isFavorite}
-          />
-        </TableCell>
-      )}
+      {isAuthenticated &&
+        program.personalProgramDetails && (
+          <TableCell className="programs-table__cell--favorite">
+            <FavoriteIcon
+              toggleSelected={toggleFavorite}
+              programId={program.id}
+              selected={program.personalProgramDetails.isFavorite}
+            />
+          </TableCell>
+        )}
     </TableRow>
   );
 };
