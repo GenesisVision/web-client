@@ -1,11 +1,13 @@
-import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
 import TableCell from "components/table/table-cell";
 import TableRow from "components/table/table-row";
 import { GVProgramAvatar } from "gv-react-components";
 import FavoriteIcon from "modules/favorite-program/components/favorite-icon/favorite-icon";
 import React from "react";
+import NumberFormat from "react-number-format";
 import gvLogo from "shared/media/logo.svg";
 import fileService from "shared/services/file-service";
+
+import ProgramSimpleChart from "../program-simple-chart/program-simple-chart";
 
 const ProgramTableRowShort = ({
   program,
@@ -43,13 +45,26 @@ const ProgramTableRowShort = ({
         {program.period}
       </TableCell>
       <TableCell className="programs-table__cell--drawdown">
-        {program.statistic.drawdownPercent}%
+        <NumberFormat
+          value={program.statistic.drawdownPercent}
+          suffix="%"
+          decimalScale={2}
+          displayType="text"
+        />
       </TableCell>
       <TableCell className="programs-table__cell--profit">
-        {program.statistic.profitPercent}%
+        <NumberFormat
+          value={program.statistic.profitPercent}
+          suffix="%"
+          decimalScale={2}
+          displayType="text"
+        />
       </TableCell>
       <TableCell className="programs-table__cell--chart">
-        <ProgramSimpleChart data={program.chart} />
+        <ProgramSimpleChart
+          data={program.chart}
+          isPositive={program.statistic.profitPercent >= 0}
+        />
       </TableCell>
       {isAuthenticated &&
         program.personalProgramDetails && (
