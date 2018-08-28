@@ -13,6 +13,7 @@
     "i18next-xhr-backend": "^1.5.1",
     "jwt-decode": "^2.2.0",
     "moment": "^2.22.1",
+    "node-sass": "^4.9.3",
     "prop-types": "^15.6.2",
     "qrcode.react": "^0.8.0",
     "qs": "^6.5.1",
@@ -55,7 +56,6 @@
     "import-sort-parser-babylon": "^4.2.0",
     "import-sort-style-module": "^4.2.0",
     "lint-staged": "^7.1.0",
-    "node-sass": "^4.9.3",
     "prettier": "^1.12.1",
     "react-test-renderer": "^16.2.0",
     "redux-devtools": "^3.4.1"

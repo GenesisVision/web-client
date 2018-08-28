@@ -1,3 +1,5 @@
+import investorApi from "services/api-client/investor-api";
+
 export const DASHBOARD_PROGRAMS = "DASHBOARD_PROGRAMS";
 export const DASHBOARD_FUNDS = "DASHBOARD_FUNDS";
 export const DASHBOARD_CHART_COMMON = "DASHBOARD_CHART_COMMON";
@@ -26,7 +28,7 @@ export const fetchFunds = data => {
   return {
     type: DASHBOARD_FUNDS,
     payload: 1 /* SwaggerInvestorApi.apiInvestorDashboardGet(
-     data
+      data
     ) */
   };
 };
@@ -34,8 +36,6 @@ export const fetchFunds = data => {
 export const fetchPortfolioEvents = data => {
   return {
     type: DASHBOARD_PORTFOLIO_EVENTS,
-    payload: 1 /* SwaggerInvestorApi.apiInvestorDashboardGet(
-   data
-  ) */
+    payload: investorApi.v10InvestorDashboardEventsGet(data)
   };
 };

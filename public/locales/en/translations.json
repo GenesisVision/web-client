@@ -231,7 +231,11 @@
   },
   "dashboard": {
     "portfolio": "Portfolio",
-    "favorite-programs": "Favorite programs"
+    "favorite-programs": "Favorite programs",
+    "portfolio-events": {
+      "title": "Portfolio Events",
+      "see-all-button": "See All"
+    }
   },
   "program-deposit": {
     "header": "Buy Tokens",
