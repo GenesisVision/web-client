@@ -4,7 +4,6 @@ import { GVProgramAvatar } from "gv-react-components";
 import FavoriteIcon from "modules/favorite-program/components/favorite-icon/favorite-icon";
 import React from "react";
 import NumberFormat from "react-number-format";
-import gvLogo from "shared/media/logo.svg";
 import fileService from "shared/services/file-service";
 
 import ProgramSimpleChart from "../program-simple-chart/program-simple-chart";
@@ -22,7 +21,6 @@ const ProgramTableRowShort = ({
           url={fileService.getFileUrl(program.avatar)}
           level={program.level}
           alt={program.title}
-          errorImage={gvLogo}
         />
         {program.title}
       </TableCell>

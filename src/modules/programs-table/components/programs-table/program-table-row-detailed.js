@@ -4,7 +4,6 @@ import TableRow from "components/table/table-row";
 import { GVButton, GVProgramAvatar } from "gv-react-components";
 import FavoriteIcon from "modules/favorite-program/components/favorite-icon/favorite-icon";
 import React from "react";
-import gvLogo from "shared/media/logo.svg";
 import fileService from "shared/services/file-service";
 
 const ProgramTableRowDetailed = ({
@@ -22,7 +21,7 @@ const ProgramTableRowDetailed = ({
               url={fileService.getFileUrl(program.avatar)}
               level={program.level}
               alt={program.title}
-              errorImage={gvLogo}
+              size="medium"
             />
             <div>
               <div className="program-detailed__title">{program.title}</div>
