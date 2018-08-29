@@ -4,6 +4,7 @@ import classnames from "classnames";
 import Modal from "components/modal/modal";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
+import * as ReactDOM from "react-dom";
 import EventListener from "react-event-listener";
 
 const getAnchorEl = el => {
@@ -69,20 +70,15 @@ class Popover extends Component {
       vertical,
       noPadding,
       children,
+      className,
       ...props
     } = this.props;
     const position = this.getPosition();
     return (
-      <Modal
-        open={Boolean(anchorEl)}
-        backdropStyle={{
-          backgroundColor: "transparent"
-        }}
-        {...props}
-      >
+      <Modal open={Boolean(anchorEl)} transparentBackdrop {...props}>
         <EventListener target="window" onResize={this.handleWindowResize} />
         <div
-          className={classnames("popover", {
+          className={classnames("popover", className, {
             "popover--no-padding": noPadding
           })}
           style={position}
@@ -100,7 +96,8 @@ Popover.propTypes = {
   vertical: PropTypes.oneOf(["top", "bottom"]),
   anchorEl: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   noPadding: PropTypes.bool,
-  disabledBackdrop: PropTypes.bool
+  disabledBackdrop: PropTypes.bool,
+  className: PropTypes.string
 };
 
 Popover.defaultProps = {

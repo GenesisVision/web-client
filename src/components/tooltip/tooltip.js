@@ -1,3 +1,5 @@
+import "./tooltip.scss";
+
 import Popover from "components/popover/popover";
 import PropTypes from "prop-types";
 import React, { Component, Fragment } from "react";
@@ -12,13 +14,7 @@ class Tooltip extends Component {
   };
 
   handleMouseLeave = () => {
-    if (this.props.delay) {
-      setTimeout(() => {
-        this.setState({ anchor: null });
-      }, this.props.delay);
-    } else {
-      this.setState({ anchor: null });
-    }
+    this.setState({ anchor: null });
   };
 
   render() {
@@ -31,7 +27,12 @@ class Tooltip extends Component {
           onMouseEnter={this.handleMouseEnter}
           onMouseLeave={this.handleMouseLeave}
         />
-        <Popover disableBackdrop anchorEl={this.state.anchor}>
+        <Popover
+          disableBackdropClick
+          noPadding
+          anchorEl={this.state.anchor}
+          className="tooltip__popover"
+        >
           {component || title}
         </Popover>
       </Fragment>
@@ -40,9 +41,8 @@ class Tooltip extends Component {
 }
 
 Tooltip.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-  delay: PropTypes.number,
-  component: PropTypes.oneOfType([PropTypes.node]).isRequired
+  component: PropTypes.element,
+  title: PropTypes.string
 };
 
 export default Tooltip;

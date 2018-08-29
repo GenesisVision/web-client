@@ -1,5 +1,6 @@
 import "./modal.scss";
 
+import classnames from "classnames";
 import Portal from "components/portal/portal";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
@@ -23,19 +24,30 @@ class Modal extends Component {
   };
 
   render() {
+    const {
+      open,
+      disableBackdropClick,
+      transparentBackdrop,
+      children
+    } = this.props;
     return (
-      <Portal open={this.props.open}>
-        <div className="modal">
-          {this.props.disabledBackdrop || (
+      <Portal open={open}>
+        <div
+          className={classnames("modal", {
+            "modal--fixed": !disableBackdropClick
+          })}
+        >
+          {disableBackdropClick || (
             <EventListener target={document} onKeyUp={this.handleKeyPress}>
               <div
-                style={this.props.backdropStyle}
-                className="modal__backdrop"
+                className={classnames("modal__backdrop", {
+                  "modal__backdrop--transparent": transparentBackdrop
+                })}
                 onClick={this.handleBackdropClick}
               />
             </EventListener>
           )}
-          {this.props.children}
+          {children}
         </div>
       </Portal>
     );
@@ -45,8 +57,8 @@ class Modal extends Component {
 Modal.propTypes = {
   onClose: PropTypes.func,
   open: PropTypes.bool,
-  backdropStyle: PropTypes.object,
-  disabledBackdrop: PropTypes.bool
+  disableBackdropClick: PropTypes.bool,
+  transparentBackdrop: PropTypes.bool
 };
 
 export default Modal;
