@@ -1,12 +1,12 @@
+import "./time-left-widget.css";
+
 import classnames from "classnames";
 import moment from "moment";
-import React from "react";
 import PropTypes from "prop-types";
+import React from "react";
 import { translate } from "react-i18next";
 
-import Progress from "../../shared/components/progress/progress";
-
-import "./time-left-widget.css";
+import Progress from "../../../shared/components/progress/progress";
 
 const TimeLeftWidget = ({ t, start, end, className }) => {
   const dateNow = moment();

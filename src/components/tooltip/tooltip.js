@@ -19,7 +19,7 @@ class Tooltip extends Component {
 
   render() {
     const child = React.Children.only(this.props.children);
-    const { component, title } = this.props;
+    const { component, title, render } = this.props;
     return (
       <Fragment>
         <child.type
@@ -33,7 +33,7 @@ class Tooltip extends Component {
           anchorEl={this.state.anchor}
           className="tooltip__popover"
         >
-          {component || title}
+          {title || component || render()}
         </Popover>
       </Fragment>
     );
@@ -42,7 +42,8 @@ class Tooltip extends Component {
 
 Tooltip.propTypes = {
   component: PropTypes.element,
-  title: PropTypes.string
+  title: PropTypes.string,
+  render: PropTypes.func
 };
 
 export default Tooltip;
