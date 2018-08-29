@@ -27,7 +27,7 @@ class DashboardPortfolioEventsContainer extends Component {
 }
 
 const mapStateToProps = state => {
-  const { data } = state.dashboardData.dashboardEvents;
+  const { data } = state.dashboard.eventsData;
   return { events: data ? data.events : null };
 };
 

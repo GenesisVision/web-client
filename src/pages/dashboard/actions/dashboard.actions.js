@@ -18,9 +18,7 @@ export const fetchChartCommon = data => {
 export const fetchPrograms = data => {
   return {
     type: DASHBOARD_PROGRAMS,
-    payload: 1 /* SwaggerInvestorApi.apiInvestorDashboardGet(
-      data
-    ) */
+    payload: investorApi.v10InvestorDashboardProgramListGet(data)
   };
 };
 

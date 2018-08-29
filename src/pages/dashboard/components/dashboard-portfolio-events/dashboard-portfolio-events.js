@@ -8,7 +8,7 @@ import { Scrollbars } from "react-custom-scrollbars";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
 
-import DashboardPortfolioEvent from "../dashboard-portfolio-event/dashboard-portfolio-event";
+import DashboardPortfolioEvent from "./dashboard-portfolio-event/dashboard-portfolio-event";
 
 const DashboardPortfolioEvents = ({ t, events, fullEventsUrl }) => (
   <Surface className="dashboard-portfolio-events">
@@ -44,14 +44,14 @@ const DashboardPortfolioEvents = ({ t, events, fullEventsUrl }) => (
 DashboardPortfolioEvents.propTypes = {
   events: PropTypes.arrayOf(
     PropTypes.shape({
-      date: PropTypes.string.isRequired,
+      date: PropTypes.instanceOf(Date).isRequired,
       description: PropTypes.string.isRequired,
       value: PropTypes.number.isRequired,
       type: PropTypes.string.isRequired,
-      logo: PropTypes.string.isRequired
+      logo: PropTypes.string
     })
   ).isRequired,
-  urlToRedirect: PropTypes.string.isRequired
+  fullEventsUrl: PropTypes.string.isRequired
 };
 
 export default translate()(DashboardPortfolioEvents);

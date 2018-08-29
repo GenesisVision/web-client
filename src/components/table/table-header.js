@@ -20,7 +20,7 @@ class TableHeader extends Component {
   };
 
   renderChildren = () => {
-    if (this.props.sorting.value !== undefined) {
+    if (this.props.sorting !== undefined) {
       return this.props.children({
         sortingName: this.sortingName(),
         isAsc: this.isAsc(),

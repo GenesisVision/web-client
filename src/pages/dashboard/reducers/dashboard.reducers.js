@@ -1,9 +1,10 @@
 import { combineReducers } from "redux";
 
-import dashboardEvents from "./dashboard-events.reducer";
+import dashboardEventsReducer from "./dashboard-events.reducer";
+import dashboardProgramsReducer from "./dashboard-program.reducer";
 
 const dashboardReducer = combineReducers({
-  chart: {},
-  dashboardEvents
+  eventsData: dashboardEventsReducer,
+  propgramsData: dashboardProgramsReducer
 });
 export default dashboardReducer;
