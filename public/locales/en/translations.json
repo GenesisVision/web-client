@@ -94,6 +94,35 @@
   "dashboard-page": {
     "title": "Dashboard"
   },
+  "program-details-page": {
+    "title": "Program detail",
+    "back": "Back",
+    "previous-path": "/programs",
+    "tabs": {
+      "overview": "Overview",
+      "investedInfo": "Invested Info"
+    },
+    "description": {
+      "strategy": "Strategy",
+      "addToFavorites": "Add to favorites",
+      "notifications": "Notifications",
+      "avToInvest": "Av. to invest",
+      "entryFee": "Entry fee",
+      "successFee": "Success fee",
+      "invest": "Invest",
+      "reinvest": "Reinvest",
+      "yourInvestment": "Your onvestment",
+      "invested": "Invested",
+      "value": "Value",
+      "profit": "Profit",
+      "status": "Status",
+      "investment-statuses": {
+        "investing": "Investing"
+      },
+      "withdraw": "Withdraw",
+      "withdraw-notice-text": "You can withdraw only the invested funds, the profit will be withdrawn to your account at the end of the period automatically"
+    }
+  },
   "program-actions": {
     "invest": "Invest",
     "withdraw": "Withdraw"
