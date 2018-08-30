@@ -11,8 +11,3 @@ export const getPortfolioEvents = () => (dispatch, getState) => {
 
   dispatch(actions.fetchPortfolioEvents(authorization));
 };
-
-export const getAssets = () => (dispatch, getState) => {
-  const authorization = authService.getAuthArg();
-  dispatch(actions.fetchPrograms(authorization));
-};

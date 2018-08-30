@@ -86,7 +86,6 @@ export const PROGRAMS_COLUMNS = [
     sortingName: "ByProfit"
   },
   {
-    name: "chart",
-    isSortable: false
+    name: "chart"
   }
 ];

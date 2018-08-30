@@ -4,7 +4,7 @@ import Surface from "components/surface/surface";
 import { GVTab, GVTabs } from "gv-react-components";
 import React, { Component } from "react";
 
-import DashboardPrograms from "./dashboard-programs/dashboard-programs";
+import DashboardProgramsContainer from "./dashboard-programs/dashboard-programs-container";
 
 class DashboardAssets extends Component {
   state = {
@@ -25,9 +25,7 @@ class DashboardAssets extends Component {
           <GVTab value={"funds"} label="Funds" />
         </GVTabs>
         <div>
-          {tab === "programs" && (
-            <DashboardPrograms data={{}} filtering={{}} paging={{}} />
-          )}
+          {tab === "programs" && <DashboardProgramsContainer />}
           {tab === "funds" && "Funds"}
         </div>
       </Surface>
