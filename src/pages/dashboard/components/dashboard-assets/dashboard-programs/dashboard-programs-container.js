@@ -12,23 +12,23 @@ class DashboardProgramsContainer extends Component {
   }
 
   render() {
-    const { isPending, data, filters, service } = this.props;
+    const { isPending, data, filters, service, paging, sorting } = this.props;
     return (
       <DashboardPrograms
         isPending={isPending}
         data={data || {}}
         sorting={{
-          value: filters.sorting,
-          updateSorting: service.programsChangeSorting
+          value: sorting,
+          updateSorting: service.changeSorting
         }}
         filtering={{
           ...filters.filtering,
           updateFilter: service.programsChangeFilter
         }}
         paging={{
-          total: filters.pages,
-          current: filters.page,
-          updatePaging: service.programsChangePage
+          total: paging.totalPages,
+          current: paging.currentPage,
+          updatePaging: service.changePage
         }}
       />
     );
@@ -36,8 +36,9 @@ class DashboardProgramsContainer extends Component {
 }
 
 const mapStateToProps = state => {
-  const { isPending, data } = state.dashboard.programs.itemsData;
-  return { isPending, data };
+  const { itemsData, sorting, paging } = state.dashboard.programs;
+  const { isPending, data } = itemsData;
+  return { isPending, data, sorting, paging };
 };
 
 const mapDispatchToProps = dispatch => ({

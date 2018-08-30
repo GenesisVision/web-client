@@ -67,33 +67,6 @@ export const getProgramsFilters = () => (dispatch, getState) => {
   return filters;
 };
 
-export const programsChangePage = nextPage => (dispatch, getState) => {
-  // const { routing } = getState();
-  // const queryParams = qs.parse(routing.location.search.slice(1));
-  // const page = nextPage + 1 || 1;
-  // queryParams.page = page;
-  // const newUrl = routing.location.pathname + "?" + qs.stringify(queryParams);
-};
-
-export const programsChangeSorting = sorting => (dispatch, getState) => {
-  // const { routing } = getState();
-  // const queryParams = qs.parse(routing.location.search.slice(1));
-  // queryParams.sorting = sorting;
-  // const newUrl = routing.location.pathname + "?" + qs.stringify(queryParams);
-};
-
-export const programsChangeFilter = filter => (dispatch, getState) => {
-  // const { routing } = getState();
-  // const queryParams = qs.parse(routing.location.search.slice(1));
-  // if (filter.value === undefined) {
-  //   delete queryParams[filter.name];
-  // } else {
-  //   queryParams[filter.name] = filter.value;
-  // }
-  // const newUrl = routing.location.pathname + "?" + qs.stringify(queryParams);
-  // dispatch(push(newUrl));
-};
-
 const updatePaging = paging => {
   const pagingActions = pagingActionsFactory(DASHBOARD_PROGRAMS);
   return pagingActions.updatePaging(paging);

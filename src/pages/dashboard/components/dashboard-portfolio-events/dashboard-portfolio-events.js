@@ -8,7 +8,7 @@ import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import DashboardPortfolioEvent, {
-  DashboardPortfolioEventPropTypes
+  DashboardPortfolioEventShape
 } from "./dashboard-portfolio-event/dashboard-portfolio-event";
 
 const DashboardPortfolioEvents = ({ t, events, fullEventsUrl }) => (
@@ -34,7 +34,7 @@ const DashboardPortfolioEvents = ({ t, events, fullEventsUrl }) => (
 );
 
 DashboardPortfolioEvents.propTypes = {
-  events: PropTypes.arrayOf(DashboardPortfolioEventPropTypes).isRequired,
+  events: PropTypes.arrayOf(DashboardPortfolioEventShape).isRequired,
   fullEventsUrl: PropTypes.string.isRequired
 };
 

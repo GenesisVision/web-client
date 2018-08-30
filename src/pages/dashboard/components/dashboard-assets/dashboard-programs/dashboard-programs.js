@@ -15,10 +15,18 @@ import NumberFormat from "react-number-format";
 
 import { DASHBOARD_PROGRAMS_COLUMNS } from "../../../dashboard.constants";
 
-const Dashboardprograms = ({ t, isPending, data, filtering, paging }) => {
+const Dashboardprograms = ({
+  t,
+  isPending,
+  data,
+  filtering,
+  paging,
+  sorting
+}) => {
   return (
     <Table
       filtering={filtering}
+      sorting={sorting}
       paging={paging}
       columns={DASHBOARD_PROGRAMS_COLUMNS}
       items={data.programs}
@@ -36,20 +44,24 @@ const Dashboardprograms = ({ t, isPending, data, filtering, paging }) => {
           </Filter> */}
         </Fragment>
       )}
-      renderHeader={
+      renderHeader={({ sortingName, isAsc, handleSorting }) => (
         <Fragment>
           {DASHBOARD_PROGRAMS_COLUMNS.map(x => {
             return (
               <TableHeadCell
                 key={x.name}
                 className={`dashboard-programs__cell--${x.name}`}
+                sortable={x.sortingName !== undefined}
+                active={x.sortingName === sortingName}
+                isAsc={isAsc}
+                onClick={handleSorting(x.sortingName)}
               >
                 {t(`dashboard-page.programs-header.${x.name}`)}
               </TableHeadCell>
             );
           })}
         </Fragment>
-      }
+      )}
       renderBodyRow={program => (
         <TableRow>
           <TableCell className="dashboard-programs__cell--title">
