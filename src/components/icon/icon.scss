@@ -35,4 +35,10 @@
     height: 20px;
     background-image: url("../../shared/media/settings.svg");
   }
+
+  &--question-circle {
+    height: 17px;
+    width: 17px;
+    background-image: url("../../shared/media/icons/question-circle.svg");
+  }
 }

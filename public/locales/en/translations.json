@@ -112,14 +112,11 @@
       "successFee": "Success fee",
       "invest": "Invest",
       "reinvest": "Reinvest",
-      "yourInvestment": "Your onvestment",
+      "yourInvestment": "Your investment",
       "invested": "Invested",
       "value": "Value",
       "profit": "Profit",
       "status": "Status",
-      "investment-statuses": {
-        "investing": "Investing"
-      },
       "withdraw": "Withdraw",
       "withdraw-notice-text": "You can withdraw only the invested funds, the profit will be withdrawn to your account at the end of the period automatically"
     }

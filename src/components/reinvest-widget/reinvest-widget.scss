@@ -1,0 +1,29 @@
+@import "styles/_colors.scss";
+
+.reinvest-widget {
+  width: 133px;
+
+  &__toggler {
+    height: 11px;
+    width: 32px;
+    border-radius: 8.5px;
+    display: inline-block;
+
+    &::after {
+      content: "";
+      position: absolute;
+      height: 15px;
+      width: 15px;
+      background-color: #fff;
+      border-radius: 10px;
+    }
+
+    &--active {
+      background-color: $alternate-color;
+    }
+
+    &--inactive {
+      background-color: $text-color-grey;
+    }
+  }
+}

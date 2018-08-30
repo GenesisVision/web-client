@@ -1,12 +1,149 @@
 import "./program-details-description.scss";
 
-import { GVButton } from "gv-react-components";
+import { QuestionCircleIcon, RingIcon } from "components/icon/icon";
+import ReinvestWidget from "components/reinvest-widget/reinvest-widget";
+import { GVButton, GVProgramAvatar } from "gv-react-components";
 import React from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
 
+import ProgramDetailsInvestment from "./program-details-investment/program-details-investment";
+
+const model = {
+  id: "string",
+  logo: "string",
+  description: "string",
+  title: "string",
+  currency: "Undefined",
+  level: 0,
+  periodDuration: 0,
+  periodDateStart: "2018-08-30T12:33:04.659Z",
+  periodDateEnd: "2018-08-30T12:33:04.659Z",
+  successFee: 0,
+  availableForInvestment: 0,
+  manager: {
+    id: "string",
+    username: "string",
+    avatar: "string"
+  },
+  statistic: {
+    balanceBase: {
+      amount: 0,
+      currency: "Undefined"
+    },
+    balanceGVT: {
+      amount: 0,
+      currency: "Undefined"
+    },
+    balanceSecondary: {
+      amount: 0,
+      currency: "Undefined"
+    },
+    investorsCount: 0,
+    startDate: "2018-08-30T12:33:04.659Z",
+    startBalance: 0,
+    startCurrency: "Undefined",
+    investedAmount: 0,
+    investedCurrency: "Undefined",
+    tradesCount: 0,
+    tradesSuccessCount: 0,
+    profitFactorPercent: 0,
+    sharpeRatioPercent: 0,
+    drawdownPercent: 0,
+    profitPercent: 0
+  },
+  personalProgramDetails: {
+    isFavorite: true,
+    isInvested: true,
+    isOwnProgram: true,
+    canCloseProgram: true,
+    canClosePeriod: true,
+    canInvest: true
+  }
+};
+
+const getInvestmentData = model => {
+  let {
+    investedAmount,
+    investedCurrency,
+    balanceBase,
+    profitPercent,
+    status
+  } = model.statistic;
+
+  return {
+    invested: investedAmount + " " + investedCurrency,
+    value: balanceBase.amount + " " + balanceBase.currency,
+    profit: profitPercent + " %",
+    status
+  };
+};
+
 const ProgramDetailsDescription = ({ t }) => (
-  <div className="program-details-description">program-details-description</div>
+  <div className="program-details-description">
+    <div className="program-details-description__left">
+      <GVProgramAvatar
+        url={model.logo}
+        level={model.level}
+        alt={model.title}
+        size="big"
+      />
+    </div>
+    <div className="program-details-description__main">
+      <h1 className="program-details-description__heading">{model.title}</h1>
+      <GVButton
+        variant="text"
+        className="program-details-description__author-btn"
+      >
+        {model.manager.username}
+      </GVButton>
+      <div className="program-details-description__info">
+        <h2 className="program-details-description__subheading">
+          {t("program-details-page.description.strategy")}
+        </h2>
+        <p className="program-details-description__text">{model.description}</p>
+        <div className="program-details-description__short-statistic">
+          <div className="program-details-description__short-statistic-item">
+            <span className="program-details-description__short-statistic-subheading">
+              {t("program-details-page.description.avToInvest")}
+            </span>
+            <span>
+              {model.availableForInvestment} {model.currency}
+            </span>
+          </div>
+          <div className="program-details-description__short-statistic-item">
+            <span className="program-details-description__short-statistic-subheading">
+              {t("program-details-page.description.entryFee")}
+            </span>
+            <span>{model.entryFee} %</span>
+          </div>
+          <div className="program-details-description__short-statistic-item">
+            <span className="program-details-description__short-statistic-subheading">
+              {t("program-details-page.description.successFee")}
+            </span>
+            <span>{model.successFee} %</span>
+          </div>
+        </div>
+        <GVButton>{t("program-details-page.description.invest")}</GVButton>
+        <ReinvestWidget onClick={() => {}} isActive={true}>
+          {t("program-details-page.description.reinvest")}
+        </ReinvestWidget>
+      </div>
+      <ProgramDetailsInvestment
+        className={"program-details-description__your-investment"}
+        {...getInvestmentData(model)}
+      />
+    </div>
+
+    <div className="program-details-description__right">
+      <GVButton variant="text" color="secondary">
+        {t("program-details-page.description.addToFavorites")}
+      </GVButton>
+      <GVButton variant="text" color="secondary">
+        {t("program-details-page.description.notifications")} <RingIcon />
+      </GVButton>
+    </div>
+  </div>
 );
 
 export default translate()(ProgramDetailsDescription);
