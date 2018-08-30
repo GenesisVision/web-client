@@ -14,7 +14,7 @@ class SelectFilter extends Component {
 
     return (
       <div className="select-filter">
-        {values.map(x => {
+        {values.map((x, idx) => {
           const selected = x.value === value;
           return (
             <GVButton
@@ -23,7 +23,7 @@ class SelectFilter extends Component {
                 primary: selected,
                 secondary: !selected
               })}
-              key={x.value}
+              key={idx}
               onClick={this.handleClick(selected, x.value)}
             >
               {x.label}
