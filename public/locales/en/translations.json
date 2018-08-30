@@ -93,7 +93,17 @@
     }
   },
   "dashboard-page": {
-    "title": "Dashboard"
+    "title": "Dashboard",
+    "programs-header": {
+      "title": "Name",
+      "share": "Share",
+      "currency": "Curr.",
+      "period": "Period",
+      "value": "value",
+      "profit": "Profit",
+      "chart": "Chart",
+      "status": "Status"
+    }
   },
   "program-details-page": {
     "title": "Program detail",

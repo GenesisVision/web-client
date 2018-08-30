@@ -1,4 +1,5 @@
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
+import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
 import TableCell from "components/table/table-cell";
 import TableRow from "components/table/table-row";
 import { GVProgramAvatar } from "gv-react-components";
@@ -7,8 +8,6 @@ import React from "react";
 import NumberFormat from "react-number-format";
 import fileService from "shared/services/file-service";
 
-import ProgramSimpleChart from "../program-simple-chart/program-simple-chart";
-
 const ProgramTableRowShort = ({
   program,
   isAuthenticated,
@@ -16,7 +15,7 @@ const ProgramTableRowShort = ({
   onExpandClick
 }) => {
   return (
-    <TableRow className="programs-table__row" onClick={onExpandClick}>
+    <TableRow onClick={onExpandClick}>
       <TableCell className="programs-table__cell--title">
         <GVProgramAvatar
           url={fileService.getFileUrl(program.avatar)}

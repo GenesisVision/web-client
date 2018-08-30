@@ -7,7 +7,7 @@ class TableToolbar extends Component {
     const { title, filtering, renderFilters } = this.props;
     return (
       <div className="table__toolbar">
-        <div className="table__title">{title}</div>
+        {title && <div className="table__title">{title}</div>}
         <TableFilters filtering={filtering}>{renderFilters}</TableFilters>
       </div>
     );
