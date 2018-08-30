@@ -17,9 +17,9 @@ const apiErrorHandlerMiddleware = (
     ) {
       action.payload = action.payload.response.body.errors;
     } else {
-      if (action.payload.status === 401) {
-        authService.removeToken();
-      }
+      // if (action.payload.status === 401) {
+      //   authService.removeToken();
+      // }
       const error = "Server Error. Please contact administrator.";
       const defaultError = [{ error, code: null }];
 

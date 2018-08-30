@@ -1,4 +1,4 @@
-import programApi from "services/api-client/program-api";
+import programApi from "services/api-client/programs-api";
 
 export const SET_FAVORITE_PROGRAM = "SET_FAVORITE_PROGRAM";
 

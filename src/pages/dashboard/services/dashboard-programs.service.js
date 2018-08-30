@@ -13,7 +13,7 @@ import {
 
 export const getPrograms = () => (dispatch, getState) => {
   const filters = composeRequestFilters(getState);
-  dispatch(fetchPrograms(filters));
+  dispatch(fetchPrograms(authService.getAuthArg(), filters));
 };
 
 const composeRequestFilters = getState => {
@@ -25,7 +25,6 @@ const composeRequestFilters = getState => {
   //const filtering = composeProgramsFilters(existingFilters.filtering);
 
   const filters = {
-    authorization: authService.getAuthArg(),
     skip,
     take,
     sorting

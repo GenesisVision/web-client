@@ -2,6 +2,7 @@ import "./dashboard-portfolio-event.scss";
 
 import classnames from "classnames";
 import * as moment from "moment";
+import PropTypes from "prop-types";
 import React from "react";
 
 import PortfolioEventLogo, {
@@ -46,5 +47,15 @@ const DashboardPortfolioEvent = ({ event }) => {
     </div>
   );
 };
+
+export const DashboardPortfolioEventPropTypes = PropTypes.shape({
+  date: PropTypes.instanceOf(Date).isRequired,
+  description: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
+  type: PropTypes.string.isRequired,
+  logo: PropTypes.string
+});
+
+DashboardPortfolioEvent.propTypes = DashboardPortfolioEventPropTypes;
 
 export default DashboardPortfolioEvent;

@@ -1,30 +1,22 @@
 import "./dashboard-portfolio-events.scss";
 
-import Surface from "components/surface/surface";
 import { GVButton } from "gv-react-components";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { Fragment } from "react";
 import { Scrollbars } from "react-custom-scrollbars";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
 
-import DashboardPortfolioEvent from "./dashboard-portfolio-event/dashboard-portfolio-event";
+import DashboardPortfolioEvent, {
+  DashboardPortfolioEventPropTypes
+} from "./dashboard-portfolio-event/dashboard-portfolio-event";
 
 const DashboardPortfolioEvents = ({ t, events, fullEventsUrl }) => (
-  <Surface className="dashboard-portfolio-events">
-    <h2 className="dashboard-portfolio-events__title">
-      {t("dashboard.portfolio-events.title")}
-    </h2>
+  <Fragment>
     <Scrollbars
       autoHide
       autoHideTimeout={1000}
       style={{ width: "265px", height: "541px", paddingRight: "10px" }}
-      renderThumbVertical={props => (
-        <div
-          {...props}
-          className="dashboard-portfolio-events__thumb-vertical"
-        />
-      )}
       className="dashboard-portfolio-events__scroll-container"
     >
       <div className="dashboard-portfolio-events__list">
@@ -38,19 +30,11 @@ const DashboardPortfolioEvents = ({ t, events, fullEventsUrl }) => (
         {t("dashboard.portfolio-events.see-all-button")}
       </GVButton>
     </Link>
-  </Surface>
+  </Fragment>
 );
 
 DashboardPortfolioEvents.propTypes = {
-  events: PropTypes.arrayOf(
-    PropTypes.shape({
-      date: PropTypes.instanceOf(Date).isRequired,
-      description: PropTypes.string.isRequired,
-      value: PropTypes.number.isRequired,
-      type: PropTypes.string.isRequired,
-      logo: PropTypes.string
-    })
-  ).isRequired,
+  events: PropTypes.arrayOf(DashboardPortfolioEventPropTypes).isRequired,
   fullEventsUrl: PropTypes.string.isRequired
 };
 
