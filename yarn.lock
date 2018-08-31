@@ -5038,9 +5038,9 @@ gud@^1.0.0:
   dependencies:
     superagent "^3.8.3"
 
-gv-react-components@^0.0.12:
-  version "0.0.12"
-  resolved "https://registry.yarnpkg.com/gv-react-components/-/gv-react-components-0.0.12.tgz#54ee012aa26d582ee97785f8ccd862f6d0f8230f"
+gv-react-components@^0.0.13:
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/gv-react-components/-/gv-react-components-0.0.13.tgz#70159a079cb3855af632011fe00fba3e6eeb3f1a"
   dependencies:
     classnames "^2.2.6"
     prop-types "^15.6.1"
