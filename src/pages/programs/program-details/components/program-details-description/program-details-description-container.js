@@ -8,15 +8,21 @@ import ProgramDetailsDescription from "./program-details-description";
 class ProgramDetailsDescriptionContainer extends Component {
   componentDidMount() {
     const { service } = this.props;
+    service.getProgramDetails();
   }
 
   render() {
-    return <ProgramDetailsDescription />;
+    const { programDetails } = this.props;
+    console.dir(programDetails);
+
+    return <ProgramDetailsDescription data={programDetails} />;
   }
 }
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    programDetails: state.programDetails.data
+  };
 };
 
 const mapDispatchToProps = dispatch => ({
