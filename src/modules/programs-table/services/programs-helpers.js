@@ -11,7 +11,10 @@ export const composeProgramsFilters = filtering => {
             prev[`${curr.name}Max`] = curr.value[1];
           }
           break;
-
+        case FilterType.custom:
+          const requestValues = curr.composeRequestValue(curr.value);
+          prev = { ...prev, ...requestValues };
+          break;
         case FilterType.general:
         default:
           if (curr.value !== undefined) {
