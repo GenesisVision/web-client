@@ -1,11 +1,12 @@
-import React from "react";
-import NumberFormat from "react-number-format";
-import { translate } from "react-i18next";
-import { UncontrolledTooltip } from "reactstrap";
-
 import "./ts-cards.css";
-import walletIcon from "../../../../../../media/wallet-icon.svg";
-import investorAvatar from "../../../../../../../../shared/media/investor-avatar.png";
+
+import walletIcon from "media/wallet-icon.svg";
+import React from "react";
+import { translate } from "react-i18next";
+import NumberFormat from "react-number-format";
+import { UncontrolledTooltip } from "reactstrap";
+import investorAvatar from "shared/media/investor-avatar.png";
+
 import TSProfitChart from "./ts-profit-chart";
 
 const profitChartData = (chartData, programStartDate) => {

@@ -1,0 +1,8 @@
+@import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
+
+.signup-form {
+  &__submit-button {
+    margin-top: 40px;
+  }
+}

@@ -1,17 +1,17 @@
-import { object as yupObject, number as yupNumber } from "yup";
-import { translate } from "react-i18next";
-import { withFormik, Field } from "formik";
-import Metric from "components/metric/metric";
-import React from "react";
+import "./program-withdraw.css";
 
-import FormError from "../../../../../shared/components/form/form-error/form-error";
-import InputText from "../../../../../shared/components/form/input-text/input-text";
-import PopupButtons from "../../../../popup/components/popup-buttons/popup-buttons";
-import PopupHeader from "../../../../popup/components/popup-header/popup-header";
+import Metric from "components/metric/metric";
+import { Field, withFormik } from "formik";
+import React from "react";
+import { translate } from "react-i18next";
+import FormError from "shared/components/form/form-error/form-error";
+import InputText from "shared/components/form/input-text/input-text";
+import { number as yupNumber, object as yupObject } from "yup";
+
 import ProgramAvatar from "../../../../../components/program-avatar/program-avatar";
 import TimeLeftWidget from "../../../../../components/time-left-widget/time-left-widget";
-
-import "./program-withdraw.css";
+import PopupButtons from "../../../../popup/components/popup-buttons/popup-buttons";
+import PopupHeader from "../../../../popup/components/popup-header/popup-header";
 
 const TraderWithdraw = ({
   t,

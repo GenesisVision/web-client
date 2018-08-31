@@ -1,17 +1,17 @@
-import { object as yupObject, number as yupNumber } from "yup";
-import { translate } from "react-i18next";
-import { withFormik, Field } from "formik";
-import Metric from "components/metric/metric";
-import NumberFormat from "react-number-format";
-import React from "react";
+import "./program-deposit.css";
 
-import FormError from "../../../../../shared/components/form/form-error/form-error";
-import InputText from "../../../../../shared/components/form/input-text/input-text";
+import Metric from "components/metric/metric";
+import { Field, withFormik } from "formik";
+import React from "react";
+import { translate } from "react-i18next";
+import NumberFormat from "react-number-format";
+import FormError from "shared/components/form/form-error/form-error";
+import InputText from "shared/components/form/input-text/input-text";
+import { number as yupNumber, object as yupObject } from "yup";
+
+import ProgramAvatar from "../../../../../components/program-avatar/program-avatar";
 import PopupButtons from "../../../../popup/components/popup-buttons/popup-buttons";
 import PopupHeader from "../../../../popup/components/popup-header/popup-header";
-import ProgramAvatar from "../../../../../components/program-avatar/program-avatar";
-
-import "./program-deposit.css";
 
 const ProgramDeposit = ({
   t,

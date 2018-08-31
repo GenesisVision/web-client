@@ -1,0 +1,36 @@
+@import "styles/_colors.scss";
+
+.filter {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+
+  & + & {
+    padding-left: 1.5rem;
+  }
+
+  &__label {
+    letter-spacing: 0.2px;
+    color: $text-color;
+  }
+
+  &__value {
+    letter-spacing: 0.2px;
+    color: $text-color;
+    padding: 0 0.4rem;
+  }
+
+  &__arrow {
+    stroke: #d8d8d8;
+    &__is-open {
+      stroke: $alternate-color;
+    }
+  }
+}
+
+.gv-hangle__text {
+  position: absolute;
+  top: -20px;
+  font-size: 0.8rem;
+}
