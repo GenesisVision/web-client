@@ -1,7 +1,6 @@
 import "./program-details-description.scss";
 
-import { QuestionCircleIcon, RingIcon } from "components/icon/icon";
-import ReinvestWidget from "components/reinvest-widget/reinvest-widget";
+import { RingIcon } from "components/icon/icon";
 import { GVButton, GVProgramAvatar } from "gv-react-components";
 import React from "react";
 import { translate } from "react-i18next";
@@ -79,7 +78,7 @@ const getInvestmentData = model => {
   };
 };
 
-const ProgramDetailsDescription = ({ t }) => (
+const ProgramDetailsDescription = ({ t, model, programAuthorUrl }) => (
   <div className="program-details-description">
     <div className="program-details-description__left">
       <GVProgramAvatar
@@ -91,12 +90,15 @@ const ProgramDetailsDescription = ({ t }) => (
     </div>
     <div className="program-details-description__main">
       <h1 className="program-details-description__heading">{model.title}</h1>
-      <GVButton
-        variant="text"
-        className="program-details-description__author-btn"
-      >
-        {model.manager.username}
-      </GVButton>
+      <Link to={programAuthorUrl}>
+        <GVButton
+          variant="text"
+          className="program-details-description__author-btn"
+        >
+          {model.manager.username}
+        </GVButton>
+      </Link>
+
       <div className="program-details-description__info">
         <h2 className="program-details-description__subheading">
           {t("program-details-page.description.strategy")}
@@ -125,9 +127,13 @@ const ProgramDetailsDescription = ({ t }) => (
           </div>
         </div>
         <GVButton>{t("program-details-page.description.invest")}</GVButton>
-        <ReinvestWidget onClick={() => {}} isActive={true}>
+        <span
+          className="program-details-description__reinvest"
+          onClick={() => {}}
+          isActive={true}
+        >
           {t("program-details-page.description.reinvest")}
-        </ReinvestWidget>
+        </span>
       </div>
       <ProgramDetailsInvestment
         className={"program-details-description__your-investment"}
@@ -140,7 +146,8 @@ const ProgramDetailsDescription = ({ t }) => (
         {t("program-details-page.description.addToFavorites")}
       </GVButton>
       <GVButton variant="text" color="secondary">
-        {t("program-details-page.description.notifications")} <RingIcon />
+        {t("program-details-page.description.notifications")}{" "}
+        <RingIcon className="program-details-description__notification-icon" />
       </GVButton>
     </div>
   </div>

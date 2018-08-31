@@ -8,8 +8,23 @@
   &__left {
   }
 
+  &__right {
+    width: 150px;
+
+    & .gv-btn--text {
+      padding: 0;
+      margin-bottom: 26px;
+    }
+  }
+
+  &__notification-icon {
+    margin-left: 24px;
+    opacity: 0.3;
+  }
+
   &__main {
-    flex-grow: 8.1;
+    position: relative;
+    left: -65px;
   }
 
   &__heading {
@@ -30,12 +45,17 @@
 
   &__subheading {
     margin-bottom: 36px;
+    font-size: 17px;
   }
 
   &__text {
     font-size: 14px;
     line-height: 28px;
     letter-spacing: 0.2px;
+  }
+
+  &__reinvest {
+    margin-left: 45px;
   }
 
   &__short-statistic {
@@ -63,5 +83,17 @@
     margin-bottom: 100px;
     position: relative;
     right: 26px;
+  }
+}
+
+.program-details-navigation {
+  margin: 25px 0 40px;
+
+  &__back-arrow {
+    margin-right: 13px;
+  }
+
+  & .gv-btn--text {
+    padding: 0;
   }
 }
