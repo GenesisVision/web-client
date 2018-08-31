@@ -1,3 +1,8 @@
+import {
+  DateRangeFilterTypes,
+  composeRequestValue,
+  validateDateRange
+} from "../filtering/components/date-range-filter/date-range-filter.helpers";
 import { FilterType } from "../filtering/filtering.constants";
 
 export const LEVEL_FILTER_NAME = "level";
@@ -7,8 +12,6 @@ export const SORTING_FILTER_NAME = "sorting";
 
 export const SERVER_LEVEL_MIN_FILTER_NAME = "levelMin";
 export const SERVER_LEVEL_MAX_FILTER_NAME = "levelMax";
-export const SERVER_DATE_RANGE_MIN_FILTER_NAME = "dateRangeStart";
-export const SERVER_DATE_RANGE_MAX_FILTER_NAME = "dateRangeEnd";
 
 export const LEVEL_MIN_FILTER_VALUE = 1;
 export const LEVEL_MAX_FILTER_VALUE = 7;
@@ -44,11 +47,18 @@ export const PROGRAMS_DEFAULT_FILTERS = [
     type: FilterType.general,
     value: CURRENCY_FILTER_VALUE,
     validate: value => CURRENCY_FILTER_VALUES.includes(value)
-  } /*,
+  },
   {
     name: DATE_RANGE_FILTER_NAME,
-    value: [undefined, undefined]
-  }*/
+    type: FilterType.custom,
+    validate: validateDateRange,
+    composeRequestValue: composeRequestValue,
+    value: {
+      type: DateRangeFilterTypes.all,
+      dateStart: undefined,
+      dateEnd: undefined
+    }
+  }
 ];
 
 export const PROGRAMS_COLUMNS = [

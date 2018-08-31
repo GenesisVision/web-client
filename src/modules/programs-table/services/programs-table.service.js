@@ -92,15 +92,23 @@ export const getProgramsFilters = () => (dispatch, getState) => {
     : SORTING_FILTER_VALUE;
 
   const filtering = PROGRAMS_DEFAULT_FILTERS.reduce((accum, cur) => {
-    const { name, type, value, validate = value => true } = cur;
+    const {
+      name,
+      type,
+      value,
+      composeRequestValue,
+      validate = value => true
+    } = cur;
     if (!queryParams[name] || !validate(queryParams[name])) {
       accum[name] = {
         type,
+        composeRequestValue,
         value
       };
     } else {
       accum[name] = {
         type,
+        composeRequestValue,
         value: queryParams[name]
       };
     }
