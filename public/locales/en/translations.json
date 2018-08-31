@@ -61,16 +61,17 @@
     "settings": "Settings",
     "logout": "Logout"
   },
-  "time-left-widget": {
-    "day": "Day left",
-    "day_plural": "Days left",
-    "hour": "Hour left",
-    "hour_plural": "Hours left",
-    "minute": "Minute left",
-    "minute_plural": "Minutes left",
-    "second": "Second left",
-    "second_plural": "Seconds left",
-    "end-less-than-now": "The period is being restarted."
+  "program-period": {
+    "day": "day",
+    "day_plural": "days",
+    "hour": "hour",
+    "hour_plural": "hours",
+    "minute": "minute",
+    "minute_plural": "minutes",
+    "second": "second",
+    "second_plural": "seconds",
+    "end-less-than-now": "The period is being restarted.",
+    "time-left": "Time left"
   },
   "programs-page": {
     "title": "Programs",
@@ -111,14 +112,11 @@
       "successFee": "Success fee",
       "invest": "Invest",
       "reinvest": "Reinvest",
-      "yourInvestment": "Your onvestment",
+      "yourInvestment": "Your investment",
       "invested": "Invested",
       "value": "Value",
       "profit": "Profit",
       "status": "Status",
-      "investment-statuses": {
-        "investing": "Investing"
-      },
       "withdraw": "Withdraw",
       "withdraw-notice-text": "You can withdraw only the invested funds, the profit will be withdrawn to your account at the end of the period automatically"
     }

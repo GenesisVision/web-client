@@ -1,0 +1,67 @@
+@import "styles/_colors.scss";
+
+.program-details-description {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  &__left {
+  }
+
+  &__main {
+    flex-grow: 8.1;
+  }
+
+  &__heading {
+    margin: 0 0 10px 0;
+    font-size: 32px;
+  }
+
+  &__author-btn {
+    padding: 0;
+    font-size: 13px;
+    letter-spacing: 0.19px;
+  }
+
+  &__info {
+    margin-top: 108px;
+    margin-bottom: 60px;
+  }
+
+  &__subheading {
+    margin-bottom: 36px;
+  }
+
+  &__text {
+    font-size: 14px;
+    line-height: 28px;
+    letter-spacing: 0.2px;
+  }
+
+  &__short-statistic {
+    margin: 24px 0 36px;
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+
+    &-item {
+      letter-spacing: 0.44px;
+      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      margin-right: 57px;
+    }
+
+    &-subheading {
+      color: $text-color-dark-grey;
+      font-size: 13px;
+      margin-bottom: 13px;
+    }
+  }
+
+  &__your-investment {
+    margin-bottom: 100px;
+    position: relative;
+    right: 26px;
+  }
+}

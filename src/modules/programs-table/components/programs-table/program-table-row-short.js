@@ -1,3 +1,4 @@
+import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
 import TableCell from "components/table/table-cell";
 import TableRow from "components/table/table-row";
 import { GVProgramAvatar } from "gv-react-components";
@@ -40,7 +41,10 @@ const ProgramTableRowShort = ({
         {program.statistic.tradesCount}
       </TableCell>
       <TableCell className="programs-table__cell--period">
-        {program.period}
+        <ProgramPeriodPie
+          start={program.periodDateStart}
+          end={program.periodDateEnd}
+        />
       </TableCell>
       <TableCell className="programs-table__cell--drawdown">
         <NumberFormat
