@@ -2,6 +2,10 @@
   "app": {
     "title": "Investor Portal: "
   },
+  "buttons": {
+    "apply": "Apply",
+    "cancel": "Cancel"
+  },
   "auth": {
     "text": "A Brief History Of Creation",
     "tabs": {
@@ -292,32 +296,23 @@
     "enter-amount": "Enter {{token}} amount",
     "withdraw-all": "Withdraw all invested tokens"
   },
-  "programs-filtering": {
+  "filters": {
     "level": {
-      "name": "Level",
-      "description": "Select Trader Level",
-      "value-pattern": "{{value.0}} - {{value.1}}"
+      "label": "Level"
     },
-    "profitAvgPercent": {
-      "name": "Average Profit",
-      "description": "Select Average Profit",
-      "value-pattern": "{{value.0}}% - {{value.1}}%"
+    "currency": {
+      "label": "Currency"
     },
-    "profitTotal": {
-      "name": "Total Profit",
-      "description": "Select Total Profit",
-      "value-pattern": "{{value.0}}GVT - {{value.1}}GVT"
-    },
-    "balanceUSD": {
-      "name": "Balance",
-      "description": "Select Balance",
-      "value-pattern": "${{value.0}} - ${{value.1}}"
-    },
-    "hasAvailableInvestment": {
-      "name": "Available To Invest",
-      "description": "Show only the programs you can invest in",
-      "label": "Has Available Investment",
-      "value-pattern": ""
+    "date-range": {
+      "label": "Date range",
+      "all-time": "All time",
+      "last-month": "Last month",
+      "last-week": "Last week",
+      "custom": "Custom",
+      "program-start": "Program start",
+      "start": "Start",
+      "end": "End",
+      "today": "Today"
     }
   }
 }
