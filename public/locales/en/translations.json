@@ -77,6 +77,12 @@
     "end-less-than-now": "The period is being restarted.",
     "time-left": "Time left"
   },
+  "program-statuses": {
+    "Active": "Active",
+    "Investing": "Investing",
+    "Withdrawing": "Withdrawing",
+    "Ended": "Ended"
+  },
   "programs-page": {
     "title": "Programs",
     "tabs": {

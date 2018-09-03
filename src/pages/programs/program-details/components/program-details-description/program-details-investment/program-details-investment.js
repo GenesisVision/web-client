@@ -1,5 +1,6 @@
 import "./program-details-investment.scss";
 
+import ProgramStatus from "components/program-status/program-status";
 import Surface from "components/surface/surface";
 import { GVButton } from "gv-react-components";
 import React from "react";
@@ -42,11 +43,11 @@ const ProgramDetailsInvestment = ({
         <span className="program-details-investment__short-statistic-subheading">
           {t("program-details-page.description.status")}
         </span>
-        <span>{status}</span>
+        <ProgramStatus status={status} />
       </div>
     </div>
     <div className="program-details-investment__footer">
-      <Link to="programWithdrawUrl">
+      <Link to={programWithdrawUrl}>
         <GVButton
           color="secondary"
           variant="outlined"

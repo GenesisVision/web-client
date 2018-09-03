@@ -1,0 +1,21 @@
+@import "styles/_colors.scss";
+
+.program-status {
+  cursor: pointer;
+
+  &__active {
+    color: $text-light-color;
+  }
+
+  &__investing {
+    color: $primary-color;
+  }
+
+  &__withdrawing {
+    color: $level-color-4;
+  }
+
+  &__ended {
+    color: $text-dark-color;
+  }
+}

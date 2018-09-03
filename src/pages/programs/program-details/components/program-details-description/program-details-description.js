@@ -67,15 +67,14 @@ const getInvestmentData = model => {
     investedAmount,
     investedCurrency,
     balanceBase,
-    profitPercent,
-    status
+    profitPercent
   } = model.statistic;
 
   return {
     invested: investedAmount + " " + investedCurrency,
     value: balanceBase.amount + " " + balanceBase.currency,
     profit: profitPercent + " %",
-    status
+    status: model.personalProgramDetails.investmentProgramStatus
   };
 };
 
