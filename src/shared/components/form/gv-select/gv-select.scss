@@ -3,10 +3,10 @@
 $select-input-height: 32px;
 $select-input-border-radius: 0;
 $select-link-hover-color: $main-color;
-$select-arrow-color-hover: $alternate-color;
-$select-option-selected-color: $alternate-color;
+$select-arrow-color-hover: $primary-color;
+$select-option-selected-color: $primary-color;
 $select-option-selected-bg: $background-color;
-$select-option-focused-color: $alternate-color;
+$select-option-focused-color: $primary-color;
 $select-option-focused-bg: white;
 
 @import "node_modules/react-select/scss/default.scss";

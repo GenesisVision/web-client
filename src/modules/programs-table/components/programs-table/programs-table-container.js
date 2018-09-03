@@ -21,17 +21,12 @@ class ProgramsContainer extends Component {
     }
   }
 
-  toggleFavorite = (programId, isFavorite) => () => {
-    console.log(isFavorite);
-  };
-
   render() {
     const { isPending, data, filters, service, isAuthenticated } = this.props;
-    if (!data) return <div>Loading...</div>;
     return (
       <Surface>
         <ProgramsTable
-          data={data}
+          data={data || {}}
           isPending={isPending}
           sorting={{
             value: filters.sorting,

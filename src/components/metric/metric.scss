@@ -34,8 +34,8 @@
   vertical-align: baseline;
   border-radius: 1em;
   color: white;
-  background-color: $alternate-color;
-  box-shadow: 0 5px 15px 0 $box-shadow-primary-color;
+  background-color: $primary-color;
+  box-shadow: 0 5px 15px 0 $positive-background-color;
   @include media-breakpoint-phone() {
     padding: 0.3em 0.4em;
     font-size: 0.55em;
@@ -44,7 +44,7 @@
 }
 
 .metric__description {
-  color: $text-sub-color;
+  color: #28768d;
   font-size: 0.9em;
   line-height: 1;
   text-align: center;

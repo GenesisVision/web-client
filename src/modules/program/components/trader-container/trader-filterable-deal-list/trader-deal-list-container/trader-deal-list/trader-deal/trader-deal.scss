@@ -34,7 +34,7 @@
   cursor: pointer;
   &:hover {
     .expand-control {
-      fill: $alternate-color;
+      fill: $primary-color;
     }
   }
 }
@@ -44,7 +44,7 @@
     transform: rotate(-180deg);
   }
   .expand-control {
-    fill: $alternate-color;
+    fill: $primary-color;
   }
 }
 

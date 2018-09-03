@@ -15,12 +15,10 @@ export const fetchChartCommon = data => {
   };
 };
 
-export const fetchPrograms = data => {
+export const fetchPrograms = (authorization, data) => {
   return {
     type: DASHBOARD_PROGRAMS,
-    payload: 1 /* SwaggerInvestorApi.apiInvestorDashboardGet(
-      data
-    ) */
+    payload: investorApi.v10InvestorProgramsGet(authorization, data)
   };
 };
 
@@ -36,6 +34,6 @@ export const fetchFunds = data => {
 export const fetchPortfolioEvents = data => {
   return {
     type: DASHBOARD_PORTFOLIO_EVENTS,
-    payload: investorApi.v10InvestorDashboardEventsGet(data)
+    payload: investorApi.v10InvestorPortfolioEventsGet(data)
   };
 };

@@ -7,9 +7,6 @@ import validationSchema from "./two-factor-code-form.validators";
 // import { Field, withFormik } from "formik";
 // import { LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE } from "pages/auth/login/login.routes";
 
-
-
-
 const TwoFactorCodeForm = ({ handleSubmit, isSubmitting, error }) => {
   return (
     <div>TODO</div>

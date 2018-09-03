@@ -4,7 +4,7 @@ import React from "react";
 import { translate } from "react-i18next";
 
 import Page from "../../components/page/page";
-import DashboardAssetsContainer from "./components/dashboard-assets/dashboard-assets-container";
+import DashboardAssets from "./components/dashboard-assets/dashboard-assets";
 import DashboardChartContainer from "./components/dashboard-chart/dashboard-chart-container";
 import DashboardPortfolioEventsContainer from "./components/dashboard-portfolio-events/dashboard-portfolio-events-container";
 
@@ -21,7 +21,7 @@ const DashboardPage = ({ t }) => {
           </div>
         </div>
         <div className="dashboard__assets">
-          <DashboardAssetsContainer />
+          <DashboardAssets />
         </div>
       </div>
     </Page>

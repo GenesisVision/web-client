@@ -5,7 +5,7 @@
   padding: 0 18px 0 30px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
 
   &__title {
     margin: 0;
@@ -23,17 +23,12 @@
       left: 0;
       width: 267px;
       height: 120px;
-      background: linear-gradient(transparent, $background-surface-color);
+      background: linear-gradient(transparent, $panel-background-color);
     }
   }
 
   & .portfolio-event:first-child {
     padding-top: 0;
-  }
-
-  &__thumb-vertical {
-    background-color: rgba(255, 255, 255, 0.1);
-    width: 5px !important;
   }
 
   &__see-all {

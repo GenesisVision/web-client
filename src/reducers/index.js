@@ -39,7 +39,7 @@ export default combineReducers({
   profileHeader: profileHeaderReducer,
   profileData: profileReducer,
   walletData: walletReducer,
-  dashboardData: dashboardReducer,
+  dashboard: dashboardReducer,
   programDepositData: programDepositReducer,
   programWithdrawData: programWithdrawReducer,
   popupData: popupReducer,

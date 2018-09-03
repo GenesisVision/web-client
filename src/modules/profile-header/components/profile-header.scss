@@ -4,27 +4,8 @@
   font-size: 13px;
   letter-spacing: 0.2px;
 
-  &__label {
-    height: 32px;
-    min-width: 32px;
-    border-radius: 8px;
-    padding: 0 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-  }
-
-  &__add {
-    border: none;
-    color: rgba(0, 255, 0, 1);
-    background-color: rgba(0, 255, 0, 0.1);
-    cursor: pointer;
-    line-height: 0;
-
-    &:focus {
-      outline: none;
-    }
+  .chip {
+    margin-left: 15px;
   }
 }
 
@@ -32,14 +13,4 @@
   display: flex;
   align-items: center;
   margin: 0 25px;
-
-  &__count {
-    background-color: rgba(255, 255, 255, 0.1);
-    margin-left: 10px;
-  }
-
-  &--has &__count {
-    color: red;
-    background-color: rgba(255, 0, 0, 0.1);
-  }
 }

@@ -8,14 +8,14 @@
   line-height: 1.4;
 
   &:hover {
-    text-shadow: 0px 0px 2px lighten($text-color-light, 5%);
+    text-shadow: 0px 0px 2px lighten($text-light-color, 5%);
   }
 
   &:active {
-    color: darken($alternate-color, 5%);
+    color: darken($primary-color, 5%);
   }
 
   &--active {
-    color: $alternate-color;
+    color: $primary-color;
   }
 }
