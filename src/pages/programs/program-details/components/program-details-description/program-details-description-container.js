@@ -1,10 +1,13 @@
+import { toggleReinvesting } from "modules/program-reinvesting/services/program-reinvesting.service";
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { goBack } from "react-router-redux";
 import { bindActionCreators } from "redux";
+import getParams from "utils/get-params";
 
 import {
   PROGRAM_AUTHOR_ROUTE,
+  PROGRAM_DETAILS_ROUTE,
   PROGRAM_INVEST_ROUTE
 } from "../../../programs.routes";
 import * as programDetailsService from "../../services/program-details.service";
@@ -17,9 +20,15 @@ class ProgramDetailsDescriptionContainer extends Component {
     service.fetchProgramDetails();
   }
 
+  toggleReinvesting = () => {
+    const { programDetails, programId, service } = this.props;
+
+    service.toggleReinvesting(programDetails, programId);
+  };
+
   render() {
-    const { programDetails, goBack, toggleReinvest } = this.props;
-    console.dir(programDetails);
+    const { programDetails, goBack } = this.props;
+    const { toggleReinvesting } = this;
 
     // if (!programDetails) return null;
 
@@ -30,7 +39,7 @@ class ProgramDetailsDescriptionContainer extends Component {
           model={programDetails}
           programAuthorUrl={PROGRAM_AUTHOR_ROUTE}
           programInvestUrl={PROGRAM_INVEST_ROUTE}
-          toggleReinvest={toggleReinvest}
+          toggleReinvesting={toggleReinvesting}
         />
       </Fragment>
     );
@@ -39,12 +48,16 @@ class ProgramDetailsDescriptionContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    programDetails: state.programDetails.programDetailsDescription.data
+    programDetails: state.programDetails.programDetailsDescription.data,
+    programId: getParams(state.routing.location.pathname, PROGRAM_DETAILS_ROUTE)
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  service: bindActionCreators(programDetailsService, dispatch),
+  service: bindActionCreators(
+    { ...programDetailsService, toggleReinvesting },
+    dispatch
+  ),
   goBack: () => dispatch(goBack())
 });
 

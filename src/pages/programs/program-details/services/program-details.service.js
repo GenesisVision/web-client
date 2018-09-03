@@ -15,5 +15,3 @@ export const fetchProgramDetails = () => (dispatch, getState) => {
 
   dispatch(actions.fetchProgramDetails({ programId, opts: { authorization } }));
 };
-
-export const toggleReinvest = () => (dispatch, getState) => {};

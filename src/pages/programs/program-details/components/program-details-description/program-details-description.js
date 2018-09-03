@@ -2,6 +2,7 @@ import "./program-details-description.scss";
 
 import { RingIcon } from "components/icon/icon";
 import { GVButton, GVProgramAvatar } from "gv-react-components";
+import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
 import React from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -81,7 +82,7 @@ const getInvestmentData = model => {
 const ProgramDetailsDescription = ({
   t,
   programAuthorUrl,
-  toggleReinvest,
+  toggleReinvesting,
   programInvestUrl
 }) => (
   <div className="program-details-description">
@@ -134,12 +135,11 @@ const ProgramDetailsDescription = ({
         <Link to={programInvestUrl}> </Link>
         <GVButton>{t("program-details-page.description.invest")}</GVButton>
         {model.personalProgramDetails.isInvested && (
-          <span
+          <ProgramReinvestingWidget
             className="program-details-description__reinvest"
-            onClick={toggleReinvest}
-          >
-            {t("program-details-page.description.reinvest")}
-          </span>
+            toggleReinvesting={toggleReinvesting}
+            isReinvesting={model.isReinvesting}
+          />
         )}
       </div>
       {model.personalProgramDetails.isInvested && (
