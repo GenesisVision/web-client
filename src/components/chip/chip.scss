@@ -1,6 +1,6 @@
 @import "styles/_colors.scss";
 
-.tag {
+.chip {
   height: 32px;
   min-width: 32px;
   border-radius: 8px;
@@ -12,19 +12,18 @@
   font-size: 13px;
   background-color: rgba(255, 255, 255, 0.1);
 
-  &--danger {
-    color: $danger-color;
-    background-color: $danger-background-color;
+  &--negative {
+    color: $negative-color;
+    background-color: $negative-background-color;
   }
 
-  &--success {
-    color: $success-color;
-    background-color: $success-background-color;
+  &--positive {
+    color: $positive-color;
+    background-color: $positive-background-color;
   }
 
-  &--warning {
-    color: $warning-color;
-    background-color: $warning-background-color;
+  &--pointer {
+    cursor: pointer;
   }
 
   &--round {

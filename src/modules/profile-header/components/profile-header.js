@@ -1,9 +1,9 @@
 import "./profile-header.scss";
 
 import classnames from "classnames";
+import Chip from "components/chip/chip";
 import { RingIcon } from "components/icon/icon";
 import ProfileWidget from "components/profile-widget/profile-widget";
-import Tag from "components/tag/tag";
 import WalletWidget from "components/wallet-widget/wallet-widget";
 import PropTypes from "prop-types";
 import React from "react";
@@ -27,16 +27,16 @@ class ProfileHeader extends React.Component {
           investedGvt={investedGvt}
           totalBalanceGvt={totalBalanceGvt}
         />
-        <Tag type="success">+</Tag>
+        <Chip type="positive">+</Chip>
         <div
           className={classnames("notifications-widget", {
             "notifications-widget--has": hasNotifications
           })}
         >
           <RingIcon />
-          <Tag type={hasNotifications ? "danger" : null}>
+          <Chip type={hasNotifications ? "negative" : null}>
             {notificationsAmount}
-          </Tag>
+          </Chip>
         </div>
         <ProfileWidget avatar={avatar} logout={logout} email={email} />
       </div>
