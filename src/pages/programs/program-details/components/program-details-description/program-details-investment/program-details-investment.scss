@@ -26,7 +26,7 @@
     }
 
     &-subheading {
-      color: $text-color-dark-grey;
+      color: $text-dark-color;
       font-size: 13px;
       margin-bottom: 13px;
     }
@@ -46,7 +46,7 @@
   }
 
   &__withdraw-notice {
-    color: $text-color-grey;
+    color: $label-color;
     line-height: 18px;
     font-size: 11px;
     letter-spacing: 0.15px;

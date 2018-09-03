@@ -133,8 +133,10 @@ const ProgramDetailsDescription = ({
             <span>{model.successFee} %</span>
           </div>
         </div>
-        <Link to={programInvestUrl}> </Link>
-        <GVButton>{t("program-details-page.description.invest")}</GVButton>
+        <Link to={programInvestUrl}>
+          <GVButton>{t("program-details-page.description.invest")}</GVButton>
+        </Link>
+
         {model.personalProgramDetails.isInvested && (
           <ProgramReinvestingWidget
             className="program-details-description__reinvest"

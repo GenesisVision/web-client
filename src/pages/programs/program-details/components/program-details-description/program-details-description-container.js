@@ -5,11 +5,7 @@ import { goBack } from "react-router-redux";
 import { bindActionCreators } from "redux";
 import getParams from "utils/get-params";
 
-import {
-  PROGRAM_AUTHOR_ROUTE,
-  PROGRAM_DETAILS_ROUTE,
-  PROGRAM_INVEST_ROUTE
-} from "../../../programs.routes";
+import { PROGRAM_DETAILS_ROUTE } from "../../../programs.routes";
 import * as programDetailsService from "../../services/program-details.service";
 import ProgramDetailsDescription from "./program-details-description";
 import ProgramDetailsNavigation from "./program-details-navigation/program-details-navigation";
@@ -37,8 +33,8 @@ class ProgramDetailsDescriptionContainer extends Component {
         <ProgramDetailsNavigation goBack={goBack} />
         <ProgramDetailsDescription
           model={programDetails}
-          programAuthorUrl={PROGRAM_AUTHOR_ROUTE}
-          programInvestUrl={PROGRAM_INVEST_ROUTE}
+          programAuthorUrl={""}
+          programInvestUrl={""}
           programWithdrawUrl={""}
           toggleReinvesting={toggleReinvesting}
         />
