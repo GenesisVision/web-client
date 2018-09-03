@@ -30,22 +30,22 @@
 }
 
 .alert-message--success {
-  background-color: $alternate-color;
-  border-color: $alternate-color;
-  box-shadow: 0 5px 15px 0 $box-shadow-primary-color;
+  background-color: $primary-color;
+  border-color: $primary-color;
+  box-shadow: 0 5px 15px 0 $positive-background-color;
 }
 
 .alert-message--danger {
-  background-color: $danger-color;
-  border-color: $danger-color;
-  box-shadow: 0 5px 15px 0 $box-shadow-danger-color;
+  background-color: $negative-color;
+  border-color: $negative-color;
+  box-shadow: 0 5px 15px 0 $negative-background-color;
 }
 
 .alert-message--warning {
   color: $text-color;
-  background-color: $warning-color;
-  border-color: $warning-color;
-  box-shadow: 0 5px 15px 0 $box-shadow-warning-color;
+  background-color: $text-color;
+  border-color: $text-color;
+  box-shadow: 0 5px 15px 0 $secondary-color;
 }
 
 .alert-message__clear-all {

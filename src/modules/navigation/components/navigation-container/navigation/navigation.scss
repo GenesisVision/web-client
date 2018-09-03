@@ -46,7 +46,7 @@
     cursor: pointer;
 
     &:hover {
-      color: $alternate-color;
+      color: $primary-color;
     }
 
     .fas {
@@ -55,14 +55,14 @@
 
     &--active {
       .fas {
-        color: $alternate-color;
+        color: $primary-color;
       }
       .traders {
-        stroke: $alternate-color;
+        stroke: $primary-color;
       }
       .wallet,
       .dashboard {
-        fill: $alternate-color;
+        fill: $primary-color;
       }
     }
   }
