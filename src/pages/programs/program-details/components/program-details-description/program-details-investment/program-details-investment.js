@@ -12,7 +12,8 @@ const ProgramDetailsInvestment = ({
   invested,
   value,
   profit,
-  status
+  status,
+  programWithdrawUrl
 }) => (
   <Surface className={"program-details-investment " + className}>
     <h2 className="program-details-investment__heading">
@@ -45,13 +46,15 @@ const ProgramDetailsInvestment = ({
       </div>
     </div>
     <div className="program-details-investment__footer">
-      <GVButton
-        color="secondary"
-        variant="outlined"
-        className="program-details-investment__withdraw"
-      >
-        {t("program-details-page.description.withdraw")}
-      </GVButton>
+      <Link to="programWithdrawUrl">
+        <GVButton
+          color="secondary"
+          variant="outlined"
+          className="program-details-investment__withdraw"
+        >
+          {t("program-details-page.description.withdraw")}
+        </GVButton>
+      </Link>
       <p className="program-details-investment__withdraw-notice">
         {t("program-details-page.description.withdraw-notice-text")}
       </p>

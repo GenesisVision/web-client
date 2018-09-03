@@ -83,7 +83,8 @@ const ProgramDetailsDescription = ({
   t,
   programAuthorUrl,
   toggleReinvesting,
-  programInvestUrl
+  programInvestUrl,
+  programWithdrawUrl
 }) => (
   <div className="program-details-description">
     <div className="program-details-description__left">
@@ -146,6 +147,7 @@ const ProgramDetailsDescription = ({
         <ProgramDetailsInvestment
           className={"program-details-description__your-investment"}
           {...getInvestmentData(model)}
+          programWithdrawUrl={programWithdrawUrl}
         />
       )}
     </div>

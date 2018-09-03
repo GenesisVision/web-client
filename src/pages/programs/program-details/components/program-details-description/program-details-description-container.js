@@ -39,6 +39,7 @@ class ProgramDetailsDescriptionContainer extends Component {
           model={programDetails}
           programAuthorUrl={PROGRAM_AUTHOR_ROUTE}
           programInvestUrl={PROGRAM_INVEST_ROUTE}
+          programWithdrawUrl={""}
           toggleReinvesting={toggleReinvesting}
         />
       </Fragment>
