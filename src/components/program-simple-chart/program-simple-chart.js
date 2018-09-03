@@ -1,52 +1,49 @@
 import "./program-simple-chart.scss";
 
-import moment from "moment";
 import React from "react";
-import {
-  Line,
-  LineChart,
-  ReferenceLine,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis
-} from "recharts";
+import { Area, AreaChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
+import { NEGATIVE_COLOR, POSITIVE_COLOR } from "styles/colors";
 
-const ProgramSimpleChart = ({ data }) => {
+const ProgramSimpleChart = ({ data, isPositive }) => {
   if (data.length === 0) return null;
-  const tooltipWrapperStyle = { opacity: 0.9 };
+  const color = isPositive ? POSITIVE_COLOR : NEGATIVE_COLOR;
+  const gradient = `url(#${
+    isPositive ? "positiveGradient" : "negativeGradient"
+  }`;
   const programChartData = data.map(x => ({
     date: x.date.getTime(),
     equity: x.value
   }));
   return (
-    <div className="pi-chart">
+    <div className="program-simple-chart">
       <ResponsiveContainer>
-        <LineChart data={programChartData}>
-          <ReferenceLine y={0} strokeDasharray="5 5" />
+        <AreaChart data={programChartData}>
+          <defs>
+            <linearGradient id="positiveGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor={POSITIVE_COLOR} stopOpacity={0.05} />
+              <stop offset="95%" stopColor={POSITIVE_COLOR} stopOpacity={0} />
+            </linearGradient>
+            <linearGradient id="negativeGradient" x1="0" y1="1" x2="0" y2="0">
+              <stop offset="5%" stopColor={NEGATIVE_COLOR} stopOpacity={0.05} />
+              <stop offset="95%" stopColor={NEGATIVE_COLOR} stopOpacity={0} />
+            </linearGradient>
+          </defs>
           <XAxis
             dataKey="date"
             domain={["dataMin", "dataMax"]}
             type="number"
             hide
-            tickFormatter={date => moment(date).format("MM/DD")}
           />
           <YAxis dataKey="equity" axisLine={false} hide />
-          <Tooltip
-            wrapperStyle={tooltipWrapperStyle}
-            formatter={value => `${value}%`}
-            labelFormatter={date => moment(date).format("MMMM Do HH:mm")}
-          />
-          <Line
+          <Area
             type="monotone"
             dataKey="equity"
-            strokeWidth={3}
-            dot={false}
-            activeDot={{ stroke: "#184f61" }}
+            stroke={color}
+            fillOpacity={1}
+            fill={gradient}
             isAnimationActive={false}
-            stroke="#03bdaf"
           />
-        </LineChart>
+        </AreaChart>
       </ResponsiveContainer>
     </div>
   );

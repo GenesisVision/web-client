@@ -1,8 +1,80 @@
 {
   "app": {
-    "header": "Manager Portal"
+    "title": "Investor Portal: "
+  },
+  "auth": {
+    "text": "A Brief History Of Creation",
+    "tabs": {
+      "investor": "Investor",
+      "manager": "Manager"
+    },
+    "signup": {
+      "footer-text": "Have an account already?",
+      "title": "Sign up",
+      "email-field-text": "Email address",
+      "password-field-text": "Password",
+      "password-confirm-field-text": "Confirm password",
+      "email-confirm-title": "Confirm your Email"
+    },
+    "login": {
+      "footer-text": "Don't have an account?",
+      "title": "Login",
+      "forgot": "Forgot?",
+      "confirm-button-text": "Login",
+      "placeholder": {
+        "email": "Email address",
+        "password": "Password"
+      }
+    },
+    "password-restore": {
+      "title": "Restore password",
+      "forgot-password": {
+        "text": "Just enter the email address you used to create your account.",
+        "email-field-text": "Email address",
+        "confirm-button-text": "Restore",
+        "back-button-text": "Back"
+      },
+      "new-password": {
+        "text": "Just enter new password.",
+        "password-field-text": "Password",
+        "password-confirm-field-text": "Confirm password",
+        "confirm-button-text": "Submit",
+        "back-button-text": "Back"
+      }
+    },
+    "email-pending": {
+      "text-section-1": "Please check your inbox for a confirmation email. Click the link in the email to create new password.",
+      "text-section-2": "After you confirm click Continue.",
+      "email-resend-button-text": "Resend email",
+      "confirm-button-text": "Continue",
+      "back-button-text": "Back"
+    }
+  },
+  "wallet-widget": {
+    "total-balance": "Total balance",
+    "invested-value": "Invested value",
+    "available": "Available",
+    "details": "Details"
+  },
+  "profile-widget": {
+    "personal-details": "Personal details",
+    "settings": "Settings",
+    "logout": "Logout"
+  },
+  "program-period": {
+    "day": "day",
+    "day_plural": "days",
+    "hour": "hour",
+    "hour_plural": "hours",
+    "minute": "minute",
+    "minute_plural": "minutes",
+    "second": "second",
+    "second_plural": "seconds",
+    "end-less-than-now": "The period is being restarted.",
+    "time-left": "Time left"
   },
   "programs-page": {
+    "title": "Programs",
     "tabs": {
       "explore": "Explore",
       "favorites": "Favorites"
@@ -20,50 +92,47 @@
       "chart": "Chart"
     }
   },
-  "login-page": {
-    "text": "A Brief History Of Creation",
-    "tabs": {
-      "investor": "Investor",
-      "manager": "Manager"
-    },
-    "signup": {
-      "text": "Don’t have an account?",
-      "title": "Sign up"
-    },
-    "login": {
-      "text": "Do you have account?",
-      "title": "Login"
+  "dashboard-page": {
+    "title": "Dashboard",
+    "programs-header": {
+      "title": "Name",
+      "share": "Share",
+      "currency": "Curr.",
+      "period": "Period",
+      "value": "value",
+      "profit": "Profit",
+      "chart": "Chart",
+      "status": "Status"
     }
   },
-  "login-form": {
-    "placeholder": {
-      "email": "Email address",
-      "password": "Password"
+  "program-details-page": {
+    "title": "Program detail",
+    "back": "Back",
+    "previous-path": "/programs",
+    "tabs": {
+      "overview": "Overview",
+      "investedInfo": "Invested Info"
     },
-    "forgot": "Forgot?",
-    "login": "Login"
-  },
-  "wallet-widget": {
-    "total-balance": "Total balance",
-    "invested-value": "Invested value",
-    "available": "Available",
-    "details": "Details"
-  },
-  "profile-widget": {
-    "personal-details": "Personal details",
-    "settings": "Settings",
-    "logout": "Logout"
-  },
-  "time-left-widget": {
-    "day": "Day left",
-    "day_plural": "Days left",
-    "hour": "Hour left",
-    "hour_plural": "Hours left",
-    "minute": "Minute left",
-    "minute_plural": "Minutes left",
-    "second": "Second left",
-    "second_plural": "Seconds left",
-    "end-less-than-now": "The period is being restarted."
+    "description": {
+      "strategy": "Strategy",
+      "addToFavorites": "Add to favorites",
+      "notifications": "Notifications",
+      "avToInvest": "Av. to invest",
+      "entryFee": "Entry fee",
+      "successFee": "Success fee",
+      "invest": "Invest",
+      "reinvest": "Reinvest",
+      "yourInvestment": "Your onvestment",
+      "invested": "Invested",
+      "value": "Value",
+      "profit": "Profit",
+      "status": "Status",
+      "investment-statuses": {
+        "investing": "Investing"
+      },
+      "withdraw": "Withdraw",
+      "withdraw-notice-text": "You can withdraw only the invested funds, the profit will be withdrawn to your account at the end of the period automatically"
+    }
   },
   "program-actions": {
     "invest": "Invest",
@@ -202,7 +271,11 @@
   },
   "dashboard": {
     "portfolio": "Portfolio",
-    "favorite-programs": "Favorite programs"
+    "favorite-programs": "Favorite programs",
+    "portfolio-events": {
+      "title": "Portfolio Events",
+      "see-all-button": "See All"
+    }
   },
   "program-deposit": {
     "header": "Buy Tokens",

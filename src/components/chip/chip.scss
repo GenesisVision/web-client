@@ -1,0 +1,32 @@
+@import "styles/_colors.scss";
+
+.chip {
+  height: 32px;
+  min-width: 32px;
+  border-radius: 8px;
+  padding: 0 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  font-size: 13px;
+  background-color: $secondaryColor;
+
+  &--negative {
+    color: $negative-color;
+    background-color: $negative-background-color;
+  }
+
+  &--positive {
+    color: $positive-color;
+    background-color: $positive-background-color;
+  }
+
+  &--pointer {
+    cursor: pointer;
+  }
+
+  &--round {
+    border-radius: 100%;
+  }
+}

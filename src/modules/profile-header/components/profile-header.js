@@ -1,6 +1,7 @@
 import "./profile-header.scss";
 
 import classnames from "classnames";
+import Chip from "components/chip/chip";
 import { RingIcon } from "components/icon/icon";
 import ProfileWidget from "components/profile-widget/profile-widget";
 import Sidebar from "components/sidebar/sidebar";
@@ -36,7 +37,7 @@ class ProfileHeader extends React.Component {
           investedGvt={investedGvt}
           totalBalanceGvt={totalBalanceGvt}
         />
-        <button className="profile-header__add profile-header__label">+</button>
+        <Chip type="positive">+</Chip>
         <div
           onClick={this.openSidebar}
           className={classnames("notifications-widget", {
@@ -44,9 +45,9 @@ class ProfileHeader extends React.Component {
           })}
         >
           <RingIcon />
-          <span className="notifications-widget__count profile-header__label">
+          <Chip type={hasNotifications ? "negative" : null}>
             {notificationsAmount}
-          </span>
+          </Chip>
         </div>
         <ProfileWidget avatar={avatar} logout={logout} email={email} />
         <Sidebar open={this.state.isOpenSidebar} onClose={this.closeSidebar} />
