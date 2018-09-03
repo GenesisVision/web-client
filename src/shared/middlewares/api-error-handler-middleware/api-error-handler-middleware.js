@@ -1,3 +1,5 @@
+import authService from "services/auth-service";
+
 import { alertMessageActions } from "../../modules/alert-message/actions/alert-message-actions";
 
 const REJECTED_SUFFIX = "FAILURE";
@@ -15,6 +17,9 @@ const apiErrorHandlerMiddleware = (
     ) {
       action.payload = action.payload.response.body.errors;
     } else {
+      // if (action.payload.status === 401) {
+      //   authService.removeToken();
+      // }
       const error = "Server Error. Please contact administrator.";
       const defaultError = [{ error, code: null }];
 

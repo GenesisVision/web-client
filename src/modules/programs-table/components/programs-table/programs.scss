@@ -1,0 +1,106 @@
+.programs-table {
+  &__cell {
+    &--header {
+      cursor: default;
+      opacity: 0.3;
+    }
+  }
+}
+
+.programs-table__cell {
+  &--title {
+    width: 22%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  &--balance {
+    width: 10%;
+  }
+  &--currency {
+    width: 5%;
+  }
+  &--investors {
+    width: 5%;
+  }
+  &--available-to-invest {
+    width: 6%;
+  }
+  &--trades {
+    width: 5%;
+  }
+  &--period {
+    width: 8%;
+  }
+  &--drawdown {
+    width: 5%;
+  }
+  &--profit {
+    width: 5%;
+  }
+  &--chart {
+    width: 15%;
+  }
+  &--favorite {
+    width: auto;
+    min-width: 30px;
+  }
+}
+
+.program-detailed {
+  width: 100%;
+  display: flex;
+  position: relative;
+  margin: 0 -2rem;
+  padding: 2rem;
+  background-color: #212c34;
+
+  &__info {
+    flex: 1;
+    padding-right: 1.5rem;
+  }
+
+  &__statistic {
+    flex: 3;
+    padding-left: 1.5rem;
+  }
+
+  &__avatar {
+    display: flex;
+  }
+
+  &__title {
+    font-size: 16px;
+    letter-spacing: 0.2px;
+  }
+
+  &__manager {
+    font-size: 13px;
+    letter-spacing: 0.2px;
+    color: #15bbaf;
+  }
+
+  &__strategy {
+    opacity: 0.9;
+    font-size: 13px;
+    line-height: 1.85;
+    letter-spacing: 0.4px;
+    color: #e8eff3;
+  }
+
+  &__chart {
+    width: 856px;
+    height: 200px;
+    background: black;
+  }
+
+  &__statistic-data {
+    display: flex;
+  }
+
+  &__collapse {
+    cursor: pointer;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+}

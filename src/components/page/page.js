@@ -1,19 +1,22 @@
-import * as classnames from "classnames";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { Fragment } from "react";
 import DocumentTitle from "react-document-title";
-const Page = ({ className, children, title }) => {
+import { translate } from "react-i18next";
+
+const Page = ({ t, title, children }) => {
   return (
-    <DocumentTitle title={title}>
-      <div className={classnames("page", className)}>{children}</div>
+    <DocumentTitle title={t("app.title") + title}>
+      <Fragment>{children}</Fragment>
     </DocumentTitle>
   );
 };
 
 Page.propTypes = {
-  className: PropTypes.string,
-  children: PropTypes.node,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]).isRequired,
   title: PropTypes.string.isRequired
 };
 
-export default Page;
+export default translate()(Page);

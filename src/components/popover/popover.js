@@ -1,9 +1,10 @@
 import "./popover.scss";
 
 import classnames from "classnames";
-import Portal from "components/portal/portal";
+import Modal from "components/modal/modal";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
+import * as ReactDOM from "react-dom";
 import EventListener from "react-event-listener";
 
 const getAnchorEl = el => {
@@ -11,6 +12,10 @@ const getAnchorEl = el => {
 };
 
 class Popover extends Component {
+  state = {
+    windowWidth: undefined
+  };
+
   static getDerivedStateFromProps() {
     return {
       windowWidth: window.innerWidth
@@ -58,37 +63,29 @@ class Popover extends Component {
     this.setState({ windowWidth: window.innerWidth });
   };
 
-  handleBackdropClick = event => {
-    this.handleClose(event);
-  };
-
-  handleClose = event => {
-    if (this.props.onClose) {
-      this.props.onClose(event);
-    }
-  };
-
   render() {
+    const {
+      anchorEl,
+      horizontal,
+      vertical,
+      noPadding,
+      children,
+      className,
+      ...props
+    } = this.props;
     const position = this.getPosition();
     return (
-      <Portal open={Boolean(this.props.anchorEl)}>
+      <Modal open={Boolean(anchorEl)} transparentBackdrop {...props}>
+        <EventListener target="window" onResize={this.handleWindowResize} />
         <div
-          className={classnames("popover", {
-            "popover--fixed": !this.props.disableBackdrop
+          className={classnames("popover", className, {
+            "popover--no-padding": noPadding
           })}
+          style={position}
         >
-          <EventListener target="window" onResize={this.handleWindowResize} />
-          {!this.props.disableBackdrop && (
-            <div
-              className="popover__backdrop"
-              onClick={this.handleBackdropClick}
-            />
-          )}
-          <div className="popover__content" style={position}>
-            {this.props.children}
-          </div>
+          {children}
         </div>
-      </Portal>
+      </Modal>
     );
   }
 }
@@ -98,7 +95,9 @@ Popover.propTypes = {
   horizontal: PropTypes.oneOf(["left", "right"]),
   vertical: PropTypes.oneOf(["top", "bottom"]),
   anchorEl: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-  disableBackdrop: PropTypes.bool
+  noPadding: PropTypes.bool,
+  disabledBackdrop: PropTypes.bool,
+  className: PropTypes.string
 };
 
 Popover.defaultProps = {

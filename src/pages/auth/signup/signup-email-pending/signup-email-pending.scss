@@ -1,0 +1,20 @@
+@import "styles/_colors.scss";
+
+.signup-email-pending {
+  &__title {
+    width: 230px;
+    margin-bottom: 50px;
+    margin-top: 0;
+  }
+
+  &__text {
+    color: $text-color-grey;
+    width: 290px;
+    line-height: 24px;
+    margin-bottom: 30px;
+  }
+
+  &__navigation {
+    margin-top: 125px;
+  }
+}

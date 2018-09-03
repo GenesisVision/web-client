@@ -1,26 +1,31 @@
 import "./dashboard.scss";
 
-import DashboardAssetsContainer from "modules/dashboard/components/dashboard-assets/dashboard-assets-container";
-import DashboardChartContainer from "modules/dashboard/components/dashboard-chart/dashboard-chart-container";
-import DashboardPortfolioEventsContainer from "modules/dashboard/components/dashboard-portfolio-events/dashboard-portfolio-events-container";
 import React from "react";
+import { translate } from "react-i18next";
 
-const DashboardPage = () => {
+import Page from "../../components/page/page";
+import DashboardAssets from "./components/dashboard-assets/dashboard-assets";
+import DashboardChartContainer from "./components/dashboard-chart/dashboard-chart-container";
+import DashboardPortfolioEventsContainer from "./components/dashboard-portfolio-events/dashboard-portfolio-events-container";
+
+const DashboardPage = ({ t }) => {
   return (
-    <div className="dashboard">
-      <div className="dashboard__row">
-        <div className="dashboard__chart">
-          <DashboardChartContainer />
+    <Page title={t("dashboard-page.title")}>
+      <div className="dashboard">
+        <div className="dashboard__row">
+          <div className="dashboard__chart">
+            <DashboardChartContainer />
+          </div>
+          <div className="dashboard__portfolio-events-aside">
+            <DashboardPortfolioEventsContainer />
+          </div>
         </div>
-        <div className="dashboard__portfolio-events">
-          <DashboardPortfolioEventsContainer />
+        <div className="dashboard__assets">
+          <DashboardAssets />
         </div>
       </div>
-      <div className="dashboard__assets">
-        <DashboardAssetsContainer />
-      </div>
-    </div>
+    </Page>
   );
 };
 
-export default DashboardPage;
+export default translate()(DashboardPage);

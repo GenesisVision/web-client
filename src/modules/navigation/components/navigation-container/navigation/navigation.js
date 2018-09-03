@@ -4,7 +4,7 @@ import classnames from "classnames";
 import { DASHBOARD_ROUTE } from "modules/dashboard/dashboard.constants";
 import { PROGRAMS_ROUTE } from "modules/programs/programs.constants";
 import { WALLET_ROUTE } from "modules/wallet/wallet.constants";
-import { LOGIN_ROUTE } from "pages/login/login.routes";
+import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 
