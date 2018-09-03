@@ -4,7 +4,7 @@ import getParams from "utils/get-params";
 
 import * as actions from "../actions/program-details-actions";
 
-export const getProgramDetails = () => (dispatch, getState) => {
+export const fetchProgramDetails = () => (dispatch, getState) => {
   const authorization = authService.getAuthArg();
   const { routing } = getState();
 
@@ -15,3 +15,5 @@ export const getProgramDetails = () => (dispatch, getState) => {
 
   dispatch(actions.fetchProgramDetails({ programId, opts: { authorization } }));
 };
+
+export const toggleReinvest = () => (dispatch, getState) => {};

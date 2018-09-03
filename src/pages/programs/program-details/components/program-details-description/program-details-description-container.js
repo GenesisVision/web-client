@@ -3,7 +3,10 @@ import { connect } from "react-redux";
 import { goBack } from "react-router-redux";
 import { bindActionCreators } from "redux";
 
-import { PROGRAM_AUTHOR_ROUTE } from "../../../programs.routes";
+import {
+  PROGRAM_AUTHOR_ROUTE,
+  PROGRAM_INVEST_ROUTE
+} from "../../../programs.routes";
 import * as programDetailsService from "../../services/program-details.service";
 import ProgramDetailsDescription from "./program-details-description";
 import ProgramDetailsNavigation from "./program-details-navigation/program-details-navigation";
@@ -11,14 +14,14 @@ import ProgramDetailsNavigation from "./program-details-navigation/program-detai
 class ProgramDetailsDescriptionContainer extends Component {
   componentDidMount() {
     const { service } = this.props;
-    service.getProgramDetails();
+    service.fetchProgramDetails();
   }
 
   render() {
-    const { programDetails, goBack } = this.props;
+    const { programDetails, goBack, toggleReinvest } = this.props;
     console.dir(programDetails);
 
-    if (!programDetails) return null;
+    // if (!programDetails) return null;
 
     return (
       <Fragment>
@@ -26,6 +29,8 @@ class ProgramDetailsDescriptionContainer extends Component {
         <ProgramDetailsDescription
           model={programDetails}
           programAuthorUrl={PROGRAM_AUTHOR_ROUTE}
+          programInvestUrl={PROGRAM_INVEST_ROUTE}
+          toggleReinvest={toggleReinvest}
         />
       </Fragment>
     );
@@ -33,9 +38,8 @@ class ProgramDetailsDescriptionContainer extends Component {
 }
 
 const mapStateToProps = state => {
-  debugger;
   return {
-    programDetails: state.programDetails.ProgramDetailsDescription.data
+    programDetails: state.programDetails.programDetailsDescription.data
   };
 };
 

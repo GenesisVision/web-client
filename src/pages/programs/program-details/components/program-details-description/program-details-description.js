@@ -78,7 +78,12 @@ const getInvestmentData = model => {
   };
 };
 
-const ProgramDetailsDescription = ({ t, model, programAuthorUrl }) => (
+const ProgramDetailsDescription = ({
+  t,
+  programAuthorUrl,
+  toggleReinvest,
+  programInvestUrl
+}) => (
   <div className="program-details-description">
     <div className="program-details-description__left">
       <GVProgramAvatar
@@ -126,19 +131,23 @@ const ProgramDetailsDescription = ({ t, model, programAuthorUrl }) => (
             <span>{model.successFee} %</span>
           </div>
         </div>
+        <Link to={programInvestUrl}> </Link>
         <GVButton>{t("program-details-page.description.invest")}</GVButton>
-        <span
-          className="program-details-description__reinvest"
-          onClick={() => {}}
-          isActive={true}
-        >
-          {t("program-details-page.description.reinvest")}
-        </span>
+        {model.personalProgramDetails.isInvested && (
+          <span
+            className="program-details-description__reinvest"
+            onClick={toggleReinvest}
+          >
+            {t("program-details-page.description.reinvest")}
+          </span>
+        )}
       </div>
-      <ProgramDetailsInvestment
-        className={"program-details-description__your-investment"}
-        {...getInvestmentData(model)}
-      />
+      {model.personalProgramDetails.isInvested && (
+        <ProgramDetailsInvestment
+          className={"program-details-description__your-investment"}
+          {...getInvestmentData(model)}
+        />
+      )}
     </div>
 
     <div className="program-details-description__right">

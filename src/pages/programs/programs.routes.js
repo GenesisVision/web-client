@@ -14,6 +14,7 @@ export const PROGRAMS_EXPLORE_TAB_NAME = "explore";
 export const PROGRAMS_ROUTE = "/programs";
 export const PROGRAM_DETAILS_ROUTE = `${PROGRAMS_ROUTE}/:programId`;
 export const PROGRAM_DETAILS_ROUTE_REGEX = `${PROGRAMS_ROUTE}/:programId${GUID_REGEXP}`;
+export const PROGRAM_INVEST_ROUTE = `${PROGRAMS_ROUTE}/:programId${GUID_REGEXP}/invest`;
 export const PROGRAM_AUTHOR_ROUTE = `${PROGRAMS_ROUTE}/author/:programAuthorId`;
 export const PROGRAMS_FACET_ROUTE = `${PROGRAMS_ROUTE}/facet/:facetId`;
 export const PROGRAMS_FACET_ROUTE_REGEX = `${PROGRAMS_ROUTE}/facet/:facetId([0-9])`;
