@@ -1,3 +1,4 @@
+import notificationsReducer from "pages/app/components/notifications/reducers/notifications.reducers";
 import { loadingBarReducer } from "react-redux-loading-bar";
 import { routerReducer } from "react-router-redux";
 import { combineReducers } from "redux";
@@ -45,5 +46,6 @@ export default combineReducers({
   popupData: popupReducer,
   navigationData: navigationReducer,
   emailPending: emailPendingReducer,
-  programDetails: programDetailsReducer
+  programDetails: programDetailsReducer,
+  notifications: notificationsReducer
 });
