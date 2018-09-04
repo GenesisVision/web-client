@@ -42,19 +42,19 @@ const ProgramsTable = ({
         <Fragment>
           <LevelFilter
             name="level"
-            value={filtering["level"].value}
+            value={filtering["level"]}
             onChange={handleFilterChange}
           />
           <SelectFilter
             name="currency"
             label="Currency"
-            value={filtering["currency"].value}
+            value={filtering["currency"]}
             values={selectFilterValues}
             onChange={handleFilterChange}
           />
           <DateRangeFilter
             name="dateRange"
-            value={filtering["dateRange"].value}
+            value={filtering["dateRange"]}
             onChange={handleFilterChange}
           />
         </Fragment>

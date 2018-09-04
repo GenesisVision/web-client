@@ -1,12 +1,13 @@
 import moment from "moment";
-export const SERVER_DATE_RANGE_MIN_FILTER_NAME = "statisticDateFrom";
-export const SERVER_DATE_RANGE_MAX_FILTER_NAME = "statisticDateTo";
-export const DateRangeFilterTypes = {
-  all: "all",
-  lastMonth: "lastMonth",
-  lastWeek: "lastWeek",
-  custom: "custom"
-};
+
+import { FilterType } from "../../filtering.constants";
+import {
+  DATE_RANGE_FILTER_NAME,
+  DEFAULT_DATE_RANGE_FILTER_VALUE,
+  DateRangeFilterTypes,
+  SERVER_DATE_RANGE_MAX_FILTER_NAME,
+  SERVER_DATE_RANGE_MIN_FILTER_NAME
+} from "./date-range-filter.constants";
 
 export const validateDateRange = value => {
   if (!value.type || !Object.values(DateRangeFilterTypes).includes(value.type))
@@ -21,34 +22,47 @@ export const validateDateRange = value => {
   return true;
 };
 
-export const composeRequestValue = value => {
+export const composeRequestValue = (
+  fromFilterName = SERVER_DATE_RANGE_MIN_FILTER_NAME,
+  toFilterName = SERVER_DATE_RANGE_MAX_FILTER_NAME
+) => value => {
   switch (value.type) {
     case DateRangeFilterTypes.all:
       return {
-        [SERVER_DATE_RANGE_MIN_FILTER_NAME]: moment(20181001).toISOString(),
-        [SERVER_DATE_RANGE_MAX_FILTER_NAME]: moment().toISOString()
+        [fromFilterName]: moment(20181001).toISOString(),
+        [toFilterName]: moment().toISOString()
       };
     case DateRangeFilterTypes.lastMonth:
       return {
-        [SERVER_DATE_RANGE_MIN_FILTER_NAME]: moment()
+        [fromFilterName]: moment()
           .subtract(1, "month")
           .toISOString(),
-        [SERVER_DATE_RANGE_MAX_FILTER_NAME]: moment().toISOString()
+        [toFilterName]: moment().toISOString()
       };
     case DateRangeFilterTypes.lastWeek:
       return {
-        [SERVER_DATE_RANGE_MIN_FILTER_NAME]: moment()
+        [fromFilterName]: moment()
           .subtract(1, "week")
           .toISOString(),
-        [SERVER_DATE_RANGE_MAX_FILTER_NAME]: moment().toISOString()
+        [toFilterName]: moment().toISOString()
       };
     case DateRangeFilterTypes.custom:
     default:
       return {
-        [SERVER_DATE_RANGE_MIN_FILTER_NAME]: moment(
-          value.dateStart
-        ).toISOString(),
-        [SERVER_DATE_RANGE_MAX_FILTER_NAME]: moment(value.dateEnd).toISOString()
+        [fromFilterName]: moment(value.dateStart).toISOString(),
+        [toFilterName]: moment(value.dateEnd).toISOString()
       };
   }
 };
+
+export const composeDefaultDateRangeFilter = ({
+  name = DATE_RANGE_FILTER_NAME,
+  type = FilterType.custom,
+  defaultValue = DEFAULT_DATE_RANGE_FILTER_VALUE,
+  composeApiRequestValue = composeRequestValue()
+} = {}) => ({
+  name: name,
+  type: type,
+  composeRequestValue: composeApiRequestValue,
+  defaultValue: defaultValue
+});

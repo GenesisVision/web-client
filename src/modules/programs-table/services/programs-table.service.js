@@ -12,14 +12,14 @@ import { push } from "react-router-redux";
 import authService from "services/auth-service";
 import getParams from "utils/get-params";
 
+import { composeFilters } from "../../filtering/helpers/filtering-helpers";
 import { getSortingColumnName } from "../../sorting/helpers/sorting-helpers";
 import * as programTableActions from "../actions/programs-table.actions";
 import {
   PROGRAMS_COLUMNS,
-  PROGRAMS_DEFAULT_FILTERS,
+  PROGRAMS_TABLE_FILTERS,
   SORTING_FILTER_VALUE
 } from "../programs.constants";
-import { composeProgramsFilters } from "./programs-helpers";
 
 const sortableColums = PROGRAMS_COLUMNS.filter(
   x => x.sortingName !== undefined
@@ -60,7 +60,10 @@ const composeRequestFilters = () => (dispatch, getState) => {
     currentPage: page - 1
   });
 
-  const filtering = composeProgramsFilters(existingFilters.filtering);
+  const filtering = composeFilters(
+    PROGRAMS_TABLE_FILTERS,
+    existingFilters.filtering
+  );
 
   filters = {
     ...filters,
@@ -91,26 +94,12 @@ export const getProgramsFilters = () => (dispatch, getState) => {
     ? queryParams.sorting
     : SORTING_FILTER_VALUE;
 
-  const filtering = PROGRAMS_DEFAULT_FILTERS.reduce((accum, cur) => {
-    const {
-      name,
-      type,
-      value,
-      composeRequestValue,
-      validate = value => true
-    } = cur;
+  const filtering = PROGRAMS_TABLE_FILTERS.reduce((accum, cur) => {
+    const { name, defaultValue, validate = value => true } = cur;
     if (!queryParams[name] || !validate(queryParams[name])) {
-      accum[name] = {
-        type,
-        composeRequestValue,
-        value
-      };
+      accum[name] = defaultValue;
     } else {
-      accum[name] = {
-        type,
-        composeRequestValue,
-        value: queryParams[name]
-      };
+      accum[name] = queryParams[name];
     }
     return accum;
   }, {});
