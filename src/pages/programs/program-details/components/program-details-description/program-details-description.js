@@ -9,6 +9,64 @@ import { Link } from "react-router-dom";
 
 import ProgramDetailsInvestment from "./program-details-investment/program-details-investment";
 
+const programDetails = {
+  id: "string",
+  logo: "string",
+  description: "string",
+  title: "string",
+  currency: "Undefined",
+  level: 0,
+  periodDuration: 0,
+  periodStarts: "2018-09-03T15:27:55.312Z",
+  periodEnds: "2018-09-03T15:27:55.312Z",
+  entryFee: 0,
+  isReinvesting: true,
+  status: "None",
+  availableInvestment: 0,
+  manager: {
+    id: "string",
+    username: "string",
+    avatar: "string"
+  },
+  statistic: {
+    balanceBase: {
+      amount: 0,
+      currency: "Undefined"
+    },
+    balanceGVT: {
+      amount: 0,
+      currency: "Undefined"
+    },
+    balanceSecondary: {
+      amount: 0,
+      currency: "Undefined"
+    },
+    currentValue: 0,
+    profitPercent: 0,
+    profitValue: 0,
+    drawdownPercent: 0,
+    investorsCount: 0,
+    startDate: "2018-09-03T15:27:55.312Z",
+    startBalance: 0,
+    startCurrency: "Undefined",
+    investedAmount: 0,
+    investedCurrency: "Undefined",
+    tradesCount: 0,
+    tradesSuccessCount: 0,
+    profitFactorPercent: 0,
+    sharpeRatioPercent: 0
+  },
+  personalProgramDetails: {
+    isFavorite: true,
+    isInvested: true,
+    isOwnProgram: true,
+    invested: 0,
+    value: 0,
+    profit: 0,
+    investmentProgramStatus: "Active"
+  }
+};
+
 const getInvestmentData = programDetails => {
   let {
     investedAmount,
@@ -32,8 +90,7 @@ const ProgramDetailsDescription = ({
   programAuthorUrl,
   toggleReinvesting,
   programInvestUrl,
-  programWithdrawUrl,
-  programDetails
+  programWithdrawUrl
 }) => (
   <div className="program-details-description">
     <div className="program-details-description__left">
