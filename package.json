@@ -12,6 +12,7 @@
     "i18next-browser-languagedetector": "^2.2.0",
     "i18next-xhr-backend": "^1.5.1",
     "jwt-decode": "^2.2.0",
+    "lodash": "^4.17.10",
     "moment": "^2.22.1",
     "node-sass": "^4.9.3",
     "prop-types": "^15.6.2",

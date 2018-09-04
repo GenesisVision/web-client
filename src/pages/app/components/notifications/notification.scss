@@ -1,0 +1,36 @@
+@import "styles/_colors.scss";
+
+.notifications {
+  &__group:not(:last-child) {
+    border-bottom: 1px solid $border-color;
+  }
+
+  &__title {
+    letter-spacing: 1px;
+    margin: 30px 0;
+    color: $text-color-dark-grey;
+    font-size: 11px;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 32px;
+  }
+}
+
+.notification {
+  &__description {
+    margin-bottom: 20px;
+    font-size: 13px;
+    line-height: 1.69;
+    letter-spacing: 0.2px;
+  }
+  &__date {
+    font-size: 13px;
+    margin-bottom: 30px;
+    color: $text-color-dark-grey;
+    letter-spacing: 0.4px;
+  }
+}

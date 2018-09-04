@@ -1,5 +1,6 @@
 import { fetchProfileHeaderInfo } from "modules/profile-header/actions/profile-header-actions";
 import ProfileHeader from "modules/profile-header/components/profile-header";
+import { notificationsToggle } from "pages/app/components/notifications/actions/notifications.actions";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -15,14 +16,19 @@ class ProfileHeaderContainer extends Component {
   render() {
     if (!this.props.info.data) return null;
     return (
-      <ProfileHeader {...this.props.info.data} logout={this.props.logout} />
+      <ProfileHeader
+        {...this.props.info.data}
+        logout={this.props.logout}
+        openNotifications={this.props.notificationsToggle}
+      />
     );
   }
 }
 
 const mapDispatchToProps = {
   fetchProfileHeaderInfo,
-  logout
+  logout,
+  notificationsToggle
 };
 
 const mapStateToProps = state => ({
