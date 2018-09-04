@@ -12,7 +12,7 @@ class DashboardProgramsContainer extends Component {
   }
 
   render() {
-    const { isPending, data, filters, service, paging, sorting } = this.props;
+    const { isPending, data, service, paging, sorting, filtering } = this.props;
     return (
       <DashboardPrograms
         isPending={isPending}
@@ -22,8 +22,8 @@ class DashboardProgramsContainer extends Component {
           updateSorting: service.changeSorting
         }}
         filtering={{
-          ...filters.filtering,
-          updateFilter: service.programsChangeFilter
+          ...filtering,
+          updateFilter: service.changeFilter
         }}
         paging={{
           total: paging.totalPages,
@@ -36,9 +36,9 @@ class DashboardProgramsContainer extends Component {
 }
 
 const mapStateToProps = state => {
-  const { itemsData, sorting, paging } = state.dashboard.programs;
+  const { itemsData, sorting, paging, filtering } = state.dashboard.programs;
   const { isPending, data } = itemsData;
-  return { isPending, data, sorting, paging };
+  return { isPending, data, sorting, paging, filtering };
 };
 
 const mapDispatchToProps = dispatch => ({
