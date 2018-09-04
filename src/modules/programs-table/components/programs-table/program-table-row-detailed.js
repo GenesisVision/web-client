@@ -3,9 +3,11 @@ import Surface from "components/surface/surface";
 import TableRow from "components/table/table-row";
 import { GVButton, GVProgramAvatar } from "gv-react-components";
 import FavoriteIcon from "modules/favorite-program/components/favorite-icon/favorite-icon";
+import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
 import React from "react";
 import { Link } from "react-router-dom";
 import fileService from "shared/services/file-service";
+import replaceParams from "utils/replace-params";
 
 const ProgramTableRowDetailed = ({
   program,
@@ -13,6 +15,10 @@ const ProgramTableRowDetailed = ({
   toggleFavorite,
   onCollapseClick
 }) => {
+  const programDetailsUrl = replaceParams(PROGRAM_DETAILS_ROUTE, {
+    ":programId": program.id
+  });
+
   return (
     <TableRow>
       <Surface className="program-detailed">
@@ -66,7 +72,7 @@ const ProgramTableRowDetailed = ({
             onClick={onCollapseClick}
           />
           <GVButton>Invest</GVButton>
-          <Link to={program.id}>
+          <Link to={programDetailsUrl}>
             <GVButton variant="text" color="secondary">
               Details >
             </GVButton>
