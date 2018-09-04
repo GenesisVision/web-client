@@ -21,6 +21,11 @@
 }
 
 .notification {
+  &:not(:last-child) {
+    border-bottom: 1px solid $border-color;
+    margin-bottom: 30px;
+  }
+
   &__description {
     margin-bottom: 20px;
     font-size: 13px;
