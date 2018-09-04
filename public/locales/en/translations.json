@@ -4,7 +4,8 @@
   },
   "buttons": {
     "apply": "Apply",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "back": "Back"
   },
   "auth": {
     "text": "A Brief History Of Creation",

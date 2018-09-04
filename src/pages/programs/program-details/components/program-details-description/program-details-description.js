@@ -21,7 +21,9 @@ const getInvestmentData = programDetails => {
     invested: investedAmount + " " + investedCurrency,
     value: balanceBase.amount + " " + balanceBase.currency,
     profit: profitPercent + " %",
-    status: programDetails.personalProgramDetails.investmentProgramStatus
+    status:
+      programDetails.personalProgramDetails &&
+      programDetails.personalProgramDetails.investmentProgramStatus
   };
 };
 

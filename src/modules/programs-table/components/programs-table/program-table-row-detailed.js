@@ -4,6 +4,7 @@ import TableRow from "components/table/table-row";
 import { GVButton, GVProgramAvatar } from "gv-react-components";
 import FavoriteIcon from "modules/favorite-program/components/favorite-icon/favorite-icon";
 import React from "react";
+import { Link } from "react-router-dom";
 import fileService from "shared/services/file-service";
 
 const ProgramTableRowDetailed = ({
@@ -65,9 +66,11 @@ const ProgramTableRowDetailed = ({
             onClick={onCollapseClick}
           />
           <GVButton>Invest</GVButton>
-          <GVButton variant="text" color="secondary">
-            Details >
-          </GVButton>
+          <Link to={program.id}>
+            <GVButton variant="text" color="secondary">
+              Details >
+            </GVButton>
+          </Link>
           {isAuthenticated &&
             program.personalProgramDetails && (
               <span style={{ float: "right" }}>
