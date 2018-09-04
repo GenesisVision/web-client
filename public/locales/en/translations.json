@@ -2,6 +2,9 @@
   "app": {
     "title": "Investor Portal: "
   },
+  "notifications": {
+    "header": "Notifications"
+  },
   "auth": {
     "text": "A Brief History Of Creation",
     "tabs": {

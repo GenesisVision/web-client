@@ -2,20 +2,21 @@
 
 .sidebar {
   position: fixed;
-  right: 0;
+  overflow: auto;
   top: 0;
   bottom: 0;
   width: 100%;
   max-width: 360px;
-  background-color: #1c2730;
+  background-color: $background-color;
   padding: 32px;
   box-sizing: border-box;
   color: $main-color;
 
-  &__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 32px;
+  &--left {
+    left: 0;
+  }
+
+  &--right {
+    right: 0;
   }
 }
