@@ -41,7 +41,7 @@
     letter-spacing: 0.4px;
     &--type {
       &:not(:disabled) {
-        color: $text-color-dark;
+        color: $text-dark-color;
       }
       &:disabled {
         opacity: 1;

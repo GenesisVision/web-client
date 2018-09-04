@@ -1,56 +1,35 @@
 import "./level-filter.scss";
 
-import { GVButton } from "gv-react-components";
-import { Range } from "rc-slider";
+import PropTypes from "prop-types";
 import React, { Component } from "react";
+import { translate } from "react-i18next";
+
+import Filter from "../filter";
+import LevelFilterPopover from "./level-filter-popover";
 
 class LevelFilter extends Component {
-  state = {
-    value: this.props.value
-  };
-
-  handleChange = e => {
-    this.setState({ value: e });
-  };
-  handleSubmit = e => {
-    this.props.changeFilter(this.state.value);
-  };
+  renderValueText = value => `${value[0]}-${value[1]}`;
 
   render() {
+    const { t } = this.props;
     return (
-      <div className="level-filter">
-        <Range
-          dots
-          min={1}
-          max={7}
-          marks={new Array(7).fill(0).reduce((prev, curr, idx) => {
-            prev[idx + 1] = idx + 1;
-            return prev;
-          }, {})}
-          value={this.state.value}
-          onChange={this.handleChange}
-          pushable
-        />
-        <div className="level-filter__btns">
-          <GVButton
-            className="level-filter__btn"
-            variant="text"
-            onClick={this.handleSubmit}
-          >
-            Apply
-          </GVButton>
-          <GVButton
-            className="level-filter__btn"
-            variant="text"
-            color="secondary"
-            onClick={this.props.cancel}
-          >
-            Cancel
-          </GVButton>
-        </div>
-      </div>
+      <Filter
+        label={t("filters.level.label")}
+        name={this.props.name}
+        renderValueText={this.renderValueText}
+        value={this.props.value}
+        changeFilter={this.props.onChange}
+      >
+        <LevelFilterPopover values={this.props.values} />
+      </Filter>
     );
   }
 }
 
-export default LevelFilter;
+LevelFilter.propTypes = {
+  name: PropTypes.string.isRequired,
+  value: PropTypes.any,
+  onChange: PropTypes.func
+};
+
+export default translate()(LevelFilter);

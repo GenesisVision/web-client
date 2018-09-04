@@ -1,38 +1,36 @@
 import "./select-filter.scss";
 
-import classnames from "classnames";
-import { GVButton } from "gv-react-components";
+import PropTypes from "prop-types";
 import React, { Component } from "react";
 
-class SelectFilter extends Component {
-  handleClick = (selected, value) => e => {
-    if (selected) return;
-    return this.props.changeFilter(value);
-  };
-  render() {
-    const { values, value } = this.props;
+import Filter from "../filter";
+import SelectFilterPopover from "./select-filter-popover";
 
+class SelectFilter extends Component {
+  renderValueText = value =>
+    this.props.values.find(x => x.value === value).label;
+
+  render() {
     return (
-      <div className="select-filter">
-        {values.map((x, idx) => {
-          const selected = x.value === value;
-          return (
-            <GVButton
-              variant="text"
-              color={classnames({
-                primary: selected,
-                secondary: !selected
-              })}
-              key={idx}
-              onClick={this.handleClick(selected, x.value)}
-            >
-              {x.label}
-            </GVButton>
-          );
-        })}
-      </div>
+      <Filter
+        label={this.props.label}
+        name={this.props.name}
+        renderValueText={this.renderValueText}
+        value={this.props.value}
+        changeFilter={this.props.onChange}
+      >
+        <SelectFilterPopover values={this.props.values} />
+      </Filter>
     );
   }
 }
+
+SelectFilter.propTypes = {
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  value: PropTypes.any,
+  values: PropTypes.array,
+  onChange: PropTypes.func
+};
 
 export default SelectFilter;

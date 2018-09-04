@@ -1,6 +1,7 @@
 import { GVTextField } from "gv-react-components";
 import moment from "moment";
 import React, { Component, Fragment } from "react";
+import { translate } from "react-i18next";
 
 import { DateRangeFilterTypes } from "./date-range-filter.helpers";
 
@@ -9,70 +10,60 @@ class DateRangeFilterValues extends Component {
     this.props.onChange(type, e.target.value);
   };
 
+  renderFirstInput = value => {
+    const { t } = this.props;
+    return (
+      <GVTextField
+        wrapperClassName="date-range-filter__date-input"
+        type="text"
+        name="startDate"
+        label={t("filters.date-range.start")}
+        value={value}
+        disabled
+      />
+    );
+  };
+
+  renderSecondInput = () => {
+    const { t } = this.props;
+    return (
+      <GVTextField
+        wrapperClassName="date-range-filter__date-input"
+        type="text"
+        name="endDate"
+        label={t("filters.date-range.end")}
+        value={t("filters.date-range.today")}
+        disabled
+      />
+    );
+  };
+
   render() {
-    const { type, dateStart, dateEnd } = this.props;
+    const { t, type, dateStart, dateEnd } = this.props;
     switch (type) {
       case DateRangeFilterTypes.all:
         return (
           <Fragment>
-            <GVTextField
-              wrapperClassName="date-range-filter__date-input"
-              type="text"
-              name="default"
-              label="Start"
-              value="Program Start"
-              disabled
-            />
-            <GVTextField
-              wrapperClassName="date-range-filter__date-input"
-              type="text"
-              name="default"
-              label="End"
-              value="Today"
-              disabled
-            />
+            {this.renderFirstInput(t("filters.date-range.program-start"))}
+            {this.renderSecondInput()}
           </Fragment>
         );
       case DateRangeFilterTypes.lastMonth:
         return (
           <Fragment>
-            <GVTextField
-              wrapperClassName="date-range-filter__date-input"
-              type="text"
-              name="default"
-              label="Start"
-              value={new moment().subtract(1, "month").format("MMM Do YY")}
-              disabled
-            />
-            <GVTextField
-              wrapperClassName="date-range-filter__date-input"
-              type="text"
-              name="default"
-              label="End"
-              value="Today"
-              disabled
-            />
+            {this.renderFirstInput(
+              new moment().subtract(1, "month").format("MMM Do YY")
+            )}
+            {this.renderSecondInput()}
           </Fragment>
         );
       case DateRangeFilterTypes.lastWeek:
         return (
           <Fragment>
-            <GVTextField
-              wrapperClassName="date-range-filter__date-input"
-              type="text"
-              name="default"
-              label="Start"
-              value={new moment().subtract(1, "week").format("MMM Do YY")}
-              disabled
-            />
-            <GVTextField
-              wrapperClassName="date-range-filter__date-input"
-              type="text"
-              name="default"
-              label="End"
-              value="Today"
-              disabled
-            />
+            {this.renderFirstInput(
+              new moment().subtract(1, "week").format("MMM Do YY")
+            )}
+            {this.renderSecondInput()}
           </Fragment>
         );
       case DateRangeFilterTypes.custom:
@@ -82,16 +73,16 @@ class DateRangeFilterValues extends Component {
             <GVTextField
               wrapperClassName="date-range-filter__date-input"
               type="text"
-              name="default"
-              label="Start"
+              name="dateStart"
+              label={t("filters.date-range.start")}
               value={dateStart}
               onChange={this.handleOnChange("dateStart")}
             />
             <GVTextField
               wrapperClassName="date-range-filter__date-input"
               type="text"
-              name="default"
-              label="End"
+              name="dateEnd"
+              label={t("filters.date-range.end")}
               value={dateEnd}
               onChange={this.handleOnChange("dateEnd")}
             />
@@ -101,4 +92,4 @@ class DateRangeFilterValues extends Component {
   }
 }
 
-export default DateRangeFilterValues;
+export default translate()(DateRangeFilterValues);

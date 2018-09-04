@@ -3,7 +3,6 @@ import "./programs.scss";
 import Table from "components/table/table";
 import TableHeadCell from "components/table/table-head-cell";
 import DateRangeFilter from "modules/filtering/components/date-range-filter/date-range-filter";
-import Filter from "modules/filtering/components/filter";
 import LevelFilter from "modules/filtering/components/level-filter/level-filter";
 import SelectFilter from "modules/filtering/components/select-filter/select-filter";
 import React, { Fragment } from "react";
@@ -41,35 +40,23 @@ const ProgramsTable = ({
       isPending={data.isPending}
       renderFilters={handleFilterChange => (
         <Fragment>
-          <Filter
-            label="Levels"
+          <LevelFilter
             name="level"
-            renderValueText={value => `${value[0]}-${value[1]}`}
             value={filtering["level"].value}
-            changeFilter={handleFilterChange}
-          >
-            <LevelFilter />
-          </Filter>
-          <Filter
-            label="Currency"
+            onChange={handleFilterChange}
+          />
+          <SelectFilter
             name="currency"
-            renderValueText={value =>
-              selectFilterValues.find(x => x.value === value).label
-            }
+            label="Currency"
             value={filtering["currency"].value}
-            changeFilter={handleFilterChange}
-          >
-            <SelectFilter values={selectFilterValues} />
-          </Filter>
-          <Filter
-            label="Date range"
+            values={selectFilterValues}
+            onChange={handleFilterChange}
+          />
+          <DateRangeFilter
             name="dateRange"
-            renderValueText={value => value.type}
             value={filtering["dateRange"].value}
-            changeFilter={handleFilterChange}
-          >
-            <DateRangeFilter />
-          </Filter>
+            onChange={handleFilterChange}
+          />
         </Fragment>
       )}
       renderHeader={({ sortingName, isAsc, handleSorting }) => (

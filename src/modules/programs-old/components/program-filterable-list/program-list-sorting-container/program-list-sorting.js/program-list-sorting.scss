@@ -46,7 +46,7 @@ $sorting-padding-mobile: 6px;
 
 .sorting__order {
   cursor: pointer;
-  color: $alternate-color;
+  color: $primary-color;
   background-color: white;
   display: inline-block;
   border-left: 1px solid $border-color;
@@ -59,7 +59,7 @@ $sorting-padding-mobile: 6px;
 }
 
 .sorting__value {
-  color: $alternate-color;
+  color: $primary-color;
 }
 
 .Select-control {
