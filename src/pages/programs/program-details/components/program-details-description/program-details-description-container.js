@@ -32,7 +32,7 @@ class ProgramDetailsDescriptionContainer extends Component {
       <Fragment>
         <ProgramDetailsNavigation goBack={goBack} />
         <ProgramDetailsDescription
-          model={programDetails}
+          programDetails={programDetails}
           programAuthorUrl={""}
           programInvestUrl={""}
           programWithdrawUrl={""}
