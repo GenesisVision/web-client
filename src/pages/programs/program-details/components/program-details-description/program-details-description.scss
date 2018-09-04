@@ -23,8 +23,7 @@
   }
 
   &__main {
-    position: relative;
-    left: -65px;
+    width: 67.2%;
   }
 
   &__heading {
@@ -52,6 +51,8 @@
     font-size: 14px;
     line-height: 28px;
     letter-spacing: 0.2px;
+    text-align: left;
+    color: $text-color;
   }
 
   &__reinvest {

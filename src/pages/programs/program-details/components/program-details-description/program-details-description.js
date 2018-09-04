@@ -88,21 +88,23 @@ const ProgramDetailsDescription = ({
           <GVButton>{t("program-details-page.description.invest")}</GVButton>
         </Link>
 
-        {programDetails.personalProgramDetails.isInvested && (
-          <ProgramReinvestingWidget
-            className="program-details-description__reinvest"
-            toggleReinvesting={toggleReinvesting}
-            isReinvesting={programDetails.isReinvesting}
+        {programDetails.personalProgramDetails &&
+          programDetails.personalProgramDetails.isInvested && (
+            <ProgramReinvestingWidget
+              className="program-details-description__reinvest"
+              toggleReinvesting={toggleReinvesting}
+              isReinvesting={programDetails.isReinvesting}
+            />
+          )}
+      </div>
+      {programDetails.personalProgramDetails &&
+        programDetails.personalProgramDetails.isInvested && (
+          <ProgramDetailsInvestment
+            className={"program-details-description__your-investment"}
+            {...getInvestmentData(programDetails)}
+            programWithdrawUrl={programWithdrawUrl}
           />
         )}
-      </div>
-      {programDetails.personalProgramDetails.isInvested && (
-        <ProgramDetailsInvestment
-          className={"program-details-description__your-investment"}
-          {...getInvestmentData(programDetails)}
-          programWithdrawUrl={programWithdrawUrl}
-        />
-      )}
     </div>
 
     <div className="program-details-description__right">
