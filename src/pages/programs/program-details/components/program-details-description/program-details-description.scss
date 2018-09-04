@@ -14,6 +14,7 @@
     & .gv-btn--text {
       padding: 0;
       margin-bottom: 26px;
+      font-size: 13px;
     }
   }
 
@@ -45,6 +46,7 @@
   &__subheading {
     margin-bottom: 36px;
     font-size: 17px;
+    letter-spacing: 0.21px;
   }
 
   &__text {
@@ -55,8 +57,13 @@
     color: $text-color;
   }
 
+  &__invest-btn {
+    letter-spacing: 0.3px;
+  }
+
   &__reinvest {
     margin-left: 45px;
+    letter-spacing: 0.3px;
   }
 
   &__short-statistic {
@@ -77,6 +84,7 @@
       color: $text-dark-color;
       font-size: 13px;
       margin-bottom: 13px;
+      letter-spacing: 0.43px;
     }
   }
 
