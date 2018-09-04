@@ -4,3 +4,8 @@ $inactive-icon-color: #ccd5d4;
 $main-color: #fff;
 $border-color: #313a41;
 $secondary-background-color: #1f2b36;
+
+$program-status-active-color: $text-light-color;
+$program-status-investing-color: $primary-color;
+$program-status-withdrawing-color: $level-color-4;
+$program-status-ended-color: $text-dark-color;

@@ -4,18 +4,18 @@
   cursor: pointer;
 
   &__active {
-    color: $text-light-color;
+    color: $program-status-active-color;
   }
 
   &__investing {
-    color: $primary-color;
+    color: $program-status-investing-color;
   }
 
   &__withdrawing {
-    color: $level-color-4;
+    color: $program-status-withdrawing-color;
   }
 
   &__ended {
-    color: $text-dark-color;
+    color: $program-status-ended-color;
   }
 }
