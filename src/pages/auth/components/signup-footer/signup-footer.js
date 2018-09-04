@@ -1,3 +1,5 @@
+import "./signup-footer.scss";
+
 import { GVButton } from "gv-react-components";
 import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
 import React from "react";

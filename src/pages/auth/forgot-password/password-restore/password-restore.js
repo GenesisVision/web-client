@@ -10,9 +10,6 @@ const PasswordRestore = ({ location, t }) => {
   const queryParams = qs.parse(location.search.slice(1));
   return (
     <div className="password-restore">
-      <h1 className="password-restore__title">
-        {t("auth.password-restore.title")}
-      </h1>
       <p className="password-restore__text">
         {t("auth.password-restore.new-password.text")}
       </p>

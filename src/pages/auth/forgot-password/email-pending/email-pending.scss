@@ -1,11 +1,11 @@
 @import "styles/_colors.scss";
 
 .password-pending {
-  &__title {
-    width: 164px;
-    margin-bottom: 50px;
-    margin-top: 0;
-  }
+  //&__title {
+  //  width: 164px;
+  //  margin-bottom: 50px;
+  //  margin-top: 0;
+  //}
 
   &__text {
     color: $text-color;
@@ -15,6 +15,6 @@
   }
 
   &__navigation {
-    margin-top: 125px;
+    //margin-top: 125px;
   }
 }

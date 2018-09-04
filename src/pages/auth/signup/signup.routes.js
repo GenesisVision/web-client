@@ -1,4 +1,5 @@
 import React from "react";
+import { translate } from "react-i18next";
 import { Route, Switch } from "react-router-dom";
 
 import AuthLayout from "../components/auth-layout/auth-layout";
@@ -9,8 +10,8 @@ import SignUpPage from "./signup/signup.page";
 export const SIGNUP_ROUTE = "/signup";
 export const SIGNUP_ROUTE_PENDING = `${SIGNUP_ROUTE}/pending`;
 
-const SignUpRoutes = () => (
-  <AuthLayout Footer={SignUpFooter}>
+const SignUpRoutes = ({ t }) => (
+  <AuthLayout Footer={SignUpFooter} title={t("auth.signup.title")}>
     <Switch>
       <Route path={SIGNUP_ROUTE_PENDING} component={EmailPending} />
       <Route path={SIGNUP_ROUTE} component={SignUpPage} />
@@ -18,4 +19,4 @@ const SignUpRoutes = () => (
   </AuthLayout>
 );
 
-export default SignUpRoutes;
+export default translate()(SignUpRoutes);

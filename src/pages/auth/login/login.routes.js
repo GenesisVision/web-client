@@ -1,4 +1,5 @@
 import React from "react";
+import { translate } from "react-i18next";
 import { Route, Switch } from "react-router-dom";
 
 import AuthLayout from "../components/auth-layout/auth-layout";
@@ -11,8 +12,8 @@ export const LOGIN_ROUTE = "/login";
 export const LOGIN_ROUTE_TWO_FACTOR_ROUTE = `${LOGIN_ROUTE}/two-factor`;
 export const LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE = `${LOGIN_ROUTE_TWO_FACTOR_ROUTE}/recovery`;
 
-const LoginRoutes = () => (
-  <AuthLayout Footer={LoginFooter}>
+const LoginRoutes = ({ t }) => (
+  <AuthLayout Footer={LoginFooter} title={t("auth.login.title")}>
     <Switch>
       <Route
         path={LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE}
@@ -24,4 +25,4 @@ const LoginRoutes = () => (
   </AuthLayout>
 );
 
-export default LoginRoutes;
+export default translate()(LoginRoutes);
