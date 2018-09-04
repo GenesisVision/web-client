@@ -43,6 +43,9 @@ export const SettingsIcon = props => {
 export const LogoutIcon = props => {
   return <Icon type={"logout"} {...props} />;
 };
+export const QuestionCircleIcon = props => {
+  return <Icon type={"question-circle"} {...props} />;
+};
 
 export const ControlsIcon = props => {
   return <Icon type={"controls"} {...props} />;
