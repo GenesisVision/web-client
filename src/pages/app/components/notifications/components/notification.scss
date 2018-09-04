@@ -1,4 +1,4 @@
-@import "styles/_colors.scss";
+@import "../../../../../styles/colors";
 
 .notifications {
   &__group:not(:last-child) {
@@ -8,7 +8,7 @@
   &__title {
     letter-spacing: 1px;
     margin: 30px 0;
-    color: $text-color-dark-grey;
+    color: $text-dark-color;
     font-size: 11px;
   }
 
@@ -30,7 +30,7 @@
   &__date {
     font-size: 13px;
     margin-bottom: 30px;
-    color: $text-color-dark-grey;
+    color: $text-dark-color;
     letter-spacing: 0.4px;
   }
 }
