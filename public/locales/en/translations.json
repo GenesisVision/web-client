@@ -2,8 +2,10 @@
   "app": {
     "title": "Investor Portal: "
   },
-  "notifications": {
-    "header": "Notifications"
+  "notifications-aside": {
+    "header": "Notifications",
+    "today": "today",
+    "yesterday": "yesterday"
   },
   "buttons": {
     "apply": "Apply",
