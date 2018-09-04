@@ -4,44 +4,61 @@
 
 .auth {
   display: flex;
+  height: 100%;
   flex-direction: row;
   justify-content: space-between;
-  padding: 80px 100px;
+  //padding: 80px 100px;
   background: url(/src/shared/media/bgnd.svg) no-repeat bottom;
   background-size: 100%;
 
   &__left {
     display: flex;
+    height: 100%;
     position: relative;
     flex-direction: column;
   }
 
   &__right {
     display: flex;
-    position: relative;
-    overflow: hidden;
     flex-direction: column;
-    justify-content: space-between;
-    border-radius: $border-radius;
-    background-color: $background-color;
-    box-sizing: border-box;
-    height: 80%;
-    width: 29.75%;
-    min-width: 476px;
+    height: 100%;
+    //position: absolute;
+    //top: 0;
+    //left: 0;
+    //right: 0;
+    //bottom: 0;
+    background-color: $panel-background-color;
+    //display: flex;
+    //position: relative;
+    //overflow: hidden;
+    //flex-direction: column;
+    //justify-content: space-between;
+    //border-radius: $border-radius;
+    //background-color: $background-color;
+    //box-sizing: border-box;
+    //height: 80%;
+    //width: 29.75%;
+    //min-width: 476px;
   }
 
   &__content {
+    flex: 1 0 auto;
     box-sizing: border-box;
-    padding: 21% 16.8% 12.2% 16.8%;
-    height: 87.5%;
+    //padding: 21% 16.8% 12.2% 16.8%;
+    padding: 20px;
+    //height: 87.5%;
   }
 
   &__footer {
-    height: 12.5%;
+    flex: 0 0 auto;
+    //height: 12.5%;
+    background-color: $secondary-background-color;
+    padding: 20px;
   }
 
   &__logo {
-    display: flex;
+    display: none;
+    //display: flex;
     width: 127px;
     flex-direction: row;
     align-items: center;
@@ -49,6 +66,7 @@
   }
 
   &__description {
+    display: none;
     font-weight: 300;
     font-size: 44px;
     margin-top: 50%;
