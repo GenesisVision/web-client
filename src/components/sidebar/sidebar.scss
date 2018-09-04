@@ -1,0 +1,26 @@
+@import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
+.sidebar {
+  position: fixed;
+  overflow: auto;
+  top: 0;
+  bottom: 0;
+  width: 360px;
+  max-width: 90%;
+  background-color: $background-color;
+  padding: 24px;
+  box-sizing: border-box;
+  color: $main-color;
+
+  @include media-breakpoint-landscape-phone {
+    padding: 32px 32px 32px 40px;
+  }
+
+  &--left {
+    left: 0;
+  }
+
+  &--right {
+    right: 0;
+  }
+}

@@ -4,11 +4,21 @@ import classnames from "classnames";
 import Chip from "components/chip/chip";
 import { RingIcon } from "components/icon/icon";
 import ProfileWidget from "components/profile-widget/profile-widget";
+import Sidebar from "components/sidebar/sidebar";
 import WalletWidget from "components/wallet-widget/wallet-widget";
 import PropTypes from "prop-types";
 import React from "react";
 
 class ProfileHeader extends React.Component {
+  state = {
+    isOpenSidebar: false
+  };
+  openSidebar = () => {
+    this.setState({ isOpenSidebar: true });
+  };
+  closeSidebar = () => {
+    this.setState({ isOpenSidebar: false });
+  };
   render() {
     const {
       availableGvt,
@@ -29,6 +39,7 @@ class ProfileHeader extends React.Component {
         />
         <Chip type="positive">+</Chip>
         <div
+          onClick={this.openSidebar}
           className={classnames("notifications-widget", {
             "notifications-widget--has": hasNotifications
           })}
@@ -39,6 +50,7 @@ class ProfileHeader extends React.Component {
           </Chip>
         </div>
         <ProfileWidget avatar={avatar} logout={logout} email={email} />
+        <Sidebar open={this.state.isOpenSidebar} onClose={this.closeSidebar} />
       </div>
     );
   }
