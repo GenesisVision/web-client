@@ -26,7 +26,7 @@ class ProgramDetailsDescriptionContainer extends Component {
     const { programDetails, goBack } = this.props;
     const { toggleReinvesting } = this;
 
-    // if (!programDetails) return null;
+    if (!programDetails) return null;
 
     return (
       <Fragment>
