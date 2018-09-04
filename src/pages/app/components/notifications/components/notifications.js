@@ -1,4 +1,4 @@
-import "./notification.scss";
+import "./notifications.scss";
 
 import Chip from "components/chip/chip";
 import { ControlsIcon, RingIcon } from "components/icon/icon";
@@ -20,7 +20,11 @@ class Notifications extends Component {
   };
 
   renderGroups = groups => group => (
-    <NotificationsGroup timestamp={group} notifications={groups[group]} />
+    <NotificationsGroup
+      key={group}
+      timestamp={parseInt(group)}
+      notifications={groups[group]}
+    />
   );
 
   sortGroups = (a, b) => b - a;
@@ -53,7 +57,7 @@ class Notifications extends Component {
 
 Notifications.propTypes = {
   fetchNotifications: PropTypes.func.isRequired,
-  notifications: PropTypes.arrayOf(notificationProps)
+  notifications: PropTypes.arrayOf(PropTypes.shape(notificationProps))
 };
 
 Notifications.defaultProps = {

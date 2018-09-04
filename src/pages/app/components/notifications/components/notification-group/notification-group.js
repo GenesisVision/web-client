@@ -7,7 +7,7 @@ import React, { Component } from "react";
 
 class NotificationsGroup extends Component {
   renderNotifications = notification => (
-    <Notification key={notification.id} notification={notification} />
+    <Notification key={notification.id} {...notification} />
   );
   getTitle = () => {
     return moment
@@ -33,7 +33,7 @@ class NotificationsGroup extends Component {
 
 NotificationsGroup.propTypes = {
   timestamp: PropTypes.number.isRequired,
-  notifications: PropTypes.arrayOf(notificationProps)
+  notifications: PropTypes.arrayOf(PropTypes.shape(notificationProps))
 };
 
 export default NotificationsGroup;

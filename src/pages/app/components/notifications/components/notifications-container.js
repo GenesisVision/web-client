@@ -1,6 +1,6 @@
 import Sidebar from "components/sidebar/sidebar";
 import { notificationsToggle } from "pages/app/components/notifications/actions/notifications.actions";
-import Notifications from "pages/app/components/notifications/components/notification";
+import Notifications from "pages/app/components/notifications/components/notifications";
 import { serviceGetNotifications } from "pages/app/components/notifications/services/notifications.services";
 import React, { Component } from "react";
 import { connect } from "react-redux";
