@@ -7,8 +7,8 @@ import TableCell from "components/table/table-cell";
 import TableHeadCell from "components/table/table-head-cell";
 import TableRow from "components/table/table-row";
 import { GVProgramAvatar } from "gv-react-components";
-import Filter from "modules/filtering/components/filter";
-import LevelFilter from "modules/filtering/components/level-filter/level-filter";
+import DateRangeFilter from "modules/filtering/components/date-range-filter/date-range-filter";
+import { DATE_RANGE_FILTER_NAME } from "modules/filtering/components/date-range-filter/date-range-filter.constants";
 import React, { Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -33,15 +33,11 @@ const Dashboardprograms = ({
       isPending={data.isPending}
       renderFilters={handleFilterChange => (
         <Fragment>
-          {/* <Filter
-            label="Levels"
-            name="level"
-            renderValueText={value => `${value[0]}-${value[1]}`}
-            value={filtering["level"].value}
-            changeFilter={handleFilterChange}
-          >
-            <LevelFilter />
-          </Filter> */}
+          <DateRangeFilter
+            name={DATE_RANGE_FILTER_NAME}
+            value={filtering[DATE_RANGE_FILTER_NAME]}
+            onChange={handleFilterChange}
+          />
         </Fragment>
       )}
       renderHeader={({ sortingName, isAsc, handleSorting }) => (
@@ -72,18 +68,24 @@ const Dashboardprograms = ({
             />
             {program.title}
           </TableCell>
+          <TableCell className="dashboard-programs__cell--share">
+            {program.dashboardProgramDetails.share}
+          </TableCell>
           <TableCell className="dashboard-programs__cell--currency">
             {program.currency}
           </TableCell>
           <TableCell className="dashboard-programs__cell--period">
             <ProgramPeriodPie
-              start={program.periodDateStart}
-              end={program.periodDateEnd}
+              start={program.periodStarts}
+              end={program.periodEnds}
             />
+          </TableCell>
+          <TableCell className="dashboard-programs__cell--value">
+            {program.statistic.currentValue}
           </TableCell>
           <TableCell className="dashboard-programs__cell--profit">
             <NumberFormat
-              value={program.profit}
+              value={program.statistic.profitPercent}
               suffix="%"
               decimalScale={2}
               displayType="text"
@@ -92,8 +94,11 @@ const Dashboardprograms = ({
           <TableCell className="dashboard-programs__cell--chart">
             <ProgramSimpleChart
               data={program.chart}
-              isPositive={program.profit >= 0}
+              isPositive={program.statistic.profitValue >= 0}
             />
+          </TableCell>
+          <TableCell className="dashboard-programs__cell--status">
+            Status
           </TableCell>
         </TableRow>
       )}

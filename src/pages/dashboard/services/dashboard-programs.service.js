@@ -1,15 +1,18 @@
-import authService from "services/auth-service";
-
-import pagingActionsFactory from "../../../modules/paging/actions/paging-actions";
+import { composeFilters } from "modules/filtering/helpers/filtering-helpers";
+import pagingActionsFactory from "modules/paging/actions/paging-actions";
 import {
   calculateSkipAndTake,
   calculateTotalPages
-} from "../../../modules/paging/helpers/paging-helpers";
-import sortingActionsFactory from "../../../modules/sorting/actions/sorting-actions";
+} from "modules/paging/helpers/paging-helpers";
+import sortingActionsFactory from "modules/sorting/actions/sorting-actions";
+import authService from "services/auth-service";
+
+import filteringActionsFactory from "../../../modules/filtering/actions/filtering-actions";
 import {
   DASHBOARD_PROGRAMS,
   fetchPrograms
 } from "../actions/dashboard.actions";
+import { DASHBOARD_PROGRAMS_FILTERS } from "../dashboard.constants";
 
 export const getPrograms = () => (dispatch, getState) => {
   const filters = composeRequestFilters(getState);
@@ -18,52 +21,22 @@ export const getPrograms = () => (dispatch, getState) => {
 
 const composeRequestFilters = getState => {
   const { dashboard } = getState();
-  const { itemsData, paging, sorting } = dashboard.programs;
+  const { itemsData, paging, sorting, filtering } = dashboard.programs;
 
   const { skip, take } = calculateSkipAndTake(paging);
 
-  //const filtering = composeProgramsFilters(existingFilters.filtering);
+  const composedFiltering = composeFilters(
+    DASHBOARD_PROGRAMS_FILTERS,
+    filtering
+  );
 
   const filters = {
     skip,
     take,
-    sorting
-    //...filtering
-  };
-
-  return filters;
-};
-
-export const getProgramsFilters = () => (dispatch, getState) => {
-  const { dashboard } = getState();
-  const { itemsData, paging, sorting } = dashboard;
-
-  const pages = calculateTotalPages(paging);
-
-  const filtering = {};
-  /*const filtering = PROGRAMS_DEFAULT_FILTERS.reduce((accum, cur) => {
-    const { name, type, value, validate = value => true } = cur;
-    if (!queryParams[name] || !validate(queryParams[name])) {
-      accum[name] = {
-        type,
-        value
-      };
-    } else {
-      accum[name] = {
-        type,
-        value: queryParams[name]
-      };
-    }
-    return accum;
-  }, {});
-*/
-
-  const filters = {
-    page: paging.currentPage,
-    pages,
     sorting,
-    filtering
+    ...composedFiltering
   };
+
   return filters;
 };
 
@@ -80,6 +53,17 @@ export const changePage = paging => dispatch => {
 export const changeSorting = sorting => dispatch => {
   const sortingActions = sortingActionsFactory(DASHBOARD_PROGRAMS);
   dispatch(sortingActions.updateSorting(sorting));
+  dispatch(
+    updatePaging({
+      currentPage: 0
+    })
+  );
+  dispatch(getPrograms());
+};
+
+export const changeFilter = filter => dispatch => {
+  const filteringActions = filteringActionsFactory(DASHBOARD_PROGRAMS);
+  dispatch(filteringActions.updateFilter(filter));
   dispatch(
     updatePaging({
       currentPage: 0

@@ -3,7 +3,7 @@ import moment from "moment";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 
-import { DateRangeFilterTypes } from "./date-range-filter.helpers";
+import { DateRangeFilterTypes } from "./date-range-filter.constants";
 
 class DateRangeFilterValues extends Component {
   handleOnChange = type => e => {
