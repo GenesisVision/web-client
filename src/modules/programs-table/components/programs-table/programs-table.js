@@ -1,10 +1,10 @@
 import "./programs.scss";
 
-import Table from "components/table/table";
-import TableHeadCell from "components/table/table-head-cell";
 import DateRangeFilter from "modules/filtering/components/date-range-filter/date-range-filter";
 import LevelFilter from "modules/filtering/components/level-filter/level-filter";
 import SelectFilter from "modules/filtering/components/select-filter/select-filter";
+import Table from "modules/table/components/table";
+import TableHeadCell from "modules/table/components/table-head-cell";
 import React, { Fragment } from "react";
 import { translate } from "react-i18next";
 
