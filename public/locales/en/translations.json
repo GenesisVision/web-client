@@ -2,7 +2,7 @@
   "app": {
     "title": "Investor Portal: "
   },
-  "notifications": {
+  "notifications-aside": {
     "header": "Notifications"
   },
   "buttons": {

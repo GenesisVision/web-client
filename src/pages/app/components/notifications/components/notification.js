@@ -33,7 +33,7 @@ class Notifications extends Component {
       <Fragment>
         <div className="notifications__header">
           <RingIcon />
-          {t("notifications.header")}
+          {t("notifications-aside.header")}
           <div className="notifications__count">
             <Chip type="negative">{notifications.length}</Chip>
           </div>
