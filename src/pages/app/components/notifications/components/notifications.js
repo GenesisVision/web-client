@@ -16,7 +16,14 @@ class Notifications extends Component {
   }
 
   getGroups = () => {
-    return groupBy(this.props.notifications, el => moment(el.date).unix());
+    return this.props.notifications.reduce((acc, notification) => {
+      const key = moment(notification.date).unix();
+      if (!Array.isArray(acc[key])) {
+        acc[key] = [];
+      }
+      acc[key].push(notification);
+      return acc;
+    }, {});
   };
 
   renderGroups = groups => group => (

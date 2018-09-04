@@ -3,7 +3,9 @@
     "title": "Investor Portal: "
   },
   "notifications-aside": {
-    "header": "Notifications"
+    "header": "Notifications",
+    "today": "today",
+    "yesterday": "yesterday"
   },
   "buttons": {
     "apply": "Apply",
