@@ -2,62 +2,35 @@ import "./notification.scss";
 
 import Chip from "components/chip/chip";
 import { ControlsIcon, RingIcon } from "components/icon/icon";
-import Sidebar from "components/sidebar/sidebar";
 import { groupBy } from "lodash/collection";
 import moment from "moment";
+import NotificationsGroup from "pages/app/components/notifications/components/notification-group/notification-group";
+import { notificationProps } from "pages/app/components/notifications/components/notification/notification";
 import PropTypes from "prop-types";
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
-
-const Notification = ({ notification }) => {
-  return (
-    <div className="notification">
-      <div className="notification__description">
-        {notification.description}
-      </div>
-      <div className="notification__date">
-        {moment(notification.date).format("hh:mm a")}
-      </div>
-    </div>
-  );
-};
-
-Notification.propTypes = {
-  notification: PropTypes.shape({
-    id: PropTypes.string,
-    description: PropTypes.string,
-    date: PropTypes.string
-  })
-};
-
-const NotificationsGroup = ({ title, notifications }) => {
-  return (
-    <div className="notifications__group">
-      <div className="notifications__title">{title.toUpperCase()}</div>
-      {notifications.map(n => (
-        <Notification key={n.id} notification={n} />
-      ))}
-    </div>
-  );
-};
 
 class Notifications extends Component {
   componentDidMount() {
     this.props.fetchNotifications();
   }
 
+  getGroups = () => {
+    return groupBy(this.props.notifications, el => moment(el.date).unix());
+  };
+
+  renderGroups = groups => group => (
+    <NotificationsGroup timestamp={group} notifications={groups[group]} />
+  );
+
+  sortGroups = (a, b) => b - a;
+
   render() {
-    const { t, open, onClose, notifications } = this.props;
-    const notificationsGroups = groupBy(notifications, el =>
-      moment(el.date).calendar(null, {
-        sameDay: "[Today], DD MM",
-        lastDay: "[Yesterday], DD MM",
-        lastWeek: "dddd, DD MM",
-        sameElse: "dddd, DD MM"
-      })
-    );
+    const { t, notifications } = this.props;
+    const groups = this.getGroups();
+
     return (
-      <Sidebar open={open} position="right" onClose={onClose}>
+      <Fragment>
         <div className="notifications__header">
           <RingIcon />
           {t("notifications.header")}
@@ -69,22 +42,18 @@ class Notifications extends Component {
           </div>
         </div>
         <div className="notifications__content">
-          {Object.keys(notificationsGroups).map(group => (
-            <NotificationsGroup
-              title={group}
-              notifications={notificationsGroups[group]}
-            />
-          ))}
+          {Object.keys(groups)
+            .sort(this.sortGroups)
+            .map(this.renderGroups(groups))}
         </div>
-      </Sidebar>
+      </Fragment>
     );
   }
 }
 
 Notifications.propTypes = {
-  open: PropTypes.bool.isRequired,
   fetchNotifications: PropTypes.func.isRequired,
-  notifications: PropTypes.arrayOf(Notification.propTypes.notification)
+  notifications: PropTypes.arrayOf(notificationProps)
 };
 
 Notifications.defaultProps = {

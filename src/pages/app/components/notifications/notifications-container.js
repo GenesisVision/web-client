@@ -1,3 +1,4 @@
+import Sidebar from "components/sidebar/sidebar";
 import { notificationsToggle } from "pages/app/components/notifications/actions/notifications.actions";
 import Notifications from "pages/app/components/notifications/notification";
 import { serviceGetNotifications } from "pages/app/components/notifications/services/notifications.services";
@@ -7,12 +8,18 @@ import { connect } from "react-redux";
 class NotificationsContainer extends Component {
   render() {
     return (
-      <Notifications
+      <Sidebar
         open={this.props.open}
+        position="right"
         onClose={this.props.notificationsToggle}
-        fetchNotifications={this.props.serviceGetNotifications}
-        notifications={this.props.notifications}
-      />
+      >
+        <Notifications
+          open={this.props.open}
+          onClose={this.props.notificationsToggle}
+          fetchNotifications={this.props.serviceGetNotifications}
+          notifications={this.props.notifications}
+        />
+      </Sidebar>
     );
   }
 }

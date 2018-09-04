@@ -1,8 +1,7 @@
-import { groupBy } from "lodash/collection";
 import moment from "moment";
-import * as uuid from "uuid";
 
 const mockNoti = () => {
+  console.info("mock info notifications");
   const n = [];
   for (let i = 0; i < 20; i++) {
     n.push({
@@ -11,10 +10,10 @@ const mockNoti = () => {
         i > 5
           ? i > 15
             ? moment()
-                .subtract(1, "days")
+                .subtract(1, "months")
                 .format()
             : moment()
-                .subtract(4, "days")
+                .subtract(2, "months")
                 .format()
           : moment().format(),
       description:
