@@ -11,11 +11,16 @@ import {
 } from "modules/table/components";
 import DateRangeFilter from "modules/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "modules/table/components/filtering/date-range-filter/date-range-filter.constants";
+import withTableContainer from "modules/table/components/with-table-container";
 import React, { Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { compose } from "redux";
 
 import { DASHBOARD_PROGRAMS_COLUMNS } from "../../../dashboard.constants";
+import dashboardProgramsService, {
+  getStorePlace
+} from "../../../services/dashboard-programs.service";
 
 const Dashboardprograms = ({
   t,
@@ -108,4 +113,7 @@ const Dashboardprograms = ({
   );
 };
 
-export default translate()(Dashboardprograms);
+export default compose(
+  translate(),
+  withTableContainer(dashboardProgramsService, getStorePlace)
+)(Dashboardprograms);

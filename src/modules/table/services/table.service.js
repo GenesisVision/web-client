@@ -59,7 +59,6 @@ const tableServiceFactory = ({
 
   return {
     getItems,
-    getStorePlace,
     changePaging,
     changeSorting,
     changeFilter
