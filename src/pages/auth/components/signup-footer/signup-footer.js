@@ -1,20 +1,18 @@
-import "./signup-footer.scss";
-
 import { GVButton } from "gv-react-components";
 import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
-import React from "react";
+import React, { Fragment } from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
 
 const signUpFooter = ({ t }) => (
-  <div className="signup-footer">
+  <Fragment>
     <span className="signup-footer__desc">{t("auth.signup.footer-text")}</span>
     <Link to={LOGIN_ROUTE}>
       <GVButton variant="outlined" color="secondary">
         {t("auth.login.title")}
       </GVButton>
     </Link>
-  </div>
+  </Fragment>
 );
 
 export default translate()(signUpFooter);

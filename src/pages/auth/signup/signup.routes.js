@@ -11,7 +11,7 @@ export const SIGNUP_ROUTE = "/signup";
 export const SIGNUP_ROUTE_PENDING = `${SIGNUP_ROUTE}/pending`;
 
 const SignUpRoutes = ({ t }) => (
-  <AuthLayout Footer={SignUpFooter} title={t("auth.signup.title")}>
+  <AuthLayout Footer={SignUpFooter}>
     <Switch>
       <Route path={SIGNUP_ROUTE_PENDING} component={EmailPending} />
       <Route path={SIGNUP_ROUTE} component={SignUpPage} />

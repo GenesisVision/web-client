@@ -18,7 +18,7 @@ const AuthLayout = ({ t, children, title, Footer }) => {
       </div>
       <div className="auth__right">
         <div className="auth__content">
-          <h1 className="auth__title">{title}</h1>
+          {title && <h1 className="auth__title">{title}</h1>}
           {children}
         </div>
         {Footer && (
@@ -33,7 +33,7 @@ const AuthLayout = ({ t, children, title, Footer }) => {
 
 AuthLayout.propTypes = {
   Footer: PropTypes.func,
-  title: PropTypes.string.isRequired
+  title: PropTypes.string
 };
 
 export default translate()(AuthLayout);

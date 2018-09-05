@@ -3,7 +3,17 @@
 @import "styles/_breakpoint.scss";
 
 .login {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 100%;
+
+  &-form {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 100%;
+  }
   &__submit-button {
-    margin-top: 40px;
+    align-self: flex-start;
+    margin-top: auto;
   }
 }

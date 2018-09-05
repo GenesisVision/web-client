@@ -4,17 +4,16 @@
 
 .auth {
   display: flex;
-  height: 100%;
+  box-sizing: border-box;
+  min-height: 100%;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  //padding: 80px 100px;
   background: url(../../../../shared/media/bgnd.svg) no-repeat bottom;
   background-size: 100%;
 
   &__left {
     display: flex;
-    height: 100%;
     position: relative;
     flex-direction: column;
   }
@@ -22,57 +21,42 @@
   &__right {
     box-sizing: border-box;
     display: flex;
-    padding: 20px;
+    position: relative;
     flex-direction: column;
-    //height: 100%;
     width: 100%;
     max-width: 340px;
-    //max-height: 600px;
-    //position: absolute;
-    //top: 0;
-    //left: 0;
-    //right: 0;
-    //bottom: 0;
+    min-height: 560px;
+    height: 100%;
     background-color: $panel-background-color;
-    //display: flex;
-    //position: relative;
-    //overflow: auto;
-    //flex-direction: column;
-    //justify-content: space-between;
+    overflow: hidden;
     border-radius: $border-radius;
-    //box-sizing: border-box;
-    //height: 80%;
-    //width: 29.75%;
-    //min-width: 476px;
   }
 
-  &__title {
-    //padding: 20px;
+  h1 {
     margin: 0 0 20px 0;
   }
 
   &__content {
+    display: flex;
+    flex-direction: column;
     flex: 1 0 auto;
     box-sizing: border-box;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    //padding: 21% 16.8% 12.2% 16.8%;
-    //padding: 20px;
-    //height: 87.5%;
+    padding: 20px;
   }
 
   &__footer {
     flex: 0 0 auto;
-    //height: 12.5%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
     background-color: $secondary-background-color;
     padding: 20px;
-    margin: -20px;
-    border-radius: 0 0 $border-radius $border-radius;
   }
 
   &__logo {
     display: none;
-    //display: flex;
     width: 127px;
     flex-direction: row;
     align-items: center;
@@ -112,6 +96,66 @@
   }
 
   @include media-breakpoint-landscape-phone() {
-    //margin: 20px;
+    padding: 20px;
+  }
+
+  @include media-breakpoint-tablet() {
+    flex-direction: column;
+    justify-content: space-around;
+    &__right {
+      min-width: 460px;
+      min-height: 600px;
+    }
+    &__logo {
+      display: flex;
+    }
+
+    &__content {
+      padding: 40px;
+    }
+
+    &__footer {
+      padding: 20px 40px;
+    }
+  }
+
+  @include media-breakpoint-landscape-tablet() {
+    height: 100%;
+    padding: 80px 0;
+    flex-direction: row;
+    align-items: inherit;
+
+    &__left {
+      height: 100%;
+      min-height: 600px;
+    }
+
+    &__description {
+      display: flex;
+    }
+  }
+
+  @include media-breakpoint-desktop() {
+    padding: 80px 100px;
+    justify-content: space-between;
+    h1 {
+      margin: 0 0 60px 0;
+    }
+    &__right {
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      min-width: 476px;
+    }
+    &__content {
+      padding: 80px;
+    }
+    &__footer {
+      padding: 40px 80px;
+    }
+
+    .gv-tabs {
+      margin-bottom: 40px;
+    }
   }
 }

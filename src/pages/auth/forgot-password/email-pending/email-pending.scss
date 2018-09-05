@@ -1,20 +1,19 @@
 @import "styles/_colors.scss";
 
 .password-pending {
-  //&__title {
-  //  width: 164px;
-  //  margin-bottom: 50px;
-  //  margin-top: 0;
-  //}
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 100%;
 
   &__text {
-    color: $text-color;
-    width: 290px;
     line-height: 24px;
-    margin-bottom: 30px;
+  }
+
+  &__resend {
+    margin-top: 24px;
   }
 
   &__navigation {
-    //margin-top: 125px;
+    margin-top: auto;
   }
 }
