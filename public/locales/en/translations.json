@@ -2,12 +2,15 @@
   "app": {
     "title": "Investor Portal: "
   },
-  "notifications": {
-    "header": "Notifications"
+  "notifications-aside": {
+    "header": "Notifications",
+    "today": "today",
+    "yesterday": "yesterday"
   },
   "buttons": {
     "apply": "Apply",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "back": "Back"
   },
   "auth": {
     "text": "A Brief History Of Creation",
@@ -80,6 +83,12 @@
     "end-less-than-now": "The period is being restarted.",
     "time-left": "Time left"
   },
+  "program-statuses": {
+    "Active": "Active",
+    "Investing": "Investing",
+    "Withdrawing": "Withdrawing",
+    "Ended": "Ended"
+  },
   "programs-page": {
     "title": "Programs",
     "tabs": {
@@ -129,14 +138,11 @@
       "successFee": "Success fee",
       "invest": "Invest",
       "reinvest": "Reinvest",
-      "yourInvestment": "Your onvestment",
+      "yourInvestment": "Your investment",
       "invested": "Invested",
       "value": "Value",
       "profit": "Profit",
       "status": "Status",
-      "investment-statuses": {
-        "investing": "Investing"
-      },
       "withdraw": "Withdraw",
       "withdraw-notice-text": "You can withdraw only the invested funds, the profit will be withdrawn to your account at the end of the period automatically"
     }

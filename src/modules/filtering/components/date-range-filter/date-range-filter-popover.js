@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import { translate } from "react-i18next";
 
 import DateRangeFilterValues from "./date-range-filter-values";
-import { DateRangeFilterTypes } from "./date-range-filter.helpers";
+import { DateRangeFilterTypes } from "./date-range-filter.constants";
 
 class DateRangeFilterPopover extends Component {
   state = {

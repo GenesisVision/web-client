@@ -2,6 +2,7 @@ import "./app-layout.scss";
 
 import platformActions from "actions/platform-actions";
 import Header from "components/header/header";
+import NotificationsContainer from "pages/app/components/notifications/components/notifications-container";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
@@ -17,6 +18,7 @@ class AppLayout extends Component {
           <Header />
         </div>
         {this.props.children}
+        <NotificationsContainer />
       </div>
     );
   }

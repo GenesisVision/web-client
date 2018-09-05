@@ -1,54 +1,27 @@
-import { composeFilteringActionType } from "../helpers/filtering-helpers";
 import { composeClearDataActionType } from "../../../shared/actions/clear-data.factory";
+import { composeFilteringActionType } from "../helpers/filtering-helpers";
 
-export const dafaultState = {
-  filters: [],
-  defaultFilters: []
-};
-
-const filteringReducerFactory = ({
-  type,
-  filters,
-  updateReducer,
-  childReducer
-}) => {
+const filteringReducerFactory = ({ type, filters }) => {
   const filteringActionType = composeFilteringActionType(type);
   const clearDataActionType = composeClearDataActionType(filteringActionType);
-  const initialState = {
-    ...dafaultState,
-    ...filters
-  };
+  const initialState = filters;
   return (state = initialState, action) => {
     switch (action.type) {
       case filteringActionType: {
-        if (updateReducer) {
-          return updateReducer(state, action);
-        }
-
-        if (state.filters.some(x => x.name === action.payload.name)) {
+        const { name, value } = action.payload;
+        const existingFilterValue = state[name];
+        if (JSON.stringify(existingFilterValue !== JSON.stringify(value))) {
           return {
             ...state,
-            filters: state.filters.map(x => {
-              if (x.name === action.payload.name) {
-                return action.payload;
-              }
-
-              return x;
-            })
+            ...{ [name]: value }
           };
         }
 
-        return {
-          ...state,
-          filters: [...state.filters, action.payload]
-        };
+        return state;
       }
       case clearDataActionType:
         return initialState;
       default:
-        if (childReducer) {
-          return childReducer(state, action);
-        }
         return state;
     }
   };

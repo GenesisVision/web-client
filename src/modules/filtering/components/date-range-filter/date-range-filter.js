@@ -6,7 +6,7 @@ import { translate } from "react-i18next";
 
 import Filter from "../filter";
 import DateRangeFilterPopover from "./date-range-filter-popover";
-import { DateRangeFilterTypes } from "./date-range-filter.helpers";
+import { DateRangeFilterTypes } from "./date-range-filter.constants";
 
 class DateRangeFilter extends Component {
   renderValueText = value => {
