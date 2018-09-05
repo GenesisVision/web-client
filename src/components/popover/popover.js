@@ -13,18 +13,32 @@ const getAnchorEl = el => {
 
 class Popover extends Component {
   state = {
-    windowWidth: undefined
+    windowWidth: undefined,
+    windowHeight: undefined
   };
 
   static getDerivedStateFromProps() {
     return {
-      windowWidth: window.innerWidth
+      windowWidth: window.innerWidth,
+      windowHeight: window.innerHeight
     };
+  }
+
+  constructor(props) {
+    super(props);
+    this.popover = React.createRef();
   }
 
   getAnchorBounds = () => {
     const anchorEl = getAnchorEl(this.props.anchorEl);
     return anchorEl.getBoundingClientRect();
+  };
+
+  getPopoverBounds = () => {
+    // console.info(this.popover.current);
+    return this.popover.current
+      ? this.popover.current.getBoundingClientRect()
+      : {};
   };
 
   getVertical = value => {
@@ -37,12 +51,18 @@ class Popover extends Component {
   getHorizontal = value => {
     const position = {};
     const bounds = this.getAnchorBounds();
-    if (value === "left") {
-      position[value] = bounds.left;
-    }
-    if (value === "right") {
-      position[value] = this.state.windowWidth - bounds.right;
-    }
+    const pBounds = this.getPopoverBounds();
+    // console.info(pBounds);
+    // if (value === "left") {
+    //   position[value] = bounds.left;
+    // }
+    // if (value === "right") {
+    //   position[value] = this.state.windowWidth - bounds.right;
+    // }
+    // if (true) {
+    //   position[value] =
+    //     this.state.windowWidth - (bounds.right - bounds.left) / 2;
+    // }
     return position;
   };
 
@@ -82,18 +102,31 @@ class Popover extends Component {
             "popover--no-padding": noPadding
           })}
           style={position}
+          ref={this.popover}
         >
           {children}
         </div>
       </Modal>
     );
   }
+
+  componentDidUpdate() {
+    if (this.popover.current) {
+      const pBounds = this.getPopoverBounds();
+      const aBounds = this.getAnchorBounds();
+
+      if (true) {
+        const aCenter = aBounds.left + aBounds.width / 2;
+        this.popover.current.style.left = `${aCenter - pBounds.width / 2}px`;
+      }
+    }
+  }
 }
 
 Popover.propTypes = {
   onClose: PropTypes.func,
-  horizontal: PropTypes.oneOf(["left", "right"]),
-  vertical: PropTypes.oneOf(["top", "bottom"]),
+  horizontal: PropTypes.oneOf(["left", "right", "center"]),
+  vertical: PropTypes.oneOf(["top", "bottom", "center"]),
   anchorEl: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   noPadding: PropTypes.bool,
   disabledBackdrop: PropTypes.bool,
