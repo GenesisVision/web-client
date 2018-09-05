@@ -2,8 +2,8 @@ import {
   composeDefaultDateRangeFilter,
   composeRequestValue,
   validateDateRange
-} from "../filtering/components/date-range-filter/date-range-filter.helpers";
-import { FilterType } from "../filtering/filtering.constants";
+} from "modules/table/components/filtering/date-range-filter/date-range-filter.helpers";
+import { FilterType } from "modules/table/helpers/filtering.helpers";
 
 export const LEVEL_FILTER_NAME = "level";
 export const CURRENCY_FILTER_NAME = "currency";

@@ -1,6 +1,6 @@
 import moment from "moment";
 
-import { FilterType } from "../../filtering.constants";
+import { FilterType } from "../../../helpers/filtering.helpers";
 import {
   DATE_RANGE_FILTER_NAME,
   DEFAULT_DATE_RANGE_FILTER_VALUE,
