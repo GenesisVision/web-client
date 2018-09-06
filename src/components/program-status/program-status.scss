@@ -1,0 +1,21 @@
+@import "styles/_colors.scss";
+
+.program-status {
+  cursor: pointer;
+
+  &__active {
+    color: $program-status-active-color;
+  }
+
+  &__investing {
+    color: $program-status-investing-color;
+  }
+
+  &__withdrawing {
+    color: $program-status-withdrawing-color;
+  }
+
+  &__ended {
+    color: $program-status-ended-color;
+  }
+}
