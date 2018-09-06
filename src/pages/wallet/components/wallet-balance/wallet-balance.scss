@@ -36,8 +36,15 @@
     margin-bottom: 12px;
   }
 
-  &__statistic-value {
+  &__total-balance-value {
     font-size: 26px;
+    letter-spacing: 0.3px;
+    font-weight: 600;
+    margin-bottom: 9px;
+  }
+
+  &__statistic-value {
+    font-size: 22px;
     letter-spacing: 0.3px;
     font-weight: 600;
     margin-bottom: 9px;
@@ -76,6 +83,7 @@
 
   @include media-breakpoint-landscape-phone() {
     display: block;
+    margin-left: 32px;
 
     &__statistic {
       flex-direction: row;
@@ -95,11 +103,19 @@
       margin-bottom: 16px;
     }
 
-    &__statistic-value {
+    &__total-balance-value {
       font-size: 32px;
       letter-spacing: 0.4px;
       font-weight: 600;
       margin-bottom: 12px;
+    }
+
+    &__statistic-value {
+      font-size: 26px;
+      letter-spacing: 0.4px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      margin-top: 6px;
     }
 
     &__footer {
@@ -111,5 +127,9 @@
       margin-right: 30px;
       margin-bottom: 0;
     }
+  }
+
+  @include media-breakpoint-desktop() {
+    margin-left: 0;
   }
 }

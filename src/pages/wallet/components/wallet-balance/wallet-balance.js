@@ -20,7 +20,7 @@ const WalletBalance = ({
         <div className="wallet-balance__statistic-heading">
           {t("wallet.total-balance")}
         </div>
-        <div className="wallet-balance__statistic-value">
+        <div className="wallet-balance__total-balance-value">
           <NumberFormat
             value={walletBalanceData.totalBalanceGVT}
             decimalScale={3}
