@@ -1,7 +1,9 @@
+import { composeFilters } from "modules/table/helpers/filtering.helpers";
 import {
   calculateSkipAndTake,
   calculateTotalPages
-} from "modules/paging/helpers/paging-helpers";
+} from "modules/table/helpers/paging.helpers";
+import { getSortingColumnName } from "modules/table/helpers/sorting.helpers";
 import {
   PROGRAMS_FACET_ROUTE,
   PROGRAMS_FAVORITES_TAB_NAME,
@@ -12,8 +14,6 @@ import { push } from "react-router-redux";
 import authService from "services/auth-service";
 import getParams from "utils/get-params";
 
-import { composeFilters } from "../../filtering/helpers/filtering-helpers";
-import { getSortingColumnName } from "../../sorting/helpers/sorting-helpers";
 import * as programTableActions from "../actions/programs-table.actions";
 import {
   PROGRAMS_COLUMNS,

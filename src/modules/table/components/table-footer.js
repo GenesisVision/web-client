@@ -1,5 +1,6 @@
-import Paging from "modules/paging/components/paging/paging";
 import React from "react";
+
+import Paging from "./paging/paging";
 
 const TableFooter = ({ isPending, paging }) => {
   if (paging.total <= 1) return null;

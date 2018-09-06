@@ -1,8 +1,8 @@
 import { Icon } from "components/icon/icon";
 import Surface from "components/surface/surface";
-import TableRow from "components/table/table-row";
 import { GVButton, GVProgramAvatar } from "gv-react-components";
 import FavoriteIcon from "modules/favorite-program/components/favorite-icon/favorite-icon";
+import { TableRow } from "modules/table/components";
 import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
 import React from "react";
 import { Link } from "react-router-dom";

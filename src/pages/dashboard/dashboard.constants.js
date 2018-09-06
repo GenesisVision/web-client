@@ -1,6 +1,5 @@
-import { composeDefaultDateRangeFilter } from "../../modules/filtering/components/date-range-filter/date-range-filter.helpers";
+import { composeDefaultDateRangeFilter } from "modules/table/components/filtering/date-range-filter/date-range-filter.helpers";
 
-export const SORTING_FILTER_VALUE = "ByProfitDesc";
 export const DASHBOARD_PROGRAMS_COLUMNS = [
   {
     name: "title"
@@ -31,6 +30,8 @@ export const DASHBOARD_PROGRAMS_COLUMNS = [
     name: "status"
   }
 ];
+
+export const DASHBOARD_PROGRAMS_SORTING = "ByProfitDesc";
 
 export const DASHBOARD_PROGRAMS_FILTERS = [
   {

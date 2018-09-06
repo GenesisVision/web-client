@@ -2,18 +2,25 @@ import "./dashboard-programs.scss";
 
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
-import Table from "components/table/table";
-import TableCell from "components/table/table-cell";
-import TableHeadCell from "components/table/table-head-cell";
-import TableRow from "components/table/table-row";
 import { GVProgramAvatar } from "gv-react-components";
-import DateRangeFilter from "modules/filtering/components/date-range-filter/date-range-filter";
-import { DATE_RANGE_FILTER_NAME } from "modules/filtering/components/date-range-filter/date-range-filter.constants";
+import {
+  Table,
+  TableCell,
+  TableHeadCell,
+  TableRow
+} from "modules/table/components";
+import DateRangeFilter from "modules/table/components/filtering/date-range-filter/date-range-filter";
+import { DATE_RANGE_FILTER_NAME } from "modules/table/components/filtering/date-range-filter/date-range-filter.constants";
+import withTableContainer from "modules/table/components/with-table-container";
 import React, { Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { compose } from "redux";
 
 import { DASHBOARD_PROGRAMS_COLUMNS } from "../../../dashboard.constants";
+import dashboardProgramsService, {
+  getStorePlace
+} from "../../../services/dashboard-programs.service";
 
 const Dashboardprograms = ({
   t,
@@ -106,4 +113,7 @@ const Dashboardprograms = ({
   );
 };
 
-export default translate()(Dashboardprograms);
+export default compose(
+  translate(),
+  withTableContainer(dashboardProgramsService, getStorePlace)
+)(Dashboardprograms);
