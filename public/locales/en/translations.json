@@ -89,6 +89,10 @@
     "Withdrawing": "Withdrawing",
     "Ended": "Ended"
   },
+  "manager": {
+    "about": "About",
+    "assets": "Assets"
+  },
   "programs-page": {
     "title": "Programs",
     "tabs": {
