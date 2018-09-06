@@ -8,6 +8,14 @@ import EventListener from "react-event-listener";
 
 const MARGIN_OFFSET = 10;
 
+const VERTICAL_TOP_POSITION = "top";
+const VERTICAL_BOTTOM_POSITION = "bottom";
+const VERTICAL_CENTER_POSITION = "center";
+
+const HORIZONTAL_LEFT_POSITION = "left";
+const HORIZONTAL_RIGHT_POSITION = "right";
+const HORIZONTAL_CENTER_POSITION = "center";
+
 const getAnchorEl = el => {
   return typeof el === "function" ? el() : el;
 };
@@ -43,53 +51,57 @@ class Popover extends Component {
 
   getTop = () => {
     const anchorBounds = this.getAnchorBounds();
-    return `${anchorBounds.top}px`;
+    const popoverBounds = this.getPopoverBounds();
+    const vertical = this.getVerticalPosition();
+
+    if (vertical === VERTICAL_TOP_POSITION) {
+      const top = Math.min(
+        anchorBounds.top - popoverBounds.height - MARGIN_OFFSET,
+        this.state.windowHeight - popoverBounds.height - MARGIN_OFFSET
+      );
+      return `${top}px`;
+    }
+
+    if (vertical === VERTICAL_CENTER_POSITION) {
+      const aCenter = anchorBounds.top + anchorBounds.height / 2;
+      const popoverOffset = popoverBounds.height / 2;
+      return `${aCenter - popoverOffset}px`;
+    }
+
+    return `${anchorBounds.bottom + MARGIN_OFFSET}px`;
   };
 
   getLeft = () => {
     const anchorBounds = this.getAnchorBounds();
-    return `${anchorBounds.left}px`;
-  };
-
-  getLeftTransform = () => {
-    const anchorBounds = this.getAnchorBounds();
     const popoverBounds = this.getPopoverBounds();
     const horizontal = this.getHorizontalPosition();
 
-    if (horizontal === "center") {
-      const aCenter = anchorBounds.width / 2;
-      const pCenter = popoverBounds.width / 2;
-      return `${aCenter - pCenter}px`;
+    if (horizontal === HORIZONTAL_CENTER_POSITION) {
+      const aCenter = anchorBounds.left + anchorBounds.width / 2;
+      const popoverOffset = popoverBounds.width / 2;
+      return `${aCenter - popoverOffset}px`;
     }
-    if (horizontal === "right") {
-      const r = anchorBounds.width - popoverBounds.width;
-      return `${r}px`;
+    if (horizontal === HORIZONTAL_RIGHT_POSITION) {
+      const left = Math.max(
+        MARGIN_OFFSET,
+        anchorBounds.right - popoverBounds.width
+      );
+      return `${left}px`;
     }
-    return 0;
-  };
 
-  getTopTransform = () => {
-    const anchorBounds = this.getAnchorBounds();
-    const popoverBounds = this.getPopoverBounds();
-    const vertical = this.getVerticalPosition();
+    const left = Math.min(
+      anchorBounds.left,
+      this.state.windowWidth - popoverBounds.width - MARGIN_OFFSET
+    );
 
-    if (vertical === "center") {
-      const aCenter = anchorBounds.height / 2;
-      const pCenter = popoverBounds.height / 2;
-      return `${aCenter - pCenter}px`;
-    }
-    if (vertical === "top") {
-      return `${-popoverBounds.height - MARGIN_OFFSET}px`;
-    }
-    return `${anchorBounds.height + MARGIN_OFFSET}px`;
-  };
-
-  getTransform = () => {
-    return [this.getLeftTransform(), this.getTopTransform()];
+    return `${left}px`;
   };
 
   handleWindowResize = () => {
-    this.setState({ windowWidth: window.innerWidth });
+    this.setState({
+      windowWidth: window.innerWidth,
+      windowHeight: window.innerHeight
+    });
   };
 
   getVerticalPosition = () => {
@@ -100,7 +112,7 @@ class Popover extends Component {
         popoverBounds.height &&
       anchorBounds.top + MARGIN_OFFSET > popoverBounds.height
     ) {
-      return "top";
+      return VERTICAL_TOP_POSITION;
     }
     return this.props.vertical;
   };
@@ -130,23 +142,24 @@ class Popover extends Component {
     if (this.popover.current) {
       const left = this.getLeft();
       const top = this.getTop();
-      const transform = this.getTransform();
-      const position = this.getVerticalPosition();
-
       this.popover.current.style.left = left;
       this.popover.current.style.top = top;
-      this.popover.current.style.transform = `translate(${[
-        transform[0],
-        transform[1]
-      ]})`;
     }
   }
 }
 
 Popover.propTypes = {
   onClose: PropTypes.func,
-  horizontal: PropTypes.oneOf(["left", "right", "center"]),
-  vertical: PropTypes.oneOf(["top", "bottom", "center"]),
+  horizontal: PropTypes.oneOf([
+    HORIZONTAL_CENTER_POSITION,
+    HORIZONTAL_LEFT_POSITION,
+    HORIZONTAL_RIGHT_POSITION
+  ]),
+  vertical: PropTypes.oneOf([
+    VERTICAL_TOP_POSITION,
+    VERTICAL_CENTER_POSITION,
+    VERTICAL_BOTTOM_POSITION
+  ]),
   anchorEl: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   noPadding: PropTypes.bool,
   disabledBackdrop: PropTypes.bool,

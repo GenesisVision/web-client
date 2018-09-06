@@ -6,7 +6,11 @@
   border-radius: $border-radius;
   overflow: auto;
 
+  max-height: calc(100vh - 96px);
+  max-width: calc(100vw - 20px);
+
   &:not(&--no-padding) {
     padding: 32px;
+    max-height: calc(100vh - 160px);
   }
 }
