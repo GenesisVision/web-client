@@ -91,7 +91,8 @@
   },
   "manager": {
     "about": "About",
-    "assets": "Assets"
+    "assets": "Assets",
+    "member-since": "Member since"
   },
   "programs-page": {
     "title": "Programs",
