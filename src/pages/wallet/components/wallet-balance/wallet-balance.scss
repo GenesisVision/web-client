@@ -2,7 +2,7 @@
 @import "styles/_colors.scss";
 
 .wallet-balance {
-  color: $wallet-text-color;
+  color: $text-color;
   display: flex;
   justify-content: center;
   align-content: space-between;
@@ -46,7 +46,7 @@
   &__statistic-equivalent {
     font-size: 13px;
     letter-spacing: 0.3px;
-    color: $wallet-text-secondary-color;
+    color: $label-color;
   }
 
   &__footer {

@@ -39,7 +39,7 @@ const WalletBalance = ({
       </div>
       <div className="wallet-balance__statistic-item">
         <div className="wallet-balance__statistic-heading">
-          {t("wallet.total-balance")}
+          {t("wallet.invested-value")}
         </div>
         <div className="wallet-balance__statistic-value">
           <NumberFormat
@@ -60,7 +60,7 @@ const WalletBalance = ({
       </div>
       <div className="wallet-balance__statistic-item">
         <div className="wallet-balance__statistic-heading">
-          {t("wallet.total-balance")}
+          {t("wallet.available")}
         </div>
         <div className="wallet-balance__statistic-value">
           <NumberFormat
