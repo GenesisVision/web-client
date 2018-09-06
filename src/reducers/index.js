@@ -17,6 +17,7 @@ import loginReducer from "../pages/auth/login/reducers/login.reducers";
 import signUpReducer from "../pages/auth/signup/reducers/signup.reducers";
 import dashboardReducer from "../pages/dashboard/reducers/dashboard.reducers";
 import programDetailsReducer from "../pages/programs/program-details/reducers/program-details.reducers.js";
+import walletReducer from "../pages/wallet/reducers/wallet.reducers.js";
 import alertMessagesReducer from "../shared/modules/alert-message/reducers/alert-message-reducers";
 import authReducer from "./auth-reducer";
 import emailPendingReducer from "./email-pending-reducer";
@@ -43,5 +44,6 @@ export default combineReducers({
   navigationData: navigationReducer,
   emailPending: emailPendingReducer,
   programDetails: programDetailsReducer,
-  notifications: notificationsReducer
+  notifications: notificationsReducer,
+  wallet: walletReducer
 });

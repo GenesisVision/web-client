@@ -1,0 +1,115 @@
+@import "styles/_breakpoint.scss";
+@import "styles/_colors.scss";
+
+.wallet-balance {
+  color: $wallet-text-color;
+  display: flex;
+  justify-content: center;
+  align-content: space-between;
+  align-items: center;
+  flex-direction: column;
+
+  &__heading {
+    font-size: 32px;
+    margin-bottom: 50px;
+  }
+
+  &__statistic {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__statistic-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+
+  &__statistic-heading {
+    font-size: 13px;
+    letter-spacing: 0.1px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  &__statistic-value {
+    font-size: 26px;
+    letter-spacing: 0.3px;
+    font-weight: 600;
+    margin-bottom: 9px;
+  }
+
+  &__statistic-equivalent {
+    font-size: 13px;
+    letter-spacing: 0.3px;
+    color: $wallet-text-secondary-color;
+  }
+
+  &__footer {
+    display: flex;
+    margin-top: 20px;
+    flex-direction: column;
+  }
+
+  &__add-funds {
+    box-sizing: border-box;
+    height: 50px;
+    width: 150px;
+    font-weight: bold;
+    letter-spacing: 0.3px;
+    font-size: 13px;
+    margin-bottom: 30px;
+  }
+
+  &__withdraw {
+    box-sizing: border-box;
+    height: 50px;
+    width: 150px;
+    font-weight: bold;
+    letter-spacing: 0.3px;
+    font-size: 13px;
+  }
+
+  @include media-breakpoint-landscape-phone() {
+    display: block;
+
+    &__statistic {
+      flex-direction: row;
+      justify-content: start;
+      align-items: start;
+    }
+
+    &__statistic-item {
+      display: flex;
+      justify-content: start;
+      align-items: start;
+      margin-right: 5.8%;
+      margin-bottom: 0;
+    }
+
+    &__statistic-heading {
+      margin-bottom: 16px;
+    }
+
+    &__statistic-value {
+      font-size: 32px;
+      letter-spacing: 0.4px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    &__footer {
+      display: block;
+      margin-top: 66px;
+    }
+
+    &__add-funds {
+      margin-right: 30px;
+      margin-bottom: 0;
+    }
+  }
+}
