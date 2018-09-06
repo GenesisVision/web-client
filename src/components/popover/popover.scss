@@ -4,8 +4,8 @@
   position: absolute;
   background-color: #273642;
   border-radius: $border-radius;
-  margin-top: 10px;
   overflow: auto;
+
   &:not(&--no-padding) {
     padding: 32px;
   }
