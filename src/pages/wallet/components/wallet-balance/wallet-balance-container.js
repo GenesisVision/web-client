@@ -35,7 +35,7 @@ class WalletBalanceContainer extends Component {
 const mapStateToProps = state => {
   return {
     walletBalanceData: state.wallet.balance.data,
-    currentCurrency: state.wallet.currentCurrency.value
+    currentCurrency: state.walletSettings.currentCurrency
   };
 };
 

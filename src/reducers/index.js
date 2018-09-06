@@ -2,6 +2,7 @@ import notificationsReducer from "pages/app/components/notifications/reducers/no
 import { loadingBarReducer } from "react-redux-loading-bar";
 import { routerReducer } from "react-router-redux";
 import { combineReducers } from "redux";
+import walletSettingsReducer from "shared/reducers/wallet-settings-reducer/wallet-settings.reducer.js";
 
 import navigationReducer from "../modules/navigation/reducers/navigation-reducers";
 import popupReducer from "../modules/popup/reducers/popup-reducers";
@@ -45,5 +46,6 @@ export default combineReducers({
   emailPending: emailPendingReducer,
   programDetails: programDetailsReducer,
   notifications: notificationsReducer,
-  wallet: walletReducer
+  wallet: walletReducer,
+  walletSettings: walletSettingsReducer
 });
