@@ -12,7 +12,9 @@ const tableServiceFactory = ({
 
   const getItems = () => (dispatch, getState) => {
     const filters = composeRequestFilters(getState);
-    dispatch(fetchItems(filters));
+    const dispathableAction = fetchItems(filters, getState());
+    if (dispathableAction !== null);
+    dispatch(dispathableAction);
   };
 
   const composeRequestFilters = getState => {
@@ -20,7 +22,10 @@ const tableServiceFactory = ({
 
     const { skip, take } = calculateSkipAndTake(paging);
 
-    const composedFiltering = composeFilters(defaultFilters, filtering);
+    let composedFiltering = {};
+    if (filtering) {
+      composeFilters(defaultFilters, filtering);
+    }
 
     const filters = {
       skip,

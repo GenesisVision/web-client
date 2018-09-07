@@ -8,7 +8,6 @@ import popupReducer from "../modules/popup/reducers/popup-reducers";
 import profileHeaderReducer from "../modules/profile-header/reducer/profile-header-reducer";
 import profileReducer from "../modules/profile/reducers/profile-reducers";
 import programDepositReducer from "../modules/program-deposit/reducers/trader-deposit-reducers";
-import programSearchReducer from "../modules/program-search/reducers/program-search-reducers";
 import programWithdrawReducer from "../modules/program-withdraw/reducers/program-withdraw-reducers";
 import programsReducer from "../modules/programs-table/reducers/programs-table.reducers";
 import emailConfirmReducer from "../pages/auth/email-confirm/reducers/email-confirm.reducers";
@@ -16,6 +15,7 @@ import passwordRestoreReducer from "../pages/auth/forgot-password/reducers/passw
 import loginReducer from "../pages/auth/login/reducers/login.reducers";
 import signUpReducer from "../pages/auth/signup/reducers/signup.reducers";
 import dashboardReducer from "../pages/dashboard/reducers/dashboard.reducers";
+import globalSearchReducer from "../pages/global-search/reducers/global-search.reducer";
 import programDetailsReducer from "../pages/programs/program-details/reducers/program-details.reducers.js";
 import alertMessagesReducer from "../shared/modules/alert-message/reducers/alert-message-reducers";
 import authReducer from "./auth-reducer";
@@ -26,7 +26,7 @@ export default combineReducers({
   routing: routerReducer,
   loadingBar: loadingBarReducer,
   platformData: platformReducer,
-  programSearchData: programSearchReducer,
+  globalSearch: globalSearchReducer,
   programsData: programsReducer,
   loginData: loginReducer,
   signUpData: signUpReducer,

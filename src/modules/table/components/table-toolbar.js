@@ -8,7 +8,9 @@ class TableToolbar extends Component {
     return (
       <div className="table__toolbar">
         {title && <div className="table__title">{title}</div>}
-        <TableFilters filtering={filtering}>{renderFilters}</TableFilters>
+        {filtering && (
+          <TableFilters filtering={filtering}>{renderFilters}</TableFilters>
+        )}
       </div>
     );
   }

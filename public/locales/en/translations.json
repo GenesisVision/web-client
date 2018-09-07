@@ -108,6 +108,9 @@
       "chart": "Chart"
     }
   },
+  "global-search-page": {
+    "title": "Search"
+  },
   "dashboard-page": {
     "title": "Dashboard",
     "programs-header": {
