@@ -58,8 +58,8 @@
 
   &__add-funds {
     box-sizing: border-box;
-    height: 45px;
-    width: 135px;
+    height: 42px;
+    width: 129px;
     letter-spacing: 0.3px;
     font-size: 13px;
     margin-bottom: 30px;
@@ -68,15 +68,14 @@
 
   &__withdraw {
     box-sizing: border-box;
-    height: 45px;
-    width: 135px;
+    height: 42px;
+    width: 129px;
     letter-spacing: 0.3px;
     font-size: 13px;
   }
 
   @include media-breakpoint-landscape-phone() {
     display: block;
-    margin-top: 30px;
 
     &__heading {
       margin-bottom: 45px;
@@ -108,11 +107,11 @@
     }
 
     &__statistic-value {
-      font-size: 26px;
+      font-size: 24px;
       letter-spacing: 0.4px;
       font-weight: 600;
       margin-bottom: 12px;
-      margin-top: 6px;
+      margin-top: 8px;
     }
 
     &__footer {
@@ -124,10 +123,14 @@
       margin-right: 30px;
       margin-bottom: 0;
       font-weight: 600;
+      width: 150px;
+      height: 50px;
     }
 
     &__withdraw {
       font-weight: 600;
+      width: 150px;
+      height: 50px;
     }
   }
 }
