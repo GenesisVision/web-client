@@ -6,6 +6,7 @@
   flex-direction: row;
   justify-content: space-between;
   color: $text-color;
+  padding-right: 18px;
 
   &__left {
     margin-right: 18px;
@@ -30,7 +31,7 @@
 
   &__heading {
     font-size: 24px;
-    margin: -5px 0 10px 0;
+    margin: -5px 0 6px 0;
   }
 
   &__info {
@@ -50,7 +51,7 @@
 
   &__subheading {
     font-size: 15px;
-    margin: 24px 0 16px;
+    margin: 24px 0 10px;
     letter-spacing: 0.2px;
     font-weight: 400;
     color: $dark-color;
@@ -64,7 +65,7 @@
 
   &__asset-heading {
     color: $dark-color;
-    margin: 16px 0 8px;
+    margin: 24px 0 4px;
     font-size: 11px;
     letter-spacing: 0.4px;
   }
@@ -76,7 +77,9 @@
     letter-spacing: 0.4px;
   }
 
-  @include media-breakpoint-landscape-tablet {
+  @include media-breakpoint-tablet {
+    padding-right: 0;
+
     &__info {
       order: 2;
     }
@@ -129,10 +132,7 @@
     }
 
     &__asset-items {
-      font-weight: 500;
       font-size: 14px;
-      line-height: 1.71;
-      letter-spacing: 0.4px;
     }
   }
 }
@@ -148,7 +148,7 @@
     margin-right: 10px;
   }
 
-  @include media-breakpoint-landscape-tablet {
+  @include media-breakpoint-tablet {
     margin-bottom: 40px;
   }
 }
