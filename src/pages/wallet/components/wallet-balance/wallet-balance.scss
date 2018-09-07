@@ -3,10 +3,9 @@
 
 .wallet-balance {
   color: $text-color;
-  padding: 0 18px;
 
   &__heading {
-    font-size: 32px;
+    font-size: 28px;
     margin: 0 0 30px;
   }
 
@@ -64,7 +63,7 @@
     letter-spacing: 0.3px;
     font-size: 13px;
     margin-bottom: 30px;
-    margin-right: 20px;
+    margin-right: 12px;
   }
 
   &__withdraw {
@@ -77,9 +76,11 @@
 
   @include media-breakpoint-landscape-phone() {
     display: block;
+    margin-top: 30px;
 
     &__heading {
-      margin-bottom: 50px;
+      margin-bottom: 45px;
+      font-size: 32px;
     }
 
     &__statistic-item {
@@ -128,9 +129,5 @@
     &__withdraw {
       font-weight: 600;
     }
-  }
-
-  @include media-breakpoint-tablet() {
-    padding: 0 32px;
   }
 }

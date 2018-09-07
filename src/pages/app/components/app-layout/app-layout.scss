@@ -12,10 +12,18 @@
   }
 
   &__header {
-    padding: 32px;
+    padding: 20px;
 
-    @include media-breakpoint-desktop {
-      padding: 32px 0;
+    @include media-breakpoint-tablet {
+      padding: 32px 32px 0;
+    }
+  }
+
+  &__main {
+    padding: 0 18px;
+
+    @include media-breakpoint-tablet {
+      padding: 0 32px;
     }
   }
 }
