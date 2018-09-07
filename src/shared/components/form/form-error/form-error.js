@@ -1,7 +1,9 @@
+import "./form-error.scss";
+
 import React from "react";
 
 const FormError = ({ error }) => (
-  <div className="text-danger">{error && <strong>{error}</strong>}</div>
+  <div className="form-error">{error && error}</div>
 );
 
 export default FormError;
