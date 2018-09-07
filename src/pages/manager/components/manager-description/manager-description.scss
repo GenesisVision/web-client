@@ -5,169 +5,88 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 0 32px;
   color: $text-color;
 
   &__right {
-    margin-right: 20px;
-  }
-
-  &__navigation-btn {
-    padding: 0;
-    margin-bottom: 18px;
-  }
-
-  &__back-arrow {
-    font-size: 36px;
-  }
-
-  &__navigation-text {
-    display: none;
+    margin-right: 62px;
   }
 
   &__avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 25px;
+    width: 120px;
+    height: 120px;
+    border-radius: 60px;
     background-color: $secondary-color;
     overflow: hidden;
 
+    & img {
+      width: 100%;
+      height: 100%;
+    }
+
     &--default img {
       height: 50%;
-      margin-top: 12.5px;
+      margin-top: 30px;
     }
   }
 
   &__main {
-    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
   }
 
   &__heading {
-    font-size: 22px;
-    margin: 0 0 28px 0;
+    font-size: 32px;
+    margin: 0 0 10px 0;
   }
 
   &__registration-date {
     color: $dark-color;
     font-size: 13px;
+    font-weight: 600;
     letter-spacing: 0.2px;
   }
 
   &__subheading {
-    font-size: 13px;
-    margin: 26px 0 12px;
+    font-size: 17px;
+    margin: 60px 0 36px;
     letter-spacing: 0.2px;
-    color: $dark-color;
-    font-weight: 400;
   }
 
   &__about {
     letter-spacing: 0.2px;
     font-size: 14px;
-    line-height: 1.8;
+    line-height: 2;
   }
 
   &__asset-heading {
-    display: none;
+    margin: 26px 0 13px;
+    font-size: 13px;
+    letter-spacing: 0.4px;
+    color: $short-statistic-subheading-color;
   }
 
   &__asset-items {
-    display: none;
-  }
-
-  &__assets-mobile {
-    margin-top: 8px;
-    font-size: 13px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.71;
     letter-spacing: 0.4px;
-
-    & span {
-      font-weight: 600;
-      margin-right: 10px;
-    }
   }
 
-  @include media-breakpoint-desktop() {
+  @include media-breakpoint-landscape-phone {
+    padding: 32px 40px;
+  }
+}
+
+.manager-description-navigation {
+  padding: 0 32px;
+  margin-bottom: 40px;
+
+  & .gv-btn--text {
     padding: 0;
   }
 
-  @include media-breakpoint-tablet() {
-    padding: 0 32px;
-
-    &__right {
-      margin-right: 6%;
-    }
-
-    &__navigation-btn {
-      margin-bottom: 40px;
-    }
-
-    &__back-arrow {
-      margin-right: 10px;
-      font-size: 13px;
-    }
-
-    &__navigation-text {
-      display: inline;
-      font-weight: 600;
-    }
-
-    &__main {
-      margin-top: 55px;
-    }
-
-    &__heading {
-      margin-bottom: 10px;
-      font-size: 32px;
-    }
-
-    &__registration-date {
-      font-weight: 600;
-    }
-
-    &__subheading {
-      margin-top: 60px;
-      margin-bottom: 32px;
-      color: $text-color;
-      font-size: 17px;
-      font-weight: 600;
-    }
-
-    &__about {
-      line-height: 2;
-    }
-
-    &__assets-mobile {
-      display: none;
-    }
-
-    &__asset-heading {
-      display: block;
-      margin: 26px 0 13px;
-      font-size: 13px;
-      letter-spacing: 0.4px;
-      color: $short-statistic-subheading-color;
-    }
-
-    &__asset-items {
-      display: block;
-      font-weight: 500;
-      font-size: 14px;
-      line-height: 1.71;
-      letter-spacing: 0.4px;
-    }
-
-    &__navigation-text {
-      display: inline;
-    }
-
-    &__avatar {
-      width: 120px;
-      height: 120px;
-      border-radius: 60px;
-
-      &--default img {
-        margin-top: 30px;
-      }
-    }
+  &__back-arrow {
+    margin-right: 10px;
   }
 }

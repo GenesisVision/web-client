@@ -5,6 +5,17 @@ import { bindActionCreators } from "redux";
 
 import * as managerService from "../../services/manager.service";
 import ManagerDescription from "./manager-description";
+import ManagerNavigation from "./manager-description-navigation";
+
+const mock = {
+  id: "string",
+  username: "string",
+  about:
+    "so many text so many text so many text so many text so many text so many text so many text so many text so many text so many text so many text so many text so many text so many text so many text so many text so many text so many text so many text so many text ",
+  avatar: "",
+  regDate: "2018-09-06T13:37:38.844Z",
+  assets: ["USD", "BTC", "ETH"]
+};
 
 class ManagerDescriptionContainer extends Component {
   componentDidMount() {
@@ -20,7 +31,8 @@ class ManagerDescriptionContainer extends Component {
 
     return (
       <Fragment>
-        <ManagerDescription managerProfile={managerProfile} goBack={goBack} />
+        <ManagerNavigation goBack={goBack} />
+        <ManagerDescription managerProfile={managerProfile} />
       </Fragment>
     );
   }
@@ -28,7 +40,8 @@ class ManagerDescriptionContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    managerProfile: state.manager.data
+    // managerProfile: state.manager.data
+    managerProfile: mock
   };
 };
 

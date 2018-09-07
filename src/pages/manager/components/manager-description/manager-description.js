@@ -1,26 +1,15 @@
 import "./manager-description.scss";
 
+import classNames from "classnames";
 import ManagerAvatar from "components/manager-avatar/manager-avatar";
-import { GVButton } from "gv-react-components";
 import moment from "moment";
 import React from "react";
 import { translate } from "react-i18next";
 
-const ManagerDescription = ({ t, managerProfile, goBack }) => {
+const ManagerDescription = ({ t, managerProfile }) => {
   return (
     <div className="manager-description">
       <div className="manager-description__right">
-        <GVButton
-          className="manager-description__navigation-btn"
-          variant="text"
-          onClick={goBack}
-          color="secondary"
-        >
-          <span className="manager-description__back-arrow">&larr;</span>
-          <span className="manager-description__navigation-text">
-            {t("buttons.back")}
-          </span>
-        </GVButton>
         <ManagerAvatar
           className="manager-description__avatar"
           avatarUrl={managerProfile.avatar}
@@ -34,12 +23,6 @@ const ManagerDescription = ({ t, managerProfile, goBack }) => {
           <div className="manager-description__registration-date">
             {t("manager.member-since")}{" "}
             {moment(managerProfile.regDate).format("D MMM YY")}
-          </div>
-          <div className="manager-description__assets-mobile">
-            <span className="manager-descrption__asset-mobile-title">
-              {t("manager.assets")}
-            </span>
-            {managerProfile.assets.join(", ")}
           </div>
         </div>
         <div className="manager-description__info">
