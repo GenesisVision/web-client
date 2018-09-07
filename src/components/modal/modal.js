@@ -34,7 +34,7 @@ class Modal extends Component {
       <Portal open={open}>
         <div
           className={classnames("modal", {
-            "modal--fixed": !disableBackdropClick
+            "modal--absolute": !disableBackdropClick
           })}
         >
           {disableBackdropClick || (

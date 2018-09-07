@@ -4,8 +4,17 @@ import classnames from "classnames";
 import Modal from "components/modal/modal";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import * as ReactDOM from "react-dom";
 import EventListener from "react-event-listener";
+
+const MARGIN_OFFSET = 10;
+
+const VERTICAL_TOP_POSITION = "top";
+const VERTICAL_BOTTOM_POSITION = "bottom";
+const VERTICAL_CENTER_POSITION = "center";
+
+const HORIZONTAL_LEFT_POSITION = "left";
+const HORIZONTAL_RIGHT_POSITION = "right";
+const HORIZONTAL_CENTER_POSITION = "center";
 
 const getAnchorEl = el => {
   return typeof el === "function" ? el() : el;
@@ -13,87 +22,135 @@ const getAnchorEl = el => {
 
 class Popover extends Component {
   state = {
-    windowWidth: undefined
+    windowWidth: undefined,
+    windowHeight: undefined
   };
 
   static getDerivedStateFromProps() {
     return {
-      windowWidth: window.innerWidth
+      windowWidth: window.innerWidth,
+      windowHeight: window.innerHeight
     };
+  }
+
+  constructor(props) {
+    super(props);
+    this.popover = React.createRef();
   }
 
   getAnchorBounds = () => {
     const anchorEl = getAnchorEl(this.props.anchorEl);
-    return anchorEl.getBoundingClientRect();
-  };
-
-  getVertical = value => {
-    const bounds = this.getAnchorBounds();
+    const box = anchorEl.getBoundingClientRect();
     return {
-      top: bounds[value]
+      width: box.width,
+      height: box.height,
+      top: anchorEl.offsetTop,
+      left: anchorEl.offsetLeft
     };
   };
 
-  getHorizontal = value => {
-    const position = {};
-    const bounds = this.getAnchorBounds();
-    if (value === "left") {
-      position[value] = bounds.left;
-    }
-    if (value === "right") {
-      position[value] = this.state.windowWidth - bounds.right;
-    }
-    return position;
+  getPopoverBounds = () => {
+    return this.popover.current
+      ? this.popover.current.getBoundingClientRect()
+      : {};
   };
 
-  getPosition = () => {
-    let position = {};
-    if (getAnchorEl(this.props.anchorEl)) {
-      position = {
-        ...position,
-        ...this.getVertical(this.props.vertical),
-        ...this.getHorizontal(this.props.horizontal)
-      };
+  getTop = () => {
+    const anchorBounds = this.getAnchorBounds();
+    const popoverBounds = this.getPopoverBounds();
+    const vertical = this.getVerticalPosition();
+
+    if (vertical === VERTICAL_CENTER_POSITION) {
+      const aCenter = anchorBounds.top + anchorBounds.height / 2;
+      const popoverOffset = popoverBounds.height / 2;
+      return `${aCenter - popoverOffset}px`;
     }
 
-    return position;
+    if (vertical === VERTICAL_TOP_POSITION) {
+      return `${anchorBounds.top - popoverBounds.height - MARGIN_OFFSET}px`;
+    }
+
+    return `${anchorBounds.top + anchorBounds.height + MARGIN_OFFSET}px`;
   };
 
-  handleWindowResize = () => {
-    this.setState({ windowWidth: window.innerWidth });
+  getLeft = () => {
+    const anchorBounds = this.getAnchorBounds();
+    const popoverBounds = this.getPopoverBounds();
+    const horizontal = this.getHorizontalPosition();
+    if (horizontal === HORIZONTAL_CENTER_POSITION) {
+      const aCenter = anchorBounds.left + anchorBounds.width / 2;
+      const popoverOffset = popoverBounds.width / 2;
+      return `${aCenter - popoverOffset}px`;
+    }
+    if (horizontal === HORIZONTAL_RIGHT_POSITION) {
+      const left = Math.max(
+        MARGIN_OFFSET,
+        anchorBounds.left + anchorBounds.width - popoverBounds.width
+      );
+      return `${left}px`;
+    }
+
+    return `${anchorBounds.left}px`;
+  };
+
+  getVerticalPosition = () => {
+    const anchorBounds = this.getAnchorBounds();
+    const popoverBounds = this.getPopoverBounds();
+    if (
+      this.state.windowHeight -
+        anchorBounds.top -
+        anchorBounds.height -
+        MARGIN_OFFSET <
+        popoverBounds.height &&
+      anchorBounds.top + MARGIN_OFFSET > popoverBounds.height
+    ) {
+      return VERTICAL_TOP_POSITION;
+    }
+    return this.props.vertical;
+  };
+
+  getHorizontalPosition = () => {
+    return this.props.horizontal;
   };
 
   render() {
-    const {
-      anchorEl,
-      horizontal,
-      vertical,
-      noPadding,
-      children,
-      className,
-      ...props
-    } = this.props;
-    const position = this.getPosition();
+    const { anchorEl, noPadding, children, className, ...props } = this.props;
     return (
       <Modal open={Boolean(anchorEl)} transparentBackdrop {...props}>
-        <EventListener target="window" onResize={this.handleWindowResize} />
         <div
           className={classnames("popover", className, {
             "popover--no-padding": noPadding
           })}
-          style={position}
+          ref={this.popover}
         >
           {children}
         </div>
       </Modal>
     );
   }
+
+  componentDidUpdate() {
+    if (this.popover.current) {
+      const left = this.getLeft();
+      const top = this.getTop();
+      this.popover.current.style.left = left;
+      this.popover.current.style.top = top;
+    }
+  }
 }
 
 Popover.propTypes = {
   onClose: PropTypes.func,
-  horizontal: PropTypes.oneOf(["left", "right"]),
-  vertical: PropTypes.oneOf(["top", "bottom"]),
+  horizontal: PropTypes.oneOf([
+    HORIZONTAL_CENTER_POSITION,
+    HORIZONTAL_LEFT_POSITION,
+    HORIZONTAL_RIGHT_POSITION
+  ]),
+  vertical: PropTypes.oneOf([
+    VERTICAL_TOP_POSITION,
+    VERTICAL_CENTER_POSITION,
+    VERTICAL_BOTTOM_POSITION
+  ]),
   anchorEl: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   noPadding: PropTypes.bool,
   disabledBackdrop: PropTypes.bool,

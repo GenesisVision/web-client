@@ -1,4 +1,5 @@
 import React from "react";
+import { translate } from "react-i18next";
 import { Route, Switch } from "react-router-dom";
 
 import AuthLayout from "../components/auth-layout/auth-layout";
@@ -11,9 +12,9 @@ export const FORGOT_PASSWORD_ROUTE = "/forgot-password";
 export const EMAIL_PENDING_ROUTE = `${FORGOT_PASSWORD_ROUTE}/pending`;
 export const PASSWORD_RESTORE_ROUTE = `${FORGOT_PASSWORD_ROUTE}/password-restore`;
 
-const ForgotPasswordRoutes = () => {
+const ForgotPasswordRoutes = ({ t }) => {
   return (
-    <AuthLayout Footer={LoginFooter}>
+    <AuthLayout Footer={LoginFooter} title={t("auth.password-restore.title")}>
       <Switch>
         <Route path={EMAIL_PENDING_ROUTE} component={EmailPendingPage} />
         <Route path={PASSWORD_RESTORE_ROUTE} component={PasswordRestore} />
@@ -23,4 +24,4 @@ const ForgotPasswordRoutes = () => {
   );
 };
 
-export default ForgotPasswordRoutes;
+export default translate()(ForgotPasswordRoutes);

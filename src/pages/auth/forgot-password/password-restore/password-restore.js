@@ -9,10 +9,7 @@ import PasswordRestoreContainer from "./components/password-restore-container";
 const PasswordRestore = ({ location, t }) => {
   const queryParams = qs.parse(location.search.slice(1));
   return (
-    <div>
-      <h1 className="password-restore__title">
-        {t("auth.password-restore.title")}
-      </h1>
+    <div className="password-restore">
       <p className="password-restore__text">
         {t("auth.password-restore.new-password.text")}
       </p>

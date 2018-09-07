@@ -7,10 +7,7 @@ import EmailPendingContainer from "./components/email-pending-container";
 
 const EmailPendingPage = ({ t }) => {
   return (
-    <div>
-      <h1 className="password-pending__title">
-        {t("auth.password-restore.title")}
-      </h1>
+    <div className="password-pending">
       <p className="password-pending__text">
         {t("auth.email-pending.text-section-1")}
       </p>
