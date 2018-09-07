@@ -17,7 +17,7 @@ class AppLayout extends Component {
         <div className="app__header">
           <Header />
         </div>
-        {this.props.children}
+        <div className="app__main">{this.props.children}</div>
         <NotificationsContainer />
       </div>
     );

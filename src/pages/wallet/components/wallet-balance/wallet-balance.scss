@@ -3,51 +3,47 @@
 
 .wallet-balance {
   color: $text-color;
-  display: flex;
-  justify-content: center;
-  align-content: space-between;
-  align-items: center;
-  flex-direction: column;
+  padding: 0 18px;
 
   &__heading {
     font-size: 32px;
-    margin-bottom: 50px;
+    margin: 0 0 30px;
   }
 
   &__statistic {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    display: block;
   }
 
   &__statistic-item {
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 30px;
+    margin-right: 40px;
+
+    &:first-child {
+      width: 100%;
+      margin-bottom: 30px;
+    }
   }
 
   &__statistic-heading {
     font-size: 13px;
     letter-spacing: 0.1px;
     font-weight: 600;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
   }
 
   &__total-balance-value {
     font-size: 26px;
     letter-spacing: 0.3px;
-    font-weight: 600;
-    margin-bottom: 9px;
+    font-weight: 400;
+    margin-bottom: 6px;
   }
 
   &__statistic-value {
     font-size: 22px;
     letter-spacing: 0.3px;
-    font-weight: 600;
-    margin-bottom: 9px;
+    font-weight: 400;
+    margin-bottom: 6px;
   }
 
   &__statistic-equivalent {
@@ -57,46 +53,46 @@
   }
 
   &__footer {
-    display: flex;
-    margin-top: 20px;
-    flex-direction: column;
+    display: block;
+    margin-top: 40px;
   }
 
   &__add-funds {
     box-sizing: border-box;
-    height: 50px;
-    width: 150px;
-    font-weight: bold;
+    height: 45px;
+    width: 135px;
     letter-spacing: 0.3px;
     font-size: 13px;
     margin-bottom: 30px;
+    margin-right: 20px;
   }
 
   &__withdraw {
     box-sizing: border-box;
-    height: 50px;
-    width: 150px;
-    font-weight: bold;
+    height: 45px;
+    width: 135px;
     letter-spacing: 0.3px;
     font-size: 13px;
   }
 
   @include media-breakpoint-landscape-phone() {
     display: block;
-    margin-left: 32px;
 
-    &__statistic {
-      flex-direction: row;
-      justify-content: start;
-      align-items: start;
+    &__heading {
+      margin-bottom: 50px;
     }
 
     &__statistic-item {
-      display: flex;
+      display: inline-flex;
       justify-content: start;
       align-items: start;
-      margin-right: 5.8%;
       margin-bottom: 0;
+      margin-right: 70px;
+
+      &:first-child {
+        width: auto;
+        margin-bottom: 0;
+      }
     }
 
     &__statistic-heading {
@@ -126,10 +122,15 @@
     &__add-funds {
       margin-right: 30px;
       margin-bottom: 0;
+      font-weight: 600;
+    }
+
+    &__withdraw {
+      font-weight: 600;
     }
   }
 
-  @include media-breakpoint-desktop() {
-    margin-left: 0;
+  @include media-breakpoint-tablet() {
+    padding: 0 32px;
   }
 }
