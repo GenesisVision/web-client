@@ -5,7 +5,6 @@ import { bindActionCreators } from "redux";
 
 import * as managerService from "../../services/manager.service";
 import ManagerDescription from "./manager-description";
-import ManagerNavigation from "./manager-description-navigation";
 
 const mock = {
   id: "string",
@@ -31,8 +30,7 @@ class ManagerDescriptionContainer extends Component {
 
     return (
       <Fragment>
-        <ManagerNavigation goBack={goBack} />
-        <ManagerDescription managerProfile={managerProfile} />
+        <ManagerDescription managerProfile={managerProfile} goBack={goBack} />
       </Fragment>
     );
   }
