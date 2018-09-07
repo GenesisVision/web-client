@@ -23,7 +23,7 @@ const WalletBalance = ({
         <div className="wallet-balance__total-balance-value">
           <NumberFormat
             value={walletBalanceData.totalBalanceGVT}
-            decimalScale={3}
+            thousandSeparator={" "}
             displayType="text"
             suffix={" GVT"}
           />
@@ -31,7 +31,7 @@ const WalletBalance = ({
         <div className="wallet-balance__statistic-equivalent">
           <NumberFormat
             value={walletBalanceData.totalBalanceCurrency}
-            decimalScale={3}
+            thousandSeparator={" "}
             displayType="text"
             suffix={" " + currentCurrency}
           />
@@ -44,7 +44,7 @@ const WalletBalance = ({
         <div className="wallet-balance__statistic-value">
           <NumberFormat
             value={walletBalanceData.investedGVT}
-            decimalScale={3}
+            thousandSeparator={" "}
             displayType="text"
             suffix={" GVT"}
           />
@@ -52,7 +52,7 @@ const WalletBalance = ({
         <div className="wallet-balance__statistic-equivalent">
           <NumberFormat
             value={walletBalanceData.investedCurrency}
-            decimalScale={3}
+            thousandSeparator={" "}
             displayType="text"
             suffix={" " + currentCurrency}
           />
@@ -65,7 +65,7 @@ const WalletBalance = ({
         <div className="wallet-balance__statistic-value">
           <NumberFormat
             value={walletBalanceData.availableGVT}
-            decimalScale={3}
+            thousandSeparator={" "}
             displayType="text"
             suffix={" GVT"}
           />
@@ -73,7 +73,7 @@ const WalletBalance = ({
         <div className="wallet-balance__statistic-equivalent">
           <NumberFormat
             value={walletBalanceData.availableCurrency}
-            decimalScale={3}
+            thousandSeparator={" "}
             displayType="text"
             suffix={" " + currentCurrency}
           />

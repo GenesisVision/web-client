@@ -25,28 +25,28 @@
   }
 
   &__statistic-heading {
-    font-size: 13px;
+    font-size: 11px;
     letter-spacing: 0.1px;
     font-weight: 600;
     margin-bottom: 8px;
   }
 
   &__total-balance-value {
-    font-size: 26px;
+    font-size: 24px;
     letter-spacing: 0.3px;
     font-weight: 400;
     margin-bottom: 6px;
   }
 
   &__statistic-value {
-    font-size: 22px;
+    font-size: 18px;
     letter-spacing: 0.3px;
     font-weight: 400;
     margin-bottom: 6px;
   }
 
   &__statistic-equivalent {
-    font-size: 13px;
+    font-size: 11px;
     letter-spacing: 0.3px;
     color: $label-color;
   }
@@ -97,6 +97,7 @@
 
     &__statistic-heading {
       margin-bottom: 16px;
+      font-size: 13px;
     }
 
     &__total-balance-value {
@@ -112,6 +113,12 @@
       font-weight: 600;
       margin-bottom: 12px;
       margin-top: 8px;
+    }
+
+    &__statistic-equivalent {
+      font-size: 13px;
+      letter-spacing: 0.3px;
+      color: $label-color;
     }
 
     &__footer {
