@@ -26,12 +26,16 @@ class Tooltip extends Component {
           {...child.props}
           onMouseEnter={this.handleMouseEnter}
           onMouseLeave={this.handleMouseLeave}
+          onTouchStart={this.handleMouseEnter}
+          onTouchEnd={this.handleMouseLeave}
         />
         <Popover
           disableBackdropClick
           noPadding
           anchorEl={this.state.anchor}
           className="tooltip__popover"
+          vertical={this.props.vertical}
+          horizontal={this.props.horizontal}
         >
           {title || component || render()}
         </Popover>
@@ -43,7 +47,14 @@ class Tooltip extends Component {
 Tooltip.propTypes = {
   component: PropTypes.element,
   title: PropTypes.string,
-  render: PropTypes.func
+  render: PropTypes.func,
+  horizontal: PropTypes.string,
+  vertical: PropTypes.string
+};
+
+Tooltip.defaultProps = {
+  vertical: "top",
+  horizontal: "center"
 };
 
 export default Tooltip;
