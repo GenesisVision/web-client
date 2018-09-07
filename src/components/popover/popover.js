@@ -40,7 +40,13 @@ class Popover extends Component {
 
   getAnchorBounds = () => {
     const anchorEl = getAnchorEl(this.props.anchorEl);
-    return anchorEl.getBoundingClientRect();
+    const box = anchorEl.getBoundingClientRect();
+    return {
+      width: box.width,
+      height: box.height,
+      top: anchorEl.offsetTop,
+      left: anchorEl.offsetLeft
+    };
   };
 
   getPopoverBounds = () => {
@@ -54,28 +60,23 @@ class Popover extends Component {
     const popoverBounds = this.getPopoverBounds();
     const vertical = this.getVerticalPosition();
 
-    if (vertical === VERTICAL_TOP_POSITION) {
-      const top = Math.min(
-        anchorBounds.top - popoverBounds.height - MARGIN_OFFSET,
-        this.state.windowHeight - popoverBounds.height - MARGIN_OFFSET
-      );
-      return `${top}px`;
-    }
-
     if (vertical === VERTICAL_CENTER_POSITION) {
       const aCenter = anchorBounds.top + anchorBounds.height / 2;
       const popoverOffset = popoverBounds.height / 2;
       return `${aCenter - popoverOffset}px`;
     }
 
-    return `${anchorBounds.bottom + MARGIN_OFFSET}px`;
+    if (vertical === VERTICAL_TOP_POSITION) {
+      return `${anchorBounds.top - popoverBounds.height - MARGIN_OFFSET}px`;
+    }
+
+    return `${anchorBounds.top + anchorBounds.height + MARGIN_OFFSET}px`;
   };
 
   getLeft = () => {
     const anchorBounds = this.getAnchorBounds();
     const popoverBounds = this.getPopoverBounds();
     const horizontal = this.getHorizontalPosition();
-
     if (horizontal === HORIZONTAL_CENTER_POSITION) {
       const aCenter = anchorBounds.left + anchorBounds.width / 2;
       const popoverOffset = popoverBounds.width / 2;
@@ -84,31 +85,22 @@ class Popover extends Component {
     if (horizontal === HORIZONTAL_RIGHT_POSITION) {
       const left = Math.max(
         MARGIN_OFFSET,
-        anchorBounds.right - popoverBounds.width
+        anchorBounds.left + anchorBounds.width - popoverBounds.width
       );
       return `${left}px`;
     }
 
-    const left = Math.min(
-      anchorBounds.left,
-      this.state.windowWidth - popoverBounds.width - MARGIN_OFFSET
-    );
-
-    return `${left}px`;
-  };
-
-  handleWindowResize = () => {
-    this.setState({
-      windowWidth: window.innerWidth,
-      windowHeight: window.innerHeight
-    });
+    return `${anchorBounds.left}px`;
   };
 
   getVerticalPosition = () => {
     const anchorBounds = this.getAnchorBounds();
     const popoverBounds = this.getPopoverBounds();
     if (
-      this.state.windowHeight - anchorBounds.bottom - MARGIN_OFFSET <
+      this.state.windowHeight -
+        anchorBounds.top -
+        anchorBounds.height -
+        MARGIN_OFFSET <
         popoverBounds.height &&
       anchorBounds.top + MARGIN_OFFSET > popoverBounds.height
     ) {
@@ -125,7 +117,6 @@ class Popover extends Component {
     const { anchorEl, noPadding, children, className, ...props } = this.props;
     return (
       <Modal open={Boolean(anchorEl)} transparentBackdrop {...props}>
-        <EventListener target="window" onResize={this.handleWindowResize} />
         <div
           className={classnames("popover", className, {
             "popover--no-padding": noPadding
