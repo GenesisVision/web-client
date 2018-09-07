@@ -1,9 +1,6 @@
-import {
-  getSortingColumnName,
-  isSortingAsc
-} from "modules/sorting/helpers/sorting-helpers";
 import React, { Component } from "react";
 
+import { getSortingColumnName, isSortingAsc } from "../helpers/sorting.helpers";
 import TableRow from "./table-row";
 
 class TableHeader extends Component {

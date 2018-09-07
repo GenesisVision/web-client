@@ -1,10 +1,9 @@
-import { dafaultState } from "../reducers/paging-reducers";
-
+import { DEFAULT_PAGING } from "../reducers/table-paging.reducer";
 export const composePaingActionType = actionType => `${actionType}_PAGING`;
 
 export const calculateTotalPages = (
   itemsCount,
-  itemsOnPage = dafaultState.itemsOnPage
+  itemsOnPage = DEFAULT_PAGING.itemsOnPage
 ) => {
   if (itemsCount === 0) return 0;
   return Math.ceil(itemsCount / itemsOnPage);
