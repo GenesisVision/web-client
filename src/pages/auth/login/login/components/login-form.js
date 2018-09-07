@@ -32,10 +32,11 @@ const LoginForm = ({ t, isSubmitting, handleSubmit, error }) => {
         component={GVTextField}
       />
 
-      <Link to={FORGOT_PASSWORD_ROUTE}>
-        <GVButton variant="text">{t("auth.login.forgot")}</GVButton>
-      </Link>
-
+      <div className="login-form__forgot">
+        <Link to={FORGOT_PASSWORD_ROUTE}>
+          <GVButton variant="text">{t("auth.login.forgot")}</GVButton>
+        </Link>
+      </div>
       <FormError error={error} />
 
       <GVButton

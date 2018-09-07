@@ -3,7 +3,7 @@
 .password-pending {
   display: flex;
   flex-direction: column;
-  flex: 1 0 100%;
+  flex: 1 0 70%;
 
   &__text {
     line-height: 24px;
@@ -11,6 +11,7 @@
 
   &__resend {
     margin-top: 24px;
+    margin-bottom: 30px;
   }
 
   &__navigation {
