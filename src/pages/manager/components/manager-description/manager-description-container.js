@@ -6,16 +6,6 @@ import { bindActionCreators } from "redux";
 import * as managerService from "../../services/manager.service";
 import ManagerDescription from "./manager-description";
 
-const mock = {
-  id: "string",
-  username: "string",
-  about:
-    "so many text so many text so many text so many text so many text so many text so many text so many text so many text so many text so many text so many text so many text so many text so many text so many text so many text so many text so many text so many text ",
-  avatar: "",
-  regDate: "2018-09-06T13:37:38.844Z",
-  assets: ["USD", "BTC", "ETH"]
-};
-
 class ManagerDescriptionContainer extends Component {
   componentDidMount() {
     const { service } = this.props;
@@ -38,8 +28,7 @@ class ManagerDescriptionContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    // managerProfile: state.manager.data
-    managerProfile: mock
+    managerProfile: state.manager.data
   };
 };
 
