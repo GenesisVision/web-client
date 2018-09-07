@@ -2,6 +2,7 @@ import notificationsReducer from "pages/app/components/notifications/reducers/no
 import { loadingBarReducer } from "react-redux-loading-bar";
 import { routerReducer } from "react-router-redux";
 import { combineReducers } from "redux";
+import walletSettingsReducer from "shared/reducers/wallet-settings-reducer/wallet-settings.reducer.js";
 
 import navigationReducer from "../modules/navigation/reducers/navigation-reducers";
 import popupReducer from "../modules/popup/reducers/popup-reducers";
@@ -18,6 +19,7 @@ import signUpReducer from "../pages/auth/signup/reducers/signup.reducers";
 import dashboardReducer from "../pages/dashboard/reducers/dashboard.reducers";
 import managerReducer from "../pages/manager/reducers/manager.reducers";
 import programDetailsReducer from "../pages/programs/program-details/reducers/program-details.reducers.js";
+import walletReducer from "../pages/wallet/reducers/wallet.reducers.js";
 import alertMessagesReducer from "../shared/modules/alert-message/reducers/alert-message-reducers";
 import authReducer from "./auth-reducer";
 import emailPendingReducer from "./email-pending-reducer";
@@ -45,5 +47,7 @@ export default combineReducers({
   emailPending: emailPendingReducer,
   programDetails: programDetailsReducer,
   notifications: notificationsReducer,
-  manager: managerReducer
+  manager: managerReducer,
+  wallet: walletReducer,
+  walletSettings: walletSettingsReducer
 });

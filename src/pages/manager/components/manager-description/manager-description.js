@@ -1,6 +1,5 @@
 import "./manager-description.scss";
 
-import classNames from "classnames";
 import ManagerAvatar from "components/manager-avatar/manager-avatar";
 import moment from "moment";
 import React from "react";
@@ -9,7 +8,7 @@ import { translate } from "react-i18next";
 const ManagerDescription = ({ t, managerProfile }) => {
   return (
     <div className="manager-description">
-      <div className="manager-description__right">
+      <div className="manager-description__left">
         <ManagerAvatar
           className="manager-description__avatar"
           avatarUrl={managerProfile.avatar}
@@ -32,6 +31,8 @@ const ManagerDescription = ({ t, managerProfile }) => {
           <div className="manager-description__about">
             {managerProfile.about}
           </div>
+        </div>
+        <div className="manager-description__footer">
           <div className="manager-description__asset-heading">
             {t("manager.assets")}
           </div>

@@ -2,7 +2,7 @@ import "./wallet-widget.scss";
 
 import { WalletIcon } from "components/icon/icon";
 import Popover from "components/popover/popover";
-import { WALLET_ROUTE } from "modules/wallet/wallet.constants";
+import { WALLET_PAGE_ROUTE } from "pages/wallet/wallet-page";
 import PropTypes from "prop-types";
 import React, { Fragment } from "react";
 import { translate } from "react-i18next";
@@ -51,7 +51,7 @@ class WalletWidget extends React.Component {
             </div>
             <div className="wallet-details__item">
               <div className="wallet-details__value">
-                <Link to={WALLET_ROUTE} onClick={this.handleCloseDetails}>
+                <Link to={WALLET_PAGE_ROUTE} onClick={this.handleCloseDetails}>
                   {t("wallet-widget.details")}
                 </Link>
               </div>

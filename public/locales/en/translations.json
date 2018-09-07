@@ -60,6 +60,14 @@
       "back-button-text": "Back"
     }
   },
+  "wallet": {
+    "title": "Wallet",
+    "total-balance": "Total balance",
+    "invested-value": "Invested value",
+    "available": "Available",
+    "add-funds": "Add funds",
+    "withdraw": "Withdraw"
+  },
   "wallet-widget": {
     "total-balance": "Total balance",
     "invested-value": "Invested value",

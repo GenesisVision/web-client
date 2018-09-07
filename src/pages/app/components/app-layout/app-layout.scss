@@ -18,4 +18,14 @@
       padding: 32px;
     }
   }
+
+  &__main {
+    padding: 0 18px;
+    margin-top: 20px;
+
+    @include media-breakpoint-tablet {
+      padding: 0 32px;
+      margin-top: 60px;
+    }
+  }
 }
