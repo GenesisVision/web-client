@@ -1,0 +1,21 @@
+@import "styles/_colors.scss";
+
+.currency {
+  &__options {
+    padding: 10px 0;
+    overflow: hidden;
+  }
+
+  &__option {
+    padding: 15px 30px;
+    cursor: pointer;
+
+    &:hover {
+      background: $secondary-background-color;
+    }
+
+    &--selected {
+      background-color: red;
+    }
+  }
+}
