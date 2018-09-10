@@ -6,8 +6,8 @@ import React, { Component } from "react";
 
 class GlobalSearchInput extends Component {
   handleOnChange = e => {
-    const { service } = this.props;
-    service.updateQueryValue(e.target.value);
+    const { onChange } = this.props;
+    onChange(e.target.value);
   };
 
   render() {
@@ -19,7 +19,7 @@ class GlobalSearchInput extends Component {
         placeholder="Search for programs or managers"
         autoComplete="off"
         adornment={<SearchIcon primary />}
-        adornmentPosition="end"
+        adornmentPosition="start"
         value={query}
         onChange={this.handleOnChange}
       />

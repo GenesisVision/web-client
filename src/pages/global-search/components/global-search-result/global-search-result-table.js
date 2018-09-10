@@ -1,15 +1,13 @@
 import ProgramTableRowShort from "modules/programs-table/components/programs-table/program-table-row-short";
 import { PROGRAMS_COLUMNS } from "modules/programs-table/programs.constants";
 import { Table, TableHeadCell } from "modules/table/components";
-import withTableContainer from "modules/table/components/with-table-container";
 import React, { Fragment } from "react";
 import { translate } from "react-i18next";
 import { compose } from "redux";
 
-import {
-  getGlobalSearchProgramsStorePlace,
-  globalSearchResult
-} from "../../services/global-search-result.service";
+import withTable from "../../../../modules/table/components/with-table";
+import { DEFAULT_PAGING } from "../../../../modules/table/reducers/table-paging.reducer";
+import { globalSearchGetPrograms } from "../../services/global-search-result.service";
 
 const GlobalSearchResult = ({
   t,
@@ -17,11 +15,12 @@ const GlobalSearchResult = ({
   data,
   filtering,
   paging,
-  sorting
+  updatePaging
 }) => {
   return (
     <Table
       paging={paging}
+      updatePaging={updatePaging}
       columns={PROGRAMS_COLUMNS}
       items={data.programs}
       isPending={data.isPending}
@@ -40,11 +39,7 @@ const GlobalSearchResult = ({
         </Fragment>
       }
       renderBodyRow={program => (
-        <ProgramTableRowShort
-          program={program}
-          onExpandClick={() => {}}
-          isAuthenticated={false}
-        />
+        <ProgramTableRowShort program={program} onExpandClick={() => {}} />
       )}
     />
   );
@@ -52,5 +47,7 @@ const GlobalSearchResult = ({
 
 export default compose(
   translate(),
-  withTableContainer(globalSearchResult, getGlobalSearchProgramsStorePlace)
+  withTable({
+    paging: DEFAULT_PAGING
+  })
 )(GlobalSearchResult);

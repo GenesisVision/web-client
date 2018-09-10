@@ -16,7 +16,6 @@ import passwordRestoreReducer from "../pages/auth/forgot-password/reducers/passw
 import loginReducer from "../pages/auth/login/reducers/login.reducers";
 import signUpReducer from "../pages/auth/signup/reducers/signup.reducers";
 import dashboardReducer from "../pages/dashboard/reducers/dashboard.reducers";
-import globalSearchReducer from "../pages/global-search/reducers/global-search.reducer";
 import managerReducer from "../pages/manager/reducers/manager.reducers";
 import programDetailsReducer from "../pages/programs/program-details/reducers/program-details.reducers.js";
 import walletReducer from "../pages/wallet/reducers/wallet.reducers.js";
@@ -29,7 +28,6 @@ export default combineReducers({
   routing: routerReducer,
   loadingBar: loadingBarReducer,
   platformData: platformReducer,
-  globalSearch: globalSearchReducer,
   programsData: programsReducer,
   loginData: loginReducer,
   signUpData: signUpReducer,

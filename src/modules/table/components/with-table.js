@@ -7,7 +7,7 @@ import { updateSorting } from "../reducers/table-sorting.reducer";
 import { composeRequestFilters } from "../services/table.service";
 
 const withTable = ({
-  fetchOnMount,
+  fetchOnMount = false,
   getItems,
   itemsData,
   paging,
@@ -34,6 +34,12 @@ const withTable = ({
     componentDidMount() {
       if (fetchOnMount) {
         this.updatItems();
+      }
+    }
+
+    static getDerivedStateFromProps(props, state) {
+      if (props.items !== undefined) {
+        return { data: props.items };
       }
     }
 
