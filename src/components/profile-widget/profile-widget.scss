@@ -1,15 +1,22 @@
 @import "styles/_colors.scss";
 
 .profile-widget {
+  &__content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+  }
+
   &__avatar {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 44px;
     width: 44px;
+    margin-right: 10px;
     border-radius: 100%;
     overflow: hidden;
-    cursor: pointer;
     background-color: rgba(255, 255, 255, 0.1);
   }
   &__image {

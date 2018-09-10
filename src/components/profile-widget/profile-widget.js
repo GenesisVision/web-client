@@ -4,6 +4,7 @@ import { DetailsIcon, LogoutIcon, SettingsIcon } from "components/icon/icon";
 import Popover from "components/popover/popover";
 import { GVButton } from "gv-react-components";
 import { PROFILE_ROUTE } from "modules/profile/profile.constants";
+import FilterArrowIcon from "modules/table/components/filtering/filter-arrow-icon";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
@@ -23,12 +24,15 @@ class ProfileWidget extends Component {
     const { t, avatar, email, logout } = this.props;
     return (
       <div className="profile-widget">
-        <div className="profile-widget__avatar" onClick={this.handleOpen}>
-          <img
-            alt={email}
-            className="profile-widget__image"
-            src={avatar || UserIcon}
-          />
+        <div className="profile-widget__content" onClick={this.handleOpen}>
+          <div className="profile-widget__avatar">
+            <img
+              alt={email}
+              className="profile-widget__image"
+              src={avatar || UserIcon}
+            />
+          </div>
+          <FilterArrowIcon isOpen={Boolean(this.state.anchor)} />
         </div>
         <Popover
           anchorEl={this.state.anchor}

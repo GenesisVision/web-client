@@ -50,3 +50,7 @@ export const QuestionCircleIcon = props => {
 export const ControlsIcon = props => {
   return <Icon type={"controls"} {...props} />;
 };
+
+export const SearchIcon = props => {
+  return <Icon type={"search"} {...props} />;
+};
