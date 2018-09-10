@@ -5,12 +5,16 @@ const tableSortingReducer = ({ type, sorting }) => {
   return (state = initialState, action) => {
     switch (action.type) {
       case type: {
-        return action.payload;
+        return updateSorting(action.payload);
       }
       default:
         return state;
     }
   };
+};
+
+export const updateSorting = sorting => {
+  return sorting;
 };
 
 export default tableSortingReducer;

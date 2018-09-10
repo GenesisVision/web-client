@@ -10,13 +10,18 @@ const tablePagingReducer = ({ type, paging = {} }) => {
   return (state = initialState, action) => {
     switch (action.type) {
       case type:
-        return {
-          ...state,
-          ...action.paging
-        };
+        return updatePaging(state, action.paging);
       default:
         return state;
     }
   };
 };
+
+export const updatePaging = (oldPaging, newPaging) => {
+  return {
+    ...oldPaging,
+    ...newPaging
+  };
+};
+
 export default tablePagingReducer;

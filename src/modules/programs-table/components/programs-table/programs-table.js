@@ -23,8 +23,11 @@ const ProgramsTable = ({
   data,
   isPending,
   sorting,
+  updateSorting,
   filtering,
+  updateFilter,
   paging,
+  updatePaging,
   toggleFavorite,
   isAuthenticated
 }) => {
@@ -32,8 +35,11 @@ const ProgramsTable = ({
     <Table
       title="All programs"
       sorting={sorting}
+      updateSorting={updateSorting}
       filtering={filtering}
+      updateFilter={updateFilter}
       paging={paging}
+      updatePaging={updatePaging}
       columns={PROGRAMS_COLUMNS}
       items={data.programs}
       isPending={data.isPending}

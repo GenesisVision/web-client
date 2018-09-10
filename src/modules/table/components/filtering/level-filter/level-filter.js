@@ -18,7 +18,7 @@ class LevelFilter extends Component {
         name={this.props.name}
         renderValueText={this.renderValueText}
         value={this.props.value}
-        changeFilter={this.props.onChange}
+        updateFilter={this.props.onChange}
       >
         <LevelFilterPopover values={this.props.values} />
       </Filter>
