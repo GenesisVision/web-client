@@ -1,0 +1,154 @@
+@import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
+
+.manager-description {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: $text-color;
+  padding-right: 18px;
+
+  &__left {
+    margin-right: 18px;
+  }
+
+  &__avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: $secondary-color;
+    overflow: hidden;
+  }
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__header {
+    order: 1;
+  }
+
+  &__heading {
+    font-size: 24px;
+    margin: -5px 0 6px 0;
+  }
+
+  &__info {
+    order: 3;
+  }
+
+  &__registration-date {
+    color: $dark-color;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+  }
+
+  &__footer {
+    order: 2;
+  }
+
+  &__subheading {
+    font-size: 15px;
+    margin: 24px 0 10px;
+    letter-spacing: 0.2px;
+    font-weight: 400;
+    color: $dark-color;
+  }
+
+  &__about {
+    letter-spacing: 0.2px;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  &__asset-heading {
+    color: $dark-color;
+    margin: 24px 0 4px;
+    font-size: 11px;
+    letter-spacing: 0.4px;
+  }
+
+  &__asset-items {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 1.71;
+    letter-spacing: 0.4px;
+  }
+
+  @include media-breakpoint-tablet {
+    padding-right: 0;
+
+    &__info {
+      order: 2;
+    }
+
+    &__footer {
+      order: 3;
+    }
+
+    &__left {
+      margin-right: 60px;
+    }
+
+    &__avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 60px;
+      background-color: $secondary-color;
+      overflow: hidden;
+    }
+
+    &__heading {
+      font-size: 32px;
+      margin: 0 0 10px 0;
+    }
+
+    &__registration-date {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    &__subheading {
+      font-size: 17px;
+      margin: 60px 0 36px;
+      letter-spacing: 0.2px;
+      font-weight: 600;
+      color: $text-color;
+    }
+
+    &__about {
+      letter-spacing: 0.2px;
+      font-size: 14px;
+      line-height: 2;
+    }
+
+    &__asset-heading {
+      margin: 26px 0 13px;
+      font-size: 13px;
+      letter-spacing: 0.4px;
+      color: $short-statistic-subheading-color;
+    }
+
+    &__asset-items {
+      font-size: 14px;
+    }
+  }
+}
+
+.manager-description-navigation {
+  margin-bottom: 20px;
+
+  & .gv-btn--text {
+    padding: 0;
+  }
+
+  &__back-arrow {
+    margin-right: 10px;
+  }
+
+  @include media-breakpoint-tablet {
+    margin-bottom: 40px;
+  }
+}

@@ -16,7 +16,7 @@ class Filter extends Component {
   handleClosePopover = () => this.setState({ anchor: null });
   handleChangeFilter = value => {
     this.handleClosePopover();
-    this.props.changeFilter({ name: this.props.name, value });
+    this.props.updateFilter({ name: this.props.name, value });
   };
 
   render() {

@@ -34,19 +34,12 @@ const withTableContainer = (service, getStorePlace) => TableComponent => {
     return {
       isPending: stateProps.isPending,
       data: stateProps.data,
-      sorting: {
-        value: stateProps.sorting,
-        updateSorting: dispatchProps.changeSorting
-      },
-      paging: {
-        total: stateProps.paging.totalPages,
-        current: stateProps.paging.currentPage,
-        updatePaging: dispatchProps.changePage
-      },
-      filtering: {
-        ...stateProps.filtering,
-        updateFilter: dispatchProps.changeFilter
-      },
+      sorting: stateProps.sorting,
+      updateSorting: dispatchProps.changeSorting,
+      paging: stateProps.paging,
+      updatePaging: dispatchProps.changePage,
+      filtering: stateProps.filtering,
+      updateFilter: dispatchProps.changeFilter,
       getItems: dispatchProps.getItems,
       ...ownProps
     };
