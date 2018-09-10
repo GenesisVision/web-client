@@ -8,19 +8,20 @@ import { HOME_ROUTE } from "pages/app/app.routes";
 import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
 import React from "react";
+import { translate } from "react-i18next";
 
-const Navigation = ({ className }) => {
+const Navigation = ({ t, className }) => {
   return (
     <div className={classnames("navigation", className)}>
       <NavigationItem icon={<GVLogo />} href={HOME_ROUTE} />
-      <NavigationItem icon={<ProgramIcon />} href={PROGRAMS_ROUTE}>
-        Programs
-      </NavigationItem>
       <NavigationItem icon={<DashboardIcon />} href={DASHBOARD_ROUTE}>
-        Dashboard
+        {t("navigation.Dashboard")}
+      </NavigationItem>
+      <NavigationItem icon={<ProgramIcon />} href={PROGRAMS_ROUTE}>
+        {t("navigation.Programs")}
       </NavigationItem>
     </div>
   );
 };
 
-export default Navigation;
+export default translate()(Navigation);

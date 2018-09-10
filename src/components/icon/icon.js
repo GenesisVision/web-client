@@ -54,3 +54,7 @@ export const ControlsIcon = props => {
 export const SearchIcon = props => {
   return <Icon type={"search"} {...props} />;
 };
+
+export const ArrowIcon = props => {
+  return <Icon type={"arrow"} {...props} />;
+};

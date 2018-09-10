@@ -1,6 +1,6 @@
 import "./wallet-widget.scss";
 
-import { WalletIcon } from "components/icon/icon";
+import { ArrowIcon, WalletIcon } from "components/icon/icon";
 import Popover from "components/popover/popover";
 import { WALLET_PAGE_ROUTE } from "pages/wallet/wallet-page";
 import PropTypes from "prop-types";
@@ -52,7 +52,8 @@ class WalletWidget extends React.Component {
             <div className="wallet-details__item">
               <div className="wallet-details__value">
                 <Link to={WALLET_PAGE_ROUTE} onClick={this.handleCloseDetails}>
-                  {t("wallet-widget.details")}
+                  {t("wallet-widget.details")}{" "}
+                  <ArrowIcon className={"wallet-details__arrow-link"} />
                 </Link>
               </div>
             </div>

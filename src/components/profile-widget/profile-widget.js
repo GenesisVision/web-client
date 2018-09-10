@@ -41,23 +41,25 @@ class ProfileWidget extends Component {
         >
           <div className="profile-menu">
             <div className="profile-menu__header">{email}</div>
-            <div className="profile-menu__item profile-menu__item--details">
-              <Link to={PROFILE_ROUTE}>
-                <DetailsIcon />
-                {t("profile-widget.personal-details")}
-              </Link>
-            </div>
-            <div className="profile-menu__item profile-menu__item--settings">
-              <Link to={PROFILE_ROUTE}>
-                <SettingsIcon />
-                {t("profile-widget.settings")}
-              </Link>
-            </div>
-            <div className="profile-menu__item profile-menu__item--logout">
-              <GVButton variant="text" onClick={logout}>
-                <LogoutIcon />
-                {t("profile-widget.logout")}
-              </GVButton>
+            <div className="profile-menu__container">
+              <div className="profile-menu__item profile-menu__item--details">
+                <Link to={PROFILE_ROUTE}>
+                  <DetailsIcon />
+                  {t("profile-widget.personal-details")}
+                </Link>
+              </div>
+              <div className="profile-menu__item profile-menu__item--settings">
+                <Link to={PROFILE_ROUTE}>
+                  <SettingsIcon />
+                  {t("profile-widget.settings")}
+                </Link>
+              </div>
+              <div className="profile-menu__item profile-menu__item--logout">
+                <GVButton variant="text" onClick={logout}>
+                  <LogoutIcon />
+                  {t("profile-widget.logout")}
+                </GVButton>
+              </div>
             </div>
           </div>
         </Popover>

@@ -5,13 +5,15 @@
   background-repeat: no-repeat;
   background-size: contain;
   &--programs {
-    background-image: url("../../shared/media/icons/programs.svg");
+    height: 15px;
+    background-image: url("../../shared/media/programs.svg");
   }
   &--dashboard {
-    background-image: url("../../shared/media/icons/dashboard.svg");
+    height: 18px;
+    background-image: url("../../shared/media/dashboard.svg");
   }
   &--collapse {
-    background-image: url("../../shared/media/icons/collapse.svg");
+    background-image: url("../../shared/media/collapse.svg");
   }
   &--ring {
     background-image: url("../../shared/media/ring.svg");
@@ -38,7 +40,7 @@
   &--question-circle {
     height: 17px;
     width: 17px;
-    background-image: url("../../shared/media/icons/question-circle.svg");
+    background-image: url("../../shared/media/question-circle.svg");
   }
   &--controls {
     height: 20px;
@@ -47,5 +49,10 @@
   &--search {
     height: 20px;
     background-image: url("../../shared/media/search.svg");
+  }
+  &--arrow {
+    width: 7px;
+    height: 7px;
+    background-image: url("../../shared/media/arrow.svg");
   }
 }

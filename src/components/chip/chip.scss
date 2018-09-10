@@ -14,12 +14,12 @@
 
   &--negative {
     color: $negative-color;
-    background-color: $negative-background-color;
+    background-color: rgba($negative-color, 0.1);
   }
 
   &--positive {
-    color: $positive-color;
-    background-color: $positive-background-color;
+    color: $primary-color;
+    background-color: rgba($primary-color, 0.1);
   }
 
   &--pointer {
