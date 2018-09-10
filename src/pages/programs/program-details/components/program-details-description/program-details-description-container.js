@@ -1,9 +1,11 @@
 import { toggleReinvesting } from "modules/program-reinvesting/services/program-reinvesting.service";
+import { MANAGER_DETAILS_ROUTE } from "pages/manager/manager.page";
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { goBack } from "react-router-redux";
 import { bindActionCreators } from "redux";
 import getParams from "utils/get-params";
+import replaceParams from "utils/replace-params";
 
 import { PROGRAM_DETAILS_ROUTE } from "../../../programs.routes";
 import * as programDetailsService from "../../services/program-details.service";
@@ -23,7 +25,7 @@ class ProgramDetailsDescriptionContainer extends Component {
   };
 
   render() {
-    const { programDetails, goBack } = this.props;
+    const { programDetails, goBack, programAuthorUrl } = this.props;
     const { toggleReinvesting } = this;
 
     if (!programDetails) return null;
@@ -33,7 +35,7 @@ class ProgramDetailsDescriptionContainer extends Component {
         <ProgramDetailsNavigation goBack={goBack} />
         <ProgramDetailsDescription
           programDetails={programDetails}
-          programAuthorUrl={""}
+          programAuthorUrl={programAuthorUrl}
           programInvestUrl={""}
           programWithdrawUrl={""}
           toggleReinvesting={toggleReinvesting}
@@ -44,9 +46,17 @@ class ProgramDetailsDescriptionContainer extends Component {
 }
 
 const mapStateToProps = state => {
+  const { data } = state.programDetails.programDetailsDescription;
+
   return {
-    programDetails: state.programDetails.programDetailsDescription.data,
-    programId: getParams(state.routing.location.pathname, PROGRAM_DETAILS_ROUTE)
+    programDetails: data,
+    programId: getParams(
+      state.routing.location.pathname,
+      PROGRAM_DETAILS_ROUTE
+    ),
+    programAuthorUrl: replaceParams(MANAGER_DETAILS_ROUTE, {
+      ":managerId": data && data.manager && data.manager.id
+    })
   };
 };
 

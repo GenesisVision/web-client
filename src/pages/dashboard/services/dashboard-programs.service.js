@@ -1,17 +1,6 @@
-import tableServiceFactory from "modules/table/services/table.service";
+import investorApi from "services/api-client/investor-api";
 import authService from "services/auth-service";
 
-import {
-  DASHBOARD_PROGRAMS,
-  fetchPrograms
-} from "../actions/dashboard.actions";
-import { DASHBOARD_PROGRAMS_FILTERS } from "../dashboard.constants";
-
-export const getStorePlace = store => store.dashboard.programs;
-
-export default tableServiceFactory({
-  type: DASHBOARD_PROGRAMS,
-  fetchItems: filters => fetchPrograms(authService.getAuthArg(), filters),
-  getStorePlace,
-  defaultFilters: DASHBOARD_PROGRAMS_FILTERS
-});
+export const getDashboardPrograms = filters => {
+  return investorApi.v10InvestorProgramsGet(authService.getAuthArg(), filters);
+};
