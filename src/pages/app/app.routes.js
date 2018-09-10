@@ -1,5 +1,8 @@
 import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import DashboardRoutes from "pages/dashboard/dashboard.routes";
+import ManagerPage, {
+  MANAGER_DETAILS_ROUTE_REGEXP
+} from "pages/manager/manager.page";
 import NotFoundPage from "pages/not-found/not-found.routes";
 import PrivateRoute from "pages/private-route";
 import WalletPage, { WALLET_PAGE_ROUTE } from "pages/wallet/wallet-page";
@@ -17,6 +20,7 @@ const AppRoutes = () => {
       <Switch>
         <Redirect exact from={HOME_ROUTE} to={PROGRAMS_ROUTE} />
         <Route path={PROGRAMS_ROUTE} component={ProgramsRoutes} />
+        <Route path={MANAGER_DETAILS_ROUTE_REGEXP} component={ManagerPage} />
         <PrivateRoute path={DASHBOARD_ROUTE} component={DashboardRoutes} />
         <PrivateRoute path={WALLET_PAGE_ROUTE} component={WalletPage} />
         <Route component={NotFoundPage} />

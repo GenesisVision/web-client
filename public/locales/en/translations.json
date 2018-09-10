@@ -97,6 +97,11 @@
     "Withdrawing": "Withdrawing",
     "Ended": "Ended"
   },
+  "manager": {
+    "about": "About",
+    "assets": "Assets",
+    "member-since": "Member since"
+  },
   "programs-page": {
     "title": "Programs",
     "tabs": {
