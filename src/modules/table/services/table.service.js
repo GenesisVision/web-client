@@ -1,8 +1,6 @@
 import { composeFilters } from "../helpers/filtering.helpers";
 import { calculateSkipAndTake } from "../helpers/paging.helpers";
 
-export const getItems = ({ paging, sorting, filtering }) => {};
-
 export const composeRequestFilters = ({
   paging,
   sorting,

@@ -10,7 +10,9 @@ const tableServiceFactory = ({
 
   const getItems = () => (dispatch, getState) => {
     const filters = composeRequestFilters(getState);
-    dispatch(fetchItems(filters));
+    const dispathableAction = fetchItems(filters, getState());
+    if (dispathableAction !== null);
+    dispatch(dispathableAction);
   };
 
   const composeRequestFilters = getState => {
