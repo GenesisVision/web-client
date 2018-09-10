@@ -1,0 +1,41 @@
+@import "styles/_colors.scss";
+
+.select {
+  &__options {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+    overflow: hidden;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  &__value {
+    letter-spacing: 0.4px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  &__icon {
+    display: inline-flex;
+    margin-left: 8px;
+  }
+
+  &__option {
+    padding: 15px 30px;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.9;
+    }
+
+    &--selected {
+      color: $primary-color;
+    }
+  }
+}
