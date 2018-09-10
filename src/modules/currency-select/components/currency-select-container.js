@@ -1,36 +1,49 @@
-import CurrencySelect from "modules/currency-select/components/currency-select";
+import "./currency-select.scss";
+
+import Select from "components/select/select";
+import { CURRENCY_VALUES } from "modules/currency-select/currency-select.constants";
+import { updateCurrentCurrency } from "modules/currency-select/services/currency-select-services";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-
-export const CURRENCY_FILTER_VALUES = {
-  GVT: "GVT",
-  ETH: "Ethereum",
-  BTC: "Bitcoin",
-  ADA: "Cardano",
-  USD: "US Dollar",
-  EUR: "Euro"
-};
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 class CurrencySelectContainer extends Component {
-  state = { value: "GVT" };
-
-  handleSelect = value => {
-    this.setState({ value });
-  };
-
   render() {
     return (
-      <CurrencySelect value={this.state.value} onSelect={this.handleSelect}>
-        {Object.keys(CURRENCY_FILTER_VALUES).map(currency => {
+      <Select
+        className={"currency-select"}
+        value={this.props.currentCurrency}
+        onSelect={this.props.service.updateCurrentCurrency}
+      >
+        {Object.keys(CURRENCY_VALUES).map(currency => {
           return (
-            <option value={currency}>{CURRENCY_FILTER_VALUES[currency]}</option>
+            <option value={currency} key={currency}>
+              {CURRENCY_VALUES[currency]}
+            </option>
           );
         })}
-      </CurrencySelect>
+      </Select>
     );
   }
 }
 
-CurrencySelectContainer.propTypes = {};
+CurrencySelectContainer.propTypes = {
+  currentCurrency: PropTypes.oneOf(Object.keys(CURRENCY_VALUES)),
+  service: PropTypes.shape({
+    updateCurrentCurrency: PropTypes.func
+  })
+};
 
-export default CurrencySelectContainer;
+const mapStateToProps = ({ accountSettings }) => ({
+  currentCurrency: accountSettings.currentCurrency
+});
+
+const mapDispatchToProps = dispatch => ({
+  service: bindActionCreators({ updateCurrentCurrency }, dispatch)
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CurrencySelectContainer);

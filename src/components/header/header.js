@@ -11,17 +11,21 @@ import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <div className="header">
-      <Navigation />
-      <AuthorizationControlsContainer className="header__buttons" />
-
-      <div>
-        <CurrencySelectContainer />
-        <Link to="/search">
-          <SearchIcon />
-        </Link>
+      <div className="header__left">
+        <Navigation />
+        <AuthorizationControlsContainer className="header__buttons" />
       </div>
 
-      <ProfileHeaderContainer />
+      <div className="header__right">
+        <CurrencySelectContainer />
+        <div className="header__search">
+          <Link to="/search">
+            <SearchIcon />
+          </Link>
+        </div>
+        <div className="header__separator" />
+        <ProfileHeaderContainer />
+      </div>
     </div>
   );
 };
