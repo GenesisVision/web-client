@@ -3,9 +3,9 @@
 
 .program-details-statistics {
   box-sizing: border-box;
-  padding: 32px 20px 20px;
+  padding: 32px 26px 20px;
   margin-bottom: 32px;
-  width: 270px;
+  width: 315px;
   color: $text-color;
   display: flex;
   flex-direction: row;
@@ -21,12 +21,12 @@
   &__balance {
     display: flex;
     flex-direction: column;
-    min-width: 90px;
+    min-width: 100px;
     margin-bottom: 22px;
   }
 
   &__item:nth-child(2n + 1) {
-    margin-right: 20px;
+    margin-right: 26px;
   }
 
   &__balance {
@@ -42,13 +42,13 @@
   }
 
   &__value {
-    font-size: 14px;
+    font-size: 16px;
     letter-spacing: 0.6px;
     font-weight: normal;
   }
 
   &__item--secondary &__value {
-    font-size: 12px;
+    font-size: 14px;
     letter-spacing: 0.4px;
   }
 
