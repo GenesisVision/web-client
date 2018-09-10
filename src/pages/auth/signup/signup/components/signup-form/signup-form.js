@@ -1,5 +1,3 @@
-import "./signup-form.scss";
-
 import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import React from "react";
@@ -21,6 +19,7 @@ const SignUpForm = ({ isSubmitting, handleSubmit, error, t }) => {
         type="email"
         name="email"
         label={t("auth.signup.email-field-text")}
+        autoComplete="email"
         component={GVTextField}
       />
 

@@ -3,15 +3,22 @@
 @import "styles/_breakpoint.scss";
 
 .login {
-  &__header {
-    margin-bottom: 30px;
-  }
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 70%;
 
-  &__heading {
-    margin: 0 0 35px 0;
+  &-form {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 70%;
+
+    &__forgot {
+      margin-bottom: 30px;
+    }
   }
 
   &__submit-button {
-    margin-top: 145px;
+    align-self: flex-start;
+    margin-top: auto;
   }
 }

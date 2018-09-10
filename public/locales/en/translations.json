@@ -60,6 +60,14 @@
       "back-button-text": "Back"
     }
   },
+  "wallet": {
+    "title": "Wallet",
+    "total-balance": "Total balance",
+    "invested-value": "Invested value",
+    "available": "Available",
+    "add-funds": "Add funds",
+    "withdraw": "Withdraw"
+  },
   "wallet-widget": {
     "total-balance": "Total balance",
     "invested-value": "Invested value",
@@ -88,6 +96,11 @@
     "Investing": "Investing",
     "Withdrawing": "Withdrawing",
     "Ended": "Ended"
+  },
+  "manager": {
+    "about": "About",
+    "assets": "Assets",
+    "member-since": "Member since"
   },
   "programs-page": {
     "title": "Programs",
