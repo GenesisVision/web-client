@@ -13,7 +13,6 @@ const Header = () => {
     <div className="header">
       <div className="header__left">
         <Navigation />
-        <AuthorizationControlsContainer className="header__buttons" />
       </div>
 
       <div className="header__right">
@@ -25,6 +24,7 @@ const Header = () => {
         </div>
         <div className="header__separator" />
         <ProfileHeaderContainer />
+        <AuthorizationControlsContainer className="header__buttons" />
       </div>
     </div>
   );
