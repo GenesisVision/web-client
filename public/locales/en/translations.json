@@ -158,6 +158,19 @@
       "status": "Status",
       "withdraw": "Withdraw",
       "withdraw-notice-text": "You can withdraw only the invested funds, the profit will be withdrawn to your account at the end of the period automatically"
+    },
+    "statistics": {
+      "title": "Statistics",
+      "balance": "Balance",
+      "investors": "Investors",
+      "trades": "Trades",
+      "succesTrades": "Succes trades",
+      "profitFactor": "Profit factor",
+      "sharpeRatio": "Sharpe Ratio",
+      "maxDrawdown": "Max Drawdown",
+      "startDay": "Start day",
+      "periodEnd": "Period end",
+      "period": "Period"
     }
   },
   "program-actions": {
