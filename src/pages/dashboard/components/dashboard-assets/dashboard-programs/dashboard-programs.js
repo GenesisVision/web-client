@@ -57,23 +57,17 @@ const Dashboardprograms = ({
           />
         </Fragment>
       )}
-      renderHeader={({ sortingName, isAsc, handleSorting }) => (
-        <Fragment>
-          {DASHBOARD_PROGRAMS_COLUMNS.map(x => {
-            return (
-              <TableHeadCell
-                key={x.name}
-                className={`dashboard-programs__cell--${x.name}`}
-                sortable={x.sortingName !== undefined}
-                active={x.sortingName === sortingName}
-                isAsc={isAsc}
-                onClick={handleSorting(x.sortingName)}
-              >
-                {t(`dashboard-page.programs-header.${x.name}`)}
-              </TableHeadCell>
-            );
-          })}
-        </Fragment>
+      renderHeader={({ column, sortingName, isAsc, handleSorting }) => (
+        <TableHeadCell
+          key={column.name}
+          className={`dashboard-programs__cell--${column.name}`}
+          sortable={column.sortingName !== undefined}
+          active={column.sortingName === sortingName}
+          isAsc={isAsc}
+          onClick={handleSorting(column.sortingName)}
+        >
+          {t(`dashboard-page.programs-header.${column.name}`)}
+        </TableHeadCell>
       )}
       renderBodyRow={program => (
         <TableRow>

@@ -7,7 +7,6 @@ import { compose } from "redux";
 
 import withTable from "../../../../modules/table/components/with-table";
 import { DEFAULT_PAGING } from "../../../../modules/table/reducers/table-paging.reducer";
-import { globalSearchGetPrograms } from "../../services/global-search-result.service";
 
 const GlobalSearchResult = ({
   t,
@@ -24,20 +23,14 @@ const GlobalSearchResult = ({
       columns={PROGRAMS_COLUMNS}
       items={data.programs}
       isPending={data.isPending}
-      renderHeader={
-        <Fragment>
-          {PROGRAMS_COLUMNS.map(x => {
-            return (
-              <TableHeadCell
-                key={x.name}
-                className={`programs-table__cell--${x.name}`}
-              >
-                {t(`programs-page.programs-header.${x.name}`)}
-              </TableHeadCell>
-            );
-          })}
-        </Fragment>
-      }
+      renderHeader={column => (
+        <TableHeadCell
+          key={column.name}
+          className={`programs-table__cell--${column.name}`}
+        >
+          {t(`programs-page.programs-header.${column.name}`)}
+        </TableHeadCell>
+      )}
       renderBodyRow={program => (
         <ProgramTableRowShort program={program} onExpandClick={() => {}} />
       )}

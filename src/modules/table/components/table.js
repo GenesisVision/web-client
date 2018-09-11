@@ -9,6 +9,7 @@ import TableToolbar from "./table-toolbar";
 
 const Table = ({
   title,
+  columns,
   items,
   isPending,
   sorting,
@@ -29,7 +30,11 @@ const Table = ({
         updateFilter={updateFilter}
         renderFilters={renderFilters}
       />
-      <TableHeader sorting={sorting} updateSorting={updateSorting}>
+      <TableHeader
+        columns={columns}
+        sorting={sorting}
+        updateSorting={updateSorting}
+      >
         {renderHeader}
       </TableHeader>
       <TableBody items={items}>{renderBodyRow}</TableBody>
