@@ -4,6 +4,8 @@ import Surface from "components/surface/surface";
 import { GVTab, GVTabs } from "gv-react-components";
 import React, { Component } from "react";
 
+import DashboardPortfolioChartSectionContainer from "./dashboard-portfolio-chart-section/dashboard-portfolio-chart-section-container";
+
 class DashboardChart extends Component {
   state = {
     tab: "portfolio"
@@ -22,6 +24,7 @@ class DashboardChart extends Component {
           <GVTab value={"portfolio"} label="Portfolio" />
           <GVTab value={"profit"} label="Profit" />
         </GVTabs>
+        {tab === "portfolio" && <DashboardPortfolioChartSectionContainer />}
       </Surface>
     );
   }

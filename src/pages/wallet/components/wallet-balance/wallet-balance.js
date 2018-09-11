@@ -4,7 +4,6 @@ import { GVButton } from "gv-react-components";
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { Link } from "react-router-dom";
 
 const WalletBalance = ({
   t,

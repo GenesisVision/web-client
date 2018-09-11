@@ -11,20 +11,22 @@ class WalletBalanceContainer extends Component {
     service.fetchWalletBalance();
   }
 
+  componentDidUpdate(prevProps) {
+    const { service, currency } = this.props;
+    if (currency !== prevProps.currency) {
+      service.fetchWalletBalance();
+    }
+  }
+
   render() {
-    const {
-      walletBalanceData,
-      currentCurrency,
-      addFunds,
-      withdraw
-    } = this.props;
+    const { walletBalanceData, currency, addFunds, withdraw } = this.props;
 
     if (!walletBalanceData) return null;
 
     return (
       <WalletBalance
         walletBalanceData={walletBalanceData}
-        currentCurrency={currentCurrency}
+        currentCurrency={currency}
         handleAddFunds={addFunds}
         handleWithdraw={withdraw}
       />
@@ -35,7 +37,7 @@ class WalletBalanceContainer extends Component {
 const mapStateToProps = state => {
   return {
     walletBalanceData: state.wallet.balance.data,
-    currentCurrency: state.walletSettings.currentCurrency
+    currency: state.accountSettings.currency
   };
 };
 
