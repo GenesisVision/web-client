@@ -11,44 +11,18 @@
 
   &__statistic {
     display: block;
-  }
-
-  &__statistic-item {
-    display: inline-flex;
-    flex-direction: column;
-    margin-right: 40px;
-
     &:first-child {
       width: 100%;
       margin-bottom: 30px;
     }
   }
 
-  &__statistic-heading {
-    font-size: 11px;
-    letter-spacing: 0.1px;
-    font-weight: 600;
-    margin-bottom: 8px;
-  }
-
   &__total-balance-value {
     font-size: 24px;
     letter-spacing: 0.3px;
     font-weight: 400;
-    margin-bottom: 6px;
-  }
-
-  &__statistic-value {
-    font-size: 18px;
-    letter-spacing: 0.3px;
-    font-weight: 400;
-    margin-bottom: 6px;
-  }
-
-  &__statistic-equivalent {
-    font-size: 11px;
-    letter-spacing: 0.3px;
-    color: $label-color;
+    margin-bottom: 10px;
+    margin-top: 0;
   }
 
   &__footer {
@@ -82,22 +56,11 @@
       font-size: 32px;
     }
 
-    &__statistic-item {
-      display: inline-flex;
-      justify-content: start;
-      align-items: start;
-      margin-bottom: 0;
-      margin-right: 70px;
-
+    &__statistic {
       &:first-child {
         width: auto;
         margin-bottom: 0;
       }
-    }
-
-    &__statistic-heading {
-      margin-bottom: 16px;
-      font-size: 13px;
     }
 
     &__total-balance-value {
@@ -105,20 +68,6 @@
       letter-spacing: 0.4px;
       font-weight: 600;
       margin-bottom: 12px;
-    }
-
-    &__statistic-value {
-      font-size: 24px;
-      letter-spacing: 0.4px;
-      font-weight: 600;
-      margin-bottom: 12px;
-      margin-top: 8px;
-    }
-
-    &__statistic-equivalent {
-      font-size: 13px;
-      letter-spacing: 0.3px;
-      color: $label-color;
     }
 
     &__footer {
