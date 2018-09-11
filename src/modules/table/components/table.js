@@ -14,8 +14,6 @@ const Table = ({
   isPending,
   sorting,
   updateSorting,
-  filtering,
-  updateFilter,
   paging,
   updatePaging,
   renderFilters,
@@ -24,12 +22,7 @@ const Table = ({
 }) => {
   return (
     <div className="table">
-      <TableToolbar
-        title={title}
-        filtering={filtering}
-        updateFilter={updateFilter}
-        renderFilters={renderFilters}
-      />
+      <TableToolbar title={title} renderFilters={renderFilters} />
       <TableHeader
         columns={columns}
         sorting={sorting}

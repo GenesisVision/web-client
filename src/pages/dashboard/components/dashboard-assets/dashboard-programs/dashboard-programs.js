@@ -40,7 +40,6 @@ const Dashboardprograms = ({
   return (
     <Table
       filtering={filtering}
-      updateFilter={updateFilter}
       sorting={sorting}
       updateSorting={updateSorting}
       paging={paging}
@@ -48,12 +47,12 @@ const Dashboardprograms = ({
       columns={DASHBOARD_PROGRAMS_COLUMNS}
       items={data.programs}
       isPending={data.isPending}
-      renderFilters={handleFilterChange => (
+      renderFilters={() => (
         <Fragment>
           <DateRangeFilter
             name={DATE_RANGE_FILTER_NAME}
             value={filtering[DATE_RANGE_FILTER_NAME]}
-            onChange={handleFilterChange}
+            onChange={updateFilter}
           />
         </Fragment>
       )}
