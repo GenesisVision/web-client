@@ -39,84 +39,86 @@ const ProgramDetailsStatistics = ({ t }) => (
       </span>
     </div>
 
-    <div className="program-details-statistics__item">
-      <span className="program-details-statistics__subheading">
-        {t("program-details-page.statistics.investors")}
-      </span>
-      <span className="program-details-statistics__value">
-        <NumberFormat
-          value={statistic.investors}
-          thousandSeparator={" "}
-          displayType="text"
-        />
-      </span>
-    </div>
+    <div className="program-details-statistics__particular-information">
+      <div className="program-details-statistics__item">
+        <span className="program-details-statistics__subheading">
+          {t("program-details-page.statistics.investors")}
+        </span>
+        <span className="program-details-statistics__value">
+          <NumberFormat
+            value={statistic.investors}
+            thousandSeparator={" "}
+            displayType="text"
+          />
+        </span>
+      </div>
 
-    <div className="program-details-statistics__item">
-      <span className="program-details-statistics__subheading">
-        {t("program-details-page.statistics.trades")}
-      </span>
-      <span className="program-details-statistics__value">
-        <NumberFormat
-          value={statistic.trades}
-          thousandSeparator={" "}
-          displayType="text"
-        />
-      </span>
-    </div>
+      <div className="program-details-statistics__item">
+        <span className="program-details-statistics__subheading">
+          {t("program-details-page.statistics.trades")}
+        </span>
+        <span className="program-details-statistics__value">
+          <NumberFormat
+            value={statistic.trades}
+            thousandSeparator={" "}
+            displayType="text"
+          />
+        </span>
+      </div>
 
-    <div className="program-details-statistics__item program-details-statistics__item--secondary">
-      <span className="program-details-statistics__subheading">
-        {t("program-details-page.statistics.succesTrades")}
-      </span>
-      <span className="program-details-statistics__value">
-        {statistic.successTrades} %
-      </span>
-    </div>
+      <div className="program-details-statistics__item program-details-statistics__item--secondary">
+        <span className="program-details-statistics__subheading">
+          {t("program-details-page.statistics.succesTrades")}
+        </span>
+        <span className="program-details-statistics__value">
+          {statistic.successTrades} %
+        </span>
+      </div>
 
-    <div className="program-details-statistics__item program-details-statistics__item--secondary">
-      <span className="program-details-statistics__subheading">
-        {t("program-details-page.statistics.profitFactor")}
-      </span>
-      <span className="program-details-statistics__value">
-        {statistic.profitFactor} %
-      </span>
-    </div>
+      <div className="program-details-statistics__item program-details-statistics__item--secondary">
+        <span className="program-details-statistics__subheading">
+          {t("program-details-page.statistics.profitFactor")}
+        </span>
+        <span className="program-details-statistics__value">
+          {statistic.profitFactor} %
+        </span>
+      </div>
 
-    <div className="program-details-statistics__item program-details-statistics__item--secondary">
-      <span className="program-details-statistics__subheading">
-        {t("program-details-page.statistics.sharpeRatio")}
-      </span>
-      <span className="program-details-statistics__value">
-        {statistic.sharpeRatio} %
-      </span>
-    </div>
+      <div className="program-details-statistics__item program-details-statistics__item--secondary">
+        <span className="program-details-statistics__subheading">
+          {t("program-details-page.statistics.sharpeRatio")}
+        </span>
+        <span className="program-details-statistics__value">
+          {statistic.sharpeRatio} %
+        </span>
+      </div>
 
-    <div className="program-details-statistics__item program-details-statistics__item--secondary">
-      <span className="program-details-statistics__subheading">
-        {t("program-details-page.statistics.maxDrawdown")}
-      </span>
-      <span className="program-details-statistics__value">
-        {statistic.maxDrawdown} %
-      </span>
-    </div>
+      <div className="program-details-statistics__item program-details-statistics__item--secondary">
+        <span className="program-details-statistics__subheading">
+          {t("program-details-page.statistics.maxDrawdown")}
+        </span>
+        <span className="program-details-statistics__value">
+          {statistic.maxDrawdown} %
+        </span>
+      </div>
 
-    <div className="program-details-statistics__item program-details-statistics__item--secondary">
-      <span className="program-details-statistics__subheading">
-        {t("program-details-page.statistics.startDay")}
-      </span>
-      <span className="program-details-statistics__value">
-        {moment(statistic.periodStarts).format("D MMM YYYY")}
-      </span>
-    </div>
+      <div className="program-details-statistics__item program-details-statistics__item--secondary">
+        <span className="program-details-statistics__subheading">
+          {t("program-details-page.statistics.startDay")}
+        </span>
+        <span className="program-details-statistics__value">
+          {moment(statistic.periodStarts).format("D MMM YYYY")}
+        </span>
+      </div>
 
-    <div className="program-details-statistics__item program-details-statistics__item--secondary">
-      <span className="program-details-statistics__subheading">
-        {t("program-details-page.statistics.periodEnd")}
-      </span>
-      <span className="program-details-statistics__value">
-        {moment(statistic.periodEnds).format("D MMM YYYY")}
-      </span>
+      <div className="program-details-statistics__item program-details-statistics__item--secondary">
+        <span className="program-details-statistics__subheading">
+          {t("program-details-page.statistics.periodEnd")}
+        </span>
+        <span className="program-details-statistics__value">
+          {moment(statistic.periodEnds).format("D MMM YYYY")}
+        </span>
+      </div>
     </div>
   </Surface>
 );

@@ -3,13 +3,10 @@
 
 .program-details-statistics {
   box-sizing: border-box;
-  padding: 32px 26px 20px;
+  padding: 32px 22px 20px;
   margin-bottom: 32px;
-  width: 315px;
+  width: 100%;
   color: $text-color;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
 
   &__heading {
     margin: 0 0 20px;
@@ -17,16 +14,18 @@
     letter-spacing: 0.2px;
   }
 
+  &__particular-information {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
   &__item,
   &__balance {
     display: flex;
     flex-direction: column;
-    min-width: 100px;
+    width: 43%;
     margin-bottom: 22px;
-  }
-
-  &__item:nth-child(2n + 1) {
-    margin-right: 26px;
   }
 
   &__balance {
@@ -52,7 +51,7 @@
     letter-spacing: 0.4px;
   }
 
-  @include media-breakpoint-tablet() {
+  @include media-breakpoint-landscape-phone() {
     padding: 40px 32px 32px;
     width: 315px;
 
@@ -61,14 +60,10 @@
       font-size: 17px;
     }
 
-    &__item:nth-child(2n + 1) {
-      margin-right: 30px;
-    }
-
     &__item,
     &__balance {
       margin-bottom: 26px;
-      min-width: 100px;
+      min-width: 50%;
     }
 
     &__subheading {
@@ -84,6 +79,12 @@
     &__value {
       font-weight: 600;
       font-size: 18px;
+    }
+  }
+
+  @media (min-width: 494px) {
+    &__item {
+      width: 23.5%;
     }
   }
 }
