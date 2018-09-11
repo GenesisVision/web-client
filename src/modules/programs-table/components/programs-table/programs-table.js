@@ -36,31 +36,29 @@ const ProgramsTable = ({
       title="All programs"
       sorting={sorting}
       updateSorting={updateSorting}
-      filtering={filtering}
-      updateFilter={updateFilter}
       paging={paging}
       updatePaging={updatePaging}
       columns={PROGRAMS_COLUMNS}
       items={data.programs}
       isPending={data.isPending}
-      renderFilters={handleFilterChange => (
+      renderFilters={() => (
         <Fragment>
           <LevelFilter
             name="level"
             value={filtering["level"]}
-            onChange={handleFilterChange}
+            onChange={updateFilter}
           />
           <SelectFilter
             name="currency"
             label="Currency"
             value={filtering["currency"]}
             values={selectFilterValues}
-            onChange={handleFilterChange}
+            onChange={updateFilter}
           />
           <DateRangeFilter
             name="dateRange"
             value={filtering["dateRange"]}
-            onChange={handleFilterChange}
+            onChange={updateFilter}
           />
         </Fragment>
       )}
