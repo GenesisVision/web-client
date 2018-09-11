@@ -23,8 +23,11 @@ const ProgramsTable = ({
   data,
   isPending,
   sorting,
+  updateSorting,
   filtering,
+  updateFilter,
   paging,
+  updatePaging,
   toggleFavorite,
   isAuthenticated
 }) => {
@@ -32,8 +35,11 @@ const ProgramsTable = ({
     <Table
       title="All programs"
       sorting={sorting}
+      updateSorting={updateSorting}
       filtering={filtering}
+      updateFilter={updateFilter}
       paging={paging}
+      updatePaging={updatePaging}
       columns={PROGRAMS_COLUMNS}
       items={data.programs}
       isPending={data.isPending}
@@ -58,27 +64,21 @@ const ProgramsTable = ({
           />
         </Fragment>
       )}
-      renderHeader={({ sortingName, isAsc, handleSorting }) => (
-        <Fragment>
-          {PROGRAMS_COLUMNS.map(x => {
-            return (
-              <TableHeadCell
-                key={x.name}
-                className={`programs-table__cell--${x.name}`}
-                sortable={x.sortingName !== undefined}
-                active={x.sortingName === sortingName}
-                isAsc={isAsc}
-                onClick={handleSorting(x.sortingName)}
-              >
-                {t(`programs-page.programs-header.${x.name}`)}
-              </TableHeadCell>
-            );
-          })}
-          {isAuthenticated && (
-            <TableHeadCell className="programs-table__cell--favorite" />
-          )}
-        </Fragment>
-      )}
+      renderHeader={({ column, sortingName, isAsc, handleSorting }) => {
+        if (!isAuthenticated && column.name === "favorite") return null;
+        return (
+          <TableHeadCell
+            key={column.name}
+            className={`programs-table__cell--${column.name}`}
+            sortable={column.sortingName !== undefined}
+            active={column.sortingName === sortingName}
+            isAsc={isAsc}
+            onClick={handleSorting(column.sortingName)}
+          >
+            {t(`programs-page.programs-header.${column.name}`)}
+          </TableHeadCell>
+        );
+      }}
       renderBodyRow={program => (
         <ProgramTableRow
           program={program}

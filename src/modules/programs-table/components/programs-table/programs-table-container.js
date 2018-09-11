@@ -28,19 +28,17 @@ class ProgramsContainer extends Component {
         <ProgramsTable
           data={data || {}}
           isPending={isPending}
-          sorting={{
-            value: filters.sorting,
-            updateSorting: service.programsChangeSorting
-          }}
+          sorting={filters.sorting}
+          updateSorting={service.programsChangeSorting}
           filtering={{
-            ...filters.filtering,
-            updateFilter: service.programsChangeFilter
+            ...filters.filtering
           }}
+          updateFilter={service.programsChangeFilter}
           paging={{
-            total: filters.pages,
-            current: filters.page,
-            updatePaging: service.programsChangePage
+            totalPages: filters.pages,
+            currentPage: filters.page
           }}
+          updatePaging={service.programsChangePage}
           toggleFavorite={service.toggleFavoriteProgram}
           isAuthenticated={isAuthenticated}
         />

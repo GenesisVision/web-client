@@ -9,11 +9,15 @@ import TableToolbar from "./table-toolbar";
 
 const Table = ({
   title,
+  columns,
   items,
   isPending,
   sorting,
+  updateSorting,
   filtering,
+  updateFilter,
   paging,
+  updatePaging,
   renderFilters,
   renderHeader,
   renderBodyRow
@@ -23,11 +27,22 @@ const Table = ({
       <TableToolbar
         title={title}
         filtering={filtering}
+        updateFilter={updateFilter}
         renderFilters={renderFilters}
       />
-      <TableHeader sorting={sorting}>{renderHeader}</TableHeader>
+      <TableHeader
+        columns={columns}
+        sorting={sorting}
+        updateSorting={updateSorting}
+      >
+        {renderHeader}
+      </TableHeader>
       <TableBody items={items}>{renderBodyRow}</TableBody>
-      <TableFooter paging={paging} isPending={isPending} />
+      <TableFooter
+        paging={paging}
+        updatePaging={updatePaging}
+        isPending={isPending}
+      />
     </div>
   );
 };

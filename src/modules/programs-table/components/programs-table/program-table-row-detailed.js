@@ -9,6 +9,8 @@ import { Link } from "react-router-dom";
 import fileService from "shared/services/file-service";
 import replaceParams from "utils/replace-params";
 
+import ProgramBigChart from "../program-big-chart/program-big-chart";
+
 const ProgramTableRowDetailed = ({
   program,
   isAuthenticated,
@@ -43,7 +45,9 @@ const ProgramTableRowDetailed = ({
           </div>
         </div>
         <div className="program-detailed__statistic">
-          <div className="program-detailed__chart">chart</div>
+          <div className="program-detailed__chart">
+            <ProgramBigChart data={program.chart} />
+          </div>
           <div className="program-detailed__statistic-data">
             <div style={{ padding: "0 1rem" }}>
               <div>Balance</div>

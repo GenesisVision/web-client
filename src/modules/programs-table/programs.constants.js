@@ -1,3 +1,4 @@
+import { CURRENCY_VALUES } from "modules/currency-select/currency-select.constants";
 import {
   composeDefaultDateRangeFilter,
   composeRequestValue,
@@ -21,14 +22,7 @@ export const LEVEL_MAX_FILTER_VALUE = 7;
 export const SORTING_FILTER_VALUE = "ByProfitDesc";
 export const CURRENCY_FILTER_VALUE = undefined;
 
-export const CURRENCY_FILTER_VALUES = [
-  "GVT",
-  "ETH",
-  "BTC",
-  "ADA",
-  "USD",
-  "EUR"
-];
+export const CURRENCY_FILTER_VALUES = Object.keys(CURRENCY_VALUES);
 
 export const PROGRAMS_TABLE_FILTERS = [
   {
