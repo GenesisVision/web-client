@@ -1,5 +1,8 @@
 import "./program-big-chart.scss";
 
+import ProgramChartGradient, {
+  gradientOffset
+} from "components/program-simple-chart/parogram-chart-gradient";
 import { GVColors } from "gv-react-components";
 import moment from "moment";
 import React from "react";
@@ -12,46 +15,6 @@ import {
   XAxis,
   YAxis
 } from "recharts";
-
-const gradientOffset = data => {
-  const dataMax = Math.max(...data.map(i => i.equity));
-  const dataMin = Math.min(...data.map(i => i.equity));
-
-  if (dataMax <= 0) {
-    return 0;
-  } else if (dataMin >= 0) {
-    return 1;
-  } else {
-    return dataMax / (dataMax - dataMin);
-  }
-};
-
-const Gradient = ({ name, offset, startOpacity, stopOpacity }) => {
-  return (
-    <linearGradient id={name} x1="0" y1="0" x2="0" y2="1">
-      <stop
-        offset={0}
-        stopColor={GVColors.$positiveColor}
-        stopOpacity={startOpacity}
-      />
-      <stop
-        offset={offset}
-        stopColor={GVColors.$positiveColor}
-        stopOpacity={stopOpacity}
-      />
-      <stop
-        offset={offset}
-        stopColor={GVColors.$negativeColor}
-        stopOpacity={stopOpacity}
-      />
-      <stop
-        offset={1}
-        stopColor={GVColors.$negativeColor}
-        stopOpacity={startOpacity}
-      />
-    </linearGradient>
-  );
-};
 
 const TooltipContent = ({ active, label, payload }) => {
   if (!active) return null;
@@ -69,7 +32,7 @@ const ProgramBigChart = ({ data }) => {
     date: x.date.getTime(),
     equity: x.value
   }));
-  const off = gradientOffset(programChartData);
+  const off = gradientOffset(programChartData.map(x => x.equity));
   return (
     <ResponsiveContainer width="100%" className="program-big-chart">
       <AreaChart data={programChartData}>
@@ -91,15 +54,19 @@ const ProgramBigChart = ({ data }) => {
         />
         <Tooltip content={TooltipContent} />
         <defs>
-          <Gradient
+          <ProgramChartGradient
             offset={off}
             name="equityChartStroke"
+            positiveColor={GVColors.$positiveColor}
+            negativeColor={GVColors.$negativeColor}
             startOpacity={1}
             stopOpacity={1}
           />
-          <Gradient
+          <ProgramChartGradient
             offset={off}
             name="equityChartFill"
+            positiveColor={GVColors.$positiveColor}
+            negativeColor={GVColors.$negativeColor}
             startOpacity={0.3}
             stopOpacity={0}
           />
