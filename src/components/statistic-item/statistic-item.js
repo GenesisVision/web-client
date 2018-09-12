@@ -1,11 +1,12 @@
 import "./statistic-item.scss";
 
 import classnames from "classnames";
+import PropTypes from "prop-types";
 import React from "react";
 import NumberFormat from "react-number-format";
 
 const StatisticItem = ({
-  header,
+  heading,
   value,
   equivalent,
   currency,
@@ -13,7 +14,7 @@ const StatisticItem = ({
 }) => {
   return (
     <div className="statistic-item">
-      <div className="statistic-item__heading">{header}</div>
+      <div className="statistic-item__heading">{heading}</div>
       <div className={classnames("statistic-item__value", valueClassName)}>
         <NumberFormat
           value={value}
@@ -34,6 +35,12 @@ const StatisticItem = ({
   );
 };
 
-StatisticItem.propTypes = {};
+StatisticItem.propTypes = {
+  heading: PropTypes.string.isRequired,
+  value: PropTypes.oneOf([PropTypes.string, PropTypes.number]).isRequired,
+  equivalent: PropTypes.oneOf([PropTypes.string, PropTypes.number]).isRequired,
+  currency: PropTypes.string.isRequired,
+  valueClassName: PropTypes.string
+};
 
 export default StatisticItem;

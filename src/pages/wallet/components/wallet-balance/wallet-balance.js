@@ -16,20 +16,20 @@ const WalletBalance = ({
     <h1 className="wallet-balance__heading">{t("wallet.title")}</h1>
     <div className="wallet-balance__statistic">
       <StatisticItem
-        header={t("wallet.total-balance")}
+        heading={t("wallet.total-balance")}
         value={walletBalanceData.totalBalanceGVT}
         equivalent={walletBalanceData.totalBalanceCurrency}
         currency={currentCurrency}
         valueClassName="wallet-balance__total-balance-value"
       />
       <StatisticItem
-        header={t("wallet.invested-value")}
+        heading={t("wallet.invested-value")}
         value={walletBalanceData.investedGVT}
         equivalent={walletBalanceData.investedCurrency}
         currency={currentCurrency}
       />
       <StatisticItem
-        header={t("wallet.available")}
+        heading={t("wallet.available")}
         value={walletBalanceData.availableGVT}
         equivalent={walletBalanceData.availableCurrency}
         currency={currentCurrency}

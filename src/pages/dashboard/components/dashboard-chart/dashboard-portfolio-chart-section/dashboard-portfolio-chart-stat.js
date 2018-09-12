@@ -14,9 +14,15 @@ const DashboardPortfolioChartStat = ({
   return (
     <div className="dashboard-portfolio-chart-stat">
       <StatisticItem
-        header={"Value"}
+        heading={"Value"}
         value={value}
         equivalent={valueCurrency}
+        currency={currency}
+      />
+      <StatisticItem
+        heading={"Change"}
+        value={changeValue}
+        equivalent={changeValueCurrency}
         currency={currency}
       />
     </div>
