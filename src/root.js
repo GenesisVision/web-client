@@ -1,3 +1,4 @@
+import ErrorHandler from "components/error-handler/error-handler";
 import AppRoutes from "pages/app/app.routes";
 import { AUTH_ROUTES_REGEX } from "pages/auth/auth.routes";
 import AuthRoutes from "pages/auth/auth.routes";
@@ -12,21 +13,23 @@ import store from "./store";
 import history from "./utils/history";
 
 const Root = () => (
-  <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <Scrollbars
-        autoHide
-        autoHideTimeout={1000}
-        style={{ width: "100%", height: "100%" }}
-      >
-        <Switch>
-          <Route path={AUTH_ROUTES_REGEX} component={AuthRoutes} />
-          <Route path={HOME_ROUTE} component={AppRoutes} />
-        </Switch>
-        <div id="modal-root" />
-      </Scrollbars>
-    </ConnectedRouter>
-  </Provider>
+  <ErrorHandler>
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
+        <Scrollbars
+          autoHide
+          autoHideTimeout={1000}
+          style={{ width: "100%", height: "100%" }}
+        >
+          <Switch>
+            <Route path={AUTH_ROUTES_REGEX} component={AuthRoutes} />
+            <Route path={HOME_ROUTE} component={AppRoutes} />
+          </Switch>
+          <div id="modal-root" />
+        </Scrollbars>
+      </ConnectedRouter>
+    </Provider>
+  </ErrorHandler>
 );
 
 export default Root;

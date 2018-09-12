@@ -1,19 +1,37 @@
 import "./icon.scss";
 
 import classnames from "classnames";
+import PropTypes from "prop-types";
 import React from "react";
 
-export const Icon = ({ type, className, onClick }) => {
+export const Icon = ({
+  type,
+  className,
+  onClick,
+  primary,
+  secondary,
+  children,
+  rotate
+}) => {
   return (
     <span
-      className={classnames("icon", `icon--${type}`, className)}
+      className={classnames("icon", `icon--${type}`, className, {
+        "icon--primary": primary,
+        "icon--secondary": secondary,
+        "icon--rotate": rotate
+      })}
       onClick={onClick}
-    />
+    >
+      {children}
+    </span>
   );
 };
 
-export const ProgramIcon = props => {
-  return <Icon type={"programs"} {...props} />;
+Icon.propTypes = {
+  type: PropTypes.string.isRequired,
+  primary: PropTypes.bool,
+  secondary: PropTypes.bool,
+  className: PropTypes.string
 };
 
 export const DashboardIcon = props => {
@@ -57,4 +75,8 @@ export const SearchIcon = props => {
 
 export const ArrowIcon = props => {
   return <Icon type={"arrow"} {...props} />;
+};
+
+export const MenuIcon = props => {
+  return <Icon type={"menu"} {...props} />;
 };

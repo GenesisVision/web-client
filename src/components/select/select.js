@@ -54,6 +54,7 @@ class Select extends Component {
         </div>
 
         <Popover
+          horizontal="center"
           noPadding
           anchorEl={this.state.anchor}
           onClose={this.handleClose}

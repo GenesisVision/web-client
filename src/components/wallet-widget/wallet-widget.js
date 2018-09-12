@@ -1,5 +1,6 @@
 import "./wallet-widget.scss";
 
+import classnames from "classnames";
 import { ArrowIcon, WalletIcon } from "components/icon/icon";
 import Popover from "components/popover/popover";
 import { WALLET_PAGE_ROUTE } from "pages/wallet/wallet-page";
@@ -19,10 +20,19 @@ class WalletWidget extends React.Component {
     this.setState({ anchorEl: null });
   };
   render() {
-    const { t, availableGvt, investedGvt, totalBalanceGvt } = this.props;
+    const {
+      t,
+      availableGvt,
+      investedGvt,
+      totalBalanceGvt,
+      className
+    } = this.props;
     return (
       <Fragment>
-        <div className="wallet-widget" onClick={this.handleOpenDetails}>
+        <div
+          className={classnames("wallet-widget", className)}
+          onClick={this.handleOpenDetails}
+        >
           <WalletIcon />
           <span className="wallet-widget__value">{`${availableGvt} GVT`}</span>
         </div>
@@ -67,13 +77,15 @@ class WalletWidget extends React.Component {
 WalletWidget.propTypes = {
   availableGvt: PropTypes.number,
   investedGvt: PropTypes.number,
-  totalBalanceGvt: PropTypes.number
+  totalBalanceGvt: PropTypes.number,
+  className: PropTypes.string
 };
 
 WalletWidget.defaultProps = {
   availableGvt: 0,
   investedGvt: 0,
-  totalBalanceGvt: 0
+  totalBalanceGvt: 0,
+  className: ""
 };
 
 export default translate()(WalletWidget);

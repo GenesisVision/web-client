@@ -1,3 +1,4 @@
+import Header from "components/header/header";
 import { fetchProfileHeaderInfo } from "modules/profile-header/actions/profile-header-actions";
 import ProfileHeader from "modules/profile-header/components/profile-header";
 import { notificationsToggle } from "pages/app/components/notifications/actions/notifications.actions";
@@ -8,18 +9,29 @@ import isAuthenticated from "shared/decorators/is-authenticated";
 
 import { logout } from "../../../pages/auth/login/services/login.service";
 
-class ProfileHeaderContainer extends Component {
+class HeaderContainer extends Component {
   componentDidMount() {
-    this.props.fetchProfileHeaderInfo();
+    this.props.isAuthenticated && this.props.fetchProfileHeaderInfo();
   }
 
   render() {
-    if (!this.props.info.data) return null;
+    const {
+      info,
+      logout,
+      notificationsToggle,
+      fetchProfileHeaderInfo,
+      isAuthenticated,
+      ...other
+    } = this.props;
+    // if (!info.data) return null;
+    console.info(this.props);
     return (
-      <ProfileHeader
-        {...this.props.info.data}
-        logout={this.props.logout}
-        openNotifications={this.props.notificationsToggle}
+      <Header
+        {...info.data}
+        {...other}
+        isAuthenticated={isAuthenticated}
+        logout={logout}
+        openNotifications={notificationsToggle}
       />
     );
   }
@@ -32,13 +44,13 @@ const mapDispatchToProps = {
 };
 
 const mapStateToProps = state => ({
-  ...state.profileHeader
+  ...state.profileHeader,
+  isAuthenticated: state.authData.isAuthenticated
 });
 
-export default compose(
-  isAuthenticated,
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
-)(ProfileHeaderContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  null,
+  { pure: false }
+)(HeaderContainer);

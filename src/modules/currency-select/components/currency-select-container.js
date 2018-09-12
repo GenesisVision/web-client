@@ -1,5 +1,6 @@
 import "./currency-select.scss";
 
+import classnames from "classnames";
 import Select from "components/select/select";
 import { CURRENCY_VALUES } from "modules/currency-select/currency-select.constants";
 import { updateCurrentCurrency } from "modules/currency-select/services/currency-select-services";
@@ -12,7 +13,7 @@ class CurrencySelectContainer extends Component {
   render() {
     return (
       <Select
-        className={"currency-select"}
+        className={classnames("currency-select", this.props.className)}
         value={this.props.currentCurrency}
         onSelect={this.props.service.updateCurrentCurrency}
       >

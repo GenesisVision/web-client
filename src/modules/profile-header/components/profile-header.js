@@ -16,11 +16,12 @@ const ProfileHeader = ({
   avatar,
   logout,
   email,
-  openNotifications
+  openNotifications,
+  className
 }) => {
   const hasNotifications = notificationsAmount > 0;
   return (
-    <div className="profile-header">
+    <div className={classnames("profile-header", className)}>
       <WalletWidget
         availableGvt={availableGvt}
         investedGvt={investedGvt}
