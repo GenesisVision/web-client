@@ -1,5 +1,6 @@
 import "./dashboard-portfolio-chart.scss";
 
+import ChartPeriod from "components/chart-period/chart-period";
 import React, { Component } from "react";
 
 import DashboardPortfolioChartStat from "./dashboard-portfolio-chart-stat";
@@ -16,8 +17,10 @@ class DashboardPortfolioChartSection extends Component {
           currency={currency}
           value={data.value}
           valueCurrency={data.valueCurrency}
+          changeValue={data.changeValue}
+          changeValueCurrency={data.changeValueCurrency}
         />
-        <div>Chart</div>
+        <ChartPeriod />
       </div>
     );
   }
