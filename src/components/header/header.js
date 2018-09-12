@@ -27,6 +27,7 @@ import { WALLET_ROUTE } from "modules/wallet/wallet.constants";
 import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
 import { SIGNUP_ROUTE } from "pages/auth/signup/signup.routes";
 import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
+import { GLOBAL_SEARCH_ROUTE } from "pages/global-search/global-search.routes";
 import { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
 // import ProfileHeaderContainer from "modules/profile-header/components/profile-header-container";
 import React, { Component, Fragment } from "react";
@@ -73,7 +74,7 @@ class Header extends Component {
         <div className="header__center">
           <CurrencySelectContainer className="header__currency" />
           <div className="header__search">
-            <Link to="/search">
+            <Link to={GLOBAL_SEARCH_ROUTE}>
               <SearchIcon />
             </Link>
           </div>

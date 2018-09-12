@@ -1,0 +1,8 @@
+@import "styles/_colors.scss";
+
+.search-icon {
+  stroke: white;
+  &--primary {
+    stroke: $primary-color;
+  }
+}

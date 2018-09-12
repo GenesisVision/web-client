@@ -3,7 +3,7 @@ import "./currency-select.scss";
 import classnames from "classnames";
 import Select from "components/select/select";
 import { CURRENCY_VALUES } from "modules/currency-select/currency-select.constants";
-import { updateCurrentCurrency } from "modules/currency-select/services/currency-select-services";
+import { updateCurrentCurrency } from "modules/currency-select/services/currency-select.service";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { connect } from "react-redux";

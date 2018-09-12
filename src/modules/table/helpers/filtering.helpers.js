@@ -11,6 +11,7 @@ export const composeFilteringActionType = actionType =>
   `${actionType}_FILTERING`;
 
 export const composeFilters = (allFilters, filtering) => {
+  if (!allFilters) return {};
   const composedFilters = allFilters.reduce((accum, cur) => {
     const { name, type, composeRequestValue } = cur;
     const processedFilterValue = processFilterValue({
