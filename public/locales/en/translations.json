@@ -174,6 +174,18 @@
       "startDay": "Start day",
       "periodEnd": "Period end",
       "period": "Period"
+    },
+    "history": {
+      "trades": {
+        "direction": "Direction",
+        "ticket": "Ticket",
+        "symbol": "Symbol",
+        "volume": "Volume",
+        "profit": "Profit",
+        "price": "Price",
+        "entry": "Entry",
+        "date": "Date"
+      }
     }
   },
   "program-actions": {

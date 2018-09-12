@@ -1,0 +1,35 @@
+.program-details-trades {
+  &__cell {
+    &--direction {
+      width: 14%;
+    }
+
+    &--symbol {
+      width: 16%;
+    }
+
+    &--volume {
+      width: 16%;
+    }
+
+    &--price {
+      width: 16%;
+    }
+
+    &--profit {
+      width: 16%;
+    }
+
+    &--date {
+      width: 23%;
+    }
+
+    &--ticket {
+      width: 16%;
+    }
+
+    &--entry {
+      width: 16%;
+    }
+  }
+}
