@@ -4,15 +4,11 @@ import TableFilters from "./table-filters";
 
 class TableToolbar extends Component {
   render() {
-    const { title, filtering, updateFilter, renderFilters } = this.props;
+    const { title, renderFilters } = this.props;
     return (
       <div className="table__toolbar">
         {title && <div className="table__title">{title}</div>}
-        {filtering && (
-          <TableFilters filtering={filtering} updateFilter={updateFilter}>
-            {renderFilters}
-          </TableFilters>
-        )}
+        {renderFilters && <TableFilters>{renderFilters}</TableFilters>}
       </div>
     );
   }

@@ -36,55 +36,47 @@ const ProgramsTable = ({
       title="All programs"
       sorting={sorting}
       updateSorting={updateSorting}
-      filtering={filtering}
-      updateFilter={updateFilter}
       paging={paging}
       updatePaging={updatePaging}
       columns={PROGRAMS_COLUMNS}
       items={data.programs}
       isPending={data.isPending}
-      renderFilters={handleFilterChange => (
+      renderFilters={() => (
         <Fragment>
           <LevelFilter
             name="level"
             value={filtering["level"]}
-            onChange={handleFilterChange}
+            onChange={updateFilter}
           />
           <SelectFilter
             name="currency"
             label="Currency"
             value={filtering["currency"]}
             values={selectFilterValues}
-            onChange={handleFilterChange}
+            onChange={updateFilter}
           />
           <DateRangeFilter
             name="dateRange"
             value={filtering["dateRange"]}
-            onChange={handleFilterChange}
+            onChange={updateFilter}
           />
         </Fragment>
       )}
-      renderHeader={({ sortingName, isAsc, handleSorting }) => (
-        <Fragment>
-          {PROGRAMS_COLUMNS.map(x => {
-            return (
-              <TableHeadCell
-                key={x.name}
-                className={`programs-table__cell--${x.name}`}
-                sortable={x.sortingName !== undefined}
-                active={x.sortingName === sortingName}
-                isAsc={isAsc}
-                onClick={handleSorting(x.sortingName)}
-              >
-                {t(`programs-page.programs-header.${x.name}`)}
-              </TableHeadCell>
-            );
-          })}
-          {isAuthenticated && (
-            <TableHeadCell className="programs-table__cell--favorite" />
-          )}
-        </Fragment>
-      )}
+      renderHeader={({ column, sortingName, isAsc, handleSorting }) => {
+        if (!isAuthenticated && column.name === "favorite") return null;
+        return (
+          <TableHeadCell
+            key={column.name}
+            className={`programs-table__cell--${column.name}`}
+            sortable={column.sortingName !== undefined}
+            active={column.sortingName === sortingName}
+            isAsc={isAsc}
+            onClick={handleSorting(column.sortingName)}
+          >
+            {t(`programs-page.programs-header.${column.name}`)}
+          </TableHeadCell>
+        );
+      }}
       renderBodyRow={program => (
         <ProgramTableRow
           program={program}

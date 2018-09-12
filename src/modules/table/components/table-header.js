@@ -16,22 +16,25 @@ class TableHeader extends Component {
     return this.props.updateSorting(sortingName + "Asc");
   };
 
-  renderChildren = () => {
+  renderChildren = column => {
     if (this.props.sorting !== undefined) {
       return this.props.children({
+        column: column,
         sortingName: this.sortingName(),
         isAsc: this.isAsc(),
         handleSorting: this.handleSorting
       });
     }
-    return this.props.children;
+    return this.props.children(column);
   };
 
   render() {
     return (
       <div className="table__head">
         <TableRow className="table__row--head">
-          {this.renderChildren()}
+          {this.props.columns.map(x => {
+            return this.renderChildren(x);
+          })}
         </TableRow>
       </div>
     );

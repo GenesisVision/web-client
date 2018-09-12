@@ -15,3 +15,21 @@ export const fetchProgramDetails = () => (dispatch, getState) => {
 
   dispatch(actions.fetchProgramDetails({ programId, opts: { authorization } }));
 };
+
+export const fetchProgramChart = ({ dateFrom, dateTo, maxPointCount }) => (
+  dispatch,
+  getState
+) => {
+  const { routing } = getState();
+  const { programId } = getParams(
+    routing.location.pathname,
+    PROGRAM_DETAILS_ROUTE
+  );
+
+  dispatch(
+    actions.fetchProgramChart({
+      programId,
+      opts: { dateFrom, dateTo, MaxPointCount: maxPointCount }
+    })
+  );
+};
