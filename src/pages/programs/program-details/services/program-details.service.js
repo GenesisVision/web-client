@@ -71,7 +71,12 @@ var fetchMock = new Promise(function(resolve, reject) {
   setTimeout(resolve, 500, tradesResponseMock.data);
 });
 
-export const fetchProgramTrades = opts => {
+export const fetchProgramTrades = () => (dispatch, getState) => {
+  const { routing } = getState();
+  const { programId } = getParams(
+    routing.location.pathname,
+    PROGRAM_DETAILS_ROUTE
+  );
   debugger;
   // return programsApi.v10ProgramsByIdTradesGet(
   //   "0234ae93-d036-4f5c-be46-60fe4cbb46b9",

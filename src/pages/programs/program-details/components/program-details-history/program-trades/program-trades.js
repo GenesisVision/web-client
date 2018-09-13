@@ -13,12 +13,14 @@ import {
   DEFAULT_DATE_RANGE_FILTER_VALUE
 } from "modules/table/components/filtering/date-range-filter/date-range-filter.constants";
 import withTable from "modules/table/components/with-table";
+import withTableContainer from "modules/table/components/with-table-container";
 import { DEFAULT_PAGING } from "modules/table/reducers/table-paging.reducer";
 import moment from "moment";
 import React, { Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { compose } from "redux";
+import { connect } from "react-redux";
+import { bindActionCreators, compose } from "redux";
 
 import {
   PROGRAM_TRADES_COLUMNS,
@@ -116,14 +118,49 @@ const ProgramTrades = ({
 
 export default compose(
   translate(),
-  withTable({
-    fetchOnMount: true,
-    getItems: fetchProgramTrades,
-    paging: DEFAULT_PAGING,
-    sorting: PROGRAM_TRADES_SORTING,
-    filtering: {
-      dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE
+  withTableContainer(
+    {
+      getItems: fetchProgramTrades,
+      changeFilter: () => () => ({}),
+      changePage: () => () => ({})
     },
-    defaultFilters: PROGRAM_TRADES_FILTERS
-  })
+    state => ({
+      itemsData: {
+        isPending: false,
+        data: {
+          trades: [
+            {
+              id: "string",
+              login: "string",
+              ticket: "string",
+              symbol: "string",
+              volume: 0,
+              profit: 0,
+              direction: "Sell",
+              date: "2018-09-12T10:40:48.657Z",
+              price: 0,
+              entry: "In"
+            }
+          ],
+          total: 20
+        }
+      },
+      sorting: PROGRAM_TRADES_SORTING,
+      filtering: {
+        dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE
+      },
+      paging: DEFAULT_PAGING
+    })
+  )
 )(ProgramTrades);
+
+// withTable({
+//   fetchOnMount: true,
+//   getItems: fetchProgramTrades,
+//   paging: DEFAULT_PAGING,
+//   sorting: PROGRAM_TRADES_SORTING,
+//   filtering: {
+//     dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE
+//   },
+//   defaultFilters: PROGRAM_TRADES_FILTERS
+// })
