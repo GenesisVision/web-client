@@ -41,39 +41,17 @@
   &--rotate {
     transform: rotate(180deg);
   }
-
-  &--programs {
-    //height: 15px;
-  }
-  &--dashboard {
-    //height: 18px;
-  }
-  &--details {
-    //height: 20px;
-  }
-  &--logout {
-    //height: 20px;
-  }
-  &--settings {
-    //height: 20px;
-  }
   &--collapse {
     background-image: url("../../shared/media/collapse.svg");
-  }
-  &--ring {
-    //background-image: url("../../shared/media/ring.svg");
   }
   &--ring-circle {
     background-image: url("../../shared/media/ring-circle.svg");
   }
   &--wallet {
     height: 20px;
-    background-image: url("../../shared/media/wallet.svg");
-  }
-  &--question-circle {
-    height: 17px;
-    width: 17px;
-    background-image: url("../../shared/media/question-circle.svg");
+    path {
+      fill: transparent;
+    }
   }
   &--controls {
     height: 20px;

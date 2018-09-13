@@ -1,13 +1,10 @@
-import Header from "components/header/header";
-import { fetchProfileHeaderInfo } from "modules/profile-header/actions/profile-header-actions";
-import ProfileHeader from "modules/profile-header/components/profile-header";
+import { fetchProfileHeaderInfo } from "modules/header/actions/header-actions";
 import { notificationsToggle } from "pages/app/components/notifications/actions/notifications.actions";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { compose } from "redux";
-import isAuthenticated from "shared/decorators/is-authenticated";
 
 import { logout } from "../../../pages/auth/login/services/login.service";
+import Header from "./header";
 
 class HeaderContainer extends Component {
   componentDidMount() {
@@ -23,8 +20,6 @@ class HeaderContainer extends Component {
       isAuthenticated,
       ...other
     } = this.props;
-    // if (!info.data) return null;
-    console.info(this.props);
     return (
       <Header
         {...info.data}

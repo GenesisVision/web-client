@@ -1,4 +1,4 @@
-import { PROFILE_HEADER } from "modules/profile-header/profile-header.constants";
+import { PROFILE_HEADER } from "modules/header/header.constants";
 import profileApi from "services/api-client/profile-api";
 import authService from "services/auth-service";
 

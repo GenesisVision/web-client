@@ -34,7 +34,7 @@ NorificationsWidget.propTypes = {
 };
 
 NorificationsWidget.defaultProps = {
-  notificationsCount: 1
+  notificationsCount: 0
 };
 
 export default NorificationsWidget;

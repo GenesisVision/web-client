@@ -1,8 +1,7 @@
 import "./app-layout.scss";
 
 import platformActions from "actions/platform-actions";
-import Header from "components/header/header";
-import HeaderContainer from "modules/profile-header/components/profile-header-container";
+import HeaderContainer from "modules/header/components/header-container";
 import NotificationsContainer from "pages/app/components/notifications/components/notifications-container";
 import React, { Component } from "react";
 import { connect } from "react-redux";

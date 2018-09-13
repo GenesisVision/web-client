@@ -1,7 +1,9 @@
 import "./wallet-widget.scss";
 
 import classnames from "classnames";
-import { ArrowIcon, WalletIcon } from "components/icon/icon";
+import Chip from "components/chip/chip";
+import { ArrowIcon } from "components/icon/icon";
+import { WalletIcon } from "components/icon/wallet-icon";
 import Popover from "components/popover/popover";
 import { WALLET_PAGE_ROUTE } from "pages/wallet/wallet-page";
 import PropTypes from "prop-types";
@@ -29,12 +31,17 @@ class WalletWidget extends React.Component {
     } = this.props;
     return (
       <Fragment>
-        <div
-          className={classnames("wallet-widget", className)}
-          onClick={this.handleOpenDetails}
-        >
-          <WalletIcon />
-          <span className="wallet-widget__value">{`${availableGvt} GVT`}</span>
+        <div className={classnames("wallet-widget", className)}>
+          <div
+            className="wallet-widget__wallet"
+            onClick={this.handleOpenDetails}
+          >
+            <WalletIcon primary={this.state.anchorEl} />
+            <span className="wallet-widget__value">{`${availableGvt} GVT`}</span>
+          </div>
+          <div className="wallet-widget__add">
+            <Chip type="positive">+</Chip>
+          </div>
         </div>
         <Popover
           anchorEl={this.state.anchorEl}
