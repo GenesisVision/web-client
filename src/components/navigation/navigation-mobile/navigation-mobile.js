@@ -58,27 +58,27 @@ const NavigationMobile = ({
             icon={<SearchIcon primary />}
             href={GLOBAL_SEARCH_ROUTE}
           >
-            {t("Search")}
+            {t("navigation.Search")}
           </NavigationItem>
           <NavigationItem icon={<DetailsIcon primary />} href={PROFILE_ROUTE}>
-            {t("profile-widget.personal-details")}
+            {t("navigation.personal-details")}
           </NavigationItem>
           <NavigationItem icon={<WalletIcon primary />} href={WALLET_ROUTE}>
-            {t("Wallet")}
+            {t("navigation.Wallet")}
           </NavigationItem>
           <NavigationItem icon={<SettingsIcon primary />} href={"/settings"}>
-            {t("profile-widget.settings")}
+            {t("navigation.settings")}
           </NavigationItem>
           {isAuthenticated ? (
             <NavigationButton icon={<LogoutIcon primary />} onClick={logout}>
-              {t("profile-widget.logout")}
+              {t("navigation.logout")}
             </NavigationButton>
           ) : (
             <NavigationItem
               icon={<LogoutIcon primary rotate />}
               href={LOGIN_ROUTE}
             >
-              {t("login")}
+              {t("navigation.login")}
             </NavigationItem>
           )}
         </div>

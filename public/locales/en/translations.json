@@ -14,7 +14,13 @@
   },
   "navigation": {
     "Dashboard": "Dashboard",
-    "Programs": "Programs"
+    "Programs": "Programs",
+    "Search": "Search",
+    "personal-details": "Personal details",
+    "Wallet": "Wallet",
+    "settings": "Settings",
+    "logout": "Log out",
+    "login": "Login"
   },
   "auth": {
     "text": "A Brief History Of Creation",
