@@ -1,4 +1,33 @@
 @import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
+@media (max-width: 1360px) {
+  .facets-shadow {
+    &:after {
+      background: linear-gradient(90deg, transparent, $background-color);
+    }
+  }
+}
+$__title-font-size: 24px;
+$__description-font-size: 14px;
+$facet-padding: 30px;
+$facet-margin: 33px;
+$facet-width: 315px;
+$facet-height: 280px;
+
+.facets-shadow {
+  position: relative;
+  &:after {
+    position: absolute;
+    content: "";
+    top: 0;
+    right: -1px;
+    width: 50px;
+    height: 100%;
+    @include media-breakpoint-desktop() {
+      //background: none;
+    }
+  }
+}
 
 .facets {
   display: flex;

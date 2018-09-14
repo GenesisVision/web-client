@@ -22,10 +22,12 @@ const FacetCard = ({ facet }) => {
   return (
     <Surface className="facet">
       <Link to={composeFacetLink(facet.id)}>
-        <div className="facet__logo-wrapper">{renderImage(facet.logo)}</div>
-        <div className="facet__info">
-          <div className="facet__title">{facet.title}</div>
-          <div className="facet__description">{facet.description}</div>
+        <div className="facet__facet-container">
+          <div className="facet__logo-wrapper">{renderImage(facet.logo)}</div>
+          <div className="facet__info">
+            <div className="facet__title">{facet.title}</div>
+            <div className="facet__description">{facet.description}</div>
+          </div>
         </div>
       </Link>
     </Surface>
