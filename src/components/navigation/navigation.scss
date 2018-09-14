@@ -1,5 +1,5 @@
 @import "styles/_colors.scss";
-
+@import "styles/_breakpoint.scss";
 .navigation {
   display: flex;
 
@@ -25,5 +25,68 @@
     font-size: 15px;
     font-weight: 600;
     letter-spacing: 0.2px;
+  }
+
+  @include media-breakpoint-landscape-tablet() {
+    &__menu {
+      display: none;
+    }
+
+    &__item {
+      padding: 0;
+      margin-right: 40px;
+    }
+
+    &__icon {
+      margin-right: 10px;
+    }
+  }
+
+  @include media-breakpoint-desktop() {
+    &__item {
+      margin-right: 60px;
+    }
+  }
+
+  @include media-breakpoint-large-desktop() {
+    &__item {
+      margin-right: 100px;
+    }
+  }
+}
+
+.mobile {
+  width: 100%;
+
+  &__top {
+    padding: 10px 0;
+  }
+
+  &__header {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    align-items: center;
+    background-color: $panel-background-color;
+  }
+
+  &__avatar {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    margin-right: 15px;
+    align-items: center;
+    justify-content: center;
+    background-color: $secondary-background-color;
+    border-radius: 100%;
+  }
+
+  &__email {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: 0.4px;
+    font-size: 14px;
   }
 }

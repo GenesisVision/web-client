@@ -1,9 +1,9 @@
+import investPopupReducer from "modules/invest-popup/reducer/invest-popup.reducer";
 import notificationsReducer from "pages/app/components/notifications/reducers/notifications.reducers";
 import { loadingBarReducer } from "react-redux-loading-bar";
 import { routerReducer } from "react-router-redux";
 import accountSettingsReducer from "reducers/account-settings";
 import { combineReducers } from "redux";
-import walletSettingsReducer from "shared/reducers/wallet-settings-reducer/wallet-settings.reducer.js";
 
 import navigationReducer from "../modules/navigation/reducers/navigation-reducers";
 import popupReducer from "../modules/popup/reducers/popup-reducers";
@@ -48,5 +48,6 @@ export default combineReducers({
   notifications: notificationsReducer,
   manager: managerReducer,
   wallet: walletReducer,
-  accountSettings: accountSettingsReducer
+  accountSettings: accountSettingsReducer,
+  investPopup: investPopupReducer
 });
