@@ -3,23 +3,13 @@ import "./navigation.scss";
 import classnames from "classnames";
 import GVLogo from "components/gv-logo/gv-logo";
 import { DashboardIcon } from "components/icon/dashboard-icon";
-import {
-  DetailsIcon,
-  LogoutIcon,
-  MenuIcon,
-  SettingsIcon
-} from "components/icon/icon";
 import { ProgramsIcon } from "components/icon/programs-icon";
 import NavigationItem from "components/navigation/navigation-item";
-import Sidebar from "components/sidebar/sidebar";
-import { GVButton } from "gv-react-components";
-import { PROFILE_ROUTE } from "modules/profile/profile.constants";
 import { HOME_ROUTE } from "pages/app/app.routes";
 import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
-import { Link } from "react-router-dom";
 
 class Navigation extends Component {
   state = {
@@ -32,10 +22,13 @@ class Navigation extends Component {
       <Fragment>
         <div className={classnames("navigation", className)}>
           <NavigationItem icon={<GVLogo />} href={HOME_ROUTE} />
-          <NavigationItem icon={<DashboardIcon />} href={DASHBOARD_ROUTE}>
+          <NavigationItem
+            icon={<DashboardIcon primary />}
+            href={DASHBOARD_ROUTE}
+          >
             {t("navigation.Dashboard")}
           </NavigationItem>
-          <NavigationItem icon={<ProgramsIcon />} href={PROGRAMS_ROUTE}>
+          <NavigationItem icon={<ProgramsIcon primary />} href={PROGRAMS_ROUTE}>
             {t("navigation.Programs")}
           </NavigationItem>
         </div>

@@ -7,15 +7,20 @@
   color: white;
 
   &__wallet {
+    font-size: 13px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-right: 15px;
+    margin-right: 25px;
     cursor: pointer;
   }
 
   &__value {
     margin-left: 15px;
+  }
+
+  &__add * {
+    font-size: 18px;
   }
 }
 

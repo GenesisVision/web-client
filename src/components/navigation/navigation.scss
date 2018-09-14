@@ -36,7 +36,6 @@
   &__item {
     display: flex;
     align-items: center;
-    //padding: 15px;
     padding: 15px 32px;
     text-decoration: none;
     position: relative;
@@ -48,7 +47,6 @@
   }
 
   &__icon {
-    //margin-right: 12px;
     margin-right: 24px;
   }
 
@@ -77,6 +75,18 @@
   @include media-breakpoint-desktop() {
     &__item {
       margin-right: 60px;
+    }
+  }
+
+  @include media-breakpoint-large-desktop() {
+    &__item:first-child {
+      margin-right: 100px;
+    }
+    &__item {
+      margin-right: 70px;
+    }
+    &__icon {
+      margin-right: 20px;
     }
   }
 }
