@@ -1,12 +1,11 @@
 import "./program-simple-chart.scss";
 
+import ProgramChartGradient, {
+  gradientOffset
+} from "components/chart/chart-gradient";
 import { GVColors } from "gv-react-components";
 import React from "react";
 import { Area, AreaChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
-
-import ProgramChartGradient, {
-  gradientOffset
-} from "./parogram-chart-gradient";
 
 const ProgramSimpleChart = ({ data, isPositive }) => {
   if (data.length === 0) return null;

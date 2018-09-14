@@ -1,0 +1,10 @@
+@import "styles/_colors.scss";
+
+.gv-tooltip {
+  font-size: 10px;
+  line-height: 1.2rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background: rgba($background-color, 0.7);
+  color: $text-color;
+}

@@ -1,6 +1,7 @@
 import "./dashboard-portfolio-chart-section.scss";
 
 import ChartPeriod from "components/chart-period/chart-period";
+import moment from "moment";
 import React, { Component } from "react";
 
 import DashboardPortfolioChart from "./dashboard-portfolio-chart";
@@ -12,11 +13,18 @@ const composeChartData = (chart, bars) => {
     ...bars.map(x => ({
       assetValue: x.value,
       assets: x.assets,
-      date: x.date.getTime()
+      date: moment(x.date)
+        .startOf("day")
+        .valueOf()
     }))
   ];
 
-  return data;
+  return data.sort((a, b) => {
+    //return a.date - b.date;
+    if (a.date < b.date) return -1;
+    if (a.date > b.date) return 1;
+    return 0;
+  });
 };
 class DashboardPortfolioChartSection extends Component {
   componentDidMount() {

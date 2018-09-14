@@ -13,7 +13,7 @@ export const gradientOffset = data => {
   }
 };
 
-const ProgramChartGradient = ({
+const ChartGradient = ({
   name,
   offset,
   negativeColor,
@@ -39,4 +39,4 @@ const ProgramChartGradient = ({
   );
 };
 
-export default ProgramChartGradient;
+export default ChartGradient;
