@@ -5,10 +5,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import replaceParams from "utils/replace-params";
 
+import facetImg from "./facet.png";
+
 const FacetCard = ({ facet }) => {
   const renderImage = src => {
     if (src === null) return null;
-    return <img className="facet__logo" src={src} alt={facet.title} />;
+    return <img className="facet__logo" src={facetImg} alt={facet.title} />;
   };
 
   const composeFacetLink = facetId => {
