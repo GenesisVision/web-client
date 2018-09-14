@@ -16,9 +16,9 @@ import {
   YAxis
 } from "recharts";
 
-import ChartTooltip from "../../../../components/chart/chart-tooltip";
+import ProgramBigChartTooltip from "./program-big-chart-tooltip";
 
-const ProgramBigChart = ({ data }) => {
+const ProgramBigChart = ({ data, currency }) => {
   const programChartData = data.map(x => ({
     date: x.date.getTime(),
     equity: x.value
@@ -43,7 +43,7 @@ const ProgramBigChart = ({ data }) => {
           axisLine={false}
           tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
         />
-        <Tooltip content={ChartTooltip} name="qwe" />
+        <Tooltip content={ProgramBigChartTooltip} />
         <defs>
           <ProgramChartGradient
             offset={off}

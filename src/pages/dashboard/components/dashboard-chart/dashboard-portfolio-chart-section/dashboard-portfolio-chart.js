@@ -1,7 +1,6 @@
 import ProgramChartGradient, {
   gradientOffset
 } from "components/chart/chart-gradient";
-import ChartTooltip from "components/chart/chart-tooltip";
 import { GVColors } from "gv-react-components";
 import moment from "moment";
 import React, { PureComponent } from "react";
@@ -16,43 +15,8 @@ import {
   YAxis
 } from "recharts";
 
-const BAR_COLORS = ["#5758A5", "#D7466C", "#DDD16E"];
-
-const Body = ({ assets }) => {
-  return assets.map((x, i) => (
-    <div key={x.id}>
-      <span style={{ color: BAR_COLORS[i] }}>o</span> {x.title}|{x.value}
-    </div>
-  ));
-};
-
-const DasboardPortfolioTooltip = ({
-  active,
-  label,
-  payload,
-  heading,
-  body,
-  date
-}) => {
-  if (!active) return null;
-  const data = payload[0].payload;
-  if (data.profitValue === undefined) {
-    return (
-      <ChartTooltip
-        heading="Assets"
-        body={<Body assets={data.assets} />}
-        date={label}
-      />
-    );
-  }
-  return (
-    <ChartTooltip
-      heading="Total balance"
-      body={data.profitValue}
-      date={label}
-    />
-  );
-};
+import { BAR_COLORS } from "../dashboard-chart.constants";
+import DasboardPortfolioTooltip from "./dashboard-portfoio-tooltip";
 
 class DashboardPortfolioChart extends PureComponent {
   state = {
@@ -79,18 +43,16 @@ class DashboardPortfolioChart extends PureComponent {
 
     return (
       <ResponsiveContainer>
-        <ComposedChart data={data}>
+        <ComposedChart data={data} stackOffset="sign">
           <defs>
-            <defs>
-              <ProgramChartGradient
-                offset={this.grOffset()}
-                name="dashboardPortfolioChartFill"
-                positiveColor={GVColors.$primaryColor}
-                negativeColor={GVColors.$primaryColor}
-                startOpacity={0.2}
-                stopOpacity={0}
-              />
-            </defs>
+            <ProgramChartGradient
+              offset={this.grOffset()}
+              name="dashboardPortfolioChartFill"
+              positiveColor={GVColors.$primaryColor}
+              negativeColor={GVColors.$primaryColor}
+              startOpacity={0.2}
+              stopOpacity={0.05}
+            />
           </defs>
           <XAxis
             dataKey="date"
@@ -112,6 +74,7 @@ class DashboardPortfolioChart extends PureComponent {
             fill={`url(#dashboardPortfolioChartFill)`}
             connectNulls={true}
             isAnimationActive={false}
+            strokeWidth={2}
           />
           {data[0].assets.map((x, i) => (
             <Bar
@@ -123,7 +86,11 @@ class DashboardPortfolioChart extends PureComponent {
             >
               {data.map((entry, index) => (
                 <Cell
-                  fill={index === activeIndex ? BAR_COLORS[i] : "#49555B"}
+                  fill={
+                    index === activeIndex
+                      ? BAR_COLORS[i]
+                      : GVColors.$textDarkColor
+                  }
                   key={`cell-${index}`}
                 />
               ))}
