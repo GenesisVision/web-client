@@ -20,11 +20,13 @@ class ProgramDetailsHistory extends Component {
     const { tab } = this.state;
     return (
       <Surface className="program-details-history">
-        <h2>History</h2>
-        <GVTabs value={tab} onChange={this.handleTabChange}>
-          <GVTab value={"trades"} label="Trades" />
-          <GVTab value={"events"} label="Events" />
-        </GVTabs>
+        <div className="program-details-history__header">
+          <h2>History</h2>
+          <GVTabs value={tab} onChange={this.handleTabChange}>
+            <GVTab value={"trades"} label="Trades" />
+            <GVTab value={"events"} label="Events" />
+          </GVTabs>
+        </div>
         <div>
           {tab === "trades" && (
             <div className="program-details-trades">

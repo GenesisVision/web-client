@@ -57,30 +57,121 @@ const tradesResponseMock = {
         symbol: "string",
         volume: 0,
         profit: 0,
+        direction: "Buy",
+        date: "2018-09-12T10:40:48.657Z",
+        price: 0,
+        entry: "In"
+      },
+      {
+        id: "string",
+        login: "string",
+        ticket: "string",
+        symbol: "string",
+        volume: 0,
+        profit: 0,
+        direction: "Buy",
+        date: "2018-09-12T10:40:48.657Z",
+        price: 0,
+        entry: "In"
+      },
+      {
+        id: "string",
+        login: "string",
+        ticket: "string",
+        symbol: "string",
+        volume: 0,
+        profit: 0,
+        direction: "Buy",
+        date: "2018-09-12T10:40:48.657Z",
+        price: 0,
+        entry: "In"
+      },
+      {
+        id: "string",
+        login: "string",
+        ticket: "string",
+        symbol: "string",
+        volume: 0,
+        profit: 0,
+        direction: "Buy",
+        date: "2018-09-12T10:40:48.657Z",
+        price: 0,
+        entry: "In"
+      },
+      {
+        id: "string",
+        login: "string",
+        ticket: "string",
+        symbol: "string",
+        volume: 0,
+        profit: 0,
+        direction: "Buy",
+        date: "2018-09-12T10:40:48.657Z",
+        price: 0,
+        entry: "In"
+      },
+      {
+        id: "string",
+        login: "string",
+        ticket: "string",
+        symbol: "string",
+        volume: 0,
+        profit: 0,
+        direction: "Buy",
+        date: "2018-09-12T10:40:48.657Z",
+        price: 0,
+        entry: "In"
+      },
+      {
+        id: "string",
+        login: "string",
+        ticket: "string",
+        symbol: "string",
+        volume: 0,
+        profit: 0,
+        direction: "Buy",
+        date: "2018-09-12T10:40:48.657Z",
+        price: 0,
+        entry: "In"
+      },
+      {
+        id: "string",
+        login: "string",
+        ticket: "string",
+        symbol: "string",
+        volume: 0,
+        profit: -25,
+        direction: "Buy",
+        date: "2018-09-12T10:40:48.657Z",
+        price: 0,
+        entry: "In"
+      },
+      {
+        id: "string",
+        login: "string",
+        ticket: "string",
+        symbol: "string",
+        volume: 0,
+        profit: 25,
         direction: "Sell",
         date: "2018-09-12T10:40:48.657Z",
         price: 0,
         entry: "In"
       }
     ],
-    total: 150
+    total: 15
   }
 };
 
-var fetchMock = new Promise(function(resolve, reject) {
-  setTimeout(resolve, 500, tradesResponseMock.data);
-});
-
-export const fetchProgramTrades = () => (dispatch, getState) => {
-  const { routing } = getState();
-  const { programId } = getParams(
-    routing.location.pathname,
-    PROGRAM_DETAILS_ROUTE
-  );
-  debugger;
-  // return programsApi.v10ProgramsByIdTradesGet(
-  //   "0234ae93-d036-4f5c-be46-60fe4cbb46b9",
-  //   opts
-  // );
-  return fetchMock.then(response => response);
+export const fetchProgramTrades = ({ programId, currentCurrency, filters }) => {
+  const opts = {
+    ...filters,
+    dateTo: filters.to,
+    dateFrom: filters.from,
+    symbol: currentCurrency
+  };
+  return programsApi.v10ProgramsByIdTradesGet(programId, opts).then(data => ({
+    items: tradesResponseMock.data.trades,
+    total: tradesResponseMock.data.total
+  }));
 };
