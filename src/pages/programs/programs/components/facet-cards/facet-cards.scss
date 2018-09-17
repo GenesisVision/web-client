@@ -16,6 +16,9 @@ $facet-height: 280px;
 
 .facets-shadow {
   position: relative;
+  height: $facet-height/1.5;
+  margin: $facet-margin/2 0;
+  overflow: hidden;
   &:after {
     position: absolute;
     content: "";
@@ -23,9 +26,10 @@ $facet-height: 280px;
     right: -1px;
     width: 50px;
     height: 100%;
-    @include media-breakpoint-desktop() {
-      //background: none;
-    }
+  }
+  @include media-breakpoint-landscape-phone() {
+    margin: $facet-margin 0;
+    height: $facet-height;
   }
 }
 
@@ -34,16 +38,12 @@ $facet-height: 280px;
   flex-wrap: nowrap;
   justify-content: space-between;
   overflow: auto;
-  margin: $facet-margin/2 0;
   &::-webkit-scrollbar {
     width: 0;
     height: 0;
   }
   & {
     -ms-overflow-style: none;
-  }
-  @include media-breakpoint-landscape-phone() {
-    margin: $facet-margin 0;
   }
   &::after {
     @include media-breakpoint-landscape-phone() {
