@@ -1,8 +1,137 @@
+@import "styles/_colors.scss";
+@mixin table-title() {
+  opacity: 0.3;
+  font-size: 12px;
+  font-weight: 100;
+  color: white;
+  text-align: left;
+  padding-bottom: 12px;
+}
+$program-padding: 32px;
+
 .programs-table {
   &__cell {
     &--header {
       cursor: default;
       opacity: 0.3;
+    }
+  }
+}
+.programs-cards {
+  box-sizing: border-box;
+  padding: $program-padding;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  &__card {
+    margin-right: $program-padding/2;
+    margin-bottom: $program-padding;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+    width: 312px;
+    height: 372px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #212c34;
+    &:last-child {
+      margin-right: 0;
+    }
+    & div,
+    table {
+      //outline: 1px solid gray;
+    }
+    &__row {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      &__title {
+        padding: 3px 0;
+        font-size: 15px;
+      }
+      &__name {
+        font-size: 13px;
+        color: $primary-color;
+      }
+      &__actions {
+        transform: rotate(90deg);
+        font-size: 2rem;
+      }
+      &__chart {
+        width: 160px;
+      }
+      &__chart-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        &--balance {
+          font-size: 13px;
+          font-weight: 100;
+        }
+        &--profit {
+          font-size: 14px;
+          font-weight: 200;
+          color: rgb(44, 211, 146);
+          border-radius: 19.5px;
+          background-color: $success;
+          padding: 5px 13px;
+          margin-bottom: 8px;
+        }
+      }
+      &__status {
+        &--text {
+          font-size: 13px;
+          font-weight: 100;
+        }
+      }
+      &--title {
+        @include table-title;
+      }
+      &__reinvest {
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+      }
+    }
+    &__table {
+      & table {
+        width: 100%;
+        th {
+          @include table-title;
+        }
+        td {
+          font-size: 13px;
+          font-weight: 100;
+        }
+      }
+    }
+    &--balance {
+    }
+    &--currency {
+    }
+    &--investors {
+    }
+    &--available-to-invest {
+    }
+    &--trades {
+    }
+    &--period {
+    }
+    &--drawdown {
+    }
+    &--profit {
+    }
+    &--chart {
+    }
+    &--favorite {
+    }
+    &-- {
     }
   }
 }
