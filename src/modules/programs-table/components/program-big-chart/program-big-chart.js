@@ -24,6 +24,7 @@ const ProgramBigChart = ({ data, currency }) => {
     equity: x.value
   }));
   const off = gradientOffset(programChartData.map(x => x.equity));
+  if (data.length === 0) return null;
   return (
     <ResponsiveContainer width="100%" className="program-big-chart">
       <AreaChart data={programChartData}>
