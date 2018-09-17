@@ -35,7 +35,6 @@ const ProgramsCards = ({
   isAuthenticated
 }) => {
   if (!data) return null;
-  console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", data);
   return (
     <div className="programs-cards">
       {data.programs.map(program => (
