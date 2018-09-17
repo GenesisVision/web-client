@@ -6,6 +6,18 @@
       background: linear-gradient(90deg, transparent, $background-color);
     }
   }
+  .facets {
+    &:after {
+      content: "a";
+    }
+  }
+}
+@media (min-width: 1360px) {
+  .facets {
+    &:after {
+      content: "";
+    }
+  }
 }
 $__title-font-size: 24px;
 $__description-font-size: 14px;
@@ -46,10 +58,6 @@ $facet-height: 280px;
     -ms-overflow-style: none;
   }
   &::after {
-    @include media-breakpoint-landscape-phone() {
-      content: "";
-    }
-    content: "a";
     opacity: 0;
   }
 }
@@ -73,9 +81,6 @@ $facet-height: 280px;
 
   &:last-child {
     margin-right: 100px;
-    @include media-breakpoint-landscape-phone() {
-      margin-right: 0;
-    }
   }
 
   &__logo-wrapper {
