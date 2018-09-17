@@ -19,7 +19,7 @@ class DashboardChart extends Component {
     const { tab } = this.state;
     return (
       <Surface className="dashboard-chart">
-        <h2>Chart</h2>
+        <div className="dashboard-chart__heading">Chart</div>
         <GVTabs value={tab} onChange={this.handleTabChange}>
           <GVTab value={"portfolio"} label="Portfolio" />
           <GVTab value={"profit"} label="Profit" />

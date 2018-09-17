@@ -63,6 +63,7 @@ class DashboardPortfolioChart extends PureComponent {
           <YAxis
             axisLine={false}
             tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
+            width={20}
           />
 
           <Tooltip cursor={false} content={DasboardPortfolioTooltip} />

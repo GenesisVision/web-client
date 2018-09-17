@@ -27,12 +27,14 @@ const WalletBalance = ({
         value={walletBalanceData.investedGVT}
         equivalent={walletBalanceData.investedCurrency}
         currency={currentCurrency}
+        valueClassName="wallet-balance__statistic-item-value"
       />
       <StatisticItem
         heading={t("wallet.available")}
         value={walletBalanceData.availableGVT}
         equivalent={walletBalanceData.availableCurrency}
         currency={currentCurrency}
+        valueClassName="wallet-balance__statistic-item-value"
       />
     </div>
     <div className="wallet-balance__footer">

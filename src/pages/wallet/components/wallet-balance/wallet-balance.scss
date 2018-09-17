@@ -2,9 +2,9 @@
 @import "styles/_colors.scss";
 
 .wallet-balance {
-  color: $text-color;
-
   &__heading {
+    color: $text-accent-color;
+
     font-size: 28px;
     margin: 0 0 30px;
   }
@@ -21,8 +21,11 @@
     font-size: 24px;
     letter-spacing: 0.3px;
     font-weight: 400;
-    margin-bottom: 10px;
     margin-top: 0;
+  }
+
+  &__statistic-item-value {
+    margin-top: 8px;
   }
 
   &__footer {
@@ -67,7 +70,6 @@
       font-size: 32px;
       letter-spacing: 0.4px;
       font-weight: 600;
-      margin-bottom: 12px;
     }
 
     &__footer {

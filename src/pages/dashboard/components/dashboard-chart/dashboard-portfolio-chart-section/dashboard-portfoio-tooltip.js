@@ -43,7 +43,7 @@ const DasboardPortfolioTooltip = ({
       <ChartTooltip
         heading="Assets"
         body={<AssetsTooltipBody assets={data.assets} />}
-        date={label}
+        date={new Date(label)}
         className="assets-tooltip"
       />
     );
@@ -52,7 +52,7 @@ const DasboardPortfolioTooltip = ({
     <ChartTooltip
       heading="Total balance"
       body={`${data.profitValue} GVT`}
-      date={label}
+      date={new Date(label)}
     />
   );
 };

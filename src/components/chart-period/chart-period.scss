@@ -4,6 +4,7 @@
   display: inline-flex;
   justify-content: space-between;
   width: 100%;
+  margin-top: 30px;
 
   &__period {
     color: $text-dark-color;
@@ -21,7 +22,7 @@
     }
     &--active {
       cursor: default;
-      color: $text-color;
+      color: $text-accent-color;
     }
   }
 

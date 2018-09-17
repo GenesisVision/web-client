@@ -1,9 +1,16 @@
 @import "styles/_colors.scss";
 
 .dashboard-portfolio-chart-section {
+  .dashboard-portfolio-chart-stat {
+    &__statistic-item {
+      margin-top: 15px;
+    }
+  }
+
   &__chart {
     height: 400px;
     width: 100%;
+    margin-top: 20px;
 
     .assets-tooltip {
       .gv-tooltip__heading,

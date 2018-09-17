@@ -10,11 +10,16 @@ const StatisticItem = ({
   value,
   equivalent,
   currency,
-  valueClassName
+  className,
+  headingClassName,
+  valueClassName,
+  equivalentClassName
 }) => {
   return (
-    <div className="statistic-item">
-      <div className="statistic-item__heading">{heading}</div>
+    <div className={classnames("statistic-item", className)}>
+      <div className={classnames("statistic-item__heading", headingClassName)}>
+        {heading}
+      </div>
       <div className={classnames("statistic-item__value", valueClassName)}>
         <NumberFormat
           value={value}
@@ -23,7 +28,12 @@ const StatisticItem = ({
           suffix={" GVT"}
         />
       </div>
-      <div className="statistic-item__equivalent">
+      <div
+        className={classnames(
+          "statistic-item__equivalent",
+          equivalentClassName
+        )}
+      >
         <NumberFormat
           value={equivalent}
           thousandSeparator={" "}
@@ -41,7 +51,10 @@ StatisticItem.propTypes = {
   equivalent: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     .isRequired,
   currency: PropTypes.string.isRequired,
-  valueClassName: PropTypes.string
+  className: PropTypes.string,
+  headingClassName: PropTypes.string,
+  valueClassName: PropTypes.string,
+  equivalentClassName: PropTypes.string
 };
 
 export default StatisticItem;
