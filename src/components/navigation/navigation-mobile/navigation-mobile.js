@@ -49,22 +49,22 @@ const NavigationMobile = ({
             icon={<DashboardIcon primary />}
             href={DASHBOARD_ROUTE}
           >
-            {t("navigation.Dashboard")}
+            {t("navigation.dashboard")}
           </NavigationItem>
           <NavigationItem icon={<ProgramsIcon primary />} href={PROGRAMS_ROUTE}>
-            {t("navigation.Programs")}
+            {t("navigation.programs")}
           </NavigationItem>
           <NavigationItem
             icon={<SearchIcon primary />}
             href={GLOBAL_SEARCH_ROUTE}
           >
-            {t("navigation.Search")}
+            {t("navigation.search")}
           </NavigationItem>
           <NavigationItem icon={<DetailsIcon primary />} href={PROFILE_ROUTE}>
             {t("navigation.personal-details")}
           </NavigationItem>
           <NavigationItem icon={<WalletIcon primary />} href={WALLET_ROUTE}>
-            {t("navigation.Wallet")}
+            {t("navigation.wallet")}
           </NavigationItem>
           <NavigationItem icon={<SettingsIcon primary />} href={"/settings"}>
             {t("navigation.settings")}

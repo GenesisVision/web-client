@@ -13,11 +13,11 @@
     "back": "Back"
   },
   "navigation": {
-    "Dashboard": "Dashboard",
-    "Programs": "Programs",
-    "Search": "Search",
+    "dashboard": "Dashboard",
+    "programs": "Programs",
+    "search": "Search",
     "personal-details": "Personal details",
-    "Wallet": "Wallet",
+    "wallet": "Wallet",
     "settings": "Settings",
     "logout": "Log out",
     "login": "Login"

@@ -26,10 +26,10 @@ class Navigation extends Component {
             icon={<DashboardIcon primary />}
             href={DASHBOARD_ROUTE}
           >
-            {t("navigation.Dashboard")}
+            {t("navigation.dashboard")}
           </NavigationItem>
           <NavigationItem icon={<ProgramsIcon primary />} href={PROGRAMS_ROUTE}>
-            {t("navigation.Programs")}
+            {t("navigation.programs")}
           </NavigationItem>
         </div>
       </Fragment>
