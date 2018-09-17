@@ -1,15 +1,13 @@
 @import "styles/_colors.scss";
 
 .chip {
-  height: 32px;
-  min-width: 32px;
+  display: inline-flex;
   border-radius: 8px;
-  padding: 0 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding: 6px 10px;
   box-sizing: border-box;
   font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
   background-color: $secondary-background-color;
 
   &--negative {
@@ -26,7 +24,13 @@
     cursor: pointer;
   }
 
-  &--round {
-    border-radius: 100%;
+  &--rounded {
+    border-radius: 2rem;
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
   }
 }

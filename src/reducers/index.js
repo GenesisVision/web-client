@@ -3,7 +3,6 @@ import { loadingBarReducer } from "react-redux-loading-bar";
 import { routerReducer } from "react-router-redux";
 import accountSettingsReducer from "reducers/account-settings";
 import { combineReducers } from "redux";
-import walletSettingsReducer from "shared/reducers/wallet-settings-reducer/wallet-settings.reducer.js";
 
 import navigationReducer from "../modules/navigation/reducers/navigation-reducers";
 import popupReducer from "../modules/popup/reducers/popup-reducers";

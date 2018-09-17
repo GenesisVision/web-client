@@ -12,18 +12,18 @@ class Chip extends Component {
   };
 
   render() {
-    const { type, children, round, onClick } = this.props;
+    const { type, children, rounded, onClick } = this.props;
     return (
-      <span
+      <div
         className={classnames("chip", {
           [`chip--${type}`]: type,
-          "chip--round": round,
+          "chip--rounded": rounded,
           "chip--pointer": typeof onClick === "function"
         })}
         onClick={this.handleClick}
       >
-        {children}
-      </span>
+        <div className="chip__content">{children}</div>
+      </div>
     );
   }
 }
@@ -34,7 +34,7 @@ Chip.propTypes = {
     PropTypes.object,
     PropTypes.node
   ]),
-  round: PropTypes.bool,
+  rounded: PropTypes.bool,
   type: PropTypes.oneOf(["positive", "negative"]),
   onClick: PropTypes.func
 };
