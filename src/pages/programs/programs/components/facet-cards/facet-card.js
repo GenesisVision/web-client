@@ -5,10 +5,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import replaceParams from "utils/replace-params";
 
+import facetImg from "./facet.png";
+
 const FacetCard = ({ facet }) => {
   const renderImage = src => {
     if (src === null) return null;
-    return <img className="facet__logo" src={src} alt={facet.title} />;
+    return <img className="facet__logo" src={facetImg} alt={facet.title} />;
   };
 
   const composeFacetLink = facetId => {
@@ -20,10 +22,12 @@ const FacetCard = ({ facet }) => {
   return (
     <Surface className="facet">
       <Link to={composeFacetLink(facet.id)}>
-        <div className="facet__logo-wrapper">{renderImage(facet.logo)}</div>
-        <div className="facet__info">
-          <div className="facet__title">{facet.title}</div>
-          <div className="facet__description">{facet.description}</div>
+        <div className="facet__facet-container">
+          <div className="facet__logo-wrapper">{renderImage(facet.logo)}</div>
+          <div className="facet__info">
+            <div className="facet__title">{facet.title}</div>
+            <div className="facet__description">{facet.description}</div>
+          </div>
         </div>
       </Link>
     </Surface>
