@@ -27,6 +27,11 @@ class DashboardPortfolioChartSection extends Component {
   componentDidMount() {
     this.props.service.getPortfolioChart();
   }
+
+  handleChangePeriod = period => {
+    this.props.service.getPortfolioChart(period);
+  };
+
   render() {
     const { data, isPending, currency } = this.props;
     if (data.chart === undefined) return null;
@@ -39,7 +44,7 @@ class DashboardPortfolioChartSection extends Component {
           changeValue={data.changeValue}
           changeValueCurrency={data.changeValueCurrency}
         />
-        <ChartPeriod />
+        <ChartPeriod onChange={this.handleChangePeriod} />
         <div className="dashboard-portfolio-chart-section__chart">
           <DashboardPortfolioChart
             data={composeChartData(data.chart, data.bars)}

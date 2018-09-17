@@ -2,6 +2,7 @@ import "./chart-period.scss";
 
 import classnames from "classnames";
 import moment from "moment";
+import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 
@@ -34,7 +35,11 @@ class ChartPeriod extends Component {
     const { period } = this.state;
     if (period !== newPeriod) {
       const start = getPeriodStartDate(newPeriod);
-      this.setState({ start, period: newPeriod });
+      this.setState({ start, period: newPeriod }, () => {
+        if (this.props.onChange) {
+          this.props.onChange(this.state);
+        }
+      });
     }
   };
 
@@ -71,5 +76,9 @@ class ChartPeriod extends Component {
     );
   }
 }
+
+ChartPeriod.propTypes = {
+  onChange: PropTypes.func
+};
 
 export default translate()(ChartPeriod);
