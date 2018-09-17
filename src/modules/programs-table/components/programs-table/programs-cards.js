@@ -35,13 +35,11 @@ const ProgramsCards = ({
   isAuthenticated
 }) => {
   if (!data) return null;
-  console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!',data)
+  console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", data);
   return (
     <div className="programs-cards">
-      {data.programs.map(program=>(
-        <ProgramCard
-          program={program}
-        />
+      {data.programs.map(program => (
+        <ProgramCard program={program} />
       ))}
     </div>
   );
