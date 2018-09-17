@@ -6,6 +6,7 @@ import { bindActionCreators, compose } from "redux";
 
 import { toggleFavoriteProgram } from "../../../favorite-program/services/favorite-program.service";
 import * as programsService from "../../services/programs-table.service";
+import ProgramsCards from "./programs-cards";
 import ProgramsTable from "./programs-table";
 
 class ProgramsContainer extends Component {
@@ -25,8 +26,8 @@ class ProgramsContainer extends Component {
     const { isPending, data, filters, service, isAuthenticated } = this.props;
     return (
       <Surface>
-        <ProgramsTable
-          data={data || {}}
+        <ProgramsCards
+          data={data}
           isPending={isPending}
           sorting={filters.sorting}
           updateSorting={service.programsChangeSorting}
