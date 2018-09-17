@@ -7,6 +7,14 @@ import { translate } from "react-i18next";
 import { compose } from "redux";
 import { number, object } from "yup";
 
+const convertToCurrency = (value = 0, rate) => {
+  return value / rate;
+};
+
+const convertEntryFeeToCurrency = (value = 0, percentage) => {
+  return (value * percentage) / 100;
+};
+
 const InvestForm = ({
   t,
   values,
@@ -16,7 +24,7 @@ const InvestForm = ({
   handleSubmit,
   errorMessage
 }) => (
-  <form id="invest-form" onSubmit={handleSubmit}>
+  <form className="dialog__bottom" id="invest-form" onSubmit={handleSubmit}>
     <GVFormikField
       className="invest-field"
       type="text"
@@ -26,13 +34,17 @@ const InvestForm = ({
       adornment="GVT"
       autoComplete="off"
     />
-    <div className="invest-popup__currency">{`= ${values.amount /
-      info.rate} ${currency}`}</div>
+    <div className="invest-popup__currency">{`= ${convertToCurrency(
+      values.amount,
+      info.rate
+    )} ${currency}`}</div>
     <div className="invest-popup__entry">
       {t("invest-popup.entry-fee")}
       <span>
-        {`${info.entryFee}% (${(values.amount * info.entryFee) /
-          100} ${currency})`}
+        {`${info.entryFee}% (${convertEntryFeeToCurrency(
+          values.amount,
+          info.entryFee
+        )} ${currency})`}
       </span>
     </div>
     <div className="form-error">{errorMessage}</div>

@@ -4,7 +4,7 @@ import { translate } from "react-i18next";
 
 const InvestTop = ({ info, t }) => {
   return (
-    <Fragment>
+    <div className="dialog__top">
       <div className="dialog__header">
         <h2>{t("invest-popup.title")}</h2>
         <p>{info.title}</p>
@@ -21,7 +21,7 @@ const InvestTop = ({ info, t }) => {
         </div>
         <div className="dialog-field__value">{info.availableInWallet} GVT</div>
       </div>
-    </Fragment>
+    </div>
   );
 };
 

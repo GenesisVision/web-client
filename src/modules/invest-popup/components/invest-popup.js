@@ -1,8 +1,7 @@
 import "./invest-popup.scss";
 
-import Dialog from "components/dialog/dialog";
 import PropTypes from "prop-types";
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 
 import InvestForm from "./invest-form";
 import InvestTop from "./invest-top";
@@ -14,19 +13,16 @@ class InvestPopup extends Component {
 
   render() {
     return this.props.info ? (
-      <Dialog
-        className="invest-dialog"
-        top={<InvestTop info={this.props.info} />}
-        bottom={
-          <InvestForm
-            errorMessage={this.props.submitInfo.errorMessage}
-            currency={this.props.currency}
-            info={this.props.info}
-            disabled={this.props.submitInfo.isPending}
-            onSubmit={this.props.invest}
-          />
-        }
-      />
+      <Fragment>
+        <InvestTop info={this.props.info} />
+        <InvestForm
+          errorMessage={this.props.submitInfo.errorMessage}
+          currency={this.props.currency}
+          info={this.props.info}
+          disabled={this.props.submitInfo.isPending}
+          onSubmit={this.props.invest}
+        />
+      </Fragment>
     ) : null;
   }
 }

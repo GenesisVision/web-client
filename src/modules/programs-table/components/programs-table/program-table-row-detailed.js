@@ -15,13 +15,13 @@ import ProgramBigChart from "../program-big-chart/program-big-chart";
 
 class ProgramTableRowDetailed extends Component {
   state = {
-    isOpen: false
+    isOpenInvestToProgramPopup: false
   };
   handleOpenInvest = () => {
-    this.setState({ isOpen: true });
+    this.setState({ isOpenInvestToProgramPopup: true });
   };
   handleCloseInvest = () => {
-    this.setState({ isOpen: false });
+    this.setState({ isOpenInvestToProgramPopup: false });
   };
   render() {
     const {
@@ -98,7 +98,7 @@ class ProgramTableRowDetailed extends Component {
             <InvestPopupContainer
               id={program.id}
               onClose={this.handleCloseInvest}
-              open={this.state.isOpen}
+              open={this.state.isOpenInvestToProgramPopup}
             />
             {isAuthenticated &&
               program.personalProgramDetails && (

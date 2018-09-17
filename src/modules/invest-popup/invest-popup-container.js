@@ -1,4 +1,4 @@
-import Modal from "components/modal/modal";
+import Dialog from "components/dialog/dialog";
 import {
   clearInvestInfo,
   clearInvestSubmit
@@ -24,7 +24,7 @@ const InvestPopupContainer = props => {
     props.service.investServiceInvestById(props.id, amount).then(handleClose);
   };
   return (
-    <Modal open={props.open} onClose={handleClose}>
+    <Dialog open={props.open} onClose={handleClose}>
       <InvestPopup
         submitInfo={props.submitInfo}
         currency={props.currency}
@@ -33,7 +33,7 @@ const InvestPopupContainer = props => {
         fetchInfo={props.service.getInvestInfoById}
         invest={handleInvest}
       />
-    </Modal>
+    </Dialog>
   );
 };
 
