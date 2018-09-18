@@ -1,6 +1,15 @@
 @import "styles/_colors.scss";
 @import "styles/_breakpoint.scss";
 
+$program-padding: 32px;
+$text-size: 13px;
+$th-text-size: 12px;
+$title-text-size: 15px;
+$chart-width: 160px;
+$program-width: 312px;
+$program-height: 312px;
+$multiplier: 1.5;
+
 @mixin table-title() {
   opacity: 0.3;
   font-size: $th-text-size/1.5;
@@ -13,14 +22,6 @@
     padding-bottom: $th-text-size;
   }
 }
-$program-padding: 32px;
-$text-size: 13px;
-$th-text-size: 12px;
-$title-text-size: 15px;
-$chart-width: 160px;
-$program-width: 312px;
-$program-height: 312px;
-$multiplier: 1.5;
 .programs-cards {
   box-sizing: border-box;
   padding: $program-padding/2;
