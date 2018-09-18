@@ -7,6 +7,8 @@ import { translate } from "react-i18next";
 import { compose } from "redux";
 import { number, object } from "yup";
 
+import i18n from "../../../i18n";
+
 const convertToCurrency = (value = 0, rate) => {
   return value / rate;
 };
@@ -73,9 +75,9 @@ export default compose(
     }),
     validationSchema: object().shape({
       amount: number()
-        .typeError("Amount must be a number.")
-        .moreThan(0, "Amount must be greater than zero")
-        .required("Amount is required.")
+        .typeError(i18n.t("invest-popup.amount-is-number-error")) //"Amount must be a number."
+        .moreThan(0, "asd") //"Amount must be greater than zero"
+        .required("asd") //"Amount is required."
     }),
     handleSubmit: (values, { props }) => {
       props.onSubmit(values.amount);

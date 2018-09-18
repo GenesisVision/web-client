@@ -106,7 +106,9 @@ class ProgramDetailsDescription extends Component {
             <InvestPopupContainer
               open={this.state.isOpenInvestToProgramPopup}
               id={programId}
-              onClose={() => this.setState({ isOpenInvestToProgramPopup: false })}
+              onClose={() =>
+                this.setState({ isOpenInvestToProgramPopup: false })
+              }
             />
             {programDetails.personalProgramDetails &&
               programDetails.personalProgramDetails.isInvested && (

@@ -9,7 +9,8 @@
     "amount": "Amount to invest",
     "entry-fee": "Entry fee",
     "period": "Your request will be processed at the end of the reporting period",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "amount-is-number-error": "Amount must be a number."
   },
   "notifications-aside": {
     "header": "Notifications",
