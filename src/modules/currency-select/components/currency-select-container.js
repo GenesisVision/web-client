@@ -14,9 +14,6 @@ class CurrencySelectContainer extends Component {
     return (
       <Select
         className={classnames("currency-select", this.props.className)}
-        value={this.props.currentCurrency}
-        onSelect={this.props.service.updateCurrentCurrency}
-        className={"currency-select"}
         value={this.props.currency}
         onSelect={this.props.service.updateCurrency}
       >
