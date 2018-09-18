@@ -1,20 +1,14 @@
 import "./program-simple-chart.scss";
 
+import ProgramChartGradient, {
+  gradientOffset
+} from "components/chart/chart-gradient";
 import { GVColors } from "gv-react-components";
 import React from "react";
 import { Area, AreaChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
-import { NEGATIVE_COLOR, POSITIVE_COLOR } from "styles/colors";
-
-import ProgramChartGradient, {
-  gradientOffset
-} from "./parogram-chart-gradient";
 
 const ProgramSimpleChart = ({ data, isPositive }) => {
   if (data.length === 0) return null;
-  const color = isPositive ? POSITIVE_COLOR : NEGATIVE_COLOR;
-  const gradient = `url(#${
-    isPositive ? "positiveGradient" : "negativeGradient"
-  }`;
   const programChartData = data.map(x => ({
     date: x.date.getTime(),
     equity: x.value

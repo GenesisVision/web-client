@@ -54,6 +54,7 @@ class Select extends Component {
         </div>
 
         <Popover
+          horizontal="center"
           noPadding
           anchorEl={this.state.anchor}
           onClose={this.handleClose}
@@ -69,10 +70,6 @@ Select.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   onSelect: PropTypes.func.isRequired,
   className: PropTypes.string
-};
-
-Select.defaultProps = {
-  className: ""
 };
 
 export default Select;

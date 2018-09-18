@@ -1,16 +1,45 @@
 @import "styles/_colors.scss";
 @import "styles/_breakpoint.scss";
+
 .navigation {
   display: flex;
+  flex-direction: row;
+  &__mobile {
+    box-sizing: border-box;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  &__bottom {
+    margin-top: auto;
+  }
+
+  &__button {
+    justify-content: flex-start;
+    width: 100%;
+    opacity: 0.4;
+  }
+
+  &__menu {
+    padding: 0;
+    height: 44px;
+    width: 44px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.1);
+  }
 
   &__item {
     display: flex;
     align-items: center;
-    color: $main-color;
+    padding: 15px 32px;
     text-decoration: none;
     position: relative;
     opacity: 0.4;
-    margin-right: 80px;
 
     &--active {
       opacity: 1;
@@ -22,8 +51,9 @@
   }
 
   &__link {
+    color: $main-color;
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 400;
     letter-spacing: 0.2px;
   }
 
@@ -49,8 +79,14 @@
   }
 
   @include media-breakpoint-large-desktop() {
-    &__item {
+    &__item:first-child {
       margin-right: 100px;
+    }
+    &__item {
+      margin-right: 70px;
+    }
+    &__icon {
+      margin-right: 20px;
     }
   }
 }

@@ -1,51 +1,76 @@
+@import "styles/_colors.scss";
+
 .icon {
   height: 22px;
   width: 20px;
   display: inline-flex;
   background-repeat: no-repeat;
   background-size: contain;
-  &--programs {
-    background-image: url("../../shared/media/icons/programs.svg");
+
+  svg {
+    height: 100%;
+    width: 100%;
   }
-  &--dashboard {
-    background-image: url("../../shared/media/icons/dashboard.svg");
+
+  svg [fill] {
+    fill: white;
+  }
+
+  svg [stroke] {
+    stroke: white;
+  }
+
+  &--secondary {
+    svg [fill] {
+      fill: #d8d8d8;
+    }
+    svg [stroke] {
+      stroke: #d8d8d8;
+    }
+  }
+
+  &--primary {
+    svg [fill] {
+      fill: $primary-color;
+    }
+    svg [stroke] {
+      stroke: $primary-color;
+    }
+  }
+
+  &--rotate {
+    transform: rotate(180deg);
   }
   &--collapse {
-    background-image: url("../../shared/media/icons/collapse.svg");
-  }
-  &--ring {
-    background-image: url("../../shared/media/ring.svg");
+    background-image: url("../../shared/media/collapse.svg");
   }
   &--ring-circle {
     background-image: url("../../shared/media/ring-circle.svg");
   }
+  &--ring {
+    width: 16px;
+  }
   &--wallet {
     height: 20px;
-    background-image: url("../../shared/media/wallet.svg");
-  }
-  &--details {
-    height: 20px;
-    background-image: url("../../shared/media/user-avatar.svg");
-  }
-  &--logout {
-    height: 20px;
-    background-image: url("../../shared/media/logout.svg");
-  }
-  &--settings {
-    height: 20px;
-    background-image: url("../../shared/media/settings.svg");
-  }
-  &--question-circle {
-    height: 17px;
-    width: 17px;
-    background-image: url("../../shared/media/icons/question-circle.svg");
+    path {
+      fill: transparent;
+    }
   }
   &--controls {
     height: 20px;
     background-image: url("../../shared/media/controls.svg");
   }
   &--search {
-    height: 20px;
-    background-image: url("../../shared/media/search.svg");
+    height: 18px;
+  }
+  &--arrow {
+    width: 7px;
+    height: 7px;
+    background-image: url("../../shared/media/arrow.svg");
+  }
+  &--menu {
+    height: 15px;
+    width: 16px;
+    background-image: url("../../shared/media/menu.svg");
   }
 }

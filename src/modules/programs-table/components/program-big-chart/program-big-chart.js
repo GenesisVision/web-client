@@ -2,7 +2,7 @@ import "./program-big-chart.scss";
 
 import ProgramChartGradient, {
   gradientOffset
-} from "components/program-simple-chart/parogram-chart-gradient";
+} from "components/chart/chart-gradient";
 import { GVColors } from "gv-react-components";
 import moment from "moment";
 import React from "react";
@@ -16,23 +16,15 @@ import {
   YAxis
 } from "recharts";
 
-const TooltipContent = ({ active, label, payload }) => {
-  if (!active) return null;
+import ProgramBigChartTooltip from "./program-big-chart-tooltip";
 
-  return (
-    <div className="tooltip">
-      <div>Equity: {payload[0].value}%</div>
-      <div>Date: {moment(label).format("ll")}</div>
-    </div>
-  );
-};
-
-const ProgramBigChart = ({ data }) => {
+const ProgramBigChart = ({ data, currency }) => {
   const programChartData = data.map(x => ({
     date: x.date.getTime(),
     equity: x.value
   }));
   const off = gradientOffset(programChartData.map(x => x.equity));
+  if (data.length === 0) return null;
   return (
     <ResponsiveContainer width="100%" className="program-big-chart">
       <AreaChart data={programChartData}>
@@ -52,7 +44,7 @@ const ProgramBigChart = ({ data }) => {
           axisLine={false}
           tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
         />
-        <Tooltip content={TooltipContent} />
+        <Tooltip content={ProgramBigChartTooltip} />
         <defs>
           <ProgramChartGradient
             offset={off}

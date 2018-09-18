@@ -1,5 +1,15 @@
+import { GVButton } from "gv-react-components";
 import React from "react";
 import { NavLink } from "react-router-dom";
+
+export const NavigationButton = ({ icon, title, children, onClick }) => {
+  return (
+    <GVButton className="navigation__button" variant="text" onClick={onClick}>
+      {<icon.type {...icon.props} className="navigation__icon" />}
+      <span className="navigation__link">{children}</span>
+    </GVButton>
+  );
+};
 
 const NavigationItem = ({ href, icon, title, children }) => {
   return (
