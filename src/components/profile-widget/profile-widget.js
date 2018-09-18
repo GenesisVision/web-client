@@ -78,8 +78,4 @@ ProfileWidget.propTypes = {
   className: PropTypes.string
 };
 
-ProfileWidget.defaultProps = {
-  className: ""
-};
-
 export default translate()(ProfileWidget);
