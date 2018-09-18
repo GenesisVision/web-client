@@ -1,3 +1,4 @@
+import headerReducer from "modules/header/reducer/header-reducer";
 import notificationsReducer from "pages/app/components/notifications/reducers/notifications.reducers";
 import { loadingBarReducer } from "react-redux-loading-bar";
 import { routerReducer } from "react-router-redux";
@@ -6,7 +7,6 @@ import { combineReducers } from "redux";
 
 import navigationReducer from "../modules/navigation/reducers/navigation-reducers";
 import popupReducer from "../modules/popup/reducers/popup-reducers";
-import profileHeaderReducer from "../modules/profile-header/reducer/profile-header-reducer";
 import profileReducer from "../modules/profile/reducers/profile-reducers";
 import programDepositReducer from "../modules/program-deposit/reducers/trader-deposit-reducers";
 import programWithdrawReducer from "../modules/program-withdraw/reducers/program-withdraw-reducers";
@@ -35,7 +35,7 @@ export default combineReducers({
   emailConfirmData: emailConfirmReducer,
   passwordRestoreData: passwordRestoreReducer,
   alertMessages: alertMessagesReducer,
-  profileHeader: profileHeaderReducer,
+  profileHeader: headerReducer,
   profileData: profileReducer,
   dashboard: dashboardReducer,
   programDepositData: programDepositReducer,
