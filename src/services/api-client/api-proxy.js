@@ -13,7 +13,7 @@ const apiProxy = (api, dispatch) => {
           .apply(target, args)
           .then(result => {
             return {
-              isPending: true,
+              isPending: false,
               data: result
             };
           })
