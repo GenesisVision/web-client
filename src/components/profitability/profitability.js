@@ -4,24 +4,31 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 
-const Profitability = ({ className, children, value, ...rest }) => {
-  let isPositive = rest.isPositive;
-  let isNegative = rest.isNegative;
+const Profitability = ({
+  className,
+  children,
+  value,
+  isPositive,
+  isNegative,
+  ...rest
+}) => {
+  let isPositiveLocal = isPositive;
+  let isNegaitveLocal = isNegative;
 
   if (value !== undefined) {
-    isPositive = value > 0;
-    isNegative = value < 0;
+    isPositiveLocal = value > 0;
+    isNegaitveLocal = value < 0;
   }
 
   const rootClassName = classNames("profitability", className, {
-    "profitability--positive": isPositive,
-    "profitability--negative": isNegative
+    "profitability--positive": isPositiveLocal,
+    "profitability--negative": isNegaitveLocal
   });
 
   return (
     <span className={rootClassName} {...rest}>
-      {isPositive && value !== undefined && "+ "}
-      {isNegative && value !== undefined && "- "}
+      {isPositiveLocal && value !== undefined && "+ "}
+      {isNegaitveLocal && value !== undefined && "- "}
       {children}
     </span>
   );
