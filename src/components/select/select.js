@@ -72,8 +72,4 @@ Select.propTypes = {
   className: PropTypes.string
 };
 
-Select.defaultProps = {
-  className: ""
-};
-
 export default Select;
