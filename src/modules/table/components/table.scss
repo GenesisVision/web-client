@@ -65,6 +65,7 @@
     white-space: nowrap;
     &#{&} {
       &--head {
+        color: $short-statistic-subheading-color;
         padding-right: 15px;
       }
       &--sortable {

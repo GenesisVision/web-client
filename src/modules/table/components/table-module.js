@@ -3,7 +3,6 @@ import { merge } from "utils/helpers";
 
 import { calculateTotalPages } from "../helpers/paging.helpers";
 import { updateFilter } from "../reducers/table-filtering.reducer";
-import { updateSorting } from "../reducers/table-sorting.reducer";
 import { composeRequestFilters } from "../services/table.service";
 import Table from "./table";
 
@@ -65,7 +64,7 @@ class TableModule extends Component {
   handleUpdateSorting = sorting => {
     this.setState(
       prevState => ({
-        sorting: updateSorting(sorting),
+        sorting: sorting,
         paging: merge(prevState.paging, {
           currentPage: 0
         })
