@@ -6,21 +6,7 @@ import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 
-// import { Link } from "react-router-dom";
-
-const statistic = {
-  pnL: 0,
-  investors: 0,
-  trades: 0,
-  successTrades: 0,
-  profitFactor: 0,
-  sharpeRatio: 0,
-  maxDrawdown: 0,
-  periodStarts: "2018-09-10T12:59:42.348Z",
-  periodEnds: "2018-09-10T12:59:42.348Z"
-};
-
-const ProgramDetailsStatistics = ({ t }) => (
+const ProgramDetailsStatistics = ({ t, statistic }) => (
   <Surface className="program-details-statistics">
     <h2 className="program-details-statistics__heading">
       {t("program-details-page.statistics.title")}
