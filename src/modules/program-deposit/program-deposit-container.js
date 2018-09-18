@@ -1,23 +1,22 @@
 import Dialog from "components/dialog/dialog";
 import {
-  clearInvestInfo,
+  clearDepositProgramInfo,
   clearInvestSubmit
-} from "modules/invest-popup/actions/invest-popup.actions";
+} from "modules/program-deposit/actions/program-deposit.actions";
+import ProgramDepositPopup from "modules/program-deposit/components/program-deposit-popup";
 import {
-  getInvestInfoById,
+  getDepositProgramInfoById,
   investServiceInvestById
-} from "modules/invest-popup/services/invest-popup.services";
+} from "modules/program-deposit/services/program-deposit.services";
 import PropTypes from "prop-types";
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import InvestPopup from "./components/invest-popup";
-
-const InvestPopupContainer = props => {
+const ProgramDepositContainer = props => {
   const handleClose = () => {
     props.onClose();
-    props.service.clearInvestInfo();
+    props.service.clearDepositProgramInfo();
     props.service.clearInvestSubmit();
   };
   const handleInvest = amount => {
@@ -25,37 +24,43 @@ const InvestPopupContainer = props => {
   };
   return (
     <Dialog open={props.open} onClose={handleClose}>
-      <InvestPopup
+      <ProgramDepositPopup
         submitInfo={props.submitInfo}
         currency={props.currency}
         info={props.info.data}
         id={props.id}
-        fetchInfo={props.service.getInvestInfoById}
+        fetchInfo={props.service.getDepositProgramInfoById}
         invest={handleInvest}
       />
     </Dialog>
   );
 };
 
-InvestPopupContainer.propTypes = {
+ProgramDepositContainer.propTypes = {
   open: PropTypes.bool,
   id: PropTypes.string.isRequired,
   currency: PropTypes.string,
-  onClose: PropTypes.func
+  onClose: PropTypes.func,
+  service: PropTypes.shape({
+    getDepositProgramInfoById: PropTypes.func,
+    clearDepositProgramInfo: PropTypes.func,
+    investServiceInvestById: PropTypes.func,
+    clearInvestSubmit: PropTypes.func
+  })
 };
 
 const mapStateToProps = state => ({
-  info: state.investPopup.info,
-  submitInfo: state.investPopup.submit,
+  info: state.programDeposit.info,
+  submitInfo: state.programDeposit.submit,
   currency: state.accountSettings.currentCurrency
 });
 
 const mapDispatchToProps = dispath => ({
   service: bindActionCreators(
     {
-      getInvestInfoById,
+      getDepositProgramInfoById,
+      clearDepositProgramInfo,
       investServiceInvestById,
-      clearInvestInfo,
       clearInvestSubmit
     },
     dispath
@@ -65,4 +70,4 @@ const mapDispatchToProps = dispath => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(InvestPopupContainer);
+)(ProgramDepositContainer);

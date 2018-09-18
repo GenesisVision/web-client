@@ -2,7 +2,7 @@ import "./program-details-description.scss";
 
 import { RingIcon } from "components/icon/icon";
 import { GVButton, GVProgramAvatar } from "gv-react-components";
-import InvestPopupContainer from "modules/invest-popup/invest-popup-container";
+import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
@@ -103,7 +103,7 @@ class ProgramDetailsDescription extends Component {
             >
               {t("program-details-page.description.invest")}
             </GVButton>
-            <InvestPopupContainer
+            <ProgramDepositContainer
               open={this.state.isOpenInvestToProgramPopup}
               id={programId}
               onClose={() =>

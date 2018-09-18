@@ -1,4 +1,4 @@
-import investPopupReducer from "modules/invest-popup/reducer/invest-popup.reducer";
+import programDepositReducer from "modules/program-deposit/reducer/program-deposit.reducer";
 import notificationsReducer from "pages/app/components/notifications/reducers/notifications.reducers";
 import { loadingBarReducer } from "react-redux-loading-bar";
 import { routerReducer } from "react-router-redux";
@@ -9,7 +9,6 @@ import navigationReducer from "../modules/navigation/reducers/navigation-reducer
 import popupReducer from "../modules/popup/reducers/popup-reducers";
 import profileHeaderReducer from "../modules/profile-header/reducer/profile-header-reducer";
 import profileReducer from "../modules/profile/reducers/profile-reducers";
-import programDepositReducer from "../modules/program-deposit/reducers/trader-deposit-reducers";
 import programWithdrawReducer from "../modules/program-withdraw/reducers/program-withdraw-reducers";
 import programsReducer from "../modules/programs-table/reducers/programs-table.reducers";
 import emailConfirmReducer from "../pages/auth/email-confirm/reducers/email-confirm.reducers";
@@ -39,7 +38,7 @@ export default combineReducers({
   profileHeader: profileHeaderReducer,
   profileData: profileReducer,
   dashboard: dashboardReducer,
-  programDepositData: programDepositReducer,
+  programDeposit: programDepositReducer,
   programWithdrawData: programWithdrawReducer,
   popupData: popupReducer,
   navigationData: navigationReducer,
@@ -48,6 +47,5 @@ export default combineReducers({
   notifications: notificationsReducer,
   manager: managerReducer,
   wallet: walletReducer,
-  accountSettings: accountSettingsReducer,
-  investPopup: investPopupReducer
+  accountSettings: accountSettingsReducer
 });

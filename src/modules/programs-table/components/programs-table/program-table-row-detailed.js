@@ -2,8 +2,7 @@ import { Icon } from "components/icon/icon";
 import Surface from "components/surface/surface";
 import { GVButton, GVProgramAvatar } from "gv-react-components";
 import FavoriteIcon from "modules/favorite-program/components/favorite-icon/favorite-icon";
-import InvestPopup from "modules/invest-popup/components/invest-popup";
-import InvestPopupContainer from "modules/invest-popup/invest-popup-container";
+import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import { TableRow } from "modules/table/components";
 import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
 import React, { Component } from "react";
@@ -95,7 +94,7 @@ class ProgramTableRowDetailed extends Component {
                 Details >
               </GVButton>
             </Link>
-            <InvestPopupContainer
+            <ProgramDepositContainer
               id={program.id}
               onClose={this.handleCloseInvest}
               open={this.state.isOpenInvestToProgramPopup}

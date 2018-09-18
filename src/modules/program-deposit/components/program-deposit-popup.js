@@ -1,12 +1,11 @@
-import "./invest-popup.scss";
+import "./program-deposit.scss";
 
+import ProgramDepositForm from "modules/program-deposit/components/program-deposit-form";
+import ProgramDepositTop from "modules/program-deposit/components/program-deposit-top";
 import PropTypes from "prop-types";
 import React, { Component, Fragment } from "react";
 
-import InvestForm from "./invest-form";
-import InvestTop from "./invest-top";
-
-class InvestPopup extends Component {
+class ProgramDepositPopup extends Component {
   componentDidMount() {
     this.props.fetchInfo(this.props.id);
   }
@@ -14,8 +13,8 @@ class InvestPopup extends Component {
   render() {
     return this.props.info ? (
       <Fragment>
-        <InvestTop info={this.props.info} />
-        <InvestForm
+        <ProgramDepositTop info={this.props.info} />
+        <ProgramDepositForm
           errorMessage={this.props.submitInfo.errorMessage}
           currency={this.props.currency}
           info={this.props.info}
@@ -27,7 +26,7 @@ class InvestPopup extends Component {
   }
 }
 
-InvestPopup.propTypes = {
+ProgramDepositPopup.propTypes = {
   fetchInfo: PropTypes.func,
   invest: PropTypes.func,
   currency: PropTypes.string,
@@ -41,4 +40,4 @@ InvestPopup.propTypes = {
   })
 };
 
-export default InvestPopup;
+export default ProgramDepositPopup;

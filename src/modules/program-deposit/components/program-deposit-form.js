@@ -7,17 +7,15 @@ import { translate } from "react-i18next";
 import { compose } from "redux";
 import { number, object } from "yup";
 
-import i18n from "../../../i18n";
-
 const convertToCurrency = (value = 0, rate) => {
-  return value / rate;
+  return Math.round((value / rate) * 100000000) / 100000000;
 };
 
-const convertEntryFeeToCurrency = (value = 0, percentage) => {
+const calculateValueOfEntryFee = (value = 0, percentage) => {
   return (value * percentage) / 100;
 };
 
-const InvestForm = ({
+const ProgramDepositForm = ({
   t,
   values,
   info,
@@ -29,9 +27,9 @@ const InvestForm = ({
   <form className="dialog__bottom" id="invest-form" onSubmit={handleSubmit}>
     <GVFormikField
       className="invest-field"
-      type="text"
+      type="number"
       name="amount"
-      label={t("invest-popup.amount")}
+      label={t("deposit-program.amount")}
       component={GVTextField}
       adornment="GVT"
       autoComplete="off"
@@ -41,11 +39,11 @@ const InvestForm = ({
       info.rate
     )} ${currency}`}</div>
     <div className="invest-popup__entry">
-      {t("invest-popup.entry-fee")}
+      {t("deposit-program.entry-fee")}
       <span>
-        {`${info.entryFee}% (${convertEntryFeeToCurrency(
-          values.amount,
-          info.entryFee
+        {`${info.entryFee}% (${convertToCurrency(
+          calculateValueOfEntryFee(values.amount, info.entryFee),
+          info.rate
         )} ${currency})`}
       </span>
     </div>
@@ -56,10 +54,10 @@ const InvestForm = ({
       className="invest-form__submit-button"
       disabled={disabled}
     >
-      {t("invest-popup.confirm")}
+      {t("deposit-program.confirm")}
     </GVButton>
     <div className="invest-popup__period-ends">
-      {`${t("invest-popup.period")} ${moment(info.periodEnds).format(
+      {`${t("deposit-program.period")} ${moment(info.periodEnds).format(
         "DD.MM.YYYY, HH:mm"
       )}`}
     </div>
@@ -73,14 +71,15 @@ export default compose(
     mapPropsToValues: () => ({
       amount: ""
     }),
-    validationSchema: object().shape({
-      amount: number()
-        .typeError(i18n.t("invest-popup.amount-is-number-error")) //"Amount must be a number."
-        .moreThan(0, "asd") //"Amount must be greater than zero"
-        .required("asd") //"Amount is required."
-    }),
+    validationSchema: props =>
+      object().shape({
+        amount: number()
+          .typeError(props.t("deposit-program.amount-type-error"))
+          .moreThan(0, props.t("deposit-program.amount-not-zero-error"))
+          .required(props.t("deposit-program.amount-is-required-error"))
+      }),
     handleSubmit: (values, { props }) => {
       props.onSubmit(values.amount);
     }
   })
-)(InvestForm);
+)(ProgramDepositForm);
