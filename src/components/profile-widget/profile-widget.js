@@ -78,4 +78,8 @@ ProfileWidget.propTypes = {
   className: PropTypes.string
 };
 
+ProfileWidget.defaultProps = {
+  email: ""
+};
+
 export default translate()(ProfileWidget);

@@ -1,7 +1,6 @@
 import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import moment from "moment";
-import PropTypes from "prop-types";
 import React from "react";
 import { translate } from "react-i18next";
 import { compose } from "redux";
@@ -27,7 +26,7 @@ const ProgramDepositForm = ({
   <form className="dialog__bottom" id="invest-form" onSubmit={handleSubmit}>
     <GVFormikField
       className="invest-field"
-      type="number"
+      type="text"
       name="amount"
       label={t("deposit-program.amount")}
       component={GVTextField}

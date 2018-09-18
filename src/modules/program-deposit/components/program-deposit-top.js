@@ -1,5 +1,4 @@
-import PropTypes from "prop-types";
-import React, { Fragment } from "react";
+import React from "react";
 import { translate } from "react-i18next";
 
 const ProgramDepositTop = ({ info, t }) => {

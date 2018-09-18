@@ -52,10 +52,10 @@ ProgramDepositContainer.propTypes = {
 const mapStateToProps = state => ({
   info: state.programDeposit.info,
   submitInfo: state.programDeposit.submit,
-  currency: state.accountSettings.currentCurrency
+  currency: state.accountSettings.currency
 });
 
-const mapDispatchToProps = dispath => ({
+const mapDispatchToProps = dispatch => ({
   service: bindActionCreators(
     {
       getDepositProgramInfoById,
@@ -63,7 +63,7 @@ const mapDispatchToProps = dispath => ({
       investServiceInvestById,
       clearInvestSubmit
     },
-    dispath
+    dispatch
   )
 });
 

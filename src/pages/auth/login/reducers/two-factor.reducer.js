@@ -6,7 +6,7 @@ import { LOGIN_TWO_FACTOR } from "../actions/login.actions";
 export const initialState = {
   email: "",
   password: "",
-  from: HOME_ROUTE
+  from: "/"
 };
 
 const clearDataActionType = composeClearDataActionType(LOGIN_TWO_FACTOR);

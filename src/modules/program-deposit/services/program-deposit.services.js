@@ -1,4 +1,4 @@
-import { fetchProfileHeaderInfo } from "modules/profile-header/actions/profile-header-actions";
+import { fetchProfileHeaderInfo } from "modules/header/actions/header-actions";
 import {
   fetchDepositProgramInfoById,
   investToProgramById
@@ -6,9 +6,7 @@ import {
 
 export const getDepositProgramInfoById = id => (dispatch, getState) => {
   const { accountSettings } = getState();
-  return dispatch(
-    fetchDepositProgramInfoById(id, accountSettings.currentCurrency)
-  );
+  return dispatch(fetchDepositProgramInfoById(id, accountSettings.currency));
 };
 
 export const investServiceInvestById = (id, amount) => dispatch => {

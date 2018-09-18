@@ -1,15 +1,13 @@
+import headerReducer from "modules/header/reducer/header-reducer";
+import programDepositReducer from "modules/program-deposit/reducer/program-deposit.reducer";
 import notificationsReducer from "pages/app/components/notifications/reducers/notifications.reducers";
 import { loadingBarReducer } from "react-redux-loading-bar";
 import { routerReducer } from "react-router-redux";
 import accountSettingsReducer from "reducers/account-settings";
 import { combineReducers } from "redux";
-import walletSettingsReducer from "shared/reducers/wallet-settings-reducer/wallet-settings.reducer.js";
 
 import navigationReducer from "../modules/navigation/reducers/navigation-reducers";
-import popupReducer from "../modules/popup/reducers/popup-reducers";
-import profileHeaderReducer from "../modules/profile-header/reducer/profile-header-reducer";
 import profileReducer from "../modules/profile/reducers/profile-reducers";
-import programDepositReducer from "../modules/program-deposit/reducers/trader-deposit-reducers";
 import programWithdrawReducer from "../modules/program-withdraw/reducers/program-withdraw-reducers";
 import programsReducer from "../modules/programs-table/reducers/programs-table.reducers";
 import emailConfirmReducer from "../pages/auth/email-confirm/reducers/email-confirm.reducers";
@@ -41,7 +39,6 @@ export default combineReducers({
   dashboard: dashboardReducer,
   programDeposit: programDepositReducer,
   programWithdrawData: programWithdrawReducer,
-  popupData: popupReducer,
   navigationData: navigationReducer,
   emailPending: emailPendingReducer,
   programDetails: programDetailsReducer,

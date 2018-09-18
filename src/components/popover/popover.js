@@ -4,7 +4,6 @@ import classnames from "classnames";
 import Modal from "components/modal/modal";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import EventListener from "react-event-listener";
 
 const MARGIN_OFFSET = 10;
 
