@@ -1,4 +1,15 @@
+@import "styles/_colors.scss";
+
 .program-details-trades {
+  & .table__row--head,
+  &__row {
+    padding: 0 0 0 32px;
+  }
+
+  &__row:nth-child(2n + 1) {
+    background-color: $table-background-subcolor;
+  }
+
   &__cell {
     &--direction {
       width: 14%;
@@ -31,5 +42,29 @@
     &--entry {
       width: 16%;
     }
+  }
+
+  & .filter {
+    &__label {
+      color: $short-statistic-notice-color;
+    }
+
+    &__value {
+      color: $text-light-color;
+    }
+
+    &__arrow {
+      stroke: $short-statistic-subheading-color;
+    }
+  }
+
+  &__head-cell span {
+    color: $text-color;
+    opacity: 0.3;
+    letter-spacing: 0.4px;
+  }
+
+  &__cell {
+    color: $text-color;
   }
 }

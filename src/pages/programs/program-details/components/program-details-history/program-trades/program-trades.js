@@ -60,7 +60,9 @@ class ProgramTrades extends Component {
         renderHeader={({ column, sortingName, isAsc }) => (
           <TableHeadCell
             key={column.name}
-            className={`program-details-trades__cell--${column.name}`}
+            className={`program-details-trades__head-cell program-details-trades__cell--${
+              column.name
+            }`}
             sortable={false}
             active={false}
           >
@@ -68,7 +70,7 @@ class ProgramTrades extends Component {
           </TableHeadCell>
         )}
         renderBodyRow={trade => (
-          <TableRow>
+          <TableRow className="program-details-trades__row">
             <TableCell className="program-details-trades__cell program-details-trades__cell--direction">
               <Profitability
                 isPositive={trade.direction === "Buy"}

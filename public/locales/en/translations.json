@@ -177,7 +177,7 @@
     },
     "history": {
       "trades": {
-        "direction": "Direction",
+        "direction": "Dir",
         "ticket": "Ticket",
         "symbol": "Symbol",
         "volume": "Volume",

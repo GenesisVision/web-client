@@ -50,6 +50,12 @@
     }
   }
 
+  &__footer {
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
   &__cell {
     cursor: default;
     box-sizing: border-box;
