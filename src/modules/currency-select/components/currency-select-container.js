@@ -3,7 +3,7 @@ import "./currency-select.scss";
 import classnames from "classnames";
 import Select from "components/select/select";
 import { CURRENCY_VALUES } from "modules/currency-select/currency-select.constants";
-import { updateCurrentCurrency } from "modules/currency-select/services/currency-select.service";
+import { updateCurrency } from "modules/currency-select/services/currency-select.service";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { connect } from "react-redux";
@@ -16,6 +16,9 @@ class CurrencySelectContainer extends Component {
         className={classnames("currency-select", this.props.className)}
         value={this.props.currentCurrency}
         onSelect={this.props.service.updateCurrentCurrency}
+        className={"currency-select"}
+        value={this.props.currency}
+        onSelect={this.props.service.updateCurrency}
       >
         {Object.keys(CURRENCY_VALUES).map(currency => {
           return (
@@ -30,18 +33,18 @@ class CurrencySelectContainer extends Component {
 }
 
 CurrencySelectContainer.propTypes = {
-  currentCurrency: PropTypes.oneOf(Object.keys(CURRENCY_VALUES)),
+  currency: PropTypes.oneOf(Object.keys(CURRENCY_VALUES)),
   service: PropTypes.shape({
-    updateCurrentCurrency: PropTypes.func
+    updateCurrency: PropTypes.func
   })
 };
 
 const mapStateToProps = ({ accountSettings }) => ({
-  currentCurrency: accountSettings.currentCurrency
+  currency: accountSettings.currency
 });
 
 const mapDispatchToProps = dispatch => ({
-  service: bindActionCreators({ updateCurrentCurrency }, dispatch)
+  service: bindActionCreators({ updateCurrency }, dispatch)
 });
 
 export default connect(

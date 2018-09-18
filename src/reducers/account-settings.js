@@ -3,7 +3,7 @@ import { ACCOUNT_SETTINGS_KEY } from "shared/middlewares/update-account-settings
 import { loadData } from "utils/localstorage";
 
 const accountSettings = loadData(ACCOUNT_SETTINGS_KEY) || {
-  currentCurrency: "GVT"
+  currency: "GVT"
 };
 
 const accountSettingsReducer = (state = accountSettings, action) => {

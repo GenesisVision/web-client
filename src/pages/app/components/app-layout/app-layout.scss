@@ -3,11 +3,7 @@
 .app {
   margin: 0 auto;
 
-  @include media-breakpoint-desktop {
-    max-width: 1200px;
-  }
-
-  @include media-breakpoint-large-desktop {
+  @media (min-width: 1360px) {
     max-width: 1360px;
   }
 
@@ -21,11 +17,8 @@
 
   &__main {
     padding: 0 18px;
-    margin-top: 20px;
-
-    @include media-breakpoint-tablet {
-      padding: 0 32px;
-      margin-top: 60px;
+    @media (min-width: 1360px) {
+      padding: 0;
     }
   }
 }
