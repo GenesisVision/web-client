@@ -198,7 +198,7 @@ $description-block-width: 250px;
     //width: 5%;
   }
   &--chart {
-    //min-width: 50px;
+    min-width: 100px;
     max-width: 200px;
   }
   &--favorite {
@@ -299,11 +299,11 @@ $description-block-width: 250px;
         &--label {
           opacity: 0.3;
           font-size: $text-size/1.5;
-          padding: $padding/3 2px;
+          padding: $padding/3 4px;
         }
         &--value {
           font-size: $text-size/1.5;
-          padding: 0 2px;
+          padding: 0 4px;
           &--positive {
             color: $positive-color;
           }
