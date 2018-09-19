@@ -65,7 +65,7 @@ class TableModule extends Component {
           currentPage: 0
         })
       }),
-      this.updateItems()
+      this.updateItems
     );
   };
 
@@ -80,12 +80,14 @@ class TableModule extends Component {
     }, this.updateItems);
   };
 
-  handleUpdatePaging = paging => {
+  handleUpdatePaging = nextPageIndex => {
     this.setState(
       prevState => ({
-        paging: merge(prevState.paging, paging)
+        paging: merge(prevState.paging, {
+          currentPage: nextPageIndex
+        })
       }),
-      this.updateItems()
+      this.updateItems
     );
   };
 
