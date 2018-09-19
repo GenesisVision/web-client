@@ -6,6 +6,7 @@ import { bindActionCreators, compose } from "redux";
 
 import { toggleFavoriteProgram } from "../../../favorite-program/services/favorite-program.service";
 import * as programsService from "../../services/programs-table.service";
+import ProgramsCards from "./programs-cards";
 import ProgramsTable from "./programs-table";
 
 class ProgramsContainer extends Component {
