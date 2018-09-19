@@ -16,7 +16,8 @@ class TableModule extends Component {
       paging: { ...paging },
       sorting: sorting,
       filtering: { ...filtering },
-      data: {}
+      data: {},
+      isPending: true
     };
   }
 
@@ -25,16 +26,12 @@ class TableModule extends Component {
     sorting: null,
     filtering: null,
     data: { items: null },
-    isPending: false
+    isPending: null
   };
 
   componentDidMount() {
     this.updateItems();
   }
-
-  /**
-   * @desc апдейтим данные.
-   */
   updateItems = () => {
     const { paging, sorting, filtering } = this.state;
     const { defaultFilters, getItems } = this.props;
@@ -48,7 +45,6 @@ class TableModule extends Component {
       defaultFilters
     });
 
-    //гетнули данные с фильтрами.
     getItems(filters)
       .then(data => {
         const totalPages = calculateTotalPages(data.total, paging.itemsOnPage);
