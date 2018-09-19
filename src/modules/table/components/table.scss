@@ -44,6 +44,7 @@ $padding: 33px;
   }
 
   &__filters {
+    font-size: $th-font-size/1.5;
     display: flex;
     flex: 1;
     justify-content: flex-end;
