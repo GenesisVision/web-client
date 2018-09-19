@@ -1,4 +1,11 @@
 @import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
+
+$th-font-size: 12px;
+$td-font-size: 13px;
+$table-title-font-size: 17px;
+$view-svg-size: 15px;
+$padding: 33px;
 
 %sortable-border-icon {
   position: absolute;
