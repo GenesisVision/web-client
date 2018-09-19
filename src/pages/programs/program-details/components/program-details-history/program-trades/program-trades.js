@@ -46,11 +46,11 @@ class ProgramTrades extends Component {
         getItems={fetchProgramTrades}
         filtering={programTradesFiltering}
         sorting={PROGRAM_TRADES_SORTING}
-        renderFilters={updateFilter => (
+        renderFilters={(updateFilter, filtering) => (
           <Fragment>
             <DateRangeFilter
               name={DATE_RANGE_FILTER_NAME}
-              value={programTradesFiltering[DATE_RANGE_FILTER_NAME]}
+              value={filtering[DATE_RANGE_FILTER_NAME]}
               onChange={updateFilter}
             />
           </Fragment>

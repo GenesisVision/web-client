@@ -18,6 +18,7 @@ const Table = ({
   updatePaging,
   renderFilters,
   updateFilter,
+  filtering,
   renderHeader,
   renderBodyRow
 }) => {
@@ -27,6 +28,7 @@ const Table = ({
         title={title}
         renderFilters={renderFilters}
         updateFilter={updateFilter}
+        filtering={filtering}
       />
       <TableHeader
         columns={columns}
