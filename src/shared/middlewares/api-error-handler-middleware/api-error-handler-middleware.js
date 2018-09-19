@@ -9,7 +9,7 @@ const apiErrorHandlerMiddleware = (
   var isRejected = new RegExp(REJECTED + "$", "g");
 
   if (isRejected && action.error) {
-    action.payload = handleErrorMessage(action.payload);
+    action.payload = handleErrorMessage(action.payload.response);
   }
 
   return next(action);
