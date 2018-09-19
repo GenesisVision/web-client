@@ -8,7 +8,6 @@ $small-font-size: 13px;
 $info-width: 318px;
 $description-block-width: 250px;
 $border-radius: 8px;
-$program-padding: 32px;
 
 @mixin table-title() {
   opacity: 0.3;
@@ -31,14 +30,14 @@ $program-padding: 32px;
 }
 .programs-cards {
   box-sizing: border-box;
-  padding: $program-padding;
+  padding: $padding;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   flex-wrap: wrap;
   &__card {
-    margin-right: $program-padding/2;
-    margin-bottom: $program-padding;
+    margin-right: $padding/2;
+    margin-bottom: $padding;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
