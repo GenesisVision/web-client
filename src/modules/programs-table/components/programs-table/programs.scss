@@ -1,22 +1,159 @@
-@import "styles/_breakpoint.scss";
 @import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
 
-$padding: 33px;
-$font-size-title: 15px;
-$font-size: 13px;
-$small-font-size: 13px;
-$info-width: 318px;
+$padding: 32px;
+$text-size: 13px;
+$th-text-size: 12px;
+$title-text-size: 15px;
+$chart-width: 160px;
+$program-width: 312px;
+$program-height: 312px;
+$multiplier: 1.5;
+$border-radius: 5px;
 $description-block-width: 250px;
-$border-radius: 8px;
 
 @mixin table-title() {
   opacity: 0.3;
-  font-size: 12px;
+  font-size: $th-text-size/1.5;
   font-weight: 100;
   color: white;
   text-align: left;
-  padding-bottom: 12px;
+  padding-bottom: $th-text-size/1.5;
+  @include media-breakpoint-landscape-phone() {
+    font-size: $th-text-size;
+    padding-bottom: $th-text-size;
+  }
 }
+.programs-cards {
+  box-sizing: border-box;
+  padding: $padding/2;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  &__card {
+    margin-bottom: $padding/2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+    width: 100%;
+    height: $program-height/1.2;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #212c34;
+    &:last-child {
+      margin-right: 0;
+    }
+    &__row {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      &__title {
+        padding: 3px 0;
+        font-size: $title-text-size/1.5;
+      }
+      &__name {
+        font-size: $text-size/1.5;
+        color: $primary-color;
+      }
+      &__actions {
+      }
+      &__chart {
+        width: $chart-width/1.5;
+      }
+      &__chart-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        &--balance {
+          font-size: $text-size/1.5;
+          font-weight: 100;
+        }
+        &--profit {
+          font-size: $text-size/1.5;
+          font-weight: 600;
+          color: rgb(44, 211, 146);
+          border-radius: 19.5px;
+          background-color: $success;
+          padding: 5px 13px;
+          margin-bottom: 8px;
+        }
+      }
+      &--title {
+        @include table-title;
+      }
+    }
+    &__table {
+      & table {
+        width: 100%;
+        th {
+          @include table-title;
+        }
+        td {
+          font-size: $text-size/$multiplier;
+          font-weight: 100;
+        }
+      }
+    }
+  }
+  .program-avatar {
+    width: 40px;
+    height: 40px;
+  }
+  @include media-breakpoint-phone() {
+    .program-avatar {
+      width: 80px;
+      height: 80px;
+    }
+    &__card {
+      height: $program-height;
+      margin-right: 0;
+      &__row {
+        &__title {
+          font-size: $title-text-size;
+        }
+        &__name {
+          font-size: $text-size;
+        }
+        &--balance {
+          font-size: $text-size;
+        }
+        &--profit {
+          font-size: $text-size;
+        }
+        &__chart {
+          width: $chart-width;
+        }
+        &__chart-info {
+          &--balance {
+            font-size: $text-size;
+          }
+          &--profit {
+            font-size: $text-size;
+          }
+        }
+      }
+      &__table {
+        & table {
+          td {
+            font-size: $text-size;
+          }
+        }
+      }
+    }
+  }
+  @include media-breakpoint-landscape-phone() {
+    &__card {
+      width: $program-width;
+      margin-right: $padding/2;
+    }
+    padding: $padding;
+  }
+}
+
 .programs-table {
   &__cell {
     &--header {
@@ -234,26 +371,26 @@ $border-radius: 8px;
     }
 
     &__title {
-      font-size: $font-size-title/1.5;
+      font-size: $title-text-size/1.5;
       letter-spacing: 0.2px;
       margin-bottom: $padding/2.5/1.5;
     }
 
     &__manager {
-      font-size: $font-size/1.5;
+      font-size: $text-size/1.5;
       letter-spacing: 0.2px;
       color: $positive-color;
     }
 
     &__strategy {
-      font-size: $font-size/1.5;
+      font-size: $text-size/1.5;
       line-height: 1.85;
       letter-spacing: 0.4px;
       color: #fff;
       margin-bottom: $padding/2/1.5;
     }
     &__description {
-      font-size: $font-size/1.5;
+      font-size: $text-size/1.5;
       line-height: 1.85;
       letter-spacing: 0.4px;
       color: #fff;
@@ -290,11 +427,11 @@ $border-radius: 8px;
         font-weight: 100;
         &--label {
           opacity: 0.3;
-          font-size: $small-font-size/1.5;
+          font-size: $text-size/1.5;
           padding: $padding/3 2px;
         }
         &--value {
-          font-size: $font-size/1.5;
+          font-size: $text-size/1.5;
           padding: 0 2px;
           &--positive {
             color: $positive-color;
@@ -326,19 +463,19 @@ $border-radius: 8px;
         margin-bottom: $padding/2;
       }
       &__title {
-        font-size: $font-size-title;
+        font-size: $title-text-size;
       }
 
       &__manager {
-        font-size: $font-size;
+        font-size: $text-size;
       }
 
       &__strategy {
-        font-size: $font-size;
+        font-size: $text-size;
       }
 
       &__description {
-        font-size: $font-size;
+        font-size: $text-size;
         width: $description-block-width;
       }
       &__avatar__img {
@@ -349,10 +486,10 @@ $border-radius: 8px;
         padding: $padding;
         &__statistic-data {
           &--label {
-            font-size: $small-font-size;
+            font-size: $text-size;
           }
           &--value {
-            font-size: $font-size;
+            font-size: $text-size;
           }
         }
         &__statistic-data,

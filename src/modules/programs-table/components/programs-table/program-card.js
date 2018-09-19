@@ -30,7 +30,57 @@ const ProgramCard = ({
           </div>
           <div className="programs-cards__card__row__name">Eddie Carr</div>
         </div>
-        <div className="programs-cards__card__row__actions">...</div>
+        <div className="programs-cards__card__row__actions">
+          <svg width="3px" height="15px" viewBox="0 0 3 15">
+            <title>white_dots</title>
+            <desc>Created with Sketch.</desc>
+            <defs />
+            <g
+              id="ui"
+              stroke="none"
+              stroke-width="1"
+              fill="none"
+              fill-rule="evenodd"
+            >
+              <g
+                id="1600_0_6"
+                transform="translate(-764.000000, -1059.000000)"
+                fill="#FFFFFF"
+              >
+                <g id="Group-28" transform="translate(120.000000, 866.000000)">
+                  <g
+                    id="Group-30"
+                    transform="translate(644.000000, 193.000000)"
+                  >
+                    <g id="white_dots">
+                      <circle
+                        id="Oval-13"
+                        transform="translate(1.500000, 1.500000) rotate(90.000000) translate(-1.500000, -1.500000) "
+                        cx="1.5"
+                        cy="1.5"
+                        r="1.5"
+                      />
+                      <circle
+                        id="Oval-13-Copy"
+                        transform="translate(1.500000, 7.500000) rotate(90.000000) translate(-1.500000, -7.500000) "
+                        cx="1.5"
+                        cy="7.5"
+                        r="1.5"
+                      />
+                      <circle
+                        id="Oval-13-Copy-2"
+                        transform="translate(1.500000, 13.500000) rotate(90.000000) translate(-1.500000, -13.500000) "
+                        cx="1.5"
+                        cy="13.5"
+                        r="1.5"
+                      />
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </svg>
+        </div>
       </div>
       <div className="programs-cards__card__row">
         <div className="programs-cards__card__row__chart">
@@ -95,78 +145,6 @@ const ProgramCard = ({
           </tr>
         </table>
       </div>
-      {/*<div className="programs-cards__card__row">
-        <div className="programs-cards__card__row__status">
-          <div className="programs-cards__card__row--title">Status</div>
-          <div className="programs-cards__card__row__status--text">Pending</div>
-        </div>
-        <div className="programs-cards__card__row__reinvest">
-          <div className="programs-cards__card__row__reinvest__question">?</div>
-          <div className="programs-cards__card__row__reinvest__test">Reinvest</div>
-          <div className="programs-cards__card__row__reinvest__toggle"><input type="checkbox"/></div>
-        </div>
-      </div>*/}
-      {/* <div className="programs-cards__card--title">
-        <GVProgramAvatar
-          url={fileService.getFileUrl(program.avatar)}
-          level={program.level}
-          alt={program.title}
-        />
-        {program.title}
-      </div>
-      <div className="programs-cards__card--balance">
-        {program.statistic.balanceInGVT.amount}
-      </div>
-      <div className="programs-cards__card--currency">
-        {program.currency}
-      </div>
-      <div className="programs-cards__card--investors">
-        {program.statistic.investorsCount}
-      </div>
-      <div className="programs-cards__card--available-to-invest">
-        {program.availableForInvestment}
-      </div>
-      <div className="programs-cards__card--trades">
-        {program.statistic.tradesCount}
-      </div>
-      <div className="programs-cards__card--period">
-        <ProgramPeriodPie
-          start={program.periodDateStart}
-          end={program.periodDateEnd}
-        />
-      </div>
-      <div className="programs-cards__card--drawdown">
-        <NumberFormat
-          value={program.statistic.drawdownPercent}
-          suffix="%"
-          decimalScale={2}
-          displayType="text"
-        />
-      </div>
-      <div className="programs-cards__card--profit">
-        <NumberFormat
-          value={program.statistic.profitPercent}
-          suffix="%"
-          decimalScale={2}
-          displayType="text"
-        />
-      </div>
-      <div className="programs-cards__card--chart">
-        <ProgramSimpleChart
-          data={program.chart}
-          isPositive={program.statistic.profitPercent >= 0}
-        />
-      </div>
-      {isAuthenticated &&
-      program.personalProgramDetails && (
-        <div className="programs-cards__card--favorite">
-          <FavoriteIcon
-            toggleSelected={toggleFavorite}
-            programId={program.id}
-            selected={program.personalProgramDetails.isFavorite}
-          />
-        </div>
-      )}*/}
     </div>
   );
 };

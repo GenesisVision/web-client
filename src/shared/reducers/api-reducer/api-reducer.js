@@ -46,9 +46,6 @@ const apiReducerFactory = (
         ...state,
         isPending: false,
         errorMessage: action.payload
-          .filter(x => !x.property)
-          .map(x => x.message)
-          .join(", ")
       };
     case CLEAR:
       return initialState;

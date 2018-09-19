@@ -1,7 +1,8 @@
 import "./notifications.scss";
 
 import Chip from "components/chip/chip";
-import { ControlsIcon, RingIcon } from "components/icon/icon";
+import { ControlsIcon } from "components/icon/icon";
+import { RingIcon } from "components/icon/ring-icon";
 import { groupBy } from "lodash/collection";
 import moment from "moment";
 import NotificationsGroup from "pages/app/components/notifications/components/notification-group/notification-group";
@@ -42,20 +43,22 @@ class Notifications extends Component {
 
     return (
       <Fragment>
-        <div className="notifications__header">
-          <RingIcon />
-          {t("notifications-aside.header")}
-          <div className="notifications__count">
-            <Chip type="negative">{notifications.length}</Chip>
+        <div className="notifications">
+          <div className="notifications__header">
+            <RingIcon />
+            {t("notifications-aside.header")}
+            <div className="notifications__count">
+              <Chip type="negative">{notifications.length}</Chip>
+            </div>
+            <div className="notifications__link">
+              <ControlsIcon />
+            </div>
           </div>
-          <div className="profile-widget__avatar">
-            <ControlsIcon />
+          <div className="notifications__content">
+            {Object.keys(groups)
+              .sort(this.sortGroups)
+              .map(this.renderGroups(groups))}
           </div>
-        </div>
-        <div className="notifications__content">
-          {Object.keys(groups)
-            .sort(this.sortGroups)
-            .map(this.renderGroups(groups))}
         </div>
       </Fragment>
     );
