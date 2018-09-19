@@ -1,106 +1,240 @@
+@import "styles/_breakpoint.scss";
+@import "styles/_colors.scss";
+
+$padding: 33px;
+$font-size-title: 15px;
+$font-size: 13px;
+$small-font-size: 13px;
+$info-width: 318px;
+$description-block-width:250px;
+$border-radius: 8px;
+
 .programs-table {
   &__cell {
     &--header {
       cursor: default;
       opacity: 0.3;
     }
+    &--profit:not(.table__cell--head) {
+      color: #2ebd85;
+    }
   }
 }
 
 .programs-table__cell {
-  &--title {
-    width: 22%;
+  &--name {
+    //width: 22%;
     text-overflow: ellipsis;
     overflow: hidden;
+    &--avatar-title {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      &--title {
+        padding-left: 9px;
+        div {
+          padding: $padding/10;
+        }
+        &--bottom {
+          opacity: 0.3;
+        }
+      }
+    }
   }
   &--balance {
-    width: 10%;
+    //width: 10%;
   }
   &--currency {
-    width: 5%;
+    //width: 5%;
   }
   &--investors {
-    width: 5%;
+    //width: 5%;
   }
   &--available-to-invest {
-    width: 6%;
+    //width: 6%;
   }
   &--trades {
-    width: 5%;
+    //width: 5%;
   }
   &--period {
-    width: 8%;
+    //width: 8%;
   }
   &--drawdown {
-    width: 5%;
+    //width: 5%;
   }
   &--profit {
-    width: 5%;
+    //width: 5%;
   }
   &--chart {
-    width: 15%;
+    min-width: 50px;
+    max-width: 100px;
   }
   &--favorite {
-    width: auto;
-    min-width: 30px;
+    //width: auto;
+    //min-width: 30px;
   }
 }
 
 .program-detailed {
-  width: 100%;
-  max-width: 100%;
-  display: flex;
-  position: relative;
-  margin: 0 -2rem;
-  padding: 2rem;
-  background-color: #212c34;
-
-  &__info {
-    flex: 1 1 20%;
-    max-width: 20%;
-  }
-
-  &__statistic {
-    flex: 4 1 80%;
-    max-width: 80%;
-  }
-
-  &__avatar {
+  .program-detailed__container {
     display: flex;
-  }
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+    height: 100%;
 
-  &__title {
-    font-size: 16px;
-    letter-spacing: 0.2px;
-  }
+    &__info {
+      display: flex;
+      justify-content: flex-start;
+      flex-direction: column;
+      align-items: flex-start;
+      background: $secondary-color;
+      padding: $padding/1.5;
+      border-radius: $border-radius 0 0 $border-radius;
+    }
 
-  &__manager {
-    font-size: 13px;
-    letter-spacing: 0.2px;
-    color: #15bbaf;
-  }
+    &__avatar {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: $padding/1.5;
+      &__img{
+        width: 40px;
+        height: 40px;
+      }
+      &--name {
+        margin-left: $padding/2;
+      }
+    }
 
-  &__strategy {
-    opacity: 0.9;
-    font-size: 13px;
-    line-height: 1.85;
-    letter-spacing: 0.4px;
-    color: #e8eff3;
-  }
+    &__title {
+      font-size: $font-size-title/1.5;
+      letter-spacing: 0.2px;
+      margin-bottom: $padding/2.5/1.5;
+    }
 
-  &__chart {
-    width: 100%;
-    height: 200px;
-  }
+    &__manager {
+      font-size: $font-size/1.5;
+      letter-spacing: 0.2px;
+      color: $positive-color;
+    }
 
-  &__statistic-data {
-    display: flex;
-  }
+    &__strategy {
+      font-size: $font-size/1.5;
+      line-height: 1.85;
+      letter-spacing: 0.4px;
+      color: #fff;
+      margin-bottom: $padding/2/1.5;
+    }
+    &__description {
+      font-size: $font-size/1.5;
+      line-height: 1.85;
+      letter-spacing: 0.4px;
+      color: #fff;
+      font-weight: 100;
+      width: $description-block-width/2;
+    }
 
-  &__collapse {
-    cursor: pointer;
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
+    &__statistic {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      align-items: stretch;
+      padding: $padding/1.5;
+      width: 100%;
+      background-color: #212c34;
+      &__chart {
+        width: 99%;
+        height: 50%;
+      }
+
+      &__statistic-data, &__investing, &__chart {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: $padding;
+        &:last-child{
+          margin-bottom: 0
+        }
+      }
+      &__statistic-data{
+        font-weight: 100;
+        &--label{
+          opacity: 0.3;
+          font-size: $small-font-size/1.5;
+          padding: $padding/3 2px;
+        }
+        &--value{
+          font-size: $font-size/1.5;
+          padding: 0 2px;
+          &--positive{
+            color: $positive-color;
+          }
+        }
+      }
+    }
+
+    &__collapse {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      padding: $padding/2.5;
+      background: #2f3a43;
+      border-radius: 0 $border-radius $border-radius 0;
+      span {
+        width: 15px;
+      }
+    }
+
+    @include media-breakpoint-landscape-phone() {
+      &__info{
+        padding: $padding;
+      }
+      &__avatar{
+        margin-bottom: $padding;
+      }
+      &__strategy{
+        margin-bottom: $padding/2;
+      }
+      &__title {
+        font-size: $font-size-title;
+      }
+
+      &__manager {
+        font-size: $font-size;
+      }
+
+      &__strategy {
+        font-size: $font-size;
+      }
+
+      &__description {
+        font-size: $font-size;
+        width: $description-block-width;
+      }
+      &__avatar__img{
+          height: 80px;
+          width: 80px;
+      }
+      &__statistic{
+        padding: $padding;
+        &__statistic-data {
+          &--label{
+            font-size: $small-font-size;
+          }
+          &--value{
+            font-size: $font-size;
+          }
+        }
+        &__statistic-data, &__investing, &__chart {
+          margin-bottom: $padding*2;
+          &:last-child{
+            margin-bottom: 0
+          }
+        }
+      }
+    }
   }
 }
