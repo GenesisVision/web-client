@@ -1,6 +1,7 @@
 import "./table.scss";
 
 import React from "react";
+import { Scrollbars } from "react-custom-scrollbars";
 
 import TableBody from "./table-body";
 import TableFooter from "./table-footer";
@@ -28,14 +29,26 @@ const Table = ({
         renderFilters={renderFilters}
         updateFilter={updateFilter}
       />
-      <TableHeader
-        columns={columns}
-        sorting={sorting}
-        updateSorting={updateSorting}
+      <Scrollbars
+        autoHide
+        autoHideTimeout={1000}
+        style={{
+          width: "1136px",
+          height: `${items && 42 * (items.length + 1)}px`,
+          paddingRight: "10px",
+          paddingBottom: "14px"
+        }}
+        className="table__scrollable-container"
       >
-        {renderHeader}
-      </TableHeader>
-      <TableBody items={items}>{renderBodyRow}</TableBody>
+        <TableHeader
+          columns={columns}
+          sorting={sorting}
+          updateSorting={updateSorting}
+        >
+          {renderHeader}
+        </TableHeader>
+        <TableBody items={items}>{renderBodyRow}</TableBody>
+      </Scrollbars>
       <TableFooter
         paging={paging}
         updatePaging={updatePaging}
