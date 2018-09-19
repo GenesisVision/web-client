@@ -15,16 +15,25 @@ const ProgramTableRowShort = ({
 }) => {
   return (
     <TableRow onClick={onExpandClick}>
-      <TableCell className="programs-table__cell--title">
-        <GVProgramAvatar
-          url={fileService.getFileUrl(program.avatar)}
-          level={program.level}
-          alt={program.title}
-        />
-        {program.title}
+      <TableCell className="programs-table__cell--name">
+        <div className="programs-table__cell--name--avatar-title">
+          <GVProgramAvatar
+            url={fileService.getFileUrl(program.avatar)}
+            level={program.level}
+            alt={program.title}
+          />
+          <div className="programs-table__cell--name--avatar-title--title">
+            <div className="programs-table__cell--name--avatar-title--title--top">
+              {program.title}
+            </div>
+            <div className="programs-table__cell--name--avatar-title--title--bottom">
+              High risk &middot; Best Choice
+            </div>
+          </div>
+        </div>
       </TableCell>
       <TableCell className="programs-table__cell--balance">
-        {program.statistic.balanceInGVT.amount}
+        {program.statistic.balanceInGVT.amount} GVT
       </TableCell>
       <TableCell className="programs-table__cell--currency">
         {program.currency}
