@@ -25,23 +25,25 @@ class ProgramsContainer extends Component {
     const { isPending, data, filters, service, isAuthenticated } = this.props;
     return (
       <Surface>
-        <ProgramsTable
-          data={data || {}}
-          isPending={isPending}
-          sorting={filters.sorting}
-          updateSorting={service.programsChangeSorting}
-          filtering={{
-            ...filters.filtering
-          }}
-          updateFilter={service.programsChangeFilter}
-          paging={{
-            totalPages: filters.pages,
-            currentPage: filters.page
-          }}
-          updatePaging={service.programsChangePage}
-          toggleFavorite={service.toggleFavoriteProgram}
-          isAuthenticated={isAuthenticated}
-        />
+        <div className="program-table-container">
+            <ProgramsTable
+              data={data || {}}
+              isPending={isPending}
+              sorting={filters.sorting}
+              updateSorting={service.programsChangeSorting}
+              filtering={{
+                ...filters.filtering
+              }}
+              updateFilter={service.programsChangeFilter}
+              paging={{
+                totalPages: filters.pages,
+                currentPage: filters.page
+              }}
+              updatePaging={service.programsChangePage}
+              toggleFavorite={service.toggleFavoriteProgram}
+              isAuthenticated={isAuthenticated}
+            />
+        </div>
       </Surface>
     );
   }
