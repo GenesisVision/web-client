@@ -1,21 +1,25 @@
 import Dialog from "components/dialog/dialog";
+import ProgramWithdrawPopup from "modules/program-withdraw/components/program-withdraw-popup";
 import { getProgramWithdrawInfo } from "modules/program-withdraw/servives/program-withdraw.services";
 import PropTypes from "prop-types";
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-const ProgramsWithdrawContainer = props => {
+const ProgramWithdrawContainer = props => {
   return (
     <Dialog open={props.open} onClose={props.onClose}>
-      <h1>Hello world</h1>
+      <ProgramWithdrawPopup
+        fetchInfo={() => props.services.getProgramWithdrawInfo(props.id)}
+      />
     </Dialog>
   );
 };
 
-ProgramsWithdrawContainer.propTypes = {
+ProgramWithdrawContainer.propTypes = {
   open: PropTypes.bool,
-  onClose: PropTypes.func
+  onClose: PropTypes.func,
+  id: PropTypes.string
 };
 
 const mapStateToProps = state => ({
@@ -38,4 +42,4 @@ const mapDispathToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispathToProps
-)(ProgramsWithdrawContainer);
+)(ProgramWithdrawContainer);
