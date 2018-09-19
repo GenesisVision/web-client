@@ -4,7 +4,7 @@ import * as actions from "../actions/wallet.actions";
 
 export const fetchWalletBalance = () => (dispatch, getState) => {
   const authorization = authService.getAuthArg();
-  const { currency } = getState().accountSettings;
+  const { currentCurrency } = getState().accountSettings;
 
-  dispatch(actions.fetchWalletBalance(currency, authorization));
+  dispatch(actions.fetchWalletBalance(currentCurrency, authorization));
 };
