@@ -6,6 +6,7 @@ import TableBody from "./table-body";
 import TableFooter from "./table-footer";
 import TableHeader from "./table-header";
 import TableToolbar from "./table-toolbar";
+import Scrollbars from "react-custom-scrollbars";
 
 const Table = ({
   title,
@@ -21,16 +22,22 @@ const Table = ({
   renderBodyRow
 }) => {
   return (
-    <div className="table">
-      <TableToolbar title={title} renderFilters={renderFilters} />
-      <TableHeader
-        columns={columns}
-        sorting={sorting}
-        updateSorting={updateSorting}
-      >
-        {renderHeader}
-      </TableHeader>
-      <TableBody items={items}>{renderBodyRow}</TableBody>
+    <div>
+      <TableToolbar title={title}
+                    renderFilters={renderFilters}/>
+      <Scrollbars autoHeight
+                  autoHeightMax={14000}>
+        <table className="table">
+          <TableHeader
+            columns={columns}
+            sorting={sorting}
+            updateSorting={updateSorting}
+          >
+            {renderHeader}
+          </TableHeader>
+          <TableBody items={items}>{renderBodyRow}</TableBody>
+        </table>
+      </Scrollbars>
       <TableFooter
         paging={paging}
         updatePaging={updatePaging}
