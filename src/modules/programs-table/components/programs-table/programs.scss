@@ -67,8 +67,8 @@ $border-radius: 8px;
     //width: 5%;
   }
   &--chart {
-    min-width: 50px;
-    max-width: 100px;
+    //min-width: 50px;
+    //max-width: 100px;
   }
   &--favorite {
     //width: auto;
@@ -146,11 +146,12 @@ $border-radius: 8px;
       width: 100%;
       background-color: #212c34;
       &__chart {
-        width: 99%;
         height: 50%;
+        min-height: 250px;
       }
 
-      &__statistic-data, &__investing, &__chart {
+      &__statistic-data,
+      &__investing {
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
@@ -228,10 +229,11 @@ $border-radius: 8px;
             font-size: $font-size;
           }
         }
-        &__statistic-data, &__investing, &__chart {
-          margin-bottom: $padding*2;
-          &:last-child{
-            margin-bottom: 0
+        &__statistic-data,
+        &__investing {
+          margin-bottom: $padding * 2;
+          &:last-child {
+            margin-bottom: 0;
           }
         }
       }

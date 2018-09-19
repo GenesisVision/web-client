@@ -34,7 +34,11 @@ const ProgramBigChart = ({ data }) => {
   }));
   const off = gradientOffset(programChartData.map(x => x.equity));
   return (
-    <ResponsiveContainer width="100%" className="program-big-chart">
+    <ResponsiveContainer
+      width="99%"
+      height="99%"
+      className="program-big-chart"
+    >
       <AreaChart data={programChartData}>
         <ReferenceLine y={0} strokeDasharray="1 10" />
         <XAxis
