@@ -30,13 +30,13 @@ class TableHeader extends Component {
 
   render() {
     return (
-      <div className="table__head">
+      <thead className="table__head">
         <TableRow className="table__row--head">
           {this.props.columns.map(x => {
             return this.renderChildren(x);
           })}
         </TableRow>
-      </div>
+      </thead>
     );
   }
 }

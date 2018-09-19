@@ -9,7 +9,7 @@ const TableBody = ({ items, children }) => {
     return items.map(x => <Fragment key={x.id}>{children(x)}</Fragment>);
   };
 
-  return <div className="table__body">{renderItems()}</div>;
+  return <tbody className="table__body">{renderItems()}</tbody>;
 };
 
 export default TableBody;

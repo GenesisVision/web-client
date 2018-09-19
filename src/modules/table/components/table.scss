@@ -17,8 +17,8 @@ $padding: 33px;
 
 .table {
   width: 100%;
-  display: flex;
-  flex-wrap: wrap;
+  border-spacing: 0;
+  margin: 1rem 0;
 
   &__toolbar {
     display: flex;
@@ -39,18 +39,18 @@ $padding: 33px;
     display: flex;
     flex: 1;
     justify-content: flex-end;
-  }
-
-  &__head,
-  &__body {
-    width: 100%;
-    display: flex;
     flex-wrap: wrap;
   }
 
+  &__head {
+    font-size: $th-font-size/1.5;
+    opacity: 0.3;
+  }
+  &__body {
+    font-size: $td-font-size/1.5;
+  }
+
   &__row {
-    width: 100%;
-    display: flex;
     padding: 0 1.5rem;
     &:not(.table__row--head):hover {
       background-color: #212c34;
@@ -58,18 +58,28 @@ $padding: 33px;
   }
 
   &__cell {
+    &:first-child {
+      padding-left: $padding/1.5;
+      @include media-breakpoint-landscape-phone() {
+        padding-left: $padding;
+      }
+    }
+    &:last-child {
+      padding-right: $padding/1.5;
+      @include media-breakpoint-landscape-phone() {
+        padding-right: $padding;
+      }
+    }
+    text-align: left;
     cursor: default;
     box-sizing: border-box;
-    display: inline-flex;
     align-items: center;
     flex-grow: 1;
-    padding: 1em 0;
+    padding: 9px 9px 9px 0;
     overflow: hidden; // Or flex might break
     list-style: none;
-    font-size: 13px;
-    font-weight: normal;
+    font-weight: 100;
     letter-spacing: 0.4px;
-    white-space: nowrap;
     &#{&} {
       &--head {
         padding-right: 15px;
