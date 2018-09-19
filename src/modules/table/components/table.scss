@@ -25,7 +25,7 @@ $padding: 33px;
     display: flex;
     width: 100%;
     align-items: center;
-    padding: $padding;
+    padding: $padding/1.5;
     svg {
       margin: 0 $view-svg-size;
       width: $view-svg-size/1.5;
@@ -141,6 +141,7 @@ $padding: 33px;
       font-size: $table-title-font-size;
     }
     &__toolbar {
+      padding: $padding;
       svg {
         margin-right: $view-svg-size;
         width: $view-svg-size;
