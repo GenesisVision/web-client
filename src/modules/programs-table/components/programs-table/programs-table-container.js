@@ -26,23 +26,23 @@ class ProgramsContainer extends Component {
     return (
       <Surface>
         <div className="program-table-container">
-            <ProgramsTable
-              data={data || {}}
-              isPending={isPending}
-              sorting={filters.sorting}
-              updateSorting={service.programsChangeSorting}
-              filtering={{
-                ...filters.filtering
-              }}
-              updateFilter={service.programsChangeFilter}
-              paging={{
-                totalPages: filters.pages,
-                currentPage: filters.page
-              }}
-              updatePaging={service.programsChangePage}
-              toggleFavorite={service.toggleFavoriteProgram}
-              isAuthenticated={isAuthenticated}
-            />
+          <ProgramsTable
+            data={data || {}}
+            isPending={isPending}
+            sorting={filters.sorting}
+            updateSorting={service.programsChangeSorting}
+            filtering={{
+              ...filters.filtering
+            }}
+            updateFilter={service.programsChangeFilter}
+            paging={{
+              totalPages: filters.pages,
+              currentPage: filters.page
+            }}
+            updatePaging={service.programsChangePage}
+            toggleFavorite={service.toggleFavoriteProgram}
+            isAuthenticated={isAuthenticated}
+          />
         </div>
       </Surface>
     );

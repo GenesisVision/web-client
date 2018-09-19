@@ -6,7 +6,7 @@ $font-size-title: 15px;
 $font-size: 13px;
 $small-font-size: 13px;
 $info-width: 318px;
-$description-block-width:250px;
+$description-block-width: 250px;
 $border-radius: 8px;
 
 .programs-table {
@@ -100,7 +100,7 @@ $border-radius: 8px;
       justify-content: space-between;
       align-items: center;
       margin-bottom: $padding/1.5;
-      &__img{
+      &__img {
         width: 40px;
         height: 40px;
       }
@@ -156,21 +156,21 @@ $border-radius: 8px;
         justify-content: space-between;
         align-items: flex-start;
         margin-bottom: $padding;
-        &:last-child{
-          margin-bottom: 0
+        &:last-child {
+          margin-bottom: 0;
         }
       }
-      &__statistic-data{
+      &__statistic-data {
         font-weight: 100;
-        &--label{
+        &--label {
           opacity: 0.3;
           font-size: $small-font-size/1.5;
           padding: $padding/3 2px;
         }
-        &--value{
+        &--value {
           font-size: $font-size/1.5;
           padding: 0 2px;
-          &--positive{
+          &--positive {
             color: $positive-color;
           }
         }
@@ -190,13 +190,13 @@ $border-radius: 8px;
     }
 
     @include media-breakpoint-landscape-phone() {
-      &__info{
+      &__info {
         padding: $padding;
       }
-      &__avatar{
+      &__avatar {
         margin-bottom: $padding;
       }
-      &__strategy{
+      &__strategy {
         margin-bottom: $padding/2;
       }
       &__title {
@@ -215,17 +215,17 @@ $border-radius: 8px;
         font-size: $font-size;
         width: $description-block-width;
       }
-      &__avatar__img{
-          height: 80px;
-          width: 80px;
+      &__avatar__img {
+        height: 80px;
+        width: 80px;
       }
-      &__statistic{
+      &__statistic {
         padding: $padding;
         &__statistic-data {
-          &--label{
+          &--label {
             font-size: $small-font-size;
           }
-          &--value{
+          &--value {
             font-size: $font-size;
           }
         }
