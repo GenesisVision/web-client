@@ -37,7 +37,7 @@ $padding: 33px;
 
   &__title {
     justify-self: flex-start;
-    font-size: 17px;
+    font-size: $table-title-font-size/2;
     font-weight: 600;
     letter-spacing: 0.2px;
     color: $text-color;
@@ -124,6 +124,26 @@ $padding: 33px;
             width: 10px;
           }
         }
+      }
+    }
+  }
+  @include media-breakpoint-landscape-phone() {
+    &__head {
+      font-size: $th-font-size;
+    }
+    &__body {
+      font-size: $td-font-size;
+    }
+    &__filters {
+      font-size: $td-font-size;
+    }
+    &__title {
+      font-size: $table-title-font-size;
+    }
+    &__toolbar {
+      svg {
+        margin-right: $view-svg-size;
+        width: $view-svg-size;
       }
     }
   }
