@@ -13,8 +13,10 @@ export const fetchWalletBalance = () => (dispatch, getState) => {
 export const fetchWalletTransactions = filters => {
   const authorization = authService.getAuthArg();
 
-  return walletApi.v10WalletTransactionsGet(authorization).then(data => ({
-    items: data.transactions,
-    total: data.total
-  }));
+  return walletApi
+    .v10WalletTransactionsGet(authorization, filters)
+    .then(data => ({
+      items: data.transactions,
+      total: data.total
+    }));
 };
