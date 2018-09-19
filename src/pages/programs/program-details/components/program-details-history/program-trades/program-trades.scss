@@ -1,6 +1,8 @@
 @import "styles/_colors.scss";
 
 .program-details-trades {
+  overflow: hidden;
+
   & .table__row--head,
   &__row {
     padding: 0 0 0 32px;
