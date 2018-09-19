@@ -57,7 +57,7 @@ const composeRequestFilters = () => (dispatch, getState) => {
 
   const { skip, take } = calculateSkipAndTake({
     itemsOnPage: itemsOnPage,
-    currentPage: page - 1
+    currentPage: page
   });
 
   const filtering = composeFilters(
