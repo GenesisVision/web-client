@@ -20,8 +20,7 @@ import getParams from "utils/get-params";
 
 import {
   PROGRAM_TRADES_COLUMNS,
-  PROGRAM_TRADES_FILTERS,
-  PROGRAM_TRADES_SORTING
+  PROGRAM_TRADES_FILTERS
 } from "../../../program-details.constants";
 import * as service from "../../../services/program-details.service";
 
@@ -31,9 +30,9 @@ const programTradesFiltering = {
 
 class ProgramTrades extends Component {
   fetchProgramTrades = filters => {
-    const { programId, currentCurrency } = this.props;
+    const { programId, currency } = this.props;
 
-    return service.fetchProgramTrades({ programId, currentCurrency, filters });
+    return service.fetchProgramTrades({ programId, currency, filters });
   };
 
   render() {
@@ -45,7 +44,6 @@ class ProgramTrades extends Component {
         defaultFilters={PROGRAM_TRADES_FILTERS}
         getItems={fetchProgramTrades}
         filtering={programTradesFiltering}
-        sorting={PROGRAM_TRADES_SORTING}
         renderFilters={(updateFilter, filtering) => (
           <Fragment>
             <DateRangeFilter
@@ -57,14 +55,12 @@ class ProgramTrades extends Component {
         )}
         paging={DEFAULT_PAGING}
         columns={PROGRAM_TRADES_COLUMNS}
-        renderHeader={({ column, sortingName, isAsc }) => (
+        renderHeader={column => (
           <TableHeadCell
             key={column.name}
             className={`program-details-trades__head-cell program-details-trades__cell--${
               column.name
             }`}
-            sortable={false}
-            active={false}
           >
             {t(`program-details-page.history.trades.${column.name}`)}
           </TableHeadCell>
@@ -130,7 +126,7 @@ const mapStateToProps = state => {
   return {
     programId: getParams(routing.location.pathname, PROGRAM_DETAILS_ROUTE)
       .programId,
-    currentCurrency: accountSettings.currentCurrency
+    currency: accountSettings.currency
   };
 };
 

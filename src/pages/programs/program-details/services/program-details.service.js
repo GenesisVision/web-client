@@ -36,12 +36,12 @@ export const fetchProgramChart = ({ dateFrom, dateTo, maxPointCount }) => (
   );
 };
 
-export const fetchProgramTrades = ({ programId, currentCurrency, filters }) => {
+export const fetchProgramTrades = ({ programId, currency, filters }) => {
   const opts = {
     ...filters,
     dateTo: filters.to,
     dateFrom: filters.from,
-    symbol: currentCurrency
+    symbol: currency
   };
   return programsApi.v10ProgramsByIdTradesGet(programId, opts).then(data => ({
     items: tradesResponseMock.data.trades,
