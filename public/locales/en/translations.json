@@ -12,6 +12,16 @@
     "cancel": "Cancel",
     "back": "Back"
   },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "programs": "Programs",
+    "search": "Search",
+    "personal-details": "Personal details",
+    "wallet": "Wallet",
+    "settings": "Settings",
+    "logout": "Log out",
+    "login": "Login"
+  },
   "auth": {
     "text": "A Brief History Of Creation",
     "tabs": {
@@ -77,7 +87,7 @@
   "profile-widget": {
     "personal-details": "Personal details",
     "settings": "Settings",
-    "logout": "Logout"
+    "logout": "Log out"
   },
   "program-period": {
     "day": "day",
@@ -96,6 +106,14 @@
     "Investing": "Investing",
     "Withdrawing": "Withdrawing",
     "Ended": "Ended"
+  },
+  "chart-period": {
+    "day": "1D",
+    "week": "1W",
+    "month": "1M",
+    "quarter": "3M",
+    "year": "1Y",
+    "all": "All"
   },
   "manager": {
     "about": "About",

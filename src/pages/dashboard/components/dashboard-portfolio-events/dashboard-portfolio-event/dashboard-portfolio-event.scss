@@ -2,11 +2,14 @@
 
 .portfolio-event {
   display: flex;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.05);
-  padding-bottom: 24px;
   padding-top: 24px;
   align-items: center;
   width: 252px;
+
+  &:not(:last-of-type) {
+    border-bottom: 2px solid $separator-color;
+    padding-bottom: 24px;
+  }
 
   &__info {
     flex-grow: 3.5;

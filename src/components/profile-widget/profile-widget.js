@@ -1,6 +1,9 @@
 import "./profile-widget.scss";
 
-import { DetailsIcon, LogoutIcon, SettingsIcon } from "components/icon/icon";
+import classnames from "classnames";
+import { DetailsIcon } from "components/icon/details-icon";
+import { LogoutIcon } from "components/icon/logout-icon";
+import { SettingsIcon } from "components/icon/settings-icon";
 import Popover from "components/popover/popover";
 import { GVButton } from "gv-react-components";
 import { PROFILE_ROUTE } from "modules/profile/profile.constants";
@@ -21,9 +24,9 @@ class ProfileWidget extends Component {
   handleClose = () => this.setState({ anchor: null });
 
   render() {
-    const { t, avatar, email, logout } = this.props;
+    const { t, avatar, email, logout, className } = this.props;
     return (
-      <div className="profile-widget">
+      <div className={classnames("profile-widget", className)}>
         <div className="profile-widget__content" onClick={this.handleOpen}>
           <div className="profile-widget__avatar">
             <img
@@ -41,23 +44,25 @@ class ProfileWidget extends Component {
         >
           <div className="profile-menu">
             <div className="profile-menu__header">{email}</div>
-            <div className="profile-menu__item profile-menu__item--details">
-              <Link to={PROFILE_ROUTE}>
-                <DetailsIcon />
-                {t("profile-widget.personal-details")}
-              </Link>
-            </div>
-            <div className="profile-menu__item profile-menu__item--settings">
-              <Link to={PROFILE_ROUTE}>
-                <SettingsIcon />
-                {t("profile-widget.settings")}
-              </Link>
-            </div>
-            <div className="profile-menu__item profile-menu__item--logout">
-              <GVButton variant="text" onClick={logout}>
-                <LogoutIcon />
-                {t("profile-widget.logout")}
-              </GVButton>
+            <div className="profile-menu__container">
+              <div className="profile-menu__item profile-menu__item--details">
+                <Link to={PROFILE_ROUTE}>
+                  <DetailsIcon />
+                  {t("profile-widget.personal-details")}
+                </Link>
+              </div>
+              <div className="profile-menu__item profile-menu__item--settings">
+                <Link to={PROFILE_ROUTE}>
+                  <SettingsIcon />
+                  {t("profile-widget.settings")}
+                </Link>
+              </div>
+              <div className="profile-menu__item profile-menu__item--logout">
+                <GVButton variant="text" onClick={logout}>
+                  <LogoutIcon />
+                  {t("profile-widget.logout")}
+                </GVButton>
+              </div>
             </div>
           </div>
         </Popover>
@@ -69,7 +74,8 @@ class ProfileWidget extends Component {
 ProfileWidget.propTypes = {
   avatar: PropTypes.string,
   logout: PropTypes.func.isRequired,
-  email: PropTypes.string.isRequired
+  email: PropTypes.string.isRequired,
+  className: PropTypes.string
 };
 
 export default translate()(ProfileWidget);

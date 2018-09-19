@@ -1,5 +1,15 @@
 .dashboard-chart {
   box-sizing: border-box;
-  padding: 1rem;
+  padding: 40px 32px;
   min-height: 683px;
+
+  &__heading {
+    font-size: 17px;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.2px;
+    margin-bottom: 20px;
+  }
 }

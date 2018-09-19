@@ -41,6 +41,8 @@ const withTable = ({
       if (props.items !== undefined) {
         return { data: props.items };
       }
+
+      return null;
     }
 
     updatItems = () => {

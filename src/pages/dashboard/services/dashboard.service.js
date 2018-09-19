@@ -2,8 +2,10 @@ import authService from "services/auth-service";
 
 import * as actions from "../actions/dashboard.actions";
 
-export const getChartCommon = () => (dispatch, getState) => {
-  dispatch(actions.fetchChartCommon());
+export const getPortfolioChart = () => (dispatch, getState) => {
+  const authorization = authService.getAuthArg();
+
+  dispatch(actions.fetchPortfolioChart(authorization));
 };
 
 export const getPortfolioEvents = () => (dispatch, getState) => {
