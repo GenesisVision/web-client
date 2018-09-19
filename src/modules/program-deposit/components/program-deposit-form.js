@@ -6,11 +6,11 @@ import { translate } from "react-i18next";
 import { compose } from "redux";
 import { number, object } from "yup";
 
-const convertToCurrency = (value = 0, rate) => {
+export const convertToCurrency = (value = 0, rate) => {
   return Math.round((value / rate) * 100000000) / 100000000;
 };
 
-const calculateValueOfEntryFee = (value = 0, percentage) => {
+export const calculateValueOfEntryFee = (value = 0, percentage) => {
   return (value * percentage) / 100;
 };
 

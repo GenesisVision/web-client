@@ -14,6 +14,17 @@
     "amount-not-zero-error": "Amount must be greater than zero",
     "amount-is-required-error": "Amount is required."
   },
+  "withdraw-program": {
+    "title": "Withdraw",
+    "available-to-withdraw": "You invested in program",
+    "amount-to-withdraw": "Amount to withdraw",
+    "next": "Next",
+    "info": "Amount of withdrawals can be changed depending on the exchange rate or the success of the Manager",
+    "withdrawing": "Withdrawing",
+    "payout-date": "Payout date",
+    "back": "Back",
+    "submit": "Submit"
+  },
   "notifications-aside": {
     "header": "Notifications",
     "today": "today",

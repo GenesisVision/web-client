@@ -1,72 +1,80 @@
 import { withFormik } from "formik";
-import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
-import moment from "moment";
-import React from "react";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { compose } from "redux";
 import { number, object } from "yup";
 
-const convertToCurrency = (value = 0, rate) => {
-  return Math.round((value / rate) * 100000000) / 100000000;
-};
+import FormStep0 from "./program-withdraw-form-0";
+import FormStep1 from "./program-withdraw-form-1";
 
-const calculateValueOfEntryFee = (value = 0, percentage) => {
-  return (value * percentage) / 100;
-};
+class ProgramWithdrawForm extends Component {
+  state = {
+    step: 0
+  };
+  nextStep = () => {
+    this.setState(({ step }) => ({ step: step + 1 }));
+  };
+  prevStep = () => {
+    this.setState(({ step }) => ({ step: step - 1 }));
+  };
+  render() {
+    const {
+      t,
+      values,
+      disabled,
+      handleSubmit,
+      errorMessage,
+      rate,
+      availableToWithdraw,
+      periodEnds,
+      currency,
+      errors
+    } = this.props;
+    return (
+      <form
+        className="dialog__bottom"
+        id="withdraw-form"
+        onSubmit={handleSubmit}
+      >
+        {this.state.step === 0 && (
+          <FormStep0
+            label={t("withdraw-program.amount-to-withdraw")}
+            value={values.amount}
+            rate={rate}
+            currency={currency}
+            availableToWithdraw={availableToWithdraw}
+            onClick={this.nextStep}
+            disabled={errors.amount}
+          />
+        )}
+        {this.state.step === 1 && (
+          <FormStep1
+            periodEnds={periodEnds}
+            amount={values.amount}
+            onPrevClick={this.prevStep}
+            error={errorMessage}
+            disabled={disabled}
+          />
+        )}
+        <div className="dialog__info">{t("withdraw-program.info")}</div>
+      </form>
+    );
+  }
+}
 
-const ProgramWithdrawForm = ({
-  t,
-  values,
-  info,
-  currency,
-  disabled,
-  handleSubmit,
-  errorMessage
-}) => (
-  <form className="dialog__bottom" id="invest-form" onSubmit={handleSubmit}>
-    <GVFormikField
-      className="invest-field"
-      type="text"
-      name="amount"
-      label={t("deposit-program.amount")}
-      component={GVTextField}
-      adornment="GVT"
-      autoComplete="off"
-    />
-    <div className="invest-popup__currency">{`= ${convertToCurrency(
-      values.amount,
-      info.rate
-    )} ${currency}`}</div>
-    <div className="invest-popup__entry">
-      {t("deposit-program.entry-fee")}
-      <span>
-        {`${info.entryFee}% (${convertToCurrency(
-          calculateValueOfEntryFee(values.amount, info.entryFee),
-          info.rate
-        )} ${currency})`}
-      </span>
-    </div>
-    <div className="form-error">{errorMessage}</div>
-    <GVButton
-      type="submit"
-      id="signUpFormSubmit"
-      className="invest-form__submit-button"
-      disabled={disabled}
-    >
-      {t("deposit-program.confirm")}
-    </GVButton>
-    <div className="invest-popup__period-ends">
-      {`${t("deposit-program.period")} ${moment(info.periodEnds).format(
-        "DD.MM.YYYY, HH:mm"
-      )}`}
-    </div>
-  </form>
-);
+ProgramWithdrawForm.propTypes = {
+  availableToWithdraw: PropTypes.number.isRequired,
+  periodEnds: PropTypes.string,
+  rate: PropTypes.number.isRequired,
+  currency: PropTypes.number.isRequired,
+  errorMessage: PropTypes.string
+};
 
 export default compose(
   translate(),
   withFormik({
-    displayName: "invest-form",
+    displayName: "withdraw-form",
     mapPropsToValues: () => ({
       amount: ""
     }),

@@ -1,13 +1,23 @@
 import { FETCH_WITHDRAW_PROGRAM_INFO } from "modules/program-withdraw/program-withdraw-constants";
-import investorApi from "services/api-client/investor-api";
-import programsApi from "services/api-client/programs-api";
+import investorApi, {
+  investorApiProxy
+} from "services/api-client/investor-api";
 import authService from "services/auth-service";
 
 export const fetchWithdrawInfoById = (id, currency) => ({
   type: FETCH_WITHDRAW_PROGRAM_INFO,
-  payload: investorApi.v10InvestorProgramsByIdWithdrawInfoByCurrencyGet(
+  payload: investorApiProxy.v10InvestorProgramsByIdWithdrawInfoByCurrencyGet(
     id,
     currency,
     authService.getAuthArg()
   )
 });
+
+// export const withdrawProgramById = (id, amount) => ({
+//   type: FETCH_WITHDRAW_PROGRAM_INFO,
+//   payload: investorApiProxy.v10InvestorProgramsByIdWithdrawByAmountPost(
+//     id,
+//     amount,
+//     authService.getAuthArg()
+//   )
+// });
