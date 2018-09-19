@@ -27,3 +27,12 @@ export const WALLET_TRANSACTIONS_DEFAULT_FILTERING = [
     dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE
   }
 ];
+
+export const WALLET_TRANSACTIONS_TYPES_ENUM = {
+  Wallet: "wallet",
+  Program: "program",
+  Fund: "fund",
+  ProgramRequest: "program-request",
+  WithdrawalRequest: "withdrawal-request",
+  PaymentTransaction: "payment-transaction"
+};

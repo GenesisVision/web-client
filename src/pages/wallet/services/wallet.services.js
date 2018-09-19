@@ -2,6 +2,7 @@ import walletApi from "services/api-client/wallet-api";
 import authService from "services/auth-service";
 
 import * as actions from "../actions/wallet.actions";
+import { walletTransactionsResponseMock } from "./wallet-transactions-response-mock";
 
 export const fetchWalletBalance = () => (dispatch, getState) => {
   const authorization = authService.getAuthArg();
@@ -16,7 +17,7 @@ export const fetchWalletTransactions = filters => {
   return walletApi
     .v10WalletTransactionsGet(authorization, filters)
     .then(data => ({
-      items: data.transactions,
-      total: data.total
+      items: walletTransactionsResponseMock.data.transactions,
+      total: walletTransactionsResponseMock.data.total
     }));
 };
