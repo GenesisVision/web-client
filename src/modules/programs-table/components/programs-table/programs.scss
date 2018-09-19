@@ -23,9 +23,6 @@ $border-radius: 8px;
 
 .programs-table__cell {
   &--name {
-    //width: 22%;
-    text-overflow: ellipsis;
-    overflow: hidden;
     &--avatar-title {
       display: flex;
       flex-direction: row;
