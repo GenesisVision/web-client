@@ -1,3 +1,4 @@
+import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "modules/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { composeDefaultDateRangeFilter } from "modules/table/components/filtering/date-range-filter/date-range-filter.helpers";
 
 export const WALLET_TRANSACTIONS_COLUMNS = [
@@ -18,5 +19,11 @@ export const WALLET_TRANSACTIONS_COLUMNS = [
 export const WALLET_TRANSACTIONS_FILTERS = [
   {
     ...composeDefaultDateRangeFilter()
+  }
+];
+
+export const WALLET_TRANSACTIONS_DEFAULT_FILTERING = [
+  {
+    dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE
   }
 ];
