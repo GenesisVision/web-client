@@ -33,7 +33,7 @@ const withTable = ({
 
     componentDidMount() {
       if (fetchOnMount) {
-        this.updatItems();
+        this.updateItems();
       }
     }
 
@@ -45,7 +45,7 @@ const withTable = ({
       return null;
     }
 
-    updatItems = () => {
+    updateItems = () => {
       const { paging, sorting, filtering } = this.state;
       const filters = composeRequestFilters({
         paging,
@@ -72,10 +72,10 @@ const withTable = ({
         prevState => ({
           sorting: updateSorting(sorting),
           paging: updatePaging(prevState.paging, {
-            currentPage: 0
+            currentPage: 1
           })
         }),
-        this.updatItems()
+        this.updateItems
       );
     };
 
@@ -84,19 +84,21 @@ const withTable = ({
         prevState => ({
           filtering: updateFilter(prevState.filtering, filter),
           paging: updatePaging(prevState.paging, {
-            currentPage: 0
+            currentPage: 1
           })
         }),
-        this.updatItems()
+        this.updateItems
       );
     };
 
-    handleUpdatePaging = paging => {
+    handleUpdatePaging = nextPageIndex => {
       this.setState(
         prevState => ({
-          paging: updatePaging(prevState.paging, paging)
+          paging: updatePaging(prevState.paging, {
+            currentPage: nextPageIndex + 1
+          })
         }),
-        this.updatItems()
+        this.updateItems
       );
     };
 

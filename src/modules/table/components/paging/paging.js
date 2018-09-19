@@ -12,7 +12,7 @@ class Paging extends PureComponent {
     return (
       <Pager
         total={paging.total}
-        current={paging.current}
+        current={paging.current - 1}
         visiblePages={3}
         onPageChanged={nextPage => updatePaging({ currentPage: nextPage })}
       />

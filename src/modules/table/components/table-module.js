@@ -13,7 +13,7 @@ class TableModule extends Component {
     const { paging, sorting, filtering } = this.props;
 
     this.state = {
-      paging: { ...paging },
+      paging: paging,
       sorting: sorting,
       filtering: { ...filtering },
       data: {},
@@ -62,7 +62,7 @@ class TableModule extends Component {
       prevState => ({
         sorting: sorting,
         paging: merge(prevState.paging, {
-          currentPage: 0
+          currentPage: 1
         })
       }),
       this.updateItems
@@ -74,7 +74,7 @@ class TableModule extends Component {
       return {
         filtering: updateFilter(prevState.filtering, filter),
         paging: merge(prevState.paging, {
-          currentPage: 0
+          currentPage: 1
         })
       };
     }, this.updateItems);
@@ -84,7 +84,7 @@ class TableModule extends Component {
     this.setState(
       prevState => ({
         paging: merge(prevState.paging, {
-          currentPage: nextPageIndex
+          currentPage: nextPageIndex + 1
         })
       }),
       this.updateItems
