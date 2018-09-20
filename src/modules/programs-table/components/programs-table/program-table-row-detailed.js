@@ -25,7 +25,7 @@ const ProgramTableRowDetailed = ({
 
   return (
     <TableRow>
-      <td className="program-detailed" colSpan="10">
+      <td className="program-detailed" colSpan="10" onClick={onCollapseClick}>
         <div className="program-detailed__container">
           <div className="program-detailed__container__info">
             <div className="program-detailed__container__avatar">
@@ -127,13 +127,13 @@ const ProgramTableRowDetailed = ({
               </div>
             </div>
           </div>
-          <div className="program-detailed__container__collapse">
+          {/*<div className="program-detailed__container__collapse">
             <Icon
               type="collapse"
               className="program-detailed__container__collapse--icon"
               onClick={onCollapseClick}
             />
-          </div>
+          </div>*/}
         </div>
       </td>
     </TableRow>
