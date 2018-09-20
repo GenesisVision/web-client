@@ -30,6 +30,7 @@ const walletTransactionsFiltering = {
 const WalletTransactions = ({ t }) => (
   <Surface className="wallet-transactions-container">
     <TableModule
+      className="wallet-transactions"
       title="Transactions"
       defaultFilters={WALLET_TRANSACTIONS_FILTERS}
       getItems={fetchWalletTransactions}
@@ -52,7 +53,7 @@ const WalletTransactions = ({ t }) => (
             column.name
           }`}
         >
-          {t(`program-details-page.history.trades.${column.name}`)}
+          {t(`wallet.transactions.${column.name}`)}
         </TableHeadCell>
       )}
       renderBodyRow={transaction => (
@@ -60,7 +61,7 @@ const WalletTransactions = ({ t }) => (
           <TableCell className="wallet-transactions__cell wallet-transactions__cell--date">
             {moment(transaction.date).format("DD-MM-YYYY, hh:mm a")}
           </TableCell>
-          <TableCell className="wallet-transactions__cell wallet-transactions__cell--Type">
+          <TableCell className="wallet-transactions__cell wallet-transactions__cell--type">
             {t(
               `wallet.transactions-types.${
                 WALLET_TRANSACTIONS_TYPES_ENUM[transaction.sourceType]

@@ -1,5 +1,6 @@
 import "./table.scss";
 
+import classNames from "classnames";
 import React from "react";
 
 import TableBody from "./table-body";
@@ -20,10 +21,11 @@ const Table = ({
   updateFilter,
   filtering,
   renderHeader,
-  renderBodyRow
+  renderBodyRow,
+  className
 }) => {
   return (
-    <div className="table">
+    <div className={classNames("table", className)}>
       <TableToolbar
         title={title}
         renderFilters={renderFilters}

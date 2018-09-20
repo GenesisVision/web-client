@@ -9,9 +9,6 @@ export const WALLET_TRANSACTIONS_COLUMNS = [
     name: "type"
   },
   {
-    name: "description"
-  },
-  {
     name: "amount"
   }
 ];

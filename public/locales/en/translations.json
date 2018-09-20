@@ -77,6 +77,11 @@
     "available": "Available",
     "add-funds": "Add funds",
     "withdraw": "Withdraw",
+    "transactions": {
+      "date": "Date",
+      "type": "Type",
+      "amount": "amount"
+    },
     "transactions-types": {
       "wallet": "Wallet",
       "program": "Program",
