@@ -6,9 +6,9 @@ import { walletTransactionsResponseMock } from "./wallet-transactions-response-m
 
 export const fetchWalletBalance = () => (dispatch, getState) => {
   const authorization = authService.getAuthArg();
-  const { currentCurrency } = getState().accountSettings;
+  const { currency } = getState().accountSettings;
 
-  dispatch(actions.fetchWalletBalance(currentCurrency, authorization));
+  dispatch(actions.fetchWalletBalance(currency, authorization));
 };
 
 export const fetchWalletTransactions = filters => {

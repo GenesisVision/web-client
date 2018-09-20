@@ -26,7 +26,6 @@ import {
 const WalletTransactions = ({ t }) => (
   <Surface className="wallet-transactions-container">
     <TableModule
-      className="wallet-transactions"
       title="Transactions"
       defaultFilters={WALLET_TRANSACTIONS_FILTERS}
       getItems={fetchWalletTransactions}
