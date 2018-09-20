@@ -105,25 +105,27 @@ const ProgramTableRowDetailed = ({
                 </div>
               </div>
             </div>
+              {isAuthenticated &&
+              program.personalProgramDetails && (
+            <div className="program-detailed__container__statistic__favorites-block">
+                <span style={{ float: "right" }}>
+                Add to favorites {" "}
+                  <FavoriteIcon
+                    toggleSelected={toggleFavorite}
+                    programId={program.id}
+                    selected={program.personalProgramDetails.isFavorite}
+                  />
+              </span>
+            </div>
+              )}
             <div className="program-detailed__container__statistic__bottom-block">
               <GVButton>Invest</GVButton>
-              <div className="program-detailed__container__statistic__bottom-block__details-favorites">
+              <div className="program-detailed__container__statistic__bottom-block__details">
                 <Link to={programDetailsUrl}>
                   <GVButton variant="text" color="secondary">
                     Details >
                   </GVButton>
                 </Link>
-                {isAuthenticated &&
-                program.personalProgramDetails && (
-                  <span style={{ float: "right" }}>
-                Add to favorites {" "}
-                    <FavoriteIcon
-                      toggleSelected={toggleFavorite}
-                      programId={program.id}
-                      selected={program.personalProgramDetails.isFavorite}
-                    />
-              </span>
-                )}
               </div>
             </div>
           </div>
