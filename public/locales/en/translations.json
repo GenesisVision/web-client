@@ -24,7 +24,11 @@
     "withdrawing": "Withdrawing",
     "payout-date": "Payout date",
     "back": "Back",
-    "submit": "Submit"
+    "submit": "Submit",
+    "validation": {
+      "amount-more-than-available": "Amount is more than available for withdraw",
+      "amount-is-required": "Amount is required."
+    }
   },
   "notifications-aside": {
     "header": "Notifications",

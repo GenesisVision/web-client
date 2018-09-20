@@ -4,29 +4,36 @@ import PropTypes from "prop-types";
 import { Fragment } from "react";
 import React from "react";
 import { translate } from "react-i18next";
+import NumberFormat from "react-number-format";
 
 const FormStep0 = props => {
   return (
     <Fragment>
       <GVFormikField
         className="invest-field"
-        type="text"
         name="amount"
-        label={props.label}
+        label={props.t("withdraw-program.amount-to-withdraw")}
         component={GVTextField}
         adornment="GVT"
         autoComplete="off"
+        InputComponent={NumberFormat}
+        allowNegative={false}
       />
-      <div className="invest-popup__currency">{`= ${convertToCurrency(
-        props.value,
-        props.rate
-      )} ${props.currency}`}</div>
+      <div className="invest-popup__currency">
+        <NumberFormat
+          value={convertToCurrency(props.amount, props.rate)}
+          prefix="= "
+          suffix={` ${props.currency}`}
+          decimalScale={8}
+          displayType="text"
+        />
+      </div>
       <div className="dialog__buttons">
         <GVButton
           onClick={props.onClick}
           id="signUpFormSubmit"
           className="invest-form__submit-button"
-          disabled={props.availableToWithdraw < props.value || props.disabled}
+          disabled={props.disabled}
         >
           {props.t("withdraw-program.next")}
         </GVButton>

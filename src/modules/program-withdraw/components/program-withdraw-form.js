@@ -39,8 +39,7 @@ class ProgramWithdrawForm extends Component {
       >
         {this.state.step === 0 && (
           <FormStep0
-            label={t("withdraw-program.amount-to-withdraw")}
-            value={values.amount}
+            amount={values.amount}
             rate={rate}
             currency={currency}
             availableToWithdraw={availableToWithdraw}
@@ -78,12 +77,14 @@ export default compose(
     mapPropsToValues: () => ({
       amount: ""
     }),
-    validationSchema: props =>
+    validationSchema: ({ t, availableToWithdraw }) =>
       object().shape({
         amount: number()
-          .typeError(props.t("deposit-program.amount-type-error"))
-          .moreThan(0, props.t("deposit-program.amount-not-zero-error"))
-          .required(props.t("deposit-program.amount-is-required-error"))
+          .lessThan(
+            availableToWithdraw,
+            t("withdraw-program.validation.amount-more-than-available")
+          )
+          .required(t("withdraw-program.validation.amount-is-required"))
       }),
     handleSubmit: (values, { props }) => {
       props.onSubmit(values.amount);

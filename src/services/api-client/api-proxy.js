@@ -1,5 +1,5 @@
 import { hideLoading, showLoading } from "react-redux-loading-bar";
-import store from "store";
+// import store from "store";
 import handleErrorMessage from "utils/handle-error-message";
 
 const apiProxy = (api, dispatch) => {
@@ -31,6 +31,6 @@ const apiProxy = (api, dispatch) => {
   });
 };
 
-const withApiProxy = api => apiProxy(api, store.dispatch);
+const withApiProxy = api => apiProxy(api, () => {});
 
 export default withApiProxy;

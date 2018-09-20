@@ -5,7 +5,6 @@ import authService from "services/auth-service";
 
 export const getProgramWithdrawInfo = id => (dispatch, getState) => {
   const { accountSettings } = getState();
-  // return dispatch(fetchWithdrawInfoById(id, accountSettings.currency));
   return investorApiProxy.v10InvestorProgramsByIdWithdrawInfoByCurrencyGet(
     id,
     accountSettings.currency,
