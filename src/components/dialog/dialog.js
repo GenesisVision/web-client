@@ -9,7 +9,19 @@ class Dialog extends Component {
   render() {
     return (
       <Modal open={this.props.open} onClose={this.props.onClose} fixed>
+        <button
+          className="dialog__close dialog__close--outside"
+          onClick={this.props.onClose}
+        >
+          X Close
+        </button>
         <div className={classnames("dialog", this.props.className)}>
+          <button
+            className="dialog__close dialog__close--inside"
+            onClick={this.props.onClose}
+          >
+            X Close
+          </button>
           {this.props.top && (
             <div className="dialog__top">{this.props.top}</div>
           )}

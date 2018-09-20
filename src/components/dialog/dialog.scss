@@ -1,6 +1,8 @@
 @import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
 
 .dialog {
+  position: relative;
   width: 100%;
   max-width: 360px;
   border-radius: 8px;
@@ -43,6 +45,35 @@
 
   &__bottom {
     background-color: rgba(255, 255, 255, 0.02);
+  }
+
+  &__close {
+    position: absolute;
+    outline: none;
+    background: transparent;
+    border: none;
+    color: white;
+
+    &--inside {
+      right: 10px;
+      top: 15px;
+    }
+
+    &--outside {
+      display: none;
+      top: 10%;
+      right: 10%;
+    }
+
+    @include media-breakpoint-tablet() {
+      &--inside {
+        display: none;
+      }
+
+      &--outside {
+        display: inherit;
+      }
+    }
   }
 
   &__header {
