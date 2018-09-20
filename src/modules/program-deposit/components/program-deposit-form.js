@@ -91,7 +91,7 @@ export default compose(
             info.availableInWallet,
             t("deposit-program.validation.amount-more-than-available")
           )
-          .required(t("deposit-program.validation.amount-is-required-error"))
+          .required(t("deposit-program.validation.amount-is-required"))
       }),
     handleSubmit: (values, { props }) => {
       props.onSubmit(values.amount);
