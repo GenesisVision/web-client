@@ -1,6 +1,8 @@
 @import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
 
 .dialog {
+  position: relative;
   width: 100%;
   max-width: 360px;
   border-radius: 8px;
@@ -9,6 +11,33 @@
   max-height: calc(100vh - 100px);
   overflow: auto;
 
+  &-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    &__item {
+      font-size: 14px;
+      font-weight: 300;
+      opacity: 0.5;
+      margin-bottom: 14px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      &:last-child {
+        margin-bottom: 44px;
+      }
+    }
+  }
+
+  &__info {
+    margin-top: 35px;
+    font-size: 11px;
+    opacity: 0.5;
+    line-height: 1.64rem;
+  }
+
   &__top,
   &__bottom {
     padding: 30px;
@@ -16,6 +45,39 @@
 
   &__bottom {
     background-color: rgba(255, 255, 255, 0.02);
+  }
+
+  &__close {
+    position: absolute;
+    outline: none;
+    background: transparent;
+    border: none;
+    color: $main-color;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+
+    &--inside {
+      right: 10px;
+      top: 15px;
+    }
+
+    &--outside {
+      display: none;
+      top: 10%;
+      right: 10%;
+    }
+
+    @include media-breakpoint-tablet() {
+      &--inside {
+        display: none;
+      }
+
+      &--outside {
+        display: inherit;
+      }
+    }
   }
 
   &__header {
@@ -51,8 +113,16 @@
     width: 100%;
   }
 
-  .gv-btn {
-    width: 100%;
+  &__buttons {
+    display: flex;
+
+    .gv-btn {
+      flex: 1 1 100%;
+    }
+
+    .gv-btn + .gv-btn {
+      margin-left: 16px;
+    }
   }
 
   .form-error {

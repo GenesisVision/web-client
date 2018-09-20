@@ -15,6 +15,21 @@
       "amount-is-required": "Amount is required."
     }
   },
+  "withdraw-program": {
+    "title": "Withdraw",
+    "available-to-withdraw": "You invested in program",
+    "amount-to-withdraw": "Amount to withdraw",
+    "next": "Next",
+    "info": "Amount of withdrawals can be changed depending on the exchange rate or the success of the Manager",
+    "withdrawing": "Withdrawing",
+    "payout-date": "Payout date",
+    "back": "Back",
+    "submit": "Submit",
+    "validation": {
+      "amount-more-than-available": "Amount is more than available for withdraw",
+      "amount-is-required": "Amount is required."
+    }
+  },
   "notifications-aside": {
     "header": "Notifications",
     "today": "today",
@@ -23,7 +38,8 @@
   "buttons": {
     "apply": "Apply",
     "cancel": "Cancel",
-    "back": "Back"
+    "back": "Back",
+    "close": "Close"
   },
   "navigation": {
     "dashboard": "Dashboard",

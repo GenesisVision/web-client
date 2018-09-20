@@ -4,6 +4,7 @@ import { RingIcon } from "components/icon/icon";
 import { GVButton, GVProgramAvatar } from "gv-react-components";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
+import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -30,10 +31,14 @@ const getInvestmentData = programDetails => {
 
 class ProgramDetailsDescription extends Component {
   state = {
-    isOpenInvestToProgramPopup: false
+    isOpenInvestToProgramPopup: false,
+    isOpenWithdrawToProgramPopup: false
   };
   handleOpenInvestPopup = () => {
     this.setState({ isOpenInvestToProgramPopup: true });
+  };
+  handleOpenWithdrawPopup = () => {
+    this.setState({ isOpenWithdrawToProgramPopup: true });
   };
   render() {
     const {
@@ -103,11 +108,24 @@ class ProgramDetailsDescription extends Component {
             >
               {t("program-details-page.description.invest")}
             </GVButton>
+            <GVButton
+              className="program-details-description__invest-btn"
+              onClick={this.handleOpenWithdrawPopup}
+            >
+              {t("withdraw")}
+            </GVButton>
             <ProgramDepositContainer
               open={this.state.isOpenInvestToProgramPopup}
               id={programId}
               onClose={() =>
                 this.setState({ isOpenInvestToProgramPopup: false })
+              }
+            />
+            <ProgramWithdrawContainer
+              open={this.state.isOpenWithdrawToProgramPopup}
+              id={programId}
+              onClose={() =>
+                this.setState({ isOpenWithdrawToProgramPopup: false })
               }
             />
             {programDetails.personalProgramDetails &&
