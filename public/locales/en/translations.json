@@ -30,6 +30,9 @@
       "amount-is-required": "Amount is required."
     }
   },
+  "dialog": {
+    "close": "Close"
+  },
   "notifications-aside": {
     "header": "Notifications",
     "today": "today",

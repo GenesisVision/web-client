@@ -6,7 +6,7 @@ import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 
-const FormStep0 = props => {
+const WithdrawEnterAmountStep = props => {
   return (
     <Fragment>
       <GVFormikField
@@ -42,14 +42,13 @@ const FormStep0 = props => {
   );
 };
 
-FormStep0.propTypes = {
-  label: PropTypes.any,
-  value: PropTypes.any,
-  rate: PropTypes.any,
-  currency: PropTypes.any,
-  availableToWithdraw: PropTypes.any,
-  t: PropTypes.any,
+WithdrawEnterAmountStep.propTypes = {
+  amount: PropTypes.string,
+  rate: PropTypes.number,
+  currency: PropTypes.string,
+  availableToWithdraw: PropTypes.number,
+  t: PropTypes.func,
   disabled: PropTypes.bool
 };
 
-export default translate()(FormStep0);
+export default translate()(WithdrawEnterAmountStep);

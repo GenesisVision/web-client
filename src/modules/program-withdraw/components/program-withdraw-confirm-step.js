@@ -5,7 +5,7 @@ import { Fragment } from "react";
 import React from "react";
 import { translate } from "react-i18next";
 
-const FormStep1 = props => {
+const WithdrawConfirmStep = props => {
   return (
     <Fragment>
       <ul className="dialog-list">
@@ -38,12 +38,12 @@ const FormStep1 = props => {
   );
 };
 
-FormStep1.propTypes = {
-  amount: PropTypes.number.isRequired,
-  periodEnds: PropTypes.string.isRequired,
+WithdrawConfirmStep.propTypes = {
+  amount: PropTypes.string.isRequired,
+  periodEnds: PropTypes.instanceOf(Date),
   onPrevClick: PropTypes.func.isRequired,
   error: PropTypes.string,
   disabled: PropTypes.bool
 };
 
-export default translate()(FormStep1);
+export default translate()(WithdrawConfirmStep);

@@ -5,18 +5,21 @@ import { translate } from "react-i18next";
 import { compose } from "redux";
 import { number, object } from "yup";
 
-import FormStep0 from "./program-withdraw-form-0";
-import FormStep1 from "./program-withdraw-form-1";
+import WithdrawConfirmStep from "./program-withdraw-confirm-step";
+import WithdrawEnterAmountStep from "./program-withdraw-enter-amount-step";
+
+const CONFIRM_STEP = "CONFIRM_STEP";
+const ENTER_AMOUNT_STEP = "ENTER_AMOUNT_STEP";
 
 class ProgramWithdrawForm extends Component {
   state = {
-    step: 0
+    step: ENTER_AMOUNT_STEP
   };
-  nextStep = () => {
-    this.setState(({ step }) => ({ step: step + 1 }));
+  goToConfirmStep = () => {
+    this.setState({ step: CONFIRM_STEP });
   };
-  prevStep = () => {
-    this.setState(({ step }) => ({ step: step - 1 }));
+  goToEnterAmountStep = () => {
+    this.setState({ step: ENTER_AMOUNT_STEP });
   };
   render() {
     const {
@@ -37,21 +40,21 @@ class ProgramWithdrawForm extends Component {
         id="withdraw-form"
         onSubmit={handleSubmit}
       >
-        {this.state.step === 0 && (
-          <FormStep0
+        {this.state.step === ENTER_AMOUNT_STEP && (
+          <WithdrawEnterAmountStep
             amount={values.amount}
             rate={rate}
             currency={currency}
             availableToWithdraw={availableToWithdraw}
-            onClick={this.nextStep}
-            disabled={errors.amount}
+            onClick={this.goToConfirmStep}
+            disabled={errors.amount !== undefined}
           />
         )}
-        {this.state.step === 1 && (
-          <FormStep1
+        {this.state.step === CONFIRM_STEP && (
+          <WithdrawConfirmStep
             periodEnds={periodEnds}
             amount={values.amount}
-            onPrevClick={this.prevStep}
+            onPrevClick={this.goToEnterAmountStep}
             error={errorMessage}
             disabled={disabled}
           />
@@ -64,9 +67,9 @@ class ProgramWithdrawForm extends Component {
 
 ProgramWithdrawForm.propTypes = {
   availableToWithdraw: PropTypes.number.isRequired,
-  periodEnds: PropTypes.string,
+  periodEnds: PropTypes.instanceOf(Date),
   rate: PropTypes.number.isRequired,
-  currency: PropTypes.number.isRequired,
+  currency: PropTypes.string.isRequired,
   errorMessage: PropTypes.string
 };
 

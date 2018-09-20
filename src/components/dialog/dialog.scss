@@ -52,7 +52,11 @@
     outline: none;
     background: transparent;
     border: none;
-    color: white;
+    color: $main-color;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
 
     &--inside {
       right: 10px;
