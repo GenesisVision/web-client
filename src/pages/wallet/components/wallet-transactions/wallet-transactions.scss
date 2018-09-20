@@ -60,10 +60,11 @@
   @include media-breakpoint-tablet() {
     & .table__filters {
       margin-left: 20px;
+      margin-top: 0;
     }
 
     & .table__toolbar {
-      padding: 40px 32px;
+      padding: 40px 32px 32px;
       flex-direction: row;
     }
   }
