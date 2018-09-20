@@ -37,44 +37,70 @@ const ProgramTableRowDetailed = ({
                 className="program-detailed__container__avatar__img"
               />
               <div className="program-detailed__container__avatar--name">
-                <div className="program-detailed__container__title">{program.title}</div>
+                <div className="program-detailed__container__title">
+                  {program.title}
+                </div>
                 <div className="program-detailed__container__manager">
                   {program.manager.username}
                 </div>
               </div>
             </div>
-            <div className="program-detailed__container__strategy">Strategy</div>
+            <div className="program-detailed__container__strategy">
+              Strategy
+            </div>
             <div className="program-detailed__container__description">
               {program.description}
             </div>
           </div>
           <div className="program-detailed__container__statistic">
             <div className="program-detailed__container__statistic__chart">
-              <ProgramBigChart data={program.chart}/>
+              <ProgramBigChart data={program.chart} />
             </div>
             <div className="program-detailed__container__statistic__statistic-data">
               <div>
-                <div className="program-detailed__container__statistic__statistic-data--label">Balance</div>
-                <div className="program-detailed__container__statistic__statistic-data--value">{program.statistic.balanceInGVT.amount}</div>
+                <div className="program-detailed__container__statistic__statistic-data--label">
+                  Balance
+                </div>
+                <div className="program-detailed__container__statistic__statistic-data--value">
+                  {program.statistic.balanceInGVT.amount}
+                </div>
               </div>
               <div>
-                <div className="program-detailed__container__statistic__statistic-data--label">Curr.</div>
-                <div className="program-detailed__container__statistic__statistic-data--value">{program.currency}</div>
+                <div className="program-detailed__container__statistic__statistic-data--label">
+                  Curr.
+                </div>
+                <div className="program-detailed__container__statistic__statistic-data--value">
+                  {program.currency}
+                </div>
               </div>
               <div>
-                <div className="program-detailed__container__statistic__statistic-data--label">Investors</div>
-                <div className="program-detailed__container__statistic__statistic-data--value">{program.statistic.investorsCount}</div>
+                <div className="program-detailed__container__statistic__statistic-data--label">
+                  Investors
+                </div>
+                <div className="program-detailed__container__statistic__statistic-data--value">
+                  {program.statistic.investorsCount}
+                </div>
               </div>
               <div>
-                <div className="program-detailed__container__statistic__statistic-data--label">Av. to Invest</div>
-                <div className="program-detailed__container__statistic__statistic-data--value">{program.availableForInvestment}</div>
+                <div className="program-detailed__container__statistic__statistic-data--label">
+                  Av. to Invest
+                </div>
+                <div className="program-detailed__container__statistic__statistic-data--value">
+                  {program.availableForInvestment}
+                </div>
               </div>
               <div>
-                <div className="program-detailed__container__statistic__statistic-data--label">Trades</div>
-                <div className="program-detailed__container__statistic__statistic-data--value">{program.statistic.tradesCount}</div>
+                <div className="program-detailed__container__statistic__statistic-data--label">
+                  Trades
+                </div>
+                <div className="program-detailed__container__statistic__statistic-data--value">
+                  {program.statistic.tradesCount}
+                </div>
               </div>
               <div>
-                <div className="program-detailed__container__statistic__statistic-data--label">Period</div>
+                <div className="program-detailed__container__statistic__statistic-data--label">
+                  Period
+                </div>
                 <div className="program-detailed__container__statistic__statistic-data--value">
                   <ProgramPeriodPie
                     start={program.periodDateStart}
@@ -83,7 +109,9 @@ const ProgramTableRowDetailed = ({
                 </div>
               </div>
               <div>
-                <div className="program-detailed__container__statistic__statistic-data--label">D.down</div>
+                <div className="program-detailed__container__statistic__statistic-data--label">
+                  D.down
+                </div>
                 <div className="program-detailed__container__statistic__statistic-data--value">
                   <NumberFormat
                     value={program.statistic.drawdownPercent}
@@ -94,7 +122,9 @@ const ProgramTableRowDetailed = ({
                 </div>
               </div>
               <div>
-                <div className="program-detailed__container__statistic__statistic-data--label">Profit</div>
+                <div className="program-detailed__container__statistic__statistic-data--label">
+                  Profit
+                </div>
                 <div className="program-detailed__container__statistic__statistic-data--value--positive">
                   <NumberFormat
                     value={program.statistic.profitPercent}
@@ -105,18 +135,18 @@ const ProgramTableRowDetailed = ({
                 </div>
               </div>
             </div>
-              {isAuthenticated &&
+            {isAuthenticated &&
               program.personalProgramDetails && (
-            <div className="program-detailed__container__statistic__favorites-block">
-                <span style={{ float: "right" }}>
-                Add to favorites {" "}
-                  <FavoriteIcon
-                    toggleSelected={toggleFavorite}
-                    programId={program.id}
-                    selected={program.personalProgramDetails.isFavorite}
-                  />
-              </span>
-            </div>
+                <div className="program-detailed__container__statistic__favorites-block">
+                  <span style={{ float: "right" }}>
+                    Add to favorites{" "}
+                    <FavoriteIcon
+                      toggleSelected={toggleFavorite}
+                      programId={program.id}
+                      selected={program.personalProgramDetails.isFavorite}
+                    />
+                  </span>
+                </div>
               )}
             <div className="program-detailed__container__statistic__bottom-block">
               <GVButton>Invest</GVButton>
