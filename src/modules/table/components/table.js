@@ -17,12 +17,19 @@ const Table = ({
   paging,
   updatePaging,
   renderFilters,
+  updateFilter,
+  filtering,
   renderHeader,
   renderBodyRow
 }) => {
   return (
     <div className="table">
-      <TableToolbar title={title} renderFilters={renderFilters} />
+      <TableToolbar
+        title={title}
+        renderFilters={renderFilters}
+        updateFilter={updateFilter}
+        filtering={filtering}
+      />
       <TableHeader
         columns={columns}
         sorting={sorting}

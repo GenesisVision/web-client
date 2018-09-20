@@ -25,12 +25,12 @@ const tableServiceFactory = ({
     });
   };
 
-  const changePaging = paging => dispatch => {
+  const updatePaging = paging => dispatch => {
     dispatch(tableActions.updatePaging(paging));
     dispatch(getItems());
   };
 
-  const changeSorting = sorting => dispatch => {
+  const updateSorting = sorting => dispatch => {
     dispatch(tableActions.updateSorting(sorting));
     dispatch(
       tableActions.updatePaging({
@@ -40,7 +40,7 @@ const tableServiceFactory = ({
     dispatch(getItems());
   };
 
-  const changeFilter = filter => dispatch => {
+  const updateFilter = filter => dispatch => {
     dispatch(tableActions.updateFilter(filter));
     dispatch(
       tableActions.updatePaging({
@@ -52,9 +52,9 @@ const tableServiceFactory = ({
 
   return {
     getItems,
-    changePaging,
-    changeSorting,
-    changeFilter
+    updatePaging,
+    updateSorting,
+    updateFilter
   };
 };
 

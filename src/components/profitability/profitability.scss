@@ -1,0 +1,11 @@
+@import "styles/_colors.scss";
+
+.profitability {
+  &--positive {
+    color: $positive-color;
+  }
+
+  &--negative {
+    color: $negative-color;
+  }
+}
