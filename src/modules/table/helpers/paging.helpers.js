@@ -1,4 +1,5 @@
 import { DEFAULT_PAGING } from "../reducers/table-paging.reducer";
+
 export const composePaingActionType = actionType => `${actionType}_PAGING`;
 
 export const calculateTotalPages = (
@@ -10,7 +11,7 @@ export const calculateTotalPages = (
 };
 
 export const calculateSkipAndTake = paging => {
-  const skip = paging.itemsOnPage * paging.currentPage;
+  const skip = paging.itemsOnPage * (paging.currentPage - 1);
   const take = paging.itemsOnPage;
   return { skip, take };
 };

@@ -1,12 +1,12 @@
 import "./table.scss";
 
 import React from "react";
+import Scrollbars from "react-custom-scrollbars";
 
 import TableBody from "./table-body";
 import TableFooter from "./table-footer";
 import TableHeader from "./table-header";
 import TableToolbar from "./table-toolbar";
-import Scrollbars from "react-custom-scrollbars";
 
 const Table = ({
   title,
@@ -18,15 +18,20 @@ const Table = ({
   paging,
   updatePaging,
   renderFilters,
+  updateFilter,
+  filtering,
   renderHeader,
   renderBodyRow
 }) => {
   return (
-    <div>
-      <TableToolbar title={title}
-                    renderFilters={renderFilters}/>
-      <Scrollbars autoHeight
-                  autoHeightMax={14000}>
+    <div className="table">
+      <TableToolbar
+        title={title}
+        renderFilters={renderFilters}
+        updateFilter={updateFilter}
+        filtering={filtering}
+      />
+      <Scrollbars autoHeight autoHeightMax={14000}>
         <table className="table">
           <TableHeader
             columns={columns}
