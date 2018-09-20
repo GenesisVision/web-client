@@ -12,20 +12,4 @@
     letter-spacing: 0.2px;
     font-size: 17px;
   }
-
-  & .gv-tabs {
-    margin-left: -12px;
-  }
-
-  & .gv-tab {
-    font-size: 13px;
-    letter-spacing: 0.1px;
-    font-weight: 600;
-
-    &:not(.gv-tab--active) {
-      letter-spacing: 0.2px;
-      color: $short-statistic-notice-color;
-      opacity: 1;
-    }
-  }
 }
