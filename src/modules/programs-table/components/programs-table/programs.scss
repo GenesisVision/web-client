@@ -284,6 +284,16 @@ $description-block-width: 250px;
         min-height: 250px;
       }
 
+      &__bottom-block{
+        &__details-favorites, &__details-favorites span{
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          svg {
+            margin: 0 10px;
+          }
+        }
+      }
       &__statistic-data,
       &__bottom-block {
         display: flex;
