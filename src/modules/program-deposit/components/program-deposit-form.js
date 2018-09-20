@@ -3,11 +3,12 @@ import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import moment from "moment";
 import React from "react";
 import { translate } from "react-i18next";
+import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import { number, object } from "yup";
 
 const convertToCurrency = (value = 0, rate) => {
-  return Math.round((value / rate) * 100000000) / 100000000;
+  return value / rate;
 };
 
 const calculateValueOfEntryFee = (value = 0, percentage) => {
@@ -26,24 +27,37 @@ const ProgramDepositForm = ({
   <form className="dialog__bottom" id="invest-form" onSubmit={handleSubmit}>
     <GVFormikField
       className="invest-field"
-      type="text"
       name="amount"
       label={t("deposit-program.amount")}
       component={GVTextField}
       adornment="GVT"
       autoComplete="off"
+      InputComponent={NumberFormat}
+      allowNegative={false}
     />
-    <div className="invest-popup__currency">{`= ${convertToCurrency(
-      values.amount,
-      info.rate
-    )} ${currency}`}</div>
+    <div className="invest-popup__currency">
+      <NumberFormat
+        value={convertToCurrency(values.amount, info.rate)}
+        prefix="= "
+        suffix={` ${currency}`}
+        decimalScale={8}
+        displayType="text"
+      />
+    </div>
     <div className="invest-popup__entry">
       {t("deposit-program.entry-fee")}
       <span>
-        {`${info.entryFee}% (${convertToCurrency(
-          calculateValueOfEntryFee(values.amount, info.entryFee),
-          info.rate
-        )} ${currency})`}
+        {info.entryFee} %{" "}
+        <NumberFormat
+          value={convertToCurrency(
+            calculateValueOfEntryFee(values.amount, info.entryFee),
+            info.rate
+          )}
+          prefix="("
+          suffix={` ${currency})`}
+          decimalScale={8}
+          displayType="text"
+        />
       </span>
     </div>
     <div className="form-error">{errorMessage}</div>
@@ -70,12 +84,14 @@ export default compose(
     mapPropsToValues: () => ({
       amount: ""
     }),
-    validationSchema: props =>
+    validationSchema: ({ t, info }) =>
       object().shape({
         amount: number()
-          .typeError(props.t("deposit-program.amount-type-error"))
-          .moreThan(0, props.t("deposit-program.amount-not-zero-error"))
-          .required(props.t("deposit-program.amount-is-required-error"))
+          .lessThan(
+            info.availableInWallet,
+            t("deposit-program.validation.amount-more-than-available")
+          )
+          .required(t("deposit-program.validation.amount-is-required-error"))
       }),
     handleSubmit: (values, { props }) => {
       props.onSubmit(values.amount);

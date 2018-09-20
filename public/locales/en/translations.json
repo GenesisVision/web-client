@@ -10,9 +10,10 @@
     "entry-fee": "Entry fee",
     "period": "Your request will be processed at the end of the reporting period",
     "confirm": "Confirm",
-    "amount-type-error": "Amount must be a number.",
-    "amount-not-zero-error": "Amount must be greater than zero",
-    "amount-is-required-error": "Amount is required."
+    "validation": {
+      "amount-more-than-available": "Amount is more than available in your wallet",
+      "amount-is-required": "Amount is required."
+    }
   },
   "notifications-aside": {
     "header": "Notifications",
