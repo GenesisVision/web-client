@@ -285,7 +285,7 @@ $description-block-width: 250px;
       }
 
       &__statistic-data,
-      &__investing {
+      &__bottom-block {
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
@@ -364,7 +364,7 @@ $description-block-width: 250px;
           }
         }
         &__statistic-data,
-        &__investing {
+        &__bottom-block {
           margin-bottom: $padding * 2;
           &:last-child {
             margin-bottom: 0;

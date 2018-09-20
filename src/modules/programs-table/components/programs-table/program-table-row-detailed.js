@@ -105,7 +105,7 @@ const ProgramTableRowDetailed = ({
                 </div>
               </div>
             </div>
-            <div className="program-detailed__container__statistic__investing">
+            <div className="program-detailed__container__statistic__bottom-block">
               <GVButton>Invest</GVButton>
               <Link to={programDetailsUrl}>
                 <GVButton variant="text" color="secondary">
