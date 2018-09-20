@@ -5,6 +5,7 @@ import Chip from "components/chip/chip";
 import { ArrowIcon } from "components/icon/icon";
 import { WalletIcon } from "components/icon/wallet-icon";
 import Popover from "components/popover/popover";
+import WalletAddFundsConatiner from "modules/wallet-add-funds/wallet-add-funds-container";
 import { WALLET_PAGE_ROUTE } from "pages/wallet/wallet-page";
 import PropTypes from "prop-types";
 import React, { Fragment } from "react";
@@ -13,13 +14,20 @@ import { Link } from "react-router-dom";
 
 class WalletWidget extends React.Component {
   state = {
-    anchorEl: null
+    anchorEl: null,
+    isOpenAddFundsPopup: true
   };
   handleOpenDetails = event => {
     this.setState({ anchorEl: event.currentTarget });
   };
   handleCloseDetails = () => {
     this.setState({ anchorEl: null });
+  };
+  handleOpenAddFundsPopup = () => {
+    this.setState({ isOpenAddFundsPopup: true });
+  };
+  handleClodsAddFundsPopup = () => {
+    this.setState({ isOpenAddFundsPopup: false });
   };
   render() {
     const {
@@ -40,9 +48,15 @@ class WalletWidget extends React.Component {
             <span className="wallet-widget__value">{`${availableGvt} GVT`}</span>
           </div>
           <div className="wallet-widget__add">
-            <Chip type="positive">+</Chip>
+            <Chip type="positive" onClick={this.handleOpenAddFundsPopup}>
+              +
+            </Chip>
           </div>
         </div>
+        <WalletAddFundsConatiner
+          onClose={this.handleClodsAddFundsPopup}
+          open={this.state.isOpenAddFundsPopup}
+        />
         <Popover
           anchorEl={this.state.anchorEl}
           onClose={this.handleCloseDetails}
