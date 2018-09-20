@@ -6,12 +6,12 @@ import FavoriteIcon from "modules/favorite-program/components/favorite-icon/favo
 import { TableRow } from "modules/table/components";
 import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
 import React from "react";
+import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import fileService from "shared/services/file-service";
 import replaceParams from "utils/replace-params";
 
 import ProgramBigChart from "../program-big-chart/program-big-chart";
-import NumberFormat from "react-number-format";
 
 const ProgramTableRowDetailed = ({
   program,
@@ -25,7 +25,7 @@ const ProgramTableRowDetailed = ({
 
   return (
     <TableRow>
-      <td className="program-detailed" colSpan="10" onClick={onCollapseClick}>
+      <td className="program-detailed" colSpan="11" onClick={onCollapseClick}>
         <div className="program-detailed__container">
           <div className="program-detailed__container__info">
             <div className="program-detailed__container__avatar">

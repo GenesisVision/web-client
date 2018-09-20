@@ -284,8 +284,8 @@ $description-block-width: 250px;
         min-height: 250px;
       }
 
-      &__bottom-block{
-        &__details{
+      &__bottom-block {
+        &__details {
           display: flex;
           justify-content: space-between;
           flex-direction: column;
@@ -298,14 +298,15 @@ $description-block-width: 250px;
         justify-content: space-between;
         align-items: flex-start;
       }
-      &__favorites-block,&__favorites-block span {
+      &__favorites-block,
+      &__favorites-block span {
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        margin-bottom: $padding/2;
+        margin-bottom: $padding/4;
         span {
-          svg{
-            margin: 0 10px
+          svg {
+            margin: 0 10px;
           }
         }
       }
@@ -379,11 +380,11 @@ $description-block-width: 250px;
             font-size: $text-size;
           }
         }
-        &__statistic-data{
+        &__statistic-data {
           margin-bottom: $padding * 2;
         }
-        &__favorites-block{
-          margin-bottom: $padding;
+        &__favorites-block {
+          margin-bottom: $padding/3;
         }
       }
     }
