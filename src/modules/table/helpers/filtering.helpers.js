@@ -51,6 +51,10 @@ const processFilterValue = filter => {
       if (filter.value !== undefined) {
         requestValue = filter.value;
       }
+
+      if (typeof filter.value === "string") {
+        requestValue = { [filter.name]: filter.value };
+      }
   }
   return requestValue;
 };

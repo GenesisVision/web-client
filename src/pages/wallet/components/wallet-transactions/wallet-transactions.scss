@@ -1,17 +1,28 @@
 @import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
 
 .wallet-transactions {
-  .table__title {
+  &__row:nth-child(2n + 1) {
+    background-color: $table-background-subcolor;
+  }
+
+  & .table__title {
     font-size: 16px;
     letter-spacing: 0.1px;
     color: $text-light-color;
   }
 
-  .table__toolbar {
-    padding: 40px 32px;
+  & .table__toolbar {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  .table__row {
+  & .table__filters {
+    margin-top: 16px;
+    margin-left: 0;
+  }
+
+  & .table__row {
     padding: 0 32px;
   }
 
@@ -20,7 +31,7 @@
 
     &--date {
       width: 33%;
-      min-width: 168px;
+      min-width: 180px;
     }
     &--type {
       width: 40%;
@@ -43,6 +54,17 @@
 
     &__arrow {
       stroke: $short-statistic-subheading-color;
+    }
+  }
+
+  @include media-breakpoint-tablet() {
+    & .table__filters {
+      margin-left: 20px;
+    }
+
+    & .table__toolbar {
+      padding: 40px 32px;
+      flex-direction: row;
     }
   }
 }

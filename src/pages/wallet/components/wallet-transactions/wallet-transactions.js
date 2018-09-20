@@ -3,11 +3,10 @@ import "./wallet-transactions.scss";
 import Profitability from "components/profitability/profitability";
 import Surface from "components/surface/surface";
 import { TableCell, TableHeadCell, TableRow } from "modules/table/components";
+import { ASSET_TYPE_FILTER_VALUES } from "modules/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 import DateRangeFilter from "modules/table/components/filtering/date-range-filter/date-range-filter";
-import {
-  DATE_RANGE_FILTER_NAME,
-  DEFAULT_DATE_RANGE_FILTER_VALUE
-} from "modules/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { DATE_RANGE_FILTER_NAME } from "modules/table/components/filtering/date-range-filter/date-range-filter.constants";
+import SelectFilter from "modules/table/components/filtering/select-filter/select-filter";
 import TableModule from "modules/table/components/table-module";
 import { DEFAULT_PAGING } from "modules/table/reducers/table-paging.reducer";
 import moment from "moment";
@@ -20,12 +19,9 @@ import {
   WALLET_TRANSACTIONS_COLUMNS,
   WALLET_TRANSACTIONS_DEFAULT_FILTERING,
   WALLET_TRANSACTIONS_FILTERS,
-  WALLET_TRANSACTIONS_TYPES_ENUM
+  WALLET_TRANSACTIONS_TYPES_ENUM,
+  WALLET_TRANSACTION_ACTIONS_VALUES
 } from "./wallet-transactions.constants";
-
-const walletTransactionsFiltering = {
-  dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE
-};
 
 const WalletTransactions = ({ t }) => (
   <Surface className="wallet-transactions-container">
@@ -37,9 +33,23 @@ const WalletTransactions = ({ t }) => (
       filtering={WALLET_TRANSACTIONS_DEFAULT_FILTERING}
       renderFilters={(updateFilter, filtering) => (
         <Fragment>
+          <SelectFilter
+            name="txAction"
+            label="Type"
+            value={filtering["txAction"]}
+            values={WALLET_TRANSACTION_ACTIONS_VALUES}
+            onChange={updateFilter}
+          />
+          <SelectFilter
+            name="assetType"
+            label="Assets type"
+            value={filtering["assetType"]}
+            values={ASSET_TYPE_FILTER_VALUES}
+            onChange={updateFilter}
+          />
           <DateRangeFilter
             name={DATE_RANGE_FILTER_NAME}
-            value={DEFAULT_DATE_RANGE_FILTER_VALUE}
+            value={filtering["dateRange"]}
             onChange={updateFilter}
           />
         </Fragment>
@@ -75,6 +85,8 @@ const WalletTransactions = ({ t }) => (
                 decimalScale={2}
                 displayType="text"
               />
+              {transaction.sourceCurrency !== "Undefined" &&
+                " " + transaction.sourceCurrency}
             </Profitability>
           </TableCell>
         </TableRow>

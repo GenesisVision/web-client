@@ -80,7 +80,7 @@
     "transactions": {
       "date": "Date",
       "type": "Type",
-      "amount": "amount"
+      "amount": "Amount"
     },
     "transactions-types": {
       "wallet": "Wallet",
