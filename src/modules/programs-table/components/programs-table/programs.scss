@@ -39,29 +39,24 @@ $description-block-width: 250px;
 
 .programs-cards {
   box-sizing: border-box;
-  padding: $padding;
+  padding: $padding/2;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   flex-wrap: wrap;
   &__card {
-    margin-right: $padding/2;
-    margin-bottom: $padding;
+    margin-bottom: $padding/2;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     box-sizing: border-box;
-    width: 312px;
-    height: 372px;
+    width: 100%;
+    height: $program-height/1.2;
     padding: 20px;
     border-radius: 8px;
     background-color: #212c34;
     &:last-child {
       margin-right: 0;
-    }
-    & div,
-    table {
-      //outline: 1px solid gray;
     }
     &__row {
       display: flex;
@@ -70,16 +65,16 @@ $description-block-width: 250px;
       align-items: flex-start;
       &__title {
         padding: 3px 0;
-        font-size: 15px;
+        font-size: $title-text-size/1.5;
       }
       &__name {
-        font-size: 13px;
+        font-size: $text-size/1.5;
         color: $primary-color;
       }
       &__actions {
       }
       &__chart {
-        width: 160px;
+        width: $chart-width/1.5;
       }
       &__chart-info {
         display: flex;
@@ -87,12 +82,12 @@ $description-block-width: 250px;
         justify-content: center;
         align-items: center;
         &--balance {
-          font-size: 13px;
+          font-size: $text-size/1.5;
           font-weight: 100;
         }
         &--profit {
-          font-size: 14px;
-          font-weight: 200;
+          font-size: $text-size/1.5;
+          font-weight: 600;
           color: rgb(44, 211, 146);
           border-radius: 19.5px;
           background-color: $success;
@@ -100,21 +95,8 @@ $description-block-width: 250px;
           margin-bottom: 8px;
         }
       }
-      &__status {
-        &--text {
-          font-size: 13px;
-          font-weight: 100;
-        }
-      }
       &--title {
         @include table-title;
-      }
-      &__reinvest {
-        height: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: flex-end;
       }
     }
     &__table {
@@ -124,33 +106,64 @@ $description-block-width: 250px;
           @include table-title;
         }
         td {
-          font-size: 13px;
+          font-size: $text-size/$multiplier;
           font-weight: 100;
         }
       }
     }
-    &--balance {
+  }
+  .program-avatar {
+    width: 40px;
+    height: 40px;
+  }
+  @include media-breakpoint-phone() {
+    .program-avatar {
+      width: 80px;
+      height: 80px;
     }
-    &--currency {
+    &__card {
+      height: $program-height;
+      margin-right: 0;
+      &__row {
+        &__title {
+          font-size: $title-text-size;
+        }
+        &__name {
+          font-size: $text-size;
+        }
+        &--balance {
+          font-size: $text-size;
+        }
+        &--profit {
+          font-size: $text-size;
+        }
+        &__chart {
+          width: $chart-width;
+        }
+        &__chart-info {
+          &--balance {
+            font-size: $text-size;
+          }
+          &--profit {
+            font-size: $text-size;
+          }
+        }
+      }
+      &__table {
+        & table {
+          td {
+            font-size: $text-size;
+          }
+        }
+      }
     }
-    &--investors {
+  }
+  @include media-breakpoint-landscape-phone() {
+    &__card {
+      width: $program-width;
+      margin-right: $padding/2;
     }
-    &--available-to-invest {
-    }
-    &--trades {
-    }
-    &--period {
-    }
-    &--drawdown {
-    }
-    &--profit {
-    }
-    &--chart {
-    }
-    &--favorite {
-    }
-    &-- {
-    }
+    padding: $padding;
   }
 }
 
