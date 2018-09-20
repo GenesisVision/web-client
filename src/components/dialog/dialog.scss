@@ -1,0 +1,62 @@
+@import "styles/_colors.scss";
+
+.dialog {
+  width: 100%;
+  max-width: 360px;
+  border-radius: 8px;
+  background-color: $secondary-background-color;
+  z-index: 1300;
+  max-height: calc(100vh - 100px);
+  overflow: auto;
+
+  &__top,
+  &__bottom {
+    padding: 30px;
+  }
+
+  &__bottom {
+    background-color: rgba(255, 255, 255, 0.02);
+  }
+
+  &__header {
+    h2 {
+      font-size: 24px;
+      font-weight: 500;
+      margin-bottom: 11px;
+    }
+    p {
+      font-size: 13px;
+      font-weight: 300;
+    }
+  }
+
+  &-field {
+    margin-top: 30px;
+    font-weight: 300;
+
+    &__description {
+      font-size: 13px;
+      opacity: 0.5;
+      margin-bottom: 12px;
+    }
+
+    &__value {
+      font-size: 24px;
+    }
+  }
+
+  .gv-text-field__wrapper {
+    margin-right: 0;
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .gv-btn {
+    width: 100%;
+  }
+
+  .form-error {
+    margin-bottom: 20px;
+    font-size: 13px;
+  }
+}

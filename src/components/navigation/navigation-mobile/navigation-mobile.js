@@ -91,7 +91,7 @@ NavigationMobile.propTypes = {
   isAuthenticated: PropTypes.bool,
   email: PropTypes.string,
   avatar: PropTypes.string,
-  isOpenNavigation: PropTypes.func,
+  isOpenNavigation: PropTypes.bool,
   onClose: PropTypes.func,
   logout: PropTypes.func
 };

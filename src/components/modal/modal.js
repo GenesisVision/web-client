@@ -28,13 +28,15 @@ class Modal extends Component {
       open,
       disableBackdropClick,
       transparentBackdrop,
-      children
+      children,
+      fixed
     } = this.props;
     return (
       <Portal open={open}>
         <div
           className={classnames("modal", {
-            "modal--absolute": !disableBackdropClick
+            "modal--position-absolute": !disableBackdropClick && !fixed,
+            "modal--position-fixed": fixed
           })}
         >
           {disableBackdropClick || (
@@ -58,7 +60,8 @@ Modal.propTypes = {
   onClose: PropTypes.func,
   open: PropTypes.bool,
   disableBackdropClick: PropTypes.bool,
-  transparentBackdrop: PropTypes.bool
+  transparentBackdrop: PropTypes.bool,
+  fixed: PropTypes.bool
 };
 
 export default Modal;
