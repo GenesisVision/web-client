@@ -16,7 +16,7 @@ class Dialog extends Component {
           className="dialog__close dialog__close--outside"
           onClick={this.props.onClose}
         >
-          <CloseIcon /> {t("dialog.close")}
+          <CloseIcon /> {t("buttons.close")}
         </button>
         <div className={classnames("dialog", this.props.className)}>
           <button

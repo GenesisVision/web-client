@@ -30,9 +30,6 @@
       "amount-is-required": "Amount is required."
     }
   },
-  "dialog": {
-    "close": "Close"
-  },
   "notifications-aside": {
     "header": "Notifications",
     "today": "today",
@@ -41,7 +38,8 @@
   "buttons": {
     "apply": "Apply",
     "cancel": "Cancel",
-    "back": "Back"
+    "back": "Back",
+    "close": "Close"
   },
   "navigation": {
     "dashboard": "Dashboard",
