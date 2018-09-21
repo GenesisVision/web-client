@@ -39,7 +39,8 @@
     "apply": "Apply",
     "cancel": "Cancel",
     "back": "Back",
-    "close": "Close"
+    "close": "Close",
+    "copy": "Copy"
   },
   "navigation": {
     "dashboard": "Dashboard",
@@ -112,6 +113,13 @@
     "invested-value": "Invested value",
     "available": "Available",
     "details": "Details"
+  },
+  "wallet-add-funds": {
+    "title": "Add funds",
+    "select-currency": "Select a wallet currency",
+    "will-send": "You will send",
+    "will-get": "You'll get",
+    "deposit-address": "Deposit address"
   },
   "profile-widget": {
     "personal-details": "Personal details",

@@ -17,10 +17,12 @@ const WalletAddFundsBottom = ({ t, walletId }) => {
         value={walletId}
         bgColor={"transparent"}
         fgColor={"white"}
-        size={170}
+        size={150}
+        level={"H"}
       />
+
       <div className="wallet-add-funds-popup__title">
-        {t("Deposit address")}
+        {t("wallet-add-funds.deposit-address")}
       </div>
       <div className="wallet-add-funds-popup__value">{walletId}</div>
       <GVButton
@@ -31,7 +33,7 @@ const WalletAddFundsBottom = ({ t, walletId }) => {
       >
         <CopyIcon />
         &nbsp;
-        {t("Copy")}
+        {t("buttons.copy")}
       </GVButton>
     </div>
   );

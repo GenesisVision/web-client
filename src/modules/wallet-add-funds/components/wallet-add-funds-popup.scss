@@ -22,4 +22,13 @@
     justify-content: center;
     align-items: center;
   }
+
+  &__will-get {
+    &:before {
+      content: none;
+    }
+    &:after {
+      content: none;
+    }
+  }
 }
