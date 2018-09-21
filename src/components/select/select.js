@@ -31,8 +31,8 @@ class Select extends Component {
   };
 
   handleChange = event => {
-    this.props.onChange(event.target.value, this.props.name);
-    this.handleClose(event);
+    this.props.onChange(event);
+    this.handleClose();
   };
 
   handleBlur = event => {
