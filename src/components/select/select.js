@@ -14,31 +14,53 @@ class Select extends Component {
 
   handleClick = event => {
     this.setState({ anchor: event.currentTarget });
+
+    if (this.props.onOpen) {
+      this.props.onOpen();
+    }
   };
+
+  input = React.createRef();
 
   handleChildClick = value => {
-    if (typeof this.props.onSelect === "function") {
-      this.props.onSelect(value);
-    }
-    this.setState({ anchor: null });
+    const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+      window.HTMLInputElement.prototype,
+      "value"
+    ).set;
+    nativeInputValueSetter.call(this.input.current, value);
+
+    const ev2 = new Event("input", { bubbles: true });
+    this.input.current.dispatchEvent(ev2);
   };
 
-  handleClose = () => {
+  handleChange = event => {
+    this.props.onChange(event);
+    this.handleClose(event);
+  };
+
+  handleClose = event => {
     this.setState({ anchor: null });
+
+    if (this.props.onClose) {
+      this.props.onClose(event);
+    }
   };
 
   render() {
     let displayValue = this.props.value;
 
     const items = React.Children.map(this.props.children, child => {
-      const isSelected = child.props.value === this.props.value;
+      const isSelected =
+        child.props.value.toString().toLowerCase() ===
+        this.props.value.toString().toLowerCase();
       if (isSelected) displayValue = child.props.children;
-      const { onClick } = this.props;
+      const { name } = this.props;
       return (
         <SelectItem
           isSelected={isSelected}
           onClick={this.handleChildClick}
           {...child.props}
+          name={name}
         >
           {child.props.children}
         </SelectItem>
@@ -47,6 +69,14 @@ class Select extends Component {
     return (
       <div className={classnames("select", this.props.className)}>
         <div onClick={this.handleClick} className="select__content">
+          <input
+            style={{ display: "none" }}
+            type="text"
+            name={this.props.name}
+            value={this.props.value}
+            onChange={this.handleChange}
+            ref={this.input}
+          />
           <div className="select__value">{displayValue}</div>
           <span className="select__icon">
             <FilterArrowIcon isOpen={Boolean(this.state.anchor)} />
@@ -54,7 +84,7 @@ class Select extends Component {
         </div>
 
         <Popover
-          horizontal="center"
+          horizontal="left"
           noPadding
           anchorEl={this.state.anchor}
           onClose={this.handleClose}
@@ -68,7 +98,7 @@ class Select extends Component {
 
 Select.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  onSelect: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
   className: PropTypes.string
 };
 
