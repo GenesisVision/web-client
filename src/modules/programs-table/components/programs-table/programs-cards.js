@@ -37,7 +37,7 @@ const ProgramsCards = ({
   if (!data) return null;
   return (
     <div className="programs-cards">
-      {data.programs.map(program => (
+      {data.map(program => (
         <ProgramCard program={program} />
       ))}
     </div>
