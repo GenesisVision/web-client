@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import WalletAddFundsConatiner from "modules/wallet-add-funds/wallet-add-funds-container";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
@@ -6,6 +7,18 @@ import * as WalletServices from "../../services/wallet.services";
 import WalletBalance from "./wallet-balance";
 
 class WalletBalanceContainer extends Component {
+  state = {
+    isOpenAddFundsPopup: false
+  };
+
+  handleOpenAddFundsPopup = () => {
+    this.setState({ isOpenAddFundsPopup: true });
+  };
+
+  handleCloseAddFundsPopup = () => {
+    this.setState({ isOpenAddFundsPopup: false });
+  };
+
   componentDidMount() {
     const { service } = this.props;
     service.fetchWalletBalance();
@@ -19,17 +32,23 @@ class WalletBalanceContainer extends Component {
   }
 
   render() {
-    const { walletBalanceData, currency, addFunds, withdraw } = this.props;
+    const { walletBalanceData, currency } = this.props;
 
     if (!walletBalanceData) return null;
 
     return (
-      <WalletBalance
-        walletBalanceData={walletBalanceData}
-        currentCurrency={currency}
-        handleAddFunds={addFunds}
-        handleWithdraw={withdraw}
-      />
+      <Fragment>
+        <WalletBalance
+          walletBalanceData={walletBalanceData}
+          currentCurrency={currency}
+          handleAddFunds={this.handleOpenAddFundsPopup}
+          handleWithdraw={this.withdraw}
+        />
+        <WalletAddFundsConatiner
+          open={this.state.isOpenAddFundsPopup}
+          onClose={this.handleCloseAddFundsPopup}
+        />
+      </Fragment>
     );
   }
 }

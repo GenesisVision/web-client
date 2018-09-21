@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 class WalletWidget extends React.Component {
   state = {
     anchorEl: null,
-    isOpenAddFundsPopup: true
+    isOpenAddFundsPopup: false
   };
   handleOpenDetails = event => {
     this.setState({ anchorEl: event.currentTarget });
