@@ -14,10 +14,7 @@ class Select extends Component {
 
   handleClick = event => {
     this.setState({ anchor: event.currentTarget });
-
-    if (this.props.onOpen) {
-      this.props.onOpen();
-    }
+    this.input.current.focus();
   };
 
   input = React.createRef();
@@ -38,17 +35,25 @@ class Select extends Component {
     this.handleClose(event);
   };
 
-  handleClose = event => {
-    this.setState({ anchor: null });
-
-    if (this.props.onClose) {
-      this.props.onClose(event);
+  handleBlur = event => {
+    if (this.props.onBlur) {
+      this.props.onBlur(event);
     }
+  };
+
+  handleFocus = event => {
+    if (this.props.onFocus) {
+      this.props.onFocus(event);
+    }
+  };
+
+  handleClose = () => {
+    this.setState({ anchor: null });
+    this.input.current.blur();
   };
 
   render() {
     let displayValue = this.props.value;
-
     const items = React.Children.map(this.props.children, child => {
       const isSelected =
         child.props.value.toString().toLowerCase() ===
@@ -70,11 +75,13 @@ class Select extends Component {
       <div className={classnames("select", this.props.className)}>
         <div onClick={this.handleClick} className="select__content">
           <input
-            style={{ display: "none" }}
+            className="select__input--hidden"
             type="text"
             name={this.props.name}
             value={this.props.value}
             onChange={this.handleChange}
+            onBlur={this.handleBlur}
+            onFocus={this.handleFocus}
             ref={this.input}
           />
           <div className="select__value">{displayValue}</div>
@@ -84,6 +91,7 @@ class Select extends Component {
         </div>
 
         <Popover
+          fullWidth={this.props.fullWidthPopover}
           horizontal="left"
           noPadding
           anchorEl={this.state.anchor}
@@ -99,7 +107,10 @@ class Select extends Component {
 Select.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   onChange: PropTypes.func.isRequired,
-  className: PropTypes.string
+  className: PropTypes.string,
+  fullWidthPopover: PropTypes.bool,
+  onFocus: PropTypes.func,
+  onBlur: PropTypes.func
 };
 
 export default Select;

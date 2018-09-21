@@ -1,4 +1,4 @@
-import GVSelectField from "components/gv-select-field/gv-select-field";
+import Select from "components/select/select";
 import { withFormik } from "formik";
 import { GVFormikField, GVTextField } from "gv-react-components";
 import { CURRENCY_VALUES } from "modules/currency-select/currency-select.constants";
@@ -18,7 +18,7 @@ const WalletAddFundsTop = ({ t, values }) => {
         name="currency"
         component={GVTextField}
         label={t("wallet-add-funds.select-currency")}
-        InputComponent={GVSelectField}
+        InputComponent={Select}
       >
         {Object.keys(CURRENCY_VALUES).map(key => {
           return (
