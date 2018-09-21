@@ -2,6 +2,34 @@
   "app": {
     "title": "Investor Portal: "
   },
+  "deposit-program": {
+    "title": "Invest",
+    "available-to-invest": "Available to invest in program",
+    "available-in-wallet": "Available in wallet",
+    "amount": "Amount to invest",
+    "entry-fee": "Entry fee",
+    "period": "Your request will be processed at the end of the reporting period",
+    "confirm": "Confirm",
+    "validation": {
+      "amount-more-than-available": "Amount is more than available in your wallet",
+      "amount-is-required": "Amount is required."
+    }
+  },
+  "withdraw-program": {
+    "title": "Withdraw",
+    "available-to-withdraw": "You invested in program",
+    "amount-to-withdraw": "Amount to withdraw",
+    "next": "Next",
+    "info": "Amount of withdrawals can be changed depending on the exchange rate or the success of the Manager",
+    "withdrawing": "Withdrawing",
+    "payout-date": "Payout date",
+    "back": "Back",
+    "submit": "Submit",
+    "validation": {
+      "amount-more-than-available": "Amount is more than available for withdraw",
+      "amount-is-required": "Amount is required."
+    }
+  },
   "notifications-aside": {
     "header": "Notifications",
     "today": "today",
@@ -10,7 +38,8 @@
   "buttons": {
     "apply": "Apply",
     "cancel": "Cancel",
-    "back": "Back"
+    "back": "Back",
+    "close": "Close"
   },
   "navigation": {
     "dashboard": "Dashboard",

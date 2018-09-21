@@ -3,9 +3,10 @@ import ProgramPeriodPie from "components/program-period/program-period-pie/progr
 import Surface from "components/surface/surface";
 import { GVButton, GVProgramAvatar } from "gv-react-components";
 import FavoriteIcon from "modules/favorite-program/components/favorite-icon/favorite-icon";
+import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import { TableRow } from "modules/table/components";
 import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
-import React from "react";
+import React, { Component } from "react";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import fileService from "shared/services/file-service";
@@ -13,15 +14,27 @@ import replaceParams from "utils/replace-params";
 
 import ProgramBigChart from "../program-big-chart/program-big-chart";
 
-const ProgramTableRowDetailed = ({
-  program,
-  isAuthenticated,
-  toggleFavorite,
-  onCollapseClick
-}) => {
-  const programDetailsUrl = replaceParams(PROGRAM_DETAILS_ROUTE, {
-    ":programId": program.id
-  });
+class ProgramTableRowDetailed extends Component {
+  state = {
+    isOpenInvestToProgramPopup: false
+  };
+  handleOpenInvest = () => {
+    this.setState({ isOpenInvestToProgramPopup: true });
+  };
+  handleCloseInvest = () => {
+    this.setState({ isOpenInvestToProgramPopup: false });
+  };
+  render() {
+    const {
+      program,
+      isAuthenticated,
+      toggleFavorite,
+      onCollapseClick
+    } = this.props;
+
+    const programDetailsUrl = replaceParams(PROGRAM_DETAILS_ROUTE, {
+      ":programId": program.id
+    });
 
   return (
     <TableRow>
