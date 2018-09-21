@@ -32,7 +32,7 @@ class Select extends Component {
 
   handleChange = event => {
     this.props.onChange(event);
-    this.handleClose(event);
+    this.handleClose();
   };
 
   handleBlur = event => {
@@ -91,7 +91,6 @@ class Select extends Component {
         </div>
 
         <Popover
-          fullWidth={this.props.fullWidthPopover}
           horizontal="left"
           noPadding
           anchorEl={this.state.anchor}

@@ -10,12 +10,15 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 class CurrencySelectContainer extends Component {
+  handleChange = event => {
+    this.props.service.updateCurrency(event.target.value);
+  };
   render() {
     return (
       <Select
         className={classnames("currency-select", this.props.className)}
         value={this.props.currency}
-        onSelect={this.props.service.updateCurrency}
+        onChange={this.handleChange}
       >
         {Object.keys(CURRENCY_VALUES).map(currency => {
           return (
