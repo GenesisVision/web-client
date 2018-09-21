@@ -5,6 +5,14 @@ import { CardsIcon } from "../../../components/icon/cards-icon";
 import { TableIcon } from "../../../components/icon/table-icon";
 
 class TableToolbar extends Component {
+  state = {
+    view: "table"
+  };
+  handleIconClick = view => e => {
+    this.setState({ view });
+    this.props.onChange(view);
+  };
+
   render() {
     const { title, renderFilters, updateFilter, filtering } = this.props;
     return (
