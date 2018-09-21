@@ -15,7 +15,7 @@ class CurrencySelectContainer extends Component {
       <Select
         className={classnames("currency-select", this.props.className)}
         value={this.props.currency}
-        onSelect={this.props.service.updateCurrency}
+        onChange={this.props.service.updateCurrency}
       >
         {Object.keys(CURRENCY_VALUES).map(currency => {
           return (
