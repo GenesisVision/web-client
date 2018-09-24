@@ -4,7 +4,6 @@ import notificationsReducer from "pages/app/components/notifications/reducers/no
 import { loadingBarReducer } from "react-redux-loading-bar";
 import { routerReducer } from "react-router-redux";
 import accountSettingsReducer from "reducers/account-settings";
-import paymentInfoReducer from "reducers/payment-info-reducer";
 import { combineReducers } from "redux";
 
 import navigationReducer from "../modules/navigation/reducers/navigation-reducers";
@@ -46,6 +45,5 @@ export default combineReducers({
   notifications: notificationsReducer,
   manager: managerReducer,
   wallet: walletReducer,
-  accountSettings: accountSettingsReducer,
-  paymentInfo: paymentInfoReducer
+  accountSettings: accountSettingsReducer
 });

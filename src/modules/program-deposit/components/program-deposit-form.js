@@ -5,15 +5,11 @@ import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
+import {
+  calculateValueOfEntryFee,
+  convertToCurrency
+} from "utils/currency-converter";
 import { number, object } from "yup";
-
-export const convertToCurrency = (value = 0, rate) => {
-  return value / rate;
-};
-
-export const calculateValueOfEntryFee = (value = 0, percentage) => {
-  return (value * percentage) / 100;
-};
 
 const ProgramDepositForm = ({
   t,

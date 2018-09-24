@@ -1,6 +1,5 @@
 import "./app-layout.scss";
 
-import fetchPaymentInfo from "actions/payment-info-actions";
 import platformActions from "actions/platform-actions";
 import HeaderContainer from "modules/header/components/header-container";
 import NotificationsContainer from "pages/app/components/notifications/components/notifications-container";
@@ -10,7 +9,6 @@ import { connect } from "react-redux";
 class AppLayout extends Component {
   componentDidMount() {
     this.props.fetchPlatformSettings();
-    this.props.fetchPaymentInfo();
   }
 
   render() {
@@ -29,9 +27,7 @@ class AppLayout extends Component {
 export default connect(
   null,
   dispatch => ({
-    fetchPlatformSettings: () =>
-      dispatch(platformActions.fetchPlatformSettings),
-    fetchPaymentInfo: () => dispatch(fetchPaymentInfo())
+    fetchPlatformSettings: () => dispatch(platformActions.fetchPlatformSettings)
   }),
   null,
   { pure: false }
