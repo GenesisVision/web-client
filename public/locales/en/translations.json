@@ -39,7 +39,8 @@
     "apply": "Apply",
     "cancel": "Cancel",
     "back": "Back",
-    "close": "Close"
+    "close": "Close",
+    "confirm": "Confirm"
   },
   "navigation": {
     "dashboard": "Dashboard",
@@ -112,6 +113,14 @@
     "invested-value": "Invested value",
     "available": "Available",
     "details": "Details"
+  },
+  "wallet-withdraw": {
+    "title": "Withdraw",
+    "available": "Available in wallet",
+    "select-currency": "Select a wallet currency",
+    "amount": "Enter correct amount",
+    "will-get": "You'll get",
+    "address": "Withdraw address"
   },
   "profile-widget": {
     "personal-details": "Personal details",

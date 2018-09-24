@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import WalletWithdrawContainer from "modules/wallet-withdraw/wallet-withdraw-container";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
@@ -6,6 +7,15 @@ import * as WalletServices from "../../services/wallet.services";
 import WalletBalance from "./wallet-balance";
 
 class WalletBalanceContainer extends Component {
+  state = {
+    isOpenWithdrawPopup: true
+  };
+  handleOpenWithdrawPopup = () => {
+    this.setState({ isOpenWithdrawPopup: true });
+  };
+  handleCloseWithdrawPopup = () => {
+    this.setState({ isOpenWithdrawPopup: false });
+  };
   componentDidMount() {
     const { service } = this.props;
     service.fetchWalletBalance();
@@ -24,12 +34,18 @@ class WalletBalanceContainer extends Component {
     if (!walletBalanceData) return null;
 
     return (
-      <WalletBalance
-        walletBalanceData={walletBalanceData}
-        currentCurrency={currency}
-        handleAddFunds={addFunds}
-        handleWithdraw={withdraw}
-      />
+      <Fragment>
+        <WalletBalance
+          walletBalanceData={walletBalanceData}
+          currentCurrency={currency}
+          handleAddFunds={addFunds}
+          handleWithdraw={this.handleOpenWithdrawPopup}
+        />
+        <WalletWithdrawContainer
+          open={this.state.isOpenWithdrawPopup}
+          onClose={this.handleCloseWithdrawPopup}
+        />
+      </Fragment>
     );
   }
 }
