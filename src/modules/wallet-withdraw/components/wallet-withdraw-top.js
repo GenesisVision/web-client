@@ -1,13 +1,19 @@
 import Select from "components/select/select";
 import { GVFormikField, GVTextField } from "gv-react-components";
-import { CURRENCY_VALUES } from "modules/currency-select/currency-select.constants";
 import { convertToCurrency } from "modules/program-deposit/components/program-deposit-form";
 import PropTypes from "prop-types";
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 
-const WalletWithdrawTop = ({ t, currency, amount, rate, available }) => {
+const WalletWithdrawTop = ({
+  t,
+  currency,
+  currencies,
+  amount,
+  rate,
+  available
+}) => {
   return (
     <div className="dialog__top">
       <div className="dialog__header">
@@ -38,11 +44,11 @@ const WalletWithdrawTop = ({ t, currency, amount, rate, available }) => {
         label={t("wallet-withdraw.select-currency")}
         InputComponent={Select}
       >
-        {Object.keys(CURRENCY_VALUES).map(key => {
+        {currencies.map(item => {
           return (
-            <option value={key} key={key}>{`${
-              CURRENCY_VALUES[key]
-            } | ${key}`}</option>
+            <option value={item.currency} key={item.currency}>{`${
+              item.description
+            } | ${item.currency}`}</option>
           );
         })}
       </GVFormikField>

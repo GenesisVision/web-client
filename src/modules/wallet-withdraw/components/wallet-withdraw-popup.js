@@ -6,11 +6,12 @@ import WalletWithdrawBottom from "modules/wallet-withdraw/components/wallet-with
 import PropTypes from "prop-types";
 import React from "react";
 
-const WalletWithdrawPopup = ({ values }) => {
+const WalletWithdrawPopup = ({ values, currencies }) => {
   return (
     <form id="wallet-withdraw" className="wallet-withdraw-popup">
       <WalletWithdrawTop
         currency={values.currency}
+        currencies={currencies}
         amount={values.amount}
         rate={2}
         available={100}
