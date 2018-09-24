@@ -1,3 +1,5 @@
+import { FilterType } from "modules/table/helpers/filtering.helpers";
+
 import {
   ASSET_TYPE_FILTER_DEFAULT_VALUE,
   ASSET_TYPE_FILTER_NAME
@@ -6,5 +8,6 @@ import {
 export const composeDefaultAssetTypeFilter = () => ({
   name: ASSET_TYPE_FILTER_NAME,
   composeRequestValue: value => value,
-  defaultValue: ASSET_TYPE_FILTER_DEFAULT_VALUE
+  defaultValue: ASSET_TYPE_FILTER_DEFAULT_VALUE,
+  type: FilterType.general
 });
