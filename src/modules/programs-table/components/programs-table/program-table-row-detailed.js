@@ -59,7 +59,10 @@ class ProgramTableRowDetailed extends Component {
           </div>
           <div className="program-detailed__statistic">
             <div className="program-detailed__chart">
-              <ProgramBigChart data={program.chart} />
+              <ProgramBigChart
+                data={program.chart}
+                currency={program.currency}
+              />
             </div>
             <div className="program-detailed__statistic-data">
               <div style={{ padding: "0 1rem" }}>

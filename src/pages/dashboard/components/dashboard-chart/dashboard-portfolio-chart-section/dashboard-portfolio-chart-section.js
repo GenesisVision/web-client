@@ -1,6 +1,6 @@
 import "./dashboard-portfolio-chart-section.scss";
 
-import ChartPeriod from "components/chart-period/chart-period";
+import ChartPeriod from "components/chart/chart-period/chart-period";
 import moment from "moment";
 import React, { Component } from "react";
 

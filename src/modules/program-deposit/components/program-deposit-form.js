@@ -7,11 +7,11 @@ import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import { number, object } from "yup";
 
-const convertToCurrency = (value = 0, rate) => {
+export const convertToCurrency = (value = 0, rate) => {
   return value / rate;
 };
 
-const calculateValueOfEntryFee = (value = 0, percentage) => {
+export const calculateValueOfEntryFee = (value = 0, percentage) => {
   return (value * percentage) / 100;
 };
 
@@ -61,14 +61,16 @@ const ProgramDepositForm = ({
       </span>
     </div>
     <div className="form-error">{errorMessage}</div>
-    <GVButton
-      type="submit"
-      id="signUpFormSubmit"
-      className="invest-form__submit-button"
-      disabled={disabled}
-    >
-      {t("deposit-program.confirm")}
-    </GVButton>
+    <div className="dialog__buttons">
+      <GVButton
+        type="submit"
+        id="signUpFormSubmit"
+        className="invest-form__submit-button"
+        disabled={disabled}
+      >
+        {t("deposit-program.confirm")}
+      </GVButton>
+    </div>
     <div className="invest-popup__period-ends">
       {`${t("deposit-program.period")} ${moment(info.periodEnds).format(
         "DD.MM.YYYY, HH:mm"
