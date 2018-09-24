@@ -2,6 +2,8 @@
 @import "styles/_breakpoint.scss";
 
 .wallet-transactions {
+  margin-top: 80px;
+
   &__row:nth-child(2n + 1) {
     background-color: $table-background-subcolor;
   }
@@ -68,8 +70,4 @@
       flex-direction: row;
     }
   }
-}
-
-.wallet-transactions-container {
-  margin-top: 80px;
 }

@@ -24,7 +24,7 @@ import {
 } from "./wallet-transactions.constants";
 
 const WalletTransactions = ({ t }) => (
-  <Surface className="wallet-transactions-container">
+  <Surface className="wallet-transactions">
     <TableModule
       title="Transactions"
       defaultFilters={WALLET_TRANSACTIONS_FILTERS}
