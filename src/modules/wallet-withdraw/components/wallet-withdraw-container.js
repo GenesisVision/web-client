@@ -1,5 +1,4 @@
-import "./wallet-withdraw-popup.scss";
-
+import WalletWithdrawConfirm from "modules/wallet-withdraw/components/wallet-withdraw-confirm";
 import WalletWithdrawForm from "modules/wallet-withdraw/components/wallet-withdraw-form";
 import {
   fetchPaymentInfo,
@@ -7,11 +6,12 @@ import {
 } from "modules/wallet-withdraw/services/wallet-withdraw.services";
 import React, { Component } from "react";
 
-class WalletWithdrawPopup extends Component {
+class WalletWithdrawContainer extends Component {
   state = {
     isPending: false,
     data: null,
-    errorMessage: null
+    errorMessage: null,
+    success: false
   };
 
   componentDidMount() {
@@ -22,25 +22,18 @@ class WalletWithdrawPopup extends Component {
   handleSubmit = values => {
     this.setState({ isPending: true });
     newWithdrawRequest(values).then(data =>
-      this.setState(state => {
-        return {
-          ...state,
-          ...data,
-          data: {
-            ...state.data,
-            ...data.data
-          }
-        };
-      })
+      this.setState({ ...data, success: !data.errorMessage })
     );
   };
 
   render() {
     if (!this.state.data) return null;
-    const { isPending, data, errorMessage } = this.state;
+    const { isPending, data, errorMessage, success } = this.state;
     const { wallets, availableToWithdrawal } = data;
 
-    return (
+    return success ? (
+      <WalletWithdrawConfirm />
+    ) : (
       <WalletWithdrawForm
         availableToWithdrawal={availableToWithdrawal}
         wallets={wallets}
@@ -52,6 +45,6 @@ class WalletWithdrawPopup extends Component {
   }
 }
 
-WalletWithdrawPopup.propTypes = {};
+WalletWithdrawContainer.propTypes = {};
 
-export default WalletWithdrawPopup;
+export default WalletWithdrawContainer;

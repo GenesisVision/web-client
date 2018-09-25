@@ -1,4 +1,4 @@
-import WalletWithdrawContainer from "modules/wallet-withdraw/wallet-withdraw-container";
+import WalletWithdrawPopup from "modules/wallet-withdraw/wallet-withdraw-popup";
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -41,7 +41,7 @@ class WalletBalanceContainer extends Component {
           handleAddFunds={addFunds}
           handleWithdraw={this.handleOpenWithdrawPopup}
         />
-        <WalletWithdrawContainer
+        <WalletWithdrawPopup
           open={this.state.isOpenWithdrawPopup}
           onClose={this.handleCloseWithdrawPopup}
         />

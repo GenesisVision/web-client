@@ -1,3 +1,5 @@
+import "./wallet-withdraw-form.scss";
+
 import Select from "components/select/select";
 import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";

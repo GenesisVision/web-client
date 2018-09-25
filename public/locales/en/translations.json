@@ -124,6 +124,7 @@
     "fee": "Fee",
     "withdrawing": "Withdrawing",
     "info": "Amount of withdrawals can be changed depending on the exchange rate.",
+    "success": "Please approve the withdrawal request via the link in the confirmation email.",
     "validation": {
       "amount-more-than-available": "Amount is more than available in your wallet",
       "amount-is-required": "Amount is required",
