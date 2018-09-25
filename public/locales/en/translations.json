@@ -127,7 +127,7 @@
     "minute_plural": "minutes",
     "second": "second",
     "second_plural": "seconds",
-    "end-less-than-now": "The period is being restarted.",
+    "period-is-over": "The period is over.",
     "time-left": "Time left"
   },
   "program-statuses": {
@@ -214,12 +214,12 @@
       "balance": "Balance",
       "investors": "Investors",
       "trades": "Trades",
-      "succesTrades": "Succes trades",
-      "profitFactor": "Profit factor",
-      "sharpeRatio": "Sharpe Ratio",
-      "maxDrawdown": "Max Drawdown",
-      "startDay": "Start day",
-      "periodEnd": "Period end",
+      "success-trades": "Success trades",
+      "profit-factor": "Profit factor",
+      "sharpe-ratio": "Sharpe ratio",
+      "max-drawdown": "Max Drawdown",
+      "start-day": "Start day",
+      "period-end": "Period end",
       "period": "Period"
     },
     "history": {

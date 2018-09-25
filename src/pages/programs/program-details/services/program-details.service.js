@@ -7,7 +7,7 @@ import getParams from "utils/get-params";
 import * as actions from "../actions/program-details.actions";
 import { tradesResponseMock } from "./trades-response-mock.js";
 
-export const getProgramDetails = () => (dispatch, getState) => {
+export const getProgramDescription = () => (dispatch, getState) => {
   const authorization = authService.getAuthArg();
   const { routing } = getState();
 
@@ -19,19 +19,29 @@ export const getProgramDetails = () => (dispatch, getState) => {
   return programsApiProxy.v10ProgramsByIdGet(programId, { authorization });
 };
 
-// export const fetchProgramDetails = () => (dispatch, getState) => {
-//   const authorization = authService.getAuthArg();
-//   const { routing } = getState();
+export const getChartAndEndHistory = () => (dispatch, getState) => {
+  const authorization = authService.getAuthArg();
+  const { routing } = getState();
 
-//   const { programId } = getParams(
-//     routing.location.pathname,
-//     PROGRAM_DETAILS_ROUTE
-//   );
+  const { programId } = getParams(
+    routing.location.pathname,
+    PROGRAM_DETAILS_ROUTE
+  );
+  // return programsApiProxy.v10ProgramsByIdChartGet(programId, {
+  //   // dateFrom,
+  //   // dateTo,
+  //   // maxPointCount
+  // });
+  return Promise.all([
+    programsApiProxy.v10ProgramsByIdChartGet(programId, {
+      // dateFrom,
+      // dateTo,
+      // maxPointCount
+    })
+  ]);
+};
 
-//   dispatch(actions.fetchProgramDetails({ programId, opts: { authorization } }));
-// };
-
-export const fetchProgramChart = ({ dateFrom, dateTo, maxPointCount }) => (
+export const getProgramChart = ({ dateFrom, dateTo, maxPointCount }) => (
   dispatch,
   getState
 ) => {

@@ -8,28 +8,49 @@ import { goBack } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
 
 import NotFoundPage from "../../not-found/not-found.routes";
-import ProgramDetailsChartContainer from "./components/program-details-chart/program-details-chart-container";
 import ProgramDetailsDescriptionSection from "./components/program-details-description/program-details-description-section";
 import ProgramDetailsNavigation from "./components/program-details-description/program-details-navigation/program-details-navigation";
 import ProgramDetailsHistoryContainer from "./components/program-details-history/program-details-history-container";
-import { getProgramDetails } from "./services/program-details.service";
+import ProgramDetailsStatisticSection from "./components/program-details-statistic-section/program-details-statistic-section";
+import {
+  getChartAndEndHistory,
+  getProgramDescription
+} from "./services/program-details.service";
 
 class ProgramDetailsPage extends PureComponent {
   state = {
-    errorCode: null
+    errorCode: null,
+    isPending: false
   };
 
   constructor(props) {
     super(props);
-    this.description = { data: null, isPending: false };
+    this.description = { data: null, isPending: true };
+    this.chart = { data: null, isPending: true };
   }
+
   componentDidMount() {
     const { service } = this.props;
     this.setState({ isPending: true });
-    service.getProgramDetails().then(data => {
-      this.description = data;
-      this.setState({ errorCode: data.code });
-    });
+    service
+      .getProgramDescription()
+      .then(data => {
+        this.description = data;
+        const errorCode = data.code;
+        this.setState({ errorCode, isPending: false });
+        if (errorCode) {
+          throw new Error(errorCode);
+        }
+      })
+      .then(() => {
+        this.setState({ isPending: true });
+        return service.getChartAndEndHistory();
+      })
+      .then(values => {
+        this.chart = values[0];
+        this.setState({ isPending: false });
+      })
+      .catch();
   }
   render() {
     const { t, service } = this.props;
@@ -41,16 +62,16 @@ class ProgramDetailsPage extends PureComponent {
     return (
       <Page title={t("program-details-page.title")}>
         <div className="program-details">
-          <div className="program-details__description">
+          <div className="program-details__section">
             <ProgramDetailsNavigation goBack={service.goBack} />
             <ProgramDetailsDescriptionSection
               programDetailsData={this.description}
             />
           </div>
-          {/* <div className="program-details__chart">
-            <ProgramDetailsChartContainer />
+          <div className="program-details__section">
+            <ProgramDetailsStatisticSection chartData={this.chart} />
           </div>
-          <div className="program-details__history">
+          {/*<div className="program-details__history">
             <ProgramDetailsHistoryContainer />
           </div> */}
         </div>
@@ -60,7 +81,10 @@ class ProgramDetailsPage extends PureComponent {
 }
 
 const mapDispatchToProps = dispatch => ({
-  service: bindActionCreators({ getProgramDetails, goBack }, dispatch)
+  service: bindActionCreators(
+    { getProgramDescription, getChartAndEndHistory, goBack },
+    dispatch
+  )
 });
 
 export default compose(
