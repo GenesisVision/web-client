@@ -1,21 +1,16 @@
 .invest-popup {
-  &__period-ends {
-    margin-top: 35px;
-    font-size: 11px;
-    opacity: 0.5;
-    line-height: 1.64rem;
-  }
-
   &__currency {
     font-size: 12px;
     opacity: 0.5;
     margin-bottom: 30px;
+    letter-spacing: 0.4px;
   }
 
   &__entry {
     font-size: 14px;
     opacity: 0.5;
     margin-bottom: 44px;
+    letter-spacing: 0.5px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
