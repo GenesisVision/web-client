@@ -8,7 +8,7 @@ import WalletBalance from "./wallet-balance";
 
 class WalletBalanceContainer extends Component {
   state = {
-    isOpenWithdrawPopup: true
+    isOpenWithdrawPopup: false
   };
   handleOpenWithdrawPopup = () => {
     this.setState({ isOpenWithdrawPopup: true });
