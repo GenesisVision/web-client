@@ -105,7 +105,20 @@
     "invested-value": "Invested value",
     "available": "Available",
     "add-funds": "Add funds",
-    "withdraw": "Withdraw"
+    "withdraw": "Withdraw",
+    "transactions": {
+      "date": "Date",
+      "type": "Type",
+      "amount": "Amount"
+    },
+    "transactions-types": {
+      "wallet": "Wallet",
+      "program": "Program",
+      "fund": "Fund",
+      "program-request": "Program request",
+      "withdrawal-request": "Withdrawal request",
+      "payment-transaction": "Payment transaction"
+    }
   },
   "wallet-widget": {
     "total-balance": "Total balance",
