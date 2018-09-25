@@ -1,0 +1,10 @@
+.wallet-withdraw {
+  &__field {
+    &:before {
+      content: none;
+    }
+    &:after {
+      content: none;
+    }
+  }
+}

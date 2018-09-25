@@ -3,13 +3,13 @@ import Select from "components/select/select";
 import copy from "copy-to-clipboard";
 import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
-import { convertToCurrency } from "modules/program-deposit/components/program-deposit-form";
 import PropTypes from "prop-types";
 import QRCode from "qrcode.react";
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
+import { convertToCurrency } from "utils/currency-converter";
 
 const WalletAddFundsForm = ({ t, values, wallets }) => {
   const selected = wallets.find(w => w.currency === values.currency);

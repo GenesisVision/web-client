@@ -1,0 +1,186 @@
+import "./wallet-withdraw-form.scss";
+
+import Select from "components/select/select";
+import { withFormik } from "formik";
+import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
+import PropTypes from "prop-types";
+import React from "react";
+import { translate } from "react-i18next";
+import NumberFormat from "react-number-format";
+import { compose } from "redux";
+import {
+  convertFromCurrency,
+  convertToCurrency
+} from "utils/currency-converter";
+import { number, object, string } from "yup";
+
+const WalletWithdrawForm = ({
+  t,
+  handleSubmit,
+  availableToWithdrawal,
+  wallets,
+  values,
+  disabled,
+  errorMessage
+}) => {
+  const { currency, amount } = values;
+  const { commission, rateToGvt } = wallets.find(
+    wallet => wallet.currency === currency
+  );
+
+  const willGet = convertFromCurrency(amount, rateToGvt);
+  const withdrawing =
+    parseFloat(amount) + convertToCurrency(commission, rateToGvt);
+  return (
+    <form
+      id="wallet-withdraw"
+      className="wallet-withdraw-popup"
+      onSubmit={handleSubmit}
+      noValidate
+    >
+      <div className="dialog__top">
+        <div className="dialog__header">
+          <h2>{t("wallet-withdraw.title")}</h2>
+        </div>
+        <div className="gv-text-field__wrapper">
+          <label className="gv-text-field__label gv-text-field__label--shrink">
+            {t("wallet-withdraw.available")}
+          </label>
+          <div className="gv-text-field wallet-withdraw__field">
+            <div className="gv-text-field__input dialog-field__value">
+              {availableToWithdrawal} GVT
+            </div>
+          </div>
+        </div>
+        <GVFormikField
+          name="currency"
+          component={GVTextField}
+          label={t("wallet-withdraw.select-currency")}
+          InputComponent={Select}
+        >
+          {wallets.map(wallet => {
+            return (
+              <option value={wallet.currency} key={wallet.currency}>{`${
+                wallet.description
+              } | ${wallet.currency}`}</option>
+            );
+          })}
+        </GVFormikField>
+      </div>
+      <div className="dialog__bottom">
+        <GVFormikField
+          name="amount"
+          label={t("wallet-withdraw.amount")}
+          component={GVTextField}
+          adornment="GVT"
+          autoComplete="off"
+          InputComponent={NumberFormat}
+          allowNegative={false}
+        />
+        <GVFormikField
+          name="address"
+          label={t("wallet-withdraw.address")}
+          component={GVTextField}
+          autoComplete="off"
+        />
+        <ul className="dialog-list">
+          <li className="dialog-list__item">
+            <span className="dialog-list__title">
+              {t("wallet-withdraw.will-get")}
+            </span>
+            <span className="dialog-list__value">
+              <NumberFormat
+                value={willGet}
+                suffix={` ${currency}`}
+                decimalScale={8}
+                displayType="text"
+              />
+            </span>
+          </li>
+          <li className="dialog-list__item">
+            <span className="dialog-list__title">
+              {t("wallet-withdraw.fee")}
+            </span>
+            <span className="dialog-list__value">
+              <NumberFormat
+                value={commission}
+                suffix={` ${currency}`}
+                decimalScale={8}
+                displayType="text"
+              />
+            </span>
+          </li>
+          <li className="dialog-list__item">
+            <span className="dialog-list__title">
+              {t("wallet-withdraw.withdrawing")}
+            </span>
+            <span className="dialog-list__value">
+              <NumberFormat
+                value={withdrawing}
+                suffix={` GVT`}
+                decimalScale={8}
+                displayType="text"
+              />
+            </span>
+          </li>
+        </ul>
+        <div className="form-error">{errorMessage}</div>
+        <div className="dialog__buttons">
+          <GVButton
+            type="submit"
+            variant="contained"
+            color="primary"
+            disabled={disabled}
+          >
+            {t("buttons.confirm")}
+          </GVButton>
+        </div>
+        <div className="dialog__info">{t("wallet-withdraw.info")}</div>
+      </div>
+    </form>
+  );
+};
+
+WalletWithdrawForm.propTypes = {
+  availableToWithdrawal: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]),
+  wallets: PropTypes.arrayOf(
+    PropTypes.shape({
+      commission: PropTypes.number,
+      currency: PropTypes.string,
+      description: PropTypes.string,
+      logo: PropTypes.string,
+      rateToGvt: PropTypes.number
+    })
+  ),
+  disabled: PropTypes.bool,
+  errorMessage: PropTypes.string,
+  onSubmit: PropTypes.func
+};
+
+export default compose(
+  translate(),
+  withFormik({
+    displayName: "wallet-withdraw",
+    mapPropsToValues: () => ({
+      amount: "",
+      currency: "BTC",
+      address: ""
+    }),
+    validationSchema: ({ t, availableToWithdrawal }) =>
+      object().shape({
+        amount: number()
+          .lessThan(
+            availableToWithdrawal,
+            t("wallet-withdraw.validation.amount-more-than-available")
+          )
+          .required(t("wallet-withdraw.validation.amount-is-required")),
+        address: string().required(
+          t("wallet-withdraw.validation.address-is-required")
+        )
+      }),
+    handleSubmit: (values, { props }) => props.onSubmit(values)
+  })
+)(WalletWithdrawForm);
