@@ -17,7 +17,7 @@ const withApiProxy = api => {
           .catch(ex => {
             return {
               isPending: false,
-              errorMessage: handleErrorMessage(ex.response)
+              ...handleErrorMessage(ex.response)
             };
           });
       };

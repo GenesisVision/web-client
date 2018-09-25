@@ -235,6 +235,10 @@
       }
     }
   },
+  "not-found-page": {
+    "title": "Page Not Found",
+    "body": "Page Not Found"
+  },
   "program-actions": {
     "invest": "Invest",
     "withdraw": "Withdraw"

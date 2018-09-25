@@ -4,10 +4,13 @@ import { RingIcon } from "components/icon/icon";
 import { GVButton, GVProgramAvatar } from "gv-react-components";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
+import { toggleReinvesting } from "modules/program-reinvesting/services/program-reinvesting.service";
 import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
+import { MANAGER_DETAILS_ROUTE } from "pages/manager/manager.page";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
+import replaceParams from "utils/replace-params";
 
 import ProgramDetailsInvestment from "./program-details-investment/program-details-investment";
 
@@ -34,21 +37,28 @@ class ProgramDetailsDescription extends Component {
     isOpenInvestToProgramPopup: false,
     isOpenWithdrawToProgramPopup: false
   };
+
+  handleOnReinvestingClick = () => {
+    const programId = this.props.programDetails.id;
+    toggleReinvesting(programId);
+  };
+
   handleOpenInvestPopup = () => {
     this.setState({ isOpenInvestToProgramPopup: true });
   };
+
   handleOpenWithdrawPopup = () => {
     this.setState({ isOpenWithdrawToProgramPopup: true });
   };
+
+  composeManagerUrl = managerId => {
+    return replaceParams(MANAGER_DETAILS_ROUTE, {
+      ":managerId": managerId
+    });
+  };
+
   render() {
-    const {
-      t,
-      programAuthorUrl,
-      toggleReinvesting,
-      programWithdrawUrl,
-      programDetails,
-      programId
-    } = this.props;
+    const { t, programDetails } = this.props;
     return (
       <div className="program-details-description">
         <div className="program-details-description__left">
@@ -63,7 +73,7 @@ class ProgramDetailsDescription extends Component {
           <h1 className="program-details-description__heading">
             {programDetails.title}
           </h1>
-          <Link to={programAuthorUrl}>
+          <Link to={this.composeManagerUrl(programDetails.manager.id)}>
             <GVButton
               variant="text"
               className="program-details-description__author-btn"
@@ -116,14 +126,14 @@ class ProgramDetailsDescription extends Component {
             </GVButton>
             <ProgramDepositContainer
               open={this.state.isOpenInvestToProgramPopup}
-              id={programId}
+              id={programDetails.id}
               onClose={() =>
                 this.setState({ isOpenInvestToProgramPopup: false })
               }
             />
             <ProgramWithdrawContainer
               open={this.state.isOpenWithdrawToProgramPopup}
-              id={programId}
+              id={programDetails.id}
               onClose={() =>
                 this.setState({ isOpenWithdrawToProgramPopup: false })
               }
@@ -132,7 +142,7 @@ class ProgramDetailsDescription extends Component {
               programDetails.personalProgramDetails.isInvested && (
                 <ProgramReinvestingWidget
                   className="program-details-description__reinvest"
-                  toggleReinvesting={toggleReinvesting}
+                  toggleReinvesting={this.handleOnReinvestingClick}
                   isReinvesting={programDetails.isReinvesting}
                 />
               )}
@@ -142,7 +152,6 @@ class ProgramDetailsDescription extends Component {
               <ProgramDetailsInvestment
                 className={"program-details-description__your-investment"}
                 {...getInvestmentData(programDetails)}
-                programWithdrawUrl={programWithdrawUrl}
               />
             )}
         </div>
