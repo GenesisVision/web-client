@@ -5,7 +5,7 @@ import Chip from "components/chip/chip";
 import { ArrowIcon } from "components/icon/icon";
 import { WalletIcon } from "components/icon/wallet-icon";
 import Popover from "components/popover/popover";
-import WalletAddFundsConatiner from "modules/wallet-add-funds/wallet-add-funds-container";
+import WalletAddFundsPopup from "modules/wallet-add-funds/wallet-add-funds-popup";
 import { WALLET_PAGE_ROUTE } from "pages/wallet/wallet-page";
 import PropTypes from "prop-types";
 import React, { Fragment } from "react";
@@ -53,7 +53,7 @@ class WalletWidget extends React.Component {
             </Chip>
           </div>
         </div>
-        <WalletAddFundsConatiner
+        <WalletAddFundsPopup
           onClose={this.handleClodsAddFundsPopup}
           open={this.state.isOpenAddFundsPopup}
         />
