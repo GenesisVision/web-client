@@ -1,16 +1,14 @@
+import Page from "components/page/page";
 import PropTypes from "prop-types";
 import React from "react";
+import { translate } from "react-i18next";
 
 export const PROFILE_ROUTE = "/profile";
 
-const ProfilePage = props => {
-  return (
-    <div>
-      <h1>Profile</h1>
-    </div>
-  );
+const ProfilePage = ({ t }) => {
+  return <Page title={t("profile.title")} />;
 };
 
 ProfilePage.propTypes = {};
 
-export default ProfilePage;
+export default translate()(ProfilePage);

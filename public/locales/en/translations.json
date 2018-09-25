@@ -51,6 +51,9 @@
     "logout": "Log out",
     "login": "Login"
   },
+  "settings": {
+    "title": "Settings"
+  },
   "auth": {
     "text": "A Brief History Of Creation",
     "tabs": {
