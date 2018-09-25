@@ -98,6 +98,8 @@
     p {
       font-size: 13px;
       font-weight: 300;
+      letter-spacing: 0.4px;
+      color: #e8eff3;
     }
   }
 
@@ -109,10 +111,12 @@
       font-size: 13px;
       opacity: 0.5;
       margin-bottom: 12px;
+      letter-spacing: 0.4px;
     }
 
     &__value {
       font-size: 24px;
+      letter-spacing: 0.8px;
     }
   }
 
