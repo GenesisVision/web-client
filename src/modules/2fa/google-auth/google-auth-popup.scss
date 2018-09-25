@@ -1,5 +1,7 @@
 .google-auth {
-  max-width: calc(360px * 3);
+  &.dialog {
+    max-width: calc(360px * 3);
+  }
 
   &__steps {
     display: flex;
