@@ -85,7 +85,9 @@ const WalletWithdrawForm = ({
         />
         <ul className="dialog-list">
           <li className="dialog-list__item">
-            {t("wallet-withdraw.will-get")}
+            <span className="dialog-list__title">
+              {t("wallet-withdraw.will-get")}
+            </span>
             <span className="dialog-list__value">
               <NumberFormat
                 value={willGet}
@@ -96,7 +98,9 @@ const WalletWithdrawForm = ({
             </span>
           </li>
           <li className="dialog-list__item">
-            {t("wallet-withdraw.fee")}
+            <span className="dialog-list__title">
+              {t("wallet-withdraw.fee")}
+            </span>
             <span className="dialog-list__value">
               <NumberFormat
                 value={commission}
@@ -107,7 +111,9 @@ const WalletWithdrawForm = ({
             </span>
           </li>
           <li className="dialog-list__item">
-            {t("wallet-withdraw.withdrawing")}
+            <span className="dialog-list__title">
+              {t("wallet-withdraw.withdrawing")}
+            </span>
             <span className="dialog-list__value">
               <NumberFormat
                 value={withdrawing}

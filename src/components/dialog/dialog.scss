@@ -19,24 +19,32 @@
     &__item {
       font-size: 14px;
       font-weight: 300;
-      opacity: 0.5;
       margin-bottom: 14px;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
+      letter-spacing: 0.5px;
 
       &:last-child {
         margin-bottom: 44px;
       }
     }
+
+    &__title {
+      opacity: 0.5;
+    }
+
+    &__value {
+      opacity: 1;
+    }
   }
 
   &__info {
     margin-top: 35px;
-    font-size: 11px;
     opacity: 0.5;
-    line-height: 1.64rem;
-    letter-spacing: 0.3px;
+    font-size: 11px;
+    line-height: 1.64;
+    letter-spacing: 0.2px;
   }
 
   &__top,
