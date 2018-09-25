@@ -1,0 +1,13 @@
+.google-auth {
+  max-width: calc(360px * 3);
+
+  &__steps {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__step {
+    width: 277px;
+    padding: 29px 28px;
+  }
+}
