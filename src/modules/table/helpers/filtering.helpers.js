@@ -47,6 +47,8 @@ const processFilterValue = filter => {
       }
       break;
     case FilterType.general:
+      requestValue = { [filter.name]: filter.value };
+      break;
     default:
       if (filter.value !== undefined) {
         requestValue = filter.value;

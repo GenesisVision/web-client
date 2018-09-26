@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 
-import TableFilters from "./table-filters";
-
 class TableToolbar extends Component {
   render() {
     const { title, renderFilters, updateFilter, filtering } = this.props;

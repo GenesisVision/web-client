@@ -1,5 +1,3 @@
-import { fetchWithdrawInfoById } from "modules/program-withdraw/actions/program-withdraw.actions";
-import { FETCH_WITHDRAW_PROGRAM_INFO } from "modules/program-withdraw/program-withdraw-constants";
 import { investorApiProxy } from "services/api-client/investor-api";
 import authService from "services/auth-service";
 

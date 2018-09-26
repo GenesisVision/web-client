@@ -10,40 +10,41 @@ import { translate } from "react-i18next";
 
 import ProgramPeriodTooltip from "../program-period-tooltip/program-period-tooltip";
 
-const ProgramPeriodPie = ({ t, start, end, className }) => {
+const renderDurationText = (t, start, end) => {
   const dateStart = moment(start);
   const dateEnd = moment(end);
-
-  const renderDurationText = () => {
-    const daysDuration = dateEnd.diff(dateStart, "days");
-    if (daysDuration > 0)
-      return `${daysDuration} ${t("program-period.day", {
-        count: daysDuration
-      })}`;
-
-    const hoursDuration = dateEnd.diff(dateStart, "hours");
-    if (hoursDuration > 0)
-      return `${hoursDuration} ${t("program-period.hour", {
-        count: hoursDuration
-      })}`;
-
-    const minutesDuration = dateEnd.diff(dateStart, "minutes");
-    if (minutesDuration > 0)
-      return `${minutesDuration} ${t("program-period.minute", {
-        count: minutesDuration
-      })}`;
-
-    const secondsDuration = dateEnd.diff(dateStart, "seconds");
-    return `${secondsDuration} ${t("program-period.second", {
-      count: secondsDuration
+  const daysDuration = dateEnd.diff(dateStart, "days");
+  if (daysDuration > 0)
+    return `${daysDuration} ${t("program-period.day", {
+      count: daysDuration
     })}`;
-  };
 
+  const hoursDuration = dateEnd.diff(dateStart, "hours");
+  if (hoursDuration > 0)
+    return `${hoursDuration} ${t("program-period.hour", {
+      count: hoursDuration
+    })}`;
+
+  const minutesDuration = dateEnd.diff(dateStart, "minutes");
+  if (minutesDuration > 0)
+    return `${minutesDuration} ${t("program-period.minute", {
+      count: minutesDuration
+    })}`;
+
+  const secondsDuration = dateEnd.diff(dateStart, "seconds");
+  return `${secondsDuration} ${t("program-period.second", {
+    count: secondsDuration
+  })}`;
+};
+
+const ProgramPeriodPie = ({ t, start, end, className }) => {
   return (
     <Tooltip render={() => <ProgramPeriodTooltip start={start} end={end} />}>
       <div className={classnames("program-period-pie", className)}>
-        <GVProgramPeriod start={start} end={end} />
-        <div className="program-period-pie__text">{renderDurationText()}</div>
+        <GVProgramPeriod start={start} end={end} value={new Date()} />
+        <div className="program-period-pie__text">
+          {renderDurationText(t, start, end)}
+        </div>
       </div>
     </Tooltip>
   );

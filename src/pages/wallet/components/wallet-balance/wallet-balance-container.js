@@ -1,4 +1,6 @@
-import React, { Component } from "react";
+import WalletAddFundsPopup from "modules/wallet-add-funds/wallet-add-funds-popup";
+import WalletWithdrawPopup from "modules/wallet-withdraw/wallet-withdraw-popup";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
@@ -6,6 +8,27 @@ import * as WalletServices from "../../services/wallet.services";
 import WalletBalance from "./wallet-balance";
 
 class WalletBalanceContainer extends Component {
+  state = {
+    isOpenAddFundsPopup: false,
+    isOpenWithdrawPopup: false
+  };
+
+  handleOpenAddFundsPopup = () => {
+    this.setState({ isOpenAddFundsPopup: true });
+  };
+
+  handleCloseAddFundsPopup = () => {
+    this.setState({ isOpenAddFundsPopup: false });
+  };
+
+  handleOpenWithdrawPopup = () => {
+    this.setState({ isOpenWithdrawPopup: true });
+  };
+
+  handleCloseWithdrawPopup = () => {
+    this.setState({ isOpenWithdrawPopup: false });
+  };
+
   componentDidMount() {
     const { service } = this.props;
     service.fetchWalletBalance();
@@ -19,17 +42,27 @@ class WalletBalanceContainer extends Component {
   }
 
   render() {
-    const { walletBalanceData, currency, addFunds, withdraw } = this.props;
+    const { walletBalanceData, currency } = this.props;
 
     if (!walletBalanceData) return null;
 
     return (
-      <WalletBalance
-        walletBalanceData={walletBalanceData}
-        currentCurrency={currency}
-        handleAddFunds={addFunds}
-        handleWithdraw={withdraw}
-      />
+      <Fragment>
+        <WalletBalance
+          walletBalanceData={walletBalanceData}
+          currentCurrency={currency}
+          handleAddFunds={this.handleOpenAddFundsPopup}
+          handleWithdraw={this.handleOpenWithdrawPopup}
+        />
+        <WalletAddFundsPopup
+          open={this.state.isOpenAddFundsPopup}
+          onClose={this.handleCloseAddFundsPopup}
+        />
+        <WalletWithdrawPopup
+          open={this.state.isOpenWithdrawPopup}
+          onClose={this.handleCloseWithdrawPopup}
+        />
+      </Fragment>
     );
   }
 }

@@ -3,7 +3,6 @@ import "./notifications.scss";
 import Chip from "components/chip/chip";
 import { ControlsIcon } from "components/icon/icon";
 import { RingIcon } from "components/icon/ring-icon";
-import { groupBy } from "lodash/collection";
 import moment from "moment";
 import NotificationsGroup from "pages/app/components/notifications/components/notification-group/notification-group";
 import { notificationProps } from "pages/app/components/notifications/components/notification/notification";

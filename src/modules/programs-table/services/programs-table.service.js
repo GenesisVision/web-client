@@ -37,9 +37,12 @@ const composeRequestFilters = () => (dispatch, getState) => {
   let itemsOnPage = 10;
   const existingFilters = dispatch(getProgramsFilters());
   let { page } = existingFilters;
-  let filters = {};
 
   const { routing } = getState();
+  const { currency } = getState().accountSettings;
+
+  let filters = { currencySecondary: currency };
+
   const { tab } = getParams(routing.location.pathname, PROGRAMS_TAB_ROUTE);
   if (tab === PROGRAMS_FAVORITES_TAB_NAME) {
     filters.isFavorite = true;
