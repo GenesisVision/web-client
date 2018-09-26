@@ -128,7 +128,8 @@
     "second": "second",
     "second_plural": "seconds",
     "period-is-over": "The period is over.",
-    "time-left": "Time left"
+    "time-left": "Time left",
+    "left": "left"
   },
   "program-statuses": {
     "Active": "Active",
