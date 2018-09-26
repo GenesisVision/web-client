@@ -5,37 +5,39 @@ import { GVButton, GVProgramAvatar } from "gv-react-components";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
 import { toggleReinvesting } from "modules/program-reinvesting/services/program-reinvesting.service";
-import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
 import { MANAGER_DETAILS_ROUTE } from "pages/manager/manager.page";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
+import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import replaceParams from "utils/replace-params";
 
 import ProgramDetailsInvestment from "./program-details-investment/program-details-investment";
 
 const getInvestmentData = programDetails => {
-  let {
+  const { statistic, personalProgramDetails } = programDetails;
+
+  const {
     investedAmount,
     investedCurrency,
     balanceBase,
     profitPercent
-  } = programDetails.statistic;
+  } = statistic;
 
   return {
-    invested: investedAmount + " " + investedCurrency,
-    value: balanceBase.amount + " " + balanceBase.currency,
-    profit: profitPercent + " %",
-    status:
-      programDetails.personalProgramDetails &&
-      programDetails.personalProgramDetails.investmentProgramStatus
+    programId: programDetails.id,
+    investedAmount,
+    investedCurrency,
+    balanceAmount: balanceBase.amount,
+    balanceCurrency: balanceBase.currency,
+    profitPercent,
+    status: personalProgramDetails.investmentProgramStatus
   };
 };
 
-class ProgramDetailsDescription extends Component {
+class ProgramDetailsDescriptionSection extends Component {
   state = {
-    isOpenInvestToProgramPopup: false,
-    isOpenWithdrawToProgramPopup: false
+    isOpenInvestmentPopup: false
   };
 
   handleOnReinvestingClick = () => {
@@ -43,12 +45,8 @@ class ProgramDetailsDescription extends Component {
     toggleReinvesting(programId);
   };
 
-  handleOpenInvestPopup = () => {
+  handleOpenInvestmentPopup = () => {
     this.setState({ isOpenInvestToProgramPopup: true });
-  };
-
-  handleOpenWithdrawPopup = () => {
-    this.setState({ isOpenWithdrawToProgramPopup: true });
   };
 
   composeManagerUrl = managerId => {
@@ -58,27 +56,32 @@ class ProgramDetailsDescription extends Component {
   };
 
   render() {
-    const { t, programDetails } = this.props;
+    const { t, programDescriptionData } = this.props;
+    const { data: programDescription, isPending } = programDescriptionData;
+    if (!programDescription || isPending) return null;
+    const isInvested =
+      programDescription.personalProgramDetails &&
+      programDescription.personalProgramDetails.isInvested;
     return (
       <div className="program-details-description">
         <div className="program-details-description__left">
           <GVProgramAvatar
-            url={programDetails.logo}
-            level={programDetails.level}
-            alt={programDetails.title}
+            url={programDescription.logo}
+            level={programDescription.level}
+            alt={programDescription.title}
             size="big"
           />
         </div>
         <div className="program-details-description__main">
           <h1 className="program-details-description__heading">
-            {programDetails.title}
+            {programDescription.title}
           </h1>
-          <Link to={this.composeManagerUrl(programDetails.manager.id)}>
+          <Link to={this.composeManagerUrl(programDescription.manager.id)}>
             <GVButton
               variant="text"
               className="program-details-description__author-btn"
             >
-              {programDetails.manager.username}
+              {programDescription.manager.username}
             </GVButton>
           </Link>
 
@@ -87,73 +90,69 @@ class ProgramDetailsDescription extends Component {
               {t("program-details-page.description.strategy")}
             </h2>
             <p className="program-details-description__text">
-              {programDetails.description}
+              {programDescription.description}
             </p>
             <div className="program-details-description__short-statistic">
               <div className="program-details-description__short-statistic-item">
                 <span className="program-details-description__short-statistic-subheading">
                   {t("program-details-page.description.avToInvest")}
                 </span>
-                <span>
-                  {programDetails.availableForInvestment}{" "}
-                  {programDetails.currency}
-                </span>
+                <NumberFormat
+                  value={programDescription.availableInvestment}
+                  displayType="text"
+                  suffix={` ${programDescription.currency}`}
+                />
               </div>
               <div className="program-details-description__short-statistic-item">
                 <span className="program-details-description__short-statistic-subheading">
                   {t("program-details-page.description.entryFee")}
                 </span>
-                <span>{programDetails.entryFee} %</span>
+                <NumberFormat
+                  value={programDescription.entryFee}
+                  displayType="text"
+                  suffix=" %"
+                />
               </div>
               <div className="program-details-description__short-statistic-item">
                 <span className="program-details-description__short-statistic-subheading">
                   {t("program-details-page.description.successFee")}
                 </span>
-                <span>{programDetails.successFee} %</span>
+                <NumberFormat
+                  value={programDescription.successFee}
+                  displayType="text"
+                  suffix=" %"
+                />
               </div>
             </div>
             <GVButton
               className="program-details-description__invest-btn"
-              onClick={this.handleOpenInvestPopup}
+              onClick={this.handleOpenInvestmentPopup}
             >
               {t("program-details-page.description.invest")}
             </GVButton>
-            <GVButton
-              className="program-details-description__invest-btn"
-              onClick={this.handleOpenWithdrawPopup}
-            >
-              {t("withdraw")}
-            </GVButton>
+
             <ProgramDepositContainer
               open={this.state.isOpenInvestToProgramPopup}
-              id={programDetails.id}
+              id={programDescription.id}
               onClose={() =>
                 this.setState({ isOpenInvestToProgramPopup: false })
               }
             />
-            <ProgramWithdrawContainer
-              open={this.state.isOpenWithdrawToProgramPopup}
-              id={programDetails.id}
-              onClose={() =>
-                this.setState({ isOpenWithdrawToProgramPopup: false })
-              }
-            />
-            {programDetails.personalProgramDetails &&
-              programDetails.personalProgramDetails.isInvested && (
-                <ProgramReinvestingWidget
-                  className="program-details-description__reinvest"
-                  toggleReinvesting={this.handleOnReinvestingClick}
-                  isReinvesting={programDetails.isReinvesting}
-                />
-              )}
-          </div>
-          {programDetails.personalProgramDetails &&
-            programDetails.personalProgramDetails.isInvested && (
-              <ProgramDetailsInvestment
-                className={"program-details-description__your-investment"}
-                {...getInvestmentData(programDetails)}
+
+            {isInvested && (
+              <ProgramReinvestingWidget
+                className="program-details-description__reinvest"
+                toggleReinvesting={this.handleOnReinvestingClick}
+                isReinvesting={programDescription.isReinvesting}
               />
             )}
+          </div>
+          {isInvested && (
+            <ProgramDetailsInvestment
+              className={"program-details-description__your-investment"}
+              {...getInvestmentData(programDescription)}
+            />
+          )}
         </div>
 
         <div className="program-details-description__right">
@@ -170,4 +169,4 @@ class ProgramDetailsDescription extends Component {
   }
 }
 
-export default translate()(ProgramDetailsDescription);
+export default translate()(ProgramDetailsDescriptionSection);

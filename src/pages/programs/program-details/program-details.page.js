@@ -8,9 +8,8 @@ import { goBack } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
 
 import NotFoundPage from "../../not-found/not-found.routes";
-import ProgramDetailsDescriptionSection from "./components/program-details-description/program-details-description-section";
-import ProgramDetailsNavigation from "./components/program-details-description/program-details-navigation/program-details-navigation";
-import ProgramDetailsHistoryContainer from "./components/program-details-history/program-details-history-container";
+import ProgramDetailsDescriptionSection from "./components/program-details-description-section/program-details-description-section";
+import ProgramDetailsNavigation from "./components/program-details-navigation/program-details-navigation";
 import ProgramDetailsStatisticSection from "./components/program-details-statistic-section/program-details-statistic-section";
 import {
   getChartAndEndHistory,
@@ -65,7 +64,7 @@ class ProgramDetailsPage extends PureComponent {
           <div className="program-details__section">
             <ProgramDetailsNavigation goBack={service.goBack} />
             <ProgramDetailsDescriptionSection
-              programDetailsData={this.description}
+              programDescriptionData={this.description}
             />
           </div>
           <div className="program-details__section">

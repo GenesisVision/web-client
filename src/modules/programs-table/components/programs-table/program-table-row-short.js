@@ -24,7 +24,7 @@ const ProgramTableRowShort = ({
         {program.title}
       </TableCell>
       <TableCell className="programs-table__cell--balance">
-        {program.statistic.balanceInGVT.amount}
+        {program.statistic.balanceGVT.amount}
       </TableCell>
       <TableCell className="programs-table__cell--currency">
         {program.currency}

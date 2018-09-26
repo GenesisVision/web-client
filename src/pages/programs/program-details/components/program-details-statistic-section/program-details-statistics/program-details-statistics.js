@@ -1,11 +1,10 @@
 import "./program-details-statistics.scss";
 
+import ProgramPeriodLine from "components/program-period/program-period-line/program-period-line";
 import moment from "moment";
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-
-import ProgramPeriodLine from "../../../../../../components/program-period/program-period-line/program-period-line";
 
 const ProgramDetailsStatistics = ({ t, statistic, sharpeRatio }) => (
   <div className="program-details-statistics">
