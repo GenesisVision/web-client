@@ -38,7 +38,6 @@ class Table extends Component {
       );
     }
   };
-  onChange = view => this.changeView(view);
   changeView = view => this.setState({ view });
   render() {
     return (
@@ -48,7 +47,7 @@ class Table extends Component {
           renderFilters={this.props.renderFilters}
           updateFilter={this.props.updateFilter}
           filtering={this.props.filtering}
-          onChange={this.onChange}
+          onChange={this.changeView}
         />
         <Scrollbars autoHeight autoHeightMax={14000}>
           {this.renderBody()}
