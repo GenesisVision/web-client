@@ -169,13 +169,6 @@ class ProgramTableRowDetailed extends Component {
                 </div>
               </div>
             </div>
-            {/*<div className="program-detailed__container__collapse">
-            <Icon
-              type="collapse"
-              className="program-detailed__container__collapse--icon"
-              onClick={onCollapseClick}
-            />
-          </div>*/}
           </div>
         </td>
       </TableRow>
