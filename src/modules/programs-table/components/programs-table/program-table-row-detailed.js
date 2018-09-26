@@ -41,81 +41,77 @@ class ProgramTableRowDetailed extends Component {
       <TableRow>
         <td className="program-detailed" colSpan="11" onClick={onCollapseClick}>
           <div className="program-detailed__container">
-            <div className="program-detailed__container__info">
-              <div className="program-detailed__container__avatar">
+            <div className="program-detailed__info">
+              <div className="program-detailed__avatar">
                 <GVProgramAvatar
                   url={fileService.getFileUrl(program.avatar)}
                   level={program.level}
                   alt={program.title}
                   size="medium"
-                  className="program-detailed__container__avatar__img"
+                  className="program-detailed__img"
                 />
-                <div className="program-detailed__container__avatar--name">
-                  <div className="program-detailed__container__title">
-                    {program.title}
-                  </div>
-                  <div className="program-detailed__container__manager">
+                <div className="program-detailed__avatar--name">
+                  <div className="program-detailed__title">{program.title}</div>
+                  <div className="program-detailed__manager">
                     {program.manager.username}
                   </div>
                 </div>
               </div>
-              <div className="program-detailed__container__strategy">
-                Strategy
-              </div>
-              <div className="program-detailed__container__description">
+              <div className="program-detailed__strategy">Strategy</div>
+              <div className="program-detailed__description">
                 {program.description}
               </div>
             </div>
-            <div className="program-detailed__container__statistic">
-              <div className="program-detailed__container__statistic__chart">
+            <div className="program-detailed__statistic">
+              <div className="program-detailed__chart">
                 <ProgramBigChart data={program.chart} />
               </div>
-              <div className="program-detailed__container__statistic__statistic-data">
+              <div className="program-detailed__statistic-data">
                 <div>
-                  <div className="program-detailed__container__statistic__statistic-data--label">
+                  <div className="program-detailed__statistic-data--label">
                     Balance
                   </div>
-                  <div className="program-detailed__container__statistic__statistic-data--value">
+                  <div className="program-detailed__statistic-data--value">
                     {program.statistic.balanceGVT.amount}
                   </div>
                 </div>
                 <div>
-                  <div className="program-detailed__container__statistic__statistic-data--label">
+                  <div className="program-detailed__statistic-data--label">
                     Curr.
                   </div>
-                  <div className="program-detailed__container__statistic__statistic-data--value">
+                  <div className="program-detailed__statistic-data--value">
                     {program.currency}
                   </div>
                 </div>
                 <div>
-                  <div className="program-detailed__container__statistic__statistic-data--label">
+                  <div className="program-detailed__statistic-data--label">
                     Investors
                   </div>
-                  <div className="program-detailed__container__statistic__statistic-data--value">
+                  <div className="program-detailed__statistic-data--value">
                     {program.statistic.investorsCount}
                   </div>
                 </div>
                 <div>
-                  <div className="program-detailed__container__statistic__statistic-data--label">
+                  <div className="program-detailed__statistic-data--label">
                     Av. to Invest
                   </div>
-                  <div className="program-detailed__container__statistic__statistic-data--value">
+                  <div className="program-detailed__statistic-data--value">
                     {program.availableForInvestment}
                   </div>
                 </div>
                 <div>
-                  <div className="program-detailed__container__statistic__statistic-data--label">
+                  <div className="program-detailed__statistic-data--label">
                     Trades
                   </div>
-                  <div className="program-detailed__container__statistic__statistic-data--value">
+                  <div className="program-detailed__statistic-data--value">
                     {program.statistic.tradesCount}
                   </div>
                 </div>
                 <div>
-                  <div className="program-detailed__container__statistic__statistic-data--label">
+                  <div className="program-detailed__statistic-data--label">
                     Period
                   </div>
-                  <div className="program-detailed__container__statistic__statistic-data--value">
+                  <div className="program-detailed__statistic-data--value">
                     <ProgramPeriodPie
                       start={program.periodDateStart}
                       end={program.periodDateEnd}
@@ -123,10 +119,10 @@ class ProgramTableRowDetailed extends Component {
                   </div>
                 </div>
                 <div>
-                  <div className="program-detailed__container__statistic__statistic-data--label">
+                  <div className="program-detailed__statistic-data--label">
                     D.down
                   </div>
-                  <div className="program-detailed__container__statistic__statistic-data--value">
+                  <div className="program-detailed__statistic-data--value">
                     <NumberFormat
                       value={program.statistic.drawdownPercent}
                       suffix="%"
@@ -136,10 +132,10 @@ class ProgramTableRowDetailed extends Component {
                   </div>
                 </div>
                 <div>
-                  <div className="program-detailed__container__statistic__statistic-data--label">
+                  <div className="program-detailed__statistic-data--label">
                     Profit
                   </div>
-                  <div className="program-detailed__container__statistic__statistic-data--value--positive">
+                  <div className="program-detailed__statistic-data--value--positive">
                     <NumberFormat
                       value={program.statistic.profitPercent}
                       suffix="%"
@@ -151,7 +147,7 @@ class ProgramTableRowDetailed extends Component {
               </div>
               {isAuthenticated &&
                 program.personalProgramDetails && (
-                  <div className="program-detailed__container__statistic__favorites-block">
+                  <div className="program-detailed__favorites-block">
                     <span style={{ float: "right" }}>
                       Add to favorites{" "}
                       <FavoriteIcon
@@ -162,9 +158,9 @@ class ProgramTableRowDetailed extends Component {
                     </span>
                   </div>
                 )}
-              <div className="program-detailed__container__statistic__bottom-block">
+              <div className="program-detailed__bottom-block">
                 <GVButton>Invest</GVButton>
-                <div className="program-detailed__container__statistic__bottom-block__details">
+                <div className="program-detailed__details">
                   <Link to={programDetailsUrl}>
                     <GVButton variant="text" color="secondary">
                       Details >

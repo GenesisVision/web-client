@@ -192,185 +192,178 @@ $description-block-width: 250px;
 }
 
 .program-detailed {
-  .program-detailed__container {
+  &__container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: stretch;
     height: 100%;
 
+  }
+  &__info {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: flex-start;
+    background: $secondary-color;
+    padding: $padding/1.5;
+    border-radius: $border-radius 0 0 $border-radius;
+    max-width: 318px;
+  }
+
+  &__img {
+    //width: 40px;
+    //height: 40px;
+  }
+
+  &__avatar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $padding/1.5;
+    &--name {
+      margin-left: $padding/2;
+    }
+  }
+
+  &__title {
+    font-size: $title-text-size/1.5;
+    letter-spacing: 0.2px;
+    margin-bottom: $padding/2.5/1.5;
+  }
+
+  &__manager {
+    font-size: $text-size/1.5;
+    letter-spacing: 0.2px;
+    color: $positive-color;
+  }
+
+  &__strategy {
+    font-size: $text-size/1.5;
+    line-height: 1.85;
+    letter-spacing: 0.4px;
+    color: #fff;
+    margin-bottom: $padding/2/1.5;
+  }
+
+  &__description {
+    font-size: $text-size/1.5;
+    line-height: 1.85;
+    letter-spacing: 0.4px;
+    color: #fff;
+    font-weight: 100;
+    width: $description-block-width/2;
+    max-height: 300px;
+    overflow: hidden;
+  }
+
+  &__chart {
+    height: 50%;
+    min-height: 250px;
+  }
+
+  &__statistic {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: stretch;
+    padding: $padding/1.5;
+    width: 100%;
+    background-color: #212c34;
+  }
+
+  &__bottom-block {
+  }
+
+  &__details {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__statistic-data,&__bottom-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  &__favorites-block, &__favorites-block span {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: $padding/4;
+    span {
+      svg {
+        margin: 0 10px;
+      }
+    }
+  }
+
+  &__statistic-data {
+    margin-bottom: $padding;
+    font-weight: 100;
+    &--label {
+      opacity: 0.3;
+      font-size: $text-size/1.5;
+      padding: $padding/3 4px;
+    }
+    &--value {
+      font-size: $text-size/1.5;
+      padding: 0 4px;
+      &--positive {
+        color: $positive-color;
+      }
+    }
+  }
+
+  @include media-breakpoint-landscape-phone() {
     &__info {
-      display: flex;
-      justify-content: flex-start;
-      flex-direction: column;
-      align-items: flex-start;
-      background: $secondary-color;
-      padding: $padding/1.5;
-      border-radius: $border-radius 0 0 $border-radius;
-      max-width: 318px;
+      padding: $padding;
     }
-
     &__avatar {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: $padding/1.5;
-      &__img {
-        width: 40px;
-        height: 40px;
-      }
-      &--name {
-        margin-left: $padding/2;
-      }
+      margin-bottom: $padding;
     }
-
+    &__strategy {
+      margin-bottom: $padding/2;
+    }
     &__title {
-      font-size: $title-text-size/1.5;
-      letter-spacing: 0.2px;
-      margin-bottom: $padding/2.5/1.5;
+      font-size: $title-text-size;
     }
 
     &__manager {
-      font-size: $text-size/1.5;
-      letter-spacing: 0.2px;
-      color: $positive-color;
+      font-size: $text-size;
     }
 
     &__strategy {
-      font-size: $text-size/1.5;
-      line-height: 1.85;
-      letter-spacing: 0.4px;
-      color: #fff;
-      margin-bottom: $padding/2/1.5;
+      font-size: $text-size;
     }
+
     &__description {
-      font-size: $text-size/1.5;
-      line-height: 1.85;
-      letter-spacing: 0.4px;
-      color: #fff;
-      font-weight: 100;
-      width: $description-block-width/2;
-      max-height: 300px;
-      overflow: hidden;
+      font-size: $text-size;
+      width: $description-block-width;
     }
-
+    &__avatar__img {
+      height: 80px;
+      width: 80px;
+    }
     &__statistic {
-      display: flex;
-      justify-content: space-between;
-      flex-direction: column;
-      align-items: stretch;
-      padding: $padding/1.5;
-      width: 100%;
-      background-color: #212c34;
-      &__chart {
-        height: 50%;
-        min-height: 250px;
+      padding: $padding;
+    }
+    &__statistic-data {
+      &--label {
+        font-size: $text-size;
       }
-
-      &__bottom-block {
-        &__details {
-          display: flex;
-          justify-content: space-between;
-          flex-direction: column;
-          align-items: center;
-        }
-      }
-      &__statistic-data,
-      &__bottom-block {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-      }
-      &__favorites-block,
-      &__favorites-block span {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        margin-bottom: $padding/4;
-        span {
-          svg {
-            margin: 0 10px;
-          }
-        }
-      }
-      &__statistic-data {
-        margin-bottom: $padding;
-        font-weight: 100;
-        &--label {
-          opacity: 0.3;
-          font-size: $text-size/1.5;
-          padding: $padding/3 4px;
-        }
-        &--value {
-          font-size: $text-size/1.5;
-          padding: 0 4px;
-          &--positive {
-            color: $positive-color;
-          }
-        }
+      &--value {
+        font-size: $text-size;
       }
     }
-
-    &__collapse {
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-      padding: $padding/2.5;
-      background: #2f3a43;
-      border-radius: 0 $border-radius $border-radius 0;
-      span {
-        width: 15px;
-      }
+    &__statistic-data {
+      margin-bottom: $padding * 2;
     }
-
-    @include media-breakpoint-landscape-phone() {
-      &__info {
-        padding: $padding;
-      }
-      &__avatar {
-        margin-bottom: $padding;
-      }
-      &__strategy {
-        margin-bottom: $padding/2;
-      }
-      &__title {
-        font-size: $title-text-size;
-      }
-
-      &__manager {
-        font-size: $text-size;
-      }
-
-      &__strategy {
-        font-size: $text-size;
-      }
-
-      &__description {
-        font-size: $text-size;
-        width: $description-block-width;
-      }
-      &__avatar__img {
-        height: 80px;
-        width: 80px;
-      }
-      &__statistic {
-        padding: $padding;
-        &__statistic-data {
-          &--label {
-            font-size: $text-size;
-          }
-          &--value {
-            font-size: $text-size;
-          }
-        }
-        &__statistic-data {
-          margin-bottom: $padding * 2;
-        }
-        &__favorites-block {
-          margin-bottom: $padding/3;
-        }
-      }
+    &__favorites-block {
+      margin-bottom: $padding/3;
     }
   }
 }
