@@ -1,6 +1,7 @@
 @import "styles/_colors.scss";
 
 .select {
+  min-width: 150px;
   &__options {
     display: flex;
     flex-direction: column;
@@ -53,6 +54,15 @@
     .select__value {
       flex: 1;
       font-size: 16px;
+    }
+  }
+
+  &--disabled {
+    .select__content {
+      cursor: default;
+    }
+    .select__value {
+      color: $text-dark-color;
     }
   }
 }

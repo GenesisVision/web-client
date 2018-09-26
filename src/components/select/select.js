@@ -13,6 +13,7 @@ class Select extends Component {
   };
 
   handleClick = event => {
+    if (this.props.disabled) return;
     this.setState({ anchor: event.currentTarget });
     this.input.current.focus();
   };
@@ -72,7 +73,11 @@ class Select extends Component {
       );
     });
     return (
-      <div className={classnames("select", this.props.className)}>
+      <div
+        className={classnames("select", this.props.className, {
+          "select--disabled": this.props.disabled
+        })}
+      >
         <div onClick={this.handleClick} className="select__content">
           <input
             className="select__input--hidden"
@@ -109,7 +114,8 @@ Select.propTypes = {
   className: PropTypes.string,
   fullWidthPopover: PropTypes.bool,
   onFocus: PropTypes.func,
-  onBlur: PropTypes.func
+  onBlur: PropTypes.func,
+  disabled: PropTypes.bool
 };
 
 export default Select;
