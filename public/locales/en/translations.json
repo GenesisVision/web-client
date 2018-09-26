@@ -40,6 +40,7 @@
     "cancel": "Cancel",
     "back": "Back",
     "close": "Close",
+    "copy": "Copy",
     "confirm": "Confirm"
   },
   "navigation": {
@@ -126,6 +127,13 @@
     "invested-value": "Invested value",
     "available": "Available",
     "details": "Details"
+  },
+  "wallet-add-funds": {
+    "title": "Add funds",
+    "select-currency": "Select a wallet currency",
+    "will-send": "You will send",
+    "will-get": "You'll get",
+    "deposit-address": "Deposit address"
   },
   "wallet-withdraw": {
     "title": "Withdraw",

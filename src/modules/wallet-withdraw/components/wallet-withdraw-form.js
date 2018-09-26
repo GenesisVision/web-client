@@ -76,6 +76,13 @@ const WalletWithdrawForm = ({
           autoComplete="off"
           InputComponent={NumberFormat}
           allowNegative={false}
+          isAllowed={values => {
+            const { floatValue, formattedValue } = values;
+            return (
+              formattedValue === "" ||
+              floatValue <= parseFloat(availableToWithdrawal)
+            );
+          }}
         />
         <GVFormikField
           name="address"
@@ -172,7 +179,7 @@ export default compose(
     validationSchema: ({ t, availableToWithdrawal }) =>
       object().shape({
         amount: number()
-          .lessThan(
+          .max(
             availableToWithdrawal,
             t("wallet-withdraw.validation.amount-more-than-available")
           )
