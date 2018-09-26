@@ -26,23 +26,23 @@ $padding: 33px;
     width: 100%;
     align-items: center;
     padding: $padding/1.5;
-    &__toggle {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-left: $padding/2;
-      div {
-        cursor: pointer;
-        padding: $view-svg-size;
-        svg{
-          width: $view-svg-size;
-        }
-        &:last-child {
-          padding-right: 0;
-        }
+  }
+
+  &__toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: $padding/2;
+    div {
+      cursor: pointer;
+      padding: $view-svg-size;
+      svg{
+        width: $view-svg-size;
+      }
+      &:last-child {
+        padding-right: 0;
       }
     }
-
   }
 
   &__title {
@@ -152,15 +152,15 @@ $padding: 33px;
     }
     &__toolbar {
       padding: $padding;
-      &__toggle {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        div {
-          padding: 0 $view-svg-size/2;
-          &:last-child {
-            padding-right: 0;
-          }
+    }
+    &__toggle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      div {
+        padding: 0 $view-svg-size/2;
+        &:last-child {
+          padding-right: 0;
         }
       }
     }

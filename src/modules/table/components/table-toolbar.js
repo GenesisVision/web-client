@@ -23,7 +23,7 @@ class TableToolbar extends Component {
             {renderFilters(updateFilter, filtering)}
           </div>
         )}
-        <div className="table__toolbar__toggle">
+        <div className="table__toggle">
           <div onClick={this.handleIconClick("cards")}>
             <CardsIcon primary={this.state.view === "cards"} />
           </div>
