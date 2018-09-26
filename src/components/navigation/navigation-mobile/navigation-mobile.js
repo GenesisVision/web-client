@@ -14,6 +14,7 @@ import { WALLET_ROUTE } from "modules/wallet/wallet.constants";
 import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
 import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import { GLOBAL_SEARCH_ROUTE } from "pages/global-search/global-search.routes";
+import { SETTINGS_ROUTE } from "pages/profile/settings/settings.page";
 import { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
 import PropTypes from "prop-types";
 import React from "react";
@@ -60,13 +61,17 @@ const NavigationMobile = ({
           >
             {t("navigation.search")}
           </NavigationItem>
-          <NavigationItem icon={<DetailsIcon primary />} href={PROFILE_ROUTE}>
+          <NavigationItem
+            exact
+            icon={<DetailsIcon primary />}
+            href={PROFILE_ROUTE}
+          >
             {t("navigation.personal-details")}
           </NavigationItem>
           <NavigationItem icon={<WalletIcon primary />} href={WALLET_ROUTE}>
             {t("navigation.wallet")}
           </NavigationItem>
-          <NavigationItem icon={<SettingsIcon primary />} href={"/settings"}>
+          <NavigationItem icon={<SettingsIcon primary />} href={SETTINGS_ROUTE}>
             {t("navigation.settings")}
           </NavigationItem>
           {isAuthenticated ? (

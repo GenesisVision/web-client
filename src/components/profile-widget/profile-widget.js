@@ -8,6 +8,7 @@ import Popover from "components/popover/popover";
 import { GVButton } from "gv-react-components";
 import { PROFILE_ROUTE } from "modules/profile/profile.constants";
 import FilterArrowIcon from "modules/table/components/filtering/filter-arrow-icon";
+import { SETTINGS_ROUTE } from "pages/profile/settings/settings.page";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
@@ -52,7 +53,7 @@ class ProfileWidget extends Component {
                 </Link>
               </div>
               <div className="profile-menu__item profile-menu__item--settings">
-                <Link to={PROFILE_ROUTE}>
+                <Link to={SETTINGS_ROUTE}>
                   <SettingsIcon />
                   {t("profile-widget.settings")}
                 </Link>
