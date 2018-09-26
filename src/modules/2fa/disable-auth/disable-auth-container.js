@@ -10,9 +10,11 @@ class DisableAuthContainer extends Component {
   };
   handleSubmit = model => {
     this.setState({ isPending: true });
-    authApiProxy.v10Auth2faDisablePost(authService.getAuthArg(), {
-      model
-    });
+    authApiProxy
+      .v10Auth2faDisablePost(authService.getAuthArg(), {
+        model
+      })
+      .then(data => this.setState({ ...data }, this.props.onSubmit));
   };
   render() {
     return (

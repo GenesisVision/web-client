@@ -1,3 +1,5 @@
+import "./google-auth-popup.scss";
+
 import GVqr from "components/gv-qr/gv-qr";
 import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
@@ -114,7 +116,6 @@ class GoogleAuthContainer extends Component {
   }
 
   handleSubmit = values => {
-    console.info(values);
     if (!this.state.data) return;
     const { sharedKey } = this.state.data;
 
@@ -126,14 +127,14 @@ class GoogleAuthContainer extends Component {
           sharedKey
         }
       })
-      .then(data => this.setState({ ...data }));
+      .then(data => this.setState({ ...data }, this.props.onSubmit));
   };
 
   render() {
     if (!this.state.data) return null;
-    const { authenticatorUri, sharedKey } = this.state.data;
+    const { authenticatorUri, sharedKey, codes } = this.state.data;
     const { t } = this.props;
-    return (
+    return !codes ? (
       <div className="dialog__top">
         <div className="dialog__header">
           <h2>{t("2fa.title")}</h2>
@@ -152,6 +153,14 @@ class GoogleAuthContainer extends Component {
             errorMessage={this.state.errorMessage}
           />
         </div>
+      </div>
+    ) : (
+      <div className="dialog__top">
+        <ul>
+          {codes.map(({ code }) => (
+            <li key={code}>{code}</li>
+          ))}
+        </ul>
       </div>
     );
   }
