@@ -82,6 +82,10 @@ class ProgramDetailsPage extends PureComponent {
   }
 }
 
+// const mapSateToProps = state => {
+//   ---
+// }
+
 const mapDispatchToProps = dispatch => ({
   service: bindActionCreators(
     { getProgramDescription, getChartAndEndHistory, goBack },

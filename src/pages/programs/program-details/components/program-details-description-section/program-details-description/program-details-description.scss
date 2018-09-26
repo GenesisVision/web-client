@@ -93,16 +93,18 @@
       font-weight: normal;
     }
   }
-}
 
-.program-details-navigation {
-  margin: 25px 0 40px;
-
-  &__back-arrow {
-    margin-right: 13px;
-  }
-
-  & .gv-btn--text {
-    padding: 0;
+  &__control {
+    text-align: center;
+    margin-bottom: 20px;
+    &-icon {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 5px;
+    }
+    &-text {
+      font-size: 10px;
+      letter-spacing: 0.3px;
+    }
   }
 }
