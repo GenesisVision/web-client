@@ -1,10 +1,10 @@
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
-import { convertToCurrency } from "modules/program-deposit/components/program-deposit-form";
 import PropTypes from "prop-types";
 import { Fragment } from "react";
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { convertToCurrency } from "utils/currency-converter";
 
 const WithdrawEnterAmountStep = props => {
   return (

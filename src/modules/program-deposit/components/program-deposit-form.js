@@ -5,15 +5,11 @@ import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
+import {
+  calculateValueOfEntryFee,
+  convertToCurrency
+} from "utils/currency-converter";
 import { number, object } from "yup";
-
-export const convertToCurrency = (value = 0, rate) => {
-  return value / rate;
-};
-
-export const calculateValueOfEntryFee = (value = 0, percentage) => {
-  return (value * percentage) / 100;
-};
 
 const ProgramDepositForm = ({
   t,
@@ -44,22 +40,26 @@ const ProgramDepositForm = ({
         displayType="text"
       />
     </div>
-    <div className="invest-popup__entry">
-      {t("deposit-program.entry-fee")}
-      <span>
-        {info.entryFee} %{" "}
-        <NumberFormat
-          value={convertToCurrency(
-            calculateValueOfEntryFee(values.amount, info.entryFee),
-            info.rate
-          )}
-          prefix="("
-          suffix={` ${currency})`}
-          decimalScale={8}
-          displayType="text"
-        />
-      </span>
-    </div>
+    <ul className="dialog-list">
+      <li className="dialog-list__item">
+        <span className="dialog-list__title">
+          {t("deposit-program.entry-fee")}
+        </span>
+        <span className="dialog-list__value">
+          {info.entryFee} %{" "}
+          <NumberFormat
+            value={convertToCurrency(
+              calculateValueOfEntryFee(values.amount, info.entryFee),
+              info.rate
+            )}
+            prefix="("
+            suffix={` ${currency})`}
+            decimalScale={8}
+            displayType="text"
+          />
+        </span>
+      </li>
+    </ul>
     <div className="form-error">{errorMessage}</div>
     <div className="dialog__buttons">
       <GVButton
@@ -71,7 +71,7 @@ const ProgramDepositForm = ({
         {t("deposit-program.confirm")}
       </GVButton>
     </div>
-    <div className="invest-popup__period-ends">
+    <div className="dialog__info">
       {`${t("deposit-program.period")} ${moment(info.periodEnds).format(
         "DD.MM.YYYY, HH:mm"
       )}`}
