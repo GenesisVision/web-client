@@ -58,57 +58,57 @@ $description-block-width: 250px;
     &:last-child {
       margin-right: 0;
     }
-    &__row {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: flex-start;
-      &__title {
-        padding: 3px 0;
-        font-size: $title-text-size/1.5;
-      }
-      &__name {
-        font-size: $text-size/1.5;
-        color: $primary-color;
-      }
-      &__actions {
-      }
-      &__chart {
-        width: $chart-width/1.5;
-      }
-      &__chart-info {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        &--balance {
-          font-size: $text-size/1.5;
-          font-weight: 100;
-        }
-        &--profit {
-          font-size: $text-size/1.5;
-          font-weight: 600;
-          color: rgb(44, 211, 146);
-          border-radius: 19.5px;
-          background-color: $success;
-          padding: 5px 13px;
-          margin-bottom: 8px;
-        }
-      }
-      &--title {
+    &--title {
+      @include table-title;
+    }
+  }
+  &__title {
+    padding: 3px 0;
+    font-size: $title-text-size/1.5;
+  }
+  &__name {
+    font-size: $text-size/1.5;
+    color: $primary-color;
+  }
+  &__actions {
+  }
+  &__chart {
+    width: $chart-width/1.5;
+  }
+  &__chart-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &--balance {
+      font-size: $text-size/1.5;
+      font-weight: 100;
+    }
+    &--profit {
+      font-size: $text-size/1.5;
+      font-weight: 600;
+      color: rgb(44, 211, 146);
+      border-radius: 19.5px;
+      background-color: $success;
+      padding: 5px 13px;
+      margin-bottom: 8px;
+    }
+  }
+  &__row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  &__table {
+    & table {
+      width: 100%;
+      th {
         @include table-title;
       }
-    }
-    &__table {
-      & table {
-        width: 100%;
-        th {
-          @include table-title;
-        }
-        td {
-          font-size: $text-size/$multiplier;
-          font-weight: 100;
-        }
+      td {
+        font-size: $text-size/$multiplier;
+        font-weight: 100;
       }
     }
   }
@@ -124,36 +124,36 @@ $description-block-width: 250px;
     &__card {
       height: $program-height;
       margin-right: 0;
-      &__row {
-        &__title {
-          font-size: $title-text-size;
-        }
-        &__name {
-          font-size: $text-size;
-        }
-        &--balance {
-          font-size: $text-size;
-        }
-        &--profit {
-          font-size: $text-size;
-        }
-        &__chart {
-          width: $chart-width;
-        }
-        &__chart-info {
-          &--balance {
-            font-size: $text-size;
-          }
-          &--profit {
-            font-size: $text-size;
-          }
-        }
+    }
+    &__title {
+      font-size: $title-text-size;
+    }
+    &__name {
+      font-size: $text-size;
+    }
+    &--balance {
+      font-size: $text-size;
+    }
+    &--profit {
+      font-size: $text-size;
+    }
+    &__chart {
+      width: $chart-width;
+    }
+    &__chart-info {
+      &--balance {
+        font-size: $text-size;
       }
-      &__table {
-        & table {
-          td {
-            font-size: $text-size;
-          }
+      &--profit {
+        font-size: $text-size;
+      }
+    }
+    &__row {
+    }
+    &__table {
+      & table {
+        td {
+          font-size: $text-size;
         }
       }
     }

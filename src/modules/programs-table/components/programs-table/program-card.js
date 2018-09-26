@@ -15,8 +15,8 @@ const ProgramCard = ({
 }) => {
   return (
     <div onClick={onExpandClick} className="programs-cards__card">
-      <div className="programs-cards__card__row">
-        <div className="programs-cards__card__row__avatar">
+      <div className="programs-cards__row">
+        <div className="programs-cards__avatar">
           <GVProgramAvatar
             url={fileService.getFileUrl(program.avatar)}
             level={program.level}
@@ -24,13 +24,13 @@ const ProgramCard = ({
             size="medium"
           />
         </div>
-        <div className="programs-cards__card__row__names">
-          <div className="programs-cards__card__row__title">
+        <div className="programs-cards__names">
+          <div className="programs-cards__title">
             {program.title}
           </div>
-          <div className="programs-cards__card__row__name">Eddie Carr</div>
+          <div className="programs-cards__name">Eddie Carr</div>
         </div>
-        <div className="programs-cards__card__row__actions">
+        <div className="programs-cards__actions">
           <svg width="3px" height="15px" viewBox="0 0 3 15">
             <title>white_dots</title>
             <desc>Created with Sketch.</desc>
@@ -82,15 +82,15 @@ const ProgramCard = ({
           </svg>
         </div>
       </div>
-      <div className="programs-cards__card__row">
-        <div className="programs-cards__card__row__chart">
+      <div className="programs-cards__row">
+        <div className="programs-cards__chart">
           <ProgramSimpleChart
             data={program.chart}
             isPositive={program.statistic.profitPercent >= 0}
           />
         </div>
-        <div className="programs-cards__card__row__chart-info">
-          <div className="programs-cards__card__row__chart-info--profit">
+        <div className="programs-cards__chart-info">
+          <div className="programs-cards__chart-info--profit">
             <NumberFormat
               value={program.statistic.profitPercent}
               suffix="%"
@@ -98,17 +98,17 @@ const ProgramCard = ({
               displayType="text"
             />
           </div>
-          <div className="programs-cards__card__row__chart-info--balance">
+          <div className="programs-cards__chart-info--balance">
             {program.statistic.balanceGVT.amount} GVT
           </div>
         </div>
       </div>
-      <div className="programs-cards__card__table">
+      <div className="programs-cards__table">
         <table>
           <tr>
-            <th className="programs-cards__card__table--title">Balance </th>
-            <th className="programs-cards__card__table--title">Investors</th>
-            <th className="programs-cards__card__table--title">
+            <th className="programs-cards__table--title">Balance </th>
+            <th className="programs-cards__table--title">Investors</th>
+            <th className="programs-cards__table--title">
               Av. to invest
             </th>
           </tr>
@@ -119,12 +119,12 @@ const ProgramCard = ({
           </tr>
         </table>
       </div>
-      <div className="programs-cards__card__table">
+      <div className="programs-cards__table">
         <table>
           <tr>
-            <th className="programs-cards__card__table--title">Trades</th>
-            <th className="programs-cards__card__table--title">Period</th>
-            <th className="programs-cards__card__table--title">D.down</th>
+            <th className="programs-cards__table--title">Trades</th>
+            <th className="programs-cards__table--title">Period</th>
+            <th className="programs-cards__table--title">D.down</th>
           </tr>
           <tr>
             <td>{program.statistic.tradesCount}</td>
