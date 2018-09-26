@@ -6,7 +6,7 @@ import ProgramDepositContainer from "modules/program-deposit/program-deposit-con
 import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
 import { toggleReinvesting } from "modules/program-reinvesting/services/program-reinvesting.service";
 import { MANAGER_DETAILS_ROUTE } from "pages/manager/manager.page";
-import React, { Component } from "react";
+import React, { Component, PureComponent } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
@@ -14,20 +14,14 @@ import replaceParams from "utils/replace-params";
 
 import ProgramDetailsInvestment from "./program-details-investment/program-details-investment";
 
-const getInvestmentData = programDetails => {
+const composeInvestmentData = programDetails => {
   const { statistic, personalProgramDetails } = programDetails;
 
-  const {
-    investedAmount,
-    investedCurrency,
-    balanceBase,
-    profitPercent
-  } = statistic;
+  const { balanceBase, profitPercent } = statistic;
 
   return {
     programId: programDetails.id,
-    investedAmount,
-    investedCurrency,
+    investedAmount: personalProgramDetails.value,
     balanceAmount: balanceBase.amount,
     balanceCurrency: balanceBase.currency,
     profitPercent,
@@ -36,13 +30,39 @@ const getInvestmentData = programDetails => {
 };
 
 class ProgramDetailsDescriptionSection extends Component {
-  state = {
-    isOpenInvestmentPopup: false
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      ui: {
+        isOpenInvestmentPopup: false,
+        isPending: false
+      },
+      programDescription: null,
+      prevProps: null
+    };
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    let newState = {};
+    if (state.prevProps !== props.programDescriptionData) {
+      newState.prevProps = props;
+      newState.programDescription = props.programDescriptionData.data;
+      newState.ui = { isPending: props.programDescriptionData.isPending };
+    }
+
+    return newState;
+  }
 
   handleOnReinvestingClick = () => {
-    const programId = this.props.programDetails.id;
-    toggleReinvesting(programId);
+    const { programDescription } = this.state;
+    const { id, isReinvesting } = programDescription;
+    this.setState({
+      programDescription: {
+        ...programDescription,
+        isReinvesting: !isReinvesting
+      }
+    });
+    //toggleReinvesting(id, isReinvesting);
   };
 
   handleOpenInvestmentPopup = () => {
@@ -56,9 +76,9 @@ class ProgramDetailsDescriptionSection extends Component {
   };
 
   render() {
-    const { t, programDescriptionData } = this.props;
-    const { data: programDescription, isPending } = programDescriptionData;
-    if (!programDescription || isPending) return null;
+    const { t } = this.props;
+    const { programDescription, ui } = this.state;
+    if (!programDescription || ui.isPending) return null;
     const isInvested =
       programDescription.personalProgramDetails &&
       programDescription.personalProgramDetails.isInvested;
@@ -150,7 +170,7 @@ class ProgramDetailsDescriptionSection extends Component {
           {isInvested && (
             <ProgramDetailsInvestment
               className={"program-details-description__your-investment"}
-              {...getInvestmentData(programDescription)}
+              {...composeInvestmentData(programDescription)}
             />
           )}
         </div>

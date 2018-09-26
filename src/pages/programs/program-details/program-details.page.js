@@ -49,7 +49,7 @@ class ProgramDetailsPage extends PureComponent {
         this.chart = values[0];
         this.setState({ isPending: false });
       })
-      .catch();
+      .catch(e => {});
   }
   render() {
     const { t, service } = this.props;
@@ -68,7 +68,10 @@ class ProgramDetailsPage extends PureComponent {
             />
           </div>
           <div className="program-details__section">
-            <ProgramDetailsStatisticSection chartData={this.chart} />
+            <ProgramDetailsStatisticSection
+              statistic={this.chart.data}
+              isPending={this.chart.isPending}
+            />
           </div>
           {/*<div className="program-details__history">
             <ProgramDetailsHistoryContainer />

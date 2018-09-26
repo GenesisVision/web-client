@@ -15,7 +15,7 @@ const disableReinvesting = ({ programId, authorization }) => {
   );
 };
 
-export const toggleReinvesting = (programId, isReinvesting) => dispatch => {
+export const toggleReinvesting = (programId, isReinvesting) => {
   if (!authService.getAuthArg()) return;
 
   const requestData = {

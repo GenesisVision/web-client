@@ -12,27 +12,28 @@ import ProgramDetailsStatistic from "./program-details-statistics/program-detail
 
 class ProgramDetailsStatisticSection extends PureComponent {
   state = {
-    period: null
+    period: 0
   };
 
-  getSelectedPeriod() {
-    const { period } = this.state;
-    if (!period) return 0;
+  componentDidUpdate() {
+    const { statistic } = this.props;
+    if (statistic && statistic.chart) {
+      this.setState({ period: statistic.chart.length - 1 });
+    }
   }
 
   render() {
-    const { chartData } = this.props;
-    const { isPending, data } = chartData;
+    const { period } = this.state;
+    const { isPending, statistic } = this.props;
 
-    if (!data || isPending) return null;
-    const period = this.getSelectedPeriod();
+    if (!statistic || isPending) return null;
 
     return (
       <div className="program-details-statistic-section">
         <Surface className="program-details-statistic-section__statistic">
           <ProgramDetailsStatistic
-            statistic={data.chart[period].statistic}
-            sharpeRatio={data.sharpeRatio}
+            statistic={statistic.chart[period].statistic}
+            sharpeRatio={statistic.sharpeRatio}
           />
         </Surface>
         <Surface className="program-details-statistic-section__chart">
