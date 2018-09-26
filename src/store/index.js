@@ -5,7 +5,7 @@ import debounceMiddleware from "redux-debounced";
 import promiseMiddleware from "redux-promise-middleware";
 import thunk from "redux-thunk";
 import authApi from "services/api-client/auth-api";
-import { updateAccountSettingsMiddleware } from "shared/middlewares/update-account-settings-middleware/update-account-settings-middleware";
+import { updateAccountCurrencyMiddleware } from "shared/middlewares/update-account-settings-middleware/update-account-settings-middleware";
 
 import rootReducer from "../reducers";
 import authService from "../services/auth-service";
@@ -45,7 +45,7 @@ const middleware = [
   loadingBarMiddleware({
     promiseTypeSuffixes: suffixes
   }),
-  updateAccountSettingsMiddleware
+  updateAccountCurrencyMiddleware
 ];
 
 const composedEnhancers = compose(

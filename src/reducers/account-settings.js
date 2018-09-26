@@ -1,16 +1,19 @@
 import { UPDATE_ACCOUNT_SETTINGS } from "actions/account-settings-actions";
-import { ACCOUNT_SETTINGS_KEY } from "shared/middlewares/update-account-settings-middleware/update-account-settings-middleware";
+import twoFactorReducer from "reducers/2fa-reducer";
+import { combineReducers } from "redux";
+import { ACCOUNT_CURRENCY_KEY } from "shared/middlewares/update-account-settings-middleware/update-account-settings-middleware";
 import { loadData } from "utils/localstorage";
 
-const accountSettings = loadData(ACCOUNT_SETTINGS_KEY) || {
-  currency: "GVT"
-};
+const initialCurrency = loadData(ACCOUNT_CURRENCY_KEY) || "GVT";
 
-const accountSettingsReducer = (state = accountSettings, action) => {
+const accountCurrencyReducer = (currency = initialCurrency, action) => {
   if (action.type === UPDATE_ACCOUNT_SETTINGS) {
-    return { ...state, ...action.payload };
+    return action.payload;
   }
-  return state;
+  return currency;
 };
 
-export default accountSettingsReducer;
+export default combineReducers({
+  currency: accountCurrencyReducer,
+  twoFactorAuth: twoFactorReducer
+});

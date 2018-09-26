@@ -1,3 +1,4 @@
+import { fetchTwoFactor } from "actions/2fa-actions";
 import { fetchProfileHeaderInfo } from "modules/header/actions/header-actions";
 import { notificationsToggle } from "pages/app/components/notifications/actions/notifications.actions";
 import React, { Component } from "react";
@@ -9,6 +10,7 @@ import Header from "./header";
 class HeaderContainer extends Component {
   componentDidMount() {
     this.props.isAuthenticated && this.props.fetchProfileHeaderInfo();
+    this.props.isAuthenticated && this.props.fetchTwoFactor();
   }
 
   render() {
@@ -35,7 +37,8 @@ class HeaderContainer extends Component {
 const mapDispatchToProps = {
   fetchProfileHeaderInfo,
   logout,
-  notificationsToggle
+  notificationsToggle,
+  fetchTwoFactor
 };
 
 const mapStateToProps = state => ({
