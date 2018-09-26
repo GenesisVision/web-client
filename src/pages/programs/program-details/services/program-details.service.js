@@ -20,7 +20,7 @@ export const getProgramDescription = () => (dispatch, getState) => {
 };
 
 export const getChartAndEndHistory = () => (dispatch, getState) => {
-  const authorization = authService.getAuthArg();
+  //const authorization = authService.getAuthArg();
   const { routing } = getState();
 
   const { programId } = getParams(

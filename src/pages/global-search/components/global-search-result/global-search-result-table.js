@@ -1,12 +1,11 @@
 import ProgramTableRowShort from "modules/programs-table/components/programs-table/program-table-row-short";
 import { PROGRAMS_COLUMNS } from "modules/programs-table/programs.constants";
 import { Table, TableHeadCell } from "modules/table/components";
-import React, { Fragment } from "react";
+import withTable from "modules/table/components/with-table";
+import { DEFAULT_PAGING } from "modules/table/reducers/table-paging.reducer";
+import React from "react";
 import { translate } from "react-i18next";
 import { compose } from "redux";
-
-import withTable from "../../../../modules/table/components/with-table";
-import { DEFAULT_PAGING } from "../../../../modules/table/reducers/table-paging.reducer";
 
 const GlobalSearchResult = ({
   t,

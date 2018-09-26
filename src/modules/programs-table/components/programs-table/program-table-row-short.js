@@ -39,10 +39,12 @@ const ProgramTableRowShort = ({
         {program.statistic.tradesCount}
       </TableCell>
       <TableCell className="programs-table__cell--period">
-        <ProgramPeriodPie
-          start={program.periodStarts}
-          end={program.periodEnds}
-        />
+        {program.periodStarts && (
+          <ProgramPeriodPie
+            start={program.periodStarts}
+            end={program.periodEnds}
+          />
+        )}
       </TableCell>
       <TableCell className="programs-table__cell--drawdown">
         <NumberFormat
