@@ -39,7 +39,8 @@
     "apply": "Apply",
     "cancel": "Cancel",
     "back": "Back",
-    "close": "Close"
+    "close": "Close",
+    "activate": "Activate"
   },
   "navigation": {
     "dashboard": "Dashboard",
@@ -59,7 +60,11 @@
     "download-app": "Download App",
     "scan-code": "Scan code",
     "enter-code": "Enter the 6-digit code it gives you here to activate:",
-    "alt-code": "Or enter this secret key into your Goggle Authenticator device:"
+    "alt-code": "Or enter this secret key into your Goggle Authenticator device:",
+    "google-code": "6-digit code",
+    "password": "Enter your password",
+    "code-required": "Code is required",
+    "password-required": "Password is required"
   },
   "settings": {
     "title": "Settings"
@@ -227,7 +232,7 @@
       "balance": "Balance",
       "investors": "Investors",
       "trades": "Trades",
-      "succesTrades": "Succes trades",
+      "succesTrades": "Success trades",
       "profitFactor": "Profit factor",
       "sharpeRatio": "Sharpe Ratio",
       "maxDrawdown": "Max Drawdown",
