@@ -99,7 +99,7 @@ const ProgramCard = ({
             />
           </div>
           <div className="programs-cards__card__row__chart-info--balance">
-            {program.statistic.balanceInGVT.amount} GVT
+            {program.statistic.balanceGVT.amount} GVT
           </div>
         </div>
       </div>
@@ -113,7 +113,7 @@ const ProgramCard = ({
             </th>
           </tr>
           <tr>
-            <td>{program.statistic.balanceInGVT.amount}</td>
+            <td>{program.statistic.balanceGVT.amount}</td>
             <td>{program.statistic.investorsCount}</td>
             <td>{program.availableForInvestment}</td>
           </tr>
