@@ -41,7 +41,7 @@ class ProgramTableRowDetailed extends Component {
       <TableRow>
         <td className="program-detailed" colSpan="11" onClick={onCollapseClick}>
           <div className="program-detailed__container">
-            <div className="program-detailed__info">
+            <div className="program-detailed__container__info">
               <div className="program-detailed__container__avatar">
                 <GVProgramAvatar
                   url={fileService.getFileUrl(program.avatar)}
