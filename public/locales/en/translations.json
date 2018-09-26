@@ -39,7 +39,9 @@
     "apply": "Apply",
     "cancel": "Cancel",
     "back": "Back",
-    "close": "Close"
+    "close": "Close",
+    "copy": "Copy",
+    "confirm": "Confirm"
   },
   "navigation": {
     "dashboard": "Dashboard",
@@ -105,13 +107,50 @@
     "invested-value": "Invested value",
     "available": "Available",
     "add-funds": "Add funds",
-    "withdraw": "Withdraw"
+    "withdraw": "Withdraw",
+    "transactions": {
+      "date": "Date",
+      "type": "Type",
+      "amount": "Amount"
+    },
+    "transactions-types": {
+      "wallet": "Wallet",
+      "program": "Program",
+      "fund": "Fund",
+      "program-request": "Program request",
+      "withdrawal-request": "Withdrawal request",
+      "payment-transaction": "Payment transaction"
+    }
   },
   "wallet-widget": {
     "total-balance": "Total balance",
     "invested-value": "Invested value",
     "available": "Available",
     "details": "Details"
+  },
+  "wallet-add-funds": {
+    "title": "Add funds",
+    "select-currency": "Select a wallet currency",
+    "will-send": "You will send",
+    "will-get": "You'll get",
+    "deposit-address": "Deposit address"
+  },
+  "wallet-withdraw": {
+    "title": "Withdraw",
+    "available": "Available in wallet",
+    "select-currency": "Select a wallet currency",
+    "amount": "Enter correct amount",
+    "will-get": "You'll get",
+    "address": "Withdraw address",
+    "fee": "Fee",
+    "withdrawing": "Withdrawing",
+    "info": "Amount of withdrawals can be changed depending on the exchange rate.",
+    "success": "Please approve the withdrawal request via the link in the confirmation email.",
+    "validation": {
+      "amount-more-than-available": "Amount is more than available in your wallet",
+      "amount-is-required": "Amount is required",
+      "address-is-required": "Address is required."
+    }
   },
   "profile-widget": {
     "personal-details": "Personal details",
@@ -127,8 +166,9 @@
     "minute_plural": "minutes",
     "second": "second",
     "second_plural": "seconds",
-    "end-less-than-now": "The period is being restarted.",
-    "time-left": "Time left"
+    "period-is-over": "The period is over.",
+    "time-left": "Time left",
+    "left": "left"
   },
   "program-statuses": {
     "Active": "Active",
@@ -214,12 +254,12 @@
       "balance": "Balance",
       "investors": "Investors",
       "trades": "Trades",
-      "succesTrades": "Succes trades",
-      "profitFactor": "Profit factor",
-      "sharpeRatio": "Sharpe Ratio",
-      "maxDrawdown": "Max Drawdown",
-      "startDay": "Start day",
-      "periodEnd": "Period end",
+      "success-trades": "Success trades",
+      "profit-factor": "Profit factor",
+      "sharpe-ratio": "Sharpe ratio",
+      "max-drawdown": "Max Drawdown",
+      "start-day": "Start day",
+      "period-end": "Period end",
       "period": "Period"
     },
     "history": {
@@ -234,6 +274,10 @@
         "date": "Date"
       }
     }
+  },
+  "not-found-page": {
+    "title": "Page Not Found",
+    "body": "Page Not Found"
   },
   "program-actions": {
     "invest": "Invest",

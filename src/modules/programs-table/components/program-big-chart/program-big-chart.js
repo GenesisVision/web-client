@@ -2,7 +2,7 @@ import "./program-big-chart.scss";
 
 import ProgramChartGradient, {
   gradientOffset
-} from "components/chart/chart-gradient";
+} from "components/chart/chart-gradient/chart-gradient";
 import { GVColors } from "gv-react-components";
 import moment from "moment";
 import React from "react";
@@ -44,7 +44,7 @@ const ProgramBigChart = ({ data, currency }) => {
           axisLine={false}
           tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
         />
-        <Tooltip content={ProgramBigChartTooltip} />
+        <Tooltip content={ProgramBigChartTooltip} currency={currency} />
         <defs>
           <ProgramChartGradient
             offset={off}

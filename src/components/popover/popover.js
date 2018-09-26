@@ -43,8 +43,8 @@ class Popover extends Component {
     return {
       width: box.width,
       height: box.height,
-      top: anchorEl.offsetTop,
-      left: anchorEl.offsetLeft
+      top: box.top,
+      left: box.left
     };
   };
 
@@ -76,6 +76,7 @@ class Popover extends Component {
     const anchorBounds = this.getAnchorBounds();
     const popoverBounds = this.getPopoverBounds();
     const horizontal = this.getHorizontalPosition();
+
     if (horizontal === HORIZONTAL_CENTER_POSITION) {
       const aCenter = anchorBounds.left + anchorBounds.width / 2;
       const popoverOffset = popoverBounds.width / 2;

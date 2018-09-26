@@ -78,7 +78,7 @@ class Table extends Component {
   renderBodyRow
 }) => {
   return (
-    <div className="table">
+    <div className={"table"}>
       <TableToolbar
         title={title}
         renderFilters={renderFilters}

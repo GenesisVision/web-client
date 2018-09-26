@@ -2,7 +2,7 @@ import "./program-simple-chart.scss";
 
 import ProgramChartGradient, {
   gradientOffset
-} from "components/chart/chart-gradient";
+} from "components/chart/chart-gradient/chart-gradient";
 import { GVColors } from "gv-react-components";
 import React from "react";
 import { Area, AreaChart, ResponsiveContainer, XAxis, YAxis } from "recharts";

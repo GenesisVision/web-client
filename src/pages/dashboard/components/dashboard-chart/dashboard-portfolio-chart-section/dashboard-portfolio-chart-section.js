@@ -1,6 +1,6 @@
 import "./dashboard-portfolio-chart-section.scss";
 
-import ChartPeriod from "components/chart-period/chart-period";
+import ChartPeriod from "components/chart/chart-period/chart-period";
 import moment from "moment";
 import React, { Component } from "react";
 
@@ -33,7 +33,7 @@ class DashboardPortfolioChartSection extends Component {
   };
 
   render() {
-    const { data, isPending, currency } = this.props;
+    const { data, currency } = this.props;
     if (data.chart === undefined) return null;
     return (
       <div className="dashboard-portfolio-chart-section">

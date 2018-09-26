@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import { GVSwitch } from "gv-react-components";
 import React from "react";
 import { translate } from "react-i18next";
 
@@ -14,7 +15,12 @@ const ProgramReinvestingWidget = ({
     })}
     onClick={toggleReinvesting}
   >
-    {t("program-details-page.description.reinvest")}
+    <GVSwitch
+      value={isReinvesting}
+      color="primary"
+      onChange={toggleReinvesting}
+      label={t("program-details-page.description.reinvest")}
+    />
   </span>
 );
 

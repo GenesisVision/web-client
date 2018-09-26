@@ -6,10 +6,10 @@ import { translate } from "react-i18next";
 
 const getStatusClassName = (status, className) => {
   return classNames("program-status", className, {
-    "program-status__active": status == "Active",
-    "program-status__investing": status == "Investing",
-    "program-status__withdrawing": status == "Withdrawing",
-    "program-status__ended": status == "Ended"
+    "program-status__active": status === "Active",
+    "program-status__investing": status === "Investing",
+    "program-status__withdrawing": status === "Withdrawing",
+    "program-status__ended": status === "Ended"
   });
 };
 

@@ -9,7 +9,7 @@ const ProgramPeriodTooltip = ({ t, start, end }) => {
   const dateEnd = moment(end);
 
   const composeTimeLeft = () => {
-    if (dateEnd < dateNow) return t("program-period.end-less-than-now");
+    if (dateEnd < dateNow) return t("program-period.period-is-over");
 
     let timeLeft = [];
     const daysLeft = dateEnd.diff(dateNow, "days");
@@ -18,7 +18,7 @@ const ProgramPeriodTooltip = ({ t, start, end }) => {
         `${daysLeft} ${t("program-period.day", { count: daysLeft })}`
       );
 
-    const hoursLeft = dateEnd.diff(dateNow, "hours");
+    const hoursLeft = dateEnd.subtract(daysLeft, "days").diff(dateNow, "hours");
     if (hoursLeft > 0)
       timeLeft.push(
         `${hoursLeft} ${t("program-period.hour", {
@@ -26,7 +26,9 @@ const ProgramPeriodTooltip = ({ t, start, end }) => {
         })}`
       );
 
-    const minutesLeft = dateEnd.diff(dateNow, "minutes");
+    const minutesLeft = dateEnd
+      .subtract(hoursLeft, "hours")
+      .diff(dateNow, "minutes");
     if (minutesLeft > 0)
       timeLeft.push(
         `${minutesLeft} ${t("program-period.minute", {
@@ -34,7 +36,9 @@ const ProgramPeriodTooltip = ({ t, start, end }) => {
         })}`
       );
 
-    const secondsLeft = dateEnd.diff(dateNow, "seconds");
+    const secondsLeft = dateEnd
+      .subtract(minutesLeft, "minutes")
+      .diff(dateNow, "seconds");
     timeLeft.push(
       `${secondsLeft} ${t("program-period.second", {
         count: secondsLeft

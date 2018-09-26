@@ -7,7 +7,7 @@
     "copy-to-clipboard": "^3.0.8",
     "formik": "^1.0.2",
     "gv-api-web": "git+https://github.com/GenesisVision/gv-api-web.git#development",
-    "gv-react-components": "^0.0.20",
+    "gv-react-components": "^0.0.22",
     "i18next": "^11.2.3",
     "i18next-browser-languagedetector": "^2.2.0",
     "i18next-xhr-backend": "^1.5.1",
