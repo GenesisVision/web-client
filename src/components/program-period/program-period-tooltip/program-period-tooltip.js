@@ -9,7 +9,7 @@ const ProgramPeriodTooltip = ({ t, start, end }) => {
   const dateEnd = moment(end);
 
   const composeTimeLeft = () => {
-    if (dateEnd < dateNow) return t("program-period.end-less-than-now");
+    if (dateEnd < dateNow) return t("program-period.period-is-over");
 
     let timeLeft = [];
     const daysLeft = dateEnd.diff(dateNow, "days");

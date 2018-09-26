@@ -33,7 +33,7 @@ class DashboardPortfolioChartSection extends Component {
   };
 
   render() {
-    const { data, isPending, currency } = this.props;
+    const { data, currency } = this.props;
     if (data.chart === undefined) return null;
     return (
       <div className="dashboard-portfolio-chart-section">

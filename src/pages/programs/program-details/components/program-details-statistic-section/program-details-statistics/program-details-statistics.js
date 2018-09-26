@@ -1,30 +1,16 @@
 import "./program-details-statistics.scss";
 
-import Surface from "components/surface/surface";
+import ProgramPeriodLine from "components/program-period/program-period-line/program-period-line";
 import moment from "moment";
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 
-// import { Link } from "react-router-dom";
-
-const statistic = {
-  pnL: 0,
-  investors: 0,
-  trades: 0,
-  successTrades: 0,
-  profitFactor: 0,
-  sharpeRatio: 0,
-  maxDrawdown: 0,
-  periodStarts: "2018-09-10T12:59:42.348Z",
-  periodEnds: "2018-09-10T12:59:42.348Z"
-};
-
-const ProgramDetailsStatistics = ({ t }) => (
-  <Surface className="program-details-statistics">
-    <h2 className="program-details-statistics__heading">
+const ProgramDetailsStatistics = ({ t, statistic, sharpeRatio }) => (
+  <div className="program-details-statistics">
+    <div className="program-details-statistics__heading">
       {t("program-details-page.statistics.title")}
-    </h2>
+    </div>
     <div className="program-details-statistics__balance">
       <span className="program-details-statistics__subheading">
         {t("program-details-page.statistics.balance")}
@@ -68,43 +54,55 @@ const ProgramDetailsStatistics = ({ t }) => (
 
       <div className="program-details-statistics__item program-details-statistics__item--secondary">
         <span className="program-details-statistics__subheading">
-          {t("program-details-page.statistics.succesTrades")}
+          {t("program-details-page.statistics.success-trades")}
         </span>
         <span className="program-details-statistics__value">
-          {statistic.successTrades} %
+          <NumberFormat
+            value={statistic.successTradesPercent}
+            displayType="text"
+            suffix="%"
+          />
         </span>
       </div>
 
       <div className="program-details-statistics__item program-details-statistics__item--secondary">
         <span className="program-details-statistics__subheading">
-          {t("program-details-page.statistics.profitFactor")}
+          {t("program-details-page.statistics.profit-factor")}
         </span>
         <span className="program-details-statistics__value">
-          {statistic.profitFactor} %
+          <NumberFormat
+            value={statistic.profitFactor}
+            displayType="text"
+            suffix="%"
+          />
         </span>
       </div>
 
       <div className="program-details-statistics__item program-details-statistics__item--secondary">
         <span className="program-details-statistics__subheading">
-          {t("program-details-page.statistics.sharpeRatio")}
+          {t("program-details-page.statistics.sharpe-ratio")}
         </span>
         <span className="program-details-statistics__value">
-          {statistic.sharpeRatio} %
+          <NumberFormat value={sharpeRatio} displayType="text" suffix="%" />
         </span>
       </div>
 
       <div className="program-details-statistics__item program-details-statistics__item--secondary">
         <span className="program-details-statistics__subheading">
-          {t("program-details-page.statistics.maxDrawdown")}
+          {t("program-details-page.statistics.max-drawdown")}
         </span>
         <span className="program-details-statistics__value">
-          {statistic.maxDrawdown} %
+          <NumberFormat
+            value={statistic.maxDrawdown}
+            displayType="text"
+            suffix="%"
+          />
         </span>
       </div>
 
       <div className="program-details-statistics__item program-details-statistics__item--secondary">
         <span className="program-details-statistics__subheading">
-          {t("program-details-page.statistics.startDay")}
+          {t("program-details-page.statistics.start-day")}
         </span>
         <span className="program-details-statistics__value">
           {moment(statistic.periodStarts).format("D MMM YYYY")}
@@ -113,14 +111,24 @@ const ProgramDetailsStatistics = ({ t }) => (
 
       <div className="program-details-statistics__item program-details-statistics__item--secondary">
         <span className="program-details-statistics__subheading">
-          {t("program-details-page.statistics.periodEnd")}
+          {t("program-details-page.statistics.period-end")}
         </span>
         <span className="program-details-statistics__value">
           {moment(statistic.periodEnds).format("D MMM YYYY")}
         </span>
       </div>
+
+      <div className="program-details-statistics__period">
+        <span className="program-details-statistics__subheading">
+          {t("program-details-page.statistics.period")}
+        </span>
+        <ProgramPeriodLine
+          start={statistic.periodStarts}
+          end={statistic.periodEnds}
+        />
+      </div>
     </div>
-  </Surface>
+  </div>
 );
 
 export default translate()(ProgramDetailsStatistics);

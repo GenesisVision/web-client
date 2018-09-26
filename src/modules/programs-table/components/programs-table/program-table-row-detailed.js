@@ -67,7 +67,7 @@ class ProgramTableRowDetailed extends Component {
             <div className="program-detailed__statistic-data">
               <div style={{ padding: "0 1rem" }}>
                 <div>Balance</div>
-                <div>{program.statistic.balanceInGVT.amount}</div>
+                <div>{program.statistic.balanceGVT.amount}</div>
               </div>
               <div style={{ padding: "0 1rem" }}>
                 <div>Curr.</div>

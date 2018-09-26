@@ -53,10 +53,6 @@
     &__value {
       color: $text-light-color;
     }
-
-    &__arrow {
-      stroke: $short-statistic-subheading-color;
-    }
   }
 
   @include media-breakpoint-tablet() {

@@ -5,16 +5,6 @@
   flex-direction: row;
   justify-content: space-between;
 
-  & h1,
-  & h2,
-  & h3,
-  h4 {
-    font-weight: 600;
-  }
-
-  &__left {
-  }
-
   &__right {
     width: 150px;
 
@@ -96,18 +86,12 @@
     }
 
     &-subheading {
-      color: $short-statistic-subheading-color;
+      color: $label-color;
       font-size: 13px;
       margin-bottom: 13px;
       letter-spacing: 0.43px;
       font-weight: normal;
     }
-  }
-
-  &__your-investment {
-    margin-bottom: 100px;
-    position: relative;
-    right: 26px;
   }
 }
 
