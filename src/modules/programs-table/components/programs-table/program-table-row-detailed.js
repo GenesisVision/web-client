@@ -64,7 +64,7 @@ class ProgramTableRowDetailed extends Component {
             </div>
             <div className="program-detailed__statistic">
               <div className="program-detailed__chart">
-                <ProgramBigChart data={program.chart}/>
+                <ProgramBigChart data={program.chart} />
               </div>
               <div className="program-detailed__statistic-data">
                 <div>
@@ -146,8 +146,8 @@ class ProgramTableRowDetailed extends Component {
                 </div>
               </div>
               {isAuthenticated &&
-              program.personalProgramDetails && (
-                <div className="program-detailed__favorites-block">
+                program.personalProgramDetails && (
+                  <div className="program-detailed__favorites-block">
                     <span style={{ float: "right" }}>
                       Add to favorites{" "}
                       <FavoriteIcon
@@ -156,8 +156,8 @@ class ProgramTableRowDetailed extends Component {
                         selected={program.personalProgramDetails.isFavorite}
                       />
                     </span>
-                </div>
-              )}
+                  </div>
+                )}
               <div className="program-detailed__bottom-block">
                 <GVButton>Invest</GVButton>
                 <div className="program-detailed__details">
