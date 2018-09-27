@@ -2,12 +2,12 @@ import "./program-details-history.scss";
 
 import Surface from "components/surface/surface";
 import { GVTab, GVTabs } from "gv-react-components";
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 
 import ProgramTrades from "./program-trades/program-trades";
 
-class ProgramDetailsHistory extends Component {
+class ProgramDetailsHistorySection extends PureComponent {
   state = {
     tab: "trades"
   };
@@ -18,20 +18,30 @@ class ProgramDetailsHistory extends Component {
 
   render() {
     const { tab } = this.state;
+    const { t, programId, currency, tradesData, eventsData } = this.props;
+    if (!tradesData || !eventsData) return null;
     return (
       <Surface className="program-details-history">
         <div className="program-details-history__header">
-          <h2>History</h2>
+          <h2>{t("program-details-page.history.heading")}</h2>
           <GVTabs value={tab} onChange={this.handleTabChange}>
-            <GVTab value={"trades"} label="Trades" />
-            <GVTab value={"events"} label="Events" />
+            <GVTab
+              value={"trades"}
+              label={t("program-details-page.history.tabs.trades")}
+            />
+            <GVTab
+              value={"events"}
+              label={t("program-details-page.history.tabs.events")}
+            />
           </GVTabs>
         </div>
         <div>
           {tab === "trades" && (
-            <div className="program-details-trades">
-              <ProgramTrades />
-            </div>
+            <ProgramTrades
+              trades={tradesData.data}
+              programId={programId}
+              currency={currency}
+            />
           )}
           {tab === "events" && "Events"}
         </div>
@@ -40,4 +50,4 @@ class ProgramDetailsHistory extends Component {
   }
 }
 
-export default translate()(ProgramDetailsHistory);
+export default translate()(ProgramDetailsHistorySection);

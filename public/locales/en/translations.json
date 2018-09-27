@@ -226,12 +226,6 @@
   },
   "program-details-page": {
     "title": "Program detail",
-    "back": "Back",
-    "previous-path": "/programs",
-    "tabs": {
-      "overview": "Overview",
-      "investedInfo": "Invested Info"
-    },
     "description": {
       "strategy": "Strategy",
       "addToFavorites": "Add to favorites",
@@ -250,7 +244,7 @@
       "withdraw-notice-text": "You can withdraw only the invested funds, the profit will be withdrawn to your account at the end of the period automatically"
     },
     "statistics": {
-      "title": "Statistics",
+      "heading": "Statistics",
       "balance": "Balance",
       "investors": "Investors",
       "trades": "Trades",
@@ -263,6 +257,11 @@
       "period": "Period"
     },
     "history": {
+      "heading": "History",
+      "tabs": {
+        "trades": "Trades",
+        "events": "Events"
+      },
       "trades": {
         "direction": "Dir",
         "ticket": "Ticket",

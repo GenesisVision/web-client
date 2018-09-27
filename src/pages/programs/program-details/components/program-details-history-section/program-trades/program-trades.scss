@@ -4,10 +4,6 @@
   overflow: hidden;
 
   & .table__row--head,
-  &__row {
-    padding: 0 0 0 32px;
-  }
-
   &__row:nth-child(2n + 1) {
     background-color: $table-background-subcolor;
   }
