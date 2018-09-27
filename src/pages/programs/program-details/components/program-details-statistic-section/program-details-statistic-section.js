@@ -21,9 +21,9 @@ class ProgramDetailsStatisticSection extends PureComponent {
 
   render() {
     const { period } = this.state;
-    const { isPending, data: statistic } = this.props.statisticData;
+    const { data: statistic } = this.props.statisticData;
 
-    if (!statistic || isPending) return null;
+    if (!statistic) return null;
 
     return (
       <div className="program-details-statistic-section">

@@ -24,6 +24,7 @@ class ProgramDetailsDescriptionSection extends PureComponent {
     super(props);
     this.state = {
       ui: {
+        isFavoritePending: false,
         isReinvestPending: false,
         isPending: false
       },
@@ -105,7 +106,7 @@ class ProgramDetailsDescriptionSection extends PureComponent {
 
   render() {
     const { programDescription, ui } = this.state;
-    if (!programDescription || ui.isPending) return null;
+    if (!programDescription) return null;
     const isInvested =
       programDescription.personalProgramDetails &&
       programDescription.personalProgramDetails.isInvested;
