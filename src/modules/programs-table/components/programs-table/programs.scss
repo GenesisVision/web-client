@@ -55,9 +55,6 @@ $description-block-width: 250px;
     padding: 20px;
     border-radius: 8px;
     background-color: #212c34;
-    &:last-child {
-      margin-right: 0;
-    }
     &--title {
       @include table-title;
     }
@@ -164,6 +161,7 @@ $description-block-width: 250px;
       margin-right: $padding/2;
     }
     padding: $padding;
+    padding-right: $padding - $padding/2;
   }
 }
 
