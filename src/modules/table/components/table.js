@@ -48,17 +48,14 @@ class Table extends Component {
           updateFilter={this.props.updateFilter}
           filtering={this.props.filtering}
           onChange={this.changeView}
+          view={this.state.view}
+          sorting={this.props.sorting}
+          updateSorting={this.props.updateSorting}
+          renderSorting={this.props.renderSorting}
         />
         <Scrollbars autoHeight autoHeightMax={14000}>
           {this.state.view === "cards" ? (
             <div>
-              <TableHeader
-                columns={this.props.columns}
-                sorting={this.props.sorting}
-                updateSorting={this.props.updateSorting}
-              >
-                {this.props.renderHeader}
-              </TableHeader>
               <TableBody items={this.props.items} className="programs-cards">
                 {this.props.renderBodyCard}
               </TableBody>

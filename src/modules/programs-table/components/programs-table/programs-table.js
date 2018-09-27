@@ -13,6 +13,7 @@ import {
 } from "../../programs.constants";
 import ProgramTableRow from "./program-table-row";
 import ProgramCard from "./program-card";
+import SelectSorting from "../../../table/components/select-sorting/select-sorting";
 
 const selectFilterValues = [
   { value: undefined, label: "All" },
@@ -60,6 +61,17 @@ const ProgramsTable = ({
             name="dateRange"
             value={filtering["dateRange"]}
             onChange={updateFilter}
+          />
+        </Fragment>
+      )}
+      renderSorting={() => (
+        <Fragment>
+          <SelectSorting
+            name="sorting"
+            label="Sorting"
+            value={sorting}
+            values={PROGRAMS_COLUMNS.filter(item => item.sortingName)}
+            onChange={updateSorting}
           />
         </Fragment>
       )}

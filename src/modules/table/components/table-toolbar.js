@@ -14,10 +14,24 @@ class TableToolbar extends Component {
   };
 
   render() {
-    const { title, renderFilters, updateFilter, filtering } = this.props;
+    const {
+      title,
+      renderFilters,
+      renderSorting,
+      updateFilter,
+      filtering,
+      view,
+      sorting,
+      updateSorting
+    } = this.props;
     return (
       <div className="table__toolbar">
         {title && <div className="table__title">{title}</div>}
+        {view === "cards" && (
+          <div className="table__filters">
+            {renderSorting(sorting, updateSorting)}
+          </div>
+        )}
         {renderFilters && (
           <div className="table__filters">
             {renderFilters(updateFilter, filtering)}
