@@ -59,9 +59,9 @@ class Table extends Component {
               >
                 {this.props.renderHeader}
               </TableHeader>
-              <ProgramsCards items={this.props.items}>
+              <TableBody items={this.props.items} className="programs-cards">
                 {this.props.renderBodyCard}
-              </ProgramsCards>
+              </TableBody>
             </div>
           ) : (
             <table className="table">
@@ -72,7 +72,7 @@ class Table extends Component {
               >
                 {this.props.renderHeader}
               </TableHeader>
-              <TableBody items={this.props.items}>
+              <TableBody items={this.props.items} className="table__body">
                 {this.props.renderBodyRow}
               </TableBody>
             </table>
