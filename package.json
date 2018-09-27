@@ -61,7 +61,7 @@
     "redux-devtools": "^3.4.1"
   },
   "scripts": {
-    "precommit": "git add",
+    "precommit": "lint-staged",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
