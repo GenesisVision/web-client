@@ -18,6 +18,9 @@ class Filter extends Component {
     this.handleClosePopover();
     this.props.updateFilter({ name: this.props.name, value });
   };
+  handleChangeSorting = value => {
+    this.props.updateFilter(value);
+  };
 
   render() {
     const { label, value, renderValueText, children } = this.props;
@@ -25,6 +28,7 @@ class Filter extends Component {
     const child = React.cloneElement(children, {
       value,
       changeFilter: this.handleChangeFilter,
+      changeSorting: this.handleChangeSorting,
       cancel: this.handleClosePopover
     });
     return (
