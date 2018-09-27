@@ -1,4 +1,11 @@
 @import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
+
+$th-font-size: 12px;
+$td-font-size: 13px;
+$table-title-font-size: 17px;
+$view-svg-size: 15px;
+$padding: 33px;
 
 %sortable-border-icon {
   position: absolute;
@@ -10,40 +17,68 @@
 
 .table {
   width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-
+  border-spacing: 0;
+  margin: 1rem 0;
+  &__footer{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: $padding/2;
+    font-size: $td-font-size/1.5;
+    .pagination{
+      margin: 0;
+    }
+  }
   &__toolbar {
+    box-sizing: border-box;
     display: flex;
     width: 100%;
     align-items: center;
-    padding: 1.5rem;
+    padding: $padding/1.5;
+  }
+
+  &__toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: $padding/2;
+    div {
+      cursor: pointer;
+      padding: $view-svg-size;
+      svg{
+        width: $view-svg-size;
+      }
+      &:last-child {
+        padding-right: 0;
+      }
+    }
   }
 
   &__title {
     justify-self: flex-start;
-    font-size: 17px;
+    font-size: $table-title-font-size/2;
     font-weight: 600;
     letter-spacing: 0.2px;
     color: $text-color;
   }
 
   &__filters {
+    font-size: $th-font-size/1.5;
     display: flex;
     flex: 1;
     justify-content: flex-end;
-  }
-
-  &__head,
-  &__body {
-    width: 100%;
-    display: flex;
     flex-wrap: wrap;
   }
 
+  &__head {
+    font-size: $th-font-size/1.5;
+    opacity: 0.3;
+  }
+  &__body {
+    font-size: $td-font-size/1.5;
+  }
+
   &__row {
-    width: 100%;
-    display: flex;
     padding: 0 1.5rem;
     &:not(.table__row--head):hover {
       background-color: #212c34;
@@ -51,18 +86,28 @@
   }
 
   &__cell {
+    &:first-child {
+      padding-left: $padding/1.5;
+      @include media-breakpoint-landscape-phone() {
+        padding-left: $padding;
+      }
+    }
+    &:last-child {
+      padding-right: $padding/1.5;
+      @include media-breakpoint-landscape-phone() {
+        padding-right: $padding;
+      }
+    }
+    text-align: left;
     cursor: default;
     box-sizing: border-box;
-    display: inline-flex;
     align-items: center;
     flex-grow: 1;
-    padding: 1em 0;
+    padding: $padding/4;
     overflow: hidden; // Or flex might break
     list-style: none;
-    font-size: 13px;
-    font-weight: normal;
+    font-weight: 200;
     letter-spacing: 0.4px;
-    white-space: nowrap;
     &#{&} {
       &--head {
         padding-right: 15px;
@@ -101,4 +146,40 @@
       }
     }
   }
+  @include media-breakpoint-landscape-phone() {
+    &__head {
+      font-size: $th-font-size;
+    }
+    &__body {
+      font-size: $td-font-size;
+    }
+    &__filters {
+      font-size: $td-font-size;
+    }
+    &__title {
+      font-size: $table-title-font-size;
+    }
+    &__toolbar {
+      padding: $padding;
+    }
+    &__footer{
+      font-size: $td-font-size;
+      padding: $padding;
+    }
+    &__toggle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      div {
+        padding: 0 $view-svg-size/2;
+        &:last-child {
+          padding-right: 0;
+        }
+      }
+    }
+  }
 }
+.message{
+  padding: $padding;
+}
+

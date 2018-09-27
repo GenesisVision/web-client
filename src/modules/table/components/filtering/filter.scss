@@ -4,20 +4,23 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  font-size: 13px;
+  padding: 5px;
+  //font-size: 13px;
 
   & + & {
     padding-left: 1.5rem;
   }
 
   &__label {
+    opacity: 0.5;
+    font-weight: 200;
     letter-spacing: 0.2px;
     color: $text-color;
   }
 
   &__value {
     letter-spacing: 0.2px;
-    color: $text-color;
+    color: $text-accent-color;
     padding: 0 0.4rem;
   }
 

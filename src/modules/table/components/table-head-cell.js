@@ -10,7 +10,7 @@ const TableHeadCell = ({
   children
 }) => {
   return (
-    <div
+    <th
       className={classnames("table__cell table__cell--head", className, {
         "table__cell--sortable": sortable
       })}
@@ -24,7 +24,7 @@ const TableHeadCell = ({
       >
         {children}
       </span>
-    </div>
+    </th>
   );
 };
 

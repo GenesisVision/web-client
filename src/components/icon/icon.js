@@ -80,3 +80,11 @@ export const ArrowIcon = props => {
 export const MenuIcon = props => {
   return <Icon type={"menu"} {...props} />;
 };
+
+export const TableIcon = props => {
+  return <Icon type={"table"} {...props} />;
+};
+
+export const CardsIcon = props => {
+  return <Icon type={"cards"} {...props} />;
+};

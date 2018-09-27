@@ -1,4 +1,5 @@
 import { Icon } from "components/icon/icon";
+import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
 import Surface from "components/surface/surface";
 import { GVButton, GVProgramAvatar } from "gv-react-components";
 import FavoriteIcon from "modules/favorite-program/components/favorite-icon/favorite-icon";
@@ -6,6 +7,7 @@ import ProgramDepositContainer from "modules/program-deposit/program-deposit-con
 import { TableRow } from "modules/table/components";
 import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
 import React, { Component } from "react";
+import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import fileService from "shared/services/file-service";
 import replaceParams from "utils/replace-params";
@@ -22,6 +24,7 @@ class ProgramTableRowDetailed extends Component {
   handleCloseInvest = () => {
     this.setState({ isOpenInvestToProgramPopup: false });
   };
+
   render() {
     const {
       program,
@@ -36,85 +39,138 @@ class ProgramTableRowDetailed extends Component {
 
     return (
       <TableRow>
-        <Surface className="program-detailed">
-          <div className="program-detailed__info">
-            <div className="program-detailed__avatar">
-              <GVProgramAvatar
-                url={fileService.getFileUrl(program.avatar)}
-                level={program.level}
-                alt={program.title}
-                size="medium"
-              />
-              <div>
-                <div className="program-detailed__title">{program.title}</div>
-                <div className="program-detailed__manager">
-                  {program.manager.username}
+        <td className="program-detailed" colSpan="11" onClick={onCollapseClick}>
+          <div className="program-detailed__container">
+            <div className="program-detailed__info">
+              <div className="program-detailed__avatar">
+                <GVProgramAvatar
+                  url={fileService.getFileUrl(program.avatar)}
+                  level={program.level}
+                  alt={program.title}
+                  size="medium"
+                  className="program-detailed__img"
+                />
+                <div className="program-detailed__avatar--name">
+                  <div className="program-detailed__title">{program.title}</div>
+                  <div className="program-detailed__manager">
+                    {program.manager.username}
+                  </div>
+                </div>
+              </div>
+              <div className="program-detailed__strategy">Strategy</div>
+              <div className="program-detailed__description">
+                {program.description}
+              </div>
+            </div>
+            <div className="program-detailed__statistic">
+              <div className="program-detailed__chart">
+                <ProgramBigChart data={program.chart} />
+              </div>
+              <div className="program-detailed__statistic-data">
+                <div>
+                  <div className="program-detailed__statistic-data--label">
+                    Balance
+                  </div>
+                  <div className="program-detailed__statistic-data--value">
+                    {program.statistic.balanceGVT.amount}
+                  </div>
+                </div>
+                <div>
+                  <div className="program-detailed__statistic-data--label">
+                    Curr.
+                  </div>
+                  <div className="program-detailed__statistic-data--value">
+                    {program.currency}
+                  </div>
+                </div>
+                <div>
+                  <div className="program-detailed__statistic-data--label">
+                    Investors
+                  </div>
+                  <div className="program-detailed__statistic-data--value">
+                    {program.statistic.investorsCount}
+                  </div>
+                </div>
+                <div>
+                  <div className="program-detailed__statistic-data--label">
+                    Av. to Invest
+                  </div>
+                  <div className="program-detailed__statistic-data--value">
+                    {program.availableForInvestment}
+                  </div>
+                </div>
+                <div>
+                  <div className="program-detailed__statistic-data--label">
+                    Trades
+                  </div>
+                  <div className="program-detailed__statistic-data--value">
+                    {program.statistic.tradesCount}
+                  </div>
+                </div>
+                <div>
+                  <div className="program-detailed__statistic-data--label">
+                    Period
+                  </div>
+                  <div className="program-detailed__statistic-data--value">
+                    <ProgramPeriodPie
+                      start={program.periodDateStart}
+                      end={program.periodDateEnd}
+                    />
+                  </div>
+                </div>
+                <div>
+                  <div className="program-detailed__statistic-data--label">
+                    D.down
+                  </div>
+                  <div className="program-detailed__statistic-data--value">
+                    <NumberFormat
+                      value={program.statistic.drawdownPercent}
+                      suffix="%"
+                      decimalScale={2}
+                      displayType="text"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <div className="program-detailed__statistic-data--label">
+                    Profit
+                  </div>
+                  <div className="program-detailed__statistic-data--value--positive">
+                    <NumberFormat
+                      value={program.statistic.profitPercent}
+                      suffix="%"
+                      decimalScale={2}
+                      displayType="text"
+                    />
+                  </div>
+                </div>
+              </div>
+              {isAuthenticated &&
+                program.personalProgramDetails && (
+                  <div className="program-detailed__favorites-block">
+                    <span style={{ float: "right" }}>
+                      Add to favorites{" "}
+                      <FavoriteIcon
+                        toggleSelected={toggleFavorite}
+                        programId={program.id}
+                        selected={program.personalProgramDetails.isFavorite}
+                      />
+                    </span>
+                  </div>
+                )}
+              <div className="program-detailed__bottom-block">
+                <GVButton>Invest</GVButton>
+                <div className="program-detailed__details">
+                  <Link to={programDetailsUrl}>
+                    <GVButton variant="text" color="secondary">
+                      Details >
+                    </GVButton>
+                  </Link>
                 </div>
               </div>
             </div>
-            <div className="program-detailed__strategy">Strategy</div>
-            <div className="program-detailed__strategy">
-              {program.description}
-            </div>
           </div>
-          <div className="program-detailed__statistic">
-            <div className="program-detailed__chart">
-              <ProgramBigChart
-                data={program.chart}
-                currency={program.currency}
-              />
-            </div>
-            <div className="program-detailed__statistic-data">
-              <div style={{ padding: "0 1rem" }}>
-                <div>Balance</div>
-                <div>{program.statistic.balanceGVT.amount}</div>
-              </div>
-              <div style={{ padding: "0 1rem" }}>
-                <div>Curr.</div>
-                <div>{program.currency}</div>
-              </div>
-              <div style={{ padding: "0 1rem" }}>
-                <div>Investors</div>
-                <div>{program.statistic.investorsCount}</div>
-              </div>
-              <div style={{ padding: "0 1rem" }}>
-                <div>Av. to Invest</div>
-                <div>{program.availableForInvestment}</div>
-              </div>
-              <div style={{ padding: "0 1rem" }}>
-                <div>Trades</div>
-                <div>{program.statistic.tradesCount}</div>
-              </div>
-            </div>
-            <Icon
-              type="collapse"
-              className="program-detailed__collapse"
-              onClick={onCollapseClick}
-            />
-            <GVButton onClick={this.handleOpenInvest}>Invest</GVButton>
-            <Link to={programDetailsUrl}>
-              <GVButton variant="text" color="secondary">
-                Details >
-              </GVButton>
-            </Link>
-            <ProgramDepositContainer
-              id={program.id}
-              onClose={this.handleCloseInvest}
-              open={this.state.isOpenInvestToProgramPopup}
-            />
-            {isAuthenticated &&
-              program.personalProgramDetails && (
-                <span style={{ float: "right" }}>
-                  Add to favorites{" "}
-                  <FavoriteIcon
-                    toggleSelected={toggleFavorite}
-                    programId={program.id}
-                    selected={program.personalProgramDetails.isFavorite}
-                  />
-                </span>
-              )}
-          </div>
-        </Surface>
+        </td>
       </TableRow>
     );
   }

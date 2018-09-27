@@ -1,13 +1,90 @@
 import "./table.scss";
-
-import React from "react";
+import React, { Component } from "react";
+import Scrollbars from "react-custom-scrollbars";
 
 import TableBody from "./table-body";
 import TableFooter from "./table-footer";
 import TableHeader from "./table-header";
 import TableToolbar from "./table-toolbar";
+import ProgramsCards from "../../programs-table/components/programs-table/programs-cards";
 
-const Table = ({
+class Table extends Component {
+  state = {
+    view: "table"
+  };
+  renderBody = () => {
+    if (this.state.view === "cards") {
+      return (
+        <ProgramsCards
+          data={this.props.items}
+          columns={this.props.columns}
+          updateSorting={this.props.updateSorting}
+        />
+      );
+    } else {
+      return (
+        <table className="table">
+          <TableHeader
+            columns={this.props.columns}
+            sorting={this.props.sorting}
+            updateSorting={this.props.updateSorting}
+          >
+            {this.props.renderHeader}
+          </TableHeader>
+          <TableBody items={this.props.items}>
+            {this.props.renderBodyRow}
+          </TableBody>
+        </table>
+      );
+    }
+  };
+  changeView = view => this.setState({ view });
+  render() {
+    return (
+      <div className="table">
+        <TableToolbar
+          title={this.props.title}
+          renderFilters={this.props.renderFilters}
+          updateFilter={this.props.updateFilter}
+          filtering={this.props.filtering}
+          onChange={this.changeView}
+          view={this.state.view}
+          sorting={this.props.sorting}
+          updateSorting={this.props.updateSorting}
+          renderSorting={this.props.renderSorting}
+        />
+        <Scrollbars autoHeight autoHeightMax={14000}>
+          {this.state.view === "cards" ? (
+            <div>
+              <TableBody items={this.props.items} className="programs-cards">
+                {this.props.renderBodyCard}
+              </TableBody>
+            </div>
+          ) : (
+            <table className="table">
+              <TableHeader
+                columns={this.props.columns}
+                sorting={this.props.sorting}
+                updateSorting={this.props.updateSorting}
+              >
+                {this.props.renderHeader}
+              </TableHeader>
+              <TableBody items={this.props.items} className="table__body">
+                {this.props.renderBodyRow}
+              </TableBody>
+            </table>
+          )}
+        </Scrollbars>
+        <TableFooter
+          paging={this.props.paging}
+          updatePaging={this.props.updatePaging}
+          isPending={this.props.isPending}
+        />
+      </div>
+    );
+  }
+}
+/*const TableOld = ({
   title,
   columns,
   items,
@@ -29,15 +106,20 @@ const Table = ({
         renderFilters={renderFilters}
         updateFilter={updateFilter}
         filtering={filtering}
+        onChange={onChange}
       />
-      <TableHeader
-        columns={columns}
-        sorting={sorting}
-        updateSorting={updateSorting}
-      >
-        {renderHeader}
-      </TableHeader>
-      <TableBody items={items}>{renderBodyRow}</TableBody>
+      <Scrollbars autoHeight autoHeightMax={14000}>
+        <table className="table">
+          <TableHeader
+            columns={columns}
+            sorting={sorting}
+            updateSorting={updateSorting}
+          >
+            {renderHeader}
+          </TableHeader>
+          <TableBody items={items}>{renderBodyRow}</TableBody>
+        </table>
+      </Scrollbars>
       <TableFooter
         paging={paging}
         updatePaging={updatePaging}
@@ -45,6 +127,6 @@ const Table = ({
       />
     </div>
   );
-};
+};*/
 
 export default Table;

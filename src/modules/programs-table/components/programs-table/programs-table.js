@@ -12,6 +12,8 @@ import {
   PROGRAMS_COLUMNS
 } from "../../programs.constants";
 import ProgramTableRow from "./program-table-row";
+import ProgramCard from "./program-card";
+import SelectSorting from "../../../table/components/select-sorting/select-sorting";
 
 const selectFilterValues = [
   { value: undefined, label: "All" },
@@ -62,6 +64,17 @@ const ProgramsTable = ({
           />
         </Fragment>
       )}
+      renderSorting={() => (
+        <Fragment>
+          <SelectSorting
+            name="sorting"
+            label="Sorting"
+            value={sorting}
+            values={PROGRAMS_COLUMNS.filter(item => item.sortingName)}
+            onChange={updateSorting}
+          />
+        </Fragment>
+      )}
       renderHeader={({ column, sortingName, isAsc, handleSorting }) => {
         if (!isAuthenticated && column.name === "favorite") return null;
         return (
@@ -79,6 +92,13 @@ const ProgramsTable = ({
       }}
       renderBodyRow={program => (
         <ProgramTableRow
+          program={program}
+          toggleFavorite={toggleFavorite}
+          isAuthenticated={isAuthenticated}
+        />
+      )}
+      renderBodyCard={program => (
+        <ProgramCard
           program={program}
           toggleFavorite={toggleFavorite}
           isAuthenticated={isAuthenticated}
