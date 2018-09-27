@@ -23,7 +23,8 @@ $padding: 33px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    padding: $padding;
+    padding: $padding/2;
+    font-size: $td-font-size/1.5;
     .pagination{
       margin: 0;
     }
@@ -159,6 +160,10 @@ $padding: 33px;
       font-size: $table-title-font-size;
     }
     &__toolbar {
+      padding: $padding;
+    }
+    &__footer{
+      font-size: $td-font-size;
       padding: $padding;
     }
     &__toggle {
