@@ -1,6 +1,8 @@
 import { RingIcon } from "components/icon/ring-icon";
 import React from "react";
 import { translate } from "react-i18next";
+import { compose } from "redux";
+import isAuthenticated from "shared/decorators/is-authenticated";
 
 const ProgramDetailsNotificaton = ({ t }) => {
   return (
@@ -13,4 +15,7 @@ const ProgramDetailsNotificaton = ({ t }) => {
   );
 };
 
-export default translate()(ProgramDetailsNotificaton);
+export default compose(
+  translate(),
+  isAuthenticated
+)(ProgramDetailsNotificaton);

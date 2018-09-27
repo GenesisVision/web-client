@@ -44,6 +44,10 @@ class ProgramDetailsDescription extends PureComponent {
       isFavoritePending
     } = this.props;
 
+    const isFavorite =
+      programDescription.personalProgramDetails &&
+      programDescription.personalProgramDetails.isFavorite;
+
     return (
       <div className="program-details-description">
         <div className="program-details-description__left">
@@ -134,7 +138,7 @@ class ProgramDetailsDescription extends PureComponent {
         <div className="program-details-description__right">
           <ProgramDetailsFavorite
             programId={programDescription.id}
-            isFavorite={programDescription.personalProgramDetails.isFavorite}
+            isFavorite={isFavorite}
             toggleFavorite={onFavoriteClick}
             disabled={isFavoritePending}
           />

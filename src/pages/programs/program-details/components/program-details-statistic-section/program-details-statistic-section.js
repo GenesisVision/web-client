@@ -1,12 +1,9 @@
 import "./program-details-statistic-section.scss";
 
 import ChartPeriod from "components/chart/chart-period/chart-period";
+import Surface from "components/surface/surface";
 import React, { PureComponent } from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 
-import Surface from "../../../../../components/surface/surface";
-import { getProgramChart } from "../../services/program-details.service";
 import ProgramDetailsChart from "./program-details-chart/program-details-chart";
 import ProgramDetailsStatistic from "./program-details-statistics/program-details-statistics";
 
@@ -16,7 +13,7 @@ class ProgramDetailsStatisticSection extends PureComponent {
   };
 
   componentDidUpdate() {
-    const { statistic } = this.props;
+    const { data: statistic } = this.props.statisticData;
     if (statistic && statistic.chart) {
       this.setState({ period: statistic.chart.length - 1 });
     }
@@ -24,7 +21,7 @@ class ProgramDetailsStatisticSection extends PureComponent {
 
   render() {
     const { period } = this.state;
-    const { isPending, statistic } = this.props;
+    const { isPending, data: statistic } = this.props.statisticData;
 
     if (!statistic || isPending) return null;
 
@@ -45,11 +42,4 @@ class ProgramDetailsStatisticSection extends PureComponent {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  service: bindActionCreators({ getProgramChart }, dispatch)
-});
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(ProgramDetailsStatisticSection);
+export default ProgramDetailsStatisticSection;
