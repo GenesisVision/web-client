@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 
 const TableBody = ({ items, children }) => {
   const renderItems = () => {
-    if (items === undefined)
+    if (items === null || items === undefined)
       return <div className="table__row">Loading...</div>;
     if (items.length === 0)
       return <div className="table__row">There are no items.</div>;

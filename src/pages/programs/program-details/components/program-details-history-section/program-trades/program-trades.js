@@ -10,40 +10,43 @@ import {
 import TableModule from "modules/table/components/table-module";
 import { DEFAULT_PAGING } from "modules/table/reducers/table-paging.reducer";
 import moment from "moment";
-import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { connect } from "react-redux";
-import { compose } from "redux";
-import getParams from "utils/get-params";
 
 import {
   PROGRAM_TRADES_COLUMNS,
+  PROGRAM_TRADES_DEFAULT_FILTERS,
   PROGRAM_TRADES_FILTERS
 } from "../../../program-details.constants";
 import * as service from "../../../services/program-details.service";
-
-const programTradesFiltering = {
-  dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE
-};
 
 class ProgramTrades extends Component {
   fetchProgramTrades = filters => {
     const { programId, currency } = this.props;
 
-    return service.fetchProgramTrades({ programId, currency, filters });
+    return service
+      .getProgramTrades({ programId, currency, filters })
+      .then(({ data }) => {
+        return { items: data.trades, total: data.total };
+      });
   };
 
   render() {
-    const { t } = this.props;
-    const { fetchProgramTrades } = this;
+    const { t, trades } = this.props;
+    let data = { trades: null, total: 0 };
+    if (trades) {
+      data.items = trades.trades;
+      data.total = trades.total;
+    }
 
     return (
       <TableModule
-        defaultFilters={PROGRAM_TRADES_FILTERS}
-        getItems={fetchProgramTrades}
-        filtering={programTradesFiltering}
+        fetchOnMount={false}
+        data={data}
+        getItems={this.fetchProgramTrades}
+        defaultFilters={PROGRAM_TRADES_DEFAULT_FILTERS}
+        filtering={PROGRAM_TRADES_FILTERS}
         renderFilters={(updateFilter, filtering) => (
           <Fragment>
             <DateRangeFilter
@@ -81,7 +84,7 @@ class ProgramTrades extends Component {
             <TableCell className="program-details-trades__cell program-details-trades__cell--volume">
               <NumberFormat
                 value={trade.volume}
-                decimalScale={2}
+                decimalScale={8}
                 displayType="text"
                 thousandSeparator=" "
               />
@@ -89,7 +92,7 @@ class ProgramTrades extends Component {
             <TableCell className="program-details-trades__cell program-details-trades__cell--price">
               <NumberFormat
                 value={trade.price}
-                decimalScale={5}
+                decimalScale={8}
                 displayType="text"
                 thousandSeparator=" "
               />
@@ -98,7 +101,7 @@ class ProgramTrades extends Component {
               <Profitability value={trade.profit}>
                 <NumberFormat
                   value={Math.abs(trade.profit)}
-                  decimalScale={2}
+                  decimalScale={8}
                   displayType="text"
                 />
               </Profitability>
@@ -120,17 +123,4 @@ class ProgramTrades extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  const { routing, accountSettings } = state;
-
-  return {
-    programId: getParams(routing.location.pathname, PROGRAM_DETAILS_ROUTE)
-      .programId,
-    currency: accountSettings.currency
-  };
-};
-
-export default compose(
-  translate(),
-  connect(mapStateToProps)
-)(ProgramTrades);
+export default translate()(ProgramTrades);

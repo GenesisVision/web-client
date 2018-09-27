@@ -3,10 +3,10 @@ import handleErrorMessage from "utils/handle-error-message";
 const withApiProxy = api => {
   return new Proxy(api, {
     get(target, property) {
-      const origianlMethod = target[property];
-      if (typeof origianlMethod !== "function") return origianlMethod;
+      const originalMethod = target[property];
+      if (typeof originalMethod !== "function") return originalMethod;
       return (...args) => {
-        return origianlMethod
+        return originalMethod
           .apply(target, args)
           .then(result => {
             return {
@@ -15,10 +15,10 @@ const withApiProxy = api => {
             };
           })
           .catch(ex => {
-            return {
+            return Promise.reject({
               isPending: false,
               ...handleErrorMessage(ex.response)
-            };
+            });
           });
       };
     }
