@@ -15,10 +15,10 @@ const withApiProxy = api => {
             };
           })
           .catch(ex => {
-            throw {
+            return Promise.reject({
               isPending: false,
               ...handleErrorMessage(ex.response)
-            };
+            });
           });
       };
     }
