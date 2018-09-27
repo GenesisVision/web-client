@@ -19,7 +19,15 @@ $padding: 33px;
   width: 100%;
   border-spacing: 0;
   margin: 1rem 0;
-
+  &__footer{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: $padding;
+    .pagination{
+      margin: 0;
+    }
+  }
   &__toolbar {
     box-sizing: border-box;
     display: flex;
@@ -94,7 +102,7 @@ $padding: 33px;
     box-sizing: border-box;
     align-items: center;
     flex-grow: 1;
-    padding: 9px 9px 9px 0;
+    padding: $padding/4;
     overflow: hidden; // Or flex might break
     list-style: none;
     font-weight: 200;
