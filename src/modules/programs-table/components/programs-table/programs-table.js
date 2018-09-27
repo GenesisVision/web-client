@@ -12,6 +12,7 @@ import {
   PROGRAMS_COLUMNS
 } from "../../programs.constants";
 import ProgramTableRow from "./program-table-row";
+import ProgramCard from "./program-card";
 
 const selectFilterValues = [
   { value: undefined, label: "All" },
@@ -79,6 +80,13 @@ const ProgramsTable = ({
       }}
       renderBodyRow={program => (
         <ProgramTableRow
+          program={program}
+          toggleFavorite={toggleFavorite}
+          isAuthenticated={isAuthenticated}
+        />
+      )}
+      renderBodyCard={program => (
+        <ProgramCard
           program={program}
           toggleFavorite={toggleFavorite}
           isAuthenticated={isAuthenticated}

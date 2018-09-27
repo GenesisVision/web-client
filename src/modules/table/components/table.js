@@ -50,7 +50,33 @@ class Table extends Component {
           onChange={this.changeView}
         />
         <Scrollbars autoHeight autoHeightMax={14000}>
-          {this.renderBody()}
+          {this.state.view === "cards" ? (
+            <div>
+              <TableHeader
+                columns={this.props.columns}
+                sorting={this.props.sorting}
+                updateSorting={this.props.updateSorting}
+              >
+                {this.props.renderHeader}
+              </TableHeader>
+              <ProgramsCards items={this.props.items}>
+                {this.props.renderBodyCard}
+              </ProgramsCards>
+            </div>
+          ) : (
+            <table className="table">
+              <TableHeader
+                columns={this.props.columns}
+                sorting={this.props.sorting}
+                updateSorting={this.props.updateSorting}
+              >
+                {this.props.renderHeader}
+              </TableHeader>
+              <TableBody items={this.props.items}>
+                {this.props.renderBodyRow}
+              </TableBody>
+            </table>
+          )}
         </Scrollbars>
         <TableFooter
           paging={this.props.paging}

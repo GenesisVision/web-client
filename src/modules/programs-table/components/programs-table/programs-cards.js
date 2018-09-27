@@ -1,31 +1,16 @@
-import "./programs.scss";
+import React, { Fragment } from "react";
 
-import React from "react";
-import { translate } from "react-i18next";
+const ProgramsCards = ({ items, children }) => {
+  const renderItems = () => {
+    if (items === undefined)
+      return <div className="programs-cards">Loading...</div>;
+    if (items.length === 0)
+      return <div className="programs-cards">There are no items.</div>;
+    return items.map(program => (
+      <Fragment key={program.id}>{children(program)}</Fragment>
+    ));
+  };
 
-import ProgramCard from "./program-card";
-
-const ProgramsCards = ({
-  t,
-  data,
-  isPending,
-  sorting,
-  updateSorting,
-  filtering,
-  updateFilter,
-  paging,
-  updatePaging,
-  toggleFavorite,
-  isAuthenticated
-}) => {
-  if (!data) return null;
-  return (
-    <div className="programs-cards">
-      {data.map(program => (
-        <ProgramCard program={program} />
-      ))}
-    </div>
-  );
+  return <div className="programs-cards">{renderItems()}</div>;
 };
-
-export default translate()(ProgramsCards);
+export default ProgramsCards;
