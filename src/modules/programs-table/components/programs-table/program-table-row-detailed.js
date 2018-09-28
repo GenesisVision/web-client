@@ -1,4 +1,3 @@
-import { Icon } from "components/icon/icon";
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
 import { GVButton, GVProgramAvatar } from "gv-react-components";
 import FavoriteIcon from "modules/favorite-program/components/favorite-icon/favorite-icon";

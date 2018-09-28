@@ -1,7 +1,6 @@
 import "./sorting-filter.scss";
 
 import { GVButton } from "gv-react-components";
-import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import {
