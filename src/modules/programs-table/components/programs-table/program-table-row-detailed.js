@@ -4,11 +4,10 @@ import FavoriteIcon from "modules/favorite-program/components/favorite-icon/favo
 import { TableRow } from "modules/table/components";
 import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
 import React, { Component } from "react";
+import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
-import fileService from "shared/services/file-service";
 import replaceParams from "utils/replace-params";
-import { translate } from "react-i18next";
 
 import ProgramBigChart from "../program-big-chart/program-big-chart";
 

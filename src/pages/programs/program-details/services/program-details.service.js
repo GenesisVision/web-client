@@ -72,4 +72,4 @@ export const getProgramTrades = ({ programId, currency, filters }) => {
   return programsApiProxy.v10ProgramsByIdTradesGet(programId, opts);
 };
 
-export const getEvents = ({}) => {};
+export const getEvents = () => {};
