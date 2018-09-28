@@ -8,6 +8,7 @@ import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import fileService from "shared/services/file-service";
 import replaceParams from "utils/replace-params";
+import { translate } from "react-i18next";
 
 import ProgramBigChart from "../program-big-chart/program-big-chart";
 
@@ -24,6 +25,7 @@ class ProgramTableRowDetailed extends Component {
 
   render() {
     const {
+      t,
       program,
       isAuthenticated,
       toggleFavorite,
@@ -66,7 +68,7 @@ class ProgramTableRowDetailed extends Component {
               <div className="program-detailed__statistic-data">
                 <div>
                   <div className="program-detailed__statistic-data--label">
-                    Balance
+                    {t("programs-page.programs-header.balance")}
                   </div>
                   <div className="program-detailed__statistic-data--value">
                     {program.statistic.balanceGVT.amount}
@@ -74,7 +76,7 @@ class ProgramTableRowDetailed extends Component {
                 </div>
                 <div>
                   <div className="program-detailed__statistic-data--label">
-                    Curr.
+                    {t("programs-page.programs-header.currency")}
                   </div>
                   <div className="program-detailed__statistic-data--value">
                     {program.currency}
@@ -82,7 +84,7 @@ class ProgramTableRowDetailed extends Component {
                 </div>
                 <div>
                   <div className="program-detailed__statistic-data--label">
-                    Investors
+                    {t("programs-page.programs-header.investors")}
                   </div>
                   <div className="program-detailed__statistic-data--value">
                     {program.statistic.investorsCount}
@@ -90,7 +92,7 @@ class ProgramTableRowDetailed extends Component {
                 </div>
                 <div>
                   <div className="program-detailed__statistic-data--label">
-                    Av. to Invest
+                    {t("programs-page.programs-header.available-to-invest")}
                   </div>
                   <div className="program-detailed__statistic-data--value">
                     {program.availableForInvestment}
@@ -98,7 +100,7 @@ class ProgramTableRowDetailed extends Component {
                 </div>
                 <div>
                   <div className="program-detailed__statistic-data--label">
-                    Trades
+                    {t("programs-page.programs-header.trades")}
                   </div>
                   <div className="program-detailed__statistic-data--value">
                     {program.statistic.tradesCount}
@@ -106,7 +108,7 @@ class ProgramTableRowDetailed extends Component {
                 </div>
                 <div>
                   <div className="program-detailed__statistic-data--label">
-                    Period
+                    {t("programs-page.programs-header.period")}
                   </div>
                   <div className="program-detailed__statistic-data--value">
                     <ProgramPeriodPie
@@ -117,7 +119,7 @@ class ProgramTableRowDetailed extends Component {
                 </div>
                 <div>
                   <div className="program-detailed__statistic-data--label">
-                    D.down
+                    {t("programs-page.programs-header.drawdown")}
                   </div>
                   <div className="program-detailed__statistic-data--value">
                     <NumberFormat
@@ -130,7 +132,7 @@ class ProgramTableRowDetailed extends Component {
                 </div>
                 <div>
                   <div className="program-detailed__statistic-data--label">
-                    Profit
+                    {t("programs-page.programs-header.profit")}
                   </div>
                   <div className="program-detailed__statistic-data--value--positive">
                     <NumberFormat
@@ -173,4 +175,4 @@ class ProgramTableRowDetailed extends Component {
   }
 }
 
-export default ProgramTableRowDetailed;
+export default translate()(ProgramTableRowDetailed);
