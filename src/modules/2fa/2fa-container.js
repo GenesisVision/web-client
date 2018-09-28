@@ -1,16 +1,14 @@
+import "./2fa.scss";
+
 import { fetchTwoFactor } from "actions/2fa-actions";
 import Dialog from "components/dialog/dialog";
-import Modal from "components/modal/modal";
 import Select from "components/select/select";
 import { GVTextField } from "gv-react-components";
 import DisableAuthContainer from "modules/2fa/disable-auth/disable-auth-container";
-import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
-import { authApiProxy } from "services/api-client/auth-api";
-import authService from "services/auth-service";
 
 import GoogleAuthContainer from "./google-auth/google-auth-container";
 

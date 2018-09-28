@@ -68,7 +68,10 @@
     "password": "Enter your password",
     "code-required": "Code is required",
     "password-required": "Password is required",
-    "disable-title": "Disable two-factor authentication",
+    "disable": {
+      "title": "Disable two-factor authentication",
+      "success": "You have successfully disabled the two factor authentication. However, we strongly recommend you keep it enabled. This can protect your funds from being stolen."
+    },
     "codes": {
       "title": "Please read carefully",
       "successfully": "You have just successfully configured the two factor authentication. We will ask you for the 2FA Code in any potentially dangerous situation, such as logging in or withdrawing funds.",

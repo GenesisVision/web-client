@@ -11,7 +11,7 @@ const DisableAuth = ({ t, handleSubmit, errorMessage, disabled }) => {
   return (
     <div className="dialog">
       <form id="disable-auth" onSubmit={handleSubmit} className="dialog__top">
-        <div className="dialog__title">{t("2fa.disable-title")}</div>
+        <div className="dialog__title">{t("2fa.disable.title")}</div>
         <GVFormikField
           name="twoFactorCode"
           label={t("2fa.google-code")}
@@ -28,7 +28,7 @@ const DisableAuth = ({ t, handleSubmit, errorMessage, disabled }) => {
           component={GVTextField}
           autoComplete="off"
         />
-        {errorMessage}
+        <div className="form-error">{errorMessage}</div>
         <GVButton
           className="google-auth__button"
           variant="contained"
