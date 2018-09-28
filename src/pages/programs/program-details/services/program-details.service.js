@@ -1,10 +1,10 @@
+import { DEFAULT_PAGING } from "modules/table/reducers/table-paging.reducer";
 import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
+import { programsApiProxy } from "services/api-client/programs-api";
 import authService from "services/auth-service";
 import getParams from "utils/get-params";
 
-import { DEFAULT_PAGING } from "../../../../modules/table/reducers/table-paging.reducer";
 import { composeRequestFilters } from "../../../../modules/table/services/table.service";
-import { programsApiProxy } from "../../../../services/api-client/programs-api";
 import {
   PROGRAM_TRADES_DEFAULT_FILTERS,
   PROGRAM_TRADES_FILTERS
@@ -40,6 +40,7 @@ export const getChartAndEndTrades = () => (dispatch, getState) => {
   chartDateFrom.setHours(chartDateFrom.getHours() - 1);
   return Promise.all([
     programsApiProxy.v10ProgramsByIdProfitchartGet(programId, {
+      currency,
       dateFrom: chartDateFrom,
       dateTo: new Date(),
       maxPointCount: 100
@@ -47,24 +48,6 @@ export const getChartAndEndTrades = () => (dispatch, getState) => {
     getProgramTrades({ programId, currency, filters: tradesFilters })
   ]);
 };
-
-// export const getProgramChart = ({ dateFrom, dateTo, maxPointCount }) => (
-//   dispatch,
-//   getState
-// ) => {
-//   const { routing } = getState();
-//   const { programId } = getParams(
-//     routing.location.pathname,
-//     PROGRAM_DETAILS_ROUTE
-//   );
-
-//   dispatch(
-//     actions.fetchProgramChart({
-//       programId,
-//       opts: { dateFrom, dateTo, MaxPointCount: maxPointCount }
-//     })
-//   );
-// };
 
 export const getProgramTrades = ({ programId, currency, filters }) => {
   const opts = {
@@ -74,4 +57,6 @@ export const getProgramTrades = ({ programId, currency, filters }) => {
   return programsApiProxy.v10ProgramsByIdTradesGet(programId, opts);
 };
 
-export const getEvents = ({}) => {};
+export const getEvents = () => (dispatch, getState) => {
+  return Promise.resolve();
+};
