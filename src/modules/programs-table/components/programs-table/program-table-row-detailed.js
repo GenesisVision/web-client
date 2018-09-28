@@ -110,8 +110,8 @@ class ProgramTableRowDetailed extends Component {
                   </div>
                   <div className="program-detailed__statistic-data--value">
                     <ProgramPeriodPie
-                      start={program.periodDateStart}
-                      end={program.periodDateEnd}
+                      start={program.periodStarts}
+                      end={program.periodEnds}
                     />
                   </div>
                 </div>
