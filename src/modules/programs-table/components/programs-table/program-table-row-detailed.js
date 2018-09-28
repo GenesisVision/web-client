@@ -9,6 +9,7 @@ import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import replaceParams from "utils/replace-params";
 
+import ProgramAvatar from "../../../../components/program-avatar/program-avatar";
 import ProgramBigChart from "../program-big-chart/program-big-chart";
 
 class ProgramTableRowDetailed extends Component {
@@ -41,12 +42,11 @@ class ProgramTableRowDetailed extends Component {
           <div className="program-detailed__container">
             <div className="program-detailed__info">
               <div className="program-detailed__avatar">
-                <GVProgramAvatar
-                  url={fileService.getFileUrl(program.avatar)}
+                <ProgramAvatar
+                  url={program.logo}
                   level={program.level}
                   alt={program.title}
                   size="medium"
-                  className="program-detailed__img"
                 />
                 <div className="program-detailed__avatar--name">
                   <div className="program-detailed__title">{program.title}</div>

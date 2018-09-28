@@ -16,8 +16,8 @@ const ProgramTableRowShort = ({
     <TableRow onClick={onExpandClick}>
       <TableCell className="programs-table__cell--name">
         <div className="programs-table__cell--avatar-title">
-          <GVProgramAvatar
-            url={fileService.getFileUrl(program.avatar)}
+          <ProgramAvatar
+            url={program.logo}
             level={program.level}
             alt={program.title}
           />
