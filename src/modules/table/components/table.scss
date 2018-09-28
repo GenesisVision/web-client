@@ -18,14 +18,14 @@ $padding: 33px;
 .table {
   width: 100%;
   border-spacing: 0;
-  margin: 1rem 0;
-  &__footer{
+  &__footer {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     padding: $padding/2;
     font-size: $td-font-size/1.5;
-    .pagination{
+    padding: 20px 30px;
+    .pagination {
       margin: 0;
     }
   }
@@ -34,7 +34,7 @@ $padding: 33px;
     display: flex;
     width: 100%;
     align-items: center;
-    padding: $padding/1.5;
+    padding: 20px 30px;
   }
 
   &__toggle {
@@ -45,7 +45,7 @@ $padding: 33px;
     div {
       cursor: pointer;
       padding: $view-svg-size;
-      svg{
+      svg {
         width: $view-svg-size;
       }
       &:last-child {
@@ -159,12 +159,8 @@ $padding: 33px;
     &__title {
       font-size: $table-title-font-size;
     }
-    &__toolbar {
-      padding: $padding;
-    }
-    &__footer{
+    &__footer {
       font-size: $td-font-size;
-      padding: $padding;
     }
     &__toggle {
       display: flex;
@@ -179,7 +175,3 @@ $padding: 33px;
     }
   }
 }
-.message{
-  padding: $padding;
-}
-

@@ -25,16 +25,8 @@ $description-block-width: 250px;
   }
 }
 
-.programs-table {
-  &__cell {
-    &--header {
-      cursor: default;
-      opacity: 0.3;
-    }
-    &--profit:not(.table__cell--head) {
-      color: #2ebd85;
-    }
-  }
+.programs-table-container {
+  padding: 20px 0;
 }
 
 .programs-cards {
@@ -66,8 +58,6 @@ $description-block-width: 250px;
   &__name {
     font-size: $text-size/1.5;
     color: $primary-color;
-  }
-  &__actions {
   }
   &__chart {
     width: $chart-width/1.5;
@@ -196,7 +186,6 @@ $description-block-width: 250px;
     justify-content: space-between;
     align-items: stretch;
     height: 100%;
-
   }
   &__info {
     display: flex;
@@ -281,13 +270,15 @@ $description-block-width: 250px;
     align-items: center;
   }
 
-  &__statistic-data, &__bottom-block {
+  &__statistic-data,
+  &__bottom-block {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
   }
 
-  &__favorites-block, &__favorites-block span {
+  &__favorites-block,
+  &__favorites-block span {
     display: flex;
     justify-content: flex-end;
     align-items: center;

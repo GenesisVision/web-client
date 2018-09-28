@@ -1,6 +1,6 @@
 import "./programs.scss";
 
-import { Table, TableHeadCell } from "modules/table/components";
+import { Table } from "modules/table/components";
 import DateRangeFilter from "modules/table/components/filtering/date-range-filter/date-range-filter";
 import LevelFilter from "modules/table/components/filtering/level-filter/level-filter";
 import SelectFilter from "modules/table/components/filtering/select-filter/select-filter";
@@ -11,9 +11,8 @@ import {
   CURRENCY_FILTER_VALUES,
   PROGRAMS_COLUMNS
 } from "../../programs.constants";
-import ProgramTableRow from "./program-table-row";
 import ProgramCard from "./program-card";
-import SelectSorting from "../../../table/components/select-sorting/select-sorting";
+import ProgramTableRow from "./program-table-row";
 
 const selectFilterValues = [
   { value: undefined, label: "All" },
@@ -64,30 +63,12 @@ const ProgramsTable = ({
           />
         </Fragment>
       )}
-      renderSorting={() => (
-        <Fragment>
-          <SelectSorting
-            name="sorting"
-            label="Sorting"
-            value={sorting}
-            values={PROGRAMS_COLUMNS.filter(item => item.sortingName)}
-            onChange={updateSorting}
-          />
-        </Fragment>
-      )}
-      renderHeader={({ column, sortingName, isAsc, handleSorting }) => {
+      renderHeader={column => {
         if (!isAuthenticated && column.name === "favorite") return null;
         return (
-          <TableHeadCell
-            key={column.name}
-            className={`programs-table__cell--${column.name}`}
-            sortable={column.sortingName !== undefined}
-            active={column.sortingName === sortingName}
-            isAsc={isAsc}
-            onClick={handleSorting(column.sortingName)}
-          >
+          <span className={`programs-table__cell--${column.name}`}>
             {t(`programs-page.programs-header.${column.name}`)}
-          </TableHeadCell>
+          </span>
         );
       }}
       renderBodyRow={program => (

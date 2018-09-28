@@ -1,10 +1,11 @@
 import classnames from "classnames";
 import React from "react";
 
+import { SortingDirection } from "../helpers/sorting.helpers";
+
 const TableHeadCell = ({
   sortable,
-  active,
-  isAsc,
+  sortingDirection,
   className,
   onClick,
   children
@@ -18,8 +19,10 @@ const TableHeadCell = ({
     >
       <span
         className={classnames({
-          "table__cell--sortable-asc": sortable && active && isAsc,
-          "table__cell--sortable-desc": sortable && active && !isAsc
+          "table__cell--sortable-asc":
+            sortingDirection === SortingDirection.asc,
+          "table__cell--sortable-desc":
+            sortingDirection === SortingDirection.desc
         })}
       >
         {children}

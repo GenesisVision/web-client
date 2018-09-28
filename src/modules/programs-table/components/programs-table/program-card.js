@@ -1,8 +1,6 @@
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
 import { GVProgramAvatar } from "gv-react-components";
-import FavoriteIcon from "modules/favorite-program/components/favorite-icon/favorite-icon";
-import { TableRow, div } from "modules/table/components";
 import React from "react";
 import NumberFormat from "react-number-format";
 import fileService from "shared/services/file-service";
@@ -25,9 +23,7 @@ const ProgramCard = ({
           />
         </div>
         <div className="programs-cards__names">
-          <div className="programs-cards__title">
-            {program.title}
-          </div>
+          <div className="programs-cards__title">{program.title}</div>
           <div className="programs-cards__name">Eddie Carr</div>
         </div>
         <div className="programs-cards__actions">
@@ -108,9 +104,7 @@ const ProgramCard = ({
           <tr>
             <th className="programs-cards__table--title">Balance </th>
             <th className="programs-cards__table--title">Investors</th>
-            <th className="programs-cards__table--title">
-              Av. to invest
-            </th>
+            <th className="programs-cards__table--title">Av. to invest</th>
           </tr>
           <tr>
             <td>{program.statistic.balanceGVT.amount}</td>

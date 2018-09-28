@@ -1,4 +1,5 @@
 import "./table.scss";
+
 import React, { Component } from "react";
 import Scrollbars from "react-custom-scrollbars";
 
@@ -6,61 +7,51 @@ import TableBody from "./table-body";
 import TableFooter from "./table-footer";
 import TableHeader from "./table-header";
 import TableToolbar from "./table-toolbar";
-import ProgramsCards from "../../programs-table/components/programs-table/programs-cards";
+
+export const TABLE_VIEW = "table_view";
+export const CARDS_VIEW = "cards_view";
 
 class Table extends Component {
   state = {
-    view: "table"
+    view: TABLE_VIEW
   };
-  renderBody = () => {
-    if (this.state.view === "cards") {
-      return (
-        <ProgramsCards
-          data={this.props.items}
-          columns={this.props.columns}
-          updateSorting={this.props.updateSorting}
-        />
-      );
-    } else {
-      return (
-        <table className="table">
-          <TableHeader
-            columns={this.props.columns}
-            sorting={this.props.sorting}
-            updateSorting={this.props.updateSorting}
-          >
-            {this.props.renderHeader}
-          </TableHeader>
-          <TableBody items={this.props.items}>
-            {this.props.renderBodyRow}
-          </TableBody>
-        </table>
-      );
-    }
-  };
+
   changeView = view => this.setState({ view });
+
+  isViewSwitchEnabled =
+    this.props.renderBodyRow !== undefined &&
+    this.props.renderBodyCard !== undefined;
+
   render() {
+    const { view } = this.state;
     return (
-      <div className="table">
+      <div className="table-wrapper">
         <TableToolbar
           title={this.props.title}
           renderFilters={this.props.renderFilters}
           updateFilter={this.props.updateFilter}
           filtering={this.props.filtering}
           onChange={this.changeView}
-          view={this.state.view}
+          view={view}
+          columns={this.props.columns}
           sorting={this.props.sorting}
           updateSorting={this.props.updateSorting}
-          renderSorting={this.props.renderSorting}
+          renderHeader={this.props.renderHeader}
+          isViewSwitchEnabled={this.isViewSwitchEnabled}
         />
         <Scrollbars autoHeight autoHeightMax={14000}>
-          {this.state.view === "cards" ? (
-            <div>
-              <TableBody items={this.props.items} className="programs-cards">
+          {view === CARDS_VIEW && (
+            <div className="table">
+              <TableBody
+                items={this.props.items}
+                className="programs-cards"
+                tag="div"
+              >
                 {this.props.renderBodyCard}
               </TableBody>
             </div>
-          ) : (
+          )}
+          {view === TABLE_VIEW && (
             <table className="table">
               <TableHeader
                 columns={this.props.columns}
@@ -69,7 +60,11 @@ class Table extends Component {
               >
                 {this.props.renderHeader}
               </TableHeader>
-              <TableBody items={this.props.items} className="table__body">
+              <TableBody
+                items={this.props.items}
+                className="table__body"
+                tag="tbody"
+              >
                 {this.props.renderBodyRow}
               </TableBody>
             </table>
@@ -84,49 +79,5 @@ class Table extends Component {
     );
   }
 }
-/*const TableOld = ({
-  title,
-  columns,
-  items,
-  isPending,
-  sorting,
-  updateSorting,
-  paging,
-  updatePaging,
-  renderFilters,
-  updateFilter,
-  filtering,
-  renderHeader,
-  renderBodyRow
-}) => {
-  return (
-    <div className={"table"}>
-      <TableToolbar
-        title={title}
-        renderFilters={renderFilters}
-        updateFilter={updateFilter}
-        filtering={filtering}
-        onChange={onChange}
-      />
-      <Scrollbars autoHeight autoHeightMax={14000}>
-        <table className="table">
-          <TableHeader
-            columns={columns}
-            sorting={sorting}
-            updateSorting={updateSorting}
-          >
-            {renderHeader}
-          </TableHeader>
-          <TableBody items={items}>{renderBodyRow}</TableBody>
-        </table>
-      </Scrollbars>
-      <TableFooter
-        paging={paging}
-        updatePaging={updatePaging}
-        isPending={isPending}
-      />
-    </div>
-  );
-};*/
 
 export default Table;
