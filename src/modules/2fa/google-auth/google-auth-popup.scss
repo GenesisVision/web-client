@@ -6,22 +6,36 @@
     //max-width: calc(360px * 3);
   }
 
+  &--desktop {
+    width: 895px;
+    max-width: 895px;
+  }
+
   .dialog__header {
-    padding: 29px;
+    padding: 0 29px;
   }
 
   &__steps {
+    box-sizing: border-box;
     display: flex;
     flex-direction: row;
   }
 
   &__step {
+    box-sizing: border-box;
     flex: 1 0 280px;
-    padding: 29px 28px;
     width: 280px;
+    padding: 29px 28px;
 
-    &--2 {
+    &--alt-color {
       background-color: $secondary-background-color;
+    }
+  }
+
+  &--mobile {
+    &__step {
+      flex: 1 0 320px;
+      width: 320px;
     }
   }
 
@@ -53,9 +67,12 @@
     font-weight: 600;
     font-size: 14px;
     letter-spacing: 0.7px;
-    margin-bottom: 30px;
   }
   &__activate {
     margin-top: 16px;
+  }
+
+  &__buttons {
+    margin-bottom: 20px;
   }
 }

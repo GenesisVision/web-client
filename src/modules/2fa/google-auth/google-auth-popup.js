@@ -1,21 +1,40 @@
 import "./google-auth-popup.scss";
 
-import Dialog from "components/dialog/dialog";
-import GoogleAuthContainer from "modules/2fa/google-auth/google-auth-container";
-import PropTypes from "prop-types";
-import React from "react";
+import {
+  GoogleAuthDesktop,
+  GoogleAuthMobile
+} from "modules/2fa/google-auth/google-auth-container";
+import React, { Component } from "react";
+import EventListener from "react-event-listener";
 
-const GoogleAuthPopup = ({ open, onClose }) => {
-  return (
-    <Dialog open={open} onClose={onClose} className="google-auth">
-      <GoogleAuthContainer />
-    </Dialog>
-  );
-};
+class GoogleAuthPopup extends Component {
+  timer = null;
 
-GoogleAuthPopup.propTypes = {
-  open: PropTypes.bool,
-  onClose: PropTypes.func
-};
+  state = {
+    innerWidth: window.innerWidth
+  };
+  handleResize = () => {
+    clearTimeout(this.timer);
+    this.timer = setTimeout(() => {
+      this.setState({
+        innerWidth: window.innerWidth
+      });
+    }, 166);
+  };
+  isMobile = () => {
+    return this.state.innerWidth < 992;
+  };
+  render() {
+    return (
+      <EventListener target="window" onResize={this.handleResize}>
+        {this.isMobile() ? (
+          <GoogleAuthMobile {...this.props} />
+        ) : (
+          <GoogleAuthDesktop {...this.props} />
+        )}
+      </EventListener>
+    );
+  }
+}
 
 export default GoogleAuthPopup;
