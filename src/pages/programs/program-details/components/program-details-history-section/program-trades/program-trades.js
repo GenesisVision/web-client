@@ -3,10 +3,7 @@ import "./program-trades.scss";
 import Profitability from "components/profitability/profitability";
 import { TableCell, TableHeadCell, TableRow } from "modules/table/components";
 import DateRangeFilter from "modules/table/components/filtering/date-range-filter/date-range-filter";
-import {
-  DATE_RANGE_FILTER_NAME,
-  DEFAULT_DATE_RANGE_FILTER_VALUE
-} from "modules/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { DATE_RANGE_FILTER_NAME } from "modules/table/components/filtering/date-range-filter/date-range-filter.constants";
 import TableModule from "modules/table/components/table-module";
 import { DEFAULT_PAGING } from "modules/table/reducers/table-paging.reducer";
 import moment from "moment";
