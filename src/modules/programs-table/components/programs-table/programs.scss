@@ -156,22 +156,20 @@ $description-block-width: 250px;
 }
 
 .programs-table__cell {
-  &--name {
-    &--avatar-title {
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-start;
-      align-items: center;
-      &--title {
-        padding-left: 9px;
-        div {
-          padding: $padding/10;
-        }
-        &--bottom {
-          opacity: 0.3;
-        }
-      }
+  &--avatar-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  &--title {
+    padding-left: 9px;
+    div {
+      padding: $padding/10;
     }
+  }
+  &--bottom {
+    opacity: 0.3;
   }
   &--chart {
     min-width: 100px;
