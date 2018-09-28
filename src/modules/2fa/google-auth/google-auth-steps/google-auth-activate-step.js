@@ -7,13 +7,14 @@ import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import { number, object, string } from "yup";
 
-const DisableAuth = ({ t, handleSubmit, errorMessage, disabled }) => {
+export const GoogleStep3 = ({ t, handleSubmit, errorMessage, disabled }) => {
   return (
-    <div className="dialog">
-      <form id="disable-auth" onSubmit={handleSubmit} className="dialog__top">
-        <div className="dialog__title">{t("2fa.disable-title")}</div>
+    <div className="google-auth__step">
+      <div className="google-auth__count">03</div>
+      <div className="google-auth__title">{t("2fa.enter-code")}</div>
+      <form id="google-auth" onSubmit={handleSubmit}>
         <GVFormikField
-          name="twoFactorCode"
+          name="code"
           label={t("2fa.google-code")}
           component={GVTextField}
           autoComplete="off"
@@ -36,36 +37,36 @@ const DisableAuth = ({ t, handleSubmit, errorMessage, disabled }) => {
           type="submit"
           disabled={disabled}
         >
-          {t("buttons.disable")}
+          {t("buttons.activate")}
         </GVButton>
       </form>
     </div>
   );
 };
 
-const DisableAuthForm = compose(
+const GoogleActivateStep = compose(
   translate(),
   withFormik({
-    displayName: "disable-auth",
+    displayName: "google-auth",
     mapPropsToValues: () => ({
-      twoFactorCode: "",
+      code: "",
       password: ""
     }),
     validationSchema: ({ t }) =>
       object().shape({
-        twoFactorCode: number().required(t("2fa.code-required")),
+        code: number().required(t("2fa.code-required")),
         password: string().required(t("2fa.password-required"))
       }),
     handleSubmit: (values, { props }) => {
       props.onSubmit(values);
     }
   })
-)(DisableAuth);
+)(GoogleStep3);
 
-DisableAuthForm.propTypes = {
+GoogleActivateStep.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  errorMessage: PropTypes.string,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  errorMessage: PropTypes.string
 };
 
-export default DisableAuthForm;
+export default GoogleActivateStep;

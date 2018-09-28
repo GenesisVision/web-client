@@ -1,5 +1,4 @@
 import DisableAuthForm from "modules/2fa/disable-auth/disable-auth-form";
-import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { authApiProxy } from "services/api-client/auth-api";
 import authService from "services/auth-service";

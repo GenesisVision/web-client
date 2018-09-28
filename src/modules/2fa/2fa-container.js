@@ -1,5 +1,6 @@
 import { fetchTwoFactor } from "actions/2fa-actions";
 import Dialog from "components/dialog/dialog";
+import Modal from "components/modal/modal";
 import Select from "components/select/select";
 import { GVTextField } from "gv-react-components";
 import DisableAuthContainer from "modules/2fa/disable-auth/disable-auth-container";
@@ -12,7 +13,6 @@ import { authApiProxy } from "services/api-client/auth-api";
 import authService from "services/auth-service";
 
 import GoogleAuthContainer from "./google-auth/google-auth-container";
-import Modal from "components/modal/modal";
 
 const components = {
   google: GoogleAuthContainer,
@@ -22,7 +22,7 @@ const components = {
 class TwoFactorAuthContainer extends Component {
   state = {
     isPending: false,
-    component: GoogleAuthContainer
+    component: null
   };
 
   handleChange = event => {

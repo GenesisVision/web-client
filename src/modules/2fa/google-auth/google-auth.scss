@@ -68,11 +68,32 @@
     font-size: 14px;
     letter-spacing: 0.7px;
   }
-  &__activate {
+  &__button {
     margin-top: 16px;
   }
 
   &__buttons {
     margin-bottom: 20px;
+  }
+}
+
+.codes {
+  p {
+    font-size: 13px;
+    letter-spacing: 0.4px;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+
+  &__item {
+    font-size: 1.1rem;
+    box-sizing: border-box;
+    flex: 1 0 50%;
+    padding: 5px;
   }
 }

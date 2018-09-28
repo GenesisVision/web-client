@@ -42,7 +42,8 @@
     "close": "Close",
     "copy": "Copy",
     "confirm": "Confirm",
-    "activate": "Activate"
+    "activate": "Activate",
+    "disable": "Disable"
   },
   "navigation": {
     "dashboard": "Dashboard",
@@ -66,7 +67,14 @@
     "google-code": "6-digit code",
     "password": "Enter your password",
     "code-required": "Code is required",
-    "password-required": "Password is required"
+    "password-required": "Password is required",
+    "disable-title": "Disable two-factor authentication",
+    "codes": {
+      "title": "Please read carefully",
+      "successfully": "You have just successfully configured the two factor authentication. We will ask you for the 2FA Code in any potentially dangerous situation, such as logging in or withdrawing funds.",
+      "recovery_codes": "You can find your recovery codes below. You can use them in case you lost your 2FA key or lost your phone with the 2FA application installed. Each recovery code can be used only once. Save these codes on paper and put it in a safe place. If you are not sure that you can provide a secure place for the recovery codes, it would be safier to just ignore these codes.",
+      "warning": "WARNING: We do not store your recovery codes. If you lost the access to your 2FA, it is most likely that we couldn't help you to return the access to your account."
+    }
   },
   "settings": {
     "title": "Settings"
