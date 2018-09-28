@@ -165,6 +165,9 @@ $description-block-width: 250px;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
+    .program-avatar {
+      min-width: 40px;
+    }
   }
   &--title {
     padding-left: 9px;
