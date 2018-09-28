@@ -33,7 +33,7 @@
   }
 
   &--mobile {
-    &__step {
+    .google-auth__step {
       flex: 1 0 320px;
       width: 320px;
     }
@@ -96,4 +96,10 @@
     flex: 1 0 50%;
     padding: 5px;
   }
+}
+
+.two-factor-auth {
+  box-sizing: border-box;
+  width: auto;
+  max-width: inherit;
 }

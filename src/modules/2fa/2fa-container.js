@@ -54,9 +54,13 @@ class TwoFactorAuthContainer extends Component {
           <option value={"disable"}>{t("2fa.none")}</option>
           <option value={"google"}>{t("2fa.google")}</option>
         </GVTextField>
-        <Modal open={Boolean(this.state.component)} onClose={this.handleClose}>
+        <Dialog
+          className="two-factor-auth"
+          open={Boolean(this.state.component)}
+          onClose={this.handleClose}
+        >
           <Child onSubmit={this.handleSubmit} />
-        </Modal>
+        </Dialog>
       </div>
     );
   }
