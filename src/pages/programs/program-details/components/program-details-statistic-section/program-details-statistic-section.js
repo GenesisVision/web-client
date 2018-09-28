@@ -1,10 +1,8 @@
 import "./program-details-statistic-section.scss";
 
-import ChartPeriod from "components/chart/chart-period/chart-period";
-import Surface from "components/surface/surface";
 import React, { PureComponent } from "react";
 
-import ProgramDetailsChart from "./program-details-chart/program-details-chart";
+import ProgramDetailsChartSection from "./program-details-chart-section/program-details-chart-section";
 import ProgramDetailsStatistic from "./program-details-statistics/program-details-statistics";
 
 class ProgramDetailsStatisticSection extends PureComponent {
@@ -27,16 +25,19 @@ class ProgramDetailsStatisticSection extends PureComponent {
 
     return (
       <div className="program-details-statistic-section">
-        <Surface className="program-details-statistic-section__statistic">
+        <div className="program-details-statistic-section__statistic">
           <ProgramDetailsStatistic
             statistic={statistic.chart[period].statistic}
             sharpeRatio={statistic.sharpeRatio}
           />
-        </Surface>
-        <Surface className="program-details-statistic-section__chart">
-          <ChartPeriod onChange={this.handleChangePeriod} />
-          <ProgramDetailsChart />
-        </Surface>
+        </div>
+        <div className="program-details-statistic-section__chart">
+          <ProgramDetailsChartSection
+            chart={statistic.chart}
+            totalProfit={statistic.totalProfit}
+            changeValue={statistic.changeValue}
+          />
+        </div>
       </div>
     );
   }

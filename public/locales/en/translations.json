@@ -272,6 +272,13 @@
         "entry": "Entry",
         "date": "Date"
       }
+    },
+    "chart": {
+      "heading": "Chart",
+      "tabs": {
+        "profit": "Profit",
+        "balance": "Balance"
+      }
     }
   },
   "not-found-page": {
