@@ -80,8 +80,8 @@ const ProgramCard = ({
               <td>{program.statistic.tradesCount}</td>
               <td>
                 <ProgramPeriodPie
-                  start={program.periodDateStart}
-                  end={program.periodDateEnd}
+                  start={program.periodStarts}
+                  end={program.periodEnds}
                 />
               </td>
               <td>
