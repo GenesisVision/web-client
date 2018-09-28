@@ -7,7 +7,11 @@ import PaperPlan from "shared/media/paper-plane.svg";
 const WalletWithdrawConfirm = ({ t }) => {
   return (
     <div className="dialog__top dialog-confirm">
-      <img className="dialog-confirm__image" src={PaperPlan} />
+      <img
+        className="dialog-confirm__image"
+        src={PaperPlan}
+        alt="Confirm withdrawal"
+      />
       <p>{t("wallet-withdraw.success")}</p>
     </div>
   );
