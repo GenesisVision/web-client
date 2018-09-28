@@ -12,6 +12,7 @@ import { authApiProxy } from "services/api-client/auth-api";
 import authService from "services/auth-service";
 
 import GoogleAuthContainer from "./google-auth/google-auth-container";
+import Modal from "components/modal/modal";
 
 const components = {
   google: GoogleAuthContainer,
@@ -21,7 +22,7 @@ const components = {
 class TwoFactorAuthContainer extends Component {
   state = {
     isPending: false,
-    component: null
+    component: GoogleAuthContainer
   };
 
   handleChange = event => {
@@ -53,9 +54,9 @@ class TwoFactorAuthContainer extends Component {
           <option value={"disable"}>{t("2fa.none")}</option>
           <option value={"google"}>{t("2fa.google")}</option>
         </GVTextField>
-        <Dialog open={Boolean(this.state.component)} onClose={this.handleClose}>
+        <Modal open={Boolean(this.state.component)} onClose={this.handleClose}>
           <Child onSubmit={this.handleSubmit} />
-        </Dialog>
+        </Modal>
       </div>
     );
   }

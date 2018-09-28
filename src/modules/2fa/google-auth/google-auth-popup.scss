@@ -1,6 +1,13 @@
+@import "styles/_colors.scss";
+
 .google-auth {
+  background-color: $background-color;
   &.dialog {
-    max-width: calc(360px * 3);
+    //max-width: calc(360px * 3);
+  }
+
+  .dialog__header {
+    padding: 29px;
   }
 
   &__steps {
@@ -9,7 +16,46 @@
   }
 
   &__step {
-    width: 277px;
+    flex: 1 0 280px;
     padding: 29px 28px;
+    width: 280px;
+
+    &--2 {
+      background-color: $secondary-background-color;
+    }
+  }
+
+  &__count {
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.6px;
+    margin-bottom: 10px;
+  }
+
+  &__title {
+    letter-spacing: 0.123077px;
+    margin-bottom: 50px;
+  }
+  &__link {
+    display: inline-flex;
+    margin-bottom: 25px;
+  }
+  &__qr {
+    margin-bottom: 40px;
+  }
+  &__alt-text {
+    font-size: 14px;
+    letter-spacing: 0.4px;
+    opacity: 0.5;
+    margin-bottom: 27px;
+  }
+  &__alt-code {
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.7px;
+    margin-bottom: 30px;
+  }
+  &__activate {
+    margin-top: 16px;
   }
 }
