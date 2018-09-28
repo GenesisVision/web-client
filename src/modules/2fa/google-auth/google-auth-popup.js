@@ -6,23 +6,11 @@ import {
 } from "modules/2fa/google-auth/google-auth-container";
 import React, { Component } from "react";
 import EventListener from "react-event-listener";
+import { connect } from "react-redux";
 
 class GoogleAuthPopup extends Component {
-  timer = null;
-
-  state = {
-    innerWidth: window.innerWidth
-  };
-  handleResize = () => {
-    clearTimeout(this.timer);
-    this.timer = setTimeout(() => {
-      this.setState({
-        innerWidth: window.innerWidth
-      });
-    }, 166);
-  };
   isMobile = () => {
-    return this.state.innerWidth < 992;
+    return this.props.innerWidth < 992;
   };
   render() {
     return (
@@ -37,4 +25,8 @@ class GoogleAuthPopup extends Component {
   }
 }
 
-export default GoogleAuthPopup;
+const mapStateToProps = ({ ui }) => ({
+  innerWidth: ui.innerWidth
+});
+
+export default connect(mapStateToProps)(GoogleAuthPopup);
