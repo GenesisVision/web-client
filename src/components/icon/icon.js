@@ -88,3 +88,7 @@ export const TableIcon = props => {
 export const CardsIcon = props => {
   return <Icon type={"cards"} {...props} />;
 };
+
+export const ActionsIcon = props => {
+  return <Icon type={"actions"} {...props} />;
+};

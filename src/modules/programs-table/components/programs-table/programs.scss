@@ -30,6 +30,10 @@ $description-block-width: 250px;
 }
 
 .programs-cards {
+  .icon{
+    height: 15px;
+    width: auto;
+  }
   box-sizing: border-box;
   padding: $padding/2;
   display: flex;
