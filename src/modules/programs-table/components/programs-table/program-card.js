@@ -54,42 +54,46 @@ const ProgramCard = ({
       </div>
       <div className="programs-cards__table">
         <table>
-          <tr>
-            <th className="programs-cards__table--title">Balance </th>
-            <th className="programs-cards__table--title">Investors</th>
-            <th className="programs-cards__table--title">Av. to invest</th>
-          </tr>
-          <tr>
-            <td>{program.statistic.balanceGVT.amount}</td>
-            <td>{program.statistic.investorsCount}</td>
-            <td>{program.availableForInvestment}</td>
-          </tr>
+          <tbody>
+            <tr>
+              <th className="programs-cards__table--title">Balance </th>
+              <th className="programs-cards__table--title">Investors</th>
+              <th className="programs-cards__table--title">Av. to invest</th>
+            </tr>
+            <tr>
+              <td>{program.statistic.balanceGVT.amount}</td>
+              <td>{program.statistic.investorsCount}</td>
+              <td>{program.availableForInvestment}</td>
+            </tr>
+          </tbody>
         </table>
       </div>
       <div className="programs-cards__table">
         <table>
-          <tr>
-            <th className="programs-cards__table--title">Trades</th>
-            <th className="programs-cards__table--title">Period</th>
-            <th className="programs-cards__table--title">D.down</th>
-          </tr>
-          <tr>
-            <td>{program.statistic.tradesCount}</td>
-            <td>
-              <ProgramPeriodPie
-                start={program.periodDateStart}
-                end={program.periodDateEnd}
-              />
-            </td>
-            <td>
-              <NumberFormat
-                value={program.statistic.drawdownPercent}
-                suffix="%"
-                decimalScale={2}
-                displayType="text"
-              />
-            </td>
-          </tr>
+          <tbody>
+            <tr>
+              <th className="programs-cards__table--title">Trades</th>
+              <th className="programs-cards__table--title">Period</th>
+              <th className="programs-cards__table--title">D.down</th>
+            </tr>
+            <tr>
+              <td>{program.statistic.tradesCount}</td>
+              <td>
+                <ProgramPeriodPie
+                  start={program.periodDateStart}
+                  end={program.periodDateEnd}
+                />
+              </td>
+              <td>
+                <NumberFormat
+                  value={program.statistic.drawdownPercent}
+                  suffix="%"
+                  decimalScale={2}
+                  displayType="text"
+                />
+              </td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>

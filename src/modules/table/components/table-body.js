@@ -3,9 +3,25 @@ import React, { Fragment } from "react";
 const TableBody = ({ items, children, tag: Tag, className }) => {
   const renderItems = () => {
     if (items === null || items === undefined)
-      return <div className="message">Loading...</div>;
+      return Tag === "div" ? (
+        <div className="message">Loading...</div>
+      ) : (
+        <tr>
+          <td>
+            <div className="message">Loading...</div>
+          </td>
+        </tr>
+      );
     if (items.length === 0)
-      return <div className="message">There are no items.</div>;
+      return Tag === "div" ? (
+        <div className="message">There are no items.</div>
+      ) : (
+        <tr>
+          <td>
+            <div className="message">There are no items.</div>
+          </td>
+        </tr>
+      );
     return items.map(x => <Fragment key={x.id}>{children(x)}</Fragment>);
   };
 

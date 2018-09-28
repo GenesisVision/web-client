@@ -1,9 +1,7 @@
 import { Icon } from "components/icon/icon";
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
-import Surface from "components/surface/surface";
 import { GVButton, GVProgramAvatar } from "gv-react-components";
 import FavoriteIcon from "modules/favorite-program/components/favorite-icon/favorite-icon";
-import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import { TableRow } from "modules/table/components";
 import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
 import React, { Component } from "react";
