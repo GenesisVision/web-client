@@ -29,7 +29,7 @@ export const getChartAndEndTrades = () => (dispatch, getState) => {
     routing.location.pathname,
     PROGRAM_DETAILS_ROUTE
   );
-  const { currency } = accountSettings.currency;
+  const { currency } = accountSettings;
   const tradesFilters = composeRequestFilters({
     paging: DEFAULT_PAGING,
     sorting: undefined,
@@ -39,7 +39,7 @@ export const getChartAndEndTrades = () => (dispatch, getState) => {
   const chartDateFrom = new Date();
   chartDateFrom.setHours(chartDateFrom.getHours() - 1);
   return Promise.all([
-    programsApiProxy.v10ProgramsByIdChartGet(programId, {
+    programsApiProxy.v10ProgramsByIdProfitchartGet(programId, {
       dateFrom: chartDateFrom,
       dateTo: new Date(),
       maxPointCount: 100
@@ -69,7 +69,7 @@ export const getChartAndEndTrades = () => (dispatch, getState) => {
 export const getProgramTrades = ({ programId, currency, filters }) => {
   const opts = {
     ...filters,
-    symbol: currency
+    currency
   };
   return programsApiProxy.v10ProgramsByIdTradesGet(programId, opts);
 };
