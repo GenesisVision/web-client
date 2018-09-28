@@ -2,19 +2,19 @@ import * as alertMessageActionTypes from "./alert-message-actions.constants";
 
 const success = text => ({
   type: alertMessageActionTypes.ALERT_MESSAGE_SUCCESS,
-  className: "alert-message--success",
+  className: "alert-message-list__alert-message--success",
   text
 });
 
 const warning = text => ({
   type: alertMessageActionTypes.ALERT_MESSAGE_WARNING,
-  className: "alert-message--warning",
+  className: "alert-message-list__alert-message--warning",
   text
 });
 
 const error = text => ({
   type: alertMessageActionTypes.ALERT_MESSAGE_ERROR,
-  className: "alert-message--danger",
+  className: "alert-message-list__alert-message--danger",
   text
 });
 
