@@ -37,7 +37,7 @@ export const getChartAndEndTrades = () => (dispatch, getState) => {
     defaultFilters: PROGRAM_TRADES_DEFAULT_FILTERS
   });
   const chartDateFrom = new Date();
-  chartDateFrom.setHours(chartDateFrom.getHours() - 1);
+  chartDateFrom.setHours(chartDateFrom.getHours() - 10);
   return Promise.all([
     programsApiProxy.v10ProgramsByIdProfitchartGet(programId, {
       currency,

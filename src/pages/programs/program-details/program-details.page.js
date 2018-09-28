@@ -78,12 +78,12 @@ class ProgramDetailsPage extends PureComponent {
     return (
       <Page title={t("program-details-page.title")}>
         <div className="program-details">
-          <div className="program-details__section">
+          {/* <div className="program-details__section">
             <ProgramDetailsNavigation goBack={service.goBack} />
             <ProgramDetailsDescriptionSection
               programDescriptionData={this.description}
             />
-          </div>
+          </div> */}
           <div className="program-details__section">
             <ProgramDetailsStatisticSection statisticData={this.chart} />
           </div>

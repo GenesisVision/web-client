@@ -16,29 +16,27 @@ import {
 } from "recharts";
 
 class ProgramProfitChart extends PureComponent {
-  state = {
-    activeIndex: undefined
-  };
-
-  handleBarMouseOver = (data, index) => {
-    this.setState({
-      activeIndex: index
-    });
-  };
-
   render() {
     const { periods, pnl } = this.props;
-    const { activeIndex } = this.state;
     if (periods.length === 0) return null;
-
+    const chart = periods.reduce((accum, next) => {
+      return accum.concat(
+        next.map(x => ({ date: x.date.getTime(), value: x.value }))
+      );
+    }, []);
     return (
       <ResponsiveContainer>
-        <ComposedChart data={pnl}>
+        <ComposedChart data={chart}>
           <XAxis
             dataKey="date"
+            domain={["dataMin", "dataMax"]}
+            type="number"
             axisLine={false}
             tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
-            tickFormatter={date => moment(date).format("ll")}
+            tickFormatter={(date, i) => {
+              var t = moment(date).format("ll");
+              return t;
+            }}
           />
           <YAxis
             axisLine={false}
@@ -48,19 +46,17 @@ class ProgramProfitChart extends PureComponent {
 
           <Tooltip cursor={false} />
 
-          {periods.map((x, i) => (
-            <Area
-              key={i}
-              type="monotone"
-              dataKey="profitValue"
-              stroke={GVColors.$primaryColor}
-              fill={`url(#dashboardPortfolioChartFill)`}
-              connectNulls={true}
-              isAnimationActive={false}
-              strokeWidth={2}
-            />
-          ))}
-          <Bar dataKey={`pnl`} stackId="bars" isAnimationActive={false} />
+          {/* {periods.map((x, i) => ( */}
+          <Area
+            type="monotone"
+            dataKey={`value`}
+            stroke={GVColors.$primaryColor}
+            // fill={`url(#dashboardPortfolioChartFill)`}
+            connectNulls={true}
+            isAnimationActive={false}
+            strokeWidth={2}
+          />
+          {/* ))} */}
         </ComposedChart>
       </ResponsiveContainer>
     );
