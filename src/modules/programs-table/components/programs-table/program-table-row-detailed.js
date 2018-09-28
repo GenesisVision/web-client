@@ -1,5 +1,5 @@
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
-import { GVButton, GVProgramAvatar } from "gv-react-components";
+import { GVButton } from "gv-react-components";
 import FavoriteIcon from "modules/favorite-program/components/favorite-icon/favorite-icon";
 import { TableRow } from "modules/table/components";
 import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
@@ -11,6 +11,7 @@ import replaceParams from "utils/replace-params";
 
 import ProgramAvatar from "../../../../components/program-avatar/program-avatar";
 import ProgramBigChart from "../program-big-chart/program-big-chart";
+import { Icon } from "../../../../components/icon/icon";
 
 class ProgramTableRowDetailed extends Component {
   state = {
@@ -38,7 +39,7 @@ class ProgramTableRowDetailed extends Component {
 
     return (
       <TableRow>
-        <td className="program-detailed" colSpan="11" onClick={onCollapseClick}>
+        <td className="program-detailed" colSpan="11">
           <div className="program-detailed__container">
             <div className="program-detailed__info">
               <div className="program-detailed__avatar">
@@ -166,6 +167,16 @@ class ProgramTableRowDetailed extends Component {
                   </Link>
                 </div>
               </div>
+            </div>
+            <div
+              className="program-detailed__collapse"
+              onClick={onCollapseClick}
+            >
+              <Icon
+                type="collapse"
+                className="program-detailed__collapse-icon"
+                onClick={onCollapseClick}
+              />
             </div>
           </div>
         </td>
