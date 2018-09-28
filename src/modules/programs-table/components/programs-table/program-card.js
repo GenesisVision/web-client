@@ -4,7 +4,9 @@ import { GVProgramAvatar } from "gv-react-components";
 import React from "react";
 import NumberFormat from "react-number-format";
 import fileService from "shared/services/file-service";
+
 import { ActionsIcon } from "../../../../components/icon/actions-icon";
+import ProgramAvatar from "../../../../components/program-avatar/program-avatar";
 
 const ProgramCard = ({
   program,
@@ -16,8 +18,8 @@ const ProgramCard = ({
     <div onClick={onExpandClick} className="programs-cards__card">
       <div className="programs-cards__row">
         <div className="programs-cards__avatar">
-          <GVProgramAvatar
-            url={fileService.getFileUrl(program.avatar)}
+          <ProgramAvatar
+            url={program.logo}
             level={program.level}
             alt={program.title}
             size="medium"
