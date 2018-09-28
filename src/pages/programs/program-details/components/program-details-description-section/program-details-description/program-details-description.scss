@@ -1,0 +1,110 @@
+@import "styles/_colors.scss";
+
+.program-details-description {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  &__right {
+    width: 150px;
+
+    & .gv-btn--text {
+      padding: 0;
+      margin-bottom: 26px;
+      font-size: 13px;
+      letter-spacing: 0.3px;
+      font-weight: 600;
+    }
+  }
+
+  &__notification-icon {
+    margin-left: 24px;
+    opacity: 0.3;
+  }
+
+  &__main {
+    width: 69.2%;
+  }
+
+  &__heading {
+    margin: 0 0 10px 0;
+    font-size: 32px;
+  }
+
+  &__author-btn {
+    padding: 0;
+    font-size: 13px;
+    letter-spacing: 0.19px;
+  }
+
+  &__info {
+    margin-top: 80px;
+    margin-bottom: 60px;
+  }
+
+  &__subheading {
+    margin-bottom: 36px;
+    font-size: 17px;
+    letter-spacing: 0.21px;
+  }
+
+  &__text {
+    font-size: 14px;
+    line-height: 28px;
+    letter-spacing: 0.2px;
+    text-align: left;
+    color: $text-color;
+  }
+
+  &__invest-btn {
+    letter-spacing: 0.3px;
+    font-weight: 600;
+    box-sizing: border-box;
+    width: 149px;
+    height: 50px;
+  }
+
+  &__reinvest {
+    margin-left: 45px;
+    letter-spacing: 0.3px;
+    font-weight: 600;
+  }
+
+  &__short-statistic {
+    margin: 24px 0 36px;
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+
+    &-item {
+      letter-spacing: 0.44px;
+      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      margin-right: 57px;
+      font-weight: 600;
+    }
+
+    &-subheading {
+      color: $label-color;
+      font-size: 13px;
+      margin-bottom: 13px;
+      letter-spacing: 0.43px;
+      font-weight: normal;
+    }
+  }
+
+  &__control {
+    text-align: center;
+    margin-bottom: 30px;
+    &-icon {
+      width: 30px;
+      height: 30px;
+      margin-bottom: 5px;
+    }
+    &-text {
+      font-size: 10px;
+      letter-spacing: 0.3px;
+    }
+  }
+}

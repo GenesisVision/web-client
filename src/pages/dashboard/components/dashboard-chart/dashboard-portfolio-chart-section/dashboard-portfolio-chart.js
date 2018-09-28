@@ -1,6 +1,6 @@
 import ProgramChartGradient, {
   gradientOffset
-} from "components/chart/chart-gradient";
+} from "components/chart/chart-gradient/chart-gradient";
 import { GVColors } from "gv-react-components";
 import moment from "moment";
 import React, { PureComponent } from "react";

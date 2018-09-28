@@ -2,6 +2,34 @@
   "app": {
     "title": "Investor Portal: "
   },
+  "deposit-program": {
+    "title": "Invest",
+    "available-to-invest": "Available to invest in program",
+    "available-in-wallet": "Available in wallet",
+    "amount": "Amount to invest",
+    "entry-fee": "Entry fee",
+    "period": "Your request will be processed at the end of the reporting period",
+    "confirm": "Confirm",
+    "validation": {
+      "amount-more-than-available": "Amount is more than available in your wallet",
+      "amount-is-required": "Amount is required."
+    }
+  },
+  "withdraw-program": {
+    "title": "Withdraw",
+    "available-to-withdraw": "You invested in program",
+    "amount-to-withdraw": "Amount to withdraw",
+    "next": "Next",
+    "info": "Amount of withdrawals can be changed depending on the exchange rate or the success of the Manager",
+    "withdrawing": "Withdrawing",
+    "payout-date": "Payout date",
+    "back": "Back",
+    "submit": "Submit",
+    "validation": {
+      "amount-more-than-available": "Amount is more than available for withdraw",
+      "amount-is-required": "Amount is required."
+    }
+  },
   "notifications-aside": {
     "header": "Notifications",
     "today": "today",
@@ -10,7 +38,20 @@
   "buttons": {
     "apply": "Apply",
     "cancel": "Cancel",
-    "back": "Back"
+    "back": "Back",
+    "close": "Close",
+    "copy": "Copy",
+    "confirm": "Confirm"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "programs": "Programs",
+    "search": "Search",
+    "personal-details": "Personal details",
+    "wallet": "Wallet",
+    "settings": "Settings",
+    "logout": "Log out",
+    "login": "Login"
   },
   "auth": {
     "text": "A Brief History Of Creation",
@@ -66,7 +107,20 @@
     "invested-value": "Invested value",
     "available": "Available",
     "add-funds": "Add funds",
-    "withdraw": "Withdraw"
+    "withdraw": "Withdraw",
+    "transactions": {
+      "date": "Date",
+      "type": "Type",
+      "amount": "Amount"
+    },
+    "transactions-types": {
+      "wallet": "Wallet",
+      "program": "Program",
+      "fund": "Fund",
+      "program-request": "Program request",
+      "withdrawal-request": "Withdrawal request",
+      "payment-transaction": "Payment transaction"
+    }
   },
   "wallet-widget": {
     "total-balance": "Total balance",
@@ -74,10 +128,34 @@
     "available": "Available",
     "details": "Details"
   },
+  "wallet-add-funds": {
+    "title": "Add funds",
+    "select-currency": "Select a wallet currency",
+    "will-send": "You will send",
+    "will-get": "You'll get",
+    "deposit-address": "Deposit address"
+  },
+  "wallet-withdraw": {
+    "title": "Withdraw",
+    "available": "Available in wallet",
+    "select-currency": "Select a wallet currency",
+    "amount": "Enter correct amount",
+    "will-get": "You'll get",
+    "address": "Withdraw address",
+    "fee": "Fee",
+    "withdrawing": "Withdrawing",
+    "info": "Amount of withdrawals can be changed depending on the exchange rate.",
+    "success": "Please approve the withdrawal request via the link in the confirmation email.",
+    "validation": {
+      "amount-more-than-available": "Amount is more than available in your wallet",
+      "amount-is-required": "Amount is required",
+      "address-is-required": "Address is required."
+    }
+  },
   "profile-widget": {
     "personal-details": "Personal details",
     "settings": "Settings",
-    "logout": "Logout"
+    "logout": "Log out"
   },
   "program-period": {
     "day": "day",
@@ -88,8 +166,9 @@
     "minute_plural": "minutes",
     "second": "second",
     "second_plural": "seconds",
-    "end-less-than-now": "The period is being restarted.",
-    "time-left": "Time left"
+    "period-is-over": "The period is over.",
+    "time-left": "Time left",
+    "left": "left"
   },
   "program-statuses": {
     "Active": "Active",
@@ -147,12 +226,6 @@
   },
   "program-details-page": {
     "title": "Program detail",
-    "back": "Back",
-    "previous-path": "/programs",
-    "tabs": {
-      "overview": "Overview",
-      "investedInfo": "Invested Info"
-    },
     "description": {
       "strategy": "Strategy",
       "addToFavorites": "Add to favorites",
@@ -171,18 +244,46 @@
       "withdraw-notice-text": "You can withdraw only the invested funds, the profit will be withdrawn to your account at the end of the period automatically"
     },
     "statistics": {
-      "title": "Statistics",
+      "heading": "Statistics",
       "balance": "Balance",
       "investors": "Investors",
       "trades": "Trades",
-      "succesTrades": "Succes trades",
-      "profitFactor": "Profit factor",
-      "sharpeRatio": "Sharpe Ratio",
-      "maxDrawdown": "Max Drawdown",
-      "startDay": "Start day",
-      "periodEnd": "Period end",
+      "success-trades": "Success trades",
+      "profit-factor": "Profit factor",
+      "sharpe-ratio": "Sharpe ratio",
+      "max-drawdown": "Max Drawdown",
+      "start-day": "Start day",
+      "period-end": "Period end",
       "period": "Period"
+    },
+    "history": {
+      "heading": "History",
+      "tabs": {
+        "trades": "Trades",
+        "events": "Events"
+      },
+      "trades": {
+        "direction": "Dir",
+        "ticket": "Ticket",
+        "symbol": "Symbol",
+        "volume": "Volume",
+        "profit": "Profit",
+        "price": "Price",
+        "entry": "Entry",
+        "date": "Date"
+      }
+    },
+    "chart": {
+      "heading": "Chart",
+      "tabs": {
+        "profit": "Profit",
+        "balance": "Balance"
+      }
     }
+  },
+  "not-found-page": {
+    "title": "Page Not Found",
+    "body": "Page Not Found"
   },
   "program-actions": {
     "invest": "Invest",

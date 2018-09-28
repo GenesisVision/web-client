@@ -1,6 +1,4 @@
-import authService from "services/auth-service";
-
-import { alertMessageActions } from "../../modules/alert-message/actions/alert-message-actions";
+import handleErrorMessage from "../../../utils/handle-error-message";
 
 const REJECTED_SUFFIX = "FAILURE";
 
@@ -11,21 +9,7 @@ const apiErrorHandlerMiddleware = (
   var isRejected = new RegExp(REJECTED + "$", "g");
 
   if (isRejected && action.error) {
-    if (
-      action.payload.response !== undefined &&
-      action.payload.response.body !== null
-    ) {
-      action.payload = action.payload.response.body.errors;
-    } else {
-      // if (action.payload.status === 401) {
-      //   authService.removeToken();
-      // }
-      const error = "Server Error. Please contact administrator.";
-      const defaultError = [{ error, code: null }];
-
-      dispatch(alertMessageActions.error(error));
-      action.payload = defaultError;
-    }
+    action.payload = handleErrorMessage(action.payload.response);
   }
 
   return next(action);

@@ -1,5 +1,0 @@
-<svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0 1H10" transform="translate(6 4)" stroke="#3BCDBD" stroke-width="2" stroke-linecap="round"/>
-    <path d="M0 1H5" transform="translate(9)" stroke="#3BCDBD" stroke-width="2" stroke-linecap="round"/>
-    <path fill-rule="evenodd" clip-rule="evenodd" d="M0 2C0 0.89543 0.895431 0 2 0H18C19.1046 0 20 0.895431 20 2V11C20 12.1046 19.1046 13 18 13H2C0.895431 13 0 12.1046 0 11V2Z" transform="translate(1 9)" stroke="#3BCDBD" stroke-width="2" stroke-linecap="round"/>
-</svg>

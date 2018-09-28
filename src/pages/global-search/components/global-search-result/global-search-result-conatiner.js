@@ -7,13 +7,14 @@ import GlobalSearchResultTable from "./global-search-result-table";
 class GlobalSearchResultConatiner extends Component {
   state = {
     query: "",
-    data: undefined
+    data: undefined,
+    isPending: true
   };
 
   handleOnChange = value => {
-    this.setState({ query: value });
+    this.setState({ query: value, isPending: true });
     globalSearchGetPrograms(value).then(data => {
-      this.setState({ data });
+      this.setState({ ...data });
     });
   };
 

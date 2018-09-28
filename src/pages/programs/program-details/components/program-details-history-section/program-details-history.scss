@@ -1,0 +1,15 @@
+@import "styles/_colors.scss";
+
+.program-details-history {
+  padding: 40px 0 32px;
+
+  &__header {
+    padding: 0 32px;
+  }
+
+  & h2 {
+    margin: 0 0 20px;
+    letter-spacing: 0.2px;
+    font-size: 17px;
+  }
+}

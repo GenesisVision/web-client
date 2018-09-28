@@ -2,9 +2,15 @@ import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
 import authService from "services/auth-service";
 import getParams from "utils/get-params";
 
-import * as actions from "../actions/program-details.actions";
+import { DEFAULT_PAGING } from "../../../../modules/table/reducers/table-paging.reducer";
+import { composeRequestFilters } from "../../../../modules/table/services/table.service";
+import { programsApiProxy } from "../../../../services/api-client/programs-api";
+import {
+  PROGRAM_TRADES_DEFAULT_FILTERS,
+  PROGRAM_TRADES_FILTERS
+} from "../program-details.constants";
 
-export const fetchProgramDetails = () => (dispatch, getState) => {
+export const getProgramDescription = () => (dispatch, getState) => {
   const authorization = authService.getAuthArg();
   const { routing } = getState();
 
@@ -13,26 +19,59 @@ export const fetchProgramDetails = () => (dispatch, getState) => {
     PROGRAM_DETAILS_ROUTE
   );
 
-  dispatch(actions.fetchProgramDetails({ programId, opts: { authorization } }));
+  return programsApiProxy.v10ProgramsByIdGet(programId, { authorization });
 };
 
-export const getProgramChart = period => (dispatch, getState) => {
-  const { routing } = getState();
+export const getChartAndEndTrades = () => (dispatch, getState) => {
+  const { routing, accountSettings } = getState();
+
   const { programId } = getParams(
     routing.location.pathname,
     PROGRAM_DETAILS_ROUTE
   );
-
-  const filters = {
-    dateFrom: new Date(),
-    dateTo: new Date(),
-    maxPointCount: 100
-  };
-
-  dispatch(
-    actions.fetchProgramChart({
-      programId,
-      filters
-    })
-  );
+  const { currency } = accountSettings.currency;
+  const tradesFilters = composeRequestFilters({
+    paging: DEFAULT_PAGING,
+    sorting: undefined,
+    filtering: PROGRAM_TRADES_FILTERS,
+    defaultFilters: PROGRAM_TRADES_DEFAULT_FILTERS
+  });
+  const chartDateFrom = new Date();
+  chartDateFrom.setHours(chartDateFrom.getHours() - 1);
+  return Promise.all([
+    programsApiProxy.v10ProgramsByIdChartGet(programId, {
+      dateFrom: chartDateFrom,
+      dateTo: new Date(),
+      maxPointCount: 100
+    }),
+    getProgramTrades({ programId, currency, filters: tradesFilters })
+  ]);
 };
+
+// export const getProgramChart = ({ dateFrom, dateTo, maxPointCount }) => (
+//   dispatch,
+//   getState
+// ) => {
+//   const { routing } = getState();
+//   const { programId } = getParams(
+//     routing.location.pathname,
+//     PROGRAM_DETAILS_ROUTE
+//   );
+
+//   dispatch(
+//     actions.fetchProgramChart({
+//       programId,
+//       opts: { dateFrom, dateTo, MaxPointCount: maxPointCount }
+//     })
+//   );
+// };
+
+export const getProgramTrades = ({ programId, currency, filters }) => {
+  const opts = {
+    ...filters,
+    symbol: currency
+  };
+  return programsApiProxy.v10ProgramsByIdTradesGet(programId, opts);
+};
+
+export const getEvents = ({}) => {};

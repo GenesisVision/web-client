@@ -24,7 +24,7 @@ const ProgramTableRowShort = ({
         {program.title}
       </TableCell>
       <TableCell className="programs-table__cell--balance">
-        {program.statistic.balanceInGVT.amount}
+        {program.statistic.balanceGVT.amount}
       </TableCell>
       <TableCell className="programs-table__cell--currency">
         {program.currency}
@@ -33,16 +33,18 @@ const ProgramTableRowShort = ({
         {program.statistic.investorsCount}
       </TableCell>
       <TableCell className="programs-table__cell--available-to-invest">
-        {program.availableForInvestment}
+        {program.availableInvestment}
       </TableCell>
       <TableCell className="programs-table__cell--trades">
         {program.statistic.tradesCount}
       </TableCell>
       <TableCell className="programs-table__cell--period">
-        <ProgramPeriodPie
-          start={program.periodDateStart}
-          end={program.periodDateEnd}
-        />
+        {program.periodStarts && (
+          <ProgramPeriodPie
+            start={program.periodStarts}
+            end={program.periodEnds}
+          />
+        )}
       </TableCell>
       <TableCell className="programs-table__cell--drawdown">
         <NumberFormat

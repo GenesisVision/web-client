@@ -17,6 +17,7 @@ class SelectItem extends Component {
           "select__option--selected": isSelected
         })}
         onClick={this.handleClick}
+        name={this.props.name}
       >
         {this.props.children}
       </GVButton>

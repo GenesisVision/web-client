@@ -1,4 +1,4 @@
-import ChartTooltip from "components/chart/chart-tooltip";
+import ChartTooltip from "components/chart/chart-tooltip/chart-tooltip";
 import Chip from "components/chip/chip";
 import React from "react";
 

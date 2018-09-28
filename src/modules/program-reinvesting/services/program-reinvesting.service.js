@@ -1,11 +1,21 @@
+import { investorApiProxy } from "services/api-client/investor-api";
 import authService from "services/auth-service";
 
-import {
-  disableReinvesting,
-  enableReinvesting
-} from "../actions/program-reinvesting.actions";
+const enableReinvesting = ({ programId, authorization }) => {
+  return investorApiProxy.v10InvestorProgramsByIdReinvestOnPost(
+    programId,
+    authorization
+  );
+};
 
-export const toggleReinvesting = (programId, isReinvesting) => dispatch => {
+const disableReinvesting = ({ programId, authorization }) => {
+  return investorApiProxy.v10InvestorProgramsByIdReinvestOffPost(
+    programId,
+    authorization
+  );
+};
+
+export const toggleReinvesting = (programId, isReinvesting) => {
   if (!authService.getAuthArg()) return;
 
   const requestData = {
@@ -13,9 +23,7 @@ export const toggleReinvesting = (programId, isReinvesting) => dispatch => {
     authorization: authService.getAuthArg()
   };
 
-  dispatch(
-    isReinvesting
-      ? disableReinvesting(requestData)
-      : enableReinvesting(requestData)
-  );
+  return isReinvesting
+    ? disableReinvesting(requestData)
+    : enableReinvesting(requestData);
 };
