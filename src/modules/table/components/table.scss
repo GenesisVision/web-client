@@ -32,21 +32,28 @@ $padding: 33px;
   &__toolbar {
     box-sizing: border-box;
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-end;
     width: 100%;
     align-items: center;
-    padding: 20px 30px;
+    padding: $padding/2;
+    padding-bottom: 0;
   }
 
   &__toggle {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-left: $padding/2;
     div {
       cursor: pointer;
       padding: $view-svg-size;
+      padding-bottom: 0;
+      .icon{
+        width: auto;
+      }
       svg {
-        width: $view-svg-size;
+        width: $view-svg-size/1.2;
       }
       &:last-child {
         padding-right: 0;
@@ -162,12 +169,15 @@ $padding: 33px;
     &__footer {
       font-size: $td-font-size;
     }
+    &__toolbar{
+      padding: $padding;
+    }
     &__toggle {
       display: flex;
       justify-content: space-between;
       align-items: center;
       div {
-        padding: 0 $view-svg-size/2;
+        padding: 0 $view-svg-size;
         &:last-child {
           padding-right: 0;
         }
