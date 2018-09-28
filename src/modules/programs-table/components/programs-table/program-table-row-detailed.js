@@ -1,13 +1,13 @@
 import { Icon } from "components/icon/icon";
+import ProgramAvatar from "components/program-avatar/program-avatar";
 import Surface from "components/surface/surface";
-import { GVButton, GVProgramAvatar } from "gv-react-components";
+import { GVButton } from "gv-react-components";
 import FavoriteIcon from "modules/favorite-program/components/favorite-icon/favorite-icon";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import { TableRow } from "modules/table/components";
 import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import fileService from "shared/services/file-service";
 import replaceParams from "utils/replace-params";
 
 import ProgramBigChart from "../program-big-chart/program-big-chart";
@@ -39,8 +39,8 @@ class ProgramTableRowDetailed extends Component {
         <Surface className="program-detailed">
           <div className="program-detailed__info">
             <div className="program-detailed__avatar">
-              <GVProgramAvatar
-                url={fileService.getFileUrl(program.avatar)}
+              <ProgramAvatar
+                url={program.logo}
                 level={program.level}
                 alt={program.title}
                 size="medium"

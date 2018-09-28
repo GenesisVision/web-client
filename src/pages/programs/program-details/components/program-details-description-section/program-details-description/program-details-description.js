@@ -1,6 +1,7 @@
 import "./program-details-description.scss";
 
-import { GVButton, GVProgramAvatar } from "gv-react-components";
+import ProgramAvatar from "components/program-avatar/program-avatar";
+import { GVButton } from "gv-react-components";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
 import { MANAGER_DETAILS_ROUTE } from "pages/manager/manager.page";
@@ -51,7 +52,7 @@ class ProgramDetailsDescription extends PureComponent {
     return (
       <div className="program-details-description">
         <div className="program-details-description__left">
-          <GVProgramAvatar
+          <ProgramAvatar
             url={programDescription.logo}
             level={programDescription.level}
             alt={programDescription.title}
