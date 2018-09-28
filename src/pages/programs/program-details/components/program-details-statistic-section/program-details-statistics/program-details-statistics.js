@@ -1,13 +1,14 @@
 import "./program-details-statistics.scss";
 
 import ProgramPeriodLine from "components/program-period/program-period-line/program-period-line";
+import Surface from "components/surface/surface";
 import moment from "moment";
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 
 const ProgramDetailsStatistics = ({ t, statistic, sharpeRatio }) => (
-  <div className="program-details-statistics">
+  <Surface className="program-details-statistics">
     <div className="program-details-statistics__heading">
       {t("program-details-page.statistics.heading")}
     </div>
@@ -135,7 +136,7 @@ const ProgramDetailsStatistics = ({ t, statistic, sharpeRatio }) => (
         />
       </div>
     </div>
-  </div>
+  </Surface>
 );
 
 export default translate()(ProgramDetailsStatistics);

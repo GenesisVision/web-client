@@ -36,11 +36,13 @@ export const getChartAndEndTrades = () => (dispatch, getState) => {
     filtering: PROGRAM_TRADES_FILTERS,
     defaultFilters: PROGRAM_TRADES_DEFAULT_FILTERS
   });
+  const chartDateFrom = new Date();
+  chartDateFrom.setHours(chartDateFrom.getHours() - 1);
   return Promise.all([
     programsApiProxy.v10ProgramsByIdChartGet(programId, {
-      // dateFrom,
-      // dateTo,
-      // maxPointCount
+      dateFrom: chartDateFrom,
+      dateTo: new Date(),
+      maxPointCount: 100
     }),
     getProgramTrades({ programId, currency, filters: tradesFilters })
   ]);
