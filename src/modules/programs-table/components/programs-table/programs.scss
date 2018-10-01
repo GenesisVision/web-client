@@ -55,13 +55,23 @@ $description-block-width: 250px;
       @include table-title;
     }
   }
+  &__names{
+    width: 100%;
+    padding: 0 $padding/4;
+  }
+  &__actions{
+    text-align: right;
+    width: 10px;
+  }
   &__title {
     padding: 3px 0;
     font-size: $title-text-size/1.5;
+    word-break: break-all;
   }
   &__name {
     font-size: $text-size/1.5;
     color: $primary-color;
+    word-break: break-all;
   }
   &__chart {
     width: $chart-width/1.5;
@@ -171,6 +181,8 @@ $description-block-width: 250px;
   }
   &--title {
     padding-left: 9px;
+    word-break: break-all;
+    min-width: 100px;
     div {
       padding: $padding/10;
     }
@@ -236,12 +248,14 @@ $description-block-width: 250px;
     font-size: $title-text-size/1.5;
     letter-spacing: 0.2px;
     margin-bottom: $padding/2.5/1.5;
+    word-break: break-all;
   }
 
   &__manager {
     font-size: $text-size/1.5;
     letter-spacing: 0.2px;
     color: $positive-color;
+    word-break: break-all;
   }
 
   &__strategy {
@@ -261,6 +275,7 @@ $description-block-width: 250px;
     width: $description-block-width/2;
     max-height: 300px;
     overflow: hidden;
+    word-break: break-all;
   }
 
   &__chart {
