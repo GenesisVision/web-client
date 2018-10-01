@@ -1,10 +1,7 @@
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
-import { GVProgramAvatar } from "gv-react-components";
 import React from "react";
 import NumberFormat from "react-number-format";
-import fileService from "shared/services/file-service";
-
 import { ActionsIcon } from "../../../../components/icon/actions-icon";
 import ProgramAvatar from "../../../../components/program-avatar/program-avatar";
 

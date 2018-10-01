@@ -179,7 +179,6 @@ class ProgramTableRowDetailed extends Component {
               <Icon
                 type="collapse"
                 className="program-detailed__collapse-icon"
-                onClick={onCollapseClick}
               />
             </div>
           </div>
