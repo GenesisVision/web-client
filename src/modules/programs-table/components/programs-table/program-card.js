@@ -1,11 +1,9 @@
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
-import { GVProgramAvatar } from "gv-react-components";
-import FavoriteIcon from "modules/favorite-program/components/favorite-icon/favorite-icon";
-import { TableRow, div } from "modules/table/components";
 import React from "react";
 import NumberFormat from "react-number-format";
-import fileService from "shared/services/file-service";
+import { ActionsIcon } from "../../../../components/icon/actions-icon";
+import ProgramAvatar from "../../../../components/program-avatar/program-avatar";
 
 const ProgramCard = ({
   program,
@@ -17,69 +15,19 @@ const ProgramCard = ({
     <div onClick={onExpandClick} className="programs-cards__card">
       <div className="programs-cards__row">
         <div className="programs-cards__avatar">
-          <GVProgramAvatar
-            url={fileService.getFileUrl(program.avatar)}
+          <ProgramAvatar
+            url={program.logo}
             level={program.level}
             alt={program.title}
             size="medium"
           />
         </div>
         <div className="programs-cards__names">
-          <div className="programs-cards__title">
-            {program.title}
-          </div>
+          <div className="programs-cards__title">{program.title}</div>
           <div className="programs-cards__name">Eddie Carr</div>
         </div>
         <div className="programs-cards__actions">
-          <svg width="3px" height="15px" viewBox="0 0 3 15">
-            <title>white_dots</title>
-            <desc>Created with Sketch.</desc>
-            <defs />
-            <g
-              id="ui"
-              stroke="none"
-              stroke-width="1"
-              fill="none"
-              fill-rule="evenodd"
-            >
-              <g
-                id="1600_0_6"
-                transform="translate(-764.000000, -1059.000000)"
-                fill="#FFFFFF"
-              >
-                <g id="Group-28" transform="translate(120.000000, 866.000000)">
-                  <g
-                    id="Group-30"
-                    transform="translate(644.000000, 193.000000)"
-                  >
-                    <g id="white_dots">
-                      <circle
-                        id="Oval-13"
-                        transform="translate(1.500000, 1.500000) rotate(90.000000) translate(-1.500000, -1.500000) "
-                        cx="1.5"
-                        cy="1.5"
-                        r="1.5"
-                      />
-                      <circle
-                        id="Oval-13-Copy"
-                        transform="translate(1.500000, 7.500000) rotate(90.000000) translate(-1.500000, -7.500000) "
-                        cx="1.5"
-                        cy="7.5"
-                        r="1.5"
-                      />
-                      <circle
-                        id="Oval-13-Copy-2"
-                        transform="translate(1.500000, 13.500000) rotate(90.000000) translate(-1.500000, -13.500000) "
-                        cx="1.5"
-                        cy="13.5"
-                        r="1.5"
-                      />
-                    </g>
-                  </g>
-                </g>
-              </g>
-            </g>
-          </svg>
+          <ActionsIcon />
         </div>
       </div>
       <div className="programs-cards__row">
@@ -105,44 +53,46 @@ const ProgramCard = ({
       </div>
       <div className="programs-cards__table">
         <table>
-          <tr>
-            <th className="programs-cards__table--title">Balance </th>
-            <th className="programs-cards__table--title">Investors</th>
-            <th className="programs-cards__table--title">
-              Av. to invest
-            </th>
-          </tr>
-          <tr>
-            <td>{program.statistic.balanceGVT.amount}</td>
-            <td>{program.statistic.investorsCount}</td>
-            <td>{program.availableForInvestment}</td>
-          </tr>
+          <tbody>
+            <tr>
+              <th className="programs-cards__table--title">Balance </th>
+              <th className="programs-cards__table--title">Investors</th>
+              <th className="programs-cards__table--title">Av. to invest</th>
+            </tr>
+            <tr>
+              <td>{program.statistic.balanceGVT.amount}</td>
+              <td>{program.statistic.investorsCount}</td>
+              <td>{program.availableInvestment}</td>
+            </tr>
+          </tbody>
         </table>
       </div>
       <div className="programs-cards__table">
         <table>
-          <tr>
-            <th className="programs-cards__table--title">Trades</th>
-            <th className="programs-cards__table--title">Period</th>
-            <th className="programs-cards__table--title">D.down</th>
-          </tr>
-          <tr>
-            <td>{program.statistic.tradesCount}</td>
-            <td>
-              <ProgramPeriodPie
-                start={program.periodDateStart}
-                end={program.periodDateEnd}
-              />
-            </td>
-            <td>
-              <NumberFormat
-                value={program.statistic.drawdownPercent}
-                suffix="%"
-                decimalScale={2}
-                displayType="text"
-              />
-            </td>
-          </tr>
+          <tbody>
+            <tr>
+              <th className="programs-cards__table--title">Trades</th>
+              <th className="programs-cards__table--title">Period</th>
+              <th className="programs-cards__table--title">D.down</th>
+            </tr>
+            <tr>
+              <td>{program.statistic.tradesCount}</td>
+              <td>
+                <ProgramPeriodPie
+                  start={program.periodStarts}
+                  end={program.periodEnds}
+                />
+              </td>
+              <td>
+                <NumberFormat
+                  value={program.statistic.drawdownPercent}
+                  suffix="%"
+                  decimalScale={2}
+                  displayType="text"
+                />
+              </td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>

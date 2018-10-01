@@ -35,7 +35,7 @@ class ProgramDetailsPage extends PureComponent {
   }
 
   componentDidMount() {
-    const { service, programId, currency } = this.props;
+    const { service } = this.props;
     this.setState({ isPending: true });
     service
       .getProgramDescription()

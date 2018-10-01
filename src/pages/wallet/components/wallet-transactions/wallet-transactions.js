@@ -56,14 +56,13 @@ const WalletTransactions = ({ t }) => (
       paging={DEFAULT_PAGING}
       columns={WALLET_TRANSACTIONS_COLUMNS}
       renderHeader={column => (
-        <TableHeadCell
-          key={column.name}
+        <span
           className={`wallet-transactions__cell wallet-transactions__cell--${
             column.name
           }`}
         >
           {t(`wallet.transactions.${column.name}`)}
-        </TableHeadCell>
+        </span>
       )}
       renderBodyRow={transaction => (
         <TableRow className="wallet-transactions__row">

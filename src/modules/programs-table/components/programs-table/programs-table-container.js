@@ -6,7 +6,6 @@ import { bindActionCreators, compose } from "redux";
 
 import { toggleFavoriteProgram } from "../../../favorite-program/services/favorite-program.service";
 import * as programsService from "../../services/programs-table.service";
-import ProgramsCards from "./programs-cards";
 import ProgramsTable from "./programs-table";
 
 class ProgramsContainer extends Component {
@@ -25,26 +24,24 @@ class ProgramsContainer extends Component {
   render() {
     const { isPending, data, filters, service, isAuthenticated } = this.props;
     return (
-      <Surface>
-        <div className="program-table-container">
-          <ProgramsTable
-            data={data || {}}
-            isPending={isPending}
-            sorting={filters.sorting}
-            updateSorting={service.programsChangeSorting}
-            filtering={{
-              ...filters.filtering
-            }}
-            updateFilter={service.programsChangeFilter}
-            paging={{
-              totalPages: filters.pages,
-              currentPage: filters.page
-            }}
-            updatePaging={service.programsChangePage}
-            toggleFavorite={service.toggleFavoriteProgram}
-            isAuthenticated={isAuthenticated}
-          />
-        </div>
+      <Surface className="programs-table-container">
+        <ProgramsTable
+          data={data || {}}
+          isPending={isPending}
+          sorting={filters.sorting}
+          updateSorting={service.programsChangeSorting}
+          filtering={{
+            ...filters.filtering
+          }}
+          updateFilter={service.programsChangeFilter}
+          paging={{
+            totalPages: filters.pages,
+            currentPage: filters.page
+          }}
+          updatePaging={service.programsChangePage}
+          toggleFavorite={service.toggleFavoriteProgram}
+          isAuthenticated={isAuthenticated}
+        />
       </Surface>
     );
   }

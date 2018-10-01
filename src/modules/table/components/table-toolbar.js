@@ -1,15 +1,12 @@
+import { CardsIcon } from "components/icon/cards-icon";
+import { TableIcon } from "components/icon/table-icon";
 import React, { Component } from "react";
 
-import TableFilters from "./table-filters";
-import { CardsIcon } from "../../../components/icon/cards-icon";
-import { TableIcon } from "../../../components/icon/table-icon";
+import SortingFilter from "./sorting/sorting-filter/sorting-filter";
+import { CARDS_VIEW, TABLE_VIEW } from "./table";
 
 class TableToolbar extends Component {
-  state = {
-    view: "table"
-  };
   handleIconClick = view => e => {
-    this.setState({ view });
     this.props.onChange(view);
   };
 
@@ -17,34 +14,44 @@ class TableToolbar extends Component {
     const {
       title,
       renderFilters,
-      renderSorting,
       updateFilter,
       filtering,
       view,
+      columns,
       sorting,
-      updateSorting
+      updateSorting,
+      renderHeader,
+      isViewSwitchEnabled
     } = this.props;
     return (
       <div className="table__toolbar">
         {title && <div className="table__title">{title}</div>}
-        {view === "cards" && (
-          <div className="table__filters">
-            {renderSorting(sorting, updateSorting)}
-          </div>
-        )}
+        {view === CARDS_VIEW &&
+          sorting !== undefined && (
+            <div className="table__filters">
+              <SortingFilter
+                sorting={sorting}
+                columns={columns}
+                updateSorting={updateSorting}
+                renderValueText={renderHeader}
+              />
+            </div>
+          )}
         {renderFilters && (
           <div className="table__filters">
             {renderFilters(updateFilter, filtering)}
           </div>
         )}
-        <div className="table__toggle">
-          <div onClick={this.handleIconClick("cards")}>
-            <CardsIcon primary={this.state.view === "cards"} />
+        {isViewSwitchEnabled && (
+          <div className="table__toggle">
+            <div onClick={this.handleIconClick(CARDS_VIEW)}>
+              <CardsIcon primary={view === CARDS_VIEW} />
+            </div>
+            <div onClick={this.handleIconClick(TABLE_VIEW)}>
+              <TableIcon primary={view === TABLE_VIEW} />
+            </div>
           </div>
-          <div onClick={this.handleIconClick("table")}>
-            <TableIcon primary={this.state.view === "table"} />
-          </div>
-        </div>
+        )}
       </div>
     );
   }

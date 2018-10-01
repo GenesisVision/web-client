@@ -18,35 +18,46 @@ $padding: 33px;
 .table {
   width: 100%;
   border-spacing: 0;
-  margin: 1rem 0;
-  &__footer{
+  .message{
+    padding: $padding;
+    text-align: center;
+  }
+  &__footer {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     padding: $padding/2;
     font-size: $td-font-size/1.5;
-    .pagination{
+    padding: 20px 30px;
+    .pagination {
       margin: 0;
     }
   }
   &__toolbar {
     box-sizing: border-box;
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-end;
     width: 100%;
     align-items: center;
-    padding: $padding/1.5;
+    padding: $padding/2;
+    padding-bottom: 0;
   }
 
   &__toggle {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-left: $padding/2;
     div {
       cursor: pointer;
       padding: $view-svg-size;
-      svg{
-        width: $view-svg-size;
+      padding-bottom: 0;
+      .icon{
+        width: auto;
+      }
+      svg {
+        width: $view-svg-size/1.2;
       }
       &:last-child {
         padding-right: 0;
@@ -59,7 +70,7 @@ $padding: 33px;
     font-size: $table-title-font-size/2;
     font-weight: 600;
     letter-spacing: 0.2px;
-    color: $text-color;
+    color: $text-accent-color;
   }
 
   &__filters {
@@ -159,11 +170,10 @@ $padding: 33px;
     &__title {
       font-size: $table-title-font-size;
     }
-    &__toolbar {
-      padding: $padding;
-    }
-    &__footer{
+    &__footer {
       font-size: $td-font-size;
+    }
+    &__toolbar{
       padding: $padding;
     }
     &__toggle {
@@ -171,7 +181,7 @@ $padding: 33px;
       justify-content: space-between;
       align-items: center;
       div {
-        padding: 0 $view-svg-size/2;
+        padding: 0 $view-svg-size;
         &:last-child {
           padding-right: 0;
         }
@@ -179,7 +189,3 @@ $padding: 33px;
     }
   }
 }
-.message{
-  padding: $padding;
-}
-

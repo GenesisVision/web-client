@@ -25,19 +25,15 @@ $description-block-width: 250px;
   }
 }
 
-.programs-table {
-  &__cell {
-    &--header {
-      cursor: default;
-      opacity: 0.3;
-    }
-    &--profit:not(.table__cell--head) {
-      color: #2ebd85;
-    }
-  }
+.programs-table-container {
+  padding: $padding/2 0;
 }
 
 .programs-cards {
+  .icon {
+    height: 15px;
+    width: auto;
+  }
   box-sizing: border-box;
   padding: $padding/2;
   display: flex;
@@ -59,15 +55,23 @@ $description-block-width: 250px;
       @include table-title;
     }
   }
+  &__names{
+    width: 100%;
+    padding: 0 $padding/4;
+  }
+  &__actions{
+    text-align: right;
+    width: 10px;
+  }
   &__title {
     padding: 3px 0;
     font-size: $title-text-size/1.5;
+    word-break: break-all;
   }
   &__name {
     font-size: $text-size/1.5;
     color: $primary-color;
-  }
-  &__actions {
+    word-break: break-all;
   }
   &__chart {
     width: $chart-width/1.5;
@@ -166,22 +170,25 @@ $description-block-width: 250px;
 }
 
 .programs-table__cell {
-  &--name {
-    &--avatar-title {
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-start;
-      align-items: center;
-      &--title {
-        padding-left: 9px;
-        div {
-          padding: $padding/10;
-        }
-        &--bottom {
-          opacity: 0.3;
-        }
-      }
+  &--avatar-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    .program-avatar {
+      min-width: 40px;
     }
+  }
+  &--title {
+    padding-left: 9px;
+    word-break: break-all;
+    min-width: 100px;
+    div {
+      padding: $padding/10;
+    }
+  }
+  &--bottom {
+    opacity: 0.3;
   }
   &--chart {
     min-width: 100px;
@@ -193,10 +200,13 @@ $description-block-width: 250px;
   &__container {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: stretch;
-    height: 100%;
-
+    justify-content: space-between;
+    &--outer{
+    }
+    &--inner{
+      width: 100%;
+    }
   }
   &__info {
     display: flex;
@@ -209,9 +219,18 @@ $description-block-width: 250px;
     max-width: 318px;
   }
 
-  &__img {
-    //width: 40px;
-    //height: 40px;
+  &__collapse {
+    background-color: $secondary-color;
+    border-radius: 0 $border-radius $border-radius 0;
+    width: 45px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  &__collapse-icon {
+    width: 15px;
   }
 
   &__avatar {
@@ -229,12 +248,14 @@ $description-block-width: 250px;
     font-size: $title-text-size/1.5;
     letter-spacing: 0.2px;
     margin-bottom: $padding/2.5/1.5;
+    word-break: break-all;
   }
 
   &__manager {
     font-size: $text-size/1.5;
     letter-spacing: 0.2px;
     color: $positive-color;
+    word-break: break-all;
   }
 
   &__strategy {
@@ -254,6 +275,7 @@ $description-block-width: 250px;
     width: $description-block-width/2;
     max-height: 300px;
     overflow: hidden;
+    word-break: break-all;
   }
 
   &__chart {
@@ -281,13 +303,15 @@ $description-block-width: 250px;
     align-items: center;
   }
 
-  &__statistic-data, &__bottom-block {
+  &__statistic-data,
+  &__bottom-block {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
   }
 
-  &__favorites-block, &__favorites-block span {
+  &__favorites-block,
+  &__favorites-block span {
     display: flex;
     justify-content: flex-end;
     align-items: center;
