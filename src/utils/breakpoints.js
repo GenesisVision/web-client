@@ -1,4 +1,3 @@
-const PHONE_WIDTH = 322;
 const PHONE_LANDSCAPE = 576;
 const TABLET = 768;
 const TABLET_LANDSCAPE = 992;

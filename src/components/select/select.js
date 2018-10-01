@@ -75,26 +75,18 @@ class Select extends Component {
           "select--disabled": this.props.disabled
         })}
       >
-        <div onClick={this.handleClick} className="select__content">
-          <input
-            className="select__input--hidden"
-            type="hidden"
-            name={this.props.name}
-            value={this.props.value}
-          />
-          <button
-            onClick={this.handleClick}
-            className="select__value"
-            onBlur={this.handleBlur}
-            onFocus={this.handleFocus}
-            ref={this.input}
-          >
-            {displayValue}
-          </button>
+        <button
+          onClick={this.handleClick}
+          className="select__value"
+          onBlur={this.handleBlur}
+          onFocus={this.handleFocus}
+          ref={this.input}
+        >
+          {displayValue && <span className="select__text">{displayValue}</span>}
           <span className="select__icon">
             <FilterArrowIcon isOpen={Boolean(this.state.anchor)} />
           </span>
-        </div>
+        </button>
 
         <Popover
           horizontal="left"

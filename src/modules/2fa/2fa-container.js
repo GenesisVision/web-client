@@ -13,8 +13,8 @@ import { bindActionCreators, compose } from "redux";
 import GoogleAuthContainer from "./google-auth/google-auth-container";
 
 const components = {
-  google: GoogleAuthContainer,
-  disable: DisableAuthContainer
+  google: <GoogleAuthContainer />,
+  disable: <DisableAuthContainer />
 };
 
 class TwoFactorAuthContainer extends Component {
@@ -37,7 +37,7 @@ class TwoFactorAuthContainer extends Component {
 
   render() {
     const { t, twoFactorAuth } = this.props;
-    const { component: Child } = this.state;
+    const { component } = this.state;
     return (
       <div className="two-factor">
         <h3>{t("2fa.title")}</h3>
@@ -57,14 +57,12 @@ class TwoFactorAuthContainer extends Component {
           open={Boolean(this.state.component)}
           onClose={this.handleClose}
         >
-          <Child onSubmit={this.handleSubmit} />
+          {component && <component.type onSubmit={this.handleSubmit} />}
         </Dialog>
       </div>
     );
   }
 }
-
-TwoFactorAuthContainer.propTypes = {};
 
 const mapStateToProps = state => ({
   twoFactorAuth: state.accountSettings.twoFactorAuth
