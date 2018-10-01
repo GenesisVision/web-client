@@ -1,42 +1,54 @@
 import React, { Component } from "react";
 
-import { getSortingColumnName, isSortingAsc } from "../helpers/sorting.helpers";
+import {
+  SortingDirection,
+  getSortingColumnName,
+  getSortingDirection
+} from "../helpers/sorting.helpers";
 import TableRow from "./table-row";
+import { TableHeadCell } from ".";
 
 class TableHeader extends Component {
   sortingName = () => getSortingColumnName(this.props.sorting);
 
-  isAsc = () => isSortingAsc(this.props.sorting);
-
-  handleSorting = sortingName => e => {
-    if (sortingName !== this.sortingName() || this.isAsc()) {
-      return this.props.updateSorting(sortingName + "Desc");
-    }
-
-    return this.props.updateSorting(sortingName + "Asc");
+  getSortingDirection = sortingName => {
+    if (sortingName !== this.sortingName()) return SortingDirection.none;
+    return getSortingDirection(this.props.sorting);
   };
 
-  renderChildren = column => {
-    if (this.props.sorting !== undefined) {
-      return this.props.children({
-        column: column,
-        sortingName: this.sortingName(),
-        isAsc: this.isAsc(),
-        handleSorting: this.handleSorting
-      });
+  isSortable = sortingName => sortingName !== undefined;
+
+  handleSorting = sortingName => e => {
+    if (
+      sortingName !== this.sortingName() ||
+      SortingDirection.asc === getSortingDirection(this.props.sorting)
+    ) {
+      return this.props.updateSorting(sortingName + SortingDirection.desc);
     }
-    return this.props.children(column);
+
+    return this.props.updateSorting(sortingName + SortingDirection.asc);
+  };
+
+  renderColumns = () => {
+    return this.props.columns.map(column => {
+      return (
+        <TableHeadCell
+          key={column.name}
+          sortable={this.isSortable(column.sortingName)}
+          onClick={this.handleSorting(column.sortingName)}
+          sortingDirection={this.getSortingDirection(column.sortingName)}
+        >
+          {this.props.children(column)}
+        </TableHeadCell>
+      );
+    });
   };
 
   render() {
     return (
-      <div className="table__head">
-        <TableRow className="table__row--head">
-          {this.props.columns.map(x => {
-            return this.renderChildren(x);
-          })}
-        </TableRow>
-      </div>
+      <thead className="table__head">
+        <TableRow className="table__row--head">{this.renderColumns()}</TableRow>
+      </thead>
     );
   }
 }

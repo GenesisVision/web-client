@@ -14,16 +14,23 @@ const ProgramTableRowShort = ({
 }) => {
   return (
     <TableRow onClick={onExpandClick}>
-      <TableCell className="programs-table__cell--title">
-        <ProgramAvatar
-          url={program.logo}
-          level={program.level}
-          alt={program.title}
-        />
-        {program.title}
+      <TableCell className="programs-table__cell--name">
+        <div className="programs-table__cell--avatar-title">
+          <ProgramAvatar
+            url={program.logo}
+            level={program.level}
+            alt={program.title}
+          />
+          <div className="programs-table__cell--title">
+            <div className="programs-table__cell--top">{program.title}</div>
+            <div className="programs-table__cell--bottom">
+              High risk &middot; Best Choice
+            </div>
+          </div>
+        </div>
       </TableCell>
       <TableCell className="programs-table__cell--balance">
-        {program.statistic.balanceGVT.amount}
+        {program.statistic.balanceGVT.amount} GVT
       </TableCell>
       <TableCell className="programs-table__cell--currency">
         {program.currency}
