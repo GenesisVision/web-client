@@ -1,3 +1,4 @@
+import debounce from "debounce";
 export const WINDOW_RESIZE = "WINDOW_RESIZE";
 
 export const windowResize = (innerWidth, innerHeight) => ({
@@ -6,16 +7,9 @@ export const windowResize = (innerWidth, innerHeight) => ({
   innerHeight
 });
 
-export const initOnResizeEvent = () => {
-  let timer;
-  return dispatch => {
+export const initOnResizeEvent = () => dispatch => {
+  const dispatchResize = () =>
     dispatch(windowResize(window.innerWidth, window.innerHeight));
-
-    window.onresize = () => {
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        dispatch(windowResize(window.innerWidth, window.innerHeight));
-      }, 166);
-    };
-  };
+  dispatchResize();
+  window.onresize = debounce(dispatchResize, 166);
 };
