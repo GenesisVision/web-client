@@ -40,131 +40,135 @@ class ProgramTableRowDetailed extends Component {
     return (
       <TableRow>
         <td className="program-detailed" colSpan="11">
-          <div className="program-detailed__container">
-            <div className="program-detailed__info">
-              <div className="program-detailed__avatar">
-                <ProgramAvatar
-                  url={program.logo}
-                  level={program.level}
-                  alt={program.title}
-                  size="medium"
-                />
-                <div className="program-detailed__avatar--name">
-                  <div className="program-detailed__title">{program.title}</div>
-                  <div className="program-detailed__manager">
-                    {program.manager.username}
+          <div className="program-detailed__container program-detailed__container--outer">
+            <div className="program-detailed__container program-detailed__container--inner">
+              <div className="program-detailed__info">
+                <div className="program-detailed__avatar">
+                  <ProgramAvatar
+                    url={program.logo}
+                    level={program.level}
+                    alt={program.title}
+                    size="medium"
+                  />
+                  <div className="program-detailed__avatar--name">
+                    <div className="program-detailed__title">
+                      {program.title}
+                    </div>
+                    <div className="program-detailed__manager">
+                      {program.manager.username}
+                    </div>
                   </div>
+                </div>
+                <div className="program-detailed__strategy">Strategy</div>
+                <div className="program-detailed__description">
+                  {program.description}
                 </div>
               </div>
-              <div className="program-detailed__strategy">Strategy</div>
-              <div className="program-detailed__description">
-                {program.description}
-              </div>
-            </div>
-            <div className="program-detailed__statistic">
-              <div className="program-detailed__chart">
-                <ProgramBigChart data={program.chart} />
-              </div>
-              <div className="program-detailed__statistic-data">
-                <div>
-                  <div className="program-detailed__statistic-data--label">
-                    {t("programs-page.programs-header.balance")}
-                  </div>
-                  <div className="program-detailed__statistic-data--value">
-                    {program.statistic.balanceGVT.amount}
-                  </div>
+              <div className="program-detailed__statistic">
+                <div className="program-detailed__chart">
+                  <ProgramBigChart data={program.chart} />
                 </div>
-                <div>
-                  <div className="program-detailed__statistic-data--label">
-                    {t("programs-page.programs-header.currency")}
+                <div className="program-detailed__statistic-data">
+                  <div>
+                    <div className="program-detailed__statistic-data--label">
+                      {t("programs-page.programs-header.balance")}
+                    </div>
+                    <div className="program-detailed__statistic-data--value">
+                      {program.statistic.balanceGVT.amount}
+                    </div>
                   </div>
-                  <div className="program-detailed__statistic-data--value">
-                    {program.currency}
+                  <div>
+                    <div className="program-detailed__statistic-data--label">
+                      {t("programs-page.programs-header.currency")}
+                    </div>
+                    <div className="program-detailed__statistic-data--value">
+                      {program.currency}
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <div className="program-detailed__statistic-data--label">
-                    {t("programs-page.programs-header.investors")}
+                  <div>
+                    <div className="program-detailed__statistic-data--label">
+                      {t("programs-page.programs-header.investors")}
+                    </div>
+                    <div className="program-detailed__statistic-data--value">
+                      {program.statistic.investorsCount}
+                    </div>
                   </div>
-                  <div className="program-detailed__statistic-data--value">
-                    {program.statistic.investorsCount}
+                  <div>
+                    <div className="program-detailed__statistic-data--label">
+                      {t("programs-page.programs-header.available-to-invest")}
+                    </div>
+                    <div className="program-detailed__statistic-data--value">
+                      {program.availableForInvestment}
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <div className="program-detailed__statistic-data--label">
-                    {t("programs-page.programs-header.available-to-invest")}
+                  <div>
+                    <div className="program-detailed__statistic-data--label">
+                      {t("programs-page.programs-header.trades")}
+                    </div>
+                    <div className="program-detailed__statistic-data--value">
+                      {program.statistic.tradesCount}
+                    </div>
                   </div>
-                  <div className="program-detailed__statistic-data--value">
-                    {program.availableForInvestment}
-                  </div>
-                </div>
-                <div>
-                  <div className="program-detailed__statistic-data--label">
-                    {t("programs-page.programs-header.trades")}
-                  </div>
-                  <div className="program-detailed__statistic-data--value">
-                    {program.statistic.tradesCount}
-                  </div>
-                </div>
-                <div>
-                  <div className="program-detailed__statistic-data--label">
-                    {t("programs-page.programs-header.period")}
-                  </div>
-                  <div className="program-detailed__statistic-data--value">
-                    <ProgramPeriodPie
-                      start={program.periodStarts}
-                      end={program.periodEnds}
-                    />
-                  </div>
-                </div>
-                <div>
-                  <div className="program-detailed__statistic-data--label">
-                    {t("programs-page.programs-header.drawdown")}
-                  </div>
-                  <div className="program-detailed__statistic-data--value">
-                    <NumberFormat
-                      value={program.statistic.drawdownPercent}
-                      suffix="%"
-                      decimalScale={2}
-                      displayType="text"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <div className="program-detailed__statistic-data--label">
-                    {t("programs-page.programs-header.profit")}
-                  </div>
-                  <div className="program-detailed__statistic-data--value--positive">
-                    <NumberFormat
-                      value={program.statistic.profitPercent}
-                      suffix="%"
-                      decimalScale={2}
-                      displayType="text"
-                    />
-                  </div>
-                </div>
-              </div>
-              {isAuthenticated &&
-                program.personalProgramDetails && (
-                  <div className="program-detailed__favorites-block">
-                    <span style={{ float: "right" }}>
-                      Add to favorites{" "}
-                      <FavoriteIcon
-                        toggleSelected={toggleFavorite}
-                        programId={program.id}
-                        selected={program.personalProgramDetails.isFavorite}
+                  <div>
+                    <div className="program-detailed__statistic-data--label">
+                      {t("programs-page.programs-header.period")}
+                    </div>
+                    <div className="program-detailed__statistic-data--value">
+                      <ProgramPeriodPie
+                        start={program.periodStarts}
+                        end={program.periodEnds}
                       />
-                    </span>
+                    </div>
                   </div>
-                )}
-              <div className="program-detailed__bottom-block">
-                <GVButton>Invest</GVButton>
-                <div className="program-detailed__details">
-                  <Link to={programDetailsUrl}>
-                    <GVButton variant="text" color="secondary">
-                      Details >
-                    </GVButton>
-                  </Link>
+                  <div>
+                    <div className="program-detailed__statistic-data--label">
+                      {t("programs-page.programs-header.drawdown")}
+                    </div>
+                    <div className="program-detailed__statistic-data--value">
+                      <NumberFormat
+                        value={program.statistic.drawdownPercent}
+                        suffix="%"
+                        decimalScale={2}
+                        displayType="text"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div className="program-detailed__statistic-data--label">
+                      {t("programs-page.programs-header.profit")}
+                    </div>
+                    <div className="program-detailed__statistic-data--value--positive">
+                      <NumberFormat
+                        value={program.statistic.profitPercent}
+                        suffix="%"
+                        decimalScale={2}
+                        displayType="text"
+                      />
+                    </div>
+                  </div>
+                </div>
+                {isAuthenticated &&
+                  program.personalProgramDetails && (
+                    <div className="program-detailed__favorites-block">
+                      <span style={{ float: "right" }}>
+                        Add to favorites{" "}
+                        <FavoriteIcon
+                          toggleSelected={toggleFavorite}
+                          programId={program.id}
+                          selected={program.personalProgramDetails.isFavorite}
+                        />
+                      </span>
+                    </div>
+                  )}
+                <div className="program-detailed__bottom-block">
+                  <GVButton>Invest</GVButton>
+                  <div className="program-detailed__details">
+                    <Link to={programDetailsUrl}>
+                      <GVButton variant="text" color="secondary">
+                        Details >
+                      </GVButton>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>

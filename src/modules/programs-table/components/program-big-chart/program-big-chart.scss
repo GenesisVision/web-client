@@ -1,2 +1,5 @@
 .program-big-chart {
+  .recharts-wrapper, svg{
+    width: 100% !important;
+  }
 }
