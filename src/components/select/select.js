@@ -35,14 +35,18 @@ class Select extends Component {
   };
 
   handleBlur = event => {
-    if (this.props.onBlur) {
-      this.props.onBlur(event);
+    const { disabled, onBlur } = this.props;
+    if (disabled) return;
+    if (onBlur) {
+      onBlur(event);
     }
   };
 
   handleFocus = event => {
-    if (this.props.onFocus) {
-      this.props.onFocus(event);
+    const { disabled, onFocus } = this.props;
+    if (disabled) return;
+    if (onFocus) {
+      onFocus(event);
     }
   };
 
