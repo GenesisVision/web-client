@@ -62,7 +62,7 @@ const ProgramCard = ({
             <tr>
               <td>{program.statistic.balanceGVT.amount}</td>
               <td>{program.statistic.investorsCount}</td>
-              <td>{program.availableForInvestment}</td>
+              <td>{program.availableInvestment}</td>
             </tr>
           </tbody>
         </table>
