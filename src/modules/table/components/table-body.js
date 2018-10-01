@@ -1,27 +1,20 @@
 import React, { Fragment } from "react";
 
 const TableBody = ({ items, children, tag: Tag, className }) => {
+  const setMessage = message => {
+    return Tag === "tbody" ? (
+      <tr>
+        <td colSpan="11">
+          <div className="message">{message}</div>
+        </td>
+      </tr>
+    ) : (
+      <div className="message">{message}</div>
+    );
+  };
   const renderItems = () => {
-    if (items === null || items === undefined)
-      return Tag === "div" ? (
-        <div className="message">Loading...</div>
-      ) : (
-        <tr>
-          <td colSpan="11">
-            <div className="message">Loading...</div>
-          </td>
-        </tr>
-      );
-    if (items.length === 0)
-      return Tag === "div" ? (
-        <div className="message">There are no items.</div>
-      ) : (
-        <tr>
-          <td colSpan="11">
-            <div className="message">There are no items.</div>
-          </td>
-        </tr>
-      );
+    if (items === null || items === undefined) return setMessage("Loading...");
+    if (items.length === 0) return setMessage("There are no items.");
     return items.map(x => <Fragment key={x.id}>{children(x)}</Fragment>);
   };
 
