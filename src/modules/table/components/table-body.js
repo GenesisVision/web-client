@@ -7,7 +7,7 @@ const TableBody = ({ items, children, tag: Tag, className }) => {
         <div className="message">Loading...</div>
       ) : (
         <tr>
-          <td>
+          <td colSpan="11">
             <div className="message">Loading...</div>
           </td>
         </tr>
@@ -17,7 +17,7 @@ const TableBody = ({ items, children, tag: Tag, className }) => {
         <div className="message">There are no items.</div>
       ) : (
         <tr>
-          <td>
+          <td colSpan="11">
             <div className="message">There are no items.</div>
           </td>
         </tr>

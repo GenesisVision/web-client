@@ -18,6 +18,10 @@ $padding: 33px;
 .table {
   width: 100%;
   border-spacing: 0;
+  .message{
+    padding: $padding;
+    text-align: center;
+  }
   &__footer {
     display: flex;
     justify-content: flex-end;
