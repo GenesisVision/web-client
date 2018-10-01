@@ -4,6 +4,7 @@ import classnames from "classnames";
 import Modal from "components/modal/modal";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 const MARGIN_OFFSET = 10;
 
@@ -43,7 +44,7 @@ class Popover extends Component {
     return {
       width: box.width,
       height: box.height,
-      top: box.top,
+      top: box.top + this.props.scrollTop,
       left: box.left
     };
   };
@@ -97,7 +98,8 @@ class Popover extends Component {
     const anchorBounds = this.getAnchorBounds();
     const popoverBounds = this.getPopoverBounds();
     if (
-      this.state.windowHeight -
+      this.state.windowHeight +
+        this.props.scrollTop -
         anchorBounds.top -
         anchorBounds.height -
         MARGIN_OFFSET <
@@ -154,7 +156,8 @@ Popover.propTypes = {
   anchorEl: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   noPadding: PropTypes.bool,
   disabledBackdrop: PropTypes.bool,
-  className: PropTypes.string
+  className: PropTypes.string,
+  scrollTop: PropTypes.number.isRequired
 };
 
 Popover.defaultProps = {
@@ -162,4 +165,8 @@ Popover.defaultProps = {
   vertical: "bottom"
 };
 
-export default Popover;
+const mapStateToProps = state => ({
+  scrollTop: state.ui.scrollTop
+});
+
+export default connect(mapStateToProps)(Popover);

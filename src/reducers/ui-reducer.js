@@ -1,8 +1,9 @@
-import { WINDOW_RESIZE } from "actions/ui-actions";
+import { WINDOW_RESIZE, WINDOW_SCROLL } from "actions/ui-actions";
 
 const initialState = {
   innerWidth: 0,
-  innerHeight: 0
+  innerHeight: 0,
+  scrollTop: 0
 };
 
 const uiReducer = (state = initialState, actions) => {
@@ -10,8 +11,16 @@ const uiReducer = (state = initialState, actions) => {
     case WINDOW_RESIZE: {
       const { innerWidth, innerHeight } = actions;
       return {
+        ...state,
         innerHeight,
         innerWidth
+      };
+    }
+    case WINDOW_SCROLL: {
+      const { scrollTop } = actions;
+      return {
+        ...state,
+        scrollTop
       };
     }
     default:
