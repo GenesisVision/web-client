@@ -24,6 +24,10 @@ class ProfileWidget extends Component {
 
   handleClose = () => this.setState({ anchor: null });
 
+  handleClick = () => {
+    this.setState({ anchor: null });
+  };
+
   render() {
     const { t, avatar, email, logout, className } = this.props;
     return (
@@ -47,13 +51,13 @@ class ProfileWidget extends Component {
             <div className="profile-menu__header">{email}</div>
             <div className="profile-menu__container">
               <div className="profile-menu__item profile-menu__item--details">
-                <Link to={PROFILE_ROUTE}>
+                <Link to={PROFILE_ROUTE} onClick={this.handleClick}>
                   <DetailsIcon />
                   {t("profile-widget.personal-details")}
                 </Link>
               </div>
               <div className="profile-menu__item profile-menu__item--settings">
-                <Link to={SETTINGS_ROUTE}>
+                <Link to={SETTINGS_ROUTE} onClick={this.handleClick}>
                   <SettingsIcon />
                   {t("profile-widget.settings")}
                 </Link>
