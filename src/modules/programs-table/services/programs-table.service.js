@@ -21,6 +21,8 @@ import {
   SORTING_FILTER_VALUE
 } from "../programs.constants";
 
+const DEFAULT_ITEMS_ON_PAGE = 10;
+
 const sortableColums = PROGRAMS_COLUMNS.filter(
   x => x.sortingName !== undefined
 ).map(x => x.sortingName);
@@ -34,7 +36,7 @@ export const getPrograms = () => (dispatch, getState) => {
 };
 
 const composeRequestFilters = () => (dispatch, getState) => {
-  let itemsOnPage = 10;
+  let itemsOnPage = DEFAULT_ITEMS_ON_PAGE;
   const existingFilters = dispatch(getProgramsFilters());
   let { page } = existingFilters;
 
@@ -84,12 +86,15 @@ export const getProgramsFilters = () => (dispatch, getState) => {
   const queryParams = qs.parse(routing.location.search.slice(1));
 
   let pages = 0;
-  if (programsData.items && programsData.items.data) {
-    pages = calculateTotalPages(programsData.items.data.total, 10);
-  }
   let page = +queryParams.page || 1;
-  if (page > pages) {
-    page = 1;
+  if (programsData.items && programsData.items.data) {
+    pages = calculateTotalPages(
+      programsData.items.data.total,
+      DEFAULT_ITEMS_ON_PAGE
+    );
+    if (page > pages) {
+      page = pages;
+    }
   }
 
   const sortingName = getSortingColumnName(queryParams.sorting || "");

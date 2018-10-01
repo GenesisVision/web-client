@@ -19,7 +19,7 @@ class ProgramDetailsHistorySection extends PureComponent {
   render() {
     const { tab } = this.state;
     const { t, programId, currency, tradesData, eventsData } = this.props;
-    if (!tradesData || !eventsData) return null;
+    if (!tradesData) return null;
     return (
       <Surface className="program-details-history">
         <div className="program-details-history__header">

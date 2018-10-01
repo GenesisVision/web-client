@@ -1,0 +1,18 @@
+.program-details-chart {
+  padding: 40px;
+  &__heading {
+    margin: 0 0 30px;
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+  }
+  &__stat-item {
+    margin-top: 15px;
+  }
+
+  &__profit {
+    height: 180px;
+    width: 100%;
+    margin-top: 20px;
+  }
+}

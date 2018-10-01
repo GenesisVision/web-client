@@ -5033,8 +5033,8 @@ gud@^1.0.0:
   resolved "https://registry.yarnpkg.com/gud/-/gud-1.0.0.tgz#a489581b17e6a70beca9abe3ae57de7a499852c0"
 
 "gv-api-web@git+https://github.com/GenesisVision/gv-api-web.git#development":
-  version "1.0.25"
-  resolved "git+https://github.com/GenesisVision/gv-api-web.git#325bbd7210693e2e93d21eb112250af36df132e9"
+  version "1.0.27"
+  resolved "git+https://github.com/GenesisVision/gv-api-web.git#54fabbd47a47d906467a8e2cf45789568fbce902"
   dependencies:
     superagent "^3.8.3"
 
