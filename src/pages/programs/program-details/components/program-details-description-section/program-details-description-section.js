@@ -1,3 +1,4 @@
+import { toggleFavoriteProgram } from "modules/favorite-program/services/favorite-program.service";
 import { toggleReinvesting } from "modules/program-reinvesting/services/program-reinvesting.service";
 import React, { Fragment, PureComponent } from "react";
 
@@ -23,6 +24,7 @@ class ProgramDetailsDescriptionSection extends PureComponent {
     super(props);
     this.state = {
       ui: {
+        isFavoritePending: false,
         isReinvestPending: false,
         isPending: false
       },
@@ -44,21 +46,25 @@ class ProgramDetailsDescriptionSection extends PureComponent {
 
   handleOnReinvestingClick = () => {
     const { ui, programDescription } = this.state;
-    const { id, isReinvesting } = programDescription;
-    this.setState({
-      ui: { ...ui, isReinvestPending: true },
-      programDescription: {
-        ...programDescription,
-        isReinvesting: !isReinvesting
+    const { id, personalProgramDetails } = programDescription;
+    const { isReinvest } = personalProgramDetails;
+
+    const composeNewReinvestState = newState => ({
+      ...programDescription,
+      personalProgramDetails: {
+        ...personalProgramDetails,
+        isReinvest: !isReinvest
       }
     });
-    toggleReinvesting(id, isReinvesting)
+
+    this.setState({
+      ui: { ...ui, isReinvestPending: true },
+      programDescription: composeNewReinvestState(!isReinvest)
+    });
+    toggleReinvesting(id, isReinvest)
       .catch(e => {
         this.setState({
-          programDescription: {
-            ...programDescription,
-            isReinvesting: isReinvesting
-          }
+          programDescription: composeNewReinvestState(isReinvest)
         });
       })
       .finally(() => {
@@ -68,9 +74,39 @@ class ProgramDetailsDescriptionSection extends PureComponent {
       });
   };
 
+  handleOnFavoriteClick = () => {
+    const { ui, programDescription } = this.state;
+    const { id, personalProgramDetails } = programDescription;
+    const { isFavorite } = personalProgramDetails;
+
+    const composeNewFavoriteState = newState => ({
+      ...programDescription,
+      personalProgramDetails: {
+        ...personalProgramDetails,
+        isFavorite: !isFavorite
+      }
+    });
+
+    this.setState({
+      ui: { ...ui, isFavoritePending: true },
+      programDescription: composeNewFavoriteState(!isFavorite)
+    });
+    toggleFavoriteProgram(id, isFavorite)
+      .catch(e => {
+        this.setState({
+          programDescription: composeNewFavoriteState(isFavorite)
+        });
+      })
+      .finally(() => {
+        this.setState({
+          ui: { ...ui, isFavoritePending: false }
+        });
+      });
+  };
+
   render() {
     const { programDescription, ui } = this.state;
-    if (!programDescription || ui.isPending) return null;
+    if (!programDescription) return null;
     const isInvested =
       programDescription.personalProgramDetails &&
       programDescription.personalProgramDetails.isInvested;
@@ -81,6 +117,8 @@ class ProgramDetailsDescriptionSection extends PureComponent {
           programDescription={programDescription}
           onReinvestingClick={this.handleOnReinvestingClick}
           isReinvestPending={ui.isReinvestPending}
+          onFavoriteClick={this.handleOnFavoriteClick}
+          isFavoritePending={ui.isFavoritePending}
         />
         {isInvested && (
           <ProgramDetailsInvestment

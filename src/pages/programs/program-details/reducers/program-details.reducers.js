@@ -14,7 +14,7 @@ const programDetailsReducer = combineReducers({
     },
     programDetailsReinvestingReducer
   ),
-  chart: apiReducerFactory({
+  chartData: apiReducerFactory({
     apiType: PROGRAM_CHART
   })
 });

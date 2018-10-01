@@ -1,3 +1,5 @@
+import "./program-details-navigation.scss";
+
 import { GVButton } from "gv-react-components";
 import React from "react";
 import { translate } from "react-i18next";

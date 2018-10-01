@@ -47,10 +47,9 @@ const StatisticItem = ({
 
 StatisticItem.propTypes = {
   heading: PropTypes.string.isRequired,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  equivalent: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-    .isRequired,
-  currency: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  equivalent: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  currency: PropTypes.string,
   className: PropTypes.string,
   headingClassName: PropTypes.string,
   valueClassName: PropTypes.string,

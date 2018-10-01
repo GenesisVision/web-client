@@ -1,3 +1,4 @@
+import { programsApiProxy } from "services/api-client/programs-api";
 import authService from "services/auth-service";
 
 import {
@@ -5,7 +6,10 @@ import {
   removeFavoriteProgram
 } from "../actions/favorite-program.actions";
 
-export const toggleFavoriteProgram = (programId, isFavorite) => dispatch => {
+export const toggleFavoriteProgramDispatchable = (
+  programId,
+  isFavorite
+) => dispatch => {
   if (!authService.getAuthArg()) return;
 
   const requestData = {
@@ -18,4 +22,29 @@ export const toggleFavoriteProgram = (programId, isFavorite) => dispatch => {
       ? removeFavoriteProgram(requestData)
       : addFavoriteProgram(requestData)
   );
+};
+
+const addFavorite = ({ programId, authorization }) => {
+  return programsApiProxy.v10ProgramsByIdFavoriteAddPost(
+    programId,
+    authorization
+  );
+};
+
+const removeFavorite = ({ programId, authorization }) => {
+  return programsApiProxy.v10ProgramsByIdFavoriteRemovePost(
+    programId,
+    authorization
+  );
+};
+
+export const toggleFavoriteProgram = (programId, isFavorite) => {
+  if (!authService.getAuthArg()) return Promise.reject();
+
+  const requestData = {
+    programId,
+    authorization: authService.getAuthArg()
+  };
+
+  return isFavorite ? removeFavorite(requestData) : addFavorite(requestData);
 };

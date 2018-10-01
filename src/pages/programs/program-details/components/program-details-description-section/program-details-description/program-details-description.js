@@ -1,7 +1,7 @@
 import "./program-details-description.scss";
 
-import { RingIcon } from "components/icon/icon";
-import { GVButton, GVProgramAvatar } from "gv-react-components";
+import ProgramAvatar from "components/program-avatar/program-avatar";
+import { GVButton } from "gv-react-components";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
 import { MANAGER_DETAILS_ROUTE } from "pages/manager/manager.page";
@@ -10,6 +10,9 @@ import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import replaceParams from "utils/replace-params";
+
+import ProgramDetailsFavorite from "./program-details-favorite";
+import ProgramDetailsNotification from "./program-details-notificaton";
 
 const composeManagerUrl = managerId => {
   return replaceParams(MANAGER_DETAILS_ROUTE, {
@@ -37,13 +40,19 @@ class ProgramDetailsDescription extends PureComponent {
       isInvested,
       programDescription,
       onReinvestingClick,
-      isReinvestPending
+      onFavoriteClick,
+      isReinvestPending,
+      isFavoritePending
     } = this.props;
+
+    const isFavorite =
+      programDescription.personalProgramDetails &&
+      programDescription.personalProgramDetails.isFavorite;
 
     return (
       <div className="program-details-description">
         <div className="program-details-description__left">
-          <GVProgramAvatar
+          <ProgramAvatar
             url={programDescription.logo}
             level={programDescription.level}
             alt={programDescription.title}
@@ -119,20 +128,22 @@ class ProgramDetailsDescription extends PureComponent {
               <ProgramReinvestingWidget
                 className="program-details-description__reinvest"
                 toggleReinvesting={onReinvestingClick}
-                isReinvesting={programDescription.isReinvesting}
+                isReinvesting={
+                  programDescription.personalProgramDetails.isReinvest
+                }
                 disabled={isReinvestPending}
               />
             )}
           </div>
         </div>
         <div className="program-details-description__right">
-          <GVButton variant="text" color="secondary">
-            {t("program-details-page.description.addToFavorites")}
-          </GVButton>
-          <GVButton variant="text" color="secondary">
-            {t("program-details-page.description.notifications")}{" "}
-            <RingIcon className="program-details-description__notification-icon" />
-          </GVButton>
+          <ProgramDetailsFavorite
+            programId={programDescription.id}
+            isFavorite={isFavorite}
+            toggleFavorite={onFavoriteClick}
+            disabled={isFavoritePending}
+          />
+          <ProgramDetailsNotification disabled={isFavoritePending} />
         </div>
       </div>
     );
