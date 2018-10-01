@@ -15,24 +15,20 @@ class Select extends Component {
   handleClick = event => {
     if (this.props.disabled) return;
     this.setState({ anchor: event.currentTarget });
-    this.input.current.focus();
   };
 
   input = React.createRef();
 
-  handleChildClick = value => {
-    const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
-      window.HTMLInputElement.prototype,
-      "value"
-    ).set;
-    nativeInputValueSetter.call(this.input.current, value);
+  handleChildClick = child => event => {
+    const { onChange, name } = this.props;
+    const { value } = child.props;
 
-    const ev2 = new Event("input", { bubbles: true });
-    this.input.current.dispatchEvent(ev2);
-  };
+    event.persist();
+    event.target = { value, name };
 
-  handleChange = event => {
-    this.props.onChange(event);
+    if (onChange) {
+      onChange(event, child);
+    }
     this.handleClose();
   };
 
@@ -50,7 +46,6 @@ class Select extends Component {
 
   handleClose = () => {
     this.setState({ anchor: null });
-    this.input.current.blur();
   };
 
   render() {
@@ -64,7 +59,7 @@ class Select extends Component {
       return (
         <SelectItem
           isSelected={isSelected}
-          onClick={this.handleChildClick}
+          onClick={this.handleChildClick(child)}
           {...child.props}
           name={name}
         >
@@ -81,15 +76,18 @@ class Select extends Component {
         <div onClick={this.handleClick} className="select__content">
           <input
             className="select__input--hidden"
-            type="text"
+            type="hidden"
             name={this.props.name}
             value={this.props.value}
-            onChange={this.handleChange}
-            onBlur={this.handleBlur}
-            onFocus={this.handleFocus}
             ref={this.input}
           />
-          <div className="select__value">{displayValue}</div>
+          <button
+            className="select__value"
+            onBlur={this.handleBlur}
+            onFocus={this.handleFocus}
+          >
+            {displayValue}
+          </button>
           <span className="select__icon">
             <FilterArrowIcon isOpen={Boolean(this.state.anchor)} />
           </span>
