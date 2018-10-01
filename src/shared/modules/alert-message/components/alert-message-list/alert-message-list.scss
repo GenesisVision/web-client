@@ -19,6 +19,10 @@ $radius: 8px;
     bottom: 0;
     right: 0;
   }*/
+  &__text{
+    word-wrap: break-word;
+    max-width: 300px;
+  }
   &__clear-all {
     background: $primary-color;
     color: $panel-background-color;
@@ -41,7 +45,6 @@ $radius: 8px;
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
-    max-width: 300px;
     color: $panel-background-color;
     font-weight: 400;
     font-size: $small-font-size;
