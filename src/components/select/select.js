@@ -13,7 +13,9 @@ class Select extends Component {
   };
 
   handleClick = event => {
+    event.preventDefault();
     if (this.props.disabled) return;
+    this.input.current.focus();
     this.setState({ anchor: event.currentTarget });
   };
 
@@ -79,12 +81,13 @@ class Select extends Component {
             type="hidden"
             name={this.props.name}
             value={this.props.value}
-            ref={this.input}
           />
           <button
+            onClick={this.handleClick}
             className="select__value"
             onBlur={this.handleBlur}
             onFocus={this.handleFocus}
+            ref={this.input}
           >
             {displayValue}
           </button>
