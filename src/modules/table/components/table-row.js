@@ -3,9 +3,9 @@ import React from "react";
 
 const TableRow = ({ className, children, ...other }) => {
   return (
-    <div className={classnames("table__row", className)} {...other}>
+    <tr className={classnames("table__row", className)} {...other}>
       {children}
-    </div>
+    </tr>
   );
 };
 

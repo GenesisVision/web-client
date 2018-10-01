@@ -1,50 +1,83 @@
 import "./table.scss";
 
-import React from "react";
+import React, { Component } from "react";
+import Scrollbars from "react-custom-scrollbars";
 
 import TableBody from "./table-body";
 import TableFooter from "./table-footer";
 import TableHeader from "./table-header";
 import TableToolbar from "./table-toolbar";
 
-const Table = ({
-  title,
-  columns,
-  items,
-  isPending,
-  sorting,
-  updateSorting,
-  paging,
-  updatePaging,
-  renderFilters,
-  updateFilter,
-  filtering,
-  renderHeader,
-  renderBodyRow
-}) => {
-  return (
-    <div className={"table"}>
-      <TableToolbar
-        title={title}
-        renderFilters={renderFilters}
-        updateFilter={updateFilter}
-        filtering={filtering}
-      />
-      <TableHeader
-        columns={columns}
-        sorting={sorting}
-        updateSorting={updateSorting}
-      >
-        {renderHeader}
-      </TableHeader>
-      <TableBody items={items}>{renderBodyRow}</TableBody>
-      <TableFooter
-        paging={paging}
-        updatePaging={updatePaging}
-        isPending={isPending}
-      />
-    </div>
-  );
-};
+export const TABLE_VIEW = "table_view";
+export const CARDS_VIEW = "cards_view";
+
+class Table extends Component {
+  state = {
+    view: TABLE_VIEW
+  };
+
+  changeView = view => this.setState({ view });
+
+  isViewSwitchEnabled =
+    this.props.renderBodyRow !== undefined &&
+    this.props.renderBodyCard !== undefined;
+
+  render() {
+    const { view } = this.state;
+    return (
+      <div className="table-wrapper">
+        <TableToolbar
+          title={this.props.title}
+          renderFilters={this.props.renderFilters}
+          updateFilter={this.props.updateFilter}
+          filtering={this.props.filtering}
+          onChange={this.changeView}
+          view={view}
+          columns={this.props.columns}
+          sorting={this.props.sorting}
+          updateSorting={this.props.updateSorting}
+          renderHeader={this.props.renderHeader}
+          isViewSwitchEnabled={this.isViewSwitchEnabled}
+        />
+        <Scrollbars autoHeight autoHeightMax={14000}>
+          {view === CARDS_VIEW && (
+            <div className="table">
+              <TableBody
+                items={this.props.items}
+                className="programs-cards"
+                tag="div"
+              >
+                {this.props.renderBodyCard}
+              </TableBody>
+            </div>
+          )}
+          {view === TABLE_VIEW && (
+            <table className="table">
+              <TableHeader
+                columns={this.props.columns}
+                sorting={this.props.sorting}
+                updateSorting={this.props.updateSorting}
+              >
+                {this.props.renderHeader}
+              </TableHeader>
+              <TableBody
+                items={this.props.items}
+                className="table__body"
+                tag="tbody"
+              >
+                {this.props.renderBodyRow}
+              </TableBody>
+            </table>
+          )}
+        </Scrollbars>
+        <TableFooter
+          paging={this.props.paging}
+          updatePaging={this.props.updatePaging}
+          isPending={this.props.isPending}
+        />
+      </div>
+    );
+  }
+}
 
 export default Table;

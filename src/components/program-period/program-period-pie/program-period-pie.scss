@@ -3,13 +3,12 @@
 
 .program-period-pie {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   width: 100%;
 
   &__text {
     white-space: nowrap;
-    min-width: 95px;
+    //min-width: 95px;
     padding-left: 0.5rem;
   }
 }
