@@ -4,8 +4,11 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 class SelectItem extends Component {
-  handleClick = () => {
-    this.props.onClick(this.props.value);
+  handleClick = event => {
+    if (this.props.isSelected) {
+      return;
+    }
+    this.props.onClick(event);
   };
   render() {
     const { isSelected } = this.props;

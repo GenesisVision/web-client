@@ -5,6 +5,7 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "copy-to-clipboard": "^3.0.8",
+    "debounce": "^1.2.0",
     "formik": "^1.0.2",
     "gv-api-web": "git+https://github.com/GenesisVision/gv-api-web.git#development",
     "gv-react-components": "^0.0.24",

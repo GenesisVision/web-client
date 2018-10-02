@@ -11,13 +11,14 @@ export const NavigationButton = ({ icon, title, children, onClick }) => {
   );
 };
 
-const NavigationItem = ({ href, icon, title, children }) => {
+const NavigationItem = ({ href, icon, title, children, ...other }) => {
   return (
     <NavLink
       className="navigation__item"
       activeClassName="navigation__item--active"
       to={href}
       title={title}
+      {...other}
     >
       {<icon.type {...icon.props} className="navigation__icon" />}
       <span className="navigation__link">{children}</span>

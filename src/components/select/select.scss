@@ -1,6 +1,10 @@
 @import "styles/_colors.scss";
 
 .select {
+  display: flex;
+  min-width: 150px;
+  height: 22px;
+
   &__options {
     display: flex;
     flex-direction: column;
@@ -16,24 +20,28 @@
   }
 
   &__value {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
     letter-spacing: 0.4px;
     font-size: 12px;
     font-weight: 400;
+    border: none;
+    outline: none;
+    background: transparent;
+    box-shadow: none;
+    color: $main-color;
+    cursor: pointer;
+  }
+
+  &__text {
+    margin-right: 8px;
   }
 
   &__icon {
     display: inline-flex;
-    margin-left: 8px;
-  }
-
-  &__input {
-    &--hidden {
-      opacity: 0;
-      height: 0;
-      width: 0;
-      border: 0;
-      padding: 0;
-    }
+    margin-left: auto;
   }
 
   &__option {
@@ -53,6 +61,15 @@
     .select__value {
       flex: 1;
       font-size: 16px;
+    }
+  }
+
+  &--disabled {
+    .select__content {
+      cursor: default;
+    }
+    .select__value {
+      color: $text-dark-color;
     }
   }
 }
