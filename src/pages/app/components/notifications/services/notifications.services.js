@@ -16,7 +16,7 @@ const calculate = ({ total, take, skip }) => {
 export const serviceGetNotifications = () => (dispatch, getState) => {
   const { notifications } = getState();
   const { take, skip } = notifications.options;
-  dispatch(
+  return dispatch(
     notificationsFetch({
       skip,
       take

@@ -13,6 +13,7 @@ const optionsReducer = (options = { take: TAKE_COUNT, skip: 0 }, action) => {
   return options;
 };
 
+// TODO: добавить нормализацию, когда буду уникальные ID
 const addNotificationsReducer = (notifications = [], action) => {
   switch (action.type) {
     case ADD_NOTIFICATIONS:

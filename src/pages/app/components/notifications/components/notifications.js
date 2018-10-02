@@ -3,18 +3,27 @@ import "./notifications.scss";
 import Chip from "components/chip/chip";
 import { ControlsIcon } from "components/icon/icon";
 import { RingIcon } from "components/icon/ring-icon";
+import InfinityScroll from "components/infinity-scroll/inifinity-scroll";
 import moment from "moment";
 import NotificationsGroup from "pages/app/components/notifications/components/notification-group/notification-group";
 import { notificationProps } from "pages/app/components/notifications/components/notification/notification";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { Scrollbars } from "react-custom-scrollbars";
 import { translate } from "react-i18next";
 
+//TODO: отрефакторить
 class Notifications extends Component {
-  componentDidMount() {
-    this.props.fetchNotifications();
-  }
+  state = {
+    isPending: false
+  };
+
+  fetchNotification = () => {
+    this.setState({ isPending: true });
+    this.props.fetchNotifications().then(data => {
+      console.info(data);
+      this.setState({ isPending: false });
+    });
+  };
 
   getGroups = notifications => {
     const { t } = this.props;
@@ -47,13 +56,14 @@ class Notifications extends Component {
 
   render() {
     const { t } = this.props;
-    // if (!this.props.notifications.data) return null;
-    const { count, notifications } = this.props;
+    const { count, notifications, total } = this.props;
     const groups = this.getGroups(notifications);
-    console.info(groups);
     return (
       <div className="notifications">
-        <Scrollbars>
+        <InfinityScroll
+          onLoad={this.fetchNotification}
+          disabled={total === notifications.length || this.state.isPending}
+        >
           <div className="notifications__header">
             <RingIcon />
             {t("notifications-aside.header")}
@@ -69,7 +79,7 @@ class Notifications extends Component {
               .sort(this.sortGroups)
               .map(this.renderGroups(groups))}
           </div>
-        </Scrollbars>
+        </InfinityScroll>
       </div>
     );
   }
@@ -77,19 +87,14 @@ class Notifications extends Component {
 
 Notifications.propTypes = {
   fetchNotifications: PropTypes.func.isRequired,
-  notifications: PropTypes.shape({
-    isPending: PropTypes.bool,
-    errorMessage: PropTypes.string,
-    code: PropTypes.number,
-    data: PropTypes.shape({
-      total: PropTypes.number,
-      notifications: PropTypes.arrayOf(PropTypes.shape(notificationProps))
-    })
-  })
+  count: PropTypes.number,
+  notifications: PropTypes.arrayOf(PropTypes.shape(notificationProps)),
+  total: PropTypes.number
 };
 
 Notifications.defaultProps = {
-  notifications: []
+  notifications: [],
+  total: 40
 };
 
 export default translate()(Notifications);
