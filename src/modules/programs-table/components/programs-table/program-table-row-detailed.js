@@ -53,7 +53,11 @@ class ProgramTableRowDetailed extends Component {
                   />
                   <div className="program-detailed__avatar--name">
                     <div className="program-detailed__title">
-                      {program.title}
+                      <Link to={programDetailsUrl}>
+                        <GVButton variant="text" color="secondary">
+                          {program.title}
+                        </GVButton>
+                      </Link>
                     </div>
                     <div className="program-detailed__manager">
                       {program.manager.username}

@@ -3,13 +3,14 @@ import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 
 import { SLUG_URL_REGEXP } from "../../utils/constants";
+import replaceParams from "../../utils/replace-params";
 import PrivateRoute from "../private-route";
 import ProgramDetailsPage from "./program-details/program-details.page";
 import ProgramsFacetPage from "./programs-facet/programs-facet.page";
 import ProgramsPage from "./programs/programs.page";
 
 export const PROGRAMS_FAVORITES_TAB_NAME = "favorites";
-export const PROGRAMS_EXPLORE_TAB_NAME = " ";
+export const PROGRAMS_EXPLORE_TAB_NAME = "";
 export const PROGRAM_SLUG_URL_PARAM_NAME = "programSlugUrl";
 
 export const PROGRAMS_ROUTE = "/programs";
@@ -22,20 +23,20 @@ export const PROGRAMS_TAB_ROUTE = `${PROGRAMS_ROUTE}/:tab`;
 export const PROGRAMS_EXPLORE_TAB_ROUTE = `${PROGRAMS_ROUTE}/:tab(${PROGRAMS_EXPLORE_TAB_NAME})`;
 export const PROGRAMS_FAVORITES_TAB_ROUTE = `${PROGRAMS_ROUTE}/:tab(${PROGRAMS_FAVORITES_TAB_NAME})`;
 
+export const composeProgramDetailsUrl = slugUrl =>
+  replaceParams(PROGRAM_DETAILS_ROUTE, {
+    [`:${PROGRAM_SLUG_URL_PARAM_NAME}`]: slugUrl
+  });
+
 const ProgramsRoutes = () => (
   <Switch>
-    <Route exact path={PROGRAMS_EXPLORE_TAB_ROUTE} component={ProgramsPage} />
+    <Route exact path={PROGRAMS_ROUTE} component={ProgramsPage} />
     <PrivateRoute
       path={PROGRAMS_FAVORITES_TAB_ROUTE}
       component={ProgramsPage}
     />
     <Route path={PROGRAMS_FACET_ROUTE_REGEX} component={ProgramsFacetPage} />
     <Route path={PROGRAM_DETAILS_ROUTE_REGEX} component={ProgramDetailsPage} />
-    <Redirect
-      exact
-      from={PROGRAMS_ROUTE}
-      to={`${PROGRAMS_ROUTE}/${PROGRAMS_EXPLORE_TAB_NAME}`}
-    />
     <Route component={NotFoundPage} />
   </Switch>
 );

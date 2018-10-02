@@ -1,9 +1,10 @@
 import "./dashboard-programs.scss";
 
+import ProgramAvatar from "components/program-avatar/program-avatar";
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
-import { GVProgramAvatar } from "gv-react-components";
-import { TableCell, TableHeadCell, TableRow } from "modules/table/components";
+import { GVButton } from "gv-react-components";
+import { TableCell, TableRow } from "modules/table/components";
 import DateRangeFilter from "modules/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "modules/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "modules/table/components/filtering/date-range-filter/date-range-filter.constants";
@@ -12,7 +13,9 @@ import { DEFAULT_PAGING } from "modules/table/reducers/table-paging.reducer";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { Link } from "react-router-dom";
 
+import { composeProgramDetailsUrl } from "../../../../programs/programs.routes";
 import {
   DASHBOARD_PROGRAMS_COLUMNS,
   DASHBOARD_PROGRAMS_FILTERS,
@@ -56,12 +59,18 @@ class Dashboardprograms extends Component {
         renderBodyRow={program => (
           <TableRow>
             <TableCell className="dashboard-programs__cell--title">
-              <GVProgramAvatar
-                url={program.logo}
-                level={program.level}
-                alt={program.title}
-              />
-              {program.title}
+              <div className="dashboard-programs__cell--avatar-title">
+                <ProgramAvatar
+                  url={program.logo}
+                  level={program.level}
+                  alt={program.title}
+                />
+                <Link to={composeProgramDetailsUrl(program.url)}>
+                  <GVButton variant="text" color="secondary">
+                    {program.title}
+                  </GVButton>
+                </Link>
+              </div>
             </TableCell>
             <TableCell className="dashboard-programs__cell--share">
               {program.dashboardProgramDetails.share}

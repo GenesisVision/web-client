@@ -1,7 +1,14 @@
 .dashboard-programs {
   &__cell {
+    &--avatar-title {
+      display: flex;
+      align-items: center;
+    }
     &--title {
       width: 22%;
+      .gv-btn {
+        padding: 5px;
+      }
     }
     &--share {
       width: 10%;

@@ -26,8 +26,4 @@ const NavigationItem = ({ href, icon, title, children, ...other }) => {
   );
 };
 
-NavigationItem.defaultProps = {
-  active: false
-};
-
 export default NavigationItem;
