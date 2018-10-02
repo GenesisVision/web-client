@@ -490,5 +490,10 @@
       "end": "End",
       "today": "Today"
     }
+  },
+  "profile": {
+    "settings": {
+      "profile-image": "Profile image"
+    }
   }
 }
