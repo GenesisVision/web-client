@@ -15,10 +15,6 @@ $radius: 8px;
   top: 0;
   right: 0;
   padding: $padding/2;
-  /*@include media-breakpoint-phone() {
-    bottom: 0;
-    right: 0;
-  }*/
   &__text{
     word-wrap: break-word;
     max-width: 300px;
@@ -32,7 +28,6 @@ $radius: 8px;
     font-weight: 200;
     box-shadow: 0 5px 15px 0 $positive-background-color;
     cursor: pointer;
-    //margin-bottom: 0.5rem;
     .gv-btn {
       font-size: 0.9rem;
       line-height: 1;
