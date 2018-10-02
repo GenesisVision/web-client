@@ -45,7 +45,7 @@ class ProgramDetailsPage extends PureComponent {
       })
       .then(() => {
         this.setState({ isPending: true });
-        return service.getChartAndEndTrades();
+        return service.getChartAndEndTrades(this.description.data.id);
       })
       .then(values => {
         this.chart = values[0];
@@ -78,12 +78,12 @@ class ProgramDetailsPage extends PureComponent {
     return (
       <Page title={t("program-details-page.title")}>
         <div className="program-details">
-          {/* <div className="program-details__section">
+          <div className="program-details__section">
             <ProgramDetailsNavigation goBack={service.goBack} />
             <ProgramDetailsDescriptionSection
               programDescriptionData={this.description}
             />
-          </div> */}
+          </div>
           <div className="program-details__section">
             <ProgramDetailsStatisticSection statisticData={this.chart} />
           </div>

@@ -5,6 +5,7 @@ import authService from "services/auth-service";
 import getParams from "utils/get-params";
 
 import { composeRequestFilters } from "../../../../modules/table/services/table.service";
+import { PROGRAM_SLUG_URL_PARAM_NAME } from "../../programs.routes";
 import {
   PROGRAM_TRADES_DEFAULT_FILTERS,
   PROGRAM_TRADES_FILTERS
@@ -14,21 +15,17 @@ export const getProgramDescription = () => (dispatch, getState) => {
   const authorization = authService.getAuthArg();
   const { routing } = getState();
 
-  const { programId } = getParams(
+  const programSlugUrl = getParams(
     routing.location.pathname,
     PROGRAM_DETAILS_ROUTE
-  );
+  )[PROGRAM_SLUG_URL_PARAM_NAME];
 
-  return programsApiProxy.v10ProgramsByIdGet(programId, { authorization });
+  return programsApiProxy.v10ProgramsByIdGet(programSlugUrl, { authorization });
 };
 
-export const getChartAndEndTrades = () => (dispatch, getState) => {
-  const { routing, accountSettings } = getState();
+export const getChartAndEndTrades = programId => (dispatch, getState) => {
+  const { accountSettings } = getState();
 
-  const { programId } = getParams(
-    routing.location.pathname,
-    PROGRAM_DETAILS_ROUTE
-  );
   const { currency } = accountSettings;
   const tradesFilters = composeRequestFilters({
     paging: DEFAULT_PAGING,

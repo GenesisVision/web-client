@@ -2,7 +2,7 @@ import "./wallet-transactions.scss";
 
 import Profitability from "components/profitability/profitability";
 import Surface from "components/surface/surface";
-import { TableCell, TableHeadCell, TableRow } from "modules/table/components";
+import { TableCell, TableRow } from "modules/table/components";
 import { ASSET_TYPE_FILTER_VALUES } from "modules/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 import DateRangeFilter from "modules/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "modules/table/components/filtering/date-range-filter/date-range-filter.constants";
