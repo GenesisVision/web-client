@@ -24,7 +24,7 @@ class ProgramsContainer extends Component {
   render() {
     const { isPending, data, filters, service, isAuthenticated } = this.props;
     return (
-      <Surface>
+      <Surface className="programs-table-container">
         <ProgramsTable
           data={data || {}}
           isPending={isPending}

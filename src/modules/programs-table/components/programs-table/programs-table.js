@@ -1,6 +1,6 @@
 import "./programs.scss";
 
-import { Table, TableHeadCell } from "modules/table/components";
+import { Table } from "modules/table/components";
 import DateRangeFilter from "modules/table/components/filtering/date-range-filter/date-range-filter";
 import LevelFilter from "modules/table/components/filtering/level-filter/level-filter";
 import SelectFilter from "modules/table/components/filtering/select-filter/select-filter";
@@ -11,6 +11,7 @@ import {
   CURRENCY_FILTER_VALUES,
   PROGRAMS_COLUMNS
 } from "../../programs.constants";
+import ProgramCard from "./program-card";
 import ProgramTableRow from "./program-table-row";
 
 const selectFilterValues = [
@@ -62,23 +63,23 @@ const ProgramsTable = ({
           />
         </Fragment>
       )}
-      renderHeader={({ column, sortingName, isAsc, handleSorting }) => {
+      renderHeader={column => {
         if (!isAuthenticated && column.name === "favorite") return null;
         return (
-          <TableHeadCell
-            key={column.name}
-            className={`programs-table__cell--${column.name}`}
-            sortable={column.sortingName !== undefined}
-            active={column.sortingName === sortingName}
-            isAsc={isAsc}
-            onClick={handleSorting(column.sortingName)}
-          >
+          <span className={`programs-table__cell--${column.name}`}>
             {t(`programs-page.programs-header.${column.name}`)}
-          </TableHeadCell>
+          </span>
         );
       }}
       renderBodyRow={program => (
         <ProgramTableRow
+          program={program}
+          toggleFavorite={toggleFavorite}
+          isAuthenticated={isAuthenticated}
+        />
+      )}
+      renderBodyCard={program => (
+        <ProgramCard
           program={program}
           toggleFavorite={toggleFavorite}
           isAuthenticated={isAuthenticated}
