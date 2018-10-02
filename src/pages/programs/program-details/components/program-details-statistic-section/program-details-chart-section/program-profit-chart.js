@@ -29,11 +29,20 @@ const composeSeries = periods => {
 
   const series = periods.map((x, i) => ({
     name: "A" + i,
-    data: x.map(p => ({
-      date: p.date.getTime(),
-      value: Math.random(),
-      pnl: Math.random()
-    }))
+    data: x.map(p => {
+      if (p === undefined) {
+        return {
+          date: null,
+          value: null,
+          pnl: null
+        };
+      }
+      return {
+        date: p.date.getTime(),
+        value: Math.random(),
+        pnl: Math.random()
+      };
+    })
   }));
 
   return series;
@@ -44,7 +53,12 @@ const composeReferences = periods => {};
 const composePnl = periods => {
   const pnl = periods.reduce((accum, next) => {
     return accum.concat(
-      next.map(x => ({ date: x.date.getTime(), value: Math.random() }))
+      next.map(x => {
+        if (x === undefined) {
+          return { date: null, value: null };
+        }
+        return { date: x.date.getTime(), value: Math.random() };
+      })
     );
   }, []);
   return pnl;
