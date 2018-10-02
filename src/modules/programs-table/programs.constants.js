@@ -7,7 +7,7 @@ import {
 import { FilterType } from "modules/table/helpers/filtering.helpers";
 
 export const LEVEL_FILTER_NAME = "level";
-export const CURRENCY_FILTER_NAME = "currency";
+export const CURRENCY_FILTER_NAME = "programCurrency";
 export const DATE_RANGE_FILTER_NAME = "dateRange";
 export const SORTING_FILTER_NAME = "sorting";
 

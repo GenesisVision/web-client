@@ -1,6 +1,6 @@
 import NotFoundPage from "pages/not-found/not-found.routes";
 import React from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import { SLUG_URL_REGEXP } from "../../utils/constants";
 import replaceParams from "../../utils/replace-params";
