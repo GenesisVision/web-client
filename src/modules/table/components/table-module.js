@@ -126,4 +126,8 @@ class TableModule extends PureComponent {
   }
 }
 
+TableModule.defaultProps = {
+  fetchOnMount: true
+};
+
 export default TableModule;
