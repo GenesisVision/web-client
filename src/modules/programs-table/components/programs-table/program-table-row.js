@@ -28,6 +28,7 @@ class ProgramTableRow extends Component {
           program={program}
           onCollapseClick={this.closeProgramDetail}
           isAuthenticated={isAuthenticated}
+          toggleFavorite={toggleFavorite}
         />
       );
     return (
