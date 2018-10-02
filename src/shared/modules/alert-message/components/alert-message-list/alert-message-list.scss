@@ -18,6 +18,7 @@ $radius: 8px;
   &__text{
     word-wrap: break-word;
     max-width: 300px;
+    padding: $padding/4;
   }
   &__clear-all {
     background: $primary-color;
@@ -43,12 +44,12 @@ $radius: 8px;
     color: $panel-background-color;
     font-weight: 400;
     font-size: $small-font-size;
-    padding: $padding/2;
+    padding: $padding/4;
     margin-bottom: $padding/2;
     border-radius: $radius;
     @include media-breakpoint-landscape-phone() {
       font-size: $main-font-size;
-      padding: $padding/2;
+      padding: $padding/4;
     }
     &--success {
       background-color: $positive-color;
@@ -78,6 +79,6 @@ $radius: 8px;
     transform: rotate(45deg);
     font-weight: 900;
     font-size: $large-font-size*1.5;
-    line-height: $large-font-size/1.5;
+    line-height: $large-font-size;
   }
 }
