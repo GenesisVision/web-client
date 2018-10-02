@@ -7,7 +7,8 @@ import moment from "moment";
 import NotificationsGroup from "pages/app/components/notifications/components/notification-group/notification-group";
 import { notificationProps } from "pages/app/components/notifications/components/notification/notification";
 import PropTypes from "prop-types";
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
+import { Scrollbars } from "react-custom-scrollbars";
 import { translate } from "react-i18next";
 
 class Notifications extends Component {
@@ -15,9 +16,17 @@ class Notifications extends Component {
     this.props.fetchNotifications();
   }
 
-  getGroups = () => {
-    return this.props.notifications.reduce((acc, notification) => {
-      const key = moment(notification.date).unix();
+  getGroups = notifications => {
+    const { t } = this.props;
+    return notifications.reduce((acc, notification) => {
+      const key = moment(notification.date)
+        .calendar(null, {
+          sameDay: `[${t("notifications-aside.today")}], DD MMMM`,
+          lastDay: `[${t("notifications-aside.yesterday")}], DD MMMM`,
+          lastWeek: "dddd, DD MMMM",
+          sameElse: "dddd, DD MMMM"
+        })
+        .toUpperCase();
       if (!Array.isArray(acc[key])) {
         acc[key] = [];
       }
@@ -29,7 +38,7 @@ class Notifications extends Component {
   renderGroups = groups => group => (
     <NotificationsGroup
       key={group}
-      timestamp={parseInt(group)}
+      title={group}
       notifications={groups[group]}
     />
   );
@@ -37,17 +46,19 @@ class Notifications extends Component {
   sortGroups = (a, b) => b - a;
 
   render() {
-    const { t, notifications } = this.props;
-    const groups = this.getGroups();
-
+    const { t } = this.props;
+    // if (!this.props.notifications.data) return null;
+    const { count, notifications } = this.props;
+    const groups = this.getGroups(notifications);
+    console.info(groups);
     return (
-      <Fragment>
-        <div className="notifications">
+      <div className="notifications">
+        <Scrollbars>
           <div className="notifications__header">
             <RingIcon />
             {t("notifications-aside.header")}
             <div className="notifications__count">
-              <Chip type="negative">{notifications.length}</Chip>
+              <Chip type="negative">{count}</Chip>
             </div>
             <div className="notifications__link">
               <ControlsIcon />
@@ -58,15 +69,23 @@ class Notifications extends Component {
               .sort(this.sortGroups)
               .map(this.renderGroups(groups))}
           </div>
-        </div>
-      </Fragment>
+        </Scrollbars>
+      </div>
     );
   }
 }
 
 Notifications.propTypes = {
   fetchNotifications: PropTypes.func.isRequired,
-  notifications: PropTypes.arrayOf(PropTypes.shape(notificationProps))
+  notifications: PropTypes.shape({
+    isPending: PropTypes.bool,
+    errorMessage: PropTypes.string,
+    code: PropTypes.number,
+    data: PropTypes.shape({
+      total: PropTypes.number,
+      notifications: PropTypes.arrayOf(PropTypes.shape(notificationProps))
+    })
+  })
 };
 
 Notifications.defaultProps = {

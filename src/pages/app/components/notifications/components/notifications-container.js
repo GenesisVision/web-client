@@ -6,21 +6,29 @@ import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-const NotificationsContainer = ({ service, open, notifications }) => {
+const NotificationsContainer = ({ service, open, notifications, count }) => {
   return (
     <Sidebar open={open} position="right" onClose={service.notificationsToggle}>
       <Notifications
         fetchNotifications={service.serviceGetNotifications}
+        count={count}
         notifications={notifications}
       />
     </Sidebar>
   );
 };
 
-const mapStateToProps = ({ notifications }) => ({
-  open: notifications.isOpen,
-  notifications: notifications.notifications.data
-});
+const mapStateToProps = ({ notifications, profileHeader }) => {
+  let count = 0;
+  if (profileHeader.info.data) {
+    count = profileHeader.info.data.notificationsCount;
+  }
+  return {
+    open: notifications.isOpen,
+    notifications: notifications.notifications,
+    count
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
   service: bindActionCreators(

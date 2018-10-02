@@ -3,15 +3,19 @@ import PropTypes from "prop-types";
 import React from "react";
 
 export const notificationProps = {
-  id: PropTypes.string,
-  description: PropTypes.string,
-  date: PropTypes.string
+  date: PropTypes.instanceOf(Date),
+  logo: PropTypes.string,
+  managerId: PropTypes.string,
+  programId: PropTypes.string,
+  text: PropTypes.string,
+  type: PropTypes.string,
+  id: PropTypes.string
 };
 
-const Notification = ({ id, description, date }) => {
+const Notification = ({ date, text }) => {
   return (
     <div className="notification">
-      <div className="notification__description">{description}</div>
+      <div className="notification__description">{text}</div>
       <div className="notification__date">{moment(date).format("hh:mm a")}</div>
     </div>
   );
