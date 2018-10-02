@@ -3,66 +3,167 @@ import ProgramChartGradient, {
 } from "components/chart/chart-gradient/chart-gradient";
 import { GVColors } from "gv-react-components";
 import moment from "moment";
-import React, { PureComponent } from "react";
+import React, { Fragment, PureComponent } from "react";
 import {
   Area,
   Bar,
+  BarChart,
   Cell,
   ComposedChart,
+  Line,
+  LineChart,
+  ReferenceArea,
+  ReferenceLine,
   ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis
 } from "recharts";
 
+const composeSeries = periods => {
+  if (periods.length === 0) return null;
+  for (let i = 1; i < periods.length; i++) {
+    const prevPeriodLength = periods[i - 1].length;
+    periods[i].unshift(periods[i - 1][prevPeriodLength - 1]);
+  }
+
+  const series = periods.map((x, i) => ({
+    name: "A" + i,
+    data: x.map(p => ({
+      date: p.date.getTime(),
+      value: Math.random(),
+      pnl: Math.random()
+    }))
+  }));
+
+  return series;
+};
+
+const composeReferences = periods => {};
+
+const composePnl = periods => {
+  const pnl = periods.reduce((accum, next) => {
+    return accum.concat(
+      next.map(x => ({ date: x.date.getTime(), value: Math.random() }))
+    );
+  }, []);
+  return pnl;
+};
+
 class ProgramProfitChart extends PureComponent {
   state = {
-    activeIndex: undefined
+    period: 0,
+    series: composeSeries(this.props.periods),
+    pnl: composePnl(this.props.periods),
+    references: composeReferences()
   };
 
-  handleBarMouseOver = (data, index) => {
+  handleClick = index => () => {
     this.setState({
-      activeIndex: index
+      period: index
     });
   };
 
   render() {
-    const { periods, pnl } = this.props;
-    const { activeIndex } = this.state;
-    if (periods.length === 0) return null;
-
+    const { periods } = this.props;
+    const { series, pnl } = this.state;
+    if (periods.length === 0 || periods[0].length === 0) return null;
     return (
-      <ResponsiveContainer>
-        <ComposedChart data={pnl}>
-          <XAxis
-            dataKey="date"
-            axisLine={false}
-            tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
-            tickFormatter={date => moment(date).format("ll")}
-          />
-          <YAxis
-            axisLine={false}
-            tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
-            width={20}
-          />
-
-          <Tooltip cursor={false} />
-
-          {periods.map((x, i) => (
-            <Area
-              key={i}
+      <Fragment>
+        {/* <BarChart width={150} height={40}>
+          <Bar dataKey="value" data={pnl} fill="#8884d8" />
+        </BarChart> */}
+        <ResponsiveContainer>
+          <ComposedChart>
+            <XAxis
+              dataKey="date"
+              domain={["dataMin", "dataMax"]}
+              type="number"
+              tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
+              tickFormatter={(date, i) => moment(date).format("lll")}
+              allowDuplicatedCategory={false}
+            />
+            <YAxis dataKey="value" />
+            <Tooltip cursor={false} />
+            {/* {series.map((s, idx) => (
+            <Line
+              dataKey="value"
               type="monotone"
-              dataKey="profitValue"
-              stroke={GVColors.$primaryColor}
-              fill={`url(#dashboardPortfolioChartFill)`}
+              data={s.data}
+              key={s.name}
+              name={s.name}
               connectNulls={true}
               isAnimationActive={false}
-              strokeWidth={2}
+              stroke={
+                this.state.period === idx
+                  ? GVColors.$positiveColor
+                  : GVColors.$labelColor
+              }
+              strokeWidth={3}
+              dot={false}
             />
-          ))}
-          <Bar dataKey={`pnl`} stackId="bars" isAnimationActive={false} />
-        </ComposedChart>
-      </ResponsiveContainer>
+          ))} */}
+            {/* {series.map((s, idx) => (
+            <ReferenceArea
+              x1={s.data[0].date}
+              x2={s.data[s.data.length - 1].date}
+              fillOpacity={0}
+              onClick={this.handleClick(idx)}
+            />
+          ))} */}
+            <Bar
+              dataKey={`value`}
+              data={pnl}
+              isAnimationActive={false}
+              stroke="green"
+            />
+            <Bar dataKey="pnl" fill="#8884d8" data={pnl} />
+            {series.map((s, idx) => (
+              <Bar
+                dataKey="value"
+                data={s.data}
+                key={s.name + 1}
+                name={s.name + 1}
+                isAnimationActive={false}
+              />
+            ))}
+          </ComposedChart>
+        </ResponsiveContainer>
+      </Fragment>
+      // <ResponsiveContainer>
+      //   <ComposedChart data={chart}>
+      //     <XAxis
+      //       dataKey="date"
+      //       domain={["dataMin", "dataMax"]}
+      //       type="number"
+      //       axisLine={false}
+      //       tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
+      //       tickFormatter={(date, i) => {
+      //         var t = moment(date).format("ll");
+      //         return t;
+      //       }}
+      //     />
+      //     <YAxis
+      //       axisLine={false}
+      //       tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
+      //       width={20}
+      //     />
+
+      //     <Tooltip cursor={false} />
+
+      //     {periods.map((x, i) => (
+      //       <Area
+      //         type="monotone"
+      //         dataKey={`${periods[i].value}`}
+      //         stroke={GVColors.$primaryColor}
+      //         // fill={`url(#dashboardPortfolioChartFill)`}
+      //         connectNulls={true}
+      //         isAnimationActive={false}
+      //         strokeWidth={2}
+      //       />
+      //     ))}
+      //   </ComposedChart>
+      // </ResponsiveContainer>
     );
   }
 }

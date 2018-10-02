@@ -20,14 +20,14 @@ const DashboardPortfolioEvents = ({ t, events, fullEventsUrl }) => (
       className="dashboard-portfolio-events__scroll-container"
     >
       <div className="dashboard-portfolio-events__list">
-        {events.map(event => (
-          <DashboardPortfolioEvent event={event} key={event.date} />
+        {events.map((event, idx) => (
+          <DashboardPortfolioEvent event={event} key={idx} />
         ))}
       </div>
     </Scrollbars>
     <Link to={fullEventsUrl} className="dashboard-portfolio-events__see-all">
       <GVButton variant="text" color="secondary">
-        {t("dashboard.portfolio-events.see-all-button")}
+        {t("dashboard.portfolio-events.see-all-button")} &#8250;
       </GVButton>
     </Link>
   </Fragment>
