@@ -19,8 +19,12 @@
     margin-left: 15px;
   }
 
-  &__add * {
-    font-size: 18px;
+  &__add {
+    .chip {
+      font-size: 18px;
+      width: 32px;
+      height: 32px;
+    }
   }
 }
 

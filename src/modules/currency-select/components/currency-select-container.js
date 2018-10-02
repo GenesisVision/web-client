@@ -2,7 +2,7 @@ import "./currency-select.scss";
 
 import classnames from "classnames";
 import Select from "components/select/select";
-import { CURRENCY_VALUES } from "modules/currency-select/currency-select.constants";
+import { HEADER_CURRENCY_VALUES } from "modules/currency-select/currency-select.constants";
 import { updateCurrency } from "modules/currency-select/services/currency-select.service";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
@@ -20,10 +20,10 @@ class CurrencySelectContainer extends Component {
         value={this.props.currency}
         onChange={this.handleChange}
       >
-        {Object.keys(CURRENCY_VALUES).map(currency => {
+        {Object.keys(HEADER_CURRENCY_VALUES).map(currency => {
           return (
             <option value={currency} key={currency}>
-              {CURRENCY_VALUES[currency]}
+              {HEADER_CURRENCY_VALUES[currency]}
             </option>
           );
         })}
@@ -33,7 +33,7 @@ class CurrencySelectContainer extends Component {
 }
 
 CurrencySelectContainer.propTypes = {
-  currency: PropTypes.oneOf(Object.keys(CURRENCY_VALUES)),
+  currency: PropTypes.oneOf(Object.keys(HEADER_CURRENCY_VALUES)),
   service: PropTypes.shape({
     updateCurrency: PropTypes.func
   })

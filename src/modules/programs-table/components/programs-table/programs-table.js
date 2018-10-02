@@ -7,8 +7,11 @@ import SelectFilter from "modules/table/components/filtering/select-filter/selec
 import React, { Fragment } from "react";
 import { translate } from "react-i18next";
 
+import { DATE_RANGE_FILTER_NAME } from "../../../table/components/filtering/date-range-filter/date-range-filter.constants";
 import {
+  CURRENCY_FILTER_NAME,
   CURRENCY_FILTER_VALUES,
+  LEVEL_FILTER_NAME,
   PROGRAMS_COLUMNS
 } from "../../programs.constants";
 import ProgramCard from "./program-card";
@@ -45,20 +48,20 @@ const ProgramsTable = ({
       renderFilters={() => (
         <Fragment>
           <LevelFilter
-            name="level"
-            value={filtering["level"]}
+            name={LEVEL_FILTER_NAME}
+            value={filtering[LEVEL_FILTER_NAME]}
             onChange={updateFilter}
           />
           <SelectFilter
-            name="currency"
+            name={CURRENCY_FILTER_NAME}
             label="Currency"
-            value={filtering["currency"]}
+            value={filtering[CURRENCY_FILTER_NAME]}
             values={selectFilterValues}
             onChange={updateFilter}
           />
           <DateRangeFilter
-            name="dateRange"
-            value={filtering["dateRange"]}
+            name={DATE_RANGE_FILTER_NAME}
+            value={filtering[DATE_RANGE_FILTER_NAME]}
             onChange={updateFilter}
           />
         </Fragment>
