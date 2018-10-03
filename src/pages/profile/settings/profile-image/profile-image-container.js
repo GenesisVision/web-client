@@ -1,21 +1,22 @@
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import fileService from "shared/services/file-service";
 
 import * as profileSettingsService from "../services/profile-settings.service";
 import ProfileImage from "./profile-image";
 
 const ProfileImageContainer = ({ headerData, services }) => {
+  if (headerData === undefined) return null;
+
   const handleChange = croppedImage => {
     services.setNewProfileAvatar(croppedImage);
   };
 
-  if (headerData === undefined) return null;
-
   return (
     <ProfileImage
       onChange={handleChange}
-      avatar={headerData && headerData.avatar}
+      avatar={headerData && fileService.getFileUrl(headerData.avatar)}
     />
   );
 };

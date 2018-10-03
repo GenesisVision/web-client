@@ -14,6 +14,7 @@ import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import UserIcon from "shared/media/user-avatar.svg";
+import fileService from "shared/services/file-service";
 
 class ProfileWidget extends Component {
   state = {
@@ -37,7 +38,7 @@ class ProfileWidget extends Component {
             <img
               alt={email}
               className="profile-widget__image"
-              src={avatar || UserIcon}
+              src={fileService.getFileUrl(avatar) || UserIcon}
             />
           </div>
           <FilterArrowIcon isOpen={Boolean(this.state.anchor)} />

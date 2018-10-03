@@ -8,7 +8,9 @@ export const setNewProfileAvatar = croppedImage => dispatch => {
 
   filesService
     .uploadFileProxy(croppedImage, authorization)
-    .then(logoId => profileApiProxy.updateAvatar(logoId, authorization))
+    .then(logoId =>
+      profileApiProxy.v10ProfileUpdateAvatarByFileIdPost(logoId, authorization)
+    )
     .then(() => dispatch(fetchProfileHeaderInfo()))
     .catch(error => alert(error.errorMessage || error.message));
 };
