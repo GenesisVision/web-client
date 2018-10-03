@@ -27,8 +27,10 @@ class ProfileImage extends Component {
     this.props.onChange(value.cropped);
   };
 
+  onClear = () => {};
+
   render() {
-    const { onChange } = this;
+    const { onChange, onClear } = this;
     const { value } = this.state;
     const { t } = this.props;
 
@@ -45,6 +47,7 @@ class ProfileImage extends Component {
         <InputImage
           defaultImage={UserIcon}
           onChange={onChange}
+          onClear={onClear}
           value={value}
           className="profile-image__input-image"
         />
