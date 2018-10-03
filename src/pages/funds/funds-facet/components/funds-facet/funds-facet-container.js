@@ -7,10 +7,10 @@ import { withRouter } from "react-router-dom";
 import { goBack } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
 
-import { getCurrentFacet } from "../../services/programs-facet.service";
-import ProgramsFacetInfo from "./programs-facet-info";
+import { getCurrentFacet } from "../../services/funds-facet.service";
+import FundsFacetNavigation from "./funds-facet-navigation";
 
-class ProgramsFacetContainer extends Component {
+class FundsFacetContainer extends Component {
   state = {
     facetData: null
   };
@@ -36,7 +36,7 @@ class ProgramsFacetContainer extends Component {
     if (facetData.notFound) return <NotFoundPage />;
     return (
       <Fragment>
-        <ProgramsFacetInfo facet={facetData.facet} goBack={goBack} />
+        <FundsFacetNavigation facet={facetData.facet} goBack={goBack} />
         <ProgramsContainer />
       </Fragment>
     );
@@ -61,4 +61,4 @@ export default compose(
     mapStateToProps,
     mapDispatchToProps
   )
-)(ProgramsFacetContainer);
+)(FundsFacetContainer);

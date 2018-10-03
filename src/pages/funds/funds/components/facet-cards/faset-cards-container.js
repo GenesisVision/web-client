@@ -5,14 +5,14 @@ import { connect } from "react-redux";
 import replaceParams from "utils/replace-params";
 
 import {
-  PROGRAMS_FACET_ROUTE,
-  PROGRAM_SLUG_URL_PARAM_NAME
-} from "../../../programs.routes";
+  FUNDS_FACET_ROUTE,
+  FUNDS_SLUG_URL_PARAM_NAME
+} from "../../../funds.routes";
 
 class FacetCardsContainer extends Component {
   composeFacetUrl = url => {
-    return replaceParams(PROGRAMS_FACET_ROUTE, {
-      [`:${PROGRAM_SLUG_URL_PARAM_NAME}`]: url
+    return replaceParams(FUNDS_FACET_ROUTE, {
+      [`:${FUNDS_SLUG_URL_PARAM_NAME}`]: url
     });
   };
   render() {

@@ -239,7 +239,11 @@
     }
   },
   "funds-page": {
-    "title": "Funds"
+    "title": "Funds",
+    "tabs": {
+      "explore": "Explore",
+      "favorites": "Favorites"
+    }
   },
   "global-search-page": {
     "title": "Search"
