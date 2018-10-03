@@ -29,10 +29,7 @@ export class AlertMessageList extends Component {
     const messageComponents = messages.map(message => (
       <div
         key={message.id}
-        className={classnames(
-          "alert-message-list__alert-message",
-          message.className
-        )}
+        className={classnames("alert-message", message.className)}
       >
         <div className="alert-message-list__text">{message.text}</div>
         <div
