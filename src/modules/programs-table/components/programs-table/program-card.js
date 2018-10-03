@@ -1,17 +1,19 @@
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
-import React, { Component } from "react";
-import NumberFormat from "react-number-format";
-import ProgramAvatar from "../../../../components/program-avatar/program-avatar";
-import Popover from "../../../../components/popover/popover";
 import { GVButton } from "gv-react-components";
-import { Link } from "react-router-dom";
-import replaceParams from "utils/replace-params";
-import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
-import { PROGRAM_SLUG_URL_PARAM_NAME } from "pages/programs/programs.routes";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
+import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
+import { PROGRAM_SLUG_URL_PARAM_NAME } from "pages/programs/programs.routes";
+import React, { Component } from "react";
+import { translate } from "react-i18next";
+import NumberFormat from "react-number-format";
+import { Link } from "react-router-dom";
+import replaceParams from "utils/replace-params";
+
 import { ActionsCircleIcon } from "../../../../components/icon/actions-circle-icon";
+import Popover from "../../../../components/popover/popover";
+import ProgramAvatar from "../../../../components/program-avatar/program-avatar";
 
 class ProgramCard extends Component {
   state = {
