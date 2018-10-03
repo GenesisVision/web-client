@@ -31,7 +31,6 @@ $description-block-width: 250px;
 
 .programs-cards {
   .icon {
-    height: 15px;
     width: auto;
   }
   box-sizing: border-box;
@@ -61,7 +60,11 @@ $description-block-width: 250px;
   }
   &__actions{
     text-align: right;
-    width: 10px;
+    svg{
+      width: 30px;
+      height: 30px;
+    }
+    cursor: pointer;
   }
   &__title {
     padding: 3px 0;
@@ -388,4 +391,9 @@ $description-block-width: 250px;
       margin-bottom: $padding/3;
     }
   }
+}
+.popover-list{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
