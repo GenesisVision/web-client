@@ -12,15 +12,15 @@ import Sidebar from "components/sidebar/sidebar";
 import { PROFILE_ROUTE } from "modules/profile/profile.constants";
 import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
 import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
+import { FUNDS_ROUTE } from "pages/funds/funds.routes";
 import { GLOBAL_SEARCH_ROUTE } from "pages/global-search/global-search.routes";
 import { SETTINGS_ROUTE } from "pages/profile/settings/settings.page";
 import { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
+import { WALLET_PAGE_ROUTE } from "pages/wallet/wallet-page";
 import PropTypes from "prop-types";
 import React from "react";
 import { translate } from "react-i18next";
 import UserIcon from "shared/media/user-avatar.svg";
-
-import { WALLET_PAGE_ROUTE } from "../../../pages/wallet/wallet-page";
 
 const NavigationMobile = ({
   t,
@@ -55,6 +55,9 @@ const NavigationMobile = ({
           </NavigationItem>
           <NavigationItem icon={<ProgramsIcon primary />} href={PROGRAMS_ROUTE}>
             {t("navigation.programs")}
+          </NavigationItem>
+          <NavigationItem icon={<ProgramsIcon primary />} href={FUNDS_ROUTE}>
+            {t("navigation.funds")}
           </NavigationItem>
           <NavigationItem
             icon={<SearchIcon primary />}

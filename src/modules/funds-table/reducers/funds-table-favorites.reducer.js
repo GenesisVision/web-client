@@ -1,4 +1,4 @@
-import { SET_FAVORITE_PROGRAM } from "modules/favorite-asset/actions/favorite-program.actions";
+import { SET_FAVORITE_FUND } from "modules/favorite-asset/actions/favorite-fund.actions";
 import {
   FAILURE_SUFFIX,
   REQUEST_SUFFIX
@@ -27,13 +27,13 @@ const updateFavoriteLocal = (state, programId, isFavorite) => {
 
 const favoritesReducer = (state, action) => {
   switch (action.type) {
-    case `${SET_FAVORITE_PROGRAM}_${REQUEST_SUFFIX}`:
+    case `${SET_FAVORITE_FUND}_${REQUEST_SUFFIX}`:
       return updateFavoriteLocal(
         state,
         action.meta.programId,
         action.meta.isFavorite
       );
-    case `${SET_FAVORITE_PROGRAM}_${FAILURE_SUFFIX}`: {
+    case `${SET_FAVORITE_FUND}_${FAILURE_SUFFIX}`: {
       return updateFavoriteLocal(
         state,
         action.meta.programId,

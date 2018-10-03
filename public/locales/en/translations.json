@@ -51,6 +51,7 @@
   "navigation": {
     "dashboard": "Dashboard",
     "programs": "Programs",
+    "funds": "Funds",
     "search": "Search",
     "personal-details": "Personal details",
     "wallet": "Wallet",
@@ -229,12 +230,28 @@
     },
     "programs-header": {
       "title": "Name",
-      "balance": "Balance, gvt.",
+      "balance": "Balance",
       "currency": "Curr.",
       "investors": "Investors",
       "available-to-invest": "Av. to invest",
       "trades": "Trades",
       "period": "Period",
+      "drawdown": "D.down",
+      "profit": "Profit",
+      "chart": "Chart"
+    }
+  },
+  "funds-page": {
+    "title": "Funds",
+    "tabs": {
+      "explore": "Explore",
+      "favorites": "Favorites"
+    },
+    "funds-header": {
+      "title": "Name",
+      "balance": "Balance",
+      "assets": "Assets",
+      "investors": "Investors",
       "drawdown": "D.down",
       "profit": "Profit",
       "chart": "Chart"
