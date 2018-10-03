@@ -1,11 +1,14 @@
+import { fetchProfileHeaderInfo } from "modules/header/actions/header-actions";
 import { profileApiProxy } from "services/api-client/profile-api";
 import authService from "services/auth-service";
 import filesService from "shared/services/file-service";
 
-export const setNewProfileAvatar = imageBlob => {
+export const setNewProfileAvatar = croppedImage => dispatch => {
   const authorization = authService.getAuthArg();
 
-  // filesService
-  //   .uploadFileProxy(imageBlob, authorization)
-  //   .then(logoId => profileApiProxy.updateAvatar(logoId, authorization));
+  filesService
+    .uploadFileProxy(croppedImage, authorization)
+    .then(logoId => profileApiProxy.updateAvatar(logoId, authorization))
+    .then(() => dispatch(fetchProfileHeaderInfo()))
+    .catch(error => alert(error.errorMessage || error.message));
 };

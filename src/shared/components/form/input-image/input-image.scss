@@ -4,6 +4,7 @@
 .input-image {
   width: 200px;
   height: 200px;
+  position: relative;
 
   border: 2px solid $separator-color;
 
@@ -12,6 +13,7 @@
   }
 
   &__dropzone {
+    height: 100%;
     &--active &-helper {
       display: flex;
     }

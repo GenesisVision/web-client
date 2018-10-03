@@ -1,12 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 import * as profileSettingsService from "../services/profile-settings.service";
 import ProfileImage from "./profile-image";
 
-const ProfileImageContainer = ({ headerData }) => {
-  const handleChange = (signUpFormData, setSubmitting) => {
-    profileSettingsService.setNewProfileAvatar(signUpFormData, setSubmitting);
+const ProfileImageContainer = ({ headerData, services }) => {
+  const handleChange = croppedImage => {
+    services.setNewProfileAvatar(croppedImage);
   };
 
   if (headerData === undefined) return null;
@@ -23,7 +24,11 @@ const mapStateToProps = ({ profileHeader }) => {
   return { headerData: profileHeader.info.data };
 };
 
+const mapDispatchToProps = dispatch => ({
+  services: bindActionCreators(profileSettingsService, dispatch)
+});
+
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(ProfileImageContainer);

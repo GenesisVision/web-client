@@ -1,3 +1,5 @@
+import "./profile-image.scss";
+
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import InputImage from "shared/components/form/input-image/input-image";
@@ -20,6 +22,9 @@ class ProfileImage extends Component {
 
   onChange = (name, value) => {
     this.setState({ value: { ...value } });
+    if (!value.cropped) return;
+
+    this.props.onChange(value.cropped);
   };
 
   render() {
@@ -28,8 +33,14 @@ class ProfileImage extends Component {
     const { t } = this.props;
 
     return (
-      <div className="profile-image-container">
-        <h3>{t("profile.settings.profile-image")}</h3>
+      <div className="profile-image">
+        <h3 className="profile-image__heading">
+          {t("profile.settings.profile-image")}
+        </h3>
+
+        <div className="profile-image__requirements">
+          {t("profile.settings.image-requirements")}
+        </div>
 
         <InputImage
           defaultImage={UserIcon}

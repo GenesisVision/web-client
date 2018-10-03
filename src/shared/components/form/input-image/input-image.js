@@ -14,7 +14,6 @@ class InputImage extends Component {
     super(props);
     const { onChange, value, name } = this.props;
 
-    // debugger;
     if (value.src) {
       onChange(name, { ...value, isDefault: false });
     } else {
@@ -41,7 +40,7 @@ class InputImage extends Component {
     reader.readAsDataURL(img);
   };
 
-  onCrop = () => {
+  catchImage = () => {
     const { name, value, onChange } = this.props;
     const cropper = this.cropper;
 
@@ -77,7 +76,7 @@ class InputImage extends Component {
   render() {
     const { className, value, defaultImage } = this.props;
     const { isDefault, isNew, src } = value;
-    const { onDrop, onCrop, clear } = this;
+    const { onDrop, catchImage, clear } = this;
     return (
       <div className={classnames("input-image", className)}>
         <Dropzone
@@ -103,7 +102,8 @@ class InputImage extends Component {
                   autoCropArea={1}
                   imageSmoothingEnabled={false}
                   imageSmoothingQuality="high"
-                  crop={onCrop}
+                  ready={catchImage}
+                  cropend={catchImage}
                 />
               )}
 

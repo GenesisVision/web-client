@@ -1,2 +1,10 @@
+@import "styles/_colors.scss";
+
 .profile-image {
+  &__requirements {
+    font-size: 13px;
+    color: $label-color;
+    letter-spacing: 0.2px;
+    margin-bottom: 16px;
+  }
 }
