@@ -316,7 +316,8 @@
   },
   "program-actions": {
     "invest": "Invest",
-    "withdraw": "Withdraw"
+    "withdraw": "Withdraw",
+    "details": "Details"
   },
   "program-statistic": {
     "manager-share": {

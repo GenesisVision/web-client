@@ -37,6 +37,7 @@ class ProgramCard extends Component {
   handleOpenDropdown = event => this.setState({ anchor: event.currentTarget });
   handleCloseDropdown = () => this.setState({ anchor: null });
   render() {
+    const { t } = this.props;
     const programDetailsUrl = replaceParams(PROGRAM_DETAILS_ROUTE, {
       [`:${PROGRAM_SLUG_URL_PARAM_NAME}`]: this.props.program.url
     });
@@ -79,7 +80,7 @@ class ProgramCard extends Component {
                       color="secondary"
                       onClick={this.handleOpenWithdrawalPopup}
                     >
-                      Withdraw
+                      {t("program-actions.withdraw")}
                     </GVButton>
                   )}
                 {this.props.program.personalProgramDetails && (
@@ -88,7 +89,7 @@ class ProgramCard extends Component {
                     color="secondary"
                     onClick={this.handleOpenInvestmentPopup}
                   >
-                    Invest
+                    {t("program-actions.invest")}
                   </GVButton>
                 )}
                 <Link to={programDetailsUrl}>
@@ -97,7 +98,7 @@ class ProgramCard extends Component {
                     color="secondary"
                     onClick={this.handleCloseDropdown}
                   >
-                    Details
+                    {t("program-actions.details")}
                   </GVButton>
                 </Link>
               </div>
@@ -130,9 +131,15 @@ class ProgramCard extends Component {
           <table>
             <tbody>
               <tr>
-                <th className="programs-cards__table--title">Balance</th>
-                <th className="programs-cards__table--title">Investors</th>
-                <th className="programs-cards__table--title">Av. to invest</th>
+                <th className="programs-cards__table--title">
+                  {t("programs-page.programs-header.balance")}
+                </th>
+                <th className="programs-cards__table--title">
+                  {t("programs-page.programs-header.investors")}
+                </th>
+                <th className="programs-cards__table--title">
+                  {t("programs-page.programs-header.available-to-invest")}
+                </th>
               </tr>
               <tr>
                 <td>{this.props.program.statistic.balanceGVT.amount}</td>
@@ -146,9 +153,15 @@ class ProgramCard extends Component {
           <table>
             <tbody>
               <tr>
-                <th className="programs-cards__table--title">Trades</th>
-                <th className="programs-cards__table--title">Period</th>
-                <th className="programs-cards__table--title">D.down</th>
+                <th className="programs-cards__table--title">
+                  {t("programs-page.programs-header.trades")}
+                </th>
+                <th className="programs-cards__table--title">
+                  {t("programs-page.programs-header.period")}
+                </th>
+                <th className="programs-cards__table--title">
+                  {t("programs-page.programs-header.drawdown")}
+                </th>
               </tr>
               <tr>
                 <td>{this.props.program.statistic.tradesCount}</td>
@@ -185,4 +198,4 @@ class ProgramCard extends Component {
   }
 }
 
-export default ProgramCard;
+export default translate()(ProgramCard);
