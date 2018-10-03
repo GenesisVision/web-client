@@ -1,0 +1,31 @@
+@import "styles/_colors.scss";
+
+.login-two-factor {
+  &__header {
+    margin: 0 0 40px 0;
+    font-weight: 600;
+    font-size: 18px;
+    letter-spacing: 0.4px;
+    margin-bottom: 30px;
+    margin-top: -10px;
+  }
+
+  &__text {
+    line-height: 24px;
+    margin-bottom: 40px;
+    color: $text-color;
+    font-size: 16px;
+  }
+
+  &__recovery-info {
+    margin-top: 20px;
+    line-height: 24px;
+    margin-bottom: 4px;
+    color: $text-color;
+    font-size: 16px;
+  }
+
+  &__recovery-link {
+    margin-bottom: 40px;
+  }
+}

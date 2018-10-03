@@ -1,56 +1,65 @@
+import "./two-factor-code.scss";
+
 import { withFormik } from "formik";
+import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
+import { LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE } from "pages/auth/login/login.routes";
 import React from "react";
+import { translate } from "react-i18next";
+import { Link } from "react-router-dom";
+import { compose } from "redux";
 
 import validationSchema from "./two-factor-code-form.validators";
 
-// import Button from "components/button/button";
-// import { Field, withFormik } from "formik";
-// import { LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE } from "pages/auth/login/login.routes";
-
-const TwoFactorCodeForm = ({ handleSubmit, isSubmitting, error }) => {
+const TwoFactorCodeForm = ({ t, handleSubmit, isSubmitting, error }) => {
   return (
-    <div>TODO</div>
-    // <form id="twoFactorForm" onSubmit={handleSubmit} noValidate>
-    //   <div className="login">
-    //     <div className="login__header">Two-factor authentication</div>
-    //     <Field
-    //       type="text"
-    //       name="twoFactorCode"
-    //       placeholder="Authentiacation code"
-    //       addon="fas fa-key"
-    //       component={InputText}
-    //     />
-    //     <FormError error={error} />
-    //     <Button
-    //       label="Verify"
-    //       id="twoFactorSubmit"
-    //       primary
-    //       disabled={isSubmitting}
-    //     />
-    //     <div className="login__separator" />
-    //     <div>
-    //       Open the two-factor authentication app on your device to view your
-    //       authentication code and verify your identity.
-    //     </div>
-    //     <div className="login__separator" />
-    //     <h5>Don’t have your phone?</h5>
-    //     <Button
-    //       className="login__recovery-link"
-    //       href={LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE}
-    //       label="Enter a two-factor recovery code"
-    //     />
-    //   </div>
-    // </form>
+    <form id="twoFactorForm" onSubmit={handleSubmit} noValidate>
+      <div className="login-two-factor">
+        <h3 className="login-two-factor__header">
+          {t("auth.login.two-factor.title")}
+        </h3>
+        <div className="login-two-factor__text">
+          {t("auth.login.two-factor.text")}
+        </div>
+        <GVFormikField
+          type="text"
+          name="twoFactorCode"
+          label={t("auth.login.two-factor.input-label")}
+          autoComplete="off"
+          component={GVTextField}
+        />
+
+        <div className="login-two-factor__recovery-info">
+          {t("auth.login.two-factor.recovery-info")}
+        </div>
+        <GVButton className="login-two-factor__recovery-link" variant="text">
+          <Link to={LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE}>
+            {t("auth.login.two-factor.link-to-recovery")}
+          </Link>
+        </GVButton>
+        <div className="login-two-fator__submit">
+          <GVButton
+            type="submit"
+            id="signUpFormSubmit"
+            className="signup-form__submit-button"
+          >
+            {t("auth.login.two-factor.verify")}
+          </GVButton>
+        </div>
+      </div>
+    </form>
   );
 };
 
-export default withFormik({
-  displayName: "twoFactorForm",
-  mapPropsToValues: () => ({
-    twoFactorCode: ""
-  }),
-  validationSchema: validationSchema,
-  handleSubmit: (values, { props, setSubmitting }) => {
-    props.onSubmit(values.twoFactorCode, setSubmitting);
-  }
-})(TwoFactorCodeForm);
+export default compose(
+  translate(),
+  withFormik({
+    displayName: "twoFactorForm",
+    mapPropsToValues: () => ({
+      twoFactorCode: ""
+    }),
+    validationSchema: validationSchema,
+    handleSubmit: (values, { props, setSubmitting }) => {
+      props.onSubmit(values.twoFactorCode, setSubmitting);
+    }
+  })
+)(TwoFactorCodeForm);
