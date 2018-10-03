@@ -12,6 +12,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { alertMessageActions } from "../../shared/modules/alert-message/actions/alert-message-actions";
 
 const ProgramDepositContainer = props => {
   const handleClose = () => {
@@ -20,6 +21,7 @@ const ProgramDepositContainer = props => {
     props.service.clearInvestSubmit();
   };
   const handleInvest = amount => {
+    props.service.notifySuccess("Request to buy tokens sent successfully");
     props.service.investServiceInvestById(props.id, amount).then(handleClose);
   };
   return (
@@ -61,7 +63,8 @@ const mapDispatchToProps = dispatch => ({
       getDepositProgramInfoById,
       clearDepositProgramInfo,
       investServiceInvestById,
-      clearInvestSubmit
+      clearInvestSubmit,
+      notifySuccess: alertMessageActions.success
     },
     dispatch
   )
