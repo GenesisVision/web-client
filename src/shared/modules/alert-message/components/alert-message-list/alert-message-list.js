@@ -1,27 +1,11 @@
-import { Alert } from "reactstrap";
 import { connect } from "react-redux";
 import React, { Component } from "react";
 import classnames from "classnames";
-import "./alert-message-list.css";
-import Button from "../../../../../components/button/button";
+import "./alert-message-list.scss";
+import { GVButton } from "gv-react-components";
 import { alertMessageActions } from "../../actions/alert-message-actions";
 import history from "../../../../../utils/history";
-
-const ClearAllButton = ({ onClick }) => (
-  <div className="alert-message__clear-all">
-    <Button secondary onClick={onClick} label="Clear" />
-  </div>
-);
-
-const AlertMessage = ({ text, messageClass, onDismiss }) => (
-  <Alert
-    className={classnames("alert-message", messageClass)}
-    color=""
-    toggle={onDismiss}
-  >
-    <div>{text}</div>
-  </Alert>
-);
+import { translate } from "react-i18next";
 
 export class AlertMessageList extends Component {
   componentDidMount() {
@@ -31,28 +15,36 @@ export class AlertMessageList extends Component {
   }
 
   render() {
-    const { messages, removeMessage, clearAllMessages } = this.props;
+    const { t, messages, removeMessage, clearAllMessages } = this.props;
 
     if (messages.length === 0) {
       return null;
     }
 
     const renderClearAllButton = messages.length > 1 && (
-      <ClearAllButton onClick={clearAllMessages} />
+      <GVButton color="primary" onClick={clearAllMessages}>
+        {t("alerts.clear-all")}
+      </GVButton>
     );
     const messageComponents = messages.map(message => (
-      <AlertMessage
+      <div
         key={message.id}
-        messageClass={message.className}
-        text={message.text}
-        onDismiss={removeMessage(message.id)}
-      />
+        className={classnames("alert-message", message.className)}
+      >
+        <div className="alert-message-list__text">{message.text}</div>
+        <div
+          className="alert-message-list__close"
+          onClick={removeMessage(message.id)}
+        >
+          <div className="alert-message-list__close-button">+</div>
+        </div>
+      </div>
     ));
 
     return (
       <div className="alert-message-list">
-        {renderClearAllButton}
         {messageComponents}
+        {renderClearAllButton}
       </div>
     );
   }
@@ -72,4 +64,9 @@ export const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(AlertMessageList);
+export default translate()(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(AlertMessageList)
+);

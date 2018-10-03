@@ -2,6 +2,9 @@
   "app": {
     "title": "Investor Portal: "
   },
+  "alerts":{
+    "clear-all": "Clear all"
+  },
   "deposit-program": {
     "title": "Invest",
     "available-to-invest": "Available to invest in program",
