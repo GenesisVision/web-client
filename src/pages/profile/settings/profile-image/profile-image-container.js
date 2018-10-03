@@ -9,13 +9,19 @@ import ProfileImage from "./profile-image";
 const ProfileImageContainer = ({ headerData, services }) => {
   if (headerData === undefined) return null;
 
-  const handleChange = croppedImage => {
-    services.setNewProfileAvatar(croppedImage);
+  const updateAvatar = (croppedImage, submitCallback) => {
+    if (croppedImage) {
+      services.updateProfileAvatar(croppedImage, submitCallback);
+    }
+
+    if (headerData.avatar && !croppedImage) {
+      services.removeProfileAvatar(submitCallback);
+    }
   };
 
   return (
     <ProfileImage
-      onChange={handleChange}
+      handleSubmit={updateAvatar}
       avatar={headerData && fileService.getFileUrl(headerData.avatar)}
     />
   );

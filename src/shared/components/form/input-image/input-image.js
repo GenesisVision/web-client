@@ -33,7 +33,8 @@ class InputImage extends Component {
         filename: img.name,
         filetype: img.type,
         isNew: true,
-        isDefault: false
+        isDefault: false,
+        isImageChanged: true
       };
       onChange(name, data);
     };
@@ -56,6 +57,7 @@ class InputImage extends Component {
       }
       const img = {
         ...value,
+        isImageChanged: true,
         cropped: blob
       };
       onChange(name, img);
@@ -67,12 +69,16 @@ class InputImage extends Component {
   };
 
   clear = event => {
-    const { onChange, name, onClear, defaultImage } = this.props;
-    onChange(name, { cropped: null, src: "", isDefault: true, isNew: false });
+    const { onChange, name } = this.props;
+    onChange(name, {
+      cropped: null,
+      src: "",
+      isDefault: true,
+      isNew: false,
+      isImageChanged: true
+    });
     event.preventDefault();
     event.stopPropagation();
-
-    if (onClear) onClear(defaultImage);
   };
 
   render() {
