@@ -41,6 +41,7 @@ const ProgramSimpleChart = ({ data, isPositive }) => {
             type="monotone"
             dataKey="equity"
             stroke={GVColors.$primaryColor}
+            strokeWidth={2}
             fill={`url(#equitySimpleChartFill)`}
             isAnimationActive={false}
           />
