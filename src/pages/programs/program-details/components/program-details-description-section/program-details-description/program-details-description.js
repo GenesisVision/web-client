@@ -13,6 +13,7 @@ import replaceParams from "utils/replace-params";
 
 import ProgramDetailsFavorite from "./program-details-favorite";
 import ProgramDetailsNotification from "./program-details-notificaton";
+import Popover from "../../../../../../components/popover/popover";
 
 const composeManagerUrl = managerId => {
   return replaceParams(MANAGER_DETAILS_ROUTE, {
@@ -22,9 +23,12 @@ const composeManagerUrl = managerId => {
 
 class ProgramDetailsDescription extends PureComponent {
   state = {
-    isOpenInvestmentPopup: false
+    isOpenInvestmentPopup: false,
+    anchor: null
   };
 
+  handleOpenDropdown = event => this.setState({ anchor: event.currentTarget });
+  handleCloseDropdown = () => this.setState({ anchor: null });
   handleOpenInvestmentPopup = () => {
     this.setState({ isOpenInvestmentPopup: true });
   };
@@ -34,7 +38,7 @@ class ProgramDetailsDescription extends PureComponent {
   };
 
   render() {
-    const { isOpenInvestmentPopup } = this.state;
+    const { isOpenInvestmentPopup, anchor } = this.state;
     const {
       t,
       isInvested,
@@ -52,12 +56,41 @@ class ProgramDetailsDescription extends PureComponent {
     return (
       <div className="program-details-description">
         <div className="program-details-description__left">
-          <ProgramAvatar
-            url={programDescription.logo}
-            level={programDescription.level}
-            alt={programDescription.title}
-            size="big"
-          />
+          <div className="program-details-description__avatar" onClick={this.handleOpenDropdown}>
+            <ProgramAvatar
+              url={programDescription.logo}
+              level={programDescription.level}
+              alt={programDescription.title}
+              size="big"
+            />
+          </div>
+          <Popover
+            horizontal="right"
+            vertical="bottom"
+            anchorEl={anchor}
+            noPadding
+            onClose={this.handleCloseDropdown}
+          >
+            <div className="popover-levels">
+              <div className="popover-levels__block">
+                <div className="popover-levels__title">
+                  Genesis Level {programDescription.level}
+                </div>
+                <div className="popover-levels__subtitle">Invest limit</div>
+                <div className="popover-levels__balance">
+                  {programDescription.availableInvestment}{" "}
+                  {programDescription.currency}
+                </div>
+              </div>
+              <div className="popover-levels__block">
+                <div className="popover-levels__text">
+                  Genesis level shows  the experience and reliability of the
+                  Manager
+                </div>
+                <div className="popover-levels__about">About levels ></div>
+              </div>
+            </div>
+          </Popover>
         </div>
         <div className="program-details-description__main">
           <h1 className="program-details-description__heading">
