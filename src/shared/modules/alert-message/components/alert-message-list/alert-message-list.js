@@ -5,6 +5,7 @@ import "./alert-message-list.scss";
 import { GVButton } from "gv-react-components";
 import { alertMessageActions } from "../../actions/alert-message-actions";
 import history from "../../../../../utils/history";
+import { translate } from "react-i18next";
 
 export class AlertMessageList extends Component {
   componentDidMount() {
@@ -14,7 +15,7 @@ export class AlertMessageList extends Component {
   }
 
   render() {
-    const { messages, removeMessage, clearAllMessages } = this.props;
+    const { t, messages, removeMessage, clearAllMessages } = this.props;
 
     if (messages.length === 0) {
       return null;
@@ -22,7 +23,7 @@ export class AlertMessageList extends Component {
 
     const renderClearAllButton = messages.length > 1 && (
       <GVButton color="primary" onClick={clearAllMessages}>
-        Clear all
+        {t("alerts.clear-all")}
       </GVButton>
     );
     const messageComponents = messages.map(message => (
@@ -66,7 +67,9 @@ export const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AlertMessageList);
+export default translate()(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(AlertMessageList)
+);
