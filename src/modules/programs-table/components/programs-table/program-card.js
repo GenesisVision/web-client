@@ -37,27 +37,25 @@ class ProgramCard extends Component {
   handleOpenDropdown = event => this.setState({ anchor: event.currentTarget });
   handleCloseDropdown = () => this.setState({ anchor: null });
   render() {
-    const { t } = this.props;
+    const { t, program, onExpandClick } = this.props;
     const programDetailsUrl = replaceParams(PROGRAM_DETAILS_ROUTE, {
-      [`:${PROGRAM_SLUG_URL_PARAM_NAME}`]: this.props.program.url
+      [`:${PROGRAM_SLUG_URL_PARAM_NAME}`]: program.url
     });
     return (
-      <div onClick={this.props.onExpandClick} className="programs-cards__card">
+      <div onClick={onExpandClick} className="programs-cards__card">
         <div className="programs-cards__row">
           <div className="programs-cards__avatar">
             <ProgramAvatar
-              url={this.props.program.logo}
-              level={this.props.program.level}
-              alt={this.props.program.title}
+              url={program.logo}
+              level={program.level}
+              alt={program.title}
               size="medium"
             />
           </div>
           <div className="programs-cards__names">
-            <div className="programs-cards__title">
-              {this.props.program.title}
-            </div>
+            <div className="programs-cards__title">{program.title}</div>
             <div className="programs-cards__name">
-              {this.props.program.manager.username}
+              {program.manager.username}
             </div>
           </div>
           <div className="programs-cards__actions">
@@ -73,8 +71,8 @@ class ProgramCard extends Component {
               onClose={this.handleCloseDropdown}
             >
               <div className="popover-list">
-                {this.props.program.personalProgramDetails &&
-                  this.props.program.personalProgramDetails.isInvested && (
+                {program.personalProgramDetails &&
+                  program.personalProgramDetails.isInvested && (
                     <GVButton
                       variant="text"
                       color="secondary"
@@ -83,7 +81,7 @@ class ProgramCard extends Component {
                       {t("program-actions.withdraw")}
                     </GVButton>
                   )}
-                {this.props.program.personalProgramDetails && (
+                {program.personalProgramDetails && (
                   <GVButton
                     variant="text"
                     color="secondary"
@@ -108,22 +106,21 @@ class ProgramCard extends Component {
         <div className="programs-cards__row">
           <div className="programs-cards__chart">
             <ProgramSimpleChart
-              data={this.props.program.chart}
-              isPositive={this.props.program.statistic.profitPercent >= 0}
+              data={program.chart}
+              isPositive={program.statistic.profitPercent >= 0}
             />
           </div>
           <div className="programs-cards__chart-info">
             <div className="programs-cards__chart-info--profit">
               <NumberFormat
-                value={this.props.program.statistic.profitPercent}
+                value={program.statistic.profitPercent}
                 suffix="%"
                 decimalScale={2}
                 displayType="text"
               />
             </div>
             <div className="programs-cards__chart-info--balance">
-              {this.props.program.statistic.balanceGVT.amount}{" "}
-              {this.props.program.currency}
+              {program.statistic.balanceGVT.amount} {program.currency}
             </div>
           </div>
         </div>
@@ -142,9 +139,9 @@ class ProgramCard extends Component {
                 </th>
               </tr>
               <tr>
-                <td>{this.props.program.statistic.balanceGVT.amount}</td>
-                <td>{this.props.program.statistic.investorsCount}</td>
-                <td>{this.props.program.availableInvestment}</td>
+                <td>{program.statistic.balanceGVT.amount}</td>
+                <td>{program.statistic.investorsCount}</td>
+                <td>{program.availableInvestment}</td>
               </tr>
             </tbody>
           </table>
@@ -164,16 +161,16 @@ class ProgramCard extends Component {
                 </th>
               </tr>
               <tr>
-                <td>{this.props.program.statistic.tradesCount}</td>
+                <td>{program.statistic.tradesCount}</td>
                 <td>
                   <ProgramPeriodPie
-                    start={this.props.program.periodStarts}
-                    end={this.props.program.periodEnds}
+                    start={program.periodStarts}
+                    end={program.periodEnds}
                   />
                 </td>
                 <td>
                   <NumberFormat
-                    value={this.props.program.statistic.drawdownPercent}
+                    value={program.statistic.drawdownPercent}
                     suffix="%"
                     decimalScale={2}
                     displayType="text"
@@ -185,12 +182,12 @@ class ProgramCard extends Component {
         </div>
         <ProgramDepositContainer
           open={this.state.isOpenInvestmentPopup}
-          id={this.props.program.id}
+          id={program.id}
           onClose={this.handleCloseInvestmentPopup}
         />
         <ProgramWithdrawContainer
           open={this.state.isOpenWithdrawalPopup}
-          id={this.props.program.id}
+          id={program.id}
           onClose={this.handleCloseWithdrawalPopup}
         />
       </div>
