@@ -8,6 +8,7 @@ import { GVButton } from "gv-react-components";
 import { Link } from "react-router-dom";
 import replaceParams from "utils/replace-params";
 import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
+import { PROGRAM_SLUG_URL_PARAM_NAME } from "pages/programs/programs.routes";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
 import { ActionsCircleIcon } from "../../../../components/icon/actions-circle-icon";
@@ -35,7 +36,7 @@ class ProgramCard extends Component {
   handleCloseDropdown = () => this.setState({ anchor: null });
   render() {
     const programDetailsUrl = replaceParams(PROGRAM_DETAILS_ROUTE, {
-      ":programId": this.props.program.id
+      [`:${PROGRAM_SLUG_URL_PARAM_NAME}`]: this.props.program.url
     });
     return (
       <div onClick={this.props.onExpandClick} className="programs-cards__card">
