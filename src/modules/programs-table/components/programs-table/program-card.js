@@ -119,7 +119,8 @@ class ProgramCard extends Component {
               />
             </div>
             <div className="programs-cards__chart-info--balance">
-              {this.props.program.statistic.balanceGVT.amount} GVT
+              {this.props.program.statistic.balanceGVT.amount}{" "}
+              {this.props.program.currency}
             </div>
           </div>
         </div>
