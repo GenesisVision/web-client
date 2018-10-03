@@ -1,6 +1,8 @@
 import "./dashboard-portfolio-event-logo.scss";
 
 import classnames from "classnames";
+import { WalletIcon } from "components/icon/wallet-icon";
+import ProgramAvatar from "components/program-avatar/program-avatar";
 import React from "react";
 
 import icons from "./icons";
@@ -24,7 +26,19 @@ const getTypeSVG = type => {
   }
 };
 
-const PortfolioEventLogo = ({ isPositive, type }) => {
+const getLogoSVG = (type, logo) => {
+  if (logo !== undefined)
+    return (
+      <ProgramAvatar
+        url={logo}
+        alt={type}
+        className="portfolio-event-logo__logo"
+      />
+    );
+  return <WalletIcon className="portfolio-event-logo__wallet" />;
+};
+
+const PortfolioEventLogo = ({ isPositive, type, logo }) => {
   const className = classnames("portfolio-event-logo", {
     "portfolio-event-logo--positive": isPositive,
     "portfolio-event-logo--negative": !isPositive
@@ -34,7 +48,9 @@ const PortfolioEventLogo = ({ isPositive, type }) => {
 
   return (
     <div className={className}>
-      <div className="portfolio-event-logo__photo">P</div>
+      <div className="portfolio-event-logo__photo">
+        {getLogoSVG(type, logo)}
+      </div>
       <div className={"portfolio-event-logo__type"}>
         <TypeSVG />
       </div>

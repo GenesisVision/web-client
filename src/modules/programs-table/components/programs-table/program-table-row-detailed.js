@@ -1,17 +1,18 @@
+import { Icon } from "components/icon/icon";
+import ProgramAvatar from "components/program-avatar/program-avatar";
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
 import { GVButton } from "gv-react-components";
 import FavoriteIcon from "modules/favorite-program/components/favorite-icon/favorite-icon";
 import { TableRow } from "modules/table/components";
 import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
+import { PROGRAM_SLUG_URL_PARAM_NAME } from "pages/programs/programs.routes";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import replaceParams from "utils/replace-params";
 
-import ProgramAvatar from "../../../../components/program-avatar/program-avatar";
 import ProgramBigChart from "../program-big-chart/program-big-chart";
-import { Icon } from "../../../../components/icon/icon";
 
 class ProgramTableRowDetailed extends Component {
   state = {
@@ -34,7 +35,7 @@ class ProgramTableRowDetailed extends Component {
     } = this.props;
 
     const programDetailsUrl = replaceParams(PROGRAM_DETAILS_ROUTE, {
-      ":programId": program.id
+      [`:${PROGRAM_SLUG_URL_PARAM_NAME}`]: program.url
     });
 
     return (
@@ -52,7 +53,11 @@ class ProgramTableRowDetailed extends Component {
                   />
                   <div className="program-detailed__avatar--name">
                     <div className="program-detailed__title">
-                      {program.title}
+                      <Link to={programDetailsUrl}>
+                        <GVButton variant="text" color="secondary">
+                          {program.title}
+                        </GVButton>
+                      </Link>
                     </div>
                     <div className="program-detailed__manager">
                       {program.manager.username}
@@ -165,7 +170,7 @@ class ProgramTableRowDetailed extends Component {
                   <div className="program-detailed__details">
                     <Link to={programDetailsUrl}>
                       <GVButton variant="text" color="secondary">
-                        Details >
+                        Details &#8250;
                       </GVButton>
                     </Link>
                   </div>

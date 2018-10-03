@@ -4,6 +4,7 @@
   align-items: center;
 
   &[class*="position"] {
+    overflow: visible;
     top: 0;
     bottom: 0;
     left: 0;

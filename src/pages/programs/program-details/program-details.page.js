@@ -45,7 +45,7 @@ class ProgramDetailsPage extends PureComponent {
       })
       .then(() => {
         this.setState({ isPending: true });
-        return service.getChartAndEndTrades();
+        return service.getChartAndEndTrades(this.description.data.id);
       })
       .then(values => {
         this.chart = values[0];

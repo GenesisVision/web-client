@@ -34,7 +34,7 @@ ProgramDepositPopup.propTypes = {
     availableInWallet: PropTypes.number,
     availableToInvest: PropTypes.number,
     entryFee: PropTypes.number,
-    periodEnds: PropTypes.string,
+    periodEnds: PropTypes.instanceOf(Date),
     rate: PropTypes.number,
     title: PropTypes.string
   })
