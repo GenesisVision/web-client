@@ -1,58 +1,84 @@
 @import "styles/_breakpoint.scss";
 @import "styles/_colors.scss";
 
+$padding: 33px;
+$main-font-size: 13px;
+$small-font-size: 12px;
+$large-font-size: 15px;
+$radius: 8px;
+
 .alert-message-list {
   display: flex;
   align-items: flex-end;
   flex-direction: column;
   position: fixed;
-  bottom: 1rem;
-  right: 1rem;
-  @include media-breakpoint-phone() {
-    bottom: 0;
-    right: 0;
+  top: 0;
+  right: 0;
+  padding: $padding/2;
+  &__text{
+    word-wrap: break-word;
+    max-width: 300px;
+    padding: $padding/4;
   }
-}
-
-.alert-message {
-  flex: 1;
-  min-width: 300px;
-  max-width: 300px;
-
-  color: white;
-  font-family: "NeuzeitGroBol";
-  font-weight: 400;
-
-  @include media-breakpoint-phone() {
-    min-width: 100vw;
-    max-width: 100vw;
+  &__clear-all {
+    background: $primary-color;
+    color: $panel-background-color;
+    font-size: $small-font-size;
+    border-radius: $radius*2;
+    padding: $padding/4;
+    font-weight: 200;
+    box-shadow: 0 5px 15px 0 $positive-background-color;
+    cursor: pointer;
+    .gv-btn {
+      font-size: 0.9rem;
+      line-height: 1;
+      padding: 0 0.9rem;
+    }
   }
-}
 
-.alert-message--success {
-  background-color: $primary-color;
-  border-color: $primary-color;
-  box-shadow: 0 5px 15px 0 $positive-background-color;
-}
+  .alert-message {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    color: $panel-background-color;
+    font-weight: 400;
+    font-size: $small-font-size;
+    padding: $padding/4;
+    margin-bottom: $padding/2;
+    border-radius: $radius;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $main-font-size;
+      padding: $padding/4;
+    }
+    &--success {
+      background-color: $positive-color;
+      border-color: $positive-color;
+      box-shadow: 0 5px 15px 0 $positive-background-color;
+    }
 
-.alert-message--danger {
-  background-color: $negative-color;
-  border-color: $negative-color;
-  box-shadow: 0 5px 15px 0 $negative-background-color;
-}
+    &--danger {
+      color: #eb3b5a;
+      background-color: hsl(349, 11%, 20%);
+      border-color: $negative-color;
+      box-shadow: 0 5px 15px 0 $panel-background-color;
+    }
 
-.alert-message--warning {
-  color: $text-color;
-  background-color: $text-color;
-  border-color: $text-color;
-  box-shadow: 0 5px 15px 0 $secondary-color;
-}
-
-.alert-message__clear-all {
-  margin-bottom: 0.5rem;
-  .gv-btn {
-    font-size: 0.9rem;
-    line-height: 1;
-    padding: 0 0.9rem;
+    &--warning {
+      color: $panel-background-color;
+      background-color: #ecdf75;
+      border-color: #ecdf75;
+      box-shadow: 0 5px 15px 0 $secondary-color;
+    }
+  }
+  &__close{
+    padding-left: $padding/4;
+    cursor: pointer;
+  }
+  &__close-button{
+    transform: rotate(45deg);
+    font-weight: 900;
+    font-size: $large-font-size*1.5;
+    line-height: $large-font-size;
   }
 }

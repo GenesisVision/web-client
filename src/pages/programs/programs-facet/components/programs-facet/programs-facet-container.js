@@ -9,9 +9,8 @@ import { bindActionCreators, compose } from "redux";
 
 import { getCurrentFacet } from "../../services/programs-facet.service";
 import ProgramsFacetInfo from "./programs-facet-info";
-import ProgramsFacetStub from "./programs-facet-stub";
 
-class ProgramsFacetPage extends Component {
+class ProgramsFacetContainer extends Component {
   state = {
     facetData: null
   };
@@ -33,7 +32,7 @@ class ProgramsFacetPage extends Component {
   render() {
     const { goBack } = this.props;
     const { facetData } = this.state;
-    if (!facetData || facetData.isPending) return <ProgramsFacetStub />;
+    if (!facetData || facetData.isPending) return null;
     if (facetData.notFound) return <NotFoundPage />;
     return (
       <Fragment>
@@ -62,4 +61,4 @@ export default compose(
     mapStateToProps,
     mapDispatchToProps
   )
-)(ProgramsFacetPage);
+)(ProgramsFacetContainer);

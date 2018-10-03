@@ -1,0 +1,34 @@
+import FacetCards from "components/facet-cards/facet-cards";
+import FacetCardsStub from "components/facet-cards/facet-cards-stub";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import replaceParams from "utils/replace-params";
+
+import {
+  FUNDS_FACET_ROUTE,
+  FUNDS_SLUG_URL_PARAM_NAME
+} from "../../../funds.routes";
+
+class FacetCardsContainer extends Component {
+  composeFacetUrl = url => {
+    return replaceParams(FUNDS_FACET_ROUTE, {
+      [`:${FUNDS_SLUG_URL_PARAM_NAME}`]: url
+    });
+  };
+  render() {
+    const { isPending, facets } = this.props;
+    if (!facets || isPending) return <FacetCardsStub />;
+    return (
+      <FacetCards facets={facets} composeFacetUrl={this.composeFacetUrl} />
+    );
+  }
+}
+
+const mapStateToProps = state => {
+  const { isPending, data } = state.platformData;
+  let facets = null;
+  if (data) facets = data.facets;
+  return { isPending, facets };
+};
+
+export default connect(mapStateToProps)(FacetCardsContainer);
