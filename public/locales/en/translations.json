@@ -227,7 +227,7 @@
     },
     "programs-header": {
       "title": "Name",
-      "balance": "Balance, gvt.",
+      "balance": "Balance",
       "currency": "Curr.",
       "investors": "Investors",
       "available-to-invest": "Av. to invest",
@@ -243,6 +243,15 @@
     "tabs": {
       "explore": "Explore",
       "favorites": "Favorites"
+    },
+    "funds-header": {
+      "title": "Name",
+      "balance": "Balance",
+      "assets": "Assets",
+      "investors": "Investors",
+      "drawdown": "D.down",
+      "profit": "Profit",
+      "chart": "Chart"
     }
   },
   "global-search-page": {

@@ -4,42 +4,42 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { bindActionCreators, compose } from "redux";
 
-import { toggleFavoriteProgramDispatchable } from "../../../favorite-asset/services/favorite-program.service";
-import * as programsService from "../../services/programs-table.service";
-import ProgramsTable from "./programs-table";
+import { toggleFavoriteFundDispatchable } from "../../../favorite-asset/services/favorite-fund.service";
+import * as fundsService from "../../services/funds-table.service";
+import FundsTable from "./funds-table";
 
-class ProgramsContainer extends Component {
+class FundsTableContainer extends Component {
   componentDidMount() {
     const { service } = this.props;
-    service.getPrograms();
+    service.getFunds();
   }
 
   componentDidUpdate(prevProps) {
     const { service, isLocationChanged } = this.props;
     if (isLocationChanged(prevProps.location)) {
-      service.getPrograms();
+      service.getFunds();
     }
   }
 
   render() {
     const { isPending, data, filters, service, isAuthenticated } = this.props;
     return (
-      <Surface className="programs-table-container">
-        <ProgramsTable
+      <Surface className="funds-table-container">
+        <FundsTable
           data={data || {}}
           isPending={isPending}
           sorting={filters.sorting}
-          updateSorting={service.programsChangeSorting}
+          updateSorting={service.fundsChangeSorting}
           filtering={{
             ...filters.filtering
           }}
-          updateFilter={service.programsChangeFilter}
+          updateFilter={service.fundsChangeFilter}
           paging={{
             totalPages: filters.pages,
             currentPage: filters.page
           }}
-          updatePaging={service.programsChangePage}
-          toggleFavorite={service.toggleFavoriteProgram}
+          updatePaging={service.fundsChangePage}
+          toggleFavorite={service.toggleFavoriteFund}
           isAuthenticated={isAuthenticated}
         />
       </Surface>
@@ -49,15 +49,15 @@ class ProgramsContainer extends Component {
 
 const mapStateToProps = state => {
   const { isAuthenticated } = state.authData;
-  const { isPending, data } = state.programsData.items;
+  const { isPending, data } = state.fundsData.items;
   return { isPending, data, isAuthenticated };
 };
 
 const mapDispatchToProps = dispatch => ({
   service: bindActionCreators(
     {
-      ...programsService,
-      toggleFavoriteProgram: toggleFavoriteProgramDispatchable
+      ...fundsService,
+      toggleFavoriteFund: toggleFavoriteFundDispatchable
     },
     dispatch
   )
@@ -68,7 +68,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const isLocationChanged = prevLocation => {
     return location.key !== prevLocation.key;
   };
-  const filters = dispatchProps.service.getProgramsFilters();
+  const filters = dispatchProps.service.getFundsFilters();
   return {
     ...stateProps,
     ...dispatchProps,
@@ -85,4 +85,4 @@ export default compose(
     mapDispatchToProps,
     mergeProps
   )
-)(ProgramsContainer);
+)(FundsTableContainer);

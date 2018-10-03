@@ -1,7 +1,7 @@
 import ProgramAvatar from "components/program-avatar/program-avatar";
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
-import FavoriteIcon from "modules/favorite-program/components/favorite-icon/favorite-icon";
+import FavoriteIcon from "modules/favorite-asset/components/favorite-icon/favorite-icon";
 import { TableCell, TableRow } from "modules/table/components";
 import React from "react";
 import NumberFormat from "react-number-format";
@@ -76,7 +76,7 @@ const ProgramTableRowShort = ({
           <TableCell className="programs-table__cell--favorite">
             <FavoriteIcon
               toggleSelected={toggleFavorite}
-              programId={program.id}
+              id={program.id}
               selected={program.personalProgramDetails.isFavorite}
             />
           </TableCell>

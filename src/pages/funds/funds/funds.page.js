@@ -1,5 +1,5 @@
 import Page from "components/page/page";
-import ProgramsContainer from "modules/programs-table/components/programs-table/programs-table-container";
+import FundsTableContainer from "modules/funds-table/components/funds-table/funds-table-container";
 import React from "react";
 import { translate } from "react-i18next";
 
@@ -11,7 +11,7 @@ const FundsPage = ({ t }) => {
     <Page title={t("funds-page.title")}>
       <FundsNavigationTabsContainer />
       <FacetCardsContainer />
-      <ProgramsContainer />
+      <FundsTableContainer />
     </Page>
   );
 };

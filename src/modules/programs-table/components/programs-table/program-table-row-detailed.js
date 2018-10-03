@@ -2,7 +2,7 @@ import { Icon } from "components/icon/icon";
 import ProgramAvatar from "components/program-avatar/program-avatar";
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
 import { GVButton } from "gv-react-components";
-import FavoriteIcon from "modules/favorite-program/components/favorite-icon/favorite-icon";
+import FavoriteIcon from "modules/favorite-asset/components/favorite-icon/favorite-icon";
 import { TableRow } from "modules/table/components";
 import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
 import { PROGRAM_SLUG_URL_PARAM_NAME } from "pages/programs/programs.routes";
@@ -159,7 +159,7 @@ class ProgramTableRowDetailed extends Component {
                         Add to favorites{" "}
                         <FavoriteIcon
                           toggleSelected={toggleFavorite}
-                          programId={program.id}
+                          id={program.id}
                           selected={program.personalProgramDetails.isFavorite}
                         />
                       </span>
