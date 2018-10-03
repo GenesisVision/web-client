@@ -21,7 +21,7 @@ const ProgramDepositContainer = props => {
     props.service.clearInvestSubmit();
   };
   const handleInvest = amount => {
-    props.sendMessage("Request to buy tokens sent successfully");
+    props.service.notifySuccess("Request to buy tokens sent successfully");
     props.service.investServiceInvestById(props.id, amount).then(handleClose);
   };
   return (
@@ -63,13 +63,11 @@ const mapDispatchToProps = dispatch => ({
       getDepositProgramInfoById,
       clearDepositProgramInfo,
       investServiceInvestById,
-      clearInvestSubmit
+      clearInvestSubmit,
+      notifySuccess: alertMessageActions.success
     },
     dispatch
-  ),
-  sendMessage: message => {
-    dispatch(alertMessageActions.success(message));
-  }
+  )
 });
 
 export default connect(
