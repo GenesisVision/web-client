@@ -1,9 +1,11 @@
 import "./dashboard-portfolio-event.scss";
 
 import classnames from "classnames";
+import Profitability from "components/profitability/profitability";
 import * as moment from "moment";
 import PropTypes from "prop-types";
 import React from "react";
+import NumberFormat from "react-number-format";
 
 import PortfolioEventLogo, {
   logoTypes
@@ -35,13 +37,20 @@ const DashboardPortfolioEvent = ({ event }) => {
       <PortfolioEventLogo
         isPositive={isPositive}
         type={isPositive ? logoTypes.PROFIT : logoTypes.LOSE}
+        logo={event.logo}
       />
       <div className="portfolio-event__info">
         <span className="portfolio-event__time">{formatDate(event.date)}</span>
         <p className="portfolio-event__description">{event.description}</p>
         <span className="portfolio-event__value">
-          {isPositive && "+"} {isNegative && "-"} {Math.abs(event.value) + " "}
-          GVT
+          <Profitability value={event.value}>
+            <NumberFormat
+              value={Math.abs(event.value)}
+              decimalScale={8}
+              displayType="text"
+              suffix=" GVT"
+            />
+          </Profitability>
         </span>
       </div>
     </div>

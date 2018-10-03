@@ -22,12 +22,16 @@ class ProgramDetailsStatisticSection extends PureComponent {
     const { data: statistic } = this.props.statisticData;
 
     if (!statistic) return null;
+    const periodStatistic =
+      statistic.chart.length - 1 > period
+        ? statistic.chart[period].statistic
+        : {};
 
     return (
       <div className="program-details-statistic-section">
         <div className="program-details-statistic-section__statistic">
           <ProgramDetailsStatistic
-            statistic={statistic.chart[period].statistic}
+            statistic={periodStatistic}
             sharpeRatio={statistic.sharpeRatio}
           />
         </div>

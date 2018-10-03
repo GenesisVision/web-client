@@ -1,19 +1,21 @@
 import ChartTooltip from "components/chart/chart-tooltip/chart-tooltip";
 import React from "react";
+import NumberFormat from "react-number-format";
 
-const ProgramBigChartTooltip = ({
-  active,
-  label,
-  payload,
-  value,
-  currency
-}) => {
+const ProgramBigChartTooltip = ({ active, label, payload, value }) => {
   if (!active) return null;
   return (
     <ChartTooltip
       heading="Equity"
-      date={label}
-      body={`${payload[0].value} ${currency}`}
+      date={new Date(label)}
+      body={
+        <NumberFormat
+          value={payload[0].value}
+          decimalScale={2}
+          displayType="text"
+          suffix=" %"
+        />
+      }
     />
   );
 };

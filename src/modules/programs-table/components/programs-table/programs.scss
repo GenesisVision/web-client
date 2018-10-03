@@ -55,11 +55,11 @@ $description-block-width: 250px;
       @include table-title;
     }
   }
-  &__names{
+  &__names {
     width: 100%;
     padding: 0 $padding/4;
   }
-  &__actions{
+  &__actions {
     text-align: right;
     width: 10px;
   }
@@ -202,9 +202,9 @@ $description-block-width: 250px;
     flex-direction: row;
     align-items: stretch;
     justify-content: space-between;
-    &--outer{
+    &--outer {
     }
-    &--inner{
+    &--inner {
       width: 100%;
     }
   }
@@ -249,6 +249,9 @@ $description-block-width: 250px;
     letter-spacing: 0.2px;
     margin-bottom: $padding/2.5/1.5;
     word-break: break-all;
+    .gv-btn {
+      padding: 0;
+    }
   }
 
   &__manager {

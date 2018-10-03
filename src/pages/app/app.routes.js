@@ -1,3 +1,4 @@
+import { PROFILE_ROUTE } from "modules/profile/profile.constants";
 import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import DashboardRoutes from "pages/dashboard/dashboard.routes";
 import ManagerPage, {
@@ -5,6 +6,7 @@ import ManagerPage, {
 } from "pages/manager/manager.page";
 import NotFoundPage from "pages/not-found/not-found.routes";
 import PrivateRoute from "pages/private-route";
+import ProfileRoutes from "pages/profile/profile.routes";
 import WalletPage, { WALLET_PAGE_ROUTE } from "pages/wallet/wallet-page";
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
@@ -24,6 +26,7 @@ const AppRoutes = () => {
         <Route path={PROGRAMS_ROUTE} component={ProgramsRoutes} />
         <Route path={GLOBAL_SEARCH_ROUTE} component={GlobalSearchPage} />
         <Route path={MANAGER_DETAILS_ROUTE_REGEXP} component={ManagerPage} />
+        <Route path={PROFILE_ROUTE} component={ProfileRoutes} />
         <PrivateRoute path={DASHBOARD_ROUTE} component={DashboardRoutes} />
         <PrivateRoute path={WALLET_PAGE_ROUTE} component={WalletPage} />
         <Route component={NotFoundPage} />

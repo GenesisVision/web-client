@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { bindActionCreators, compose } from "redux";
 
-import { toggleFavoriteProgram } from "../../../favorite-program/services/favorite-program.service";
+import { toggleFavoriteProgramDispatchable } from "../../../favorite-program/services/favorite-program.service";
 import * as programsService from "../../services/programs-table.service";
 import ProgramsTable from "./programs-table";
 
@@ -55,7 +55,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   service: bindActionCreators(
-    { ...programsService, toggleFavoriteProgram },
+    {
+      ...programsService,
+      toggleFavoriteProgram: toggleFavoriteProgramDispatchable
+    },
     dispatch
   )
 });

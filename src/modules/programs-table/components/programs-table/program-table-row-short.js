@@ -69,10 +69,7 @@ const ProgramTableRowShort = ({
         />
       </TableCell>
       <TableCell className="programs-table__cell--chart">
-        <ProgramSimpleChart
-          data={program.chart}
-          isPositive={program.statistic.profitPercent >= 0}
-        />
+        <ProgramSimpleChart data={program.chart} />
       </TableCell>
       {isAuthenticated &&
         program.personalProgramDetails && (
