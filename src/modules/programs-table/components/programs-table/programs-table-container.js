@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { bindActionCreators, compose } from "redux";
 
-import { toggleFavoriteProgramDispatchable } from "../../../favorite-program/services/favorite-program.service";
+import { toggleFavoriteProgramDispatchable } from "../../../favorite-asset/services/favorite-program.service";
 import * as programsService from "../../services/programs-table.service";
 import ProgramsTable from "./programs-table";
 

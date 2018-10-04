@@ -1,4 +1,4 @@
-import { toggleFavoriteProgram } from "modules/favorite-program/services/favorite-program.service";
+import { toggleFavoriteProgram } from "modules/favorite-asset/services/favorite-program.service";
 import { toggleReinvesting } from "modules/program-reinvesting/services/program-reinvesting.service";
 import React, { Fragment, PureComponent } from "react";
 
