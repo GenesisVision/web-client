@@ -59,7 +59,8 @@ export const getProgramStatistic = (
         totalProgramCurrencyProfit: values[0].data.totalProgramCurrencyProfit,
         programCurrency: values[0].data.programCurrency,
         profitChangePercent: values[0].data.profitChangePercent,
-        profitChart: values[0].data.profitChart
+        pnLChart: values[0].data.pnLChart,
+        equityChart: values[0].data.pnLChart
       },
       isPending: values[0].isPending
     };

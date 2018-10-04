@@ -14,6 +14,7 @@ import ProgramDetailsStatistic from "./program-details-statistics/program-detail
 class ProgramDetailsStatisticSection extends PureComponent {
   state = {
     statisticData: { data: null, isPending: true },
+    profitChartData: { data: null, isPending: true },
     period: {
       type: ChartPeriodType.month,
       start: getPeriodStartDate(ChartPeriodType.month),
@@ -27,6 +28,7 @@ class ProgramDetailsStatisticSection extends PureComponent {
     if (state.prevProps !== props) {
       newState.prevProps = props;
       newState.statisticData = props.statisticData;
+      newState.profitChartData = props.profitChartData;
     }
     return newState;
   }
