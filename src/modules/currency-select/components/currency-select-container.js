@@ -27,7 +27,7 @@ class CurrencySelectContainer extends Component {
 }
 
 CurrencySelectContainer.propTypes = {
-  currency: PropTypes.oneOf(Object.keys(HEADER_CURRENCY_VALUES)),
+  currency: PropTypes.string,
   service: PropTypes.shape({
     updateCurrency: PropTypes.func
   })
