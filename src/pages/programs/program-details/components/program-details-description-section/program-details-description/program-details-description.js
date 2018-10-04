@@ -14,6 +14,7 @@ import replaceParams from "utils/replace-params";
 import ProgramDetailsFavorite from "./program-details-favorite";
 import ProgramDetailsNotification from "./program-details-notificaton";
 import Popover from "../../../../../../components/popover/popover";
+import AboutLevelsComponent from "../../../../../app/components/about-levels/about-levels";
 
 const composeManagerUrl = managerId => {
   return replaceParams(MANAGER_DETAILS_ROUTE, {
@@ -24,9 +25,15 @@ const composeManagerUrl = managerId => {
 class ProgramDetailsDescription extends PureComponent {
   state = {
     isOpenInvestmentPopup: false,
+    isOpenAboutLevels: false,
     anchor: null
   };
 
+  handleOpenAboutLevels = () => {
+    this.setState({ isOpenAboutLevels: true });
+    this.handleCloseDropdown();
+  };
+  handleCloseAboutLevels = () => this.setState({ isOpenAboutLevels: false });
   handleOpenDropdown = event => this.setState({ anchor: event.currentTarget });
   handleCloseDropdown = () => this.setState({ anchor: null });
   handleOpenInvestmentPopup = () => {
@@ -38,7 +45,7 @@ class ProgramDetailsDescription extends PureComponent {
   };
 
   render() {
-    const { isOpenInvestmentPopup, anchor } = this.state;
+    const { isOpenInvestmentPopup, isOpenAboutLevels, anchor } = this.state;
     const {
       t,
       isInvested,
@@ -100,6 +107,10 @@ class ProgramDetailsDescription extends PureComponent {
               </div>
             </div>
           </Popover>
+          <AboutLevelsComponent
+            open={isOpenAboutLevels}
+            onClose={this.handleCloseAboutLevels}
+          />
         </div>
         <div className="program-details-description__main">
           <h1 className="program-details-description__heading">
