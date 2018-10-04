@@ -2,10 +2,13 @@ import ChartPeriod from "components/chart/chart-period/chart-period";
 import StatisticItem from "components/statistic-item/statistic-item";
 import React, { Fragment } from "react";
 
+import ProgramProfitChart from "./program-profit-chart";
+
 const ProgramProfitChartSection = ({
   profitChartData,
   period,
-  onPeriodChange
+  onPeriodChange,
+  currency
 }) => {
   const { data: profitChart } = profitChartData;
   if (!profitChart) return null;
@@ -29,10 +32,11 @@ const ProgramProfitChartSection = ({
       </div>
       <ChartPeriod onChange={onPeriodChange} period={period} />
       <div className="program-details-chart__profit">
-        {/* <ProgramProfitChart
-    periods={chart.map(x => x.equityChart)}
-    pnl={chart.pnLChart}
-  /> */}
+        <ProgramProfitChart
+          equityChart={profitChart.equityChart}
+          pnlChart={profitChart.pnLChart}
+          currency={profitChart.programCurrency}
+        />
       </div>
     </Fragment>
   );
