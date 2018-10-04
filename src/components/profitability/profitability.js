@@ -15,22 +15,22 @@ const Profitability = ({
   ...rest
 }) => {
   let isPositiveLocal = isPositive;
-  let isNegaitveLocal = isNegative;
+  let isNegativeLocal = isNegative;
 
   if (value !== undefined) {
     isPositiveLocal = value > 0;
-    isNegaitveLocal = value < 0;
+    isNegativeLocal = value < 0;
   }
 
   const rootClassName = classNames("profitability", className, {
     "profitability--positive": isPositiveLocal,
-    "profitability--negative": isNegaitveLocal
+    "profitability--negative": isNegativeLocal
   });
 
   return (
     <span className={rootClassName} {...rest}>
       {isPositiveLocal && value !== undefined && `${positiveSymbol || "+"} `}
-      {isNegaitveLocal && value !== undefined && `${negativeSymbol || "-"} `}
+      {isNegativeLocal && value !== undefined && `${negativeSymbol || "-"} `}
       {children}
     </span>
   );
