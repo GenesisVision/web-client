@@ -4,7 +4,8 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 
 export const NOTIFICATIONS_ROUTE = "/notifications";
-export const PROGRAM_NOTIFICATIONS_ROUTE = `${NOTIFICATIONS_ROUTE}/:id`;
+export const PROGRAM_NOTIFICATIONS_ROUTE = `${NOTIFICATIONS_ROUTE}/program/:id`;
+export const MANAGER_NOTIFICATIONS_ROUTE = `${NOTIFICATIONS_ROUTE}/manager/:id`;
 
 const NotificationRoutes = () => (
   <Switch>

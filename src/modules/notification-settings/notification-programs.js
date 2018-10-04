@@ -11,7 +11,7 @@ class NotificationPrograms extends Component {
     if (settings.length === 0) return null;
     const items = settings.map(setting => {
       const href = replaceParams(PROGRAM_NOTIFICATIONS_ROUTE, {
-        ":id": setting.programId
+        ":id": setting.url
       });
       return (
         <NotificationEntity
