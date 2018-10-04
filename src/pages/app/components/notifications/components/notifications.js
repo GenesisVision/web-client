@@ -10,6 +10,7 @@ import { notificationProps } from "pages/app/components/notifications/components
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
+import { Link } from "react-router-dom";
 
 //TODO: отрефакторить
 class Notifications extends Component {
@@ -20,7 +21,6 @@ class Notifications extends Component {
   fetchNotification = () => {
     this.setState({ isPending: true });
     this.props.fetchNotifications().then(data => {
-      console.info(data);
       this.setState({ isPending: false });
     });
   };
@@ -62,7 +62,7 @@ class Notifications extends Component {
       <div className="notifications">
         <InfinityScroll
           onLoad={this.fetchNotification}
-          disabled={total === notifications.length || this.state.isPending}
+          disabled={this.state.isPending}
         >
           <div className="notifications__header">
             <RingIcon />
@@ -70,9 +70,11 @@ class Notifications extends Component {
             <div className="notifications__count">
               <Chip type="negative">{count}</Chip>
             </div>
-            <div className="notifications__link">
-              <ControlsIcon />
-            </div>
+            <Link to={"/notifications"}>
+              <div className="notifications__link">
+                <ControlsIcon />
+              </div>
+            </Link>
           </div>
           <div className="notifications__content">
             {Object.keys(groups)

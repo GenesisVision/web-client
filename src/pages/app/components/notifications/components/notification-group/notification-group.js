@@ -9,7 +9,7 @@ import * as uuid from "uuid";
 
 class NotificationsGroup extends Component {
   renderNotifications = notification => (
-    <Notification key={uuid.v4()} {...notification} /> //FIXME: исправить когда будут уникальные ID
+    <Notification key={notification.id} {...notification} /> //FIXME: исправить когда будут уникальные ID
   );
   render() {
     const { notifications, title } = this.props;

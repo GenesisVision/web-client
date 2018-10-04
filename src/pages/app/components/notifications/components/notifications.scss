@@ -66,4 +66,14 @@
     color: $text-dark-color;
     letter-spacing: 0.4px;
   }
+
+  &--is-unread {
+    .notification__date {
+      &:after {
+        content: "\25CF";
+        color: $negative-color;
+        margin-left: 10px;
+      }
+    }
+  }
 }
