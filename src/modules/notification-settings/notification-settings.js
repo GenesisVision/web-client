@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import NotificationGeneral from "./notification-general";
+import NotificationManagers from "./notification-managers";
 import NotificationPrograms from "./notification-programs";
 
 class NotificationSettings extends Component {
@@ -12,6 +13,7 @@ class NotificationSettings extends Component {
       <div>
         <NotificationGeneral settings={this.props.settingsGeneral} />
         <NotificationPrograms settings={this.props.settingsProgram} />
+        <NotificationManagers settings={this.props.settingsManager} />
       </div>
     );
   }

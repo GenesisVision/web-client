@@ -1,47 +1,47 @@
 import NotificationEntity from "modules/notification-settings/notification-entity";
-import { PROGRAM_NOTIFICATIONS_ROUTE } from "pages/notifications/notifications.routes";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import replaceParams from "utils/replace-params";
 
-class NotificationPrograms extends Component {
+class NotificationManagers extends Component {
   render() {
     const { t, settings } = this.props;
     if (settings.length === 0) return null;
     const items = settings.map(setting => {
-      const href = replaceParams(PROGRAM_NOTIFICATIONS_ROUTE, {
+      const href = replaceParams("/notifications/manager/:id", {
+        //TODO: refactor
         ":id": setting.programId
       });
       return (
         <NotificationEntity
           href={href}
-          programId={setting.id}
-          title={setting.title}
-          logo={setting.logo}
-          count={setting.settingsCustom.length + setting.settingsGeneral.length}
+          id={setting.managerId}
+          title={setting.username}
+          logo={setting.avatar}
+          count={setting.settingsGeneral.length}
         />
       );
     });
     return (
       <div>
-        <h3>{t("notifications.programs")}</h3>
+        <h3>{t("notifications.managers")}</h3>
         <div className="program-notification__list">{items}</div>
       </div>
     );
   }
 }
 
-NotificationPrograms.propTypes = {
+NotificationManagers.propTypes = {
   settings: PropTypes.arrayOf(
     PropTypes.shape({
-      level: PropTypes.number,
-      logo: PropTypes.string,
-      programId: PropTypes.string,
-      settingsCustom: PropTypes.array,
+      managerId: PropTypes.string,
+      username: PropTypes.string,
+      avatar: PropTypes.string,
+      about: PropTypes.string,
       settingsGeneral: PropTypes.array
     })
   )
 };
 
-export default translate()(NotificationPrograms);
+export default translate()(NotificationManagers);

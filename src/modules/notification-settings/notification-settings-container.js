@@ -8,8 +8,10 @@ import NotificationSettings from "./notification-settings";
 class NotificationSettingsContainer extends Component {
   state = {
     settingsGeneral: [],
-    settingsProgram: []
+    settingsProgram: [],
+    settingsManager: []
   };
+
   componentDidMount() {
     notificationsApi
       .v10NotificationsSettingsGet(authService.getAuthArg())
@@ -21,6 +23,7 @@ class NotificationSettingsContainer extends Component {
       <NotificationSettings
         settingsGeneral={this.state.settingsGeneral}
         settingsProgram={this.state.settingsProgram}
+        settingsManager={this.state.settingsManager}
       />
     );
   }
