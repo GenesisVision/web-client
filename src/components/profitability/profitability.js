@@ -10,6 +10,8 @@ const Profitability = ({
   value,
   isPositive,
   isNegative,
+  positiveSymbol,
+  negativeSymbol,
   ...rest
 }) => {
   let isPositiveLocal = isPositive;
@@ -27,8 +29,8 @@ const Profitability = ({
 
   return (
     <span className={rootClassName} {...rest}>
-      {isPositiveLocal && value !== undefined && "+ "}
-      {isNegaitveLocal && value !== undefined && "- "}
+      {isPositiveLocal && value !== undefined && `${positiveSymbol || "+"} `}
+      {isNegaitveLocal && value !== undefined && `${negativeSymbol || "-"} `}
       {children}
     </span>
   );
@@ -39,7 +41,9 @@ Profitability.propTypes = {
   children: PropTypes.node.isRequired,
   value: PropTypes.number,
   isPositive: PropTypes.bool,
-  isNegative: PropTypes.bool
+  isNegative: PropTypes.bool,
+  positiveSymbol: PropTypes.string,
+  negativeSymbol: PropTypes.string
 };
 
 export default Profitability;
