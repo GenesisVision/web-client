@@ -6,7 +6,7 @@ import { CURRENCY_VALUES } from "modules/currency-select/currency-select.constan
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import rateApi from "services/api-client/rate-api";
+import rateApiProxy from "services/api-client/rate-api";
 
 import { convertToCurrency } from "../../../../utils/currency-converter";
 
@@ -17,7 +17,7 @@ class AboutLevelsComponent extends Component {
   };
   handlerCurrencyChange = e => {
     this.setState({ currency: e.target.value });
-    rateApi
+    rateApiProxy
       .v10RateByFromByToGet(e.target.value, CURRENCY_VALUES.GVT)
       .then(value => {
         this.setState({ rate: value });
