@@ -8,6 +8,7 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import CurrencySelect from "modules/currency-select/components/currency-select";
 
 class CurrencySelectContainer extends Component {
   handleChange = event => {
@@ -15,19 +16,12 @@ class CurrencySelectContainer extends Component {
   };
   render() {
     return (
-      <Select
+      <CurrencySelect
         className={classnames("currency-select", this.props.className)}
         value={this.props.currency}
         onChange={this.handleChange}
-      >
-        {Object.keys(HEADER_CURRENCY_VALUES).map(currency => {
-          return (
-            <option value={currency} key={currency}>
-              {HEADER_CURRENCY_VALUES[currency]}
-            </option>
-          );
-        })}
-      </Select>
+        currencyValues={this.props.currencyValues}
+      />
     );
   }
 }
