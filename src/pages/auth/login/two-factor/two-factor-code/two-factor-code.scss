@@ -2,14 +2,13 @@
 
 .login-two-factor-page {
   display: flex;
-  flex-direction: column;
-  flex: 1 0 70%;
+  flex-grow: 1;
 }
 
 .login-two-factor {
   display: flex;
   flex-direction: column;
-  flex: 1 0 70%;
+  flex-grow: 1;
 
   &__header {
     margin: 0 0 40px 0;
