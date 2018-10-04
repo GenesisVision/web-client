@@ -134,7 +134,7 @@ class ProgramCard extends Component {
                 />
               </Profitability>
             </div>
-            <div className="programs-cards__chart-info--balance">
+            <div className="programs-cards__balance">
               {program.statistic.balanceGVT.amount} {program.currency}
             </div>
           </div>
