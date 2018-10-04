@@ -1,12 +1,14 @@
 import "./about-level.scss";
-import React, { Component } from "react";
+
 import Dialog from "components/dialog/dialog";
-import { translate } from "react-i18next";
-import { CURRENCY_VALUES } from "modules/currency-select/currency-select.constants";
 import CurrencySelect from "modules/currency-select/components/currency-select";
-import { convertToCurrency } from "../../../../utils/currency-converter";
-import rateApi from "services/api-client/rate-api";
+import { CURRENCY_VALUES } from "modules/currency-select/currency-select.constants";
+import React, { Component } from "react";
+import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import rateApi from "services/api-client/rate-api";
+
+import { convertToCurrency } from "../../../../utils/currency-converter";
 
 class AboutLevelsComponent extends Component {
   state = {
@@ -21,7 +23,7 @@ class AboutLevelsComponent extends Component {
         this.setState({ rate: value });
       });
   };
-  numberFormat=val=>{
+  numberFormat = val => {
     return (
       <NumberFormat
         value={convertToCurrency(val, this.state.rate)}
@@ -30,8 +32,8 @@ class AboutLevelsComponent extends Component {
         decimalScale={2}
         displayType="text"
       />
-    )
-  }
+    );
+  };
   render() {
     const { t, open, onClose } = this.props;
     return (
