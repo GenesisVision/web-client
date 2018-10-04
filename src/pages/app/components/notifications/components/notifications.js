@@ -7,6 +7,7 @@ import InfinityScroll from "components/infinity-scroll/inifinity-scroll";
 import moment from "moment";
 import NotificationsGroup from "pages/app/components/notifications/components/notification-group/notification-group";
 import { notificationProps } from "pages/app/components/notifications/components/notification/notification";
+import { NOTIFICATIONS_ROUTE } from "pages/notifications/notifications.routes";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
@@ -56,7 +57,7 @@ class Notifications extends Component {
 
   render() {
     const { t } = this.props;
-    const { count, notifications, total } = this.props;
+    const { count, notifications } = this.props;
     const groups = this.getGroups(notifications);
     return (
       <div className="notifications">
@@ -70,7 +71,7 @@ class Notifications extends Component {
             <div className="notifications__count">
               <Chip type="negative">{count}</Chip>
             </div>
-            <Link to={"/notifications"}>
+            <Link to={NOTIFICATIONS_ROUTE}>
               <div className="notifications__link">
                 <ControlsIcon />
               </div>

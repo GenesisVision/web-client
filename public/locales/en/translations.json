@@ -35,6 +35,18 @@
     "today": "today",
     "yesterday": "yesterday"
   },
+  "notifications": {
+    "title": "Notification settings",
+    "general": {
+      "title": "GENERAL",
+      "news-updates": "News and updates",
+      "emergency": "Emergency notifications"
+    },
+    "programs": "PROGRAMS",
+    "program": {
+      "title": "Program notifications"
+    }
+  },
   "buttons": {
     "apply": "Apply",
     "cancel": "Cancel",
