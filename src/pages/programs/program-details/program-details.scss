@@ -48,7 +48,10 @@ $small-font-size: 12px;
     letter-spacing: 0.3px;
   }
   &__about {
-    padding: $padding 0;
+    padding: $padding/2 0;
     font-size: $small-font-size;
+    font-weight: 600;
+    line-height: 1.67;
+    letter-spacing: 0.3px;
   }
 }
