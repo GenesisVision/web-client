@@ -8,6 +8,7 @@ import { Route, Switch } from "react-router-dom";
 import { ConnectedRouter } from "react-router-redux";
 
 import { HOME_ROUTE } from "./pages/app/app.routes";
+import AlertMessageList from "./shared/modules/alert-message/components/alert-message-list/alert-message-list";
 import store from "./store";
 import history from "./utils/history";
 
@@ -21,6 +22,7 @@ const Root = () => {
             <Route path={HOME_ROUTE} component={AppRoutes} />
           </Switch>
           <div id="modal-root" />
+          <AlertMessageList />
         </GVScroll>
       </ConnectedRouter>
     </Provider>

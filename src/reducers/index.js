@@ -7,6 +7,7 @@ import accountSettingsReducer from "reducers/account-settings";
 import uiReducer from "reducers/ui-reducer";
 import { combineReducers } from "redux";
 
+import fundsReducer from "../modules/funds-table/reducers/funds-table.reducers";
 import navigationReducer from "../modules/navigation/reducers/navigation-reducers";
 import profileReducer from "../modules/profile/reducers/profile-reducers";
 import programWithdrawReducer from "../modules/program-withdraw/reducer/program-withdraw.reducer";
@@ -28,6 +29,7 @@ export default combineReducers({
   loadingBar: loadingBarReducer,
   platformData: platformReducer,
   programsData: programsReducer,
+  fundsData: fundsReducer,
   loginData: loginReducer,
   signUpData: signUpReducer,
   authData: authReducer,

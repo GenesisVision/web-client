@@ -7,7 +7,7 @@ $th-text-size: 12px;
 $title-text-size: 15px;
 $chart-width: 160px;
 $program-width: 312px;
-$program-height: 312px;
+$program-height: 372px;
 $multiplier: 1.5;
 $border-radius: 5px;
 $description-block-width: 250px;
@@ -31,7 +31,6 @@ $description-block-width: 250px;
 
 .programs-cards {
   .icon {
-    height: 15px;
     width: auto;
   }
   box-sizing: border-box;
@@ -48,7 +47,7 @@ $description-block-width: 250px;
     box-sizing: border-box;
     width: 100%;
     height: $program-height/1.2;
-    padding: 20px;
+    padding: $padding 20px;
     border-radius: 8px;
     background-color: #212c34;
     &--title {
@@ -61,7 +60,11 @@ $description-block-width: 250px;
   }
   &__actions {
     text-align: right;
-    width: 10px;
+    svg {
+      width: 30px;
+      height: 30px;
+    }
+    cursor: pointer;
   }
   &__title {
     padding: 3px 0;
@@ -391,4 +394,9 @@ $description-block-width: 250px;
       margin-bottom: $padding/3;
     }
   }
+}
+.popover-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
