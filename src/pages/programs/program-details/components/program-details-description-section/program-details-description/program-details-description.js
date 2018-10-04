@@ -12,8 +12,8 @@ import { Link } from "react-router-dom";
 import replaceParams from "utils/replace-params";
 import ProgramDetailsFavorite from "./program-details-favorite";
 import ProgramDetailsNotification from "./program-details-notificaton";
-import Popover from "../../../../../../components/popover/popover";
-import AboutLevelsComponent from "../../../../../app/components/about-levels/about-levels";
+import Popover from "components/popover/popover";
+import AboutLevelsComponent from "pages/app/components/about-levels/about-levels";
 
 const composeManagerUrl = managerId => {
   return replaceParams(MANAGER_DETAILS_ROUTE, {
