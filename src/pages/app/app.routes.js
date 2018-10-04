@@ -11,6 +11,7 @@ import WalletPage, { WALLET_PAGE_ROUTE } from "pages/wallet/wallet-page";
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 
+import FundsRoutes, { FUNDS_ROUTE } from "../funds/funds.routes";
 import GlobalSearchPage from "../global-search/global-search.page";
 import { GLOBAL_SEARCH_ROUTE } from "../global-search/global-search.routes";
 import ProgramsRoutes, { PROGRAMS_ROUTE } from "../programs/programs.routes";
@@ -24,6 +25,7 @@ const AppRoutes = () => {
       <Switch>
         <Redirect exact from={HOME_ROUTE} to={PROGRAMS_ROUTE} />
         <Route path={PROGRAMS_ROUTE} component={ProgramsRoutes} />
+        <Route path={FUNDS_ROUTE} component={FundsRoutes} />
         <Route path={GLOBAL_SEARCH_ROUTE} component={GlobalSearchPage} />
         <Route path={MANAGER_DETAILS_ROUTE_REGEXP} component={ManagerPage} />
         <Route path={PROFILE_ROUTE} component={ProfileRoutes} />
