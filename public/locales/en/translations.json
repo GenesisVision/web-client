@@ -18,14 +18,14 @@
       "section-total-profit": " is calculated in USD. It shows how much USD you would need to make per day on an average basis.",
       "section-6": "A manager would need to achieve all three parameters to receive the next level of his investment program. You can also skip levels if you outperform them. "
     },
-    "levels": {
-      "1": "1000",
-      "2": "10000",
-      "3": "50000",
-      "4": "100000",
-      "5": "200000",
-      "6": "500000",
-      "7": "1000000"
+    "limits": {
+      "1": 1000,
+      "2": 10000,
+      "3": 50000,
+      "4": 100000,
+      "5": 200000,
+      "6": 500000,
+      "7": 1000000
     },
     "table-header": {
       "level": "Level",

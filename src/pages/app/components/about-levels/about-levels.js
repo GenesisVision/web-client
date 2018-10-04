@@ -155,7 +155,7 @@ class AboutLevelsComponent extends Component {
                       {t("about-levels.titles.limit")}
                     </div>
                     <div className="about-levels-container__value">
-                      {this.numberFormat(1000)}
+                      {this.numberFormat(t("about-levels.limits.1"))}
                     </div>
                   </div>
                 </div>
@@ -166,7 +166,7 @@ class AboutLevelsComponent extends Component {
                       {t("about-levels.titles.limit")}
                     </div>
                     <div className="about-levels-container__value">
-                      {this.numberFormat(10000)}
+                      {this.numberFormat(t("about-levels.limits.2"))}
                     </div>
                   </div>
                 </div>
@@ -179,7 +179,7 @@ class AboutLevelsComponent extends Component {
                       {t("about-levels.titles.limit")}
                     </div>
                     <div className="about-levels-container__value">
-                      {this.numberFormat(50000)}
+                      {this.numberFormat(t("about-levels.limits.3"))}
                     </div>
                   </div>
                 </div>
@@ -190,7 +190,7 @@ class AboutLevelsComponent extends Component {
                       {t("about-levels.titles.limit")}
                     </div>
                     <div className="about-levels-container__value">
-                      {this.numberFormat(100000)}
+                      {this.numberFormat(t("about-levels.limits.4"))}
                     </div>
                   </div>
                 </div>
@@ -201,7 +201,7 @@ class AboutLevelsComponent extends Component {
                       {t("about-levels.titles.limit")}
                     </div>
                     <div className="about-levels-container__value">
-                      {this.numberFormat(200000)}
+                      {this.numberFormat(t("about-levels.limits.5"))}
                     </div>
                   </div>
                 </div>
@@ -212,7 +212,7 @@ class AboutLevelsComponent extends Component {
                       {t("about-levels.titles.limit")}
                     </div>
                     <div className="about-levels-container__value">
-                      {this.numberFormat(500000)}
+                      {this.numberFormat(t("about-levels.limits.6"))}
                     </div>
                   </div>
                 </div>
@@ -225,7 +225,7 @@ class AboutLevelsComponent extends Component {
                       {t("about-levels.titles.limit")}
                     </div>
                     <div className="about-levels-container__value">
-                      {this.numberFormat(1000000)}
+                      {this.numberFormat(t("about-levels.limits.7"))}
                     </div>
                   </div>
                 </div>
