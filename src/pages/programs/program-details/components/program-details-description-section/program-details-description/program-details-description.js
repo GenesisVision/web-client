@@ -72,7 +72,7 @@ class ProgramDetailsDescription extends PureComponent {
             />
           </div>
           <Popover
-            horizontal="right"
+            horizontal="left"
             vertical="bottom"
             anchorEl={anchor}
             noPadding
