@@ -14,6 +14,8 @@ import replaceParams from "utils/replace-params";
 import { ActionsCircleIcon } from "../../../../components/icon/actions-circle-icon";
 import Popover from "../../../../components/popover/popover";
 import ProgramAvatar from "../../../../components/program-avatar/program-avatar";
+import Profitability from "components/profitability/profitability";
+import classNames from "classnames";
 
 class ProgramCard extends Component {
   state = {
@@ -111,13 +113,26 @@ class ProgramCard extends Component {
             />
           </div>
           <div className="programs-cards__chart-info">
-            <div className="programs-cards__chart-info--profit">
-              <NumberFormat
+            <div
+              className={classNames("programs-cards__profit", {
+                "programs-cards__profit--positive":
+                  program.statistic.profitPercent > 0,
+                "programs-cards__profit--negative":
+                  program.statistic.profitPercent < 0
+              })}
+            >
+              <Profitability
                 value={program.statistic.profitPercent}
-                suffix="%"
-                decimalScale={2}
-                displayType="text"
-              />
+                positiveSymbol="&uarr;"
+                negativeSymbol="&darr;"
+              >
+                <NumberFormat
+                  value={program.statistic.profitPercent}
+                  suffix="%"
+                  decimalScale={2}
+                  displayType="text"
+                />
+              </Profitability>
             </div>
             <div className="programs-cards__chart-info--balance">
               {program.statistic.balanceGVT.amount} {program.currency}
