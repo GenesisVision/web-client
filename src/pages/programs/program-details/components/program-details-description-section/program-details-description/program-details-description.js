@@ -74,9 +74,12 @@ class ProgramDetailsDescription extends PureComponent {
             <div className="popover-levels">
               <div className="popover-levels__block">
                 <div className="popover-levels__title">
-                  Genesis Level {programDescription.level}
+                  {t("program-details-page.popover.genesis-level")}{" "}
+                  {programDescription.level}
                 </div>
-                <div className="popover-levels__subtitle">Invest limit</div>
+                <div className="popover-levels__subtitle">
+                  {t("program-details-page.popover.invest-limit")}
+                </div>
                 <div className="popover-levels__balance">
                   {programDescription.availableInvestment}{" "}
                   {programDescription.currency}
@@ -84,8 +87,7 @@ class ProgramDetailsDescription extends PureComponent {
               </div>
               <div className="popover-levels__block">
                 <div className="popover-levels__text">
-                  Genesis level shows  the experience and reliability of the
-                  Manager
+                  {t("program-details-page.popover.text")}
                 </div>
                 <div className="popover-levels__about">About levels ></div>
               </div>
