@@ -1,13 +1,22 @@
 @import "styles/_colors.scss";
 
+.login-two-factor-page {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 70%;
+}
+
 .login-two-factor {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 70%;
+
   &__header {
     margin: 0 0 40px 0;
     font-weight: 600;
     font-size: 18px;
     letter-spacing: 0.4px;
     margin-bottom: 30px;
-    margin-top: -10px;
   }
 
   &__text {
@@ -26,6 +35,15 @@
   }
 
   &__recovery-link {
-    margin-bottom: 40px;
+    align-self: flex-start;
+    margin-bottom: 20px;
+  }
+
+  &__submit {
+    margin-top: auto;
+  }
+
+  & .form-error {
+    margin-bottom: 16px;
   }
 }

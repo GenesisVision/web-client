@@ -59,7 +59,7 @@ export const twoFactorLogin = (code, type, setSubmitting) => (
 
   return dispatch(loginUser(model))
     .then(response => {
-      authService.storeToken(response.value.data);
+      authService.storeToken(response.value);
       dispatch(authActions.updateToken());
       dispatch(clearTwoFactorData());
       dispatch(push(from));
