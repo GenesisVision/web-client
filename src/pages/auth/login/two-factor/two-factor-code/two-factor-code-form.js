@@ -8,8 +8,7 @@ import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
-
-import validationSchema from "./two-factor-code-form.validators";
+import { object, string } from "yup";
 
 const TwoFactorCodeForm = ({ t, handleSubmit, isSubmitting, error }) => {
   return (
@@ -59,7 +58,16 @@ export default compose(
     mapPropsToValues: () => ({
       twoFactorCode: ""
     }),
-    validationSchema: validationSchema,
+    validationSchema: ({ t }) =>
+      object().shape({
+        twoFactorCode: string()
+          .trim()
+          .matches(
+            /^\d{6}$/,
+            t("auth.login.two-factor.validation.two-factor-6digits")
+          )
+          .required(t("auth.login.two-factor.validation.two-factor-required"))
+      }),
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values.twoFactorCode, setSubmitting);
     }

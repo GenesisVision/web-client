@@ -111,11 +111,18 @@
         "verify": "Verify",
         "recovery-info": "Don’t have access to the device?",
         "link-to-recovery": "Enter a two-factor recovery code",
-        "text": "Open the two-factor authentication app on your device to view your authentication code and verify your identity."
+        "text": "Open the two-factor authentication app on your device to view your authentication code and verify your identity.",
+        "validation": {
+          "two-factor-6digits": "Authentication code should contain 6 digits.",
+          "two-factor-required": "Authentication code is required."
+        }
       },
       "recovery": {
         "title": "Recovery",
-        "text": "You can enter one of your recovery codes in case you lost access to your mobile device."
+        "text": "You can enter one of your recovery codes in case you lost access to your mobile device.",
+        "validation": {
+          "recovery-is-required": "Recovery code is required."
+        }
       }
     },
     "password-restore": {

@@ -4,8 +4,7 @@ import React from "react";
 import { translate } from "react-i18next";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
-
-import validationSchema from "./recovery-code-form.validators";
+import { object, string } from "yup";
 
 const RecoveryCodeForm = ({ t, handleSubmit, isSubmitting, error }) => {
   return (
@@ -44,7 +43,12 @@ export default compose(
     mapPropsToValues: () => ({
       recoveryCode: ""
     }),
-    validationSchema: validationSchema,
+    validationSchema: ({ t }) =>
+      object().shape({
+        recoveryCode: string()
+          .trim()
+          .required(t("auth.login.recovery.validation.recovery-is-required"))
+      }),
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values.recoveryCode, setSubmitting);
     }
