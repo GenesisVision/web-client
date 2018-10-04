@@ -1,4 +1,5 @@
 import Page from "components/page/page";
+import ProgramNotificationsContainer from "modules/program-notifications/program-notifications-container";
 import React from "react";
 import { translate } from "react-i18next";
 
@@ -7,7 +8,7 @@ const ProgramNotificationPage = ({ t, match }) => {
   return (
     <Page title={t("notifications.program.title")}>
       <h1>{t("notifications.program.title")}</h1>
-      <p>{id}</p>
+      <ProgramNotificationsContainer id={id} />
     </Page>
   );
 };

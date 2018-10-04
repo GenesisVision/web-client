@@ -44,7 +44,16 @@
     },
     "programs": "PROGRAMS",
     "program": {
-      "title": "Program notifications"
+      "title": "Program notifications",
+      "general": {
+        "title": "GENERAL",
+        "news-updates": "Program news and updates",
+        "end-of-period": "Notifications for the end of the period"
+      },
+      "custom": {
+        "profit": "Profit notification",
+        "create": "Create notification"
+      }
     }
   },
   "buttons": {
