@@ -74,7 +74,6 @@ class ProgramDetailsPage extends PureComponent {
     if (errorCode) {
       return <NotFoundPage />;
     }
-
     return (
       <Page title={t("program-details-page.title")}>
         <div className="program-details">
