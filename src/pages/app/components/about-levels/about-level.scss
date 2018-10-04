@@ -11,9 +11,9 @@ $large-font-size: 16px;
 $middle-font-size: 14px;
 $small-font-size: 12px;
 $border-radius: 5px;
-$mobile-padding-multiplier: 3;
-$mobile-text-multiplier: 1.5;
-$mobile-title-multiplier: 2;
+$mobile-padding-divider: 3;
+$mobile-text-divider: 1.5;
+$mobile-title-divider: 2;
 * {
   box-sizing: border-box;
 }
@@ -30,21 +30,22 @@ $mobile-title-multiplier: 2;
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
-  padding-left: $outer-padding/$mobile-padding-multiplier;
-  padding-right: $outer-padding/$mobile-padding-multiplier;
+  padding-left: $outer-padding/$mobile-padding-divider;
+  padding-right: $outer-padding/$mobile-padding-divider;
   &__header {
   }
   &__title {
-    padding: $middle-padding/$mobile-padding-multiplier 0;
-    font-size: $title-size/$mobile-title-multiplier;
+    padding: $middle-padding/$mobile-padding-divider 0;
+    font-size: $title-size/$mobile-title-divider;
     font-weight: bold;
   }
   &__description {
-    font-size: $large-font-size/$mobile-title-multiplier;
+    font-size: $large-font-size/$mobile-title-divider;
     opacity: 0.4;
   }
-  &__title, &__text {
-    padding-top: $outer-padding/$mobile-padding-multiplier;
+  &__title,
+  &__text {
+    padding-top: $outer-padding/$mobile-padding-divider;
   }
   &__text {
     display: flex;
@@ -56,28 +57,27 @@ $mobile-title-multiplier: 2;
     line-height: 2;
     letter-spacing: 0.2px;
     //max-width: 577px;
-
   }
   &__paragraph {
-    font-size: $middle-font-size/$mobile-text-multiplier;
-    padding-bottom: $middle-padding/$mobile-padding-multiplier;
+    font-size: $middle-font-size/$mobile-text-divider;
+    padding-bottom: $middle-padding/$mobile-padding-divider;
     & b {
       font-weight: 600;
     }
     &--mute {
-      padding-top: $middle-padding/$mobile-padding-multiplier;
-      padding-bottom: $outer-padding/$mobile-padding-multiplier;
+      padding-top: $middle-padding/$mobile-padding-divider;
+      padding-bottom: $outer-padding/$mobile-padding-divider;
       opacity: 0.4;
     }
   }
   &__subtitle {
-    padding: $small-padding/$mobile-padding-multiplier 0;
-    font-size: $large-font-size/$mobile-title-multiplier;
+    padding: $small-padding/$mobile-padding-divider 0;
+    font-size: $large-font-size/$mobile-title-divider;
     font-weight: 600;
   }
   &__table {
-    padding-bottom: $large-padding/$mobile-padding-multiplier;
-    font-size: $middle-font-size/$mobile-text-multiplier;
+    padding-bottom: $large-padding/$mobile-padding-divider;
+    font-size: $middle-font-size/$mobile-text-divider;
     table {
       border-spacing: 0;
       width: 100%;
@@ -100,7 +100,7 @@ $mobile-title-multiplier: 2;
     }
   }
   &__right-block {
-    padding: $middle-padding/$mobile-title-multiplier;
+    padding: $middle-padding/$mobile-title-divider;
     background: rgba(232, 239, 243, 0.04);
     width: 100%;
     //min-width: 292px;
@@ -112,7 +112,7 @@ $mobile-title-multiplier: 2;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    padding: $small-padding/$mobile-padding-multiplier 0;
+    padding: $small-padding/$mobile-padding-divider 0;
   }
   &__currency {
     display: flex;
@@ -126,7 +126,7 @@ $mobile-title-multiplier: 2;
   }
   &__mute-title {
     opacity: 0.4;
-    font-size: $small-font-size/$mobile-text-multiplier;
+    font-size: $small-font-size/$mobile-text-divider;
     letter-spacing: 0.4px;
     white-space: nowrap;
   }
@@ -134,7 +134,7 @@ $mobile-title-multiplier: 2;
     padding: 0 $small-padding;
   }
   &__value {
-    font-size: $middle-font-size/$mobile-text-multiplier;
+    font-size: $middle-font-size/$mobile-text-divider;
     font-weight: bold;
     //line-height: 30px;
     letter-spacing: 0.2px;
@@ -181,7 +181,8 @@ $mobile-title-multiplier: 2;
       padding: $middle-padding 0;
       font-size: $title-size;
     }
-    &__title, &__text {
+    &__title,
+    &__text {
       padding-top: $outer-padding;
     }
     &__description {
