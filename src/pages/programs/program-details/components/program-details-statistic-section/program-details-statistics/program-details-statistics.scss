@@ -11,13 +11,21 @@
   }
 
   &__heading {
-    margin: 0 0 20px;
+    margin-bottom: 20px;
     font-size: 15px;
     letter-spacing: 0.2px;
     @include media-breakpoint-landscape-phone() {
-      margin: 0 0 30px;
       font-size: 17px;
       font-weight: 600;
+    }
+  }
+
+  &__subheading {
+    margin: 20px 0;
+    font-size: 13px;
+    letter-spacing: 0.2px;
+    @include media-breakpoint-landscape-phone() {
+      font-size: 15px;
     }
   }
 
@@ -27,8 +35,7 @@
     flex-wrap: wrap;
   }
 
-  &__item,
-  &__balance {
+  &__item {
     display: flex;
     flex-direction: column;
     width: 43%;
@@ -39,15 +46,11 @@
     }
   }
 
-  &__balance {
-    width: 100%;
-  }
-
   &__period {
     width: 100%;
   }
 
-  &__subheading {
+  &__label {
     color: $label-color;
     font-size: 11px;
     letter-spacing: 0.4px;

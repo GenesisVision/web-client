@@ -1,10 +1,11 @@
+import { DEFAULT_PERIOD } from "components/chart/chart-period/chart-period.helpers";
 import { DEFAULT_PAGING } from "modules/table/reducers/table-paging.reducer";
+import { composeRequestFilters } from "modules/table/services/table.service";
 import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
 import { programsApiProxy } from "services/api-client/programs-api";
 import authService from "services/auth-service";
 import getParams from "utils/get-params";
 
-import { composeRequestFilters } from "../../../../modules/table/services/table.service";
 import { PROGRAM_SLUG_URL_PARAM_NAME } from "../../programs.routes";
 import {
   PROGRAM_TRADES_DEFAULT_FILTERS,
@@ -23,26 +24,66 @@ export const getProgramDescription = () => (dispatch, getState) => {
   return programsApiProxy.v10ProgramsByIdGet(programSlugUrl, { authorization });
 };
 
-export const getChartAndEndTrades = programId => (dispatch, getState) => {
-  const { accountSettings } = getState();
+export const getProgramStatistic = (
+  programId,
+  currency,
+  period = DEFAULT_PERIOD
+) => {
+  const chartFilter = {
+    currency,
+    dateFrom: period.start,
+    dateTo: period.end,
+    maxPointCount: 100
+  };
+  return Promise.all([
+    programsApiProxy.v10ProgramsByIdChartsProfitGet(programId, chartFilter),
+    programsApiProxy.v10ProgramsByIdChartsBalanceGet(programId, chartFilter)
+  ]).then(values => {
+    const statistic = {
+      data: {
+        trades: values[0].data.trades,
+        successTradesPercent: values[0].data.successTradesPercent,
+        profitFactor: values[0].data.profitFactor,
+        investors: values[0].data.investors,
+        sharpeRatio: values[0].data.sharpeRatio,
+        sortinoRatio: values[0].data.sortinoRatio,
+        maxDrawdown: values[0].data.maxDrawdown,
+        periodStarts: values[0].data.lastPeriodStarts,
+        periodEnds: values[0].data.lastPeriodEnds
+      },
+      isPending: values[0].isPending
+    };
+    const profitChart = {
+      data: {
+        totalGvtProfit: values[0].data.totalGvtProfit,
+        totalProgramCurrencyProfit: values[0].data.totalProgramCurrencyProfit,
+        programCurrency: values[0].data.programCurrency,
+        profitChangePercent: values[0].data.profitChangePercent,
+        profitChart: values[0].data.profitChart
+      },
+      isPending: values[0].isPending
+    };
 
-  const { currency } = accountSettings;
+    const balanceChart = values[1];
+
+    return { statistic, profitChart, balanceChart };
+  });
+};
+
+export const getProgramHistory = ({ programId, currency }) => (
+  dispatch,
+  getState
+) => {
   const tradesFilters = composeRequestFilters({
     paging: DEFAULT_PAGING,
     sorting: undefined,
     filtering: PROGRAM_TRADES_FILTERS,
     defaultFilters: PROGRAM_TRADES_DEFAULT_FILTERS
   });
-  const chartDateFrom = new Date();
-  chartDateFrom.setHours(chartDateFrom.getHours() - 40);
+
   return Promise.all([
-    programsApiProxy.v10ProgramsByIdChartsProfitGet(programId, {
-      currency,
-      dateFrom: chartDateFrom,
-      dateTo: new Date(),
-      maxPointCount: 100
-    }),
-    getProgramTrades({ programId, currency, filters: tradesFilters })
+    getProgramTrades({ programId, currency, filters: tradesFilters }),
+    getProgramEvents()
   ]);
 };
 
@@ -54,6 +95,6 @@ export const getProgramTrades = ({ programId, currency, filters }) => {
   return programsApiProxy.v10ProgramsByIdTradesGet(programId, opts);
 };
 
-export const getEvents = () => (dispatch, getState) => {
+export const getProgramEvents = () => {
   return Promise.resolve();
 };

@@ -20,7 +20,14 @@ class ProgramDetailsChartSection extends PureComponent {
     this.setState({ tab });
   };
   render() {
-    const { t, chart, totalProfit, changeValue } = this.props;
+    const {
+      t,
+      period,
+      onPeriodChange,
+      profitChartData,
+      totalProfit,
+      changeValue
+    } = this.props;
     const { tab } = this.state;
 
     return (
@@ -54,12 +61,12 @@ class ProgramDetailsChartSection extends PureComponent {
             className="program-details-chart__stat-item"
           />
         </div>
-        <ChartPeriod onChange={this.handleChangePeriod} />
+        <ChartPeriod onChange={onPeriodChange} period={period} />
         <div className="program-details-chart__profit">
-          <ProgramProfitChart
+          {/* <ProgramProfitChart
             periods={chart.map(x => x.equityChart)}
             pnl={chart.pnLChart}
-          />
+          /> */}
         </div>
       </Surface>
     );
