@@ -1,3 +1,4 @@
+import { setTwoFactorRequirement } from "actions/2fa-actions";
 import authActions from "actions/auth-actions";
 import { HOME_ROUTE } from "pages/app/app.routes";
 import { LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "pages/auth/login/login.routes";
@@ -34,6 +35,7 @@ export const login = (loginData, from, setSubmitting) => dispatch => {
             from
           })
         );
+        dispatch(setTwoFactorRequirement(true));
         dispatch(push(LOGIN_ROUTE_TWO_FACTOR_ROUTE));
       } else {
         setSubmitting(false);

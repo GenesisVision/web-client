@@ -6,8 +6,7 @@ export const fetchPaymentInfo = () => {
 };
 
 export const newWithdrawRequest = data => {
-  return walletApiProxy.v10WalletWithdrawRequestNewPost(
-    authService.getAuthArg(),
-    data
-  );
+  return walletApiProxy
+    .v10WalletWithdrawRequestNewPost(authService.getAuthArg(), data)
+    .catch(error => error);
 };
