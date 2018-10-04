@@ -5,6 +5,42 @@
   "alerts":{
     "clear-all": "Clear all"
   },
+  "about-levels": {
+    "description": "Genesis level shows the experience and reliability of the Manager",
+    "sections": {
+      "section-1": "Let's take a moment to talk about the level system. We will now share the parameters of the system, but please keep in mind, that these parameters are subject to change and are relevant only for the time of the Alpha version. Only emphasizes that there is a deep curiosity in all humans about nature and astronomy, even if many people would not know to call it astronomy.,",
+      "section-2": "Astronomy is one of the oldest sciences of all time. When archeologists unearth ancient civilizations, even as far back as the cavemen, they invariably find art that shows mans unquenchable fascination with the stars. To this day, you can easily get an animated discussion at any gathering on the topic of “Is there intelligent life on other planets?”",
+      "section-age-title": "Age",
+      "section-age": " stands for the lifetime of a manager account. During the Alpha it will be counted as days, so you will need to have your investment program running for at least two days to have a third level.",
+      "section-avg-profit-title": "Avg. Profit",
+      "section-avg-profit": " means an average profit that is made daily. So if you want to reach the second level, you would need to achieve at least 0.5% of an average daily gain. ",
+      "section-total-profit-title": "Total profit",
+      "section-total-profit": " is calculated in USD. It shows how much USD you would need to make per day on an average basis.",
+      "section-6": "A manager would need to achieve all three parameters to receive the next level of his investment program. You can also skip levels if you outperform them. "
+    },
+    "levels": {
+      "1": "1000",
+      "2": "10000",
+      "3": "50000",
+      "4": "100000",
+      "5": "200000",
+      "6": "500000",
+      "7": "1000000"
+    },
+    "table-header": {
+      "level": "Level",
+      "age": "Age",
+      "avg-profit": "Avg. Profit",
+      "total-profit": "Total profit"
+    },
+    "titles": {
+      "main": "About levels",
+      "table": "Requirements for levels",
+      "limits": "Available investments",
+      "limit": "Invest limit"
+    },
+    "select": "Show in:"
+  },
   "deposit-program": {
     "title": "Invest",
     "available-to-invest": "Available to invest in program",
