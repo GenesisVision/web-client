@@ -14,14 +14,16 @@ const NotificationProgram = props => {
 
   return (
     <Link to={href}>
-      <div className="notification__program">
+      <div className="program-notification">
         <GVProgramAvatar
           url={filesService.getFileUrl(props.logo)}
           alt={props.title}
           level={props.level}
         />
-        {props.title}
-        {props.settingsCustom.length + props.settingsGeneral.length}
+        <div className="program-notification__title">{props.title}</div>
+        <div className="program-notification__count">
+          {props.settingsCustom.length + props.settingsGeneral.length}
+        </div>
       </div>
     </Link>
   );
@@ -36,7 +38,7 @@ class NotificationPrograms extends Component {
     return (
       <div>
         <h3>{t("notifications.programs")}</h3>
-        {items}
+        <div className="program-notification__list">{items}</div>
       </div>
     );
   }
