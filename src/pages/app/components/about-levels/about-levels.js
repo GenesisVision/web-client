@@ -37,7 +37,7 @@ class AboutLevelsComponent extends Component {
   render() {
     const { t, open, onClose } = this.props;
     return (
-      <Dialog open={open} onClose={onClose}>
+      <Dialog open={open} onClose={onClose} className="about-levels__dialog">
         <div className="about-levels-container">
           <div className="about-levels-container__header">
             <div className="about-levels-container__title">
