@@ -146,15 +146,11 @@ $description-block-width: 250px;
     &__chart {
       width: $chart-width;
     }
-    &__chart-info {
-    }
     &__balance {
       font-size: $text-size;
     }
     &__profit {
       font-size: $text-size;
-    }
-    &__row {
     }
     &__table {
       & table {
@@ -207,8 +203,6 @@ $description-block-width: 250px;
     flex-direction: row;
     align-items: stretch;
     justify-content: space-between;
-    &--outer {
-    }
     &--inner {
       width: 100%;
     }
@@ -299,9 +293,6 @@ $description-block-width: 250px;
     padding: $padding/1.5;
     width: 100%;
     background-color: #212c34;
-  }
-
-  &__bottom-block {
   }
 
   &__details {
