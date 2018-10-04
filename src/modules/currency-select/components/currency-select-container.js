@@ -33,6 +33,10 @@ CurrencySelectContainer.propTypes = {
   })
 };
 
+CurrencySelectContainer.defaultProps = {
+  currencyValues: HEADER_CURRENCY_VALUES
+};
+
 const mapStateToProps = ({ accountSettings }) => ({
   currency: accountSettings.currency
 });
