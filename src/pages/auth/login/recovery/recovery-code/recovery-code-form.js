@@ -30,7 +30,7 @@ const RecoveryCodeForm = ({ t, handleSubmit, isSubmitting, error }) => {
         type="submit"
         className="recovery-form__submit"
       >
-        Verify
+        {t("auth.login.recovery.continue")}
       </GVButton>
     </form>
   );
