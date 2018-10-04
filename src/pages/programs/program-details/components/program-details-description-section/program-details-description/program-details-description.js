@@ -10,7 +10,6 @@ import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import replaceParams from "utils/replace-params";
-
 import ProgramDetailsFavorite from "./program-details-favorite";
 import ProgramDetailsNotification from "./program-details-notificaton";
 import Popover from "../../../../../../components/popover/popover";
@@ -63,7 +62,10 @@ class ProgramDetailsDescription extends PureComponent {
     return (
       <div className="program-details-description">
         <div className="program-details-description__left">
-          <div className="program-details-description__avatar" onClick={this.handleOpenDropdown}>
+          <div
+            className="program-details-description__avatar"
+            onClick={this.handleOpenDropdown}
+          >
             <ProgramAvatar
               url={programDescription.logo}
               level={programDescription.level}

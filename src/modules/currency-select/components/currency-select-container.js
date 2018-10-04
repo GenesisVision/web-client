@@ -1,7 +1,6 @@
 import "./currency-select.scss";
 
 import classnames from "classnames";
-import Select from "components/select/select";
 import { HEADER_CURRENCY_VALUES } from "modules/currency-select/currency-select.constants";
 import { updateCurrency } from "modules/currency-select/services/currency-select.service";
 import PropTypes from "prop-types";
