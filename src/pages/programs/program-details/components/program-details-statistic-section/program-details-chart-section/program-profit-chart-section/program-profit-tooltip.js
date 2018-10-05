@@ -4,13 +4,13 @@ import React, { Fragment } from "react";
 const TooltipBody = ({ equity, pnl }) => {
   return (
     <Fragment>
-      <div className="program-profit-tooltip__statistic">
-        <div className="program-profit-tooltip__title">Equity</div>
-        <div className="program-profit-tooltip__value">{equity}</div>
+      <div className="program-details-tooltip__statistic">
+        <div className="program-details-tooltip__title">Equity</div>
+        <div className="program-details-tooltip__value">{equity}</div>
       </div>
-      <div>
-        <div className="program-profit-tooltip__title">PnL</div>
-        <div className="program-profit-tooltip__value">{pnl}</div>
+      <div className="program-details-tooltip__statistic">
+        <div className="program-details-tooltip__title">PnL</div>
+        <div className="program-details-tooltip__value">{pnl}</div>
       </div>
     </Fragment>
   );
@@ -25,19 +25,19 @@ const ProgramProfitTooltip = ({
 }) => {
   if (!active) return null;
   let equity = "";
-  if (payload[0]) {
-    equity = `${payload[0].payload.value.toFixed(2)}${payload[0].unit}`;
+  if (payload[1]) {
+    equity = `${payload[1].payload.value.toFixed(2)}${payload[1].unit}`;
   }
   let pnl = "";
-  if (payload[1]) {
-    pnl = `${payload[1].payload.value.toFixed(8)}${payload[1].unit}`;
+  if (payload[0]) {
+    pnl = `${payload[0].payload.value.toFixed(8)}${payload[0].unit}`;
   }
   return (
     <ChartTooltip
       heading="Profit"
       body={<TooltipBody equity={equity} pnl={pnl} />}
       date={new Date(label)}
-      className="program-profit-tooltip"
+      className="program-details-tooltip"
     />
   );
 };
