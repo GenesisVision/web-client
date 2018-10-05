@@ -6,10 +6,12 @@ import React, { Component } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
+import { number, object, string } from "yup";
 
 class ProgramNotificationCreateForm extends Component {
   render() {
-    const { t, program, handleSubmit } = this.props;
+    const { t, program, handleSubmit, values } = this.props;
+    const { conditionType } = values;
     return (
       <form id="create-notification" onSubmit={handleSubmit}>
         <div className="dialog__top">
@@ -24,10 +26,10 @@ class ProgramNotificationCreateForm extends Component {
             InputComponent={Select}
           >
             <options value="Profit">
-              {t("notifications.program.create.type-profit")}
+              {t("notifications.program.create.Profit.title")}
             </options>
             <options value="Level">
-              {t("notifications.program.create.type-level")}
+              {t("notifications.program.create.Level.title")}
             </options>
           </GVFormikField>
         </div>
@@ -39,6 +41,15 @@ class ProgramNotificationCreateForm extends Component {
             adornment="%"
             autoComplete="off"
             InputComponent={NumberFormat}
+            isAllowed={values => {
+              const { floatValue, formattedValue } = values;
+              if (conditionType === "Level") {
+                return (
+                  formattedValue === "" || (floatValue > 0 && floatValue <= 7)
+                );
+              }
+              return true;
+            }}
           />
           <div className="dialog__buttons">
             <GVButton color="primary" type="submit">
@@ -62,6 +73,12 @@ export default compose(
       conditionType: "Profit",
       conditionAmount: ""
     }),
+    validationSchema: ({ t }) =>
+      object().shape({
+        conditionAmount: number().required(
+          t("notifications.program.create.amount-required")
+        )
+      }),
     handleSubmit: (values, { props }) => props.onSubmit(values)
   })
 )(ProgramNotificationCreateForm);

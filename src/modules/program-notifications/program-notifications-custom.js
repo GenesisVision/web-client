@@ -17,10 +17,12 @@ class ProgramNotificationsCustom extends Component {
   };
 
   handleSubmit = values => {
-    this.props.services.addProgramNotificationService({
-      programId: this.props.program.programId,
-      ...values
-    });
+    this.props.services
+      .addProgramNotificationService({
+        programId: this.props.program.programId,
+        ...values
+      })
+      .then(() => this.handleClosePopup());
   };
 
   handleClosePopup = () => {

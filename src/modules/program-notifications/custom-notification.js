@@ -12,10 +12,16 @@ import NumberFormat from "react-number-format";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
+//        "type-profit": "Profit notification",
+//         "type-level": "Level notification",
+//         "label-profit": "Profit",
+//         "label-level": "Level",
+
 class CustomNotification extends Component {
   state = {
     isPending: false
   };
+
   handleSwitch = () => {
     this.setState({ isPending: true });
     this.props.services
@@ -26,6 +32,7 @@ class CustomNotification extends Component {
       })
       .finally(() => this.setState({ isPending: false }));
   };
+
   handleDelete = () => {
     this.setState({ isPending: true });
     this.props.services
@@ -35,6 +42,7 @@ class CustomNotification extends Component {
       )
       .finally(() => this.setState({ isPending: false }));
   };
+
   render() {
     const { t, settings } = this.props;
     return (
@@ -49,7 +57,7 @@ class CustomNotification extends Component {
             onChange={this.handleSwitch}
           />
           <span className="notification-setting__label">
-            {t("notifications.program.create.type-profit")}
+            {t(`notifications.program.create.${settings.conditionType}.title`)}
           </span>
         </label>
         <div className="custom-notification__offset">
@@ -57,7 +65,9 @@ class CustomNotification extends Component {
             name="conditionAmount"
             value={settings.conditionAmount}
             disabled
-            label={t("notifications.program.create.amount-label")}
+            label={t(
+              `notifications.program.create.${settings.conditionType}.label`
+            )}
             adornment="%"
             autoComplete="off"
             InputComponent={NumberFormat}

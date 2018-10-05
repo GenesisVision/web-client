@@ -60,10 +60,17 @@
       },
       "create": {
         "title": "Create notification",
-        "type-profit": "Profit notification",
-        "type-level": "Level notification",
         "type-label": "Type",
-        "amount-label": "Enter amount"
+        "amount-label": "Enter amount",
+        "amount-required": "Amount is required",
+        "Level": {
+          "title": "Level notification",
+          "label": "Level"
+        },
+        "Profit": {
+          "title": "Profit notification",
+          "label": "Profit"
+        }
       }
     }
   },
