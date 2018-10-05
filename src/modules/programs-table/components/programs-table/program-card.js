@@ -125,6 +125,8 @@ class ProgramCard extends Component {
                 value={program.statistic.profitPercent}
                 positiveSymbol="&uarr;"
                 negativeSymbol="&darr;"
+                form="ellipse"
+                prefix="ARROWS"
               >
                 <NumberFormat
                   value={program.statistic.profitPercent}

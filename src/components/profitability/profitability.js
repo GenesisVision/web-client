@@ -12,6 +12,8 @@ const Profitability = ({
   isNegative,
   positiveSymbol,
   negativeSymbol,
+  prefix,
+  form,
   ...rest
 }) => {
   let isPositiveLocal = isPositive;
@@ -42,6 +44,8 @@ Profitability.propTypes = {
   value: PropTypes.number,
   isPositive: PropTypes.bool,
   isNegative: PropTypes.bool,
+  form: PropTypes.string,
+  prefix: PropTypes.string,
   positiveSymbol: PropTypes.string,
   negativeSymbol: PropTypes.string
 };
