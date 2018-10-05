@@ -6,18 +6,25 @@ import {
 } from "modules/program-withdraw/servives/program-withdraw.services";
 import PropTypes from "prop-types";
 import React from "react";
+import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { compose } from "redux";
+
+import { alertMessageActions } from "../../shared/modules/alert-message/actions/alert-message-actions";
 
 const ProgramWithdrawContainer = props => {
+  const { t, open, onClose, currency, services, id, alertSuccess } = props;
+
   return (
-    <Dialog open={props.open} onClose={props.onClose}>
+    <Dialog open={open} onClose={onClose}>
       <ProgramWithdrawPopup
-        currency={props.currency}
-        fetchInfo={() => props.services.getProgramWithdrawInfo(props.id)}
-        withdraw={amount =>
-          console.info(amount) || withdrawProgramById(props.id, amount)
-        }
+        currency={currency}
+        fetchInfo={() => services.getProgramWithdrawInfo(id)}
+        withdraw={amount => {
+          alertSuccess(t("program-withdraw.success-alert-message"));
+          return withdrawProgramById(id, amount);
+        }}
       />
     </Dialog>
   );
@@ -39,10 +46,14 @@ const mapDispathToProps = dispatch => ({
       getProgramWithdrawInfo
     },
     dispatch
-  )
+  ),
+  alertSuccess: text => dispatch(alertMessageActions.success(text))
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispathToProps
+export default compose(
+  translate(),
+  connect(
+    mapStateToProps,
+    mapDispathToProps
+  )
 )(ProgramWithdrawContainer);

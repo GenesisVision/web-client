@@ -2,7 +2,7 @@
   "app": {
     "title": "Investor Portal: "
   },
-  "alerts":{
+  "alerts": {
     "clear-all": "Clear all"
   },
   "deposit-program": {
@@ -491,7 +491,8 @@
     "invested": "Invested",
     "how-much-withdraw": "How much would you like to withdraw?",
     "enter-amount": "Enter {{token}} amount",
-    "withdraw-all": "Withdraw all invested tokens"
+    "withdraw-all": "Withdraw all invested tokens",
+    "success-alert-message": "Request to withdrawal sent successfully"
   },
   "filters": {
     "level": {
