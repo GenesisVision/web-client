@@ -519,7 +519,8 @@
     "settings": {
       "profile-image": "Profile image",
       "image-requirements": "At least 300 x 300px PNG or JPG file.",
-      "save-photo": "Save photo"
+      "save-photo": "Save photo",
+      "image-success-save-message": "The photo has just been successfully changed."
     }
   }
 }
