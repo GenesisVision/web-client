@@ -113,6 +113,7 @@
     },
     "password-restore": {
       "title": "Restore password",
+      "success-alert-message": "Your password changed successfully!",
       "forgot-password": {
         "text": "Just enter the email address you used to create your account.",
         "email-field-text": "Email address",
