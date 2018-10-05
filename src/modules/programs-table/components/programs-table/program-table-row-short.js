@@ -5,6 +5,7 @@ import FavoriteIcon from "modules/favorite-asset/components/favorite-icon/favori
 import { TableCell, TableRow } from "modules/table/components";
 import React from "react";
 import NumberFormat from "react-number-format";
+import Profitability from "components/profitability/profitability";
 
 const ProgramTableRowShort = ({
   program,
@@ -61,12 +62,15 @@ const ProgramTableRowShort = ({
         />
       </TableCell>
       <TableCell className="programs-table__cell--profit">
-        <NumberFormat
-          value={program.statistic.profitPercent}
-          suffix="%"
-          decimalScale={2}
-          displayType="text"
-        />
+        <Profitability value={program.statistic.profitPercent} prefix="SCIENCE">
+          <NumberFormat
+            value={program.statistic.profitPercent}
+            suffix="%"
+            allowNegative={false}
+            decimalScale={2}
+            displayType="text"
+          />
+        </Profitability>
       </TableCell>
       <TableCell className="programs-table__cell--chart">
         <ProgramSimpleChart data={program.chart} />
