@@ -24,7 +24,7 @@ $text-size: 13px;
   }
   &--negative {
     color: $negative-color;
-    background-color: rgba(235, 59, 90, 0.1);
+    background-color: rgba($negative-color, 0.1);
   }
   @include media-breakpoint-phone() {
     font-size: $text-size;
