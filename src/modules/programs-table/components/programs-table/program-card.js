@@ -15,7 +15,6 @@ import { ActionsCircleIcon } from "../../../../components/icon/actions-circle-ic
 import Popover from "../../../../components/popover/popover";
 import ProgramAvatar from "../../../../components/program-avatar/program-avatar";
 import Profitability from "components/profitability/profitability";
-import classNames from "classnames";
 
 class ProgramCard extends Component {
   state = {
