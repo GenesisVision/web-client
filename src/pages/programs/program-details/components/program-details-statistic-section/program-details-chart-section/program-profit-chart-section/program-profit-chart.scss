@@ -1,0 +1,23 @@
+@import "styles/_colors.scss";
+
+.program-profit-tooltip {
+  &__statistic {
+    margin: 10px 0;
+  }
+  &__title {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    color: $text-accent-color;
+    max-width: 10em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__value {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    color: $text-dark-color;
+  }
+}

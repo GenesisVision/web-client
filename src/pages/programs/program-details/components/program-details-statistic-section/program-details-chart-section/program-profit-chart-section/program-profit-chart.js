@@ -1,3 +1,5 @@
+import "./program-profit-chart.scss";
+
 import ProgramChartGradient, {
   gradientOffset
 } from "components/chart/chart-gradient/chart-gradient";
@@ -9,25 +11,30 @@ import {
   Bar,
   CartesianGrid,
   ComposedChart,
-  Line,
   ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis
 } from "recharts";
 
+import ProgramProfitTooltip from "./program-profit-tooltip";
+
 class ProgramProfitChart extends PureComponent {
   render() {
     const { equityChart, pnlChart, currency } = this.props;
     if (equityChart.length === 0 || pnlChart.length === 0) return null;
-    const equity = equityChart.map(x => ({
-      date: x.date.getTime(),
-      value: x.value
-    }));
-    const pnl = pnlChart.map(x => ({
-      date: x.date.getTime(),
-      value: x.value
-    }));
+    const equity = equityChart
+      .map(x => ({
+        date: x.date.getTime(),
+        value: x.value
+      }))
+      .slice(0, 10);
+    const pnl = pnlChart
+      .map(x => ({
+        date: x.date.getTime(),
+        value: x.value
+      }))
+      .slice(0, 10);
     const off = gradientOffset(equity.map(x => x.value));
     return (
       <ResponsiveContainer>
@@ -81,7 +88,7 @@ class ProgramProfitChart extends PureComponent {
             tickFormatter={x => x.toFixed(4)}
             width={80}
           />
-          <Tooltip />
+          <Tooltip content={ProgramProfitTooltip} />
           <CartesianGrid vertical={false} strokeWidth={0.1} />
           <Area
             dataKey="value"
@@ -99,7 +106,7 @@ class ProgramProfitChart extends PureComponent {
             dataKey="value"
             data={pnl}
             unit={` ${currency}`}
-            barSize={8}
+            barSize={6}
             fill={GVColors.$labelColor}
             stroke={GVColors.$labelColor}
             yAxisId="right"
