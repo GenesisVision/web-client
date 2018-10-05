@@ -1,5 +1,10 @@
 import * as alertMessageActionTypes from "./alert-message-actions.constants";
 
+const withLocalizationAlert = action => ({
+  ...action,
+  isUseLocalization: true
+});
+
 const success = text => ({
   type: alertMessageActionTypes.ALERT_MESSAGE_SUCCESS,
   className: "alert-message--success",
@@ -27,6 +32,13 @@ const clearAll = () => ({
   type: alertMessageActionTypes.ALERT_MESSAGE_CLEAR_ALL
 });
 
-const alertMessageActions = { success, warning, error, remove, clearAll };
+const alertMessageActions = {
+  success,
+  warning,
+  error,
+  remove,
+  clearAll,
+  withLocalizationAlert
+};
 
 export { alertMessageActions };

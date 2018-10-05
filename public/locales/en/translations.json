@@ -3,7 +3,8 @@
     "title": "Investor Portal: "
   },
   "alerts": {
-    "clear-all": "Clear all"
+    "clear-all": "Clear all",
+    "server-error": "Server Error. Please contact administrator."
   },
   "deposit-program": {
     "title": "Invest",

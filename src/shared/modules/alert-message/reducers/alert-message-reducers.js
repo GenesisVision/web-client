@@ -8,7 +8,8 @@ const addMessage = (state, action) => {
   const newMessage = {
     id: uuid.v4(),
     text: action.text,
-    className: action.className
+    className: action.className,
+    isUseLocalization: action.isUseLocalization
   };
   return [...state.slice(-2), newMessage];
 };
