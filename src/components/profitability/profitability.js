@@ -9,9 +9,13 @@ const PREFIXES = {
     NEGATIVE: String.fromCharCode(8595),
     POSITIVE: String.fromCharCode(8593)
   },
-  MATH: {
+  SCIENCE: {
     NEGATIVE: "-",
     POSITIVE: "+"
+  },
+  DEFAULT: {
+    NEGATIVE: "",
+    POSITIVE: ""
   }
 };
 
