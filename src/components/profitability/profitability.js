@@ -31,7 +31,13 @@ const Profitability = ({
     isPositiveLocal = value > 0;
     isNegativeLocal = value < 0;
   }
-
+  const getPrefix = (value, prefix) => {
+    return (
+      value !== undefined &&
+      ((isPositiveLocal && `${PREFIXES[prefix].POSITIVE} `) ||
+        (isNegativeLocal && `${PREFIXES[prefix].NEGATIVE} `))
+    );
+  };
   switch (form) {
     case "ellipse":
       return (
@@ -42,12 +48,7 @@ const Profitability = ({
           })}
         >
           <span {...rest}>
-            {isPositiveLocal &&
-              value !== undefined &&
-              `${prefixes[prefix].POSITIVE} `}
-            {isNegativeLocal &&
-              value !== undefined &&
-              `${prefixes[prefix].NEGATIVE} `}
+            {getPrefix(value, prefix)}
             {children}
           </span>
         </div>
@@ -61,12 +62,7 @@ const Profitability = ({
           })}
           {...rest}
         >
-          {isPositiveLocal &&
-            value !== undefined &&
-            `${prefixes[prefix].POSITIVE} `}
-          {isNegativeLocal &&
-            value !== undefined &&
-            `${prefixes[prefix].NEGATIVE} `}
+          {getPrefix(value, prefix)}
           {children}
         </span>
       );
