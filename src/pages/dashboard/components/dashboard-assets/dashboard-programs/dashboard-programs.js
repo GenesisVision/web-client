@@ -96,10 +96,7 @@ class Dashboardprograms extends Component {
               />
             </TableCell>
             <TableCell className="dashboard-programs__cell--chart">
-              <ProgramSimpleChart
-                data={program.chart}
-                isPositive={program.statistic.profitValue >= 0}
-              />
+              <ProgramSimpleChart data={program.chart} programId={program.id} />
             </TableCell>
             <TableCell className="dashboard-programs__cell--status">
               Status

@@ -105,10 +105,7 @@ class ProgramCard extends Component {
         </div>
         <div className="programs-cards__row">
           <div className="programs-cards__chart">
-            <ProgramSimpleChart
-              data={program.chart}
-              isPositive={program.statistic.profitPercent >= 0}
-            />
+            <ProgramSimpleChart data={program.chart} programId={program.id} />
           </div>
           <div className="programs-cards__chart-info">
             <div className="programs-cards__chart-info--profit">
