@@ -21,6 +21,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { translate } from "react-i18next";
 import UserIcon from "shared/media/user-avatar.svg";
+import fileService from "shared/services/file-service";
 
 const NavigationMobile = ({
   t,
@@ -40,7 +41,7 @@ const NavigationMobile = ({
               <img
                 alt={email}
                 className="profile-widget__image"
-                src={avatar || UserIcon}
+                src={fileService.getFileUrl(avatar) || UserIcon}
               />
             </div>
             <div className="mobile__email">{email}</div>
