@@ -14,6 +14,7 @@ const PREFIXES = {
     POSITIVE: "+"
   }
 };
+
 const Profitability = ({
   className,
   children,
@@ -31,6 +32,7 @@ const Profitability = ({
     isPositiveLocal = value > 0;
     isNegativeLocal = value < 0;
   }
+
   const getPrefix = (value, prefix) => {
     return (
       value !== undefined &&
@@ -38,6 +40,7 @@ const Profitability = ({
         (isNegativeLocal && `${PREFIXES[prefix].NEGATIVE} `))
     );
   };
+
   switch (form) {
     case "ellipse":
       return (
