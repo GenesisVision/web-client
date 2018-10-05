@@ -1,2 +1,19 @@
+@import "styles/_colors.scss";
+
 .profile-image {
+  &__requirements {
+    font-size: 13px;
+    color: $label-color;
+    letter-spacing: 0.2px;
+    margin-bottom: 16px;
+  }
+
+  &__submit-btn {
+    margin-top: 30px;
+    color: $primary-color;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    padding: 1em 2.4em;
+  }
 }

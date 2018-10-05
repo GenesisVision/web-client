@@ -1,3 +1,5 @@
+import "./settings.scss";
+
 import Page from "components/page/page";
 import TwoFactorAuthContainer from "modules/2fa/2fa-container";
 import { PROFILE_ROUTE } from "pages/profile/profile/profile.page";
@@ -12,8 +14,10 @@ const SettingsPage = ({ t }) => {
   return (
     <Page title={t("settings.title")}>
       <h1>Settings</h1>
-      <TwoFactorAuthContainer />
-      <ProfileImageContainer />
+      <div className="profile-settings__content">
+        <TwoFactorAuthContainer />
+        <ProfileImageContainer />
+      </div>
     </Page>
   );
 };
