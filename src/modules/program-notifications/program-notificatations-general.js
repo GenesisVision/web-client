@@ -14,7 +14,7 @@ class ProgramNotificationsGeneral extends Component {
   render() {
     const { t, settings, programId } = this.props;
     return (
-      <div>
+      <div className="notification-settings">
         <h3>{t("notifications.program.general.title")}</h3>
         <GeneralNotification
           name="ProgramNewsAndUpdates"

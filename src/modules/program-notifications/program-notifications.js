@@ -13,18 +13,15 @@ class ProgramNotifications extends Component {
     }, {});
   };
   render() {
-    const { t, program } = this.props;
+    const { program } = this.props;
     return (
       <div>
-        <h3>{program.title}</h3>
+        <h3 className="notification-settings__title">{program.title}</h3>
         <ProgramNotificationsGeneral
           settings={this.getGeneralSettings()}
           programId={program.programId}
         />
-        <ProgramNotificationsCustom
-          // settings={program.settingsCustom}
-          program={program}
-        />
+        <ProgramNotificationsCustom program={program} />
       </div>
     );
   }

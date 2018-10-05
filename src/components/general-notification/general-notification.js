@@ -3,12 +3,6 @@ import "./general-notification.scss";
 import { GVSwitch } from "gv-react-components";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-// import { connect } from "react-redux";
-// import { bindActionCreators } from "redux";
-// import {
-//   addProgramNotificationService,
-//   removeProgramNotificationService
-// } from "modules/program-notifications/services/program-notifications.services";
 
 class GeneralNotification extends Component {
   state = {
@@ -44,16 +38,16 @@ class GeneralNotification extends Component {
   render() {
     const { setting, name, label } = this.props;
     return (
-      <label className="general-notification">
+      <label className="notification-setting">
         <GVSwitch
-          className="general-notification__switch"
+          className="notification-setting__switch"
           name={name}
           value={Boolean(setting)}
           disabled={this.state.isPending}
           color="primary"
           onChange={this.handleSwitch}
         />
-        <span className="general-notification__label">{label}</span>
+        <span className="notification-setting__label">{label}</span>
       </label>
     );
   }
@@ -67,15 +61,5 @@ GeneralNotification.propTypes = {
   addNotification: PropTypes.func,
   removeNotification: PropTypes.func
 };
-
-// const mapDispatchToProps = dispatch => ({
-//   services: bindActionCreators(
-//     {
-//       addProgramNotificationService,
-//       removeProgramNotificationService
-//     },
-//     dispatch
-//   )
-// });
 
 export default GeneralNotification;

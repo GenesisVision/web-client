@@ -18,7 +18,7 @@ class NotificationGeneral extends Component {
     const { t, settings } = this.props;
     const { PlatformNewsAndUpdates, PlatformEmergency, programId } = settings;
     return (
-      <div>
+      <div className="notification-settings">
         <h3>{t("notifications.general.title")}</h3>
         <GeneralNotification
           name="PlatformNewsAndUpdates"

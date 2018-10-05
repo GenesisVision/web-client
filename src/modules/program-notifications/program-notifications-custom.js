@@ -1,4 +1,6 @@
+import Chip from "components/chip/chip";
 import Dialog from "components/dialog/dialog";
+import { GVButton } from "gv-react-components";
 import CustomNotification from "modules/program-notifications/custom-notification";
 import { addProgramNotificationService } from "modules/program-notifications/services/program-notifications.services";
 import PropTypes from "prop-types";
@@ -8,36 +10,41 @@ import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
 import ProgramNotificationCreateForm from "./program-notification-create-form";
+
 class ProgramNotificationsCustom extends Component {
   state = {
     isOpenCreatePopup: false
   };
+
   handleSubmit = values => {
     this.props.services.addProgramNotificationService({
       programId: this.props.program.programId,
       ...values
     });
   };
+
   handleClosePopup = () => {
     this.setState({ isOpenCreatePopup: false });
   };
+
   handleOpenPopup = () => {
     this.setState({ isOpenCreatePopup: true });
   };
+
   render() {
     const { t, program } = this.props;
-    console.info(program);
     return (
-      <div>
+      <div className="notification-settings custom-notifications">
         <h3>{t("notifications.program.custom.title")}</h3>
-        <ul>
-          {program.settingsCustom.map(settings => (
-            <CustomNotification settings={settings} />
-          ))}
-        </ul>
-        <button onClick={this.handleOpenPopup}>
-          {t("notifications.program.create.title")}
-        </button>
+        {program.settingsCustom.map(settings => (
+          <CustomNotification settings={settings} />
+        ))}
+        <div className="custom-notification__create">
+          <GVButton variant="text" onClick={this.handleOpenPopup}>
+            <Chip type="positive">+</Chip>
+            {t("notifications.program.create.title")}
+          </GVButton>
+        </div>
         <Dialog
           open={this.state.isOpenCreatePopup}
           onClose={this.handleClosePopup}

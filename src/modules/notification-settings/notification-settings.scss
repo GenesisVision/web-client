@@ -1,6 +1,24 @@
 @import "styles/_colors.scss";
 @import "styles/_constants.scss";
 
+.notification-settings {
+  margin-top: 50px;
+  h3 {
+    opacity: 0.3;
+    font-size: 13px;
+    letter-spacing: 0.4px;
+    margin-bottom: 35px;
+  }
+
+  &__title {
+    overflow-wrap: break-word;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    color: #3bcdbd;
+  }
+}
+
 .notification-entity {
   display: inline-flex;
   flex-direction: row;

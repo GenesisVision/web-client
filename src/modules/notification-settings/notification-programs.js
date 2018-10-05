@@ -24,7 +24,7 @@ class NotificationPrograms extends Component {
       );
     });
     return (
-      <div>
+      <div className="notification-settings">
         <h3>{t("notifications.programs")}</h3>
         <div className="program-notification__list">{items}</div>
       </div>
