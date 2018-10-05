@@ -6,7 +6,7 @@ import fileService from "shared/services/file-service";
 import * as profileSettingsService from "../services/profile-settings.service";
 import ProfileImage from "./profile-image";
 
-const ProfileImageContainer = ({ t, headerData, services }) => {
+const ProfileImageContainer = ({ headerData, services }) => {
   if (headerData === undefined) return null;
 
   const updateAvatar = (croppedImage, submitCallback) => {
