@@ -6,36 +6,23 @@ import { CURRENCY_VALUES } from "modules/currency-select/currency-select.constan
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import rateApiProxy from "services/api-client/rate-api";
 
 import { convertToCurrency } from "../../../../utils/currency-converter";
 
 class AboutLevelsComponent extends Component {
-  state = {
-    currency: CURRENCY_VALUES.GVT,
-    rate: 1
-  };
-  handlerCurrencyChange = e => {
-    this.setState({ currency: e.target.value });
-    rateApiProxy
-      .v10RateByFromByToGet(e.target.value, CURRENCY_VALUES.GVT)
-      .then(value => {
-        this.setState({ rate: value });
-      });
-  };
-  numberFormat = val => {
+  numberFormat = (val, rate, currency) => {
     return (
       <NumberFormat
-        value={convertToCurrency(val, this.state.rate)}
+        value={convertToCurrency(val, rate)}
         prefix=""
-        suffix={` ${this.state.currency}`}
+        suffix={` ${currency}`}
         decimalScale={2}
         displayType="text"
       />
     );
   };
   render() {
-    const { t, open, onClose } = this.props;
+    const { t, open, onClose, rate, currency, currencyChange } = this.props;
     return (
       <Dialog open={open} onClose={onClose} className="about-levels__dialog">
         <div className="about-levels-container">
@@ -142,8 +129,8 @@ class AboutLevelsComponent extends Component {
                 </div>
                 <div className="about-levels-container__select">
                   <CurrencySelect
-                    onChange={this.handlerCurrencyChange}
-                    value={this.state.currency}
+                    onChange={currencyChange}
+                    value={currency}
                     currencyValues={CURRENCY_VALUES}
                     className="header__currency"
                   />
@@ -157,7 +144,11 @@ class AboutLevelsComponent extends Component {
                       {t("about-levels.titles.limit")}
                     </div>
                     <div className="about-levels-container__value">
-                      {this.numberFormat(t("about-levels.limits.1"))}
+                      {this.numberFormat(
+                        t("about-levels.limits.1"),
+                        rate,
+                        currency
+                      )}
                     </div>
                   </div>
                 </div>
@@ -168,7 +159,11 @@ class AboutLevelsComponent extends Component {
                       {t("about-levels.titles.limit")}
                     </div>
                     <div className="about-levels-container__value">
-                      {this.numberFormat(t("about-levels.limits.2"))}
+                      {this.numberFormat(
+                        t("about-levels.limits.2"),
+                        rate,
+                        currency
+                      )}
                     </div>
                   </div>
                 </div>
@@ -181,7 +176,11 @@ class AboutLevelsComponent extends Component {
                       {t("about-levels.titles.limit")}
                     </div>
                     <div className="about-levels-container__value">
-                      {this.numberFormat(t("about-levels.limits.3"))}
+                      {this.numberFormat(
+                        t("about-levels.limits.3"),
+                        rate,
+                        currency
+                      )}
                     </div>
                   </div>
                 </div>
@@ -192,7 +191,11 @@ class AboutLevelsComponent extends Component {
                       {t("about-levels.titles.limit")}
                     </div>
                     <div className="about-levels-container__value">
-                      {this.numberFormat(t("about-levels.limits.4"))}
+                      {this.numberFormat(
+                        t("about-levels.limits.4"),
+                        rate,
+                        currency
+                      )}
                     </div>
                   </div>
                 </div>
@@ -203,7 +206,11 @@ class AboutLevelsComponent extends Component {
                       {t("about-levels.titles.limit")}
                     </div>
                     <div className="about-levels-container__value">
-                      {this.numberFormat(t("about-levels.limits.5"))}
+                      {this.numberFormat(
+                        t("about-levels.limits.5"),
+                        rate,
+                        currency
+                      )}
                     </div>
                   </div>
                 </div>
@@ -214,7 +221,11 @@ class AboutLevelsComponent extends Component {
                       {t("about-levels.titles.limit")}
                     </div>
                     <div className="about-levels-container__value">
-                      {this.numberFormat(t("about-levels.limits.6"))}
+                      {this.numberFormat(
+                        t("about-levels.limits.6"),
+                        rate,
+                        currency
+                      )}
                     </div>
                   </div>
                 </div>
@@ -227,7 +238,11 @@ class AboutLevelsComponent extends Component {
                       {t("about-levels.titles.limit")}
                     </div>
                     <div className="about-levels-container__value">
-                      {this.numberFormat(t("about-levels.limits.7"))}
+                      {this.numberFormat(
+                        t("about-levels.limits.7"),
+                        rate,
+                        currency
+                      )}
                     </div>
                   </div>
                 </div>
