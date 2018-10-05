@@ -113,14 +113,7 @@ class ProgramCard extends Component {
             />
           </div>
           <div className="programs-cards__chart-info">
-            <div
-              className={classNames("programs-cards__profit", {
-                "programs-cards__profit--positive":
-                  program.statistic.profitPercent > 0,
-                "programs-cards__profit--negative":
-                  program.statistic.profitPercent < 0
-              })}
-            >
+            <div className="programs-cards__profit">
               <Profitability
                 value={program.statistic.profitPercent}
                 positiveSymbol="&uarr;"
