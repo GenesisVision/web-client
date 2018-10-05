@@ -14,7 +14,7 @@ import { compose } from "redux";
 import { alertMessageActions } from "../../shared/modules/alert-message/actions/alert-message-actions";
 
 const ProgramWithdrawContainer = props => {
-  const { t, open, onClose, currency, services, id, alertSuccess } = props;
+  const { t, open, onClose, currency, services, id } = props;
 
   return (
     <Dialog open={open} onClose={onClose}>
@@ -22,8 +22,10 @@ const ProgramWithdrawContainer = props => {
         currency={currency}
         fetchInfo={() => services.getProgramWithdrawInfo(id)}
         withdraw={amount => {
-          alertSuccess(t("program-withdraw.success-alert-message"));
-          return withdrawProgramById(id, amount);
+          withdrawProgramById(id, amount).then(response => {
+            services.notifySuccess(t("program-withdraw.success-alert-message"));
+            return response;
+          });
         }}
       />
     </Dialog>
@@ -43,11 +45,11 @@ const mapStateToProps = state => ({
 const mapDispathToProps = dispatch => ({
   services: bindActionCreators(
     {
-      getProgramWithdrawInfo
+      getProgramWithdrawInfo,
+      notifySuccess: alertMessageActions.success
     },
     dispatch
-  ),
-  alertSuccess: text => dispatch(alertMessageActions.success(text))
+  )
 });
 
 export default compose(

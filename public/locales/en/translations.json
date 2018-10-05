@@ -13,6 +13,7 @@
     "entry-fee": "Entry fee",
     "period": "Your request will be processed at the end of the reporting period",
     "confirm": "Confirm",
+    "success-alert-message": "Successful request for investment in the program.",
     "validation": {
       "amount-more-than-available": "Amount is more than available in your wallet",
       "amount-is-required": "Amount is required."
@@ -492,7 +493,7 @@
     "how-much-withdraw": "How much would you like to withdraw?",
     "enter-amount": "Enter {{token}} amount",
     "withdraw-all": "Withdraw all invested tokens",
-    "success-alert-message": "Request to withdrawal sent successfully"
+    "success-alert-message": "Request to withdrawal sent successfully."
   },
   "filters": {
     "level": {
