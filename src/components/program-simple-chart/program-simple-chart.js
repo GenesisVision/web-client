@@ -19,16 +19,14 @@ const ProgramSimpleChart = ({ data, isPositive }) => {
       <ResponsiveContainer>
         <AreaChart data={programChartData}>
           <defs>
-            <defs>
-              <ProgramChartGradient
-                offset={off}
-                name="equitySimpleChartFill"
-                positiveColor={GVColors.$primaryColor}
-                negativeColor={GVColors.$primaryColor}
-                startOpacity={0.2}
-                stopOpacity={0}
-              />
-            </defs>
+            <ProgramChartGradient
+              offset={off}
+              name="equitySimpleChartFill"
+              positiveColor={GVColors.$primaryColor}
+              negativeColor={GVColors.$primaryColor}
+              startOpacity={0.2}
+              stopOpacity={0}
+            />
           </defs>
           <XAxis
             dataKey="date"
@@ -41,6 +39,7 @@ const ProgramSimpleChart = ({ data, isPositive }) => {
             type="monotone"
             dataKey="equity"
             stroke={GVColors.$primaryColor}
+            strokeWidth={2}
             fill={`url(#equitySimpleChartFill)`}
             isAnimationActive={false}
           />

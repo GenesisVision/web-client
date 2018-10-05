@@ -246,12 +246,18 @@
     "Ended": "Ended"
   },
   "chart-period": {
-    "day": "1D",
-    "week": "1W",
-    "month": "1M",
-    "quarter": "3M",
-    "year": "1Y",
-    "all": "All"
+    "day-short": "1D",
+    "day": "a Day",
+    "week-short": "1W",
+    "week": "a Week",
+    "month-short": "1M",
+    "month": "a Month",
+    "quarter-short": "3M",
+    "quarter": "a Quarter",
+    "year-short": "1Y",
+    "year": "a Year",
+    "all-short": "All",
+    "all": "All Time"
   },
   "manager": {
     "about": "About",
@@ -330,12 +336,15 @@
     },
     "statistics": {
       "heading": "Statistics",
+      "current": "Current",
+      "for": "For",
       "balance": "Balance",
       "investors": "Investors",
       "trades": "Trades",
       "success-trades": "Success trades",
       "profit-factor": "Profit factor",
       "sharpe-ratio": "Sharpe ratio",
+      "sortino-ratio": "Sortino ratio",
       "max-drawdown": "Max Drawdown",
       "start-day": "Start day",
       "period-end": "Period end",

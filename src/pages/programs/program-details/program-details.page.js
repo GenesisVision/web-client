@@ -2,7 +2,6 @@ import "./program-details.scss";
 
 import Page from "components/page/page";
 import React, { PureComponent } from "react";
-import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { goBack } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
@@ -15,9 +14,9 @@ import ProgramDetailsHistorySection from "./components/program-details-history-s
 import ProgramDetailsNavigation from "./components/program-details-navigation/program-details-navigation";
 import ProgramDetailsStatisticSection from "./components/program-details-statistic-section/program-details-statistic-section";
 import {
-  getChartAndEndTrades,
-  getEvents,
-  getProgramDescription
+  getProgramDescription,
+  getProgramHistory,
+  getProgramStatistic
 } from "./services/program-details.service";
 
 class ProgramDetailsPage extends PureComponent {
@@ -29,8 +28,9 @@ class ProgramDetailsPage extends PureComponent {
   constructor(props) {
     super(props);
     this.description = { data: null, isPending: true };
-    this.chart = { data: null, isPending: true };
-    this.trades = { data: null, isPending: true };
+    this.profitChart = { data: null, isPending: true };
+    this.balanceChart = { data: null, isPending: true };
+    this.statistic = { data: null, isPending: true };
     this.events = { data: null, isPending: true };
   }
 
@@ -45,11 +45,12 @@ class ProgramDetailsPage extends PureComponent {
       })
       .then(() => {
         this.setState({ isPending: true });
-        return service.getChartAndEndTrades(this.description.data.id);
+        return getProgramStatistic(this.description.data.id);
       })
-      .then(values => {
-        this.chart = values[0];
-        this.trades = values[1];
+      .then(data => {
+        this.profitChart = data.profitChart;
+        this.balanceChart = data.balanceChart;
+        this.statistic = data.statistic;
         this.setState({ isPending: false });
       })
       .then(() => {
@@ -69,13 +70,16 @@ class ProgramDetailsPage extends PureComponent {
       });
   }
   render() {
-    const { t, service, programId, currency } = this.props;
+    const { currency, service } = this.props;
     const { errorCode } = this.state;
     if (errorCode) {
       return <NotFoundPage />;
     }
+
+    if (!this.description.data) return null;
+
     return (
-      <Page title={t("program-details-page.title")}>
+      <Page title={this.description.data.title}>
         <div className="program-details">
           <div className="program-details__section">
             <ProgramDetailsNavigation goBack={service.goBack} />
@@ -84,16 +88,22 @@ class ProgramDetailsPage extends PureComponent {
             />
           </div>
           <div className="program-details__section">
-            <ProgramDetailsStatisticSection statisticData={this.chart} />
+            <ProgramDetailsStatisticSection
+              programId={this.description.data.id}
+              currency={currency}
+              statisticData={this.statistic}
+              profitChartData={this.profitChart}
+              balanceChartData={this.balanceChart}
+            />
           </div>
-          <div className="program-details__history">
+          {/*<div className="program-details__history">
             <ProgramDetailsHistorySection
               programId={programId}
               currency={currency}
               tradesData={this.trades}
               eventsData={this.events}
             />
-          </div>
+          </div> */}
         </div>
       </Page>
     );
@@ -101,24 +111,18 @@ class ProgramDetailsPage extends PureComponent {
 }
 
 const mapStateToProps = state => {
-  const { routing, accountSettings } = state;
+  const { accountSettings } = state;
 
   return {
-    programId: getParams(routing.location.pathname, PROGRAM_DETAILS_ROUTE)
-      .programId,
     currency: accountSettings.currency
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  service: bindActionCreators(
-    { getProgramDescription, getChartAndEndTrades, getEvents, goBack },
-    dispatch
-  )
+  service: bindActionCreators({ getProgramDescription, goBack }, dispatch)
 });
 
 export default compose(
-  translate(),
   connect(
     mapStateToProps,
     mapDispatchToProps
