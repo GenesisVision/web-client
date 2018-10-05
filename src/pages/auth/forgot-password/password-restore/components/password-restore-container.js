@@ -1,7 +1,6 @@
 import React from "react";
-import { translate } from "react-i18next";
 import { connect } from "react-redux";
-import { bindActionCreators, compose } from "redux";
+import { bindActionCreators } from "redux";
 
 import forgotPasswordService from "../../services/forgot-password.service";
 import PasswordRestore from "./password-restore";
@@ -18,8 +17,7 @@ const PasswordRestoreContainer = ({
       userId: queryParams.userId,
       code: queryParams.code,
       data: formData,
-      setSubmitting,
-      successText: t("auth.password-restore.success-alert-message")
+      setSubmitting
     };
 
     services.restorePassword(params);
@@ -37,10 +35,7 @@ const mapDispatchToProps = dispatch => ({
   services: bindActionCreators(forgotPasswordService, dispatch)
 });
 
-export default compose(
-  translate(),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
 )(PasswordRestoreContainer);

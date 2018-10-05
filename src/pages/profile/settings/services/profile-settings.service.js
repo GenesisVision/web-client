@@ -6,8 +6,7 @@ import filesService from "shared/services/file-service";
 
 export const updateProfileAvatar = ({
   croppedImage,
-  submitCallback,
-  successText
+  submitCallback
 }) => dispatch => {
   const authorization = authService.getAuthArg();
 
@@ -18,7 +17,12 @@ export const updateProfileAvatar = ({
     )
     .then(() => dispatch(fetchProfileHeaderInfo()))
     .then(() => {
-      dispatch(alertMessageActions.success(successText));
+      dispatch(
+        alertMessageActions.success(
+          "profile.settings.image-success-save-message",
+          true
+        )
+      );
       submitCallback();
     })
     .catch(error =>
@@ -26,17 +30,19 @@ export const updateProfileAvatar = ({
     );
 };
 
-export const removeProfileAvatar = ({
-  submitCallback,
-  successText
-}) => dispatch => {
+export const removeProfileAvatar = ({ submitCallback }) => dispatch => {
   const authorization = authService.getAuthArg();
 
   profileApiProxy
     .v10ProfileAvatarRemovePost(authorization)
     .then(() => dispatch(fetchProfileHeaderInfo()))
     .then(() => {
-      dispatch(alertMessageActions.success(successText));
+      dispatch(
+        alertMessageActions.success(
+          "profile.settings.image-success-save-message",
+          true
+        )
+      );
       submitCallback();
     })
     .catch(error =>

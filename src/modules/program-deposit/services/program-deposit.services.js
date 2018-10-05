@@ -10,13 +10,11 @@ export const getDepositProgramInfoById = id => (dispatch, getState) => {
   return dispatch(fetchDepositProgramInfoById(id, accountSettings.currency));
 };
 
-export const investServiceInvestById = ({
-  id,
-  amount,
-  successText
-}) => dispatch => {
+export const investServiceInvestById = ({ id, amount }) => dispatch => {
   return dispatch(investToProgramById(id, amount)).then(() => {
-    dispatch(alertMessageActions.success(successText));
+    dispatch(
+      alertMessageActions.success("deposit-program.success-alert-message", true)
+    );
     dispatch(fetchProfileHeaderInfo());
   });
 };

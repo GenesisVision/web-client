@@ -1,8 +1,6 @@
 import React from "react";
-import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { compose } from "redux";
 import fileService from "shared/services/file-service";
 
 import * as profileSettingsService from "../services/profile-settings.service";
@@ -15,15 +13,13 @@ const ProfileImageContainer = ({ t, headerData, services }) => {
     if (croppedImage) {
       services.updateProfileAvatar({
         croppedImage,
-        submitCallback,
-        successText: t("profile.settings.image-success-save-message")
+        submitCallback
       });
     }
 
     if (headerData.avatar && !croppedImage) {
       services.removeProfileAvatar({
-        submitCallback,
-        successText: t("profile.settings.image-success-save-message")
+        submitCallback
       });
     }
   };
@@ -44,10 +40,7 @@ const mapDispatchToProps = dispatch => ({
   services: bindActionCreators(profileSettingsService, dispatch)
 });
 
-export default compose(
-  translate(),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
 )(ProfileImageContainer);

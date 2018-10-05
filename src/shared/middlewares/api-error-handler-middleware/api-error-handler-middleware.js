@@ -12,10 +12,9 @@ const apiErrorHandlerMiddleware = (
 
   if (isRejected && action.error) {
     const handledError = handleErrorMessage(action.payload.response);
-    const { withLocalizationAlert, error } = alertMessageActions;
 
     if (handledError.isServerConnectionError) {
-      dispatch(withLocalizationAlert(error("alerts.server-error")));
+      dispatch(alertMessageActions.error("alerts.server-error", true));
       action.payload = { code: handledError.code };
     }
 

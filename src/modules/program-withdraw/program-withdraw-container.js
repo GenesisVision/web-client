@@ -11,22 +11,15 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { compose } from "redux";
 
-import { alertMessageActions } from "../../shared/modules/alert-message/actions/alert-message-actions";
-
 const ProgramWithdrawContainer = props => {
-  const { t, open, onClose, currency, services, id } = props;
+  const { open, onClose, currency, services, id } = props;
 
   return (
     <Dialog open={open} onClose={onClose}>
       <ProgramWithdrawPopup
         currency={currency}
         fetchInfo={() => services.getProgramWithdrawInfo(id)}
-        withdraw={amount => {
-          withdrawProgramById(id, amount).then(response => {
-            services.notifySuccess(t("program-withdraw.success-alert-message"));
-            return response;
-          });
-        }}
+        withdraw={amount => withdrawProgramById(id, amount)}
       />
     </Dialog>
   );
@@ -45,8 +38,7 @@ const mapStateToProps = state => ({
 const mapDispathToProps = dispatch => ({
   services: bindActionCreators(
     {
-      getProgramWithdrawInfo,
-      notifySuccess: alertMessageActions.success
+      getProgramWithdrawInfo
     },
     dispatch
   )

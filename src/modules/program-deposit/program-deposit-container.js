@@ -10,9 +10,8 @@ import {
 } from "modules/program-deposit/services/program-deposit.services";
 import PropTypes from "prop-types";
 import React from "react";
-import { translate } from "react-i18next";
 import { connect } from "react-redux";
-import { bindActionCreators, compose } from "redux";
+import { bindActionCreators } from "redux";
 
 const ProgramDepositContainer = props => {
   const handleClose = () => {
@@ -21,13 +20,12 @@ const ProgramDepositContainer = props => {
     props.service.clearInvestSubmit();
   };
   const handleInvest = amount => {
-    const { t, service, id } = props;
+    const { service, id } = props;
 
     service
       .investServiceInvestById({
         id,
-        amount,
-        successText: t("deposit-program.success-alert-message")
+        amount
       })
       .then(handleClose);
   };
@@ -76,10 +74,7 @@ const mapDispatchToProps = dispatch => ({
   )
 });
 
-export default compose(
-  translate(),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
 )(ProgramDepositContainer);

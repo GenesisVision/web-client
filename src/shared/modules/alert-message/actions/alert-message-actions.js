@@ -1,26 +1,24 @@
 import * as alertMessageActionTypes from "./alert-message-actions.constants";
 
-const withLocalizationAlert = action => ({
-  ...action,
-  isUseLocalization: true
-});
-
-const success = text => ({
+const success = (text, isUseLocalization = false) => ({
   type: alertMessageActionTypes.ALERT_MESSAGE_SUCCESS,
   className: "alert-message--success",
-  text
+  text,
+  isUseLocalization
 });
 
-const warning = text => ({
+const warning = (text, isUseLocalization = false) => ({
   type: alertMessageActionTypes.ALERT_MESSAGE_WARNING,
   className: "alert-message--warning",
-  text
+  text,
+  isUseLocalization
 });
 
-const error = text => ({
+const error = (text, isUseLocalization = false) => ({
   type: alertMessageActionTypes.ALERT_MESSAGE_ERROR,
   className: "alert-message--danger",
-  text
+  text,
+  isUseLocalization
 });
 
 const remove = id => ({
@@ -37,8 +35,7 @@ const alertMessageActions = {
   warning,
   error,
   remove,
-  clearAll,
-  withLocalizationAlert
+  clearAll
 };
 
 export { alertMessageActions };
