@@ -13,7 +13,7 @@ import replaceParams from "utils/replace-params";
 import ProgramDetailsFavorite from "./program-details-favorite";
 import ProgramDetailsNotification from "./program-details-notificaton";
 import Popover from "components/popover/popover";
-import AboutLevelsComponent from "pages/app/components/about-levels/about-levels";
+import AboutLevelsContainerComponent from "../../../../../app/components/about-levels/about-levels-container";
 
 const composeManagerUrl = managerId => {
   return replaceParams(MANAGER_DETAILS_ROUTE, {
@@ -109,7 +109,7 @@ class ProgramDetailsDescription extends PureComponent {
               </div>
             </div>
           </Popover>
-          <AboutLevelsComponent
+          <AboutLevelsContainerComponent
             open={isOpenAboutLevels}
             onClose={this.handleCloseAboutLevels}
           />
