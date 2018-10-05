@@ -90,6 +90,13 @@ const WalletWithdrawForm = ({
           component={GVTextField}
           autoComplete="off"
         />
+        <GVFormikField
+          type="text"
+          name="twoFactorCode"
+          label={t("wallet-withdraw.two-factor-code-label")}
+          autoComplete="off"
+          component={GVTextField}
+        />
         <ul className="dialog-list">
           <li className="dialog-list__item">
             <span className="dialog-list__title">
@@ -174,7 +181,8 @@ export default compose(
     mapPropsToValues: () => ({
       amount: "",
       currency: "BTC",
-      address: ""
+      address: "",
+      twoFactorCode: ""
     }),
     validationSchema: ({ t, availableToWithdrawal }) =>
       object().shape({
@@ -186,7 +194,14 @@ export default compose(
           .required(t("wallet-withdraw.validation.amount-is-required")),
         address: string().required(
           t("wallet-withdraw.validation.address-is-required")
-        )
+        ),
+        twoFactorCode: string()
+          .trim()
+          .matches(
+            /^\d{6}$/,
+            t("wallet-withdraw.validation.two-factor-6digits")
+          )
+          .required(t("wallet-withdraw.validation.two-factor-required"))
       }),
     handleSubmit: (values, { props }) => props.onSubmit(values)
   })
