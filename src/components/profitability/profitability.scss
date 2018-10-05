@@ -1,11 +1,32 @@
 @import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
 
-.profitability {
+$text-size: 13px;
+.default {
   &--positive {
     color: $positive-color;
   }
 
   &--negative {
     color: $negative-color;
+  }
+}
+
+.ellipse {
+  font-size: $text-size/1.5;
+  font-weight: 600;
+  border-radius: 19.5px;
+  background-color: $separator-color;
+  padding: 5px 13px;
+  &--positive {
+    color: $positive-color;
+    background-color: $success;
+  }
+  &--negative {
+    color: $negative-color;
+    background-color: rgba(235, 59, 90, 0.1);
+  }
+  @include media-breakpoint-phone() {
+    font-size: $text-size;
   }
 }
