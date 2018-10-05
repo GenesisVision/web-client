@@ -20,8 +20,6 @@ const Profitability = ({
   value,
   isPositive,
   isNegative,
-  positiveSymbol,
-  negativeSymbol,
   prefix,
   form,
   ...rest
@@ -65,10 +63,10 @@ const Profitability = ({
         >
           {isPositiveLocal &&
             value !== undefined &&
-            `${positiveSymbol || "+"} `}
+            `${prefixes[prefix].POSITIVE} `}
           {isNegativeLocal &&
             value !== undefined &&
-            `${negativeSymbol || "-"} `}
+            `${prefixes[prefix].NEGATIVE} `}
           {children}
         </span>
       );
