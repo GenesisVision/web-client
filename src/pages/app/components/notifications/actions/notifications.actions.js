@@ -16,11 +16,10 @@ export const addNotifications = notifications => ({
   notifications
 });
 
-export const addNotificationsCount = count =>
-  console.info(count) || {
-    type: ADD_NOTIFICATIONS_COUNT,
-    count
-  };
+export const addNotificationsCount = count => ({
+  type: ADD_NOTIFICATIONS_COUNT,
+  count
+});
 
 export const setNotificationsOptions = options => ({
   type: SET_NOTIFICATIONS_OPTIONS,

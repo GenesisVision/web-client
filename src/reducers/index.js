@@ -1,4 +1,5 @@
 import headerReducer from "modules/header/reducer/header-reducer";
+import notificationSettingsReducer from "modules/notification-settings/reducers/notification-settings.reducers";
 import programDepositReducer from "modules/program-deposit/reducer/program-deposit.reducer";
 import notificationsReducer from "pages/app/components/notifications/reducers/notifications.reducers";
 import { loadingBarReducer } from "react-redux-loading-bar";
@@ -42,6 +43,7 @@ export default combineReducers({
   navigationData: navigationReducer,
   emailPending: emailPendingReducer,
   notifications: notificationsReducer,
+  notificationSettings: notificationSettingsReducer,
   manager: managerReducer,
   wallet: walletReducer,
   accountSettings: accountSettingsReducer,

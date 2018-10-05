@@ -15,7 +15,6 @@ export const notificationProps = {
 };
 
 const Notification = ({ date, text, isUnread }) => {
-  console.info(isUnread);
   return (
     <div
       className={classnames("notification", {

@@ -1,3 +1,4 @@
+import ProgramNotificationsCustom from "modules/program-notifications/program-notifications-custom";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
@@ -11,6 +12,7 @@ class ProgramNotifications extends Component {
       <div>
         <h3>{program.title}</h3>
         <ProgramNotificationsGeneral settings={program.settingsGeneral} />
+        <ProgramNotificationsCustom settings={program.settingsCustom} />
       </div>
     );
   }

@@ -1,8 +1,14 @@
 import { GVSwitch } from "gv-react-components";
 import { settingsProps } from "modules/notification-settings/notification-settings";
+import {
+  addNotificationSettingService,
+  removeNotificationSettingService
+} from "modules/notification-settings/services/notification-settings.services";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
+import { connect } from "react-redux";
+import { bindActionCreators, compose } from "redux";
 import notificationsApi from "services/api-client/notifications-api";
 import authService from "services/auth-service";
 
@@ -11,16 +17,10 @@ class NotificationGeneral extends Component {
     isPendingPlatformNewsAndUpdates: false,
     isPendingPlatformEmergency: false
   };
-  static getDerivedStateFromProps(props, state) {
-    return props.settings.reduce((acc, setting) => {
-      acc[setting.type] = setting;
-      return acc;
-    }, {});
-  }
 
   handleSwitch = event => {
     const { target } = event;
-    if (!this.state[target.name]) {
+    if (!this.props.settings[target.name]) {
       this.addNotification(target.name);
     } else {
       this.removeNotification(target.name);
@@ -34,8 +34,8 @@ class NotificationGeneral extends Component {
   addNotification = type => {
     const isPending = this.getPendingName(type);
     this.setState({ [isPending]: true });
-    notificationsApi
-      .v10NotificationsSettingsAddPost(authService.getAuthArg(), {
+    this.props.service
+      .addNotificationSettingService({
         type
       })
       .finally(() => this.setState({ [isPending]: false }));
@@ -44,16 +44,14 @@ class NotificationGeneral extends Component {
   removeNotification = type => {
     const isPending = this.getPendingName(type);
     this.setState({ [isPending]: true });
-    notificationsApi
-      .v10NotificationsSettingsRemoveByIdPost(
-        this.state[type].id,
-        authService.getAuthArg()
-      )
+    this.props.service
+      .removeNotificationSettingService(this.props.settings[type].id)
       .finally(() => this.setState({ [isPending]: false }));
   };
 
   render() {
-    const { t } = this.props;
+    const { t, settings } = this.props;
+    const { PlatformNewsAndUpdates, PlatformEmergency } = settings;
     return (
       <div>
         <h3>{t("notifications.general.title")}</h3>
@@ -62,7 +60,7 @@ class NotificationGeneral extends Component {
             {t("notifications.general.news-updates")}
             <GVSwitch
               name="PlatformNewsAndUpdates"
-              value={this.state.PlatformNewsAndUpdates}
+              value={PlatformNewsAndUpdates}
               disabled={this.state.isPendingPlatformNewsAndUpdates}
               color="primary"
               onChange={this.handleSwitch}
@@ -74,7 +72,7 @@ class NotificationGeneral extends Component {
             {t("notifications.general.emergency")}
             <GVSwitch
               name="PlatformEmergency"
-              value={this.state.PlatformEmergency}
+              value={PlatformEmergency}
               disabled={this.state.isPendingPlatformEmergency}
               color="primary"
               onChange={this.handleSwitch}
@@ -94,4 +92,17 @@ NotificationGeneral.defaultProps = {
   settings: []
 };
 
-export default translate()(NotificationGeneral);
+const mapDispatchToProps = dispatch => ({
+  service: bindActionCreators(
+    { removeNotificationSettingService, addNotificationSettingService },
+    dispatch
+  )
+});
+
+export default compose(
+  translate(),
+  connect(
+    undefined,
+    mapDispatchToProps
+  )
+)(NotificationGeneral);

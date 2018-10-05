@@ -7,14 +7,14 @@ import filesService from "shared/services/file-service";
 const NotificationEntity = props => {
   return (
     <Link to={props.href}>
-      <div className="program-notification">
+      <div className="notification-entity">
         <GVProgramAvatar
           url={filesService.getFileUrl(props.logo)}
           alt={props.title}
           level={props.level}
         />
-        <div className="program-notification__title">{props.title}</div>
-        <div className="program-notification__count">{props.count}</div>
+        <div className="notification-entity__title">{props.title}</div>
+        <div className="notification-entity__count">{props.count}</div>
       </div>
     </Link>
   );
@@ -25,7 +25,6 @@ NotificationEntity.propTypes = {
   title: PropTypes.string,
   level: PropTypes.number,
   count: PropTypes.number,
-  programId: PropTypes.string.isRequired,
   href: PropTypes.string.isRequired
 };
 

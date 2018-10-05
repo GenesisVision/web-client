@@ -8,10 +8,17 @@ import NotificationManagers from "./notification-managers";
 import NotificationPrograms from "./notification-programs";
 
 class NotificationSettings extends Component {
+  getGeneralSettings = () => {
+    return this.props.settingsGeneral.reduce((acc, setting) => {
+      acc[setting.type] = setting;
+      return acc;
+    }, {});
+  };
+
   render() {
     return (
       <div>
-        <NotificationGeneral settings={this.props.settingsGeneral} />
+        <NotificationGeneral settings={this.getGeneralSettings()} />
         <NotificationPrograms settings={this.props.settingsProgram} />
         <NotificationManagers settings={this.props.settingsManager} />
       </div>

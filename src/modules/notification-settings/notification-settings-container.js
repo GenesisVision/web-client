@@ -1,34 +1,45 @@
+import { fetchNotificationSettingsService } from "modules/notification-settings/services/notification-settings.services";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import notificationsApi from "services/api-client/notifications-api";
 import authService from "services/auth-service";
 
 import NotificationSettings from "./notification-settings";
 
 class NotificationSettingsContainer extends Component {
-  state = {
-    settingsGeneral: [],
-    settingsProgram: [],
-    settingsManager: []
-  };
-
   componentDidMount() {
-    notificationsApi
-      .v10NotificationsSettingsGet(authService.getAuthArg())
-      .then(data => this.setState({ ...data }));
+    const { fetchNotificationSettingsService } = this.props.services;
+    fetchNotificationSettingsService();
   }
 
   render() {
     return (
       <NotificationSettings
-        settingsGeneral={this.state.settingsGeneral}
-        settingsProgram={this.state.settingsProgram}
-        settingsManager={this.state.settingsManager}
+        settingsGeneral={this.props.settingsGeneral}
+        settingsProgram={this.props.settingsProgram}
+        settingsManager={this.props.settingsManager}
       />
     );
   }
 }
 
-NotificationSettingsContainer.propTypes = {};
+NotificationSettingsContainer.propTypes = {
+  settingsGeneral: PropTypes.array,
+  settingsProgram: PropTypes.array,
+  settingsManager: PropTypes.array
+};
 
-export default NotificationSettingsContainer;
+const mapStateToProps = state => ({
+  ...state.notificationSettings
+});
+
+const mapDispatchToProps = dispatch => ({
+  services: bindActionCreators({ fetchNotificationSettingsService }, dispatch)
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NotificationSettingsContainer);
