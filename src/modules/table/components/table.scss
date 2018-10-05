@@ -16,6 +16,7 @@ $padding: 33px;
 }
 
 .table {
+  padding-bottom: $padding;
   width: 100%;
   border-spacing: 0;
   .message {
