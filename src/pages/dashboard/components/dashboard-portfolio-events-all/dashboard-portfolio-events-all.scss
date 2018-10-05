@@ -1,0 +1,25 @@
+@import "styles/_colors.scss";
+$middle-font-size: 13px;
+.dashboard-portfolio-events-all{
+  &__navigation {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: $middle-font-size;
+    padding: 40px 0;
+    .navigation-title{
+      opacity: 0.4;
+    }
+    button{
+      padding-left: 0;
+      font-size: $middle-font-size;
+      font-weight: 600;
+    }
+  }
+  &__heading {
+    color: $text-accent-color;
+    font-size: 28px;
+    margin: 0 0 30px;
+  }
+}
