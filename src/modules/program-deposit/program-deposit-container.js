@@ -13,7 +13,6 @@ import React from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
-import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
 const ProgramDepositContainer = props => {
   const handleClose = () => {
@@ -24,10 +23,13 @@ const ProgramDepositContainer = props => {
   const handleInvest = amount => {
     const { t, service, id } = props;
 
-    service.investServiceInvestById(id, amount).then(() => {
-      service.notifySuccess(t("deposit-program.success-alert-message"));
-      handleClose();
-    });
+    service
+      .investServiceInvestById({
+        id,
+        amount,
+        successText: t("deposit-program.success-alert-message")
+      })
+      .then(handleClose);
   };
   return (
     <Dialog open={props.open} onClose={handleClose}>
@@ -68,8 +70,7 @@ const mapDispatchToProps = dispatch => ({
       getDepositProgramInfoById,
       clearDepositProgramInfo,
       investServiceInvestById,
-      clearInvestSubmit,
-      notifySuccess: alertMessageActions.success
+      clearInvestSubmit
     },
     dispatch
   )
