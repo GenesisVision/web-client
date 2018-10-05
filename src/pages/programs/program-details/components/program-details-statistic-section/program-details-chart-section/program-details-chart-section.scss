@@ -1,5 +1,6 @@
 .program-details-chart {
   padding: 40px;
+  flex: 1;
   &__heading {
     margin: 0 0 30px;
     font-size: 17px;
@@ -11,8 +12,8 @@
   }
 
   &__profit {
-    height: 260px;
+    height: 300px;
     width: 100%;
-    margin-top: 20px;
+    margin-top: 40px;
   }
 }

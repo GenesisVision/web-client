@@ -1,74 +1,53 @@
 import "./chart-period.scss";
 
 import classnames from "classnames";
+import { GVButton } from "gv-react-components";
 import moment from "moment";
 import PropTypes from "prop-types";
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 
-export const ChartPeriodType = {
-  day: "day",
-  week: "week",
-  month: "month",
-  quarter: "quarter",
-  year: "year",
-  all: "all"
-};
+import { ChartPeriodType, getPeriodStartDate } from "./chart-period.helpers";
 
-const getPeriodStartDate = period => {
-  switch (period) {
-    case ChartPeriodType.all:
-      return undefined;
-    default:
-      return moment().subtract(1, `${period}s`);
-  }
-};
-
-class ChartPeriod extends Component {
-  state = {
-    period: ChartPeriodType.month,
-    start: getPeriodStartDate(ChartPeriodType.month),
-    end: moment()
-  };
-
-  handleChangePeriod = newPeriod => () => {
-    const { period } = this.state;
-    if (period !== newPeriod) {
-      const start = getPeriodStartDate(newPeriod);
-      this.setState({ start, period: newPeriod }, () => {
-        if (this.props.onChange) {
-          this.props.onChange(this.state);
-        }
-      });
+class ChartPeriod extends PureComponent {
+  handleChangePeriod = newPeriodType => () => {
+    const { period } = this.props;
+    if (period.type !== newPeriodType) {
+      const start = getPeriodStartDate(newPeriodType);
+      const end = moment();
+      this.props.onChange({ type: newPeriodType, start, end });
     }
   };
 
   renderDateRange = () => {
-    const { period, start, end } = this.state;
-    if (period === ChartPeriodType.all) return null;
+    const { period } = this.props;
+    if (period.type === ChartPeriodType.all) return null;
     return (
       <span>
-        {start.format("ll")} - {end.format("ll")}
+        {period.start.format("ll")} - {period.end.format("ll")}
       </span>
     );
   };
 
   render() {
-    const { t } = this.props;
-    const { period } = this.state;
+    const { t, period } = this.props;
+    const { type } = period;
     return (
       <div className="chart-period">
         <div className="chart-period__period">
-          {Object.keys(ChartPeriodType).map(x => (
-            <span
+          {Object.values(ChartPeriodType).map(x => (
+            <GVButton
               key={x}
               className={classnames("chart-period__period-item", {
-                "chart-period__period-item--active": period === x
+                "chart-period__period-item--active": type === x
               })}
               onClick={this.handleChangePeriod(x)}
+              variant="text"
+              color="secondary"
+              disabled={type === x}
             >
-              {t(`chart-period.${ChartPeriodType[x]}`)}
-            </span>
+              {t(`chart-period.${ChartPeriodType[x]}-short`)}
+            </GVButton>
           ))}
         </div>
         <div className="chart-period__date-range">{this.renderDateRange()}</div>
@@ -77,7 +56,12 @@ class ChartPeriod extends Component {
   }
 }
 
+const periodShape = PropTypes.shape({
+  type: PropTypes.oneOf(Object.values(ChartPeriodType))
+});
+
 ChartPeriod.propTypes = {
+  period: periodShape.isRequired,
   onChange: PropTypes.func
 };
 

@@ -1,13 +1,11 @@
 import "./program-details-chart-section.scss";
 
-import ChartPeriod from "components/chart/chart-period/chart-period";
-import StatisticItem from "components/statistic-item/statistic-item";
 import Surface from "components/surface/surface";
 import { GVTab, GVTabs } from "gv-react-components";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 
-import ProgramProfitChart from "./program-profit-chart";
+import ProgramProfitChartSection from "./program-profit-chart-section/program-profit-chart-section";
 
 const PROFIT_TAB = "profit";
 const BALANCE_TAB = "balance";
@@ -20,7 +18,15 @@ class ProgramDetailsChartSection extends PureComponent {
     this.setState({ tab });
   };
   render() {
-    const { t, chart, totalProfit, changeValue } = this.props;
+    const {
+      t,
+      period,
+      onPeriodChange,
+      profitChartData,
+      totalProfit,
+      changeValue
+    } = this.props;
+
     const { tab } = this.state;
 
     return (
@@ -38,29 +44,13 @@ class ProgramDetailsChartSection extends PureComponent {
             label={t("program-details-page.chart.tabs.balance")}
           />
         </GVTabs>
-        <div>
-          <StatisticItem
-            heading={"Value"}
-            value={totalProfit}
-            equivalent={"???"}
-            currency={"???"}
-            className="program-details-chart__stat-item"
+        {tab === PROFIT_TAB && (
+          <ProgramProfitChartSection
+            profitChartData={profitChartData}
+            period={period}
+            onPeriodChange={onPeriodChange}
           />
-          <StatisticItem
-            heading={"Change"}
-            value={changeValue}
-            equivalent={"???"}
-            currency={"???"}
-            className="program-details-chart__stat-item"
-          />
-        </div>
-        <ChartPeriod onChange={this.handleChangePeriod} />
-        <div className="program-details-chart__profit">
-          <ProgramProfitChart
-            periods={chart.map(x => x.equityChart)}
-            pnl={chart.pnLChart}
-          />
-        </div>
+        )}
       </Surface>
     );
   }

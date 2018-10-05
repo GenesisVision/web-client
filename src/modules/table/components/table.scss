@@ -18,7 +18,7 @@ $padding: 33px;
 .table {
   width: 100%;
   border-spacing: 0;
-  .message{
+  .message {
     padding: $padding;
     text-align: center;
   }
@@ -53,7 +53,7 @@ $padding: 33px;
       cursor: pointer;
       padding: $view-svg-size;
       padding-bottom: 0;
-      .icon{
+      .icon {
         width: auto;
       }
       svg {
@@ -117,7 +117,7 @@ $padding: 33px;
     padding: $padding/4;
     overflow: hidden; // Or flex might break
     list-style: none;
-    font-weight: 200;
+    font-weight: 300;
     letter-spacing: 0.4px;
     &#{&} {
       &--head {
@@ -173,7 +173,7 @@ $padding: 33px;
     &__footer {
       font-size: $td-font-size;
     }
-    &__toolbar{
+    &__toolbar {
       padding: $padding;
     }
     &__toggle {
