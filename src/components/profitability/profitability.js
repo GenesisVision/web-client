@@ -29,12 +29,12 @@ const Profitability = ({
   form,
   ...rest
 }) => {
-  let isPositiveLocal = isPositive;
-  let isNegativeLocal = isNegative;
+  let isPositiveLocal;
+  let isNegativeLocal;
 
   if (value !== undefined) {
-    isPositiveLocal = value > 0;
-    isNegativeLocal = value < 0;
+    isPositiveLocal = isPositive || value > 0;
+    isNegativeLocal = isNegative || value < 0;
   }
 
   const getPrefix = (value, prefix) => {
