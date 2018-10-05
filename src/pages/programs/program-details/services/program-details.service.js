@@ -71,10 +71,7 @@ export const getProgramStatistic = (
   });
 };
 
-export const getProgramHistory = ({ programId, currency }) => (
-  dispatch,
-  getState
-) => {
+export const getProgramHistory = (programId, currency) => {
   const tradesFilters = composeRequestFilters({
     paging: DEFAULT_PAGING,
     sorting: undefined,
@@ -85,7 +82,9 @@ export const getProgramHistory = ({ programId, currency }) => (
   return Promise.all([
     getProgramTrades({ programId, currency, filters: tradesFilters }),
     getProgramEvents()
-  ]);
+  ]).then(values => ({
+    trades: values[0]
+  }));
 };
 
 export const getProgramTrades = ({ programId, currency, filters }) => {

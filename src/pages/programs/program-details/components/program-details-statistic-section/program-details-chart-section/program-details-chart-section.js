@@ -12,7 +12,7 @@ const PROFIT_TAB = "profit";
 const BALANCE_TAB = "balance";
 class ProgramDetailsChartSection extends PureComponent {
   state = {
-    tab: BALANCE_TAB
+    tab: PROFIT_TAB
   };
 
   handleTabChange = (e, tab) => {
