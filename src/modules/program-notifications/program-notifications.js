@@ -22,8 +22,8 @@ class ProgramNotifications extends Component {
           programId={program.programId}
         />
         <ProgramNotificationsCustom
-          settings={program.settingsCustom}
-          programId={program.programId}
+          // settings={program.settingsCustom}
+          program={program}
         />
       </div>
     );

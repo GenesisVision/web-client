@@ -54,8 +54,16 @@
         "end-of-period": "Notifications for the end of the period"
       },
       "custom": {
+        "title": "CUSTOM",
         "profit": "Profit notification",
         "create": "Create notification"
+      },
+      "create": {
+        "title": "Create notification",
+        "type-profit": "Profit notification",
+        "type-level": "Level notification",
+        "type-label": "Type",
+        "amount-label": "Enter amount"
       }
     }
   },
@@ -67,7 +75,9 @@
     "copy": "Copy",
     "confirm": "Confirm",
     "activate": "Activate",
-    "disable": "Disable"
+    "disable": "Disable",
+    "create": "Create",
+    "delete": "Delete"
   },
   "navigation": {
     "dashboard": "Dashboard",
