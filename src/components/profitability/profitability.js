@@ -4,7 +4,7 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 
-const prefixes = {
+const PREFIXES = {
   ARROWS: {
     NEGATIVE: String.fromCharCode(8595),
     POSITIVE: String.fromCharCode(8593)
@@ -80,7 +80,7 @@ Profitability.propTypes = {
   isPositive: PropTypes.bool,
   isNegative: PropTypes.bool,
   form: PropTypes.string,
-  prefix: PropTypes.string,
+  prefix: PropTypes.oneOf(Object.keys(PREFIXES)),
   positiveSymbol: PropTypes.string,
   negativeSymbol: PropTypes.string
 };
