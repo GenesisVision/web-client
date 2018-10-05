@@ -14,7 +14,6 @@ export const fetchProgramNotificationsService = id => dispatch => {
 };
 
 export const addProgramNotificationService = opts => dispatch => {
-  console.info(opts, "-----");
   return dispatch(addNotificationSetting(opts)).then(() =>
     dispatch(fetchProgramNotificationsService(opts.programId))
   );

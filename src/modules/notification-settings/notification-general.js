@@ -1,3 +1,4 @@
+import GeneralNotification from "components/general-notification/general-notification";
 import { GVSwitch } from "gv-react-components";
 import { settingsProps } from "modules/notification-settings/notification-settings";
 import {
@@ -13,79 +14,43 @@ import notificationsApi from "services/api-client/notifications-api";
 import authService from "services/auth-service";
 
 class NotificationGeneral extends Component {
-  state = {
-    isPendingPlatformNewsAndUpdates: false,
-    isPendingPlatformEmergency: false
-  };
-
-  handleSwitch = event => {
-    const { target } = event;
-    if (!this.props.settings[target.name]) {
-      this.addNotification(target.name);
-    } else {
-      this.removeNotification(target.name);
-    }
-  };
-
-  getPendingName = type => {
-    return [`isPending${type}`];
-  };
-
-  addNotification = type => {
-    const isPending = this.getPendingName(type);
-    this.setState({ [isPending]: true });
-    this.props.service
-      .addNotificationSettingService({
-        type
-      })
-      .finally(() => this.setState({ [isPending]: false }));
-  };
-
-  removeNotification = type => {
-    const isPending = this.getPendingName(type);
-    this.setState({ [isPending]: true });
-    this.props.service
-      .removeNotificationSettingService(this.props.settings[type].id)
-      .finally(() => this.setState({ [isPending]: false }));
-  };
-
   render() {
     const { t, settings } = this.props;
-    const { PlatformNewsAndUpdates, PlatformEmergency } = settings;
+    const { PlatformNewsAndUpdates, PlatformEmergency, programId } = settings;
     return (
       <div>
         <h3>{t("notifications.general.title")}</h3>
-        <div>
-          <label>
-            {t("notifications.general.news-updates")}
-            <GVSwitch
-              name="PlatformNewsAndUpdates"
-              value={PlatformNewsAndUpdates}
-              disabled={this.state.isPendingPlatformNewsAndUpdates}
-              color="primary"
-              onChange={this.handleSwitch}
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            {t("notifications.general.emergency")}
-            <GVSwitch
-              name="PlatformEmergency"
-              value={PlatformEmergency}
-              disabled={this.state.isPendingPlatformEmergency}
-              color="primary"
-              onChange={this.handleSwitch}
-            />
-          </label>
-        </div>
+        <GeneralNotification
+          name="PlatformNewsAndUpdates"
+          label={t("notifications.general.news-updates")}
+          programId={programId}
+          setting={PlatformNewsAndUpdates}
+          addNotification={this.props.services.addNotificationSettingService}
+          removeNotification={
+            this.props.services.removeNotificationSettingService
+          }
+        />
+        <GeneralNotification
+          name="PlatformEmergency"
+          label={t("notifications.general.emergency")}
+          programId={programId}
+          setting={PlatformEmergency}
+          addNotification={this.props.services.addNotificationSettingService}
+          removeNotification={
+            this.props.services.removeNotificationSettingService
+          }
+        />
       </div>
     );
   }
 }
 
 NotificationGeneral.propTypes = {
-  settings: settingsProps
+  settings: settingsProps,
+  services: PropTypes.shape({
+    removeNotificationSettingService: PropTypes.func,
+    addNotificationSettingService: PropTypes.func
+  })
 };
 
 NotificationGeneral.defaultProps = {
@@ -93,7 +58,7 @@ NotificationGeneral.defaultProps = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  service: bindActionCreators(
+  services: bindActionCreators(
     { removeNotificationSettingService, addNotificationSettingService },
     dispatch
   )

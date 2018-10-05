@@ -1,4 +1,4 @@
-import { GVSwitch } from "gv-react-components";
+import GeneralNotification from "components/general-notification/general-notification";
 import { settingsProps } from "modules/notification-settings/notification-settings";
 import {
   addProgramNotificationService,
@@ -9,101 +9,44 @@ import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
-import notificationsApi from "services/api-client/notifications-api";
-import authService from "services/auth-service";
-
-export const notificationTypes = PropTypes.oneOf([
-  "PlatformNewsAndUpdates",
-  "PlatformEmergency",
-  "PlatformOther",
-  "ProfileUpdated",
-  "ProfilePwdUpdated",
-  "ProfileVerification",
-  "Profile2FA",
-  "ProfileSecurity",
-  "ProgramNewsAndUpdates",
-  "ProgramEndOfPeriod",
-  "ProgramCondition",
-  "ManagerNewProgram"
-]);
 
 class ProgramNotificationsGeneral extends Component {
-  state = {
-    isPendingProgramNewsAndUpdates: false,
-    isPendingProgramEndOfPeriod: false
-  };
-
-  handleSwitch = event => {
-    const { target } = event;
-    if (!this.props.settings[target.name]) {
-      this.addNotification(target.name);
-    } else {
-      this.removeNotification(target.name);
-    }
-  };
-
-  getPendingName = type => {
-    return [`isPending${type}`];
-  };
-
-  addNotification = type => {
-    const isPending = this.getPendingName(type);
-    this.setState({ [isPending]: true });
-    this.props.services
-      .addProgramNotificationService({
-        type,
-        programId: this.props.programId
-      })
-      .finally(() => this.setState({ [isPending]: false }));
-  };
-
-  removeNotification = type => {
-    const isPending = this.getPendingName(type);
-    this.setState({ [isPending]: true });
-    this.props.services
-      .removeProgramNotificationService(
-        this.props.settings[type].id,
-        this.props.programId
-      )
-      .finally(() => this.setState({ [isPending]: false }));
-  };
-
   render() {
-    const { t, settings } = this.props;
+    const { t, settings, programId } = this.props;
     return (
       <div>
         <h3>{t("notifications.program.general.title")}</h3>
-        <div>
-          <label>
-            {t("notifications.program.general.news-updates")}
-            <GVSwitch
-              name="ProgramNewsAndUpdates"
-              value={settings.ProgramNewsAndUpdates}
-              disabled={this.state.isPendingProgramNewsAndUpdates}
-              color="primary"
-              onChange={this.handleSwitch}
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            {t("notifications.program.general.end-of-period")}
-            <GVSwitch
-              name="ProgramEndOfPeriod"
-              value={settings.ProgramEndOfPeriod}
-              disabled={this.state.isPendingProgramEndOfPeriod}
-              color="primary"
-              onChange={this.handleSwitch}
-            />
-          </label>
-        </div>
+        <GeneralNotification
+          name="ProgramNewsAndUpdates"
+          label={t("notifications.program.general.news-updates")}
+          programId={programId}
+          setting={settings.ProgramNewsAndUpdates}
+          addNotification={this.props.services.addProgramNotificationService}
+          removeNotification={
+            this.props.services.removeProgramNotificationService
+          }
+        />
+        <GeneralNotification
+          name="ProgramEndOfPeriod"
+          label={t("notifications.program.general.end-of-period")}
+          programId={programId}
+          setting={settings.ProgramEndOfPeriod}
+          addNotification={this.props.services.addProgramNotificationService}
+          removeNotification={
+            this.props.services.removeProgramNotificationService
+          }
+        />
       </div>
     );
   }
 }
 
 ProgramNotificationsGeneral.propTypes = {
-  settings: settingsProps
+  settings: settingsProps,
+  services: PropTypes.shape({
+    addProgramNotificationService: PropTypes.func,
+    removeProgramNotificationService: PropTypes.func
+  })
 };
 
 ProgramNotificationsGeneral.defaultProps = {

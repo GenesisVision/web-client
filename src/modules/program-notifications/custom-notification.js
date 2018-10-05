@@ -1,21 +1,26 @@
-import {
-  GVButton,
-  GVFormikField,
-  GVSwitch,
-  GVTextField
-} from "gv-react-components";
-import PropTypes from "prop-types";
+import "./custom-notification.scss";
+
+import { GVButton, GVSwitch, GVTextField } from "gv-react-components";
+import { removeProgramNotificationService } from "modules/program-notifications/services/program-notifications.services";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { bindActionCreators, compose } from "redux";
 
 class CustomNotification extends Component {
   state = {
     isPending: false
   };
-  handleSwitch = () => {
-    console.info("hello");
+  handleSwitch = () => {};
+  handleDelete = () => {
+    this.setState({ isPending: true });
+    this.props.services
+      .removeProgramNotificationService(
+        this.props.settings.id,
+        this.props.settings.programId
+      )
+      .finally(() => this.setState({ isPending: false }));
   };
   render() {
     const { t, settings } = this.props;
@@ -24,7 +29,7 @@ class CustomNotification extends Component {
         <label>
           <GVSwitch
             name={settings.type}
-            value={settings.isEnabled || true}
+            value={true}
             disabled={this.state.isPending}
             color="primary"
             onChange={this.handleSwitch}
@@ -33,12 +38,19 @@ class CustomNotification extends Component {
         </label>
         <GVTextField
           name="conditionAmount"
+          value={settings.conditionAmount}
+          disabled
           label={t("notifications.program.create.amount-label")}
           adornment="%"
           autoComplete="off"
           InputComponent={NumberFormat}
         />
-        <GVButton variant="text" color="secondary">
+        <GVButton
+          variant="text"
+          color="secondary"
+          disabled={this.state.isPending}
+          onClick={this.handleDelete}
+        >
           {t("buttons.delete")}
         </GVButton>
       </div>
@@ -47,5 +59,13 @@ class CustomNotification extends Component {
 }
 
 CustomNotification.propTypes = {};
-
-export default translate()(CustomNotification);
+const mapStateToProps = dispatch => ({
+  services: bindActionCreators({ removeProgramNotificationService }, dispatch)
+});
+export default compose(
+  translate(),
+  connect(
+    undefined,
+    mapStateToProps
+  )
+)(CustomNotification);
