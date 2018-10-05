@@ -1,5 +1,6 @@
 import NotificationEntity from "modules/notification-settings/notification-entity";
 import { PROGRAM_NOTIFICATIONS_ROUTE } from "pages/notifications/notifications.routes";
+import { composeProgramNotificationsUrl } from "pages/programs/program-details/components/program-details-description-section/program-details-description/program-details-description";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
@@ -10,9 +11,7 @@ class NotificationPrograms extends Component {
     const { t, settings } = this.props;
     if (settings.length === 0) return null;
     const items = settings.map(setting => {
-      const href = replaceParams(PROGRAM_NOTIFICATIONS_ROUTE, {
-        ":id": setting.url
-      });
+      const href = composeProgramNotificationsUrl(settings.url);
       return (
         <NotificationEntity
           href={href}
