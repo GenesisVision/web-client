@@ -520,5 +520,12 @@
       "end": "End",
       "today": "Today"
     }
+  },
+  "profile": {
+    "settings": {
+      "profile-image": "Profile image",
+      "image-requirements": "At least 300 x 300px PNG or JPG file.",
+      "save-photo": "Save photo"
+    }
   }
 }

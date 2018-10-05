@@ -1,0 +1,21 @@
+.profile-settings {
+  &__content {
+    display: flex;
+    flex-direction: row;
+
+    & h3 {
+      text-transform: uppercase;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.4px;
+      margin-bottom: 30px;
+      margin-top: 16px;
+    }
+
+    & .two-factor,
+    & .profile-image {
+      min-width: 340px;
+      margin-right: 20px;
+    }
+  }
+}
