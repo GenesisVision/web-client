@@ -484,7 +484,24 @@
     "favorite-programs": "Favorite programs",
     "portfolio-events": {
       "title": "Portfolio Events",
-      "see-all-button": "See All"
+      "see-all-button": "See All",
+      "table-title": "Operations",
+      "table-header": {
+        "date": "Date",
+        "type": "Type",
+        "description": "Description",
+        "amount": "Amount, GVT"
+      },
+      "types": {
+        "all": "All",
+        "invest": "Invest",
+        "withdraw": "Withdraw",
+        "profit": "Profit",
+        "loss": "Loss",
+        "reinvest": "Reinvest",
+        "canceled": "Canceled",
+        "ended": "Ended"
+      }
     }
   },
   "program-deposit": {
