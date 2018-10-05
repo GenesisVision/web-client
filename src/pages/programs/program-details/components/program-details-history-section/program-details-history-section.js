@@ -7,14 +7,27 @@ import { translate } from "react-i18next";
 
 import ProgramTrades from "./program-trades/program-trades";
 
+const TRADES_TAB = "trades";
+const EVENTS_TAB = "events";
 class ProgramDetailsHistorySection extends PureComponent {
   state = {
-    tab: "trades"
+    tab: TRADES_TAB,
+    tradesData: { data: null, isPending: true },
+    prevProps: null
   };
 
   handleTabChange = (e, tab) => {
     this.setState({ tab });
   };
+
+  static getDerivedStateFromProps(props, state) {
+    let newState = {};
+    if (state.prevProps !== props) {
+      newState.prevProps = props;
+      newState.tradesData = props.tradesData;
+    }
+    return newState;
+  }
 
   render() {
     const { tab } = this.state;
@@ -36,14 +49,14 @@ class ProgramDetailsHistorySection extends PureComponent {
           </GVTabs>
         </div>
         <div>
-          {tab === "trades" && (
+          {tab === TRADES_TAB && (
             <ProgramTrades
               trades={tradesData.data}
               programId={programId}
               currency={currency}
             />
           )}
-          {tab === "events" && "Events"}
+          {tab === EVENTS_TAB && "Events"}
         </div>
       </Surface>
     );
