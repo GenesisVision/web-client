@@ -43,7 +43,15 @@
     "general": {
       "title": "GENERAL",
       "news-updates": "News and updates",
-      "emergency": "Emergency notifications"
+      "emergency": "Emergency notifications",
+      "PlatformEmergency": {
+        "enabled-alert": "Enabled emergency notifications",
+        "disabled-alert": "Disabled emergency notifications"
+      },
+      "PlatformNewsAndUpdates": {
+        "enabled-alert": "Enabled new and updates notifications",
+        "disabled-alert": "Disabled new and updates notifications"
+      }
     },
     "programs": "PROGRAMS",
     "program": {

@@ -1,5 +1,4 @@
 import GeneralNotification from "components/general-notification/general-notification";
-import { GVSwitch } from "gv-react-components";
 import { settingsProps } from "modules/notification-settings/notification-settings";
 import {
   addNotificationSettingService,
@@ -10,10 +9,32 @@ import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
-import notificationsApi from "services/api-client/notifications-api";
-import authService from "services/auth-service";
+import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
 class NotificationGeneral extends Component {
+  success = text => {
+    const { dispatch } = this.props;
+    dispatch(alertMessageActions.success(text));
+  };
+
+  handleAdd = options => {
+    const { services, t } = this.props;
+    return services
+      .addNotificationSettingService(options)
+      .then(() =>
+        this.success(t(`notifications.general.${options.type}.enabled-alert`))
+      );
+  };
+
+  handleRemove = options => {
+    const { services, t } = this.props;
+    return services
+      .removeNotificationSettingService("options.id")
+      .then(() =>
+        this.success(t(`notifications.general.${options.type}.disabled-alert`))
+      );
+  };
+
   render() {
     const { t, settings } = this.props;
     const { PlatformNewsAndUpdates, PlatformEmergency, programId } = settings;
@@ -25,20 +46,16 @@ class NotificationGeneral extends Component {
           label={t("notifications.general.news-updates")}
           programId={programId}
           setting={PlatformNewsAndUpdates}
-          addNotification={this.props.services.addNotificationSettingService}
-          removeNotification={
-            this.props.services.removeNotificationSettingService
-          }
+          addNotification={this.handleAdd}
+          removeNotification={this.handleRemove}
         />
         <GeneralNotification
           name="PlatformEmergency"
           label={t("notifications.general.emergency")}
           programId={programId}
           setting={PlatformEmergency}
-          addNotification={this.props.services.addNotificationSettingService}
-          removeNotification={
-            this.props.services.removeNotificationSettingService
-          }
+          addNotification={this.handleAdd}
+          removeNotification={this.handleRemove}
         />
       </div>
     );
@@ -61,7 +78,8 @@ const mapDispatchToProps = dispatch => ({
   services: bindActionCreators(
     { removeNotificationSettingService, addNotificationSettingService },
     dispatch
-  )
+  ),
+  dispatch
 });
 
 export default compose(

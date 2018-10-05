@@ -25,13 +25,17 @@ class GeneralNotification extends Component {
         type: this.props.name,
         programId: this.props.programId
       })
-      .finally(() => this.setState({ isPending: false }));
+      .finally(a => console.info(a) || this.setState({ isPending: false }));
   };
 
   removeNotification = () => {
     this.setState({ isPending: true });
     this.props
-      .removeNotification(this.props.setting.id, this.props.programId)
+      .removeNotification({
+        id: this.props.setting.id,
+        programId: this.props.programId,
+        type: this.props.name
+      })
       .finally(() => this.setState({ isPending: false }));
   };
 
