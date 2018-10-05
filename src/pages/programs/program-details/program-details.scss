@@ -1,5 +1,57 @@
+@import "styles/_colors.scss";
+
+$padding: 20px;
+$title-size: 16px;
+$large-font-size: 14px;
+$middle-font-size: 13px;
+$small-font-size: 12px;
 .program-details {
   &__section {
     margin-bottom: 32px;
+  }
+}
+
+.popover-levels {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: #25434d;
+  &__block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: $padding;
+  }
+  &__title, &__subtitle, &__text {
+    padding: $padding/2 0;
+  }
+  &__title, &__subtitle, &__text, &__balance, &__text {
+    word-wrap: break-word;
+    max-width: 165px;
+  }
+  &__title {
+    font-size: $title-size;
+    color: $primary-color;
+    font-weight: bold;
+  }
+  &__subtitle {
+    font-size: $large-font-size;
+    opacity: 0.4;
+  }
+  &__balance {
+    font-weight: bold;
+  }
+  &__text {
+    font-size: $middle-font-size;
+    opacity: 0.4;
+    line-height: 1.54;
+    letter-spacing: 0.3px;
+  }
+  &__about {
+    padding: $padding/2 0;
+    font-size: $small-font-size;
+    font-weight: 600;
+    line-height: 1.67;
+    letter-spacing: 0.3px;
   }
 }
