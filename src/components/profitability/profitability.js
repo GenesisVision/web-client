@@ -83,9 +83,7 @@ Profitability.propTypes = {
   isPositive: PropTypes.bool,
   isNegative: PropTypes.bool,
   form: PropTypes.string,
-  prefix: PropTypes.oneOf(Object.keys(PREFIXES)),
-  positiveSymbol: PropTypes.string,
-  negativeSymbol: PropTypes.string
+  prefix: PropTypes.oneOf(Object.keys(PREFIXES))
 };
 
 export default Profitability;
