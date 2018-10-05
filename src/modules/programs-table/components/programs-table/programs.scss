@@ -90,15 +90,7 @@ $description-block-width: 250px;
     font-weight: 100;
   }
   &__profit {
-    font-size: $text-size/1.5;
-    font-weight: 600;
-    border-radius: 19.5px;
-    background-color: $separator-color;
-    padding: 5px 13px;
     margin-bottom: 8px;
-    &--positive{
-      background-color: $success;
-    }
   }
   &__row {
     display: flex;
