@@ -131,6 +131,7 @@ class ProgramCard extends Component {
                 <NumberFormat
                   value={program.statistic.profitPercent}
                   suffix="%"
+                  allowNegative={false}
                   decimalScale={2}
                   displayType="text"
                 />
