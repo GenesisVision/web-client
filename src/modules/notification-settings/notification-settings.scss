@@ -30,6 +30,7 @@
   letter-spacing: 0.2px;
   padding: 11px 16px;
   border-radius: $border-radius;
+  margin: 0 -16px;
 
   &:hover {
     background-color: $secondary-background-color;
@@ -48,5 +49,13 @@
 
   &__count {
     margin-left: auto;
+  }
+}
+
+.program-notification {
+  &__list {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
   }
 }

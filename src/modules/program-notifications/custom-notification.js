@@ -1,7 +1,10 @@
 import "./custom-notification.scss";
 
 import { GVButton, GVSwitch, GVTextField } from "gv-react-components";
-import { removeProgramNotificationService } from "modules/program-notifications/services/program-notifications.services";
+import {
+  removeProgramNotificationService,
+  toggleProgramNotificationsService
+} from "modules/program-notifications/services/program-notifications.services";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
@@ -13,7 +16,16 @@ class CustomNotification extends Component {
   state = {
     isPending: false
   };
-  handleSwitch = () => {};
+  handleSwitch = () => {
+    this.setState({ isPending: true });
+    this.props.services
+      .toggleProgramNotificationsService({
+        id: this.props.settings.id,
+        programId: this.props.settings.programId,
+        enabled: !Boolean(this.props.settings.isEnabled)
+      })
+      .finally(() => this.setState({ isPending: false }));
+  };
   handleDelete = () => {
     this.setState({ isPending: true });
     this.props.services
@@ -31,7 +43,7 @@ class CustomNotification extends Component {
           <GVSwitch
             className="notification-setting__switch"
             name={settings.type}
-            value={true}
+            value={settings.isEnabled}
             disabled={this.state.isPending}
             color="primary"
             onChange={this.handleSwitch}
@@ -66,12 +78,16 @@ class CustomNotification extends Component {
 
 CustomNotification.propTypes = {
   services: PropTypes.shape({
-    removeProgramNotificationService: PropTypes.func
+    removeProgramNotificationService: PropTypes.func,
+    toggleProgramNotificationsService: PropTypes.func
   })
 };
 
 const mapStateToProps = dispatch => ({
-  services: bindActionCreators({ removeProgramNotificationService }, dispatch)
+  services: bindActionCreators(
+    { removeProgramNotificationService, toggleProgramNotificationsService },
+    dispatch
+  )
 });
 
 export default compose(

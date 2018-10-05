@@ -4,7 +4,8 @@ import {
 } from "modules/notification-settings/actions/notification-settings.actions";
 import {
   addProgramNotifications,
-  fetchProgramNotifications
+  fetchProgramNotifications,
+  toggleProgramNotifications
 } from "modules/program-notifications/actions/program-notifications.actions";
 
 export const fetchProgramNotificationsService = id => dispatch => {
@@ -21,6 +22,16 @@ export const addProgramNotificationService = opts => dispatch => {
 
 export const removeProgramNotificationService = (id, programId) => dispatch => {
   return dispatch(removeNotificationSetting(id)).then(() =>
+    dispatch(fetchProgramNotificationsService(programId))
+  );
+};
+
+export const toggleProgramNotificationsService = ({
+  id,
+  enabled,
+  programId
+}) => dispatch => {
+  return dispatch(toggleProgramNotifications(id, enabled)).then(() =>
     dispatch(fetchProgramNotificationsService(programId))
   );
 };
