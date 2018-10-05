@@ -143,7 +143,7 @@ class ProgramTableRowDetailed extends Component {
                     <div className="program-detailed__statistic-data--label">
                       {t("programs-page.programs-header.profit")}
                     </div>
-                    <div className="program-detailed__statistic-data--value--positive">
+                    <div className="program-detailed__statistic-data--value">
                       <Profitability
                         value={program.statistic.profitPercent}
                         prefix="SCIENCE"
