@@ -4,7 +4,7 @@ import { combineReducers } from "redux";
 import { ACCOUNT_CURRENCY_KEY } from "shared/middlewares/update-account-settings-middleware/update-account-settings-middleware";
 import { loadData } from "utils/localstorage";
 
-const initialCurrency = loadData(ACCOUNT_CURRENCY_KEY) || "GVT";
+const initialCurrency = loadData(ACCOUNT_CURRENCY_KEY) || "BTC";
 
 const accountCurrencyReducer = (currency = initialCurrency, action) => {
   if (action.type === UPDATE_ACCOUNT_SETTINGS) {

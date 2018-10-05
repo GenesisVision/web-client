@@ -1,4 +1,4 @@
-import { SET_FAVORITE_PROGRAM } from "modules/favorite-program/actions/favorite-program.actions";
+import { SET_FAVORITE_PROGRAM } from "modules/favorite-asset/actions/favorite-program.actions";
 import {
   FAILURE_SUFFIX,
   REQUEST_SUFFIX

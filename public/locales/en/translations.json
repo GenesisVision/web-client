@@ -2,6 +2,9 @@
   "app": {
     "title": "Investor Portal: "
   },
+  "alerts": {
+    "clear-all": "Clear all"
+  },
   "deposit-program": {
     "title": "Invest",
     "available-to-invest": "Available to invest in program",
@@ -69,6 +72,7 @@
   "navigation": {
     "dashboard": "Dashboard",
     "programs": "Programs",
+    "funds": "Funds",
     "search": "Search",
     "personal-details": "Personal details",
     "wallet": "Wallet",
@@ -227,12 +231,18 @@
     "Ended": "Ended"
   },
   "chart-period": {
-    "day": "1D",
-    "week": "1W",
-    "month": "1M",
-    "quarter": "3M",
-    "year": "1Y",
-    "all": "All"
+    "day-short": "1D",
+    "day": "a Day",
+    "week-short": "1W",
+    "week": "a Week",
+    "month-short": "1M",
+    "month": "a Month",
+    "quarter-short": "3M",
+    "quarter": "a Quarter",
+    "year-short": "1Y",
+    "year": "a Year",
+    "all-short": "All",
+    "all": "All Time"
   },
   "manager": {
     "about": "About",
@@ -247,12 +257,28 @@
     },
     "programs-header": {
       "title": "Name",
-      "balance": "Balance, gvt.",
+      "balance": "Balance",
       "currency": "Curr.",
       "investors": "Investors",
       "available-to-invest": "Av. to invest",
       "trades": "Trades",
       "period": "Period",
+      "drawdown": "D.down",
+      "profit": "Profit",
+      "chart": "Chart"
+    }
+  },
+  "funds-page": {
+    "title": "Funds",
+    "tabs": {
+      "explore": "Explore",
+      "favorites": "Favorites"
+    },
+    "funds-header": {
+      "title": "Name",
+      "balance": "Balance",
+      "assets": "Assets",
+      "investors": "Investors",
       "drawdown": "D.down",
       "profit": "Profit",
       "chart": "Chart"
@@ -295,12 +321,15 @@
     },
     "statistics": {
       "heading": "Statistics",
+      "current": "Current",
+      "for": "For",
       "balance": "Balance",
       "investors": "Investors",
       "trades": "Trades",
       "success-trades": "Success trades",
       "profit-factor": "Profit factor",
       "sharpe-ratio": "Sharpe ratio",
+      "sortino-ratio": "Sortino ratio",
       "max-drawdown": "Max Drawdown",
       "start-day": "Start day",
       "period-end": "Period end",
@@ -337,7 +366,8 @@
   },
   "program-actions": {
     "invest": "Invest",
-    "withdraw": "Withdraw"
+    "withdraw": "Withdraw",
+    "details": "Details"
   },
   "program-statistic": {
     "manager-share": {
@@ -510,6 +540,13 @@
       "start": "Start",
       "end": "End",
       "today": "Today"
+    }
+  },
+  "profile": {
+    "settings": {
+      "profile-image": "Profile image",
+      "image-requirements": "At least 300 x 300px PNG or JPG file.",
+      "save-photo": "Save photo"
     }
   }
 }

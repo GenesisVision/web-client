@@ -1,15 +1,26 @@
+import FacetCards from "components/facet-cards/facet-cards";
+import FacetCardsStub from "components/facet-cards/facet-cards-stub";
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import replaceParams from "utils/replace-params";
 
-import FacetCards from "./facet-cards";
-import FacetCardsStub from "./facet-cards-stub";
+import {
+  PROGRAMS_FACET_ROUTE,
+  PROGRAM_SLUG_URL_PARAM_NAME
+} from "../../../programs.routes";
 
 class FacetCardsContainer extends Component {
+  composeFacetUrl = url => {
+    return replaceParams(PROGRAMS_FACET_ROUTE, {
+      [`:${PROGRAM_SLUG_URL_PARAM_NAME}`]: url
+    });
+  };
   render() {
     const { isPending, facets } = this.props;
-    if (!facets) return null;
-    if (isPending) return <FacetCardsStub />;
-    return <FacetCards facets={facets} />;
+    if (!facets || isPending) return <FacetCardsStub />;
+    return (
+      <FacetCards facets={facets} composeFacetUrl={this.composeFacetUrl} />
+    );
   }
 }
 

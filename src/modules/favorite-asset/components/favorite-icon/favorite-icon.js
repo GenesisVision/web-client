@@ -7,7 +7,7 @@ import React, { Component } from "react";
 class FavoriteIcon extends Component {
   handleClick = e => {
     e.stopPropagation();
-    this.props.toggleSelected(this.props.programId, this.props.selected);
+    this.props.toggleSelected(this.props.id, this.props.selected);
   };
 
   render() {
@@ -30,6 +30,7 @@ class FavoriteIcon extends Component {
 }
 
 FavoriteIcon.propTypes = {
+  id: PropTypes.string,
   className: PropTypes.string,
   selected: PropTypes.bool.isRequired,
   toggleSelected: PropTypes.func.isRequired
