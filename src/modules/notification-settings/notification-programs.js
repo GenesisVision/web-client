@@ -11,7 +11,7 @@ class NotificationPrograms extends Component {
     const { t, settings } = this.props;
     if (settings.length === 0) return null;
     const items = settings.map(setting => {
-      const href = composeProgramNotificationsUrl(settings.url);
+      const href = composeProgramNotificationsUrl(setting.url);
       return (
         <NotificationEntity
           href={href}

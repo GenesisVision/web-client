@@ -1,25 +1,18 @@
+import { fetchProgramNotificationsService } from "modules/program-notifications/services/program-notifications.services";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import notificationsApi from "services/api-client/notifications-api";
-import authService from "services/auth-service";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 import ProgramNotifications from "./program-notifications";
 
 class ProgramNotificationsContainer extends Component {
-  state = {
-    program: null
-  };
   componentDidMount() {
-    notificationsApi
-      .v10NotificationsSettingsProgramsByIdGet(
-        this.props.id,
-        authService.getAuthArg()
-      )
-      .then(program => this.setState({ program }));
+    this.props.services.fetchProgramNotificationsService(this.props.id);
   }
 
   render() {
-    const { program } = this.state;
+    const { program } = this.props;
     if (!program) return null;
     return <ProgramNotifications program={program} />;
   }
@@ -29,4 +22,15 @@ ProgramNotificationsContainer.propTypes = {
   id: PropTypes.string
 };
 
-export default ProgramNotificationsContainer;
+const mapStateToProps = (state, props) => ({
+  program: state.programNotifications[props.id]
+});
+
+const mapDispatchToProps = dispatch => ({
+  services: bindActionCreators({ fetchProgramNotificationsService }, dispatch)
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProgramNotificationsContainer);

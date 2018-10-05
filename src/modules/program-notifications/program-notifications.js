@@ -6,13 +6,25 @@ import { translate } from "react-i18next";
 import ProgramNotificationsGeneral from "./program-notificatations-general";
 
 class ProgramNotifications extends Component {
+  getGeneralSettings = () => {
+    return this.props.program.settingsGeneral.reduce((acc, setting) => {
+      acc[setting.type] = setting;
+      return acc;
+    }, {});
+  };
   render() {
     const { t, program } = this.props;
     return (
       <div>
         <h3>{program.title}</h3>
-        <ProgramNotificationsGeneral settings={program.settingsGeneral} />
-        <ProgramNotificationsCustom settings={program.settingsCustom} />
+        <ProgramNotificationsGeneral
+          settings={this.getGeneralSettings()}
+          programId={program.programId}
+        />
+        <ProgramNotificationsCustom
+          settings={program.settingsCustom}
+          programId={program.programId}
+        />
       </div>
     );
   }
