@@ -41,7 +41,7 @@ $padding: 33px;
     justify-content: flex-end;
     width: 100%;
     align-items: center;
-    padding-bottom: 0;
+    padding: 0 $padding/2 $padding/2;
   }
 
   &__toggle {

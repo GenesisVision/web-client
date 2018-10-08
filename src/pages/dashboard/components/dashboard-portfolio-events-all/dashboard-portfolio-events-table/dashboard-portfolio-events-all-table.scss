@@ -4,8 +4,8 @@
 $middle-padding: 33px;
 $large-padding: 42px;
 
-.portfolio-events-all {
-  padding: $large-padding 0;
+.portfolio-events-all-table {
+  padding-top: $large-padding;
   &__row:nth-child(2n + 1) {
     background-color: $table-background-subcolor;
   }
