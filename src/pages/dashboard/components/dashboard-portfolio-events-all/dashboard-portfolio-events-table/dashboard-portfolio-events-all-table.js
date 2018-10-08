@@ -26,11 +26,11 @@ import {
 
 class PortfolioEventsTableComponent extends Component {
   render() {
-    const { t, filtering } = this.props;
+    const { t, filtering, title } = this.props;
     return (
       <Surface className="portfolio-events">
         <TableModule
-          title={t("dashboard.portfolio-events.table-title")}
+          title={title}
           defaultFilters={PORTFOLIO_EVENTS_FILTERS}
           getItems={fetchPortfolioEvents}
           filtering={filtering}

@@ -21,7 +21,9 @@ const PortfolioEventsAllComponent = ({ service, t }) => {
         <h1 className="dashboard-portfolio-events-all__heading">
           {t("dashboard.portfolio-events.title")}
         </h1>
-        <PortfolioEventsTableComponent />
+        <PortfolioEventsTableComponent
+          title={t("dashboard.portfolio-events.table-title")}
+        />
       </div>
     </Page>
   );
