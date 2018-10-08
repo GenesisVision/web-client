@@ -26,17 +26,17 @@ import {
 
 class PortfolioEventsTableComponent extends Component {
   render() {
-    const { t } = this.props;
+    const { t, filtering } = this.props;
     return (
       <Surface className="portfolio-events">
         <TableModule
           title={t("dashboard.portfolio-events.table-title")}
           defaultFilters={PORTFOLIO_EVENTS_FILTERS}
           getItems={fetchPortfolioEvents}
-          filtering={PORTFOLIO_EVENTS_DEFAULT_FILTERING}
+          filtering={filtering}
           renderFilters={(updateFilter, filtering) => (
             <Fragment>
-              {PORTFOLIO_EVENTS_DEFAULT_FILTERING["type"] && (
+              {filtering["type"] && (
                 <SelectFilter
                   name={EVENT_TYPE_FILTER_NAME}
                   label="Type"
@@ -45,7 +45,7 @@ class PortfolioEventsTableComponent extends Component {
                   onChange={updateFilter}
                 />
               )}
-              {PORTFOLIO_EVENTS_DEFAULT_FILTERING["assetType"] && (
+              {filtering["assetType"] && (
                 <SelectFilter
                   name="assetType"
                   label="Assets type"
@@ -54,7 +54,7 @@ class PortfolioEventsTableComponent extends Component {
                   onChange={updateFilter}
                 />
               )}
-              {PORTFOLIO_EVENTS_DEFAULT_FILTERING["dateRange"] && (
+              {filtering["dateRange"] && (
                 <DateRangeFilter
                   name={DATE_RANGE_FILTER_NAME}
                   value={filtering["dateRange"]}
@@ -105,5 +105,9 @@ class PortfolioEventsTableComponent extends Component {
     );
   }
 }
+
+PortfolioEventsTableComponent.defaultProps = {
+  filtering: PORTFOLIO_EVENTS_DEFAULT_FILTERING
+};
 
 export default translate()(PortfolioEventsTableComponent);
