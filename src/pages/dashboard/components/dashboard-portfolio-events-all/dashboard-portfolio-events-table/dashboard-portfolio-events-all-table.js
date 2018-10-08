@@ -5,7 +5,6 @@ import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import Profitability from "components/profitability/profitability";
-import Surface from "components/surface/surface";
 import { TableCell, TableRow } from "modules/table/components";
 import DateRangeFilter from "modules/table/components/filtering/date-range-filter/date-range-filter";
 import SelectFilter from "modules/table/components/filtering/select-filter/select-filter";
@@ -26,9 +25,9 @@ import {
 
 class PortfolioEventsTableComponent extends Component {
   render() {
-    const { t, filtering, title } = this.props;
+    const { t, filtering, title, className } = this.props;
     return (
-      <Surface className="portfolio-events">
+      <div className={className}>
         <TableModule
           title={title}
           defaultFilters={PORTFOLIO_EVENTS_FILTERS}
@@ -67,7 +66,7 @@ class PortfolioEventsTableComponent extends Component {
           columns={PORTFOLIO_EVENTS_COLUMNS}
           renderHeader={column => (
             <span
-              className={`portfolio-events__cell portfolio-events__cell--${
+              className={`portfolio-events-all__cell portfolio-events-all__cell--${
                 column.name
               }`}
             >
@@ -75,21 +74,21 @@ class PortfolioEventsTableComponent extends Component {
             </span>
           )}
           renderBodyRow={event => (
-            <TableRow className="portfolio-events__row">
-              <TableCell className="portfolio-events__cell portfolio-events__cell--date">
+            <TableRow className="portfolio-events-all__row">
+              <TableCell className="portfolio-events-all__cell portfolio-events-all__cell--date">
                 {moment(event.date).format("DD-MM-YYYY, hh:mm a")}
               </TableCell>
-              <TableCell className="portfolio-events__cell portfolio-events__cell--type">
+              <TableCell className="portfolio-events-all__cell portfolio-events-all__cell--type">
                 {t(
                   `dashboard.portfolio-events.types.${
                     PORTFOLIO_EVENTS_TYPES_ENUM[event.type]
                   }`
                 )}
               </TableCell>
-              <TableCell className="portfolio-events__cell portfolio-events__cell--type">
+              <TableCell className="portfolio-events-all__cell portfolio-events-all__cell--type">
                 {event.title}
               </TableCell>
-              <TableCell className="portfolio-events__cell portfolio-events__cell--amount">
+              <TableCell className="portfolio-events-all__cell portfolio-events-all__cell--amount">
                 <Profitability value={event.value}>
                   <NumberFormat
                     value={Math.abs(event.value)}
@@ -101,7 +100,7 @@ class PortfolioEventsTableComponent extends Component {
             </TableRow>
           )}
         />
-      </Surface>
+      </div>
     );
   }
 }

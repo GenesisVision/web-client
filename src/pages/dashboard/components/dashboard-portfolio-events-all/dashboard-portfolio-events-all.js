@@ -8,6 +8,7 @@ import { translate } from "react-i18next";
 import Page from "components/page/page";
 import PortfolioEventsTableComponent from "./dashboard-portfolio-events-table/dashboard-portfolio-events-all-table";
 import PortfolioEventsAllNavigation from "./dashboard-portfolio-events-all-navigation";
+import Surface from "components/surface/surface";
 
 export const PORTFOLIO_EVENTS_ALL_PAGE_ROUTE = "portfolio-events";
 const PortfolioEventsAllComponent = ({ service, t }) => {
@@ -21,9 +22,12 @@ const PortfolioEventsAllComponent = ({ service, t }) => {
         <h1 className="dashboard-portfolio-events-all__heading">
           {t("dashboard.portfolio-events.title")}
         </h1>
-        <PortfolioEventsTableComponent
-          title={t("dashboard.portfolio-events.table-title")}
-        />
+        <Surface>
+          <PortfolioEventsTableComponent
+            title={t("dashboard.portfolio-events.table-title")}
+            className="portfolio-events-all"
+          />
+        </Surface>
       </div>
     </Page>
   );
