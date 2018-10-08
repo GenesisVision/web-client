@@ -110,11 +110,7 @@ class ProgramCard extends Component {
           </div>
           <div className="programs-cards__chart-info">
             <div className="programs-cards__profit">
-              <Profitability
-                value={program.statistic.profitPercent}
-                form="CHIPS"
-                prefix="ARROW"
-              >
+              <Profitability value={program.statistic.profitPercent} className="chips" prefix="ARROW">
                 <NumberFormat
                   value={program.statistic.profitPercent}
                   suffix="%"
