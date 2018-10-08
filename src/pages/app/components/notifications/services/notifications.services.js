@@ -30,7 +30,6 @@ export const serviceGetNotifications = () => (dispatch, getState) => {
     dispatch(addTotalNotifications(value.total));
     dispatch(addNotifications(value.notifications));
     dispatch(setNotificationsOptions(options));
-    dispatch(fetchProfileHeaderInfo());
   });
 };
 
@@ -38,4 +37,5 @@ export const serviceClearNotifications = () => dispatch => {
   dispatch(clearNotifications());
   dispatch(addTotalNotifications(0));
   dispatch(setNotificationsOptions(calculate()));
+  dispatch(fetchProfileHeaderInfo());
 };
