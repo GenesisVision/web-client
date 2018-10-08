@@ -4,6 +4,7 @@ import Chip from "components/chip/chip";
 import { ControlsIcon } from "components/icon/icon";
 import { RingIcon } from "components/icon/ring-icon";
 import InfinityScroll from "components/infinity-scroll/inifinity-scroll";
+import Spinner from "components/spiner/spiner";
 import moment from "moment";
 import NotificationsGroup from "pages/app/components/notifications/components/notification-group/notification-group";
 import { notificationProps } from "pages/app/components/notifications/components/notification/notification";
@@ -12,7 +13,6 @@ import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
 
-//TODO: отрефакторить
 class Notifications extends Component {
   state = {
     isPending: false
@@ -20,7 +20,7 @@ class Notifications extends Component {
 
   fetchNotification = () => {
     this.setState({ isPending: true });
-    this.props.fetchNotifications().then(data => {
+    this.props.fetchNotifications().then(() => {
       this.setState({ isPending: false });
     });
   };
@@ -54,21 +54,28 @@ class Notifications extends Component {
 
   sortGroups = (a, b) => b - a;
 
+  componentDidMount() {
+    this.fetchNotification();
+  }
+
+  componentWillUnmount() {
+    this.props.clearNotifications();
+  }
+
   render() {
     const { t } = this.props;
-    const { count, notifications, total } = this.props;
+    const { notifications, total, count } = this.props;
     const groups = this.getGroups(notifications);
+    const hasMore = total > notifications.length;
+    const hasNotifications = count > 0;
     return (
       <div className="notifications">
-        <InfinityScroll
-          onLoad={this.fetchNotification}
-          disabled={this.state.isPending}
-        >
+        <InfinityScroll loadMore={this.fetchNotification} hasMore={hasMore}>
           <div className="notifications__header">
             <RingIcon />
             {t("notifications-aside.header")}
             <div className="notifications__count">
-              <Chip type="negative">{count}</Chip>
+              <Chip type={hasNotifications ? "negative" : null}>{count}</Chip>
             </div>
             <Link to={"/notifications"}>
               <div className="notifications__link">
@@ -80,6 +87,7 @@ class Notifications extends Component {
             {Object.keys(groups)
               .sort(this.sortGroups)
               .map(this.renderGroups(groups))}
+            <Spinner isShown={this.state.isPending} />
           </div>
         </InfinityScroll>
       </div>
@@ -89,6 +97,7 @@ class Notifications extends Component {
 
 Notifications.propTypes = {
   fetchNotifications: PropTypes.func.isRequired,
+  clearNotifications: PropTypes.func.isRequired,
   count: PropTypes.number,
   notifications: PropTypes.arrayOf(PropTypes.shape(notificationProps)),
   total: PropTypes.number
@@ -96,7 +105,7 @@ Notifications.propTypes = {
 
 Notifications.defaultProps = {
   notifications: [],
-  total: 40
+  total: 0
 };
 
 export default translate()(Notifications);

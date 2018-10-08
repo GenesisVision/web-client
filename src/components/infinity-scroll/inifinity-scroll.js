@@ -9,18 +9,12 @@ class InfinityScroll extends Component {
     const clientHeight = scroll.getClientHeight();
     const scrollHeight = scroll.getScrollHeight();
     const offsetBottom = scrollHeight - scrollTop - clientHeight;
-    if (offsetBottom < 250 && !this.props.disabled) {
-      this.props.onLoad();
+    if (offsetBottom < 100 && this.props.hasMore) {
+      this.props.loadMore();
     }
   };
 
   scroll = React.createRef();
-
-  componentDidMount() {
-    if (!this.props.disabled) {
-      this.props.onLoad();
-    }
-  }
 
   render() {
     return (
@@ -32,8 +26,8 @@ class InfinityScroll extends Component {
 }
 
 InfinityScroll.propTypes = {
-  onLoad: PropTypes.func.isRequired,
-  disabled: PropTypes.bool
+  loadMore: PropTypes.func.isRequired,
+  hasMore: PropTypes.bool
 };
 
 export default InfinityScroll;
