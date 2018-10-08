@@ -31,8 +31,10 @@ class ProgramDetailsStatisticSection extends PureComponent {
       newState.statisticData = props.statisticData;
       newState.profitChartData = props.profitChartData;
       newState.balanceChartData = props.balanceChartData;
+      return newState;
     }
-    return newState;
+
+    return state;
   }
 
   handlePeriodChange = period => {

@@ -4,8 +4,8 @@ import ProgramSimpleChart from "components/program-simple-chart/program-simple-c
 import { GVButton } from "gv-react-components";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
-import { PROGRAM_SLUG_URL_PARAM_NAME } from "pages/programs/programs.routes";
 import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
+import { PROGRAM_SLUG_URL_PARAM_NAME } from "pages/programs/programs.routes";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -110,7 +110,11 @@ class ProgramCard extends Component {
           </div>
           <div className="programs-cards__chart-info">
             <div className="programs-cards__profit">
-              <Profitability value={program.statistic.profitPercent} className="chips" prefix="ARROW">
+              <Profitability
+                value={program.statistic.profitPercent}
+                variant="chips"
+                prefix="arrow"
+              >
                 <NumberFormat
                   value={program.statistic.profitPercent}
                   suffix="%"

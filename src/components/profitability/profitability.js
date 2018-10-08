@@ -1,67 +1,49 @@
 import "./profitability.scss";
 
-import classNames from "classnames";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { PureComponent } from "react";
 
-const PREFIXES = {
-  ARROW: {
-    NEGATIVE: String.fromCharCode(8595),
-    POSITIVE: String.fromCharCode(8593)
-  },
-  SIGN: {
-    NEGATIVE: "-",
-    POSITIVE: "+"
-  },
-  DEFAULT: {
-    NEGATIVE: "",
-    POSITIVE: ""
-  }
-};
+import BaseProfitability from "./base-profitability";
+import {
+  ProfitabilityPrefix,
+  ProfitabilityVariant,
+  composeProfitabilityPrefix
+} from "./profitability.helper";
 
-const Profitability = ({
-  className,
-  children,
-  value,
-  isPositive,
-  isNegative,
-  prefix
-}) => {
-  let isPositiveLocal;
-  let isNegativeLocal;
-
-  if (value !== undefined) {
-    isPositiveLocal = isPositive || value > 0;
-    isNegativeLocal = isNegative || value < 0;
+class Profitability extends PureComponent {
+  renderPrefix() {
+    const { value, prefix } = this.props;
+    if (value > 0) return composeProfitabilityPrefix(prefix).positive;
+    if (value < 0) return composeProfitabilityPrefix(prefix).negative;
   }
 
-  const getPrefix = (value, prefix) => {
+  render() {
+    const { className, value, variant, children } = this.props;
+
     return (
-      value !== undefined &&
-      ((isPositiveLocal && `${PREFIXES[prefix || "DEFAULT"].POSITIVE} `) ||
-        (isNegativeLocal && `${PREFIXES[prefix || "DEFAULT"].NEGATIVE} `))
+      <BaseProfitability
+        className={className}
+        variant={variant}
+        isPositive={value > 0}
+        isNegative={value < 0}
+      >
+        {this.renderPrefix()}
+        {children}
+      </BaseProfitability>
     );
-  };
-  return (
-    <div
-      className={classNames("profitability", className, {
-        positive: isPositiveLocal,
-        negative: isNegativeLocal
-      })}
-    >
-      {getPrefix(value, prefix)}
-      {children}
-    </div>
-  );
-};
+  }
+}
 
 Profitability.propTypes = {
   className: PropTypes.string,
-  children: PropTypes.node.isRequired,
-  value: PropTypes.number,
-  isPositive: PropTypes.bool,
-  isNegative: PropTypes.bool,
-  prefix: PropTypes.oneOf(Object.keys(PREFIXES))
+  value: PropTypes.number.isRequired,
+  prefix: PropTypes.oneOf(Object.values(ProfitabilityPrefix)),
+  variant: PropTypes.oneOf(Object.values(ProfitabilityVariant))
+};
+
+Profitability.defaultProps = {
+  prefix: "noPrefix",
+  variant: "text"
 };
 
 export default Profitability;

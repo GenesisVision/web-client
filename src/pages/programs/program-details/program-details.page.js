@@ -46,9 +46,9 @@ class ProgramDetailsPage extends PureComponent {
         return getProgramStatistic(this.description.data.id);
       })
       .then(data => {
-        this.profitChart = data.profitChart;
-        this.balanceChart = data.balanceChart;
-        this.statistic = data.statistic;
+        this.profitChart = data.profitChartData;
+        this.balanceChart = data.balanceChartData;
+        this.statistic = data.statisticData;
         this.setState({ isPending: false });
       })
       .then(() => {

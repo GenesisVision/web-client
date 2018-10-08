@@ -3,15 +3,15 @@
 
 $text-size: 13px;
 .profitability {
-  &.positive {
+  &--positive {
     color: $positive-color;
   }
 
-  &.negative {
+  &--negative {
     color: $negative-color;
   }
 
-  &.chips {
+  &--chips {
     font-size: $text-size/1.5;
     font-weight: 600;
     border-radius: 19.5px;

@@ -11,6 +11,7 @@ import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 
+import BaseProfitability from "../../../../../../components/profitability/base-profitability";
 import {
   PROGRAM_TRADES_COLUMNS,
   PROGRAM_TRADES_DEFAULT_FILTERS,
@@ -67,12 +68,12 @@ class ProgramTrades extends Component {
         renderBodyRow={trade => (
           <TableRow className="program-details-trades__row">
             <TableCell className="program-details-trades__cell program-details-trades__cell--direction">
-              <Profitability
+              <BaseProfitability
                 isPositive={trade.direction === "Buy"}
                 isNegative={trade.direction === "Sell"}
               >
                 {trade.direction}
-              </Profitability>
+              </BaseProfitability>
             </TableCell>
             <TableCell className="program-details-trades__cell program-details-trades__cell--symbol">
               {trade.symbol}
@@ -94,7 +95,7 @@ class ProgramTrades extends Component {
               />
             </TableCell>
             <TableCell className="program-details-trades__cell program-details-trades__cell--profit">
-              <Profitability value={trade.profit}>
+              <Profitability value={trade.profit} prefix="sign">
                 <NumberFormat
                   value={Math.abs(trade.profit)}
                   decimalScale={8}
