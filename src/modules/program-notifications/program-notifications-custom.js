@@ -8,6 +8,7 @@ import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
+import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
 import ProgramNotificationCreateForm from "./program-notification-create-form";
 
@@ -16,13 +17,22 @@ class ProgramNotificationsCustom extends Component {
     isOpenCreatePopup: false
   };
 
+  success = text => {
+    const { dispatch } = this.props;
+    dispatch(alertMessageActions.success(text));
+  };
+
   handleSubmit = values => {
+    const { t } = this.props;
     this.props.services
       .addProgramNotificationService({
         programId: this.props.program.programId,
         ...values
       })
-      .then(() => this.handleClosePopup());
+      .then(() => this.handleClosePopup())
+      .then(() => {
+        this.success(t(`notifications.program.custom.create-alert`));
+      });
   };
 
   handleClosePopup = () => {
@@ -39,7 +49,7 @@ class ProgramNotificationsCustom extends Component {
       <div className="notification-settings custom-notifications">
         <h3>{t("notifications.program.custom.title")}</h3>
         {program.settingsCustom.map(settings => (
-          <CustomNotification settings={settings} />
+          <CustomNotification settings={settings} key={settings.programId} />
         ))}
         <div className="custom-notification__create">
           <GVButton variant="text" onClick={this.handleOpenPopup}>
@@ -66,7 +76,8 @@ ProgramNotificationsCustom.propTypes = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  services: bindActionCreators({ addProgramNotificationService }, dispatch)
+  services: bindActionCreators({ addProgramNotificationService }, dispatch),
+  dispatch
 });
 
 export default compose(

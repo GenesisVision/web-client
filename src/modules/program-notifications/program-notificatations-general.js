@@ -1,5 +1,4 @@
 import GeneralNotification from "components/general-notification/general-notification";
-import { settingsProps } from "modules/notification-settings/notification-settings";
 import {
   addProgramNotificationService,
   removeProgramNotificationService
@@ -9,8 +8,35 @@ import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
+import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
 class ProgramNotificationsGeneral extends Component {
+  success = text => {
+    const { dispatch } = this.props;
+    dispatch(alertMessageActions.success(text));
+  };
+
+  handleAdd = options => {
+    const { services, t } = this.props;
+    return services
+      .addProgramNotificationService(options)
+      .then(() =>
+        this.success(
+          t(`notifications.program.general.${options.type}.enabled-alert`)
+        )
+      );
+  };
+
+  handleRemove = options => {
+    const { services, t } = this.props;
+    return services
+      .removeProgramNotificationService(options)
+      .then(() =>
+        this.success(
+          t(`notifications.program.general.${options.type}.disabled-alert`)
+        )
+      );
+  };
   render() {
     const { t, settings, programId } = this.props;
     return (
@@ -21,20 +47,16 @@ class ProgramNotificationsGeneral extends Component {
           label={t("notifications.program.general.news-updates")}
           programId={programId}
           setting={settings.ProgramNewsAndUpdates}
-          addNotification={this.props.services.addProgramNotificationService}
-          removeNotification={
-            this.props.services.removeProgramNotificationService
-          }
+          addNotification={this.handleAdd}
+          removeNotification={this.handleRemove}
         />
         <GeneralNotification
           name="ProgramEndOfPeriod"
           label={t("notifications.program.general.end-of-period")}
           programId={programId}
           setting={settings.ProgramEndOfPeriod}
-          addNotification={this.props.services.addProgramNotificationService}
-          removeNotification={
-            this.props.services.removeProgramNotificationService
-          }
+          addNotification={this.handleAdd}
+          removeNotification={this.handleRemove}
         />
       </div>
     );
@@ -42,7 +64,7 @@ class ProgramNotificationsGeneral extends Component {
 }
 
 ProgramNotificationsGeneral.propTypes = {
-  settings: settingsProps,
+  settings: PropTypes.object,
   services: PropTypes.shape({
     addProgramNotificationService: PropTypes.func,
     removeProgramNotificationService: PropTypes.func
@@ -60,7 +82,8 @@ const mapDispatchToProps = dispatch => ({
       removeProgramNotificationService
     },
     dispatch
-  )
+  ),
+  dispatch
 });
 
 export default compose(

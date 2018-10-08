@@ -1,5 +1,4 @@
 import GeneralNotification from "components/general-notification/general-notification";
-import { settingsProps } from "modules/notification-settings/notification-settings";
 import {
   addNotificationSettingService,
   removeNotificationSettingService
@@ -29,7 +28,7 @@ class NotificationGeneral extends Component {
   handleRemove = options => {
     const { services, t } = this.props;
     return services
-      .removeNotificationSettingService("options.id")
+      .removeNotificationSettingService(options.id)
       .then(() =>
         this.success(t(`notifications.general.${options.type}.disabled-alert`))
       );
@@ -63,7 +62,7 @@ class NotificationGeneral extends Component {
 }
 
 NotificationGeneral.propTypes = {
-  settings: settingsProps,
+  settings: PropTypes.object,
   services: PropTypes.shape({
     removeNotificationSettingService: PropTypes.func,
     addNotificationSettingService: PropTypes.func

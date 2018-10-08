@@ -1,15 +1,13 @@
-import moment from "moment";
 import Notification, {
   notificationProps
 } from "pages/app/components/notifications/components/notification/notification";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
-import * as uuid from "uuid";
 
 class NotificationsGroup extends Component {
   renderNotifications = notification => (
-    <Notification key={notification.id} {...notification} /> //FIXME: исправить когда будут уникальные ID
+    <Notification key={notification.id} {...notification} />
   );
   render() {
     const { notifications, title } = this.props;

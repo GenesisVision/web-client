@@ -25,7 +25,7 @@ class GeneralNotification extends Component {
         type: this.props.name,
         programId: this.props.programId
       })
-      .finally(a => console.info(a) || this.setState({ isPending: false }));
+      .finally(this.setState({ isPending: false }));
   };
 
   removeNotification = () => {

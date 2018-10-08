@@ -20,7 +20,10 @@ export const addProgramNotificationService = opts => dispatch => {
   );
 };
 
-export const removeProgramNotificationService = (id, programId) => dispatch => {
+export const removeProgramNotificationService = ({
+  id,
+  programId
+}) => dispatch => {
   return dispatch(removeNotificationSetting(id)).then(() =>
     dispatch(fetchProgramNotificationsService(programId))
   );

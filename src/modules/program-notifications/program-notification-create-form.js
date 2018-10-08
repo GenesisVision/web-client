@@ -1,17 +1,17 @@
 import Select from "components/select/select";
 import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
-import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
-import { number, object, string } from "yup";
+import { number, object } from "yup";
 
 class ProgramNotificationCreateForm extends Component {
   render() {
     const { t, program, handleSubmit, values } = this.props;
     const { conditionType } = values;
+    const isProfit = conditionType === "Profit";
     return (
       <form id="create-notification" onSubmit={handleSubmit}>
         <div className="dialog__top">
@@ -38,17 +38,20 @@ class ProgramNotificationCreateForm extends Component {
             name="conditionAmount"
             label={t("notifications.program.create.amount-label")}
             component={GVTextField}
-            adornment="%"
+            adornment={isProfit ? "%" : null}
             autoComplete="off"
             InputComponent={NumberFormat}
             isAllowed={values => {
               const { floatValue, formattedValue } = values;
-              if (conditionType === "Level") {
+              if (isProfit) {
                 return (
-                  formattedValue === "" || (floatValue > 0 && floatValue <= 7)
+                  formattedValue === "" ||
+                  (floatValue > 0 && floatValue <= 1000)
                 );
               }
-              return true;
+              return (
+                formattedValue === "" || (floatValue > 0 && floatValue <= 7)
+              );
             }}
           />
           <div className="dialog__buttons">

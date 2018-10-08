@@ -11,35 +11,48 @@ import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
-
-//        "type-profit": "Profit notification",
-//         "type-level": "Level notification",
-//         "label-profit": "Profit",
-//         "label-level": "Level",
+import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
 class CustomNotification extends Component {
   state = {
     isPending: false
   };
 
+  success = text => {
+    const { dispatch } = this.props;
+    dispatch(alertMessageActions.success(text));
+  };
+
   handleSwitch = () => {
     this.setState({ isPending: true });
-    this.props.services
+    const { services, settings, t } = this.props;
+    const status = !Boolean(settings.isEnabled);
+    services
       .toggleProgramNotificationsService({
-        id: this.props.settings.id,
-        programId: this.props.settings.programId,
-        enabled: !Boolean(this.props.settings.isEnabled)
+        id: settings.id,
+        programId: settings.programId,
+        enabled: status
+      })
+      .then(() => {
+        this.success(
+          t(
+            `notifications.program.custom.${
+              status ? "enabled" : "disabled"
+            }-alert`
+          )
+        );
       })
       .finally(() => this.setState({ isPending: false }));
   };
 
   handleDelete = () => {
     this.setState({ isPending: true });
+    const { t, settings } = this.props;
     this.props.services
-      .removeProgramNotificationService(
-        this.props.settings.id,
-        this.props.settings.programId
-      )
+      .removeProgramNotificationService(settings)
+      .then(() => {
+        this.success(t(`notifications.program.custom.delete-alert`));
+      })
       .finally(() => this.setState({ isPending: false }));
   };
 
@@ -63,7 +76,7 @@ class CustomNotification extends Component {
         <div className="custom-notification__offset">
           <GVTextField
             name="conditionAmount"
-            value={settings.conditionAmount}
+            value={settings.conditionAmount.toString()}
             disabled
             label={t(
               `notifications.program.create.${settings.conditionType}.label`
@@ -97,7 +110,8 @@ const mapStateToProps = dispatch => ({
   services: bindActionCreators(
     { removeProgramNotificationService, toggleProgramNotificationsService },
     dispatch
-  )
+  ),
+  dispatch
 });
 
 export default compose(
