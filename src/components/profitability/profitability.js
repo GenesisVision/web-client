@@ -38,8 +38,8 @@ const Profitability = ({
   const getPrefix = (value, prefix) => {
     return (
       value !== undefined &&
-      ((isPositiveLocal && `${PREFIXES[prefix].POSITIVE} `) ||
-        (isNegativeLocal && `${PREFIXES[prefix].NEGATIVE} `))
+      ((isPositiveLocal && `${PREFIXES[prefix || "DEFAULT"].POSITIVE} `) ||
+        (isNegativeLocal && `${PREFIXES[prefix || "DEFAULT"].NEGATIVE} `))
     );
   };
   return (
