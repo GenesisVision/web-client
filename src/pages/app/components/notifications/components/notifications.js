@@ -77,7 +77,7 @@ class Notifications extends Component {
             <div className="notifications__count">
               <Chip type={hasNotifications ? "negative" : null}>{count}</Chip>
             </div>
-            <Link to={"/notifications"}>
+            <Link to={"/notifications"} onClick={this.props.closeNotifications}>
               <div className="notifications__link">
                 <ControlsIcon />
               </div>
@@ -100,7 +100,8 @@ Notifications.propTypes = {
   clearNotifications: PropTypes.func.isRequired,
   count: PropTypes.number,
   notifications: PropTypes.arrayOf(PropTypes.shape(notificationProps)),
-  total: PropTypes.number
+  total: PropTypes.number,
+  closeNotifications: PropTypes.func
 };
 
 Notifications.defaultProps = {

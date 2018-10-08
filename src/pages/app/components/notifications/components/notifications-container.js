@@ -24,6 +24,7 @@ const NotificationsContainer = ({
         total={total}
         notifications={notifications}
         clearNotifications={service.serviceClearNotifications}
+        closeNotifications={service.notificationsToggle}
       />
     </Sidebar>
   );
