@@ -5,11 +5,11 @@ import PropTypes from "prop-types";
 import React from "react";
 
 const PREFIXES = {
-  ARROWS: {
+  ARROW: {
     NEGATIVE: String.fromCharCode(8595),
     POSITIVE: String.fromCharCode(8593)
   },
-  SCIENCE: {
+  SIGN: {
     NEGATIVE: "-",
     POSITIVE: "+"
   },

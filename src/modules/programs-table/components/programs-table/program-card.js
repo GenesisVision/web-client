@@ -113,7 +113,7 @@ class ProgramCard extends Component {
               <Profitability
                 value={program.statistic.profitPercent}
                 form="ellipse"
-                prefix="ARROWS"
+                prefix="ARROW"
               >
                 <NumberFormat
                   value={program.statistic.profitPercent}
