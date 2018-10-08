@@ -1,7 +1,7 @@
 import "./program-trades.scss";
 
 import Profitability from "components/profitability/profitability";
-import { TableCell, TableHeadCell, TableRow } from "modules/table/components";
+import { TableCell, TableRow } from "modules/table/components";
 import DateRangeFilter from "modules/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "modules/table/components/filtering/date-range-filter/date-range-filter.constants";
 import TableModule from "modules/table/components/table-module";
@@ -56,14 +56,13 @@ class ProgramTrades extends Component {
         paging={DEFAULT_PAGING}
         columns={PROGRAM_TRADES_COLUMNS}
         renderHeader={column => (
-          <TableHeadCell
-            key={column.name}
+          <span
             className={`program-details-trades__head-cell program-details-trades__cell--${
               column.name
             }`}
           >
             {t(`program-details-page.history.trades.${column.name}`)}
-          </TableHeadCell>
+          </span>
         )}
         renderBodyRow={trade => (
           <TableRow className="program-details-trades__row">

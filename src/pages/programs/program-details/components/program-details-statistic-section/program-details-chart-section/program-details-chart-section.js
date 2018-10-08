@@ -5,6 +5,7 @@ import { GVTab, GVTabs } from "gv-react-components";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 
+import ProgramBalanceChartSection from "./program-balance-chart-section/program-profit-chart-section";
 import ProgramProfitChartSection from "./program-profit-chart-section/program-profit-chart-section";
 
 const PROFIT_TAB = "profit";
@@ -23,8 +24,7 @@ class ProgramDetailsChartSection extends PureComponent {
       period,
       onPeriodChange,
       profitChartData,
-      totalProfit,
-      changeValue
+      balanceChartData
     } = this.props;
 
     const { tab } = this.state;
@@ -47,6 +47,13 @@ class ProgramDetailsChartSection extends PureComponent {
         {tab === PROFIT_TAB && (
           <ProgramProfitChartSection
             profitChartData={profitChartData}
+            period={period}
+            onPeriodChange={onPeriodChange}
+          />
+        )}
+        {tab === BALANCE_TAB && (
+          <ProgramBalanceChartSection
+            balanceChartData={balanceChartData}
             period={period}
             onPeriodChange={onPeriodChange}
           />

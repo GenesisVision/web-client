@@ -15,6 +15,7 @@ class ProgramDetailsStatisticSection extends PureComponent {
   state = {
     statisticData: { data: null, isPending: true },
     profitChartData: { data: null, isPending: true },
+    balanceChartData: { data: null, isPending: true },
     period: {
       type: ChartPeriodType.month,
       start: getPeriodStartDate(ChartPeriodType.month),
@@ -29,6 +30,7 @@ class ProgramDetailsStatisticSection extends PureComponent {
       newState.prevProps = props;
       newState.statisticData = props.statisticData;
       newState.profitChartData = props.profitChartData;
+      newState.balanceChartData = props.balanceChartData;
     }
     return newState;
   }
@@ -42,7 +44,7 @@ class ProgramDetailsStatisticSection extends PureComponent {
   };
 
   render() {
-    const { statisticData, profitChartData } = this.state;
+    const { statisticData, profitChartData, balanceChartData } = this.state;
     const { period } = this.state;
     return (
       <div className="program-details-statistic-section">
@@ -55,6 +57,7 @@ class ProgramDetailsStatisticSection extends PureComponent {
         <div className="program-details-statistic-section__chart">
           <ProgramDetailsChartSection
             profitChartData={profitChartData}
+            balanceChartData={balanceChartData}
             period={period}
             onPeriodChange={this.handlePeriodChange}
           />

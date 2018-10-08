@@ -14,12 +14,14 @@ export const getPeriodStartDate = periodType => {
     case ChartPeriodType.all:
       return undefined;
     default:
-      return moment().subtract(1, `${periodType}s`);
+      return moment()
+        .subtract(1, `${periodType}s`)
+        .toDate();
   }
 };
 
 export const DEFAULT_PERIOD = {
   type: ChartPeriodType.month,
   start: getPeriodStartDate(ChartPeriodType.month),
-  end: moment()
+  end: new Date()
 };

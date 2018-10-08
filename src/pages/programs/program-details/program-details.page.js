@@ -6,9 +6,7 @@ import { connect } from "react-redux";
 import { goBack } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
 
-import getParams from "../../../utils/get-params";
 import NotFoundPage from "../../not-found/not-found.routes";
-import { PROGRAM_DETAILS_ROUTE } from "../programs.routes";
 import ProgramDetailsDescriptionSection from "./components/program-details-description-section/program-details-description-section";
 import ProgramDetailsHistorySection from "./components/program-details-history-section/program-details-history-section";
 import ProgramDetailsNavigation from "./components/program-details-navigation/program-details-navigation";
@@ -31,11 +29,11 @@ class ProgramDetailsPage extends PureComponent {
     this.profitChart = { data: null, isPending: true };
     this.balanceChart = { data: null, isPending: true };
     this.statistic = { data: null, isPending: true };
-    this.events = { data: null, isPending: true };
+    this.trades = { data: null, isPending: true };
   }
 
   componentDidMount() {
-    const { service } = this.props;
+    const { service, currency } = this.props;
     this.setState({ isPending: true });
     service
       .getProgramDescription()
@@ -55,10 +53,10 @@ class ProgramDetailsPage extends PureComponent {
       })
       .then(() => {
         this.setState({ isPending: true });
-        return service.getEvents();
+        return getProgramHistory(this.description.data.id, currency);
       })
       .then(data => {
-        this.events = data;
+        this.trades = data.trades;
         this.setState({ isPending: false });
       })
       .catch(e => {
@@ -96,14 +94,14 @@ class ProgramDetailsPage extends PureComponent {
               balanceChartData={this.balanceChart}
             />
           </div>
-          {/*<div className="program-details__history">
+          <div className="program-details__history">
             <ProgramDetailsHistorySection
-              programId={programId}
+              programId={this.description.data.id}
               currency={currency}
               tradesData={this.trades}
               eventsData={this.events}
             />
-          </div> */}
+          </div>
         </div>
       </Page>
     );
