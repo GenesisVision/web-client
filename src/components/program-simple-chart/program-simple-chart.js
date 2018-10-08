@@ -7,7 +7,7 @@ import { GVColors } from "gv-react-components";
 import React from "react";
 import { Area, AreaChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 
-const ProgramSimpleChart = ({ data, isPositive }) => {
+const ProgramSimpleChart = ({ data, programId }) => {
   if (data.length === 0) return null;
   const programChartData = data.map(x => ({
     date: x.date.getTime(),
@@ -19,16 +19,14 @@ const ProgramSimpleChart = ({ data, isPositive }) => {
       <ResponsiveContainer>
         <AreaChart data={programChartData}>
           <defs>
-            <defs>
-              <ProgramChartGradient
-                offset={off}
-                name="equitySimpleChartFill"
-                positiveColor={GVColors.$primaryColor}
-                negativeColor={GVColors.$primaryColor}
-                startOpacity={0.2}
-                stopOpacity={0}
-              />
-            </defs>
+            <ProgramChartGradient
+              offset={off}
+              name={`equitySimpleChartFill__${programId}`}
+              positiveColor={GVColors.$primaryColor}
+              negativeColor={GVColors.$primaryColor}
+              startOpacity={0.2}
+              stopOpacity={0.01}
+            />
           </defs>
           <XAxis
             dataKey="date"
@@ -41,7 +39,8 @@ const ProgramSimpleChart = ({ data, isPositive }) => {
             type="monotone"
             dataKey="equity"
             stroke={GVColors.$primaryColor}
-            fill={`url(#equitySimpleChartFill)`}
+            strokeWidth={2}
+            fill={`url(#equitySimpleChartFill__${programId})`}
             isAnimationActive={false}
           />
         </AreaChart>

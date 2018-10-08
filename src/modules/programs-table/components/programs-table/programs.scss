@@ -7,7 +7,7 @@ $th-text-size: 12px;
 $title-text-size: 15px;
 $chart-width: 160px;
 $program-width: 312px;
-$program-height: 312px;
+$program-height: 372px;
 $multiplier: 1.5;
 $border-radius: 5px;
 $description-block-width: 250px;
@@ -15,7 +15,6 @@ $description-block-width: 250px;
 @mixin table-title() {
   opacity: 0.3;
   font-size: $th-text-size/1.5;
-  font-weight: 200;
   color: white;
   text-align: left;
   padding-bottom: $th-text-size/1.5;
@@ -26,12 +25,11 @@ $description-block-width: 250px;
 }
 
 .programs-table-container {
-  padding: $padding/2 0;
+  padding-top: $padding;
 }
 
 .programs-cards {
   .icon {
-    height: 15px;
     width: auto;
   }
   box-sizing: border-box;
@@ -48,7 +46,7 @@ $description-block-width: 250px;
     box-sizing: border-box;
     width: 100%;
     height: $program-height/1.2;
-    padding: 20px;
+    padding: $padding 20px;
     border-radius: 8px;
     background-color: #212c34;
     &--title {
@@ -61,7 +59,11 @@ $description-block-width: 250px;
   }
   &__actions {
     text-align: right;
-    width: 10px;
+    svg {
+      width: 30px;
+      height: 30px;
+    }
+    cursor: pointer;
   }
   &__title {
     padding: 3px 0;
@@ -81,19 +83,12 @@ $description-block-width: 250px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    &--balance {
-      font-size: $text-size/1.5;
-      font-weight: 100;
-    }
-    &--profit {
-      font-size: $text-size/1.5;
-      font-weight: 600;
-      color: rgb(44, 211, 146);
-      border-radius: 19.5px;
-      background-color: $success;
-      padding: 5px 13px;
-      margin-bottom: 8px;
-    }
+  }
+  &__balance {
+    font-size: $text-size/1.5;
+  }
+  &__profit {
+    margin-bottom: 8px;
   }
   &__row {
     display: flex;
@@ -106,10 +101,10 @@ $description-block-width: 250px;
       width: 100%;
       th {
         @include table-title;
+        font-weight: 300;
       }
       td {
         font-size: $text-size/$multiplier;
-        font-weight: 100;
       }
     }
   }
@@ -132,24 +127,17 @@ $description-block-width: 250px;
     &__name {
       font-size: $text-size;
     }
-    &--balance {
+    &__balance {
       font-size: $text-size;
     }
-    &--profit {
+    &__profit {
       font-size: $text-size;
     }
     &__chart {
       width: $chart-width;
     }
-    &__chart-info {
-      &--balance {
-        font-size: $text-size;
-      }
-      &--profit {
-        font-size: $text-size;
-      }
-    }
-    &__row {
+    &__balance {
+      font-size: $text-size;
     }
     &__table {
       & table {
@@ -202,8 +190,6 @@ $description-block-width: 250px;
     flex-direction: row;
     align-items: stretch;
     justify-content: space-between;
-    &--outer {
-    }
     &--inner {
       width: 100%;
     }
@@ -274,7 +260,6 @@ $description-block-width: 250px;
     line-height: 1.85;
     letter-spacing: 0.4px;
     color: #fff;
-    font-weight: 100;
     width: $description-block-width/2;
     max-height: 300px;
     overflow: hidden;
@@ -294,9 +279,6 @@ $description-block-width: 250px;
     padding: $padding/1.5;
     width: 100%;
     background-color: #212c34;
-  }
-
-  &__bottom-block {
   }
 
   &__details {
@@ -328,7 +310,6 @@ $description-block-width: 250px;
 
   &__statistic-data {
     margin-bottom: $padding;
-    font-weight: 100;
     &--label {
       opacity: 0.3;
       font-size: $text-size/1.5;
@@ -391,4 +372,9 @@ $description-block-width: 250px;
       margin-bottom: $padding/3;
     }
   }
+}
+.popover-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }

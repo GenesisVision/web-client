@@ -1,11 +1,12 @@
 import { Icon } from "components/icon/icon";
+import Profitability from "components/profitability/profitability";
 import ProgramAvatar from "components/program-avatar/program-avatar";
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
 import { GVButton } from "gv-react-components";
-import FavoriteIcon from "modules/favorite-program/components/favorite-icon/favorite-icon";
+import FavoriteIcon from "modules/favorite-asset/components/favorite-icon/favorite-icon";
 import { TableRow } from "modules/table/components";
-import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
 import { PROGRAM_SLUG_URL_PARAM_NAME } from "pages/programs/programs.routes";
+import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -71,7 +72,10 @@ class ProgramTableRowDetailed extends Component {
               </div>
               <div className="program-detailed__statistic">
                 <div className="program-detailed__chart">
-                  <ProgramBigChart data={program.chart} />
+                  <ProgramBigChart
+                    data={program.chart}
+                    programId={program.id}
+                  />
                 </div>
                 <div className="program-detailed__statistic-data">
                   <div>
@@ -142,13 +146,19 @@ class ProgramTableRowDetailed extends Component {
                     <div className="program-detailed__statistic-data--label">
                       {t("programs-page.programs-header.profit")}
                     </div>
-                    <div className="program-detailed__statistic-data--value--positive">
-                      <NumberFormat
+                    <div className="program-detailed__statistic-data--value">
+                      <Profitability
                         value={program.statistic.profitPercent}
-                        suffix="%"
-                        decimalScale={2}
-                        displayType="text"
-                      />
+                        prefix="sign"
+                      >
+                        <NumberFormat
+                          value={program.statistic.profitPercent}
+                          suffix="%"
+                          allowNegative={false}
+                          decimalScale={2}
+                          displayType="text"
+                        />
+                      </Profitability>
                     </div>
                   </div>
                 </div>
@@ -159,7 +169,7 @@ class ProgramTableRowDetailed extends Component {
                         Add to favorites{" "}
                         <FavoriteIcon
                           toggleSelected={toggleFavorite}
-                          programId={program.id}
+                          id={program.id}
                           selected={program.personalProgramDetails.isFavorite}
                         />
                       </span>

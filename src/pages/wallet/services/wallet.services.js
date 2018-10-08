@@ -17,7 +17,7 @@ export const fetchWalletTransactions = filters => {
   return walletApi
     .v10WalletTransactionsGet(authorization, filters)
     .then(data => ({
-      items: walletTransactionsResponseMock.data.transactions,
-      total: walletTransactionsResponseMock.data.total
+      items: data.transactions,
+      total: data.total
     }));
 };

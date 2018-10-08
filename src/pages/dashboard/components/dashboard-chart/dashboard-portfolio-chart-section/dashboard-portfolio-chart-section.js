@@ -1,6 +1,7 @@
 import "./dashboard-portfolio-chart-section.scss";
 
 import ChartPeriod from "components/chart/chart-period/chart-period";
+import { DEFAULT_PERIOD } from "components/chart/chart-period/chart-period.helpers";
 import moment from "moment";
 import React, { Component } from "react";
 
@@ -24,16 +25,23 @@ const composeChartData = (chart, bars) => {
   });
 };
 class DashboardPortfolioChartSection extends Component {
+  state = {
+    period: DEFAULT_PERIOD
+  };
+
   componentDidMount() {
-    this.props.service.getPortfolioChart();
+    const { period } = this.state;
+    this.props.service.getPortfolioChart(period.start, period.end);
   }
 
   handleChangePeriod = period => {
-    this.props.service.getPortfolioChart(period);
+    this.props.service.getPortfolioChart(period.start, period.end);
+    this.setState({ period });
   };
 
   render() {
     const { data, currency } = this.props;
+    const { period } = this.state;
     if (data.chart === undefined) return null;
     return (
       <div className="dashboard-portfolio-chart-section">
@@ -44,11 +52,11 @@ class DashboardPortfolioChartSection extends Component {
           changeValue={data.changeValue}
           changeValueCurrency={data.changeValueCurrency}
         />
-        <ChartPeriod onChange={this.handleChangePeriod} />
+        <ChartPeriod period={period} onChange={this.handleChangePeriod} />
         <div className="dashboard-portfolio-chart-section__chart">
-          <DashboardPortfolioChart
+          {/* <DashboardPortfolioChart
             data={composeChartData(data.chart, data.bars)}
-          />
+          /> */}
         </div>
       </div>
     );
