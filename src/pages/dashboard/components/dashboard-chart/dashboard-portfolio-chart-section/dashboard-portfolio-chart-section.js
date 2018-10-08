@@ -8,22 +8,22 @@ import React, { Component } from "react";
 import DashboardPortfolioChart from "./dashboard-portfolio-chart";
 import DashboardPortfolioChartStat from "./dashboard-portfolio-chart-stat";
 
-const composeChartData = (chart, bars) => {
-  const data = [
-    ...chart.map(x => ({ profitValue: x.value, date: x.date.getTime() })),
-    ...bars.map(x => ({
-      assetValue: x.value,
-      assets: x.assets,
-      date: moment(x.date)
-        .startOf("day")
-        .valueOf()
-    }))
-  ];
+// const composeChartData = (chart, bars) => {
+//   const data = [
+//     ...chart.map(x => ({ profitValue: x.value, date: x.date.getTime() })),
+//     ...bars.map(x => ({
+//       assetValue: x.value,
+//       assets: x.assets,
+//       date: moment(x.date)
+//         .startOf("day")
+//         .valueOf()
+//     }))
+//   ];
 
-  return data.sort((a, b) => {
-    return a.date - b.date;
-  });
-};
+//   return data.sort((a, b) => {
+//     return a.date - b.date;
+//   });
+// };
 class DashboardPortfolioChartSection extends Component {
   state = {
     period: DEFAULT_PERIOD
@@ -54,9 +54,10 @@ class DashboardPortfolioChartSection extends Component {
         />
         <ChartPeriod period={period} onChange={this.handleChangePeriod} />
         <div className="dashboard-portfolio-chart-section__chart">
-          {/* <DashboardPortfolioChart
-            data={composeChartData(data.chart, data.bars)}
-          /> */}
+          <DashboardPortfolioChart
+            assetsChart={data.bars}
+            balanceChart={data.chart}
+          />
         </div>
       </div>
     );

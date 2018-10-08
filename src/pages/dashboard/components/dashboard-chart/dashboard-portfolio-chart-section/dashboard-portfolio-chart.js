@@ -23,12 +23,12 @@ class DashboardPortfolioChart extends PureComponent {
     activeIndex: undefined
   };
 
-  grOffset = () =>
-    gradientOffset(
-      this.props.data
-        .filter(x => x.profitValue !== undefined)
-        .map(x => x.profitValue)
-    );
+  // grOffset = () =>
+  //   gradientOffset(
+  //     this.props.data
+  //       .filter(x => x.profitValue !== undefined)
+  //       .map(x => x.profitValue)
+  //   );
 
   handleBarMouseOver = (data, index) => {
     this.setState({
@@ -37,13 +37,13 @@ class DashboardPortfolioChart extends PureComponent {
   };
 
   render() {
-    const { data } = this.props;
+    const { balanceChart, assetsChart } = this.props;
     const { activeIndex } = this.state;
-    if (data.length === 0) return null;
+    if (balanceChart.length === 0) return null;
 
     return (
       <ResponsiveContainer>
-        <ComposedChart data={data} stackOffset="sign">
+        <ComposedChart stackOffset="sign">
           <defs>
             <ProgramChartGradient
               offset={this.grOffset()}
@@ -77,7 +77,7 @@ class DashboardPortfolioChart extends PureComponent {
             isAnimationActive={false}
             strokeWidth={2}
           />
-          {data[0].assets.map((x, i) => (
+          {/* {data[0].assets.map((x, i) => (
             <Bar
               key={`assets[${i}]`}
               dataKey={`assets[${i}].value`}
@@ -96,7 +96,7 @@ class DashboardPortfolioChart extends PureComponent {
                 />
               ))}
             </Bar>
-          ))}
+          ))} */}
         </ComposedChart>
       </ResponsiveContainer>
     );
