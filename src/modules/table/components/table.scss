@@ -84,7 +84,6 @@ $padding: 33px;
 
   &__head {
     font-size: $th-font-size/1.5;
-    opacity: 0.3;
   }
   &__body {
     font-size: $td-font-size/1.5;
@@ -123,12 +122,23 @@ $padding: 33px;
     &#{&} {
       &--head {
         padding-right: 15px;
+        span {
+          opacity: 0.5;
+        }
       }
       &--sortable {
         cursor: pointer;
         padding-right: 15px;
+        font-weight: 500;
+        span {
+          opacity: 0.6;
+        }
         .table__cell--sortable-asc,
         .table__cell--sortable-desc {
+          font-weight: 600;
+          span {
+            opacity: 1;
+          }
           position: relative;
           &::before {
             @extend %sortable-border-icon;
