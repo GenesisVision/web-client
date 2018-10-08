@@ -83,18 +83,12 @@ $description-block-width: 250px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    &--balance {
-      font-size: $text-size/1.5;
-    }
-    &--profit {
-      font-size: $text-size/1.5;
-      font-weight: 600;
-      color: rgb(44, 211, 146);
-      border-radius: 19.5px;
-      background-color: $success;
-      padding: 5px 13px;
-      margin-bottom: 8px;
-    }
+  }
+  &__balance {
+    font-size: $text-size/1.5;
+  }
+  &__profit {
+    margin-bottom: 8px;
   }
   &__row {
     display: flex;
@@ -133,24 +127,17 @@ $description-block-width: 250px;
     &__name {
       font-size: $text-size;
     }
-    &--balance {
+    &__balance {
       font-size: $text-size;
     }
-    &--profit {
+    &__profit {
       font-size: $text-size;
     }
     &__chart {
       width: $chart-width;
     }
-    &__chart-info {
-      &--balance {
-        font-size: $text-size;
-      }
-      &--profit {
-        font-size: $text-size;
-      }
-    }
-    &__row {
+    &__balance {
+      font-size: $text-size;
     }
     &__table {
       & table {
@@ -292,9 +279,6 @@ $description-block-width: 250px;
     padding: $padding/1.5;
     width: 100%;
     background-color: #212c34;
-  }
-
-  &__bottom-block {
   }
 
   &__details {

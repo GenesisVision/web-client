@@ -1,10 +1,11 @@
+import Profitability from "components/profitability/profitability";
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
 import { GVButton } from "gv-react-components";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
-import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
 import { PROGRAM_SLUG_URL_PARAM_NAME } from "pages/programs/programs.routes";
+import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -108,15 +109,18 @@ class ProgramCard extends Component {
             <ProgramSimpleChart data={program.chart} programId={program.id} />
           </div>
           <div className="programs-cards__chart-info">
-            <div className="programs-cards__chart-info--profit">
-              <NumberFormat
-                value={program.statistic.profitPercent}
-                suffix="%"
-                decimalScale={2}
-                displayType="text"
-              />
+            <div className="programs-cards__profit">
+              <Profitability value={program.statistic.profitPercent} className="chips" prefix="ARROW">
+                <NumberFormat
+                  value={program.statistic.profitPercent}
+                  suffix="%"
+                  allowNegative={false}
+                  decimalScale={2}
+                  displayType="text"
+                />
+              </Profitability>
             </div>
-            <div className="programs-cards__chart-info--balance">
+            <div className="programs-cards__balance">
               {program.statistic.balanceGVT.amount} {program.currency}
             </div>
           </div>

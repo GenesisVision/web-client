@@ -22,10 +22,16 @@ $small-font-size: 12px;
     align-items: flex-start;
     padding: $padding;
   }
-  &__title, &__subtitle, &__text {
+  &__title,
+  &__subtitle,
+  &__text {
     padding: $padding/2 0;
   }
-  &__title, &__subtitle, &__text, &__balance, &__text {
+  &__title,
+  &__subtitle,
+  &__text,
+  &__balance,
+  &__text {
     word-wrap: break-word;
     max-width: 165px;
   }
