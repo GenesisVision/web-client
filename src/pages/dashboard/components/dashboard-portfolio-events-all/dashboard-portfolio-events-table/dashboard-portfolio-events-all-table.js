@@ -25,7 +25,7 @@ import {
 
 class PortfolioEventsTableComponent extends Component {
   render() {
-    const { t, filtering, title, className } = this.props;
+    const { t, filtering, title, className, fetchPortfolioEvents } = this.props;
     return (
       <div className={className}>
         <TableModule
@@ -106,7 +106,8 @@ class PortfolioEventsTableComponent extends Component {
 }
 
 PortfolioEventsTableComponent.defaultProps = {
-  filtering: PORTFOLIO_EVENTS_DEFAULT_FILTERING
+  filtering: PORTFOLIO_EVENTS_DEFAULT_FILTERING,
+  fetchPortfolioEvents: fetchPortfolioEvents
 };
 
 export default translate()(PortfolioEventsTableComponent);

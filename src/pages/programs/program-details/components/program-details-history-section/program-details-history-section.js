@@ -9,6 +9,7 @@ import ProgramTrades from "./program-trades/program-trades";
 import PortfolioEventsTableComponent from "pages/dashboard/components/dashboard-portfolio-events-all/dashboard-portfolio-events-table/dashboard-portfolio-events-all-table";
 import { EVENT_TYPE_FILTER_DEFAULT_VALUE } from "modules/table/components/filtering/event-type-filter/event-type-filter.constants";
 import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "modules/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { fetchPortfolioEvents } from "../../../../dashboard/services/dashboard-events.services";
 
 const TRADES_TAB = "trades";
 const EVENTS_TAB = "events";
@@ -64,7 +65,15 @@ class ProgramDetailsHistorySection extends PureComponent {
             />
           )}
           {tab === EVENTS_TAB && (
-            <PortfolioEventsTableComponent filtering={EVENTS_FILTERING} />
+            <PortfolioEventsTableComponent
+              filtering={EVENTS_FILTERING}
+              fetchPortfolioEvents={filters =>
+                fetchPortfolioEvents({
+                  ...filters,
+                  assetId: programId
+                })
+              }
+            />
           )}
         </div>
       </Surface>
