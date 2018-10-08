@@ -38,36 +38,36 @@ export const getProgramStatistic = (
   return Promise.all([
     programsApiProxy.v10ProgramsByIdChartsProfitGet(programId, chartFilter),
     programsApiProxy.v10ProgramsByIdChartsBalanceGet(programId, chartFilter)
-  ]).then(values => {
-    const statistic = {
+  ]).then(([profitChart, balanceChart]) => {
+    const statisticData = {
       data: {
-        trades: values[0].data.trades,
-        successTradesPercent: values[0].data.successTradesPercent,
-        profitFactor: values[0].data.profitFactor,
-        investors: values[0].data.investors,
-        sharpeRatio: values[0].data.sharpeRatio,
-        sortinoRatio: values[0].data.sortinoRatio,
-        maxDrawdown: values[0].data.maxDrawdown,
-        periodStarts: values[0].data.lastPeriodStarts,
-        periodEnds: values[0].data.lastPeriodEnds
+        trades: profitChart.data.trades,
+        successTradesPercent: profitChart.data.successTradesPercent,
+        profitFactor: profitChart.data.profitFactor,
+        investors: profitChart.data.investors,
+        sharpeRatio: profitChart.data.sharpeRatio,
+        sortinoRatio: profitChart.data.sortinoRatio,
+        maxDrawdown: profitChart.data.maxDrawdown,
+        periodStarts: profitChart.data.lastPeriodStarts,
+        periodEnds: profitChart.data.lastPeriodEnds
       },
-      isPending: values[0].isPending
+      isPending: profitChart.isPending
     };
-    const profitChart = {
+    const profitChartData = {
       data: {
-        totalGvtProfit: values[0].data.totalGvtProfit,
-        totalProgramCurrencyProfit: values[0].data.totalProgramCurrencyProfit,
-        programCurrency: values[0].data.programCurrency,
-        profitChangePercent: values[0].data.profitChangePercent,
-        pnLChart: values[0].data.pnLChart,
-        equityChart: values[0].data.equityChart
+        totalGvtProfit: profitChart.data.totalGvtProfit,
+        totalProgramCurrencyProfit: profitChart.data.totalProgramCurrencyProfit,
+        programCurrency: profitChart.data.programCurrency,
+        profitChangePercent: profitChart.data.profitChangePercent,
+        pnLChart: profitChart.data.pnLChart,
+        equityChart: profitChart.data.equityChart
       },
-      isPending: values[0].isPending
+      isPending: profitChart.isPending
     };
 
-    const balanceChart = values[1];
+    const balanceChartData = balanceChart;
 
-    return { statistic, profitChart, balanceChart };
+    return { statisticData, profitChartData, balanceChartData };
   });
 };
 
@@ -82,8 +82,8 @@ export const getProgramHistory = (programId, currency) => {
   return Promise.all([
     getProgramTrades({ programId, currency, filters: tradesFilters }),
     getProgramEvents()
-  ]).then(values => ({
-    trades: values[0]
+  ]).then(([trades]) => ({
+    trades
   }));
 };
 

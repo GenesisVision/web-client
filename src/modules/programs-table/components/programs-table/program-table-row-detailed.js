@@ -149,7 +149,7 @@ class ProgramTableRowDetailed extends Component {
                     <div className="program-detailed__statistic-data--value">
                       <Profitability
                         value={program.statistic.profitPercent}
-                        prefix="SIGN"
+                        prefix="sign"
                       >
                         <NumberFormat
                           value={program.statistic.profitPercent}
