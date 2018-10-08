@@ -20,6 +20,7 @@ class Notifications extends Component {
   };
 
   fetchNotification = () => {
+    if (this.state.isPending) return;
     this.setState({ isPending: true });
     this.props.fetchNotifications().then(() => {
       this.setState({ isPending: false });
