@@ -5,28 +5,17 @@ import Notification, {
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
+import * as uuid from "uuid";
 
 class NotificationsGroup extends Component {
   renderNotifications = notification => (
-    <Notification key={notification.id} {...notification} />
+    <Notification key={notification.id} {...notification} /> //FIXME: исправить когда будут уникальные ID
   );
-  getTitle = () => {
-    const { t } = this.props;
-    return moment
-      .unix(this.props.timestamp)
-      .calendar(null, {
-        sameDay: `[${t("notifications-aside.today")}], DD MMMM`,
-        lastDay: `[${t("notifications-aside.yesterday")}], DD MMMM`,
-        lastWeek: "dddd, DD MMMM",
-        sameElse: "dddd, DD MMMM"
-      })
-      .toUpperCase();
-  };
   render() {
-    const { notifications } = this.props;
+    const { notifications, title } = this.props;
     return (
       <div className="notifications__group">
-        <div className="notifications__title">{this.getTitle()}</div>
+        <div className="notifications__title">{title}</div>
         {notifications.map(this.renderNotifications)}
       </div>
     );
@@ -34,7 +23,7 @@ class NotificationsGroup extends Component {
 }
 
 NotificationsGroup.propTypes = {
-  timestamp: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
   notifications: PropTypes.arrayOf(PropTypes.shape(notificationProps))
 };
 

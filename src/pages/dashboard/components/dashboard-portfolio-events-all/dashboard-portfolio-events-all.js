@@ -1,14 +1,15 @@
 import "./dashboard-portfolio-events-all.scss";
 
+import Page from "components/page/page";
+import Surface from "components/surface/surface";
 import React from "react";
+import { translate } from "react-i18next";
+import connect from "react-redux/es/connect/connect";
 import { goBack } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
-import connect from "react-redux/es/connect/connect";
-import { translate } from "react-i18next";
-import Page from "components/page/page";
-import PortfolioEventsTableComponent from "./dashboard-portfolio-events-table/dashboard-portfolio-events-all-table";
+
 import PortfolioEventsAllNavigation from "./dashboard-portfolio-events-all-navigation";
-import Surface from "components/surface/surface";
+import PortfolioEventsTableComponent from "./dashboard-portfolio-events-table/dashboard-portfolio-events-all-table";
 
 export const PORTFOLIO_EVENTS_ALL_PAGE_ROUTE = "portfolio-events";
 const PortfolioEventsAllComponent = ({ service, t }) => {
