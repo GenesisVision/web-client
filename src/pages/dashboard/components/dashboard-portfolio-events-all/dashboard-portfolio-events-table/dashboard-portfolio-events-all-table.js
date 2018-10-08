@@ -31,7 +31,6 @@ const PortfolioEventsTableComponent = ({ t }) => (
       defaultFilters={PORTFOLIO_EVENTS_FILTERS}
       getItems={fetchPortfolioEvents}
       filtering={PORTFOLIO_EVENTS_DEFAULT_FILTERING}
-      view="TABLE_VIEW"
       renderFilters={(updateFilter, filtering) => (
         <Fragment>
           <SelectFilter
