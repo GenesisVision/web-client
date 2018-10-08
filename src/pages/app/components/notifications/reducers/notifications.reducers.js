@@ -1,5 +1,7 @@
 import {
   ADD_NOTIFICATIONS,
+  ADD_TOTAL_NOTIFICATIONS,
+  CLEAR_NOTIFICATIONS,
   SET_NOTIFICATIONS_OPTIONS
 } from "pages/app/components/notifications/actions/notifications.actions";
 import isOpenReducer from "pages/app/components/notifications/reducers/is-open.reducer";
@@ -18,15 +20,25 @@ const addNotificationsReducer = (notifications = [], action) => {
   switch (action.type) {
     case ADD_NOTIFICATIONS:
       return [...notifications, ...action.notifications];
+    case CLEAR_NOTIFICATIONS:
+      return [];
     default:
       return notifications;
   }
 };
 
+const addTotalCount = (total = 0, action) => {
+  if (action.type === ADD_TOTAL_NOTIFICATIONS) {
+    return action.total;
+  }
+  return total;
+};
+
 const notificationsReducer = combineReducers({
   notifications: addNotificationsReducer,
   isOpen: isOpenReducer,
-  options: optionsReducer
+  options: optionsReducer,
+  total: addTotalCount
 });
 
 export default notificationsReducer;

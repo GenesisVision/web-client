@@ -4,8 +4,9 @@ import authService from "services/auth-service";
 export const NOTIFICATIONS = "NOTIFICATIONS";
 export const NOTIFICATIONS_TOGGLE = "NOTIFICATIONS_TOGGLE";
 export const ADD_NOTIFICATIONS = "ADD_NOTIFICATIONS";
-export const ADD_NOTIFICATIONS_COUNT = "ADD_NOTIFICATIONS_COUNT";
 export const SET_NOTIFICATIONS_OPTIONS = "SET_NOTIFICATIONS_OPTIONS";
+export const CLEAR_NOTIFICATIONS = "CLEAR_NOTIFICATIONS";
+export const ADD_TOTAL_NOTIFICATIONS = "ADD_TOTAL_NOTIFICATIONS";
 
 export const notificationsToggle = () => ({
   type: NOTIFICATIONS_TOGGLE
@@ -16,9 +17,13 @@ export const addNotifications = notifications => ({
   notifications
 });
 
-export const addNotificationsCount = count => ({
-  type: ADD_NOTIFICATIONS_COUNT,
-  count
+export const addTotalNotifications = total => ({
+  type: ADD_TOTAL_NOTIFICATIONS,
+  total
+});
+
+export const clearNotifications = () => ({
+  type: CLEAR_NOTIFICATIONS
 });
 
 export const setNotificationsOptions = options => ({

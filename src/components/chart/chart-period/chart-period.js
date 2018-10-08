@@ -14,7 +14,7 @@ class ChartPeriod extends PureComponent {
     const { period } = this.props;
     if (period.type !== newPeriodType) {
       const start = getPeriodStartDate(newPeriodType);
-      const end = moment();
+      const end = new Date();
       this.props.onChange({ type: newPeriodType, start, end });
     }
   };
@@ -24,7 +24,7 @@ class ChartPeriod extends PureComponent {
     if (period.type === ChartPeriodType.all) return null;
     return (
       <span>
-        {period.start.format("ll")} - {period.end.format("ll")}
+        {moment(period.start).format("ll")} - {moment(period.end).format("ll")}
       </span>
     );
   };

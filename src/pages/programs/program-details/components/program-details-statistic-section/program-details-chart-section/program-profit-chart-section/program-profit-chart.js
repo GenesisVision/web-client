@@ -9,12 +9,13 @@ import {
   Bar,
   CartesianGrid,
   ComposedChart,
-  Line,
   ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis
 } from "recharts";
+
+import ProgramProfitTooltip from "./program-profit-tooltip";
 
 class ProgramProfitChart extends PureComponent {
   render() {
@@ -81,8 +82,17 @@ class ProgramProfitChart extends PureComponent {
             tickFormatter={x => x.toFixed(4)}
             width={80}
           />
-          <Tooltip />
+          <Tooltip content={ProgramProfitTooltip} />
           <CartesianGrid vertical={false} strokeWidth={0.1} />
+          <Bar
+            dataKey="value"
+            data={pnl}
+            unit={` ${currency}`}
+            barSize={6}
+            fill={GVColors.$labelColor}
+            stroke={GVColors.$labelColor}
+            yAxisId="right"
+          />
           <Area
             dataKey="value"
             type="monotone"
@@ -94,15 +104,6 @@ class ProgramProfitChart extends PureComponent {
             dot={false}
             yAxisId="left"
             unit=" %"
-          />
-          <Bar
-            dataKey="value"
-            data={pnl}
-            unit={` ${currency}`}
-            barSize={8}
-            fill={GVColors.$labelColor}
-            stroke={GVColors.$labelColor}
-            yAxisId="right"
           />
         </ComposedChart>
       </ResponsiveContainer>
