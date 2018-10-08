@@ -10,7 +10,7 @@ class PortfolioEventsAllNavigation extends Component {
         <GVButton variant="text" onClick={goBack}>
           &larr; {t("buttons.back")}
         </GVButton>
-        <div className="navigation-title">/dashboard</div>
+        <div className="navigation-title" />
       </div>
     );
   }
