@@ -2,7 +2,6 @@
 @import "styles/_breakpoint.scss";
 
 .portfolio-events {
-  margin-top: 80px;
 
   &__row:nth-child(2n + 1) {
     background-color: $table-background-subcolor;
