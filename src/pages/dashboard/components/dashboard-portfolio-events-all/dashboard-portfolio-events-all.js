@@ -25,7 +25,7 @@ const PortfolioEventsAllComponent = ({ service, t }) => {
         <Surface>
           <PortfolioEventsTableComponent
             title={t("dashboard.portfolio-events.table-title")}
-            className="portfolio-events-all"
+            className="portfolio-events-all-table"
           />
         </Surface>
       </div>

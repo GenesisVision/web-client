@@ -74,21 +74,21 @@ class PortfolioEventsTableComponent extends Component {
             </span>
           )}
           renderBodyRow={event => (
-            <TableRow className="portfolio-events-all__row">
-              <TableCell className="portfolio-events-all__cell portfolio-events-all__cell--date">
+            <TableRow className="portfolio-events-all-table__row">
+              <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--date">
                 {moment(event.date).format("DD-MM-YYYY, hh:mm a")}
               </TableCell>
-              <TableCell className="portfolio-events-all__cell portfolio-events-all__cell--type">
+              <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--type">
                 {t(
                   `dashboard.portfolio-events.types.${
                     PORTFOLIO_EVENTS_TYPES_ENUM[event.type]
                   }`
                 )}
               </TableCell>
-              <TableCell className="portfolio-events-all__cell portfolio-events-all__cell--type">
+              <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--type">
                 {event.title}
               </TableCell>
-              <TableCell className="portfolio-events-all__cell portfolio-events-all__cell--amount">
+              <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--amount">
                 <Profitability value={event.value}>
                   <NumberFormat
                     value={Math.abs(event.value)}
