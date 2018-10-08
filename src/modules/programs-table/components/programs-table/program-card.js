@@ -112,7 +112,7 @@ class ProgramCard extends Component {
             <div className="programs-cards__profit">
               <Profitability
                 value={program.statistic.profitPercent}
-                form="ellipse"
+                form="CHIPS"
                 prefix="ARROW"
               >
                 <NumberFormat

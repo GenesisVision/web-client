@@ -19,6 +19,11 @@ const PREFIXES = {
   }
 };
 
+const FORMS = {
+  CHIPS: "CHIPS",
+  TEXT: "TEXT"
+};
+
 const Profitability = ({
   className,
   children,
@@ -46,7 +51,7 @@ const Profitability = ({
   };
 
   switch (form) {
-    case "ellipse":
+    case "CHIPS":
       return (
         <div
           className={classNames("ellipse", className, {
@@ -60,6 +65,7 @@ const Profitability = ({
           </span>
         </div>
       );
+    case "TEXT":
     default:
       return (
         <span
@@ -82,7 +88,7 @@ Profitability.propTypes = {
   value: PropTypes.number,
   isPositive: PropTypes.bool,
   isNegative: PropTypes.bool,
-  form: PropTypes.string,
+  form: PropTypes.oneOf(Object.keys(FORMS)),
   prefix: PropTypes.oneOf(Object.keys(PREFIXES))
 };
 
