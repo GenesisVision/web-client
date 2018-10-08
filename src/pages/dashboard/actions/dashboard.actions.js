@@ -5,10 +5,10 @@ export const DASHBOARD_PORTFOLIO_CHART = "DASHBOARD_PORTFOLIO_CHART";
 export const DASHBOARD_CHART = "DASHBOARD_CHART";
 export const DASHBOARD_PORTFOLIO_EVENTS = "DASHBOARD_PORTFOLIO_EVENTS";
 
-export const fetchPortfolioChart = data => {
+export const fetchPortfolioChart = (data, filters) => {
   return {
     type: DASHBOARD_PORTFOLIO_CHART,
-    payload: investorApi.v10InvestorPortfolioChartGet(data)
+    payload: investorApi.v10InvestorPortfolioChartGet(data, filters)
   };
 };
 

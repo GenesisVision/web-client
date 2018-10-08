@@ -1,11 +1,13 @@
-import { connect } from "react-redux";
-import React, { Component } from "react";
-import classnames from "classnames";
 import "./alert-message-list.scss";
+
+import classnames from "classnames";
 import { GVButton } from "gv-react-components";
-import { alertMessageActions } from "../../actions/alert-message-actions";
-import history from "../../../../../utils/history";
+import React, { Component } from "react";
 import { translate } from "react-i18next";
+import { connect } from "react-redux";
+
+import history from "../../../../../utils/history";
+import { alertMessageActions } from "../../actions/alert-message-actions";
 
 export class AlertMessageList extends Component {
   componentDidMount() {

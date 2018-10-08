@@ -1,22 +1,11 @@
-import { LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE } from "pages/auth/login/login.routes";
 import React from "react";
-import { Link } from "react-router-dom";
 
 import TwoFactorCodeContainer from "./two-factor-code/two-factor-code-container";
 
 const TwoFactorPage = () => {
   return (
-    <div>
-      <h1>2fa</h1>
-      <p>
-        Open the two-factor authentication app on your device to view your
-        authentication code and verify your identity.
-      </p>
+    <div className="login-two-factor-page">
       <TwoFactorCodeContainer />
-      <h5>Don’t have your phone?</h5>
-      <Link to={LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE}>
-        Enter a two-factor recovery code
-      </Link>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import "./program-details-description.scss";
 
+import Popover from "components/popover/popover";
 import ProgramAvatar from "components/program-avatar/program-avatar";
 import { GVButton } from "gv-react-components";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
@@ -11,6 +12,7 @@ import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import replaceParams from "utils/replace-params";
 
+import AboutLevelsContainerComponent from "../../../../../app/components/about-levels/about-levels-container";
 import ProgramDetailsFavorite from "./program-details-favorite";
 import ProgramDetailsNotification from "./program-details-notificaton";
 
@@ -22,9 +24,18 @@ const composeManagerUrl = managerId => {
 
 class ProgramDetailsDescription extends PureComponent {
   state = {
-    isOpenInvestmentPopup: false
+    isOpenInvestmentPopup: false,
+    isOpenAboutLevels: false,
+    anchor: null
   };
 
+  handleOpenAboutLevels = () => {
+    this.setState({ isOpenAboutLevels: true });
+    this.handleCloseDropdown();
+  };
+  handleCloseAboutLevels = () => this.setState({ isOpenAboutLevels: false });
+  handleOpenDropdown = event => this.setState({ anchor: event.currentTarget });
+  handleCloseDropdown = () => this.setState({ anchor: null });
   handleOpenInvestmentPopup = () => {
     this.setState({ isOpenInvestmentPopup: true });
   };
@@ -34,7 +45,7 @@ class ProgramDetailsDescription extends PureComponent {
   };
 
   render() {
-    const { isOpenInvestmentPopup } = this.state;
+    const { isOpenInvestmentPopup, isOpenAboutLevels, anchor } = this.state;
     const {
       t,
       isInvested,
@@ -52,11 +63,56 @@ class ProgramDetailsDescription extends PureComponent {
     return (
       <div className="program-details-description">
         <div className="program-details-description__left">
-          <ProgramAvatar
-            url={programDescription.logo}
-            level={programDescription.level}
-            alt={programDescription.title}
-            size="big"
+          <div
+            className="program-details-description__avatar"
+            onClick={this.handleOpenDropdown}
+          >
+            <ProgramAvatar
+              url={programDescription.logo}
+              level={programDescription.level}
+              alt={programDescription.title}
+              size="big"
+            />
+          </div>
+          <Popover
+            horizontal="left"
+            vertical="bottom"
+            anchorEl={anchor}
+            noPadding
+            onClose={this.handleCloseDropdown}
+          >
+            <div className="popover-levels">
+              <div className="popover-levels__block">
+                <div className="popover-levels__title">
+                  {t("program-details-page.popover.genesis-level")}{" "}
+                  {programDescription.level}
+                </div>
+                <div className="popover-levels__subtitle">
+                  {t("program-details-page.popover.invest-limit")}
+                </div>
+                <div className="popover-levels__balance">
+                  {programDescription.availableInvestment}{" "}
+                  {programDescription.currency}
+                </div>
+              </div>
+              <div className="popover-levels__block">
+                <div className="popover-levels__text">
+                  {t("program-details-page.popover.text")}
+                </div>
+                <GVButton
+                  variant="text"
+                  onClick={this.handleOpenAboutLevels}
+                  color="secondary"
+                  className="popover-levels__about"
+                >
+                  {t("program-details-page.popover.about-levels")} &#8250;
+                </GVButton>
+              </div>
+            </div>
+          </Popover>
+          <AboutLevelsContainerComponent
+            open={isOpenAboutLevels}
+            onClose={this.handleCloseAboutLevels}
           />
         </div>
         <div className="program-details-description__main">

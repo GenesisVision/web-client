@@ -1,3 +1,4 @@
+import Profitability from "components/profitability/profitability";
 import ProgramAvatar from "components/program-avatar/program-avatar";
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
@@ -5,7 +6,6 @@ import FavoriteIcon from "modules/favorite-asset/components/favorite-icon/favori
 import { TableCell, TableRow } from "modules/table/components";
 import React from "react";
 import NumberFormat from "react-number-format";
-import Profitability from "components/profitability/profitability";
 
 const ProgramTableRowShort = ({
   program,
@@ -73,7 +73,7 @@ const ProgramTableRowShort = ({
         </Profitability>
       </TableCell>
       <TableCell className="programs-table__cell--chart">
-        <ProgramSimpleChart data={program.chart} />
+        <ProgramSimpleChart data={program.chart} programId={program.id} />
       </TableCell>
       {isAuthenticated &&
         program.personalProgramDetails && (

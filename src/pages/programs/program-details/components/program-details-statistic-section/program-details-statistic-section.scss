@@ -1,14 +1,20 @@
+@import "styles/_breakpoint.scss";
 .program-details-statistic-section {
   display: flex;
   flex-wrap: wrap;
+  align-items: stretch;
+  min-width: 400px;
   &__statistic {
-    flex: 1 1;
     margin-right: 30px;
-    min-height: 400px;
+    display: flex;
+    @include media-breakpoint-landscape-phone() {
+      max-width: 300px;
+    }
   }
 
   &__chart {
-    flex: 3 1;
+    display: flex;
+    flex: 1;
     min-height: 400px;
   }
 }

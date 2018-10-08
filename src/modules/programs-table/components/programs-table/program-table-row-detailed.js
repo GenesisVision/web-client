@@ -1,17 +1,17 @@
 import { Icon } from "components/icon/icon";
+import Profitability from "components/profitability/profitability";
 import ProgramAvatar from "components/program-avatar/program-avatar";
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
 import { GVButton } from "gv-react-components";
 import FavoriteIcon from "modules/favorite-asset/components/favorite-icon/favorite-icon";
 import { TableRow } from "modules/table/components";
-import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
 import { PROGRAM_SLUG_URL_PARAM_NAME } from "pages/programs/programs.routes";
+import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import replaceParams from "utils/replace-params";
-import Profitability from "components/profitability/profitability";
 
 import ProgramBigChart from "../program-big-chart/program-big-chart";
 
@@ -72,7 +72,10 @@ class ProgramTableRowDetailed extends Component {
               </div>
               <div className="program-detailed__statistic">
                 <div className="program-detailed__chart">
-                  <ProgramBigChart data={program.chart} />
+                  <ProgramBigChart
+                    data={program.chart}
+                    programId={program.id}
+                  />
                 </div>
                 <div className="program-detailed__statistic-data">
                   <div>
