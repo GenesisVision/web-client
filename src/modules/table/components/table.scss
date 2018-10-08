@@ -16,7 +16,6 @@ $padding: 33px;
 }
 
 .table {
-  padding-bottom: $padding;
   width: 100%;
   border-spacing: 0;
   .message {
@@ -42,8 +41,7 @@ $padding: 33px;
     justify-content: flex-end;
     width: 100%;
     align-items: center;
-    padding: $padding/2;
-    padding-bottom: 0;
+    padding: 0 $padding/2 $padding/2;
   }
 
   &__toggle {
@@ -175,7 +173,7 @@ $padding: 33px;
       font-size: $td-font-size;
     }
     &__toolbar {
-      padding: $padding;
+      padding: 0 $padding $padding;
     }
     &__toggle {
       display: flex;
