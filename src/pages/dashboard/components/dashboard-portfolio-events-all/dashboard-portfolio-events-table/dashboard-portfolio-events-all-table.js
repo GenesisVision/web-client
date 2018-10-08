@@ -33,25 +33,31 @@ const PortfolioEventsTableComponent = ({ t }) => (
       filtering={PORTFOLIO_EVENTS_DEFAULT_FILTERING}
       renderFilters={(updateFilter, filtering) => (
         <Fragment>
-          <SelectFilter
-            name={EVENT_TYPE_FILTER_NAME}
-            label="Type"
-            value={filtering["type"]}
-            values={EVENT_TYPE_FILTER_VALUES}
-            onChange={updateFilter}
-          />
-          <SelectFilter
-            name="assetType"
-            label="Assets type"
-            value={filtering["assetType"]}
-            values={ASSET_TYPE_FILTER_VALUES}
-            onChange={updateFilter}
-          />
-          <DateRangeFilter
-            name={DATE_RANGE_FILTER_NAME}
-            value={filtering["dateRange"]}
-            onChange={updateFilter}
-          />
+          {PORTFOLIO_EVENTS_DEFAULT_FILTERING["type"] && (
+            <SelectFilter
+              name={EVENT_TYPE_FILTER_NAME}
+              label="Type"
+              value={filtering["type"]}
+              values={EVENT_TYPE_FILTER_VALUES}
+              onChange={updateFilter}
+            />
+          )}
+          {PORTFOLIO_EVENTS_DEFAULT_FILTERING["assetType"] && (
+            <SelectFilter
+              name="assetType"
+              label="Assets type"
+              value={filtering["assetType"]}
+              values={ASSET_TYPE_FILTER_VALUES}
+              onChange={updateFilter}
+            />
+          )}
+          {PORTFOLIO_EVENTS_DEFAULT_FILTERING["dateRange"] && (
+            <DateRangeFilter
+              name={DATE_RANGE_FILTER_NAME}
+              value={filtering["dateRange"]}
+              onChange={updateFilter}
+            />
+          )}
         </Fragment>
       )}
       paging={DEFAULT_PAGING}
