@@ -31,8 +31,7 @@ const Profitability = ({
   isPositive,
   isNegative,
   prefix,
-  form,
-  ...rest
+  form
 }) => {
   let isPositiveLocal;
   let isNegativeLocal;
@@ -59,7 +58,7 @@ const Profitability = ({
             "ellipse--negative": isNegativeLocal
           })}
         >
-          <span {...rest}>
+          <span>
             {getPrefix(value, prefix)}
             {children}
           </span>
@@ -73,7 +72,6 @@ const Profitability = ({
             "default--positive": isPositiveLocal,
             "default--negative": isNegativeLocal
           })}
-          {...rest}
         >
           {getPrefix(value, prefix)}
           {children}
