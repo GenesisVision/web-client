@@ -13,12 +13,10 @@ export const PORTFOLIO_EVENTS_COLUMNS = [
     name: "type"
   },
   {
-    name: "description",
-    value: "title"
+    name: "description"
   },
   {
-    name: "amount",
-    value: "value"
+    name: "amount"
   }
 ];
 
