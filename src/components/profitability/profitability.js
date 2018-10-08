@@ -19,19 +19,13 @@ const PREFIXES = {
   }
 };
 
-const FORMS = {
-  CHIPS: "CHIPS",
-  TEXT: "TEXT"
-};
-
 const Profitability = ({
   className,
   children,
   value,
   isPositive,
   isNegative,
-  prefix,
-  form
+  prefix
 }) => {
   let isPositiveLocal;
   let isNegativeLocal;
@@ -48,36 +42,17 @@ const Profitability = ({
         (isNegativeLocal && `${PREFIXES[prefix].NEGATIVE} `))
     );
   };
-
-  switch (form) {
-    case "CHIPS":
-      return (
-        <div
-          className={classNames("ellipse", className, {
-            "ellipse--positive": isPositiveLocal,
-            "ellipse--negative": isNegativeLocal
-          })}
-        >
-          <span>
-            {getPrefix(value, prefix)}
-            {children}
-          </span>
-        </div>
-      );
-    case "TEXT":
-    default:
-      return (
-        <span
-          className={classNames("default", className, {
-            "default--positive": isPositiveLocal,
-            "default--negative": isNegativeLocal
-          })}
-        >
-          {getPrefix(value, prefix)}
-          {children}
-        </span>
-      );
-  }
+  return (
+    <div
+      className={classNames("profitability", className, {
+        positive: isPositiveLocal,
+        negative: isNegativeLocal
+      })}
+    >
+      {getPrefix(value, prefix)}
+      {children}
+    </div>
+  );
 };
 
 Profitability.propTypes = {
@@ -86,7 +61,6 @@ Profitability.propTypes = {
   value: PropTypes.number,
   isPositive: PropTypes.bool,
   isNegative: PropTypes.bool,
-  form: PropTypes.oneOf(Object.keys(FORMS)),
   prefix: PropTypes.oneOf(Object.keys(PREFIXES))
 };
 
