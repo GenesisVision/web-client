@@ -250,6 +250,10 @@
       "email-resend-button-text": "Resend email",
       "confirm-button-text": "Continue",
       "back-button-text": "Back"
+    },
+    "email-confirm": {
+      "title": "Email confirm",
+      "text-success": "Email address successfully verified"
     }
   },
   "wallet": {

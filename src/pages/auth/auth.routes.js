@@ -1,6 +1,9 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
+import EmailConfirmPage, {
+  EMAIL_CONFIRM_ROUTE
+} from "./email-confirm/email-confirm.page";
 import ForgotPasswordRoutes, {
   FORGOT_PASSWORD_ROUTE
 } from "./forgot-password/forgot-password.routes";
@@ -14,6 +17,7 @@ const AuthRoutes = () => (
     <Route path={LOGIN_ROUTE} component={LoginRoutes} />
     <Route path={SIGNUP_ROUTE} component={SignupRoutes} />
     <Route path={FORGOT_PASSWORD_ROUTE} component={ForgotPasswordRoutes} />
+    <Route path={EMAIL_CONFIRM_ROUTE} component={EmailConfirmPage} />
   </Switch>
 );
 
