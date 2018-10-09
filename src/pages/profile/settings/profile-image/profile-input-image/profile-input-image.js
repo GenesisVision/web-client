@@ -1,15 +1,15 @@
 import "cropperjs/dist/cropper.css";
 
-import "./input-image.scss";
+import "./profile-input-image.scss";
 
 import classnames from "classnames";
 import React, { Component } from "react";
 import Cropper from "react-cropper";
 import Dropzone from "react-dropzone";
 
-import InputImageDefault from "./input-image-default";
+import ProfileInputImageDefault from "./profile-input-image-default";
 
-class InputImage extends Component {
+class ProfileInputImage extends Component {
   constructor(props) {
     super(props);
     const { onChange, value, name } = this.props;
@@ -86,20 +86,22 @@ class InputImage extends Component {
     const { isDefault, isNew, src } = value;
     const { onDrop, catchImage, clear } = this;
     return (
-      <div className={classnames("input-image", className)}>
+      <div className={classnames("profile-input-image", className)}>
         <Dropzone
           disableClick
-          className="input-image__dropzone"
-          activeClassName="input-image__dropzone--active"
+          className="profile-input-image__dropzone"
+          activeClassName="profile-input-image__dropzone--active"
           accept="image/jpeg, image/png"
           ref={dropzone => {
             this.dropzone = dropzone;
           }}
           onDrop={onDrop}
         >
-          <div className="input-image__dropzone-helper">Drop files...</div>
-          <div className="input-image__dropzone-content">
-            <div className="input-image__image-container">
+          <div className="profile-input-image__dropzone-helper">
+            Drop files...
+          </div>
+          <div className="profile-input-image__dropzone-content">
+            <div className="profile-input-image__image-container">
               {isNew && (
                 <Cropper
                   ref={cropper => {
@@ -118,7 +120,7 @@ class InputImage extends Component {
               {!isNew &&
                 !isDefault && (
                   <span
-                    className="input-image__preview-img"
+                    className="profile-input-image__preview-img"
                     style={{
                       backgroundImage: `url(${src})`
                     }}
@@ -126,12 +128,14 @@ class InputImage extends Component {
                 )}
 
               {!isNew &&
-                isDefault && <InputImageDefault defaultImage={defaultImage} />}
+                isDefault && (
+                  <ProfileInputImageDefault defaultImage={defaultImage} />
+                )}
             </div>
-            <p className="input-image__text input-image__text--big">
+            <p className="profile-input-image__text profile-input-image__text--big">
               Drag the image here or click{" "}
               <span
-                className="input-image__text-upload"
+                className="profile-input-image__text-upload"
                 onClick={this.openFileDialog}
               >
                 upload
@@ -139,7 +143,7 @@ class InputImage extends Component {
               to browse your files
             </p>
             <p
-              className="input-image__text input-image__text--small"
+              className="profile-input-image__text profile-input-image__text--small"
               onClick={this.openFileDialog}
             >
               Tap to upload the image
@@ -147,7 +151,7 @@ class InputImage extends Component {
           </div>
         </Dropzone>
         {!isDefault && (
-          <div className="input-image__clear-btn" onClick={clear}>
+          <div className="profile-input-image__clear-btn" onClick={clear}>
             &#10006;
           </div>
         )}
@@ -156,4 +160,4 @@ class InputImage extends Component {
   }
 }
 
-export default InputImage;
+export default ProfileInputImage;
