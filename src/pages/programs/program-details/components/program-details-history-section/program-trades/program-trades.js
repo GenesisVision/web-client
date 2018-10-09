@@ -97,7 +97,9 @@ class ProgramTrades extends Component {
             <TableCell className="program-details-trades__cell program-details-trades__cell--profit">
               <Profitability value={trade.profit} prefix="sign">
                 <NumberFormat
-                  value={Math.abs(trade.profit)}
+                  value={Math.abs(trade.profit)
+                    .toFixed(8)
+                    .replace(/0*$/, "")}
                   decimalScale={8}
                   displayType="text"
                 />
