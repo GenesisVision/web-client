@@ -1,7 +1,7 @@
 import { TableCell, TableRow } from "modules/table/components";
 import React, { Component } from "react";
 import NumberFormat from "react-number-format";
-
+import Profitability from "components/profitability/profitability";
 import FavoriteIcon from "../../../favorite-asset/components/favorite-icon/favorite-icon";
 
 class FundsTableRow extends Component {
@@ -49,12 +49,15 @@ class FundsTableRow extends Component {
           />
         </TableCell>
         <TableCell className="funds-table__cell--profit">
-          <NumberFormat
-            value={fund.statistic.profitPercent}
-            suffix="%"
-            decimalScale={2}
-            displayType="text"
-          />
+          <Profitability value={fund.statistic.profitPercent} prefix="sign">
+            <NumberFormat
+              value={fund.statistic.profitPercent}
+              suffix="%"
+              allowNegative={false}
+              decimalScale={2}
+              displayType="text"
+            />
+          </Profitability>
         </TableCell>
         <TableCell className="funds-table__cell--chart">
           <fundSimpleChart data={fund.chart} />
