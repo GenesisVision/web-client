@@ -18,7 +18,7 @@ import {
 
 import ProgramBigChartTooltip from "./program-big-chart-tooltip";
 
-const ProgramBigChart = ({ data, currency }) => {
+const ProgramBigChart = ({ programId, data }) => {
   const programChartData = data.map(x => ({
     date: x.date.getTime(),
     equity: x.value
@@ -44,11 +44,11 @@ const ProgramBigChart = ({ data, currency }) => {
           axisLine={false}
           tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
         />
-        <Tooltip content={ProgramBigChartTooltip} currency={currency} />
+        <Tooltip content={ProgramBigChartTooltip} />
         <defs>
           <ProgramChartGradient
             offset={off}
-            name="equityChartStroke"
+            name={`equityChartStroke__${programId}`}
             positiveColor={GVColors.$positiveColor}
             negativeColor={GVColors.$negativeColor}
             startOpacity={1}
@@ -56,7 +56,7 @@ const ProgramBigChart = ({ data, currency }) => {
           />
           <ProgramChartGradient
             offset={off}
-            name="equityChartFill"
+            name={`equityChartFill__${programId}`}
             positiveColor={GVColors.$positiveColor}
             negativeColor={GVColors.$negativeColor}
             startOpacity={0.3}
@@ -66,11 +66,10 @@ const ProgramBigChart = ({ data, currency }) => {
         <Area
           type="monotone"
           dataKey="equity"
-          stroke={`url(#equityChartStroke)`}
+          stroke={`url(#equityChartStroke__${programId})`}
           strokeWidth={2}
-          fill={`url(#equityChartFill)`}
+          fill={`url(#equityChartFill__${programId})`}
           isAnimationActive={false}
-          activeDot={{ fill: "transparant" }}
         />
       </AreaChart>
     </ResponsiveContainer>

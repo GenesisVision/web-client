@@ -24,6 +24,7 @@ const StatisticItem = ({
         <NumberFormat
           value={value}
           thousandSeparator={" "}
+          decimalScale={8}
           displayType="text"
           suffix={" GVT"}
         />
@@ -37,6 +38,7 @@ const StatisticItem = ({
         <NumberFormat
           value={equivalent}
           thousandSeparator={" "}
+          decimalScale={8}
           displayType="text"
           suffix={` ${currency}`}
         />

@@ -4,7 +4,9 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
+  &__avatar {
+    cursor: pointer;
+  }
   &__right {
     width: 150px;
 

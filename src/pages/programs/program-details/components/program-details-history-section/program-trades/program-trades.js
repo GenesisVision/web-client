@@ -1,7 +1,7 @@
 import "./program-trades.scss";
 
 import Profitability from "components/profitability/profitability";
-import { TableCell, TableHeadCell, TableRow } from "modules/table/components";
+import { TableCell, TableRow } from "modules/table/components";
 import DateRangeFilter from "modules/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "modules/table/components/filtering/date-range-filter/date-range-filter.constants";
 import TableModule from "modules/table/components/table-module";
@@ -11,6 +11,7 @@ import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 
+import BaseProfitability from "../../../../../../components/profitability/base-profitability";
 import {
   PROGRAM_TRADES_COLUMNS,
   PROGRAM_TRADES_DEFAULT_FILTERS,
@@ -27,6 +28,18 @@ class ProgramTrades extends Component {
       .then(({ data }) => {
         return { items: data.trades, total: data.total };
       });
+  };
+
+  parseNumber = number => {
+    if (number === 0) return 0;
+    const dig =
+      Math.abs(number.toString().split("e")[1]) +
+        Math.abs(number.toString().split("e")[0].length) || 8;
+    return (
+      Math.abs(number)
+        .toFixed(dig)
+        .replace(/0*$/, "") || 0
+    );
   };
 
   render() {
@@ -56,24 +69,23 @@ class ProgramTrades extends Component {
         paging={DEFAULT_PAGING}
         columns={PROGRAM_TRADES_COLUMNS}
         renderHeader={column => (
-          <TableHeadCell
-            key={column.name}
+          <span
             className={`program-details-trades__head-cell program-details-trades__cell--${
               column.name
             }`}
           >
             {t(`program-details-page.history.trades.${column.name}`)}
-          </TableHeadCell>
+          </span>
         )}
         renderBodyRow={trade => (
           <TableRow className="program-details-trades__row">
             <TableCell className="program-details-trades__cell program-details-trades__cell--direction">
-              <Profitability
+              <BaseProfitability
                 isPositive={trade.direction === "Buy"}
                 isNegative={trade.direction === "Sell"}
               >
                 {trade.direction}
-              </Profitability>
+              </BaseProfitability>
             </TableCell>
             <TableCell className="program-details-trades__cell program-details-trades__cell--symbol">
               {trade.symbol}
@@ -95,10 +107,9 @@ class ProgramTrades extends Component {
               />
             </TableCell>
             <TableCell className="program-details-trades__cell program-details-trades__cell--profit">
-              <Profitability value={trade.profit}>
+              <Profitability value={trade.profit} prefix="sign">
                 <NumberFormat
-                  value={Math.abs(trade.profit)}
-                  decimalScale={8}
+                  value={this.parseNumber(trade.profit)}
                   displayType="text"
                 />
               </Profitability>

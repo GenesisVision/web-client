@@ -1,45 +1,49 @@
 import "./profitability.scss";
 
-import classNames from "classnames";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { PureComponent } from "react";
 
-const Profitability = ({
-  className,
-  children,
-  value,
-  isPositive,
-  isNegative,
-  ...rest
-}) => {
-  let isPositiveLocal = isPositive;
-  let isNegaitveLocal = isNegative;
+import BaseProfitability from "./base-profitability";
+import {
+  ProfitabilityPrefix,
+  ProfitabilityVariant,
+  composeProfitabilityPrefix
+} from "./profitability.helper";
 
-  if (value !== undefined) {
-    isPositiveLocal = value > 0;
-    isNegaitveLocal = value < 0;
+class Profitability extends PureComponent {
+  renderPrefix() {
+    const { value, prefix } = this.props;
+    if (value > 0) return composeProfitabilityPrefix(prefix).positive;
+    if (value < 0) return composeProfitabilityPrefix(prefix).negative;
   }
 
-  const rootClassName = classNames("profitability", className, {
-    "profitability--positive": isPositiveLocal,
-    "profitability--negative": isNegaitveLocal
-  });
+  render() {
+    const { className, value, variant, children } = this.props;
 
-  return (
-    <span className={rootClassName} {...rest}>
-      {isPositiveLocal && value !== undefined && "+ "}
-      {isNegaitveLocal && value !== undefined && "- "}
-      {children}
-    </span>
-  );
-};
+    return (
+      <BaseProfitability
+        className={className}
+        variant={variant}
+        isPositive={value > 0}
+        isNegative={value < 0}
+      >
+        {this.renderPrefix()}
+        {children}
+      </BaseProfitability>
+    );
+  }
+}
 
 Profitability.propTypes = {
   className: PropTypes.string,
-  children: PropTypes.node.isRequired,
-  value: PropTypes.number,
-  isPositive: PropTypes.bool,
-  isNegative: PropTypes.bool
+  value: PropTypes.number.isRequired,
+  prefix: PropTypes.oneOf(Object.values(ProfitabilityPrefix)),
+  variant: PropTypes.oneOf(Object.values(ProfitabilityVariant))
+};
+
+Profitability.defaultProps = {
+  prefix: "noPrefix",
+  variant: "text"
 };
 
 export default Profitability;
