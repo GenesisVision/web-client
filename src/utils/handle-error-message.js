@@ -5,7 +5,8 @@ const handleErrorMessage = response => {
         .filter(x => !x.property)
         .map(x => x.message)
         .join(", "),
-      code: response.body.code
+      code: response.body.code,
+      isServerConnectionError: false
     };
   } else {
     // if (action.payload.status === 401) {
@@ -13,7 +14,8 @@ const handleErrorMessage = response => {
     // }
     const error = {
       errorMessage: "Server Error. Please contact administrator.",
-      code: "InternalServerError"
+      code: "InternalServerError",
+      isServerConnectionError: true
     };
     const defaultError = error;
 

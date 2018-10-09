@@ -8,6 +8,7 @@ import NumberFormat from "react-number-format";
 const StatisticItem = ({
   heading,
   value,
+  adornment,
   equivalent,
   currency,
   className,
@@ -28,6 +29,7 @@ const StatisticItem = ({
           displayType="text"
           suffix={" GVT"}
         />
+        {adornment}
       </div>
       <div
         className={classnames(

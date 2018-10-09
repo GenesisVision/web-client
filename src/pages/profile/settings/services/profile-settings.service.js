@@ -1,12 +1,13 @@
 import { fetchProfileHeaderInfo } from "modules/header/actions/header-actions";
 import { profileApiProxy } from "services/api-client/profile-api";
 import authService from "services/auth-service";
+import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import filesService from "shared/services/file-service";
 
-export const updateProfileAvatar = (
+export const updateProfileAvatar = ({
   croppedImage,
   submitCallback
-) => dispatch => {
+}) => dispatch => {
   const authorization = authService.getAuthArg();
   let photoSrc = null;
 
@@ -20,16 +21,36 @@ export const updateProfileAvatar = (
       );
     })
     .then(() => dispatch(fetchProfileHeaderInfo()))
-    .then(() => submitCallback(photoSrc))
-    .catch(error => alert(error.errorMessage || error.message));
+    .then(() => {
+      dispatch(
+        alertMessageActions.success(
+          "profile.settings.image-success-save-message",
+          true
+        )
+      );
+      submitCallback(photoSrc);
+    })
+    .catch(error =>
+      dispatch(alertMessageActions.error(error.errorMessage || error.message))
+    );
 };
 
-export const removeProfileAvatar = submitCallback => dispatch => {
+export const removeProfileAvatar = ({ submitCallback }) => dispatch => {
   const authorization = authService.getAuthArg();
 
   profileApiProxy
     .v10ProfileAvatarRemovePost(authorization)
     .then(() => dispatch(fetchProfileHeaderInfo()))
-    .then(() => submitCallback())
-    .catch(error => alert(error.errorMessage || error.message));
+    .then(() => {
+      dispatch(
+        alertMessageActions.success(
+          "profile.settings.image-success-save-message",
+          true
+        )
+      );
+      submitCallback();
+    })
+    .catch(error =>
+      alertMessageActions.error(error.errorMessage || error.message)
+    );
 };
