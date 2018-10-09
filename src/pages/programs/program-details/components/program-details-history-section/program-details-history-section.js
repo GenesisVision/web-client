@@ -47,16 +47,18 @@ class ProgramDetailsHistorySection extends PureComponent {
       <Surface className="program-details-history">
         <div className="program-details-history__header">
           <h2>{t("program-details-page.history.heading")}</h2>
-          <GVTabs value={tab} onChange={this.handleTabChange}>
-            <GVTab
-              value={"trades"}
-              label={t("program-details-page.history.tabs.trades")}
-            />
-            <GVTab
-              value={"events"}
-              label={t("program-details-page.history.tabs.events")}
-            />
-          </GVTabs>
+          {(isAuthenticated && (
+            <GVTabs value={tab} onChange={this.handleTabChange}>
+              <GVTab
+                value={"trades"}
+                label={t("program-details-page.history.tabs.trades")}
+              />
+              <GVTab
+                value={"events"}
+                label={t("program-details-page.history.tabs.events")}
+              />
+            </GVTabs>
+          )) || <h5>Trades</h5>}
         </div>
         <div>
           {tab === TRADES_TAB && (
@@ -66,18 +68,17 @@ class ProgramDetailsHistorySection extends PureComponent {
               currency={currency}
             />
           )}
-          {tab === EVENTS_TAB &&
-            isAuthenticated && (
-              <PortfolioEventsTableComponent
-                filtering={EVENTS_FILTERING}
-                fetchPortfolioEvents={filters =>
-                  fetchPortfolioEvents({
-                    ...filters,
-                    assetId: programId
-                  })
-                }
-              />
-            )}
+          {tab === EVENTS_TAB && (
+            <PortfolioEventsTableComponent
+              filtering={EVENTS_FILTERING}
+              fetchPortfolioEvents={filters =>
+                fetchPortfolioEvents({
+                  ...filters,
+                  assetId: programId
+                })
+              }
+            />
+          )}
         </div>
       </Surface>
     );
