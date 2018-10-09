@@ -9,12 +9,17 @@ export const updateProfileAvatar = ({
   submitCallback
 }) => dispatch => {
   const authorization = authService.getAuthArg();
+  let photoSrc = null;
 
   filesService
     .uploadFileProxy(croppedImage, authorization)
-    .then(logoId =>
-      profileApiProxy.v10ProfileAvatarUpdateByFileIdPost(logoId, authorization)
-    )
+    .then(logoId => {
+      photoSrc = filesService.getFileUrl(logoId);
+      return profileApiProxy.v10ProfileAvatarUpdateByFileIdPost(
+        logoId,
+        authorization
+      );
+    })
     .then(() => dispatch(fetchProfileHeaderInfo()))
     .then(() => {
       dispatch(
@@ -23,7 +28,7 @@ export const updateProfileAvatar = ({
           true
         )
       );
-      submitCallback();
+      submitCallback(photoSrc);
     })
     .catch(error =>
       dispatch(alertMessageActions.error(error.errorMessage || error.message))
