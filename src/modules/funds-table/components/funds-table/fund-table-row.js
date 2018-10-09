@@ -4,6 +4,7 @@ import NumberFormat from "react-number-format";
 import Profitability from "components/profitability/profitability";
 import FavoriteIcon from "../../../favorite-asset/components/favorite-icon/favorite-icon";
 import ProgramAvatar from "../../../../components/program-avatar/program-avatar";
+import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
 
 class FundsTableRow extends Component {
   constructor(props) {
@@ -61,7 +62,7 @@ class FundsTableRow extends Component {
           </Profitability>
         </TableCell>
         <TableCell className="funds-table__cell--chart">
-          <fundSimpleChart data={fund.chart} />
+          <ProgramSimpleChart data={fund.chart} programId={fund.id} />
         </TableCell>
         {isAuthenticated &&
           fund.personalfundDetails && (
