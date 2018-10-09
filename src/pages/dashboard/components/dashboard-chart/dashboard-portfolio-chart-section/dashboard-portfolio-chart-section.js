@@ -55,6 +55,15 @@ class DashboardPortfolioChartSection extends PureComponent {
     this.props.service.getPortfolioChart(period.start, period.end);
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.currency !== this.props.currency) {
+      this.props.service.getPortfolioChart(
+        this.state.period.start,
+        this.state.period.end
+      );
+    }
+  }
+
   handleChangePeriod = period => {
     this.props.service.getPortfolioChart(period.start, period.end);
     this.setState({ period });
@@ -70,6 +79,7 @@ class DashboardPortfolioChartSection extends PureComponent {
           currency={currency}
           value={data.value}
           valueCurrency={data.valueCurrency}
+          changePercent={data.changePercent}
           changeValue={data.changeValue}
           changeValueCurrency={data.changeValueCurrency}
         />
