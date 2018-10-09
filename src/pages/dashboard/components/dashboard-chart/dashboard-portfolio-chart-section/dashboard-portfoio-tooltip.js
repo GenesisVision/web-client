@@ -1,32 +1,45 @@
 import ChartTooltip from "components/chart/chart-tooltip/chart-tooltip";
-import Chip from "components/chip/chip";
+import Profitability from "components/profitability/profitability";
 import React from "react";
+import NumberFormat from "react-number-format";
 
 import { BAR_COLORS } from "../dashboard-chart.constants";
 
-const assetChipType = value => {
-  if (value > 0) return { type: "positive" };
-  if (value < 0) return { type: "negative" };
-  return {};
-};
 const AssetsTooltipBody = ({ assets }) => {
-  return assets.map((x, i) => (
-    <div className="asset" key={x.id}>
-      <div className="asset__indicator" style={{ background: BAR_COLORS[i] }} />
-      <div className="asset__stats">
-        <div className="asset__asset-title">{x.title}</div>
-        <div className="asset__asset-value">{`${x.value} GVT`}</div>
-      </div>
-      <div className="asset__change">
-        <div className="asset__change-percent">
-          <Chip {...assetChipType(x.changePercent)} rounded>
-            {`${x.changePercent}%`}
-          </Chip>
+  return Object.keys(assets)
+    .filter(x => x.startsWith("asset"))
+    .map((x, i) => (
+      <div className="asset" key={i}>
+        <div
+          className="asset__indicator"
+          style={{ background: BAR_COLORS[i] }}
+        />
+        <div className="asset__stats">
+          <div className="asset__asset-title">{assets[x].asset.title}</div>
+          <div className="asset__asset-value">{`${
+            assets[x].asset.value
+          } GVT`}</div>
         </div>
-        <div className="asset__change-value">{`${x.changeValue} GVT`}</div>
+        <div className="asset__change">
+          <div className="asset__change-percent">
+            <Profitability
+              variant="chips"
+              value={assets[x].asset.changePercent}
+            >
+              <NumberFormat
+                value={Math.abs(assets[x].asset.changePercent)}
+                decimalScale={2}
+                displayType="text"
+                suffix="%"
+              />
+            </Profitability>
+          </div>
+          <div className="asset__change-value">{`${
+            assets[x].asset.changeValue
+          } GVT`}</div>
+        </div>
       </div>
-    </div>
-  ));
+    ));
 };
 const DasboardPortfolioTooltip = ({
   active,
@@ -37,21 +50,22 @@ const DasboardPortfolioTooltip = ({
   date
 }) => {
   if (!active) return null;
-  const data = payload[0].payload;
-  if (data.profitValue === undefined) {
+
+  const data = payload[0];
+  if (data.name !== "balance")
     return (
       <ChartTooltip
         heading="Assets"
-        body={<AssetsTooltipBody assets={data.assets} />}
+        body={<AssetsTooltipBody assets={data.payload} />}
         date={new Date(label)}
         className="assets-tooltip"
       />
     );
-  }
+
   return (
     <ChartTooltip
       heading="Total balance"
-      body={`${data.profitValue} GVT`}
+      body={`${data.value} GVT`}
       date={new Date(label)}
     />
   );

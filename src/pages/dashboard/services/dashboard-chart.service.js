@@ -9,7 +9,9 @@ export const getPortfolioChart = (from, to) => (dispatch, getState) => {
   const filters = {
     currency,
     from,
-    to
+    to,
+    balancePoints: 15,
+    programsPoints: 10
   };
 
   dispatch(actions.fetchPortfolioChart(authorization, filters));

@@ -23,12 +23,10 @@ class DashboardPortfolioChart extends PureComponent {
     activeIndex: undefined
   };
 
-  // grOffset = () =>
-  //   gradientOffset(
-  //     this.props.data
-  //       .filter(x => x.profitValue !== undefined)
-  //       .map(x => x.profitValue)
-  //   );
+  grOffset = () =>
+    gradientOffset(
+      this.props.balance.filter(x => x.value !== undefined).map(x => x.value)
+    );
 
   handleBarMouseOver = (data, index) => {
     this.setState({
@@ -37,13 +35,14 @@ class DashboardPortfolioChart extends PureComponent {
   };
 
   render() {
-    const { balanceChart, assetsChart } = this.props;
-    const { activeIndex } = this.state;
-    if (balanceChart.length === 0) return null;
+    const { balance, assets } = this.props;
 
+    if (balance.length === 0) return null;
+    const { activeIndex } = this.state;
+    const assetsCount = 3;
     return (
       <ResponsiveContainer>
-        <ComposedChart stackOffset="sign">
+        <ComposedChart stackOffset="sign" data={assets}>
           <defs>
             <ProgramChartGradient
               offset={this.grOffset()}
@@ -56,47 +55,69 @@ class DashboardPortfolioChart extends PureComponent {
           </defs>
           <XAxis
             dataKey="date"
-            axisLine={false}
+            domain={["dataMin", "dataMax"]}
+            type="number"
             tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
-            tickFormatter={date => moment(date).format("ll")}
+            tickFormatter={(date, i) => moment(date).format("ll")}
+            allowDuplicatedCategory={false}
+            axisLine={false}
           />
           <YAxis
+            yAxisId="left"
+            dataKey="balance"
+            data={balance}
+            orientation="left"
             axisLine={false}
             tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
-            width={20}
+            tickFormatter={x => x.toFixed(2)}
+            //unit="GVT"
+            width={50}
           />
-
-          <Tooltip cursor={false} content={DasboardPortfolioTooltip} />
-
+          <YAxis
+            yAxisId="right"
+            dataKey="value"
+            data={assets}
+            orientation="right"
+            axisLine={false}
+            tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
+            //unit={currency}
+            tickFormatter={x => x.toFixed(4)}
+            width={80}
+          />
           <Area
             type="monotone"
-            dataKey="profitValue"
+            dataKey="balance"
+            data={balance}
             stroke={GVColors.$primaryColor}
             fill={`url(#dashboardPortfolioChartFill)`}
             connectNulls={true}
-            isAnimationActive={false}
             strokeWidth={2}
+            yAxisId="left"
           />
-          {/* {data[0].assets.map((x, i) => (
+          <Tooltip cursor={false} content={DasboardPortfolioTooltip} />
+          {[...Array(assetsCount).keys()].map(idx => (
             <Bar
-              key={`assets[${i}]`}
-              dataKey={`assets[${i}].value`}
+              dataKey={`asset${assetsCount - idx - 1}.value`}
+              data={assets}
               stackId="bars"
               isAnimationActive={false}
+              barSize={15}
+              yAxisId="right"
               onMouseOver={this.handleBarMouseOver}
+              key={idx}
             >
-              {data.map((entry, index) => (
+              {assets.map((entry, index) => (
                 <Cell
                   fill={
-                    index === activeIndex
-                      ? BAR_COLORS[i]
-                      : GVColors.$textDarkColor
+                    activeIndex === index
+                      ? BAR_COLORS[assetsCount - idx - 1]
+                      : GVColors.$labelColor
                   }
-                  key={`cell-${index}`}
+                  key={index}
                 />
               ))}
             </Bar>
-          ))} */}
+          ))}
         </ComposedChart>
       </ResponsiveContainer>
     );
