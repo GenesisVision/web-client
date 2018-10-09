@@ -1,4 +1,3 @@
-import moment from "moment";
 import Notification, {
   notificationProps
 } from "pages/app/components/notifications/components/notification/notification";
@@ -10,23 +9,11 @@ class NotificationsGroup extends Component {
   renderNotifications = notification => (
     <Notification key={notification.id} {...notification} />
   );
-  getTitle = () => {
-    const { t } = this.props;
-    return moment
-      .unix(this.props.timestamp)
-      .calendar(null, {
-        sameDay: `[${t("notifications-aside.today")}], DD MMMM`,
-        lastDay: `[${t("notifications-aside.yesterday")}], DD MMMM`,
-        lastWeek: "dddd, DD MMMM",
-        sameElse: "dddd, DD MMMM"
-      })
-      .toUpperCase();
-  };
   render() {
-    const { notifications } = this.props;
+    const { notifications, title } = this.props;
     return (
       <div className="notifications__group">
-        <div className="notifications__title">{this.getTitle()}</div>
+        <div className="notifications__title">{title}</div>
         {notifications.map(this.renderNotifications)}
       </div>
     );
@@ -34,7 +21,7 @@ class NotificationsGroup extends Component {
 }
 
 NotificationsGroup.propTypes = {
-  timestamp: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
   notifications: PropTypes.arrayOf(PropTypes.shape(notificationProps))
 };
 

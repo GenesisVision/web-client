@@ -2,17 +2,15 @@ import authService from "services/auth-service";
 
 import * as actions from "../actions/dashboard.actions";
 
-export const getPortfolioChart = period => (dispatch, getState) => {
+export const getPortfolioChart = (from, to) => (dispatch, getState) => {
   const authorization = authService.getAuthArg();
   const { currency } = getState().accountSettings;
 
   const filters = {
-    currency
+    currency,
+    from,
+    to
   };
-  if (period) {
-    filters.from = period.from;
-    filters.to = period.to;
-  }
 
   dispatch(actions.fetchPortfolioChart(authorization, filters));
 };

@@ -5,6 +5,9 @@ import ManagerPage, {
   MANAGER_DETAILS_ROUTE_REGEXP
 } from "pages/manager/manager.page";
 import NotFoundPage from "pages/not-found/not-found.routes";
+import NotificationRoutes, {
+  NOTIFICATIONS_ROUTE
+} from "pages/notifications/notifications.routes";
 import PrivateRoute from "pages/private-route";
 import ProfileRoutes from "pages/profile/profile.routes";
 import WalletPage, { WALLET_PAGE_ROUTE } from "pages/wallet/wallet-page";
@@ -28,7 +31,11 @@ const AppRoutes = () => {
         <Route path={FUNDS_ROUTE} component={FundsRoutes} />
         <Route path={GLOBAL_SEARCH_ROUTE} component={GlobalSearchPage} />
         <Route path={MANAGER_DETAILS_ROUTE_REGEXP} component={ManagerPage} />
-        <Route path={PROFILE_ROUTE} component={ProfileRoutes} />
+        <PrivateRoute path={PROFILE_ROUTE} component={ProfileRoutes} />
+        <PrivateRoute
+          path={NOTIFICATIONS_ROUTE}
+          component={NotificationRoutes}
+        />
         <PrivateRoute path={DASHBOARD_ROUTE} component={DashboardRoutes} />
         <PrivateRoute path={WALLET_PAGE_ROUTE} component={WalletPage} />
         <Route component={NotFoundPage} />

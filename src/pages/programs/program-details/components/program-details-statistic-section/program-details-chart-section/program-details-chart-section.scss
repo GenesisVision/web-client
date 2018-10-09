@@ -1,5 +1,7 @@
+@import "styles/_colors.scss";
 .program-details-chart {
   padding: 40px;
+  flex: 1;
   &__heading {
     margin: 0 0 30px;
     font-size: 17px;
@@ -11,8 +13,30 @@
   }
 
   &__profit {
-    height: 260px;
+    height: 300px;
     width: 100%;
-    margin-top: 20px;
+    margin-top: 40px;
+  }
+
+  .program-details-tooltip {
+    &__statistic {
+      margin: 10px 0;
+    }
+    &__title {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      color: $text-accent-color;
+      max-width: 10em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &__value {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      color: $text-dark-color;
+    }
   }
 }

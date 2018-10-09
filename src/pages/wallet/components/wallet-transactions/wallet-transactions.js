@@ -83,8 +83,7 @@ const WalletTransactions = ({ t }) => (
                 decimalScale={2}
                 displayType="text"
               />
-              {transaction.sourceCurrency !== "Undefined" &&
-                " " + transaction.sourceCurrency}
+              {" " + transaction.sourceCurrency}
             </Profitability>
           </TableCell>
         </TableRow>

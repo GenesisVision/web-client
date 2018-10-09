@@ -49,31 +49,4 @@
       min-width: 62px;
     }
   }
-
-  & .table-body,
-  & .table-head {
-    width: auto;
-  }
-
-  & .filter {
-    &__label {
-      color: $short-statistic-notice-color;
-    }
-
-    &__value {
-      color: $text-light-color;
-    }
-
-    &__arrow {
-      stroke: $label-color;
-    }
-  }
-
-  &__head-cell span {
-    letter-spacing: 0.4px;
-  }
-
-  &__cell {
-    color: $text-light-color;
-  }
 }
