@@ -15,9 +15,7 @@ const ProgramWithdrawContainer = props => {
       <ProgramWithdrawPopup
         currency={props.currency}
         fetchInfo={() => props.services.getProgramWithdrawInfo(props.id)}
-        withdraw={amount =>
-          console.info(amount) || withdrawProgramById(props.id, amount)
-        }
+        withdraw={amount => withdrawProgramById(props.id, amount)}
       />
     </Dialog>
   );

@@ -2,11 +2,11 @@
 @import "styles/_breakpoint.scss";
 
 .notifications {
-  padding: 20px;
+  //padding: 20px;
   width: 100%;
-  @include media-breakpoint-landscape-phone {
-    padding: 32px 40px;
-  }
+  //@include media-breakpoint-landscape-phone {
+  //  padding: 32px 40px;
+  //}
   &__group:not(:last-child) {
     border-bottom: 1px solid $border-color;
   }
@@ -34,6 +34,17 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 32px;
+    padding: 20px 20px 0 20px;
+    @include media-breakpoint-landscape-phone {
+      padding: 32px 40px 0 40px;
+    }
+  }
+
+  &__content {
+    padding: 0 20px 20px 20px;
+    @include media-breakpoint-landscape-phone {
+      padding: 0 40px 32px 40px;
+    }
   }
 }
 
@@ -54,5 +65,15 @@
     margin-bottom: 30px;
     color: $text-dark-color;
     letter-spacing: 0.4px;
+  }
+
+  &--is-unread {
+    .notification__date {
+      &:after {
+        content: "\25CF";
+        color: $negative-color;
+        margin-left: 10px;
+      }
+    }
   }
 }

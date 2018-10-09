@@ -74,6 +74,62 @@
     "today": "today",
     "yesterday": "yesterday"
   },
+  "notifications": {
+    "title": "Notification settings",
+    "general": {
+      "title": "GENERAL",
+      "news-updates": "News and updates",
+      "emergency": "Emergency notifications",
+      "PlatformEmergency": {
+        "enabled-alert": "Enabled emergency notifications",
+        "disabled-alert": "Disabled emergency notifications"
+      },
+      "PlatformNewsAndUpdates": {
+        "enabled-alert": "Enabled new and updates notifications",
+        "disabled-alert": "Disabled new and updates notifications"
+      }
+    },
+    "programs": "PROGRAMS",
+    "program": {
+      "title": "Program notifications",
+      "general": {
+        "title": "GENERAL",
+        "news-updates": "Program news and updates",
+        "end-of-period": "Notifications for the end of the period",
+        "ProgramNewsAndUpdates": {
+          "disabled-alert": "Enabled program new and updates notifications",
+          "enabled-alert": "Disabled program new and updates notifications"
+        },
+        "ProgramEndOfPeriod": {
+          "disabled-alert": "Enabled the end of period notifications",
+          "enabled-alert": "Disabled the end of period notifications"
+        }
+      },
+      "custom": {
+        "title": "CUSTOM",
+        "profit": "Profit notification",
+        "create": "Create notification",
+        "enabled-alert": "Enabled custom notification",
+        "disabled-alert": "Disabled custom notification",
+        "delete-alert": "Custom notification was deleted",
+        "create-alert": "Custom notification was created"
+      },
+      "create": {
+        "title": "Create notification",
+        "type-label": "Type",
+        "amount-label": "Enter amount",
+        "amount-required": "Amount is required",
+        "Level": {
+          "title": "Level notification",
+          "label": "Level"
+        },
+        "Profit": {
+          "title": "Profit notification",
+          "label": "Profit"
+        }
+      }
+    }
+  },
   "buttons": {
     "apply": "Apply",
     "cancel": "Cancel",
@@ -82,7 +138,9 @@
     "copy": "Copy",
     "confirm": "Confirm",
     "activate": "Activate",
-    "disable": "Disable"
+    "disable": "Disable",
+    "create": "Create",
+    "delete": "Delete"
   },
   "navigation": {
     "dashboard": "Dashboard",
