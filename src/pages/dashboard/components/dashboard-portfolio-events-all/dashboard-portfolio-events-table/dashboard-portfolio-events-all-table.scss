@@ -1,8 +1,11 @@
 @import "styles/_colors.scss";
 @import "styles/_breakpoint.scss";
 
-.portfolio-events {
+$middle-padding: 33px;
+$large-padding: 42px;
 
+.portfolio-events-all-table {
+  padding-top: $large-padding;
   &__row:nth-child(2n + 1) {
     background-color: $table-background-subcolor;
   }
@@ -61,7 +64,7 @@
     }
 
     & .table__toolbar {
-      padding: 40px 32px 32px;
+      padding: 0 $middle-padding $middle-padding;
       flex-direction: row;
     }
   }
