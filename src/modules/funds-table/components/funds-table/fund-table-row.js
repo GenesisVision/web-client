@@ -35,13 +35,6 @@ class FundsTableRow extends Component {
         <TableCell className="funds-table__cell--investors">
           {fund.statistic.investorsCount}
         </TableCell>
-        <TableCell className="funds-table__cell--available-to-invest">
-          {fund.availableInvestment}
-        </TableCell>
-        <TableCell className="funds-table__cell--trades">
-          {fund.statistic.tradesCount}
-        </TableCell>
-
         <TableCell className="funds-table__cell--drawdown">
           <NumberFormat
             value={fund.statistic.drawdownPercent}
