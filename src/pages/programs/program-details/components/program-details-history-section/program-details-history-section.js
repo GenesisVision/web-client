@@ -10,6 +10,8 @@ import { translate } from "react-i18next";
 
 import { fetchPortfolioEvents } from "../../../../dashboard/services/dashboard-events.services";
 import ProgramTrades from "./program-trades/program-trades";
+import { compose } from "redux";
+import connect from "react-redux/es/connect/connect";
 
 const TRADES_TAB = "trades";
 const EVENTS_TAB = "events";
@@ -39,22 +41,24 @@ class ProgramDetailsHistorySection extends PureComponent {
 
   render() {
     const { tab } = this.state;
-    const { t, programId, currency, tradesData } = this.props;
+    const { t, programId, currency, tradesData, isAuthenticated } = this.props;
     if (!tradesData) return null;
     return (
       <Surface className="program-details-history">
         <div className="program-details-history__header">
           <h2>{t("program-details-page.history.heading")}</h2>
-          <GVTabs value={tab} onChange={this.handleTabChange}>
-            <GVTab
-              value={"trades"}
-              label={t("program-details-page.history.tabs.trades")}
-            />
-            <GVTab
-              value={"events"}
-              label={t("program-details-page.history.tabs.events")}
-            />
-          </GVTabs>
+          {(isAuthenticated && (
+            <GVTabs value={tab} onChange={this.handleTabChange}>
+              <GVTab
+                value={"trades"}
+                label={t("program-details-page.history.tabs.trades")}
+              />
+              <GVTab
+                value={"events"}
+                label={t("program-details-page.history.tabs.events")}
+              />
+            </GVTabs>
+          )) || <h5>Trades</h5>}
         </div>
         <div>
           {tab === TRADES_TAB && (
@@ -80,5 +84,10 @@ class ProgramDetailsHistorySection extends PureComponent {
     );
   }
 }
-
-export default translate()(ProgramDetailsHistorySection);
+const mapStateToProps = state => {
+  const { isAuthenticated } = state.authData;
+  return { isAuthenticated };
+};
+export default translate()(
+  compose(connect(mapStateToProps))(ProgramDetailsHistorySection)
+);
