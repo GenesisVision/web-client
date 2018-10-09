@@ -3,8 +3,9 @@ import "./profile-image.scss";
 import { GVButton } from "gv-react-components";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
-import InputImage from "shared/components/form/input-image/input-image";
 import UserIcon from "shared/media/user-avatar.svg";
+
+import ProfileInputImage from "./profile-input-image/profile-input-image";
 
 class ProfileImage extends Component {
   state = {
@@ -32,10 +33,15 @@ class ProfileImage extends Component {
     );
   };
 
-  submitCallback = () => {
+  submitCallback = imageSrc => {
     this.setState({
       isSubmitting: false,
-      value: { ...this.state.value, isImageChanged: false }
+      value: {
+        ...this.state.value,
+        isImageChanged: false,
+        isNew: false,
+        src: imageSrc
+      }
     });
   };
 
@@ -65,7 +71,7 @@ class ProfileImage extends Component {
           {t("profile.settings.image-requirements")}
         </div>
 
-        <InputImage
+        <ProfileInputImage
           defaultImage={UserIcon}
           onChange={onChange}
           onClear={onClear}
