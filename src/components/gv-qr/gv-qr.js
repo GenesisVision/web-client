@@ -13,7 +13,6 @@ const GVqr = ({ value, size, figureColor, backgroundColor }) => (
       bgColor={backgroundColor}
       fgColor={figureColor}
       size={size}
-      level="L"
     />
   </div>
 );
@@ -26,8 +25,8 @@ GVqr.propTypes = {
 
 GVqr.defaultProps = {
   size: 150,
-  figureColor: GVColors.$primaryColor,
-  backgroundColor: GVColors.$backgroundColor
+  figureColor: GVColors.$backgroundColor,
+  backgroundColor: GVColors.$primaryColor
 };
 
 export default GVqr;
