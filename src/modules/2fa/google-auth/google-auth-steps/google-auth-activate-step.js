@@ -15,9 +15,10 @@ export const GoogleStep3 = ({ t, handleSubmit, errorMessage, disabled }) => {
       <form id="google-auth" onSubmit={handleSubmit}>
         <GVFormikField
           name="code"
+          type="text"
           label={t("2fa.google-code")}
           component={GVTextField}
-          autoComplete="off"
+          autoComplete="nope"
           InputComponent={NumberFormat}
           allowNegative={false}
           format="######"
@@ -27,9 +28,9 @@ export const GoogleStep3 = ({ t, handleSubmit, errorMessage, disabled }) => {
           type="password"
           label={t("2fa.password")}
           component={GVTextField}
-          autoComplete="off"
+          autoComplete="new-password"
         />
-        {errorMessage}
+        <div className="form-error">{errorMessage}</div>
         <GVButton
           className="google-auth__button"
           variant="contained"
