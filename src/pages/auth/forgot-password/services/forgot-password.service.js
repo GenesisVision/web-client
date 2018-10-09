@@ -41,7 +41,14 @@ const restorePassword = ({ userId, code, data, setSubmitting }) => dispatch => {
 const sendForgotPasswordEmail = () => (dispatch, getState) => {
   let { email } = getState().emailPending;
 
-  dispatch(passwordRestoreActions.forgotPassword({ email }));
+  dispatch(passwordRestoreActions.forgotPassword({ email })).then(() => {
+    dispatch(
+      alertMessageActions.success(
+        "auth.password-restore.resend-email-alert-message",
+        true
+      )
+    );
+  });
 };
 
 const navigateToPasswordRestore = () => (dispatch, getState) => {

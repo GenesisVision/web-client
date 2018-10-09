@@ -229,6 +229,7 @@
     "password-restore": {
       "title": "Restore password",
       "success-alert-message": "Your password changed successfully!",
+      "resend-email-alert-message": "Information has been re-sent to your email address.",
       "forgot-password": {
         "text": "Just enter the email address you used to create your account.",
         "email-field-text": "Email address",
