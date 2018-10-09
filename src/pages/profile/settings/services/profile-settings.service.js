@@ -8,14 +8,19 @@ export const updateProfileAvatar = (
   submitCallback
 ) => dispatch => {
   const authorization = authService.getAuthArg();
+  let photoSrc = null;
 
   filesService
     .uploadFileProxy(croppedImage, authorization)
-    .then(logoId =>
-      profileApiProxy.v10ProfileAvatarUpdateByFileIdPost(logoId, authorization)
-    )
+    .then(logoId => {
+      photoSrc = filesService.getFileUrl(logoId);
+      return profileApiProxy.v10ProfileAvatarUpdateByFileIdPost(
+        logoId,
+        authorization
+      );
+    })
     .then(() => dispatch(fetchProfileHeaderInfo()))
-    .then(() => submitCallback())
+    .then(() => submitCallback(photoSrc))
     .catch(error => alert(error.errorMessage || error.message));
 };
 
