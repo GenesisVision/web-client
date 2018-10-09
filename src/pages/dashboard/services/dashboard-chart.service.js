@@ -10,7 +10,7 @@ export const getPortfolioChart = (from, to) => (dispatch, getState) => {
     currency,
     from,
     to,
-    balancePoints: 15,
+    balancePoints: 50,
     programsPoints: 10
   };
 

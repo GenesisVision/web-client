@@ -23,6 +23,7 @@ const AssetsTooltipBody = ({ assets }) => {
         <div className="asset__change">
           <div className="asset__change-percent">
             <Profitability
+              prefix="arrow"
               variant="chips"
               value={assets[x].asset.changePercent}
             >
@@ -51,22 +52,27 @@ const DasboardPortfolioTooltip = ({
 }) => {
   if (!active) return null;
 
-  const data = payload[0];
-  if (data.name !== "balance")
+  let data = payload[0];
+  if (data.name === "balance" && payload.length === 1) {
     return (
       <ChartTooltip
-        heading="Assets"
-        body={<AssetsTooltipBody assets={data.payload} />}
+        heading="Total balance"
+        body={`${data.value} GVT`}
         date={new Date(label)}
-        className="assets-tooltip"
       />
     );
+  }
+  if (data.name === "balance") {
+    const [, ...assets] = payload;
+    data = assets[0];
+  }
 
   return (
     <ChartTooltip
-      heading="Total balance"
-      body={`${data.value} GVT`}
+      heading="Assets"
+      body={<AssetsTooltipBody assets={data.payload} />}
       date={new Date(label)}
+      className="assets-tooltip"
     />
   );
 };

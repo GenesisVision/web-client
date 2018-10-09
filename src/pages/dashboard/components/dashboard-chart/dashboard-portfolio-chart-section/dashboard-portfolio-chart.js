@@ -39,7 +39,7 @@ class DashboardPortfolioChart extends PureComponent {
 
     if (balance.length === 0) return null;
     const { activeIndex } = this.state;
-    const assetsCount = 3;
+    const assetsCount = 10;
     return (
       <ResponsiveContainer>
         <ComposedChart stackOffset="sign" data={assets}>
@@ -49,8 +49,8 @@ class DashboardPortfolioChart extends PureComponent {
               name="dashboardPortfolioChartFill"
               positiveColor={GVColors.$primaryColor}
               negativeColor={GVColors.$primaryColor}
-              startOpacity={0.2}
-              stopOpacity={0.05}
+              startOpacity={0.05}
+              stopOpacity={0.2}
             />
           </defs>
           <XAxis
