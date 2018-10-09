@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import NumberFormat from "react-number-format";
 import Profitability from "components/profitability/profitability";
 import FavoriteIcon from "../../../favorite-asset/components/favorite-icon/favorite-icon";
+import ProgramAvatar from "../../../../components/program-avatar/program-avatar";
 
 class FundsTableRow extends Component {
   constructor(props) {
@@ -17,8 +18,8 @@ class FundsTableRow extends Component {
     return (
       <TableRow>
         <TableCell className="funds-table__cell--name">
-          <div className="funds-table__cell--avatar-title">
-            <fundAvatar url={fund.logo} alt={fund.title} />
+          <div className="programs-table__cell--avatar-title">
+            <ProgramAvatar url={fund.logo} alt={fund.title} />
             <div className="funds-table__cell--title">
               <div className="funds-table__cell--top">{fund.title}</div>
             </div>
