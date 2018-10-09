@@ -1,19 +1,19 @@
 import "./dashboard-portfolio-events-all-table.scss";
 
+import Profitability from "components/profitability/profitability";
+import { TableCell, TableRow } from "modules/table/components";
+import { ASSET_TYPE_FILTER_VALUES } from "modules/table/components/filtering/asset-type-filter/asset-type-filter.constants";
+import DateRangeFilter from "modules/table/components/filtering/date-range-filter/date-range-filter";
+import { DATE_RANGE_FILTER_NAME } from "modules/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { EVENT_TYPE_FILTER_NAME } from "modules/table/components/filtering/event-type-filter/event-type-filter.constants";
+import { EVENT_TYPE_FILTER_VALUES } from "modules/table/components/filtering/event-type-filter/event-type-filter.constants";
+import SelectFilter from "modules/table/components/filtering/select-filter/select-filter";
+import TableModule from "modules/table/components/table-module";
+import { DEFAULT_PAGING } from "modules/table/reducers/table-paging.reducer";
 import moment from "moment";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import Profitability from "components/profitability/profitability";
-import { TableCell, TableRow } from "modules/table/components";
-import DateRangeFilter from "modules/table/components/filtering/date-range-filter/date-range-filter";
-import SelectFilter from "modules/table/components/filtering/select-filter/select-filter";
-import TableModule from "modules/table/components/table-module";
-import { DEFAULT_PAGING } from "modules/table/reducers/table-paging.reducer";
-import { ASSET_TYPE_FILTER_VALUES } from "modules/table/components/filtering/asset-type-filter/asset-type-filter.constants";
-import { EVENT_TYPE_FILTER_VALUES } from "modules/table/components/filtering/event-type-filter/event-type-filter.constants";
-import { DATE_RANGE_FILTER_NAME } from "modules/table/components/filtering/date-range-filter/date-range-filter.constants";
-import { EVENT_TYPE_FILTER_NAME } from "modules/table/components/filtering/event-type-filter/event-type-filter.constants";
 
 import { fetchPortfolioEvents } from "../../../services/dashboard-events.services";
 import {
