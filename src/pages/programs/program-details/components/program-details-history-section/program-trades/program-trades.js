@@ -30,6 +30,18 @@ class ProgramTrades extends Component {
       });
   };
 
+  parseNumber = number => {
+    if (number === 0) return 0;
+    const dig =
+      Math.abs(number.toString().split("e")[1]) +
+        Math.abs(number.toString().split("e")[0].length) || 8;
+    return (
+      Math.abs(number)
+        .toFixed(dig)
+        .replace(/0*$/, "") || 0
+    );
+  };
+
   render() {
     const { t, trades } = this.props;
     let data = { trades: null, total: 0 };
@@ -97,9 +109,7 @@ class ProgramTrades extends Component {
             <TableCell className="program-details-trades__cell program-details-trades__cell--profit">
               <Profitability value={trade.profit} prefix="sign">
                 <NumberFormat
-                  value={Math.abs(trade.profit)
-                    .toFixed(8)
-                    .replace(/0*$/, "")}
+                  value={this.parseNumber(trade.profit)}
                   displayType="text"
                 />
               </Profitability>
