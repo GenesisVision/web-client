@@ -20,23 +20,35 @@ const forgotPassword = data => dispatch => {
   });
 };
 
-const restorePassword = (userId, code, data) => dispatch => {
-  return dispatch(
-    passwordRestoreActions.restorePassword(userId, code, data)
-  ).then(response => {
-    authService.storeToken(response.value);
-    dispatch(authActions.updateToken());
-    dispatch(push(HOME_ROUTE));
-    dispatch(
-      alertMessageActions.success("Your password changed successfully!")
-    );
-  });
+const restorePassword = ({ userId, code, data, setSubmitting }) => dispatch => {
+  return dispatch(passwordRestoreActions.restorePassword(userId, code, data))
+    .then(response => {
+      authService.storeToken(response.value);
+      dispatch(authActions.updateToken());
+      dispatch(push(HOME_ROUTE));
+      dispatch(
+        alertMessageActions.success(
+          "auth.password-restore.success-alert-message",
+          true
+        )
+      );
+    })
+    .catch(() => {
+      setSubmitting(false);
+    });
 };
 
 const sendForgotPasswordEmail = () => (dispatch, getState) => {
   let { email } = getState().emailPending;
 
-  dispatch(passwordRestoreActions.forgotPassword({ email }));
+  dispatch(passwordRestoreActions.forgotPassword({ email })).then(() => {
+    dispatch(
+      alertMessageActions.success(
+        "auth.password-restore.resend-email-alert-message",
+        true
+      )
+    );
+  });
 };
 
 const navigateToPasswordRestore = () => (dispatch, getState) => {

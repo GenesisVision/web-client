@@ -11,11 +11,16 @@ const ProfileImageContainer = ({ headerData, services }) => {
 
   const updateAvatar = (croppedImage, submitCallback) => {
     if (croppedImage) {
-      services.updateProfileAvatar(croppedImage, submitCallback);
+      services.updateProfileAvatar({
+        croppedImage,
+        submitCallback
+      });
     }
 
     if (headerData.avatar && !croppedImage) {
-      services.removeProfileAvatar(submitCallback);
+      services.removeProfileAvatar({
+        submitCallback
+      });
     }
   };
 
