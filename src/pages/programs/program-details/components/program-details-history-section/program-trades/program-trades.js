@@ -100,7 +100,6 @@ class ProgramTrades extends Component {
                   value={Math.abs(trade.profit)
                     .toFixed(8)
                     .replace(/0*$/, "")}
-                  decimalScale={8}
                   displayType="text"
                 />
               </Profitability>
