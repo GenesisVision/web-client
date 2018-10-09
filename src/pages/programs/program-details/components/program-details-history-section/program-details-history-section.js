@@ -10,6 +10,8 @@ import { translate } from "react-i18next";
 
 import { fetchPortfolioEvents } from "../../../../dashboard/services/dashboard-events.services";
 import ProgramTrades from "./program-trades/program-trades";
+import { compose } from "redux";
+import connect from "react-redux/es/connect/connect";
 
 const TRADES_TAB = "trades";
 const EVENTS_TAB = "events";
@@ -64,21 +66,27 @@ class ProgramDetailsHistorySection extends PureComponent {
               currency={currency}
             />
           )}
-          {tab === EVENTS_TAB && (
-            <PortfolioEventsTableComponent
-              filtering={EVENTS_FILTERING}
-              fetchPortfolioEvents={filters =>
-                fetchPortfolioEvents({
-                  ...filters,
-                  assetId: programId
-                })
-              }
-            />
-          )}
+          {tab === EVENTS_TAB &&
+            isAuthenticated && (
+              <PortfolioEventsTableComponent
+                filtering={EVENTS_FILTERING}
+                fetchPortfolioEvents={filters =>
+                  fetchPortfolioEvents({
+                    ...filters,
+                    assetId: programId
+                  })
+                }
+              />
+            )}
         </div>
       </Surface>
     );
   }
 }
-
-export default translate()(ProgramDetailsHistorySection);
+const mapStateToProps = state => {
+  const { isAuthenticated } = state.authData;
+  return { isAuthenticated };
+};
+export default translate()(
+  compose(connect(mapStateToProps))(ProgramDetailsHistorySection)
+);
