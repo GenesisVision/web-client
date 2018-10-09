@@ -16,7 +16,6 @@ $padding: 33px;
 }
 
 .table {
-  padding-bottom: $padding;
   width: 100%;
   border-spacing: 0;
   .message {
@@ -42,8 +41,7 @@ $padding: 33px;
     justify-content: flex-end;
     width: 100%;
     align-items: center;
-    padding: $padding/2;
-    padding-bottom: 0;
+    padding: 0 $padding/2 $padding/2;
   }
 
   &__toggle {
@@ -84,7 +82,6 @@ $padding: 33px;
 
   &__head {
     font-size: $th-font-size/1.5;
-    opacity: 0.3;
   }
   &__body {
     font-size: $td-font-size/1.5;
@@ -123,12 +120,23 @@ $padding: 33px;
     &#{&} {
       &--head {
         padding-right: 15px;
+        span {
+          opacity: 0.5;
+        }
       }
       &--sortable {
         cursor: pointer;
         padding-right: 15px;
+        font-weight: 500;
+        span {
+          opacity: 0.6;
+        }
         .table__cell--sortable-asc,
         .table__cell--sortable-desc {
+          font-weight: 600;
+          span {
+            opacity: 1;
+          }
           position: relative;
           &::before {
             @extend %sortable-border-icon;
@@ -175,7 +183,7 @@ $padding: 33px;
       font-size: $td-font-size;
     }
     &__toolbar {
-      padding: $padding;
+      padding: 0 $padding $padding;
     }
     &__toggle {
       display: flex;

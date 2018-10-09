@@ -1,3 +1,4 @@
+import Profitability from "components/profitability/profitability";
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
 import { GVButton } from "gv-react-components";
@@ -108,15 +109,22 @@ class ProgramCard extends Component {
             <ProgramSimpleChart data={program.chart} programId={program.id} />
           </div>
           <div className="programs-cards__chart-info">
-            <div className="programs-cards__chart-info--profit">
-              <NumberFormat
+            <div className="programs-cards__profit">
+              <Profitability
                 value={program.statistic.profitPercent}
-                suffix="%"
-                decimalScale={2}
-                displayType="text"
-              />
+                variant="chips"
+                prefix="arrow"
+              >
+                <NumberFormat
+                  value={program.statistic.profitPercent}
+                  suffix="%"
+                  allowNegative={false}
+                  decimalScale={2}
+                  displayType="text"
+                />
+              </Profitability>
             </div>
-            <div className="programs-cards__chart-info--balance">
+            <div className="programs-cards__balance">
               {program.statistic.balanceGVT.amount} {program.currency}
             </div>
           </div>

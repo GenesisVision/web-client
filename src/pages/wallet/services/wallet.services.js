@@ -2,7 +2,6 @@ import walletApi from "services/api-client/wallet-api";
 import authService from "services/auth-service";
 
 import * as actions from "../actions/wallet.actions";
-import { walletTransactionsResponseMock } from "./wallet-transactions-response-mock";
 
 export const fetchWalletBalance = () => (dispatch, getState) => {
   const authorization = authService.getAuthArg();

@@ -1,3 +1,4 @@
+import Profitability from "components/profitability/profitability";
 import ProgramAvatar from "components/program-avatar/program-avatar";
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
@@ -61,12 +62,15 @@ const ProgramTableRowShort = ({
         />
       </TableCell>
       <TableCell className="programs-table__cell--profit">
-        <NumberFormat
-          value={program.statistic.profitPercent}
-          suffix="%"
-          decimalScale={2}
-          displayType="text"
-        />
+        <Profitability value={program.statistic.profitPercent} prefix="sign">
+          <NumberFormat
+            value={program.statistic.profitPercent}
+            suffix="%"
+            allowNegative={false}
+            decimalScale={2}
+            displayType="text"
+          />
+        </Profitability>
       </TableCell>
       <TableCell className="programs-table__cell--chart">
         <ProgramSimpleChart data={program.chart} programId={program.id} />

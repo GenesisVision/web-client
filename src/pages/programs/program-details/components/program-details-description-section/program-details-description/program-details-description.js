@@ -1,23 +1,31 @@
 import "./program-details-description.scss";
 
+import Popover from "components/popover/popover";
 import ProgramAvatar from "components/program-avatar/program-avatar";
 import { GVButton } from "gv-react-components";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
 import { MANAGER_DETAILS_ROUTE } from "pages/manager/manager.page";
+import { PROGRAM_NOTIFICATIONS_ROUTE } from "pages/notifications/notifications.routes";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import replaceParams from "utils/replace-params";
+
+import AboutLevelsContainerComponent from "../../../../../app/components/about-levels/about-levels-container";
 import ProgramDetailsFavorite from "./program-details-favorite";
 import ProgramDetailsNotification from "./program-details-notificaton";
-import Popover from "components/popover/popover";
-import AboutLevelsContainerComponent from "../../../../../app/components/about-levels/about-levels-container";
 
 const composeManagerUrl = managerId => {
   return replaceParams(MANAGER_DETAILS_ROUTE, {
     ":managerId": managerId
+  });
+};
+
+export const composeProgramNotificationsUrl = url => {
+  return replaceParams(PROGRAM_NOTIFICATIONS_ROUTE, {
+    ":id": url
   });
 };
 
@@ -58,7 +66,6 @@ class ProgramDetailsDescription extends PureComponent {
     const isFavorite =
       programDescription.personalProgramDetails &&
       programDescription.personalProgramDetails.isFavorite;
-
     return (
       <div className="program-details-description">
         <div className="program-details-description__left">
@@ -198,7 +205,10 @@ class ProgramDetailsDescription extends PureComponent {
             toggleFavorite={onFavoriteClick}
             disabled={isFavoritePending}
           />
-          <ProgramDetailsNotification disabled={isFavoritePending} />
+          <ProgramDetailsNotification
+            url={composeProgramNotificationsUrl(programDescription.url)}
+            disabled={isFavoritePending}
+          />
         </div>
       </div>
     );

@@ -4,7 +4,6 @@ import ChartPeriod from "components/chart/chart-period/chart-period";
 import { DEFAULT_PERIOD } from "components/chart/chart-period/chart-period.helpers";
 import React, { PureComponent } from "react";
 
-import DashboardPortfolioChart from "./dashboard-portfolio-chart";
 import DashboardPortfolioChartStat from "./dashboard-portfolio-chart-stat";
 
 const composeBalanceChartData = balanceChart => {
