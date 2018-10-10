@@ -1,6 +1,6 @@
 import { PROFILE_ROUTE } from "modules/profile/profile.constants";
-import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import DashboardRoutes from "pages/dashboard/dashboard.routes";
+import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import ManagerPage, {
   MANAGER_DETAILS_ROUTE_REGEXP
 } from "pages/manager/manager.page";
