@@ -48,6 +48,7 @@
     "available-in-wallet": "Available in wallet",
     "amount": "Amount to invest",
     "entry-fee": "Entry fee",
+    "amount-due": "Amount due",
     "period": "Your request will be processed at the end of the reporting period",
     "confirm": "Confirm",
     "success-alert-message": "Successful request for investment in the program.",
@@ -55,6 +56,15 @@
       "amount-more-than-available": "Amount is more than available in your wallet",
       "amount-is-required": "Amount is required."
     }
+  },
+  "password-page": {
+    "title": "Change password"
+  },
+  "password-change": {
+    "current-password": "Current password",
+    "password": "Password",
+    "confirm-password": "Confirm password",
+    "success-alert": "Password was changed"
   },
   "withdraw-program": {
     "title": "Withdraw",
@@ -180,7 +190,8 @@
     }
   },
   "settings": {
-    "title": "Settings"
+    "title": "Settings",
+    "change-password": "Change password"
   },
   "auth": {
     "text": "A Brief History Of Creation",
@@ -387,7 +398,11 @@
     }
   },
   "global-search-page": {
-    "title": "Search"
+    "title": "Search",
+    "heading": "Search Results",
+    "programs": "Programs",
+    "funds": "Funds",
+    "managers": "Managers"
   },
   "dashboard-page": {
     "title": "Dashboard",
@@ -675,5 +690,10 @@
       "save-photo": "Save photo",
       "image-success-save-message": "The photo has just been successfully changed."
     }
+  },
+  "managers-table": {
+    "username": "Username",
+    "assets": "Assets",
+    "memberSince": "Member Since"
   }
 }

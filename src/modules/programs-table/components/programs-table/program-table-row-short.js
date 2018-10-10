@@ -1,11 +1,15 @@
+import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import Profitability from "components/profitability/profitability";
-import ProgramAvatar from "components/program-avatar/program-avatar";
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
+import { GVButton } from "gv-react-components";
 import FavoriteIcon from "modules/favorite-asset/components/favorite-icon/favorite-icon";
 import { TableCell, TableRow } from "modules/table/components";
 import React from "react";
 import NumberFormat from "react-number-format";
+import { Link } from "react-router-dom";
+
+import { composeProgramDetailsUrl } from "../../../../pages/programs/programs.routes";
 
 const ProgramTableRowShort = ({
   program,
@@ -17,13 +21,19 @@ const ProgramTableRowShort = ({
     <TableRow onClick={onExpandClick}>
       <TableCell className="programs-table__cell--name">
         <div className="programs-table__cell--avatar-title">
-          <ProgramAvatar
+          <AssetAvatar
             url={program.logo}
             level={program.level}
             alt={program.title}
           />
           <div className="programs-table__cell--title">
-            <div className="programs-table__cell--top">{program.title}</div>
+            <div className="programs-table__cell--top">
+              <Link to={composeProgramDetailsUrl(program.url)}>
+                <GVButton variant="text" color="secondary">
+                  {program.title}
+                </GVButton>
+              </Link>
+            </div>
             <div className="programs-table__cell--bottom">
               High risk &middot; Best Choice
             </div>

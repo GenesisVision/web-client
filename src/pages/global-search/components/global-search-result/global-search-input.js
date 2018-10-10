@@ -2,9 +2,9 @@ import "./global-search-input.scss";
 
 import SearchIcon from "components/search-icon/search-icon";
 import { GVTextField } from "gv-react-components";
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 
-class GlobalSearchInput extends Component {
+class GlobalSearchInput extends PureComponent {
   handleOnChange = e => {
     const { onChange } = this.props;
     onChange(e.target.value);
