@@ -33,6 +33,7 @@ const ProgramsTable = ({
   paging,
   updatePaging,
   toggleFavorite,
+  redirectToLogin,
   isAuthenticated
 }) => {
   return (
@@ -79,6 +80,7 @@ const ProgramsTable = ({
           program={program}
           toggleFavorite={toggleFavorite}
           isAuthenticated={isAuthenticated}
+          redirectToLogin={redirectToLogin}
         />
       )}
       renderBodyCard={program => (

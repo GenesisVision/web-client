@@ -86,12 +86,12 @@ const ProgramTableRowShort = ({
         <ProgramSimpleChart data={program.chart} programId={program.id} />
       </TableCell>
       {isAuthenticated &&
-        program.personalProgramDetails && (
+        program.personalDetails && (
           <TableCell className="programs-table__cell--favorite">
             <FavoriteIcon
               toggleSelected={toggleFavorite}
               id={program.id}
-              selected={program.personalProgramDetails.isFavorite}
+              selected={program.personalDetails.isFavorite}
             />
           </TableCell>
         )}

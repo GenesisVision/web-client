@@ -3,9 +3,10 @@ import "./program-details.scss";
 import Page from "components/page/page";
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import { goBack } from "react-router-redux";
+import { goBack, push } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
 
+import { LOGIN_ROUTE } from "../../auth/login/login.routes";
 import NotFoundPage from "../../not-found/not-found.routes";
 import ProgramDetailsDescriptionSection from "./components/program-details-description-section/program-details-description-section";
 import ProgramDetailsHistorySection from "./components/program-details-history-section/program-details-history-section";
@@ -68,7 +69,7 @@ class ProgramDetailsPage extends PureComponent {
       });
   }
   render() {
-    const { currency, service } = this.props;
+    const { currency, isAuthenticated, service } = this.props;
     const { errorCode } = this.state;
     if (errorCode) {
       return <NotFoundPage />;
@@ -83,6 +84,8 @@ class ProgramDetailsPage extends PureComponent {
             <ProgramDetailsNavigation goBack={service.goBack} />
             <ProgramDetailsDescriptionSection
               programDescriptionData={this.description}
+              isAuthenticated={isAuthenticated}
+              redirectToLogin={service.redirectToLogin}
             />
           </div>
           <div className="program-details__section">
@@ -109,15 +112,18 @@ class ProgramDetailsPage extends PureComponent {
 }
 
 const mapStateToProps = state => {
-  const { accountSettings } = state;
-
+  const { accountSettings, authData } = state;
   return {
-    currency: accountSettings.currency
+    currency: accountSettings.currency,
+    isAuthenticated: authData.isAuthenticated
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  service: bindActionCreators({ getProgramDescription, goBack }, dispatch)
+  service: bindActionCreators(
+    { getProgramDescription, goBack, redirectToLogin: () => push(LOGIN_ROUTE) },
+    dispatch
+  )
 });
 
 export default compose(
