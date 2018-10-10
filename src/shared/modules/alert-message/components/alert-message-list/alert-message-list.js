@@ -16,6 +16,15 @@ export class AlertMessageList extends Component {
     });
   }
 
+  getMessageText = ({ text, isUseLocalization }) => {
+    let result = text;
+
+    if (isUseLocalization) {
+      result = this.props.t(text);
+    }
+    return result;
+  };
+
   render() {
     const { t, messages, removeMessage, clearAllMessages } = this.props;
 
@@ -33,7 +42,9 @@ export class AlertMessageList extends Component {
         key={message.id}
         className={classnames("alert-message", message.className)}
       >
-        <div className="alert-message-list__text">{message.text}</div>
+        <div className="alert-message-list__text">
+          {this.getMessageText(message)}
+        </div>
         <div
           className="alert-message-list__close"
           onClick={removeMessage(message.id)}

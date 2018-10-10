@@ -11,9 +11,25 @@ import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import { convertToCurrency } from "utils/currency-converter";
 
-const WalletAddFundsForm = ({ t, values, wallets }) => {
+const WalletAddFundsForm = ({
+  t,
+  notifySuccess,
+  notifyError,
+  values,
+  wallets
+}) => {
   const selected = wallets.find(w => w.currency === values.currency);
   const { address, currency, rateToGVT } = selected;
+
+  const onCopy = () => {
+    try {
+      copy(address);
+      notifySuccess(t("wallet-add-funds.copy-to-clipboard-success"));
+    } catch (error) {
+      notifyError(t("wallet-add-funds.copy-to-clipboard-error"));
+    }
+  };
+
   return (
     <form id="add-funds">
       <div className="dialog__top">
@@ -74,12 +90,7 @@ const WalletAddFundsForm = ({ t, values, wallets }) => {
           {t("wallet-add-funds.deposit-address")}
         </div>
         <div className="wallet-add-funds-popup__value">{address}</div>
-        <GVButton
-          color="secondary"
-          onClick={() => {
-            copy(address);
-          }}
-        >
+        <GVButton color="secondary" onClick={onCopy}>
           <CopyIcon />
           &nbsp;
           {t("buttons.copy")}
