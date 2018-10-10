@@ -97,8 +97,8 @@
         "disabled-alert": "Disabled emergency notifications"
       },
       "PlatformNewsAndUpdates": {
-        "enabled-alert": "Enabled new and updates notifications",
-        "disabled-alert": "Disabled new and updates notifications"
+        "enabled-alert": "Enabled news and updates notifications",
+        "disabled-alert": "Disabled news and updates notifications"
       }
     },
     "programs": "PROGRAMS",
@@ -109,8 +109,8 @@
         "news-updates": "Program news and updates",
         "end-of-period": "Notifications for the end of the period",
         "ProgramNewsAndUpdates": {
-          "disabled-alert": "Enabled program new and updates notifications",
-          "enabled-alert": "Disabled program new and updates notifications"
+          "disabled-alert": "Enabled program news and updates notifications",
+          "enabled-alert": "Disabled program news and updates notifications"
         },
         "ProgramEndOfPeriod": {
           "disabled-alert": "Enabled the end of period notifications",
