@@ -1,5 +1,5 @@
+import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import Profitability from "components/profitability/profitability";
-import ProgramAvatar from "components/program-avatar/program-avatar";
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
 import FavoriteIcon from "modules/favorite-asset/components/favorite-icon/favorite-icon";
@@ -17,7 +17,7 @@ const ProgramTableRowShort = ({
     <TableRow onClick={onExpandClick}>
       <TableCell className="programs-table__cell--name">
         <div className="programs-table__cell--avatar-title">
-          <ProgramAvatar
+          <AssetAvatar
             url={program.logo}
             level={program.level}
             alt={program.title}
