@@ -1,7 +1,11 @@
+@import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
+
 .profile-settings {
   &__content {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: baseline;
 
     & h3 {
       text-transform: uppercase;
@@ -16,6 +20,22 @@
     & .profile-image {
       min-width: 340px;
       margin-right: 20px;
+    }
+
+    @include media-breakpoint-landscape-tablet() {
+      flex-direction: row;
+    }
+  }
+
+  &__password {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    color: $main-color;
+    margin-top: 16px;
+
+    @include media-breakpoint-landscape-tablet() {
+      margin-left: auto;
     }
   }
 }

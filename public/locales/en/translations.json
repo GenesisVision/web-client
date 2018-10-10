@@ -57,6 +57,15 @@
       "amount-is-required": "Amount is required."
     }
   },
+  "password-page": {
+    "title": "Change password"
+  },
+  "password-change": {
+    "current-password": "Current password",
+    "password": "Password",
+    "confirm-password": "Confirm password",
+    "success-alert": "Password was changed"
+  },
   "withdraw-program": {
     "title": "Withdraw",
     "available-to-withdraw": "You invested in program",
@@ -181,7 +190,8 @@
     }
   },
   "settings": {
-    "title": "Settings"
+    "title": "Settings",
+    "change-password": "Change password"
   },
   "auth": {
     "text": "A Brief History Of Creation",
