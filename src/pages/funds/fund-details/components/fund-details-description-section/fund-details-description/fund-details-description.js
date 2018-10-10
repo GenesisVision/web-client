@@ -1,7 +1,7 @@
 import "./fund-details-description.scss";
 
+import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import Popover from "components/popover/popover";
-import ProgramAvatar from "components/program-avatar/program-avatar";
 import { GVButton } from "gv-react-components";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
@@ -73,7 +73,7 @@ class FundDetailsDescription extends PureComponent {
             className="fund-details-description__avatar"
             onClick={this.handleOpenDropdown}
           >
-            <ProgramAvatar
+            <AssetAvatar
               url={fundDescription.logo}
               level={fundDescription.level}
               alt={fundDescription.title}
