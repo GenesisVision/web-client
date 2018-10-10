@@ -398,7 +398,11 @@
     }
   },
   "global-search-page": {
-    "title": "Search"
+    "title": "Search",
+    "heading": "Search Results",
+    "programs": "Programs",
+    "funds": "Funds",
+    "managers": "Managers"
   },
   "dashboard-page": {
     "title": "Dashboard",
@@ -686,5 +690,10 @@
       "save-photo": "Save photo",
       "image-success-save-message": "The photo has just been successfully changed."
     }
+  },
+  "managers-table": {
+    "username": "Username",
+    "assets": "Assets",
+    "memberSince": "Member Since"
   }
 }

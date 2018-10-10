@@ -1,0 +1,12 @@
+@import "styles/_colors.scss";
+
+.profile-avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 44px;
+  width: 44px;
+  border-radius: 100%;
+  overflow: hidden;
+  background-color: $secondary-color;
+}
