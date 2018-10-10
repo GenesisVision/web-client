@@ -2,7 +2,6 @@ import { toggleFavoriteProgram } from "modules/favorite-asset/services/favorite-
 import { toggleReinvesting } from "modules/program-reinvesting/services/program-reinvesting.service";
 import React, { Fragment, PureComponent } from "react";
 
-import isAuthenticated from "../../../../../shared/decorators/is-authenticated";
 import ProgramDetailsDescription from "./program-details-description/program-details-description";
 import ProgramDetailsInvestment from "./program-details-investment/program-details-investment";
 

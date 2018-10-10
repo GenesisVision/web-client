@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 import { goBack, push } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
 
-import isAuthenticated from "../../../shared/decorators/is-authenticated";
 import { LOGIN_ROUTE } from "../../auth/login/login.routes";
 import NotFoundPage from "../../not-found/not-found.routes";
 import ProgramDetailsDescriptionSection from "./components/program-details-description-section/program-details-description-section";
