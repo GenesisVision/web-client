@@ -258,7 +258,9 @@
         "password-weak": "Password is weak.",
         "password-required": "Password is required.",
         "password-dont-match": "Passwords don't match.",
-        "confirm-password-required": "Confirm password is required"
+        "confirm-password-required": "Confirm password is required",
+        "email-invalid": "Invalid email address.",
+        "email-required": "Email is required."
       }
     },
     "email-pending": {

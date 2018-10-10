@@ -6,8 +6,7 @@ import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
-
-import validationSchema from "./forgot-password.validators";
+import { object, string } from "yup";
 
 const ForgotPasswordForm = ({
   t,
@@ -54,7 +53,12 @@ const withTranslationAndFormik = compose(
     mapPropsToValues: () => ({
       email: ""
     }),
-    validationSchema: validationSchema,
+    validationSchema: ({ t }) =>
+      object().shape({
+        email: string()
+          .email(t("auth.password-restore.validators.email-invalid"))
+          .required(t("auth.password-restore.validators.email-required"))
+      }),
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }
