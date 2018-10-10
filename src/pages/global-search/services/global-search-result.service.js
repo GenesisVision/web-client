@@ -1,10 +1,12 @@
 import { searchApiProxy } from "services/api-client/search-api";
 
-export const globalSearchGetPrograms = queryValue => {
-  if (queryValue.length === "") return Promise.reject();
+export const search = (queryValue = "") => {
+  const trimmedQuery = queryValue.trim();
+  if (trimmedQuery.length === 0) return Promise.resolve({ data: {} });
   const filters = {
-    mask: queryValue,
+    mask: trimmedQuery,
     take: 10
   };
+
   return searchApiProxy.v10SearchGet(filters);
 };
