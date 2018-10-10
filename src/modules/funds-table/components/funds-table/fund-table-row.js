@@ -30,7 +30,7 @@ class FundsTableRow extends Component {
           {fund.statistic.balanceGVT.amount} GVT
         </TableCell>
         <TableCell className="funds-table__cell--currency">
-          {fund.currency}
+          <AssetContainer assets={fund.topFundAssets} />
         </TableCell>
         <TableCell className="funds-table__cell--investors">
           {fund.statistic.investorsCount}
