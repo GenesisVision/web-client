@@ -13,13 +13,13 @@ const RestorePassword = ({ t, isSubmitting, handleSubmit, error }) => {
   return (
     <form id="passwordRestoreForm" onSubmit={handleSubmit} noValidate>
       <GVFormikField
-        type="new-password"
+        type="password"
         name="password"
         label={t("auth.password-restore.new-password.password-field-text")}
         component={GVTextField}
       />
       <GVFormikField
-        type="new-password"
+        type="password"
         name="confirmPassword"
         label={t(
           "auth.password-restore.new-password.password-confirm-field-text"
