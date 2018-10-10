@@ -14,12 +14,14 @@ $border-radius: 5px;
 $mobile-padding-divider: 2;
 $mobile-text-divider: 1.5;
 $mobile-title-divider: 2;
+
 .assets {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  @include media-breakpoint-landscape-phone(){
+
+  @include media-breakpoint-landscape-phone() {
     align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
@@ -41,33 +43,38 @@ $mobile-title-divider: 2;
   &:last-child {
     margin-right: 0;
   }
-  &--large{
-    min-with: 250px;
-  }
-  &__currencies{
+
+  &__currencies {
     display: flex;
     flex-direction: row;
     align-items: center;
   }
-  &__currency-full{
+
+  &__currency-full {
     white-space: nowrap;
   }
+
   &__currency-full, &__currency-short {
     padding-left: $small-padding/2/$mobile-padding-divider;
   }
+
   &__percent {
     padding-left: $small-padding/$mobile-padding-divider;
   }
+
   &__currency-short {
     opacity: 0.4;
   }
+
   @include media-breakpoint-landscape-phone() {
     padding: $small-padding/2;
     margin-right: $small-padding/2;
     border-radius: $border-radius;
+
     &__currency-full, &__currency-short {
       padding-left: $small-padding/2;
     }
+
     &__percent {
       padding-left: $small-padding;
     }
