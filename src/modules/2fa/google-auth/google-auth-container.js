@@ -33,7 +33,8 @@ class GoogleAuthContainer extends Component {
           sharedKey
         }
       })
-      .then(data => this.setState({ ...data }, this.props.onSubmit));
+      .then(data => this.setState({ ...data }, this.props.onSubmit))
+      .catch(data => this.setState({ ...data }));
   };
 
   render() {

@@ -25,7 +25,7 @@ class GeneralNotification extends Component {
         type: this.props.name,
         programId: this.props.programId
       })
-      .finally(this.setState({ isPending: false }));
+      .finally(() => this.setState({ isPending: false }));
   };
 
   removeNotification = () => {
@@ -42,7 +42,7 @@ class GeneralNotification extends Component {
   render() {
     const { setting, name, label } = this.props;
     return (
-      <label className="notification-setting">
+      <span className="notification-setting">
         <GVSwitch
           className="notification-setting__switch"
           name={name}
@@ -52,7 +52,7 @@ class GeneralNotification extends Component {
           onChange={this.handleSwitch}
         />
         <span className="notification-setting__label">{label}</span>
-      </label>
+      </span>
     );
   }
 }

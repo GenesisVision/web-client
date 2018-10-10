@@ -1,5 +1,10 @@
-.global-search-input {
-  &__wrapper {
-    width: 100%;
+.global-search {
+  &-input {
+    &__wrapper {
+      width: 100%;
+    }
+  }
+  &-hidden {
+    display: none;
   }
 }
