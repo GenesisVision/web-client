@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { replace } from "react-router-redux";
 import { bindActionCreators } from "redux";
 
-import * as emailConfirmService from "../service/email-confirm-service";
+import * as emailConfirmService from "../service/email-confirm.service";
 import EmailConfirmFailure from "./email-confirm-failure";
 
 class EmailConfirmContainer extends PureComponent {
