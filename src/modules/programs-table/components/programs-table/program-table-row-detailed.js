@@ -4,9 +4,10 @@ import Profitability from "components/profitability/profitability";
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
 import { GVButton } from "gv-react-components";
 import FavoriteIcon from "modules/favorite-asset/components/favorite-icon/favorite-icon";
+import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import { TableRow } from "modules/table/components";
-import { PROGRAM_SLUG_URL_PARAM_NAME } from "pages/programs/programs.routes";
 import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
+import { PROGRAM_SLUG_URL_PARAM_NAME } from "pages/programs/programs.routes";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -20,7 +21,12 @@ class ProgramTableRowDetailed extends Component {
     isOpenInvestToProgramPopup: false
   };
   handleOpenInvest = () => {
-    this.setState({ isOpenInvestToProgramPopup: true });
+    const { isAuthenticated, redirectToLogin } = this.props;
+    if (isAuthenticated) {
+      this.setState({ isOpenInvestToProgramPopup: true });
+    } else {
+      redirectToLogin();
+    }
   };
   handleCloseInvest = () => {
     this.setState({ isOpenInvestToProgramPopup: false });
@@ -65,7 +71,9 @@ class ProgramTableRowDetailed extends Component {
                     </div>
                   </div>
                 </div>
-                <div className="program-detailed__strategy">Strategy</div>
+                <div className="program-detailed__strategy">
+                  {t("programs-page.programs-header.strategy")}
+                </div>
                 <div className="program-detailed__description">
                   {program.description}
                 </div>
@@ -163,24 +171,31 @@ class ProgramTableRowDetailed extends Component {
                   </div>
                 </div>
                 {isAuthenticated &&
-                  program.personalProgramDetails && (
+                  program.personalDetails && (
                     <div className="program-detailed__favorites-block">
                       <span style={{ float: "right" }}>
-                        Add to favorites{" "}
+                        {t("program-details-page.description.addToFavorites")}
                         <FavoriteIcon
                           toggleSelected={toggleFavorite}
                           id={program.id}
-                          selected={program.personalProgramDetails.isFavorite}
+                          selected={program.personalDetails.isFavorite}
                         />
                       </span>
                     </div>
                   )}
                 <div className="program-detailed__bottom-block">
-                  <GVButton>Invest</GVButton>
+                  <GVButton onClick={this.handleOpenInvest}>
+                    {t("program-actions.invest")}
+                  </GVButton>
+                  <ProgramDepositContainer
+                    id={program.id}
+                    onClose={this.handleCloseInvest}
+                    open={this.state.isOpenInvestToProgramPopup}
+                  />
                   <div className="program-detailed__details">
                     <Link to={programDetailsUrl}>
                       <GVButton variant="text" color="secondary">
-                        Details &#8250;
+                        {t("program-actions.details")} &#8250;
                       </GVButton>
                     </Link>
                   </div>

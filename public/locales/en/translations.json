@@ -378,7 +378,8 @@
       "period": "Period",
       "drawdown": "D.down",
       "profit": "Profit",
-      "chart": "Chart"
+      "chart": "Chart",
+      "strategy": "Strategy"
     }
   },
   "funds-page": {
