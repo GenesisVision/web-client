@@ -1,0 +1,87 @@
+@import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
+
+$padding-outer: 80px;
+$padding-large: 62px;
+$padding-middle: 32px;
+$padding-small: 20px;
+$font-size-title: 32px;
+$font-size-subtitle: 17.5px;
+$font-size-large: 16px;
+$font-size-middle: 14px;
+$font-size-small: 12px;
+$border-radius: 5px;
+
+$divider-padding: 3;
+$divider-text: 1.5;
+$divider-title: 2;
+
+$padding-outer-mobile: $padding-outer/$divider-padding;
+$padding-large-mobile: $padding-large/$divider-padding;
+$padding-middle-mobile: $padding-middle/$divider-padding;
+$padding-small-mobile: $padding-small/$divider-padding;
+$font-size-title-mobile: $font-size-title/$divider-title;
+$font-size-subtitle-mobile: $font-size-subtitle/$divider-text;
+$font-size-large-mobile: $font-size-large/$divider-text;
+$font-size-middle-mobile: $font-size-middle/$divider-text;
+$font-size-small-mobile: $font-size-small/$divider-text;
+$border-radius-mobile: $border-radius/$divider-text;
+
+.fund-details-chart {
+  padding: 0 $padding-middle-mobile;
+  flex: 1;
+
+  &__heading {
+    font-size: $font-size-subtitle-mobile;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    padding: $padding-middle-mobile 0;
+  }
+
+  &__stat-item {
+  }
+
+  &__profit {
+    height: 300px;
+    width: 100%;
+  }
+
+  .fund-details-tooltip {
+    &__statistic {
+    }
+
+    &__title {
+      font-size: $font-size-middle-mobile;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      color: $text-accent-color;
+      max-width: 10em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &__value {
+      font-size: $font-size-small-mobile;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      color: $text-dark-color;
+    }
+  }
+  @include media-breakpoint-landscape-phone(){
+    padding: 0 $padding-middle;
+
+    &__heading {
+      font-size: $font-size-subtitle;
+      padding: $padding-middle 0;
+    }
+
+    .fund-details-tooltip {
+      &__title {
+        font-size: $font-size-middle;
+      }
+      &__value {
+        font-size: $font-size-small;
+      }
+    }
+  }
+}

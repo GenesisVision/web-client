@@ -1,0 +1,227 @@
+@import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
+
+
+$padding-outer: 80px;
+$padding-large: 62px;
+$padding-middle: 32px;
+$padding-small: 20px;
+$font-size-title: 32px;
+$font-size-subtitle: 17.5px;
+$font-size-large: 16px;
+$font-size-middle: 14px;
+$font-size-small: 12px;
+$border-radius: 5px;
+$btn-height:50px;
+$btn-width:149px;
+$icon-size: 20px;
+$avatar-size: 120px;
+
+$divider-padding: 3;
+$divider-text: 1.5;
+$divider-title: 2;
+
+$padding-outer-mobile: $padding-outer/$divider-padding;
+$padding-large-mobile: $padding-large/$divider-padding;
+$padding-middle-mobile: $padding-middle/$divider-padding;
+$padding-small-mobile: $padding-small/$divider-padding;
+$font-size-title-mobile: $font-size-title/$divider-title;
+$font-size-subtitle-mobile: $font-size-subtitle/$divider-text;
+$font-size-large-mobile: $font-size-large/$divider-text;
+$font-size-middle-mobile: $font-size-middle/$divider-text;
+$font-size-small-mobile: $font-size-small/$divider-text;
+$border-radius-mobile: $border-radius/$divider-text;
+$btn-height-mobile:$btn-height/$divider-text;
+$btn-width-mobile:$btn-width/$divider-text;
+$icon-size-mobile: $icon-size/$divider-text;
+$avatar-size-mobile: $avatar-size/$divider-title;
+
+.fund-details-description {
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  &__avatar {
+    cursor: pointer;
+    .program-avatar{
+      justify-content: flex-start;
+      width:$avatar-size-mobile;
+      height:$avatar-size-mobile;
+    }
+  }
+
+  &__right {
+    & .gv-btn--text {
+      padding: 0;
+      //margin-bottom: 26px;
+      font-size: 13px;
+      letter-spacing: 0.3px;
+      font-weight: 600;
+    }
+  }
+
+  &__notification-icon {
+    //margin-left: 24px;
+    opacity: 0.3;
+  }
+
+  &__main {
+    width: 100%;
+    padding: 0 $padding-small-mobile;
+  }
+
+  &__heading {
+    font-size: $font-size-title-mobile;
+    font-weight: 600;
+    color: $text-light-color
+  }
+
+  &__author-btn {
+    padding: 0;
+    font-size: 13px;
+    letter-spacing: 0.19px;
+  }
+
+  &__info {
+  }
+
+  &__invest-button-container{
+    padding: $padding-middle-mobile 0;
+  }
+
+  &__subheading {
+    font-size: $font-size-large-mobile;
+    letter-spacing: 0.21px;
+  }
+
+  &__strategy-block{
+    padding: $padding-middle-mobile 0;
+  }
+
+  &__short-statistic-subheading{
+    margin-bottom: $padding-small-mobile/2;
+  }
+
+  &__text {
+    font-size: $font-size-middle-mobile;
+    line-height: $font-size-middle-mobile*2;
+    letter-spacing: 0.2px;
+    text-align: left;
+    color: $text-color;
+  }
+
+  &__invest-btn {
+    letter-spacing: 0.3px;
+    font-weight: 600;
+    box-sizing: border-box;
+    width: $btn-width-mobile;
+    height: $btn-height-mobile;
+  }
+
+  &__reinvest {
+    //margin-left: 45px;
+    letter-spacing: 0.3px;
+    font-weight: 600;
+  }
+
+  &__short-statistic {
+    display: flex;
+    justify-content: flex-start;
+
+    &-item {
+      margin-right: $padding-middle-mobile;
+      letter-spacing: 0.44px;
+      font-size: $font-size-middle-mobile;
+      display: flex;
+      flex-direction: column;
+      font-weight: 600;
+      &:last-child{
+        margin-right: 0;
+      }
+    }
+
+    &-subheading {
+      color: $label-color;
+      font-size: $font-size-middle-mobile;
+      letter-spacing: 0.43px;
+      font-weight: normal;
+    }
+  }
+
+  &__control {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    &-icon,&-text{
+      padding: $padding-small-mobile $padding-small-mobile/2;
+    }
+    &-icon {
+      width: $icon-size-mobile;
+      height: $icon-size-mobile;
+    }
+    &-text {
+      font-size: $font-size-small-mobile;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+  }
+  @include media-breakpoint-landscape-phone(){
+    &__avatar {
+      .program-avatar{
+        width:$avatar-size;
+        height:$avatar-size;
+      }
+    }
+    &__main {
+      padding: 0 $padding-small;
+    }
+    &__heading {
+      font-size: $font-size-title;
+    }
+    &__subheading {
+      font-size: $font-size-large;
+    }
+    &__strategy-block{
+      padding: $padding-middle 0;
+    }
+    &__text {
+      font-size: $font-size-middle;
+      line-height: $font-size-middle*2;
+    }
+    &__invest-button-container{
+      padding: $padding-middle 0;
+    }
+    &__short-statistic-subheading{
+      margin-bottom: $padding-small/2;
+    }
+    &__invest-btn {
+      width: $btn-width;
+      height: $btn-height;
+    }
+    &__short-statistic {
+      &-item {
+        margin-right: $padding-middle;
+        font-size: $font-size-middle;
+      }
+      &-subheading {
+        font-size: $font-size-middle;
+      }
+    }
+    &__control {
+      flex-direction: row;
+      &-icon,&-text{
+        padding: $padding-small/2 $padding-small;
+        white-space: nowrap;
+      }
+      &-icon {
+        width: $icon-size;
+        height: $icon-size;
+      }
+      &-text {
+        font-size: $font-size-middle;
+      }
+    }
+  }
+}
