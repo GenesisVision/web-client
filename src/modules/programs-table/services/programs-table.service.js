@@ -14,6 +14,7 @@ import { push } from "react-router-redux";
 import authService from "services/auth-service";
 import getParams from "utils/get-params";
 
+import { PROGRAM_SLUG_URL_PARAM_NAME } from "../../../pages/programs/programs.routes";
 import * as programTableActions from "../actions/programs-table.actions";
 import {
   PROGRAMS_COLUMNS,
@@ -50,12 +51,11 @@ const composeRequestFilters = () => (dispatch, getState) => {
     filters.isFavorite = true;
   }
 
-  const { facetId } = getParams(
-    routing.location.pathname,
-    PROGRAMS_FACET_ROUTE
-  );
+  const facetId = getParams(routing.location.pathname, PROGRAMS_FACET_ROUTE)[
+    PROGRAM_SLUG_URL_PARAM_NAME
+  ];
   if (facetId) {
-    filters.facet = facetId;
+    filters.facetId = facetId;
     itemsOnPage = 100;
     page = 1;
   }
