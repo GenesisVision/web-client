@@ -1,5 +1,7 @@
+import { NOT_FOUND_PAGE_ROUTE } from "pages/not-found/not-found.routes";
 import React from "react";
 import { connect } from "react-redux";
+import { replace } from "react-router-redux";
 import { bindActionCreators } from "redux";
 
 import forgotPasswordService from "../../services/forgot-password.service";
@@ -10,7 +12,8 @@ const PasswordRestoreContainer = ({
   queryParams,
   isPending,
   errorMessage,
-  services
+  services,
+  showNotFoundPage
 }) => {
   const handleSubmit = (formData, setSubmitting) => {
     const params = {
@@ -22,7 +25,10 @@ const PasswordRestoreContainer = ({
 
     services.restorePassword(params);
   };
-  // if (!queryParams.userId || !queryParams.code) return null;
+  if (!queryParams.userId || !queryParams.code) {
+    showNotFoundPage();
+    return null;
+  }
   return <PasswordRestore error={errorMessage} onSubmit={handleSubmit} />;
 };
 
@@ -32,7 +38,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  services: bindActionCreators(forgotPasswordService, dispatch)
+  services: bindActionCreators(forgotPasswordService, dispatch),
+  showNotFoundPage: () => dispatch(replace(NOT_FOUND_PAGE_ROUTE))
 });
 
 export default connect(

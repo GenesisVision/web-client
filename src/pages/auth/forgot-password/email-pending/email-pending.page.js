@@ -11,9 +11,6 @@ const EmailPendingPage = ({ t }) => {
       <p className="password-pending__text">
         {t("auth.email-pending.text-section-1")}
       </p>
-      <p className="password-pending__text">
-        {t("auth.email-pending.text-section-2")}
-      </p>
       <EmailPendingContainer />
     </div>
   );

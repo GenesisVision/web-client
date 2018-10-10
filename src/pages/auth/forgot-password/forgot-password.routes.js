@@ -9,8 +9,8 @@ import ForgotPasswordPage from "./forgot-password/forgot-password.page";
 import PasswordRestore from "./password-restore/password-restore";
 
 export const FORGOT_PASSWORD_ROUTE = "/forgot-password";
-export const EMAIL_PENDING_ROUTE = `${FORGOT_PASSWORD_ROUTE}/pending`;
-export const PASSWORD_RESTORE_ROUTE = `${FORGOT_PASSWORD_ROUTE}/password-restore`;
+export const EMAIL_PENDING_ROUTE = `${FORGOT_PASSWORD_ROUTE}/email-pending`;
+export const PASSWORD_RESTORE_ROUTE = `${FORGOT_PASSWORD_ROUTE}/restore`;
 
 const ForgotPasswordRoutes = ({ t }) => {
   return (

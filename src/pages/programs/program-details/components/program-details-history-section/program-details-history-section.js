@@ -7,11 +7,11 @@ import { EVENT_TYPE_FILTER_DEFAULT_VALUE } from "modules/table/components/filter
 import PortfolioEventsTableComponent from "pages/dashboard/components/dashboard-portfolio-events-all/dashboard-portfolio-events-table/dashboard-portfolio-events-all-table";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
+import connect from "react-redux/es/connect/connect";
+import { compose } from "redux";
 
 import { fetchPortfolioEvents } from "../../../../dashboard/services/dashboard-events.services";
 import ProgramTrades from "./program-trades/program-trades";
-import { compose } from "redux";
-import connect from "react-redux/es/connect/connect";
 
 const TRADES_TAB = "trades";
 const EVENTS_TAB = "events";
