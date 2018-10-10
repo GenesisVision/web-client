@@ -257,7 +257,6 @@
     },
     "email-pending": {
       "text-section-1": "Please check your inbox for a confirmation email. Click the link in the email to create new password.",
-      "text-section-2": "After you confirm click Continue.",
       "email-resend-button-text": "Resend email",
       "confirm-button-text": "Continue",
       "back-button-text": "Back"
