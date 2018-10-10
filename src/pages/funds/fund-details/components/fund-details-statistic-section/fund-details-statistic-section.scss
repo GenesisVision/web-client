@@ -1,0 +1,32 @@
+@import "styles/_breakpoint.scss";
+$padding-middle: 32px;
+$divider-padding: 3;
+$padding-middle-mobile: $padding-middle/$divider-padding;
+$padding-large: 62px;
+$padding-large-mobile: $padding-large/$divider-padding;
+.fund-details-statistic-section {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  //min-width: 400px;
+  &__statistic,&__chart {
+    margin-top: $padding-large-mobile;
+    @include media-breakpoint-landscape-phone() {
+      margin-top: $padding-large;
+    }
+  }
+  &__statistic {
+    display: flex;
+    width: 100%;
+    @include media-breakpoint-landscape-phone() {
+      margin-right: $padding-large-mobile;
+      max-width: 300px;
+    }
+  }
+
+  &__chart {
+    display: flex;
+    flex: 1;
+    min-height: 400px;
+  }
+}
