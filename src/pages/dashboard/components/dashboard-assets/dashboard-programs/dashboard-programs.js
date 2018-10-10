@@ -73,7 +73,7 @@ class Dashboardprograms extends Component {
               </div>
             </TableCell>
             <TableCell className="dashboard-programs__cell--share">
-              {program.dashboardProgramDetails.share}
+              {program.dashboardAssetsDetails.share}
             </TableCell>
             <TableCell className="dashboard-programs__cell--currency">
               {program.currency}
