@@ -253,6 +253,12 @@
         "password-confirm-field-text": "Confirm password",
         "confirm-button-text": "Submit",
         "back-button-text": "Back"
+      },
+      "validators": {
+        "password-weak": "Password is weak.",
+        "password-required": "Password is required.",
+        "password-dont-match": "Passwords don't match.",
+        "confirm-password-required": "Confirm password is required"
       }
     },
     "email-pending": {
