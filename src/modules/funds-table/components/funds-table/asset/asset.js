@@ -14,7 +14,7 @@ const FULL_CURRENCIES = {
 };
 class Asset extends Component {
   render() {
-    const { percent, icon, currency, size } = this.props;
+    const { percent, currency, size } = this.props;
     return (
       <div
         className={classNames("asset", {

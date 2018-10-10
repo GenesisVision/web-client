@@ -4,7 +4,6 @@ import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import { GVButton } from "gv-react-components";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
-import { MANAGER_DETAILS_ROUTE } from "pages/manager/manager.page";
 import { PROGRAM_NOTIFICATIONS_ROUTE } from "pages/notifications/notifications.routes";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";

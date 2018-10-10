@@ -1,17 +1,12 @@
 import "./fund-rebalancing.scss";
 
-import Profitability from "components/profitability/profitability";
 import { TableCell, TableRow } from "modules/table/components";
 import DateRangeFilter from "modules/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "modules/table/components/filtering/date-range-filter/date-range-filter.constants";
 import TableModule from "modules/table/components/table-module";
 import { DEFAULT_PAGING } from "modules/table/reducers/table-paging.reducer";
-import moment from "moment";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
-import NumberFormat from "react-number-format";
-
-import BaseProfitability from "../../../../../../components/profitability/base-profitability";
 import {
   FUND_REBALANCING_COLUMNS,
   FUND_REBALANCING_DEFAULT_FILTERS,
@@ -25,18 +20,6 @@ class FundRebalancing extends Component {
     return service.getFundRebalancing(programId, filters).then(({ data }) => {
       return { items: data.trades, total: data.total };
     });
-  };
-
-  parseNumber = number => {
-    if (number === 0) return 0;
-    const dig =
-      Math.abs(number.toString().split("e")[1]) +
-        Math.abs(number.toString().split("e")[0].length) || 8;
-    return (
-      Math.abs(number)
-        .toFixed(dig)
-        .replace(/0*$/, "") || 0
-    );
   };
 
   render() {

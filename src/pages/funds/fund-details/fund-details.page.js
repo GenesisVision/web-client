@@ -13,7 +13,6 @@ import FundDetailsNavigation from "./components/fund-details-navigation/fund-det
 import FundDetailsStatisticSection from "./components/fund-details-statistic-section/fund-details-statistic-section";
 import {
   getFundDescription,
-  getProgramHistory,
   getFundRebalancing,
   getFundStatistic
 } from "./services/fund-details.service";
@@ -76,7 +75,6 @@ class FundDetailsPage extends PureComponent {
     }
 
     if (!this.description.data) return null;
-    console.log(this.rebalancing);
     return (
       <Page title={this.description.data.title}>
         <div className="fund-details">
