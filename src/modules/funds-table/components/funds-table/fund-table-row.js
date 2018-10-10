@@ -5,6 +5,13 @@ import Profitability from "components/profitability/profitability";
 import FavoriteIcon from "../../../favorite-asset/components/favorite-icon/favorite-icon";
 import ProgramAvatar from "../../../../components/program-avatar/program-avatar";
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
+import AssetContainer from "./asset/asset-container";
+import { Link } from "react-router-dom";
+import {
+  FUND_DETAILS_ROUTE,
+  FUNDS_SLUG_URL_PARAM_NAME
+} from "../../../../pages/funds/funds.routes";
+import replaceParams from "../../../../utils/replace-params";
 
 class FundsTableRow extends Component {
   constructor(props) {
@@ -16,13 +23,18 @@ class FundsTableRow extends Component {
 
   render() {
     const { fund, isAuthenticated, toggleFavorite } = this.props;
+    const fundDetailsUrl = replaceParams(FUND_DETAILS_ROUTE, {
+      [`:${FUNDS_SLUG_URL_PARAM_NAME}`]: fund.id
+    });
     return (
       <TableRow>
         <TableCell className="funds-table__cell--name">
           <div className="programs-table__cell--avatar-title">
             <ProgramAvatar url={fund.logo} alt={fund.title} />
             <div className="funds-table__cell--title">
-              <div className="funds-table__cell--top">{fund.title}</div>
+              <Link to={fundDetailsUrl}>
+                <div className="funds-table__cell--top">{fund.title}</div>
+              </Link>
             </div>
           </div>
         </TableCell>
@@ -58,12 +70,12 @@ class FundsTableRow extends Component {
           <ProgramSimpleChart data={fund.chart} programId={fund.id} />
         </TableCell>
         {isAuthenticated &&
-          fund.personalfundDetails && (
+          fund.personalProgramDetails && (
             <TableCell className="funds-table__cell--favorite">
               <FavoriteIcon
                 toggleSelected={toggleFavorite}
                 fundId={fund.id}
-                selected={fund.personalfundDetails.isFavorite}
+                selected={fund.personalProgramDetails.isFavorite}
               />
             </TableCell>
           )}
