@@ -1,5 +1,7 @@
+import { NOT_FOUND_PAGE_ROUTE } from "pages/not-found/not-found.routes";
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
+import { replace } from "react-router-redux";
 import { bindActionCreators } from "redux";
 
 import * as emailConfirmService from "../service/email-confirm-service";
@@ -13,11 +15,13 @@ class EmailConfirmContainer extends PureComponent {
   };
 
   componentDidMount() {
-    const { queryParams, service } = this.props;
-    if (queryParams.userId || queryParams.code) {
+    const { queryParams, service, showNotFoundPage } = this.props;
+    if (queryParams.userId && queryParams.code) {
       service
         .confirmEmail(queryParams.userId, queryParams.code)
         .catch(response => this.setState(response));
+    } else {
+      showNotFoundPage();
     }
   }
 
@@ -29,7 +33,8 @@ class EmailConfirmContainer extends PureComponent {
 }
 
 const mapDispatchToProps = dispatch => ({
-  service: bindActionCreators(emailConfirmService, dispatch)
+  service: bindActionCreators(emailConfirmService, dispatch),
+  showNotFoundPage: () => dispatch(replace(NOT_FOUND_PAGE_ROUTE))
 });
 
 export default connect(

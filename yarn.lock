@@ -3040,8 +3040,8 @@ debug@=3.1.0:
     ms "2.0.0"
 
 debug@^3.1.0:
-  version "3.2.5"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-3.2.5.tgz#c2418fbfd7a29f4d4f70ff4cea604d4b64c46407"
+  version "3.2.6"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-3.2.6.tgz#e83d17de16d8a7efb7717edbe5fb10135eee629b"
   dependencies:
     ms "^2.1.1"
 
@@ -4412,8 +4412,8 @@ gud@^1.0.0:
   resolved "https://registry.yarnpkg.com/gud/-/gud-1.0.0.tgz#a489581b17e6a70beca9abe3ae57de7a499852c0"
 
 "gv-api-web@git+https://github.com/GenesisVision/gv-api-web.git#development":
-  version "1.0.35"
-  resolved "git+https://github.com/GenesisVision/gv-api-web.git#aa8e53d69c7255668046c79bc3ddfb4539787a99"
+  version "1.0.38"
+  resolved "git+https://github.com/GenesisVision/gv-api-web.git#9e6e0e37cba6740bce41f3bffb3ac8a743b88926"
   dependencies:
     superagent "^3.8.3"
 

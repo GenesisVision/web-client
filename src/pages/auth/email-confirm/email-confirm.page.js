@@ -6,7 +6,7 @@ import { translate } from "react-i18next";
 import AuthLayout from "../components/auth-layout/auth-layout";
 import EmailConfirmContainer from "./components/email-confirm-container";
 
-export const EMAIL_CONFIRM_ROUTE = "/email-confirm";
+export const EMAIL_CONFIRM_ROUTE = `/email-confirm`;
 
 const EmailConfirmPage = ({ t, location }) => {
   const queryParams = qs.parse(location.search.slice(1));
