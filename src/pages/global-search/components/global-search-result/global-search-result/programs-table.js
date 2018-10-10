@@ -7,7 +7,7 @@ import React from "react";
 import { translate } from "react-i18next";
 import { compose } from "redux";
 
-const GlobalSearchResult = ({
+const ProgramsTable = ({
   t,
   isPending,
   data,
@@ -42,4 +42,4 @@ export default compose(
   withTable({
     paging: DEFAULT_PAGING
   })
-)(GlobalSearchResult);
+)(ProgramsTable);

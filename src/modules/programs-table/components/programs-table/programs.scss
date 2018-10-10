@@ -175,6 +175,9 @@ $description-block-width: 250px;
     div {
       padding: $padding/10;
     }
+    .gv-btn {
+      padding: 0;
+    }
   }
   &--bottom {
     opacity: 0.3;

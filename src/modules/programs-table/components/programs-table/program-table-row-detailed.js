@@ -1,6 +1,6 @@
+import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import { Icon } from "components/icon/icon";
 import Profitability from "components/profitability/profitability";
-import ProgramAvatar from "components/program-avatar/program-avatar";
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
 import { GVButton } from "gv-react-components";
 import FavoriteIcon from "modules/favorite-asset/components/favorite-icon/favorite-icon";
@@ -46,7 +46,7 @@ class ProgramTableRowDetailed extends Component {
             <div className="program-detailed__container program-detailed__container--inner">
               <div className="program-detailed__info">
                 <div className="program-detailed__avatar">
-                  <ProgramAvatar
+                  <AssetAvatar
                     url={program.logo}
                     level={program.level}
                     alt={program.title}

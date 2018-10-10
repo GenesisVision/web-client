@@ -3,7 +3,8 @@
     "title": "Investor Portal: "
   },
   "alerts": {
-    "clear-all": "Clear all"
+    "clear-all": "Clear all",
+    "server-error": "Server Error. Please contact administrator."
   },
   "about-levels": {
     "description": "Genesis level shows the experience and reliability of the Manager",
@@ -47,12 +48,23 @@
     "available-in-wallet": "Available in wallet",
     "amount": "Amount to invest",
     "entry-fee": "Entry fee",
+    "amount-due": "Amount due",
     "period": "Your request will be processed at the end of the reporting period",
     "confirm": "Confirm",
+    "success-alert-message": "Successful request for investment in the program.",
     "validation": {
       "amount-more-than-available": "Amount is more than available in your wallet",
       "amount-is-required": "Amount is required."
     }
+  },
+  "password-page": {
+    "title": "Change password"
+  },
+  "password-change": {
+    "current-password": "Current password",
+    "password": "Password",
+    "confirm-password": "Confirm password",
+    "success-alert": "Password was changed"
   },
   "withdraw-program": {
     "title": "Withdraw",
@@ -178,7 +190,8 @@
     }
   },
   "settings": {
-    "title": "Settings"
+    "title": "Settings",
+    "change-password": "Change password"
   },
   "auth": {
     "text": "A Brief History Of Creation",
@@ -226,6 +239,8 @@
     },
     "password-restore": {
       "title": "Restore password",
+      "success-alert-message": "Your password changed successfully!",
+      "resend-email-alert-message": "Information has been re-sent to your email address.",
       "forgot-password": {
         "text": "Just enter the email address you used to create your account.",
         "email-field-text": "Email address",
@@ -280,7 +295,9 @@
     "select-currency": "Select a wallet currency",
     "will-send": "You will send",
     "will-get": "You'll get",
-    "deposit-address": "Deposit address"
+    "deposit-address": "Deposit address",
+    "copy-to-clipboard-success": "Your wallet-pane number was copied to the clipboard successfully.",
+    "copy-to-clipboard-error": "Failed to copy data to the clipboard."
   },
   "wallet-withdraw": {
     "title": "Withdraw",
@@ -381,7 +398,11 @@
     }
   },
   "global-search-page": {
-    "title": "Search"
+    "title": "Search",
+    "heading": "Search Results",
+    "programs": "Programs",
+    "funds": "Funds",
+    "managers": "Managers"
   },
   "dashboard-page": {
     "title": "Dashboard",
@@ -708,7 +729,8 @@
     "invested": "Invested",
     "how-much-withdraw": "How much would you like to withdraw?",
     "enter-amount": "Enter {{token}} amount",
-    "withdraw-all": "Withdraw all invested tokens"
+    "withdraw-all": "Withdraw all invested tokens",
+    "success-alert-message": "Request to withdrawal sent successfully."
   },
   "filters": {
     "level": {
@@ -733,7 +755,13 @@
     "settings": {
       "profile-image": "Profile image",
       "image-requirements": "At least 300 x 300px PNG or JPG file.",
-      "save-photo": "Save photo"
+      "save-photo": "Save photo",
+      "image-success-save-message": "The photo has just been successfully changed."
     }
+  },
+  "managers-table": {
+    "username": "Username",
+    "assets": "Assets",
+    "memberSince": "Member Since"
   }
 }

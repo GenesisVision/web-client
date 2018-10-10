@@ -1,8 +1,8 @@
 import "./dashboard-portfolio-event-logo.scss";
 
 import classnames from "classnames";
+import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import { WalletIcon } from "components/icon/wallet-icon";
-import ProgramAvatar from "components/program-avatar/program-avatar";
 import React from "react";
 
 import icons from "./icons";
@@ -29,7 +29,7 @@ const getTypeSVG = type => {
 const getLogoSVG = (type, logo) => {
   if (logo !== undefined)
     return (
-      <ProgramAvatar
+      <AssetAvatar
         url={logo}
         alt={type}
         className="portfolio-event-logo__logo"

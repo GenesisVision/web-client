@@ -1,6 +1,7 @@
 .dashboard {
   &__row {
     display: flex;
+    flex-wrap: wrap;
   }
 
   &__chart {

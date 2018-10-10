@@ -1,3 +1,6 @@
+import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
+import { ActionsCircleIcon } from "components/icon/actions-circle-icon";
+import Popover from "components/popover/popover";
 import Profitability from "components/profitability/profitability";
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
@@ -11,10 +14,6 @@ import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import replaceParams from "utils/replace-params";
-
-import { ActionsCircleIcon } from "../../../../components/icon/actions-circle-icon";
-import Popover from "../../../../components/popover/popover";
-import ProgramAvatar from "../../../../components/program-avatar/program-avatar";
 
 class ProgramCard extends Component {
   state = {
@@ -46,7 +45,7 @@ class ProgramCard extends Component {
       <div onClick={onExpandClick} className="programs-cards__card">
         <div className="programs-cards__row">
           <div className="programs-cards__avatar">
-            <ProgramAvatar
+            <AssetAvatar
               url={program.logo}
               level={program.level}
               alt={program.title}

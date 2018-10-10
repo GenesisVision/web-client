@@ -1,6 +1,6 @@
 import "./dashboard-programs.scss";
 
-import ProgramAvatar from "components/program-avatar/program-avatar";
+import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
 import { GVButton } from "gv-react-components";
@@ -60,7 +60,7 @@ class Dashboardprograms extends Component {
           <TableRow>
             <TableCell className="dashboard-programs__cell--title">
               <div className="dashboard-programs__cell--avatar-title">
-                <ProgramAvatar
+                <AssetAvatar
                   url={program.logo}
                   level={program.level}
                   alt={program.title}

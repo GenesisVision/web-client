@@ -1,11 +1,11 @@
 import React from "react";
 
-const InputImageDefault = ({ defaultImage }) => {
+const ProfileInputImageDefault = ({ defaultImage }) => {
   if (defaultImage.type === "svg") return defaultImage;
   else
     return (
       <span
-        className="input-image__preview-img"
+        className="profile-input-image__preview-img"
         style={{
           backgroundImage: `url(${defaultImage})`
         }}
@@ -13,4 +13,4 @@ const InputImageDefault = ({ defaultImage }) => {
     );
 };
 
-export default InputImageDefault;
+export default ProfileInputImageDefault;

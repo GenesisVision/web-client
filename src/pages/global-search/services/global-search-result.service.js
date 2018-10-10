@@ -1,9 +1,12 @@
-import { programsApiProxy } from "services/api-client/programs-api";
+import { searchApiProxy } from "services/api-client/search-api";
 
-export const globalSearchGetPrograms = queryValue => {
-  if (queryValue.length === "") return null;
+export const search = (queryValue = "") => {
+  const trimmedQuery = queryValue.trim();
+  if (trimmedQuery.length === 0) return Promise.resolve({ data: {} });
   const filters = {
-    mask: queryValue
+    mask: trimmedQuery,
+    take: 10
   };
-  return programsApiProxy.v10ProgramsGet(filters);
+
+  return searchApiProxy.v10SearchGet(filters);
 };

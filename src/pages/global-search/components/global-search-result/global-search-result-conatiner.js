@@ -1,22 +1,27 @@
+import classnames from "classnames";
+import debounce from "debounce";
 import React, { Component, Fragment } from "react";
 
-import { globalSearchGetPrograms } from "../../services/global-search-result.service";
+import { search } from "../../services/global-search-result.service";
 import GlobalSearchInput from "./global-search-input";
-import GlobalSearchResultTable from "./global-search-result-table";
+import GlobalSearchResult from "./global-search-result/global-search-result";
 
 class GlobalSearchResultConatiner extends Component {
   state = {
     query: "",
-    data: undefined,
-    isPending: true
+    data: {}
   };
 
   handleOnChange = value => {
     this.setState({ query: value, isPending: true });
-    globalSearchGetPrograms(value).then(data => {
+    this.searchDebounced(value);
+  };
+
+  searchDebounced = debounce(value => {
+    search(value).then(data => {
       this.setState({ ...data });
     });
-  };
+  }, 300);
 
   render() {
     const { query } = this.state;
@@ -26,7 +31,9 @@ class GlobalSearchResultConatiner extends Component {
           query={this.state.query}
           onChange={this.handleOnChange}
         />
-        {query && <GlobalSearchResultTable items={this.state.data} />}
+        <div className={classnames({ "global-search-hidden": !query })}>
+          <GlobalSearchResult data={this.state.data} />
+        </div>
       </Fragment>
     );
   }
