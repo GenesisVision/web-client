@@ -1,7 +1,6 @@
 import "./fund-details-description.scss";
 
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
-import Popover from "components/popover/popover";
 import { GVButton } from "gv-react-components";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
@@ -10,18 +9,9 @@ import { PROGRAM_NOTIFICATIONS_ROUTE } from "pages/notifications/notifications.r
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { Link } from "react-router-dom";
 import replaceParams from "utils/replace-params";
-
-import AboutLevelsContainerComponent from "../../../../../app/components/about-levels/about-levels-container";
 import FundDetailsFavorite from "./fund-details-favorite";
 import FundDetailsNotification from "./fund-details-notificaton";
-
-const composeManagerUrl = managerId => {
-  return replaceParams(MANAGER_DETAILS_ROUTE, {
-    ":managerId": managerId
-  });
-};
 
 export const composeProgramNotificationsUrl = url => {
   return replaceParams(PROGRAM_NOTIFICATIONS_ROUTE, {
@@ -34,17 +24,6 @@ class FundDetailsDescription extends PureComponent {
     isOpenInvestmentPopup: false,
     isOpenAboutLevels: false,
     anchor: null
-  };
-
-  handleOpenAboutLevels = () => {
-    this.setState({ isOpenAboutLevels: true });
-    this.handleCloseDropdown();
-  };
-  handleCloseAboutLevels = () => this.setState({ isOpenAboutLevels: false });
-  handleOpenDropdown = event => this.setState({ anchor: event.currentTarget });
-  handleCloseDropdown = () => this.setState({ anchor: null });
-  handleOpenInvestmentPopup = () => {
-    this.setState({ isOpenInvestmentPopup: true });
   };
 
   handleCloseInvestmentPopup = () => {
