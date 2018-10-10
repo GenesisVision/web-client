@@ -12,6 +12,7 @@ import NumberFormat from "react-number-format";
 import replaceParams from "utils/replace-params";
 import FundDetailsFavorite from "./fund-details-favorite";
 import FundDetailsNotification from "./fund-details-notificaton";
+import AssetContainer from "../../../../../../modules/funds-table/components/funds-table/asset/asset-container";
 
 export const composeProgramNotificationsUrl = url => {
   return replaceParams(PROGRAM_NOTIFICATIONS_ROUTE, {
@@ -71,6 +72,17 @@ class FundDetailsDescription extends PureComponent {
               </h2>
               <p className="fund-details-description__text">
                 {fundDescription.description}
+              </p>
+            </div>
+            <div className="fund-details-description__info-block">
+              <h2 className="fund-details-description__subheading">
+                {t("fund-details-page.description.assets")}
+              </h2>
+              <p className="fund-details-description__text">
+                <AssetContainer
+                  size={"large"}
+                  assets={fundDescription.currentAssets}
+                />
               </p>
             </div>
             <div className="fund-details-description__short-statistic">
