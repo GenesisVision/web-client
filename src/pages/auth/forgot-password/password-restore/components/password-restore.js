@@ -1,9 +1,7 @@
 import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
-import { FORGOT_PASSWORD_ROUTE } from "pages/auth/forgot-password/forgot-password.routes";
 import React from "react";
 import { translate } from "react-i18next";
-import { Link } from "react-router-dom";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
 
@@ -28,11 +26,6 @@ const RestorePassword = ({ t, isSubmitting, handleSubmit, error }) => {
       />
       <FormError error={error} />
       <div className="password-restore__navigation">
-        <Link to={FORGOT_PASSWORD_ROUTE} className="password-restore__btn-back">
-          <GVButton variant="text" color="secondary">
-            &larr; {t("auth.password-restore.new-password.back-button-text")}
-          </GVButton>
-        </Link>
         <GVButton type="submit" id="passwordRestoreSubmit">
           {t("auth.password-restore.new-password.confirm-button-text")}
         </GVButton>
