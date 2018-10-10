@@ -253,7 +253,8 @@
     },
     "email-confirm": {
       "title": "Email confirm",
-      "text-success": "Email address successfully verified"
+      "success-alert-message": "Email address successfully verified",
+      "error-during-confirmation": "An error occurred during confirmation of email:"
     }
   },
   "wallet": {

@@ -1,37 +1,38 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
-import emailConfirmService from "../service/email-confirm-service";
-import EmailConfirmSuccess from "./email-confirm-success";
+import * as emailConfirmService from "../service/email-confirm-service";
+import EmailConfirmFailure from "./email-confirm-failure";
 
 class EmailConfirmContainer extends PureComponent {
+  state = {
+    isPending: true,
+    errorMessage: "",
+    code: null
+  };
+
   componentDidMount() {
-    const { queryParams } = this.props;
+    const { queryParams, service } = this.props;
     if (queryParams.userId || queryParams.code) {
-      this.props.emailConfirm(queryParams.userId, queryParams.code);
+      service
+        .confirmEmail(queryParams.userId, queryParams.code)
+        .catch(response => this.setState(response));
     }
   }
 
   render() {
-    const { isPending } = this.props;
+    const { isPending, errorMessage } = this.state;
     if (isPending) return null;
-    return <EmailConfirmSuccess />;
+    return <EmailConfirmFailure errorMessage={errorMessage} />;
   }
 }
 
-const mapStateToProps = state => {
-  const { isPending, errorMessage } = state.emailConfirmData;
-
-  return { isPending, errorMessage };
-};
-
 const mapDispatchToProps = dispatch => ({
-  emailConfirm: (userId, code) => {
-    dispatch(emailConfirmService.confirmEmail(userId, code));
-  }
+  service: bindActionCreators(emailConfirmService, dispatch)
 });
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(EmailConfirmContainer);

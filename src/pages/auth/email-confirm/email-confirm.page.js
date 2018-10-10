@@ -1,3 +1,4 @@
+import SignUpFooter from "pages/auth/components/signup-footer/signup-footer";
 import qs from "qs";
 import React from "react";
 import { translate } from "react-i18next";
@@ -11,7 +12,7 @@ const EmailConfirmPage = ({ t, location }) => {
   const queryParams = qs.parse(location.search.slice(1));
 
   return (
-    <AuthLayout title={t("auth.email-confirm.title")}>
+    <AuthLayout title={t("auth.email-confirm.title")} Footer={SignUpFooter}>
       <div className="email-confirm-page">
         <EmailConfirmContainer queryParams={queryParams} />
       </div>
