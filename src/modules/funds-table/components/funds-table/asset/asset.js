@@ -8,7 +8,9 @@ const SIZES = {
   short: "short"
 };
 const FULL_CURRENCIES = {
-  BTC: "Bitcoin"
+  BTC: "Bitcoin",
+  ETH: "Ethereum",
+  GVT: "Genesis Vision"
 };
 class Asset extends Component {
   render() {
@@ -19,15 +21,15 @@ class Asset extends Component {
           "asset--large": size === SIZES.large
         })}
       >
-        <img src={BTC} alt="" className="assert__icon-img" />
+        <img src={BTC} alt="" className="asset__icon-img" />
         {currency && (
-          <div className="assert__currencies">
+          <div className="asset__currencies">
             {size === SIZES.large && (
-              <div className="assert__currency-full">
+              <div className="asset__currency-full">
                 {FULL_CURRENCIES[currency]}
               </div>
             )}
-            <div className="assert__currency-short">currency</div>
+            <div className="asset__currency-short">{currency}</div>
           </div>
         )}
         <div className="asset__percent">
