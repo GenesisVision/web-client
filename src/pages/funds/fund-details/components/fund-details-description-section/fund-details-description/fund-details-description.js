@@ -80,59 +80,11 @@ class FundDetailsDescription extends PureComponent {
               size="big"
             />
           </div>
-          {/*<Popover
-            horizontal="left"
-            vertical="bottom"
-            anchorEl={anchor}
-            noPadding
-            onClose={this.handleCloseDropdown}
-          >
-            <div className="popover-levels">
-              <div className="popover-levels__block">
-                <div className="popover-levels__title">
-                  {t("fund-details-page.popover.genesis-level")}{" "}
-                  {fundDescription.level}
-                </div>
-                <div className="popover-levels__subtitle">
-                  {t("fund-details-page.popover.invest-limit")}
-                </div>
-                <div className="popover-levels__balance">
-                  {fundDescription.availableInvestment}{" "}
-                  {fundDescription.currency}
-                </div>
-              </div>
-              <div className="popover-levels__block">
-                <div className="popover-levels__text">
-                  {t("fund-details-page.popover.text")}
-                </div>
-                <GVButton
-                  variant="text"
-                  onClick={this.handleOpenAboutLevels}
-                  color="secondary"
-                  className="popover-levels__about"
-                >
-                  {t("fund-details-page.popover.about-levels")} &#8250;
-                </GVButton>
-              </div>
-            </div>
-          </Popover>
-          <AboutLevelsContainerComponent
-            open={isOpenAboutLevels}
-            onClose={this.handleCloseAboutLevels}*/}
         </div>
         <div className="fund-details-description__main">
           <div className="fund-details-description__heading">
             {fundDescription.title}
           </div>
-          {/*<Link to={composeManagerUrl(fundDescription.manager.id)}>
-            <GVButton
-              variant="text"
-              className="fund-details-description__author-btn"
-            >
-              {fundDescription.manager.username}
-            </GVButton>
-          </Link>*/}
-
           <div className="fund-details-description__info">
             <div className="fund-details-description__strategy-block">
               <h2 className="fund-details-description__subheading">
@@ -143,16 +95,6 @@ class FundDetailsDescription extends PureComponent {
               </p>
             </div>
             <div className="fund-details-description__short-statistic">
-              {/*<div className="fund-details-description__short-statistic-item">
-                <span className="fund-details-description__short-statistic-subheading">
-                  {t("fund-details-page.description.avToInvest")}
-                </span>
-                <NumberFormat
-                  value={fundDescription.availableInvestment}
-                  displayType="text"
-                  suffix={` ${fundDescription.currency}`}
-                />
-              </div>*/}
               <div className="fund-details-description__short-statistic-item">
                 <span className="fund-details-description__short-statistic-subheading">
                   {t("fund-details-page.description.entryFee")}

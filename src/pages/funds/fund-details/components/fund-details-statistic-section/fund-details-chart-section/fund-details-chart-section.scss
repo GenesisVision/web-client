@@ -39,6 +39,7 @@ $border-radius-mobile: $border-radius/$divider-text;
   }
 
   &__stat-item {
+    //font-size: ;
   }
 
   &__profit {
@@ -67,7 +68,7 @@ $border-radius-mobile: $border-radius/$divider-text;
       color: $text-dark-color;
     }
   }
-  @include media-breakpoint-landscape-phone(){
+  @include media-breakpoint-landscape-phone() {
     padding: 0 $padding-middle;
 
     &__heading {
