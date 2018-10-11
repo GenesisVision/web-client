@@ -13,21 +13,23 @@ import {
   FUND_REBALANCING_FILTERS
 } from "../../../fund-details.constants";
 import * as service from "../../../services/fund-details.service";
+import AssetContainer from "../../../../../../modules/funds-table/components/funds-table/asset/asset-container";
+import moment from "moment";
 
 class FundRebalancing extends Component {
   fetchFundRebalancing = filters => {
-    const { programId, fundId, currency } = this.props;
-    return service.getFundRebalancing(programId, filters).then(({ data }) => {
+    const { fundId } = this.props;
+    return service.getFundRebalancing(fundId, filters).then(({ data }) => {
       return { items: data.trades, total: data.total };
     });
   };
 
   render() {
-    const { t, trades } = this.props;
-    let data = { trades: null, total: 0 };
-    if (trades) {
-      data.items = trades.trades;
-      data.total = trades.total;
+    const { t, rebalancing } = this.props;
+    let data = { rebalancing: null, total: 0 };
+    if (rebalancing) {
+      data.items = rebalancing.rebalances;
+      data.total = rebalancing.total;
     }
 
     return (
@@ -50,7 +52,7 @@ class FundRebalancing extends Component {
         columns={FUND_REBALANCING_COLUMNS}
         renderHeader={column => (
           <span
-            className={`program-details-trades__head-cell program-details-trades__cell--${
+            className={`fund-details-rebalancing__head-cell fund-details-rebalancing__cell--${
               column.name
             }`}
           >
@@ -58,34 +60,15 @@ class FundRebalancing extends Component {
           </span>
         )}
         renderBodyRow={rebalance => (
-          <TableRow className="program-details-trades__row">
-            <TableCell className="program-details-trades__cell program-details-trades__cell--direction">
-              {rebalance.name}
+          <TableRow className="fund-details-rebalancing__row">
+            <TableCell className="fund-details-rebalancing__cell fund-details-rebalancing__cell--direction">
+              {rebalance.from && moment(rebalance.from).format("D MMM YYYY")}
             </TableCell>
-            <TableCell className="program-details-trades__cell program-details-trades__cell--direction">
-              {rebalance.symbol}
+            <TableCell className="fund-details-rebalancing__cell fund-details-rebalancing__cell--direction">
+              {rebalance.to && moment(rebalance.to).format("D MMM YYYY")}
             </TableCell>
-            <TableCell className="program-details-trades__cell program-details-trades__cell--direction">
-              {rebalance.assertPart}
-            </TableCell>
-            {/*<TableCell className="program-details-trades__cell program-details-trades__cell--direction">
-              <BaseProfitability
-                isPositive={rebalance.direction === "Buy"}
-                isNegative={rebalance.direction === "Sell"}
-              >
-                {rebalance.direction}
-              </BaseProfitability>
-            </TableCell>
-            <TableCell className="program-details-trades__cell program-details-trades__cell--symbol">
-              {rebalance.symbol}
-            </TableCell>
-            <TableCell className="program-details-trades__cell program-details-trades__cell--volume">
-              <NumberFormat
-                value={rebalance.volume}
-                decimalScale={8}
-                displayType="text"
-                thousandSeparator=" "
-              />
+            <TableCell className="fund-details-rebalancing__cell fund-details-rebalancing__cell--direction">
+              <AssetContainer type={"text"} assets={rebalance.parts} />
             </TableCell>
           </TableRow>
         )}
