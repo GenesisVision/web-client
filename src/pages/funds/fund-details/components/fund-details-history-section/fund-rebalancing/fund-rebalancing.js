@@ -34,6 +34,7 @@ class FundRebalancing extends Component {
 
     return (
       <TableModule
+        title={t("fund-details-page.history.subheading")}
         fetchOnMount={false}
         data={data}
         getItems={this.fetchFundRebalancing}
