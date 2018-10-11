@@ -1,15 +1,6 @@
 @import "styles/_colors.scss";
 @import "styles/_breakpoint.scss";
-
-$padding: 20px;
-$title-size: 16px;
-$large-font-size: 14px;
-$middle-font-size: 13px;
-$small-font-size: 12px;
-
-$padding-large: 62px;
-$divider-padding: 3;
-$padding-large-mobile: $padding-large/$divider-padding;
+@import "styles/_sizes.scss";
 
 .fund-details {
   &__section {

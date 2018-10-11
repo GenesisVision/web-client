@@ -1,17 +1,6 @@
 @import "styles/_colors.scss";
 @import "styles/_breakpoint.scss";
-
-$padding-middle: 32px;
-$font-size-title: 32px;
-$font-size-subtitle: 17.5px;
-
-$divider-padding: 3;
-$divider-text: 1.5;
-$divider-title: 2;
-
-$padding-middle-mobile: $padding-middle/$divider-padding;
-$font-size-title-mobile: $font-size-title/$divider-title;
-$font-size-subtitle-mobile: $font-size-subtitle/$divider-text;
+@import "styles/_sizes.scss";
 
 .fund-details-history {
   padding: 0 $padding-middle-mobile;

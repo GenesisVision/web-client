@@ -1,31 +1,6 @@
 @import "styles/_colors.scss";
 @import "styles/_breakpoint.scss";
-
-$padding-outer: 80px;
-$padding-large: 62px;
-$padding-middle: 32px;
-$padding-small: 20px;
-$font-size-title: 32px;
-$font-size-subtitle: 17.5px;
-$font-size-large: 16px;
-$font-size-middle: 14px;
-$font-size-small: 12px;
-$border-radius: 5px;
-
-$divider-padding: 3;
-$divider-text: 1.5;
-$divider-title: 2;
-
-$padding-outer-mobile: $padding-outer/$divider-padding;
-$padding-large-mobile: $padding-large/$divider-padding;
-$padding-middle-mobile: $padding-middle/$divider-padding;
-$padding-small-mobile: $padding-small/$divider-padding;
-$font-size-title-mobile: $font-size-title/$divider-title;
-$font-size-subtitle-mobile: $font-size-subtitle/$divider-text;
-$font-size-large-mobile: $font-size-large/$divider-text;
-$font-size-middle-mobile: $font-size-middle/$divider-text;
-$font-size-small-mobile: $font-size-small/$divider-text;
-$border-radius-mobile: $border-radius/$divider-text;
+@import "styles/_sizes.scss";
 
 .fund-details-chart {
   padding: 0 $padding-middle-mobile;

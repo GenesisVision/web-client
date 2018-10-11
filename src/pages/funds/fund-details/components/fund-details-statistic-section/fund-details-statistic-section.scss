@@ -1,9 +1,6 @@
 @import "styles/_breakpoint.scss";
-$padding-middle: 32px;
-$divider-padding: 3;
-$padding-middle-mobile: $padding-middle/$divider-padding;
-$padding-large: 62px;
-$padding-large-mobile: $padding-large/$divider-padding;
+@import "styles/_sizes.scss";
+
 .fund-details-statistic-section {
   display: flex;
   flex-wrap: wrap;
