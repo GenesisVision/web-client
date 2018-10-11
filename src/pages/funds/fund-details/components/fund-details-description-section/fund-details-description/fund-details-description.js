@@ -31,7 +31,7 @@ class FundDetailsDescription extends PureComponent {
   };
 
   render() {
-    const { isOpenInvestmentPopup, isOpenAboutLevels, anchor } = this.state;
+    const { isOpenInvestmentPopup } = this.state;
     const {
       t,
       isInvested,

@@ -10,11 +10,6 @@ import { fundsApiProxy } from "services/api-client/funds-api";
 import authService from "services/auth-service";
 import getParams from "utils/get-params";
 
-import {
-  FUND_REBALANCING_DEFAULT_FILTERS,
-  FUND_REBALANCING_FILTERS
-} from "../fund-details.constants";
-
 export const getFundDescription = () => (dispatch, getState) => {
   const authorization = authService.getAuthArg();
   const { routing } = getState();
@@ -76,34 +71,6 @@ export const getFundStatistic = (fundId, currency, period = DEFAULT_PERIOD) => {
   });
 };
 
-export const getProgramHistory = (fundId, currency) => {
-  const tradesFilters = composeRequestFilters({
-    paging: DEFAULT_PAGING,
-    sorting: undefined,
-    filtering: FUND_REBALANCING_FILTERS,
-    defaultFilters: FUND_REBALANCING_DEFAULT_FILTERS
-  });
-
-  return Promise.all([
-    getProgramTrades({ fundId, currency, filters: tradesFilters }),
-    getProgramEvents()
-  ]).then(([trades]) => ({
-    trades
-  }));
-};
-
-export const getProgramTrades = ({ fundId, currency, filters }) => {
-  const opts = {
-    ...filters,
-    currency
-  };
-  return programsApiProxy.v10ProgramsByIdTradesGet(fundId, opts);
-};
-
 export const getFundRebalancing = (id, filters) => {
   return fundsApiProxy.v10FundsByIdRebalancingGet(id, filters);
-};
-
-export const getProgramEvents = () => {
-  return Promise.resolve();
 };

@@ -33,7 +33,7 @@ class FundDetailsPage extends PureComponent {
   }
 
   componentDidMount() {
-    const { service, currency } = this.props;
+    const { service } = this.props;
     this.setState({ isPending: true });
     service
       .getFundDescription()

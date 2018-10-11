@@ -5,7 +5,6 @@ import { composeRequestValue } from "../../../modules/table/components/filtering
 
 const SERVER_DATE_RANGE_MIN_FILTER_NAME = "dateFrom";
 const SERVER_DATE_RANGE_MAX_FILTER_NAME = "dateTo";
-export const FUND_REBALANCING_SORTING = "ByDateDesc";
 export const FUND_REBALANCING_COLUMNS = [
   {
     name: "name"

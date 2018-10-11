@@ -87,31 +87,6 @@ class FundRebalancing extends Component {
                 thousandSeparator=" "
               />
             </TableCell>
-            <TableCell className="program-details-trades__cell program-details-trades__cell--price">
-              <NumberFormat
-                value={rebalance.price}
-                decimalScale={8}
-                displayType="text"
-                thousandSeparator=" "
-              />
-            </TableCell>
-            <TableCell className="program-details-trades__cell program-details-trades__cell--profit">
-              <Profitability value={rebalance.profit} prefix="sign">
-                <NumberFormat
-                  value={this.parseNumber(rebalance.profit)}
-                  displayType="text"
-                />
-              </Profitability>
-            </TableCell>
-            <TableCell className="program-details-trades__cell program-details-trades__cell--date">
-              {moment(rebalance.date).format("DD-MM-YYYY, hh:mm a")}
-            </TableCell>
-            <TableCell className="program-details-trades__cell program-details-trades__cell--ticket">
-              {rebalance.ticket}
-            </TableCell>
-            <TableCell className="program-details-trades__cell program-details-trades__cell--entry">
-              {rebalance.entry}
-            </TableCell>*/}
           </TableRow>
         )}
       />
