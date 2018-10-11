@@ -1,41 +1,33 @@
 @import "styles/_colors.scss";
 
 .profile {
-  &__title {
-    display: flex;
-    flex-direction: row;
-    align-items: baseline;
+  &__container {
+    width: 100%;
+    overflow: scroll;
   }
-
-  &__content {
-    display: flex;
-    flex-direction: row;
-  }
-
   &__left {
-    display: flex;
-    flex-shrink: 0;
-    justify-content: center;
-    width: 20px;
+    position: relative;
   }
 
   &__center {
-    flex-shrink: 1;
     width: 100px;
-  }
-
-  &__right {
-    flex-shrink: 0;
-    //display: flex;
-    //flex-direction: row;
-    //align-items: baseline;
   }
 
   &__stick {
     display: flex;
-    width: 1px;
-    background-color: $secondary-background-color;
-    height: 100%;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    &::after {
+      content: "";
+      display: flex;
+      width: 1px;
+      background-color: $secondary-background-color;
+      height: 100%;
+    }
   }
 
   h4 {
@@ -50,11 +42,20 @@
 
   .gv-text-field {
     min-width: 310px;
-    &::before {
-      border: none;
+
+    &__wrapper {
+      margin-left: 0;
+      margin-right: 16px;
     }
+
     &__input {
-      color: $main-color;
+      color: $main-color !important;
+    }
+  }
+
+  &--is-disabled {
+    .gv-text-field::before {
+      border: none;
     }
   }
 }

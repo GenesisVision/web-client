@@ -1,137 +1,177 @@
 import "./profile.scss";
 
+import classnames from "classnames";
 import Chip from "components/chip/chip";
-import { GVTextField } from "gv-react-components";
+import { GVButton, GVTextField } from "gv-react-components";
+import UploadButton from "modules/upload-button/upload-file";
 import moment from "moment";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 
+const ProfileField = ({ name, value, label, disabled }) => {
+  return value || !disabled ? (
+    <GVTextField name={name} value={value} label={label} disabled={disabled} />
+  ) : null;
+};
+
 class Profile extends Component {
+  state = {
+    disabled: false
+  };
+  fileInput = React.createRef();
   render() {
     const { t, info } = this.props;
     return (
-      <div className="profile">
-        <div className="profile__section">
-          <div className="profile__title">
-            <div className="profile__left">
+      <div className="profile__container">
+        <table
+          className={classnames("profile", {
+            "profile--is-disabled": this.state.disabled
+          })}
+        >
+          <tr className="profile__title">
+            <td className="profile__left">
               <h4>01</h4>
-            </div>
-            <div className="profile__center" />
-            <div className="profile__right">
+            </td>
+            <td className="profile__center" />
+            <td className="profile__right">
               <h4>{t("profile.contacts")}</h4>
-              <Chip type="negative">{t("profile.not-verified")}</Chip>
-            </div>
-          </div>
-          <div className="profile__content">
-            <div className="profile__left">
+              {info.phoneNumberConfirmed || (
+                <Chip type="negative">{t("profile.not-verified")}</Chip>
+              )}
+            </td>
+          </tr>
+          <tr className="profile__content">
+            <td className="profile__left">
               <span className="profile__stick" />
-            </div>
-            <div className="profile__center" />
-            <div className="profile__right">
-              <GVTextField
-                value={info.phone}
+            </td>
+            <td className="profile__center" />
+            <td className="profile__right">
+              <ProfileField
                 label={t("profile.phone-number")}
-                disabled
+                value={info.phone}
+                name="phone"
+                disabled={this.state.disabled}
               />
-              <GVTextField
-                value={info.email}
+              <ProfileField
                 label={t("profile.email")}
+                value={info.email}
+                name="phone"
                 disabled
               />
-            </div>
-          </div>
-        </div>
-        <div className="profile__section">
-          <div className="profile__title">
-            <div className="profile__left">
+            </td>
+          </tr>
+          <tr className="profile__title">
+            <td className="profile__left">
               <h4>02</h4>
-            </div>
-            <div className="profile__center" />
-            <div className="profile__right">
+            </td>
+            <td className="profile__center" />
+            <td className="profile__right">
               <h4>{t("profile.personal-info")}</h4>
-              <Chip type="negative">{t("profile.not-verified")}</Chip>
-            </div>
-          </div>
-          <div className="profile__content">
-            <div className="profile__left">
+              {info.documentsConfirmed || (
+                <Chip type="negative">{t("profile.not-verified")}</Chip>
+              )}
+            </td>
+          </tr>
+          <tr className="profile__content">
+            <td className="profile__left">
               <span className="profile__stick" />
-            </div>
-            <div className="profile__center" />
-            <div className="profile__right">
+            </td>
+            <td className="profile__center" />
+            <td className="profile__right">
+              {!info.firstName &&
+                !info.lastName &&
+                !info.birthday &&
+                !info.country &&
+                this.state.disabled && <p>No info</p>}
               <div>
-                <GVTextField
+                <ProfileField
                   value={info.firstName}
                   label={t("profile.forename")}
-                  disabled
+                  name="firstName"
+                  disabled={this.state.disabled}
                 />
-                <GVTextField
+                <ProfileField
                   value={info.lastName}
                   label={t("profile.family-name")}
-                  disabled
+                  name="lastName"
+                  disabled={this.state.disabled}
                 />
               </div>
               <div>
-                <GVTextField
-                  value={moment(info.birthday).format("dd-mm-YYYY")}
+                <ProfileField
+                  value={
+                    info.birthday && moment(info.birthday).format("dd-mm-YYYY")
+                  }
                   label={t("profile.birthday")}
-                  disabled
+                  name="birthday"
+                  disabled={this.state.disabled}
                 />
-                <GVTextField
+                <ProfileField
                   value={info.country}
                   label={t("profile.citizen")}
-                  disabled
+                  name="country"
+                  disabled={this.state.disabled}
                 />
               </div>
-            </div>
-          </div>
-        </div>
-        <div className="profile__section">
-          <div className="profile__title">
-            <div className="profile__left">
+              <div>
+                <UploadButton />
+              </div>
+            </td>
+          </tr>
+          <tr className="profile__title">
+            <td className="profile__left">
               <h4>03</h4>
-            </div>
-            <div className="profile__center" />
-            <div className="profile__right">
+            </td>
+            <td className="profile__center" />
+            <td className="profile__right">
               <h4>{t("profile.residential-address")}</h4>
-              <Chip type="negative">{t("profile.not-verified")}</Chip>
-            </div>
-          </div>
-          <div className="profile__content">
-            <div className="profile__left">
+            </td>
+          </tr>
+          <tr className="profile__content">
+            <td className="profile__left">
               <span className="profile__stick" />
-            </div>
-            <div className="profile__center" />
-            <div className="profile__right">
+            </td>
+            <td className="profile__center" />
+            <td className="profile__right">
+              {!info.country &&
+                !info.city &&
+                !info.address &&
+                !info.index &&
+                this.state.disabled && <p>No info</p>}
               <div className="profile__row">
-                <GVTextField
+                <ProfileField
                   value={info.country}
                   label={t("profile.country")}
-                  disabled
+                  name="country"
+                  disabled={this.state.disabled}
                 />
-                <GVTextField
+                <ProfileField
                   value={info.city}
                   label={t("profile.city")}
-                  disabled
+                  name="city"
+                  disabled={this.state.disabled}
                 />
               </div>
               <div className="profile__row">
-                <GVTextField
+                <ProfileField
                   value={info.address}
                   label={t("profile.address")}
-                  disabled
+                  name="address"
+                  disabled={this.state.disabled}
                 />
               </div>
               <div className="profile__row">
-                <GVTextField
+                <ProfileField
                   value={info.index || ""}
                   label={t("profile.index")}
-                  disabled
+                  name="index"
+                  disabled={this.state.disabled}
                 />
               </div>
-            </div>
-          </div>
-        </div>
+            </td>
+          </tr>
+        </table>
       </div>
     );
   }
