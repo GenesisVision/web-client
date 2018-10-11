@@ -4,6 +4,7 @@ import { translate } from "react-i18next";
 
 import ManagersTable from "./managers-table";
 import ProgramsTable from "./programs-table";
+import FundsTable from "./funds-table";
 
 const PROGRAMS_TABLE_TAB = "investors";
 const FUNDS_TABLE_TAB = "funds";
@@ -23,6 +24,13 @@ class GlobalSearchResult extends PureComponent {
     const { tab } = this.state;
     if (tab !== PROGRAMS_TABLE_TAB || !data.programs) return null;
     return <ProgramsTable items={data.programs} />;
+  };
+
+  renderFundsTab = () => {
+    const { data } = this.props;
+    const { tab } = this.state;
+    if (tab !== FUNDS_TABLE_TAB || !data.funds) return null;
+    return <FundsTable items={data.funds} />;
   };
 
   renderManagersTab = () => {
@@ -54,6 +62,7 @@ class GlobalSearchResult extends PureComponent {
         </GVTabs>
         {this.renderProgramsTab()}
         {this.renderManagersTab()}
+        {this.renderFundsTab()}
       </Fragment>
     );
   }
