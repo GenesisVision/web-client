@@ -51,10 +51,7 @@ class FundDetailsStatisticSection extends PureComponent {
     return (
       <div className="fund-details-statistic-section">
         <div className="fund-details-statistic-section__statistic">
-          <FundDetailsStatistic
-            statisticData={statisticData}
-            period={period}
-          />
+          <FundDetailsStatistic statisticData={statisticData} period={period} />
         </div>
         <div className="fund-details-statistic-section__chart">
           <FundDetailsChartSection
