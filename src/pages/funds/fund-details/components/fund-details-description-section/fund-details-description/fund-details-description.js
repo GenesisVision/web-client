@@ -41,7 +41,6 @@ class FundDetailsDescription extends PureComponent {
       isReinvestPending,
       isFavoritePending
     } = this.props;
-
     const isFavorite =
       fundDescription.personalFundDetails &&
       fundDescription.personalFundDetails.isFavorite;
@@ -64,24 +63,24 @@ class FundDetailsDescription extends PureComponent {
           <div className="fund-details-description__heading">
             {fundDescription.title}
           </div>
+          <div className="fund-details-description__info-block">
+            <h2 className="fund-details-description__subheading">
+              {t("fund-details-page.description.assets")}
+            </h2>
+            <div className="fund-details-description__text">
+              <AssetContainer
+                type={"large"}
+                assets={fundDescription.currentAssets}
+              />
+            </div>
+          </div>
           <div className="fund-details-description__info">
-            <div className="fund-details-description__strategy-block">
+            <div className="fund-details-description__info-block">
               <h2 className="fund-details-description__subheading">
                 {t("fund-details-page.description.strategy")}
               </h2>
               <p className="fund-details-description__text">
                 {fundDescription.description}
-              </p>
-            </div>
-            <div className="fund-details-description__info-block">
-              <h2 className="fund-details-description__subheading">
-                {t("fund-details-page.description.assets")}
-              </h2>
-              <p className="fund-details-description__text">
-                <AssetContainer
-                  size={"large"}
-                  assets={fundDescription.currentAssets}
-                />
               </p>
             </div>
             <div className="fund-details-description__short-statistic">

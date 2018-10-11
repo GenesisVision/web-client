@@ -39,7 +39,8 @@
   &__heading {
     font-size: $font-size-title-mobile;
     font-weight: 600;
-    color: $text-light-color
+    color: $text-light-color;
+    padding-bottom: $padding-middle-mobile;
   }
 
   &__author-btn {
@@ -60,8 +61,8 @@
     letter-spacing: 0.21px;
   }
 
-  &__strategy-block{
-    padding: $padding-middle-mobile 0;
+  &__info-block{
+    padding-bottom: $padding-small-mobile;
   }
 
   &__short-statistic-subheading{
@@ -77,6 +78,7 @@
   }
 
   &__invest-btn {
+    font-size: $font-size-middle-mobile;
     letter-spacing: 0.3px;
     font-weight: 600;
     box-sizing: border-box;
@@ -145,12 +147,13 @@
     }
     &__heading {
       font-size: $font-size-title;
+      padding-bottom: $padding-middle;
     }
     &__subheading {
       font-size: $font-size-large;
     }
-    &__strategy-block{
-      padding: $padding-middle 0;
+    &__info-block{
+      padding-bottom: $padding-middle;
     }
     &__text {
       font-size: $font-size-middle;
@@ -163,6 +166,7 @@
       margin-bottom: $padding-small/2;
     }
     &__invest-btn {
+      font-size: $font-size-middle;
       width: $btn-width;
       height: $btn-height;
     }
