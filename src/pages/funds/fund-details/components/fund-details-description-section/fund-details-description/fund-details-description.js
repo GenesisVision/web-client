@@ -26,6 +26,15 @@ class FundDetailsDescription extends PureComponent {
     anchor: null
   };
 
+  handleOpenInvestmentPopup = () => {
+    const { isAuthenticated, redirectToLogin } = this.props;
+    if (isAuthenticated) {
+      this.setState({ isOpenInvestmentPopup: true });
+    } else {
+      redirectToLogin();
+    }
+  };
+
   handleCloseInvestmentPopup = () => {
     this.setState({ isOpenInvestmentPopup: false });
   };
@@ -117,6 +126,7 @@ class FundDetailsDescription extends PureComponent {
             <ProgramDepositContainer
               open={isOpenInvestmentPopup}
               id={fundDescription.id}
+              type={"fund"}
               onClose={this.handleCloseInvestmentPopup}
             />
 

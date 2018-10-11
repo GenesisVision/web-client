@@ -181,6 +181,7 @@ class ProgramDetailsDescription extends PureComponent {
 
             <ProgramDepositContainer
               open={isOpenInvestmentPopup}
+              type={"program"}
               id={programDescription.id}
               onClose={this.handleCloseInvestmentPopup}
             />
