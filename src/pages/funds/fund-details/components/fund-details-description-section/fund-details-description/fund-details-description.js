@@ -80,7 +80,7 @@ class FundDetailsDescription extends PureComponent {
               <AssetContainer
                 type={"large"}
                 assets={fundDescription.currentAssets}
-                size={5}
+                size={7}
               />
             </div>
           </div>
