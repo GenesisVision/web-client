@@ -26,7 +26,7 @@ class FundsTableRow extends Component {
   render() {
     const { fund, isAuthenticated, toggleFavorite } = this.props;
     const fundDetailsUrl = replaceParams(FUND_DETAILS_ROUTE, {
-      [`:${FUNDS_SLUG_URL_PARAM_NAME}`]: fund.id
+      [`:${FUNDS_SLUG_URL_PARAM_NAME}`]: fund.url
     });
     return (
       <TableRow>
