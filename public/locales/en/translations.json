@@ -487,6 +487,7 @@
     "title": "Program detail",
     "description": {
       "strategy": "Strategy",
+      "assets": "Assets",
       "addToFavorites": "Add to favorites",
       "notifications": "Notifications",
       "avToInvest": "Av. to invest",
@@ -505,6 +506,7 @@
     "statistics": {
       "heading": "Statistics",
       "current": "Current",
+      "profit-change": "Profit change",
       "for": "For",
       "balance": "Balance",
       "investors": "Investors",
@@ -531,6 +533,9 @@
         "events": "Events"
       },
       "trades": {
+        "assets": "Assets",
+        "from": "From",
+        "to": "To",
         "name": "Name",
         "assertPart": "Assert part",
         "direction": "Dir",
