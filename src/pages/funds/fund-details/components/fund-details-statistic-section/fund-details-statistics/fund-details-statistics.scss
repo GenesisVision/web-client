@@ -45,11 +45,16 @@
     }
   }
 
+  &__vertical-info-block{
+    display: flex;
+    flex-direction: column;
+  }
+
   &__item {
     display: flex;
     flex-direction: column;
-    padding-right: $padding-outer-mobile/8;
-    padding-bottom: $padding-outer-mobile/4;
+    padding-right: $padding-small-mobile;
+    padding-bottom: $padding-large-mobile;
     @include media-breakpoint-landscape-phone(){
     }
   }

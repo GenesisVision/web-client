@@ -20,49 +20,51 @@ const FundDetailsStatistics = ({ t, statisticData, period }) => {
         {t("fund-details-page.statistics.current")}
       </div>
       <div className="fund-details-statistics__particular-information">
-        <div className="fund-details-statistics__item">
-          <span className="fund-details-statistics__label">
-            {t("fund-details-page.statistics.balance")}
-          </span>
-          <span className="fund-details-statistics__value fund-details-statistics__value--accent">
-            <NumberFormat
-              value={statistic.balance}
-              thousandSeparator={" "}
-              displayType="text"
-              suffix={" GVT"}
-            />
-          </span>
+        <div className="fund-details-statistics__vertical-info-block">
+          <div className="fund-details-statistics__item">
+            <span className="fund-details-statistics__label">
+              {t("fund-details-page.statistics.balance")}
+            </span>
+            <span className="fund-details-statistics__value fund-details-statistics__value--accent">
+              <NumberFormat
+                value={statistic.balance}
+                thousandSeparator={" "}
+                displayType="text"
+                suffix={" GVT"}
+              />
+            </span>
+          </div>
+          <div className="fund-details-statistics__item">
+            <span className="fund-details-statistics__label">
+              {t("fund-details-page.statistics.investors")}
+            </span>
+            <span className="fund-details-statistics__value">
+              <NumberFormat
+                value={statistic.investors}
+                thousandSeparator={" "}
+                displayType="text"
+              />
+            </span>
+          </div>
         </div>
-        <div className="fund-details-statistics__item">
-          <span className="fund-details-statistics__label">
-            {t("fund-details-page.statistics.investors")}
-          </span>
-          <span className="fund-details-statistics__value">
-            <NumberFormat
-              value={statistic.investors}
-              thousandSeparator={" "}
-              displayType="text"
-            />
-          </span>
+        <div className="fund-details-statistics__vertical-info-block">
+          <div className="fund-details-statistics__item fund-details-statistics__item--secondary">
+            <span className="fund-details-statistics__label">
+              {t("fund-details-page.statistics.start-day")}
+            </span>
+            <span className="fund-details-statistics__value">
+              {moment(statistic.periodStarts).format("D MMM YYYY")}
+            </span>
+          </div>
+          <div className="fund-details-statistics__item fund-details-statistics__item--secondary">
+            <span className="fund-details-statistics__label">
+              {t("fund-details-page.statistics.period-end")}
+            </span>
+            <span className="fund-details-statistics__value">
+              {moment(statistic.periodEnds).format("D MMM YYYY")}
+            </span>
+          </div>
         </div>
-
-        <div className="fund-details-statistics__item fund-details-statistics__item--secondary">
-          <span className="fund-details-statistics__label">
-            {t("fund-details-page.statistics.start-day")}
-          </span>
-          <span className="fund-details-statistics__value">
-            {moment(statistic.startDate).format("D MMM YYYY")}
-          </span>
-        </div>
-
-        {/*<div className="fund-details-statistics__item fund-details-statistics__item--secondary">
-          <span className="fund-details-statistics__label">
-            {t("fund-details-page.statistics.period-end")}
-          </span>
-          <span className="fund-details-statistics__value">
-            {moment(statistic.periodEnds).format("D MMM YYYY")}
-          </span>
-        </div>*/}
       </div>
 
       <div className="fund-details-statistics__period">
@@ -105,7 +107,7 @@ const FundDetailsStatistics = ({ t, statisticData, period }) => {
 
         <div className="fund-details-statistics__item fund-details-statistics__item--secondary">
           <span className="fund-details-statistics__label">
-            Profit change percent
+            {t("fund-details-page.statistics.profit-change")}
           </span>
           <span className="fund-details-statistics__value">
             <NumberFormat
