@@ -3,16 +3,12 @@ import React, { Component } from "react";
 import classNames from "classnames";
 import NumberFormat from "react-number-format";
 import BTC from "shared/media/BTC.png";
+import { HEADER_CURRENCY_VALUES } from "modules/currency-select/currency-select.constants";
 export const ASSET_TYPE = {
   large: "large",
   middle: "middle",
   short: "short",
   text: "text"
-};
-const FULL_CURRENCIES = {
-  BTC: "Bitcoin",
-  ETH: "Ethereum",
-  GVT: "Genesis Vision"
 };
 class Asset extends Component {
   render() {
@@ -37,7 +33,7 @@ class Asset extends Component {
             <div className="asset__currencies">
               {type === ASSET_TYPE.large && (
                 <div className="asset__currency-full">
-                  {FULL_CURRENCIES[currency]}
+                  {HEADER_CURRENCY_VALUES[currency]}
                 </div>
               )}
               {type !== ASSET_TYPE.short && (
