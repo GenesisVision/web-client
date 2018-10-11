@@ -13,6 +13,7 @@ import {
 import replaceParams from "../../../../utils/replace-params";
 import FavoriteIcon from "../../../favorite-asset/components/favorite-icon/favorite-icon";
 import AssetContainer from "./asset/asset-container";
+import { GVButton } from "gv-react-components";
 
 class FundsTableRow extends Component {
   constructor(props) {
@@ -33,7 +34,11 @@ class FundsTableRow extends Component {
           <div className="funds-table__cell--avatar-title">
             <AssetAvatar url={fund.logo} alt={fund.title} />
             <div className="funds-table__cell--title">
-              <Link to={fundDetailsUrl}>{fund.title}</Link>
+              <Link to={fundDetailsUrl}>
+                <GVButton variant="text" color="secondary">
+                  {fund.title}
+                </GVButton>
+              </Link>
             </div>
           </div>
         </TableCell>

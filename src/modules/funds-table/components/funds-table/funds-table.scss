@@ -37,10 +37,22 @@ $chart-width: 160px;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
+    .gv-btn {
+      font-size: $font-size-middle-mobile;
+      padding: 0;
+    }
     .program-avatar {
       width: 20px;
+      margin: 0;
+      padding-right: $padding-mini-mobile;
       @include media-breakpoint-landscape-phone() {
         width: 40px;
+        padding-right: $padding-mini;
+      }
+    }
+    @include media-breakpoint-landscape-phone() {
+      .gv-btn {
+        font-size: $font-size-middle;
       }
     }
   }
