@@ -3,19 +3,32 @@
 @import "styles/_sizes.scss";
 
 .fund-details-history {
-  padding: 0 $padding-middle-mobile;
+  padding-bottom: $padding-middle-mobile;
   @include media-breakpoint-landscape-phone(){
-    padding: 0 $padding-middle;
+    padding-bottom: $padding-middle;
   }
 
   &__heading {
-    padding: $padding-middle-mobile 0;
+    padding: $padding-middle-mobile;
     font-size: $font-size-subtitle-mobile;
     letter-spacing: 0.2px;
     font-weight: 600;
     @include media-breakpoint-landscape-phone() {
-      padding: $padding-middle 0;
+      padding: $padding-middle;
       font-size: $font-size-subtitle;
+    }
+  }
+
+  &__subheading {
+    font-size: $font-size-middle-mobile;
+    padding-bottom: $padding-small-mobile;
+    padding-left: $padding-middle-mobile;
+    letter-spacing: 0.2px;
+    font-weight: 600;
+    @include media-breakpoint-landscape-phone() {
+      padding-bottom: $padding-small;
+      padding-left: $padding-middle;
+      font-size: $font-size-middle;
     }
   }
 

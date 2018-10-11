@@ -3,9 +3,7 @@ import "./fund-details-history.scss";
 import Surface from "components/surface/surface";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
-import FundRebalancing from "./fund-rebalancing/fund-rebalancing"
-import { fetchPortfolioEvents } from "../../../../dashboard/services/dashboard-events.services";
-import ProgramTrades from "./fund-rebalancing/fund-rebalancing";
+import FundRebalancing from "./fund-rebalancing/fund-rebalancing";
 
 const TRADES_TAB = "trades";
 class FundDetailsHistorySection extends PureComponent {
@@ -37,7 +35,7 @@ class FundDetailsHistorySection extends PureComponent {
           {t("fund-details-page.history.heading")}
         </div>
 
-        <div className="fund-details-statistics__subheading">Rebalancing</div>
+        <div className="fund-details-history__subheading">Rebalancing</div>
         <div>
           <FundRebalancing
             rebalancing={rebalancingData.data}
