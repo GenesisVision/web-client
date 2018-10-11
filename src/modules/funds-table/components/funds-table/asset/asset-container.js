@@ -1,6 +1,6 @@
 import "./asset.scss";
 import React, { Component, Fragment } from "react";
-import Asset, { TYPES } from "./asset";
+import Asset, { ASSET_TYPE } from "./asset";
 import classNames from "classnames";
 
 class AssetContainer extends Component {
@@ -9,7 +9,7 @@ class AssetContainer extends Component {
     return (
       <div
         className={classNames("assets", {
-          "assets--text": type === TYPES.text
+          "assets--text": type === ASSET_TYPE.text
         })}
       >
         {assets.map((asset, idx) => (
@@ -20,7 +20,7 @@ class AssetContainer extends Component {
               currency={asset.symbol}
               type={type}
             />
-            {type === TYPES.text &&
+            {type === ASSET_TYPE.text &&
               idx !== assets.length - 1 && <span>,&nbsp;</span>}
           </Fragment>
         ))}
