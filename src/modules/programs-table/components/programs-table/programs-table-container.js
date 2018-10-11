@@ -1,7 +1,9 @@
 import Surface from "components/surface/surface";
+import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import { push } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
 
 import { toggleFavoriteProgramDispatchable } from "../../../favorite-asset/services/favorite-program.service";
@@ -40,6 +42,7 @@ class ProgramsContainer extends Component {
           }}
           updatePaging={service.programsChangePage}
           toggleFavorite={service.toggleFavoriteProgram}
+          redirectToLogin={service.redirectToLogin}
           isAuthenticated={isAuthenticated}
         />
       </Surface>
@@ -57,7 +60,8 @@ const mapDispatchToProps = dispatch => ({
   service: bindActionCreators(
     {
       ...programsService,
-      toggleFavoriteProgram: toggleFavoriteProgramDispatchable
+      toggleFavoriteProgram: toggleFavoriteProgramDispatchable,
+      redirectToLogin: () => push(LOGIN_ROUTE)
     },
     dispatch
   )

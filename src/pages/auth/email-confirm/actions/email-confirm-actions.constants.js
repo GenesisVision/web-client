@@ -1,1 +1,0 @@
-export const EMAIL_CONFIRM = "EMAIL_CONFIRM";

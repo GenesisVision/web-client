@@ -7,16 +7,6 @@ import * as managerService from "../../services/manager.service";
 import ManagerDescription from "./manager-description";
 import ManagerNavigation from "./manager-description-navigation";
 
-const mock = {
-  id: "string",
-  username: "string",
-  about:
-    "so many text so many text so many text so many text so many text so many text so many text so many text so many text so many text so many text so many text so many text so many text so many text so many text so many text so many text so many text so many text ",
-  avatar: "",
-  regDate: "2018-09-06T13:37:38.844Z",
-  assets: ["USD", "BTC", "ETH"]
-};
-
 class ManagerDescriptionContainer extends Component {
   componentDidMount() {
     const { service } = this.props;
@@ -25,13 +15,13 @@ class ManagerDescriptionContainer extends Component {
   }
 
   render() {
-    const { managerProfile, goBack } = this.props;
+    const { managerProfile, service } = this.props;
 
     if (!managerProfile) return null;
 
     return (
       <Fragment>
-        <ManagerNavigation goBack={goBack} />
+        <ManagerNavigation goBack={service.goBack} />
         <ManagerDescription managerProfile={managerProfile} />
       </Fragment>
     );
@@ -40,14 +30,12 @@ class ManagerDescriptionContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    // managerProfile: state.manager.data
-    managerProfile: mock
+    managerProfile: state.manager.data
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  service: bindActionCreators(managerService, dispatch),
-  goBack: () => dispatch(goBack())
+  service: bindActionCreators({ ...managerService, goBack }, dispatch)
 });
 
 export default connect(

@@ -97,8 +97,8 @@
         "disabled-alert": "Disabled emergency notifications"
       },
       "PlatformNewsAndUpdates": {
-        "enabled-alert": "Enabled new and updates notifications",
-        "disabled-alert": "Disabled new and updates notifications"
+        "enabled-alert": "Enabled news and updates notifications",
+        "disabled-alert": "Disabled news and updates notifications"
       }
     },
     "programs": "PROGRAMS",
@@ -109,8 +109,8 @@
         "news-updates": "Program news and updates",
         "end-of-period": "Notifications for the end of the period",
         "ProgramNewsAndUpdates": {
-          "disabled-alert": "Enabled program new and updates notifications",
-          "enabled-alert": "Disabled program new and updates notifications"
+          "disabled-alert": "Enabled program news and updates notifications",
+          "enabled-alert": "Disabled program news and updates notifications"
         },
         "ProgramEndOfPeriod": {
           "disabled-alert": "Enabled the end of period notifications",
@@ -257,10 +257,14 @@
     },
     "email-pending": {
       "text-section-1": "Please check your inbox for a confirmation email. Click the link in the email to create new password.",
-      "text-section-2": "After you confirm click Continue.",
       "email-resend-button-text": "Resend email",
       "confirm-button-text": "Continue",
       "back-button-text": "Back"
+    },
+    "email-confirm": {
+      "title": "Email confirm",
+      "success-alert-message": "Email address successfully verified",
+      "error-during-confirmation": "An error occurred during confirmation of email:"
     }
   },
   "wallet": {
@@ -378,7 +382,8 @@
       "period": "Period",
       "drawdown": "D.down",
       "profit": "Profit",
-      "chart": "Chart"
+      "chart": "Chart",
+      "strategy": "Strategy"
     }
   },
   "funds-page": {
