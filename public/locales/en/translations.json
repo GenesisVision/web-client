@@ -497,7 +497,6 @@
       "notifications": "Notifications",
       "avToInvest": "Av. to invest",
       "entryFee": "Entry fee",
-      "successFee": "Success fee",
       "invest": "Invest",
       "reinvest": "Reinvest",
       "yourInvestment": "Your investment",
@@ -515,9 +514,6 @@
       "for": "For",
       "balance": "Balance",
       "investors": "Investors",
-      "trades": "Trades",
-      "success-trades": "Success trades",
-      "profit-factor": "Profit factor",
       "sharpe-ratio": "Sharpe ratio",
       "sortino-ratio": "Sortino ratio",
       "max-drawdown": "Max Drawdown",
@@ -525,32 +521,13 @@
       "period-end": "Period end",
       "period": "Period"
     },
-    "popover": {
-      "genesis-level": "Genesis Level",
-      "invest-limit": "Invest limit",
-      "text": "Genesis level shows the experience and reliability of the Manager",
-      "about-levels": "About levels"
-    },
     "history": {
       "heading": "History",
-      "tabs": {
-        "trades": "Trades",
-        "events": "Events"
-      },
-      "trades": {
+      "subheading": "Rebalancing",
+      "rebalances": {
         "assets": "Assets",
         "from": "From",
-        "to": "To",
-        "name": "Name",
-        "assertPart": "Assert part",
-        "direction": "Dir",
-        "ticket": "Ticket",
-        "symbol": "Symbol",
-        "volume": "Volume",
-        "profit": "Profit",
-        "price": "Price",
-        "entry": "Entry",
-        "date": "Date"
+        "to": "To"
       }
     },
     "chart": {

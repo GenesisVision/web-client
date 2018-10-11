@@ -35,7 +35,9 @@ class FundDetailsHistorySection extends PureComponent {
           {t("fund-details-page.history.heading")}
         </div>
 
-        <div className="fund-details-history__subheading">Rebalancing</div>
+        <div className="fund-details-history__subheading">
+          {t("fund-details-page.history.subheading")}
+        </div>
         <div>
           <FundRebalancing
             rebalancing={rebalancingData.data}
