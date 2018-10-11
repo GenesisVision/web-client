@@ -1,5 +1,5 @@
-import WalletWithdrawConfirm from "modules/wallet-withdraw/components/wallet-withdraw-confirm";
 import WalletWithdrawForm from "modules/wallet-withdraw/components/wallet-withdraw-form";
+import WalletWithdrawRequest from "modules/wallet-withdraw/components/wallet-withdraw-request/wallet-withdraw-request";
 import {
   fetchPaymentInfo,
   newWithdrawRequest
@@ -32,7 +32,7 @@ class WalletWithdrawContainer extends Component {
     const { wallets, availableToWithdrawal } = data;
 
     return success ? (
-      <WalletWithdrawConfirm />
+      <WalletWithdrawRequest />
     ) : (
       <WalletWithdrawForm
         availableToWithdrawal={availableToWithdrawal}

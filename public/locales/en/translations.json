@@ -321,8 +321,13 @@
     "fee": "Fee",
     "withdrawing": "Withdrawing",
     "info": "Amount of withdrawals can be changed depending on the exchange rate.",
-    "success": "Please approve the withdrawal request via the link in the confirmation email.",
+    "withdraw-request": "Please approve the withdrawal request via the link in the confirmation email.",
     "two-factor-code-label": "Two factor code",
+    "confirmation": {
+      "page-title": "Wallet withdraw confirm",
+      "error": "An error occurred during confirmation of email: ",
+      "success": "Successful Email Verification"
+    },
     "validation": {
       "amount-more-than-available": "Amount is more than available in your wallet",
       "amount-is-required": "Amount is required",
