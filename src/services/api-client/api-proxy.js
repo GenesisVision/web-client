@@ -1,4 +1,4 @@
-import handleErrorMessage from "utils/handle-error-message";
+import handleErrorResponse from "utils/handle-error-response";
 
 const withApiProxy = api => {
   return new Proxy(api, {
@@ -17,7 +17,7 @@ const withApiProxy = api => {
           .catch(ex => {
             return Promise.reject({
               isPending: false,
-              ...handleErrorMessage(ex.response)
+              ...handleErrorResponse(ex.response)
             });
           });
       };
