@@ -11,7 +11,6 @@ import { combineReducers } from "redux";
 
 import fundsReducer from "../modules/funds-table/reducers/funds-table.reducers";
 import navigationReducer from "../modules/navigation/reducers/navigation-reducers";
-import profileReducer from "../modules/profile/reducers/profile-reducers";
 import programWithdrawReducer from "../modules/program-withdraw/reducer/program-withdraw.reducer";
 import programsReducer from "../modules/programs-table/reducers/programs-table.reducers";
 import emailConfirmReducer from "../pages/auth/email-confirm/reducers/email-confirm.reducers";
@@ -39,7 +38,6 @@ export default combineReducers({
   passwordRestoreData: passwordRestoreReducer,
   alertMessages: alertMessagesReducer,
   profileHeader: headerReducer,
-  profileData: profileReducer,
   dashboard: dashboardReducer,
   programDeposit: programDepositReducer,
   programWithdraw: programWithdrawReducer,

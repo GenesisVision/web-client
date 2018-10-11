@@ -684,6 +684,20 @@
     }
   },
   "profile": {
+    "contacts": "Contacts",
+    "not-verified": "Not verified",
+    "phone-number": "Phone number",
+    "email": "Email address",
+    "personal-info": "Personal info",
+    "forename": "Forename",
+    "family-name": "Family name",
+    "birthday": "Date of birth",
+    "citizen": "Citizenship",
+    "residential-address": "Residential address",
+    "country": "Country",
+    "city": "City",
+    "address": "Address",
+    "index": "Index",
     "settings": {
       "profile-image": "Profile image",
       "image-requirements": "At least 300 x 300px PNG or JPG file.",

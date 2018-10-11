@@ -1,0 +1,60 @@
+@import "styles/_colors.scss";
+
+.profile {
+  &__title {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__left {
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+    width: 20px;
+  }
+
+  &__center {
+    flex-shrink: 1;
+    width: 100px;
+  }
+
+  &__right {
+    flex-shrink: 0;
+    //display: flex;
+    //flex-direction: row;
+    //align-items: baseline;
+  }
+
+  &__stick {
+    display: flex;
+    width: 1px;
+    background-color: $secondary-background-color;
+    height: 100%;
+  }
+
+  h4 {
+    display: inline-flex;
+    flex-shrink: 0;
+  }
+
+  .chip {
+    margin-left: 20px;
+    flex-shrink: 0;
+  }
+
+  .gv-text-field {
+    min-width: 310px;
+    &::before {
+      border: none;
+    }
+    &__input {
+      color: $main-color;
+    }
+  }
+}
