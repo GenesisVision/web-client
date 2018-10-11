@@ -1,5 +1,5 @@
 import { NOT_FOUND_PAGE_ROUTE } from "pages/not-found/not-found.routes";
-import React, { PureComponent } from "react";
+import { PureComponent } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { replace } from "react-router-redux";
