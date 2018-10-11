@@ -3,7 +3,10 @@ export const HEADER_CURRENCY_VALUES = {
   ETH: "Ethereum",
   ADA: "Cardano",
   USD: "US Dollar",
-  EUR: "Euro"
+  EUR: "Euro",
+  GVT: "Genesis Vision",
+  XRP: "Ripple",
+  DOGE: "Dogecoin"
 };
 
 export const CURRENCY_VALUES = {
