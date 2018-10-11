@@ -105,6 +105,7 @@ class FundDetailsDescriptionSection extends PureComponent {
   };
 
   render() {
+    const { isAuthenticated, redirectToLogin } = this.props;
     const { fundDescription, ui } = this.state;
     if (!fundDescription) return null;
     const isInvested =
@@ -113,6 +114,8 @@ class FundDetailsDescriptionSection extends PureComponent {
     return (
       <Fragment>
         <FundDetailsDescription
+          isAuthenticated={isAuthenticated}
+          redirectToLogin={redirectToLogin}
           isInvested={isInvested}
           fundDescription={fundDescription}
           onReinvestingClick={this.handleOnReinvestingClick}
