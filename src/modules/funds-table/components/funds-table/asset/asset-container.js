@@ -1,20 +1,28 @@
 import "./asset.scss";
-import React, { Component } from "react";
-import Asset from "./asset";
+import React, { Component, Fragment } from "react";
+import Asset, { TYPES } from "./asset";
+import classNames from "classnames";
 
 class AssetContainer extends Component {
   render() {
-    const { assets, size } = this.props;
+    const { assets, type } = this.props;
     return (
-      <div className="assets">
+      <div
+        className={classNames("assets", {
+          "assets--text": type === TYPES.text
+        })}
+      >
         {assets.map((asset, idx) => (
-          <Asset
-            key={idx}
-            icon={asset.icon}
-            percent={asset.percent || asset.assetPart}
-            currency={asset.symbol}
-            size={size}
-          />
+          <Fragment key={idx}>
+            <Asset
+              icon={asset.icon}
+              percent={asset.percent || asset.assetPart}
+              currency={asset.symbol}
+              type={type}
+            />
+            {type === TYPES.text &&
+              idx !== assets.length - 1 && <span>,&nbsp;</span>}
+          </Fragment>
         ))}
       </div>
     );

@@ -24,26 +24,38 @@ $mobile-title-divider: 2;
   @include media-breakpoint-landscape-phone() {
     align-items: center;
     flex-direction: row;
-    flex-wrap: wrap;
+  }
+  &--text {
+    flex-direction: row;
   }
 }
 
 .asset {
+  font-size: $font-size-small-mobile;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: $small-padding/2/$mobile-padding-divider;
+  padding: $padding-small/2/$divider-padding;
   border-radius: $border-radius/2;
   background: $separator-color;
   font-weight: 400;
-  margin-right: $small-padding/2/$mobile-padding-divider;
-  margin-bottom: $small-padding/2/$mobile-padding-divider;
+  margin-right: $padding-small/2/$divider-padding;
+  margin-bottom: $padding-small/2/$divider-padding;
   color: $text-light-color;
   &:last-child {
     margin-right: 0;
   }
-
+  &__icon {
+    display: flex;
+    align-items: center;
+    width: $asset-icon-size-mobile;
+    height: $asset-icon-size-mobile;
+  }
+  &__icon-img {
+    width: $asset-icon-size-mobile;
+    height: $asset-icon-size-mobile;
+  }
   &__currencies {
     display: flex;
     flex-direction: row;
@@ -55,11 +67,11 @@ $mobile-title-divider: 2;
   }
 
   &__currency-full, &__currency-short {
-    padding-left: $small-padding/2/$mobile-padding-divider;
+    padding-left: $padding-small/2/$divider-padding;
   }
 
   &__percent {
-    padding-left: $small-padding/$mobile-padding-divider;
+    padding-left: $padding-small/$divider-padding;
   }
 
   &__currency-short {
@@ -67,16 +79,34 @@ $mobile-title-divider: 2;
   }
 
   @include media-breakpoint-landscape-phone() {
-    padding: $small-padding/2;
-    margin-right: $small-padding/2;
+    font-size: $font-size-small;
+    padding: $padding-small/3;
+    margin-right: $padding-small/2;
+    margin-bottom: $padding-small/2;
     border-radius: $border-radius;
 
     &__currency-full, &__currency-short {
-      padding-left: $small-padding/2;
+      padding-left: $padding-small/2;
     }
 
     &__percent {
-      padding-left: $small-padding;
+      padding-left: $padding-small;
+    }
+    &__icon {
+      width: $asset-icon-size;
+      height: $asset-icon-size;
+    }
+    &__icon-img {
+      width: $asset-icon-size;
+      height: $asset-icon-size;
+    }
+  }
+  &--text {
+    padding: 0;
+    margin: 0;
+    background: none;
+    & .asset__currency-short {
+      padding-left: 0;
     }
   }
 }
