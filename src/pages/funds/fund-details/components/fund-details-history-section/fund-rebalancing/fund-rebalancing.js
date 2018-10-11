@@ -56,7 +56,7 @@ class FundRebalancing extends Component {
               column.name
             }`}
           >
-            {t(`fund-details-page.history.trades.${column.name}`)}
+            {t(`fund-details-page.history.rebalances.${column.name}`)}
           </span>
         )}
         renderBodyRow={rebalance => (
