@@ -68,7 +68,11 @@ class FundRebalancing extends Component {
               {rebalance.to && moment(rebalance.to).format("D MMM YYYY")}
             </TableCell>
             <TableCell className="fund-details-rebalancing__cell fund-details-rebalancing__cell--direction">
-              <AssetContainer type={"text"} assets={rebalance.parts} />
+              <AssetContainer
+                type={"text"}
+                assets={rebalance.parts}
+                size={5}
+              />
             </TableCell>
           </TableRow>
         )}

@@ -2,8 +2,8 @@
 @import "styles/_breakpoint.scss";
 @import "styles/_sizes.scss";
 
-$asset-icon-size: 30px;
-$asset-icon-size-mobile: $asset-icon-size/$divider-padding;
+$asset-icon-size: 15px;
+$asset-icon-size-mobile: $asset-icon-size/$divider-text;
 
 .assets {
   display: flex;
@@ -23,11 +23,12 @@ $asset-icon-size-mobile: $asset-icon-size/$divider-padding;
 
 .asset {
   font-size: $font-size-small-mobile;
+  line-height: $font-size-small-mobile;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: $padding-small/2/$divider-padding;
+  padding: $padding-small/$divider-padding;
   border-radius: $border-radius/2;
   background: $separator-color;
   font-weight: 400;
@@ -70,8 +71,9 @@ $asset-icon-size-mobile: $asset-icon-size/$divider-padding;
   }
 
   @include media-breakpoint-landscape-phone() {
+    height: 15px;
     font-size: $font-size-small;
-    padding: $padding-small/3;
+    padding: $padding-mini;
     margin-right: $padding-small/2;
     margin-bottom: $padding-small/2;
     border-radius: $border-radius;

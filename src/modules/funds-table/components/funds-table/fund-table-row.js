@@ -46,7 +46,12 @@ class FundsTableRow extends Component {
           {fund.statistic.balanceGVT.amount} GVT
         </TableCell>
         <TableCell className="funds-table__cell">
-          <AssetContainer assets={fund.topFundAssets} type={"short"} />
+          <AssetContainer
+            assets={fund.topFundAssets}
+            type={"short"}
+            size={3}
+            length={fund.totalAssetsCount}
+          />
         </TableCell>
         <TableCell className="funds-table__cell--investors">
           {fund.statistic.investorsCount}
