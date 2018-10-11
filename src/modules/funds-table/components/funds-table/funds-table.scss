@@ -10,43 +10,54 @@ $chart-width: 160px;
 
 @mixin table-title() {
   opacity: 0.3;
-  font-size: $th-text-size/1.5;
+  font-size: $font-size-small-mobile;
   color: white;
   text-align: left;
-  padding-bottom: $th-text-size/1.5;
+  padding-bottom: $font-size-small-mobile;
   @include media-breakpoint-landscape-phone() {
-    font-size: $th-text-size;
-    padding-bottom: $th-text-size;
+    font-size: $font-size-small;
+    padding-bottom: $font-size-small;
   }
 }
 
 .funds-table-container {
-  padding: $padding/2 0;
+  padding: $padding-middle-mobile 0;
+  @include media-breakpoint-landscape-phone() {
+    padding: $padding-middle 0;
+  }
 }
 
 .funds-table__cell {
+  & .assets {
+    flex-direction: row;
+  }
   &--avatar-title {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
     .program-avatar {
-      min-width: 40px;
+      width: 20px;
+      @include media-breakpoint-landscape-phone() {
+        width: 40px;
+      }
     }
   }
   &--title {
-    padding-left: 9px;
-    word-break: break-all;
-    min-width: 100px;
+    min-width: 50px;
     div {
-      padding: $padding/10;
+      padding: $padding-small/10;
     }
   }
   &--bottom {
     opacity: 0.3;
   }
   &--chart {
-    min-width: 100px;
-    max-width: 200px;
+    min-width: 50px;
+    max-width: 100px;
+    @include media-breakpoint-landscape-phone() {
+      min-width: 100px;
+      max-width: 200px;
+    }
   }
 }

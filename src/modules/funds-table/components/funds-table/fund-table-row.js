@@ -30,20 +30,18 @@ class FundsTableRow extends Component {
     return (
       <TableRow>
         <TableCell className="funds-table__cell--name">
-          <div className="programs-table__cell--avatar-title">
+          <div className="funds-table__cell--avatar-title">
             <AssetAvatar url={fund.logo} alt={fund.title} />
             <div className="funds-table__cell--title">
-              <Link to={fundDetailsUrl}>
-                <div className="funds-table__cell--top">{fund.title}</div>
-              </Link>
+              <Link to={fundDetailsUrl}>{fund.title}</Link>
             </div>
           </div>
         </TableCell>
-        <TableCell className="funds-table__cell--balance">
+        <TableCell className="funds-table__cell">
           {fund.statistic.balanceGVT.amount} GVT
         </TableCell>
-        <TableCell className="funds-table__cell--currency">
-          <AssetContainer assets={fund.topFundAssets} />
+        <TableCell className="funds-table__cell">
+          <AssetContainer assets={fund.topFundAssets} type={"short"} />
         </TableCell>
         <TableCell className="funds-table__cell--investors">
           {fund.statistic.investorsCount}
