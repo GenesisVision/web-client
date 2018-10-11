@@ -10,6 +10,7 @@ $asset-icon-size-mobile: $asset-icon-size/$divider-padding;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  flex-wrap: wrap;
 
   @include media-breakpoint-landscape-phone() {
     align-items: center;

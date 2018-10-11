@@ -30,6 +30,7 @@ $chart-width: 160px;
 .funds-table__cell {
   & .assets {
     flex-direction: row;
+    flex-wrap: nowrap;
   }
   &--avatar-title {
     display: flex;
