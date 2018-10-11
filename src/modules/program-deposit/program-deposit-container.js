@@ -41,6 +41,7 @@ const ProgramDepositContainer = props => {
           (type === "fund" && props.service.getDepositFundInfoById)
         }
         invest={handleInvest}
+        type={type}
       />
     </Dialog>
   );

@@ -20,6 +20,7 @@ class ProgramDepositPopup extends Component {
           info={this.props.info}
           disabled={this.props.submitInfo.isPending}
           onSubmit={this.props.invest}
+          type={this.props.type}
         />
       </Fragment>
     ) : null;

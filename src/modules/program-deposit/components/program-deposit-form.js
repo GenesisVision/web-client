@@ -18,7 +18,8 @@ const ProgramDepositForm = ({
   currency,
   disabled,
   handleSubmit,
-  errorMessage
+  errorMessage,
+  type
 }) => {
   const fee = calculateValueOfEntryFee(values.amount, info.entryFee);
   const due = parseFloat(values.amount || 0) + parseFloat(fee);
@@ -27,10 +28,12 @@ const ProgramDepositForm = ({
     const { floatValue, formattedValue } = values;
     const { availableInWallet, availableToInvest } = info;
     const fee = calculateValueOfEntryFee(floatValue, info.entryFee);
+    const validateAvailableToInvest = () =>
+      type === "program" ? floatValue <= availableToInvest : true;
     return (
       formattedValue === "" ||
       (floatValue <= parseFloat(availableInWallet - fee) &&
-        floatValue <= availableToInvest &&
+        validateAvailableToInvest() &&
         (floatValue === 0 || floatValue >= info.minInvestmentAmount))
     );
   };
