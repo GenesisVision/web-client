@@ -14,23 +14,8 @@ const SignupEmailPending = ({ t, service }) => {
         variant="text"
         onClick={service.sendConfirmationLink}
       >
-        {t("auth.email-pending.email-resend-button-text")}
+        {t("auth.signup-email-pending.resend-button-text")}
       </GVButton>
-      <div className="signup-email-pending__navigation">
-        <Link to={SIGNUP_ROUTE} className="signup-email-pending__btn-back">
-          <GVButton variant="text" color="secondary">
-            &larr; {t("auth.email-pending.back-button-text")}
-          </GVButton>
-        </Link>
-        {/* <GVButton
-          color="primary"
-          variant="contained"
-          type="submit"
-          onClick={continueConfirmEmail}
-        >
-          {t("auth.email-pending.confirm-button-text")}
-        </GVButton> */}
-      </div>
     </React.Fragment>
   );
 };

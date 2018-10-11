@@ -207,6 +207,10 @@
       "password-confirm-field-text": "Confirm password",
       "email-confirm-title": "Confirm your Email"
     },
+    "signup-email-pending": {
+      "text-section": "Please check your inbox for a confirmation email. Click the link in the email to confirm your email.",
+      "resend-button-text": "Resend email"
+    },
     "login": {
       "footer-text": "Don't have an account?",
       "title": "Login",
@@ -261,13 +265,13 @@
         "confirm-password-required": "Confirm password is required",
         "email-invalid": "Invalid email address.",
         "email-required": "Email is required."
+      },
+      "email-pending": {
+        "text-section-1": "Please check your inbox for a confirmation email. Click the link in the email to create new password.",
+        "email-resend-button-text": "Resend email",
+        "confirm-button-text": "Continue",
+        "back-button-text": "Back"
       }
-    },
-    "email-pending": {
-      "text-section-1": "Please check your inbox for a confirmation email. Click the link in the email to create new password.",
-      "email-resend-button-text": "Resend email",
-      "confirm-button-text": "Continue",
-      "back-button-text": "Back"
     },
     "email-confirm": {
       "title": "Email confirm",
