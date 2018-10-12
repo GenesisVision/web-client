@@ -9,10 +9,10 @@ const FundDetailsNotificaton = ({ t, url }) => {
   return (
     <Link to={url}>
       <div className="fund-details-description__control">
-        <div className="fund-details-description__control-text">
-          {t("fund-details-page.description.notifications")}
-        </div>
         <RingIcon className="fund-details-description__control-icon" />
+      </div>
+      <div className="fund-details-description__control-text">
+        {t("fund-details-page.description.notifications")}
       </div>
     </Link>
   );

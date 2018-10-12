@@ -3,23 +3,42 @@
 @import "styles/_sizes.scss";
 
 .fund-details-description {
+  & .asset {
+    background: rgba(216, 216, 216, 0.05);
+    height: 50px/$divider-title;
+    //min-width: 240px/$divider-text;
+    padding: 15px/$divider-padding;
+    justify-content: space-between;
+    &--others-count{
+      min-width: auto;
+      background: rgba(216, 216, 216, 0.1);
+    }
+    @include media-breakpoint-landscape-phone() {
+      height: 50px;
+      padding: 15px;
+      min-width: 240px;
+      &--others-count{
+        min-width: auto;
+      }
+    }
 
+  }
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   &__avatar {
     cursor: pointer;
-    .program-avatar{
+    .program-avatar {
       justify-content: flex-start;
-      width:$avatar-size-mobile;
-      height:$avatar-size-mobile;
+      width: $avatar-size-mobile;
+      height: $avatar-size-mobile;
+      margin: 0;
     }
   }
 
   &__right {
     & .gv-btn--text {
       padding: 0;
-      //margin-bottom: 26px;
       font-size: 13px;
       letter-spacing: 0.3px;
       font-weight: 600;
@@ -27,20 +46,20 @@
   }
 
   &__notification-icon {
-    //margin-left: 24px;
     opacity: 0.3;
   }
 
   &__main {
     width: 100%;
-    padding: 0 $padding-small-mobile;
+    padding: 0 $padding-large-mobile;
   }
 
   &__heading {
     font-size: $font-size-title-mobile;
     font-weight: 600;
     color: $text-light-color;
-    padding-bottom: $padding-middle-mobile;
+    padding-bottom: $padding-very-large-mobile;
+    padding-top: $padding-middle-mobile;
   }
 
   &__author-btn {
@@ -52,7 +71,7 @@
   &__info {
   }
 
-  &__invest-button-container{
+  &__invest-button-container {
     padding: $padding-middle-mobile 0;
   }
 
@@ -63,11 +82,11 @@
     letter-spacing: 0.21px;
   }
 
-  &__info-block{
+  &__info-block {
     padding-bottom: $padding-small-mobile;
   }
 
-  &__short-statistic-subheading{
+  &__short-statistic-subheading {
     margin-bottom: $padding-small-mobile/2;
   }
 
@@ -89,7 +108,6 @@
   }
 
   &__reinvest {
-    //margin-left: 45px;
     letter-spacing: 0.3px;
     font-weight: 600;
   }
@@ -105,7 +123,7 @@
       display: flex;
       flex-direction: column;
       font-weight: 600;
-      &:last-child{
+      &:last-child {
         margin-right: 0;
       }
     }
@@ -123,8 +141,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-end;
-    &-icon,&-text{
+    justify-content: center;
+    &-icon, &-text {
       padding: $padding-small-mobile $padding-small-mobile/2;
     }
     &-icon {
@@ -133,39 +151,44 @@
     }
     &-text {
       font-size: $font-size-small-mobile;
-      font-weight: 600;
+      font-weight: 300;
+      opacity: 0.4;
       letter-spacing: 0.3px;
+      color: $main-color;
+      text-align: center;
     }
   }
-  @include media-breakpoint-landscape-phone(){
+  @include media-breakpoint-landscape-phone() {
     &__avatar {
-      .program-avatar{
-        width:$avatar-size;
-        height:$avatar-size;
+      .program-avatar {
+        width: $avatar-size;
+        height: $avatar-size;
+        margin: 0;
       }
     }
     &__main {
-      padding: 0 $padding-small;
+      padding: 0 $padding-large;
     }
     &__heading {
       font-size: $font-size-title;
-      padding-bottom: $padding-middle;
+      padding-bottom: $padding-very-large;
+      padding-top: $padding-middle;
     }
     &__subheading {
       font-size: $font-size-large;
       padding-bottom: $padding-middle;
     }
-    &__info-block{
+    &__info-block {
       padding-bottom: $padding-middle;
     }
     &__text {
       font-size: $font-size-middle;
       line-height: $font-size-middle*2;
     }
-    &__invest-button-container{
+    &__invest-button-container {
       padding: $padding-middle 0;
     }
-    &__short-statistic-subheading{
+    &__short-statistic-subheading {
       margin-bottom: $padding-small/2;
     }
     &__invest-btn {
@@ -183,8 +206,7 @@
       }
     }
     &__control {
-      flex-direction: row;
-      &-icon,&-text{
+      &-icon, &-text {
         padding: $padding-small/2 $padding-small;
         white-space: nowrap;
       }
@@ -193,7 +215,7 @@
         height: $icon-size;
       }
       &-text {
-        font-size: $font-size-middle;
+        font-size: $font-size-small;
       }
     }
   }

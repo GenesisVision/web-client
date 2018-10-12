@@ -6,16 +6,15 @@ import isAuthenticated from "shared/decorators/is-authenticated";
 
 const FundDetailsFavorite = ({ t, toggleFavorite, programId, isFavorite }) => (
   <div className="fund-details-description__control">
-    <div className="fund-details-description__control-text">
-      {t("fund-details-page.description.addToFavorites")}
-    </div>
     <FavoriteIcon
       className="fund-details-description__control-icon"
       toggleSelected={toggleFavorite}
       id={programId}
       selected={isFavorite}
     />
-    <div />
+    <div className="fund-details-description__control-text">
+      {t("fund-details-page.description.addToFavorites")}
+    </div>
   </div>
 );
 
