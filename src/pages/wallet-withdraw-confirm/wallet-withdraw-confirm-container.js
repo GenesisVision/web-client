@@ -23,7 +23,7 @@ class EmailConfirmContainer extends PureComponent {
           );
         });
     } else {
-      showNotFoundPage();
+      service.showNotFoundPage();
     }
   }
 
@@ -37,11 +37,11 @@ const mapDispatchToProps = dispatch => ({
     {
       ...walletWithdrawConfirmService,
       notifySuccess: alertMessageActions.success,
-      notifyError: alertMessageActions.error
+      notifyError: alertMessageActions.error,
+      showNotFoundPage: () => replace(NOT_FOUND_PAGE_ROUTE)
     },
     dispatch
-  ),
-  showNotFoundPage: () => dispatch(replace(NOT_FOUND_PAGE_ROUTE))
+  )
 });
 
 export default compose(
