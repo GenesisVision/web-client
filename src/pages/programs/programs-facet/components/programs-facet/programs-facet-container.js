@@ -1,4 +1,4 @@
-import FundsTableContainer from "modules/funds-table/components/funds-table/funds-table-container";
+import ProgramsContainer from "modules/programs-table/components/programs-table/programs-table-container";
 import { getPrograms } from "modules/programs-table/services/programs-table.service";
 import NotFoundPage from "pages/not-found/not-found.routes";
 import React, { Component, Fragment } from "react";
@@ -7,10 +7,10 @@ import { withRouter } from "react-router-dom";
 import { goBack } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
 
-import { getCurrentFacet } from "../../services/funds-facet.service";
-import FundsFacetNavigation from "./funds-facet-navigation";
+import { getCurrentFacet } from "../../services/programs-facet.service";
+import ProgramsFacetInfo from "./programs-facet-info";
 
-class FundsFacetContainer extends Component {
+class ProgramsFacetContainer extends Component {
   state = {
     facetData: null
   };
@@ -36,8 +36,8 @@ class FundsFacetContainer extends Component {
     if (facetData.notFound) return <NotFoundPage />;
     return (
       <Fragment>
-        <FundsFacetNavigation facet={facetData.facet} goBack={goBack} />
-        <FundsTableContainer title={facetData.facet.title} />
+        <ProgramsFacetInfo facet={facetData.facet} goBack={goBack} />
+        <ProgramsContainer title={facetData.facet.title} />
       </Fragment>
     );
   }
@@ -46,7 +46,7 @@ class FundsFacetContainer extends Component {
 const mapStateToProps = state => {
   const { data } = state.platformData;
   let facets = null;
-  if (data) facets = data.fundsFacets;
+  if (data) facets = data.programsFacets;
   return { facets };
 };
 
@@ -61,4 +61,4 @@ export default compose(
     mapStateToProps,
     mapDispatchToProps
   )
-)(FundsFacetContainer);
+)(ProgramsFacetContainer);
