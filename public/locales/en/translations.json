@@ -44,7 +44,8 @@
   },
   "deposit-program": {
     "title": "Invest",
-    "available-to-invest": "Available to invest in program",
+    "available-to-invest-in-program": "Available to invest in program",
+    "available-to-invest-in-fund": "Available to invest in fund",
     "available-in-wallet": "Available in wallet",
     "amount": "Amount to invest",
     "entry-fee": "Entry fee",
@@ -113,6 +114,45 @@
           "enabled-alert": "Disabled program news and updates notifications"
         },
         "ProgramEndOfPeriod": {
+          "disabled-alert": "Enabled the end of period notifications",
+          "enabled-alert": "Disabled the end of period notifications"
+        }
+      },
+      "custom": {
+        "title": "CUSTOM",
+        "profit": "Profit notification",
+        "create": "Create notification",
+        "enabled-alert": "Enabled custom notification",
+        "disabled-alert": "Disabled custom notification",
+        "delete-alert": "Custom notification was deleted",
+        "create-alert": "Custom notification was created"
+      },
+      "create": {
+        "title": "Create notification",
+        "type-label": "Type",
+        "amount-label": "Enter amount",
+        "amount-required": "Amount is required",
+        "Level": {
+          "title": "Level notification",
+          "label": "Level"
+        },
+        "Profit": {
+          "title": "Profit notification",
+          "label": "Profit"
+        }
+      }
+    },
+    "fund": {
+      "title": "Fund notifications",
+      "general": {
+        "title": "GENERAL",
+        "news-updates": "Fund news and updates",
+        "end-of-period": "Notifications for the end of the period",
+        "FundNewsAndUpdates": {
+          "disabled-alert": "Enabled fund news and updates notifications",
+          "enabled-alert": "Disabled fund news and updates notifications"
+        },
+        "FundEndOfPeriod": {
           "disabled-alert": "Enabled the end of period notifications",
           "enabled-alert": "Disabled the end of period notifications"
         }
@@ -420,6 +460,15 @@
       "profit": "Profit",
       "chart": "Chart",
       "status": "Status"
+    },
+    "funds-header": {
+      "title": "Name",
+      "balance": "Balance",
+      "assets": "Assets",
+      "investors": "Investors",
+      "drawdown": "D.down",
+      "profit": "Profit",
+      "chart": "Chart"
     }
   },
   "program-details-page": {
@@ -478,6 +527,58 @@
         "price": "Price",
         "entry": "Entry",
         "date": "Date"
+      }
+    },
+    "chart": {
+      "heading": "Chart",
+      "tabs": {
+        "profit": "Profit",
+        "balance": "Balance"
+      }
+    }
+  },
+  "fund-details-page": {
+    "title": "Program detail",
+    "description": {
+      "strategy": "Strategy",
+      "assets": "Assets",
+      "addToFavorites": "Add to favorites",
+      "notifications": "Notifications",
+      "avToInvest": "Av. to invest",
+      "entryFee": "Entry fee",
+      "invest": "Invest",
+      "reinvest": "Reinvest",
+      "yourInvestment": "Your investment",
+      "invested": "Invested",
+      "value": "Value",
+      "profit": "Profit",
+      "status": "Status",
+      "withdraw": "Withdraw",
+      "withdraw-notice-text": "You can withdraw only the invested funds, the profit will be withdrawn to your account at the end of the period automatically"
+    },
+    "statistics": {
+      "heading": "Statistics",
+      "current": "Current",
+      "calmarRatio": "Calmar ratio",
+      "rebalances": "Rebalances",
+      "profit-change": "Profit change",
+      "for": "For",
+      "balance": "Balance",
+      "investors": "Investors",
+      "sharpe-ratio": "Sharpe ratio",
+      "sortino-ratio": "Sortino ratio",
+      "max-drawdown": "Max Drawdown",
+      "start-day": "Start day",
+      "period-end": "Period end",
+      "period": "Period"
+    },
+    "history": {
+      "heading": "History",
+      "subheading": "Rebalancing",
+      "rebalances": {
+        "assets": "Assets",
+        "from": "From",
+        "to": "To"
       }
     },
     "chart": {

@@ -1,5 +1,6 @@
 @import "styles/_colors.scss";
 @import "styles/_breakpoint.scss";
+@import "styles/_sizes.scss";
 
 $th-font-size: 12px;
 $td-font-size: 13px;
@@ -112,7 +113,7 @@ $padding: 33px;
     box-sizing: border-box;
     align-items: center;
     flex-grow: 1;
-    padding: $padding/4;
+    padding: $padding-small-mobile;
     overflow: hidden; // Or flex might break
     list-style: none;
     font-weight: 300;
@@ -169,6 +170,9 @@ $padding: 33px;
   @include media-breakpoint-landscape-phone() {
     &__head {
       font-size: $th-font-size;
+    }
+    &__cell{
+      padding: $padding-small;
     }
     &__body {
       font-size: $td-font-size;

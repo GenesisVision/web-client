@@ -48,7 +48,7 @@ $facet-height: 280px;
 .facets {
   display: flex;
   flex-wrap: nowrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   overflow: auto;
   &::-webkit-scrollbar {
     width: 0;
