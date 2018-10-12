@@ -5,6 +5,7 @@ import { GVTab, GVTabs } from "gv-react-components";
 import React, { Component } from "react";
 
 import DashboardPrograms from "./dashboard-programs/dashboard-programs";
+import DashboardFunds from "./dashboard-funds/dashboard-funds";
 
 class DashboardAssets extends Component {
   state = {
@@ -26,7 +27,7 @@ class DashboardAssets extends Component {
         </GVTabs>
         <div>
           {tab === "programs" && <DashboardPrograms />}
-          {tab === "funds" && "Funds"}
+          {tab === "funds" && <DashboardFunds />}
         </div>
       </Surface>
     );
