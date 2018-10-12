@@ -82,9 +82,9 @@ class FundsTableRow extends Component {
           fund.personalDetails && (
             <TableCell className="funds-table__cell--favorite">
               <FavoriteIcon
-                toggleSelected={toggleFavorite}
                 id={fund.id}
                 selected={fund.personalDetails.isFavorite}
+                onClick={toggleFavorite}
               />
             </TableCell>
           )}

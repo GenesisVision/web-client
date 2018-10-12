@@ -9,7 +9,7 @@
     //min-width: 240px/$divider-text;
     padding: 15px/$divider-padding;
     justify-content: space-between;
-    &--others-count{
+    &--others-count {
       min-width: auto;
       background: rgba(216, 216, 216, 0.1);
     }
@@ -17,7 +17,7 @@
       height: 50px;
       padding: 15px;
       min-width: 240px;
-      &--others-count{
+      &--others-count {
         min-width: auto;
       }
     }
@@ -142,6 +142,16 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+    color: $label-color;
+    .icon path {
+      stroke: $label-color;
+    }
+    &:hover {
+      path {
+        stroke: $text-accent-color;
+      }
+    }
     &-icon, &-text {
       padding: $padding-small-mobile $padding-small-mobile/2;
     }
