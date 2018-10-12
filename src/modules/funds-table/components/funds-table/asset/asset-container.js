@@ -31,7 +31,9 @@ class AssetContainer extends Component {
           ((type === ASSET_TYPE.text && (
             <div>... +{assets.length - size}</div>
           )) || (
-            <div className="asset">+{(length || assets.length) - size}</div>
+            <div className="asset asset--others-count">
+              +{(length || assets.length) - size}
+            </div>
           ))}
       </div>
     );
