@@ -2,7 +2,7 @@
 @import "styles/_breakpoint.scss";
 @import "styles/_sizes.scss";
 
-$asset-height: 15px;
+$asset-height: 40px;
 $asset-height-mobile: $asset-height/$divider-text;
 $asset-icon-size: 20px;
 $asset-icon-size-mobile: $asset-icon-size/$divider-text;
@@ -24,6 +24,7 @@ $asset-icon-size-mobile: $asset-icon-size/$divider-text;
 }
 
 .asset {
+  box-sizing: border-box;
   height: $asset-height-mobile;
   font-size: $font-size-small-mobile;
   line-height: $font-size-small-mobile;
@@ -32,7 +33,7 @@ $asset-icon-size-mobile: $asset-icon-size/$divider-text;
   justify-content: space-between;
   align-items: center;
   padding: $padding-mini-mobile;
-  border-radius: $border-radius/2;
+  border-radius: $border-radius-middle-mobile;
   background: rgba(255, 255, 255, 0.02);
   font-weight: 400;
   margin-right: $padding-small/2/$divider-padding;
@@ -44,7 +45,7 @@ $asset-icon-size-mobile: $asset-icon-size/$divider-text;
   }
   &--others-count {
     cursor: unset;
-    &:hover{
+    &:hover {
       background: rgba(255, 255, 255, 0.02);
     }
   }
@@ -66,6 +67,7 @@ $asset-icon-size-mobile: $asset-icon-size/$divider-text;
     display: flex;
     flex-direction: row;
     align-items: center;
+    width: 100%;
   }
 
   &__currency-full {
@@ -86,11 +88,11 @@ $asset-icon-size-mobile: $asset-icon-size/$divider-text;
 
   @include media-breakpoint-landscape-phone() {
     height: $asset-height;
-    font-size: $font-size-small;
+    font-size: $font-size-middle;
     padding: $padding-mini;
     margin-right: $padding-small/2;
     margin-bottom: $padding-small/2;
-    border-radius: $border-radius;
+    border-radius: $border-radius-middle;
 
     &__currency-full, &__currency-short {
       padding-left: $padding-small/2;

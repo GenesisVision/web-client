@@ -21,7 +21,7 @@ class AssetContainer extends Component {
                 key={idx}
                 render={() => <AssetTooltip currency={asset.symbol} />}
               >
-                <div className="asset__containerr">
+                <div>
                   <Asset
                     icon={asset.icon}
                     percent={asset.percent}
