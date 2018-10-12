@@ -8,11 +8,11 @@ export const getCurrentFacet = () => (dispatch, getState) => {
 
   if (!platformData.data) return { isPending: true };
 
-  const { facets } = platformData.data;
+  const { programsFacets } = platformData.data;
   const facetUrl = getParams(routing.location.pathname, PROGRAMS_FACET_ROUTE)[
     PROGRAM_SLUG_URL_PARAM_NAME
   ];
-  const facet = facets.find(x => x.url === facetUrl);
+  const facet = programsFacets.find(x => x.url === facetUrl);
   if (!facet) return { notFound: true };
   return { facet };
 };

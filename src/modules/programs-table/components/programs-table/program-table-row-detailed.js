@@ -176,7 +176,7 @@ class ProgramTableRowDetailed extends Component {
                       <span style={{ float: "right" }}>
                         {t("program-details-page.description.addToFavorites")}
                         <FavoriteIcon
-                          toggleSelected={toggleFavorite}
+                          onClick={toggleFavorite}
                           id={program.id}
                           selected={program.personalDetails.isFavorite}
                         />
