@@ -10,7 +10,7 @@ import * as walletWithdrawConfirmService from "./services/wallet-withdraw-confir
 
 class EmailConfirmContainer extends PureComponent {
   componentDidMount() {
-    const { t, queryParams, service, showNotFoundPage } = this.props;
+    const { t, queryParams, service } = this.props;
     if (queryParams.requestId && queryParams.code) {
       service
         .confirmWithdraw(queryParams.requestId, queryParams.code)
