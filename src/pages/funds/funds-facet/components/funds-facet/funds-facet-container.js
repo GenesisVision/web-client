@@ -35,7 +35,6 @@ class FundsFacetContainer extends Component {
     const { facetData } = this.state;
     if (!facetData || facetData.isPending) return null;
     if (facetData.notFound) return <NotFoundPage />;
-    console.log(facetData);
     return (
       <Fragment>
         <FundsFacetNavigation facet={facetData.facet} goBack={goBack} />

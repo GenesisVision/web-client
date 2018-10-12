@@ -30,7 +30,6 @@ class FundsTableContainer extends Component {
       isAuthenticated,
       title
     } = this.props;
-    console.log(title);
     return (
       <Surface className="funds-table-container">
         <FundsTable
