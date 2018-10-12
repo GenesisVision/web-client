@@ -4,7 +4,7 @@
 
 $asset-height: 15px;
 $asset-height-mobile: $asset-height/$divider-text;
-$asset-icon-size: 15px;
+$asset-icon-size: 20px;
 $asset-icon-size-mobile: $asset-icon-size/$divider-text;
 
 .assets {
@@ -31,18 +31,26 @@ $asset-icon-size-mobile: $asset-icon-size/$divider-text;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: $padding-small/$divider-padding;
+  padding: $padding-mini-mobile;
   border-radius: $border-radius/2;
-  background: $separator-color;
+  background: rgba(255, 255, 255, 0.02);
   font-weight: 400;
   margin-right: $padding-small/2/$divider-padding;
   margin-bottom: $padding-small/2/$divider-padding;
   color: $text-light-color;
-  &--others-count{
-    background: $text-dark-color;
+  cursor: pointer;
+  &:hover {
+    background: rgba(255, 255, 255, 0.06);
   }
-  &:last-child {
-    margin-right: 0;
+  &--others-count {
+    cursor: unset;
+    &:hover{
+      background: rgba(255, 255, 255, 0.02);
+    }
+  }
+  &__popover {
+    font-size: $font-size-middle;
+    padding: $padding-small;
   }
   &__icon {
     display: flex;

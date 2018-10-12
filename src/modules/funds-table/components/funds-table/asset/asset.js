@@ -12,13 +12,14 @@ export const ASSET_TYPE = {
 };
 class Asset extends Component {
   render() {
-    const { percent, currency, type } = this.props;
+    const { percent, currency, type, last } = this.props;
     return (
       (type === ASSET_TYPE.text && (
         <div>
           {currency}
           &nbsp;
           <NumberFormat value={percent} suffix="%" displayType="text" />
+          {!last && <span>,&nbsp;</span>}
         </div>
       )) || (
         <div
