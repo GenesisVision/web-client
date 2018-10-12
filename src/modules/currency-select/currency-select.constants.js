@@ -7,7 +7,7 @@ export const HEADER_CURRENCY_VALUES = {
   GVT: "Genesis Vision",
   XRP: "Ripple",
   BCH: "Bitcoin Cash",
-  LTC: "Littlecoin",
+  LTC: "Litecoin",
   DOGE: "Dogecoin"
 };
 
