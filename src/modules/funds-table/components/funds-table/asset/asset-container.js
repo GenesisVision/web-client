@@ -25,7 +25,7 @@ class AssetContainer extends Component {
                   <Asset
                     icon={asset.icon}
                     percent={asset.percent}
-                    currency={asset.symbol}
+                    currency={asset.asset}
                     type={type}
                     last={idx === assets.length - 1}
                   />
