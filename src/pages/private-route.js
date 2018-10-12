@@ -9,7 +9,12 @@ class Private extends Component {
     return isAuthenticated ? (
       <Component {...props} />
     ) : (
-      <Redirect to={LOGIN_ROUTE} />
+      <Redirect
+        to={{
+          pathname: LOGIN_ROUTE,
+          state: { from: props.location }
+        }}
+      />
     );
   };
 
