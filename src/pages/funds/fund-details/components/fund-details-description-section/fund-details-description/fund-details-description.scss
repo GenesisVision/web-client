@@ -58,6 +58,8 @@
 
   &__subheading {
     font-size: $font-size-large-mobile;
+    font-weight: bold;
+    padding-bottom: $padding-middle-mobile;
     letter-spacing: 0.21px;
   }
 
@@ -151,6 +153,7 @@
     }
     &__subheading {
       font-size: $font-size-large;
+      padding-bottom: $padding-middle;
     }
     &__info-block{
       padding-bottom: $padding-middle;

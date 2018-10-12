@@ -73,9 +73,9 @@ class FundDetailsDescription extends PureComponent {
             {fundDescription.title}
           </div>
           <div className="fund-details-description__info-block">
-            <h2 className="fund-details-description__subheading">
+            <div className="fund-details-description__subheading">
               {t("fund-details-page.description.assets")}
-            </h2>
+            </div>
             <div className="fund-details-description__text">
               <AssetContainer
                 type={"large"}
@@ -86,12 +86,12 @@ class FundDetailsDescription extends PureComponent {
           </div>
           <div className="fund-details-description__info">
             <div className="fund-details-description__info-block">
-              <h2 className="fund-details-description__subheading">
+              <div className="fund-details-description__subheading">
                 {t("fund-details-page.description.strategy")}
-              </h2>
-              <p className="fund-details-description__text">
+              </div>
+              <div className="fund-details-description__text">
                 {fundDescription.description}
-              </p>
+              </div>
             </div>
             <div className="fund-details-description__short-statistic">
               <div className="fund-details-description__short-statistic-item">
