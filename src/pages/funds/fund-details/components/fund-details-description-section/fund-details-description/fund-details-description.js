@@ -4,7 +4,6 @@ import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import { GVButton } from "gv-react-components";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
-import { PROGRAM_NOTIFICATIONS_ROUTE } from "pages/notifications/notifications.routes";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -12,9 +11,10 @@ import replaceParams from "utils/replace-params";
 import FundDetailsFavorite from "./fund-details-favorite";
 import FundDetailsNotification from "./fund-details-notificaton";
 import AssetContainer from "../../../../../../modules/funds-table/components/funds-table/asset/asset-container";
+import { FUND_NOTIFICATIONS_ROUTE } from "pages/notifications/notifications.routes";
 
-export const composeProgramNotificationsUrl = url => {
-  return replaceParams(PROGRAM_NOTIFICATIONS_ROUTE, {
+export const composeFundNotificationsUrl = url => {
+  return replaceParams(FUND_NOTIFICATIONS_ROUTE, {
     ":id": url
   });
 };
@@ -151,7 +151,7 @@ class FundDetailsDescription extends PureComponent {
             disabled={isFavoritePending}
           />
           <FundDetailsNotification
-            url={composeProgramNotificationsUrl(fundDescription.url)}
+            url={composeFundNotificationsUrl(fundDescription.url)}
             disabled={isFavoritePending}
           />
         </div>
