@@ -6,7 +6,7 @@ export const fetchPortfolioEvents = filters => {
 
   return investorApiProxy
     .v10InvestorPortfolioEventsGet(authorization, filters)
-    .then(data => ({
+    .then(({ data }) => ({
       items: data.events,
       total: data.total
     }));
