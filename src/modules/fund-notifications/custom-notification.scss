@@ -1,0 +1,42 @@
+@import "styles/_colors.scss";
+
+.custom-notification {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 35px;
+
+  .notification-setting {
+    margin-bottom: 15px;
+  }
+
+  &__offset {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 52px;
+  }
+
+  .gv-text-field__wrapper {
+    margin: 0 0 15px 0;
+  }
+
+  .gv-btn {
+    color: $negative-color;
+    padding: 0;
+  }
+
+  &__create {
+    .gv-btn {
+      padding: 0;
+      color: $main-color;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    .chip {
+      margin-right: 24px;
+    }
+  }
+}

@@ -22,10 +22,18 @@ class FundsTableContainer extends Component {
   }
 
   render() {
-    const { isPending, data, filters, service, isAuthenticated } = this.props;
+    const {
+      isPending,
+      data,
+      filters,
+      service,
+      isAuthenticated,
+      title
+    } = this.props;
     return (
       <Surface className="funds-table-container">
         <FundsTable
+          title={title}
           data={data || {}}
           isPending={isPending}
           sorting={filters.sorting}

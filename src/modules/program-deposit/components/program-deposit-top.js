@@ -1,7 +1,7 @@
 import React from "react";
 import { translate } from "react-i18next";
 
-const ProgramDepositTop = ({ info, t }) => {
+const ProgramDepositTop = ({ info, t, type }) => {
   return (
     <div className="dialog__top">
       <div className="dialog__header">
@@ -10,7 +10,9 @@ const ProgramDepositTop = ({ info, t }) => {
       </div>
       <div className="dialog-field">
         <div className="dialog-field__description">
-          {t("deposit-program.available-to-invest")}
+          {type === "fund" && t("deposit-program.available-to-invest-in-fund")}
+          {type === "program" &&
+            t("deposit-program.available-to-invest-in-program")}
         </div>
         <div className="dialog-field__value">{info.availableToInvest} GVT</div>
       </div>

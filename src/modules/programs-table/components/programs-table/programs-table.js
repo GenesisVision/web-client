@@ -34,11 +34,12 @@ const ProgramsTable = ({
   updatePaging,
   toggleFavorite,
   redirectToLogin,
-  isAuthenticated
+  isAuthenticated,
+  title
 }) => {
   return (
     <Table
-      title="All programs"
+      title={title}
       sorting={sorting}
       updateSorting={updateSorting}
       paging={paging}

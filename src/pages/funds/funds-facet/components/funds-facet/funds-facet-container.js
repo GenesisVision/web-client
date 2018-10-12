@@ -1,3 +1,4 @@
+import FundsTableContainer from "modules/funds-table/components/funds-table/funds-table-container";
 import ProgramsContainer from "modules/programs-table/components/programs-table/programs-table-container";
 import { getPrograms } from "modules/programs-table/services/programs-table.service";
 import NotFoundPage from "pages/not-found/not-found.routes";
@@ -37,7 +38,7 @@ class FundsFacetContainer extends Component {
     return (
       <Fragment>
         <FundsFacetNavigation facet={facetData.facet} goBack={goBack} />
-        <ProgramsContainer />
+        <FundsTableContainer title={facetData.facet.title} />
       </Fragment>
     );
   }

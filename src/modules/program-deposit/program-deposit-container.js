@@ -5,6 +5,7 @@ import {
 } from "modules/program-deposit/actions/program-deposit.actions";
 import ProgramDepositPopup from "modules/program-deposit/components/program-deposit-popup";
 import {
+  getDepositFundInfoById,
   getDepositProgramInfoById,
   investServiceInvestById
 } from "modules/program-deposit/services/program-deposit.services";
@@ -14,14 +15,13 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 const ProgramDepositContainer = props => {
+  const { service, id, type } = props;
   const handleClose = () => {
     props.onClose();
     props.service.clearDepositProgramInfo();
     props.service.clearInvestSubmit();
   };
   const handleInvest = amount => {
-    const { service, id } = props;
-
     service
       .investServiceInvestById({
         id,
@@ -36,8 +36,12 @@ const ProgramDepositContainer = props => {
         currency={props.currency}
         info={props.info.data}
         id={props.id}
-        fetchInfo={props.service.getDepositProgramInfoById}
+        fetchInfo={
+          (type === "program" && props.service.getDepositProgramInfoById) ||
+          (type === "fund" && props.service.getDepositFundInfoById)
+        }
         invest={handleInvest}
+        type={type}
       />
     </Dialog>
   );
@@ -50,6 +54,7 @@ ProgramDepositContainer.propTypes = {
   onClose: PropTypes.func,
   service: PropTypes.shape({
     getDepositProgramInfoById: PropTypes.func,
+    getDepositFundInfoById: PropTypes.func,
     clearDepositProgramInfo: PropTypes.func,
     investServiceInvestById: PropTypes.func,
     clearInvestSubmit: PropTypes.func
@@ -66,6 +71,7 @@ const mapDispatchToProps = dispatch => ({
   service: bindActionCreators(
     {
       getDepositProgramInfoById,
+      getDepositFundInfoById,
       clearDepositProgramInfo,
       investServiceInvestById,
       clearInvestSubmit

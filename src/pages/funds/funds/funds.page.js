@@ -11,7 +11,7 @@ const FundsPage = ({ t }) => {
     <Page title={t("funds-page.title")}>
       <FundsNavigationTabsContainer />
       <FacetCardsContainer />
-      <FundsTableContainer />
+      <FundsTableContainer title={"All funds"} />
     </Page>
   );
 };

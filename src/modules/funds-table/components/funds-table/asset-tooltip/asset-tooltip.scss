@@ -1,0 +1,16 @@
+@import "styles/_colors.scss";
+@import "styles/_sizes.scss";
+
+.fund-period-tooltip {
+  &__header {
+    font-size: $font-size-middle;
+    letter-spacing: 0.2px;
+    color: $text-dark-color;
+  }
+
+  &__content {
+    font-size: $font-size-middle;
+    letter-spacing: 0.5px;
+    color: $text-accent-color;
+  }
+}

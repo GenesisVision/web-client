@@ -1,56 +1,76 @@
 @import "styles/_colors.scss";
 @import "styles/_breakpoint.scss";
+@import "styles/_sizes.scss";
 
-$padding: 32px;
-$text-size: 13px;
-$th-text-size: 12px;
-$title-text-size: 15px;
-$chart-width: 160px;
+$description-block-width: 250px;
 $program-width: 312px;
 $program-height: 312px;
 $multiplier: 1.5;
-$border-radius: 5px;
-$description-block-width: 250px;
+$chart-width: 160px;
 
 @mixin table-title() {
   opacity: 0.3;
-  font-size: $th-text-size/1.5;
+  font-size: $font-size-small-mobile;
   color: white;
   text-align: left;
-  padding-bottom: $th-text-size/1.5;
+  padding-bottom: $font-size-small-mobile;
   @include media-breakpoint-landscape-phone() {
-    font-size: $th-text-size;
-    padding-bottom: $th-text-size;
+    font-size: $font-size-small;
+    padding-bottom: $font-size-small;
   }
 }
 
 .funds-table-container {
-  padding: $padding/2 0;
+  padding: $padding-middle-mobile 0;
+  @include media-breakpoint-landscape-phone() {
+    padding: $padding-middle 0;
+  }
 }
 
-.programs-table__cell {
+.funds-table__cell {
+  & .assets {
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
   &--avatar-title {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
+    .gv-btn {
+      font-size: $font-size-middle-mobile;
+      padding: 0;
+    }
     .program-avatar {
-      min-width: 40px;
+      width: 20px;
+      margin: 0;
+      padding-right: $padding-mini-mobile;
+      @include media-breakpoint-landscape-phone() {
+        width: 40px;
+        padding-right: $padding-mini;
+      }
+    }
+    @include media-breakpoint-landscape-phone() {
+      .gv-btn {
+        font-size: $font-size-middle;
+      }
     }
   }
   &--title {
-    padding-left: 9px;
-    word-break: break-all;
-    min-width: 100px;
+    min-width: 50px;
     div {
-      padding: $padding/10;
+      padding: $padding-small/10;
     }
   }
   &--bottom {
     opacity: 0.3;
   }
   &--chart {
-    min-width: 100px;
-    max-width: 200px;
+    min-width: 50px;
+    max-width: 100px;
+    @include media-breakpoint-landscape-phone() {
+      min-width: 100px;
+      max-width: 200px;
+    }
   }
 }
