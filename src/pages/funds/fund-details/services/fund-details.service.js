@@ -1,11 +1,8 @@
 import { DEFAULT_PERIOD } from "components/chart/chart-period/chart-period.helpers";
-import { DEFAULT_PAGING } from "modules/table/reducers/table-paging.reducer";
-import { composeRequestFilters } from "modules/table/services/table.service";
 import {
   FUND_DETAILS_ROUTE,
   FUNDS_SLUG_URL_PARAM_NAME
 } from "pages/funds/funds.routes";
-import { programsApiProxy } from "services/api-client/programs-api";
 import { fundsApiProxy } from "services/api-client/funds-api";
 import authService from "services/auth-service";
 import getParams from "utils/get-params";
