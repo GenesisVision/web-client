@@ -18,7 +18,7 @@ class AssetContainer extends Component {
               <Fragment key={idx}>
                 <Asset
                   icon={asset.icon}
-                  percent={asset.percent || asset.assetPart}
+                  percent={asset.percent}
                   currency={asset.symbol}
                   type={type}
                 />
