@@ -22,7 +22,7 @@ import {
   SORTING_FILTER_VALUE
 } from "../programs.constants";
 
-const DEFAULT_ITEMS_ON_PAGE = 10;
+const DEFAULT_ITEMS_ON_PAGE = 12;
 
 const sortableColums = PROGRAMS_COLUMNS.filter(
   x => x.sortingName !== undefined
@@ -145,6 +145,9 @@ export const programsChangeFilter = filter => (dispatch, getState) => {
     delete queryParams[filter.name];
   } else {
     queryParams[filter.name] = filter.value;
+  }
+  if (queryParams.page) {
+    delete queryParams.page;
   }
   const newUrl = routing.location.pathname + "?" + qs.stringify(queryParams);
   dispatch(push(newUrl));
