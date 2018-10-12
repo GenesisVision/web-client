@@ -19,7 +19,7 @@ class AssetContainer extends Component {
             idx < size && (
               <Tooltip
                 key={idx}
-                render={() => <AssetTooltip currency={asset.symbol} />}
+                render={() => <AssetTooltip currency={asset.asset} />}
               >
                 <div>
                   <Asset
