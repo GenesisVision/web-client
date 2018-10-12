@@ -44,7 +44,8 @@
   },
   "deposit-program": {
     "title": "Invest",
-    "available-to-invest": "Available to invest in program",
+    "available-to-invest-in-program": "Available to invest in program",
+    "available-to-invest-in-fund": "Available to invest in fund",
     "available-in-wallet": "Available in wallet",
     "amount": "Amount to invest",
     "entry-fee": "Entry fee",
@@ -558,6 +559,8 @@
     "statistics": {
       "heading": "Statistics",
       "current": "Current",
+      "calmarRatio": "Calmar ratio",
+      "rebalances": "Rebalances",
       "profit-change": "Profit change",
       "for": "For",
       "balance": "Balance",
