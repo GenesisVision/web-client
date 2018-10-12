@@ -34,6 +34,16 @@ const FundDetailsStatistics = ({ t, statisticData, period }) => {
               />
             </span>
           </div>
+          <div className="fund-details-statistics__item fund-details-statistics__item--secondary">
+            <span className="fund-details-statistics__label">
+              {t("fund-details-page.statistics.start-day")}
+            </span>
+            <span className="fund-details-statistics__value">
+              {moment(statistic.periodStarts).format("D MMM YYYY")}
+            </span>
+          </div>
+        </div>
+        <div className="fund-details-statistics__vertical-info-block">
           <div className="fund-details-statistics__item">
             <span className="fund-details-statistics__label">
               {t("fund-details-page.statistics.investors")}
@@ -44,16 +54,6 @@ const FundDetailsStatistics = ({ t, statisticData, period }) => {
                 thousandSeparator={" "}
                 displayType="text"
               />
-            </span>
-          </div>
-        </div>
-        <div className="fund-details-statistics__vertical-info-block">
-          <div className="fund-details-statistics__item fund-details-statistics__item--secondary">
-            <span className="fund-details-statistics__label">
-              {t("fund-details-page.statistics.start-day")}
-            </span>
-            <span className="fund-details-statistics__value">
-              {moment(statistic.periodStarts).format("D MMM YYYY")}
             </span>
           </div>
           <div className="fund-details-statistics__item fund-details-statistics__item--secondary">
@@ -82,25 +82,28 @@ const FundDetailsStatistics = ({ t, statisticData, period }) => {
       </div>
 
       <div className="fund-details-statistics__particular-information">
-        <div className="fund-details-statistics__item">
-          <span className="fund-details-statistics__label">Calmar ratio</span>
+        <div className="fund-details-statistics__item fund-details-statistics__item--secondary">
+          <span className="fund-details-statistics__label">
+            {t("fund-details-page.statistics.calmarRatio")}
+          </span>
           <span className="fund-details-statistics__value">
             <NumberFormat
               value={statistic.calmarRatio}
-              thousandSeparator={" "}
               displayType="text"
+              suffix="%"
             />
           </span>
         </div>
 
         <div className="fund-details-statistics__item fund-details-statistics__item--secondary">
-          <span className="fund-details-statistics__label">Rebalances</span>
+          <span className="fund-details-statistics__label">
+            {t("fund-details-page.statistics.rebalances")}
+          </span>
           <span className="fund-details-statistics__value">
             <NumberFormat
               value={statistic.rebalances}
               decimalScale={2}
               displayType="text"
-              suffix="%"
             />
           </span>
         </div>
