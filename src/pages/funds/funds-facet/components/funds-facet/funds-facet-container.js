@@ -9,6 +9,7 @@ import { bindActionCreators, compose } from "redux";
 
 import { getCurrentFacet } from "../../services/funds-facet.service";
 import FundsFacetNavigation from "./funds-facet-navigation";
+import FundsTableContainer from "modules/funds-table/components/funds-table/funds-table-container";
 
 class FundsFacetContainer extends Component {
   state = {
@@ -34,10 +35,11 @@ class FundsFacetContainer extends Component {
     const { facetData } = this.state;
     if (!facetData || facetData.isPending) return null;
     if (facetData.notFound) return <NotFoundPage />;
+    console.log(facetData);
     return (
       <Fragment>
         <FundsFacetNavigation facet={facetData.facet} goBack={goBack} />
-        <ProgramsContainer />
+        <FundsTableContainer title={facetData.facet.title} />
       </Fragment>
     );
   }

@@ -37,7 +37,7 @@ class ProgramsFacetContainer extends Component {
     return (
       <Fragment>
         <ProgramsFacetInfo facet={facetData.facet} goBack={goBack} />
-        <ProgramsContainer />
+        <ProgramsContainer title={facetData.facet.title} />
       </Fragment>
     );
   }
