@@ -22,7 +22,7 @@ class EmailConfirmContainer extends PureComponent {
       service
         .confirmWithdraw(queryParams.requestId, queryParams.code)
         .then(() => {
-          notifySuccess(t("wallet-withdraw.confirmation.sucess"));
+          notifySuccess(t("wallet-withdraw.confirmation.success"));
         })
         .catch(error => {
           notifyError(
