@@ -89,9 +89,9 @@ const ProgramTableRowShort = ({
         program.personalDetails && (
           <TableCell className="programs-table__cell--favorite">
             <FavoriteIcon
-              toggleSelected={toggleFavorite}
               id={program.id}
               selected={program.personalDetails.isFavorite}
+              onClick={toggleFavorite}
             />
           </TableCell>
         )}

@@ -12,7 +12,7 @@ const ManagersTableRow = ({ manager }) => {
   return (
     <TableRow className="managers-table__row">
       <TableCell className="managers-table__cell--username">
-        <ProfileAvatar url={manager.logo} alt={manager.username} />
+        <ProfileAvatar url={manager.avatar} alt={manager.username} />
         <Link to={composeManagerDetailsUrl(manager.url)}>
           <GVButton variant="text" color="secondary">
             {manager.username}
