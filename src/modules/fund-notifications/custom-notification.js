@@ -34,13 +34,7 @@ class CustomNotification extends Component {
         enabled: status
       })
       .then(() => {
-        this.success(
-          t(
-            `fund.custom.${
-              status ? "enabled" : "disabled"
-            }-alert`
-          )
-        );
+        this.success(t(`fund.custom.${status ? "enabled" : "disabled"}-alert`));
       })
       .finally(() => this.setState({ isPending: false }));
   };
@@ -78,9 +72,7 @@ class CustomNotification extends Component {
             name="conditionAmount"
             value={settings.conditionAmount.toString()}
             disabled
-            label={t(
-              `fund.create.${settings.conditionType}.label`
-            )}
+            label={t(`fund.create.${settings.conditionType}.label`)}
             adornment="%"
             autoComplete="off"
             InputComponent={NumberFormat}

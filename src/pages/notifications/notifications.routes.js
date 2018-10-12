@@ -15,10 +15,7 @@ const NotificationRoutes = () => (
       path={PROGRAM_NOTIFICATIONS_ROUTE}
       component={ProgramNotificationPage}
     />
-    <Route
-      path={FUND_NOTIFICATIONS_ROUTE}
-      component={FundNotificationPage}
-    />
+    <Route path={FUND_NOTIFICATIONS_ROUTE} component={FundNotificationPage} />
     <Route path={NOTIFICATIONS_ROUTE} component={NotificationsPage} />
   </Switch>
 );

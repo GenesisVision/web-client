@@ -21,9 +21,7 @@ class FundNotificationsGeneral extends Component {
     return services
       .addFundNotificationsService(options)
       .then(() =>
-        this.success(
-          t(`fund.general.${options.type}.enabled-alert`)
-        )
+        this.success(t(`fund.general.${options.type}.enabled-alert`))
       );
   };
 
@@ -32,9 +30,7 @@ class FundNotificationsGeneral extends Component {
     return services
       .removeFundNotificationService(options)
       .then(() =>
-        this.success(
-          t(`fund.general.${options.type}.disabled-alert`)
-        )
+        this.success(t(`fund.general.${options.type}.disabled-alert`))
       );
   };
   render() {

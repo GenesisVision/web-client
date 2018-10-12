@@ -28,11 +28,7 @@ const updateFavoriteLocal = (state, id, isFavorite) => {
 const favoritesReducer = (state, action) => {
   switch (action.type) {
     case `${SET_FAVORITE_FUND}_${REQUEST_SUFFIX}`:
-      return updateFavoriteLocal(
-        state,
-        action.meta.id,
-        action.meta.isFavorite
-      );
+      return updateFavoriteLocal(state, action.meta.id, action.meta.isFavorite);
     case `${SET_FAVORITE_FUND}_${FAILURE_SUFFIX}`: {
       return updateFavoriteLocal(
         state,

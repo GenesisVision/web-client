@@ -120,7 +120,10 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  service: bindActionCreators({ getFundDescription, goBack, redirectToLogin: () => push(LOGIN_ROUTE) }, dispatch)
+  service: bindActionCreators(
+    { getFundDescription, goBack, redirectToLogin: () => push(LOGIN_ROUTE) },
+    dispatch
+  )
 });
 
 export default compose(

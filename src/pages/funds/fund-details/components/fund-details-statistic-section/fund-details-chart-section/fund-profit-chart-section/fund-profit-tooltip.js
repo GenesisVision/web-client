@@ -15,14 +15,7 @@ const TooltipBody = ({ equity, pnl }) => {
     </Fragment>
   );
 };
-const FundProfitTooltip = ({
-  active,
-  label,
-  payload,
-  heading,
-  body,
-  date
-}) => {
+const FundProfitTooltip = ({ active, label, payload, heading, body, date }) => {
   if (!active) return null;
   let equity = "";
   if (payload[1]) {
