@@ -28,7 +28,6 @@ import Profitability from "components/profitability/profitability";
 class DashboardFunds extends Component {
   fetchFunds = filters => {
     return getDashboardFunds().then(({ data }) => {
-      console.log(data);
       return { items: data.funds, total: data.total };
     });
   };
