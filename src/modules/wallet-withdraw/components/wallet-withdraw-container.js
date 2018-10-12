@@ -23,7 +23,11 @@ class WalletWithdrawContainer extends Component {
     this.setState({ isPending: true });
     newWithdrawRequest({ ...values, amount: Number(values.amount) }).then(
       response => {
-        this.setState({ isPending: response.isPending, success: true });
+        this.setState({
+          isPending: response.isPending,
+          success: !Boolean(response.errorMessage),
+          errorMessage: response.errorMessage
+        });
       }
     );
   };

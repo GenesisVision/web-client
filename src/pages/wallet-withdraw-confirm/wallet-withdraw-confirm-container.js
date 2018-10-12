@@ -10,22 +10,15 @@ import * as walletWithdrawConfirmService from "./services/wallet-withdraw-confir
 
 class EmailConfirmContainer extends PureComponent {
   componentDidMount() {
-    const {
-      t,
-      queryParams,
-      service,
-      showNotFoundPage,
-      notifySuccess,
-      notifyError
-    } = this.props;
+    const { t, queryParams, service, showNotFoundPage } = this.props;
     if (queryParams.requestId && queryParams.code) {
       service
         .confirmWithdraw(queryParams.requestId, queryParams.code)
         .then(() => {
-          notifySuccess(t("wallet-withdraw.confirmation.success"));
+          service.notifySuccess(t("wallet-withdraw.confirmation.success"));
         })
         .catch(error => {
-          notifyError(
+          service.notifyError(
             t("wallet-withdraw.confirmation.error") + error.errorMessage
           );
         });
@@ -40,10 +33,15 @@ class EmailConfirmContainer extends PureComponent {
 }
 
 const mapDispatchToProps = dispatch => ({
-  service: bindActionCreators(walletWithdrawConfirmService, dispatch),
-  showNotFoundPage: () => dispatch(replace(NOT_FOUND_PAGE_ROUTE)),
-  notifySuccess: text => dispatch(alertMessageActions.success(text)),
-  notifyError: text => dispatch(alertMessageActions.error(text))
+  service: bindActionCreators(
+    {
+      ...walletWithdrawConfirmService,
+      notifySuccess: alertMessageActions.success,
+      notifyError: alertMessageActions.error
+    },
+    dispatch
+  ),
+  showNotFoundPage: () => dispatch(replace(NOT_FOUND_PAGE_ROUTE))
 });
 
 export default compose(
