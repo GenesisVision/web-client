@@ -79,12 +79,12 @@ class FundsTableRow extends Component {
           <ProgramSimpleChart data={fund.chart} programId={fund.id} />
         </TableCell>
         {isAuthenticated &&
-          fund.personalProgramDetails && (
+          fund.personalDetails && (
             <TableCell className="funds-table__cell--favorite">
               <FavoriteIcon
                 toggleSelected={toggleFavorite}
-                fundId={fund.id}
-                selected={fund.personalProgramDetails.isFavorite}
+                id={fund.id}
+                selected={fund.personalDetails.isFavorite}
               />
             </TableCell>
           )}

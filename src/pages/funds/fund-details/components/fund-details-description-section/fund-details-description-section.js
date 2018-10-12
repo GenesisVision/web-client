@@ -1,4 +1,4 @@
-import { toggleFavoriteProgram } from "modules/favorite-asset/services/favorite-program.service";
+import { toggleFavoriteFund } from "modules/favorite-asset/services/favorite-fund.service";
 import { toggleReinvesting } from "modules/program-reinvesting/services/program-reinvesting.service";
 import React, { Fragment, PureComponent } from "react";
 
@@ -76,22 +76,21 @@ class FundDetailsDescriptionSection extends PureComponent {
 
   handleOnFavoriteClick = () => {
     const { ui, fundDescription } = this.state;
-    const { id, personalProgramDetails } = fundDescription;
-    const { isFavorite } = personalProgramDetails;
-
-    const composeNewFavoriteState = newState => ({
+    const { id, personalFundDetails } = fundDescription;
+    const { isFavorite } = personalFundDetails;
+    const composeNewFavoriteState = () => ({
       ...fundDescription,
-      personalProgramDetails: {
-        ...personalProgramDetails,
+      personalFundDetails: {
+        ...personalFundDetails,
         isFavorite: !isFavorite
       }
     });
 
     this.setState({
       ui: { ...ui, isFavoritePending: true },
-      fundDescription: composeNewFavoriteState(!isFavorite)
+      fundDescription: composeNewFavoriteState()
     });
-    toggleFavoriteProgram(id, isFavorite)
+    toggleFavoriteFund(id, isFavorite)
       .catch(e => {
         this.setState({
           fundDescription: composeNewFavoriteState(isFavorite)
