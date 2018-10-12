@@ -15,7 +15,7 @@ export const fetchWalletTransactions = filters => {
 
   return walletApiProxy
     .v10WalletTransactionsGet(authorization, filters)
-    .then(data => ({
+    .then(({ data }) => ({
       items: data.transactions,
       total: data.total
     }));
