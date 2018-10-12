@@ -12,6 +12,8 @@ import { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 
+import { FundsIcon } from "../icon/funds-icon";
+
 class Navigation extends Component {
   state = {
     isOpen: false
@@ -32,7 +34,7 @@ class Navigation extends Component {
           <NavigationItem icon={<ProgramsIcon primary />} href={PROGRAMS_ROUTE}>
             {t("navigation.programs")}
           </NavigationItem>
-          <NavigationItem icon={<ProgramsIcon primary />} href={FUNDS_ROUTE}>
+          <NavigationItem icon={<FundsIcon primary />} href={FUNDS_ROUTE}>
             {t("navigation.funds")}
           </NavigationItem>
         </div>
