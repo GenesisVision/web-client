@@ -5,8 +5,8 @@
 .program-details-description {
   & .asset {
     background: rgba(216, 216, 216, 0.05);
-    height: 50px/$divider-title;
-    padding: 15px/$divider-padding;
+    height: 50px / $divider-title;
+    padding: 15px / $divider-padding;
     justify-content: space-between;
     &--others-count {
       min-width: auto;
@@ -20,7 +20,6 @@
         min-width: auto;
       }
     }
-
   }
   display: flex;
   flex-direction: row;
@@ -92,7 +91,7 @@
 
   &__text {
     font-size: $font-size-middle-mobile;
-    line-height: $font-size-middle-mobile*2;
+    line-height: $font-size-middle-mobile * 2;
     letter-spacing: 0.2px;
     text-align: left;
     color: $text-color;
@@ -153,7 +152,8 @@
         stroke: $text-accent-color;
       }
     }
-    &-icon, &-text {
+    &-icon,
+    &-text {
       padding: $padding-small-mobile $padding-small-mobile/2;
     }
     &-text {
@@ -189,7 +189,7 @@
     }
     &__text {
       font-size: $font-size-middle;
-      line-height: $font-size-middle*2;
+      line-height: $font-size-middle * 2;
     }
     &__invest-button-container {
       padding: $padding-middle 0;
@@ -215,7 +215,8 @@
       }
     }
     &__control {
-      &-icon, &-text {
+      &-icon,
+      &-text {
         padding: $padding-small/2 $padding-small;
         white-space: nowrap;
       }

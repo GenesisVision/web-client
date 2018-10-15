@@ -109,14 +109,7 @@
 
   &__avatar {
     flex-shrink: 0;
-    width: 44px;
-    height: 44px;
-    display: flex;
     margin-right: 15px;
-    align-items: center;
-    justify-content: center;
-    background-color: $secondary-background-color;
-    border-radius: 100%;
   }
 
   &__email {

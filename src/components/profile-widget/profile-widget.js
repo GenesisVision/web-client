@@ -1,6 +1,7 @@
 import "./profile-widget.scss";
 
 import classnames from "classnames";
+import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import { DetailsIcon } from "components/icon/details-icon";
 import { LogoutIcon } from "components/icon/logout-icon";
 import { SettingsIcon } from "components/icon/settings-icon";
@@ -13,8 +14,6 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
-import UserIcon from "shared/media/user-avatar.svg";
-import fileService from "shared/services/file-service";
 
 class ProfileWidget extends Component {
   state = {
@@ -34,13 +33,12 @@ class ProfileWidget extends Component {
     return (
       <div className={classnames("profile-widget", className)}>
         <div className="profile-widget__content" onClick={this.handleOpen}>
-          <div className="profile-widget__avatar">
-            <img
-              alt={email}
-              className="profile-widget__image"
-              src={fileService.getFileUrl(avatar) || UserIcon}
-            />
-          </div>
+          <ProfileAvatar
+            url={avatar}
+            alt={email}
+            className="profile-widget__avatar"
+            imageClassName="profile-widget__image"
+          />
           <FilterArrowIcon isOpen={Boolean(this.state.anchor)} />
         </div>
         <Popover

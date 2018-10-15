@@ -2,10 +2,7 @@
 @import "styles/_breakpoint.scss";
 @import "styles/_sizes.scss";
 
-$asset-height: 40px;
 $asset-height-mobile: $asset-height/$divider-text;
-$asset-icon-size: 20px;
-$asset-icon-size-mobile: $asset-icon-size/$divider-text;
 
 .assets {
   display: flex;
@@ -53,16 +50,7 @@ $asset-icon-size-mobile: $asset-icon-size/$divider-text;
     font-size: $font-size-middle;
     padding: $padding-small;
   }
-  &__icon {
-    display: flex;
-    align-items: center;
-    width: $asset-icon-size-mobile;
-    height: $asset-icon-size-mobile;
-  }
-  &__icon-img {
-    width: $asset-icon-size-mobile;
-    height: $asset-icon-size-mobile;
-  }
+
   &__currencies {
     display: flex;
     flex-direction: row;
@@ -102,14 +90,6 @@ $asset-icon-size-mobile: $asset-icon-size/$divider-text;
 
     &__percent {
       padding-left: $padding-mini;
-    }
-    &__icon {
-      width: $asset-icon-size;
-      height: $asset-icon-size;
-    }
-    &__icon-img {
-      width: $asset-icon-size;
-      height: $asset-icon-size;
     }
   }
   &--text {
