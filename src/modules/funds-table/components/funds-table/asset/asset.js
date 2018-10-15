@@ -1,9 +1,11 @@
 import "./asset.scss";
-import React, { Component } from "react";
+
 import classNames from "classnames";
+import FundAssetImage from "components/avatar/fund-asset-image/fund-asset-image";
+import { CURRENCY_VALUES } from "modules/currency-select/currency-select.constants";
+import React, { Component } from "react";
 import NumberFormat from "react-number-format";
-import BTC from "shared/media/BTC.png";
-import { HEADER_CURRENCY_VALUES } from "modules/currency-select/currency-select.constants";
+
 export const ASSET_TYPE = {
   large: "large",
   middle: "middle",
@@ -12,7 +14,7 @@ export const ASSET_TYPE = {
 };
 class Asset extends Component {
   render() {
-    const { percent, currency, type, last } = this.props;
+    const { percent, currency, type, last, icon } = this.props;
     return (
       (type === ASSET_TYPE.text && (
         <div>
@@ -27,14 +29,13 @@ class Asset extends Component {
             "asset--large": type === ASSET_TYPE.large
           })}
         >
-          <div className="asset__icon">
-            <img src={BTC} alt="" className="asset__icon-img" />
-          </div>
+          <FundAssetImage url={icon} alt={currency} />
+
           {currency && (
             <div className="asset__currencies">
               {type === ASSET_TYPE.large && (
                 <div className="asset__currency-full">
-                  {HEADER_CURRENCY_VALUES[currency]}
+                  {CURRENCY_VALUES[currency]}
                 </div>
               )}
               {type !== ASSET_TYPE.short && (

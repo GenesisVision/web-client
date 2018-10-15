@@ -2,9 +2,9 @@ import { GVTab, GVTabs } from "gv-react-components";
 import React, { Fragment, PureComponent } from "react";
 import { translate } from "react-i18next";
 
+import FundsTable from "./funds-table";
 import ManagersTable from "./managers-table";
 import ProgramsTable from "./programs-table";
-import FundsTable from "./funds-table";
 
 const PROGRAMS_TABLE_TAB = "investors";
 const FUNDS_TABLE_TAB = "funds";

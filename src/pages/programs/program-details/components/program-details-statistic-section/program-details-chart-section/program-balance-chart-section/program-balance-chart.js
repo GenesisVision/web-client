@@ -13,8 +13,6 @@ import {
 
 import ProgramBalanceTooltip from "./program-balance-tooltip";
 
-//import ProgramProfitTooltip from "./program-profit-tooltip";
-
 class ProgramBalanceChart extends PureComponent {
   render() {
     const { balanceChart, currency } = this.props;

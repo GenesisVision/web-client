@@ -1,8 +1,10 @@
 import "./dashboard-funds.scss";
 
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
+import Profitability from "components/profitability/profitability";
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
 import { GVButton } from "gv-react-components";
+import { FUNDS_TABLE_COLUMNS } from "modules/funds-table/funds-table.constants";
 import { TableCell, TableRow } from "modules/table/components";
 import DateRangeFilter from "modules/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "modules/table/components/filtering/date-range-filter/date-range-filter.constants";
@@ -14,16 +16,14 @@ import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 
-import { DASHBOARD_PROGRAMS_SORTING } from "../../../dashboard.constants";
-import { getDashboardFunds } from "../../../services/dashboard-funds.service";
-import { FUNDS_TABLE_COLUMNS } from "modules/funds-table/funds-table.constants";
 import AssetContainer from "../../../../../modules/funds-table/components/funds-table/asset/asset-container";
 import replaceParams from "../../../../../utils/replace-params";
 import {
-  FUND_DETAILS_ROUTE,
-  FUNDS_SLUG_URL_PARAM_NAME
+  FUNDS_SLUG_URL_PARAM_NAME,
+  FUND_DETAILS_ROUTE
 } from "../../../../funds/funds.routes";
-import Profitability from "components/profitability/profitability";
+import { DASHBOARD_PROGRAMS_SORTING } from "../../../dashboard.constants";
+import { getDashboardFunds } from "../../../services/dashboard-funds.service";
 
 class DashboardFunds extends Component {
   fetchFunds = filters => {

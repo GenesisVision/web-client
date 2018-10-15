@@ -5,7 +5,8 @@
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
-  &__statistic,&__chart {
+  &__statistic,
+  &__chart {
     margin-top: $padding-large-mobile;
     @include media-breakpoint-landscape-phone() {
       margin-top: $padding-large;

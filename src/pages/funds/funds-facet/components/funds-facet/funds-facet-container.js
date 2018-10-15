@@ -1,4 +1,4 @@
-import ProgramsContainer from "modules/programs-table/components/programs-table/programs-table-container";
+import FundsTableContainer from "modules/funds-table/components/funds-table/funds-table-container";
 import { getPrograms } from "modules/programs-table/services/programs-table.service";
 import NotFoundPage from "pages/not-found/not-found.routes";
 import React, { Component, Fragment } from "react";
@@ -9,7 +9,6 @@ import { bindActionCreators, compose } from "redux";
 
 import { getCurrentFacet } from "../../services/funds-facet.service";
 import FundsFacetNavigation from "./funds-facet-navigation";
-import FundsTableContainer from "modules/funds-table/components/funds-table/funds-table-container";
 
 class FundsFacetContainer extends Component {
   state = {

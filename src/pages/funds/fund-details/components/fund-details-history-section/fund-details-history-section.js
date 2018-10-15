@@ -3,6 +3,7 @@ import "./fund-details-history.scss";
 import Surface from "components/surface/surface";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
+
 import FundRebalancing from "./fund-rebalancing/fund-rebalancing";
 
 const TRADES_TAB = "trades";

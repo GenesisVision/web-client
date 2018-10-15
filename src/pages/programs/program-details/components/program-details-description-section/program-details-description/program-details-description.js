@@ -121,9 +121,9 @@ class ProgramDetailsDescription extends PureComponent {
           />
         </div>
         <div className="program-details-description__main">
-          <h1 className="program-details-description__heading">
+          <div className="program-details-description__heading">
             {programDescription.title}
-          </h1>
+          </div>
           <Link to={composeManagerDetailsUrl(programDescription.manager.url)}>
             <GVButton
               variant="text"
@@ -134,12 +134,12 @@ class ProgramDetailsDescription extends PureComponent {
           </Link>
 
           <div className="program-details-description__info">
-            <h2 className="program-details-description__subheading">
+            <div className="program-details-description__subheading">
               {t("program-details-page.description.strategy")}
-            </h2>
-            <p className="program-details-description__text">
+            </div>
+            <div className="program-details-description__text">
               {programDescription.description}
-            </p>
+            </div>
             <div className="program-details-description__short-statistic">
               <div className="program-details-description__short-statistic-item">
                 <span className="program-details-description__short-statistic-subheading">
@@ -172,12 +172,14 @@ class ProgramDetailsDescription extends PureComponent {
                 />
               </div>
             </div>
-            <GVButton
-              className="program-details-description__invest-btn"
-              onClick={this.handleOpenInvestmentPopup}
-            >
-              {t("program-details-page.description.invest")}
-            </GVButton>
+            <div className="program-details-description__invest-button-container">
+              <GVButton
+                className="program-details-description__invest-btn"
+                onClick={this.handleOpenInvestmentPopup}
+              >
+                {t("program-details-page.description.invest")}
+              </GVButton>
+            </div>
 
             <ProgramDepositContainer
               open={isOpenInvestmentPopup}

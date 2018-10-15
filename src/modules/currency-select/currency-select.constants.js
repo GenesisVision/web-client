@@ -4,14 +4,13 @@ export const HEADER_CURRENCY_VALUES = {
   ADA: "Cardano",
   USD: "US Dollar",
   EUR: "Euro",
-  GVT: "Genesis Vision",
   XRP: "Ripple",
   BCH: "Bitcoin Cash",
-  LTC: "Littlecoin",
+  LTC: "Litecoin",
   DOGE: "Dogecoin"
 };
 
 export const CURRENCY_VALUES = {
-  GVT: "GVT",
+  GVT: "Genesis Vision Token",
   ...HEADER_CURRENCY_VALUES
 };

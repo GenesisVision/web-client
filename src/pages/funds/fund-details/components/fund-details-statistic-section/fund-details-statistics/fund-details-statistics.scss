@@ -40,12 +40,12 @@
     align-items: flex-start;
     align-content: stretch;
     padding-bottom: $padding-middle-mobile;
-    @include media-breakpoint-landscape-phone(){
+    @include media-breakpoint-landscape-phone() {
       padding-bottom: $padding-middle;
     }
   }
 
-  &__vertical-info-block{
+  &__vertical-info-block {
     display: flex;
     flex-direction: column;
   }
@@ -55,14 +55,14 @@
     flex-direction: column;
     padding-right: $padding-small-mobile;
     padding-bottom: $padding-large-mobile;
-    @include media-breakpoint-landscape-phone(){
+    @include media-breakpoint-landscape-phone() {
     }
   }
 
   &__period {
     width: 100%;
     padding-bottom: $padding-middle-mobile;
-    @include media-breakpoint-landscape-phone(){
+    @include media-breakpoint-landscape-phone() {
       padding-bottom: $padding-middle;
     }
   }
@@ -82,7 +82,7 @@
   &__value {
     font-size: $font-size-large-mobile;
     letter-spacing: 0.6px;
-    &--accent{
+    &--accent {
       font-weight: 600;
     }
     @include media-breakpoint-landscape-phone() {

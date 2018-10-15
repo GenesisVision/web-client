@@ -1,9 +1,11 @@
 import "./asset.scss";
-import React, { Component } from "react";
-import Asset, { ASSET_TYPE } from "./asset";
+
 import classNames from "classnames";
-import AssetTooltip from "../asset-tooltip/asset-tooltip";
 import Tooltip from "components/tooltip/tooltip";
+import React, { Component } from "react";
+
+import AssetTooltip from "../asset-tooltip/asset-tooltip";
+import Asset, { ASSET_TYPE } from "./asset";
 
 class AssetContainer extends Component {
   render() {
