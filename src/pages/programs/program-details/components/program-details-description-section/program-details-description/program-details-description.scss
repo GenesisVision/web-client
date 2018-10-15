@@ -6,7 +6,6 @@
   & .asset {
     background: rgba(216, 216, 216, 0.05);
     height: 50px/$divider-title;
-    //min-width: 240px/$divider-text;
     padding: 15px/$divider-padding;
     justify-content: space-between;
     &--others-count {
@@ -154,10 +153,6 @@
     }
     &-icon, &-text {
       padding: $padding-small-mobile $padding-small-mobile/2;
-    }
-    &-icon {
-      //width: $icon-size-mobile;
-      //height: $icon-size-mobile;
     }
     &-text {
       font-size: $font-size-small-mobile;
