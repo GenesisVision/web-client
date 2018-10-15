@@ -30,8 +30,7 @@ const ProgramDepositForm = ({
     return (
       formattedValue === "" ||
       (floatValue <= parseFloat(availableInWallet - fee) &&
-        floatValue <= availableToInvest &&
-        (floatValue === 0 || floatValue >= info.minInvestmentAmount))
+        floatValue <= availableToInvest)
     );
   };
 
@@ -117,6 +116,12 @@ export default compose(
     validationSchema: ({ t, info }) =>
       object().shape({
         amount: number()
+          .min(
+            info.minInvestmentAmount,
+            t("deposit-program.validation.amount-min-value", {
+              min: info.minInvestmentAmount
+            })
+          )
           .lessThan(
             info.availableInWallet,
             t("deposit-program.validation.amount-more-than-available")

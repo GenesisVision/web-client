@@ -54,7 +54,8 @@
     "success-alert-message": "Successful request for investment in the program.",
     "validation": {
       "amount-more-than-available": "Amount is more than available in your wallet",
-      "amount-is-required": "Amount is required."
+      "amount-is-required": "Amount is required.",
+      "amount-min-value": "Min amount is {{min}} GVT"
     }
   },
   "password-page": {
