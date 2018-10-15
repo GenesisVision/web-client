@@ -1,4 +1,3 @@
-import ProgramsContainer from "modules/programs-table/components/programs-table/programs-table-container";
 import { getPrograms } from "modules/programs-table/services/programs-table.service";
 import NotFoundPage from "pages/not-found/not-found.routes";
 import React, { Component, Fragment } from "react";
