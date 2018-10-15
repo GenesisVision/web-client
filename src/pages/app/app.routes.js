@@ -8,8 +8,7 @@ import NotificationRoutes, {
   NOTIFICATIONS_ROUTE
 } from "pages/notifications/notifications.routes";
 import PrivateRoute from "pages/private-route";
-import ProfileRoutes from "pages/profile/profile.routes";
-import { PROFILE_ROUTE } from "pages/profile/profile/profile.page";
+import ProfileRoutes, { PROFILE_ROUTE } from "pages/profile/profile.routes";
 import WalletPage, { WALLET_PAGE_ROUTE } from "pages/wallet/wallet-page";
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";

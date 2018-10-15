@@ -1,11 +1,27 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { GVButton } from "gv-react-components";
+import filesService from "shared/services/file-service";
+import authService from "services/auth-service";
 
 class UploadButton extends Component {
   input = React.createRef();
+  state = {
+    isPending: false
+  };
   handleChange = event => {
-    console.info(event.target.files);
+    const file = event.target.files[0];
+    this.setState({ isPending: true });
+    filesService.uploadFile(file, authService.getAuthArg()).then(id => {
+      this.setState({ isPending: false });
+      this.handleLoad(id, file);
+    });
+  };
+  handleLoad = (id, file) => {
+    const f = { name: file.name, size: file.size, id };
+    if (this.props.onLoad) {
+      this.props.onLoad(f);
+    }
   };
   render() {
     return (
@@ -29,6 +45,8 @@ class UploadButton extends Component {
   }
 }
 
-UploadButton.propTypes = {};
+UploadButton.propTypes = {
+  onLoad: PropTypes.func
+};
 
 export default UploadButton;

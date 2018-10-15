@@ -2,6 +2,7 @@ import "./profile.scss";
 
 import classnames from "classnames";
 import Chip from "components/chip/chip";
+import { withFormik } from "formik";
 import { GVTextField } from "gv-react-components";
 import UploadButton from "modules/upload-button/upload-button";
 import moment from "moment";
@@ -9,18 +10,28 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 
-const ProfileField = ({ name, value, label, disabled = true }) => {
+const ProfileField = ({ name, value, label, disabled }) => {
   return value || !disabled ? (
     <GVTextField name={name} value={value} label={label} disabled={disabled} />
   ) : null;
 };
 
 class Profile extends Component {
+  state = {
+    file: null
+  };
+  handleLoad = file => {
+    this.setState({ file });
+  };
   render() {
-    const { t, info } = this.props;
+    const { t, info, handleSubmit } = this.props;
     return (
-      <div className="profile__container">
-        <table className="profile profile--is-disabled">
+      <form
+        id="profile-form"
+        className="profile__container"
+        onSubmit={handleSubmit}
+      >
+        <table className={"profile"}>
           <tbody>
             <tr className="profile__title">
               <td className="profile__left">
@@ -49,6 +60,7 @@ class Profile extends Component {
                   label={t("profile.email")}
                   value={info.email}
                   name="phone"
+                  disabled
                 />
               </td>
             </tr>
@@ -70,10 +82,6 @@ class Profile extends Component {
               </td>
               <td className="profile__center" />
               <td className="profile__right">
-                {!info.firstName &&
-                  !info.lastName &&
-                  !info.birthday &&
-                  !info.country && <p>No info</p>}
                 <div>
                   <ProfileField
                     value={info.firstName}
@@ -98,8 +106,21 @@ class Profile extends Component {
                   <ProfileField
                     value={info.citizenship}
                     label={t("profile.citizen")}
-                    name="citizenship"
+                    name="citizen"
                   />
+                </div>
+                <div>
+                  <div>
+                    {this.state.file && this.state.file.name.toUpperCase()}
+                  </div>
+                  {this.state.file && (
+                    <input
+                      type="hidden"
+                      name="documentId"
+                      value={this.state.file.id}
+                    />
+                  )}
+                  <UploadButton onLoad={this.handleLoad} />
                 </div>
               </td>
             </tr>
@@ -118,10 +139,6 @@ class Profile extends Component {
               </td>
               <td className="profile__center" />
               <td className="profile__right">
-                {!info.country &&
-                  !info.city &&
-                  !info.address &&
-                  !info.index && <p>No info</p>}
                 <div className="profile__row">
                   <ProfileField
                     value={info.country}
@@ -152,7 +169,7 @@ class Profile extends Component {
             </tr>
           </tbody>
         </table>
-      </div>
+      </form>
     );
   }
 }
@@ -181,4 +198,11 @@ Profile.propTypes = {
   })
 };
 
-export default translate()(Profile);
+const ProfileForm = withFormik({
+  displayName: "profile-form",
+  handleSubmit: values => {
+    console.info(values);
+  }
+})(Profile);
+
+export default translate()(ProfileForm);
