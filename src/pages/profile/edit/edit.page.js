@@ -1,4 +1,5 @@
 import Page from "components/page/page";
+import ProfileContainer from "modules/profile/profile-container";
 import ProfileForm from "modules/profile/profile-form";
 import ProgramDetailsNavigation from "pages/programs/program-details/components/program-details-navigation/program-details-navigation";
 import React from "react";
@@ -11,7 +12,9 @@ const ProfileEditPage = ({ t, service }) => {
   return (
     <Page title={t("profile.title")}>
       <ProgramDetailsNavigation goBack={service.goBack} />
-      <ProfileForm info={{}} />
+      <ProfileContainer>
+        <ProfileForm />
+      </ProfileContainer>
     </Page>
   );
 };
@@ -24,6 +27,8 @@ export default compose(
   translate(),
   connect(
     null,
-    mapDispatchToProps
+    mapDispatchToProps,
+    null,
+    { pure: false }
   )
 )(ProfileEditPage);

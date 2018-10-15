@@ -1,13 +1,13 @@
 import "./profile.scss";
 
-import classnames from "classnames";
 import Chip from "components/chip/chip";
-import { GVTextField } from "gv-react-components";
-import UploadButton from "modules/upload-button/upload-button";
+import { GVButton, GVTextField } from "gv-react-components";
 import moment from "moment";
+import { PROFILE_EDIT_ROUTE } from "pages/profile/profile.routes";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
+import { Link } from "react-router-dom";
 
 const ProfileField = ({ name, value, label, disabled = true }) => {
   return value || !disabled ? (
@@ -90,7 +90,7 @@ class Profile extends Component {
                   <ProfileField
                     value={
                       info.birthday &&
-                      moment(info.birthday).format("dd-mm-YYYY")
+                      moment(info.birthday).format("DD-MM-YYYY")
                     }
                     label={t("profile.birthday")}
                     name="birthday"
@@ -148,6 +148,15 @@ class Profile extends Component {
                     name="index"
                   />
                 </div>
+              </td>
+            </tr>
+            <tr>
+              <td />
+              <td />
+              <td>
+                <Link to={PROFILE_EDIT_ROUTE} className="profile__edit-link">
+                  <GVButton>{this.props.t("buttons.edit")}</GVButton>
+                </Link>
               </td>
             </tr>
           </tbody>

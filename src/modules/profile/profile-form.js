@@ -1,27 +1,29 @@
 import "./profile.scss";
 
-import classnames from "classnames";
 import Chip from "components/chip/chip";
+import FileLabel from "components/file-label/file-label";
+import GVDatePicker from "components/gv-datepicker/gv-datepicker";
 import { withFormik } from "formik";
-import { GVTextField } from "gv-react-components";
+import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import UploadButton from "modules/upload-button/upload-button";
 import moment from "moment";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 
-const ProfileField = ({ name, value, label, disabled }) => {
-  return value || !disabled ? (
-    <GVTextField name={name} value={value} label={label} disabled={disabled} />
-  ) : null;
-};
-
 class Profile extends Component {
   state = {
     file: null
   };
   handleLoad = file => {
-    this.setState({ file });
+    this.setState({ file }, () =>
+      this.props.setFieldValue("documentId", file.id)
+    );
+  };
+  handleDelete = () => {
+    this.setState({ file: null }, () => {
+      this.props.setFieldValue("documentId", "");
+    });
   };
   render() {
     const { t, info, handleSubmit } = this.props;
@@ -51,16 +53,16 @@ class Profile extends Component {
               </td>
               <td className="profile__center" />
               <td className="profile__right">
-                <ProfileField
+                <GVFormikField
                   label={t("profile.phone-number")}
-                  value={info.phone}
-                  name="phone"
+                  name="phoneNumber"
+                  component={GVTextField}
                 />
-                <ProfileField
+                <GVFormikField
                   label={t("profile.email")}
                   value={info.email}
-                  name="phone"
-                  disabled
+                  component={GVTextField}
+                  name="email"
                 />
               </td>
             </tr>
@@ -83,43 +85,51 @@ class Profile extends Component {
               <td className="profile__center" />
               <td className="profile__right">
                 <div>
-                  <ProfileField
-                    value={info.firstName}
+                  <GVFormikField
                     label={t("profile.forename")}
                     name="firstName"
+                    component={GVTextField}
                   />
-                  <ProfileField
-                    value={info.lastName}
+                  <GVFormikField
                     label={t("profile.family-name")}
                     name="lastName"
+                    component={GVTextField}
                   />
                 </div>
                 <div>
-                  <ProfileField
-                    value={
-                      info.birthday &&
-                      moment(info.birthday).format("dd-mm-YYYY")
-                    }
+                  <GVFormikField
                     label={t("profile.birthday")}
                     name="birthday"
+                    component={GVTextField}
+                    InputComponent={GVDatePicker}
+                    onChange={date => {
+                      this.props.setFieldValue("birthday", date);
+                    }}
                   />
-                  <ProfileField
-                    value={info.citizenship}
+                  <GVFormikField
                     label={t("profile.citizen")}
-                    name="citizen"
+                    name="citizenship"
+                    component={GVTextField}
                   />
                 </div>
+                {this.state.file && (
+                  <FileLabel
+                    className="profile__file"
+                    file={this.state.file}
+                    onClick={this.handleDelete}
+                  />
+                )}
                 <div>
-                  <div>
-                    {this.state.file && this.state.file.name.toUpperCase()}
-                  </div>
-                  {this.state.file && (
-                    <input
-                      type="hidden"
-                      name="documentId"
-                      value={this.state.file.id}
-                    />
-                  )}
+                  <GVFormikField
+                    name="documentId"
+                    component={props => (
+                      <input
+                        type="hidden"
+                        name={props.name}
+                        value={props.value}
+                      />
+                    )}
+                  />
                   <UploadButton onLoad={this.handleLoad} />
                 </div>
               </td>
@@ -140,31 +150,42 @@ class Profile extends Component {
               <td className="profile__center" />
               <td className="profile__right">
                 <div className="profile__row">
-                  <ProfileField
-                    value={info.country}
+                  <GVFormikField
                     label={t("profile.country")}
                     name="country"
+                    component={GVTextField}
                   />
-                  <ProfileField
-                    value={info.city}
+                  <GVFormikField
                     label={t("profile.city")}
                     name="city"
+                    component={GVTextField}
                   />
                 </div>
                 <div className="profile__row">
-                  <ProfileField
-                    value={info.address}
+                  <GVFormikField
                     label={t("profile.address")}
                     name="address"
+                    component={GVTextField}
                   />
                 </div>
                 <div className="profile__row">
-                  <ProfileField
-                    value={info.index}
+                  <GVFormikField
                     label={t("profile.index")}
                     name="index"
+                    component={GVTextField}
                   />
                 </div>
+              </td>
+            </tr>
+            <tr>
+              <td />
+              <td />
+              <td>
+                <span className="profile__edit-link">
+                  <GVButton type="submit">
+                    {this.props.t("buttons.save")}
+                  </GVButton>
+                </span>
               </td>
             </tr>
           </tbody>
@@ -200,8 +221,22 @@ Profile.propTypes = {
 
 const ProfileForm = withFormik({
   displayName: "profile-form",
-  handleSubmit: values => {
-    console.info(values);
+  mapPropsToValues: ({ info }) => ({
+    firstName: info.firstName,
+    phoneNumber: info.phone,
+    middleName: info.middleComments,
+    lastName: info.lastName,
+    birthday: moment(info.birthday).format(),
+    citizenship: info.citizenship,
+    gender: info.gender,
+    documentId: "",
+    country: info.country,
+    city: info.city,
+    address: info.address,
+    index: info.index
+  }),
+  handleSubmit: (values, { props }) => {
+    props.onSubmit(values);
   }
 })(Profile);
 

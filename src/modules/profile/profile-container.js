@@ -1,20 +1,38 @@
-import { GVButton } from "gv-react-components";
-import Profile from "modules/profile/profile";
-import ProfileForm from "modules/profile/profile-form";
-import { PROFILE_EDIT_ROUTE } from "pages/profile/edit/edit.page";
-import PropTypes from "prop-types";
+import pickBy from "lodash.pickby";
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { translate } from "react-i18next";
+import { connect } from "react-redux";
+import { compose } from "redux";
 import { profileApiProxy } from "services/api-client/profile-api";
 import authService from "services/auth-service";
+import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
 class ProfileContainer extends Component {
+  success = text => {
+    const { dispatch } = this.props;
+    dispatch(alertMessageActions.success(text));
+  };
+
   state = {
     data: null,
     isPending: false
   };
 
+  handleEdit = values => {
+    const model = pickBy(values, str => Boolean(str));
+    this.setState({ isPending: true });
+    profileApiProxy
+      .v10ProfilePersonalUpdatePost(authService.getAuthArg(), {
+        model
+      })
+      .then(() => {
+        this.setState({ isPending: false });
+        this.success(this.props.t("profile.success-edit"));
+      });
+  };
+
   componentDidMount() {
+    this.setState({ isPending: true });
     profileApiProxy
       .v10ProfileGet(authService.getAuthArg())
       .then(data => this.setState({ ...data }));
@@ -22,10 +40,18 @@ class ProfileContainer extends Component {
 
   render() {
     if (!this.state.data) return null;
-    return <Profile info={this.state.data} />;
+    const child = React.Children.only(this.props.children);
+    return (
+      <child.type
+        {...child.props}
+        info={this.state.data}
+        onSubmit={this.handleEdit}
+      />
+    );
   }
 }
 
-ProfileContainer.propTypes = {};
-
-export default ProfileContainer;
+export default compose(
+  connect(),
+  translate()
+)(ProfileContainer);

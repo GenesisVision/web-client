@@ -1,6 +1,14 @@
 @import "styles/_colors.scss";
 
 .profile {
+  &__edit-link {
+    display: inline-flex;
+    margin-top: 45px;
+  }
+
+  &__file {
+    margin-bottom: 15px;
+  }
   &__container {
     width: 100%;
     overflow: scroll;

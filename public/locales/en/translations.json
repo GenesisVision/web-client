@@ -152,7 +152,9 @@
     "activate": "Activate",
     "disable": "Disable",
     "create": "Create",
-    "delete": "Delete"
+    "delete": "Delete",
+    "edit": "Edit",
+    "save": "Save"
   },
   "navigation": {
     "dashboard": "Dashboard",
@@ -698,6 +700,7 @@
     "city": "City",
     "address": "Address",
     "index": "Index",
+    "success-edit": "Profile update is successful",
     "settings": {
       "profile-image": "Profile image",
       "image-requirements": "At least 300 x 300px PNG or JPG file.",
