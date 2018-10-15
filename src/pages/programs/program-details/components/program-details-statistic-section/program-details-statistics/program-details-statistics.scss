@@ -1,31 +1,34 @@
 @import "styles/_colors.scss";
 @import "styles/_breakpoint.scss";
+@import "styles/_sizes.scss";
 
 .program-details-statistics {
   box-sizing: border-box;
-  padding: 32px 22px 20px;
+  padding: 0 $padding-middle-mobile;
   width: 100%;
   color: $text-light-color;
   @include media-breakpoint-landscape-phone() {
-    padding: 40px 32px 32px;
+    padding: 0 $padding-middle;
   }
-
   &__heading {
-    margin-bottom: 20px;
-    font-size: 15px;
+    padding: $padding-middle-mobile 0;
+    font-size: $font-size-subtitle-mobile;
     letter-spacing: 0.2px;
+    font-weight: 600;
     @include media-breakpoint-landscape-phone() {
-      font-size: 17px;
-      font-weight: 600;
+      padding: $padding-middle 0;
+      font-size: $font-size-subtitle;
     }
   }
 
   &__subheading {
-    margin: 20px 0;
-    font-size: 13px;
+    font-size: $font-size-middle-mobile;
+    padding-bottom: $padding-small-mobile;
     letter-spacing: 0.2px;
+    font-weight: 600;
     @include media-breakpoint-landscape-phone() {
-      font-size: 15px;
+      padding-bottom: $padding-small;
+      font-size: $font-size-middle;
     }
   }
 
@@ -34,46 +37,64 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
+    align-items: flex-start;
+    align-content: stretch;
+    padding-bottom: $padding-middle-mobile;
+    @include media-breakpoint-landscape-phone(){
+      padding-bottom: $padding-middle;
+    }
+  }
+
+  &__vertical-info-block{
+    display: flex;
+    flex-direction: column;
   }
 
   &__item {
     display: flex;
     flex-direction: column;
-    margin-bottom: 26px;
-    min-width: 100px;
+    padding-right: $padding-small-mobile;
+    padding-bottom: $padding-large-mobile;
+    @include media-breakpoint-landscape-phone(){
+    }
   }
 
   &__period {
     width: 100%;
+    padding-bottom: $padding-middle-mobile;
+    @include media-breakpoint-landscape-phone(){
+      padding-bottom: $padding-middle;
+    }
   }
 
   &__label {
     color: $label-color;
-    font-size: 11px;
+    font-size: $font-size-middle-mobile;
     letter-spacing: 0.4px;
-    margin-bottom: 8px;
+    margin-bottom: $padding-small-mobile/2;
     font-weight: normal;
     @include media-breakpoint-landscape-phone() {
-      font-size: 13px;
-      margin-bottom: 10px;
+      font-size: $font-size-middle;
+      margin-bottom: $padding-small/2;
     }
   }
 
   &__value {
-    font-size: 16px;
+    font-size: $font-size-large-mobile;
     letter-spacing: 0.6px;
-    font-weight: normal;
-    @include media-breakpoint-landscape-phone() {
+    &--accent{
       font-weight: 600;
-      font-size: 18px;
+    }
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-large;
     }
   }
 
   &__item--secondary &__value {
-    font-size: 14px;
+    font-size: $font-size-middle-mobile;
     letter-spacing: 0.4px;
     @include media-breakpoint-landscape-phone() {
-      font-size: 14px;
+      font-size: $font-size-middle;
     }
   }
 }
