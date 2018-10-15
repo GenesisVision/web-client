@@ -13,8 +13,8 @@ const updateFavoriteLocal = (state, programId, isFavorite) => {
         if (program.id === programId) {
           return {
             ...program,
-            personalProgramDetails: {
-              ...program.personalProgramDetails,
+            personalDetails: {
+              ...program.personalDetails,
               isFavorite: isFavorite
             }
           };

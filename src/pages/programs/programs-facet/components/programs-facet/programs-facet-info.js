@@ -7,7 +7,6 @@ const ProgramsFacetInfo = ({ facet, goBack }) => {
       <GVButton variant="text" onClick={goBack}>
         &larr; Back
       </GVButton>
-      {facet.title}
     </div>
   );
 };

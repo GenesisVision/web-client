@@ -9,10 +9,7 @@ const EmailPendingPage = ({ t }) => {
   return (
     <div className="password-pending">
       <p className="password-pending__text">
-        {t("auth.email-pending.text-section-1")}
-      </p>
-      <p className="password-pending__text">
-        {t("auth.email-pending.text-section-2")}
+        {t("auth.password-restore.email-pending.text-section-1")}
       </p>
       <EmailPendingContainer />
     </div>

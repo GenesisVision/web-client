@@ -5,7 +5,8 @@ import Popover from "components/popover/popover";
 import { GVButton } from "gv-react-components";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
-import { MANAGER_DETAILS_ROUTE } from "pages/manager/manager.page";
+import AboutLevelsContainerComponent from "pages/app/components/about-levels/about-levels-container";
+import { composeManagerDetailsUrl } from "pages/manager/manager.page";
 import { PROGRAM_NOTIFICATIONS_ROUTE } from "pages/notifications/notifications.routes";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
@@ -13,15 +14,8 @@ import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import replaceParams from "utils/replace-params";
 
-import AboutLevelsContainerComponent from "../../../../../app/components/about-levels/about-levels-container";
 import ProgramDetailsFavorite from "./program-details-favorite";
 import ProgramDetailsNotification from "./program-details-notificaton";
-
-const composeManagerUrl = managerId => {
-  return replaceParams(MANAGER_DETAILS_ROUTE, {
-    ":managerId": managerId
-  });
-};
 
 export const composeProgramNotificationsUrl = url => {
   return replaceParams(PROGRAM_NOTIFICATIONS_ROUTE, {
@@ -44,7 +38,12 @@ class ProgramDetailsDescription extends PureComponent {
   handleOpenDropdown = event => this.setState({ anchor: event.currentTarget });
   handleCloseDropdown = () => this.setState({ anchor: null });
   handleOpenInvestmentPopup = () => {
-    this.setState({ isOpenInvestmentPopup: true });
+    const { isAuthenticated, redirectToLogin } = this.props;
+    if (isAuthenticated) {
+      this.setState({ isOpenInvestmentPopup: true });
+    } else {
+      redirectToLogin();
+    }
   };
 
   handleCloseInvestmentPopup = () => {
@@ -122,10 +121,10 @@ class ProgramDetailsDescription extends PureComponent {
           />
         </div>
         <div className="program-details-description__main">
-          <h1 className="program-details-description__heading">
+          <div className="program-details-description__heading">
             {programDescription.title}
-          </h1>
-          <Link to={composeManagerUrl(programDescription.manager.id)}>
+          </div>
+          <Link to={composeManagerDetailsUrl(programDescription.manager.url)}>
             <GVButton
               variant="text"
               className="program-details-description__author-btn"
@@ -135,12 +134,12 @@ class ProgramDetailsDescription extends PureComponent {
           </Link>
 
           <div className="program-details-description__info">
-            <h2 className="program-details-description__subheading">
+            <div className="program-details-description__subheading">
               {t("program-details-page.description.strategy")}
-            </h2>
-            <p className="program-details-description__text">
+            </div>
+            <div className="program-details-description__text">
               {programDescription.description}
-            </p>
+            </div>
             <div className="program-details-description__short-statistic">
               <div className="program-details-description__short-statistic-item">
                 <span className="program-details-description__short-statistic-subheading">
@@ -173,15 +172,18 @@ class ProgramDetailsDescription extends PureComponent {
                 />
               </div>
             </div>
-            <GVButton
-              className="program-details-description__invest-btn"
-              onClick={this.handleOpenInvestmentPopup}
-            >
-              {t("program-details-page.description.invest")}
-            </GVButton>
+            <div className="program-details-description__invest-button-container">
+              <GVButton
+                className="program-details-description__invest-btn"
+                onClick={this.handleOpenInvestmentPopup}
+              >
+                {t("program-details-page.description.invest")}
+              </GVButton>
+            </div>
 
             <ProgramDepositContainer
               open={isOpenInvestmentPopup}
+              type={"program"}
               id={programDescription.id}
               onClose={this.handleCloseInvestmentPopup}
             />

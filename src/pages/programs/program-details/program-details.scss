@@ -1,13 +1,13 @@
 @import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
+@import "styles/_sizes.scss";
 
-$padding: 20px;
-$title-size: 16px;
-$large-font-size: 14px;
-$middle-font-size: 13px;
-$small-font-size: 12px;
 .program-details {
   &__section {
-    margin-bottom: 32px;
+    margin-bottom: $padding-large-mobile;
+    @include media-breakpoint-landscape-phone() {
+      margin-top: $padding-large;
+    }
   }
 }
 
@@ -20,12 +20,12 @@ $small-font-size: 12px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: $padding;
+    padding: $padding-small;
   }
   &__title,
   &__subtitle,
   &__text {
-    padding: $padding/2 0;
+    padding: $padding-small/2 0;
   }
   &__title,
   &__subtitle,
@@ -36,26 +36,26 @@ $small-font-size: 12px;
     max-width: 165px;
   }
   &__title {
-    font-size: $title-size;
+    font-size: $font-size-title;
     color: $primary-color;
     font-weight: bold;
   }
   &__subtitle {
-    font-size: $large-font-size;
+    font-size: $font-size-large;
     opacity: 0.4;
   }
   &__balance {
     font-weight: bold;
   }
   &__text {
-    font-size: $middle-font-size;
+    font-size: $font-size-middle;
     opacity: 0.4;
     line-height: 1.54;
     letter-spacing: 0.3px;
   }
   &__about {
-    padding: $padding/2 0;
-    font-size: $small-font-size;
+    padding: $padding-small/2 0;
+    font-size: $font-size-small;
     font-weight: 600;
     line-height: 1.67;
     letter-spacing: 0.3px;

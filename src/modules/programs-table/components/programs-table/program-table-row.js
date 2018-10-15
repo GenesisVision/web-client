@@ -20,7 +20,12 @@ class ProgramTableRow extends Component {
   };
 
   render() {
-    const { program, isAuthenticated, toggleFavorite } = this.props;
+    const {
+      program,
+      isAuthenticated,
+      toggleFavorite,
+      redirectToLogin
+    } = this.props;
     const { isDetailed } = this.state;
     if (isDetailed)
       return (
@@ -29,6 +34,7 @@ class ProgramTableRow extends Component {
           onCollapseClick={this.closeProgramDetail}
           isAuthenticated={isAuthenticated}
           toggleFavorite={toggleFavorite}
+          redirectToLogin={redirectToLogin}
         />
       );
     return (

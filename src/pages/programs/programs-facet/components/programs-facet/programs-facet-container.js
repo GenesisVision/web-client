@@ -37,7 +37,7 @@ class ProgramsFacetContainer extends Component {
     return (
       <Fragment>
         <ProgramsFacetInfo facet={facetData.facet} goBack={goBack} />
-        <ProgramsContainer />
+        <ProgramsContainer title={facetData.facet.title} />
       </Fragment>
     );
   }
@@ -46,7 +46,7 @@ class ProgramsFacetContainer extends Component {
 const mapStateToProps = state => {
   const { data } = state.platformData;
   let facets = null;
-  if (data) facets = data.facets;
+  if (data) facets = data.programsFacets;
   return { facets };
 };
 

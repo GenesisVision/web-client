@@ -1,25 +1,22 @@
 import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
-import { FORGOT_PASSWORD_ROUTE } from "pages/auth/forgot-password/forgot-password.routes";
 import React from "react";
 import { translate } from "react-i18next";
-import { Link } from "react-router-dom";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
-
-import validationSchema from "./password-restore.validators";
+import { object, ref, string } from "yup";
 
 const RestorePassword = ({ t, isSubmitting, handleSubmit, error }) => {
   return (
     <form id="passwordRestoreForm" onSubmit={handleSubmit} noValidate>
       <GVFormikField
-        type="new-password"
+        type="password"
         name="password"
         label={t("auth.password-restore.new-password.password-field-text")}
         component={GVTextField}
       />
       <GVFormikField
-        type="new-password"
+        type="password"
         name="confirmPassword"
         label={t(
           "auth.password-restore.new-password.password-confirm-field-text"
@@ -28,11 +25,6 @@ const RestorePassword = ({ t, isSubmitting, handleSubmit, error }) => {
       />
       <FormError error={error} />
       <div className="password-restore__navigation">
-        <Link to={FORGOT_PASSWORD_ROUTE} className="password-restore__btn-back">
-          <GVButton variant="text" color="secondary">
-            &larr; {t("auth.password-restore.new-password.back-button-text")}
-          </GVButton>
-        </Link>
         <GVButton type="submit" id="passwordRestoreSubmit">
           {t("auth.password-restore.new-password.confirm-button-text")}
         </GVButton>
@@ -49,7 +41,20 @@ const withTranslationAndFormik = compose(
       password: "",
       confirmPassword: ""
     }),
-    validationSchema: validationSchema,
+    validationSchema: ({ t }) =>
+      object().shape({
+        password: string()
+          .min(6, t("auth.password-restore.validators.password-weak"))
+          .required(t("auth.password-restore.validators.password-required")),
+        confirmPassword: string()
+          .oneOf(
+            [ref("password")],
+            t("auth.password-restore.validators.password-dont-match")
+          )
+          .required(
+            t("auth.password-restore.validators.confirm-password-required")
+          )
+      }),
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }

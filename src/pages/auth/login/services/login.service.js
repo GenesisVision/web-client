@@ -15,7 +15,10 @@ import {
   storeTwoFactor
 } from "../actions/login.actions";
 
+export const CLIENT_WEB = "Web";
+
 export const login = (loginData, from, setSubmitting) => dispatch => {
+  loginData = { ...loginData, client: CLIENT_WEB };
   return dispatch(loginUser(loginData))
     .then(response => {
       authService.storeToken(response.value);
@@ -30,8 +33,7 @@ export const login = (loginData, from, setSubmitting) => dispatch => {
       ) {
         dispatch(
           storeTwoFactor({
-            email: loginData.email,
-            password: loginData.password,
+            ...loginData,
             from
           })
         );

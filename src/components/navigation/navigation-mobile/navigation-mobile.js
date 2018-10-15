@@ -1,5 +1,7 @@
+import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import { DashboardIcon } from "components/icon/dashboard-icon";
 import { DetailsIcon } from "components/icon/details-icon";
+import { FundsIcon } from "components/icon/funds-icon";
 import { LogoutIcon } from "components/icon/logout-icon";
 import { ProgramsIcon } from "components/icon/programs-icon";
 import { SearchIcon } from "components/icon/search-icon";
@@ -19,8 +21,6 @@ import { WALLET_PAGE_ROUTE } from "pages/wallet/wallet-page";
 import PropTypes from "prop-types";
 import React from "react";
 import { translate } from "react-i18next";
-import UserIcon from "shared/media/user-avatar.svg";
-import fileService from "shared/services/file-service";
 
 const NavigationMobile = ({
   t,
@@ -36,13 +36,12 @@ const NavigationMobile = ({
       <div className="navigation__mobile mobile">
         {isAuthenticated && (
           <div className="mobile__header">
-            <div className="mobile__avatar">
-              <img
-                alt={email}
-                className="profile-widget__image"
-                src={fileService.getFileUrl(avatar) || UserIcon}
-              />
-            </div>
+            <ProfileAvatar
+              url={avatar}
+              alt={email}
+              className="mobile__avatar"
+              imageClassName="profile-widget__image"
+            />
             <div className="mobile__email">{email}</div>
           </div>
         )}
@@ -56,7 +55,7 @@ const NavigationMobile = ({
           <NavigationItem icon={<ProgramsIcon primary />} href={PROGRAMS_ROUTE}>
             {t("navigation.programs")}
           </NavigationItem>
-          <NavigationItem icon={<ProgramsIcon primary />} href={FUNDS_ROUTE}>
+          <NavigationItem icon={<FundsIcon primary />} href={FUNDS_ROUTE}>
             {t("navigation.funds")}
           </NavigationItem>
           <NavigationItem

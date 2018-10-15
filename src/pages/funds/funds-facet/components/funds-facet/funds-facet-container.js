@@ -1,4 +1,4 @@
-import ProgramsContainer from "modules/programs-table/components/programs-table/programs-table-container";
+import FundsTableContainer from "modules/funds-table/components/funds-table/funds-table-container";
 import { getPrograms } from "modules/programs-table/services/programs-table.service";
 import NotFoundPage from "pages/not-found/not-found.routes";
 import React, { Component, Fragment } from "react";
@@ -37,7 +37,7 @@ class FundsFacetContainer extends Component {
     return (
       <Fragment>
         <FundsFacetNavigation facet={facetData.facet} goBack={goBack} />
-        <ProgramsContainer />
+        <FundsTableContainer title={facetData.facet.title} />
       </Fragment>
     );
   }
@@ -46,7 +46,7 @@ class FundsFacetContainer extends Component {
 const mapStateToProps = state => {
   const { data } = state.platformData;
   let facets = null;
-  if (data) facets = data.facets;
+  if (data) facets = data.fundsFacets;
   return { facets };
 };
 

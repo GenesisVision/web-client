@@ -33,11 +33,13 @@ const ProgramsTable = ({
   paging,
   updatePaging,
   toggleFavorite,
-  isAuthenticated
+  redirectToLogin,
+  isAuthenticated,
+  title
 }) => {
   return (
     <Table
-      title="All programs"
+      title={title}
       sorting={sorting}
       updateSorting={updateSorting}
       paging={paging}
@@ -79,6 +81,7 @@ const ProgramsTable = ({
           program={program}
           toggleFavorite={toggleFavorite}
           isAuthenticated={isAuthenticated}
+          redirectToLogin={redirectToLogin}
         />
       )}
       renderBodyCard={program => (

@@ -13,7 +13,6 @@ import fundsReducer from "../modules/funds-table/reducers/funds-table.reducers";
 import navigationReducer from "../modules/navigation/reducers/navigation-reducers";
 import programWithdrawReducer from "../modules/program-withdraw/reducer/program-withdraw.reducer";
 import programsReducer from "../modules/programs-table/reducers/programs-table.reducers";
-import emailConfirmReducer from "../pages/auth/email-confirm/reducers/email-confirm.reducers";
 import passwordRestoreReducer from "../pages/auth/forgot-password/reducers/password-restore-reducers";
 import loginReducer from "../pages/auth/login/reducers/login.reducers";
 import signUpReducer from "../pages/auth/signup/reducers/signup.reducers";
@@ -34,7 +33,6 @@ export default combineReducers({
   loginData: loginReducer,
   signUpData: signUpReducer,
   authData: authReducer,
-  emailConfirmData: emailConfirmReducer,
   passwordRestoreData: passwordRestoreReducer,
   alertMessages: alertMessagesReducer,
   profileHeader: headerReducer,

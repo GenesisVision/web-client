@@ -21,7 +21,7 @@ import {
   SORTING_FILTER_VALUE
 } from "../funds-table.constants";
 
-const DEFAULT_ITEMS_ON_PAGE = 10;
+const DEFAULT_ITEMS_ON_PAGE = 12;
 
 const sortableColums = FUNDS_TABLE_COLUMNS.filter(
   x => x.sortingName !== undefined
@@ -142,6 +142,9 @@ export const fundsChangeFilter = filter => (dispatch, getState) => {
     delete queryParams[filter.name];
   } else {
     queryParams[filter.name] = filter.value;
+  }
+  if (queryParams.page) {
+    delete queryParams.page;
   }
   const newUrl = routing.location.pathname + "?" + qs.stringify(queryParams);
   dispatch(push(newUrl));

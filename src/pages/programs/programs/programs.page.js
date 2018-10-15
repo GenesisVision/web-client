@@ -11,7 +11,7 @@ const ProgramsPage = ({ t }) => {
     <Page title={t("programs-page.title")}>
       <ProgramsTabsContainer />
       <FacetCardsContainer />
-      <ProgramsContainer />
+      <ProgramsContainer title={"All programs"} />
     </Page>
   );
 };

@@ -20,11 +20,12 @@ const FundsTable = ({
   paging,
   updatePaging,
   toggleFavorite,
-  isAuthenticated
+  isAuthenticated,
+  title
 }) => {
   return (
     <Table
-      title="All Funds"
+      title={title}
       sorting={sorting}
       updateSorting={updateSorting}
       paging={paging}
