@@ -1,9 +1,11 @@
 import "./asset.scss";
-import React, { Component } from "react";
+
 import classNames from "classnames";
+import { HEADER_CURRENCY_VALUES } from "modules/currency-select/currency-select.constants";
+import React, { Component } from "react";
 import NumberFormat from "react-number-format";
 import BTC from "shared/media/BTC.png";
-import { HEADER_CURRENCY_VALUES } from "modules/currency-select/currency-select.constants";
+
 export const ASSET_TYPE = {
   large: "large",
   middle: "middle",

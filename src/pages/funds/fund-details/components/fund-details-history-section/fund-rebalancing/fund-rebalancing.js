@@ -5,16 +5,17 @@ import DateRangeFilter from "modules/table/components/filtering/date-range-filte
 import { DATE_RANGE_FILTER_NAME } from "modules/table/components/filtering/date-range-filter/date-range-filter.constants";
 import TableModule from "modules/table/components/table-module";
 import { DEFAULT_PAGING } from "modules/table/reducers/table-paging.reducer";
+import moment from "moment";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
+
+import AssetContainer from "../../../../../../modules/funds-table/components/funds-table/asset/asset-container";
 import {
   FUND_REBALANCING_COLUMNS,
   FUND_REBALANCING_DEFAULT_FILTERS,
   FUND_REBALANCING_FILTERS
 } from "../../../fund-details.constants";
 import * as service from "../../../services/fund-details.service";
-import AssetContainer from "../../../../../../modules/funds-table/components/funds-table/asset/asset-container";
-import moment from "moment";
 
 class FundRebalancing extends Component {
   fetchFundRebalancing = filters => {

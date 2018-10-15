@@ -5,9 +5,9 @@ import { Route, Switch } from "react-router-dom";
 import { SLUG_URL_REGEXP } from "../../utils/constants";
 import replaceParams from "../../utils/replace-params";
 import PrivateRoute from "../private-route";
+import FundDetailsPage from "./fund-details/fund-details.page";
 import FundsFacetPage from "./funds-facet/funds-facet.page";
 import FundsPage from "./funds/funds.page";
-import FundDetailsPage from "./fund-details/fund-details.page";
 
 export const FUNDS_FAVORITES_TAB_NAME = "favorites";
 export const FUNDS_EXPLORE_TAB_NAME = "";

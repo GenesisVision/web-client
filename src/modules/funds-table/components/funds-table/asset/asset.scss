@@ -74,7 +74,8 @@ $asset-icon-size-mobile: $asset-icon-size/$divider-text;
     white-space: nowrap;
   }
 
-  &__currency-full, &__currency-short {
+  &__currency-full,
+  &__currency-short {
     padding-left: $padding-small-mobile/2;
   }
 
@@ -94,7 +95,8 @@ $asset-icon-size-mobile: $asset-icon-size/$divider-text;
     margin-bottom: $padding-small/2;
     border-radius: $border-radius-middle;
 
-    &__currency-full, &__currency-short {
+    &__currency-full,
+    &__currency-short {
       padding-left: $padding-small/2;
     }
 

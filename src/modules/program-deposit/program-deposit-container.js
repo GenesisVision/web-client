@@ -5,8 +5,8 @@ import {
 } from "modules/program-deposit/actions/program-deposit.actions";
 import ProgramDepositPopup from "modules/program-deposit/components/program-deposit-popup";
 import {
-  getDepositProgramInfoById,
   getDepositFundInfoById,
+  getDepositProgramInfoById,
   investServiceInvestById
 } from "modules/program-deposit/services/program-deposit.services";
 import PropTypes from "prop-types";

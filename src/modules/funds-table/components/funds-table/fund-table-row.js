@@ -1,6 +1,7 @@
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import Profitability from "components/profitability/profitability";
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
+import { GVButton } from "gv-react-components";
 import { TableCell, TableRow } from "modules/table/components";
 import React, { Component } from "react";
 import NumberFormat from "react-number-format";
@@ -13,7 +14,6 @@ import {
 import replaceParams from "../../../../utils/replace-params";
 import FavoriteIcon from "../../../favorite-asset/components/favorite-icon/favorite-icon";
 import AssetContainer from "./asset/asset-container";
-import { GVButton } from "gv-react-components";
 
 class FundsTableRow extends Component {
   constructor(props) {

@@ -1,7 +1,7 @@
 import { DEFAULT_PERIOD } from "components/chart/chart-period/chart-period.helpers";
 import {
-  FUND_DETAILS_ROUTE,
-  FUNDS_SLUG_URL_PARAM_NAME
+  FUNDS_SLUG_URL_PARAM_NAME,
+  FUND_DETAILS_ROUTE
 } from "pages/funds/funds.routes";
 import { fundsApiProxy } from "services/api-client/funds-api";
 import authService from "services/auth-service";
