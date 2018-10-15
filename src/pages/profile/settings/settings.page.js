@@ -16,7 +16,7 @@ export const SETTINGS_ROUTE = `${PROFILE_ROUTE}/settings`;
 
 const SettingsPage = ({ t }) => {
   return (
-    <Page title={t("settings.title")}>
+    <Page title={t("profile.settings.title")}>
       <h1>{t("profile.settings.title")}</h1>
       <div className="profile-settings__content">
         <TwoFactorAuthContainer />
@@ -28,7 +28,7 @@ const SettingsPage = ({ t }) => {
               color="secondary"
               className={"profile-settings__password"}
             >
-              {`${t("settings.change-password")} >`}
+              {`${t("profile.settings.change-password")} >`}
             </GVButton>
           </Link>
 
