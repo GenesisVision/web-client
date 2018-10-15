@@ -84,19 +84,23 @@ $facet-height: 280px;
   }
 
   &__logo-wrapper {
-    height: 50%;
+    height: 65%;
   }
 
   &__logo {
     width: 100%;
+    max-width: 315px;
+    max-height: 100%;
+    object-fit: cover;
   }
 
   &__info {
-    padding: $facet-padding/2;
-    @include media-breakpoint-landscape-phone() {
-      padding: $facet-padding;
+    padding: $facet-padding / 2 $facet-padding;
+    @include media-breakpoint-tablet() {
+      padding: $facet-padding * 3/4 $facet-padding;
     }
   }
+
   &__facet-container {
     height: 100%;
     display: flex;
@@ -119,9 +123,6 @@ $facet-height: 280px;
     letter-spacing: 0.2px;
     color: $primary-color;
     margin-top: $facet-padding/4;
-    @include media-breakpoint-landscape-phone() {
-      margin-top: $facet-padding/2;
-    }
     @include media-breakpoint-landscape-phone() {
       font-size: $__description-font-size;
     }
