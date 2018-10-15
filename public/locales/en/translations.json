@@ -111,12 +111,12 @@
         "news-updates": "Program news and updates",
         "end-of-period": "Notifications for the end of the period",
         "ProgramNewsAndUpdates": {
-          "disabled-alert": "Enabled program news and updates notifications",
-          "enabled-alert": "Disabled program news and updates notifications"
+          "enabled-alert": "Enabled program news and updates notifications",
+          "disabled-alert": "Disabled program news and updates notifications"
         },
         "ProgramEndOfPeriod": {
-          "disabled-alert": "Enabled the end of period notifications",
-          "enabled-alert": "Disabled the end of period notifications"
+          "enabled-alert": "Enabled the end of period notifications",
+          "disabled-alert": "Disabled the end of period notifications"
         }
       },
       "custom": {
