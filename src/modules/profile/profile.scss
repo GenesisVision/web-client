@@ -3,7 +3,7 @@
 .profile {
   &__edit-link {
     display: inline-flex;
-    margin: 45px 0;
+    margin-bottom: 45px;
   }
 
   &__file {
@@ -19,6 +19,26 @@
 
   &__center {
     width: 100px;
+  }
+
+  &__row {
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  &__phone {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+
+    .gv-btn {
+      padding: 0;
+    }
+  }
+
+  &__content &__right {
+    padding-bottom: 30px;
   }
 
   &__stick {

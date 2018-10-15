@@ -11,6 +11,7 @@ class ProfileContainer extends Component {
   success = text => {
     const { dispatch } = this.props;
     dispatch(alertMessageActions.success(text));
+    this.fetch();
   };
 
   state = {
@@ -31,7 +32,18 @@ class ProfileContainer extends Component {
       });
   };
 
+  handleVerify = () => {
+    this.success(this.props.t("profile.success-verify"));
+  };
+
   componentDidMount() {
+    this.setState({ isPending: true });
+    profileApiProxy
+      .v10ProfileGet(authService.getAuthArg())
+      .then(data => this.setState({ ...data }));
+  }
+
+  fetch() {
     this.setState({ isPending: true });
     profileApiProxy
       .v10ProfileGet(authService.getAuthArg())
@@ -46,6 +58,7 @@ class ProfileContainer extends Component {
         {...child.props}
         info={this.state.data}
         onSubmit={this.handleEdit}
+        onVerify={this.handleVerify}
       />
     );
   }

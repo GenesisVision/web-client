@@ -113,9 +113,7 @@ class Profile extends Component {
               </td>
             </tr>
             <tr className="profile__content">
-              <td className="profile__left">
-                <span className="profile__stick" />
-              </td>
+              <td className="profile__left" />
               <td className="profile__center" />
               <td className="profile__right">
                 {!info.country &&

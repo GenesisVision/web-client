@@ -194,7 +194,8 @@
     "create": "Create",
     "delete": "Delete",
     "edit": "Edit",
-    "save": "Save"
+    "save": "Save",
+    "verify": "Verify"
   },
   "navigation": {
     "dashboard": "Dashboard",
@@ -824,6 +825,17 @@
     "address": "Address",
     "index": "Index",
     "success-edit": "Profile update is successful",
+    "success-verify": "Phone number verification is successful",
+    "verification": {
+      "phone": {
+        "required": "Code is required",
+        "title": "Verify phone number",
+        "description": "We have sent you a verification code",
+        "number": "Phone number",
+        "code": "Verification code",
+        "resend": "Resend code"
+      }
+    },
     "settings": {
       "profile-image": "Profile image",
       "image-requirements": "At least 300 x 300px PNG or JPG file.",
