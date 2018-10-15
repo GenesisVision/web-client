@@ -121,9 +121,9 @@ class ProgramDetailsDescription extends PureComponent {
           />
         </div>
         <div className="program-details-description__main">
-          <h1 className="program-details-description__heading">
+          <div className="program-details-description__heading">
             {programDescription.title}
-          </h1>
+          </div>
           <Link to={composeManagerDetailsUrl(programDescription.manager.url)}>
             <GVButton
               variant="text"
@@ -172,12 +172,14 @@ class ProgramDetailsDescription extends PureComponent {
                 />
               </div>
             </div>
-            <GVButton
-              className="program-details-description__invest-btn"
-              onClick={this.handleOpenInvestmentPopup}
-            >
-              {t("program-details-page.description.invest")}
-            </GVButton>
+            <div className="program-details-description__invest-button-container">
+              <GVButton
+                className="program-details-description__invest-btn"
+                onClick={this.handleOpenInvestmentPopup}
+              >
+                {t("program-details-page.description.invest")}
+              </GVButton>
+            </div>
 
             <ProgramDepositContainer
               open={isOpenInvestmentPopup}

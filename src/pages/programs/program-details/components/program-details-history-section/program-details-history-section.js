@@ -46,19 +46,27 @@ class ProgramDetailsHistorySection extends PureComponent {
     return (
       <Surface className="program-details-history">
         <div className="program-details-history__header">
-          <h2>{t("program-details-page.history.heading")}</h2>
+          <div className="program-details-history__heading">
+            {t("program-details-page.history.heading")}
+          </div>
           {(isAuthenticated && (
-            <GVTabs value={tab} onChange={this.handleTabChange}>
-              <GVTab
-                value={"trades"}
-                label={t("program-details-page.history.tabs.trades")}
-              />
-              <GVTab
-                value={"events"}
-                label={t("program-details-page.history.tabs.events")}
-              />
-            </GVTabs>
-          )) || <h5>Trades</h5>}
+            <div className="program-details-history__tabs">
+              <GVTabs value={tab} onChange={this.handleTabChange}>
+                <GVTab
+                  value={"trades"}
+                  label={t("program-details-page.history.tabs.trades")}
+                />
+                <GVTab
+                  value={"events"}
+                  label={t("program-details-page.history.tabs.events")}
+                />
+              </GVTabs>
+            </div>
+          )) || (
+            <div className="program-details-history__subheading">
+              {t("program-details-page.history.tabs.trades")}
+            </div>
+          )}
         </div>
         <div>
           {tab === TRADES_TAB && (
