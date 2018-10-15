@@ -20,6 +20,8 @@ const mapDispatchToProps = dispatch => ({
   service: bindActionCreators({ goBack }, dispatch)
 });
 
+console.info(123);
+
 export default compose(
   translate(),
   connect(
