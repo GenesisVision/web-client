@@ -1,7 +1,7 @@
 import "./asset.scss";
 
 import classNames from "classnames";
-import { HEADER_CURRENCY_VALUES } from "modules/currency-select/currency-select.constants";
+import { CURRENCY_VALUES } from "modules/currency-select/currency-select.constants";
 import React, { Component } from "react";
 import NumberFormat from "react-number-format";
 import fileService from "shared/services/file-service";
@@ -40,7 +40,7 @@ class Asset extends Component {
             <div className="asset__currencies">
               {type === ASSET_TYPE.large && (
                 <div className="asset__currency-full">
-                  {HEADER_CURRENCY_VALUES[currency]}
+                  {CURRENCY_VALUES[currency]}
                 </div>
               )}
               {type !== ASSET_TYPE.short && (
