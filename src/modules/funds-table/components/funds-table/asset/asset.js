@@ -1,9 +1,10 @@
 import "./asset.scss";
-import React, { Component } from "react";
+
 import classNames from "classnames";
-import NumberFormat from "react-number-format";
-import BTC from "shared/media/BTC.png";
 import { HEADER_CURRENCY_VALUES } from "modules/currency-select/currency-select.constants";
+import React, { Component } from "react";
+import NumberFormat from "react-number-format";
+import fileService from "shared/services/file-service";
 export const ASSET_TYPE = {
   large: "large",
   middle: "middle",
@@ -12,7 +13,7 @@ export const ASSET_TYPE = {
 };
 class Asset extends Component {
   render() {
-    const { percent, currency, type, last } = this.props;
+    const { percent, currency, type, last, icon } = this.props;
     return (
       (type === ASSET_TYPE.text && (
         <div>
@@ -28,7 +29,11 @@ class Asset extends Component {
           })}
         >
           <div className="asset__icon">
-            <img src={BTC} alt="" className="asset__icon-img" />
+            <img
+              src={fileService.getFileUrl(icon)}
+              alt=""
+              className="asset__icon-img"
+            />
           </div>
           {currency && (
             <div className="asset__currencies">
