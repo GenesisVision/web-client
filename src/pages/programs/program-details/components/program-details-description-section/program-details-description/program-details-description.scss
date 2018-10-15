@@ -57,17 +57,18 @@
     font-size: $font-size-title-mobile;
     font-weight: 600;
     color: $text-light-color;
-    padding-bottom: $padding-very-large-mobile;
-    padding-top: $padding-middle-mobile;
+    padding-bottom: $padding-mini-mobile;
   }
 
   &__author-btn {
     padding: 0;
     font-size: 13px;
     letter-spacing: 0.19px;
+    font-weight: bold;
   }
 
   &__info {
+    padding-top: $padding-very-large-mobile;
   }
 
   &__invest-button-container {
@@ -95,6 +96,7 @@
     letter-spacing: 0.2px;
     text-align: left;
     color: $text-color;
+    padding-bottom: $padding-middle;
   }
 
   &__invest-btn {
@@ -176,8 +178,7 @@
     }
     &__heading {
       font-size: $font-size-title;
-      padding-bottom: $padding-very-large;
-      padding-top: $padding-middle;
+      padding-bottom: $padding-mini;
     }
     &__subheading {
       font-size: $font-size-large;
@@ -200,6 +201,9 @@
       font-size: $font-size-middle;
       width: $btn-width;
       height: $btn-height;
+    }
+    &__info {
+      padding-top: $padding-very-large;
     }
     &__short-statistic {
       &-item {

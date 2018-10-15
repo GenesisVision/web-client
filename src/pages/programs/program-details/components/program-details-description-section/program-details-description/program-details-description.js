@@ -134,12 +134,12 @@ class ProgramDetailsDescription extends PureComponent {
           </Link>
 
           <div className="program-details-description__info">
-            <h2 className="program-details-description__subheading">
+            <div className="program-details-description__subheading">
               {t("program-details-page.description.strategy")}
-            </h2>
-            <p className="program-details-description__text">
+            </div>
+            <div className="program-details-description__text">
               {programDescription.description}
-            </p>
+            </div>
             <div className="program-details-description__short-statistic">
               <div className="program-details-description__short-statistic-item">
                 <span className="program-details-description__short-statistic-subheading">
