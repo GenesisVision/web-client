@@ -8,6 +8,7 @@ import React from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
 
+import LogoutButtonContainer from "./logout-button/logout-button-container";
 import ProfileImageContainer from "./profile-image/profile-image-container";
 
 export const SETTINGS_ROUTE = `${PROFILE_ROUTE}/settings`;
@@ -15,13 +16,14 @@ export const SETTINGS_ROUTE = `${PROFILE_ROUTE}/settings`;
 const SettingsPage = ({ t }) => {
   return (
     <Page title={t("settings.title")}>
-      <h1>Settings</h1>
+      <h1>{t("profile.settings.title")}</h1>
       <div className="profile-settings__content">
         <TwoFactorAuthContainer />
         <ProfileImageContainer />
         <Link to={PASSWORD_ROUTE} className={"profile-settings__password"}>
           {`${t("settings.change-password")} >`}
         </Link>
+        <LogoutButtonContainer />
       </div>
     </Page>
   );

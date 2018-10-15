@@ -231,7 +231,8 @@
   },
   "settings": {
     "title": "Settings",
-    "change-password": "Change password"
+    "change-password": "Change password",
+    "logout-from-another-devices": "Logout from another devices"
   },
   "auth": {
     "text": "A Brief History Of Creation",
@@ -279,6 +280,9 @@
         "validation": {
           "recovery-is-required": "Recovery code is required."
         }
+      },
+      "logout-from-another-devices": {
+        "success-message": "Successful logout on another devices"
       }
     },
     "password-restore": {
@@ -808,6 +812,7 @@
   },
   "profile": {
     "settings": {
+      "title": "Settings",
       "profile-image": "Profile image",
       "image-requirements": "At least 300 x 300px PNG or JPG file.",
       "save-photo": "Save photo",
