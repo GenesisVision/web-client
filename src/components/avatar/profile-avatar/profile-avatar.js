@@ -1,13 +1,20 @@
 import "./profile-avatar.scss";
 
+import classnames from "classnames";
 import React from "react";
 import withUrl from "shared/decorators/with-url";
 import UserIcon from "shared/media/user-avatar.svg";
 
-let ProfileAvatar = ({ url, alt }) => {
+let ProfileAvatar = ({ url, alt, className }) => {
   return (
-    <div className="profile-avatar">
-      <img alt={alt} className="profile-avatar__image" src={url || UserIcon} />
+    <div className={classnames("profile-avatar", className)}>
+      <img
+        alt={alt}
+        className={classnames("profile-avatar__image", {
+          "profile-avatar__image--default": !url
+        })}
+        src={url || UserIcon}
+      />
     </div>
   );
 };

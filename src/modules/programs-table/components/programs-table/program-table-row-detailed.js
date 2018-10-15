@@ -21,7 +21,12 @@ class ProgramTableRowDetailed extends Component {
     isOpenInvestToProgramPopup: false
   };
   handleOpenInvest = () => {
-    this.setState({ isOpenInvestToProgramPopup: true });
+    const { isAuthenticated, redirectToLogin } = this.props;
+    if (isAuthenticated) {
+      this.setState({ isOpenInvestToProgramPopup: true });
+    } else {
+      redirectToLogin();
+    }
   };
   handleCloseInvest = () => {
     this.setState({ isOpenInvestToProgramPopup: false });
@@ -66,7 +71,9 @@ class ProgramTableRowDetailed extends Component {
                     </div>
                   </div>
                 </div>
-                <div className="program-detailed__strategy">Strategy</div>
+                <div className="program-detailed__strategy">
+                  {t("programs-page.programs-header.strategy")}
+                </div>
                 <div className="program-detailed__description">
                   {program.description}
                 </div>
@@ -164,20 +171,22 @@ class ProgramTableRowDetailed extends Component {
                   </div>
                 </div>
                 {isAuthenticated &&
-                  program.personalProgramDetails && (
+                  program.personalDetails && (
                     <div className="program-detailed__favorites-block">
                       <span style={{ float: "right" }}>
-                        Add to favorites{" "}
+                        {t("program-details-page.description.addToFavorites")}
                         <FavoriteIcon
-                          toggleSelected={toggleFavorite}
+                          onClick={toggleFavorite}
                           id={program.id}
-                          selected={program.personalProgramDetails.isFavorite}
+                          selected={program.personalDetails.isFavorite}
                         />
                       </span>
                     </div>
                   )}
                 <div className="program-detailed__bottom-block">
-                  <GVButton onClick={this.handleOpenInvest}>Invest</GVButton>
+                  <GVButton onClick={this.handleOpenInvest}>
+                    {t("program-actions.invest")}
+                  </GVButton>
                   <ProgramDepositContainer
                     id={program.id}
                     onClose={this.handleCloseInvest}
@@ -186,7 +195,7 @@ class ProgramTableRowDetailed extends Component {
                   <div className="program-detailed__details">
                     <Link to={programDetailsUrl}>
                       <GVButton variant="text" color="secondary">
-                        Details &#8250;
+                        {t("program-actions.details")} &#8250;
                       </GVButton>
                     </Link>
                   </div>

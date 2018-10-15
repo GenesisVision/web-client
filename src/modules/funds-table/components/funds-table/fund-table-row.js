@@ -1,8 +1,19 @@
+import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
+import Profitability from "components/profitability/profitability";
+import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
+import { GVButton } from "gv-react-components";
 import { TableCell, TableRow } from "modules/table/components";
 import React, { Component } from "react";
 import NumberFormat from "react-number-format";
+import { Link } from "react-router-dom";
 
+import {
+  FUNDS_SLUG_URL_PARAM_NAME,
+  FUND_DETAILS_ROUTE
+} from "../../../../pages/funds/funds.routes";
+import replaceParams from "../../../../utils/replace-params";
 import FavoriteIcon from "../../../favorite-asset/components/favorite-icon/favorite-icon";
+import AssetContainer from "./asset/asset-container";
 
 class FundsTableRow extends Component {
   constructor(props) {
@@ -14,32 +25,37 @@ class FundsTableRow extends Component {
 
   render() {
     const { fund, isAuthenticated, toggleFavorite } = this.props;
+    const fundDetailsUrl = replaceParams(FUND_DETAILS_ROUTE, {
+      [`:${FUNDS_SLUG_URL_PARAM_NAME}`]: fund.url
+    });
     return (
       <TableRow>
         <TableCell className="funds-table__cell--name">
           <div className="funds-table__cell--avatar-title">
-            <fundAvatar url={fund.logo} alt={fund.title} />
+            <AssetAvatar url={fund.logo} alt={fund.title} />
             <div className="funds-table__cell--title">
-              <div className="funds-table__cell--top">{fund.title}</div>
+              <Link to={fundDetailsUrl}>
+                <GVButton variant="text" color="secondary">
+                  {fund.title}
+                </GVButton>
+              </Link>
             </div>
           </div>
         </TableCell>
-        <TableCell className="funds-table__cell--balance">
+        <TableCell className="funds-table__cell">
           {fund.statistic.balanceGVT.amount} GVT
         </TableCell>
-        <TableCell className="funds-table__cell--currency">
-          {fund.currency}
+        <TableCell className="funds-table__cell">
+          <AssetContainer
+            assets={fund.topFundAssets}
+            type={"short"}
+            size={3}
+            length={fund.totalAssetsCount}
+          />
         </TableCell>
         <TableCell className="funds-table__cell--investors">
           {fund.statistic.investorsCount}
         </TableCell>
-        <TableCell className="funds-table__cell--available-to-invest">
-          {fund.availableInvestment}
-        </TableCell>
-        <TableCell className="funds-table__cell--trades">
-          {fund.statistic.tradesCount}
-        </TableCell>
-
         <TableCell className="funds-table__cell--drawdown">
           <NumberFormat
             value={fund.statistic.drawdownPercent}
@@ -49,23 +65,26 @@ class FundsTableRow extends Component {
           />
         </TableCell>
         <TableCell className="funds-table__cell--profit">
-          <NumberFormat
-            value={fund.statistic.profitPercent}
-            suffix="%"
-            decimalScale={2}
-            displayType="text"
-          />
+          <Profitability value={fund.statistic.profitPercent} prefix="sign">
+            <NumberFormat
+              value={fund.statistic.profitPercent}
+              suffix="%"
+              allowNegative={false}
+              decimalScale={2}
+              displayType="text"
+            />
+          </Profitability>
         </TableCell>
         <TableCell className="funds-table__cell--chart">
-          <fundSimpleChart data={fund.chart} />
+          <ProgramSimpleChart data={fund.chart} programId={fund.id} />
         </TableCell>
         {isAuthenticated &&
-          fund.personalfundDetails && (
+          fund.personalDetails && (
             <TableCell className="funds-table__cell--favorite">
               <FavoriteIcon
-                toggleSelected={toggleFavorite}
-                fundId={fund.id}
-                selected={fund.personalfundDetails.isFavorite}
+                id={fund.id}
+                selected={fund.personalDetails.isFavorite}
+                onClick={toggleFavorite}
               />
             </TableCell>
           )}

@@ -4,22 +4,22 @@ import {
   REQUEST_SUFFIX
 } from "shared/reducers/api-reducer/api-reducer";
 
-const updateFavoriteLocal = (state, programId, isFavorite) => {
+const updateFavoriteLocal = (state, id, isFavorite) => {
   return {
     ...state,
     data: {
       ...state.data,
-      programs: state.data.programs.map(program => {
-        if (program.id === programId) {
+      funds: state.data.funds.map(fund => {
+        if (fund.id === id) {
           return {
-            ...program,
-            personalProgramDetails: {
-              ...program.personalProgramDetails,
+            ...fund,
+            personalDetails: {
+              ...fund.personalDetails,
               isFavorite: isFavorite
             }
           };
         }
-        return program;
+        return fund;
       })
     }
   };
@@ -28,15 +28,11 @@ const updateFavoriteLocal = (state, programId, isFavorite) => {
 const favoritesReducer = (state, action) => {
   switch (action.type) {
     case `${SET_FAVORITE_FUND}_${REQUEST_SUFFIX}`:
-      return updateFavoriteLocal(
-        state,
-        action.meta.programId,
-        action.meta.isFavorite
-      );
+      return updateFavoriteLocal(state, action.meta.id, action.meta.isFavorite);
     case `${SET_FAVORITE_FUND}_${FAILURE_SUFFIX}`: {
       return updateFavoriteLocal(
         state,
-        action.meta.programId,
+        action.meta.id,
         !action.meta.isFavorite
       );
     }
