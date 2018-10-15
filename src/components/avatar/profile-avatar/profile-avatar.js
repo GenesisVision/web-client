@@ -2,22 +2,24 @@ import "./profile-avatar.scss";
 
 import classnames from "classnames";
 import React from "react";
-import withUrl from "shared/decorators/with-url";
 import UserIcon from "shared/media/user-avatar.svg";
 
-let ProfileAvatar = ({ url, alt, className }) => {
+import ImageBase from "../image-base";
+
+const ProfileAvatar = ({ url, alt, className, imageClassName }) => {
+  className = classnames("profile-avatar", className);
+  imageClassName = classnames("profile-avatar__image", imageClassName, {
+    "profile-avatar__image--default": !url
+  });
   return (
-    <div className={classnames("profile-avatar", className)}>
-      <img
-        alt={alt}
-        className={classnames("profile-avatar__image", {
-          "profile-avatar__image--default": !url
-        })}
-        src={url || UserIcon}
-      />
-    </div>
+    <ImageBase
+      url={url}
+      alt={alt}
+      defaultImage={UserIcon}
+      className={className}
+      imageClassName={imageClassName}
+    />
   );
 };
 
-ProfileAvatar = withUrl("url")(ProfileAvatar);
 export default ProfileAvatar;

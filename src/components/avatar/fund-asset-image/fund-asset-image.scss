@@ -1,0 +1,25 @@
+@import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
+@import "styles/_sizes.scss";
+
+$asset-icon-size: 20px;
+$asset-icon-size-mobile: $asset-icon-size/$divider-text;
+.fund-asset {
+  display: flex;
+  align-items: center;
+  width: $asset-icon-size-mobile;
+  height: $asset-icon-size-mobile;
+  @include media-breakpoint-landscape-phone() {
+    width: $asset-icon-size;
+    height: $asset-icon-size;
+  }
+
+  &__img {
+    width: $asset-icon-size-mobile;
+    height: $asset-icon-size-mobile;
+    @include media-breakpoint-landscape-phone() {
+      width: $asset-icon-size;
+      height: $asset-icon-size;
+    }
+  }
+}

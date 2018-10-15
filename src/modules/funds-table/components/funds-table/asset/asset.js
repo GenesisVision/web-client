@@ -1,10 +1,10 @@
 import "./asset.scss";
 
 import classNames from "classnames";
+import FundAssetImage from "components/avatar/fund-asset-image/fund-asset-image";
 import { CURRENCY_VALUES } from "modules/currency-select/currency-select.constants";
 import React, { Component } from "react";
 import NumberFormat from "react-number-format";
-import fileService from "shared/services/file-service";
 
 export const ASSET_TYPE = {
   large: "large",
@@ -29,13 +29,8 @@ class Asset extends Component {
             "asset--large": type === ASSET_TYPE.large
           })}
         >
-          <div className="asset__icon">
-            <img
-              src={fileService.getFileUrl(icon)}
-              alt=""
-              className="asset__icon-img"
-            />
-          </div>
+          <FundAssetImage url={icon} alt={currency} />
+
           {currency && (
             <div className="asset__currencies">
               {type === ASSET_TYPE.large && (
