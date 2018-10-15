@@ -280,9 +280,6 @@
         "validation": {
           "recovery-is-required": "Recovery code is required."
         }
-      },
-      "logout-from-another-devices": {
-        "success-message": "Successful logout on another devices"
       }
     },
     "password-restore": {
@@ -321,6 +318,9 @@
       "title": "Email confirm",
       "success-alert-message": "Email address successfully verified",
       "error-during-confirmation": "An error occurred during confirmation of email:"
+    },
+    "logout-from-another-devices": {
+      "success-message": "Successful logout on another devices."
     }
   },
   "wallet": {

@@ -1,6 +1,7 @@
 import "./settings.scss";
 
 import Page from "components/page/page";
+import { GVButton } from "gv-react-components";
 import TwoFactorAuthContainer from "modules/2fa/2fa-container";
 import { PASSWORD_ROUTE } from "pages/profile/password/password.page";
 import { PROFILE_ROUTE } from "pages/profile/profile/profile.page";
@@ -20,10 +21,19 @@ const SettingsPage = ({ t }) => {
       <div className="profile-settings__content">
         <TwoFactorAuthContainer />
         <ProfileImageContainer />
-        <Link to={PASSWORD_ROUTE} className={"profile-settings__password"}>
-          {`${t("settings.change-password")} >`}
-        </Link>
-        <LogoutButtonContainer />
+        <div className="profile-settings__aside-actions">
+          <Link to={PASSWORD_ROUTE}>
+            <GVButton
+              variant="text"
+              color="secondary"
+              className={"profile-settings__password"}
+            >
+              {`${t("settings.change-password")} >`}
+            </GVButton>
+          </Link>
+
+          <LogoutButtonContainer />
+        </div>
       </div>
     </Page>
   );

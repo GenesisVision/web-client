@@ -3,7 +3,8 @@ import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
-import authService from "services/auth-service";
+
+import * as profileSettingsService from "../services/profile-settings.service";
 
 class LogoutButtonContainer extends PureComponent {
   state = {
@@ -23,8 +24,9 @@ class LogoutButtonContainer extends PureComponent {
       <GVButton
         variant="text"
         onClick={this.handleSubmit}
+        color="secondary"
         disabled={this.state.isPending}
-        className="profile-settings-logout-devices"
+        className="profile-settings__logout-devices"
       >
         {this.props.t("settings.logout-from-another-devices")}
       </GVButton>
@@ -33,7 +35,7 @@ class LogoutButtonContainer extends PureComponent {
 }
 
 const mapDispatchToProps = dispatch => ({
-  services: bindActionCreators(authService, dispatch)
+  services: bindActionCreators(profileSettingsService, dispatch)
 });
 
 export default compose(

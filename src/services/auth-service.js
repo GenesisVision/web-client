@@ -1,6 +1,4 @@
 import * as jwt_decode from "jwt-decode";
-import { authApiProxy } from "services/api-client/auth-api";
-import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
 import { AUTH_TOKEN } from "../utils/constants";
 
@@ -55,24 +53,6 @@ const removeToken = () => {
   localStorage.removeItem(AUTH_TOKEN);
 };
 
-const logoutFromDevices = () => dispatch => {
-  authApiProxy
-    .v10AuthTokenDevicesLogoutPost(getAuthArg())
-    .then(response => {
-      dispatch(
-        alertMessageActions.success(
-          "auth.logout-from-another-devices.success-message",
-          true
-        )
-      );
-      return response;
-    })
-    .catch(error => {
-      dispatch(alertMessageActions.error(error.errorMessage || error.message));
-      return error;
-    });
-};
-
 const authService = {
   isAuthenticated,
   getAuthArg,
@@ -80,8 +60,7 @@ const authService = {
   getTokenData,
   storeToken,
   removeToken,
-  getUserName,
-  logoutFromDevices
+  getUserName
 };
 
 export default authService;
