@@ -12,10 +12,7 @@ const EmailPending = ({ t }) => {
         {t("auth.signup.email-confirm-title")}
       </h1>
       <p className="signup-email-pending__text">
-        {t("auth.email-pending.text-section-1")}
-      </p>
-      <p className="signup-email-pending__text">
-        {t("auth.email-pending.text-section-2")}
+        {t("auth.signup-email-pending.text-section")}
       </p>
       <SignupEmailPendingContainer />
     </div>

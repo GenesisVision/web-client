@@ -4,8 +4,7 @@ import React from "react";
 import { translate } from "react-i18next";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
-
-import validationSchema from "./password-restore.validators";
+import { object, ref, string } from "yup";
 
 const RestorePassword = ({ t, isSubmitting, handleSubmit, error }) => {
   return (
@@ -42,7 +41,20 @@ const withTranslationAndFormik = compose(
       password: "",
       confirmPassword: ""
     }),
-    validationSchema: validationSchema,
+    validationSchema: ({ t }) =>
+      object().shape({
+        password: string()
+          .min(6, t("auth.password-restore.validators.password-weak"))
+          .required(t("auth.password-restore.validators.password-required")),
+        confirmPassword: string()
+          .oneOf(
+            [ref("password")],
+            t("auth.password-restore.validators.password-dont-match")
+          )
+          .required(
+            t("auth.password-restore.validators.confirm-password-required")
+          )
+      }),
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
     }

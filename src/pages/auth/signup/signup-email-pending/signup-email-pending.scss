@@ -6,17 +6,14 @@
   flex: 1 0 70%;
   align-items: flex-start;
 
-  &__text {
-    line-height: 24px;
-  }
-
   &-pending {
-    &__resend-btn {
-      margin-top: 24px;
+    &__text {
+      line-height: 24px;
+      color: $text-color;
     }
 
-    &__navigation {
-      margin-top: auto;
+    &__resend-btn {
+      margin-top: 24px;
     }
   }
 }
