@@ -1,7 +1,7 @@
 import { fetchProfileHeaderInfo } from "modules/header/actions/header-actions";
 import {
-  fetchDepositProgramInfoById,
   fetchDepositFundInfoById,
+  fetchDepositProgramInfoById,
   investToProgramById
 } from "modules/program-deposit/actions/program-deposit.actions";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";

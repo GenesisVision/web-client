@@ -1,13 +1,22 @@
 @import "styles/_breakpoint.scss";
+@import "styles/_sizes.scss";
+
 .program-details-statistic-section {
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
-  min-width: 400px;
-  &__statistic {
-    margin-right: 30px;
-    display: flex;
+  &__statistic,
+  &__chart {
+    margin-top: $padding-large-mobile;
     @include media-breakpoint-landscape-phone() {
+      margin-top: $padding-large;
+    }
+  }
+  &__statistic {
+    display: flex;
+    width: 100%;
+    @include media-breakpoint-landscape-phone() {
+      margin-right: $padding-large-mobile;
       max-width: 300px;
     }
   }

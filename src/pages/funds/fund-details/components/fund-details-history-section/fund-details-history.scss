@@ -4,7 +4,7 @@
 
 .fund-details-history {
   padding-bottom: $padding-middle-mobile;
-  @include media-breakpoint-landscape-phone(){
+  @include media-breakpoint-landscape-phone() {
     padding-bottom: $padding-middle;
   }
 
@@ -35,7 +35,7 @@
   &__title {
     letter-spacing: 0.2px;
     font-size: $font-size-subtitle-mobile;
-    @include media-breakpoint-landscape-phone(){
+    @include media-breakpoint-landscape-phone() {
       font-size: $font-size-subtitle;
     }
   }

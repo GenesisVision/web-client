@@ -4,8 +4,8 @@ import Surface from "components/surface/surface";
 import { GVTab, GVTabs } from "gv-react-components";
 import React, { Component } from "react";
 
-import DashboardPrograms from "./dashboard-programs/dashboard-programs";
 import DashboardFunds from "./dashboard-funds/dashboard-funds";
+import DashboardPrograms from "./dashboard-programs/dashboard-programs";
 
 class DashboardAssets extends Component {
   state = {

@@ -5,6 +5,7 @@ import { HEADER_CURRENCY_VALUES } from "modules/currency-select/currency-select.
 import React, { Component } from "react";
 import NumberFormat from "react-number-format";
 import fileService from "shared/services/file-service";
+
 export const ASSET_TYPE = {
   large: "large",
   middle: "middle",

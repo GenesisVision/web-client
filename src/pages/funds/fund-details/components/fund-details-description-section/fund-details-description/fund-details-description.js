@@ -4,14 +4,15 @@ import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import { GVButton } from "gv-react-components";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
+import { FUND_NOTIFICATIONS_ROUTE } from "pages/notifications/notifications.routes";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import replaceParams from "utils/replace-params";
+
+import AssetContainer from "../../../../../../modules/funds-table/components/funds-table/asset/asset-container";
 import FundDetailsFavorite from "./fund-details-favorite";
 import FundDetailsNotification from "./fund-details-notificaton";
-import AssetContainer from "../../../../../../modules/funds-table/components/funds-table/asset/asset-container";
-import { FUND_NOTIFICATIONS_ROUTE } from "pages/notifications/notifications.routes";
 
 export const composeFundNotificationsUrl = url => {
   return replaceParams(FUND_NOTIFICATIONS_ROUTE, {

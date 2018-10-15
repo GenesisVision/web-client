@@ -1,29 +1,29 @@
 @import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
+@import "styles/_sizes.scss";
+
 .program-details-chart {
-  padding: 40px;
+  padding: 0 $padding-middle-mobile;
   flex: 1;
+
   &__heading {
-    margin: 0 0 30px;
-    font-size: 17px;
+    font-size: $font-size-subtitle-mobile;
     font-weight: 600;
     letter-spacing: 0.2px;
-  }
-  &__stat-item {
-    margin-top: 15px;
+    padding: $padding-middle-mobile 0;
   }
 
   &__profit {
     height: 300px;
     width: 100%;
-    margin-top: 40px;
   }
 
-  .program-details-tooltip {
+  .fund-details-tooltip {
     &__statistic {
-      margin: 10px 0;
     }
+
     &__title {
-      font-size: 14px;
+      font-size: $font-size-middle-mobile;
       font-weight: 600;
       letter-spacing: 0.4px;
       color: $text-accent-color;
@@ -33,10 +33,27 @@
     }
 
     &__value {
-      font-size: 13px;
+      font-size: $font-size-small-mobile;
       font-weight: 600;
       letter-spacing: 0.3px;
       color: $text-dark-color;
+    }
+  }
+  @include media-breakpoint-landscape-phone() {
+    padding: 0 $padding-middle;
+
+    &__heading {
+      font-size: $font-size-subtitle;
+      padding: $padding-middle 0;
+    }
+
+    .fund-details-tooltip {
+      &__title {
+        font-size: $font-size-middle;
+      }
+      &__value {
+        font-size: $font-size-small;
+      }
     }
   }
 }

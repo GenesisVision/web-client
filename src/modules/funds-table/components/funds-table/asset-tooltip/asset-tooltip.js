@@ -2,6 +2,7 @@ import "./asset-tooltip.scss";
 
 import React from "react";
 import { translate } from "react-i18next";
+
 import { HEADER_CURRENCY_VALUES } from "../../../../currency-select/currency-select.constants";
 
 const AssetTooltip = ({ t, currency }) => {

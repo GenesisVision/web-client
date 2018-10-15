@@ -1,6 +1,6 @@
+import FundNotificationPage from "pages/notifications/fund-settings/fund-settings.page";
 import NotificationsPage from "pages/notifications/general-settings/general-settings.page";
 import ProgramNotificationPage from "pages/notifications/program-settings/program-settings.page";
-import FundNotificationPage from "pages/notifications/fund-settings/fund-settings.page";
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
