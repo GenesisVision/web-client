@@ -32,7 +32,10 @@ class DateRangeFilter extends Component {
         value={this.props.value}
         updateFilter={this.props.onChange}
       >
-        <DateRangeFilterPopover values={this.props.values} />
+        <DateRangeFilterPopover
+          values={this.props.values}
+          startLabel={this.props.startLabel}
+        />
       </Filter>
     );
   }

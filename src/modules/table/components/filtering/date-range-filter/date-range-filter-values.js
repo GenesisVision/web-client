@@ -39,12 +39,13 @@ class DateRangeFilterValues extends Component {
   };
 
   render() {
-    const { t, type, dateStart, dateEnd } = this.props;
+    const { t, type, dateStart, dateEnd, startLabel } = this.props;
+    debugger;
     switch (type) {
       case DateRangeFilterTypes.all:
         return (
           <Fragment>
-            {this.renderFirstInput(t("filters.date-range.program-start"))}
+            {this.renderFirstInput(startLabel)}
             {this.renderSecondInput()}
           </Fragment>
         );

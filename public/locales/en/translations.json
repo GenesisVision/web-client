@@ -801,6 +801,11 @@
       "last-week": "Last week",
       "custom": "Custom",
       "program-start": "Program start",
+      "account-creation": "Account creation",
+      "fund-start-label": "GV Release",
+      "funds-table-start-label": "GV Release",
+      "programs-start-label": "GV Release",
+      "fund-rebalancing-start-label": "GV Release",
       "start": "Start",
       "end": "End",
       "today": "Today"
