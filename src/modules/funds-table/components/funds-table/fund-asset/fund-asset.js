@@ -1,4 +1,4 @@
-import "./asset.scss";
+import "./fund-asset.scss";
 
 import classNames from "classnames";
 import FundAssetImage from "components/avatar/fund-asset-image/fund-asset-image";
@@ -6,17 +6,17 @@ import { CURRENCY_VALUES } from "modules/currency-select/currency-select.constan
 import React, { Component } from "react";
 import NumberFormat from "react-number-format";
 
-export const ASSET_TYPE = {
+export const FUND_ASSET_TYPE = {
   large: "large",
   middle: "middle",
   short: "short",
   text: "text"
 };
-class Asset extends Component {
+class FundAsset extends Component {
   render() {
     const { percent, currency, type, last, icon } = this.props;
     return (
-      (type === ASSET_TYPE.text && (
+      (type === FUND_ASSET_TYPE.text && (
         <div>
           {currency}
           &nbsp;
@@ -25,25 +25,25 @@ class Asset extends Component {
         </div>
       )) || (
         <div
-          className={classNames("asset", {
-            "asset--large": type === ASSET_TYPE.large
+          className={classNames("fund-asset", {
+            "fund-asset--large": type === FUND_ASSET_TYPE.large
           })}
         >
           <FundAssetImage url={icon} alt={currency} />
 
           {currency && (
-            <div className="asset__currencies">
-              {type === ASSET_TYPE.large && (
-                <div className="asset__currency-full">
+            <div className="fund-asset__currencies">
+              {type === FUND_ASSET_TYPE.large && (
+                <div className="fund-asset__currency-full">
                   {CURRENCY_VALUES[currency]}
                 </div>
               )}
-              {type !== ASSET_TYPE.short && (
-                <div className="asset__currency-short">{currency}</div>
+              {type !== FUND_ASSET_TYPE.short && (
+                <div className="fund-asset__currency-short">{currency}</div>
               )}
             </div>
           )}
-          <div className="asset__percent">
+          <div className="fund-asset__percent">
             <NumberFormat value={percent} suffix="%" displayType="text" />
           </div>
         </div>
@@ -52,4 +52,4 @@ class Asset extends Component {
   }
 }
 
-export default Asset;
+export default FundAsset;

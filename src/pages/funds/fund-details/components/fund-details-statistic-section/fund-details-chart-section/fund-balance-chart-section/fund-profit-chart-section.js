@@ -34,7 +34,7 @@ const ProgramBalanceChartSection = ({
       <div className="fund-details-chart__profit">
         <FundBalanceChart
           balanceChart={balanceChart.balanceChart}
-          currency={balanceChart.programCurrency}
+          currency={"BTC"}
         />
       </div>
     </Fragment>

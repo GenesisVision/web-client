@@ -28,7 +28,7 @@ $chart-width: 160px;
 }
 
 .funds-table__cell {
-  & .assets {
+  & .fund-assets {
     flex-direction: row;
     flex-wrap: nowrap;
   }

@@ -5,10 +5,6 @@ const TooltipBody = ({ managersFunds, investorsFunds, profit }) => {
   return (
     <Fragment>
       <div className="fund-details-tooltip__statistic">
-        <div className="fund-details-tooltip__title">Profit</div>
-        <div className="fund-details-tooltip__value">{profit}</div>
-      </div>
-      <div className="fund-details-tooltip__statistic">
         <div className="fund-details-tooltip__title">Investors Funds</div>
         <div className="fund-details-tooltip__value">{investorsFunds}</div>
       </div>
