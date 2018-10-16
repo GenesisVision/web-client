@@ -13,10 +13,6 @@
     padding: $padding-middle-mobile 0;
   }
 
-  &__stat-item {
-    //font-size: ;
-  }
-
   &__profit {
     height: 300px;
     width: 100%;
@@ -24,13 +20,14 @@
 
   .fund-details-tooltip {
     &__statistic {
+      padding: 5px 0;
     }
 
     &__title {
       font-size: $font-size-middle-mobile;
-      font-weight: 600;
       letter-spacing: 0.4px;
-      color: $text-accent-color;
+      font-weight: 300;
+      color: $text-color;
       max-width: 10em;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -40,7 +37,7 @@
       font-size: $font-size-small-mobile;
       font-weight: 600;
       letter-spacing: 0.3px;
-      color: $text-dark-color;
+      color: $text-accent-color;
     }
   }
   @include media-breakpoint-landscape-phone() {
