@@ -11,6 +11,7 @@ import PropTypes from "prop-types";
 import React, { Fragment } from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
+import { formatValue } from "utils/formatter";
 
 class WalletWidget extends React.Component {
   state = {
@@ -66,19 +67,25 @@ class WalletWidget extends React.Component {
               <div className="wallet-details__title">
                 {t("wallet-widget.total-balance")}
               </div>
-              <div className="wallet-details__value">{`${totalBalanceGvt} GVT`}</div>
+              <div className="wallet-details__value">{`${formatValue(
+                totalBalanceGvt
+              )} GVT`}</div>
             </div>
             <div className="wallet-details__item">
               <div className="wallet-details__title">
                 {t("wallet-widget.invested-value")}
               </div>
-              <div className="wallet-details__value">{`${investedGvt} GVT`}</div>
+              <div className="wallet-details__value">{`${formatValue(
+                investedGvt
+              )} GVT`}</div>
             </div>
             <div className="wallet-details__item">
               <div className="wallet-details__title">
                 {t("wallet-widget.available")}
               </div>
-              <div className="wallet-details__value">{`${availableGvt} GVT`}</div>
+              <div className="wallet-details__value">{`${formatValue(
+                availableGvt
+              )} GVT`}</div>
             </div>
             <div className="wallet-details__item">
               <div className="wallet-details__value">

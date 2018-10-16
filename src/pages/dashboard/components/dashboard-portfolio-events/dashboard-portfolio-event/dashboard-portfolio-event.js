@@ -6,6 +6,7 @@ import * as moment from "moment";
 import PropTypes from "prop-types";
 import React from "react";
 import NumberFormat from "react-number-format";
+import { formatValue } from "utils/formatter";
 
 import PortfolioEventLogo, {
   logoTypes
@@ -45,7 +46,7 @@ const DashboardPortfolioEvent = ({ event }) => {
         <span className="portfolio-event__value">
           <Profitability value={event.value}>
             <NumberFormat
-              value={Math.abs(event.value)}
+              value={formatValue(Math.abs(event.value))}
               decimalScale={8}
               displayType="text"
               suffix=" GVT"

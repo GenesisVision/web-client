@@ -12,6 +12,7 @@ import React, { Component } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
+import { formatValue } from "utils/formatter";
 import replaceParams from "utils/replace-params";
 
 import ProgramBigChart from "../program-big-chart/program-big-chart";
@@ -91,7 +92,7 @@ class ProgramTableRowDetailed extends Component {
                       {t("programs-page.programs-header.balance")}
                     </div>
                     <div className="program-detailed__statistic-data--value">
-                      {program.statistic.balanceGVT.amount}
+                      {formatValue(program.statistic.balanceGVT.amount)} GVT
                     </div>
                   </div>
                   <div>
@@ -115,7 +116,7 @@ class ProgramTableRowDetailed extends Component {
                       {t("programs-page.programs-header.available-to-invest")}
                     </div>
                     <div className="program-detailed__statistic-data--value">
-                      {program.availableInvestment}
+                      {formatValue(program.availableInvestment)} GVT
                     </div>
                   </div>
                   <div>

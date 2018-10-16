@@ -12,6 +12,7 @@ import {
   convertFromCurrency,
   convertToCurrency
 } from "utils/currency-converter";
+import { formatValue } from "utils/formatter";
 import { number, object, string } from "yup";
 
 const WalletWithdrawForm = ({
@@ -104,7 +105,7 @@ const WalletWithdrawForm = ({
             </span>
             <span className="dialog-list__value">
               <NumberFormat
-                value={willGet}
+                value={formatValue(willGet)}
                 suffix={` ${currency}`}
                 decimalScale={8}
                 displayType="text"
@@ -117,7 +118,7 @@ const WalletWithdrawForm = ({
             </span>
             <span className="dialog-list__value">
               <NumberFormat
-                value={commission}
+                value={formatValue(commission)}
                 suffix={` ${currency}`}
                 decimalScale={8}
                 displayType="text"
@@ -130,7 +131,7 @@ const WalletWithdrawForm = ({
             </span>
             <span className="dialog-list__value">
               <NumberFormat
-                value={withdrawing}
+                value={formatValue(withdrawing)}
                 suffix={` GVT`}
                 decimalScale={8}
                 displayType="text"

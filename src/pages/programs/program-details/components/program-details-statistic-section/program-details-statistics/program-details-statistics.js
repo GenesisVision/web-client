@@ -7,6 +7,7 @@ import moment from "moment";
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { formatValue } from "utils/formatter";
 
 const ProgramDetailsStatistics = ({ t, statisticData, period }) => {
   const { data: statistic, isPending } = statisticData;
@@ -27,7 +28,7 @@ const ProgramDetailsStatistics = ({ t, statisticData, period }) => {
           </span>
           <span className="program-details-statistics__value">
             <NumberFormat
-              value={statistic.balance}
+              value={formatValue(statistic.balance)}
               thousandSeparator={" "}
               displayType="text"
               suffix={" GVT"}

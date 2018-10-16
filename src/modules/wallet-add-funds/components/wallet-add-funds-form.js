@@ -10,6 +10,7 @@ import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import { convertToCurrency } from "utils/currency-converter";
+import { formatValue } from "utils/formatter";
 
 const WalletAddFundsForm = ({
   t,
@@ -68,7 +69,7 @@ const WalletAddFundsForm = ({
           <div className="gv-text-field wallet-add-funds-popup__will-get">
             <div className="gv-text-field__input dialog-field__value">
               <NumberFormat
-                value={convertToCurrency(values.amount, rateToGVT)}
+                value={formatValue(convertToCurrency(values.amount, rateToGVT))}
                 suffix=" GVT"
                 decimalScale={8}
                 displayType="text"

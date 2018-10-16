@@ -10,6 +10,7 @@ import moment from "moment";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { formatValue } from "utils/formatter";
 
 import BaseProfitability from "../../../../../../components/profitability/base-profitability";
 import {
@@ -28,18 +29,6 @@ class ProgramTrades extends Component {
       .then(({ data }) => {
         return { items: data.trades, total: data.total };
       });
-  };
-
-  parseNumber = number => {
-    if (number === 0) return 0;
-    const dig =
-      Math.abs(number.toString().split("e")[1]) +
-        Math.abs(number.toString().split("e")[0].length) || 8;
-    return (
-      Math.abs(number)
-        .toFixed(dig)
-        .replace(/0*$/, "") || 0
-    );
   };
 
   render() {
@@ -92,7 +81,7 @@ class ProgramTrades extends Component {
             </TableCell>
             <TableCell className="program-details-trades__cell program-details-trades__cell--volume">
               <NumberFormat
-                value={trade.volume}
+                value={formatValue(trade.volume)}
                 decimalScale={8}
                 displayType="text"
                 thousandSeparator=" "
@@ -100,7 +89,7 @@ class ProgramTrades extends Component {
             </TableCell>
             <TableCell className="program-details-trades__cell program-details-trades__cell--price">
               <NumberFormat
-                value={trade.price}
+                value={formatValue(trade.price)}
                 decimalScale={8}
                 displayType="text"
                 thousandSeparator=" "
@@ -109,7 +98,7 @@ class ProgramTrades extends Component {
             <TableCell className="program-details-trades__cell program-details-trades__cell--profit">
               <Profitability value={trade.profit} prefix="sign">
                 <NumberFormat
-                  value={this.parseNumber(trade.profit)}
+                  value={formatValue(Math.abs(trade.profit))}
                   displayType="text"
                 />
               </Profitability>

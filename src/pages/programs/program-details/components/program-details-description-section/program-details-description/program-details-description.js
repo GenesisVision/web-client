@@ -12,6 +12,7 @@ import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
+import { formatValue } from "utils/formatter";
 import replaceParams from "utils/replace-params";
 
 import ProgramDetailsFavorite from "./program-details-favorite";
@@ -146,7 +147,7 @@ class ProgramDetailsDescription extends PureComponent {
                   {t("program-details-page.description.avToInvest")}
                 </span>
                 <NumberFormat
-                  value={programDescription.availableInvestment}
+                  value={formatValue(programDescription.availableInvestment)}
                   displayType="text"
                   suffix={` ${programDescription.currency}`}
                 />

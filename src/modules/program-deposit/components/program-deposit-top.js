@@ -1,5 +1,6 @@
 import React from "react";
 import { translate } from "react-i18next";
+import { formatValue } from "utils/formatter";
 
 const ProgramDepositTop = ({ info, t, type }) => {
   return (
@@ -14,13 +15,17 @@ const ProgramDepositTop = ({ info, t, type }) => {
           {type === "program" &&
             t("deposit-program.available-to-invest-in-program")}
         </div>
-        <div className="dialog-field__value">{info.availableToInvest} GVT</div>
+        <div className="dialog-field__value">
+          {formatValue(info.availableToInvest)} GVT
+        </div>
       </div>
       <div className="dialog-field">
         <div className="dialog-field__description">
           {t("deposit-program.available-in-wallet")}
         </div>
-        <div className="dialog-field__value">{info.availableInWallet} GVT</div>
+        <div className="dialog-field__value">
+          {formatValue(info.availableInWallet)} GVT
+        </div>
       </div>
     </div>
   );
