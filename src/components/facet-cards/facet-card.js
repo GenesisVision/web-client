@@ -32,7 +32,7 @@ export const facetShape = PropTypes.shape({
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  logo: PropTypes.string.isRequired
+  logo: PropTypes.string
 });
 
 FacetCard.propTypes = {

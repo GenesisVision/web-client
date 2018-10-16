@@ -1,19 +1,19 @@
-import "./asset.scss";
+import "./fund-asset.scss";
 
 import classNames from "classnames";
 import Tooltip from "components/tooltip/tooltip";
 import React, { Component } from "react";
 
-import AssetTooltip from "../asset-tooltip/asset-tooltip";
-import Asset, { ASSET_TYPE } from "./asset";
+import FundAssetTooltip from "../fund-asset-tooltip/fund-asset-tooltip";
+import FundAsset, { FUND_ASSET_TYPE } from "./fund-asset";
 
-class AssetContainer extends Component {
+class FundAssetContainer extends Component {
   render() {
     const { assets, type, size, length } = this.props;
     return (
       <div
-        className={classNames("assets", {
-          "assets--text": type === ASSET_TYPE.text
+        className={classNames("fund-assets", {
+          "fund-assets--text": type === FUND_ASSET_TYPE.text
         })}
       >
         {assets.map(
@@ -21,10 +21,10 @@ class AssetContainer extends Component {
             idx < size && (
               <Tooltip
                 key={idx}
-                render={() => <AssetTooltip currency={asset.asset} />}
+                render={() => <FundAssetTooltip currency={asset.asset} />}
               >
                 <div>
-                  <Asset
+                  <FundAsset
                     icon={asset.icon}
                     percent={asset.percent}
                     currency={asset.asset}
@@ -36,11 +36,11 @@ class AssetContainer extends Component {
             )
         )}
         {size < (length || assets.length) &&
-          ((type === ASSET_TYPE.text && (
+          ((type === FUND_ASSET_TYPE.text && (
             <div>... +{assets.length - size}</div>
           )) || (
-            <div className="asset__container">
-              <div className="asset asset--others-count">
+            <div className="fund-asset__container">
+              <div className="fund-asset fund-asset--others-count">
                 +{(length || assets.length) - size}
               </div>{" "}
             </div>
@@ -50,4 +50,4 @@ class AssetContainer extends Component {
   }
 }
 
-export default AssetContainer;
+export default FundAssetContainer;

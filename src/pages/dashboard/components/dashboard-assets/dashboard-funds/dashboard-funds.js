@@ -16,7 +16,7 @@ import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 
-import AssetContainer from "../../../../../modules/funds-table/components/funds-table/asset/asset-container";
+import FundAssetContainer from "../../../../../modules/funds-table/components/funds-table/fund-asset/fund-asset-container";
 import replaceParams from "../../../../../utils/replace-params";
 import {
   FUNDS_SLUG_URL_PARAM_NAME,
@@ -79,7 +79,7 @@ class DashboardFunds extends Component {
               {fund.statistic.balanceGVT.amount} GVT
             </TableCell>
             <TableCell className="funds-table__cell">
-              <AssetContainer
+              <FundAssetContainer
                 assets={fund.topFundAssets}
                 type={"short"}
                 size={3}
