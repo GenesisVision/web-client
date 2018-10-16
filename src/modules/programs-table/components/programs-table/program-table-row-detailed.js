@@ -188,6 +188,7 @@ class ProgramTableRowDetailed extends Component {
                     {t("program-actions.invest")}
                   </GVButton>
                   <ProgramDepositContainer
+                    type="program"
                     id={program.id}
                     onClose={this.handleCloseInvest}
                     open={this.state.isOpenInvestToProgramPopup}

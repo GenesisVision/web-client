@@ -13,7 +13,7 @@ import {
 } from "../../../../pages/funds/funds.routes";
 import replaceParams from "../../../../utils/replace-params";
 import FavoriteIcon from "../../../favorite-asset/components/favorite-icon/favorite-icon";
-import AssetContainer from "./asset/asset-container";
+import FundAssetContainer from "./fund-asset/fund-asset-container";
 
 class FundsTableRow extends Component {
   constructor(props) {
@@ -46,7 +46,7 @@ class FundsTableRow extends Component {
           {fund.statistic.balanceGVT.amount} GVT
         </TableCell>
         <TableCell className="funds-table__cell">
-          <AssetContainer
+          <FundAssetContainer
             assets={fund.topFundAssets}
             type={"short"}
             size={3}

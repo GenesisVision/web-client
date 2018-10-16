@@ -6,7 +6,6 @@ import moment from "moment";
 import React, { PureComponent } from "react";
 import {
   Area,
-  Bar,
   CartesianGrid,
   ComposedChart,
   ResponsiveContainer,
@@ -19,26 +18,17 @@ import FundProfitTooltip from "./fund-profit-tooltip";
 
 class FundProfitChart extends PureComponent {
   render() {
-    const { equityChart, pnlChart, currency } = this.props;
-    if (
-      !equityChart ||
-      !pnlChart ||
-      equityChart.length === 0 ||
-      pnlChart.length === 0
-    )
-      return null;
+    const { equityChart } = this.props;
+    if (!equityChart || equityChart.length === 0) return null;
     const equity = equityChart.map(x => ({
       date: x.date.getTime(),
       value: x.value
     }));
-    const pnl = pnlChart.map(x => ({
-      date: x.date.getTime(),
-      value: x.value
-    }));
+
     const off = gradientOffset(equity.map(x => x.value));
     return (
       <ResponsiveContainer>
-        <ComposedChart data={pnl}>
+        <ComposedChart data={equity}>
           <defs>
             <ProgramChartGradient
               offset={off}
@@ -67,38 +57,16 @@ class FundProfitChart extends PureComponent {
             axisLine={false}
           />
           <YAxis
-            yAxisId="left"
             dataKey="value"
-            data={equity}
-            orientation="left"
             axisLine={false}
             tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
             tickFormatter={x => x.toFixed(2)}
             unit="%"
             width={50}
           />
-          <YAxis
-            yAxisId="right"
-            dataKey="value"
-            data={pnl}
-            orientation="right"
-            axisLine={false}
-            tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
-            unit={currency}
-            tickFormatter={x => x.toFixed(4)}
-            width={80}
-          />
+
           <Tooltip content={FundProfitTooltip} />
           <CartesianGrid vertical={false} strokeWidth={0.1} />
-          <Bar
-            dataKey="value"
-            data={pnl}
-            unit={` ${currency}`}
-            barSize={6}
-            fill={GVColors.$labelColor}
-            stroke={GVColors.$labelColor}
-            yAxisId="right"
-          />
           <Area
             dataKey="value"
             type="monotone"
@@ -108,7 +76,6 @@ class FundProfitChart extends PureComponent {
             fill={`url(#equityProgramChartFill)`}
             strokeWidth={3}
             dot={false}
-            yAxisId="left"
             unit=" %"
           />
         </ComposedChart>

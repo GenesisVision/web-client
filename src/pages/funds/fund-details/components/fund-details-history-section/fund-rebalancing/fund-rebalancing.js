@@ -9,7 +9,7 @@ import moment from "moment";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 
-import AssetContainer from "../../../../../../modules/funds-table/components/funds-table/asset/asset-container";
+import FundAssetContainer from "../../../../../../modules/funds-table/components/funds-table/fund-asset/fund-asset-container";
 import {
   FUND_REBALANCING_COLUMNS,
   FUND_REBALANCING_DEFAULT_FILTERS,
@@ -70,7 +70,11 @@ class FundRebalancing extends Component {
               {rebalance.to && moment(rebalance.to).format("D MMM YYYY")}
             </TableCell>
             <TableCell className="fund-details-rebalancing__cell fund-details-rebalancing__cell--direction">
-              <AssetContainer type={"text"} assets={rebalance.parts} size={5} />
+              <FundAssetContainer
+                type={"text"}
+                assets={rebalance.parts}
+                size={5}
+              />
             </TableCell>
           </TableRow>
         )}
