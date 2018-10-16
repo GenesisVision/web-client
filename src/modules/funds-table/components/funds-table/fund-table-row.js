@@ -6,6 +6,7 @@ import { TableCell, TableRow } from "modules/table/components";
 import React, { Component } from "react";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
+import { formatValue } from "utils/formatter";
 
 import {
   FUNDS_SLUG_URL_PARAM_NAME,
@@ -43,7 +44,7 @@ class FundsTableRow extends Component {
           </div>
         </TableCell>
         <TableCell className="funds-table__cell">
-          {fund.statistic.balanceGVT.amount} GVT
+          {formatValue(fund.statistic.balanceGVT.amount)} GVT
         </TableCell>
         <TableCell className="funds-table__cell">
           <FundAssetContainer
