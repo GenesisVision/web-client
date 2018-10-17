@@ -46,6 +46,7 @@ const DasboardPortfolioTooltip = ({ active, label, payload, date }) => {
   if (!active) return null;
 
   let data = payload[0];
+  if (!data) return null;
   if (data.name === "balance" && payload.length === 1) {
     return (
       <ChartTooltip

@@ -12,18 +12,9 @@ export const fetchPortfolioChart = (data, filters) => {
   };
 };
 
-export const fetchFunds = data => {
-  return {
-    type: DASHBOARD_FUNDS,
-    payload: 1 /* SwaggerInvestorApi.apiInvestorDashboardGet(
-      data
-    ) */
-  };
-};
-
-export const fetchPortfolioEvents = data => {
+export const fetchPortfolioEvents = (data, filters) => {
   return {
     type: DASHBOARD_PORTFOLIO_EVENTS,
-    payload: investorApi.v10InvestorPortfolioEventsGet(data)
+    payload: investorApi.v10InvestorPortfolioEventsGet(data, filters)
   };
 };
