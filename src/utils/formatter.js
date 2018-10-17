@@ -56,7 +56,13 @@ const decreaseAccuracy = (x, roundType) => {
   return result;
 };
 
-const formatValue = (x, roundType = roundTypeEnum.FLOOR) => {
+const removeSign = x => {
+  if (x >= 0) return x;
+
+  return x.split("").slice(1);
+};
+
+const formatValue = (x, roundType = roundTypeEnum.FLOOR, isShowSign = true) => {
   if (!x) return x;
 
   const decimal = getDecimal(x)
@@ -81,6 +87,11 @@ const formatValue = (x, roundType = roundTypeEnum.FLOOR) => {
   if (x < 1 && x > -1 && fmnp <= 8) {
     result = roundTypeHandler(x, 8, roundType);
   }
+
+  if (!isShowSign) {
+    result = removeSign(result);
+  }
+
   return result;
 };
 

@@ -13,7 +13,7 @@ import moment from "moment";
 import React, { Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { formatValue } from "utils/formatter";
+import { formatValue, roundTypeEnum } from "utils/formatter";
 
 import { fetchWalletTransactions } from "../../services/wallet.services";
 import {
@@ -79,11 +79,7 @@ const WalletTransactions = ({ t }) => (
           </TableCell>
           <TableCell className="wallet-transactions__cell wallet-transactions__cell--amount">
             <Profitability value={transaction.amount}>
-              <NumberFormat
-                value={formatValue(Math.abs(transaction.amount))}
-                decimalScale={2}
-                displayType="text"
-              />
+              {formatValue(transaction.amount, roundTypeEnum.FLOOR, false)}
               {" " + transaction.sourceCurrency}
             </Profitability>
           </TableCell>
