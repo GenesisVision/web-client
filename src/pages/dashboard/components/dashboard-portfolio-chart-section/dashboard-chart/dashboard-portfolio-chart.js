@@ -15,7 +15,7 @@ import {
   YAxis
 } from "recharts";
 
-import { BAR_COLORS } from "../dashboard-chart.constants";
+import { BAR_COLORS } from "./dashboard-chart.constants";
 import DasboardPortfolioTooltip from "./dashboard-portfoio-tooltip";
 
 class DashboardPortfolioChart extends PureComponent {

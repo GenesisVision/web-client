@@ -3,7 +3,7 @@ import Profitability from "components/profitability/profitability";
 import React from "react";
 import NumberFormat from "react-number-format";
 
-import { BAR_COLORS } from "../dashboard-chart.constants";
+import { BAR_COLORS } from "./dashboard-chart.constants";
 
 const AssetsTooltipBody = ({ assets }) => {
   return Object.keys(assets)

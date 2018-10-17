@@ -1,9 +1,10 @@
-import "./dashboard-portfolio-chart-section.scss";
-
 import ChartPeriod from "components/chart/chart-period/chart-period";
 import { DEFAULT_PERIOD } from "components/chart/chart-period/chart-period.helpers";
-import React, { PureComponent } from "react";
+import React, { Fragment, PureComponent } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
+import { getPortfolioChart } from "../../../services/dashboard-chart.service";
 import DashboardPortfolioChart from "./dashboard-portfolio-chart";
 import DashboardPortfolioChartStat from "./dashboard-portfolio-chart-stat";
 
@@ -45,7 +46,8 @@ const composeAssetsChartData = assetsChart => {
 
   return assets;
 };
-class DashboardPortfolioChartSection extends PureComponent {
+
+class DashboardPortfolioChartContainer extends PureComponent {
   state = {
     period: DEFAULT_PERIOD
   };
@@ -54,7 +56,6 @@ class DashboardPortfolioChartSection extends PureComponent {
     const { period } = this.state;
     this.props.service.getPortfolioChart(period.start, period.end);
   }
-
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.currency !== this.props.currency) {
       this.props.service.getPortfolioChart(
@@ -74,7 +75,7 @@ class DashboardPortfolioChartSection extends PureComponent {
     const { period } = this.state;
     if (data === undefined) return null;
     return (
-      <div className="dashboard-portfolio-chart-section">
+      <Fragment>
         <DashboardPortfolioChartStat
           currency={currency}
           value={data.value}
@@ -90,9 +91,24 @@ class DashboardPortfolioChartSection extends PureComponent {
             balance={composeBalanceChartData(data.balanceChart)}
           />
         </div>
-      </div>
+      </Fragment>
     );
   }
 }
 
-export default DashboardPortfolioChartSection;
+const mapStateToProps = state => {
+  const { data, isPending } = state.dashboard.portfolioChartData;
+  const { currency } = state.accountSettings;
+  return { data, isPending, currency };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    service: bindActionCreators({ getPortfolioChart }, dispatch)
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DashboardPortfolioChartContainer);

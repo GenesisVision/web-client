@@ -1,9 +1,0 @@
-@import "styles/_colors.scss";
-
-.event-lose-icon {
-  transform: rotateX(180deg);
-
-  & path {
-    stroke: $negative-color;
-  }
-}
