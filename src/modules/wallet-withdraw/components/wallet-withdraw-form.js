@@ -107,7 +107,6 @@ const WalletWithdrawForm = ({
               <NumberFormat
                 value={formatValue(willGet)}
                 suffix={` ${currency}`}
-                decimalScale={8}
                 displayType="text"
               />
             </span>
@@ -120,7 +119,6 @@ const WalletWithdrawForm = ({
               <NumberFormat
                 value={formatValue(commission)}
                 suffix={` ${currency}`}
-                decimalScale={8}
                 displayType="text"
               />
             </span>
@@ -133,7 +131,6 @@ const WalletWithdrawForm = ({
               <NumberFormat
                 value={formatValue(withdrawing)}
                 suffix={` GVT`}
-                decimalScale={8}
                 displayType="text"
               />
             </span>

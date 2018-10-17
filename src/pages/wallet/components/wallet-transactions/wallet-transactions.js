@@ -78,9 +78,17 @@ const WalletTransactions = ({ t }) => (
             )}
           </TableCell>
           <TableCell className="wallet-transactions__cell wallet-transactions__cell--amount">
-            <Profitability value={transaction.amount}>
-              {formatValue(transaction.amount, roundTypeEnum.FLOOR, false)}
-              {" " + transaction.sourceCurrency}
+            <Profitability value={transaction.amount} prefix="sign">
+              <NumberFormat
+                value={formatValue(
+                  transaction.amount,
+                  roundTypeEnum.FLOOR,
+                  false
+                )}
+                thousandSeparator=" "
+                displayType="text"
+                suffix={" " + transaction.sourceCurrency}
+              />
             </Profitability>
           </TableCell>
         </TableRow>

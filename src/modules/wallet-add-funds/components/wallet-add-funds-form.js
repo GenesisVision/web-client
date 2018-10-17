@@ -71,7 +71,6 @@ const WalletAddFundsForm = ({
               <NumberFormat
                 value={formatValue(convertToCurrency(values.amount, rateToGVT))}
                 suffix=" GVT"
-                decimalScale={8}
                 displayType="text"
               />
             </div>

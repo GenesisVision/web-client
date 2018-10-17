@@ -47,7 +47,6 @@ const DashboardPortfolioEvent = ({ event }) => {
           <Profitability value={event.value}>
             <NumberFormat
               value={formatValue(Math.abs(event.value))}
-              decimalScale={8}
               displayType="text"
               suffix=" GVT"
             />

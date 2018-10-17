@@ -35,7 +35,25 @@ const roundTypeEnum = {
   CEIL: "ceil"
 };
 
+const roundLongNumber = (x, accuracy, roundType) => {
+  let result;
+  switch (roundType) {
+    case "round":
+    case "ceil":
+      result = x.toFixed(accuracy);
+      break;
+    case "floor":
+      result = x.toFixed(32).slice(0, accuracy - 32);
+      break;
+    default:
+      result = x.toFixed(accuracy);
+  }
+
+  return result;
+};
+
 const roundTypeHandler = (x, accuracy, roundType) => {
+  if (accuracy > 27) return roundLongNumber(x, accuracy, roundType);
   let num = x * Math.pow(10, accuracy);
   let result = Math[roundType](num) / Math.pow(10, accuracy);
   result = result.toFixed(accuracy);
@@ -57,9 +75,13 @@ const decreaseAccuracy = (x, roundType) => {
 };
 
 const removeSign = x => {
-  if (x >= 0) return x;
+  if (x < 0)
+    return x
+      .split("")
+      .slice(1)
+      .join("");
 
-  return x.split("").slice(1);
+  return x;
 };
 
 const formatValue = (x, roundType = roundTypeEnum.FLOOR, isShowSign = true) => {
@@ -76,7 +98,7 @@ const formatValue = (x, roundType = roundTypeEnum.FLOOR, isShowSign = true) => {
     return result;
   }
 
-  if (x > 1 || x < 1) {
+  if (x > 1 || x < -1) {
     result = Number(decreaseAccuracy(x, roundType));
   }
 
@@ -88,9 +110,7 @@ const formatValue = (x, roundType = roundTypeEnum.FLOOR, isShowSign = true) => {
     result = roundTypeHandler(x, 8, roundType);
   }
 
-  if (!isShowSign) {
-    result = removeSign(result);
-  }
+  if (!isShowSign) return removeSign(result);
 
   return result;
 };
