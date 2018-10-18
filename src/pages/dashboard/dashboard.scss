@@ -5,13 +5,15 @@
   }
 
   &__chart {
+    display: flex;
     flex: 3;
   }
 
   &__portfolio-events-aside {
+    display: flex;
     flex: 1;
     margin-left: 2rem;
-    width: 315px;
+    min-width: 315px;
   }
 
   &__assets {
