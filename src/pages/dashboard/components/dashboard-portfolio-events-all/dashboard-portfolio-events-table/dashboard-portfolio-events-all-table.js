@@ -14,7 +14,7 @@ import moment from "moment";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { formatValue, roundTypeEnum } from "utils/formatter";
+import { formatValue } from "utils/formatter";
 
 import { fetchPortfolioEvents } from "../../../services/dashboard-events.services";
 import {

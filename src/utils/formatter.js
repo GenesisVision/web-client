@@ -2,10 +2,6 @@ const dateFormat = date => {
   return new Date(+date).toDateString();
 };
 
-const getDecimal = num => {
-  return num - Math.floor(num);
-};
-
 const getFmnp = x => {
   let num = Number(x);
   let str = num.toString();
@@ -19,12 +15,18 @@ const removeLastZeros = str => {
   let initialLength = result.length;
   result.reverse();
   for (let i = 0; i <= initialLength; i++) {
-    if (Number(result[0]) !== 0) break;
-
-    result = result.slice(1);
+    if (Number(result[0]) === 0) {
+      result = result.slice(1);
+    } else if (result[0] === ".") {
+      result = result.slice(1);
+      break;
+    } else {
+      break;
+    }
   }
   result.reverse();
-  return result.join("");
+  result = result.join("");
+  return result;
 };
 
 const roundingAccuracy = [null, 8, 6, 4, 2];
@@ -35,25 +37,7 @@ const roundTypeEnum = {
   CEIL: "ceil"
 };
 
-const roundLongNumber = (x, accuracy, roundType) => {
-  let result;
-  switch (roundType) {
-    case "round":
-    case "ceil":
-      result = x.toFixed(accuracy);
-      break;
-    case "floor":
-      result = x.toFixed(32).slice(0, accuracy - 32);
-      break;
-    default:
-      result = x.toFixed(accuracy);
-  }
-
-  return result;
-};
-
 const roundTypeHandler = (x, accuracy, roundType) => {
-  if (accuracy > 27) return roundLongNumber(x, accuracy, roundType);
   let num = x * Math.pow(10, accuracy);
   let result = Math[roundType](num) / Math.pow(10, accuracy);
   result = result.toFixed(accuracy);
@@ -74,6 +58,10 @@ const decreaseAccuracy = (x, roundType) => {
   return result;
 };
 
+const getDecimalSeparated = x => x.split(".")[1];
+
+const filterNum = x => removeLastZeros(x.toFixed(11).slice(0, -1));
+
 const removeSign = x => {
   if (x < 0)
     return x
@@ -86,17 +74,16 @@ const removeSign = x => {
 
 const formatValue = (x, roundType = roundTypeEnum.FLOOR, isShowSign = true) => {
   if (!x) return x;
+  x = filterNum(x);
+  const decimalSplited = getDecimalSeparated(x);
 
-  const decimal = getDecimal(x)
-    .toFixed(32)
-    .split(".")[1];
-  const fmnp = getFmnp(decimal);
-  let result;
-
-  if (Number(decimal) === 0 || Number(x) === 0) {
-    result = x;
-    return result;
+  if (!Number(decimalSplited) || Number(x) === 0) {
+    return x;
   }
+
+  const fmnp = getFmnp(decimalSplited);
+
+  let result;
 
   if (x > 1 || x < -1) {
     result = Number(decreaseAccuracy(x, roundType));
