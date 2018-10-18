@@ -46,7 +46,7 @@ const DashboardPortfolioEvent = ({ event }) => {
         <span className="portfolio-event__value">
           <Profitability value={formatValue(event.value)} prefix="sign">
             <NumberFormat
-              value={formatValue(Math.abs(event.value))}
+              value={formatValue(event.value, roundTypeEnum.FLOOR, false)}
               displayType="text"
               suffix=" GVT"
             />
