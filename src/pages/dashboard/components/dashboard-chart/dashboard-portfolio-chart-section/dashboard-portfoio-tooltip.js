@@ -2,6 +2,7 @@ import ChartTooltip from "components/chart/chart-tooltip/chart-tooltip";
 import Profitability from "components/profitability/profitability";
 import React from "react";
 import NumberFormat from "react-number-format";
+import { formatValue } from "utils/formatter";
 
 import { BAR_COLORS } from "../dashboard-chart.constants";
 
@@ -16,9 +17,9 @@ const AssetsTooltipBody = ({ assets }) => {
         />
         <div className="asset__stats">
           <div className="asset__asset-title">{assets[x].asset.title}</div>
-          <div className="asset__asset-value">{`${
+          <div className="asset__asset-value">{`${formatValue(
             assets[x].asset.value
-          } GVT`}</div>
+          )} GVT`}</div>
         </div>
         <div className="asset__change">
           <div className="asset__change-percent">
@@ -35,9 +36,9 @@ const AssetsTooltipBody = ({ assets }) => {
               />
             </Profitability>
           </div>
-          <div className="asset__change-value">{`${
+          <div className="asset__change-value">{`${formatValue(
             assets[x].asset.changeValue
-          } GVT`}</div>
+          )} GVT`}</div>
         </div>
       </div>
     ));
@@ -50,7 +51,7 @@ const DasboardPortfolioTooltip = ({ active, label, payload, date }) => {
     return (
       <ChartTooltip
         heading="Total balance"
-        body={`${data.value} GVT`}
+        body={`${formatValue(data.value)} GVT`}
         date={new Date(label)}
       />
     );
