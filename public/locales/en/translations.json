@@ -810,6 +810,7 @@
     }
   },
   "profile": {
+    "title": "Profile",
     "contacts": "Contacts",
     "not-verified": "Not verified",
     "phone-number": "Phone number",
