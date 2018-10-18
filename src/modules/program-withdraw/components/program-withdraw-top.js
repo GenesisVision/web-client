@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { translate } from "react-i18next";
+import { formatValue } from "utils/formatter";
 
 const ProgramWithdrawTop = ({ t, availableToWithdraw, title }) => {
   return (
@@ -13,7 +14,9 @@ const ProgramWithdrawTop = ({ t, availableToWithdraw, title }) => {
         <div className="dialog-field__description">
           {t("withdraw-program.available-to-withdraw")}
         </div>
-        <div className="dialog-field__value">{availableToWithdraw} GVT</div>
+        <div className="dialog-field__value">
+          {formatValue(availableToWithdraw)} GVT
+        </div>
       </div>
     </div>
   );

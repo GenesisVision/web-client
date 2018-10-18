@@ -10,10 +10,16 @@ import { number, object, string } from "yup";
 const DisableAuth = ({ t, handleSubmit, errorMessage, disabled }) => {
   return (
     <div className="dialog">
-      <form id="disable-auth" onSubmit={handleSubmit} className="dialog__top">
+      <form
+        id="disable-auth"
+        onSubmit={handleSubmit}
+        className="dialog__top"
+        autoComplete="off"
+      >
         <div className="dialog__title">{t("2fa.disable.title")}</div>
         <GVFormikField
           name="twoFactorCode"
+          type="text"
           label={t("2fa.google-code")}
           component={GVTextField}
           autoComplete="off"
@@ -26,7 +32,7 @@ const DisableAuth = ({ t, handleSubmit, errorMessage, disabled }) => {
           type="password"
           label={t("2fa.password")}
           component={GVTextField}
-          autoComplete="off"
+          autoComplete="new-password"
         />
         <div className="form-error">{errorMessage}</div>
         <GVButton

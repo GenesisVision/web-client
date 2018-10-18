@@ -4,6 +4,7 @@ import classnames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 import NumberFormat from "react-number-format";
+import { formatValue } from "utils/formatter";
 
 const StatisticItem = ({
   heading,
@@ -23,9 +24,8 @@ const StatisticItem = ({
       </div>
       <div className={classnames("statistic-item__value", valueClassName)}>
         <NumberFormat
-          value={value}
+          value={formatValue(value)}
           thousandSeparator={" "}
-          decimalScale={8}
           displayType="text"
           suffix={" GVT"}
         />
@@ -38,9 +38,8 @@ const StatisticItem = ({
         )}
       >
         <NumberFormat
-          value={equivalent}
+          value={formatValue(equivalent)}
           thousandSeparator={" "}
-          decimalScale={8}
           displayType="text"
           suffix={` ${currency}`}
         />

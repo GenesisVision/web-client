@@ -1,5 +1,6 @@
 import ChartTooltip from "components/chart/chart-tooltip/chart-tooltip";
 import React, { Fragment } from "react";
+import { formatValue } from "utils/formatter";
 
 const TooltipBody = ({ equity, pnl }) => {
   return (
@@ -30,7 +31,7 @@ const ProgramProfitTooltip = ({
   }
   let pnl = "";
   if (payload[0]) {
-    pnl = `${payload[0].payload.value.toFixed(8)}${payload[0].unit}`;
+    pnl = `${formatValue(payload[0].payload.value)}${payload[0].unit}`;
   }
   return (
     <ChartTooltip

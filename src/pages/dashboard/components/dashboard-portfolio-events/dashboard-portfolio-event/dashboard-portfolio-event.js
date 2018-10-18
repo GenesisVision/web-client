@@ -5,6 +5,7 @@ import * as moment from "moment";
 import PropTypes from "prop-types";
 import React from "react";
 import NumberFormat from "react-number-format";
+import { formatValue, roundTypeEnum } from "utils/formatter";
 
 import PortfolioEventLogo from "../dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
 import { composeEventLogoType } from "../dashboard-portfolio-event-logo/dashboard-portfolio-event-logo.helper";
@@ -33,10 +34,9 @@ const DashboardPortfolioEvent = ({ event }) => {
         <span className="portfolio-event__time">{formatDate(event.date)}</span>
         <p className="portfolio-event__description">{event.description}</p>
         <span className="portfolio-event__value">
-          <Profitability value={event.value}>
+          <Profitability value={formatValue(event.value)} prefix="sign">
             <NumberFormat
-              value={Math.abs(event.value)}
-              decimalScale={8}
+              value={formatValue(event.value, roundTypeEnum.FLOOR, false)}
               displayType="text"
               suffix=" GVT"
             />

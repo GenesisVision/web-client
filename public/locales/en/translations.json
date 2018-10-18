@@ -111,12 +111,12 @@
         "news-updates": "Program news and updates",
         "end-of-period": "Notifications for the end of the period",
         "ProgramNewsAndUpdates": {
-          "disabled-alert": "Enabled program news and updates notifications",
-          "enabled-alert": "Disabled program news and updates notifications"
+          "enabled-alert": "Enabled program news and updates notifications",
+          "disabled-alert": "Disabled program news and updates notifications"
         },
         "ProgramEndOfPeriod": {
-          "disabled-alert": "Enabled the end of period notifications",
-          "enabled-alert": "Disabled the end of period notifications"
+          "enabled-alert": "Enabled the end of period notifications",
+          "disabled-alert": "Disabled the end of period notifications"
         }
       },
       "custom": {
@@ -193,7 +193,10 @@
     "activate": "Activate",
     "disable": "Disable",
     "create": "Create",
-    "delete": "Delete"
+    "delete": "Delete",
+    "edit": "Edit",
+    "save": "Save",
+    "verify": "Verify"
   },
   "navigation": {
     "dashboard": "Dashboard",
@@ -811,6 +814,32 @@
     }
   },
   "profile": {
+    "contacts": "Contacts",
+    "not-verified": "Not verified",
+    "phone-number": "Phone number",
+    "email": "Email address",
+    "personal-info": "Personal info",
+    "forename": "Forename",
+    "family-name": "Family name",
+    "birthday": "Date of birth",
+    "citizen": "Citizenship",
+    "residential-address": "Residential address",
+    "country": "Country",
+    "city": "City",
+    "address": "Address",
+    "index": "Index",
+    "success-edit": "Profile update is successful",
+    "success-verify": "Phone number verification is successful",
+    "verification": {
+      "phone": {
+        "required": "Code is required",
+        "title": "Verify phone number",
+        "description": "We have sent you a verification code",
+        "number": "Phone number",
+        "code": "Verification code",
+        "resend": "Resend code"
+      }
+    },
     "settings": {
       "title": "Settings",
       "profile-image": "Profile image",

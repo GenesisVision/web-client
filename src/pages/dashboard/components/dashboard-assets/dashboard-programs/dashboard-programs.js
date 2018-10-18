@@ -14,6 +14,7 @@ import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
+import { formatValue } from "utils/formatter";
 
 import { composeProgramDetailsUrl } from "../../../../programs/programs.routes";
 import {
@@ -73,7 +74,7 @@ class Dashboardprograms extends Component {
               </div>
             </TableCell>
             <TableCell className="dashboard-programs__cell--share">
-              {program.dashboardAssetsDetails.share}
+              {formatValue(program.dashboardAssetsDetails.share)}
             </TableCell>
             <TableCell className="dashboard-programs__cell--currency">
               {program.currency}
@@ -85,7 +86,7 @@ class Dashboardprograms extends Component {
               />
             </TableCell>
             <TableCell className="dashboard-programs__cell--value">
-              {program.statistic.currentValue}
+              {formatValue(program.statistic.currentValue)}
             </TableCell>
             <TableCell className="dashboard-programs__cell--profit">
               <NumberFormat

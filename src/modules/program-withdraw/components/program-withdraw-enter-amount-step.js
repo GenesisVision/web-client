@@ -5,6 +5,7 @@ import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { convertToCurrency } from "utils/currency-converter";
+import { formatValue } from "utils/formatter";
 
 const WithdrawEnterAmountStep = props => {
   return (
@@ -21,10 +22,9 @@ const WithdrawEnterAmountStep = props => {
       />
       <div className="invest-popup__currency">
         <NumberFormat
-          value={convertToCurrency(props.amount, props.rate)}
+          value={formatValue(convertToCurrency(props.amount, props.rate))}
           prefix="= "
           suffix={` ${props.currency}`}
-          decimalScale={8}
           displayType="text"
         />
       </div>
