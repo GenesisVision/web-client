@@ -8,6 +8,7 @@ import { TableCell, TableRow } from "modules/table/components";
 import React from "react";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
+import { formatValue } from "utils/formatter";
 
 import { composeProgramDetailsUrl } from "../../../../pages/programs/programs.routes";
 
@@ -25,6 +26,7 @@ const ProgramTableRowShort = ({
             url={program.logo}
             level={program.level}
             alt={program.title}
+            color={program.color}
           />
           <div className="programs-table__cell--title">
             <div className="programs-table__cell--top">
@@ -41,7 +43,7 @@ const ProgramTableRowShort = ({
         </div>
       </TableCell>
       <TableCell className="programs-table__cell--balance">
-        {program.statistic.balanceGVT.amount} GVT
+        {formatValue(program.statistic.balanceGVT.amount)} GVT
       </TableCell>
       <TableCell className="programs-table__cell--currency">
         {program.currency}
@@ -50,7 +52,7 @@ const ProgramTableRowShort = ({
         {program.statistic.investorsCount}
       </TableCell>
       <TableCell className="programs-table__cell--available-to-invest">
-        {program.availableInvestment}
+        {formatValue(program.availableInvestment)} GVT
       </TableCell>
       <TableCell className="programs-table__cell--trades">
         {program.statistic.tradesCount}

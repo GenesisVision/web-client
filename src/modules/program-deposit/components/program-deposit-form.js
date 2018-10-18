@@ -9,6 +9,7 @@ import {
   calculateValueOfEntryFee,
   convertToCurrency
 } from "utils/currency-converter";
+import { formatValue } from "utils/formatter";
 import { number, object } from "yup";
 
 const ProgramDepositForm = ({
@@ -52,10 +53,9 @@ const ProgramDepositForm = ({
       />
       <div className="invest-popup__currency">
         <NumberFormat
-          value={convertToCurrency(values.amount, info.rate)}
+          value={formatValue(convertToCurrency(values.amount, info.rate))}
           prefix="= "
           suffix={` ${currency}`}
-          decimalScale={8}
           displayType="text"
         />
       </div>
@@ -67,10 +67,9 @@ const ProgramDepositForm = ({
           <span className="dialog-list__value">
             {info.entryFee} %{" "}
             <NumberFormat
-              value={fee}
+              value={formatValue(fee)}
               prefix="("
               suffix={` GVT)`}
-              decimalScale={8}
               displayType="text"
             />
           </span>
@@ -81,9 +80,8 @@ const ProgramDepositForm = ({
           </span>
           <span className="dialog-list__value">
             <NumberFormat
-              value={due}
+              value={formatValue(due)}
               suffix={` GVT`}
-              decimalScale={8}
               displayType="text"
             />
           </span>

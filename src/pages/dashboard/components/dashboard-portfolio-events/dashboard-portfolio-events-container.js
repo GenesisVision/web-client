@@ -18,6 +18,7 @@ class DashboardPortfolioEventsContainer extends Component {
   renderEvents = () => {
     const { isPending, data } = this.props;
     if (isPending || data === undefined) return null;
+    debugger;
     return (
       <DashboardPortfolioEvents
         events={data.events}

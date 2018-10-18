@@ -49,6 +49,7 @@ class ProgramCard extends Component {
               url={program.logo}
               level={program.level}
               alt={program.title}
+              color={program.color}
               size="medium"
             />
           </div>

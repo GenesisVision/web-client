@@ -11,5 +11,5 @@ export const getPortfolioChart = () => (dispatch, getState) => {
 export const getPortfolioEvents = () => (dispatch, getState) => {
   const authorization = authService.getAuthArg();
 
-  dispatch(actions.fetchPortfolioEvents(authorization));
+  dispatch(actions.fetchPortfolioEvents(authorization, { take: 5 }));
 };

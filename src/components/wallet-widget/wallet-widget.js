@@ -2,7 +2,6 @@ import "./wallet-widget.scss";
 
 import classnames from "classnames";
 import Chip from "components/chip/chip";
-import { ArrowIcon } from "components/icon/icon";
 import { WalletIcon } from "components/icon/wallet-icon";
 import Popover from "components/popover/popover";
 import WalletAddFundsPopup from "modules/wallet-add-funds/wallet-add-funds-popup";
@@ -11,6 +10,7 @@ import PropTypes from "prop-types";
 import React, { Fragment } from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
+import { formatValue } from "utils/formatter";
 
 class WalletWidget extends React.Component {
   state = {
@@ -44,7 +44,7 @@ class WalletWidget extends React.Component {
             className="wallet-widget__wallet"
             onClick={this.handleOpenDetails}
           >
-            <WalletIcon primary={this.state.anchorEl} />
+            <WalletIcon primary={this.state.anchorEl !== null} />
             <span className="wallet-widget__value">{`${availableGvt} GVT`}</span>
           </div>
           <div className="wallet-widget__add">
@@ -66,25 +66,30 @@ class WalletWidget extends React.Component {
               <div className="wallet-details__title">
                 {t("wallet-widget.total-balance")}
               </div>
-              <div className="wallet-details__value">{`${totalBalanceGvt} GVT`}</div>
+              <div className="wallet-details__value">{`${formatValue(
+                totalBalanceGvt
+              )} GVT`}</div>
             </div>
             <div className="wallet-details__item">
               <div className="wallet-details__title">
                 {t("wallet-widget.invested-value")}
               </div>
-              <div className="wallet-details__value">{`${investedGvt} GVT`}</div>
+              <div className="wallet-details__value">{`${formatValue(
+                investedGvt
+              )} GVT`}</div>
             </div>
             <div className="wallet-details__item">
               <div className="wallet-details__title">
                 {t("wallet-widget.available")}
               </div>
-              <div className="wallet-details__value">{`${availableGvt} GVT`}</div>
+              <div className="wallet-details__value">{`${formatValue(
+                availableGvt
+              )} GVT`}</div>
             </div>
             <div className="wallet-details__item">
               <div className="wallet-details__value">
                 <Link to={WALLET_PAGE_ROUTE} onClick={this.handleCloseDetails}>
-                  {t("wallet-widget.details")}{" "}
-                  <ArrowIcon className={"wallet-details__arrow-link"} />
+                  {t("wallet-widget.details")} ›
                 </Link>
               </div>
             </div>

@@ -66,6 +66,7 @@ class FundDetailsDescription extends PureComponent {
               level={fundDescription.level}
               alt={fundDescription.title}
               size="big"
+              color={fundDescription.color}
             />
           </div>
         </div>

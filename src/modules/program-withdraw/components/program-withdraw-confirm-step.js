@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { Fragment } from "react";
 import React from "react";
 import { translate } from "react-i18next";
+import { formatValue } from "utils/formatter";
 
 const WithdrawConfirmStep = props => {
   return (
@@ -11,7 +12,9 @@ const WithdrawConfirmStep = props => {
       <ul className="dialog-list">
         <li className="dialog-list__item">
           {props.t("withdraw-program.withdrawing")}
-          <span className="dialog-list__value">{props.amount} GVT</span>
+          <span className="dialog-list__value">
+            {formatValue(props.amount)} GVT
+          </span>
         </li>
         <li className="dialog-list__item">
           {props.t("withdraw-program.payout-date")}
