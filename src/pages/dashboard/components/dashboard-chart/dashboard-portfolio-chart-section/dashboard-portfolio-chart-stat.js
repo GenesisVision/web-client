@@ -29,7 +29,7 @@ const DashboardPortfolioChartStat = ({
           <Profitability
             prefix="arrow"
             variant="chips"
-            value={changePercent.toFixed(2)}
+            value={changePercent && changePercent.toFixed(2)}
             className="dashboard-portfolio-chart-stat__adornment"
           >
             <NumberFormat

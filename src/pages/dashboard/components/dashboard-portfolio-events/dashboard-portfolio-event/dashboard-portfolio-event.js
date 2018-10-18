@@ -6,7 +6,7 @@ import * as moment from "moment";
 import PropTypes from "prop-types";
 import React from "react";
 import NumberFormat from "react-number-format";
-import { formatValue } from "utils/formatter";
+import { formatValue, roundTypeEnum } from "utils/formatter";
 
 import PortfolioEventLogo, {
   logoTypes
@@ -44,7 +44,12 @@ const DashboardPortfolioEvent = ({ event }) => {
         <span className="portfolio-event__time">{formatDate(event.date)}</span>
         <p className="portfolio-event__description">{event.description}</p>
         <span className="portfolio-event__value">
-          <Profitability value={event.value}>
+          <Profitability
+            value={formatValue(
+              Math.abs(event.value, roundTypeEnum.FLOOR, false)
+            )}
+            prefix="sign"
+          >
             <NumberFormat
               value={formatValue(Math.abs(event.value))}
               displayType="text"
