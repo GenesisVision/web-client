@@ -18,8 +18,7 @@ import {
 export const CLIENT_WEB = "Web";
 
 export const login = (loginData, from, setSubmitting) => dispatch => {
-  loginData = { ...loginData, client: CLIENT_WEB };
-  return dispatch(loginUser(loginData))
+  return dispatch(loginUser({ ...loginData, client: CLIENT_WEB }))
     .then(response => {
       authService.storeToken(response.value);
       dispatch(authActions.updateToken());
@@ -52,7 +51,8 @@ export const twoFactorLogin = (code, type, setSubmitting) => (
   const { email, password, from } = getState().loginData.twoFactor;
   const model = {
     email,
-    password
+    password,
+    client: CLIENT_WEB
   };
   if (type === TWO_FACTOR_CODE) {
     model.twoFactorCode = code;
