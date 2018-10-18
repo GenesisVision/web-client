@@ -3,6 +3,7 @@
 
 $text-size: 13px;
 .profitability {
+  display: inline-block;
   &--positive {
     color: $positive-color;
     &.profitability--chips {

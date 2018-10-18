@@ -32,11 +32,7 @@ const FundProfitChartSection = ({
       </div>
       <ChartPeriod onChange={onPeriodChange} period={period} />
       <div className="fund-details-chart__profit">
-        <FundProfitChart
-          equityChart={profitChart.equityChart}
-          pnlChart={profitChart.pnLChart}
-          currency={profitChart.programCurrency}
-        />
+        <FundProfitChart equityChart={profitChart.equityChart} />
       </div>
     </Fragment>
   );

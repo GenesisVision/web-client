@@ -10,7 +10,7 @@ import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import replaceParams from "utils/replace-params";
 
-import AssetContainer from "../../../../../../modules/funds-table/components/funds-table/asset/asset-container";
+import FundAssetContainer from "../../../../../../modules/funds-table/components/funds-table/fund-asset/fund-asset-container";
 import FundDetailsFavorite from "./fund-details-favorite";
 import FundDetailsNotification from "./fund-details-notificaton";
 
@@ -78,7 +78,7 @@ class FundDetailsDescription extends PureComponent {
               {t("fund-details-page.description.assets")}
             </div>
             <div className="fund-details-description__text">
-              <AssetContainer
+              <FundAssetContainer
                 type={"large"}
                 assets={fundDescription.currentAssets}
                 size={7}

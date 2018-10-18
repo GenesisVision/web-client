@@ -42,14 +42,7 @@ const AssetsTooltipBody = ({ assets }) => {
       </div>
     ));
 };
-const DasboardPortfolioTooltip = ({
-  active,
-  label,
-  payload,
-  heading,
-  body,
-  date
-}) => {
+const DasboardPortfolioTooltip = ({ active, label, payload, date }) => {
   if (!active) return null;
 
   let data = payload[0];

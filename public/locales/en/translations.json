@@ -233,10 +233,6 @@
       "warning": "WARNING: We do not store your recovery codes. If you lost the access to your 2FA, it is most likely that we couldn't help you to return the access to your account."
     }
   },
-  "settings": {
-    "title": "Settings",
-    "change-password": "Change password"
-  },
   "auth": {
     "text": "A Brief History Of Creation",
     "tabs": {
@@ -321,6 +317,9 @@
       "title": "Email confirm",
       "success-alert-message": "Email address successfully verified",
       "error-during-confirmation": "An error occurred during confirmation of email:"
+    },
+    "logout-from-another-devices": {
+      "success-message": "Successful logout on another devices."
     }
   },
   "wallet": {
@@ -838,10 +837,13 @@
       }
     },
     "settings": {
+      "title": "Settings",
       "profile-image": "Profile image",
       "image-requirements": "At least 300 x 300px PNG or JPG file.",
       "save-photo": "Save photo",
-      "image-success-save-message": "The photo has just been successfully changed."
+      "image-success-save-message": "The photo has just been successfully changed.",
+      "change-password": "Change password",
+      "logout-from-another-devices": "Logout from another devices"
     }
   },
   "managers-table": {

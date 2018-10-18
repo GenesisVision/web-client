@@ -13,8 +13,6 @@ import {
 
 import FundBalanceTooltip from "./fund-balance-tooltip";
 
-//import FundProfitTooltip from "./program-profit-tooltip";
-
 class FundBalanceChart extends PureComponent {
   render() {
     const { balanceChart, currency } = this.props;
@@ -61,17 +59,6 @@ class FundBalanceChart extends PureComponent {
             connectNulls={true}
             fill={GVColors.$primaryColor}
             stroke={GVColors.$primaryColor}
-            strokeWidth={2}
-            dot={false}
-            unit={currency}
-            stackId="1"
-          />
-          <Area
-            dataKey="profit"
-            type="monotone"
-            connectNulls={true}
-            fill="#84d6d0"
-            stroke="#84d6d0"
             strokeWidth={2}
             dot={false}
             unit={currency}

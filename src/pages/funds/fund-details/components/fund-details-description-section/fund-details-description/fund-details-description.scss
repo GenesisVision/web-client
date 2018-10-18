@@ -3,7 +3,7 @@
 @import "styles/_sizes.scss";
 
 .fund-details-description {
-  & .asset {
+  & .fund-asset {
     background: rgba(216, 216, 216, 0.05);
     height: 50px / $divider-title;
     //min-width: 240px/$divider-text;
@@ -65,9 +65,6 @@
     padding: 0;
     font-size: 13px;
     letter-spacing: 0.19px;
-  }
-
-  &__info {
   }
 
   &__invest-button-container {
@@ -154,10 +151,6 @@
     &-icon,
     &-text {
       padding: $padding-small-mobile $padding-small-mobile/2;
-    }
-    &-icon {
-      //width: $icon-size-mobile;
-      //height: $icon-size-mobile;
     }
     &-text {
       font-size: $font-size-small-mobile;

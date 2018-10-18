@@ -4,7 +4,7 @@
 
 $asset-height-mobile: $asset-height/$divider-text;
 
-.assets {
+.fund-assets {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -20,7 +20,7 @@ $asset-height-mobile: $asset-height/$divider-text;
   }
 }
 
-.asset {
+.fund-asset {
   box-sizing: border-box;
   height: $asset-height-mobile;
   font-size: $font-size-small-mobile;
@@ -96,7 +96,7 @@ $asset-height-mobile: $asset-height/$divider-text;
     padding: 0;
     margin: 0;
     background: none;
-    & .asset__currency-short {
+    & .fund-asset__currency-short {
       padding-left: 0;
     }
   }
