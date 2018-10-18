@@ -83,8 +83,7 @@ class WalletWidget extends React.Component {
             <div className="wallet-details__item">
               <div className="wallet-details__value">
                 <Link to={WALLET_PAGE_ROUTE} onClick={this.handleCloseDetails}>
-                  {t("wallet-widget.details")}{" "}
-                  <ArrowIcon className={"wallet-details__arrow-link"} />
+                  {t("wallet-widget.details")} ›
                 </Link>
               </div>
             </div>
