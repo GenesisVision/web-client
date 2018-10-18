@@ -44,12 +44,7 @@ const DashboardPortfolioEvent = ({ event }) => {
         <span className="portfolio-event__time">{formatDate(event.date)}</span>
         <p className="portfolio-event__description">{event.description}</p>
         <span className="portfolio-event__value">
-          <Profitability
-            value={formatValue(
-              Math.abs(event.value, roundTypeEnum.FLOOR, false)
-            )}
-            prefix="sign"
-          >
+          <Profitability value={formatValue(event.value)} prefix="sign">
             <NumberFormat
               value={formatValue(Math.abs(event.value))}
               displayType="text"
