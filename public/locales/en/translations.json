@@ -468,6 +468,10 @@
   },
   "dashboard-page": {
     "title": "Dashboard",
+    "requests": {
+      "success-cancel-request": "Request canceled successfully",
+      "failure-cancel-request": "Failed to cancel request"
+    },
     "programs-header": {
       "title": "Name",
       "share": "Share",
