@@ -58,6 +58,7 @@ class ProgramTableRowDetailed extends Component {
                     level={program.level}
                     alt={program.title}
                     size="medium"
+                    color={program.color}
                   />
                   <div className="program-detailed__avatar--name">
                     <div className="program-detailed__title">

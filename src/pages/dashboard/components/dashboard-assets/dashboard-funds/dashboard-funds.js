@@ -65,7 +65,11 @@ class DashboardFunds extends Component {
           <TableRow>
             <TableCell className="funds-table__cell--name">
               <div className="funds-table__cell--avatar-title">
-                <AssetAvatar url={fund.logo} alt={fund.title} />
+                <AssetAvatar
+                  url={fund.logo}
+                  alt={fund.title}
+                  color={fund.color}
+                />
                 <div className="funds-table__cell--title">
                   <Link to={fundDetailsUrl(fund.url)}>
                     <GVButton variant="text" color="secondary">

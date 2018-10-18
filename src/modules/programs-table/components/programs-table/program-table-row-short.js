@@ -26,6 +26,7 @@ const ProgramTableRowShort = ({
             url={program.logo}
             level={program.level}
             alt={program.title}
+            color={program.color}
           />
           <div className="programs-table__cell--title">
             <div className="programs-table__cell--top">

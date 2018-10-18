@@ -65,6 +65,7 @@ class Dashboardprograms extends Component {
                   url={program.logo}
                   level={program.level}
                   alt={program.title}
+                  color={program.color}
                 />
                 <Link to={composeProgramDetailsUrl(program.url)}>
                   <GVButton variant="text" color="secondary">
