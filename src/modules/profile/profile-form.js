@@ -1,17 +1,17 @@
 import "./profile.scss";
 
 import Chip from "components/chip/chip";
+import Dialog from "components/dialog/dialog";
 import FileLabel from "components/file-label/file-label";
 import GVDatePicker from "components/gv-datepicker/gv-datepicker";
 import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
+import PhoneVerification from "modules/phone-verification/phone-verification";
 import UploadButton from "modules/upload-button/upload-button";
 import moment from "moment";
 import PropTypes from "prop-types";
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
-import Dialog from "components/dialog/dialog";
-import PhoneVerification from "modules/phone-verification/phone-verification";
 
 class Profile extends Component {
   state = {
@@ -41,13 +41,18 @@ class Profile extends Component {
   render() {
     const { t, info, handleSubmit } = this.props;
     return (
-      <>
-        <Dialog open={this.state.isOpenVerify} onClose={this.handleCloseVerify}>
-          <PhoneVerification
-            phoneNumber={info.phone}
-            onVerify={this.handleVerify}
-          />
-        </Dialog>
+      <Fragment>
+        {info.phone && (
+          <Dialog
+            open={this.state.isOpenVerify}
+            onClose={this.handleCloseVerify}
+          >
+            <PhoneVerification
+              phoneNumber={info.phone}
+              onVerify={this.handleVerify}
+            />
+          </Dialog>
+        )}
         <form
           id="profile-form"
           className="profile__container"
@@ -80,14 +85,15 @@ class Profile extends Component {
                         name="phoneNumber"
                         component={GVTextField}
                       />
-                      {info.phoneNumberConfirmed || (
-                        <GVButton
-                          variant="text"
-                          onClick={this.handleOpenVerify}
-                        >
-                          {t("buttons.verify")}
-                        </GVButton>
-                      )}
+                      {info.phoneNumberConfirmed ||
+                        (info.phone && (
+                          <GVButton
+                            variant="text"
+                            onClick={this.handleOpenVerify}
+                          >
+                            {t("buttons.verify")}
+                          </GVButton>
+                        ))}
                     </div>
                     <GVFormikField
                       label={t("profile.email")}
@@ -221,7 +227,7 @@ class Profile extends Component {
             </tbody>
           </table>
         </form>
-      </>
+      </Fragment>
     );
   }
 }

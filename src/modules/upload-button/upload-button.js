@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { GVButton } from "gv-react-components";
-import filesService from "shared/services/file-service";
+import PropTypes from "prop-types";
+import React, { Component, Fragment } from "react";
 import authService from "services/auth-service";
+import filesService from "shared/services/file-service";
 
 class UploadButton extends Component {
   input = React.createRef();
@@ -25,7 +25,7 @@ class UploadButton extends Component {
   };
   render() {
     return (
-      <>
+      <Fragment>
         <input
           type="file"
           ref={this.input}
@@ -40,7 +40,7 @@ class UploadButton extends Component {
         >
           Upload file
         </GVButton>
-      </>
+      </Fragment>
     );
   }
 }
