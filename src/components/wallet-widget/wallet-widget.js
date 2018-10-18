@@ -2,7 +2,6 @@ import "./wallet-widget.scss";
 
 import classnames from "classnames";
 import Chip from "components/chip/chip";
-import { ArrowIcon } from "components/icon/icon";
 import { WalletIcon } from "components/icon/wallet-icon";
 import Popover from "components/popover/popover";
 import WalletAddFundsPopup from "modules/wallet-add-funds/wallet-add-funds-popup";
@@ -44,7 +43,7 @@ class WalletWidget extends React.Component {
             className="wallet-widget__wallet"
             onClick={this.handleOpenDetails}
           >
-            <WalletIcon primary={this.state.anchorEl} />
+            <WalletIcon primary={this.state.anchorEl !== null} />
             <span className="wallet-widget__value">{`${availableGvt} GVT`}</span>
           </div>
           <div className="wallet-widget__add">
