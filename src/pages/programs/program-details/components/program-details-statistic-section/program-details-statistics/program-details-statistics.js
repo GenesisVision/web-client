@@ -21,48 +21,50 @@ const ProgramDetailsStatistics = ({ t, statisticData, period }) => {
         {t("program-details-page.statistics.current")}
       </div>
       <div className="program-details-statistics__particular-information">
-        <div className="program-details-statistics__item">
-          <span className="program-details-statistics__label">
-            {t("program-details-page.statistics.balance")}
-          </span>
-          <span className="program-details-statistics__value">
-            <NumberFormat
-              value={statistic.balance}
-              thousandSeparator={" "}
-              displayType="text"
-              suffix={" GVT"}
-            />
-          </span>
+        <div className="program-details-statistics__vertical-info-block">
+          <div className="program-details-statistics__item">
+            <span className="program-details-statistics__label">
+              {t("program-details-page.statistics.balance")}
+            </span>
+            <span className="program-details-statistics__value">
+              <NumberFormat
+                value={statistic.balance}
+                thousandSeparator={" "}
+                displayType="text"
+                suffix={" GVT"}
+              />
+            </span>
+          </div>
+          <div className="program-details-statistics__item program-details-statistics__item--secondary">
+            <span className="program-details-statistics__label">
+              {t("program-details-page.statistics.start-day")}
+            </span>
+            <span className="program-details-statistics__value">
+              {moment(statistic.periodStarts).format("D MMM YYYY")}
+            </span>
+          </div>
         </div>
-        <div className="program-details-statistics__item">
-          <span className="program-details-statistics__label">
-            {t("program-details-page.statistics.investors")}
-          </span>
-          <span className="program-details-statistics__value">
-            <NumberFormat
-              value={statistic.investors}
-              thousandSeparator={" "}
-              displayType="text"
-            />
-          </span>
-        </div>
-
-        <div className="program-details-statistics__item program-details-statistics__item--secondary">
-          <span className="program-details-statistics__label">
-            {t("program-details-page.statistics.start-day")}
-          </span>
-          <span className="program-details-statistics__value">
-            {moment(statistic.periodStarts).format("D MMM YYYY")}
-          </span>
-        </div>
-
-        <div className="program-details-statistics__item program-details-statistics__item--secondary">
-          <span className="program-details-statistics__label">
-            {t("program-details-page.statistics.period-end")}
-          </span>
-          <span className="program-details-statistics__value">
-            {moment(statistic.periodEnds).format("D MMM YYYY")}
-          </span>
+        <div className="program-details-statistics__vertical-info-block">
+          <div className="program-details-statistics__item">
+            <span className="program-details-statistics__label">
+              {t("program-details-page.statistics.investors")}
+            </span>
+            <span className="program-details-statistics__value">
+              <NumberFormat
+                value={statistic.investors}
+                thousandSeparator={" "}
+                displayType="text"
+              />
+            </span>
+          </div>
+          <div className="program-details-statistics__item program-details-statistics__item--secondary">
+            <span className="program-details-statistics__label">
+              {t("program-details-page.statistics.period-end")}
+            </span>
+            <span className="program-details-statistics__value">
+              {moment(statistic.periodEnds).format("D MMM YYYY")}
+            </span>
+          </div>
         </div>
 
         <div className="program-details-statistics__period">

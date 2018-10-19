@@ -37,43 +37,47 @@ class ProgramDetailsInvestment extends PureComponent {
         <div className="program-details-investment__heading">
           {t("program-details-page.description.yourInvestment")}
         </div>
-        <div className="program-details-investment__short-statistic">
-          <div className="program-details-investment__short-statistic-item">
-            <span className="program-details-investment__short-statistic-subheading">
-              {t("program-details-page.description.invested")}
-            </span>
+        <div className="program-details-investment__short-statistic-container">
+          <div className="program-details-investment__short-statistic">
+            <div className="program-details-investment__short-statistic-item">
+              <span className="program-details-investment__short-statistic-subheading">
+                {t("program-details-page.description.invested")}
+              </span>
 
-            <NumberFormat
-              value={investedAmount}
-              suffix={" GVT"}
-              displayType="text"
-            />
+              <NumberFormat
+                value={investedAmount}
+                suffix={" GVT"}
+                displayType="text"
+              />
+            </div>
+            <div className="program-details-investment__short-statistic-item">
+              <span className="program-details-investment__short-statistic-subheading">
+                {t("program-details-page.description.value")}
+              </span>
+              <NumberFormat
+                value={balanceAmount}
+                suffix={` ${balanceCurrency}`}
+                displayType="text"
+              />
+            </div>
           </div>
-          <div className="program-details-investment__short-statistic-item">
-            <span className="program-details-investment__short-statistic-subheading">
-              {t("program-details-page.description.value")}
-            </span>
-            <NumberFormat
-              value={balanceAmount}
-              suffix={` ${balanceCurrency}`}
-              displayType="text"
-            />
-          </div>
-          <div className="program-details-investment__short-statistic-item">
-            <span className="program-details-investment__short-statistic-subheading">
-              {t("program-details-page.description.profit")}
-            </span>
-            <NumberFormat
-              value={profitPercent}
-              suffix=" %"
-              displayType="text"
-            />
-          </div>
-          <div className="program-details-investment__short-statistic-item">
-            <span className="program-details-investment__short-statistic-subheading">
-              {t("program-details-page.description.status")}
-            </span>
-            <ProgramStatus status={status} />
+          <div className="program-details-investment__short-statistic">
+            <div className="program-details-investment__short-statistic-item">
+              <span className="program-details-investment__short-statistic-subheading">
+                {t("program-details-page.description.profit")}
+              </span>
+              <NumberFormat
+                value={profitPercent}
+                suffix=" %"
+                displayType="text"
+              />
+            </div>
+            <div className="program-details-investment__short-statistic-item">
+              <span className="program-details-investment__short-statistic-subheading">
+                {t("program-details-page.description.status")}
+              </span>
+              <ProgramStatus status={status} />
+            </div>
           </div>
         </div>
         <div className="program-details-investment__footer">
