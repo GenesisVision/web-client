@@ -60,7 +60,8 @@ class ProgramDetailsDescription extends PureComponent {
       onReinvestingClick,
       onFavoriteClick,
       isReinvestPending,
-      isFavoritePending
+      isFavoritePending,
+      composeInvestmentData
     } = this.props;
 
     const isFavorite =
