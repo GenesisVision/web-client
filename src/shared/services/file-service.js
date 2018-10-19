@@ -17,5 +17,16 @@ const uploadFileProxy = (file, authorization) => {
     .then(response => response.data.id);
 };
 
-const filesService = { getFileUrl, uploadFile, uploadFileProxy };
+const uploadDocument = (file, authorization) => {
+  return FileApi.v10FileDocumentUploadPost(authorization, file).then(
+    response => response.id
+  );
+};
+
+const filesService = {
+  getFileUrl,
+  uploadFile,
+  uploadFileProxy,
+  uploadDocument
+};
 export default filesService;

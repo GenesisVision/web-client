@@ -1,4 +1,3 @@
-import { PROFILE_ROUTE } from "modules/profile/profile.constants";
 import DashboardRoutes from "pages/dashboard/dashboard.routes";
 import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import ManagerPage, {
@@ -9,6 +8,7 @@ import NotificationRoutes, {
   NOTIFICATIONS_ROUTE
 } from "pages/notifications/notifications.routes";
 import PrivateRoute from "pages/private-route";
+import { PROFILE_ROUTE } from "pages/profile/profile.constants";
 import ProfileRoutes from "pages/profile/profile.routes";
 import WalletWithdrawConfirmPage, {
   WALLET_WITHDRAW_CONFIRM_ROUTE

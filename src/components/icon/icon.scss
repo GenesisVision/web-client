@@ -36,14 +36,6 @@
     svg [stroke] {
       stroke: $primary-color;
     }
-    .actions-circle {
-      g[fill] {
-        fill: $panel-background-color;
-      }
-      circle[fill] {
-        fill: white;
-      }
-    }
   }
   &--rotate {
     transform: rotate(180deg);
@@ -91,13 +83,21 @@
   &--copy {
     width: 14px;
   }
-}
 
-.actions-circle {
-  circle[fill] {
-    fill: none;
-  }
-  g[fill] {
-    fill: white;
+  &--actions-circle {
+    circle[fill] {
+      fill: rgba($label-color, 0.3);
+    }
+    g[fill] {
+      fill: white;
+    }
+    &.icon--primary {
+      g[fill] {
+        fill: $panel-background-color;
+      }
+      circle[fill] {
+        fill: white;
+      }
+    }
   }
 }

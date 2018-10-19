@@ -56,7 +56,6 @@ const ProgramDepositForm = ({
           value={formatValue(convertToCurrency(values.amount, info.rate))}
           prefix="= "
           suffix={` ${currency}`}
-          decimalScale={8}
           displayType="text"
         />
       </div>
@@ -71,7 +70,6 @@ const ProgramDepositForm = ({
               value={formatValue(fee)}
               prefix="("
               suffix={` GVT)`}
-              decimalScale={8}
               displayType="text"
             />
           </span>
@@ -84,7 +82,6 @@ const ProgramDepositForm = ({
             <NumberFormat
               value={formatValue(due)}
               suffix={` GVT`}
-              decimalScale={8}
               displayType="text"
             />
           </span>

@@ -10,7 +10,7 @@ import moment from "moment";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { formatValue } from "utils/formatter";
+import { formatValue, roundTypeEnum } from "utils/formatter";
 
 import BaseProfitability from "../../../../../../components/profitability/base-profitability";
 import {
@@ -82,7 +82,6 @@ class ProgramTrades extends Component {
             <TableCell className="program-details-trades__cell program-details-trades__cell--volume">
               <NumberFormat
                 value={formatValue(trade.volume)}
-                decimalScale={8}
                 displayType="text"
                 thousandSeparator=" "
               />
@@ -90,15 +89,15 @@ class ProgramTrades extends Component {
             <TableCell className="program-details-trades__cell program-details-trades__cell--price">
               <NumberFormat
                 value={formatValue(trade.price)}
-                decimalScale={8}
                 displayType="text"
                 thousandSeparator=" "
               />
             </TableCell>
             <TableCell className="program-details-trades__cell program-details-trades__cell--profit">
-              <Profitability value={trade.profit} prefix="sign">
+              <Profitability value={formatValue(trade.profit)} prefix="sign">
                 <NumberFormat
-                  value={formatValue(Math.abs(trade.profit))}
+                  value={formatValue(trade.profit, roundTypeEnum.FLOOR, false)}
+                  thousandSeparator=" "
                   displayType="text"
                 />
               </Profitability>

@@ -35,7 +35,6 @@
 
   &__search {
     display: none;
-    margin-left: 30px;
 
     a {
       display: inline-flex;
@@ -43,9 +42,10 @@
   }
 
   &__separator {
+    flex-grow: 1;
     display: none;
     border-left: 2px solid #1f2b36;
-    margin: 0 60px;
+    margin: 0 30px;
     align-self: stretch;
   }
 
@@ -57,7 +57,12 @@
 
   @include media-breakpoint-landscape-tablet() {
     &__center {
-      margin-left: auto;
+      flex-grow: 2;
+      justify-content: space-between;
+
+      .select {
+        min-width: 100px;
+      }
     }
     &__menu {
       display: flex;

@@ -78,6 +78,7 @@ class ProgramDetailsDescription extends PureComponent {
               level={programDescription.level}
               alt={programDescription.title}
               size="big"
+              color={programDescription.color}
             />
           </div>
           <Popover
