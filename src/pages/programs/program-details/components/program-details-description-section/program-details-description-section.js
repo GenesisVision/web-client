@@ -16,7 +16,7 @@ const composeInvestmentData = programDetails => {
     balanceAmount: balanceBase.amount,
     balanceCurrency: balanceBase.currency,
     profitPercent,
-    status: personalProgramDetails.investmentProgramStatus
+    status: personalProgramDetails.status
   };
 };
 class ProgramDetailsDescriptionSection extends PureComponent {
