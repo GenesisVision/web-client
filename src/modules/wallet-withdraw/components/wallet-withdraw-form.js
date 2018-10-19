@@ -8,10 +8,7 @@ import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
-import {
-  convertFromCurrency,
-  convertToCurrency
-} from "utils/currency-converter";
+import { convertFromCurrency } from "utils/currency-converter";
 import { formatValue } from "utils/formatter";
 import { number, object, string } from "yup";
 

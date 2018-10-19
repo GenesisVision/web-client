@@ -5,7 +5,6 @@ import copy from "copy-to-clipboard";
 import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import PropTypes from "prop-types";
-import QRCode from "qrcode.react";
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
