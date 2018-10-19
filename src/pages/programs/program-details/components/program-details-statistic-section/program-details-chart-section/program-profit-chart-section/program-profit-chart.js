@@ -16,11 +16,34 @@ import {
   YAxis
 } from "recharts";
 
+import { ChartPeriodType } from "../../../../../../../components/chart/chart-period/chart-period.helpers";
 import ProgramProfitTooltip from "./program-profit-tooltip";
+
+const dateTickFormatter = periodType => date => {
+  let dateFormat;
+  switch (periodType) {
+    case ChartPeriodType.day:
+      dateFormat = "LT";
+      break;
+    case ChartPeriodType.week:
+    case ChartPeriodType.month:
+    case ChartPeriodType.quarter:
+      dateFormat = "MMM Do";
+      break;
+    default:
+      dateFormat = "ll";
+  }
+  return moment(date).format(dateFormat);
+};
+
+const composeTicks = (periodStart, periodEnd) => {
+  const diff = (periodEnd - periodStart) / 6;
+  return [...Array(7).keys()].map(x => periodStart + diff * x);
+};
 
 class ProgramProfitChart extends PureComponent {
   render() {
-    const { equityChart, pnlChart, currency } = this.props;
+    const { equityChart, pnlChart, currency, period } = this.props;
     if (equityChart.length === 0 || pnlChart.length === 0) return null;
     const equity = equityChart.map(x => ({
       date: x.date.getTime(),
@@ -37,6 +60,7 @@ class ProgramProfitChart extends PureComponent {
       `url(#equityProgramChartStroke)`
     );
 
+    const periodStart = period.start ? period.start.getTime() : equity[0].date;
     return (
       <ResponsiveContainer>
         <ComposedChart data={pnl}>
@@ -60,12 +84,17 @@ class ProgramProfitChart extends PureComponent {
           </defs>
           <XAxis
             dataKey="date"
-            domain={["dataMin", "dataMax"]}
+            domain={[periodStart, period.end.getTime()]}
             type="number"
-            tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
-            tickFormatter={(date, i) => moment(date).format("ll")}
+            tick={{
+              fill: GVColors.$labelColor,
+              fontSize: "12",
+              transform: "translate(0, 8)"
+            }}
+            tickFormatter={dateTickFormatter(period.type)}
             allowDuplicatedCategory={false}
             axisLine={false}
+            ticks={composeTicks(periodStart, period.end.getTime())}
           />
           <YAxis
             yAxisId="left"
@@ -73,7 +102,10 @@ class ProgramProfitChart extends PureComponent {
             data={equity}
             orientation="left"
             axisLine={false}
-            tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
+            tick={{
+              fill: GVColors.$labelColor,
+              fontSize: "12"
+            }}
             tickFormatter={x => x.toFixed(2)}
             unit="%"
             width={50}

@@ -1,10 +1,6 @@
 import "./program-details-statistic-section.scss";
 
-import {
-  ChartPeriodType,
-  getPeriodStartDate
-} from "components/chart/chart-period/chart-period.helpers";
-import moment from "moment";
+import { DEFAULT_PERIOD } from "components/chart/chart-period/chart-period.helpers";
 import React, { PureComponent } from "react";
 
 import { getProgramStatistic } from "../../services/program-details.service";
@@ -16,11 +12,7 @@ class ProgramDetailsStatisticSection extends PureComponent {
     statisticData: { data: null, isPending: true },
     profitChartData: { data: null, isPending: true },
     balanceChartData: { data: null, isPending: true },
-    period: {
-      type: ChartPeriodType.month,
-      start: getPeriodStartDate(ChartPeriodType.month),
-      end: moment()
-    },
+    period: DEFAULT_PERIOD,
     prevProps: null
   };
 

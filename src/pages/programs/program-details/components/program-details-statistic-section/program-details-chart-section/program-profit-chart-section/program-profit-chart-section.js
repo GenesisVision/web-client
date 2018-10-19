@@ -36,6 +36,7 @@ const ProgramProfitChartSection = ({
           equityChart={profitChart.equityChart}
           pnlChart={profitChart.pnLChart}
           currency={profitChart.programCurrency}
+          period={period}
         />
       </div>
     </Fragment>
