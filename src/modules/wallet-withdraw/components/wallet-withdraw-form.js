@@ -29,9 +29,11 @@ const WalletWithdrawForm = ({
     wallet => wallet.currency === currency
   );
 
-  const willGet = convertFromCurrency(amount, rateToGvt);
-  const withdrawing =
-    parseFloat(amount) + convertToCurrency(commission, rateToGvt);
+  const willGet = Math.max(
+    convertFromCurrency(amount, rateToGvt) - commission,
+    0
+  );
+
   return (
     <form
       id="wallet-withdraw"
@@ -119,18 +121,6 @@ const WalletWithdrawForm = ({
               <NumberFormat
                 value={formatValue(commission)}
                 suffix={` ${currency}`}
-                displayType="text"
-              />
-            </span>
-          </li>
-          <li className="dialog-list__item">
-            <span className="dialog-list__title">
-              {t("wallet-withdraw.withdrawing")}
-            </span>
-            <span className="dialog-list__value">
-              <NumberFormat
-                value={formatValue(withdrawing)}
-                suffix={` GVT`}
                 displayType="text"
               />
             </span>

@@ -1,3 +1,4 @@
+import GVqr from "components/gv-qr/gv-qr";
 import CopyIcon from "components/icon/copy-icon";
 import Select from "components/select/select";
 import copy from "copy-to-clipboard";
@@ -78,14 +79,7 @@ const WalletAddFundsForm = ({
         </div>
       </div>
       <div className="dialog__bottom wallet-add-funds-popup__bottom">
-        <QRCode
-          className="wallet-add-funds-popup__qr"
-          value={address}
-          bgColor={"transparent"}
-          fgColor={"white"}
-          size={150}
-          level={"H"}
-        />
+        <GVqr className="wallet-add-funds-popup__qr" value={address} />
         <div className="wallet-add-funds-popup__title">
           {t("wallet-add-funds.deposit-address")}
         </div>
