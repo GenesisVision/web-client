@@ -1,9 +1,9 @@
 import "./settings.scss";
 
-import Page from "components/page/page";
 import { GVButton } from "gv-react-components";
 import TwoFactorAuthContainer from "modules/2fa/2fa-container";
-import { PASSWORD_ROUTE } from "pages/profile/profile.routes";
+import ProfileLayout from "pages/profile/profile-layout";
+import { PASSWORD_ROUTE } from "pages/profile/profile.constants";
 import React from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -13,8 +13,7 @@ import ProfileImageContainer from "./profile-image/profile-image-container";
 
 const SettingsPage = ({ t }) => {
   return (
-    <Page title={t("profile.settings.title")}>
-      <h1>{t("profile.settings.title")}</h1>
+    <ProfileLayout route="settings">
       <div className="profile-settings__content">
         <TwoFactorAuthContainer />
         <ProfileImageContainer />
@@ -32,10 +31,8 @@ const SettingsPage = ({ t }) => {
           <LogoutButtonContainer />
         </div>
       </div>
-    </Page>
+    </ProfileLayout>
   );
 };
-
-SettingsPage.propTypes = {};
 
 export default translate()(SettingsPage);

@@ -15,7 +15,7 @@ import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
 import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import { FUNDS_ROUTE } from "pages/funds/funds.routes";
 import { GLOBAL_SEARCH_ROUTE } from "pages/global-search/global-search.routes";
-import { PROFILE_ROUTE, SETTINGS_ROUTE } from "pages/profile/profile.routes";
+import { PROFILE_ROUTE, SETTINGS_ROUTE } from "pages/profile/profile.constants";
 import { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
 import { WALLET_PAGE_ROUTE } from "pages/wallet/wallet-page";
 import PropTypes from "prop-types";

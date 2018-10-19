@@ -2,7 +2,7 @@
 
 .profile {
   &__edit-link {
-    display: inline-flex;
+    display: flex;
     margin-bottom: 45px;
   }
 
@@ -11,7 +11,7 @@
   }
   &__container {
     width: 100%;
-    overflow: scroll;
+    overflow: auto;
   }
   &__left {
     position: relative;
