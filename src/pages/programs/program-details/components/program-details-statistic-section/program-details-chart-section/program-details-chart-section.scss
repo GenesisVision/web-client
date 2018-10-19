@@ -4,9 +4,13 @@
 
 .program-details-chart {
   padding: 0 $padding-middle-mobile;
+  padding-bottom: $padding-middle-mobile;
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
-  &__heading {
+  &__title {
     font-size: $font-size-subtitle-mobile;
     font-weight: 600;
     letter-spacing: 0.2px;
@@ -42,8 +46,9 @@
   }
   @include media-breakpoint-landscape-phone() {
     padding: 0 $padding-middle;
+    padding-bottom: $padding-middle;
 
-    &__heading {
+    &__title {
       font-size: $font-size-subtitle;
       padding: $padding-small 0;
     }

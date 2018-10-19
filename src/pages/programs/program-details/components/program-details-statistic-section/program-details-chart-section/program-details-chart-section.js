@@ -32,18 +32,20 @@ class ProgramDetailsChartSection extends PureComponent {
     return (
       <Surface className="program-details-chart">
         <div className="program-details-chart__heading">
-          {t("program-details-page.chart.heading")}
+          <div className="program-details-chart__title">
+            {t("program-details-page.chart.heading")}
+          </div>
+          <GVTabs value={tab} onChange={this.handleTabChange}>
+            <GVTab
+              value={PROFIT_TAB}
+              label={t("program-details-page.chart.tabs.profit")}
+            />
+            <GVTab
+              value={BALANCE_TAB}
+              label={t("program-details-page.chart.tabs.balance")}
+            />
+          </GVTabs>
         </div>
-        <GVTabs value={tab} onChange={this.handleTabChange}>
-          <GVTab
-            value={PROFIT_TAB}
-            label={t("program-details-page.chart.tabs.profit")}
-          />
-          <GVTab
-            value={BALANCE_TAB}
-            label={t("program-details-page.chart.tabs.balance")}
-          />
-        </GVTabs>
         {tab === PROFIT_TAB && (
           <ProgramProfitChartSection
             profitChartData={profitChartData}
