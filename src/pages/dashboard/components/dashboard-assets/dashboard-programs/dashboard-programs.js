@@ -26,7 +26,7 @@ import { getDashboardPrograms } from "../../../services/dashboard-programs.servi
 
 class Dashboardprograms extends Component {
   fetchPrograms = filters => {
-    return getDashboardPrograms().then(({ data }) => {
+    return getDashboardPrograms(filters).then(({ data }) => {
       return { items: data.programs, total: data.total };
     });
   };
@@ -101,7 +101,7 @@ class Dashboardprograms extends Component {
               <ProgramSimpleChart data={program.chart} programId={program.id} />
             </TableCell>
             <TableCell className="dashboard-programs__cell--status">
-              Status
+              {program.status}
             </TableCell>
           </TableRow>
         )}

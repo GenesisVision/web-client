@@ -13,7 +13,8 @@ export const DASHBOARD_PROGRAMS_COLUMNS = [
     sortingName: "ByCurr"
   },
   {
-    name: "period"
+    name: "time-left",
+    sortingName: "ByEndOfPeriod"
   },
   {
     name: "value",
