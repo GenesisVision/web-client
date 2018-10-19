@@ -3,6 +3,7 @@ import "./program-big-chart.scss";
 import ProgramChartGradient, {
   gradientOffset
 } from "components/chart/chart-gradient/chart-gradient";
+import { getStrokeColor } from "components/chart/chart-gradient/chart-gradient";
 import { GVColors } from "gv-react-components";
 import moment from "moment";
 import React from "react";
@@ -19,12 +20,19 @@ import {
 import ProgramBigChartTooltip from "./program-big-chart-tooltip";
 
 const ProgramBigChart = ({ programId, data }) => {
+  if (data.length === 0) return null;
   const programChartData = data.map(x => ({
     date: x.date.getTime(),
     equity: x.value
   }));
-  const off = gradientOffset(programChartData.map(x => x.equity));
-  if (data.length === 0) return null;
+
+  const programChartDataValues = programChartData.map(x => x.equity);
+  const off = gradientOffset(programChartDataValues);
+  const areaStrokeColor = getStrokeColor(
+    programChartDataValues,
+    `url(#equityChartStroke__${programId})`
+  );
+
   return (
     <ResponsiveContainer width="99%" height="99%" className="program-big-chart">
       <AreaChart data={programChartData}>
@@ -66,7 +74,7 @@ const ProgramBigChart = ({ programId, data }) => {
         <Area
           type="monotone"
           dataKey="equity"
-          stroke={`url(#equityChartStroke__${programId})`}
+          stroke={areaStrokeColor}
           strokeWidth={2}
           fill={`url(#equityChartFill__${programId})`}
           isAnimationActive={false}

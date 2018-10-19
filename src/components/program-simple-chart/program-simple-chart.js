@@ -3,6 +3,7 @@ import "./program-simple-chart.scss";
 import ProgramChartGradient, {
   gradientOffset
 } from "components/chart/chart-gradient/chart-gradient";
+import { getStrokeColor } from "components/chart/chart-gradient/chart-gradient";
 import { GVColors } from "gv-react-components";
 import React from "react";
 import { Area, AreaChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
@@ -13,7 +14,13 @@ const ProgramSimpleChart = ({ data, programId }) => {
     date: x.date.getTime(),
     equity: x.value
   }));
-  const off = gradientOffset(programChartData.map(x => x.equity));
+
+  const programChartDataValues = programChartData.map(x => x.equity);
+  const off = gradientOffset(programChartDataValues);
+  const areaStrokeColor = getStrokeColor(
+    programChartDataValues,
+    `url(#equitySimpleChartStroke__${programId})`
+  );
   return (
     <div className="program-simple-chart">
       <ResponsiveContainer>
@@ -21,9 +28,17 @@ const ProgramSimpleChart = ({ data, programId }) => {
           <defs>
             <ProgramChartGradient
               offset={off}
+              name={`equitySimpleChartStroke__${programId}`}
+              positiveColor={GVColors.$positiveColor}
+              negativeColor={GVColors.$negativeColor}
+              startOpacity={1}
+              stopOpacity={1}
+            />
+            <ProgramChartGradient
+              offset={off}
               name={`equitySimpleChartFill__${programId}`}
-              positiveColor={GVColors.$primaryColor}
-              negativeColor={GVColors.$primaryColor}
+              positiveColor={GVColors.$positiveColor}
+              negativeColor={GVColors.$negativeColor}
               startOpacity={0.2}
               stopOpacity={0.01}
             />
@@ -38,7 +53,7 @@ const ProgramSimpleChart = ({ data, programId }) => {
           <Area
             type="monotone"
             dataKey="equity"
-            stroke={GVColors.$primaryColor}
+            stroke={areaStrokeColor}
             strokeWidth={2}
             fill={`url(#equitySimpleChartFill__${programId})`}
             isAnimationActive={false}

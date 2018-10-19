@@ -1,6 +1,7 @@
 import ProgramChartGradient, {
   gradientOffset
 } from "components/chart/chart-gradient/chart-gradient";
+import { getStrokeColor } from "components/chart/chart-gradient/chart-gradient";
 import { GVColors } from "gv-react-components";
 import moment from "moment";
 import React, { PureComponent } from "react";
@@ -29,7 +30,13 @@ class ProgramProfitChart extends PureComponent {
       date: x.date.getTime(),
       value: x.value
     }));
-    const off = gradientOffset(equity.map(x => x.value));
+    const equityValues = equity.map(x => x.value);
+    const off = gradientOffset(equityValues);
+    const areaStrokeColor = getStrokeColor(
+      equityValues,
+      `url(#equityProgramChartStroke)`
+    );
+
     return (
       <ResponsiveContainer>
         <ComposedChart data={pnl}>
@@ -98,7 +105,7 @@ class ProgramProfitChart extends PureComponent {
             type="monotone"
             data={equity}
             connectNulls={true}
-            stroke={`url(#equityProgramChartStroke)`}
+            stroke={areaStrokeColor}
             fill={`url(#equityProgramChartFill)`}
             strokeWidth={3}
             dot={false}
