@@ -8,7 +8,8 @@ import NotificationRoutes, {
   NOTIFICATIONS_ROUTE
 } from "pages/notifications/notifications.routes";
 import PrivateRoute from "pages/private-route";
-import ProfileRoutes, { PROFILE_ROUTE } from "pages/profile/profile.routes";
+import { PROFILE_ROUTE } from "pages/profile/profile.constants";
+import ProfileRoutes from "pages/profile/profile.routes";
 import WalletWithdrawConfirmPage, {
   WALLET_WITHDRAW_CONFIRM_ROUTE
 } from "pages/wallet-withdraw-confirm/wallet-withdraw-confirm.page";
