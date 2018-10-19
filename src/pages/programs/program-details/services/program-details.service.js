@@ -55,6 +55,7 @@ export const getProgramStatistic = (
     };
     const profitChartData = {
       data: {
+        balance: profitChart.data.balance,
         totalGvtProfit: profitChart.data.totalGvtProfit,
         totalProgramCurrencyProfit: profitChart.data.totalProgramCurrencyProfit,
         programCurrency: profitChart.data.programCurrency,

@@ -8,10 +8,16 @@ import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 
-const ProgramDetailsStatistics = ({ t, statisticData, period }) => {
-  const { data: statistic, isPending } = statisticData;
+const ProgramDetailsStatistics = ({
+  t,
+  statisticData,
+  profitChartData,
+  period
+}) => {
+  const { data: statistic, isPendingStatistic } = statisticData;
+  const { data: profitChart, isPendingProfitChart } = profitChartData;
 
-  if (!statistic || isPending) return null;
+  if (!statistic || isPendingStatistic || isPendingProfitChart) return null;
   return (
     <Surface className="program-details-statistics">
       <div className="program-details-statistics__heading">
@@ -28,7 +34,7 @@ const ProgramDetailsStatistics = ({ t, statisticData, period }) => {
             </span>
             <span className="program-details-statistics__value">
               <NumberFormat
-                value={statistic.balance}
+                value={profitChart.balance.toFixed(2)}
                 thousandSeparator={" "}
                 displayType="text"
                 suffix={" GVT"}
