@@ -10,7 +10,7 @@ export const PeriodTimeLeft = ({ t, periodEnds, className }) => {
       return t("program-period.period-is-over");
     }
 
-    return periodEndsMoment.from(now);
+    return periodEndsMoment.from(now, true);
   };
 
   return <div className={className}>{renderTimeLeft()}</div>;

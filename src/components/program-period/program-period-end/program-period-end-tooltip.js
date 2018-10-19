@@ -6,7 +6,7 @@ const PropgramPeriodEndTooltip = ({ t, periodEnds }) => {
   return (
     <div className="program-period-tooltip">
       <div className="program-period-tooltip__header">
-        {t("program-period.time-left")}
+        {t("program-period.period-ends")}
       </div>
       <div className="program-period-tooltip__content">
         {moment(periodEnds).format("lll")}
