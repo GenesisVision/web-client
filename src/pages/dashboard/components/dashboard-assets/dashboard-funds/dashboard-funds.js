@@ -1,14 +1,15 @@
 import "./dashboard-funds.scss";
 
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
+import FundAssetContainer from "components/fund-asset/fund-asset-container";
 import Profitability from "components/profitability/profitability";
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
 import { GVButton } from "gv-react-components";
 import { FUNDS_TABLE_COLUMNS } from "modules/funds-table/funds-table.constants";
 import { TableCell, TableRow } from "modules/table/components";
 import DateRangeFilter from "modules/table/components/filtering/date-range-filter/date-range-filter";
-import { DATE_RANGE_FILTER_NAME } from "modules/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "modules/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { DATE_RANGE_FILTER_NAME } from "modules/table/components/filtering/date-range-filter/date-range-filter.constants";
 import TableModule from "modules/table/components/table-module";
 import { DEFAULT_PAGING } from "modules/table/reducers/table-paging.reducer";
 import React, { Component, Fragment } from "react";
@@ -16,7 +17,6 @@ import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 
-import FundAssetContainer from "../../../../../modules/funds-table/components/funds-table/fund-asset/fund-asset-container";
 import replaceParams from "../../../../../utils/replace-params";
 import {
   FUNDS_SLUG_URL_PARAM_NAME,

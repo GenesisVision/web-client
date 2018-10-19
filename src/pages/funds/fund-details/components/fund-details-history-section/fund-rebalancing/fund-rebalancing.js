@@ -1,5 +1,6 @@
 import "./fund-rebalancing.scss";
 
+import FundAssetContainer from "components/fund-asset/fund-asset-container";
 import { TableCell, TableRow } from "modules/table/components";
 import DateRangeFilter from "modules/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "modules/table/components/filtering/date-range-filter/date-range-filter.constants";
@@ -9,7 +10,6 @@ import moment from "moment";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 
-import FundAssetContainer from "../../../../../../modules/funds-table/components/funds-table/fund-asset/fund-asset-container";
 import {
   FUND_REBALANCING_COLUMNS,
   FUND_REBALANCING_DEFAULT_FILTERS,
