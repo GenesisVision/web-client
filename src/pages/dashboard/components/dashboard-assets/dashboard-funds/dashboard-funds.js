@@ -27,7 +27,7 @@ import { getDashboardFunds } from "../../../services/dashboard-funds.service";
 
 class DashboardFunds extends Component {
   fetchFunds = filters => {
-    return getDashboardFunds().then(({ data }) => {
+    return getDashboardFunds(filters).then(({ data }) => {
       return { items: data.funds, total: data.total };
     });
   };

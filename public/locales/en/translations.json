@@ -398,7 +398,7 @@
     "second": "second",
     "second_plural": "seconds",
     "period-is-over": "The period is over.",
-    "time-left": "Time left",
+    "time-left": "Period ends",
     "left": "left"
   },
   "program-statuses": {
@@ -479,7 +479,7 @@
       "title": "Name",
       "share": "Share",
       "currency": "Curr.",
-      "time-left": "T.left",
+      "time-left": "Ends",
       "value": "Value",
       "profit": "Profit",
       "chart": "Chart",
