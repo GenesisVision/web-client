@@ -29,11 +29,11 @@ const ProgramBalanceTooltip = ({
 }) => {
   if (!active || !payload[0]) return null;
 
-  const managersFunds = `${payload[0].payload.managerFunds}${payload[0].unit}`;
-  const investorsFunds = `${payload[0].payload.investorsFunds}${
+  const managersFunds = `${payload[0].payload.managerFunds} ${payload[0].unit}`;
+  const investorsFunds = `${payload[0].payload.investorsFunds} ${
     payload[0].unit
   }`;
-  const profit = `${payload[0].payload.profit}${payload[0].unit}`;
+  const profit = `${payload[0].payload.profit} ${payload[0].unit}`;
 
   return (
     <ChartTooltip
