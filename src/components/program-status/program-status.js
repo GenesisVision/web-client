@@ -16,7 +16,7 @@ const getStatusClassName = (status, className) => {
 const ProgramStatus = ({ t, className, status }) => {
   return (
     <span className={getStatusClassName(status, className)}>
-      {t(`program-statuses.${status}`)}
+      {status ? t(`program-statuses.${status}`) : ""}
     </span>
   );
 };

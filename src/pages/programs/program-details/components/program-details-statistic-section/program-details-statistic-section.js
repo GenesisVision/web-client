@@ -53,6 +53,7 @@ class ProgramDetailsStatisticSection extends PureComponent {
         <div className="program-details-statistic-section__statistic">
           <ProgramDetailsStatistic
             statisticData={statisticData}
+            profitChartData={profitChartData}
             period={period}
           />
         </div>
