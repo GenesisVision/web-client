@@ -831,6 +831,10 @@
     "index": "Index",
     "success-edit": "Profile update is successful",
     "success-verify": "Phone number verification is successful",
+    "tabs": {
+      "personal-details": "Personal details",
+      "settings": "Settings"
+    },
     "verification": {
       "phone": {
         "required": "Code is required",

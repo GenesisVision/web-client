@@ -12,11 +12,13 @@ const ProfilePage = ({ t }) => {
       <h1>{t("profile.title")}</h1>
       <GVTabs value="details">
         <GVTab
-          label={<Link to={PROFILE_ROUTE}>Personal details</Link>}
+          label={
+            <Link to={PROFILE_ROUTE}>{t("profile.tabs.personal-details")}</Link>
+          }
           value="details"
         />
         <GVTab
-          label={<Link to={SETTINGS_ROUTE}>Settings</Link>}
+          label={<Link to={SETTINGS_ROUTE}>{t("profile.tabs.settings")}</Link>}
           value="settings"
         />
       </GVTabs>
