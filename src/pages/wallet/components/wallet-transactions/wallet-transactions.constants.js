@@ -14,6 +14,9 @@ export const WALLET_TRANSACTIONS_COLUMNS = [
   },
   {
     name: "amount"
+  },
+  {
+    name: "actions"
   }
 ];
 
