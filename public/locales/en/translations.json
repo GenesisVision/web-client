@@ -373,7 +373,7 @@
     "confirmation": {
       "page-title": "Wallet withdraw confirm",
       "error": "An error occurred during confirmation of email: ",
-      "success": "Successful Email Verification"
+      "success": "Withdrawal request is confirmed"
     },
     "validation": {
       "amount-more-than-available": "Amount is more than available in your wallet",
