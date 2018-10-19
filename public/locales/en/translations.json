@@ -479,8 +479,8 @@
       "title": "Name",
       "share": "Share",
       "currency": "Curr.",
-      "period": "Period",
-      "value": "value",
+      "time-left": "T.left",
+      "value": "Value",
       "profit": "Profit",
       "chart": "Chart",
       "status": "Status"
@@ -814,6 +814,7 @@
     }
   },
   "profile": {
+    "title": "Profile",
     "contacts": "Contacts",
     "not-verified": "Not verified",
     "phone-number": "Phone number",
@@ -830,6 +831,10 @@
     "index": "Index",
     "success-edit": "Profile update is successful",
     "success-verify": "Phone number verification is successful",
+    "tabs": {
+      "personal-details": "Personal details",
+      "settings": "Settings"
+    },
     "verification": {
       "phone": {
         "required": "Code is required",

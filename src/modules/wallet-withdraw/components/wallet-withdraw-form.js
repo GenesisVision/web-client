@@ -8,10 +8,7 @@ import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
-import {
-  convertFromCurrency,
-  convertToCurrency
-} from "utils/currency-converter";
+import { convertFromCurrency } from "utils/currency-converter";
 import { formatValue } from "utils/formatter";
 import { number, object, string } from "yup";
 
@@ -29,9 +26,11 @@ const WalletWithdrawForm = ({
     wallet => wallet.currency === currency
   );
 
-  const willGet = convertFromCurrency(amount, rateToGvt);
-  const withdrawing =
-    parseFloat(amount) + convertToCurrency(commission, rateToGvt);
+  const willGet = Math.max(
+    convertFromCurrency(amount, rateToGvt) - commission,
+    0
+  );
+
   return (
     <form
       id="wallet-withdraw"
@@ -119,18 +118,6 @@ const WalletWithdrawForm = ({
               <NumberFormat
                 value={formatValue(commission)}
                 suffix={` ${currency}`}
-                displayType="text"
-              />
-            </span>
-          </li>
-          <li className="dialog-list__item">
-            <span className="dialog-list__title">
-              {t("wallet-withdraw.withdrawing")}
-            </span>
-            <span className="dialog-list__value">
-              <NumberFormat
-                value={formatValue(withdrawing)}
-                suffix={` GVT`}
                 displayType="text"
               />
             </span>

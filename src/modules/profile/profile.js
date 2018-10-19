@@ -3,7 +3,7 @@ import "./profile.scss";
 import Chip from "components/chip/chip";
 import { GVButton, GVTextField } from "gv-react-components";
 import moment from "moment";
-import { PROFILE_EDIT_ROUTE } from "pages/profile/profile.routes";
+import { PROFILE_EDIT_ROUTE } from "pages/profile/profile.constants";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";

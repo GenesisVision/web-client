@@ -1,34 +1,18 @@
-import Page from "components/page/page";
+import NavigationBackButton from "modules/navigation-back-button/navigation-back-button";
 import ProfileContainer from "modules/profile/profile-container";
 import ProfileForm from "modules/profile/profile-form";
-import ProgramDetailsNavigation from "pages/programs/program-details/components/program-details-navigation/program-details-navigation";
+import ProfileLayout from "pages/profile/profile-layout";
 import React from "react";
-import { translate } from "react-i18next";
-import connect from "react-redux/es/connect/connect";
-import { goBack } from "react-router-redux";
-import { bindActionCreators, compose } from "redux";
 
-const ProfileEditPage = ({ t, service }) => {
+const ProfileEditPage = () => {
   return (
-    <Page title={t("profile.title")}>
-      <ProgramDetailsNavigation goBack={service.goBack} />
+    <ProfileLayout route="details">
+      <NavigationBackButton />
       <ProfileContainer>
         <ProfileForm />
       </ProfileContainer>
-    </Page>
+    </ProfileLayout>
   );
 };
 
-const mapDispatchToProps = dispatch => ({
-  service: bindActionCreators({ goBack }, dispatch)
-});
-
-export default compose(
-  translate(),
-  connect(
-    null,
-    mapDispatchToProps,
-    null,
-    { pure: false }
-  )
-)(ProfileEditPage);
+export default ProfileEditPage;
