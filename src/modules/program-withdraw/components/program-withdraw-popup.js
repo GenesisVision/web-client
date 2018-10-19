@@ -13,14 +13,20 @@ class ProgramWithdrawPopup extends Component {
 
   componentDidMount() {
     this.setState({ isPending: true });
-    this.props.fetchInfo().then(data => {
-      this.setState({ ...data });
-    });
+    this.props
+      .fetchInfo()
+      .then(data => {
+        this.setState({ ...data });
+      })
+      .catch(data => this.setState({ ...data }));
   }
 
   handleSumbit = amount => {
     this.setState({ isPending: true });
-    return this.props.withdraw(amount).then(data => this.setState({ ...data }));
+    return this.props
+      .withdraw(amount)
+      .then(data => this.setState({ ...data }))
+      .catch(data => this.setState({ ...data }));
   };
 
   render() {

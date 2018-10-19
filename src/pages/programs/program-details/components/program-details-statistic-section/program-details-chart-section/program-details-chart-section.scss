@@ -4,9 +4,13 @@
 
 .program-details-chart {
   padding: 0 $padding-middle-mobile;
+  padding-bottom: $padding-middle-mobile;
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
-  &__heading {
+  &__title {
     font-size: $font-size-subtitle-mobile;
     font-weight: 600;
     letter-spacing: 0.2px;
@@ -18,41 +22,44 @@
     width: 100%;
   }
 
-  .fund-details-tooltip {
+  .program-details-tooltip {
     &__statistic {
     }
 
     &__title {
       font-size: $font-size-middle-mobile;
-      font-weight: 600;
+      font-weight: 300;
       letter-spacing: 0.4px;
       color: $text-accent-color;
       max-width: 10em;
       overflow: hidden;
       text-overflow: ellipsis;
+      padding: $padding-mini-mobile/2 0;
     }
 
     &__value {
-      font-size: $font-size-small-mobile;
+      font-size: $font-size-large-mobile;
       font-weight: 600;
       letter-spacing: 0.3px;
-      color: $text-dark-color;
+      color: $text-accent-color;
     }
   }
   @include media-breakpoint-landscape-phone() {
     padding: 0 $padding-middle;
+    padding-bottom: $padding-middle;
 
-    &__heading {
+    &__title {
       font-size: $font-size-subtitle;
-      padding: $padding-middle 0;
+      padding: $padding-small 0;
     }
 
-    .fund-details-tooltip {
+    .program-details-tooltip {
       &__title {
         font-size: $font-size-middle;
+        padding: $padding-mini/2 0;
       }
       &__value {
-        font-size: $font-size-small;
+        font-size: $font-size-large;
       }
     }
   }

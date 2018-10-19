@@ -1,6 +1,7 @@
 @import "styles/_colors.scss";
 
 .dashboard-portfolio-events {
+  flex: 1;
   min-height: 683px;
   padding: 0 18px 0 30px;
   display: flex;
@@ -23,7 +24,10 @@
       left: 0;
       width: 267px;
       height: 120px;
-      background: linear-gradient(transparent, $panel-background-color);
+      background: linear-gradient(
+        rgba($panel-background-color, 0),
+        $panel-background-color
+      );
     }
   }
 

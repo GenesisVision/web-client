@@ -2,57 +2,36 @@ import "./dashboard-portfolio-event-logo.scss";
 
 import classnames from "classnames";
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
-import { WalletIcon } from "components/icon/wallet-icon";
 import React from "react";
+import EventLossIcon from "shared/media/event-loss.svg";
+import EventProfitIcon from "shared/media/event-profit.svg";
+import EventReinvestIcon from "shared/media/event-reinvest.svg";
 
-import icons from "./icons";
+import { EventLogoType } from "./dashboard-portfolio-event-logo.helper";
 
-export const logoTypes = {
-  PROFIT: "PROFIT",
-  LOSE: "LOSE",
-  REINVEST: "REINVEST"
+const EvenLogoIcon = ({ type }) => {
+  if (type === EventLogoType.profit)
+    return <img src={EventProfitIcon} alt="profit" />;
+  if (type === EventLogoType.loss)
+    return <img src={EventLossIcon} alt="loss" />;
+  return <img src={EventReinvestIcon} alt="reinvest" />;
 };
 
-const getTypeSVG = type => {
-  switch (type) {
-    case logoTypes.PROFIT:
-      return icons.EventProfitIcon;
-    case logoTypes.LOSE:
-      return icons.EventLoseIcon;
-    case logoTypes.REINVEST:
-      return icons.EventReinvestIcon;
-    default:
-      return null;
-  }
-};
-
-const getLogoSVG = (type, logo) => {
-  if (logo !== undefined)
-    return (
-      <AssetAvatar
-        url={logo}
-        alt={type}
-        className="portfolio-event-logo__logo"
-      />
-    );
-  return <WalletIcon className="portfolio-event-logo__wallet" />;
-};
-
-const PortfolioEventLogo = ({ isPositive, type, logo }) => {
-  const className = classnames("portfolio-event-logo", {
-    "portfolio-event-logo--positive": isPositive,
-    "portfolio-event-logo--negative": !isPositive
-  });
-
-  const TypeSVG = getTypeSVG(type);
+const PortfolioEventLogo = ({ type, logo, color }) => {
+  const className = classnames("portfolio-event-logo");
 
   return (
     <div className={className}>
       <div className="portfolio-event-logo__photo">
-        {getLogoSVG(type, logo)}
+        <AssetAvatar
+          url={logo}
+          alt={type}
+          className="portfolio-event-logo__logo"
+          color={color}
+        />
       </div>
       <div className={"portfolio-event-logo__type"}>
-        <TypeSVG />
+        <EvenLogoIcon type={type} />
       </div>
     </div>
   );

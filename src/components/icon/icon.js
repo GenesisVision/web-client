@@ -89,10 +89,6 @@ export const CardsIcon = props => {
   return <Icon type={"cards"} {...props} />;
 };
 
-export const ActionsIcon = props => {
-  return <Icon type={"actions"} {...props} />;
-};
-
 export const ActionsCircleIcon = props => {
   return <Icon type={"actions-circle"} {...props} />;
 };

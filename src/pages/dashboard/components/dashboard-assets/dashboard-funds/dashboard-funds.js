@@ -27,7 +27,7 @@ import { getDashboardFunds } from "../../../services/dashboard-funds.service";
 
 class DashboardFunds extends Component {
   fetchFunds = filters => {
-    return getDashboardFunds().then(({ data }) => {
+    return getDashboardFunds(filters).then(({ data }) => {
       return { items: data.funds, total: data.total };
     });
   };
@@ -66,7 +66,11 @@ class DashboardFunds extends Component {
           <TableRow>
             <TableCell className="funds-table__cell--name">
               <div className="funds-table__cell--avatar-title">
-                <AssetAvatar url={fund.logo} alt={fund.title} />
+                <AssetAvatar
+                  url={fund.logo}
+                  alt={fund.title}
+                  color={fund.color}
+                />
                 <div className="funds-table__cell--title">
                   <Link to={fundDetailsUrl(fund.url)}>
                     <GVButton variant="text" color="secondary">

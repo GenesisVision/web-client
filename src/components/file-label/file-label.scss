@@ -1,0 +1,15 @@
+.file-label {
+  padding: 1em;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: baseline;
+
+  &__name {
+    padding-right: 1em;
+    text-transform: uppercase;
+  }
+
+  .gv-btn {
+    padding: 0;
+  }
+}

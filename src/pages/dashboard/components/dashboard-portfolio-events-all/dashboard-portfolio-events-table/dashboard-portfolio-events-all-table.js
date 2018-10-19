@@ -93,8 +93,8 @@ class PortfolioEventsTableComponent extends Component {
               <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--amount">
                 <Profitability value={event.value}>
                   <NumberFormat
-                    value={formatValue(Math.abs(event.value))}
-                    decimalScale={2}
+                    value={formatValue(event.value)}
+                    thousandSeparator=" "
                     displayType="text"
                   />
                 </Profitability>

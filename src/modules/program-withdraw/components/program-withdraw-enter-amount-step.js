@@ -25,7 +25,6 @@ const WithdrawEnterAmountStep = props => {
           value={formatValue(convertToCurrency(props.amount, props.rate))}
           prefix="= "
           suffix={` ${props.currency}`}
-          decimalScale={8}
           displayType="text"
         />
       </div>
