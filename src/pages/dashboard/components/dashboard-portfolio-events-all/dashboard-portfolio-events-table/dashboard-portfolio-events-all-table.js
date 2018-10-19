@@ -26,7 +26,14 @@ import {
 
 class PortfolioEventsTableComponent extends Component {
   render() {
-    const { t, filtering, title, className, fetchPortfolioEvents } = this.props;
+    const {
+      t,
+      filtering,
+      title,
+      className,
+      fetchPortfolioEvents,
+      dateRangeStartLabel
+    } = this.props;
     return (
       <div className={className}>
         <TableModule
@@ -59,7 +66,7 @@ class PortfolioEventsTableComponent extends Component {
                   name={DATE_RANGE_FILTER_NAME}
                   value={filtering["dateRange"]}
                   onChange={updateFilter}
-                  startLabel={t("filters.date-range.account-creation")}
+                  startLabel={dateRangeStartLabel}
                 />
               )}
             </Fragment>

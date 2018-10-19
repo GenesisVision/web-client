@@ -53,7 +53,7 @@ class DashboardFunds extends Component {
               name={DATE_RANGE_FILTER_NAME}
               value={filtering[DATE_RANGE_FILTER_NAME]}
               onChange={updateFilter}
-              startLabel={t("filters.date-range.fund-start-label")}
+              startLabel={t("filters.date-range.fund-start")}
             />
           </Fragment>
         )}
