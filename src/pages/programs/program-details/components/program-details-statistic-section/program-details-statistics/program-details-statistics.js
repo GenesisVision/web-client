@@ -35,7 +35,7 @@ const ProgramDetailsStatistics = ({
             </span>
             <span className="program-details-statistics__value">
               <NumberFormat
-                value={formatValue(statistic.balance)}
+                value={formatValue(profitChart.balance)}
                 thousandSeparator={" "}
                 displayType="text"
                 suffix={" GVT"}
