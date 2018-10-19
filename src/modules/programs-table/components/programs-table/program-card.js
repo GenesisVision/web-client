@@ -189,6 +189,7 @@ class ProgramCard extends Component {
           open={this.state.isOpenInvestmentPopup}
           id={program.id}
           onClose={this.handleCloseInvestmentPopup}
+          type={"program"}
         />
         <ProgramWithdrawContainer
           open={this.state.isOpenWithdrawalPopup}
