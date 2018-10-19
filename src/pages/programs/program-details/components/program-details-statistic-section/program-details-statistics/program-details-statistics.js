@@ -38,7 +38,7 @@ const ProgramDetailsStatistics = ({
                 value={formatValue(profitChart.balance)}
                 thousandSeparator={" "}
                 displayType="text"
-                suffix={" GVT"}
+                suffix={` ${profitChart.programCurrency}`}
               />
             </span>
           </div>
