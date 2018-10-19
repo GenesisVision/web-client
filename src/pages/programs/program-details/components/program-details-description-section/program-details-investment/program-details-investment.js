@@ -7,6 +7,7 @@ import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { formatValue } from "utils/formatter";
 
 class ProgramDetailsInvestment extends PureComponent {
   state = {
@@ -45,7 +46,7 @@ class ProgramDetailsInvestment extends PureComponent {
               </span>
 
               <NumberFormat
-                value={investedAmount}
+                value={formatValue(investedAmount)}
                 suffix={" GVT"}
                 displayType="text"
               />
@@ -55,7 +56,7 @@ class ProgramDetailsInvestment extends PureComponent {
                 {t("program-details-page.description.value")}
               </span>
               <NumberFormat
-                value={balanceAmount}
+                value={formatValue(balanceAmount)}
                 suffix={` ${balanceCurrency}`}
                 displayType="text"
               />

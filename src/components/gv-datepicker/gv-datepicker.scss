@@ -1,0 +1,44 @@
+@import "styles/_colors.scss";
+
+.gv-datepicker {
+  display: inline-flex;
+  width: 100%;
+
+  > div,
+  .react-datepicker-wrapper,
+  .react-datepicker__input-container {
+    display: flex;
+    width: 100%;
+  }
+
+  .react-datepicker {
+    border: none;
+    background-color: #273642;
+
+    &__triangle {
+      display: none;
+    }
+
+    &__current-month,
+    &__day-name {
+      color: $main-color;
+    }
+
+    &__day {
+      color: $main-color;
+
+      &:hover {
+        background-color: $positive-color;
+      }
+
+      &--selected {
+        background-color: $primary-color;
+      }
+    }
+
+    &__header {
+      background-color: #273642;
+      border-bottom: 1px solid $label-color;
+    }
+  }
+}

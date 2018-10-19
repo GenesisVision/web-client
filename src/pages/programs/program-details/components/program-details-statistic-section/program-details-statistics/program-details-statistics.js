@@ -7,6 +7,7 @@ import moment from "moment";
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { formatValue } from "utils/formatter";
 
 const ProgramDetailsStatistics = ({
   t,
@@ -34,7 +35,7 @@ const ProgramDetailsStatistics = ({
             </span>
             <span className="program-details-statistics__value">
               <NumberFormat
-                value={profitChart.balance.toFixed(2)}
+                value={formatValue(statistic.balance)}
                 thousandSeparator={" "}
                 displayType="text"
                 suffix={" GVT"}

@@ -1,15 +1,14 @@
 import "./dashboard-portfolio-event.scss";
 
-import classnames from "classnames";
 import Profitability from "components/profitability/profitability";
 import * as moment from "moment";
 import PropTypes from "prop-types";
 import React from "react";
 import NumberFormat from "react-number-format";
+import { formatValue, roundTypeEnum } from "utils/formatter";
 
-import PortfolioEventLogo, {
-  logoTypes
-} from "../dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
+import PortfolioEventLogo from "../dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
+import { composeEventLogoType } from "../dashboard-portfolio-event-logo/dashboard-portfolio-event-logo.helper";
 
 const formatDate = date => {
   const now = moment(new Date());
@@ -24,29 +23,20 @@ const formatDate = date => {
 };
 
 const DashboardPortfolioEvent = ({ event }) => {
-  const isPositive = event.value > 0;
-  const isNegative = event.value < 0;
-
-  const className = classnames("portfolio-event", {
-    "portfolio-event--positive": isPositive,
-    "portfolio-event--negative": isNegative
-  });
-
   return (
-    <div className={className}>
+    <div className="portfolio-event">
       <PortfolioEventLogo
-        isPositive={isPositive}
-        type={isPositive ? logoTypes.PROFIT : logoTypes.LOSE}
+        type={composeEventLogoType(event.type)}
         logo={event.logo}
+        color={event.logo}
       />
       <div className="portfolio-event__info">
         <span className="portfolio-event__time">{formatDate(event.date)}</span>
         <p className="portfolio-event__description">{event.description}</p>
         <span className="portfolio-event__value">
-          <Profitability value={event.value}>
+          <Profitability value={formatValue(event.value)} prefix="sign">
             <NumberFormat
-              value={Math.abs(event.value)}
-              decimalScale={8}
+              value={formatValue(event.value, roundTypeEnum.FLOOR, false)}
               displayType="text"
               suffix=" GVT"
             />
