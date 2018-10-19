@@ -140,9 +140,6 @@ class Profile extends Component {
                       name="birthday"
                       component={GVTextField}
                       InputComponent={GVDatePicker}
-                      onChange={date => {
-                        this.props.setFieldValue("birthday", date);
-                      }}
                     />
                     <GVFormikField
                       label={t("profile.citizen")}
@@ -260,13 +257,13 @@ const ProfileForm = withFormik({
   displayName: "profile-form",
   mapPropsToValues: ({ info }) => ({
     firstName: info.firstName,
-    phoneNumber: info.phone,
-    middleName: info.middleComments,
+    middleName: info.middleName,
     lastName: info.lastName,
-    birthday: moment(info.birthday).format(),
+    birthday: info.birthday ? moment(info.birthday).format() : undefined,
     citizenship: info.citizenship,
     gender: info.gender,
     documentId: "",
+    phoneNumber: info.phone,
     country: info.country,
     city: info.city,
     address: info.address,

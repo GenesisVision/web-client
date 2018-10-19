@@ -1,9 +1,8 @@
-import { GVTab, GVTabs } from "gv-react-components";
 import ProfileEditPage from "pages/profile/edit/edit.page";
 import PasswordPage from "pages/profile/password/password.page";
 import ProfilePage from "pages/profile/profile/profile.page";
 import SettingsPage from "pages/profile/settings/settings.page";
-import React, { Fragment } from "react";
+import React from "react";
 import { Route, Switch } from "react-router-dom";
 
 export const PROFILE_ROUTE = "/profile";
