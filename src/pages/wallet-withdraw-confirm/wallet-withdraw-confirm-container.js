@@ -18,9 +18,7 @@ class EmailConfirmContainer extends PureComponent {
           service.notifySuccess(t("wallet-withdraw.confirmation.success"));
         })
         .catch(error => {
-          service.notifyError(
-            t("wallet-withdraw.confirmation.error") + error.errorMessage
-          );
+          service.notifyError(error.errorMessage);
         });
     } else {
       service.showNotFoundPage();

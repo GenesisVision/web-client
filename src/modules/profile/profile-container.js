@@ -1,4 +1,5 @@
-import pickBy from "lodash.pickby";
+// import pickBy from "lodash.pickby";
+
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
@@ -20,11 +21,11 @@ class ProfileContainer extends Component {
   };
 
   handleEdit = values => {
-    const model = pickBy(values, str => Boolean(str));
+    // const model = pickBy(values, str => Boolean(str));
     this.setState({ isPending: true });
     profileApiProxy
       .v10ProfilePersonalUpdatePost(authService.getAuthArg(), {
-        model
+        // model
       })
       .then(() => {
         this.setState({ isPending: false });
