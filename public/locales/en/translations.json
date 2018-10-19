@@ -808,6 +808,8 @@
       "last-month": "Last month",
       "last-week": "Last week",
       "custom": "Custom",
+      "account-creation": "Account creation",
+      "fund-start": "Fund start",
       "program-start": "Program start",
       "start": "Start",
       "end": "End",

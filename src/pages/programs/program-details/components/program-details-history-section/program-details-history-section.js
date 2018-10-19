@@ -85,6 +85,7 @@ class ProgramDetailsHistorySection extends PureComponent {
                   assetId: programId
                 })
               }
+              dateRangeStartLabel={t("filters.date-range.program-start")}
             />
           )}
         </div>

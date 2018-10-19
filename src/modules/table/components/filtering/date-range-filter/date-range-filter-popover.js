@@ -34,7 +34,7 @@ class DateRangeFilterPopover extends Component {
 
   render() {
     const { type } = this.state;
-    const { t } = this.props;
+    const { t, startLabel } = this.props;
     return (
       <div className="date-range-filter">
         <div className="date-range-filter__type">
@@ -83,6 +83,7 @@ class DateRangeFilterPopover extends Component {
             <DateRangeFilterValues
               {...this.state}
               onChange={this.handleChangeDate}
+              startLabel={startLabel}
             />
           </div>
           <div className="date-range-filter__btns">
