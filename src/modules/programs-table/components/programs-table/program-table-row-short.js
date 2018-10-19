@@ -36,9 +36,11 @@ const ProgramTableRowShort = ({
                 </GVButton>
               </Link>
             </div>
-            <div className="programs-table__cell--bottom">
-              High risk &middot; Best Choice
-            </div>
+            {program.tags && (
+              <div className="programs-table__cell--bottom">
+                {program.tags.join(` \u00B7 `)}
+              </div>
+            )}
           </div>
         </div>
       </TableCell>
