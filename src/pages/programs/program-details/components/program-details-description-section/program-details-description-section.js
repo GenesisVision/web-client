@@ -3,7 +3,6 @@ import { toggleReinvesting } from "modules/program-reinvesting/services/program-
 import React, { Fragment, PureComponent } from "react";
 
 import ProgramDetailsDescription from "./program-details-description/program-details-description";
-import ProgramDetailsInvestment from "./program-details-investment/program-details-investment";
 
 const composeInvestmentData = programDetails => {
   const { statistic, personalProgramDetails } = programDetails;
@@ -122,13 +121,8 @@ class ProgramDetailsDescriptionSection extends PureComponent {
           isReinvestPending={ui.isReinvestPending}
           onFavoriteClick={this.handleOnFavoriteClick}
           isFavoritePending={ui.isFavoritePending}
+          composeInvestmentData={composeInvestmentData}
         />
-        {isInvested && (
-          <ProgramDetailsInvestment
-            className={"program-details-description__your-investment"}
-            {...composeInvestmentData(programDescription)}
-          />
-        )}
       </Fragment>
     );
   }

@@ -14,6 +14,7 @@ import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import replaceParams from "utils/replace-params";
 
+import ProgramDetailsInvestment from "../program-details-investment/program-details-investment";
 import ProgramDetailsFavorite from "./program-details-favorite";
 import ProgramDetailsNotification from "./program-details-notificaton";
 
@@ -172,14 +173,32 @@ class ProgramDetailsDescription extends PureComponent {
                 />
               </div>
             </div>
-            <div className="program-details-description__invest-button-container">
-              <GVButton
-                className="program-details-description__invest-btn"
-                onClick={this.handleOpenInvestmentPopup}
-              >
-                {t("program-details-page.description.invest")}
-              </GVButton>
+            <div className="program-details-description__investing-container">
+              <div className="program-details-description__invest-button-container">
+                <GVButton
+                  className="program-details-description__invest-btn"
+                  onClick={this.handleOpenInvestmentPopup}
+                >
+                  {t("program-details-page.description.invest")}
+                </GVButton>
+              </div>
+              {isInvested && (
+                <ProgramReinvestingWidget
+                  className="program-details-description__reinvest"
+                  toggleReinvesting={onReinvestingClick}
+                  isReinvesting={
+                    programDescription.personalProgramDetails.isReinvest
+                  }
+                  disabled={isReinvestPending}
+                />
+              )}
             </div>
+            {isInvested && (
+              <ProgramDetailsInvestment
+                className={"program-details-description__your-investment"}
+                {...composeInvestmentData(programDescription)}
+              />
+            )}
 
             <ProgramDepositContainer
               open={isOpenInvestmentPopup}
@@ -187,17 +206,6 @@ class ProgramDetailsDescription extends PureComponent {
               id={programDescription.id}
               onClose={this.handleCloseInvestmentPopup}
             />
-
-            {isInvested && (
-              <ProgramReinvestingWidget
-                className="program-details-description__reinvest"
-                toggleReinvesting={onReinvestingClick}
-                isReinvesting={
-                  programDescription.personalProgramDetails.isReinvest
-                }
-                disabled={isReinvestPending}
-              />
-            )}
           </div>
         </div>
         <div className="program-details-description__right">
