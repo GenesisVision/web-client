@@ -1,7 +1,6 @@
 import * as fundsTableActions from "modules/funds-table/actions/funds-table.actions";
 import authService from "services/auth-service";
 import getParams from "utils/get-params";
-
 import * as programTableActions from "../../../modules/programs-table/actions/programs-table.actions";
 import * as actions from "../actions/manager.actions.js";
 import { MANAGER_SLUG_URL_PARAM_NAME } from "../manager.page";

@@ -39,6 +39,7 @@ class ManagerPage extends Component {
     const { t } = this.props;
     const { managerProfile, funds, programs, isPending } = this.state;
     if (isPending) return null;
+
     return (
       <Page title={`${t("manager.title")} ${managerProfile.username}`}>
         <div className="manager">
