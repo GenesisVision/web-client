@@ -19,7 +19,7 @@ class TableModule extends PureComponent {
       sorting: sorting,
       filtering: { ...filtering },
       data: defaultData,
-      isPending: true,
+      isPending: false,
       errorCode: null,
       prevData: defaultData
     };
