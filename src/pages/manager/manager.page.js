@@ -1,10 +1,15 @@
 import Page from "components/page/page";
-import React from "react";
+import React, { Component } from "react";
 import { translate } from "react-i18next";
+import connect from "react-redux/es/connect/connect";
+import { goBack } from "react-router-redux";
+import { bindActionCreators } from "redux";
 import replaceParams from "utils/replace-params";
 
 import { SLUG_URL_REGEXP } from "../../utils/constants";
 import MananagerDescriptionContainer from "./components/manager-description/manager-description-container";
+import ManagerHistorySection from "./components/program-details-history-section/manager-history-section";
+import * as managerService from "./services/manager.service";
 
 export const MANAGER_SLUG_URL_PARAM_NAME = "managerSlugUrl";
 
@@ -17,16 +22,56 @@ export const composeManagerDetailsUrl = slugUrl =>
     [`:${MANAGER_SLUG_URL_PARAM_NAME}`]: slugUrl
   });
 
-const ManagerPage = ({ t }) => {
-  return (
-    <Page title={t("program-details-page.title")}>
-      <div className="manager">
-        <div className="manager__description">
-          <MananagerDescriptionContainer />
+class ManagerPage extends Component {
+  state = {
+    managerProfile: {},
+    funds: [],
+    programs: [],
+    isPending: true
+  };
+  componentDidMount() {
+    const { service } = this.props;
+    service.fetchManagerProfile().then(profile => {
+      this.setState({ managerProfile: profile, isPending: false });
+    });
+  }
+  render() {
+    const { t } = this.props;
+    const { managerProfile, funds, programs, isPending } = this.state;
+    if (isPending) return null;
+    return (
+      <Page title={`${t("manager.title")} ${managerProfile.username}`}>
+        <div className="manager">
+          <div className="manager__description">
+            <MananagerDescriptionContainer managerProfile={managerProfile} />
+          </div>
+          <div className="manager__history">
+            <ManagerHistorySection
+              funds={funds}
+              programs={programs}
+              managerId={managerProfile.id}
+            />
+          </div>
         </div>
-      </div>
-    </Page>
-  );
+      </Page>
+    );
+  }
+}
+const mapStateToProps = state => {
+  return {
+    managerProfile: state.manager.data
+  };
 };
 
-export default translate()(ManagerPage);
+const mapDispatchToProps = dispatch => {
+  return {
+    service: bindActionCreators({ ...managerService, goBack }, dispatch)
+  };
+};
+
+export default translate()(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(ManagerPage)
+);

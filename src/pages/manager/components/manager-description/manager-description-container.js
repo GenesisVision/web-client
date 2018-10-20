@@ -8,16 +8,8 @@ import ManagerDescription from "./manager-description";
 import ManagerNavigation from "./manager-description-navigation";
 
 class ManagerDescriptionContainer extends Component {
-  componentDidMount() {
-    const { service } = this.props;
-
-    service.fetchManagerProfile();
-  }
-
   render() {
     const { managerProfile, service } = this.props;
-
-    if (!managerProfile) return null;
 
     return (
       <Fragment>
@@ -28,17 +20,8 @@ class ManagerDescriptionContainer extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    managerProfile: state.manager.data
-  };
-};
-
 const mapDispatchToProps = dispatch => ({
   service: bindActionCreators({ ...managerService, goBack }, dispatch)
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ManagerDescriptionContainer);
+export default connect(mapDispatchToProps)(ManagerDescriptionContainer);
