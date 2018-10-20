@@ -21,7 +21,7 @@ export const getPeriodStartDate = periodType => {
 };
 
 export const DEFAULT_PERIOD = {
-  type: ChartPeriodType.month,
-  start: getPeriodStartDate(ChartPeriodType.month),
+  type: ChartPeriodType.week,
+  start: getPeriodStartDate(ChartPeriodType.week),
   end: new Date()
 };

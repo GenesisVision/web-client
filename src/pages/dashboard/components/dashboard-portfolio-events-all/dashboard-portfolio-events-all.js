@@ -27,6 +27,7 @@ const PortfolioEventsAllComponent = ({ service, t }) => {
           <PortfolioEventsTableComponent
             title={t("dashboard.portfolio-events.table-title")}
             className="portfolio-events-all-table"
+            dateRangeStartLabel={t("filters.date-range.account-creation")}
           />
         </Surface>
       </div>

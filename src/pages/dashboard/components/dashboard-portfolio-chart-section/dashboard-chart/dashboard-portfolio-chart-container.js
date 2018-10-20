@@ -29,7 +29,7 @@ const composeAssetsChartData = assetsChart => {
         asset
       };
     });
-    if (x.otherAssetsValue.amount > 0) {
+    if (x.otherAssetsValue) {
       newAsset[`asset${assetsCount}`] = {
         value: x.otherAssetsValue.value,
         asset: {

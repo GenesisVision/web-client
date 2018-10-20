@@ -373,7 +373,7 @@
     "confirmation": {
       "page-title": "Wallet withdraw confirm",
       "error": "An error occurred during confirmation of email: ",
-      "success": "Successful Email Verification"
+      "success": "Withdrawal request is confirmed"
     },
     "validation": {
       "amount-more-than-available": "Amount is more than available in your wallet",
@@ -399,6 +399,7 @@
     "second_plural": "seconds",
     "period-is-over": "The period is over.",
     "time-left": "Time left",
+    "period-ends": "Period ends",
     "left": "left"
   },
   "program-statuses": {
@@ -486,7 +487,7 @@
       "title": "Name",
       "share": "Share",
       "currency": "Curr.",
-      "time-left": "T.left",
+      "time-left": "T. Left",
       "value": "Value",
       "profit": "Profit",
       "chart": "Chart",
@@ -814,6 +815,8 @@
       "last-month": "Last month",
       "last-week": "Last week",
       "custom": "Custom",
+      "account-creation": "Account creation",
+      "fund-start": "Fund start",
       "program-start": "Program start",
       "start": "Start",
       "end": "End",

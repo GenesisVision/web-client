@@ -51,6 +51,7 @@ const WalletTransactions = ({ t }) => (
             name={DATE_RANGE_FILTER_NAME}
             value={filtering["dateRange"]}
             onChange={updateFilter}
+            startLabel={t("filters.date-range.account-creation")}
           />
         </Fragment>
       )}

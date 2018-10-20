@@ -72,8 +72,8 @@ class ProgramCard extends Component {
               onClose={this.handleCloseDropdown}
             >
               <div className="popover-list">
-                {program.personalProgramDetails &&
-                  program.personalProgramDetails.isInvested && (
+                {program.personalDetails &&
+                  program.personalDetails.isInvested && (
                     <GVButton
                       variant="text"
                       color="secondary"
@@ -82,7 +82,7 @@ class ProgramCard extends Component {
                       {t("program-actions.withdraw")}
                     </GVButton>
                   )}
-                {program.personalProgramDetails && (
+                {program.personalDetails && (
                   <GVButton
                     variant="text"
                     color="secondary"
@@ -189,6 +189,7 @@ class ProgramCard extends Component {
           open={this.state.isOpenInvestmentPopup}
           id={program.id}
           onClose={this.handleCloseInvestmentPopup}
+          type={"program"}
         />
         <ProgramWithdrawContainer
           open={this.state.isOpenWithdrawalPopup}

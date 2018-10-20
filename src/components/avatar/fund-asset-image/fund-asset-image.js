@@ -7,8 +7,8 @@ import FundAsset from "shared/media/fund-asset.svg";
 import ImageBase from "../image-base";
 
 const FundAssetImage = ({ url, alt, className, imageClassName }) => {
-  className = classnames("fund-asset", className);
-  imageClassName = classnames("fund-asset__img", imageClassName);
+  className = classnames("fund-asset-icon", className);
+  imageClassName = classnames("fund-asset-icon__img", imageClassName);
   return (
     <ImageBase
       url={url}

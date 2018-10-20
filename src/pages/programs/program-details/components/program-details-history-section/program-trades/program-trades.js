@@ -52,6 +52,7 @@ class ProgramTrades extends Component {
               name={DATE_RANGE_FILTER_NAME}
               value={filtering[DATE_RANGE_FILTER_NAME]}
               onChange={updateFilter}
+              startLabel={t("filters.date-range.program-start")}
             />
           </Fragment>
         )}
@@ -94,7 +95,7 @@ class ProgramTrades extends Component {
               />
             </TableCell>
             <TableCell className="program-details-trades__cell program-details-trades__cell--profit">
-              <Profitability value={formatValue(trade.profit)} prefix="sign">
+              <Profitability value={+formatValue(trade.profit)} prefix="sign">
                 <NumberFormat
                   value={formatValue(trade.profit, roundTypeEnum.FLOOR, false)}
                   thousandSeparator=" "

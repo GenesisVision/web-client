@@ -3,6 +3,12 @@
 @import "styles/_sizes.scss";
 
 .program-details-description {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  @include media-breakpoint-phone() {
+    flex-direction: row;
+  }
   & .fund-asset {
     background: rgba(216, 216, 216, 0.05);
     height: 50px / $divider-title;
@@ -21,20 +27,42 @@
       }
     }
   }
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+
+  &__investing-container {
+    display: flex;
+    align-items: center;
+  }
+
   &__avatar {
     cursor: pointer;
+    width: 100%;
+    padding: $padding-small 0;
     .program-avatar {
       justify-content: flex-start;
       width: $avatar-size-mobile;
       height: $avatar-size-mobile;
       margin: 0;
     }
+    @include media-breakpoint-phone() {
+      padding: 0;
+      .program-avatar {
+        width: $avatar-size;
+        height: $avatar-size;
+      }
+    }
   }
 
   &__right {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: $padding-large-mobile;
+    @include media-breakpoint-phone() {
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 0;
+    }
+
     & .gv-btn--text {
       padding: 0;
       font-size: 13px;
@@ -49,7 +77,10 @@
 
   &__main {
     width: 100%;
-    padding: 0 $padding-middle;
+    padding-left: 0;
+    @include media-breakpoint-phone(){
+      padding-left: $padding-large-mobile;
+    }
   }
 
   &__heading {
@@ -110,6 +141,24 @@
   &__reinvest {
     letter-spacing: 0.3px;
     font-weight: 600;
+    padding-left: $padding-middle-mobile;
+    .gv-switch-wrapper {
+      display: inline-flex;
+      align-items: center;
+    }
+    .gv-switch__label {
+      color: $text-accent-color;
+      font-size: $font-size-middle-mobile;
+      line-height: $font-size-middle-mobile;
+      font-weight: 600;
+    }
+    @include media-breakpoint-landscape-phone() {
+      padding-left: $padding-middle;
+      .gv-switch__label {
+        line-height: $font-size-middle;
+        font-size: $font-size-middle;
+      }
+    }
   }
 
   &__short-statistic {
@@ -147,6 +196,10 @@
     .icon path {
       stroke: $label-color;
     }
+    .icon--ring {
+      width: 27px;
+      height: 27px;
+    }
     &:hover {
       path {
         stroke: $text-accent-color;
@@ -165,6 +218,15 @@
       text-align: center;
     }
   }
+  @include media-breakpoint-phone() {
+    &__avatar {
+      .program-avatar {
+        width: $avatar-size-mobile;
+        height: $avatar-size-mobile;
+        margin: 0;
+      }
+    }
+  }
   @include media-breakpoint-landscape-phone() {
     &__avatar {
       .program-avatar {
@@ -174,7 +236,7 @@
       }
     }
     &__main {
-      padding: 0 $padding-large;
+      padding-left: $padding-large;
     }
     &__heading {
       font-size: $font-size-title;

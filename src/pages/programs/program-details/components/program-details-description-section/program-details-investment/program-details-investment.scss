@@ -1,38 +1,70 @@
 @import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
+@import "styles/_sizes.scss";
+
+$withdraw-button-height: 50px;
+$withdraw-button-width: 150px;
+$withdraw-button-height-mobile: $withdraw-button-height/$divider-text;
+$withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
+
+div {
+  //outline: 1px solid saddlebrown;
+}
 
 .program-details-investment {
-  padding: 40px 32px;
-  width: 697px;
-  box-sizing: border-box;
-  margin-left: 200px;
-
-  &__heading {
-    font-size: 17px;
-    letter-spacing: 0.21px;
-    margin: 0 0 31px;
+  & div {
+    box-sizing: border-box;
+  }
+  padding: $padding-middle-mobile;
+  margin-top: $padding-large-mobile;
+  @include media-breakpoint-landscape-phone() {
+    padding: $padding-middle;
+    margin-top: $padding-large;
   }
 
+  &__heading {
+    font-size: $font-size-subtitle-mobile;
+    letter-spacing: 0.21px;
+    padding-bottom: $padding-middle-mobile;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-subtitle;
+      padding-bottom: $padding-middle;
+    }
+  }
+
+  &__short-statistic-container {
+    display: flex;
+    justify-content: flex-start;
+  }
   &__short-statistic {
-    margin: 24px 0 36px;
     display: flex;
     justify-content: space-between;
-    width: 50%;
+    flex-wrap: wrap;
 
     &-item {
       white-space: nowrap;
       letter-spacing: 0.44px;
-      font-size: 14px;
+      font-size: $font-size-middle-mobile;
       display: flex;
       flex-direction: column;
-      margin-right: 57px;
+      margin-right: $padding-large-mobile;
+      margin-bottom: $font-size-small-mobile;
       font-weight: 600;
+      @include media-breakpoint-landscape-phone() {
+        font-size: $font-size-middle;
+        margin-right: $padding-large;
+      margin-bottom: $font-size-small;
+      }
     }
 
     &-subheading {
       color: $label-color;
-      font-size: 13px;
-      margin-bottom: 13px;
+      font-size: $font-size-small-mobile;
+      margin-bottom: $font-size-small-mobile;
       font-weight: normal;
+      @include media-breakpoint-landscape-phone() {
+        font-size: $font-size-small;
+      }
     }
   }
 
@@ -41,22 +73,29 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-  }
-
-  &__withdraw {
-    width: 150px;
-    height: 50px;
-    margin-right: 5.5%;
-    letter-spacing: 0.3px;
-    font-size: 13px;
-    font-weight: 600;
+    & .gv-btn {
+      width: $withdraw-button-width-mobile;
+      height: $withdraw-button-height-mobile;
+      letter-spacing: 0.3px;
+      font-size: $font-size-small-mobile;
+      font-weight: 600;
+      @include media-breakpoint-landscape-phone() {
+        width: $withdraw-button-width;
+        height: $withdraw-button-height;
+        font-size: $font-size-small;
+      }
+    }
   }
 
   &__withdraw-notice {
     color: $short-statistic-notice-color;
-    line-height: 18px;
-    font-size: 11px;
+    line-height: $font-size-subtitle-mobile;
+    font-size: $font-size-small-mobile;
     letter-spacing: 0.15px;
     margin-left: 5%;
+    @include media-breakpoint-landscape-phone() {
+      line-height: $font-size-subtitle;
+      font-size: $font-size-small;
+    }
   }
 }

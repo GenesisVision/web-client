@@ -30,7 +30,7 @@
     "react-dropzone": "^6.0.0",
     "react-event-listener": "^0.5.10",
     "react-i18next": "^7.6.0",
-    "react-number-format": "^3.3.3",
+    "react-number-format": "^3.6.2",
     "react-pager": "^1.3.3",
     "react-popper": "^0.10.1",
     "react-redux": "^5.0.7",

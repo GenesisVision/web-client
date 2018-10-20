@@ -1,4 +1,13 @@
+import { GVColors } from "gv-react-components";
 import React from "react";
+
+export const getStrokeColor = (data, defaultColor) => {
+  const commonValue = data.reduce(function(a, b) {
+    return a === b ? a : NaN;
+  });
+  if (isNaN(commonValue)) return defaultColor;
+  return commonValue >= 0 ? GVColors.$positiveColor : GVColors.$negativeColor;
+};
 
 export const gradientOffset = data => {
   const dataMax = Math.max(...data);

@@ -27,7 +27,7 @@ import { getDashboardFunds } from "../../../services/dashboard-funds.service";
 
 class DashboardFunds extends Component {
   fetchFunds = filters => {
-    return getDashboardFunds().then(({ data }) => {
+    return getDashboardFunds(filters).then(({ data }) => {
       return { items: data.funds, total: data.total };
     });
   };
@@ -53,6 +53,7 @@ class DashboardFunds extends Component {
               name={DATE_RANGE_FILTER_NAME}
               value={filtering[DATE_RANGE_FILTER_NAME]}
               onChange={updateFilter}
+              startLabel={t("filters.date-range.fund-start")}
             />
           </Fragment>
         )}
