@@ -7,13 +7,16 @@ import { translate } from "react-i18next";
 import connect from "react-redux/es/connect/connect";
 import { bindActionCreators, compose } from "redux";
 
-import FundsTableRow from "../../../../modules/funds-table/components/funds-table/fund-table-row";
-import { FUNDS_TABLE_COLUMNS } from "../../../../modules/funds-table/funds-table.constants";
-import ProgramTableRow from "../../../../modules/programs-table/components/programs-table/program-table-row";
-import { PROGRAMS_COLUMNS } from "../../../../modules/programs-table/programs.constants";
+import FundsTableRow from "modules/funds-table/components/funds-table/fund-table-row";
+import { FUNDS_TABLE_COLUMNS } from "modules/funds-table/funds-table.constants";
+import ProgramTableRow from "modules/programs-table/components/programs-table/program-table-row";
+import { PROGRAMS_COLUMNS } from "modules/programs-table/programs.constants";
 import * as service from "../../services/manager.service";
 import * as managerService from "../../services/manager.service";
 import ManagerTable from "./manager-table/manager-table";
+import { push } from "react-router-redux";
+import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
+import { toggleFavoriteProgramDispatchable } from "modules/favorite-asset/services/favorite-program.service";
 
 const PROGRAMS_TAB = "programs";
 const FUNDS_TAB = "funds";
@@ -74,7 +77,7 @@ class ManagerHistorySection extends PureComponent {
 
   render() {
     const { funds, programs, tab, isPending } = this.state;
-    const { t, managerId } = this.props;
+    const { t, managerId, isAuthenticated, service } = this.props;
     const { handleTabChange, getPrograms, getFunds } = this;
     return (
       !isPending && (
@@ -100,7 +103,14 @@ class ManagerHistorySection extends PureComponent {
                 managerId={managerId}
                 getItems={getPrograms}
                 columns={PROGRAMS_COLUMNS}
-                renderBodyRow={program => <ProgramTableRow program={program} />}
+                renderBodyRow={program => (
+                  <ProgramTableRow
+                    isAuthenticated={isAuthenticated}
+                    program={program}
+                    redirectToLogin={service.redirectToLogin}
+                    toggleFavorite={service.toggleFavoriteProgram}
+                  />
+                )}
                 renderHeader={column => (
                   <span className={`programs-table__cell--${column.name}`}>
                     {t(`programs-page.programs-header.${column.name}`)}
@@ -135,15 +145,21 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    service: bindActionCreators({ ...managerService }, dispatch)
+    service: bindActionCreators(
+      {
+        ...managerService,
+        toggleFavoriteProgram: toggleFavoriteProgramDispatchable,
+        redirectToLogin: () => push(LOGIN_ROUTE)
+      },
+      dispatch
+    )
   };
 };
 
-export default translate()(
-  compose(
-    connect(
-      mapStateToProps,
-      mapDispatchToProps
-    )
-  )(ManagerHistorySection)
-);
+export default compose(
+  translate(),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
+)(ManagerHistorySection);

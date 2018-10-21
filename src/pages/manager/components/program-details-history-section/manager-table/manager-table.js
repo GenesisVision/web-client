@@ -3,7 +3,6 @@ import "./manager-table.scss";
 import TableModule from "modules/table/components/table-module";
 import { DEFAULT_PAGING } from "modules/table/reducers/table-paging.reducer";
 import React, { Component } from "react";
-import { translate } from "react-i18next";
 
 class ManagerTable extends Component {
   render() {
@@ -27,4 +26,4 @@ class ManagerTable extends Component {
   }
 }
 
-export default translate()(ManagerTable);
+export default ManagerTable;
