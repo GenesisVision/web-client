@@ -6,9 +6,9 @@ $avatar-size: 100px;
 $avatar-size-mobile: $avatar-size/$divider-text;
 
 .manager-description {
-  padding: $padding-large-mobile 0;
+  padding-bottom: $padding-large-mobile;
   @include media-breakpoint-landscape-phone() {
-    padding: $padding-large 0;
+    padding-bottom: $padding-large;
   }
   & .fund-asset {
     background: rgba(216, 216, 216, 0.05);
@@ -76,7 +76,10 @@ $avatar-size-mobile: $avatar-size/$divider-text;
     width: 100%;
     padding: $padding-small 0;
     @include media-breakpoint-phone() {
-      padding: 0 $padding-small;
+      padding: 0 $padding-large-mobile;
+    }
+    @include media-breakpoint-landscape-phone() {
+      padding: 0 $padding-large;
     }
   }
 
@@ -257,7 +260,7 @@ $avatar-size-mobile: $avatar-size/$divider-text;
 }
 
 .manager-description-navigation {
-  margin-bottom: 20px;
+  margin: 25px 0 40px;
 
   & .gv-btn--text {
     padding: 0;
