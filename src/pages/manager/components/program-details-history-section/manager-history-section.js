@@ -5,7 +5,6 @@ import { GVTab, GVTabs } from "gv-react-components";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import connect from "react-redux/es/connect/connect";
-import { goBack } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
 
 import FundsTableRow from "../../../../modules/funds-table/components/funds-table/fund-table-row";
@@ -27,6 +26,7 @@ class ManagerHistorySection extends PureComponent {
     programs: [],
     isPending: true
   };
+
   componentDidMount() {
     const { managerId, service } = this.props;
     return service
@@ -43,22 +43,25 @@ class ManagerHistorySection extends PureComponent {
         this.setState({ isPending: false });
       });
   }
+
   handleTabChange = (e, tab) => {
     this.setState({ tab });
   };
 
   getFunds = filters => {
-    const { managerId } = this.props;
-    return service.getFunds(managerId, filters).payload.then(data => {
-      return { items: data.funds, total: data.total };
-    });
+    return service
+      .getFunds(this.props.managerId, filters)
+      .payload.then(data => {
+        return { items: data.funds, total: data.total };
+      });
   };
 
   getPrograms = filters => {
-    const { managerId } = this.props;
-    return service.getPrograms(managerId, filters).payload.then(data => {
-      return { items: data.programs, total: data.total };
-    });
+    return service
+      .getPrograms(this.props.managerId, filters)
+      .payload.then(data => {
+        return { items: data.programs, total: data.total };
+      });
   };
 
   static getDerivedStateFromProps(props, state) {
@@ -72,13 +75,13 @@ class ManagerHistorySection extends PureComponent {
   render() {
     const { funds, programs, tab, isPending } = this.state;
     const { t, managerId } = this.props;
-
+    const { handleTabChange, getPrograms, getFunds } = this;
     return (
       !isPending && (
         <Surface className="manager-history">
           <div className="manager-history__header">
             <div className="manager-history__tabs">
-              <GVTabs value={tab} onChange={this.handleTabChange}>
+              <GVTabs value={tab} onChange={handleTabChange}>
                 <GVTab
                   value={"programs"}
                   label={t("manager.history.tabs.programs")}
@@ -95,7 +98,7 @@ class ManagerHistorySection extends PureComponent {
               <ManagerTable
                 data={programs}
                 managerId={managerId}
-                getItems={this.getPrograms}
+                getItems={getPrograms}
                 columns={PROGRAMS_COLUMNS}
                 renderBodyRow={program => <ProgramTableRow program={program} />}
                 renderHeader={column => (
@@ -109,7 +112,7 @@ class ManagerHistorySection extends PureComponent {
               <ManagerTable
                 data={funds}
                 managerId={managerId}
-                getItems={this.getFunds}
+                getItems={getFunds}
                 columns={FUNDS_TABLE_COLUMNS}
                 renderBodyRow={fund => <FundsTableRow fund={fund} />}
                 renderHeader={column => (
@@ -132,7 +135,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    service: bindActionCreators({ ...managerService, goBack }, dispatch)
+    service: bindActionCreators({ ...managerService }, dispatch)
   };
 };
 

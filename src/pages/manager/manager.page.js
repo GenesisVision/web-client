@@ -4,12 +4,11 @@ import Page from "components/page/page";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import connect from "react-redux/es/connect/connect";
-import { goBack } from "react-router-redux";
 import { bindActionCreators } from "redux";
 import replaceParams from "utils/replace-params";
 
 import { SLUG_URL_REGEXP } from "../../utils/constants";
-import MananagerDescriptionContainer from "./components/manager-description/manager-description-container";
+import ManagerDescriptionContainer from "./components/manager-description/manager-description-container";
 import ManagerHistorySection from "./components/program-details-history-section/manager-history-section";
 import * as managerService from "./services/manager.service";
 
@@ -39,24 +38,21 @@ class ManagerPage extends Component {
   }
   render() {
     const { t } = this.props;
-    const { managerProfile, funds, programs, isPending } = this.state;
-    if (isPending) return null;
+    const { managerProfile, isPending } = this.state;
 
     return (
-      <Page title={`${t("manager.title")} ${managerProfile.username}`}>
-        <div className="manager">
-          <div className="manager__description">
-            <MananagerDescriptionContainer managerProfile={managerProfile} />
+      !isPending && (
+        <Page title={`${t("manager.title")} ${managerProfile.username}`}>
+          <div className="manager">
+            <div className="manager__description">
+              <ManagerDescriptionContainer managerProfile={managerProfile} />
+            </div>
+            <div className="manager__history">
+              <ManagerHistorySection managerId={managerProfile.id} />
+            </div>
           </div>
-          <div className="manager__history">
-            <ManagerHistorySection
-              funds={funds}
-              programs={programs}
-              managerId={managerProfile.id}
-            />
-          </div>
-        </div>
-      </Page>
+        </Page>
+      )
     );
   }
 }
@@ -68,7 +64,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    service: bindActionCreators({ ...managerService, goBack }, dispatch)
+    service: bindActionCreators({ ...managerService }, dispatch)
   };
 };
 
