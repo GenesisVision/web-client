@@ -81,7 +81,7 @@ class CustomNotification extends Component {
             label={t(
               `notifications.program.create.${settings.conditionType}.label`
             )}
-            adornment="%"
+            adornment={settings.conditionType === "Profit" ? "%" : undefined}
             autoComplete="off"
             InputComponent={NumberFormat}
           />
