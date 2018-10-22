@@ -40,7 +40,6 @@ class DateRangeFilterValues extends Component {
 
   render() {
     const { t, type, dateStart, dateEnd, startLabel } = this.props;
-    debugger;
     switch (type) {
       case DateRangeFilterTypes.all:
         return (
