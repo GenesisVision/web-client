@@ -74,12 +74,12 @@ export const PROGRAMS_COLUMNS = [
     name: "available-to-invest"
   },
   {
-    name: "trades",
-    sortingName: "ByTrades"
-  },
-  {
     name: "period",
     sortingName: "ByEndOfPeriod"
+  },
+  {
+    name: "trades",
+    sortingName: "ByTrades"
   },
   {
     name: "drawdown",

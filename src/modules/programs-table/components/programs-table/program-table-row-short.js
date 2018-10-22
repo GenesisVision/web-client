@@ -56,9 +56,6 @@ const ProgramTableRowShort = ({
       <TableCell className="programs-table__cell--available-to-invest">
         {formatValue(program.availableInvestment)} GVT
       </TableCell>
-      <TableCell className="programs-table__cell--trades">
-        {program.statistic.tradesCount}
-      </TableCell>
       <TableCell className="programs-table__cell--period">
         {program.periodStarts && (
           <ProgramPeriodPie
@@ -66,6 +63,9 @@ const ProgramTableRowShort = ({
             end={program.periodEnds}
           />
         )}
+      </TableCell>
+      <TableCell className="programs-table__cell--trades">
+        {program.statistic.tradesCount}
       </TableCell>
       <TableCell className="programs-table__cell--drawdown">
         <NumberFormat
