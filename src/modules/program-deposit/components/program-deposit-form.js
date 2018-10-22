@@ -23,7 +23,10 @@ const ProgramDepositForm = ({
   type
 }) => {
   const fee = calculateValueOfEntryFee(values.amount, info.entryFee);
-  const due = parseFloat(values.amount || 0) + parseFloat(fee);
+  const gvFee = calculateValueOfEntryFee(values.amount, info.gvCommission);
+
+  const investAmount =
+    parseFloat(values.amount || 0) - parseFloat(fee) - parseFloat(gvFee);
 
   const isAllow = values => {
     const { floatValue, formattedValue } = values;
@@ -76,11 +79,25 @@ const ProgramDepositForm = ({
         </li>
         <li className="dialog-list__item">
           <span className="dialog-list__title">
-            {t("deposit-program.amount-due")}
+            {t("deposit-program.gv-commission")}
+          </span>
+          <span className="dialog-list__value">
+            {info.gvCommission} %{" "}
+            <NumberFormat
+              value={formatValue(gvFee)}
+              prefix="("
+              suffix={` GVT)`}
+              displayType="text"
+            />
+          </span>
+        </li>
+        <li className="dialog-list__item">
+          <span className="dialog-list__title">
+            {t("deposit-program.investment-amount")}
           </span>
           <span className="dialog-list__value">
             <NumberFormat
-              value={formatValue(due)}
+              value={formatValue(investAmount)}
               suffix={` GVT`}
               displayType="text"
             />
