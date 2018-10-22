@@ -116,9 +116,9 @@ const ProgramDepositForm = ({
         </GVButton>
       </div>
       <div className="dialog__info">
-        {`${t("deposit-program.period")} ${moment(info.periodEnds).format(
-          "DD.MM.YYYY, HH:mm"
-        )}`}
+        {t("deposit-program.disclaimer", {
+          currency
+        })}
       </div>
     </form>
   );

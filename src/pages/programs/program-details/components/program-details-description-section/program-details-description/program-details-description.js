@@ -204,6 +204,7 @@ class ProgramDetailsDescription extends PureComponent {
             )}
 
             <ProgramDepositContainer
+              currency={programDescription.currency}
               open={isOpenInvestmentPopup}
               type={"program"}
               id={programDescription.id}

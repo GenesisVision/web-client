@@ -90,6 +90,7 @@ class ProgramDetailsInvestment extends PureComponent {
             {t("program-details-page.description.withdraw")}
           </GVButton>
           <ProgramWithdrawContainer
+            currency={balanceCurrency}
             open={this.state.isOpenWithdrawalPopup}
             id={programId}
             onClose={this.handleCloseWithdrawalPopup}

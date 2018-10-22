@@ -63,8 +63,7 @@ ProgramDepositContainer.propTypes = {
 
 const mapStateToProps = state => ({
   info: state.programDeposit.info,
-  submitInfo: state.programDeposit.submit,
-  currency: state.accountSettings.currency
+  submitInfo: state.programDeposit.submit
 });
 
 const mapDispatchToProps = dispatch => ({

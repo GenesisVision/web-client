@@ -38,11 +38,7 @@ ProgramWithdrawContainer.propTypes = {
   id: PropTypes.string
 };
 
-const mapStateToProps = state => ({
-  currency: state.accountSettings.currency
-});
-
-const mapDispathToProps = dispatch => ({
+const mapDispatchToProps = dispatch => ({
   services: bindActionCreators(
     {
       getProgramWithdrawInfo
@@ -54,7 +50,7 @@ const mapDispathToProps = dispatch => ({
 export default compose(
   translate(),
   connect(
-    mapStateToProps,
-    mapDispathToProps
+    undefined,
+    mapDispatchToProps
   )
 )(ProgramWithdrawContainer);

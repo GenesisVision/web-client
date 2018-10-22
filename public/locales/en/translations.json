@@ -51,7 +51,7 @@
     "amount": "Amount to invest",
     "entry-fee": "Entry fee",
     "investment-amount": "Investment amount",
-    "period": "Your request will be processed at the end of the reporting period",
+    "disclaimer": "After clicking the \"Confirm\" button, the invested GVT will be immediately converted to {{currency}}. Accrual of {{currency}} to the account manager will only occur at the end of the reporting period.",
     "confirm": "Confirm",
     "success-alert-message": "Successful request for investment in the program.",
     "validation": {
@@ -357,7 +357,8 @@
     "will-get": "You'll get",
     "deposit-address": "Deposit address",
     "copy-to-clipboard-success": "Your wallet-pane number was copied to the clipboard successfully.",
-    "copy-to-clipboard-error": "Failed to copy data to the clipboard."
+    "copy-to-clipboard-error": "Failed to copy data to the clipboard.",
+    "disclaimer": "After processing the {{currency}} transaction, your transferred funds will be converted to GVT, according to the current market price. The exact amount of GVT received will be determined at the time of conversion in the market."
   },
   "wallet-withdraw": {
     "title": "Withdraw",
