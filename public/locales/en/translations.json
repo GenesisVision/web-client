@@ -423,9 +423,16 @@
     "all": "All Time"
   },
   "manager": {
+    "title": "Manager",
     "about": "About",
     "assets": "Assets",
-    "member-since": "Member since"
+    "member-since": "Member since",
+    "history": {
+      "tabs": {
+        "programs": "Programs",
+        "funds": "Funds"
+      }
+    }
   },
   "programs-page": {
     "title": "Programs",

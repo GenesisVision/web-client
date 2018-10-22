@@ -4,8 +4,8 @@ import classNames from "classnames";
 import Tooltip from "components/tooltip/tooltip";
 import React, { Component } from "react";
 
-import FundAssetTooltip from "../fund-asset-tooltip/fund-asset-tooltip";
 import FundAsset, { FUND_ASSET_TYPE } from "./fund-asset";
+import FundAssetTooltip from "./fund-asset-tooltip/fund-asset-tooltip";
 
 class FundAssetContainer extends Component {
   render() {

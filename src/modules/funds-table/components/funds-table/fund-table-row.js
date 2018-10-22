@@ -8,13 +8,13 @@ import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import { formatValue } from "utils/formatter";
 
+import FundAssetContainer from "components/fund-asset/fund-asset-container";
 import {
   FUNDS_SLUG_URL_PARAM_NAME,
   FUND_DETAILS_ROUTE
 } from "../../../../pages/funds/funds.routes";
 import replaceParams from "../../../../utils/replace-params";
 import FavoriteIcon from "../../../favorite-asset/components/favorite-icon/favorite-icon";
-import FundAssetContainer from "./fund-asset/fund-asset-container";
 
 class FundsTableRow extends Component {
   constructor(props) {

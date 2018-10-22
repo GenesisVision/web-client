@@ -1,6 +1,7 @@
 import "./fund-details-description.scss";
 
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
+import FundAssetContainer from "components/fund-asset/fund-asset-container";
 import { GVButton } from "gv-react-components";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
@@ -10,7 +11,6 @@ import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import replaceParams from "utils/replace-params";
 
-import FundAssetContainer from "../../../../../../modules/funds-table/components/funds-table/fund-asset/fund-asset-container";
 import FundDetailsFavorite from "./fund-details-favorite";
 import FundDetailsNotification from "./fund-details-notificaton";
 
