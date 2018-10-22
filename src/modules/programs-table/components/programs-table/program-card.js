@@ -161,23 +161,23 @@ class ProgramCard extends Component {
             <tbody>
               <tr>
                 <th className="programs-cards__table--title">
-                  {t("programs-page.programs-header.trades")}
+                  {t("programs-page.programs-header.period")}
                 </th>
                 <th className="programs-cards__table--title">
-                  {t("programs-page.programs-header.period")}
+                  {t("programs-page.programs-header.trades")}
                 </th>
                 <th className="programs-cards__table--title">
                   {t("programs-page.programs-header.drawdown")}
                 </th>
               </tr>
               <tr>
-                <td>{program.statistic.tradesCount}</td>
                 <td>
                   <ProgramPeriodPie
                     start={program.periodStarts}
                     end={program.periodEnds}
                   />
                 </td>
+                <td>{program.statistic.tradesCount}</td>
                 <td>
                   <NumberFormat
                     value={program.statistic.drawdownPercent}
