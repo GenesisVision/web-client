@@ -55,6 +55,10 @@
     }
   }
 
+  & .icon.icon--actions-circle {
+    cursor: pointer;
+  }
+
   @include media-breakpoint-tablet() {
     & .table__filters {
       margin-left: 20px;

@@ -16,6 +16,7 @@ import NumberFormat from "react-number-format";
 import { formatValue, roundTypeEnum } from "utils/formatter";
 
 import { fetchWalletTransactions } from "../../services/wallet.services";
+import WalletTransactionActions from "./wallet-transaction-action-cell";
 import {
   WALLET_TRANSACTIONS_COLUMNS,
   WALLET_TRANSACTIONS_DEFAULT_FILTERING,
@@ -94,6 +95,9 @@ const WalletTransactions = ({ t }) => (
                 suffix={" " + transaction.sourceCurrency}
               />
             </Profitability>
+          </TableCell>
+          <TableCell className="wallet-transactions__cell wallet-transactions__cell--actions">
+            <WalletTransactionActions transaction={transaction} />
           </TableCell>
         </TableRow>
       )}
