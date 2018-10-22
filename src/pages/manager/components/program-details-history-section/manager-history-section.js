@@ -17,6 +17,7 @@ import ManagerTable from "./manager-table/manager-table";
 import { push } from "react-router-redux";
 import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
 import { toggleFavoriteProgramDispatchable } from "modules/favorite-asset/services/favorite-program.service";
+import { toggleFavoriteFundDispatchable } from "modules/favorite-asset/services/favorite-fund.service";
 
 const PROGRAMS_TAB = "programs";
 const FUNDS_TAB = "funds";
@@ -113,7 +114,14 @@ class ManagerHistorySection extends PureComponent {
               managerId={managerId}
               getItems={getFunds}
               columns={FUNDS_TABLE_COLUMNS}
-              renderBodyRow={fund => <FundsTableRow fund={fund} />}
+              renderBodyRow={fund => (
+                <FundsTableRow
+                  fund={fund}
+                  isAuthenticated={isAuthenticated}
+                  redirectToLogin={service.redirectToLogin}
+                  toggleFavorite={service.toggleFavoriteFund}
+                />
+              )}
               renderHeader={column => (
                 <span className={`funds-table__cell--${column.name}`}>
                   {t(`funds-page.funds-header.${column.name}`)}
@@ -139,6 +147,7 @@ const mapDispatchToProps = dispatch => {
       {
         ...managerService,
         toggleFavoriteProgram: toggleFavoriteProgramDispatchable,
+        toggleFavoriteFund: toggleFavoriteFundDispatchable,
         redirectToLogin: () => push(LOGIN_ROUTE)
       },
       dispatch
