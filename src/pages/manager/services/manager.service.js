@@ -1,6 +1,8 @@
 import authService from "services/auth-service";
 import getParams from "utils/get-params";
 import * as actions from "../actions/manager.actions.js";
+import * as actionsPrograms from "modules/programs-table/actions/programs-table.actions";
+import * as actionsFunds from "modules/funds-table/actions/funds-table.actions";
 import { MANAGER_SLUG_URL_PARAM_NAME } from "../manager.page";
 import { MANAGER_DETAILS_ROUTE } from "../manager.page.js";
 
@@ -20,7 +22,7 @@ export const getFunds = (managerId, filters) => {
   if (authService.getAuthArg()) {
     requestFilters.authorization = authService.getAuthArg();
   }
-  return actions.fetchFunds(requestFilters);
+  return actionsFunds.fetchFunds(requestFilters);
 };
 
 export const getPrograms = (managerId, filters) => {
@@ -28,7 +30,7 @@ export const getPrograms = (managerId, filters) => {
   if (authService.getAuthArg()) {
     requestFilters.authorization = authService.getAuthArg();
   }
-  return actions.fetchPrograms(requestFilters);
+  return actionsPrograms.fetchPrograms(requestFilters);
 };
 
 export const getFundsDispatch = (managerId, filters) => dispatch => {
@@ -36,7 +38,7 @@ export const getFundsDispatch = (managerId, filters) => dispatch => {
   if (authService.getAuthArg()) {
     requestFilters.authorization = authService.getAuthArg();
   }
-  return dispatch(actions.fetchFunds(requestFilters));
+  return dispatch(actionsFunds.fetchFunds(requestFilters));
 };
 
 export const getProgramsDispatch = (managerId, filters) => dispatch => {
@@ -44,5 +46,5 @@ export const getProgramsDispatch = (managerId, filters) => dispatch => {
   if (authService.getAuthArg()) {
     requestFilters.authorization = authService.getAuthArg();
   }
-  return dispatch(actions.fetchPrograms(requestFilters));
+  return dispatch(actionsPrograms.fetchPrograms(requestFilters));
 };
