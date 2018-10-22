@@ -20,7 +20,8 @@ import { Link } from "react-router-dom";
 import replaceParams from "../../../../../utils/replace-params";
 import {
   FUNDS_SLUG_URL_PARAM_NAME,
-  FUND_DETAILS_ROUTE
+  FUND_DETAILS_ROUTE,
+  composeFundsDetailsUrl
 } from "../../../../funds/funds.routes";
 import { DASHBOARD_PROGRAMS_SORTING } from "../../../dashboard.constants";
 import { getDashboardFunds } from "../../../services/dashboard-funds.service";
@@ -66,11 +67,13 @@ class DashboardFunds extends Component {
           <TableRow>
             <TableCell className="funds-table__cell--name">
               <div className="funds-table__cell--avatar-title">
-                <AssetAvatar
-                  url={fund.logo}
-                  alt={fund.title}
-                  color={fund.color}
-                />
+                <Link to={composeFundsDetailsUrl(fund.url)}>
+                  <AssetAvatar
+                    url={fund.logo}
+                    alt={fund.title}
+                    color={fund.color}
+                  />
+                </Link>
                 <div className="funds-table__cell--title">
                   <Link to={fundDetailsUrl(fund.url)}>
                     <GVButton variant="text" color="secondary">

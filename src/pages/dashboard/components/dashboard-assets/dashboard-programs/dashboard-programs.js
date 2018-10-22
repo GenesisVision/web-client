@@ -62,12 +62,14 @@ class Dashboardprograms extends Component {
           <TableRow>
             <TableCell className="dashboard-programs__cell--title">
               <div className="dashboard-programs__cell--avatar-title">
-                <AssetAvatar
-                  url={program.logo}
-                  level={program.level}
-                  alt={program.title}
-                  color={program.color}
-                />
+                <Link to={composeProgramDetailsUrl(program.url)}>
+                  <AssetAvatar
+                    url={program.logo}
+                    level={program.level}
+                    alt={program.title}
+                    color={program.color}
+                  />
+                </Link>
                 <Link to={composeProgramDetailsUrl(program.url)}>
                   <GVButton variant="text" color="secondary">
                     {program.title}

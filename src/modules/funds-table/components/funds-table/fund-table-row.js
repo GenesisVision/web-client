@@ -1,4 +1,5 @@
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
+import FundAssetContainer from "components/fund-asset/fund-asset-container";
 import Profitability from "components/profitability/profitability";
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
 import { GVButton } from "gv-react-components";
@@ -8,10 +9,10 @@ import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import { formatValue } from "utils/formatter";
 
-import FundAssetContainer from "components/fund-asset/fund-asset-container";
 import {
   FUNDS_SLUG_URL_PARAM_NAME,
-  FUND_DETAILS_ROUTE
+  FUND_DETAILS_ROUTE,
+  composeFundsDetailsUrl
 } from "../../../../pages/funds/funds.routes";
 import replaceParams from "../../../../utils/replace-params";
 import FavoriteIcon from "../../../favorite-asset/components/favorite-icon/favorite-icon";
@@ -33,7 +34,13 @@ class FundsTableRow extends Component {
       <TableRow>
         <TableCell className="funds-table__cell--name">
           <div className="funds-table__cell--avatar-title">
-            <AssetAvatar url={fund.logo} alt={fund.title} color={fund.color} />
+            <Link to={composeFundsDetailsUrl(fund.url)}>
+              <AssetAvatar
+                url={fund.logo}
+                alt={fund.title}
+                color={fund.color}
+              />
+            </Link>
             <div className="funds-table__cell--title">
               <Link to={fundDetailsUrl}>
                 <GVButton variant="text" color="secondary">

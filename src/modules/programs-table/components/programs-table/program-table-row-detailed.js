@@ -6,7 +6,9 @@ import { GVButton } from "gv-react-components";
 import FavoriteIcon from "modules/favorite-asset/components/favorite-icon/favorite-icon";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import { TableRow } from "modules/table/components";
+import { composeManagerDetailsUrl } from "pages/manager/manager.page";
 import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
+import { composeProgramDetailsUrl } from "pages/programs/programs.routes";
 import { PROGRAM_SLUG_URL_PARAM_NAME } from "pages/programs/programs.routes";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
@@ -53,13 +55,15 @@ class ProgramTableRowDetailed extends Component {
             <div className="program-detailed__container program-detailed__container--inner">
               <div className="program-detailed__info">
                 <div className="program-detailed__avatar">
-                  <AssetAvatar
-                    url={program.logo}
-                    level={program.level}
-                    alt={program.title}
-                    size="medium"
-                    color={program.color}
-                  />
+                  <Link to={composeProgramDetailsUrl(program.url)}>
+                    <AssetAvatar
+                      url={program.logo}
+                      level={program.level}
+                      alt={program.title}
+                      size="medium"
+                      color={program.color}
+                    />
+                  </Link>
                   <div className="program-detailed__avatar--name">
                     <div className="program-detailed__title">
                       <Link to={programDetailsUrl}>
@@ -69,7 +73,11 @@ class ProgramTableRowDetailed extends Component {
                       </Link>
                     </div>
                     <div className="program-detailed__manager">
-                      {program.manager.username}
+                      <Link to={composeManagerDetailsUrl(program.manager.url)}>
+                        <GVButton variant="text" color="primary">
+                          {program.manager.username}
+                        </GVButton>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -93,7 +101,7 @@ class ProgramTableRowDetailed extends Component {
                       {t("programs-page.programs-header.balance")}
                     </div>
                     <div className="program-detailed__statistic-data--value">
-                      {formatValue(program.statistic.balanceGVT.amount)} GVT
+                      {(+program.statistic.balanceGVT.amount).toFixed(0)} GVT
                     </div>
                   </div>
                   <div>

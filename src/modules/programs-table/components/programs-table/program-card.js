@@ -7,8 +7,10 @@ import ProgramSimpleChart from "components/program-simple-chart/program-simple-c
 import { GVButton } from "gv-react-components";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
-import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
+import { composeManagerDetailsUrl } from "pages/manager/manager.page";
 import { PROGRAM_SLUG_URL_PARAM_NAME } from "pages/programs/programs.routes";
+import { composeProgramDetailsUrl } from "pages/programs/programs.routes";
+import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -45,18 +47,24 @@ class ProgramCard extends Component {
       <div onClick={onExpandClick} className="programs-cards__card">
         <div className="programs-cards__row">
           <div className="programs-cards__avatar">
-            <AssetAvatar
-              url={program.logo}
-              level={program.level}
-              alt={program.title}
-              color={program.color}
-              size="medium"
-            />
+            <Link to={composeProgramDetailsUrl(program.url)}>
+              <AssetAvatar
+                url={program.logo}
+                level={program.level}
+                alt={program.title}
+                color={program.color}
+                size="medium"
+              />
+            </Link>
           </div>
           <div className="programs-cards__names">
             <div className="programs-cards__title">{program.title}</div>
             <div className="programs-cards__name">
-              {program.manager.username}
+              <Link to={composeManagerDetailsUrl(program.manager.url)}>
+                <GVButton variant="text" color="primary">
+                  {program.manager.username}
+                </GVButton>
+              </Link>
             </div>
           </div>
           <div className="programs-cards__actions">
@@ -124,9 +132,6 @@ class ProgramCard extends Component {
                 />
               </Profitability>
             </div>
-            <div className="programs-cards__balance">
-              {program.statistic.balanceGVT.amount} {program.currency}
-            </div>
           </div>
         </div>
         <div className="programs-cards__table">
@@ -144,9 +149,9 @@ class ProgramCard extends Component {
                 </th>
               </tr>
               <tr>
-                <td>{program.statistic.balanceGVT.amount}</td>
+                <td>{(+program.statistic.balanceGVT.amount).toFixed(0)} GVT</td>
                 <td>{program.statistic.investorsCount}</td>
-                <td>{program.availableInvestment}</td>
+                <td>{program.availableInvestment} GVT</td>
               </tr>
             </tbody>
           </table>
