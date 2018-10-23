@@ -3,7 +3,7 @@ import "./fund-details-description.scss";
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import FundAssetContainer from "components/fund-asset/fund-asset-container";
 import { GVButton } from "gv-react-components";
-import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
+import FundDepositContainer from "modules/fund-deposit/fund-deposit-container";
 import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
 import { FUND_NOTIFICATIONS_ROUTE } from "pages/notifications/notifications.routes";
 import React, { PureComponent } from "react";
@@ -126,10 +126,9 @@ class FundDetailsDescription extends PureComponent {
               </GVButton>
             </div>
 
-            <ProgramDepositContainer
+            <FundDepositContainer
               open={isOpenInvestmentPopup}
               id={fundDescription.id}
-              type={"fund"}
               onClose={this.handleCloseInvestmentPopup}
             />
 
