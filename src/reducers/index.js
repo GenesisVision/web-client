@@ -1,6 +1,7 @@
 import headerReducer from "modules/header/reducer/header-reducer";
 import notificationSettingsReducer from "modules/notification-settings/reducers/notification-settings.reducers";
 import programDepositReducer from "modules/program-deposit/reducer/program-deposit.reducer";
+import fundDepositReducer from "modules/fund-deposit/reducer/fund-deposit.reducer";
 import programNotificationsReducer from "modules/program-notifications/reducers/program-notifications.reducers";
 import notificationsReducer from "pages/app/components/notifications/reducers/notifications.reducers";
 import { loadingBarReducer } from "react-redux-loading-bar";
@@ -38,6 +39,7 @@ export default combineReducers({
   profileHeader: headerReducer,
   dashboard: dashboardReducer,
   programDeposit: programDepositReducer,
+  fundDeposit: fundDepositReducer,
   programWithdraw: programWithdrawReducer,
   navigationData: navigationReducer,
   emailPending: emailPendingReducer,
