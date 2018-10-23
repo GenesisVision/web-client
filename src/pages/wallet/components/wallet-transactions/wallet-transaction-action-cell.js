@@ -43,11 +43,7 @@ class WalletTransactionActions extends Component {
   render() {
     const { t, transaction } = this.props;
     const { resendWithdrawRequest, cancelWithdrawRequest } = this;
-    if (
-      transaction.destinationType !== "WithdrawalRequest" ||
-      // transaction.status !== "Processing"
-      false
-    ) {
+    if (transaction.destinationType !== "WithdrawalRequest") {
       return null;
     }
 
@@ -69,6 +65,7 @@ class WalletTransactionActions extends Component {
               variant="text"
               color="secondary"
               onClick={resendWithdrawRequest}
+              disabled={!transaction.destinationWithdrawalInfo.canResendEmail}
             >
               {t("wallet.transaction-actions.resend-email")}
             </GVButton>
@@ -76,6 +73,7 @@ class WalletTransactionActions extends Component {
               variant="text"
               color="secondary"
               onClick={cancelWithdrawRequest}
+              disabled={!transaction.destinationWithdrawalInfo.canCancelRequest}
             >
               {t("wallet.transaction-actions.cancel-request")}
             </GVButton>

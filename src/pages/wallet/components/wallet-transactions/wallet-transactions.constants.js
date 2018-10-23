@@ -26,7 +26,7 @@ export const WALLET_TRANSACTIONS_COLUMNS = [
   }
 ];
 
-export const WALLET_TRANSACTIONS_FILTERS = [
+export const WALLET_TRANSACTIONS_FILTERS_DEFAULT = [
   {
     ...composeDefaultDateRangeFilter()
   },

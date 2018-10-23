@@ -1,4 +1,4 @@
-import * as walletActions from "pages/wallet/actions/wallet.actions";
+import { fetchWalletTransactions } from "pages/wallet/services/wallet.services";
 import { walletApiProxy } from "services/api-client/wallet-api";
 import authService from "services/auth-service";
 
@@ -7,17 +7,10 @@ export const fetchPaymentInfo = () => {
 };
 
 export const newWithdrawRequest = data => (dispatch, getState) => {
-  const authorization = authService.getAuthArg();
-  const prevFilters = getState().wallet.transactions.filters;
-
   return walletApiProxy
     .v10WalletWithdrawRequestNewPost(authService.getAuthArg(), { model: data })
     .then(response => {
-      dispatch(
-        walletActions.fetchWalletTransactions(authorization, {
-          ...prevFilters
-        })
-      );
+      dispatch(fetchWalletTransactions());
       return response;
     })
     .catch(error => error);

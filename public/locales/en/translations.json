@@ -331,8 +331,8 @@
     "withdraw": "Withdraw",
     "transactions": {
       "date": "Date",
-      "destination-type": "Source type",
-      "source-type": "Destination type",
+      "destination-type": "Destination type",
+      "source-type": "Source type",
       "status": "Status",
       "amount": "Amount",
       "actions": "Actions"
@@ -350,8 +350,12 @@
       "cancel-request": "Cancel request"
     },
     "transaction-statuses": {
-      "completed": "Completed",
-      "processing": "Processing"
+      "Done": "Completed",
+      "InProcess": "Processing",
+      "New": "New",
+      "Error": "Error",
+      "Rejected": "Rejected",
+      "Cancelled": "Cancelled"
     },
     "alert-messages": {
       "resend-email-success": "A withdrawal confirmation letter has just been resent to your email address.",

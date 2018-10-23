@@ -18,10 +18,17 @@ import { fetchWalletTransactions } from "../../services/wallet.services";
 import WalletTransactionActions from "./wallet-transaction-action-cell";
 import {
   WALLET_TRANSACTIONS_COLUMNS,
-  WALLET_TRANSACTIONS_FILTERS,
   WALLET_TRANSACTIONS_TYPES_ENUM,
   WALLET_TRANSACTION_ACTIONS_VALUES
 } from "./wallet-transactions.constants";
+
+const getStatus = transaction => {
+  const { destinationWithdrawalInfo } = transaction;
+
+  let status = destinationWithdrawalInfo && destinationWithdrawalInfo.status;
+
+  return status ? status : "";
+};
 
 const getWalletTransactionsPlace = state => {
   const itemsData = {
@@ -44,7 +51,6 @@ const WalletTransactions = ({ t }) => (
   <Surface className="wallet-transactions">
     <TableContainer
       title="Transactions"
-      defaultFilters={WALLET_TRANSACTIONS_FILTERS}
       getItems={fetchWalletTransactions}
       getStorePlace={getWalletTransactionsPlace}
       isFetchOnMount={true}
@@ -84,55 +90,53 @@ const WalletTransactions = ({ t }) => (
           {t(`wallet.transactions.${column.name}`)}
         </span>
       )}
-      renderBodyRow={transaction => (
-        <TableRow className="wallet-transactions__row">
-          <TableCell className="wallet-transactions__cell wallet-transactions__cell--date">
-            {moment(transaction.date).format("DD-MM-YYYY, hh:mm a")}
-          </TableCell>
-          <TableCell className="wallet-transactions__cell wallet-transactions__cell--source-type">
-            {t(
-              `wallet.transactions-types.${
-                WALLET_TRANSACTIONS_TYPES_ENUM[transaction.sourceType]
-              }`
-            )}
-          </TableCell>
-          <TableCell className="wallet-transactions__cell wallet-transactions__cell--destination-type">
-            {t(
-              `wallet.transactions-types.${
-                WALLET_TRANSACTIONS_TYPES_ENUM[transaction.destinationType]
-              }`
-            )}
-          </TableCell>
-          <TableCell className="wallet-transactions__cell wallet-transactions__cell--amount">
-            <Profitability
-              value={formatValue(transaction.amount)}
-              prefix="sign"
-            >
-              <NumberFormat
-                value={formatValue(
-                  transaction.amount,
-                  roundTypeEnum.FLOOR,
-                  false
-                )}
-                thousandSeparator=" "
-                displayType="text"
-                suffix={" " + transaction.sourceCurrency}
-              />
-            </Profitability>
-          </TableCell>
-          <TableCell className="wallet-transactions__cell wallet-transactions__cell--status">
-            {t(
-              `wallet.transaction-statuses.${
-                // transaction.status || "processing"
-                "processing"
-              }`
-            )}
-          </TableCell>
-          <TableCell className="wallet-transactions__cell wallet-transactions__cell--actions">
-            <WalletTransactionActions transaction={transaction} />
-          </TableCell>
-        </TableRow>
-      )}
+      renderBodyRow={transaction => {
+        const status = getStatus(transaction);
+        return (
+          <TableRow className="wallet-transactions__row">
+            <TableCell className="wallet-transactions__cell wallet-transactions__cell--date">
+              {moment(transaction.date).format("DD-MM-YYYY, hh:mm a")}
+            </TableCell>
+            <TableCell className="wallet-transactions__cell wallet-transactions__cell--source-type">
+              {t(
+                `wallet.transactions-types.${
+                  WALLET_TRANSACTIONS_TYPES_ENUM[transaction.sourceType]
+                }`
+              )}
+            </TableCell>
+            <TableCell className="wallet-transactions__cell wallet-transactions__cell--destination-type">
+              {t(
+                `wallet.transactions-types.${
+                  WALLET_TRANSACTIONS_TYPES_ENUM[transaction.destinationType]
+                }`
+              )}
+            </TableCell>
+            <TableCell className="wallet-transactions__cell wallet-transactions__cell--amount">
+              <Profitability
+                value={formatValue(transaction.amount)}
+                prefix="sign"
+              >
+                <NumberFormat
+                  value={formatValue(
+                    transaction.amount,
+                    roundTypeEnum.FLOOR,
+                    false
+                  )}
+                  thousandSeparator=" "
+                  displayType="text"
+                  suffix={" " + transaction.sourceCurrency}
+                />
+              </Profitability>
+            </TableCell>
+            <TableCell className="wallet-transactions__cell wallet-transactions__cell--status">
+              {status && t(`wallet.transaction-statuses.${status}`)}
+            </TableCell>
+            <TableCell className="wallet-transactions__cell wallet-transactions__cell--actions">
+              <WalletTransactionActions transaction={transaction} />
+            </TableCell>
+          </TableRow>
+        );
+      }}
     />
   </Surface>
 );

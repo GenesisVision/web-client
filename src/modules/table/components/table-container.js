@@ -4,7 +4,6 @@ import { bindActionCreators } from "redux";
 import { merge } from "utils/helpers";
 
 import { updateFilter } from "../helpers/filtering.helpers";
-import { composeRequestFilters } from "../services/table.service";
 import Table from "./table";
 
 class TableContainer extends Component {
@@ -14,27 +13,17 @@ class TableContainer extends Component {
     }
   }
 
-  updateItems = (changedFilters = {}) => {
-    const { defaultFilters, getItems, paging, sorting, filtering } = this.props;
+  updateItems = changedFilters => {
+    const { getItems, paging, sorting, filtering } = this.props;
 
-    const filters = composeRequestFilters({
+    const filters = {
       paging,
       sorting,
       filtering,
-      defaultFilters,
       ...changedFilters
-    });
+    };
 
     getItems(filters);
-
-    // обновить пейджинг.
-    // .then(data => {
-    //   const totalPages = calculateTotalPages(data.total, paging.itemsOnPage);
-    //   this.setState(prevState => ({
-    //     data,
-    //     paging: merge(prevState.paging, { totalPages })
-    //   }));
-    // })
   };
 
   handleUpdateSorting = sorting => {
@@ -69,10 +58,12 @@ class TableContainer extends Component {
 
   render() {
     const { data } = this.props;
+    const items = data && data.items;
+
     return (
       <Table
         {...this.props}
-        items={data ? data.items : []}
+        items={items || []}
         updateSorting={this.handleUpdateSorting}
         updatePaging={this.handleUpdatePaging}
         updateFilter={this.handleUpdateFilter}
@@ -84,7 +75,7 @@ class TableContainer extends Component {
 const mapStateToProps = (state, ownProps) => {
   let storePlace = ownProps.getStorePlace(state);
   const {
-    itemsData = { isPending: false, data: { items: [], total: 0 } },
+    itemsData = { isPending: false, data: { items: [] } },
     filters
   } = storePlace;
 
