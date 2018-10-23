@@ -11,6 +11,7 @@ import { SLUG_URL_REGEXP } from "../../utils/constants";
 import ManagerDescriptionContainer from "./components/manager-description/manager-description-container";
 import ManagerHistorySection from "./components/program-details-history-section/manager-history-section";
 import * as managerService from "./services/manager.service";
+import { goBack } from "react-router-redux";
 
 export const MANAGER_SLUG_URL_PARAM_NAME = "managerSlugUrl";
 
@@ -37,7 +38,7 @@ class ManagerPage extends Component {
     });
   }
   render() {
-    const { t } = this.props;
+    const { t, service } = this.props;
     const { managerProfile, isPending } = this.state;
 
     return (
@@ -45,7 +46,10 @@ class ManagerPage extends Component {
         <Page title={`${t("manager.title")} ${managerProfile.username}`}>
           <div className="manager">
             <div className="manager__description">
-              <ManagerDescriptionContainer managerProfile={managerProfile} />
+              <ManagerDescriptionContainer
+                managerProfile={managerProfile}
+                goBack={service.goBack}
+              />
             </div>
             <div className="manager__history">
               <ManagerHistorySection managerId={managerProfile.id} />
@@ -64,7 +68,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    service: bindActionCreators({ ...managerService }, dispatch)
+    service: bindActionCreators({ ...managerService, goBack }, dispatch)
   };
 };
 
