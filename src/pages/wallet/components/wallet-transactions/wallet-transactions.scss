@@ -35,9 +35,17 @@
       width: 33%;
       min-width: 180px;
     }
-    &--type {
+    &--source-type {
       width: 40%;
       min-width: 230px;
+    }
+    &--destination-type {
+      width: 40%;
+      min-width: 230px;
+    }
+    &--status {
+      width: 27%;
+      min-width: 110px;
     }
     &--amount {
       width: 27%;

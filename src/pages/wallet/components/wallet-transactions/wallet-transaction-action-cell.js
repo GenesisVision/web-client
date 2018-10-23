@@ -43,7 +43,11 @@ class WalletTransactionActions extends Component {
   render() {
     const { t, transaction } = this.props;
     const { resendWithdrawRequest, cancelWithdrawRequest } = this;
-    if (transaction.destinationType !== "WithdrawalRequest") {
+    if (
+      transaction.destinationType !== "WithdrawalRequest" ||
+      // transaction.status !== "Processing"
+      false
+    ) {
       return null;
     }
 

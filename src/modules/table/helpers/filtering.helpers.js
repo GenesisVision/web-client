@@ -56,3 +56,16 @@ const processFilterValue = filter => {
   }
   return requestValue;
 };
+
+export const updateFilter = (oldFilters, newFilter) => {
+  const { name, value } = newFilter;
+  const existingFilterValue = oldFilters[name];
+  if (JSON.stringify(existingFilterValue !== JSON.stringify(value))) {
+    return {
+      ...oldFilters,
+      ...{ [name]: value }
+    };
+  }
+
+  return oldFilters;
+};

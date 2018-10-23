@@ -1,10 +1,9 @@
 import WalletWithdrawForm from "modules/wallet-withdraw/components/wallet-withdraw-form";
 import WalletWithdrawRequest from "modules/wallet-withdraw/components/wallet-withdraw-request/wallet-withdraw-request";
-import {
-  fetchPaymentInfo,
-  newWithdrawRequest
-} from "modules/wallet-withdraw/services/wallet-withdraw.services";
+import * as walletWithdrawService from "modules/wallet-withdraw/services/wallet-withdraw.services";
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 class WalletWithdrawContainer extends Component {
   state = {
@@ -16,20 +15,22 @@ class WalletWithdrawContainer extends Component {
 
   componentDidMount() {
     this.setState({ isPending: true });
-    fetchPaymentInfo().then(data => this.setState({ ...data }));
+    walletWithdrawService
+      .fetchPaymentInfo()
+      .then(data => this.setState({ ...data }));
   }
 
   handleSubmit = values => {
     this.setState({ isPending: true });
-    newWithdrawRequest({ ...values, amount: Number(values.amount) }).then(
-      response => {
+    this.props.service
+      .newWithdrawRequest({ ...values, amount: Number(values.amount) })
+      .then(response => {
         this.setState({
           isPending: response.isPending,
           success: !Boolean(response.errorMessage),
           errorMessage: response.errorMessage
         });
-      }
-    );
+      });
   };
 
   render() {
@@ -51,6 +52,11 @@ class WalletWithdrawContainer extends Component {
   }
 }
 
-WalletWithdrawContainer.propTypes = {};
+const mapDispatchToProps = dispatch => ({
+  service: bindActionCreators(walletWithdrawService, dispatch)
+});
 
-export default WalletWithdrawContainer;
+export default connect(
+  null,
+  mapDispatchToProps
+)(WalletWithdrawContainer);

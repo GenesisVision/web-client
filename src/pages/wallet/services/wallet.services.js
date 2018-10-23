@@ -11,19 +11,22 @@ export const fetchWalletBalance = () => (dispatch, getState) => {
   dispatch(actions.fetchWalletBalance(currency, authorization));
 };
 
-export const fetchWalletTransactions = filters => {
+export const fetchWalletTransactions = newFilters => (dispatch, getState) => {
   const authorization = authService.getAuthArg();
+  const prevFilters = getState().wallet.transactions.filters;
 
-  return walletApiProxy
-    .v10WalletTransactionsGet(authorization, filters)
-    .then(({ data }) => ({
-      items: data.transactions,
-      total: data.total
-    }));
+  dispatch(
+    actions.fetchWalletTransactions(authorization, {
+      ...prevFilters,
+      ...newFilters
+    })
+  );
+  dispatch(actions.updateWalletTransactionsFilters(newFilters));
 };
 
 export const cancelWithdrawRequest = txId => (dispatch, getState) => {
   const authorization = authService.getAuthArg();
+  const prevFilters = getState().wallet.transactions.filters;
 
   return walletApiProxy
     .v10WalletWithdrawRequestCancelByTxIdPost(txId, authorization)
@@ -33,6 +36,11 @@ export const cancelWithdrawRequest = txId => (dispatch, getState) => {
           "wallet.alert-messages.cancel-request-success",
           true
         )
+      );
+      dispatch(
+        actions.fetchWalletTransactions(authorization, {
+          ...prevFilters
+        })
       );
       return response;
     })
