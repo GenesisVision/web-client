@@ -13,13 +13,17 @@ import { compose } from "redux";
 
 const ProgramWithdrawContainer = props => {
   const { open, onClose, currency, services, id } = props;
+  const handleWithdraw = (id, amount) => {
+    onClose();
+    return withdrawProgramById(id, amount);
+  };
 
   return (
     <Dialog open={open} onClose={onClose}>
       <ProgramWithdrawPopup
         currency={currency}
         fetchInfo={() => services.getProgramWithdrawInfo(id)}
-        withdraw={amount => withdrawProgramById(id, amount)}
+        withdraw={amount => handleWithdraw(id, amount)}
       />
     </Dialog>
   );
