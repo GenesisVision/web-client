@@ -47,8 +47,7 @@ class DashboardPortfolioChart extends PureComponent {
             <ProgramChartGradient
               offset={this.grOffset()}
               name="dashboardPortfolioChartFill"
-              positiveColor={GVColors.$primaryColor}
-              negativeColor={GVColors.$primaryColor}
+              color={GVColors.$primaryColor}
               startOpacity={0.05}
               stopOpacity={0.2}
             />

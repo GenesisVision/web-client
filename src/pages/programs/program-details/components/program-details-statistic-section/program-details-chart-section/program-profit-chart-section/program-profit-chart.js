@@ -55,10 +55,7 @@ class ProgramProfitChart extends PureComponent {
     }));
     const equityValues = equity.map(x => x.value);
     const off = gradientOffset(equityValues);
-    const areaStrokeColor = getStrokeColor(
-      equityValues,
-      `url(#equityProgramChartStroke)`
-    );
+    const areaStrokeColor = getStrokeColor(equityValues);
 
     const periodStart = period.start ? period.start.getTime() : equity[0].date;
     return (
@@ -67,17 +64,8 @@ class ProgramProfitChart extends PureComponent {
           <defs>
             <ProgramChartGradient
               offset={off}
-              name="equityProgramChartStroke"
-              positiveColor={GVColors.$positiveColor}
-              negativeColor={GVColors.$negativeColor}
-              startOpacity={1}
-              stopOpacity={1}
-            />
-            <ProgramChartGradient
-              offset={off}
               name="equityProgramChartFill"
-              positiveColor={GVColors.$positiveColor}
-              negativeColor={GVColors.$negativeColor}
+              color={areaStrokeColor}
               startOpacity={0.1}
               stopOpacity={0.01}
             />
