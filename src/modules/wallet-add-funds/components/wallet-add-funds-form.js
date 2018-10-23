@@ -88,6 +88,12 @@ const WalletAddFundsForm = ({
           &nbsp;
           {t("buttons.copy")}
         </GVButton>
+        <div className="dialog__info">
+          {currency !== "GVT" &&
+            t("wallet-add-funds.disclaimer", {
+              currency
+            })}
+        </div>
       </div>
     </form>
   );
@@ -113,7 +119,6 @@ export default compose(
     mapPropsToValues: () => ({
       currency: "BTC",
       amount: ""
-    }),
-    onSubmit: values => console.info(values)
+    })
   })
 )(WalletAddFundsForm);
