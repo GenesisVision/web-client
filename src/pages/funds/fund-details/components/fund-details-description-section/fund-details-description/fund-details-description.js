@@ -137,9 +137,7 @@ class FundDetailsDescription extends PureComponent {
               <ProgramReinvestingWidget
                 className="fund-details-description__reinvest"
                 toggleReinvesting={onReinvestingClick}
-                isReinvesting={
-                  fundDescription.personalProgramDetails.isReinvest
-                }
+                isReinvesting={fundDescription.personalFundDetails.isReinvest}
                 disabled={isReinvestPending}
               />
             )}
