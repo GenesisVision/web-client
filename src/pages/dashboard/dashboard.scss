@@ -1,22 +1,38 @@
+@import "styles/_breakpoint.scss";
+@import "styles/_sizes.scss";
+
 .dashboard {
+  & div {
+    box-sizing: border-box;
+  }
+
   &__row {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    @include media-breakpoint-landscape-phone() {
+      flex-direction: row;
+    }
   }
 
   &__chart {
     display: flex;
-    flex: 3;
+    width: 100%;
   }
 
   &__portfolio-events-aside {
     display: flex;
-    flex: 1;
-    margin-left: 2rem;
     min-width: 315px;
+    margin-top: $padding-small;
+    @include media-breakpoint-landscape-phone() {
+      margin-left: 2rem;
+      margin-top: 0;
+    }
   }
 
   &__assets {
-    margin-top: 2rem;
+    margin-top: $padding-small;
+    @include media-breakpoint-landscape-phone() {
+      margin-top: $padding-middle;
+    }
   }
 }

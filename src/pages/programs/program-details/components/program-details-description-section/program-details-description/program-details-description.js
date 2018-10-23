@@ -104,18 +104,18 @@ class ProgramDetailsDescription extends PureComponent {
                   {programDescription.currency}
                 </div>
               </div>
-              <div className="popover-levels__block">
+              <div className="popover-levels__block popover-levels__text-block">
                 <div className="popover-levels__text">
                   {t("program-details-page.popover.text")}
                 </div>
-                <GVButton
+                {/*<GVButton
                   variant="text"
                   onClick={this.handleOpenAboutLevels}
                   color="secondary"
                   className="popover-levels__about"
                 >
                   {t("program-details-page.popover.about-levels")} &#8250;
-                </GVButton>
+                </GVButton>*/}
               </div>
             </div>
           </Popover>
