@@ -16,6 +16,9 @@
   flex-direction: column;
   align-items: flex-start;
   background: #25434d;
+  &__text-block {
+    background: #273642;
+  }
   &__block {
     display: flex;
     flex-direction: column;
@@ -34,11 +37,6 @@
   &__text {
     word-wrap: break-word;
     max-width: 165px;
-  }
-  &__title {
-    font-size: $font-size-title;
-    color: $primary-color;
-    font-weight: bold;
   }
   &__subtitle {
     font-size: $font-size-large;

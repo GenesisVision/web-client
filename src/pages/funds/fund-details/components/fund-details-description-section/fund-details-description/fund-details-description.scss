@@ -150,7 +150,7 @@
     }
     &-icon,
     &-text {
-      padding: $padding-small-mobile $padding-small-mobile/2;
+      padding: $padding-small-mobile/2 $padding-small-mobile/2;
     }
     &-text {
       font-size: $font-size-small-mobile;
@@ -209,14 +209,14 @@
       }
     }
     &__control {
-      &-icon,
+      margin-bottom: 10px;
       &-text {
-        padding: $padding-small/2 $padding-small;
+        padding: $padding-small/4 $padding-small;
         white-space: nowrap;
       }
       &-icon {
-        width: $icon-size;
-        height: $icon-size;
+        width: 28px;
+        height: 27px;
       }
       &-text {
         font-size: $font-size-small;

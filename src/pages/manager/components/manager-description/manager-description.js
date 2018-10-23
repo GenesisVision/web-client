@@ -20,7 +20,7 @@ const ManagerDescription = ({ t, managerProfile }) => {
         <div className="manager-description__heading">
           {managerProfile.username}
         </div>
-        <div className="manager-description__author-btn">
+        <div className="manager-description__date">
           {`${t("manager.member-since")} ${moment(
             managerProfile.regDate
           ).format("D MMM YY")}`}

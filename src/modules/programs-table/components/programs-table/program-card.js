@@ -197,6 +197,7 @@ class ProgramCard extends Component {
           type={"program"}
         />
         <ProgramWithdrawContainer
+          currency={program.currency}
           open={this.state.isOpenWithdrawalPopup}
           id={program.id}
           onClose={this.handleCloseWithdrawalPopup}
