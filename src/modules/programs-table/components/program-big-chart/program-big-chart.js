@@ -26,11 +26,6 @@ const ProgramBigChart = ({ programId, data }) => {
     equity: x.value
   }));
 
-  const period = {
-    start: data[0].date,
-    end: data[data.length - 1].date,
-    type: ChartPeriodType.week
-  };
   const programChartDataValues = programChartData.map(x => x.equity);
   const off = gradientOffset(programChartDataValues);
   const areaStrokeColor = getStrokeColor(programChartDataValues);
@@ -39,7 +34,7 @@ const ProgramBigChart = ({ programId, data }) => {
     <ResponsiveContainer width="99%" height="99%" className="program-big-chart">
       <AreaChart data={programChartData}>
         <ReferenceLine y={0} strokeDasharray="1 10" />
-        {chartXAxis(period)}
+        {chartXAxis(data[0].date, data[data.length - 1].date)}
         <YAxis
           dataKey="equity"
           labelFormatter={value => `${value}%`}

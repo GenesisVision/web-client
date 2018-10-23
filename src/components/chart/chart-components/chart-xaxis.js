@@ -4,7 +4,7 @@ import { XAxis } from "recharts";
 
 import { composeTicks, dateTickFormatter } from "./chart-components.helpers";
 
-const chartXAxis = period => {
+const chartXAxis = (start, end) => {
   return (
     <XAxis
       dataKey="date"
@@ -15,10 +15,10 @@ const chartXAxis = period => {
         fontSize: "12",
         transform: "translate(0, 8)"
       }}
-      tickFormatter={dateTickFormatter(period.type)}
+      tickFormatter={dateTickFormatter(start, end)}
       allowDuplicatedCategory={false}
       axisLine={false}
-      ticks={composeTicks(period)}
+      ticks={composeTicks(start, end)}
     />
   );
 };

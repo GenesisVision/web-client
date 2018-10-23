@@ -1,48 +1,31 @@
 import moment from "moment";
 
-import { ChartPeriodType } from "../chart-period/chart-period.helpers";
-
-export const dateTickFormatter = periodType => date => {
+export const dateTickFormatter = (start, end) => date => {
   let dateFormat;
-  switch (periodType) {
-    case ChartPeriodType.day:
-      dateFormat = "LT";
-      break;
-    case ChartPeriodType.week:
-    case ChartPeriodType.month:
-    case ChartPeriodType.quarter:
-      dateFormat = "MMM Do";
-      break;
-    case ChartPeriodType.year:
-      dateFormat = "MMM";
-      break;
-    default:
-      dateFormat = "ll";
-  }
+  const duration = end.getTime() - start.getTime();
+  const msInDay = 1000 * 60 * 60 * 24;
+  if (duration <= msInDay) dateFormat = "LT";
+  else if (duration <= msInDay * 90) dateFormat = "MMM Do";
+  else if (duration <= msInDay * 365) dateFormat = "MMM";
+  else dateFormat = "ll";
+
   return moment(date).format(dateFormat);
 };
 
-const getTicksCountByPeriod = periodType => {
-  switch (periodType) {
-    case ChartPeriodType.day:
-      return 12;
-    case ChartPeriodType.week:
-      return 7;
-    case ChartPeriodType.month:
-      return 30;
-    case ChartPeriodType.quarter:
-      return 4;
-    case ChartPeriodType.year:
-      return 12;
-    default:
-      return 7;
-  }
+const getTicksCountByPeriod = (start, end) => {
+  const duration = end.getTime() - start.getTime();
+  const msInDay = 1000 * 60 * 60 * 24;
+  if (duration <= msInDay) return 6;
+  if (duration <= msInDay * 7) return 7;
+  if (duration <= msInDay * 30) return 10;
+  if (duration <= msInDay * 90) return 4;
+  return 12;
 };
 
-export const composeTicks = period => {
-  const periodStart = period.start.getTime();
-  const periodEnd = period.end.getTime();
-  const ticks = getTicksCountByPeriod(period.type);
+export const composeTicks = (start, end) => {
+  const periodStart = start.getTime();
+  const periodEnd = end.getTime();
+  const ticks = getTicksCountByPeriod(start, end);
   const diff = (periodEnd - periodStart) / (ticks - 1);
   return [...Array(ticks).keys()].map(x => periodStart + diff * x);
 };

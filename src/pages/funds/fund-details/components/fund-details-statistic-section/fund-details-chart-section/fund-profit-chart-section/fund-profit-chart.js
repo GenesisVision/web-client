@@ -1,9 +1,9 @@
+import chartXAxis from "components/chart/chart-components/chart-xaxis";
 import ProgramChartGradient, {
   gradientOffset
 } from "components/chart/chart-gradient/chart-gradient";
 import { getStrokeColor } from "components/chart/chart-gradient/chart-gradient";
 import { GVColors } from "gv-react-components";
-import moment from "moment";
 import React, { PureComponent } from "react";
 import {
   Area,
@@ -11,7 +11,6 @@ import {
   ComposedChart,
   ResponsiveContainer,
   Tooltip,
-  XAxis,
   YAxis
 } from "recharts";
 
@@ -41,15 +40,7 @@ class FundProfitChart extends PureComponent {
               stopOpacity={0.01}
             />
           </defs>
-          <XAxis
-            dataKey="date"
-            domain={["dataMin", "dataMax"]}
-            type="number"
-            tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
-            tickFormatter={(date, i) => moment(date).format("ll")}
-            allowDuplicatedCategory={false}
-            axisLine={false}
-          />
+          {chartXAxis(equityChart[0].date, equityChart[equity.length - 1].date)}
           <YAxis
             dataKey="value"
             axisLine={false}

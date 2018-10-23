@@ -1,9 +1,9 @@
+import chartXAxis from "components/chart/chart-components/chart-xaxis";
 import ProgramChartGradient, {
   gradientOffset
 } from "components/chart/chart-gradient/chart-gradient";
 import { getStrokeColor } from "components/chart/chart-gradient/chart-gradient";
 import { GVColors } from "gv-react-components";
-import moment from "moment";
 import React, { PureComponent } from "react";
 import {
   Area,
@@ -12,34 +12,10 @@ import {
   ComposedChart,
   ResponsiveContainer,
   Tooltip,
-  XAxis,
   YAxis
 } from "recharts";
 
-import { ChartPeriodType } from "../../../../../../../components/chart/chart-period/chart-period.helpers";
 import ProgramProfitTooltip from "./program-profit-tooltip";
-
-const dateTickFormatter = periodType => date => {
-  let dateFormat;
-  switch (periodType) {
-    case ChartPeriodType.day:
-      dateFormat = "LT";
-      break;
-    case ChartPeriodType.week:
-    case ChartPeriodType.month:
-    case ChartPeriodType.quarter:
-      dateFormat = "MMM Do";
-      break;
-    default:
-      dateFormat = "ll";
-  }
-  return moment(date).format(dateFormat);
-};
-
-const composeTicks = (periodStart, periodEnd) => {
-  const diff = (periodEnd - periodStart) / 6;
-  return [...Array(7).keys()].map(x => periodStart + diff * x);
-};
 
 class ProgramProfitChart extends PureComponent {
   render() {
@@ -57,7 +33,6 @@ class ProgramProfitChart extends PureComponent {
     const off = gradientOffset(equityValues);
     const areaStrokeColor = getStrokeColor(equityValues);
 
-    const periodStart = period.start ? period.start.getTime() : equity[0].date;
     return (
       <ResponsiveContainer>
         <ComposedChart data={pnl}>
@@ -70,20 +45,10 @@ class ProgramProfitChart extends PureComponent {
               stopOpacity={0.01}
             />
           </defs>
-          <XAxis
-            dataKey="date"
-            domain={[periodStart, period.end.getTime()]}
-            type="number"
-            tick={{
-              fill: GVColors.$labelColor,
-              fontSize: "12",
-              transform: "translate(0, 8)"
-            }}
-            tickFormatter={dateTickFormatter(period.type)}
-            allowDuplicatedCategory={false}
-            axisLine={false}
-            ticks={composeTicks(periodStart, period.end.getTime())}
-          />
+          {chartXAxis(
+            equityChart[0].date,
+            equityChart[equityChart.length - 1].date
+          )}
           <YAxis
             yAxisId="left"
             dataKey="value"
