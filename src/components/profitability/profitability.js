@@ -36,7 +36,7 @@ class Profitability extends PureComponent {
 
 Profitability.propTypes = {
   className: PropTypes.string,
-  value: PropTypes.number.isRequired,
+  value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   prefix: PropTypes.oneOf(Object.values(ProfitabilityPrefix)),
   variant: PropTypes.oneOf(Object.values(ProfitabilityVariant))
 };
