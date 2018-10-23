@@ -76,6 +76,7 @@ $description-block-width: 250px;
     word-break: break-all;
     .gv-btn {
       padding: 0;
+      letter-spacing: 0.278571px;
     }
   }
   &__chart {
@@ -179,6 +180,7 @@ $description-block-width: 250px;
       padding: $padding/10;
     }
     .gv-btn {
+      letter-spacing: 0.278571px;
       padding: 0;
     }
   }

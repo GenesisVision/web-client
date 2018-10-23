@@ -119,25 +119,21 @@ $padding: 33px;
     padding: $padding-small-mobile;
     overflow: hidden; // Or flex might break
     list-style: none;
-    font-weight: 300;
-    letter-spacing: 0.4px;
+    font-weight: normal;
+    font-size: 13px;
+    letter-spacing: 0.433333px;
+
     &#{&} {
       &--head {
         padding-right: 15px;
-        span {
-          opacity: 0.5;
-        }
+        opacity: 0.3;
       }
       &--sortable {
         cursor: pointer;
         padding-right: 15px;
-        font-weight: 500;
-        span {
-          opacity: 0.6;
-        }
+        opacity: 0.6;
         .table__cell--sortable-asc,
         .table__cell--sortable-desc {
-          font-weight: 600;
           span {
             opacity: 1;
           }
