@@ -4,6 +4,7 @@ import Page from "components/page/page";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import connect from "react-redux/es/connect/connect";
+import { goBack } from "react-router-redux";
 import { bindActionCreators } from "redux";
 import replaceParams from "utils/replace-params";
 
@@ -11,7 +12,6 @@ import { SLUG_URL_REGEXP } from "../../utils/constants";
 import ManagerDescriptionContainer from "./components/manager-description/manager-description-container";
 import ManagerHistorySection from "./components/program-details-history-section/manager-history-section";
 import * as managerService from "./services/manager.service";
-import { goBack } from "react-router-redux";
 
 export const MANAGER_SLUG_URL_PARAM_NAME = "managerSlugUrl";
 

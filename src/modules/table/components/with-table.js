@@ -1,9 +1,8 @@
 import React, { Component } from "react";
+import { merge } from "utils/helpers";
 
+import { updateFilter } from "../helpers/filtering.helpers";
 import { calculateTotalPages } from "../helpers/paging.helpers";
-import { updateFilter } from "../reducers/table-filtering.reducer";
-import { updatePaging } from "../reducers/table-paging.reducer";
-import { updateSorting } from "../reducers/table-sorting.reducer";
 import { composeRequestFilters } from "../services/table.service";
 
 const withTable = ({
@@ -61,7 +60,7 @@ const withTable = ({
           );
           this.setState(prevState => ({
             data,
-            paging: updatePaging(prevState.paging, { totalPages })
+            paging: merge(prevState.paging, { totalPages })
           }));
         })
         .catch();
@@ -70,8 +69,8 @@ const withTable = ({
     handleUpdateSorting = sorting => {
       this.setState(
         prevState => ({
-          sorting: updateSorting(sorting),
-          paging: updatePaging(prevState.paging, {
+          sorting: sorting,
+          paging: merge(prevState.paging, {
             currentPage: 1
           })
         }),
@@ -83,7 +82,7 @@ const withTable = ({
       this.setState(
         prevState => ({
           filtering: updateFilter(prevState.filtering, filter),
-          paging: updatePaging(prevState.paging, {
+          paging: merge(prevState.paging, {
             currentPage: 1
           })
         }),
@@ -94,7 +93,7 @@ const withTable = ({
     handleUpdatePaging = nextPageIndex => {
       this.setState(
         prevState => ({
-          paging: updatePaging(prevState.paging, {
+          paging: merge(prevState.paging, {
             currentPage: nextPageIndex + 1
           })
         }),

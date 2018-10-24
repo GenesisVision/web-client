@@ -1,3 +1,5 @@
+import { merge } from "utils/helpers";
+
 export const DEFAULT_PAGING = {
   currentPage: 1,
   itemsOnPage: 10,
@@ -10,17 +12,10 @@ const tablePagingReducer = ({ type, paging = {} }) => {
   return (state = initialState, action) => {
     switch (action.type) {
       case type:
-        return updatePaging(state, action.paging);
+        return merge(state, action.paging);
       default:
         return state;
     }
-  };
-};
-
-export const updatePaging = (oldPaging, newPaging) => {
-  return {
-    ...oldPaging,
-    ...newPaging
   };
 };
 

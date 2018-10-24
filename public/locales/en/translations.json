@@ -364,8 +364,11 @@
     "withdraw": "Withdraw",
     "transactions": {
       "date": "Date",
-      "type": "Type",
-      "amount": "Amount"
+      "destination-type": "Destination type",
+      "source-type": "Source type",
+      "status": "Status",
+      "amount": "Amount",
+      "actions": "Actions"
     },
     "transactions-types": {
       "wallet": "Wallet",
@@ -374,6 +377,22 @@
       "program-request": "Program request",
       "withdrawal-request": "Withdrawal request",
       "payment-transaction": "Payment transaction"
+    },
+    "transaction-actions": {
+      "resend-email": "Resend confirmation email",
+      "cancel-request": "Cancel request"
+    },
+    "transaction-statuses": {
+      "Done": "Completed",
+      "InProcess": "Processing",
+      "New": "New",
+      "Error": "Error",
+      "Rejected": "Rejected",
+      "Cancelled": "Cancelled"
+    },
+    "alert-messages": {
+      "resend-email-success": "A withdrawal confirmation letter has just been resent to your email address.",
+      "cancel-request-success": "The withdrawal request was successfully canceled"
     }
   },
   "wallet-widget": {
