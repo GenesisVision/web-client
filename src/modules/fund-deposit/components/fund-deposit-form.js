@@ -81,7 +81,7 @@ const FundDepositForm = ({
             {info.gvCommission * 100}%
             <NumberFormat
               value={formatValue(gvFee)}
-              prefix={"("}
+              prefix={" ("}
               suffix={` GVT)`}
               displayType="text"
             />
