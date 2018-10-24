@@ -10,14 +10,23 @@ export const WALLET_TRANSACTIONS_COLUMNS = [
     name: "date"
   },
   {
-    name: "type"
+    name: "source-type"
+  },
+  {
+    name: "destination-type"
   },
   {
     name: "amount"
+  },
+  {
+    name: "status"
+  },
+  {
+    name: "actions"
   }
 ];
 
-export const WALLET_TRANSACTIONS_FILTERS = [
+export const WALLET_TRANSACTIONS_FILTERS_DEFAULT = [
   {
     ...composeDefaultDateRangeFilter()
   },
