@@ -9,6 +9,11 @@
     //min-width: 240px/$divider-text;
     padding: 15px / $divider-padding;
     justify-content: space-between;
+    &__container{
+      &--others-count{
+        cursor: pointer;
+      }
+    }
     &--others-count {
       min-width: auto;
       background: rgba(216, 216, 216, 0.1);
