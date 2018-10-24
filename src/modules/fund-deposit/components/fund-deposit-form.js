@@ -22,11 +22,12 @@ const FundDepositForm = ({
   errorMessage
 }) => {
   const fee = calculateValueOfEntryFee(values.amount, info.entryFee);
-  const due = parseFloat(values.amount || 0) + parseFloat(fee);
-
+  const gvFee = calculateValueOfEntryFee(values.amount, info.gvCommission);
+  const investAmount =
+    parseFloat(values.amount || 0) - parseFloat(fee) - parseFloat(gvFee);
   const isAllow = values => {
     const { floatValue, formattedValue } = values;
-    const { availableInWallet, availableToInvest } = info;
+    const { availableInWallet } = info;
     const fee = calculateValueOfEntryFee(floatValue, info.entryFee);
     const validateAvailableToInvest = () => true;
     return (
@@ -41,7 +42,7 @@ const FundDepositForm = ({
       <GVFormikField
         className="invest-field"
         name="amount"
-        label={t("deposit-program.amount")}
+        label={t("deposit-fund.amount")}
         component={GVTextField}
         adornment="GVT"
         autoComplete="off"
@@ -60,13 +61,27 @@ const FundDepositForm = ({
       <ul className="dialog-list">
         <li className="dialog-list__item">
           <span className="dialog-list__title">
-            {t("deposit-program.entry-fee")}
+            {t("deposit-fund.entry-fee")}
           </span>
           <span className="dialog-list__value">
             {info.entryFee} %{" "}
             <NumberFormat
               value={formatValue(fee)}
-              prefix="("
+              prefix=" ("
+              suffix={" GVT)"}
+              displayType="text"
+            />
+          </span>
+        </li>
+        <li className="dialog-list__item">
+          <span className="dialog-list__title">
+            {t("deposit-fund.gv-commission")}
+          </span>
+          <span className="dialog-list__value">
+            {info.gvCommission * 100}%
+            <NumberFormat
+              value={formatValue(gvFee)}
+              prefix={"("}
               suffix={` GVT)`}
               displayType="text"
             />
@@ -74,11 +89,11 @@ const FundDepositForm = ({
         </li>
         <li className="dialog-list__item">
           <span className="dialog-list__title">
-            {t("deposit-program.amount-due")}
+            {t("deposit-fund.investment-amount")}
           </span>
           <span className="dialog-list__value">
             <NumberFormat
-              value={formatValue(due)}
+              value={formatValue(investAmount)}
               suffix={` GVT`}
               displayType="text"
             />
@@ -93,13 +108,8 @@ const FundDepositForm = ({
           className="invest-form__submit-button"
           disabled={disabled}
         >
-          {t("deposit-program.confirm")}
+          {t("deposit-fund.confirm")}
         </GVButton>
-      </div>
-      <div className="dialog__info">
-        {`${t("deposit-program.period")} ${moment(info.periodEnds).format(
-          "DD.MM.YYYY, HH:mm"
-        )}`}
       </div>
     </form>
   );
@@ -117,15 +127,15 @@ export default compose(
         amount: number()
           .min(
             info.minInvestmentAmount,
-            t("deposit-program.validation.amount-min-value", {
+            t("deposit-fund.validation.amount-min-value", {
               min: info.minInvestmentAmount
             })
           )
           .lessThan(
             info.availableInWallet,
-            t("deposit-program.validation.amount-more-than-available")
+            t("deposit-fund.validation.amount-more-than-available")
           )
-          .required(t("deposit-program.validation.amount-is-required"))
+          .required(t("deposit-fund.validation.amount-is-required"))
       }),
     handleSubmit: (values, { props }) => {
       props.onSubmit(values.amount);
