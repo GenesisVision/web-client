@@ -85,6 +85,7 @@ class ProgramDetailsInvestment extends PureComponent {
           <GVButton
             color="secondary"
             variant="outlined"
+            disabled={status === "Investing"}
             onClick={this.handleOpenWithdrawalPopup}
           >
             {t("program-details-page.description.withdraw")}
