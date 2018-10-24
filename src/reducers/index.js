@@ -3,6 +3,7 @@ import headerReducer from "modules/header/reducer/header-reducer";
 import notificationSettingsReducer from "modules/notification-settings/reducers/notification-settings.reducers";
 import programDepositReducer from "modules/program-deposit/reducer/program-deposit.reducer";
 import programNotificationsReducer from "modules/program-notifications/reducers/program-notifications.reducers";
+import fundNotificationsReducer from "modules/fund-notifications/reducers/fund-notifications.reducers";
 import notificationsReducer from "pages/app/components/notifications/reducers/notifications.reducers";
 import { loadingBarReducer } from "react-redux-loading-bar";
 import { routerReducer } from "react-router-redux";
@@ -44,6 +45,7 @@ export default combineReducers({
   notifications: notificationsReducer,
   notificationSettings: notificationSettingsReducer,
   programNotifications: programNotificationsReducer,
+  fundNotifications: fundNotificationsReducer,
   manager: managerReducer,
   wallet: walletReducer,
   accountSettings: accountSettingsReducer,
