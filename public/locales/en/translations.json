@@ -60,6 +60,23 @@
       "amount-min-value": "Min amount is {{min}} GVT"
     }
   },
+  "deposit-fund": {
+    "title": "Invest",
+    "gv-commission": "GV commission",
+    "available-to-invest-in-fund": "Available to invest in fund",
+    "available-in-wallet": "Available in wallet",
+    "amount": "Amount to invest",
+    "entry-fee": "Entry fee",
+    "investment-amount": "Investment amount",
+    "disclaimer": "After clicking the \"Confirm\" button, the invested GVT will be immediately converted to {{currency}}. Accrual of {{currency}} to the account manager will only occur at the end of the reporting period.",
+    "confirm": "Confirm",
+    "success-alert-message": "Successful request for investment in the program.",
+    "validation": {
+      "amount-more-than-available": "Amount is more than available in your wallet",
+      "amount-is-required": "Amount is required.",
+      "amount-min-value": "Min amount is {{min}} GVT"
+    }
+  },
   "password-page": {
     "title": "Change password"
   },
@@ -72,6 +89,21 @@
   "withdraw-program": {
     "title": "Withdraw",
     "available-to-withdraw": "You invested in program",
+    "amount-to-withdraw": "Amount to withdraw",
+    "next": "Next",
+    "info": "Amount of withdrawals can be changed depending on the exchange rate or the success of the Manager",
+    "withdrawing": "Withdrawing",
+    "payout-date": "Payout date",
+    "back": "Back",
+    "submit": "Submit",
+    "validation": {
+      "amount-more-than-available": "Amount is more than available for withdraw",
+      "amount-is-required": "Amount is required."
+    }
+  },
+  "withdraw-fund": {
+    "title": "Withdraw",
+    "available-to-withdraw": "You invested in fund",
     "amount-to-withdraw": "Amount to withdraw",
     "next": "Next",
     "info": "Amount of withdrawals can be changed depending on the exchange rate or the success of the Manager",
