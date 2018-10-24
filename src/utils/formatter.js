@@ -78,6 +78,7 @@ const removeSign = x => {
 };
 
 const formatValue = (x, roundType = roundTypeEnum.FLOOR, isShowSign = true) => {
+  x = typeof x !== "number" ? +x : x;
   if (!x) return x;
   x = filterNum(x);
   const decimalSplited = getDecimalSeparated(x);

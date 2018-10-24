@@ -6,17 +6,17 @@ import FundDetailsDescription from "./fund-details-description/fund-details-desc
 import FundDetailsInvestment from "./fund-details-investment/fund-details-investment";
 
 const composeInvestmentData = programDetails => {
-  const { statistic, personalProgramDetails } = programDetails;
+  const { statistic, personalFundDetails } = programDetails;
 
   const { balanceBase, profitPercent } = statistic;
 
   return {
     programId: programDetails.id,
-    investedAmount: personalProgramDetails.value,
+    investedAmount: personalFundDetails.value,
     balanceAmount: balanceBase.amount,
     balanceCurrency: balanceBase.currency,
     profitPercent,
-    status: personalProgramDetails.investmentProgramStatus
+    status: personalFundDetails.investmentProgramStatus
   };
 };
 class FundDetailsDescriptionSection extends PureComponent {
@@ -46,13 +46,13 @@ class FundDetailsDescriptionSection extends PureComponent {
 
   handleOnReinvestingClick = () => {
     const { ui, fundDescription } = this.state;
-    const { id, personalProgramDetails } = fundDescription;
-    const { isReinvest } = personalProgramDetails;
+    const { id, personalFundDetails } = fundDescription;
+    const { isReinvest } = personalFundDetails;
 
     const composeNewReinvestState = newState => ({
       ...fundDescription,
-      personalProgramDetails: {
-        ...personalProgramDetails,
+      personalFundDetails: {
+        ...personalFundDetails,
         isReinvest: !isReinvest
       }
     });
@@ -108,8 +108,8 @@ class FundDetailsDescriptionSection extends PureComponent {
     const { fundDescription, ui } = this.state;
     if (!fundDescription) return null;
     const isInvested =
-      fundDescription.personalProgramDetails &&
-      fundDescription.personalProgramDetails.isInvested;
+      fundDescription.personalFundDetails &&
+      fundDescription.personalFundDetails.isInvested;
     return (
       <Fragment>
         <FundDetailsDescription
