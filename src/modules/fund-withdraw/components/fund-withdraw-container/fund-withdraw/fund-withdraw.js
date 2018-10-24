@@ -1,4 +1,4 @@
-import "./fund-withdraw.css";
+import "./fund-withdraw.scss";
 
 import { Field, withFormik } from "formik";
 import React from "react";
