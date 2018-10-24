@@ -94,7 +94,7 @@ class PortfolioEventsTableComponent extends Component {
                   }`
                 )}
               </TableCell>
-              <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--type">
+              <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--description">
                 {event.title}
               </TableCell>
               <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--amount">
@@ -103,6 +103,7 @@ class PortfolioEventsTableComponent extends Component {
                     value={formatValue(event.value)}
                     thousandSeparator=" "
                     displayType="text"
+                    suffix={" " + event.currency}
                   />
                 </Profitability>
               </TableCell>
