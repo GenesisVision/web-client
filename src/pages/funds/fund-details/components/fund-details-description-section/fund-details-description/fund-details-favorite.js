@@ -18,7 +18,4 @@ const FundDetailsFavorite = ({ t, toggleFavorite, id, isFavorite }) => (
   </div>
 );
 
-export default compose(
-  translate(),
-  isAuthenticated
-)(FundDetailsFavorite);
+export default compose(translate(), isAuthenticated)(FundDetailsFavorite);

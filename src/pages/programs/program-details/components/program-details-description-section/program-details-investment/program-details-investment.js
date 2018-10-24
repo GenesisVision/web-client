@@ -31,7 +31,8 @@ class ProgramDetailsInvestment extends PureComponent {
       balanceAmount,
       balanceCurrency,
       profitPercent,
-      status
+      status,
+      value
     } = this.props;
     return (
       <Surface className={"program-details-investment " + className}>
@@ -47,7 +48,7 @@ class ProgramDetailsInvestment extends PureComponent {
 
               <NumberFormat
                 value={formatValue(investedAmount)}
-                suffix={" GVT"}
+                suffix={` ${balanceCurrency}`}
                 displayType="text"
               />
             </div>
@@ -56,7 +57,7 @@ class ProgramDetailsInvestment extends PureComponent {
                 {t("program-details-page.description.value")}
               </span>
               <NumberFormat
-                value={formatValue(balanceAmount)}
+                value={formatValue(value)}
                 suffix={` ${balanceCurrency}`}
                 displayType="text"
               />

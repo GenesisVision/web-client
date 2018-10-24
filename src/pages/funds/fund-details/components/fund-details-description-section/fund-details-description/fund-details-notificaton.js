@@ -18,7 +18,4 @@ const FundDetailsNotificaton = ({ t, url }) => {
   );
 };
 
-export default compose(
-  translate(),
-  isAuthenticated
-)(FundDetailsNotificaton);
+export default compose(translate(), isAuthenticated)(FundDetailsNotificaton);

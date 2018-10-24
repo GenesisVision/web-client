@@ -33,6 +33,16 @@ class FundDetailsPage extends PureComponent {
     this.trades = { data: null, isPending: true };
   }
 
+  changeInvestmentStatus = () => {
+    this.setState({ isPending: true });
+    this.props.service
+      .getFundDescription(this.description.data.id)
+      .then(data => {
+        this.description = data;
+        this.setState({ isPending: false });
+      });
+  };
+
   componentDidMount() {
     const { service } = this.props;
     this.setState({ isPending: true });
@@ -85,6 +95,7 @@ class FundDetailsPage extends PureComponent {
               fundDescriptionData={this.description}
               isAuthenticated={isAuthenticated}
               redirectToLogin={service.redirectToLogin}
+              onChangeInvestmentStatus={this.changeInvestmentStatus}
             />
           </div>
           <div className="fund-details__section">

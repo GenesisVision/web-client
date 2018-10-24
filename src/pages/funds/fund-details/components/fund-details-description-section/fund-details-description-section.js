@@ -3,20 +3,19 @@ import { toggleReinvesting } from "modules/program-reinvesting/services/program-
 import React, { Fragment, PureComponent } from "react";
 
 import FundDetailsDescription from "./fund-details-description/fund-details-description";
-import FundDetailsInvestment from "./fund-details-investment/fund-details-investment";
 
-const composeInvestmentData = programDetails => {
-  const { statistic, personalFundDetails } = programDetails;
+const composeInvestmentData = fundDetails => {
+  const { statistic, personalFundDetails } = fundDetails;
 
-  const { balanceBase, profitPercent } = statistic;
-
+  const { balanceGVT, profitPercent } = statistic;
   return {
-    programId: programDetails.id,
-    investedAmount: personalFundDetails.value,
-    balanceAmount: balanceBase.amount,
-    balanceCurrency: balanceBase.currency,
+    fundId: fundDetails.id,
+    investedAmount: personalFundDetails.invested,
+    value: personalFundDetails.value,
+    balanceAmount: balanceGVT.amount,
+    balanceCurrency: balanceGVT.currency,
     profitPercent,
-    status: personalFundDetails.investmentProgramStatus
+    status: personalFundDetails.status
   };
 };
 class FundDetailsDescriptionSection extends PureComponent {
@@ -104,7 +103,11 @@ class FundDetailsDescriptionSection extends PureComponent {
   };
 
   render() {
-    const { isAuthenticated, redirectToLogin } = this.props;
+    const {
+      isAuthenticated,
+      redirectToLogin,
+      onChangeInvestmentStatus
+    } = this.props;
     const { fundDescription, ui } = this.state;
     if (!fundDescription) return null;
     const isInvested =
@@ -121,13 +124,9 @@ class FundDetailsDescriptionSection extends PureComponent {
           isReinvestPending={ui.isReinvestPending}
           onFavoriteClick={this.handleOnFavoriteClick}
           isFavoritePending={ui.isFavoritePending}
+          composeInvestmentData={composeInvestmentData}
+          onChangeInvestmentStatus={onChangeInvestmentStatus}
         />
-        {isInvested && (
-          <FundDetailsInvestment
-            className={"fund-details-description__your-investment"}
-            {...composeInvestmentData(fundDescription)}
-          />
-        )}
       </Fragment>
     );
   }

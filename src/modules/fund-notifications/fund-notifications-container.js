@@ -23,7 +23,7 @@ FundNotificationsContainer.propTypes = {
 
 const mapStateToProps = (state, props) => {
   return {
-    fund: state.FundNotifications[props.id]
+    fund: state.fundNotifications[props.id]
   };
 };
 
