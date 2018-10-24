@@ -60,7 +60,12 @@ const decreaseAccuracy = (x, roundType) => {
 
 const getDecimalSeparated = x => x.split(".")[1];
 
-const filterNum = x => removeLastZeros(x.toFixed(11).slice(0, -1));
+const filterNum = x =>
+  removeLastZeros(
+    parseFloat(x)
+      .toFixed(11)
+      .slice(0, -1)
+  );
 
 const removeSign = x => {
   if (x < 0)

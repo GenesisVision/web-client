@@ -5,29 +5,32 @@ import {
   withdrawProgramById
 } from "modules/program-withdraw/servives/program-withdraw.services";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { compose } from "redux";
 
-const ProgramWithdrawContainer = props => {
-  const { open, onClose, currency, services, id } = props;
-  const handleWithdraw = (id, amount) => {
-    onClose();
-    return withdrawProgramById(id, amount);
+class ProgramWithdrawContainer extends Component {
+  handleWithdraw = amount => {
+    return withdrawProgramById(this.props.id, amount).then(() => {
+      this.props.onClose();
+    });
   };
+  render() {
+    const { open, onClose, currency, services, id } = this.props;
 
-  return (
-    <Dialog open={open} onClose={onClose}>
-      <ProgramWithdrawPopup
-        currency={currency}
-        fetchInfo={() => services.getProgramWithdrawInfo(id)}
-        withdraw={amount => handleWithdraw(id, amount)}
-      />
-    </Dialog>
-  );
-};
+    return (
+      <Dialog open={open} onClose={onClose}>
+        <ProgramWithdrawPopup
+          currency={currency}
+          fetchInfo={() => services.getProgramWithdrawInfo(id)}
+          withdraw={this.handleWithdraw}
+        />
+      </Dialog>
+    );
+  }
+}
 
 ProgramWithdrawContainer.propTypes = {
   open: PropTypes.bool,
@@ -35,11 +38,7 @@ ProgramWithdrawContainer.propTypes = {
   id: PropTypes.string
 };
 
-const mapStateToProps = state => ({
-  currency: state.accountSettings.currency
-});
-
-const mapDispathToProps = dispatch => ({
+const mapDispatchToProps = dispatch => ({
   services: bindActionCreators(
     {
       getProgramWithdrawInfo
@@ -51,7 +50,7 @@ const mapDispathToProps = dispatch => ({
 export default compose(
   translate(),
   connect(
-    mapStateToProps,
-    mapDispathToProps
+    undefined,
+    mapDispatchToProps
   )
 )(ProgramWithdrawContainer);

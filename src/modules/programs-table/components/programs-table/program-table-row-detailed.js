@@ -130,14 +130,6 @@ class ProgramTableRowDetailed extends Component {
                   </div>
                   <div>
                     <div className="program-detailed__statistic-data--label">
-                      {t("programs-page.programs-header.trades")}
-                    </div>
-                    <div className="program-detailed__statistic-data--value">
-                      {program.statistic.tradesCount}
-                    </div>
-                  </div>
-                  <div>
-                    <div className="program-detailed__statistic-data--label">
                       {t("programs-page.programs-header.period")}
                     </div>
                     <div className="program-detailed__statistic-data--value">
@@ -145,6 +137,14 @@ class ProgramTableRowDetailed extends Component {
                         start={program.periodStarts}
                         end={program.periodEnds}
                       />
+                    </div>
+                  </div>
+                  <div>
+                    <div className="program-detailed__statistic-data--label">
+                      {t("programs-page.programs-header.trades")}
+                    </div>
+                    <div className="program-detailed__statistic-data--value">
+                      {program.statistic.tradesCount}
                     </div>
                   </div>
                   <div>

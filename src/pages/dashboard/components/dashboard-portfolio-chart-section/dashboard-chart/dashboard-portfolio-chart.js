@@ -1,8 +1,8 @@
+import chartXAxis from "components/chart/chart-components/chart-xaxis";
 import ProgramChartGradient, {
   gradientOffset
 } from "components/chart/chart-gradient/chart-gradient";
 import { GVColors } from "gv-react-components";
-import moment from "moment";
 import React, { PureComponent } from "react";
 import {
   Area,
@@ -11,7 +11,6 @@ import {
   ComposedChart,
   ResponsiveContainer,
   Tooltip,
-  XAxis,
   YAxis
 } from "recharts";
 
@@ -40,6 +39,7 @@ class DashboardPortfolioChart extends PureComponent {
     if (balance.length === 0) return null;
     const { activeIndex } = this.state;
     const assetsCount = 10;
+
     return (
       <ResponsiveContainer>
         <ComposedChart stackOffset="sign" data={assets}>
@@ -47,21 +47,15 @@ class DashboardPortfolioChart extends PureComponent {
             <ProgramChartGradient
               offset={this.grOffset()}
               name="dashboardPortfolioChartFill"
-              positiveColor={GVColors.$primaryColor}
-              negativeColor={GVColors.$primaryColor}
+              color={GVColors.$primaryColor}
               startOpacity={0.05}
               stopOpacity={0.2}
             />
           </defs>
-          <XAxis
-            dataKey="date"
-            domain={["dataMin", "dataMax"]}
-            type="number"
-            tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
-            tickFormatter={(date, i) => moment(date).format("ll")}
-            allowDuplicatedCategory={false}
-            axisLine={false}
-          />
+          {chartXAxis(
+            new Date(balance[0].date),
+            new Date(balance[balance.length - 1].date)
+          )}
           <YAxis
             yAxisId="left"
             dataKey="balance"
