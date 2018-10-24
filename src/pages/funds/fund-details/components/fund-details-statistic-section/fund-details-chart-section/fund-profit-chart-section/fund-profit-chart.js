@@ -1,9 +1,8 @@
-import chartXAxis from "components/chart/chart-components/chart-xaxis";
 import ProgramChartGradient, {
   gradientOffset
 } from "components/chart/chart-gradient/chart-gradient";
-import { getStrokeColor } from "components/chart/chart-gradient/chart-gradient";
 import { GVColors } from "gv-react-components";
+import moment from "moment";
 import React, { PureComponent } from "react";
 import {
   Area,
@@ -11,6 +10,7 @@ import {
   ComposedChart,
   ResponsiveContainer,
   Tooltip,
+  XAxis,
   YAxis
 } from "recharts";
 
@@ -25,22 +25,37 @@ class FundProfitChart extends PureComponent {
       value: x.value
     }));
 
-    const equityValues = equity.map(x => x.value);
-    const off = gradientOffset(equityValues);
-    const areaStrokeColor = getStrokeColor(equityValues);
+    const off = gradientOffset(equity.map(x => x.value));
     return (
       <ResponsiveContainer>
         <ComposedChart data={equity}>
           <defs>
             <ProgramChartGradient
               offset={off}
+              name="equityProgramChartStroke"
+              positiveColor={GVColors.$positiveColor}
+              negativeColor={GVColors.$negativeColor}
+              startOpacity={1}
+              stopOpacity={1}
+            />
+            <ProgramChartGradient
+              offset={off}
               name="equityProgramChartFill"
-              color={areaStrokeColor}
+              positiveColor={GVColors.$positiveColor}
+              negativeColor={GVColors.$negativeColor}
               startOpacity={0.1}
               stopOpacity={0.01}
             />
           </defs>
-          {chartXAxis(equityChart[0].date, equityChart[equity.length - 1].date)}
+          <XAxis
+            dataKey="date"
+            domain={["dataMin", "dataMax"]}
+            type="number"
+            tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
+            tickFormatter={(date, i) => moment(date).format("ll")}
+            allowDuplicatedCategory={false}
+            axisLine={false}
+          />
           <YAxis
             dataKey="value"
             axisLine={false}
@@ -57,7 +72,7 @@ class FundProfitChart extends PureComponent {
             type="monotone"
             data={equity}
             connectNulls={true}
-            stroke={areaStrokeColor}
+            stroke={`url(#equityProgramChartStroke)`}
             fill={`url(#equityProgramChartFill)`}
             strokeWidth={3}
             dot={false}

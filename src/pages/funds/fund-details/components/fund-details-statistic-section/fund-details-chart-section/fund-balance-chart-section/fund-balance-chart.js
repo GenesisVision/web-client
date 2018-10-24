@@ -1,5 +1,5 @@
-import chartXAxis from "components/chart/chart-components/chart-xaxis";
 import { GVColors } from "gv-react-components";
+import moment from "moment";
 import React, { PureComponent } from "react";
 import {
   Area,
@@ -7,6 +7,7 @@ import {
   CartesianGrid,
   ResponsiveContainer,
   Tooltip,
+  XAxis,
   YAxis
 } from "recharts";
 
@@ -23,10 +24,15 @@ class FundBalanceChart extends PureComponent {
     return (
       <ResponsiveContainer>
         <AreaChart data={chart}>
-          {chartXAxis(
-            balanceChart[0].date,
-            balanceChart[balanceChart.length - 1].date
-          )}
+          <XAxis
+            dataKey="date"
+            domain={["dataMin", "dataMax"]}
+            type="number"
+            tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
+            tickFormatter={(date, i) => moment(date).format("ll")}
+            allowDuplicatedCategory={false}
+            axisLine={false}
+          />
           <YAxis
             axisLine={false}
             orientation="right"
