@@ -1,0 +1,85 @@
+@import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
+
+.fund-withdraw__info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem 0;
+  @include media-breakpoint-phone() {
+    display: none;
+  }
+}
+
+.fund-withdraw__info-cell {
+  flex: 1;
+  max-width: 100%;
+  text-align: center;
+}
+
+.fund-withdraw__trader {
+  display: flex;
+  align-items: center;
+}
+
+.fund-withdraw__name {
+  font-size: 1.3rem;
+  margin: 0.5rem;
+}
+
+.fund-withdraw__days-left {
+  max-width: 5rem;
+  margin: auto;
+  .days-left-widget {
+    flex-direction: column;
+  }
+}
+
+.fund-withdraw__calculator {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+  @include media-breakpoint-phone() {
+    margin: 0;
+  }
+}
+
+.fund-withdraw__calculator-header {
+  @include media-breakpoint-phone() {
+    font-size: 0.9rem;
+  }
+}
+
+.fund-withdraw__calculator-cell {
+  flex: 1 1 30%;
+  max-width: 30%;
+  text-align: center;
+  border: 1px solid $border-color;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.input-token {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 15rem;
+}
+
+.input-token__percent {
+  color: $text-sub-color;
+  border: 0;
+  max-width: 10rem;
+  text-align: center;
+  font-size: 2rem;
+  outline: none;
+}
+
+.input-token__description {
+  color: $text-sub-color;
+  font-size: 0.9rem;
+  line-height: 0.5;
+}
