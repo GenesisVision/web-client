@@ -284,7 +284,11 @@
       "email-field-text": "Email address",
       "password-field-text": "Password",
       "password-confirm-field-text": "Confirm password",
-      "email-confirm-title": "Confirm your Email"
+      "email-confirm-title": "Confirm your Email",
+      "i-accept-text": "I accept the",
+      "accept-terms-text": "Terms of Service",
+      "privacy-policy-text": "Privacy Policy",
+      "resident-USA-text": "I certify that I am not a resident or a citizen of the USA"
     },
     "signup-email-pending": {
       "text-section": "Please check your inbox for a confirmation email. Click the link in the email to confirm your email.",
