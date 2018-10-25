@@ -14,8 +14,7 @@ import { compose } from "redux";
 const ProgramWithdrawContainer = props => {
   const { open, onClose, currency, services, id, type } = props;
   const handleWithdraw = (id, amount) => {
-    return services.withdrawFundById(id, amount).then(res => {
-      debugger;
+    return services.withdrawProgramById(id, amount).then(res => {
       onClose();
       return res;
     });
