@@ -19,6 +19,7 @@ class FundDetailsInvestment extends PureComponent {
   };
 
   handleCloseWithdrawalPopup = () => {
+    this.props.onChangeInvestmentStatus();
     this.setState({ isOpenWithdrawalPopup: false });
   };
 

@@ -77,6 +77,16 @@ class ProgramDetailsPage extends PureComponent {
       });
   };
 
+  changeInvestmentStatus = () => {
+    this.setState({ isPending: true });
+    this.props.service
+      .getProgramDescription(this.description.data.id)
+      .then(data => {
+        this.description = data;
+        this.setState({ isPending: false });
+      });
+  };
+
   render() {
     const { currency, isAuthenticated, service } = this.props;
     const { errorCode } = this.state;
@@ -100,6 +110,7 @@ class ProgramDetailsPage extends PureComponent {
                 programDescriptionData={this.description}
                 isAuthenticated={isAuthenticated}
                 redirectToLogin={service.redirectToLogin}
+                onChangeInvestmentStatus={this.changeInvestmentStatus}
               />
             </div>
             <div className="program-details__section">
