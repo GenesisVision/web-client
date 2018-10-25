@@ -8,6 +8,7 @@ import ProgramReinvestingWidget from "modules/program-reinvesting/components/pro
 import AboutLevelsContainerComponent from "pages/app/components/about-levels/about-levels-container";
 import { composeManagerDetailsUrl } from "pages/manager/manager.page";
 import { PROGRAM_NOTIFICATIONS_ROUTE } from "pages/notifications/notifications.routes";
+import { ProgramDetailContext } from "pages/programs/program-details/program-details.page";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -203,14 +204,18 @@ class ProgramDetailsDescription extends PureComponent {
                 {...composeInvestmentData(programDescription)}
               />
             )}
-
-            <ProgramDepositContainer
-              currency={programDescription.currency}
-              open={isOpenInvestmentPopup}
-              type={"program"}
-              id={programDescription.id}
-              onClose={this.handleCloseInvestmentPopup}
-            />
+            <ProgramDetailContext.Consumer>
+              {({ updateDetails }) => (
+                <ProgramDepositContainer
+                  currency={programDescription.currency}
+                  open={isOpenInvestmentPopup}
+                  type={"program"}
+                  id={programDescription.id}
+                  onClose={this.handleCloseInvestmentPopup}
+                  onInvest={updateDetails}
+                />
+              )}
+            </ProgramDetailContext.Consumer>
           </div>
         </div>
         <div className="program-details-description__right">
