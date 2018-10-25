@@ -29,7 +29,6 @@ class ProgramDetailsInvestment extends PureComponent {
       className,
       programId,
       investedAmount,
-      balanceAmount,
       balanceCurrency,
       profitPercent,
       status,

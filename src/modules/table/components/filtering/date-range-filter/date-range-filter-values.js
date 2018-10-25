@@ -1,3 +1,4 @@
+import GVDatePicker from "components/gv-datepicker/gv-datepicker";
 import { GVTextField } from "gv-react-components";
 import moment from "moment";
 import React, { Component, Fragment } from "react";
@@ -76,6 +77,9 @@ class DateRangeFilterValues extends Component {
               name="dateStart"
               label={t("filters.date-range.start")}
               value={dateStart}
+              InputComponent={GVDatePicker}
+              horizontal="right"
+              maxDate={new Date()}
               onChange={this.handleOnChange("dateStart")}
             />
             <GVTextField
@@ -84,6 +88,10 @@ class DateRangeFilterValues extends Component {
               name="dateEnd"
               label={t("filters.date-range.end")}
               value={dateEnd}
+              horizontal="right"
+              InputComponent={GVDatePicker}
+              minDate={dateStart}
+              maxDate={new Date()}
               onChange={this.handleOnChange("dateEnd")}
             />
           </Fragment>
