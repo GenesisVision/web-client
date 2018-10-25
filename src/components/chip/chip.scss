@@ -1,4 +1,6 @@
 @import "styles/_colors.scss";
+$warning-color: #f5a623;
+$warning-background-color: rgba($warning-color, 0.1);
 
 .chip {
   display: inline-flex;
@@ -18,6 +20,11 @@
   &--positive {
     color: $primary-color;
     background-color: rgba($primary-color, 0.1);
+  }
+
+  &--warning {
+    color: $warning-color;
+    background-color: $warning-background-color;
   }
 
   &--pointer {

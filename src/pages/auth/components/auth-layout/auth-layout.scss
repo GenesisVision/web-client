@@ -26,9 +26,7 @@
     width: 100%;
     max-width: 340px;
     min-height: 560px;
-    height: 100%;
     background-color: $panel-background-color;
-    overflow: hidden;
     border-radius: $border-radius;
   }
 
@@ -78,9 +76,10 @@
 
   .gv-text-field__wrapper {
     width: 100%;
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
+    margin: 0;
+  }
+  .gv-checkbox-wrapper {
+    margin: 16px 0;
   }
 
   .gv-text-field__error {

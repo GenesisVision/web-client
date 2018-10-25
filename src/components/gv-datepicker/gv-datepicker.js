@@ -52,10 +52,13 @@ class GVDatePicker extends Component {
   handleFocus = event => {
     const { disabled, onFocus } = this.props;
     if (disabled) return;
-    this.handleOpen(event.target);
     if (onFocus) {
       onFocus(event);
     }
+  };
+
+  handleClick = event => {
+    this.handleOpen(event.target);
   };
 
   input = React.createRef();
@@ -84,6 +87,7 @@ class GVDatePicker extends Component {
           ref={this.input}
           name={this.props.name}
           value={date}
+          onClick={this.handleClick}
           onFocus={this.handleFocus}
           className="gv-text-field__input"
           onBlur={this.handleBlur}
@@ -110,11 +114,17 @@ class GVDatePicker extends Component {
   }
 }
 
+const DateType = PropTypes.oneOfType([
+  PropTypes.instanceOf(Date),
+  PropTypes.string,
+  PropTypes.object
+]);
+
 GVDatePicker.propTypes = {
-  value: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]),
+  value: DateType,
   onChange: PropTypes.func.isRequired,
-  minDate: PropTypes.object,
-  maxDate: PropTypes.object,
+  minDate: DateType,
+  maxDate: DateType,
   horizontal: PropTypes.string
 };
 
