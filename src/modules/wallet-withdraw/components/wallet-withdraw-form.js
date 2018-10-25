@@ -22,9 +22,13 @@ const WalletWithdrawForm = ({
   errorMessage
 }) => {
   const { currency, amount } = values;
-  const { commission, rateToGvt } = wallets.find(
-    wallet => wallet.currency === currency
-  );
+  let currentWallet = wallets.find(wallet => wallet.currency === currency);
+
+  if (!currentWallet) {
+    currentWallet = wallets[0];
+  }
+
+  const { commission, rateToGvt } = currentWallet;
 
   const willGet = Math.max(
     convertFromCurrency(amount, rateToGvt) - commission,
@@ -165,7 +169,7 @@ export default compose(
     displayName: "wallet-withdraw",
     mapPropsToValues: () => ({
       amount: "",
-      currency: "BTC",
+      currency: "",
       address: "",
       twoFactorCode: ""
     }),
