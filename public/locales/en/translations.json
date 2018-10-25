@@ -6,6 +6,12 @@
     "clear-all": "Clear all",
     "server-error": "Server Error. Please contact administrator."
   },
+  "verification-status": {
+    "verified": "Verified",
+    "not-verified": "Not verified",
+    "under-review": "Under Review",
+    "rejected": "Rejected"
+  },
   "about-levels": {
     "description": "Genesis level shows the experience and reliability of the Manager",
     "sections": {
