@@ -32,7 +32,8 @@ class ProgramDetailsInvestment extends PureComponent {
       balanceCurrency,
       profitPercent,
       status,
-      value
+      value,
+      programCurrency
     } = this.props;
     return (
       <Surface className={"program-details-investment " + className}>
@@ -92,7 +93,7 @@ class ProgramDetailsInvestment extends PureComponent {
             {t("program-details-page.description.withdraw")}
           </GVButton>
           <ProgramWithdrawContainer
-            currency={balanceCurrency}
+            programCurrency={programCurrency}
             open={this.state.isOpenWithdrawalPopup}
             id={programId}
             onClose={this.handleCloseWithdrawalPopup}

@@ -15,7 +15,7 @@ const WithdrawEnterAmountStep = props => {
         name="amount"
         label={props.t("withdraw-program.amount-to-withdraw")}
         component={GVTextField}
-        adornment="GVT"
+        adornment={props.currency}
         autoComplete="off"
         InputComponent={NumberFormat}
         allowNegative={false}
