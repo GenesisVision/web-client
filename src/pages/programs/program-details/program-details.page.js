@@ -102,7 +102,7 @@ class ProgramDetailsPage extends PureComponent {
               />
             </div>
             <div className="program-details__section">
-              §<ProgramDetailsStatisticSection
+              <ProgramDetailsStatisticSection
                 programId={this.description.data.id}
                 currency={currency}
                 statisticData={this.statistic}
