@@ -6,7 +6,7 @@ const initialState = {
   settingsManager: []
 };
 
-const notificationSettignsReducer = (state = initialState, action) => {
+const notificationSettingsReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_NOTIFICATION_SETTINGS:
       return { ...action.settings };
@@ -15,4 +15,4 @@ const notificationSettignsReducer = (state = initialState, action) => {
   }
 };
 
-export default notificationSettignsReducer;
+export default notificationSettingsReducer;
