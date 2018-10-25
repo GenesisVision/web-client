@@ -8,11 +8,11 @@ import apiReducerFactory from "shared/reducers/api-reducer/api-reducer";
 const fundWithdrawReducer = apiReducerFactory({
   apiType: FETCH_WITHDRAW_FUND_INFO
 });
-const withdrawSumbitReducer = apiReducerFactory({
+const withdrawSubmitReducer = apiReducerFactory({
   apiType: WITHDRAW_SUBMIT_BY_ID
 });
 
 export default combineReducers({
   info: fundWithdrawReducer,
-  submit: withdrawSumbitReducer
+  submit: withdrawSubmitReducer
 });

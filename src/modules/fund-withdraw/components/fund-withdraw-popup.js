@@ -38,7 +38,6 @@ class FundWithdrawPopup extends Component {
         <FundWithdrawTop
           title={title}
           availableToWithdraw={availableToWithdraw}
-          type={type}
         />
         <FundWithdrawForm
           currency={currency}

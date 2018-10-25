@@ -43,7 +43,6 @@ const ProgramWithdrawContainer = props => {
         currency={programCurrency}
         fetchInfo={() => services.getProgramWithdrawInfo(id)}
         withdraw={amount => handleWithdraw(id, amount)}
-        type={type}
       />
     </Dialog>
   );
