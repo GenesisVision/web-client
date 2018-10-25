@@ -54,14 +54,6 @@ const ProgramDepositForm = ({
         allowNegative={false}
         isAllowed={isAllow}
       />
-      <div className="invest-popup__currency">
-        <NumberFormat
-          value={formatValue(convertToCurrency(values.amount, info.rate))}
-          prefix="= "
-          suffix={` ${currency}`}
-          displayType="text"
-        />
-      </div>
       <ul className="dialog-list">
         <li className="dialog-list__item">
           <span className="dialog-list__title">
