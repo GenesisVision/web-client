@@ -14,7 +14,12 @@ const apiErrorHandlerMiddleware = (
   if (isRejected && action.error) {
     const handledError = handleErrorResponse(action.payload.response);
     if (handledError.code === SERVER_CONNECTION_ERROR_CODE) {
-      dispatch(alertMessageActions.error("alerts.server-error", true));
+      dispatch(
+        alertMessageActions.error(
+          action.payload.errorMessage || "alerts.server-error",
+          true
+        )
+      );
     } else {
       next({ ...action, payload: handledError });
     }
