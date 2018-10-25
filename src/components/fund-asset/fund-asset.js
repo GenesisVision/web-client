@@ -3,7 +3,7 @@ import "./fund-asset.scss";
 import classNames from "classnames";
 import FundAssetImage from "components/avatar/fund-asset-image/fund-asset-image";
 import { CURRENCY_VALUES } from "modules/currency-select/currency-select.constants";
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import NumberFormat from "react-number-format";
 
 export const FUND_ASSET_TYPE = {
@@ -19,8 +19,12 @@ class FundAsset extends Component {
       (type === FUND_ASSET_TYPE.text && (
         <div>
           {currency}
-          &nbsp;
-          <NumberFormat value={percent} suffix="%" displayType="text" />
+          {percent && (
+            <Fragment>
+              &nbsp;
+              <NumberFormat value={percent} suffix="%" displayType="text" />
+            </Fragment>
+          )}
           {!last && <span>,&nbsp;</span>}
         </div>
       )) || (

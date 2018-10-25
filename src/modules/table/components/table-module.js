@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
 import { merge } from "utils/helpers";
 
+import { updateFilter } from "../helpers/filtering.helpers";
 import { calculateTotalPages } from "../helpers/paging.helpers";
-import { updateFilter } from "../reducers/table-filtering.reducer";
 import { composeRequestFilters } from "../services/table.service";
 import Table from "./table";
 
@@ -19,7 +19,7 @@ class TableModule extends PureComponent {
       sorting: sorting,
       filtering: { ...filtering },
       data: defaultData,
-      isPending: true,
+      isPending: false,
       errorCode: null,
       prevData: defaultData
     };
@@ -58,7 +58,6 @@ class TableModule extends PureComponent {
       filtering,
       defaultFilters
     });
-
     getItems(filters)
       .then(data => {
         const totalPages = calculateTotalPages(data.total, paging.itemsOnPage);

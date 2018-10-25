@@ -3,20 +3,19 @@ import { toggleReinvesting } from "modules/program-reinvesting/services/program-
 import React, { Fragment, PureComponent } from "react";
 
 import FundDetailsDescription from "./fund-details-description/fund-details-description";
-import FundDetailsInvestment from "./fund-details-investment/fund-details-investment";
 
-const composeInvestmentData = programDetails => {
-  const { statistic, personalProgramDetails } = programDetails;
+const composeInvestmentData = fundDetails => {
+  const { statistic, personalFundDetails } = fundDetails;
 
-  const { balanceBase, profitPercent } = statistic;
-
+  const { balanceGVT, profitPercent } = statistic;
   return {
-    programId: programDetails.id,
-    investedAmount: personalProgramDetails.value,
-    balanceAmount: balanceBase.amount,
-    balanceCurrency: balanceBase.currency,
+    fundId: fundDetails.id,
+    investedAmount: personalFundDetails.invested,
+    value: personalFundDetails.value,
+    balanceAmount: balanceGVT.amount,
+    balanceCurrency: balanceGVT.currency,
     profitPercent,
-    status: personalProgramDetails.investmentProgramStatus
+    status: personalFundDetails.status
   };
 };
 class FundDetailsDescriptionSection extends PureComponent {
@@ -46,13 +45,13 @@ class FundDetailsDescriptionSection extends PureComponent {
 
   handleOnReinvestingClick = () => {
     const { ui, fundDescription } = this.state;
-    const { id, personalProgramDetails } = fundDescription;
-    const { isReinvest } = personalProgramDetails;
+    const { id, personalFundDetails } = fundDescription;
+    const { isReinvest } = personalFundDetails;
 
     const composeNewReinvestState = newState => ({
       ...fundDescription,
-      personalProgramDetails: {
-        ...personalProgramDetails,
+      personalFundDetails: {
+        ...personalFundDetails,
         isReinvest: !isReinvest
       }
     });
@@ -104,12 +103,16 @@ class FundDetailsDescriptionSection extends PureComponent {
   };
 
   render() {
-    const { isAuthenticated, redirectToLogin } = this.props;
+    const {
+      isAuthenticated,
+      redirectToLogin,
+      onChangeInvestmentStatus
+    } = this.props;
     const { fundDescription, ui } = this.state;
     if (!fundDescription) return null;
     const isInvested =
-      fundDescription.personalProgramDetails &&
-      fundDescription.personalProgramDetails.isInvested;
+      fundDescription.personalFundDetails &&
+      fundDescription.personalFundDetails.isInvested;
     return (
       <Fragment>
         <FundDetailsDescription
@@ -121,13 +124,9 @@ class FundDetailsDescriptionSection extends PureComponent {
           isReinvestPending={ui.isReinvestPending}
           onFavoriteClick={this.handleOnFavoriteClick}
           isFavoritePending={ui.isFavoritePending}
+          composeInvestmentData={composeInvestmentData}
+          onChangeInvestmentStatus={onChangeInvestmentStatus}
         />
-        {isInvested && (
-          <FundDetailsInvestment
-            className={"fund-details-description__your-investment"}
-            {...composeInvestmentData(fundDescription)}
-          />
-        )}
       </Fragment>
     );
   }

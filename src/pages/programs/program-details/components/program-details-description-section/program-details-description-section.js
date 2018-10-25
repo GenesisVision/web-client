@@ -11,11 +11,12 @@ const composeInvestmentData = programDetails => {
 
   return {
     programId: programDetails.id,
-    investedAmount: personalProgramDetails.value,
+    investedAmount: personalProgramDetails.invested,
     balanceAmount: balanceBase.amount,
     balanceCurrency: balanceBase.currency,
     profitPercent,
-    status: personalProgramDetails.status
+    status: personalProgramDetails.status,
+    value: personalProgramDetails.value
   };
 };
 class ProgramDetailsDescriptionSection extends PureComponent {

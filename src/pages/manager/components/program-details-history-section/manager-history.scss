@@ -1,0 +1,54 @@
+@import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
+@import "styles/_sizes.scss";
+
+.manager-history {
+  padding: $padding-middle-mobile 0;
+  @include media-breakpoint-landscape-phone() {
+    padding: $padding-middle 0;
+  }
+
+  &__heading {
+    padding: $padding-middle-mobile;
+    font-size: $font-size-subtitle-mobile;
+    letter-spacing: 0.2px;
+    font-weight: 600;
+    @include media-breakpoint-landscape-phone() {
+      padding: $padding-middle;
+      font-size: $font-size-subtitle;
+    }
+  }
+
+  &__subheading {
+    font-size: $font-size-middle-mobile;
+    padding-bottom: $padding-small-mobile;
+    padding-left: $padding-middle-mobile;
+    letter-spacing: 0.2px;
+    font-weight: 600;
+    @include media-breakpoint-landscape-phone() {
+      padding-bottom: $padding-small;
+      padding-left: $padding-middle;
+      font-size: $font-size-middle;
+    }
+  }
+
+  &__title {
+    letter-spacing: 0.2px;
+    font-size: $font-size-subtitle-mobile;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-subtitle;
+    }
+  }
+  &__tabs {
+    padding: 0 $padding-middle-mobile;
+    .gv-tab {
+      font-size: $font-size-middle-mobile;
+    }
+    @include media-breakpoint-landscape-phone() {
+      padding: 0 $padding-middle;
+      .gv-tab {
+        font-size: $font-size-middle;
+      }
+    }
+  }
+}

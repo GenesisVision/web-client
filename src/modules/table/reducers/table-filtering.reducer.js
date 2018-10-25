@@ -1,7 +1,9 @@
+import { updateFilter } from "../helpers/filtering.helpers";
+
 const defaultState = {};
 
-const tableFilteringReducer = ({ type, filters = {} }) => {
-  const initialState = { ...defaultState, ...filters };
+const tableFilteringReducer = ({ type, filtering = {} }) => {
+  const initialState = { ...defaultState, ...filtering };
   return (state = initialState, action) => {
     switch (action.type) {
       case type: {
@@ -12,19 +14,6 @@ const tableFilteringReducer = ({ type, filters = {} }) => {
         return state;
     }
   };
-};
-
-export const updateFilter = (oldFilters, newFilter) => {
-  const { name, value } = newFilter;
-  const existingFilterValue = oldFilters[name];
-  if (JSON.stringify(existingFilterValue !== JSON.stringify(value))) {
-    return {
-      ...oldFilters,
-      ...{ [name]: value }
-    };
-  }
-
-  return oldFilters;
 };
 
 export default tableFilteringReducer;

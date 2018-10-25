@@ -22,12 +22,14 @@ const ProgramTableRowShort = ({
     <TableRow onClick={onExpandClick}>
       <TableCell className="programs-table__cell--name">
         <div className="programs-table__cell--avatar-title">
-          <AssetAvatar
-            url={program.logo}
-            level={program.level}
-            alt={program.title}
-            color={program.color}
-          />
+          <Link to={composeProgramDetailsUrl(program.url)}>
+            <AssetAvatar
+              url={program.logo}
+              level={program.level}
+              alt={program.title}
+              color={program.color}
+            />
+          </Link>
           <div className="programs-table__cell--title">
             <div className="programs-table__cell--top">
               <Link to={composeProgramDetailsUrl(program.url)}>
@@ -45,7 +47,7 @@ const ProgramTableRowShort = ({
         </div>
       </TableCell>
       <TableCell className="programs-table__cell--balance">
-        {formatValue(program.statistic.balanceGVT.amount)} GVT
+        {(+program.statistic.balanceGVT.amount).toFixed(0)} GVT
       </TableCell>
       <TableCell className="programs-table__cell--currency">
         {program.currency}
@@ -56,9 +58,6 @@ const ProgramTableRowShort = ({
       <TableCell className="programs-table__cell--available-to-invest">
         {formatValue(program.availableInvestment)} GVT
       </TableCell>
-      <TableCell className="programs-table__cell--trades">
-        {program.statistic.tradesCount}
-      </TableCell>
       <TableCell className="programs-table__cell--period">
         {program.periodStarts && (
           <ProgramPeriodPie
@@ -66,6 +65,9 @@ const ProgramTableRowShort = ({
             end={program.periodEnds}
           />
         )}
+      </TableCell>
+      <TableCell className="programs-table__cell--trades">
+        {program.statistic.tradesCount}
       </TableCell>
       <TableCell className="programs-table__cell--drawdown">
         <NumberFormat

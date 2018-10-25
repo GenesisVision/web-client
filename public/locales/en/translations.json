@@ -60,6 +60,23 @@
       "amount-min-value": "Min amount is {{min}} GVT"
     }
   },
+  "deposit-fund": {
+    "title": "Invest",
+    "gv-commission": "GV commission",
+    "available-to-invest-in-fund": "Available to invest in fund",
+    "available-in-wallet": "Available in wallet",
+    "amount": "Amount to invest",
+    "entry-fee": "Entry fee",
+    "investment-amount": "Investment amount",
+    "disclaimer": "After clicking the \"Confirm\" button, the invested GVT will be immediately converted to {{currency}}. Accrual of {{currency}} to the account manager will only occur at the end of the reporting period.",
+    "confirm": "Confirm",
+    "success-alert-message": "Successful request for investment in the program.",
+    "validation": {
+      "amount-more-than-available": "Amount is more than available in your wallet",
+      "amount-is-required": "Amount is required.",
+      "amount-min-value": "Min amount is {{min}} GVT"
+    }
+  },
   "password-page": {
     "title": "Change password"
   },
@@ -72,6 +89,21 @@
   "withdraw-program": {
     "title": "Withdraw",
     "available-to-withdraw": "You invested in program",
+    "amount-to-withdraw": "Amount to withdraw",
+    "next": "Next",
+    "info": "Amount of withdrawals can be changed depending on the exchange rate or the success of the Manager",
+    "withdrawing": "Withdrawing",
+    "payout-date": "Payout date",
+    "back": "Back",
+    "submit": "Submit",
+    "validation": {
+      "amount-more-than-available": "Amount is more than available for withdraw",
+      "amount-is-required": "Amount is required."
+    }
+  },
+  "withdraw-fund": {
+    "title": "Withdraw",
+    "available-to-withdraw": "You invested in fund",
     "amount-to-withdraw": "Amount to withdraw",
     "next": "Next",
     "info": "Amount of withdrawals can be changed depending on the exchange rate or the success of the Manager",
@@ -332,8 +364,11 @@
     "withdraw": "Withdraw",
     "transactions": {
       "date": "Date",
-      "type": "Type",
-      "amount": "Amount"
+      "destination-type": "Destination type",
+      "source-type": "Source type",
+      "status": "Status",
+      "amount": "Amount",
+      "actions": "Actions"
     },
     "transactions-types": {
       "wallet": "Wallet",
@@ -342,6 +377,22 @@
       "program-request": "Program request",
       "withdrawal-request": "Withdrawal request",
       "payment-transaction": "Payment transaction"
+    },
+    "transaction-actions": {
+      "resend-email": "Resend confirmation email",
+      "cancel-request": "Cancel request"
+    },
+    "transaction-statuses": {
+      "Done": "Completed",
+      "InProcess": "Processing",
+      "New": "New",
+      "Error": "Error",
+      "Rejected": "Rejected",
+      "Cancelled": "Cancelled"
+    },
+    "alert-messages": {
+      "resend-email-success": "A withdrawal confirmation letter has just been resent to your email address.",
+      "cancel-request-success": "The withdrawal request was successfully canceled"
     }
   },
   "wallet-widget": {
@@ -425,9 +476,16 @@
     "all": "All Time"
   },
   "manager": {
+    "title": "Manager",
     "about": "About",
     "assets": "Assets",
-    "member-since": "Member since"
+    "member-since": "Member since",
+    "history": {
+      "tabs": {
+        "programs": "Programs",
+        "funds": "Funds"
+      }
+    }
   },
   "programs-page": {
     "title": "Programs",
@@ -767,7 +825,7 @@
         "date": "Date",
         "type": "Type",
         "description": "Description",
-        "amount": "Amount, GVT"
+        "amount": "Amount"
       },
       "types": {
         "all": "All",

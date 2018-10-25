@@ -62,12 +62,14 @@ class Dashboardprograms extends Component {
           <TableRow>
             <TableCell className="dashboard-programs__cell--title">
               <div className="dashboard-programs__cell--avatar-title">
-                <AssetAvatar
-                  url={program.logo}
-                  level={program.level}
-                  alt={program.title}
-                  color={program.color}
-                />
+                <Link to={composeProgramDetailsUrl(program.url)}>
+                  <AssetAvatar
+                    url={program.logo}
+                    level={program.level}
+                    alt={program.title}
+                    color={program.color}
+                  />
+                </Link>
                 <Link to={composeProgramDetailsUrl(program.url)}>
                   <GVButton variant="text" color="secondary">
                     {program.title}
@@ -85,13 +87,12 @@ class Dashboardprograms extends Component {
               <ProgramPeriodEnd periodEnds={program.periodEnds} />
             </TableCell>
             <TableCell className="dashboard-programs__cell--value">
-              {formatValue(program.statistic.currentValue)}
+              {formatValue(program.personalDetails.value)}
             </TableCell>
             <TableCell className="dashboard-programs__cell--profit">
               <NumberFormat
-                value={program.statistic.profitPercent}
+                value={+program.personalDetails.profit.toFixed(2)}
                 suffix="%"
-                decimalScale={2}
                 displayType="text"
               />
             </TableCell>
@@ -99,7 +100,7 @@ class Dashboardprograms extends Component {
               <ProgramSimpleChart data={program.chart} programId={program.id} />
             </TableCell>
             <TableCell className="dashboard-programs__cell--status">
-              {program.status}
+              {program.personalDetails.status}
             </TableCell>
           </TableRow>
         )}

@@ -1,8 +1,9 @@
 import "./fund-details-description.scss";
 
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
+import FundAssetContainer from "components/fund-asset/fund-asset-container";
 import { GVButton } from "gv-react-components";
-import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
+import FundDepositContainer from "modules/fund-deposit/fund-deposit-container";
 import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
 import { FUND_NOTIFICATIONS_ROUTE } from "pages/notifications/notifications.routes";
 import React, { PureComponent } from "react";
@@ -10,9 +11,9 @@ import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import replaceParams from "utils/replace-params";
 
-import FundAssetContainer from "../../../../../../modules/funds-table/components/funds-table/fund-asset/fund-asset-container";
 import FundDetailsFavorite from "./fund-details-favorite";
 import FundDetailsNotification from "./fund-details-notificaton";
+import FundDetailsInvestment from "../fund-details-investment/fund-details-investment";
 
 export const composeFundNotificationsUrl = url => {
   return replaceParams(FUND_NOTIFICATIONS_ROUTE, {
@@ -49,7 +50,10 @@ class FundDetailsDescription extends PureComponent {
       onReinvestingClick,
       onFavoriteClick,
       isReinvestPending,
-      isFavoritePending
+      isFavoritePending,
+      composeInvestmentData,
+      onChangeInvestmentStatus,
+      isOwnFund
     } = this.props;
     const isFavorite =
       fundDescription.personalFundDetails &&
@@ -124,30 +128,33 @@ class FundDetailsDescription extends PureComponent {
               >
                 {t("fund-details-page.description.invest")}
               </GVButton>
+              <FundDepositContainer
+                open={isOpenInvestmentPopup}
+                id={fundDescription.id}
+                type={"fund"}
+                onClose={this.handleCloseInvestmentPopup}
+              />
+              {isInvested && (
+                <ProgramReinvestingWidget
+                  className="fund-details-description__reinvest"
+                  toggleReinvesting={onReinvestingClick}
+                  isReinvesting={fundDescription.personalFundDetails.isReinvest}
+                  disabled={isReinvestPending}
+                />
+              )}
             </div>
-
-            <ProgramDepositContainer
-              open={isOpenInvestmentPopup}
-              id={fundDescription.id}
-              type={"fund"}
-              onClose={this.handleCloseInvestmentPopup}
-            />
-
             {isInvested && (
-              <ProgramReinvestingWidget
-                className="fund-details-description__reinvest"
-                toggleReinvesting={onReinvestingClick}
-                isReinvesting={
-                  fundDescription.personalProgramDetails.isReinvest
-                }
-                disabled={isReinvestPending}
+              <FundDetailsInvestment
+                className={"fund-details-description__your-investment"}
+                {...composeInvestmentData(fundDescription)}
+                onChangeInvestmentStatus={onChangeInvestmentStatus}
               />
             )}
           </div>
         </div>
         <div className="fund-details-description__right">
           <FundDetailsFavorite
-            programId={fundDescription.id}
+            fundId={fundDescription.id}
             isFavorite={isFavorite}
             toggleFavorite={onFavoriteClick}
             disabled={isFavoritePending}

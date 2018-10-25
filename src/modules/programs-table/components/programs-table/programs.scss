@@ -74,6 +74,10 @@ $description-block-width: 250px;
     font-size: $text-size/1.5;
     color: $primary-color;
     word-break: break-all;
+    .gv-btn {
+      padding: 0;
+      letter-spacing: 0.278571px;
+    }
   }
   &__chart {
     width: $chart-width/1.5;
@@ -176,6 +180,7 @@ $description-block-width: 250px;
       padding: $padding/10;
     }
     .gv-btn {
+      letter-spacing: 0.278571px;
       padding: 0;
     }
   }
@@ -247,8 +252,11 @@ $description-block-width: 250px;
   &__manager {
     font-size: $text-size/1.5;
     letter-spacing: 0.2px;
-    color: $positive-color;
+    color: $primary-color;
     word-break: break-all;
+    .gv-btn {
+      padding: 0;
+    }
   }
 
   &__strategy {
