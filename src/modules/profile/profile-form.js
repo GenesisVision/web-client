@@ -140,6 +140,7 @@ class Profile extends Component {
                       name="birthday"
                       component={GVTextField}
                       InputComponent={GVDatePicker}
+                      maxDate={new Date()}
                     />
                     <GVFormikField
                       label={t("profile.citizen")}

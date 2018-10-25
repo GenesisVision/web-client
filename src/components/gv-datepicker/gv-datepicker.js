@@ -1,28 +1,37 @@
-import "react-datepicker/dist/react-datepicker.css";
-
 import "./gv-datepicker.scss";
 
+import Popover from "components/popover/popover";
 import moment from "moment";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import DatePicker from "react-datepicker";
+import Calendar from "react-calendar";
+import { translate } from "react-i18next";
+
+export const DATE_FORMAT = "DD-MM-YYYY";
 
 class GVDatePicker extends Component {
+  state = {
+    anchorEl: null
+  };
+
   handleChange = data => {
     if (this.props.onChange) {
       this.props.onChange({
         persist: () => {},
         target: {
-          value: data && data.format(),
+          value: data && moment(data).format(),
           name: this.props.name
         }
       });
     }
+    setTimeout(() => {
+      this.input.current.focus();
+    }, 300);
   };
 
   handleBlur = () => {
     const { disabled, onBlur, name } = this.props;
-    if (disabled) return;
+    if (disabled || this.state.anchorEl) return;
     if (onBlur) {
       onBlur({
         target: {
@@ -32,26 +41,70 @@ class GVDatePicker extends Component {
     }
   };
 
+  handleOpen = anchorEl => {
+    this.setState({ anchorEl });
+  };
+
+  handleClose = () => {
+    this.setState({ anchorEl: null }, this.handleBlur);
+  };
+
   handleFocus = event => {
     const { disabled, onFocus } = this.props;
     if (disabled) return;
+    this.handleOpen(event.target);
     if (onFocus) {
       onFocus(event);
     }
   };
 
+  input = React.createRef();
+
   render() {
-    const date = this.props.value && moment(this.props.value);
+    const date =
+      this.props.value && moment(this.props.value).format(DATE_FORMAT);
+
+    const value = this.props.value && moment(this.props.value).toDate();
+
+    const minDate =
+      this.props.minDate &&
+      (this.props.minDate instanceof Date
+        ? this.props.minDate
+        : moment(this.props.minDate).toDate());
+
+    const maxDate =
+      this.props.maxDate &&
+      (this.props.maxDate instanceof Date
+        ? this.props.maxDate
+        : moment(this.props.maxDate).toDate());
+
     return (
       <div className="gv-datepicker">
-        <DatePicker
-          className="gv-text-field__input"
-          dateFormat="DD-MM-YYYY"
-          onBlur={this.handleBlur}
+        <button
+          ref={this.input}
+          name={this.props.name}
+          value={date}
           onFocus={this.handleFocus}
-          selected={date}
-          onChange={this.handleChange}
-        />
+          className="gv-text-field__input"
+          onBlur={this.handleBlur}
+          disabled={this.props.disabled}
+        >
+          {date}
+        </button>
+        <Popover
+          anchorEl={this.state.anchorEl}
+          onClose={this.handleClose}
+          horizontal={this.props.horizontal}
+        >
+          <Calendar
+            className="gv-datepicker__calendar"
+            value={value}
+            onChange={this.handleChange}
+            locale={this.props.lng}
+            minDate={minDate}
+            maxDate={maxDate}
+          />
+        </Popover>
       </div>
     );
   }
@@ -59,7 +112,14 @@ class GVDatePicker extends Component {
 
 GVDatePicker.propTypes = {
   value: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]),
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  minDate: PropTypes.object,
+  maxDate: PropTypes.object,
+  horizontal: PropTypes.string
 };
 
-export default GVDatePicker;
+GVDatePicker.defaultProps = {
+  horizontal: "left"
+};
+
+export default translate()(GVDatePicker);
