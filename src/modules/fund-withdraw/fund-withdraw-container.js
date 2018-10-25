@@ -14,14 +14,13 @@ import { compose } from "redux";
 const FundWithdrawContainer = props => {
   const { open, onClose, currency, services, id, type } = props;
   const handleWithdraw = (id, percent) => {
-    return services.withdrawFundById(id, percent)
+    return services
+      .withdrawFundById(id, percent)
       .then(res => {
-        debugger;
         onClose();
         return res;
       })
       .catch(error => {
-        debugger;
         onClose();
         return error;
       });
