@@ -1,7 +1,7 @@
-import { ManagersApi } from "gv-api-web";
+import { ManagerApi } from "gv-api-web";
 
 import apiClient from "./swagger-custom-client";
 
-const managersApi = new ManagersApi(apiClient);
+const managerApi = new ManagerApi(apiClient);
 
-export default managersApi;
+export default managerApi;
