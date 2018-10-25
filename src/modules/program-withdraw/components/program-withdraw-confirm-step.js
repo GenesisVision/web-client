@@ -7,34 +7,43 @@ import { translate } from "react-i18next";
 import { formatValue } from "utils/formatter";
 
 const WithdrawConfirmStep = props => {
+  const {
+    t,
+    currency,
+    amount,
+    periodEnds,
+    onPrevClick,
+    error,
+    disabled
+  } = props;
   return (
     <Fragment>
       <ul className="dialog-list">
         <li className="dialog-list__item">
-          {props.t("withdraw-program.withdrawing")}
+          {t("withdraw-program.withdrawing")}
           <span className="dialog-list__value">
-            {formatValue(props.amount)} GVT
+            {formatValue(amount)} {currency}
           </span>
         </li>
         <li className="dialog-list__item">
-          {props.t("withdraw-program.payout-date")}
+          {t("withdraw-program.payout-date")}
           <span className="dialog-list__value">
-            {moment(props.periodEnds).format("DD MMM YYYY")}
+            {moment(periodEnds).format("DD MMM YYYY hh:mm")}
           </span>
         </li>
       </ul>
-      <div className="form-error">{props.error}</div>
+      <div className="form-error">{error}</div>
       <div className="dialog__buttons">
         <GVButton
-          onClick={props.onPrevClick}
+          onClick={onPrevClick}
           color="secondary"
           variant="outlined"
           title={"back"}
         >
-          {props.t("withdraw-program.back")}
+          {t("withdraw-program.back")}
         </GVButton>
-        <GVButton title={"submit"} type={"submit"} disabled={props.disabled}>
-          {props.t("withdraw-program.submit")}
+        <GVButton title={"submit"} type={"submit"} disabled={disabled}>
+          {t("withdraw-program.submit")}
         </GVButton>
       </div>
     </Fragment>

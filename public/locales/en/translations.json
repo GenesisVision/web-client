@@ -91,11 +91,17 @@
     "available-to-withdraw": "You invested in program",
     "amount-to-withdraw": "Amount to withdraw",
     "next": "Next",
-    "info": "Amount of withdrawals can be changed depending on the exchange rate or the success of the Manager",
+    "info": "Your request will be processed at the end of the reporting period. The requested amount will be converted to GVT and transferred to your wallet",
     "withdrawing": "Withdrawing",
     "payout-date": "Payout date",
     "back": "Back",
     "submit": "Submit",
+    "header": "Sell Tokens",
+    "invested": "Invested",
+    "how-much-withdraw": "How much would you like to withdraw?",
+    "enter-amount": "Enter {{token}} amount",
+    "withdraw-all": "Withdraw all invested tokens",
+    "success-alert-message": "Request to withdrawal sent successfully.",
     "validation": {
       "amount-more-than-available": "Amount is more than available for withdraw",
       "amount-is-required": "Amount is required."
@@ -846,14 +852,6 @@
     "your-gvt": "Your GVT",
     "enter-gvt-amount": "Enter GVT amount",
     "amount-in": "Amount in"
-  },
-  "program-withdraw": {
-    "header": "Sell Tokens",
-    "invested": "Invested",
-    "how-much-withdraw": "How much would you like to withdraw?",
-    "enter-amount": "Enter {{token}} amount",
-    "withdraw-all": "Withdraw all invested tokens",
-    "success-alert-message": "Request to withdrawal sent successfully."
   },
   "filters": {
     "level": {

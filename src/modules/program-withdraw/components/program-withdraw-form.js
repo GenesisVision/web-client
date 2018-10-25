@@ -57,6 +57,7 @@ class ProgramWithdrawForm extends Component {
             onPrevClick={this.goToEnterAmountStep}
             error={errorMessage}
             disabled={disabled}
+            currency={currency}
           />
         )}
         <div className="dialog__info">{t("withdraw-program.info")}</div>

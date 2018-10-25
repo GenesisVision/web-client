@@ -38,6 +38,7 @@ class ProgramWithdrawPopup extends Component {
         <ProgramWithdrawTop
           title={title}
           availableToWithdraw={availableToWithdraw}
+          currency={currency}
         />
         <ProgramWithdrawForm
           currency={currency}
