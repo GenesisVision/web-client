@@ -830,7 +830,7 @@
         "date": "Date",
         "type": "Type",
         "description": "Description",
-        "amount": "Amount, GVT"
+        "amount": "Amount"
       },
       "types": {
         "all": "All",

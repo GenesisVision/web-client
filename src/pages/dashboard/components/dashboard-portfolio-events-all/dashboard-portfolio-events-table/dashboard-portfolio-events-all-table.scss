@@ -32,18 +32,23 @@ $large-padding: 42px;
 
   &__cell {
     color: $text-light-color;
+    box-sizing: border-box;
 
     &--date {
-      width: 33%;
-      min-width: 180px;
+      width: 30%;
+      min-width: 210px;
     }
     &--type {
-      width: 40%;
+      width: 20%;
+      min-width: 110px;
+    }
+    &--description {
+      width: 35%;
       min-width: 230px;
     }
     &--amount {
-      width: 27%;
-      min-width: 110px;
+      width: 15%;
+      min-width: 180px;
     }
   }
 

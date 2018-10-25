@@ -80,6 +80,7 @@ class Select extends Component {
         })}
       >
         <button
+          name={this.props.name}
           onClick={this.handleClick}
           className="select__value"
           onBlur={this.handleBlur}

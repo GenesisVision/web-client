@@ -40,6 +40,7 @@ class ProgramDetailsPage extends PureComponent {
   componentDidMount() {
     this.updateDetails();
   }
+
   updateDetails = () => {
     const { service, currency } = this.props;
     this.setState({ isPending: true });
