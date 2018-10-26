@@ -5,6 +5,7 @@ import { Fragment } from "react";
 import React from "react";
 import { translate } from "react-i18next";
 import { formatValue } from "utils/formatter";
+import FormError from "shared/components/form/form-error/form-error";
 
 const WithdrawConfirmStep = props => {
   return (
@@ -23,7 +24,9 @@ const WithdrawConfirmStep = props => {
           </span>
         </li>
       </ul>
-      <div className="form-error">{props.error}</div>
+      <div className="form-error">
+        <FormError error={props.error} />
+      </div>
       <div className="dialog__buttons">
         <GVButton
           onClick={props.onPrevClick}

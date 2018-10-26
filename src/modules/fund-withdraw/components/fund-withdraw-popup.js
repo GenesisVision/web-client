@@ -31,7 +31,7 @@ class FundWithdrawPopup extends Component {
 
   render() {
     if (!this.state.data) return null;
-    const { currency, type } = this.props;
+    const { currency, type, error } = this.props;
     const { title, availableToWithdraw, periodEnds, rate } = this.state.data;
     return (
       <Fragment>
@@ -46,7 +46,7 @@ class FundWithdrawPopup extends Component {
           periodEnds={periodEnds}
           rate={rate}
           onSubmit={this.handleSumbit}
-          errorMessage={this.state.errorMessage}
+          errorMessage={error}
           disabled={this.state.isPending}
         />
       </Fragment>
