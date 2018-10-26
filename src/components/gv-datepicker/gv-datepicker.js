@@ -59,6 +59,7 @@ class GVDatePicker extends Component {
 
   handleClick = event => {
     this.handleOpen(event.target);
+    this.handleFocus(event);
   };
 
   input = React.createRef();
@@ -84,6 +85,7 @@ class GVDatePicker extends Component {
     return (
       <div className="gv-datepicker">
         <button
+          type="button"
           ref={this.input}
           name={this.props.name}
           value={date}
