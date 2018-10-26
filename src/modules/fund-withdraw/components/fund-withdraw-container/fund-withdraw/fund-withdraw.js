@@ -34,9 +34,7 @@ const FundWithdraw = ({
                   level={fundWithdraw.level}
                 />
               </div>
-              <div className="fund-withdraw__name">
-                {fundWithdraw.title}
-              </div>
+              <div className="fund-withdraw__name">{fundWithdraw.title}</div>
             </div>
           </div>
           <div className="fund-withdraw__info-cell">

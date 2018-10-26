@@ -51,7 +51,7 @@ class FundDetailsDescription extends PureComponent {
       onFavoriteClick,
       isFavoritePending,
       composeInvestmentData,
-      onChangeInvestmentStatus,
+      onChangeInvestmentStatus
     } = this.props;
     const isFavorite =
       fundDescription.personalFundDetails &&

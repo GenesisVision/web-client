@@ -229,6 +229,7 @@
     }
   },
   "buttons": {
+    "generate": "Generate",
     "apply": "Apply",
     "cancel": "Cancel",
     "back": "Back",
@@ -272,6 +273,9 @@
       "success": "You have successfully disabled the two factor authentication. However, we strongly recommend you keep it enabled. This can protect your funds from being stolen."
     },
     "codes": {
+      "copy-success": "Recovery codes was copied to the clipboard successfully.",
+      "copy-error": "Failed to copy data to the clipboard.",
+      "generate-recovery-codes": "Generate recovery codes",
       "title": "Please read carefully",
       "successfully": "You have just successfully configured the two factor authentication. We will ask you for the 2FA Code in any potentially dangerous situation, such as logging in or withdrawing funds.",
       "recovery_codes": "You can find your recovery codes below. You can use them in case you lost your 2FA key or lost your phone with the 2FA application installed. Each recovery code can be used only once. Save these codes on paper and put it in a safe place. If you are not sure that you can provide a secure place for the recovery codes, it would be safier to just ignore these codes.",
@@ -279,7 +283,32 @@
     }
   },
   "auth": {
-    "text": "A Brief History Of Creation",
+    "quotes": {
+      "0": {
+        "quote": "An investor without investment objectives is like a traveler without a destination.",
+        "author": "Ralph Seger"
+      },
+      "1": {
+        "quote": "Sometimes your best investments are the ones you don't make.",
+        "author": "Donald Trump"
+      },
+      "2": {
+        "quote": "Never depend on a single income, make an investment to create a second source.",
+        "author": "Warren Buffet"
+      },
+      "3": {
+        "quote": "Put not your trust in money, but put your money in trust.",
+        "author": "Oliver Wendell Holmes"
+      },
+      "4": {
+        "quote": "Never stop investing. Never stop improving. Never stop doing something new.",
+        "author": "Bob Parsons"
+      },
+      "5": {
+        "quote": "When you invest you are buying a day that you don't have to work.",
+        "author": "Aya Laraya"
+      }
+    },
     "tabs": {
       "investor": "Investor",
       "manager": "Manager"
@@ -583,7 +612,9 @@
       "successFee": "Success fee",
       "invest": "Invest",
       "reinvest": "Reinvest",
-      "yourInvestment": "Your investment",
+      "yourInvestment": "Current period investment",
+      "pending-input": "Pending input",
+      "pending-output": "Pending output",
       "invested": "Invested",
       "value": "Value",
       "profit": "Profit",
@@ -649,7 +680,9 @@
       "entryFee": "Entry fee",
       "invest": "Invest",
       "reinvest": "Reinvest",
-      "yourInvestment": "Your investment",
+      "yourInvestment": "Current period investment",
+      "pending-input": "Pending input",
+      "pending-output": "Pending output",
       "invested": "Invested",
       "value": "Value",
       "profit": "Profit",

@@ -2,7 +2,7 @@ import React from "react";
 import { translate } from "react-i18next";
 import { formatValue } from "utils/formatter";
 
-const ProgramDepositTop = ({ info, t, type }) => {
+const ProgramDepositTop = ({ info, t }) => {
   return (
     <div className="dialog__top">
       <div className="dialog__header">
@@ -11,9 +11,7 @@ const ProgramDepositTop = ({ info, t, type }) => {
       </div>
       <div className="dialog-field">
         <div className="dialog-field__description">
-          {type === "fund" && t("deposit-program.available-to-invest-in-fund")}
-          {type === "program" &&
-            t("deposit-program.available-to-invest-in-program")}
+          {t("deposit-program.available-to-invest-in-program")}
         </div>
         <div className="dialog-field__value">
           {formatValue(info.availableToInvest)} GVT

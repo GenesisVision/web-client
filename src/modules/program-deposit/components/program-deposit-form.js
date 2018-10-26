@@ -15,8 +15,7 @@ const ProgramDepositForm = ({
   currency,
   disabled,
   handleSubmit,
-  errorMessage,
-  type
+  errorMessage
 }) => {
   const fee = calculateValueOfEntryFee(values.amount, info.entryFee);
   const gvFee = calculateValueOfEntryFee(values.amount, info.gvCommission);
@@ -28,8 +27,7 @@ const ProgramDepositForm = ({
     const { floatValue, formattedValue } = values;
     const { availableInWallet, availableToInvest } = info;
     const fee = calculateValueOfEntryFee(floatValue, info.entryFee);
-    const validateAvailableToInvest = () =>
-      type === "program" ? floatValue <= availableToInvest : true;
+    const validateAvailableToInvest = () => floatValue <= availableToInvest;
     return (
       formattedValue === "" ||
       (floatValue <= parseFloat(availableInWallet - fee) &&

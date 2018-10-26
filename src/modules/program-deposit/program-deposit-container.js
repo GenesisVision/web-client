@@ -15,7 +15,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 const ProgramDepositContainer = props => {
-  const { service, id, type, onInvest } = props;
+  const { service, id, onInvest } = props;
   const handleClose = () => {
     props.onClose();
     props.service.clearDepositProgramInfo();
@@ -41,12 +41,8 @@ const ProgramDepositContainer = props => {
         currency={props.currency}
         info={props.info.data}
         id={props.id}
-        fetchInfo={
-          (type === "program" && props.service.getDepositProgramInfoById) ||
-          (type === "fund" && props.service.getDepositFundInfoById)
-        }
+        fetchInfo={props.service.getDepositProgramInfoById}
         invest={handleInvest}
-        type={type}
       />
     </Dialog>
   );
