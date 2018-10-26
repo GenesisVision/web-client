@@ -26,6 +26,7 @@ class FundDetailsInvestment extends PureComponent {
   render() {
     const {
       t,
+      fundCurrency,
       className,
       fundId,
       investedAmount,
@@ -116,6 +117,7 @@ class FundDetailsInvestment extends PureComponent {
             open={this.state.isOpenWithdrawalPopup}
             id={fundId}
             onClose={this.handleCloseWithdrawalPopup}
+            fundCurrency={fundCurrency}
           />
           <p className="fund-details-investment__withdraw-notice">
             {t("fund-details-page.description.withdraw-notice-text")}

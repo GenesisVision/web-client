@@ -141,6 +141,7 @@ class FundDetailsDescription extends PureComponent {
             {isInvested && (
               <FundDetailsInvestment
                 className={"fund-details-description__your-investment"}
+                fundCurrency={fundDescription.currency}
                 {...composeInvestmentData(fundDescription)}
                 onChangeInvestmentStatus={onChangeInvestmentStatus}
               />

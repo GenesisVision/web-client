@@ -31,16 +31,18 @@ class FundWithdrawPopup extends Component {
 
   render() {
     if (!this.state.data) return null;
-    const { currency, error } = this.props;
+    const { fundCurrency, accountCurrency, error } = this.props;
     const { title, availableToWithdraw, periodEnds, rate } = this.state.data;
     return (
       <Fragment>
         <FundWithdrawTop
           title={title}
           availableToWithdraw={availableToWithdraw}
+          fundCurrency={fundCurrency}
         />
         <FundWithdrawForm
-          currency={currency}
+          fundCurrency={fundCurrency}
+          accountCurrency={accountCurrency}
           availableToWithdraw={availableToWithdraw}
           periodEnds={periodEnds}
           rate={rate}

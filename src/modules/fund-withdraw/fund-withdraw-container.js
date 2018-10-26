@@ -39,11 +39,19 @@ class FundWithdrawContainer extends PureComponent {
   };
 
   render() {
-    const { open, onClose, currency, services, id } = this.props;
+    const {
+      open,
+      onClose,
+      services,
+      id,
+      fundCurrency,
+      accountCurrency
+    } = this.props;
     return (
       <Dialog open={open} onClose={onClose}>
         <FundWithdrawPopup
-          currency={currency}
+          fundCurrency={fundCurrency}
+          accountCurrency={accountCurrency}
           fetchInfo={() => services.getFundWithdrawInfo(id)}
           withdraw={percent => this.handleWithdraw(id, percent)}
           error={this.state.error}
@@ -60,7 +68,7 @@ FundWithdrawContainer.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  currency: state.accountSettings.currency
+  accountCurrency: state.accountSettings.currency
 });
 
 const mapDispathToProps = dispatch => ({
