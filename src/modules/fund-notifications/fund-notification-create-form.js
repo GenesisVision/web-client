@@ -54,6 +54,7 @@ class FundNotificationCreateForm extends Component {
               );
             }}
           />
+          <div className="form-error">{this.props.errorMessage}</div>
           <div className="dialog__buttons">
             <GVButton color="primary" type="submit">
               {t("buttons.create")}
