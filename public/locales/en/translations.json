@@ -195,6 +195,11 @@
         "title": "GENERAL",
         "news-updates": "Fund news and updates",
         "end-of-period": "Notifications for the end of the period",
+        "fund-rebalancing": "Fund rebalancing",
+        "FundRebalancing": {
+          "disabled-alert": "Enabled fund rebalancing notifications",
+          "enabled-alert": "Disabled fund rebalancing notifications"
+        },
         "FundNewsAndUpdates": {
           "disabled-alert": "Enabled fund news and updates notifications",
           "enabled-alert": "Disabled fund news and updates notifications"

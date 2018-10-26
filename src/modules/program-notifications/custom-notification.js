@@ -30,7 +30,7 @@ class CustomNotification extends Component {
     services
       .toggleProgramNotificationsService({
         id: settings.id,
-        programId: settings.programId,
+        assetId: settings.assetId,
         enabled: status
       })
       .then(() => {

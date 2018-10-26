@@ -19,7 +19,7 @@ class ProgramNotifications extends Component {
         <h3 className="notification-settings__title">{program.title}</h3>
         <ProgramNotificationsGeneral
           settings={this.getGeneralSettings()}
-          programId={program.programId}
+          assetId={program.assetId}
         />
         <ProgramNotificationsCustom program={program} />
       </div>
@@ -29,7 +29,7 @@ class ProgramNotifications extends Component {
 
 const settingsGeneralProps = PropTypes.shape({
   id: PropTypes.string,
-  programId: PropTypes.string,
+  assetId: PropTypes.string,
   managerId: PropTypes.string,
   type: PropTypes.string,
   conditionType: PropTypes.string,
@@ -38,7 +38,7 @@ const settingsGeneralProps = PropTypes.shape({
 
 const settingsCustomProps = PropTypes.shape({
   id: PropTypes.string,
-  programId: PropTypes.string,
+  assetId: PropTypes.string,
   managerId: PropTypes.string,
   type: PropTypes.string,
   conditionType: PropTypes.string,
@@ -48,7 +48,7 @@ const settingsCustomProps = PropTypes.shape({
 ProgramNotifications.propTypes = {
   t: PropTypes.func,
   program: PropTypes.shape({
-    programId: PropTypes.string,
+    assetId: PropTypes.string,
     title: PropTypes.string,
     url: PropTypes.string,
     logo: PropTypes.string,

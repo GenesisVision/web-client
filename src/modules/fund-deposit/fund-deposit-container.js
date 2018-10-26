@@ -1,4 +1,9 @@
 import Dialog from "components/dialog/dialog";
+import PropTypes from "prop-types";
+import React from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+
 import {
   clearDepositFundInfo,
   clearInvestSubmitFund
@@ -8,10 +13,6 @@ import {
   getDepositFundInfoById,
   investServiceInvestById
 } from "./services/fund-deposit.services";
-import PropTypes from "prop-types";
-import React from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 
 const FundDepositContainer = props => {
   const { service, id, onInvest } = props;

@@ -18,7 +18,7 @@
   }
 
   &__scroll-container {
-    @include media-breakpoint-landscape-phone(){
+    @include media-breakpoint-landscape-phone() {
       width: 265px;
     }
     &:after {

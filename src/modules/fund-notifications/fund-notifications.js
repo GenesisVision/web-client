@@ -1,4 +1,3 @@
-import FundNotificationsCustom from "modules/fund-notifications/fund-notifications-custom";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
@@ -19,9 +18,8 @@ class FundNotifications extends Component {
         <h3 className="notification-settings__title">{fund.title}</h3>
         <FundNotificationsGeneral
           settings={this.getGeneralSettings()}
-          fundId={fund.fundId}
+          assetId={fund.assetId}
         />
-        <FundNotificationsCustom fund={fund} />
       </div>
     );
   }
@@ -29,7 +27,7 @@ class FundNotifications extends Component {
 
 const settingsGeneralProps = PropTypes.shape({
   id: PropTypes.string,
-  fundId: PropTypes.string,
+  assetId: PropTypes.string,
   managerId: PropTypes.string,
   type: PropTypes.string,
   conditionType: PropTypes.string,
@@ -38,7 +36,7 @@ const settingsGeneralProps = PropTypes.shape({
 
 const settingsCustomProps = PropTypes.shape({
   id: PropTypes.string,
-  fundId: PropTypes.string,
+  assetId: PropTypes.string,
   managerId: PropTypes.string,
   type: PropTypes.string,
   conditionType: PropTypes.string,
@@ -48,7 +46,7 @@ const settingsCustomProps = PropTypes.shape({
 FundNotifications.propTypes = {
   t: PropTypes.func,
   fund: PropTypes.shape({
-    fundId: PropTypes.string,
+    assetId: PropTypes.string,
     title: PropTypes.string,
     url: PropTypes.string,
     logo: PropTypes.string,
