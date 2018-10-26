@@ -2,7 +2,7 @@ import React from "react";
 import { translate } from "react-i18next";
 import { formatValue } from "utils/formatter";
 
-const FundDepositTop = ({ info, t, type }) => {
+const FundDepositTop = ({ info, t }) => {
   return (
     <div className="dialog__top">
       <div className="dialog__header">
