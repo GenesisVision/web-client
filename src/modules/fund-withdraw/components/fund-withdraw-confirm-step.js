@@ -14,7 +14,7 @@ const WithdrawConfirmStep = props => {
         <li className="dialog-list__item">
           {props.t("withdraw-fund.withdrawing")}
           <span className="dialog-list__value">
-            {formatValue(props.percent)} GVT
+            {formatValue(props.percent)} %
           </span>
         </li>
         <li className="dialog-list__item">

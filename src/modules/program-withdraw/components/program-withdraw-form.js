@@ -31,7 +31,8 @@ class ProgramWithdrawForm extends Component {
       rate,
       availableToWithdraw,
       periodEnds,
-      currency,
+      programCurrency,
+      accountCurrency,
       errors
     } = this.props;
     return (
@@ -44,7 +45,8 @@ class ProgramWithdrawForm extends Component {
           <WithdrawEnterAmountStep
             amount={values.amount}
             rate={rate}
-            currency={currency}
+            programCurrency={programCurrency}
+            accountCurrency={accountCurrency}
             availableToWithdraw={availableToWithdraw}
             onClick={this.goToConfirmStep}
             disabled={errors.amount !== undefined}
@@ -57,7 +59,8 @@ class ProgramWithdrawForm extends Component {
             onPrevClick={this.goToEnterAmountStep}
             error={errorMessage}
             disabled={disabled}
-            currency={currency}
+            programCurrency={programCurrency}
+            accountCurrency={accountCurrency}
           />
         )}
         <div className="dialog__info">{t("withdraw-program.info")}</div>

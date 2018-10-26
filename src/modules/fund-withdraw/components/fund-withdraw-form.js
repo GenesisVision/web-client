@@ -5,6 +5,7 @@ import { translate } from "react-i18next";
 import { compose } from "redux";
 import { number, object } from "yup";
 
+import { formatValue } from "utils/formatter";
 import WithdrawConfirmStep from "./fund-withdraw-confirm-step";
 import FundWithdrawEnterPercentStep from "./fund-withdraw-enter-percent-step";
 
@@ -31,7 +32,8 @@ class FundWithdrawForm extends Component {
       rate,
       availableToWithdraw,
       periodEnds,
-      currency,
+      fundCurrency,
+      accountCurrency,
       errors
     } = this.props;
     return (
@@ -44,7 +46,8 @@ class FundWithdrawForm extends Component {
           <FundWithdrawEnterPercentStep
             percent={values.percent}
             rate={rate}
-            currency={currency}
+            fundCurrency={fundCurrency}
+            accountCurrency={accountCurrency}
             availableToWithdraw={availableToWithdraw}
             onClick={this.goToConfirmStep}
             disabled={errors.percent !== undefined}
