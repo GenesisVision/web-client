@@ -34,14 +34,14 @@ class FundNotificationsGeneral extends Component {
       );
   };
   render() {
-    const { t, settings, fundId } = this.props;
+    const { t, settings, assetId } = this.props;
     return (
       <div className="notification-settings">
         <h3>{t("notifications.fund.general.title")}</h3>
         <GeneralNotification
           name="FundNewsAndUpdates"
           label={t("notifications.fund.general.news-updates")}
-          fundId={fundId}
+          assetId={assetId}
           setting={settings.FundNewsAndUpdates}
           addNotification={this.handleAdd}
           removeNotification={this.handleRemove}
@@ -49,7 +49,7 @@ class FundNotificationsGeneral extends Component {
         <GeneralNotification
           name="FundEndOfPeriod"
           label={t("notifications.fund.general.end-of-period")}
-          fundId={fundId}
+          assetId={assetId}
           setting={settings.FundEndOfPeriod}
           addNotification={this.handleAdd}
           removeNotification={this.handleRemove}

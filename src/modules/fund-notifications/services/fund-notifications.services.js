@@ -20,18 +20,18 @@ export const addFundNotificationsService = opts => dispatch => {
   );
 };
 
-export const removeFundNotificationService = ({ id, fundId }) => dispatch => {
+export const removeFundNotificationService = ({ id, assetId }) => dispatch => {
   return dispatch(removeNotificationSetting(id)).then(() =>
-    dispatch(fetchFundNotificationsService(fundId))
+    dispatch(fetchFundNotificationsService(assetId))
   );
 };
 
 export const toggleFundNotificationsService = ({
   id,
   enabled,
-  fundId
+  assetId
 }) => dispatch => {
   return dispatch(toggleFundNotifications(id, enabled)).then(() =>
-    dispatch(fetchFundNotificationsService(fundId))
+    dispatch(fetchFundNotificationsService(assetId))
   );
 };

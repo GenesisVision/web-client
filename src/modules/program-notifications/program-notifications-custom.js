@@ -27,7 +27,7 @@ class ProgramNotificationsCustom extends Component {
     const { t } = this.props;
     this.props.services
       .addProgramNotificationService({
-        programId: this.props.program.programId,
+        assetId: this.props.program.assetId,
         ...values
       })
       .then(() => this.handleClosePopup())
@@ -52,7 +52,7 @@ class ProgramNotificationsCustom extends Component {
       <div className="notification-settings custom-notifications">
         <h3>{t("notifications.program.custom.title")}</h3>
         {program.settingsCustom.map(settings => (
-          <CustomNotification settings={settings} key={settings.programId} />
+          <CustomNotification settings={settings} key={settings.assetId} />
         ))}
         <div className="custom-notification__create">
           <GVButton variant="text" onClick={this.handleOpenPopup}>

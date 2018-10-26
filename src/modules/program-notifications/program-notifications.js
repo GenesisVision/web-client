@@ -19,7 +19,7 @@ class ProgramNotifications extends Component {
         <h3 className="notification-settings__title">{program.title}</h3>
         <ProgramNotificationsGeneral
           settings={this.getGeneralSettings()}
-          programId={program.programId}
+          assetId={program.assetId}
         />
         <ProgramNotificationsCustom program={program} />
       </div>

@@ -30,7 +30,7 @@ class CustomNotification extends Component {
     services
       .toggleFundNotificationsService({
         id: settings.id,
-        fundId: settings.fundId,
+        assetId: settings.assetId,
         enabled: status
       })
       .then(() => {
