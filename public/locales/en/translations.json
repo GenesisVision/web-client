@@ -452,6 +452,7 @@
     "select-currency": "Select a wallet currency",
     "will-send": "You will send",
     "will-get": "Approximate amount",
+    "will-get-gvt": "You will get",
     "deposit-address": "Deposit address",
     "copy-to-clipboard-success": "Your wallet-pane number was copied to the clipboard successfully.",
     "copy-to-clipboard-error": "Failed to copy data to the clipboard.",
