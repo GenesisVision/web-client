@@ -28,7 +28,7 @@ class FundWithdrawContainer extends PureComponent {
         this.props.onClose();
         this.props.services.alert(
           "success",
-          "fund-withdraw.success-alert-message",
+          "withdraw-fund.success-alert-message",
           true
         );
         return res;
