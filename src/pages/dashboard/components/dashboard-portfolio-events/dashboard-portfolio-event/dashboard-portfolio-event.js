@@ -9,7 +9,6 @@ import { formatValue, roundTypeEnum } from "utils/formatter";
 
 import { isUseProfitability } from "../../helpers/dashboard-portfolio.helpers";
 import PortfolioEventLogo from "../dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
-import { composeEventLogoType } from "../dashboard-portfolio-event-logo/dashboard-portfolio-event-logo.helper";
 
 const formatDate = date => {
   const now = moment(new Date());
@@ -27,7 +26,7 @@ const DashboardPortfolioEvent = ({ event }) => {
   return (
     <div className="portfolio-event">
       <PortfolioEventLogo
-        type={composeEventLogoType(event.type)}
+        type={event.type}
         logo={event.logo}
         color={event.color}
       />
