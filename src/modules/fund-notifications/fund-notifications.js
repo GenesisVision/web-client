@@ -1,4 +1,3 @@
-import FundNotificationsCustom from "modules/fund-notifications/fund-notifications-custom";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
@@ -21,7 +20,6 @@ class FundNotifications extends Component {
           settings={this.getGeneralSettings()}
           assetId={fund.assetId}
         />
-        <FundNotificationsCustom fund={fund} />
       </div>
     );
   }
