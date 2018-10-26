@@ -19,8 +19,8 @@ const WalletAddFundsForm = ({
   values,
   wallets
 }) => {
-  const selected = wallets.find(w => w.currency === values.currency);
-  const { address, currency, rateToGVT } = selected;
+  const selected = wallets.find(w => w.currency === values.currency) || {};
+  const { address = "", currency = null, rateToGVT = null } = selected;
 
   const onCopy = () => {
     try {
@@ -83,16 +83,17 @@ const WalletAddFundsForm = ({
           {t("wallet-add-funds.deposit-address")}
         </div>
         <div className="wallet-add-funds-popup__value">{address}</div>
-        <GVButton color="secondary" onClick={onCopy}>
+        <GVButton color="secondary" onClick={onCopy} disabled={!address}>
           <CopyIcon />
           &nbsp;
           {t("buttons.copy")}
         </GVButton>
         <div className="dialog__info">
           {currency !== "GVT" &&
-            t("wallet-add-funds.disclaimer", {
-              currency
-            })}
+            (currency !== null &&
+              t("wallet-add-funds.disclaimer", {
+                currency
+              }))}
         </div>
       </div>
     </form>
@@ -116,9 +117,15 @@ export default compose(
   translate(),
   withFormik({
     displayName: "add-funds",
-    mapPropsToValues: () => ({
-      currency: "BTC",
-      amount: ""
-    })
+    mapPropsToValues: props => {
+      let currency = "GVT";
+      if (!props.wallets.find(wallet => wallet.currency === currency)) {
+        currency = props.wallets[0] ? props.wallets[0].currency : "";
+      }
+      return {
+        currency,
+        amount: ""
+      };
+    }
   })
 )(WalletAddFundsForm);
