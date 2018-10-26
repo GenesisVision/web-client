@@ -58,6 +58,14 @@ class FundNotificationsGeneral extends Component {
           addNotification={this.handleAdd}
           removeNotification={this.handleRemove}
         />
+        <GeneralNotification
+          name="FundRebalancing"
+          label={t("notifications.fund.general.fund-rebalancing")}
+          assetId={assetId}
+          setting={settings.FundRebalancing}
+          addNotification={this.handleAdd}
+          removeNotification={this.handleRemove}
+        />
       </div>
     );
   }
@@ -78,7 +86,7 @@ FundNotificationsGeneral.defaultProps = {
 const mapDispatchToProps = dispatch => ({
   services: bindActionCreators(
     {
-      addFundNotificationsService,
+      addFundNotificationService,
       removeFundNotificationService
     },
     dispatch
