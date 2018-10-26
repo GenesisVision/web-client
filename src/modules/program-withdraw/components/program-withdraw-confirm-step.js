@@ -10,7 +10,7 @@ import { formatValue } from "utils/formatter";
 const WithdrawConfirmStep = props => {
   const {
     t,
-    currency,
+    programCurrency,
     amount,
     periodEnds,
     onPrevClick,
@@ -23,7 +23,7 @@ const WithdrawConfirmStep = props => {
         <li className="dialog-list__item">
           {t("withdraw-program.withdrawing")}
           <span className="dialog-list__value">
-            {formatValue(amount)} {currency}
+            {formatValue(amount)} {programCurrency}
           </span>
         </li>
         <li className="dialog-list__item">
