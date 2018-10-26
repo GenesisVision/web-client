@@ -13,7 +13,7 @@ class ProgramDepositPopup extends Component {
   render() {
     return this.props.info ? (
       <Fragment>
-        <ProgramDepositTop info={this.props.info}/>
+        <ProgramDepositTop info={this.props.info} />
         <ProgramDepositForm
           errorMessage={this.props.submitInfo.errorMessage}
           currency={this.props.currency}

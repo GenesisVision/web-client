@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 import { Fragment } from "react";
 import React from "react";
 import { translate } from "react-i18next";
-import { formatValue } from "utils/formatter";
 import FormError from "shared/components/form/form-error/form-error";
+import { formatValue } from "utils/formatter";
 
 const WithdrawConfirmStep = props => {
   const {

@@ -112,21 +112,16 @@ const WalletTransactions = ({ t }) => (
               )}
             </TableCell>
             <TableCell className="wallet-transactions__cell wallet-transactions__cell--amount">
-              <Profitability
-                value={formatValue(transaction.amount)}
-                prefix="sign"
-              >
-                <NumberFormat
-                  value={formatValue(
-                    transaction.amount,
-                    roundTypeEnum.FLOOR,
-                    false
-                  )}
-                  thousandSeparator=" "
-                  displayType="text"
-                  suffix={" " + transaction.sourceCurrency}
-                />
-              </Profitability>
+              <NumberFormat
+                value={formatValue(
+                  transaction.amount,
+                  roundTypeEnum.FLOOR,
+                  false
+                )}
+                thousandSeparator=" "
+                displayType="text"
+                suffix={" " + transaction.sourceCurrency}
+              />
             </TableCell>
             <TableCell className="wallet-transactions__cell wallet-transactions__cell--status">
               {status && t(`wallet.transaction-statuses.${status}`)}

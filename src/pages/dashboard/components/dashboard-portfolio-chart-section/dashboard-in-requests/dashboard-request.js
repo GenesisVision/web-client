@@ -39,7 +39,7 @@ class DashboardRequest extends Component {
       <div className="dashboard-request-popover__request">
         <div className="dashboard-request-popover__logo">
           <PortfolioEventLogo
-            type={composeEventLogoType(request.type)}
+            type={request.type}
             logo={request.logo}
             color={request.color}
           />
