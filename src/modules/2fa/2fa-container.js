@@ -5,6 +5,7 @@ import Dialog from "components/dialog/dialog";
 import Select from "components/select/select";
 import { GVTextField } from "gv-react-components";
 import DisableAuthContainer from "modules/2fa/disable-auth/disable-auth-container";
+import GenerateRecoveryCode from "modules/2fa/google-auth/generate-recovery-codes/generate-recovery-codes";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
@@ -52,6 +53,7 @@ class TwoFactorAuthContainer extends Component {
           <option value={"disable"}>{t("2fa.none")}</option>
           <option value={"google"}>{t("2fa.google")}</option>
         </GVTextField>
+        <GenerateRecoveryCode disabled={twoFactorAuth.data.twoFactorEnabled} />
         <Dialog
           className="two-factor-auth"
           open={Boolean(this.state.component)}

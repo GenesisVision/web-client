@@ -229,6 +229,7 @@
     }
   },
   "buttons": {
+    "generate": "Generate",
     "apply": "Apply",
     "cancel": "Cancel",
     "back": "Back",
@@ -272,6 +273,9 @@
       "success": "You have successfully disabled the two factor authentication. However, we strongly recommend you keep it enabled. This can protect your funds from being stolen."
     },
     "codes": {
+      "copy-success": "Recovery codes was copied to the clipboard successfully.",
+      "copy-error": "Failed to copy data to the clipboard.",
+      "generate-recovery-codes": "Generate recovery codes",
       "title": "Please read carefully",
       "successfully": "You have just successfully configured the two factor authentication. We will ask you for the 2FA Code in any potentially dangerous situation, such as logging in or withdrawing funds.",
       "recovery_codes": "You can find your recovery codes below. You can use them in case you lost your 2FA key or lost your phone with the 2FA application installed. Each recovery code can be used only once. Save these codes on paper and put it in a safe place. If you are not sure that you can provide a secure place for the recovery codes, it would be safier to just ignore these codes.",
