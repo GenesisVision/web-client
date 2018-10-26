@@ -94,7 +94,7 @@
   },
   "withdraw-program": {
     "title": "Withdraw",
-    "available-to-withdraw": "You invested in program",
+    "available-to-withdraw": "Current invested value",
     "amount-to-withdraw": "Amount to withdraw",
     "next": "Next",
     "info": "Your request will be processed at the end of the reporting period. The requested amount will be converted to GVT and transferred to your wallet",
@@ -115,7 +115,7 @@
   },
   "withdraw-fund": {
     "title": "Withdraw",
-    "available-to-withdraw": "You invested in fund",
+    "available-to-withdraw": "Current invested value",
     "amount-to-withdraw": "Amount to withdraw",
     "next": "Next",
     "info": "Amount of withdrawals can be changed depending on the exchange rate or the success of the Manager",
@@ -699,6 +699,8 @@
     "body": "Page Not Found"
   },
   "program-actions": {
+    "remove-from-favorites": "Remove from favorites",
+    "add-to-favorites": "Add to favorites",
     "invest": "Invest",
     "withdraw": "Withdraw",
     "details": "Details"

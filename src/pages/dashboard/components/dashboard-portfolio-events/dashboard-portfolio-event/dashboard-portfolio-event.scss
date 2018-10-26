@@ -1,14 +1,28 @@
 @import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
+@import "styles/_sizes.scss";
 
 .portfolio-event {
   display: flex;
   padding-top: 24px;
   align-items: center;
-  width: 252px;
+  //width: 252px;
+  @include media-breakpoint-landscape-phone() {
+    width: 252px;
+  }
 
   &:not(:last-of-type) {
     border-bottom: 2px solid $separator-color;
     padding-bottom: 24px;
+  }
+
+  &__values-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    @include media-breakpoint-landscape-phone() {
+      flex-direction: column;
+    }
   }
 
   &__info {
@@ -23,12 +37,14 @@
   }
 
   &__description {
-    line-height: 1.69;
     letter-spacing: 0.2px;
-    margin-top: 5px;
     margin-bottom: 0px;
     font-size: 13px;
     color: $text-color;
+    @include media-breakpoint-landscape-phone() {
+      line-height: 1.69;
+      margin-top: 5px;
+    }
   }
 
   &__value {

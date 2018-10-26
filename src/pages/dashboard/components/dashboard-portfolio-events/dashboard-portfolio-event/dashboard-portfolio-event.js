@@ -32,16 +32,20 @@ const DashboardPortfolioEvent = ({ event }) => {
       />
       <div className="portfolio-event__info">
         <span className="portfolio-event__time">{formatDate(event.date)}</span>
-        <div className="portfolio-event__description">{event.description}</div>
-        <span className="portfolio-event__value">
-          <Profitability value={formatValue(event.value)} prefix="sign">
-            <NumberFormat
-              value={formatValue(event.value, roundTypeEnum.FLOOR, false)}
-              displayType="text"
-              suffix={` ${event.currency}`}
-            />
-          </Profitability>
-        </span>
+        <div className="portfolio-event__values-container">
+          <div className="portfolio-event__description">
+            {event.description}
+          </div>
+          <span className="portfolio-event__value">
+            <Profitability value={formatValue(event.value)} prefix="sign">
+              <NumberFormat
+                value={formatValue(event.value, roundTypeEnum.FLOOR, false)}
+                displayType="text"
+                suffix={` ${event.currency}`}
+              />
+            </Profitability>
+          </span>
+        </div>
       </div>
     </div>
   );

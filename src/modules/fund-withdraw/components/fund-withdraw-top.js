@@ -3,7 +3,7 @@ import React from "react";
 import { translate } from "react-i18next";
 import { formatValue } from "utils/formatter";
 
-const FundWithdrawTop = ({ t, availableToWithdraw, title, type }) => {
+const FundWithdrawTop = ({ t, availableToWithdraw, title }) => {
   return (
     <div className="dialog__top">
       <div className="dialog__header">
@@ -12,9 +12,7 @@ const FundWithdrawTop = ({ t, availableToWithdraw, title, type }) => {
       </div>
       <div className="dialog-field">
         <div className="dialog-field__description">
-          {type === "withdraw-program" &&
-            t("withdraw-fund.available-to-withdraw")}
-          {type === "withdraw-fund" && t("withdraw-fund.available-to-withdraw")}
+          {t("withdraw-fund.available-to-withdraw")}
         </div>
         <div className="dialog-field__value">
           {formatValue(availableToWithdraw)} GVT
