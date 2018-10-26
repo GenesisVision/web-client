@@ -8,11 +8,10 @@ import PropTypes from "prop-types";
 import React from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { compose } from "redux";
+import { bindActionCreators, compose } from "redux";
 
 const FundWithdrawContainer = props => {
-  const { open, onClose, currency, services, id, type } = props;
+  const { open, onClose, currency, services, id } = props;
   const handleWithdraw = (id, percent) => {
     return services
       .withdrawFundById(id, percent)
@@ -31,7 +30,6 @@ const FundWithdrawContainer = props => {
         currency={currency}
         fetchInfo={() => services.getFundWithdrawInfo(id)}
         withdraw={percent => handleWithdraw(id, percent)}
-        type={type}
       />
     </Dialog>
   );
@@ -50,8 +48,6 @@ const mapStateToProps = state => ({
 const mapDispathToProps = dispatch => ({
   services: bindActionCreators(
     {
-      getFundWithdrawInfo,
-      withdrawFundById,
       getFundWithdrawInfo,
       withdrawFundById
     },

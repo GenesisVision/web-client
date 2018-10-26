@@ -1,7 +1,7 @@
 import { investorApiProxy } from "services/api-client/investor-api";
 import authService from "services/auth-service";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import { managersApiProxy } from "services/api-client/managers-api";
+import { managerApiProxy } from "services/api-client/manager-api";
 
 export const getFundWithdrawInfo = id => (dispatch, getState) => {
   const { accountSettings } = getState();

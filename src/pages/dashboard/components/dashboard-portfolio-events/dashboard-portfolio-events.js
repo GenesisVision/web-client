@@ -16,7 +16,7 @@ const DashboardPortfolioEvents = ({ t, events, fullEventsUrl }) => (
     <Scrollbars
       autoHide
       autoHideTimeout={1000}
-      style={{ width: "265px", height: "541px", paddingRight: "10px" }}
+      style={{ height: "541px", paddingRight: "10px" }}
       className="dashboard-portfolio-events__scroll-container"
     >
       <div className="dashboard-portfolio-events__list">
