@@ -1,9 +1,9 @@
 import Dialog from "components/dialog/dialog";
 import FundWithdrawPopup from "modules/fund-withdraw/components/fund-withdraw-popup";
 import {
+  alert,
   getFundWithdrawInfo,
-  withdrawFundById,
-  alert
+  withdrawFundById
 } from "modules/fund-withdraw/servives/fund-withdraw.services";
 import PropTypes from "prop-types";
 import React, { PureComponent } from "react";

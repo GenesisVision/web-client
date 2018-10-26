@@ -19,7 +19,7 @@ export const addProgramNotificationService = opts => dispatch => {
   const promise = dispatch(addNotificationSetting(opts));
 
   promise
-    .then(() => dispatch(fetchProgramNotificationsService(opts.programId)))
+    .then(() => dispatch(fetchProgramNotificationsService(opts.assetId)))
     .catch(data => dispatch(addErrorMessage(data.errorMessage)));
 
   return promise;
@@ -27,19 +27,19 @@ export const addProgramNotificationService = opts => dispatch => {
 
 export const removeProgramNotificationService = ({
   id,
-  programId
+  assetId
 }) => dispatch => {
   return dispatch(removeNotificationSetting(id)).then(() =>
-    dispatch(fetchProgramNotificationsService(programId))
+    dispatch(fetchProgramNotificationsService(assetId))
   );
 };
 
 export const toggleProgramNotificationsService = ({
   id,
   enabled,
-  programId
+  assetId
 }) => dispatch => {
   return dispatch(toggleProgramNotifications(id, enabled)).then(() =>
-    dispatch(fetchProgramNotificationsService(programId))
+    dispatch(fetchProgramNotificationsService(assetId))
   );
 };

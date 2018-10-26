@@ -22,13 +22,10 @@ const WalletWithdrawForm = ({
   errorMessage
 }) => {
   const { currency, amount } = values;
-  let currentWallet = wallets.find(wallet => wallet.currency === currency);
+  const currentWallet =
+    wallets.find(wallet => wallet.currency === currency) || {};
 
-  if (!currentWallet) {
-    currentWallet = wallets[0];
-  }
-
-  const { commission, rateToGvt } = currentWallet;
+  const { commission = null, rateToGvt = null } = currentWallet;
 
   const willGet = Math.max(
     convertFromCurrency(amount, rateToGvt) - commission,
@@ -167,12 +164,13 @@ export default compose(
   translate(),
   withFormik({
     displayName: "wallet-withdraw",
-    mapPropsToValues: () => ({
-      amount: "",
-      currency: "",
-      address: "",
-      twoFactorCode: ""
-    }),
+    mapPropsToValues: props => {
+      let currency = "GVT";
+      if (!props.wallets.find(wallet => wallet.currency === currency)) {
+        currency = props.wallets[0] ? props.wallets[0].currency : "";
+      }
+      return { currency, amount: "", address: "", twoFactorCode: "" };
+    },
     validationSchema: ({ t, availableToWithdrawal }) =>
       object().shape({
         amount: number()

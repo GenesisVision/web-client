@@ -7,8 +7,8 @@ import React from "react";
 import NumberFormat from "react-number-format";
 import { formatValue, roundTypeEnum } from "utils/formatter";
 
+import { isUseProfitability } from "../../helpers/dashboard-portfolio.helpers";
 import PortfolioEventLogo from "../dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
-import { composeEventLogoType } from "../dashboard-portfolio-event-logo/dashboard-portfolio-event-logo.helper";
 
 const formatDate = date => {
   const now = moment(new Date());
@@ -26,7 +26,7 @@ const DashboardPortfolioEvent = ({ event }) => {
   return (
     <div className="portfolio-event">
       <PortfolioEventLogo
-        type={composeEventLogoType(event.type)}
+        type={event.type}
         logo={event.logo}
         color={event.color}
       />
@@ -37,13 +37,21 @@ const DashboardPortfolioEvent = ({ event }) => {
             {event.description}
           </div>
           <span className="portfolio-event__value">
-            <Profitability value={formatValue(event.value)} prefix="sign">
+            {isUseProfitability(event) ? (
+              <Profitability value={formatValue(event.value)} prefix="sign">
+                <NumberFormat
+                  value={formatValue(event.value, roundTypeEnum.FLOOR, false)}
+                  displayType="text"
+                  suffix={` ${event.currency}`}
+                />
+              </Profitability>
+            ) : (
               <NumberFormat
                 value={formatValue(event.value, roundTypeEnum.FLOOR, false)}
                 displayType="text"
                 suffix={` ${event.currency}`}
               />
-            </Profitability>
+            )}
           </span>
         </div>
       </div>
