@@ -1,6 +1,6 @@
 import GeneralNotification from "components/general-notification/general-notification";
 import {
-  addFundNotificationsService,
+  addFundNotificationService,
   removeFundNotificationService
 } from "modules/fund-notifications/services/fund-notifications.services";
 import PropTypes from "prop-types";
@@ -19,7 +19,7 @@ class FundNotificationsGeneral extends Component {
   handleAdd = options => {
     const { services, t } = this.props;
     return services
-      .addFundNotificationsService(options)
+      .addFundNotificationService(options)
       .then(() =>
         this.success(
           t(`notifications.fund.general.${options.type}.enabled-alert`)
@@ -66,7 +66,7 @@ class FundNotificationsGeneral extends Component {
 FundNotificationsGeneral.propTypes = {
   settings: PropTypes.object,
   services: PropTypes.shape({
-    addFundNotificationsService: PropTypes.func,
+    addFundNotificationService: PropTypes.func,
     removeFundNotificationService: PropTypes.func
   })
 };
