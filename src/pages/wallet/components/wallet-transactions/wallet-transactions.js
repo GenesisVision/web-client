@@ -21,7 +21,6 @@ import {
 import WalletTransactionActions from "./wallet-transaction-action-cell";
 import {
   WALLET_TRANSACTIONS_COLUMNS,
-  WALLET_TRANSACTIONS_TYPES_ENUM,
   WALLET_TRANSACTION_ACTIONS_VALUES
 } from "./wallet-transactions.constants";
 
@@ -102,19 +101,9 @@ const WalletTransactions = ({ t }) => (
             <TableCell className="wallet-transactions__cell wallet-transactions__cell--date">
               {moment(transaction.date).format("DD-MM-YYYY, hh:mm a")}
             </TableCell>
-            <TableCell className="wallet-transactions__cell wallet-transactions__cell--source-type">
-              {t(
-                `wallet.transactions-types.${
-                  WALLET_TRANSACTIONS_TYPES_ENUM[transaction.sourceType]
-                }`
-              )}
-            </TableCell>
-            <TableCell className="wallet-transactions__cell wallet-transactions__cell--destination-type">
-              {t(
-                `wallet.transactions-types.${
-                  WALLET_TRANSACTIONS_TYPES_ENUM[transaction.destinationType]
-                }`
-              )}
+            <TableCell className="wallet-transactions__cell wallet-transactions__cell--information">
+              {transaction.information ||
+                "Вы вевели с кошелька, вот ваш tx hash"}
             </TableCell>
             <TableCell className="wallet-transactions__cell wallet-transactions__cell--amount">
               <NumberFormat
