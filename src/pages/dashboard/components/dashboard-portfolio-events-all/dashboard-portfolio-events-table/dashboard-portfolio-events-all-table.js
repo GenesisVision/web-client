@@ -17,6 +17,7 @@ import NumberFormat from "react-number-format";
 import { formatValue } from "utils/formatter";
 
 import { fetchPortfolioEvents } from "../../../services/dashboard-events.services";
+import { isUseProfitability } from "../../helpers/dashboard-portfolio.helpers";
 import {
   PORTFOLIO_EVENTS_COLUMNS,
   PORTFOLIO_EVENTS_DEFAULT_FILTERING,
@@ -98,14 +99,23 @@ class PortfolioEventsTableComponent extends Component {
                 {event.title}
               </TableCell>
               <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--amount">
-                <Profitability value={event.value}>
+                {isUseProfitability(event) ? (
+                  <Profitability value={formatValue(event.value)} prefix="sign">
+                    <NumberFormat
+                      value={formatValue(event.value, "floor", false)}
+                      thousandSeparator=" "
+                      displayType="text"
+                      suffix={" " + event.currency}
+                    />
+                  </Profitability>
+                ) : (
                   <NumberFormat
                     value={formatValue(event.value)}
                     thousandSeparator=" "
                     displayType="text"
                     suffix={" " + event.currency}
                   />
-                </Profitability>
+                )}
               </TableCell>
             </TableRow>
           )}
