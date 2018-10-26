@@ -117,9 +117,15 @@ export default compose(
   translate(),
   withFormik({
     displayName: "add-funds",
-    mapPropsToValues: () => ({
-      currency: "",
-      amount: ""
-    })
+    mapPropsToValues: props => {
+      let currency = "GVT";
+      if (!props.wallets.find(wallet => wallet.currency === currency)) {
+        currency = props.wallets[0] ? props.wallets[0].currency : "";
+      }
+      return {
+        currency,
+        amount: ""
+      };
+    }
   })
 )(WalletAddFundsForm);
