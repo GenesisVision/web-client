@@ -132,7 +132,10 @@ const WalletTransactions = ({ t }) => (
               {status && t(`wallet.transaction-statuses.${status}`)}
             </TableCell>
             <TableCell className="wallet-transactions__cell wallet-transactions__cell--actions">
-              <WalletTransactionActions transaction={transaction} />
+              {status !== "InProcess" &&
+                status !== "Cancelled" && (
+                  <WalletTransactionActions transaction={transaction} />
+                )}
             </TableCell>
           </TableRow>
         );
