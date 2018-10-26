@@ -1,6 +1,6 @@
 import GeneralNotification from "components/general-notification/general-notification";
 import {
-  addFundNotificationsService,
+  addFundNotificationService,
   removeFundNotificationService
 } from "modules/fund-notifications/services/fund-notifications.services";
 import PropTypes from "prop-types";
@@ -19,9 +19,11 @@ class FundNotificationsGeneral extends Component {
   handleAdd = options => {
     const { services, t } = this.props;
     return services
-      .addFundNotificationsService(options)
+      .addFundNotificationService(options)
       .then(() =>
-        this.success(t(`fund.general.${options.type}.enabled-alert`))
+        this.success(
+          t(`notifications.fund.general.${options.type}.enabled-alert`)
+        )
       );
   };
 
@@ -30,18 +32,20 @@ class FundNotificationsGeneral extends Component {
     return services
       .removeFundNotificationService(options)
       .then(() =>
-        this.success(t(`fund.general.${options.type}.disabled-alert`))
+        this.success(
+          t(`notifications.fund.general.${options.type}.disabled-alert`)
+        )
       );
   };
   render() {
-    const { t, settings, fundId } = this.props;
+    const { t, settings, assetId } = this.props;
     return (
       <div className="notification-settings">
         <h3>{t("notifications.fund.general.title")}</h3>
         <GeneralNotification
           name="FundNewsAndUpdates"
           label={t("notifications.fund.general.news-updates")}
-          fundId={fundId}
+          assetId={assetId}
           setting={settings.FundNewsAndUpdates}
           addNotification={this.handleAdd}
           removeNotification={this.handleRemove}
@@ -49,8 +53,16 @@ class FundNotificationsGeneral extends Component {
         <GeneralNotification
           name="FundEndOfPeriod"
           label={t("notifications.fund.general.end-of-period")}
-          fundId={fundId}
+          assetId={assetId}
           setting={settings.FundEndOfPeriod}
+          addNotification={this.handleAdd}
+          removeNotification={this.handleRemove}
+        />
+        <GeneralNotification
+          name="FundRebalancing"
+          label={t("notifications.fund.general.fund-rebalancing")}
+          assetId={assetId}
+          setting={settings.FundRebalancing}
           addNotification={this.handleAdd}
           removeNotification={this.handleRemove}
         />
@@ -62,7 +74,7 @@ class FundNotificationsGeneral extends Component {
 FundNotificationsGeneral.propTypes = {
   settings: PropTypes.object,
   services: PropTypes.shape({
-    addFundNotificationsService: PropTypes.func,
+    addFundNotificationService: PropTypes.func,
     removeFundNotificationService: PropTypes.func
   })
 };
@@ -74,7 +86,7 @@ FundNotificationsGeneral.defaultProps = {
 const mapDispatchToProps = dispatch => ({
   services: bindActionCreators(
     {
-      addFundNotificationsService,
+      addFundNotificationService,
       removeFundNotificationService
     },
     dispatch

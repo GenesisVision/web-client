@@ -9,15 +9,21 @@ import React from "react";
 const GVqr = ({ value, size, figureColor, backgroundColor, className }) => (
   <div
     className={classNames("gv-qr", className)}
-    style={{ background: backgroundColor }}
+    style={{
+      background: backgroundColor,
+      width: `${size}px`,
+      height: `${size}px`
+    }}
   >
-    <QRCode
-      className="gv-qr__code"
-      value={value}
-      bgColor={backgroundColor}
-      fgColor={figureColor}
-      size={size}
-    />
+    {value ? (
+      <QRCode
+        className="gv-qr__code"
+        value={value}
+        bgColor={backgroundColor}
+        fgColor={figureColor}
+        size={size}
+      />
+    ) : null}
   </div>
 );
 GVqr.propTypes = {

@@ -1,4 +1,6 @@
 @import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
+@import "styles/_sizes.scss";
 
 .dashboard-portfolio-events {
   flex: 1;
@@ -16,6 +18,9 @@
   }
 
   &__scroll-container {
+    @include media-breakpoint-landscape-phone() {
+      width: 265px;
+    }
     &:after {
       position: absolute;
       z-index: 3;

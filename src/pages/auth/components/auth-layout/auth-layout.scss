@@ -26,9 +26,7 @@
     width: 100%;
     max-width: 340px;
     min-height: 560px;
-    height: 100%;
     background-color: $panel-background-color;
-    overflow: hidden;
     border-radius: $border-radius;
   }
 
@@ -63,7 +61,7 @@
     justify-content: space-between;
   }
 
-  &__description {
+  &__quote {
     display: none;
     font-weight: 300;
     font-size: 44px;
@@ -78,9 +76,10 @@
 
   .gv-text-field__wrapper {
     width: 100%;
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
+    margin: 0;
+  }
+  .gv-checkbox-wrapper {
+    margin: 16px 0;
   }
 
   .gv-text-field__error {
@@ -130,8 +129,16 @@
       min-height: 600px;
     }
 
-    &__description {
-      display: flex;
+    &__quote {
+      display: block;
+      margin-top: 110px;
+      margin-left: 0;
+      max-width: 760px;
+    }
+
+    &__quote-footer {
+      font-size: 22px;
+      margin-top: 40px;
     }
   }
 

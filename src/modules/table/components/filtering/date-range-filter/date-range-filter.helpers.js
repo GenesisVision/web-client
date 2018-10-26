@@ -49,8 +49,12 @@ export const composeRequestValue = (
     case DateRangeFilterTypes.custom:
     default:
       return {
-        [fromFilterName]: moment(value.dateStart).toISOString(),
-        [toFilterName]: moment(value.dateEnd).toISOString()
+        [fromFilterName]: moment(value.dateStart)
+          .add(1, "d")
+          .toISOString(),
+        [toFilterName]: moment(value.dateEnd)
+          .add(1, "d")
+          .toISOString()
       };
   }
 };

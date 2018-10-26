@@ -23,7 +23,7 @@ class GeneralNotification extends Component {
     this.props
       .addNotification({
         type: this.props.name,
-        programId: this.props.programId
+        assetId: this.props.assetId
       })
       .finally(() => this.setState({ isPending: false }));
   };
@@ -33,7 +33,7 @@ class GeneralNotification extends Component {
     this.props
       .removeNotification({
         id: this.props.setting.id,
-        programId: this.props.programId,
+        assetId: this.props.assetId,
         type: this.props.name
       })
       .finally(() => this.setState({ isPending: false }));
@@ -61,7 +61,7 @@ GeneralNotification.propTypes = {
   setting: PropTypes.object,
   name: PropTypes.string,
   label: PropTypes.string,
-  programId: PropTypes.string,
+  assetId: PropTypes.string,
   addNotification: PropTypes.func,
   removeNotification: PropTypes.func
 };

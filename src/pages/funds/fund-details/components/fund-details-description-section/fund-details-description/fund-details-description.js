@@ -5,15 +5,16 @@ import FundAssetContainer from "components/fund-asset/fund-asset-container";
 import { GVButton } from "gv-react-components";
 import FundDepositContainer from "modules/fund-deposit/fund-deposit-container";
 import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
+import { FundDetailContext } from "pages/funds/fund-details/fund-details.page";
 import { FUND_NOTIFICATIONS_ROUTE } from "pages/notifications/notifications.routes";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import replaceParams from "utils/replace-params";
 
+import FundDetailsInvestment from "../fund-details-investment/fund-details-investment";
 import FundDetailsFavorite from "./fund-details-favorite";
 import FundDetailsNotification from "./fund-details-notificaton";
-import FundDetailsInvestment from "../fund-details-investment/fund-details-investment";
 
 export const composeFundNotificationsUrl = url => {
   return replaceParams(FUND_NOTIFICATIONS_ROUTE, {
@@ -47,13 +48,10 @@ class FundDetailsDescription extends PureComponent {
       t,
       isInvested,
       fundDescription,
-      onReinvestingClick,
       onFavoriteClick,
-      isReinvestPending,
       isFavoritePending,
       composeInvestmentData,
-      onChangeInvestmentStatus,
-      isOwnFund
+      onChangeInvestmentStatus
     } = this.props;
     const isFavorite =
       fundDescription.personalFundDetails &&
@@ -128,20 +126,17 @@ class FundDetailsDescription extends PureComponent {
               >
                 {t("fund-details-page.description.invest")}
               </GVButton>
-              <FundDepositContainer
-                open={isOpenInvestmentPopup}
-                id={fundDescription.id}
-                type={"fund"}
-                onClose={this.handleCloseInvestmentPopup}
-              />
-              {isInvested && (
-                <ProgramReinvestingWidget
-                  className="fund-details-description__reinvest"
-                  toggleReinvesting={onReinvestingClick}
-                  isReinvesting={fundDescription.personalFundDetails.isReinvest}
-                  disabled={isReinvestPending}
-                />
-              )}
+              <FundDetailContext.Consumer>
+                {({ updateDetails }) => (
+                  <FundDepositContainer
+                    open={isOpenInvestmentPopup}
+                    id={fundDescription.id}
+                    type={"fund"}
+                    onClose={this.handleCloseInvestmentPopup}
+                    onInvest={updateDetails}
+                  />
+                )}
+              </FundDetailContext.Consumer>
             </div>
             {isInvested && (
               <FundDetailsInvestment

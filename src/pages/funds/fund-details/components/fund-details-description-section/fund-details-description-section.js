@@ -9,6 +9,8 @@ const composeInvestmentData = fundDetails => {
 
   const { balanceGVT, profitPercent } = statistic;
   return {
+    pendingInput: personalFundDetails.pendingInput,
+    pendingOutput: personalFundDetails.pendingOutput,
     fundId: fundDetails.id,
     investedAmount: personalFundDetails.invested,
     value: personalFundDetails.value,
@@ -42,36 +44,6 @@ class FundDetailsDescriptionSection extends PureComponent {
 
     return newState;
   }
-
-  handleOnReinvestingClick = () => {
-    const { ui, fundDescription } = this.state;
-    const { id, personalFundDetails } = fundDescription;
-    const { isReinvest } = personalFundDetails;
-
-    const composeNewReinvestState = newState => ({
-      ...fundDescription,
-      personalFundDetails: {
-        ...personalFundDetails,
-        isReinvest: !isReinvest
-      }
-    });
-
-    this.setState({
-      ui: { ...ui, isReinvestPending: true },
-      fundDescription: composeNewReinvestState(!isReinvest)
-    });
-    toggleReinvesting(id, isReinvest)
-      .catch(e => {
-        this.setState({
-          fundDescription: composeNewReinvestState(isReinvest)
-        });
-      })
-      .finally(() => {
-        this.setState({
-          ui: { ...ui, isReinvestPending: false }
-        });
-      });
-  };
 
   handleOnFavoriteClick = () => {
     const { ui, fundDescription } = this.state;
@@ -120,8 +92,6 @@ class FundDetailsDescriptionSection extends PureComponent {
           redirectToLogin={redirectToLogin}
           isInvested={isInvested}
           fundDescription={fundDescription}
-          onReinvestingClick={this.handleOnReinvestingClick}
-          isReinvestPending={ui.isReinvestPending}
           onFavoriteClick={this.handleOnFavoriteClick}
           isFavoritePending={ui.isFavoritePending}
           composeInvestmentData={composeInvestmentData}

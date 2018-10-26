@@ -22,7 +22,7 @@ const AssetsTooltipBody = ({ assets }) => {
           )} GVT`}</div>
         </div>
         <div className="asset__change">
-          {assets[x].asset.changePercent && (
+          {assets[x].asset.changePercent !== null && (
             <Fragment>
               <div className="asset__change-percent">
                 <Profitability

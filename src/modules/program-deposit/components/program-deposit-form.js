@@ -1,14 +1,10 @@
 import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
-import moment from "moment";
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
-import {
-  calculateValueOfEntryFee,
-  convertToCurrency
-} from "utils/currency-converter";
+import { calculateValueOfEntryFee } from "utils/currency-converter";
 import { formatValue } from "utils/formatter";
 import { number, object } from "yup";
 
@@ -19,8 +15,7 @@ const ProgramDepositForm = ({
   currency,
   disabled,
   handleSubmit,
-  errorMessage,
-  type
+  errorMessage
 }) => {
   const fee = calculateValueOfEntryFee(values.amount, info.entryFee);
   const gvFee = calculateValueOfEntryFee(values.amount, info.gvCommission);
@@ -32,8 +27,7 @@ const ProgramDepositForm = ({
     const { floatValue, formattedValue } = values;
     const { availableInWallet, availableToInvest } = info;
     const fee = calculateValueOfEntryFee(floatValue, info.entryFee);
-    const validateAvailableToInvest = () =>
-      type === "program" ? floatValue <= availableToInvest : true;
+    const validateAvailableToInvest = () => floatValue <= availableToInvest;
     return (
       formattedValue === "" ||
       (floatValue <= parseFloat(availableInWallet - fee) &&
@@ -54,14 +48,6 @@ const ProgramDepositForm = ({
         allowNegative={false}
         isAllowed={isAllow}
       />
-      <div className="invest-popup__currency">
-        <NumberFormat
-          value={formatValue(convertToCurrency(values.amount, info.rate))}
-          prefix="= "
-          suffix={` ${currency}`}
-          displayType="text"
-        />
-      </div>
       <ul className="dialog-list">
         <li className="dialog-list__item">
           <span className="dialog-list__title">

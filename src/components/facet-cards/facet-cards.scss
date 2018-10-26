@@ -88,13 +88,13 @@ $facet-height: 280px;
   }
 
   &__logo-wrapper {
-    height: 65%;
+    max-height: 65%;
+    margin: auto;
   }
 
   &__logo {
     width: 100%;
     max-width: 315px;
-    max-height: 100%;
     object-fit: cover;
   }
 

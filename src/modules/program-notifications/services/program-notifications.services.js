@@ -3,6 +3,7 @@ import {
   removeNotificationSetting
 } from "modules/notification-settings/actions/notification-settings.actions";
 import {
+  addErrorMessage,
   addProgramNotifications,
   fetchProgramNotifications,
   toggleProgramNotifications
@@ -15,26 +16,30 @@ export const fetchProgramNotificationsService = id => dispatch => {
 };
 
 export const addProgramNotificationService = opts => dispatch => {
-  return dispatch(addNotificationSetting(opts)).then(() =>
-    dispatch(fetchProgramNotificationsService(opts.programId))
-  );
+  const promise = dispatch(addNotificationSetting(opts));
+
+  promise
+    .then(() => dispatch(fetchProgramNotificationsService(opts.assetId)))
+    .catch(data => dispatch(addErrorMessage(data.errorMessage)));
+
+  return promise;
 };
 
 export const removeProgramNotificationService = ({
   id,
-  programId
+  assetId
 }) => dispatch => {
   return dispatch(removeNotificationSetting(id)).then(() =>
-    dispatch(fetchProgramNotificationsService(programId))
+    dispatch(fetchProgramNotificationsService(assetId))
   );
 };
 
 export const toggleProgramNotificationsService = ({
   id,
   enabled,
-  programId
+  assetId
 }) => dispatch => {
   return dispatch(toggleProgramNotifications(id, enabled)).then(() =>
-    dispatch(fetchProgramNotificationsService(programId))
+    dispatch(fetchProgramNotificationsService(assetId))
   );
 };

@@ -18,6 +18,10 @@ import {
   getFundStatistic
 } from "./services/fund-details.service";
 
+export const FundDetailContext = React.createContext({
+  updateDetails: () => {}
+});
+
 class FundDetailsPage extends PureComponent {
   state = {
     errorCode: null,
@@ -38,12 +42,16 @@ class FundDetailsPage extends PureComponent {
     this.props.service
       .getFundDescription(this.description.data.id)
       .then(data => {
-        this.description = data;
+        this.description = data.data;
         this.setState({ isPending: false });
       });
   };
 
   componentDidMount() {
+    this.updateDetails();
+  }
+
+  updateDetails = () => {
     const { service } = this.props;
     this.setState({ isPending: true });
     service
@@ -77,7 +85,8 @@ class FundDetailsPage extends PureComponent {
       .finally(() => {
         this.setState({ isPending: false });
       });
-  }
+  };
+
   render() {
     const { currency, service, isAuthenticated } = this.props;
     const { errorCode } = this.state;
@@ -88,34 +97,40 @@ class FundDetailsPage extends PureComponent {
     if (!this.description.data) return null;
     return (
       <Page title={this.description.data.title}>
-        <div className="fund-details">
-          <div className="fund-details__section">
-            <FundDetailsNavigation goBack={service.goBack} />
-            <FundDetailsDescriptionSection
-              fundDescriptionData={this.description}
-              isAuthenticated={isAuthenticated}
-              redirectToLogin={service.redirectToLogin}
-              onChangeInvestmentStatus={this.changeInvestmentStatus}
-            />
+        <FundDetailContext.Provider
+          value={{
+            updateDetails: this.updateDetails
+          }}
+        >
+          <div className="fund-details">
+            <div className="fund-details__section">
+              <FundDetailsNavigation goBack={service.goBack} />
+              <FundDetailsDescriptionSection
+                fundDescriptionData={this.description}
+                isAuthenticated={isAuthenticated}
+                redirectToLogin={service.redirectToLogin}
+                onChangeInvestmentStatus={this.changeInvestmentStatus}
+              />
+            </div>
+            <div className="fund-details__section">
+              <FundDetailsStatisticSection
+                programId={this.description.data.id}
+                currency={currency}
+                statisticData={this.statistic}
+                profitChartData={this.profitChart}
+                balanceChartData={this.balanceChart}
+              />
+            </div>
+            <div className="fund-details__history">
+              <FundDetailsHistorySection
+                fundId={this.description.data.id}
+                currency={currency}
+                rebalancingData={this.rebalancing}
+                eventsData={this.events}
+              />
+            </div>
           </div>
-          <div className="fund-details__section">
-            <FundDetailsStatisticSection
-              programId={this.description.data.id}
-              currency={currency}
-              statisticData={this.statistic}
-              profitChartData={this.profitChart}
-              balanceChartData={this.balanceChart}
-            />
-          </div>
-          <div className="fund-details__history">
-            <FundDetailsHistorySection
-              fundId={this.description.data.id}
-              currency={currency}
-              rebalancingData={this.rebalancing}
-              eventsData={this.events}
-            />
-          </div>
-        </div>
+        </FundDetailContext.Provider>
       </Page>
     );
   }

@@ -1,16 +1,15 @@
 import "./fund-withdraw.scss";
 
-import { Field, withFormik } from "formik";
-import React from "react";
-import { translate } from "react-i18next";
-import Yup from "yup";
-
 import DaysLeftWidget from "components/days-left-widget/days-left-widget";
 import TraderAvatar from "components/program-avatar/program-avatar";
-import FormError from "shared/components/form/form-error/form-error";
-import InputText from "shared/components/form/input-text/input-text";
+import { Field, withFormik } from "formik";
 import PopupButtons from "popup/components/popup-buttons/popup-buttons";
 import PopupHeader from "popup/components/popup-header/popup-header";
+import React from "react";
+import { translate } from "react-i18next";
+import FormError from "shared/components/form/form-error/form-error";
+import InputText from "shared/components/form/input-text/input-text";
+import Yup from "yup";
 
 const FundWithdraw = ({
   t,
@@ -34,9 +33,7 @@ const FundWithdraw = ({
                   level={fundWithdraw.level}
                 />
               </div>
-              <div className="fund-withdraw__name">
-                {fundWithdraw.title}
-              </div>
+              <div className="fund-withdraw__name">{fundWithdraw.title}</div>
             </div>
           </div>
           <div className="fund-withdraw__info-cell">
@@ -51,14 +48,14 @@ const FundWithdraw = ({
             <div className="metric">
               <div className="metric__value">{fundWithdraw.ownBalance}</div>
               <div className="metric__description">
-                {t("fund-withdraw.your-balance")} {fundWithdraw.currency}
+                {t("withdraw-fund.your-balance")} {fundWithdraw.currency}
               </div>
             </div>
           </div>
         </div>
         <div className="fund-withdraw__calculator">
           <div className="fund-withdraw__calculator-header">
-            {t("fund-withdraw.how-much-withdraw")}
+            {t("withdraw-fund.how-much-withdraw")}
           </div>
           <div className="fund-withdraw__calculator-cell input-token">
             <div className="input-gvt__token">
@@ -72,14 +69,14 @@ const FundWithdraw = ({
               />
             </div>
             <div className="input-token__description">
-              {t("fund-withdraw.enter-percent", {
+              {t("withdraw-fund.enter-percent", {
                 currency: fundWithdraw.currency
               })}
             </div>
           </div>
           <div>
             <span>
-              {t("fund-withdraw.minimal-balance")} $
+              {t("withdraw-fund.minimal-balance")} $
               {fundWithdraw.minAccountBalanceUsd} (
               {fundWithdraw.minAccountBalance} {fundWithdraw.currency})
             </span>

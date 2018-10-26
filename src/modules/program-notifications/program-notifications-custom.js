@@ -1,6 +1,7 @@
 import Chip from "components/chip/chip";
 import Dialog from "components/dialog/dialog";
 import { GVButton } from "gv-react-components";
+import { addErrorMessage } from "modules/program-notifications/actions/program-notifications.actions";
 import CustomNotification from "modules/program-notifications/custom-notification";
 import { addProgramNotificationService } from "modules/program-notifications/services/program-notifications.services";
 import PropTypes from "prop-types";
@@ -26,7 +27,7 @@ class ProgramNotificationsCustom extends Component {
     const { t } = this.props;
     this.props.services
       .addProgramNotificationService({
-        programId: this.props.program.programId,
+        assetId: this.props.program.assetId,
         ...values
       })
       .then(() => this.handleClosePopup())
@@ -36,7 +37,9 @@ class ProgramNotificationsCustom extends Component {
   };
 
   handleClosePopup = () => {
-    this.setState({ isOpenCreatePopup: false });
+    this.setState({ isOpenCreatePopup: false }, () => {
+      this.props.dispatch(addErrorMessage());
+    });
   };
 
   handleOpenPopup = () => {
@@ -44,12 +47,12 @@ class ProgramNotificationsCustom extends Component {
   };
 
   render() {
-    const { t, program } = this.props;
+    const { t, program, errorMessage } = this.props;
     return (
       <div className="notification-settings custom-notifications">
         <h3>{t("notifications.program.custom.title")}</h3>
         {program.settingsCustom.map(settings => (
-          <CustomNotification settings={settings} key={settings.programId} />
+          <CustomNotification settings={settings} key={settings.assetId} />
         ))}
         <div className="custom-notification__create">
           <GVButton variant="text" onClick={this.handleOpenPopup}>
@@ -63,6 +66,7 @@ class ProgramNotificationsCustom extends Component {
         >
           <ProgramNotificationCreateForm
             program={program}
+            errorMessage={errorMessage}
             onSubmit={this.handleSubmit}
           />
         </Dialog>
@@ -75,6 +79,10 @@ ProgramNotificationsCustom.propTypes = {
   settings: PropTypes.array
 };
 
+const mapStateToProps = state => ({
+  errorMessage: state.programNotifications.errorMessage
+});
+
 const mapDispatchToProps = dispatch => ({
   services: bindActionCreators({ addProgramNotificationService }, dispatch),
   dispatch
@@ -83,7 +91,7 @@ const mapDispatchToProps = dispatch => ({
 export default compose(
   translate(),
   connect(
-    undefined,
+    mapStateToProps,
     mapDispatchToProps
   )
 )(ProgramNotificationsCustom);

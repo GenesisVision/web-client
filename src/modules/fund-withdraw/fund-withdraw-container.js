@@ -1,42 +1,57 @@
 import Dialog from "components/dialog/dialog";
 import FundWithdrawPopup from "modules/fund-withdraw/components/fund-withdraw-popup";
 import {
+  alert,
   getFundWithdrawInfo,
   withdrawFundById
 } from "modules/fund-withdraw/servives/fund-withdraw.services";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { compose } from "redux";
+import { investorApiProxy } from "services/api-client/investor-api";
+import authService from "services/auth-service";
 
-const FundWithdrawContainer = props => {
-  const { open, onClose, currency, services, id, type } = props;
-  const handleWithdraw = (id, percent) => {
-    return services.withdrawFundById(id, percent)
+class FundWithdrawContainer extends PureComponent {
+  state = { error: "" };
+
+  handleWithdraw = (id, percent) => {
+    return investorApiProxy
+      .v10InvestorFundsByIdWithdrawByPercentPost(
+        id,
+        percent,
+        authService.getAuthArg()
+      )
       .then(res => {
-        debugger;
-        onClose();
+        this.props.onClose();
+        this.props.services.alert(
+          "success",
+          "withdraw-fund.success-alert-message",
+          true
+        );
         return res;
       })
       .catch(error => {
-        debugger;
-        onClose();
-        return error;
+        this.setState({ error: error.errorMessage || error.error });
       });
   };
-  return (
-    <Dialog open={open} onClose={onClose}>
-      <FundWithdrawPopup
-        currency={currency}
-        fetchInfo={() => services.getFundWithdrawInfo(id)}
-        withdraw={percent => handleWithdraw(id, percent)}
-        type={type}
-      />
-    </Dialog>
-  );
-};
+
+  render() {
+    const { open, onClose, currency, services, id } = this.props;
+    return (
+      <Dialog open={open} onClose={onClose}>
+        <FundWithdrawPopup
+          currency={currency}
+          fetchInfo={() => services.getFundWithdrawInfo(id)}
+          withdraw={percent => this.handleWithdraw(id, percent)}
+          error={this.state.error}
+        />
+      </Dialog>
+    );
+  }
+}
 
 FundWithdrawContainer.propTypes = {
   open: PropTypes.bool,
@@ -53,8 +68,7 @@ const mapDispathToProps = dispatch => ({
     {
       getFundWithdrawInfo,
       withdrawFundById,
-      getFundWithdrawInfo,
-      withdrawFundById
+      alert
     },
     dispatch
   )

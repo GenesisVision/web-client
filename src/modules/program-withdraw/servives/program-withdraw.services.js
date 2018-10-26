@@ -26,3 +26,5 @@ export const withdrawProgramById = (id, amount) => {
       return response;
     });
 };
+export const alert = (type, text, translate = false) => dispatch =>
+  dispatch(alertMessageActions[type](text, translate));

@@ -4,6 +4,7 @@ import authService from "services/auth-service";
 export const ADD_PROGRAM_NOTIFICATIONS = "ADD_PROGRAM_NOTIFICATIONS";
 export const FETCH_PROGRAM_NOTIFICATIONS = "FETCH_PROGRAM_NOTIFICATIONS";
 export const TOGGLE_PROGRAM_NOTIFICATION = "TOGGLE_PROGRAM_NOTIFICATION";
+export const ADD_ERROR_MESSAGE = "ADD_ERROR_MESSAGE";
 
 export const addProgramNotifications = settings => ({
   type: ADD_PROGRAM_NOTIFICATIONS,
@@ -16,6 +17,11 @@ export const fetchProgramNotifications = id => ({
     id,
     authService.getAuthArg()
   )
+});
+
+export const addErrorMessage = errorMessage => ({
+  type: ADD_ERROR_MESSAGE,
+  errorMessage
 });
 
 export const toggleProgramNotifications = (id, enabled) => ({

@@ -19,6 +19,7 @@ class FundDetailsInvestment extends PureComponent {
   };
 
   handleCloseWithdrawalPopup = () => {
+    this.props.onChangeInvestmentStatus();
     this.setState({ isOpenWithdrawalPopup: false });
   };
 
@@ -28,11 +29,12 @@ class FundDetailsInvestment extends PureComponent {
       className,
       fundId,
       investedAmount,
-      balanceAmount,
       balanceCurrency,
       profitPercent,
       status,
-      value
+      value,
+      pendingInput,
+      pendingOutput
     } = this.props;
     return (
       <Surface className={"fund-details-investment " + className}>
@@ -77,6 +79,30 @@ class FundDetailsInvestment extends PureComponent {
             </span>
             <ProgramStatus status={status} />
           </div>
+          {pendingInput !== 0 && (
+            <div className="fund-details-investment__short-statistic-item">
+              <span className="fund-details-investment__short-statistic-subheading">
+                {t("fund-details-page.description.pending-input")}
+              </span>
+              <NumberFormat
+                value={formatValue(pendingInput)}
+                suffix={` ${balanceCurrency}`}
+                displayType="text"
+              />
+            </div>
+          )}
+          {pendingOutput !== 0 && (
+            <div className="fund-details-investment__short-statistic-item">
+              <span className="fund-details-investment__short-statistic-subheading">
+                {t("fund-details-page.description.pending-output")}
+              </span>
+              <NumberFormat
+                value={formatValue(pendingOutput)}
+                suffix={` ${balanceCurrency}`}
+                displayType="text"
+              />
+            </div>
+          )}
         </div>
         <div className="fund-details-investment__footer">
           <GVButton

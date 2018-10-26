@@ -5,6 +5,7 @@ import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
+import FormError from "shared/components/form/form-error/form-error";
 import {
   calculateValueOfEntryFee,
   convertToCurrency
@@ -78,7 +79,7 @@ const FundDepositForm = ({
             {t("deposit-fund.gv-commission")}
           </span>
           <span className="dialog-list__value">
-            {info.gvCommission * 100}%
+            {info.gvCommission}%
             <NumberFormat
               value={formatValue(gvFee)}
               prefix={" ("}
@@ -100,7 +101,9 @@ const FundDepositForm = ({
           </span>
         </li>
       </ul>
-      <div className="form-error">{errorMessage}</div>
+      <div className="form-error">
+        <FormError error={errorMessage} />
+      </div>
       <div className="dialog__buttons">
         <GVButton
           type="submit"
