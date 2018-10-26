@@ -9,6 +9,8 @@ const composeInvestmentData = fundDetails => {
 
   const { balanceGVT, profitPercent } = statistic;
   return {
+    pendingInput: personalFundDetails.pendingInput,
+    pendingOutput: personalFundDetails.pendingOutput,
     fundId: fundDetails.id,
     investedAmount: personalFundDetails.invested,
     value: personalFundDetails.value,
