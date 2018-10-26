@@ -695,6 +695,8 @@
     "body": "Page Not Found"
   },
   "program-actions": {
+    "remove-from-favorites": "Remove from favorites",
+    "add-to-favorites": "Add to favorites",
     "invest": "Invest",
     "withdraw": "Withdraw",
     "details": "Details"

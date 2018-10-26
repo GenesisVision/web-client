@@ -39,10 +39,13 @@ class ProgramCard extends Component {
   handleOpenDropdown = event => this.setState({ anchor: event.currentTarget });
   handleCloseDropdown = () => this.setState({ anchor: null });
   render() {
-    const { t, program, onExpandClick } = this.props;
+    const { t, program, onExpandClick, toggleFavorite } = this.props;
     const programDetailsUrl = replaceParams(PROGRAM_DETAILS_ROUTE, {
       [`:${PROGRAM_SLUG_URL_PARAM_NAME}`]: program.url
     });
+    const handleToggleFavorite = () => {
+      toggleFavorite(program.id, program.personalDetails.isFavorite);
+    };
     return (
       <div onClick={onExpandClick} className="programs-cards__card">
         <div className="programs-cards__row">
@@ -108,6 +111,26 @@ class ProgramCard extends Component {
                     {t("program-actions.details")}
                   </GVButton>
                 </Link>
+                {program.personalDetails &&
+                  !program.personalDetails.isFavorite && (
+                    <GVButton
+                      variant="text"
+                      color="secondary"
+                      onClick={handleToggleFavorite}
+                    >
+                      {t("program-actions.add-to-favorites")}
+                    </GVButton>
+                  )}
+                {program.personalDetails &&
+                  program.personalDetails.isFavorite && (
+                    <GVButton
+                      variant="text"
+                      color="secondary"
+                      onClick={handleToggleFavorite}
+                    >
+                      {t("program-actions.remove-from-favorites")}
+                    </GVButton>
+                  )}
               </div>
             </Popover>
           </div>
