@@ -4,6 +4,7 @@ import authService from "services/auth-service";
 export const ADD_FUND_NOTIFICATIONS = "ADD_FUND_NOTIFICATIONS";
 export const FETCH_FUND_NOTIFICATIONS = "FETCH_FUND_NOTIFICATIONS";
 export const TOGGLE_FUND_NOTIFICATION = "TOGGLE_FUND_NOTIFICATION";
+export const ADD_ERROR_MESSAGE = "ADD_ERROR_MESSAGE";
 
 export const addFundNotifications = settings => ({
   type: ADD_FUND_NOTIFICATIONS,
@@ -16,6 +17,11 @@ export const fetchFundNotifications = id => ({
     id,
     authService.getAuthArg()
   )
+});
+
+export const addErrorMessage = errorMessage => ({
+  type: ADD_ERROR_MESSAGE,
+  errorMessage
 });
 
 export const toggleFundNotifications = (id, enabled) => ({

@@ -1,12 +1,13 @@
 import {
+  addNotificationSetting,
+  removeNotificationSetting
+} from "modules/notification-settings/actions/notification-settings.actions";
+import {
+  addErrorMessage,
   addFundNotifications,
   fetchFundNotifications,
   toggleFundNotifications
 } from "modules/fund-notifications/actions/fund-notifications.actions";
-import {
-  addNotificationSetting,
-  removeNotificationSetting
-} from "modules/notification-settings/actions/notification-settings.actions";
 
 export const fetchFundNotificationsService = id => dispatch => {
   return dispatch(fetchFundNotifications(id)).then(data =>
@@ -14,24 +15,28 @@ export const fetchFundNotificationsService = id => dispatch => {
   );
 };
 
-export const addFundNotificationsService = opts => dispatch => {
-  return dispatch(addNotificationSetting(opts)).then(() =>
-    dispatch(fetchFundNotificationsService(opts.fundId))
-  );
+export const addFundNotificationService = opts => dispatch => {
+  const promise = dispatch(addNotificationSetting(opts));
+
+  promise
+    .then(() => dispatch(fetchFundNotificationsService(opts.assetId)))
+    .catch(data => dispatch(addErrorMessage(data.errorMessage)));
+
+  return promise;
 };
 
-export const removeFundNotificationService = ({ id, fundId }) => dispatch => {
+export const removeFundNotificationService = ({ id, assetId }) => dispatch => {
   return dispatch(removeNotificationSetting(id)).then(() =>
-    dispatch(fetchFundNotificationsService(fundId))
+    dispatch(fetchFundNotificationsService(assetId))
   );
 };
 
 export const toggleFundNotificationsService = ({
   id,
   enabled,
-  fundId
+  assetId
 }) => dispatch => {
   return dispatch(toggleFundNotifications(id, enabled)).then(() =>
-    dispatch(fetchFundNotificationsService(fundId))
+    dispatch(fetchFundNotificationsService(assetId))
   );
 };

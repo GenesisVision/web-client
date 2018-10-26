@@ -38,14 +38,14 @@ class ProgramNotificationsGeneral extends Component {
       );
   };
   render() {
-    const { t, settings, programId } = this.props;
+    const { t, settings, assetId } = this.props;
     return (
       <div className="notification-settings">
         <h3>{t("notifications.program.general.title")}</h3>
         <GeneralNotification
           name="ProgramNewsAndUpdates"
           label={t("notifications.program.general.news-updates")}
-          programId={programId}
+          assetId={assetId}
           setting={settings.ProgramNewsAndUpdates}
           addNotification={this.handleAdd}
           removeNotification={this.handleRemove}
@@ -53,7 +53,7 @@ class ProgramNotificationsGeneral extends Component {
         <GeneralNotification
           name="ProgramEndOfPeriod"
           label={t("notifications.program.general.end-of-period")}
-          programId={programId}
+          assetId={assetId}
           setting={settings.ProgramEndOfPeriod}
           addNotification={this.handleAdd}
           removeNotification={this.handleRemove}
