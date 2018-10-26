@@ -42,7 +42,7 @@ class FundDetailsPage extends PureComponent {
     this.props.service
       .getFundDescription(this.description.data.id)
       .then(data => {
-        this.description = data;
+        this.description = data.data;
         this.setState({ isPending: false });
       });
   };

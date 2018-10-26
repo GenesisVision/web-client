@@ -10,6 +10,8 @@ const composeInvestmentData = programDetails => {
   const { balanceBase, profitPercent } = statistic;
 
   return {
+    pendingInput: personalProgramDetails.pendingInput,
+    pendingOutput: personalProgramDetails.pendingOutput,
     programId: programDetails.id,
     investedAmount: personalProgramDetails.invested,
     balanceAmount: balanceBase.amount,

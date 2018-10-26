@@ -1,7 +1,6 @@
 import { investorApiProxy } from "services/api-client/investor-api";
 import authService from "services/auth-service";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import { managerApiProxy } from "services/api-client/manager-api";
 
 export const getFundWithdrawInfo = id => (dispatch, getState) => {
   const { accountSettings } = getState();
@@ -22,9 +21,8 @@ export const withdrawFundById = (id, percent) => {
     .then(response => {
       alertMessageActions.success("fund-withdraw.success-alert-message", true);
       return response;
-    })
-    .catch(error => {
-      alertMessageActions.success(error.errorMessage, true);
-      return error;
     });
 };
+
+export const alert = (type, text, translate = false) => dispatch =>
+  dispatch(alertMessageActions[type](text, translate));
