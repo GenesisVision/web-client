@@ -61,7 +61,7 @@
     justify-content: space-between;
   }
 
-  &__description {
+  &__quote {
     display: none;
     font-weight: 300;
     font-size: 44px;
@@ -129,8 +129,16 @@
       min-height: 600px;
     }
 
-    &__description {
-      display: flex;
+    &__quote {
+      display: block;
+      margin-top: 110px;
+      margin-left: 0;
+      max-width: 760px;
+    }
+
+    &__quote-footer {
+      font-size: 22px;
+      margin-top: 40px;
     }
   }
 

@@ -279,7 +279,32 @@
     }
   },
   "auth": {
-    "text": "A Brief History Of Creation",
+    "quotes": {
+      "0": {
+        "quote": "An investor without investment objectives is like a traveler without a destination.",
+        "author": "Ralph Seger"
+      },
+      "1": {
+        "quote": "Sometimes your best investments are the ones you don't make.",
+        "author": "Donald Trump"
+      },
+      "2": {
+        "quote": "Never depend on a single income, make an investment to create a second source.",
+        "author": "Warren Buffet"
+      },
+      "3": {
+        "quote": "Put not your trust in money, but put your money in trust.",
+        "author": "Oliver Wendell Holmes"
+      },
+      "4": {
+        "quote": "Never stop investing. Never stop improving. Never stop doing something new.",
+        "author": "Bob Parsons"
+      },
+      "5": {
+        "quote": "When you invest you are buying a day that you don't have to work.",
+        "author": "Aya Laraya"
+      }
+    },
     "tabs": {
       "investor": "Investor",
       "manager": "Manager"
