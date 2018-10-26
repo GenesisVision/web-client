@@ -40,6 +40,10 @@ export const fetchWalletTransactions = filters => (dispatch, getState) => {
   );
 };
 
+export const updateWalletTransactionsFilters = filters => dispatch => {
+  dispatch(actions.updateWalletTransactionsFilters(filters));
+};
+
 export const cancelWithdrawRequest = txId => (dispatch, getState) => {
   const authorization = authService.getAuthArg();
 

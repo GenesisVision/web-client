@@ -14,7 +14,10 @@ import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { formatValue, roundTypeEnum } from "utils/formatter";
 
-import { fetchWalletTransactions } from "../../services/wallet.services";
+import {
+  fetchWalletTransactions,
+  updateWalletTransactionsFilters
+} from "../../services/wallet.services";
 import WalletTransactionActions from "./wallet-transaction-action-cell";
 import {
   WALLET_TRANSACTIONS_COLUMNS,
@@ -52,7 +55,9 @@ const WalletTransactions = ({ t }) => (
     <TableContainer
       title="Transactions"
       getItems={fetchWalletTransactions}
+      updateFilters={updateWalletTransactionsFilters}
       getStorePlace={getWalletTransactionsPlace}
+      isResetToDefaultOnUnmount={true}
       isFetchOnMount={true}
       renderFilters={(updateFilter, filtering) => {
         return (
