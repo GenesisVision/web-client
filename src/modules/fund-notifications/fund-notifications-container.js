@@ -10,6 +10,7 @@ class FundNotificationsContainer extends Component {
   componentDidMount() {
     this.props.services.fetchFundNotificationsService(this.props.id);
   }
+
   render() {
     const { fund } = this.props;
     if (!fund) return null;
@@ -21,11 +22,9 @@ FundNotificationsContainer.propTypes = {
   id: PropTypes.string
 };
 
-const mapStateToProps = (state, props) => {
-  return {
-    fund: state.fundNotifications[props.id]
-  };
-};
+const mapStateToProps = (state, props) => ({
+  fund: state.fundNotifications[props.id]
+});
 
 const mapDispatchToProps = dispatch => ({
   services: bindActionCreators({ fetchFundNotificationsService }, dispatch)
