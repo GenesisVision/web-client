@@ -64,7 +64,9 @@ const WalletAddFundsForm = ({
         />
         <div className="gv-text-field__wrapper">
           <label className="gv-text-field__label gv-text-field__label--shrink">
-            {t("wallet-add-funds.will-get")}
+            {currency === "GVT"
+              ? t("wallet-add-funds.will-get-gvt")
+              : t("wallet-add-funds.will-get")}
           </label>
           <div className="gv-text-field wallet-add-funds-popup__will-get">
             <div className="gv-text-field__input dialog-field__value">
