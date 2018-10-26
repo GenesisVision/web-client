@@ -276,6 +276,7 @@ $description-block-width: 250px;
     max-height: 300px;
     overflow: hidden;
     word-break: break-all;
+    white-space: pre-wrap;
   }
 
   &__chart {
