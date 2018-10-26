@@ -17,12 +17,12 @@
 
   &__profile {
     display: none;
-    margin-left: 45px;
+    margin-left: auto;
   }
 
   &__wallet {
     display: none !important;
-    margin-right: 40px;
+    margin-right: auto;
   }
 
   &__right,
@@ -42,11 +42,14 @@
   }
 
   &__separator {
-    flex-grow: 1;
-    display: none;
-    border-left: 2px solid #1f2b36;
-    margin: 0 30px;
+    flex-grow: 2;
+    justify-content: center;
     align-self: stretch;
+    display: none;
+    &:before {
+      content: "";
+      border-left: 2px solid #1f2b36;
+    }
   }
 
   &__buttons {
@@ -63,6 +66,10 @@
       .select {
         min-width: 100px;
       }
+    }
+    &__right {
+      flex-grow: 2;
+      justify-content: flex-end;
     }
     &__menu {
       display: flex;

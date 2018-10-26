@@ -8,10 +8,10 @@
   }
 
   &__header {
-    padding: 20px;
+    padding: 18px;
 
-    @include media-breakpoint-desktop {
-      padding: 32px 0;
+    @media (min-width: 1360px) {
+      padding: 18px 0;
     }
   }
 
