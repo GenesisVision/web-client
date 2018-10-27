@@ -93,88 +93,88 @@ const ProgramDetailsStatistics = ({
       <div className="program-details-statistics__particular-information">
         <div className="program-details-statistics__column">
           <div className="program-details-statistics__item program-details-statistics__item--half">
-          <span className="program-details-statistics__label">
-            {t("program-details-page.statistics.trades")}
-          </span>
+            <span className="program-details-statistics__label">
+              {t("program-details-page.statistics.trades")}
+            </span>
             <span className="program-details-statistics__value">
-            <NumberFormat
-              value={statistic.trades}
-              thousandSeparator={" "}
-              displayType="text"
-            />
-          </span>
+              <NumberFormat
+                value={statistic.trades}
+                thousandSeparator={" "}
+                displayType="text"
+              />
+            </span>
           </div>
 
           <div className="program-details-statistics__item program-details-statistics__item--half program-details-statistics__item--secondary">
-          <span className="program-details-statistics__label">
-            {t("program-details-page.statistics.profit-factor")}
-          </span>
+            <span className="program-details-statistics__label">
+              {t("program-details-page.statistics.profit-factor")}
+            </span>
             <span className="program-details-statistics__value">
-            <NumberFormat
-              value={statistic.profitFactor}
-              displayType="text"
-              suffix="%"
-              decimalScale={2}
-            />
-          </span>
+              <NumberFormat
+                value={statistic.profitFactor}
+                displayType="text"
+                suffix="%"
+                decimalScale={2}
+              />
+            </span>
           </div>
 
           <div className="program-details-statistics__item program-details-statistics__item--half program-details-statistics__item--secondary">
-          <span className="program-details-statistics__label">
-            {t("program-details-page.statistics.max-drawdown")}
-          </span>
+            <span className="program-details-statistics__label">
+              {t("program-details-page.statistics.max-drawdown")}
+            </span>
             <span className="program-details-statistics__value">
-            <NumberFormat
-              value={statistic.maxDrawdown}
-              displayType="text"
-              suffix="%"
-              decimalScale={2}
-            />
-          </span>
+              <NumberFormat
+                value={statistic.maxDrawdown}
+                displayType="text"
+                suffix="%"
+                decimalScale={2}
+              />
+            </span>
           </div>
         </div>
 
         <div className="program-details-statistics__column">
           <div className="program-details-statistics__item program-details-statistics__item--half program-details-statistics__item--secondary">
-          <span className="program-details-statistics__label">
-            {t("program-details-page.statistics.success-trades")}
-          </span>
+            <span className="program-details-statistics__label">
+              {t("program-details-page.statistics.success-trades")}
+            </span>
             <span className="program-details-statistics__value">
-            <NumberFormat
-              value={statistic.successTradesPercent}
-              decimalScale={2}
-              displayType="text"
-              suffix="%"
-            />
-          </span>
+              <NumberFormat
+                value={statistic.successTradesPercent}
+                decimalScale={2}
+                displayType="text"
+                suffix="%"
+              />
+            </span>
           </div>
 
           <div className="program-details-statistics__item program-details-statistics__item--half program-details-statistics__item--secondary">
-          <span className="program-details-statistics__label">
-            {t("program-details-page.statistics.sharpe-ratio")}
-          </span>
+            <span className="program-details-statistics__label">
+              {t("program-details-page.statistics.sharpe-ratio")}
+            </span>
             <span className="program-details-statistics__value">
-            <NumberFormat
-              value={statistic.sharpeRatio}
-              displayType="text"
-              suffix="%"
-              decimalScale={2}
-            />
-          </span>
+              <NumberFormat
+                value={statistic.sharpeRatio}
+                displayType="text"
+                suffix="%"
+                decimalScale={2}
+              />
+            </span>
           </div>
 
           <div className="program-details-statistics__item program-details-statistics__item--half program-details-statistics__item--secondary">
-          <span className="program-details-statistics__label">
-            {t("program-details-page.statistics.sortino-ratio")}
-          </span>
+            <span className="program-details-statistics__label">
+              {t("program-details-page.statistics.sortino-ratio")}
+            </span>
             <span className="program-details-statistics__value">
-            <NumberFormat
-              value={statistic.sortinoRatio}
-              displayType="text"
-              suffix="%"
-              decimalScale={2}
-            />
-          </span>
+              <NumberFormat
+                value={statistic.sortinoRatio}
+                displayType="text"
+                suffix="%"
+                decimalScale={2}
+              />
+            </span>
           </div>
         </div>
       </div>
