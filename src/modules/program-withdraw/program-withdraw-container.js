@@ -19,7 +19,7 @@ class ProgramWithdrawContainer extends PureComponent {
 
   handleWithdraw = (id, percent) => {
     return investorApiProxy
-      .v10InvestorFundsByIdWithdrawByPercentPost(
+      .v10InvestorProgramsByIdWithdrawByAmountPost(
         id,
         percent,
         authService.getAuthArg()
