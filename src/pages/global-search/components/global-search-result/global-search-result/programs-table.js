@@ -18,18 +18,12 @@ const ProgramsTable = ({
   return (
     <Table
       paging={paging}
-      updatePaging={updatePaging}
+      updatePaging={() => {}}
+      updateSorting={() => {}}
       columns={PROGRAMS_COLUMNS}
       items={data.programs}
       isPending={data.isPending}
-      renderHeader={column => (
-        <TableHeadCell
-          key={column.name}
-          className={`programs-table__cell--${column.name}`}
-        >
-          {t(`programs-page.programs-header.${column.name}`)}
-        </TableHeadCell>
-      )}
+      renderHeader={column => t(`programs-page.programs-header.${column.name}`)}
       renderBodyRow={program => (
         <ProgramTableRowShort program={program} onExpandClick={() => {}} />
       )}
