@@ -55,10 +55,13 @@
     flex-direction: column;
     padding-right: $padding-small-mobile;
     padding-bottom: $padding-large-mobile;
-    @include media-breakpoint-landscape-phone() {
+    &--half {
+      @include media-breakpoint-landscape-phone() {
+        width: 50%;
+        box-sizing: border-box;
+      }
     }
   }
-
   &__period {
     width: 100%;
     padding-bottom: $padding-middle-mobile;

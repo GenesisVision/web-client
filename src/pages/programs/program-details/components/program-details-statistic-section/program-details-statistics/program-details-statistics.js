@@ -91,7 +91,7 @@ const ProgramDetailsStatistics = ({
       </div>
 
       <div className="program-details-statistics__particular-information">
-        <div className="program-details-statistics__item">
+        <div className="program-details-statistics__item program-details-statistics__item--half">
           <span className="program-details-statistics__label">
             {t("program-details-page.statistics.trades")}
           </span>
@@ -104,7 +104,7 @@ const ProgramDetailsStatistics = ({
           </span>
         </div>
 
-        <div className="program-details-statistics__item program-details-statistics__item--secondary">
+        <div className="program-details-statistics__item program-details-statistics__item--half program-details-statistics__item--secondary">
           <span className="program-details-statistics__label">
             {t("program-details-page.statistics.success-trades")}
           </span>
@@ -118,7 +118,7 @@ const ProgramDetailsStatistics = ({
           </span>
         </div>
 
-        <div className="program-details-statistics__item program-details-statistics__item--secondary">
+        <div className="program-details-statistics__item program-details-statistics__item--half program-details-statistics__item--secondary">
           <span className="program-details-statistics__label">
             {t("program-details-page.statistics.profit-factor")}
           </span>
@@ -132,7 +132,7 @@ const ProgramDetailsStatistics = ({
           </span>
         </div>
 
-        <div className="program-details-statistics__item program-details-statistics__item--secondary">
+        <div className="program-details-statistics__item program-details-statistics__item--half program-details-statistics__item--secondary">
           <span className="program-details-statistics__label">
             {t("program-details-page.statistics.sharpe-ratio")}
           </span>
@@ -146,7 +146,7 @@ const ProgramDetailsStatistics = ({
           </span>
         </div>
 
-        <div className="program-details-statistics__item program-details-statistics__item--secondary">
+        <div className="program-details-statistics__item program-details-statistics__item--half program-details-statistics__item--secondary">
           <span className="program-details-statistics__label">
             {t("program-details-page.statistics.max-drawdown")}
           </span>
@@ -160,7 +160,7 @@ const ProgramDetailsStatistics = ({
           </span>
         </div>
 
-        <div className="program-details-statistics__item program-details-statistics__item--secondary">
+        <div className="program-details-statistics__item program-details-statistics__item--half program-details-statistics__item--secondary">
           <span className="program-details-statistics__label">
             {t("program-details-page.statistics.sortino-ratio")}
           </span>
