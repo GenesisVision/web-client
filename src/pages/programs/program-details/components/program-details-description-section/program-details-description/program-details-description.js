@@ -157,7 +157,7 @@ class ProgramDetailsDescription extends PureComponent {
                 <NumberFormat
                   value={formatValue(programDescription.availableInvestment)}
                   displayType="text"
-                  suffix={` ${programDescription.currency}`}
+                  suffix={` GVT`}
                 />
               </div>
               <div className="program-details-description__short-statistic-item">
