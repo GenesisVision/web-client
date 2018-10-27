@@ -17,12 +17,6 @@ const WithdrawConfirmStep = props => {
             {formatValue(props.percent)} %
           </span>
         </li>
-        <li className="dialog-list__item">
-          {props.t("withdraw-fund.payout-date")}
-          <span className="dialog-list__value">
-            {moment(props.periodEnds).format("DD MMM YYYY")}
-          </span>
-        </li>
       </ul>
       <div className="form-error">
         <FormError error={props.error} />
