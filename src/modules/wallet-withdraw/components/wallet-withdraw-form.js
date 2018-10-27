@@ -135,7 +135,9 @@ const WalletWithdrawForm = ({
             {t("buttons.confirm")}
           </GVButton>
         </div>
-        <div className="dialog__info">{t("wallet-withdraw.info")}</div>
+        {currency !== "GVT" && (
+          <div className="dialog__info">{t("wallet-withdraw.info")}</div>
+        )}
       </div>
     </form>
   );
