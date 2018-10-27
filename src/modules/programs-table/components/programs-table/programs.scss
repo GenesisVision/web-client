@@ -69,6 +69,9 @@ $description-block-width: 250px;
     padding: 3px 0;
     font-size: $title-text-size/1.5;
     word-break: break-all;
+    & a{
+      color: $text-accent-color;
+    }
   }
   &__name {
     font-size: $text-size/1.5;
@@ -386,6 +389,7 @@ $description-block-width: 250px;
     }
   }
 }
+
 .popover-list {
   display: flex;
   flex-direction: column;
