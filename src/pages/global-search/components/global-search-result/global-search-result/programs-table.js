@@ -18,7 +18,8 @@ const ProgramsTable = ({
   return (
     <Table
       paging={paging}
-      updatePaging={updatePaging}
+      updatePaging={() => {}}
+      updateSorting={() => {}}
       columns={PROGRAMS_COLUMNS}
       items={data.programs}
       isPending={data.isPending}
