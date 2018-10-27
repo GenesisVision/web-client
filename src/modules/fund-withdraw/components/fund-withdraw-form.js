@@ -62,7 +62,6 @@ class FundWithdrawForm extends Component {
             disabled={disabled}
           />
         )}
-        <div className="dialog__info">{t("withdraw-fund.info")}</div>
       </form>
     );
   }
