@@ -5072,7 +5072,7 @@ gud@^1.0.0:
 
 "gv-api-web@git+https://github.com/GenesisVision/gv-api-web.git#development":
   version "1.0.111"
-  resolved "git+https://github.com/GenesisVision/gv-api-web.git#42954920a4d642e51b67ff1ae6d2e07f2929cc50"
+  resolved "git+https://github.com/GenesisVision/gv-api-web.git#9665d4b4a4add22af469fcfb521c8095adc6b179"
   dependencies:
     superagent "^3.8.3"
 
