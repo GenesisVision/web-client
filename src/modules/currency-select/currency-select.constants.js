@@ -1,4 +1,5 @@
 export const HEADER_CURRENCY_VALUES = {
+  USDT: "USD Tether",
   BTC: "Bitcoin",
   ETH: "Ethereum",
   ADA: "Cardano",
