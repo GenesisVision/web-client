@@ -119,9 +119,6 @@ class FundDetailsInvestment extends PureComponent {
             onClose={this.handleCloseWithdrawalPopup}
             fundCurrency={fundCurrency}
           />
-          <p className="fund-details-investment__withdraw-notice">
-            {t("fund-details-page.description.withdraw-notice-text")}
-          </p>
         </div>
       </Surface>
     );
