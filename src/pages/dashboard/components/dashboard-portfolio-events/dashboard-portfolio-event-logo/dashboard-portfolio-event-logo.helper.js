@@ -3,7 +3,10 @@ export const EventLogoType = {
   loss: "Loss",
   reinvest: "Reinvest",
   cancelled: "Cancelled",
+  cancelledRed: "CancelledRed",
   invest: "Invest",
   withdraw: "Withdraw",
-  ended: "Ended"
+  started: "Started",
+  ended: "Ended",
+  endedRed: "EndedRed"
 };
