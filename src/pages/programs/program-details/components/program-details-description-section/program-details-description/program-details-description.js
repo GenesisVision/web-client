@@ -58,6 +58,7 @@ class ProgramDetailsDescription extends PureComponent {
     const {
       t,
       isInvested,
+      canWithdraw,
       programDescription,
       onReinvestingClick,
       onFavoriteClick,
@@ -201,7 +202,7 @@ class ProgramDetailsDescription extends PureComponent {
                 />
               )}
             </div>
-            {isInvested && (
+            {canWithdraw && (
               <ProgramDetailsInvestment
                 className={"program-details-description__your-investment"}
                 programCurrency={programDescription.currency}
