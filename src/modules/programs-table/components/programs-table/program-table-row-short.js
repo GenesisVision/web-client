@@ -49,7 +49,11 @@ const ProgramTableRowShort = ({
       </TableCell>
       <TableCell className="programs-table__cell--balance">
         <Tooltip
-          render={() => <div>{program.statistic.balanceBase.amount} BTC</div>}
+          render={() => (
+            <div>
+              {program.statistic.balanceBase.amount} {program.currency}
+            </div>
+          )}
         >
           <NumberFormat
             value={program.statistic.balanceGVT.amount}
