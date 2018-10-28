@@ -63,6 +63,7 @@ class FundProfitChart extends PureComponent {
             strokeWidth={3}
             dot={false}
             unit=" %"
+            isAnimationActive={false}
           />
         </ComposedChart>
       </ResponsiveContainer>

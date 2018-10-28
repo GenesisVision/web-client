@@ -85,6 +85,7 @@ class ProgramProfitChart extends PureComponent {
             fill={GVColors.$labelColor}
             stroke={GVColors.$labelColor}
             yAxisId="right"
+            isAnimationActive={false}
           />
           <Area
             dataKey="value"
@@ -97,6 +98,7 @@ class ProgramProfitChart extends PureComponent {
             dot={false}
             yAxisId="left"
             unit=" %"
+            isAnimationActive={false}
           />
         </ComposedChart>
       </ResponsiveContainer>
