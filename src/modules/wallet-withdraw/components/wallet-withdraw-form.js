@@ -11,6 +11,7 @@ import { compose } from "redux";
 import { convertFromCurrency } from "utils/currency-converter";
 import { formatValue } from "utils/formatter";
 import { number, object, string } from "yup";
+import { ethWalletValidator } from "shared/utils/validators/validators";
 
 const WalletWithdrawForm = ({
   t,
@@ -181,7 +182,7 @@ export default compose(
             t("wallet-withdraw.validation.amount-more-than-available")
           )
           .required(t("wallet-withdraw.validation.amount-is-required")),
-        address: string().required(
+        address: ethWalletValidator.required(
           t("wallet-withdraw.validation.address-is-required")
         ),
         twoFactorCode: string()
