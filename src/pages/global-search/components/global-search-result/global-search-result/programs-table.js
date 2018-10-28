@@ -1,6 +1,6 @@
 import ProgramTableRowShort from "modules/programs-table/components/programs-table/program-table-row-short";
 import { PROGRAMS_COLUMNS } from "modules/programs-table/programs.constants";
-import { Table, TableHeadCell } from "modules/table/components";
+import { Table } from "modules/table/components";
 import withTable from "modules/table/components/with-table";
 import { DEFAULT_PAGING } from "modules/table/reducers/table-paging.reducer";
 import React from "react";
@@ -12,8 +12,7 @@ const ProgramsTable = ({
   isPending,
   data,
   filtering,
-  paging,
-  updatePaging
+  paging
 }) => {
   return (
     <Table

@@ -7,7 +7,6 @@ import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 
 import PortfolioEventLogo from "../../dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
-import { composeEventLogoType } from "../../dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo.helper";
 
 const composeRequestValue = (value, type) => {
   if (type === "Invest") return -value;

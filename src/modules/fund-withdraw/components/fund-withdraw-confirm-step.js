@@ -1,5 +1,4 @@
 import { GVButton } from "gv-react-components";
-import moment from "moment";
 import PropTypes from "prop-types";
 import { Fragment } from "react";
 import React from "react";

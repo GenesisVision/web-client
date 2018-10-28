@@ -14,7 +14,6 @@ const WithdrawConfirmStep = props => {
     amount,
     periodEnds,
     onPrevClick,
-    error,
     disabled
   } = props;
   return (
