@@ -101,8 +101,7 @@ const WalletTransactions = ({ t }) => (
               {moment(transaction.date).format("DD-MM-YYYY, hh:mm a")}
             </TableCell>
             <TableCell className="wallet-transactions__cell wallet-transactions__cell--information">
-              {transaction.information ||
-                "Вы вевели с кошелька, вот ваш tx hash"}
+              {transaction.information}
             </TableCell>
             <TableCell className="wallet-transactions__cell wallet-transactions__cell--amount">
               <NumberFormat
