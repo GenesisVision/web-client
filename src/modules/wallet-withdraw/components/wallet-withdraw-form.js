@@ -14,6 +14,7 @@ import { number, object, string } from "yup";
 
 const WalletWithdrawForm = ({
   t,
+  twoFactorEnabled,
   handleSubmit,
   availableToWithdrawal,
   wallets,
@@ -91,13 +92,15 @@ const WalletWithdrawForm = ({
           component={GVTextField}
           autoComplete="off"
         />
-        <GVFormikField
-          type="text"
-          name="twoFactorCode"
-          label={t("wallet-withdraw.two-factor-code-label")}
-          autoComplete="off"
-          component={GVTextField}
-        />
+        {twoFactorEnabled && (
+          <GVFormikField
+            type="text"
+            name="twoFactorCode"
+            label={t("wallet-withdraw.two-factor-code-label")}
+            autoComplete="off"
+            component={GVTextField}
+          />
+        )}
         <ul className="dialog-list">
           <li className="dialog-list__item">
             <span className="dialog-list__title">
