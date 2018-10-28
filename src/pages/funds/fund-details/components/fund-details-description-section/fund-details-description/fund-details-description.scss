@@ -88,15 +88,17 @@
     font-size: $font-size-title-mobile;
     font-weight: 600;
     color: $text-light-color;
-    padding-bottom: $padding-very-large-mobile;
-    padding-top: $padding-middle-mobile;
+    padding-bottom: $padding-mini-mobile;
   }
 
   &__author-btn {
-    padding: 0;
+    padding: 0 0 $padding-very-large-mobile;
     font-size: 13px;
     letter-spacing: 0.19px;
     font-weight: bold;
+    @include media-breakpoint-landscape-phone() {
+      padding: 0 0 $padding-very-large;
+    }
   }
 
   &__info {
@@ -242,8 +244,7 @@
     }
     &__heading {
       font-size: $font-size-title;
-      padding-bottom: $padding-very-large;
-      padding-top: $padding-middle;
+      padding-bottom: $padding-mini;
     }
     &__subheading {
       font-size: $font-size-large;
@@ -465,7 +466,7 @@
     }
     &__heading {
       font-size: $font-size-title;
-      padding-bottom: $padding-very-large;
+      padding-bottom: $padding-mini;
       padding-top: $padding-middle;
     }
     &__subheading {

@@ -14,6 +14,8 @@ import replaceParams from "utils/replace-params";
 import FundDetailsInvestment from "../fund-details-investment/fund-details-investment";
 import FundDetailsFavorite from "./fund-details-favorite";
 import FundDetailsNotification from "./fund-details-notificaton";
+import { Link } from "react-router-dom";
+import { composeManagerDetailsUrl } from "pages/manager/manager.page";
 
 export const composeFundNotificationsUrl = url => {
   return replaceParams(FUND_NOTIFICATIONS_ROUTE, {
@@ -75,6 +77,14 @@ class FundDetailsDescription extends PureComponent {
           <div className="fund-details-description__heading">
             {fundDescription.title}
           </div>
+          <Link to={composeManagerDetailsUrl(fundDescription.manager.url)}>
+            <GVButton
+              variant="text"
+              className="fund-details-description__author-btn"
+            >
+              {fundDescription.manager.username}
+            </GVButton>
+          </Link>
           <div className="fund-details-description__info-block">
             <div className="fund-details-description__subheading">
               {t("fund-details-page.description.assets")}
