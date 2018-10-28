@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { formatValue } from "utils/formatter";
 
 import { composeProgramDetailsUrl } from "../../../../pages/programs/programs.routes";
+import Tooltip from "components/tooltip/tooltip";
 
 const ProgramTableRowShort = ({
   program,
@@ -47,7 +48,16 @@ const ProgramTableRowShort = ({
         </div>
       </TableCell>
       <TableCell className="programs-table__cell--balance">
-        {(+program.statistic.balanceGVT.amount).toFixed(0)} GVT
+        <Tooltip
+          render={() => <div>{program.statistic.balanceBase.amount} BTC</div>}
+        >
+          <NumberFormat
+            value={program.statistic.balanceGVT.amount}
+            suffix=" GVT"
+            decimalScale={0}
+            displayType="text"
+          />
+        </Tooltip>
       </TableCell>
       <TableCell className="programs-table__cell--currency">
         {program.currency}
