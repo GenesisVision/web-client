@@ -21,9 +21,9 @@
 
   &__portfolio-events-aside {
     display: flex;
-    min-width: 315px;
     margin-top: $padding-small;
     @include media-breakpoint-landscape-phone() {
+      min-width: 315px;
       margin-left: 2rem;
       margin-top: 0;
     }
