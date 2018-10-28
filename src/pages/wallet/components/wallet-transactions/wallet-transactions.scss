@@ -79,3 +79,11 @@
     }
   }
 }
+.wallet-transaction-actions{
+  &__disabled-actions{
+    opacity: 0.4;
+    &.icon.icon--actions-circle {
+      cursor: auto;
+    }
+  }
+}

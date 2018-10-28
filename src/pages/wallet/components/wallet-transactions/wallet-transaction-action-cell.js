@@ -41,10 +41,12 @@ class WalletTransactionActions extends Component {
   };
 
   render() {
-    const { t, transaction } = this.props;
+    const { t, transaction, disabled } = this.props;
     const { resendWithdrawRequest, cancelWithdrawRequest } = this;
-    if (transaction.destinationType !== "WithdrawalRequest") {
-      return null;
+    if (transaction.destinationType !== "WithdrawalRequest" || disabled) {
+      return (
+        <ActionsCircleIcon className="wallet-transaction-actions__disabled-actions" />
+      );
     }
 
     return (
