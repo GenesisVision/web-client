@@ -3,7 +3,7 @@ import "./fund-asset.scss";
 import classNames from "classnames";
 import FundAssetImage from "components/avatar/fund-asset-image/fund-asset-image";
 import { CURRENCY_VALUES } from "modules/currency-select/currency-select.constants";
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import NumberFormat from "react-number-format";
 
 export const FUND_ASSET_TYPE = {
@@ -14,24 +14,35 @@ export const FUND_ASSET_TYPE = {
 };
 class FundAsset extends Component {
   render() {
-    const { percent, currency, type, last, icon } = this.props;
+    const {
+      name,
+      percent,
+      currency,
+      type,
+      last,
+      removable,
+      removeHandle,
+      icon,
+      className
+    } = this.props;
     return (
       (type === FUND_ASSET_TYPE.text && (
         <div>
           {currency}
-          {percent && (
-            <Fragment>
-              &nbsp;
-              <NumberFormat value={percent} suffix="%" displayType="text" />
-            </Fragment>
-          )}
+          &nbsp;
+          <NumberFormat value={percent} suffix="%" displayType="text" />
           {!last && <span>,&nbsp;</span>}
         </div>
       )) || (
         <div
-          className={classNames("fund-asset", {
-            "fund-asset--large": type === FUND_ASSET_TYPE.large
-          })}
+          className={classNames(
+            "fund-asset",
+            "fund-asset--default",
+            className,
+            {
+              "fund-asset--large": type === FUND_ASSET_TYPE.large
+            }
+          )}
         >
           <FundAssetImage url={icon} alt={currency} />
 
@@ -39,7 +50,7 @@ class FundAsset extends Component {
             <div className="fund-asset__currencies">
               {type === FUND_ASSET_TYPE.large && (
                 <div className="fund-asset__currency-full">
-                  {CURRENCY_VALUES[currency]}
+                  {name || CURRENCY_VALUES[currency]}
                 </div>
               )}
               {type !== FUND_ASSET_TYPE.short && (
@@ -50,6 +61,14 @@ class FundAsset extends Component {
           <div className="fund-asset__percent">
             <NumberFormat value={percent} suffix="%" displayType="text" />
           </div>
+          {removable && (
+            <div
+              className="fund-asset__remove-button"
+              onClick={removeHandle(currency)}
+            >
+              +
+            </div>
+          )}
         </div>
       )
     );
