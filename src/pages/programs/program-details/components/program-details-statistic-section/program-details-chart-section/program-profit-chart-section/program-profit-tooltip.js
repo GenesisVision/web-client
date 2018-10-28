@@ -6,12 +6,9 @@ const TooltipBody = ({ equity, pnl }) => {
   return (
     <Fragment>
       <div className="program-details-tooltip__statistic">
-        <div className="program-details-tooltip__title">Equity</div>
-        <div className="program-details-tooltip__value">{equity}</div>
-      </div>
-      <div className="program-details-tooltip__statistic">
-        <div className="program-details-tooltip__title">PnL</div>
-        <div className="program-details-tooltip__value">{pnl}</div>
+        <div className="program-details-tooltip__value">
+          {pnl} ({equity})
+        </div>
       </div>
     </Fragment>
   );
@@ -35,7 +32,6 @@ const ProgramProfitTooltip = ({
   }
   return (
     <ChartTooltip
-      heading="Profit"
       body={<TooltipBody equity={equity} pnl={pnl} />}
       date={new Date(label)}
       className="program-details-tooltip"

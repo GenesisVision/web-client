@@ -97,7 +97,7 @@ class ProgramProfitChart extends PureComponent {
             strokeWidth={3}
             dot={false}
             yAxisId="left"
-            unit=" %"
+            unit="%"
             isAnimationActive={false}
           />
         </ComposedChart>
