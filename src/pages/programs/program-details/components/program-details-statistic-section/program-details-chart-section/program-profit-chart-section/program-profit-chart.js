@@ -17,17 +17,22 @@ import {
 
 import ProgramProfitTooltip from "./program-profit-tooltip";
 
+const MIN_CHART_VALUE = 1e-6;
+const formartChartValue = value => {
+  return Math.abs(value) < MIN_CHART_VALUE ? 0 : value;
+};
+
 class ProgramProfitChart extends PureComponent {
   render() {
-    const { equityChart, pnlChart, currency, period } = this.props;
+    const { equityChart, pnlChart, currency } = this.props;
     if (equityChart.length === 0 || pnlChart.length === 0) return null;
     const equity = equityChart.map(x => ({
       date: x.date.getTime(),
-      value: x.value
+      value: formartChartValue(x.value)
     }));
     const pnl = pnlChart.map(x => ({
       date: x.date.getTime(),
-      value: x.value
+      value: formartChartValue(x.value)
     }));
     const equityValues = equity.map(x => x.value);
     const off = gradientOffset(equityValues);
