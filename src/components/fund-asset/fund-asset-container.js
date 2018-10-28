@@ -5,7 +5,7 @@ import Tooltip from "components/tooltip/tooltip";
 import React, { Component } from "react";
 import NumberFormat from "react-number-format";
 
-import FundAssetTooltip from "../fund-asset-tooltip/fund-asset-tooltip";
+import FundAssetTooltip from "./fund-asset-tooltip/fund-asset-tooltip";
 import FundAsset, { FUND_ASSET_TYPE } from "./fund-asset";
 
 class FundAssetContainer extends Component {
