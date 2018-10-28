@@ -81,15 +81,15 @@ class FundDetailsDescriptionSection extends PureComponent {
     } = this.props;
     const { fundDescription, ui } = this.state;
     if (!fundDescription) return null;
-    const isInvested =
+    const canWithdraw =
       fundDescription.personalFundDetails &&
-      fundDescription.personalFundDetails.isInvested;
+      fundDescription.personalFundDetails.canWithdraw;
     return (
       <Fragment>
         <FundDetailsDescription
           isAuthenticated={isAuthenticated}
           redirectToLogin={redirectToLogin}
-          isInvested={isInvested}
+          canWithdraw={canWithdraw}
           fundDescription={fundDescription}
           onFavoriteClick={this.handleOnFavoriteClick}
           isFavoritePending={ui.isFavoritePending}
