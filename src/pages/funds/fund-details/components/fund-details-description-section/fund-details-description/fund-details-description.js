@@ -45,7 +45,7 @@ class FundDetailsDescription extends PureComponent {
     const { isOpenInvestmentPopup } = this.state;
     const {
       t,
-      isInvested,
+      canWithdraw,
       fundDescription,
       onFavoriteClick,
       isFavoritePending,
@@ -137,7 +137,7 @@ class FundDetailsDescription extends PureComponent {
                 )}
               </FundDetailContext.Consumer>
             </div>
-            {isInvested && (
+            {canWithdraw && (
               <FundDetailsInvestment
                 className={"fund-details-description__your-investment"}
                 fundCurrency={fundDescription.currency}
