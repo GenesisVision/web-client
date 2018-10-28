@@ -568,7 +568,7 @@
     },
     "funds-header": {
       "title": "Name",
-      "balance": "Balance",
+      "balance": "Size",
       "assets": "Assets",
       "investors": "Investors",
       "drawdown": "D.down",
