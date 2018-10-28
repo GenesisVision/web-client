@@ -13,10 +13,10 @@ class CurrencySelect extends Component {
         value={value}
         onChange={onChange}
       >
-        {Object.keys(currencyValues).map(currency => {
+        {currencyValues.map(currency => {
           return (
             <option value={currency} key={currency}>
-              {currencyValues[currency]}
+              {currency}
             </option>
           );
         })}
