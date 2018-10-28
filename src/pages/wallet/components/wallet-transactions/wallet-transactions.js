@@ -116,7 +116,7 @@ const WalletTransactions = ({ t }) => (
               />
             </TableCell>
             <TableCell className="wallet-transactions__cell wallet-transactions__cell--status">
-              {status && t(`wallet.transaction-statuses.${status}`)}
+              {(status && t(`wallet.transaction-statuses.${status}`)) || "-"}
             </TableCell>
             <TableCell className="wallet-transactions__cell wallet-transactions__cell--actions">
               {status !== "InProcess" &&
