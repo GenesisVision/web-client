@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="28" height="28"
+     viewBox="0 0 28 28">
+    <defs>
+        <path id="65zha" d="M197 711a14 14 0 1 1 28 0 14 14 0 0 1-28 0z"/>
+        <path id="65zhc"
+              d="M224.15 698.98c5.12 7.87 3.07 18.28-4.57 23.24-7.11 4.62-16.56 2.9-21.96-3.7l27.24-17.7-3.14-4.82c.9.88 1.72 1.87 2.43 2.98z"/>
+        <path id="65zhd" d="M211 704.75a.75.75 0 0 1 1.5 0v6.5a.75.75 0 0 1-1.5 0z"/>
+        <path id="65zhe" d="M208.26 714.78a.91.91 0 0 1-1.1-1.45l3.48-2.62a.91.91 0 0 1 1.1 1.45z"/>
+        <clipPath id="65zhb">
+            <use xlink:href="#65zha"/>
+        </clipPath>
+    </defs>
+    <g>
+        <g transform="translate(-197 -697)">
+            <g>
+                <use fill="#312934" xlink:href="#65zha"/>
+            </g>
+            <g clip-path="url(#65zhb)" opacity=".1">
+                <use fill="#eb3b5a" xlink:href="#65zhc"/>
+            </g>
+            <g clip-path="url(#65zhb)">
+                <use fill="#eb3b5a" xlink:href="#65zhd"/>
+            </g>
+            <g clip-path="url(#65zhb)">
+                <use fill="#eb3b5a" xlink:href="#65zhe"/>
+            </g>
+        </g>
+    </g>
+</svg>
