@@ -58,7 +58,8 @@ class ProgramWithdrawPopup extends Component {
 ProgramWithdrawPopup.propTypes = {
   fetchInfo: PropTypes.func,
   withdraw: PropTypes.func,
-  currency: PropTypes.string.isRequired
+  accountCurrency: PropTypes.string.isRequired,
+  programCurrency: PropTypes.string.isRequired
 };
 
 export default ProgramWithdrawPopup;
