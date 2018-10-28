@@ -1,5 +1,4 @@
 import { toggleFavoriteFund } from "modules/favorite-asset/services/favorite-fund.service";
-import { toggleReinvesting } from "modules/program-reinvesting/services/program-reinvesting.service";
 import React, { Fragment, PureComponent } from "react";
 
 import FundDetailsDescription from "./fund-details-description/fund-details-description";

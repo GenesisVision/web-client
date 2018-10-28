@@ -4,7 +4,6 @@ import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import FundAssetContainer from "components/fund-asset/fund-asset-container";
 import { GVButton } from "gv-react-components";
 import FundDepositContainer from "modules/fund-deposit/fund-deposit-container";
-import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
 import { FundDetailContext } from "pages/funds/fund-details/fund-details.page";
 import { FUND_NOTIFICATIONS_ROUTE } from "pages/notifications/notifications.routes";
 import React, { PureComponent } from "react";
