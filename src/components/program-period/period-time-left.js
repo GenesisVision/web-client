@@ -6,6 +6,9 @@ export const PeriodTimeLeft = ({ t, periodEnds, className }) => {
   const now = moment();
   const periodEndsMoment = moment(periodEnds);
   const renderTimeLeft = () => {
+    if (!periodEnds) {
+      return null;
+    }
     if (now.isAfter(periodEndsMoment)) {
       return t("program-period.period-is-over");
     }
