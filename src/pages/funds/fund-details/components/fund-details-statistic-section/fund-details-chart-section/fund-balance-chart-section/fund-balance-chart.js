@@ -46,6 +46,7 @@ class FundBalanceChart extends PureComponent {
             dot={false}
             unit={currency}
             stackId="1"
+            isAnimationActive={false}
           />
           <Area
             dataKey="investorsFunds"
@@ -57,6 +58,7 @@ class FundBalanceChart extends PureComponent {
             dot={false}
             unit={currency}
             stackId="1"
+            isAnimationActive={false}
           />
           <Tooltip content={FundBalanceTooltip} />
         </AreaChart>

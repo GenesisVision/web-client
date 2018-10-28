@@ -1,3 +1,4 @@
+import { formartChartMinValue } from "components/chart/chart-components/chart-components.helpers";
 import chartXAxis from "components/chart/chart-components/chart-xaxis";
 import ProgramChartGradient, {
   gradientOffset
@@ -19,15 +20,15 @@ import ProgramProfitTooltip from "./program-profit-tooltip";
 
 class ProgramProfitChart extends PureComponent {
   render() {
-    const { equityChart, pnlChart, currency, period } = this.props;
+    const { equityChart, pnlChart, currency } = this.props;
     if (equityChart.length === 0 || pnlChart.length === 0) return null;
     const equity = equityChart.map(x => ({
       date: x.date.getTime(),
-      value: x.value
+      value: formartChartMinValue(x.value)
     }));
     const pnl = pnlChart.map(x => ({
       date: x.date.getTime(),
-      value: x.value
+      value: formartChartMinValue(x.value)
     }));
     const equityValues = equity.map(x => x.value);
     const off = gradientOffset(equityValues);
@@ -84,6 +85,7 @@ class ProgramProfitChart extends PureComponent {
             fill={GVColors.$labelColor}
             stroke={GVColors.$labelColor}
             yAxisId="right"
+            isAnimationActive={false}
           />
           <Area
             dataKey="value"
@@ -95,7 +97,8 @@ class ProgramProfitChart extends PureComponent {
             strokeWidth={3}
             dot={false}
             yAxisId="left"
-            unit=" %"
+            unit="%"
+            isAnimationActive={false}
           />
         </ComposedChart>
       </ResponsiveContainer>

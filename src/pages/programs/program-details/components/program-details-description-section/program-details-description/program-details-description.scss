@@ -53,6 +53,13 @@
     }
   }
 
+  &__left {
+    padding-right: $padding-small-mobile;
+    @include media-breakpoint-landscape-phone() {
+      padding-right: 0;
+    }
+  }
+
   &__right {
     display: flex;
     flex-direction: row;

@@ -87,6 +87,7 @@ class DashboardPortfolioChart extends PureComponent {
             connectNulls={true}
             strokeWidth={2}
             yAxisId="left"
+            isAnimationActive={false}
           />
           <Tooltip cursor={false} content={DasboardPortfolioTooltip} />
           {[...Array(assetsCount).keys()].map(idx => (
@@ -99,6 +100,7 @@ class DashboardPortfolioChart extends PureComponent {
               yAxisId="right"
               onMouseOver={this.handleBarMouseOver}
               key={idx}
+              isAnimationActive={false}
             >
               {assets.map((entry, index) => (
                 <Cell

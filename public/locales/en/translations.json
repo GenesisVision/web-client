@@ -448,8 +448,9 @@
     "select-currency": "Select a wallet currency",
     "will-send": "You will send",
     "will-get": "Approximate amount",
+    "will-get-gvt": "You will get",
     "deposit-address": "Deposit address",
-    "copy-to-clipboard-success": "Your wallet-pane number was copied to the clipboard successfully.",
+    "copy-to-clipboard-success": "Address is copied to the clipboard",
     "copy-to-clipboard-error": "Failed to copy data to the clipboard.",
     "disclaimer": "After processing the {{currency}} transaction, your transferred funds will be converted to GVT, according to the current market price. The exact amount of GVT received will be determined at the time of conversion in the market."
   },
@@ -492,6 +493,7 @@
     "minute_plural": "minutes",
     "second": "second",
     "second_plural": "seconds",
+    "waiting-period-start": "Waiting for the period start",
     "period-is-over": "The period is over.",
     "time-left": "Time left",
     "period-ends": "Period ends",
@@ -557,7 +559,7 @@
     },
     "funds-header": {
       "title": "Name",
-      "balance": "Balance",
+      "balance": "Size",
       "assets": "Assets",
       "investors": "Investors",
       "drawdown": "D.down",
@@ -936,7 +938,8 @@
     "success-verify": "Phone number verification is successful",
     "tabs": {
       "personal-details": "Personal details",
-      "settings": "Settings"
+      "settings": "Settings",
+      "verify": "Verify"
     },
     "verification": {
       "phone": {

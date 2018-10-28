@@ -29,3 +29,8 @@ export const composeTicks = (start, end) => {
   const diff = (periodEnd - periodStart) / (ticks - 1);
   return [...Array(ticks).keys()].map(x => periodStart + diff * x);
 };
+
+const MIN_CHART_VALUE = 1e-6;
+export const formartChartMinValue = value => {
+  return Math.abs(value) < MIN_CHART_VALUE ? 0 : value;
+};

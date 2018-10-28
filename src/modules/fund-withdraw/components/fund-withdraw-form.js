@@ -23,7 +23,6 @@ class FundWithdrawForm extends Component {
   };
   render() {
     const {
-      t,
       values,
       disabled,
       handleSubmit,
@@ -31,7 +30,8 @@ class FundWithdrawForm extends Component {
       rate,
       availableToWithdraw,
       periodEnds,
-      currency,
+      fundCurrency,
+      accountCurrency,
       errors
     } = this.props;
     return (
@@ -44,7 +44,8 @@ class FundWithdrawForm extends Component {
           <FundWithdrawEnterPercentStep
             percent={values.percent}
             rate={rate}
-            currency={currency}
+            fundCurrency={fundCurrency}
+            accountCurrency={accountCurrency}
             availableToWithdraw={availableToWithdraw}
             onClick={this.goToConfirmStep}
             disabled={errors.percent !== undefined}
@@ -59,7 +60,6 @@ class FundWithdrawForm extends Component {
             disabled={disabled}
           />
         )}
-        <div className="dialog__info">{t("withdraw-fund.info")}</div>
       </form>
     );
   }
@@ -84,10 +84,7 @@ export default compose(
       object().shape({
         percent: number()
           .min(0)
-          .lessThan(
-            100,
-            t("withdraw-fund.validation.amount-more-than-available")
-          )
+          .max(100, t("withdraw-fund.validation.amount-more-than-available"))
           .required(t("withdraw-fund.validation.amount-is-required"))
       }),
     handleSubmit: (values, { props }) => {

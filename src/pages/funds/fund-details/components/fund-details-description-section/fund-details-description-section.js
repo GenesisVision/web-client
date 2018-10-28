@@ -1,5 +1,4 @@
 import { toggleFavoriteFund } from "modules/favorite-asset/services/favorite-fund.service";
-import { toggleReinvesting } from "modules/program-reinvesting/services/program-reinvesting.service";
 import React, { Fragment, PureComponent } from "react";
 
 import FundDetailsDescription from "./fund-details-description/fund-details-description";
@@ -82,15 +81,15 @@ class FundDetailsDescriptionSection extends PureComponent {
     } = this.props;
     const { fundDescription, ui } = this.state;
     if (!fundDescription) return null;
-    const isInvested =
+    const canWithdraw =
       fundDescription.personalFundDetails &&
-      fundDescription.personalFundDetails.isInvested;
+      fundDescription.personalFundDetails.canWithdraw;
     return (
       <Fragment>
         <FundDetailsDescription
           isAuthenticated={isAuthenticated}
           redirectToLogin={redirectToLogin}
-          isInvested={isInvested}
+          canWithdraw={canWithdraw}
           fundDescription={fundDescription}
           onFavoriteClick={this.handleOnFavoriteClick}
           isFavoritePending={ui.isFavoritePending}

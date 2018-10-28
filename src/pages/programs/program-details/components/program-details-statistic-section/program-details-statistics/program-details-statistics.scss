@@ -50,12 +50,35 @@
     flex-direction: column;
   }
 
+  &__column {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    @include media-breakpoint-phone() {
+      flex-wrap: wrap;
+      flex-direction: row;
+      width: 100%;
+      justify-content: space-between;
+    }
+    @include media-breakpoint-landscape-phone() {
+      flex-direction: column;
+      width: auto;
+      justify-content: space-between;
+    }
+  }
+
   &__item {
     display: flex;
     flex-direction: column;
     padding-right: $padding-small-mobile;
     padding-bottom: $padding-large-mobile;
-    @include media-breakpoint-landscape-phone() {
+    &--half {
+      width: 70px;
+      @include media-breakpoint-landscape-phone() {
+        padding-right: 0;
+        width: auto;
+        box-sizing: border-box;
+      }
     }
   }
 

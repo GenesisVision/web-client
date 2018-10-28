@@ -1,5 +1,6 @@
 import "./program-simple-chart.scss";
 
+import { formartChartMinValue } from "components/chart/chart-components/chart-components.helpers";
 import ProgramChartGradient, {
   gradientOffset
 } from "components/chart/chart-gradient/chart-gradient";
@@ -11,7 +12,7 @@ const ProgramSimpleChart = ({ data, programId }) => {
   if (data.length === 0) return null;
   const programChartData = data.map(x => ({
     date: x.date.getTime(),
-    equity: x.value
+    equity: formartChartMinValue(x.value)
   }));
 
   const programChartDataValues = programChartData.map(x => x.equity);

@@ -51,7 +51,12 @@ class FundsTableRow extends Component {
           </div>
         </TableCell>
         <TableCell className="funds-table__cell">
-          {formatValue(fund.statistic.balanceGVT.amount)} GVT
+          <NumberFormat
+            value={formatValue(fund.statistic.balanceGVT.amount)}
+            suffix=" GVT"
+            decimalScale={0}
+            displayType="text"
+          />
         </TableCell>
         <TableCell className="funds-table__cell">
           <FundAssetContainer

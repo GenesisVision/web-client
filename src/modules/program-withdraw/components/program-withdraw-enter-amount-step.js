@@ -15,19 +15,21 @@ const WithdrawEnterAmountStep = props => {
         name="amount"
         label={props.t("withdraw-program.amount-to-withdraw")}
         component={GVTextField}
-        adornment={props.currency}
+        adornment={props.programCurrency}
         autoComplete="off"
         InputComponent={NumberFormat}
         allowNegative={false}
       />
-      <div className="invest-popup__currency">
-        <NumberFormat
-          value={formatValue(convertToCurrency(props.amount, props.rate))}
-          prefix="= "
-          suffix={` ${props.currency}`}
-          displayType="text"
-        />
-      </div>
+      {props.programCurrency !== props.accountCurrency && (
+        <div className="invest-popup__currency">
+          <NumberFormat
+            value={formatValue(convertToCurrency(props.amount, props.rate))}
+            prefix="= "
+            suffix={` ${props.accountCurrency}`}
+            displayType="text"
+          />
+        </div>
+      )}
       <div className="dialog__buttons">
         <GVButton
           onClick={props.onClick}

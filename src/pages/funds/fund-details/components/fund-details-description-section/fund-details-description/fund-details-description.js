@@ -4,12 +4,13 @@ import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import FundAssetContainer from "components/fund-asset/fund-asset-container";
 import { GVButton } from "gv-react-components";
 import FundDepositContainer from "modules/fund-deposit/fund-deposit-container";
-import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
 import { FundDetailContext } from "pages/funds/fund-details/fund-details.page";
+import { composeManagerDetailsUrl } from "pages/manager/manager.page";
 import { FUND_NOTIFICATIONS_ROUTE } from "pages/notifications/notifications.routes";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { Link } from "react-router-dom";
 import replaceParams from "utils/replace-params";
 
 import FundDetailsInvestment from "../fund-details-investment/fund-details-investment";
@@ -46,7 +47,7 @@ class FundDetailsDescription extends PureComponent {
     const { isOpenInvestmentPopup } = this.state;
     const {
       t,
-      isInvested,
+      canWithdraw,
       fundDescription,
       onFavoriteClick,
       isFavoritePending,
@@ -76,6 +77,14 @@ class FundDetailsDescription extends PureComponent {
           <div className="fund-details-description__heading">
             {fundDescription.title}
           </div>
+          <Link to={composeManagerDetailsUrl(fundDescription.manager.url)}>
+            <GVButton
+              variant="text"
+              className="fund-details-description__author-btn"
+            >
+              {fundDescription.manager.username}
+            </GVButton>
+          </Link>
           <div className="fund-details-description__info-block">
             <div className="fund-details-description__subheading">
               {t("fund-details-page.description.assets")}
@@ -138,9 +147,10 @@ class FundDetailsDescription extends PureComponent {
                 )}
               </FundDetailContext.Consumer>
             </div>
-            {isInvested && (
+            {canWithdraw && (
               <FundDetailsInvestment
                 className={"fund-details-description__your-investment"}
+                fundCurrency={fundDescription.currency}
                 {...composeInvestmentData(fundDescription)}
                 onChangeInvestmentStatus={onChangeInvestmentStatus}
               />

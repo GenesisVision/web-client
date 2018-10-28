@@ -1,4 +1,5 @@
 @import "styles/_breakpoint.scss";
+@import "styles/_sizes.scss";
 
 .app {
   margin: 0 auto;
@@ -8,17 +9,17 @@
   }
 
   &__header {
-    padding: 18px;
+    padding: $padding-small;
 
     @media (min-width: 1360px) {
-      padding: 18px 0;
+      padding: $padding-small 0;
     }
   }
 
   &__main {
-    padding: 0 18px;
+    padding: 0 $padding-small $padding-large;
     @media (min-width: 1360px) {
-      padding: 0;
+      padding: 0 0 $padding-large;
     }
   }
 }

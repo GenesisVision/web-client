@@ -74,7 +74,9 @@ class Notifications extends Component {
       <div className="notifications">
         <InfinityScroll loadMore={this.fetchNotification} hasMore={hasMore}>
           <div className="notifications__header">
-            <RingIcon />
+            <div className="notifications__ring">
+              <RingIcon />
+            </div>
             {t("notifications-aside.header")}
             <div className="notifications__count">
               <Chip type={hasNotifications ? "negative" : null}>{count}</Chip>

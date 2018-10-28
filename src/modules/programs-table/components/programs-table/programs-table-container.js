@@ -25,6 +25,7 @@ class ProgramsContainer extends Component {
 
   render() {
     const {
+      currencies,
       isPending,
       data,
       filters,
@@ -52,6 +53,7 @@ class ProgramsContainer extends Component {
           toggleFavorite={service.toggleFavoriteProgram}
           redirectToLogin={service.redirectToLogin}
           isAuthenticated={isAuthenticated}
+          currencies={currencies}
         />
       </Surface>
     );
@@ -61,7 +63,10 @@ class ProgramsContainer extends Component {
 const mapStateToProps = state => {
   const { isAuthenticated } = state.authData;
   const { isPending, data } = state.programsData.items;
-  return { isPending, data, isAuthenticated };
+  const currencies = state.platformData.data
+    ? state.platformData.data.currencies
+    : [];
+  return { isPending, data, isAuthenticated, currencies };
 };
 
 const mapDispatchToProps = dispatch => ({

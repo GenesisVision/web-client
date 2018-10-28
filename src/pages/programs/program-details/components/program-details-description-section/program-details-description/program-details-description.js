@@ -58,6 +58,7 @@ class ProgramDetailsDescription extends PureComponent {
     const {
       t,
       isInvested,
+      canWithdraw,
       programDescription,
       onReinvestingClick,
       onFavoriteClick,
@@ -102,8 +103,11 @@ class ProgramDetailsDescription extends PureComponent {
                   {t("program-details-page.popover.invest-limit")}
                 </div>
                 <div className="popover-levels__balance">
-                  {programDescription.availableInvestment}{" "}
-                  {programDescription.currency}
+                  <NumberFormat
+                    value={formatValue(programDescription.availableInvestment)}
+                    displayType="text"
+                    suffix={` GVT`}
+                  />
                 </div>
               </div>
               <div className="popover-levels__block popover-levels__text-block">
@@ -154,7 +158,7 @@ class ProgramDetailsDescription extends PureComponent {
                 <NumberFormat
                   value={formatValue(programDescription.availableInvestment)}
                   displayType="text"
-                  suffix={` ${programDescription.currency}`}
+                  suffix={` GVT`}
                 />
               </div>
               <div className="program-details-description__short-statistic-item">
@@ -198,7 +202,7 @@ class ProgramDetailsDescription extends PureComponent {
                 />
               )}
             </div>
-            {isInvested && (
+            {canWithdraw && (
               <ProgramDetailsInvestment
                 className={"program-details-description__your-investment"}
                 programCurrency={programDescription.currency}

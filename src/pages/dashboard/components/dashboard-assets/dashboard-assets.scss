@@ -1,4 +1,24 @@
+@import "styles/_breakpoint.scss";
+@import "styles/_sizes.scss";
+
 .dashboard-assets {
-  padding: 1rem;
-  min-height: 200px;
+  padding-top: $padding-middle-mobile;
+  @include media-breakpoint-landscape-phone() {
+    padding-top: $padding-middle;
+  }
+  &__head {
+    padding-left: $padding-middle-mobile;
+    @include media-breakpoint-landscape-phone() {
+      padding-left: $padding-middle;
+    }
+  }
+  &__title {
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    font-size: $font-size-subtitle-mobile;
+    padding-bottom: $padding-small;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-subtitle;
+    }
+  }
 }

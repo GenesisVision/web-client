@@ -82,86 +82,90 @@ const FundDetailsStatistics = ({ t, statisticData, period }) => {
       </div>
 
       <div className="fund-details-statistics__particular-information">
-        <div className="fund-details-statistics__item fund-details-statistics__item--secondary">
-          <span className="fund-details-statistics__label">
-            {t("fund-details-page.statistics.calmarRatio")}
-          </span>
-          <span className="fund-details-statistics__value">
-            <NumberFormat
-              value={statistic.calmarRatio}
-              displayType="text"
-              suffix="%"
-            />
-          </span>
+        <div className="fund-details-statistics__column">
+          <div className="fund-details-statistics__item fund-details-statistics__item--half fund-details-statistics__item--secondary">
+            <span className="fund-details-statistics__label">
+              {t("fund-details-page.statistics.calmarRatio")}
+            </span>
+            <span className="fund-details-statistics__value">
+              <NumberFormat
+                value={statistic.calmarRatio}
+                displayType="text"
+                suffix="%"
+              />
+            </span>
+          </div>
+
+          <div className="fund-details-statistics__item fund-details-statistics__item--half fund-details-statistics__item--secondary">
+            <span className="fund-details-statistics__label">
+              {t("fund-details-page.statistics.profit-change")}
+            </span>
+            <span className="fund-details-statistics__value">
+              <NumberFormat
+                value={statistic.profitChangePercent}
+                displayType="text"
+                suffix="%"
+                decimalScale={2}
+              />
+            </span>
+          </div>
+
+          <div className="fund-details-statistics__item fund-details-statistics__item--half fund-details-statistics__item--secondary">
+            <span className="fund-details-statistics__label">
+              {t("fund-details-page.statistics.max-drawdown")}
+            </span>
+            <span className="fund-details-statistics__value">
+              <NumberFormat
+                value={statistic.maxDrawdown}
+                displayType="text"
+                suffix="%"
+                decimalScale={2}
+              />
+            </span>
+          </div>
         </div>
 
-        <div className="fund-details-statistics__item fund-details-statistics__item--secondary">
-          <span className="fund-details-statistics__label">
-            {t("fund-details-page.statistics.rebalances")}
-          </span>
-          <span className="fund-details-statistics__value">
-            <NumberFormat
-              value={statistic.rebalances}
-              decimalScale={2}
-              displayType="text"
-            />
-          </span>
-        </div>
+        <div className="fund-details-statistics__column">
+          <div className="fund-details-statistics__item fund-details-statistics__item--half fund-details-statistics__item--secondary">
+            <span className="fund-details-statistics__label">
+              {t("fund-details-page.statistics.rebalances")}
+            </span>
+            <span className="fund-details-statistics__value">
+              <NumberFormat
+                value={statistic.rebalances}
+                decimalScale={2}
+                displayType="text"
+              />
+            </span>
+          </div>
 
-        <div className="fund-details-statistics__item fund-details-statistics__item--secondary">
-          <span className="fund-details-statistics__label">
-            {t("fund-details-page.statistics.profit-change")}
-          </span>
-          <span className="fund-details-statistics__value">
-            <NumberFormat
-              value={statistic.profitChangePercent}
-              displayType="text"
-              suffix="%"
-              decimalScale={2}
-            />
-          </span>
-        </div>
+          <div className="fund-details-statistics__item fund-details-statistics__item--half fund-details-statistics__item--secondary">
+            <span className="fund-details-statistics__label">
+              {t("fund-details-page.statistics.sharpe-ratio")}
+            </span>
+            <span className="fund-details-statistics__value">
+              <NumberFormat
+                value={statistic.sharpeRatio}
+                displayType="text"
+                suffix="%"
+                decimalScale={2}
+              />
+            </span>
+          </div>
 
-        <div className="fund-details-statistics__item fund-details-statistics__item--secondary">
-          <span className="fund-details-statistics__label">
-            {t("fund-details-page.statistics.sharpe-ratio")}
-          </span>
-          <span className="fund-details-statistics__value">
-            <NumberFormat
-              value={statistic.sharpeRatio}
-              displayType="text"
-              suffix="%"
-              decimalScale={2}
-            />
-          </span>
-        </div>
-
-        <div className="fund-details-statistics__item fund-details-statistics__item--secondary">
-          <span className="fund-details-statistics__label">
-            {t("fund-details-page.statistics.max-drawdown")}
-          </span>
-          <span className="fund-details-statistics__value">
-            <NumberFormat
-              value={statistic.maxDrawdown}
-              displayType="text"
-              suffix="%"
-              decimalScale={2}
-            />
-          </span>
-        </div>
-
-        <div className="fund-details-statistics__item fund-details-statistics__item--secondary">
-          <span className="fund-details-statistics__label">
-            {t("fund-details-page.statistics.sortino-ratio")}
-          </span>
-          <span className="fund-details-statistics__value">
-            <NumberFormat
-              value={statistic.sortinoRatio}
-              displayType="text"
-              suffix="%"
-              decimalScale={2}
-            />
-          </span>
+          <div className="fund-details-statistics__item fund-details-statistics__item--half fund-details-statistics__item--secondary">
+            <span className="fund-details-statistics__label">
+              {t("fund-details-page.statistics.sortino-ratio")}
+            </span>
+            <span className="fund-details-statistics__value">
+              <NumberFormat
+                value={statistic.sortinoRatio}
+                displayType="text"
+                suffix="%"
+                decimalScale={2}
+              />
+            </span>
+          </div>
         </div>
       </div>
     </Surface>

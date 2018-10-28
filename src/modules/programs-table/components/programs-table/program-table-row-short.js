@@ -2,6 +2,7 @@ import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import Profitability from "components/profitability/profitability";
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
+import Tooltip from "components/tooltip/tooltip";
 import { GVButton } from "gv-react-components";
 import FavoriteIcon from "modules/favorite-asset/components/favorite-icon/favorite-icon";
 import { TableCell, TableRow } from "modules/table/components";
@@ -47,7 +48,20 @@ const ProgramTableRowShort = ({
         </div>
       </TableCell>
       <TableCell className="programs-table__cell--balance">
-        {(+program.statistic.balanceGVT.amount).toFixed(0)} GVT
+        <Tooltip
+          render={() => (
+            <div>
+              {program.statistic.balanceBase.amount} {program.currency}
+            </div>
+          )}
+        >
+          <NumberFormat
+            value={program.statistic.balanceGVT.amount}
+            suffix=" GVT"
+            decimalScale={0}
+            displayType="text"
+          />
+        </Tooltip>
       </TableCell>
       <TableCell className="programs-table__cell--currency">
         {program.currency}

@@ -17,13 +17,9 @@ import {
 import ProgramCard from "./program-card";
 import ProgramTableRow from "./program-table-row";
 
-const selectFilterValues = [
-  { value: undefined, label: "All" },
-  ...CURRENCY_FILTER_VALUES.map(x => ({ value: x, label: x }))
-];
-
 const ProgramsTable = ({
   t,
+  currencies,
   data,
   isPending,
   sorting,
@@ -37,6 +33,10 @@ const ProgramsTable = ({
   isAuthenticated,
   title
 }) => {
+  const selectFilterValues = [
+    { value: undefined, label: "All" },
+    ...currencies.map(x => ({ value: x, label: x }))
+  ];
   return (
     <Table
       title={title}

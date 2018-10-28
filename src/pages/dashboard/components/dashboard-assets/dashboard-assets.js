@@ -20,11 +20,15 @@ class DashboardAssets extends Component {
     const { tab } = this.state;
     return (
       <Surface className="dashboard-assets">
-        <h2>Assets</h2>
-        <GVTabs value={tab} onChange={this.handleTabChange}>
-          <GVTab value={"programs"} label="Programs" />
-          <GVTab value={"funds"} label="Funds" />
-        </GVTabs>
+        <div className="dashboard-assets__head">
+          <div className="dashboard-assets__title">Assets</div>
+          <div className="dashboard-assets__tabs">
+            <GVTabs value={tab} onChange={this.handleTabChange}>
+              <GVTab value={"programs"} label="Programs" />
+              <GVTab value={"funds"} label="Funds" />
+            </GVTabs>
+          </div>
+        </div>
         <div>
           {tab === "programs" && <DashboardPrograms />}
           {tab === "funds" && <DashboardFunds />}

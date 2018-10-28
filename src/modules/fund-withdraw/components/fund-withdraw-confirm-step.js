@@ -1,5 +1,4 @@
 import { GVButton } from "gv-react-components";
-import moment from "moment";
 import PropTypes from "prop-types";
 import { Fragment } from "react";
 import React from "react";
@@ -14,13 +13,7 @@ const WithdrawConfirmStep = props => {
         <li className="dialog-list__item">
           {props.t("withdraw-fund.withdrawing")}
           <span className="dialog-list__value">
-            {formatValue(props.percent)} GVT
-          </span>
-        </li>
-        <li className="dialog-list__item">
-          {props.t("withdraw-fund.payout-date")}
-          <span className="dialog-list__value">
-            {moment(props.periodEnds).format("DD MMM YYYY")}
+            {formatValue(props.percent)} %
           </span>
         </li>
       </ul>
