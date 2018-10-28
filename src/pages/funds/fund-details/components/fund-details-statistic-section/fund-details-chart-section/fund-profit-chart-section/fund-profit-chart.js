@@ -1,3 +1,4 @@
+import { formartChartMinValue } from "components/chart/chart-components/chart-components.helpers";
 import chartXAxis from "components/chart/chart-components/chart-xaxis";
 import ProgramChartGradient, {
   gradientOffset
@@ -22,7 +23,7 @@ class FundProfitChart extends PureComponent {
     if (!equityChart || equityChart.length === 0) return null;
     const equity = equityChart.map(x => ({
       date: x.date.getTime(),
-      value: x.value
+      value: formartChartMinValue(x.value)
     }));
 
     const equityValues = equity.map(x => x.value);

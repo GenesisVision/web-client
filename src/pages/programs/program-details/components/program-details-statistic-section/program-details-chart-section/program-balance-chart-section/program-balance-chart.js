@@ -14,7 +14,7 @@ import ProgramBalanceTooltip from "./program-balance-tooltip";
 
 class ProgramBalanceChart extends PureComponent {
   render() {
-    const { balanceChart, currency, period } = this.props;
+    const { balanceChart, currency } = this.props;
     if (balanceChart.length === 0) return null;
     const chart = balanceChart.map(x => ({
       ...x,

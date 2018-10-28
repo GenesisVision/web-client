@@ -1,3 +1,4 @@
+import { formartChartMinValue } from "components/chart/chart-components/chart-components.helpers";
 import ChartPeriod from "components/chart/chart-period/chart-period";
 import { DEFAULT_PERIOD } from "components/chart/chart-period/chart-period.helpers";
 import React, { Fragment, PureComponent } from "react";
@@ -11,7 +12,7 @@ import DashboardPortfolioChartStat from "./dashboard-portfolio-chart-stat";
 const composeBalanceChartData = balanceChart => {
   const balance = balanceChart.map(x => ({
     date: x.date.getTime(),
-    balance: x.value
+    balance: formartChartMinValue(x.value)
   }));
   return balance;
 };
@@ -21,11 +22,11 @@ const composeAssetsChartData = assetsChart => {
     let assetsCount = 0;
     const newAsset = {
       date: x.date.getTime(),
-      value: x.value
+      value: formartChartMinValue(x.value)
     };
     x.topAssets.forEach(asset => {
       newAsset[`asset${assetsCount++}`] = {
-        value: asset.value,
+        value: formartChartMinValue(asset.value),
         asset
       };
     });
@@ -34,7 +35,7 @@ const composeAssetsChartData = assetsChart => {
         value: x.otherAssetsValue.value,
         asset: {
           title: "Others",
-          value: x.otherAssetsValue.value,
+          value: formartChartMinValue(x.otherAssetsValue.value),
           changePercent: x.otherAssetsValue.changePercent,
           changeValue: x.otherAssetsValue.changeValue
         }

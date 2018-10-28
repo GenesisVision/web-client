@@ -1,11 +1,11 @@
 import "./program-big-chart.scss";
 
+import { formartChartMinValue } from "components/chart/chart-components/chart-components.helpers";
 import chartXAxis from "components/chart/chart-components/chart-xaxis";
 import ProgramChartGradient, {
   gradientOffset
 } from "components/chart/chart-gradient/chart-gradient";
 import { getStrokeColor } from "components/chart/chart-gradient/chart-gradient";
-import { ChartPeriodType } from "components/chart/chart-period/chart-period.helpers";
 import { GVColors } from "gv-react-components";
 import React from "react";
 import {
@@ -23,7 +23,7 @@ const ProgramBigChart = ({ programId, data }) => {
   if (data.length === 0) return null;
   const programChartData = data.map(x => ({
     date: x.date.getTime(),
-    equity: x.value
+    equity: formartChartMinValue(x.value)
   }));
 
   const programChartDataValues = programChartData.map(x => x.equity);
