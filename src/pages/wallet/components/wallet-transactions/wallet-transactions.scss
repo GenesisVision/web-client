@@ -1,5 +1,6 @@
 @import "styles/_colors.scss";
 @import "styles/_breakpoint.scss";
+@import "styles/_sizes.scss";
 
 .wallet-transactions {
   margin-top: 80px;
@@ -84,6 +85,41 @@
     opacity: 0.4;
     &.icon.icon--actions-circle {
       cursor: auto;
+    }
+  }
+}
+
+.empty-transactions{
+  padding: $padding-small-mobile $padding-middle-mobile;
+  @include media-breakpoint-landscape-phone() {
+    padding: $padding-small $padding-middle;
+  }
+  &__subtitle{
+    font-weight: 600;
+    font-size: $font-size-subtitle-mobile;
+    padding: $padding-small-mobile 0;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-subtitle;
+      padding: $padding-small 0;
+    }
+  }
+  &__disclaimer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: $padding-large-mobile 0;
+    @include media-breakpoint-landscape-phone() {
+      padding: $padding-large 0;
+    }
+  }
+  &__text{
+    font-size: $font-size-middle-mobile;
+    font-weight: 500;
+    opacity: 0.4;
+    padding: $padding-small-mobile 0;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-middle;
+      padding: $padding-small 0;
     }
   }
 }
