@@ -197,16 +197,16 @@
         "end-of-period": "Notifications for the end of the period",
         "fund-rebalancing": "Fund rebalancing",
         "FundRebalancing": {
-          "disabled-alert": "Enabled fund rebalancing notifications",
-          "enabled-alert": "Disabled fund rebalancing notifications"
+          "disabled-alert": "Disabled fund rebalancing notifications",
+          "enabled-alert": "Enabled fund rebalancing notifications"
         },
         "FundNewsAndUpdates": {
-          "disabled-alert": "Enabled fund news and updates notifications",
-          "enabled-alert": "Disabled fund news and updates notifications"
+          "disabled-alert": "Disabled fund news and updates notifications",
+          "enabled-alert": "Enabled fund news and updates notifications"
         },
         "FundEndOfPeriod": {
-          "disabled-alert": "Enabled the end of period notifications",
-          "enabled-alert": "Disabled the end of period notifications"
+          "disabled-alert": "Disabled the end of period notifications",
+          "enabled-alert": "Enabled the end of period notifications"
         }
       },
       "custom": {

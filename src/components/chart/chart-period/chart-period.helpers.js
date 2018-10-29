@@ -25,6 +25,7 @@ export const DEFAULT_PERIOD = {
   type: ChartPeriodType.week,
   start: getPeriodStartDate(ChartPeriodType.week),
   end: moment()
+    .add(1, "d")
     .startOf("day")
     .toDate()
 };

@@ -33,6 +33,7 @@ export const composeRequestValue = (
           .startOf("day")
           .toISOString(),
         [toFilterName]: moment()
+          .add(1, "d")
           .startOf("day")
           .toISOString()
       };
@@ -43,6 +44,7 @@ export const composeRequestValue = (
           .startOf("day")
           .toISOString(),
         [toFilterName]: moment()
+          .add(1, "d")
           .startOf("day")
           .toISOString()
       };
@@ -53,6 +55,7 @@ export const composeRequestValue = (
           .startOf("day")
           .toISOString(),
         [toFilterName]: moment()
+          .add(1, "d")
           .startOf("day")
           .toISOString()
       };
