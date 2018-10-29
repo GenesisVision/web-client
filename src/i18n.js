@@ -25,7 +25,7 @@ i18n
       wait: true
     },
     backend: {
-      loadPath: "locales/{{lng}}/{{ns}}.json",
+      loadPath: "/investor/locales/{{lng}}/{{ns}}.json",
       queryStringParams: { v: "0.0.3" }
     }
   });
