@@ -415,7 +415,7 @@
     "withdraw": "Withdraw",
     "transactions": {
       "title": "Transactions",
-      "empty-transactions":"There are no transactions",
+      "empty-transactions": "There are no transactions",
       "date": "Date",
       "information": "Information",
       "status": "Status",
@@ -956,7 +956,7 @@
     "settings": {
       "title": "Settings",
       "profile-image": "Profile image",
-      "image-requirements": "At least 300 x 300px PNG or JPG file.",
+      "image-requirements": "At least 300 x 300px PNG or JPG file. The maximum file size is 2MB.",
       "save-photo": "Save photo",
       "image-success-save-message": "The photo has just been successfully changed.",
       "change-password": "Change password",

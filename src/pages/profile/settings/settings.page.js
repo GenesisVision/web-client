@@ -24,7 +24,8 @@ const SettingsPage = ({ t }) => {
               color="secondary"
               className={"profile-settings__password"}
             >
-              {`${t("profile.settings.change-password")} >`}
+              {`${t("profile.settings.change-password")} `}
+              <span className="profile-settings__password-arrow">&#10148;</span>
             </GVButton>
           </Link>
 

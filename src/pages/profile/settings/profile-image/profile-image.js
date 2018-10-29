@@ -15,7 +15,8 @@ class ProfileImage extends Component {
       isDefault: false,
       isImageChanged: false
     },
-    isSubmitting: false
+    isSubmitting: false,
+    error: ""
   };
 
   constructor(props) {
@@ -23,8 +24,22 @@ class ProfileImage extends Component {
     this.state.value.src = props.avatar;
   }
 
+  getError = value => {
+    const { t } = this.props;
+    const { width, height, size } = value;
+
+    if (width < 300 || height < 300)
+      return t("profile.settings.validation.image-resolution-incorrect");
+    if (size > 2097152)
+      return t("profile.settings.validation.image-file-is-large");
+
+    return "";
+  };
+
   onChange = (name, value) => {
-    this.setState({ value: { ...value } });
+    let error = this.getError(value);
+
+    this.setState({ value: { ...value }, error });
   };
 
   onSubmit = () => {
@@ -46,19 +61,20 @@ class ProfileImage extends Component {
   };
 
   get isSubmitDisabled() {
-    const { value, isSubmitting } = this.state;
+    const { value, isSubmitting, error } = this.state;
     const { avatar } = this.props;
 
     if (isSubmitting) return true;
     if (!value.isImageChanged) return true;
     if (!value.cropped && !avatar) return true;
+    if (error) return true;
 
     return false;
   }
 
   render() {
     const { onChange, onClear, onSubmit, isSubmitDisabled } = this;
-    const { value } = this.state;
+    const { value, error } = this.state;
     const { t } = this.props;
 
     return (
@@ -77,6 +93,7 @@ class ProfileImage extends Component {
           onClear={onClear}
           value={value}
           className="profile-image__input-image"
+          error={error}
         />
 
         <GVButton
