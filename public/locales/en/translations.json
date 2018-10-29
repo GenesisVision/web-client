@@ -414,6 +414,8 @@
     "add-funds": "Add funds",
     "withdraw": "Withdraw",
     "transactions": {
+      "title": "Transactions",
+      "empty-transactions": "There are no transactions",
       "date": "Date",
       "information": "Information",
       "status": "Status",
