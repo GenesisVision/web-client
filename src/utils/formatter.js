@@ -108,4 +108,19 @@ const formatValue = (x, roundType = roundTypeEnum.FLOOR, isShowSign = true) => {
   return result;
 };
 
-export { dateFormat, formatValue, roundTypeEnum };
+const formatPercent = x => {
+  x = typeof x !== "number" ? +x : x;
+  if (!x) return x;
+  x = filterNum(x);
+  const decimalSplited = getDecimalSeparated(x);
+
+  if (!Number(decimalSplited) || Number(x) === 0) {
+    return x;
+  }
+
+  if (x > 1 || x < -1) return Math.floor(x);
+
+  return Math.floor(x * 10) / 10;
+};
+
+export { dateFormat, formatValue, roundTypeEnum, formatPercent };
