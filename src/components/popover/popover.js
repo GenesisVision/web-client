@@ -126,9 +126,7 @@ class Popover extends Component {
           })}
           ref={this.popover}
         >
-          <Scrollbars autoHeight autoHeightMax={"100vh - 100px"}>
-            {children}
-          </Scrollbars>
+          {children}
         </div>
       </Modal>
     );
