@@ -15,7 +15,7 @@ export const PROGRAMS_VIEW = "programs_view";
 
 class Table extends Component {
   state = {
-    view: loadData(PROGRAMS_VIEW) || TABLE_VIEW
+    view: (this.isViewSwitchEnabled && loadData(PROGRAMS_VIEW)) || TABLE_VIEW
   };
 
   changeView = view => {
