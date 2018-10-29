@@ -93,20 +93,6 @@ class WalletTransactions extends Component {
             renderFilters={(updateFilter, filtering) => {
               return (
                 <Fragment>
-                  <SelectFilter
-                    name="txAction"
-                    label="Type"
-                    value={filtering["txAction"]}
-                    values={WALLET_TRANSACTION_ACTIONS_VALUES}
-                    onChange={updateFilter}
-                  />
-                  <SelectFilter
-                    name="assetType"
-                    label="Assets type"
-                    value={filtering["assetType"]}
-                    values={ASSET_TYPE_FILTER_VALUES}
-                    onChange={updateFilter}
-                  />
                   <DateRangeFilter
                     name={DATE_RANGE_FILTER_NAME}
                     value={filtering["dateRange"]}
