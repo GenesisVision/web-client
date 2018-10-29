@@ -13,11 +13,13 @@ import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { formatValue, roundTypeEnum } from "utils/formatter";
 
-import { fetchWalletTransactions } from "../../services/wallet.services";
+import {
+  fetchWalletTransactions,
+  updateWalletTransactionsFilters
+} from "../../services/wallet.services";
 import WalletTransactionActions from "./wallet-transaction-action-cell";
 import {
   WALLET_TRANSACTIONS_COLUMNS,
-  WALLET_TRANSACTIONS_TYPES_ENUM,
   WALLET_TRANSACTION_ACTIONS_VALUES
 } from "./wallet-transactions.constants";
 
@@ -51,7 +53,9 @@ const WalletTransactions = ({ t }) => (
     <TableContainer
       title="Transactions"
       getItems={fetchWalletTransactions}
+      updateFilters={updateWalletTransactionsFilters}
       getStorePlace={getWalletTransactionsPlace}
+      isResetToDefaultOnUnmount={true}
       isFetchOnMount={true}
       renderFilters={(updateFilter, filtering) => {
         return (
@@ -96,19 +100,8 @@ const WalletTransactions = ({ t }) => (
             <TableCell className="wallet-transactions__cell wallet-transactions__cell--date">
               {moment(transaction.date).format("DD-MM-YYYY, hh:mm a")}
             </TableCell>
-            <TableCell className="wallet-transactions__cell wallet-transactions__cell--source-type">
-              {t(
-                `wallet.transactions-types.${
-                  WALLET_TRANSACTIONS_TYPES_ENUM[transaction.sourceType]
-                }`
-              )}
-            </TableCell>
-            <TableCell className="wallet-transactions__cell wallet-transactions__cell--destination-type">
-              {t(
-                `wallet.transactions-types.${
-                  WALLET_TRANSACTIONS_TYPES_ENUM[transaction.destinationType]
-                }`
-              )}
+            <TableCell className="wallet-transactions__cell wallet-transactions__cell--information">
+              {transaction.information}
             </TableCell>
             <TableCell className="wallet-transactions__cell wallet-transactions__cell--amount">
               <NumberFormat
@@ -123,10 +116,13 @@ const WalletTransactions = ({ t }) => (
               />
             </TableCell>
             <TableCell className="wallet-transactions__cell wallet-transactions__cell--status">
-              {status && t(`wallet.transaction-statuses.${status}`)}
+              {(status && t(`wallet.transaction-statuses.${status}`)) || "-"}
             </TableCell>
             <TableCell className="wallet-transactions__cell wallet-transactions__cell--actions">
-              <WalletTransactionActions transaction={transaction} />
+              <WalletTransactionActions
+                disabled={status === "InProcess" || status === "Cancelled"}
+                transaction={transaction}
+              />
             </TableCell>
           </TableRow>
         );

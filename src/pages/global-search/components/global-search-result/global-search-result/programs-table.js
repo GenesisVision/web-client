@@ -7,13 +7,7 @@ import React from "react";
 import { translate } from "react-i18next";
 import { compose } from "redux";
 
-const ProgramsTable = ({
-  t,
-  isPending,
-  data,
-  filtering,
-  paging
-}) => {
+const ProgramsTable = ({ t, isPending, data, filtering, paging }) => {
   return (
     <Table
       paging={paging}

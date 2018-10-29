@@ -7,9 +7,9 @@ import { compose } from "redux";
 
 import { DASHBOARD_EVENTS_ROUTE } from "../../dashboard.routes";
 import { getPortfolioEvents } from "../../services/dashboard.service";
-import DashboardPortfolioEvents from "./dashboard-portfolio-events";
 import { EvenLogoIcon } from "./dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
 import { EventLogoType } from "./dashboard-portfolio-event-logo/dashboard-portfolio-event-logo.helper";
+import DashboardPortfolioEvents from "./dashboard-portfolio-events";
 
 class DashboardPortfolioEventsContainer extends Component {
   componentDidMount() {

@@ -3,15 +3,15 @@ import "./dashboard-portfolio-event-logo.scss";
 import classnames from "classnames";
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import React from "react";
-import EventCancelledIcon from "shared/media/event-cancelled.svg";
 import EventCancelledIconRed from "shared/media/event-cancelled-red.svg";
-import EventStartedIcon from "shared/media/event-started.svg";
-import EventEndedIcon from "shared/media/event-ended.svg";
+import EventCancelledIcon from "shared/media/event-cancelled.svg";
 import EventEndedRedIcon from "shared/media/event-ended-red.svg";
+import EventEndedIcon from "shared/media/event-ended.svg";
 import EventInvestIcon from "shared/media/event-invest.svg";
 import EventLossIcon from "shared/media/event-loss.svg";
 import EventProfitIcon from "shared/media/event-profit.svg";
 import EventReinvestIcon from "shared/media/event-reinvest.svg";
+import EventStartedIcon from "shared/media/event-started.svg";
 import EventWithdrawIcon from "shared/media/event-withdraw.svg";
 
 import { EventLogoType } from "./dashboard-portfolio-event-logo.helper";

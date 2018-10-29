@@ -415,19 +415,10 @@
     "withdraw": "Withdraw",
     "transactions": {
       "date": "Date",
-      "destination-type": "Destination type",
-      "source-type": "Source type",
+      "information": "Information",
       "status": "Status",
       "amount": "Amount",
       "actions": "Actions"
-    },
-    "transactions-types": {
-      "wallet": "Wallet",
-      "program": "Program",
-      "fund": "Fund",
-      "program-request": "Program request",
-      "withdrawal-request": "Withdrawal request",
-      "payment-transaction": "Payment transaction"
     },
     "transaction-actions": {
       "resend-email": "Resend confirmation email",
