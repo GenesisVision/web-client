@@ -166,6 +166,17 @@ WalletWithdrawForm.propTypes = {
   onSubmit: PropTypes.func
 };
 
+const twoFactorvalidator = (t, twoFactorEnabled) => {
+  return twoFactorEnabled
+    ? string()
+        .trim()
+        .matches(/^\d{6}$/, t("wallet-withdraw.validation.two-factor-6digits"))
+        .required(t("wallet-withdraw.validation.two-factor-required"))
+    : string()
+        .trim()
+        .matches(/^\d{6}$/, t("wallet-withdraw.validation.two-factor-6digits"));
+};
+
 export default compose(
   translate(),
   withFormik({
@@ -177,7 +188,7 @@ export default compose(
       }
       return { currency, amount: "", address: "", twoFactorCode: "" };
     },
-    validationSchema: ({ t, availableToWithdrawal }) =>
+    validationSchema: ({ t, availableToWithdrawal, twoFactorEnabled }) =>
       object().shape({
         amount: number()
           .max(
@@ -188,13 +199,7 @@ export default compose(
         address: ethWalletValidator.required(
           t("wallet-withdraw.validation.address-is-required")
         ),
-        twoFactorCode: string()
-          .trim()
-          .matches(
-            /^\d{6}$/,
-            t("wallet-withdraw.validation.two-factor-6digits")
-          )
-          .required(t("wallet-withdraw.validation.two-factor-required"))
+        twoFactorCode: twoFactorvalidator(t, twoFactorEnabled)
       }),
     handleSubmit: (values, { props }) => props.onSubmit(values)
   })
