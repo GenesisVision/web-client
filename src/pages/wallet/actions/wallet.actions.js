@@ -9,10 +9,13 @@ export const fetchWalletBalance = (currentCurrency, authorization) => ({
   payload: walletApi.v10WalletByCurrencyGet(currentCurrency, authorization)
 });
 
-export const fetchWalletTransactions = (authorization, filters) => ({
+export const fetchWalletTransactionsDispatch = (authorization, filters) => ({
   type: WALLET_TRANSACTIONS,
   payload: walletApi.v10WalletTransactionsGet(authorization, filters)
 });
+
+export const fetchWalletTransactions = (authorization, filters) =>
+  walletApi.v10WalletTransactionsGet(authorization, filters);
 
 export const updateWalletTransactionsFilters = filters => ({
   type: WALLET_TRANSACTIONS_FILTERS,

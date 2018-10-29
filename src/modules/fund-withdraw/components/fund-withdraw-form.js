@@ -1,9 +1,9 @@
 import { withFormik } from "formik";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
+import { translate } from "react-i18next";
 import { compose } from "redux";
 import { number, object } from "yup";
-import { translate } from "react-i18next";
 
 import WithdrawConfirmStep from "./fund-withdraw-confirm-step";
 import FundWithdrawEnterPercentStep from "./fund-withdraw-enter-percent-step";

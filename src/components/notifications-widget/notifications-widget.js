@@ -13,15 +13,10 @@ const NorificationsWidget = ({ openNotifications, notificationsCount }) => {
       className={classnames("notifications-widget", {
         "notifications-widget--has": hasNotifications
       })}
+      onClick={openNotifications}
     >
-      <RingIcon
-        className="notifications-widget__ring"
-        onClick={openNotifications}
-      />
-      <Chip
-        type={hasNotifications ? "negative" : null}
-        onClick={openNotifications}
-      >
+      <RingIcon className="notifications-widget__ring" />
+      <Chip type={hasNotifications ? "negative" : null}>
         {notificationsCount}
       </Chip>
     </div>

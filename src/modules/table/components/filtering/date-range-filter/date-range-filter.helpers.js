@@ -29,31 +29,42 @@ export const composeRequestValue = (
   switch (value.type) {
     case DateRangeFilterTypes.all:
       return {
-        [fromFilterName]: moment(20181001).toISOString(),
-        [toFilterName]: moment().toISOString()
+        [fromFilterName]: moment(20181001)
+          .startOf("day")
+          .toISOString(),
+        [toFilterName]: moment()
+          .startOf("day")
+          .toISOString()
       };
     case DateRangeFilterTypes.lastMonth:
       return {
         [fromFilterName]: moment()
           .subtract(1, "month")
+          .startOf("day")
           .toISOString(),
-        [toFilterName]: moment().toISOString()
+        [toFilterName]: moment()
+          .startOf("day")
+          .toISOString()
       };
     case DateRangeFilterTypes.lastWeek:
       return {
         [fromFilterName]: moment()
           .subtract(1, "week")
+          .startOf("day")
           .toISOString(),
-        [toFilterName]: moment().toISOString()
+        [toFilterName]: moment()
+          .startOf("day")
+          .toISOString()
       };
     case DateRangeFilterTypes.custom:
     default:
       return {
         [fromFilterName]: moment(value.dateStart)
-          .add(1, "d")
+          .startOf("day")
           .toISOString(),
         [toFilterName]: moment(value.dateEnd)
           .add(1, "d")
+          .startOf("day")
           .toISOString()
       };
   }

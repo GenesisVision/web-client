@@ -10,10 +10,7 @@ export const WALLET_TRANSACTIONS_COLUMNS = [
     name: "date"
   },
   {
-    name: "source-type"
-  },
-  {
-    name: "destination-type"
+    name: "information"
   },
   {
     name: "amount"
@@ -38,15 +35,6 @@ export const WALLET_TRANSACTIONS_DEFAULT_FILTERING = {
   dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE,
   assetType: ASSET_TYPE_FILTER_DEFAULT_VALUE,
   txAction: undefined
-};
-
-export const WALLET_TRANSACTIONS_TYPES_ENUM = {
-  Wallet: "wallet",
-  Program: "program",
-  Fund: "fund",
-  ProgramRequest: "program-request",
-  WithdrawalRequest: "withdrawal-request",
-  PaymentTransaction: "payment-transaction"
 };
 
 export const WALLET_TRANSACTION_ACTIONS_VALUES = [

@@ -8,18 +8,23 @@ import { DATE_RANGE_FILTER_NAME } from "modules/table/components/filtering/date-
 import SelectFilter from "modules/table/components/filtering/select-filter/select-filter";
 import TableContainer from "modules/table/components/table-container";
 import moment from "moment";
-import React, { Fragment } from "react";
+import React, { Fragment, Component } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { formatValue, roundTypeEnum } from "utils/formatter";
+import authService from "services/auth-service";
+import EmptyTransactionsIcon from "shared/media/empty-wallet.svg";
 
-import { fetchWalletTransactions } from "../../services/wallet.services";
+import {
+  fetchWalletTransactions,
+  updateWalletTransactionsFilters
+} from "../../services/wallet.services";
 import WalletTransactionActions from "./wallet-transaction-action-cell";
 import {
   WALLET_TRANSACTIONS_COLUMNS,
-  WALLET_TRANSACTIONS_TYPES_ENUM,
   WALLET_TRANSACTION_ACTIONS_VALUES
 } from "./wallet-transactions.constants";
+import * as actions from "../../actions/wallet.actions";
 
 const getStatus = transaction => {
   const { destinationWithdrawalInfo } = transaction;
@@ -46,93 +51,124 @@ const getWalletTransactionsPlace = state => {
   };
 };
 
-const WalletTransactions = ({ t }) => (
-  <Surface className="wallet-transactions">
-    <TableContainer
-      title="Transactions"
-      getItems={fetchWalletTransactions}
-      getStorePlace={getWalletTransactionsPlace}
-      isFetchOnMount={true}
-      renderFilters={(updateFilter, filtering) => {
-        return (
-          <Fragment>
-            <SelectFilter
-              name="txAction"
-              label="Type"
-              value={filtering["txAction"]}
-              values={WALLET_TRANSACTION_ACTIONS_VALUES}
-              onChange={updateFilter}
-            />
-            <SelectFilter
-              name="assetType"
-              label="Assets type"
-              value={filtering["assetType"]}
-              values={ASSET_TYPE_FILTER_VALUES}
-              onChange={updateFilter}
-            />
-            <DateRangeFilter
-              name={DATE_RANGE_FILTER_NAME}
-              value={filtering["dateRange"]}
-              onChange={updateFilter}
-              startLabel={t("filters.date-range.account-creation")}
-            />
-          </Fragment>
-        );
-      }}
-      columns={WALLET_TRANSACTIONS_COLUMNS}
-      renderHeader={column => (
-        <span
-          className={`wallet-transactions__cell wallet-transactions__cell--${
-            column.name
-          }`}
-        >
-          {t(`wallet.transactions.${column.name}`)}
-        </span>
-      )}
-      renderBodyRow={transaction => {
-        const status = getStatus(transaction);
-        return (
-          <TableRow className="wallet-transactions__row">
-            <TableCell className="wallet-transactions__cell wallet-transactions__cell--date">
-              {moment(transaction.date).format("DD-MM-YYYY, hh:mm a")}
-            </TableCell>
-            <TableCell className="wallet-transactions__cell wallet-transactions__cell--source-type">
-              {t(
-                `wallet.transactions-types.${
-                  WALLET_TRANSACTIONS_TYPES_ENUM[transaction.sourceType]
-                }`
-              )}
-            </TableCell>
-            <TableCell className="wallet-transactions__cell wallet-transactions__cell--destination-type">
-              {t(
-                `wallet.transactions-types.${
-                  WALLET_TRANSACTIONS_TYPES_ENUM[transaction.destinationType]
-                }`
-              )}
-            </TableCell>
-            <TableCell className="wallet-transactions__cell wallet-transactions__cell--amount">
-              <NumberFormat
-                value={formatValue(
-                  transaction.amount,
-                  roundTypeEnum.FLOOR,
-                  false
-                )}
-                thousandSeparator=" "
-                displayType="text"
-                suffix={" " + transaction.sourceCurrency}
-              />
-            </TableCell>
-            <TableCell className="wallet-transactions__cell wallet-transactions__cell--status">
-              {status && t(`wallet.transaction-statuses.${status}`)}
-            </TableCell>
-            <TableCell className="wallet-transactions__cell wallet-transactions__cell--actions">
-              <WalletTransactionActions transaction={transaction} />
-            </TableCell>
-          </TableRow>
-        );
-      }}
-    />
-  </Surface>
+const emptyTransactions = t => (
+  <div className="empty-transactions">
+    <div className="empty-transactions__subtitle">
+      {t("wallet.transactions.title")}
+    </div>
+    <div className="empty-transactions__disclaimer">
+      <div className="empty-transactions__icon">
+        <img src={EmptyTransactionsIcon} alt="" />
+      </div>
+      <div className="empty-transactions__text">
+        {t("wallet.transactions.empty-transactions")}
+      </div>
+    </div>
+  </div>
 );
+
+class WalletTransactions extends Component {
+  state = {
+    transactionsCount: []
+  };
+  componentDidMount() {
+    const authorization = authService.getAuthArg();
+    actions.fetchWalletTransactions(authorization).then(res => {
+      this.setState({ transactionsCount: res.total });
+    });
+  }
+
+  render() {
+    const { t } = this.props;
+    return (
+      <Surface className="wallet-transactions">
+        {(this.state.transactionsCount && (
+          <TableContainer
+            title={t("wallet.transactions.title")}
+            getItems={fetchWalletTransactions}
+            updateFilters={updateWalletTransactionsFilters}
+            getStorePlace={getWalletTransactionsPlace}
+            isResetToDefaultOnUnmount={true}
+            isFetchOnMount={true}
+            renderFilters={(updateFilter, filtering) => {
+              return (
+                <Fragment>
+                  <SelectFilter
+                    name="txAction"
+                    label="Type"
+                    value={filtering["txAction"]}
+                    values={WALLET_TRANSACTION_ACTIONS_VALUES}
+                    onChange={updateFilter}
+                  />
+                  <SelectFilter
+                    name="assetType"
+                    label="Assets type"
+                    value={filtering["assetType"]}
+                    values={ASSET_TYPE_FILTER_VALUES}
+                    onChange={updateFilter}
+                  />
+                  <DateRangeFilter
+                    name={DATE_RANGE_FILTER_NAME}
+                    value={filtering["dateRange"]}
+                    onChange={updateFilter}
+                    startLabel={t("filters.date-range.account-creation")}
+                  />
+                </Fragment>
+              );
+            }}
+            columns={WALLET_TRANSACTIONS_COLUMNS}
+            renderHeader={column => (
+              <span
+                className={`wallet-transactions__cell wallet-transactions__cell--${
+                  column.name
+                }`}
+              >
+                {t(`wallet.transactions.${column.name}`)}
+              </span>
+            )}
+            renderBodyRow={transaction => {
+              const status = getStatus(transaction);
+              return (
+                <TableRow className="wallet-transactions__row">
+                  <TableCell className="wallet-transactions__cell wallet-transactions__cell--date">
+                    {moment(transaction.date).format("DD-MM-YYYY, hh:mm a")}
+                  </TableCell>
+                  <TableCell className="wallet-transactions__cell wallet-transactions__cell--information">
+                    {transaction.information}
+                  </TableCell>
+                  <TableCell className="wallet-transactions__cell wallet-transactions__cell--amount">
+                    <NumberFormat
+                      value={formatValue(
+                        transaction.amount,
+                        roundTypeEnum.FLOOR,
+                        false
+                      )}
+                      thousandSeparator=" "
+                      displayType="text"
+                      suffix={" " + transaction.sourceCurrency}
+                    />
+                  </TableCell>
+                  <TableCell className="wallet-transactions__cell wallet-transactions__cell--status">
+                    {(status && t(`wallet.transaction-statuses.${status}`)) ||
+                      "-"}
+                  </TableCell>
+                  <TableCell className="wallet-transactions__cell wallet-transactions__cell--actions">
+                    <WalletTransactionActions
+                      disabled={
+                        status === "InProcess" || status === "Cancelled"
+                      }
+                      transaction={transaction}
+                    />
+                  </TableCell>
+                </TableRow>
+              );
+            }}
+          />
+        )) ||
+          emptyTransactions(t)}
+      </Surface>
+    );
+  }
+}
 
 export default translate()(WalletTransactions);

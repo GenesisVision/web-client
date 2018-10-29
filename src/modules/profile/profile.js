@@ -29,7 +29,7 @@ class Profile extends Component {
               <td className="profile__center" />
               <td className="profile__right">
                 <h4>{t("profile.contacts")}</h4>
-                <VerificationStatus checked={info.phoneNumberConfirmed} />
+                <VerificationStatus checked={true} />
               </td>
             </tr>
             <tr className="profile__content">
@@ -38,11 +38,6 @@ class Profile extends Component {
               </td>
               <td className="profile__center" />
               <td className="profile__right">
-                <ProfileField
-                  label={t("profile.phone-number")}
-                  value={info.phone}
-                  name="phone"
-                />
                 <ProfileField
                   label={t("profile.email")}
                   value={info.email}
@@ -60,99 +55,6 @@ class Profile extends Component {
                 <VerificationStatus
                   verificationStatus={info.verificationStatus}
                 />
-              </td>
-            </tr>
-            <tr className="profile__content">
-              <td className="profile__left">
-                <span className="profile__stick" />
-              </td>
-              <td className="profile__center" />
-              <td className="profile__right">
-                {!info.firstName &&
-                  !info.lastName &&
-                  !info.birthday &&
-                  !info.country && <p>No info</p>}
-                <div>
-                  <ProfileField
-                    value={info.firstName}
-                    label={t("profile.forename")}
-                    name="firstName"
-                  />
-                  <ProfileField
-                    value={info.lastName}
-                    label={t("profile.family-name")}
-                    name="lastName"
-                  />
-                </div>
-                <div>
-                  <ProfileField
-                    value={
-                      info.birthday &&
-                      moment(info.birthday).format("DD-MM-YYYY")
-                    }
-                    label={t("profile.birthday")}
-                    name="birthday"
-                  />
-                  <ProfileField
-                    value={info.citizenship}
-                    label={t("profile.citizen")}
-                    name="citizenship"
-                  />
-                </div>
-              </td>
-            </tr>
-            <tr className="profile__title">
-              <td className="profile__left">
-                <h4>03</h4>
-              </td>
-              <td className="profile__center" />
-              <td className="profile__right">
-                <h4>{t("profile.residential-address")}</h4>
-              </td>
-            </tr>
-            <tr className="profile__content">
-              <td className="profile__left" />
-              <td className="profile__center" />
-              <td className="profile__right">
-                {!info.country &&
-                  !info.city &&
-                  !info.address &&
-                  !info.index && <p>No info</p>}
-                <div className="profile__row">
-                  <ProfileField
-                    value={info.country}
-                    label={t("profile.country")}
-                    name="country"
-                  />
-                  <ProfileField
-                    value={info.city}
-                    label={t("profile.city")}
-                    name="city"
-                  />
-                </div>
-                <div className="profile__row">
-                  <ProfileField
-                    value={info.address}
-                    label={t("profile.address")}
-                    name="address"
-                  />
-                </div>
-                <div className="profile__row">
-                  <ProfileField
-                    value={info.index}
-                    label={t("profile.index")}
-                    name="index"
-                  />
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td />
-              <td />
-              <td>
-                <Link to={PROFILE_EDIT_ROUTE} className="profile__edit-link">
-                  <GVButton>{this.props.t("buttons.edit")}</GVButton>
-                </Link>
               </td>
             </tr>
           </tbody>
