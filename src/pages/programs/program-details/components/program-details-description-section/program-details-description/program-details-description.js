@@ -202,8 +202,9 @@ class ProgramDetailsDescription extends PureComponent {
                 />
               )}
             </div>
-            {canWithdraw && (
+            {isInvested && (
               <ProgramDetailsInvestment
+                canWithdraw={canWithdraw}
                 className={"program-details-description__your-investment"}
                 programCurrency={programDescription.currency}
                 {...composeInvestmentData(programDescription)}

@@ -26,6 +26,7 @@ class FundDetailsInvestment extends PureComponent {
   render() {
     const {
       t,
+      canWithdraw,
       fundCurrency,
       className,
       fundId,
@@ -110,6 +111,7 @@ class FundDetailsInvestment extends PureComponent {
             color="secondary"
             variant="outlined"
             onClick={this.handleOpenWithdrawalPopup}
+            disabled={!canWithdraw}
           >
             {t("fund-details-page.description.withdraw")}
           </GVButton>
