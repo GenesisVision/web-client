@@ -899,7 +899,10 @@
         "ManagerInvest":"Manager invest",
         "EntranceFee": "Entrance fee",
         "AssetStarted": "Asset started",
-        "InvestorInvest": "Investor invest"
+        "InvestorInvest": "Investor invest",
+        "AssetFinished": "Asset finished",
+        "ProgramPeriodStats": "Program period stats",
+        "ProgramPeriodEnds": "Programp period ends"
       }
     }
   },
