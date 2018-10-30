@@ -1,17 +1,17 @@
 import "./dashboard-portfolio-chart-section.scss";
 
 import Surface from "components/surface/surface";
+import { GVButton } from "gv-react-components";
+import { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
+import { WALLET_PAGE_ROUTE } from "pages/wallet/wallet-page";
 import React, { Component, Fragment } from "react";
+import { translate } from "react-i18next";
+import connect from "react-redux/es/connect/connect";
+import { Link } from "react-router-dom";
+import { compose } from "redux";
 
 import DashboardPortfolioChartContainer from "./dashboard-chart/dashboard-portfolio-chart-container";
 import DashboardInRequestsContainer from "./dashboard-in-requests/dashboard-in-requests-container";
-import { translate } from "react-i18next";
-import { GVButton } from "gv-react-components";
-import { Link } from "react-router-dom";
-import { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
-import { WALLET_PAGE_ROUTE } from "pages/wallet/wallet-page";
-import connect from "react-redux/es/connect/connect";
-import { compose } from "redux";
 
 class DashboardPortfolioChartSection extends Component {
   GetStarted = () => {
@@ -46,29 +46,35 @@ class DashboardPortfolioChartSection extends Component {
     );
   };
 
+  renderSectionBody = () => {
+    const { isNewUser } = this.props;
+    if (isNewUser === null) return null;
+    if (isNewUser) return this.GetStarted();
+    return (
+      <Fragment>
+        <div className="dashboard-portfolio-chart-section__heading">Chart</div>
+        <DashboardInRequestsContainer />
+        <DashboardPortfolioChartContainer />
+      </Fragment>
+    );
+  };
   render() {
-    const { invested } = this.props;
     return (
       <Surface className="dashboard-portfolio-chart-section">
-        {(invested && (
-          <Fragment>
-            <div className="dashboard-portfolio-chart-section__heading">
-              Chart
-            </div>
-            <DashboardInRequestsContainer />
-            <DashboardPortfolioChartContainer />
-          </Fragment>
-        )) ||
-          this.GetStarted()}
+        {this.renderSectionBody()}
       </Surface>
     );
   }
 }
 const mapStateToProps = state => {
   const { info } = state.profileHeader;
-  if (!info.data) return;
-  return { invested: !info.data.isNewUser };
+  let isNewUser = null;
+  if (info.data) {
+    isNewUser = info.data.isNewUser;
+  }
+  return { isNewUser };
 };
+
 export default compose(
   translate(),
   connect(mapStateToProps)
