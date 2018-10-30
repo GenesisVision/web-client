@@ -9,9 +9,9 @@ export const PORTFOLIO_EVENTS_COLUMNS = [
   {
     name: "date"
   },
-  {
+  /*{
     name: "type"
-  },
+  },*/
   {
     name: "description"
   },
