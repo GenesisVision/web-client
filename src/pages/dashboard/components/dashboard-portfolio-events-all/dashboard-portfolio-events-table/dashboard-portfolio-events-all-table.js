@@ -102,7 +102,7 @@ class PortfolioEventsTableComponent extends Component {
                 {isUseProfitability(event) ? (
                   <Profitability value={formatValue(event.value)} prefix="sign">
                     <NumberFormat
-                      value={formatValue(event.value, "floor", false)}
+                      value={formatValue(event.value)}
                       thousandSeparator=" "
                       displayType="text"
                       suffix={" " + event.currency}

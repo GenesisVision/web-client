@@ -124,11 +124,7 @@ class WalletTransactions extends Component {
                   </TableCell>
                   <TableCell className="wallet-transactions__cell wallet-transactions__cell--amount">
                     <NumberFormat
-                      value={formatValue(
-                        transaction.amount,
-                        roundTypeEnum.FLOOR,
-                        false
-                      )}
+                      value={formatValue(transaction.amount)}
                       thousandSeparator=" "
                       displayType="text"
                       suffix={" " + transaction.sourceCurrency}
