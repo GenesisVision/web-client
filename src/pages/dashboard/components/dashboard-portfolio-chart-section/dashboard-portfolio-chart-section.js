@@ -65,10 +65,9 @@ class DashboardPortfolioChartSection extends Component {
   }
 }
 const mapStateToProps = state => {
-  console.log(state.dashboard.portfolioChartData);
-  const { portfolioChartData } = state.dashboard;
-  if (!portfolioChartData.data) return;
-  return { invested: state.dashboard.portfolioChartData.data.isNewUser };
+  const { info } = state.profileHeader;
+  if (!info.data) return;
+  return { invested: !info.data.isNewUser };
 };
 export default compose(
   translate(),
