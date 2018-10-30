@@ -22,6 +22,19 @@ export const validateDateRange = value => {
   return true;
 };
 
+const dateFrom = (substruct, date) => {
+  date = date || new Date();
+  return moment(date)
+    .subtract(1, substruct)
+    .startOf("minute")
+    .toISOString();
+};
+const dateTo = () =>
+  moment()
+    .add(1, "minute")
+    .startOf("minute")
+    .toISOString();
+
 export const composeRequestValue = (
   fromFilterName = SERVER_DATE_RANGE_MIN_FILTER_NAME,
   toFilterName = SERVER_DATE_RANGE_MAX_FILTER_NAME
@@ -29,35 +42,18 @@ export const composeRequestValue = (
   switch (value.type) {
     case DateRangeFilterTypes.all:
       return {
-        [fromFilterName]: moment(20181001)
-          .startOf("day")
-          .toISOString(),
-        [toFilterName]: moment()
-          .add(1, "d")
-          .startOf("day")
-          .toISOString()
+        [fromFilterName]: dateFrom(null, 20181001),
+        [toFilterName]: dateTo()
       };
     case DateRangeFilterTypes.lastMonth:
       return {
-        [fromFilterName]: moment()
-          .subtract(1, "month")
-          .startOf("day")
-          .toISOString(),
-        [toFilterName]: moment()
-          .add(1, "d")
-          .startOf("day")
-          .toISOString()
+        [fromFilterName]: dateFrom("month"),
+        [toFilterName]: dateTo()
       };
     case DateRangeFilterTypes.lastWeek:
       return {
-        [fromFilterName]: moment()
-          .subtract(1, "week")
-          .startOf("day")
-          .toISOString(),
-        [toFilterName]: moment()
-          .add(1, "d")
-          .startOf("day")
-          .toISOString()
+        [fromFilterName]: dateFrom("week"),
+        [toFilterName]: dateTo()
       };
     case DateRangeFilterTypes.custom:
     default:
@@ -65,8 +61,8 @@ export const composeRequestValue = (
         [fromFilterName]: moment(value.dateStart)
           .startOf("day")
           .toISOString(),
-        [toFilterName]: moment(value.dateEnd)
-          .add(1, "d")
+        [toFilterName]: moment()
+          .add(1, "day")
           .startOf("day")
           .toISOString()
       };

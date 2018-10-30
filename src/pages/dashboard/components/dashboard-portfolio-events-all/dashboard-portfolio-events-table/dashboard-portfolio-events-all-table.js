@@ -106,6 +106,7 @@ class PortfolioEventsTableComponent extends Component {
                       value={formatValue(event.value)}
                       thousandSeparator=" "
                       displayType="text"
+                      allowNegative={false}
                       suffix={" " + event.currency}
                     />
                   </Profitability>

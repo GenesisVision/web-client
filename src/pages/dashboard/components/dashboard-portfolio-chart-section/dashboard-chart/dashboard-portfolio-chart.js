@@ -63,7 +63,7 @@ class DashboardPortfolioChart extends PureComponent {
             orientation="left"
             axisLine={false}
             tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
-            tickFormatter={x => x.toFixed(2)}
+            tickFormatter={x => +x.toFixed(2)}
             unit="GVT"
             width={80}
           />
@@ -75,7 +75,7 @@ class DashboardPortfolioChart extends PureComponent {
             axisLine={false}
             tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
             unit="GVT"
-            tickFormatter={x => x.toFixed(2)}
+            tickFormatter={x => +x.toFixed(2)}
             width={100}
           />
           <Area
@@ -95,7 +95,6 @@ class DashboardPortfolioChart extends PureComponent {
               dataKey={`asset${assetsCount - idx - 1}.value`}
               data={assets}
               stackId="bars"
-              // isAnimationActive={false}
               barSize={15}
               yAxisId="right"
               onMouseOver={this.handleBarMouseOver}
