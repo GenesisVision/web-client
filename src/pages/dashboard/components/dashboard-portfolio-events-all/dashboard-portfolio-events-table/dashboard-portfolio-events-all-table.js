@@ -89,11 +89,12 @@ class PortfolioEventsTableComponent extends Component {
                 {moment(event.date).format("DD-MM-YYYY, hh:mm a")}
               </TableCell>
               <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--type">
-                {t(
-                  `dashboard.portfolio-events.types.${
-                    PORTFOLIO_EVENTS_TYPES_ENUM[event.type]
-                  }`
-                )}
+                {PORTFOLIO_EVENTS_TYPES_ENUM[event.type] &&
+                  t(
+                    `dashboard.portfolio-events.types.${
+                      PORTFOLIO_EVENTS_TYPES_ENUM[event.type]
+                    }`
+                  )}
               </TableCell>
               <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--description">
                 {event.title}
