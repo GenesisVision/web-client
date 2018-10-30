@@ -895,7 +895,11 @@
         "loss": "Loss",
         "reinvest": "Reinvest",
         "canceled": "Canceled",
-        "ended": "Ended"
+        "ended": "Ended",
+        "ManagerInvest":"Manager invest",
+        "EntranceFee": "Entrance fee",
+        "AssetStarted": "Asset started",
+        "InvestorInvest": "Investor invest"
       }
     }
   },
