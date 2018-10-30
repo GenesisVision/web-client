@@ -9,5 +9,5 @@ export const passwordValidator = string()
   .required("Password is required.");
 
 export const ethWalletValidator = string()
-  .matches(/^0x[a-fA-F0-9]{40}$/, "Invalid eth wallet-pane address")
+  .matches(/^0x[a-fA-F0-9]{40}$/, "Invalid eth wallet address")
   .required("Wallet is required.");

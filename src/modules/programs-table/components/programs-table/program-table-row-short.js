@@ -94,10 +94,9 @@ const ProgramTableRowShort = ({
       <TableCell className="programs-table__cell--profit">
         <Profitability value={program.statistic.profitPercent} prefix="sign">
           <NumberFormat
-            value={program.statistic.profitPercent}
+            value={formatValue(program.statistic.profitPercent, 2)}
             suffix="%"
             allowNegative={false}
-            decimalScale={2}
             displayType="text"
           />
         </Profitability>

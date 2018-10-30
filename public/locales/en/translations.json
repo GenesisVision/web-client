@@ -197,16 +197,16 @@
         "end-of-period": "Notifications for the end of the period",
         "fund-rebalancing": "Fund rebalancing",
         "FundRebalancing": {
-          "disabled-alert": "Enabled fund rebalancing notifications",
-          "enabled-alert": "Disabled fund rebalancing notifications"
+          "disabled-alert": "Disabled fund rebalancing notifications",
+          "enabled-alert": "Enabled fund rebalancing notifications"
         },
         "FundNewsAndUpdates": {
-          "disabled-alert": "Enabled fund news and updates notifications",
-          "enabled-alert": "Disabled fund news and updates notifications"
+          "disabled-alert": "Disabled fund news and updates notifications",
+          "enabled-alert": "Enabled fund news and updates notifications"
         },
         "FundEndOfPeriod": {
-          "disabled-alert": "Enabled the end of period notifications",
-          "enabled-alert": "Disabled the end of period notifications"
+          "disabled-alert": "Disabled the end of period notifications",
+          "enabled-alert": "Enabled the end of period notifications"
         }
       },
       "custom": {
@@ -415,7 +415,7 @@
     "withdraw": "Withdraw",
     "transactions": {
       "title": "Transactions",
-      "empty-transactions":"There are no transactions",
+      "empty-transactions": "There are no transactions",
       "date": "Date",
       "information": "Information",
       "status": "Status",
@@ -873,6 +873,14 @@
       "title": "Portfolio Events",
       "see-all-button": "See All",
       "table-title": "Operations",
+      "empty-events": {
+        "text": "The following events will be displayed here",
+        "finished": "Fund/Program finished",
+        "started": "Fund/Program started",
+        "investor-left": "Investor left",
+        "new-investor": "New investor",
+        "interrupted": "Fund/Program interrupted"
+      },
       "table-header": {
         "date": "Date",
         "type": "Type",
@@ -887,7 +895,14 @@
         "loss": "Loss",
         "reinvest": "Reinvest",
         "canceled": "Canceled",
-        "ended": "Ended"
+        "ended": "Ended",
+        "ManagerInvest":"Manager invest",
+        "EntranceFee": "Entrance fee",
+        "AssetStarted": "Asset started",
+        "InvestorInvest": "Investor invest",
+        "AssetFinished": "Asset finished",
+        "ProgramPeriodStats": "Program period stats",
+        "ProgramPeriodEnds": "Programp period ends"
       }
     }
   },

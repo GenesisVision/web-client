@@ -62,7 +62,7 @@ class DashboardPortfolioEventsContainer extends Component {
     const { isPending, data } = this.props;
     if (isPending || data === undefined) return null;
     return (
-      (data.events && (
+      (data.total && (
         <DashboardPortfolioEvents
           events={data.events}
           fullEventsUrl={DASHBOARD_EVENTS_ROUTE}

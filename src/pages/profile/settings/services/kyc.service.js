@@ -14,6 +14,7 @@ export const loadKycIFrame = () => {
         // configuration object (see preparation steps)
         {
           accessToken: data,
+          excludedCountries: [ "USA" ],
           lang: "en",
           applicantDataPage: {
             enabled: true,
@@ -29,6 +30,10 @@ export const loadKycIFrame = () => {
               {
                 name: "email",
                 required: true
+              },
+              {
+                 "name": "phone",
+                 "required": true
               },
               {
                 name: "country",

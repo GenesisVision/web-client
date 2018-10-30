@@ -8,13 +8,14 @@ import { DATE_RANGE_FILTER_NAME } from "modules/table/components/filtering/date-
 import SelectFilter from "modules/table/components/filtering/select-filter/select-filter";
 import TableContainer from "modules/table/components/table-container";
 import moment from "moment";
-import React, { Fragment, Component } from "react";
+import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { formatValue, roundTypeEnum } from "utils/formatter";
 import authService from "services/auth-service";
 import EmptyTransactionsIcon from "shared/media/empty-wallet.svg";
+import { formatValue, roundTypeEnum } from "utils/formatter";
 
+import * as actions from "../../actions/wallet.actions";
 import {
   fetchWalletTransactions,
   updateWalletTransactionsFilters
@@ -24,7 +25,6 @@ import {
   WALLET_TRANSACTIONS_COLUMNS,
   WALLET_TRANSACTION_ACTIONS_VALUES
 } from "./wallet-transactions.constants";
-import * as actions from "../../actions/wallet.actions";
 
 const getStatus = transaction => {
   const { destinationWithdrawalInfo } = transaction;
@@ -93,20 +93,6 @@ class WalletTransactions extends Component {
             renderFilters={(updateFilter, filtering) => {
               return (
                 <Fragment>
-                  <SelectFilter
-                    name="txAction"
-                    label="Type"
-                    value={filtering["txAction"]}
-                    values={WALLET_TRANSACTION_ACTIONS_VALUES}
-                    onChange={updateFilter}
-                  />
-                  <SelectFilter
-                    name="assetType"
-                    label="Assets type"
-                    value={filtering["assetType"]}
-                    values={ASSET_TYPE_FILTER_VALUES}
-                    onChange={updateFilter}
-                  />
                   <DateRangeFilter
                     name={DATE_RANGE_FILTER_NAME}
                     value={filtering["dateRange"]}
@@ -138,11 +124,7 @@ class WalletTransactions extends Component {
                   </TableCell>
                   <TableCell className="wallet-transactions__cell wallet-transactions__cell--amount">
                     <NumberFormat
-                      value={formatValue(
-                        transaction.amount,
-                        roundTypeEnum.FLOOR,
-                        false
-                      )}
+                      value={formatValue(transaction.amount)}
                       thousandSeparator=" "
                       displayType="text"
                       suffix={" " + transaction.sourceCurrency}
