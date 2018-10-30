@@ -4,8 +4,9 @@
   position: absolute;
   background-color: #273642;
   border-radius: $border-radius;
-  overflow: auto;
+  overflow: hidden;
 
-  max-height: calc(100vh - 96px);
+  box-shadow: $box-shadow-4;
+
   max-width: calc(100vw - 20px);
 }
