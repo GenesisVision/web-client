@@ -30,7 +30,7 @@ const FundBalanceTooltip = ({
   const investorsFunds = `${formatValue(
     payload[0].payload.investorsFunds
   )} GVT`;
-  const profit = `${payload[0].payload.profit}${payload[0].unit}`;
+  const profit = `${payload[0].payload.profit} ${payload[0].unit}`;
 
   return (
     <ChartTooltip
