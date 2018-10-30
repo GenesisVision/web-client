@@ -867,6 +867,13 @@
     }
   },
   "dashboard": {
+    "get-started": {
+      "title": "Get started",
+      "text-1": "There's no data right now.",
+      "text-2": "Find the program to invest or make a deposit first",
+      "deposit": "Deposit",
+      "programs": "Go to the programs"
+    },
     "portfolio": "Portfolio",
     "favorite-programs": "Favorite programs",
     "portfolio-events": {
