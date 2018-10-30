@@ -10,6 +10,8 @@ import { GVButton } from "gv-react-components";
 import { Link } from "react-router-dom";
 import { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
 import { WALLET_PAGE_ROUTE } from "pages/wallet/wallet-page";
+import connect from "react-redux/es/connect/connect";
+import { compose } from "redux";
 
 class DashboardPortfolioChartSection extends Component {
   GetStarted = () => {
@@ -45,7 +47,7 @@ class DashboardPortfolioChartSection extends Component {
   };
 
   render() {
-    const invested = true;
+    const { invested } = this.props;
     return (
       <Surface className="dashboard-portfolio-chart-section">
         {(invested && (
@@ -62,5 +64,13 @@ class DashboardPortfolioChartSection extends Component {
     );
   }
 }
-
-export default translate()(DashboardPortfolioChartSection);
+const mapStateToProps = state => {
+  console.log(state.dashboard.portfolioChartData);
+  const { portfolioChartData } = state.dashboard;
+  if (!portfolioChartData.data) return;
+  return { invested: state.dashboard.portfolioChartData.data.isNewUser };
+};
+export default compose(
+  translate(),
+  connect(mapStateToProps)
+)(DashboardPortfolioChartSection);
