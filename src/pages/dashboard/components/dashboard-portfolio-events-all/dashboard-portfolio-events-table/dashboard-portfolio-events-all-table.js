@@ -97,7 +97,7 @@ class PortfolioEventsTableComponent extends Component {
                   )}
               </TableCell>
               <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--description">
-                {event.title}
+                {event.description}
               </TableCell>
               <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--amount">
                 {isUseProfitability(event) ? (
