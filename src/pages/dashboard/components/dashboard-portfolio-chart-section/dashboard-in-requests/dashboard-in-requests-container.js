@@ -46,7 +46,7 @@ class DashboardInRequestsContainer extends PureComponent {
       <div className="dashboard-request">
         <StatisticItem
           heading={"In Requests"}
-          value={-inRequests.totalValue}
+          value={inRequests.totalValue}
           adornment={this.renderActionsIcon()}
         />
         <Popover

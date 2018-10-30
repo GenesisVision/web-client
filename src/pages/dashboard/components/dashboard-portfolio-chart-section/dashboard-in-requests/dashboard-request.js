@@ -8,10 +8,6 @@ import NumberFormat from "react-number-format";
 
 import PortfolioEventLogo from "../../dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
 
-const composeRequestValue = (value, type) => {
-  if (type === "Invest") return -value;
-  return value;
-};
 class DashboardRequest extends Component {
   state = {
     isConfirmPopupOpen: false
@@ -51,18 +47,13 @@ class DashboardRequest extends Component {
         </div>
         <div className="dashboard-request-popover__value">
           <div className="dashboard-request-popover__profitability">
-            <Profitability
-              value={composeRequestValue(request.value, request.type)}
-              prefix="sign"
-            >
-              <NumberFormat
-                value={request.value}
-                decimalScale={8}
-                displayType="text"
-                allowNegative={false}
-                suffix=" GVT"
-              />
-            </Profitability>
+            <NumberFormat
+              value={request.value}
+              decimalScale={8}
+              displayType="text"
+              allowNegative={false}
+              suffix=" GVT"
+            />
           </div>
           <div className="dashboard-request-popover__label">
             {moment(request.date).format("ll")}
