@@ -150,7 +150,7 @@ class FundDetailsDescription extends PureComponent {
             {canWithdraw && (
               <FundDetailsInvestment
                 className={"fund-details-description__your-investment"}
-                fundCurrency={fundDescription.currency}
+                fundCurrency={"GVT"}
                 {...composeInvestmentData(fundDescription)}
                 onChangeInvestmentStatus={onChangeInvestmentStatus}
               />
