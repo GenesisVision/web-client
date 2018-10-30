@@ -873,6 +873,14 @@
       "title": "Portfolio Events",
       "see-all-button": "See All",
       "table-title": "Operations",
+      "empty-events": {
+        "text": "The following events will be displayed here",
+        "finished": "Fund/Program finished",
+        "started": "Fund/Program started",
+        "investor-left": "Investor left",
+        "new-investor": "New investor",
+        "interrupted": "Fund/Program interrupted"
+      },
       "table-header": {
         "date": "Date",
         "type": "Type",
