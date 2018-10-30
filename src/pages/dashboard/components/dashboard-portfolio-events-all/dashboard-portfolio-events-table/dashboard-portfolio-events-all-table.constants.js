@@ -46,5 +46,8 @@ export const PORTFOLIO_EVENTS_TYPES_ENUM = {
   ManagerInvest: "ManagerInvest",
   EntranceFee: "EntranceFee",
   AssetStarted: "AssetStarted",
-  InvestorInvest: "InvestorInvest"
+  InvestorInvest: "InvestorInvest",
+  AssetFinished: "AssetFinished",
+  ProgramPeriodStats: "ProgramPeriodStats",
+  ProgramPeriodEnds: "ProgramPeriodEnds"
 };
