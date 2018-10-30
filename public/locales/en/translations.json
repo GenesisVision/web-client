@@ -505,7 +505,8 @@
     "Active": "Active",
     "Investing": "Investing",
     "Withdrawing": "Withdrawing",
-    "Ended": "Ended"
+    "Ended": "Ended",
+    "Pending": "Pending"
   },
   "chart-period": {
     "day-short": "1D",
@@ -896,7 +897,7 @@
         "reinvest": "Reinvest",
         "canceled": "Canceled",
         "ended": "Ended",
-        "ManagerInvest":"Manager invest",
+        "ManagerInvest": "Manager invest",
         "EntranceFee": "Entrance fee",
         "AssetStarted": "Asset started",
         "InvestorInvest": "Investor invest",

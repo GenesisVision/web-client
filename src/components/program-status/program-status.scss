@@ -15,7 +15,8 @@
     color: $program-status-withdrawing-color;
   }
 
-  &__ended {
+  &__ended,
+  &__pending {
     color: $program-status-ended-color;
   }
 }

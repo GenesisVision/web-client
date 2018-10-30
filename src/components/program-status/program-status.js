@@ -9,7 +9,8 @@ const getStatusClassName = (status, className) => {
     "program-status__active": status === "Active",
     "program-status__investing": status === "Investing",
     "program-status__withdrawing": status === "Withdrawing",
-    "program-status__ended": status === "Ended"
+    "program-status__ended": status === "Ended",
+    "program-status__pending": status === "Pending"
   });
 };
 
