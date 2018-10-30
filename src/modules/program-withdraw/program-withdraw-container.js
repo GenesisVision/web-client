@@ -51,7 +51,7 @@ class ProgramWithdrawContainer extends PureComponent {
         <ProgramWithdrawPopup
           programCurrency={programCurrency}
           accountCurrency={accountCurrency}
-          fetchInfo={() => services.getProgramWithdrawInfo(id)}
+          fetchInfo={() => services.getProgramWithdrawInfo(id,programCurrency)}
           withdraw={amount => this.handleWithdraw(id, amount)}
           error={this.state.error}
         />
