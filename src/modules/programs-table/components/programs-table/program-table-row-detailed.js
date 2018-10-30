@@ -125,7 +125,7 @@ class ProgramTableRowDetailed extends Component {
                       {t("programs-page.programs-header.available-to-invest")}
                     </div>
                     <div className="program-detailed__statistic-data--value">
-                      {formatValue(program.availableInvestment)} GVT
+                      {formatValue(program.availableInvestment, 2)} GVT
                     </div>
                   </div>
                   <div>
