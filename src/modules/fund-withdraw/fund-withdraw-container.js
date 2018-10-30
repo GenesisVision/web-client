@@ -52,7 +52,7 @@ class FundWithdrawContainer extends PureComponent {
         <FundWithdrawPopup
           fundCurrency={fundCurrency}
           accountCurrency={accountCurrency}
-          fetchInfo={() => services.getFundWithdrawInfo(id, fundCurrency)}
+          fetchInfo={() => services.getFundWithdrawInfo(id)}
           withdraw={percent => this.handleWithdraw(id, percent)}
           error={this.state.error}
         />

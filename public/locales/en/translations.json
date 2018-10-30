@@ -505,7 +505,8 @@
     "Active": "Active",
     "Investing": "Investing",
     "Withdrawing": "Withdrawing",
-    "Ended": "Ended"
+    "Ended": "Ended",
+    "Pending": "Pending"
   },
   "chart-period": {
     "day-short": "1D",
@@ -867,6 +868,13 @@
     }
   },
   "dashboard": {
+    "get-started": {
+      "title": "Get started",
+      "text-1": "There's no data right now.",
+      "text-2": "Find the program to invest or make a deposit first",
+      "deposit": "Deposit",
+      "programs": "Go to the programs"
+    },
     "portfolio": "Portfolio",
     "favorite-programs": "Favorite programs",
     "portfolio-events": {
@@ -896,7 +904,7 @@
         "reinvest": "Reinvest",
         "canceled": "Canceled",
         "ended": "Ended",
-        "ManagerInvest":"Manager invest",
+        "ManagerInvest": "Manager invest",
         "EntranceFee": "Entrance fee",
         "AssetStarted": "Asset started",
         "InvestorInvest": "Investor invest",

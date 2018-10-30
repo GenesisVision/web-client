@@ -91,7 +91,7 @@ class Dashboardprograms extends Component {
             </TableCell>
             <TableCell className="dashboard-programs__cell--profit">
               <NumberFormat
-                value={+program.personalDetails.profit.toFixed(2)}
+                value={+program.statistic.profitPercent.toFixed(2)}
                 suffix="%"
                 displayType="text"
               />
