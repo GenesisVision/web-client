@@ -37,7 +37,7 @@ export const getFundStatistic = (fundId, currency, period = DEFAULT_PERIOD) => {
         calmarRatio: profitChart.data.calmarRatio,
         profitChangePercent: profitChart.data.profitChangePercent,
         rebalances: profitChart.data.rebalances,
-        balance: profitChart.data.balance,
+        balance: balanceChart.data.gvtBalance,
         trades: profitChart.data.trades,
         successTradesPercent: profitChart.data.successTradesPercent,
         profitFactor: profitChart.data.profitFactor,
