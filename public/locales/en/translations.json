@@ -960,7 +960,7 @@
       "save-photo": "Save photo",
       "image-success-save-message": "The photo has just been successfully changed.",
       "change-password": "Change password",
-      "logout-from-another-devices": "Logout from another devices",
+      "logout-from-another-devices": "Logout from other devices",
       "validation": {
         "image-resolution-incorrect": "The resolution of the uploaded image is too low.",
         "image-file-is-large": "The uploaded image file is too large."
