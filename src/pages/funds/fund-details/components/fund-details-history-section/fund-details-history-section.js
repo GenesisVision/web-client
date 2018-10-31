@@ -28,8 +28,8 @@ class FundDetailsHistorySection extends PureComponent {
   }
 
   render() {
-    const { t, fundId, currency, rebalancingData } = this.props;
-    if (!rebalancingData) return null;
+    const { t, fundId, currency, structure } = this.props;
+    if (!structure) return null;
     return (
       <Surface className="fund-details-history">
         <div className="fund-details-history__heading">
