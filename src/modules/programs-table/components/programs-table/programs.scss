@@ -275,9 +275,9 @@ $description-block-width: 250px;
     line-height: 1.85;
     letter-spacing: 0.4px;
     color: #fff;
-    width: $description-block-width/2;
+    //width: $description-block-width/2;
     max-height: 300px;
-    overflow: hidden;
+    //overflow: hidden;
     word-break: break-all;
     white-space: pre-wrap;
   }
@@ -364,7 +364,7 @@ $description-block-width: 250px;
 
     &__description {
       font-size: $text-size;
-      width: $description-block-width;
+      //width: $description-block-width;
     }
     &__avatar__img {
       height: 80px;

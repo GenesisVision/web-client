@@ -58,7 +58,10 @@ class ProfileInputImage extends Component {
       const img = {
         ...value,
         isImageChanged: true,
-        cropped: blob
+        cropped: blob,
+        width: croppedCanvas.width,
+        height: croppedCanvas.height,
+        size: blob.size
       };
       onChange(name, img);
     }, value.filetype);
@@ -82,11 +85,15 @@ class ProfileInputImage extends Component {
   };
 
   render() {
-    const { className, value, defaultImage } = this.props;
+    const { className, value, defaultImage, error } = this.props;
     const { isDefault, isNew, src } = value;
     const { onDrop, catchImage, clear } = this;
     return (
-      <div className={classnames("profile-input-image", className)}>
+      <div
+        className={classnames("profile-input-image", className, {
+          "profile-input-image--error": error
+        })}
+      >
         <Dropzone
           disableClick
           className="profile-input-image__dropzone"
@@ -155,6 +162,7 @@ class ProfileInputImage extends Component {
             &#10006;
           </div>
         )}
+        {error && <div className="profile-input-image__error">{error}</div>}
       </div>
     );
   }

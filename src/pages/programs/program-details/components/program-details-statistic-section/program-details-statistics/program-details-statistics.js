@@ -113,7 +113,6 @@ const ProgramDetailsStatistics = ({
               <NumberFormat
                 value={statistic.profitFactor}
                 displayType="text"
-                suffix="%"
                 decimalScale={2}
               />
             </span>
@@ -157,7 +156,6 @@ const ProgramDetailsStatistics = ({
               <NumberFormat
                 value={statistic.sharpeRatio}
                 displayType="text"
-                suffix="%"
                 decimalScale={2}
               />
             </span>
@@ -171,7 +169,6 @@ const ProgramDetailsStatistics = ({
               <NumberFormat
                 value={statistic.sortinoRatio}
                 displayType="text"
-                suffix="%"
                 decimalScale={2}
               />
             </span>
