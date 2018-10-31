@@ -33,7 +33,7 @@ class FundDetailsHistorySection extends PureComponent {
     return (
       <Surface className="fund-details-history">
         <div className="fund-details-history__heading">
-          {t("fund-details-page.history.heading")}
+          {t("fund-details-page.history.structure.title")}
         </div>
         <div>
           <FundStructure
