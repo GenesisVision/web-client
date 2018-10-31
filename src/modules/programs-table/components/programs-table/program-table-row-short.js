@@ -85,9 +85,8 @@ const ProgramTableRowShort = ({
       </TableCell>
       <TableCell className="programs-table__cell--drawdown">
         <NumberFormat
-          value={program.statistic.drawdownPercent}
+          value={formatValue(program.statistic.drawdownPercent, 2)}
           suffix="%"
-          decimalScale={2}
           displayType="text"
         />
       </TableCell>

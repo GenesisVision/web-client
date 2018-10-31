@@ -160,9 +160,11 @@ class ProgramTableRowDetailed extends Component {
                     </div>
                     <div className="program-detailed__statistic-data--value">
                       <NumberFormat
-                        value={program.statistic.drawdownPercent}
+                        value={formatValue(
+                          program.statistic.drawdownPercent,
+                          2
+                        )}
                         suffix="%"
-                        decimalScale={2}
                         displayType="text"
                       />
                     </div>
@@ -177,10 +179,12 @@ class ProgramTableRowDetailed extends Component {
                         prefix="sign"
                       >
                         <NumberFormat
-                          value={program.statistic.profitPercent}
+                          value={formatValue(
+                            program.statistic.profitPercent,
+                            2
+                          )}
                           suffix="%"
                           allowNegative={false}
-                          decimalScale={2}
                           displayType="text"
                         />
                       </Profitability>
