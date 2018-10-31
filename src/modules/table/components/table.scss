@@ -19,6 +19,10 @@ $padding: 33px;
 .table {
   width: 100%;
   border-spacing: 0;
+  margin-bottom: $padding-middle-mobile;
+  @include media-breakpoint-landscape-phone() {
+    margin-bottom: $padding-middle;
+  }
   .message {
     padding: $padding;
     text-align: center;
@@ -117,7 +121,7 @@ $padding: 33px;
     box-sizing: border-box;
     align-items: center;
     flex-grow: 1;
-    padding: $padding-small-mobile;
+    padding: 0 $padding-small-mobile;
     overflow: hidden; // Or flex might break
     list-style: none;
     font-weight: normal;
@@ -172,7 +176,7 @@ $padding: 33px;
       font-size: $th-font-size;
     }
     &__cell {
-      padding: $padding-small;
+      padding: 0 $padding-small;
     }
     &__body {
       font-size: $td-font-size;
