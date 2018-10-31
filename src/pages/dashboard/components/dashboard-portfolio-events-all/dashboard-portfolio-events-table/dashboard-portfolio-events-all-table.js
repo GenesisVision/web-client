@@ -88,16 +88,16 @@ class PortfolioEventsTableComponent extends Component {
               <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--date">
                 {moment(event.date).format("DD-MM-YYYY, hh:mm a")}
               </TableCell>
-              <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--type">
+              {/*<TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--type">
                 {PORTFOLIO_EVENTS_TYPES_ENUM[event.type] &&
                   t(
                     `dashboard.portfolio-events.types.${
                       PORTFOLIO_EVENTS_TYPES_ENUM[event.type]
                     }`
                   )}
-              </TableCell>
+              </TableCell>*/}
               <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--description">
-                {event.title}
+                {event.description}
               </TableCell>
               <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--amount">
                 {isUseProfitability(event) ? (
@@ -106,6 +106,7 @@ class PortfolioEventsTableComponent extends Component {
                       value={formatValue(event.value)}
                       thousandSeparator=" "
                       displayType="text"
+                      allowNegative={false}
                       suffix={" " + event.currency}
                     />
                   </Profitability>

@@ -77,7 +77,11 @@ const removeSign = x => {
   return x;
 };
 
-const formatValueOld = (x, roundType = roundTypeEnum.FLOOR, isShowSign = true) => {
+const formatValueOld = (
+  x,
+  roundType = roundTypeEnum.FLOOR,
+  isShowSign = true
+) => {
   x = typeof x !== "number" ? +x : x;
   if (!x) return x;
   x = filterNum(x);
@@ -109,6 +113,7 @@ const formatValueOld = (x, roundType = roundTypeEnum.FLOOR, isShowSign = true) =
 };
 
 const formatValue = (value, decimalScale) => {
+  value = typeof value !== "number" ? +value : value;
   if (value === undefined || isNaN(value)) return null;
   if (value === 0 || value.toFixed(0) == value) return value;
   return [...[value.toFixed(decimalScale || 9).split(".")]]

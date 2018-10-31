@@ -1,4 +1,6 @@
 @import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
+@import "styles/_sizes.scss";
 
 .dashboard-portfolio-chart-section {
   flex: 1;
@@ -101,6 +103,44 @@
           color: $text-dark-color;
         }
       }
+    }
+  }
+}
+.get-started{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  &__title{
+    font-weight: 600;
+    font-size: $font-size-title-mobile;
+    padding: $padding-middle-mobile;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-title;
+      padding: $padding-middle;
+    }
+  }
+  &__text{
+    text-align: center;
+    font-weight: 400;
+    opacity: 0.4;
+    font-size: $font-size-small-mobile;
+    padding: $padding-small-mobile;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-small;
+      padding: $padding-small;
+    }
+  }
+  &__deposit{
+    padding: $padding-middle-mobile;
+    @include media-breakpoint-landscape-phone() {
+      padding: $padding-middle;
+    }
+  }
+  &__programs{
+    font-weight: 600;
+    @include media-breakpoint-landscape-phone() {
     }
   }
 }
