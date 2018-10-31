@@ -1,6 +1,6 @@
 @import "styles/_breakpoint.scss";
 @import "styles/_colors.scss";
-
+@import "styles/_constants.scss";
 $padding: 33px;
 $main-font-size: 13px;
 $small-font-size: 12px;
@@ -47,6 +47,8 @@ $radius: 8px;
     padding: $padding/4;
     margin-bottom: $padding/2;
     border-radius: $radius;
+    box-shadow: $box-shadow-4;
+
     @include media-breakpoint-landscape-phone() {
       font-size: $main-font-size;
       padding: $padding/4;
@@ -54,21 +56,18 @@ $radius: 8px;
     &--success {
       background-color: $positive-color;
       border-color: $positive-color;
-      box-shadow: 0 5px 15px 0 $positive-background-color;
     }
 
     &--danger {
       color: #eb3b5a;
       background-color: hsl(349, 11%, 20%);
       border-color: $negative-color;
-      box-shadow: 0 5px 15px 0 $panel-background-color;
     }
 
     &--warning {
       color: $panel-background-color;
       background-color: #ecdf75;
       border-color: #ecdf75;
-      box-shadow: 0 5px 15px 0 $secondary-color;
     }
   }
   &__close {

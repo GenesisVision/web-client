@@ -1,16 +1,19 @@
 @import "styles/_colors.scss";
-$warning-color: #f5a623;
-$warning-background-color: rgba($warning-color, 0.1);
+@import "styles/_constants.scss";
 
 .chip {
   display: inline-flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 8px;
-  padding: 6px 10px;
+  padding: 7px 13px;
   box-sizing: border-box;
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.4px;
   background-color: $secondary-background-color;
+  box-shadow: $box-shadow-1;
+  cursor: default;
 
   &--negative {
     color: $negative-color;

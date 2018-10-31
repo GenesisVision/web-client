@@ -101,6 +101,7 @@ class GVDatePicker extends Component {
           anchorEl={this.state.anchorEl}
           onClose={this.handleClose}
           horizontal={this.props.horizontal}
+          vertical="bottom"
         >
           <Calendar
             className="gv-datepicker__calendar"
