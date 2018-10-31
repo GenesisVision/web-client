@@ -19,8 +19,7 @@ import { formatValue } from "utils/formatter";
 
 import {
   DASHBOARD_PROGRAMS_COLUMNS,
-  DASHBOARD_PROGRAMS_FILTERS,
-  DASHBOARD_PROGRAMS_SORTING
+  DASHBOARD_PROGRAMS_FILTERS
 } from "../../../dashboard.constants";
 import { getDashboardPrograms } from "../../../services/dashboard-programs.service";
 
@@ -36,7 +35,6 @@ class Dashboardprograms extends Component {
     return (
       <TableModule
         paging={DEFAULT_PAGING}
-        sorting={DASHBOARD_PROGRAMS_SORTING}
         filtering={{
           dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE
         }}
