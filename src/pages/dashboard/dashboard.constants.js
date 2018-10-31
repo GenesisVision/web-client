@@ -5,24 +5,19 @@ export const DASHBOARD_PROGRAMS_COLUMNS = [
     name: "title"
   },
   {
-    name: "share",
-    sortingName: "ByShare"
+    name: "share"
   },
   {
-    name: "currency",
-    sortingName: "ByCurr"
+    name: "currency"
   },
   {
-    name: "time-left",
-    sortingName: "ByEndOfPeriod"
+    name: "time-left"
   },
   {
-    name: "value",
-    sortingName: "ByValue"
+    name: "value"
   },
   {
-    name: "profit",
-    sortingName: "ByProfit"
+    name: "profit"
   },
   {
     name: "chart"
@@ -32,10 +27,32 @@ export const DASHBOARD_PROGRAMS_COLUMNS = [
   }
 ];
 
-export const DASHBOARD_PROGRAMS_SORTING = "ByProfitDesc";
-
 export const DASHBOARD_PROGRAMS_FILTERS = [
   {
     ...composeDefaultDateRangeFilter()
+  }
+];
+
+export const DASHBOARD_FUNDS_TABLE_COLUMNS = [
+  {
+    name: "title"
+  },
+  {
+    name: "balance"
+  },
+  {
+    name: "assets"
+  },
+  {
+    name: "investors"
+  },
+  {
+    name: "drawdown"
+  },
+  {
+    name: "profit"
+  },
+  {
+    name: "chart"
   }
 ];
