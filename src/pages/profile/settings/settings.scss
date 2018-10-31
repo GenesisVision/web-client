@@ -34,6 +34,11 @@
     color: $main-color;
     margin-top: 16px;
     padding: 0;
+
+    &-arrow {
+      font-size: 6px;
+      margin-left: 6px;
+    }
   }
 
   &__aside-actions {
