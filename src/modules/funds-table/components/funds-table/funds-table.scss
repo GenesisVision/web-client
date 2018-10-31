@@ -28,9 +28,13 @@ $chart-width: 160px;
 }
 
 .funds-table__cell {
+  padding: 0 $padding-small;
   & .fund-assets {
     flex-direction: row;
     flex-wrap: nowrap;
+  }
+  & .fund-asset {
+    margin-bottom: 0;
   }
   &--avatar-title {
     display: flex;
