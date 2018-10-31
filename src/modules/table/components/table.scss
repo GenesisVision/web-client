@@ -19,6 +19,10 @@ $padding: 33px;
 .table {
   width: 100%;
   border-spacing: 0;
+  margin-bottom: $padding-middle-mobile;
+  @include media-breakpoint-landscape-phone() {
+    margin-bottom: $padding-middle;
+  }
   .message {
     padding: $padding;
     text-align: center;
