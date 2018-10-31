@@ -711,6 +711,13 @@
     "history": {
       "heading": "History",
       "subheading": "Rebalancing",
+      "structure": {
+        "title": "Structure",
+        "asset": "Asset",
+        "symbol": "Symbol",
+        "target": "Target",
+        "current": "Current"
+      },
       "rebalances": {
         "assets": "Assets",
         "from": "From",
