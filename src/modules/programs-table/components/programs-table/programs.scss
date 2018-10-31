@@ -1,5 +1,6 @@
 @import "styles/_colors.scss";
 @import "styles/_breakpoint.scss";
+@import "styles/_sizes.scss";
 
 $padding: 32px;
 $text-size: 13px;
@@ -66,7 +67,7 @@ $description-block-width: 250px;
     cursor: pointer;
   }
   &__title {
-    padding: 3px 0;
+    //padding: 3px 0;
     font-size: $title-text-size/1.5;
     word-break: break-all;
     & a {
@@ -165,6 +166,7 @@ $description-block-width: 250px;
 }
 
 .programs-table__cell {
+  padding: 0 $padding-small;
   &--avatar-title {
     display: flex;
     flex-direction: row;
@@ -175,7 +177,6 @@ $description-block-width: 250px;
     }
   }
   &--title {
-    padding-left: 9px;
     word-break: break-all;
     min-width: 100px;
     max-width: 170px;
@@ -237,6 +238,7 @@ $description-block-width: 250px;
     justify-content: space-between;
     align-items: center;
     margin-bottom: $padding/1.5;
+    padding-left: 0;
     &--name {
       margin-left: $padding/2;
     }
