@@ -16,6 +16,7 @@ import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import { formatValue } from "utils/formatter";
 import replaceParams from "utils/replace-params";
+import { Scrollbars } from "react-custom-scrollbars";
 
 import ProgramBigChart from "../program-big-chart/program-big-chart";
 
@@ -84,9 +85,15 @@ class ProgramTableRowDetailed extends Component {
                 <div className="program-detailed__strategy">
                   {t("programs-page.programs-header.strategy")}
                 </div>
-                <div className="program-detailed__description">
-                  {program.description}
-                </div>
+                <Scrollbars
+                  autoHide
+                  autoHideTimeout={1000}
+                  style={{ width: "100%", height: "100%" }}
+                >
+                  <div className="program-detailed__description">
+                    {program.description}
+                  </div>
+                </Scrollbars>
               </div>
               <div className="program-detailed__statistic">
                 <div className="program-detailed__chart">
