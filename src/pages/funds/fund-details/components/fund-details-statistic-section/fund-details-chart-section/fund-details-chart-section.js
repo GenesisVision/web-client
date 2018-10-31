@@ -5,7 +5,7 @@ import { GVTab, GVTabs } from "gv-react-components";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 
-import ProgramBalanceChartSection from "./fund-balance-chart-section/fund-profit-chart-section";
+import ProgramBalanceChartSection from "./fund-balance-chart-section/fund-balance-chart-section";
 import FundProfitChartSection from "./fund-profit-chart-section/fund-profit-chart-section";
 
 const PROFIT_TAB = "profit";
