@@ -190,7 +190,9 @@ class ProgramDetailsDescription extends PureComponent {
                 <GVButton
                   className="program-details-description__invest-btn"
                   onClick={this.handleOpenInvestmentPopup}
-                  disabled={!programDescription.canInvest}
+                  disabled={
+                    !programDescription.personalProgramDetails.canInvest
+                  }
                 >
                   {t("program-details-page.description.invest")}
                 </GVButton>
