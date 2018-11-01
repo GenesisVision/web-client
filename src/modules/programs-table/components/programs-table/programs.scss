@@ -219,7 +219,7 @@ $description-block-width: 250px;
     background: $secondary-color;
     padding: $padding/1.5;
     border-radius: $border-radius 0 0 $border-radius;
-    width: 318px;
+    min-width: 218px;
   }
 
   &__collapse {
