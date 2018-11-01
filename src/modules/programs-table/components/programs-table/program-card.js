@@ -16,6 +16,7 @@ import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import replaceParams from "utils/replace-params";
+
 import { formatValue } from "../../../../utils/formatter";
 
 class ProgramCard extends Component {
@@ -88,7 +89,7 @@ class ProgramCard extends Component {
               onClose={this.handleCloseDropdown}
             >
               <div className="popover-list">
-                {program.personalDetails &&
+                {/* {program.personalDetails &&
                   program.personalDetails.isInvested && (
                     <GVButton
                       variant="text"
@@ -106,7 +107,7 @@ class ProgramCard extends Component {
                   >
                     {t("program-actions.invest")}
                   </GVButton>
-                )}
+                )} */}
                 <Link to={programDetailsUrl}>
                   <GVButton
                     variant="text"

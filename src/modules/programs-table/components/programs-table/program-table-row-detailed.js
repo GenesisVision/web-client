@@ -205,7 +205,7 @@ class ProgramTableRowDetailed extends Component {
                     </div>
                   )}
                 <div className="program-detailed__bottom-block">
-                  <GVButton
+                  {/* <GVButton
                     onClick={this.handleOpenInvest}
                     disabled={
                       !program.personalDetails ||
@@ -213,7 +213,7 @@ class ProgramTableRowDetailed extends Component {
                     }
                   >
                     {t("program-actions.invest")}
-                  </GVButton>
+                  </GVButton> */}
                   <ProgramDepositContainer
                     type="program"
                     id={program.id}
