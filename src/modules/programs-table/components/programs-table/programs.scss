@@ -72,7 +72,6 @@ $description-block-width: 250px;
   &__title {
     //padding: 3px 0;
     font-size: $title-text-size/1.5;
-    word-break: break-all;
     & a {
       color: $text-accent-color;
     }
@@ -219,7 +218,7 @@ $description-block-width: 250px;
     background: $secondary-color;
     padding: $padding/1.5;
     border-radius: $border-radius 0 0 $border-radius;
-    width: 318px;
+    min-width: 218px;
   }
 
   &__collapse {
