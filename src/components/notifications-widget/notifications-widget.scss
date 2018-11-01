@@ -2,9 +2,9 @@
   display: flex;
   align-items: center;
   cursor: pointer;
-  .chip {
-    //width: 32px;
+  &__count {
     height: 32px;
+    cursor: pointer !important;
   }
   &__ring {
     margin-right: 10px;

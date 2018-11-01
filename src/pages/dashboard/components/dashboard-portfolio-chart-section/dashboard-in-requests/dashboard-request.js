@@ -52,7 +52,7 @@ class DashboardRequest extends Component {
               decimalScale={8}
               displayType="text"
               allowNegative={false}
-              suffix=" GVT"
+              suffix={` ${request.currency}`}
             />
           </div>
           <div className="dashboard-request-popover__label">

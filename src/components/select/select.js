@@ -6,6 +6,7 @@ import SelectItem from "components/select/select-item";
 import FilterArrowIcon from "modules/table/components/filtering/filter-arrow-icon";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
+import Scrollbars from "react-custom-scrollbars";
 
 class Select extends Component {
   state = {
@@ -99,7 +100,9 @@ class Select extends Component {
           anchorEl={this.state.anchor}
           onClose={this.handleClose}
         >
-          <div className="select__options">{items}</div>
+          <Scrollbars autoHeight autoHeightMax="300px">
+            <div className="select__options">{items}</div>
+          </Scrollbars>
         </Popover>
       </div>
     );

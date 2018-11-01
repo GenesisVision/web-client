@@ -20,9 +20,11 @@
 }
 
 .dashboard-request-popover {
+  display: flex;
+  flex-direction: column;
   min-width: 300px;
-  max-height: 200px;
   padding: 20px;
+  overflow: hidden;
 
   @include media-breakpoint-landscape-phone() {
     min-width: 400px;

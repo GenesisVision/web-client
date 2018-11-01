@@ -4,7 +4,7 @@ import Surface from "components/surface/surface";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 
-import FundRebalancing from "./fund-rebalancing/fund-rebalancing";
+import FundStructure from "./fund-structure/fund-structure";
 
 const TRADES_TAB = "trades";
 class FundDetailsHistorySection extends PureComponent {
@@ -28,17 +28,17 @@ class FundDetailsHistorySection extends PureComponent {
   }
 
   render() {
-    const { t, fundId, currency, rebalancingData } = this.props;
-    if (!rebalancingData) return null;
+    const { t, fundId, currency, structure } = this.props;
+    if (!structure) return null;
     return (
       <Surface className="fund-details-history">
         <div className="fund-details-history__heading">
-          {t("fund-details-page.history.heading")}
+          {t("fund-details-page.history.structure.title")}
         </div>
         <div>
-          <FundRebalancing
-            rebalancing={rebalancingData.data}
-            programId={fundId}
+          <FundStructure
+            structure={structure}
+            fundId={fundId}
             currency={currency}
           />
         </div>

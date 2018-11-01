@@ -34,15 +34,21 @@
     color: $main-color;
     margin-top: 16px;
     padding: 0;
+
+    &-arrow {
+      margin-left: 6px;
+    }
   }
 
   &__aside-actions {
     display: flex;
+
     flex-direction: column;
     margin-top: 16px;
     @include media-breakpoint-landscape-tablet() {
       margin-top: 0;
       margin-left: auto;
+      align-items: flex-end;
     }
   }
 

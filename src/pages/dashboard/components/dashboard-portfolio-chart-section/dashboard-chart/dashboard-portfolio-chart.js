@@ -57,26 +57,13 @@ class DashboardPortfolioChart extends PureComponent {
             new Date(balance[balance.length - 1].date)
           )}
           <YAxis
-            yAxisId="left"
             dataKey="balance"
-            data={balance}
-            orientation="left"
-            axisLine={false}
-            tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
-            tickFormatter={x => +x.toFixed(2)}
-            unit="GVT"
-            width={70}
-          />
-          <YAxis
-            yAxisId="right"
-            dataKey="value"
             data={assets}
-            orientation="right"
             axisLine={false}
             tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
-            unit="GVT"
             tickFormatter={x => +x.toFixed(2)}
-            width={70}
+            unit="GVT"
+            width={40}
           />
           <Area
             type="monotone"
@@ -86,7 +73,6 @@ class DashboardPortfolioChart extends PureComponent {
             fill={`url(#dashboardPortfolioChartFill)`}
             connectNulls={true}
             strokeWidth={2}
-            yAxisId="left"
             isAnimationActive={false}
           />
           <Tooltip cursor={false} content={DasboardPortfolioTooltip} />
@@ -96,7 +82,6 @@ class DashboardPortfolioChart extends PureComponent {
               data={assets}
               stackId="bars"
               barSize={15}
-              yAxisId="right"
               onMouseOver={this.handleBarMouseOver}
               key={idx}
               isAnimationActive={false}

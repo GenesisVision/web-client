@@ -19,7 +19,8 @@ const FundsTable = ({
   return (
     <Table
       paging={paging}
-      updatePaging={updatePaging}
+      updatePaging={() => {}}
+      updateSorting={() => {}}
       columns={FUNDS_TABLE_COLUMNS}
       items={data.funds}
       isPending={data.isPending}

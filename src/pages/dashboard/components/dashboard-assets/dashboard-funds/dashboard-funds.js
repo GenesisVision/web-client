@@ -5,7 +5,6 @@ import FundAssetContainer from "components/fund-asset/fund-asset-container";
 import Profitability from "components/profitability/profitability";
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
 import { GVButton } from "gv-react-components";
-import { FUNDS_TABLE_COLUMNS } from "modules/funds-table/funds-table.constants";
 import { TableCell, TableRow } from "modules/table/components";
 import DateRangeFilter from "modules/table/components/filtering/date-range-filter/date-range-filter";
 import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "modules/table/components/filtering/date-range-filter/date-range-filter.constants";
@@ -23,7 +22,7 @@ import {
   FUND_DETAILS_ROUTE,
   composeFundsDetailsUrl
 } from "../../../../funds/funds.routes";
-import { DASHBOARD_PROGRAMS_SORTING } from "../../../dashboard.constants";
+import { DASHBOARD_FUNDS_TABLE_COLUMNS } from "../../../dashboard.constants";
 import { getDashboardFunds } from "../../../services/dashboard-funds.service";
 
 class DashboardFunds extends Component {
@@ -42,12 +41,11 @@ class DashboardFunds extends Component {
     return (
       <TableModule
         paging={DEFAULT_PAGING}
-        sorting={DASHBOARD_PROGRAMS_SORTING}
         filtering={{
           dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE
         }}
         getItems={this.fetchFunds}
-        columns={FUNDS_TABLE_COLUMNS}
+        columns={DASHBOARD_FUNDS_TABLE_COLUMNS}
         renderFilters={(updateFilter, filtering) => (
           <Fragment>
             <DateRangeFilter
