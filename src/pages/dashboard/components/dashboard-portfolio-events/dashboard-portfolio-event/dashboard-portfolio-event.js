@@ -5,7 +5,7 @@ import * as moment from "moment";
 import PropTypes from "prop-types";
 import React from "react";
 import NumberFormat from "react-number-format";
-import { formatValue, roundTypeEnum } from "utils/formatter";
+import { formatValue } from "utils/formatter";
 
 import { isUseProfitability } from "../../helpers/dashboard-portfolio.helpers";
 import PortfolioEventLogo from "../dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";

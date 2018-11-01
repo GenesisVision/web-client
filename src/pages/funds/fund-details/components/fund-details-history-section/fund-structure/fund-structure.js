@@ -1,17 +1,16 @@
 import "../fund-structure/fund-structure.scss";
 
+import FundAssetImage from "components/avatar/fund-asset-image/fund-asset-image";
 import { TableCell, TableRow } from "modules/table/components";
-import { DATE_RANGE_FILTER_NAME } from "modules/table/components/filtering/date-range-filter/date-range-filter.constants";
 import TableModule from "modules/table/components/table-module";
 import { DEFAULT_PAGING } from "modules/table/reducers/table-paging.reducer";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
+import NumberFormat from "react-number-format";
+import { formatValue } from "utils/formatter";
 
 import { FUND_STRUCTURE_COLUMNS } from "../../../fund-details.constants";
 import * as service from "../../../services/fund-details.service";
-import NumberFormat from "react-number-format";
-import { formatValue } from "utils/formatter";
-import FundAssetImage from "components/avatar/fund-asset-image/fund-asset-image";
 
 class FundStructure extends Component {
   fetchFundStructure = () => {
