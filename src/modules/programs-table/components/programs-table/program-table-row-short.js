@@ -51,7 +51,8 @@ const ProgramTableRowShort = ({
         <Tooltip
           render={() => (
             <div>
-              {program.statistic.balanceBase.amount} {program.currency}
+              {formatValue(program.statistic.balanceBase.amount)}{" "}
+              {program.currency}
             </div>
           )}
         >

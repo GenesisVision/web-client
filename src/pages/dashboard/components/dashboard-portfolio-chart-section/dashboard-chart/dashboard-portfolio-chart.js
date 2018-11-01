@@ -63,7 +63,7 @@ class DashboardPortfolioChart extends PureComponent {
             tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
             tickFormatter={x => +x.toFixed(2)}
             unit="GVT"
-            width={40}
+            width={50}
           />
           <Area
             type="monotone"

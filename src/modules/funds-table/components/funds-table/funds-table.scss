@@ -36,6 +36,9 @@ $chart-width: 160px;
   & .fund-asset {
     margin-bottom: 0;
   }
+  &--amount {
+    white-space: nowrap;
+  }
   &--avatar-title {
     display: flex;
     flex-direction: row;
