@@ -44,6 +44,9 @@
       height: $avatar-size-mobile;
       margin: 0;
     }
+    & .program-avatar__level{
+      border-color: $background-color;
+    }
     @include media-breakpoint-phone() {
       padding: 0;
       .program-avatar {
