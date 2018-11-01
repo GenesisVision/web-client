@@ -56,6 +56,7 @@ export const cancelWithdrawRequest = txId => (dispatch, getState) => {
           true
         )
       );
+      dispatch(fetchWalletBalance());
       dispatch(fetchWalletTransactions());
       return response;
     })
@@ -70,7 +71,14 @@ export const resendWithdrawRequest = txId => (dispatch, getState) => {
   return walletApiProxy
     .v10WalletWithdrawRequestResendByTxIdPost(txId, authorization)
     .then(response => {
+      dispatch(fetchWalletBalance());
       dispatch(fetchWalletTransactions());
+      dispatch(
+        alertMessageActions.success(
+          "wallet.alert-messages.resend-email-success",
+          true
+        )
+      );
       return response;
     })
     .catch(err => {

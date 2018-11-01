@@ -71,6 +71,10 @@ class ProgramDetailsDescription extends PureComponent {
     const isFavorite =
       programDescription.personalProgramDetails &&
       programDescription.personalProgramDetails.isFavorite;
+
+    const hasNotifications =
+      programDescription.personalProgramDetails &&
+      programDescription.personalProgramDetails.hasNotifications;
     return (
       <div className="program-details-description">
         <div className="program-details-description__left">
@@ -234,7 +238,7 @@ class ProgramDetailsDescription extends PureComponent {
           />
           <ProgramDetailsNotification
             url={composeProgramNotificationsUrl(programDescription.url)}
-            disabled={isFavoritePending}
+            hasNotifications={hasNotifications}
           />
         </div>
       </div>
