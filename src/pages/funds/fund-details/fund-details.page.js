@@ -60,10 +60,15 @@ class FundDetailsPage extends PureComponent {
         this.description = data.data;
         this.setState({ isPending: false });
       })
+      .catch(e => {
+        const errorCode = e.code;
+        this.setState({ errorCode });
+      })
       .then(() => {
         this.setState({ isPending: true });
         return getFundStatistic(this.description.data.id);
       })
+      .catch()
       .then(data => {
         this.profitChart = data.profitChartData;
         this.balanceChart = data.balanceChartData;
@@ -79,10 +84,6 @@ class FundDetailsPage extends PureComponent {
         this.setState({ isPending: false });
       })
       .catch(e => {
-        const errorCode = e.code;
-        this.setState({ errorCode });
-      })
-      .finally(() => {
         this.setState({ isPending: false });
       });
   };
