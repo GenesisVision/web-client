@@ -50,6 +50,9 @@ $description-block-width: 250px;
     padding: $padding 20px;
     border-radius: 8px;
     background-color: #212c34;
+    & .program-avatar__level {
+      border-color: #212c34 !important;
+    }
     &--title {
       @include table-title;
     }
