@@ -7,7 +7,7 @@ import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
 import {
   calculateValueOfEntryFee,
-  convertToCurrency
+  convertFromCurrency
 } from "utils/currency-converter";
 import { formatValue } from "utils/formatter";
 import { number, object } from "yup";
@@ -52,7 +52,7 @@ const FundDepositForm = ({
       />
       <div className="invest-popup__currency">
         <NumberFormat
-          value={formatValue(convertToCurrency(values.amount, info.rate))}
+          value={formatValue(convertFromCurrency(values.amount, info.rate))}
           prefix="= "
           suffix={` ${currency}`}
           displayType="text"
