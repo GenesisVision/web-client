@@ -1,7 +1,6 @@
 import "./fund-details-statistics.scss";
 
 import { ChartPeriodType } from "components/chart/chart-period/chart-period.helpers";
-// import ProgramPeriodLine from "components/program-period/program-period-line/program-period-line";
 import Surface from "components/surface/surface";
 import moment from "moment";
 import React from "react";
@@ -57,7 +56,7 @@ const FundDetailsStatistics = ({ t, statisticData, period }) => {
               />
             </span>
           </div>
-         {/* <div className="fund-details-statistics__item fund-details-statistics__item--secondary">
+          {/* <div className="fund-details-statistics__item fund-details-statistics__item--secondary">
             <span className="fund-details-statistics__label">
               {t("fund-details-page.statistics.period-end")}
             </span>
@@ -90,7 +89,9 @@ const FundDetailsStatistics = ({ t, statisticData, period }) => {
             </span>
             <span className="fund-details-statistics__value">
               <NumberFormat
-                value={statistic.calmarRatio}
+                value={
+                  statistic.calmarRatio !== null ? statistic.calmarRatio : "-"
+                }
                 displayType="text"
                 decimalScale={2}
               />
@@ -103,7 +104,11 @@ const FundDetailsStatistics = ({ t, statisticData, period }) => {
             </span>
             <span className="fund-details-statistics__value">
               <NumberFormat
-                value={statistic.profitChangePercent}
+                value={
+                  statistic.profitChangePercent !== null
+                    ? statistic.profitChangePercent
+                    : "-"
+                }
                 displayType="text"
                 suffix="%"
                 decimalScale={2}
@@ -117,7 +122,9 @@ const FundDetailsStatistics = ({ t, statisticData, period }) => {
             </span>
             <span className="fund-details-statistics__value">
               <NumberFormat
-                value={statistic.maxDrawdown}
+                value={
+                  statistic.maxDrawdown !== null ? statistic.maxDrawdown : "-"
+                }
                 displayType="text"
                 suffix="%"
                 decimalScale={2}
@@ -146,7 +153,9 @@ const FundDetailsStatistics = ({ t, statisticData, period }) => {
             </span>
             <span className="fund-details-statistics__value">
               <NumberFormat
-                value={statistic.sharpeRatio}
+                value={
+                  statistic.sharpeRatio !== null ? statistic.sharpeRatio : "-"
+                }
                 displayType="text"
                 decimalScale={2}
               />
@@ -159,7 +168,9 @@ const FundDetailsStatistics = ({ t, statisticData, period }) => {
             </span>
             <span className="fund-details-statistics__value">
               <NumberFormat
-                value={statistic.sortinoRatio}
+                value={
+                  statistic.sortinoRatio !== null ? statistic.sortinoRatio : "-"
+                }
                 displayType="text"
                 decimalScale={2}
               />
