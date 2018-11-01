@@ -65,7 +65,7 @@ class DashboardPortfolioChart extends PureComponent {
             tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
             tickFormatter={x => +x.toFixed(2)}
             unit="GVT"
-            width={80}
+            width={70}
           />
           <YAxis
             yAxisId="right"
@@ -76,7 +76,7 @@ class DashboardPortfolioChart extends PureComponent {
             tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
             unit="GVT"
             tickFormatter={x => +x.toFixed(2)}
-            width={100}
+            width={70}
           />
           <Area
             type="monotone"
