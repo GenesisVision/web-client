@@ -16,6 +16,7 @@ import replaceParams from "utils/replace-params";
 import FundDetailsInvestment from "../fund-details-investment/fund-details-investment";
 import FundDetailsFavorite from "./fund-details-favorite";
 import FundDetailsNotification from "./fund-details-notificaton";
+import { formatValue } from "../../../../../../utils/formatter";
 
 export const composeFundNotificationsUrl = url => {
   return replaceParams(FUND_NOTIFICATIONS_ROUTE, {
@@ -113,7 +114,7 @@ class FundDetailsDescription extends PureComponent {
                   {t("fund-details-page.description.entryFee")}
                 </span>
                 <NumberFormat
-                  value={fundDescription.entryFee}
+                  value={formatValue(fundDescription.entryFee)}
                   displayType="text"
                   suffix=" %"
                 />
@@ -123,7 +124,7 @@ class FundDetailsDescription extends PureComponent {
                   Exit fee
                 </span>
                 <NumberFormat
-                  value={fundDescription.exitFee}
+                  value={formatValue(fundDescription.exitFee)}
                   displayType="text"
                   suffix=" %"
                 />

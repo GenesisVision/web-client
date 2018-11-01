@@ -98,7 +98,7 @@ const ProgramDetailsStatistics = ({
             </span>
             <span className="program-details-statistics__value">
               <NumberFormat
-                value={statistic.trades}
+                value={statistic.trades !== undefined ? statistic.trades : "-"}
                 thousandSeparator={" "}
                 displayType="text"
               />
@@ -111,9 +111,12 @@ const ProgramDetailsStatistics = ({
             </span>
             <span className="program-details-statistics__value">
               <NumberFormat
-                value={statistic.profitFactor}
+                value={
+                  statistic.profitFactor !== undefined
+                    ? formatValue(statistic.profitFactor, 2)
+                    : "-"
+                }
                 displayType="text"
-                decimalScale={2}
               />
             </span>
           </div>
@@ -124,10 +127,13 @@ const ProgramDetailsStatistics = ({
             </span>
             <span className="program-details-statistics__value">
               <NumberFormat
-                value={statistic.maxDrawdown}
+                value={
+                  statistic.maxDrawdown !== undefined
+                    ? formatValue(statistic.maxDrawdown, 2)
+                    : "-"
+                }
                 displayType="text"
                 suffix="%"
-                decimalScale={2}
               />
             </span>
           </div>
@@ -140,8 +146,11 @@ const ProgramDetailsStatistics = ({
             </span>
             <span className="program-details-statistics__value">
               <NumberFormat
-                value={statistic.successTradesPercent}
-                decimalScale={2}
+                value={
+                  statistic.successTradesPercent !== undefined
+                    ? formatValue(statistic.successTradesPercent, 2)
+                    : "-"
+                }
                 displayType="text"
                 suffix="%"
               />
@@ -154,9 +163,12 @@ const ProgramDetailsStatistics = ({
             </span>
             <span className="program-details-statistics__value">
               <NumberFormat
-                value={statistic.sharpeRatio}
+                value={
+                  statistic.sharpeRatio !== undefined
+                    ? formatValue(statistic.sharpeRatio, 2)
+                    : "-"
+                }
                 displayType="text"
-                decimalScale={2}
               />
             </span>
           </div>
@@ -167,9 +179,12 @@ const ProgramDetailsStatistics = ({
             </span>
             <span className="program-details-statistics__value">
               <NumberFormat
-                value={statistic.sortinoRatio}
+                value={
+                  statistic.sortinoRatio !== undefined
+                    ? formatValue(statistic.sortinoRatio, 2)
+                    : "-"
+                }
                 displayType="text"
-                decimalScale={2}
               />
             </span>
           </div>

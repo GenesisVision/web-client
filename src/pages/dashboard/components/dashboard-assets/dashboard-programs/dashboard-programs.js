@@ -52,7 +52,11 @@ class Dashboardprograms extends Component {
           </Fragment>
         )}
         renderHeader={column => (
-          <span className={`dashboard-programs__cell--${column.name}`}>
+          <span
+            className={`programs-table__cell dashboard-programs__cell--${
+              column.name
+            }`}
+          >
             {t(`dashboard-page.programs-header.${column.name}`)}
           </span>
         )}
@@ -89,7 +93,7 @@ class Dashboardprograms extends Component {
             </TableCell>
             <TableCell className="programs-table__cell dashboard-programs__cell--profit">
               <NumberFormat
-                value={+program.statistic.profitPercent.toFixed(2)}
+                value={formatValue(program.statistic.profitPercent)}
                 suffix="%"
                 displayType="text"
               />

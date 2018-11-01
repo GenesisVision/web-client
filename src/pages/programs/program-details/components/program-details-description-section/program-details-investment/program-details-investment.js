@@ -73,7 +73,7 @@ class ProgramDetailsInvestment extends PureComponent {
                 {t("program-details-page.description.profit")}
               </span>
               <NumberFormat
-                value={profitPercent}
+                value={formatValue(profitPercent, 2)}
                 suffix=" %"
                 displayType="text"
               />

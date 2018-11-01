@@ -66,7 +66,10 @@
     height: 380px;
     width: 100%;
     margin-top: 20px;
-
+    padding: 0 $padding-middle-mobile;
+    @include media-breakpoint-landscape-phone(){
+      padding: 0 $padding-middle;
+    }
     .assets-tooltip {
       .gv-tooltip__heading,
       .gv-tooltip__date {
