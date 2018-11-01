@@ -191,6 +191,7 @@ class ProgramDetailsDescription extends PureComponent {
                   className="program-details-description__invest-btn"
                   onClick={this.handleOpenInvestmentPopup}
                   disabled={
+                    !programDescription.personalProgramDetails ||
                     !programDescription.personalProgramDetails.canInvest
                   }
                 >

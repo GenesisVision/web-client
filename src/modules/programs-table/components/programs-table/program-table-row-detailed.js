@@ -11,12 +11,12 @@ import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
 import { composeProgramDetailsUrl } from "pages/programs/programs.routes";
 import { PROGRAM_SLUG_URL_PARAM_NAME } from "pages/programs/programs.routes";
 import React, { Component } from "react";
+import { Scrollbars } from "react-custom-scrollbars";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import { formatValue } from "utils/formatter";
 import replaceParams from "utils/replace-params";
-import { Scrollbars } from "react-custom-scrollbars";
 
 import ProgramBigChart from "../program-big-chart/program-big-chart";
 
@@ -205,7 +205,13 @@ class ProgramTableRowDetailed extends Component {
                     </div>
                   )}
                 <div className="program-detailed__bottom-block">
-                  <GVButton onClick={this.handleOpenInvest}>
+                  <GVButton
+                    onClick={this.handleOpenInvest}
+                    disabled={
+                      !program.personalDetails ||
+                      !program.personalDetails.canInvest
+                    }
+                  >
                     {t("program-actions.invest")}
                   </GVButton>
                   <ProgramDepositContainer
