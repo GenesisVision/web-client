@@ -46,12 +46,11 @@ $chart-width: 160px;
       padding: 0;
     }
     .program-avatar {
-      width: 20px;
+      width: 40px;
       margin: 0;
-      padding-right: $padding-mini-mobile;
+      padding-right: $padding-small-mobile;
       @include media-breakpoint-landscape-phone() {
-        width: 40px;
-        padding-right: $padding-mini;
+        padding-right: $padding-small;
       }
     }
     @include media-breakpoint-landscape-phone() {
@@ -62,6 +61,7 @@ $chart-width: 160px;
   }
   &--title {
     min-width: 50px;
+    padding: 0;
     div {
       padding: $padding-small/10;
     }

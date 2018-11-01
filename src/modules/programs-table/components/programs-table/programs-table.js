@@ -72,7 +72,11 @@ const ProgramsTable = ({
       renderHeader={column => {
         if (!isAuthenticated && column.name === "favorite") return null;
         return (
-          <span className={`programs-table__cell--${column.name}`}>
+          <span
+            className={`programs-table__cell programs-table__cell--${
+              column.name
+            }`}
+          >
             {t(`programs-page.programs-header.${column.name}`)}
           </span>
         );

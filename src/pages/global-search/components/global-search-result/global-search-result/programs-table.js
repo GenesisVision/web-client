@@ -16,7 +16,15 @@ const ProgramsTable = ({ t, isPending, data, filtering, paging }) => {
       columns={PROGRAMS_COLUMNS}
       items={data.programs}
       isPending={data.isPending}
-      renderHeader={column => t(`programs-page.programs-header.${column.name}`)}
+      renderHeader={column => (
+        <span
+          className={`programs-table__cell programs-table__cell--${
+            column.name
+          }`}
+        >
+          {t(`programs-page.programs-header.${column.name}`)}
+        </span>
+      )}
       renderBodyRow={program => (
         <ProgramTableRowShort program={program} onExpandClick={() => {}} />
       )}
