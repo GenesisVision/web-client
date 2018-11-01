@@ -180,6 +180,7 @@ $description-block-width: 250px;
     word-break: break-all;
     min-width: 100px;
     max-width: 170px;
+    padding: 0;
     div {
       padding: $padding/10;
     }
@@ -270,6 +271,7 @@ $description-block-width: 250px;
     letter-spacing: 0.4px;
     color: #fff;
     margin-bottom: $padding/2/1.5;
+    font-weight: 600;
   }
 
   &__description {

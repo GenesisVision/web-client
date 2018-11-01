@@ -25,7 +25,7 @@ const FundsTable = ({
       items={data.funds}
       isPending={data.isPending}
       renderHeader={column => (
-        <span className={`funds-table__cell--${column.name}`}>
+        <span className={`funds-table__cell funds-table__cell--${column.name}`}>
           {t(`funds-page.funds-header.${column.name}`)}
         </span>
       )}

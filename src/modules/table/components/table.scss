@@ -121,7 +121,7 @@ $padding: 33px;
     box-sizing: border-box;
     align-items: center;
     flex-grow: 1;
-    padding: $padding-small-mobile;
+    padding: $padding-small-mobile 0;
     overflow: hidden; // Or flex might break
     list-style: none;
     font-weight: normal;
@@ -176,7 +176,7 @@ $padding: 33px;
       font-size: $th-font-size;
     }
     &__cell {
-      padding: $padding-small;
+      padding: $padding-small 0;
     }
     &__body {
       font-size: $td-font-size;
