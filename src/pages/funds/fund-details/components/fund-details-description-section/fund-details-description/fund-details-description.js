@@ -13,10 +13,10 @@ import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import replaceParams from "utils/replace-params";
 
+import { formatValue } from "../../../../../../utils/formatter";
 import FundDetailsInvestment from "../fund-details-investment/fund-details-investment";
 import FundDetailsFavorite from "./fund-details-favorite";
 import FundDetailsNotification from "./fund-details-notificaton";
-import { formatValue } from "../../../../../../utils/formatter";
 
 export const composeFundNotificationsUrl = url => {
   return replaceParams(FUND_NOTIFICATIONS_ROUTE, {
@@ -134,7 +134,7 @@ class FundDetailsDescription extends PureComponent {
               <GVButton
                 className="fund-details-description__invest-btn"
                 onClick={this.handleOpenInvestmentPopup}
-                disabled={!fundDescription.canInvest}
+                disabled={!fundDescription.personalProgramDetails.canInvest}
               >
                 {t("fund-details-page.description.invest")}
               </GVButton>
