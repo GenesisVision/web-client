@@ -58,6 +58,10 @@ class FundDetailsDescription extends PureComponent {
     const isFavorite =
       fundDescription.personalFundDetails &&
       fundDescription.personalFundDetails.isFavorite;
+
+    const hasNotifications =
+      fundDescription.personalFundDetails &&
+      fundDescription.personalFundDetails.hasNotifications;
     return (
       <div className="fund-details-description">
         <div className="fund-details-description__left">
@@ -169,6 +173,7 @@ class FundDetailsDescription extends PureComponent {
           <FundDetailsNotification
             url={composeFundNotificationsUrl(fundDescription.url)}
             disabled={isFavoritePending}
+            hasNotifications={hasNotifications}
           />
         </div>
       </div>

@@ -48,6 +48,9 @@
   }
   &--ring {
     width: 16px;
+    & path {
+      stroke-width: 1.5px;
+    }
   }
   &--wallet {
     height: 20px;

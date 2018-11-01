@@ -205,6 +205,9 @@
       width: 27px;
       height: 27px;
     }
+    &-icon svg [stroke] {
+      stroke: $label-color;
+    }
     &:hover {
       path {
         stroke: $text-accent-color;
