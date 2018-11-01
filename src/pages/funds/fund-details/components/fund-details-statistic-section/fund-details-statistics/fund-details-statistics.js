@@ -39,7 +39,7 @@ const FundDetailsStatistics = ({ t, statisticData, period }) => {
               {t("fund-details-page.statistics.start-day")}
             </span>
             <span className="fund-details-statistics__value">
-              {moment(statistic.periodStarts).format("D MMM YYYY")}
+              {moment(statistic.creationDate).format("D MMM YYYY")}
             </span>
           </div>
         </div>
