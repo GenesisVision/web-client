@@ -108,7 +108,10 @@ class ProgramDetailsDescription extends PureComponent {
                 </div>
                 <div className="popover-levels__balance">
                   <NumberFormat
-                    value={formatValue(programDescription.availableInvestment)}
+                    value={formatValue(
+                      programDescription.availableInvestment,
+                      5
+                    )}
                     displayType="text"
                     suffix={` GVT`}
                   />
@@ -160,7 +163,7 @@ class ProgramDetailsDescription extends PureComponent {
                   {t("program-details-page.description.avToInvest")}
                 </span>
                 <NumberFormat
-                  value={formatValue(programDescription.availableInvestment)}
+                  value={formatValue(programDescription.availableInvestment, 2)}
                   displayType="text"
                   suffix={` GVT`}
                 />
@@ -170,7 +173,7 @@ class ProgramDetailsDescription extends PureComponent {
                   {t("program-details-page.description.entryFee")}
                 </span>
                 <NumberFormat
-                  value={programDescription.entryFee}
+                  value={formatValue(programDescription.entryFee, 2)}
                   displayType="text"
                   suffix=" %"
                 />
@@ -180,7 +183,7 @@ class ProgramDetailsDescription extends PureComponent {
                   {t("program-details-page.description.successFee")}
                 </span>
                 <NumberFormat
-                  value={programDescription.successFee}
+                  value={formatValue(programDescription.successFee, 2)}
                   displayType="text"
                   suffix=" %"
                 />

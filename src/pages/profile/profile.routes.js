@@ -1,9 +1,9 @@
-import ProfileEditPage from "pages/profile/edit/edit.page";
+// import ProfileEditPage from "pages/profile/edit/edit.page";
+
 import PasswordPage from "pages/profile/password/password.page";
 import {
   KYC_ROUTE,
   PASSWORD_ROUTE,
-  PROFILE_EDIT_ROUTE,
   PROFILE_ROUTE,
   SETTINGS_ROUTE
 } from "pages/profile/profile.constants";

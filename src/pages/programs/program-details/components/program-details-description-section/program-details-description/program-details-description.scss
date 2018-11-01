@@ -10,6 +10,11 @@
   @include media-breakpoint-phone() {
     flex-direction: row;
   }
+
+  &__your-investment {
+    max-width: 750px;
+  }
+
   & .fund-asset {
     background: rgba(216, 216, 216, 0.05);
     height: 50px / $divider-title;
@@ -43,6 +48,9 @@
       width: $avatar-size-mobile;
       height: $avatar-size-mobile;
       margin: 0;
+    }
+    & .program-avatar__level {
+      border-color: $background-color;
     }
     @include media-breakpoint-phone() {
       padding: 0;

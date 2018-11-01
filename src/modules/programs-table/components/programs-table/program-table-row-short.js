@@ -21,7 +21,7 @@ const ProgramTableRowShort = ({
 }) => {
   return (
     <TableRow onClick={onExpandClick}>
-      <TableCell className="programs-table__cell--name">
+      <TableCell className="programs-table__cell programs-table__cell--name">
         <div className="programs-table__cell--avatar-title">
           <Link to={composeProgramDetailsUrl(program.url)}>
             <AssetAvatar
@@ -47,11 +47,12 @@ const ProgramTableRowShort = ({
           </div>
         </div>
       </TableCell>
-      <TableCell className="programs-table__cell--balance">
+      <TableCell className="programs-table__cell programs-table__cell--balance">
         <Tooltip
           render={() => (
             <div>
-              {program.statistic.balanceBase.amount} {program.currency}
+              {formatValue(program.statistic.balanceBase.amount)}{" "}
+              {program.currency}
             </div>
           )}
         >
@@ -63,16 +64,16 @@ const ProgramTableRowShort = ({
           />
         </Tooltip>
       </TableCell>
-      <TableCell className="programs-table__cell--currency">
+      <TableCell className="programs-table__cell programs-table__cell--currency">
         {program.currency}
       </TableCell>
-      <TableCell className="programs-table__cell--investors">
+      <TableCell className="programs-table__cell programs-table__cell--investors">
         {program.statistic.investorsCount}
       </TableCell>
-      <TableCell className="programs-table__cell--available-to-invest">
+      <TableCell className="programs-table__cell programs-table__cell--available-to-invest">
         {formatValue(program.availableInvestment)} GVT
       </TableCell>
-      <TableCell className="programs-table__cell--period">
+      <TableCell className="programs-table__cell programs-table__cell--period">
         {program.periodStarts && (
           <ProgramPeriodPie
             start={program.periodStarts}
@@ -80,18 +81,17 @@ const ProgramTableRowShort = ({
           />
         )}
       </TableCell>
-      <TableCell className="programs-table__cell--trades">
+      <TableCell className="programs-table__cell programs-table__cell--trades">
         {program.statistic.tradesCount}
       </TableCell>
-      <TableCell className="programs-table__cell--drawdown">
+      <TableCell className="programs-table__cell programs-table__cell--drawdown">
         <NumberFormat
-          value={program.statistic.drawdownPercent}
+          value={formatValue(program.statistic.drawdownPercent, 2)}
           suffix="%"
-          decimalScale={2}
           displayType="text"
         />
       </TableCell>
-      <TableCell className="programs-table__cell--profit">
+      <TableCell className="programs-table__cell programs-table__cell--profit">
         <Profitability value={program.statistic.profitPercent} prefix="sign">
           <NumberFormat
             value={formatValue(program.statistic.profitPercent, 2)}
@@ -101,12 +101,12 @@ const ProgramTableRowShort = ({
           />
         </Profitability>
       </TableCell>
-      <TableCell className="programs-table__cell--chart">
+      <TableCell className="programs-table__cell programs-table__cell--chart">
         <ProgramSimpleChart data={program.chart} programId={program.id} />
       </TableCell>
       {isAuthenticated &&
         program.personalDetails && (
-          <TableCell className="programs-table__cell--favorite">
+          <TableCell className="programs-table__cell programs-table__cell--favorite">
             <FavoriteIcon
               id={program.id}
               selected={program.personalDetails.isFavorite}

@@ -27,3 +27,10 @@
     min-height: 400px;
   }
 }
+
+.recharts-text {
+  font-size: $font-size-small-mobile;
+  @include media-breakpoint-landscape-phone() {
+    font-size: $font-size-small;
+  }
+}

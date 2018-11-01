@@ -39,6 +39,7 @@ const ProgramBigChart = ({ programId, data }) => {
           dataKey="equity"
           labelFormatter={value => `${value}%`}
           axisLine={false}
+          width={30}
           tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
         />
         <Tooltip content={ProgramBigChartTooltip} />

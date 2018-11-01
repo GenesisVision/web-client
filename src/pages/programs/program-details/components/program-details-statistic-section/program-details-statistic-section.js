@@ -40,6 +40,7 @@ class ProgramDetailsStatisticSection extends PureComponent {
   render() {
     const { statisticData, profitChartData, balanceChartData } = this.state;
     const { period } = this.state;
+    if (!profitChartData.data) return null;
     return (
       <div className="program-details-statistic-section">
         <div className="program-details-statistic-section__statistic">

@@ -17,6 +17,8 @@ import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import replaceParams from "utils/replace-params";
 
+import { formatValue } from "../../../../utils/formatter";
+
 class ProgramCard extends Component {
   state = {
     anchor: null,
@@ -151,10 +153,9 @@ class ProgramCard extends Component {
                 prefix="arrow"
               >
                 <NumberFormat
-                  value={program.statistic.profitPercent}
+                  value={formatValue(program.statistic.profitPercent, 2)}
                   suffix="%"
                   allowNegative={false}
-                  decimalScale={2}
                   displayType="text"
                 />
               </Profitability>
@@ -207,9 +208,8 @@ class ProgramCard extends Component {
                 <td>{program.statistic.tradesCount}</td>
                 <td>
                   <NumberFormat
-                    value={program.statistic.drawdownPercent}
+                    value={formatValue(program.statistic.drawdownPercent, 2)}
                     suffix="%"
-                    decimalScale={2}
                     displayType="text"
                   />
                 </td>

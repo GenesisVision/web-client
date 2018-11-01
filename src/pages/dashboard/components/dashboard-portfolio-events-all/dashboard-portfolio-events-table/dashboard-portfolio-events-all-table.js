@@ -21,8 +21,7 @@ import { isUseProfitability } from "../../helpers/dashboard-portfolio.helpers";
 import {
   PORTFOLIO_EVENTS_COLUMNS,
   PORTFOLIO_EVENTS_DEFAULT_FILTERING,
-  PORTFOLIO_EVENTS_FILTERS,
-  PORTFOLIO_EVENTS_TYPES_ENUM
+  PORTFOLIO_EVENTS_FILTERS
 } from "./dashboard-portfolio-events-all-table.constants";
 
 class PortfolioEventsTableComponent extends Component {

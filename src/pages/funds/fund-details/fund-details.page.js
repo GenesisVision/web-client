@@ -14,8 +14,8 @@ import FundDetailsNavigation from "./components/fund-details-navigation/fund-det
 import FundDetailsStatisticSection from "./components/fund-details-statistic-section/fund-details-statistic-section";
 import {
   getFundDescription,
-  getFundRebalancing,
-  getFundStatistic
+  getFundStatistic,
+  getFundStructure
 } from "./services/fund-details.service";
 
 export const FundDetailContext = React.createContext({
@@ -60,10 +60,15 @@ class FundDetailsPage extends PureComponent {
         this.description = data.data;
         this.setState({ isPending: false });
       })
+      .catch(e => {
+        const errorCode = e.code;
+        this.setState({ errorCode });
+      })
       .then(() => {
         this.setState({ isPending: true });
         return getFundStatistic(this.description.data.id);
       })
+      .catch()
       .then(data => {
         this.profitChart = data.profitChartData;
         this.balanceChart = data.balanceChartData;
@@ -72,17 +77,13 @@ class FundDetailsPage extends PureComponent {
       })
       .then(() => {
         this.setState({ isPending: true });
-        return getFundRebalancing(this.description.data.id);
+        return getFundStructure(this.description.data.id);
       })
-      .then(data => {
-        this.rebalancing = data;
+      .then(({ data }) => {
+        this.structure = data.assets;
         this.setState({ isPending: false });
       })
       .catch(e => {
-        const errorCode = e.code;
-        this.setState({ errorCode });
-      })
-      .finally(() => {
         this.setState({ isPending: false });
       });
   };
@@ -125,7 +126,7 @@ class FundDetailsPage extends PureComponent {
               <FundDetailsHistorySection
                 fundId={this.description.data.id}
                 currency={currency}
-                rebalancingData={this.rebalancing}
+                structure={this.structure}
                 eventsData={this.events}
               />
             </div>

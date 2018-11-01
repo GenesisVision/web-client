@@ -62,7 +62,7 @@ class ProgramProfitChart extends PureComponent {
             }}
             tickFormatter={x => +x.toFixed(2)}
             unit="%"
-            width={50}
+            width={35}
           />
           <YAxis
             yAxisId="right"
@@ -73,7 +73,7 @@ class ProgramProfitChart extends PureComponent {
             tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
             unit={currency}
             tickFormatter={x => +x.toFixed(4)}
-            width={80}
+            width={60}
           />
           <Tooltip content={ProgramProfitTooltip} />
           <CartesianGrid vertical={false} strokeWidth={0.1} />

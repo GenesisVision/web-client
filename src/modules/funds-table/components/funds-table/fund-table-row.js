@@ -32,7 +32,7 @@ class FundsTableRow extends Component {
     });
     return (
       <TableRow>
-        <TableCell className="funds-table__cell--name">
+        <TableCell className="funds-table__cell funds-table__cell--name">
           <div className="funds-table__cell--avatar-title">
             <Link to={composeFundsDetailsUrl(fund.url)}>
               <AssetAvatar
@@ -50,7 +50,7 @@ class FundsTableRow extends Component {
             </div>
           </div>
         </TableCell>
-        <TableCell className="funds-table__cell">
+        <TableCell className="funds-table__cell funds-table__cell--amount">
           <NumberFormat
             value={formatValue(fund.statistic.balanceGVT.amount)}
             suffix=" GVT"
@@ -66,34 +66,32 @@ class FundsTableRow extends Component {
             length={fund.totalAssetsCount}
           />
         </TableCell>
-        <TableCell className="funds-table__cell--investors">
+        <TableCell className="funds-table__cell funds-table__cell--investors">
           {fund.statistic.investorsCount}
         </TableCell>
-        <TableCell className="funds-table__cell--drawdown">
+        <TableCell className="funds-table__cell funds-table__cell--drawdown">
           <NumberFormat
-            value={fund.statistic.drawdownPercent}
+            value={formatValue(fund.statistic.drawdownPercent, 2)}
             suffix="%"
-            decimalScale={2}
             displayType="text"
           />
         </TableCell>
-        <TableCell className="funds-table__cell--profit">
+        <TableCell className="funds-table__cell funds-table__cell--profit">
           <Profitability value={fund.statistic.profitPercent} prefix="sign">
             <NumberFormat
-              value={fund.statistic.profitPercent}
+              value={formatValue(fund.statistic.profitPercent, 2)}
               suffix="%"
               allowNegative={false}
-              decimalScale={2}
               displayType="text"
             />
           </Profitability>
         </TableCell>
-        <TableCell className="funds-table__cell--chart">
+        <TableCell className="funds-table__cell funds-table__cell--chart">
           <ProgramSimpleChart data={fund.chart} programId={fund.id} />
         </TableCell>
         {isAuthenticated &&
           fund.personalDetails && (
-            <TableCell className="funds-table__cell--favorite">
+            <TableCell className="funds-table__cell funds-table__cell--favorite">
               <FavoriteIcon
                 id={fund.id}
                 selected={fund.personalDetails.isFavorite}
