@@ -145,5 +145,9 @@ const formatValue = (value, decimalScale, abs) => {
     .map(item => (item[1] ? item.join(".") : item[0]))
     .join();
 };
+const formatPercent = value => {
+  if (value < 0.1 && value > -0.1) return 0;
+  return formatValue(value, value > 1 || value < -1 ? 0 : 1);
+};
 
-export { dateFormat, formatValue, roundTypeEnum };
+export { dateFormat, formatValue, roundTypeEnum, formatPercent };
