@@ -243,6 +243,9 @@ $description-block-width: 250px;
     &--name {
       margin-left: $padding/2;
     }
+    & .program-avatar__level {
+      border-color: $secondary-color !important;
+    }
   }
 
   &__title {
