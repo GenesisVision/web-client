@@ -23,10 +23,8 @@ class GVDatePicker extends Component {
           name: this.props.name
         }
       });
+      this.handleClose();
     }
-    setTimeout(() => {
-      this.input.current.focus();
-    }, 300);
   };
 
   handleBlur = () => {
