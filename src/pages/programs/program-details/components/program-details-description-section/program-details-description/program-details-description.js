@@ -58,6 +58,7 @@ class ProgramDetailsDescription extends PureComponent {
     const {
       t,
       isInvested,
+      canInvest,
       canWithdraw,
       programDescription,
       onReinvestingClick,
@@ -198,16 +199,17 @@ class ProgramDetailsDescription extends PureComponent {
                   {t("program-details-page.description.invest")}
                 </GVButton>
               </div>
-              {isInvested && (
-                <ProgramReinvestingWidget
-                  className="program-details-description__reinvest"
-                  toggleReinvesting={onReinvestingClick}
-                  isReinvesting={
-                    programDescription.personalProgramDetails.isReinvest
-                  }
-                  disabled={isReinvestPending}
-                />
-              )}
+              {isInvested &&
+                canInvest && (
+                  <ProgramReinvestingWidget
+                    className="program-details-description__reinvest"
+                    toggleReinvesting={onReinvestingClick}
+                    isReinvesting={
+                      programDescription.personalProgramDetails.isReinvest
+                    }
+                    disabled={isReinvestPending}
+                  />
+                )}
             </div>
             {isInvested && (
               <ProgramDetailsInvestment
