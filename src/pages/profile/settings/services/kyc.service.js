@@ -45,10 +45,6 @@ export const loadKycIFrame = () => {
           uiConf: {
             customCssUrl: "https://genesis.vision/assets/kyc/style.css",
             steps: {
-              SELFIE: {
-                instructions:
-                  '## Please take a selfie of you holding a paper with the current date and "GV" written on it.'
-              }
             }
           }
         },
