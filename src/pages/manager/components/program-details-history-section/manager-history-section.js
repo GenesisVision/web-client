@@ -102,7 +102,11 @@ class ManagerHistorySection extends PureComponent {
                 />
               )}
               renderHeader={column => (
-                <span className={`programs-table__cell--${column.name}`}>
+                <span
+                  className={`programs-table__cell programs-table__cell--${
+                    column.name
+                  }`}
+                >
                   {t(`programs-page.programs-header.${column.name}`)}
                 </span>
               )}
@@ -123,7 +127,11 @@ class ManagerHistorySection extends PureComponent {
                 />
               )}
               renderHeader={column => (
-                <span className={`funds-table__cell--${column.name}`}>
+                <span
+                  className={`funds-table__cell funds-table__cell--${
+                    column.name
+                  }`}
+                >
                   {t(`funds-page.funds-header.${column.name}`)}
                 </span>
               )}
