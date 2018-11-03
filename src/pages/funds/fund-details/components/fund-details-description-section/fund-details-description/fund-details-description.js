@@ -134,7 +134,7 @@ class FundDetailsDescription extends PureComponent {
               <GVButton
                 className="fund-details-description__invest-btn"
                 onClick={this.handleOpenInvestmentPopup}
-                disabled={!fundDescription.canInvest}
+                disabled={!fundDescription.personalFundDetails.canInvest}
               >
                 {t("fund-details-page.description.invest")}
               </GVButton>
