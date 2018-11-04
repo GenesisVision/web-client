@@ -168,7 +168,7 @@ $description-block-width: 250px;
 }
 
 .programs-table__cell {
-  padding: 0 $padding-small;
+  padding: $padding-small/2 $padding-small;
   &--avatar-title {
     display: flex;
     flex-direction: row;

@@ -12,15 +12,15 @@ import { ProgramDetailContext } from "pages/programs/program-details/program-det
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import connect from "react-redux/es/connect/connect";
 import { Link } from "react-router-dom";
+import { compose } from "redux";
 import { formatValue } from "utils/formatter";
 import replaceParams from "utils/replace-params";
 
 import ProgramDetailsInvestment from "../program-details-investment/program-details-investment";
 import ProgramDetailsFavorite from "./program-details-favorite";
 import ProgramDetailsNotification from "./program-details-notificaton";
-import { compose } from "redux";
-import connect from "react-redux/es/connect/connect";
 
 export const composeProgramNotificationsUrl = url => {
   return replaceParams(PROGRAM_NOTIFICATIONS_ROUTE, {
@@ -202,6 +202,7 @@ class ProgramDetailsDescription extends PureComponent {
                   className="program-details-description__invest-btn"
                   onClick={this.handleOpenInvestmentPopup}
                   disabled={
+                    !programDescription.personalProgramDetails ||
                     !programDescription.personalProgramDetails.canInvest
                   }
                 >

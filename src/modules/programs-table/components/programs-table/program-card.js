@@ -12,10 +12,11 @@ import { composeProgramDetailsUrl } from "pages/programs/programs.routes";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { Link } from "react-router-dom";
-import { formatValue } from "../../../../utils/formatter";
-import { compose } from "redux";
 import connect from "react-redux/es/connect/connect";
+import { Link } from "react-router-dom";
+import { compose } from "redux";
+
+import { formatValue } from "../../../../utils/formatter";
 
 class ProgramCard extends Component {
   state = {
@@ -99,7 +100,7 @@ class ProgramCard extends Component {
               onClose={this.handleCloseDropdown}
             >
               <div className="popover-list">
-                {program.personalDetails &&
+                {/* {program.personalDetails &&
                   program.personalDetails.isInvested && (
                     <GVButton
                       variant="text"
@@ -117,7 +118,7 @@ class ProgramCard extends Component {
                   >
                     {t("program-actions.invest")}
                   </GVButton>
-                )}
+                )} */}
                 <Link
                   to={{
                     pathname: composeProgramDetailsUrl(program.url),
