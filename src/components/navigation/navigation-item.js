@@ -1,6 +1,8 @@
 import { GVButton } from "gv-react-components";
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { compose } from "redux";
+import connect from "react-redux/es/connect/connect";
 
 export const NavigationButton = ({ icon, title, children, onClick }) => {
   return (
@@ -11,12 +13,22 @@ export const NavigationButton = ({ icon, title, children, onClick }) => {
   );
 };
 
-const NavigationItem = ({ href, icon, title, children, ...other }) => {
+const NavigationItem = ({
+  href,
+  icon,
+  title,
+  children,
+  pathname,
+  ...other
+}) => {
   return (
     <NavLink
       className="navigation__item"
       activeClassName="navigation__item--active"
-      to={href}
+      to={{
+        pathname: href,
+        state: pathname
+      }}
       title={title}
       {...other}
     >
@@ -26,4 +38,9 @@ const NavigationItem = ({ href, icon, title, children, ...other }) => {
   );
 };
 
-export default NavigationItem;
+const mapStateToProps = state => {
+  const { pathname } = state.routing.location;
+  return { pathname };
+};
+
+export default compose(connect(mapStateToProps))(NavigationItem);
