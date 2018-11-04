@@ -9,13 +9,10 @@ import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import { formatValue } from "utils/formatter";
 
-import {
-  FUNDS_SLUG_URL_PARAM_NAME,
-  FUND_DETAILS_ROUTE,
-  composeFundsDetailsUrl
-} from "../../../../pages/funds/funds.routes";
-import replaceParams from "../../../../utils/replace-params";
+import { composeFundsDetailsUrl } from "../../../../pages/funds/funds.routes";
 import FavoriteIcon from "../../../favorite-asset/components/favorite-icon/favorite-icon";
+import { compose } from "redux";
+import connect from "react-redux/es/connect/connect";
 
 class FundsTableRow extends Component {
   constructor(props) {
@@ -26,15 +23,17 @@ class FundsTableRow extends Component {
   }
 
   render() {
-    const { fund, isAuthenticated, toggleFavorite } = this.props;
-    const fundDetailsUrl = replaceParams(FUND_DETAILS_ROUTE, {
-      [`:${FUNDS_SLUG_URL_PARAM_NAME}`]: fund.url
-    });
+    const { fund, isAuthenticated, toggleFavorite, pathname } = this.props;
     return (
       <TableRow>
         <TableCell className="funds-table__cell funds-table__cell--name">
           <div className="funds-table__cell--avatar-title">
-            <Link to={composeFundsDetailsUrl(fund.url)}>
+            <Link
+              to={{
+                pathname: composeFundsDetailsUrl(fund.url),
+                state: pathname
+              }}
+            >
               <AssetAvatar
                 url={fund.logo}
                 alt={fund.title}
@@ -42,7 +41,12 @@ class FundsTableRow extends Component {
               />
             </Link>
             <div className="funds-table__cell--title">
-              <Link to={fundDetailsUrl}>
+              <Link
+                to={{
+                  pathname: composeFundsDetailsUrl(fund.url),
+                  state: pathname
+                }}
+              >
                 <GVButton variant="text" color="secondary">
                   {fund.title}
                 </GVButton>
@@ -103,5 +107,8 @@ class FundsTableRow extends Component {
     );
   }
 }
-
-export default FundsTableRow;
+const mapStateToProps = state => {
+  const { pathname } = state.routing.location;
+  return { pathname };
+};
+export default compose(connect(mapStateToProps))(FundsTableRow);
