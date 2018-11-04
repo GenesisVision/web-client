@@ -8,7 +8,7 @@ import { goBack } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
 
 import { getCurrentFacet } from "../../services/funds-facet.service";
-import FundsFacetNavigation from "./funds-facet-navigation";
+import BackButton from "components/back-button/back-button";
 
 class FundsFacetContainer extends Component {
   state = {
@@ -30,13 +30,13 @@ class FundsFacetContainer extends Component {
   }
 
   render() {
-    const { goBack } = this.props;
+    const { goBack, backPath } = this.props;
     const { facetData } = this.state;
     if (!facetData || facetData.isPending) return null;
     if (facetData.notFound) return <NotFoundPage />;
     return (
       <Fragment>
-        <FundsFacetNavigation facet={facetData.facet} goBack={goBack} />
+        {backPath && <BackButton backPath={backPath} goBack={goBack} />}
         <FundsTableContainer title={facetData.facet.title} />
       </Fragment>
     );
@@ -45,9 +45,10 @@ class FundsFacetContainer extends Component {
 
 const mapStateToProps = state => {
   const { data } = state.platformData;
+  const backPath = state.routing.location.state;
   let facets = null;
   if (data) facets = data.fundsFacets;
-  return { facets };
+  return { facets, backPath };
 };
 
 const mapDispatchToProps = dispatch => ({
