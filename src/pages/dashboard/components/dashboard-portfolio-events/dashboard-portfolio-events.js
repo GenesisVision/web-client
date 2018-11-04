@@ -10,8 +10,10 @@ import { Link } from "react-router-dom";
 import DashboardPortfolioEvent, {
   DashboardPortfolioEventShape
 } from "./dashboard-portfolio-event/dashboard-portfolio-event";
+import { compose } from "redux";
+import connect from "react-redux/es/connect/connect";
 
-const DashboardPortfolioEvents = ({ t, events, fullEventsUrl }) => (
+const DashboardPortfolioEvents = ({ t, events, fullEventsUrl, pathname }) => (
   <Fragment>
     <Scrollbars
       autoHide
@@ -25,7 +27,13 @@ const DashboardPortfolioEvents = ({ t, events, fullEventsUrl }) => (
         ))}
       </div>
     </Scrollbars>
-    <Link to={fullEventsUrl} className="dashboard-portfolio-events__see-all">
+    <Link
+      className="dashboard-portfolio-events__see-all"
+      to={{
+        pathname: fullEventsUrl,
+        state: pathname
+      }}
+    >
       <GVButton variant="text" color="secondary">
         {t("dashboard.portfolio-events.see-all-button")} &#8250;
       </GVButton>
@@ -38,4 +46,12 @@ DashboardPortfolioEvents.propTypes = {
   fullEventsUrl: PropTypes.string.isRequired
 };
 
-export default translate()(DashboardPortfolioEvents);
+const mapStateToProps = state => {
+  const { pathname } = state.routing.location;
+  return { pathname };
+};
+
+export default compose(
+  translate(),
+  connect(mapStateToProps)
+)(DashboardPortfolioEvents);
