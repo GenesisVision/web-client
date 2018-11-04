@@ -10,13 +10,13 @@ import { LOGIN_ROUTE } from "../../auth/login/login.routes";
 import NotFoundPage from "../../not-found/not-found.routes";
 import FundDetailsDescriptionSection from "./components/fund-details-description-section/fund-details-description-section";
 import FundDetailsHistorySection from "./components/fund-details-history-section/fund-details-history-section";
-import FundDetailsNavigation from "./components/fund-details-navigation/fund-details-navigation";
 import FundDetailsStatisticSection from "./components/fund-details-statistic-section/fund-details-statistic-section";
 import {
   getFundDescription,
   getFundStatistic,
   getFundStructure
 } from "./services/fund-details.service";
+import BackButton from "components/back-button/back-button";
 
 export const FundDetailContext = React.createContext({
   updateDetails: () => {}
@@ -89,7 +89,7 @@ class FundDetailsPage extends PureComponent {
   };
 
   render() {
-    const { currency, service, isAuthenticated } = this.props;
+    const { currency, service, isAuthenticated, backPath } = this.props;
     const { errorCode } = this.state;
     if (errorCode) {
       return <NotFoundPage />;
@@ -105,7 +105,9 @@ class FundDetailsPage extends PureComponent {
         >
           <div className="fund-details">
             <div className="fund-details__section">
-              <FundDetailsNavigation goBack={service.goBack} />
+              {backPath && (
+                <BackButton backPath={backPath} goBack={service.goBack} />
+              )}
               <FundDetailsDescriptionSection
                 fundDescriptionData={this.description}
                 isAuthenticated={isAuthenticated}
@@ -138,9 +140,10 @@ class FundDetailsPage extends PureComponent {
 }
 
 const mapStateToProps = state => {
-  const { accountSettings, authData } = state;
+  const { accountSettings, authData, routing } = state;
 
   return {
+    backPath: routing.location.state,
     currency: accountSettings.currency,
     isAuthenticated: authData.isAuthenticated
   };
