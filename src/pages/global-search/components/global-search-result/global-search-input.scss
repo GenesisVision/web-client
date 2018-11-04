@@ -12,6 +12,12 @@
   }
 }
 
+.global-search-input{
+  & .gv-text-field__wrapper, & .gv-text-field{
+    margin: 0;
+  }
+}
+
 .global-search-result {
   margin-top: $padding-small-mobile;
   @include media-breakpoint-landscape-phone() {
