@@ -4,10 +4,16 @@ import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
 import isAuthenticated from "shared/decorators/is-authenticated";
+import connect from "react-redux/es/connect/connect";
 
-const FundDetailsNotificaton = ({ t, url }) => {
+const FundDetailsNotificaton = ({ t, url, pathname }) => {
   return (
-    <Link to={url}>
+    <Link
+      to={{
+        pathname: url,
+        state: pathname
+      }}
+    >
       <div className="fund-details-description__control">
         <RingIcon className="fund-details-description__control-icon" />
         <div className="fund-details-description__control-text">
@@ -18,4 +24,13 @@ const FundDetailsNotificaton = ({ t, url }) => {
   );
 };
 
-export default compose(translate(), isAuthenticated)(FundDetailsNotificaton);
+const mapStateToProps = state => {
+  const { pathname } = state.routing.location;
+  return { pathname };
+};
+
+export default compose(
+  translate(),
+  isAuthenticated,
+  connect(mapStateToProps)
+)(FundDetailsNotificaton);
