@@ -19,6 +19,8 @@ import replaceParams from "utils/replace-params";
 import ProgramDetailsInvestment from "../program-details-investment/program-details-investment";
 import ProgramDetailsFavorite from "./program-details-favorite";
 import ProgramDetailsNotification from "./program-details-notificaton";
+import { compose } from "redux";
+import connect from "react-redux/es/connect/connect";
 
 export const composeProgramNotificationsUrl = url => {
   return replaceParams(PROGRAM_NOTIFICATIONS_ROUTE, {
@@ -57,6 +59,7 @@ class ProgramDetailsDescription extends PureComponent {
     const { isOpenInvestmentPopup, isOpenAboutLevels, anchor } = this.state;
     const {
       t,
+      pathname,
       isInvested,
       canInvest,
       canWithdraw,
@@ -138,7 +141,14 @@ class ProgramDetailsDescription extends PureComponent {
           <div className="program-details-description__heading">
             {programDescription.title}
           </div>
-          <Link to={composeManagerDetailsUrl(programDescription.manager.url)}>
+          <Link
+            to={{
+              pathname: composeManagerDetailsUrl(
+                programDescription.manager.url
+              ),
+              state: pathname
+            }}
+          >
             <GVButton
               variant="text"
               className="program-details-description__author-btn"
@@ -250,4 +260,11 @@ class ProgramDetailsDescription extends PureComponent {
   }
 }
 
-export default translate()(ProgramDetailsDescription);
+const mapStateToProps = state => {
+  const { pathname } = state.routing.location;
+  return { pathname };
+};
+export default compose(
+  translate(),
+  connect(mapStateToProps)
+)(ProgramDetailsDescription);
