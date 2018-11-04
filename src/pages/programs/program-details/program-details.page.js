@@ -10,13 +10,13 @@ import { LOGIN_ROUTE } from "../../auth/login/login.routes";
 import NotFoundPage from "../../not-found/not-found.routes";
 import ProgramDetailsDescriptionSection from "./components/program-details-description-section/program-details-description-section";
 import ProgramDetailsHistorySection from "./components/program-details-history-section/program-details-history-section";
-import ProgramDetailsNavigation from "./components/program-details-navigation/program-details-navigation";
 import ProgramDetailsStatisticSection from "./components/program-details-statistic-section/program-details-statistic-section";
 import {
   getProgramDescription,
   getProgramHistory,
   getProgramStatistic
 } from "./services/program-details.service";
+import BackButton from "components/back-button/back-button";
 
 export const ProgramDetailContext = React.createContext({
   updateDetails: () => {}
@@ -89,7 +89,7 @@ class ProgramDetailsPage extends PureComponent {
   };
 
   render() {
-    const { currency, isAuthenticated, service } = this.props;
+    const { currency, isAuthenticated, service, backPath } = this.props;
     const { errorCode } = this.state;
     if (errorCode) {
       return <NotFoundPage />;
@@ -106,7 +106,9 @@ class ProgramDetailsPage extends PureComponent {
         >
           <div className="program-details">
             <div className="program-details__section">
-              <ProgramDetailsNavigation goBack={service.goBack} />
+              {backPath && (
+                <BackButton backPath={backPath} goBack={service.goBack} />
+              )}
               <ProgramDetailsDescriptionSection
                 programDescriptionData={this.description}
                 isAuthenticated={isAuthenticated}
@@ -139,8 +141,9 @@ class ProgramDetailsPage extends PureComponent {
 }
 
 const mapStateToProps = state => {
-  const { accountSettings, authData } = state;
+  const { accountSettings, authData, routing } = state;
   return {
+    backPath: routing.location.state,
     currency: accountSettings.currency,
     isAuthenticated: authData.isAuthenticated
   };
