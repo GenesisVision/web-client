@@ -22,6 +22,8 @@ import {
   DASHBOARD_PROGRAMS_FILTERS
 } from "../../../dashboard.constants";
 import { getDashboardPrograms } from "../../../services/dashboard-programs.service";
+import { compose } from "redux";
+import connect from "react-redux/es/connect/connect";
 
 class Dashboardprograms extends Component {
   fetchPrograms = filters => {
@@ -31,7 +33,7 @@ class Dashboardprograms extends Component {
   };
 
   render() {
-    const { t } = this.props;
+    const { t, pathname } = this.props;
     return (
       <TableModule
         paging={DEFAULT_PAGING}
@@ -64,7 +66,12 @@ class Dashboardprograms extends Component {
           <TableRow>
             <TableCell className="programs-table__cell dashboard-programs__cell--title">
               <div className="dashboard-programs__cell--avatar-title">
-                <Link to={composeProgramDetailsUrl(program.url)}>
+                <Link
+                  to={{
+                    pathname: composeProgramDetailsUrl(program.url),
+                    state: pathname
+                  }}
+                >
                   <AssetAvatar
                     url={program.logo}
                     level={program.level}
@@ -72,7 +79,12 @@ class Dashboardprograms extends Component {
                     color={program.color}
                   />
                 </Link>
-                <Link to={composeProgramDetailsUrl(program.url)}>
+                <Link
+                  to={{
+                    pathname: composeProgramDetailsUrl(program.url),
+                    state: pathname
+                  }}
+                >
                   <GVButton variant="text" color="secondary">
                     {program.title}
                   </GVButton>
@@ -111,4 +123,12 @@ class Dashboardprograms extends Component {
   }
 }
 
-export default translate()(Dashboardprograms);
+const mapStateToProps = state => {
+  const { pathname } = state.routing.location;
+  return { pathname };
+};
+
+export default compose(
+  translate(),
+  connect(mapStateToProps)
+)(Dashboardprograms);
