@@ -1,0 +1,22 @@
+@import "styles/_sizes.scss";
+
+.back-button {
+  margin: 25px 0 40px;
+  display: flex;
+  align-items: center;
+
+  &__back-arrow {
+    margin-right: 13px;
+  }
+
+  & .gv-btn--text {
+    padding: 0;
+    font-size: $font-size-small;
+  }
+
+  &__path {
+    padding-left: $padding-small;
+    opacity: 0.4;
+    font-size: $font-size-small;
+  }
+}
