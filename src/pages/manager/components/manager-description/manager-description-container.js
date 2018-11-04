@@ -4,23 +4,29 @@ import { bindActionCreators } from "redux";
 
 import * as managerService from "../../services/manager.service";
 import ManagerDescription from "./manager-description";
-import ManagerNavigation from "./manager-description-navigation";
+import BackButton from "components/back-button/back-button";
 
 class ManagerDescriptionContainer extends Component {
   render() {
-    const { managerProfile, goBack } = this.props;
-
+    const { managerProfile, goBack, backPath } = this.props;
     return (
       <Fragment>
-        <ManagerNavigation goBack={goBack} />
+        {backPath && <BackButton backPath={backPath} goBack={goBack} />}
         <ManagerDescription managerProfile={managerProfile} />
       </Fragment>
     );
   }
 }
 
+const mapStateToProps = state => ({
+  backPath: state.routing.location.state
+});
+
 const mapDispatchToProps = dispatch => ({
   service: bindActionCreators({ ...managerService }, dispatch)
 });
 
-export default connect(mapDispatchToProps)(ManagerDescriptionContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ManagerDescriptionContainer);
