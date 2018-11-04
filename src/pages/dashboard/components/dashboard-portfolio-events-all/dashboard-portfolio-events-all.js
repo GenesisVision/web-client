@@ -8,18 +8,15 @@ import connect from "react-redux/es/connect/connect";
 import { goBack } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
 
-import PortfolioEventsAllNavigation from "./dashboard-portfolio-events-all-navigation";
 import PortfolioEventsTableComponent from "./dashboard-portfolio-events-table/dashboard-portfolio-events-all-table";
+import BackButton from "components/back-button/back-button";
 
 export const PORTFOLIO_EVENTS_ALL_PAGE_ROUTE = "portfolio-events";
-const PortfolioEventsAllComponent = ({ service, t }) => {
+const PortfolioEventsAllComponent = ({ service, t, backPath }) => {
   return (
     <Page title={t("dashboard.portfolio-events.title")}>
       <div className="dashboard-portfolio-events-all">
-        <PortfolioEventsAllNavigation
-          className="dashboard-portfolio-events-all__navigation"
-          goBack={service.goBack}
-        />
+        {backPath && <BackButton backPath={backPath} goBack={service.goBack} />}
         <h1 className="dashboard-portfolio-events-all__heading">
           {t("dashboard.portfolio-events.title")}
         </h1>
@@ -35,13 +32,17 @@ const PortfolioEventsAllComponent = ({ service, t }) => {
   );
 };
 
+const mapStateToProps = state => ({
+  backPath: state.routing.location.state
+});
+
 const mapDispatchToProps = dispatch => ({
   service: bindActionCreators({ goBack }, dispatch)
 });
 
 export default compose(
   connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
   )
 )(translate()(PortfolioEventsAllComponent));
