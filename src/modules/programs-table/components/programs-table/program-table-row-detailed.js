@@ -19,6 +19,8 @@ import replaceParams from "utils/replace-params";
 import { Scrollbars } from "react-custom-scrollbars";
 
 import ProgramBigChart from "../program-big-chart/program-big-chart";
+import { compose } from "redux";
+import connect from "react-redux/es/connect/connect";
 
 class ProgramTableRowDetailed extends Component {
   state = {
@@ -39,6 +41,7 @@ class ProgramTableRowDetailed extends Component {
   render() {
     const {
       t,
+      pathname,
       program,
       isAuthenticated,
       toggleFavorite,
@@ -56,7 +59,12 @@ class ProgramTableRowDetailed extends Component {
             <div className="program-detailed__container program-detailed__container--inner">
               <div className="program-detailed__info">
                 <div className="program-detailed__avatar">
-                  <Link to={composeProgramDetailsUrl(program.url)}>
+                  <Link
+                    to={{
+                      pathname: composeProgramDetailsUrl(program.url),
+                      state: pathname
+                    }}
+                  >
                     <AssetAvatar
                       url={program.logo}
                       level={program.level}
@@ -67,14 +75,26 @@ class ProgramTableRowDetailed extends Component {
                   </Link>
                   <div className="program-detailed__avatar--name">
                     <div className="program-detailed__title">
-                      <Link to={programDetailsUrl}>
+                      <Link
+                        to={{
+                          pathname: composeProgramDetailsUrl(program.url),
+                          state: pathname
+                        }}
+                      >
                         <GVButton variant="text" color="secondary">
                           {program.title}
                         </GVButton>
                       </Link>
                     </div>
                     <div className="program-detailed__manager">
-                      <Link to={composeManagerDetailsUrl(program.manager.url)}>
+                      <Link
+                        to={{
+                          pathname: composeManagerDetailsUrl(
+                            program.manager.url
+                          ),
+                          state: pathname
+                        }}
+                      >
                         <GVButton variant="text" color="primary">
                           {program.manager.username}
                         </GVButton>
@@ -215,7 +235,12 @@ class ProgramTableRowDetailed extends Component {
                     open={this.state.isOpenInvestToProgramPopup}
                   />
                   <div className="program-detailed__details">
-                    <Link to={programDetailsUrl}>
+                    <Link
+                      to={{
+                        pathname: composeProgramDetailsUrl(program.url),
+                        state: pathname
+                      }}
+                    >
                       <GVButton variant="text" color="secondary">
                         {t("program-actions.details")} &#8250;
                       </GVButton>
@@ -240,4 +265,12 @@ class ProgramTableRowDetailed extends Component {
   }
 }
 
-export default translate()(ProgramTableRowDetailed);
+const mapStateToProps = state => {
+  const { pathname } = state.routing.location;
+  return { pathname };
+};
+
+export default compose(
+  translate(),
+  connect(mapStateToProps)
+)(ProgramTableRowDetailed);

@@ -12,8 +12,11 @@ import { Link } from "react-router-dom";
 import { formatValue } from "utils/formatter";
 
 import { composeProgramDetailsUrl } from "../../../../pages/programs/programs.routes";
+import { compose } from "redux";
+import connect from "react-redux/es/connect/connect";
 
 const ProgramTableRowShort = ({
+  pathname,
   program,
   isAuthenticated,
   toggleFavorite,
@@ -23,7 +26,12 @@ const ProgramTableRowShort = ({
     <TableRow onClick={onExpandClick}>
       <TableCell className="programs-table__cell programs-table__cell--name">
         <div className="programs-table__cell--avatar-title">
-          <Link to={composeProgramDetailsUrl(program.url)}>
+          <Link
+            to={{
+              pathname: composeProgramDetailsUrl(program.url),
+              state: pathname
+            }}
+          >
             <AssetAvatar
               url={program.logo}
               level={program.level}
@@ -33,7 +41,12 @@ const ProgramTableRowShort = ({
           </Link>
           <div className="programs-table__cell--title">
             <div className="programs-table__cell--top">
-              <Link to={composeProgramDetailsUrl(program.url)}>
+              <Link
+                to={{
+                  pathname: composeProgramDetailsUrl(program.url),
+                  state: pathname
+                }}
+              >
                 <GVButton variant="text" color="secondary">
                   {program.title}
                 </GVButton>
@@ -118,4 +131,8 @@ const ProgramTableRowShort = ({
   );
 };
 
-export default ProgramTableRowShort;
+const mapStateToProps = state => {
+  const { pathname } = state.routing.location;
+  return { pathname };
+};
+export default compose(connect(mapStateToProps))(ProgramTableRowShort);
