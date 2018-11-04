@@ -8,7 +8,7 @@ import { goBack } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
 
 import { getCurrentFacet } from "../../services/programs-facet.service";
-import ProgramsFacetInfo from "./programs-facet-info";
+import BackButton from "components/back-button/back-button";
 
 class ProgramsFacetContainer extends Component {
   state = {
@@ -30,13 +30,13 @@ class ProgramsFacetContainer extends Component {
   }
 
   render() {
-    const { goBack } = this.props;
+    const { goBack, backPath } = this.props;
     const { facetData } = this.state;
     if (!facetData || facetData.isPending) return null;
     if (facetData.notFound) return <NotFoundPage />;
     return (
       <Fragment>
-        <ProgramsFacetInfo facet={facetData.facet} goBack={goBack} />
+        {backPath && <BackButton backPath={backPath} goBack={goBack} />}
         <ProgramsContainer title={facetData.facet.title} />
       </Fragment>
     );
@@ -45,9 +45,10 @@ class ProgramsFacetContainer extends Component {
 
 const mapStateToProps = state => {
   const { data } = state.platformData;
+  const backPath = state.routing.location.state;
   let facets = null;
   if (data) facets = data.programsFacets;
-  return { facets };
+  return { facets, backPath };
 };
 
 const mapDispatchToProps = dispatch => ({
