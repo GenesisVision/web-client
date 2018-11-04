@@ -1,21 +1,25 @@
 import Page from "components/page/page";
 import NotificationSettingsContainer from "modules/notification-settings/notification-settings-container";
-import ProgramDetailsNavigation from "pages/programs/program-details/components/program-details-navigation/program-details-navigation";
 import React from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { goBack } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
+import BackButton from "components/back-button/back-button";
 
-const NotificationsPage = ({ t, service }) => {
+const NotificationsPage = ({ t, service, backPath }) => {
   return (
     <Page title={t("notifications.title")}>
-      <ProgramDetailsNavigation goBack={service.goBack} />
+      {backPath && <BackButton backPath={backPath} goBack={service.goBack} />}
       <h1>{t("notifications.title")}</h1>
       <NotificationSettingsContainer />
     </Page>
   );
 };
+
+const mapStateToProps = state => ({
+  backPath: state.routing.location.state
+});
 
 const mapDispatchToProps = dispatch => ({
   service: bindActionCreators({ goBack }, dispatch)
@@ -24,7 +28,7 @@ const mapDispatchToProps = dispatch => ({
 export default compose(
   translate(),
   connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
   )
 )(NotificationsPage);
