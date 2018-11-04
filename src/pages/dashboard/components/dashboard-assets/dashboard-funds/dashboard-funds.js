@@ -16,15 +16,12 @@ import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 
-import replaceParams from "../../../../../utils/replace-params";
-import {
-  FUNDS_SLUG_URL_PARAM_NAME,
-  FUND_DETAILS_ROUTE,
-  composeFundsDetailsUrl
-} from "../../../../funds/funds.routes";
+import { composeFundsDetailsUrl } from "../../../../funds/funds.routes";
 import { DASHBOARD_FUNDS_TABLE_COLUMNS } from "../../../dashboard.constants";
 import { getDashboardFunds } from "../../../services/dashboard-funds.service";
 import { formatValue } from "../../../../../utils/formatter";
+import { compose } from "redux";
+import connect from "react-redux/es/connect/connect";
 
 class DashboardFunds extends Component {
   fetchFunds = filters => {
@@ -34,11 +31,7 @@ class DashboardFunds extends Component {
   };
 
   render() {
-    const fundDetailsUrl = fundUrl =>
-      replaceParams(FUND_DETAILS_ROUTE, {
-        [`:${FUNDS_SLUG_URL_PARAM_NAME}`]: fundUrl
-      });
-    const { t } = this.props;
+    const { t, pathname } = this.props;
     return (
       <TableModule
         paging={DEFAULT_PAGING}
@@ -70,7 +63,12 @@ class DashboardFunds extends Component {
           <TableRow>
             <TableCell className="funds-table__cell funds-table__cell--name">
               <div className="funds-table__cell--avatar-title">
-                <Link to={composeFundsDetailsUrl(fund.url)}>
+                <Link
+                  to={{
+                    pathname: composeFundsDetailsUrl(fund.url),
+                    state: pathname
+                  }}
+                >
                   <AssetAvatar
                     url={fund.logo}
                     alt={fund.title}
@@ -78,7 +76,12 @@ class DashboardFunds extends Component {
                   />
                 </Link>
                 <div className="funds-table__cell--title">
-                  <Link to={fundDetailsUrl(fund.url)}>
+                  <Link
+                    to={{
+                      pathname: composeFundsDetailsUrl(fund.url),
+                      state: pathname
+                    }}
+                  >
                     <GVButton variant="text" color="secondary">
                       {fund.title}
                     </GVButton>
@@ -127,4 +130,12 @@ class DashboardFunds extends Component {
   }
 }
 
-export default translate()(DashboardFunds);
+const mapStateToProps = state => {
+  const { pathname } = state.routing.location;
+  return { pathname };
+};
+
+export default compose(
+  translate(),
+  connect(mapStateToProps)
+)(DashboardFunds);
