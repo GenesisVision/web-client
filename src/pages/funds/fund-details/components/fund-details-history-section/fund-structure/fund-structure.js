@@ -33,7 +33,6 @@ class FundStructure extends Component {
         fetchOnMount={false}
         data={data}
         getItems={this.fetchFundStructure}
-        paging={DEFAULT_PAGING}
         columns={FUND_STRUCTURE_COLUMNS}
         renderHeader={column => (
           <span
