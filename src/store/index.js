@@ -11,6 +11,7 @@ import rootReducer from "../reducers";
 import authService from "../services/auth-service";
 import apiErrorHandlerMiddleware from "../shared/middlewares/api-error-handler-middleware/api-error-handler-middleware";
 import clearOnceMetaMiddleware from "../shared/middlewares/clear-once-meta-middleware/clear-once-meta-middleware";
+import gtmMiddleware from "../shared/middlewares/gtm-middleware/gtm-middleware";
 import refreshTokenMiddleware from "../shared/middlewares/refresh-token-middleware/refresh-token-middleware";
 import {
   FAILURE_SUFFIX,
@@ -33,6 +34,7 @@ if (reduxDevTools) {
 }
 const middleware = [
   debounceMiddleware(),
+  gtmMiddleware(),
   clearOnceMetaMiddleware(),
   thunk,
   refreshTokenMiddleware(

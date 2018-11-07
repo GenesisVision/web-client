@@ -33,7 +33,7 @@ class TableModule extends PureComponent {
 
       const totalPages = calculateTotalPages(
         props.data.total,
-        props.paging.itemsOnPage
+        props.paging ? props.paging.itemsOnPage : props.data.total
       );
       newState.paging = merge(state.paging, { totalPages });
     }
