@@ -15,8 +15,6 @@ import { GLOBAL_SEARCH_ROUTE } from "pages/global-search/global-search.routes";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
-import { compose } from "redux";
-import connect from "react-redux/es/connect/connect";
 
 class Header extends Component {
   state = {
@@ -29,7 +27,6 @@ class Header extends Component {
   render() {
     const {
       t,
-      pathname,
       avatar,
       logout,
       email,
@@ -54,12 +51,7 @@ class Header extends Component {
         <div className="header__center">
           <CurrencySelectContainer className="header__currency" />
           <div className="header__search">
-            <Link
-              to={{
-                pathname: GLOBAL_SEARCH_ROUTE,
-                state: pathname
-              }}
-            >
+            <Link to={GLOBAL_SEARCH_ROUTE}>
               <SearchIcon />
             </Link>
           </div>
@@ -113,12 +105,4 @@ class Header extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  const { pathname } = state.routing.location;
-  return { pathname };
-};
-
-export default compose(
-  translate(),
-  connect(mapStateToProps)
-)(Header);
+export default translate()(Header);
