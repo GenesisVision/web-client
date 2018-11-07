@@ -18,7 +18,12 @@ const SettingsPage = ({ t }) => {
         <TwoFactorAuthContainer />
         <ProfileImageContainer />
         <div className="profile-settings__aside-actions">
-          <Link to={PASSWORD_ROUTE}>
+          <Link
+            to={{
+              pathname: PASSWORD_ROUTE,
+              state: `/ ${t("profile.title")}`
+            }}
+          >
             <GVButton
               variant="text"
               color="secondary"
