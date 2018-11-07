@@ -108,6 +108,7 @@ class ProgramDetailsDescriptionSection extends PureComponent {
 
   render() {
     const {
+      backPath,
       isAuthenticated,
       redirectToLogin,
       onChangeInvestmentStatus
