@@ -109,6 +109,7 @@ class FundDetailsPage extends PureComponent {
                 <BackButton backPath={backPath} goBack={service.goBack} />
               )}
               <FundDetailsDescriptionSection
+                backPath={backPath}
                 fundDescriptionData={this.description}
                 isAuthenticated={isAuthenticated}
                 redirectToLogin={service.redirectToLogin}

@@ -17,8 +17,6 @@ import FundDetailsInvestment from "../fund-details-investment/fund-details-inves
 import FundDetailsFavorite from "./fund-details-favorite";
 import FundDetailsNotification from "./fund-details-notificaton";
 import { formatValue } from "../../../../../../utils/formatter";
-import { compose } from "redux";
-import connect from "react-redux/es/connect/connect";
 
 export const composeFundNotificationsUrl = url => {
   return replaceParams(FUND_NOTIFICATIONS_ROUTE, {
@@ -50,7 +48,7 @@ class FundDetailsDescription extends PureComponent {
     const { isOpenInvestmentPopup } = this.state;
     const {
       t,
-      pathname,
+      backPath,
       isInvested,
       canWithdraw,
       fundDescription,
@@ -85,7 +83,7 @@ class FundDetailsDescription extends PureComponent {
           <Link
             to={{
               pathname: composeManagerDetailsUrl(fundDescription.manager.url),
-              state: pathname
+              state: `${backPath} / ${fundDescription.title}`
             }}
           >
             <GVButton
@@ -177,6 +175,7 @@ class FundDetailsDescription extends PureComponent {
             disabled={isFavoritePending}
           />
           <FundDetailsNotification
+            title={fundDescription.title}
             url={composeFundNotificationsUrl(fundDescription.url)}
             disabled={isFavoritePending}
           />
@@ -186,12 +185,4 @@ class FundDetailsDescription extends PureComponent {
   }
 }
 
-const mapStateToProps = state => {
-  const { pathname } = state.routing.location;
-  return { pathname };
-};
-
-export default compose(
-  translate(),
-  connect(mapStateToProps)
-)(FundDetailsDescription);
+export default translate()(FundDetailsDescription);
