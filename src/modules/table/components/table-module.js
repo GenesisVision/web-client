@@ -66,12 +66,7 @@ class TableModule extends PureComponent {
           paging: merge(prevState.paging, { totalPages })
         }));
       })
-      .catch(e => {
-        this.setState({ errorCode: e.errorCode });
-      })
-      .finally(() => {
-        this.setState({ isPending: false });
-      });
+      .catch(e => this.setState({ errorCode: e.errorCode }));
   };
 
   handleUpdateSorting = sorting => {
