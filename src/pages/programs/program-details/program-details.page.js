@@ -110,6 +110,7 @@ class ProgramDetailsPage extends PureComponent {
                 <BackButton backPath={backPath} goBack={service.goBack} />
               )}
               <ProgramDetailsDescriptionSection
+                backPath={backPath}
                 programDescriptionData={this.description}
                 isAuthenticated={isAuthenticated}
                 redirectToLogin={service.redirectToLogin}

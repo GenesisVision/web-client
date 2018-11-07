@@ -126,6 +126,7 @@ class ProgramDetailsDescriptionSection extends PureComponent {
     return (
       <Fragment>
         <ProgramDetailsDescription
+          backPath={backPath}
           isAuthenticated={isAuthenticated}
           redirectToLogin={redirectToLogin}
           isInvested={isInvested}

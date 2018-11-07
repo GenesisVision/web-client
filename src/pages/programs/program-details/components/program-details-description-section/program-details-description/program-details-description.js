@@ -12,9 +12,7 @@ import { ProgramDetailContext } from "pages/programs/program-details/program-det
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import connect from "react-redux/es/connect/connect";
 import { Link } from "react-router-dom";
-import { compose } from "redux";
 import { formatValue } from "utils/formatter";
 import replaceParams from "utils/replace-params";
 
@@ -59,7 +57,7 @@ class ProgramDetailsDescription extends PureComponent {
     const { isOpenInvestmentPopup, isOpenAboutLevels, anchor } = this.state;
     const {
       t,
-      pathname,
+      backPath,
       isInvested,
       canInvest,
       canWithdraw,
@@ -146,7 +144,7 @@ class ProgramDetailsDescription extends PureComponent {
               pathname: composeManagerDetailsUrl(
                 programDescription.manager.url
               ),
-              state: pathname
+              state: `${backPath} / ${programDescription.title}`
             }}
           >
             <GVButton
@@ -252,6 +250,7 @@ class ProgramDetailsDescription extends PureComponent {
             disabled={isFavoritePending}
           />
           <ProgramDetailsNotification
+            title={programDescription.title}
             url={composeProgramNotificationsUrl(programDescription.url)}
             disabled={isFavoritePending}
           />
@@ -261,11 +260,4 @@ class ProgramDetailsDescription extends PureComponent {
   }
 }
 
-const mapStateToProps = state => {
-  const { pathname } = state.routing.location;
-  return { pathname };
-};
-export default compose(
-  translate(),
-  connect(mapStateToProps)
-)(ProgramDetailsDescription);
+export default translate()(ProgramDetailsDescription);

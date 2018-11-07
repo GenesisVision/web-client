@@ -4,14 +4,13 @@ import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
 import isAuthenticated from "shared/decorators/is-authenticated";
-import connect from "react-redux/es/connect/connect";
 
-const ProgramDetailsNotificaton = ({ t, url, pathname }) => {
+const ProgramDetailsNotificaton = ({ t, url, pathname, title }) => {
   return (
     <Link
       to={{
         pathname: url,
-        state: pathname
+        state: `programs/${title}`
       }}
     >
       <div className="program-details-description__control">
@@ -24,13 +23,7 @@ const ProgramDetailsNotificaton = ({ t, url, pathname }) => {
   );
 };
 
-const mapStateToProps = state => {
-  const { pathname } = state.routing.location;
-  return { pathname };
-};
-
 export default compose(
   translate(),
-  isAuthenticated,
-  connect(mapStateToProps)
+  isAuthenticated
 )(ProgramDetailsNotificaton);
