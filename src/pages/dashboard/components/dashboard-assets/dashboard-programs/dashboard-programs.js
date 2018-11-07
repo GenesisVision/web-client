@@ -22,8 +22,6 @@ import {
   DASHBOARD_PROGRAMS_FILTERS
 } from "../../../dashboard.constants";
 import { getDashboardPrograms } from "../../../services/dashboard-programs.service";
-import { compose } from "redux";
-import connect from "react-redux/es/connect/connect";
 
 class Dashboardprograms extends Component {
   fetchPrograms = filters => {
@@ -33,7 +31,7 @@ class Dashboardprograms extends Component {
   };
 
   render() {
-    const { t, pathname } = this.props;
+    const { t } = this.props;
     return (
       <TableModule
         paging={DEFAULT_PAGING}
@@ -69,7 +67,7 @@ class Dashboardprograms extends Component {
                 <Link
                   to={{
                     pathname: composeProgramDetailsUrl(program.url),
-                    state: pathname
+                    state: `/ ${t("dashboard-page.title")}`
                   }}
                 >
                   <AssetAvatar
@@ -82,7 +80,7 @@ class Dashboardprograms extends Component {
                 <Link
                   to={{
                     pathname: composeProgramDetailsUrl(program.url),
-                    state: pathname
+                    state: `/ ${t("dashboard-page.title")}`
                   }}
                 >
                   <GVButton variant="text" color="secondary">
@@ -123,12 +121,4 @@ class Dashboardprograms extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  const { pathname } = state.routing.location;
-  return { pathname };
-};
-
-export default compose(
-  translate(),
-  connect(mapStateToProps)
-)(Dashboardprograms);
+export default translate()(Dashboardprograms);

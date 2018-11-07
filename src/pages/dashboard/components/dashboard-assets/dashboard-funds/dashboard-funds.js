@@ -20,8 +20,6 @@ import { composeFundsDetailsUrl } from "../../../../funds/funds.routes";
 import { DASHBOARD_FUNDS_TABLE_COLUMNS } from "../../../dashboard.constants";
 import { getDashboardFunds } from "../../../services/dashboard-funds.service";
 import { formatValue } from "../../../../../utils/formatter";
-import { compose } from "redux";
-import connect from "react-redux/es/connect/connect";
 
 class DashboardFunds extends Component {
   fetchFunds = filters => {
@@ -31,7 +29,7 @@ class DashboardFunds extends Component {
   };
 
   render() {
-    const { t, pathname } = this.props;
+    const { t } = this.props;
     return (
       <TableModule
         paging={DEFAULT_PAGING}
@@ -66,7 +64,7 @@ class DashboardFunds extends Component {
                 <Link
                   to={{
                     pathname: composeFundsDetailsUrl(fund.url),
-                    state: pathname
+                    state: `/ ${t("dashboard-page.title")}`
                   }}
                 >
                   <AssetAvatar
@@ -79,7 +77,7 @@ class DashboardFunds extends Component {
                   <Link
                     to={{
                       pathname: composeFundsDetailsUrl(fund.url),
-                      state: pathname
+                      state: `/ ${t("dashboard-page.title")}`
                     }}
                   >
                     <GVButton variant="text" color="secondary">
@@ -130,12 +128,4 @@ class DashboardFunds extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  const { pathname } = state.routing.location;
-  return { pathname };
-};
-
-export default compose(
-  translate(),
-  connect(mapStateToProps)
-)(DashboardFunds);
+export default translate()(DashboardFunds);
