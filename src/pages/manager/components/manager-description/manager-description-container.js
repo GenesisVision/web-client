@@ -8,25 +8,21 @@ import BackButton from "components/back-button/back-button";
 
 class ManagerDescriptionContainer extends Component {
   render() {
-    const { managerProfile, goBack, backPath } = this.props;
+    const { managerProfile } = this.props;
     return (
       <Fragment>
-        <BackButton backPath={backPath} goBack={goBack} />
+        <BackButton />
         <ManagerDescription managerProfile={managerProfile} />
       </Fragment>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  backPath: state.routing.location.state
-});
-
 const mapDispatchToProps = dispatch => ({
   service: bindActionCreators({ ...managerService }, dispatch)
 });
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(ManagerDescriptionContainer);
