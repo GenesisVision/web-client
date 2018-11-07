@@ -5,7 +5,7 @@ import React, { Component } from "react";
 
 class SelectItem extends Component {
   handleClick = event => {
-    this.props.onClick(event);
+    this.props.onClick({ event, isSelected: this.props.isSelected });
   };
   render() {
     const { isSelected } = this.props;
