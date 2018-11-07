@@ -16,10 +16,14 @@ class FacetCardsContainer extends Component {
     });
   };
   render() {
-    const { isPending, facets } = this.props;
+    const { isPending, facets, title } = this.props;
     if (!facets || isPending) return <FacetCardsStub />;
     return (
-      <FacetCards facets={facets} composeFacetUrl={this.composeFacetUrl} />
+      <FacetCards
+        title={title}
+        facets={facets}
+        composeFacetUrl={this.composeFacetUrl}
+      />
     );
   }
 }

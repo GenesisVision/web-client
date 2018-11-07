@@ -10,7 +10,7 @@ const FundsPage = ({ t }) => {
   return (
     <Page title={t("funds-page.title")}>
       <FundsNavigationTabsContainer />
-      <FacetCardsContainer />
+      <FacetCardsContainer title={t("funds-page.title")} />
       <FundsTableContainer title={"All funds"} />
     </Page>
   );

@@ -5,16 +5,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import facetImg from "./facet.png";
-import { compose } from "redux";
-import connect from "react-redux/es/connect/connect";
 
-const FacetCard = ({ facet, composeFacetUrl, pathname }) => {
+const FacetCard = ({ facet, composeFacetUrl, title }) => {
   return (
     <Surface className="facet">
       <Link
         to={{
           pathname: composeFacetUrl(facet.url),
-          state: pathname
+          state: `/ ${title}`
         }}
       >
         <div className="facet__facet-container">
@@ -46,9 +44,4 @@ FacetCard.propTypes = {
   facet: facetShape
 };
 
-const mapStateToProps = state => {
-  const { pathname } = state.routing.location;
-  return { pathname };
-};
-
-export default compose(connect(mapStateToProps))(FacetCard);
+export default FacetCard;

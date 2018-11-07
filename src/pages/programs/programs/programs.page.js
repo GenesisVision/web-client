@@ -10,7 +10,7 @@ const ProgramsPage = ({ t }) => {
   return (
     <Page title={t("programs-page.title")}>
       <ProgramsTabsContainer />
-      <FacetCardsContainer />
+      <FacetCardsContainer title={t("programs-page.title")} />
       <ProgramsContainer title={"All programs"} />
     </Page>
   );
