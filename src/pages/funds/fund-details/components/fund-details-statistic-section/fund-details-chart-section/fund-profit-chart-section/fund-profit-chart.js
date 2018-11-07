@@ -46,9 +46,9 @@ class FundProfitChart extends PureComponent {
             dataKey="value"
             axisLine={false}
             tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
-            tickFormatter={x => x.toFixed(2)}
+            tickFormatter={x => +x.toFixed(2)}
             unit="%"
-            width={50}
+            width={35}
           />
 
           <Tooltip content={FundProfitTooltip} />

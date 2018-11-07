@@ -58,6 +58,7 @@ class ProgramDetailsDescription extends PureComponent {
     const {
       t,
       isInvested,
+      canInvest,
       canWithdraw,
       programDescription,
       onReinvestingClick,
@@ -104,7 +105,10 @@ class ProgramDetailsDescription extends PureComponent {
                 </div>
                 <div className="popover-levels__balance">
                   <NumberFormat
-                    value={formatValue(programDescription.availableInvestment)}
+                    value={formatValue(
+                      programDescription.availableInvestment,
+                      5
+                    )}
                     displayType="text"
                     suffix={` GVT`}
                   />
@@ -156,7 +160,7 @@ class ProgramDetailsDescription extends PureComponent {
                   {t("program-details-page.description.avToInvest")}
                 </span>
                 <NumberFormat
-                  value={formatValue(programDescription.availableInvestment)}
+                  value={formatValue(programDescription.availableInvestment, 2)}
                   displayType="text"
                   suffix={` GVT`}
                 />
@@ -166,7 +170,7 @@ class ProgramDetailsDescription extends PureComponent {
                   {t("program-details-page.description.entryFee")}
                 </span>
                 <NumberFormat
-                  value={programDescription.entryFee}
+                  value={formatValue(programDescription.entryFee, 2)}
                   displayType="text"
                   suffix=" %"
                 />
@@ -176,7 +180,7 @@ class ProgramDetailsDescription extends PureComponent {
                   {t("program-details-page.description.successFee")}
                 </span>
                 <NumberFormat
-                  value={programDescription.successFee}
+                  value={formatValue(programDescription.successFee, 2)}
                   displayType="text"
                   suffix=" %"
                 />
@@ -187,23 +191,29 @@ class ProgramDetailsDescription extends PureComponent {
                 <GVButton
                   className="program-details-description__invest-btn"
                   onClick={this.handleOpenInvestmentPopup}
+                  disabled={
+                    !programDescription.personalProgramDetails ||
+                    !programDescription.personalProgramDetails.canInvest
+                  }
                 >
                   {t("program-details-page.description.invest")}
                 </GVButton>
               </div>
-              {isInvested && (
-                <ProgramReinvestingWidget
-                  className="program-details-description__reinvest"
-                  toggleReinvesting={onReinvestingClick}
-                  isReinvesting={
-                    programDescription.personalProgramDetails.isReinvest
-                  }
-                  disabled={isReinvestPending}
-                />
-              )}
+              {isInvested &&
+                canInvest && (
+                  <ProgramReinvestingWidget
+                    className="program-details-description__reinvest"
+                    toggleReinvesting={onReinvestingClick}
+                    isReinvesting={
+                      programDescription.personalProgramDetails.isReinvest
+                    }
+                    disabled={isReinvestPending}
+                  />
+                )}
             </div>
-            {canWithdraw && (
+            {isInvested && (
               <ProgramDetailsInvestment
+                canWithdraw={canWithdraw}
                 className={"program-details-description__your-investment"}
                 programCurrency={programDescription.currency}
                 {...composeInvestmentData(programDescription)}

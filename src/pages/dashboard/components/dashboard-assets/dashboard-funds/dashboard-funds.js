@@ -5,7 +5,6 @@ import FundAssetContainer from "components/fund-asset/fund-asset-container";
 import Profitability from "components/profitability/profitability";
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
 import { GVButton } from "gv-react-components";
-import { FUNDS_TABLE_COLUMNS } from "modules/funds-table/funds-table.constants";
 import { TableCell, TableRow } from "modules/table/components";
 import DateRangeFilter from "modules/table/components/filtering/date-range-filter/date-range-filter";
 import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "modules/table/components/filtering/date-range-filter/date-range-filter.constants";
@@ -17,13 +16,14 @@ import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 
+import { formatValue } from "../../../../../utils/formatter";
 import replaceParams from "../../../../../utils/replace-params";
 import {
   FUNDS_SLUG_URL_PARAM_NAME,
   FUND_DETAILS_ROUTE,
   composeFundsDetailsUrl
 } from "../../../../funds/funds.routes";
-import { DASHBOARD_PROGRAMS_SORTING } from "../../../dashboard.constants";
+import { DASHBOARD_FUNDS_TABLE_COLUMNS } from "../../../dashboard.constants";
 import { getDashboardFunds } from "../../../services/dashboard-funds.service";
 
 class DashboardFunds extends Component {
@@ -42,12 +42,11 @@ class DashboardFunds extends Component {
     return (
       <TableModule
         paging={DEFAULT_PAGING}
-        sorting={DASHBOARD_PROGRAMS_SORTING}
         filtering={{
           dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE
         }}
         getItems={this.fetchFunds}
-        columns={FUNDS_TABLE_COLUMNS}
+        columns={DASHBOARD_FUNDS_TABLE_COLUMNS}
         renderFilters={(updateFilter, filtering) => (
           <Fragment>
             <DateRangeFilter
@@ -59,13 +58,17 @@ class DashboardFunds extends Component {
           </Fragment>
         )}
         renderHeader={column => (
-          <span className={`dashboard-funds__cell--${column.name}`}>
+          <span
+            className={`funds-table__cell dashboard-funds__cell--${
+              column.name
+            }`}
+          >
             {t(`dashboard-page.funds-header.${column.name}`)}
           </span>
         )}
         renderBodyRow={fund => (
           <TableRow>
-            <TableCell className="funds-table__cell--name">
+            <TableCell className="funds-table__cell funds-table__cell--name">
               <div className="funds-table__cell--avatar-title">
                 <Link to={composeFundsDetailsUrl(fund.url)}>
                   <AssetAvatar
@@ -83,8 +86,8 @@ class DashboardFunds extends Component {
                 </div>
               </div>
             </TableCell>
-            <TableCell className="funds-table__cell">
-              {fund.statistic.balanceGVT.amount} GVT
+            <TableCell className="funds-table__cell funds-table__cell--amount">
+              {formatValue(fund.statistic.balanceGVT.amount)} GVT
             </TableCell>
             <TableCell className="funds-table__cell">
               <FundAssetContainer
@@ -94,29 +97,27 @@ class DashboardFunds extends Component {
                 length={fund.totalAssetsCount}
               />
             </TableCell>
-            <TableCell className="funds-table__cell--investors">
+            <TableCell className="funds-table__cell funds-table__cell--investors">
               {fund.statistic.investorsCount}
             </TableCell>
-            <TableCell className="funds-table__cell--drawdown">
+            <TableCell className="funds-table__cell funds-table__cell--drawdown">
               <NumberFormat
-                value={fund.statistic.drawdownPercent}
+                value={formatValue(fund.statistic.drawdownPercent, 2)}
                 suffix="%"
-                decimalScale={2}
                 displayType="text"
               />
             </TableCell>
-            <TableCell className="funds-table__cell--profit">
+            <TableCell className="funds-table__cell funds-table__cell--profit">
               <Profitability value={fund.statistic.profitPercent} prefix="sign">
                 <NumberFormat
-                  value={fund.statistic.profitPercent}
+                  value={formatValue(fund.statistic.profitPercent, 2)}
                   suffix="%"
                   allowNegative={false}
-                  decimalScale={2}
                   displayType="text"
                 />
               </Profitability>
             </TableCell>
-            <TableCell className="funds-table__cell--chart">
+            <TableCell className="funds-table__cell funds-table__cell--chart">
               <ProgramSimpleChart data={fund.chart} programId={fund.id} />
             </TableCell>
           </TableRow>

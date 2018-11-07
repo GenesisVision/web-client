@@ -26,6 +26,7 @@ class ProgramDetailsInvestment extends PureComponent {
   render() {
     const {
       t,
+      canWithdraw,
       className,
       programId,
       investedAmount,
@@ -72,7 +73,7 @@ class ProgramDetailsInvestment extends PureComponent {
                 {t("program-details-page.description.profit")}
               </span>
               <NumberFormat
-                value={profitPercent}
+                value={formatValue(profitPercent, 2)}
                 suffix=" %"
                 displayType="text"
               />
@@ -113,7 +114,7 @@ class ProgramDetailsInvestment extends PureComponent {
           <GVButton
             color="secondary"
             variant="outlined"
-            disabled={status === "Investing"}
+            disabled={!canWithdraw}
             onClick={this.handleOpenWithdrawalPopup}
           >
             {t("program-details-page.description.withdraw")}

@@ -15,12 +15,11 @@ import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
-import { formatValue } from "utils/formatter";
+import { formatPercent, formatValue } from "utils/formatter";
 
 import {
   DASHBOARD_PROGRAMS_COLUMNS,
-  DASHBOARD_PROGRAMS_FILTERS,
-  DASHBOARD_PROGRAMS_SORTING
+  DASHBOARD_PROGRAMS_FILTERS
 } from "../../../dashboard.constants";
 import { getDashboardPrograms } from "../../../services/dashboard-programs.service";
 
@@ -36,7 +35,6 @@ class Dashboardprograms extends Component {
     return (
       <TableModule
         paging={DEFAULT_PAGING}
-        sorting={DASHBOARD_PROGRAMS_SORTING}
         filtering={{
           dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE
         }}
@@ -54,13 +52,17 @@ class Dashboardprograms extends Component {
           </Fragment>
         )}
         renderHeader={column => (
-          <span className={`dashboard-programs__cell--${column.name}`}>
+          <span
+            className={`programs-table__cell dashboard-programs__cell--${
+              column.name
+            }`}
+          >
             {t(`dashboard-page.programs-header.${column.name}`)}
           </span>
         )}
         renderBodyRow={program => (
           <TableRow>
-            <TableCell className="dashboard-programs__cell--title">
+            <TableCell className="programs-table__cell dashboard-programs__cell--title">
               <div className="dashboard-programs__cell--avatar-title">
                 <Link to={composeProgramDetailsUrl(program.url)}>
                   <AssetAvatar
@@ -77,29 +79,29 @@ class Dashboardprograms extends Component {
                 </Link>
               </div>
             </TableCell>
-            <TableCell className="dashboard-programs__cell--share">
-              {formatValue(program.dashboardAssetsDetails.share)}
+            <TableCell className="programs-table__cell dashboard-programs__cell--share">
+              {formatPercent(program.dashboardAssetsDetails.share)}%
             </TableCell>
-            <TableCell className="dashboard-programs__cell--currency">
+            <TableCell className="programs-table__cell dashboard-programs__cell--currency">
               {program.currency}
             </TableCell>
-            <TableCell className="dashboard-programs__cell--period">
+            <TableCell className="programs-table__cell dashboard-programs__cell--period">
               <ProgramPeriodEnd periodEnds={program.periodEnds} />
             </TableCell>
-            <TableCell className="dashboard-programs__cell--value">
-              {formatValue(program.personalDetails.value)}
+            <TableCell className="programs-table__cell dashboard-programs__cell--value">
+              {formatPercent(program.personalDetails.value)} GVT
             </TableCell>
-            <TableCell className="dashboard-programs__cell--profit">
+            <TableCell className="programs-table__cell dashboard-programs__cell--profit">
               <NumberFormat
-                value={+program.personalDetails.profit.toFixed(2)}
+                value={formatValue(program.statistic.profitPercent)}
                 suffix="%"
                 displayType="text"
               />
             </TableCell>
-            <TableCell className="dashboard-programs__cell--chart">
+            <TableCell className="programs-table__cell dashboard-programs__cell--chart">
               <ProgramSimpleChart data={program.chart} programId={program.id} />
             </TableCell>
-            <TableCell className="dashboard-programs__cell--status">
+            <TableCell className="programs-table__cell dashboard-programs__cell--status">
               {program.personalDetails.status}
             </TableCell>
           </TableRow>

@@ -25,8 +25,8 @@ i18n
       wait: true
     },
     backend: {
-      loadPath: "/investor/locales/{{lng}}/{{ns}}.json",
-      queryStringParams: { v: "0.0.3" }
+      loadPath: `${process.env.REACT_APP_BASENAME}locales/{{lng}}/{{ns}}.json`,
+      queryStringParams: { v: "0.0.4" }
     }
   });
 

@@ -2,12 +2,12 @@ import "./table.scss";
 
 import React, { Component } from "react";
 import Scrollbars from "react-custom-scrollbars";
+import { loadData, saveData } from "utils/localstorage";
 
 import TableBody from "./table-body";
 import TableFooter from "./table-footer";
 import TableHeader from "./table-header";
 import TableToolbar from "./table-toolbar";
-import { loadData, saveData } from "utils/localstorage";
 
 export const TABLE_VIEW = "table_view";
 export const CARDS_VIEW = "cards_view";
@@ -81,11 +81,13 @@ class Table extends Component {
             </table>
           )}
         </Scrollbars>
-        <TableFooter
-          paging={this.props.paging}
-          updatePaging={this.props.updatePaging}
-          isPending={this.props.isPending}
-        />
+        {this.props.paging && (
+          <TableFooter
+            paging={this.props.paging}
+            updatePaging={this.props.updatePaging}
+            isPending={this.props.isPending}
+          />
+        )}
       </div>
     );
   }

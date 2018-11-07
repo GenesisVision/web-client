@@ -11,6 +11,7 @@ import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
 import { composeProgramDetailsUrl } from "pages/programs/programs.routes";
 import { PROGRAM_SLUG_URL_PARAM_NAME } from "pages/programs/programs.routes";
 import React, { Component } from "react";
+import { Scrollbars } from "react-custom-scrollbars";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
@@ -84,9 +85,15 @@ class ProgramTableRowDetailed extends Component {
                 <div className="program-detailed__strategy">
                   {t("programs-page.programs-header.strategy")}
                 </div>
-                <div className="program-detailed__description">
-                  {program.description}
-                </div>
+                <Scrollbars
+                  autoHide
+                  autoHideTimeout={1000}
+                  style={{ width: "100%", height: "100%" }}
+                >
+                  <div className="program-detailed__description">
+                    {program.description}
+                  </div>
+                </Scrollbars>
               </div>
               <div className="program-detailed__statistic">
                 <div className="program-detailed__chart">
@@ -125,7 +132,7 @@ class ProgramTableRowDetailed extends Component {
                       {t("programs-page.programs-header.available-to-invest")}
                     </div>
                     <div className="program-detailed__statistic-data--value">
-                      {formatValue(program.availableInvestment)} GVT
+                      {formatValue(program.availableInvestment, 2)} GVT
                     </div>
                   </div>
                   <div>
@@ -153,9 +160,11 @@ class ProgramTableRowDetailed extends Component {
                     </div>
                     <div className="program-detailed__statistic-data--value">
                       <NumberFormat
-                        value={program.statistic.drawdownPercent}
+                        value={formatValue(
+                          program.statistic.drawdownPercent,
+                          2
+                        )}
                         suffix="%"
-                        decimalScale={2}
                         displayType="text"
                       />
                     </div>
@@ -170,10 +179,12 @@ class ProgramTableRowDetailed extends Component {
                         prefix="sign"
                       >
                         <NumberFormat
-                          value={program.statistic.profitPercent}
+                          value={formatValue(
+                            program.statistic.profitPercent,
+                            2
+                          )}
                           suffix="%"
                           allowNegative={false}
-                          decimalScale={2}
                           displayType="text"
                         />
                       </Profitability>
@@ -194,9 +205,15 @@ class ProgramTableRowDetailed extends Component {
                     </div>
                   )}
                 <div className="program-detailed__bottom-block">
-                  <GVButton onClick={this.handleOpenInvest}>
+                  {/* <GVButton
+                    onClick={this.handleOpenInvest}
+                    disabled={
+                      !program.personalDetails ||
+                      !program.personalDetails.canInvest
+                    }
+                  >
                     {t("program-actions.invest")}
-                  </GVButton>
+                  </GVButton> */}
                   <ProgramDepositContainer
                     type="program"
                     id={program.id}

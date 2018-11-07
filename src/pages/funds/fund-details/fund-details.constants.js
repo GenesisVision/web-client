@@ -3,6 +3,21 @@ import { composeDefaultDateRangeFilter } from "modules/table/components/filterin
 import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "../../../modules/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { composeRequestValue } from "../../../modules/table/components/filtering/date-range-filter/date-range-filter.helpers";
 
+export const FUND_STRUCTURE_COLUMNS = [
+  {
+    name: "asset"
+  },
+  {
+    name: "symbol"
+  },
+  {
+    name: "target"
+  },
+  {
+    name: "current"
+  }
+];
+
 const SERVER_DATE_RANGE_MIN_FILTER_NAME = "dateFrom";
 const SERVER_DATE_RANGE_MAX_FILTER_NAME = "dateTo";
 export const FUND_REBALANCING_COLUMNS = [

@@ -4,7 +4,6 @@ import classnames from "classnames";
 import Modal from "components/modal/modal";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { Scrollbars } from "react-custom-scrollbars";
 import { connect } from "react-redux";
 
 const MARGIN_OFFSET = 10;
@@ -126,9 +125,7 @@ class Popover extends Component {
           })}
           ref={this.popover}
         >
-          <Scrollbars autoHeight autoHeightMax={"100vh - 100px"}>
-            {children}
-          </Scrollbars>
+          {children}
         </div>
       </Modal>
     );

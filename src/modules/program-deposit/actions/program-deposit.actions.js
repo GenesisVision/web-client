@@ -42,7 +42,14 @@ export const investToProgramById = (id, amount) => {
       id,
       amount,
       authService.getAuthArg()
-    )
+    ),
+    meta: {
+      gtm: {
+        type: "PROGRAM_INVEST",
+        id,
+        amount
+      }
+    }
   };
 };
 

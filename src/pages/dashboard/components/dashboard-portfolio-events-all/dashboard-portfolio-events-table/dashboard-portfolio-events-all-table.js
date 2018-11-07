@@ -21,8 +21,7 @@ import { isUseProfitability } from "../../helpers/dashboard-portfolio.helpers";
 import {
   PORTFOLIO_EVENTS_COLUMNS,
   PORTFOLIO_EVENTS_DEFAULT_FILTERING,
-  PORTFOLIO_EVENTS_FILTERS,
-  PORTFOLIO_EVENTS_TYPES_ENUM
+  PORTFOLIO_EVENTS_FILTERS
 } from "./dashboard-portfolio-events-all-table.constants";
 
 class PortfolioEventsTableComponent extends Component {
@@ -88,23 +87,25 @@ class PortfolioEventsTableComponent extends Component {
               <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--date">
                 {moment(event.date).format("DD-MM-YYYY, hh:mm a")}
               </TableCell>
-              <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--type">
-                {t(
-                  `dashboard.portfolio-events.types.${
-                    PORTFOLIO_EVENTS_TYPES_ENUM[event.type]
-                  }`
-                )}
-              </TableCell>
+              {/*<TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--type">
+                {PORTFOLIO_EVENTS_TYPES_ENUM[event.type] &&
+                  t(
+                    `dashboard.portfolio-events.types.${
+                      PORTFOLIO_EVENTS_TYPES_ENUM[event.type]
+                    }`
+                  )}
+              </TableCell>*/}
               <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--description">
-                {event.title}
+                {event.description}
               </TableCell>
               <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--amount">
                 {isUseProfitability(event) ? (
                   <Profitability value={formatValue(event.value)} prefix="sign">
                     <NumberFormat
-                      value={formatValue(event.value, "floor", false)}
+                      value={formatValue(event.value)}
                       thousandSeparator=" "
                       displayType="text"
+                      allowNegative={false}
                       suffix={" " + event.currency}
                     />
                   </Profitability>

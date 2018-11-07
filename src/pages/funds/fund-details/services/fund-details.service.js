@@ -45,8 +45,7 @@ export const getFundStatistic = (fundId, currency, period = DEFAULT_PERIOD) => {
         sharpeRatio: profitChart.data.sharpeRatio,
         sortinoRatio: profitChart.data.sortinoRatio,
         maxDrawdown: profitChart.data.maxDrawdown,
-        periodStarts: profitChart.data.lastPeriodStarts,
-        periodEnds: profitChart.data.lastPeriodEnds
+        creationDate: profitChart.data.creationDate
       },
       isPending: profitChart.isPending
     };
@@ -70,4 +69,8 @@ export const getFundStatistic = (fundId, currency, period = DEFAULT_PERIOD) => {
 
 export const getFundRebalancing = (id, filters) => {
   return fundsApiProxy.v10FundsByIdRebalancingGet(id, filters);
+};
+
+export const getFundStructure = id => {
+  return fundsApiProxy.v10FundsByIdAssetsGet(id);
 };

@@ -9,7 +9,8 @@ import authService from "services/auth-service";
 class DisableAuthContainer extends Component {
   state = {
     isPending: false,
-    success: false
+    success: false,
+    errorMessage: ""
   };
   handleSubmit = model => {
     this.setState({ isPending: true });
@@ -17,12 +18,12 @@ class DisableAuthContainer extends Component {
       .v10Auth2faDisablePost(authService.getAuthArg(), {
         model
       })
-      .then(data =>
-        this.setState(
-          { ...data, success: !data.errorMessage },
-          this.props.onSubmit
-        )
-      );
+      .then(data => {
+        this.setState({ ...data, success: true }, this.props.onSubmit);
+      })
+      .catch(data => {
+        this.setState({ ...data, success: false });
+      });
   };
   render() {
     const { success, isPending, errorMessage } = this.state;

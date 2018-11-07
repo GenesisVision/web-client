@@ -5,7 +5,7 @@ import * as moment from "moment";
 import PropTypes from "prop-types";
 import React from "react";
 import NumberFormat from "react-number-format";
-import { formatValue, roundTypeEnum } from "utils/formatter";
+import { formatValue } from "utils/formatter";
 
 import { isUseProfitability } from "../../helpers/dashboard-portfolio.helpers";
 import PortfolioEventLogo from "../dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
@@ -40,14 +40,15 @@ const DashboardPortfolioEvent = ({ event }) => {
             {isUseProfitability(event) ? (
               <Profitability value={formatValue(event.value)} prefix="sign">
                 <NumberFormat
-                  value={formatValue(event.value, roundTypeEnum.FLOOR, false)}
+                  value={formatValue(event.value)}
                   displayType="text"
+                  allowNegative={false}
                   suffix={` ${event.currency}`}
                 />
               </Profitability>
             ) : (
               <NumberFormat
-                value={formatValue(event.value, roundTypeEnum.FLOOR, false)}
+                value={formatValue(event.value)}
                 displayType="text"
                 suffix={` ${event.currency}`}
               />

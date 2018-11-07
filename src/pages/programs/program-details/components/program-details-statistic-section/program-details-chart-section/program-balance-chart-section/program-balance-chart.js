@@ -31,9 +31,9 @@ class ProgramBalanceChart extends PureComponent {
             axisLine={false}
             orientation="right"
             tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
-            tickFormatter={x => x.toFixed(4)}
+            tickFormatter={x => +x.toFixed(4)}
             unit={currency}
-            width={80}
+            width={60}
           />
           <CartesianGrid vertical={false} strokeWidth={0.1} />
           <Area

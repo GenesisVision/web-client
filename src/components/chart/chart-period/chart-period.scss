@@ -1,11 +1,18 @@
 @import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
+@import "styles/_sizes.scss";
 
 .chart-period {
   display: inline-flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
   margin-top: 30px;
   min-height: 1em;
+  padding-bottom: $padding-middle-mobile;
+  @include media-breakpoint-landscape-phone() {
+    padding-bottom: $padding-middle;
+  }
 
   &__period {
     color: $text-dark-color;
@@ -15,6 +22,7 @@
   }
 
   &__period-item {
+    font-size: $font-size-middle;
     padding: 0;
     &:not(:last-of-type) {
       margin-right: 20px;
@@ -34,8 +42,12 @@
 
   &__date-range {
     color: $text-color;
-    font-size: 13px;
+    font-size: $font-size-small-mobile;
     font-weight: 600;
-    letter-spacing: 0.2px;
+    letter-spacing: 0;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-middle;
+      letter-spacing: 0.2px;
+    }
   }
 }

@@ -1,9 +1,14 @@
 @import "styles/_breakpoint.scss";
 @import "styles/_colors.scss";
+@import "styles/_sizes.scss";
 
 .dashboard-request {
   float: right;
   margin-top: 10px;
+  padding: 0 $padding-middle-mobile;
+  @include media-breakpoint-landscape-phone() {
+    padding: 0 $padding-middle;
+  }
   .statistic-item {
     margin-right: 0;
   }
@@ -15,9 +20,11 @@
 }
 
 .dashboard-request-popover {
+  display: flex;
+  flex-direction: column;
   min-width: 300px;
-  max-height: 200px;
   padding: 20px;
+  overflow: hidden;
 
   @include media-breakpoint-landscape-phone() {
     min-width: 400px;

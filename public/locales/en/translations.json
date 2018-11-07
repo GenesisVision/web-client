@@ -197,16 +197,16 @@
         "end-of-period": "Notifications for the end of the period",
         "fund-rebalancing": "Fund rebalancing",
         "FundRebalancing": {
-          "disabled-alert": "Enabled fund rebalancing notifications",
-          "enabled-alert": "Disabled fund rebalancing notifications"
+          "disabled-alert": "Disabled fund rebalancing notifications",
+          "enabled-alert": "Enabled fund rebalancing notifications"
         },
         "FundNewsAndUpdates": {
-          "disabled-alert": "Enabled fund news and updates notifications",
-          "enabled-alert": "Disabled fund news and updates notifications"
+          "disabled-alert": "Disabled fund news and updates notifications",
+          "enabled-alert": "Enabled fund news and updates notifications"
         },
         "FundEndOfPeriod": {
-          "disabled-alert": "Enabled the end of period notifications",
-          "enabled-alert": "Disabled the end of period notifications"
+          "disabled-alert": "Disabled the end of period notifications",
+          "enabled-alert": "Enabled the end of period notifications"
         }
       },
       "custom": {
@@ -505,7 +505,8 @@
     "Active": "Active",
     "Investing": "Investing",
     "Withdrawing": "Withdrawing",
-    "Ended": "Ended"
+    "Ended": "Ended",
+    "Pending": "Pending"
   },
   "chart-period": {
     "day-short": "1D",
@@ -710,6 +711,13 @@
     "history": {
       "heading": "History",
       "subheading": "Rebalancing",
+      "structure": {
+        "title": "Structure",
+        "asset": "Asset",
+        "symbol": "Symbol",
+        "target": "Target",
+        "current": "Current"
+      },
       "rebalances": {
         "assets": "Assets",
         "from": "From",
@@ -867,12 +875,27 @@
     }
   },
   "dashboard": {
+    "get-started": {
+      "title": "Get started",
+      "text-1": "There's no data right now.",
+      "text-2": "Find the program to invest or make a deposit first",
+      "deposit": "Deposit",
+      "programs": "Go to the programs"
+    },
     "portfolio": "Portfolio",
     "favorite-programs": "Favorite programs",
     "portfolio-events": {
       "title": "Portfolio Events",
       "see-all-button": "See All",
       "table-title": "Operations",
+      "empty-events": {
+        "text": "The following events will be displayed here",
+        "finished": "Fund/Program finished",
+        "started": "Fund/Program started",
+        "investor-left": "Investor left",
+        "new-investor": "New investor",
+        "interrupted": "Fund/Program interrupted"
+      },
       "table-header": {
         "date": "Date",
         "type": "Type",
@@ -887,7 +910,14 @@
         "loss": "Loss",
         "reinvest": "Reinvest",
         "canceled": "Canceled",
-        "ended": "Ended"
+        "ended": "Ended",
+        "ManagerInvest": "Manager invest",
+        "EntranceFee": "Entrance fee",
+        "AssetStarted": "Asset started",
+        "InvestorInvest": "Investor invest",
+        "AssetFinished": "Asset finished",
+        "ProgramPeriodStats": "Program period stats",
+        "ProgramPeriodEnds": "Programp period ends"
       }
     }
   },
@@ -956,11 +986,15 @@
     "settings": {
       "title": "Settings",
       "profile-image": "Profile image",
-      "image-requirements": "At least 300 x 300px PNG or JPG file.",
+      "image-requirements": "At least 300 x 300px PNG or JPG file. The maximum file size is 2MB.",
       "save-photo": "Save photo",
       "image-success-save-message": "The photo has just been successfully changed.",
       "change-password": "Change password",
-      "logout-from-another-devices": "Logout from another devices"
+      "logout-from-another-devices": "Logout from other devices",
+      "validation": {
+        "image-resolution-incorrect": "The resolution of the uploaded image is too low.",
+        "image-file-is-large": "The uploaded image file is too large."
+      }
     }
   },
   "managers-table": {

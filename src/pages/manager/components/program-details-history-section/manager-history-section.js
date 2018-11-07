@@ -2,22 +2,22 @@ import "./manager-history.scss";
 
 import Surface from "components/surface/surface";
 import { GVTab, GVTabs } from "gv-react-components";
-import React, { PureComponent } from "react";
-import { translate } from "react-i18next";
-import connect from "react-redux/es/connect/connect";
-import { bindActionCreators, compose } from "redux";
-
+import { toggleFavoriteFundDispatchable } from "modules/favorite-asset/services/favorite-fund.service";
+import { toggleFavoriteProgramDispatchable } from "modules/favorite-asset/services/favorite-program.service";
 import FundsTableRow from "modules/funds-table/components/funds-table/fund-table-row";
 import { FUNDS_TABLE_COLUMNS } from "modules/funds-table/funds-table.constants";
 import ProgramTableRow from "modules/programs-table/components/programs-table/program-table-row";
 import { PROGRAMS_COLUMNS } from "modules/programs-table/programs.constants";
+import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
+import React, { PureComponent } from "react";
+import { translate } from "react-i18next";
+import connect from "react-redux/es/connect/connect";
+import { push } from "react-router-redux";
+import { bindActionCreators, compose } from "redux";
+
 import * as service from "../../services/manager.service";
 import * as managerService from "../../services/manager.service";
 import ManagerTable from "./manager-table/manager-table";
-import { push } from "react-router-redux";
-import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
-import { toggleFavoriteProgramDispatchable } from "modules/favorite-asset/services/favorite-program.service";
-import { toggleFavoriteFundDispatchable } from "modules/favorite-asset/services/favorite-fund.service";
 
 const PROGRAMS_TAB = "programs";
 const FUNDS_TAB = "funds";
@@ -102,7 +102,11 @@ class ManagerHistorySection extends PureComponent {
                 />
               )}
               renderHeader={column => (
-                <span className={`programs-table__cell--${column.name}`}>
+                <span
+                  className={`programs-table__cell programs-table__cell--${
+                    column.name
+                  }`}
+                >
                   {t(`programs-page.programs-header.${column.name}`)}
                 </span>
               )}
@@ -123,7 +127,11 @@ class ManagerHistorySection extends PureComponent {
                 />
               )}
               renderHeader={column => (
-                <span className={`funds-table__cell--${column.name}`}>
+                <span
+                  className={`funds-table__cell funds-table__cell--${
+                    column.name
+                  }`}
+                >
                   {t(`funds-page.funds-header.${column.name}`)}
                 </span>
               )}

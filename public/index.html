@@ -9,7 +9,9 @@
   <title>Investor Web Portal</title>
   <!-- Google Tag Manager -->
   <script>
-    if ('%NODE_ENV%' === 'production') {
+    var env = '%NODE_ENV%'
+    if (env === 'production') {
+      dataLayer = [];
       (function (w, d, s, l, i) {
         w[l] = w[l] || []; w[l].push({
           'gtm.start':

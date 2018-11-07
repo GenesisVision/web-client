@@ -4,6 +4,7 @@ import { ActionsCircleIcon } from "components/icon/actions-circle-icon";
 import Popover from "components/popover/popover";
 import StatisticItem from "components/statistic-item/statistic-item";
 import React, { PureComponent } from "react";
+import Scrollbars from "react-custom-scrollbars";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
@@ -46,7 +47,7 @@ class DashboardInRequestsContainer extends PureComponent {
       <div className="dashboard-request">
         <StatisticItem
           heading={"In Requests"}
-          value={-inRequests.totalValue}
+          value={inRequests.totalValue}
           adornment={this.renderActionsIcon()}
         />
         <Popover
@@ -56,16 +57,18 @@ class DashboardInRequestsContainer extends PureComponent {
           noPadding
           onClose={this.handleCloseDropdown}
         >
-          <div className="dashboard-request-popover">
-            {inRequests.requests.map(x => (
-              <DashboardRequest
-                key={x.id}
-                request={x}
-                cancelRequest={service.cancelRequest}
-                onApplyCancelRequest={this.handleCloseDropdown}
-              />
-            ))}
-          </div>
+          <Scrollbars autoHeight>
+            <div className="dashboard-request-popover">
+              {inRequests.requests.map(x => (
+                <DashboardRequest
+                  key={x.id}
+                  request={x}
+                  cancelRequest={service.cancelRequest}
+                  onApplyCancelRequest={this.handleCloseDropdown}
+                />
+              ))}
+            </div>
+          </Scrollbars>
         </Popover>
       </div>
     );

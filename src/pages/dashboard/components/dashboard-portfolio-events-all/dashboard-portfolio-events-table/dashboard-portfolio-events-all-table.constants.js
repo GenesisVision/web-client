@@ -9,9 +9,9 @@ export const PORTFOLIO_EVENTS_COLUMNS = [
   {
     name: "date"
   },
-  {
+  /*{
     name: "type"
-  },
+  },*/
   {
     name: "description"
   },
@@ -42,5 +42,12 @@ export const PORTFOLIO_EVENTS_TYPES_ENUM = {
   Loss: "loss",
   Reinvest: "reinvest",
   Canceled: "canceled",
-  Ended: "ended"
+  Ended: "ended",
+  ManagerInvest: "ManagerInvest",
+  EntranceFee: "EntranceFee",
+  AssetStarted: "AssetStarted",
+  InvestorInvest: "InvestorInvest",
+  AssetFinished: "AssetFinished",
+  ProgramPeriodStats: "ProgramPeriodStats",
+  ProgramPeriodEnds: "ProgramPeriodEnds"
 };

@@ -40,14 +40,12 @@ class Header extends Component {
     return (
       <div className="header">
         <div className="header__left">
-          <GVButton
+          <div
             onClick={this.handleOpenMenu}
-            variant="text"
-            color="secondary"
-            className="navigation__menu"
+            className="navigation__menu profile-avatar"
           >
             <MenuIcon />
-          </GVButton>
+          </div>
           <Navigation className="header__navigation" />
         </div>
         <div className="header__center">

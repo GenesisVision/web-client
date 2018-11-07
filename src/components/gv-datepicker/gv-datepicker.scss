@@ -25,8 +25,11 @@ $lighten-back-color: lighten($back-color, 10);
   border: none !important;
   background-color: $back-color !important;
 
-  &__month-view__days__day--weekend {
-    color: $negative-color !important;
+  &__month-view {
+    margin-bottom: 10px;
+    &__days__day--weekend {
+      color: $negative-color !important;
+    }
   }
 
   &__triangle {
@@ -34,6 +37,7 @@ $lighten-back-color: lighten($back-color, 10);
   }
 
   &__navigation {
+    margin-bottom: 10px !important;
     &__label {
       font-size: 0.75em;
       font-weight: bold;

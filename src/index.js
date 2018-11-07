@@ -1,4 +1,5 @@
 import "./i18n";
+import "./setupMoment";
 import "./index.scss";
 import "./styles/gv-styles.scss";
 

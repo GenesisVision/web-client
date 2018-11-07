@@ -85,7 +85,7 @@ class Notifications extends Component {
               to={NOTIFICATIONS_ROUTE}
               onClick={this.props.closeNotifications}
             >
-              <div className="notifications__link">
+              <div className="profile-avatar notifications__link">
                 <ControlsIcon />
               </div>
             </Link>
