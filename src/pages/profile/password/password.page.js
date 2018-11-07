@@ -1,17 +1,34 @@
 import Page from "components/page/page";
-import NavigationBackButton from "modules/navigation-back-button/navigation-back-button";
 import PasswordChange from "modules/password-change/password-change";
 import React from "react";
 import { translate } from "react-i18next";
+import { bindActionCreators, compose } from "redux";
+import connect from "react-redux/es/connect/connect";
+import { goBack } from "react-router-redux";
+import BackButton from "components/back-button/back-button";
 
-const PasswordPage = ({ t }) => {
+const PasswordPage = ({ t, backPath, service }) => {
   return (
     <Page title={t("password-page.title")}>
-      <NavigationBackButton />
+      {backPath && <BackButton backPath={backPath} goBack={service.goBack} />}
       <h1>{t("password-page.title")}</h1>
       <PasswordChange />
     </Page>
   );
 };
 
-export default translate()(PasswordPage);
+const mapStateToProps = state => ({
+  backPath: state.routing.location.state
+});
+
+const mapDispatchToProps = dispatch => ({
+  service: bindActionCreators({ goBack }, dispatch)
+});
+
+export default compose(
+  translate(),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
+)(PasswordPage);
