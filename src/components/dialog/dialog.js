@@ -1,6 +1,6 @@
 import "./dialog.scss";
 
-import classNames from "classnames";
+import classnames from "classnames";
 import { CloseIcon } from "components/icon/close-icon";
 import Modal from "components/modal/modal";
 import { GVButton } from "gv-react-components";
@@ -26,7 +26,7 @@ class Dialog extends Component {
             >
               <CloseIcon /> {t("buttons.close")}
             </GVButton>
-            <div className={classNames("dialog", this.props.className)}>
+            <div className={classnames("dialog", this.props.className)}>
               <GVButton
                 variant="text"
                 color="secondary"

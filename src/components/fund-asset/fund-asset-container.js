@@ -1,6 +1,6 @@
 import "./fund-asset.scss";
 
-import classNames from "classnames";
+import classnames from "classnames";
 import Tooltip from "components/tooltip/tooltip";
 import React, { Component } from "react";
 import NumberFormat from "react-number-format";
@@ -30,7 +30,7 @@ class FundAssetContainer extends Component {
     const { size } = this.state;
     return (
       <div
-        className={classNames("fund-assets", {
+        className={classnames("fund-assets", {
           "fund-assets--text": type === FUND_ASSET_TYPE.text
         })}
       >

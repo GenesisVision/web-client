@@ -1,6 +1,6 @@
 import "./fund-asset.scss";
 
-import classNames from "classnames";
+import classnames from "classnames";
 import FundAssetImage from "components/avatar/fund-asset-image/fund-asset-image";
 import { CURRENCY_VALUES } from "modules/currency-select/currency-select.constants";
 import React, { Component } from "react";
@@ -35,7 +35,7 @@ class FundAsset extends Component {
         </div>
       )) || (
         <div
-          className={classNames(
+          className={classnames(
             "fund-asset",
             "fund-asset--default",
             className,
