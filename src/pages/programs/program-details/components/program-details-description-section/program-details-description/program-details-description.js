@@ -250,6 +250,7 @@ class ProgramDetailsDescription extends PureComponent {
             disabled={isFavoritePending}
           />
           <ProgramDetailsNotification
+            backPath={backPath}
             title={programDescription.title}
             url={composeProgramNotificationsUrl(programDescription.url)}
             disabled={isFavoritePending}

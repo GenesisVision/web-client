@@ -175,6 +175,7 @@ class FundDetailsDescription extends PureComponent {
             disabled={isFavoritePending}
           />
           <FundDetailsNotification
+            backPath={backPath}
             title={fundDescription.title}
             url={composeFundNotificationsUrl(fundDescription.url)}
             disabled={isFavoritePending}
