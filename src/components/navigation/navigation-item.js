@@ -1,8 +1,6 @@
 import { GVButton } from "gv-react-components";
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { compose } from "redux";
-import { connect } from "react-redux";
 
 export const NavigationButton = ({ icon, title, children, onClick }) => {
   return (
