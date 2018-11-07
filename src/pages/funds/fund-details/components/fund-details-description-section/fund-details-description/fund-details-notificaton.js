@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 import { compose } from "redux";
 import isAuthenticated from "shared/decorators/is-authenticated";
 
-const FundDetailsNotificaton = ({ t, url, pathname, title, backPath }) => {
+const FundDetailsNotificaton = ({ t, url, pathname, title }) => {
   return (
     <Link
       to={{
         pathname: url,
-        state: `${backPath} / ${title}`
+        state: `/ ${title}`
       }}
     >
       <div className="fund-details-description__control">

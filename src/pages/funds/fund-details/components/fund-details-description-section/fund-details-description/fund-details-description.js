@@ -48,7 +48,6 @@ class FundDetailsDescription extends PureComponent {
     const { isOpenInvestmentPopup } = this.state;
     const {
       t,
-      backPath,
       isInvested,
       canWithdraw,
       fundDescription,
@@ -83,7 +82,7 @@ class FundDetailsDescription extends PureComponent {
           <Link
             to={{
               pathname: composeManagerDetailsUrl(fundDescription.manager.url),
-              state: `${backPath} / ${fundDescription.title}`
+              state: `/ ${fundDescription.title}`
             }}
           >
             <GVButton
@@ -178,7 +177,6 @@ class FundDetailsDescription extends PureComponent {
             disabled={isFavoritePending}
           />
           <FundDetailsNotification
-            backPath={backPath}
             title={fundDescription.title}
             url={composeFundNotificationsUrl(fundDescription.url)}
             disabled={isFavoritePending}
