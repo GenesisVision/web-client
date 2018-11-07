@@ -11,8 +11,6 @@ import { formatValue } from "utils/formatter";
 
 import { composeFundsDetailsUrl } from "../../../../pages/funds/funds.routes";
 import FavoriteIcon from "../../../favorite-asset/components/favorite-icon/favorite-icon";
-import { compose } from "redux";
-import connect from "react-redux/es/connect/connect";
 
 class FundsTableRow extends Component {
   constructor(props) {
@@ -23,7 +21,7 @@ class FundsTableRow extends Component {
   }
 
   render() {
-    const { fund, isAuthenticated, toggleFavorite, pathname } = this.props;
+    const { fund, isAuthenticated, toggleFavorite, title } = this.props;
     return (
       <TableRow>
         <TableCell className="funds-table__cell funds-table__cell--name">
@@ -31,7 +29,7 @@ class FundsTableRow extends Component {
             <Link
               to={{
                 pathname: composeFundsDetailsUrl(fund.url),
-                state: pathname
+                state: `/ ${title}`
               }}
             >
               <AssetAvatar
@@ -44,7 +42,7 @@ class FundsTableRow extends Component {
               <Link
                 to={{
                   pathname: composeFundsDetailsUrl(fund.url),
-                  state: pathname
+                  state: `/ ${title}`
                 }}
               >
                 <GVButton variant="text" color="secondary">
@@ -107,8 +105,5 @@ class FundsTableRow extends Component {
     );
   }
 }
-const mapStateToProps = state => {
-  const { pathname } = state.routing.location;
-  return { pathname };
-};
-export default compose(connect(mapStateToProps))(FundsTableRow);
+
+export default FundsTableRow;

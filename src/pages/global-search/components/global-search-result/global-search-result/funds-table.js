@@ -29,7 +29,9 @@ const FundsTable = ({
           {t(`funds-page.funds-header.${column.name}`)}
         </span>
       )}
-      renderBodyRow={fund => <FundsTableRow fund={fund} />}
+      renderBodyRow={fund => (
+        <FundsTableRow title={t("global-search-page.title")} fund={fund} />
+      )}
     />
   );
 };

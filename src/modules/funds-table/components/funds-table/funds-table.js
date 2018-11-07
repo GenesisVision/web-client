@@ -55,6 +55,7 @@ const FundsTable = ({
       }}
       renderBodyRow={fund => (
         <FundsTableRow
+          title={title}
           fund={fund}
           toggleFavorite={toggleFavorite}
           isAuthenticated={isAuthenticated}
