@@ -3,7 +3,7 @@ import "./fund-details.scss";
 import Page from "components/page/page";
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import { goBack, push } from "react-router-redux";
+import { push } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
 
 import { LOGIN_ROUTE } from "../../auth/login/login.routes";
@@ -89,7 +89,7 @@ class FundDetailsPage extends PureComponent {
   };
 
   render() {
-    const { currency, service, isAuthenticated, backPath } = this.props;
+    const { currency, service, isAuthenticated } = this.props;
     const { errorCode } = this.state;
     if (errorCode) {
       return <NotFoundPage />;
@@ -105,9 +105,7 @@ class FundDetailsPage extends PureComponent {
         >
           <div className="fund-details">
             <div className="fund-details__section">
-              {backPath && (
-                <BackButton backPath={backPath} goBack={service.goBack} />
-              )}
+              <BackButton />
               <FundDetailsDescriptionSection
                 backPath={backPath}
                 fundDescriptionData={this.description}
@@ -141,10 +139,9 @@ class FundDetailsPage extends PureComponent {
 }
 
 const mapStateToProps = state => {
-  const { accountSettings, authData, routing } = state;
+  const { accountSettings, authData } = state;
 
   return {
-    backPath: routing.location.state,
     currency: accountSettings.currency,
     isAuthenticated: authData.isAuthenticated
   };
@@ -152,7 +149,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   service: bindActionCreators(
-    { getFundDescription, goBack, redirectToLogin: () => push(LOGIN_ROUTE) },
+    { getFundDescription, redirectToLogin: () => push(LOGIN_ROUTE) },
     dispatch
   )
 });
