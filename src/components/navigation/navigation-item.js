@@ -13,22 +13,12 @@ export const NavigationButton = ({ icon, title, children, onClick }) => {
   );
 };
 
-const NavigationItem = ({
-  href,
-  icon,
-  title,
-  children,
-  pathname,
-  ...other
-}) => {
+const NavigationItem = ({ href, icon, title, children, ...other }) => {
   return (
     <NavLink
       className="navigation__item"
       activeClassName="navigation__item--active"
-      to={{
-        pathname: href,
-        state: pathname
-      }}
+      to={href}
       title={title}
       {...other}
     >
@@ -38,9 +28,4 @@ const NavigationItem = ({
   );
 };
 
-const mapStateToProps = state => {
-  const { pathname } = state.routing.location;
-  return { pathname };
-};
-
-export default compose(connect(mapStateToProps))(NavigationItem);
+export default NavigationItem;
