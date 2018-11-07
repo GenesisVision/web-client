@@ -3,12 +3,43 @@
 
 .dialog {
   position: relative;
-  width: 100%;
-  max-width: 360px;
   border-radius: 8px;
   background-color: $secondary-background-color;
-  z-index: 1303;
-  overflow: auto;
+  z-index: 1300;
+  max-width: 360px;
+  width: 100%;
+  margin: 2rem auto;
+  overflow: hidden;
+
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-height: 100vh;
+  }
+
+  &__backdrop {
+    z-index: 1 !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    min-width: 100%;
+    height: 100vh;
+    min-height: 100%;
+  }
+
+  &__background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: black;
+    opacity: 0.7;
+    z-index: -1;
+  }
 
   &-list {
     list-style-type: none;
@@ -25,7 +56,7 @@
       letter-spacing: 0.5px;
 
       &:last-child {
-        margin-bottom: 24px;
+        margin-bottom: 44px;
       }
     }
 
@@ -35,7 +66,6 @@
 
     &__value {
       opacity: 1;
-      text-align: right;
     }
   }
 
@@ -66,7 +96,7 @@
     flex-direction: row;
     align-items: center;
     cursor: pointer;
-    z-index: 1301;
+    z-index: 2;
 
     &--inside {
       right: 10px;
@@ -74,6 +104,7 @@
     }
 
     &--outside {
+      position: fixed;
       display: none;
       top: 10%;
       right: 10%;
@@ -101,7 +132,6 @@
       font-weight: 300;
       letter-spacing: 0.4px;
       color: #e8eff3;
-      overflow-wrap: break-word;
     }
   }
 
@@ -119,7 +149,6 @@
     &__value {
       font-size: 24px;
       letter-spacing: 0.8px;
-      overflow-wrap: break-word;
     }
   }
 

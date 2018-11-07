@@ -26,7 +26,7 @@ class GoogleAuth extends Component {
     const { step } = this.state;
     const { t } = this.props;
     return (
-      <div className="dialog google-auth google-auth--mobile">
+      <div className="google-auth google-auth--mobile">
         {step === 0 && <GoogleDownloadStep {...this.props} />}
         {step === 1 && <GoogleCodeStep {...this.props} />}
         {step === 2 && <GoogleActivateStep {...this.props} />}
