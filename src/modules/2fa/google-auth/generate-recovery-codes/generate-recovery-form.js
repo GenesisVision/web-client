@@ -6,7 +6,7 @@ import { translate } from "react-i18next";
 import { compose } from "redux";
 import { object, string } from "yup";
 
-export const Form = ({ t, handleSubmit, errorMessage, disabled }) => {
+const GenerateRecoveryForm = ({ t, handleSubmit, errorMessage, disabled }) => {
   return (
     <div className="dialog__top">
       <div className="dialog__header">
@@ -41,7 +41,7 @@ export const Form = ({ t, handleSubmit, errorMessage, disabled }) => {
   );
 };
 
-const GenerateRecoveryForm = compose(
+const GenerateRecoveryWithFormik = compose(
   translate(),
   withFormik({
     displayName: "generate-recovery-form",
@@ -56,12 +56,12 @@ const GenerateRecoveryForm = compose(
       props.onSubmit(values);
     }
   })
-)(Form);
+)(GenerateRecoveryForm);
 
-GenerateRecoveryForm.propTypes = {
+GenerateRecoveryWithFormik.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   disabled: PropTypes.bool,
   errorMessage: PropTypes.string
 };
 
-export default GenerateRecoveryForm;
+export default GenerateRecoveryWithFormik;
