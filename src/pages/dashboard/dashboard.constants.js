@@ -56,3 +56,9 @@ export const DASHBOARD_FUNDS_TABLE_COLUMNS = [
     name: "chart"
   }
 ];
+
+export const DASHBOARD_FUNDS_FILTERS = [
+  {
+    ...composeDefaultDateRangeFilter()
+  }
+];
