@@ -7,11 +7,9 @@ import moment from "moment";
 import { composeManagerDetailsUrl } from "pages/manager/manager.page";
 import React from "react";
 import { Link } from "react-router-dom";
-import { compose } from "redux";
 import { translate } from "react-i18next";
-import connect from "react-redux/es/connect/connect";
 
-const ManagersTableRow = ({ manager, pathname }) => {
+const ManagersTableRow = ({ t, manager }) => {
   return (
     <TableRow className="managers-table__row">
       <TableCell className="managers-table__cell--username">
@@ -19,7 +17,7 @@ const ManagersTableRow = ({ manager, pathname }) => {
         <Link
           to={{
             pathname: composeManagerDetailsUrl(manager.url),
-            state: pathname
+            state: `/ ${t("global-search-page.title")}`
           }}
         >
           <GVButton variant="text" color="secondary">
@@ -33,12 +31,4 @@ const ManagersTableRow = ({ manager, pathname }) => {
   );
 };
 
-const mapStateToProps = state => {
-  const { pathname } = state.routing.location;
-  return { pathname };
-};
-
-export default compose(
-  translate(),
-  connect(mapStateToProps)
-)(ManagersTableRow);
+export default translate()(ManagersTableRow);
