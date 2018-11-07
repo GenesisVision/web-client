@@ -140,7 +140,7 @@ class FundDetailsDescription extends PureComponent {
                 className="fund-details-description__invest-btn"
                 onClick={this.handleOpenInvestmentPopup}
                 disabled={
-                  !fundDescription.personalFundDetails &&
+                  !fundDescription.personalFundDetails ||
                   !fundDescription.personalFundDetails.canInvest
                 }
               >
