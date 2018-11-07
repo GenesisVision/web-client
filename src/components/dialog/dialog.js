@@ -3,6 +3,7 @@ import "./dialog.scss";
 import classNames from "classnames";
 import { CloseIcon } from "components/icon/close-icon";
 import Modal from "components/modal/modal";
+import { GVButton } from "gv-react-components";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { Scrollbars } from "react-custom-scrollbars";
@@ -17,19 +18,23 @@ class Dialog extends Component {
           <div className="dialog__content">
             <div className="dialog__background" />
             <div className="dialog__backdrop" onClick={this.props.onClose} />
-            <button
+            <GVButton
+              variant="text"
+              color="secondary"
               className="dialog__close dialog__close--outside"
               onClick={this.props.onClose}
             >
               <CloseIcon /> {t("buttons.close")}
-            </button>
+            </GVButton>
             <div className={classNames("dialog", this.props.className)}>
-              <button
+              <GVButton
+                variant="text"
+                color="secondary"
                 className="dialog__close dialog__close--inside"
                 onClick={this.props.onClose}
               >
-                {t("buttons.close")}
-              </button>
+                <CloseIcon />
+              </GVButton>
               {this.props.top && (
                 <div className="dialog__top">{this.props.top}</div>
               )}
