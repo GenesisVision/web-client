@@ -11,7 +11,7 @@ const FundNotificationPage = ({ t, match, service, backPath }) => {
   const { id } = match.params;
   return (
     <Page title={t("notifications.fund.title")}>
-      {backPath && <BackButton backPath={backPath} goBack={service.goBack} />}
+      <BackButton backPath={backPath} goBack={service.goBack} />
       <h1>{t("notifications.fund.title")}</h1>
       <FundNotificationsContainer id={id} />
     </Page>

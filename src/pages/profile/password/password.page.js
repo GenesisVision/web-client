@@ -10,7 +10,7 @@ import BackButton from "components/back-button/back-button";
 const PasswordPage = ({ t, backPath, service }) => {
   return (
     <Page title={t("password-page.title")}>
-      {backPath && <BackButton backPath={backPath} goBack={service.goBack} />}
+      <BackButton backPath={backPath} goBack={service.goBack} />
       <h1>{t("password-page.title")}</h1>
       <PasswordChange />
     </Page>

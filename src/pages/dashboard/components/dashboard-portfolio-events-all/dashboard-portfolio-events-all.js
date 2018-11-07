@@ -16,7 +16,7 @@ const PortfolioEventsAllComponent = ({ service, t, backPath }) => {
   return (
     <Page title={t("dashboard.portfolio-events.title")}>
       <div className="dashboard-portfolio-events-all">
-        {backPath && <BackButton backPath={backPath} goBack={service.goBack} />}
+        <BackButton backPath={backPath} goBack={service.goBack} />
         <h1 className="dashboard-portfolio-events-all__heading">
           {t("dashboard.portfolio-events.title")}
         </h1>

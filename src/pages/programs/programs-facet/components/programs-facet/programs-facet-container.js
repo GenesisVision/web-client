@@ -36,7 +36,7 @@ class ProgramsFacetContainer extends Component {
     if (facetData.notFound) return <NotFoundPage />;
     return (
       <Fragment>
-        {backPath && <BackButton backPath={backPath} goBack={goBack} />}
+        <BackButton backPath={backPath} goBack={goBack} />
         <ProgramsContainer title={facetData.facet.title} />
       </Fragment>
     );

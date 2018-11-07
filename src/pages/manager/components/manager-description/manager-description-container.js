@@ -11,7 +11,7 @@ class ManagerDescriptionContainer extends Component {
     const { managerProfile, goBack, backPath } = this.props;
     return (
       <Fragment>
-        {backPath && <BackButton backPath={backPath} goBack={goBack} />}
+        <BackButton backPath={backPath} goBack={goBack} />
         <ManagerDescription managerProfile={managerProfile} />
       </Fragment>
     );

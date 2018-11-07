@@ -36,7 +36,7 @@ class FundsFacetContainer extends Component {
     if (facetData.notFound) return <NotFoundPage />;
     return (
       <Fragment>
-        {backPath && <BackButton backPath={backPath} goBack={goBack} />}
+        <BackButton backPath={backPath} goBack={goBack} />
         <FundsTableContainer title={facetData.facet.title} />
       </Fragment>
     );
