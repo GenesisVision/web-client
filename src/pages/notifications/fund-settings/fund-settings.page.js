@@ -2,7 +2,7 @@ import Page from "components/page/page";
 import FundNotificationsContainer from "modules/fund-notifications/fund-notifications-container";
 import React from "react";
 import { translate } from "react-i18next";
-import connect from "react-redux/es/connect/connect";
+import { connect } from "react-redux";
 import { goBack } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
 import BackButton from "components/back-button/back-button";

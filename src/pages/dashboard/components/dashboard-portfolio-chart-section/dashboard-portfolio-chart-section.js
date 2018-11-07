@@ -6,7 +6,7 @@ import { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
 import { WALLET_PAGE_ROUTE } from "pages/wallet/wallet-page";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
-import connect from "react-redux/es/connect/connect";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
 

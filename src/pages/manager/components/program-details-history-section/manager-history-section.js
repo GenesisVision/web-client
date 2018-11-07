@@ -4,7 +4,7 @@ import Surface from "components/surface/surface";
 import { GVTab, GVTabs } from "gv-react-components";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
-import connect from "react-redux/es/connect/connect";
+import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
 import FundsTableRow from "modules/funds-table/components/funds-table/fund-table-row";

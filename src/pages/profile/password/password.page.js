@@ -3,7 +3,7 @@ import PasswordChange from "modules/password-change/password-change";
 import React from "react";
 import { translate } from "react-i18next";
 import { bindActionCreators, compose } from "redux";
-import connect from "react-redux/es/connect/connect";
+import { connect } from "react-redux";
 import { goBack } from "react-router-redux";
 import BackButton from "components/back-button/back-button";
 

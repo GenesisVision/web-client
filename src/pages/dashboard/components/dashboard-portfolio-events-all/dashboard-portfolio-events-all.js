@@ -4,7 +4,7 @@ import Page from "components/page/page";
 import Surface from "components/surface/surface";
 import React from "react";
 import { translate } from "react-i18next";
-import connect from "react-redux/es/connect/connect";
+import { connect } from "react-redux";
 import { goBack } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
 
