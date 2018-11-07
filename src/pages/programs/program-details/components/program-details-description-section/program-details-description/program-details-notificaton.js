@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 import { compose } from "redux";
 import isAuthenticated from "shared/decorators/is-authenticated";
 
-const ProgramDetailsNotificaton = ({ t, url, pathname, title, backPath }) => {
+const ProgramDetailsNotificaton = ({ t, url, pathname, title }) => {
   return (
     <Link
       to={{
         pathname: url,
-        state: `${backPath} / ${title}`
+        state: `/ ${title}`
       }}
     >
       <div className="program-details-description__control">

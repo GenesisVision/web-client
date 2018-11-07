@@ -108,7 +108,6 @@ class ProgramDetailsPage extends PureComponent {
             <div className="program-details__section">
               <BackButton />
               <ProgramDetailsDescriptionSection
-                backPath={backPath}
                 programDescriptionData={this.description}
                 isAuthenticated={isAuthenticated}
                 redirectToLogin={service.redirectToLogin}

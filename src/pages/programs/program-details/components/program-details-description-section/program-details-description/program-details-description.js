@@ -57,7 +57,6 @@ class ProgramDetailsDescription extends PureComponent {
     const { isOpenInvestmentPopup, isOpenAboutLevels, anchor } = this.state;
     const {
       t,
-      backPath,
       isInvested,
       canInvest,
       canWithdraw,
@@ -144,7 +143,7 @@ class ProgramDetailsDescription extends PureComponent {
               pathname: composeManagerDetailsUrl(
                 programDescription.manager.url
               ),
-              state: `${backPath} / ${programDescription.title}`
+              state: `/ ${programDescription.title}`
             }}
           >
             <GVButton
@@ -250,7 +249,6 @@ class ProgramDetailsDescription extends PureComponent {
             disabled={isFavoritePending}
           />
           <ProgramDetailsNotification
-            backPath={backPath}
             title={programDescription.title}
             url={composeProgramNotificationsUrl(programDescription.url)}
             disabled={isFavoritePending}
