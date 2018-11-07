@@ -99,7 +99,7 @@ class Dashboardprograms extends Component {
               <ProgramPeriodEnd periodEnds={program.periodEnds} />
             </TableCell>
             <TableCell className="programs-table__cell dashboard-programs__cell--value">
-              {formatPercent(program.personalDetails.value)} GVT
+              {formatPercent(program.personalDetails.gvtValue)} GVT
             </TableCell>
             <TableCell className="programs-table__cell dashboard-programs__cell--profit">
               <NumberFormat

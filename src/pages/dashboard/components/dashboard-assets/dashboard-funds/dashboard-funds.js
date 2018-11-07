@@ -16,10 +16,18 @@ import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 
-import { composeFundsDetailsUrl } from "../../../../funds/funds.routes";
-import { DASHBOARD_FUNDS_TABLE_COLUMNS } from "../../../dashboard.constants";
-import { getDashboardFunds } from "../../../services/dashboard-funds.service";
 import { formatValue } from "../../../../../utils/formatter";
+import replaceParams from "../../../../../utils/replace-params";
+import {
+  FUNDS_SLUG_URL_PARAM_NAME,
+  FUND_DETAILS_ROUTE,
+  composeFundsDetailsUrl
+} from "../../../../funds/funds.routes";
+import {
+  DASHBOARD_FUNDS_FILTERS,
+  DASHBOARD_FUNDS_TABLE_COLUMNS
+} from "../../../dashboard.constants";
+import { getDashboardFunds } from "../../../services/dashboard-funds.service";
 
 class DashboardFunds extends Component {
   fetchFunds = filters => {
@@ -36,6 +44,7 @@ class DashboardFunds extends Component {
         filtering={{
           dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE
         }}
+        defaultFilters={DASHBOARD_FUNDS_FILTERS}
         getItems={this.fetchFunds}
         columns={DASHBOARD_FUNDS_TABLE_COLUMNS}
         renderFilters={(updateFilter, filtering) => (
