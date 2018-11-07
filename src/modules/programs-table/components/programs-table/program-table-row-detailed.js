@@ -7,18 +7,13 @@ import FavoriteIcon from "modules/favorite-asset/components/favorite-icon/favori
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import { TableRow } from "modules/table/components";
 import { composeManagerDetailsUrl } from "pages/manager/manager.page";
-import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
 import { composeProgramDetailsUrl } from "pages/programs/programs.routes";
-import { PROGRAM_SLUG_URL_PARAM_NAME } from "pages/programs/programs.routes";
 import React, { Component } from "react";
 import { Scrollbars } from "react-custom-scrollbars";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import connect from "react-redux/es/connect/connect";
 import { Link } from "react-router-dom";
-import { compose } from "redux";
 import { formatValue } from "utils/formatter";
-import replaceParams from "utils/replace-params";
 
 import ProgramBigChart from "../program-big-chart/program-big-chart";
 
@@ -41,16 +36,12 @@ class ProgramTableRowDetailed extends Component {
   render() {
     const {
       t,
-      pathname,
+      title,
       program,
       isAuthenticated,
       toggleFavorite,
       onCollapseClick
     } = this.props;
-
-    const programDetailsUrl = replaceParams(PROGRAM_DETAILS_ROUTE, {
-      [`:${PROGRAM_SLUG_URL_PARAM_NAME}`]: program.url
-    });
 
     return (
       <TableRow>
@@ -62,7 +53,7 @@ class ProgramTableRowDetailed extends Component {
                   <Link
                     to={{
                       pathname: composeProgramDetailsUrl(program.url),
-                      state: pathname
+                      state: `/ ${title}`
                     }}
                   >
                     <AssetAvatar
@@ -78,7 +69,7 @@ class ProgramTableRowDetailed extends Component {
                       <Link
                         to={{
                           pathname: composeProgramDetailsUrl(program.url),
-                          state: pathname
+                          state: `/ ${title}`
                         }}
                       >
                         <GVButton variant="text" color="secondary">
@@ -92,7 +83,7 @@ class ProgramTableRowDetailed extends Component {
                           pathname: composeManagerDetailsUrl(
                             program.manager.url
                           ),
-                          state: pathname
+                          state: `/ ${title}`
                         }}
                       >
                         <GVButton variant="text" color="primary">
@@ -244,7 +235,7 @@ class ProgramTableRowDetailed extends Component {
                     <Link
                       to={{
                         pathname: composeProgramDetailsUrl(program.url),
-                        state: pathname
+                        state: `/ ${title}`
                       }}
                     >
                       <GVButton variant="text" color="secondary">
@@ -271,12 +262,4 @@ class ProgramTableRowDetailed extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  const { pathname } = state.routing.location;
-  return { pathname };
-};
-
-export default compose(
-  translate(),
-  connect(mapStateToProps)
-)(ProgramTableRowDetailed);
+export default translate()(ProgramTableRowDetailed);

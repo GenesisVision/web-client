@@ -12,9 +12,7 @@ import { composeProgramDetailsUrl } from "pages/programs/programs.routes";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import connect from "react-redux/es/connect/connect";
 import { Link } from "react-router-dom";
-import { compose } from "redux";
 
 import { formatValue } from "../../../../utils/formatter";
 
@@ -40,7 +38,7 @@ class ProgramCard extends Component {
   handleOpenDropdown = event => this.setState({ anchor: event.currentTarget });
   handleCloseDropdown = () => this.setState({ anchor: null });
   render() {
-    const { t, program, onExpandClick, toggleFavorite, pathname } = this.props;
+    const { t, program, onExpandClick, toggleFavorite, title } = this.props;
     const handleToggleFavorite = () => {
       toggleFavorite(program.id, program.personalDetails.isFavorite);
     };
@@ -51,7 +49,7 @@ class ProgramCard extends Component {
             <Link
               to={{
                 pathname: composeProgramDetailsUrl(program.url),
-                state: pathname
+                state: `/ ${title}`
               }}
             >
               <AssetAvatar
@@ -68,7 +66,7 @@ class ProgramCard extends Component {
               <Link
                 to={{
                   pathname: composeProgramDetailsUrl(program.url),
-                  state: pathname
+                  state: `/ ${title}`
                 }}
               >
                 {program.title}
@@ -78,7 +76,7 @@ class ProgramCard extends Component {
               <Link
                 to={{
                   pathname: composeManagerDetailsUrl(program.manager.url),
-                  state: pathname
+                  state: `/ ${title}`
                 }}
               >
                 <GVButton variant="text" color="primary">
@@ -122,7 +120,7 @@ class ProgramCard extends Component {
                 <Link
                   to={{
                     pathname: composeProgramDetailsUrl(program.url),
-                    state: pathname
+                    state: `/ ${title}`
                   }}
                 >
                   <GVButton
@@ -250,11 +248,4 @@ class ProgramCard extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  const { pathname } = state.routing.location;
-  return { pathname };
-};
-export default compose(
-  translate(),
-  connect(mapStateToProps)
-)(ProgramCard);
+export default translate()(ProgramCard);

@@ -82,6 +82,7 @@ const ProgramsTable = ({
       }}
       renderBodyRow={program => (
         <ProgramTableRow
+          title={title}
           program={program}
           toggleFavorite={toggleFavorite}
           isAuthenticated={isAuthenticated}
@@ -90,6 +91,7 @@ const ProgramsTable = ({
       )}
       renderBodyCard={program => (
         <ProgramCard
+          title={title}
           program={program}
           toggleFavorite={toggleFavorite}
           isAuthenticated={isAuthenticated}

@@ -26,7 +26,11 @@ const ProgramsTable = ({ t, isPending, data, filtering, paging }) => {
         </span>
       )}
       renderBodyRow={program => (
-        <ProgramTableRowShort program={program} onExpandClick={() => {}} />
+        <ProgramTableRowShort
+          title={t("global-search-page.title")}
+          program={program}
+          onExpandClick={() => {}}
+        />
       )}
     />
   );
