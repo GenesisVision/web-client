@@ -1,5 +1,7 @@
 @import "shared/styles/_colors.scss";
 @import "shared/styles/_breakpoint.scss";
+@import "shared/styles/_constants.scss";
+
 @media (max-width: 1360px) {
   .facets-shadow {
     &:after {
@@ -10,9 +12,13 @@
       );
     }
   }
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
   .facets {
     &:after {
-      content: "a";
+      content: "";
     }
   }
 }
@@ -32,20 +38,20 @@ $facet-height: 280px;
 
 .facets-shadow {
   position: relative;
-  height: $facet-height/1.5;
-  margin: $facet-margin/2 0;
-  overflow: hidden;
+  margin: 0 -20px;
+  padding: 20px 0;
+  overflow-x: auto;
+  overflow-y: visible;
   &:after {
     position: absolute;
     content: "";
     top: 0;
-    right: -1px;
+    right: 0;
     width: 50px;
     height: 100%;
   }
-  @include media-breakpoint-landscape-phone() {
-    margin: $facet-margin 0;
-    height: $facet-height;
+  @include media-breakpoint-landscape-tablet() {
+    padding: 20px;
   }
 }
 
@@ -53,7 +59,10 @@ $facet-height: 280px;
   display: flex;
   flex-wrap: nowrap;
   justify-content: flex-start;
-  overflow: auto;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  z-index: 2;
+
   &::-webkit-scrollbar {
     width: 0;
     height: 0;
@@ -64,27 +73,99 @@ $facet-height: 280px;
   &::after {
     opacity: 0;
   }
+
+  &__wrapper {
+    position: relative;
+    margin: 0 -20px;
+    padding: 20px 0;
+    overflow: hidden;
+  }
+
+  &__shadow {
+    &:before,
+    &:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 50px;
+      z-index: 2;
+      opacity: 0;
+      transition: opacity 250ms;
+      pointer-events: none;
+      @include media-breakpoint-landscape-tablet() {
+        width: 70px;
+      }
+    }
+
+    &:before {
+      left: 0;
+      background: linear-gradient(90deg, #131e26, rgba(19, 30, 38, 0));
+      @include media-breakpoint-landscape-tablet() {
+        background: linear-gradient(90deg, #131e26 20px, rgba(19, 30, 38, 0));
+      }
+    }
+
+    &:after {
+      right: 0;
+      background: linear-gradient(90deg, rgba(19, 30, 38, 0), #131e26);
+      @include media-breakpoint-landscape-tablet() {
+        background: linear-gradient(90deg, rgba(19, 30, 38, 0), #131e26 50px);
+      }
+    }
+
+    &--left:before,
+    &--right:after {
+      opacity: 1;
+    }
+  }
+
+  &__carousel {
+    box-sizing: border-box;
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    padding: 20px 0;
+    @include media-breakpoint-landscape-tablet() {
+      padding: 20px;
+    }
+  }
 }
 
 .facet {
+  display: inline-block;
   box-sizing: border-box;
   background-color: #1c2730; // temporary
   height: $facet-height/1.5;
-  min-width: $facet-width/1.5;
-  margin-right: $facet-margin/2;
+  width: $facet-width/1.5;
+  //margin-right: $facet-margin/2;
   overflow: hidden;
+  box-shadow: $box-shadow-1;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+
+  &:not(:last-child) {
+    margin-right: $facet-margin/2;
+  }
+
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: $box-shadow-4;
+  }
 
   @include media-breakpoint-desktop() {
     min-width: auto;
   }
   @include media-breakpoint-landscape-phone() {
-    margin-right: $facet-margin;
-    min-width: $facet-width;
+    //margin-right: $facet-margin;
+    width: $facet-width;
     height: $facet-height;
+    &:not(:last-child) {
+      margin-right: $facet-margin;
+    }
   }
 
   &:last-child {
-    margin-right: 100px;
+    //margin-right: 100px;
   }
 
   &__logo-wrapper {
