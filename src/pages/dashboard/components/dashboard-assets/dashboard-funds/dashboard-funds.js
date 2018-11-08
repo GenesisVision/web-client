@@ -17,12 +17,7 @@ import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 
 import { formatValue } from "../../../../../utils/formatter";
-import replaceParams from "../../../../../utils/replace-params";
-import {
-  FUNDS_SLUG_URL_PARAM_NAME,
-  FUND_DETAILS_ROUTE,
-  composeFundsDetailsUrl
-} from "../../../../funds/funds.routes";
+import { composeFundsDetailsUrl } from "../../../../funds/funds.routes";
 import {
   DASHBOARD_FUNDS_FILTERS,
   DASHBOARD_FUNDS_TABLE_COLUMNS
@@ -37,11 +32,7 @@ class DashboardFunds extends Component {
   };
 
   render() {
-    const fundDetailsUrl = fundUrl =>
-      replaceParams(FUND_DETAILS_ROUTE, {
-        [`:${FUNDS_SLUG_URL_PARAM_NAME}`]: fundUrl
-      });
-    const { t } = this.props;
+    const { t, title } = this.props;
     return (
       <TableModule
         paging={DEFAULT_PAGING}
@@ -74,7 +65,12 @@ class DashboardFunds extends Component {
           <TableRow>
             <TableCell className="funds-table__cell funds-table__cell--name">
               <div className="funds-table__cell--avatar-title">
-                <Link to={composeFundsDetailsUrl(fund.url)}>
+                <Link
+                  to={{
+                    pathname: composeFundsDetailsUrl(fund.url),
+                    state: `/ ${title}`
+                  }}
+                >
                   <AssetAvatar
                     url={fund.logo}
                     alt={fund.title}
@@ -82,7 +78,12 @@ class DashboardFunds extends Component {
                   />
                 </Link>
                 <div className="funds-table__cell--title">
-                  <Link to={fundDetailsUrl(fund.url)}>
+                  <Link
+                    to={{
+                      pathname: composeFundsDetailsUrl(fund.url),
+                      state: `/ ${title}`
+                    }}
+                  >
                     <GVButton variant="text" color="secondary">
                       {fund.title}
                     </GVButton>

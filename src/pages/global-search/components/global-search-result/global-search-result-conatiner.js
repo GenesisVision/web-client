@@ -25,6 +25,7 @@ class GlobalSearchResultConatiner extends Component {
 
   render() {
     const { query } = this.state;
+    const { title } = this.props;
     return (
       <Fragment>
         <GlobalSearchInput
@@ -32,7 +33,7 @@ class GlobalSearchResultConatiner extends Component {
           onChange={this.handleOnChange}
         />
         <div className={classnames({ "global-search-hidden": !query })}>
-          <GlobalSearchResult data={this.state.data} />
+          <GlobalSearchResult data={this.state.data} title={title}/>
         </div>
       </Fragment>
     );

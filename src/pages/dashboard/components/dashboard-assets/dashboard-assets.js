@@ -18,6 +18,7 @@ class DashboardAssets extends Component {
 
   render() {
     const { tab } = this.state;
+    const { title } = this.props;
     return (
       <Surface className="dashboard-assets">
         <div className="dashboard-assets__head">
@@ -30,8 +31,8 @@ class DashboardAssets extends Component {
           </div>
         </div>
         <div>
-          {tab === "programs" && <DashboardPrograms />}
-          {tab === "funds" && <DashboardFunds />}
+          {tab === "programs" && <DashboardPrograms title={title} />}
+          {tab === "funds" && <DashboardFunds title={title} />}
         </div>
       </Surface>
     );

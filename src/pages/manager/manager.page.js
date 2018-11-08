@@ -3,7 +3,7 @@ import "./manager.page.scss";
 import Page from "components/page/page";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
-import connect from "react-redux/es/connect/connect";
+import { connect } from "react-redux";
 import { goBack } from "react-router-redux";
 import { bindActionCreators } from "redux";
 import replaceParams from "utils/replace-params";
@@ -52,7 +52,10 @@ class ManagerPage extends Component {
               />
             </div>
             <div className="manager__history">
-              <ManagerHistorySection managerId={managerProfile.id} />
+              <ManagerHistorySection
+                managerId={managerProfile.id}
+                title={managerProfile.username}
+              />
             </div>
           </div>
         </Page>

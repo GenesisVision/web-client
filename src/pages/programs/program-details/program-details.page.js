@@ -3,14 +3,13 @@ import "./program-details.scss";
 import Page from "components/page/page";
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import { goBack, push } from "react-router-redux";
+import { push } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
 
 import { LOGIN_ROUTE } from "../../auth/login/login.routes";
 import NotFoundPage from "../../not-found/not-found.routes";
 import ProgramDetailsDescriptionSection from "./components/program-details-description-section/program-details-description-section";
 import ProgramDetailsHistorySection from "./components/program-details-history-section/program-details-history-section";
-import ProgramDetailsNavigation from "./components/program-details-navigation/program-details-navigation";
 import ProgramDetailsStatisticSection from "./components/program-details-statistic-section/program-details-statistic-section";
 import {
   getProgramDescription,
@@ -106,7 +105,6 @@ class ProgramDetailsPage extends PureComponent {
         >
           <div className="program-details">
             <div className="program-details__section">
-              <ProgramDetailsNavigation goBack={service.goBack} />
               <ProgramDetailsDescriptionSection
                 programDescriptionData={this.description}
                 isAuthenticated={isAuthenticated}
@@ -148,7 +146,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   service: bindActionCreators(
-    { getProgramDescription, goBack, redirectToLogin: () => push(LOGIN_ROUTE) },
+    { getProgramDescription, redirectToLogin: () => push(LOGIN_ROUTE) },
     dispatch
   )
 });

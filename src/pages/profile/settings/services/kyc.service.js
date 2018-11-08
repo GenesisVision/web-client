@@ -14,7 +14,7 @@ export const loadKycIFrame = () => {
         // configuration object (see preparation steps)
         {
           accessToken: data,
-          excludedCountries: [ "USA" ],
+          excludedCountries: ["USA"],
           lang: "en",
           applicantDataPage: {
             enabled: true,
@@ -32,8 +32,8 @@ export const loadKycIFrame = () => {
                 required: true
               },
               {
-                 "name": "phone",
-                 "required": true
+                name: "phone",
+                required: true
               },
               {
                 name: "country",
@@ -44,8 +44,7 @@ export const loadKycIFrame = () => {
           requiredDocuments: "IDENTITY:PASSPORT,ID_CARD,DRIVERS;SELFIE:SELFIE",
           uiConf: {
             customCssUrl: "https://genesis.vision/assets/kyc/style.css",
-            steps: {
-            }
+            steps: {}
           }
         },
         // function for the IFrame callbacks
