@@ -4,14 +4,12 @@ import { bindActionCreators } from "redux";
 
 import * as managerService from "../../services/manager.service";
 import ManagerDescription from "./manager-description";
-import BackButton from "components/back-button/back-button";
 
 class ManagerDescriptionContainer extends Component {
   render() {
     const { managerProfile } = this.props;
     return (
       <Fragment>
-        <BackButton />
         <ManagerDescription managerProfile={managerProfile} />
       </Fragment>
     );

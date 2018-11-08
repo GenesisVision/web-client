@@ -16,7 +16,6 @@ import {
   getProgramHistory,
   getProgramStatistic
 } from "./services/program-details.service";
-import BackButton from "components/back-button/back-button";
 
 export const ProgramDetailContext = React.createContext({
   updateDetails: () => {}
@@ -106,7 +105,6 @@ class ProgramDetailsPage extends PureComponent {
         >
           <div className="program-details">
             <div className="program-details__section">
-              <BackButton />
               <ProgramDetailsDescriptionSection
                 programDescriptionData={this.description}
                 isAuthenticated={isAuthenticated}

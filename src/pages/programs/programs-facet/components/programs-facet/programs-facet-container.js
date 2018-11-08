@@ -7,7 +7,6 @@ import { withRouter } from "react-router-dom";
 import { bindActionCreators, compose } from "redux";
 
 import { getCurrentFacet } from "../../services/programs-facet.service";
-import BackButton from "components/back-button/back-button";
 
 class ProgramsFacetContainer extends Component {
   state = {
@@ -34,7 +33,6 @@ class ProgramsFacetContainer extends Component {
     if (facetData.notFound) return <NotFoundPage />;
     return (
       <Fragment>
-        <BackButton />
         <ProgramsContainer title={facetData.facet.title} />
       </Fragment>
     );

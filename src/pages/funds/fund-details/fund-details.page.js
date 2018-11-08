@@ -16,7 +16,6 @@ import {
   getFundStatistic,
   getFundStructure
 } from "./services/fund-details.service";
-import BackButton from "components/back-button/back-button";
 
 export const FundDetailContext = React.createContext({
   updateDetails: () => {}
@@ -105,7 +104,6 @@ class FundDetailsPage extends PureComponent {
         >
           <div className="fund-details">
             <div className="fund-details__section">
-              <BackButton />
               <FundDetailsDescriptionSection
                 fundDescriptionData={this.description}
                 isAuthenticated={isAuthenticated}
