@@ -108,7 +108,6 @@ class ProgramDetailsDescriptionSection extends PureComponent {
 
   render() {
     const {
-      backPath,
       isAuthenticated,
       redirectToLogin,
       onChangeInvestmentStatus
@@ -127,7 +126,6 @@ class ProgramDetailsDescriptionSection extends PureComponent {
     return (
       <Fragment>
         <ProgramDetailsDescription
-          backPath={backPath}
           isAuthenticated={isAuthenticated}
           redirectToLogin={redirectToLogin}
           isInvested={isInvested}
