@@ -20,7 +20,7 @@
   }
 
   &__backdrop {
-    z-index: 1 !important;
+    z-index: 1;
     position: absolute;
     top: 0;
     left: 0;
@@ -88,15 +88,18 @@
 
   &__close {
     position: absolute;
-    outline: none;
-    background: transparent;
-    border: none;
-    padding: 1rem !important;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    cursor: pointer;
+    padding: 1rem;
     z-index: 2;
+
+    .icon {
+      transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    }
+
+    &:hover {
+      .icon {
+        opacity: 0.4;
+      }
+    }
 
     &--inside {
       right: 10px;
