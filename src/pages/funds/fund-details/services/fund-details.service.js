@@ -45,8 +45,7 @@ export const getFundStatistic = (fundId, currency, period = DEFAULT_PERIOD) => {
         sharpeRatio: profitChart.data.sharpeRatio,
         sortinoRatio: profitChart.data.sortinoRatio,
         maxDrawdown: profitChart.data.maxDrawdown,
-        periodStarts: profitChart.data.lastPeriodStarts,
-        periodEnds: profitChart.data.lastPeriodEnds
+        creationDate: profitChart.data.creationDate
       },
       isPending: profitChart.isPending
     };

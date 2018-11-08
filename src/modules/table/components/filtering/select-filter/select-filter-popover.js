@@ -4,7 +4,6 @@ import React, { Component } from "react";
 
 class SelectFilterPopover extends Component {
   handleClick = (selected, value) => e => {
-    if (selected) return;
     return this.props.changeFilter(value);
   };
   render() {

@@ -1,5 +1,6 @@
 @import "styles/_colors.scss";
 @import "styles/_breakpoint.scss";
+@import "styles/_sizes.scss";
 
 $padding: 32px;
 $text-size: 13px;
@@ -49,6 +50,9 @@ $description-block-width: 250px;
     padding: $padding 20px;
     border-radius: 8px;
     background-color: #212c34;
+    & .program-avatar__level {
+      border-color: #212c34 !important;
+    }
     &--title {
       @include table-title;
     }
@@ -66,9 +70,8 @@ $description-block-width: 250px;
     cursor: pointer;
   }
   &__title {
-    padding: 3px 0;
+    //padding: 3px 0;
     font-size: $title-text-size/1.5;
-    word-break: break-all;
     & a {
       color: $text-accent-color;
     }
@@ -165,6 +168,7 @@ $description-block-width: 250px;
 }
 
 .programs-table__cell {
+  padding: $padding-small/2 $padding-small;
   &--avatar-title {
     display: flex;
     flex-direction: row;
@@ -175,10 +179,9 @@ $description-block-width: 250px;
     }
   }
   &--title {
-    padding-left: 9px;
-    word-break: break-all;
     min-width: 100px;
     max-width: 170px;
+    padding: 0;
     div {
       padding: $padding/10;
     }
@@ -214,7 +217,7 @@ $description-block-width: 250px;
     background: $secondary-color;
     padding: $padding/1.5;
     border-radius: $border-radius 0 0 $border-radius;
-    max-width: 318px;
+    min-width: 218px;
   }
 
   &__collapse {
@@ -237,8 +240,12 @@ $description-block-width: 250px;
     justify-content: space-between;
     align-items: center;
     margin-bottom: $padding/1.5;
+    padding-left: 0;
     &--name {
       margin-left: $padding/2;
+    }
+    & .program-avatar__level {
+      border-color: $secondary-color !important;
     }
   }
 
@@ -268,6 +275,7 @@ $description-block-width: 250px;
     letter-spacing: 0.4px;
     color: #fff;
     margin-bottom: $padding/2/1.5;
+    font-weight: 600;
   }
 
   &__description {

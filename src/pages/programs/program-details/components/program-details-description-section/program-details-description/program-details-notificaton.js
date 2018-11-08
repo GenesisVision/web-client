@@ -5,9 +5,14 @@ import { Link } from "react-router-dom";
 import { compose } from "redux";
 import isAuthenticated from "shared/decorators/is-authenticated";
 
-const ProgramDetailsNotificaton = ({ t, url }) => {
+const ProgramDetailsNotificaton = ({ t, url, title }) => {
   return (
-    <Link to={url}>
+    <Link
+      to={{
+        pathname: url,
+        state: `/ ${title}`
+      }}
+    >
       <div className="program-details-description__control">
         <RingIcon className="program-details-description__control-icon" />
         <div className="program-details-description__control-text">

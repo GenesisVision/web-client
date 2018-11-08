@@ -15,8 +15,13 @@ export const PROGRAMS_VIEW = "programs_view";
 
 class Table extends Component {
   state = {
-    view: (this.isViewSwitchEnabled && loadData(PROGRAMS_VIEW)) || TABLE_VIEW
+    view: TABLE_VIEW
   };
+
+  componentDidMount() {
+    if (this.isViewSwitchEnabled)
+      this.setState({ view: loadData(PROGRAMS_VIEW) || TABLE_VIEW });
+  }
 
   changeView = view => {
     saveData(PROGRAMS_VIEW, view);
@@ -81,11 +86,13 @@ class Table extends Component {
             </table>
           )}
         </Scrollbars>
-        <TableFooter
-          paging={this.props.paging}
-          updatePaging={this.props.updatePaging}
-          isPending={this.props.isPending}
-        />
+        {this.props.paging && (
+          <TableFooter
+            paging={this.props.paging}
+            updatePaging={this.props.updatePaging}
+            isPending={this.props.isPending}
+          />
+        )}
       </div>
     );
   }

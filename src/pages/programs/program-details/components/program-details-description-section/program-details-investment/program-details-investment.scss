@@ -26,6 +26,7 @@ div {
     font-size: $font-size-subtitle-mobile;
     letter-spacing: 0.21px;
     padding-bottom: $padding-middle-mobile;
+    font-weight: 600;
     @include media-breakpoint-landscape-phone() {
       font-size: $font-size-subtitle;
       padding-bottom: $padding-middle;

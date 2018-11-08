@@ -3,14 +3,13 @@ import "./fund-details.scss";
 import Page from "components/page/page";
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import { goBack, push } from "react-router-redux";
+import { push } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
 
 import { LOGIN_ROUTE } from "../../auth/login/login.routes";
 import NotFoundPage from "../../not-found/not-found.routes";
 import FundDetailsDescriptionSection from "./components/fund-details-description-section/fund-details-description-section";
 import FundDetailsHistorySection from "./components/fund-details-history-section/fund-details-history-section";
-import FundDetailsNavigation from "./components/fund-details-navigation/fund-details-navigation";
 import FundDetailsStatisticSection from "./components/fund-details-statistic-section/fund-details-statistic-section";
 import {
   getFundDescription,
@@ -60,10 +59,15 @@ class FundDetailsPage extends PureComponent {
         this.description = data.data;
         this.setState({ isPending: false });
       })
+      .catch(e => {
+        const errorCode = e.code;
+        this.setState({ errorCode });
+      })
       .then(() => {
         this.setState({ isPending: true });
         return getFundStatistic(this.description.data.id);
       })
+      .catch()
       .then(data => {
         this.profitChart = data.profitChartData;
         this.balanceChart = data.balanceChartData;
@@ -79,10 +83,6 @@ class FundDetailsPage extends PureComponent {
         this.setState({ isPending: false });
       })
       .catch(e => {
-        const errorCode = e.code;
-        this.setState({ errorCode });
-      })
-      .finally(() => {
         this.setState({ isPending: false });
       });
   };
@@ -104,7 +104,6 @@ class FundDetailsPage extends PureComponent {
         >
           <div className="fund-details">
             <div className="fund-details__section">
-              <FundDetailsNavigation goBack={service.goBack} />
               <FundDetailsDescriptionSection
                 fundDescriptionData={this.description}
                 isAuthenticated={isAuthenticated}
@@ -147,7 +146,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   service: bindActionCreators(
-    { getFundDescription, goBack, redirectToLogin: () => push(LOGIN_ROUTE) },
+    { getFundDescription, redirectToLogin: () => push(LOGIN_ROUTE) },
     dispatch
   )
 });

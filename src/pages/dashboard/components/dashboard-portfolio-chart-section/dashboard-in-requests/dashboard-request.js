@@ -1,5 +1,4 @@
 import ConfirmPopup from "components/confirm-popup/confirm-popup";
-import Profitability from "components/profitability/profitability";
 import { GVButton } from "gv-react-components";
 import moment from "moment";
 import React, { Component } from "react";

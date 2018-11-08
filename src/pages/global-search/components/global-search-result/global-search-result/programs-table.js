@@ -7,7 +7,7 @@ import React from "react";
 import { translate } from "react-i18next";
 import { compose } from "redux";
 
-const ProgramsTable = ({ t, isPending, data, filtering, paging }) => {
+const ProgramsTable = ({ t, isPending, data, filtering, paging, title }) => {
   return (
     <Table
       paging={paging}
@@ -16,9 +16,21 @@ const ProgramsTable = ({ t, isPending, data, filtering, paging }) => {
       columns={PROGRAMS_COLUMNS}
       items={data.programs}
       isPending={data.isPending}
-      renderHeader={column => t(`programs-page.programs-header.${column.name}`)}
+      renderHeader={column => (
+        <span
+          className={`programs-table__cell programs-table__cell--${
+            column.name
+          }`}
+        >
+          {t(`programs-page.programs-header.${column.name}`)}
+        </span>
+      )}
       renderBodyRow={program => (
-        <ProgramTableRowShort program={program} onExpandClick={() => {}} />
+        <ProgramTableRowShort
+          title={title}
+          program={program}
+          onExpandClick={() => {}}
+        />
       )}
     />
   );

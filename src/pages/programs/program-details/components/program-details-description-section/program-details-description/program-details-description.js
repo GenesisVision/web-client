@@ -58,6 +58,7 @@ class ProgramDetailsDescription extends PureComponent {
     const {
       t,
       isInvested,
+      canInvest,
       canWithdraw,
       programDescription,
       onReinvestingClick,
@@ -71,6 +72,7 @@ class ProgramDetailsDescription extends PureComponent {
     const isFavorite =
       programDescription.personalProgramDetails &&
       programDescription.personalProgramDetails.isFavorite;
+    const title = programDescription.title;
     return (
       <div className="program-details-description">
         <div className="program-details-description__left">
@@ -81,7 +83,7 @@ class ProgramDetailsDescription extends PureComponent {
             <AssetAvatar
               url={programDescription.logo}
               level={programDescription.level}
-              alt={programDescription.title}
+              alt={title}
               size="big"
               color={programDescription.color}
             />
@@ -104,7 +106,10 @@ class ProgramDetailsDescription extends PureComponent {
                 </div>
                 <div className="popover-levels__balance">
                   <NumberFormat
-                    value={formatValue(programDescription.availableInvestment)}
+                    value={formatValue(
+                      programDescription.availableInvestment,
+                      5
+                    )}
                     displayType="text"
                     suffix={` GVT`}
                   />
@@ -131,10 +136,15 @@ class ProgramDetailsDescription extends PureComponent {
           />
         </div>
         <div className="program-details-description__main">
-          <div className="program-details-description__heading">
-            {programDescription.title}
-          </div>
-          <Link to={composeManagerDetailsUrl(programDescription.manager.url)}>
+          <div className="program-details-description__heading">{title}</div>
+          <Link
+            to={{
+              pathname: composeManagerDetailsUrl(
+                programDescription.manager.url
+              ),
+              state: `/ ${title}`
+            }}
+          >
             <GVButton
               variant="text"
               className="program-details-description__author-btn"
@@ -156,7 +166,7 @@ class ProgramDetailsDescription extends PureComponent {
                   {t("program-details-page.description.avToInvest")}
                 </span>
                 <NumberFormat
-                  value={formatValue(programDescription.availableInvestment)}
+                  value={formatValue(programDescription.availableInvestment, 2)}
                   displayType="text"
                   suffix={` GVT`}
                 />
@@ -166,7 +176,7 @@ class ProgramDetailsDescription extends PureComponent {
                   {t("program-details-page.description.entryFee")}
                 </span>
                 <NumberFormat
-                  value={programDescription.entryFee}
+                  value={formatValue(programDescription.entryFee, 2)}
                   displayType="text"
                   suffix=" %"
                 />
@@ -176,7 +186,7 @@ class ProgramDetailsDescription extends PureComponent {
                   {t("program-details-page.description.successFee")}
                 </span>
                 <NumberFormat
-                  value={programDescription.successFee}
+                  value={formatValue(programDescription.successFee, 2)}
                   displayType="text"
                   suffix=" %"
                 />
@@ -187,20 +197,25 @@ class ProgramDetailsDescription extends PureComponent {
                 <GVButton
                   className="program-details-description__invest-btn"
                   onClick={this.handleOpenInvestmentPopup}
+                  disabled={
+                    !programDescription.personalProgramDetails ||
+                    !programDescription.personalProgramDetails.canInvest
+                  }
                 >
                   {t("program-details-page.description.invest")}
                 </GVButton>
               </div>
-              {isInvested && (
-                <ProgramReinvestingWidget
-                  className="program-details-description__reinvest"
-                  toggleReinvesting={onReinvestingClick}
-                  isReinvesting={
-                    programDescription.personalProgramDetails.isReinvest
-                  }
-                  disabled={isReinvestPending}
-                />
-              )}
+              {isInvested &&
+                canInvest && (
+                  <ProgramReinvestingWidget
+                    className="program-details-description__reinvest"
+                    toggleReinvesting={onReinvestingClick}
+                    isReinvesting={
+                      programDescription.personalProgramDetails.isReinvest
+                    }
+                    disabled={isReinvestPending}
+                  />
+                )}
             </div>
             {isInvested && (
               <ProgramDetailsInvestment
@@ -233,6 +248,7 @@ class ProgramDetailsDescription extends PureComponent {
             disabled={isFavoritePending}
           />
           <ProgramDetailsNotification
+            title={title}
             url={composeProgramNotificationsUrl(programDescription.url)}
             disabled={isFavoritePending}
           />

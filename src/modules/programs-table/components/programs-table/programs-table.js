@@ -10,7 +10,6 @@ import { translate } from "react-i18next";
 import { DATE_RANGE_FILTER_NAME } from "../../../table/components/filtering/date-range-filter/date-range-filter.constants";
 import {
   CURRENCY_FILTER_NAME,
-  CURRENCY_FILTER_VALUES,
   LEVEL_FILTER_NAME,
   PROGRAMS_COLUMNS
 } from "../../programs.constants";
@@ -72,13 +71,18 @@ const ProgramsTable = ({
       renderHeader={column => {
         if (!isAuthenticated && column.name === "favorite") return null;
         return (
-          <span className={`programs-table__cell--${column.name}`}>
+          <span
+            className={`programs-table__cell programs-table__cell--${
+              column.name
+            }`}
+          >
             {t(`programs-page.programs-header.${column.name}`)}
           </span>
         );
       }}
       renderBodyRow={program => (
         <ProgramTableRow
+          title={title}
           program={program}
           toggleFavorite={toggleFavorite}
           isAuthenticated={isAuthenticated}
@@ -87,6 +91,7 @@ const ProgramsTable = ({
       )}
       renderBodyCard={program => (
         <ProgramCard
+          title={title}
           program={program}
           toggleFavorite={toggleFavorite}
           isAuthenticated={isAuthenticated}

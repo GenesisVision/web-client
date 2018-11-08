@@ -4,7 +4,6 @@ import classnames from "classnames";
 import Modal from "components/modal/modal";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { Scrollbars } from "react-custom-scrollbars";
 import { connect } from "react-redux";
 
 const MARGIN_OFFSET = 10;

@@ -21,6 +21,7 @@ class ProgramTableRow extends Component {
 
   render() {
     const {
+      title,
       program,
       isAuthenticated,
       toggleFavorite,
@@ -30,6 +31,7 @@ class ProgramTableRow extends Component {
     if (isDetailed)
       return (
         <ProgramTableRowDetailed
+          title={title}
           program={program}
           onCollapseClick={this.closeProgramDetail}
           isAuthenticated={isAuthenticated}
@@ -39,6 +41,7 @@ class ProgramTableRow extends Component {
       );
     return (
       <ProgramTableRowShort
+        title={title}
         program={program}
         onExpandClick={this.openProgramDetail}
         toggleFavorite={toggleFavorite}

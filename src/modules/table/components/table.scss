@@ -19,6 +19,10 @@ $padding: 33px;
 .table {
   width: 100%;
   border-spacing: 0;
+  margin-bottom: $padding-middle-mobile;
+  @include media-breakpoint-landscape-phone() {
+    margin-bottom: $padding-middle;
+  }
   .message {
     padding: $padding;
     text-align: center;
@@ -96,6 +100,9 @@ $padding: 33px;
     padding: 0 1.5rem;
     &:not(.table__row--head):hover {
       background-color: #212c34;
+      & .program-avatar__level{
+        border-color: #212c34;
+      }
     }
   }
 
@@ -117,7 +124,7 @@ $padding: 33px;
     box-sizing: border-box;
     align-items: center;
     flex-grow: 1;
-    padding: $padding-small-mobile;
+    padding: $padding-small-mobile 0;
     overflow: hidden; // Or flex might break
     list-style: none;
     font-weight: normal;
@@ -172,7 +179,7 @@ $padding: 33px;
       font-size: $th-font-size;
     }
     &__cell {
-      padding: $padding-small;
+      padding: $padding-small 0;
     }
     &__body {
       font-size: $td-font-size;

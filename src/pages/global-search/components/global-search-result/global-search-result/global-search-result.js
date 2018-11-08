@@ -1,5 +1,6 @@
+import Surface from "components/surface/surface";
 import { GVTab, GVTabs } from "gv-react-components";
-import React, { Fragment, PureComponent } from "react";
+import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 
 import FundsTable from "./funds-table";
@@ -19,52 +20,68 @@ class GlobalSearchResult extends PureComponent {
     this.setState({ tab });
   };
 
-  renderProgramsTab = () => {
-    const { data } = this.props;
+  renderTab = () => {
+    const { data, title, t } = this.props;
     const { tab } = this.state;
-    if (tab !== PROGRAMS_TABLE_TAB || !data.programs) return null;
-    return <ProgramsTable items={data.programs} />;
-  };
-
-  renderFundsTab = () => {
-    const { data } = this.props;
-    const { tab } = this.state;
-    if (tab !== FUNDS_TABLE_TAB || !data.funds) return null;
-    return <FundsTable items={data.funds} />;
-  };
-
-  renderManagersTab = () => {
-    const { data } = this.props;
-    const { tab } = this.state;
-    if (tab !== MANAGERS_TABLE_TAB || !data.managers) return null;
-    return <ManagersTable data={data.managers} />;
+    switch (tab) {
+      case MANAGERS_TABLE_TAB:
+        return (
+          <SearchResultTable t={t} data={data.managers}>
+            <ManagersTable title={title} data={data.managers} />
+          </SearchResultTable>
+        );
+      case FUNDS_TABLE_TAB:
+        return (
+          <SearchResultTable t={t} data={data.funds}>
+            <FundsTable title={title} data={data.funds} />
+          </SearchResultTable>
+        );
+      case PROGRAMS_TABLE_TAB:
+        return (
+          <SearchResultTable t={t} data={data.programs}>
+            <ProgramsTable title={title} data={data.programs} />
+          </SearchResultTable>
+        );
+      default:
+        return null;
+    }
   };
 
   render() {
     const { t } = this.props;
     const { tab } = this.state;
     return (
-      <Fragment>
-        <h2>{t("global-search-page.heading")}</h2>
-        <GVTabs value={tab} onChange={this.handleTabChange}>
-          <GVTab
-            value={PROGRAMS_TABLE_TAB}
-            label={t("global-search-page.programs")}
-          />
-          <GVTab
-            value={FUNDS_TABLE_TAB}
-            label={t("global-search-page.funds")}
-          />
-          <GVTab
-            value={MANAGERS_TABLE_TAB}
-            label={t("global-search-page.managers")}
-          />
-        </GVTabs>
-        {this.renderProgramsTab()}
-        {this.renderManagersTab()}
-        {this.renderFundsTab()}
-      </Fragment>
+      <Surface className="global-search-result">
+        <div className="global-search-result__heading">
+          {t("global-search-page.heading")}
+        </div>
+        <div className="global-search-result__tabs">
+          <GVTabs value={tab} onChange={this.handleTabChange}>
+            <GVTab
+              value={PROGRAMS_TABLE_TAB}
+              label={t("global-search-page.programs")}
+            />
+            <GVTab
+              value={FUNDS_TABLE_TAB}
+              label={t("global-search-page.funds")}
+            />
+            <GVTab
+              value={MANAGERS_TABLE_TAB}
+              label={t("global-search-page.managers")}
+            />
+          </GVTabs>
+        </div>
+        {this.renderTab()}
+      </Surface>
     );
   }
 }
+
+const SearchResultTable = ({ data, children, t }) =>
+  data ? (
+    children
+  ) : (
+    <div className="global-search-result__loading">{t("table.loading")}</div>
+  );
+
 export default translate()(GlobalSearchResult);

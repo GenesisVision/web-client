@@ -10,7 +10,7 @@ import moment from "moment";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { formatValue, roundTypeEnum } from "utils/formatter";
+import { formatValue } from "utils/formatter";
 
 import BaseProfitability from "../../../../../../components/profitability/base-profitability";
 import {
@@ -97,7 +97,7 @@ class ProgramTrades extends Component {
             <TableCell className="program-details-trades__cell program-details-trades__cell--profit">
               <Profitability value={+formatValue(trade.profit)} prefix="sign">
                 <NumberFormat
-                  value={Math.abs(formatValue(trade.profit))}
+                  value={formatValue(trade.profit, null, true)}
                   thousandSeparator=" "
                   displayType="text"
                 />

@@ -4,15 +4,12 @@ import { bindActionCreators } from "redux";
 
 import * as managerService from "../../services/manager.service";
 import ManagerDescription from "./manager-description";
-import ManagerNavigation from "./manager-description-navigation";
 
 class ManagerDescriptionContainer extends Component {
   render() {
-    const { managerProfile, goBack } = this.props;
-
+    const { managerProfile } = this.props;
     return (
       <Fragment>
-        <ManagerNavigation goBack={goBack} />
         <ManagerDescription managerProfile={managerProfile} />
       </Fragment>
     );
@@ -23,4 +20,7 @@ const mapDispatchToProps = dispatch => ({
   service: bindActionCreators({ ...managerService }, dispatch)
 });
 
-export default connect(mapDispatchToProps)(ManagerDescriptionContainer);
+export default connect(
+  null,
+  mapDispatchToProps
+)(ManagerDescriptionContainer);

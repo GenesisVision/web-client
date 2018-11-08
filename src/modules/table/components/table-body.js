@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
+import { translate } from "react-i18next";
 
-const TableBody = ({ items, children, tag: Tag, className }) => {
+const TableBody = ({ items, children, tag: Tag, className, t }) => {
   const setMessage = message => {
     return Tag === "tbody" ? (
       <tr>
@@ -13,8 +14,9 @@ const TableBody = ({ items, children, tag: Tag, className }) => {
     );
   };
   const renderItems = () => {
-    if (items === null || items === undefined) return setMessage("Loading...");
-    if (items.length === 0) return setMessage("There are no items.");
+    if (items === null || items === undefined)
+      return setMessage(t("table.loading"));
+    if (items.length === 0) return setMessage(t("table.no-items"));
     return items.map((x, idx) => (
       <Fragment key={x.id || idx}>{children(x)}</Fragment>
     ));
@@ -23,4 +25,4 @@ const TableBody = ({ items, children, tag: Tag, className }) => {
   return <Tag className={className}>{renderItems()}</Tag>;
 };
 
-export default TableBody;
+export default translate()(TableBody);

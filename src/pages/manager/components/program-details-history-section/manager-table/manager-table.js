@@ -6,7 +6,14 @@ import React, { Component } from "react";
 
 class ManagerTable extends Component {
   render() {
-    const { data, renderBodyRow, getItems, renderHeader, columns } = this.props;
+    const {
+      data,
+      renderBodyRow,
+      getItems,
+      renderHeader,
+      columns,
+      title
+    } = this.props;
     let rows = { items: null, total: 0 };
     if (data) {
       rows.items = data.funds || data.programs;
@@ -14,6 +21,7 @@ class ManagerTable extends Component {
     }
     return (
       <TableModule
+        title={title}
         fetchOnMount={false}
         data={rows}
         getItems={getItems}

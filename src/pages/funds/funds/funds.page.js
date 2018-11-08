@@ -7,10 +7,11 @@ import FacetCardsContainer from "./components/facet-cards/faset-cards-container"
 import FundsNavigationTabsContainer from "./components/funds-navigation-tabs/funds-navigation-tabs-container";
 
 const FundsPage = ({ t }) => {
+  const title = t("funds-page.title");
   return (
-    <Page title={t("funds-page.title")}>
+    <Page title={title}>
       <FundsNavigationTabsContainer />
-      <FacetCardsContainer />
+      <FacetCardsContainer title={title} />
       <FundsTableContainer title={"All funds"} />
     </Page>
   );

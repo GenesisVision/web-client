@@ -1,13 +1,10 @@
 import "./profile.scss";
 
 import VerificationStatus from "components/verification-status/verification-status";
-import { GVButton, GVTextField } from "gv-react-components";
-import moment from "moment";
-import { PROFILE_EDIT_ROUTE } from "pages/profile/profile.constants";
+import { GVTextField } from "gv-react-components";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
-import { Link } from "react-router-dom";
 
 const ProfileField = ({ name, value, label, disabled = true }) => {
   return value || !disabled ? (

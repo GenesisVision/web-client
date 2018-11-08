@@ -15,7 +15,7 @@ import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
-import { formatValue } from "utils/formatter";
+import { formatPercent, formatValue } from "utils/formatter";
 
 import {
   DASHBOARD_PROGRAMS_COLUMNS,
@@ -31,7 +31,7 @@ class Dashboardprograms extends Component {
   };
 
   render() {
-    const { t } = this.props;
+    const { t, title } = this.props;
     return (
       <TableModule
         paging={DEFAULT_PAGING}
@@ -52,15 +52,24 @@ class Dashboardprograms extends Component {
           </Fragment>
         )}
         renderHeader={column => (
-          <span className={`dashboard-programs__cell--${column.name}`}>
+          <span
+            className={`programs-table__cell dashboard-programs__cell--${
+              column.name
+            }`}
+          >
             {t(`dashboard-page.programs-header.${column.name}`)}
           </span>
         )}
         renderBodyRow={program => (
           <TableRow>
-            <TableCell className="dashboard-programs__cell--title">
+            <TableCell className="programs-table__cell dashboard-programs__cell--title">
               <div className="dashboard-programs__cell--avatar-title">
-                <Link to={composeProgramDetailsUrl(program.url)}>
+                <Link
+                  to={{
+                    pathname: composeProgramDetailsUrl(program.url),
+                    state: `/ ${title}`
+                  }}
+                >
                   <AssetAvatar
                     url={program.logo}
                     level={program.level}
@@ -68,36 +77,41 @@ class Dashboardprograms extends Component {
                     color={program.color}
                   />
                 </Link>
-                <Link to={composeProgramDetailsUrl(program.url)}>
+                <Link
+                  to={{
+                    pathname: composeProgramDetailsUrl(program.url),
+                    state: `/ ${title}`
+                  }}
+                >
                   <GVButton variant="text" color="secondary">
                     {program.title}
                   </GVButton>
                 </Link>
               </div>
             </TableCell>
-            <TableCell className="dashboard-programs__cell--share">
-              {formatValue(program.dashboardAssetsDetails.share)}
+            <TableCell className="programs-table__cell dashboard-programs__cell--share">
+              {formatPercent(program.dashboardAssetsDetails.share)}%
             </TableCell>
-            <TableCell className="dashboard-programs__cell--currency">
+            <TableCell className="programs-table__cell dashboard-programs__cell--currency">
               {program.currency}
             </TableCell>
-            <TableCell className="dashboard-programs__cell--period">
+            <TableCell className="programs-table__cell dashboard-programs__cell--period">
               <ProgramPeriodEnd periodEnds={program.periodEnds} />
             </TableCell>
-            <TableCell className="dashboard-programs__cell--value">
-              {formatValue(program.personalDetails.value)}
+            <TableCell className="programs-table__cell dashboard-programs__cell--value">
+              {formatPercent(program.personalDetails.gvtValue)} GVT
             </TableCell>
-            <TableCell className="dashboard-programs__cell--profit">
+            <TableCell className="programs-table__cell dashboard-programs__cell--profit">
               <NumberFormat
-                value={+program.statistic.profitPercent.toFixed(2)}
+                value={formatValue(program.statistic.profitPercent)}
                 suffix="%"
                 displayType="text"
               />
             </TableCell>
-            <TableCell className="dashboard-programs__cell--chart">
+            <TableCell className="programs-table__cell dashboard-programs__cell--chart">
               <ProgramSimpleChart data={program.chart} programId={program.id} />
             </TableCell>
-            <TableCell className="dashboard-programs__cell--status">
+            <TableCell className="programs-table__cell dashboard-programs__cell--status">
               {program.personalDetails.status}
             </TableCell>
           </TableRow>

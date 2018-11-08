@@ -7,16 +7,13 @@ import FavoriteIcon from "modules/favorite-asset/components/favorite-icon/favori
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import { TableRow } from "modules/table/components";
 import { composeManagerDetailsUrl } from "pages/manager/manager.page";
-import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
 import { composeProgramDetailsUrl } from "pages/programs/programs.routes";
-import { PROGRAM_SLUG_URL_PARAM_NAME } from "pages/programs/programs.routes";
 import React, { Component } from "react";
+import { Scrollbars } from "react-custom-scrollbars";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import { formatValue } from "utils/formatter";
-import replaceParams from "utils/replace-params";
-import { Scrollbars } from "react-custom-scrollbars";
 
 import ProgramBigChart from "../program-big-chart/program-big-chart";
 
@@ -39,15 +36,12 @@ class ProgramTableRowDetailed extends Component {
   render() {
     const {
       t,
+      title,
       program,
       isAuthenticated,
       toggleFavorite,
       onCollapseClick
     } = this.props;
-
-    const programDetailsUrl = replaceParams(PROGRAM_DETAILS_ROUTE, {
-      [`:${PROGRAM_SLUG_URL_PARAM_NAME}`]: program.url
-    });
 
     return (
       <TableRow>
@@ -56,7 +50,12 @@ class ProgramTableRowDetailed extends Component {
             <div className="program-detailed__container program-detailed__container--inner">
               <div className="program-detailed__info">
                 <div className="program-detailed__avatar">
-                  <Link to={composeProgramDetailsUrl(program.url)}>
+                  <Link
+                    to={{
+                      pathname: composeProgramDetailsUrl(program.url),
+                      state: `/ ${title}`
+                    }}
+                  >
                     <AssetAvatar
                       url={program.logo}
                       level={program.level}
@@ -67,14 +66,26 @@ class ProgramTableRowDetailed extends Component {
                   </Link>
                   <div className="program-detailed__avatar--name">
                     <div className="program-detailed__title">
-                      <Link to={programDetailsUrl}>
+                      <Link
+                        to={{
+                          pathname: composeProgramDetailsUrl(program.url),
+                          state: `/ ${title}`
+                        }}
+                      >
                         <GVButton variant="text" color="secondary">
                           {program.title}
                         </GVButton>
                       </Link>
                     </div>
                     <div className="program-detailed__manager">
-                      <Link to={composeManagerDetailsUrl(program.manager.url)}>
+                      <Link
+                        to={{
+                          pathname: composeManagerDetailsUrl(
+                            program.manager.url
+                          ),
+                          state: `/ ${title}`
+                        }}
+                      >
                         <GVButton variant="text" color="primary">
                           {program.manager.username}
                         </GVButton>
@@ -160,9 +171,11 @@ class ProgramTableRowDetailed extends Component {
                     </div>
                     <div className="program-detailed__statistic-data--value">
                       <NumberFormat
-                        value={program.statistic.drawdownPercent}
+                        value={formatValue(
+                          program.statistic.drawdownPercent,
+                          2
+                        )}
                         suffix="%"
-                        decimalScale={2}
                         displayType="text"
                       />
                     </div>
@@ -177,10 +190,12 @@ class ProgramTableRowDetailed extends Component {
                         prefix="sign"
                       >
                         <NumberFormat
-                          value={program.statistic.profitPercent}
+                          value={formatValue(
+                            program.statistic.profitPercent,
+                            2
+                          )}
                           suffix="%"
                           allowNegative={false}
-                          decimalScale={2}
                           displayType="text"
                         />
                       </Profitability>
@@ -201,9 +216,15 @@ class ProgramTableRowDetailed extends Component {
                     </div>
                   )}
                 <div className="program-detailed__bottom-block">
-                  <GVButton onClick={this.handleOpenInvest}>
+                  {/* <GVButton
+                    onClick={this.handleOpenInvest}
+                    disabled={
+                      !program.personalDetails ||
+                      !program.personalDetails.canInvest
+                    }
+                  >
                     {t("program-actions.invest")}
-                  </GVButton>
+                  </GVButton> */}
                   <ProgramDepositContainer
                     type="program"
                     id={program.id}
@@ -211,7 +232,12 @@ class ProgramTableRowDetailed extends Component {
                     open={this.state.isOpenInvestToProgramPopup}
                   />
                   <div className="program-detailed__details">
-                    <Link to={programDetailsUrl}>
+                    <Link
+                      to={{
+                        pathname: composeProgramDetailsUrl(program.url),
+                        state: `/ ${title}`
+                      }}
+                    >
                       <GVButton variant="text" color="secondary">
                         {t("program-actions.details")} &#8250;
                       </GVButton>

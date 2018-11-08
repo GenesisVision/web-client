@@ -4,11 +4,9 @@ import NotFoundPage from "pages/not-found/not-found.routes";
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { goBack } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
 
 import { getCurrentFacet } from "../../services/programs-facet.service";
-import ProgramsFacetInfo from "./programs-facet-info";
 
 class ProgramsFacetContainer extends Component {
   state = {
@@ -30,13 +28,11 @@ class ProgramsFacetContainer extends Component {
   }
 
   render() {
-    const { goBack } = this.props;
     const { facetData } = this.state;
     if (!facetData || facetData.isPending) return null;
     if (facetData.notFound) return <NotFoundPage />;
     return (
       <Fragment>
-        <ProgramsFacetInfo facet={facetData.facet} goBack={goBack} />
         <ProgramsContainer title={facetData.facet.title} />
       </Fragment>
     );
@@ -51,7 +47,6 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  goBack: () => dispatch(goBack()),
   service: bindActionCreators({ getCurrentFacet, getPrograms }, dispatch)
 });
 

@@ -46,13 +46,16 @@ const FundsTable = ({
       renderHeader={column => {
         if (!isAuthenticated && column.name === "favorite") return null;
         return (
-          <span className={`funds-table__cell--${column.name}`}>
+          <span
+            className={`funds-table__cell funds-table__cell--${column.name}`}
+          >
             {t(`funds-page.funds-header.${column.name}`)}
           </span>
         );
       }}
       renderBodyRow={fund => (
         <FundsTableRow
+          title={title}
           fund={fund}
           toggleFavorite={toggleFavorite}
           isAuthenticated={isAuthenticated}
