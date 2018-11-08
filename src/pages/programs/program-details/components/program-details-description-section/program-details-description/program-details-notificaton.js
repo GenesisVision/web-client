@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { compose } from "redux";
 import isAuthenticated from "shared/decorators/is-authenticated";
 
-const ProgramDetailsNotificaton = ({ t, url, pathname, title }) => {
+const ProgramDetailsNotificaton = ({ t, url, title }) => {
   return (
     <Link
       to={{
