@@ -31,7 +31,7 @@ class Dashboardprograms extends Component {
   };
 
   render() {
-    const { t } = this.props;
+    const { t, title } = this.props;
     return (
       <TableModule
         paging={DEFAULT_PAGING}
@@ -67,7 +67,7 @@ class Dashboardprograms extends Component {
                 <Link
                   to={{
                     pathname: composeProgramDetailsUrl(program.url),
-                    state: `/ ${t("dashboard-page.title")}`
+                    state: `/ ${title}`
                   }}
                 >
                   <AssetAvatar
@@ -80,7 +80,7 @@ class Dashboardprograms extends Component {
                 <Link
                   to={{
                     pathname: composeProgramDetailsUrl(program.url),
-                    state: `/ ${t("dashboard-page.title")}`
+                    state: `/ ${title}`
                   }}
                 >
                   <GVButton variant="text" color="secondary">

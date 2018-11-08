@@ -11,7 +11,7 @@ import DashboardPortfolioEvent, {
   DashboardPortfolioEventShape
 } from "./dashboard-portfolio-event/dashboard-portfolio-event";
 
-const DashboardPortfolioEvents = ({ t, events, fullEventsUrl }) => (
+const DashboardPortfolioEvents = ({ t, events, fullEventsUrl, title }) => (
   <Fragment>
     <Scrollbars
       autoHide
@@ -29,7 +29,7 @@ const DashboardPortfolioEvents = ({ t, events, fullEventsUrl }) => (
       className="dashboard-portfolio-events__see-all"
       to={{
         pathname: fullEventsUrl,
-        state: `/ ${t("dashboard-page.title")}`
+        state: `/ ${title}`
       }}
     >
       <GVButton variant="text" color="secondary">
