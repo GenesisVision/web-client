@@ -46,4 +46,15 @@
     }
   }
 
+  &__loading {
+    padding: $padding-middle-mobile;
+    font-size: $font-size-large-mobile;
+    letter-spacing: 0.2px;
+    opacity: 0.4;
+    @include media-breakpoint-landscape-phone() {
+      padding: $padding-middle;
+      font-size: $font-size-large;
+    }
+  }
+
 }

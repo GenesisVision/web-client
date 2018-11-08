@@ -20,25 +20,35 @@ class GlobalSearchResult extends PureComponent {
     this.setState({ tab });
   };
 
-  renderProgramsTab = () => {
-    const { data, title } = this.props;
-    const { tab } = this.state;
-    if (tab !== PROGRAMS_TABLE_TAB || !data.programs) return null;
-    return <ProgramsTable title={title} items={data.programs} />;
-  };
+  renderLoading = () => (
+    <div className="global-search-result__loading">Loading...</div>
+  );
 
-  renderFundsTab = () => {
+  renderTab = () => {
     const { data, title } = this.props;
     const { tab } = this.state;
-    if (tab !== FUNDS_TABLE_TAB || !data.funds) return null;
-    return <FundsTable title={title} items={data.funds} />;
-  };
-
-  renderManagersTab = () => {
-    const { data, title } = this.props;
-    const { tab } = this.state;
-    if (tab !== MANAGERS_TABLE_TAB || !data.managers) return null;
-    return <ManagersTable title={title} data={data.managers} />;
+    switch (tab) {
+      case MANAGERS_TABLE_TAB:
+        return data.managers ? (
+          <ManagersTable title={title} data={data.managers} />
+        ) : (
+          this.renderLoading()
+        );
+      case FUNDS_TABLE_TAB:
+        return data.funds ? (
+          <FundsTable title={title} items={data.funds} />
+        ) : (
+          this.renderLoading()
+        );
+      case PROGRAMS_TABLE_TAB:
+        return data.programs ? (
+          <ProgramsTable title={title} items={data.programs} />
+        ) : (
+          this.renderLoading()
+        );
+      default:
+        return null;
+    }
   };
 
   render() {
@@ -65,9 +75,7 @@ class GlobalSearchResult extends PureComponent {
             />
           </GVTabs>
         </div>
-        {this.renderProgramsTab()}
-        {this.renderManagersTab()}
-        {this.renderFundsTab()}
+        {this.renderTab()}
       </Surface>
     );
   }
