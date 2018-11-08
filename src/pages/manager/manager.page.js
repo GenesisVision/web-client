@@ -52,7 +52,10 @@ class ManagerPage extends Component {
               />
             </div>
             <div className="manager__history">
-              <ManagerHistorySection managerId={managerProfile.id} />
+              <ManagerHistorySection
+                managerId={managerProfile.id}
+                title={managerProfile.username}
+              />
             </div>
           </div>
         </Page>
