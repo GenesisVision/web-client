@@ -20,8 +20,8 @@ class GlobalSearchResult extends PureComponent {
     this.setState({ tab });
   };
 
-  renderTab = t => {
-    const { data, title } = this.props;
+  renderTab = () => {
+    const { data, title, t } = this.props;
     const { tab } = this.state;
     switch (tab) {
       case MANAGERS_TABLE_TAB:
@@ -71,7 +71,7 @@ class GlobalSearchResult extends PureComponent {
             />
           </GVTabs>
         </div>
-        {this.renderTab(t)}
+        {this.renderTab()}
       </Surface>
     );
   }
