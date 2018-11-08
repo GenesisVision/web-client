@@ -7,10 +7,11 @@ import FacetCardsContainer from "./components/facet-cards/faset-cards-container"
 import ProgramsTabsContainer from "./components/programs-tabs/programs-tabs-container";
 
 const ProgramsPage = ({ t }) => {
+  const title = t("programs-page.title");
   return (
-    <Page title={t("programs-page.title")}>
+    <Page title={title}>
       <ProgramsTabsContainer />
-      <FacetCardsContainer title={t("programs-page.title")} />
+      <FacetCardsContainer title={title} />
       <ProgramsContainer title={"All programs"} />
     </Page>
   );
