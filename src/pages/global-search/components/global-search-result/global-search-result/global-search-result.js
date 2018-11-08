@@ -21,36 +21,24 @@ class GlobalSearchResult extends PureComponent {
   };
 
   renderProgramsTab = () => {
-    const { data, t } = this.props;
+    const { data, title } = this.props;
     const { tab } = this.state;
     if (tab !== PROGRAMS_TABLE_TAB || !data.programs) return null;
-    return (
-      <ProgramsTable
-        title={t("global-search-page.title")}
-        items={data.programs}
-      />
-    );
+    return <ProgramsTable title={title} items={data.programs} />;
   };
 
   renderFundsTab = () => {
-    const { data, t } = this.props;
+    const { data, title } = this.props;
     const { tab } = this.state;
     if (tab !== FUNDS_TABLE_TAB || !data.funds) return null;
-    return (
-      <FundsTable title={t("global-search-page.title")} items={data.funds} />
-    );
+    return <FundsTable title={title} items={data.funds} />;
   };
 
   renderManagersTab = () => {
-    const { data, t } = this.props;
+    const { data, title } = this.props;
     const { tab } = this.state;
     if (tab !== MANAGERS_TABLE_TAB || !data.managers) return null;
-    return (
-      <ManagersTable
-        title={t("global-search-page.title")}
-        data={data.managers}
-      />
-    );
+    return <ManagersTable title={title} data={data.managers} />;
   };
 
   render() {
