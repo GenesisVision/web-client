@@ -29,7 +29,7 @@ const DashboardPortfolioEvents = ({ t, events, fullEventsUrl }) => (
       className="dashboard-portfolio-events__see-all"
       to={{
         pathname: fullEventsUrl,
-        state: `/ ${t("dashboard.portfolio-events.title")}`
+        state: `/ ${t("dashboard-page.title")}`
       }}
     >
       <GVButton variant="text" color="secondary">
