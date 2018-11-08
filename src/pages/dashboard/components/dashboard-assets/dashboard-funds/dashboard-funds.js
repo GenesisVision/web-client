@@ -17,12 +17,7 @@ import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 
 import { formatValue } from "../../../../../utils/formatter";
-import replaceParams from "../../../../../utils/replace-params";
-import {
-  FUNDS_SLUG_URL_PARAM_NAME,
-  FUND_DETAILS_ROUTE,
-  composeFundsDetailsUrl
-} from "../../../../funds/funds.routes";
+import { composeFundsDetailsUrl } from "../../../../funds/funds.routes";
 import {
   DASHBOARD_FUNDS_FILTERS,
   DASHBOARD_FUNDS_TABLE_COLUMNS
