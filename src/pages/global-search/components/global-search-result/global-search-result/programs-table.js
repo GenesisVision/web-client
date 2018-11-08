@@ -7,7 +7,7 @@ import React from "react";
 import { translate } from "react-i18next";
 import { compose } from "redux";
 
-const ProgramsTable = ({ t, isPending, data, filtering, paging }) => {
+const ProgramsTable = ({ t, isPending, data, filtering, paging, title }) => {
   return (
     <Table
       paging={paging}
@@ -27,7 +27,7 @@ const ProgramsTable = ({ t, isPending, data, filtering, paging }) => {
       )}
       renderBodyRow={program => (
         <ProgramTableRowShort
-          title={t("global-search-page.title")}
+          title={title}
           program={program}
           onExpandClick={() => {}}
         />

@@ -10,6 +10,7 @@ import FundsTableRow from "../../../../../modules/funds-table/components/funds-t
 
 const FundsTable = ({
   t,
+  title,
   isPending,
   data,
   filtering,
@@ -29,9 +30,7 @@ const FundsTable = ({
           {t(`funds-page.funds-header.${column.name}`)}
         </span>
       )}
-      renderBodyRow={fund => (
-        <FundsTableRow title={t("global-search-page.title")} fund={fund} />
-      )}
+      renderBodyRow={fund => <FundsTableRow title={title} fund={fund} />}
     />
   );
 };

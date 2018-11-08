@@ -7,7 +7,7 @@ import React from "react";
 import { translate } from "react-i18next";
 import { compose } from "redux";
 
-const ManagersTable = ({ t, isPending, data, filtering, paging }) => {
+const ManagersTable = ({ t, isPending, data, filtering, paging, title }) => {
   return (
     <Table
       paging={paging}
@@ -21,7 +21,9 @@ const ManagersTable = ({ t, isPending, data, filtering, paging }) => {
           {t(`managers-table.${column.name}`)}
         </span>
       )}
-      renderBodyRow={manager => <ManagersTableRow manager={manager} />}
+      renderBodyRow={manager => (
+        <ManagersTableRow manager={manager} title={title} />
+      )}
     />
   );
 };

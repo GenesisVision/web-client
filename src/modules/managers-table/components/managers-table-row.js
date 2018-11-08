@@ -9,7 +9,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { translate } from "react-i18next";
 
-const ManagersTableRow = ({ t, manager }) => {
+const ManagersTableRow = ({ t, manager, title }) => {
   return (
     <TableRow className="managers-table__row">
       <TableCell className="managers-table__cell--username">
@@ -17,7 +17,7 @@ const ManagersTableRow = ({ t, manager }) => {
         <Link
           to={{
             pathname: composeManagerDetailsUrl(manager.url),
-            state: `/ ${t("global-search-page.title")}`
+            state: `/ ${title}`
           }}
         >
           <GVButton variant="text" color="secondary">
