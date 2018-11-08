@@ -20,25 +20,25 @@ class GlobalSearchResult extends PureComponent {
     this.setState({ tab });
   };
 
-  renderTab = () => {
+  renderTab = t => {
     const { data, title } = this.props;
     const { tab } = this.state;
     switch (tab) {
       case MANAGERS_TABLE_TAB:
         return (
-          <SearchResultTable data={data.managers}>
+          <SearchResultTable t={t} data={data.managers}>
             <ManagersTable title={title} data={data.managers} />
           </SearchResultTable>
         );
       case FUNDS_TABLE_TAB:
         return (
-          <SearchResultTable data={data.funds}>
+          <SearchResultTable t={t} data={data.funds}>
             <FundsTable title={title} data={data.funds} />
           </SearchResultTable>
         );
       case PROGRAMS_TABLE_TAB:
         return (
-          <SearchResultTable data={data.programs}>
+          <SearchResultTable t={t} data={data.programs}>
             <ProgramsTable title={title} data={data.programs} />
           </SearchResultTable>
         );
@@ -71,17 +71,17 @@ class GlobalSearchResult extends PureComponent {
             />
           </GVTabs>
         </div>
-        {this.renderTab()}
+        {this.renderTab(t)}
       </Surface>
     );
   }
 }
 
-const SearchResultTable = ({ data, children }) =>
+const SearchResultTable = ({ data, children, t }) =>
   data ? (
     children
   ) : (
-    <div className="global-search-result__loading">Loading...</div>
+    <div className="global-search-result__loading">{t("table.loading")}</div>
   );
 
 export default translate()(GlobalSearchResult);
