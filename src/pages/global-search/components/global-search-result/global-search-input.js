@@ -13,16 +13,18 @@ class GlobalSearchInput extends PureComponent {
   render() {
     const { query } = this.props;
     return (
-      <GVTextField
-        name="queryValue"
-        wrapperClassName="global-search-input__wrapper"
-        placeholder="Search for programs or managers"
-        autoComplete="off"
-        adornment={<SearchIcon primary />}
-        adornmentPosition="start"
-        value={query}
-        onChange={this.handleOnChange}
-      />
+      <div className="global-search-input">
+        <GVTextField
+          name="queryValue"
+          wrapperClassName="global-search-input__wrapper"
+          placeholder="Search for programs or managers"
+          autoComplete="off"
+          adornment={<SearchIcon primary />}
+          adornmentPosition="start"
+          value={query}
+          onChange={this.handleOnChange}
+        />
+      </div>
     );
   }
 }

@@ -9,19 +9,20 @@ import DashboardChartSection from "./components/dashboard-portfolio-chart-sectio
 import DashboardPortfolioEventsContainer from "./components/dashboard-portfolio-events/dashboard-portfolio-events-container";
 
 const DashboardPage = ({ t }) => {
+  const title = t("dashboard-page.title");
   return (
-    <Page title={t("dashboard-page.title")}>
+    <Page title={title}>
       <div className="dashboard">
         <div className="dashboard__row">
           <div className="dashboard__chart">
             <DashboardChartSection />
           </div>
           <div className="dashboard__portfolio-events-aside">
-            <DashboardPortfolioEventsContainer />
+            <DashboardPortfolioEventsContainer title={title} />
           </div>
         </div>
         <div className="dashboard__assets">
-          <DashboardAssets />
+          <DashboardAssets title={title} />
         </div>
       </div>
     </Page>

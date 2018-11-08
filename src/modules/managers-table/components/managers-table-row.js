@@ -6,14 +6,20 @@ import { TableCell, TableRow } from "modules/table/components";
 import moment from "moment";
 import { composeManagerDetailsUrl } from "pages/manager/manager.page";
 import React from "react";
+import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
 
-const ManagersTableRow = ({ manager }) => {
+const ManagersTableRow = ({ t, manager, title }) => {
   return (
     <TableRow className="managers-table__row">
       <TableCell className="managers-table__cell--username">
         <ProfileAvatar url={manager.avatar} alt={manager.username} />
-        <Link to={composeManagerDetailsUrl(manager.url)}>
+        <Link
+          to={{
+            pathname: composeManagerDetailsUrl(manager.url),
+            state: `/ ${title}`
+          }}
+        >
           <GVButton variant="text" color="secondary">
             {manager.username}
           </GVButton>
@@ -25,4 +31,4 @@ const ManagersTableRow = ({ manager }) => {
   );
 };
 
-export default ManagersTableRow;
+export default translate()(ManagersTableRow);

@@ -2,6 +2,10 @@
   "app": {
     "title": "Investor Portal: "
   },
+  "table": {
+    "loading": "Loading...",
+    "no-items": "There are no items."
+  },
   "alerts": {
     "clear-all": "Clear all",
     "server-error": "Server Error. Please contact administrator."

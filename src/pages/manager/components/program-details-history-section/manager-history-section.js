@@ -11,7 +11,7 @@ import { PROGRAMS_COLUMNS } from "modules/programs-table/programs.constants";
 import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
-import connect from "react-redux/es/connect/connect";
+import { connect } from "react-redux";
 import { push } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
 
@@ -66,6 +66,7 @@ class ManagerHistorySection extends PureComponent {
     const { tab } = this.state;
     const {
       t,
+      title,
       managerId,
       isAuthenticated,
       service,
@@ -95,6 +96,7 @@ class ManagerHistorySection extends PureComponent {
               columns={PROGRAMS_COLUMNS}
               renderBodyRow={program => (
                 <ProgramTableRow
+                  title={title}
                   isAuthenticated={isAuthenticated}
                   program={program}
                   redirectToLogin={service.redirectToLogin}
@@ -120,6 +122,7 @@ class ManagerHistorySection extends PureComponent {
               columns={FUNDS_TABLE_COLUMNS}
               renderBodyRow={fund => (
                 <FundsTableRow
+                  title={title}
                   fund={fund}
                   isAuthenticated={isAuthenticated}
                   redirectToLogin={service.redirectToLogin}

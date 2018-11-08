@@ -6,10 +6,15 @@ import { Link } from "react-router-dom";
 
 import facetImg from "./facet.png";
 
-const FacetCard = ({ facet, composeFacetUrl }) => {
+const FacetCard = ({ facet, composeFacetUrl, title }) => {
   return (
     <Surface className="facet">
-      <Link to={composeFacetUrl(facet.url)}>
+      <Link
+        to={{
+          pathname: composeFacetUrl(facet.url),
+          state: `/ ${title}`
+        }}
+      >
         <div className="facet__facet-container">
           <ImageBase
             url={facet.logo}

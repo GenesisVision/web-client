@@ -139,6 +139,7 @@ const formatValue = (value, decimalScale, abs) => {
       if (item[0] < 100) return [item[0], item[1].slice(0, 6)];
       if (item[0] < 1000) return [item[0], item[1].slice(0, 4)];
       if (item[0] >= 1000) return [item[0], item[1].slice(0, 2)];
+      return item;
     })
     .map(addOne)
     .map(cleanNulls)

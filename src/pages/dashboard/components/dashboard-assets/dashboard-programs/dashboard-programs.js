@@ -31,7 +31,7 @@ class Dashboardprograms extends Component {
   };
 
   render() {
-    const { t } = this.props;
+    const { t, title } = this.props;
     return (
       <TableModule
         paging={DEFAULT_PAGING}
@@ -64,7 +64,12 @@ class Dashboardprograms extends Component {
           <TableRow>
             <TableCell className="programs-table__cell dashboard-programs__cell--title">
               <div className="dashboard-programs__cell--avatar-title">
-                <Link to={composeProgramDetailsUrl(program.url)}>
+                <Link
+                  to={{
+                    pathname: composeProgramDetailsUrl(program.url),
+                    state: `/ ${title}`
+                  }}
+                >
                   <AssetAvatar
                     url={program.logo}
                     level={program.level}
@@ -72,7 +77,12 @@ class Dashboardprograms extends Component {
                     color={program.color}
                   />
                 </Link>
-                <Link to={composeProgramDetailsUrl(program.url)}>
+                <Link
+                  to={{
+                    pathname: composeProgramDetailsUrl(program.url),
+                    state: `/ ${title}`
+                  }}
+                >
                   <GVButton variant="text" color="secondary">
                     {program.title}
                   </GVButton>
@@ -89,7 +99,7 @@ class Dashboardprograms extends Component {
               <ProgramPeriodEnd periodEnds={program.periodEnds} />
             </TableCell>
             <TableCell className="programs-table__cell dashboard-programs__cell--value">
-              {formatPercent(program.personalDetails.value)} GVT
+              {formatPercent(program.personalDetails.gvtValue)} GVT
             </TableCell>
             <TableCell className="programs-table__cell dashboard-programs__cell--profit">
               <NumberFormat

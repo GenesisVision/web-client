@@ -14,6 +14,7 @@ import { formatValue } from "utils/formatter";
 import { composeProgramDetailsUrl } from "../../../../pages/programs/programs.routes";
 
 const ProgramTableRowShort = ({
+  title,
   program,
   isAuthenticated,
   toggleFavorite,
@@ -23,7 +24,12 @@ const ProgramTableRowShort = ({
     <TableRow onClick={onExpandClick}>
       <TableCell className="programs-table__cell programs-table__cell--name">
         <div className="programs-table__cell--avatar-title">
-          <Link to={composeProgramDetailsUrl(program.url)}>
+          <Link
+            to={{
+              pathname: composeProgramDetailsUrl(program.url),
+              state: `/ ${title}`
+            }}
+          >
             <AssetAvatar
               url={program.logo}
               level={program.level}
@@ -33,7 +39,12 @@ const ProgramTableRowShort = ({
           </Link>
           <div className="programs-table__cell--title">
             <div className="programs-table__cell--top">
-              <Link to={composeProgramDetailsUrl(program.url)}>
+              <Link
+                to={{
+                  pathname: composeProgramDetailsUrl(program.url),
+                  state: `/ ${title}`
+                }}
+              >
                 <GVButton variant="text" color="secondary">
                   {program.title}
                 </GVButton>

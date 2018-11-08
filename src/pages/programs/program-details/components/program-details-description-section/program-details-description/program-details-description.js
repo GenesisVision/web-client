@@ -72,6 +72,7 @@ class ProgramDetailsDescription extends PureComponent {
     const isFavorite =
       programDescription.personalProgramDetails &&
       programDescription.personalProgramDetails.isFavorite;
+    const title = programDescription.title;
     return (
       <div className="program-details-description">
         <div className="program-details-description__left">
@@ -82,7 +83,7 @@ class ProgramDetailsDescription extends PureComponent {
             <AssetAvatar
               url={programDescription.logo}
               level={programDescription.level}
-              alt={programDescription.title}
+              alt={title}
               size="big"
               color={programDescription.color}
             />
@@ -135,10 +136,15 @@ class ProgramDetailsDescription extends PureComponent {
           />
         </div>
         <div className="program-details-description__main">
-          <div className="program-details-description__heading">
-            {programDescription.title}
-          </div>
-          <Link to={composeManagerDetailsUrl(programDescription.manager.url)}>
+          <div className="program-details-description__heading">{title}</div>
+          <Link
+            to={{
+              pathname: composeManagerDetailsUrl(
+                programDescription.manager.url
+              ),
+              state: `/ ${title}`
+            }}
+          >
             <GVButton
               variant="text"
               className="program-details-description__author-btn"
@@ -242,6 +248,7 @@ class ProgramDetailsDescription extends PureComponent {
             disabled={isFavoritePending}
           />
           <ProgramDetailsNotification
+            title={title}
             url={composeProgramNotificationsUrl(programDescription.url)}
             disabled={isFavoritePending}
           />

@@ -20,25 +20,31 @@ class GlobalSearchResult extends PureComponent {
     this.setState({ tab });
   };
 
-  renderProgramsTab = () => {
-    const { data } = this.props;
+  renderTab = () => {
+    const { data, title, t } = this.props;
     const { tab } = this.state;
-    if (tab !== PROGRAMS_TABLE_TAB || !data.programs) return null;
-    return <ProgramsTable items={data.programs} />;
-  };
-
-  renderFundsTab = () => {
-    const { data } = this.props;
-    const { tab } = this.state;
-    if (tab !== FUNDS_TABLE_TAB || !data.funds) return null;
-    return <FundsTable items={data.funds} />;
-  };
-
-  renderManagersTab = () => {
-    const { data } = this.props;
-    const { tab } = this.state;
-    if (tab !== MANAGERS_TABLE_TAB || !data.managers) return null;
-    return <ManagersTable data={data.managers} />;
+    switch (tab) {
+      case MANAGERS_TABLE_TAB:
+        return (
+          <SearchResultTable t={t} data={data.managers}>
+            <ManagersTable title={title} data={data.managers} />
+          </SearchResultTable>
+        );
+      case FUNDS_TABLE_TAB:
+        return (
+          <SearchResultTable t={t} data={data.funds}>
+            <FundsTable title={title} data={data.funds} />
+          </SearchResultTable>
+        );
+      case PROGRAMS_TABLE_TAB:
+        return (
+          <SearchResultTable t={t} data={data.programs}>
+            <ProgramsTable title={title} data={data.programs} />
+          </SearchResultTable>
+        );
+      default:
+        return null;
+    }
   };
 
   render() {
@@ -65,11 +71,17 @@ class GlobalSearchResult extends PureComponent {
             />
           </GVTabs>
         </div>
-        {this.renderProgramsTab()}
-        {this.renderManagersTab()}
-        {this.renderFundsTab()}
+        {this.renderTab()}
       </Surface>
     );
   }
 }
+
+const SearchResultTable = ({ data, children, t }) =>
+  data ? (
+    children
+  ) : (
+    <div className="global-search-result__loading">{t("table.loading")}</div>
+  );
+
 export default translate()(GlobalSearchResult);

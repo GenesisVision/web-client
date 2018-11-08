@@ -8,14 +8,11 @@ import { GVButton } from "gv-react-components";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
 import { composeManagerDetailsUrl } from "pages/manager/manager.page";
-import { PROGRAM_SLUG_URL_PARAM_NAME } from "pages/programs/programs.routes";
 import { composeProgramDetailsUrl } from "pages/programs/programs.routes";
-import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
-import replaceParams from "utils/replace-params";
 
 import { formatValue } from "../../../../utils/formatter";
 
@@ -41,10 +38,7 @@ class ProgramCard extends Component {
   handleOpenDropdown = event => this.setState({ anchor: event.currentTarget });
   handleCloseDropdown = () => this.setState({ anchor: null });
   render() {
-    const { t, program, onExpandClick, toggleFavorite } = this.props;
-    const programDetailsUrl = replaceParams(PROGRAM_DETAILS_ROUTE, {
-      [`:${PROGRAM_SLUG_URL_PARAM_NAME}`]: program.url
-    });
+    const { t, program, onExpandClick, toggleFavorite, title } = this.props;
     const handleToggleFavorite = () => {
       toggleFavorite(program.id, program.personalDetails.isFavorite);
     };
@@ -52,7 +46,12 @@ class ProgramCard extends Component {
       <div onClick={onExpandClick} className="programs-cards__card">
         <div className="programs-cards__row">
           <div className="programs-cards__avatar">
-            <Link to={composeProgramDetailsUrl(program.url)}>
+            <Link
+              to={{
+                pathname: composeProgramDetailsUrl(program.url),
+                state: `/ ${title}`
+              }}
+            >
               <AssetAvatar
                 url={program.logo}
                 level={program.level}
@@ -64,12 +63,22 @@ class ProgramCard extends Component {
           </div>
           <div className="programs-cards__names">
             <div className="programs-cards__title">
-              <Link to={composeProgramDetailsUrl(program.url)}>
+              <Link
+                to={{
+                  pathname: composeProgramDetailsUrl(program.url),
+                  state: `/ ${title}`
+                }}
+              >
                 {program.title}
               </Link>
             </div>
             <div className="programs-cards__name">
-              <Link to={composeManagerDetailsUrl(program.manager.url)}>
+              <Link
+                to={{
+                  pathname: composeManagerDetailsUrl(program.manager.url),
+                  state: `/ ${title}`
+                }}
+              >
                 <GVButton variant="text" color="primary">
                   {program.manager.username}
                 </GVButton>
@@ -108,7 +117,12 @@ class ProgramCard extends Component {
                     {t("program-actions.invest")}
                   </GVButton>
                 )} */}
-                <Link to={programDetailsUrl}>
+                <Link
+                  to={{
+                    pathname: composeProgramDetailsUrl(program.url),
+                    state: `/ ${title}`
+                  }}
+                >
                   <GVButton
                     variant="text"
                     color="secondary"

@@ -79,7 +79,12 @@ class FundDetailsDescription extends PureComponent {
           <div className="fund-details-description__heading">
             {fundDescription.title}
           </div>
-          <Link to={composeManagerDetailsUrl(fundDescription.manager.url)}>
+          <Link
+            to={{
+              pathname: composeManagerDetailsUrl(fundDescription.manager.url),
+              state: `/ ${fundDescription.title}`
+            }}
+          >
             <GVButton
               variant="text"
               className="fund-details-description__author-btn"
@@ -135,8 +140,8 @@ class FundDetailsDescription extends PureComponent {
                 className="fund-details-description__invest-btn"
                 onClick={this.handleOpenInvestmentPopup}
                 disabled={
-                  !fundDescription.personalProgramDetails ||
-                  !fundDescription.personalProgramDetails.canInvest
+                  !fundDescription.personalFundDetails ||
+                  !fundDescription.personalFundDetails.canInvest
                 }
               >
                 {t("fund-details-page.description.invest")}
@@ -172,6 +177,7 @@ class FundDetailsDescription extends PureComponent {
             disabled={isFavoritePending}
           />
           <FundDetailsNotification
+            title={fundDescription.title}
             url={composeFundNotificationsUrl(fundDescription.url)}
             disabled={isFavoritePending}
           />
