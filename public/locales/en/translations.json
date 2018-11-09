@@ -10,6 +10,13 @@
     "clear-all": "Clear all",
     "server-error": "Server Error. Please contact administrator."
   },
+  "fields": {
+    "input-photo": {
+      "text-download--big": "Drag the image here or click here to browse your files",
+      "text-download--small": "Tap to upload the image",
+      "drop-files": "Drop files..."
+    }
+  },
   "verification-status": {
     "verified": "Verified",
     "not-verified": "Not verified",
