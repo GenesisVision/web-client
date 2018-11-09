@@ -100,7 +100,7 @@ class FundDetailsInvestment extends PureComponent {
               </span>
               <NumberFormat
                 value={formatValue(pendingOutput)}
-                suffix={` ${balanceCurrency}`}
+                suffix={` %`}
                 displayType="text"
               />
             </div>
