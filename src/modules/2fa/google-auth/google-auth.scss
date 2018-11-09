@@ -2,9 +2,6 @@
 
 .google-auth {
   background-color: $background-color;
-  &.dialog {
-    //max-width: calc(360px * 3);
-  }
 
   &--desktop {
     width: 895px;
@@ -94,6 +91,7 @@
 }
 
 .two-factor-auth {
+  display: flex;
   box-sizing: border-box;
   width: auto;
   max-width: inherit;

@@ -54,7 +54,7 @@ div {
       @include media-breakpoint-landscape-phone() {
         font-size: $font-size-middle;
         margin-right: $padding-large;
-      margin-bottom: $font-size-small;
+        margin-bottom: $font-size-small;
       }
     }
 

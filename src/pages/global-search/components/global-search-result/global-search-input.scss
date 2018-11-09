@@ -12,8 +12,9 @@
   }
 }
 
-.global-search-input{
-  & .gv-text-field__wrapper, & .gv-text-field{
+.global-search-input {
+  & .gv-text-field__wrapper,
+  & .gv-text-field {
     margin: 0;
   }
 }
@@ -56,5 +57,4 @@
       font-size: $font-size-large;
     }
   }
-
 }

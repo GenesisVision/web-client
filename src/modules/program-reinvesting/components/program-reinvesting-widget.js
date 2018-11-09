@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import classnames from "classnames";
 import { GVSwitch } from "gv-react-components";
 import React from "react";
 import { translate } from "react-i18next";
@@ -10,7 +10,7 @@ const ProgramReinvestingWidget = ({
   toggleReinvesting
 }) => (
   <span
-    className={classNames("reinvesting-widget", className, {
+    className={classnames("reinvesting-widget", className, {
       "reinvesting-widget--active": isReinvesting
     })}
     onClick={toggleReinvesting}

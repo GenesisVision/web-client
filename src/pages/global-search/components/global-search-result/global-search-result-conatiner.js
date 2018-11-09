@@ -33,7 +33,7 @@ class GlobalSearchResultConatiner extends Component {
           onChange={this.handleOnChange}
         />
         <div className={classnames({ "global-search-hidden": !query })}>
-          <GlobalSearchResult data={this.state.data} title={title}/>
+          <GlobalSearchResult data={this.state.data} title={title} />
         </div>
       </Fragment>
     );

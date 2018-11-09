@@ -64,13 +64,10 @@ class ProgramDetailsDescriptionSection extends PureComponent {
       programDescription: composeNewReinvestState(!isReinvest)
     });
     toggleReinvesting(id, isReinvest)
+      .then(() => this.setState({ ui: { ...ui, isReinvestPending: false } }))
       .catch(e => {
         this.setState({
-          programDescription: composeNewReinvestState(isReinvest)
-        });
-      })
-      .finally(() => {
-        this.setState({
+          programDescription: composeNewReinvestState(isReinvest),
           ui: { ...ui, isReinvestPending: false }
         });
       });
@@ -94,14 +91,11 @@ class ProgramDetailsDescriptionSection extends PureComponent {
       programDescription: composeNewFavoriteState(!isFavorite)
     });
     toggleFavoriteProgram(id, isFavorite)
+      .then(() => this.setState({ ui: { ...ui, isFavoritePending: false } }))
       .catch(e => {
         this.setState({
-          programDescription: composeNewFavoriteState(isFavorite)
-        });
-      })
-      .finally(() => {
-        this.setState({
-          ui: { ...ui, isFavoritePending: false }
+          programDescription: composeNewFavoriteState(isFavorite),
+          ui: { ...ui, isReinvestPending: false }
         });
       });
   };

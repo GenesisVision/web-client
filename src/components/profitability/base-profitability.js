@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import classnames from "classnames";
 import PropTypes from "prop-types";
 import React, { PureComponent } from "react";
 
@@ -10,7 +10,7 @@ class BaseProfitability extends PureComponent {
 
     return (
       <div
-        className={classNames("profitability", className, {
+        className={classnames("profitability", className, {
           "profitability--positive": isPositive,
           "profitability--negative": isNegative,
           "profitability--chips": variant === ProfitabilityVariant.chips

@@ -3,6 +3,7 @@ import StatisticItem from "components/statistic-item/statistic-item";
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+
 import { formatValue } from "../../../../../utils/formatter";
 
 const DashboardPortfolioChartStat = ({
