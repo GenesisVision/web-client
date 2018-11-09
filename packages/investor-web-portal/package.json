@@ -68,8 +68,8 @@
   },
   "scripts": {
     "precommit": "lint-staged",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
