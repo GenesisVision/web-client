@@ -1,8 +1,8 @@
 import "./2fa.scss";
 
 import { fetchTwoFactor } from "actions/2fa-actions";
-import Dialog from "components/dialog/dialog";
-import Select from "components/select/select";
+import Dialog from "shared/components/dialog/dialog";
+import Select from "shared/components/select/select";
 import { GVTextField } from "gv-react-components";
 import DisableAuthContainer from "modules/2fa/disable-auth/disable-auth-container";
 import GenerateRecoveryCode from "modules/2fa/google-auth/generate-recovery-codes/generate-recovery-codes";

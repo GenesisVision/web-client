@@ -1,4 +1,4 @@
-import Sidebar from "components/sidebar/sidebar";
+import Sidebar from "shared/components/sidebar/sidebar";
 import { notificationsToggle } from "pages/app/components/notifications/actions/notifications.actions";
 import Notifications from "pages/app/components/notifications/components/notifications";
 import {

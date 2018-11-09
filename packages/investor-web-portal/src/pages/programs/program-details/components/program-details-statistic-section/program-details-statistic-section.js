@@ -1,6 +1,6 @@
 import "./program-details-statistic-section.scss";
 
-import { DEFAULT_PERIOD } from "components/chart/chart-period/chart-period.helpers";
+import { DEFAULT_PERIOD } from "shared/components/chart/chart-period/chart-period.helpers";
 import React, { PureComponent } from "react";
 
 import { getProgramStatistic } from "../../services/program-details.service";

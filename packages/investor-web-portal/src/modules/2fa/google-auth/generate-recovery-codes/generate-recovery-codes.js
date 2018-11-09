@@ -1,12 +1,12 @@
-import Dialog from "components/dialog/dialog";
+import Dialog from "shared/components/dialog/dialog";
 import { GVButton } from "gv-react-components";
 import GenerateRecoveryWithFormik from "modules/2fa/google-auth/generate-recovery-codes/generate-recovery-form";
 import GoogleAuthCodes from "modules/2fa/google-auth/google-auth-codes";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
-import { authApiProxy } from "services/api-client/auth-api";
-import authService from "services/auth-service";
+import { authApiProxy } from "shared/services/api-client/auth-api";
+import authService from "shared/services/auth-service";
 
 class GenerateRecoveryCode extends Component {
   state = {

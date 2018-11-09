@@ -7,7 +7,7 @@ import {
 import React from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
-import replaceParams from "utils/replace-params";
+import replaceParams from "shared/utils/replace-params";
 
 const ProgramsTabs = ({ t, tab = PROGRAMS_EXPLORE_TAB_NAME }) => {
   return (

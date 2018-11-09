@@ -1,6 +1,6 @@
 import { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
 import { push } from "react-router-redux";
-import { walletApiProxy } from "services/api-client/wallet-api";
+import { walletApiProxy } from "shared/services/api-client/wallet-api";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
 export const confirmWithdraw = (requestId, code) => dispatch => {

@@ -1,7 +1,7 @@
 import "./manager-description.scss";
 
-import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
-import FundAssetContainer from "components/fund-asset/fund-asset-container";
+import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
+import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
 import moment from "moment";
 import React from "react";
 import { translate } from "react-i18next";

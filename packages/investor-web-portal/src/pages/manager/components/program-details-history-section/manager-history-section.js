@@ -1,6 +1,6 @@
 import "./manager-history.scss";
 
-import Surface from "components/surface/surface";
+import Surface from "shared/components/surface/surface";
 import { GVTab, GVTabs } from "gv-react-components";
 import { toggleFavoriteFundDispatchable } from "modules/favorite-asset/services/favorite-fund.service";
 import { toggleFavoriteProgramDispatchable } from "modules/favorite-asset/services/favorite-program.service";

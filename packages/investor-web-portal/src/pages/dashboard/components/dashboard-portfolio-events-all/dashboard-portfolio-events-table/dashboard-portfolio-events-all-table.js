@@ -1,6 +1,6 @@
 import "./dashboard-portfolio-events-all-table.scss";
 
-import Profitability from "components/profitability/profitability";
+import Profitability from "shared/components/profitability/profitability";
 import { TableCell, TableRow } from "modules/table/components";
 import { ASSET_TYPE_FILTER_VALUES } from "modules/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 import DateRangeFilter from "modules/table/components/filtering/date-range-filter/date-range-filter";
@@ -14,7 +14,7 @@ import moment from "moment";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { formatValue } from "utils/formatter";
+import { formatValue } from "shared/utils/formatter";
 
 import { fetchPortfolioEvents } from "../../../services/dashboard-events.services";
 import { isUseProfitability } from "../../helpers/dashboard-portfolio.helpers";

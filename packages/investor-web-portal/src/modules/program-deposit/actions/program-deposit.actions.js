@@ -4,8 +4,8 @@ import {
   INVEST_TO_PROGRAM_BY_ID,
   INVEST_TO_PROGRAM_BY_ID_CLEAR
 } from "modules/program-deposit/program-deposit.constants";
-import investorApi from "services/api-client/investor-api";
-import authService from "services/auth-service";
+import investorApi from "shared/services/api-client/investor-api";
+import authService from "shared/services/auth-service";
 
 export const fetchDepositProgramInfoById = (id, currency) => {
   return {

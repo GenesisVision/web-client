@@ -1,6 +1,6 @@
-import ChartTooltip from "components/chart/chart-tooltip/chart-tooltip";
+import ChartTooltip from "shared/components/chart/chart-tooltip/chart-tooltip";
 import React, { Fragment } from "react";
-import { formatValue } from "utils/formatter";
+import { formatValue } from "shared/utils/formatter";
 
 const TooltipBody = ({ equity, pnl }) => {
   return (

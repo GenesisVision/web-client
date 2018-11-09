@@ -1,4 +1,4 @@
-import investorApi from "services/api-client/investor-api";
+import investorApi from "shared/services/api-client/investor-api";
 
 export const PROGRAM_REINVEST = "PROGRAM_REINVEST";
 

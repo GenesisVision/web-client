@@ -1,4 +1,4 @@
-import GVDatePicker from "components/gv-datepicker/gv-datepicker";
+import GVDatePicker from "shared/components/gv-datepicker/gv-datepicker";
 import { GVTextField } from "gv-react-components";
 import moment from "moment";
 import React, { Component, Fragment } from "react";

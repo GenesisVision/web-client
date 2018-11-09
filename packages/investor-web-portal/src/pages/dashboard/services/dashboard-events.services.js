@@ -1,5 +1,5 @@
-import { investorApiProxy } from "services/api-client/investor-api";
-import authService from "services/auth-service";
+import { investorApiProxy } from "shared/services/api-client/investor-api";
+import authService from "shared/services/auth-service";
 
 export const fetchPortfolioEvents = filters => {
   const authorization = authService.getAuthArg();

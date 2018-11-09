@@ -1,4 +1,4 @@
-import ManagerApi from "services/api-client/manager-api";
+import ManagerApi from "shared/services/api-client/manager-api";
 
 export const MANAGER_PROFILE = "MANAGER_PROFILE";
 

@@ -1,4 +1,4 @@
-import Dialog from "components/dialog/dialog";
+import Dialog from "shared/components/dialog/dialog";
 import PropTypes from "prop-types";
 import React from "react";
 import { connect } from "react-redux";

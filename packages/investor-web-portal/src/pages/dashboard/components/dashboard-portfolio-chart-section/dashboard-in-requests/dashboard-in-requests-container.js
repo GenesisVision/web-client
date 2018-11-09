@@ -1,8 +1,8 @@
 import "./dashboard-in-requests.scss";
 
-import { ActionsCircleIcon } from "components/icon/actions-circle-icon";
-import Popover from "components/popover/popover";
-import StatisticItem from "components/statistic-item/statistic-item";
+import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
+import Popover from "shared/components/popover/popover";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
 import React, { PureComponent } from "react";
 import Scrollbars from "react-custom-scrollbars";
 import { translate } from "react-i18next";

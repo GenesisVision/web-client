@@ -1,10 +1,10 @@
-import Profitability from "components/profitability/profitability";
-import StatisticItem from "components/statistic-item/statistic-item";
+import Profitability from "shared/components/profitability/profitability";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 
-import { formatValue } from "../../../../../utils/formatter";
+import { formatValue } from "shared/utils/formatter";
 
 const DashboardPortfolioChartStat = ({
   t,

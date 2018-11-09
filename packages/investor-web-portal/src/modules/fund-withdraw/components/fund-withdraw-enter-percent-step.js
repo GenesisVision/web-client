@@ -4,8 +4,8 @@ import { Fragment } from "react";
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { calculateValueOfEntryFee } from "utils/currency-converter";
-import { formatValue } from "utils/formatter";
+import { calculateValueOfEntryFee } from "shared/utils/currency-converter";
+import { formatValue } from "shared/utils/formatter";
 
 const FundWithdrawEnterPercentStep = props => {
   return (

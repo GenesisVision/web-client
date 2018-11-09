@@ -1,6 +1,6 @@
 import "./wallet-transactions.scss";
 
-import Surface from "components/surface/surface";
+import Surface from "shared/components/surface/surface";
 import { TableCell, TableRow } from "modules/table/components";
 import DateRangeFilter from "modules/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "modules/table/components/filtering/date-range-filter/date-range-filter.constants";
@@ -9,9 +9,9 @@ import moment from "moment";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import authService from "services/auth-service";
+import authService from "shared/services/auth-service";
 import EmptyTransactionsIcon from "shared/media/empty-wallet.svg";
-import { formatValue } from "utils/formatter";
+import { formatValue } from "shared/utils/formatter";
 
 import * as actions from "../../actions/wallet.actions";
 import {

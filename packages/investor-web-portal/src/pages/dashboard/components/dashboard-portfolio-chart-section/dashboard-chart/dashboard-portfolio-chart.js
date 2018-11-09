@@ -1,7 +1,7 @@
-import chartXAxis from "components/chart/chart-components/chart-xaxis";
+import chartXAxis from "shared/components/chart/chart-components/chart-xaxis";
 import ProgramChartGradient, {
   gradientOffset
-} from "components/chart/chart-gradient/chart-gradient";
+} from "shared/components/chart/chart-gradient/chart-gradient";
 import { GVColors } from "gv-react-components";
 import React, { PureComponent } from "react";
 import {

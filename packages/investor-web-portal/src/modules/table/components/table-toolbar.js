@@ -1,5 +1,5 @@
-import { CardsIcon } from "components/icon/cards-icon";
-import { TableIcon } from "components/icon/table-icon";
+import { CardsIcon } from "shared/components/icon/cards-icon";
+import { TableIcon } from "shared/components/icon/table-icon";
 import React, { Component } from "react";
 
 import SortingFilter from "./sorting/sorting-filter/sorting-filter";

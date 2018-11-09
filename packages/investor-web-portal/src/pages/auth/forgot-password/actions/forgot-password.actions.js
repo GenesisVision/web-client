@@ -1,4 +1,4 @@
-import AuthApi from "services/api-client/auth-api";
+import AuthApi from "shared/services/api-client/auth-api";
 
 export const FORGOT_PASSWORD = "FORGOT_PASSWORD";
 export const PASSWORD_RESTORE = "PASSWORD_RESTORE";

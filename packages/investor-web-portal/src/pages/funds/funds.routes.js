@@ -2,8 +2,8 @@ import NotFoundPage from "pages/not-found/not-found.routes";
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
-import { SLUG_URL_REGEXP } from "../../utils/constants";
-import replaceParams from "../../utils/replace-params";
+import { SLUG_URL_REGEXP } from "shared/utils/constants";
+import replaceParams from "shared/utils/replace-params";
 import PrivateRoute from "../private-route";
 import FundDetailsPage from "./fund-details/fund-details.page";
 import FundsFacetPage from "./funds-facet/funds-facet.page";

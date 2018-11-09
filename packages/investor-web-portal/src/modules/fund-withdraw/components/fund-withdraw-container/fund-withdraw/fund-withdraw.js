@@ -1,7 +1,7 @@
 import "./fund-withdraw.scss";
 
-import DaysLeftWidget from "components/days-left-widget/days-left-widget";
-import TraderAvatar from "components/program-avatar/program-avatar";
+import DaysLeftWidget from "shared/components/days-left-widget/days-left-widget";
+import TraderAvatar from "shared/components/program-avatar/program-avatar";
 import { Field, withFormik } from "formik";
 import PopupButtons from "popup/components/popup-buttons/popup-buttons";
 import PopupHeader from "popup/components/popup-header/popup-header";

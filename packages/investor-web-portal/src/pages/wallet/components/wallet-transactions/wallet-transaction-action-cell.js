@@ -1,5 +1,5 @@
-import { ActionsCircleIcon } from "components/icon/actions-circle-icon";
-import Popover from "components/popover/popover";
+import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
+import Popover from "shared/components/popover/popover";
 import { GVButton } from "gv-react-components";
 import React, { Component } from "react";
 import { translate } from "react-i18next";

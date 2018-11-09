@@ -1,6 +1,6 @@
 import "./program-trades.scss";
 
-import Profitability from "components/profitability/profitability";
+import Profitability from "shared/components/profitability/profitability";
 import { TableCell, TableRow } from "modules/table/components";
 import DateRangeFilter from "modules/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "modules/table/components/filtering/date-range-filter/date-range-filter.constants";
@@ -10,9 +10,9 @@ import moment from "moment";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { formatValue } from "utils/formatter";
+import { formatValue } from "shared/utils/formatter";
 
-import BaseProfitability from "../../../../../../components/profitability/base-profitability";
+import BaseProfitability from "shared/components/profitability/base-profitability";
 import {
   PROGRAM_TRADES_COLUMNS,
   PROGRAM_TRADES_DEFAULT_FILTERS,

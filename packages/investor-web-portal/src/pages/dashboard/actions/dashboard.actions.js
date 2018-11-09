@@ -1,4 +1,4 @@
-import investorApi from "services/api-client/investor-api";
+import investorApi from "shared/services/api-client/investor-api";
 
 export const DASHBOARD_PORTFOLIO_CHART = "DASHBOARD_PORTFOLIO_CHART";
 export const DASHBOARD_PORTFOLIO_EVENTS = "DASHBOARD_PORTFOLIO_EVENTS";

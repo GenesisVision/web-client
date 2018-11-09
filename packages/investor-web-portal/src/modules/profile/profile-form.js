@@ -1,9 +1,9 @@
 import "./profile.scss";
 
-import Dialog from "components/dialog/dialog";
-import FileLabel from "components/file-label/file-label";
-import GVDatePicker from "components/gv-datepicker/gv-datepicker";
-import VerificationStatus from "components/verification-status/verification-status";
+import Dialog from "shared/components/dialog/dialog";
+import FileLabel from "shared/components/file-label/file-label";
+import GVDatePicker from "shared/components/gv-datepicker/gv-datepicker";
+import VerificationStatus from "shared/components/verification-status/verification-status";
 import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import PhoneVerification from "modules/phone-verification/phone-verification";

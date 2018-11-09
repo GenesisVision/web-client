@@ -1,4 +1,4 @@
-import Dialog from "components/dialog/dialog";
+import Dialog from "shared/components/dialog/dialog";
 import FundWithdrawPopup from "modules/fund-withdraw/components/fund-withdraw-popup";
 import {
   alert,
@@ -11,8 +11,8 @@ import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { compose } from "redux";
-import { investorApiProxy } from "services/api-client/investor-api";
-import authService from "services/auth-service";
+import { investorApiProxy } from "shared/services/api-client/investor-api";
+import authService from "shared/services/auth-service";
 
 class FundWithdrawContainer extends PureComponent {
   state = { error: "" };

@@ -1,5 +1,5 @@
-import { fundsApiProxy } from "services/api-client/funds-api";
-import authService from "services/auth-service";
+import { fundsApiProxy } from "shared/services/api-client/funds-api";
+import authService from "shared/services/auth-service";
 
 import {
   addFavoriteFund,

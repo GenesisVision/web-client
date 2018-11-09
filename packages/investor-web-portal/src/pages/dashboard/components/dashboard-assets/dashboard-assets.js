@@ -1,6 +1,6 @@
 import "./dashboard-assets.scss";
 
-import Surface from "components/surface/surface";
+import Surface from "shared/components/surface/surface";
 import { GVTab, GVTabs } from "gv-react-components";
 import React, { Component } from "react";
 

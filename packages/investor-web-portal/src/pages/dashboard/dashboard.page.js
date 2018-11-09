@@ -3,7 +3,7 @@ import "./dashboard.scss";
 import React from "react";
 import { translate } from "react-i18next";
 
-import Page from "../../components/page/page";
+import Page from "shared/components/page/page";
 import DashboardAssets from "./components/dashboard-assets/dashboard-assets";
 import DashboardChartSection from "./components/dashboard-portfolio-chart-section/dashboard-portfolio-chart-section";
 import DashboardPortfolioEventsContainer from "./components/dashboard-portfolio-events/dashboard-portfolio-events-container";

@@ -1,15 +1,15 @@
-import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
-import Profitability from "components/profitability/profitability";
-import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
-import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
-import Tooltip from "components/tooltip/tooltip";
+import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import Profitability from "shared/components/profitability/profitability";
+import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
+import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
+import Tooltip from "shared/components/tooltip/tooltip";
 import { GVButton } from "gv-react-components";
 import FavoriteIcon from "modules/favorite-asset/components/favorite-icon/favorite-icon";
 import { TableCell, TableRow } from "modules/table/components";
 import React from "react";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
-import { formatValue } from "utils/formatter";
+import { formatValue } from "shared/utils/formatter";
 
 import { composeProgramDetailsUrl } from "../../../../pages/programs/programs.routes";
 

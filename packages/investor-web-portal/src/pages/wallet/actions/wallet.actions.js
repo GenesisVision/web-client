@@ -1,4 +1,4 @@
-import walletApi from "services/api-client/wallet-api";
+import walletApi from "shared/services/api-client/wallet-api";
 
 export const WALLET_BALANCE = "WALLET_BALANCE";
 export const WALLET_TRANSACTIONS = "WALLET_TRANSACTIONS";

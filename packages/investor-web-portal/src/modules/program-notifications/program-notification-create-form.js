@@ -1,4 +1,4 @@
-import Select from "components/select/select";
+import Select from "shared/components/select/select";
 import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import React, { Component } from "react";

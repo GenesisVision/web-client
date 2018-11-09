@@ -1,6 +1,6 @@
 import "./wallet-balance.scss";
 
-import StatisticItem from "components/statistic-item/statistic-item";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { GVButton } from "gv-react-components";
 import React from "react";
 import { translate } from "react-i18next";

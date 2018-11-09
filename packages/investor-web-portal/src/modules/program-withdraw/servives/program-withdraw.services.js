@@ -1,5 +1,5 @@
-import { investorApiProxy } from "services/api-client/investor-api";
-import authService from "services/auth-service";
+import { investorApiProxy } from "shared/services/api-client/investor-api";
+import authService from "shared/services/auth-service";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
 export const getProgramWithdrawInfo = id => (dispatch, getState) => {

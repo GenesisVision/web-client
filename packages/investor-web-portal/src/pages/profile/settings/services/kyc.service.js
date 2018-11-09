@@ -1,6 +1,6 @@
-import { profileApiProxy } from "services/api-client/profile-api";
+import { profileApiProxy } from "shared/services/api-client/profile-api";
 
-import authService from "../../../../services/auth-service";
+import authService from "shared/services/auth-service";
 
 export const loadKycIFrame = () => {
   const authorization = authService.getAuthArg();

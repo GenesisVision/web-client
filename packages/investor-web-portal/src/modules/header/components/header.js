@@ -1,12 +1,12 @@
 import "./header.scss";
 
-import { MenuIcon } from "components/icon/icon";
-import { SearchIcon } from "components/icon/search-icon";
-import Navigation from "components/navigation/navigation";
-import NavigationMobile from "components/navigation/navigation-mobile/navigation-mobile";
-import NorificationsWidget from "components/notifications-widget/notifications-widget";
-import ProfileWidget from "components/profile-widget/profile-widget";
-import WalletWidget from "components/wallet-widget/wallet-widget";
+import { MenuIcon } from "shared/components/icon/icon";
+import { SearchIcon } from "shared/components/icon/search-icon";
+import Navigation from "shared/components/navigation/navigation";
+import NavigationMobile from "shared/components/navigation/navigation-mobile/navigation-mobile";
+import NorificationsWidget from "shared/components/notifications-widget/notifications-widget";
+import ProfileWidget from "shared/components/profile-widget/profile-widget";
+import WalletWidget from "shared/components/wallet-widget/wallet-widget";
 import { GVButton } from "gv-react-components";
 import CurrencySelectContainer from "modules/currency-select/components/currency-select-container";
 import { LOGIN_ROUTE } from "pages/auth/login/login.routes";

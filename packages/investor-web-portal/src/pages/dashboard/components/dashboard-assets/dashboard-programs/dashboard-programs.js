@@ -1,8 +1,8 @@
 import "./dashboard-programs.scss";
 
-import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
-import ProgramPeriodEnd from "components/program-period/program-period-end/program-period-end";
-import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
+import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import ProgramPeriodEnd from "shared/components/program-period/program-period-end/program-period-end";
+import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import { GVButton } from "gv-react-components";
 import { TableCell, TableRow } from "modules/table/components";
 import DateRangeFilter from "modules/table/components/filtering/date-range-filter/date-range-filter";
@@ -15,7 +15,7 @@ import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
-import { formatPercent, formatValue } from "utils/formatter";
+import { formatPercent, formatValue } from "shared/utils/formatter";
 
 import {
   DASHBOARD_PROGRAMS_COLUMNS,

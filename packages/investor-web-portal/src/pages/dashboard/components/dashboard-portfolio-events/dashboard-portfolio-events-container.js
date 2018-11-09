@@ -1,4 +1,4 @@
-import Surface from "components/surface/surface";
+import Surface from "shared/components/surface/surface";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";

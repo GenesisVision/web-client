@@ -3,7 +3,7 @@ import authActions from "actions/auth-actions";
 import { HOME_ROUTE } from "pages/app/app.routes";
 import { LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "pages/auth/login/login.routes";
 import { push } from "react-router-redux";
-import authService from "services/auth-service";
+import authService from "shared/services/auth-service";
 import clearDataActionFactory from "shared/actions/clear-data.factory";
 
 import {

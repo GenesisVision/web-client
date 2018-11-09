@@ -1,13 +1,13 @@
 import "./fund-details-investment.scss";
 
-import ProgramStatus from "components/program-status/program-status";
-import Surface from "components/surface/surface";
+import ProgramStatus from "shared/components/program-status/program-status";
+import Surface from "shared/components/surface/surface";
 import { GVButton } from "gv-react-components";
 import FundWithdrawContainer from "modules/fund-withdraw/fund-withdraw-container";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { formatValue } from "utils/formatter";
+import { formatValue } from "shared/utils/formatter";
 
 class FundDetailsInvestment extends PureComponent {
   state = {

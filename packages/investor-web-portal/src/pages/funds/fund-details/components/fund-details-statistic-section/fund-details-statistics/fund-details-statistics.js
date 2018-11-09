@@ -1,7 +1,7 @@
 import "./fund-details-statistics.scss";
 
-import { ChartPeriodType } from "components/chart/chart-period/chart-period.helpers";
-import Surface from "components/surface/surface";
+import { ChartPeriodType } from "shared/components/chart/chart-period/chart-period.helpers";
+import Surface from "shared/components/surface/surface";
 import moment from "moment";
 import React from "react";
 import { translate } from "react-i18next";

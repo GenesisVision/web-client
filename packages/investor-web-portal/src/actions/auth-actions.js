@@ -1,7 +1,7 @@
 import { HOME_ROUTE } from "pages/app/app.routes";
-import authService from "services/auth-service";
+import authService from "shared/services/auth-service";
 
-import history from "../utils/history";
+import history from "shared/utils/history";
 
 export const UPDATE_TOKEN = "UPDATE_TOKEN";
 

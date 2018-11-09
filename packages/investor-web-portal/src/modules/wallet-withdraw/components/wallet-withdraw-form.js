@@ -1,6 +1,6 @@
 import "./wallet-withdraw-form.scss";
 
-import Select from "components/select/select";
+import Select from "shared/components/select/select";
 import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import PropTypes from "prop-types";
@@ -8,8 +8,8 @@ import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
-import { convertFromCurrency } from "utils/currency-converter";
-import { formatValue } from "utils/formatter";
+import { convertFromCurrency } from "shared/utils/currency-converter";
+import { formatValue } from "shared/utils/formatter";
 import { number, object, string } from "yup";
 import { ethWalletValidator } from "shared/utils/validators/validators";
 

@@ -1,4 +1,4 @@
-import { RingIcon } from "components/icon/ring-icon";
+import { RingIcon } from "shared/components/icon/ring-icon";
 import React from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";

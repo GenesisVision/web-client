@@ -1,4 +1,4 @@
-import getParams from "utils/get-params";
+import getParams from "shared/utils/get-params";
 
 import {
   FUNDS_FACET_ROUTE,

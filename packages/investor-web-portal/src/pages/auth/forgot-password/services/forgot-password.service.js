@@ -7,7 +7,7 @@ import {
   PASSWORD_RESTORE_ROUTE
 } from "pages/auth/forgot-password/forgot-password.routes";
 import { push } from "react-router-redux";
-import authService from "services/auth-service";
+import authService from "shared/services/auth-service";
 import clearDataActionFactory from "shared/actions/clear-data.factory";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 

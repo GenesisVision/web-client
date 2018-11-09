@@ -1,6 +1,6 @@
 import "./profile.scss";
 
-import VerificationStatus from "components/verification-status/verification-status";
+import VerificationStatus from "shared/components/verification-status/verification-status";
 import { GVTextField } from "gv-react-components";
 import PropTypes from "prop-types";
 import React, { Component } from "react";

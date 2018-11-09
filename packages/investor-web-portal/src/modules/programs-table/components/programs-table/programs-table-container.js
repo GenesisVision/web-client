@@ -1,4 +1,4 @@
-import Surface from "components/surface/surface";
+import Surface from "shared/components/surface/surface";
 import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
 import React, { Component } from "react";
 import { connect } from "react-redux";

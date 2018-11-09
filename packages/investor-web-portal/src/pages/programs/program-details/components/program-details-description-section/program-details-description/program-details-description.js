@@ -1,7 +1,7 @@
 import "./program-details-description.scss";
 
-import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
-import Popover from "components/popover/popover";
+import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import Popover from "shared/components/popover/popover";
 import { GVButton } from "gv-react-components";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
@@ -13,8 +13,8 @@ import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
-import { formatValue } from "utils/formatter";
-import replaceParams from "utils/replace-params";
+import { formatValue } from "shared/utils/formatter";
+import replaceParams from "shared/utils/replace-params";
 
 import ProgramDetailsInvestment from "../program-details-investment/program-details-investment";
 import ProgramDetailsFavorite from "./program-details-favorite";

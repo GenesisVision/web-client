@@ -1,4 +1,4 @@
-import Dialog from "components/dialog/dialog";
+import Dialog from "shared/components/dialog/dialog";
 import {
   clearDepositProgramInfo,
   clearInvestSubmit

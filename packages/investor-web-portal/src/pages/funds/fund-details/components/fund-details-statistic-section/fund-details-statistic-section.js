@@ -3,7 +3,7 @@ import "./fund-details-statistic-section.scss";
 import {
   ChartPeriodType,
   getPeriodStartDate
-} from "components/chart/chart-period/chart-period.helpers";
+} from "shared/components/chart/chart-period/chart-period.helpers";
 import moment from "moment";
 import React, { PureComponent } from "react";
 

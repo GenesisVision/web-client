@@ -1,4 +1,4 @@
-import programApi from "services/api-client/programs-api";
+import programApi from "shared/services/api-client/programs-api";
 
 export const PROGRAMS = "PROGRAMS";
 
