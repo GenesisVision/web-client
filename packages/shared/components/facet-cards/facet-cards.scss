@@ -1,0 +1,138 @@
+@import "shared/styles/_colors.scss";
+@import "shared/styles/_breakpoint.scss";
+@media (max-width: 1360px) {
+  .facets-shadow {
+    &:after {
+      background: linear-gradient(
+        90deg,
+        rgba($background-color, 0),
+        $background-color
+      );
+    }
+  }
+  .facets {
+    &:after {
+      content: "a";
+    }
+  }
+}
+@media (min-width: 1360px) {
+  .facets {
+    &:after {
+      content: "";
+    }
+  }
+}
+$__title-font-size: 24px;
+$__description-font-size: 14px;
+$facet-padding: 30px;
+$facet-margin: 33px;
+$facet-width: 315px;
+$facet-height: 280px;
+
+.facets-shadow {
+  position: relative;
+  height: $facet-height/1.5;
+  margin: $facet-margin/2 0;
+  overflow: hidden;
+  &:after {
+    position: absolute;
+    content: "";
+    top: 0;
+    right: -1px;
+    width: 50px;
+    height: 100%;
+  }
+  @include media-breakpoint-landscape-phone() {
+    margin: $facet-margin 0;
+    height: $facet-height;
+  }
+}
+
+.facets {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+  & {
+    -ms-overflow-style: none;
+  }
+  &::after {
+    opacity: 0;
+  }
+}
+
+.facet {
+  box-sizing: border-box;
+  background-color: #1c2730; // temporary
+  height: $facet-height/1.5;
+  min-width: $facet-width/1.5;
+  margin-right: $facet-margin/2;
+  overflow: hidden;
+
+  @include media-breakpoint-desktop() {
+    min-width: auto;
+  }
+  @include media-breakpoint-landscape-phone() {
+    margin-right: $facet-margin;
+    min-width: $facet-width;
+    height: $facet-height;
+  }
+
+  &:last-child {
+    margin-right: 100px;
+  }
+
+  &__logo-wrapper {
+    max-height: 65%;
+    margin: auto;
+  }
+
+  &__logo {
+    width: 100%;
+    max-width: 315px;
+    object-fit: cover;
+  }
+
+  &__info {
+    padding: $facet-padding / 2 $facet-padding;
+    @include media-breakpoint-tablet() {
+      padding: $facet-padding * 3/4 $facet-padding;
+    }
+  }
+
+  &__facet-container {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+
+  &__title {
+    font-size: $__title-font-size/1.5;
+    color: $text-color;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $__title-font-size;
+    }
+  }
+
+  &__description {
+    font-size: $__description-font-size/1.3;
+    font-weight: 300;
+    line-height: 1.57;
+    letter-spacing: 0.2px;
+    color: $primary-color;
+    margin-top: $facet-padding/4;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $__description-font-size;
+    }
+  }
+
+  &:not(.facet--stub) {
+    cursor: pointer;
+  }
+}
