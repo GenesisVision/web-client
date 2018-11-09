@@ -1,10 +1,12 @@
 import "./password-change.scss";
 
+import authActions from "actions/auth-actions";
 import PasswordChangeForm from "modules/password-change/password-change-form";
-import { logout } from "pages/auth/login/services/login.service";
+import { SETTINGS_ROUTE } from "pages/profile/profile.constants";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
+import { push } from "react-router-redux";
 import { compose } from "redux";
 import { authApiProxy } from "shared/services/api-client/auth-api";
 import authService from "shared/services/auth-service";
@@ -22,8 +24,11 @@ class PasswordChange extends Component {
     dispatch(alertMessageActions.success(text));
   };
 
-  logout = () => {
-    this.props.dispatch(logout());
+  updateToken = token => {
+    authService.storeToken(token);
+    this.props.dispatch(authActions.updateToken());
+    this.props.dispatch(push(SETTINGS_ROUTE));
+    this.success(this.props.t("password-change.success-alert"));
   };
 
   handleSubmit = model => {
@@ -32,10 +37,9 @@ class PasswordChange extends Component {
       .v10AuthPasswordChangePost(authService.getAuthArg(), {
         model
       })
-      .then(data => {
-        this.logout();
-        this.setState({ ...data });
-        this.success(this.props.t("password-change.success-alert"));
+      .then(({ data }) => {
+        this.updateToken(data);
+        this.setState({ isPending: false });
       })
       .catch(data => {
         this.setState({ ...data });
@@ -52,8 +56,6 @@ class PasswordChange extends Component {
     );
   }
 }
-
-PasswordChange.propTypes = {};
 
 export default compose(
   connect(),
