@@ -61,16 +61,13 @@ class FundDetailsDescriptionSection extends PureComponent {
       fundDescription: composeNewFavoriteState()
     });
     toggleFavoriteFund(id, isFavorite)
-      .catch(e => {
+      .then(() => this.setState({ ui: { ...ui, isFavoritePending: false } }))
+      .catch(e =>
         this.setState({
-          fundDescription: composeNewFavoriteState(isFavorite)
-        });
-      })
-      .finally(() => {
-        this.setState({
+          fundDescription: composeNewFavoriteState(isFavorite),
           ui: { ...ui, isFavoritePending: false }
-        });
-      });
+        })
+      );
   };
 
   render() {

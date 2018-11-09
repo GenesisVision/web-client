@@ -10,7 +10,8 @@
     background-color: $table-background-subcolor;
   }
 
-  &__cell, &__head-cell {
+  &__cell,
+  &__head-cell {
     font-size: $font-size-middle-mobile;
     @include media-breakpoint-landscape-phone() {
       font-size: $font-size-middle;

@@ -22,16 +22,18 @@ class Select extends Component {
 
   input = React.createRef();
 
-  handleChildClick = child => event => {
+  handleChildClick = child => ({ event, isSelected }) => {
     const { onChange, name } = this.props;
     const { value } = child.props;
+    if (!isSelected) {
+      event.persist();
+      event.target = { value, name };
 
-    event.persist();
-    event.target = { value, name };
-
-    if (onChange) {
-      onChange(event, child);
+      if (onChange) {
+        onChange(event, child);
+      }
     }
+
     this.handleClose();
   };
 

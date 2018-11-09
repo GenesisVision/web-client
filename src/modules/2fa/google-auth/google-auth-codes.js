@@ -32,23 +32,21 @@ const GoogleAuth = ({ t, codes, notifySuccess, notifyError }) => {
     }
   };
   return (
-    <div className="dialog codes">
-      <div className="dialog__top">
-        <div className="dialog__header">
-          <h2>{t("2fa.codes.title")}</h2>
-        </div>
-        <p>{t("2fa.codes.successfully")}</p>
-        <p>{t("2fa.codes.recovery_codes")}</p>
-        <CodeList codes={codes} />
-        <div className="dialog__buttons">
-          <GVButton color="secondary" onClick={onCopy}>
-            <CopyIcon />
-            &nbsp;
-            {t("buttons.copy")}
-          </GVButton>
-        </div>
-        <p>{t("2fa.codes.warning")}</p>
+    <div className="dialog__top">
+      <div className="dialog__header">
+        <h2>{t("2fa.codes.title")}</h2>
       </div>
+      <p>{t("2fa.codes.successfully")}</p>
+      <p>{t("2fa.codes.recovery_codes")}</p>
+      <CodeList codes={codes} />
+      <div className="dialog__buttons">
+        <GVButton color="secondary" onClick={onCopy}>
+          <CopyIcon />
+          &nbsp;
+          {t("buttons.copy")}
+        </GVButton>
+      </div>
+      <p className="dialog__info">{t("2fa.codes.warning")}</p>
     </div>
   );
 };

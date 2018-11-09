@@ -10,7 +10,7 @@
   margin-top: 30px;
   min-height: 1em;
   padding-bottom: $padding-middle-mobile;
-  @include media-breakpoint-landscape-phone(){
+  @include media-breakpoint-landscape-phone() {
     padding-bottom: $padding-middle;
   }
 
@@ -45,7 +45,7 @@
     font-size: $font-size-small-mobile;
     font-weight: 600;
     letter-spacing: 0;
-    @include media-breakpoint-landscape-phone(){
+    @include media-breakpoint-landscape-phone() {
       font-size: $font-size-middle;
       letter-spacing: 0.2px;
     }

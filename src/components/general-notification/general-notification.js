@@ -25,7 +25,8 @@ class GeneralNotification extends Component {
         type: this.props.name,
         assetId: this.props.assetId
       })
-      .finally(() => this.setState({ isPending: false }));
+      .then(() => this.setState({ isPending: false }))
+      .catch(() => this.setState({ isPending: false }));
   };
 
   removeNotification = () => {
@@ -36,7 +37,8 @@ class GeneralNotification extends Component {
         assetId: this.props.assetId,
         type: this.props.name
       })
-      .finally(() => this.setState({ isPending: false }));
+      .then(() => this.setState({ isPending: false }))
+      .catch(() => this.setState({ isPending: false }));
   };
 
   render() {

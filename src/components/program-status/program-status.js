@@ -1,11 +1,11 @@
 import "./program-status.scss";
 
-import classNames from "classnames";
+import classnames from "classnames";
 import React from "react";
 import { translate } from "react-i18next";
 
 const getStatusClassName = (status, className) => {
-  return classNames("program-status", className, {
+  return classnames("program-status", className, {
     "program-status__active": status === "Active",
     "program-status__investing": status === "Investing",
     "program-status__withdrawing": status === "Withdrawing",

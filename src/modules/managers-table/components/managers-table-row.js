@@ -6,8 +6,8 @@ import { TableCell, TableRow } from "modules/table/components";
 import moment from "moment";
 import { composeManagerDetailsUrl } from "pages/manager/manager.page";
 import React from "react";
-import { Link } from "react-router-dom";
 import { translate } from "react-i18next";
+import { Link } from "react-router-dom";
 
 const ManagersTableRow = ({ t, manager, title }) => {
   return (

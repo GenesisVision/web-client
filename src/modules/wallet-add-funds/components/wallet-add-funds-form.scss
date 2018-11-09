@@ -1,4 +1,5 @@
 @import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
 
 .wallet-add-funds-popup {
   &__title {
@@ -9,9 +10,14 @@
     margin-bottom: 12px;
   }
   &__value {
-    font-size: 13px;
+    font-size: 11px;
     letter-spacing: 0.4px;
     margin-bottom: 32px;
+    text-align: center;
+
+    @include media-breakpoint-landscape-phone() {
+      font-size: 13px;
+    }
   }
   &__qr {
     margin-bottom: 32px;
