@@ -46,7 +46,7 @@
     "redux-thunk": "^2.2.0",
     "reselect": "^3.0.1",
     "uuid": "^3.2.1",
-    "yup": "^0.25.1"
+    "yup": "^0.26.6"
   },
   "devDependencies": {
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
