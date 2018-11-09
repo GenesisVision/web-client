@@ -1,0 +1,55 @@
+@import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
+
+.dashboard-statistic {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.dashboard-card {
+  flex: 1 1;
+  margin: 2rem;
+  padding: 1rem;
+  border-color: white;
+  box-shadow: 0 70px 70px 0 $box-shadow-color;
+  min-width: 20%;
+
+  &:first-of-type {
+    margin-left: 0;
+  }
+  &:last-of-type {
+    margin-right: 0;
+  }
+
+  @include media-breakpoint-phone() {
+    min-width: 300px;
+    &:first-of-type {
+      min-width: 300px;
+      margin-left: 2rem;
+    }
+    &:last-of-type {
+      margin-right: 2rem;
+    }
+  }
+}
+
+.dashboard-card__body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.dashboard-card__header {
+  font-size: 1.4rem;
+}
+
+.dashboard-card__image {
+  display: flex;
+  min-height: 170px;
+}
+
+.dashboard-card .days-left-widget {
+  flex-direction: column;
+}

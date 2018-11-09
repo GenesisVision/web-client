@@ -1,0 +1,20 @@
+@import "styles/_breakpoint.scss";
+
+.program-list-filter-pane {
+  flex: 1;
+  max-width: 300px;
+  @include media-breakpoint-desktop() {
+    position: fixed;
+    top: 68px;
+    bottom: 0;
+    right: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  @include media-breakpoint-phone() {
+    padding-bottom: 72px; /*fix for iphone*/
+    top: 0;
+    max-width: 100%;
+  }
+}

@@ -1,0 +1,47 @@
+@import "styles/_colors.scss";
+@import "styles/_sizes.scss";
+@import "styles/_breakpoint.scss";
+
+.fund-asset-ratio {
+  display: block;
+  position: relative;
+
+  &__values {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: $padding-mini;
+  }
+  &__value {
+    font-size: $font-size-small-mobile;
+    opacity: 0.4;
+    @include media-breakpoint-phone() {
+      font-size: $font-size-small;
+    }
+    &--full {
+      opacity: 1;
+    }
+  }
+
+  &--pie {
+    width: 20px;
+    height: 20px;
+  }
+
+  &--line {
+    height: 2px;
+    background-color: #2a353f;
+    border-radius: 0.25rem;
+    width: 100%;
+
+    .fund-asset-ratio__value {
+      height: 3px;
+      border-radius: 0.25rem;
+    }
+  }
+  &--item-line {
+    height: 3px;
+    border-radius: 0.25rem;
+    position: absolute;
+  }
+}

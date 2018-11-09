@@ -1,0 +1,9 @@
+@import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
+@import "styles/_sizes.scss";
+
+.close-program-popup {
+  @include media-breakpoint-landscape-phone() {
+    min-width: 400px;
+  }
+}

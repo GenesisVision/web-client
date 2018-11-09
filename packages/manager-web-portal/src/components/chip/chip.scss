@@ -1,0 +1,47 @@
+@import "styles/_colors.scss";
+@import "styles/_constants.scss";
+
+.chip {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 36px;
+  border-radius: 8px;
+  padding: 7px 13px;
+  box-sizing: border-box;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  background-color: $secondary-background-color;
+  box-shadow: $box-shadow-1;
+  cursor: default;
+
+  &--negative {
+    color: $negative-color;
+    background-color: rgba($negative-color, 0.1);
+  }
+
+  &--positive {
+    color: $primary-color;
+    background-color: rgba($primary-color, 0.1);
+  }
+
+  &--warning {
+    color: $warning-color;
+    background-color: $warning-background-color;
+  }
+
+  &--pointer {
+    cursor: pointer;
+  }
+
+  &--rounded {
+    border-radius: 2rem;
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+  }
+}

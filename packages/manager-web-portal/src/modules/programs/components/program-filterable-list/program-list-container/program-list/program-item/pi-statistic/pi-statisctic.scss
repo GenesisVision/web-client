@@ -1,0 +1,25 @@
+@import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
+
+.pi-statistic {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  hr {
+    display: none;
+  }
+
+  @include media-breakpoint-phone() {
+    flex-wrap: wrap;
+    max-height: 100px;
+    margin-top: 1rem;
+    hr {
+      margin: 0.5rem 0;
+      display: flex;
+      flex: 1 0 100%;
+    }
+  }
+}

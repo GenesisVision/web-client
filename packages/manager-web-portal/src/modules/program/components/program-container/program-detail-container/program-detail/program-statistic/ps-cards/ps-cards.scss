@@ -1,0 +1,72 @@
+@import "styles/_breakpoint.scss";
+.program-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.program-card {
+  flex: 1;
+  margin: 2rem;
+  border-color: white;
+  box-shadow: 0 70px 70px 0 rgba(194, 207, 212, 0.32);
+  &:first-of-type {
+    margin-left: 0;
+  }
+  &:last-of-type {
+    margin-right: 0;
+  }
+
+  @include media-breakpoint-phone() {
+    min-width: 100px;
+    &:first-of-type {
+      min-width: 300px;
+      margin-left: 2rem;
+    }
+    &:last-of-type {
+      margin-right: 2rem;
+    }
+  }
+}
+
+.program-card__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem;
+  @include media-breakpoint-phone() {
+    padding: 1rem;
+  }
+}
+
+.program-card__image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-height: 150px;
+  @include media-breakpoint-phone() {
+    min-height: initial;
+    img {
+      height: 50px;
+    }
+  }
+}
+.program-card__value {
+  display: flex;
+  font-size: 4rem;
+  @include media-breakpoint-desktop() {
+    font-size: 3rem;
+  }
+  @include media-breakpoint-phone() {
+    font-size: 2rem;
+  }
+}
+.program-card__description {
+  line-height: 0;
+}
+
+.program-card__bubble {
+  margin-top: 1rem;
+}

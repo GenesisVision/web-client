@@ -1,0 +1,60 @@
+@import "styles/_colors.scss";
+
+.portfolio-event-logo {
+  width: 44px;
+  height: 44px;
+  position: relative;
+
+  &__type {
+    box-sizing: border-box;
+    width: 28px;
+    height: 28px;
+    border-radius: 18px;
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    z-index: 1;
+    line-height: 28px;
+    text-align: center;
+  }
+
+  &__photo {
+    box-sizing: border-box;
+    width: 32px;
+    height: 32px;
+    border: solid 2px #1c2730;
+    border-radius: 18px;
+    background-color: #27323a;
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    line-height: 28px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  &__wallet {
+    height: 12px;
+    width: 12px;
+  }
+
+  &__logo {
+    height: 28px;
+    width: 28px;
+  }
+
+  &--positive {
+    & .portfolio-event-logo__type {
+      background-color: $positive-background-color;
+      color: $positive-color;
+    }
+  }
+
+  &--negative {
+    & .portfolio-event-logo__type {
+      background-color: $negative-background-color;
+      color: $negative-color;
+    }
+  }
+}

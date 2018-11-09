@@ -1,0 +1,47 @@
+@import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
+@import "styles/_sizes.scss";
+
+$regulator-width: 120px;
+$regulator-height: 25px;
+$regulator-button-font-size: 28px;
+
+.regulator {
+  padding: 0 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 3.6px;
+  background-color: #2d373f;
+  min-width: $regulator-width/$divider-text;
+  height: $regulator-height/1.2;
+  @include media-breakpoint-landscape-phone() {
+    min-width: $regulator-width;
+    height: $regulator-height;
+  }
+  &,
+  & div {
+    box-sizing: border-box;
+  }
+  &--mute {
+    background-color: #202b34;
+    color: rgba(255, 255, 255, 0.3);
+  }
+  &__button {
+    padding: 0 7px;
+    color: #14beb4;
+    font-size: $regulator-button-font-size/$divider-text;
+    font-weight: 100;
+    user-select: none;
+    cursor: pointer;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $regulator-button-font-size;
+    }
+  }
+  &__indicator {
+    font-size: $font-size-middle-mobile;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-middle;
+    }
+  }
+}

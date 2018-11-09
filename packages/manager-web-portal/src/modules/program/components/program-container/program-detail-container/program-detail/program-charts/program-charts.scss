@@ -1,0 +1,43 @@
+@import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
+
+.program-charts {
+  margin-top: 2rem;
+}
+
+.program-charts__charts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  min-height: 430px;
+  padding: 2rem;
+  @include media-breakpoint-desktop() {
+    padding: 1rem;
+  }
+  @include media-breakpoint-phone() {
+    min-height: 250px;
+  }
+}
+
+.program-chart__bar {
+  flex: 2;
+  max-width: 60%;
+  @include media-breakpoint-desktop() {
+    min-width: 100%;
+    min-height: 430px;
+  }
+  @include media-breakpoint-phone() {
+    min-height: 250px;
+  }
+}
+
+.program-chart__pie {
+  flex: 1;
+  @include media-breakpoint-desktop() {
+    min-width: 100%;
+    min-height: 430px;
+  }
+  @include media-breakpoint-phone() {
+    display: none;
+  }
+}

@@ -1,0 +1,9 @@
+.link {
+  cursor: pointer;
+  color: $text-light-color;
+  &:hover {
+    padding-bottom: 0.1rem;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+  }
+}

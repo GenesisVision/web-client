@@ -1,0 +1,48 @@
+@import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
+
+.dashboard-program-card {
+  display: flex;
+  align-items: center;
+  flex: 1 1;
+  margin: 2rem;
+  padding: 2rem;
+  border-color: white;
+  box-shadow: 0 70px 70px 0 $box-shadow-color;
+  min-width: 400px;
+  max-width: 28%;
+  @include media-breakpoint-phone() {
+    min-width: 300px;
+    max-width: 100%;
+    margin: 0.5rem;
+  }
+}
+
+.dashboard-program-card__title {
+  display: flex;
+  justify-content: center;
+  font-size: 1.5rem;
+  max-width: 100%;
+  color: $text-color;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.dashboard-program-card__pending {
+  color: $inactive-icon-color;
+  line-height: inherit;
+}
+
+.dashboard-program-card__avatar {
+  width: 100px;
+  height: 100px;
+  margin: auto;
+}
+
+.dashboard-program-card__description {
+  max-width: 100%;
+}

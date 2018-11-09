@@ -1,0 +1,121 @@
+@import "styles/_colors.scss";
+
+$select-input-height: 32px;
+$select-input-border-radius: 0;
+$select-link-hover-color: $main-color;
+$select-arrow-color-hover: $alternate-color;
+$select-option-selected-color: $alternate-color;
+$select-option-selected-bg: $background-color;
+$select-option-focused-color: $alternate-color;
+$select-option-focused-bg: white;
+$select-menu-max-height: 210px;
+
+.gv-select {
+  @import "node_modules/react-select/scss/default.scss";
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.gv-select__invalid {
+  position: absolute;
+  bottom: -15px;
+  font-size: 12px;
+  line-height: 12px;
+  color: $danger-color;
+  transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
+
+.gv-select__label {
+  color: rgba(0, 0, 0, 0.87);
+
+  &.gv-select__label--error {
+    color: $danger-color;
+  }
+
+  &.gv-select__label--regular {
+    color: $alternate-color;
+  }
+}
+
+.gv-select__label--material {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+  z-index: 1;
+  transform: scale(1) translate(0px, 0px);
+  transform-origin: left top 0px;
+  pointer-events: none;
+  user-select: none;
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.gv-select--is-open,
+.gv-select--is-filled,
+.gv-select--has-error {
+  .gv-select__label--material {
+    transform: scale(0.75) translate(0px, -28px);
+  }
+
+  .gv-select__hr {
+    transform: scaleX(1);
+  }
+}
+
+.gv-select__hr {
+  border-top: none $alternate-color;
+  border-left: none $alternate-color;
+  border-right: none $alternate-color;
+  border-bottom: 2px solid $alternate-color;
+  bottom: 0;
+  box-sizing: content-box;
+  margin: 0px;
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
+
+.gv-select__hr-placeholder {
+  @extend .gv-select__hr;
+  transform: scaleX(1);
+  border-top: none $border-color;
+  border-left: none $border-color;
+  border-right: none $border-color;
+  border-bottom: 2px solid $border-color;
+}
+
+.gv-select__hr--error {
+  border-top: none $danger-color;
+  border-left: none $danger-color;
+  border-right: none $danger-color;
+  border-bottom: 2px solid $danger-color;
+}
+
+.gv-select__hr--regular {
+  border-top: none $alternate-color;
+  border-left: none $alternate-color;
+  border-right: none $alternate-color;
+  border-bottom: 2px solid $alternate-color;
+}
+
+.gv-select--material {
+  margin-top: 2rem;
+  .Select.is-focused > .Select-control {
+    background-color: transparent;
+  }
+  .Select-control {
+    background-color: transparent;
+    border: 0;
+
+    &:hover {
+      box-shadow: none;
+    }
+  }
+}
+
+.gv-select__help {
+  position: absolute;
+  left: -22px;
+  color: lighten($color: $main-color, $amount: 10%);
+}

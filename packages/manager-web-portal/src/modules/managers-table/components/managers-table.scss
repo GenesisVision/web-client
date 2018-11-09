@@ -1,0 +1,8 @@
+.managers-table {
+  &__cell {
+    &--username {
+      display: flex;
+      white-space: nowrap;
+    }
+  }
+}
