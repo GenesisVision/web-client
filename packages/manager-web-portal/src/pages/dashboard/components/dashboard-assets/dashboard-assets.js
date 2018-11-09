@@ -1,6 +1,6 @@
 import "./dashboard-assets.scss";
 
-import Surface from "components/surface/surface";
+import Surface from "shared/components/surface/surface";
 import { GVButton } from "gv-react-components";
 import { GVTab, GVTabs } from "gv-react-components";
 import { CREATE_FUND_PAGE_ROUTE } from "pages/create-fund/create-fund.constants";

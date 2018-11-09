@@ -1,5 +1,5 @@
-import ChartPeriod from "components/chart/chart-period/chart-period";
-import { DEFAULT_PERIOD } from "components/chart/chart-period/chart-period.helpers";
+import ChartPeriod from "shared/components/chart/chart-period/chart-period";
+import { DEFAULT_PERIOD } from "shared/components/chart/chart-period/chart-period.helpers";
 import React, { Fragment, PureComponent } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";

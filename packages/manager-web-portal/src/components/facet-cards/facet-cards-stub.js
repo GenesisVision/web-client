@@ -1,4 +1,4 @@
-import Surface from "components/surface/surface";
+import Surface from "shared/components/surface/surface";
 import React from "react";
 
 const facetsStub = [1, 2, 3, 4];

@@ -1,6 +1,6 @@
 import "./about-level.scss";
 
-import Dialog from "components/dialog/dialog";
+import Dialog from "shared/components/dialog/dialog";
 import CurrencySelect from "modules/currency-select/components/currency-select";
 import { CURRENCY_VALUES } from "modules/currency-select/currency-select.constants";
 import React, { Component } from "react";

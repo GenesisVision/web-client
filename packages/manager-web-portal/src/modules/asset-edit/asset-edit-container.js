@@ -1,4 +1,4 @@
-import Dialog from "components/dialog/dialog";
+import Dialog from "shared/components/dialog/dialog";
 import AssetEditPopup from "modules/asset-edit/components/asset-edit-popup";
 import { editAsset } from "modules/asset-edit/services/asset-edit.services";
 import PropTypes from "prop-types";

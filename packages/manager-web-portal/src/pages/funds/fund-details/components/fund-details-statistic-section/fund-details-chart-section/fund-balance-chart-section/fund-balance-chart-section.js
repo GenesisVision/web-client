@@ -1,5 +1,5 @@
-import ChartPeriod from "components/chart/chart-period/chart-period";
-import StatisticItem from "components/statistic-item/statistic-item";
+import ChartPeriod from "shared/components/chart/chart-period/chart-period";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
 import React, { Fragment } from "react";
 
 import FundBalanceChart from "./fund-balance-chart";

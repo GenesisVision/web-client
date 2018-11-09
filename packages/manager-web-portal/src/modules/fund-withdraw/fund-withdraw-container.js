@@ -1,4 +1,4 @@
-import Dialog from "components/dialog/dialog";
+import Dialog from "shared/components/dialog/dialog";
 import FundWithdrawPopup from "modules/fund-withdraw/components/fund-withdraw-popup";
 import {
   alert,

@@ -1,4 +1,4 @@
-import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
+import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 

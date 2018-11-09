@@ -1,6 +1,6 @@
-import GVqr from "components/gv-qr/gv-qr";
-import CopyIcon from "components/icon/copy-icon";
-import Select from "components/select/select";
+import GVqr from "shared/components/gv-qr/gv-qr";
+import CopyIcon from "shared/components/icon/copy-icon";
+import Select from "shared/components/select/select";
 import copy from "copy-to-clipboard";
 import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";

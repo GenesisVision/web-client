@@ -1,6 +1,6 @@
 import "./create-program-broker.scss";
 
-import Surface from "components/surface/surface";
+import Surface from "shared/components/surface/surface";
 import { GVButton } from "gv-react-components";
 import React from "react";
 import { translate } from "react-i18next";

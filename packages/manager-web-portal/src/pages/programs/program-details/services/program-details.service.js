@@ -1,4 +1,4 @@
-import { DEFAULT_PERIOD } from "components/chart/chart-period/chart-period.helpers";
+import { DEFAULT_PERIOD } from "shared/components/chart/chart-period/chart-period.helpers";
 import { DEFAULT_PAGING } from "modules/table/reducers/table-paging.reducer";
 import { composeRequestFilters } from "modules/table/services/table.service";
 import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";

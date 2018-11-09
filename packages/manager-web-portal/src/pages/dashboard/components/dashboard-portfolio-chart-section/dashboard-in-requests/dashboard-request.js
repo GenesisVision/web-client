@@ -1,4 +1,4 @@
-import ConfirmPopup from "components/confirm-popup/confirm-popup";
+import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import { GVButton } from "gv-react-components";
 import moment from "moment";
 import React, { Component } from "react";

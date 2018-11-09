@@ -1,4 +1,4 @@
-import CopyIcon from "components/icon/copy-icon";
+import CopyIcon from "shared/components/icon/copy-icon";
 import copy from "copy-to-clipboard";
 import { GVButton } from "gv-react-components";
 import PropTypes from "prop-types";

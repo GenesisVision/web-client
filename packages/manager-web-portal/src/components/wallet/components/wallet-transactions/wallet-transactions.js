@@ -1,7 +1,7 @@
 import "./wallet-transactions.scss";
 
-import Profitability from "components/profitability/profitability";
-import Surface from "components/surface/surface";
+import Profitability from "shared/components/profitability/profitability";
+import Surface from "shared/components/surface/surface";
 import { TableCell, TableRow } from "modules/table/components";
 import { ASSET_TYPE_FILTER_VALUES } from "modules/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 import DateRangeFilter from "modules/table/components/filtering/date-range-filter/date-range-filter";

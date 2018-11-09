@@ -1,7 +1,7 @@
-import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
-import FundAssetContainer from "components/fund-asset/fund-asset-container";
-import Profitability from "components/profitability/profitability";
-import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
+import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
+import Profitability from "shared/components/profitability/profitability";
+import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import { GVButton } from "gv-react-components";
 import { TableCell, TableRow } from "modules/table/components";
 import React, { Component } from "react";

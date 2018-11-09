@@ -1,6 +1,6 @@
 import "./gv-datepicker.scss";
 
-import Popover from "components/popover/popover";
+import Popover from "shared/components/popover/popover";
 import moment from "moment";
 import PropTypes from "prop-types";
 import React, { Component } from "react";

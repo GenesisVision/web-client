@@ -1,6 +1,6 @@
 import "./managers-table.scss";
 
-import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
+import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
 import { GVButton } from "gv-react-components";
 import { TableCell, TableRow } from "modules/table/components";
 import moment from "moment";

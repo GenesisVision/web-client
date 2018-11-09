@@ -1,7 +1,7 @@
 import "./modal.scss";
 
 import classnames from "classnames";
-import Portal from "components/portal/portal";
+import Portal from "shared/components/portal/portal";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import EventListener from "react-event-listener";

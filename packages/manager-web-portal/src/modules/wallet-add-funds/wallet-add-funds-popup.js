@@ -1,4 +1,4 @@
-import Dialog from "components/dialog/dialog";
+import Dialog from "shared/components/dialog/dialog";
 import WalletAddFundsPopup from "modules/wallet-add-funds/components/wallet-add-funds-container";
 import PropTypes from "prop-types";
 import React, { Component } from "react";

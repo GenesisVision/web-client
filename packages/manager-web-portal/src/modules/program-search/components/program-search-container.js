@@ -1,8 +1,8 @@
 import "./program-search.css";
 
 import classnames from "classnames";
-import Button from "components/button/button";
-import ClickOutside from "components/click-outside/click-outside";
+import Button from "shared/components/button/button";
+import ClickOutside from "shared/components/click-outside/click-outside";
 import React from "react";
 import { connect } from "react-redux";
 import LoadingBar from "react-redux-loading-bar";

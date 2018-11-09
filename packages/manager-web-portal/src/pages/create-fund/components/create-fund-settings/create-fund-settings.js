@@ -1,8 +1,8 @@
 import "./create-fund-settings.scss";
 
 import classNames from "classnames";
-import Hint from "components/hint/hint";
-import { RefreshIcon } from "components/icon/refresh-icon";
+import Hint from "shared/components/hint/hint";
+import { RefreshIcon } from "shared/components/icon/refresh-icon";
 import { Field, withFormik } from "formik";
 import {
   GVButton,

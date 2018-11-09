@@ -1,15 +1,15 @@
-import { DashboardIcon } from "components/icon/dashboard-icon";
-import { DetailsIcon } from "components/icon/details-icon";
-import { FundsIcon } from "components/icon/funds-icon";
-import { LogoutIcon } from "components/icon/logout-icon";
-import { ProgramsIcon } from "components/icon/programs-icon";
-import { SearchIcon } from "components/icon/search-icon";
-import { SettingsIcon } from "components/icon/settings-icon";
-import { WalletIcon } from "components/icon/wallet-icon";
+import { DashboardIcon } from "shared/components/icon/dashboard-icon";
+import { DetailsIcon } from "shared/components/icon/details-icon";
+import { FundsIcon } from "shared/components/icon/funds-icon";
+import { LogoutIcon } from "shared/components/icon/logout-icon";
+import { ProgramsIcon } from "shared/components/icon/programs-icon";
+import { SearchIcon } from "shared/components/icon/search-icon";
+import { SettingsIcon } from "shared/components/icon/settings-icon";
+import { WalletIcon } from "shared/components/icon/wallet-icon";
 import NavigationItem, {
   NavigationButton
-} from "components/navigation/navigation-item";
-import Sidebar from "components/sidebar/sidebar";
+} from "shared/components/navigation/navigation-item";
+import Sidebar from "shared/components/sidebar/sidebar";
 import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
 import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import { FUNDS_ROUTE } from "pages/funds/funds.routes";

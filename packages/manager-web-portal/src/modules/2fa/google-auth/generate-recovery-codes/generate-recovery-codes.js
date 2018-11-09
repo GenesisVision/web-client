@@ -1,4 +1,4 @@
-import Dialog from "components/dialog/dialog";
+import Dialog from "shared/components/dialog/dialog";
 import { GVButton } from "gv-react-components";
 import GenerateRecoveryForm from "modules/2fa/google-auth/generate-recovery-codes/generate-recovery-form";
 import GoogleAuthCodes from "modules/2fa/google-auth/google-auth-codes";

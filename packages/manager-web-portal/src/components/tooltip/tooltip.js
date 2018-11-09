@@ -1,6 +1,6 @@
 import "./tooltip.scss";
 
-import Popover from "components/popover/popover";
+import Popover from "shared/components/popover/popover";
 import PropTypes from "prop-types";
 import React, { Component, Fragment } from "react";
 

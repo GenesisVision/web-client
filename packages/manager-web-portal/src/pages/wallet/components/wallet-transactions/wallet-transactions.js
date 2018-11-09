@@ -1,6 +1,6 @@
 import "./wallet-transactions.scss";
 
-import Surface from "components/surface/surface";
+import Surface from "shared/components/surface/surface";
 import { TableCell, TableRow } from "modules/table/components";
 import DateRangeFilter from "modules/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "modules/table/components/filtering/date-range-filter/date-range-filter.constants";

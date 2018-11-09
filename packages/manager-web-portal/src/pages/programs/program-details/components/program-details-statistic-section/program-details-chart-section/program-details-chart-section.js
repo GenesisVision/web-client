@@ -1,6 +1,6 @@
 import "./program-details-chart-section.scss";
 
-import Surface from "components/surface/surface";
+import Surface from "shared/components/surface/surface";
 import { GVTab, GVTabs } from "gv-react-components";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";

@@ -1,7 +1,7 @@
 import "./dashboard-portfolio-events-all.scss";
 
-import Page from "components/page/page";
-import Surface from "components/surface/surface";
+import Page from "shared/components/page/page";
+import Surface from "shared/components/surface/surface";
 import React from "react";
 import { translate } from "react-i18next";
 

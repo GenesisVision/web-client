@@ -1,5 +1,5 @@
-import ImageBase from "components/avatar/image-base";
-import Surface from "components/surface/surface";
+import ImageBase from "shared/components/avatar/image-base";
+import Surface from "shared/components/surface/surface";
 import PropTypes from "prop-types";
 import React from "react";
 import { Link } from "react-router-dom";

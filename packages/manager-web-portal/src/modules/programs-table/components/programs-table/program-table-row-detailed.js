@@ -1,7 +1,7 @@
-import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
-import { Icon } from "components/icon/icon";
-import Profitability from "components/profitability/profitability";
-import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
+import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import { Icon } from "shared/components/icon/icon";
+import Profitability from "shared/components/profitability/profitability";
+import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
 import { GVButton } from "gv-react-components";
 import FavoriteIcon from "modules/favorite-asset/components/favorite-icon/favorite-icon";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";

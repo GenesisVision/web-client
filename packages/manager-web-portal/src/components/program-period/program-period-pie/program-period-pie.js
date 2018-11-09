@@ -1,7 +1,7 @@
 import "./program-period-pie.scss";
 
 import classnames from "classnames";
-import Tooltip from "components/tooltip/tooltip";
+import Tooltip from "shared/components/tooltip/tooltip";
 import { GVProgramPeriod } from "gv-react-components";
 import moment from "moment";
 import PropTypes from "prop-types";

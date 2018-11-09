@@ -1,10 +1,10 @@
 import "./program-simple-chart.scss";
 
-import { formartChartMinValue } from "components/chart/chart-components/chart-components.helpers";
+import { formartChartMinValue } from "shared/components/chart/chart-components/chart-components.helpers";
 import ProgramChartGradient, {
   gradientOffset
-} from "components/chart/chart-gradient/chart-gradient";
-import { getStrokeColor } from "components/chart/chart-gradient/chart-gradient";
+} from "shared/components/chart/chart-gradient/chart-gradient";
+import { getStrokeColor } from "shared/components/chart/chart-gradient/chart-gradient";
 import React from "react";
 import { Area, AreaChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 

@@ -1,4 +1,4 @@
-import { Icon } from "components/icon/icon";
+import { Icon } from "shared/components/icon/icon";
 import React from "react";
 
 export const RefreshIcon = props => (

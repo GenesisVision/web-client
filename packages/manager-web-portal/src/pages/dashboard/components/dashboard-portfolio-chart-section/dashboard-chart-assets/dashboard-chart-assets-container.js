@@ -1,7 +1,7 @@
 import "./dashboard-chart-assets.scss";
 
-import { ActionsCircleIcon } from "components/icon/actions-circle-icon";
-import Popover from "components/popover/popover";
+import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
+import Popover from "shared/components/popover/popover";
 import React, { PureComponent } from "react";
 import Scrollbars from "react-custom-scrollbars";
 import { translate } from "react-i18next";

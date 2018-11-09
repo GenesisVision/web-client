@@ -1,7 +1,7 @@
 import "./currency-select.scss";
 
 import classnames from "classnames";
-import Select from "components/select/select";
+import Select from "shared/components/select/select";
 import React, { Component } from "react";
 
 class CurrencySelect extends Component {

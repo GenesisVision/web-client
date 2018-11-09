@@ -1,6 +1,6 @@
 import "./close-program.scss";
 
-import Dialog from "components/dialog/dialog";
+import Dialog from "shared/components/dialog/dialog";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";

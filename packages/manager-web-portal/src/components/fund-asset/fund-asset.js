@@ -1,7 +1,7 @@
 import "./fund-asset.scss";
 
 import classNames from "classnames";
-import FundAssetImage from "components/avatar/fund-asset-image/fund-asset-image";
+import FundAssetImage from "shared/components/avatar/fund-asset-image/fund-asset-image";
 import { CURRENCY_VALUES } from "modules/currency-select/currency-select.constants";
 import React, { Component } from "react";
 import NumberFormat from "react-number-format";

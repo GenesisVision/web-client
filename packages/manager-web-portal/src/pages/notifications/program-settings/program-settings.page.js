@@ -1,4 +1,4 @@
-import Page from "components/page/page";
+import Page from "shared/components/page/page";
 import ProgramNotificationsContainer from "modules/program-notifications/program-notifications-container";
 import React from "react";
 import { translate } from "react-i18next";

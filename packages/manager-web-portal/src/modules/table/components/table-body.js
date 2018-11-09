@@ -1,4 +1,4 @@
-import { ChartIcon } from "components/icon/chart-icon";
+import { ChartIcon } from "shared/components/icon/chart-icon";
 import React, { Fragment } from "react";
 import { translate } from "react-i18next";
 

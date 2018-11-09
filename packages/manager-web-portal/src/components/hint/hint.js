@@ -1,7 +1,7 @@
 import "./hint.scss";
 
 import classNames from "classnames";
-import Tooltip from "components/tooltip/tooltip";
+import Tooltip from "shared/components/tooltip/tooltip";
 import React from "react";
 
 const Hint = ({ content, tooltipContent, className, vertical }) => {

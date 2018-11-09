@@ -1,6 +1,6 @@
 import "./program-details.scss";
 
-import Page from "components/page/page";
+import Page from "shared/components/page/page";
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";

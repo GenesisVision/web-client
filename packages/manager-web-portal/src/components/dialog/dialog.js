@@ -1,8 +1,8 @@
 import "./dialog.scss";
 
 import classnames from "classnames";
-import { CloseIcon } from "components/icon/close-icon";
-import Modal from "components/modal/modal";
+import { CloseIcon } from "shared/components/icon/close-icon";
+import Modal from "shared/components/modal/modal";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { Scrollbars } from "react-custom-scrollbars";

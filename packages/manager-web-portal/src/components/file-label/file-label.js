@@ -1,7 +1,7 @@
 import "./file-label.scss";
 
 import classnames from "classnames";
-import { CloseIcon } from "components/icon/close-icon";
+import { CloseIcon } from "shared/components/icon/close-icon";
 import { GVButton } from "gv-react-components";
 import PropTypes from "prop-types";
 import React from "react";

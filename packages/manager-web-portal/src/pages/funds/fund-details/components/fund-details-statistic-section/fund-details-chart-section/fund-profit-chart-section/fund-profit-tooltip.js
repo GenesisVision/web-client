@@ -1,4 +1,4 @@
-import ChartTooltip from "components/chart/chart-tooltip/chart-tooltip";
+import ChartTooltip from "shared/components/chart/chart-tooltip/chart-tooltip";
 import React from "react";
 import NumberFormat from "react-number-format";
 

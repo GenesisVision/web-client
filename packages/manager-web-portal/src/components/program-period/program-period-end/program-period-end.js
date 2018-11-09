@@ -1,4 +1,4 @@
-import Tooltip from "components/tooltip/tooltip";
+import Tooltip from "shared/components/tooltip/tooltip";
 import React from "react";
 import { translate } from "react-i18next";
 

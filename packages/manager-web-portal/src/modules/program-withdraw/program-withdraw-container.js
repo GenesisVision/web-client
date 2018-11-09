@@ -1,4 +1,4 @@
-import Dialog from "components/dialog/dialog";
+import Dialog from "shared/components/dialog/dialog";
 import ProgramWithdrawPopup from "modules/program-withdraw/components/program-withdraw-popup";
 import {
   alert,

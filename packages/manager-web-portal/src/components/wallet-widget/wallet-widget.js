@@ -1,10 +1,10 @@
 import "./wallet-widget.scss";
 
 import classnames from "classnames";
-import Chip from "components/chip/chip";
-import { ArrowIcon } from "components/icon/icon";
-import { WalletIcon } from "components/icon/wallet-icon";
-import Popover from "components/popover/popover";
+import Chip from "shared/components/chip/chip";
+import { ArrowIcon } from "shared/components/icon/icon";
+import { WalletIcon } from "shared/components/icon/wallet-icon";
+import Popover from "shared/components/popover/popover";
 import WalletAddFundsPopup from "modules/wallet-add-funds/wallet-add-funds-popup";
 import { WALLET_PAGE_ROUTE } from "pages/wallet/wallet-page";
 import PropTypes from "prop-types";

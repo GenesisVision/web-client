@@ -1,5 +1,5 @@
-import FacetCards from "components/facet-cards/facet-cards";
-import FacetCardsStub from "components/facet-cards/facet-cards-stub";
+import FacetCards from "shared/components/facet-cards/facet-cards";
+import FacetCardsStub from "shared/components/facet-cards/facet-cards-stub";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import replaceParams from "utils/replace-params";

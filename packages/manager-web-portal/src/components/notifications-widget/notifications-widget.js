@@ -1,8 +1,8 @@
 import "./notifications-widget.scss";
 
 import classnames from "classnames";
-import Chip from "components/chip/chip";
-import { RingIcon } from "components/icon/ring-icon";
+import Chip from "shared/components/chip/chip";
+import { RingIcon } from "shared/components/icon/ring-icon";
 import PropTypes from "prop-types";
 import React from "react";
 

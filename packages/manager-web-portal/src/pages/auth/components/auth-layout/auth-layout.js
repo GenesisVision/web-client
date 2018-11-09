@@ -1,7 +1,7 @@
 import "./auth-layout.scss";
 
-import GvBrand from "components/gv-brand/gv-brand";
-import GvLogo from "components/gv-logo/gv-logo";
+import GvBrand from "shared/components/gv-brand/gv-brand";
+import GvLogo from "shared/components/gv-logo/gv-logo";
 import { HOME_ROUTE } from "pages/app/app.constants";
 import PropTypes from "prop-types";
 import React, { Component } from "react";

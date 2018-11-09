@@ -1,4 +1,4 @@
-import GeneralNotification from "components/general-notification/general-notification";
+import GeneralNotification from "shared/components/general-notification/general-notification";
 import {
   addNotificationSettingService,
   removeNotificationSettingService

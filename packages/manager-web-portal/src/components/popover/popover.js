@@ -1,7 +1,7 @@
 import "./popover.scss";
 
 import classnames from "classnames";
-import Modal from "components/modal/modal";
+import Modal from "shared/components/modal/modal";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { connect } from "react-redux";

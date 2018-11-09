@@ -1,6 +1,6 @@
 import "./verification-status.scss";
 
-import Chip from "components/chip/chip";
+import Chip from "shared/components/chip/chip";
 import PropTypes from "prop-types";
 import React from "react";
 import { translate } from "react-i18next";

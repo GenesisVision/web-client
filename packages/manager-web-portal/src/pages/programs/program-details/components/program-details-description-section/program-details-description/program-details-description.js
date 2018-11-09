@@ -1,7 +1,7 @@
 import "./program-details-description.scss";
 
-import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
-import Popover from "components/popover/popover";
+import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import Popover from "shared/components/popover/popover";
 import { GVButton } from "gv-react-components";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import AboutLevelsContainerComponent from "pages/app/components/about-levels/about-levels-container";

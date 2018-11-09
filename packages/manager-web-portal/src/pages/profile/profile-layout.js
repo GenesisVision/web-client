@@ -1,4 +1,4 @@
-import Page from "components/page/page";
+import Page from "shared/components/page/page";
 import { GVTab, GVTabs } from "gv-react-components";
 import PropTypes from "prop-types";
 import React from "react";

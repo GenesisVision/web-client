@@ -1,4 +1,4 @@
-import { DEFAULT_PERIOD } from "components/chart/chart-period/chart-period.helpers";
+import { DEFAULT_PERIOD } from "shared/components/chart/chart-period/chart-period.helpers";
 import {
   FUNDS_SLUG_URL_PARAM_NAME,
   FUND_DETAILS_ROUTE

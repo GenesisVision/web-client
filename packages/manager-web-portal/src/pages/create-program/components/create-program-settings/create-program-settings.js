@@ -1,9 +1,9 @@
 import "./create-program-settings.scss";
 
 import classNames from "classnames";
-import Hint from "components/hint/hint";
-import { RefreshIcon } from "components/icon/refresh-icon";
-import Select from "components/select/select";
+import Hint from "shared/components/hint/hint";
+import { RefreshIcon } from "shared/components/icon/refresh-icon";
+import Select from "shared/components/select/select";
 import { Field, withFormik } from "formik";
 import {
   GVButton,

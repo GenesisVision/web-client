@@ -1,7 +1,7 @@
 import "./confirm-popup.scss";
 
 import classnames from "classnames";
-import Dialog from "components/dialog/dialog";
+import Dialog from "shared/components/dialog/dialog";
 import { GVButton } from "gv-react-components";
 import PropTypes from "prop-types";
 import React from "react";

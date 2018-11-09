@@ -1,4 +1,4 @@
-import GVCheckbox from "components/gv-checkbox/gv-checkbox";
+import GVCheckbox from "shared/components/gv-checkbox/gv-checkbox";
 import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import React from "react";

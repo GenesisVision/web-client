@@ -1,7 +1,7 @@
 import "./fund-details-description.scss";
 
-import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
-import FundAssetContainer from "components/fund-asset/fund-asset-container";
+import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
 import { GVButton } from "gv-react-components";
 import FundDepositContainer from "modules/fund-deposit/fund-deposit-container";
 import { FundDetailContext } from "pages/funds/fund-details/fund-details.page";

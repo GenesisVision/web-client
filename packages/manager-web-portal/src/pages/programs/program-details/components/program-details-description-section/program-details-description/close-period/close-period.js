@@ -1,4 +1,4 @@
-import ConfirmPopup from "components/confirm-popup/confirm-popup";
+import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 

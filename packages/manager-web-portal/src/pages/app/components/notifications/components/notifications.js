@@ -1,10 +1,10 @@
 import "./notifications.scss";
 
-import Chip from "components/chip/chip";
-import { ControlsIcon } from "components/icon/icon";
-import { RingIcon } from "components/icon/ring-icon";
-import InfinityScroll from "components/infinity-scroll/inifinity-scroll";
-import Spinner from "components/spiner/spiner";
+import Chip from "shared/components/chip/chip";
+import { ControlsIcon } from "shared/components/icon/icon";
+import { RingIcon } from "shared/components/icon/ring-icon";
+import InfinityScroll from "shared/components/infinity-scroll/inifinity-scroll";
+import Spinner from "shared/components/spiner/spiner";
 import moment from "moment";
 import NotificationsGroup from "pages/app/components/notifications/components/notification-group/notification-group";
 import { notificationProps } from "pages/app/components/notifications/components/notification/notification";

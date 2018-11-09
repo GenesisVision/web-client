@@ -1,4 +1,4 @@
-import Dialog from "components/dialog/dialog";
+import Dialog from "shared/components/dialog/dialog";
 import { GVButton } from "gv-react-components";
 import React from "react";
 import { translate } from "react-i18next";

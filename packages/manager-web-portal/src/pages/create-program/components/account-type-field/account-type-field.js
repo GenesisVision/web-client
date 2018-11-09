@@ -1,4 +1,4 @@
-import Select from "components/select/select";
+import Select from "shared/components/select/select";
 import { Field } from "formik";
 import { GVTextField } from "gv-react-components";
 import React, { Component } from "react";

@@ -1,6 +1,6 @@
 import "./dashboard-portfolio-event.scss";
 
-import Profitability from "components/profitability/profitability";
+import Profitability from "shared/components/profitability/profitability";
 import * as moment from "moment";
 import PropTypes from "prop-types";
 import React from "react";

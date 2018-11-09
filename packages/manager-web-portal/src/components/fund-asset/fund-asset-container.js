@@ -1,7 +1,7 @@
 import "./fund-asset.scss";
 
 import classNames from "classnames";
-import Tooltip from "components/tooltip/tooltip";
+import Tooltip from "shared/components/tooltip/tooltip";
 import React, { Component } from "react";
 import NumberFormat from "react-number-format";
 

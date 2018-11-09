@@ -1,5 +1,5 @@
-import Chip from "components/chip/chip";
-import Dialog from "components/dialog/dialog";
+import Chip from "shared/components/chip/chip";
+import Dialog from "shared/components/dialog/dialog";
 import { GVButton } from "gv-react-components";
 import CustomNotification from "modules/fund-notifications/custom-notification";
 import { addFundNotificationsService } from "modules/fund-notifications/services/fund-notifications.services";

@@ -1,11 +1,11 @@
 import "./profile-widget.scss";
 
 import classnames from "classnames";
-import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
-import { DetailsIcon } from "components/icon/details-icon";
-import { LogoutIcon } from "components/icon/logout-icon";
-import { SettingsIcon } from "components/icon/settings-icon";
-import Popover from "components/popover/popover";
+import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
+import { DetailsIcon } from "shared/components/icon/details-icon";
+import { LogoutIcon } from "shared/components/icon/logout-icon";
+import { SettingsIcon } from "shared/components/icon/settings-icon";
+import Popover from "shared/components/popover/popover";
 import { GVButton } from "gv-react-components";
 import FilterArrowIcon from "modules/table/components/filtering/filter-arrow-icon";
 import PropTypes from "prop-types";
