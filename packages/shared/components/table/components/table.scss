@@ -21,9 +21,9 @@ $create-icon-width: 140px;
 .table {
   width: 100%;
   border-spacing: 0;
-  margin-bottom: $padding-middle-mobile;
+  margin-bottom: $padding-small-mobile;
   @include media-breakpoint-landscape-phone() {
-    margin-bottom: $padding-middle;
+    margin-bottom: $padding-small;
   }
   .message {
     padding: $padding;
