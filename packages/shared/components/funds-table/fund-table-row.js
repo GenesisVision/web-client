@@ -10,8 +10,8 @@ import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import { formatValue } from "shared/utils/formatter";
 
-import { composeFundsDetailsUrl } from "../../../../pages/funds/funds.routes";
-import FavoriteIcon from "../../../favorite-asset/components/favorite-icon/favorite-icon";
+import { composeFundsDetailsUrl } from "shared/utils/compose-url";
+import FavoriteIcon from "shared/components/favorite-asset/favorite-icon/favorite-icon";
 
 class FundsTableRow extends Component {
   constructor(props) {
@@ -92,16 +92,15 @@ class FundsTableRow extends Component {
         <TableCell className="funds-table__cell funds-table__cell--chart">
           <ProgramSimpleChart data={fund.chart} programId={fund.id} />
         </TableCell>
-        {isAuthenticated &&
-          fund.personalDetails && (
-            <TableCell className="funds-table__cell funds-table__cell--favorite">
-              <FavoriteIcon
-                id={fund.id}
-                selected={fund.personalDetails.isFavorite}
-                onClick={toggleFavorite}
-              />
-            </TableCell>
-          )}
+        {isAuthenticated && fund.personalDetails && (
+          <TableCell className="funds-table__cell funds-table__cell--favorite">
+            <FavoriteIcon
+              id={fund.id}
+              selected={fund.personalDetails.isFavorite}
+              onClick={toggleFavorite}
+            />
+          </TableCell>
+        )}
       </TableRow>
     );
   }
