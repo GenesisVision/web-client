@@ -5,10 +5,10 @@ import { GVButton } from "gv-react-components";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import moment from "moment";
-import { composeManagerDetailsUrl } from "pages/manager/manager.page";
+import { composeManagerDetailsUrl } from "shared/utils/compose-url";
 import React from "react";
-import { Link } from "react-router-dom";
 import { translate } from "react-i18next";
+import { Link } from "react-router-dom";
 
 const ManagersTableRow = ({ t, manager, title }) => {
   return (
