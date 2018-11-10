@@ -1,5 +1,5 @@
-import ManagersTableRow from "modules/managers-table/components/managers-table-row";
-import { MANAGERS_TABLE_COLUMNS } from "modules/managers-table/managers-table.constants";
+import ManagersTableRow from "shared/components/managers-table/components/managers-table-row";
+import { MANAGERS_TABLE_COLUMNS } from "shared/components/managers-table/managers-table.constants";
 import { Table } from "modules/table/components";
 import withTable from "modules/table/components/with-table";
 import { DEFAULT_PAGING } from "modules/table/reducers/table-paging.reducer";
