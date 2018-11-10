@@ -1,13 +1,13 @@
 import "./programs.scss";
 
 import { Table } from "modules/table/components";
-import DateRangeFilter from "modules/table/components/filtering/date-range-filter/date-range-filter";
-import LevelFilter from "modules/table/components/filtering/level-filter/level-filter";
-import SelectFilter from "modules/table/components/filtering/select-filter/select-filter";
+import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
+import LevelFilter from "shared/components/table/components/filtering/level-filter/level-filter";
+import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
 import React, { Fragment } from "react";
 import { translate } from "react-i18next";
 
-import { DATE_RANGE_FILTER_NAME } from "../../../table/components/filtering/date-range-filter/date-range-filter.constants";
+import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import {
   CURRENCY_FILTER_NAME,
   LEVEL_FILTER_NAME,

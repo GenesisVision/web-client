@@ -2,7 +2,7 @@ import {
   composeDefaultDateRangeFilter,
   composeRequestValue,
   validateDateRange
-} from "modules/table/components/filtering/date-range-filter/date-range-filter.helpers";
+} from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 
 export const DATE_RANGE_FILTER_NAME = "dateRange";
 export const SORTING_FILTER_NAME = "sorting";

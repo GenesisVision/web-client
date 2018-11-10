@@ -1,5 +1,5 @@
-import { composeFilters } from "../helpers/filtering.helpers";
-import { calculateSkipAndTake } from "../helpers/paging.helpers";
+import { composeFilters } from "shared/components/table/helpers/filtering.helpers";
+import { calculateSkipAndTake } from "shared/components/table/helpers/paging.helpers";
 
 export const composeRequestFilters = ({
   paging,

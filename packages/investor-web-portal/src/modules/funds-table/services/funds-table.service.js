@@ -1,9 +1,9 @@
-import { composeFilters } from "modules/table/helpers/filtering.helpers";
+import { composeFilters } from "shared/components/table/helpers/filtering.helpers";
 import {
   calculateSkipAndTake,
   calculateTotalPages
-} from "modules/table/helpers/paging.helpers";
-import { getSortingColumnName } from "modules/table/helpers/sorting.helpers";
+} from "shared/components/table/helpers/paging.helpers";
+import { getSortingColumnName } from "shared/components/table/helpers/sorting.helpers";
 import {
   FUNDS_FACET_ROUTE,
   FUNDS_FAVORITES_TAB_NAME,

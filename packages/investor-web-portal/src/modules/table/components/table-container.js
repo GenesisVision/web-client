@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { merge } from "shared/utils/helpers";
 
-import { updateFilter } from "../helpers/filtering.helpers";
+import { updateFilter } from "shared/components/table/helpers/filtering.helpers";
 import Table from "./table";
 
 class TableContainer extends Component {

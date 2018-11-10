@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { merge } from "shared/utils/helpers";
 
-import { updateFilter } from "../helpers/filtering.helpers";
-import { calculateTotalPages } from "../helpers/paging.helpers";
+import { updateFilter } from "shared/components/table/helpers/filtering.helpers";
+import { calculateTotalPages } from "shared/components/table/helpers/paging.helpers";
 import { composeRequestFilters } from "../services/table.service";
 
 const withTable = ({

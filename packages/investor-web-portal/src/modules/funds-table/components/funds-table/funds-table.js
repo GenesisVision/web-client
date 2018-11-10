@@ -1,8 +1,8 @@
 import "./funds-table.scss";
 
 import { Table } from "modules/table/components";
-import DateRangeFilter from "modules/table/components/filtering/date-range-filter/date-range-filter";
-import { DATE_RANGE_FILTER_NAME } from "modules/table/components/filtering/date-range-filter/date-range-filter.constants";
+import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
+import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import React, { Fragment } from "react";
 import { translate } from "react-i18next";
 

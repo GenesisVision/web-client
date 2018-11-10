@@ -5,9 +5,9 @@ import ProgramPeriodEnd from "shared/components/program-period/program-period-en
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import { GVButton } from "gv-react-components";
 import { TableCell, TableRow } from "modules/table/components";
-import DateRangeFilter from "modules/table/components/filtering/date-range-filter/date-range-filter";
-import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "modules/table/components/filtering/date-range-filter/date-range-filter.constants";
-import { DATE_RANGE_FILTER_NAME } from "modules/table/components/filtering/date-range-filter/date-range-filter.constants";
+import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
+import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import TableModule from "modules/table/components/table-module";
 import { DEFAULT_PAGING } from "modules/table/reducers/table-paging.reducer";
 import { composeProgramDetailsUrl } from "pages/programs/programs.routes";

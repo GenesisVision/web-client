@@ -1,6 +1,6 @@
-import { composeFilteringActionType } from "../helpers/filtering.helpers";
-import { composePaingActionType } from "../helpers/paging.helpers";
-import { composeSortingActionType } from "../helpers/sorting.helpers";
+import { composeFilteringActionType } from "shared/components/table/helpers/filtering.helpers";
+import { composePaingActionType } from "shared/components/table/helpers/paging.helpers";
+import { composeSortingActionType } from "shared/components/table/helpers/sorting.helpers";
 
 export const tableActionsFactory = actionType => {
   const tablePagingActionType = composePaingActionType(actionType);
