@@ -1,6 +1,6 @@
 import "./2fa.scss";
 
-import { fetchTwoFactor } from "actions/2fa-actions";
+import { fetchTwoFactor } from "shared/actions/2fa-actions";
 import Dialog from "shared/components/dialog/dialog";
 import Select from "shared/components/select/select";
 import { GVTextField } from "gv-react-components";

@@ -1,5 +1,5 @@
-import { setTwoFactorRequirement } from "actions/2fa-actions";
-import authActions from "actions/auth-actions";
+import { setTwoFactorRequirement } from "shared/actions/2fa-actions";
+import authActions from "shared/actions/auth-actions";
 import { HOME_ROUTE } from "pages/app/app.routes";
 import { LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "pages/auth/login/login.routes";
 import { push } from "react-router-redux";

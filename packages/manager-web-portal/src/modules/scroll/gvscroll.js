@@ -1,4 +1,4 @@
-import { windowScroll } from "actions/ui-actions";
+import { windowScroll } from "shared/actions/ui-actions";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { Scrollbars } from "react-custom-scrollbars";

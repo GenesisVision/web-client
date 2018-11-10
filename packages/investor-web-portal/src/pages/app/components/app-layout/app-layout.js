@@ -1,7 +1,7 @@
 import "./app-layout.scss";
 
-import platformActions from "actions/platform-actions";
-import { initOnResizeEvent } from "actions/ui-actions";
+import platformActions from "shared/actions/platform-actions";
+import { initOnResizeEvent } from "shared/actions/ui-actions";
 import HeaderContainer from "modules/header/components/header-container";
 import NotificationsContainer from "pages/app/components/notifications/components/notifications-container";
 import React, { Component } from "react";

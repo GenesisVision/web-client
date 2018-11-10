@@ -1,6 +1,6 @@
-import authActions from "actions/auth-actions";
-import { EMAIL_PENDING } from "actions/email-pending-actions";
-import emailPendingActions from "actions/email-pending-actions";
+import authActions from "shared/actions/auth-actions";
+import { EMAIL_PENDING } from "shared/actions/email-pending-actions";
+import emailPendingActions from "shared/actions/email-pending-actions";
 import { HOME_ROUTE } from "pages/app/app.routes";
 import {
   EMAIL_PENDING_ROUTE,

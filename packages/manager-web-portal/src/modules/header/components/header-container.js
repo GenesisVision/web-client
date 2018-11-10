@@ -1,4 +1,4 @@
-import { fetchTwoFactor } from "actions/2fa-actions";
+import { fetchTwoFactor } from "shared/actions/2fa-actions";
 import { fetchProfileHeaderInfo } from "modules/header/actions/header-actions";
 import { notificationsToggle } from "pages/app/components/notifications/actions/notifications.actions";
 import React, { Component } from "react";

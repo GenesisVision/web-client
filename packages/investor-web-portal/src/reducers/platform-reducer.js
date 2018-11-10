@@ -1,4 +1,4 @@
-import { PLATFORM_SETTINGS } from "../actions/platform-actions";
+import { PLATFORM_SETTINGS } from "shared/actions/platform-actions";
 import apiReducerFactory from "shared/reducers/api-reducer/api-reducer";
 
 const platformReducer = apiReducerFactory({

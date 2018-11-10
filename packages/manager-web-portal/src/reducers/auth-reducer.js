@@ -1,4 +1,4 @@
-import { UPDATE_TOKEN } from "../actions/auth-actions";
+import { UPDATE_TOKEN } from "shared/actions/auth-actions";
 import authService from "shared/services/auth-service";
 
 const initialState = {

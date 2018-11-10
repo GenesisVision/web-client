@@ -1,4 +1,4 @@
-import { WINDOW_RESIZE, WINDOW_SCROLL } from "actions/ui-actions";
+import { WINDOW_RESIZE, WINDOW_SCROLL } from "shared/actions/ui-actions";
 
 const initialState = {
   innerWidth: 0,

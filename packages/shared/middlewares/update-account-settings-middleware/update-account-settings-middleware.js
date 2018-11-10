@@ -1,4 +1,4 @@
-import { UPDATE_ACCOUNT_SETTINGS } from "actions/account-settings-actions";
+import { UPDATE_ACCOUNT_SETTINGS } from "shared/actions/account-settings-actions";
 import { saveData } from "shared/utils/localstorage";
 
 export const ACCOUNT_CURRENCY_KEY = "accountCurrency";

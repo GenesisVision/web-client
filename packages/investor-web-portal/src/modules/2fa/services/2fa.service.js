@@ -1,4 +1,4 @@
-import authActions from "actions/auth-actions";
+import authActions from "shared/actions/auth-actions";
 import { authApiProxy } from "shared/services/api-client/auth-api";
 import authService from "shared/services/auth-service";
 

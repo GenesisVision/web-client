@@ -1,5 +1,5 @@
-import { TWO_FACTOR_AUTH } from "actions/2fa-actions";
-import { TWO_FACTOR_SET_REQUIREMENT } from "actions/2fa-actions";
+import { TWO_FACTOR_AUTH } from "shared/actions/2fa-actions";
+import { TWO_FACTOR_SET_REQUIREMENT } from "shared/actions/2fa-actions";
 import apiReducerFactory from "shared/reducers/api-reducer/api-reducer";
 
 const data = {

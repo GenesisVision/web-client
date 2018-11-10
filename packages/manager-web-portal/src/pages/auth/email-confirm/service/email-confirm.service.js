@@ -1,4 +1,4 @@
-import authActions from "actions/auth-actions";
+import authActions from "shared/actions/auth-actions";
 import { HOME_ROUTE } from "pages/app/app.routes";
 import { push } from "react-router-redux";
 import { authApiProxy } from "shared/services/api-client/auth-api";
