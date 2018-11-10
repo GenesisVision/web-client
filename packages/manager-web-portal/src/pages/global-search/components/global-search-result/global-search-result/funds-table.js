@@ -6,7 +6,7 @@ import React from "react";
 import { translate } from "react-i18next";
 import { compose } from "redux";
 
-import FundsTableRow from "../../../../../modules/funds-table/components/funds-table/fund-table-row";
+import FundsTableRow from "shared/components/funds-table/fund-table-row";
 
 const FundsTable = ({
   t,

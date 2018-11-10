@@ -1,4 +1,4 @@
-import ProgramTableRowShort from "modules/programs-table/components/programs-table/program-table-row-short";
+import ProgramTableRowShort from "shared/components/programs-table/program-table-row-short";
 import { PROGRAMS_COLUMNS } from "modules/programs-table/programs.constants";
 import { Table } from "modules/table/components";
 import withTable from "modules/table/components/with-table";
