@@ -1,4 +1,4 @@
-import managerApi, { managerApiProxy } from "services/api-client/manager-api";
+import managerApi, { managerApiProxy } from "shared/services/api-client/manager-api";
 
 export const DASHBOARD_PORTFOLIO_CHART = "DASHBOARD_PORTFOLIO_CHART";
 export const DASHBOARD_PORTFOLIO_EVENTS = "DASHBOARD_PORTFOLIO_EVENTS";

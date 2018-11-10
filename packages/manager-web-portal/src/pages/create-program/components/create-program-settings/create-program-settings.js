@@ -15,8 +15,8 @@ import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import InputImage from "shared/components/form/input-image/input-image";
-import { formatValue } from "utils/formatter";
-import { allowValuesNumberFormat } from "utils/helpers";
+import { formatValue } from "shared/utils/formatter";
+import { allowValuesNumberFormat } from "shared/utils/helpers";
 
 import {
   getAccountTypes,

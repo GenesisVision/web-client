@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { merge } from "utils/helpers";
+import { merge } from "shared/utils/helpers";
 
 import { updateFilter } from "../helpers/filtering.helpers";
 import { calculateTotalPages } from "../helpers/paging.helpers";

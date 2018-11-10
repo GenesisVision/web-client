@@ -1,5 +1,5 @@
-import { programsApiProxy } from "services/api-client/programs-api";
-import authService from "services/auth-service";
+import { programsApiProxy } from "shared/services/api-client/programs-api";
+import authService from "shared/services/auth-service";
 
 import {
   addFavoriteProgram,

@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 
-import apiReducerFactory from "../../../shared/reducers/api-reducer/api-reducer";
+import apiReducerFactory from "shared/reducers/api-reducer/api-reducer";
 import pagingReducerFactory from "../../paging/reducers/paging-reducers";
 import { PROGRAMS } from "../actions/programs-actions.constants";
 import programsFilterPaneReducer from "./programs-filter-pane-reducer";

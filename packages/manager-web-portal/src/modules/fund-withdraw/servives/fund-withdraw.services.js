@@ -1,5 +1,5 @@
-import authService from "services/auth-service";
-import { managerApiProxy } from "services/api-client/manager-api";
+import authService from "shared/services/auth-service";
+import { managerApiProxy } from "shared/services/api-client/manager-api";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
 export const getFundWithdrawInfo = id => (dispatch, getState) => {

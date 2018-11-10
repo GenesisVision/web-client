@@ -1,7 +1,7 @@
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import authService from "services/auth-service";
+import authService from "shared/services/auth-service";
 import filesService from "shared/services/file-service";
-import { managerApiProxy } from "services/api-client/manager-api";
+import { managerApiProxy } from "shared/services/api-client/manager-api";
 import { FUND, PROGRAM } from "../asset-edit.constants";
 
 export const editAsset = (id, editAssetData, type) => dispatch => {

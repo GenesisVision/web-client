@@ -4,20 +4,20 @@ import { applyMiddleware, compose, createStore } from "redux";
 import debounceMiddleware from "redux-debounced";
 import promiseMiddleware from "redux-promise-middleware";
 import thunk from "redux-thunk";
-import authApi from "services/api-client/auth-api";
+import authApi from "shared/services/api-client/auth-api";
 import { updateAccountCurrencyMiddleware } from "shared/middlewares/update-account-settings-middleware/update-account-settings-middleware";
 
 import rootReducer from "../reducers";
-import authService from "../services/auth-service";
-import apiErrorHandlerMiddleware from "../shared/middlewares/api-error-handler-middleware/api-error-handler-middleware";
-import clearOnceMetaMiddleware from "../shared/middlewares/clear-once-meta-middleware/clear-once-meta-middleware";
-import refreshTokenMiddleware from "../shared/middlewares/refresh-token-middleware/refresh-token-middleware";
+import authService from "shared/services/auth-service";
+import apiErrorHandlerMiddleware from "shared/middlewares/api-error-handler-middleware/api-error-handler-middleware";
+import clearOnceMetaMiddleware from "shared/middlewares/clear-once-meta-middleware/clear-once-meta-middleware";
+import refreshTokenMiddleware from "shared/middlewares/refresh-token-middleware/refresh-token-middleware";
 import {
   FAILURE_SUFFIX,
   REQUEST_SUFFIX,
   SUCCESS_SUFFIX
-} from "../shared/reducers/api-reducer/api-reducer";
-import history from "../utils/history";
+} from "shared/reducers/api-reducer/api-reducer";
+import history from "shared/utils/history";
 
 const suffixes = [REQUEST_SUFFIX, SUCCESS_SUFFIX, FAILURE_SUFFIX];
 

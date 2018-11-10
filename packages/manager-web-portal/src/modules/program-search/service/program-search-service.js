@@ -1,6 +1,6 @@
 import authService from "../../../services/auth-service";
-import clearDataActionFactory from "../../../shared/actions/clear-data.factory";
-import fileServices from "../../../shared/services/file-service";
+import clearDataActionFactory from "shared/actions/clear-data.factory";
+import fileServices from "shared/services/file-service";
 import programSearchActions from "../actions/program-search-actions";
 import { PROGRAM_SEARCH } from "../actions/program-search-actions.constants";
 const getPrograms = query => (dispatch, getState) => {

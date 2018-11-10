@@ -20,7 +20,7 @@ import {
   getDashboardFunds,
   updateDashboardFundsFilters
 } from "../../../services/dashboard-funds.service";
-import { formatValue } from "utils/formatter";
+import { formatValue } from "shared/utils/formatter";
 
 class DashboardFunds extends Component {
   getDashboardFundsPlace = state => {

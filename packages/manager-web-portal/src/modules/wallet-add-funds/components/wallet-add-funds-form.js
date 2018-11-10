@@ -9,8 +9,8 @@ import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
-import { convertToCurrency } from "utils/currency-converter";
-import { formatValue } from "utils/formatter";
+import { convertToCurrency } from "shared/utils/currency-converter";
+import { formatValue } from "shared/utils/formatter";
 
 const WalletAddFundsForm = ({
   t,

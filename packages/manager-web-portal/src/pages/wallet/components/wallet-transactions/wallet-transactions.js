@@ -9,9 +9,9 @@ import moment from "moment";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import authService from "services/auth-service";
+import authService from "shared/services/auth-service";
 import EmptyTransactionsIcon from "shared/media/empty-wallet.svg";
-import { formatValue } from "utils/formatter";
+import { formatValue } from "shared/utils/formatter";
 
 import * as actions from "../../actions/wallet.actions";
 import {

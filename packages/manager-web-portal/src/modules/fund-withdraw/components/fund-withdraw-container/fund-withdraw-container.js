@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import React, { PureComponent } from "react";
 
-import { alertMessageActions } from "../../../../shared/modules/alert-message/actions/alert-message-actions";
+import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import FundWithdraw from "./fund-withdraw/fund-withdraw";
 import fundWithdrawActions from "../../actions/fund-withdraw-actions";
 

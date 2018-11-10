@@ -21,7 +21,7 @@ import loginReducer from "../pages/auth/login/reducers/login.reducers";
 import signUpReducer from "../pages/auth/signup/reducers/signup.reducers";
 import dashboardReducer from "../pages/dashboard/reducers/dashboard.reducers";
 import managerReducer from "../pages/manager/reducers/manager.reducers";
-import alertMessagesReducer from "../shared/modules/alert-message/reducers/alert-message-reducers";
+import alertMessagesReducer from "shared/modules/alert-message/reducers/alert-message-reducers";
 import authReducer from "./auth-reducer";
 import emailPendingReducer from "./email-pending-reducer";
 import platformReducer from "./platform-reducer";

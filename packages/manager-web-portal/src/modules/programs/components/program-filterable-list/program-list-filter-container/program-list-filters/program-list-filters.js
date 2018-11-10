@@ -5,7 +5,7 @@ import "../../../../../../shared/components/form/gv-range/gv-range.css";
 import React from "react";
 import { translate } from "react-i18next";
 
-import Button from "../../../../../../components/button/button";
+import Button from "shared/components/button/button";
 // import AvailableInvestmentFilter from "./program-filters/available-investment-filter";
 import AvgProfitFilter from "./program-filters/avg-profit-filter";
 import BalanceFilter from "./program-filters/balance-filter";

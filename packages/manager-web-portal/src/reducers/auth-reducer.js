@@ -1,5 +1,5 @@
 import { UPDATE_TOKEN } from "../actions/auth-actions";
-import authService from "../services/auth-service";
+import authService from "shared/services/auth-service";
 
 const initialState = {
   isAuthenticated: authService.isAuthenticated(),

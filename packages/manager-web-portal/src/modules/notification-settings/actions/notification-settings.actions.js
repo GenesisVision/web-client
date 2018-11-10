@@ -1,5 +1,5 @@
-import notificationsApi from "services/api-client/notifications-api";
-import authService from "services/auth-service";
+import notificationsApi from "shared/services/api-client/notifications-api";
+import authService from "shared/services/auth-service";
 
 export const NOTIFICATION_SETTINGS = "NOTIFICATION_SETTINGS";
 export const ADD_NOTIFICATION_SETTINGS = "ADD_NOTIFICATION_SETTINGS";

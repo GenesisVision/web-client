@@ -2,7 +2,7 @@ import React from "react";
 import { translate } from "react-i18next";
 import { UncontrolledTooltip } from "reactstrap";
 
-import DaysLeftWidget from "../../../../../../../components/days-left-widget/days-left-widget";
+import DaysLeftWidget from "shared/components/days-left-widget/days-left-widget";
 
 import CalendarImage from "./calendar-icon.svg";
 

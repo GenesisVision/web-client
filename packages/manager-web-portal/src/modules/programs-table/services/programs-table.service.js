@@ -11,8 +11,8 @@ import {
 } from "pages/programs/programs.routes";
 import qs from "qs";
 import { push } from "react-router-redux";
-import authService from "services/auth-service";
-import getParams from "utils/get-params";
+import authService from "shared/services/auth-service";
+import getParams from "shared/utils/get-params";
 
 import { PROGRAM_SLUG_URL_PARAM_NAME } from "../../../pages/programs/programs.routes";
 import * as programTableActions from "../actions/programs-table.actions";

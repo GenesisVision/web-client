@@ -10,8 +10,8 @@ import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { compose } from "redux";
-import { managerApiProxy } from "services/api-client/manager-api";
-import authService from "services/auth-service";
+import { managerApiProxy } from "shared/services/api-client/manager-api";
+import authService from "shared/services/auth-service";
 
 class ProgramWithdrawContainer extends PureComponent {
   state = { error: "" };

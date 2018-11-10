@@ -1,7 +1,7 @@
 import { calculateTotalPages } from "modules/table/helpers/paging.helpers";
 import { composeRequestFilters } from "modules/table/services/table.service";
-import { walletApiProxy } from "services/api-client/wallet-api";
-import authService from "services/auth-service";
+import { walletApiProxy } from "shared/services/api-client/wallet-api";
+import authService from "shared/services/auth-service";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
 import * as actions from "../actions/wallet.actions";

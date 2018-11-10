@@ -1,4 +1,4 @@
-import { merge } from "utils/helpers";
+import { merge } from "shared/utils/helpers";
 
 const defaultState = {};
 

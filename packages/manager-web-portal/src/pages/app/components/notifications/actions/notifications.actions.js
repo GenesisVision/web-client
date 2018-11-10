@@ -1,5 +1,5 @@
-import notificationsApi from "services/api-client/notifications-api";
-import authService from "services/auth-service";
+import notificationsApi from "shared/services/api-client/notifications-api";
+import authService from "shared/services/auth-service";
 
 export const NOTIFICATIONS = "NOTIFICATIONS";
 export const NOTIFICATIONS_TOGGLE = "NOTIFICATIONS_TOGGLE";

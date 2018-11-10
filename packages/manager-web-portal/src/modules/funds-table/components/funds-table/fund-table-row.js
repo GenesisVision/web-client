@@ -7,7 +7,7 @@ import { TableCell, TableRow } from "modules/table/components";
 import React, { Component } from "react";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
-import { formatValue } from "utils/formatter";
+import { formatValue } from "shared/utils/formatter";
 
 import { composeFundsDetailsUrl } from "../../../../pages/funds/funds.routes";
 import FavoriteIcon from "../../../favorite-asset/components/favorite-icon/favorite-icon";

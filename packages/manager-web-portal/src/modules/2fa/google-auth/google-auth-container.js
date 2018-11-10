@@ -6,8 +6,8 @@ import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
-import { authApiProxy } from "services/api-client/auth-api";
-import authService from "services/auth-service";
+import { authApiProxy } from "shared/services/api-client/auth-api";
+import authService from "shared/services/auth-service";
 
 import * as twoFactorServices from "../services/2fa.service.js";
 

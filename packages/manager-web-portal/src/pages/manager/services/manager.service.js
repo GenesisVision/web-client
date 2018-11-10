@@ -1,5 +1,5 @@
-import authService from "services/auth-service";
-import getParams from "utils/get-params";
+import authService from "shared/services/auth-service";
+import getParams from "shared/utils/get-params";
 import * as actions from "../actions/manager.actions.js";
 import * as actionsPrograms from "modules/programs-table/actions/programs-table.actions";
 import * as actionsFunds from "modules/funds-table/actions/funds-table.actions";

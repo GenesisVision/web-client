@@ -3,9 +3,9 @@ import {
   FUNDS_SLUG_URL_PARAM_NAME,
   FUND_DETAILS_ROUTE
 } from "pages/funds/funds.routes";
-import { fundsApiProxy } from "services/api-client/funds-api";
-import authService from "services/auth-service";
-import getParams from "utils/get-params";
+import { fundsApiProxy } from "shared/services/api-client/funds-api";
+import authService from "shared/services/auth-service";
+import getParams from "shared/utils/get-params";
 
 export const getFundDescription = () => (dispatch, getState) => {
   const authorization = authService.getAuthArg();

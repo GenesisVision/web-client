@@ -1,7 +1,7 @@
-import clearDataActionFactory from "../../../shared/actions/clear-data.factory";
-import fileServices from "../../../shared/services/file-service";
-import history from "../../../utils/history";
-import replaceParams from "../../../utils/replace-params";
+import clearDataActionFactory from "shared/actions/clear-data.factory";
+import fileServices from "shared/services/file-service";
+import history from "shared/utils/history";
+import replaceParams from "shared/utils/replace-params";
 import pagingActionsFactory from "../../paging/actions/paging-actions";
 import {
   calculateSkipAndTake,

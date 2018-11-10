@@ -1,10 +1,10 @@
 import moment from "moment";
 
-import { HOME_ROUTE } from "../../../components/app.constants";
-import { alertMessageActions } from "../../../shared/modules/alert-message/actions/alert-message-actions";
-import filesService from "../../../shared/services/file-service";
-import history from "../../../utils/history";
-import replaceParams from "../../../utils/replace-params";
+import { HOME_ROUTE } from "shared/components/app.constants";
+import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
+import filesService from "shared/services/file-service";
+import history from "shared/utils/history";
+import replaceParams from "shared/utils/replace-params";
 import { PROGRAM_ROUTE } from "../../program/program.constants";
 import programSettingsActions from "../actions/program-settings-actions";
 

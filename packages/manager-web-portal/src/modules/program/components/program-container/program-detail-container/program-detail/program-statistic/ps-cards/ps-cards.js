@@ -5,7 +5,7 @@ import NumberFormat from "react-number-format";
 
 import "./ps-cards.css";
 import walletIcon from "../../../../../../media/wallet-icon.svg";
-import investorAvatar from "../../../../../../../../shared/media/investor-avatar.png";
+import investorAvatar from "shared/media/investor-avatar.png";
 import PSProfitChart from "./ps-profit-chart";
 
 const profitChartData = (chartData, programStartDate) => {

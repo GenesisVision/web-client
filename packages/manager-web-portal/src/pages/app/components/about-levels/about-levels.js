@@ -7,7 +7,7 @@ import React, { Component } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 
-import { convertToCurrency } from "../../../../utils/currency-converter";
+import { convertToCurrency } from "shared/utils/currency-converter";
 
 class AboutLevelsComponent extends Component {
   numberFormat = (val, rate, currency) => {

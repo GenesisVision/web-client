@@ -1,8 +1,8 @@
-import authService from "services/auth-service";
+import authService from "shared/services/auth-service";
 
-import { DEFAULT_PERIOD } from "../../../components/chart/chart-period/chart-period.helpers";
-import { fundsApiProxy } from "../../../services/api-client/funds-api";
-import { programsApiProxy } from "../../../services/api-client/programs-api";
+import { DEFAULT_PERIOD } from "shared/components/chart/chart-period/chart-period.helpers";
+import { fundsApiProxy } from "shared/services/api-client/funds-api";
+import { programsApiProxy } from "shared/services/api-client/programs-api";
 import * as actions from "../actions/dashboard.actions";
 
 export const getPortfolioEvents = () => (dispatch, getState) => {

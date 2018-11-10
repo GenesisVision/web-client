@@ -1,4 +1,4 @@
-import fundsApi from "services/api-client/funds-api";
+import fundsApi from "shared/services/api-client/funds-api";
 
 export const SET_FAVORITE_FUND = "SET_FAVORITE_FUND";
 

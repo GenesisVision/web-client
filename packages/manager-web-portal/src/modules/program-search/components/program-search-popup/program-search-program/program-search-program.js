@@ -5,9 +5,9 @@ import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 
-import Metric from "../../../../../components/metric/metric";
-import ProgramAvatar from "../../../../../components/program-avatar/program-avatar";
-import replaceParams from "../../../../../utils/replace-params";
+import Metric from "shared/components/metric/metric";
+import ProgramAvatar from "shared/components/program-avatar/program-avatar";
+import replaceParams from "shared/utils/replace-params";
 import { PROGRAM_ROUTE } from "../../../../program/program.constants";
 
 const ProgramSearchProgram = ({ t, program, onProgramClick }) => {

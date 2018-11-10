@@ -1,6 +1,6 @@
-import fileService from "../../../shared/services/file-service";
-import history from "../../../utils/history";
-import replaceParams from "../../../utils/replace-params";
+import fileService from "shared/services/file-service";
+import history from "shared/utils/history";
+import replaceParams from "shared/utils/replace-params";
 import { composeApiFiltering } from "../../filtering/helpers/filtering-helpers";
 import { PROGRAM_SETTINGS_EDIT_ROUTE } from "../../program-settings/program-settings.constants";
 import dashboardActions from "../actions/dashboard-actions";

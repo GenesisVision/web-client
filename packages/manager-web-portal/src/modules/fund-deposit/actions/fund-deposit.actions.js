@@ -4,8 +4,8 @@ import {
   INVEST_TO_FUND_BY_ID,
   INVEST_TO_FUND_BY_ID_CLEAR
 } from "modules/fund-deposit/fund-deposit.constants";
-import { managerApiProxy } from "services/api-client/manager-api";
-import authService from "services/auth-service";
+import { managerApiProxy } from "shared/services/api-client/manager-api";
+import authService from "shared/services/auth-service";
 
 export const fetchDepositFundInfoById = (id, currency) => {
   return {

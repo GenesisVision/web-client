@@ -1,4 +1,4 @@
-import apiReducerFactory from "../../../shared/reducers/api-reducer/api-reducer";
+import apiReducerFactory from "shared/reducers/api-reducer/api-reducer";
 
 import { PROGRAM_CLOSE_PERIOD } from "../actions/program-close-period-actions.constants";
 

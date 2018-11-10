@@ -1,8 +1,8 @@
 import authActions from "actions/auth-actions";
 import { HOME_ROUTE } from "pages/app/app.routes";
 import { push } from "react-router-redux";
-import { authApiProxy } from "services/api-client/auth-api";
-import authService from "services/auth-service";
+import { authApiProxy } from "shared/services/api-client/auth-api";
+import authService from "shared/services/auth-service";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
 export const confirmEmail = (userId, code) => dispatch => {

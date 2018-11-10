@@ -1,4 +1,4 @@
-import authService from "services/auth-service";
+import authService from "shared/services/auth-service";
 
 import { calculateTotalPages } from "../../../modules/table/helpers/paging.helpers";
 import { composeRequestFilters } from "../../../modules/table/services/table.service";

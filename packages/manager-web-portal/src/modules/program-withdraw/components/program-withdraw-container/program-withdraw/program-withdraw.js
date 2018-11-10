@@ -5,10 +5,10 @@ import React from "react";
 import { translate } from "react-i18next";
 import Yup from "yup";
 
-import DaysLeftWidget from "../../../../../components/days-left-widget/days-left-widget";
-import TraderAvatar from "../../../../../components/program-avatar/program-avatar";
-import FormError from "../../../../../shared/components/form/form-error/form-error";
-import InputText from "../../../../../shared/components/form/input-text/input-text";
+import DaysLeftWidget from "shared/components/days-left-widget/days-left-widget";
+import TraderAvatar from "shared/components/program-avatar/program-avatar";
+import FormError from "shared/components/form/form-error/form-error";
+import InputText from "shared/components/form/input-text/input-text";
 import PopupButtons from "../../../../popup/components/popup-buttons/popup-buttons";
 import PopupHeader from "../../../../popup/components/popup-header/popup-header";
 

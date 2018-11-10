@@ -1,7 +1,7 @@
 import React from "react";
 import { translate } from "react-i18next";
 
-import GVCheckbox from "../../../../../../../shared/components/form/gv-checkbox/gv-checkbox";
+import GVCheckbox from "shared/components/form/gv-checkbox/gv-checkbox";
 import FilterItem from "../../../../../../filter-pane/components/filter-item/filter-item";
 import { AVAILABLE_INVESTMENT_FILTER_NAME } from "../../../../../programs.constants";
 

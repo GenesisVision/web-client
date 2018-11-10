@@ -3,7 +3,7 @@ import "./program-buttons.css";
 import React from "react";
 import { translate } from "react-i18next";
 
-import Button from "../../../../../../../components/button/button";
+import Button from "shared/components/button/button";
 
 const TraderButtons = ({
   t,

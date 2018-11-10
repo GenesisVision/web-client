@@ -2,7 +2,7 @@ import "./table.scss";
 
 import React, { Component } from "react";
 import Scrollbars from "react-custom-scrollbars";
-import { loadData, saveData } from "utils/localstorage";
+import { loadData, saveData } from "shared/utils/localstorage";
 
 import TableBody from "./table-body";
 import TableFooter from "./table-footer";

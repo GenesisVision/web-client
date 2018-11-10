@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import React, { PureComponent } from "react";
 
-import { alertMessageActions } from "../../../../shared/modules/alert-message/actions/alert-message-actions";
+import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import ProgramWithdraw from "./program-withdraw/program-withdraw";
 import programWithdrawActions from "../../actions/program-withdraw-actions";
 

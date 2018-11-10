@@ -8,8 +8,8 @@ import { compose } from "redux";
 import {
   calculateValueOfEntryFee,
   convertToCurrency
-} from "utils/currency-converter";
-import { formatValue } from "utils/formatter";
+} from "shared/utils/currency-converter";
+import { formatValue } from "shared/utils/formatter";
 import { number, object } from "yup";
 
 const ProgramDepositForm = ({

@@ -1,8 +1,8 @@
-import filesService from "../../../shared/services/file-service";
-import history from "../../../utils/history";
-import { alertMessageActions } from "../../../shared/modules/alert-message/actions/alert-message-actions";
+import filesService from "shared/services/file-service";
+import history from "shared/utils/history";
+import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { createTournamentProgram } from "../actions/program-tournament-actions";
-import { HOME_ROUTE } from "../../../components/app.constants";
+import { HOME_ROUTE } from "shared/components/app.constants";
 
 export const createProgram = programData => dispatch => {
   const data = {

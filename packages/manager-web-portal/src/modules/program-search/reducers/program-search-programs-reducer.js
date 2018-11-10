@@ -1,6 +1,6 @@
 import { LOCATION_CHANGE } from "react-router-redux";
 
-import apiReducerFactory from "../../../shared/reducers/api-reducer/api-reducer";
+import apiReducerFactory from "shared/reducers/api-reducer/api-reducer";
 import { PROGRAM_SEARCH } from "../actions/program-search-actions.constants";
 
 const programSearchProgramsReducer = apiReducerFactory(

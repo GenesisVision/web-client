@@ -2,7 +2,7 @@ import NotificationEntity from "modules/notification-settings/notification-entit
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
-import replaceParams from "utils/replace-params";
+import replaceParams from "shared/utils/replace-params";
 
 class NotificationManagers extends Component {
   render() {

@@ -1,5 +1,5 @@
-import notificationsApi from "services/api-client/notifications-api";
-import authService from "services/auth-service";
+import notificationsApi from "shared/services/api-client/notifications-api";
+import authService from "shared/services/auth-service";
 
 export const ADD_FUND_NOTIFICATIONS = "ADD_FUND_NOTIFICATIONS";
 export const FETCH_FUND_NOTIFICATIONS = "FETCH_FUND_NOTIFICATIONS";

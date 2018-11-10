@@ -1,6 +1,6 @@
 import authActions from "actions/auth-actions";
-import { authApiProxy } from "services/api-client/auth-api";
-import authService from "services/auth-service";
+import { authApiProxy } from "shared/services/api-client/auth-api";
+import authService from "shared/services/auth-service";
 
 export const CLIENT_WEB = "Web";
 

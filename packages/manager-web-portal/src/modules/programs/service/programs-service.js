@@ -1,6 +1,6 @@
 import authService from "../../../services/auth-service";
-import clearDataActionFactory from "../../../shared/actions/clear-data.factory";
-import fileServices from "../../../shared/services/file-service";
+import clearDataActionFactory from "shared/actions/clear-data.factory";
+import fileServices from "shared/services/file-service";
 import filterPaneActionsFactory from "../../filter-pane/actions/filter-pane-actions";
 import filteringActionsFactory from "../../filtering/actions/filtering-actions";
 import { composeFilteringActionType } from "../../filtering/helpers/filtering-helpers";

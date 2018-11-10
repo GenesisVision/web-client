@@ -2,7 +2,7 @@ import "./program-info.css";
 
 import React from "react";
 
-import TraderAvatar from "../../../../../../../components/program-avatar/program-avatar";
+import TraderAvatar from "shared/components/program-avatar/program-avatar";
 
 const ProgramInfo = ({
   program,

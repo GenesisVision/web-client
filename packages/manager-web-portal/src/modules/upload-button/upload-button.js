@@ -1,7 +1,7 @@
 import { GVButton } from "gv-react-components";
 import PropTypes from "prop-types";
 import React, { Component, Fragment } from "react";
-import authService from "services/auth-service";
+import authService from "shared/services/auth-service";
 import filesService from "shared/services/file-service";
 
 class UploadButton extends Component {

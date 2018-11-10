@@ -7,7 +7,7 @@ import moment from "moment";
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { formatValue } from "utils/formatter";
+import { formatValue } from "shared/utils/formatter";
 
 const ProgramDetailsStatistics = ({
   t,

@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { authApiProxy } from "services/api-client/auth-api";
-import authService from "services/auth-service";
+import { authApiProxy } from "shared/services/api-client/auth-api";
+import authService from "shared/services/auth-service";
 
 import PhoneVerificationForm from "./phone-verification-form";
 

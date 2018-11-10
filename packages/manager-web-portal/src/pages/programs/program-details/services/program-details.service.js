@@ -2,12 +2,12 @@ import { DEFAULT_PERIOD } from "shared/components/chart/chart-period/chart-perio
 import { DEFAULT_PAGING } from "modules/table/reducers/table-paging.reducer";
 import { composeRequestFilters } from "modules/table/services/table.service";
 import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
-import { managerApiProxy } from "services/api-client/manager-api";
-import { programsApiProxy } from "services/api-client/programs-api";
-import authService from "services/auth-service";
-import getParams from "utils/get-params";
+import { managerApiProxy } from "shared/services/api-client/manager-api";
+import { programsApiProxy } from "shared/services/api-client/programs-api";
+import authService from "shared/services/auth-service";
+import getParams from "shared/utils/get-params";
 
-import { alertMessageActions } from "../../../../shared/modules/alert-message/actions/alert-message-actions";
+import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { PROGRAM_SLUG_URL_PARAM_NAME } from "../../programs.routes";
 import {
   PROGRAM_TRADES_DEFAULT_FILTERS,

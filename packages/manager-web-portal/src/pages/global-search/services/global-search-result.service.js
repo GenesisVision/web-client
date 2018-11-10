@@ -1,4 +1,4 @@
-import { searchApiProxy } from "services/api-client/search-api";
+import { searchApiProxy } from "shared/services/api-client/search-api";
 
 export const search = (queryValue = "") => {
   const trimmedQuery = queryValue.trim();

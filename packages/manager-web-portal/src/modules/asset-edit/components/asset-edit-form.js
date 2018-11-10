@@ -11,7 +11,7 @@ import { compose } from "redux";
 import ProgramDefaultImage from "../../../pages/create-program/components/create-program-settings/program-default-image";
 import InputImage from "shared/components/form/input-image/input-image";
 import editAssetSettingsValidationSchema from "./asset-edit.validators";
-import filesService from "../../../shared/services/file-service";
+import filesService from "shared/services/file-service";
 import { FUND, PROGRAM } from "../asset-edit.constants";
 
 const AssetEditForm = ({

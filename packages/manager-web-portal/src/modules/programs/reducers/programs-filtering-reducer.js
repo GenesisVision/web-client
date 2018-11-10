@@ -1,6 +1,6 @@
 // import { PLATFORM_SETTINGS } from "../../../actions/platform-action";
 import { PLATFORM_SETTINGS } from "../../../actions/platform-action";
-import { SUCCESS_SUFFIX } from "../../../shared/reducers/api-reducer/api-reducer";
+import { SUCCESS_SUFFIX } from "shared/reducers/api-reducer/api-reducer";
 import filteringReducerFactory from "../../filtering/reducers/filtering-reducers";
 import { normalizeFilteringSelector } from "../../filtering/selectors/filtering-selectors";
 import { PROGRAMS } from "../actions/programs-actions.constants";

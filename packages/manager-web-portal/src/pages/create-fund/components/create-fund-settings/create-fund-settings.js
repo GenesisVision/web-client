@@ -14,9 +14,9 @@ import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import InputImage from "shared/components/form/input-image/input-image";
-import { allowValuesNumberFormat } from "utils/helpers";
+import { allowValuesNumberFormat } from "shared/utils/helpers";
 
-import AddButton from "../../../../components/add-button/add-button";
+import AddButton from "shared/components/add-button/add-button";
 import CreateFundSettingsAddAsset from "./create-fund-settings-add-asset/create-fund-settings-add-asset";
 import CreateFundSettingsAssetsComponent from "./create-fund-settings-assets-block/create-fund-settings-assets-block";
 import createFundSettingsValidationSchema from "./create-fund-settings.validators";

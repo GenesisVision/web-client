@@ -1,4 +1,4 @@
-import filesService from "../../../shared/services/file-service";
+import filesService from "shared/services/file-service";
 import programDepositActions from "../actions/program-deposit-actions";
 
 const fetchProgramDeposit = programId => dispatch => {

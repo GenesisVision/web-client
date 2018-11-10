@@ -7,7 +7,7 @@ import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { formatValue } from "utils/formatter";
+import { formatValue } from "shared/utils/formatter";
 
 class ProgramDetailsInvestment extends PureComponent {
   state = {

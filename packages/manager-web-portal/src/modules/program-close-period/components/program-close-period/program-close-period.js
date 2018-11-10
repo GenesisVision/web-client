@@ -1,7 +1,7 @@
 import { withFormik } from "formik";
 import React from "react";
 
-import FormError from "../../../../shared/components/form/form-error/form-error";
+import FormError from "shared/components/form/form-error/form-error";
 import PopupButtons from "../../../popup/components/popup-buttons/popup-buttons";
 import PopupHeader from "../../../popup/components/popup-header/popup-header";
 

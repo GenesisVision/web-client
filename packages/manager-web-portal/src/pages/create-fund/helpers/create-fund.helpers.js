@@ -1,4 +1,4 @@
-import { getNumberWithoutSuffix } from "utils/helpers";
+import { getNumberWithoutSuffix } from "shared/utils/helpers";
 
 export const getDataWithoutSuffixes = (data, fields) => {
   let result = { ...data };

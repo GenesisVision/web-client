@@ -1,4 +1,4 @@
-import authApi from "services/api-client/auth-api";
+import authApi from "shared/services/api-client/auth-api";
 
 export const LOGIN = "LOGIN";
 export const LOGIN_TWO_FACTOR = "LOGIN_TWO_FACTOR";

@@ -1,5 +1,5 @@
-import { managerApiProxy } from "services/api-client/manager-api";
-import authService from "services/auth-service";
+import { managerApiProxy } from "shared/services/api-client/manager-api";
+import authService from "shared/services/auth-service";
 
 export const fetchPortfolioEvents = filters => {
   const authorization = authService.getAuthArg();

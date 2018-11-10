@@ -3,8 +3,8 @@ import "./wallet-add-funds-form.scss";
 import WalletAddFundsForm from "modules/wallet-add-funds/components/wallet-add-funds-form";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { walletApiProxy } from "services/api-client/wallet-api";
-import authService from "services/auth-service";
+import { walletApiProxy } from "shared/services/api-client/wallet-api";
+import authService from "shared/services/auth-service";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
 class WalletAddFundsContainer extends Component {

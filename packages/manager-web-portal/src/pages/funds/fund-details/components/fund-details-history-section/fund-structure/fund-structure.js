@@ -6,7 +6,7 @@ import TableModule from "modules/table/components/table-module";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { formatValue } from "utils/formatter";
+import { formatValue } from "shared/utils/formatter";
 
 import { FUND_STRUCTURE_COLUMNS } from "../../../fund-details.constants";
 import * as service from "../../../services/fund-details.service";

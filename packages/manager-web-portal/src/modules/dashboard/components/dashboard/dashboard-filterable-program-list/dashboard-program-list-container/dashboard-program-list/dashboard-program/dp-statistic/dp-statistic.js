@@ -1,7 +1,7 @@
 import NumberFormat from "react-number-format";
 import React from "react";
 
-import DaysLeftWidget from "../../../../../../../../../components/days-left-widget/days-left-widget";
+import DaysLeftWidget from "shared/components/days-left-widget/days-left-widget";
 
 import "./dp-statistic.css";
 

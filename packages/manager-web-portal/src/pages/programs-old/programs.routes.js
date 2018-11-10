@@ -1,4 +1,4 @@
-import replaceParams from "../../utils/replace-params";
+import replaceParams from "shared/utils/replace-params";
 export const PROGRAM_SLUG_URL_PARAM_NAME = "programSlugUrl";
 export const PROGRAMS_ROUTE = "/programs";
 export const PROGRAM_DETAILS_ROUTE = `${PROGRAMS_ROUTE}/:${PROGRAM_SLUG_URL_PARAM_NAME}`;

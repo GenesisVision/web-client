@@ -10,9 +10,9 @@ import moment from "moment";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { formatValue } from "utils/formatter";
+import { formatValue } from "shared/utils/formatter";
 
-import BaseProfitability from "../../../../../../components/profitability/base-profitability";
+import BaseProfitability from "shared/components/profitability/base-profitability";
 import {
   PROGRAM_TRADES_COLUMNS,
   PROGRAM_TRADES_DEFAULT_FILTERS,

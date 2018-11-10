@@ -2,7 +2,7 @@ import { GVTab, GVTabs } from "gv-react-components";
 import React from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
-import replaceParams from "utils/replace-params";
+import replaceParams from "shared/utils/replace-params";
 
 import {
   FUNDS_EXPLORE_TAB_NAME,

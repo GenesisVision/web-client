@@ -9,7 +9,7 @@ import { TableCell, TableRow } from "modules/table/components";
 import React from "react";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
-import { formatValue } from "utils/formatter";
+import { formatValue } from "shared/utils/formatter";
 
 import { composeProgramDetailsUrl } from "../../../../pages/programs/programs.routes";
 

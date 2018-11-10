@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { translate } from "react-i18next";
-import { formatValue } from "utils/formatter";
+import { formatValue } from "shared/utils/formatter";
 
 const ProgramWithdrawTop = ({
   t,

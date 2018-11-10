@@ -4,12 +4,12 @@ import { Field, withFormik } from "formik";
 import React from "react";
 import { translate } from "react-i18next";
 
-import Button from "../../../../../components/button/button";
-import FormError from "../../../../../shared/components/form/form-error/form-error";
-import GVTextarea from "../../../../../shared/components/form/gv-textarea/gv-textarea";
-import InputFile from "../../../../../shared/components/form/input-file/input-file";
-import InputText from "../../../../../shared/components/form/input-text/input-text";
-import managerAvatar from "../../../../../shared/media/manager-avatar.png";
+import Button from "shared/components/button/button";
+import FormError from "shared/components/form/form-error/form-error";
+import GVTextarea from "shared/components/form/gv-textarea/gv-textarea";
+import InputFile from "shared/components/form/input-file/input-file";
+import InputText from "shared/components/form/input-text/input-text";
+import managerAvatar from "shared/media/manager-avatar.png";
 import validateSchema from "./program-tournament-create-form.validators";
 
 const ProgramTournamentCreateForm = ({

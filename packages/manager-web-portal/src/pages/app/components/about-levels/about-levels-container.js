@@ -2,7 +2,7 @@ import "./about-level.scss";
 
 import { CURRENCY_VALUES } from "modules/currency-select/currency-select.constants";
 import React, { Component } from "react";
-import rateApiProxy from "services/api-client/rate-api";
+import rateApiProxy from "shared/services/api-client/rate-api";
 
 import AboutLevelsComponent from "./about-levels";
 

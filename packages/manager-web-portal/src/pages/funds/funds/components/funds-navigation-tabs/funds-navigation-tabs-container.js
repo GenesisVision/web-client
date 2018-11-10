@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import { push } from "react-router-redux";
 import { compose } from "redux";
 import isAuthenticated from "shared/decorators/is-authenticated";
-import replaceParams from "utils/replace-params";
+import replaceParams from "shared/utils/replace-params";
 
 import { FUNDS_TAB_ROUTE } from "../../../funds.routes";
 import FundsNavigationTabs from "./funds-navigation-tabs";

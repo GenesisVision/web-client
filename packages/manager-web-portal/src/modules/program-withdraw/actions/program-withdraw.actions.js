@@ -1,8 +1,8 @@
 import { FETCH_WITHDRAW_PROGRAM_INFO } from "modules/program-withdraw/program-withdraw-constants";
 import investorApi, {
   investorApiProxy
-} from "services/api-client/investor-api";
-import authService from "services/auth-service";
+} from "shared/services/api-client/investor-api";
+import authService from "shared/services/auth-service";
 
 export const fetchWithdrawInfoById = (id, currency) => ({
   type: FETCH_WITHDRAW_PROGRAM_INFO,

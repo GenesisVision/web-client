@@ -2,7 +2,7 @@ import "./popup-buttons.css";
 
 import React from "react";
 
-import Button from "../../../../components/button/button";
+import Button from "shared/components/button/button";
 
 const PopupButtons = ({
   submitLabel,

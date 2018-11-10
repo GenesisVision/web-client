@@ -8,7 +8,7 @@ import React, { Component, Fragment } from "react";
 import Scrollbars from "react-custom-scrollbars";
 import { translate } from "react-i18next";
 
-import VerificationStatus from "../../components/verification-status/verification-status";
+import VerificationStatus from "shared/components/verification-status/verification-status";
 import About from "../about/about";
 
 class Profile extends Component {

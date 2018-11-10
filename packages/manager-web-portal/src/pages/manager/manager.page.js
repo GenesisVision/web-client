@@ -5,9 +5,9 @@ import React, { Component } from "react";
 import { translate } from "react-i18next";
 import connect from "react-redux/es/connect/connect";
 import { bindActionCreators } from "redux";
-import replaceParams from "utils/replace-params";
+import replaceParams from "shared/utils/replace-params";
 
-import { SLUG_URL_REGEXP } from "../../utils/constants";
+import { SLUG_URL_REGEXP } from "shared/utils/constants";
 import ManagerDescriptionContainer from "./components/manager-description/manager-description-container";
 import ManagerHistorySection from "./components/program-details-history-section/manager-history-section";
 import * as managerService from "./services/manager.service";
