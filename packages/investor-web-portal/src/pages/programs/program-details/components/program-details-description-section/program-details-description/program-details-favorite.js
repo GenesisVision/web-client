@@ -1,4 +1,4 @@
-import FavoriteIcon from "modules/favorite-asset/components/favorite-icon/favorite-icon";
+import FavoriteIcon from "shared/components/favorite-asset/favorite-icon/favorite-icon";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { compose } from "redux";

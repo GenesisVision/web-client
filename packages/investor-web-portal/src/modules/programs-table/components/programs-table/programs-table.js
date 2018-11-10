@@ -1,4 +1,4 @@
-import "./programs.scss";
+import "shared/components/programs-table/programs.scss";
 
 import { Table } from "modules/table/components";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
@@ -13,8 +13,8 @@ import {
   LEVEL_FILTER_NAME,
   PROGRAMS_COLUMNS
 } from "../../programs.constants";
-import ProgramCard from "./program-card";
-import ProgramTableRow from "./program-table-row";
+import ProgramCard from "shared/components/programs-table/program-card";
+import ProgramTableRow from "shared/components/programs-table/program-table-row";
 
 const ProgramsTable = ({
   t,

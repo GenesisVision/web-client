@@ -17,7 +17,7 @@ import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 
 import { formatValue } from "shared/utils/formatter";
-import { composeFundsDetailsUrl } from "../../../../funds/funds.routes";
+import { composeFundsDetailsUrl } from "shared/utils/compose-url";
 import {
   DASHBOARD_FUNDS_FILTERS,
   DASHBOARD_FUNDS_TABLE_COLUMNS
