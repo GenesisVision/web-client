@@ -1,4 +1,4 @@
-import { updateFilter } from "../helpers/filtering.helpers";
+import { updateFilter } from "shared/components/table/helpers/filtering.helpers";
 
 const defaultState = {};
 
