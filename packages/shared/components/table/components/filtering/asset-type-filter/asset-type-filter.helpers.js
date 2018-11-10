@@ -1,4 +1,4 @@
-import { FilterType } from "modules/table/helpers/filtering.helpers";
+import { FilterType } from "../../../helpers/filtering.helpers";
 
 import {
   ASSET_TYPE_FILTER_DEFAULT_VALUE,
