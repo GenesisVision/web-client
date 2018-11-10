@@ -1,6 +1,6 @@
 import authService from "shared/services/auth-service";
 
-import { calculateTotalPages } from "../../../modules/table/helpers/paging.helpers";
+import { calculateTotalPages } from "shared/components/table/helpers/paging.helpers";
 import { composeRequestFilters } from "../../../modules/table/services/table.service";
 import * as actions from "../actions/dashboard.actions";
 import { DASHBOARD_FUNDS_FILTERS } from "../dashboard.constants";

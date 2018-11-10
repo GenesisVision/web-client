@@ -5,9 +5,10 @@ import FundAssetContainer from "shared/components/fund-asset/fund-asset-containe
 import Profitability from "shared/components/profitability/profitability";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import { GVButton } from "gv-react-components";
-import { TableCell, TableRow } from "modules/table/components";
-import DateRangeFilter from "modules/table/components/filtering/date-range-filter/date-range-filter";
-import { DATE_RANGE_FILTER_NAME } from "modules/table/components/filtering/date-range-filter/date-range-filter.constants";
+import TableCell from "shared/components/table/components/table-cell";
+import TableRow from "shared/components/table/components/table-row";
+import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
+import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import TableContainer from "modules/table/components/table-container";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";

@@ -3,7 +3,8 @@ import FundAssetContainer from "shared/components/fund-asset/fund-asset-containe
 import Profitability from "shared/components/profitability/profitability";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import { GVButton } from "gv-react-components";
-import { TableCell, TableRow } from "modules/table/components";
+import TableCell from "shared/components/table/components/table-cell";
+import TableRow from "shared/components/table/components/table-row";
 import React, { Component } from "react";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";

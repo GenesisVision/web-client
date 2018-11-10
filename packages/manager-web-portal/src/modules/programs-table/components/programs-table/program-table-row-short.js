@@ -5,7 +5,8 @@ import ProgramSimpleChart from "shared/components/program-simple-chart/program-s
 import Tooltip from "shared/components/tooltip/tooltip";
 import { GVButton } from "gv-react-components";
 import FavoriteIcon from "modules/favorite-asset/components/favorite-icon/favorite-icon";
-import { TableCell, TableRow } from "modules/table/components";
+import TableCell from "shared/components/table/components/table-cell";
+import TableRow from "shared/components/table/components/table-row";
 import React from "react";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";

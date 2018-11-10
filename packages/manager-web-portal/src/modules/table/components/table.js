@@ -1,12 +1,12 @@
-import "./table.scss";
+import "shared/components/table/components/table.scss";
 
 import React, { Component } from "react";
 import Scrollbars from "react-custom-scrollbars";
 import { loadData, saveData } from "shared/utils/localstorage";
 
-import TableBody from "./table-body";
-import TableFooter from "./table-footer";
-import TableHeader from "./table-header";
+import TableBody from "shared/components/table/components/table-body";
+import TableFooter from "shared/components/table/components/table-footer";
+import TableHeader from "shared/components/table/components/table-header";
 import TableToolbar from "./table-toolbar";
 
 export const TABLE_VIEW = "table_view";
@@ -28,8 +28,9 @@ class Table extends Component {
     this.setState({ view });
   };
 
-  isViewSwitchEnabled = this.props.renderBodyRow !== undefined &&
-  this.props.renderBodyCard !== undefined;
+  isViewSwitchEnabled =
+    this.props.renderBodyRow !== undefined &&
+    this.props.renderBodyCard !== undefined;
 
   renderTrackVertical = () => <span className="table__vertical-track" />;
 

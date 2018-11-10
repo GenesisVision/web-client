@@ -2,7 +2,8 @@ import "./managers-table.scss";
 
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
 import { GVButton } from "gv-react-components";
-import { TableCell, TableRow } from "modules/table/components";
+import TableCell from "shared/components/table/components/table-cell";
+import TableRow from "shared/components/table/components/table-row";
 import moment from "moment";
 import { composeManagerDetailsUrl } from "pages/manager/manager.page";
 import React from "react";

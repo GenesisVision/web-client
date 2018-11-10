@@ -5,7 +5,7 @@ import ProgramPeriodPie from "shared/components/program-period/program-period-pi
 import { GVButton } from "gv-react-components";
 import FavoriteIcon from "modules/favorite-asset/components/favorite-icon/favorite-icon";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
-import { TableRow } from "modules/table/components";
+import TableRow from "shared/components/table/components/table-row";
 import { composeManagerDetailsUrl } from "pages/manager/manager.page";
 import { composeProgramDetailsUrl } from "pages/programs/programs.routes";
 import React, { Component } from "react";

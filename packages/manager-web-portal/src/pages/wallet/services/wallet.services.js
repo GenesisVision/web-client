@@ -1,4 +1,4 @@
-import { calculateTotalPages } from "modules/table/helpers/paging.helpers";
+import { calculateTotalPages } from "shared/components/table/helpers/paging.helpers";
 import { composeRequestFilters } from "modules/table/services/table.service";
 import { walletApiProxy } from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
