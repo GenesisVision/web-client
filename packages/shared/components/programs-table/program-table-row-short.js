@@ -4,7 +4,7 @@ import ProgramPeriodPie from "shared/components/program-period/program-period-pi
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import Tooltip from "shared/components/tooltip/tooltip";
 import { GVButton } from "gv-react-components";
-import FavoriteIcon from "modules/favorite-asset/components/favorite-icon/favorite-icon";
+import FavoriteIcon from "shared/components/favorite-asset/favorite-icon/favorite-icon";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import React from "react";
@@ -12,7 +12,7 @@ import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import { formatValue } from "shared/utils/formatter";
 
-import { composeProgramDetailsUrl } from "../../../../pages/programs/programs.routes";
+import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 
 const ProgramTableRowShort = ({
   title,
@@ -116,16 +116,15 @@ const ProgramTableRowShort = ({
       <TableCell className="programs-table__cell programs-table__cell--chart">
         <ProgramSimpleChart data={program.chart} programId={program.id} />
       </TableCell>
-      {isAuthenticated &&
-        program.personalDetails && (
-          <TableCell className="programs-table__cell programs-table__cell--favorite">
-            <FavoriteIcon
-              id={program.id}
-              selected={program.personalDetails.isFavorite}
-              onClick={toggleFavorite}
-            />
-          </TableCell>
-        )}
+      {isAuthenticated && program.personalDetails && (
+        <TableCell className="programs-table__cell programs-table__cell--favorite">
+          <FavoriteIcon
+            id={program.id}
+            selected={program.personalDetails.isFavorite}
+            onClick={toggleFavorite}
+          />
+        </TableCell>
+      )}
     </TableRow>
   );
 };

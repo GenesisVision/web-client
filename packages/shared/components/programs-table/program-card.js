@@ -5,10 +5,8 @@ import Profitability from "shared/components/profitability/profitability";
 import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import { GVButton } from "gv-react-components";
-import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
-import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
-import { composeManagerDetailsUrl } from "pages/manager/manager.page";
-import { composeProgramDetailsUrl } from "pages/programs/programs.routes";
+import { composeProgramDetailsUrl } from "shared/utils/compose-url";
+import { composeManagerDetailsUrl } from "shared/utils/compose-url";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -22,19 +20,6 @@ class ProgramCard extends Component {
     isOpenInvestmentPopup: false,
     isOpenWithdrawalPopup: false
   };
-  handleOpenWithdrawalPopup = () => {
-    this.handleCloseDropdown();
-    this.setState({ isOpenWithdrawalPopup: true });
-  };
-  handleCloseWithdrawalPopup = () => {
-    this.setState({ isOpenWithdrawalPopup: false });
-  };
-  handleOpenInvestmentPopup = () => {
-    this.handleCloseDropdown();
-    this.setState({ isOpenInvestmentPopup: true });
-  };
-  handleCloseInvestmentPopup = () =>
-    this.setState({ isOpenInvestmentPopup: false });
   handleOpenDropdown = event => this.setState({ anchor: event.currentTarget });
   handleCloseDropdown = () => this.setState({ anchor: null });
   render() {
@@ -98,25 +83,6 @@ class ProgramCard extends Component {
               onClose={this.handleCloseDropdown}
             >
               <div className="popover-list">
-                {/* {program.personalDetails &&
-                  program.personalDetails.isInvested && (
-                    <GVButton
-                      variant="text"
-                      color="secondary"
-                      onClick={this.handleOpenWithdrawalPopup}
-                    >
-                      {t("program-actions.withdraw")}
-                    </GVButton>
-                  )}
-                {program.personalDetails && (
-                  <GVButton
-                    variant="text"
-                    color="secondary"
-                    onClick={this.handleOpenInvestmentPopup}
-                  >
-                    {t("program-actions.invest")}
-                  </GVButton>
-                )} */}
                 <Link
                   to={{
                     pathname: composeProgramDetailsUrl(program.url),
@@ -141,16 +107,15 @@ class ProgramCard extends Component {
                       {t("program-actions.add-to-favorites")}
                     </GVButton>
                   )}
-                {program.personalDetails &&
-                  program.personalDetails.isFavorite && (
-                    <GVButton
-                      variant="text"
-                      color="secondary"
-                      onClick={handleToggleFavorite}
-                    >
-                      {t("program-actions.remove-from-favorites")}
-                    </GVButton>
-                  )}
+                {program.personalDetails && program.personalDetails.isFavorite && (
+                  <GVButton
+                    variant="text"
+                    color="secondary"
+                    onClick={handleToggleFavorite}
+                  >
+                    {t("program-actions.remove-from-favorites")}
+                  </GVButton>
+                )}
               </div>
             </Popover>
           </div>
@@ -231,18 +196,6 @@ class ProgramCard extends Component {
             </tbody>
           </table>
         </div>
-        <ProgramDepositContainer
-          open={this.state.isOpenInvestmentPopup}
-          id={program.id}
-          onClose={this.handleCloseInvestmentPopup}
-          type={"program"}
-        />
-        <ProgramWithdrawContainer
-          programCurrency={program.currency}
-          open={this.state.isOpenWithdrawalPopup}
-          id={program.id}
-          onClose={this.handleCloseWithdrawalPopup}
-        />
       </div>
     );
   }

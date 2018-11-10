@@ -3,34 +3,21 @@ import { Icon } from "shared/components/icon/icon";
 import Profitability from "shared/components/profitability/profitability";
 import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
 import { GVButton } from "gv-react-components";
-import FavoriteIcon from "modules/favorite-asset/components/favorite-icon/favorite-icon";
-import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
-import { TableRow } from "modules/table/components";
-import { composeManagerDetailsUrl } from "pages/manager/manager.page";
-import { composeProgramDetailsUrl } from "pages/programs/programs.routes";
+import FavoriteIcon from "shared/components/favorite-asset/favorite-icon/favorite-icon";
+import TableRow from "shared/components/table/components/table-row";
+import { composeProgramDetailsUrl } from "shared/utils/compose-url";
+import { composeManagerDetailsUrl } from "shared/utils/compose-url";
 import React, { Component } from "react";
 import { Scrollbars } from "react-custom-scrollbars";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import { formatValue } from "shared/utils/formatter";
-
-import ProgramBigChart from "../program-big-chart/program-big-chart";
+import ProgramBigChart from "./program-big-chart/program-big-chart";
 
 class ProgramTableRowDetailed extends Component {
   state = {
     isOpenInvestToProgramPopup: false
-  };
-  handleOpenInvest = () => {
-    const { isAuthenticated, redirectToLogin } = this.props;
-    if (isAuthenticated) {
-      this.setState({ isOpenInvestToProgramPopup: true });
-    } else {
-      redirectToLogin();
-    }
-  };
-  handleCloseInvest = () => {
-    this.setState({ isOpenInvestToProgramPopup: false });
   };
 
   render() {
@@ -202,35 +189,19 @@ class ProgramTableRowDetailed extends Component {
                     </div>
                   </div>
                 </div>
-                {isAuthenticated &&
-                  program.personalDetails && (
-                    <div className="program-detailed__favorites-block">
-                      <span style={{ float: "right" }}>
-                        {t("program-details-page.description.addToFavorites")}
-                        <FavoriteIcon
-                          onClick={toggleFavorite}
-                          id={program.id}
-                          selected={program.personalDetails.isFavorite}
-                        />
-                      </span>
-                    </div>
-                  )}
+                {isAuthenticated && program.personalDetails && (
+                  <div className="program-detailed__favorites-block">
+                    <span style={{ float: "right" }}>
+                      {t("program-details-page.description.addToFavorites")}
+                      <FavoriteIcon
+                        onClick={toggleFavorite}
+                        id={program.id}
+                        selected={program.personalDetails.isFavorite}
+                      />
+                    </span>
+                  </div>
+                )}
                 <div className="program-detailed__bottom-block">
-                  {/* <GVButton
-                    onClick={this.handleOpenInvest}
-                    disabled={
-                      !program.personalDetails ||
-                      !program.personalDetails.canInvest
-                    }
-                  >
-                    {t("program-actions.invest")}
-                  </GVButton> */}
-                  <ProgramDepositContainer
-                    type="program"
-                    id={program.id}
-                    onClose={this.handleCloseInvest}
-                    open={this.state.isOpenInvestToProgramPopup}
-                  />
                   <div className="program-detailed__details">
                     <Link
                       to={{
