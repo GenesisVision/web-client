@@ -6,7 +6,7 @@ import GVDatePicker from "shared/components/gv-datepicker/gv-datepicker";
 import VerificationStatus from "shared/components/verification-status/verification-status";
 import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
-import PhoneVerification from "modules/phone-verification/phone-verification";
+import PhoneVerification from "shared/components/phone-verification/phone-verification";
 import UploadButton from "modules/upload-button/upload-button";
 import moment from "moment";
 import PropTypes from "prop-types";
