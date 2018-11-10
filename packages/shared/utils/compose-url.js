@@ -9,6 +9,9 @@ export const MANAGER_DETAILS_ROUTE = `${MANAGERS_ROUTE}/:${MANAGER_SLUG_URL_PARA
 export const FUNDS_SLUG_URL_PARAM_NAME = "fundsSlugUrl";
 export const FUNDS_ROUTE = "/funds";
 export const FUND_DETAILS_ROUTE = `${FUNDS_ROUTE}/:${FUNDS_SLUG_URL_PARAM_NAME}`;
+export const NOTIFICATIONS_ROUTE = "/notifications";
+export const PROGRAM_NOTIFICATIONS_ROUTE = `${NOTIFICATIONS_ROUTE}/program/:id`;
+export const FUND_NOTIFICATIONS_ROUTE = `${NOTIFICATIONS_ROUTE}/fund/:id`;
 
 export const composeProgramDetailsUrl = slugUrl =>
   replaceParams(PROGRAM_DETAILS_ROUTE, {
@@ -24,3 +27,15 @@ export const composeFundsDetailsUrl = slugUrl =>
   replaceParams(FUND_DETAILS_ROUTE, {
     [`:${FUNDS_SLUG_URL_PARAM_NAME}`]: slugUrl
   });
+
+export const composeProgramNotificationsUrl = url => {
+  return replaceParams(PROGRAM_NOTIFICATIONS_ROUTE, {
+    ":id": url
+  });
+};
+
+export const composeFundNotificationsUrl = url => {
+  return replaceParams(FUND_NOTIFICATIONS_ROUTE, {
+    ":id": url
+  });
+};
