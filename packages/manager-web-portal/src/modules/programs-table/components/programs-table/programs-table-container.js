@@ -63,8 +63,8 @@ class ProgramsContainer extends Component {
 const mapStateToProps = state => {
   const { isAuthenticated } = state.authData;
   const { isPending, data } = state.programsData.items;
-  const currencies = state.platformData.settings.data
-    ? state.platformData.settings.data.currencies
+  const currencies = state.platformData.data
+    ? state.platformData.data.currencies
     : [];
   return { isPending, data, isAuthenticated, currencies };
 };

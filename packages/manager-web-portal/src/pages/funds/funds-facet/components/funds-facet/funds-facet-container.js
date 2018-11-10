@@ -40,7 +40,7 @@ class FundsFacetContainer extends Component {
 }
 
 const mapStateToProps = state => {
-  const { data } = state.platformData.settings;
+  const { data } = state.platformData;
   let facets = null;
   if (data) facets = data.fundsFacets;
   return { facets };

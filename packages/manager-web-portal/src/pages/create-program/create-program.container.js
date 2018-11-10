@@ -137,7 +137,7 @@ class CreateProgramContainer extends Component {
 
 const mapStateToProps = state => ({
   headerData: state.profileHeader.info.data,
-  platformSettings: state.platformData.settings.data
+  platformSettings: state.platformData.data
 });
 
 const mapDispatchToProps = dispatch => {

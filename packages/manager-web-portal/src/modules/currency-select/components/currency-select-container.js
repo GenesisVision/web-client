@@ -39,9 +39,7 @@ CurrencySelectContainer.defaultProps = {
 };
 
 const mapStateToProps = ({ accountSettings, platformData }) => ({
-  currencyValues: platformData.settings.data
-    ? platformData.settings.data.currencies
-    : null,
+  currencyValues: platformData.data ? platformData.data.currencies : null,
   currency: accountSettings.currency
 });
 
@@ -49,6 +47,7 @@ const mapDispatchToProps = dispatch => ({
   service: bindActionCreators({ updateCurrency }, dispatch)
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  CurrencySelectContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CurrencySelectContainer);

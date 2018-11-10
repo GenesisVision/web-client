@@ -42,7 +42,7 @@ class DashboardContainer extends PureComponent {
 
 const mapStateToProps = state => {
   const { isPending, errorMessage, data } = state.dashboardData.info;
-  const { data: tournamentStatus } = state.platformData.settings;
+  const { data: tournamentStatus } = state.platformData;
   const isTournamentActive =
     tournamentStatus && tournamentStatus.isTournamentRegistrationActive;
   let dashboard;

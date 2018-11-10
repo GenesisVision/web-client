@@ -79,7 +79,7 @@ class CreateFundContainer extends Component {
 const mapStateToProps = state => {
   return {
     headerData: state.profileHeader.info.data,
-    platformSettings: state.platformData.settings.data
+    platformSettings: state.platformData.data
   };
 };
 

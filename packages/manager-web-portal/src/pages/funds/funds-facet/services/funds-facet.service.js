@@ -8,9 +8,9 @@ import {
 export const getCurrentFacet = () => (dispatch, getState) => {
   const { routing, platformData } = getState();
 
-  if (!platformData.settings.data) return { isPending: true };
+  if (!platformData.data) return { isPending: true };
 
-  const { fundsFacets } = platformData.settings.data;
+  const { fundsFacets } = platformData.data;
   const facetUrl = getParams(routing.location.pathname, FUNDS_FACET_ROUTE)[
     FUNDS_SLUG_URL_PARAM_NAME
   ];
