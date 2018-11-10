@@ -9,7 +9,7 @@ import React from "react";
 import { translate } from "react-i18next";
 import FormError from "shared/components/form/form-error/form-error";
 import InputText from "shared/components/form/input-text/input-text";
-import Yup from "yup";
+import { object, number } from "yup";
 
 const FundWithdraw = ({
   t,
@@ -101,8 +101,8 @@ export default withFormik({
   mapPropsToValues: () => ({
     percent: ""
   }),
-  validationSchema: Yup.object().shape({
-    percent: Yup.number()
+  validationSchema: object().shape({
+    percent: number()
       .typeError("Amount must be a number.")
       .moreThan(0, "Amount must be greater than zero")
       .required("Amount is required.")

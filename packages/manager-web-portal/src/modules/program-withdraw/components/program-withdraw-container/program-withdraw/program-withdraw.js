@@ -3,7 +3,7 @@ import "./program-withdraw.css";
 import { Field, withFormik } from "formik";
 import React from "react";
 import { translate } from "react-i18next";
-import Yup from "yup";
+import { object, number } from "yup";
 
 import DaysLeftWidget from "shared/components/days-left-widget/days-left-widget";
 import TraderAvatar from "shared/components/program-avatar/program-avatar";
@@ -79,10 +79,9 @@ const ProgramWithdraw = ({
           </div>
           <div>
             <span>
-              {t("withdraw-program.minimal-balance")} ${
-                programWithdraw.minAccountBalanceUsd
-              }{" "}
-              ({programWithdraw.minAccountBalance} {programWithdraw.currency})
+              {t("withdraw-program.minimal-balance")} $
+              {programWithdraw.minAccountBalanceUsd} (
+              {programWithdraw.minAccountBalance} {programWithdraw.currency})
             </span>
           </div>
         </div>
@@ -105,8 +104,8 @@ export default withFormik({
   mapPropsToValues: () => ({
     amount: ""
   }),
-  validationSchema: Yup.object().shape({
-    amount: Yup.number()
+  validationSchema: object().shape({
+    amount: number()
       .typeError("Amount must be a number.")
       .moreThan(0, "Amount must be greater than zero")
       .required("Amount is required.")

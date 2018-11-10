@@ -1,22 +1,22 @@
-import Yup from "yup";
+import { object, string, number } from "yup";
 
 const editAssetSettingsValidationSchema = ({ t, ...props }) =>
-  Yup.object().shape({
-    logo: Yup.object().shape({
-      width: Yup.number().min(
+  object().shape({
+    logo: object().shape({
+      width: number().min(
         300,
         t("create-program-page.settings.validation.image-resolution-incorrect")
       ),
-      height: Yup.number().min(
+      height: number().min(
         300,
         t("create-program-page.settings.validation.image-resolution-incorrect")
       ),
-      size: Yup.number().max(
+      size: number().max(
         2097152,
         t("create-program-page.settings.validation.image-file-is-large")
       )
     }),
-    title: Yup.string()
+    title: string()
       .required(t("create-program-page.settings.validation.title-required"))
       .min(4, t("create-program-page.settings.validation.title-is-short"))
       .max(20, t("create-program-page.settings.validation.title-is-long"))
@@ -24,7 +24,7 @@ const editAssetSettingsValidationSchema = ({ t, ...props }) =>
         /^[-a-zA-Z0-9\s]{4,20}$/,
         t("create-program-page.settings.validation.title-is-latin-and-numbers")
       ),
-    description: Yup.string()
+    description: string()
       .required(
         t("create-program-page.settings.validation.description-required")
       )

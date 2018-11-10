@@ -1,8 +1,8 @@
-import Yup from "yup";
+import { object, string } from "yup";
 
-const validateSchema = Yup.object().shape({
-  title: Yup.string().required("Title is required"),
-  description: Yup.string()
+const validateSchema = object().shape({
+  title: string().required("Title is required"),
+  description: string()
 });
 
 export default validateSchema;

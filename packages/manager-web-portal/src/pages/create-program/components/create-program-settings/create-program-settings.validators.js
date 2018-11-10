@@ -1,22 +1,22 @@
-import Yup from "yup";
+import { object, string, number } from "yup";
 
 const createProgramSettingsValidationSchema = ({ t, ...props }) =>
-  Yup.object().shape({
-    logo: Yup.object().shape({
-      width: Yup.number().min(
+  object().shape({
+    logo: object().shape({
+      width: number().min(
         300,
         t("create-program-page.settings.validation.image-resolution-incorrect")
       ),
-      height: Yup.number().min(
+      height: number().min(
         300,
         t("create-program-page.settings.validation.image-resolution-incorrect")
       ),
-      size: Yup.number().max(
+      size: number().max(
         2097152,
         t("create-program-page.settings.validation.image-file-is-large")
       )
     }),
-    title: Yup.string()
+    title: string()
       .required(t("create-program-page.settings.validation.title-required"))
       .min(4, t("create-program-page.settings.validation.title-is-short"))
       .max(20, t("create-program-page.settings.validation.title-is-long"))
@@ -24,7 +24,7 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) =>
         /^[-a-zA-Z0-9\s]{4,20}$/,
         t("create-program-page.settings.validation.title-is-latin-and-numbers")
       ),
-    description: Yup.string()
+    description: string()
       .required(
         t("create-program-page.settings.validation.description-required")
       )
@@ -36,16 +36,16 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) =>
         500,
         t("create-program-page.settings.validation.description-is-long")
       ),
-    currency: Yup.string().required(
+    currency: string().required(
       t("create-program-page.settings.validation.currency-required")
     ),
-    periodLength: Yup.string().required(
+    periodLength: string().required(
       t("create-program-page.settings.validation.period-required")
     ),
-    leverage: Yup.string().required(
+    leverage: string().required(
       t("create-program-page.settings.validation.leverage-required")
     ),
-    entryFee: Yup.number()
+    entryFee: number()
       .required(t("create-program-page.settings.validation.entry-fee-required"))
       .max(
         props.programsInfo.managerMaxEntryFee,
@@ -53,7 +53,7 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) =>
           props.programsInfo.managerMaxEntryFee +
           " %"
       ),
-    successFee: Yup.number()
+    successFee: number()
       .required(
         t("create-program-page.settings.validation.success-fee-required")
       )
@@ -63,7 +63,7 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) =>
           props.programsInfo.managerMaxSuccessFee +
           " %"
       ),
-    accountType: Yup.string().required(
+    accountType: string().required(
       t("create-program-page.settings.validation.account-type-required")
     )
   });

@@ -1,29 +1,29 @@
-import * as Yup from "yup";
+import { object, string, number, array } from "yup";
 
 const createFundSettingsValidationSchema = ({ t, ...props }) =>
-  Yup.object().shape({
-    logo: Yup.object().shape({
-      width: Yup.number().min(
+  object().shape({
+    logo: object().shape({
+      width: number().min(
         300,
         t("create-fund-page.settings.validation.image-resolution-incorrect")
       ),
-      height: Yup.number().min(
+      height: number().min(
         300,
         t("create-fund-page.settings.validation.image-resolution-incorrect")
       ),
-      size: Yup.number().max(
+      size: number().max(
         2097152,
         t("create-fund-page.settings.validation.image-file-is-large")
       )
     }),
-    title: Yup.string()
+    title: string()
       .required(t("create-fund-page.settings.validation.title-required"))
       .max(20, t("create-fund-page.settings.validation.title-is-long")),
-    description: Yup.string()
+    description: string()
       .required(t("create-fund-page.settings.validation.description-required"))
       .min(20, t("create-fund-page.settings.validation.description-is-short"))
       .max(500, t("create-fund-page.settings.validation.description-is-long")),
-    entryFee: Yup.number()
+    entryFee: number()
       .required(t("create-fund-page.settings.validation.entry-fee-required"))
       .max(
         props.programsInfo.managerMaxEntryFee,
@@ -31,7 +31,7 @@ const createFundSettingsValidationSchema = ({ t, ...props }) =>
           props.programsInfo.managerMaxEntryFee +
           " %"
       ),
-    exitFee: Yup.number()
+    exitFee: number()
       .required(t("create-fund-page.settings.validation.exit-fee-required"))
       .max(
         props.programsInfo.managerMaxExitFee,
@@ -39,13 +39,13 @@ const createFundSettingsValidationSchema = ({ t, ...props }) =>
           props.programsInfo.managerMaxExitFee +
           " %"
       ),
-    remainder: Yup.number()
+    remainder: number()
       .required(t("create-fund-page.settings.validation.assets-share"))
       .max(0, t("create-fund-page.settings.validation.assets-share")),
-    assets: Yup.array()
+    assets: array()
       .required(t("create-fund-page.settings.validation.assets-count"))
       .min(2, t("create-fund-page.settings.validation.assets-count")),
-    balance: Yup.number()
+    balance: number()
       .required()
       .min(props.deposit, t("create-fund-page.settings.validation.deposit-min"))
   });
