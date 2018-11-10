@@ -7,8 +7,8 @@ import fundNotificationsReducer from "modules/fund-notifications/reducers/fund-n
 import notificationsReducer from "pages/app/components/notifications/reducers/notifications.reducers";
 import { loadingBarReducer } from "react-redux-loading-bar";
 import { routerReducer } from "react-router-redux";
-import accountSettingsReducer from "reducers/account-settings";
-import uiReducer from "reducers/ui-reducer";
+import accountSettingsReducer from "shared/reducers/account-settings";
+import uiReducer from "shared/reducers/ui-reducer";
 import { combineReducers } from "redux";
 
 import fundsReducer from "../modules/funds-table/reducers/funds-table.reducers";
@@ -22,9 +22,9 @@ import dashboardReducer from "../pages/dashboard/reducers/dashboard.reducers";
 import managerReducer from "../pages/manager/reducers/manager.reducers";
 import walletReducer from "../pages/wallet/reducers/wallet.reducers.js";
 import alertMessagesReducer from "shared/modules/alert-message/reducers/alert-message-reducers";
-import authReducer from "./auth-reducer";
-import emailPendingReducer from "./email-pending-reducer";
-import platformReducer from "./platform-reducer";
+import authReducer from "shared/reducers/auth-reducer";
+import emailPendingReducer from "shared/reducers/email-pending-reducer";
+import platformReducer from "shared/reducers/platform-reducer";
 
 export default combineReducers({
   routing: routerReducer,
