@@ -5,26 +5,17 @@ import FundAssetContainer from "shared/components/fund-asset/fund-asset-containe
 import { GVButton } from "gv-react-components";
 import FundDepositContainer from "modules/fund-deposit/fund-deposit-container";
 import { FundDetailContext } from "pages/funds/fund-details/fund-details.page";
-import { composeManagerDetailsUrl } from "pages/manager/manager.page";
-import { FUND_NOTIFICATIONS_ROUTE } from "pages/notifications/notifications.routes";
+import { composeManagerDetailsUrl, composeFundNotificationsUrl } from "shared/utils/compose-url";
 import React, { Fragment, PureComponent } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
-import replaceParams from "shared/utils/replace-params";
-
 import { formatValue } from "shared/utils/formatter";
 import FundDetailsInvestment from "../fund-details-investment/fund-details-investment";
 import FundDetailsFavorite from "./fund-details-favorite";
 import FundDetailsNotification from "./fund-details-notificaton";
 import AssetEditContainer from "../../../../../../modules/asset-edit/asset-edit-container";
 import { FUND } from "../../../../../../modules/asset-edit/asset-edit.constants";
-
-export const composeFundNotificationsUrl = url => {
-  return replaceParams(FUND_NOTIFICATIONS_ROUTE, {
-    ":id": url
-  });
-};
 
 class FundDetailsDescription extends PureComponent {
   state = {

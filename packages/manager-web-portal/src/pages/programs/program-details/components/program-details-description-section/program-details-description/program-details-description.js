@@ -5,15 +5,16 @@ import Popover from "shared/components/popover/popover";
 import { GVButton } from "gv-react-components";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import AboutLevelsContainerComponent from "pages/app/components/about-levels/about-levels-container";
-import { composeManagerDetailsUrl } from "pages/manager/manager.page";
-import { PROGRAM_NOTIFICATIONS_ROUTE } from "pages/notifications/notifications.routes";
+import {
+  composeManagerDetailsUrl,
+  composeProgramNotificationsUrl
+} from "shared/utils/compose-url";
 import { ProgramDetailContext } from "pages/programs/program-details/program-details.page";
 import React, { Fragment, PureComponent } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import { formatValue } from "shared/utils/formatter";
-import replaceParams from "shared/utils/replace-params";
 
 import AssetEditContainer from "../../../../../../modules/asset-edit/asset-edit-container";
 import { PROGRAM } from "../../../../../../modules/asset-edit/asset-edit.constants";
@@ -22,12 +23,6 @@ import ClosePeriodContainer from "./close-period/close-period-container";
 import CloseProgramContainer from "./close-program/close-program-container";
 import ProgramDetailsFavorite from "./program-details-favorite";
 import ProgramDetailsNotification from "./program-details-notificaton";
-
-export const composeProgramNotificationsUrl = url => {
-  return replaceParams(PROGRAM_NOTIFICATIONS_ROUTE, {
-    ":id": url
-  });
-};
 
 class ProgramDetailsDescription extends PureComponent {
   state = {

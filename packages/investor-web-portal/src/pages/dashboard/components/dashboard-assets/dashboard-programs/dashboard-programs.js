@@ -10,7 +10,7 @@ import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/compone
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import TableModule from "modules/table/components/table-module";
 import { DEFAULT_PAGING } from "modules/table/reducers/table-paging.reducer";
-import { composeProgramDetailsUrl } from "pages/programs/programs.routes";
+import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";

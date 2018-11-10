@@ -2,15 +2,7 @@ import NotificationEntity from "modules/notification-settings/notification-entit
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
-
-import { PROGRAM_NOTIFICATIONS_ROUTE } from "../../pages/notifications/notifications.routes";
-import replaceParams from "shared/utils/replace-params";
-
-export const composeProgramNotificationsUrl = url => {
-  return replaceParams(PROGRAM_NOTIFICATIONS_ROUTE, {
-    ":id": url
-  });
-};
+import { composeProgramNotificationsUrl } from "shared/utils/compose-url";
 
 class NotificationPrograms extends Component {
   render() {

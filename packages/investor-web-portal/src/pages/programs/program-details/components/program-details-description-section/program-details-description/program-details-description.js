@@ -6,25 +6,17 @@ import { GVButton } from "gv-react-components";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
 import AboutLevelsContainerComponent from "pages/app/components/about-levels/about-levels-container";
-import { composeManagerDetailsUrl } from "pages/manager/manager.page";
-import { PROGRAM_NOTIFICATIONS_ROUTE } from "pages/notifications/notifications.routes";
+import { composeManagerDetailsUrl, composeProgramNotificationsUrl } from "shared/utils/compose-url";
 import { ProgramDetailContext } from "pages/programs/program-details/program-details.page";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import { formatValue } from "shared/utils/formatter";
-import replaceParams from "shared/utils/replace-params";
 
 import ProgramDetailsInvestment from "../program-details-investment/program-details-investment";
 import ProgramDetailsFavorite from "./program-details-favorite";
 import ProgramDetailsNotification from "./program-details-notificaton";
-
-export const composeProgramNotificationsUrl = url => {
-  return replaceParams(PROGRAM_NOTIFICATIONS_ROUTE, {
-    ":id": url
-  });
-};
 
 class ProgramDetailsDescription extends PureComponent {
   state = {

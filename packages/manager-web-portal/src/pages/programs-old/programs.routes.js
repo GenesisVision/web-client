@@ -8,8 +8,3 @@ export const PROGRAMS_FAVORITES_TAB_NAME = "favorites";
 export const PROGRAMS_FACET_ROUTE = `${PROGRAMS_ROUTE}/facets/:${PROGRAM_SLUG_URL_PARAM_NAME}`;
 
 export default ProgramsRoutes;
-
-export const composeProgramDetailsUrl = slugUrl =>
-  replaceParams(PROGRAM_DETAILS_ROUTE, {
-    [`:${PROGRAM_SLUG_URL_PARAM_NAME}`]: slugUrl
-  });

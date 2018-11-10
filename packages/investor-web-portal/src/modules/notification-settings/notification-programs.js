@@ -1,5 +1,5 @@
 import NotificationEntity from "modules/notification-settings/notification-entity";
-import { composeProgramNotificationsUrl } from "pages/programs/program-details/components/program-details-description-section/program-details-description/program-details-description";
+import { composeProgramNotificationsUrl } from "shared/utils/compose-url";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";

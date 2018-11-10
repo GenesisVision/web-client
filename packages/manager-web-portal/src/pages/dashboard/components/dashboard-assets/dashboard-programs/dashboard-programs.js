@@ -14,22 +14,15 @@ import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import { formatPercent, formatValue } from "shared/utils/formatter";
-import replaceParams from "shared/utils/replace-params";
 
 import { DASHBOARD_PROGRAMS_COLUMNS } from "../../../dashboard.constants";
 import {
   getDashboardPrograms,
   updateDashboardProgramsFilters
 } from "../../../services/dashboard-programs.service";
-
-const PROGRAM_SLUG_URL_PARAM_NAME = "programSlugUrl";
-const PROGRAMS_ROUTE = "/programs";
-const PROGRAM_DETAILS_ROUTE = `${PROGRAMS_ROUTE}/:${PROGRAM_SLUG_URL_PARAM_NAME}`;
-
-export const composeProgramDetailsUrl = slugUrl =>
-  replaceParams(PROGRAM_DETAILS_ROUTE, {
-    [`:${PROGRAM_SLUG_URL_PARAM_NAME}`]: slugUrl
-  });
+import {
+  composeProgramDetailsUrl
+} from "shared/utils/compose-url";
 
 class DashboardPrograms extends Component {
   getDashboardProgramsPlace = state => {
