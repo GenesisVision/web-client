@@ -1,0 +1,93 @@
+@import "shared/styles/_colors.scss";
+
+.gv-textarea {
+  position: relative;
+  margin-top: 28px;
+}
+
+.gv-textarea__textarea {
+  resize: none;
+  width: 100%;
+  border: none;
+  outline: none;
+  background-color: transparent;
+
+  &:focus,
+  &.gv-textarea__textarea--filled,
+  &.gv-textarea__textarea--error {
+    & ~ .gv-textarea__label {
+      transform: scale(0.75) translate(0px, -28px);
+    }
+
+    & ~ .gv-textarea__hr {
+      transform: scaleX(1);
+    }
+  }
+}
+
+.gv-textarea__hr {
+  border-top: none $alternate-color;
+  border-left: none $alternate-color;
+  border-right: none $alternate-color;
+  border-bottom: 2px solid $alternate-color;
+  bottom: 0;
+  box-sizing: content-box;
+  margin: 0px;
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
+
+.gv-textarea__hr--error {
+  border-top: none $danger-color;
+  border-left: none $danger-color;
+  border-right: none $danger-color;
+  border-bottom: 2px solid $danger-color;
+}
+
+.gv-textarea__hr--regular {
+  border-top: none $alternate-color;
+  border-left: none $alternate-color;
+  border-right: none $alternate-color;
+  border-bottom: 2px solid $alternate-color;
+}
+
+.gv-textarea__hr-placeholder {
+  @extend .gv-textarea__hr;
+  transform: scaleX(1);
+  border-top: none $border-color;
+  border-left: none $border-color;
+  border-right: none $border-color;
+  border-bottom: 2px solid $border-color;
+}
+
+.gv-textarea__label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+  z-index: 1;
+  transform: scale(1) translate(0px, 0px);
+  transform-origin: left top 0px;
+  pointer-events: none;
+  user-select: none;
+  color: rgba(0, 0, 0, 0.3);
+
+  &.gv-textarea__label--error {
+    color: $danger-color;
+  }
+
+  &.gv-textarea__label--regular {
+    color: $alternate-color;
+  }
+}
+
+.gv-textarea__error-message {
+  position: absolute;
+  bottom: -15px;
+  font-size: 12px;
+  line-height: 12px;
+  color: $danger-color;
+  transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
