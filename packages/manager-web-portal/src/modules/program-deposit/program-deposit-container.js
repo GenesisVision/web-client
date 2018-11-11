@@ -3,7 +3,7 @@ import {
   clearDepositProgramInfo,
   clearInvestSubmit
 } from "modules/program-deposit/actions/program-deposit.actions";
-import ProgramDepositPopup from "modules/program-deposit/components/program-deposit-popup";
+import ProgramDepositPopup from "shared/components/program-deposit/program-deposit-popup";
 import {
   getDepositProgramInfoById,
   investServiceInvestById
@@ -81,6 +81,7 @@ const mapDispatchToProps = dispatch => ({
   )
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  ProgramDepositContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProgramDepositContainer);
