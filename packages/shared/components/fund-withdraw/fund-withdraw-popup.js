@@ -57,7 +57,7 @@ class FundWithdrawPopup extends Component {
 FundWithdrawPopup.propTypes = {
   fetchInfo: PropTypes.func,
   withdraw: PropTypes.func,
-  currency: PropTypes.string.isRequired
+  currency: PropTypes.string
 };
 
 export default FundWithdrawPopup;
