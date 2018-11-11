@@ -1,5 +1,5 @@
 import Dialog from "shared/components/dialog/dialog";
-import ProgramWithdrawPopup from "modules/program-withdraw/components/program-withdraw-popup";
+import ProgramWithdrawPopup from "shared/components/program-withdraw/program-withdraw-popup";
 import {
   alert,
   getProgramWithdrawInfo,
