@@ -8,7 +8,7 @@ import {
   clearDepositFundInfo,
   clearInvestSubmitFund
 } from "./actions/fund-deposit.actions";
-import FundDepositPopup from "shared/components/fund-deposit/fund-deposit-popup";
+import DepositPopup from "shared/components/deposit/deposit-popup";
 import {
   getDepositFundInfoById,
   investServiceInvestById
@@ -36,7 +36,8 @@ const FundDepositContainer = props => {
   };
   return (
     <Dialog open={props.open} onClose={handleClose}>
-      <FundDepositPopup
+      <DepositPopup
+        entryFee
         submitInfo={props.submitInfo}
         currency={props.currency}
         info={props.info.data}
