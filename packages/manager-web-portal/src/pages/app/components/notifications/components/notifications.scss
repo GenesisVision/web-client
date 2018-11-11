@@ -108,7 +108,7 @@ $line-height: 1.69;
   }
 
   &:before {
-    content: url("../../../../../shared/media/star.svg");
+    content: url("~shared/media/star.svg");
     background-color: $positive-background-color;
     line-height: 10px;
     flex-shrink: 0;
@@ -124,13 +124,13 @@ $line-height: 1.69;
 
   &[class*="--type-profile"] {
     &:before {
-      content: url("../../../../../shared/media/red-user.svg");
+      content: url("~shared/media/red-user.svg");
       background-color: $negative-background-color;
     }
   }
   &[class*="--type-platform"] {
     &:before {
-      content: url("../../../../../shared/media/news.svg");
+      content: url("~shared/media/news.svg");
       background-color: rgba($main-color, 0.2);
     }
   }
