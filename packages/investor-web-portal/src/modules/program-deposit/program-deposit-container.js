@@ -3,7 +3,7 @@ import {
   clearDepositProgramInfo,
   clearInvestSubmit
 } from "modules/program-deposit/actions/program-deposit.actions";
-import ProgramDepositPopup from "modules/program-deposit/components/program-deposit-popup";
+import ProgramDepositPopup from "shared/components/program-deposit/program-deposit-popup";
 import {
   getDepositFundInfoById,
   getDepositProgramInfoById,
@@ -37,6 +37,7 @@ const ProgramDepositContainer = props => {
   return (
     <Dialog open={props.open} onClose={handleClose}>
       <ProgramDepositPopup
+        entryFee
         submitInfo={props.submitInfo}
         currency={props.currency}
         info={props.info.data}
