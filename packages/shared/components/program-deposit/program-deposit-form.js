@@ -30,10 +30,12 @@ const ProgramDepositForm = ({
     const { floatValue, formattedValue } = values;
     const { availableInWallet, availableToInvest } = info;
     const fee = calculateValueOfEntryFee(floatValue, info.entryFee);
+    const gvFee = calculateValueOfEntryFee(floatValue, info.gvCommission);
     const validateAvailableToInvest = () => floatValue <= availableToInvest;
     return (
       formattedValue === "" ||
-      (floatValue <= parseFloat(availableInWallet - (entryFee ? fee : 0)) &&
+      (floatValue <=
+        parseFloat(availableInWallet - gvFee - (entryFee ? fee : 0)) &&
         validateAvailableToInvest())
     );
   };
