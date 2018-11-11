@@ -3,7 +3,7 @@ import {
   clearDepositFundInfo,
   clearInvestSubmitFund
 } from "./actions/fund-deposit.actions";
-import FundDepositPopup from "./components/fund-deposit-popup";
+import FundDepositPopup from "shared/components/fund-deposit/fund-deposit-popup";
 import {
   getDepositFundInfoById,
   investServiceInvestById
