@@ -1,4 +1,4 @@
-import GVScroll from "modules/scroll/gvscroll";
+import GVScroll from "shared/components/scroll/gvscroll";
 import AppRoutes from "pages/app/app.routes";
 import { AUTH_ROUTES_REGEX } from "pages/auth/auth.routes";
 import AuthRoutes from "pages/auth/auth.routes";
