@@ -1,5 +1,5 @@
 import Dialog from "shared/components/dialog/dialog";
-import FundWithdrawPopup from "modules/fund-withdraw/components/fund-withdraw-popup";
+import FundWithdrawPopup from "shared/components/fund-withdraw/fund-withdraw-popup";
 import {
   alert,
   getFundWithdrawInfo,
