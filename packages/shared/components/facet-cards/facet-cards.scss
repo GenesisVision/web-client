@@ -137,7 +137,7 @@ $facet-height: 280px;
   box-sizing: border-box;
   background-color: #1c2730; // temporary
   height: $facet-height/1.5;
-  width: $facet-width/1.5;
+  min-width: $facet-width/1.5;
   //margin-right: $facet-margin/2;
   overflow: hidden;
   box-shadow: $box-shadow-1;
@@ -157,7 +157,7 @@ $facet-height: 280px;
   }
   @include media-breakpoint-landscape-phone() {
     //margin-right: $facet-margin;
-    width: $facet-width;
+    min-width: $facet-width;
     height: $facet-height;
     &:not(:last-child) {
       margin-right: $facet-margin;
