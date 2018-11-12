@@ -1,37 +1,62 @@
 import ImageBase from "shared/components/avatar/image-base";
 import Surface from "shared/components/surface/surface";
+import classnames from "classnames";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 import facetImg from "./facet.png";
 
-const FacetCard = ({ facet, composeFacetUrl, title }) => {
-  return (
-    <Surface className="facet">
-      <Link
-        to={{
-          pathname: composeFacetUrl(facet.url),
-          state: `/ ${title}`
-        }}
+class FacetCard extends Component {
+  facet = React.createRef();
+  state = {
+    isHovered: false
+  };
+
+  handleMouseEnter = () => {
+    this.setState({ isHovered: true });
+  };
+
+  handleMouseLeave = () => {
+    this.setState({ isHovered: false });
+  };
+
+  render() {
+    const { facet, composeFacetUrl, title } = this.props;
+
+    return (
+      <Surface
+        className={classnames("facet", {
+          "facet--hovered": this.state.isHovered
+        })}
+        ref={this.facet}
+        onMouseEnter={this.handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}
       >
-        <div className="facet__facet-container">
-          <ImageBase
-            url={facet.logo}
-            alt={facet.title}
-            defaultImage={facetImg}
-            className="facet__logo-wrapper"
-            imageClassName="facet__logo"
-          />
-          <div className="facet__info">
-            <div className="facet__title">{facet.title}</div>
-            <div className="facet__description">{facet.description}</div>
+        <Link
+          to={{
+            pathname: composeFacetUrl(facet.url),
+            state: `/ ${title}`
+          }}
+        >
+          <div className="facet__facet-container">
+            <ImageBase
+              url={facet.logo}
+              alt={facet.title}
+              defaultImage={facetImg}
+              className="facet__logo-wrapper"
+              imageClassName="facet__logo"
+            />
+            <div className="facet__info">
+              <div className="facet__title">{facet.title}</div>
+              <div className="facet__description">{facet.description}</div>
+            </div>
           </div>
-        </div>
-      </Link>
-    </Surface>
-  );
-};
+        </Link>
+      </Surface>
+    );
+  }
+}
 
 export const facetShape = PropTypes.shape({
   id: PropTypes.string.isRequired,

@@ -31,6 +31,7 @@
   &__scroll-container {
     &:after {
       position: absolute;
+      pointer-events: none;
       z-index: 3;
       content: "";
       bottom: 0;

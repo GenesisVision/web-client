@@ -147,7 +147,7 @@ $facet-height: 280px;
     margin-right: $facet-margin/2;
   }
 
-  &:hover {
+  &--hovered {
     transform: translateY(-10px);
     box-shadow: $box-shadow-4;
   }
