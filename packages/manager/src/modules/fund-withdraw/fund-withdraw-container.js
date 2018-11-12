@@ -82,5 +82,8 @@ const mapDispathToProps = dispatch => ({
 
 export default compose(
   translate(),
-  connect(mapStateToProps, mapDispathToProps)
+  connect(
+    mapStateToProps,
+    mapDispathToProps
+  )
 )(FundWithdrawContainer);

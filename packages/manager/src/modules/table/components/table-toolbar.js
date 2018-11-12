@@ -27,17 +27,16 @@ class TableToolbar extends Component {
     return (
       <div className="table__toolbar">
         {title && <div className="table__title">{title}</div>}
-        {view === CARDS_VIEW &&
-          sorting !== undefined && (
-            <div className="table__filters">
-              <SortingFilter
-                sorting={sorting}
-                columns={columns}
-                updateSorting={updateSorting}
-                renderValueText={renderHeader}
-              />
-            </div>
-          )}
+        {view === CARDS_VIEW && sorting !== undefined && (
+          <div className="table__filters">
+            <SortingFilter
+              sorting={sorting}
+              columns={columns}
+              updateSorting={updateSorting}
+              renderValueText={renderHeader}
+            />
+          </div>
+        )}
         {renderFilters && (
           <div className="table__filters">
             {renderFilters(updateFilter, filtering)}

@@ -117,9 +117,7 @@ class DetailsInvestment extends PureComponent {
             {t("fund-details-page.description.withdraw")}
           </GVButton>
           {notice && (
-            <p className="details-investment__withdraw-notice">
-              {notice}
-            </p>
+            <p className="details-investment__withdraw-notice">{notice}</p>
           )}
           <WithdrawContainer
             open={this.state.isOpenWithdrawalPopup}
