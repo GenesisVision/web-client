@@ -1,11 +1,14 @@
+import "./details-description-controls.scss";
+
 import { RingIcon } from "shared/components/icon/ring-icon";
 import React from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
 import isAuthenticated from "shared/decorators/is-authenticated";
+import classNames from "classnames";
 
-const ProgramDetailsNotificaton = ({ t, url, title }) => {
+const DetailsNotificaton = ({ t, url, hasNotifications, title }) => {
   return (
     <Link
       to={{
@@ -13,9 +16,13 @@ const ProgramDetailsNotificaton = ({ t, url, title }) => {
         state: `/ ${title}`
       }}
     >
-      <div className="program-details-description__control">
-        <RingIcon className="program-details-description__control-icon" />
-        <div className="program-details-description__control-text">
+      <div className="details-description__control">
+        <RingIcon
+          className={classNames("details-description__control-icon", {
+            "details-description__control-icon--active": hasNotifications
+          })}
+        />
+        <div className="details-description__control-text">
           {t("program-details-page.description.notifications")}
         </div>
       </div>
@@ -26,4 +33,4 @@ const ProgramDetailsNotificaton = ({ t, url, title }) => {
 export default compose(
   translate(),
   isAuthenticated
-)(ProgramDetailsNotificaton);
+)(DetailsNotificaton);

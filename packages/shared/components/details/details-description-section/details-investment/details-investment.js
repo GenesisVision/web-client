@@ -1,15 +1,14 @@
-import "./fund-details-investment.scss";
+import "./details-investment.scss";
 
 import ProgramStatus from "shared/components/program-status/program-status";
 import Surface from "shared/components/surface/surface";
 import { GVButton } from "gv-react-components";
-import FundWithdrawContainer from "modules/fund-withdraw/fund-withdraw-container";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { formatValue } from "shared/utils/formatter";
 
-class FundDetailsInvestment extends PureComponent {
+class DetailsInvestment extends PureComponent {
   state = {
     isOpenWithdrawalPopup: false
   };
@@ -26,10 +25,12 @@ class FundDetailsInvestment extends PureComponent {
   render() {
     const {
       t,
+      notice,
+      WithdrawContainer,
       canWithdraw,
-      fundCurrency,
+      assetCurrency,
       className,
-      fundId,
+      id,
       investedAmount,
       balanceCurrency,
       profitPercent,
@@ -39,13 +40,13 @@ class FundDetailsInvestment extends PureComponent {
       pendingOutput
     } = this.props;
     return (
-      <Surface className={"fund-details-investment " + className}>
-        <div className="fund-details-investment__heading">
+      <Surface className={"details-investment " + className}>
+        <div className="details-investment__heading">
           {t("fund-details-page.description.yourInvestment")}
         </div>
-        <div className="fund-details-investment__short-statistic">
-          <div className="fund-details-investment__short-statistic-item">
-            <span className="fund-details-investment__short-statistic-subheading">
+        <div className="details-investment__short-statistic">
+          <div className="details-investment__short-statistic-item">
+            <span className="details-investment__short-statistic-subheading">
               {t("fund-details-page.description.invested")}
             </span>
 
@@ -55,8 +56,8 @@ class FundDetailsInvestment extends PureComponent {
               displayType="text"
             />
           </div>
-          <div className="fund-details-investment__short-statistic-item">
-            <span className="fund-details-investment__short-statistic-subheading">
+          <div className="details-investment__short-statistic-item">
+            <span className="details-investment__short-statistic-subheading">
               {t("fund-details-page.description.value")}
             </span>
             <NumberFormat
@@ -65,8 +66,8 @@ class FundDetailsInvestment extends PureComponent {
               displayType="text"
             />
           </div>
-          <div className="fund-details-investment__short-statistic-item">
-            <span className="fund-details-investment__short-statistic-subheading">
+          <div className="details-investment__short-statistic-item">
+            <span className="details-investment__short-statistic-subheading">
               {t("fund-details-page.description.profit")}
             </span>
             <NumberFormat
@@ -75,15 +76,15 @@ class FundDetailsInvestment extends PureComponent {
               displayType="text"
             />
           </div>
-          <div className="fund-details-investment__short-statistic-item">
-            <span className="fund-details-investment__short-statistic-subheading">
+          <div className="details-investment__short-statistic-item">
+            <span className="details-investment__short-statistic-subheading">
               {t("fund-details-page.description.status")}
             </span>
             <ProgramStatus status={status} />
           </div>
           {pendingInput !== 0 && (
-            <div className="fund-details-investment__short-statistic-item">
-              <span className="fund-details-investment__short-statistic-subheading">
+            <div className="details-investment__short-statistic-item">
+              <span className="details-investment__short-statistic-subheading">
                 {t("fund-details-page.description.pending-input")}
               </span>
               <NumberFormat
@@ -94,8 +95,8 @@ class FundDetailsInvestment extends PureComponent {
             </div>
           )}
           {pendingOutput !== 0 && (
-            <div className="fund-details-investment__short-statistic-item">
-              <span className="fund-details-investment__short-statistic-subheading">
+            <div className="details-investment__short-statistic-item">
+              <span className="details-investment__short-statistic-subheading">
                 {t("fund-details-page.description.pending-output")}
               </span>
               <NumberFormat
@@ -106,7 +107,7 @@ class FundDetailsInvestment extends PureComponent {
             </div>
           )}
         </div>
-        <div className="fund-details-investment__footer">
+        <div className="details-investment__footer">
           <GVButton
             color="secondary"
             variant="outlined"
@@ -115,11 +116,16 @@ class FundDetailsInvestment extends PureComponent {
           >
             {t("fund-details-page.description.withdraw")}
           </GVButton>
-          <FundWithdrawContainer
+          {notice && (
+            <p className="details-investment__withdraw-notice">
+              {notice}
+            </p>
+          )}
+          <WithdrawContainer
             open={this.state.isOpenWithdrawalPopup}
-            id={fundId}
+            id={id}
             onClose={this.handleCloseWithdrawalPopup}
-            fundCurrency={fundCurrency}
+            assetCurrency={assetCurrency}
           />
         </div>
       </Surface>
@@ -127,4 +133,4 @@ class FundDetailsInvestment extends PureComponent {
   }
 }
 
-export default translate()(FundDetailsInvestment);
+export default translate()(DetailsInvestment);
