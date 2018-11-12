@@ -1,0 +1,103 @@
+@import "styles/_colors.scss";
+
+.icon {
+  height: 22px;
+  width: 20px;
+  display: inline-flex;
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  svg {
+    height: 100%;
+    width: 100%;
+  }
+
+  svg [fill] {
+    fill: white;
+  }
+
+  svg [stroke] {
+    stroke: white;
+  }
+
+  &--secondary {
+    svg [fill] {
+      fill: #d8d8d8;
+    }
+    svg [stroke] {
+      stroke: #d8d8d8;
+    }
+  }
+
+  &--primary {
+    svg [fill] {
+      fill: $primary-color;
+    }
+    svg [stroke] {
+      stroke: $primary-color;
+    }
+  }
+  &--rotate {
+    transform: rotate(180deg);
+  }
+  &--collapse {
+    background-image: url("../../shared/media/collapse.svg");
+  }
+  &--ring-circle {
+    background-image: url("../../shared/media/ring-circle.svg");
+  }
+  &--ring {
+    width: 16px;
+  }
+  &--wallet {
+    height: 20px;
+    path {
+      fill: transparent;
+    }
+  }
+  &--close {
+    height: 10px;
+  }
+  &--controls {
+    height: 20px;
+    background-image: url("../../shared/media/controls.svg");
+  }
+  &--search {
+    height: 18px;
+  }
+  &--arrow {
+    width: 7px;
+    height: 7px;
+    background-image: url("../../shared/media/arrow.svg");
+  }
+  &--menu {
+    height: 15px;
+    width: 16px;
+    background-image: url("../../shared/media/menu.svg");
+  }
+
+  &--funds {
+    height: 18px;
+  }
+
+  &--copy {
+    width: 14px;
+  }
+
+  &--actions-circle {
+    circle[fill] {
+      fill: rgba($label-color, 0.3);
+    }
+    g[fill] {
+      fill: white;
+    }
+    &.icon--primary {
+      g[fill] {
+        fill: $panel-background-color;
+      }
+      circle[fill] {
+        fill: white;
+      }
+    }
+  }
+}

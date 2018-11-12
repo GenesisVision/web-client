@@ -1,14 +1,11 @@
+import "./i18n";
+import "./setupMoment";
+import "./index.scss";
+import "./styles/gv-styles.scss";
+
 import React from "react";
 import ReactDOM from "react-dom";
-import './i18n';
 
-import "@fortawesome/fontawesome-free-webfonts/css/fa-solid.css";
-import "@fortawesome/fontawesome-free-webfonts/css/fontawesome.css";
+import Root from "./root";
 
-import "./styles/gv-bootstrap/gv-bootstrap.css";
-import "./styles/gv-styles.css";
-import "./index.css";
-
-import App from "./components/app";
-
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<Root />, document.getElementById("root"));

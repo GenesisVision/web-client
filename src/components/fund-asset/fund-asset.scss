@@ -1,0 +1,103 @@
+@import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
+@import "styles/_sizes.scss";
+
+$asset-height-mobile: $asset-height/$divider-text;
+
+.fund-assets {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+
+  @include media-breakpoint-landscape-phone() {
+    align-items: center;
+    flex-direction: row;
+  }
+  &--text {
+    flex-direction: row;
+  }
+}
+
+.fund-asset {
+  box-sizing: border-box;
+  height: $asset-height-mobile;
+  font-size: $font-size-small-mobile;
+  line-height: $font-size-small-mobile;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: $padding-mini-mobile;
+  border-radius: $border-radius-middle-mobile;
+  background: rgba(255, 255, 255, 0.02);
+  font-weight: 400;
+  margin-right: $padding-small/2/$divider-padding;
+  margin-bottom: $padding-small/2/$divider-padding;
+  color: $text-light-color;
+  cursor: pointer;
+  &:hover {
+    background: rgba(255, 255, 255, 0.06);
+  }
+  &--others-count {
+    cursor: unset;
+    &:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+  }
+  &__popover {
+    font-size: $font-size-middle;
+    padding: $padding-small;
+  }
+
+  &__currencies {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+  }
+
+  &__currency-full {
+    white-space: nowrap;
+  }
+
+  &__currency-full,
+  &__currency-short {
+    padding-left: $padding-small-mobile/2;
+  }
+
+  &__percent {
+    padding-left: $padding-mini-mobile;
+  }
+
+  &__currency-short {
+    opacity: 0.4;
+  }
+
+  @include media-breakpoint-landscape-phone() {
+    height: $asset-height;
+    font-size: $font-size-middle;
+    padding: $padding-mini;
+    margin-right: $padding-small/2;
+    margin-bottom: $padding-small/2;
+    border-radius: $border-radius-middle;
+
+    &__currency-full,
+    &__currency-short {
+      padding-left: $padding-small/2;
+    }
+
+    &__percent {
+      padding-left: $padding-mini;
+    }
+  }
+  &--text {
+    padding: 0;
+    margin: 0;
+    background: none;
+    & .fund-asset__currency-short {
+      padding-left: 0;
+    }
+  }
+}

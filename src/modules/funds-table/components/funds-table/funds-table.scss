@@ -1,0 +1,83 @@
+@import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
+@import "styles/_sizes.scss";
+
+$description-block-width: 250px;
+$program-width: 312px;
+$program-height: 312px;
+$multiplier: 1.5;
+$chart-width: 160px;
+
+@mixin table-title() {
+  opacity: 0.3;
+  font-size: $font-size-small-mobile;
+  color: white;
+  text-align: left;
+  padding-bottom: $font-size-small-mobile;
+  @include media-breakpoint-landscape-phone() {
+    font-size: $font-size-small;
+    padding-bottom: $font-size-small;
+  }
+}
+
+.funds-table-container {
+  padding: $padding-middle-mobile 0;
+  @include media-breakpoint-landscape-phone() {
+    padding: $padding-middle 0;
+  }
+}
+
+.funds-table__cell {
+  padding: $padding-small/2 $padding-small;
+  & .fund-assets {
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+  & .fund-asset {
+    margin-bottom: 0;
+  }
+  &--amount {
+    white-space: nowrap;
+  }
+  &--avatar-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    .gv-btn {
+      font-size: $font-size-middle-mobile;
+      padding: 0;
+    }
+    .program-avatar {
+      width: 40px;
+      margin: 0;
+      padding-right: $padding-small-mobile;
+      @include media-breakpoint-landscape-phone() {
+        padding-right: $padding-small;
+      }
+    }
+    @include media-breakpoint-landscape-phone() {
+      .gv-btn {
+        font-size: $font-size-middle;
+      }
+    }
+  }
+  &--title {
+    min-width: 50px;
+    padding: 0;
+    div {
+      padding: $padding-small/10;
+    }
+  }
+  &--bottom {
+    opacity: 0.3;
+  }
+  &--chart {
+    min-width: 50px;
+    max-width: 100px;
+    @include media-breakpoint-landscape-phone() {
+      min-width: 100px;
+      max-width: 200px;
+    }
+  }
+}

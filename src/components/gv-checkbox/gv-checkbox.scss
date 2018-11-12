@@ -1,0 +1,120 @@
+@import "styles/_colors.scss";
+
+.gv-checkbox-wrapper {
+  margin: 16px 8px;
+  position: relative;
+  display: inline-flex;
+  align-items: flex-start;
+}
+
+.gv-checkbox {
+  border: 0;
+  margin: 0;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  user-select: none;
+  vertical-align: middle;
+  justify-content: center;
+  text-decoration: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+
+  flex: 0 0 auto;
+  color: rgba(0, 0, 0, 0.54);
+  overflow: visible;
+  font-size: 1.5rem;
+  text-align: center;
+  border-radius: 50%;
+
+  display: inline-flex;
+  align-items: center;
+
+  &#{&} {
+    &--disabled {
+      opacity: 0.5;
+      cursor: default;
+    }
+
+    &--primary {
+      color: $primary-color;
+    }
+
+    &--secondary {
+      color: $secondary-color;
+    }
+
+    &--checked {
+      .gv-checkbox__input-wrapper {
+        color: currentColor;
+        background-color: rgba($primary-color, 0.1);
+      }
+      .gv-checkbox__track {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__input-wrapper {
+    color: transparent;
+    background-color: #343d44;
+    border-radius: 4px;
+    width: 24px;
+    height: 24px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 17px;
+  }
+
+  &__track {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 0;
+    position: absolute;
+    overflow: hidden;
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  &__handler {
+  }
+
+  &__input {
+    top: 0;
+    left: 0;
+    width: 100%;
+    cursor: inherit;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    padding: 0;
+    position: absolute;
+  }
+
+  &__label {
+    cursor: pointer;
+    font-family: Montserrat;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 1.38;
+    letter-spacing: 0.2px;
+    user-select: none;
+    margin-left: 10px;
+    color: $label-color;
+  }
+
+  &__error {
+    position: absolute;
+    left: 0;
+    bottom: -24px;
+    font-size: 0.7em;
+    color: #eb3b5a;
+    backface-visibility: hidden;
+    white-space: nowrap;
+  }
+}

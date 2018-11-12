@@ -7,7 +7,8 @@ export const FAILURE_SUFFIX = "FAILURE";
 
 const initialState = {
   isPending: false,
-  errorMessage: ""
+  errorMessage: "",
+  code: null
 };
 
 const apiReducerFactory = (
@@ -39,16 +40,14 @@ const apiReducerFactory = (
         ...state,
         isPending: false,
         data: action.payload,
-        errorMessage: ""
+        errorMessage: "",
+        code: null
       };
     case FAILURE:
       return {
         ...state,
         isPending: false,
-        errorMessage: action.payload
-          .filter(x => !x.property)
-          .map(x => x.message)
-          .join(", ")
+        ...action.payload
       };
     case CLEAR:
       return initialState;

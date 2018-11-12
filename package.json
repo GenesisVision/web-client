@@ -3,37 +3,43 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@fortawesome/fontawesome-free-webfonts": "^1.0.6",
-    "bootstrap": "^4.1.0",
     "classnames": "^2.2.5",
     "copy-to-clipboard": "^3.0.8",
-    "formik": "^0.11.11",
-    "gv-api-web": "git+https://github.com/GenesisVision/gv-api-web.git",
+    "debounce": "^1.2.0",
+    "formik": "^1.0.2",
+    "gv-api-web": "git+https://github.com/GenesisVision/gv-api-web.git#development",
+    "gv-react-components": "^0.0.25",
     "i18next": "^11.2.3",
     "i18next-browser-languagedetector": "^2.2.0",
     "i18next-xhr-backend": "^1.5.1",
     "jwt-decode": "^2.2.0",
+    "lodash.pickby": "^4.6.0",
     "moment": "^2.22.1",
-    "node-sass-chokidar": "^1.2.2",
-    "npm-run-all": "^4.1.2",
+    "node-sass": "^4.9.3",
+    "prop-types": "^15.6.2",
     "qrcode.react": "^0.8.0",
     "qs": "^6.5.1",
     "rc-slider": "^8.6.1",
     "react": "^16.3.2",
+    "react-calendar": "^2.17.4",
     "react-content-loader": "^3.1.2",
+    "react-cropper": "^1.0.1",
+    "react-custom-scrollbars": "^4.2.1",
+    "react-document-title": "^2.0.3",
     "react-dom": "^16.2.0",
+    "react-dropzone": "^6.0.0",
+    "react-event-listener": "^0.5.10",
     "react-i18next": "^7.6.0",
-    "react-number-format": "^3.3.3",
+    "react-number-format": "^3.6.2",
     "react-pager": "^1.3.3",
     "react-popper": "^0.10.1",
     "react-redux": "^5.0.7",
     "react-redux-loading-bar": "^4.0.3",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.9",
-    "react-scripts": "1.1.4",
+    "react-scripts": "^2.1.1",
     "react-select": "^1.2.1",
-    "reactstrap": "^6.0.1",
-    "recharts": "^1.0.0-beta.10",
+    "recharts": "1.2.0",
     "redux": "^4.0.0",
     "redux-debounced": "^0.5.0",
     "redux-promise-middleware": "^5.1.1",
@@ -43,7 +49,6 @@
     "yup": "^0.25.1"
   },
   "devDependencies": {
-    "babel-jest": "23.0.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
@@ -61,18 +66,15 @@
   },
   "scripts": {
     "precommit": "lint-staged",
-    "build-css": "node-sass-chokidar --include-path ./src src/ -o src/",
-    "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src src/ -o src/ --watch --recursive",
-    "start-js": "react-scripts start",
-    "start": "npm-run-all -p watch-css start-js",
-    "build-js": "react-scripts build",
-    "build": "npm-run-all build-css build-js",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "lint-staged": {
     "*.js": [
-      "import-sort --write"
+      "import-sort --write",
+      "git add"
     ],
     "*.{js,json,scss,md}": [
       "prettier --write",
@@ -84,5 +86,17 @@
       "parser": "babylon",
       "style": "module"
     }
+  },
+  "browserslist": {
+    "development": [
+      "last 2 chrome versions",
+      "last 2 firefox versions",
+      "last 2 edge versions"
+    ],
+    "production": [
+      ">0.25%",
+      "not op_mini all",
+      "ie 11"
+    ]
   }
 }

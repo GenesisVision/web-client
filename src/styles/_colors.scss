@@ -1,16 +1,21 @@
-$main-color: #184f61;
-$alternate-color: #03bdaf;
-$danger-color: #e00463;
-$warning-color: #f9f3dd;
-$border-color: #e3ebed;
-$background-color: #f8f8f8;
+@import "node_modules/gv-react-components/dist/gv-styles/_colors.scss";
 
 $inactive-icon-color: #ccd5d4;
+$main-color: #fff;
+$border-color: #313a41;
+$secondary-background-color: #1f2b36;
 
-$text-color: $main-color;
-$text-sub-color: #28768d;
-$text-color-light: $alternate-color;
+$program-status-active-color: $text-light-color;
+$program-status-investing-color: $primary-color;
+$program-status-withdrawing-color: $level-color-4;
+$program-status-ended-color: $text-dark-color;
 
-$box-shadow-primary-color: rgba(22, 183, 173, 0.28);
-$box-shadow-danger-color: rgba(224, 4, 99, 0.28);
-$box-shadow-warning-color: rgba(249, 243, 221, 0.28);
+$short-statistic-notice-color: rgba(255, 255, 255, 0.4);
+
+$dark-color: rgba(255, 255, 255, 0.5);
+
+$panel-background-color: #1c2730;
+$table-background-subcolor: rgba(255, 255, 255, 0.02);
+$success: rgba(46, 189, 133, 0.1);
+
+$text-error: $negative-color;

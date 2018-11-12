@@ -6,6 +6,6 @@ h1 {
   line-height: 1;
   &::after {
     content: ".";
-    color: $text-color-light;
+    color: $text-light-color;
   }
 }

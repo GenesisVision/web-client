@@ -1,22 +1,28 @@
+import { GVButton } from "gv-react-components";
+import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
+import { SIGNUP_ROUTE } from "pages/auth/signup/signup.routes";
 import React from "react";
+import { translate } from "react-i18next";
 import { connect } from "react-redux";
-import loginService from "../../modules/login/service/login-service";
-import Button from "../../components/button/button";
-import { LOGIN_ROUTE } from "../../modules/login/login.constants";
+import { Link } from "react-router-dom";
+import { compose } from "redux";
 
-const SignOut = ({ onClick, ...props }) => (
-  <Button label="Sign Out" secondary onClick={onClick} {...props} />
-);
-
-const SignIn = props => (
-  <Button label="Sign In" secondary href={LOGIN_ROUTE} {...props} />
-);
-
-const AuthorizationControls = ({ isAuthenticated, signOut, ...props }) => {
-  return isAuthenticated ? (
-    <SignOut onClick={signOut} {...props} />
-  ) : (
-    <SignIn {...props} />
+const AuthorizationControls = ({ t, isAuthenticated, className = "" }) => {
+  return (
+    isAuthenticated || (
+      <div className={className}>
+        <Link to={LOGIN_ROUTE}>
+          <GVButton variant="outlined" color="secondary">
+            {t("auth.login.title")}
+          </GVButton>
+        </Link>
+        <Link to={SIGNUP_ROUTE}>
+          <GVButton variant="contained" color="primary">
+            {t("auth.signup.title")}
+          </GVButton>
+        </Link>
+      </div>
+    )
   );
 };
 
@@ -24,13 +30,9 @@ const mapStateToProps = state => ({
   isAuthenticated: state.authData.isAuthenticated
 });
 
-const mapDispatchToProps = dispatch => ({
-  signOut: () => {
-    dispatch(loginService.logout());
-  }
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+const AuthorizationControlsContainer = compose(
+  translate(),
+  connect(mapStateToProps)
 )(AuthorizationControls);
+
+export default AuthorizationControlsContainer;

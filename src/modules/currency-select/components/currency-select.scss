@@ -1,0 +1,8 @@
+@import "styles/_colors.scss";
+
+.currency-select {
+  .select__value {
+    border-bottom: 1px dotted $text-color;
+    padding-bottom: 2px;
+  }
+}

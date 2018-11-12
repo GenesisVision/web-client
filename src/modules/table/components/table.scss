@@ -1,0 +1,211 @@
+@import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
+@import "styles/_sizes.scss";
+
+$th-font-size: 12px;
+$td-font-size: 13px;
+$table-title-font-size: 17px;
+$view-svg-size: 15px;
+$padding: 33px;
+
+%sortable-border-icon {
+  position: absolute;
+  right: -15px;
+  bottom: 3px;
+  content: "";
+  border-top: 1px solid white;
+}
+
+.table {
+  width: 100%;
+  border-spacing: 0;
+  margin-bottom: $padding-middle-mobile;
+  @include media-breakpoint-landscape-phone() {
+    margin-bottom: $padding-middle;
+  }
+  .message {
+    padding: $padding;
+    text-align: center;
+  }
+  &__vertical-track {
+    display: none;
+  }
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: $padding/2;
+    font-size: $td-font-size/1.5;
+    padding: 20px 30px;
+    .pagination {
+      margin: 0;
+    }
+  }
+  &__toolbar {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    width: 100%;
+    align-items: center;
+    padding: 0 $padding/2 $padding/2;
+  }
+
+  &__toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    div {
+      cursor: pointer;
+      padding: $view-svg-size;
+      padding-bottom: 0;
+      .icon {
+        width: auto;
+      }
+      svg {
+        width: $view-svg-size/1.2;
+      }
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+  }
+
+  &__title {
+    justify-self: flex-start;
+    font-size: $table-title-font-size/2;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    color: $text-accent-color;
+  }
+
+  &__filters {
+    width: 100%;
+    font-size: $th-font-size/1.5;
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+
+  &__head {
+    font-size: $th-font-size/1.5;
+  }
+  &__body {
+    font-size: $td-font-size/1.5;
+  }
+
+  &__row {
+    padding: 0 1.5rem;
+    &:not(.table__row--head):hover {
+      background-color: #212c34;
+      & .program-avatar__level {
+        border-color: #212c34;
+      }
+    }
+  }
+
+  &__cell {
+    &:first-child {
+      padding-left: $padding/1.5;
+      @include media-breakpoint-landscape-phone() {
+        padding-left: $padding;
+      }
+    }
+    &:last-child {
+      padding-right: $padding/1.5;
+      @include media-breakpoint-landscape-phone() {
+        padding-right: $padding;
+      }
+    }
+    text-align: left;
+    cursor: default;
+    box-sizing: border-box;
+    align-items: center;
+    flex-grow: 1;
+    padding: $padding-small-mobile 0;
+    overflow: hidden; // Or flex might break
+    list-style: none;
+    font-weight: normal;
+    font-size: 13px;
+    letter-spacing: 0.433333px;
+
+    &#{&} {
+      &--head {
+        padding-right: 15px;
+        opacity: 0.3;
+      }
+      &--sortable {
+        cursor: pointer;
+        padding-right: 15px;
+        opacity: 0.6;
+        .table__cell--sortable-asc,
+        .table__cell--sortable-desc {
+          span {
+            opacity: 1;
+          }
+          position: relative;
+          &::before {
+            @extend %sortable-border-icon;
+            height: 4px;
+          }
+          &::after {
+            @extend %sortable-border-icon;
+          }
+        }
+        .table__cell--sortable-desc {
+          &::before {
+            width: 10px;
+          }
+          &::after {
+            width: 5px;
+          }
+        }
+
+        .table__cell--sortable-asc {
+          &::before {
+            width: 5px;
+          }
+          &::after {
+            width: 10px;
+          }
+        }
+      }
+    }
+  }
+  @include media-breakpoint-landscape-phone() {
+    &__head {
+      font-size: $th-font-size;
+    }
+    &__cell {
+      padding: $padding-small 0;
+    }
+    &__body {
+      font-size: $td-font-size;
+    }
+    &__filters {
+      font-size: $td-font-size;
+    }
+    &__title {
+      font-size: $table-title-font-size;
+    }
+    &__footer {
+      font-size: $td-font-size;
+    }
+    &__toolbar {
+      padding: 0 $padding $padding;
+    }
+    &__toggle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      div {
+        padding: 0 $view-svg-size;
+        &:last-child {
+          padding-right: 0;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,76 @@
+@import "styles/_colors.scss";
+@import "styles/_breakpoint.scss";
+
+$middle-padding: 33px;
+$large-padding: 42px;
+
+.portfolio-events-all-table {
+  padding-top: $large-padding;
+  &__row:nth-child(2n + 1) {
+    background-color: $table-background-subcolor;
+  }
+
+  & .table__title {
+    font-size: 16px;
+    letter-spacing: 0.1px;
+    color: $text-light-color;
+  }
+
+  & .table__toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  & .table__filters {
+    margin-top: 16px;
+    margin-left: 0;
+  }
+
+  & .table__row {
+    padding: 0 32px;
+  }
+
+  &__cell {
+    color: $text-light-color;
+    box-sizing: border-box;
+
+    &--date {
+      width: 30%;
+      min-width: 210px;
+    }
+    &--type {
+      width: 20%;
+      min-width: 110px;
+    }
+    &--description {
+      width: 35%;
+      min-width: 230px;
+    }
+    &--amount {
+      width: 15%;
+      min-width: 180px;
+    }
+  }
+
+  & .filter {
+    &__label {
+      color: $short-statistic-notice-color;
+    }
+
+    &__value {
+      color: $text-light-color;
+    }
+  }
+
+  @include media-breakpoint-tablet() {
+    & .table__filters {
+      margin-left: 20px;
+      margin-top: 0;
+    }
+
+    & .table__toolbar {
+      padding: 0 $middle-padding $middle-padding;
+      flex-direction: row;
+    }
+  }
+}
