@@ -7,6 +7,7 @@ import NumberFormat from "react-number-format";
 
 import { ChartPeriodType } from "shared/components/chart/chart-period/chart-period.helpers";
 import Surface from "shared/components/surface/surface";
+import DetailsStatisticItem from "../../../../details-statistic-item/details-statistic-item";
 
 const FundDetailsStatistics = ({ t, statisticData, period }) => {
   const { data: statistic, isPending } = statisticData;
@@ -21,162 +22,109 @@ const FundDetailsStatistics = ({ t, statisticData, period }) => {
       </div>
       <div className="fund-details-statistics__particular-information">
         <div className="fund-details-statistics__vertical-info-block">
-          <div className="fund-details-statistics__item">
-            <span className="fund-details-statistics__label">
-              {t("fund-details-page.statistics.balance")}
-            </span>
-            <span className="fund-details-statistics__value fund-details-statistics__value--accent">
-              <NumberFormat
-                value={statistic.balance}
-                thousandSeparator={" "}
-                displayType="text"
-                decimalScale={2}
-                suffix={" GVT"}
-              />
-            </span>
-          </div>
-          <div className="fund-details-statistics__item fund-details-statistics__item--secondary">
-            <span className="fund-details-statistics__label">
-              {t("fund-details-page.statistics.start-day")}
-            </span>
-            <span className="fund-details-statistics__value">
-              {moment(statistic.creationDate).format("D MMM YYYY")}
-            </span>
-          </div>
+          <DetailsStatisticItem
+            label={t("fund-details-page.statistics.balance")}
+            accent
+          >
+            <NumberFormat
+              value={statistic.balance}
+              thousandSeparator={" "}
+              displayType="text"
+              decimalScale={2}
+              suffix={" GVT"}
+            />
+          </DetailsStatisticItem>
+          <DetailsStatisticItem
+            label={t("fund-details-page.statistics.start-day")}
+          >
+            {moment(statistic.creationDate).format("D MMM YYYY")}
+          </DetailsStatisticItem>
         </div>
         <div className="fund-details-statistics__vertical-info-block">
-          <div className="fund-details-statistics__item">
-            <span className="fund-details-statistics__label">
-              {t("fund-details-page.statistics.investors")}
-            </span>
-            <span className="fund-details-statistics__value">
-              <NumberFormat
-                value={statistic.investors}
-                thousandSeparator={" "}
-                displayType="text"
-              />
-            </span>
-          </div>
-          {/* <div className="fund-details-statistics__item fund-details-statistics__item--secondary">
-            <span className="fund-details-statistics__label">
-              {t("fund-details-page.statistics.period-end")}
-            </span>
-            <span className="fund-details-statistics__value">
-              {moment(statistic.periodEnds).format("D MMM YYYY")}
-            </span>
-          </div>*/}
+          <DetailsStatisticItem
+            label={t("fund-details-page.statistics.investors")}
+          >
+            <NumberFormat
+              value={statistic.investors}
+              thousandSeparator={" "}
+              displayType="text"
+            />
+          </DetailsStatisticItem>
         </div>
       </div>
-
-      {/*<div className="fund-details-statistics__period">
-        <span className="fund-details-statistics__label">
-          {t("fund-details-page.statistics.period")}
-        </span>
-        <ProgramPeriodLine
-          start={statistic.periodStarts}
-          end={statistic.periodEnds}
-        />
-      </div>*/}
       <div className="fund-details-statistics__subheading">
         {t("fund-details-page.statistics.for")}{" "}
         {t(`chart-period.${ChartPeriodType[period.type]}`)}
       </div>
-
       <div className="fund-details-statistics__particular-information">
         <div className="fund-details-statistics__column">
-          <div className="fund-details-statistics__item fund-details-statistics__item--half fund-details-statistics__item--secondary">
-            <span className="fund-details-statistics__label">
-              {t("fund-details-page.statistics.calmarRatio")}
-            </span>
-            <span className="fund-details-statistics__value">
-              <NumberFormat
-                value={
-                  statistic.calmarRatio !== null ? statistic.calmarRatio : "-"
-                }
-                displayType="text"
-                decimalScale={2}
-              />
-            </span>
-          </div>
-
-          <div className="fund-details-statistics__item fund-details-statistics__item--half fund-details-statistics__item--secondary">
-            <span className="fund-details-statistics__label">
-              {t("fund-details-page.statistics.profit-change")}
-            </span>
-            <span className="fund-details-statistics__value">
-              <NumberFormat
-                value={
-                  statistic.profitChangePercent !== null
-                    ? statistic.profitChangePercent
-                    : "-"
-                }
-                displayType="text"
-                suffix="%"
-                decimalScale={2}
-              />
-            </span>
-          </div>
-
-          <div className="fund-details-statistics__item fund-details-statistics__item--half fund-details-statistics__item--secondary">
-            <span className="fund-details-statistics__label">
-              {t("fund-details-page.statistics.max-drawdown")}
-            </span>
-            <span className="fund-details-statistics__value">
-              <NumberFormat
-                value={
-                  statistic.maxDrawdown !== null ? statistic.maxDrawdown : "-"
-                }
-                displayType="text"
-                suffix="%"
-                decimalScale={2}
-              />
-            </span>
-          </div>
+          <DetailsStatisticItem
+            label={t("fund-details-page.statistics.calmarRatio")}
+            half
+          >
+            <NumberFormat
+              value={
+                statistic.calmarRatio !== null ? statistic.calmarRatio : "-"
+              }
+              displayType="text"
+              decimalScale={2}
+            />
+          </DetailsStatisticItem>
+          <DetailsStatisticItem
+            label={t("fund-details-page.statistics.profit-change")}
+            half
+          >
+            <NumberFormat
+              value={
+                statistic.profitChangePercent !== null
+                  ? statistic.profitChangePercent
+                  : "-"
+              }
+              displayType="text"
+              suffix="%"
+              decimalScale={2}
+            />
+          </DetailsStatisticItem>
+          <DetailsStatisticItem
+            label={t("fund-details-page.statistics.max-drawdown")}
+            half
+          >
+            <NumberFormat
+              value={
+                statistic.maxDrawdown !== null ? statistic.maxDrawdown : "-"
+              }
+              displayType="text"
+              suffix="%"
+              decimalScale={2}
+            />
+          </DetailsStatisticItem>
         </div>
-
         <div className="fund-details-statistics__column">
-          {/*<div className="fund-details-statistics__item fund-details-statistics__item--half fund-details-statistics__item--secondary">
-            <span className="fund-details-statistics__label">
-              {t("fund-details-page.statistics.rebalances")}
-            </span>
-            <span className="fund-details-statistics__value">
-              <NumberFormat
-                value={statistic.rebalances}
-                decimalScale={2}
-                displayType="text"
-              />
-            </span>
-          </div>*/}
+          <DetailsStatisticItem
+            label={t("fund-details-page.statistics.sharpe-ratio")}
+            half
+          >
+            <NumberFormat
+              value={
+                statistic.sharpeRatio !== null ? statistic.sharpeRatio : "-"
+              }
+              displayType="text"
+              decimalScale={2}
+            />
+          </DetailsStatisticItem>
 
-          <div className="fund-details-statistics__item fund-details-statistics__item--half fund-details-statistics__item--secondary">
-            <span className="fund-details-statistics__label">
-              {t("fund-details-page.statistics.sharpe-ratio")}
-            </span>
-            <span className="fund-details-statistics__value">
-              <NumberFormat
-                value={
-                  statistic.sharpeRatio !== null ? statistic.sharpeRatio : "-"
-                }
-                displayType="text"
-                decimalScale={2}
-              />
-            </span>
-          </div>
-
-          <div className="fund-details-statistics__item fund-details-statistics__item--half fund-details-statistics__item--secondary">
-            <span className="fund-details-statistics__label">
-              {t("fund-details-page.statistics.sortino-ratio")}
-            </span>
-            <span className="fund-details-statistics__value">
-              <NumberFormat
-                value={
-                  statistic.sortinoRatio !== null ? statistic.sortinoRatio : "-"
-                }
-                displayType="text"
-                decimalScale={2}
-              />
-            </span>
-          </div>
+          <DetailsStatisticItem
+            label={t("fund-details-page.statistics.sortino-ratio")}
+            half
+          >
+            <NumberFormat
+              value={
+                statistic.sortinoRatio !== null ? statistic.sortinoRatio : "-"
+              }
+              displayType="text"
+              decimalScale={2}
+            />
+          </DetailsStatisticItem>
         </div>
       </div>
     </Surface>
