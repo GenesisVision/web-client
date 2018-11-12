@@ -64,6 +64,10 @@ const mapDispatchToProps = dispatch => ({
   service: bindActionCreators(twoFactorServices, dispatch)
 });
 
-export default compose(translate(), connect(null, mapDispatchToProps))(
-  GoogleAuthContainer
-);
+export default compose(
+  translate(),
+  connect(
+    null,
+    mapDispatchToProps
+  )
+)(GoogleAuthContainer);
