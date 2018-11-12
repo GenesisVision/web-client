@@ -1,6 +1,6 @@
 import "./password-change.scss";
 
-import authActions from "actions/auth-actions";
+import authActions from "shared/actions/auth-actions";
 import PasswordChangeForm from "modules/password-change/password-change-form";
 import { SETTINGS_ROUTE } from "pages/profile/profile.constants";
 import React, { Component } from "react";
