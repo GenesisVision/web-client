@@ -1,6 +1,6 @@
 import "../create-fund-settings.scss";
 
-import classNames from "classnames";
+import classnames from "classnames";
 import Popover from "shared/components/popover/popover";
 import { GVTextField } from "gv-react-components";
 import React from "react";
@@ -86,7 +86,7 @@ class CreateFundSettingsAddAsset extends React.Component {
                             <input
                               value={asset.percent}
                               onChange={handlePercentChange(asset)}
-                              className={classNames(
+                              className={classnames(
                                 "popover-add__regulator-input",
                                 {
                                   "popover-add__regulator-input--mute":

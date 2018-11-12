@@ -1,6 +1,6 @@
 import "./create-fund-settings.scss";
 
-import classNames from "classnames";
+import classnames from "classnames";
 import Hint from "shared/components/hint/hint";
 import { RefreshIcon } from "shared/components/icon/refresh-icon";
 import { Field, withFormik } from "formik";
@@ -304,7 +304,7 @@ class CreateFundSettings extends React.Component {
             <div className="create-fund-settings__available-amount">
               {t("create-fund-page.settings.fields.available-in-wallet")}
               <span
-                className={classNames(
+                className={classnames(
                   "create-fund-settings__available-amount-value",
                   {
                     "create-fund-settings__available-amount-value--error":

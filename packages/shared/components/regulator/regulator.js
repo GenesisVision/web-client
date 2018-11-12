@@ -1,12 +1,12 @@
 import "./regulator.scss";
 
-import classNames from "classnames";
+import classnames from "classnames";
 import React from "react";
 
 const Regulator = ({ value, handleUp, handleDown, children }) => {
   return (
     <div
-      className={classNames("regulator", {
+      className={classnames("regulator", {
         "regulator--mute": value === 0
       })}
     >
