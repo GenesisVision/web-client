@@ -9,10 +9,12 @@ import React from "react";
 import { translate } from "react-i18next";
 import { compose } from "redux";
 import ProgramDefaultImage from "../../../pages/create-program/components/create-program-settings/program-default-image";
-import InputImage from "shared/components/form/input-image/input-image";
 import editAssetSettingsValidationSchema from "./asset-edit.validators";
 import filesService from "shared/services/file-service";
 import { FUND, PROGRAM } from "../asset-edit.constants";
+import InputPhoto, {
+  getInputPhotoInitialValue
+} from "shared/components/form/input-photo/input-photo";
 
 const AssetEditForm = ({
   t,
@@ -73,12 +75,10 @@ const AssetEditForm = ({
           <Field
             name="logo"
             render={({ field }) => (
-              <InputImage
+              <InputPhoto
                 {...field}
                 defaultImage={ProgramDefaultImage}
                 onChange={setFieldValue}
-                notifyError={notifyError}
-                alt="Program logo"
                 error={imageInputError}
               />
             )}
@@ -108,14 +108,8 @@ export default compose(
       title: props.info.title,
       description: props.info.description,
       logo: {
-        cropped: null,
-        src: filesService.getFileUrl(props.info.logo.src),
-        id: props.info.logo.src,
-        isNew: false,
-        isDefault: !!!props.info.logo.src,
-        width: undefined,
-        height: undefined,
-        size: undefined
+        ...getInputPhotoInitialValue(),
+        src: filesService.getFileUrl(props.info.logo.src)
       }
     }),
     validationSchema: editAssetSettingsValidationSchema,

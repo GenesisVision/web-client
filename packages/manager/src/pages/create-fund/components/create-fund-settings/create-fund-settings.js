@@ -13,7 +13,6 @@ import {
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import InputImage from "shared/components/form/input-image/input-image";
 import { allowValuesNumberFormat } from "shared/utils/helpers";
 
 import AddButton from "shared/components/add-button/add-button";
@@ -22,6 +21,10 @@ import CreateFundSettingsAssetsComponent from "./create-fund-settings-assets-blo
 import createFundSettingsValidationSchema from "./create-fund-settings.validators";
 import ErrorNotifier from "./error-notifier/error-notifier";
 import FundDefaultImage from "./fund-default-image";
+
+import InputPhoto, {
+  getInputPhotoInitialValue
+} from "shared/components/form/input-photo/input-photo";
 
 class CreateFundSettings extends React.Component {
   allowEntryFee = values => {
@@ -174,11 +177,10 @@ class CreateFundSettings extends React.Component {
                 <Field
                   name="logo"
                   render={({ field, form }) => (
-                    <InputImage
+                    <InputPhoto
                       {...field}
                       defaultImage={FundDefaultImage}
                       onChange={setFieldValue}
-                      alt="Fund logo"
                       error={imageInputError}
                     />
                   )}
@@ -366,15 +368,7 @@ export default translate()(
         exitFee: "",
         title: "",
         description: "",
-        logo: {
-          cropped: null,
-          src: "",
-          isNew: false,
-          isDefault: true,
-          size: undefined,
-          width: undefined,
-          height: undefined
-        },
+        logo: getInputPhotoInitialValue(),
         entryFee: ""
       };
     },

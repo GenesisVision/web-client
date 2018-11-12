@@ -14,9 +14,11 @@ import {
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import InputImage from "shared/components/form/input-image/input-image";
 import { formatValue } from "shared/utils/formatter";
 import { allowValuesNumberFormat } from "shared/utils/helpers";
+import InputPhoto, {
+  getInputPhotoInitialValue
+} from "shared/components/form/input-photo/input-photo";
 
 import {
   getAccountTypes,
@@ -187,12 +189,10 @@ class CreateProgramSettings extends React.Component {
                 <Field
                   name="logo"
                   render={({ field, form }) => (
-                    <InputImage
+                    <InputPhoto
                       {...field}
                       defaultImage={ProgramDefaultImage}
                       onChange={setFieldValue}
-                      notifyError={notifyError}
-                      alt="Program logo"
                       error={imageInputError}
                     />
                   )}
@@ -329,15 +329,7 @@ export default translate()(
       leverage: "",
       title: "",
       description: "",
-      logo: {
-        cropped: null,
-        src: "",
-        isNew: false,
-        isDefault: true,
-        width: undefined,
-        height: undefined,
-        size: undefined
-      },
+      logo: getInputPhotoInitialValue(),
       brokerAccountTypeId: "",
       entryFee: "",
       currency: "",
