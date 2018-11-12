@@ -9,7 +9,7 @@ import React, { PureComponent } from "react";
 
 import { getFundStatistic } from "../../services/fund-details.service";
 import FundDetailsChartSection from "./fund-details-chart-section/fund-details-chart-section";
-import FundDetailsStatistic from "./fund-details-statistics/fund-details-statistics";
+import FundDetailsStatistic from "shared/components/funds/fund-details/fund-details-statistics-sections/fund-details-statistics/fund-details-statistics";
 
 class FundDetailsStatisticSection extends PureComponent {
   state = {
