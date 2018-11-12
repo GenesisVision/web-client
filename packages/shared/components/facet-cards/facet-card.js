@@ -29,7 +29,6 @@ class FacetCard extends Component {
         className={classnames("facet", {
           "facet--hovered": this.state.isHovered
         })}
-        ref={this.facet}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
       >
