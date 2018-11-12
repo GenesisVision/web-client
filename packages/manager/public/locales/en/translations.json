@@ -549,7 +549,7 @@
       "After clicking the \"Confirm\" button, the invested GVT will be immediately converted to {{currency}}. Accrual of {{currency}} to the account manager will only occur at the end of the reporting period.",
     "confirm": "Confirm",
     "success-alert-message":
-      "Successful request for investment in the program.",
+      "Successful request for investment in the fund.",
     "validation": {
       "amount-more-than-available":
         "Amount is more than available in your wallet",
