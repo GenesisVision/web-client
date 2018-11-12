@@ -8,6 +8,7 @@ import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { formatValue } from "shared/utils/formatter";
+import DetailsStatisticItem from "../../../../details-statistic-item/details-statistic-item";
 
 const ProgramDetailsStatistics = ({
   t,
@@ -28,52 +29,26 @@ const ProgramDetailsStatistics = ({
         {t("program-details-page.statistics.current")}
       </div>
       <div className="program-details-statistics__particular-information">
-        <div className="program-details-statistics__vertical-info-block">
-          <div className="program-details-statistics__item">
-            <span className="program-details-statistics__label">
-              {t("program-details-page.statistics.balance")}
-            </span>
-            <span className="program-details-statistics__value">
-              <NumberFormat
-                value={formatValue(profitChart.balance)}
-                thousandSeparator={" "}
-                displayType="text"
-                suffix={` ${profitChart.programCurrency}`}
-              />
-            </span>
-          </div>
-          <div className="program-details-statistics__item program-details-statistics__item--secondary">
-            <span className="program-details-statistics__label">
-              {t("program-details-page.statistics.start-day")}
-            </span>
-            <span className="program-details-statistics__value">
-              {moment(statistic.periodStarts).format("D MMM YYYY")}
-            </span>
-          </div>
-        </div>
-        <div className="program-details-statistics__vertical-info-block">
-          <div className="program-details-statistics__item">
-            <span className="program-details-statistics__label">
-              {t("program-details-page.statistics.investors")}
-            </span>
-            <span className="program-details-statistics__value">
-              <NumberFormat
-                value={statistic.investors}
-                thousandSeparator={" "}
-                displayType="text"
-              />
-            </span>
-          </div>
-          <div className="program-details-statistics__item program-details-statistics__item--secondary">
-            <span className="program-details-statistics__label">
-              {t("program-details-page.statistics.period-end")}
-            </span>
-            <span className="program-details-statistics__value">
-              {moment(statistic.periodEnds).format("D MMM YYYY")}
-            </span>
-          </div>
-        </div>
-
+        <DetailsStatisticItem
+          label={t("program-details-page.statistics.balance")}
+          accent
+        >
+          <NumberFormat
+            value={formatValue(profitChart.balance)}
+            thousandSeparator={" "}
+            displayType="text"
+            suffix={` ${profitChart.programCurrency}`}
+          />
+        </DetailsStatisticItem>
+        <DetailsStatisticItem
+          label={t("program-details-page.statistics.investors")}
+        >
+          <NumberFormat
+            value={statistic.investors}
+            thousandSeparator={" "}
+            displayType="text"
+          />
+        </DetailsStatisticItem>
         <div className="program-details-statistics__period">
           <span className="program-details-statistics__label">
             {t("program-details-page.statistics.period")}
@@ -92,102 +67,86 @@ const ProgramDetailsStatistics = ({
 
       <div className="program-details-statistics__particular-information">
         <div className="program-details-statistics__column">
-          <div className="program-details-statistics__item program-details-statistics__item--half">
-            <span className="program-details-statistics__label">
-              {t("program-details-page.statistics.trades")}
-            </span>
-            <span className="program-details-statistics__value">
-              <NumberFormat
-                value={statistic.trades !== undefined ? statistic.trades : "-"}
-                thousandSeparator={" "}
-                displayType="text"
-              />
-            </span>
-          </div>
-
-          <div className="program-details-statistics__item program-details-statistics__item--half program-details-statistics__item--secondary">
-            <span className="program-details-statistics__label">
-              {t("program-details-page.statistics.profit-factor")}
-            </span>
-            <span className="program-details-statistics__value">
-              <NumberFormat
-                value={
-                  statistic.profitFactor !== undefined
-                    ? formatValue(statistic.profitFactor, 2)
-                    : "-"
-                }
-                displayType="text"
-              />
-            </span>
-          </div>
-
-          <div className="program-details-statistics__item program-details-statistics__item--half program-details-statistics__item--secondary">
-            <span className="program-details-statistics__label">
-              {t("program-details-page.statistics.max-drawdown")}
-            </span>
-            <span className="program-details-statistics__value">
-              <NumberFormat
-                value={
-                  statistic.maxDrawdown !== undefined
-                    ? formatValue(statistic.maxDrawdown, 2)
-                    : "-"
-                }
-                displayType="text"
-                suffix="%"
-              />
-            </span>
-          </div>
+          <DetailsStatisticItem
+            label={t("program-details-page.statistics.trades")}
+            half
+          >
+            <NumberFormat
+              value={statistic.trades !== undefined ? statistic.trades : "-"}
+              thousandSeparator={" "}
+              displayType="text"
+            />
+          </DetailsStatisticItem>
+          <DetailsStatisticItem
+            label={t("program-details-page.statistics.profit-factor")}
+            half
+          >
+            <NumberFormat
+              value={
+                statistic.profitFactor !== undefined
+                  ? formatValue(statistic.profitFactor, 2)
+                  : "-"
+              }
+              displayType="text"
+            />
+          </DetailsStatisticItem>
+          <DetailsStatisticItem
+            label={t("program-details-page.statistics.max-drawdown")}
+            half
+          >
+            <NumberFormat
+              value={
+                statistic.maxDrawdown !== undefined
+                  ? formatValue(statistic.maxDrawdown, 2)
+                  : "-"
+              }
+              displayType="text"
+              suffix="%"
+            />
+          </DetailsStatisticItem>
         </div>
 
         <div className="program-details-statistics__column">
-          <div className="program-details-statistics__item program-details-statistics__item--half program-details-statistics__item--secondary">
-            <span className="program-details-statistics__label">
-              {t("program-details-page.statistics.success-trades")}
-            </span>
-            <span className="program-details-statistics__value">
-              <NumberFormat
-                value={
-                  statistic.successTradesPercent !== undefined
-                    ? formatValue(statistic.successTradesPercent, 2)
-                    : "-"
-                }
-                displayType="text"
-                suffix="%"
-              />
-            </span>
-          </div>
-
-          <div className="program-details-statistics__item program-details-statistics__item--half program-details-statistics__item--secondary">
-            <span className="program-details-statistics__label">
-              {t("program-details-page.statistics.sharpe-ratio")}
-            </span>
-            <span className="program-details-statistics__value">
-              <NumberFormat
-                value={
-                  statistic.sharpeRatio !== undefined
-                    ? formatValue(statistic.sharpeRatio, 2)
-                    : "-"
-                }
-                displayType="text"
-              />
-            </span>
-          </div>
-
-          <div className="program-details-statistics__item program-details-statistics__item--half program-details-statistics__item--secondary">
-            <span className="program-details-statistics__label">
-              {t("program-details-page.statistics.sortino-ratio")}
-            </span>
-            <span className="program-details-statistics__value">
-              <NumberFormat
-                value={
-                  statistic.sortinoRatio !== undefined
-                    ? formatValue(statistic.sortinoRatio, 2)
-                    : "-"
-                }
-                displayType="text"
-              />
-            </span>
-          </div>
+          <DetailsStatisticItem
+            label={t("program-details-page.statistics.success-trades")}
+            half
+          >
+            <NumberFormat
+              value={
+                statistic.successTradesPercent !== undefined
+                  ? formatValue(statistic.successTradesPercent, 2)
+                  : "-"
+              }
+              displayType="text"
+              suffix="%"
+            />
+          </DetailsStatisticItem>
+          <DetailsStatisticItem
+            label={t("program-details-page.statistics.sharpe-ratio")}
+            half
+          >
+            <NumberFormat
+              value={
+                statistic.sharpeRatio !== undefined
+                  ? formatValue(statistic.sharpeRatio, 2)
+                  : "-"
+              }
+              displayType="text"
+            />
+          </DetailsStatisticItem>
+          <DetailsStatisticItem
+            label={t("program-details-page.statistics.sortino-ratio")}
+            half
+          >
+            <NumberFormat
+              value={
+                statistic.sortinoRatio !== undefined
+                  ? formatValue(statistic.sortinoRatio, 2)
+                  : "-"
+              }
+              displayType="text"
+            />
+          </DetailsStatisticItem>
         </div>
       </div>
     </Surface>
