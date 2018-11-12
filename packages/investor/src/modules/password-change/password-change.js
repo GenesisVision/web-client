@@ -39,7 +39,6 @@ class PasswordChange extends Component {
       })
       .then(({ data }) => {
         this.updateToken(data);
-        this.setState({ isPending: false });
       })
       .catch(data => {
         this.setState({ ...data });

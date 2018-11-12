@@ -80,7 +80,6 @@ export default compose(
           .oneOf([ref("password")], t("Passwords don't match."))
           .required(t("Confirm Password is required"))
       }),
-    handleSubmit: (values, { props }) =>
-      console.info(props) || props.onSubmit(values)
+    handleSubmit: (values, { props }) => props.onSubmit(values)
   })
 )(PasswordChangeForm);
