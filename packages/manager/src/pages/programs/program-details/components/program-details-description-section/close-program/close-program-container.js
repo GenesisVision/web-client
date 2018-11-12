@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
-import { closeProgram } from "../../../../services/program-details.service";
+import { closeProgram } from "../../../services/program-details.service";
 import CloseProgramForm from "./close-program-form";
 
 class CloseProgramContainer extends Component {

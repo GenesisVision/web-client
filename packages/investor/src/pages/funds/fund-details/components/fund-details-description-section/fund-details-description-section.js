@@ -1,7 +1,10 @@
 import { toggleFavoriteFund } from "modules/favorite-asset/services/favorite-fund.service";
+import FundWithdrawContainer from "modules/fund-withdraw/fund-withdraw-container";
+import FundDepositContainer from "modules/fund-deposit/fund-deposit-container";
+import { FundDetailContext } from "pages/funds/fund-details/fund-details.page";
 import React, { Fragment, PureComponent } from "react";
 
-import FundDetailsDescription from "./fund-details-description/fund-details-description";
+import FundDetailsDescription from "shared/components/funds/fund-details/fund-details-description/fund-details-description";
 
 const composeInvestmentData = fundDetails => {
   const { statistic, personalFundDetails } = fundDetails;
@@ -10,7 +13,7 @@ const composeInvestmentData = fundDetails => {
   return {
     pendingInput: personalFundDetails.pendingInput,
     pendingOutput: personalFundDetails.pendingOutput,
-    fundId: fundDetails.id,
+    id: fundDetails.id,
     investedAmount: personalFundDetails.invested,
     value: personalFundDetails.value,
     balanceAmount: balanceGVT.amount,
@@ -87,6 +90,10 @@ class FundDetailsDescriptionSection extends PureComponent {
     return (
       <Fragment>
         <FundDetailsDescription
+          FundDetailContext={FundDetailContext}
+          FundWithdrawContainer={FundWithdrawContainer}
+          FundDepositContainer={FundDepositContainer}
+          canInvest={fundDescription.personalFundDetails}
           isAuthenticated={isAuthenticated}
           redirectToLogin={redirectToLogin}
           canWithdraw={canWithdraw}

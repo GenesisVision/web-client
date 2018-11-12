@@ -7,7 +7,7 @@ $withdraw-button-width: 150px;
 $withdraw-button-height-mobile: $withdraw-button-height/$divider-text;
 $withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
 
-.program-details-investment {
+.details-investment {
   & div {
     box-sizing: border-box;
   }
@@ -22,7 +22,6 @@ $withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
     font-size: $font-size-subtitle-mobile;
     letter-spacing: 0.21px;
     padding-bottom: $padding-middle-mobile;
-    font-weight: 600;
     @include media-breakpoint-landscape-phone() {
       font-size: $font-size-subtitle;
       padding-bottom: $padding-middle;
@@ -50,7 +49,7 @@ $withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
       @include media-breakpoint-landscape-phone() {
         font-size: $font-size-middle;
         margin-right: $padding-large;
-      margin-bottom: $font-size-small;
+        margin-bottom: $font-size-small;
       }
     }
 

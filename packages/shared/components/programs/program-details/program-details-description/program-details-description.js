@@ -1,28 +1,21 @@
 import "./program-details-description.scss";
 
-import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
-import Popover from "shared/components/popover/popover";
-import { GVButton } from "gv-react-components";
-import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
-import AboutLevelsContainerComponent from "pages/app/components/about-levels/about-levels-container";
-import {
-  composeManagerDetailsUrl,
-  composeProgramNotificationsUrl
-} from "shared/utils/compose-url";
-import { ProgramDetailContext } from "pages/programs/program-details/program-details.page";
 import React, { Fragment, PureComponent } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
-import { formatValue } from "shared/utils/formatter";
+import { GVButton } from "gv-react-components";
 
-import AssetEditContainer from "../../../../../../modules/asset-edit/asset-edit-container";
-import { PROGRAM } from "../../../../../../modules/asset-edit/asset-edit.constants";
-import ProgramDetailsInvestment from "../program-details-investment/program-details-investment";
-import ClosePeriodContainer from "./close-period/close-period-container";
-import CloseProgramContainer from "./close-program/close-program-container";
-import ProgramDetailsFavorite from "./program-details-favorite";
-import ProgramDetailsNotification from "./program-details-notificaton";
+import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import Popover from "shared/components/popover/popover";
+import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
+import DetailsFavorite from "shared/components/details/details-description-section/details-description/details-favorite";
+import DetailsNotification from "shared/components/details/details-description-section/details-description/details-notificaton";
+import { formatValue } from "shared/utils/formatter";
+import {
+  composeManagerDetailsUrl,
+  composeProgramNotificationsUrl
+} from "shared/utils/compose-url";
 
 class ProgramDetailsDescription extends PureComponent {
   state = {
@@ -92,11 +85,18 @@ class ProgramDetailsDescription extends PureComponent {
     } = this.state;
     const {
       t,
-      isOwnProgram,
+      ClosePeriodContainer,
+      CloseProgramContainer,
+      ProgramDepositContainer,
+      AboutLevelsContainerComponent,
+      ProgramDetailContext,
+      AssetEditContainer,
+      PROGRAM,
+      ProgramWithdrawContainer,
+      canInvest,
       canWithdraw,
       programDescription,
       onFavoriteClick,
-      isFavoritePending,
       composeInvestmentData,
       onChangeInvestmentStatus
     } = this.props;
@@ -123,7 +123,6 @@ class ProgramDetailsDescription extends PureComponent {
     };
 
     const title = programDescription.title;
-
     return (
       <div className="program-details-description">
         <div className="program-details-description__left">
@@ -243,7 +242,7 @@ class ProgramDetailsDescription extends PureComponent {
                 />
               </div>
             </div>
-            {isOwnProgram && (
+            {canInvest && (
               <Fragment>
                 <div className="program-details-description__investing-container">
                   <div className="program-details-description__invest-button-container">
@@ -257,46 +256,55 @@ class ProgramDetailsDescription extends PureComponent {
                     >
                       {t("program-details-page.description.invest")}
                     </GVButton>
-                    <GVButton
-                      className="program-details-description__invest-btn"
-                      color="secondary"
-                      variant="outlined"
-                      onClick={this.handleOpenCloseProgramPopup}
-                      disabled={
-                        !programDescription.personalProgramDetails
-                          .canCloseProgram
-                      }
-                    >
-                      {t("program-details-page.description.close-program")}
-                    </GVButton>
-
-                    <GVButton
-                      className="program-details-description__invest-btn"
-                      color="secondary"
-                      variant="outlined"
-                      onClick={this.handleOpenClosePeriodPopup}
-                      disabled={
-                        !programDescription.personalProgramDetails
-                          .canClosePeriod
-                      }
-                    >
-                      {t("program-details-page.close-period.title")}
-                    </GVButton>
-                    <GVButton
-                      className="program-details-description__invest-btn"
-                      color="secondary"
-                      variant="outlined"
-                      onClick={this.handleOpenEditProgramPopup}
-                      disabled={!canCloseProgram}
-                    >
-                      {t("program-details-page.description.edit-program")}
-                    </GVButton>
+                    {CloseProgramContainer && (
+                      <GVButton
+                        className="program-details-description__invest-btn"
+                        color="secondary"
+                        variant="outlined"
+                        onClick={this.handleOpenCloseProgramPopup}
+                        disabled={
+                          !programDescription.personalProgramDetails
+                            .canCloseProgram
+                        }
+                      >
+                        {t("program-details-page.description.close-program")}
+                      </GVButton>
+                    )}
+                    {ClosePeriodContainer && (
+                      <GVButton
+                        className="program-details-description__invest-btn"
+                        color="secondary"
+                        variant="outlined"
+                        onClick={this.handleOpenClosePeriodPopup}
+                        disabled={
+                          !programDescription.personalProgramDetails
+                            .canClosePeriod
+                        }
+                      >
+                        {t("program-details-page.close-period.title")}
+                      </GVButton>
+                    )}
+                    {AssetEditContainer && (
+                      <GVButton
+                        className="program-details-description__invest-btn"
+                        color="secondary"
+                        variant="outlined"
+                        onClick={this.handleOpenEditProgramPopup}
+                        disabled={!canCloseProgram}
+                      >
+                        {t("program-details-page.description.edit-program")}
+                      </GVButton>
+                    )}
                   </div>
                 </div>
-                <ProgramDetailsInvestment
+                <DetailsInvestment
+                  WithdrawContainer={ProgramWithdrawContainer}
+                  notice={t(
+                    "program-details-page.description.withdraw-notice-text"
+                  )}
                   canWithdraw={canWithdraw}
                   className={"program-details-description__your-investment"}
-                  programCurrency={programDescription.currency}
+                  assetCurrency={programDescription.currency}
                   {...composeInvestmentData(programDescription)}
                   onChangeInvestmentStatus={onChangeInvestmentStatus}
                 />
@@ -313,41 +321,46 @@ class ProgramDetailsDescription extends PureComponent {
                     onClose={this.handleCloseInvestmentPopup}
                     onInvest={updateDetails}
                   />
+                  {ClosePeriodContainer && (
+                    <ClosePeriodContainer
+                      open={isOpenClosePeriodPopup}
+                      onCancel={this.handleCloseClosePeriodPopup}
+                      onApply={this.handleApplyClosePeriodPopup(updateDetails)}
+                      id={programDescription.id}
+                    />
+                  )}
 
-                  <ClosePeriodContainer
-                    open={isOpenClosePeriodPopup}
-                    onCancel={this.handleCloseClosePeriodPopup}
-                    onApply={this.handleApplyClosePeriodPopup(updateDetails)}
-                    id={programDescription.id}
-                  />
+                  {CloseProgramContainer && (
+                    <CloseProgramContainer
+                      open={isOpenCloseProgramPopup}
+                      onClose={this.handleCloseCloseProgramPopup}
+                      onCancel={this.handleCloseCloseProgramPopup}
+                      onApply={this.handleApplyCloseProgramPopup(updateDetails)}
+                      id={programDescription.id}
+                    />
+                  )}
 
-                  <CloseProgramContainer
-                    open={isOpenCloseProgramPopup}
-                    onClose={this.handleCloseCloseProgramPopup}
-                    onCancel={this.handleCloseCloseProgramPopup}
-                    onApply={this.handleApplyCloseProgramPopup(updateDetails)}
-                    id={programDescription.id}
-                  />
-                  <AssetEditContainer
-                    open={isOpenEditProgramPopup}
-                    info={composeEditInfo}
-                    onClose={this.handleCloseEditProgramPopup}
-                    onApply={this.handleApplyEditProgramPopup(updateDetails)}
-                    type={PROGRAM}
-                  />
+                  {AssetEditContainer && (
+                    <AssetEditContainer
+                      open={isOpenEditProgramPopup}
+                      info={composeEditInfo}
+                      onClose={this.handleCloseEditProgramPopup}
+                      onApply={this.handleApplyEditProgramPopup(updateDetails)}
+                      type={PROGRAM}
+                    />
+                  )}
                 </Fragment>
               )}
             </ProgramDetailContext.Consumer>
           </div>
         </div>
         <div className="program-details-description__right">
-          <ProgramDetailsFavorite
-            programId={programDescription.id}
+          <DetailsFavorite
+            id={programDescription.id}
             isFavorite={isFavorite}
             toggleFavorite={onFavoriteClick}
-            disabled={isFavoritePending}
           />
-          <ProgramDetailsNotification
+          <DetailsNotification
             title={title}
             url={composeProgramNotificationsUrl(programDescription.url)}
             hasNotifications={hasNotifications}

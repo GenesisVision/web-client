@@ -1,21 +1,21 @@
 import "./fund-details-description.scss";
 
-import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
-import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
 import { GVButton } from "gv-react-components";
-import FundDepositContainer from "modules/fund-deposit/fund-deposit-container";
-import { FundDetailContext } from "pages/funds/fund-details/fund-details.page";
-import { composeManagerDetailsUrl, composeFundNotificationsUrl } from "shared/utils/compose-url";
 import React, { Fragment, PureComponent } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
+
 import { formatValue } from "shared/utils/formatter";
-import FundDetailsInvestment from "../fund-details-investment/fund-details-investment";
-import FundDetailsFavorite from "./fund-details-favorite";
-import FundDetailsNotification from "./fund-details-notificaton";
-import AssetEditContainer from "../../../../../../modules/asset-edit/asset-edit-container";
-import { FUND } from "../../../../../../modules/asset-edit/asset-edit.constants";
+import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
+import DetailsFavorite from "shared/components/details/details-description-section/details-description/details-favorite";
+import DetailsNotification from "shared/components/details/details-description-section/details-description/details-notificaton";
+import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
+import {
+  composeManagerDetailsUrl,
+  composeFundNotificationsUrl
+} from "shared/utils/compose-url";
 
 class FundDetailsDescription extends PureComponent {
   state = {
@@ -51,13 +51,18 @@ class FundDetailsDescription extends PureComponent {
     const { isOpenInvestmentPopup, isOpenEditFundPopup } = this.state;
     const {
       t,
+      FUND,
+      AssetEditContainer,
+      FundDetailContext,
+      FundDepositContainer,
+      FundWithdrawContainer,
       canWithdraw,
       fundDescription,
       onFavoriteClick,
       isFavoritePending,
       composeInvestmentData,
       onChangeInvestmentStatus,
-      isOwnProgram
+      canInvest
     } = this.props;
     const isFavorite =
       fundDescription.personalFundDetails &&
@@ -156,7 +161,7 @@ class FundDetailsDescription extends PureComponent {
                 />
               </div>
             </div>
-            {isOwnProgram && (
+            {canInvest && (
               <Fragment>
                 <div className="fund-details-description__invest-button-container">
                   <GVButton
@@ -169,15 +174,17 @@ class FundDetailsDescription extends PureComponent {
                   >
                     {t("fund-details-page.description.invest")}
                   </GVButton>
-                  <GVButton
-                    className="fund-details-description__invest-btn"
-                    color="secondary"
-                    variant="outlined"
-                    onClick={this.handleOpenEditFundPopup}
-                    disabled={!canCloseProgram}
-                  >
-                    {t("fund-details-page.description.edit-fund")}
-                  </GVButton>
+                  {AssetEditContainer && (
+                    <GVButton
+                      className="fund-details-description__invest-btn"
+                      color="secondary"
+                      variant="outlined"
+                      onClick={this.handleOpenEditFundPopup}
+                      disabled={!canCloseProgram}
+                    >
+                      {t("fund-details-page.description.edit-fund")}
+                    </GVButton>
+                  )}
                   <FundDetailContext.Consumer>
                     {({ updateDetails }) => (
                       <Fragment>
@@ -188,21 +195,26 @@ class FundDetailsDescription extends PureComponent {
                           onClose={this.handleCloseInvestmentPopup}
                           onInvest={updateDetails}
                         />
-                        <AssetEditContainer
-                          open={isOpenEditFundPopup}
-                          info={composeEditInfo}
-                          onClose={this.handleCloseEditFundPopup}
-                          onApply={this.handleApplyEditFundPopup(updateDetails)}
-                          type={FUND}
-                        />
+                        {AssetEditContainer && (
+                          <AssetEditContainer
+                            open={isOpenEditFundPopup}
+                            info={composeEditInfo}
+                            onClose={this.handleCloseEditFundPopup}
+                            onApply={this.handleApplyEditFundPopup(
+                              updateDetails
+                            )}
+                            type={FUND}
+                          />
+                        )}
                       </Fragment>
                     )}
                   </FundDetailContext.Consumer>
                 </div>
-                <FundDetailsInvestment
+                <DetailsInvestment
+                  WithdrawContainer={FundWithdrawContainer}
                   canWithdraw={canWithdraw}
                   className={"fund-details-description__your-investment"}
-                  fundCurrency={"GVT"}
+                  assetCurrency={"GVT"}
                   {...composeInvestmentData(fundDescription)}
                   onChangeInvestmentStatus={onChangeInvestmentStatus}
                 />
@@ -211,13 +223,12 @@ class FundDetailsDescription extends PureComponent {
           </div>
         </div>
         <div className="fund-details-description__right">
-          <FundDetailsFavorite
-            fundId={fundDescription.id}
+          <DetailsFavorite
+            id={fundDescription.id}
             isFavorite={isFavorite}
             toggleFavorite={onFavoriteClick}
-            disabled={isFavoritePending}
           />
-          <FundDetailsNotification
+          <DetailsNotification
             title={fundDescription.title}
             url={composeFundNotificationsUrl(fundDescription.url)}
             disabled={isFavoritePending}
