@@ -1,0 +1,123 @@
+@import "shared/styles/_colors.scss";
+@import "shared/styles/_breakpoint.scss";
+@import "shared/styles/_sizes.scss";
+
+.program-details-statistics {
+  box-sizing: border-box;
+  padding: 0 $padding-middle-mobile;
+  width: 100%;
+  color: $text-light-color;
+  @include media-breakpoint-landscape-phone() {
+    padding: 0 $padding-middle;
+  }
+  &__heading {
+    padding: $padding-middle-mobile 0;
+    font-size: $font-size-subtitle-mobile;
+    letter-spacing: 0.2px;
+    font-weight: 600;
+    @include media-breakpoint-landscape-phone() {
+      padding: $padding-middle 0;
+      font-size: $font-size-subtitle;
+    }
+  }
+
+  &__subheading {
+    font-size: $font-size-middle-mobile;
+    padding-bottom: $padding-small-mobile;
+    letter-spacing: 0.2px;
+    font-weight: 600;
+    @include media-breakpoint-landscape-phone() {
+      padding-bottom: $padding-small;
+      font-size: $font-size-middle;
+    }
+  }
+
+  &__particular-information {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-content: stretch;
+    padding-bottom: $padding-middle-mobile;
+    @include media-breakpoint-landscape-phone() {
+      padding-bottom: $padding-middle;
+    }
+  }
+
+  &__vertical-info-block {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__column {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    @include media-breakpoint-phone() {
+      flex-wrap: wrap;
+      flex-direction: row;
+      width: 100%;
+      justify-content: space-between;
+    }
+    @include media-breakpoint-landscape-phone() {
+      flex-direction: column;
+      width: auto;
+      justify-content: space-between;
+    }
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    padding-right: $padding-small-mobile;
+    padding-bottom: $padding-large-mobile;
+    &--half {
+      width: 70px;
+      @include media-breakpoint-landscape-phone() {
+        padding-right: 0;
+        width: auto;
+        box-sizing: border-box;
+      }
+    }
+  }
+
+  &__period {
+    width: 100%;
+    padding-bottom: $padding-middle-mobile;
+    @include media-breakpoint-landscape-phone() {
+      padding-bottom: $padding-middle;
+    }
+  }
+
+  &__label {
+    color: $label-color;
+    font-size: $font-size-middle-mobile;
+    letter-spacing: 0.4px;
+    margin-bottom: $padding-small-mobile/2;
+    font-weight: normal;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-middle;
+      margin-bottom: $padding-small/2;
+    }
+  }
+
+  &__value {
+    font-size: $font-size-large-mobile;
+    letter-spacing: 0.6px;
+    &--accent {
+      font-weight: 600;
+    }
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-large;
+    }
+  }
+
+  &__item--secondary &__value {
+    font-size: $font-size-middle-mobile;
+    letter-spacing: 0.4px;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-middle;
+    }
+  }
+}
