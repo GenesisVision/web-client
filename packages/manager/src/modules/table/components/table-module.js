@@ -63,14 +63,12 @@ class TableModule extends PureComponent {
         const totalPages = calculateTotalPages(data.total, paging.itemsOnPage);
         this.setState(prevState => ({
           data,
-          paging: merge(prevState.paging, { totalPages })
+          paging: merge(prevState.paging, { totalPages }),
+          isPending: false
         }));
       })
       .catch(e => {
-        this.setState({ errorCode: e.errorCode });
-      })
-      .finally(() => {
-        this.setState({ isPending: false });
+        this.setState({ errorCode: e.errorCode, isPending: false });
       });
   };
 
