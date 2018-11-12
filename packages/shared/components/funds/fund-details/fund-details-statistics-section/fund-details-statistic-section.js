@@ -37,7 +37,7 @@ class FundDetailsStatisticSection extends PureComponent {
   }
 
   handlePeriodChange = period => {
-    const { programId, currency,getFundStatistic } = this.props;
+    const { programId, currency, getFundStatistic } = this.props;
 
     getFundStatistic(programId, currency, period).then(data => {
       this.setState({ period, ...data });
