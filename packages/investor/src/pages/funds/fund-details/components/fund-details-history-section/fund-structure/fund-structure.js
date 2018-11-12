@@ -1,7 +1,8 @@
 import "../fund-structure/fund-structure.scss";
 
 import FundAssetImage from "shared/components/avatar/fund-asset-image/fund-asset-image";
-import { TableCell, TableRow } from "modules/table/components";
+import TableCell from "shared/components/table/components/table-cell";
+import TableRow from "shared/components/table/components/table-row";
 import TableModule from "modules/table/components/table-module";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
