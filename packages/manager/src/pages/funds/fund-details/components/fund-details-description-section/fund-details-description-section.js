@@ -1,8 +1,13 @@
 import { toggleFavoriteFund } from "modules/favorite-asset/services/favorite-fund.service";
 import { toggleReinvesting } from "modules/program-reinvesting/services/program-reinvesting.service";
+import FundWithdrawContainer from "modules/fund-withdraw/fund-withdraw-container";
+import FundDepositContainer from "modules/fund-deposit/fund-deposit-container";
+import { FundDetailContext } from "pages/funds/fund-details/fund-details.page";
+import AssetEditContainer from "modules/asset-edit/asset-edit-container";
+import { FUND } from "modules/asset-edit/asset-edit.constants";
 import React, { Fragment, PureComponent } from "react";
 
-import FundDetailsDescription from "./fund-details-description/fund-details-description";
+import FundDetailsDescription from "shared/components/funds/fund-details/fund-details-description/fund-details-description";
 
 const composeInvestmentData = fundDetails => {
   const { statistic, personalFundDetails } = fundDetails;
@@ -12,7 +17,7 @@ const composeInvestmentData = fundDetails => {
     pendingInput: personalFundDetails.pendingInput,
     pendingOutput: personalFundDetails.pendingOutput,
     value: personalFundDetails.value,
-    fundId: fundDetails.id,
+    id: fundDetails.id,
     investedAmount: personalFundDetails.value,
     balanceAmount: balanceGVT.amount,
     balanceCurrency: balanceGVT.currency,
@@ -124,6 +129,11 @@ class FundDetailsDescriptionSection extends PureComponent {
     return (
       <Fragment>
         <FundDetailsDescription
+          FUND={FUND}
+          AssetEditContainer={AssetEditContainer}
+          FundDetailContext={FundDetailContext}
+          FundWithdrawContainer={FundWithdrawContainer}
+          FundDepositContainer={FundDepositContainer}
           isAuthenticated={isAuthenticated}
           redirectToLogin={redirectToLogin}
           isInvested={isInvested}
@@ -133,7 +143,7 @@ class FundDetailsDescriptionSection extends PureComponent {
           isReinvestPending={ui.isReinvestPending}
           onFavoriteClick={this.handleOnFavoriteClick}
           isFavoritePending={ui.isFavoritePending}
-          isOwnProgram={isOwnProgram}
+          canInvest={isOwnProgram}
           composeInvestmentData={composeInvestmentData}
           onChangeInvestmentStatus={onChangeInvestmentStatus}
         />
