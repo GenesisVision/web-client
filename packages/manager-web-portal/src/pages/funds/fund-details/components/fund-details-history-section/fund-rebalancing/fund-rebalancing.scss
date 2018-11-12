@@ -1,0 +1,13 @@
+@import "shared/styles/_colors.scss";
+
+.fund-details-rebalancing {
+  overflow: hidden;
+
+  & .table__row--head,
+  &__row:nth-child(2n + 1) {
+    background-color: $table-background-subcolor;
+  }
+
+  &__cell {
+  }
+}

@@ -1,0 +1,85 @@
+@import "shared/styles/_colors.scss";
+@import "shared/styles/_breakpoint.scss";
+
+.create-program-broker {
+  &-container {
+    margin-bottom: 20px;
+  }
+
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  &__list {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    width: 59%;
+    margin-right: 1%;
+    min-width: 280px;
+
+    @include media-breakpoint-tablet() {
+      margin-right: 4%;
+      min-width: 324px;
+    }
+
+    @include media-breakpoint-desktop() {
+      min-width: 352px;
+      margin-right: 6%;
+    }
+  }
+
+  &__description {
+    box-sizing: border-box;
+    width: 300px;
+    padding: 40px 32px;
+
+    &-heading {
+      color: $text-light-color;
+      font-weight: 600;
+    }
+  }
+
+  &__info-title {
+    margin-top: 32px;
+    margin-bottom: 14px;
+    font-size: 13px;
+    color: $short-statistic-subheading-color;
+    letter-spacing: 0.4px;
+  }
+
+  &__info-text {
+    font-size: 14px;
+    line-height: 1.9;
+    letter-spacing: 0.3px;
+    color: $text-light-color;
+  }
+
+  &__leverage,
+  &__fee {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 50%;
+  }
+
+  &__navigation {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+
+    & .gv-btn {
+      box-sizing: border-box;
+      height: 40px;
+      width: 110px;
+      padding: 0;
+    }
+  }
+
+  @include media-breakpoint-landscape-phone() {
+    flex-direction: row;
+  }
+}

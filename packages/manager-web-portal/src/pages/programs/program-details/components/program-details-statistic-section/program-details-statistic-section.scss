@@ -1,0 +1,29 @@
+@import "shared/styles/_breakpoint.scss";
+@import "shared/styles/_sizes.scss";
+
+.program-details-statistic-section {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  &__statistic,
+  &__chart {
+    margin-top: $padding-large-mobile;
+    @include media-breakpoint-landscape-phone() {
+      margin-top: $padding-large;
+    }
+  }
+  &__statistic {
+    display: flex;
+    width: 100%;
+    @include media-breakpoint-landscape-phone() {
+      margin-right: $padding-large-mobile;
+      max-width: 300px;
+    }
+  }
+
+  &__chart {
+    display: flex;
+    flex: 1;
+    min-height: 400px;
+  }
+}

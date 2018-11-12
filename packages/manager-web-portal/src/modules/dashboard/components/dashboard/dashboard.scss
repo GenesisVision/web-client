@@ -1,0 +1,13 @@
+@import "shared/styles/_breakpoint.scss";
+
+.dashboard {
+  margin: 4rem;
+  @include media-breakpoint-phone() {
+    margin: 2rem;
+  }
+}
+
+.dashboard-subheader {
+  font-size: 2rem;
+  font-family: "NeuzeitGroBol";
+}

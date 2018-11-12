@@ -1,0 +1,92 @@
+@import "shared/styles/_sizes.scss";
+@import "shared/styles/_breakpoint.scss";
+
+.dashboard-funds {
+  &__cell {
+    font-size: $font-size-small-mobile;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-small;
+    }
+    &--avatar-title {
+      display: flex;
+      align-items: center;
+    }
+    &--title {
+      width: 22%;
+      padding: 0;
+      .gv-btn {
+        padding: 5px;
+      }
+    }
+    &--share {
+      width: 10%;
+    }
+    &--currency {
+      width: 10%;
+    }
+    &--period {
+      width: 10%;
+    }
+    &--value {
+      width: 10%;
+    }
+    &--profit {
+      width: 10%;
+    }
+    &--chart {
+      width: 15%;
+      max-width: 200px;
+    }
+    &--status {
+      width: 13%;
+    }
+  }
+}
+
+.funds-table__cell {
+  & .fund-assets {
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+  &--avatar-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    .gv-btn {
+      font-size: $font-size-middle-mobile;
+      padding: 0;
+    }
+    .program-avatar {
+      width: 20px;
+      margin: 0;
+      padding-right: $padding-mini-mobile;
+      @include media-breakpoint-landscape-phone() {
+        width: 40px;
+        padding-right: $padding-mini;
+      }
+    }
+    @include media-breakpoint-landscape-phone() {
+      .gv-btn {
+        font-size: $font-size-middle;
+      }
+    }
+  }
+  &--title {
+    min-width: 50px;
+    div {
+      padding: $padding-small/10;
+    }
+  }
+  &--bottom {
+    opacity: 0.3;
+  }
+  &--chart {
+    min-width: 50px;
+    max-width: 100px;
+    @include media-breakpoint-landscape-phone() {
+      min-width: 100px;
+      max-width: 200px;
+    }
+  }
+}

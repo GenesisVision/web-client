@@ -1,0 +1,60 @@
+@import "shared/styles/_breakpoint.scss";
+@import "shared/styles/_sizes.scss";
+
+.global-search {
+  &-input {
+    &__wrapper {
+      width: 100%;
+    }
+  }
+  &-hidden {
+    display: none;
+  }
+}
+
+.global-search-input {
+  & .gv-text-field__wrapper,
+  & .gv-text-field {
+    margin: 0;
+  }
+}
+
+.global-search-result {
+  margin-top: $padding-small-mobile;
+  @include media-breakpoint-landscape-phone() {
+    margin-top: $padding-small;
+  }
+
+  & .table__toolbar {
+    padding: 0;
+  }
+
+  &__tabs {
+    padding: 0 $padding-middle-mobile;
+    @include media-breakpoint-landscape-phone() {
+      padding: 0 $padding-middle;
+    }
+  }
+
+  &__heading {
+    padding: $padding-middle-mobile;
+    font-size: $font-size-subtitle-mobile;
+    letter-spacing: 0.2px;
+    font-weight: 600;
+    @include media-breakpoint-landscape-phone() {
+      padding: $padding-middle;
+      font-size: $font-size-subtitle;
+    }
+  }
+
+  &__loading {
+    padding: $padding-middle-mobile;
+    font-size: $font-size-large-mobile;
+    letter-spacing: 0.2px;
+    opacity: 0.4;
+    @include media-breakpoint-landscape-phone() {
+      padding: $padding-middle;
+      font-size: $font-size-large;
+    }
+  }
+}

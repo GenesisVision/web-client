@@ -1,0 +1,24 @@
+@import "shared/styles/_colors.scss";
+@import "shared/styles/_constants.scss";
+@import "shared/styles/_breakpoint.scss";
+
+.login {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 70%;
+
+  &-form {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 70%;
+
+    &__forgot {
+      margin-bottom: 30px;
+    }
+  }
+
+  &__submit-button {
+    align-self: flex-start;
+    margin-top: auto;
+  }
+}

@@ -1,0 +1,19 @@
+@import "shared/styles/_colors.scss";
+
+.signup-email {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 70%;
+  align-items: flex-start;
+
+  &-pending {
+    &__text {
+      line-height: 24px;
+      color: $text-color;
+    }
+
+    &__resend-btn {
+      margin-top: 24px;
+    }
+  }
+}

@@ -1,0 +1,52 @@
+@import "shared/styles/_breakpoint.scss";
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.metric__value {
+  display: flex;
+  justify-content: center;
+  font-size: 1.7rem;
+  font-family: "NeuzeitGroLig";
+  line-height: 1;
+  flex: 1;
+  min-width: 6rem;
+  @include media-breakpoint-phone() {
+    font-size: 1.2rem;
+  }
+}
+
+.metric__bubble {
+  align-self: flex-start;
+  display: inline-block;
+  padding: 0.3rem 0.5em;
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 10rem;
+  color: white;
+  background-color: $primary-color;
+  box-shadow: 0 5px 15px 0 $positive-background-color;
+  @include media-breakpoint-phone() {
+    padding: 0.3em 0.4em;
+    font-size: 0.55rem;
+    line-height: 1.1;
+  }
+}
+
+.metric__description {
+  color: #28768d;
+  font-size: 0.9rem;
+  line-height: 1;
+  text-align: center;
+  @include media-breakpoint-phone() {
+    font-size: 0.6rem;
+  }
+}

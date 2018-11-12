@@ -1,0 +1,42 @@
+@import "shared/styles/_colors.scss";
+@import "shared/styles/_breakpoint.scss";
+@import "shared/styles/_sizes.scss";
+
+$add-button-width: 120px;
+$add-button-height: 25px;
+$add-button-button-font-size: 28px;
+
+.add-button {
+  padding: 0 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3.6px;
+  color: #14beb4;
+  background: rgba(21, 187, 175, 0.1);
+  width: $add-button-height/$divider-text;
+  height: $add-button-height/$divider-text;
+  cursor: pointer;
+  &:hover {
+    background: rgb(21, 187, 175);
+    color: $text-accent-color;
+    &__button {
+    }
+  }
+  @include media-breakpoint-landscape-phone() {
+    width: $add-button-height;
+    height: $add-button-height;
+  }
+  &,
+  & div {
+    box-sizing: border-box;
+  }
+  &__button {
+    padding: 0 7px;
+    font-size: $add-button-button-font-size/$divider-text;
+    font-weight: 100;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $add-button-button-font-size;
+    }
+  }
+}

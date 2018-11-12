@@ -1,0 +1,34 @@
+@import "shared/styles/_colors.scss";
+
+.wallet-add-funds-popup {
+  &__title {
+    font-size: 12px;
+    opacity: 0.3;
+    letter-spacing: 0.4px;
+    color: $main-color;
+    margin-bottom: 12px;
+  }
+  &__value {
+    font-size: 13px;
+    letter-spacing: 0.4px;
+    margin-bottom: 32px;
+  }
+  &__qr {
+    margin-bottom: 32px;
+  }
+  &__bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__will-get {
+    &:before {
+      content: none;
+    }
+    &:after {
+      content: none;
+    }
+  }
+}

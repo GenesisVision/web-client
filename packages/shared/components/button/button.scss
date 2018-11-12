@@ -1,0 +1,113 @@
+.gv-btn {
+  display: inline-flex;
+  font-family: "NeuzeitGroBol";
+  font-weight: 300;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 0.3rem 0.75rem;
+  min-height: 35px;
+  font-size: 0.875rem;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+  & + & {
+    margin-left: 1rem;
+  }
+
+  &:not(:disabled):not(.disabled) {
+    cursor: pointer;
+  }
+
+  &.disabled,
+  &:disabled {
+    opacity: 0.5;
+  }
+
+  &:focus,
+  &.focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(3, 189, 175, 0.25);
+  }
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+
+  &:not(:disabled):not(.disabled):active,
+  &:not(:disabled):not(.disabled).active {
+    background-image: none;
+  }
+}
+
+.gv-btn--full-width {
+  width: 100%;
+  margin-left: 0 !important;
+}
+
+.gv-btn--primary {
+  color: #fff;
+  background-color: #03bdaf;
+  border-color: #03bdaf;
+  box-shadow: 0 5px 15px 0 rgba(22, 183, 173, 0.28);
+
+  &:not(:disabled):not(.disabled):active,
+  &:not(:disabled):not(.disabled).active {
+    background-color: #028b81;
+    border-color: #027e75;
+  }
+
+  &:focus,
+  &.focus {
+    box-shadow: 0 0 0 0.2rem rgba(3, 189, 175, 0.5);
+  }
+
+  &:hover {
+    color: #fff;
+    background-color: #02978c;
+    border-color: #028b81;
+  }
+
+  &.disabled,
+  &:disabled {
+    background-color: #03bdaf;
+    border-color: #03bdaf;
+  }
+}
+
+.gv-btn--secondary {
+  color: #184f61;
+  background-color: #fff;
+  background-image: none;
+  border-color: #e3ebed;
+  box-shadow: 0 1px 4px 0 rgba(227, 235, 237, 0.67);
+
+  &:not(:disabled):not(.disabled):active:focus,
+  &:not(:disabled):not(.disabled).active:focus {
+    box-shadow: 0 0 0 0.2rem rgba(24, 79, 97, 0.5);
+  }
+
+  &:not(:disabled):not(.disabled):active,
+  &:not(:disabled):not(.disabled).active {
+    color: #fff;
+    background-color: #184f61;
+    border-color: #184f61;
+  }
+
+  &:hover {
+    color: #fff;
+    background-color: #184f61;
+    border-color: #184f61;
+  }
+
+  &.disabled,
+  &:disabled {
+    color: #184f61;
+    background-color: transparent;
+    border-color: #e3ebed;
+  }
+}

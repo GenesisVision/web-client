@@ -1,0 +1,43 @@
+@import "shared/styles/_colors.scss";
+@import "shared/styles/_breakpoint.scss";
+$middle-font-size: 13px;
+$middle-padding: 32px;
+$title-size: 28px;
+$mobile-padding-divider: 3;
+$mobile-text-divider: 1.5;
+.dashboard-portfolio-events-all {
+  &__navigation {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: $middle-font-size/$mobile-text-divider;
+    padding: $middle-padding/$mobile-padding-divider 0;
+    .navigation-title {
+      opacity: 0.4;
+    }
+    button {
+      padding-left: 0;
+      font-size: $middle-font-size/$mobile-text-divider;
+      font-weight: 600;
+    }
+  }
+  &__heading {
+    color: $text-accent-color;
+    font-size: $title-size/$mobile-text-divider;
+    padding-bottom: $middle-padding/$mobile-padding-divider;
+  }
+  @include media-breakpoint-landscape-phone() {
+    &__navigation {
+      padding: $middle-padding 0;
+      font-size: $middle-font-size;
+      button {
+        font-size: $middle-font-size;
+      }
+    }
+    &__heading {
+      font-size: $title-size;
+      padding-bottom: $middle-padding;
+    }
+  }
+}

@@ -1,0 +1,96 @@
+@import "shared/styles/_colors.scss";
+@import "shared/styles/_constants.scss";
+
+.gv-datepicker {
+  display: inline-flex;
+  width: 100%;
+
+  button {
+    text-align: left;
+  }
+
+  > div,
+  .react-datepicker-wrapper,
+  .react-datepicker__input-container {
+    display: flex;
+    width: 100%;
+  }
+}
+
+$back-color: #273642;
+$lighten-back-color: lighten($back-color, 10);
+
+.react-calendar {
+  border-radius: $border-radius;
+  border: none !important;
+  background-color: $back-color !important;
+
+  &__month-view {
+    margin-bottom: 10px;
+    &__days__day--weekend {
+      color: $negative-color !important;
+    }
+  }
+
+  &__triangle {
+    display: none;
+  }
+
+  &__navigation {
+    margin-bottom: 10px !important;
+    &__label {
+      font-size: 0.75em;
+      font-weight: bold;
+    }
+
+    button:enabled:focus,
+    button:hover,
+    button[disabled] {
+      background-color: $lighten-back-color !important;
+    }
+
+    button[disabled] {
+      background-color: rgba($lighten-back-color, 0.5) !important;
+      opacity: 0.5;
+    }
+  }
+
+  &__navigation__arrow,
+  &__navigation__label {
+    color: $main-color;
+  }
+
+  &__tile {
+    color: $main-color;
+
+    &:hover {
+      background-color: $positive-color !important;
+    }
+
+    &--active {
+      background-color: $primary-color !important;
+    }
+
+    &:disabled {
+      background-color: rgba($lighten-back-color, 0.5) !important;
+      opacity: 0.5;
+    }
+  }
+
+  &__day {
+    color: $main-color;
+
+    &:hover {
+      background-color: $positive-color;
+    }
+
+    &--selected {
+      background-color: $primary-color;
+    }
+  }
+
+  &__header {
+    background-color: #273642;
+    border-bottom: 1px solid $label-color;
+  }
+}

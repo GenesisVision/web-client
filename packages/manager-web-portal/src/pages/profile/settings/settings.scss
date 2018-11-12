@@ -1,0 +1,65 @@
+@import "shared/styles/_colors.scss";
+@import "shared/styles/_breakpoint.scss";
+
+.profile-settings {
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+
+    & h3 {
+      text-transform: uppercase;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.4px;
+      margin-bottom: 30px;
+      margin-top: 16px;
+    }
+
+    & .two-factor,
+    & .profile-image {
+      min-width: 340px;
+      margin-right: 20px;
+    }
+
+    @include media-breakpoint-landscape-tablet() {
+      flex-direction: row;
+    }
+  }
+
+  &__password {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    color: $main-color;
+    margin-top: 16px;
+
+    &-arrow {
+      margin-left: 6px;
+    }
+
+    @include media-breakpoint-landscape-tablet() {
+      margin-left: auto;
+    }
+  }
+
+  &__aside-actions {
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
+    @include media-breakpoint-landscape-tablet() {
+      margin-top: 0;
+      margin-left: auto;
+      align-items: flex-end;
+    }
+  }
+
+  &__logout-devices {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    color: $main-color;
+    margin-top: 16px;
+    padding: 0;
+  }
+}

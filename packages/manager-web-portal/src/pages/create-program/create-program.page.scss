@@ -1,0 +1,21 @@
+@import "shared/styles/_colors.scss";
+
+.create-program {
+  &__navigation-dialog {
+    padding: 32px;
+
+    &-text {
+      font-size: 14px;
+      color: $text-light-color;
+    }
+
+    &-button {
+      margin-top: 20px;
+      padding: 8px 24px;
+    }
+  }
+
+  &-page .gv-tab {
+    cursor: default;
+  }
+}

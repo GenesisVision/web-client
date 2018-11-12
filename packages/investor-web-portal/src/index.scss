@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700");
+@import "~gv-react-components/dist/index.css";
+@import "shared/styles/_colors.scss";
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: $background-color;
+  font-family: "Montserrat", sans-serif;
+}
+
+input,
+textarea,
+select,
+button {
+  font-family: "Montserrat", sans-serif;
+}
+
+.root,
+.app,
+.app__body {
+  height: 100vh;
+  color: white;
+}
+
+*::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}

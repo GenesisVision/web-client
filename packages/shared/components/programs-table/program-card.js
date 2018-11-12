@@ -1,0 +1,204 @@
+import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
+import Popover from "shared/components/popover/popover";
+import Profitability from "shared/components/profitability/profitability";
+import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
+import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
+import { GVButton } from "gv-react-components";
+import { composeProgramDetailsUrl } from "shared/utils/compose-url";
+import { composeManagerDetailsUrl } from "shared/utils/compose-url";
+import React, { Component } from "react";
+import { translate } from "react-i18next";
+import NumberFormat from "react-number-format";
+import { Link } from "react-router-dom";
+
+import { formatValue } from "shared/utils/formatter";
+
+class ProgramCard extends Component {
+  state = {
+    anchor: null,
+    isOpenInvestmentPopup: false,
+    isOpenWithdrawalPopup: false
+  };
+  handleOpenDropdown = event => this.setState({ anchor: event.currentTarget });
+  handleCloseDropdown = () => this.setState({ anchor: null });
+  render() {
+    const { t, program, onExpandClick, toggleFavorite, title } = this.props;
+    const handleToggleFavorite = () => {
+      toggleFavorite(program.id, program.personalDetails.isFavorite);
+    };
+    return (
+      <div onClick={onExpandClick} className="programs-cards__card">
+        <div className="programs-cards__row">
+          <div className="programs-cards__avatar">
+            <Link
+              to={{
+                pathname: composeProgramDetailsUrl(program.url),
+                state: `/ ${title}`
+              }}
+            >
+              <AssetAvatar
+                url={program.logo}
+                level={program.level}
+                alt={program.title}
+                color={program.color}
+                size="medium"
+              />
+            </Link>
+          </div>
+          <div className="programs-cards__names">
+            <div className="programs-cards__title">
+              <Link
+                to={{
+                  pathname: composeProgramDetailsUrl(program.url),
+                  state: `/ ${title}`
+                }}
+              >
+                {program.title}
+              </Link>
+            </div>
+            <div className="programs-cards__name">
+              <Link
+                to={{
+                  pathname: composeManagerDetailsUrl(program.manager.url),
+                  state: `/ ${title}`
+                }}
+              >
+                <GVButton variant="text" color="primary">
+                  {program.manager.username}
+                </GVButton>
+              </Link>
+            </div>
+          </div>
+          <div className="programs-cards__actions">
+            <ActionsCircleIcon
+              primary={!!this.state.anchor}
+              onClick={this.handleOpenDropdown}
+            />
+            <Popover
+              horizontal="right"
+              vertical="bottom"
+              anchorEl={this.state.anchor}
+              noPadding
+              onClose={this.handleCloseDropdown}
+            >
+              <div className="popover-list">
+                <Link
+                  to={{
+                    pathname: composeProgramDetailsUrl(program.url),
+                    state: `/ ${title}`
+                  }}
+                >
+                  <GVButton
+                    variant="text"
+                    color="secondary"
+                    onClick={this.handleCloseDropdown}
+                  >
+                    {t("program-actions.details")}
+                  </GVButton>
+                </Link>
+                {program.personalDetails &&
+                  !program.personalDetails.isFavorite && (
+                    <GVButton
+                      variant="text"
+                      color="secondary"
+                      onClick={handleToggleFavorite}
+                    >
+                      {t("program-actions.add-to-favorites")}
+                    </GVButton>
+                  )}
+                {program.personalDetails && program.personalDetails.isFavorite && (
+                  <GVButton
+                    variant="text"
+                    color="secondary"
+                    onClick={handleToggleFavorite}
+                  >
+                    {t("program-actions.remove-from-favorites")}
+                  </GVButton>
+                )}
+              </div>
+            </Popover>
+          </div>
+        </div>
+        <div className="programs-cards__row">
+          <div className="programs-cards__chart">
+            <ProgramSimpleChart data={program.chart} programId={program.id} />
+          </div>
+          <div className="programs-cards__chart-info">
+            <div className="programs-cards__profit">
+              <Profitability
+                value={program.statistic.profitPercent}
+                variant="chips"
+                prefix="arrow"
+              >
+                <NumberFormat
+                  value={formatValue(program.statistic.profitPercent, 2)}
+                  suffix="%"
+                  allowNegative={false}
+                  displayType="text"
+                />
+              </Profitability>
+            </div>
+          </div>
+        </div>
+        <div className="programs-cards__table">
+          <table>
+            <tbody>
+              <tr>
+                <th className="programs-cards__table--title">
+                  {t("programs-page.programs-header.balance")}
+                </th>
+                <th className="programs-cards__table--title">
+                  {t("programs-page.programs-header.investors")}
+                </th>
+                <th className="programs-cards__table--title">
+                  {t("programs-page.programs-header.available-to-invest")}
+                </th>
+              </tr>
+              <tr>
+                <td>{(+program.statistic.balanceGVT.amount).toFixed(0)} GVT</td>
+                <td>{program.statistic.investorsCount}</td>
+                <td>{program.availableInvestment} GVT</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div className="programs-cards__table">
+          <table>
+            <tbody>
+              <tr>
+                <th className="programs-cards__table--title">
+                  {t("programs-page.programs-header.period")}
+                </th>
+                <th className="programs-cards__table--title">
+                  {t("programs-page.programs-header.trades")}
+                </th>
+                <th className="programs-cards__table--title">
+                  {t("programs-page.programs-header.drawdown")}
+                </th>
+              </tr>
+              <tr>
+                <td>
+                  <ProgramPeriodPie
+                    start={program.periodStarts}
+                    end={program.periodEnds}
+                  />
+                </td>
+                <td>{program.statistic.tradesCount}</td>
+                <td>
+                  <NumberFormat
+                    value={formatValue(program.statistic.drawdownPercent, 2)}
+                    suffix="%"
+                    displayType="text"
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    );
+  }
+}
+
+export default translate()(ProgramCard);

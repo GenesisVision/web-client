@@ -1,0 +1,26 @@
+@import "shared/styles/_colors.scss";
+@import "shared/styles/_breakpoint.scss";
+
+.program-statistic {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 2rem;
+}
+
+.program-statistic__cell {
+  flex: 1 1 15rem;
+  max-width: 15rem;
+  padding: 1rem;
+
+  &:not(:last-of-type) {
+    border-right: 2px dashed $border-color;
+  }
+
+  @include media-breakpoint-phone() {
+    max-width: 9rem;
+    &:not(:last-of-type) {
+      border-right: 0;
+    }
+  }
+}

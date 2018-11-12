@@ -1,0 +1,34 @@
+@import "shared/styles/_breakpoint.scss";
+@import "shared/styles/_constants.scss";
+
+.program-filterable-list {
+  display: flex;
+  overflow: hidden;
+}
+
+.program-filterable-list__wrapper {
+  flex: 1;
+  max-width: 1570px;
+  margin: 0 auto;
+  &:not(:last-child) {
+    @include media-breakpoint-desktop() {
+      height: calc(100vh - $header-height);
+      overflow: hidden;
+    }
+
+    @include media-breakpoint-phone() {
+      display: none;
+    }
+  }
+}
+
+.program-filterable-list__header {
+  display: flex;
+  margin: 2rem 1rem 0.5rem 1rem;
+  align-items: center;
+  justify-content: space-between;
+  @include media-breakpoint-phone() {
+    flex-direction: column;
+    margin: 0.5rem;
+  }
+}

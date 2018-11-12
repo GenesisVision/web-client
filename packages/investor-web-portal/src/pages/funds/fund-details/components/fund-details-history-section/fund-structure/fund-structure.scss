@@ -1,0 +1,30 @@
+@import "shared/styles/_colors.scss";
+@import "shared/styles/_breakpoint.scss";
+@import "shared/styles/_sizes.scss";
+
+.fund-details-structure {
+  overflow: hidden;
+
+  & .table__row--head,
+  &__row:nth-child(2n + 1) {
+    background-color: $table-background-subcolor;
+  }
+
+  &__cell,
+  &__head-cell {
+    font-size: $font-size-middle-mobile;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-middle;
+    }
+  }
+
+  &__symbol {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  &__symbol-name {
+    padding: 0 $padding-mini;
+  }
+}
