@@ -7,11 +7,13 @@ import { loadData, saveData } from "shared/utils/localstorage";
 import TableBody from "shared/components/table/components/table-body";
 import TableFooter from "shared/components/table/components/table-footer";
 import TableHeader from "shared/components/table/components/table-header";
-import TableToolbar from "./table-toolbar";
+import TableToolbar from "shared/components/table/components/table-toolbar";
 
-export const TABLE_VIEW = "table_view";
-export const CARDS_VIEW = "cards_view";
-export const PROGRAMS_VIEW = "programs_view";
+import {
+  TABLE_VIEW,
+  CARDS_VIEW,
+  PROGRAMS_VIEW
+} from "shared/components/table/table.constants";
 
 class Table extends Component {
   state = {

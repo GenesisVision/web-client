@@ -3,7 +3,10 @@ import { TableIcon } from "shared/components/icon/table-icon";
 import React, { Component } from "react";
 
 import SortingFilter from "shared/components/table/components/sorting/sorting-filter/sorting-filter";
-import { CARDS_VIEW, TABLE_VIEW } from "./table";
+import {
+  CARDS_VIEW,
+  TABLE_VIEW
+} from "shared/components/table/table.constants";
 
 class TableToolbar extends Component {
   handleIconClick = view => e => {
@@ -26,17 +29,16 @@ class TableToolbar extends Component {
     return (
       <div className="table__toolbar">
         {title && <div className="table__title">{title}</div>}
-        {view === CARDS_VIEW &&
-          sorting !== undefined && (
-            <div className="table__filters">
-              <SortingFilter
-                sorting={sorting}
-                columns={columns}
-                updateSorting={updateSorting}
-                renderValueText={renderHeader}
-              />
-            </div>
-          )}
+        {view === CARDS_VIEW && sorting !== undefined && (
+          <div className="table__filters">
+            <SortingFilter
+              sorting={sorting}
+              columns={columns}
+              updateSorting={updateSorting}
+              renderValueText={renderHeader}
+            />
+          </div>
+        )}
         {renderFilters && (
           <div className="table__filters">
             {renderFilters(updateFilter, filtering)}
