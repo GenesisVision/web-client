@@ -1,7 +1,7 @@
 @import "shared/styles/_colors.scss";
 @import "shared/styles/_breakpoint.scss";
 
-.profile-input-image {
+.input-photo {
   width: 200px;
   height: 200px;
   position: relative;
@@ -26,7 +26,6 @@
   }
 
   &__dropzone {
-    height: 100%;
     &--active &-helper {
       display: flex;
     }
@@ -75,11 +74,7 @@
     margin-top: 6px;
     margin-bottom: 0;
     text-align: center;
-
-    &-upload {
-      color: $primary-color;
-      cursor: pointer;
-    }
+    cursor: pointer;
 
     &--big {
       display: none;

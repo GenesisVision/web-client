@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import fileService from "shared/services/file-service";
 
 import * as profileSettingsService from "../services/profile-settings.service";
-import ProfileImage from "./profile-image";
+import ProfileImageForm from "./profile-image-form";
 
 const ProfileImageContainer = ({ headerData, services }) => {
   if (headerData === undefined) return null;
@@ -25,7 +25,7 @@ const ProfileImageContainer = ({ headerData, services }) => {
   };
 
   return (
-    <ProfileImage
+    <ProfileImageForm
       handleSubmit={updateAvatar}
       avatar={headerData && fileService.getFileUrl(headerData.avatar)}
     />

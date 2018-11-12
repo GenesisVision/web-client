@@ -16,6 +16,13 @@
     "under-review": "Under Review",
     "rejected": "Rejected"
   },
+  "fields": {
+    "input-photo": {
+      "text-download--big": "Drag the image here or click here to browse your files",
+      "text-download--small": "Tap to upload the image",
+      "drop-files": "Drop files..."
+    }
+  },
   "about-levels": {
     "description": "Genesis level shows the experience and reliability of the Manager",
     "sections": {
