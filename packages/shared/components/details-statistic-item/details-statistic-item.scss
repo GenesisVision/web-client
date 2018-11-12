@@ -1,0 +1,41 @@
+@import "shared/styles/_breakpoint.scss";
+@import "shared/styles/_colors.scss";
+@import "shared/styles/_sizes.scss";
+
+.details-statistics-item {
+  display: flex;
+  flex-direction: column;
+  padding-right: $padding-small-mobile;
+  padding-bottom: $padding-large-mobile;
+  &--half {
+    width: 70px;
+    @include media-breakpoint-landscape-phone() {
+      padding-right: 0;
+      width: auto;
+      box-sizing: border-box;
+    }
+  }
+
+  &__label {
+    color: $label-color;
+    font-size: $font-size-middle-mobile;
+    letter-spacing: 0.4px;
+    margin-bottom: $padding-small-mobile;
+    font-weight: normal;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-middle;
+      margin-bottom: $padding-small/2;
+    }
+  }
+
+  &__value {
+    font-size: $font-size-large-mobile;
+    letter-spacing: 0.6px;
+    &--accent {
+      font-weight: 600;
+    }
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-large;
+    }
+  }
+}
