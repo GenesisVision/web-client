@@ -1,6 +1,6 @@
 import Dialog from "shared/components/dialog/dialog";
 import { GVButton } from "gv-react-components";
-import GenerateRecoveryForm from "modules/2fa/google-auth/generate-recovery-codes/generate-recovery-form";
+import GenerateRecoveryWithFormik from "modules/2fa/google-auth/generate-recovery-codes/generate-recovery-form";
 import GoogleAuthCodes from "modules/2fa/google-auth/google-auth-codes";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
@@ -42,7 +42,7 @@ class GenerateRecoveryCode extends Component {
           {this.state.data ? (
             <GoogleAuthCodes codes={this.state.data.codes} />
           ) : (
-            <GenerateRecoveryForm
+            <GenerateRecoveryWithFormik
               onSubmit={this.handleSubmit}
               disabled={this.state.isPending}
               errorMessage={this.state.errorMessage}

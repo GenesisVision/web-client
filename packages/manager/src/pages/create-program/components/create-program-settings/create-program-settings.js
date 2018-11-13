@@ -1,6 +1,6 @@
 import "./create-program-settings.scss";
 
-import classNames from "classnames";
+import classnames from "classnames";
 import Hint from "shared/components/hint/hint";
 import { RefreshIcon } from "shared/components/icon/refresh-icon";
 import Select from "shared/components/select/select";
@@ -276,7 +276,7 @@ class CreateProgramSettings extends React.Component {
             <div className="create-program-settings__available-amount">
               {t("create-program-page.settings.fields.available-in-wallet")}
               <span
-                className={classNames(
+                className={classnames(
                   "create-program-settings__available-amount-value",
                   {
                     "create-program-settings__available-amount-value--error":

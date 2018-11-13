@@ -1,6 +1,6 @@
 import "shared/components/programs-table/programs.scss";
 
-import { Table } from "modules/table/components";
+import { Table } from "shared/components/table/components";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import LevelFilter from "shared/components/table/components/filtering/level-filter/level-filter";
 import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";

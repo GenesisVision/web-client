@@ -44,7 +44,7 @@
     "redux-debounced": "^0.5.0",
     "redux-promise-middleware": "^5.1.1",
     "redux-thunk": "^2.2.0",
-    "reselect": "^3.0.1",
+    "reselect": "^4.0.0",
     "uuid": "^3.2.1",
     "yup": "^0.26.6"
   },
@@ -67,38 +67,9 @@
     "redux-devtools": "^3.4.1"
   },
   "scripts": {
-    "precommit": "lint-staged",
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  },
-  "lint-staged": {
-    "*.js": [
-      "import-sort --write",
-      "git add"
-    ],
-    "*.{js,json,scss,md}": [
-      "prettier --write",
-      "git add"
-    ]
-  },
-  "importSort": {
-    ".js": {
-      "parser": "babylon",
-      "style": "module"
-    }
-  },
-  "browserslist": {
-    "development": [
-      "last 2 chrome versions",
-      "last 2 firefox versions",
-      "last 2 edge versions"
-    ],
-    "production": [
-      ">0.25%",
-      "not op_mini all",
-      "ie 11"
-    ]
   }
 }

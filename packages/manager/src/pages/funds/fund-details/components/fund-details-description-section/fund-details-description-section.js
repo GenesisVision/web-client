@@ -68,13 +68,14 @@ class FundDetailsDescriptionSection extends PureComponent {
       fundDescription: composeNewReinvestState(!isReinvest)
     });
     toggleReinvesting(id, isReinvest)
-      .catch(e => {
+      .then(() => {
         this.setState({
-          fundDescription: composeNewReinvestState(isReinvest)
+          ui: { ...ui, isReinvestPending: false }
         });
       })
-      .finally(() => {
+      .catch(e => {
         this.setState({
+          fundDescription: composeNewReinvestState(isReinvest),
           ui: { ...ui, isReinvestPending: false }
         });
       });
@@ -97,13 +98,14 @@ class FundDetailsDescriptionSection extends PureComponent {
       fundDescription: composeNewFavoriteState()
     });
     toggleFavoriteFund(id, isFavorite)
-      .catch(e => {
+      .then(() => {
         this.setState({
-          fundDescription: composeNewFavoriteState(isFavorite)
+          ui: { ...ui, isFavoritePending: false }
         });
       })
-      .finally(() => {
+      .catch(e => {
         this.setState({
+          fundDescription: composeNewFavoriteState(isFavorite),
           ui: { ...ui, isFavoritePending: false }
         });
       });
