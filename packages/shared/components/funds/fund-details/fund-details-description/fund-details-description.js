@@ -16,12 +16,14 @@ import {
   composeManagerDetailsUrl,
   composeFundNotificationsUrl
 } from "shared/utils/compose-url";
+import RebalancePopup from "manager-web-portal/src/modules/rebalance/rebalance-popup";
 
 class FundDetailsDescription extends PureComponent {
   state = {
     isOpenInvestmentPopup: false,
     isOpenAboutLevels: false,
     isOpenEditFundPopup: false,
+    isOpenRebalanceFundPopup: false,
     anchor: null
   };
 
@@ -46,9 +48,19 @@ class FundDetailsDescription extends PureComponent {
   handleApplyEditFundPopup = updateDetails => () => {
     updateDetails();
   };
+  handleOpenRebalanceFundPopup = () => {
+    this.setState({ isOpenRebalanceFundPopup: true });
+  };
+  handleCloseRebalanceFundPopup = () => {
+    this.setState({ isOpenRebalanceFundPopup: false });
+  };
 
   render() {
-    const { isOpenInvestmentPopup, isOpenEditFundPopup } = this.state;
+    const {
+      isOpenInvestmentPopup,
+      isOpenEditFundPopup,
+      isOpenRebalanceFundPopup
+    } = this.state;
     const {
       t,
       FUND,
@@ -175,15 +187,26 @@ class FundDetailsDescription extends PureComponent {
                     {t("fund-details-page.description.invest")}
                   </GVButton>
                   {AssetEditContainer && (
-                    <GVButton
-                      className="fund-details-description__invest-btn"
-                      color="secondary"
-                      variant="outlined"
-                      onClick={this.handleOpenEditFundPopup}
-                      disabled={!canCloseProgram}
-                    >
-                      {t("fund-details-page.description.edit-fund")}
-                    </GVButton>
+                    <Fragment>
+                      <GVButton
+                        className="fund-details-description__invest-btn"
+                        color="secondary"
+                        variant="outlined"
+                        onClick={this.handleOpenEditFundPopup}
+                        disabled={!canCloseProgram}
+                      >
+                        {t("fund-details-page.description.edit-fund")}
+                      </GVButton>
+                      <GVButton
+                        className="fund-details-description__invest-btn"
+                        color="secondary"
+                        variant="outlined"
+                        onClick={this.handleOpenRebalanceFundPopup}
+                        disabled={!canCloseProgram}
+                      >
+                        {t("fund-details-page.description.edit-fund")}
+                      </GVButton>
+                    </Fragment>
                   )}
                   <FundDetailContext.Consumer>
                     {({ updateDetails }) => (
@@ -206,6 +229,11 @@ class FundDetailsDescription extends PureComponent {
                             type={FUND}
                           />
                         )}
+                        <RebalancePopup
+                          open={isOpenRebalanceFundPopup}
+                          onClose={this.handleCloseRebalanceFundPopup}
+                          assets={fundDescription.currentAssets}
+                        />
                       </Fragment>
                     )}
                   </FundDetailContext.Consumer>
