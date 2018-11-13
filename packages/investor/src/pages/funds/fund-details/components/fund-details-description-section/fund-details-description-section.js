@@ -93,7 +93,7 @@ class FundDetailsDescriptionSection extends PureComponent {
           FundDetailContext={FundDetailContext}
           FundWithdrawContainer={FundWithdrawContainer}
           FundDepositContainer={FundDepositContainer}
-          canInvest={true}
+          canInvest={fundDescription.personalFundDetails}
           isAuthenticated={isAuthenticated}
           redirectToLogin={redirectToLogin}
           canWithdraw={canWithdraw}

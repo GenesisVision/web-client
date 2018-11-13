@@ -1,8 +1,8 @@
 import "./about-level.scss";
 
 import Dialog from "shared/components/dialog/dialog";
-import CurrencySelect from "modules/currency-select/components/currency-select";
-import { CURRENCY_VALUES } from "modules/currency-select/currency-select.constants";
+import CurrencySelect from "shared/modules/currency-select/components/currency-select";
+import { CURRENCY_VALUES } from "shared/modules/currency-select/currency-select.constants";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";

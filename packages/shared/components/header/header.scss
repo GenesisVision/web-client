@@ -1,0 +1,101 @@
+@import "shared/styles/_colors.scss";
+@import "shared/styles/_breakpoint.scss";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+
+  &__buttons {
+    display: none !important;
+  }
+
+  &__navigation {
+    display: none !important;
+  }
+
+  &__profile {
+    display: none;
+    margin-left: auto;
+  }
+
+  &__wallet {
+    display: none !important;
+    margin-right: auto;
+  }
+
+  &__right,
+  &__left,
+  &__center {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &__search {
+    display: none;
+
+    a {
+      display: inline-flex;
+    }
+  }
+
+  &__separator {
+    flex-grow: 2;
+    justify-content: center;
+    align-self: stretch;
+    display: none;
+    &:before {
+      content: "";
+      border-left: 2px solid #1f2b36;
+    }
+  }
+
+  &__buttons {
+    a + a {
+      margin-left: 10px;
+    }
+  }
+
+  @include media-breakpoint-landscape-tablet() {
+    &__center {
+      flex-grow: 2;
+      justify-content: space-between;
+
+      .select {
+        min-width: 100px;
+      }
+    }
+    &__right {
+      flex-grow: 2;
+      justify-content: flex-end;
+    }
+    &__menu {
+      display: flex;
+    }
+    &__navigation {
+      display: inherit !important;
+    }
+
+    &__search {
+      display: flex;
+    }
+
+    &__profile {
+      display: flex;
+    }
+
+    &__wallet {
+      display: flex !important;
+    }
+
+    &__separator {
+      display: flex;
+    }
+
+    &__buttons {
+      display: inherit !important;
+    }
+  }
+}

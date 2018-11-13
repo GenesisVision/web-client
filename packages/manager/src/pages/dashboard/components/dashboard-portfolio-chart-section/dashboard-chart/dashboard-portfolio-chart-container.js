@@ -4,8 +4,8 @@ import React, { Fragment, PureComponent } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import FundProfitChart from "../../../../funds/fund-details/components/fund-details-statistic-section/fund-details-chart-section/fund-profit-chart-section/fund-profit-chart";
-import ProgramProfitChart from "../../../../programs/program-details/components/program-details-statistic-section/program-details-chart-section/program-profit-chart-section/program-profit-chart";
+import FundProfitChart from "shared/components/funds/fund-details/fund-details-statistics-section/fund-details-chart-section/fund-profit-chart-section/fund-profit-chart";
+import ProgramProfitChart from "shared/components/programs/program-details/program-details-statistic-section/program-details-chart-section/program-profit-chart-section/program-profit-chart";
 import { getAssetChart } from "../../../services/dashboard.service";
 
 class DashboardPortfolioChartContainer extends PureComponent {
@@ -95,6 +95,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  DashboardPortfolioChartContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DashboardPortfolioChartContainer);

@@ -6,7 +6,7 @@ import { translate } from "react-i18next";
 import Page from "shared/components/page/page";
 import DashboardAssets from "./components/dashboard-assets/dashboard-assets";
 import DashboardChartSection from "./components/dashboard-portfolio-chart-section/dashboard-portfolio-chart-section";
-import DashboardPortfolioEventsContainer from "./components/dashboard-portfolio-events/dashboard-portfolio-events-container";
+import DashboardPortfolioEventsSection from "./components/dashboard-portfolio-events/dashboard-portfolio-events-section";
 
 const DashboardPage = ({ t }) => {
   const title = t("dashboard-page.title");
@@ -18,7 +18,7 @@ const DashboardPage = ({ t }) => {
             <DashboardChartSection />
           </div>
           <div className="dashboard__portfolio-events-aside">
-            <DashboardPortfolioEventsContainer title={title} />
+            <DashboardPortfolioEventsSection title={title} />
           </div>
         </div>
         <div className="dashboard__assets">
