@@ -1,7 +1,8 @@
 import "./fund-rebalancing.scss";
 
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
-import { TableCell, TableRow } from "modules/table/components";
+import TableCell from "shared/components/table/components/table-cell";
+import TableRow from "shared/components/table/components/table-row";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import TableModule from "modules/table/components/table-module";

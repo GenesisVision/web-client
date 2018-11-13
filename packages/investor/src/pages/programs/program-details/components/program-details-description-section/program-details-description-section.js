@@ -1,8 +1,12 @@
 import { toggleFavoriteProgram } from "modules/favorite-asset/services/favorite-program.service";
 import { toggleReinvesting } from "modules/program-reinvesting/services/program-reinvesting.service";
 import React, { Fragment, PureComponent } from "react";
+import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
+import AboutLevelsContainerComponent from "pages/app/components/about-levels/about-levels-container";
+import { ProgramDetailContext } from "pages/programs/program-details/program-details.page";
+import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
 
-import ProgramDetailsDescription from "./program-details-description/program-details-description";
+import ProgramDetailsDescription from "shared/components/programs/program-details/program-details-description/program-details-description";
 
 const composeInvestmentData = programDetails => {
   const { statistic, personalProgramDetails } = programDetails;
@@ -12,7 +16,7 @@ const composeInvestmentData = programDetails => {
   return {
     pendingInput: personalProgramDetails.pendingInput,
     pendingOutput: personalProgramDetails.pendingOutput,
-    programId: programDetails.id,
+    id: programDetails.id,
     investedAmount: personalProgramDetails.invested,
     balanceAmount: balanceBase.amount,
     balanceCurrency: balanceBase.currency,
@@ -111,19 +115,20 @@ class ProgramDetailsDescriptionSection extends PureComponent {
     const isInvested =
       programDescription.personalProgramDetails &&
       programDescription.personalProgramDetails.isInvested;
-    const canInvest =
-      programDescription.personalProgramDetails &&
-      programDescription.personalProgramDetails.canInvest;
     const canWithdraw =
       programDescription.personalProgramDetails &&
       programDescription.personalProgramDetails.canWithdraw;
     return (
       <Fragment>
         <ProgramDetailsDescription
+          ProgramDepositContainer={ProgramDepositContainer}
+          AboutLevelsContainerComponent={AboutLevelsContainerComponent}
+          ProgramDetailContext={ProgramDetailContext}
+          ProgramWithdrawContainer={ProgramWithdrawContainer}
           isAuthenticated={isAuthenticated}
           redirectToLogin={redirectToLogin}
           isInvested={isInvested}
-          canInvest={canInvest}
+          canInvest={programDescription.personalProgramDetails}
           canWithdraw={canWithdraw}
           programDescription={programDescription}
           onReinvestingClick={this.handleOnReinvestingClick}

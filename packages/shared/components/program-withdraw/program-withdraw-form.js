@@ -73,7 +73,8 @@ ProgramWithdrawForm.propTypes = {
   availableToWithdraw: PropTypes.number.isRequired,
   periodEnds: PropTypes.instanceOf(Date),
   rate: PropTypes.number.isRequired,
-  currency: PropTypes.string,
+  fundCurrency: PropTypes.string.isRequired,
+  accountCurrency: PropTypes.string.isRequired,
   errorMessage: PropTypes.string
 };
 
