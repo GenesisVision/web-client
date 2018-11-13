@@ -1,4 +1,4 @@
-import { CURRENCY_VALUES } from "modules/currency-select/currency-select.constants";
+import { CURRENCY_VALUES } from "shared/modules/currency-select/currency-select.constants";
 import {
   composeDefaultDateRangeFilter,
   composeRequestValue,
