@@ -1,8 +1,6 @@
 import "./create-fund-settings.scss";
 
 import classnames from "classnames";
-import Hint from "shared/components/hint/hint";
-import { RefreshIcon } from "shared/components/icon/refresh-icon";
 import { Field, withFormik } from "formik";
 import {
   GVButton,
@@ -14,9 +12,10 @@ import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import InputImage from "shared/components/form/input-image/input-image";
+import Hint from "shared/components/hint/hint";
+import { RefreshIcon } from "shared/components/icon/refresh-icon";
 import { allowValuesNumberFormat } from "shared/utils/helpers";
 
-import AddButton from "shared/components/add-button/add-button";
 import CreateFundSettingsAddAsset from "./create-fund-settings-add-asset/create-fund-settings-add-asset";
 import CreateFundSettingsAssetsComponent from "./create-fund-settings-assets-block/create-fund-settings-assets-block";
 import createFundSettingsValidationSchema from "./create-fund-settings.validators";
