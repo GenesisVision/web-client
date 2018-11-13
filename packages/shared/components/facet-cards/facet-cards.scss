@@ -35,25 +35,7 @@ $facet-padding: 30px;
 $facet-margin: 33px;
 $facet-width: 315px;
 $facet-height: 280px;
-
-.facets-shadow {
-  position: relative;
-  margin: 0 -20px;
-  padding: 20px 0;
-  overflow-x: auto;
-  overflow-y: visible;
-  &:after {
-    position: absolute;
-    content: "";
-    top: 0;
-    right: 0;
-    width: 50px;
-    height: 100%;
-  }
-  @include media-breakpoint-landscape-tablet() {
-    padding: 20px;
-  }
-}
+$padding-app: 20px;
 
 .facets {
   display: flex;
@@ -76,8 +58,7 @@ $facet-height: 280px;
 
   &__wrapper {
     position: relative;
-    margin: 0 -20px;
-    padding: 20px 0;
+    margin: 0 0-$padding-app;
     overflow: hidden;
   }
 
@@ -116,7 +97,11 @@ $facet-height: 280px;
     display: inline-flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    padding: 20px;
+    padding: $facet-margin/2 $padding-app;
+
+    @include media-breakpoint-landscape-phone() {
+      padding: $facet-margin $padding-app;
+    }
   }
 }
 
@@ -141,6 +126,7 @@ $facet-height: 280px;
   @include media-breakpoint-desktop() {
     min-width: auto;
   }
+
   @include media-breakpoint-landscape-phone() {
     min-width: $facet-width;
     height: $facet-height;
@@ -162,7 +148,7 @@ $facet-height: 280px;
 
   &__info {
     padding: $facet-padding / 2 $facet-padding;
-    @include media-breakpoint-tablet() {
+    @include media-breakpoint-landscape-phone() {
       padding: $facet-padding * 3/4 $facet-padding;
     }
   }
