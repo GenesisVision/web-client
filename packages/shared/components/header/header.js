@@ -8,10 +8,7 @@ import NorificationsWidget from "shared/components/notifications-widget/notifica
 import ProfileWidget from "shared/components/profile-widget/profile-widget";
 import WalletWidget from "shared/components/wallet-widget/wallet-widget";
 import { GVButton } from "gv-react-components";
-import CurrencySelectContainer from "modules/currency-select/components/currency-select-container";
-import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
-import { SIGNUP_ROUTE } from "pages/auth/signup/signup.routes";
-import { GLOBAL_SEARCH_ROUTE } from "pages/global-search/global-search.routes";
+import CurrencySelectContainer from "shared/modules/currency-select/components/currency-select-container";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -35,7 +32,10 @@ class Header extends Component {
       isAuthenticated,
       totalBalanceGvt,
       availableGvt,
-      investedGvt
+      investedGvt,
+      LOGIN_ROUTE,
+      SIGNUP_ROUTE,
+      GLOBAL_SEARCH_ROUTE
     } = this.props;
     return (
       <div className="header">
