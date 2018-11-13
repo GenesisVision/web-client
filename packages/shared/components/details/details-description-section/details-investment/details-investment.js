@@ -101,7 +101,7 @@ class DetailsInvestment extends PureComponent {
             >
               <NumberFormat
                 value={formatValue(pendingOutput)}
-                suffix={` %`}
+                suffix={` ${balanceCurrency}`}
                 displayType="text"
               />
             </DetailsStatisticItem>
