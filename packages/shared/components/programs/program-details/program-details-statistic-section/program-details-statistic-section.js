@@ -1,9 +1,9 @@
 import "./program-details-statistic-section.scss";
 
-import { DEFAULT_PERIOD } from "shared/components/chart/chart-period/chart-period.helpers";
 import React, { PureComponent } from "react";
 
-import { getProgramStatistic } from "../../services/program-details.service";
+import { DEFAULT_PERIOD } from "shared/components/chart/chart-period/chart-period.helpers";
+
 import ProgramDetailsChartSection from "./program-details-chart-section/program-details-chart-section";
 import ProgramDetailsStatistic from "./program-details-statistics/program-details-statistics";
 
@@ -30,7 +30,7 @@ class ProgramDetailsStatisticSection extends PureComponent {
   }
 
   handlePeriodChange = period => {
-    const { programId, currency } = this.props;
+    const { programId, currency, getProgramStatistic } = this.props;
 
     getProgramStatistic(programId, currency, period).then(data => {
       this.setState({ period, ...data });

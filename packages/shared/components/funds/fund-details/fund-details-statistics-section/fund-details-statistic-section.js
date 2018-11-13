@@ -1,15 +1,14 @@
 import "./fund-details-statistic-section.scss";
 
+import moment from "moment";
+import React, { PureComponent } from "react";
+
 import {
   ChartPeriodType,
   getPeriodStartDate
 } from "shared/components/chart/chart-period/chart-period.helpers";
-import moment from "moment";
-import React, { PureComponent } from "react";
-
-import { getFundStatistic } from "../../services/fund-details.service";
-import FundDetailsChartSection from "./fund-details-chart-section/fund-details-chart-section";
-import FundDetailsStatistic from "./fund-details-statistics/fund-details-statistics";
+import FundDetailsChartSection from "shared/components/funds/fund-details/fund-details-statistics-section/fund-details-chart-section/fund-details-chart-section";
+import FundDetailsStatistic from "shared/components/funds/fund-details/fund-details-statistics-section/fund-details-statistics/fund-details-statistics";
 
 class FundDetailsStatisticSection extends PureComponent {
   state = {
@@ -38,7 +37,7 @@ class FundDetailsStatisticSection extends PureComponent {
   }
 
   handlePeriodChange = period => {
-    const { programId, currency } = this.props;
+    const { programId, currency, getFundStatistic } = this.props;
 
     getFundStatistic(programId, currency, period).then(data => {
       this.setState({ period, ...data });

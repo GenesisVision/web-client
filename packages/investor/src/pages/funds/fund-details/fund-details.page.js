@@ -10,7 +10,7 @@ import { LOGIN_ROUTE } from "../../auth/login/login.routes";
 import NotFoundPage from "../../not-found/not-found.routes";
 import FundDetailsDescriptionSection from "./components/fund-details-description-section/fund-details-description-section";
 import FundDetailsHistorySection from "./components/fund-details-history-section/fund-details-history-section";
-import FundDetailsStatisticSection from "./components/fund-details-statistic-section/fund-details-statistic-section";
+import FundDetailsStatisticSection from "shared/components/funds/fund-details/fund-details-statistics-section/fund-details-statistic-section";
 import {
   getFundDescription,
   getFundStatistic,
@@ -113,6 +113,7 @@ class FundDetailsPage extends PureComponent {
             </div>
             <div className="fund-details__section">
               <FundDetailsStatisticSection
+                getFundStatistic={getFundStatistic}
                 programId={this.description.data.id}
                 currency={currency}
                 statisticData={this.statistic}

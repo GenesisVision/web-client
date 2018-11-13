@@ -1,9 +1,10 @@
 import "./fund-details-chart-section.scss";
 
-import Surface from "shared/components/surface/surface";
 import { GVTab, GVTabs } from "gv-react-components";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
+
+import Surface from "shared/components/surface/surface";
 
 import ProgramBalanceChartSection from "./fund-balance-chart-section/fund-balance-chart-section";
 import FundProfitChartSection from "./fund-profit-chart-section/fund-profit-chart-section";
