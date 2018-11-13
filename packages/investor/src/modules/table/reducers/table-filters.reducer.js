@@ -1,13 +1,16 @@
-import { merge } from "shared/utils/helpers";
-
-const defaultState = {};
+const FILTER_ACTION_SUFFIX = "FILTER";
+export const composeFiltersActionType = (
+  actionType,
+  suffix = FILTER_ACTION_SUFFIX
+) => `${actionType}_${suffix}`;
 
 const tableFiltersReducer = ({ type, filters = {} }) => {
-  const initialState = { ...defaultState, ...filters };
+  const initialState = { ...filters };
+  const filterActionType = composeFiltersActionType(type);
   return (state = initialState, action) => {
     switch (action.type) {
-      case type: {
-        return merge(state, action.payload);
+      case filterActionType: {
+        return { ...state, ...action.filters };
       }
 
       default:

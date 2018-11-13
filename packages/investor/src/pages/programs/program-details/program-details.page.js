@@ -10,7 +10,7 @@ import { LOGIN_ROUTE } from "../../auth/login/login.routes";
 import NotFoundPage from "../../not-found/not-found.routes";
 import ProgramDetailsDescriptionSection from "./components/program-details-description-section/program-details-description-section";
 import ProgramDetailsHistorySection from "./components/program-details-history-section/program-details-history-section";
-import ProgramDetailsStatisticSection from "./components/program-details-statistic-section/program-details-statistic-section";
+import ProgramDetailsStatisticSection from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import {
   getProgramDescription,
   getProgramHistory,
@@ -95,7 +95,9 @@ class ProgramDetailsPage extends PureComponent {
     }
 
     if (!this.description.data) return null;
-
+    const isInvested =
+      this.description.data.personalProgramDetails &&
+      this.description.data.personalProgramDetails.isInvested;
     return (
       <Page title={this.description.data.title}>
         <ProgramDetailContext.Provider
@@ -114,6 +116,7 @@ class ProgramDetailsPage extends PureComponent {
             </div>
             <div className="program-details__section">
               <ProgramDetailsStatisticSection
+                getProgramStatistic={getProgramStatistic}
                 programId={this.description.data.id}
                 currency={currency}
                 statisticData={this.statistic}
@@ -126,7 +129,7 @@ class ProgramDetailsPage extends PureComponent {
                 programId={this.description.data.id}
                 currency={currency}
                 tradesData={this.trades}
-                eventsData={this.events}
+                isInvested={isInvested}
               />
             </div>
           </div>

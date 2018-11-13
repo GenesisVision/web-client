@@ -5,7 +5,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { logout } from "../../../pages/auth/login/services/login.service";
-import Header from "./header";
+import Header from "shared/components/header/header";
+import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
+import { SIGNUP_ROUTE } from "pages/auth/signup/signup.routes";
+import { GLOBAL_SEARCH_ROUTE } from "pages/global-search/global-search.routes";
 
 class HeaderContainer extends Component {
   componentDidMount() {
@@ -29,6 +32,9 @@ class HeaderContainer extends Component {
         isAuthenticated={isAuthenticated}
         logout={logout}
         openNotifications={notificationsToggle}
+        LOGIN_ROUTE={LOGIN_ROUTE}
+        SIGNUP_ROUTE={SIGNUP_ROUTE}
+        GLOBAL_SEARCH_ROUTE={GLOBAL_SEARCH_ROUTE}
       />
     );
   }

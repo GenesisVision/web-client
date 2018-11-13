@@ -41,7 +41,7 @@ class FundWithdrawContainer extends PureComponent {
     const {
       open,
       onClose,
-      fundCurrency,
+      assetCurrency,
       accountCurrency,
       services,
       id
@@ -49,7 +49,7 @@ class FundWithdrawContainer extends PureComponent {
     return (
       <Dialog open={open} onClose={onClose}>
         <FundWithdrawPopup
-          fundCurrency={fundCurrency}
+          fundCurrency={assetCurrency}
           accountCurrency={accountCurrency}
           fetchInfo={() => services.getFundWithdrawInfo(id)}
           withdraw={percent => this.handleWithdraw(id, percent)}
@@ -82,5 +82,8 @@ const mapDispathToProps = dispatch => ({
 
 export default compose(
   translate(),
-  connect(mapStateToProps, mapDispathToProps)
+  connect(
+    mapStateToProps,
+    mapDispathToProps
+  )
 )(FundWithdrawContainer);

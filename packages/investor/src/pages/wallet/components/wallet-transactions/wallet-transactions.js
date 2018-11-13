@@ -1,25 +1,25 @@
-import "./wallet-transactions.scss";
-
-import Surface from "shared/components/surface/surface";
-import { TableCell, TableRow } from "modules/table/components";
-import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
-import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import TableContainer from "modules/table/components/table-container";
-import moment from "moment";
-import React, { Component, Fragment } from "react";
-import { translate } from "react-i18next";
-import NumberFormat from "react-number-format";
-import authService from "shared/services/auth-service";
-import EmptyTransactionsIcon from "shared/media/empty-wallet.svg";
 import { formatValue } from "shared/utils/formatter";
+import { translate } from "react-i18next";
+import authService from "shared/services/auth-service";
+import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
+import moment from "moment";
+import NumberFormat from "react-number-format";
+import React, { Component, Fragment } from "react";
+import Surface from "shared/components/surface/surface";
+import TableCell from "shared/components/table/components/table-cell";
+import TableContainer from "modules/table/components/table-container";
+import TableRow from "shared/components/table/components/table-row";
 
+import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import EmptyTransactionsIcon from "shared/media/empty-wallet.svg";
+
+import "./wallet-transactions.scss";
 import * as actions from "../../actions/wallet.actions";
-import {
-  fetchWalletTransactions,
-  updateWalletTransactionsFilters
-} from "../../services/wallet.services";
+
+import { fetchWalletTransactions } from "../../services/wallet.services";
 import WalletTransactionActions from "./wallet-transaction-action-cell";
 import { WALLET_TRANSACTIONS_COLUMNS } from "./wallet-transactions.constants";
+import { walletTableTransactionsSelector } from "./wallet-transactions.selector";
 
 const getStatus = transaction => {
   const { destinationWithdrawalInfo } = transaction;
@@ -27,23 +27,6 @@ const getStatus = transaction => {
   let status = destinationWithdrawalInfo && destinationWithdrawalInfo.status;
 
   return status ? status : "";
-};
-
-const getWalletTransactionsPlace = state => {
-  const itemsData = {
-    ...state.wallet.transactions.itemsData,
-    data: {
-      ...state.wallet.transactions.itemsData.data,
-      items:
-        state.wallet.transactions.itemsData.data &&
-        state.wallet.transactions.itemsData.data.transactions
-    }
-  };
-
-  return {
-    ...state.wallet.transactions,
-    itemsData: itemsData
-  };
 };
 
 const emptyTransactions = t => (
@@ -81,8 +64,7 @@ class WalletTransactions extends Component {
           <TableContainer
             title={t("wallet.transactions.title")}
             getItems={fetchWalletTransactions}
-            updateFilters={updateWalletTransactionsFilters}
-            getStorePlace={getWalletTransactionsPlace}
+            dataSelector={walletTableTransactionsSelector}
             isResetToDefaultOnUnmount={true}
             isFetchOnMount={true}
             renderFilters={(updateFilter, filtering) => {

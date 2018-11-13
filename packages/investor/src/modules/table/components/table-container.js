@@ -1,64 +1,44 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { merge } from "shared/utils/helpers";
+import { connect } from "react-redux";
+import React, { PureComponent } from "react";
 
 import { updateFilter } from "shared/components/table/helpers/filtering.helpers";
+
 import Table from "./table";
 
-class TableContainer extends Component {
-  constructor(props) {
-    super(props);
+import { updateFilters, getItems } from "../services/table.service";
 
-    const { paging, sorting, filtering } = this.props;
-
-    this.state.defaultFilters = { paging, sorting, filtering };
-  }
-
-  state = {
-    defaultFilters: null
-  };
-
+class TableContainer extends PureComponent {
   componentDidMount() {
     if (this.props.isFetchOnMount) {
       this.updateItems();
     }
   }
 
-  componentWillUnmount() {
-    if (this.props.isResetToDefaultOnUnmount) {
-      this.props.updateFilters(this.state.defaultFilters);
-    }
-  }
-
   updateItems = changedFilters => {
-    const { getItems, paging, sorting, filtering } = this.props;
-
-    const filters = {
-      paging,
-      sorting,
-      filtering,
-      ...changedFilters
-    };
-
-    getItems(filters);
+    const { service, selector, dataSelector, fetchItems } = this.props;
+    const { defaults } = selector;
+    service.updateFilters(changedFilters, defaults.type);
+    service.getItems(fetchItems, dataSelector);
   };
 
   handleUpdateSorting = sorting => {
     this.updateItems({
       sorting,
-      paging: merge(this.props.paging, {
+      paging: {
+        ...this.props.paging,
         currentPage: 1
-      })
+      }
     });
   };
 
   handleUpdateFilter = filter => {
     let changedFilters = {
       filtering: updateFilter(this.props.filtering, filter),
-      paging: merge(this.props.paging, {
+      paging: {
+        ...this.props.paging,
         currentPage: 1
-      })
+      }
     };
 
     this.updateItems(changedFilters);
@@ -66,22 +46,22 @@ class TableContainer extends Component {
 
   handleUpdatePaging = nextPageIndex => {
     let changedFilters = {
-      paging: merge(this.props.paging, {
+      paging: {
+        ...this.props.paging,
         currentPage: nextPageIndex + 1
-      })
+      }
     };
 
     this.updateItems(changedFilters);
   };
 
   render() {
-    const { data } = this.props;
-    const items = data && data.items;
-
+    const { data, isPending, ...otherProps } = this.props;
     return (
       <Table
-        {...this.props}
-        items={items || []}
+        {...otherProps}
+        items={data.items}
+        isPending={isPending}
         updateSorting={this.handleUpdateSorting}
         updatePaging={this.handleUpdatePaging}
         updateFilter={this.handleUpdateFilter}
@@ -90,26 +70,24 @@ class TableContainer extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  let storePlace = ownProps.getStorePlace(state);
-  const {
-    itemsData = { isPending: false, data: { items: [] } },
-    filters
-  } = storePlace;
-
+const mapStateToProps = (state, props) => {
+  const selector = props.dataSelector(state);
+  const { itemsData, filters } = selector;
   const { sorting, paging, filtering } = filters;
+
   return {
     data: itemsData.data,
+    isPending: itemsData.isPending,
     sorting,
     paging,
     filtering,
-    isPending: itemsData.isPending
+    fetchItems: props.getItems
   };
 };
 
-const mapDispatchToProps = (dispatch, { getItems, updateFilters }) => ({
-  ...bindActionCreators({ getItems, updateFilters }, dispatch)
-});
+const mapDispatchToProps = (dispatch, props) => {
+  return { service: bindActionCreators({ getItems, updateFilters }, dispatch) };
+};
 
 export default connect(
   mapStateToProps,

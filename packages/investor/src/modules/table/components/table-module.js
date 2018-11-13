@@ -1,8 +1,8 @@
+import PropTypes from "prop-types";
 import React, { PureComponent } from "react";
-import { merge } from "shared/utils/helpers";
 
-import { updateFilter } from "shared/components/table/helpers/filtering.helpers";
-import { calculateTotalPages } from "shared/components/table/helpers/paging.helpers";
+import { updateFilter } from "shared/components/table//helpers/filtering.helpers";
+import { calculateTotalPages } from "shared/components/table//helpers/paging.helpers";
 import { composeRequestFilters } from "../services/table.service";
 import Table from "./table";
 
@@ -17,10 +17,9 @@ class TableModule extends PureComponent {
     this.state = {
       paging: paging,
       sorting: sorting,
-      filtering: { ...filtering },
+      filtering: filtering,
       data: defaultData,
       isPending: false,
-      errorCode: null,
       prevData: defaultData
     };
   }
@@ -35,7 +34,7 @@ class TableModule extends PureComponent {
         props.data.total,
         props.paging ? props.paging.itemsOnPage : props.data.total
       );
-      newState.paging = merge(state.paging, { totalPages });
+      newState.paging = { ...state.paging, totalPages };
     }
     return newState;
   }
@@ -63,20 +62,23 @@ class TableModule extends PureComponent {
         const totalPages = calculateTotalPages(data.total, paging.itemsOnPage);
         this.setState(prevState => ({
           data,
-          paging: merge(prevState.paging, { totalPages }),
+          paging: { ...prevState.paging, totalPages },
           isPending: false
         }));
       })
-      .catch(e => this.setState({ errorCode: e.errorCode, isPending: false }));
+      .catch(e => {
+        this.setState({ isPending: false });
+      });
   };
 
   handleUpdateSorting = sorting => {
     this.setState(
       prevState => ({
         sorting: sorting,
-        paging: merge(prevState.paging, {
+        paging: {
+          ...prevState.paging,
           currentPage: 1
-        })
+        }
       }),
       this.updateItems
     );
@@ -86,9 +88,10 @@ class TableModule extends PureComponent {
     this.setState(prevState => {
       return {
         filtering: updateFilter(prevState.filtering, filter),
-        paging: merge(prevState.paging, {
+        paging: {
+          ...prevState.paging,
           currentPage: 1
-        })
+        }
       };
     }, this.updateItems);
   };
@@ -96,9 +99,10 @@ class TableModule extends PureComponent {
   handleUpdatePaging = nextPageIndex => {
     this.setState(
       prevState => ({
-        paging: merge(prevState.paging, {
+        paging: {
+          ...prevState.paging,
           currentPage: nextPageIndex + 1
-        })
+        }
       }),
       this.updateItems
     );
@@ -120,6 +124,16 @@ class TableModule extends PureComponent {
     );
   }
 }
+
+TableModule.propTypes = {
+  fetchOnMount: PropTypes.bool,
+  paging: PropTypes.object,
+  sorting: PropTypes.object,
+  filtering: PropTypes.object,
+  defaultFilters: PropTypes.object,
+  getItems: PropTypes.func,
+  data: PropTypes.object
+};
 
 TableModule.defaultProps = {
   fetchOnMount: true
