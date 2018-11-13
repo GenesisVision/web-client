@@ -156,9 +156,16 @@ class ProgramCard extends Component {
                 </th>
               </tr>
               <tr>
-                <td>{(+program.statistic.balanceGVT.amount).toFixed(0)} GVT</td>
+                <td>
+                  <NumberFormat
+                    value={program.statistic.balanceGVT.amount}
+                    suffix=" GVT"
+                    decimalScale={0}
+                    displayType="text"
+                  />
+                </td>
                 <td>{program.statistic.investorsCount}</td>
-                <td>{program.availableInvestment} GVT</td>
+                <td>{formatValue(program.availableInvestment)} GVT</td>
               </tr>
             </tbody>
           </table>
