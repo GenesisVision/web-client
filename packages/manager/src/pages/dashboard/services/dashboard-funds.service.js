@@ -1,33 +1,10 @@
 import authService from "shared/services/auth-service";
 
-import { calculateTotalPages } from "shared/components/table/helpers/paging.helpers";
-import { composeRequestFilters } from "../../../modules/table/services/table.service";
 import * as actions from "../actions/dashboard.actions";
-import { DASHBOARD_FUNDS_FILTERS } from "../dashboard.constants";
 
-export const getDashboardFunds = filters => (dispatch, getState) => {
+export const getDashboardFunds = requestFilters => {
   const authorization = authService.getAuthArg();
-  if (!filters) filters = getState().dashboard.funds.filters;
-  let requestFilters = composeRequestFilters({
-    ...filters,
-    defaultFilters: DASHBOARD_FUNDS_FILTERS
-  });
-  dispatch(actions.fetchDashboardFunds(authorization, requestFilters)).then(
-    response => {
-      dispatch(
-        actions.updateDashboardFundsFilters({
-          ...filters,
-          paging: {
-            ...filters.paging,
-            totalPages: calculateTotalPages(
-              response.value.total,
-              filters.paging.itemsOnPage
-            )
-          }
-        })
-      );
-    }
-  );
+  return actions.fetchDashboardFunds(authorization, requestFilters);
 };
 
 export const updateDashboardFundsFilters = filters => dispatch => {

@@ -1,4 +1,4 @@
-import { FilterType } from "modules/table/helpers/filtering.helpers";
+import { FilterType } from "shared/components/table/helpers/filtering.helpers";
 
 export const composeDefaultTransactionTypeFilter = () => ({
   name: "txAction",

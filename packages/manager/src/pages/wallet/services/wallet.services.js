@@ -1,11 +1,8 @@
-import { calculateTotalPages } from "shared/components/table/helpers/paging.helpers";
-import { composeRequestFilters } from "modules/table/services/table.service";
+import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { walletApiProxy } from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
-import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
 import * as actions from "../actions/wallet.actions";
-import { WALLET_TRANSACTIONS_FILTERS_DEFAULT } from "../components/wallet-transactions/wallet-transactions.constants";
 
 export const fetchWalletBalance = () => (dispatch, getState) => {
   const authorization = authService.getAuthArg();
@@ -14,30 +11,10 @@ export const fetchWalletBalance = () => (dispatch, getState) => {
   dispatch(actions.fetchWalletBalance(currency, authorization));
 };
 
-export const fetchWalletTransactions = filters => (dispatch, getState) => {
+export const fetchWalletTransactions = requestFilters => {
   const authorization = authService.getAuthArg();
-  if (!filters) filters = getState().wallet.transactions.filters;
-  let requestFilters = composeRequestFilters({
-    ...filters,
-    defaultFilters: WALLET_TRANSACTIONS_FILTERS_DEFAULT
-  });
 
-  dispatch(
-    actions.fetchWalletTransactionsDispatch(authorization, requestFilters)
-  ).then(response => {
-    dispatch(
-      actions.updateWalletTransactionsFilters({
-        ...filters,
-        paging: {
-          ...filters.paging,
-          totalPages: calculateTotalPages(
-            response.value.total,
-            filters.paging.itemsOnPage
-          )
-        }
-      })
-    );
-  });
+  return actions.fetchWalletTransactionsDispatch(authorization, requestFilters);
 };
 
 export const updateWalletTransactionsFilters = filters => dispatch => {
