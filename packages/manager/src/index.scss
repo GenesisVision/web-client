@@ -22,3 +22,9 @@ button {
   height: 100vh;
   color: white;
 }
+
+*::-webkit-scrollbar {
+  //fix for hidden scroll after zoom page, because we are using custom scroll
+  width: 0;
+  height: 0;
+}

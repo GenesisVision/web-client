@@ -13,7 +13,7 @@ const GoogleAuth = ({
   errorMessage
 }) => {
   return (
-    <div className="dialog google-auth google-auth--desktop">
+    <div className="google-auth google-auth--desktop">
       <div className="dialog__header">
         <h2>{t("2fa.title")}</h2>
         <p>{t("2fa.google")}</p>
