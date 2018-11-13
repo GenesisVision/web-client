@@ -225,18 +225,8 @@ class CreateFundSettings extends React.Component {
               assets={assets.filter(item => item.percent > 0)}
               remainder={remainder}
               removeHandle={this.removeHandle}
+              addHandle={this.handleOpenDropdown}
             />
-            <div className="create-fund-settings__add-assets">
-              <div
-                className="create-fund-settings__add-assets-button"
-                onClick={this.handleOpenDropdown}
-              >
-                <div>
-                  <AddButton />
-                </div>
-                <div>{t("buttons.add-assets")}</div>
-              </div>
-            </div>
           </div>
           <div className="create-fund-settings__subheading">
             <span className="create-fund-settings__block-number">03</span>
