@@ -7,6 +7,7 @@ import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { formatValue } from "shared/utils/formatter";
+import DetailsStatisticItem from "../../../details-statistic-item/details-statistic-item";
 
 class DetailsInvestment extends PureComponent {
   state = {
@@ -45,66 +46,65 @@ class DetailsInvestment extends PureComponent {
           {t("fund-details-page.description.yourInvestment")}
         </div>
         <div className="details-investment__short-statistic">
-          <div className="details-investment__short-statistic-item">
-            <span className="details-investment__short-statistic-subheading">
-              {t("fund-details-page.description.invested")}
-            </span>
-
+          <DetailsStatisticItem
+            accent
+            label={t("fund-details-page.description.invested")}
+          >
             <NumberFormat
               value={formatValue(investedAmount)}
               suffix={` ${balanceCurrency}`}
               displayType="text"
             />
-          </div>
-          <div className="details-investment__short-statistic-item">
-            <span className="details-investment__short-statistic-subheading">
-              {t("fund-details-page.description.value")}
-            </span>
+          </DetailsStatisticItem>
+          <DetailsStatisticItem
+            accent
+            label={t("fund-details-page.description.value")}
+          >
             <NumberFormat
               value={formatValue(value)}
               suffix={` ${balanceCurrency}`}
               displayType="text"
             />
-          </div>
-          <div className="details-investment__short-statistic-item">
-            <span className="details-investment__short-statistic-subheading">
-              {t("fund-details-page.description.profit")}
-            </span>
+          </DetailsStatisticItem>
+          <DetailsStatisticItem
+            accent
+            label={t("fund-details-page.description.profit")}
+          >
             <NumberFormat
               value={profitPercent}
               suffix=" %"
               displayType="text"
             />
-          </div>
-          <div className="details-investment__short-statistic-item">
-            <span className="details-investment__short-statistic-subheading">
-              {t("fund-details-page.description.status")}
-            </span>
+          </DetailsStatisticItem>
+          <DetailsStatisticItem
+            accent
+            label={t("fund-details-page.description.status")}
+          >
             <ProgramStatus status={status} />
-          </div>
+          </DetailsStatisticItem>
           {pendingInput !== 0 && (
-            <div className="details-investment__short-statistic-item">
-              <span className="details-investment__short-statistic-subheading">
-                {t("fund-details-page.description.pending-input")}
-              </span>
+            <DetailsStatisticItem
+              accent
+              label={t("fund-details-page.description.pending-input")}
+            >
               <NumberFormat
                 value={formatValue(pendingInput)}
                 suffix={` ${balanceCurrency}`}
                 displayType="text"
               />
-            </div>
+            </DetailsStatisticItem>
           )}
           {pendingOutput !== 0 && (
-            <div className="details-investment__short-statistic-item">
-              <span className="details-investment__short-statistic-subheading">
-                {t("fund-details-page.description.pending-output")}
-              </span>
+            <DetailsStatisticItem
+              accent
+              label={t("fund-details-page.description.pending-output")}
+            >
               <NumberFormat
                 value={formatValue(pendingOutput)}
                 suffix={` ${balanceCurrency}`}
                 displayType="text"
               />
-            </div>
+            </DetailsStatisticItem>
           )}
         </div>
         <div className="details-investment__footer">
@@ -117,9 +117,7 @@ class DetailsInvestment extends PureComponent {
             {t("fund-details-page.description.withdraw")}
           </GVButton>
           {notice && (
-            <p className="details-investment__withdraw-notice">
-              {notice}
-            </p>
+            <p className="details-investment__withdraw-notice">{notice}</p>
           )}
           <WithdrawContainer
             open={this.state.isOpenWithdrawalPopup}

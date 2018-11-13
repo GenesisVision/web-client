@@ -111,4 +111,7 @@ const mapDispatchToProps = (dispatch, { getItems, updateFilters }) => ({
   ...bindActionCreators({ getItems, updateFilters }, dispatch)
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(TableContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TableContainer);

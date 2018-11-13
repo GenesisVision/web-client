@@ -1,7 +1,8 @@
 import "./dashboard-portfolio-events-all-table.scss";
 
 import Profitability from "shared/components/profitability/profitability";
-import { TableCell, TableRow } from "modules/table/components";
+import TableCell from "shared/components/table/components/table-cell";
+import TableRow from "shared/components/table/components/table-row";
 import { ASSET_TYPE_FILTER_VALUES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
@@ -17,7 +18,7 @@ import NumberFormat from "react-number-format";
 import { formatValue } from "shared/utils/formatter";
 
 import { fetchPortfolioEvents } from "../../../services/dashboard-events.services";
-import { isUseProfitability } from "../../helpers/dashboard-portfolio.helpers";
+import { isUseProfitability } from "shared/components/dashboard/helpers/dashboard-portfolio.helpers";
 import {
   PORTFOLIO_EVENTS_COLUMNS,
   PORTFOLIO_EVENTS_DEFAULT_FILTERING,
