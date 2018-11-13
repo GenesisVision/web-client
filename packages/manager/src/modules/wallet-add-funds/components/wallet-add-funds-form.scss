@@ -14,6 +14,7 @@
     font-size: $font-size-large-mobile;
     letter-spacing: 0.4px;
     margin-bottom: 32px;
+    text-align: center;
 
     @include media-breakpoint-landscape-phone() {
       font-size: $font-size-small;
