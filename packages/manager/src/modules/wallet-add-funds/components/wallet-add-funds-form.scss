@@ -1,21 +1,22 @@
 @import "shared/styles/_colors.scss";
 @import "shared/styles/_breakpoint.scss";
+@import "shared/styles/_sizes.scss";
 
 .wallet-add-funds-popup {
   &__title {
-    font-size: 12px;
+    font-size: $font-size-small;
     opacity: 0.3;
     letter-spacing: 0.4px;
     color: $main-color;
     margin-bottom: 12px;
   }
   &__value {
-    font-size: 11px;
+    font-size: $font-size-large-mobile;
     letter-spacing: 0.4px;
     margin-bottom: 32px;
 
     @include media-breakpoint-landscape-phone() {
-      font-size: 13px;
+      font-size: $font-size-small;
     }
   }
   &__qr {
