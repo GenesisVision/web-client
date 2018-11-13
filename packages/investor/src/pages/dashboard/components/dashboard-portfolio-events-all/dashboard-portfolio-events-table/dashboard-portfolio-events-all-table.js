@@ -18,7 +18,7 @@ import NumberFormat from "react-number-format";
 import { formatValue } from "shared/utils/formatter";
 
 import { fetchPortfolioEvents } from "../../../services/dashboard-events.services";
-import { isUseProfitability } from "../../helpers/dashboard-portfolio.helpers";
+import { isUseProfitability } from "shared/components/dashboard/helpers/dashboard-portfolio.helpers";
 import {
   PORTFOLIO_EVENTS_COLUMNS,
   PORTFOLIO_EVENTS_DEFAULT_FILTERING,
