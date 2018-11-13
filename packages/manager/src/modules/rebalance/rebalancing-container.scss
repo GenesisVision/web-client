@@ -1,0 +1,7 @@
+@import "shared/styles/_colors.scss";
+@import "shared/styles/_breakpoint.scss";
+@import "shared/styles/_sizes.scss";
+
+.rebalancing-container{
+  padding: $padding-large $padding-middle $padding-middle;
+}
