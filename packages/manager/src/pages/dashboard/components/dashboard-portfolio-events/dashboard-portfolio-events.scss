@@ -32,6 +32,7 @@
     margin: 24px -24px;
     &:after {
       position: absolute;
+      pointer-events: none;
       z-index: 3;
       content: "";
       bottom: 0;

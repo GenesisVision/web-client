@@ -41,7 +41,14 @@ class ProgramDetailsHistorySection extends PureComponent {
 
   render() {
     const { tab } = this.state;
-    const { t, programId, currency, tradesData, isAuthenticated } = this.props;
+    const {
+      t,
+      programId,
+      currency,
+      tradesData,
+      isAuthenticated,
+      isInvested
+    } = this.props;
     if (!tradesData) return null;
     return (
       <Surface className="program-details-history">
@@ -49,7 +56,7 @@ class ProgramDetailsHistorySection extends PureComponent {
           <div className="program-details-history__heading">
             {t("program-details-page.history.heading")}
           </div>
-          {(isAuthenticated && (
+          {(isAuthenticated && isInvested && (
             <div className="program-details-history__tabs">
               <GVTabs value={tab} onChange={this.handleTabChange}>
                 <GVTab

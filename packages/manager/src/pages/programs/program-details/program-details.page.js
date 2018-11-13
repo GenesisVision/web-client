@@ -95,7 +95,9 @@ class ProgramDetailsPage extends PureComponent {
     }
 
     if (!this.description.data) return null;
-
+    const isInvested =
+      this.description.data.personalProgramDetails &&
+      this.description.data.personalProgramDetails.isInvested;
     return (
       <Page title={this.description.data.title}>
         <ProgramDetailContext.Provider
@@ -128,6 +130,7 @@ class ProgramDetailsPage extends PureComponent {
                 currency={currency}
                 tradesData={this.trades}
                 eventsData={this.events}
+                isInvested={isInvested}
               />
             </div>
           </div>
