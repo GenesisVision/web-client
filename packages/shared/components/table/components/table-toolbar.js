@@ -15,6 +15,7 @@ class TableToolbar extends Component {
 
   render() {
     const {
+      createButtonToolbar,
       title,
       renderFilters,
       updateFilter,
@@ -54,6 +55,7 @@ class TableToolbar extends Component {
             </div>
           </div>
         )}
+        {createButtonToolbar}
       </div>
     );
   }
