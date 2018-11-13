@@ -95,6 +95,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  DashboardPortfolioChartContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DashboardPortfolioChartContainer);
