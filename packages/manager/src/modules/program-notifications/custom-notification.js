@@ -41,8 +41,9 @@ class CustomNotification extends Component {
             }-alert`
           )
         );
+        this.setState({ isPending: false });
       })
-      .finally(() => this.setState({ isPending: false }));
+      .catch(() => this.setState({ isPending: false }));
   };
 
   handleDelete = () => {
@@ -52,8 +53,9 @@ class CustomNotification extends Component {
       .removeProgramNotificationService(settings)
       .then(() => {
         this.success(t(`notifications.program.custom.delete-alert`));
+        this.setState({ isPending: false });
       })
-      .finally(() => this.setState({ isPending: false }));
+      .catch(() => this.setState({ isPending: false }));
   };
 
   render() {
@@ -114,6 +116,10 @@ const mapStateToProps = dispatch => ({
   dispatch
 });
 
-export default compose(translate(), connect(undefined, mapStateToProps))(
-  CustomNotification
-);
+export default compose(
+  translate(),
+  connect(
+    undefined,
+    mapStateToProps
+  )
+)(CustomNotification);

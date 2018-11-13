@@ -16,8 +16,7 @@ class TableContainer extends PureComponent {
   }
 
   updateItems = changedFilters => {
-    const { service, selector, dataSelector, fetchItems } = this.props;
-    const { defaults } = selector;
+    const { service, dataSelector, fetchItems, defaults } = this.props;
     service.updateFilters(changedFilters, defaults.type);
     service.getItems(fetchItems, dataSelector);
   };
@@ -72,7 +71,7 @@ class TableContainer extends PureComponent {
 
 const mapStateToProps = (state, props) => {
   const selector = props.dataSelector(state);
-  const { itemsData, filters } = selector;
+  const { itemsData, filters, defaults } = selector;
   const { sorting, paging, filtering } = filters;
 
   return {
@@ -81,7 +80,8 @@ const mapStateToProps = (state, props) => {
     sorting,
     paging,
     filtering,
-    fetchItems: props.getItems
+    fetchItems: props.getItems,
+    defaults
   };
 };
 

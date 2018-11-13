@@ -549,7 +549,7 @@
       "After clicking the \"Confirm\" button, the invested GVT will be immediately converted to {{currency}}. Accrual of {{currency}} to the account manager will only occur at the end of the reporting period.",
     "confirm": "Confirm",
     "success-alert-message":
-      "Successful request for investment in the program.",
+      "Successful request for investment in the fund.",
     "validation": {
       "amount-more-than-available":
         "Amount is more than available in your wallet",
@@ -1046,7 +1046,7 @@
     "scan-code": "Scan code",
     "enter-code": "Enter the 6-digit code it gives you here to activate:",
     "alt-code":
-      "Or enter this secret key into your Goggle Authenticator device:",
+      "Or enter this secret key into your Google Authenticator device:",
     "google-code": "6-digit code",
     "password": "Enter your password",
     "code-required": "Code is required",

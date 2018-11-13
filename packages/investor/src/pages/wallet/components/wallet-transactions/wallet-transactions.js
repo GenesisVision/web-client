@@ -7,7 +7,7 @@ import NumberFormat from "react-number-format";
 import React, { Component, Fragment } from "react";
 import Surface from "shared/components/surface/surface";
 import TableCell from "shared/components/table/components/table-cell";
-import TableContainer from "modules/table/components/table-container";
+import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
 
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
@@ -65,7 +65,6 @@ class WalletTransactions extends Component {
             title={t("wallet.transactions.title")}
             getItems={fetchWalletTransactions}
             dataSelector={walletTableTransactionsSelector}
-            isResetToDefaultOnUnmount={true}
             isFetchOnMount={true}
             renderFilters={(updateFilter, filtering) => {
               return (
