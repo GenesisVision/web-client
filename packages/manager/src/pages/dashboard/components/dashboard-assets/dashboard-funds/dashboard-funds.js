@@ -9,7 +9,7 @@ import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import TableContainer from "modules/table/components/table-container";
+import TableContainer from "shared/components/table/components/table-container";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -17,30 +17,11 @@ import { Link } from "react-router-dom";
 import { composeFundsDetailsUrl } from "shared/utils/compose-url";
 
 import { DASHBOARD_FUNDS_COLUMNS } from "../../../dashboard.constants";
-import {
-  getDashboardFunds,
-  updateDashboardFundsFilters
-} from "../../../services/dashboard-funds.service";
+import { getDashboardFunds } from "../../../services/dashboard-funds.service";
 import { formatValue } from "shared/utils/formatter";
+import dashboardFundsTableSelector from "./dashboard-funds.selector";
 
 class DashboardFunds extends Component {
-  getDashboardFundsPlace = state => {
-    const itemsData = {
-      ...state.dashboard.funds.itemsData,
-      data: {
-        ...state.dashboard.funds.itemsData.data,
-        items:
-          state.dashboard.funds.itemsData.data &&
-          state.dashboard.funds.itemsData.data.funds
-      }
-    };
-
-    return {
-      ...state.dashboard.funds,
-      itemsData: itemsData
-    };
-  };
-
   render() {
     const {
       t,
@@ -55,10 +36,8 @@ class DashboardFunds extends Component {
         createButtonBody={createButtonBody}
         createText={createText}
         getItems={getDashboardFunds}
-        getStorePlace={this.getDashboardFundsPlace}
-        updateFilters={updateDashboardFundsFilters}
-        isResetToDefaultOnUnmount={true}
-        isFetchOnMount={false}
+        dataSelector={dashboardFundsTableSelector}
+        isFetchOnMount={true}
         columns={DASHBOARD_FUNDS_COLUMNS}
         renderFilters={(updateFilter, filtering) => (
           <Fragment>

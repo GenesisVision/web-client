@@ -3,7 +3,7 @@ import "../fund-structure/fund-structure.scss";
 import FundAssetImage from "shared/components/avatar/fund-asset-image/fund-asset-image";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
-import TableModule from "modules/table/components/table-module";
+import TableModule from "shared/components/table/components/table-module";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";

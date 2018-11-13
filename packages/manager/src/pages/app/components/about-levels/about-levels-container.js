@@ -1,6 +1,6 @@
 import "./about-level.scss";
 
-import { CURRENCY_VALUES } from "modules/currency-select/currency-select.constants";
+import { CURRENCY_VALUES } from "shared/modules/currency-select/currency-select.constants";
 import React, { Component } from "react";
 import rateApiProxy from "shared/services/api-client/rate-api";
 

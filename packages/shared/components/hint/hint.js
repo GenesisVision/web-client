@@ -1,17 +1,17 @@
 import "./hint.scss";
 
-import classNames from "classnames";
+import classnames from "classnames";
 import Tooltip from "shared/components/tooltip/tooltip";
 import React from "react";
 
 const Hint = ({ content, tooltipContent, className, vertical }) => {
   return (
-    <div className={classNames("hint", className)}>
+    <div className={classnames("hint", className)}>
       <Tooltip
         vertical={vertical}
         render={() => (
           <div
-            className={classNames("hint__tooltip-content", {
+            className={classnames("hint__tooltip-content", {
               [className + "-tooltip-content"]: className
             })}
           >
