@@ -55,4 +55,7 @@ class PasswordChange extends Component {
 
 PasswordChange.propTypes = {};
 
-export default compose(connect(), translate())(PasswordChange);
+export default compose(
+  connect(),
+  translate()
+)(PasswordChange);
