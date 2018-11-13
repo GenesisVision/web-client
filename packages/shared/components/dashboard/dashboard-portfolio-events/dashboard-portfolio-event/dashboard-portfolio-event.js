@@ -1,14 +1,14 @@
 import "./dashboard-portfolio-event.scss";
 
-import Profitability from "shared/components/profitability/profitability";
 import * as moment from "moment";
 import PropTypes from "prop-types";
 import React from "react";
 import NumberFormat from "react-number-format";
-import { formatValue } from "shared/utils/formatter";
 
-import { isUseProfitability } from "../../helpers/dashboard-portfolio.helpers";
-import PortfolioEventLogo from "../dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
+import { formatValue } from "shared/utils/formatter";
+import Profitability from "shared/components/profitability/profitability";
+import { isUseProfitability } from "shared/components/dashboard/helpers/dashboard-portfolio.helpers";
+import PortfolioEventLogo from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
 
 const formatDate = date => {
   const now = moment(new Date());

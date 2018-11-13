@@ -16,7 +16,7 @@ export const DASHBOARD_ASSET_CHART = "DASHBOARD_ASSET_CHART";
 export const fetchPortfolioEvents = (auth, filters) => {
   return {
     type: DASHBOARD_PORTFOLIO_EVENTS,
-    payload: managerApiProxy.v10ManagerEventsGet(auth, filters)
+    payload: managerApi.v10ManagerEventsGet(auth, filters)
   };
 };
 

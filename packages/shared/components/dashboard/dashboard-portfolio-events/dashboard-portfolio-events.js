@@ -9,22 +9,24 @@ import { Link } from "react-router-dom";
 
 import DashboardPortfolioEvent, {
   DashboardPortfolioEventShape
-} from "./dashboard-portfolio-event/dashboard-portfolio-event";
+} from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event/dashboard-portfolio-event";
 
 const DashboardPortfolioEvents = ({ t, events, fullEventsUrl, title }) => (
   <Fragment>
-    <Scrollbars
-      autoHide
-      autoHideTimeout={1000}
-      style={{ height: "541px", paddingRight: "10px" }}
-      className="dashboard-portfolio-events__scroll-container"
-    >
-      <div className="dashboard-portfolio-events__list">
-        {events.map((event, idx) => (
-          <DashboardPortfolioEvent event={event} key={idx} />
-        ))}
-      </div>
-    </Scrollbars>
+    <div className="dashboard-portfolio-events__scroll-container">
+      <Scrollbars
+        autoHide
+        autoHideTimeout={1000}
+        autoHeight
+        autoHeightMax="541px"
+      >
+        <div className="dashboard-portfolio-events__list">
+          {events.map((event, idx) => (
+            <DashboardPortfolioEvent event={event} key={idx} />
+          ))}
+        </div>
+      </Scrollbars>
+    </div>
     <Link
       className="dashboard-portfolio-events__see-all"
       to={{

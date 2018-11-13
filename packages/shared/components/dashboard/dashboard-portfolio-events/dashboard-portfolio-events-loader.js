@@ -5,10 +5,9 @@ import React, { Fragment } from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
 
-import { DASHBOARD_EVENTS_ROUTE } from "../../dashboard.routes";
 import DashboardPortfolioEventLoader from "./dashboard-portfolio-event/dashboard-portfolio-event-loader";
 
-const DashboardPortfolioEvents = ({ t }) => (
+const DashboardPortfolioEvents = ({ t, fullEventsUrl }) => (
   <Fragment>
     <div className="dashboard-portfolio-events__scroll-container">
       <div className="dashboard-portfolio-events__list">
@@ -17,10 +16,7 @@ const DashboardPortfolioEvents = ({ t }) => (
       </div>
     </div>
 
-    <Link
-      to={DASHBOARD_EVENTS_ROUTE}
-      className="dashboard-portfolio-events__see-all"
-    >
+    <Link to={fullEventsUrl} className="dashboard-portfolio-events__see-all">
       <GVButton variant="text" color="secondary">
         {t("dashboard.portfolio-events.see-all-button")} &#8250;
       </GVButton>

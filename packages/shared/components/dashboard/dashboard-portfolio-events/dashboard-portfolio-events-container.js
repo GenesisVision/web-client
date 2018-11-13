@@ -1,23 +1,14 @@
 import Surface from "shared/components/surface/surface";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import { compose } from "redux";
 
-import { DASHBOARD_EVENTS_ROUTE } from "../../dashboard.routes";
-import { getPortfolioEvents } from "../../services/dashboard.service";
-import { EvenLogoIcon } from "./dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
-import { EventLogoType } from "./dashboard-portfolio-event-logo/dashboard-portfolio-event-logo.helper";
-import DashboardPortfolioEvents from "./dashboard-portfolio-events";
-import DashboardPortfolioEventsLoader from "./dashboard-portfolio-events-loader";
+import DashboardPortfolioEvents from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-events";
+import DashboardPortfolioEventsLoader from "shared/components/dashboard/dashboard-portfolio-events//dashboard-portfolio-events-loader";
+import { EvenLogoIcon } from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
+import { EventLogoType } from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo.helper";
 
 class DashboardPortfolioEventsContainer extends Component {
-  componentDidMount() {
-    const { service } = this.props;
-    service.getPortfolioEvents();
-  }
-
   emptyEvents = () => {
     const { t } = this.props;
     return (
@@ -60,18 +51,20 @@ class DashboardPortfolioEventsContainer extends Component {
   };
 
   renderEvents = () => {
-    const { isPending, data, title } = this.props;
-    if (isPending && !data) return <DashboardPortfolioEventsLoader />;
+    const { isPending, data, title, fullEventsUrl, manager } = this.props;
+    if (isPending && !data)
+      return <DashboardPortfolioEventsLoader fullEventsUrl={fullEventsUrl} />;
     if (data === undefined) return null;
     return (
-      (data.data.total && (
+      (data.total && (
         <DashboardPortfolioEvents
           title={title}
-          events={data.data.events}
-          fullEventsUrl={DASHBOARD_EVENTS_ROUTE}
+          events={data.events}
+          fullEventsUrl={fullEventsUrl}
         />
       )) ||
-      this.emptyEvents()
+      (manager && this.emptyEvents()) ||
+      null
     );
   };
   render() {
@@ -88,19 +81,4 @@ class DashboardPortfolioEventsContainer extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  const { isPending, data } = state.dashboard.eventsData;
-  return { isPending, data };
-};
-
-const mapDispatchToProps = dispatch => ({
-  service: bindActionCreators({ getPortfolioEvents }, dispatch)
-});
-
-export default compose(
-  translate(),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
-)(DashboardPortfolioEventsContainer);
+export default compose(translate())(DashboardPortfolioEventsContainer);
