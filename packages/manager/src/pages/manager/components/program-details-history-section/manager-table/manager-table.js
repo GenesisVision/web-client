@@ -1,7 +1,7 @@
 import "./manager-table.scss";
 
-import TableModule from "modules/table/components/table-module";
-import { DEFAULT_PAGING } from "modules/table/reducers/table-paging.reducer";
+import TableModule from "shared/components/table/components/table-module";
+import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import React, { Component } from "react";
 
 class ManagerTable extends Component {

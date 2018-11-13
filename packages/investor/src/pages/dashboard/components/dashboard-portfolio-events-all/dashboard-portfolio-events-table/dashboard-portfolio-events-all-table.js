@@ -9,8 +9,8 @@ import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filte
 import { EVENT_TYPE_FILTER_NAME } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
 import { EVENT_TYPE_FILTER_VALUES } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
 import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
-import TableModule from "modules/table/components/table-module";
-import { DEFAULT_PAGING } from "modules/table/reducers/table-paging.reducer";
+import TableModule from "shared/components/table/components/table-module";
+import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import moment from "moment";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";

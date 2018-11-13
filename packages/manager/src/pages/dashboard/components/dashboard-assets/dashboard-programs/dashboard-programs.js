@@ -1,47 +1,26 @@
-import "./dashboard-programs.scss";
-
+import { composeProgramDetailsUrl } from "shared/utils/compose-url";
+import { formatPercent, formatValue } from "shared/utils/formatter";
+import { GVButton } from "gv-react-components";
+import { Link } from "react-router-dom";
+import { translate } from "react-i18next";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
+import NumberFormat from "react-number-format";
 import ProgramPeriodEnd from "shared/components/program-period/program-period-end/program-period-end";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
-import { GVButton } from "gv-react-components";
-import TableCell from "shared/components/table/components/table-cell";
-import TableRow from "shared/components/table/components/table-row";
-import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
-import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import TableContainer from "modules/table/components/table-container";
 import React, { Component, Fragment } from "react";
-import { translate } from "react-i18next";
-import NumberFormat from "react-number-format";
-import { Link } from "react-router-dom";
-import { formatPercent, formatValue } from "shared/utils/formatter";
+import TableCell from "shared/components/table/components/table-cell";
+import TableContainer from "shared/components/table/components/table-container";
+import TableRow from "shared/components/table/components/table-row";
 
+import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+
+import "./dashboard-programs.scss";
 import { DASHBOARD_PROGRAMS_COLUMNS } from "../../../dashboard.constants";
-import {
-  getDashboardPrograms,
-  updateDashboardProgramsFilters
-} from "../../../services/dashboard-programs.service";
-import {
-  composeProgramDetailsUrl
-} from "shared/utils/compose-url";
+import { getDashboardPrograms } from "../../../services/dashboard-programs.service";
+import dashboardProgramsTableSelector from "./dashboard-programs.selector";
 
 class DashboardPrograms extends Component {
-  getDashboardProgramsPlace = state => {
-    const itemsData = {
-      ...state.dashboard.programs.itemsData,
-      data: {
-        ...state.dashboard.programs.itemsData.data,
-        items:
-          state.dashboard.programs.itemsData.data &&
-          state.dashboard.programs.itemsData.data.programs
-      }
-    };
-
-    return {
-      ...state.dashboard.programs,
-      itemsData: itemsData
-    };
-  };
-
   render() {
     const {
       t,
@@ -56,10 +35,8 @@ class DashboardPrograms extends Component {
         createButtonBody={createButtonBody}
         createText={createText}
         getItems={getDashboardPrograms}
-        isResetToDefaultOnUnmount={true}
-        updateFilters={updateDashboardProgramsFilters}
-        getStorePlace={this.getDashboardProgramsPlace}
-        isFetchOnMount={false}
+        dataSelector={dashboardProgramsTableSelector}
+        isFetchOnMount={true}
         columns={DASHBOARD_PROGRAMS_COLUMNS}
         renderFilters={(updateFilter, filtering) => (
           <Fragment>

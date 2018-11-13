@@ -1,6 +1,6 @@
 import "shared/components/funds-table/funds-table.scss";
 
-import { Table } from "modules/table/components";
+import { Table } from "shared/components/table/components";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import React, { Fragment } from "react";

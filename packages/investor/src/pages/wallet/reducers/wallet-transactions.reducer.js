@@ -1,5 +1,5 @@
-import { DEFAULT_PAGING } from "modules/table/reducers/table-paging.reducer";
-import tableReducerFactory from "modules/table/reducers/table.reducer";
+import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
+import tableReducerFactory from "shared/components/table/reducers/table.reducer";
 
 import { WALLET_TRANSACTIONS } from "../actions/wallet.actions";
 import {
