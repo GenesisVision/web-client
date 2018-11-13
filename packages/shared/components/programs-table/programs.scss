@@ -170,7 +170,7 @@ $description-block-width: 250px;
   @include media-breakpoint-landscape-phone() {
     &__card {
       min-width: $program-width;
-      width: calc(50% - 32px/2);
+      width: calc(50% - #{$padding}/2);
       margin-right: $padding/2;
 
       &:nth-child(2n) {
