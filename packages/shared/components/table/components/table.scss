@@ -48,10 +48,10 @@ $create-icon-width: 140px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: flex-end;
     width: 100%;
     align-items: center;
     padding: 0 $padding/2 $padding/2;
+    justify-content: space-between;
   }
 
   &__toggle {
@@ -86,9 +86,15 @@ $create-icon-width: 140px;
     width: 100%;
     font-size: $th-font-size/1.5;
     display: flex;
-    flex: 1;
-    justify-content: flex-end;
+    flex: 1 1 100%;
+    justify-content: space-between;
     flex-wrap: wrap;
+    order: 99;
+    margin-top: 15px;
+
+    .filter {
+      padding-left: 5px;
+    }
   }
 
   &__head {
@@ -253,6 +259,34 @@ $create-icon-width: 140px;
         &:last-child {
           padding-right: 0;
         }
+      }
+    }
+    &__filters {
+      justify-content: flex-start;
+
+      .filter {
+        margin-right: 15px;
+      }
+    }
+  }
+  @include media-breakpoint-desktop() {
+    &__toolbar {
+      justify-content: flex-end;
+    }
+
+    &__filters {
+      justify-content: flex-end;
+      order: 0;
+      flex-basis: 0%;
+      margin-top: 0;
+
+      .filter {
+        margin-right: 0px;
+        margin-left: 15px;
+      }
+
+      .sorting-filter {
+        margin-right: 60px;
       }
     }
   }
