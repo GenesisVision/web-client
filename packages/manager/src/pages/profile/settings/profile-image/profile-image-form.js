@@ -27,10 +27,14 @@ class ProfileImageForm extends React.Component {
     const { avatar, errors, values, isSubmitting } = this.props;
     const value = values.logo;
 
-    if (isSubmitting) return true;
-    if (!value.isUpdated) return true;
-    if (!value.cropped && !avatar) return true;
-    if (errors.logo) return true;
+    if (
+      isSubmitting ||
+      !value.isUpdated ||
+      (!value.cropped && !avatar) ||
+      errors.logo
+    ) {
+      return true;
+    }
 
     return false;
   }

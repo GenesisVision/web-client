@@ -30,4 +30,11 @@ const getNumberWithoutSuffix = str => {
   return result;
 };
 
-export { merge, allowValuesNumberFormat, getNumberWithoutSuffix };
+const convertMbToBytes = mb => Math.pow(1024, 2) * mb;
+
+export {
+  merge,
+  allowValuesNumberFormat,
+  getNumberWithoutSuffix,
+  convertMbToBytes
+};

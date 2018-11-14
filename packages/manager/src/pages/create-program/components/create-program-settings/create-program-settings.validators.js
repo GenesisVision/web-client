@@ -1,4 +1,5 @@
 import { object, string, number } from "yup";
+import { convertMbToBytes } from "shared/utils/helpers";
 
 const createProgramSettingsValidationSchema = ({ t, ...props }) =>
   object().shape({
@@ -12,7 +13,7 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) =>
         t("create-program-page.settings.validation.image-resolution-incorrect")
       ),
       size: number().max(
-        2097152,
+        convertMbToBytes(2),
         t("create-program-page.settings.validation.image-file-is-large")
       )
     }),

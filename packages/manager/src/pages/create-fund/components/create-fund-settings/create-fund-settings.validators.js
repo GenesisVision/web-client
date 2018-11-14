@@ -1,4 +1,5 @@
 import { object, string, number, array } from "yup";
+import { convertMbToBytes } from "shared/utils/helpers";
 
 const createFundSettingsValidationSchema = ({ t, ...props }) =>
   object().shape({
@@ -12,7 +13,7 @@ const createFundSettingsValidationSchema = ({ t, ...props }) =>
         t("create-fund-page.settings.validation.image-resolution-incorrect")
       ),
       size: number().max(
-        2097152,
+        convertMbToBytes(2),
         t("create-fund-page.settings.validation.image-file-is-large")
       )
     }),

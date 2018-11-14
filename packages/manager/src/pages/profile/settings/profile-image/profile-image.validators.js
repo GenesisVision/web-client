@@ -1,4 +1,5 @@
 import * as Yup from "yup";
+import { convertMbToBytes } from "shared/utils/helpers";
 
 const profileImageValidationSchema = ({ t }) => {
   return Yup.object().shape({
@@ -12,7 +13,7 @@ const profileImageValidationSchema = ({ t }) => {
         t("profile.settings.validation.image-resolution-incorrect")
       ),
       size: Yup.number().max(
-        2097152,
+        convertMbToBytes(2),
         t("profile.settings.validation.image-file-is-large")
       )
     })
