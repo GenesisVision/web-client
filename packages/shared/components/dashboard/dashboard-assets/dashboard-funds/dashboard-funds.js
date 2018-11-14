@@ -1,48 +1,45 @@
 import "./dashboard-funds.scss";
 
-import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
-import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
-import Profitability from "shared/components/profitability/profitability";
-import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
-import { GVButton } from "gv-react-components";
-import TableCell from "shared/components/table/components/table-cell";
-import TableRow from "shared/components/table/components/table-row";
-import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
-import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import TableModule from "shared/components/table/components/table-module";
-import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
+import { GVButton } from "gv-react-components";
 
-import { formatValue } from "shared/utils/formatter";
+import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
+import Profitability from "shared/components/profitability/profitability";
+import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
+import TableCell from "shared/components/table/components/table-cell";
+import TableRow from "shared/components/table/components/table-row";
+import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
+import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import TableContainer from "shared/components/table/components/table-container";
 import { composeFundsDetailsUrl } from "shared/utils/compose-url";
-import {
-  DASHBOARD_FUNDS_FILTERS,
-  DASHBOARD_FUNDS_TABLE_COLUMNS
-} from "../../../dashboard.constants";
-import { getDashboardFunds } from "../../../services/dashboard-funds.service";
+import { formatValue } from "shared/utils/formatter";
+
+import dashboardFundsTableSelector from "./dashboard-funds.selector";
 
 class DashboardFunds extends Component {
-  fetchFunds = filters => {
-    return getDashboardFunds(filters).then(({ data }) => {
-      return { items: data.funds, total: data.total };
-    });
-  };
-
   render() {
-    const { t, title } = this.props;
+    const {
+      t,
+      DASHBOARD_FUNDS_COLUMNS,
+      getDashboardFunds,
+      createButtonToolbar,
+      createButtonBody,
+      createText,
+      title
+    } = this.props;
     return (
-      <TableModule
-        paging={DEFAULT_PAGING}
-        filtering={{
-          dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE
-        }}
-        defaultFilters={DASHBOARD_FUNDS_FILTERS}
-        getItems={this.fetchFunds}
-        columns={DASHBOARD_FUNDS_TABLE_COLUMNS}
+      <TableContainer
+        createButtonToolbar={createButtonToolbar}
+        createButtonBody={createButtonBody}
+        createText={createText}
+        getItems={getDashboardFunds}
+        dataSelector={dashboardFundsTableSelector}
+        isFetchOnMount={true}
+        columns={DASHBOARD_FUNDS_COLUMNS}
         renderFilters={(updateFilter, filtering) => (
           <Fragment>
             <DateRangeFilter
@@ -55,7 +52,7 @@ class DashboardFunds extends Component {
         )}
         renderHeader={column => (
           <span
-            className={`funds-table__cell dashboard-funds__cell--${
+            className={`funds-table__cell dashboard-funds__cell dashboard-funds__cell--${
               column.name
             }`}
           >

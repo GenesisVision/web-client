@@ -1,24 +1,25 @@
 import "./dashboard-portfolio-events-all-table.scss";
 
-import Profitability from "shared/components/profitability/profitability";
-import TableCell from "shared/components/table/components/table-cell";
-import TableRow from "shared/components/table/components/table-row";
-import { ASSET_TYPE_FILTER_VALUES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
-import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
-import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import { EVENT_TYPE_FILTER_NAME } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
-import { EVENT_TYPE_FILTER_VALUES } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
-import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
-import TableModule from "shared/components/table/components/table-module";
-import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import moment from "moment";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { isUseProfitability } from "shared/components/dashboard/helpers/dashboard-portfolio.helpers";
+import Profitability from "shared/components/profitability/profitability";
+import { ASSET_TYPE_FILTER_VALUES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
+import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
+import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import {
+  EVENT_TYPE_FILTER_NAME,
+  EVENT_TYPE_FILTER_VALUES
+} from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
+import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
+import TableCell from "shared/components/table/components/table-cell";
+import TableModule from "shared/components/table/components/table-module";
+import TableRow from "shared/components/table/components/table-row";
+import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { formatValue } from "shared/utils/formatter";
 
-import { fetchPortfolioEvents } from "../../../services/dashboard-events.services";
-import { isUseProfitability } from "shared/components/dashboard/helpers/dashboard-portfolio.helpers";
 import {
   PORTFOLIO_EVENTS_COLUMNS,
   PORTFOLIO_EVENTS_DEFAULT_FILTERING,
@@ -127,8 +128,7 @@ class PortfolioEventsTableComponent extends Component {
 }
 
 PortfolioEventsTableComponent.defaultProps = {
-  filtering: PORTFOLIO_EVENTS_DEFAULT_FILTERING,
-  fetchPortfolioEvents: fetchPortfolioEvents
+  filtering: PORTFOLIO_EVENTS_DEFAULT_FILTERING
 };
 
 export default translate()(PortfolioEventsTableComponent);

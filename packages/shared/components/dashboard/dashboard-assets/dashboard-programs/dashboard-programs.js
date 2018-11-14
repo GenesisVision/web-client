@@ -1,29 +1,30 @@
-import { composeProgramDetailsUrl } from "shared/utils/compose-url";
-import { formatPercent, formatValue } from "shared/utils/formatter";
+import "./dashboard-programs.scss";
+
 import { GVButton } from "gv-react-components";
 import { Link } from "react-router-dom";
 import { translate } from "react-i18next";
+import NumberFormat from "react-number-format";
+import React, { Component, Fragment } from "react";
+
+import { composeProgramDetailsUrl } from "shared/utils/compose-url";
+import { formatPercent, formatValue } from "shared/utils/formatter";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
-import NumberFormat from "react-number-format";
 import ProgramPeriodEnd from "shared/components/program-period/program-period-end/program-period-end";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
-import React, { Component, Fragment } from "react";
 import TableCell from "shared/components/table/components/table-cell";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
-
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { DASHBOARD_PROGRAMS_COLUMNS } from "shared/components/dashboard/dashboard.constants";
 
-import "./dashboard-programs.scss";
-import { DASHBOARD_PROGRAMS_COLUMNS } from "../../../dashboard.constants";
-import { getDashboardPrograms } from "../../../services/dashboard-programs.service";
 import dashboardProgramsTableSelector from "./dashboard-programs.selector";
 
 class DashboardPrograms extends Component {
   render() {
     const {
       t,
+      getDashboardPrograms,
       createButtonToolbar,
       createButtonBody,
       createText,
