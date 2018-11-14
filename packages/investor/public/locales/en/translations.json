@@ -570,7 +570,8 @@
       "investors": "Investors",
       "drawdown": "D.down",
       "profit": "Profit",
-      "chart": "Chart"
+      "chart": "Chart",
+      "value": "Value"
     }
   },
   "global-search-page": {
@@ -603,7 +604,8 @@
       "investors": "Investors",
       "drawdown": "D.down",
       "profit": "Profit",
-      "chart": "Chart"
+      "chart": "Chart",
+      "value": "Value"
     }
   },
   "program-details-page": {
