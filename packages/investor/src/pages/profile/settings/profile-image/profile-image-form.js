@@ -10,7 +10,7 @@ import InputPhoto, {
 } from "shared/components/form/input-photo/input-photo";
 import UserIcon from "shared/media/user-avatar.svg";
 
-import ProfileImageValidationSchema from "./profile-image.validators";
+import InputPhotoValidation from "shared/components/form/input-photo/input-photo.validators";
 
 class ProfileImageForm extends React.Component {
   constructor(props) {
@@ -88,7 +88,7 @@ export default compose(
         src: props.avatar
       }
     }),
-    validationSchema: ProfileImageValidationSchema,
+    validationSchema: InputPhotoValidation,
     handleSubmit: (values, { props, setSubmitting, setFieldValue }) => {
       props.handleSubmit(values.logo.cropped, src => {
         setFieldValue("logo", {
