@@ -10,7 +10,7 @@ import InputPhoto, {
 } from "shared/components/form/input-photo/input-photo";
 import UserIcon from "shared/media/user-avatar.svg";
 
-import ProfileImageValidationSchema from "./profile-image.validators";
+import inputPhotoValidation from "shared/components/form/input-photo/input-photo.validators";
 
 class ProfileImageForm extends React.Component {
   constructor(props) {
@@ -27,16 +27,12 @@ class ProfileImageForm extends React.Component {
     const { avatar, errors, values, isSubmitting } = this.props;
     const value = values.logo;
 
-    if (
+    return (
       isSubmitting ||
       !value.isUpdated ||
       (!value.cropped && !avatar) ||
       errors.logo
-    ) {
-      return true;
-    }
-
-    return false;
+    );
   }
 
   render() {
@@ -92,7 +88,7 @@ export default compose(
         src: props.avatar
       }
     }),
-    validationSchema: ProfileImageValidationSchema,
+    validationSchema: inputPhotoValidation,
     handleSubmit: (values, { props, setSubmitting, setFieldValue }) => {
       props.handleSubmit(values.logo.cropped, src => {
         setFieldValue("logo", {

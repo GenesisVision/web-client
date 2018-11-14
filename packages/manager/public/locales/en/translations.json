@@ -774,9 +774,7 @@
         "leverage-required": "Leverage is required",
         "entry-fee-required": "Entry fee is required",
         "success-fee-required": "Success fee is required",
-        "account-type-required": "Account type is required",
-        "image-resolution-incorrect": "The resolution of the uploaded image is too low.",
-        "image-file-is-large": "The uploaded image file is too large."
+        "account-type-required": "Account type is required"
       }
     },
     "notifications": {
@@ -807,9 +805,7 @@
         "description-is-long": "Description is too long",
         "description-is-short": "Description is too short",
         "description-required": "Description is required",
-        "account-type-required": "Account type is required",
-        "image-resolution-incorrect": "The resolution of the uploaded image is too low.",
-        "image-file-is-large": "The uploaded image file is too large."
+        "account-type-required": "Account type is required"
       }
     },
     "notifications": {
@@ -840,9 +836,7 @@
         "description-is-long": "Description is too long",
         "description-is-short": "Description is too short",
         "description-required": "Description is required",
-        "account-type-required": "Account type is required",
-        "image-resolution-incorrect": "The resolution of the uploaded image is too low.",
-        "image-file-is-large": "The uploaded image file is too large."
+        "account-type-required": "Account type is required"
       }
     },
     "notifications": {
@@ -899,8 +893,6 @@
         "exit-fee-required": "Exit fee is required",
         "assets-share": "Total share of all assets should be equal to 100%",
         "assets-count": "Must be at least two assets.",
-        "image-resolution-incorrect": "The resolution of the uploaded image is too low.",
-        "image-file-is-large": "The uploaded image file is too large.",
         "deposit-min": "Not enought money."
       },
       "hints": {
@@ -963,11 +955,7 @@
       "save-photo": "Save photo",
       "image-success-save-message": "The photo has just been successfully changed.",
       "logout-from-another-devices": "Logout from other devices",
-      "change-password": "Change password",
-      "validation": {
-        "image-resolution-incorrect": "The resolution of the uploaded image is too low.",
-        "image-file-is-large": "The uploaded image file is too large."
-      }
+      "change-password": "Change password"
     }
   },
   "profile-widget": {

@@ -1,22 +1,9 @@
 import { object, string, number, array } from "yup";
-import { convertMbToBytes } from "shared/utils/helpers";
+import inputPhotoValidation from "shared/components/form/input-photo/input-photo.validators";
 
 const createFundSettingsValidationSchema = ({ t, ...props }) =>
   object().shape({
-    logo: object().shape({
-      width: number().min(
-        300,
-        t("create-fund-page.settings.validation.image-resolution-incorrect")
-      ),
-      height: number().min(
-        300,
-        t("create-fund-page.settings.validation.image-resolution-incorrect")
-      ),
-      size: number().max(
-        convertMbToBytes(2),
-        t("create-fund-page.settings.validation.image-file-is-large")
-      )
-    }),
+    logo: inputPhotoValidation({ t }),
     title: string()
       .required(t("create-fund-page.settings.validation.title-required"))
       .max(20, t("create-fund-page.settings.validation.title-is-long"))
