@@ -1,0 +1,12 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_sizes.scss";
+@import "~shared/styles/_breakpoint.scss";
+
+.error-message {
+  color: $negative-color;
+  font-size: $font-size-small;
+  font-weight: 500;
+  &--over{
+    position: absolute;
+  }
+}

@@ -1,9 +1,9 @@
 import "./fund-asset.scss";
 
 import classnames from "classnames";
-import Tooltip from "shared/components/tooltip/tooltip";
 import React, { Component } from "react";
 import NumberFormat from "react-number-format";
+import Tooltip from "shared/components/tooltip/tooltip";
 
 import FundAsset, { FUND_ASSET_TYPE } from "./fund-asset";
 import FundAssetTooltip from "./fund-asset-tooltip/fund-asset-tooltip";
@@ -36,7 +36,7 @@ class FundAssetContainer extends Component {
       >
         {assets.map(
           (asset, idx) =>
-            idx < size && (
+            idx < (size || assets.length) && (
               <Tooltip
                 key={idx}
                 render={() => (
