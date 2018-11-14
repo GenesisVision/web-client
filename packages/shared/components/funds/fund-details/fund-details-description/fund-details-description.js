@@ -180,7 +180,7 @@ class FundDetailsDescription extends PureComponent {
                   >
                     {t("fund-details-page.description.invest")}
                   </GVButton>
-                  {AssetEditContainer && (
+                  {isOwnProgram && (
                     <Fragment>
                       <GVButton
                         className="fund-details-description__invest-btn"
@@ -196,7 +196,7 @@ class FundDetailsDescription extends PureComponent {
                         color="secondary"
                         variant="outlined"
                         onClick={this.handleOpenReallocateFundPopup}
-                        disabled={!canCloseProgram}
+                        disabled={status !== "Active"}
                       >
                         {t("fund-details-page.description.reallocate")}
                       </GVButton>
