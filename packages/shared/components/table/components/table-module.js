@@ -120,7 +120,7 @@ TableModule.propTypes = {
   paging: PropTypes.object,
   sorting: PropTypes.object,
   filtering: PropTypes.object,
-  defaultFilters: PropTypes.object,
+  defaultFilters: PropTypes.array,
   getItems: PropTypes.func,
   data: PropTypes.object
 };

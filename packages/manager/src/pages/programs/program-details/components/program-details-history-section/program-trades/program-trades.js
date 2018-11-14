@@ -34,11 +34,9 @@ class ProgramTrades extends Component {
 
   render() {
     const { t, trades } = this.props;
-    let data = { trades: null, total: 0 };
-    if (trades) {
-      data.items = trades.trades;
-      data.total = trades.total;
-    }
+    if (!trades) return null;
+
+    const data = { items: trades.trades, total: trades.total };
 
     return (
       <TableModule
