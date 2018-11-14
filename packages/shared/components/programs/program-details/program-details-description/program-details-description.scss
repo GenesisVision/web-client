@@ -177,6 +177,7 @@
     .gv-switch-wrapper {
       display: inline-flex;
       align-items: center;
+      padding-top: $padding-middle-mobile;
     }
     .gv-switch__label {
       color: $text-accent-color;
