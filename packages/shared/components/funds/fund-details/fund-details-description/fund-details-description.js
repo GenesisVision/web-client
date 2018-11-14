@@ -5,18 +5,16 @@ import React, { Fragment, PureComponent } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
-
-import { formatValue } from "shared/utils/formatter";
-import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
+import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import DetailsFavorite from "shared/components/details/details-description-section/details-description/details-favorite";
 import DetailsNotification from "shared/components/details/details-description-section/details-description/details-notificaton";
-import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
 import {
-  composeManagerDetailsUrl,
-  composeFundNotificationsUrl
+  composeFundNotificationsUrl,
+  composeManagerDetailsUrl
 } from "shared/utils/compose-url";
-import ReallocateContainer from "modules/reallocate/reallocate-container";
+import { formatValue } from "shared/utils/formatter";
 
 class FundDetailsDescription extends PureComponent {
   state = {
@@ -65,6 +63,7 @@ class FundDetailsDescription extends PureComponent {
     const {
       t,
       FUND,
+      ReallocateContainer,
       AssetEditContainer,
       FundDetailContext,
       FundDepositContainer,
@@ -230,14 +229,16 @@ class FundDetailsDescription extends PureComponent {
                             type={FUND}
                           />
                         )}
-                        <ReallocateContainer
-                          id={fundDescription.id}
-                          open={isOpenReallocateFundPopup}
-                          onClose={this.handleCloseReallocateFundPopup(
-                            updateDetails
-                          )}
-                          assets={fundDescription.currentAssets}
-                        />
+                        {ReallocateContainer && (
+                          <ReallocateContainer
+                            id={fundDescription.id}
+                            open={isOpenReallocateFundPopup}
+                            onClose={this.handleCloseReallocateFundPopup(
+                              updateDetails
+                            )}
+                            assets={fundDescription.currentAssets}
+                          />
+                        )}
                       </Fragment>
                     )}
                   </FundDetailContext.Consumer>
