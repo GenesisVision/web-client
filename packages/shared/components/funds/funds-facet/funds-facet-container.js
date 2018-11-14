@@ -1,14 +1,10 @@
-import ProgramsContainer from "modules/programs-table/components/programs-table/programs-table-container";
-import { getPrograms } from "modules/programs-table/services/programs-table.service";
-import NotFoundPage from "pages/not-found/not-found.routes";
+import NotFoundPage from "shared/components/not-found/not-found.routes";
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { bindActionCreators, compose } from "redux";
 
-import { getCurrentFacet } from "../../services/programs-facet.service";
-
-class ProgramsFacetContainer extends Component {
+class FundsFacetContainer extends Component {
   state = {
     facetData: null
   };
@@ -28,12 +24,13 @@ class ProgramsFacetContainer extends Component {
   }
 
   render() {
+    const { FundsTableContainer } = this.props;
     const { facetData } = this.state;
     if (!facetData || facetData.isPending) return null;
     if (facetData.notFound) return <NotFoundPage />;
     return (
       <Fragment>
-        <ProgramsContainer title={facetData.facet.title} />
+        <FundsTableContainer title={facetData.facet.title} />
       </Fragment>
     );
   }
@@ -42,13 +39,16 @@ class ProgramsFacetContainer extends Component {
 const mapStateToProps = state => {
   const { data } = state.platformData;
   let facets = null;
-  if (data) facets = data.programsFacets;
+  if (data) facets = data.fundsFacets;
   return { facets };
 };
 
-const mapDispatchToProps = dispatch => ({
-  service: bindActionCreators({ getCurrentFacet, getPrograms }, dispatch)
-});
+const mapDispatchToProps = (dispatch, props) => {
+  const { getCurrentFacet, getPrograms } = props;
+  return {
+    service: bindActionCreators({ getCurrentFacet, getPrograms }, dispatch)
+  };
+};
 
 export default compose(
   withRouter,
@@ -56,4 +56,4 @@ export default compose(
     mapStateToProps,
     mapDispatchToProps
   )
-)(ProgramsFacetContainer);
+)(FundsFacetContainer);
