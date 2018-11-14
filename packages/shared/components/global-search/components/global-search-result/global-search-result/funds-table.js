@@ -1,12 +1,11 @@
 import { FUNDS_TABLE_COLUMNS } from "modules/funds-table/funds-table.constants";
-import { Table } from "shared/components/table/components";
-import withTable from "shared/components/table/components/with-table";
-import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import React from "react";
 import { translate } from "react-i18next";
 import { compose } from "redux";
-
 import FundsTableRow from "shared/components/funds-table/fund-table-row";
+import { Table } from "shared/components/table/components";
+import withTable from "shared/components/table/components/with-table";
+import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 
 const FundsTable = ({
   t,
@@ -30,7 +29,7 @@ const FundsTable = ({
           {t(`funds-page.funds-header.${column.name}`)}
         </span>
       )}
-      renderBodyRow={fund => <FundsTableRow fund={fund} title={title} />}
+      renderBodyRow={fund => <FundsTableRow title={title} fund={fund} />}
     />
   );
 };
