@@ -1,3 +1,7 @@
+import React, { Fragment, PureComponent } from "react";
+
+import FundDetailsDescription from "shared/components/funds/fund-details/fund-details-description/fund-details-description";
+
 import AssetEditContainer from "modules/asset-edit/asset-edit-container";
 import { FUND } from "modules/asset-edit/asset-edit.constants";
 import { toggleFavoriteFund } from "modules/favorite-asset/services/favorite-fund.service";
@@ -6,8 +10,6 @@ import FundWithdrawContainer from "modules/fund-withdraw/fund-withdraw-container
 import { toggleReinvesting } from "modules/program-reinvesting/services/program-reinvesting.service";
 import ReallocateContainer from "modules/reallocate/reallocate-container";
 import { FundDetailContext } from "pages/funds/fund-details/fund-details.page";
-import React, { Fragment, PureComponent } from "react";
-import FundDetailsDescription from "shared/components/funds/fund-details/fund-details-description/fund-details-description";
 
 const composeInvestmentData = fundDetails => {
   const { statistic, personalFundDetails } = fundDetails;
