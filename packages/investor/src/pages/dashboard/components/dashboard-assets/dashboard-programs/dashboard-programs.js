@@ -21,7 +21,7 @@ import { formatPercent, formatValue } from "shared/utils/formatter";
 import {
   DASHBOARD_PROGRAMS_COLUMNS,
   DASHBOARD_PROGRAMS_FILTERS
-} from "../../../dashboard.constants";
+} from "shared/components/dashboard/dashboard.constants";
 import { getDashboardPrograms } from "../../../services/dashboard-programs.service";
 
 class Dashboardprograms extends Component {
