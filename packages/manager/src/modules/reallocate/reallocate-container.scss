@@ -1,0 +1,39 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
+
+.reallocate-container {
+  padding: $padding-middle;
+  @include media-breakpoint-landscape-phone() {
+    padding: $padding-middle;
+  }
+
+  &__header {
+    font-size: $font-size-subtitle-mobile;
+    font-weight: 500;
+    padding-bottom: $padding-mini-mobile;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-subtitle;
+      padding-bottom: $padding-mini;
+    }
+  }
+
+  &__buttons {
+    padding-top: $padding-middle-mobile;
+    @include media-breakpoint-landscape-phone() {
+      padding-top: $padding-middle;
+    }
+  }
+
+  .fund-assets {
+    flex-direction: row;
+    .fund-asset {
+      &--default {
+        background: rgba(255, 255, 255, 0.06);
+      }
+      &__remove-button {
+        border: solid 2px rgba(19, 30, 38, .6);
+      }
+    }
+  }
+}
