@@ -6,6 +6,9 @@ import { compose } from "redux";
 import CreateFundSettingsAssetsComponent from "../../../pages/create-fund/components/create-fund-settings/create-fund-settings-assets-block/create-fund-settings-assets-block";
 import CreateFundSettingsAddAsset from "../../../pages/create-fund/components/create-fund-settings/create-fund-settings-add-asset/create-fund-settings-add-asset";
 import { array, number, object } from "yup";
+import ErrorMessage, {
+  OVER
+} from "shared/components/error-message/error-message";
 
 class ReallocateForm extends Component {
   state = {
@@ -67,10 +70,19 @@ class ReallocateForm extends Component {
   handleCloseDropdown = () => this.setState({ anchor: null });
   render() {
     const { anchor, assets, remainder } = this.state;
-    const { t, handleSubmit, disabled, dirty } = this.props;
-
+    const { t, handleSubmit, isValid, dirty, errors } = this.props;
     return (
-      <form className="reallocate-container dialog__bottom" id="reallocate" onSubmit={handleSubmit}>
+      <form
+        className="reallocate-container dialog__bottom"
+        id="reallocate"
+        onSubmit={handleSubmit}
+      >
+        {(errors.assets && (
+          <ErrorMessage error={errors.assets} type={OVER} />
+        )) ||
+          (errors.remainder && (
+            <ErrorMessage error={errors.remainder} type={OVER} />
+          ))}
         <CreateFundSettingsAssetsComponent
           assets={assets.filter(item => item.percent > 0)}
           remainder={remainder}
