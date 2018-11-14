@@ -7,9 +7,9 @@ import React, { Component } from "react";
 import { DASHBOARD_FUNDS_COLUMNS } from "shared/components/dashboard/dashboard.constants";
 import { getDashboardFunds } from "../../services/dashboard-funds.service";
 import DashboardFunds from "shared/components/dashboard/dashboard-assets/dashboard-funds/dashboard-funds";
-import DashboardPrograms from "./dashboard-programs/dashboard-programs";
+import DashboardPrograms from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs";
 import { bindActionCreators, compose } from "redux";
-import { getDashboardPrograms } from "manager-web-portal/src/pages/dashboard/services/dashboard-programs.service";
+import { getDashboardPrograms } from "../../services/dashboard-programs.service";
 import connect from "react-redux/es/connect/connect";
 
 class DashboardAssets extends Component {
@@ -47,7 +47,12 @@ class DashboardAssets extends Component {
           </div>
         </div>
         <div>
-          {tab === "programs" && <DashboardPrograms title={title} />}
+          {tab === "programs" && (
+            <DashboardPrograms
+              getDashboardPrograms={getDashboardPrograms}
+              title={title}
+            />
+          )}
           {tab === "funds" && (
             <DashboardFunds
               DASHBOARD_FUNDS_COLUMNS={DASHBOARD_FUNDS_COLUMNS}
