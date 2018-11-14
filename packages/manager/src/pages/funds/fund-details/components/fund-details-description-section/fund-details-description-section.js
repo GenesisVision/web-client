@@ -130,9 +130,26 @@ class FundDetailsDescriptionSection extends PureComponent {
     const canWithdraw =
       fundDescription.personalFundDetails &&
       fundDescription.personalFundDetails.canWithdraw;
+    const isFavorite =
+      fundDescription.personalFundDetails &&
+      fundDescription.personalFundDetails.isFavorite;
+    const canCloseProgram =
+      fundDescription.personalFundDetails &&
+      fundDescription.personalFundDetails.canCloseProgram;
+    const hasNotifications =
+      fundDescription.personalFundDetails &&
+      fundDescription.personalFundDetails.hasNotifications;
+    const status =
+      fundDescription.personalFundDetails &&
+      fundDescription.personalFundDetails.status;
     return (
       <Fragment>
         <FundDetailsDescription
+          status={status}
+          isFavorite={isFavorite}
+          canCloseProgram={canCloseProgram}
+          hasNotifications={hasNotifications}
+          isOwnProgram={isOwnProgram}
           FUND={FUND}
           ReallocateContainer={ReallocateContainer}
           AssetEditContainer={AssetEditContainer}

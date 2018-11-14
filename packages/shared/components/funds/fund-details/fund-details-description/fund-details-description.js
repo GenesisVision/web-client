@@ -62,6 +62,11 @@ class FundDetailsDescription extends PureComponent {
     } = this.state;
     const {
       t,
+      status,
+      isFavorite,
+      canCloseProgram,
+      hasNotifications,
+      isOwnProgram,
       FUND,
       ReallocateContainer,
       AssetEditContainer,
@@ -76,17 +81,6 @@ class FundDetailsDescription extends PureComponent {
       onChangeInvestmentStatus,
       canInvest
     } = this.props;
-    const isFavorite =
-      fundDescription.personalFundDetails &&
-      fundDescription.personalFundDetails.isFavorite;
-
-    const canCloseProgram =
-      fundDescription.personalFundDetails &&
-      fundDescription.personalFundDetails.canCloseProgram;
-
-    const hasNotifications =
-      fundDescription.personalFundDetails &&
-      fundDescription.personalFundDetails.hasNotifications;
 
     const composeEditInfo = {
       id: fundDescription.id,
