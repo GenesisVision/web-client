@@ -1,18 +1,12 @@
+import React from "react";
+import { translate } from "react-i18next";
 import ManagersTableRow from "shared/components/managers-table/components/managers-table-row";
 import { MANAGERS_TABLE_COLUMNS } from "shared/components/managers-table/managers-table.constants";
 import { Table } from "shared/components/table/components";
-import withTable from "shared/components/table/components/with-table";
-import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
-import React from "react";
-import { translate } from "react-i18next";
-import { compose } from "redux";
 
-const ManagersTable = ({ t, isPending, data, filtering, paging, title }) => {
+const ManagersTable = ({ t, isPending, data, title }) => {
   return (
     <Table
-      paging={paging}
-      updatePaging={() => {}}
-      updateSorting={() => {}}
       columns={MANAGERS_TABLE_COLUMNS}
       items={data.managers}
       isPending={data.isPending}
@@ -28,9 +22,4 @@ const ManagersTable = ({ t, isPending, data, filtering, paging, title }) => {
   );
 };
 
-export default compose(
-  translate(),
-  withTable({
-    paging: DEFAULT_PAGING
-  })
-)(ManagersTable);
+export default translate()(ManagersTable);

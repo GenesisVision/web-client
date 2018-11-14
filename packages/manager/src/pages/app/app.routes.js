@@ -4,7 +4,6 @@ import { CREATE_PROGRAM_PAGE_ROUTE } from "pages/create-program/create-program.c
 import createProgramPage from "pages/create-program/create-program.page";
 import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import DashboardRoutes from "pages/dashboard/dashboard.routes";
-import GlobalSearchPage from "pages/global-search/global-search.page.js";
 import ManagerPage, {
   MANAGER_DETAILS_ROUTE_REGEXP
 } from "pages/manager/manager.page";
@@ -18,9 +17,10 @@ import WalletWithdrawConfirmPage, {
 import WalletPage, { WALLET_PAGE_ROUTE } from "pages/wallet/wallet-page";
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
+import GlobalSearchPage from "shared/components/global-search/global-search.page.js";
+import { GLOBAL_SEARCH_ROUTE } from "shared/components/global-search/global-search.routes";
 
 import FundsRoutes, { FUNDS_ROUTE } from "../funds/funds.routes";
-import { GLOBAL_SEARCH_ROUTE } from "../global-search/global-search.routes";
 import { NOTIFICATIONS_ROUTE } from "../notifications/notifications.routes";
 import NotificationRoutes from "../notifications/notifications.routes";
 import ProgramsRoutes, { PROGRAMS_ROUTE } from "../programs/programs.routes";

@@ -1,4 +1,14 @@
+import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
+import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
+import { FUNDS_ROUTE } from "pages/funds/funds.routes";
+import { PROFILE_ROUTE, SETTINGS_ROUTE } from "pages/profile/profile.constants";
+import { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
+import { WALLET_PAGE_ROUTE } from "pages/wallet/wallet-page";
+import PropTypes from "prop-types";
+import React from "react";
+import { translate } from "react-i18next";
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
+import { GLOBAL_SEARCH_ROUTE } from "shared/components/global-search/global-search.routes";
 import { DashboardIcon } from "shared/components/icon/dashboard-icon";
 import { DetailsIcon } from "shared/components/icon/details-icon";
 import { FundsIcon } from "shared/components/icon/funds-icon";
@@ -11,16 +21,6 @@ import NavigationItem, {
   NavigationButton
 } from "shared/components/navigation/navigation-item";
 import Sidebar from "shared/components/sidebar/sidebar";
-import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
-import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
-import { FUNDS_ROUTE } from "pages/funds/funds.routes";
-import { GLOBAL_SEARCH_ROUTE } from "pages/global-search/global-search.routes";
-import { PROFILE_ROUTE, SETTINGS_ROUTE } from "pages/profile/profile.constants";
-import { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
-import { WALLET_PAGE_ROUTE } from "pages/wallet/wallet-page";
-import PropTypes from "prop-types";
-import React from "react";
-import { translate } from "react-i18next";
 
 const NavigationMobile = ({
   t,
