@@ -1,18 +1,14 @@
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
 import React, { PureComponent } from "react";
-
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import { updateFilter } from "shared/components/table/helpers/filtering.helpers";
 
+import { getItems, updateFilters } from "../services/table.service";
 import Table from "./table";
-
-import { updateFilters, getItems } from "../services/table.service";
 
 class TableContainer extends PureComponent {
   componentDidMount() {
-    if (this.props.isFetchOnMount) {
-      this.updateItems();
-    }
+    this.updateItems();
   }
 
   updateItems = changedFilters => {
