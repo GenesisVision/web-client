@@ -7,6 +7,7 @@ import FundAssetImage from "shared/components/avatar/fund-asset-image/fund-asset
 import TableCell from "shared/components/table/components/table-cell";
 import TableModule from "shared/components/table/components/table-module";
 import TableRow from "shared/components/table/components/table-row";
+import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { formatValue } from "shared/utils/formatter";
 
 import { FUND_STRUCTURE_COLUMNS } from "../../../fund-details.constants";
@@ -31,6 +32,7 @@ class FundStructure extends Component {
     return (
       <TableModule
         data={data}
+        paging={{ ...DEFAULT_PAGING, itemsOnPage: data.total }}
         getItems={this.fetchFundStructure}
         columns={FUND_STRUCTURE_COLUMNS}
         renderHeader={column => (
