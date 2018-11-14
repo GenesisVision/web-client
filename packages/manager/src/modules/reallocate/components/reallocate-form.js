@@ -97,7 +97,7 @@ class ReallocateForm extends Component {
           handleUp={this.handleUp}
           handlePercentChange={this.handlePercentChange}
         />
-        <div className="reallocate-container__buttons">
+        <div className="dialog__buttons">
           <GVButton type={"submit"} disabled={!isValid || !dirty}>
             {t("reallocate.apply")}
           </GVButton>
