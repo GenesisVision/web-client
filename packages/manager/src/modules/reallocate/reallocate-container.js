@@ -11,6 +11,7 @@ import * as createFundService from "../../pages/create-fund/services/create-fund
 
 class ReallocateContainer extends Component {
   state = { serverError: "", assets: [] };
+
   fillAssets = (target, data) => {
     data.forEach(dataItem => {
       target.forEach(targetItem => {
@@ -21,6 +22,7 @@ class ReallocateContainer extends Component {
     });
     return target;
   };
+
   componentDidMount() {
     createFundService.fetchAssets().then(response => {
       const assets = this.fillAssets(response.assets, this.props.assets);
@@ -37,7 +39,7 @@ class ReallocateContainer extends Component {
       service
         .updateAssets(id, values)
         .then(() => {
-          // onClose();
+          onClose();
         })
         .catch(error => {
           this.setState({ serverError: error.errorMessage });
