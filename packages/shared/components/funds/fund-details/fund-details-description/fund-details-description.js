@@ -16,14 +16,14 @@ import {
   composeManagerDetailsUrl,
   composeFundNotificationsUrl
 } from "shared/utils/compose-url";
-import RebalancePopup from "manager-web-portal/src/modules/rebalance/rebalance-popup";
+import ReallocateContainer from "modules/reallocate/reallocate-container";
 
 class FundDetailsDescription extends PureComponent {
   state = {
     isOpenInvestmentPopup: false,
     isOpenAboutLevels: false,
     isOpenEditFundPopup: false,
-    isOpenRebalanceFundPopup: false,
+    isOpenReallocateFundPopup: false,
     anchor: null
   };
 
@@ -48,18 +48,19 @@ class FundDetailsDescription extends PureComponent {
   handleApplyEditFundPopup = updateDetails => () => {
     updateDetails();
   };
-  handleOpenRebalanceFundPopup = () => {
-    this.setState({ isOpenRebalanceFundPopup: true });
+  handleOpenReallocateFundPopup = () => {
+    this.setState({ isOpenReallocateFundPopup: true });
   };
-  handleCloseRebalanceFundPopup = () => {
-    this.setState({ isOpenRebalanceFundPopup: false });
+  handleCloseReallocateFundPopup = updateDetails => () => {
+    this.setState({ isOpenReallocateFundPopup: false });
+    updateDetails();
   };
 
   render() {
     const {
       isOpenInvestmentPopup,
       isOpenEditFundPopup,
-      isOpenRebalanceFundPopup
+      isOpenReallocateFundPopup
     } = this.state;
     const {
       t,
@@ -201,10 +202,10 @@ class FundDetailsDescription extends PureComponent {
                         className="fund-details-description__invest-btn"
                         color="secondary"
                         variant="outlined"
-                        onClick={this.handleOpenRebalanceFundPopup}
+                        onClick={this.handleOpenReallocateFundPopup}
                         disabled={!canCloseProgram}
                       >
-                        {t("fund-details-page.description.edit-fund")}
+                        {t("fund-details-page.description.reallocate")}
                       </GVButton>
                     </Fragment>
                   )}
@@ -229,9 +230,12 @@ class FundDetailsDescription extends PureComponent {
                             type={FUND}
                           />
                         )}
-                        <RebalancePopup
-                          open={isOpenRebalanceFundPopup}
-                          onClose={this.handleCloseRebalanceFundPopup}
+                        <ReallocateContainer
+                          id={fundDescription.id}
+                          open={isOpenReallocateFundPopup}
+                          onClose={this.handleCloseReallocateFundPopup(
+                            updateDetails
+                          )}
                           assets={fundDescription.currentAssets}
                         />
                       </Fragment>
