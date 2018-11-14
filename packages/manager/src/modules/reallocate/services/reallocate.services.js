@@ -4,7 +4,6 @@ import authService from "shared/services/auth-service";
 
 export const updateAssets = (id, values) => dispatch => {
   const authorization = authService.getAuthArg();
-  console.log(values.assets);
   return managerApiProxy
     .v10ManagerFundsByIdAssetsUpdatePost(id, authorization, {
       request: values.assets
