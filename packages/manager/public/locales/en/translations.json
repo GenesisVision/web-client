@@ -160,7 +160,7 @@
     "title": "Program detail",
     "description": {
       "reallocate": "Reallocate",
-      "edit-fund": "Edit fund",
+      "edit-fund": "Edit details",
       "strategy": "Strategy",
       "assets": "Assets",
       "addToFavorites": "Add to favorites",
@@ -873,7 +873,7 @@
     }
   },
   "edit-fund": {
-    "title": "Edit fund",
+    "title": "Edit details",
     "navigation-back-text":
       "All data will be deleted. Do you want to continue?",
     "confirm": "Confirm",
