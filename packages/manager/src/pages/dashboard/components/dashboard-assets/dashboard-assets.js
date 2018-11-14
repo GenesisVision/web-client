@@ -15,7 +15,8 @@ import { DASHBOARD_FUNDS_COLUMNS } from "shared/components/dashboard/dashboard.c
 import { getDashboardFunds } from "../../services/dashboard-funds.service";
 import { getDashboardPrograms } from "../../services/dashboard-programs.service";
 import DashboardFunds from "shared/components/dashboard/dashboard-assets/dashboard-funds/dashboard-funds";
-import DashboardPrograms from "./dashboard-programs/dashboard-programs";
+import DashboardPrograms from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs";
+
 class DashboardAssets extends Component {
   state = {
     tab: "programs"
@@ -48,6 +49,7 @@ class DashboardAssets extends Component {
         <div className="dashboard-assets__table">
           {tab === "programs" && (
             <DashboardPrograms
+              getDashboardPrograms={getDashboardPrograms}
               createButtonToolbar={createButtonToolbar(
                 t("buttons.create-program"),
                 CREATE_PROGRAM_PAGE_ROUTE
