@@ -1,13 +1,14 @@
 import "./reallocate-container.scss";
 
-import Dialog from "shared/components/dialog/dialog";
-import { updateAssets } from "./services/reallocate.services";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import ReallocatePopup from "./components/reallocate-popup";
+import Dialog from "shared/components/dialog/dialog";
+
 import * as createFundService from "../../pages/create-fund/services/create-fund.service";
+import ReallocatePopup from "./components/reallocate-popup";
+import { updateAssets } from "./services/reallocate.services";
 
 class ReallocateContainer extends Component {
   state = { serverError: "", assets: [] };
@@ -49,6 +50,7 @@ class ReallocateContainer extends Component {
       this.setState({ serverError: "" });
       onClose();
     };
+    if (!assets.length) return null;
     return (
       <Dialog open={open} onClose={handleClose}>
         <ReallocatePopup
