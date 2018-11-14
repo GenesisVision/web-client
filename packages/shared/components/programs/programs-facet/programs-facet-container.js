@@ -1,8 +1,8 @@
-import NotFoundPage from "share/components/not-found/not-found.routes";
+import NotFoundPage from "shared/components/not-found/not-found.routes";
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { compose } from "redux";
+import { bindActionCreators, compose } from "redux";
 
 class ProgramsFacetContainer extends Component {
   state = {
@@ -10,16 +10,16 @@ class ProgramsFacetContainer extends Component {
   };
 
   componentDidMount() {
-    const { getCurrentFacet, facets } = this.props;
+    const { service, facets } = this.props;
     if (facets !== null) {
-      this.setState({ facetData: getCurrentFacet() });
+      this.setState({ facetData: service.getCurrentFacet() });
     }
   }
 
   componentDidUpdate(prevProps) {
-    const { getCurrentFacet, facets } = this.props;
+    const { service, facets } = this.props;
     if (prevProps.facets !== facets) {
-      this.setState({ facetData: getCurrentFacet() });
+      this.setState({ facetData: service.getCurrentFacet() });
     }
   }
 
@@ -43,7 +43,17 @@ const mapStateToProps = state => {
   return { facets };
 };
 
+const mapDispatchToProps = (dispatch, props) => {
+  const { getCurrentFacet, getPrograms } = props;
+  return {
+    service: bindActionCreators({ getCurrentFacet, getPrograms }, dispatch)
+  };
+};
+
 export default compose(
   withRouter,
-  connect(mapStateToProps)
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
 )(ProgramsFacetContainer);
