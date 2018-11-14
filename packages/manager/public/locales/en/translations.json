@@ -151,9 +151,15 @@
     "all-short": "All",
     "all": "All Time"
   },
+  "reallocate": {
+    "title": "Reallocate",
+    "apply": "Apply",
+    "success-alert-message": "Your assets reallocated successfully!"
+  },
   "fund-details-page": {
     "title": "Program detail",
     "description": {
+      "reallocate": "Reallocate",
       "edit-fund": "Edit fund",
       "strategy": "Strategy",
       "assets": "Assets",
