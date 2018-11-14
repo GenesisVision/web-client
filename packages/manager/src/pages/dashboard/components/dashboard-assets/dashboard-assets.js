@@ -11,9 +11,10 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { bindActionCreators, compose } from "redux";
 
+import { DASHBOARD_FUNDS_COLUMNS } from "shared/components/dashboard/dashboard.constants";
 import { getDashboardFunds } from "../../services/dashboard-funds.service";
 import { getDashboardPrograms } from "../../services/dashboard-programs.service";
-import DashboardFunds from "./dashboard-funds/dashboard-funds";
+import DashboardFunds from "shared/components/dashboard/dashboard-assets/dashboard-funds/dashboard-funds";
 import DashboardPrograms from "./dashboard-programs/dashboard-programs";
 
 class DashboardAssets extends Component {
@@ -62,6 +63,8 @@ class DashboardAssets extends Component {
           )}
           {tab === "funds" && (
             <DashboardFunds
+              DASHBOARD_FUNDS_COLUMNS={DASHBOARD_FUNDS_COLUMNS}
+              getDashboardFunds={getDashboardFunds}
               createButtonToolbar={createButtonToolbar(
                 t("buttons.create-fund"),
                 CREATE_FUND_PAGE_ROUTE

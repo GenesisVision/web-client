@@ -5,7 +5,7 @@ import { DASHBOARD_FUNDS } from "../actions/dashboard.actions";
 import {
   DASHBOARD_FUNDS_DEFAULT_FILTERING,
   DASHBOARD_FUNDS_FILTERS
-} from "../dashboard.constants";
+} from "shared/components/dashboard/dashboard.constants";
 
 const dashboardFundsReducer = tableReducerFactory({
   type: DASHBOARD_FUNDS,

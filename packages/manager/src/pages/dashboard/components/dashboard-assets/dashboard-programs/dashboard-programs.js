@@ -16,7 +16,7 @@ import TableRow from "shared/components/table/components/table-row";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 
 import "./dashboard-programs.scss";
-import { DASHBOARD_PROGRAMS_COLUMNS } from "../../../dashboard.constants";
+import { DASHBOARD_PROGRAMS_COLUMNS } from "shared/components/dashboard/dashboard.constants";
 import { getDashboardPrograms } from "../../../services/dashboard-programs.service";
 import dashboardProgramsTableSelector from "./dashboard-programs.selector";
 
