@@ -10,7 +10,6 @@ import DashboardFunds from "shared/components/dashboard/dashboard-assets/dashboa
 import DashboardPrograms from "./dashboard-programs/dashboard-programs";
 import { bindActionCreators, compose } from "redux";
 import { getDashboardPrograms } from "manager-web-portal/src/pages/dashboard/services/dashboard-programs.service";
-import { translate } from "react-i18next";
 import connect from "react-redux/es/connect/connect";
 
 class DashboardAssets extends Component {

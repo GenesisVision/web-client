@@ -16,7 +16,6 @@ import { getDashboardFunds } from "../../services/dashboard-funds.service";
 import { getDashboardPrograms } from "../../services/dashboard-programs.service";
 import DashboardFunds from "shared/components/dashboard/dashboard-assets/dashboard-funds/dashboard-funds";
 import DashboardPrograms from "./dashboard-programs/dashboard-programs";
-
 class DashboardAssets extends Component {
   state = {
     tab: "programs"
@@ -106,6 +105,10 @@ const mapDispatchToProps = dispatch => ({
   )
 });
 
-export default compose(translate(), connect(null, mapDispatchToProps))(
-  DashboardAssets
-);
+export default compose(
+  translate(),
+  connect(
+    null,
+    mapDispatchToProps
+  )
+)(DashboardAssets);
