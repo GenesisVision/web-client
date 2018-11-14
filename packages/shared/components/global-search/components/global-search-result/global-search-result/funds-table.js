@@ -1,26 +1,12 @@
 import { FUNDS_TABLE_COLUMNS } from "modules/funds-table/funds-table.constants";
 import React from "react";
 import { translate } from "react-i18next";
-import { compose } from "redux";
 import FundsTableRow from "shared/components/funds-table/fund-table-row";
 import { Table } from "shared/components/table/components";
-import withTable from "shared/components/table/components/with-table";
-import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 
-const FundsTable = ({
-  t,
-  title,
-  isPending,
-  data,
-  filtering,
-  paging,
-  updatePaging
-}) => {
+const FundsTable = ({ t, title, isPending, data }) => {
   return (
     <Table
-      paging={paging}
-      updatePaging={() => {}}
-      updateSorting={() => {}}
       columns={FUNDS_TABLE_COLUMNS}
       items={data.funds}
       isPending={data.isPending}
@@ -34,9 +20,4 @@ const FundsTable = ({
   );
 };
 
-export default compose(
-  translate(),
-  withTable({
-    paging: DEFAULT_PAGING
-  })
-)(FundsTable);
+export default translate()(FundsTable);

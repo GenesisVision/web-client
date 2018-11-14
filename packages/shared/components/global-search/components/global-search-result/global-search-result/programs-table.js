@@ -1,18 +1,12 @@
 import { PROGRAMS_COLUMNS } from "modules/programs-table/programs.constants";
 import React from "react";
 import { translate } from "react-i18next";
-import { compose } from "redux";
 import ProgramTableRowShort from "shared/components/programs-table/program-table-row-short";
 import { Table } from "shared/components/table/components";
-import withTable from "shared/components/table/components/with-table";
-import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 
-const ProgramsTable = ({ t, isPending, data, filtering, paging, title }) => {
+const ProgramsTable = ({ t, isPending, data, title }) => {
   return (
     <Table
-      paging={paging}
-      updatePaging={() => {}}
-      updateSorting={() => {}}
       columns={PROGRAMS_COLUMNS}
       items={data.programs}
       isPending={data.isPending}
@@ -36,9 +30,4 @@ const ProgramsTable = ({ t, isPending, data, filtering, paging, title }) => {
   );
 };
 
-export default compose(
-  translate(),
-  withTable({
-    paging: DEFAULT_PAGING
-  })
-)(ProgramsTable);
+export default translate()(ProgramsTable);
