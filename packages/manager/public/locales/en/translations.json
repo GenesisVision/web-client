@@ -160,7 +160,7 @@
   "fund-details-page": {
     "title": "Program detail",
     "description": {
-      "disable-reallocation-message":"The next reallocation will be avaiable on",
+      "disable-reallocation-message":"The next reallocation will be available on",
       "reallocate": "Reallocate",
       "edit-fund": "Edit details",
       "strategy": "Strategy",
