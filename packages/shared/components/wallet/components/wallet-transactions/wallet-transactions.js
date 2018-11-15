@@ -4,8 +4,6 @@ import moment from "moment";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { connect } from "react-redux";
-import { compose } from "redux";
 import Surface from "shared/components/surface/surface";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
@@ -127,7 +125,4 @@ class WalletTransactions extends Component {
   }
 }
 
-export default compose(
-  translate(),
-  connect(walletTableTransactionsSelector)
-)(WalletTransactions);
+export default translate()(WalletTransactions);
