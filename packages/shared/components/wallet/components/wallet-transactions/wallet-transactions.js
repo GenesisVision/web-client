@@ -4,6 +4,8 @@ import moment from "moment";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { connect } from "react-redux";
+import { compose } from "redux";
 import Surface from "shared/components/surface/surface";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
@@ -28,21 +30,23 @@ const getStatus = transaction => {
   return status ? status : "";
 };
 
-const emptyTransactions = t => (
-  <div className="empty-transactions">
-    <div className="empty-transactions__subtitle">
-      {t("wallet.transactions.title")}
-    </div>
-    <div className="empty-transactions__disclaimer">
-      <div className="empty-transactions__icon">
-        <img src={EmptyTransactionsIcon} alt="" />
+const EmptyTransactions = translate()(({ t }) => (
+  <Surface className="wallet-transactions">
+    <div className="empty-transactions">
+      <div className="empty-transactions__subtitle">
+        {t("wallet.transactions.title")}
       </div>
-      <div className="empty-transactions__text">
-        {t("wallet.transactions.empty-transactions")}
+      <div className="empty-transactions__disclaimer">
+        <div className="empty-transactions__icon">
+          <img src={EmptyTransactionsIcon} alt="" />
+        </div>
+        <div className="empty-transactions__text">
+          {t("wallet.transactions.empty-transactions")}
+        </div>
       </div>
     </div>
-  </div>
-);
+  </Surface>
+));
 
 class WalletTransactions extends Component {
   state = {
@@ -57,74 +61,73 @@ class WalletTransactions extends Component {
 
   render() {
     const { t } = this.props;
+    if (!this.state.transactionsCount) return <EmptyTransactions />;
     return (
       <Surface className="wallet-transactions">
-        {(this.state.transactionsCount && (
-          <TableContainer
-            title={t("wallet.transactions.title")}
-            getItems={fetchWalletTransactions}
-            dataSelector={walletTableTransactionsSelector}
-            renderFilters={(updateFilter, filtering) => {
-              return (
-                <Fragment>
-                  <DateRangeFilter
-                    name={DATE_RANGE_FILTER_NAME}
-                    value={filtering["dateRange"]}
-                    onChange={updateFilter}
-                    startLabel={t("filters.date-range.account-creation")}
+        <TableContainer
+          title={t("wallet.transactions.title")}
+          getItems={fetchWalletTransactions}
+          dataSelector={walletTableTransactionsSelector}
+          renderFilters={(updateFilter, filtering) => {
+            return (
+              <Fragment>
+                <DateRangeFilter
+                  name={DATE_RANGE_FILTER_NAME}
+                  value={filtering["dateRange"]}
+                  onChange={updateFilter}
+                  startLabel={t("filters.date-range.account-creation")}
+                />
+              </Fragment>
+            );
+          }}
+          columns={WALLET_TRANSACTIONS_COLUMNS}
+          renderHeader={column => (
+            <span
+              className={`wallet-transactions__cell wallet-transactions__cell--${
+                column.name
+              }`}
+            >
+              {t(`wallet.transactions.${column.name}`)}
+            </span>
+          )}
+          renderBodyRow={transaction => {
+            const status = getStatus(transaction);
+            return (
+              <TableRow className="wallet-transactions__row">
+                <TableCell className="wallet-transactions__cell wallet-transactions__cell--date">
+                  {moment(transaction.date).format("DD-MM-YYYY, hh:mm a")}
+                </TableCell>
+                <TableCell className="wallet-transactions__cell wallet-transactions__cell--information">
+                  {transaction.information}
+                </TableCell>
+                <TableCell className="wallet-transactions__cell wallet-transactions__cell--amount">
+                  <NumberFormat
+                    value={formatValue(transaction.amount)}
+                    thousandSeparator=" "
+                    displayType="text"
+                    suffix={" " + transaction.sourceCurrency}
                   />
-                </Fragment>
-              );
-            }}
-            columns={WALLET_TRANSACTIONS_COLUMNS}
-            renderHeader={column => (
-              <span
-                className={`wallet-transactions__cell wallet-transactions__cell--${
-                  column.name
-                }`}
-              >
-                {t(`wallet.transactions.${column.name}`)}
-              </span>
-            )}
-            renderBodyRow={transaction => {
-              const status = getStatus(transaction);
-              return (
-                <TableRow className="wallet-transactions__row">
-                  <TableCell className="wallet-transactions__cell wallet-transactions__cell--date">
-                    {moment(transaction.date).format("DD-MM-YYYY, hh:mm a")}
-                  </TableCell>
-                  <TableCell className="wallet-transactions__cell wallet-transactions__cell--information">
-                    {transaction.information}
-                  </TableCell>
-                  <TableCell className="wallet-transactions__cell wallet-transactions__cell--amount">
-                    <NumberFormat
-                      value={formatValue(transaction.amount)}
-                      thousandSeparator=" "
-                      displayType="text"
-                      suffix={" " + transaction.sourceCurrency}
-                    />
-                  </TableCell>
-                  <TableCell className="wallet-transactions__cell wallet-transactions__cell--status">
-                    {(status && t(`wallet.transaction-statuses.${status}`)) ||
-                      "-"}
-                  </TableCell>
-                  <TableCell className="wallet-transactions__cell wallet-transactions__cell--actions">
-                    <WalletTransactionActions
-                      disabled={
-                        status === "InProcess" || status === "Cancelled"
-                      }
-                      transaction={transaction}
-                    />
-                  </TableCell>
-                </TableRow>
-              );
-            }}
-          />
-        )) ||
-          emptyTransactions(t)}
+                </TableCell>
+                <TableCell className="wallet-transactions__cell wallet-transactions__cell--status">
+                  {(status && t(`wallet.transaction-statuses.${status}`)) ||
+                    "-"}
+                </TableCell>
+                <TableCell className="wallet-transactions__cell wallet-transactions__cell--actions">
+                  <WalletTransactionActions
+                    disabled={status === "InProcess" || status === "Cancelled"}
+                    transaction={transaction}
+                  />
+                </TableCell>
+              </TableRow>
+            );
+          }}
+        />
       </Surface>
     );
   }
 }
 
-export default translate()(WalletTransactions);
+export default compose(
+  translate(),
+  connect(walletTableTransactionsSelector)
+)(WalletTransactions);

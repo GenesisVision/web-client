@@ -12,15 +12,15 @@ import { PROFILE_ROUTE } from "pages/profile/profile.constants";
 import ProfileRoutes from "pages/profile/profile.routes";
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import WalletPage, {
-  WALLET_PAGE_ROUTE
-} from "shared/comnponents/wallet/wallet-page";
 import GlobalSearchPage from "shared/components/global-search/global-search.page.js";
 import { GLOBAL_SEARCH_ROUTE } from "shared/components/global-search/global-search.routes";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
 import WalletWithdrawConfirmPage, {
   WALLET_WITHDRAW_CONFIRM_ROUTE
 } from "shared/components/wallet-withdraw-confirm/wallet-withdraw-confirm.page";
+import WalletPage, {
+  WALLET_PAGE_ROUTE
+} from "shared/components/wallet/wallet-page";
 
 import FundsRoutes, { FUNDS_ROUTE } from "../funds/funds.routes";
 import { NOTIFICATIONS_ROUTE } from "../notifications/notifications.routes";
