@@ -88,7 +88,7 @@ export default compose(
     validationSchema: ({ t, availableToWithdraw }) =>
       object().shape({
         amount: number()
-          .lessThan(
+          .max(
             availableToWithdraw,
             t("withdraw-program.validation.amount-more-than-available")
           )
