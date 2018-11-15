@@ -1,4 +1,4 @@
-import { fetchWalletTransactions } from "pages/wallet/services/wallet.services";
+import { fetchWalletTransactions } from "shared/components/wallet/services/wallet.services";
 import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
 

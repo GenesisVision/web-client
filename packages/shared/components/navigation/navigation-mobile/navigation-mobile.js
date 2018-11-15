@@ -3,7 +3,6 @@ import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import { FUNDS_ROUTE } from "pages/funds/funds.routes";
 import { PROFILE_ROUTE, SETTINGS_ROUTE } from "pages/profile/profile.constants";
 import { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
-import { WALLET_PAGE_ROUTE } from "pages/wallet/wallet-page";
 import PropTypes from "prop-types";
 import React from "react";
 import { translate } from "react-i18next";
@@ -21,6 +20,7 @@ import NavigationItem, {
   NavigationButton
 } from "shared/components/navigation/navigation-item";
 import Sidebar from "shared/components/sidebar/sidebar";
+import { WALLET_PAGE_ROUTE } from "shared/components/wallet/wallet-page";
 
 const NavigationMobile = ({
   t,

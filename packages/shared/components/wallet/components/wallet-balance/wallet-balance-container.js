@@ -1,8 +1,8 @@
-import WalletAddFundsPopup from "modules/wallet-add-funds/wallet-add-funds-popup";
-import WalletWithdrawPopup from "modules/wallet-withdraw/wallet-withdraw-popup";
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import WalletAddFundsPopup from "shared/components/wallet-add-funds/wallet-add-funds-popup";
+import WalletWithdrawPopup from "shared/components/wallet-withdraw/wallet-withdraw-popup";
 
 import * as WalletServices from "../../services/wallet.services";
 import WalletBalance from "./wallet-balance";
