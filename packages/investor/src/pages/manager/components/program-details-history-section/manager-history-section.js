@@ -7,7 +7,7 @@ import { toggleFavoriteProgramDispatchable } from "modules/favorite-asset/servic
 import FundsTableRow from "shared/components/funds-table/fund-table-row";
 import { FUNDS_TABLE_COLUMNS } from "modules/funds-table/funds-table.constants";
 import ProgramTableRow from "shared/components/programs-table/program-table-row";
-import { PROGRAMS_COLUMNS } from "modules/programs-table/programs.constants";
+import { PROGRAMS_COLUMNS } from "shared/components/programs-table/programs.constants";
 import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";

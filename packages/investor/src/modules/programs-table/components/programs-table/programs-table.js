@@ -12,7 +12,7 @@ import {
   CURRENCY_FILTER_NAME,
   LEVEL_FILTER_NAME,
   PROGRAMS_COLUMNS
-} from "../../programs.constants";
+} from "shared/components/programs-table/programs.constants";
 import ProgramCard from "shared/components/programs-table/program-card";
 import ProgramTableRow from "shared/components/programs-table/program-table-row";
 
