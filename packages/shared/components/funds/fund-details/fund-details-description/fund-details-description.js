@@ -62,6 +62,7 @@ class FundDetailsDescription extends PureComponent {
     } = this.state;
     const {
       t,
+      canReallocate,
       status,
       isFavorite,
       canCloseProgram,
@@ -196,7 +197,7 @@ class FundDetailsDescription extends PureComponent {
                         color="secondary"
                         variant="outlined"
                         onClick={this.handleOpenReallocateFundPopup}
-                        disabled={status !== "Active"}
+                        disabled={!canReallocate}
                       >
                         {t("fund-details-page.description.reallocate")}
                       </GVButton>

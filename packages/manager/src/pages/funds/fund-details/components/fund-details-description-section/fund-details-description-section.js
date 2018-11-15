@@ -121,6 +121,9 @@ class FundDetailsDescriptionSection extends PureComponent {
     } = this.props;
     const { fundDescription, ui } = this.state;
     if (!fundDescription) return null;
+    const canReallocate =
+      fundDescription.personalFundDetails &&
+      fundDescription.personalFundDetails.canReallocate;
     const isInvested =
       fundDescription.personalFundDetails &&
       fundDescription.personalFundDetails.isInvested;
@@ -145,6 +148,7 @@ class FundDetailsDescriptionSection extends PureComponent {
     return (
       <Fragment>
         <FundDetailsDescription
+          canReallocate={canReallocate}
           status={status}
           isFavorite={isFavorite}
           canCloseProgram={canCloseProgram}
