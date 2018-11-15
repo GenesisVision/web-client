@@ -1,31 +1,27 @@
-import { PROGRAMS_TAB_ROUTE } from "pages/programs/programs.routes";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { push } from "react-router-redux";
 import { compose } from "redux";
-import replaceParams from "shared/utils/replace-params";
 
 import isAuthenticated from "shared/decorators/is-authenticated";
-import ProgramsTabs from "./programs-tabs";
+import replaceParams from "shared/utils/replace-params";
 
-class ProgramsTabsContainer extends Component {
+import FundsNavigationTabs from "./navigation-tabs";
+
+class NavigationTabsContainer extends Component {
   render() {
-    const { match } = this.props;
     return (
-      <ProgramsTabs
-        tab={match.params.tab}
-        onChange={this.props.handleTabChange}
-      />
+      <FundsNavigationTabs tab={this.props.match.params.tab} {...this.props} />
     );
   }
 }
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, props) => ({
   handleTabChange: (e, tab) => {
     dispatch(
       push(
-        replaceParams(PROGRAMS_TAB_ROUTE, {
+        replaceParams(props.routes.FUNDS_TAB_ROUTE, {
           ":tab": tab
         })
       )
@@ -40,4 +36,4 @@ export default compose(
     null,
     mapDispatchToProps
   )
-)(ProgramsTabsContainer);
+)(NavigationTabsContainer);
