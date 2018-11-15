@@ -3,7 +3,7 @@ import inputPhotoValidation from "shared/components/form/input-photo/input-photo
 
 const createProgramSettingsValidationSchema = ({ t, ...props }) =>
   object().shape({
-    logo: inputPhotoValidation({ t }),
+    logo: inputPhotoValidation(t),
     title: string()
       .required(t("create-program-page.settings.validation.title-required"))
       .min(4, t("create-program-page.settings.validation.title-is-short"))

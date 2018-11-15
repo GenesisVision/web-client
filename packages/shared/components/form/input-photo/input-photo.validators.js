@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 import { convertMbToBytes } from "shared/utils/helpers";
 
-const inputPhotoValidation = ({ t }) => {
+const inputPhotoValidation = t => {
   return Yup.object().shape({
     width: Yup.number().min(
       300,

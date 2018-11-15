@@ -18,7 +18,11 @@
     "input-photo": {
       "text-download--big": "Drag the image here or click here to browse your files",
       "text-download--small": "Tap to upload the image",
-      "drop-files": "Drop files..."
+      "drop-files": "Drop files...",
+      "validations": {
+        "image-resolution-incorrect": "The resolution of the uploaded image is too low.",
+        "image-file-is-large": "The uploaded image file is too large."
+      }
     }
   },
   "programs-page": {

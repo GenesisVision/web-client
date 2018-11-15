@@ -3,7 +3,7 @@ import inputPhotoValidation from "shared/components/form/input-photo/input-photo
 
 const createFundSettingsValidationSchema = ({ t, ...props }) =>
   object().shape({
-    logo: inputPhotoValidation({ t }),
+    logo: inputPhotoValidation(t),
     title: string()
       .required(t("create-fund-page.settings.validation.title-required"))
       .max(20, t("create-fund-page.settings.validation.title-is-long"))

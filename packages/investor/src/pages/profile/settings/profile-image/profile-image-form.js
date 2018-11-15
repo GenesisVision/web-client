@@ -9,6 +9,7 @@ import InputPhoto, {
   getInputPhotoInitialValue
 } from "shared/components/form/input-photo/input-photo";
 import UserIcon from "shared/media/user-avatar.svg";
+import * as Yup from "yup";
 
 import InputPhotoValidation from "shared/components/form/input-photo/input-photo.validators";
 
@@ -88,7 +89,10 @@ export default compose(
         src: props.avatar
       }
     }),
-    validationSchema: InputPhotoValidation,
+    validationSchema: ({ t }) =>
+      Yup.object().shape({
+        logo: InputPhotoValidation(t)
+      }),
     handleSubmit: (values, { props, setSubmitting, setFieldValue }) => {
       props.handleSubmit(values.logo.cropped, src => {
         setFieldValue("logo", {
