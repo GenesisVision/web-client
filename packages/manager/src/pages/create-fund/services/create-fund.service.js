@@ -7,8 +7,6 @@ import authService from "shared/services/auth-service";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import filesService from "shared/services/file-service";
 
-import { getDataWithoutSuffixes } from "../helpers/create-fund.helpers";
-
 export const fetchBalance = () => dispatch =>
   dispatch(fetchProfileHeaderInfo());
 
@@ -20,26 +18,22 @@ export const fetchInvestmentAmount = () =>
 
 export const createFund = (createFundData, setSubmitting) => dispatch => {
   const authorization = authService.getAuthArg();
-
-  let data = getDataWithoutSuffixes(createFundData, [
-    "periodLength",
-    "exitFee",
-    "entryFee",
-    "leverage"
-  ]);
   let promise = Promise.resolve(null);
-  if (data.logo.cropped) {
-    promise = filesService.uploadFileProxy(data.logo.cropped, authorization);
+  if (createFundData.logo.cropped) {
+    promise = filesService.uploadFileProxy(
+      createFundData.logo.cropped,
+      authorization
+    );
   }
   promise
     .then(response => {
-      data = {
-        ...data,
+      createFundData = {
+        ...createFundData,
         logo: response || ""
       };
 
       return managerApiProxy.v10ManagerFundsCreatePost(authorization, {
-        request: data
+        request: createFundData
       });
     })
     .then(() => {
