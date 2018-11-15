@@ -52,7 +52,7 @@ export const DASHBOARD_FUNDS_COLUMNS = [
     name: "assets"
   },
   {
-    name: "investors"
+    name: "value"
   },
   {
     name: "drawdown"

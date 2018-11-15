@@ -47,7 +47,8 @@
       "investors": "Investors",
       "drawdown": "D.down",
       "profit": "Profit",
-      "chart": "Chart"
+      "chart": "Chart",
+      "value": "Value"
     }
   },
   "managers-table": {
@@ -442,7 +443,8 @@
       "investors": "Investors",
       "drawdown": "D.down",
       "profit": "Profit",
-      "chart": "Chart"
+      "chart": "Chart",
+      "value": "Value"
     }
   },
   "dashboard": {
