@@ -3,7 +3,7 @@ import FundsTableContainer from "modules/funds-table/components/funds-table/fund
 import React from "react";
 import { translate } from "react-i18next";
 
-import FacetCardsContainer from "./components/facet-cards/faset-cards-container";
+import FacetCardsContainer from "shared/components/facet-cards/faset-cards-container";
 import FundsNavigationTabsContainer from "./components/funds-navigation-tabs/funds-navigation-tabs-container";
 
 const FundsPage = ({ t }) => {
@@ -11,7 +11,7 @@ const FundsPage = ({ t }) => {
   return (
     <Page title={title}>
       <FundsNavigationTabsContainer />
-      <FacetCardsContainer title={title} />
+      <FacetCardsContainer title={title} assetsFacets={"fundsFacets"} />
       <FundsTableContainer title={"All funds"} />
     </Page>
   );
