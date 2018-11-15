@@ -12,6 +12,7 @@ export const FUND_DETAILS_ROUTE = `${FUNDS_ROUTE}/:${FUNDS_SLUG_URL_PARAM_NAME}`
 export const NOTIFICATIONS_ROUTE = "/notifications";
 export const PROGRAM_NOTIFICATIONS_ROUTE = `${NOTIFICATIONS_ROUTE}/program/:id`;
 export const FUND_NOTIFICATIONS_ROUTE = `${NOTIFICATIONS_ROUTE}/fund/:id`;
+export const PROGRAMS_FACET_ROUTE = `${PROGRAMS_ROUTE}/facets/:${PROGRAM_SLUG_URL_PARAM_NAME}`;
 
 export const composeProgramDetailsUrl = slugUrl =>
   replaceParams(PROGRAM_DETAILS_ROUTE, {
@@ -37,5 +38,11 @@ export const composeProgramNotificationsUrl = url => {
 export const composeFundNotificationsUrl = url => {
   return replaceParams(FUND_NOTIFICATIONS_ROUTE, {
     ":id": url
+  });
+};
+
+export const composeFacetUrl = url => {
+  return replaceParams(PROGRAMS_FACET_ROUTE, {
+    [`:${PROGRAM_SLUG_URL_PARAM_NAME}`]: url
   });
 };

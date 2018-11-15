@@ -1,15 +1,15 @@
 import "./fund-rebalancing.scss";
 
-import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
-import TableCell from "shared/components/table/components/table-cell";
-import TableRow from "shared/components/table/components/table-row";
-import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
-import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import TableModule from "shared/components/table/components/table-module";
-import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import moment from "moment";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
+import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
+import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
+import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import TableCell from "shared/components/table/components/table-cell";
+import TableModule from "shared/components/table/components/table-module";
+import TableRow from "shared/components/table/components/table-row";
+import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 
 import {
   FUND_REBALANCING_COLUMNS,
@@ -37,7 +37,6 @@ class FundRebalancing extends Component {
     return (
       <TableModule
         title={t("fund-details-page.history.subheading")}
-        fetchOnMount={false}
         data={data}
         getItems={this.fetchFundRebalancing}
         defaultFilters={FUND_REBALANCING_DEFAULT_FILTERS}

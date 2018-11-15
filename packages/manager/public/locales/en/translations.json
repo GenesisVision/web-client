@@ -47,7 +47,8 @@
       "investors": "Investors",
       "drawdown": "D.down",
       "profit": "Profit",
-      "chart": "Chart"
+      "chart": "Chart",
+      "value": "Value"
     }
   },
   "managers-table": {
@@ -151,10 +152,16 @@
     "all-short": "All",
     "all": "All Time"
   },
+  "reallocate": {
+    "title": "Reallocate",
+    "apply": "Confirm",
+    "success-alert-message": "Your assets reallocated successfully!"
+  },
   "fund-details-page": {
     "title": "Program detail",
     "description": {
-      "edit-fund": "Edit fund",
+      "reallocate": "Reallocate",
+      "edit-fund": "Edit details",
       "strategy": "Strategy",
       "assets": "Assets",
       "addToFavorites": "Add to favorites",
@@ -436,7 +443,8 @@
       "investors": "Investors",
       "drawdown": "D.down",
       "profit": "Profit",
-      "chart": "Chart"
+      "chart": "Chart",
+      "value": "Value"
     }
   },
   "dashboard": {
@@ -867,7 +875,7 @@
     }
   },
   "edit-fund": {
-    "title": "Edit fund",
+    "title": "Edit details",
     "navigation-back-text":
       "All data will be deleted. Do you want to continue?",
     "confirm": "Confirm",

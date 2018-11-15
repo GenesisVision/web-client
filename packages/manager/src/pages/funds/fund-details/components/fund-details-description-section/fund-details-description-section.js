@@ -1,13 +1,15 @@
-import { toggleFavoriteFund } from "modules/favorite-asset/services/favorite-fund.service";
-import { toggleReinvesting } from "modules/program-reinvesting/services/program-reinvesting.service";
-import FundWithdrawContainer from "modules/fund-withdraw/fund-withdraw-container";
-import FundDepositContainer from "modules/fund-deposit/fund-deposit-container";
-import { FundDetailContext } from "pages/funds/fund-details/fund-details.page";
-import AssetEditContainer from "modules/asset-edit/asset-edit-container";
-import { FUND } from "modules/asset-edit/asset-edit.constants";
 import React, { Fragment, PureComponent } from "react";
 
 import FundDetailsDescription from "shared/components/funds/fund-details/fund-details-description/fund-details-description";
+
+import AssetEditContainer from "modules/asset-edit/asset-edit-container";
+import { FUND } from "modules/asset-edit/asset-edit.constants";
+import { toggleFavoriteFund } from "shared/modules/favorite-asset/services/favorite-fund.service";
+import FundDepositContainer from "modules/fund-deposit/fund-deposit-container";
+import FundWithdrawContainer from "modules/fund-withdraw/fund-withdraw-container";
+import { toggleReinvesting } from "modules/program-reinvesting/services/program-reinvesting.service";
+import ReallocateContainer from "modules/reallocate/reallocate-container";
+import { FundDetailContext } from "pages/funds/fund-details/fund-details.page";
 
 const composeInvestmentData = fundDetails => {
   const { statistic, personalFundDetails } = fundDetails;
@@ -128,10 +130,28 @@ class FundDetailsDescriptionSection extends PureComponent {
     const canWithdraw =
       fundDescription.personalFundDetails &&
       fundDescription.personalFundDetails.canWithdraw;
+    const isFavorite =
+      fundDescription.personalFundDetails &&
+      fundDescription.personalFundDetails.isFavorite;
+    const canCloseProgram =
+      fundDescription.personalFundDetails &&
+      fundDescription.personalFundDetails.canCloseProgram;
+    const hasNotifications =
+      fundDescription.personalFundDetails &&
+      fundDescription.personalFundDetails.hasNotifications;
+    const status =
+      fundDescription.personalFundDetails &&
+      fundDescription.personalFundDetails.status;
     return (
       <Fragment>
         <FundDetailsDescription
+          status={status}
+          isFavorite={isFavorite}
+          canCloseProgram={canCloseProgram}
+          hasNotifications={hasNotifications}
+          isOwnProgram={isOwnProgram}
           FUND={FUND}
+          ReallocateContainer={ReallocateContainer}
           AssetEditContainer={AssetEditContainer}
           FundDetailContext={FundDetailContext}
           FundWithdrawContainer={FundWithdrawContainer}

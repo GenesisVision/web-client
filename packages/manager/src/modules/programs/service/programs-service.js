@@ -12,7 +12,7 @@ import {
 import sortingActionsFactory from "../../sorting/actions/sorting-actions";
 import programsActions from "../actions/programs-actions";
 import * as actionTypes from "../actions/programs-actions.constants";
-import { SORTING_FILTER_NAME } from "../programs.constants";
+import { SORTING_FILTER_NAME } from "shared/components/programs-table/programs.constants";
 import { composeProgramsFilters } from "./programs-helpers";
 
 const filteringActions = filteringActionsFactory(actionTypes.PROGRAMS);

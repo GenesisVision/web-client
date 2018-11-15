@@ -2,18 +2,16 @@ import "shared/components/table/components/table.scss";
 
 import React, { Component } from "react";
 import Scrollbars from "react-custom-scrollbars";
-import { loadData, saveData } from "shared/utils/localstorage";
-
 import TableBody from "shared/components/table/components/table-body";
 import TableFooter from "shared/components/table/components/table-footer";
 import TableHeader from "shared/components/table/components/table-header";
 import TableToolbar from "shared/components/table/components/table-toolbar";
-
 import {
-  TABLE_VIEW,
   CARDS_VIEW,
-  PROGRAMS_VIEW
+  PROGRAMS_VIEW,
+  TABLE_VIEW
 } from "shared/components/table/table.constants";
+import { loadData, saveData } from "shared/utils/localstorage";
 
 class Table extends Component {
   state = {
@@ -52,6 +50,7 @@ class Table extends Component {
           updateSorting={this.props.updateSorting}
           renderHeader={this.props.renderHeader}
           isViewSwitchEnabled={this.isViewSwitchEnabled}
+          createButtonToolbar={this.props.createButtonToolbar}
         />
         <Scrollbars
           autoHeight
@@ -64,6 +63,8 @@ class Table extends Component {
                 items={this.props.items}
                 className="programs-cards"
                 tag="div"
+                createButtonBody={this.props.createButtonBody}
+                createText={this.props.createText}
               >
                 {this.props.renderBodyCard}
               </TableBody>
@@ -82,6 +83,8 @@ class Table extends Component {
                 items={this.props.items}
                 className="table__body"
                 tag="tbody"
+                createButtonBody={this.props.createButtonBody}
+                createText={this.props.createText}
               >
                 {this.props.renderBodyRow}
               </TableBody>

@@ -1,21 +1,20 @@
-import { formatValue } from "shared/utils/formatter";
-import { translate } from "react-i18next";
-import authService from "shared/services/auth-service";
-import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
+import "./wallet-transactions.scss";
+
 import moment from "moment";
-import NumberFormat from "react-number-format";
 import React, { Component, Fragment } from "react";
+import { translate } from "react-i18next";
+import NumberFormat from "react-number-format";
 import Surface from "shared/components/surface/surface";
+import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
+import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import TableCell from "shared/components/table/components/table-cell";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
-
-import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import EmptyTransactionsIcon from "shared/media/empty-wallet.svg";
+import authService from "shared/services/auth-service";
+import { formatValue } from "shared/utils/formatter";
 
-import "./wallet-transactions.scss";
 import * as actions from "../../actions/wallet.actions";
-
 import { fetchWalletTransactions } from "../../services/wallet.services";
 import WalletTransactionActions from "./wallet-transaction-action-cell";
 import { WALLET_TRANSACTIONS_COLUMNS } from "./wallet-transactions.constants";
@@ -65,7 +64,6 @@ class WalletTransactions extends Component {
             title={t("wallet.transactions.title")}
             getItems={fetchWalletTransactions}
             dataSelector={walletTableTransactionsSelector}
-            isFetchOnMount={true}
             renderFilters={(updateFilter, filtering) => {
               return (
                 <Fragment>

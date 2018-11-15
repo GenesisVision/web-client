@@ -5,23 +5,23 @@ import React, { Fragment, PureComponent } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
-
-import { formatValue } from "shared/utils/formatter";
-import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
+import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import DetailsFavorite from "shared/components/details/details-description-section/details-description/details-favorite";
 import DetailsNotification from "shared/components/details/details-description-section/details-description/details-notificaton";
-import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
 import {
-  composeManagerDetailsUrl,
-  composeFundNotificationsUrl
+  composeFundNotificationsUrl,
+  composeManagerDetailsUrl
 } from "shared/utils/compose-url";
+import { formatValue } from "shared/utils/formatter";
 
 class FundDetailsDescription extends PureComponent {
   state = {
     isOpenInvestmentPopup: false,
     isOpenAboutLevels: false,
     isOpenEditFundPopup: false,
+    isOpenReallocateFundPopup: false,
     anchor: null
   };
 
@@ -46,12 +46,29 @@ class FundDetailsDescription extends PureComponent {
   handleApplyEditFundPopup = updateDetails => () => {
     updateDetails();
   };
+  handleOpenReallocateFundPopup = () => {
+    this.setState({ isOpenReallocateFundPopup: true });
+  };
+  handleCloseReallocateFundPopup = updateDetails => () => {
+    this.setState({ isOpenReallocateFundPopup: false });
+    updateDetails();
+  };
 
   render() {
-    const { isOpenInvestmentPopup, isOpenEditFundPopup } = this.state;
+    const {
+      isOpenInvestmentPopup,
+      isOpenEditFundPopup,
+      isOpenReallocateFundPopup
+    } = this.state;
     const {
       t,
+      status,
+      isFavorite,
+      canCloseProgram,
+      hasNotifications,
+      isOwnProgram,
       FUND,
+      ReallocateContainer,
       AssetEditContainer,
       FundDetailContext,
       FundDepositContainer,
@@ -64,17 +81,6 @@ class FundDetailsDescription extends PureComponent {
       onChangeInvestmentStatus,
       canInvest
     } = this.props;
-    const isFavorite =
-      fundDescription.personalFundDetails &&
-      fundDescription.personalFundDetails.isFavorite;
-
-    const canCloseProgram =
-      fundDescription.personalFundDetails &&
-      fundDescription.personalFundDetails.canCloseProgram;
-
-    const hasNotifications =
-      fundDescription.personalFundDetails &&
-      fundDescription.personalFundDetails.hasNotifications;
 
     const composeEditInfo = {
       id: fundDescription.id,
@@ -174,16 +180,27 @@ class FundDetailsDescription extends PureComponent {
                   >
                     {t("fund-details-page.description.invest")}
                   </GVButton>
-                  {AssetEditContainer && (
-                    <GVButton
-                      className="fund-details-description__invest-btn"
-                      color="secondary"
-                      variant="outlined"
-                      onClick={this.handleOpenEditFundPopup}
-                      disabled={!canCloseProgram}
-                    >
-                      {t("fund-details-page.description.edit-fund")}
-                    </GVButton>
+                  {isOwnProgram && (
+                    <Fragment>
+                      <GVButton
+                        className="fund-details-description__invest-btn"
+                        color="secondary"
+                        variant="outlined"
+                        onClick={this.handleOpenEditFundPopup}
+                        disabled={!canCloseProgram}
+                      >
+                        {t("fund-details-page.description.edit-fund")}
+                      </GVButton>
+                      <GVButton
+                        className="fund-details-description__invest-btn"
+                        color="secondary"
+                        variant="outlined"
+                        onClick={this.handleOpenReallocateFundPopup}
+                        disabled={status !== "Active"}
+                      >
+                        {t("fund-details-page.description.reallocate")}
+                      </GVButton>
+                    </Fragment>
                   )}
                   <FundDetailContext.Consumer>
                     {({ updateDetails }) => (
@@ -204,6 +221,17 @@ class FundDetailsDescription extends PureComponent {
                               updateDetails
                             )}
                             type={FUND}
+                          />
+                        )}
+                        {ReallocateContainer && (
+                          <ReallocateContainer
+                            key={isOpenReallocateFundPopup}
+                            id={fundDescription.id}
+                            open={isOpenReallocateFundPopup}
+                            onClose={this.handleCloseReallocateFundPopup(
+                              updateDetails
+                            )}
+                            assets={fundDescription.currentAssets}
                           />
                         )}
                       </Fragment>

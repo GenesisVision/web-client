@@ -8,6 +8,9 @@ $withdraw-button-height-mobile: $withdraw-button-height/$divider-text;
 $withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
 
 .details-investment {
+  display: inline-block;
+  width: 100%;
+  max-width: 500px;
   & div {
     box-sizing: border-box;
   }

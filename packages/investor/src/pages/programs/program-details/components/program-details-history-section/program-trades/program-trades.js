@@ -1,19 +1,19 @@
 import "./program-trades.scss";
 
-import Profitability from "shared/components/profitability/profitability";
-import TableCell from "shared/components/table/components/table-cell";
-import TableRow from "shared/components/table/components/table-row";
-import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
-import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import TableModule from "shared/components/table/components/table-module";
-import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import moment from "moment";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import BaseProfitability from "shared/components/profitability/base-profitability";
+import Profitability from "shared/components/profitability/profitability";
+import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
+import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import TableCell from "shared/components/table/components/table-cell";
+import TableModule from "shared/components/table/components/table-module";
+import TableRow from "shared/components/table/components/table-row";
+import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { formatValue } from "shared/utils/formatter";
 
-import BaseProfitability from "shared/components/profitability/base-profitability";
 import {
   PROGRAM_TRADES_COLUMNS,
   PROGRAM_TRADES_DEFAULT_FILTERS,
@@ -34,15 +34,12 @@ class ProgramTrades extends Component {
 
   render() {
     const { t, trades } = this.props;
-    let data = { trades: null, total: 0 };
-    if (trades) {
-      data.items = trades.trades;
-      data.total = trades.total;
-    }
+
+    if (!trades) return null;
+    const data = { items: trades.trades, total: trades.total };
 
     return (
       <TableModule
-        fetchOnMount={false}
         data={data}
         getItems={this.fetchProgramTrades}
         defaultFilters={PROGRAM_TRADES_DEFAULT_FILTERS}

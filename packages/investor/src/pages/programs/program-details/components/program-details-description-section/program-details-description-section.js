@@ -1,10 +1,11 @@
-import { toggleFavoriteProgram } from "modules/favorite-asset/services/favorite-program.service";
+import { toggleFavoriteProgram } from "shared/modules/favorite-asset/services/favorite-program.service";
 import { toggleReinvesting } from "modules/program-reinvesting/services/program-reinvesting.service";
 import React, { Fragment, PureComponent } from "react";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import AboutLevelsContainerComponent from "pages/app/components/about-levels/about-levels-container";
 import { ProgramDetailContext } from "pages/programs/program-details/program-details.page";
 import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
+import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
 
 import ProgramDetailsDescription from "shared/components/programs/program-details/program-details-description/program-details-description";
 
@@ -121,6 +122,7 @@ class ProgramDetailsDescriptionSection extends PureComponent {
     return (
       <Fragment>
         <ProgramDetailsDescription
+          ProgramReinvestingWidget={ProgramReinvestingWidget}
           ProgramDepositContainer={ProgramDepositContainer}
           AboutLevelsContainerComponent={AboutLevelsContainerComponent}
           ProgramDetailContext={ProgramDetailContext}

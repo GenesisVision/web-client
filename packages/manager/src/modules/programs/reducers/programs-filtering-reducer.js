@@ -7,7 +7,7 @@ import { PROGRAMS } from "../actions/programs-actions.constants";
 import {
   MAP_DEFAULT_FILTERS_FROM_SERVER,
   PROGRAMS_DEFAULT_FILTERS
-} from "../programs.constants";
+} from "shared/components/programs-table/programs.constants";
 
 const updateFilter = (state, filter) => {
   if (state.filters.some(x => x.name === filter.name)) {
