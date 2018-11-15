@@ -4,16 +4,24 @@ import { Fragment } from "react";
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { calculateValueOfEntryFee } from "shared/utils/currency-converter";
 import { formatValue } from "shared/utils/formatter";
 
 const FundWithdrawEnterPercentStep = props => {
+  const {
+    t,
+    onClick,
+    disabled,
+    exitFee,
+    feeInCurrency,
+    valueInCurrency,
+    withdrawAmount
+  } = props;
   return (
     <Fragment>
       <GVFormikField
         className="invest-field"
         name="percent"
-        label={props.t("withdraw-fund.amount-to-withdraw")}
+        label={t("withdraw-fund.amount-to-withdraw")}
         component={GVTextField}
         adornment="%"
         autoComplete="off"
@@ -22,22 +30,49 @@ const FundWithdrawEnterPercentStep = props => {
       />
       <div className="invest-popup__currency">
         <NumberFormat
-          value={formatValue(
-            calculateValueOfEntryFee(props.availableToWithdraw, props.percent)
-          )}
+          value={formatValue(valueInCurrency)}
           prefix="&asymp; "
           suffix={` GVT`}
           displayType="text"
         />
       </div>
+      <ul className="dialog-list">
+        <li className="dialog-list__item">
+          <span className="dialog-list__title">
+            {t("withdraw-fund.exit-fee")}
+          </span>
+          <span className="dialog-list__value">
+            {exitFee} %{" "}
+            <NumberFormat
+              value={formatValue(feeInCurrency)}
+              prefix=" &asymp; "
+              suffix={" GVT"}
+              displayType="text"
+            />
+          </span>
+        </li>
+        <li className="dialog-list__item">
+          <span className="dialog-list__title">
+            {t("withdraw-fund.withdraw-amount")}
+          </span>
+          <span className="dialog-list__value">
+            <NumberFormat
+              value={formatValue(withdrawAmount)}
+              prefix=" &asymp; "
+              suffix={" GVT"}
+              displayType="text"
+            />
+          </span>
+        </li>
+      </ul>
       <div className="dialog__buttons">
         <GVButton
-          onClick={props.onClick}
+          onClick={onClick}
           id="signUpFormSubmit"
           className="invest-form__submit-button"
-          disabled={props.disabled}
+          disabled={disabled}
         >
-          {props.t("withdraw-fund.next")}
+          {t("withdraw-fund.next")}
         </GVButton>
       </div>
     </Fragment>
