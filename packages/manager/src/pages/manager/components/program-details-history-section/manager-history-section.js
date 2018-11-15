@@ -16,8 +16,8 @@ import * as managerService from "../../services/manager.service";
 import ManagerTable from "./manager-table/manager-table";
 import { push } from "react-router-redux";
 import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
-import { toggleFavoriteProgramDispatchable } from "modules/favorite-asset/services/favorite-program.service";
-import { toggleFavoriteFundDispatchable } from "modules/favorite-asset/services/favorite-fund.service";
+import { toggleFavoriteProgramDispatchable } from "shared/modules/favorite-asset/services/favorite-program.service";
+import { toggleFavoriteFundDispatchable } from "shared/modules/favorite-asset/services/favorite-fund.service";
 
 const PROGRAMS_TAB = "programs";
 const FUNDS_TAB = "funds";

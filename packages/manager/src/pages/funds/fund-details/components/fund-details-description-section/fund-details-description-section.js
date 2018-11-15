@@ -4,7 +4,7 @@ import FundDetailsDescription from "shared/components/funds/fund-details/fund-de
 
 import AssetEditContainer from "modules/asset-edit/asset-edit-container";
 import { FUND } from "modules/asset-edit/asset-edit.constants";
-import { toggleFavoriteFund } from "modules/favorite-asset/services/favorite-fund.service";
+import { toggleFavoriteFund } from "shared/modules/favorite-asset/services/favorite-fund.service";
 import FundDepositContainer from "modules/fund-deposit/fund-deposit-container";
 import FundWithdrawContainer from "modules/fund-withdraw/fund-withdraw-container";
 import { toggleReinvesting } from "modules/program-reinvesting/services/program-reinvesting.service";
