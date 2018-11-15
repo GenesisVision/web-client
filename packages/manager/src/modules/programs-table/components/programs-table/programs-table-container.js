@@ -8,7 +8,7 @@ import { bindActionCreators, compose } from "redux";
 
 import { toggleFavoriteProgramDispatchable } from "../../../favorite-asset/services/favorite-program.service";
 import * as programsService from "../../services/programs-table.service";
-import ProgramsTable from "./programs-table";
+import ProgramsTable from "shared/components/programs-table/programs-table";
 
 class ProgramsContainer extends Component {
   componentDidMount() {
