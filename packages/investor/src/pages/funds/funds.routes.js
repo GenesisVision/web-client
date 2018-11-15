@@ -1,4 +1,4 @@
-import NotFoundPage from "pages/not-found/not-found.routes";
+import NotFoundPage from "shared/components/not-found/not-found.routes";
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
