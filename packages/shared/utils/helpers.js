@@ -21,7 +21,7 @@ const allowValuesNumberFormat = ({ from, to }) => values => {
 
 const getNumberWithoutSuffix = str => {
   let result = null;
-  let coincidence = str.match(/^[^\d]*(\d+)/);
+  let coincidence = str.match(/[-+]?[0-9]*\.?[0-9]+/);
 
   if (coincidence) {
     result = Number(coincidence[0]);
