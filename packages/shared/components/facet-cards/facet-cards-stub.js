@@ -1,14 +1,16 @@
-import Surface from "shared/components/surface/surface";
 import React from "react";
+import Surface from "shared/components/surface/surface";
 
 const facetsStub = [1, 2, 3, 4];
 const FacetCardsStub = () => {
   return (
-    <div className="facets-shadow">
-      <div className="facets">
-        {facetsStub.map(x => (
-          <Surface key={x} className="facet facet--stub" />
-        ))}
+    <div className="facets__wrapper facets__shadow facets__shadow--right">
+      <div className="facets__carousel">
+        <div className="facets">
+          {facetsStub.map(x => (
+            <Surface key={x} className="facet facet--stub" />
+          ))}
+        </div>
       </div>
     </div>
   );
