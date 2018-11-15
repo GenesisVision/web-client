@@ -591,6 +591,8 @@
   },
   "withdraw-fund": {
     "title": "Withdraw",
+    "exit-fee": "Exit fee",
+    "withdraw-amount": "Withdraw amount",
     "available-to-withdraw": "You invested in fund",
     "amount-to-withdraw": "Amount to withdraw",
     "next": "Next",

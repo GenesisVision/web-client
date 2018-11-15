@@ -36,35 +36,37 @@ const FundWithdrawEnterPercentStep = props => {
           displayType="text"
         />
       </div>
-      <ul className="dialog-list">
-        <li className="dialog-list__item">
-          <span className="dialog-list__title">
-            {t("withdraw-fund.exit-fee")}
-          </span>
-          <span className="dialog-list__value">
-            {exitFee} %{" "}
-            <NumberFormat
-              value={formatValue(feeInCurrency)}
-              prefix=" &asymp; "
-              suffix={" GVT"}
-              displayType="text"
-            />
-          </span>
-        </li>
-        <li className="dialog-list__item">
-          <span className="dialog-list__title">
-            {t("withdraw-fund.withdraw-amount")}
-          </span>
-          <span className="dialog-list__value">
-            <NumberFormat
-              value={formatValue(withdrawAmount)}
-              prefix=" &asymp; "
-              suffix={" GVT"}
-              displayType="text"
-            />
-          </span>
-        </li>
-      </ul>
+      {exitFee !== 0 && (
+        <ul className="dialog-list">
+          <li className="dialog-list__item">
+            <span className="dialog-list__title">
+              {t("withdraw-fund.exit-fee")}
+            </span>
+            <span className="dialog-list__value">
+              {exitFee} %{" "}
+              <NumberFormat
+                value={formatValue(feeInCurrency)}
+                prefix=" &asymp; "
+                suffix={" GVT"}
+                displayType="text"
+              />
+            </span>
+          </li>
+          <li className="dialog-list__item">
+            <span className="dialog-list__title">
+              {t("withdraw-fund.withdraw-amount")}
+            </span>
+            <span className="dialog-list__value">
+              <NumberFormat
+                value={formatValue(withdrawAmount)}
+                prefix=" &asymp; "
+                suffix={" GVT"}
+                displayType="text"
+              />
+            </span>
+          </li>
+        </ul>
+      )}
       <div className="dialog__buttons">
         <GVButton
           onClick={onClick}
