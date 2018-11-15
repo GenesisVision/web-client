@@ -20,7 +20,7 @@ import {
   PROGRAMS_COLUMNS,
   PROGRAMS_TABLE_FILTERS,
   SORTING_FILTER_VALUE
-} from "../programs.constants";
+} from "shared/components/programs-table/programs.constants";
 
 const DEFAULT_ITEMS_ON_PAGE = 12;
 

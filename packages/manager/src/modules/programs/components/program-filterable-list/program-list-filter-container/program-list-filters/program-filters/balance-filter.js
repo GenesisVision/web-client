@@ -4,7 +4,7 @@ import { translate } from "react-i18next";
 
 import FilterItem from "../../../../../../filter-pane/components/filter-item/filter-item";
 import { RANGE_FILTER_TYPE } from "../../../../../../filtering/filtering.constants";
-import { BALANCE_FILTER_NAME } from "../../../../../programs.constants";
+import { BALANCE_FILTER_NAME } from "shared/components/programs-table/programs.constants";
 
 const pointsCount = 5;
 

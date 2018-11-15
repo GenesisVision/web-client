@@ -1,4 +1,4 @@
-import { FUNDS_TABLE_COLUMNS } from "modules/funds-table/funds-table.constants";
+import { FUNDS_TABLE_COLUMNS } from "shared/components/funds-table/funds-table.constants";
 import React from "react";
 import { translate } from "react-i18next";
 import FundsTableRow from "shared/components/funds-table/fund-table-row";

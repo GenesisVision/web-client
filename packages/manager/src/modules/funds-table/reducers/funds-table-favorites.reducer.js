@@ -1,4 +1,4 @@
-import { SET_FAVORITE_FUND } from "modules/favorite-asset/actions/favorite-fund.actions";
+import { SET_FAVORITE_FUND } from "shared/modules/favorite-asset/actions/favorite-fund.actions";
 import {
   FAILURE_SUFFIX,
   REQUEST_SUFFIX

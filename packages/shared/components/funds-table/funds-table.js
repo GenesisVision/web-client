@@ -1,13 +1,13 @@
-import "shared/components/funds-table/funds-table.scss";
+import "./funds-table.scss";
+
+import React, { Fragment } from "react";
+import { translate } from "react-i18next";
 
 import { Table } from "shared/components/table/components";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import React, { Fragment } from "react";
-import { translate } from "react-i18next";
-
-import { FUNDS_TABLE_COLUMNS } from "../../funds-table.constants";
-import FundsTableRow from "shared/components/funds-table/fund-table-row";
+import { FUNDS_TABLE_COLUMNS } from "./funds-table.constants";
+import FundsTableRow from "./fund-table-row";
 
 const FundsTable = ({
   t,

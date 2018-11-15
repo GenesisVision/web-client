@@ -19,7 +19,7 @@ import {
   FUNDS_TABLE_COLUMNS,
   FUNDS_TABLE_FILTERS,
   SORTING_FILTER_VALUE
-} from "../funds-table.constants";
+} from "shared/components/funds-table/funds-table.constants";
 
 const DEFAULT_ITEMS_ON_PAGE = 12;
 

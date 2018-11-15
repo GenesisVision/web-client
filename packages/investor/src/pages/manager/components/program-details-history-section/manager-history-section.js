@@ -2,12 +2,12 @@ import "./manager-history.scss";
 
 import Surface from "shared/components/surface/surface";
 import { GVTab, GVTabs } from "gv-react-components";
-import { toggleFavoriteFundDispatchable } from "modules/favorite-asset/services/favorite-fund.service";
-import { toggleFavoriteProgramDispatchable } from "modules/favorite-asset/services/favorite-program.service";
+import { toggleFavoriteFundDispatchable } from "shared/modules/favorite-asset/services/favorite-fund.service";
+import { toggleFavoriteProgramDispatchable } from "shared/modules/favorite-asset/services/favorite-program.service";
 import FundsTableRow from "shared/components/funds-table/fund-table-row";
-import { FUNDS_TABLE_COLUMNS } from "modules/funds-table/funds-table.constants";
+import { FUNDS_TABLE_COLUMNS } from "shared/components/funds-table/funds-table.constants";
 import ProgramTableRow from "shared/components/programs-table/program-table-row";
-import { PROGRAMS_COLUMNS } from "modules/programs-table/programs.constants";
+import { PROGRAMS_COLUMNS } from "shared/components/programs-table/programs.constants";
 import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";

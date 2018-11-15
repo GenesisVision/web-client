@@ -8,7 +8,7 @@ import {
   LEVEL_FILTER_NAME,
   LEVEL_MAX_FILTER_VALUE,
   LEVEL_MIN_FILTER_VALUE
-} from "../../../../../programs.constants";
+} from "shared/components/programs-table/programs.constants";
 
 const LevelFilter = ({ t, filtering, onFilterChange }) => {
   const handleFilterChange = value =>

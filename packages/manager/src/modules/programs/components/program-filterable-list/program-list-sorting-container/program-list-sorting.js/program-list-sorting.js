@@ -4,7 +4,7 @@ import classnames from "classnames";
 import React from "react";
 import Select from "react-select";
 
-import { SORTING_OPTIONS } from "../../../../programs.constants";
+import { SORTING_OPTIONS } from "shared/components/programs-table/programs.constants";
 
 const ProgramListSorting = ({ sorting, onSortingChange }) => {
   const fullValue = sorting.value || sorting.defaultValue;

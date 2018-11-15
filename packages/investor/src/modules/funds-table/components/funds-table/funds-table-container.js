@@ -4,9 +4,9 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { bindActionCreators, compose } from "redux";
 
-import { toggleFavoriteFundDispatchable } from "../../../favorite-asset/services/favorite-fund.service";
+import { toggleFavoriteFundDispatchable } from "shared/modules/favorite-asset/services/favorite-fund.service";
 import * as fundsService from "../../services/funds-table.service";
-import FundsTable from "./funds-table";
+import FundsTable from "shared/components/funds-table/funds-table";
 
 class FundsTableContainer extends Component {
   componentDidMount() {

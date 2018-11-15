@@ -7,7 +7,7 @@ import VerificationStatus from "shared/components/verification-status/verificati
 import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import PhoneVerification from "shared/components/phone-verification/phone-verification";
-import UploadButton from "modules/upload-button/upload-button";
+import UploadButton from "shared/modules/upload-button/upload-button";
 import moment from "moment";
 import PropTypes from "prop-types";
 import React, { Component, Fragment } from "react";
