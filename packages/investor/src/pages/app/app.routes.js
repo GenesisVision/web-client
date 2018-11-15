@@ -3,7 +3,7 @@ import DashboardRoutes from "pages/dashboard/dashboard.routes";
 import ManagerPage, {
   MANAGER_DETAILS_ROUTE_REGEXP
 } from "pages/manager/manager.page";
-import NotFoundPage from "pages/not-found/not-found.routes";
+import NotFoundPage from "shared/components/not-found/not-found.routes";
 import NotificationRoutes, {
   NOTIFICATIONS_ROUTE
 } from "pages/notifications/notifications.routes";

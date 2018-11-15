@@ -3,7 +3,7 @@ import ProgramsContainer from "modules/programs-table/components/programs-table/
 import React from "react";
 import { translate } from "react-i18next";
 
-import FacetCardsContainer from "./components/facet-cards/faset-cards-container";
+import FacetCardsContainer from "shared/components/facet-cards/faset-cards-container";
 import ProgramsTabsContainer from "./components/programs-tabs/programs-tabs-container";
 
 const ProgramsPage = ({ t }) => {
@@ -11,7 +11,7 @@ const ProgramsPage = ({ t }) => {
   return (
     <Page title={title}>
       <ProgramsTabsContainer />
-      <FacetCardsContainer title={title} />
+      <FacetCardsContainer title={title} assetsFacets={"programsFacets"} />
       <ProgramsContainer title={"All programs"} />
     </Page>
   );

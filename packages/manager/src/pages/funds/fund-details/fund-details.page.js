@@ -7,7 +7,7 @@ import { push } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
 
 import { LOGIN_ROUTE } from "../../auth/login/login.routes";
-import NotFoundPage from "../../not-found/not-found.routes";
+import NotFoundPage from "shared/components/not-found/not-found.routes";
 import FundDetailsDescriptionSection from "./components/fund-details-description-section/fund-details-description-section";
 import FundDetailsHistorySection from "./components/fund-details-history-section/fund-details-history-section";
 import FundDetailsStatisticSection from "shared/components/funds/fund-details/fund-details-statistics-section/fund-details-statistic-section";

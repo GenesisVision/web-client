@@ -1,4 +1,4 @@
-import { NOT_FOUND_PAGE_ROUTE } from "pages/not-found/not-found.routes";
+import { NOT_FOUND_PAGE_ROUTE } from "shared/components/not-found/not-found.routes";
 import { PureComponent } from "react";
 import { connect } from "react-redux";
 import { replace } from "react-router-redux";
