@@ -7,7 +7,7 @@ import DashboardRoutes from "pages/dashboard/dashboard.routes";
 import ManagerPage, {
   MANAGER_DETAILS_ROUTE_REGEXP
 } from "pages/manager/manager.page";
-import NotFoundPage from "pages/not-found/not-found.routes";
+import NotFoundPage from "shared/components/not-found/not-found.routes";
 import PrivateRoute from "pages/private-route";
 import { PROFILE_ROUTE } from "pages/profile/profile.constants";
 import ProfileRoutes from "pages/profile/profile.routes";
