@@ -25,20 +25,22 @@ const WithdrawConfirmStep = props => {
           {t("withdraw-fund.withdrawing")}
           <span className="dialog-list__value">{formatValue(percent)} %</span>
         </li>
-        <li className="dialog-list__item">
-          <span className="dialog-list__title">
-            {t("withdraw-fund.exit-fee")}
-          </span>
-          <span className="dialog-list__value">
-            {exitFee} %{" "}
-            <NumberFormat
-              value={formatValue(feeInCurrency)}
-              prefix=" &asymp; "
-              suffix={" GVT"}
-              displayType="text"
-            />
-          </span>
-        </li>
+        {exitFee !== 0 && (
+          <li className="dialog-list__item">
+            <span className="dialog-list__title">
+              {t("withdraw-fund.exit-fee")}
+            </span>
+            <span className="dialog-list__value">
+              {exitFee} %{" "}
+              <NumberFormat
+                value={formatValue(feeInCurrency)}
+                prefix=" &asymp; "
+                suffix={" GVT"}
+                displayType="text"
+              />
+            </span>
+          </li>
+        )}
         <li className="dialog-list__item">
           <span className="dialog-list__title">
             {t("withdraw-fund.withdraw-amount")}
