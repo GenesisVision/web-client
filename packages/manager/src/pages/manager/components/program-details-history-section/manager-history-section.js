@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
 import FundsTableRow from "shared/components/funds-table/fund-table-row";
-import { FUNDS_TABLE_COLUMNS } from "modules/funds-table/funds-table.constants";
+import { FUNDS_TABLE_COLUMNS } from "shared/components/funds-table/funds-table.constants";
 import ProgramTableRow from "shared/components/programs-table/program-table-row";
 import { PROGRAMS_COLUMNS } from "shared/components/programs-table/programs.constants";
 import * as service from "../../services/manager.service";
