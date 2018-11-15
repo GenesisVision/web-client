@@ -61,7 +61,7 @@ export const composeRequestValue = (
         [fromFilterName]: moment(value.dateStart)
           .startOf("day")
           .toISOString(),
-        [toFilterName]: moment()
+        [toFilterName]: moment(value.dateEnd)
           .add(1, "day")
           .startOf("day")
           .toISOString()
