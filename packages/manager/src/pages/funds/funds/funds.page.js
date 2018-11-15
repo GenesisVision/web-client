@@ -8,7 +8,7 @@ import FacetCardsContainer from "./components/facet-cards/faset-cards-container"
 const FundsPage = ({ t }) => {
   return (
     <Page title={t("funds-page.title")}>
-      <FacetCardsContainer />
+      <FacetCardsContainer title={t("funds-page.title")} />
       <FundsTableContainer title={"All funds"} />
     </Page>
   );
