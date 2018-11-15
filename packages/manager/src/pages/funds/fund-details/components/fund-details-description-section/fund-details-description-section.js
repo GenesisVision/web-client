@@ -145,9 +145,13 @@ class FundDetailsDescriptionSection extends PureComponent {
     const status =
       fundDescription.personalFundDetails &&
       fundDescription.personalFundDetails.status;
+    const possibleReallocationTime =
+      fundDescription.personalFundDetails &&
+      fundDescription.personalFundDetails.possibleReallocationTime;
     return (
       <Fragment>
         <FundDetailsDescription
+          possibleReallocationTime={possibleReallocationTime}
           canReallocate={canReallocate}
           status={status}
           isFavorite={isFavorite}

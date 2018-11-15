@@ -15,6 +15,7 @@ import {
   composeManagerDetailsUrl
 } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
+import moment from "moment";
 
 class FundDetailsDescription extends PureComponent {
   state = {
@@ -62,6 +63,7 @@ class FundDetailsDescription extends PureComponent {
     } = this.state;
     const {
       t,
+      possibleReallocationTime,
       canReallocate,
       status,
       isFavorite,
@@ -192,15 +194,27 @@ class FundDetailsDescription extends PureComponent {
                       >
                         {t("fund-details-page.description.edit-fund")}
                       </GVButton>
-                      <GVButton
-                        className="fund-details-description__invest-btn"
-                        color="secondary"
-                        variant="outlined"
-                        onClick={this.handleOpenReallocateFundPopup}
-                        disabled={!canReallocate}
-                      >
-                        {t("fund-details-page.description.reallocate")}
-                      </GVButton>
+                      <div className="fund-details-description__reallocate-container">
+                        <GVButton
+                          className="fund-details-description__invest-btn"
+                          color="secondary"
+                          variant="outlined"
+                          onClick={this.handleOpenReallocateFundPopup}
+                          disabled={!canReallocate}
+                        >
+                          {t("fund-details-page.description.reallocate")}
+                        </GVButton>
+                        {!canReallocate && possibleReallocationTime && (
+                          <div className="fund-details-description__reallocate-message">
+                            {t(
+                              "fund-details-page.description.disable-reallocation-message"
+                            )}{" "}
+                            {moment(possibleReallocationTime).format(
+                              "D MMM YYYY"
+                            )}
+                          </div>
+                        )}
+                      </div>
                     </Fragment>
                   )}
                   <FundDetailContext.Consumer>
