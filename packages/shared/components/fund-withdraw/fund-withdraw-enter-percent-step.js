@@ -16,6 +16,10 @@ const FundWithdrawEnterPercentStep = props => {
     valueInCurrency,
     withdrawAmount
   } = props;
+  const isAllow = values =>
+    !values.floatValue ||
+    (values.floatValue >= 0.01 && values.floatValue <= 100);
+
   return (
     <Fragment>
       <GVFormikField
@@ -27,6 +31,7 @@ const FundWithdrawEnterPercentStep = props => {
         autoComplete="off"
         InputComponent={NumberFormat}
         allowNegative={false}
+        isAllowed={isAllow}
       />
       <div className="invest-popup__currency">
         <NumberFormat
