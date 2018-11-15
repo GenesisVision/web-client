@@ -101,7 +101,7 @@ export default compose(
     validationSchema: ({ t, availableToWithdraw }) =>
       object().shape({
         percent: number()
-          .min(0)
+          .min(0.01)
           .max(100, t("withdraw-fund.validation.amount-more-than-available"))
           .required(t("withdraw-fund.validation.amount-is-required"))
       }),
