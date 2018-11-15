@@ -1,7 +1,7 @@
-import Dialog from "shared/components/dialog/dialog";
 import WalletAddFundsPopup from "modules/wallet-add-funds/components/wallet-add-funds-container";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
+import Dialog from "shared/components/dialog/dialog";
 
 class WalletAddFundsContainer extends Component {
   handleClose = () => {

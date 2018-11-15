@@ -1,6 +1,3 @@
-import GVqr from "shared/components/gv-qr/gv-qr";
-import CopyIcon from "shared/components/icon/copy-icon";
-import Select from "shared/components/select/select";
 import copy from "copy-to-clipboard";
 import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
@@ -9,6 +6,9 @@ import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
+import GVqr from "shared/components/gv-qr/gv-qr";
+import CopyIcon from "shared/components/icon/copy-icon";
+import Select from "shared/components/select/select";
 import { convertToCurrency } from "shared/utils/currency-converter";
 import { formatValue } from "shared/utils/formatter";
 
