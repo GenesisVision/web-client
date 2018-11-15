@@ -4,7 +4,6 @@ import { translate } from "react-i18next";
 
 import FacetContainer from "shared/components/facet-container/facet-container";
 import ProgramsContainer from "modules/programs-table/components/programs-table/programs-table-container";
-import { getPrograms } from "modules/programs-table/services/programs-table.service";
 import { getCurrentFacet } from "./services/programs-facet.service";
 
 const ProgramsFacetPage = ({ t }) => (
@@ -12,7 +11,6 @@ const ProgramsFacetPage = ({ t }) => (
     <FacetContainer
       asset={"programsFacets"}
       TableContainer={ProgramsContainer}
-      getPrograms={getPrograms}
       getCurrentFacet={getCurrentFacet}
     />
   </Page>

@@ -44,9 +44,9 @@ const mapStateToProps = (state, props) => {
 };
 
 const mapDispatchToProps = (dispatch, props) => {
-  const { getCurrentFacet, getPrograms } = props;
+  const { getCurrentFacet } = props;
   return {
-    service: bindActionCreators({ getCurrentFacet, getPrograms }, dispatch)
+    service: bindActionCreators({ getCurrentFacet }, dispatch)
   };
 };
 
