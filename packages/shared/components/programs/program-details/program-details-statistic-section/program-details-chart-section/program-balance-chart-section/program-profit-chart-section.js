@@ -1,16 +1,15 @@
+import React, { Fragment } from "react";
 import ChartPeriod from "shared/components/chart/chart-period/chart-period";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import React, { Fragment } from "react";
 
 import ProgramBalanceChart from "./program-balance-chart";
 
 const ProgramBalanceChartSection = ({
-  balanceChartData,
+  balanceChart,
   period,
   onPeriodChange,
   currency
 }) => {
-  const { data: balanceChart } = balanceChartData;
   if (!balanceChart) return null;
   return (
     <Fragment>

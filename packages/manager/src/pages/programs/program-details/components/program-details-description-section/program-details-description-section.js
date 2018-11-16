@@ -1,17 +1,17 @@
-import { toggleFavoriteProgram } from "shared/modules/favorite-asset/services/favorite-program.service";
-import { toggleReinvesting } from "modules/program-reinvesting/services/program-reinvesting.service";
-import React, { Fragment, PureComponent } from "react";
-import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
-import AboutLevelsContainerComponent from "pages/app/components/about-levels/about-levels-container";
-import { ProgramDetailContext } from "pages/programs/program-details/program-details.page";
 import AssetEditContainer from "modules/asset-edit/asset-edit-container";
 import { PROGRAM } from "modules/asset-edit/asset-edit.constants";
+import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
+import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
+import { toggleReinvesting } from "modules/program-reinvesting/services/program-reinvesting.service";
 import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
+import AboutLevelsContainerComponent from "pages/app/components/about-levels/about-levels-container";
+import { ProgramDetailContext } from "pages/programs/program-details/program-details.page";
+import React, { Fragment, PureComponent } from "react";
+import ProgramDetailsDescription from "shared/components/programs/program-details/program-details-description/program-details-description";
+import { toggleFavoriteProgram } from "shared/modules/favorite-asset/services/favorite-program.service";
+
 import ClosePeriodContainer from "./close-period/close-period-container";
 import CloseProgramContainer from "./close-program/close-program-container";
-import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
-
-import ProgramDetailsDescription from "shared/components/programs/program-details/program-details-description/program-details-description";
 
 const composeInvestmentData = programDetails => {
   const { statistic, personalProgramDetails } = programDetails;
@@ -46,10 +46,10 @@ class ProgramDetailsDescriptionSection extends PureComponent {
 
   static getDerivedStateFromProps(props, state) {
     let newState = {};
-    if (state.prevProps !== props.programDescriptionData) {
-      newState.prevProps = props.programDescriptionData;
-      newState.programDescription = props.programDescriptionData.data;
-      newState.ui = { isPending: props.programDescriptionData.isPending };
+    if (state.prevProps !== props.programDescription) {
+      newState.prevProps = props.programDescription;
+      newState.programDescription = props.programDescription;
+      newState.ui = { isPending: props.programDescription };
     }
 
     return newState;

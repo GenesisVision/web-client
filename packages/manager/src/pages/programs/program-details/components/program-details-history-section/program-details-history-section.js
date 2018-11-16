@@ -1,14 +1,14 @@
 import "./program-details-history.scss";
 
-import Surface from "shared/components/surface/surface";
 import { GVTab, GVTabs } from "gv-react-components";
-import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import { EVENT_TYPE_FILTER_DEFAULT_VALUE } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
-import PortfolioEventsTableComponent from "shared/components/dashboard/dashboard-portfolio-events-all/dashboard-portfolio-events-table/dashboard-portfolio-events-all-table";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import connect from "react-redux/es/connect/connect";
 import { compose } from "redux";
+import PortfolioEventsTableComponent from "shared/components/dashboard/dashboard-portfolio-events-all/dashboard-portfolio-events-table/dashboard-portfolio-events-all-table";
+import Surface from "shared/components/surface/surface";
+import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { EVENT_TYPE_FILTER_DEFAULT_VALUE } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
 
 import { fetchPortfolioEvents } from "../../../../dashboard/services/dashboard-events.services";
 import ProgramTrades from "./program-trades/program-trades";
@@ -22,7 +22,7 @@ const EVENTS_FILTERING = {
 class ProgramDetailsHistorySection extends PureComponent {
   state = {
     tab: TRADES_TAB,
-    tradesData: { data: null, isPending: true },
+    trades: null,
     prevProps: null
   };
 
@@ -34,7 +34,7 @@ class ProgramDetailsHistorySection extends PureComponent {
     let newState = {};
     if (state.prevProps !== props) {
       newState.prevProps = props;
-      newState.tradesData = props.tradesData;
+      newState.trades = props.trades;
     }
     return newState;
   }
@@ -45,11 +45,11 @@ class ProgramDetailsHistorySection extends PureComponent {
       t,
       programId,
       currency,
-      tradesData,
+      trades,
       isAuthenticated,
       isInvested
     } = this.props;
-    if (!tradesData) return null;
+    if (!trades) return null;
     return (
       <Surface className="program-details-history">
         <div className="program-details-history__header">
@@ -78,7 +78,7 @@ class ProgramDetailsHistorySection extends PureComponent {
         <div>
           {tab === TRADES_TAB && (
             <ProgramTrades
-              trades={tradesData.data}
+              trades={trades}
               programId={programId}
               currency={currency}
             />

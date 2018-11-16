@@ -1,25 +1,17 @@
 import "./program-details-statistics.scss";
 
-import { ChartPeriodType } from "shared/components/chart/chart-period/chart-period.helpers";
-import ProgramPeriodLine from "shared/components/program-period/program-period-line/program-period-line";
-import Surface from "shared/components/surface/surface";
-import moment from "moment";
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { ChartPeriodType } from "shared/components/chart/chart-period/chart-period.helpers";
+import ProgramPeriodLine from "shared/components/program-period/program-period-line/program-period-line";
+import Surface from "shared/components/surface/surface";
 import { formatValue } from "shared/utils/formatter";
+
 import DetailsStatisticItem from "../../../../details-statistic-item/details-statistic-item";
 
-const ProgramDetailsStatistics = ({
-  t,
-  statisticData,
-  profitChartData,
-  period
-}) => {
-  const { data: statistic, isPendingStatistic } = statisticData;
-  const { data: profitChart, isPendingProfitChart } = profitChartData;
-
-  if (!statistic || isPendingStatistic || isPendingProfitChart) return null;
+const ProgramDetailsStatistics = ({ t, statistic, profitChart, period }) => {
+  if (!statistic) return null;
   return (
     <Surface className="program-details-statistics">
       <div className="program-details-statistics__heading">

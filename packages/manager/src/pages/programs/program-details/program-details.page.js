@@ -1,16 +1,16 @@
 import "./program-details.scss";
 
-import Page from "shared/components/page/page";
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
+import NotFoundPage from "shared/components/not-found/not-found.routes";
+import Page from "shared/components/page/page";
+import ProgramDetailsStatisticSection from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 
 import { LOGIN_ROUTE } from "../../auth/login/login.routes";
-import NotFoundPage from "shared/components/not-found/not-found.routes";
 import ProgramDetailsDescriptionSection from "./components/program-details-description-section/program-details-description-section";
 import ProgramDetailsHistorySection from "./components/program-details-history-section/program-details-history-section";
-import ProgramDetailsStatisticSection from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import {
   getProgramDescription,
   getProgramHistory,
@@ -29,11 +29,11 @@ class ProgramDetailsPage extends PureComponent {
 
   constructor(props) {
     super(props);
-    this.description = { data: null, isPending: true };
-    this.profitChart = { data: null, isPending: true };
-    this.balanceChart = { data: null, isPending: true };
-    this.statistic = { data: null, isPending: true };
-    this.trades = { data: null, isPending: true };
+    this.description = null;
+    this.profitChart = null;
+    this.balanceChart = null;
+    this.statistic = null;
+    this.trades = null;
   }
 
   componentDidMount() {
@@ -55,18 +55,18 @@ class ProgramDetailsPage extends PureComponent {
       })
       .then(() => {
         this.setState({ isPending: true });
-        return getProgramStatistic(this.description.data.id);
+        return getProgramStatistic(this.description.id);
       })
       .catch()
       .then(data => {
-        this.profitChart = data.profitChartData;
-        this.balanceChart = data.balanceChartData;
-        this.statistic = data.statisticData;
+        this.profitChart = data.profitChart;
+        this.balanceChart = data.balanceChart;
+        this.statistic = data.statistic;
         this.setState({ isPending: false });
       })
       .then(() => {
         this.setState({ isPending: true });
-        return getProgramHistory(this.description.data.id, currency);
+        return getProgramHistory(this.description.id, currency);
       })
       .then(data => {
         this.trades = data.trades;
@@ -79,12 +79,10 @@ class ProgramDetailsPage extends PureComponent {
 
   changeInvestmentStatus = () => {
     this.setState({ isPending: true });
-    this.props.service
-      .getProgramDescription(this.description.data.id)
-      .then(data => {
-        this.description = data;
-        this.setState({ isPending: false });
-      });
+    this.props.service.getProgramDescription(this.description.id).then(data => {
+      this.description = data;
+      this.setState({ isPending: false });
+    });
   };
 
   render() {
@@ -94,12 +92,12 @@ class ProgramDetailsPage extends PureComponent {
       return <NotFoundPage />;
     }
 
-    if (!this.description.data) return null;
+    if (!this.description) return null;
     const isInvested =
-      this.description.data.personalProgramDetails &&
-      this.description.data.personalProgramDetails.isInvested;
+      this.description.personalProgramDetails &&
+      this.description.personalProgramDetails.isInvested;
     return (
-      <Page title={this.description.data.title}>
+      <Page title={this.description.title}>
         <ProgramDetailContext.Provider
           value={{
             updateDetails: this.updateDetails
@@ -108,7 +106,7 @@ class ProgramDetailsPage extends PureComponent {
           <div className="program-details">
             <div className="program-details__section">
               <ProgramDetailsDescriptionSection
-                programDescriptionData={this.description}
+                programDescription={this.description}
                 isAuthenticated={isAuthenticated}
                 redirectToLogin={service.redirectToLogin}
                 onChangeInvestmentStatus={this.changeInvestmentStatus}
@@ -117,19 +115,18 @@ class ProgramDetailsPage extends PureComponent {
             <div className="program-details__section">
               <ProgramDetailsStatisticSection
                 getProgramStatistic={getProgramStatistic}
-                programId={this.description.data.id}
+                programId={this.description.id}
                 currency={currency}
-                statisticData={this.statistic}
-                profitChartData={this.profitChart}
-                balanceChartData={this.balanceChart}
+                statistic={this.statistic}
+                profitChart={this.profitChart}
+                balanceChart={this.balanceChart}
               />
             </div>
             <div className="program-details__history">
               <ProgramDetailsHistorySection
-                programId={this.description.data.id}
+                programId={this.description.id}
                 currency={currency}
-                tradesData={this.trades}
-                eventsData={this.events}
+                trades={this.trades}
                 isInvested={isInvested}
               />
             </div>

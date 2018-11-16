@@ -1,9 +1,9 @@
 import "./program-details-chart-section.scss";
 
-import Surface from "shared/components/surface/surface";
 import { GVTab, GVTabs } from "gv-react-components";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
+import Surface from "shared/components/surface/surface";
 
 import ProgramBalanceChartSection from "./program-balance-chart-section/program-profit-chart-section";
 import ProgramProfitChartSection from "./program-profit-chart-section/program-profit-chart-section";
@@ -19,13 +19,7 @@ class ProgramDetailsChartSection extends PureComponent {
     this.setState({ tab });
   };
   render() {
-    const {
-      t,
-      period,
-      onPeriodChange,
-      profitChartData,
-      balanceChartData
-    } = this.props;
+    const { t, period, onPeriodChange, profitChart, balanceChart } = this.props;
 
     const { tab } = this.state;
 
@@ -48,14 +42,14 @@ class ProgramDetailsChartSection extends PureComponent {
         </div>
         {tab === PROFIT_TAB && (
           <ProgramProfitChartSection
-            profitChartData={profitChartData}
+            profitChart={profitChart}
             period={period}
             onPeriodChange={onPeriodChange}
           />
         )}
         {tab === BALANCE_TAB && (
           <ProgramBalanceChartSection
-            balanceChartData={balanceChartData}
+            balanceChart={balanceChart}
             period={period}
             onPeriodChange={onPeriodChange}
           />

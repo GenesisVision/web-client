@@ -42,24 +42,24 @@ export const getProgramStatistic = (
     programsApi.v10ProgramsByIdChartsBalanceGet(programId, chartFilter)
   ]).then(([profitChart, balanceChart]) => {
     const statistic = {
-      trades: profitChart.data.trades,
-      successTradesPercent: profitChart.data.successTradesPercent,
-      profitFactor: profitChart.data.profitFactor,
-      investors: profitChart.data.investors,
-      sharpeRatio: profitChart.data.sharpeRatio,
-      sortinoRatio: profitChart.data.sortinoRatio,
-      maxDrawdown: profitChart.data.maxDrawdown,
-      periodStarts: profitChart.data.lastPeriodStarts,
-      periodEnds: profitChart.data.lastPeriodEnds
+      trades: profitChart.trades,
+      successTradesPercent: profitChart.successTradesPercent,
+      profitFactor: profitChart.profitFactor,
+      investors: profitChart.investors,
+      sharpeRatio: profitChart.sharpeRatio,
+      sortinoRatio: profitChart.sortinoRatio,
+      maxDrawdown: profitChart.maxDrawdown,
+      periodStarts: profitChart.lastPeriodStarts,
+      periodEnds: profitChart.lastPeriodEnds
     };
     const profitChartData = {
-      balance: profitChart.data.balance,
-      totalGvtProfit: profitChart.data.totalGvtProfit,
-      totalProgramCurrencyProfit: profitChart.data.totalProgramCurrencyProfit,
-      programCurrency: profitChart.data.programCurrency,
-      profitChangePercent: profitChart.data.profitChangePercent,
-      pnLChart: profitChart.data.pnLChart,
-      equityChart: profitChart.data.equityChart
+      balance: profitChart.balance,
+      totalGvtProfit: profitChart.totalGvtProfit,
+      totalProgramCurrencyProfit: profitChart.totalProgramCurrencyProfit,
+      programCurrency: profitChart.programCurrency,
+      profitChangePercent: profitChart.profitChangePercent,
+      pnLChart: profitChart.pnLChart,
+      equityChart: profitChart.equityChart
     };
 
     return { statistic, profitChart: profitChartData, balanceChart };
@@ -74,12 +74,11 @@ export const getProgramHistory = (programId, currency) => {
     defaultFilters: PROGRAM_TRADES_DEFAULT_FILTERS
   });
 
-  return Promise.all([
-    getProgramTrades({ programId, currency, filters: tradesFilters }),
-    getProgramEvents()
-  ]).then(([trades]) => ({
-    trades
-  }));
+  return getProgramTrades({ programId, currency, filters: tradesFilters }).then(
+    trades => ({
+      trades
+    })
+  );
 };
 
 export const getProgramTrades = ({ programId, currency, filters }) => {
@@ -88,10 +87,6 @@ export const getProgramTrades = ({ programId, currency, filters }) => {
     currency
   };
   return programsApi.v10ProgramsByIdTradesGet(programId, opts);
-};
-
-export const getProgramEvents = () => {
-  return Promise.resolve();
 };
 
 export const closeProgram = (programId, opts) => dispatch => {
