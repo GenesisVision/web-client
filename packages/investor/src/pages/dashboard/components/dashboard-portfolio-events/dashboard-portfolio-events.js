@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 import DashboardPortfolioEvent, {
   DashboardPortfolioEventShape
-} from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event/dashboard-portfolio-event";
+} from "./dashboard-portfolio-event/dashboard-portfolio-event";
 
 const DashboardPortfolioEvents = ({ t, events, fullEventsUrl, title }) => (
   <Fragment>

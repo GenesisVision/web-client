@@ -1,8 +1,8 @@
 import "./dashboard-portfolio-event-logo.scss";
 
 import classnames from "classnames";
-import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import React from "react";
+import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import EventCancelledIconRed from "shared/media/event-cancelled-red.svg";
 import EventCancelledIcon from "shared/media/event-cancelled.svg";
 import EventEndedRedIcon from "shared/media/event-ended-red.svg";
