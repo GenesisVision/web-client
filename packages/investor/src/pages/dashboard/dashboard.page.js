@@ -1,4 +1,4 @@
-import "./dashboard.scss";
+import "shared/components/dashboard/dashboard.scss";
 
 import React from "react";
 import { translate } from "react-i18next";
