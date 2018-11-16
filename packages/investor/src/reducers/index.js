@@ -1,9 +1,9 @@
 import fundDepositReducer from "modules/fund-deposit/reducer/fund-deposit.reducer";
 import headerReducer from "modules/header/reducer/header-reducer";
-import notificationSettingsReducer from "modules/notification-settings/reducers/notification-settings.reducers";
+import notificationSettingsReducer from "shared/modules/notification-settings/reducers/notification-settings.reducers";
 import programDepositReducer from "modules/program-deposit/reducer/program-deposit.reducer";
-import programNotificationsReducer from "modules/program-notifications/reducers/program-notifications.reducers";
-import fundNotificationsReducer from "modules/fund-notifications/reducers/fund-notifications.reducers";
+import programNotificationsReducer from "shared/modules/program-notifications/reducers/program-notifications.reducers";
+import fundNotificationsReducer from "shared/modules/fund-notifications/reducers/fund-notifications.reducers";
 import notificationsReducer from "pages/app/components/notifications/reducers/notifications.reducers";
 import { loadingBarReducer } from "react-redux-loading-bar";
 import { routerReducer } from "react-router-redux";
