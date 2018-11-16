@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
+import { PROFILE_ROUTE } from "shared/components/profile/profile.constants";
+import profileApi from "shared/services/api-client/profile-api";
+import authService from "shared/services/auth-service";
 import history from "shared/utils/history";
 
-import { PROFILE_ROUTE } from "shared/components/profile/profile.constants";
-import { profileApiProxy } from "shared/services/api-client/profile-api";
-import authService from "shared/services/auth-service";
 import AboutForm from "./about-form";
 
 class About extends Component {
@@ -14,12 +14,12 @@ class About extends Component {
   };
   handleSubmit = model => {
     this.setState({ isPending: true });
-    profileApiProxy
+    profileApi
       .v10ProfileUpdatePost(authService.getAuthArg(), {
         model
       })
       .then(data => {
-        this.setState({ ...data }, () => {
+        this.setState({ data }, () => {
           history.push(PROFILE_ROUTE);
         });
       })

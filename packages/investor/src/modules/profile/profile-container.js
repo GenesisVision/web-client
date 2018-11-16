@@ -3,9 +3,9 @@ import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { profileApiProxy } from "shared/services/api-client/profile-api";
-import authService from "shared/services/auth-service";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
+import profileApi from "shared/services/api-client/profile-api";
+import authService from "shared/services/auth-service";
 
 class ProfileContainer extends Component {
   success = text => {
@@ -22,7 +22,7 @@ class ProfileContainer extends Component {
   handleEdit = values => {
     const model = pickBy(values, str => Boolean(str));
     this.setState({ isPending: true });
-    profileApiProxy
+    profileApi
       .v10ProfilePersonalUpdatePost(authService.getAuthArg(), {
         model
       })
@@ -38,16 +38,16 @@ class ProfileContainer extends Component {
 
   componentDidMount() {
     this.setState({ isPending: true });
-    profileApiProxy
+    profileApi
       .v10ProfileGet(authService.getAuthArg())
-      .then(data => this.setState({ ...data }));
+      .then(data => this.setState({ data }));
   }
 
   fetch() {
     this.setState({ isPending: true });
-    profileApiProxy
+    profileApi
       .v10ProfileGet(authService.getAuthArg())
-      .then(data => this.setState({ ...data }));
+      .then(data => this.setState({ data }));
   }
 
   render() {

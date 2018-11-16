@@ -1,9 +1,9 @@
-import authActions from "shared/actions/auth-actions";
 import { fetchProfileHeaderInfo } from "modules/header/actions/header-actions";
-import { authApiProxy } from "shared/services/api-client/auth-api";
-import { profileApiProxy } from "shared/services/api-client/profile-api";
-import authService from "shared/services/auth-service";
+import authActions from "shared/actions/auth-actions";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
+import { authApiProxy } from "shared/services/api-client/auth-api";
+import profileApi from "shared/services/api-client/profile-api";
+import authService from "shared/services/auth-service";
 import filesService from "shared/services/file-service";
 
 export const updateProfileAvatar = ({
@@ -17,7 +17,7 @@ export const updateProfileAvatar = ({
     .uploadFileProxy(croppedImage, authorization)
     .then(logoId => {
       photoSrc = filesService.getFileUrl(logoId);
-      return profileApiProxy.v10ProfileAvatarUpdateByFileIdPost(
+      return profileApi.v10ProfileAvatarUpdateByFileIdPost(
         logoId,
         authorization
       );
@@ -40,7 +40,7 @@ export const updateProfileAvatar = ({
 export const removeProfileAvatar = ({ submitCallback }) => dispatch => {
   const authorization = authService.getAuthArg();
 
-  profileApiProxy
+  profileApi
     .v10ProfileAvatarRemovePost(authorization)
     .then(() => dispatch(fetchProfileHeaderInfo()))
     .then(() => {
