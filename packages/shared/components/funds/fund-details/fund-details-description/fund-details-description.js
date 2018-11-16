@@ -250,15 +250,17 @@ class FundDetailsDescription extends PureComponent {
                     )}
                   </FundDetailContext.Consumer>
                 </div>
-                <DetailsInvestment
-                  WithdrawContainer={FundWithdrawContainer}
-                  canWithdraw={canWithdraw}
-                  className={"fund-details-description__your-investment"}
-                  assetCurrency={"GVT"}
-                  {...composeInvestmentData(fundDescription)}
-                  onChangeInvestmentStatus={onChangeInvestmentStatus}
-                />
               </Fragment>
+            )}
+            {status !== "Ended" && (
+              <DetailsInvestment
+                WithdrawContainer={FundWithdrawContainer}
+                canWithdraw={canWithdraw}
+                className={"fund-details-description__your-investment"}
+                assetCurrency={"GVT"}
+                {...composeInvestmentData(fundDescription)}
+                onChangeInvestmentStatus={onChangeInvestmentStatus}
+              />
             )}
           </div>
         </div>

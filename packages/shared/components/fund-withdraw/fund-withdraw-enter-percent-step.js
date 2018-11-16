@@ -74,6 +74,7 @@ const FundWithdrawEnterPercentStep = props => {
       )}
       <div className="dialog__buttons">
         <GVButton
+          type="submit"
           onClick={onClick}
           id="signUpFormSubmit"
           className="invest-form__submit-button"
