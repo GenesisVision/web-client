@@ -85,6 +85,10 @@ class ProgramDetailsDescription extends PureComponent {
     } = this.state;
     const {
       t,
+      status,
+      isFavorite,
+      canCloseProgram,
+      hasNotifications,
       isOwnProgram,
       onReinvestingClick,
       isReinvestPending,
@@ -105,22 +109,6 @@ class ProgramDetailsDescription extends PureComponent {
       composeInvestmentData,
       onChangeInvestmentStatus
     } = this.props;
-
-    const status =
-      programDescription.personalProgramDetails &&
-      programDescription.personalProgramDetails.status;
-
-    const isFavorite =
-      programDescription.personalProgramDetails &&
-      programDescription.personalProgramDetails.isFavorite;
-
-    const canCloseProgram =
-      programDescription.personalProgramDetails &&
-      programDescription.personalProgramDetails.canCloseProgram;
-
-    const hasNotifications =
-      programDescription.personalProgramDetails &&
-      programDescription.personalProgramDetails.hasNotifications;
 
     const composeEditInfo = {
       id: programDescription.id,
@@ -251,7 +239,7 @@ class ProgramDetailsDescription extends PureComponent {
                 />
               </div>
             </div>
-            {canInvest && (
+            {(isOwnProgram || canInvest) && (
               <Fragment>
                 <div className="program-details-description__investing-container">
                   <div className="program-details-description__invest-button-container">
