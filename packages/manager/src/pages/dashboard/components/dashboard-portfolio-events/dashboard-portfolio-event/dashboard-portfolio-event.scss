@@ -7,7 +7,7 @@
   padding-top: 24px;
   align-items: center;
   //width: 252px;
-  @include media-breakpoint-landscape-phone() {
+  @include media-breakpoint-tablet() {
     width: 252px;
   }
 
