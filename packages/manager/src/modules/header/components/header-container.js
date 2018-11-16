@@ -1,4 +1,4 @@
-import { fetchProfileHeaderInfo } from "modules/header/actions/header-actions";
+import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
 import { notificationsToggle } from "pages/app/components/notifications/actions/notifications.actions";
 import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
 import { SIGNUP_ROUTE } from "pages/auth/signup/signup.routes";
