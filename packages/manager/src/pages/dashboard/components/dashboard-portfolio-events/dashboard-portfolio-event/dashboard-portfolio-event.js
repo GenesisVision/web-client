@@ -3,11 +3,15 @@ import "./dashboard-portfolio-event.scss";
 import * as moment from "moment";
 import PropTypes from "prop-types";
 import React from "react";
+import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import Profitability from "shared/components/profitability/profitability";
 import { formatValue } from "shared/utils/formatter";
 
-import { isUseProfitability } from "../../helpers/dashboard-portfolio.helpers";
+import {
+  isUseProfitability,
+  valueDescriptionLocalizationConstant
+} from "../../helpers/dashboard-portfolio.helpers";
 import PortfolioEventLogo from "../dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
 
 const formatDate = date => {
@@ -22,7 +26,8 @@ const formatDate = date => {
   return eventCreationDate.fromNow();
 };
 
-const DashboardPortfolioEvent = ({ event }) => {
+const DashboardPortfolioEvent = ({ t, event }) => {
+  const valueDescription = valueDescriptionLocalizationConstant(event);
   return (
     <div className="portfolio-event">
       <PortfolioEventLogo
@@ -35,6 +40,9 @@ const DashboardPortfolioEvent = ({ event }) => {
         <div className="portfolio-event__values-container">
           <div className="portfolio-event__description">
             {event.description}
+          </div>
+          <div className="portfolio-event__value-description">
+            {t(valueDescription)}
           </div>
           <span className="portfolio-event__value">
             {isUseProfitability(event) ? (
@@ -72,4 +80,4 @@ DashboardPortfolioEvent.propTypes = {
   event: DashboardPortfolioEventShape
 };
 
-export default DashboardPortfolioEvent;
+export default translate()(DashboardPortfolioEvent);

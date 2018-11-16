@@ -443,6 +443,8 @@
       "title": "Events",
       "see-all-button": "See All",
       "table-title": "Operations",
+      "balance": "Balance",
+      "profit": "Profit",
       "empty-events": {
         "text": "The following events will be displayed here",
         "finished": "Fund/Program finished",

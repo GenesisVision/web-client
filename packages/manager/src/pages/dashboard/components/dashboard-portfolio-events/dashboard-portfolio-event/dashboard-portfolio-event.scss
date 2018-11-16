@@ -40,11 +40,21 @@
     letter-spacing: 0.2px;
     margin-bottom: 0px;
     font-size: 13px;
-    color: $text-color;
+    color: $text-accent-color;
     @include media-breakpoint-landscape-phone() {
       line-height: 1.69;
       margin-top: 5px;
     }
+  }
+
+  &__value-description {
+    color: $text-color;
+    font-weight: normal;
+    line-height: normal;
+    font-size: 12px;
+    letter-spacing: 0.4px;
+    margin-top: 10px;
+    margin-bottom: 5px;
   }
 
   &__value {
