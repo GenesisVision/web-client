@@ -3,9 +3,9 @@ import {
   ADD_TOTAL_NOTIFICATIONS,
   CLEAR_NOTIFICATIONS,
   SET_NOTIFICATIONS_OPTIONS
-} from "pages/app/components/notifications/actions/notifications.actions";
-import isOpenReducer from "pages/app/components/notifications/reducers/is-open.reducer";
-import { TAKE_COUNT } from "pages/app/components/notifications/services/notifications.services";
+} from "../actions/notifications.actions";
+import isOpenReducer from "../reducers/is-open.reducer";
+import { TAKE_COUNT } from "../services/notifications.services";
 import { combineReducers } from "redux";
 
 const optionsReducer = (options = { take: TAKE_COUNT, skip: 0 }, action) => {

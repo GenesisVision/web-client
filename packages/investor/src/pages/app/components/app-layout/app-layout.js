@@ -3,7 +3,7 @@ import "./app-layout.scss";
 import platformActions from "shared/actions/platform-actions";
 import { initOnResizeEvent } from "shared/actions/ui-actions";
 import HeaderContainer from "modules/header/components/header-container";
-import NotificationsContainer from "pages/app/components/notifications/components/notifications-container";
+import NotificationsContainer from "shared/modules/notifications/components/notifications-container";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 

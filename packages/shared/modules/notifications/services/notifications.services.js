@@ -5,7 +5,7 @@ import {
   clearNotifications,
   notificationsFetch,
   setNotificationsOptions
-} from "pages/app/components/notifications/actions/notifications.actions";
+} from "../actions/notifications.actions";
 
 export const TAKE_COUNT = 10;
 

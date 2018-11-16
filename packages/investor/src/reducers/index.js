@@ -4,7 +4,7 @@ import notificationSettingsReducer from "modules/notification-settings/reducers/
 import programDepositReducer from "modules/program-deposit/reducer/program-deposit.reducer";
 import programNotificationsReducer from "modules/program-notifications/reducers/program-notifications.reducers";
 import fundNotificationsReducer from "modules/fund-notifications/reducers/fund-notifications.reducers";
-import notificationsReducer from "pages/app/components/notifications/reducers/notifications.reducers";
+import notificationsReducer from "shared/modules/notifications/reducers/notifications.reducers";
 import { loadingBarReducer } from "react-redux-loading-bar";
 import { routerReducer } from "react-router-redux";
 import accountSettingsReducer from "shared/reducers/account-settings";
