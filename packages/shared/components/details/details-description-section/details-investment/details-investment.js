@@ -62,7 +62,7 @@ class DetailsInvestment extends PureComponent {
           >
             <ProgramStatus status={status} />
           </DetailsStatisticItem>
-          {pendingInput !== 0 && (
+          {pendingInput !== undefined && pendingInput !== 0 && (
             <DetailsStatisticItem
               accent
               label={t("fund-details-page.description.pending-input")}
@@ -74,7 +74,7 @@ class DetailsInvestment extends PureComponent {
               />
             </DetailsStatisticItem>
           )}
-          {pendingOutput !== 0 && (
+          {pendingOutput !== undefined && pendingOutput !== 0 && (
             <DetailsStatisticItem
               accent
               label={t("fund-details-page.description.pending-output")}
