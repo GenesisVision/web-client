@@ -8,7 +8,7 @@ import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import VerificationStatus from "shared/components/verification-status/verification-status";
-import { PROFILE_EDIT_ROUTE } from "../../pages/profile/profile.constants";
+import { PROFILE_EDIT_ROUTE } from "shared/components/profile/profile.constants";
 
 const ProfileField = ({ name, value, label, disabled = true, type }) => {
   return value || !disabled ? (

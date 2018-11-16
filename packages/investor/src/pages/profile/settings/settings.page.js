@@ -2,21 +2,24 @@ import "./settings.scss";
 
 import { GVButton } from "gv-react-components";
 import TwoFactorAuthContainer from "modules/2fa/2fa-container";
-import ProfileLayout from "pages/profile/profile-layout";
-import { PASSWORD_ROUTE } from "pages/profile/profile.constants";
+import ProfileLayout from "shared/components/profile/profile-layout";
+import { PASSWORD_ROUTE } from "shared/components/profile/profile.constants";
 import React from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
 
-import LogoutButtonContainer from "./logout-button/logout-button-container";
-import ProfileImageContainer from "./profile-image/profile-image-container";
+import LogoutButtonContainer from "shared/components/profile/settings/logout-button/logout-button-container";
+import ProfileImageContainer from "shared/components/profile/settings/profile-image/profile-image-container";
+import * as profileSettingsService from "./services/profile-settings.service";
 
 const SettingsPage = ({ t }) => {
   return (
     <ProfileLayout route="settings">
       <div className="profile-settings__content">
         <TwoFactorAuthContainer />
-        <ProfileImageContainer />
+        <ProfileImageContainer
+          profileSettingsService={profileSettingsService}
+        />
         <div className="profile-settings__aside-actions">
           <Link
             to={{
@@ -34,7 +37,9 @@ const SettingsPage = ({ t }) => {
             </GVButton>
           </Link>
 
-          <LogoutButtonContainer />
+          <LogoutButtonContainer
+            profileSettingsService={profileSettingsService}
+          />
         </div>
       </div>
     </ProfileLayout>

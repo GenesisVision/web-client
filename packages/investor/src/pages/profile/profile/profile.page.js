@@ -1,6 +1,6 @@
 import Profile from "modules/profile/profile";
 import ProfileContainer from "modules/profile/profile-container";
-import ProfileLayout from "pages/profile/profile-layout";
+import ProfileLayout from "shared/components/profile/profile-layout";
 import React from "react";
 
 const ProfilePage = () => {

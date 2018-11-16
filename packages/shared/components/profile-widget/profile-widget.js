@@ -8,7 +8,7 @@ import { SettingsIcon } from "shared/components/icon/settings-icon";
 import Popover from "shared/components/popover/popover";
 import { GVButton } from "gv-react-components";
 import FilterArrowIcon from "shared/components/table/components/filtering/filter-arrow-icon";
-import { PROFILE_ROUTE, SETTINGS_ROUTE } from "pages/profile/profile.constants";
+import { PROFILE_ROUTE, SETTINGS_ROUTE } from "shared/components/profile/profile.constants";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
