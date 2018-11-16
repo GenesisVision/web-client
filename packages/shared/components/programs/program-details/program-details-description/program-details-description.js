@@ -85,6 +85,11 @@ class ProgramDetailsDescription extends PureComponent {
     } = this.state;
     const {
       t,
+      status,
+      isFavorite,
+      canCloseProgram,
+      hasNotifications,
+      isOwnProgram,
       onReinvestingClick,
       isReinvestPending,
       isInvested,
@@ -104,22 +109,6 @@ class ProgramDetailsDescription extends PureComponent {
       composeInvestmentData,
       onChangeInvestmentStatus
     } = this.props;
-
-    const status =
-      programDescription.personalProgramDetails &&
-      programDescription.personalProgramDetails.status;
-
-    const isFavorite =
-      programDescription.personalProgramDetails &&
-      programDescription.personalProgramDetails.isFavorite;
-
-    const canCloseProgram =
-      programDescription.personalProgramDetails &&
-      programDescription.personalProgramDetails.canCloseProgram;
-
-    const hasNotifications =
-      programDescription.personalProgramDetails &&
-      programDescription.personalProgramDetails.hasNotifications;
 
     const composeEditInfo = {
       id: programDescription.id,
@@ -250,7 +239,7 @@ class ProgramDetailsDescription extends PureComponent {
                 />
               </div>
             </div>
-            {canInvest && (
+            {(isOwnProgram || canInvest) && (
               <Fragment>
                 <div className="program-details-description__investing-container">
                   <div className="program-details-description__invest-button-container">
@@ -303,7 +292,7 @@ class ProgramDetailsDescription extends PureComponent {
                         {t("program-details-page.description.edit-program")}
                       </GVButton>
                     )}
-                    {isInvested && canInvest && (
+                    {!isOwnProgram && isInvested && canInvest && (
                       <ProgramReinvestingWidget
                         className="program-details-description__reinvest"
                         toggleReinvesting={onReinvestingClick}

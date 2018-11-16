@@ -3,10 +3,9 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { compose } from "redux";
 
-import DashboardPortfolioEventsContainer from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-events-container";
-
 import { DASHBOARD_EVENTS_ROUTE } from "../../dashboard.routes";
 import { getPortfolioEvents } from "../../services/dashboard.service";
+import DashboardPortfolioEventsContainer from "./dashboard-portfolio-events-container";
 
 class DashboardPortfolioEventsSection extends Component {
   componentDidMount() {

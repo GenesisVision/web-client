@@ -118,22 +118,8 @@ class ProgramDetailsDescriptionSection extends PureComponent {
   };
 
   render() {
-    const {
-      isAuthenticated,
-      redirectToLogin,
-      onChangeInvestmentStatus
-    } = this.props;
     const { programDescription, ui } = this.state;
     if (!programDescription) return null;
-    const isInvested =
-      programDescription.personalProgramDetails &&
-      programDescription.personalProgramDetails.isInvested;
-    const canWithdraw =
-      programDescription.personalProgramDetails &&
-      programDescription.personalProgramDetails.canWithdraw;
-    const isOwnProgram =
-      programDescription.personalProgramDetails &&
-      programDescription.personalProgramDetails.isOwnProgram;
     return (
       <Fragment>
         <ProgramDetailsDescription
@@ -146,18 +132,14 @@ class ProgramDetailsDescriptionSection extends PureComponent {
           AssetEditContainer={AssetEditContainer}
           PROGRAM={PROGRAM}
           ProgramWithdrawContainer={ProgramWithdrawContainer}
-          isAuthenticated={isAuthenticated}
-          redirectToLogin={redirectToLogin}
-          isInvested={isInvested}
-          canWithdraw={canWithdraw}
-          canInvest={isOwnProgram}
           programDescription={programDescription}
           onReinvestingClick={this.handleOnReinvestingClick}
           isReinvestPending={ui.isReinvestPending}
           onFavoriteClick={this.handleOnFavoriteClick}
           isFavoritePending={ui.isFavoritePending}
           composeInvestmentData={composeInvestmentData}
-          onChangeInvestmentStatus={onChangeInvestmentStatus}
+          {...programDescription.personalProgramDetails}
+          {...this.props}
         />
       </Fragment>
     );

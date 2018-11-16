@@ -74,35 +74,20 @@ class FundDetailsDescriptionSection extends PureComponent {
   };
 
   render() {
-    const {
-      isAuthenticated,
-      redirectToLogin,
-      onChangeInvestmentStatus
-    } = this.props;
     const { fundDescription, ui } = this.state;
     if (!fundDescription) return null;
-    const isInvested =
-      fundDescription.personalFundDetails &&
-      fundDescription.personalFundDetails.isInvested;
-    const canWithdraw =
-      fundDescription.personalFundDetails &&
-      fundDescription.personalFundDetails.canWithdraw;
     return (
       <Fragment>
         <FundDetailsDescription
           FundDetailContext={FundDetailContext}
           FundWithdrawContainer={FundWithdrawContainer}
           FundDepositContainer={FundDepositContainer}
-          canInvest={fundDescription.personalFundDetails}
-          isAuthenticated={isAuthenticated}
-          redirectToLogin={redirectToLogin}
-          canWithdraw={canWithdraw}
-          isInvested={isInvested}
           fundDescription={fundDescription}
           onFavoriteClick={this.handleOnFavoriteClick}
           isFavoritePending={ui.isFavoritePending}
           composeInvestmentData={composeInvestmentData}
-          onChangeInvestmentStatus={onChangeInvestmentStatus}
+          {...fundDescription.personalFundDetails}
+          {...this.props}
         />
       </Fragment>
     );

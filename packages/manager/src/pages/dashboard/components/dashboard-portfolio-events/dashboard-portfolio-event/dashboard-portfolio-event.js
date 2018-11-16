@@ -3,12 +3,16 @@ import "./dashboard-portfolio-event.scss";
 import * as moment from "moment";
 import PropTypes from "prop-types";
 import React from "react";
+import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-
-import { formatValue } from "shared/utils/formatter";
 import Profitability from "shared/components/profitability/profitability";
-import { isUseProfitability } from "shared/components/dashboard/helpers/dashboard-portfolio.helpers";
-import PortfolioEventLogo from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
+import { formatValue } from "shared/utils/formatter";
+
+import {
+  isUseProfitability,
+  valueDescriptionLocalizationConstant
+} from "../../helpers/dashboard-portfolio.helpers";
+import PortfolioEventLogo from "../dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
 
 const formatDate = date => {
   const now = moment(new Date());
@@ -22,7 +26,8 @@ const formatDate = date => {
   return eventCreationDate.fromNow();
 };
 
-const DashboardPortfolioEvent = ({ event }) => {
+const DashboardPortfolioEvent = ({ t, event }) => {
+  const valueDescription = valueDescriptionLocalizationConstant(event);
   return (
     <div className="portfolio-event">
       <PortfolioEventLogo
@@ -36,24 +41,29 @@ const DashboardPortfolioEvent = ({ event }) => {
           <div className="portfolio-event__description">
             {event.description}
           </div>
-          <span className="portfolio-event__value">
-            {isUseProfitability(event) ? (
-              <Profitability value={formatValue(event.value)} prefix="sign">
+          <div>
+            <div className="portfolio-event__value-description">
+              {t(valueDescription)}
+            </div>
+            <span className="portfolio-event__value">
+              {isUseProfitability(event) ? (
+                <Profitability value={event.value} prefix="sign">
+                  <NumberFormat
+                    value={formatValue(event.value)}
+                    displayType="text"
+                    allowNegative={false}
+                    suffix={` ${event.currency}`}
+                  />
+                </Profitability>
+              ) : (
                 <NumberFormat
                   value={formatValue(event.value)}
                   displayType="text"
-                  allowNegative={false}
                   suffix={` ${event.currency}`}
                 />
-              </Profitability>
-            ) : (
-              <NumberFormat
-                value={formatValue(event.value)}
-                displayType="text"
-                suffix={` ${event.currency}`}
-              />
-            )}
-          </span>
+              )}
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -72,4 +82,4 @@ DashboardPortfolioEvent.propTypes = {
   event: DashboardPortfolioEventShape
 };
 
-export default DashboardPortfolioEvent;
+export default translate()(DashboardPortfolioEvent);

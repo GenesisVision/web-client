@@ -114,68 +114,25 @@ class FundDetailsDescriptionSection extends PureComponent {
   };
 
   render() {
-    const {
-      isAuthenticated,
-      redirectToLogin,
-      onChangeInvestmentStatus
-    } = this.props;
     const { fundDescription, ui } = this.state;
     if (!fundDescription) return null;
-    const canReallocate =
-      fundDescription.personalFundDetails &&
-      fundDescription.personalFundDetails.canReallocate;
-    const isInvested =
-      fundDescription.personalFundDetails &&
-      fundDescription.personalFundDetails.isInvested;
-    const isOwnProgram =
-      fundDescription.personalFundDetails &&
-      fundDescription.personalFundDetails.isOwnProgram;
-    const canWithdraw =
-      fundDescription.personalFundDetails &&
-      fundDescription.personalFundDetails.canWithdraw;
-    const isFavorite =
-      fundDescription.personalFundDetails &&
-      fundDescription.personalFundDetails.isFavorite;
-    const canCloseProgram =
-      fundDescription.personalFundDetails &&
-      fundDescription.personalFundDetails.canCloseProgram;
-    const hasNotifications =
-      fundDescription.personalFundDetails &&
-      fundDescription.personalFundDetails.hasNotifications;
-    const status =
-      fundDescription.personalFundDetails &&
-      fundDescription.personalFundDetails.status;
-    const possibleReallocationTime =
-      fundDescription.personalFundDetails &&
-      fundDescription.personalFundDetails.possibleReallocationTime;
     return (
       <Fragment>
         <FundDetailsDescription
-          possibleReallocationTime={possibleReallocationTime}
-          canReallocate={canReallocate}
-          status={status}
-          isFavorite={isFavorite}
-          canCloseProgram={canCloseProgram}
-          hasNotifications={hasNotifications}
-          isOwnProgram={isOwnProgram}
           FUND={FUND}
           ReallocateContainer={ReallocateContainer}
           AssetEditContainer={AssetEditContainer}
           FundDetailContext={FundDetailContext}
           FundWithdrawContainer={FundWithdrawContainer}
           FundDepositContainer={FundDepositContainer}
-          isAuthenticated={isAuthenticated}
-          redirectToLogin={redirectToLogin}
-          isInvested={isInvested}
-          canWithdraw={canWithdraw}
           fundDescription={fundDescription}
           onReinvestingClick={this.handleOnReinvestingClick}
           isReinvestPending={ui.isReinvestPending}
           onFavoriteClick={this.handleOnFavoriteClick}
           isFavoritePending={ui.isFavoritePending}
-          canInvest={isOwnProgram}
           composeInvestmentData={composeInvestmentData}
-          onChangeInvestmentStatus={onChangeInvestmentStatus}
+          {...fundDescription.personalFundDetails}
+          {...this.props}
         />
       </Fragment>
     );
