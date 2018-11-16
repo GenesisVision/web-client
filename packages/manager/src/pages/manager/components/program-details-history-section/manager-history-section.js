@@ -15,7 +15,6 @@ import Surface from "shared/components/surface/surface";
 import { toggleFavoriteFundDispatchable } from "shared/modules/favorite-asset/services/favorite-fund.service";
 import { toggleFavoriteProgramDispatchable } from "shared/modules/favorite-asset/services/favorite-program.service";
 
-import * as service from "../../services/manager.service";
 import * as managerService from "../../services/manager.service";
 import ManagerTable from "./manager-table/manager-table";
 
