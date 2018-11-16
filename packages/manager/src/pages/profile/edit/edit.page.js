@@ -1,5 +1,5 @@
 import ProfileContainer from "shared/modules/profile/profile-container";
-import ProfileForm from "modules/profile/profile-form";
+import ProfileForm from "shared/modules/profile/profile-form";
 import React from "react";
 
 import NavigationBackButton from "../../../modules/navigation-back-button/navigation-back-button";
