@@ -47,7 +47,8 @@
       "investors": "Investors",
       "drawdown": "D.down",
       "profit": "Profit",
-      "chart": "Chart"
+      "chart": "Chart",
+      "value": "Value"
     }
   },
   "managers-table": {
@@ -159,6 +160,7 @@
   "fund-details-page": {
     "title": "Program detail",
     "description": {
+      "disable-reallocation-message":"The next reallocation will be available on",
       "reallocate": "Reallocate",
       "edit-fund": "Edit details",
       "strategy": "Strategy",
@@ -442,7 +444,8 @@
       "investors": "Investors",
       "drawdown": "D.down",
       "profit": "Profit",
-      "chart": "Chart"
+      "chart": "Chart",
+      "value": "Value"
     }
   },
   "dashboard": {
@@ -589,6 +592,8 @@
   },
   "withdraw-fund": {
     "title": "Withdraw",
+    "exit-fee": "Exit fee",
+    "withdraw-amount": "Withdraw amount",
     "available-to-withdraw": "You invested in fund",
     "amount-to-withdraw": "Amount to withdraw",
     "next": "Next",

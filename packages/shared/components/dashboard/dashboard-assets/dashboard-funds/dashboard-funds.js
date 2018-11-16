@@ -100,8 +100,12 @@ class DashboardFunds extends Component {
                 length={fund.totalAssetsCount}
               />
             </TableCell>
-            <TableCell className="funds-table__cell funds-table__cell--investors">
-              {fund.statistic.investorsCount}
+            <TableCell className="funds-table__cell funds-table__cell--value">
+              <NumberFormat
+                value={formatValue(fund.personalDetails.value, 4)}
+                suffix=" GVT"
+                displayType="text"
+              />
             </TableCell>
             <TableCell className="funds-table__cell funds-table__cell--drawdown">
               <NumberFormat

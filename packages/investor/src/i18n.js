@@ -26,7 +26,7 @@ i18n
     },
     backend: {
       loadPath: `${process.env.REACT_APP_BASENAME}locales/{{lng}}/{{ns}}.json`,
-      queryStringParams: { v: "0.0.4" }
+      queryStringParams: { v: "0.0.5" }
     }
   });
 

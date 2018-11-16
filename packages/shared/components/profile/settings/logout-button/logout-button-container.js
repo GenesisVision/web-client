@@ -4,8 +4,6 @@ import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
-import * as profileSettingsService from "../services/profile-settings.service";
-
 class LogoutButtonContainer extends PureComponent {
   state = {
     isPending: false
@@ -34,8 +32,8 @@ class LogoutButtonContainer extends PureComponent {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  services: bindActionCreators(profileSettingsService, dispatch)
+const mapDispatchToProps = (dispatch, props) => ({
+  services: bindActionCreators(props.profileSettingsService, dispatch)
 });
 
 export default compose(translate(), connect(null, mapDispatchToProps))(

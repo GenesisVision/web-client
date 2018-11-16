@@ -1,9 +1,9 @@
-import ProfileLayout from "pages/profile/profile-layout";
+import ProfileLayout from "../profile-layout";
 import React from "react";
 
 import KYCContainer from "./kyc.container";
 
-const KYCPage = ({ t }) => {
+const KYCPage = () => {
   return (
     <ProfileLayout route="verify">
       <KYCContainer />

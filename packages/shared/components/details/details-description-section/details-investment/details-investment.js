@@ -48,31 +48,11 @@ class DetailsInvestment extends PureComponent {
         <div className="details-investment__short-statistic">
           <DetailsStatisticItem
             accent
-            label={t("fund-details-page.description.invested")}
-          >
-            <NumberFormat
-              value={formatValue(investedAmount)}
-              suffix={` ${balanceCurrency}`}
-              displayType="text"
-            />
-          </DetailsStatisticItem>
-          <DetailsStatisticItem
-            accent
             label={t("fund-details-page.description.value")}
           >
             <NumberFormat
               value={formatValue(value)}
               suffix={` ${balanceCurrency}`}
-              displayType="text"
-            />
-          </DetailsStatisticItem>
-          <DetailsStatisticItem
-            accent
-            label={t("fund-details-page.description.profit")}
-          >
-            <NumberFormat
-              value={profitPercent}
-              suffix=" %"
               displayType="text"
             />
           </DetailsStatisticItem>

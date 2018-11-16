@@ -1,6 +1,9 @@
 {
   "private": true,
   "workspaces": ["packages/*"],
+  "dependencies": {
+    "gv-api-web": "git+https://github.com/GenesisVision/gv-api-web.git#development"
+  },
   "scripts": {
     "precommit": "lint-staged"
   },

@@ -6,17 +6,20 @@ import React from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
 
-import ProfileLayout from "../profile-layout";
-import { PASSWORD_ROUTE } from "../profile.constants";
-import LogoutButtonContainer from "./logout-button/logout-button-container";
-import ProfileImageContainer from "./profile-image/profile-image-container";
+import ProfileLayout from "shared/components/profile/profile-layout";
+import { PASSWORD_ROUTE } from "shared/components/profile/profile.constants";
+import LogoutButtonContainer from "shared/components/profile/settings/logout-button/logout-button-container";
+import ProfileImageContainer from "shared/components/profile/settings/profile-image/profile-image-container";
+import * as profileSettingsService from "./services/profile-settings.service";
 
 const SettingsPage = ({ t }) => {
   return (
     <ProfileLayout route="settings">
       <div className="profile-settings__content">
         <TwoFactorAuthContainer />
-        <ProfileImageContainer />
+        <ProfileImageContainer
+          profileSettingsService={profileSettingsService}
+        />
         <div className="profile-settings__aside-actions">
           <Link
             to={{
@@ -34,7 +37,9 @@ const SettingsPage = ({ t }) => {
             </GVButton>
           </Link>
 
-          <LogoutButtonContainer />
+          <LogoutButtonContainer
+            profileSettingsService={profileSettingsService}
+          />
         </div>
       </div>
     </ProfileLayout>

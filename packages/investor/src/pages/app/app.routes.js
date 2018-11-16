@@ -7,7 +7,7 @@ import NotificationRoutes, {
   NOTIFICATIONS_ROUTE
 } from "pages/notifications/notifications.routes";
 import PrivateRoute from "pages/private-route";
-import { PROFILE_ROUTE } from "pages/profile/profile.constants";
+import { PROFILE_ROUTE } from "shared/components/profile/profile.constants";
 import ProfileRoutes from "pages/profile/profile.routes";
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";

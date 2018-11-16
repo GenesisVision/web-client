@@ -105,6 +105,10 @@ class ProgramDetailsDescription extends PureComponent {
       onChangeInvestmentStatus
     } = this.props;
 
+    const status =
+      programDescription.personalProgramDetails &&
+      programDescription.personalProgramDetails.status;
+
     const isFavorite =
       programDescription.personalProgramDetails &&
       programDescription.personalProgramDetails.isFavorite;
@@ -311,17 +315,19 @@ class ProgramDetailsDescription extends PureComponent {
                     )}
                   </div>
                 </div>
-                <DetailsInvestment
-                  WithdrawContainer={ProgramWithdrawContainer}
-                  notice={t(
-                    "program-details-page.description.withdraw-notice-text"
-                  )}
-                  canWithdraw={canWithdraw}
-                  className={"program-details-description__your-investment"}
-                  assetCurrency={programDescription.currency}
-                  {...composeInvestmentData(programDescription)}
-                  onChangeInvestmentStatus={onChangeInvestmentStatus}
-                />
+                {status !== "Ended" && (
+                  <DetailsInvestment
+                    WithdrawContainer={ProgramWithdrawContainer}
+                    notice={t(
+                      "program-details-page.description.withdraw-notice-text"
+                    )}
+                    canWithdraw={canWithdraw}
+                    className={"program-details-description__your-investment"}
+                    assetCurrency={programDescription.currency}
+                    {...composeInvestmentData(programDescription)}
+                    onChangeInvestmentStatus={onChangeInvestmentStatus}
+                  />
+                )}
               </Fragment>
             )}
             <ProgramDetailContext.Consumer>

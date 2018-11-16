@@ -5,13 +5,13 @@ import {
   PASSWORD_ROUTE,
   PROFILE_ROUTE,
   SETTINGS_ROUTE
-} from "pages/profile/profile.constants";
+} from "shared/components/profile/profile.constants";
 import ProfilePage from "pages/profile/profile/profile.page";
 import SettingsPage from "pages/profile/settings/settings.page";
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
-import KYCPage from "./kyc/kyc.page";
+import KYCPage from "shared/components/profile/kyc/kyc.page";
 
 const ProfileRoutes = () => (
   <Switch>

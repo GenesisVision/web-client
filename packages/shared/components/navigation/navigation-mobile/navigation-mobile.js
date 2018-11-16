@@ -1,7 +1,7 @@
 import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
 import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import { FUNDS_ROUTE } from "pages/funds/funds.routes";
-import { PROFILE_ROUTE, SETTINGS_ROUTE } from "pages/profile/profile.constants";
+import { PROFILE_ROUTE, SETTINGS_ROUTE } from "shared/components/profile/profile.constants";
 import { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
 import PropTypes from "prop-types";
 import React from "react";
