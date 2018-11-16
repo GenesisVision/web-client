@@ -1,7 +1,7 @@
 import "./settings.scss";
 
 import { GVButton } from "gv-react-components";
-import TwoFactorAuthContainer from "modules/2fa/2fa-container";
+import TwoFactorAuthContainer from "shared/modules/2fa/2fa-container";
 import ProfileLayout from "shared/components/profile/profile-layout";
 import { PASSWORD_ROUTE } from "shared/components/profile/profile.constants";
 import React from "react";
