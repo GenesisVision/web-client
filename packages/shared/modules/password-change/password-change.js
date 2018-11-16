@@ -1,7 +1,7 @@
 import "./password-change.scss";
 
 import authActions from "shared/actions/auth-actions";
-import { SETTINGS_ROUTE } from "pages/profile/profile.constants";
+import { SETTINGS_ROUTE } from "shared/components/profile/profile.constants";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";

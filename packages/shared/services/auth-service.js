@@ -1,6 +1,5 @@
 import * as jwt_decode from "jwt-decode";
-
-import { AUTH_TOKEN } from "shared/utils/constants";
+import { AUTH_TOKEN } from "utils/constants";
 
 const canParseToken = token => {
   try {

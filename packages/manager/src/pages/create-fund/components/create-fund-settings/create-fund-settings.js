@@ -237,7 +237,7 @@ class CreateFundSettings extends React.Component {
                 <GVFormikField
                   name="entryFee"
                   label={t("create-fund-page.settings.fields.entry-fee")}
-                  suffix=" %"
+                  adornment="%"
                   //isAllowed={this.allowEntryFee}
                   component={GVTextField}
                   InputComponent={NumberFormat}
@@ -258,7 +258,7 @@ class CreateFundSettings extends React.Component {
                 <GVFormikField
                   name="exitFee"
                   label={t("create-fund-page.settings.fields.exit-fee")}
-                  suffix=" %"
+                  adornment="%"
                   //isAllowed={this.allowExitFee}
                   component={GVTextField}
                   InputComponent={NumberFormat}

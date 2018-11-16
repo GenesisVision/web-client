@@ -14,15 +14,11 @@ class ManagerTable extends Component {
       columns,
       title
     } = this.props;
-    let rows = { items: null, total: 0 };
-    if (data) {
-      rows.items = data.funds || data.programs;
-      rows.total = data.total;
-    }
+
     return (
       <TableModule
         title={title}
-        data={rows}
+        data={data}
         getItems={getItems}
         paging={DEFAULT_PAGING}
         columns={columns}

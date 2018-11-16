@@ -1,22 +1,21 @@
 import "./dashboard-programs.scss";
 
 import { GVButton } from "gv-react-components";
-import { Link } from "react-router-dom";
+import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import React, { Component, Fragment } from "react";
-
-import { composeProgramDetailsUrl } from "shared/utils/compose-url";
-import { formatPercent, formatValue } from "shared/utils/formatter";
+import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
-import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
+import { DASHBOARD_PROGRAMS_COLUMNS } from "shared/components/dashboard/dashboard.constants";
 import ProgramPeriodEnd from "shared/components/program-period/program-period-end/program-period-end";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
+import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
+import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import TableCell from "shared/components/table/components/table-cell";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
-import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import { DASHBOARD_PROGRAMS_COLUMNS } from "shared/components/dashboard/dashboard.constants";
+import { composeProgramDetailsUrl } from "shared/utils/compose-url";
+import { formatPercent, formatValue } from "shared/utils/formatter";
 
 import dashboardProgramsTableSelector from "./dashboard-programs.selector";
 
@@ -110,7 +109,7 @@ class DashboardPrograms extends Component {
               <ProgramSimpleChart data={program.chart} programId={program.id} />
             </TableCell>
             <TableCell className="programs-table__cell dashboard-programs__cell--status">
-              {program.status}
+              {program.personalDetails.status}
             </TableCell>
           </TableRow>
         )}

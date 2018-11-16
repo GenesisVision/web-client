@@ -1,4 +1,4 @@
-import { PROFILE_HEADER } from "modules/header/header.constants";
+import { PROFILE_HEADER } from "shared/components/header/header.constants";
 import { combineReducers } from "redux";
 
 import apiReducerFactory from "shared/reducers/api-reducer/api-reducer";

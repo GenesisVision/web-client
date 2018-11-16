@@ -7,6 +7,7 @@ import { number, object } from "yup";
 
 import WithdrawConfirmStep from "./fund-withdraw-confirm-step";
 import FundWithdrawEnterPercentStep from "./fund-withdraw-enter-percent-step";
+import { calculateValueOfEntryFee } from "../../utils/currency-converter";
 
 const CONFIRM_STEP = "CONFIRM_STEP";
 const ENTER_AMOUNT_STEP = "ENTER_AMOUNT_STEP";
@@ -23,6 +24,7 @@ class FundWithdrawForm extends Component {
   };
   render() {
     const {
+      exitFee,
       values,
       disabled,
       handleSubmit,
@@ -34,6 +36,13 @@ class FundWithdrawForm extends Component {
       accountCurrency,
       errors
     } = this.props;
+    const valueInCurrency = calculateValueOfEntryFee(
+      availableToWithdraw,
+      values.percent
+    );
+    const feeInCurrency = calculateValueOfEntryFee(valueInCurrency, exitFee);
+    const withdrawAmount =
+      parseFloat(valueInCurrency || 0) - parseFloat(feeInCurrency);
     return (
       <form
         className="dialog__bottom"
@@ -42,6 +51,10 @@ class FundWithdrawForm extends Component {
       >
         {this.state.step === ENTER_AMOUNT_STEP && (
           <FundWithdrawEnterPercentStep
+            valueInCurrency={valueInCurrency}
+            feeInCurrency={feeInCurrency}
+            exitFee={exitFee}
+            withdrawAmount={withdrawAmount}
             percent={values.percent}
             rate={rate}
             fundCurrency={fundCurrency}
@@ -53,6 +66,10 @@ class FundWithdrawForm extends Component {
         )}
         {this.state.step === CONFIRM_STEP && (
           <WithdrawConfirmStep
+            valueInCurrency={valueInCurrency}
+            feeInCurrency={feeInCurrency}
+            exitFee={exitFee}
+            withdrawAmount={withdrawAmount}
             periodEnds={periodEnds}
             percent={values.percent}
             onPrevClick={this.goToEnterAmountStep}
@@ -84,7 +101,7 @@ export default compose(
     validationSchema: ({ t, availableToWithdraw }) =>
       object().shape({
         percent: number()
-          .min(0)
+          .min(0.01)
           .max(100, t("withdraw-fund.validation.amount-more-than-available"))
           .required(t("withdraw-fund.validation.amount-is-required"))
       }),
