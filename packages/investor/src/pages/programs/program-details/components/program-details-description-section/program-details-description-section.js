@@ -130,7 +130,7 @@ class ProgramDetailsDescriptionSection extends PureComponent {
           isAuthenticated={isAuthenticated}
           redirectToLogin={redirectToLogin}
           isInvested={isInvested}
-          canInvest={programDescription.personalProgramDetails}
+          canInvest={programDescription.personalProgramDetails.canInvest}
           canWithdraw={canWithdraw}
           programDescription={programDescription}
           onReinvestingClick={this.handleOnReinvestingClick}

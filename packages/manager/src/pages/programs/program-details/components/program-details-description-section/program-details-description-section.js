@@ -134,6 +134,9 @@ class ProgramDetailsDescriptionSection extends PureComponent {
     const isOwnProgram =
       programDescription.personalProgramDetails &&
       programDescription.personalProgramDetails.isOwnProgram;
+    const canInvest =
+      programDescription.personalProgramDetails &&
+      programDescription.personalProgramDetails.canInvest;
     return (
       <Fragment>
         <ProgramDetailsDescription
@@ -150,7 +153,8 @@ class ProgramDetailsDescriptionSection extends PureComponent {
           redirectToLogin={redirectToLogin}
           isInvested={isInvested}
           canWithdraw={canWithdraw}
-          canInvest={isOwnProgram}
+          canInvest={canInvest}
+          isOwnProgram={isOwnProgram}
           programDescription={programDescription}
           onReinvestingClick={this.handleOnReinvestingClick}
           isReinvestPending={ui.isReinvestPending}
