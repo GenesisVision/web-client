@@ -39,6 +39,9 @@ class TwoFactorAuthContainer extends Component {
   render() {
     const { t, twoFactorAuth } = this.props;
     const { component } = this.state;
+
+    if (!twoFactorAuth.data) return null;
+
     return (
       <div className="two-factor">
         <h3>{t("2fa.title")}</h3>
