@@ -4,7 +4,7 @@ import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.re
 import { composeRequestFilters } from "shared/components/table/services/table.service";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import managerApi from "shared/services/api-client/manager-api";
-import { programsApiProxy } from "shared/services/api-client/programs-api";
+import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
 
@@ -23,7 +23,7 @@ export const getProgramDescription = () => (dispatch, getState) => {
     PROGRAM_DETAILS_ROUTE
   )[PROGRAM_SLUG_URL_PARAM_NAME];
 
-  return programsApiProxy.v10ProgramsByIdGet(programSlugUrl, { authorization });
+  return programsApi.v10ProgramsByIdGet(programSlugUrl, { authorization });
 };
 
 export const getProgramStatistic = (
@@ -38,39 +38,31 @@ export const getProgramStatistic = (
     maxPointCount: 100
   };
   return Promise.all([
-    programsApiProxy.v10ProgramsByIdChartsProfitGet(programId, chartFilter),
-    programsApiProxy.v10ProgramsByIdChartsBalanceGet(programId, chartFilter)
+    programsApi.v10ProgramsByIdChartsProfitGet(programId, chartFilter),
+    programsApi.v10ProgramsByIdChartsBalanceGet(programId, chartFilter)
   ]).then(([profitChart, balanceChart]) => {
-    const statisticData = {
-      data: {
-        trades: profitChart.data.trades,
-        successTradesPercent: profitChart.data.successTradesPercent,
-        profitFactor: profitChart.data.profitFactor,
-        investors: profitChart.data.investors,
-        sharpeRatio: profitChart.data.sharpeRatio,
-        sortinoRatio: profitChart.data.sortinoRatio,
-        maxDrawdown: profitChart.data.maxDrawdown,
-        periodStarts: profitChart.data.lastPeriodStarts,
-        periodEnds: profitChart.data.lastPeriodEnds
-      },
-      isPending: profitChart.isPending
+    const statistic = {
+      trades: profitChart.data.trades,
+      successTradesPercent: profitChart.data.successTradesPercent,
+      profitFactor: profitChart.data.profitFactor,
+      investors: profitChart.data.investors,
+      sharpeRatio: profitChart.data.sharpeRatio,
+      sortinoRatio: profitChart.data.sortinoRatio,
+      maxDrawdown: profitChart.data.maxDrawdown,
+      periodStarts: profitChart.data.lastPeriodStarts,
+      periodEnds: profitChart.data.lastPeriodEnds
     };
     const profitChartData = {
-      data: {
-        balance: profitChart.data.balance,
-        totalGvtProfit: profitChart.data.totalGvtProfit,
-        totalProgramCurrencyProfit: profitChart.data.totalProgramCurrencyProfit,
-        programCurrency: profitChart.data.programCurrency,
-        profitChangePercent: profitChart.data.profitChangePercent,
-        pnLChart: profitChart.data.pnLChart,
-        equityChart: profitChart.data.equityChart
-      },
-      isPending: profitChart.isPending
+      balance: profitChart.data.balance,
+      totalGvtProfit: profitChart.data.totalGvtProfit,
+      totalProgramCurrencyProfit: profitChart.data.totalProgramCurrencyProfit,
+      programCurrency: profitChart.data.programCurrency,
+      profitChangePercent: profitChart.data.profitChangePercent,
+      pnLChart: profitChart.data.pnLChart,
+      equityChart: profitChart.data.equityChart
     };
 
-    const balanceChartData = balanceChart;
-
-    return { statisticData, profitChartData, balanceChartData };
+    return { statistic, profitChart: profitChartData, balanceChart };
   });
 };
 
@@ -95,7 +87,7 @@ export const getProgramTrades = ({ programId, currency, filters }) => {
     ...filters,
     currency
   };
-  return programsApiProxy.v10ProgramsByIdTradesGet(programId, opts);
+  return programsApi.v10ProgramsByIdTradesGet(programId, opts);
 };
 
 export const getProgramEvents = () => {

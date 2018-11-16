@@ -1,8 +1,8 @@
-import authService from "shared/services/auth-service";
-
 import { DEFAULT_PERIOD } from "shared/components/chart/chart-period/chart-period.helpers";
 import { fundsApiProxy } from "shared/services/api-client/funds-api";
-import { programsApiProxy } from "shared/services/api-client/programs-api";
+import programsApi from "shared/services/api-client/programs-api";
+import authService from "shared/services/auth-service";
+
 import * as actions from "../actions/dashboard.actions";
 
 export const getPortfolioEvents = () => (dispatch, getState) => {
@@ -27,9 +27,9 @@ export const getAssetChart = (
 
   dispatch(actions.dashboardChart({ isPending: true }));
   if (assetType === "Program") {
-    programsApiProxy
+    programsApi
       .v10ProgramsByIdChartsProfitGet(assetId, chartFilter)
-      .then(({ data }) => {
+      .then(data => {
         dispatch(
           actions.dashboardChart({
             type: assetType,
