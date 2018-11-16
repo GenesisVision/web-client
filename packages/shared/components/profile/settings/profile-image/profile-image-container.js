@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import fileService from "shared/services/file-service";
 
-import * as profileSettingsService from "../services/profile-settings.service";
 import ProfileImage from "./profile-image";
 
 const ProfileImageContainer = ({ headerData, services }) => {
@@ -36,10 +35,11 @@ const mapStateToProps = ({ profileHeader }) => {
   return { headerData: profileHeader.info.data };
 };
 
-const mapDispatchToProps = dispatch => ({
-  services: bindActionCreators(profileSettingsService, dispatch)
+const mapDispatchToProps = (dispatch, props) => ({
+  services: bindActionCreators(props.profileSettingsService, dispatch)
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  ProfileImageContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProfileImageContainer);
