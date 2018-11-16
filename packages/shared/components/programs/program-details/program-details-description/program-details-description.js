@@ -292,7 +292,7 @@ class ProgramDetailsDescription extends PureComponent {
                         {t("program-details-page.description.edit-program")}
                       </GVButton>
                     )}
-                    {!isOwnProgram && isInvested && canInvest && (
+                    {ProgramReinvestingWidget && isInvested && canInvest && (
                       <ProgramReinvestingWidget
                         className="program-details-description__reinvest"
                         toggleReinvesting={onReinvestingClick}

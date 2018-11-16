@@ -9,7 +9,6 @@ import { PROGRAM } from "modules/asset-edit/asset-edit.constants";
 import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
 import ClosePeriodContainer from "./close-period/close-period-container";
 import CloseProgramContainer from "./close-program/close-program-container";
-import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
 
 import ProgramDetailsDescription from "shared/components/programs/program-details/program-details-description/program-details-description";
 
@@ -123,7 +122,6 @@ class ProgramDetailsDescriptionSection extends PureComponent {
     return (
       <Fragment>
         <ProgramDetailsDescription
-          ProgramReinvestingWidget={ProgramReinvestingWidget}
           ClosePeriodContainer={ClosePeriodContainer}
           CloseProgramContainer={CloseProgramContainer}
           ProgramDepositContainer={ProgramDepositContainer}
