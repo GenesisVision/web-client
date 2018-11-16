@@ -170,16 +170,13 @@ class FundDetailsDescription extends PureComponent {
                 />
               </div>
             </div>
-            {canInvest && (
+            {(isOwnProgram || canInvest) && (
               <Fragment>
                 <div className="fund-details-description__invest-button-container">
                   <GVButton
                     className="fund-details-description__invest-btn"
                     onClick={this.handleOpenInvestmentPopup}
-                    disabled={
-                      !fundDescription.personalFundDetails ||
-                      !fundDescription.personalFundDetails.canInvest
-                    }
+                    disabled={!canInvest}
                   >
                     {t("fund-details-page.description.invest")}
                   </GVButton>
