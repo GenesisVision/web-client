@@ -1,7 +1,6 @@
 import "./password-change.scss";
 
 import authActions from "shared/actions/auth-actions";
-import PasswordChangeForm from "modules/password-change/password-change-form";
 import { SETTINGS_ROUTE } from "shared/components/profile/profile.constants";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
@@ -11,6 +10,7 @@ import { compose } from "redux";
 import { authApiProxy } from "shared/services/api-client/auth-api";
 import authService from "shared/services/auth-service";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
+import PasswordChangeForm from "shared/modules/password-change/password-change-form";
 
 class PasswordChange extends Component {
   state = {
@@ -56,7 +56,9 @@ class PasswordChange extends Component {
   }
 }
 
-export default compose(
+const PasswordChangeContainer = compose(
   connect(),
   translate()
 )(PasswordChange);
+
+export default PasswordChangeContainer;
