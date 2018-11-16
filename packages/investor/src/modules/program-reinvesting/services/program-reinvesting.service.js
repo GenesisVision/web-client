@@ -1,15 +1,15 @@
-import { investorApiProxy } from "shared/services/api-client/investor-api";
+import investorApi from "shared/services/api-client/investor-api";
 import authService from "shared/services/auth-service";
 
 const enableReinvesting = ({ programId, authorization }) => {
-  return investorApiProxy.v10InvestorProgramsByIdReinvestOnPost(
+  return investorApi.v10InvestorProgramsByIdReinvestOnPost(
     programId,
     authorization
   );
 };
 
 const disableReinvesting = ({ programId, authorization }) => {
-  return investorApiProxy.v10InvestorProgramsByIdReinvestOffPost(
+  return investorApi.v10InvestorProgramsByIdReinvestOffPost(
     programId,
     authorization
   );

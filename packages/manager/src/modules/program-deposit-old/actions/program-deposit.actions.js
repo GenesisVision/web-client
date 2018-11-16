@@ -4,7 +4,6 @@ import {
   INVEST_TO_PROGRAM_BY_ID,
   INVEST_TO_PROGRAM_BY_ID_CLEAR
 } from "modules/program-deposit/program-deposit.constants";
-import { investorApiProxy } from "shared/services/api-client/investor-api";
 import investorApi from "shared/services/api-client/investor-api";
 import authService from "shared/services/auth-service";
 
@@ -39,7 +38,7 @@ export const clearDepositProgramInfo = () => {
 export const investToProgramById = (id, amount) => {
   return {
     type: INVEST_TO_PROGRAM_BY_ID,
-    payload: investorApiProxy.v10InvestorProgramsByIdInvestByAmountPost(
+    payload: investorApi.v10InvestorProgramsByIdInvestByAmountPost(
       id,
       amount,
       authService.getAuthArg()
