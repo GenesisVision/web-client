@@ -1,10 +1,10 @@
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import { managerApiProxy } from "shared/services/api-client/manager-api";
+import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
 
 export const updateAssets = (id, values) => dispatch => {
   const authorization = authService.getAuthArg();
-  return managerApiProxy
+  return managerApi
     .v10ManagerFundsByIdAssetsUpdatePost(id, authorization, {
       request: values.assets
     })

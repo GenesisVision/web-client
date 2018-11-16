@@ -1,5 +1,3 @@
-import Dialog from "shared/components/dialog/dialog";
-import FundWithdrawPopup from "shared/components/fund-withdraw/fund-withdraw-popup";
 import {
   alert,
   getFundWithdrawInfo
@@ -8,16 +6,18 @@ import PropTypes from "prop-types";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import { compose } from "redux";
-import { managerApiProxy } from "shared/services/api-client/manager-api";
+import { bindActionCreators } from "redux";
+import Dialog from "shared/components/dialog/dialog";
+import FundWithdrawPopup from "shared/components/fund-withdraw/fund-withdraw-popup";
+import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
 
 class FundWithdrawContainer extends PureComponent {
   state = { error: "" };
 
   handleWithdraw = (id, percent) => {
-    return managerApiProxy
+    return managerApi
       .v10ManagerFundsByIdWithdrawByPercentPost(
         id,
         percent,

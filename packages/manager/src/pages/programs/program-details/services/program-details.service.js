@@ -1,13 +1,13 @@
+import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
 import { DEFAULT_PERIOD } from "shared/components/chart/chart-period/chart-period.helpers";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { composeRequestFilters } from "shared/components/table/services/table.service";
-import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
-import { managerApiProxy } from "shared/services/api-client/manager-api";
+import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
+import managerApi from "shared/services/api-client/manager-api";
 import { programsApiProxy } from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
 
-import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { PROGRAM_SLUG_URL_PARAM_NAME } from "../../programs.routes";
 import {
   PROGRAM_TRADES_DEFAULT_FILTERS,
@@ -105,7 +105,7 @@ export const getProgramEvents = () => {
 export const closeProgram = (programId, opts) => dispatch => {
   const authorization = authService.getAuthArg();
 
-  return managerApiProxy.v10ManagerProgramsByIdClosePost(
+  return managerApi.v10ManagerProgramsByIdClosePost(
     programId,
     authorization,
     opts
@@ -114,7 +114,7 @@ export const closeProgram = (programId, opts) => dispatch => {
 
 export const closePeriod = (programId, onSuccess) => dispatch => {
   const authorization = authService.getAuthArg();
-  return managerApiProxy
+  return managerApi
     .v10ManagerProgramsByIdPeriodClosePost(programId, authorization)
     .then(() => {
       onSuccess();
