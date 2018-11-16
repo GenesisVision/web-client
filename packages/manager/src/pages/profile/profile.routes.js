@@ -1,7 +1,7 @@
 import ProfileEditPage from "pages/profile/edit/edit.page";
 import PasswordPage from "pages/profile/password/password.page";
 import ProfilePage from "shared/components/profile/profile/profile.page";
-import SettingsPage from "pages/profile/settings/settings.page";
+import SettingsPage from "shared/components/profile/settings/settings.page";
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
