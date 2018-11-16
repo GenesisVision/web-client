@@ -1,5 +1,5 @@
 import { DEFAULT_PERIOD } from "shared/components/chart/chart-period/chart-period.helpers";
-import { fundsApiProxy } from "shared/services/api-client/funds-api";
+import fundsApi from "shared/services/api-client/funds-api";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 
@@ -41,17 +41,15 @@ export const getAssetChart = (
         );
       });
   } else {
-    fundsApiProxy
-      .v10FundsByIdChartsProfitGet(assetId, chartFilter)
-      .then(({ data }) => {
-        dispatch(
-          actions.dashboardChart({
-            type: assetType,
-            id: assetId,
-            title: assetTitle,
-            equityChart: data.equityChart
-          })
-        );
-      });
+    fundsApi.v10FundsByIdChartsProfitGet(assetId, chartFilter).then(data => {
+      dispatch(
+        actions.dashboardChart({
+          type: assetType,
+          id: assetId,
+          title: assetTitle,
+          equityChart: data.equityChart
+        })
+      );
+    });
   }
 };
