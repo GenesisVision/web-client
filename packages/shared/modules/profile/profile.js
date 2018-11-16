@@ -1,61 +1,59 @@
 import "./profile.scss";
 
 import VerificationStatus from "shared/components/verification-status/verification-status";
-import { GVTextField } from "gv-react-components";
+import ProfilePersonal, { ProfileField } from "./profile-personal";
+import Scrollbars from "react-custom-scrollbars";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 
-const ProfileField = ({ name, value, label, disabled = true }) => {
-  return value || !disabled ? (
-    <GVTextField name={name} value={value} label={label} disabled={disabled} />
-  ) : null;
-};
-
 class Profile extends Component {
   render() {
-    const { t, info } = this.props;
+    const { t, info, personal } = this.props;
     return (
       <div className="profile__container">
-        <table className="profile profile--is-disabled">
-          <tbody>
-            <tr className="profile__title">
-              <td className="profile__left">
-                <h4>01</h4>
-              </td>
-              <td className="profile__center" />
-              <td className="profile__right">
-                <h4>{t("profile.contacts")}</h4>
-                <VerificationStatus checked={true} />
-              </td>
-            </tr>
-            <tr className="profile__content">
-              <td className="profile__left">
-                <span className="profile__stick" />
-              </td>
-              <td className="profile__center" />
-              <td className="profile__right">
-                <ProfileField
-                  label={t("profile.email")}
-                  value={info.email}
-                  name="phone"
-                />
-              </td>
-            </tr>
-            <tr className="profile__title">
-              <td className="profile__left">
-                <h4>02</h4>
-              </td>
-              <td className="profile__center" />
-              <td className="profile__right">
-                <h4>{t("profile.personal-info")}</h4>
-                <VerificationStatus
-                  verificationStatus={info.verificationStatus}
-                />
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <Scrollbars autoHeight autoHeightMax={14000}>
+          <table className="profile profile--is-disabled">
+            <tbody>
+              {personal && <ProfilePersonal info={info} />}
+              <tr className="profile__title">
+                <td className="profile__left">
+                  <h4>01</h4>
+                </td>
+                <td className="profile__center" />
+                <td className="profile__right">
+                  <h4>{t("profile.contacts")}</h4>
+                  <VerificationStatus checked={true} />
+                </td>
+              </tr>
+              <tr className="profile__content">
+                <td className="profile__left">
+                  <span className="profile__stick" />
+                </td>
+                <td className="profile__center" />
+                <td className="profile__right">
+                  <ProfileField
+                    label={t("profile.email")}
+                    value={info.email}
+                    name="phone"
+                  />
+                </td>
+              </tr>
+              <tr className="profile__title">
+                <td className="profile__left">
+                  <h4>02</h4>
+                </td>
+                <td className="profile__center" />
+                <td className="profile__right">
+                  <h4>{t("profile.personal-info")}</h4>
+                  <VerificationStatus
+                    verificationStatus={info.verificationStatus}
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </Scrollbars>
       </div>
     );
   }
