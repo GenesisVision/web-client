@@ -1,4 +1,4 @@
-import Profile from "modules/profile/profile";
+import Profile from "shared/modules/profile/profile";
 import ProfileContainer from "shared/modules/profile/profile-container";
 import React from "react";
 
@@ -8,7 +8,7 @@ const ProfilePage = () => {
   return (
     <ProfileLayout route="details">
       <ProfileContainer>
-        <Profile />
+        <Profile personal />
       </ProfileContainer>
     </ProfileLayout>
   );

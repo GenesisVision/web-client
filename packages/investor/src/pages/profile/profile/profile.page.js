@@ -1,4 +1,4 @@
-import Profile from "modules/profile/profile";
+import Profile from "shared/modules/profile/profile";
 import ProfileContainer from "shared/modules/profile/profile-container";
 import ProfileLayout from "shared/components/profile/profile-layout";
 import React from "react";
