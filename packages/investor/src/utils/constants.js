@@ -1,1 +1,1 @@
-export const AUTH_TOKEN = "gvManagerAuthToken";
+export const AUTH_TOKEN = "gvInvestorToken";
