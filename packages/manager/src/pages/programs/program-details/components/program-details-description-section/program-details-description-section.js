@@ -1,5 +1,4 @@
 import { toggleFavoriteProgram } from "shared/modules/favorite-asset/services/favorite-program.service";
-import { toggleReinvesting } from "modules/program-reinvesting/services/program-reinvesting.service";
 import React, { Fragment, PureComponent } from "react";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import AboutLevelsContainerComponent from "pages/app/components/about-levels/about-levels-container";
@@ -54,37 +53,6 @@ class ProgramDetailsDescriptionSection extends PureComponent {
     return newState;
   }
 
-  handleOnReinvestingClick = () => {
-    const { ui, programDescription } = this.state;
-    const { id, personalProgramDetails } = programDescription;
-    const { isReinvest } = personalProgramDetails;
-
-    const composeNewReinvestState = newState => ({
-      ...programDescription,
-      personalProgramDetails: {
-        ...personalProgramDetails,
-        isReinvest: !isReinvest
-      }
-    });
-
-    this.setState({
-      ui: { ...ui, isReinvestPending: true },
-      programDescription: composeNewReinvestState(!isReinvest)
-    });
-    toggleReinvesting(id, isReinvest)
-      .then(() => {
-        this.setState({
-          ui: { ...ui, isReinvestPending: false }
-        });
-      })
-      .catch(e => {
-        this.setState({
-          programDescription: composeNewReinvestState(isReinvest),
-          ui: { ...ui, isReinvestPending: false }
-        });
-      });
-  };
-
   handleOnFavoriteClick = () => {
     const { ui, programDescription } = this.state;
     const { id, personalProgramDetails } = programDescription;
@@ -131,7 +99,6 @@ class ProgramDetailsDescriptionSection extends PureComponent {
           PROGRAM={PROGRAM}
           ProgramWithdrawContainer={ProgramWithdrawContainer}
           programDescription={programDescription}
-          onReinvestingClick={this.handleOnReinvestingClick}
           isReinvestPending={ui.isReinvestPending}
           onFavoriteClick={this.handleOnFavoriteClick}
           isFavoritePending={ui.isFavoritePending}
