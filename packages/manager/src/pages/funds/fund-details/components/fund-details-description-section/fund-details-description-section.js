@@ -15,8 +15,6 @@ const composeInvestmentData = fundDetails => {
 
   const { balanceGVT, profitPercent } = statistic;
   return {
-    pendingInput: personalFundDetails.pendingInput,
-    pendingOutput: personalFundDetails.pendingOutput,
     value: personalFundDetails.value,
     id: fundDetails.id,
     investedAmount: personalFundDetails.value,
