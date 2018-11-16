@@ -8,18 +8,22 @@ import { compose } from "redux";
 
 import DashboardPortfolioChartContainer from "./dashboard-chart/dashboard-portfolio-chart-container";
 import DashboardInRequestsContainer from "./dashboard-in-requests/dashboard-in-requests-container";
+import DashboardGetStarted from "./dashboard-get-started";
 
 class DashboardPortfolioChartSection extends Component {
   renderSectionBody = () => {
     const { isNewUser } = this.props;
-    if (isNewUser === null) return null;
-    return (
-      <Fragment>
-        <div className="dashboard-portfolio-chart-section__heading">Chart</div>
-        <DashboardInRequestsContainer />
-        <DashboardPortfolioChartContainer />
-      </Fragment>
-    );
+    if (!isNewUser)
+      return (
+        <Fragment>
+          <div className="dashboard-portfolio-chart-section__heading">
+            Chart
+          </div>
+          <DashboardInRequestsContainer />
+          <DashboardPortfolioChartContainer />
+        </Fragment>
+      );
+    return <DashboardGetStarted />;
   };
   render() {
     return (
