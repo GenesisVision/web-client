@@ -53,8 +53,10 @@
     line-height: normal;
     font-size: 12px;
     letter-spacing: 0.4px;
-    margin-top: 10px;
     margin-bottom: 5px;
+    @include media-breakpoint-landscape-phone() {
+      margin-top: 10px;
+    }
   }
 
   &__value {

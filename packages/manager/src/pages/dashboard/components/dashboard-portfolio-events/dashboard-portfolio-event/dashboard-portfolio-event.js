@@ -41,27 +41,29 @@ const DashboardPortfolioEvent = ({ t, event }) => {
           <div className="portfolio-event__description">
             {event.description}
           </div>
-          <div className="portfolio-event__value-description">
-            {t(valueDescription)}
-          </div>
-          <span className="portfolio-event__value">
-            {isUseProfitability(event) ? (
-              <Profitability value={event.value} prefix="sign">
+          <div>
+            <div className="portfolio-event__value-description">
+              {t(valueDescription)}
+            </div>
+            <span className="portfolio-event__value">
+              {isUseProfitability(event) ? (
+                <Profitability value={event.value} prefix="sign">
+                  <NumberFormat
+                    value={formatValue(event.value)}
+                    displayType="text"
+                    allowNegative={false}
+                    suffix={` ${event.currency}`}
+                  />
+                </Profitability>
+              ) : (
                 <NumberFormat
                   value={formatValue(event.value)}
                   displayType="text"
-                  allowNegative={false}
                   suffix={` ${event.currency}`}
                 />
-              </Profitability>
-            ) : (
-              <NumberFormat
-                value={formatValue(event.value)}
-                displayType="text"
-                suffix={` ${event.currency}`}
-              />
-            )}
-          </span>
+              )}
+            </span>
+          </div>
         </div>
       </div>
     </div>
