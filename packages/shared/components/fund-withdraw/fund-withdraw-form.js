@@ -5,23 +5,14 @@ import { translate } from "react-i18next";
 import { compose } from "redux";
 import { number, object } from "yup";
 
+import { calculateValueOfEntryFee } from "../../utils/currency-converter";
 import WithdrawConfirmStep from "./fund-withdraw-confirm-step";
 import FundWithdrawEnterPercentStep from "./fund-withdraw-enter-percent-step";
-import { calculateValueOfEntryFee } from "../../utils/currency-converter";
 
-const CONFIRM_STEP = "CONFIRM_STEP";
-const ENTER_AMOUNT_STEP = "ENTER_AMOUNT_STEP";
+export const CONFIRM_STEP = "CONFIRM_STEP";
+export const ENTER_AMOUNT_STEP = "ENTER_AMOUNT_STEP";
 
 class FundWithdrawForm extends Component {
-  state = {
-    step: ENTER_AMOUNT_STEP
-  };
-  goToConfirmStep = () => {
-    this.setState({ step: CONFIRM_STEP });
-  };
-  goToEnterAmountStep = () => {
-    this.setState({ step: ENTER_AMOUNT_STEP });
-  };
   render() {
     const {
       exitFee,
@@ -34,7 +25,10 @@ class FundWithdrawForm extends Component {
       periodEnds,
       fundCurrency,
       accountCurrency,
-      errors
+      errors,
+      step,
+      goToConfirmStep,
+      goToEnterAmountStep
     } = this.props;
     const valueInCurrency = calculateValueOfEntryFee(
       availableToWithdraw,
@@ -49,7 +43,7 @@ class FundWithdrawForm extends Component {
         id="withdraw-form"
         onSubmit={handleSubmit}
       >
-        {this.state.step === ENTER_AMOUNT_STEP && (
+        {step === ENTER_AMOUNT_STEP && (
           <FundWithdrawEnterPercentStep
             valueInCurrency={valueInCurrency}
             feeInCurrency={feeInCurrency}
@@ -60,11 +54,11 @@ class FundWithdrawForm extends Component {
             fundCurrency={fundCurrency}
             accountCurrency={accountCurrency}
             availableToWithdraw={availableToWithdraw}
-            onClick={this.goToConfirmStep}
+            onClick={goToConfirmStep}
             disabled={errors.percent !== undefined}
           />
         )}
-        {this.state.step === CONFIRM_STEP && (
+        {step === CONFIRM_STEP && (
           <WithdrawConfirmStep
             valueInCurrency={valueInCurrency}
             feeInCurrency={feeInCurrency}
@@ -72,7 +66,7 @@ class FundWithdrawForm extends Component {
             withdrawAmount={withdrawAmount}
             periodEnds={periodEnds}
             percent={values.percent}
-            onPrevClick={this.goToEnterAmountStep}
+            onPrevClick={goToEnterAmountStep}
             error={errorMessage}
             disabled={disabled}
           />
