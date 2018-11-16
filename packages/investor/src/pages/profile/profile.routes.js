@@ -1,4 +1,3 @@
-// import ProfileEditPage from "pages/profile/edit/edit.page";
 import PasswordPage from "pages/profile/password/password.page";
 import {
   KYC_ROUTE,
@@ -18,7 +17,6 @@ const ProfileRoutes = () => (
     <Route path={KYC_ROUTE} component={KYCPage} />
     <Route path={PASSWORD_ROUTE} component={PasswordPage} />
     <Route path={SETTINGS_ROUTE} component={SettingsPage} />
-    {/*<Route path={PROFILE_EDIT_ROUTE} component={ProfileEditPage} />*/}
     <Route path={PROFILE_ROUTE} component={ProfilePage} />
   </Switch>
 );
