@@ -7,7 +7,6 @@ import { FUND } from "modules/asset-edit/asset-edit.constants";
 import { toggleFavoriteFund } from "shared/modules/favorite-asset/services/favorite-fund.service";
 import FundDepositContainer from "modules/fund-deposit/fund-deposit-container";
 import FundWithdrawContainer from "modules/fund-withdraw/fund-withdraw-container";
-import { toggleReinvesting } from "modules/program-reinvesting/services/program-reinvesting.service";
 import ReallocateContainer from "modules/reallocate/reallocate-container";
 import { FundDetailContext } from "pages/funds/fund-details/fund-details.page";
 
@@ -52,37 +51,6 @@ class FundDetailsDescriptionSection extends PureComponent {
     return newState;
   }
 
-  handleOnReinvestingClick = () => {
-    const { ui, fundDescription } = this.state;
-    const { id, personalFundDetails } = fundDescription;
-    const { isReinvest } = personalFundDetails;
-
-    const composeNewReinvestState = newState => ({
-      ...fundDescription,
-      personalFundDetails: {
-        ...personalFundDetails,
-        isReinvest: !isReinvest
-      }
-    });
-
-    this.setState({
-      ui: { ...ui, isReinvestPending: true },
-      fundDescription: composeNewReinvestState(!isReinvest)
-    });
-    toggleReinvesting(id, isReinvest)
-      .then(() => {
-        this.setState({
-          ui: { ...ui, isReinvestPending: false }
-        });
-      })
-      .catch(e => {
-        this.setState({
-          fundDescription: composeNewReinvestState(isReinvest),
-          ui: { ...ui, isReinvestPending: false }
-        });
-      });
-  };
-
   handleOnFavoriteClick = () => {
     const { ui, fundDescription } = this.state;
     const { id, personalFundDetails } = fundDescription;
@@ -126,7 +94,6 @@ class FundDetailsDescriptionSection extends PureComponent {
           FundWithdrawContainer={FundWithdrawContainer}
           FundDepositContainer={FundDepositContainer}
           fundDescription={fundDescription}
-          onReinvestingClick={this.handleOnReinvestingClick}
           isReinvestPending={ui.isReinvestPending}
           onFavoriteClick={this.handleOnFavoriteClick}
           isFavoritePending={ui.isFavoritePending}
