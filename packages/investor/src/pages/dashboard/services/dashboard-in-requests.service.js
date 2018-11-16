@@ -1,4 +1,4 @@
-import { fetchProfileHeaderInfo } from "modules/header/actions/header-actions";
+import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
 import authService from "shared/services/auth-service";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 

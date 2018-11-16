@@ -1,5 +1,5 @@
 import authActions from "shared/actions/auth-actions";
-import { fetchProfileHeaderInfo } from "modules/header/actions/header-actions";
+import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
 import { authApiProxy } from "shared/services/api-client/auth-api";
 import { profileApiProxy } from "shared/services/api-client/profile-api";
 import authService from "shared/services/auth-service";
