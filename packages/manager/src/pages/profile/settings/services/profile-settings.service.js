@@ -1,7 +1,7 @@
 import { fetchProfileHeaderInfo } from "modules/header/actions/header-actions";
 import authActions from "shared/actions/auth-actions";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import { authApiProxy } from "shared/services/api-client/auth-api";
+import authApi from "shared/services/api-client/auth-api";
 import profileApi from "shared/services/api-client/profile-api";
 import authService from "shared/services/auth-service";
 import filesService from "shared/services/file-service";
@@ -58,10 +58,10 @@ export const removeProfileAvatar = ({ submitCallback }) => dispatch => {
 };
 
 export const logoutFromDevices = () => dispatch => {
-  return authApiProxy
+  return authApi
     .v10AuthTokenDevicesLogoutPost(authService.getAuthArg())
     .then(response => {
-      authService.storeToken(response.data);
+      authService.storeToken(response);
       dispatch(authActions.updateToken());
       dispatch(
         alertMessageActions.success(

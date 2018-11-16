@@ -12,7 +12,7 @@ class LogoutButtonContainer extends PureComponent {
     this.setState({ isPending: true }, () => {
       this.props.services
         .logoutFromDevices()
-        .then(({ isPending }) => this.setState({ isPending }))
+        .then(() => this.setState({ isPending: false }))
         .catch(() => this.setState({ isPending: false }));
     });
   };
@@ -36,6 +36,10 @@ const mapDispatchToProps = (dispatch, props) => ({
   services: bindActionCreators(props.profileSettingsService, dispatch)
 });
 
-export default compose(translate(), connect(null, mapDispatchToProps))(
-  LogoutButtonContainer
-);
+export default compose(
+  translate(),
+  connect(
+    null,
+    mapDispatchToProps
+  )
+)(LogoutButtonContainer);

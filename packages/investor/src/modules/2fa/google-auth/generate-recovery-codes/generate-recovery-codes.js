@@ -1,11 +1,11 @@
-import Dialog from "shared/components/dialog/dialog";
 import { GVButton } from "gv-react-components";
 import GenerateRecoveryWithFormik from "modules/2fa/google-auth/generate-recovery-codes/generate-recovery-form";
 import GoogleAuthCodes from "modules/2fa/google-auth/google-auth-codes";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
-import { authApiProxy } from "shared/services/api-client/auth-api";
+import Dialog from "shared/components/dialog/dialog";
+import authApi from "shared/services/api-client/auth-api";
 import authService from "shared/services/auth-service";
 
 class GenerateRecoveryCode extends Component {
@@ -23,12 +23,12 @@ class GenerateRecoveryCode extends Component {
   };
   handleSubmit = values => {
     this.setState({ isPending: true });
-    authApiProxy
+    authApi
       .v10Auth2faRecoverycodesNewPost(authService.getAuthArg(), {
         model: values
       })
-      .then(data => this.setState({ ...data }))
-      .catch(data => this.setState({ ...data }));
+      .then(data => this.setState({ data }))
+      .catch(data => this.setState({ data }));
   };
 
   render() {
