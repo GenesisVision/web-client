@@ -39,13 +39,14 @@ class FacetCards extends Component {
   };
 
   render() {
-    const { facets, composeFacetUrl } = this.props;
+    const { facets, composeFacetUrl, title } = this.props;
     return (
       <div className="facets__wrapper facets__shadow" ref={this.facetList}>
         <div className="facets" ref={this.scroll} onScroll={this.handleScroll}>
           <div className="facets__carousel">
             {facets.map(x => (
               <FacetCard
+                title={title}
                 key={x.id}
                 facet={x}
                 composeFacetUrl={composeFacetUrl}
