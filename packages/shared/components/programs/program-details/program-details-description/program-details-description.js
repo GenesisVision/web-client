@@ -304,19 +304,20 @@ class ProgramDetailsDescription extends PureComponent {
                     )}
                   </div>
                 </div>
-                {status !== "Ended" && (
-                  <DetailsInvestment
-                    WithdrawContainer={ProgramWithdrawContainer}
-                    notice={t(
-                      "program-details-page.description.withdraw-notice-text"
-                    )}
-                    canWithdraw={canWithdraw}
-                    className={"program-details-description__your-investment"}
-                    assetCurrency={programDescription.currency}
-                    onChangeInvestmentStatus={onChangeInvestmentStatus}
-                    {...investmentData}
-                  />
-                )}
+                {programDescription.personalProgramDetails &&
+                  status !== "Ended" && (
+                    <DetailsInvestment
+                      WithdrawContainer={ProgramWithdrawContainer}
+                      notice={t(
+                        "program-details-page.description.withdraw-notice-text"
+                      )}
+                      canWithdraw={canWithdraw}
+                      className={"details-description__your-investment"}
+                      assetCurrency={programDescription.currency}
+                      onChangeInvestmentStatus={onChangeInvestmentStatus}
+                      {...investmentData}
+                    />
+                  )}
               </Fragment>
             )}
             <ProgramDetailContext.Consumer>

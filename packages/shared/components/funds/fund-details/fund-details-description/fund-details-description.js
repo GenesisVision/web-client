@@ -252,7 +252,7 @@ class FundDetailsDescription extends PureComponent {
                 </div>
               </Fragment>
             )}
-            {status !== "Ended" && (
+            {fundDescription.personalFundDetails && status !== "Ended" && (
               <DetailsInvestment
                 WithdrawContainer={FundWithdrawContainer}
                 canWithdraw={canWithdraw}

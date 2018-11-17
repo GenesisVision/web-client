@@ -5,19 +5,13 @@ import ProgramDetailsDescription from "shared/components/programs/program-detail
 
 const composeInvestmentData = programDetails => {
   const { statistic, personalProgramDetails } = programDetails;
-
   const { balanceBase, profitPercent } = statistic;
-
   return {
-    pendingInput: personalProgramDetails.pendingInput,
-    pendingOutput: personalProgramDetails.pendingOutput,
     id: programDetails.id,
-    investedAmount: personalProgramDetails.value,
     balanceAmount: balanceBase.amount,
     balanceCurrency: balanceBase.currency,
     profitPercent,
-    status: personalProgramDetails.status,
-    value: personalProgramDetails.value
+    ...personalProgramDetails
   };
 };
 class ProgramDetailsDescriptionSection extends PureComponent {
