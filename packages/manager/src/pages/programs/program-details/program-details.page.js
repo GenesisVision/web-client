@@ -16,7 +16,13 @@ import {
   getProgramHistory,
   getProgramStatistic
 } from "./services/program-details.service";
-
+import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
+import AboutLevelsContainerComponent from "pages/app/components/about-levels/about-levels-container";
+import AssetEditContainer from "modules/asset-edit/asset-edit-container";
+import { PROGRAM } from "modules/asset-edit/asset-edit.constants";
+import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
+import ClosePeriodContainer from "./close-period/close-period-container";
+import CloseProgramContainer from "./close-program/close-program-container";
 export const ProgramDetailContext = React.createContext({
   updateDetails: () => {}
 });
@@ -108,6 +114,14 @@ class ProgramDetailsPage extends PureComponent {
           <div className="program-details">
             <div className="program-details__section">
               <ProgramDetailsDescriptionSection
+                ProgramDepositContainer={ProgramDepositContainer}
+                AboutLevelsContainerComponent={AboutLevelsContainerComponent}
+                AssetEditContainer={AssetEditContainer}
+                PROGRAM={PROGRAM}
+                ProgramWithdrawContainer={ProgramWithdrawContainer}
+                ClosePeriodContainer={ClosePeriodContainer}
+                CloseProgramContainer={CloseProgramContainer}
+                ProgramDetailContext={ProgramDetailContext}
                 programDescriptionData={this.description}
                 isAuthenticated={isAuthenticated}
                 redirectToLogin={service.redirectToLogin}
