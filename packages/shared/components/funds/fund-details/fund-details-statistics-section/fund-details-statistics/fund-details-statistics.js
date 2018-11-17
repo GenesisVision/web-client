@@ -1,4 +1,4 @@
-import "./fund-details-statistics.scss";
+import "shared/components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.scss";
 
 import moment from "moment";
 import React from "react";
@@ -13,15 +13,15 @@ const FundDetailsStatistics = ({ t, statisticData, period }) => {
   const { data: statistic, isPending } = statisticData;
   if (!statistic || isPending) return null;
   return (
-    <Surface className="fund-details-statistics">
-      <div className="fund-details-statistics__heading">
+    <Surface className="details-statistics">
+      <div className="details-statistics__heading">
         {t("fund-details-page.statistics.heading")}
       </div>
-      <div className="fund-details-statistics__subheading">
+      <div className="details-statistics__subheading">
         {t("fund-details-page.statistics.current")}
       </div>
-      <div className="fund-details-statistics__particular-information">
-        <div className="fund-details-statistics__vertical-info-block">
+      <div className="details-statistics__particular-information">
+        <div className="details-statistics__vertical-info-block">
           <DetailsStatisticItem
             label={t("fund-details-page.statistics.balance")}
             accent
@@ -40,7 +40,7 @@ const FundDetailsStatistics = ({ t, statisticData, period }) => {
             {moment(statistic.creationDate).format("D MMM YYYY")}
           </DetailsStatisticItem>
         </div>
-        <div className="fund-details-statistics__vertical-info-block">
+        <div className="details-statistics__vertical-info-block">
           <DetailsStatisticItem
             label={t("fund-details-page.statistics.investors")}
           >
@@ -52,12 +52,12 @@ const FundDetailsStatistics = ({ t, statisticData, period }) => {
           </DetailsStatisticItem>
         </div>
       </div>
-      <div className="fund-details-statistics__subheading">
+      <div className="details-statistics__subheading">
         {t("fund-details-page.statistics.for")}{" "}
         {t(`chart-period.${ChartPeriodType[period.type]}`)}
       </div>
-      <div className="fund-details-statistics__particular-information">
-        <div className="fund-details-statistics__column">
+      <div className="details-statistics__particular-information">
+        <div className="details-statistics__column">
           <DetailsStatisticItem
             label={t("fund-details-page.statistics.calmarRatio")}
             half
@@ -99,7 +99,7 @@ const FundDetailsStatistics = ({ t, statisticData, period }) => {
             />
           </DetailsStatisticItem>
         </div>
-        <div className="fund-details-statistics__column">
+        <div className="details-statistics__column">
           <DetailsStatisticItem
             label={t("fund-details-page.statistics.sharpe-ratio")}
             half

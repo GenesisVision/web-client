@@ -20,18 +20,18 @@ const ProgramBalanceChartSection = ({
           value={balanceChart.gvtBalance}
           equivalent={balanceChart.programCurrencyBalance}
           currency={balanceChart.programCurrency}
-          className="fund-details-chart__stat-item"
+          className="details-chart__stat-item"
         />
         {/* <StatisticItem
           heading={"Change"}
           value={changeValue}
           equivalent={"???"}
           currency={"???"}
-          className="fund-details-chart__stat-item"
+          className="details-chart__stat-item"
         /> */}
       </div>
       <ChartPeriod onChange={onPeriodChange} period={period} />
-      <div className="fund-details-chart__profit">
+      <div className="details-chart__profit">
         <FundBalanceChart
           balanceChart={balanceChart.balanceChart}
           currency={"BTC"}
