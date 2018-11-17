@@ -1,4 +1,4 @@
-import "./program-details.scss";
+import "shared/components/programs/program-details/program-details.scss";
 
 import Page from "shared/components/page/page";
 import React, { PureComponent } from "react";
