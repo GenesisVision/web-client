@@ -80,7 +80,7 @@ class FundDetailsDescription extends PureComponent {
       fundDescription,
       onFavoriteClick,
       isFavoritePending,
-      composeInvestmentData,
+      investmentData,
       onChangeInvestmentStatus,
       canInvest
     } = this.props;
@@ -258,7 +258,7 @@ class FundDetailsDescription extends PureComponent {
                 canWithdraw={canWithdraw}
                 className={"fund-details-description__your-investment"}
                 assetCurrency={"GVT"}
-                {...composeInvestmentData(fundDescription)}
+                {...investmentData}
                 onChangeInvestmentStatus={onChangeInvestmentStatus}
               />
             )}
