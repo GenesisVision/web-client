@@ -2,7 +2,7 @@
 @import "shared/styles/_breakpoint.scss";
 @import "shared/styles/_sizes.scss";
 
-.program-details-chart {
+.details-chart {
   padding: 0 $padding-middle-mobile;
   padding-bottom: $padding-middle-mobile;
   flex: 1;
@@ -11,7 +11,7 @@
   justify-content: space-between;
   width: 100px;
 
-  &__title {
+  &__heading {
     font-size: $font-size-subtitle-mobile;
     font-weight: 600;
     letter-spacing: 0.2px;
@@ -23,7 +23,7 @@
     width: 100%;
   }
 
-  .program-details-tooltip {
+  .details-tooltip {
     &__statistic {
       padding: 5px 0;
     }
@@ -50,12 +50,12 @@
     padding: 0 $padding-middle;
     padding-bottom: $padding-middle;
 
-    &__title {
+    &__heading {
       font-size: $font-size-subtitle;
-      padding: 32px 0;
+      padding: $padding-middle 0;
     }
 
-    .program-details-tooltip {
+    .details-tooltip {
       &__title {
         font-size: $font-size-middle;
         padding: $padding-mini/4 0;

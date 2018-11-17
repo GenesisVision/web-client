@@ -1,8 +1,8 @@
-@import "shared/styles/_colors.scss";
-@import "shared/styles/_breakpoint.scss";
-@import "shared/styles/_sizes.scss";
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
 
-.program-details {
+.details {
   &__section {
     margin-bottom: $padding-large-mobile;
     @include media-breakpoint-landscape-phone() {
@@ -16,6 +16,9 @@
   flex-direction: column;
   align-items: flex-start;
   background: #25434d;
+  &__text-block {
+    background: #273642;
+  }
   &__block {
     display: flex;
     flex-direction: column;

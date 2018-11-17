@@ -1,11 +1,21 @@
 @import "shared/styles/_colors.scss";
+@import "shared/styles/_breakpoint.scss";
+@import "shared/styles/_sizes.scss";
 
-.program-details-trades {
+.details-trades {
   overflow: hidden;
 
   & .table__row--head,
   &__row:nth-child(2n + 1) {
     background-color: $table-background-subcolor;
+  }
+
+  &__cell,
+  &__head-cell {
+    font-size: $font-size-middle-mobile;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-middle;
+    }
   }
 
   &__cell {

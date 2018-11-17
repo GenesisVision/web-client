@@ -1,4 +1,4 @@
-import "./program-details.scss";
+import "shared/components/details/details.scss";
 
 import Page from "shared/components/page/page";
 import React, { PureComponent } from "react";
@@ -8,7 +8,7 @@ import { bindActionCreators, compose } from "redux";
 
 import { LOGIN_ROUTE } from "../../auth/login/login.routes";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
-import ProgramDetailsDescriptionSection from "./components/program-details-description-section/program-details-description-section";
+import ProgramDetailsDescriptionSection from "shared/components/programs/program-details/program-details-description/program-details-description-section";
 import ProgramDetailsHistorySection from "./components/program-details-history-section/program-details-history-section";
 import ProgramDetailsStatisticSection from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import {
@@ -16,6 +16,11 @@ import {
   getProgramHistory,
   getProgramStatistic
 } from "./services/program-details.service";
+import { toggleReinvesting } from "modules/program-reinvesting/services/program-reinvesting.service";
+import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
+import AboutLevelsContainerComponent from "pages/app/components/about-levels/about-levels-container";
+import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
+import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
 
 export const ProgramDetailContext = React.createContext({
   updateDetails: () => {}
@@ -105,16 +110,22 @@ class ProgramDetailsPage extends PureComponent {
             updateDetails: this.updateDetails
           }}
         >
-          <div className="program-details">
-            <div className="program-details__section">
+          <div className="details">
+            <div className="details__section">
               <ProgramDetailsDescriptionSection
+                toggleReinvesting={toggleReinvesting}
+                ProgramDepositContainer={ProgramDepositContainer}
+                AboutLevelsContainerComponent={AboutLevelsContainerComponent}
+                ProgramDetailContext={ProgramDetailContext}
+                ProgramWithdrawContainer={ProgramWithdrawContainer}
+                ProgramReinvestingWidget={ProgramReinvestingWidget}
                 programDescriptionData={this.description}
                 isAuthenticated={isAuthenticated}
                 redirectToLogin={service.redirectToLogin}
                 onChangeInvestmentStatus={this.changeInvestmentStatus}
               />
             </div>
-            <div className="program-details__section">
+            <div className="details__section">
               <ProgramDetailsStatisticSection
                 getProgramStatistic={getProgramStatistic}
                 programId={this.description.data.id}
@@ -124,7 +135,7 @@ class ProgramDetailsPage extends PureComponent {
                 balanceChartData={this.balanceChart}
               />
             </div>
-            <div className="program-details__history">
+            <div className="details__history">
               <ProgramDetailsHistorySection
                 programId={this.description.data.id}
                 currency={currency}

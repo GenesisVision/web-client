@@ -1,4 +1,4 @@
-import "./program-trades.scss";
+import "shared/components/details/details-description-section/details-statistic-section/details-history/trades.scss";
 
 import moment from "moment";
 import React, { Component, Fragment } from "react";
@@ -58,7 +58,7 @@ class ProgramTrades extends Component {
         columns={PROGRAM_TRADES_COLUMNS}
         renderHeader={column => (
           <span
-            className={`program-details-trades__head-cell program-details-trades__cell--${
+            className={`details-trades__head-cell program-details-trades__cell--${
               column.name
             }`}
           >
@@ -66,8 +66,8 @@ class ProgramTrades extends Component {
           </span>
         )}
         renderBodyRow={trade => (
-          <TableRow className="program-details-trades__row">
-            <TableCell className="program-details-trades__cell program-details-trades__cell--direction">
+          <TableRow className="details-trades__row">
+            <TableCell className="details-trades__cell program-details-trades__cell--direction">
               <BaseProfitability
                 isPositive={trade.direction === "Buy"}
                 isNegative={trade.direction === "Sell"}
@@ -75,32 +75,32 @@ class ProgramTrades extends Component {
                 {trade.direction}
               </BaseProfitability>
             </TableCell>
-            <TableCell className="program-details-trades__cell program-details-trades__cell--symbol">
+            <TableCell className="details-trades__cell program-details-trades__cell--symbol">
               {trade.symbol}
             </TableCell>
-            <TableCell className="program-details-trades__cell program-details-trades__cell--volume">
+            <TableCell className="details-trades__cell program-details-trades__cell--volume">
               {formatValue(trade.volume)}
             </TableCell>
-            <TableCell className="program-details-trades__cell program-details-trades__cell--price">
+            <TableCell className="details-trades__cell program-details-trades__cell--price">
               <NumberFormat
                 value={formatValue(trade.price)}
                 displayType="text"
                 thousandSeparator=" "
               />
             </TableCell>
-            <TableCell className="program-details-trades__cell program-details-trades__cell--profit">
+            <TableCell className="details-trades__cell program-details-trades__cell--profit">
               <Profitability value={+formatValue(trade.profit)} prefix="sign">
                 {formatValue(trade.profit, null, true)}
               </Profitability>
             </TableCell>
-            <TableCell className="program-details-trades__cell program-details-trades__cell--date">
+            <TableCell className="details-trades__cell program-details-trades__cell--date">
               {moment(trade.date).format("DD-MM-YYYY, hh:mm a")}
             </TableCell>
-            <TableCell className="program-details-trades__cell program-details-trades__cell--ticket">
+            <TableCell className="details-trades__cell program-details-trades__cell--ticket">
               {trade.ticket}
             </TableCell>
 
-            <TableCell className="program-details-trades__cell program-details-trades__cell--entry">
+            <TableCell className="details-trades__cell program-details-trades__cell--entry">
               {trade.entry}
             </TableCell>
           </TableRow>

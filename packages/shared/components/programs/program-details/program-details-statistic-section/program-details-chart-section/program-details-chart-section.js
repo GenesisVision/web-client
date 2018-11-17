@@ -1,4 +1,4 @@
-import "./program-details-chart-section.scss";
+import "shared/components/details/details-description-section/details-statistic-section/details-chart-section/details-chart-section.scss";
 
 import Surface from "shared/components/surface/surface";
 import { GVTab, GVTabs } from "gv-react-components";
@@ -30,22 +30,20 @@ class ProgramDetailsChartSection extends PureComponent {
     const { tab } = this.state;
 
     return (
-      <Surface className="program-details-chart">
-        <div className="program-details-chart__heading">
-          <div className="program-details-chart__title">
-            {t("program-details-page.chart.heading")}
-          </div>
-          <GVTabs value={tab} onChange={this.handleTabChange}>
-            <GVTab
-              value={PROFIT_TAB}
-              label={t("program-details-page.chart.tabs.profit")}
-            />
-            <GVTab
-              value={BALANCE_TAB}
-              label={t("program-details-page.chart.tabs.balance")}
-            />
-          </GVTabs>
+      <Surface className="details-chart">
+        <div className="details-chart__heading">
+          {t("program-details-page.chart.heading")}
         </div>
+        <GVTabs value={tab} onChange={this.handleTabChange}>
+          <GVTab
+            value={PROFIT_TAB}
+            label={t("program-details-page.chart.tabs.profit")}
+          />
+          <GVTab
+            value={BALANCE_TAB}
+            label={t("program-details-page.chart.tabs.balance")}
+          />
+        </GVTabs>
         {tab === PROFIT_TAB && (
           <ProgramProfitChartSection
             profitChartData={profitChartData}

@@ -1,25 +1,17 @@
-import { toggleFavoriteFund } from "shared/modules/favorite-asset/services/favorite-fund.service";
-import FundWithdrawContainer from "modules/fund-withdraw/fund-withdraw-container";
-import FundDepositContainer from "modules/fund-deposit/fund-deposit-container";
-import { FundDetailContext } from "pages/funds/fund-details/fund-details.page";
 import React, { Fragment, PureComponent } from "react";
 
 import FundDetailsDescription from "shared/components/funds/fund-details/fund-details-description/fund-details-description";
+import { toggleFavoriteFund } from "shared/modules/favorite-asset/services/favorite-fund.service";
 
 const composeInvestmentData = fundDetails => {
   const { statistic, personalFundDetails } = fundDetails;
-
   const { balanceGVT, profitPercent } = statistic;
   return {
-    pendingInput: personalFundDetails.pendingInput,
-    pendingOutput: personalFundDetails.pendingOutput,
     id: fundDetails.id,
-    investedAmount: personalFundDetails.invested,
-    value: personalFundDetails.value,
     balanceAmount: balanceGVT.amount,
     balanceCurrency: balanceGVT.currency,
     profitPercent,
-    status: personalFundDetails.status
+    ...personalFundDetails
   };
 };
 class FundDetailsDescriptionSection extends PureComponent {
@@ -79,13 +71,10 @@ class FundDetailsDescriptionSection extends PureComponent {
     return (
       <Fragment>
         <FundDetailsDescription
-          FundDetailContext={FundDetailContext}
-          FundWithdrawContainer={FundWithdrawContainer}
-          FundDepositContainer={FundDepositContainer}
           fundDescription={fundDescription}
           onFavoriteClick={this.handleOnFavoriteClick}
           isFavoritePending={ui.isFavoritePending}
-          composeInvestmentData={composeInvestmentData}
+          investmentData={composeInvestmentData(fundDescription)}
           {...fundDescription.personalFundDetails}
           {...this.props}
         />

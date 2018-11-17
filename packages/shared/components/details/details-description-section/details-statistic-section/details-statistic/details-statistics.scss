@@ -2,7 +2,7 @@
 @import "shared/styles/_breakpoint.scss";
 @import "shared/styles/_sizes.scss";
 
-.fund-details-statistics {
+.details-statistics {
   box-sizing: border-box;
   padding: 0 $padding-middle-mobile;
   width: 100%;
@@ -75,6 +75,7 @@
     &--half {
       width: 70px;
       @include media-breakpoint-landscape-phone() {
+        padding-right: 0;
         width: auto;
         box-sizing: border-box;
       }

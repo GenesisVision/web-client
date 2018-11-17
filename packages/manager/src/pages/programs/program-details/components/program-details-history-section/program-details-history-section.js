@@ -1,4 +1,4 @@
-import "./program-details-history.scss";
+import "shared/components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
 
 import Surface from "shared/components/surface/surface";
 import { GVTab, GVTabs } from "gv-react-components";
@@ -51,13 +51,13 @@ class ProgramDetailsHistorySection extends PureComponent {
     } = this.props;
     if (!tradesData) return null;
     return (
-      <Surface className="program-details-history">
-        <div className="program-details-history__header">
-          <div className="program-details-history__heading">
+      <Surface className="details-history">
+        <div className="details-history__header">
+          <div className="details-history__heading">
             {t("program-details-page.history.heading")}
           </div>
           {(isAuthenticated && isInvested && (
-            <div className="program-details-history__tabs">
+            <div className="details-history__tabs">
               <GVTabs value={tab} onChange={this.handleTabChange}>
                 <GVTab
                   value={"trades"}
@@ -70,7 +70,7 @@ class ProgramDetailsHistorySection extends PureComponent {
               </GVTabs>
             </div>
           )) || (
-            <div className="program-details-history__subheading">
+            <div className="details-history__subheading">
               {t("program-details-page.history.tabs.trades")}
             </div>
           )}

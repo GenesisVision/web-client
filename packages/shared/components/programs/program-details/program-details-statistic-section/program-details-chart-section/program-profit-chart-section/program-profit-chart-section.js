@@ -20,18 +20,18 @@ const ProgramProfitChartSection = ({
           value={profitChart.totalGvtProfit}
           equivalent={profitChart.totalProgramCurrencyProfit}
           currency={profitChart.programCurrency}
-          className="program-details-chart__stat-item"
+          className="details-chart__stat-item"
         />
         {/* <StatisticItem
           heading={"Change"}
           value={changeValue}
           equivalent={"???"}
           currency={"???"}
-          className="program-details-chart__stat-item"
+          className="details-chart__stat-item"
         /> */}
       </div>
       <ChartPeriod onChange={onPeriodChange} period={period} />
-      <div className="program-details-chart__profit">
+      <div className="details-chart__profit">
         <ProgramProfitChart
           equityChart={profitChart.equityChart}
           pnlChart={profitChart.pnLChart}

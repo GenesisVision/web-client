@@ -13,7 +13,6 @@ class ClosePeriod extends Component {
     const { t, open, onCancel } = this.props;
     return (
       <ConfirmPopup
-        // dialogClassName="program-details-description__close-program-popup"
         open={open}
         onClose={onCancel}
         onCancel={onCancel}

@@ -5,17 +5,17 @@ import { formatValue } from "shared/utils/formatter";
 const TooltipBody = ({ managersFunds, investorsFunds, profit }) => {
   return (
     <Fragment>
-      <div className="program-details-tooltip__statistic">
-        <div className="program-details-tooltip__title">Profit</div>
-        <div className="program-details-tooltip__value">{profit}</div>
+      <div className="details-tooltip__statistic">
+        <div className="details-tooltip__title">Profit</div>
+        <div className="details-tooltip__value">{profit}</div>
       </div>
-      <div className="program-details-tooltip__statistic">
-        <div className="program-details-tooltip__title">Investors Funds</div>
-        <div className="program-details-tooltip__value">{investorsFunds}</div>
+      <div className="details-tooltip__statistic">
+        <div className="details-tooltip__title">Investors Funds</div>
+        <div className="details-tooltip__value">{investorsFunds}</div>
       </div>
-      <div className="program-details-tooltip__statistic">
-        <div className="program-details-tooltip__title">Managers Funds</div>
-        <div className="program-details-tooltip__value">{managersFunds}</div>
+      <div className="details-tooltip__statistic">
+        <div className="details-tooltip__title">Managers Funds</div>
+        <div className="details-tooltip__value">{managersFunds}</div>
       </div>
     </Fragment>
   );
@@ -49,7 +49,7 @@ const ProgramBalanceTooltip = ({
         />
       }
       date={new Date(label)}
-      className="program-details-tooltip"
+      className="details-tooltip"
     />
   );
 };
