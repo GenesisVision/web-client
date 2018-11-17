@@ -5,8 +5,8 @@ import { formatValue } from "shared/utils/formatter";
 const TooltipBody = ({ equity, pnl }) => {
   return (
     <Fragment>
-      <div className="program-details-tooltip__statistic">
-        <div className="program-details-tooltip__value">
+      <div className="details-tooltip__statistic">
+        <div className="details-tooltip__value">
           {pnl} ({equity})
         </div>
       </div>
@@ -34,7 +34,7 @@ const ProgramProfitTooltip = ({
     <ChartTooltip
       body={<TooltipBody equity={equity} pnl={pnl} />}
       date={new Date(label)}
-      className="program-details-tooltip"
+      className="details-tooltip"
     />
   );
 };
