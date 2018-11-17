@@ -8,7 +8,7 @@ import { bindActionCreators, compose } from "redux";
 
 import { LOGIN_ROUTE } from "../../auth/login/login.routes";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
-import FundDetailsDescriptionSection from "./components/fund-details-description-section/fund-details-description-section";
+import FundDetailsDescriptionSection from "shared/components/funds/fund-details/fund-details-description/fund-details-description-section";
 import FundDetailsHistorySection from "./components/fund-details-history-section/fund-details-history-section";
 import FundDetailsStatisticSection from "shared/components/funds/fund-details/fund-details-statistics-section/fund-details-statistic-section";
 import {
@@ -16,6 +16,11 @@ import {
   getFundStatistic,
   getFundStructure
 } from "./services/fund-details.service";
+import AssetEditContainer from "modules/asset-edit/asset-edit-container";
+import { FUND } from "modules/asset-edit/asset-edit.constants";
+import FundDepositContainer from "modules/fund-deposit/fund-deposit-container";
+import FundWithdrawContainer from "modules/fund-withdraw/fund-withdraw-container";
+import ReallocateContainer from "modules/reallocate/reallocate-container";
 
 export const FundDetailContext = React.createContext({
   updateDetails: () => {}
@@ -105,6 +110,12 @@ class FundDetailsPage extends PureComponent {
           <div className="fund-details">
             <div className="fund-details__section">
               <FundDetailsDescriptionSection
+                AssetEditContainer={AssetEditContainer}
+                FUND={FUND}
+                FundDepositContainer={FundDepositContainer}
+                FundWithdrawContainer={FundWithdrawContainer}
+                ReallocateContainer={ReallocateContainer}
+                FundDetailContext={FundDetailContext}
                 fundDescriptionData={this.description}
                 isAuthenticated={isAuthenticated}
                 redirectToLogin={service.redirectToLogin}
