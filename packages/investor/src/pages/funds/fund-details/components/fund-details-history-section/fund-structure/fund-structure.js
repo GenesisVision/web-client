@@ -1,4 +1,4 @@
-import "../fund-structure/fund-structure.scss";
+import "shared/components/details/details-description-section/details-statistic-section/details-history/structure.scss";
 
 import React, { Component } from "react";
 import { translate } from "react-i18next";
@@ -37,7 +37,7 @@ class FundStructure extends Component {
         columns={FUND_STRUCTURE_COLUMNS}
         renderHeader={column => (
           <span
-            className={`fund-details-structure__head-cell fund-details-structure__cell--${
+            className={`details-structure__head-cell fund-details-structure__cell--${
               column.name
             }`}
           >
@@ -45,26 +45,26 @@ class FundStructure extends Component {
           </span>
         )}
         renderBodyRow={item => (
-          <TableRow className="fund-details-structure__row">
-            <TableCell className="fund-details-structure__cell fund-details-structure__cell">
+          <TableRow className="details-structure__row">
+            <TableCell className="details-structure__cell fund-details-structure__cell">
               {item.asset}
             </TableCell>
-            <TableCell className="fund-details-structure__cell">
-              <div className="fund-details-structure__symbol">
+            <TableCell className="details-structure__cell">
+              <div className="details-structure__symbol">
                 <FundAssetImage url={item.icon} alt={item.symbol} />
-                <div className="fund-details-structure__symbol-name">
+                <div className="details-structure__symbol-name">
                   {item.symbol}
                 </div>
               </div>
             </TableCell>
-            <TableCell className="fund-details-structure__cell fund-details-structure__cell">
+            <TableCell className="details-structure__cell fund-details-structure__cell">
               <NumberFormat
                 value={formatValue(item.target)}
                 suffix={"%"}
                 displayType="text"
               />
             </TableCell>
-            <TableCell className="fund-details-structure__cell fund-details-structure__cell">
+            <TableCell className="details-structure__cell fund-details-structure__cell">
               <NumberFormat
                 value={formatValue(item.current)}
                 suffix={"%"}

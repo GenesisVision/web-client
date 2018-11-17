@@ -1,4 +1,4 @@
-import "shared/components/programs/program-details/program-details.scss";
+import "shared/components/details/details.scss";
 
 import Page from "shared/components/page/page";
 import React, { PureComponent } from "react";
@@ -110,8 +110,8 @@ class ProgramDetailsPage extends PureComponent {
             updateDetails: this.updateDetails
           }}
         >
-          <div className="program-details">
-            <div className="program-details__section">
+          <div className="details">
+            <div className="details__section">
               <ProgramDetailsDescriptionSection
                 toggleReinvesting={toggleReinvesting}
                 ProgramDepositContainer={ProgramDepositContainer}
@@ -125,7 +125,7 @@ class ProgramDetailsPage extends PureComponent {
                 onChangeInvestmentStatus={this.changeInvestmentStatus}
               />
             </div>
-            <div className="program-details__section">
+            <div className="details__section">
               <ProgramDetailsStatisticSection
                 getProgramStatistic={getProgramStatistic}
                 programId={this.description.data.id}
@@ -135,7 +135,7 @@ class ProgramDetailsPage extends PureComponent {
                 balanceChartData={this.balanceChart}
               />
             </div>
-            <div className="program-details__history">
+            <div className="details__history">
               <ProgramDetailsHistorySection
                 programId={this.description.data.id}
                 currency={currency}
