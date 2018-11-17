@@ -1,4 +1,4 @@
-import "shared/components/funds/fund-details/fund-details.scss";
+import "shared/components/details/details.scss";
 
 import Page from "shared/components/page/page";
 import React, { PureComponent } from "react";
@@ -107,8 +107,8 @@ class FundDetailsPage extends PureComponent {
             updateDetails: this.updateDetails
           }}
         >
-          <div className="fund-details">
-            <div className="fund-details__section">
+          <div className="details">
+            <div className="details__section">
               <FundDetailsDescriptionSection
                 AssetEditContainer={AssetEditContainer}
                 FUND={FUND}
@@ -122,7 +122,7 @@ class FundDetailsPage extends PureComponent {
                 onChangeInvestmentStatus={this.changeInvestmentStatus}
               />
             </div>
-            <div className="fund-details__section">
+            <div className="details__section">
               <FundDetailsStatisticSection
                 getFundStatistic={getFundStatistic}
                 programId={this.description.data.id}
@@ -132,7 +132,7 @@ class FundDetailsPage extends PureComponent {
                 balanceChartData={this.balanceChart}
               />
             </div>
-            <div className="fund-details__history">
+            <div className="details__history">
               <FundDetailsHistorySection
                 fundId={this.description.data.id}
                 currency={currency}
