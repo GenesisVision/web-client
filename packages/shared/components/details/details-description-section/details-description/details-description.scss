@@ -20,6 +20,11 @@
     height: 50px / $divider-title;
     padding: 15px / $divider-padding;
     justify-content: space-between;
+    &__container {
+      &--others-count {
+        cursor: pointer;
+      }
+    }
     &--others-count {
       min-width: auto;
       background: rgba(216, 216, 216, 0.1);
@@ -107,19 +112,22 @@
   }
 
   &__author-btn {
-    padding: 0;
+    padding: 0 0 $padding-very-large-mobile;
     font-size: 13px;
     letter-spacing: 0.19px;
     font-weight: bold;
+    @include media-breakpoint-landscape-phone() {
+      padding: 0 0 $padding-very-large;
+    }
   }
 
   &__info {
-    padding-top: $padding-very-large-mobile;
+    //padding-top: $padding-very-large-mobile;
   }
 
   &__invest-button-container {
     padding-bottom: $padding-middle-mobile;
-    & > button {
+    & > button, .details-description__reallocate-container {
       margin-top: $padding-middle-mobile;
     }
     & button:not(:last-child) {
@@ -127,13 +135,25 @@
     }
     @include media-breakpoint-landscape-phone() {
       padding-bottom: $padding-middle;
-      & > button {
+      & > button, .details-description__reallocate-container {
         margin-top: $padding-middle;
       }
       & button:not(:last-child) {
         margin-right: $padding-middle;
       }
+    }
+  }
 
+  &__reallocate-container {
+    display: flex;
+    align-items: center;
+  }
+
+  &__reallocate-message {
+    font-size: $font-size-small-mobile;
+    opacity: 0.4;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-small;
     }
   }
 
@@ -226,12 +246,15 @@
     justify-content: center;
     cursor: pointer;
     color: $label-color;
-    .icon--ring {
-      width: 27px;
-      height: 27px;
+    .icon path {
+      stroke: $label-color;
     }
     &-icon svg [stroke] {
       stroke: $label-color;
+    }
+    .icon--ring {
+      width: 27px;
+      height: 27px;
     }
     &:hover {
       path {
