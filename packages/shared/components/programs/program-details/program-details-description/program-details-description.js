@@ -106,7 +106,7 @@ class ProgramDetailsDescription extends PureComponent {
       canWithdraw,
       programDescription,
       onFavoriteClick,
-      composeInvestmentData,
+      investmentData,
       onChangeInvestmentStatus
     } = this.props;
 
@@ -313,8 +313,8 @@ class ProgramDetailsDescription extends PureComponent {
                     canWithdraw={canWithdraw}
                     className={"program-details-description__your-investment"}
                     assetCurrency={programDescription.currency}
-                    {...composeInvestmentData(programDescription)}
                     onChangeInvestmentStatus={onChangeInvestmentStatus}
+                    {...investmentData}
                   />
                 )}
               </Fragment>
