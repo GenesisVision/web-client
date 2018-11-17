@@ -1,4 +1,4 @@
-import "./fund-details.scss";
+import "shared/components/funds/fund-details/fund-details.scss";
 
 import Page from "shared/components/page/page";
 import React, { PureComponent } from "react";
