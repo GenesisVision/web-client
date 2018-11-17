@@ -8,7 +8,7 @@ import { bindActionCreators, compose } from "redux";
 
 import { LOGIN_ROUTE } from "../../auth/login/login.routes";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
-import ProgramDetailsDescriptionSection from "./components/program-details-description-section/program-details-description-section";
+import ProgramDetailsDescriptionSection from "shared/components/programs/program-details/program-details-description/program-details-description-section";
 import ProgramDetailsHistorySection from "./components/program-details-history-section/program-details-history-section";
 import ProgramDetailsStatisticSection from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import {
