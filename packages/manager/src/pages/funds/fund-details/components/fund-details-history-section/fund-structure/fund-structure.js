@@ -10,7 +10,7 @@ import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { formatValue } from "shared/utils/formatter";
 
-import { FUND_STRUCTURE_COLUMNS } from "../../../fund-details.constants";
+import { FUND_STRUCTURE_COLUMNS } from "shared/components/funds/fund-details/fund-details.constants";
 import * as service from "../../../services/fund-details.service";
 
 class FundStructure extends Component {
