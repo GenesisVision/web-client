@@ -47,7 +47,7 @@
   &__avatar {
     cursor: pointer;
     width: 100%;
-    padding: $padding-small 0;
+    padding: $padding-small-mobile 0 $padding-small;
     .program-avatar {
       justify-content: flex-start;
       width: $avatar-size-mobile;
@@ -112,17 +112,17 @@
   }
 
   &__author-btn {
-    padding: 0 0 $padding-very-large-mobile;
+    padding: 0;
     font-size: 13px;
     letter-spacing: 0.19px;
     font-weight: bold;
-    @include media-breakpoint-landscape-phone() {
-      padding: 0 0 $padding-very-large;
-    }
   }
 
   &__info {
-    //padding-top: $padding-very-large-mobile;
+    padding-top: $padding-description-mobile;
+    @include media-breakpoint-landscape-phone() {
+      padding-top: $padding-description;
+    }
   }
 
   &__invest-button-container {
@@ -165,7 +165,10 @@
   }
 
   &__info-block {
-    padding-bottom: $padding-small-mobile;
+    padding-top: $padding-very-large-mobile;
+    @include media-breakpoint-landscape-phone() {
+      padding-top: $padding-very-large;
+    }
   }
 
   &__short-statistic-subheading {
@@ -314,9 +317,6 @@
       font-size: $font-size-large;
       padding-bottom: $padding-middle;
     }
-    &__info-block {
-      padding-bottom: $padding-middle;
-    }
     &__text {
       font-size: $font-size-middle;
       line-height: $font-size-middle * 2;
@@ -328,9 +328,6 @@
       font-size: $font-size-middle;
       width: $btn-width;
       height: $btn-height;
-    }
-    &__info {
-      padding-top: $padding-very-large;
     }
     &__short-statistic {
       &-item {
