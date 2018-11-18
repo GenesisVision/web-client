@@ -10,7 +10,7 @@ import { PROGRAM_SLUG_URL_PARAM_NAME } from "../../programs.routes";
 import {
   PROGRAM_TRADES_DEFAULT_FILTERS,
   PROGRAM_TRADES_FILTERS
-} from "../program-details.constants";
+} from "shared/components/programs/program-details/program-details.constants";
 
 export const getProgramDescription = () => (dispatch, getState) => {
   const authorization = authService.getAuthArg();
