@@ -1,4 +1,4 @@
-import { PROGRAMS_COLUMNS } from "modules/programs-table/programs.constants";
+import { PROGRAMS_COLUMNS } from "shared/components/programs-table/programs.constants";
 import React from "react";
 import { translate } from "react-i18next";
 import ProgramTableRowShort from "shared/components/programs-table/program-table-row-short";
