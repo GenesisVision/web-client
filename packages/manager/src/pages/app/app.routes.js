@@ -23,7 +23,7 @@ import { GLOBAL_SEARCH_ROUTE } from "shared/components/global-search/global-sear
 import FundsRoutes, { FUNDS_ROUTE } from "../funds/funds.routes";
 import { NOTIFICATIONS_ROUTE } from "../notifications/notifications.routes";
 import NotificationRoutes from "../notifications/notifications.routes";
-import ProgramsRoutes, { PROGRAMS_ROUTE } from "../programs/programs.routes";
+import ProgramsRoutes, { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
 import AppLayout from "./components/app-layout/app-layout";
 
 export const HOME_ROUTE = "/";

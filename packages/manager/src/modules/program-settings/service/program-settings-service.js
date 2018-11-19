@@ -5,7 +5,7 @@ import { alertMessageActions } from "shared/modules/alert-message/actions/alert-
 import filesService from "shared/services/file-service";
 import history from "shared/utils/history";
 import replaceParams from "shared/utils/replace-params";
-import { PROGRAM_ROUTE } from "../../program/program.constants";
+import { PROGRAM_ROUTE } from "pages/programs/programs.routes";
 import programSettingsActions from "../actions/program-settings-actions";
 
 const fetchProgramSettings = programId => dispatch => {

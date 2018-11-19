@@ -13,6 +13,7 @@ export const PROGRAMS_EXPLORE_TAB_NAME = "";
 export const PROGRAM_SLUG_URL_PARAM_NAME = "programSlugUrl";
 
 export const PROGRAMS_ROUTE = "/programs";
+export const PROGRAM_ROUTE = `${PROGRAMS_ROUTE}/:programId`;
 export const PROGRAM_DETAILS_ROUTE = `${PROGRAMS_ROUTE}/:${PROGRAM_SLUG_URL_PARAM_NAME}`;
 export const PROGRAM_DETAILS_ROUTE_REGEX = `${PROGRAMS_ROUTE}/:${PROGRAM_SLUG_URL_PARAM_NAME}(${SLUG_URL_REGEXP})`;
 
