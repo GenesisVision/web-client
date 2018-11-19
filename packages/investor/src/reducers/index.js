@@ -11,7 +11,7 @@ import accountSettingsReducer from "shared/reducers/account-settings";
 import uiReducer from "shared/reducers/ui-reducer";
 import { combineReducers } from "redux";
 
-import fundsReducer from "../modules/funds-table/reducers/funds-table.reducers";
+import fundsReducer from "shared/modules/funds-table/reducers/funds-table.reducers";
 import programWithdrawReducer from "../modules/program-withdraw/reducer/program-withdraw.reducer";
 import fundWithdrawReducer from "../modules/fund-withdraw/reducer/fund-withdraw.reducer";
 import programsReducer from "../modules/programs-table/reducers/programs-table.reducers";
