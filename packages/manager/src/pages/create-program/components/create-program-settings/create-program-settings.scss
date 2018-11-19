@@ -223,6 +223,9 @@
 
     & .gv-text-field {
       width: 230px;
+      &__error {
+        white-space: nowrap;
+      }
     }
 
     &--description {
