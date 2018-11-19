@@ -3,7 +3,7 @@ import React from "react";
 
 import ProgramFilterableListContainer from "./components/program-filterable-list/program-filterable-list";
 
-import { PROGRAMS_ROUTE } from "shared/components/programs-table/programs.constants";
+import { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
 
 const ProgramsRoutes = () => (
   <Route

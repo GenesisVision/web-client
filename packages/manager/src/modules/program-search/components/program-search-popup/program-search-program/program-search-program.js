@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import Metric from "shared/components/metric/metric";
 import ProgramAvatar from "shared/components/program-avatar/program-avatar";
 import replaceParams from "shared/utils/replace-params";
-import { PROGRAM_ROUTE } from "../../../../program/program.constants";
+import { PROGRAM_ROUTE } from "pages/programs/programs.routes";
 
 const ProgramSearchProgram = ({ t, program, onProgramClick }) => {
   const programRoute = replaceParams(PROGRAM_ROUTE, {

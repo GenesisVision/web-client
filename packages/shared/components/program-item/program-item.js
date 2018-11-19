@@ -4,7 +4,8 @@ import classnames from "classnames";
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { PROGRAM_ROUTE } from "../../modules/program/program.constants";
+import { PROGRAM_ROUTE } from "pages/programs/programs.routes";
+
 import replaceParams from "../../utils/replace-params";
 import Button from "../button/button";
 import PIAvatar from "../program-avatar/program-avatar";

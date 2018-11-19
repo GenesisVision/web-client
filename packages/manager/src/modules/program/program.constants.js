@@ -1,3 +1,3 @@
-import { PROGRAMS_ROUTE } from "shared/components/programs-table/programs/programs.constants";
+import { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
 
 export const PROGRAM_ROUTE = `${PROGRAMS_ROUTE}/:programId`;
