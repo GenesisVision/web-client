@@ -1,6 +1,6 @@
-@import "shared/styles/_colors.scss";
-@import "shared/styles/_breakpoint.scss";
-@import "shared/styles/_sizes.scss";
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
 
 .wallet-add-funds-popup {
   &__title {
@@ -11,7 +11,7 @@
     margin-bottom: 12px;
   }
   &__value {
-    font-size: $font-size-large-mobile;
+    font-size: $font-size-h4-mobile;
     letter-spacing: 0.4px;
     margin-bottom: 32px;
     text-align: center;

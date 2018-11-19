@@ -1,5 +1,6 @@
-@import "shared/styles/_colors.scss";
-@import "shared/styles/_breakpoint.scss";
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
 
 .create-program-broker {
   &-container {
@@ -36,7 +37,7 @@
   &__description {
     box-sizing: border-box;
     width: 300px;
-    padding: 40px 32px;
+    padding: $padding-medium 32px;
 
     &-heading {
       color: $text-light-color;
@@ -47,7 +48,7 @@
   &__info-title {
     margin-top: 32px;
     margin-bottom: 14px;
-    font-size: 13px;
+    font-size: $font-size-common;
     color: $short-statistic-subheading-color;
     letter-spacing: 0.4px;
   }

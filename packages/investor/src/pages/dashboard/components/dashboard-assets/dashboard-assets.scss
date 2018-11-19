@@ -1,24 +1,24 @@
-@import "shared/styles/_breakpoint.scss";
-@import "shared/styles/_sizes.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
 
 .dashboard-assets {
-  padding-top: $padding-middle-mobile;
+  padding-top: $padding-small-mobile;
   @include media-breakpoint-landscape-phone() {
-    padding-top: $padding-middle;
+    padding-top: $padding-small;
   }
   &__head {
-    padding-left: $padding-middle-mobile;
+    padding-left: $padding-small-mobile;
     @include media-breakpoint-landscape-phone() {
-      padding-left: $padding-middle;
+      padding-left: $padding-small;
     }
   }
   &__title {
     font-weight: 600;
     letter-spacing: 0.2px;
-    font-size: $font-size-subtitle-mobile;
-    padding-bottom: $padding-small;
+    font-size: $font-size-h3-mobile;
+    padding-bottom: $padding-xsmall;
     @include media-breakpoint-landscape-phone() {
-      font-size: $font-size-subtitle;
+      font-size: $font-size-h3;
     }
   }
 }

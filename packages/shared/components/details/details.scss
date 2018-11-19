@@ -4,7 +4,7 @@
 
 .details {
   &__section {
-    margin-bottom: $padding-large-mobile;
+    margin-bottom: $padding-big-mobile;
     @include media-breakpoint-landscape-phone() {
       margin-top: 40px;
     }
@@ -23,12 +23,12 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: $padding-small;
+    padding: $padding-xsmall;
   }
   &__title,
   &__subtitle,
   &__text {
-    padding: $padding-small/2 0;
+    padding: $padding-xsmall/2 0;
   }
   &__title,
   &__subtitle,
@@ -39,25 +39,25 @@
     max-width: 165px;
   }
   &__title {
-    font-size: $font-size-large;
+    font-size: $font-size-h4;
     color: $primary-color;
     font-weight: bold;
   }
   &__subtitle {
-    font-size: $font-size-large;
+    font-size: $font-size-h4;
     opacity: 0.4;
   }
   &__balance {
     font-weight: bold;
   }
   &__text {
-    font-size: $font-size-middle;
+    font-size: $font-size-paragraph;
     opacity: 0.4;
     line-height: 1.54;
     letter-spacing: 0.3px;
   }
   &__about {
-    padding: $padding-small/2 0;
+    padding: $padding-xsmall/2 0;
     font-size: $font-size-small;
     font-weight: 600;
     line-height: 1.67;

@@ -1,5 +1,6 @@
-@import "shared/styles/_colors.scss";
-@import "shared/styles/_constants.scss";
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_constants.scss";
+@import "~shared/styles/_sizes.scss";
 
 .wallet-widget {
   display: flex;
@@ -7,7 +8,7 @@
   color: white;
 
   &__wallet {
-    font-size: 13px;
+    font-size: $font-size-common;
     display: flex;
     flex-direction: row;
     align-items: center;

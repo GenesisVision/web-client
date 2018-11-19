@@ -1,5 +1,6 @@
-@import "shared/styles/_colors.scss";
-@import "shared/styles/_constants.scss";
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_constants.scss";
+@import "~shared/styles/_sizes.scss";
 
 .chip {
   display: inline-flex;
@@ -8,7 +9,7 @@
   border-radius: 8px;
   padding: 7px 13px;
   box-sizing: border-box;
-  font-size: 13px;
+  font-size: $font-size-common;
   font-weight: 600;
   letter-spacing: 0.4px;
   background-color: $secondary-background-color;

@@ -1,5 +1,6 @@
-@import "shared/styles/_colors.scss";
-@import "shared/styles/_breakpoint.scss";
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
 
 .wallet-transactions {
   margin-top: 80px;
@@ -62,7 +63,7 @@
     }
 
     & .table__toolbar {
-      padding: 40px 32px 32px;
+      padding: $padding-medium 32px 32px;
       flex-direction: row;
     }
   }

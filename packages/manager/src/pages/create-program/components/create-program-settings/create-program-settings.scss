@@ -1,5 +1,6 @@
-@import "shared/styles/_colors.scss";
-@import "shared/styles/_breakpoint.scss";
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
 
 .create-program-settings {
   margin-top: 40px;
@@ -55,7 +56,7 @@
   &__subheading {
     text-transform: uppercase;
     font-weight: 600;
-    font-size: 13px;
+    font-size: $font-size-common;
     letter-spacing: 0.4px;
 
     margin-bottom: 16px;
@@ -68,7 +69,7 @@
 
   &__fill-block {
     padding-top: 16px;
-    padding-bottom: 40px;
+    padding-bottom: $padding-medium;
 
     &:last-child {
       padding-bottom: 0;
@@ -127,7 +128,7 @@
   &__logo-title {
     margin-top: 44px;
     margin-bottom: 8px;
-    font-size: 13px;
+    font-size: $font-size-common;
     letter-spacing: 0.3px;
   }
 
@@ -195,7 +196,7 @@
   }
 
   &__available-amount {
-    font-size: 13px;
+    font-size: $font-size-common;
     margin-top: 4px;
     letter-spacing: 0.4px;
 

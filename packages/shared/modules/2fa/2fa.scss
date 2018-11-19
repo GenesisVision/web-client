@@ -1,6 +1,8 @@
+@import "~shared/styles/_sizes.scss";
+
 .two-factor-auth {
   p {
-    font-size: 13px;
+    font-size: $font-size-common;
     letter-spacing: 0.4px;
   }
 }

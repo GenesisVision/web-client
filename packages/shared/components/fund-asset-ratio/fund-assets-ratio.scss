@@ -1,6 +1,6 @@
-@import "shared/styles/_colors.scss";
-@import "shared/styles/_sizes.scss";
-@import "shared/styles/_breakpoint.scss";
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_sizes.scss";
+@import "~shared/styles/_breakpoint.scss";
 
 .fund-asset-ratio {
   display: block;
@@ -10,7 +10,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-top: $padding-mini;
+    padding-top: $padding-xxsmall;
   }
   &__value {
     font-size: $font-size-small-mobile;
