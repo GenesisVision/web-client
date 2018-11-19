@@ -90,7 +90,7 @@ $create-icon-width: 140px;
     justify-content: space-between;
     flex-wrap: wrap;
     order: 99;
-    margin-bottom: 10px;
+    padding-bottom: 10px;
 
     .filter {
       padding: 10px;
@@ -261,8 +261,8 @@ $create-icon-width: 140px;
     &__filters {
       justify-content: flex-end;
       font-size: $td-font-size;
-      margin-top: 15px;
-      margin-bottom: 0;
+      padding-top: 15px;
+      padding-bottom: 0;
 
       .filter {
         margin-right: 15px;
@@ -280,7 +280,7 @@ $create-icon-width: 140px;
       justify-content: flex-end;
       order: 0;
       flex-basis: 0;
-      margin-top: 0;
+      padding-top: 0;
 
       .filter {
         margin-right: 0;
