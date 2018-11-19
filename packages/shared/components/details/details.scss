@@ -6,7 +6,7 @@
   &__section {
     margin-bottom: $padding-large-mobile;
     @include media-breakpoint-landscape-phone() {
-      margin-top: $padding-large;
+      margin-top: 40px;
     }
   }
 }

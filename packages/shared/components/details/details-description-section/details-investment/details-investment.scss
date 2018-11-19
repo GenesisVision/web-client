@@ -15,16 +15,22 @@ $withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
     box-sizing: border-box;
   }
   padding: $padding-middle-mobile;
-  margin-top: $padding-large-mobile;
+  margin-top: $padding-middle-mobile;
+  margin-left: 0;
+  @include media-breakpoint-phone() {
+    margin-left: -$padding-middle-mobile;
+  }
   @include media-breakpoint-landscape-phone() {
     padding: $padding-middle;
-    margin-top: $padding-large;
+    margin-top: $padding-middle;
+    margin-left: -$padding-middle;
   }
 
   &__heading {
     font-size: $font-size-subtitle-mobile;
     letter-spacing: 0.21px;
     padding-bottom: $padding-middle-mobile;
+    font-weight: 600;
     @include media-breakpoint-landscape-phone() {
       font-size: $font-size-subtitle;
       padding-bottom: $padding-middle;

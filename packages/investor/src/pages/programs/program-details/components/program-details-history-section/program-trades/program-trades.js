@@ -18,7 +18,7 @@ import {
   PROGRAM_TRADES_COLUMNS,
   PROGRAM_TRADES_DEFAULT_FILTERS,
   PROGRAM_TRADES_FILTERS
-} from "../../../program-details.constants";
+} from "shared/components/programs/program-details/program-details.constants";
 import * as service from "../../../services/program-details.service";
 
 class ProgramTrades extends Component {
