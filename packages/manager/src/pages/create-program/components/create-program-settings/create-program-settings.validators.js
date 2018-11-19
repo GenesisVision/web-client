@@ -47,6 +47,7 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) =>
     ),
     entryFee: number()
       .required(t("create-program-page.settings.validation.entry-fee-required"))
+      .min(0.01, "Entry fee must be greater than 0.01 % ")
       .max(
         props.programsInfo.managerMaxEntryFee,
         "Entry fee must be less than  " +
@@ -54,6 +55,7 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) =>
           " %"
       ),
     successFee: number()
+      .min(0.01, "Entry fee must be greater than 0.01 % ")
       .required(
         t("create-program-page.settings.validation.success-fee-required")
       )
