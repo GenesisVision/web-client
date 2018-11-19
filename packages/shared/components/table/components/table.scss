@@ -61,7 +61,6 @@ $create-icon-width: 140px;
     div {
       cursor: pointer;
       padding: $view-svg-size;
-      padding-bottom: 0;
       line-height: 0;
       .icon {
         width: auto;
@@ -85,16 +84,16 @@ $create-icon-width: 140px;
 
   &__filters {
     width: 100%;
-    font-size: $th-font-size/1.5;
+    font-size: $table-title-font-size/2;
     display: flex;
     flex: 1 1 100%;
     justify-content: space-between;
     flex-wrap: wrap;
     order: 99;
-    margin-top: 15px;
+    margin-bottom: 10px;
 
     .filter {
-      padding-left: 5px;
+      padding: 10px;
     }
   }
 
@@ -239,9 +238,6 @@ $create-icon-width: 140px;
     &__body {
       font-size: $td-font-size;
     }
-    &__filters {
-      font-size: $td-font-size;
-    }
     &__title {
       font-size: $table-title-font-size;
     }
@@ -263,10 +259,19 @@ $create-icon-width: 140px;
       }
     }
     &__filters {
-      justify-content: flex-start;
+      justify-content: flex-end;
+      font-size: $td-font-size;
+      margin-top: 15px;
+      margin-bottom: 0;
 
       .filter {
         margin-right: 15px;
+        padding: 5px;
+
+        &:last-child {
+          margin-right: 0;
+          padding-right: 0;
+        }
       }
     }
   }
@@ -274,12 +279,13 @@ $create-icon-width: 140px;
     &__filters {
       justify-content: flex-end;
       order: 0;
-      flex-basis: 0%;
+      flex-basis: 0;
       margin-top: 0;
 
       .filter {
-        margin-right: 0px;
+        margin-right: 0;
         margin-left: 15px;
+        padding-right: 5px;
       }
 
       .sorting-filter {
