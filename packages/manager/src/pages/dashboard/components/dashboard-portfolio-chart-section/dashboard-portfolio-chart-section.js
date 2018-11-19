@@ -1,8 +1,8 @@
 import "./dashboard-portfolio-chart-section.scss";
 
-import Surface from "shared/components/surface/surface";
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import Surface from "shared/components/surface/surface";
 
 import DashboardChartAssetsContainer from "./dashboard-chart-assets/dashboard-chart-assets-container";
 import DashboardPortfolioChartContainer from "./dashboard-chart/dashboard-portfolio-chart-container";
@@ -25,8 +25,9 @@ class DashboardPortfolioChartSection extends Component {
   };
   render() {
     const assets = this.getAssets();
+    const { isNewUser } = this.props;
     if (!assets) return null;
-    if (assets.programs.length > 0 || assets.funds.length > 0)
+    if (!isNewUser)
       return (
         <Surface className="dashboard-portfolio-chart-section">
           <div className="dashboard-portfolio-chart-section__heading">
@@ -49,8 +50,14 @@ class DashboardPortfolioChartSection extends Component {
 }
 
 const mapStateToProps = state => {
+  const { info } = state.profileHeader;
+  let isNewUser = null;
+  if (info.data) {
+    isNewUser = info.data.isNewUser;
+  }
   const { programs, funds } = state.dashboard;
   return {
+    isNewUser,
     programsData: programs.itemsData.data,
     fundsData: funds.itemsData.data
   };

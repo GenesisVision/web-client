@@ -1,9 +1,10 @@
-import { fetchProfileHeaderInfo } from "modules/header/actions/header-actions";
+import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
+import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
+
 import {
   fetchDepositFundInfoById,
   investToFundById
 } from "../actions/fund-deposit.actions";
-import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
 export const getDepositFundInfoById = id => (dispatch, getState) => {
   const { accountSettings } = getState();

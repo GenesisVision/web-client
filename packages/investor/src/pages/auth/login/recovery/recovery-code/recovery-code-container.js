@@ -1,7 +1,7 @@
-import { NOT_FOUND_PAGE_ROUTE } from "pages/not-found/not-found.routes";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { replace } from "react-router-redux";
+import { NOT_FOUND_PAGE_ROUTE } from "shared/components/not-found/not-found.routes";
 
 import { RECOVERY_CODE } from "../../actions/login.actions";
 import { clearLoginData, twoFactorLogin } from "../../services/login.service";

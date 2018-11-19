@@ -5155,10 +5155,9 @@ gud@^1.0.0:
   resolved "https://registry.yarnpkg.com/gud/-/gud-1.0.0.tgz#a489581b17e6a70beca9abe3ae57de7a499852c0"
   integrity sha512-zGEOVKFM5sVPPrYs7J5/hYEw2Pof8KCyOwyhG8sAF26mCAeUFAcYPu1mwB7hhpIP29zOIBaDqwuHdLp0jvZXjw==
 
-"gv-api-web@git+https://github.com/GenesisVision/gv-api-web.git", "gv-api-web@git+https://github.com/GenesisVision/gv-api-web.git#development":
-  version "1.0.150"
-  uid "236e9418dff93209fd6dac5d029cb0ab1188ef25"
-  resolved "git+https://github.com/GenesisVision/gv-api-web.git#236e9418dff93209fd6dac5d029cb0ab1188ef25"
+"gv-api-web@git+https://github.com/GenesisVision/gv-api-web.git#development":
+  version "1.0.168"
+  resolved "git+https://github.com/GenesisVision/gv-api-web.git#94a1e1839fbd93bb57bba814b3f2eded9fd92be3"
   dependencies:
     superagent "^3.8.3"
 

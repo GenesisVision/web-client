@@ -1,27 +1,28 @@
-import "./fund-details-description.scss";
+import "shared/components/details/details-description-section/details-description/details-description.scss";
 
 import { GVButton } from "gv-react-components";
+import moment from "moment";
 import React, { Fragment, PureComponent } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
-
-import { formatValue } from "shared/utils/formatter";
-import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
+import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import DetailsFavorite from "shared/components/details/details-description-section/details-description/details-favorite";
 import DetailsNotification from "shared/components/details/details-description-section/details-description/details-notificaton";
-import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
 import {
-  composeManagerDetailsUrl,
-  composeFundNotificationsUrl
+  composeFundNotificationsUrl,
+  composeManagerDetailsUrl
 } from "shared/utils/compose-url";
+import { formatValue } from "shared/utils/formatter";
 
 class FundDetailsDescription extends PureComponent {
   state = {
     isOpenInvestmentPopup: false,
     isOpenAboutLevels: false,
     isOpenEditFundPopup: false,
+    isOpenReallocateFundPopup: false,
     anchor: null
   };
 
@@ -46,12 +47,31 @@ class FundDetailsDescription extends PureComponent {
   handleApplyEditFundPopup = updateDetails => () => {
     updateDetails();
   };
+  handleOpenReallocateFundPopup = () => {
+    this.setState({ isOpenReallocateFundPopup: true });
+  };
+  handleCloseReallocateFundPopup = updateDetails => () => {
+    this.setState({ isOpenReallocateFundPopup: false });
+    updateDetails();
+  };
 
   render() {
-    const { isOpenInvestmentPopup, isOpenEditFundPopup } = this.state;
+    const {
+      isOpenInvestmentPopup,
+      isOpenEditFundPopup,
+      isOpenReallocateFundPopup
+    } = this.state;
     const {
       t,
+      possibleReallocationTime,
+      canReallocate,
+      status,
+      isFavorite,
+      canCloseProgram,
+      hasNotifications,
+      isOwnProgram,
       FUND,
+      ReallocateContainer,
       AssetEditContainer,
       FundDetailContext,
       FundDepositContainer,
@@ -60,21 +80,10 @@ class FundDetailsDescription extends PureComponent {
       fundDescription,
       onFavoriteClick,
       isFavoritePending,
-      composeInvestmentData,
+      investmentData,
       onChangeInvestmentStatus,
       canInvest
     } = this.props;
-    const isFavorite =
-      fundDescription.personalFundDetails &&
-      fundDescription.personalFundDetails.isFavorite;
-
-    const canCloseProgram =
-      fundDescription.personalFundDetails &&
-      fundDescription.personalFundDetails.canCloseProgram;
-
-    const hasNotifications =
-      fundDescription.personalFundDetails &&
-      fundDescription.personalFundDetails.hasNotifications;
 
     const composeEditInfo = {
       id: fundDescription.id,
@@ -86,10 +95,10 @@ class FundDetailsDescription extends PureComponent {
     };
 
     return (
-      <div className="fund-details-description">
-        <div className="fund-details-description__left">
+      <div className="details-description">
+        <div className="details-description__left">
           <div
-            className="fund-details-description__avatar"
+            className="details-description__avatar"
             onClick={this.handleOpenDropdown}
           >
             <AssetAvatar
@@ -101,8 +110,8 @@ class FundDetailsDescription extends PureComponent {
             />
           </div>
         </div>
-        <div className="fund-details-description__main">
-          <div className="fund-details-description__heading">
+        <div className="details-description__main">
+          <div className="details-description__heading">
             {fundDescription.title}
           </div>
           <Link
@@ -113,16 +122,16 @@ class FundDetailsDescription extends PureComponent {
           >
             <GVButton
               variant="text"
-              className="fund-details-description__author-btn"
+              className="details-description__author-btn"
             >
               {fundDescription.manager.username}
             </GVButton>
           </Link>
-          <div className="fund-details-description__info-block">
-            <div className="fund-details-description__subheading">
+          <div className="details-description__info-block">
+            <div className="details-description__subheading">
               {t("fund-details-page.description.assets")}
             </div>
-            <div className="fund-details-description__text">
+            <div>
               <FundAssetContainer
                 type={"large"}
                 assets={fundDescription.currentAssets}
@@ -130,18 +139,16 @@ class FundDetailsDescription extends PureComponent {
               />
             </div>
           </div>
-          <div className="fund-details-description__info">
-            <div className="fund-details-description__info-block">
-              <div className="fund-details-description__subheading">
-                {t("fund-details-page.description.strategy")}
-              </div>
-              <div className="fund-details-description__text">
-                {fundDescription.description}
-              </div>
+          <div className="details-description__info">
+            <div className="details-description__subheading">
+              {t("fund-details-page.description.strategy")}
             </div>
-            <div className="fund-details-description__short-statistic">
-              <div className="fund-details-description__short-statistic-item">
-                <span className="fund-details-description__short-statistic-subheading">
+            <div className="details-description__text">
+              {fundDescription.description}
+            </div>
+            <div className="details-description__short-statistic">
+              <div className="details-description__short-statistic-item">
+                <span className="details-description__short-statistic-subheading">
                   {t("fund-details-page.description.entryFee")}
                 </span>
                 <NumberFormat
@@ -150,8 +157,8 @@ class FundDetailsDescription extends PureComponent {
                   suffix=" %"
                 />
               </div>
-              <div className="fund-details-description__short-statistic-item">
-                <span className="fund-details-description__short-statistic-subheading">
+              <div className="details-description__short-statistic-item">
+                <span className="details-description__short-statistic-subheading">
                   Exit fee
                 </span>
                 <NumberFormat
@@ -161,29 +168,49 @@ class FundDetailsDescription extends PureComponent {
                 />
               </div>
             </div>
-            {canInvest && (
+            {(isOwnProgram || canInvest) && (
               <Fragment>
-                <div className="fund-details-description__invest-button-container">
+                <div className="details-description__invest-button-container">
                   <GVButton
-                    className="fund-details-description__invest-btn"
+                    className="details-description__invest-btn"
                     onClick={this.handleOpenInvestmentPopup}
-                    disabled={
-                      !fundDescription.personalFundDetails ||
-                      !fundDescription.personalFundDetails.canInvest
-                    }
+                    disabled={!canInvest}
                   >
                     {t("fund-details-page.description.invest")}
                   </GVButton>
-                  {AssetEditContainer && (
-                    <GVButton
-                      className="fund-details-description__invest-btn"
-                      color="secondary"
-                      variant="outlined"
-                      onClick={this.handleOpenEditFundPopup}
-                      disabled={!canCloseProgram}
-                    >
-                      {t("fund-details-page.description.edit-fund")}
-                    </GVButton>
+                  {isOwnProgram && (
+                    <Fragment>
+                      <GVButton
+                        className="details-description__invest-btn"
+                        color="secondary"
+                        variant="outlined"
+                        onClick={this.handleOpenEditFundPopup}
+                        disabled={!canCloseProgram}
+                      >
+                        {t("fund-details-page.description.edit-fund")}
+                      </GVButton>
+                      <div className="details-description__reallocate-container">
+                        <GVButton
+                          className="details-description__invest-btn"
+                          color="secondary"
+                          variant="outlined"
+                          onClick={this.handleOpenReallocateFundPopup}
+                          disabled={!canReallocate}
+                        >
+                          {t("fund-details-page.description.reallocate")}
+                        </GVButton>
+                        {!canReallocate && possibleReallocationTime && (
+                          <div className="details-description__reallocate-message">
+                            {t(
+                              "fund-details-page.description.disable-reallocation-message"
+                            )}{" "}
+                            {moment(possibleReallocationTime).format(
+                              "D MMM YYYY"
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    </Fragment>
                   )}
                   <FundDetailContext.Consumer>
                     {({ updateDetails }) => (
@@ -206,23 +233,36 @@ class FundDetailsDescription extends PureComponent {
                             type={FUND}
                           />
                         )}
+                        {ReallocateContainer && (
+                          <ReallocateContainer
+                            key={isOpenReallocateFundPopup}
+                            id={fundDescription.id}
+                            open={isOpenReallocateFundPopup}
+                            onClose={this.handleCloseReallocateFundPopup(
+                              updateDetails
+                            )}
+                            assets={fundDescription.currentAssets}
+                          />
+                        )}
                       </Fragment>
                     )}
                   </FundDetailContext.Consumer>
                 </div>
-                <DetailsInvestment
-                  WithdrawContainer={FundWithdrawContainer}
-                  canWithdraw={canWithdraw}
-                  className={"fund-details-description__your-investment"}
-                  assetCurrency={"GVT"}
-                  {...composeInvestmentData(fundDescription)}
-                  onChangeInvestmentStatus={onChangeInvestmentStatus}
-                />
               </Fragment>
+            )}
+            {fundDescription.personalFundDetails && status !== "Ended" && (
+              <DetailsInvestment
+                WithdrawContainer={FundWithdrawContainer}
+                canWithdraw={canWithdraw}
+                className={"details-description__your-investment"}
+                assetCurrency={"GVT"}
+                {...investmentData}
+                onChangeInvestmentStatus={onChangeInvestmentStatus}
+              />
             )}
           </div>
         </div>
-        <div className="fund-details-description__right">
+        <div className="details-description__right">
           <DetailsFavorite
             id={fundDescription.id}
             isFavorite={isFavorite}

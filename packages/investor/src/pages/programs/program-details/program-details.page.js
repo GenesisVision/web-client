@@ -1,16 +1,21 @@
-import "./program-details.scss";
+import "shared/components/details/details.scss";
 
-import Page from "shared/components/page/page";
+import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
+import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
+import { toggleReinvesting } from "modules/program-reinvesting/services/program-reinvesting.service";
+import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
+import AboutLevelsContainerComponent from "pages/app/components/about-levels/about-levels-container";
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
+import NotFoundPage from "shared/components/not-found/not-found.routes";
+import Page from "shared/components/page/page";
+import ProgramDetailsDescriptionSection from "shared/components/programs/program-details/program-details-description/program-details-description-section";
+import ProgramDetailsStatisticSection from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 
 import { LOGIN_ROUTE } from "../../auth/login/login.routes";
-import NotFoundPage from "../../not-found/not-found.routes";
-import ProgramDetailsDescriptionSection from "./components/program-details-description-section/program-details-description-section";
 import ProgramDetailsHistorySection from "./components/program-details-history-section/program-details-history-section";
-import ProgramDetailsStatisticSection from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import {
   getProgramDescription,
   getProgramHistory,
@@ -57,15 +62,10 @@ class ProgramDetailsPage extends PureComponent {
         this.setState({ isPending: true });
         return getProgramStatistic(this.description.data.id);
       })
-      .catch()
       .then(data => {
         this.profitChart = data.profitChartData;
         this.balanceChart = data.balanceChartData;
         this.statistic = data.statisticData;
-        this.setState({ isPending: false });
-      })
-      .then(() => {
-        this.setState({ isPending: true });
         return getProgramHistory(this.description.data.id, currency);
       })
       .then(data => {
@@ -105,16 +105,22 @@ class ProgramDetailsPage extends PureComponent {
             updateDetails: this.updateDetails
           }}
         >
-          <div className="program-details">
-            <div className="program-details__section">
+          <div className="details">
+            <div className="details__section">
               <ProgramDetailsDescriptionSection
+                toggleReinvesting={toggleReinvesting}
+                ProgramDepositContainer={ProgramDepositContainer}
+                AboutLevelsContainerComponent={AboutLevelsContainerComponent}
+                ProgramDetailContext={ProgramDetailContext}
+                ProgramWithdrawContainer={ProgramWithdrawContainer}
+                ProgramReinvestingWidget={ProgramReinvestingWidget}
                 programDescriptionData={this.description}
                 isAuthenticated={isAuthenticated}
                 redirectToLogin={service.redirectToLogin}
                 onChangeInvestmentStatus={this.changeInvestmentStatus}
               />
             </div>
-            <div className="program-details__section">
+            <div className="details__section">
               <ProgramDetailsStatisticSection
                 getProgramStatistic={getProgramStatistic}
                 programId={this.description.data.id}
@@ -124,7 +130,7 @@ class ProgramDetailsPage extends PureComponent {
                 balanceChartData={this.balanceChart}
               />
             </div>
-            <div className="program-details__history">
+            <div className="details__history">
               <ProgramDetailsHistorySection
                 programId={this.description.data.id}
                 currency={currency}

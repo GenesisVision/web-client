@@ -4,26 +4,26 @@ import { CREATE_PROGRAM_PAGE_ROUTE } from "pages/create-program/create-program.c
 import createProgramPage from "pages/create-program/create-program.page";
 import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import DashboardRoutes from "pages/dashboard/dashboard.routes";
-import GlobalSearchPage from "pages/global-search/global-search.page.js";
 import ManagerPage, {
   MANAGER_DETAILS_ROUTE_REGEXP
 } from "pages/manager/manager.page";
-import NotFoundPage from "pages/not-found/not-found.routes";
 import PrivateRoute from "pages/private-route";
-import { PROFILE_ROUTE } from "pages/profile/profile.constants";
 import ProfileRoutes from "pages/profile/profile.routes";
+import ProgramsRoutes, { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
 import WalletWithdrawConfirmPage, {
   WALLET_WITHDRAW_CONFIRM_ROUTE
 } from "pages/wallet-withdraw-confirm/wallet-withdraw-confirm.page";
 import WalletPage, { WALLET_PAGE_ROUTE } from "pages/wallet/wallet-page";
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
+import GlobalSearchPage from "shared/components/global-search/global-search.page.js";
+import { GLOBAL_SEARCH_ROUTE } from "shared/components/global-search/global-search.routes";
+import NotFoundPage from "shared/components/not-found/not-found.routes";
+import { PROFILE_ROUTE } from "shared/components/profile/profile.constants";
 
 import FundsRoutes, { FUNDS_ROUTE } from "../funds/funds.routes";
-import { GLOBAL_SEARCH_ROUTE } from "../global-search/global-search.routes";
 import { NOTIFICATIONS_ROUTE } from "../notifications/notifications.routes";
 import NotificationRoutes from "../notifications/notifications.routes";
-import ProgramsRoutes, { PROGRAMS_ROUTE } from "../programs/programs.routes";
 import AppLayout from "./components/app-layout/app-layout";
 
 export const HOME_ROUTE = "/";

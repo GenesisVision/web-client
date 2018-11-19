@@ -1,21 +1,20 @@
 import "./manager-history.scss";
 
-import Surface from "shared/components/surface/surface";
 import { GVTab, GVTabs } from "gv-react-components";
-import { toggleFavoriteFundDispatchable } from "modules/favorite-asset/services/favorite-fund.service";
-import { toggleFavoriteProgramDispatchable } from "modules/favorite-asset/services/favorite-program.service";
-import FundsTableRow from "shared/components/funds-table/fund-table-row";
-import { FUNDS_TABLE_COLUMNS } from "modules/funds-table/funds-table.constants";
-import ProgramTableRow from "shared/components/programs-table/program-table-row";
-import { PROGRAMS_COLUMNS } from "modules/programs-table/programs.constants";
 import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
+import FundsTableRow from "shared/components/funds-table/fund-table-row";
+import { FUNDS_TABLE_COLUMNS } from "shared/components/funds-table/funds-table.constants";
+import ProgramTableRow from "shared/components/programs-table/program-table-row";
+import { PROGRAMS_COLUMNS } from "shared/components/programs-table/programs.constants";
+import Surface from "shared/components/surface/surface";
+import { toggleFavoriteFundDispatchable } from "shared/modules/favorite-asset/services/favorite-fund.service";
+import { toggleFavoriteProgramDispatchable } from "shared/modules/favorite-asset/services/favorite-program.service";
 
-import * as service from "../../services/manager.service";
 import * as managerService from "../../services/manager.service";
 import ManagerTable from "./manager-table/manager-table";
 
@@ -25,13 +24,13 @@ const FUNDS_TAB = "funds";
 class ManagerHistorySection extends PureComponent {
   state = {
     tab: PROGRAMS_TAB,
-    prevProps: null
+    programs: null,
+    funds: null
   };
 
   componentDidMount() {
-    const { managerId, service } = this.props;
-    service.getFundsDispatch(managerId);
-    service.getProgramsDispatch(managerId);
+    this.getFunds().then(data => this.setState({ funds: data }));
+    this.getPrograms().then(data => this.setState({ programs: data }));
   }
 
   handleTabChange = (e, tab) => {
@@ -39,40 +38,16 @@ class ManagerHistorySection extends PureComponent {
   };
 
   getFunds = filters => {
-    return service
-      .getFunds(this.props.managerId, filters)
-      .payload.then(data => {
-        return { items: data.funds, total: data.total };
-      });
+    return managerService.getFunds(this.props.managerId, filters);
   };
 
   getPrograms = filters => {
-    return service
-      .getPrograms(this.props.managerId, filters)
-      .payload.then(data => {
-        return { items: data.programs, total: data.total };
-      });
+    return managerService.getPrograms(this.props.managerId, filters);
   };
 
-  static getDerivedStateFromProps(props, state) {
-    let newState = {};
-    if (state.prevProps !== props) {
-      newState.prevProps = props;
-    }
-    return newState;
-  }
-
   render() {
-    const { tab } = this.state;
-    const {
-      t,
-      title,
-      managerId,
-      isAuthenticated,
-      service,
-      programs,
-      funds
-    } = this.props;
+    const { tab, programs, funds } = this.state;
+    const { t, title, managerId, isAuthenticated, service } = this.props;
     const { handleTabChange, getPrograms, getFunds } = this;
     return (
       <Surface className="manager-history">
@@ -147,16 +122,13 @@ class ManagerHistorySection extends PureComponent {
 }
 const mapStateToProps = state => {
   const { isAuthenticated } = state.authData;
-  const programs = state.programsData.items.data;
-  const funds = state.fundsData.items.data;
-  return { isAuthenticated, programs, funds };
+  return { isAuthenticated };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     service: bindActionCreators(
       {
-        ...managerService,
         toggleFavoriteProgram: toggleFavoriteProgramDispatchable,
         toggleFavoriteFund: toggleFavoriteFundDispatchable,
         redirectToLogin: () => push(LOGIN_ROUTE)

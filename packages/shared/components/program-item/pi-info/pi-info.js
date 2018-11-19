@@ -1,9 +1,9 @@
 import "./pi-info.css";
 
+import { PROGRAM_ROUTE } from "pages/programs/programs.routes";
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { PROGRAM_ROUTE } from "../../../modules/program/program.constants";
 import replaceParams from "../../../utils/replace-params";
 import TraderAvatar from "../../program-avatar/program-avatar";
 

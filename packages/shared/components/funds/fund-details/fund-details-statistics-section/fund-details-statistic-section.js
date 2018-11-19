@@ -1,12 +1,7 @@
-import "./fund-details-statistic-section.scss";
+import "shared/components/details/details-description-section/details-statistic-section/details-statistic-section.scss";
 
-import moment from "moment";
 import React, { PureComponent } from "react";
-
-import {
-  ChartPeriodType,
-  getPeriodStartDate
-} from "shared/components/chart/chart-period/chart-period.helpers";
+import { DEFAULT_PERIOD } from "shared/components/chart/chart-period/chart-period.helpers";
 import FundDetailsChartSection from "shared/components/funds/fund-details/fund-details-statistics-section/fund-details-chart-section/fund-details-chart-section";
 import FundDetailsStatistic from "shared/components/funds/fund-details/fund-details-statistics-section/fund-details-statistics/fund-details-statistics";
 
@@ -15,11 +10,7 @@ class FundDetailsStatisticSection extends PureComponent {
     statisticData: { data: null, isPending: true },
     profitChartData: { data: null, isPending: true },
     balanceChartData: { data: null, isPending: true },
-    period: {
-      type: ChartPeriodType.month,
-      start: getPeriodStartDate(ChartPeriodType.month),
-      end: moment()
-    },
+    period: DEFAULT_PERIOD,
     prevProps: null
   };
 
@@ -49,11 +40,11 @@ class FundDetailsStatisticSection extends PureComponent {
     const { period } = this.state;
     if (!profitChartData.data) return null;
     return (
-      <div className="fund-details-statistic-section">
-        <div className="fund-details-statistic-section__statistic">
+      <div className="details-statistic-section">
+        <div className="details-statistic-section__statistic">
           <FundDetailsStatistic statisticData={statisticData} period={period} />
         </div>
-        <div className="fund-details-statistic-section__chart">
+        <div className="details-statistic-section__chart">
           <FundDetailsChartSection
             profitChartData={profitChartData}
             balanceChartData={balanceChartData}

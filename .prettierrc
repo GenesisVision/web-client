@@ -21,6 +21,12 @@
       "options": {
         "parser": "json"
       }
+    },
+    {
+      "files": "*.scss",
+      "options": {
+        "parser": "scss"
+      }
     }
   ]
 }

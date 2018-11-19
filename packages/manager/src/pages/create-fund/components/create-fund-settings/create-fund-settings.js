@@ -1,8 +1,6 @@
 import "./create-fund-settings.scss";
 
 import classnames from "classnames";
-import Hint from "shared/components/hint/hint";
-import { RefreshIcon } from "shared/components/icon/refresh-icon";
 import { Field, withFormik } from "formik";
 import {
   GVButton,
@@ -14,9 +12,10 @@ import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import InputImage from "shared/components/form/input-image/input-image";
+import Hint from "shared/components/hint/hint";
+import { RefreshIcon } from "shared/components/icon/refresh-icon";
 import { allowValuesNumberFormat } from "shared/utils/helpers";
 
-import AddButton from "shared/components/add-button/add-button";
 import CreateFundSettingsAddAsset from "./create-fund-settings-add-asset/create-fund-settings-add-asset";
 import CreateFundSettingsAssetsComponent from "./create-fund-settings-assets-block/create-fund-settings-assets-block";
 import createFundSettingsValidationSchema from "./create-fund-settings.validators";
@@ -225,18 +224,8 @@ class CreateFundSettings extends React.Component {
               assets={assets.filter(item => item.percent > 0)}
               remainder={remainder}
               removeHandle={this.removeHandle}
+              addHandle={this.handleOpenDropdown}
             />
-            <div className="create-fund-settings__add-assets">
-              <div
-                className="create-fund-settings__add-assets-button"
-                onClick={this.handleOpenDropdown}
-              >
-                <div>
-                  <AddButton />
-                </div>
-                <div>{t("buttons.add-assets")}</div>
-              </div>
-            </div>
           </div>
           <div className="create-fund-settings__subheading">
             <span className="create-fund-settings__block-number">03</span>
@@ -248,7 +237,7 @@ class CreateFundSettings extends React.Component {
                 <GVFormikField
                   name="entryFee"
                   label={t("create-fund-page.settings.fields.entry-fee")}
-                  suffix=" %"
+                  adornment="%"
                   //isAllowed={this.allowEntryFee}
                   component={GVTextField}
                   InputComponent={NumberFormat}
@@ -269,7 +258,7 @@ class CreateFundSettings extends React.Component {
                 <GVFormikField
                   name="exitFee"
                   label={t("create-fund-page.settings.fields.exit-fee")}
-                  suffix=" %"
+                  adornment="%"
                   //isAllowed={this.allowExitFee}
                   component={GVTextField}
                   InputComponent={NumberFormat}

@@ -1,9 +1,8 @@
-import "./fund-details-chart-section.scss";
+import "shared/components/details/details-description-section/details-statistic-section/details-chart-section/details-chart-section.scss";
 
 import { GVTab, GVTabs } from "gv-react-components";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
-
 import Surface from "shared/components/surface/surface";
 
 import ProgramBalanceChartSection from "./fund-balance-chart-section/fund-balance-chart-section";
@@ -31,8 +30,8 @@ class FundDetailsChartSection extends PureComponent {
     const { tab } = this.state;
 
     return (
-      <Surface className="fund-details-chart">
-        <div className="fund-details-chart__heading">
+      <Surface className="details-chart">
+        <div className="details-chart__heading">
           {t("fund-details-page.chart.heading")}
         </div>
         <GVTabs value={tab} onChange={this.handleTabChange}>

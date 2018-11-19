@@ -1,15 +1,31 @@
 import "./dashboard-assets.scss";
 
-import Surface from "shared/components/surface/surface";
 import { GVTab, GVTabs } from "gv-react-components";
 import React, { Component } from "react";
+import connect from "react-redux/es/connect/connect";
+import { bindActionCreators, compose } from "redux";
+import DashboardFunds from "shared/components/dashboard/dashboard-assets/dashboard-funds/dashboard-funds";
+import DashboardPrograms from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs";
+import { DASHBOARD_FUNDS_COLUMNS } from "shared/components/dashboard/dashboard.constants";
+import Surface from "shared/components/surface/surface";
 
-import DashboardFunds from "./dashboard-funds/dashboard-funds";
-import DashboardPrograms from "./dashboard-programs/dashboard-programs";
+import { getDashboardFunds } from "../../services/dashboard-funds.service";
+import { getDashboardPrograms } from "../../services/dashboard-programs.service";
 
 class DashboardAssets extends Component {
   state = {
     tab: "programs"
+  };
+  componentDidMount() {
+    const { service } = this.props;
+    service.getDashboardFunds();
+    service.getDashboardPrograms();
+  }
+
+  fetchFunds = filters => {
+    return getDashboardFunds(filters).then(({ data }) => {
+      return { items: data.funds, total: data.total };
+    });
   };
 
   handleTabChange = (e, tab) => {
@@ -31,12 +47,34 @@ class DashboardAssets extends Component {
           </div>
         </div>
         <div>
-          {tab === "programs" && <DashboardPrograms title={title} />}
-          {tab === "funds" && <DashboardFunds title={title} />}
+          {tab === "programs" && (
+            <DashboardPrograms
+              getDashboardPrograms={getDashboardPrograms}
+              title={title}
+            />
+          )}
+          {tab === "funds" && (
+            <DashboardFunds
+              DASHBOARD_FUNDS_COLUMNS={DASHBOARD_FUNDS_COLUMNS}
+              getDashboardFunds={getDashboardFunds}
+              title={title}
+            />
+          )}
         </div>
       </Surface>
     );
   }
 }
+const mapDispatchToProps = dispatch => ({
+  service: bindActionCreators(
+    { getDashboardFunds, getDashboardPrograms },
+    dispatch
+  )
+});
 
-export default DashboardAssets;
+export default compose(
+  connect(
+    null,
+    mapDispatchToProps
+  )
+)(DashboardAssets);

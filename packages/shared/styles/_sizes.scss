@@ -1,4 +1,5 @@
 $padding-outer: 80px;
+$padding-description: 108px;
 $padding-very-large: 90px;
 $padding-large: 62px;
 $padding-middle: 32px;
@@ -23,6 +24,7 @@ $divider-title: 2;
 $asset-height: 40px;
 
 $padding-outer-mobile: $padding-outer/$divider-padding;
+$padding-description-mobile: $padding-description/$divider-padding;
 $padding-very-large-mobile: $padding-very-large/$divider-padding;
 $padding-large-mobile: $padding-large/$divider-padding;
 $padding-middle-mobile: $padding-middle/$divider-padding;

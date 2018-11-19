@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 import React, { PureComponent } from "react";
-
 import { updateFilter } from "shared/components/table//helpers/filtering.helpers";
 import { calculateTotalPages } from "shared/components/table//helpers/paging.helpers";
+
 import { composeRequestFilters } from "../services/table.service";
 import Table from "./table";
 
@@ -19,28 +19,19 @@ class TableModule extends PureComponent {
       sorting: sorting,
       filtering: filtering,
       data: defaultData,
-      isPending: false,
-      prevData: defaultData
+      isPending: false
     };
   }
 
-  static getDerivedStateFromProps(props, state) {
-    let newState = {};
-    if (props.data !== undefined && state.prevData !== props.data) {
-      state.prevData = props.data;
-      newState.data = props.data;
-
-      const totalPages = calculateTotalPages(
-        props.data.total,
-        props.paging ? props.paging.itemsOnPage : props.data.total
-      );
-      newState.paging = { ...state.paging, totalPages };
-    }
-    return newState;
-  }
-
   componentDidMount() {
-    if (this.props.fetchOnMount) {
+    const { data, paging } = this.props;
+    if (data) {
+      const totalPages = calculateTotalPages(data.total, paging.itemsOnPage);
+      this.setState({
+        data,
+        paging: { ...paging, totalPages }
+      });
+    } else {
       this.updateItems();
     }
   }
@@ -126,17 +117,12 @@ class TableModule extends PureComponent {
 }
 
 TableModule.propTypes = {
-  fetchOnMount: PropTypes.bool,
   paging: PropTypes.object,
   sorting: PropTypes.object,
   filtering: PropTypes.object,
-  defaultFilters: PropTypes.object,
+  defaultFilters: PropTypes.array,
   getItems: PropTypes.func,
   data: PropTypes.object
-};
-
-TableModule.defaultProps = {
-  fetchOnMount: true
 };
 
 export default TableModule;

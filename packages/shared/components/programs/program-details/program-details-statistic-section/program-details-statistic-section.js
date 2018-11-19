@@ -1,7 +1,6 @@
-import "./program-details-statistic-section.scss";
+import "shared/components/details/details-description-section/details-statistic-section/details-statistic-section.scss";
 
 import React, { PureComponent } from "react";
-
 import { DEFAULT_PERIOD } from "shared/components/chart/chart-period/chart-period.helpers";
 
 import ProgramDetailsChartSection from "./program-details-chart-section/program-details-chart-section";
@@ -42,15 +41,15 @@ class ProgramDetailsStatisticSection extends PureComponent {
     const { period } = this.state;
     if (!profitChartData.data) return null;
     return (
-      <div className="program-details-statistic-section">
-        <div className="program-details-statistic-section__statistic">
+      <div className="details-statistic-section">
+        <div className="details-statistic-section__statistic">
           <ProgramDetailsStatistic
             statisticData={statisticData}
             profitChartData={profitChartData}
             period={period}
           />
         </div>
-        <div className="program-details-statistic-section__chart">
+        <div className="details-statistic-section__chart">
           <ProgramDetailsChartSection
             profitChartData={profitChartData}
             balanceChartData={balanceChartData}

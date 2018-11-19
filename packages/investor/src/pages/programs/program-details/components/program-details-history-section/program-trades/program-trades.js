@@ -1,24 +1,24 @@
-import "./program-trades.scss";
+import "shared/components/details/details-description-section/details-statistic-section/details-history/trades.scss";
 
-import Profitability from "shared/components/profitability/profitability";
-import TableCell from "shared/components/table/components/table-cell";
-import TableRow from "shared/components/table/components/table-row";
-import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
-import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import TableModule from "shared/components/table/components/table-module";
-import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import moment from "moment";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { formatValue } from "shared/utils/formatter";
-
 import BaseProfitability from "shared/components/profitability/base-profitability";
+import Profitability from "shared/components/profitability/profitability";
 import {
   PROGRAM_TRADES_COLUMNS,
   PROGRAM_TRADES_DEFAULT_FILTERS,
   PROGRAM_TRADES_FILTERS
-} from "../../../program-details.constants";
+} from "shared/components/programs/program-details/program-details.constants";
+import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
+import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import TableCell from "shared/components/table/components/table-cell";
+import TableModule from "shared/components/table/components/table-module";
+import TableRow from "shared/components/table/components/table-row";
+import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
+import { formatValue } from "shared/utils/formatter";
+
 import * as service from "../../../services/program-details.service";
 
 class ProgramTrades extends Component {
@@ -34,15 +34,12 @@ class ProgramTrades extends Component {
 
   render() {
     const { t, trades } = this.props;
-    let data = { trades: null, total: 0 };
-    if (trades) {
-      data.items = trades.trades;
-      data.total = trades.total;
-    }
+
+    if (!trades) return null;
+    const data = { items: trades.trades, total: trades.total };
 
     return (
       <TableModule
-        fetchOnMount={false}
         data={data}
         getItems={this.fetchProgramTrades}
         defaultFilters={PROGRAM_TRADES_DEFAULT_FILTERS}
@@ -61,7 +58,7 @@ class ProgramTrades extends Component {
         columns={PROGRAM_TRADES_COLUMNS}
         renderHeader={column => (
           <span
-            className={`program-details-trades__head-cell program-details-trades__cell--${
+            className={`details-trades__head-cell program-details-trades__cell--${
               column.name
             }`}
           >
@@ -69,8 +66,8 @@ class ProgramTrades extends Component {
           </span>
         )}
         renderBodyRow={trade => (
-          <TableRow className="program-details-trades__row">
-            <TableCell className="program-details-trades__cell program-details-trades__cell--direction">
+          <TableRow className="details-trades__row">
+            <TableCell className="details-trades__cell program-details-trades__cell--direction">
               <BaseProfitability
                 isPositive={trade.direction === "Buy"}
                 isNegative={trade.direction === "Sell"}
@@ -78,24 +75,24 @@ class ProgramTrades extends Component {
                 {trade.direction}
               </BaseProfitability>
             </TableCell>
-            <TableCell className="program-details-trades__cell program-details-trades__cell--symbol">
+            <TableCell className="details-trades__cell program-details-trades__cell--symbol">
               {trade.symbol}
             </TableCell>
-            <TableCell className="program-details-trades__cell program-details-trades__cell--volume">
+            <TableCell className="details-trades__cell program-details-trades__cell--volume">
               <NumberFormat
                 value={formatValue(trade.volume)}
                 displayType="text"
                 thousandSeparator=" "
               />
             </TableCell>
-            <TableCell className="program-details-trades__cell program-details-trades__cell--price">
+            <TableCell className="details-trades__cell program-details-trades__cell--price">
               <NumberFormat
                 value={formatValue(trade.price)}
                 displayType="text"
                 thousandSeparator=" "
               />
             </TableCell>
-            <TableCell className="program-details-trades__cell program-details-trades__cell--profit">
+            <TableCell className="details-trades__cell program-details-trades__cell--profit">
               <Profitability value={+formatValue(trade.profit)} prefix="sign">
                 <NumberFormat
                   value={formatValue(trade.profit, null, true)}
@@ -104,14 +101,14 @@ class ProgramTrades extends Component {
                 />
               </Profitability>
             </TableCell>
-            <TableCell className="program-details-trades__cell program-details-trades__cell--date">
+            <TableCell className="details-trades__cell program-details-trades__cell--date">
               {moment(trade.date).format("DD-MM-YYYY, hh:mm a")}
             </TableCell>
-            <TableCell className="program-details-trades__cell program-details-trades__cell--ticket">
+            <TableCell className="details-trades__cell program-details-trades__cell--ticket">
               {trade.ticket}
             </TableCell>
 
-            <TableCell className="program-details-trades__cell program-details-trades__cell--entry">
+            <TableCell className="details-trades__cell program-details-trades__cell--entry">
               {trade.entry}
             </TableCell>
           </TableRow>

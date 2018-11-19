@@ -1,4 +1,3 @@
-import { fetchProfileHeaderInfo } from "modules/header/actions/header-actions";
 import {
   addNotifications,
   addTotalNotifications,
@@ -6,6 +5,7 @@ import {
   notificationsFetch,
   setNotificationsOptions
 } from "pages/app/components/notifications/actions/notifications.actions";
+import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
 
 export const TAKE_COUNT = 10;
 

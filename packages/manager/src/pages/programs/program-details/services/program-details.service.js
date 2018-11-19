@@ -1,18 +1,18 @@
+import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
 import { DEFAULT_PERIOD } from "shared/components/chart/chart-period/chart-period.helpers";
+import {
+  PROGRAM_TRADES_DEFAULT_FILTERS,
+  PROGRAM_TRADES_FILTERS
+} from "shared/components/programs/program-details/program-details.constants";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { composeRequestFilters } from "shared/components/table/services/table.service";
-import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
+import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { managerApiProxy } from "shared/services/api-client/manager-api";
 import { programsApiProxy } from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
 
-import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { PROGRAM_SLUG_URL_PARAM_NAME } from "../../programs.routes";
-import {
-  PROGRAM_TRADES_DEFAULT_FILTERS,
-  PROGRAM_TRADES_FILTERS
-} from "../program-details.constants";
 
 export const getProgramDescription = () => (dispatch, getState) => {
   const authorization = authService.getAuthArg();

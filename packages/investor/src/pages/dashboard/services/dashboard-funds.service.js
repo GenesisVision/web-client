@@ -1,9 +1,8 @@
-import { investorApiProxy } from "shared/services/api-client/investor-api";
 import authService from "shared/services/auth-service";
 
-export const getDashboardFunds = filters => {
-  return investorApiProxy.v10InvestorFundsGet(
-    authService.getAuthArg(),
-    filters
-  );
+import * as actions from "../actions/dashboard.actions";
+
+export const getDashboardFunds = requestFilters => {
+  const authorization = authService.getAuthArg();
+  return actions.fetchDashboardFunds(authorization, requestFilters);
 };

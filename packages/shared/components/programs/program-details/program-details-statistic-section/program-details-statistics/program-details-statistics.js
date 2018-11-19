@@ -1,13 +1,14 @@
-import "./program-details-statistics.scss";
+import "shared/components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.scss";
 
-import { ChartPeriodType } from "shared/components/chart/chart-period/chart-period.helpers";
-import ProgramPeriodLine from "shared/components/program-period/program-period-line/program-period-line";
-import Surface from "shared/components/surface/surface";
 import moment from "moment";
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { ChartPeriodType } from "shared/components/chart/chart-period/chart-period.helpers";
+import ProgramPeriodLine from "shared/components/program-period/program-period-line/program-period-line";
+import Surface from "shared/components/surface/surface";
 import { formatValue } from "shared/utils/formatter";
+
 import DetailsStatisticItem from "../../../../details-statistic-item/details-statistic-item";
 
 const ProgramDetailsStatistics = ({
@@ -21,14 +22,14 @@ const ProgramDetailsStatistics = ({
 
   if (!statistic || isPendingStatistic || isPendingProfitChart) return null;
   return (
-    <Surface className="program-details-statistics">
-      <div className="program-details-statistics__heading">
+    <Surface className="details-statistics">
+      <div className="details-statistics__heading">
         {t("program-details-page.statistics.heading")}
       </div>
-      <div className="program-details-statistics__subheading">
+      <div className="details-statistics__subheading">
         {t("program-details-page.statistics.current")}
       </div>
-      <div className="program-details-statistics__particular-information">
+      <div className="details-statistics__particular-information">
         <DetailsStatisticItem
           label={t("program-details-page.statistics.balance")}
           accent
@@ -49,8 +50,8 @@ const ProgramDetailsStatistics = ({
             displayType="text"
           />
         </DetailsStatisticItem>
-        <div className="program-details-statistics__period">
-          <span className="program-details-statistics__label">
+        <div className="details-statistics__period">
+          <span className="details-statistics__label">
             {t("program-details-page.statistics.period")}
           </span>
           <ProgramPeriodLine
@@ -60,13 +61,13 @@ const ProgramDetailsStatistics = ({
         </div>
       </div>
 
-      <div className="program-details-statistics__subheading">
+      <div className="details-statistics__subheading">
         {t("program-details-page.statistics.for")}{" "}
         {t(`chart-period.${ChartPeriodType[period.type]}`)}
       </div>
 
-      <div className="program-details-statistics__particular-information">
-        <div className="program-details-statistics__column">
+      <div className="details-statistics__particular-information">
+        <div className="details-statistics__column">
           <DetailsStatisticItem
             label={t("program-details-page.statistics.trades")}
             half
@@ -106,7 +107,7 @@ const ProgramDetailsStatistics = ({
           </DetailsStatisticItem>
         </div>
 
-        <div className="program-details-statistics__column">
+        <div className="details-statistics__column">
           <DetailsStatisticItem
             label={t("program-details-page.statistics.success-trades")}
             half

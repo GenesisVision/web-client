@@ -1,8 +1,9 @@
+import * as actionsFunds from "shared/modules/funds-table/actions/funds-table.actions";
+import * as actionsPrograms from "shared/modules/programs-table/actions/programs-table.actions";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
+
 import * as actions from "../actions/manager.actions.js";
-import * as actionsPrograms from "modules/programs-table/actions/programs-table.actions";
-import * as actionsFunds from "modules/funds-table/actions/funds-table.actions";
 import { MANAGER_SLUG_URL_PARAM_NAME } from "../manager.page";
 import { MANAGER_DETAILS_ROUTE } from "../manager.page.js";
 
@@ -22,7 +23,9 @@ export const getFunds = (managerId, filters) => {
   if (authService.getAuthArg()) {
     requestFilters.authorization = authService.getAuthArg();
   }
-  return actionsFunds.fetchFunds(requestFilters);
+  return actionsFunds.fetchFunds(requestFilters).payload.then(data => {
+    return { items: data.funds, total: data.total };
+  });
 };
 
 export const getPrograms = (managerId, filters) => {
@@ -30,21 +33,7 @@ export const getPrograms = (managerId, filters) => {
   if (authService.getAuthArg()) {
     requestFilters.authorization = authService.getAuthArg();
   }
-  return actionsPrograms.fetchPrograms(requestFilters);
-};
-
-export const getFundsDispatch = (managerId, filters) => dispatch => {
-  const requestFilters = { ...filters, managerId };
-  if (authService.getAuthArg()) {
-    requestFilters.authorization = authService.getAuthArg();
-  }
-  return dispatch(actionsFunds.fetchFunds(requestFilters));
-};
-
-export const getProgramsDispatch = (managerId, filters) => dispatch => {
-  const requestFilters = { ...filters, managerId };
-  if (authService.getAuthArg()) {
-    requestFilters.authorization = authService.getAuthArg();
-  }
-  return dispatch(actionsPrograms.fetchPrograms(requestFilters));
+  return actionsPrograms.fetchPrograms(requestFilters).payload.then(data => {
+    return { items: data.programs, total: data.total };
+  });
 };

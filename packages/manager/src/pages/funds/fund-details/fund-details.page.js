@@ -1,16 +1,21 @@
-import "./fund-details.scss";
+import "shared/components/details/details.scss";
 
-import Page from "shared/components/page/page";
+import AssetEditContainer from "modules/asset-edit/asset-edit-container";
+import { FUND } from "modules/asset-edit/asset-edit.constants";
+import FundDepositContainer from "modules/fund-deposit/fund-deposit-container";
+import FundWithdrawContainer from "modules/fund-withdraw/fund-withdraw-container";
+import ReallocateContainer from "modules/reallocate/reallocate-container";
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
+import FundDetailsDescriptionSection from "shared/components/funds/fund-details/fund-details-description/fund-details-description-section";
+import FundDetailsStatisticSection from "shared/components/funds/fund-details/fund-details-statistics-section/fund-details-statistic-section";
+import NotFoundPage from "shared/components/not-found/not-found.routes";
+import Page from "shared/components/page/page";
 
 import { LOGIN_ROUTE } from "../../auth/login/login.routes";
-import NotFoundPage from "../../not-found/not-found.routes";
-import FundDetailsDescriptionSection from "./components/fund-details-description-section/fund-details-description-section";
 import FundDetailsHistorySection from "./components/fund-details-history-section/fund-details-history-section";
-import FundDetailsStatisticSection from "shared/components/funds/fund-details/fund-details-statistics-section/fund-details-statistic-section";
 import {
   getFundDescription,
   getFundStatistic,
@@ -67,15 +72,10 @@ class FundDetailsPage extends PureComponent {
         this.setState({ isPending: true });
         return getFundStatistic(this.description.data.id);
       })
-      .catch()
       .then(data => {
         this.profitChart = data.profitChartData;
         this.balanceChart = data.balanceChartData;
         this.statistic = data.statisticData;
-        this.setState({ isPending: false });
-      })
-      .then(() => {
-        this.setState({ isPending: true });
         return getFundStructure(this.description.data.id);
       })
       .then(({ data }) => {
@@ -102,16 +102,22 @@ class FundDetailsPage extends PureComponent {
             updateDetails: this.updateDetails
           }}
         >
-          <div className="fund-details">
-            <div className="fund-details__section">
+          <div className="details">
+            <div className="details__section">
               <FundDetailsDescriptionSection
+                AssetEditContainer={AssetEditContainer}
+                FUND={FUND}
+                FundDepositContainer={FundDepositContainer}
+                FundWithdrawContainer={FundWithdrawContainer}
+                ReallocateContainer={ReallocateContainer}
+                FundDetailContext={FundDetailContext}
                 fundDescriptionData={this.description}
                 isAuthenticated={isAuthenticated}
                 redirectToLogin={service.redirectToLogin}
                 onChangeInvestmentStatus={this.changeInvestmentStatus}
               />
             </div>
-            <div className="fund-details__section">
+            <div className="details__section">
               <FundDetailsStatisticSection
                 getFundStatistic={getFundStatistic}
                 programId={this.description.data.id}
@@ -121,7 +127,7 @@ class FundDetailsPage extends PureComponent {
                 balanceChartData={this.balanceChart}
               />
             </div>
-            <div className="fund-details__history">
+            <div className="details__history">
               <FundDetailsHistorySection
                 fundId={this.description.data.id}
                 currency={currency}

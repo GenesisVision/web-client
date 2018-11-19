@@ -1,12 +1,13 @@
 import "./details-investment.scss";
 
-import ProgramStatus from "shared/components/program-status/program-status";
-import Surface from "shared/components/surface/surface";
 import { GVButton } from "gv-react-components";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import ProgramStatus from "shared/components/program-status/program-status";
+import Surface from "shared/components/surface/surface";
 import { formatValue } from "shared/utils/formatter";
+
 import DetailsStatisticItem from "../../../details-statistic-item/details-statistic-item";
 
 class DetailsInvestment extends PureComponent {
@@ -48,16 +49,6 @@ class DetailsInvestment extends PureComponent {
         <div className="details-investment__short-statistic">
           <DetailsStatisticItem
             accent
-            label={t("fund-details-page.description.invested")}
-          >
-            <NumberFormat
-              value={formatValue(investedAmount)}
-              suffix={` ${balanceCurrency}`}
-              displayType="text"
-            />
-          </DetailsStatisticItem>
-          <DetailsStatisticItem
-            accent
             label={t("fund-details-page.description.value")}
           >
             <NumberFormat
@@ -68,21 +59,11 @@ class DetailsInvestment extends PureComponent {
           </DetailsStatisticItem>
           <DetailsStatisticItem
             accent
-            label={t("fund-details-page.description.profit")}
-          >
-            <NumberFormat
-              value={profitPercent}
-              suffix=" %"
-              displayType="text"
-            />
-          </DetailsStatisticItem>
-          <DetailsStatisticItem
-            accent
             label={t("fund-details-page.description.status")}
           >
             <ProgramStatus status={status} />
           </DetailsStatisticItem>
-          {pendingInput !== 0 && (
+          {pendingInput !== undefined && pendingInput !== 0 && (
             <DetailsStatisticItem
               accent
               label={t("fund-details-page.description.pending-input")}
@@ -94,7 +75,7 @@ class DetailsInvestment extends PureComponent {
               />
             </DetailsStatisticItem>
           )}
-          {pendingOutput !== 0 && (
+          {pendingOutput !== undefined && pendingOutput !== 0 && (
             <DetailsStatisticItem
               accent
               label={t("fund-details-page.description.pending-output")}

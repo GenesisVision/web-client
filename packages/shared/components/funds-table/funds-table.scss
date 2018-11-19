@@ -36,7 +36,8 @@ $chart-width: 160px;
   & .fund-asset {
     margin-bottom: 0;
   }
-  &--amount {
+  &--amount,
+  &--value {
     white-space: nowrap;
   }
   &--avatar-title {

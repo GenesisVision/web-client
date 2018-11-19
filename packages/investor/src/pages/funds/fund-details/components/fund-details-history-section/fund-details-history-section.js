@@ -1,8 +1,8 @@
-import "./fund-details-history.scss";
+import "shared/components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
 
-import Surface from "shared/components/surface/surface";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
+import Surface from "shared/components/surface/surface";
 
 import FundStructure from "./fund-structure/fund-structure";
 
@@ -31,8 +31,8 @@ class FundDetailsHistorySection extends PureComponent {
     const { t, fundId, currency, structure } = this.props;
     if (!structure) return null;
     return (
-      <Surface className="fund-details-history">
-        <div className="fund-details-history__heading">
+      <Surface className="details-history">
+        <div className="details-history__heading">
           {t("fund-details-page.history.structure.title")}
         </div>
         <div>

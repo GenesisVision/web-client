@@ -1,7 +1,12 @@
-@import "shared/styles/_sizes.scss";
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
 
 .back-button {
-  margin: 25px 0 40px;
+  margin: 12px 0 12px;
+  @include media-breakpoint-landscape-phone() {
+    margin: 25px 0 25px;
+  }
   display: flex;
   align-items: center;
 

@@ -118,6 +118,8 @@
   },
   "withdraw-fund": {
     "title": "Withdraw",
+    "exit-fee": "Exit fee",
+    "withdraw-amount": "Withdraw amount",
     "available-to-withdraw": "Current invested value",
     "amount-to-withdraw": "Amount to withdraw",
     "next": "Next",
@@ -570,7 +572,8 @@
       "investors": "Investors",
       "drawdown": "D.down",
       "profit": "Profit",
-      "chart": "Chart"
+      "chart": "Chart",
+      "value": "Value"
     }
   },
   "global-search-page": {
@@ -603,7 +606,8 @@
       "investors": "Investors",
       "drawdown": "D.down",
       "profit": "Profit",
-      "chart": "Chart"
+      "chart": "Chart",
+      "value": "Value"
     }
   },
   "program-details-page": {
@@ -881,7 +885,7 @@
     "get-started": {
       "title": "Get started",
       "text-1": "There's no data right now.",
-      "text-2": "Find the program to invest or make a deposit first",
+      "text-2": "Find the program or the fund to invest or make a deposit first",
       "deposit": "Deposit",
       "programs": "Go to the programs"
     },

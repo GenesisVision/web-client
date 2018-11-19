@@ -47,7 +47,8 @@
       "investors": "Investors",
       "drawdown": "D.down",
       "profit": "Profit",
-      "chart": "Chart"
+      "chart": "Chart",
+      "value": "Value"
     }
   },
   "managers-table": {
@@ -60,8 +61,7 @@
     "close-period": {
       "title": "Close Period",
       "body": "Do you really want to restart current period?",
-      "notification-success":
-        "Request to close the period was sent successfully."
+      "notification-success": "Request to close the period was sent successfully."
     },
     "description": {
       "strategy": "Strategy",
@@ -80,14 +80,11 @@
       "profit": "Profit",
       "status": "Status",
       "withdraw": "Withdraw",
-      "withdraw-notice-text":
-        "You can withdraw only the invested funds, the profit will be withdrawn to your account at the end of the period automatically",
+      "withdraw-notice-text": "You can withdraw only the invested funds, the profit will be withdrawn to your account at the end of the period automatically",
       "edit-program": "Edit Program",
       "close-program": "Close Program",
-      "close-program-notification":
-        "Investment program will be closed after this reporting period. Current investment requests will be cancelled and new requests won’t be accepted. Profit and funds from the trading account will be deposited to GVT wallets of investors and manager according to their shares.",
-      "close-program-notification-success":
-        "Request to close the program was sent successfully."
+      "close-program-notification": "Investment program will be closed after this reporting period. Current investment requests will be cancelled and new requests won’t be accepted. Profit and funds from the trading account will be deposited to GVT wallets of investors and manager according to their shares.",
+      "close-program-notification-success": "Request to close the program was sent successfully."
     },
     "statistics": {
       "heading": "Statistics",
@@ -108,8 +105,7 @@
     "popover": {
       "genesis-level": "Genesis Level",
       "invest-limit": "Invest limit",
-      "text":
-        "Genesis level shows the experience and reliability of the Manager",
+      "text": "Genesis level shows the experience and reliability of the Manager",
       "about-levels": "About levels"
     },
     "history": {
@@ -151,10 +147,17 @@
     "all-short": "All",
     "all": "All Time"
   },
+  "reallocate": {
+    "title": "Reallocate",
+    "apply": "Confirm",
+    "success-alert-message": "Your assets reallocated successfully!"
+  },
   "fund-details-page": {
     "title": "Program detail",
     "description": {
-      "edit-fund": "Edit fund",
+      "disable-reallocation-message": "The next reallocation will be available on",
+      "reallocate": "Reallocate",
+      "edit-fund": "Edit details",
       "strategy": "Strategy",
       "assets": "Assets",
       "addToFavorites": "Add to favorites",
@@ -171,8 +174,7 @@
       "profit": "Profit",
       "status": "Status",
       "withdraw": "Withdraw",
-      "withdraw-notice-text":
-        "You can withdraw only the invested funds, the profit will be withdrawn to your account at the end of the period automatically"
+      "withdraw-notice-text": "You can withdraw only the invested funds, the profit will be withdrawn to your account at the end of the period automatically"
     },
     "statistics": {
       "heading": "Statistics",
@@ -273,8 +275,7 @@
   "program-statistic": {
     "avg-profit": {
       "text": "Avg Profit",
-      "tooltip":
-        "The average profit for the period in relation to the starting balance."
+      "tooltip": "The average profit for the period in relation to the starting balance."
     },
     "available-to-invest": {
       "text": "Available to Invest",
@@ -282,14 +283,12 @@
     },
     "trades": {
       "text": "Trades",
-      "tooltip":
-        "Trades show the number of financial operations conducted by the manager."
+      "tooltip": "Trades show the number of financial operations conducted by the manager."
     },
     "investors": {
       "text": "Investor",
       "text_plural": "Investors",
-      "tooltip":
-        "Investor - is a Genesis Vision client, investors choose a manager in the Program Ratings and invest money in their investment programs."
+      "tooltip": "Investor - is a Genesis Vision client, investors choose a manager in the Program Ratings and invest money in their investment programs."
     },
     "program-item-balance": {
       "text": "Balance",
@@ -301,25 +300,21 @@
     },
     "balance": {
       "text": "Balance",
-      "tooltip":
-        "Balance - is the total USD value of funds that are managed in the investment program."
+      "tooltip": "Balance - is the total USD value of funds that are managed in the investment program."
     },
     "own-balance": {
       "text": "Own Balance",
-      "tooltip":
-        "Own balance - is an amount of money which belongs to the manager."
+      "tooltip": "Own balance - is an amount of money which belongs to the manager."
     }
   },
   "program-deal-list": {
     "symbol": {
       "text": "Symbol",
-      "tooltip":
-        "Symbol is a trading instrument which was used by a manager in a trade."
+      "tooltip": "Symbol is a trading instrument which was used by a manager in a trade."
     },
     "volume": {
       "text": "Volume",
-      "tooltip":
-        "Volume is the number of units offered for sale or purchase. Usually, volume measured in \"lots\" - the number of currency units you will buy or sell."
+      "tooltip": "Volume is the number of units offered for sale or purchase. Usually, volume measured in \"lots\" - the number of currency units you will buy or sell."
     },
     "ticket": {
       "text": "Ticket",
@@ -327,18 +322,15 @@
     },
     "price": {
       "text": "Price",
-      "tooltip":
-        "Price is a price of base trading instrument unit the value of quoted currency (in case of a currency pair)."
+      "tooltip": "Price is a price of base trading instrument unit the value of quoted currency (in case of a currency pair)."
     },
     "price-open": {
       "text": "Price Open",
-      "tooltip":
-        "Price open – is a price which was at the opening moment of the trade."
+      "tooltip": "Price open – is a price which was at the opening moment of the trade."
     },
     "price-close": {
       "text": "Price Close",
-      "tooltip":
-        "Price close – is a price which was at the closing moment of the trade."
+      "tooltip": "Price close – is a price which was at the closing moment of the trade."
     },
     "profit": {
       "text": "Profit",
@@ -346,8 +338,7 @@
     },
     "direction": {
       "text": "Direction",
-      "tooltip":
-        "Direction is an indicator of the direction of the trade (i.e. \"Buy\" or \"Sell\")."
+      "tooltip": "Direction is an indicator of the direction of the trade (i.e. \"Buy\" or \"Sell\")."
     },
     "date": {
       "text": "Date",
@@ -369,8 +360,7 @@
   "program-settings": {
     "token-symbol": {
       "text": "Token Symbol",
-      "tooltip":
-        "Token symbol - is a unique abbreviation used to identify manager’s token."
+      "tooltip": "Token symbol - is a unique abbreviation used to identify manager’s token."
     },
     "token-name": {
       "text": "Token Name",
@@ -378,8 +368,7 @@
     },
     "deposit-amount": {
       "text": "Deposit amount (GVT)",
-      "tooltip":
-        "Deposit amount (GVT) - is the amount of manager’s own funds invested in his program."
+      "tooltip": "Deposit amount (GVT) - is the amount of manager’s own funds invested in his program."
     },
     "start-date": {
       "text": "Start Date",
@@ -387,30 +376,25 @@
     },
     "period-length": {
       "text": "Period Length",
-      "tooltip":
-        "Period length is the duration of the reporting period estimated in days."
+      "tooltip": "Period length is the duration of the reporting period estimated in days."
     },
     "leverage": {
       "text": "Leverage",
-      "tooltip":
-        "Leverage - is the correlation between margin amount and trade volume."
+      "tooltip": "Leverage - is the correlation between margin amount and trade volume."
     },
     "period-duration": {
       "text": "Period Duration",
       "bubble": "day",
       "bubble_plural": "days",
-      "tooltip":
-        "Period duration - is a period that is defined by a manager at the end of which all trading positions are closed with a subsequent profit distribution."
+      "tooltip": "Period duration - is a period that is defined by a manager at the end of which all trading positions are closed with a subsequent profit distribution."
     },
     "success-fee": {
       "text": "Success Fee",
-      "tooltip":
-        "Success fee is an additional successful trading fee that is charged from the investor’s profit at the end of the reporting period."
+      "tooltip": "Success fee is an additional successful trading fee that is charged from the investor’s profit at the end of the reporting period."
     },
     "management-fee": {
       "text": "Management Fee",
-      "tooltip":
-        "Management fee - is an obligatory annual fee, charged at the end of the reporting period from the total amount of funds invested in this investment program."
+      "tooltip": "Management fee - is an obligatory annual fee, charged at the end of the reporting period from the total amount of funds invested in this investment program."
     }
   },
   "dashboard-page": {
@@ -436,7 +420,8 @@
       "investors": "Investors",
       "drawdown": "D.down",
       "profit": "Profit",
-      "chart": "Chart"
+      "chart": "Chart",
+      "value": "Value"
     }
   },
   "dashboard": {
@@ -455,9 +440,11 @@
       "deposit": "Deposit"
     },
     "portfolio-events": {
-      "title": "Portfolio Events",
+      "title": "Events",
       "see-all-button": "See All",
       "table-title": "Operations",
+      "balance": "Balance",
+      "profit": "Profit",
       "empty-events": {
         "text": "The following events will be displayed here",
         "finished": "Fund/Program finished",
@@ -494,18 +481,15 @@
   "dashboard-statistic": {
     "funds": {
       "text": "Funds",
-      "tooltip":
-        "Funds – is the amount of money which is managed by the trader."
+      "tooltip": "Funds – is the amount of money which is managed by the trader."
     },
     "investors": {
       "text": "Investors",
-      "tooltip":
-        "Investors show the amount of investors who invested in the manager."
+      "tooltip": "Investors show the amount of investors who invested in the manager."
     },
     "end-of-next-period": {
       "text": "End of next period",
-      "tooltip":
-        "End of next period shows the amount of days until the end of the nearest next trading period."
+      "tooltip": "End of next period shows the amount of days until the end of the nearest next trading period."
     },
     "profit": {
       "text": "Profit",
@@ -525,14 +509,11 @@
     "amount": "Amount to invest",
     "entry-fee": "Entry fee",
     "investment-amount": "Investment amount",
-    "disclaimer":
-      "After clicking the \"Confirm\" button, the invested GVT will be immediately converted to {{currency}}. Accrual of {{currency}} to the account manager will only occur at the end of the reporting period.",
+    "disclaimer": "After clicking the \"Confirm\" button, the invested GVT will be immediately converted to {{currency}}. Accrual of {{currency}} to the account manager will only occur at the end of the reporting period.",
     "confirm": "Confirm",
-    "success-alert-message":
-      "Successful request for investment in the program.",
+    "success-alert-message": "Successful request for investment in the program.",
     "validation": {
-      "amount-more-than-available":
-        "Amount is more than available in your wallet",
+      "amount-more-than-available": "Amount is more than available in your wallet",
       "amount-is-required": "Amount is required.",
       "amount-min-value": "Min amount is {{min}} GVT"
     }
@@ -545,14 +526,11 @@
     "amount": "Amount to invest",
     "entry-fee": "Entry fee",
     "investment-amount": "Investment amount",
-    "disclaimer":
-      "After clicking the \"Confirm\" button, the invested GVT will be immediately converted to {{currency}}. Accrual of {{currency}} to the account manager will only occur at the end of the reporting period.",
+    "disclaimer": "After clicking the \"Confirm\" button, the invested GVT will be immediately converted to {{currency}}. Accrual of {{currency}} to the account manager will only occur at the end of the reporting period.",
     "confirm": "Confirm",
-    "success-alert-message":
-      "Successful request for investment in the fund.",
+    "success-alert-message": "Successful request for investment in the fund.",
     "validation": {
-      "amount-more-than-available":
-        "Amount is more than available in your wallet",
+      "amount-more-than-available": "Amount is more than available in your wallet",
       "amount-is-required": "Amount is required.",
       "amount-min-value": "Min amount is {{min}} GVT"
     }
@@ -563,39 +541,36 @@
     "how-much-withdraw": "How much would you like to withdraw?",
     "enter-amount": "Enter {{currency}} amount",
     "minimal-balance": "Minimal remaining balance is",
-    "success-alert-message":
-      "Successful request for investment in the program.",
+    "success-alert-message": "Successful request for investment in the program.",
     "title": "Withdraw",
     "available-to-withdraw": "Available to withdraw",
     "amount-to-withdraw": "Amount to withdraw",
     "next": "Next",
-    "info":
-      "Your request will be processed at the end of the reporting period. The requested amount will be converted to GVT and transferred to your wallet",
+    "info": "Your request will be processed at the end of the reporting period. The requested amount will be converted to GVT and transferred to your wallet",
     "withdrawing": "Withdrawing",
     "payout-date": "Payout date",
     "back": "Back",
     "submit": "Submit",
     "validation": {
-      "amount-more-than-available":
-        "Amount is more than available for withdraw",
+      "amount-more-than-available": "Amount is more than available for withdraw",
       "amount-is-required": "Amount is required."
     }
   },
   "withdraw-fund": {
     "title": "Withdraw",
+    "exit-fee": "Exit fee",
+    "withdraw-amount": "Withdraw amount",
     "available-to-withdraw": "You invested in fund",
     "amount-to-withdraw": "Amount to withdraw",
     "next": "Next",
-    "info":
-      "Amount of withdrawals can be changed depending on the exchange rate or the success of the Manager",
+    "info": "Amount of withdrawals can be changed depending on the exchange rate or the success of the Manager",
     "withdrawing": "Withdrawing",
     "payout-date": "Payout date",
     "back": "Back",
     "submit": "Submit",
     "success-alert-message": "Request to withdrawal sent successfully.",
     "validation": {
-      "amount-more-than-available":
-        "Amount is more than available for withdraw",
+      "amount-more-than-available": "Amount is more than available for withdraw",
       "amount-is-required": "Amount is required."
     }
   },
@@ -630,28 +605,23 @@
   "auth": {
     "quotes": {
       "0": {
-        "quote":
-          "Rule No. 1: Never lose money. Rule No. 2: Never forget rule No.1",
+        "quote": "Rule No. 1: Never lose money. Rule No. 2: Never forget rule No.1",
         "author": "Warren Buffet"
       },
       "1": {
-        "quote":
-          "Successful investing is about managing risk, not avoiding it.",
+        "quote": "Successful investing is about managing risk, not avoiding it.",
         "author": "Benjamin Graham"
       },
       "2": {
-        "quote":
-          "Money is always eager and ready to work for anyone who is ready to employ it.",
+        "quote": "Money is always eager and ready to work for anyone who is ready to employ it.",
         "author": "Idowu Koyenikan"
       },
       "3": {
-        "quote":
-          "Investing isn’t about beating others at their game. It’s about controlling yourself at your own game.",
+        "quote": "Investing isn’t about beating others at their game. It’s about controlling yourself at your own game.",
         "author": "Benjamin Graham"
       },
       "4": {
-        "quote":
-          "The greatest investment we can ever make is to invest our life in the life of someone else.",
+        "quote": "The greatest investment we can ever make is to invest our life in the life of someone else.",
         "author": "Scott Lee"
       },
       "5": {
@@ -676,8 +646,7 @@
       "privacy-policy-text": "Privacy Policy"
     },
     "signup-email-pending": {
-      "text-section":
-        "Please check your inbox for a confirmation email. Click the link in the email to confirm your email.",
+      "text-section": "Please check your inbox for a confirmation email. Click the link in the email to confirm your email.",
       "resend-button-text": "Resend email"
     },
     "login": {
@@ -695,8 +664,7 @@
         "verify": "Verify",
         "recovery-info": "Don’t have access to the device?",
         "link-to-recovery": "Enter a two-factor recovery code",
-        "text":
-          "Open the two-factor authentication app on your device to view your authentication code and verify your identity.",
+        "text": "Open the two-factor authentication app on your device to view your authentication code and verify your identity.",
         "validation": {
           "two-factor-6digits": "Authentication code should contain 6 digits.",
           "two-factor-required": "Authentication code is required."
@@ -704,8 +672,7 @@
       },
       "recovery": {
         "title": "Recovery",
-        "text":
-          "You can enter one of your recovery codes in case you lost access to your mobile device.",
+        "text": "You can enter one of your recovery codes in case you lost access to your mobile device.",
         "continue": "Continue",
         "validation": {
           "recovery-is-required": "Recovery code is required."
@@ -715,8 +682,7 @@
     "password-restore": {
       "title": "Restore password",
       "success-alert-message": "Your password changed successfully!",
-      "resend-email-alert-message":
-        "Information has been re-sent to your email address.",
+      "resend-email-alert-message": "Information has been re-sent to your email address.",
       "forgot-password": {
         "text": "Just enter the email address you used to create your account.",
         "email-field-text": "Email address",
@@ -739,8 +705,7 @@
         "email-required": "Email is required."
       },
       "email-pending": {
-        "text-section-1":
-          "Please check your inbox for a confirmation email. Click the link in the email to create new password.",
+        "text-section-1": "Please check your inbox for a confirmation email. Click the link in the email to create new password.",
         "email-resend-button-text": "Resend email",
         "confirm-button-text": "Continue",
         "back-button-text": "Back"
@@ -749,8 +714,7 @@
     "email-confirm": {
       "title": "Email confirm",
       "success-alert-message": "Email address successfully verified",
-      "error-during-confirmation":
-        "An error occurred during confirmation of email:"
+      "error-during-confirmation": "An error occurred during confirmation of email:"
     },
     "logout-from-another-devices": {
       "success-message": "Successful logout on another devices."
@@ -758,8 +722,7 @@
   },
   "create-program-page": {
     "title": "Create Program",
-    "navigation-back-text":
-      "All data will be deleted. Do you want to continue?",
+    "navigation-back-text": "All data will be deleted. Do you want to continue?",
     "tabs": {
       "select-broker": "Select broker",
       "settings": "Settings"
@@ -792,8 +755,7 @@
           "day_plural": "Days"
         },
         "upload-logo": "Upload program logo",
-        "upload-logo-rules":
-          "At least 300 x 300px PNG or JPG file. The maximum file size is 2MB.",
+        "upload-logo-rules": "At least 300 x 300px PNG or JPG file. The maximum file size is 2MB.",
         "entry-fee": "Entry fee",
         "success-fee": "Success fee",
         "deposit-amount": "Deposit amount",
@@ -801,11 +763,9 @@
       },
       "hints": {
         "entry-fee": "Description about entry fee is here",
-        "entry-fee-description":
-          "An entry fee is a fee charged to investors upon their investment to an investment program. The maximum entry fee is {{maxFee}} %",
+        "entry-fee-description": "An entry fee is a fee charged to investors upon their investment to an investment program. The maximum entry fee is {{maxFee}} %",
         "success-fee": "Description about success fee is here",
-        "success-fee-description":
-          "A success fee is paid to a manager at the end of the reporting period for successfully closing the period at a profit. The maximum success fee is {{maxFee}} %"
+        "success-fee-description": "A success fee is paid to a manager at the end of the reporting period for successfully closing the period at a profit. The maximum success fee is {{maxFee}} %"
       },
       "validation": {
         "title-required": "Title is required",
@@ -821,8 +781,7 @@
         "entry-fee-required": "Entry fee is required",
         "success-fee-required": "Success fee is required",
         "account-type-required": "Account type is required",
-        "image-resolution-incorrect":
-          "The resolution of the uploaded image is too low.",
+        "image-resolution-incorrect": "The resolution of the uploaded image is too low.",
         "image-file-is-large": "The uploaded image file is too large."
       }
     },
@@ -832,8 +791,7 @@
   },
   "edit-program": {
     "title": "Edit program",
-    "navigation-back-text":
-      "All data will be deleted. Do you want to continue?",
+    "navigation-back-text": "All data will be deleted. Do you want to continue?",
     "confirm": "Confirm",
     "settings": {
       "fields": {
@@ -842,8 +800,7 @@
         "description": "Description",
         "description-requirements": "Requirement from 20 to 500 symbols",
         "upload-logo": "Upload program logo",
-        "upload-logo-rules":
-          "At least 300 x 300px PNG or JPG file. The maximum file size is 2MB."
+        "upload-logo-rules": "At least 300 x 300px PNG or JPG file. The maximum file size is 2MB."
       },
       "hints": {
         "entry-fee": "Description about entry fee is here"
@@ -857,8 +814,7 @@
         "description-is-short": "Description is too short",
         "description-required": "Description is required",
         "account-type-required": "Account type is required",
-        "image-resolution-incorrect":
-          "The resolution of the uploaded image is too low.",
+        "image-resolution-incorrect": "The resolution of the uploaded image is too low.",
         "image-file-is-large": "The uploaded image file is too large."
       }
     },
@@ -867,9 +823,8 @@
     }
   },
   "edit-fund": {
-    "title": "Edit fund",
-    "navigation-back-text":
-      "All data will be deleted. Do you want to continue?",
+    "title": "Edit details",
+    "navigation-back-text": "All data will be deleted. Do you want to continue?",
     "confirm": "Confirm",
     "settings": {
       "fields": {
@@ -878,8 +833,7 @@
         "description": "Description",
         "description-requirements": "Requirement from 20 to 500 symbols",
         "upload-logo": "Upload fund logo",
-        "upload-logo-rules":
-          "At least 300 x 300px PNG or JPG file. The maximum file size is 2MB."
+        "upload-logo-rules": "At least 300 x 300px PNG or JPG file. The maximum file size is 2MB."
       },
       "hints": {
         "entry-fee": "Description about entry fee is here"
@@ -893,8 +847,7 @@
         "description-is-short": "Description is too short",
         "description-required": "Description is required",
         "account-type-required": "Account type is required",
-        "image-resolution-incorrect":
-          "The resolution of the uploaded image is too low.",
+        "image-resolution-incorrect": "The resolution of the uploaded image is too low.",
         "image-file-is-large": "The uploaded image file is too large."
       }
     },
@@ -904,8 +857,7 @@
   },
   "create-fund-page": {
     "title": "Create Fund",
-    "navigation-back-text":
-      "All data will be deleted. Do you want to continue?",
+    "navigation-back-text": "All data will be deleted. Do you want to continue?",
     "notifications": {
       "create-success": "Successful program creating."
     },
@@ -926,8 +878,7 @@
       "fees-settings": "Fees settings",
       "deposit-details": "Deposit details",
       "fields": {
-        "asset-description":
-          "Total share of all assets should be equal to 100%",
+        "asset-description": "Total share of all assets should be equal to 100%",
         "name": "Name",
         "account-type": "Account type",
         "currency": "Currency",
@@ -936,8 +887,7 @@
         "brokers-leverage": "Broker's leverage",
         "period": "Period",
         "upload-logo": "Upload fund logo",
-        "upload-logo-rules":
-          "At least 300 x 300px PNG or JPG file. The maximum file size is 2MB.",
+        "upload-logo-rules": "At least 300 x 300px PNG or JPG file. The maximum file size is 2MB.",
         "entry-fee": "Entry fee",
         "success-fee": "Success fee",
         "exit-fee": "Exit fee",
@@ -955,18 +905,15 @@
         "exit-fee-required": "Exit fee is required",
         "assets-share": "Total share of all assets should be equal to 100%",
         "assets-count": "Must be at least two assets.",
-        "image-resolution-incorrect":
-          "The resolution of the uploaded image is too low.",
+        "image-resolution-incorrect": "The resolution of the uploaded image is too low.",
         "image-file-is-large": "The uploaded image file is too large.",
         "deposit-min": "Not enought money."
       },
       "hints": {
         "entry-fee": "Description about entry fee is here",
-        "entry-fee-description":
-          "An entry fee is a fee charged to investors upon their investment to a GV Fund. The maximum entry fee is {{maxFee}} %",
+        "entry-fee-description": "An entry fee is a fee charged to investors upon their investment to a GV Fund. The maximum entry fee is {{maxFee}} %",
         "exit-fee": "Description about exit fee is here",
-        "exit-fee-description":
-          "An exit fee is a fee charged to investors when they redeem shares from a GV Fund. The maximum exit fee is {{maxFee}} %"
+        "exit-fee-description": "An exit fee is a fee charged to investors when they redeem shares from a GV Fund. The maximum exit fee is {{maxFee}} %"
       }
     }
   },
@@ -1018,16 +965,13 @@
     "settings": {
       "title": "Settings",
       "profile-image": "Profile image",
-      "image-requirements":
-        "At least 300 x 300px PNG or JPG file. The maximum file size is 2MB.",
+      "image-requirements": "At least 300 x 300px PNG or JPG file. The maximum file size is 2MB.",
       "save-photo": "Save photo",
-      "image-success-save-message":
-        "The photo has just been successfully changed.",
+      "image-success-save-message": "The photo has just been successfully changed.",
       "logout-from-another-devices": "Logout from other devices",
       "change-password": "Change password",
       "validation": {
-        "image-resolution-incorrect":
-          "The resolution of the uploaded image is too low.",
+        "image-resolution-incorrect": "The resolution of the uploaded image is too low.",
         "image-file-is-large": "The uploaded image file is too large."
       }
     }
@@ -1045,29 +989,23 @@
     "download-app": "Download App",
     "scan-code": "Scan code",
     "enter-code": "Enter the 6-digit code it gives you here to activate:",
-    "alt-code":
-      "Or enter this secret key into your Google Authenticator device:",
+    "alt-code": "Or enter this secret key into your Google Authenticator device:",
     "google-code": "6-digit code",
     "password": "Enter your password",
     "code-required": "Code is required",
     "password-required": "Password is required",
     "disable": {
       "title": "Disable two-factor authentication",
-      "success":
-        "You have successfully disabled the two factor authentication. However, we strongly recommend you keep it enabled. This can protect your funds from being stolen."
+      "success": "You have successfully disabled the two factor authentication. However, we strongly recommend you keep it enabled. This can protect your funds from being stolen."
     },
     "codes": {
-      "copy-success":
-        "Recovery codes was copied to the clipboard successfully.",
+      "copy-success": "Recovery codes was copied to the clipboard successfully.",
       "copy-error": "Failed to copy data to the clipboard.",
       "generate-recovery-codes": "Generate recovery codes",
       "title": "Please read carefully",
-      "successfully":
-        "You have just successfully configured the two factor authentication. We will ask you for the 2FA Code in any potentially dangerous situation, such as logging in or withdrawing funds.",
-      "recovery_codes":
-        "You can find your recovery codes below. You can use them in case you lost your 2FA key or lost your phone with the 2FA application installed. Each recovery code can be used only once. Save these codes on paper and put it in a safe place. If you are not sure that you can provide a secure place for the recovery codes, it would be safier to just ignore these codes.",
-      "warning":
-        "WARNING: We do not store your recovery codes. If you lost the access to your 2FA, it is most likely that we couldn't help you to return the access to your account."
+      "successfully": "You have just successfully configured the two factor authentication. We will ask you for the 2FA Code in any potentially dangerous situation, such as logging in or withdrawing funds.",
+      "recovery_codes": "You can find your recovery codes below. You can use them in case you lost your 2FA key or lost your phone with the 2FA application installed. Each recovery code can be used only once. Save these codes on paper and put it in a safe place. If you are not sure that you can provide a secure place for the recovery codes, it would be safier to just ignore these codes.",
+      "warning": "WARNING: We do not store your recovery codes. If you lost the access to your 2FA, it is most likely that we couldn't help you to return the access to your account."
     }
   },
   "buttons": {
@@ -1120,8 +1058,7 @@
     "deposit-address": "Deposit address",
     "copy-to-clipboard-success": "Address is copied to the clipboard.",
     "copy-to-clipboard-error": "Failed to copy data to the clipboard.",
-    "disclaimer":
-      "After processing the {{currency}} transaction, your transferred funds will be converted to GVT, according to the current market price. The exact amount of GVT received will be determined at the time of conversion in the market."
+    "disclaimer": "After processing the {{currency}} transaction, your transferred funds will be converted to GVT, according to the current market price. The exact amount of GVT received will be determined at the time of conversion in the market."
   },
   "wallet": {
     "title": "Wallet",
@@ -1152,10 +1089,8 @@
       "Cancelled": "Cancelled"
     },
     "alert-messages": {
-      "resend-email-success":
-        "A withdrawal confirmation letter has just been resent to your email address.",
-      "cancel-request-success":
-        "The withdrawal request was successfully canceled"
+      "resend-email-success": "A withdrawal confirmation letter has just been resent to your email address.",
+      "cancel-request-success": "The withdrawal request was successfully canceled"
     }
   },
   "wallet-withdraw": {
@@ -1167,10 +1102,8 @@
     "address": "Withdraw address",
     "fee": "Fee",
     "withdrawing": "Withdrawing",
-    "info":
-      "Amount of withdrawals can be changed depending on the exchange rate.",
-    "withdraw-request":
-      "Please approve the withdrawal request via the link in the confirmation email.",
+    "info": "Amount of withdrawals can be changed depending on the exchange rate.",
+    "withdraw-request": "Please approve the withdrawal request via the link in the confirmation email.",
     "two-factor-code-label": "Two factor code",
     "confirmation": {
       "page-title": "Wallet withdraw confirm",
@@ -1178,8 +1111,7 @@
       "success": "Withdrawal request is confirmed"
     },
     "validation": {
-      "amount-more-than-available":
-        "Amount is more than available in your wallet",
+      "amount-more-than-available": "Amount is more than available in your wallet",
       "amount-is-required": "Amount is required",
       "address-is-required": "Address is required.",
       "two-factor-6digits": "Authentication code should contain 6 digits.",

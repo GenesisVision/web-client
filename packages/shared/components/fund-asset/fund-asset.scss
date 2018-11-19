@@ -1,8 +1,14 @@
-@import "shared/styles/_colors.scss";
-@import "shared/styles/_breakpoint.scss";
-@import "shared/styles/_sizes.scss";
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
 
+$asset-height: 40px;
 $asset-height-mobile: $asset-height/$divider-text;
+$asset-icon-size: 20px;
+$asset-icon-size-mobile: $asset-icon-size/$divider-text;
+$remove-button-size: 18px;
+$remove-button-size-mobile: $remove-button-size/1.2;
+$remove-button-color: #293842;
 
 .fund-assets {
   display: flex;
@@ -31,14 +37,41 @@ $asset-height-mobile: $asset-height/$divider-text;
   align-items: center;
   padding: $padding-mini-mobile;
   border-radius: $border-radius-middle-mobile;
-  background: rgba(255, 255, 255, 0.02);
   font-weight: 400;
-  margin-right: $padding-small/2/$divider-padding;
-  margin-bottom: $padding-small/2/$divider-padding;
-  color: $text-light-color;
-  cursor: pointer;
+  margin-right: $padding-small/2/$divider-text;
+  margin-bottom: $padding-small/2/$divider-text;
+  position: relative;
   &:hover {
     background: rgba(255, 255, 255, 0.06);
+  }
+  &--hover {
+    background: rgba(255, 255, 255, 0.06) !important;
+  }
+  &--default {
+    background: rgba(255, 255, 255, 0.02);
+    color: $text-light-color;
+  }
+  &--remainder {
+    background: rgba(59, 205, 189, 0.1);
+    color: #14beb4;
+  }
+  &__remove-button {
+    position: absolute;
+    top: -$remove-button-size-mobile/2;
+    right: -$remove-button-size-mobile/2;
+    width: $remove-button-size-mobile;
+    height: $remove-button-size-mobile;
+    background: $remove-button-color;
+    border: solid 2px #131e26;
+    border-radius: $remove-button-size-mobile;
+    font-size: 20px;
+    font-weight: 300;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotate(45deg);
+    cursor: pointer;
+    user-select: none;
   }
   &--others-count {
     cursor: unset;
@@ -90,6 +123,14 @@ $asset-height-mobile: $asset-height/$divider-text;
 
     &__percent {
       padding-left: $padding-mini;
+    }
+    &__remove-button {
+      top: -$remove-button-size/2;
+      right: -$remove-button-size/2;
+      width: $remove-button-size;
+      height: $remove-button-size;
+      border-radius: $remove-button-size;
+      font-size: 20px;
     }
   }
   &--text {

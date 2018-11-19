@@ -1,8 +1,7 @@
 import "./dashboard-assets.scss";
 
-import Surface from "shared/components/surface/surface";
-import { GVButton } from "gv-react-components";
 import { GVTab, GVTabs } from "gv-react-components";
+import { GVButton } from "gv-react-components";
 import { CREATE_FUND_PAGE_ROUTE } from "pages/create-fund/create-fund.constants";
 import { CREATE_PROGRAM_PAGE_ROUTE } from "pages/create-program/create-program.constants";
 import React, { Component } from "react";
@@ -10,11 +9,13 @@ import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { bindActionCreators, compose } from "redux";
+import DashboardFunds from "shared/components/dashboard/dashboard-assets/dashboard-funds/dashboard-funds";
+import DashboardPrograms from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs";
+import { DASHBOARD_FUNDS_COLUMNS } from "shared/components/dashboard/dashboard.constants";
+import Surface from "shared/components/surface/surface";
 
 import { getDashboardFunds } from "../../services/dashboard-funds.service";
 import { getDashboardPrograms } from "../../services/dashboard-programs.service";
-import DashboardFunds from "./dashboard-funds/dashboard-funds";
-import DashboardPrograms from "./dashboard-programs/dashboard-programs";
 
 class DashboardAssets extends Component {
   state = {
@@ -48,6 +49,7 @@ class DashboardAssets extends Component {
         <div className="dashboard-assets__table">
           {tab === "programs" && (
             <DashboardPrograms
+              getDashboardPrograms={getDashboardPrograms}
               createButtonToolbar={createButtonToolbar(
                 t("buttons.create-program"),
                 CREATE_PROGRAM_PAGE_ROUTE
@@ -62,6 +64,8 @@ class DashboardAssets extends Component {
           )}
           {tab === "funds" && (
             <DashboardFunds
+              DASHBOARD_FUNDS_COLUMNS={DASHBOARD_FUNDS_COLUMNS}
+              getDashboardFunds={getDashboardFunds}
               createButtonToolbar={createButtonToolbar(
                 t("buttons.create-fund"),
                 CREATE_FUND_PAGE_ROUTE
@@ -103,6 +107,10 @@ const mapDispatchToProps = dispatch => ({
   )
 });
 
-export default compose(translate(), connect(null, mapDispatchToProps))(
-  DashboardAssets
-);
+export default compose(
+  translate(),
+  connect(
+    null,
+    mapDispatchToProps
+  )
+)(DashboardAssets);

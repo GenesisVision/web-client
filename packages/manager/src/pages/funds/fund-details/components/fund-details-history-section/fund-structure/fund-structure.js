@@ -1,15 +1,16 @@
-import "../fund-structure/fund-structure.scss";
+import "shared/components/details/details-description-section/details-statistic-section/details-history/structure.scss";
 
-import FundAssetImage from "shared/components/avatar/fund-asset-image/fund-asset-image";
-import TableCell from "shared/components/table/components/table-cell";
-import TableRow from "shared/components/table/components/table-row";
-import TableModule from "shared/components/table/components/table-module";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import FundAssetImage from "shared/components/avatar/fund-asset-image/fund-asset-image";
+import { FUND_STRUCTURE_COLUMNS } from "shared/components/funds/fund-details/fund-details.constants";
+import TableCell from "shared/components/table/components/table-cell";
+import TableModule from "shared/components/table/components/table-module";
+import TableRow from "shared/components/table/components/table-row";
+import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { formatValue } from "shared/utils/formatter";
 
-import { FUND_STRUCTURE_COLUMNS } from "../../../fund-details.constants";
 import * as service from "../../../services/fund-details.service";
 
 class FundStructure extends Component {
@@ -30,13 +31,13 @@ class FundStructure extends Component {
 
     return (
       <TableModule
-        fetchOnMount={false}
         data={data}
+        paging={{ ...DEFAULT_PAGING, itemsOnPage: data.total }}
         getItems={this.fetchFundStructure}
         columns={FUND_STRUCTURE_COLUMNS}
         renderHeader={column => (
           <span
-            className={`fund-details-structure__head-cell fund-details-structure__cell--${
+            className={`details-structure__head-cell fund-details-structure__cell--${
               column.name
             }`}
           >
@@ -44,26 +45,26 @@ class FundStructure extends Component {
           </span>
         )}
         renderBodyRow={item => (
-          <TableRow className="fund-details-structure__row">
-            <TableCell className="fund-details-structure__cell fund-details-structure__cell">
+          <TableRow className="details-structure__row">
+            <TableCell className="details-structure__cell fund-details-structure__cell">
               {item.asset}
             </TableCell>
-            <TableCell className="fund-details-structure__cell">
-              <div className="fund-details-structure__symbol">
+            <TableCell className="details-structure__cell">
+              <div className="details-structure__symbol">
                 <FundAssetImage url={item.icon} alt={item.symbol} />
-                <div className="fund-details-structure__symbol-name">
+                <div className="details-structure__symbol-name">
                   {item.symbol}
                 </div>
               </div>
             </TableCell>
-            <TableCell className="fund-details-structure__cell fund-details-structure__cell">
+            <TableCell className="details-structure__cell fund-details-structure__cell">
               <NumberFormat
                 value={formatValue(item.target)}
                 suffix={"%"}
                 displayType="text"
               />
             </TableCell>
-            <TableCell className="fund-details-structure__cell fund-details-structure__cell">
+            <TableCell className="details-structure__cell fund-details-structure__cell">
               <NumberFormat
                 value={formatValue(item.current)}
                 suffix={"%"}

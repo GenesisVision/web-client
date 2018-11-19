@@ -1,10 +1,10 @@
 import "./program-item.css";
 
 import classnames from "classnames";
+import { PROGRAM_ROUTE } from "pages/programs/programs.routes";
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { PROGRAM_ROUTE } from "../../modules/program/program.constants";
 import replaceParams from "../../utils/replace-params";
 import Button from "../button/button";
 import PIAvatar from "../program-avatar/program-avatar";

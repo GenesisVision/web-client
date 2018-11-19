@@ -1,8 +1,8 @@
 import "./manager-table.scss";
 
+import React, { Component } from "react";
 import TableModule from "shared/components/table/components/table-module";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
-import React, { Component } from "react";
 
 class ManagerTable extends Component {
   render() {
@@ -14,16 +14,11 @@ class ManagerTable extends Component {
       columns,
       title
     } = this.props;
-    let rows = { items: null, total: 0 };
-    if (data) {
-      rows.items = data.funds || data.programs;
-      rows.total = data.total;
-    }
+
     return (
       <TableModule
         title={title}
-        fetchOnMount={false}
-        data={rows}
+        data={data}
         getItems={getItems}
         paging={DEFAULT_PAGING}
         columns={columns}
