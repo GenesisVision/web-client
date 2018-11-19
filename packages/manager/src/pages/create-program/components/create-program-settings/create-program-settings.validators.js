@@ -55,7 +55,7 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) =>
           " %"
       ),
     successFee: number()
-      .min(0.01, "Entry fee must be greater than 0.01 % ")
+      .min(0.01, "Success fee must be greater than 0.01 % ")
       .required(
         t("create-program-page.settings.validation.success-fee-required")
       )

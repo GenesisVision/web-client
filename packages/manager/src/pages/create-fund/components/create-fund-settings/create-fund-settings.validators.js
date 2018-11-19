@@ -38,7 +38,7 @@ const createFundSettingsValidationSchema = ({ t, ...props }) =>
       ),
     exitFee: number()
       .required(t("create-fund-page.settings.validation.exit-fee-required"))
-      .min(0.01, "Entry fee must be greater than 0.01 % ")
+      .min(0.01, "Exit fee must be greater than 0.01 % ")
       .max(
         props.programsInfo.managerMaxExitFee,
         "Exit fee must be less than  " +
