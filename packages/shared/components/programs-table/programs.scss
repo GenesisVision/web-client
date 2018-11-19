@@ -112,18 +112,15 @@ $description-block-width: 250px;
       width: 100%;
 
       td {
-        font-size: $text-size/$multiplier;
         white-space: nowrap;
       }
     }
-    &--title {
-      @include table-title;
-      font-weight: 300;
-      width: 37.5%;
+  }
+  &__table-col {
+    width: 37.5%;
 
-      &:nth-child(2) {
-        width: 25%;
-      }
+    &:nth-child(2) {
+      width: 25%;
     }
   }
   .program-avatar {

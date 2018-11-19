@@ -62,6 +62,7 @@ $create-icon-width: 140px;
       cursor: pointer;
       padding: $view-svg-size;
       padding-bottom: 0;
+      line-height: 0;
       .icon {
         width: auto;
       }
@@ -269,11 +270,7 @@ $create-icon-width: 140px;
       }
     }
   }
-  @include media-breakpoint-desktop() {
-    &__toolbar {
-      justify-content: flex-end;
-    }
-
+  @include media-breakpoint-landscape-tablet() {
     &__filters {
       justify-content: flex-end;
       order: 0;
@@ -288,6 +285,12 @@ $create-icon-width: 140px;
       .sorting-filter {
         margin-right: 60px;
       }
+    }
+  }
+
+  @include media-breakpoint-desktop() {
+    &__toolbar {
+      justify-content: flex-end;
     }
   }
 }
