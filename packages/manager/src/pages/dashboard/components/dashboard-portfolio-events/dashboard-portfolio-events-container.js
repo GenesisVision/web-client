@@ -3,8 +3,8 @@ import { translate } from "react-i18next";
 import { compose } from "redux";
 import Surface from "shared/components/surface/surface";
 
-import { EvenLogoIcon } from "./dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
-import { EventLogoType } from "./dashboard-portfolio-event-logo/dashboard-portfolio-event-logo.helper";
+import { EvenLogoIcon } from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
+import { EventLogoType } from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo.helper";
 import DashboardPortfolioEvents from "./dashboard-portfolio-events";
 import DashboardPortfolioEventsLoader from "./dashboard-portfolio-events-loader";
 
