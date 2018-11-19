@@ -13,7 +13,7 @@ import accountSettingsReducer from "shared/reducers/account-settings";
 import uiReducer from "shared/reducers/ui-reducer";
 import { combineReducers } from "redux";
 
-import fundsReducer from "../modules/funds-table/reducers/funds-table.reducers";
+import fundsReducer from "shared/modules/funds-table/reducers/funds-table.reducers";
 import programSettingsReducer from "../modules/program-settings/reducers/program-settings-reducers";
 import programsReducer from "../modules/programs-table/reducers/programs-table.reducers";
 import passwordRestoreReducer from "../pages/auth/forgot-password/reducers/password-restore-reducers";
