@@ -13,6 +13,10 @@ import EventProfitIcon from "shared/media/event-profit.svg";
 import EventReinvestIcon from "shared/media/event-reinvest.svg";
 import EventStartedIcon from "shared/media/event-started.svg";
 import EventWithdrawIcon from "shared/media/event-withdraw.svg";
+import EventAssetFinished from "shared/media/event-manager-asset-finished.svg";
+import EventAssetStarted from "shared/media/event-manager-asset-started.svg";
+import EventPeriodEnds from "shared/media/event-manager-period-end.svg";
+import EventPeriodStarts from "shared/media/event-manager-period-start.svg";
 
 import { EventLogoType } from "./dashboard-portfolio-event-logo.helper";
 
@@ -38,6 +42,20 @@ export const EvenLogoIcon = ({ type }) => {
       return <img src={EventCancelledIconRed} alt="cancelled" />;
     case EventLogoType.started:
       return <img src={EventStartedIcon} alt="started" />;
+    case EventLogoType.assetStarted:
+      return <img src={EventAssetStarted} alt="Asset Started" />;
+    case EventLogoType.assetFinished:
+      return <img src={EventAssetFinished} alt="Asset Finished" />;
+    case EventLogoType.programPeriodStars:
+      return <img src={EventPeriodStarts} alt="Period Starts" />;
+    case EventLogoType.programPeriodEnds:
+      return <img src={EventPeriodEnds} alt="Period ends" />;
+    case EventLogoType.investorInvest:
+    case EventLogoType.managerInvest:
+      return <img src={EventProfitIcon} alt="Invest" />;
+    case EventLogoType.investorWithdraw:
+    case EventLogoType.managerWithdraw:
+      return <img src={EventLossIcon} alt="withdraw" />;
     default:
       return null;
   }
