@@ -1,5 +1,5 @@
 import * as actionsFunds from "shared/modules/funds-table/actions/funds-table.actions";
-import * as actionsPrograms from "modules/programs-table/actions/programs-table.actions";
+import * as actionsPrograms from "shared/modules/programs-table/actions/programs-table.actions";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
 

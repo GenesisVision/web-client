@@ -3,7 +3,7 @@ import React from "react";
 import { translate } from "react-i18next";
 
 import FacetContainer from "shared/components/facet-container/facet-container";
-import ProgramsContainer from "modules/programs-table/components/programs-table/programs-table-container";
+import ProgramsContainer from "shared/modules/programs-table/components/programs-table/programs-table-container";
 import { getCurrentFacet } from "./services/programs-facet.service";
 
 const ProgramsFacetPage = ({ t }) => (
