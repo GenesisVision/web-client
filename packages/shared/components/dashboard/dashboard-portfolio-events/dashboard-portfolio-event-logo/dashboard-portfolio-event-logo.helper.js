@@ -8,5 +8,15 @@ export const EventLogoType = {
   managerInvest: "ManagerInvest",
   managerWithdraw: "ManagerWithdraw",
   entranceFee: "EntranceFee",
-  exitFee: "ExitFee"
+  exitFee: "ExitFee",
+  profit: "Profit",
+  loss: "Loss",
+  reinvest: "Reinvest",
+  cancelled: "Cancelled",
+  cancelledRed: "CancelledRed",
+  invest: "Invest",
+  withdraw: "Withdraw",
+  started: "Started",
+  ended: "Ended",
+  endedRed: "EndedRed"
 };
