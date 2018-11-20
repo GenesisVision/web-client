@@ -6,6 +6,9 @@
   float: right;
   margin-top: 10px;
   padding: 0 $padding-small-mobile;
+  & .details-statistics-item{
+    padding-right: 0;
+  }
   &__in-request{
     display: flex;
     align-items: center;
