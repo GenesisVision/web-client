@@ -169,10 +169,6 @@ $description-block-width: 250px;
       min-width: $program-width;
       width: calc(50% - #{$padding}/ 2);
       margin-right: $padding/2;
-
-      &:nth-child(2n) {
-        margin-right: 0;
-      }
     }
     padding: $padding;
     padding-right: $padding - $padding/2;
@@ -181,10 +177,6 @@ $description-block-width: 250px;
     justify-content: flex-start;
     &__card {
       width: $program-width;
-
-      &:nth-child(2n) {
-        margin-right: $padding/2;
-      }
     }
     &__table {
       &--title {
