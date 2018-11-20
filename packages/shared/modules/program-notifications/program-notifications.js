@@ -1,7 +1,7 @@
-import ProgramNotificationsCustom from "shared/modules/program-notifications/program-notifications-custom";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
+import ProgramNotificationsCustom from "shared/modules/program-notifications/program-notifications-custom";
 
 import ProgramNotificationsGeneral from "./program-notificatations-general";
 

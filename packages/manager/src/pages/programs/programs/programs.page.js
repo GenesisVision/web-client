@@ -1,10 +1,10 @@
-import Page from "shared/components/page/page";
-import ProgramsContainer from "shared/modules/programs-table/components/programs-table/programs-table-container";
 import React from "react";
 import { translate } from "react-i18next";
-
 import FacetCardsContainer from "shared/components/facet-cards/faset-cards-container";
 import NavigationTabsContainer from "shared/components/navigation-tabs/navigation-tabs-container";
+import Page from "shared/components/page/page";
+import ProgramsContainer from "shared/modules/programs-table/components/programs-table/programs-table-container";
+
 import * as routes from "../programs.routes";
 
 const ProgramsPage = ({ t }) => {

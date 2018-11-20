@@ -1,14 +1,14 @@
 import "./dashboard-portfolio-chart-section.scss";
 
-import Surface from "shared/components/surface/surface";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import connect from "react-redux/es/connect/connect";
 import { compose } from "redux";
+import Surface from "shared/components/surface/surface";
 
 import DashboardPortfolioChartContainer from "./dashboard-chart/dashboard-portfolio-chart-container";
-import DashboardInRequestsContainer from "./dashboard-in-requests/dashboard-in-requests-container";
 import DashboardGetStarted from "./dashboard-get-started";
+import DashboardInRequestsContainer from "./dashboard-in-requests/dashboard-in-requests-container";
 
 class DashboardPortfolioChartSection extends Component {
   renderSectionBody = () => {

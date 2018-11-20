@@ -48,10 +48,10 @@ $create-icon-width: 140px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: flex-end;
     width: 100%;
     align-items: center;
     padding: 0 $padding/2;
+    justify-content: space-between;
   }
 
   &__toggle {
@@ -61,7 +61,7 @@ $create-icon-width: 140px;
     div {
       cursor: pointer;
       padding: $view-svg-size;
-      padding-bottom: 0;
+      line-height: 0;
       .icon {
         width: auto;
       }
@@ -84,11 +84,17 @@ $create-icon-width: 140px;
 
   &__filters {
     width: 100%;
-    font-size: $th-font-size/1.5;
+    font-size: $table-title-font-size/2;
     display: flex;
-    flex: 1;
-    justify-content: flex-end;
+    flex: 1 1 100%;
+    justify-content: space-between;
     flex-wrap: wrap;
+    order: 99;
+    padding-bottom: 10px;
+
+    .filter {
+      padding: 10px;
+    }
   }
 
   &__head {
@@ -102,7 +108,7 @@ $create-icon-width: 140px;
     padding: 0 1.5rem;
     &:not(.table__row--head):hover {
       background-color: #212c34;
-      & .program-avatar__level{
+      & .program-avatar__level {
         border-color: #212c34;
       }
     }
@@ -232,9 +238,6 @@ $create-icon-width: 140px;
     &__body {
       font-size: $td-font-size;
     }
-    &__filters {
-      font-size: $td-font-size;
-    }
     &__title {
       font-size: $table-title-font-size;
     }
@@ -254,6 +257,46 @@ $create-icon-width: 140px;
           padding-right: 0;
         }
       }
+    }
+    &__filters {
+      justify-content: flex-end;
+      font-size: $td-font-size;
+      padding-top: 15px;
+      padding-bottom: 0;
+
+      .filter {
+        margin-right: 15px;
+        padding: 5px;
+
+        &:last-child {
+          margin-right: 0;
+          padding-right: 0;
+        }
+      }
+    }
+  }
+  @include media-breakpoint-landscape-tablet() {
+    &__filters {
+      justify-content: flex-end;
+      order: 0;
+      flex-basis: 0;
+      padding-top: 0;
+
+      .filter {
+        margin-right: 0;
+        margin-left: 15px;
+        padding-right: 5px;
+      }
+
+      .sorting-filter {
+        margin-right: 60px;
+      }
+    }
+  }
+
+  @include media-breakpoint-desktop() {
+    &__toolbar {
+      justify-content: flex-end;
     }
   }
 }

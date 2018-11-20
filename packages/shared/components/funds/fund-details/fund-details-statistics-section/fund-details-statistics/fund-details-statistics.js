@@ -4,9 +4,9 @@ import moment from "moment";
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-
 import { ChartPeriodType } from "shared/components/chart/chart-period/chart-period.helpers";
 import Surface from "shared/components/surface/surface";
+
 import DetailsStatisticItem from "../../../../details-statistic-item/details-statistic-item";
 
 const FundDetailsStatistics = ({ t, statisticData, period }) => {

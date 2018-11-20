@@ -1,10 +1,11 @@
-import Page from "shared/components/page/page";
 import { GVTab, GVTabs } from "gv-react-components";
-import { KYC_ROUTE, PROFILE_ROUTE, SETTINGS_ROUTE } from "./profile.constants";
 import PropTypes from "prop-types";
 import React from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
+import Page from "shared/components/page/page";
+
+import { KYC_ROUTE, PROFILE_ROUTE, SETTINGS_ROUTE } from "./profile.constants";
 
 const ProfileLayout = ({ route, children, t = string => string }) => {
   return (

@@ -86,6 +86,10 @@ const mapDispatchToProps = dispatch => ({
   dispatch
 });
 
-export default compose(translate(), connect(undefined, mapDispatchToProps))(
-  ProgramNotificationsGeneral
-);
+export default compose(
+  translate(),
+  connect(
+    undefined,
+    mapDispatchToProps
+  )
+)(ProgramNotificationsGeneral);

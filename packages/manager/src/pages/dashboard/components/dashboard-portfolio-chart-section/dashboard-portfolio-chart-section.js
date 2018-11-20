@@ -1,8 +1,8 @@
 import "./dashboard-portfolio-chart-section.scss";
 
-import Surface from "shared/components/surface/surface";
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import Surface from "shared/components/surface/surface";
 
 import DashboardChartAssetsContainer from "./dashboard-chart-assets/dashboard-chart-assets-container";
 import DashboardPortfolioChartContainer from "./dashboard-chart/dashboard-portfolio-chart-container";

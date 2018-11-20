@@ -124,20 +124,18 @@ class ProfileInputImage extends Component {
                 />
               )}
 
-              {!isNew &&
-                !isDefault && (
-                  <span
-                    className="profile-input-image__preview-img"
-                    style={{
-                      backgroundImage: `url(${src})`
-                    }}
-                  />
-                )}
+              {!isNew && !isDefault && (
+                <span
+                  className="profile-input-image__preview-img"
+                  style={{
+                    backgroundImage: `url(${src})`
+                  }}
+                />
+              )}
 
-              {!isNew &&
-                isDefault && (
-                  <ProfileInputImageDefault defaultImage={defaultImage} />
-                )}
+              {!isNew && isDefault && (
+                <ProfileInputImageDefault defaultImage={defaultImage} />
+              )}
             </div>
             <p className="profile-input-image__text profile-input-image__text--big">
               Drag the image here or click{" "}

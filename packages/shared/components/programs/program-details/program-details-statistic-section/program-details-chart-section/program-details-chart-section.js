@@ -1,9 +1,9 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-chart-section/details-chart-section.scss";
 
-import Surface from "shared/components/surface/surface";
 import { GVTab, GVTabs } from "gv-react-components";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
+import Surface from "shared/components/surface/surface";
 
 import ProgramBalanceChartSection from "./program-balance-chart-section/program-profit-chart-section";
 import ProgramProfitChartSection from "./program-profit-chart-section/program-profit-chart-section";

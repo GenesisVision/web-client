@@ -1,21 +1,20 @@
 import "shared/components/details/details-description-section/details-description/details-description.scss";
 
+import { GVButton } from "gv-react-components";
 import React, { Fragment, PureComponent } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
-import { GVButton } from "gv-react-components";
-
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
-import Popover from "shared/components/popover/popover";
-import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import DetailsFavorite from "shared/components/details/details-description-section/details-description/details-favorite";
 import DetailsNotification from "shared/components/details/details-description-section/details-description/details-notificaton";
-import { formatValue } from "shared/utils/formatter";
+import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
+import Popover from "shared/components/popover/popover";
 import {
   composeManagerDetailsUrl,
   composeProgramNotificationsUrl
 } from "shared/utils/compose-url";
+import { formatValue } from "shared/utils/formatter";
 
 class ProgramDetailsDescription extends PureComponent {
   state = {

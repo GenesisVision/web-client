@@ -1,11 +1,12 @@
 import "./profile.scss";
 
-import VerificationStatus from "shared/components/verification-status/verification-status";
-import ProfilePersonal, { ProfileField } from "./profile-personal";
-import Scrollbars from "react-custom-scrollbars";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
+import Scrollbars from "react-custom-scrollbars";
 import { translate } from "react-i18next";
+import VerificationStatus from "shared/components/verification-status/verification-status";
+
+import ProfilePersonal, { ProfileField } from "./profile-personal";
 
 class Profile extends Component {
   render() {

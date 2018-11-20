@@ -1,16 +1,16 @@
 import "./2fa.scss";
 
-import { fetchTwoFactor } from "shared/actions/2fa-actions";
-import Dialog from "shared/components/dialog/dialog";
-import Select from "shared/components/select/select";
 import { GVTextField } from "gv-react-components";
-import DisableAuthContainer from "./disable-auth/disable-auth-container";
-import GenerateRecoveryCode from "./google-auth/generate-recovery-codes/generate-recovery-codes";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
+import { fetchTwoFactor } from "shared/actions/2fa-actions";
+import Dialog from "shared/components/dialog/dialog";
+import Select from "shared/components/select/select";
 
+import DisableAuthContainer from "./disable-auth/disable-auth-container";
+import GenerateRecoveryCode from "./google-auth/generate-recovery-codes/generate-recovery-codes";
 import GoogleAuthContainer from "./google-auth/google-auth-container";
 
 const components = {

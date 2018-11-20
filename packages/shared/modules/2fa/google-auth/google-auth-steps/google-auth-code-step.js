@@ -1,8 +1,8 @@
 import classnames from "classnames";
-import GVqr from "shared/components/gv-qr/gv-qr";
 import PropTypes from "prop-types";
 import React from "react";
 import { translate } from "react-i18next";
+import GVqr from "shared/components/gv-qr/gv-qr";
 
 const GoogleStep2 = ({ t, authenticatorUri, sharedKey, className }) => {
   return (

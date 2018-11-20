@@ -1,11 +1,10 @@
 import "../create-fund-settings.scss";
 
-import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
 import React, { Fragment } from "react";
-
-import FundAssetRatio from "shared/components/fund-asset-ratio/fund-asset-ratio";
-import AddButton from "shared/components/add-button/add-button";
 import { translate } from "react-i18next";
+import AddButton from "shared/components/add-button/add-button";
+import FundAssetRatio from "shared/components/fund-asset-ratio/fund-asset-ratio";
+import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
 
 class CreateFundSettingsAssetsComponent extends React.Component {
   state = {

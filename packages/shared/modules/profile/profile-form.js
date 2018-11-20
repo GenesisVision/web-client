@@ -7,7 +7,6 @@ import PropTypes from "prop-types";
 import React, { Component, Fragment } from "react";
 import Scrollbars from "react-custom-scrollbars";
 import { translate } from "react-i18next";
-
 import VerificationStatus from "shared/components/verification-status/verification-status";
 import About from "shared/modules/about/about";
 

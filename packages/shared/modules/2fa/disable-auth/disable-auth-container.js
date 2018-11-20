@@ -1,10 +1,11 @@
 import "./disable-auth.scss";
 
-import DisableAuthForm from "./disable-auth-form";
-import DisableAuthSuccess from "./disable-auth-success";
 import React, { Component } from "react";
 import { authApiProxy } from "shared/services/api-client/auth-api";
 import authService from "shared/services/auth-service";
+
+import DisableAuthForm from "./disable-auth-form";
+import DisableAuthSuccess from "./disable-auth-success";
 
 class DisableAuthContainer extends Component {
   state = {

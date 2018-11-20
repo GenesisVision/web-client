@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { push } from "react-router-redux";
 import { compose } from "redux";
-
 import isAuthenticated from "shared/decorators/is-authenticated";
 import replaceParams from "shared/utils/replace-params";
 

@@ -1,13 +1,12 @@
 import "./dashboard-assets.scss";
 
-import { translate } from "react-i18next";
 import { GVTab, GVTabs } from "gv-react-components";
 import React, { Component } from "react";
-
-import { DASHBOARD_FUNDS_COLUMNS } from "shared/components/dashboard/dashboard.constants";
-import Surface from "shared/components/surface/surface";
+import { translate } from "react-i18next";
 import DashboardFunds from "shared/components/dashboard/dashboard-assets/dashboard-funds/dashboard-funds";
 import DashboardPrograms from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs";
+import { DASHBOARD_FUNDS_COLUMNS } from "shared/components/dashboard/dashboard.constants";
+import Surface from "shared/components/surface/surface";
 
 class DashboardAssets extends Component {
   state = {

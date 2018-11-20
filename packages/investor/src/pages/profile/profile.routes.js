@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-
+import KYCPage from "shared/components/profile/kyc/kyc.page";
 import PasswordPage from "shared/components/profile/password/password.page";
 import {
   KYC_ROUTE,
@@ -10,7 +10,7 @@ import {
 } from "shared/components/profile/profile.constants";
 import ProfilePage from "shared/components/profile/profile/profile.page";
 import SettingsPage from "shared/components/profile/settings/settings.page";
-import KYCPage from "shared/components/profile/kyc/kyc.page";
+
 const ProfilePageContainer = () => <ProfilePage />;
 
 const ProfileRoutes = () => (

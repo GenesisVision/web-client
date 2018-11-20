@@ -1,10 +1,10 @@
-import { fetchFundNotificationsService } from "./services/fund-notifications.services";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import FundNotifications from "./fund-notifications";
+import { fetchFundNotificationsService } from "./services/fund-notifications.services";
 
 class FundNotificationsContainer extends Component {
   componentDidMount() {

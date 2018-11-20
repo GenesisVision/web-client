@@ -1,8 +1,9 @@
 import React from "react";
 import { translate } from "react-i18next";
+import PortfolioEventsTableComponent from "shared/components/dashboard/dashboard-portfolio-events-all/dashboard-portfolio-events-table/dashboard-portfolio-events-all-table";
 
 import { fetchPortfolioEvents } from "../../services/dashboard-events.services";
-import PortfolioEventsTableComponent from "shared/components/dashboard/dashboard-portfolio-events-all/dashboard-portfolio-events-table/dashboard-portfolio-events-all-table";
+
 export const PORTFOLIO_EVENTS_ALL_PAGE_ROUTE = "portfolio-events";
 const PortfolioEventsAllComponent = ({ t }) => {
   return (

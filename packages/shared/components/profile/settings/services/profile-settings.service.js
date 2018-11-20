@@ -1,9 +1,9 @@
 import authActions from "shared/actions/auth-actions";
 import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
+import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { authApiProxy } from "shared/services/api-client/auth-api";
 import { profileApiProxy } from "shared/services/api-client/profile-api";
 import authService from "shared/services/auth-service";
-import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import filesService from "shared/services/file-service";
 
 export const updateProfileAvatar = ({

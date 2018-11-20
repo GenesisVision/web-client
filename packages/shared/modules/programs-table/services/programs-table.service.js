@@ -1,9 +1,3 @@
-import { composeFilters } from "shared/components/table/helpers/filtering.helpers";
-import {
-  calculateSkipAndTake,
-  calculateTotalPages
-} from "shared/components/table/helpers/paging.helpers";
-import { getSortingColumnName } from "shared/components/table/helpers/sorting.helpers";
 import {
   PROGRAMS_FACET_ROUTE,
   PROGRAMS_FAVORITES_TAB_NAME,
@@ -12,15 +6,21 @@ import {
 } from "pages/programs/programs.routes";
 import qs from "qs";
 import { push } from "react-router-redux";
-import authService from "shared/services/auth-service";
-import getParams from "shared/utils/get-params";
-
-import * as programTableActions from "../actions/programs-table.actions";
 import {
   PROGRAMS_COLUMNS,
   PROGRAMS_TABLE_FILTERS,
   SORTING_FILTER_VALUE
 } from "shared/components/programs-table/programs.constants";
+import { composeFilters } from "shared/components/table/helpers/filtering.helpers";
+import {
+  calculateSkipAndTake,
+  calculateTotalPages
+} from "shared/components/table/helpers/paging.helpers";
+import { getSortingColumnName } from "shared/components/table/helpers/sorting.helpers";
+import authService from "shared/services/auth-service";
+import getParams from "shared/utils/get-params";
+
+import * as programTableActions from "../actions/programs-table.actions";
 
 const DEFAULT_ITEMS_ON_PAGE = 12;
 

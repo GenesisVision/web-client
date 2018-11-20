@@ -11,7 +11,8 @@ $withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
   display: inline-block;
   width: 100%;
   max-width: 500px;
-  &, & div {
+  &,
+  & div {
     box-sizing: border-box;
   }
   padding: $padding-small-mobile;

@@ -1,10 +1,10 @@
-import Select from "shared/components/select/select";
 import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
+import Select from "shared/components/select/select";
 import { number, object } from "yup";
 
 class ProgramNotificationCreateForm extends Component {

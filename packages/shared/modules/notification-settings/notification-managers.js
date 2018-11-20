@@ -1,8 +1,9 @@
-import NotificationEntity from "./notification-entity";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import replaceParams from "shared/utils/replace-params";
+
+import NotificationEntity from "./notification-entity";
 
 class NotificationManagers extends Component {
   render() {

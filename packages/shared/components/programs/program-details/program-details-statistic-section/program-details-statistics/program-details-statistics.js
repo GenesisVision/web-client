@@ -1,13 +1,14 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.scss";
 
-import { ChartPeriodType } from "shared/components/chart/chart-period/chart-period.helpers";
-import ProgramPeriodLine from "shared/components/program-period/program-period-line/program-period-line";
-import Surface from "shared/components/surface/surface";
 import moment from "moment";
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { ChartPeriodType } from "shared/components/chart/chart-period/chart-period.helpers";
+import ProgramPeriodLine from "shared/components/program-period/program-period-line/program-period-line";
+import Surface from "shared/components/surface/surface";
 import { formatValue } from "shared/utils/formatter";
+
 import DetailsStatisticItem from "../../../../details-statistic-item/details-statistic-item";
 
 const ProgramDetailsStatistics = ({

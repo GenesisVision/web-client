@@ -1,23 +1,23 @@
 import "shared/components/details/details.scss";
 
-import Page from "shared/components/page/page";
+import FundDepositContainer from "modules/fund-deposit/fund-deposit-container";
+import FundWithdrawContainer from "modules/fund-withdraw/fund-withdraw-container";
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
+import FundDetailsDescriptionSection from "shared/components/funds/fund-details/fund-details-description/fund-details-description-section";
+import FundDetailsStatisticSection from "shared/components/funds/fund-details/fund-details-statistics-section/fund-details-statistic-section";
+import NotFoundPage from "shared/components/not-found/not-found.routes";
+import Page from "shared/components/page/page";
 
 import { LOGIN_ROUTE } from "../../auth/login/login.routes";
-import NotFoundPage from "shared/components/not-found/not-found.routes";
-import FundDetailsDescriptionSection from "shared/components/funds/fund-details/fund-details-description/fund-details-description-section";
 import FundDetailsHistorySection from "./components/fund-details-history-section/fund-details-history-section";
-import FundDetailsStatisticSection from "shared/components/funds/fund-details/fund-details-statistics-section/fund-details-statistic-section";
 import {
   getFundDescription,
   getFundStatistic,
   getFundStructure
 } from "./services/fund-details.service";
-import FundWithdrawContainer from "modules/fund-withdraw/fund-withdraw-container";
-import FundDepositContainer from "modules/fund-deposit/fund-deposit-container";
 
 export const FundDetailContext = React.createContext({
   updateDetails: () => {}

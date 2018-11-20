@@ -1,28 +1,29 @@
 import "shared/components/details/details.scss";
 
-import Page from "shared/components/page/page";
+import AssetEditContainer from "modules/asset-edit/asset-edit-container";
+import { PROGRAM } from "modules/asset-edit/asset-edit.constants";
+import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
+import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
+import AboutLevelsContainerComponent from "pages/app/components/about-levels/about-levels-container";
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
+import NotFoundPage from "shared/components/not-found/not-found.routes";
+import Page from "shared/components/page/page";
+import ProgramDetailsDescriptionSection from "shared/components/programs/program-details/program-details-description/program-details-description-section";
+import ProgramDetailsStatisticSection from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 
 import { LOGIN_ROUTE } from "../../auth/login/login.routes";
-import NotFoundPage from "shared/components/not-found/not-found.routes";
-import ProgramDetailsDescriptionSection from "shared/components/programs/program-details/program-details-description/program-details-description-section";
+import ClosePeriodContainer from "./close-period/close-period-container";
+import CloseProgramContainer from "./close-program/close-program-container";
 import ProgramDetailsHistorySection from "./components/program-details-history-section/program-details-history-section";
-import ProgramDetailsStatisticSection from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import {
   getProgramDescription,
   getProgramHistory,
   getProgramStatistic
 } from "./services/program-details.service";
-import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
-import AboutLevelsContainerComponent from "pages/app/components/about-levels/about-levels-container";
-import AssetEditContainer from "modules/asset-edit/asset-edit-container";
-import { PROGRAM } from "modules/asset-edit/asset-edit.constants";
-import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
-import ClosePeriodContainer from "./close-period/close-period-container";
-import CloseProgramContainer from "./close-program/close-program-container";
+
 export const ProgramDetailContext = React.createContext({
   updateDetails: () => {}
 });

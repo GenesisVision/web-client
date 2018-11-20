@@ -1,8 +1,8 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
 
-import Surface from "shared/components/surface/surface";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
+import Surface from "shared/components/surface/surface";
 
 import FundStructure from "./fund-structure/fund-structure";
 

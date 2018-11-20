@@ -1,10 +1,10 @@
-import { CURRENCY_VALUES } from "shared/modules/currency-select/currency-select.constants";
 import {
   composeDefaultDateRangeFilter,
   composeRequestValue,
   validateDateRange
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 import { FilterType } from "shared/components/table/helpers/filtering.helpers";
+import { CURRENCY_VALUES } from "shared/modules/currency-select/currency-select.constants";
 
 export const LEVEL_FILTER_NAME = "level";
 export const CURRENCY_FILTER_NAME = "programCurrency";

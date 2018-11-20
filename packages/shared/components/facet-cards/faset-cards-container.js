@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
 import { composeFacetUrl } from "shared/utils/compose-url";
+
 import FacetCards from "./facet-cards";
 import FacetCardsStub from "./facet-cards-stub";
 

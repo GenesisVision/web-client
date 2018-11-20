@@ -1,18 +1,21 @@
 import "./profile-widget.scss";
 
 import classnames from "classnames";
+import { GVButton } from "gv-react-components";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import { translate } from "react-i18next";
+import { Link } from "react-router-dom";
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
 import { DetailsIcon } from "shared/components/icon/details-icon";
 import { LogoutIcon } from "shared/components/icon/logout-icon";
 import { SettingsIcon } from "shared/components/icon/settings-icon";
 import Popover from "shared/components/popover/popover";
-import { GVButton } from "gv-react-components";
+import {
+  PROFILE_ROUTE,
+  SETTINGS_ROUTE
+} from "shared/components/profile/profile.constants";
 import FilterArrowIcon from "shared/components/table/components/filtering/filter-arrow-icon";
-import { PROFILE_ROUTE, SETTINGS_ROUTE } from "shared/components/profile/profile.constants";
-import PropTypes from "prop-types";
-import React, { Component } from "react";
-import { translate } from "react-i18next";
-import { Link } from "react-router-dom";
 
 class ProfileWidget extends Component {
   state = {

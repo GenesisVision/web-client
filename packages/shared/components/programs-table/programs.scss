@@ -37,8 +37,8 @@ $description-block-width: 250px;
   padding: $padding/2;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
   flex-wrap: wrap;
+  justify-content: space-between;
   &__card {
     margin-bottom: $padding/2;
     display: flex;
@@ -50,6 +50,7 @@ $description-block-width: 250px;
     padding: $padding 20px;
     border-radius: 8px;
     background-color: #212c34;
+    flex-grow: 1;
     & .program-avatar__level {
       border-color: #212c34 !important;
     }
@@ -109,13 +110,17 @@ $description-block-width: 250px;
   &__table {
     & table {
       width: 100%;
-      th {
-        @include table-title;
-        font-weight: 300;
-      }
+
       td {
-        font-size: $text-size/$multiplier;
+        white-space: nowrap;
       }
+    }
+  }
+  &__table-col {
+    width: 37.5%;
+
+    &:nth-child(2) {
+      width: 25%;
     }
   }
   .program-avatar {
@@ -145,6 +150,8 @@ $description-block-width: 250px;
     }
     &__chart {
       width: $chart-width;
+      flex-grow: 1;
+      margin-right: $padding;
     }
     &__balance {
       font-size: $text-size;
@@ -159,11 +166,39 @@ $description-block-width: 250px;
   }
   @include media-breakpoint-landscape-phone() {
     &__card {
-      width: $program-width;
+      min-width: $program-width;
+      width: calc(50% - #{$padding}/ 2);
       margin-right: $padding/2;
+
+      &:nth-child(2n) {
+        margin-right: 0;
+      }
     }
     padding: $padding;
     padding-right: $padding - $padding/2;
+  }
+  @include media-breakpoint-landscape-tablet() {
+    justify-content: flex-start;
+    &__card {
+      width: $program-width;
+
+      &:nth-child(2n) {
+        margin-right: $padding/2;
+      }
+    }
+    &__table {
+      &--title {
+        width: 45%;
+
+        &:first-child {
+          width: 30%;
+        }
+
+        &:nth-child(2) {
+          width: 25%;
+        }
+      }
+    }
   }
 }
 

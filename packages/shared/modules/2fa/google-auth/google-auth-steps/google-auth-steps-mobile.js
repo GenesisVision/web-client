@@ -1,10 +1,11 @@
 import { GVButton } from "gv-react-components";
-import GoogleActivateStep from "./google-auth-activate-step";
-import GoogleCodeStep from "./google-auth-code-step";
-import GoogleDownloadStep from "./google-auth-download-step";
 import { Component } from "react";
 import React from "react";
 import { translate } from "react-i18next";
+
+import GoogleActivateStep from "./google-auth-activate-step";
+import GoogleCodeStep from "./google-auth-code-step";
+import GoogleDownloadStep from "./google-auth-download-step";
 
 class GoogleAuth extends Component {
   state = {

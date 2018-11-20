@@ -1,9 +1,9 @@
-import React, { PureComponent } from "react";
+import "shared/components/details/details-description-section/details-statistic-section/details-statistic-section.scss";
 
+import React, { PureComponent } from "react";
 import { DEFAULT_PERIOD } from "shared/components/chart/chart-period/chart-period.helpers";
 import FundDetailsChartSection from "shared/components/funds/fund-details/fund-details-statistics-section/fund-details-chart-section/fund-details-chart-section";
 import FundDetailsStatistic from "shared/components/funds/fund-details/fund-details-statistics-section/fund-details-statistics/fund-details-statistics";
-import "shared/components/details/details-description-section/details-statistic-section/details-statistic-section.scss";
 
 class FundDetailsStatisticSection extends PureComponent {
   state = {

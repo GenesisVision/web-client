@@ -1,6 +1,7 @@
 import "shared/components/details/details-description-section/details-description/details-description.scss";
 
 import { GVButton } from "gv-react-components";
+import moment from "moment";
 import React, { Fragment, PureComponent } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -15,7 +16,6 @@ import {
   composeManagerDetailsUrl
 } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
-import moment from "moment";
 
 class FundDetailsDescription extends PureComponent {
   state = {

@@ -1,12 +1,13 @@
 import "./details-investment.scss";
 
-import ProgramStatus from "shared/components/program-status/program-status";
-import Surface from "shared/components/surface/surface";
 import { GVButton } from "gv-react-components";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import ProgramStatus from "shared/components/program-status/program-status";
+import Surface from "shared/components/surface/surface";
 import { formatValue } from "shared/utils/formatter";
+
 import DetailsStatisticItem from "../../../details-statistic-item/details-statistic-item";
 
 class DetailsInvestment extends PureComponent {

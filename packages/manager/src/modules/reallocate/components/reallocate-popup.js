@@ -1,6 +1,7 @@
+import React, { Component, Fragment } from "react";
+
 import ReallocateForm from "./reallocate-form";
 import ReallocateTop from "./reallocate-top";
-import React, { Component, Fragment } from "react";
 
 class ReallocatePopup extends Component {
   render() {

@@ -5,9 +5,10 @@ import moment from "moment";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-
 import { isUseProfitability } from "shared/components/dashboard/helpers/dashboard-portfolio.helpers";
+import Page from "shared/components/page/page";
 import Profitability from "shared/components/profitability/profitability";
+import Surface from "shared/components/surface/surface";
 import { ASSET_TYPE_FILTER_VALUES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
@@ -21,8 +22,6 @@ import TableModule from "shared/components/table/components/table-module";
 import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { formatValue } from "shared/utils/formatter";
-import Page from "shared/components/page/page";
-import Surface from "shared/components/surface/surface";
 
 import {
   PORTFOLIO_EVENTS_COLUMNS,

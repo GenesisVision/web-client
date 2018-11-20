@@ -1,13 +1,14 @@
 import {
+  addNotificationSetting,
+  removeNotificationSetting
+} from "shared/modules/notification-settings/actions/notification-settings.actions";
+
+import {
   addErrorMessage,
   addFundNotifications,
   fetchFundNotifications,
   toggleFundNotifications
 } from "../actions/fund-notifications.actions";
-import {
-  addNotificationSetting,
-  removeNotificationSetting
-} from "shared/modules/notification-settings/actions/notification-settings.actions";
 
 export const fetchFundNotificationsService = id => dispatch => {
   return dispatch(fetchFundNotifications(id)).then(data =>

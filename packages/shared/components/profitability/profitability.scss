@@ -24,6 +24,7 @@ $text-size: 13px;
     border-radius: 19.5px;
     padding: 5px 13px;
     background-color: rgba($label-color, 0.1);
+    white-space: nowrap;
 
     @include media-breakpoint-phone() {
       font-size: $text-size;

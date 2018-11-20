@@ -1,9 +1,10 @@
+import { GVButton, GVTextField } from "gv-react-components";
 import { Component, Fragment } from "react";
+import React from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
+
 import { PROFILE_EDIT_ROUTE } from "../../components/profile/profile.constants";
-import { GVButton, GVTextField } from "gv-react-components";
-import React from "react";
 
 export const ProfileField = ({ name, value, label, disabled = true, type }) => {
   return value || !disabled ? (

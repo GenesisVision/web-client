@@ -1,8 +1,9 @@
-import NotificationEntity from "./notification-entity";
-import { composeProgramNotificationsUrl } from "shared/utils/compose-url";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
+import { composeProgramNotificationsUrl } from "shared/utils/compose-url";
+
+import NotificationEntity from "./notification-entity";
 
 class NotificationPrograms extends Component {
   render() {
