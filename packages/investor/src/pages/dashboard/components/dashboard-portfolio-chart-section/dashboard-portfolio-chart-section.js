@@ -5,10 +5,14 @@ import { translate } from "react-i18next";
 import connect from "react-redux/es/connect/connect";
 import { compose } from "redux";
 import Surface from "shared/components/surface/surface";
+import DashboardInRequestsContainer from "shared/components/dashboard/dashboard-portfolio-chart-section/dashboard-in-requests/dashboard-in-requests-container";
 
+import {
+  cancelRequest,
+  getInRequests
+} from "../../services/dashboard-in-requests.service";
 import DashboardPortfolioChartContainer from "./dashboard-chart/dashboard-portfolio-chart-container";
 import DashboardGetStarted from "./dashboard-get-started";
-import DashboardInRequestsContainer from "./dashboard-in-requests/dashboard-in-requests-container";
 
 class DashboardPortfolioChartSection extends Component {
   renderSectionBody = () => {
@@ -19,7 +23,10 @@ class DashboardPortfolioChartSection extends Component {
           <div className="dashboard-portfolio-chart-section__heading">
             Chart
           </div>
-          <DashboardInRequestsContainer />
+          <DashboardInRequestsContainer
+            cancelRequest={cancelRequest}
+            getInRequests={getInRequests}
+          />
           <DashboardPortfolioChartContainer />
         </Fragment>
       );
