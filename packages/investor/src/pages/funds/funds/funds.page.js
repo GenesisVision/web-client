@@ -6,6 +6,7 @@ import Page from "shared/components/page/page";
 import FundsTableContainer from "shared/modules/funds-table/components/funds-table/funds-table-container";
 
 import * as routes from "../funds.routes";
+import { composeFundFacetUrl } from "shared/utils/compose-url";
 
 const FundsPage = ({ t }) => {
   const title = t("funds-page.title");
@@ -16,7 +17,11 @@ const FundsPage = ({ t }) => {
         fundsTabRoute={routes.FUNDS_TAB_ROUTE}
         fundsFavoritesTabName={routes.FUNDS_FAVORITES_TAB_NAME}
       />
-      <FacetCardsContainer title={title} assetsFacets={"fundsFacets"} />
+      <FacetCardsContainer
+        title={title}
+        assetsFacets={"fundsFacets"}
+        composeFacetUrl={composeFundFacetUrl}
+      />
       <FundsTableContainer title={"All funds"} />
     </Page>
   );
