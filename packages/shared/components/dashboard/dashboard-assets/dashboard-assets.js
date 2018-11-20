@@ -1,31 +1,17 @@
 import "./dashboard-assets.scss";
 
-import Surface from "shared/components/surface/surface";
+import { translate } from "react-i18next";
 import { GVTab, GVTabs } from "gv-react-components";
 import React, { Component } from "react";
 
 import { DASHBOARD_FUNDS_COLUMNS } from "shared/components/dashboard/dashboard.constants";
-import { getDashboardFunds } from "../../services/dashboard-funds.service";
+import Surface from "shared/components/surface/surface";
 import DashboardFunds from "shared/components/dashboard/dashboard-assets/dashboard-funds/dashboard-funds";
 import DashboardPrograms from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs";
-import { bindActionCreators, compose } from "redux";
-import { getDashboardPrograms } from "../../services/dashboard-programs.service";
-import connect from "react-redux/es/connect/connect";
 
 class DashboardAssets extends Component {
   state = {
     tab: "programs"
-  };
-  componentDidMount() {
-    const { service } = this.props;
-    service.getDashboardFunds();
-    service.getDashboardPrograms();
-  }
-
-  fetchFunds = filters => {
-    return getDashboardFunds(filters).then(({ data }) => {
-      return { items: data.funds, total: data.total };
-    });
   };
 
   handleTabChange = (e, tab) => {
@@ -34,7 +20,17 @@ class DashboardAssets extends Component {
 
   render() {
     const { tab } = this.state;
-    const { title } = this.props;
+    const {
+      title,
+      getDashboardPrograms,
+      getDashboardFunds,
+      createProgramButtonToolbar,
+      createProgramButtonBody,
+      createProgramText,
+      createFundButtonToolbar,
+      createFundButtonBody,
+      createFundText
+    } = this.props;
     return (
       <Surface className="dashboard-assets">
         <div className="dashboard-assets__head">
@@ -50,11 +46,17 @@ class DashboardAssets extends Component {
           {tab === "programs" && (
             <DashboardPrograms
               getDashboardPrograms={getDashboardPrograms}
+              createButtonToolbar={createProgramButtonToolbar}
+              createButtonBody={createProgramButtonBody}
+              createText={createProgramText}
               title={title}
             />
           )}
           {tab === "funds" && (
             <DashboardFunds
+              createButtonToolbar={createFundButtonToolbar}
+              createButtonBody={createFundButtonBody}
+              createText={createFundText}
               DASHBOARD_FUNDS_COLUMNS={DASHBOARD_FUNDS_COLUMNS}
               getDashboardFunds={getDashboardFunds}
               title={title}
@@ -65,16 +67,5 @@ class DashboardAssets extends Component {
     );
   }
 }
-const mapDispatchToProps = dispatch => ({
-  service: bindActionCreators(
-    { getDashboardFunds, getDashboardPrograms },
-    dispatch
-  )
-});
 
-export default compose(
-  connect(
-    null,
-    mapDispatchToProps
-  )
-)(DashboardAssets);
+export default translate()(DashboardAssets);
