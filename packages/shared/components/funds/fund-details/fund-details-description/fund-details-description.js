@@ -16,6 +16,7 @@ import {
   composeManagerDetailsUrl
 } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
+import DetailsStatisticItem from "shared/components/details-statistic-item/details-statistic-item";
 
 class FundDetailsDescription extends PureComponent {
   state = {
@@ -147,26 +148,28 @@ class FundDetailsDescription extends PureComponent {
               {fundDescription.description}
             </div>
             <div className="details-description__short-statistic">
-              <div className="details-description__short-statistic-item">
-                <span className="details-description__short-statistic-subheading">
-                  {t("fund-details-page.description.entryFee")}
-                </span>
+              <DetailsStatisticItem
+                label={t("fund-details-page.description.entryFee")}
+                className={"details-description__short-statistic-item"}
+                accent
+              >
                 <NumberFormat
                   value={formatValue(fundDescription.entryFee)}
                   displayType="text"
                   suffix=" %"
                 />
-              </div>
-              <div className="details-description__short-statistic-item">
-                <span className="details-description__short-statistic-subheading">
-                  Exit fee
-                </span>
+              </DetailsStatisticItem>
+              <DetailsStatisticItem
+                label={t("fund-details-page.description.exitFee")}
+                className={"details-description__short-statistic-item"}
+                accent
+              >
                 <NumberFormat
                   value={formatValue(fundDescription.exitFee)}
                   displayType="text"
                   suffix=" %"
                 />
-              </div>
+              </DetailsStatisticItem>
             </div>
             {(isOwnProgram || canInvest) && (
               <Fragment>
