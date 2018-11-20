@@ -6,6 +6,7 @@ import Page from "shared/components/page/page";
 import ProgramsContainer from "shared/modules/programs-table/components/programs-table/programs-table-container";
 
 import * as routes from "../programs.routes";
+import { composeProgramFacetUrl } from "shared/utils/compose-url";
 
 const ProgramsPage = ({ t }) => {
   const title = t("programs-page.title");
@@ -16,7 +17,12 @@ const ProgramsPage = ({ t }) => {
         fundsTabRoute={routes.PROGRAMS_TAB_ROUTE}
         fundsFavoritesTabName={routes.PROGRAMS_FAVORITES_TAB_NAME}
       />
-      <FacetCardsContainer title={title} assetsFacets={"programsFacets"} />
+
+      <FacetCardsContainer
+        title={title}
+        assetsFacets={"programsFacets"}
+        composeFacetUrl={composeProgramFacetUrl}
+      />
       <ProgramsContainer title={"All programs"} />
     </Page>
   );
