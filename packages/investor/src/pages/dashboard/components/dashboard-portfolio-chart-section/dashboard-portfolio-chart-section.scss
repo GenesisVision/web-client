@@ -54,11 +54,25 @@
     @include media-breakpoint-landscape-phone() {
       padding: 0 $padding-small;
     }
+    & > div {
+      display: inline-flex;
+      margin-right: 40px;
+    }
     &__statistic-item {
       margin-top: 15px;
     }
     &__adornment {
       margin-left: 10px;
+    }
+    &__value {
+      display: flex;
+      align-items: center;
+      font-size: $font-size-h2-mobile;
+      letter-spacing: 0.3px;
+      @include media-breakpoint-landscape-phone() {
+        font-size: $font-size-h2;
+        letter-spacing: 0.4px;
+      }
     }
   }
 
