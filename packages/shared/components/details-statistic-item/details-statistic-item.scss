@@ -39,4 +39,14 @@
       font-size: $font-size-paragraph;
     }
   }
+  &__equivalent {
+    font-size: $font-size-common-mobile;
+    letter-spacing: 0.3px;
+    color: $label-color;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-common;
+      letter-spacing: 0.3px;
+      color: $label-color;
+    }
+  }
 }
