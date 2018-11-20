@@ -1,18 +1,15 @@
 import "./dashboard-in-requests.scss";
 
-import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
-import Popover from "shared/components/popover/popover";
-import StatisticItem from "shared/components/statistic-item/statistic-item";
 import React, { PureComponent } from "react";
 import Scrollbars from "react-custom-scrollbars";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
-import {
-  cancelRequest,
-  getInRequests
-} from "../../../services/dashboard-in-requests.service";
+import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
+import Popover from "shared/components/popover/popover";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
+
 import DashboardRequest from "./dashboard-request";
 
 class DashboardInRequestsContainer extends PureComponent {
@@ -21,8 +18,8 @@ class DashboardInRequestsContainer extends PureComponent {
   };
 
   componentDidMount() {
-    const { getInRequests } = this.props;
-    getInRequests();
+    const { service } = this.props;
+    service.getInRequests();
   }
 
   handleOpenDropdown = event => this.setState({ anchor: event.currentTarget });
@@ -40,7 +37,7 @@ class DashboardInRequestsContainer extends PureComponent {
   };
 
   render() {
-    const { inRequests, isPending, cancelRequest } = this.props;
+    const { inRequests, isPending, service } = this.props;
     if (!inRequests || isPending) return null;
 
     return (
@@ -50,6 +47,7 @@ class DashboardInRequestsContainer extends PureComponent {
           value={inRequests.totalValue}
           adornment={this.renderActionsIcon()}
         />
+
         <Popover
           horizontal="right"
           vertical="bottom"
@@ -63,7 +61,7 @@ class DashboardInRequestsContainer extends PureComponent {
                 <DashboardRequest
                   key={x.id}
                   request={x}
-                  cancelRequest={cancelRequest}
+                  cancelRequest={service.cancelRequest}
                   onApplyCancelRequest={this.handleCloseDropdown}
                 />
               ))}
@@ -80,7 +78,8 @@ const mapStateToProps = state => {
   return { inRequests: data, isPending };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch, props) => {
+  const { getInRequests, cancelRequest } = props;
   return {
     service: bindActionCreators({ getInRequests, cancelRequest }, dispatch)
   };
