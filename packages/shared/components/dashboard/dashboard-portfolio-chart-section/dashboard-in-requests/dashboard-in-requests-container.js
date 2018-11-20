@@ -11,6 +11,9 @@ import Popover from "shared/components/popover/popover";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 
 import DashboardRequest from "./dashboard-request";
+import DetailsStatisticItem from "../../../details-statistic-item/details-statistic-item";
+import { formatValue } from "../../../../utils/formatter";
+import NumberFormat from "react-number-format";
 
 class DashboardInRequestsContainer extends PureComponent {
   state = {
@@ -42,11 +45,17 @@ class DashboardInRequestsContainer extends PureComponent {
 
     return (
       <div className="dashboard-request">
-        <StatisticItem
-          heading={"In Requests"}
-          value={inRequests.totalValue}
-          adornment={this.renderActionsIcon()}
-        />
+        <DetailsStatisticItem label={"In Requests"}>
+          <div className="dashboard-request__in-request">
+            <NumberFormat
+              value={formatValue(inRequests.totalValue)}
+              thousandSeparator={" "}
+              displayType="text"
+              suffix={" GVT"}
+            />
+            {this.renderActionsIcon()}
+          </div>
+        </DetailsStatisticItem>
 
         <Popover
           horizontal="right"
