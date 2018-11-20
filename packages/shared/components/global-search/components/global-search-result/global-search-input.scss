@@ -1,5 +1,5 @@
-@import "shared/styles/_breakpoint.scss";
-@import "shared/styles/_sizes.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
 
 .global-search {
   &-input {
@@ -20,9 +20,9 @@
 }
 
 .global-search-result {
-  margin-top: $padding-small-mobile;
+  margin-top: $padding-xsmall-mobile;
   @include media-breakpoint-landscape-phone() {
-    margin-top: $padding-small;
+    margin-top: $padding-xsmall;
   }
 
   & .table__toolbar {
@@ -30,31 +30,31 @@
   }
 
   &__tabs {
-    padding: 0 $padding-middle-mobile;
+    padding: 0 $padding-small-mobile;
     @include media-breakpoint-landscape-phone() {
-      padding: 0 $padding-middle;
+      padding: 0 $padding-small;
     }
   }
 
   &__heading {
-    padding: $padding-middle-mobile;
-    font-size: $font-size-subtitle-mobile;
+    padding: $padding-small-mobile;
+    font-size: $font-size-h3-mobile;
     letter-spacing: 0.2px;
     font-weight: 600;
     @include media-breakpoint-landscape-phone() {
-      padding: $padding-middle;
-      font-size: $font-size-subtitle;
+      padding: $padding-small;
+      font-size: $font-size-h3;
     }
   }
 
   &__loading {
-    padding: $padding-middle-mobile;
-    font-size: $font-size-large-mobile;
+    padding: $padding-small-mobile;
+    font-size: $font-size-h4-mobile;
     letter-spacing: 0.2px;
     opacity: 0.4;
     @include media-breakpoint-landscape-phone() {
-      padding: $padding-middle;
-      font-size: $font-size-large;
+      padding: $padding-small;
+      font-size: $font-size-h4;
     }
   }
 }

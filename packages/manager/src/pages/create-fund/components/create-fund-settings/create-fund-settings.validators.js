@@ -1,4 +1,4 @@
-import { object, string, number, array } from "yup";
+import { array, number, object, string } from "yup";
 
 const createFundSettingsValidationSchema = ({ t, ...props }) =>
   object().shape({

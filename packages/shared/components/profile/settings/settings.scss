@@ -1,5 +1,6 @@
 @import "~shared/styles/_colors.scss";
 @import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
 
 .profile-settings {
   &__content {
@@ -10,7 +11,7 @@
     & h3 {
       text-transform: uppercase;
       font-weight: 600;
-      font-size: 13px;
+      font-size: $font-size-common;
       letter-spacing: 0.4px;
       margin-bottom: 30px;
       margin-top: 16px;
@@ -28,7 +29,7 @@
   }
 
   &__password {
-    font-size: 13px;
+    font-size: $font-size-common;
     font-weight: 600;
     letter-spacing: 0.3px;
     color: $main-color;
@@ -53,7 +54,7 @@
   }
 
   &__logout-devices {
-    font-size: 13px;
+    font-size: $font-size-common;
     font-weight: 600;
     letter-spacing: 0.3px;
     color: $main-color;

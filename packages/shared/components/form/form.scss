@@ -1,10 +1,11 @@
-@import "shared/styles/_colors.scss";
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_sizes.scss";
 
 .form {
   display: block;
 
   &__error {
-    font-size: 13px;
+    font-size: $font-size-common;
     height: 16px;
     letter-spacing: 0.2px;
     color: $negative-color;
