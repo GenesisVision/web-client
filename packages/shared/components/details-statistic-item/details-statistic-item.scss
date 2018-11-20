@@ -1,12 +1,12 @@
-@import "shared/styles/_breakpoint.scss";
-@import "shared/styles/_colors.scss";
-@import "shared/styles/_sizes.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_sizes.scss";
 
 .details-statistics-item {
   display: flex;
   flex-direction: column;
-  padding-right: $padding-small-mobile;
-  padding-bottom: $padding-large-mobile;
+  padding-right: $padding-xsmall-mobile;
+  padding-bottom: $padding-big-mobile;
   &--half {
     width: 70px;
     @include media-breakpoint-landscape-phone() {
@@ -18,25 +18,25 @@
 
   &__label {
     color: $label-color;
-    font-size: $font-size-middle-mobile;
+    font-size: $font-size-paragraph-mobile;
     letter-spacing: 0.4px;
-    margin-bottom: $padding-small-mobile;
+    margin-bottom: $padding-xsmall-mobile;
     font-weight: normal;
     @include media-breakpoint-landscape-phone() {
-      font-size: $font-size-middle;
-      margin-bottom: $padding-small/2;
+      font-size: $font-size-paragraph;
+      margin-bottom: $padding-xsmall/2;
     }
   }
 
   &__value {
-    font-size: $font-size-large-mobile;
+    font-size: $font-size-h4-mobile;
     letter-spacing: 0.6px;
     white-space: nowrap;
     &--accent {
       font-weight: 600;
     }
     @include media-breakpoint-landscape-phone() {
-      font-size: $font-size-large;
+      font-size: $font-size-h4;
     }
   }
 }

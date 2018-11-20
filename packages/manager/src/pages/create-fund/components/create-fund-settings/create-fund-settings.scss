@@ -1,21 +1,21 @@
-@import "shared/styles/_colors.scss";
-@import "shared/styles/_breakpoint.scss";
-@import "shared/styles/_sizes.scss";
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
 
 $asset-icon-size: 26px;
 $asset-height: 40px;
 $asset-height-mobile: $asset-height/$divider-text;
 
 .create-fund-settings {
-  padding: $padding-outer-mobile 0;
+  padding: $padding-large-mobile 0;
 
   @include media-breakpoint-landscape-phone() {
-    padding: $padding-outer 0;
+    padding: $padding-large 0;
   }
   & .gv-text-field__input {
-    font-size: $font-size-large-mobile;
+    font-size: $font-size-h4-mobile;
     @include media-breakpoint-landscape-phone() {
-      font-size: $font-size-large;
+      font-size: $font-size-h4;
     }
   }
   & .fund-assets {
@@ -36,8 +36,8 @@ $asset-height-mobile: $asset-height/$divider-text;
     }
   }
   &__assets-and-line {
-    padding-top: $padding-middle;
-    padding-bottom: $padding-middle;
+    padding-top: $padding-small;
+    padding-bottom: $padding-small;
   }
   &__remainder {
     box-sizing: border-box;
@@ -49,15 +49,15 @@ $asset-height-mobile: $asset-height/$divider-text;
     align-items: center;
     border-radius: $border-radius-middle-mobile;
     font-weight: 400;
-    padding: $padding-mini-mobile;
+    padding: $padding-xxsmall-mobile;
     height: $asset-height-mobile;
-    margin-right: $padding-small/2/$divider-padding;
-    margin-bottom: $padding-small/2/$divider-padding;
-    font-size: $font-size-middle-mobile;
+    margin-right: $padding-xsmall/2/$divider-padding;
+    margin-bottom: $padding-xsmall/2/$divider-padding;
+    font-size: $font-size-paragraph-mobile;
     @include media-breakpoint-landscape-phone() {
       height: $asset-height;
-      padding: $padding-mini;
-      font-size: $font-size-middle;
+      padding: $padding-xxsmall;
+      font-size: $font-size-paragraph;
     }
   }
   &__add-assets {
@@ -67,10 +67,10 @@ $asset-height-mobile: $asset-height/$divider-text;
     display: flex;
     align-items: center;
     cursor: pointer;
-    font-size: $font-size-middle;
+    font-size: $font-size-paragraph;
     font-weight: 600;
     & > div {
-      padding-right: $padding-middle/2;
+      padding-right: $padding-small/2;
     }
     .add-button {
       background: rgb(21, 187, 175);
@@ -104,26 +104,26 @@ $asset-height-mobile: $asset-height/$divider-text;
     font-size: $font-size-small-mobile;
     letter-spacing: 0.4px;
 
-    padding-top: $padding-mini-mobile;
+    padding-top: $padding-xxsmall-mobile;
 
     &:first-child {
       margin-left: 2px;
     }
     @include media-breakpoint-landscape-phone() {
-      padding-top: $padding-mini;
+      padding-top: $padding-xxsmall;
       font-size: $font-size-small;
     }
   }
 
   &__fill-block {
-    padding-bottom: 40px;
+    padding-bottom: $padding-medium;
 
     &:last-child {
       padding-bottom: 0;
     }
 
     @include media-breakpoint-tablet() {
-      padding-left: $padding-outer;
+      padding-left: $padding-large;
       padding-bottom: 60px;
 
       &--with-border {
@@ -176,7 +176,7 @@ $asset-height-mobile: $asset-height/$divider-text;
       }
     }
     &-chars-value {
-      padding: 0 $padding-mini;
+      padding: 0 $padding-xxsmall;
     }
     @include media-breakpoint-landscape-phone() {
       font-size: $font-size-small;
@@ -186,7 +186,7 @@ $asset-height-mobile: $asset-height/$divider-text;
   &__logo-title {
     margin-top: 44px;
     margin-bottom: 8px;
-    font-size: 13px;
+    font-size: $font-size-common;
     letter-spacing: 0.3px;
     font-weight: 600;
   }
@@ -291,7 +291,7 @@ $asset-height-mobile: $asset-height/$divider-text;
   }
 
   &__available-amount {
-    font-size: 13px;
+    font-size: $font-size-common;
     margin-top: 4px;
     letter-spacing: 0.4px;
 
@@ -372,8 +372,8 @@ $asset-height-mobile: $asset-height/$divider-text;
     display: block;
     background: transparent;
     border-width: 0;
-    font-size: $font-size-middle-mobile;
-    line-height: $font-size-middle-mobile;
+    font-size: $font-size-paragraph-mobile;
+    line-height: $font-size-paragraph-mobile;
     color: $text-accent-color;
     text-align: right;
     &:focus {
@@ -384,24 +384,24 @@ $asset-height-mobile: $asset-height/$divider-text;
       color: rgba(255, 255, 255, 0.3);
     }
     @include media-breakpoint-landscape-phone() {
-      font-size: $font-size-middle;
-      line-height: $font-size-middle;
+      font-size: $font-size-paragraph;
+      line-height: $font-size-paragraph;
     }
   }
   &__asset-currency-short {
     opacity: 0.4;
   }
   &__search {
-    padding: 0 $padding-small;
+    padding: 0 $padding-xsmall;
   }
   &__assets {
-    padding-bottom: $padding-small;
+    padding-bottom: $padding-xsmall;
     table {
-      padding: 0 $padding-small;
+      padding: 0 $padding-xsmall;
       border-spacing: 0;
     }
     td {
-      padding-right: $padding-small;
+      padding-right: $padding-xsmall;
       padding-top: 12px;
       &:last-child {
         padding-right: 0;
@@ -412,7 +412,7 @@ $asset-height-mobile: $asset-height/$divider-text;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding-bottom: $padding-small;
+    padding-bottom: $padding-xsmall;
   }
   &__search-input {
     margin: 0;
@@ -420,7 +420,7 @@ $asset-height-mobile: $asset-height/$divider-text;
   }
   &__asset {
     font-size: $font-size-small;
-    padding-top: $padding-middle/2;
+    padding-top: $padding-small/2;
   }
 
   &__asset-icon {
@@ -432,12 +432,12 @@ $asset-height-mobile: $asset-height/$divider-text;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: $padding-small;
+    padding: $padding-xsmall;
   }
   &__title,
   &__subtitle,
   &__text {
-    padding: $padding-small/2 0;
+    padding: $padding-xsmall/2 0;
   }
   &__title,
   &__subtitle,
@@ -448,12 +448,12 @@ $asset-height-mobile: $asset-height/$divider-text;
     max-width: 165px;
   }
   &__title {
-    font-size: $font-size-title;
+    font-size: $font-size-h1;
     color: $primary-color;
     font-weight: bold;
   }
   &__subtitle {
-    font-size: $font-size-large;
+    font-size: $font-size-h4;
     opacity: 0.4;
   }
   &__balance {
@@ -466,7 +466,7 @@ $asset-height-mobile: $asset-height/$divider-text;
     letter-spacing: 0.3px;
   }
   &__about {
-    padding: $padding-small/2 0;
+    padding: $padding-xsmall/2 0;
     font-size: $font-size-small;
     font-weight: 600;
     line-height: 1.67;

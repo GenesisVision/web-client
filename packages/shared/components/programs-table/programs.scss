@@ -1,6 +1,6 @@
-@import "shared/styles/_colors.scss";
-@import "shared/styles/_breakpoint.scss";
-@import "shared/styles/_sizes.scss";
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
 
 $padding: 32px;
 $text-size: 13px;
@@ -167,7 +167,7 @@ $description-block-width: 250px;
   @include media-breakpoint-landscape-phone() {
     &__card {
       min-width: $program-width;
-      width: calc(50% - #{$padding}/2);
+      width: calc(50% - #{$padding}/ 2);
       margin-right: $padding/2;
 
       &:nth-child(2n) {
@@ -203,7 +203,7 @@ $description-block-width: 250px;
 }
 
 .programs-table__cell {
-  padding: $padding-small/2 $padding-small;
+  padding: $padding-xsmall/2 $padding-xsmall;
   &--avatar-title {
     display: flex;
     flex-direction: row;

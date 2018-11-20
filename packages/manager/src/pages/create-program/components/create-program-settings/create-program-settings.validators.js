@@ -1,4 +1,4 @@
-import { object, string, number } from "yup";
+import { number, object, string } from "yup";
 
 const createProgramSettingsValidationSchema = ({ t, ...props }) =>
   object().shape({

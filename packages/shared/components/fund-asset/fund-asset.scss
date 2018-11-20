@@ -35,11 +35,11 @@ $remove-button-color: #293842;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: $padding-mini-mobile;
+  padding: $padding-xxsmall-mobile;
   border-radius: $border-radius-middle-mobile;
   font-weight: 400;
-  margin-right: $padding-small/2/$divider-text;
-  margin-bottom: $padding-small/2/$divider-text;
+  margin-right: $padding-xsmall/2/$divider-text;
+  margin-bottom: $padding-xsmall/2/$divider-text;
   position: relative;
   &:hover {
     background: rgba(255, 255, 255, 0.06);
@@ -80,8 +80,8 @@ $remove-button-color: #293842;
     }
   }
   &__popover {
-    font-size: $font-size-middle;
-    padding: $padding-small;
+    font-size: $font-size-paragraph;
+    padding: $padding-xsmall;
   }
 
   &__currencies {
@@ -97,11 +97,11 @@ $remove-button-color: #293842;
 
   &__currency-full,
   &__currency-short {
-    padding-left: $padding-small-mobile/2;
+    padding-left: $padding-xsmall-mobile/2;
   }
 
   &__percent {
-    padding-left: $padding-mini-mobile;
+    padding-left: $padding-xxsmall-mobile;
   }
 
   &__currency-short {
@@ -110,19 +110,19 @@ $remove-button-color: #293842;
 
   @include media-breakpoint-landscape-phone() {
     height: $asset-height;
-    font-size: $font-size-middle;
-    padding: $padding-mini;
-    margin-right: $padding-small/2;
-    margin-bottom: $padding-small/2;
+    font-size: $font-size-paragraph;
+    padding: $padding-xxsmall;
+    margin-right: $padding-xsmall/2;
+    margin-bottom: $padding-xsmall/2;
     border-radius: $border-radius-middle;
 
     &__currency-full,
     &__currency-short {
-      padding-left: $padding-small/2;
+      padding-left: $padding-xsmall/2;
     }
 
     &__percent {
-      padding-left: $padding-mini;
+      padding-left: $padding-xxsmall;
     }
     &__remove-button {
       top: -$remove-button-size/2;
