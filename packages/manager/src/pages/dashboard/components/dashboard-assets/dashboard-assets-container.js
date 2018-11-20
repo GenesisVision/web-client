@@ -1,5 +1,3 @@
-import "./dashboard-assets.scss";
-
 import { GVButton } from "gv-react-components";
 import React, { Component } from "react";
 import { translate } from "react-i18next";

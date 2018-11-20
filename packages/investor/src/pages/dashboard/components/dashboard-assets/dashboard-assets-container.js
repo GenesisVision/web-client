@@ -1,5 +1,3 @@
-import "./dashboard-assets.scss";
-
 import React, { Component } from "react";
 import { bindActionCreators, compose } from "redux";
 import connect from "react-redux/es/connect/connect";
