@@ -6,6 +6,14 @@
   float: right;
   margin-top: 10px;
   padding: 0 $padding-small-mobile;
+  .statistic-item {
+    &__heading {
+      font-weight: 300;
+    }
+    &__value {
+      font-weight: 300;
+    }
+  }
   @include media-breakpoint-landscape-phone() {
     padding: 0 $padding-small;
   }
