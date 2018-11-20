@@ -225,11 +225,6 @@
 
     &-item {
       margin-right: $padding-small-mobile;
-      letter-spacing: 0.44px;
-      font-size: $font-size-paragraph-mobile;
-      display: flex;
-      flex-direction: column;
-      font-weight: 600;
       &:last-child {
         margin-right: 0;
       }
