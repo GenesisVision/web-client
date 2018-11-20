@@ -40,6 +40,7 @@ class TableToolbar extends Component {
             />
           )}
           {renderFilters && renderFilters(updateFilter, filtering)}
+          {createButtonToolbar}
         </div>
         {isViewSwitchEnabled && (
           <div className="table__toggle">
@@ -51,7 +52,6 @@ class TableToolbar extends Component {
             </div>
           </div>
         )}
-        {createButtonToolbar}
       </div>
     );
   }
