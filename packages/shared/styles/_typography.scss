@@ -1,5 +1,5 @@
-@import "~shared/styles/_sizes.scss";
-@import "~shared/styles/_breakpoint.scss";
+@import "./_sizes.scss";
+@import "./_breakpoint.scss";
 
 @mixin font-size($font-size) {
   $divider: $divider-text;
@@ -28,7 +28,7 @@ h2 {
 h3 {
   @include font-size($font-size-h3);
   font-weight: 600;
-}
+}
 
 p {
   @include font-size($font-size-paragraph);
