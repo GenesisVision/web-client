@@ -90,13 +90,10 @@ const WalletAddFundsForm = ({
           &nbsp;
           {t("buttons.copy")}
         </GVButton>
-        <div className="dialog__info">
-          {currency !== "GVT" &&
-            (currency !== null &&
-              t("wallet-add-funds.disclaimer", {
-                currency
-              }))}
-        </div>
+        {currency !== "GVT" &&
+          currency !== null && (
+          <div className="dialog__info">{t("wallet-add-funds.disclaimer", { currency })}</div>
+        )}
       </div>
     </form>
   );

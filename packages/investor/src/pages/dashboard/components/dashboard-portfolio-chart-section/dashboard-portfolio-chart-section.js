@@ -16,9 +16,9 @@ class DashboardPortfolioChartSection extends Component {
     if (!isNewUser)
       return (
         <Fragment>
-          <div className="dashboard-portfolio-chart-section__heading">
+          <h3 className="dashboard-portfolio-chart-section__heading">
             Chart
-          </div>
+          </h3>
           <DashboardInRequestsContainer />
           <DashboardPortfolioChartContainer />
         </Fragment>

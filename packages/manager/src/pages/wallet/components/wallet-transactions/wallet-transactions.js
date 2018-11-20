@@ -30,9 +30,9 @@ const getStatus = transaction => {
 
 const emptyTransactions = t => (
   <div className="empty-transactions">
-    <div className="empty-transactions__subtitle">
+    <h3 className="empty-transactions__subtitle">
       {t("wallet.transactions.title")}
-    </div>
+    </h3>
     <div className="empty-transactions__disclaimer">
       <div className="empty-transactions__icon">
         <img src={EmptyTransactionsIcon} alt="" />

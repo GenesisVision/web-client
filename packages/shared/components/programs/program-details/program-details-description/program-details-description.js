@@ -182,7 +182,7 @@ class ProgramDetailsDescription extends PureComponent {
           />
         </div>
         <div className="details-description__main">
-          <div className="details-description__heading">{title}</div>
+          <h1 className="details-description__heading">{title}</h1>
           <Link
             to={{
               pathname: composeManagerDetailsUrl(

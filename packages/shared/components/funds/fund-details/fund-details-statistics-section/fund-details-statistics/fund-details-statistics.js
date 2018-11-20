@@ -14,9 +14,9 @@ const FundDetailsStatistics = ({ t, statisticData, period }) => {
   if (!statistic || isPending) return null;
   return (
     <Surface className="details-statistics">
-      <div className="details-statistics__heading">
+      <h3 className="details-statistics__heading">
         {t("fund-details-page.statistics.heading")}
-      </div>
+      </h3>
       <div className="details-statistics__subheading">
         {t("fund-details-page.statistics.current")}
       </div>

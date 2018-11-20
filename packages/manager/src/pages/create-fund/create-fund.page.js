@@ -7,7 +7,7 @@ import CreateFundContainer from "./create-fund.container";
 
 const CreateFundPage = ({ t }) => (
   <div className="create-fund-page">
-    <div className="create-fund-page__title">{t("create-fund-page.title")}</div>
+    <h1>{t("create-fund-page.title")}</h1>
     <CreateFundContainer />
   </div>
 );

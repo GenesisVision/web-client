@@ -51,9 +51,9 @@ class DashboardPortfolioChartContainer extends PureComponent {
     if (!assetChart || assetChart.isPending) return null;
     return (
       <Fragment>
-        <div className="dashboard-portfolio-chart-section__heading">
+        <h3 className="dashboard-portfolio-chart-section__heading">
           {assetChart.title}
-        </div>
+        </h3>
         <ChartPeriod period={period} onChange={this.handleChangePeriod} />
         <div className="dashboard-portfolio-chart-section__chart">
           {assetChart.type === "Program" && (

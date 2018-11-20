@@ -47,7 +47,7 @@ class FacetCard extends Component {
               imageClassName="facet__logo"
             />
             <div className="facet__info">
-              <div className="facet__title">{facet.title}</div>
+              <h2>{facet.title}</h2>
               <div className="facet__description">{facet.description}</div>
             </div>
           </div>

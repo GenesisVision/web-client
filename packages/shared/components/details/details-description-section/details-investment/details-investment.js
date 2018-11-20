@@ -43,9 +43,9 @@ class DetailsInvestment extends PureComponent {
     } = this.props;
     return (
       <Surface className={"details-investment " + className}>
-        <div className="details-investment__heading">
+        <h3 className="details-investment__heading">
           {t("fund-details-page.description.yourInvestment")}
-        </div>
+        </h3>
         <div className="details-investment__short-statistic">
           <DetailsStatisticItem
             accent

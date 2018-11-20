@@ -1,23 +1,35 @@
-h1 {
+@import "~shared/styles/_sizes.scss";
+@import "~shared/styles/_breakpoint.scss";
+
+@mixin font-size($font-size) {
+  $divider: $divider-text;
+
+  @if $font-size == $font-size-h1 {
+    $divider: $divider-title;
+  }
+  font-size: $font-size/$divider;
   margin-top: 0;
 
   @include media-breakpoint-landscape-phone() {
-
+    font-size: $font-size;
   }
 }
 
+h1 {
+  @include font-size($font-size-h1);
+  font-weight: 600;
+}
+
 h2 {
-  margin-top: 0;
+  @include font-size($font-size-h2);
+  font-weight: 600;
 }
 
 h3 {
-  margin-top: 0;
-}
-
-h4 {
-  margin-top: 0;
+  @include font-size($font-size-h3);
+  font-weight: 600;
 }
 
 p {
-  margin-top: 0;
+  @include font-size($font-size-paragraph);
 }

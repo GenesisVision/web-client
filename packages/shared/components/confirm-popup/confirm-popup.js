@@ -26,9 +26,9 @@ const ConfirmPopup = ({
   return (
     <Dialog open={open} onClose={onClose}>
       <div className={classnames("confirm-popup", className)}>
-        <div className={classnames("confirm-popup__header", headerClassName)}>
+        <h2 className={classnames("confirm-popup__header", headerClassName)}>
           {header}
-        </div>
+        </h2>
         <div className={classnames("confirm-popup__body", bodyClassName)}>
           {body}
         </div>

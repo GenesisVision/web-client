@@ -30,9 +30,9 @@ class DashboardPortfolioChartSection extends Component {
     if (!isNewUser)
       return (
         <Surface className="dashboard-portfolio-chart-section">
-          <div className="dashboard-portfolio-chart-section__heading">
+          <h3 className="dashboard-portfolio-chart-section__heading">
             Chart
-          </div>
+          </h3>
           <div className="dashboard-portfolio-chart-section__actions">
             <DashboardChartAssetsContainer assets={this.getAssets()} />
             <DashboardInRequestsContainer />

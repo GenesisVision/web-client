@@ -32,13 +32,6 @@
     }
   }
 
-  &__title {
-    letter-spacing: 0.2px;
-    font-size: $font-size-h3-mobile;
-    @include media-breakpoint-landscape-phone() {
-      font-size: $font-size-h3;
-    }
-  }
   &__tabs {
     padding: 0 $padding-small-mobile;
     @include media-breakpoint-landscape-phone() {
