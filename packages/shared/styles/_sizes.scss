@@ -26,7 +26,7 @@ $icon-size: 29px;
 $avatar-size: 120px;
 $asset-height: 40px;
 
-//dividers
+//dividers4
 $divider-padding: 3;
 $divider-text: 1.5;
 $divider-title: 2;
@@ -42,6 +42,7 @@ $padding-xxsmall-mobile: $padding-xxsmall/$divider-padding;
 
 //fonts for mobile
 $font-size-h1-mobile: $font-size-h1/$divider-title;
+$font-size-h2-mobile: $font-size-h2/$divider-text;
 $font-size-h3-mobile: $font-size-h3/$divider-text;
 $font-size-h4-mobile: $font-size-h4/$divider-text;
 $font-size-paragraph-mobile: $font-size-paragraph/$divider-text;

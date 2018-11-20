@@ -285,7 +285,7 @@ $asset-height-mobile: $asset-height/$divider-text;
     }
 
     &-value {
-      font-size: 24px;
+      font-size: $font-size-h2;
       letter-spacing: 0.4px;
     }
   }

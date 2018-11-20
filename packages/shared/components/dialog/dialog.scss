@@ -127,7 +127,7 @@
 
   &__header {
     h2 {
-      font-size: 24px;
+      font-size: $font-size-h2;
       font-weight: 500;
       margin-bottom: 11px;
     }
@@ -151,7 +151,7 @@
     }
 
     &__value {
-      font-size: 24px;
+      font-size: $font-size-h2;
       letter-spacing: 0.8px;
     }
   }
