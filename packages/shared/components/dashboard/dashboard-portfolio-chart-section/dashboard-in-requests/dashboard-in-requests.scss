@@ -8,13 +8,16 @@
   padding: 0 $padding-small-mobile;
   & .details-statistics-item{
     padding-right: 0;
+    &__label{ //temp
+      font-weight: 500;
+    }
   }
   &__in-request{
     display: flex;
     align-items: center;
     font-size: $font-size-h2-mobile;
     letter-spacing: 0.3px;
-    font-weight: 300;
+    font-weight: 600; // temp
     @include media-breakpoint-landscape-phone() {
       font-size: $font-size-h2;
       letter-spacing: 0.4px;
