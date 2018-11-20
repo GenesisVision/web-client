@@ -10,7 +10,6 @@ const TRADES_TAB = "trades";
 class FundDetailsHistorySection extends PureComponent {
   state = {
     tab: TRADES_TAB,
-    tradesData: { data: null, isPending: true },
     prevProps: null
   };
 
@@ -28,19 +27,14 @@ class FundDetailsHistorySection extends PureComponent {
   }
 
   render() {
-    const { t, fundId, currency, structure } = this.props;
-    if (!structure) return null;
+    const { t, fundId, currency } = this.props;
     return (
       <Surface className="details-history">
         <h3 className="details-history__heading">
           {t("fund-details-page.history.structure.title")}
         </h3>
         <div>
-          <FundStructure
-            structure={structure}
-            fundId={fundId}
-            currency={currency}
-          />
+          <FundStructure fundId={fundId} currency={currency} />
         </div>
       </Surface>
     );

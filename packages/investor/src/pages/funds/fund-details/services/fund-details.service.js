@@ -66,11 +66,3 @@ export const getFundStatistic = (fundId, currency, period = DEFAULT_PERIOD) => {
     return { statisticData, profitChartData, balanceChartData };
   });
 };
-
-export const getFundRebalancing = (id, filters) => {
-  return fundsApiProxy.v10FundsByIdRebalancingGet(id, filters);
-};
-
-export const getFundStructure = id => {
-  return fundsApiProxy.v10FundsByIdAssetsGet(id);
-};
