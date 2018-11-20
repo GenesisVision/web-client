@@ -1,26 +1,28 @@
 import "shared/components/details/details.scss";
 
-import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
-import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
-import { toggleReinvesting } from "modules/program-reinvesting/services/program-reinvesting.service";
-import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
-import AboutLevelsContainerComponent from "pages/app/components/about-levels/about-levels-container";
+import Page from "shared/components/page/page";
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
-import NotFoundPage from "shared/components/not-found/not-found.routes";
-import Page from "shared/components/page/page";
-import ProgramDetailsDescriptionSection from "shared/components/programs/program-details/program-details-description/program-details-description-section";
-import ProgramDetailsStatisticSection from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 
 import { LOGIN_ROUTE } from "../../auth/login/login.routes";
-import ProgramDetailsHistorySection from "./components/program-details-history-section/program-details-history-section";
+import NotFoundPage from "shared/components/not-found/not-found.routes";
+import ProgramDetailsDescriptionSection from "shared/components/programs/program-details/program-details-description/program-details-description-section";
+import ProgramDetailsHistorySection from "shared/components/programs/program-details/program-trades/program-details-history-section";
+import ProgramDetailsStatisticSection from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import {
   getProgramDescription,
   getProgramHistory,
-  getProgramStatistic
+  getProgramStatistic,
+  getProgramTrades
 } from "./services/program-details.service";
+import { toggleReinvesting } from "modules/program-reinvesting/services/program-reinvesting.service";
+import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
+import AboutLevelsContainerComponent from "pages/app/components/about-levels/about-levels-container";
+import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
+import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
+import { fetchPortfolioEvents } from "../../dashboard/services/dashboard-events.services";
 
 export const ProgramDetailContext = React.createContext({
   updateDetails: () => {}
@@ -46,7 +48,7 @@ class ProgramDetailsPage extends PureComponent {
   }
 
   updateDetails = () => {
-    const { service, currency } = this.props;
+    const { service } = this.props;
     this.setState({ isPending: true });
     service
       .getProgramDescription()
@@ -66,11 +68,6 @@ class ProgramDetailsPage extends PureComponent {
         this.profitChart = data.profitChartData;
         this.balanceChart = data.balanceChartData;
         this.statistic = data.statisticData;
-        return getProgramHistory(this.description.data.id, currency);
-      })
-      .then(data => {
-        this.trades = data.trades;
-        this.setState({ isPending: false });
       })
       .catch(e => {
         this.setState({ isPending: false });
@@ -95,6 +92,7 @@ class ProgramDetailsPage extends PureComponent {
     }
 
     if (!this.description.data) return null;
+
     const isInvested =
       this.description.data.personalProgramDetails &&
       this.description.data.personalProgramDetails.isInvested;
@@ -132,9 +130,14 @@ class ProgramDetailsPage extends PureComponent {
             </div>
             <div className="details__history">
               <ProgramDetailsHistorySection
+                fetchPortfolioEvents={filters =>
+                  fetchPortfolioEvents({
+                    ...filters,
+                    assetId: this.description.data.id
+                  })
+                }
                 programId={this.description.data.id}
                 currency={currency}
-                tradesData={this.trades}
                 isInvested={isInvested}
               />
             </div>

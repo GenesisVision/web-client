@@ -6,11 +6,6 @@ import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import BaseProfitability from "shared/components/profitability/base-profitability";
 import Profitability from "shared/components/profitability/profitability";
-import {
-  PROGRAM_TRADES_COLUMNS,
-  PROGRAM_TRADES_DEFAULT_FILTERS,
-  PROGRAM_TRADES_FILTERS
-} from "shared/components/programs/program-details/program-details.constants";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import TableCell from "shared/components/table/components/table-cell";
@@ -19,24 +14,56 @@ import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { formatValue } from "shared/utils/formatter";
 
-import * as service from "../../../services/program-details.service";
+import {
+  PROGRAM_TRADES_COLUMNS,
+  PROGRAM_TRADES_DEFAULT_FILTERS,
+  PROGRAM_TRADES_FILTERS
+} from "shared/components/programs/program-details/program-details.constants";
+import { programsApiProxy } from "../../../../services/api-client/programs-api";
+import * as PropTypes from "prop-types";
+import { composeRequestFilters } from "../../../table/services/table.service";
 
 class ProgramTrades extends Component {
-  fetchProgramTrades = filters => {
-    const { programId, currency } = this.props;
+  state = {
+    isPending: false,
+    data: null
+  };
 
-    return service
-      .getProgramTrades({ programId, currency, filters })
-      .then(({ data }) => {
-        return { items: data.trades, total: data.total };
-      });
+  componentDidMount() {
+    const tradesFilters = composeRequestFilters({
+      paging: DEFAULT_PAGING,
+      sorting: undefined,
+      filtering: PROGRAM_TRADES_FILTERS,
+      defaultFilters: PROGRAM_TRADES_DEFAULT_FILTERS
+    });
+    this.fetchProgramTrades(tradesFilters);
+  }
+
+  fetchProgramTrades = filters => {
+    const { currency, programId } = this.props;
+    const opts = {
+      ...filters,
+      currency
+    };
+
+    this.setState({ isPending: true });
+
+    return programsApiProxy
+      .v10ProgramsByIdTradesGet(programId, opts)
+      .then(data => {
+        this.setState(data);
+      })
+      .catch(error => console.info(error) || this.setState({ ...error }));
   };
 
   render() {
-    const { t, trades } = this.props;
+    const { t } = this.props;
+    if (!this.state.data) return null;
 
-    if (!trades) return null;
-    const data = { items: trades.trades, total: trades.total };
+    const data = {
+      items: this.state.data.trades,
+      total: this.state.data.total
+    };
 
     return (
       <TableModule
@@ -117,5 +144,10 @@ class ProgramTrades extends Component {
     );
   }
 }
+
+ProgramTrades.propTypes = {
+  programId: PropTypes.string.isRequired,
+  currency: PropTypes.string.isRequired
+};
 
 export default translate()(ProgramTrades);
