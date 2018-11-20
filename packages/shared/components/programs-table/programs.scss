@@ -81,8 +81,8 @@ $description-block-width: 250px;
   &__name {
     font-size: $text-size/1.5;
     color: $primary-color;
-    word-break: break-all;
     .gv-btn {
+      white-space: normal;
       padding: 0;
     }
   }
