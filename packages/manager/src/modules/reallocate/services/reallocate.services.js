@@ -6,7 +6,7 @@ export const updateAssets = (id, values) => dispatch => {
   const authorization = authService.getAuthArg();
   return managerApiProxy
     .v10ManagerFundsByIdAssetsUpdatePost(id, authorization, {
-      request: values.assets
+      assets: values.assets
     })
     .then(res => {
       dispatch(

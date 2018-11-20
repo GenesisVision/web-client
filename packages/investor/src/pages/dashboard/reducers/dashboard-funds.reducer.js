@@ -11,7 +11,7 @@ const dashboardFundsReducer = tableReducerFactory({
   type: DASHBOARD_FUNDS,
   paging: DEFAULT_PAGING,
   filtering: DASHBOARD_FUNDS_DEFAULT_FILTERING,
-  defaultFilter: DASHBOARD_FUNDS_FILTERS
+  defaultFilters: DASHBOARD_FUNDS_FILTERS
 });
 
 export default dashboardFundsReducer;

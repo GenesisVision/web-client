@@ -1,6 +1,7 @@
-@import "shared/styles/_colors.scss";
-@import "shared/styles/_constants.scss";
-@import "shared/styles/_breakpoint.scss";
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_constants.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
 
 .auth {
   display: flex;
@@ -48,7 +49,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    font-size: 13px;
+    font-size: $font-size-common;
     background-color: $secondary-background-color;
     padding: 20px;
   }
@@ -110,7 +111,7 @@
     }
 
     &__content {
-      padding: 40px;
+      padding: $padding-medium;
     }
 
     &__footer {
@@ -159,7 +160,7 @@
       padding: 80px 80px 60px;
     }
     &__footer {
-      padding: 40px 80px;
+      padding: $padding-medium 80px;
     }
 
     .gv-tabs {

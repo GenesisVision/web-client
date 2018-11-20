@@ -1,6 +1,6 @@
-@import "shared/styles/_colors.scss";
-@import "shared/styles/_breakpoint.scss";
-@import "shared/styles/_sizes.scss";
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
 
 .details-trades {
   overflow: hidden;
@@ -12,9 +12,9 @@
 
   &__cell,
   &__head-cell {
-    font-size: $font-size-middle-mobile;
+    font-size: $font-size-paragraph-mobile;
     @include media-breakpoint-landscape-phone() {
-      font-size: $font-size-middle;
+      font-size: $font-size-paragraph;
     }
   }
 

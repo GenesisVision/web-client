@@ -1,15 +1,15 @@
-@import "shared/styles/_colors.scss";
-@import "shared/styles/_sizes.scss";
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_sizes.scss";
 
 .fund-asset-tooltip {
   &__header {
-    font-size: $font-size-middle;
+    font-size: $font-size-paragraph;
     letter-spacing: 0.2px;
     color: $text-dark-color;
   }
 
   &__content {
-    font-size: $font-size-middle;
+    font-size: $font-size-paragraph;
     color: $text-accent-color;
   }
 }

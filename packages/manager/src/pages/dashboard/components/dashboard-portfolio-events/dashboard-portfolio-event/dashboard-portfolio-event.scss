@@ -1,6 +1,6 @@
-@import "shared/styles/_colors.scss";
-@import "shared/styles/_breakpoint.scss";
-@import "shared/styles/_sizes.scss";
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
 
 .portfolio-event {
   display: flex;
@@ -39,7 +39,7 @@
   &__description {
     letter-spacing: 0.2px;
     margin-bottom: 0px;
-    font-size: 13px;
+    font-size: $font-size-common;
     color: $text-accent-color;
     @include media-breakpoint-landscape-phone() {
       line-height: 1.69;
@@ -61,7 +61,7 @@
 
   &__value {
     letter-spacing: 0.4px;
-    font-size: 13px;
+    font-size: $font-size-common;
     font-weight: 600;
   }
 

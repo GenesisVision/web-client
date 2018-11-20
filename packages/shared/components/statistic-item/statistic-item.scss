@@ -1,5 +1,6 @@
-@import "shared/styles/_breakpoint.scss";
-@import "shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_sizes.scss";
 
 .statistic-item {
   display: inline-flex;
@@ -21,7 +22,7 @@
     font-weight: 600;
     margin-bottom: 8px;
     @include media-breakpoint-landscape-phone() {
-      font-size: 13px;
+      font-size: $font-size-common;
     }
   }
 
@@ -44,7 +45,7 @@
     letter-spacing: 0.3px;
     color: $label-color;
     @include media-breakpoint-landscape-phone() {
-      font-size: 13px;
+      font-size: $font-size-common;
       letter-spacing: 0.3px;
       color: $label-color;
     }

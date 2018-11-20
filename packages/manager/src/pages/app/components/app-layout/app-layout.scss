@@ -1,5 +1,5 @@
-@import "shared/styles/_breakpoint.scss";
-@import "shared/styles/_sizes.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
 
 .app {
   margin: 0 auto;
@@ -9,17 +9,17 @@
   }
 
   &__header {
-    padding: $padding-small;
+    padding: $padding-xsmall;
 
     @media (min-width: 1360px) {
-      padding: $padding-small 0;
+      padding: $padding-xsmall 0;
     }
   }
 
   &__main {
-    padding: 0 $padding-small $padding-large;
+    padding: 0 $padding-xsmall $padding-big;
     @media (min-width: 1360px) {
-      padding: 0 0 $padding-large;
+      padding: 0 0 $padding-big;
     }
   }
 }

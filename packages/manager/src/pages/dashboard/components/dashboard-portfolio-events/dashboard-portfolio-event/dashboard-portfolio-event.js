@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import PortfolioEventLogo from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
 import Profitability from "shared/components/profitability/profitability";
 import { formatValue } from "shared/utils/formatter";
 
@@ -12,7 +13,6 @@ import {
   isUseProfitability,
   valueDescriptionLocalizationConstant
 } from "../../helpers/dashboard-portfolio.helpers";
-import PortfolioEventLogo from "../dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
 
 const formatDate = date => {
   const now = moment(new Date());
