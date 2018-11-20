@@ -18,25 +18,25 @@
 
   &__label {
     color: $label-color;
-    font-size: $font-size-paragraph-mobile;
+    font-size: $font-size-common-mobile;
     letter-spacing: 0.4px;
     margin-bottom: $padding-xsmall-mobile;
     font-weight: normal;
     @include media-breakpoint-landscape-phone() {
-      font-size: $font-size-paragraph;
+      font-size: $font-size-common;
       margin-bottom: $padding-xsmall/2;
     }
   }
 
   &__value {
-    font-size: $font-size-h4-mobile;
+    font-size: $font-size-paragraph-mobile;
     letter-spacing: 0.6px;
     white-space: nowrap;
     &--accent {
       font-weight: 600;
     }
     @include media-breakpoint-landscape-phone() {
-      font-size: $font-size-h4;
+      font-size: $font-size-paragraph;
     }
   }
 }

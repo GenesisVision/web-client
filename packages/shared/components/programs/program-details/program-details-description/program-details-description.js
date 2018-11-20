@@ -15,6 +15,7 @@ import {
   composeProgramNotificationsUrl
 } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
+import DetailsStatisticItem from "shared/components/details-statistic-item/details-statistic-item";
 
 class ProgramDetailsDescription extends PureComponent {
   state = {
@@ -207,36 +208,39 @@ class ProgramDetailsDescription extends PureComponent {
               {programDescription.description}
             </div>
             <div className="details-description__short-statistic">
-              <div className="details-description__short-statistic-item">
-                <span className="details-description__short-statistic-subheading">
-                  {t("program-details-page.description.avToInvest")}
-                </span>
+              <DetailsStatisticItem
+                label={t("program-details-page.description.avToInvest")}
+                className={"details-description__short-statistic-item"}
+                accent
+              >
                 <NumberFormat
                   value={formatValue(programDescription.availableInvestment, 2)}
                   displayType="text"
                   suffix={` GVT`}
                 />
-              </div>
-              <div className="details-description__short-statistic-item">
-                <span className="details-description__short-statistic-subheading">
-                  {t("program-details-page.description.entryFee")}
-                </span>
+              </DetailsStatisticItem>
+              <DetailsStatisticItem
+                label={t("program-details-page.description.entryFee")}
+                className={"details-description__short-statistic-item"}
+                accent
+              >
                 <NumberFormat
                   value={formatValue(programDescription.entryFee, 2)}
                   displayType="text"
                   suffix=" %"
                 />
-              </div>
-              <div className="details-description__short-statistic-item">
-                <span className="details-description__short-statistic-subheading">
-                  {t("program-details-page.description.successFee")}
-                </span>
+              </DetailsStatisticItem>
+              <DetailsStatisticItem
+                label={t("program-details-page.description.successFee")}
+                className={"details-description__short-statistic-item"}
+                accent
+              >
                 <NumberFormat
                   value={formatValue(programDescription.successFee, 2)}
                   displayType="text"
                   suffix=" %"
                 />
-              </div>
+              </DetailsStatisticItem>
             </div>
             {(isOwnProgram || canInvest) && (
               <Fragment>
