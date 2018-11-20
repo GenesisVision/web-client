@@ -12,7 +12,7 @@ import {
   isUseProfitability,
   valueDescriptionLocalizationConstant
 } from "../../helpers/dashboard-portfolio.helpers";
-import PortfolioEventLogo from "../dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
+import PortfolioEventLogo from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
 
 const formatDate = date => {
   const now = moment(new Date());
