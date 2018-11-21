@@ -1,6 +1,6 @@
-import WalletWithdrawForm from "modules/wallet-withdraw/components/wallet-withdraw-form";
-import WalletWithdrawRequest from "modules/wallet-withdraw/components/wallet-withdraw-request/wallet-withdraw-request";
-import * as walletWithdrawService from "modules/wallet-withdraw/services/wallet-withdraw.services";
+import WalletWithdrawForm from "./wallet-withdraw-form";
+import WalletWithdrawRequest from "./wallet-withdraw-request/wallet-withdraw-request";
+import * as walletWithdrawService from "../services/wallet-withdraw.services";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -64,6 +64,7 @@ const mapDispatchToProps = dispatch => ({
   service: bindActionCreators(walletWithdrawService, dispatch)
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  WalletWithdrawContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(WalletWithdrawContainer);

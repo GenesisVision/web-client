@@ -1,5 +1,5 @@
 import Dialog from "shared/components/dialog/dialog";
-import WalletWithdrawContainer from "modules/wallet-withdraw/components/wallet-withdraw-container";
+import WalletWithdrawContainer from "./components/wallet-withdraw-container";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 

@@ -1,5 +1,5 @@
-import WalletAddFundsPopup from "modules/wallet-add-funds/wallet-add-funds-popup";
-import WalletWithdrawPopup from "modules/wallet-withdraw/wallet-withdraw-popup";
+import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
+import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";

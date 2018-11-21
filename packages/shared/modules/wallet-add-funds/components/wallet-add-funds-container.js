@@ -1,6 +1,6 @@
 import "./wallet-add-funds-form.scss";
 
-import WalletAddFundsForm from "modules/wallet-add-funds/components/wallet-add-funds-form";
+import WalletAddFundsForm from "./wallet-add-funds-form";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { walletApiProxy } from "shared/services/api-client/wallet-api";
