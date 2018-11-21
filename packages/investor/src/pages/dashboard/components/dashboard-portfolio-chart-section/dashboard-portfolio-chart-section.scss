@@ -9,7 +9,7 @@
   flex: 1;
   box-sizing: border-box;
   padding: $padding-small-mobile 0;
-  width: 300px;
+  width: 100px;
   @include media-breakpoint-landscape-phone() {
     padding: $padding-small 0;
     min-height: 683px;
