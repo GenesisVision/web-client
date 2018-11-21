@@ -48,12 +48,16 @@
     margin-bottom: 0px;
     font-size: $font-size-common;
     color: $text-color;
+    line-height: 1.69;
   }
 
   &__value {
     letter-spacing: 0.4px;
     font-size: $font-size-common;
     font-weight: 600;
+    line-height: 1.69;
+    white-space: nowrap;
+    word-break: normal;
   }
 
   &__art {
