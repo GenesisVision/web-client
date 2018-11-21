@@ -1,0 +1,29 @@
+.wallet-withdraw {
+  &__field {
+    &:before {
+      content: none;
+    }
+    &:after {
+      content: none;
+    }
+  }
+
+  &-popup {
+    & .dialog__bottom {
+      padding-top: 20px;
+    }
+
+    .gv-text-field__wrapper {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    &__two-factor-input {
+      margin-bottom: 20px;
+    }
+
+    & .dialog-list {
+      margin-top: 20px;
+    }
+  }
+}
