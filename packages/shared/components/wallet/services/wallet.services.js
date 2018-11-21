@@ -1,6 +1,6 @@
+import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { walletApiProxy } from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
-import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
 import * as actions from "../actions/wallet.actions";
 
@@ -17,6 +17,10 @@ export const fetchWalletTransactions = requestFilters => {
   return actions.fetchWalletTransactionsDispatch(authorization, requestFilters);
 };
 
+export const updateWalletTransactionsFilters = filters => dispatch => {
+  dispatch(actions.updateWalletTransactionsFilters(filters));
+};
+
 export const cancelWithdrawRequest = txId => (dispatch, getState) => {
   const authorization = authService.getAuthArg();
 
@@ -29,6 +33,7 @@ export const cancelWithdrawRequest = txId => (dispatch, getState) => {
           true
         )
       );
+      dispatch(fetchWalletBalance());
       dispatch(fetchWalletTransactions());
       return response;
     })
@@ -43,6 +48,13 @@ export const resendWithdrawRequest = txId => (dispatch, getState) => {
   return walletApiProxy
     .v10WalletWithdrawRequestResendByTxIdPost(txId, authorization)
     .then(response => {
+      dispatch(
+        alertMessageActions.success(
+          "wallet.alert-messages.resend-email-success",
+          true
+        )
+      );
+      dispatch(fetchWalletBalance());
       dispatch(fetchWalletTransactions());
       return response;
     })
