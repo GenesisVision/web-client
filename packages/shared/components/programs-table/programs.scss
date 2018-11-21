@@ -108,20 +108,12 @@ $description-block-width: 250px;
     align-items: flex-start;
   }
   &__table {
-    & table {
-      width: 100%;
-
-      td {
-        white-space: nowrap;
-      }
-    }
+    display: flex;
+    justify-content: space-between;
   }
-  &__table-col {
-    width: 37.5%;
-
-    &:nth-child(2) {
-      width: 25%;
-    }
+  &__table-column{
+    display: flex;
+    flex-direction: column;
   }
   .program-avatar {
     width: 40px;
