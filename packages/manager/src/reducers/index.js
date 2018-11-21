@@ -3,7 +3,7 @@ import fundDepositReducer from "modules/fund-deposit/reducer/fund-deposit.reduce
 import headerReducer from "modules/header/reducer/header-reducer";
 import programDepositReducer from "modules/program-deposit/reducer/program-deposit.reducer";
 import notificationsReducer from "pages/app/components/notifications/reducers/notifications.reducers";
-import walletReducer from "pages/wallet/reducers/wallet.reducers.js";
+import walletReducer from "shared/components/wallet/reducers/wallet.reducers";
 import { loadingBarReducer } from "react-redux-loading-bar";
 import { routerReducer } from "react-router-redux";
 import { combineReducers } from "redux";
