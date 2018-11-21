@@ -81,8 +81,8 @@ $description-block-width: 250px;
   &__name {
     font-size: $text-size/1.5;
     color: $primary-color;
-    word-break: break-all;
     .gv-btn {
+      white-space: normal;
       padding: 0;
     }
   }
@@ -108,20 +108,12 @@ $description-block-width: 250px;
     align-items: flex-start;
   }
   &__table {
-    & table {
-      width: 100%;
-
-      td {
-        white-space: nowrap;
-      }
-    }
+    display: flex;
+    justify-content: space-between;
   }
-  &__table-col {
-    width: 37.5%;
-
-    &:nth-child(2) {
-      width: 25%;
-    }
+  &__table-column {
+    display: flex;
+    flex-direction: column;
   }
   .program-avatar {
     width: 40px;
@@ -169,10 +161,6 @@ $description-block-width: 250px;
       min-width: $program-width;
       width: calc(50% - #{$padding}/ 2);
       margin-right: $padding/2;
-
-      &:nth-child(2n) {
-        margin-right: 0;
-      }
     }
     padding: $padding;
     padding-right: $padding - $padding/2;
@@ -181,10 +169,6 @@ $description-block-width: 250px;
     justify-content: flex-start;
     &__card {
       width: $program-width;
-
-      &:nth-child(2n) {
-        margin-right: $padding/2;
-      }
     }
     &__table {
       &--title {

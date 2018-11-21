@@ -1,7 +1,6 @@
+import React, { Component } from "react";
 import { CardsIcon } from "shared/components/icon/cards-icon";
 import { TableIcon } from "shared/components/icon/table-icon";
-import React, { Component } from "react";
-
 import SortingFilter from "shared/components/table/components/sorting/sorting-filter/sorting-filter";
 import {
   CARDS_VIEW,
@@ -40,6 +39,7 @@ class TableToolbar extends Component {
             />
           )}
           {renderFilters && renderFilters(updateFilter, filtering)}
+          {createButtonToolbar}
         </div>
         {isViewSwitchEnabled && (
           <div className="table__toggle">
@@ -51,7 +51,6 @@ class TableToolbar extends Component {
             </div>
           </div>
         )}
-        {createButtonToolbar}
       </div>
     );
   }

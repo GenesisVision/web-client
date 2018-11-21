@@ -2,12 +2,16 @@ import "./dashboard-portfolio-chart-section.scss";
 
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import DashboardInRequestsContainer from "shared/components/dashboard/dashboard-portfolio-chart-section/dashboard-in-requests/dashboard-in-requests-container";
 import Surface from "shared/components/surface/surface";
 
+import {
+  cancelRequest,
+  getInRequests
+} from "../../services/dashboard-in-requests.service";
 import DashboardChartAssetsContainer from "./dashboard-chart-assets/dashboard-chart-assets-container";
 import DashboardPortfolioChartContainer from "./dashboard-chart/dashboard-portfolio-chart-container";
 import DashboardGetStarted from "./dashboard-get-started";
-import DashboardInRequestsContainer from "./dashboard-in-requests/dashboard-in-requests-container";
 
 class DashboardPortfolioChartSection extends Component {
   getAssets = () => {
@@ -30,12 +34,13 @@ class DashboardPortfolioChartSection extends Component {
     if (!isNewUser)
       return (
         <Surface className="dashboard-portfolio-chart-section">
-          <h3 className="dashboard-portfolio-chart-section__heading">
-            Chart
-          </h3>
+          <h3 className="dashboard-portfolio-chart-section__heading">Chart</h3>
           <div className="dashboard-portfolio-chart-section__actions">
             <DashboardChartAssetsContainer assets={this.getAssets()} />
-            <DashboardInRequestsContainer />
+            <DashboardInRequestsContainer
+              cancelRequest={cancelRequest}
+              getInRequests={getInRequests}
+            />
           </div>
           <DashboardPortfolioChartContainer assets={this.getAssets()} />
         </Surface>

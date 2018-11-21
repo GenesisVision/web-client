@@ -4,11 +4,15 @@ import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import connect from "react-redux/es/connect/connect";
 import { compose } from "redux";
+import DashboardInRequestsContainer from "shared/components/dashboard/dashboard-portfolio-chart-section/dashboard-in-requests/dashboard-in-requests-container";
 import Surface from "shared/components/surface/surface";
 
+import {
+  cancelRequest,
+  getInRequests
+} from "../../services/dashboard-in-requests.service";
 import DashboardPortfolioChartContainer from "./dashboard-chart/dashboard-portfolio-chart-container";
 import DashboardGetStarted from "./dashboard-get-started";
-import DashboardInRequestsContainer from "./dashboard-in-requests/dashboard-in-requests-container";
 
 class DashboardPortfolioChartSection extends Component {
   renderSectionBody = () => {
@@ -16,10 +20,11 @@ class DashboardPortfolioChartSection extends Component {
     if (!isNewUser)
       return (
         <Fragment>
-          <h3 className="dashboard-portfolio-chart-section__heading">
-            Chart
-          </h3>
-          <DashboardInRequestsContainer />
+          <h3 className="dashboard-portfolio-chart-section__heading">Chart</h3>
+          <DashboardInRequestsContainer
+            cancelRequest={cancelRequest}
+            getInRequests={getInRequests}
+          />
           <DashboardPortfolioChartContainer />
         </Fragment>
       );

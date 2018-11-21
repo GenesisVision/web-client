@@ -7,6 +7,7 @@ import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import DetailsStatisticItem from "shared/components/details-statistic-item/details-statistic-item";
 import DetailsFavorite from "shared/components/details/details-description-section/details-description/details-favorite";
 import DetailsNotification from "shared/components/details/details-description-section/details-description/details-notificaton";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
@@ -147,26 +148,28 @@ class FundDetailsDescription extends PureComponent {
               {fundDescription.description}
             </div>
             <div className="details-description__short-statistic">
-              <div className="details-description__short-statistic-item">
-                <span className="details-description__short-statistic-subheading">
-                  {t("fund-details-page.description.entryFee")}
-                </span>
+              <DetailsStatisticItem
+                label={t("fund-details-page.description.entryFee")}
+                className={"details-description__short-statistic-item"}
+                accent
+              >
                 <NumberFormat
                   value={formatValue(fundDescription.entryFee)}
                   displayType="text"
                   suffix=" %"
                 />
-              </div>
-              <div className="details-description__short-statistic-item">
-                <span className="details-description__short-statistic-subheading">
-                  Exit fee
-                </span>
+              </DetailsStatisticItem>
+              <DetailsStatisticItem
+                label={t("fund-details-page.description.exitFee")}
+                className={"details-description__short-statistic-item"}
+                accent
+              >
                 <NumberFormat
                   value={formatValue(fundDescription.exitFee)}
                   displayType="text"
                   suffix=" %"
                 />
-              </div>
+              </DetailsStatisticItem>
             </div>
             {(isOwnProgram || canInvest) && (
               <Fragment>

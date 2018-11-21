@@ -1,18 +1,18 @@
+import { GVButton } from "gv-react-components";
+import React, { Component } from "react";
+import { translate } from "react-i18next";
+import NumberFormat from "react-number-format";
+import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
 import Popover from "shared/components/popover/popover";
 import Profitability from "shared/components/profitability/profitability";
 import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
-import { GVButton } from "gv-react-components";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { composeManagerDetailsUrl } from "shared/utils/compose-url";
-import React, { Component } from "react";
-import { translate } from "react-i18next";
-import NumberFormat from "react-number-format";
-import { Link } from "react-router-dom";
-
 import { formatValue } from "shared/utils/formatter";
+
 import DetailsStatisticItem from "../details-statistic-item/details-statistic-item";
 
 class ProgramCard extends Component {
@@ -143,86 +143,66 @@ class ProgramCard extends Component {
           </div>
         </div>
         <div className="programs-cards__table">
-          <table>
-            <tbody>
-              <tr>
-                <td className="programs-cards__table-col">
-                  <DetailsStatisticItem
-                    label={t("programs-page.programs-header.balance")}
-                  >
-                    <NumberFormat
-                      value={program.statistic.balanceGVT.amount}
-                      displayType="text"
-                      decimalScale={0}
-                      suffix=" GVT"
-                    />
-                  </DetailsStatisticItem>
-                </td>
-                <td className="programs-cards__table-col">
-                  <DetailsStatisticItem
-                    label={t("programs-page.programs-header.investors")}
-                  >
-                    <NumberFormat
-                      value={program.statistic.investorsCount}
-                      displayType="text"
-                      decimalScale={0}
-                    />
-                  </DetailsStatisticItem>
-                  </td>
-                <td className="programs-cards__table-col">
-                  <DetailsStatisticItem
-                    label={t("programs-page.programs-header.available-to-invest")}
-                  >
-                    <NumberFormat
-                      value={formatValue(program.availableInvestment)}
-                      displayType="text"
-                      suffix=" GVT"
-                    />
-                  </DetailsStatisticItem>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div className="programs-cards__table">
-          <table>
-            <tbody>
-              <tr>
-                <td className="programs-cards__table-col">
-                  <DetailsStatisticItem
-                    label={t("programs-page.programs-header.period")}
-                  >
-                    <ProgramPeriodPie
-                      start={program.periodStarts}
-                      end={program.periodEnds}
-                    />
-                  </DetailsStatisticItem>
-                </td>
-                <td className="programs-cards__table-col">
-                  <DetailsStatisticItem
-                    label={t("programs-page.programs-header.trades")}
-                  >
-                    <NumberFormat
-                      value={program.statistic.tradesCount}
-                      displayType="text"
-                      decimalScale={0}
-                    />
-                  </DetailsStatisticItem>
-                </td>
-                <td className="programs-cards__table-col">
-                  <DetailsStatisticItem
-                    label={t("programs-page.programs-header.available-to-invest")}
-                  >
-                    <NumberFormat
-                      value={formatValue(program.statistic.drawdownPercent, 2)}
-                      displayType="text"
-                      suffix="%"
-                    />
-                  </DetailsStatisticItem>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div className="programs-cards__table-column">
+            <DetailsStatisticItem
+              label={t("programs-page.programs-header.balance")}
+            >
+              <NumberFormat
+                value={program.statistic.balanceGVT.amount}
+                displayType="text"
+                decimalScale={0}
+                suffix=" GVT"
+              />
+            </DetailsStatisticItem>
+            <DetailsStatisticItem
+              label={t("programs-page.programs-header.period")}
+            >
+              <ProgramPeriodPie
+                start={program.periodStarts}
+                end={program.periodEnds}
+              />
+            </DetailsStatisticItem>
+          </div>
+          <div className="programs-cards__table-column">
+            <DetailsStatisticItem
+              label={t("programs-page.programs-header.investors")}
+            >
+              <NumberFormat
+                value={program.statistic.investorsCount}
+                displayType="text"
+                decimalScale={0}
+              />
+            </DetailsStatisticItem>
+            <DetailsStatisticItem
+              label={t("programs-page.programs-header.trades")}
+            >
+              <NumberFormat
+                value={program.statistic.tradesCount}
+                displayType="text"
+                decimalScale={0}
+              />
+            </DetailsStatisticItem>
+          </div>
+          <div className="programs-cards__table-column">
+            <DetailsStatisticItem
+              label={t("programs-page.programs-header.available-to-invest")}
+            >
+              <NumberFormat
+                value={formatValue(program.availableInvestment)}
+                displayType="text"
+                suffix=" GVT"
+              />
+            </DetailsStatisticItem>
+            <DetailsStatisticItem
+              label={t("programs-page.programs-header.drawdown")}
+            >
+              <NumberFormat
+                value={formatValue(program.statistic.drawdownPercent, 2)}
+                displayType="text"
+                suffix="%"
+              />
+            </DetailsStatisticItem>
+          </div>
         </div>
       </div>
     );
