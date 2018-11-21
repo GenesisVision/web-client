@@ -168,10 +168,12 @@ class ProgramCard extends Component {
                       decimalScale={0}
                     />
                   </DetailsStatisticItem>
-                  </td>
+                </td>
                 <td className="programs-cards__table-col">
                   <DetailsStatisticItem
-                    label={t("programs-page.programs-header.available-to-invest")}
+                    label={t(
+                      "programs-page.programs-header.available-to-invest"
+                    )}
                   >
                     <NumberFormat
                       value={formatValue(program.availableInvestment)}
@@ -211,7 +213,7 @@ class ProgramCard extends Component {
                 </td>
                 <td className="programs-cards__table-col">
                   <DetailsStatisticItem
-                    label={t("programs-page.programs-header.available-to-invest")}
+                    label={t("programs-page.programs-header.drawdown")}
                   >
                     <NumberFormat
                       value={formatValue(program.statistic.drawdownPercent, 2)}

@@ -1,19 +1,19 @@
 import "./dashboard-in-requests.scss";
 
-import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
-import Popover from "shared/components/popover/popover";
-import StatisticItem from "shared/components/statistic-item/statistic-item";
 import React, { PureComponent } from "react";
 import Scrollbars from "react-custom-scrollbars";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
-import {
-  cancelRequest,
-  getInRequests
-} from "../../../services/dashboard-in-requests.service";
+import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
+import Popover from "shared/components/popover/popover";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
+
 import DashboardRequest from "./dashboard-request";
+import DetailsStatisticItem from "../../../details-statistic-item/details-statistic-item";
+import { formatValue } from "../../../../utils/formatter";
+import NumberFormat from "react-number-format";
 
 class DashboardInRequestsContainer extends PureComponent {
   state = {
@@ -45,11 +45,18 @@ class DashboardInRequestsContainer extends PureComponent {
 
     return (
       <div className="dashboard-request">
-        <StatisticItem
-          heading={"In Requests"}
-          value={inRequests.totalValue}
-          adornment={this.renderActionsIcon()}
-        />
+        <DetailsStatisticItem label={"In Requests"}>
+          <div className="dashboard-request__in-request">
+            <NumberFormat
+              value={formatValue(inRequests.totalValue)}
+              thousandSeparator={" "}
+              displayType="text"
+              suffix={" GVT"}
+            />
+            {this.renderActionsIcon()}
+          </div>
+        </DetailsStatisticItem>
+
         <Popover
           horizontal="right"
           vertical="bottom"
@@ -80,7 +87,8 @@ const mapStateToProps = state => {
   return { inRequests: data, isPending };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch, props) => {
+  const { getInRequests, cancelRequest } = props;
   return {
     service: bindActionCreators({ getInRequests, cancelRequest }, dispatch)
   };

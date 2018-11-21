@@ -83,6 +83,7 @@ $create-icon-width: 140px;
   }
 
   &__filters {
+    align-items: center;
     width: 100%;
     font-size: $table-title-font-size/2;
     display: flex;
