@@ -1,14 +1,14 @@
 import "./manager.page.scss";
 
-import Page from "shared/components/page/page";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import connect from "react-redux/es/connect/connect";
 import { bindActionCreators } from "redux";
+import ManagerDescription from "shared/components/manager-description/manager-description";
+import Page from "shared/components/page/page";
+import { SLUG_URL_REGEXP } from "shared/utils/constants";
 import replaceParams from "shared/utils/replace-params";
 
-import { SLUG_URL_REGEXP } from "shared/utils/constants";
-import ManagerDescriptionContainer from "./components/manager-description/manager-description-container";
 import ManagerHistorySection from "./components/program-details-history-section/manager-history-section";
 import * as managerService from "./services/manager.service";
 
@@ -45,7 +45,7 @@ class ManagerPage extends Component {
         <Page title={`${t("manager.title")} ${managerProfile.username}`}>
           <div className="manager">
             <div className="manager__description">
-              <ManagerDescriptionContainer managerProfile={managerProfile} />
+              <ManagerDescription managerProfile={managerProfile} />
             </div>
             <div className="manager__history">
               <ManagerHistorySection
@@ -72,5 +72,8 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default translate()(
-  connect(mapStateToProps, mapDispatchToProps)(ManagerPage)
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(ManagerPage)
 );
