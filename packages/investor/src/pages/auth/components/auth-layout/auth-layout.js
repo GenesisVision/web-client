@@ -50,7 +50,7 @@ class AuthLayout extends Component {
         </div>
         <div className="auth__right">
           <div className="auth__content">
-            {title && <h1 className="auth__title">{title}</h1>}
+            {title && <h1 className="title-common">{title}</h1>}
             {children}
           </div>
           {Footer && (

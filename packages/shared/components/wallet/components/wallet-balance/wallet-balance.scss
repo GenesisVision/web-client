@@ -3,10 +3,6 @@
 @import "~shared/styles/_sizes.scss";
 
 .wallet-balance {
-  &__heading {
-    color: $text-accent-color;
-    margin: 0 0 30px;
-  }
 
   &__statistic {
     display: block;
@@ -52,10 +48,6 @@
 
   @include media-breakpoint-landscape-phone() {
     display: block;
-
-    &__heading {
-      margin-bottom: 45px;
-    }
 
     &__statistic {
       &:first-child {

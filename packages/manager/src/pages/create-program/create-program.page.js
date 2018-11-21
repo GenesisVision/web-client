@@ -8,7 +8,7 @@ import CreateProgramContainer from "./create-program.container";
 const CreateProgramPage = ({ t }) => (
   <div className="create-program-page">
     <div className="create-program-page__header">
-      <h2>{t("create-program-page.title")}</h2>
+      <h1 className="title-page">{t("create-program-page.title")}</h1>
     </div>
     <CreateProgramContainer />
   </div>

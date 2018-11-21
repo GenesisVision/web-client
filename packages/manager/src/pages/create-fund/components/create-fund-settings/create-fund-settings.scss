@@ -7,10 +7,10 @@ $asset-height: 40px;
 $asset-height-mobile: $asset-height/$divider-text;
 
 .create-fund-settings {
-  padding: $padding-large-mobile 0;
+  padding: $padding-big-mobile 0 $padding-large-mobile;
 
   @include media-breakpoint-landscape-phone() {
-    padding: $padding-large 0;
+    padding: $padding-big 0 $padding-large;
   }
   & .gv-text-field__input {
     font-size: $font-size-h4-mobile;

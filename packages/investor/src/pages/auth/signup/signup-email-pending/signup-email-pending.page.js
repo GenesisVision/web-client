@@ -8,7 +8,7 @@ import SignupEmailPendingContainer from "./components/signup-email-pending/signu
 const EmailPending = ({ t }) => {
   return (
     <div className="signup-email">
-      <h1>
+      <h1 className="title-common">
         {t("auth.signup.email-confirm-title")}
       </h1>
       <p className="signup-email-pending__text">

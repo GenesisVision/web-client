@@ -1,36 +1,41 @@
 @import "./_sizes.scss";
 @import "./_breakpoint.scss";
 
-@mixin font-size($font-size) {
-  $divider: $divider-text;
-
-  @if $font-size == $font-size-h1 {
-    $divider: $divider-title;
-  }
-  font-size: $font-size/$divider;
-  margin-top: 0;
-  margin-bottom: 0;
-
-  @include media-breakpoint-landscape-phone() {
-    font-size: $font-size;
-  }
-}
-
 h1 {
   @include font-size($font-size-h1);
   font-weight: 600;
+  color: $text-light-color;
 }
 
 h2 {
   @include font-size($font-size-h2);
   font-weight: 500;
+  color: $text-light-color;
 }
 
 h3 {
   @include font-size($font-size-h3);
   font-weight: 600;
+  color: $text-light-color;
 }
 
 p {
   @include font-size($font-size-paragraph);
+}
+
+.title-page {
+  @include padding-top($padding-medium);
+  @include padding-bottom($padding-small);
+
+  &--wallet {
+    @include padding-bottom($padding-medium);
+  }
+}
+
+.title-common {
+  padding-bottom: $padding-small;
+}
+
+.title-details {
+  @include padding-bottom($padding-xxsmall);
 }

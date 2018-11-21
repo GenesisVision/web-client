@@ -142,15 +142,6 @@
     align-items: center;
     flex-direction: column;
     height: 100%;
-    &__title {
-      font-weight: 600;
-      font-size: $font-size-h1-mobile;
-      padding: $padding-small-mobile;
-      @include media-breakpoint-landscape-phone() {
-        font-size: $font-size-h1;
-        padding: $padding-small;
-      }
-    }
     &__text {
       text-align: center;
       font-weight: 400;

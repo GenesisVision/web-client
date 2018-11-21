@@ -83,13 +83,6 @@ $avatar-size-mobile: $avatar-size/$divider-text;
     }
   }
 
-  &__heading {
-    font-size: $font-size-h1-mobile;
-    font-weight: 600;
-    color: $text-light-color;
-    padding-bottom: $padding-xxsmall-mobile;
-  }
-
   &__author-btn {
     padding: 0;
     font-size: $font-size-common;
@@ -203,10 +196,6 @@ $avatar-size-mobile: $avatar-size/$divider-text;
         height: $avatar-size;
         margin: 0;
       }
-    }
-    &__heading {
-      font-size: $font-size-h1;
-      padding-bottom: $padding-xxsmall;
     }
     &__subheading {
       font-size: $font-size-h4;

@@ -17,7 +17,7 @@ const ManagerDescription = ({ t, managerProfile }) => {
         />
       </div>
       <div className="manager-description__main">
-        <h1 className="manager-description__heading">
+        <h1 className="title-details">
           {managerProfile.username}
         </h1>
         <div className="manager-description__date">
