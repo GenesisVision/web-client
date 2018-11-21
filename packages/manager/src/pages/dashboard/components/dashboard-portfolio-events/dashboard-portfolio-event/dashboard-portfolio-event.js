@@ -22,9 +22,9 @@ const formatDate = date => {
   const dayDifference = moment(now).diff(eventCreationDate, "days");
   const isShowFullDate = dayDifference > 1;
 
-  if (isShowFullDate) return eventCreationDate.format("DD MMM YYYY, HH:MM a");
-
-  return eventCreationDate.fromNow();
+  return isShowFullDate
+    ? eventCreationDate.format("DD MMM YYYY, HH:MM a")
+    : eventCreationDate.fromNow();
 };
 
 const DashboardPortfolioEvent = ({ t, event }) => {
@@ -61,7 +61,11 @@ const DashboardPortfolioEvent = ({ t, event }) => {
           <div className="portfolio-event__values-container">
             {event.description}
           </div>
-          <DetailsStatisticItem label={t(valueDescription)} small>
+          <DetailsStatisticItem
+            label={t(valueDescription)}
+            small
+            className="portfolio-event__values-container"
+          >
             {renderValueDescription()}
           </DetailsStatisticItem>
         </DetailsStatisticItem>
