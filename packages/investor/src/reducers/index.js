@@ -24,7 +24,7 @@ import loginReducer from "../pages/auth/login/reducers/login.reducers";
 import signUpReducer from "../pages/auth/signup/reducers/signup.reducers";
 import dashboardReducer from "../pages/dashboard/reducers/dashboard.reducers";
 import managerReducer from "../pages/manager/reducers/manager.reducers";
-import walletReducer from "../pages/wallet/reducers/wallet.reducers.js";
+import walletReducer from "shared/components/wallet/reducers/wallet.reducers";
 
 export default combineReducers({
   routing: routerReducer,
