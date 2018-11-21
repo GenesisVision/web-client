@@ -70,8 +70,11 @@
 
   &__value {
     letter-spacing: 0.4px;
-    font-size: $font-size-common;
+    font-size: $font-size-common-mobile;
     font-weight: 600;
+    @include media-breakpoint-landscape-phone(){
+      font-size: $font-size-common;
+    }
   }
 
   &__art {

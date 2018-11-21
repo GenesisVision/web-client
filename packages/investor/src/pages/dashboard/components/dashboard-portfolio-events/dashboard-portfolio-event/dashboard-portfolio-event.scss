@@ -28,7 +28,10 @@
 
   &__info {
     flex-grow: 3.5;
-    margin-left: 24px;
+    margin-left: 12px;
+    @include media-breakpoint-landscape-phone(){
+      margin-left: 24px;
+    }
     & .details-statistics-item {
       padding: 0;
       &__value {
@@ -46,18 +49,26 @@
   &__description {
     letter-spacing: 0.2px;
     margin-bottom: 0px;
-    font-size: $font-size-common;
+    font-size: $font-size-common-mobile;
     color: $text-color;
     line-height: 1.69;
+    padding-right: $padding-small-mobile;
+    @include media-breakpoint-landscape-phone(){
+      font-size: $font-size-common;
+    }
   }
 
   &__value {
     letter-spacing: 0.4px;
-    font-size: $font-size-common;
+    font-size: $font-size-common-mobile;
     font-weight: 600;
     line-height: 1.69;
-    white-space: nowrap;
+    text-align: right;
     word-break: normal;
+    @include media-breakpoint-landscape-phone(){
+      font-size: $font-size-common;
+      text-align: left;
+    }
   }
 
   &__art {
