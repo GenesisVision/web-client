@@ -20,6 +20,9 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    white-space: normal;
+    line-height: 1.69;
+    padding-bottom: $padding-xxsmall;
     @include media-breakpoint-landscape-phone() {
       flex-direction: column;
     }
@@ -28,6 +31,9 @@
   &__info {
     flex-grow: 3.5;
     margin-left: 24px;
+    & .details-statistics-item {
+      padding: 0;
+    }
   }
 
   &__time {
