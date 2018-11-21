@@ -9,6 +9,7 @@ import Profitability from "shared/components/profitability/profitability";
 import { formatValue } from "shared/utils/formatter";
 
 import { isUseProfitability } from "../../helpers/dashboard-portfolio.helpers";
+import DetailsStatisticItem from "shared/components/details-statistic-item/details-statistic-item";
 
 const formatDate = date => {
   const now = moment(new Date());
@@ -23,6 +24,30 @@ const formatDate = date => {
 };
 
 const DashboardPortfolioEvent = ({ event }) => {
+  const eventDescription = () => (
+    <div className="portfolio-event__values-container">
+      <div className="portfolio-event__description">{event.description}</div>
+      <span className="portfolio-event__value">
+        {isUseProfitability(event) ? (
+          <Profitability value={event.value} prefix="sign">
+            <NumberFormat
+              value={formatValue(event.value)}
+              displayType="text"
+              allowNegative={false}
+              suffix={` ${event.currency}`}
+            />
+          </Profitability>
+        ) : (
+          <NumberFormat
+            value={formatValue(event.value)}
+            displayType="text"
+            suffix={` ${event.currency}`}
+          />
+        )}
+      </span>
+    </div>
+  );
+
   return (
     <div className="portfolio-event">
       <PortfolioEventLogo
@@ -31,30 +56,9 @@ const DashboardPortfolioEvent = ({ event }) => {
         color={event.color}
       />
       <div className="portfolio-event__info">
-        <span className="portfolio-event__time">{formatDate(event.date)}</span>
-        <div className="portfolio-event__values-container">
-          <div className="portfolio-event__description">
-            {event.description}
-          </div>
-          <span className="portfolio-event__value">
-            {isUseProfitability(event) ? (
-              <Profitability value={event.value} prefix="sign">
-                <NumberFormat
-                  value={formatValue(event.value)}
-                  displayType="text"
-                  allowNegative={false}
-                  suffix={` ${event.currency}`}
-                />
-              </Profitability>
-            ) : (
-              <NumberFormat
-                value={formatValue(event.value)}
-                displayType="text"
-                suffix={` ${event.currency}`}
-              />
-            )}
-          </span>
-        </div>
+        <DetailsStatisticItem label={formatDate(event.date)}>
+          {eventDescription()}
+        </DetailsStatisticItem>
       </div>
     </div>
   );

@@ -7,6 +7,7 @@
   flex-direction: column;
   padding-right: $padding-xsmall-mobile;
   padding-bottom: $padding-big-mobile;
+
   &--half {
     width: 70px;
     @include media-breakpoint-landscape-phone() {
@@ -37,6 +38,33 @@
     }
     @include media-breakpoint-landscape-phone() {
       font-size: $font-size-paragraph;
+    }
+  }
+
+  &--small{
+    & > .details-statistics-item__label{
+      font-size: $font-size-small-mobile;
+      @include media-breakpoint-landscape-phone() {
+        font-size: $font-size-small;
+      }
+    }
+
+    & > .details-statistics-item__value{
+      font-size: $font-size-common-mobile;
+      @include media-breakpoint-landscape-phone() {
+        font-size: $font-size-common;
+      }
+    }
+  }
+
+  &__equivalent {
+    font-size: $font-size-common-mobile;
+    letter-spacing: 0.3px;
+    color: $label-color;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-common;
+      letter-spacing: 0.3px;
+      color: $label-color;
     }
   }
 }
