@@ -12,7 +12,7 @@ import ProgramsRoutes, { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
 import WalletWithdrawConfirmPage, {
   WALLET_WITHDRAW_CONFIRM_ROUTE
 } from "shared/components/wallet-withdraw-confirm/wallet-withdraw-confirm.page";
-import WalletPage, { WALLET_PAGE_ROUTE } from "pages/wallet/wallet-page";
+import WalletPage, { WALLET_PAGE_ROUTE } from "shared/components/wallet/wallet-page";
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import GlobalSearchPage from "shared/components/global-search/global-search.page";
