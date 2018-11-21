@@ -7,6 +7,7 @@ import { formatValue } from "../../utils/formatter";
 import NumberFormat from "react-number-format";
 
 const DetailsStatisticItem = ({
+  small,
   label,
   children,
   accent,
@@ -20,7 +21,8 @@ const DetailsStatisticItem = ({
       className={classnames(
         "details-statistics-item",
         {
-          "details-statistics-item--half": half
+          "details-statistics-item--half": half,
+          "details-statistics-item--small": small
         },
         className
       )}
@@ -28,7 +30,8 @@ const DetailsStatisticItem = ({
       <div className="details-statistics-item__label">{label}</div>
       <div
         className={classnames("details-statistics-item__value", {
-          "details-statistics-item__value--accent": accent
+          "details-statistics-item__value--accent": accent,
+          "details-statistics-item__value--small": small
         })}
       >
         {children}
