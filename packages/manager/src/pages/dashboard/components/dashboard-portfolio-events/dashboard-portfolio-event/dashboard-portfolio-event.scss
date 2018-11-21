@@ -18,19 +18,25 @@
 
   &__values-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     white-space: normal;
     line-height: 1.69;
     padding-bottom: $padding-xxsmall;
-    @include media-breakpoint-landscape-phone() {
+    @include media-breakpoint-phone() {
+      flex-direction: row;
+    }
+    @include media-breakpoint-tablet() {
       flex-direction: column;
     }
   }
 
   &__info {
     flex-grow: 3.5;
-    margin-left: 24px;
+    margin-left: 12px;
+    @include media-breakpoint-landscape-phone(){
+      margin-left: 24px;
+    }
     & .details-statistics-item {
       padding: 0;
       &__value {

@@ -61,7 +61,11 @@ const DashboardPortfolioEvent = ({ t, event }) => {
           <div className="portfolio-event__values-container">
             {event.description}
           </div>
-          <DetailsStatisticItem label={t(valueDescription)} small>
+          <DetailsStatisticItem
+            label={t(valueDescription)}
+            small
+            className="portfolio-event__values-container"
+          >
             {renderValueDescription()}
           </DetailsStatisticItem>
         </DetailsStatisticItem>

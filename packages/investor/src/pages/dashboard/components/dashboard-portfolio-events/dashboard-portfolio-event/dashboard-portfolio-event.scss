@@ -18,10 +18,13 @@
 
   &__values-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     white-space: normal;
-    @include media-breakpoint-landscape-phone() {
+    @include media-breakpoint-phone() {
+      flex-direction: row;
+    }
+    @include media-breakpoint-tablet() {
       flex-direction: column;
     }
   }
@@ -34,9 +37,6 @@
     }
     & .details-statistics-item {
       padding: 0;
-      &__value {
-        word-break: break-word;
-      }
     }
   }
 
@@ -63,10 +63,15 @@
     font-size: $font-size-common-mobile;
     font-weight: 600;
     line-height: 1.69;
-    text-align: right;
+    text-align: left;
     word-break: normal;
+    @include media-breakpoint-phone() {
+      text-align: right;
+    }
     @include media-breakpoint-landscape-phone(){
       font-size: $font-size-common;
+    }
+    @include media-breakpoint-tablet() {
       text-align: left;
     }
   }
