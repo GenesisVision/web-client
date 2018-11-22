@@ -1,4 +1,5 @@
 @import "~shared/styles/_colors.scss";
+@import "~shared/styles/_sizes.scss";
 
 .google-auth {
   background-color: $background-color;
@@ -9,7 +10,7 @@
   }
 
   .dialog__header {
-    padding: 0 29px;
+    padding: 50px 30px 0;
   }
 
   &__steps {
@@ -22,7 +23,7 @@
     box-sizing: border-box;
     flex: 1 0 280px;
     width: 280px;
-    padding: 29px 28px;
+    padding: 29px 28px 50px;
 
     &--alt-color {
       background-color: $secondary-background-color;
@@ -31,6 +32,7 @@
 
   &--mobile {
     .google-auth__step {
+      padding-bottom: 30px;
       flex: 1 0 320px;
       width: 320px;
     }
@@ -61,6 +63,7 @@
     margin-bottom: 27px;
   }
   &__alt-code {
+    @include padding-bottom($padding-xxsmall);
     font-weight: 600;
     font-size: 14px;
     letter-spacing: 0.7px;

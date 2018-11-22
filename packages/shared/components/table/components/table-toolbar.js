@@ -1,7 +1,6 @@
+import React, { Component } from "react";
 import { CardsIcon } from "shared/components/icon/cards-icon";
 import { TableIcon } from "shared/components/icon/table-icon";
-import React, { Component } from "react";
-
 import SortingFilter from "shared/components/table/components/sorting/sorting-filter/sorting-filter";
 import {
   CARDS_VIEW,
@@ -29,7 +28,7 @@ class TableToolbar extends Component {
     } = this.props;
     return (
       <div className="table__toolbar">
-        {title && <div className="table__title">{title}</div>}
+        {title && <h3 className="table__title">{title}</h3>}
         <div className="table__filters">
           {view === CARDS_VIEW && sorting !== undefined && (
             <SortingFilter

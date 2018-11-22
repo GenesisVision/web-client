@@ -3,8 +3,9 @@ import "./statistic-item.scss";
 import classnames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
-import { formatValue } from "../../utils/formatter";
 import NumberFormat from "react-number-format";
+
+import { formatValue } from "../../utils/formatter";
 
 const StatisticItem = ({
   large,

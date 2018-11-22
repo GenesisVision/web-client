@@ -33,7 +33,7 @@ class DashboardAssets extends Component {
     return (
       <Surface className="dashboard-assets">
         <div className="dashboard-assets__head">
-          <div className="dashboard-assets__title">Assets</div>
+          <h3 className="dashboard-assets__title">Assets</h3>
           <div className="dashboard-assets__tabs">
             <GVTabs value={tab} onChange={this.handleTabChange}>
               <GVTab value={"programs"} label="Programs" />

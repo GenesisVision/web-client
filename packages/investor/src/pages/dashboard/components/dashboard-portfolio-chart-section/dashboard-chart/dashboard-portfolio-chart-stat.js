@@ -1,10 +1,9 @@
 import React, { Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-
-import { formatValue } from "shared/utils/formatter";
-import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Profitability from "shared/components/profitability/profitability";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
+import { formatValue } from "shared/utils/formatter";
 
 const DashboardPortfolioChartStat = ({
   t,

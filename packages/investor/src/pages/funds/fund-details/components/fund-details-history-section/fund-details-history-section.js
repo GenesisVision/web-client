@@ -32,9 +32,9 @@ class FundDetailsHistorySection extends PureComponent {
     if (!structure) return null;
     return (
       <Surface className="details-history">
-        <div className="details-history__heading">
+        <h3 className="details-history__heading">
           {t("fund-details-page.history.structure.title")}
-        </div>
+        </h3>
         <div>
           <FundStructure
             structure={structure}

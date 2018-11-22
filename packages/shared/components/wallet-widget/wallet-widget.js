@@ -1,15 +1,15 @@
 import "./wallet-widget.scss";
 
 import classnames from "classnames";
-import Chip from "shared/components/chip/chip";
-import { WalletIcon } from "shared/components/icon/wallet-icon";
-import Popover from "shared/components/popover/popover";
-import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
-import { WALLET_PAGE_ROUTE } from "shared/components/wallet/wallet-page";
 import PropTypes from "prop-types";
 import React, { Fragment } from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
+import Chip from "shared/components/chip/chip";
+import { WalletIcon } from "shared/components/icon/wallet-icon";
+import Popover from "shared/components/popover/popover";
+import { WALLET_PAGE_ROUTE } from "shared/components/wallet/wallet-page";
+import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
 import { formatValue } from "shared/utils/formatter";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 

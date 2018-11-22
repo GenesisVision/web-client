@@ -1,0 +1,38 @@
+@import "./_sizes.scss";
+
+h1 {
+  @include font-size($font-size-h1);
+  font-weight: 600;
+  color: $text-light-color;
+  padding-bottom: $padding-small;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+h2 {
+  @include font-size($font-size-h2);
+  @include padding-bottom($padding-xxsmall);
+  font-weight: 500;
+  color: $text-light-color;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+h3 {
+  @include font-size($font-size-h3);
+  font-weight: 600;
+  color: $text-light-color;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+h4 {
+  @include font-size($font-size-h4);
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+p {
+  @include font-size($font-size-paragraph);
+}

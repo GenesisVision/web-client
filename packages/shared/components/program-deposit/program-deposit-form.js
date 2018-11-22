@@ -108,11 +108,10 @@ const ProgramDepositForm = ({
           {t("deposit-program.confirm")}
         </GVButton>
       </div>
-      <div className="dialog__info">
-        {t("deposit-program.disclaimer", {
-          currency
-        })}
-      </div>
+      {currency !== "GVT" &&
+        currency !== null && (
+        <div className="dialog__info">{t("deposit-program.disclaimer", { currency })}</div>
+      )}
     </form>
   );
 };

@@ -51,16 +51,14 @@ class ManagerHistorySection extends PureComponent {
     const { handleTabChange, getPrograms, getFunds } = this;
     return (
       <Surface className="manager-history">
-        <div className="manager-history__header">
-          <div className="manager-history__tabs">
-            <GVTabs value={tab} onChange={handleTabChange}>
-              <GVTab
-                value={"programs"}
-                label={t("manager.history.tabs.programs")}
-              />
-              <GVTab value={"funds"} label={t("manager.history.tabs.funds")} />
-            </GVTabs>
-          </div>
+        <div className="manager-history__tabs">
+          <GVTabs value={tab} onChange={handleTabChange}>
+            <GVTab
+              value={"programs"}
+              label={t("manager.history.tabs.programs")}
+            />
+            <GVTab value={"funds"} label={t("manager.history.tabs.funds")} />
+          </GVTabs>
         </div>
         <div>
           {tab === PROGRAMS_TAB && (

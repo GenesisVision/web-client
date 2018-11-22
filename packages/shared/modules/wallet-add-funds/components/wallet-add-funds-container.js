@@ -1,11 +1,12 @@
 import "./wallet-add-funds-form.scss";
 
-import WalletAddFundsForm from "./wallet-add-funds-form";
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { walletApiProxy } from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
-import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
+
+import WalletAddFundsForm from "./wallet-add-funds-form";
 
 class WalletAddFundsContainer extends Component {
   state = {

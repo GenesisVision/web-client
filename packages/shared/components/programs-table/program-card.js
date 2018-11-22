@@ -1,19 +1,18 @@
+import { GVButton } from "gv-react-components";
+import React, { Component } from "react";
+import { translate } from "react-i18next";
+import NumberFormat from "react-number-format";
+import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
 import Popover from "shared/components/popover/popover";
 import Profitability from "shared/components/profitability/profitability";
 import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
-import { GVButton } from "gv-react-components";
-import { composeProgramDetailsUrl } from "shared/utils/compose-url";
-import { composeManagerDetailsUrl } from "shared/utils/compose-url";
-import React, { Component } from "react";
-import { translate } from "react-i18next";
-import NumberFormat from "react-number-format";
-import { Link } from "react-router-dom";
-
-import { formatValue } from "shared/utils/formatter";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import { composeManagerDetailsUrl } from "shared/utils/compose-url";
+import { composeProgramDetailsUrl } from "shared/utils/compose-url";
+import { formatValue } from "shared/utils/formatter";
 
 class ProgramCard extends Component {
   state = {
@@ -144,9 +143,7 @@ class ProgramCard extends Component {
         </div>
         <div className="programs-cards__table">
           <div className="programs-cards__table-column">
-            <StatisticItem
-              label={t("programs-page.programs-header.balance")}
-            >
+            <StatisticItem label={t("programs-page.programs-header.balance")}>
               <NumberFormat
                 value={program.statistic.balanceGVT.amount}
                 displayType="text"
@@ -154,9 +151,7 @@ class ProgramCard extends Component {
                 suffix=" GVT"
               />
             </StatisticItem>
-            <StatisticItem
-              label={t("programs-page.programs-header.period")}
-            >
+            <StatisticItem label={t("programs-page.programs-header.period")}>
               <ProgramPeriodPie
                 start={program.periodStarts}
                 end={program.periodEnds}
@@ -164,18 +159,14 @@ class ProgramCard extends Component {
             </StatisticItem>
           </div>
           <div className="programs-cards__table-column">
-            <StatisticItem
-              label={t("programs-page.programs-header.investors")}
-            >
+            <StatisticItem label={t("programs-page.programs-header.investors")}>
               <NumberFormat
                 value={program.statistic.investorsCount}
                 displayType="text"
                 decimalScale={0}
               />
             </StatisticItem>
-            <StatisticItem
-              label={t("programs-page.programs-header.trades")}
-            >
+            <StatisticItem label={t("programs-page.programs-header.trades")}>
               <NumberFormat
                 value={program.statistic.tradesCount}
                 displayType="text"
@@ -193,9 +184,7 @@ class ProgramCard extends Component {
                 suffix=" GVT"
               />
             </StatisticItem>
-            <StatisticItem
-              label={t("programs-page.programs-header.drawdown")}
-            >
+            <StatisticItem label={t("programs-page.programs-header.drawdown")}>
               <NumberFormat
                 value={formatValue(program.statistic.drawdownPercent, 2)}
                 displayType="text"

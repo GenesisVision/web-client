@@ -6,10 +6,10 @@ import React from "react";
 import NumberFormat from "react-number-format";
 import PortfolioEventLogo from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
 import Profitability from "shared/components/profitability/profitability";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatValue } from "shared/utils/formatter";
 
 import { isUseProfitability } from "../../helpers/dashboard-portfolio.helpers";
-import StatisticItem from "shared/components/statistic-item/statistic-item";
 
 const formatDate = date => {
   const now = moment(new Date());

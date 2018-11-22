@@ -2,8 +2,8 @@ import "./dashboard-portfolio-chart-section.scss";
 
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Surface from "shared/components/surface/surface";
 import DashboardInRequestsContainer from "shared/components/dashboard/dashboard-portfolio-chart-section/dashboard-in-requests/dashboard-in-requests-container";
+import Surface from "shared/components/surface/surface";
 
 import {
   cancelRequest,
@@ -34,9 +34,7 @@ class DashboardPortfolioChartSection extends Component {
     if (!isNewUser)
       return (
         <Surface className="dashboard-portfolio-chart-section">
-          <div className="dashboard-portfolio-chart-section__heading">
-            Chart
-          </div>
+          <h3 className="dashboard-portfolio-chart-section__heading">Chart</h3>
           <div className="dashboard-portfolio-chart-section__actions">
             <DashboardChartAssetsContainer assets={this.getAssets()} />
             <DashboardInRequestsContainer
