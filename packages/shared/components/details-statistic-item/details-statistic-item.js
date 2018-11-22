@@ -40,7 +40,7 @@ const DetailsStatisticItem = ({
       >
         {children}
       </div>
-      {equivalent && (
+      {equivalent ? (
         <div className="details-statistics-item__equivalent">
           {
             <NumberFormat
@@ -51,7 +51,7 @@ const DetailsStatisticItem = ({
             />
           }
         </div>
-      )}
+      ) : null}
     </div>
   );
 };
