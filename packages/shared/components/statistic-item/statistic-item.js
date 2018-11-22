@@ -58,6 +58,11 @@ const StatisticItem = ({
 
 StatisticItem.propTypes = {
   label: PropTypes.string.isRequired,
+  equivalent: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  equivalentCurrency: PropTypes.string,
+  small: PropTypes.bool,
+  big: PropTypes.bool,
+  large: PropTypes.bool,
   accent: PropTypes.bool,
   half: PropTypes.bool,
   className: PropTypes.string

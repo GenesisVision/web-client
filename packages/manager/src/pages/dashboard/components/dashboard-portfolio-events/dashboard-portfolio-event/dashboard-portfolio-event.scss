@@ -37,8 +37,11 @@
     @include media-breakpoint-landscape-phone(){
       margin-left: 24px;
     }
-    & .details-statistics-item {
+    & .statistics-item {
       padding: 0;
+      &__label {
+        line-height: normal;
+      }
       &__value {
         word-break: break-word;
       }
