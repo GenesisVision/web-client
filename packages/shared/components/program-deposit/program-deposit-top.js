@@ -1,6 +1,7 @@
 import React from "react";
 import { translate } from "react-i18next";
 import { formatValue } from "shared/utils/formatter";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
 
 const ProgramDepositTop = ({ info, t }) => {
   return (
@@ -10,20 +11,17 @@ const ProgramDepositTop = ({ info, t }) => {
         <p>{info.title}</p>
       </div>
       <div className="dialog-field">
-        <div className="dialog-field__description">
-          {t("deposit-program.available-to-invest-in-program")}
-        </div>
-        <div className="dialog-field__value">
+        <StatisticItem
+          label={t("deposit-program.available-to-invest-in-program")}
+          big
+        >
           {formatValue(info.availableToInvest)} GVT
-        </div>
+        </StatisticItem>
       </div>
       <div className="dialog-field">
-        <div className="dialog-field__description">
-          {t("deposit-program.available-in-wallet")}
-        </div>
-        <div className="dialog-field__value">
+        <StatisticItem label={t("deposit-program.available-in-wallet")} big>
           {formatValue(info.availableInWallet)} GVT
-        </div>
+        </StatisticItem>
       </div>
     </div>
   );
