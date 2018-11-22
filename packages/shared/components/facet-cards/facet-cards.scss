@@ -122,6 +122,7 @@ $padding-app: 20px;
   box-shadow: $box-shadow-1;
   transition: 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   transition-property: transform, box-shadow;
+  padding: 0;
 
   &:not(:last-child) {
     margin-right: $facet-margin/2;
@@ -185,7 +186,6 @@ $padding-app: 20px;
     font-weight: 300;
     letter-spacing: 0.2px;
     color: $primary-color;
-    margin-top: $facet-padding/4;
     @include media-breakpoint-landscape-phone() {
       font-size: $__description-font-size;
     }

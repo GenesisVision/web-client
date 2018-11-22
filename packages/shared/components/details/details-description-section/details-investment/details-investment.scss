@@ -15,14 +15,16 @@ $withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
   & div {
     box-sizing: border-box;
   }
-  padding: $padding-small-mobile;
+  padding-right: $padding-small-mobile;
+  padding-left: $padding-small-mobile;
   margin-top: $padding-small-mobile;
   margin-left: 0;
   @include media-breakpoint-phone() {
     margin-left: -$padding-small-mobile;
   }
   @include media-breakpoint-landscape-phone() {
-    padding: $padding-small;
+    padding-right: $padding-small;
+    padding-left: $padding-small;
     margin-top: $padding-small;
     margin-left: -$padding-small;
   }
