@@ -8,7 +8,6 @@ import { bindActionCreators, compose } from "redux";
 
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
 import Popover from "shared/components/popover/popover";
-import StatisticItem from "shared/components/statistic-item/statistic-item";
 
 import DashboardRequest from "./dashboard-request";
 import DetailsStatisticItem from "../../../details-statistic-item/details-statistic-item";
