@@ -1,8 +1,8 @@
-import { NOT_FOUND_PAGE_ROUTE } from "shared/components/not-found/not-found.routes";
 import React from "react";
 import { connect } from "react-redux";
 import { replace } from "react-router-redux";
 import { bindActionCreators } from "redux";
+import { NOT_FOUND_PAGE_ROUTE } from "shared/components/not-found/not-found.routes";
 
 import forgotPasswordService from "../../services/forgot-password.service";
 import PasswordRestore from "./password-restore";

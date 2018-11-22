@@ -1,6 +1,6 @@
-@import "shared/styles/_colors.scss";
-@import "shared/styles/_breakpoint.scss";
-@import "shared/styles/_constants.scss";
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_constants.scss";
 .navigation {
   display: flex;
   flex-direction: row;

@@ -1,5 +1,6 @@
-@import "shared/styles/_colors.scss";
-@import "shared/styles/_breakpoint.scss";
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
 
 .wallet-transactions {
   margin-top: 80px;
@@ -15,12 +16,12 @@
   }
 
   & .table__toolbar {
+    padding-top: $padding-medium;
     flex-direction: column;
     align-items: flex-start;
   }
 
   & .table__filters {
-    margin-top: 16px;
     margin-left: 0;
   }
 
@@ -28,20 +29,28 @@
     padding: 0 32px;
   }
 
+  & .table__row .table__cell:last-child {
+    padding-right: 36px;
+  }
+
   &__cell {
     color: $text-light-color;
 
     &--date {
-      width: 33%;
-      min-width: 180px;
+      width: 25%;
+      min-width: 200px;
     }
-    &--type {
-      width: 40%;
-      min-width: 230px;
+    &--information {
+      width: 51%;
+      min-width: 300px;
+    }
+    &--status {
+      width: 13%;
+      min-width: 110px;
     }
     &--amount {
-      width: 27%;
-      min-width: 110px;
+      width: 13%;
+      min-width: 140px;
     }
   }
 
@@ -55,6 +64,10 @@
     }
   }
 
+  & .icon.icon--actions-circle {
+    cursor: pointer;
+  }
+
   @include media-breakpoint-tablet() {
     & .table__filters {
       margin-left: 20px;
@@ -62,8 +75,51 @@
     }
 
     & .table__toolbar {
-      padding: 40px 32px 32px;
+      padding: $padding-medium 32px 32px;
       flex-direction: row;
+    }
+  }
+}
+.wallet-transaction-actions {
+  &__disabled-actions {
+    opacity: 0.4;
+    &.icon.icon--actions-circle {
+      cursor: auto;
+    }
+  }
+}
+
+.empty-transactions {
+  padding: $padding-xsmall-mobile $padding-small-mobile;
+  @include media-breakpoint-landscape-phone() {
+    padding: $padding-xsmall $padding-small;
+  }
+  &__subtitle {
+    font-weight: 600;
+    font-size: $font-size-h3-mobile;
+    padding: $padding-xsmall-mobile 0;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-h3;
+      padding: $padding-xsmall 0;
+    }
+  }
+  &__disclaimer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: $padding-big-mobile 0;
+    @include media-breakpoint-landscape-phone() {
+      padding: $padding-big 0;
+    }
+  }
+  &__text {
+    font-size: $font-size-paragraph-mobile;
+    font-weight: 500;
+    opacity: 0.4;
+    padding: $padding-xsmall-mobile 0;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-paragraph;
+      padding: $padding-xsmall 0;
     }
   }
 }

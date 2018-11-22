@@ -1,5 +1,6 @@
-@import "shared/styles/_colors.scss";
-@import "shared/styles/_breakpoint.scss";
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_sizes.scss";
+@import "~shared/styles/_breakpoint.scss";
 
 .dialog {
   position: relative;
@@ -131,7 +132,7 @@
       margin-bottom: 11px;
     }
     p {
-      font-size: 13px;
+      font-size: $font-size-common;
       font-weight: 300;
       letter-spacing: 0.4px;
       color: #e8eff3;
@@ -143,7 +144,7 @@
     font-weight: 300;
 
     &__description {
-      font-size: 13px;
+      font-size: $font-size-common;
       opacity: 0.5;
       margin-bottom: 12px;
       letter-spacing: 0.4px;
@@ -176,6 +177,6 @@
 
   .form-error {
     margin-bottom: 20px;
-    font-size: 13px;
+    font-size: $font-size-common;
   }
 }

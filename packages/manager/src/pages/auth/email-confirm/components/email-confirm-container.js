@@ -1,8 +1,8 @@
-import { NOT_FOUND_PAGE_ROUTE } from "shared/components/not-found/not-found.routes";
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { replace } from "react-router-redux";
 import { bindActionCreators } from "redux";
+import { NOT_FOUND_PAGE_ROUTE } from "shared/components/not-found/not-found.routes";
 
 import * as emailConfirmService from "../service/email-confirm.service";
 import EmailConfirmFailure from "./email-confirm-failure";
@@ -37,4 +37,7 @@ const mapDispatchToProps = dispatch => ({
   showNotFoundPage: () => dispatch(replace(NOT_FOUND_PAGE_ROUTE))
 });
 
-export default connect(null, mapDispatchToProps)(EmailConfirmContainer);
+export default connect(
+  null,
+  mapDispatchToProps
+)(EmailConfirmContainer);

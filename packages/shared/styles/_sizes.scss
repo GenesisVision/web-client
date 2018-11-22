@@ -1,40 +1,56 @@
-$padding-outer: 80px;
-$padding-description: 108px;
-$padding-very-large: 90px;
-$padding-large: 62px;
-$padding-middle: 32px;
-$padding-small: 20px;
-$padding-mini: 10px;
-$font-size-title: 32px;
-$font-size-subtitle: 17px;
-$font-size-large: 16px;
-$font-size-middle: 14px;
+//paddings
+$padding-xxlarge: 108px;
+$padding-xlarge: 90px;
+$padding-large: 80px;
+$padding-big: 62px;
+$padding-medium: 40px;
+$padding-small: 32px;
+$padding-xsmall: 20px;
+$padding-xxsmall: 10px;
+
+//fonts
+$font-size-h1: 32px;
+$font-size-h2: 24px;
+$font-size-h3: 17px;
+$font-size-h4: 16px;
+$font-size-paragraph: 14px;
+$font-size-common: 13px;
 $font-size-small: 12px;
+
+//others
 $border-radius: 5px;
 $border-radius-middle: 8px;
 $btn-height: 50px;
 $btn-width: 149px;
 $icon-size: 29px;
 $avatar-size: 120px;
+$asset-height: 40px;
 
+//dividers
 $divider-padding: 3;
 $divider-text: 1.5;
 $divider-title: 2;
 
-$asset-height: 40px;
-
-$padding-outer-mobile: $padding-outer/$divider-padding;
-$padding-description-mobile: $padding-description/$divider-padding;
-$padding-very-large-mobile: $padding-very-large/$divider-padding;
+//paddings for mobile
+$padding-xxlarge-mobile: $padding-xxlarge/$divider-padding;
+$padding-xlarge-mobile: $padding-xlarge/$divider-padding;
 $padding-large-mobile: $padding-large/$divider-padding;
-$padding-middle-mobile: $padding-middle/$divider-padding;
+$padding-big-mobile: $padding-big/$divider-padding;
+$padding-medium-mobile: $padding-medium/$divider-padding;
 $padding-small-mobile: $padding-small/$divider-padding;
-$padding-mini-mobile: $padding-mini/$divider-padding;
-$font-size-title-mobile: $font-size-title/$divider-title;
-$font-size-subtitle-mobile: $font-size-subtitle/$divider-text;
-$font-size-large-mobile: $font-size-large/$divider-text;
-$font-size-middle-mobile: $font-size-middle/$divider-text;
+$padding-xsmall-mobile: $padding-xsmall/$divider-padding;
+$padding-xxsmall-mobile: $padding-xxsmall/$divider-padding;
+
+//fonts for mobile
+$font-size-h1-mobile: $font-size-h1/$divider-title;
+$font-size-h2-mobile: $font-size-h2/$divider-text;
+$font-size-h3-mobile: $font-size-h3/$divider-text;
+$font-size-h4-mobile: $font-size-h4/$divider-text;
+$font-size-paragraph-mobile: $font-size-paragraph/$divider-text;
+$font-size-common-mobile: $font-size-common/$divider-text;
 $font-size-small-mobile: $font-size-small/$divider-text;
+
+//others for mobile
 $border-radius-mobile: $border-radius/$divider-text;
 $border-radius-middle-mobile: $border-radius-middle/$divider-text;
 $btn-height-mobile: $btn-height/$divider-text;

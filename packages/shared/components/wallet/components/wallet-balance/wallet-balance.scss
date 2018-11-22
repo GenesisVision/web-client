@@ -1,5 +1,6 @@
-@import "shared/styles/_breakpoint.scss";
-@import "shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_sizes.scss";
 
 .wallet-balance {
   &__heading {
@@ -10,10 +11,21 @@
   }
 
   &__statistic {
-    display: block;
-    &:first-child {
-      width: 100%;
-      margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    & > * {
+      margin-right: $padding-small-mobile;
+    }
+    @include media-breakpoint-landscape-phone() {
+      & > * {
+        margin-right: $padding-small;
+      }
+    }
+  }
+
+  &__statistic-big {
+    & .details-statistics-item__value {
+      //margin-top: 7px;
     }
   }
 
@@ -38,7 +50,7 @@
     height: 42px;
     width: 129px;
     letter-spacing: 0.3px;
-    font-size: 13px;
+    font-size: $font-size-common;
     margin-bottom: 30px;
     margin-right: 12px;
   }
@@ -48,7 +60,7 @@
     height: 42px;
     width: 129px;
     letter-spacing: 0.3px;
-    font-size: 13px;
+    font-size: $font-size-common;
   }
 
   @include media-breakpoint-landscape-phone() {

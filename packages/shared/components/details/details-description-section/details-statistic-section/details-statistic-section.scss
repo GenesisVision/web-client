@@ -7,16 +7,16 @@
   align-items: stretch;
   &__statistic,
   &__chart {
-    margin-top: $padding-large-mobile;
+    margin-top: $padding-big-mobile;
     @include media-breakpoint-landscape-phone() {
-      margin-top: $padding-large;
+      margin-top: $padding-big;
     }
   }
   &__statistic {
     display: flex;
     width: 100%;
     @include media-breakpoint-landscape-phone() {
-      margin-right: $padding-large-mobile;
+      margin-right: $padding-big-mobile;
       max-width: 300px;
     }
   }

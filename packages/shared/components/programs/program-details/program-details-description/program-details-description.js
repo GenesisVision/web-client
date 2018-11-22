@@ -1,21 +1,21 @@
 import "shared/components/details/details-description-section/details-description/details-description.scss";
 
+import { GVButton } from "gv-react-components";
 import React, { Fragment, PureComponent } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
-import { GVButton } from "gv-react-components";
-
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
-import Popover from "shared/components/popover/popover";
-import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import DetailsFavorite from "shared/components/details/details-description-section/details-description/details-favorite";
 import DetailsNotification from "shared/components/details/details-description-section/details-description/details-notificaton";
-import { formatValue } from "shared/utils/formatter";
+import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
+import Popover from "shared/components/popover/popover";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
 import {
   composeManagerDetailsUrl,
   composeProgramNotificationsUrl
 } from "shared/utils/compose-url";
+import { formatValue } from "shared/utils/formatter";
 
 class ProgramDetailsDescription extends PureComponent {
   state = {
@@ -208,36 +208,39 @@ class ProgramDetailsDescription extends PureComponent {
               {programDescription.description}
             </div>
             <div className="details-description__short-statistic">
-              <div className="details-description__short-statistic-item">
-                <span className="details-description__short-statistic-subheading">
-                  {t("program-details-page.description.avToInvest")}
-                </span>
+              <StatisticItem
+                label={t("program-details-page.description.avToInvest")}
+                className={"details-description__short-statistic-item"}
+                accent
+              >
                 <NumberFormat
                   value={formatValue(programDescription.availableInvestment, 2)}
                   displayType="text"
                   suffix={` GVT`}
                 />
-              </div>
-              <div className="details-description__short-statistic-item">
-                <span className="details-description__short-statistic-subheading">
-                  {t("program-details-page.description.entryFee")}
-                </span>
+              </StatisticItem>
+              <StatisticItem
+                label={t("program-details-page.description.entryFee")}
+                className={"details-description__short-statistic-item"}
+                accent
+              >
                 <NumberFormat
                   value={formatValue(programDescription.entryFee, 2)}
                   displayType="text"
                   suffix=" %"
                 />
-              </div>
-              <div className="details-description__short-statistic-item">
-                <span className="details-description__short-statistic-subheading">
-                  {t("program-details-page.description.successFee")}
-                </span>
+              </StatisticItem>
+              <StatisticItem
+                label={t("program-details-page.description.successFee")}
+                className={"details-description__short-statistic-item"}
+                accent
+              >
                 <NumberFormat
                   value={formatValue(programDescription.successFee, 2)}
                   displayType="text"
                   suffix=" %"
                 />
-              </div>
+              </StatisticItem>
             </div>
             {(isOwnProgram || canInvest) && (
               <Fragment>

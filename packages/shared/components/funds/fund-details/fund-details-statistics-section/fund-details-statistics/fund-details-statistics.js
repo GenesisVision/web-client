@@ -4,10 +4,9 @@ import moment from "moment";
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-
 import { ChartPeriodType } from "shared/components/chart/chart-period/chart-period.helpers";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Surface from "shared/components/surface/surface";
-import DetailsStatisticItem from "../../../../details-statistic-item/details-statistic-item";
 
 const FundDetailsStatistics = ({ t, statisticData, period }) => {
   const { data: statistic, isPending } = statisticData;
@@ -22,7 +21,7 @@ const FundDetailsStatistics = ({ t, statisticData, period }) => {
       </div>
       <div className="details-statistics__particular-information">
         <div className="details-statistics__vertical-info-block">
-          <DetailsStatisticItem
+          <StatisticItem
             label={t("fund-details-page.statistics.balance")}
             accent
           >
@@ -33,23 +32,19 @@ const FundDetailsStatistics = ({ t, statisticData, period }) => {
               decimalScale={2}
               suffix={" GVT"}
             />
-          </DetailsStatisticItem>
-          <DetailsStatisticItem
-            label={t("fund-details-page.statistics.start-day")}
-          >
+          </StatisticItem>
+          <StatisticItem label={t("fund-details-page.statistics.start-day")}>
             {moment(statistic.creationDate).format("D MMM YYYY")}
-          </DetailsStatisticItem>
+          </StatisticItem>
         </div>
         <div className="details-statistics__vertical-info-block">
-          <DetailsStatisticItem
-            label={t("fund-details-page.statistics.investors")}
-          >
+          <StatisticItem label={t("fund-details-page.statistics.investors")}>
             <NumberFormat
               value={statistic.investors}
               thousandSeparator={" "}
               displayType="text"
             />
-          </DetailsStatisticItem>
+          </StatisticItem>
         </div>
       </div>
       <div className="details-statistics__subheading">
@@ -58,7 +53,7 @@ const FundDetailsStatistics = ({ t, statisticData, period }) => {
       </div>
       <div className="details-statistics__particular-information">
         <div className="details-statistics__column">
-          <DetailsStatisticItem
+          <StatisticItem
             label={t("fund-details-page.statistics.calmarRatio")}
             half
           >
@@ -69,8 +64,8 @@ const FundDetailsStatistics = ({ t, statisticData, period }) => {
               displayType="text"
               decimalScale={2}
             />
-          </DetailsStatisticItem>
-          <DetailsStatisticItem
+          </StatisticItem>
+          <StatisticItem
             label={t("fund-details-page.statistics.profit-change")}
             half
           >
@@ -84,8 +79,8 @@ const FundDetailsStatistics = ({ t, statisticData, period }) => {
               suffix="%"
               decimalScale={2}
             />
-          </DetailsStatisticItem>
-          <DetailsStatisticItem
+          </StatisticItem>
+          <StatisticItem
             label={t("fund-details-page.statistics.max-drawdown")}
             half
           >
@@ -97,10 +92,10 @@ const FundDetailsStatistics = ({ t, statisticData, period }) => {
               suffix="%"
               decimalScale={2}
             />
-          </DetailsStatisticItem>
+          </StatisticItem>
         </div>
         <div className="details-statistics__column">
-          <DetailsStatisticItem
+          <StatisticItem
             label={t("fund-details-page.statistics.sharpe-ratio")}
             half
           >
@@ -111,9 +106,9 @@ const FundDetailsStatistics = ({ t, statisticData, period }) => {
               displayType="text"
               decimalScale={2}
             />
-          </DetailsStatisticItem>
+          </StatisticItem>
 
-          <DetailsStatisticItem
+          <StatisticItem
             label={t("fund-details-page.statistics.sortino-ratio")}
             half
           >
@@ -124,7 +119,7 @@ const FundDetailsStatistics = ({ t, statisticData, period }) => {
               displayType="text"
               decimalScale={2}
             />
-          </DetailsStatisticItem>
+          </StatisticItem>
         </div>
       </div>
     </Surface>

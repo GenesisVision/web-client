@@ -1,16 +1,16 @@
 import "./password-change.scss";
 
-import authActions from "shared/actions/auth-actions";
-import { SETTINGS_ROUTE } from "shared/components/profile/profile.constants";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
 import { compose } from "redux";
-import { authApiProxy } from "shared/services/api-client/auth-api";
-import authService from "shared/services/auth-service";
+import authActions from "shared/actions/auth-actions";
+import { SETTINGS_ROUTE } from "shared/components/profile/profile.constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import PasswordChangeForm from "shared/modules/password-change/password-change-form";
+import { authApiProxy } from "shared/services/api-client/auth-api";
+import authService from "shared/services/auth-service";
 
 class PasswordChange extends Component {
   state = {

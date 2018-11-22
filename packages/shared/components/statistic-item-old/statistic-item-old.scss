@@ -1,0 +1,53 @@
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_sizes.scss";
+
+.statistic-item {
+  display: inline-flex;
+  flex-direction: column;
+  margin-right: 40px;
+
+  @include media-breakpoint-landscape-phone() {
+    display: inline-flex;
+    justify-content: start;
+    align-items: start;
+    margin-bottom: 0;
+    margin-right: 70px;
+  }
+
+  &__heading {
+    color: $text-dark-color;
+    font-size: 11px;
+    letter-spacing: 0.1px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-common;
+    }
+  }
+
+  &__value {
+    display: flex;
+    align-items: center;
+    color: $text-light-color;
+    font-size: 18px;
+    letter-spacing: 0.3px;
+    font-weight: 400;
+    @include media-breakpoint-landscape-phone() {
+      font-size: 24px;
+      letter-spacing: 0.4px;
+      font-weight: 600;
+    }
+  }
+
+  &__equivalent {
+    font-size: 11px;
+    letter-spacing: 0.3px;
+    color: $label-color;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-common;
+      letter-spacing: 0.3px;
+      color: $label-color;
+    }
+  }
+}

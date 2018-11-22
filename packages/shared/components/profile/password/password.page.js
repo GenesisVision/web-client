@@ -1,6 +1,6 @@
-import Page from "shared/components/page/page";
 import React from "react";
 import { translate } from "react-i18next";
+import Page from "shared/components/page/page";
 import PasswordChangeContainer from "shared/modules/password-change/password-change";
 
 const PasswordPage = ({ t }) => {

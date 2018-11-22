@@ -1,6 +1,6 @@
-@import "shared/styles/_colors.scss";
-@import "shared/styles/_breakpoint.scss";
-@import "shared/styles/_sizes.scss";
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
 
 .details-description {
   &__control {
@@ -25,7 +25,7 @@
     }
     &-icon,
     &-text {
-      padding: $padding-small-mobile $padding-small-mobile/2;
+      padding: $padding-xsmall-mobile $padding-xsmall-mobile/2;
     }
     &-text {
       font-size: $font-size-small-mobile;
@@ -48,7 +48,7 @@
     @include media-breakpoint-landscape-phone() {
       &-icon,
       &-text {
-        padding: $padding-small/2 $padding-small;
+        padding: $padding-xsmall/2 $padding-xsmall;
         white-space: nowrap;
       }
       &-icon {
@@ -61,4 +61,3 @@
     }
   }
 }
-

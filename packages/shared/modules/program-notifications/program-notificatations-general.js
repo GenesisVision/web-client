@@ -1,14 +1,15 @@
-import GeneralNotification from "shared/components/general-notification/general-notification";
-import {
-  addProgramNotificationService,
-  removeProgramNotificationService
-} from "./services/program-notifications.services";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
+import GeneralNotification from "shared/components/general-notification/general-notification";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
+
+import {
+  addProgramNotificationService,
+  removeProgramNotificationService
+} from "./services/program-notifications.services";
 
 class ProgramNotificationsGeneral extends Component {
   success = text => {
@@ -86,6 +87,10 @@ const mapDispatchToProps = dispatch => ({
   dispatch
 });
 
-export default compose(translate(), connect(undefined, mapDispatchToProps))(
-  ProgramNotificationsGeneral
-);
+export default compose(
+  translate(),
+  connect(
+    undefined,
+    mapDispatchToProps
+  )
+)(ProgramNotificationsGeneral);

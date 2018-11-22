@@ -1,6 +1,7 @@
 import "shared/components/details/details-description-section/details-description/details-description.scss";
 
 import { GVButton } from "gv-react-components";
+import moment from "moment";
 import React, { Fragment, PureComponent } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -10,12 +11,12 @@ import DetailsFavorite from "shared/components/details/details-description-secti
 import DetailsNotification from "shared/components/details/details-description-section/details-description/details-notificaton";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
 import {
   composeFundNotificationsUrl,
   composeManagerDetailsUrl
 } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
-import moment from "moment";
 
 class FundDetailsDescription extends PureComponent {
   state = {
@@ -147,26 +148,28 @@ class FundDetailsDescription extends PureComponent {
               {fundDescription.description}
             </div>
             <div className="details-description__short-statistic">
-              <div className="details-description__short-statistic-item">
-                <span className="details-description__short-statistic-subheading">
-                  {t("fund-details-page.description.entryFee")}
-                </span>
+              <StatisticItem
+                label={t("fund-details-page.description.entryFee")}
+                className={"details-description__short-statistic-item"}
+                accent
+              >
                 <NumberFormat
                   value={formatValue(fundDescription.entryFee)}
                   displayType="text"
                   suffix=" %"
                 />
-              </div>
-              <div className="details-description__short-statistic-item">
-                <span className="details-description__short-statistic-subheading">
-                  Exit fee
-                </span>
+              </StatisticItem>
+              <StatisticItem
+                label={t("fund-details-page.description.exitFee")}
+                className={"details-description__short-statistic-item"}
+                accent
+              >
                 <NumberFormat
                   value={formatValue(fundDescription.exitFee)}
                   displayType="text"
                   suffix=" %"
                 />
-              </div>
+              </StatisticItem>
             </div>
             {(isOwnProgram || canInvest) && (
               <Fragment>

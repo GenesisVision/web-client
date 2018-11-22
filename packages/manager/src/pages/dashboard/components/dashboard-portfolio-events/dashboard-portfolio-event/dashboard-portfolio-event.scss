@@ -1,6 +1,6 @@
-@import "shared/styles/_colors.scss";
-@import "shared/styles/_breakpoint.scss";
-@import "shared/styles/_sizes.scss";
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
 
 .portfolio-event {
   display: flex;
@@ -18,16 +18,31 @@
 
   &__values-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
-    @include media-breakpoint-landscape-phone() {
+    white-space: normal;
+    line-height: 1.69;
+    padding-bottom: $padding-xxsmall;
+    @include media-breakpoint-phone() {
+      flex-direction: row;
+    }
+    @include media-breakpoint-tablet() {
       flex-direction: column;
     }
   }
 
   &__info {
     flex-grow: 3.5;
-    margin-left: 24px;
+    margin-left: 12px;
+    @include media-breakpoint-landscape-phone() {
+      margin-left: 24px;
+    }
+    & .details-statistics-item {
+      padding: 0;
+      &__value {
+        word-break: break-word;
+      }
+    }
   }
 
   &__time {
@@ -39,7 +54,7 @@
   &__description {
     letter-spacing: 0.2px;
     margin-bottom: 0px;
-    font-size: 13px;
+    font-size: $font-size-common;
     color: $text-accent-color;
     @include media-breakpoint-landscape-phone() {
       line-height: 1.69;
@@ -61,8 +76,11 @@
 
   &__value {
     letter-spacing: 0.4px;
-    font-size: 13px;
+    font-size: $font-size-common-mobile;
     font-weight: 600;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-common;
+    }
   }
 
   &__art {

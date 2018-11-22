@@ -1,5 +1,5 @@
-@import "shared/styles/_sizes.scss";
-@import "shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
+@import "~shared/styles/_breakpoint.scss";
 
 .dashboard-funds {
   &__cell {
@@ -54,28 +54,28 @@
     justify-content: flex-start;
     align-items: center;
     .gv-btn {
-      font-size: $font-size-middle-mobile;
+      font-size: $font-size-paragraph-mobile;
       padding: 0;
     }
     .program-avatar {
       width: 20px;
       margin: 0;
-      padding-right: $padding-mini-mobile;
+      padding-right: $padding-xxsmall-mobile;
       @include media-breakpoint-landscape-phone() {
         width: 40px;
-        padding-right: $padding-mini;
+        padding-right: $padding-xxsmall;
       }
     }
     @include media-breakpoint-landscape-phone() {
       .gv-btn {
-        font-size: $font-size-middle;
+        font-size: $font-size-paragraph;
       }
     }
   }
   &--title {
     min-width: 50px;
     div {
-      padding: $padding-small/10;
+      padding: $padding-xsmall/10;
     }
   }
   &--bottom {

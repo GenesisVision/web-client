@@ -1,9 +1,9 @@
-import NotFoundPage from "shared/components/not-found/not-found.routes";
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-
+import NotFoundPage from "shared/components/not-found/not-found.routes";
 import { SLUG_URL_REGEXP } from "shared/utils/constants";
 import replaceParams from "shared/utils/replace-params";
+
 import PrivateRoute from "../private-route";
 import ProgramDetailsPage from "./program-details/program-details.page";
 import ProgramsFacetPage from "./programs-facet/programs-facet.page";

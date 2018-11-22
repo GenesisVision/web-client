@@ -1,4 +1,4 @@
-@import "shared/styles/_sizes.scss";
+@import "~shared/styles/_sizes.scss";
 
 .invest-popup {
   &__currency {
@@ -21,7 +21,7 @@
 
 .edit-program {
   &__logo-section {
-    margin-bottom: $padding-middle;
+    margin-bottom: $padding-small;
   }
   &__description {
     display: flex;

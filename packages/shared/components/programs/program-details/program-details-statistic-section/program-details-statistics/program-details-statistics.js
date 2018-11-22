@@ -1,14 +1,14 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.scss";
 
-import { ChartPeriodType } from "shared/components/chart/chart-period/chart-period.helpers";
-import ProgramPeriodLine from "shared/components/program-period/program-period-line/program-period-line";
-import Surface from "shared/components/surface/surface";
 import moment from "moment";
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { ChartPeriodType } from "shared/components/chart/chart-period/chart-period.helpers";
+import ProgramPeriodLine from "shared/components/program-period/program-period-line/program-period-line";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
+import Surface from "shared/components/surface/surface";
 import { formatValue } from "shared/utils/formatter";
-import DetailsStatisticItem from "../../../../details-statistic-item/details-statistic-item";
 
 const ProgramDetailsStatistics = ({
   t,
@@ -29,7 +29,7 @@ const ProgramDetailsStatistics = ({
         {t("program-details-page.statistics.current")}
       </div>
       <div className="details-statistics__particular-information">
-        <DetailsStatisticItem
+        <StatisticItem
           label={t("program-details-page.statistics.balance")}
           accent
         >
@@ -39,16 +39,14 @@ const ProgramDetailsStatistics = ({
             displayType="text"
             suffix={` ${profitChart.programCurrency}`}
           />
-        </DetailsStatisticItem>
-        <DetailsStatisticItem
-          label={t("program-details-page.statistics.investors")}
-        >
+        </StatisticItem>
+        <StatisticItem label={t("program-details-page.statistics.investors")}>
           <NumberFormat
             value={statistic.investors}
             thousandSeparator={" "}
             displayType="text"
           />
-        </DetailsStatisticItem>
+        </StatisticItem>
         <div className="details-statistics__period">
           <span className="details-statistics__label">
             {t("program-details-page.statistics.period")}
@@ -67,7 +65,7 @@ const ProgramDetailsStatistics = ({
 
       <div className="details-statistics__particular-information">
         <div className="details-statistics__column">
-          <DetailsStatisticItem
+          <StatisticItem
             label={t("program-details-page.statistics.trades")}
             half
           >
@@ -76,8 +74,8 @@ const ProgramDetailsStatistics = ({
               thousandSeparator={" "}
               displayType="text"
             />
-          </DetailsStatisticItem>
-          <DetailsStatisticItem
+          </StatisticItem>
+          <StatisticItem
             label={t("program-details-page.statistics.profit-factor")}
             half
           >
@@ -89,8 +87,8 @@ const ProgramDetailsStatistics = ({
               }
               displayType="text"
             />
-          </DetailsStatisticItem>
-          <DetailsStatisticItem
+          </StatisticItem>
+          <StatisticItem
             label={t("program-details-page.statistics.max-drawdown")}
             half
           >
@@ -103,11 +101,11 @@ const ProgramDetailsStatistics = ({
               displayType="text"
               suffix="%"
             />
-          </DetailsStatisticItem>
+          </StatisticItem>
         </div>
 
         <div className="details-statistics__column">
-          <DetailsStatisticItem
+          <StatisticItem
             label={t("program-details-page.statistics.success-trades")}
             half
           >
@@ -120,8 +118,8 @@ const ProgramDetailsStatistics = ({
               displayType="text"
               suffix="%"
             />
-          </DetailsStatisticItem>
-          <DetailsStatisticItem
+          </StatisticItem>
+          <StatisticItem
             label={t("program-details-page.statistics.sharpe-ratio")}
             half
           >
@@ -133,8 +131,8 @@ const ProgramDetailsStatistics = ({
               }
               displayType="text"
             />
-          </DetailsStatisticItem>
-          <DetailsStatisticItem
+          </StatisticItem>
+          <StatisticItem
             label={t("program-details-page.statistics.sortino-ratio")}
             half
           >
@@ -146,7 +144,7 @@ const ProgramDetailsStatistics = ({
               }
               displayType="text"
             />
-          </DetailsStatisticItem>
+          </StatisticItem>
         </div>
       </div>
     </Surface>

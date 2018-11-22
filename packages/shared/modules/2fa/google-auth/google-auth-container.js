@@ -1,7 +1,5 @@
 import "./google-auth.scss";
 
-import GoogleAuthCodes from "../google-auth/google-auth-codes";
-import GoogleAuthStepsContainer from "../google-auth/google-auth-steps/google-auth-steps";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
@@ -9,6 +7,8 @@ import { bindActionCreators, compose } from "redux";
 import { authApiProxy } from "shared/services/api-client/auth-api";
 import authService from "shared/services/auth-service";
 
+import GoogleAuthCodes from "../google-auth/google-auth-codes";
+import GoogleAuthStepsContainer from "../google-auth/google-auth-steps/google-auth-steps";
 import * as twoFactorServices from "../services/2fa.service.js";
 
 class GoogleAuthContainer extends Component {

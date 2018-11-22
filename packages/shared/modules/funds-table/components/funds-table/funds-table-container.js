@@ -2,10 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { bindActionCreators, compose } from "redux";
-
-import { toggleFavoriteFundDispatchable } from "shared/modules/favorite-asset/services/favorite-fund.service";
 import FundsTable from "shared/components/funds-table/funds-table";
 import Surface from "shared/components/surface/surface";
+import { toggleFavoriteFundDispatchable } from "shared/modules/favorite-asset/services/favorite-fund.service";
 
 import * as fundsService from "../../services/funds-table.service";
 

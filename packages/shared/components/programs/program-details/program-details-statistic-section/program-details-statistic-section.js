@@ -1,7 +1,6 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-statistic-section.scss";
 
 import React, { PureComponent } from "react";
-
 import { DEFAULT_PERIOD } from "shared/components/chart/chart-period/chart-period.helpers";
 
 import ProgramDetailsChartSection from "./program-details-chart-section/program-details-chart-section";

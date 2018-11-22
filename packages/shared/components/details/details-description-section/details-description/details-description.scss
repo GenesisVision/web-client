@@ -47,7 +47,7 @@
   &__avatar {
     cursor: pointer;
     width: 100%;
-    padding: $padding-small-mobile 0 $padding-small;
+    padding: $padding-xsmall-mobile 0 $padding-xsmall;
     .program-avatar {
       justify-content: flex-start;
       width: $avatar-size-mobile;
@@ -67,7 +67,7 @@
   }
 
   &__left {
-    padding-right: $padding-small-mobile;
+    padding-right: $padding-xsmall-mobile;
     @include media-breakpoint-landscape-phone() {
       padding-right: 0;
     }
@@ -77,7 +77,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: $padding-large-mobile;
+    padding: $padding-big-mobile;
     @include media-breakpoint-phone() {
       flex-direction: column;
       justify-content: flex-start;
@@ -86,7 +86,7 @@
 
     & .gv-btn--text {
       padding: 0;
-      font-size: 13px;
+      font-size: $font-size-common;
       letter-spacing: 0.3px;
       font-weight: 600;
     }
@@ -100,46 +100,48 @@
     width: 100%;
     padding-left: 0;
     @include media-breakpoint-phone() {
-      padding-left: $padding-large-mobile;
+      padding-left: $padding-big-mobile;
     }
   }
 
   &__heading {
-    font-size: $font-size-title-mobile;
+    font-size: $font-size-h1-mobile;
     font-weight: 600;
     color: $text-light-color;
-    padding-bottom: $padding-mini-mobile;
+    padding-bottom: $padding-xxsmall-mobile;
   }
 
   &__author-btn {
     padding: 0;
-    font-size: 13px;
+    font-size: $font-size-common;
     letter-spacing: 0.19px;
     font-weight: bold;
   }
 
   &__info {
-    padding-top: $padding-description-mobile;
+    padding-top: $padding-xxlarge-mobile;
     @include media-breakpoint-landscape-phone() {
-      padding-top: $padding-description;
+      padding-top: $padding-xxlarge;
     }
   }
 
   &__invest-button-container {
-    padding-bottom: $padding-middle-mobile;
-    & > button, .details-description__reallocate-container {
-      margin-top: $padding-middle-mobile;
+    padding-bottom: $padding-small-mobile;
+    & > button,
+    .details-description__reallocate-container {
+      margin-top: $padding-small-mobile;
     }
     & button:not(:last-child) {
-      margin-right: $padding-middle-mobile;
+      margin-right: $padding-small-mobile;
     }
     @include media-breakpoint-landscape-phone() {
-      padding-bottom: $padding-middle;
-      & > button, .details-description__reallocate-container {
-        margin-top: $padding-middle;
+      padding-bottom: $padding-small;
+      & > button,
+      .details-description__reallocate-container {
+        margin-top: $padding-small;
       }
       & button:not(:last-child) {
-        margin-right: $padding-middle;
+        margin-right: $padding-small;
       }
     }
   }
@@ -158,34 +160,34 @@
   }
 
   &__subheading {
-    font-size: $font-size-large-mobile;
+    font-size: $font-size-h4-mobile;
     font-weight: bold;
-    padding-bottom: $padding-middle-mobile;
+    padding-bottom: $padding-small-mobile;
     letter-spacing: 0.21px;
   }
 
   &__info-block {
-    padding-top: $padding-very-large-mobile;
+    padding-top: $padding-xlarge-mobile;
     @include media-breakpoint-landscape-phone() {
-      padding-top: $padding-very-large;
+      padding-top: $padding-xlarge;
     }
   }
 
   &__short-statistic-subheading {
-    margin-bottom: $padding-small-mobile/2;
+    margin-bottom: $padding-xsmall-mobile/2;
   }
 
   &__text {
-    font-size: $font-size-middle-mobile;
-    line-height: $font-size-middle-mobile * 2;
+    font-size: $font-size-paragraph-mobile;
+    line-height: $font-size-paragraph-mobile * 2;
     letter-spacing: 0.2px;
     text-align: left;
     color: $text-color;
-    padding-bottom: $padding-middle;
+    padding-bottom: $padding-small;
   }
 
   &__invest-btn {
-    font-size: $font-size-middle-mobile;
+    font-size: $font-size-paragraph-mobile;
     letter-spacing: 0.3px;
     font-weight: 600;
     box-sizing: border-box;
@@ -196,23 +198,23 @@
   &__reinvest {
     letter-spacing: 0.3px;
     font-weight: 600;
-    padding-left: $padding-middle-mobile;
+    padding-left: $padding-small-mobile;
     .gv-switch-wrapper {
       display: inline-flex;
       align-items: center;
-      padding-top: $padding-middle-mobile;
+      padding-top: $padding-small-mobile;
     }
     .gv-switch__label {
       color: $text-accent-color;
-      font-size: $font-size-middle-mobile;
-      line-height: $font-size-middle-mobile;
+      font-size: $font-size-paragraph-mobile;
+      line-height: $font-size-paragraph-mobile;
       font-weight: 600;
     }
     @include media-breakpoint-landscape-phone() {
-      padding-left: $padding-middle;
+      padding-left: $padding-small;
       .gv-switch__label {
-        line-height: $font-size-middle;
-        font-size: $font-size-middle;
+        line-height: $font-size-paragraph;
+        font-size: $font-size-paragraph;
       }
     }
   }
@@ -222,12 +224,7 @@
     justify-content: flex-start;
 
     &-item {
-      margin-right: $padding-middle-mobile;
-      letter-spacing: 0.44px;
-      font-size: $font-size-middle-mobile;
-      display: flex;
-      flex-direction: column;
-      font-weight: 600;
+      margin-right: $padding-small-mobile;
       &:last-child {
         margin-right: 0;
       }
@@ -235,7 +232,7 @@
 
     &-subheading {
       color: $label-color;
-      font-size: $font-size-middle-mobile;
+      font-size: $font-size-paragraph-mobile;
       letter-spacing: 0.43px;
       font-weight: normal;
     }
@@ -266,7 +263,7 @@
     }
     &-icon,
     &-text {
-      padding: $padding-small-mobile $padding-small-mobile/2;
+      padding: $padding-xsmall-mobile $padding-xsmall-mobile/2;
     }
     &-text {
       font-size: $font-size-small-mobile;
@@ -307,41 +304,41 @@
       }
     }
     &__main {
-      padding-left: $padding-large;
+      padding-left: $padding-big;
     }
     &__heading {
-      font-size: $font-size-title;
-      padding-bottom: $padding-mini;
+      font-size: $font-size-h1;
+      padding-bottom: $padding-xxsmall;
     }
     &__subheading {
-      font-size: $font-size-large;
-      padding-bottom: $padding-middle;
+      font-size: $font-size-h4;
+      padding-bottom: $padding-small;
     }
     &__text {
-      font-size: $font-size-middle;
-      line-height: $font-size-middle * 2;
+      font-size: $font-size-paragraph;
+      line-height: $font-size-paragraph * 2;
     }
     &__short-statistic-subheading {
-      margin-bottom: $padding-small/2;
+      margin-bottom: $padding-xsmall/2;
     }
     &__invest-btn {
-      font-size: $font-size-middle;
+      font-size: $font-size-paragraph;
       width: $btn-width;
       height: $btn-height;
     }
     &__short-statistic {
       &-item {
-        margin-right: $padding-middle;
-        font-size: $font-size-middle;
+        margin-right: $padding-small;
+        font-size: $font-size-paragraph;
       }
       &-subheading {
-        font-size: $font-size-middle;
+        font-size: $font-size-paragraph;
       }
     }
     &__control {
       &-icon,
       &-text {
-        padding: $padding-small/2 $padding-small;
+        padding: $padding-xsmall/2 $padding-xsmall;
         white-space: nowrap;
       }
       &-icon {

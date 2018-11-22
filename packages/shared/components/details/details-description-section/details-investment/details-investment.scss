@@ -1,6 +1,6 @@
-@import "shared/styles/_colors.scss";
-@import "shared/styles/_breakpoint.scss";
-@import "shared/styles/_sizes.scss";
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
 
 $withdraw-button-height: 50px;
 $withdraw-button-width: 150px;
@@ -11,29 +11,30 @@ $withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
   display: inline-block;
   width: 100%;
   max-width: 500px;
-  &, & div {
+  &,
+  & div {
     box-sizing: border-box;
   }
-  padding: $padding-middle-mobile;
-  margin-top: $padding-middle-mobile;
+  padding: $padding-small-mobile;
+  margin-top: $padding-small-mobile;
   margin-left: 0;
   @include media-breakpoint-phone() {
-    margin-left: -$padding-middle-mobile;
+    margin-left: -$padding-small-mobile;
   }
   @include media-breakpoint-landscape-phone() {
-    padding: $padding-middle;
-    margin-top: $padding-middle;
-    margin-left: -$padding-middle;
+    padding: $padding-small;
+    margin-top: $padding-small;
+    margin-left: -$padding-small;
   }
 
   &__heading {
-    font-size: $font-size-subtitle-mobile;
+    font-size: $font-size-h3-mobile;
     letter-spacing: 0.21px;
-    padding-bottom: $padding-middle-mobile;
+    padding-bottom: $padding-small-mobile;
     font-weight: 600;
     @include media-breakpoint-landscape-phone() {
-      font-size: $font-size-subtitle;
-      padding-bottom: $padding-middle;
+      font-size: $font-size-h3;
+      padding-bottom: $padding-small;
     }
   }
 
@@ -49,15 +50,15 @@ $withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
     &-item {
       white-space: nowrap;
       letter-spacing: 0.44px;
-      font-size: $font-size-middle-mobile;
+      font-size: $font-size-paragraph-mobile;
       display: flex;
       flex-direction: column;
-      margin-right: $padding-large-mobile;
+      margin-right: $padding-big-mobile;
       margin-bottom: $font-size-small-mobile;
       font-weight: 600;
       @include media-breakpoint-landscape-phone() {
-        font-size: $font-size-middle;
-        margin-right: $padding-large;
+        font-size: $font-size-paragraph;
+        margin-right: $padding-big;
         margin-bottom: $font-size-small;
       }
     }
@@ -94,12 +95,12 @@ $withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
 
   &__withdraw-notice {
     color: $short-statistic-notice-color;
-    line-height: $font-size-subtitle-mobile;
+    line-height: $font-size-h3-mobile;
     font-size: $font-size-small-mobile;
     letter-spacing: 0.15px;
     margin-left: 5%;
     @include media-breakpoint-landscape-phone() {
-      line-height: $font-size-subtitle;
+      line-height: $font-size-h3;
       font-size: $font-size-small;
     }
   }

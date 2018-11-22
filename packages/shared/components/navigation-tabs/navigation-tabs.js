@@ -2,7 +2,6 @@ import { GVTab, GVTabs } from "gv-react-components";
 import React from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
-
 import replaceParams from "shared/utils/replace-params";
 
 const NavigationTabs = ({

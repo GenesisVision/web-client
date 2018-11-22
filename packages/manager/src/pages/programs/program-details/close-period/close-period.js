@@ -1,6 +1,6 @@
-import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
+import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 
 class ClosePeriod extends Component {
   handleApplyClick = () => {

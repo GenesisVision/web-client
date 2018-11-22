@@ -1,9 +1,9 @@
 import "./close-program.scss";
 
-import Dialog from "shared/components/dialog/dialog";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import Dialog from "shared/components/dialog/dialog";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
 import { closeProgram } from "../services/program-details.service";
@@ -74,6 +74,7 @@ const mapDispatchToProps = dispatch => ({
   )
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  CloseProgramContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CloseProgramContainer);

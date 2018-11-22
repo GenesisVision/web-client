@@ -1,9 +1,7 @@
 import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
 import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import { FUNDS_ROUTE } from "pages/funds/funds.routes";
-import { PROFILE_ROUTE, SETTINGS_ROUTE } from "shared/components/profile/profile.constants";
 import { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
-import { WALLET_PAGE_ROUTE } from "pages/wallet/wallet-page";
 import PropTypes from "prop-types";
 import React from "react";
 import { translate } from "react-i18next";
@@ -20,7 +18,12 @@ import { WalletIcon } from "shared/components/icon/wallet-icon";
 import NavigationItem, {
   NavigationButton
 } from "shared/components/navigation/navigation-item";
+import {
+  PROFILE_ROUTE,
+  SETTINGS_ROUTE
+} from "shared/components/profile/profile.constants";
 import Sidebar from "shared/components/sidebar/sidebar";
+import { WALLET_PAGE_ROUTE } from "shared/components/wallet/wallet-page";
 
 const NavigationMobile = ({
   t,

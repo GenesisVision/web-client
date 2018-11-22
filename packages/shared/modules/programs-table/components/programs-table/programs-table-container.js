@@ -1,14 +1,14 @@
-import Surface from "shared/components/surface/surface";
 import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { push } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
-
-import { toggleFavoriteProgramDispatchable } from "shared/modules/favorite-asset/services/favorite-program.service";
-import * as programsService from "../../services/programs-table.service";
 import ProgramsTable from "shared/components/programs-table/programs-table";
+import Surface from "shared/components/surface/surface";
+import { toggleFavoriteProgramDispatchable } from "shared/modules/favorite-asset/services/favorite-program.service";
+
+import * as programsService from "../../services/programs-table.service";
 
 class ProgramsContainer extends Component {
   componentDidMount() {

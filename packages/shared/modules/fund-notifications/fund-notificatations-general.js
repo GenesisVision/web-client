@@ -1,14 +1,15 @@
-import GeneralNotification from "shared/components/general-notification/general-notification";
-import {
-  addFundNotificationService,
-  removeFundNotificationService
-} from "./services/fund-notifications.services";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
+import GeneralNotification from "shared/components/general-notification/general-notification";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
+
+import {
+  addFundNotificationService,
+  removeFundNotificationService
+} from "./services/fund-notifications.services";
 
 class FundNotificationsGeneral extends Component {
   success = text => {

@@ -1,8 +1,8 @@
-import NotFoundPage from "shared/components/not-found/not-found.routes";
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { bindActionCreators, compose } from "redux";
+import NotFoundPage from "shared/components/not-found/not-found.routes";
 
 class FacetContainer extends Component {
   state = {

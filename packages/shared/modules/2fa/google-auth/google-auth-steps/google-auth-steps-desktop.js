@@ -1,8 +1,9 @@
+import React from "react";
+import { translate } from "react-i18next";
+
 import GoogleActivateStep from "./google-auth-activate-step";
 import GoogleCodeStep from "./google-auth-code-step";
 import GoogleDownloadStep from "./google-auth-download-step";
-import React from "react";
-import { translate } from "react-i18next";
 
 const GoogleAuth = ({
   authenticatorUri,

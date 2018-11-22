@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { composeFacetUrl } from "shared/utils/compose-url";
 import FacetCards from "./facet-cards";
 import FacetCardsStub from "./facet-cards-stub";
 
 class FacetCardsContainer extends Component {
   render() {
-    const { isPending, facets, title } = this.props;
+    const { isPending, facets, title, composeFacetUrl } = this.props;
     if (!facets || isPending) return <FacetCardsStub />;
     return (
       <FacetCards

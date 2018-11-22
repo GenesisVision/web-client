@@ -1,7 +1,6 @@
-import { toggleFavoriteProgram } from "shared/modules/favorite-asset/services/favorite-program.service";
 import React, { Fragment, PureComponent } from "react";
-
 import ProgramDetailsDescription from "shared/components/programs/program-details/program-details-description/program-details-description";
+import { toggleFavoriteProgram } from "shared/modules/favorite-asset/services/favorite-program.service";
 
 const composeInvestmentData = programDetails => {
   const { statistic, personalProgramDetails } = programDetails;

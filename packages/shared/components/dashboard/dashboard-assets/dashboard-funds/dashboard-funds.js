@@ -1,20 +1,19 @@
 import "./dashboard-funds.scss";
 
+import { GVButton } from "gv-react-components";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
-import { GVButton } from "gv-react-components";
-
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
 import Profitability from "shared/components/profitability/profitability";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
-import TableCell from "shared/components/table/components/table-cell";
-import TableRow from "shared/components/table/components/table-row";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import TableCell from "shared/components/table/components/table-cell";
 import TableContainer from "shared/components/table/components/table-container";
+import TableRow from "shared/components/table/components/table-row";
 import { composeFundsDetailsUrl } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
 

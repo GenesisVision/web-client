@@ -1,14 +1,15 @@
-import GeneralNotification from "shared/components/general-notification/general-notification";
-import {
-  addNotificationSettingService,
-  removeNotificationSettingService
-} from "./services/notification-settings.services";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
+import GeneralNotification from "shared/components/general-notification/general-notification";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
+
+import {
+  addNotificationSettingService,
+  removeNotificationSettingService
+} from "./services/notification-settings.services";
 
 class NotificationGeneral extends Component {
   success = text => {

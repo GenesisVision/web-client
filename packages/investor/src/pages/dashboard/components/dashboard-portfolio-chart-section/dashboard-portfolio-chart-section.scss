@@ -1,6 +1,6 @@
-@import "shared/styles/_colors.scss";
-@import "shared/styles/_breakpoint.scss";
-@import "shared/styles/_sizes.scss";
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
 
 .dashboard-portfolio-chart-section {
   & div {
@@ -8,16 +8,16 @@
   }
   flex: 1;
   box-sizing: border-box;
-  padding: $padding-middle-mobile 0;
-  width: 300px;
+  padding: $padding-small-mobile 0;
+  width: 100px;
   @include media-breakpoint-landscape-phone() {
-    padding: $padding-middle 0;
+    padding: $padding-small 0;
     min-height: 683px;
   }
   & .chart-period {
-    padding: 0 $padding-middle-mobile;
+    padding: 0 $padding-small-mobile;
     @include media-breakpoint-landscape-phone() {
-      padding: 0 $padding-middle;
+      padding: 0 $padding-small;
     }
   }
 
@@ -27,32 +27,36 @@
   }
 
   &__heading {
-    font-size: $font-size-subtitle-mobile;
+    font-size: $font-size-h3-mobile;
     font-weight: 600;
     font-style: normal;
     font-stretch: normal;
     line-height: normal;
     letter-spacing: 0.2px;
     margin-bottom: 20px;
-    padding: 0 $padding-middle-mobile;
+    padding: 0 $padding-small-mobile;
     @include media-breakpoint-landscape-phone() {
-      font-size: $font-size-subtitle;
-      padding: 0 $padding-middle;
+      font-size: $font-size-h3;
+      padding: 0 $padding-small;
     }
   }
 
   &__actions {
     float: right;
-    padding: 0 $padding-middle-mobile;
+    padding: 0 $padding-small-mobile;
     @include media-breakpoint-landscape-phone() {
-      padding: 0 $padding-middle;
+      padding: 0 $padding-small;
     }
   }
 
   .dashboard-portfolio-chart-stat {
-    padding: 0 $padding-middle-mobile;
+    padding: 0 $padding-small-mobile;
     @include media-breakpoint-landscape-phone() {
-      padding: 0 $padding-middle;
+      padding: 0 $padding-small;
+    }
+    & > div {
+      display: inline-flex;
+      margin-right: 40px;
     }
     &__statistic-item {
       margin-top: 15px;
@@ -60,15 +64,25 @@
     &__adornment {
       margin-left: 10px;
     }
+    &__value {
+      display: flex;
+      align-items: center;
+      font-size: $font-size-h2-mobile;
+      letter-spacing: 0.3px;
+      @include media-breakpoint-landscape-phone() {
+        font-size: $font-size-h2;
+        letter-spacing: 0.4px;
+      }
+    }
   }
 
   &__chart {
     height: 380px;
     width: 100%;
     margin-top: 20px;
-    padding: 0 $padding-middle-mobile;
+    padding: 0 $padding-small-mobile;
     @include media-breakpoint-landscape-phone() {
-      padding: 0 $padding-middle;
+      padding: 0 $padding-small;
     }
     .assets-tooltip {
       .gv-tooltip__heading,
@@ -112,7 +126,7 @@
         }
 
         &__asset-value {
-          font-size: 13px;
+          font-size: $font-size-common;
           font-weight: 600;
           letter-spacing: 0.3px;
           color: $text-dark-color;
@@ -135,7 +149,7 @@
         }
 
         &__change-value {
-          font-size: 13px;
+          font-size: $font-size-common;
           font-weight: normal;
           letter-spacing: 0.3px;
           color: $text-dark-color;
@@ -152,11 +166,11 @@
     height: 100%;
     &__title {
       font-weight: 600;
-      font-size: $font-size-title-mobile;
-      padding: $padding-middle-mobile;
+      font-size: $font-size-h1-mobile;
+      padding: $padding-small-mobile;
       @include media-breakpoint-landscape-phone() {
-        font-size: $font-size-title;
-        padding: $padding-middle;
+        font-size: $font-size-h1;
+        padding: $padding-small;
       }
     }
     &__text {
@@ -164,16 +178,16 @@
       font-weight: 400;
       opacity: 0.4;
       font-size: $font-size-small-mobile;
-      padding: $padding-small-mobile;
+      padding: $padding-xsmall-mobile;
       @include media-breakpoint-landscape-phone() {
         font-size: $font-size-small;
-        padding: $padding-small;
+        padding: $padding-xsmall;
       }
     }
     &__deposit {
-      padding: $padding-middle-mobile;
+      padding: $padding-small-mobile;
       @include media-breakpoint-landscape-phone() {
-        padding: $padding-middle;
+        padding: $padding-small;
       }
     }
     &__programs {

@@ -3,12 +3,13 @@ import { GVButton } from "gv-react-components";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { compose } from "redux";
-import CreateFundSettingsAssetsComponent from "../../../pages/create-fund/components/create-fund-settings/create-fund-settings-assets-block/create-fund-settings-assets-block";
-import CreateFundSettingsAddAsset from "../../../pages/create-fund/components/create-fund-settings/create-fund-settings-add-asset/create-fund-settings-add-asset";
-import { array, number, object } from "yup";
 import ErrorMessage, {
   OVER
 } from "shared/components/error-message/error-message";
+import { array, number, object } from "yup";
+
+import CreateFundSettingsAddAsset from "../../../pages/create-fund/components/create-fund-settings/create-fund-settings-add-asset/create-fund-settings-add-asset";
+import CreateFundSettingsAssetsComponent from "../../../pages/create-fund/components/create-fund-settings/create-fund-settings-assets-block/create-fund-settings-assets-block";
 
 class ReallocateForm extends Component {
   state = {

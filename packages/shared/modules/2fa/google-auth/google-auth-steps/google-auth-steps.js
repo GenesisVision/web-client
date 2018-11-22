@@ -1,8 +1,9 @@
-import GoogleAuthDesktop from "./google-auth-steps-desktop";
-import GoogleAuthMobile from "./google-auth-steps-mobile";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { isTablet } from "shared/utils/breakpoints";
+
+import GoogleAuthDesktop from "./google-auth-steps-desktop";
+import GoogleAuthMobile from "./google-auth-steps-mobile";
 
 class GoogleAuthSteps extends Component {
   render() {

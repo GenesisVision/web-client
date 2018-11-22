@@ -1,15 +1,15 @@
 import "./settings.scss";
 
 import { GVButton } from "gv-react-components";
-import TwoFactorAuthContainer from "shared/modules/2fa/2fa-container";
-import ProfileLayout from "shared/components/profile/profile-layout";
-import { PASSWORD_ROUTE } from "shared/components/profile/profile.constants";
 import React from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
-
+import ProfileLayout from "shared/components/profile/profile-layout";
+import { PASSWORD_ROUTE } from "shared/components/profile/profile.constants";
 import LogoutButtonContainer from "shared/components/profile/settings/logout-button/logout-button-container";
 import ProfileImageContainer from "shared/components/profile/settings/profile-image/profile-image-container";
+import TwoFactorAuthContainer from "shared/modules/2fa/2fa-container";
+
 import * as profileSettingsService from "./services/profile-settings.service";
 
 const SettingsPage = ({ t }) => {

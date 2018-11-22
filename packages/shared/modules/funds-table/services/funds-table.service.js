@@ -1,6 +1,15 @@
+import {
+  FUNDS_FACET_ROUTE,
+  FUNDS_FAVORITES_TAB_NAME,
+  FUNDS_TAB_ROUTE
+} from "pages/funds/funds.routes";
 import qs from "qs";
 import { push } from "react-router-redux";
-
+import {
+  FUNDS_TABLE_COLUMNS,
+  FUNDS_TABLE_FILTERS,
+  SORTING_FILTER_VALUE
+} from "shared/components/funds-table/funds-table.constants";
 import { composeFilters } from "shared/components/table/helpers/filtering.helpers";
 import {
   calculateSkipAndTake,
@@ -9,18 +18,8 @@ import {
 import { getSortingColumnName } from "shared/components/table/helpers/sorting.helpers";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
-import {
-  FUNDS_TABLE_COLUMNS,
-  FUNDS_TABLE_FILTERS,
-  SORTING_FILTER_VALUE
-} from "shared/components/funds-table/funds-table.constants";
 
 import * as fundsTableActions from "../actions/funds-table.actions";
-import {
-  FUNDS_FACET_ROUTE,
-  FUNDS_FAVORITES_TAB_NAME,
-  FUNDS_TAB_ROUTE
-} from "pages/funds/funds.routes";
 
 const DEFAULT_ITEMS_ON_PAGE = 12;
 

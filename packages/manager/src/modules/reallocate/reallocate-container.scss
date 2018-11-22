@@ -3,25 +3,25 @@
 @import "~shared/styles/_sizes.scss";
 
 .reallocate-container {
-  padding: $padding-middle;
+  padding: $padding-small;
   @include media-breakpoint-landscape-phone() {
-    padding: $padding-middle;
+    padding: $padding-small;
   }
 
   &__header {
-    font-size: $font-size-subtitle-mobile;
+    font-size: $font-size-h3-mobile;
     font-weight: 500;
-    padding-bottom: $padding-mini-mobile;
+    padding-bottom: $padding-xxsmall-mobile;
     @include media-breakpoint-landscape-phone() {
-      font-size: $font-size-subtitle;
-      padding-bottom: $padding-mini;
+      font-size: $font-size-h3;
+      padding-bottom: $padding-xxsmall;
     }
   }
 
   &__buttons {
-    padding-top: $padding-middle-mobile;
+    padding-top: $padding-small-mobile;
     @include media-breakpoint-landscape-phone() {
-      padding-top: $padding-middle;
+      padding-top: $padding-small;
     }
   }
 
@@ -32,7 +32,7 @@
         background: rgba(255, 255, 255, 0.06);
       }
       &__remove-button {
-        border: solid 2px rgba(19, 30, 38, .6);
+        border: solid 2px rgba(19, 30, 38, 0.6);
       }
     }
   }

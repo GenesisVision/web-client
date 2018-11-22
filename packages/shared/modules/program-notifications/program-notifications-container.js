@@ -1,10 +1,10 @@
-import { fetchProgramNotificationsService } from "./services/program-notifications.services";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import ProgramNotifications from "./program-notifications";
+import { fetchProgramNotificationsService } from "./services/program-notifications.services";
 
 class ProgramNotificationsContainer extends Component {
   componentDidMount() {

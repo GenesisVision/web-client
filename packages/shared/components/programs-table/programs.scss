@@ -1,6 +1,6 @@
-@import "shared/styles/_colors.scss";
-@import "shared/styles/_breakpoint.scss";
-@import "shared/styles/_sizes.scss";
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
 
 $padding: 32px;
 $text-size: 13px;
@@ -37,8 +37,8 @@ $description-block-width: 250px;
   padding: $padding/2;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
   flex-wrap: wrap;
+  justify-content: space-between;
   &__card {
     margin-bottom: $padding/2;
     display: flex;
@@ -50,6 +50,7 @@ $description-block-width: 250px;
     padding: $padding 20px;
     border-radius: 8px;
     background-color: #212c34;
+    flex-grow: 1;
     & .program-avatar__level {
       border-color: #212c34 !important;
     }
@@ -80,8 +81,8 @@ $description-block-width: 250px;
   &__name {
     font-size: $text-size/1.5;
     color: $primary-color;
-    word-break: break-all;
     .gv-btn {
+      white-space: normal;
       padding: 0;
     }
   }
@@ -107,16 +108,12 @@ $description-block-width: 250px;
     align-items: flex-start;
   }
   &__table {
-    & table {
-      width: 100%;
-      th {
-        @include table-title;
-        font-weight: 300;
-      }
-      td {
-        font-size: $text-size/$multiplier;
-      }
-    }
+    display: flex;
+    justify-content: space-between;
+  }
+  &__table-column {
+    display: flex;
+    flex-direction: column;
   }
   .program-avatar {
     width: 40px;
@@ -145,6 +142,8 @@ $description-block-width: 250px;
     }
     &__chart {
       width: $chart-width;
+      flex-grow: 1;
+      margin-right: $padding;
     }
     &__balance {
       font-size: $text-size;
@@ -159,16 +158,47 @@ $description-block-width: 250px;
   }
   @include media-breakpoint-landscape-phone() {
     &__card {
-      width: $program-width;
+      min-width: $program-width;
+      width: calc(50% - #{$padding}/ 2);
       margin-right: $padding/2;
     }
     padding: $padding;
     padding-right: $padding - $padding/2;
   }
+  @include media-breakpoint-tablet() {
+    justify-content: flex-start;
+    &__card {
+      flex-grow: 0;
+    }
+  }
+  @include media-breakpoint-landscape-tablet() {
+    justify-content: flex-start;
+    &__card {
+      width: calc(33% - #{$padding}/ 2);
+    }
+    &__table {
+      &--title {
+        width: 45%;
+
+        &:first-child {
+          width: 30%;
+        }
+
+        &:nth-child(2) {
+          width: 25%;
+        }
+      }
+    }
+  }
+  @include media-breakpoint-desktop() {
+    &__card {
+      width: $program-width;
+    }
+  }
 }
 
 .programs-table__cell {
-  padding: $padding-small/2 $padding-small;
+  padding: $padding-xsmall/2 $padding-xsmall;
   &--avatar-title {
     display: flex;
     flex-direction: row;
@@ -181,7 +211,7 @@ $description-block-width: 250px;
   &--title {
     word-break: break-all;
     min-width: 100px;
-    max-width: 170px;
+    max-width: 1programs-cards70px;
     padding: 0;
     div {
       padding: $padding/10;

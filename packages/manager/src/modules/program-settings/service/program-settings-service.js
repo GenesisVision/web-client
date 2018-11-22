@@ -1,11 +1,11 @@
 import moment from "moment";
-
+import { PROGRAM_ROUTE } from "pages/programs/programs.routes";
 import { HOME_ROUTE } from "shared/components/app.constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import filesService from "shared/services/file-service";
 import history from "shared/utils/history";
 import replaceParams from "shared/utils/replace-params";
-import { PROGRAM_ROUTE } from "pages/programs/programs.routes";
+
 import programSettingsActions from "../actions/program-settings-actions";
 
 const fetchProgramSettings = programId => dispatch => {

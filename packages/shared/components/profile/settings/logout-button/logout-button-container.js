@@ -36,6 +36,10 @@ const mapDispatchToProps = (dispatch, props) => ({
   services: bindActionCreators(props.profileSettingsService, dispatch)
 });
 
-export default compose(translate(), connect(null, mapDispatchToProps))(
-  LogoutButtonContainer
-);
+export default compose(
+  translate(),
+  connect(
+    null,
+    mapDispatchToProps
+  )
+)(LogoutButtonContainer);

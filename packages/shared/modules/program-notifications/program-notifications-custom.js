@@ -1,15 +1,15 @@
-import Chip from "shared/components/chip/chip";
-import Dialog from "shared/components/dialog/dialog";
 import { GVButton } from "gv-react-components";
-import { addErrorMessage } from "shared/modules/program-notifications/actions/program-notifications.actions";
-import CustomNotification from "shared/modules/program-notifications/custom-notification";
-import { addProgramNotificationService } from "shared/modules/program-notifications/services/program-notifications.services";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
+import Chip from "shared/components/chip/chip";
+import Dialog from "shared/components/dialog/dialog";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
+import { addErrorMessage } from "shared/modules/program-notifications/actions/program-notifications.actions";
+import CustomNotification from "shared/modules/program-notifications/custom-notification";
+import { addProgramNotificationService } from "shared/modules/program-notifications/services/program-notifications.services";
 
 import ProgramNotificationCreateForm from "./program-notification-create-form";
 
@@ -90,5 +90,8 @@ const mapDispatchToProps = dispatch => ({
 
 export default compose(
   translate(),
-  connect(mapStateToProps, mapDispatchToProps)
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
 )(ProgramNotificationsCustom);

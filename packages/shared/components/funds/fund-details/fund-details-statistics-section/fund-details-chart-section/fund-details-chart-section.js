@@ -3,7 +3,6 @@ import "shared/components/details/details-description-section/details-statistic-
 import { GVTab, GVTabs } from "gv-react-components";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
-
 import Surface from "shared/components/surface/surface";
 
 import ProgramBalanceChartSection from "./fund-balance-chart-section/fund-balance-chart-section";

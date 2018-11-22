@@ -1,8 +1,9 @@
-@import "shared/styles/_colors.scss";
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_sizes.scss";
 
 .profile-image {
   &__requirements {
-    font-size: 13px;
+    font-size: $font-size-common;
     color: $label-color;
     letter-spacing: 0.2px;
     margin-bottom: 16px;

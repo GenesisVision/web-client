@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import { Fragment } from "react";
 import React from "react";
 import { translate } from "react-i18next";
+import NumberFormat from "react-number-format";
 import FormError from "shared/components/form/form-error/form-error";
 import { formatValue } from "shared/utils/formatter";
-import NumberFormat from "react-number-format";
 
 const WithdrawConfirmStep = props => {
   const {
