@@ -1,12 +1,12 @@
 import "./auth-layout.scss";
 
-import GvBrand from "shared/components/gv-brand/gv-brand";
-import GvLogo from "shared/components/gv-logo/gv-logo";
 import { HOME_ROUTE } from "pages/app/app.constants";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { NavLink } from "react-router-dom";
+import GvBrand from "shared/components/gv-brand/gv-brand";
+import GvLogo from "shared/components/gv-logo/gv-logo";
 
 const QUOTES_COUNT = 5;
 
@@ -50,7 +50,7 @@ class AuthLayout extends Component {
         </div>
         <div className="auth__right">
           <div className="auth__content">
-            {title && <h1 className="title-common">{title}</h1>}
+            {title && <h1>{title}</h1>}
             {children}
           </div>
           {Footer && (

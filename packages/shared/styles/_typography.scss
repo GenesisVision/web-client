@@ -4,6 +4,7 @@ h1 {
   @include font-size($font-size-h1);
   font-weight: 600;
   color: $text-light-color;
+  padding-bottom: $padding-small;
 }
 
 h2 {
@@ -19,23 +20,12 @@ h3 {
   color: $text-light-color;
 }
 
+h4 {
+  @include font-size($font-size-h3);
+  font-weight: 600;
+  color: $text-light-color;
+}
+
 p {
   @include font-size($font-size-paragraph);
-}
-
-.title-page {
-  @include padding-top($padding-medium);
-  @include padding-bottom($padding-small);
-
-  &--wallet {
-    @include padding-bottom($padding-medium);
-  }
-}
-
-.title-common {
-  padding-bottom: $padding-small;
-}
-
-.title-details {
-  @include padding-bottom($padding-xxsmall);
 }

@@ -15,7 +15,7 @@ const WalletBalance = ({
   currentCurrency
 }) => (
   <div className="wallet-balance">
-    <h1 className="title-page title-page--wallet">{t("wallet.title")}</h1>
+    <h1 className="app__title-page">{t("wallet.title")}</h1>
     <div className="wallet-balance__statistic">
       <StatisticItem
         label={t("wallet.total-balance")}

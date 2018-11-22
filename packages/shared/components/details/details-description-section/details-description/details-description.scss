@@ -104,13 +104,6 @@
     }
   }
 
-  &__heading {
-    font-size: $font-size-h1-mobile;
-    font-weight: 600;
-    color: $text-light-color;
-    padding-bottom: $padding-xxsmall-mobile;
-  }
-
   &__author-btn {
     padding: 0;
     font-size: $font-size-common;
@@ -305,10 +298,6 @@
     }
     &__main {
       padding-left: $padding-big;
-    }
-    &__heading {
-      font-size: $font-size-h1;
-      padding-bottom: $padding-xxsmall;
     }
     &__subheading {
       font-size: $font-size-h4;

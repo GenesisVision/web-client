@@ -112,7 +112,7 @@ class FundDetailsDescription extends PureComponent {
           </div>
         </div>
         <div className="details-description__main">
-          <h1 className="title-details">{fundDescription.title}</h1>
+          <h1 className="app__title-details">{fundDescription.title}</h1>
           <Link
             to={{
               pathname: composeManagerDetailsUrl(fundDescription.manager.url),
@@ -127,9 +127,9 @@ class FundDetailsDescription extends PureComponent {
             </GVButton>
           </Link>
           <div className="details-description__info-block">
-            <div className="details-description__subheading">
+            <h4 className="details-description__subheading">
               {t("fund-details-page.description.assets")}
-            </div>
+            </h4>
             <div>
               <FundAssetContainer
                 type={"large"}
@@ -139,9 +139,9 @@ class FundDetailsDescription extends PureComponent {
             </div>
           </div>
           <div className="details-description__info">
-            <div className="details-description__subheading">
+            <h4 className="details-description__subheading">
               {t("fund-details-page.description.strategy")}
-            </div>
+            </h4>
             <div className="details-description__text">
               {fundDescription.description}
             </div>

@@ -29,3 +29,12 @@ button {
   width: 0;
   height: 0;
 }
+
+.app__title-page {
+  @include padding-top($padding-medium);
+  @include padding-bottom($padding-small);
+}
+
+.app__title-details {
+  @include padding-bottom($padding-xxsmall);
+}

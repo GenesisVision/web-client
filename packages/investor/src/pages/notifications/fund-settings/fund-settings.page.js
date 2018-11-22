@@ -7,7 +7,7 @@ const FundNotificationPage = ({ t, match }) => {
   const { id } = match.params;
   return (
     <Page title={t("notifications.fund.title")}>
-      <h1 className="title-details">{t("notifications.fund.title")}</h1>
+      <h1 className="app__title-details">{t("notifications.fund.title")}</h1>
       <FundNotificationsContainer id={id} />
     </Page>
   );

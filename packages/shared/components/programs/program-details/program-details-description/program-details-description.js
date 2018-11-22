@@ -144,10 +144,10 @@ class ProgramDetailsDescription extends PureComponent {
           >
             <div className="popover-levels">
               <div className="popover-levels__block">
-                <div className="popover-levels__title">
+                <h4 className="popover-levels__title">
                   {t("program-details-page.popover.genesis-level")}{" "}
                   {programDescription.level}
-                </div>
+                </h4>
                 <div className="popover-levels__subtitle">
                   {t("program-details-page.popover.invest-limit")}
                 </div>
@@ -183,7 +183,7 @@ class ProgramDetailsDescription extends PureComponent {
           />
         </div>
         <div className="details-description__main">
-          <h1 className="title-details">{title}</h1>
+          <h1 className="app__title-details">{title}</h1>
           <Link
             to={{
               pathname: composeManagerDetailsUrl(
@@ -201,9 +201,9 @@ class ProgramDetailsDescription extends PureComponent {
           </Link>
 
           <div className="details-description__info">
-            <div className="details-description__subheading">
+            <h4 className="details-description__subheading">
               {t("program-details-page.description.strategy")}
-            </div>
+            </h4>
             <div className="details-description__text">
               {programDescription.description}
             </div>

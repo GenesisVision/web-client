@@ -9,7 +9,7 @@ import SignUpFormContainer from "./components/signup-form/signup-form-container"
 const SignUpPage = ({ t }) => {
   return (
     <div className="signup">
-      <h1 className="title-common">{t("auth.signup.title")}</h1>
+      <h1>{t("auth.signup.title")}</h1>
       <AuthTabs />
       <SignUpFormContainer />
     </div>
