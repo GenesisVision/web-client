@@ -1,4 +1,4 @@
-import "./details-statistic-item.scss";
+import "./statistic-item.scss";
 
 import classnames from "classnames";
 import PropTypes from "prop-types";
@@ -6,7 +6,7 @@ import React from "react";
 import { formatValue } from "../../utils/formatter";
 import NumberFormat from "react-number-format";
 
-const DetailsStatisticItem = ({
+const StatisticItem = ({
   large,
   big,
   small,
@@ -21,27 +21,27 @@ const DetailsStatisticItem = ({
   return (
     <div
       className={classnames(
-        "details-statistics-item",
+        "statistics-item",
         {
-          "details-statistics-item--half": half,
-          "details-statistics-item--small": small
+          "statistics-item--half": half,
+          "statistics-item--small": small
         },
         className
       )}
     >
-      <div className="details-statistics-item__label">{label}</div>
+      <div className="statistics-item__label">{label}</div>
       <div
-        className={classnames("details-statistics-item__value", {
-          "details-statistics-item__value--accent": accent,
-          "details-statistics-item__value--small": small,
-          "details-statistics-item__value--big": big,
-          "details-statistics-item__value--large": large
+        className={classnames("statistics-item__value", {
+          "statistics-item__value--accent": accent,
+          "statistics-item__value--small": small,
+          "statistics-item__value--big": big,
+          "statistics-item__value--large": large
         })}
       >
         {children}
       </div>
       {equivalent ? (
-        <div className="details-statistics-item__equivalent">
+        <div className="statistics-item__equivalent">
           {
             <NumberFormat
               value={formatValue(equivalent)}
@@ -56,11 +56,11 @@ const DetailsStatisticItem = ({
   );
 };
 
-DetailsStatisticItem.propTypes = {
+StatisticItem.propTypes = {
   label: PropTypes.string.isRequired,
   accent: PropTypes.bool,
   half: PropTypes.bool,
   className: PropTypes.string
 };
 
-export default DetailsStatisticItem;
+export default StatisticItem;
