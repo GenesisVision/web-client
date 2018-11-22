@@ -11,6 +11,7 @@ import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import { convertToCurrency } from "shared/utils/currency-converter";
 import { formatValue } from "shared/utils/formatter";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
 
 const WalletAddFundsForm = ({
   t,
@@ -63,28 +64,27 @@ const WalletAddFundsForm = ({
           allowNegative={false}
         />
         <div className="gv-text-field__wrapper">
-          <label className="gv-text-field__label gv-text-field__label--shrink">
-            {currency === "GVT"
-              ? t("wallet-add-funds.will-get-gvt")
-              : t("wallet-add-funds.will-get")}
-          </label>
-          <div className="gv-text-field wallet-add-funds-popup__will-get">
-            <div className="gv-text-field__input dialog-field__value">
-              <NumberFormat
-                value={formatValue(convertToCurrency(values.amount, rateToGVT))}
-                suffix=" GVT"
-                displayType="text"
-              />
-            </div>
-          </div>
+          <StatisticItem
+            big
+            label={
+              currency === "GVT"
+                ? t("wallet-add-funds.will-get-gvt")
+                : t("wallet-add-funds.will-get")
+            }
+          >
+            <NumberFormat
+              value={formatValue(convertToCurrency(values.amount, rateToGVT))}
+              suffix=" GVT"
+              displayType="text"
+            />
+          </StatisticItem>
         </div>
       </div>
       <div className="dialog__bottom wallet-add-funds-popup__bottom">
         <GVqr className="wallet-add-funds-popup__qr" value={address} />
-        <div className="wallet-add-funds-popup__title">
-          {t("wallet-add-funds.deposit-address")}
-        </div>
-        <div className="wallet-add-funds-popup__value">{address}</div>
+        <StatisticItem label={t("wallet-add-funds.deposit-address")}>
+          {address}
+        </StatisticItem>
         <GVButton color="secondary" onClick={onCopy} disabled={!address}>
           <CopyIcon />
           &nbsp;
