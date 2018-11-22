@@ -1,16 +1,11 @@
-import "./manager.page.scss";
-
 import React, { Component } from "react";
-import { translate } from "react-i18next";
-import { connect } from "react-redux";
-import { goBack } from "react-router-redux";
+import connect from "react-redux/es/connect/connect";
 import { bindActionCreators } from "redux";
-import ManagerDescription from "shared/components/manager-description/manager-description";
-import Page from "shared/components/page/page";
+import ManagerDescription from "shared/components/manager/manager-description/manager-description";
+import ManagerView from "shared/components/manager/manager.view";
 import { SLUG_URL_REGEXP } from "shared/utils/constants";
-import replaceParams from "shared/utils/replace-params";
 
-import ManagerHistorySection from "./components/program-details-history-section/manager-history-section";
+import ManagerHistoryContainer from "./components/manager-history/manager-history.container";
 import * as managerService from "./services/manager.service";
 
 export const MANAGER_SLUG_URL_PARAM_NAME = "managerSlugUrl";
@@ -18,11 +13,6 @@ export const MANAGER_SLUG_URL_PARAM_NAME = "managerSlugUrl";
 export const MANAGERS_ROUTE = "/managers";
 export const MANAGER_DETAILS_ROUTE = `${MANAGERS_ROUTE}/:${MANAGER_SLUG_URL_PARAM_NAME}`;
 export const MANAGER_DETAILS_ROUTE_REGEXP = `${MANAGERS_ROUTE}/:${MANAGER_SLUG_URL_PARAM_NAME}(${SLUG_URL_REGEXP})`;
-
-export const composeManagerDetailsUrl = slugUrl =>
-  replaceParams(MANAGER_DETAILS_ROUTE, {
-    [`:${MANAGER_SLUG_URL_PARAM_NAME}`]: slugUrl
-  });
 
 class ManagerPage extends Component {
   state = {
@@ -38,27 +28,22 @@ class ManagerPage extends Component {
     });
   }
   render() {
-    const { t, service } = this.props;
     const { managerProfile, isPending } = this.state;
 
     return (
       !isPending && (
-        <Page title={`${t("manager.title")} ${managerProfile.username}`}>
-          <div className="manager">
-            <div className="manager__description">
-              <ManagerDescription
-                managerProfile={managerProfile}
-                goBack={service.goBack}
-              />
-            </div>
-            <div className="manager__history">
-              <ManagerHistorySection
-                managerId={managerProfile.id}
-                title={managerProfile.username}
-              />
-            </div>
-          </div>
-        </Page>
+        <ManagerView
+          username={managerProfile.username}
+          renderDescription={() => (
+            <ManagerDescription managerProfile={managerProfile} />
+          )}
+          renderHistory={() => (
+            <ManagerHistoryContainer
+              managerId={managerProfile.id}
+              title={managerProfile.username}
+            />
+          )}
+        />
       )
     );
   }
@@ -71,13 +56,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    service: bindActionCreators({ ...managerService, goBack }, dispatch)
+    service: bindActionCreators({ ...managerService }, dispatch)
   };
 };
 
-export default translate()(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(ManagerPage)
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ManagerPage);
