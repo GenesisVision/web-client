@@ -1,15 +1,12 @@
-import "./manager.page.scss";
-
 import React, { Component } from "react";
-import { translate } from "react-i18next";
 import connect from "react-redux/es/connect/connect";
 import { bindActionCreators } from "redux";
-import ManagerDescription from "shared/components/manager-description/manager-description";
-import Page from "shared/components/page/page";
+import ManagerDescription from "shared/components/manager/manager-description/manager-description";
+import ManagerView from "shared/components/manager/manager.view";
 import { SLUG_URL_REGEXP } from "shared/utils/constants";
 import replaceParams from "shared/utils/replace-params";
 
-import ManagerHistorySection from "./components/program-details-history-section/manager-history-section";
+import ManagerHistoryContainer from "./components/manager-history/manager-history.container";
 import * as managerService from "./services/manager.service";
 
 export const MANAGER_SLUG_URL_PARAM_NAME = "managerSlugUrl";
@@ -37,24 +34,22 @@ class ManagerPage extends Component {
     });
   }
   render() {
-    const { t } = this.props;
     const { managerProfile, isPending } = this.state;
 
     return (
       !isPending && (
-        <Page title={`${t("manager.title")} ${managerProfile.username}`}>
-          <div className="manager">
-            <div className="manager__description">
-              <ManagerDescription managerProfile={managerProfile} />
-            </div>
-            <div className="manager__history">
-              <ManagerHistorySection
-                managerId={managerProfile.id}
-                title={managerProfile.username}
-              />
-            </div>
-          </div>
-        </Page>
+        <ManagerView
+          username={managerProfile.username}
+          renderDescription={() => (
+            <ManagerDescription managerProfile={managerProfile} />
+          )}
+          renderHistory={() => (
+            <ManagerHistoryContainer
+              managerId={managerProfile.id}
+              title={managerProfile.username}
+            />
+          )}
+        />
       )
     );
   }
@@ -71,9 +66,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default translate()(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(ManagerPage)
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ManagerPage);

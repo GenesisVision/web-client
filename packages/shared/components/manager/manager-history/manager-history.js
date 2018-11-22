@@ -1,54 +1,45 @@
 import "./manager-history.scss";
 
 import { GVTab, GVTabs } from "gv-react-components";
-import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
-import { connect } from "react-redux";
-import { push } from "react-router-redux";
-import { bindActionCreators, compose } from "redux";
 import FundsTableRow from "shared/components/funds-table/fund-table-row";
 import { FUNDS_TABLE_COLUMNS } from "shared/components/funds-table/funds-table.constants";
 import ProgramTableRow from "shared/components/programs-table/program-table-row";
 import { PROGRAMS_COLUMNS } from "shared/components/programs-table/programs.constants";
 import Surface from "shared/components/surface/surface";
-import { toggleFavoriteFundDispatchable } from "shared/modules/favorite-asset/services/favorite-fund.service";
-import { toggleFavoriteProgramDispatchable } from "shared/modules/favorite-asset/services/favorite-program.service";
 
-import * as managerService from "../../services/manager.service";
-import ManagerTable from "./manager-table/manager-table";
+import ManagerTable from "../manager-table/manager-table";
 
 const PROGRAMS_TAB = "programs";
 const FUNDS_TAB = "funds";
 
-class ManagerHistorySection extends PureComponent {
+class ManagerHistory extends PureComponent {
   state = {
-    tab: PROGRAMS_TAB,
-    programs: null,
-    funds: null
+    tab: PROGRAMS_TAB
   };
-
-  componentDidMount() {
-    this.getFunds().then(data => this.setState({ funds: data }));
-    this.getPrograms().then(data => this.setState({ programs: data }));
-  }
 
   handleTabChange = (e, tab) => {
     this.setState({ tab });
   };
 
-  getFunds = filters => {
-    return managerService.getFunds(this.props.managerId, filters);
-  };
-
-  getPrograms = filters => {
-    return managerService.getPrograms(this.props.managerId, filters);
-  };
-
   render() {
-    const { tab, programs, funds } = this.state;
-    const { t, title, managerId, isAuthenticated, service } = this.props;
-    const { handleTabChange, getPrograms, getFunds } = this;
+    const {
+      t,
+      title,
+      managerId,
+      isAuthenticated,
+      redirectToLogin,
+      toggleFavoriteProgram,
+      toggleFavoriteFund,
+      getPrograms,
+      getFunds,
+      programs,
+      funds
+    } = this.props;
+
+    const { handleTabChange } = this;
+    const { tab } = this.state;
     return (
       <Surface className="manager-history">
         <div className="manager-history__header">
@@ -74,8 +65,8 @@ class ManagerHistorySection extends PureComponent {
                   title={title}
                   isAuthenticated={isAuthenticated}
                   program={program}
-                  redirectToLogin={service.redirectToLogin}
-                  toggleFavorite={service.toggleFavoriteProgram}
+                  redirectToLogin={redirectToLogin}
+                  toggleFavorite={toggleFavoriteProgram}
                 />
               )}
               renderHeader={column => (
@@ -100,8 +91,8 @@ class ManagerHistorySection extends PureComponent {
                   title={title}
                   fund={fund}
                   isAuthenticated={isAuthenticated}
-                  redirectToLogin={service.redirectToLogin}
-                  toggleFavorite={service.toggleFavoriteFund}
+                  redirectToLogin={redirectToLogin}
+                  toggleFavorite={toggleFavoriteFund}
                 />
               )}
               renderHeader={column => (
@@ -120,28 +111,5 @@ class ManagerHistorySection extends PureComponent {
     );
   }
 }
-const mapStateToProps = state => {
-  const { isAuthenticated } = state.authData;
-  return { isAuthenticated };
-};
 
-const mapDispatchToProps = dispatch => {
-  return {
-    service: bindActionCreators(
-      {
-        toggleFavoriteProgram: toggleFavoriteProgramDispatchable,
-        toggleFavoriteFund: toggleFavoriteFundDispatchable,
-        redirectToLogin: () => push(LOGIN_ROUTE)
-      },
-      dispatch
-    )
-  };
-};
-
-export default compose(
-  translate(),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
-)(ManagerHistorySection);
+export default translate()(ManagerHistory);
