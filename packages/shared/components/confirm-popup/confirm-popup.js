@@ -29,9 +29,9 @@ const ConfirmPopup = ({
         <h2 className={classnames("confirm-popup__header", headerClassName)}>
           {header}
         </h2>
-        <div className={classnames("confirm-popup__body", bodyClassName)}>
+        <p className={classnames("confirm-popup__body", bodyClassName)}>
           {body}
-        </div>
+        </p>
         <div className="confirm-popup__btns">
           <GVButton onClick={onApply}>{applyButtonText}</GVButton>
           {onCancel && (

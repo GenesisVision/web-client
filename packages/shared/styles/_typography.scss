@@ -1,5 +1,4 @@
 @import "./_sizes.scss";
-@import "./_breakpoint.scss";
 
 h1 {
   @include font-size($font-size-h1);
@@ -9,6 +8,7 @@ h1 {
 
 h2 {
   @include font-size($font-size-h2);
+  @include padding-bottom($padding-xxsmall);
   font-weight: 500;
   color: $text-light-color;
 }
