@@ -50,11 +50,13 @@ class Profile extends Component {
               <tbody>
                 <tr className="profile__title">
                   <td className="profile__left">
-                    <h4>01</h4>
+                    <h4 className="profile__subtitle">01</h4>
                   </td>
                   <td className="profile__center" />
                   <td className="profile__right">
-                    <h4>{t("profile.contacts")}</h4>
+                    <h4 className="profile__subtitle">
+                      {t("profile.contacts")}
+                    </h4>
                     <VerificationStatus checked={info.phoneNumberConfirmed} />
                   </td>
                 </tr>
@@ -77,11 +79,13 @@ class Profile extends Component {
                 </tr>
                 <tr className="profile__title">
                   <td className="profile__left">
-                    <h4>02</h4>
+                    <h4 className="profile__subtitle">02</h4>
                   </td>
                   <td className="profile__center" />
                   <td className="profile__right">
-                    <h4>{t("profile.personal-info")}</h4>
+                    <h4 className="profile__subtitle">
+                      {t("profile.personal-info")}
+                    </h4>
                     <VerificationStatus
                       verificationStatus={info.verificationStatus}
                     />

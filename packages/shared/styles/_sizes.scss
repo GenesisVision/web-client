@@ -68,8 +68,6 @@ $avatar-size-mobile: $avatar-size/$divider-title;
     $divider: $divider-title;
   }
   font-size: $font-size/$divider;
-  margin-top: 0;
-  margin-bottom: 0;
 
   @include media-breakpoint-landscape-phone() {
     font-size: $font-size;
