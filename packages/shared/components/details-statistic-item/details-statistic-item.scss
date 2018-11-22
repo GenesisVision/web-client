@@ -39,6 +39,26 @@
     @include media-breakpoint-landscape-phone() {
       font-size: $font-size-paragraph;
     }
+    &--big {
+      display: flex;
+      align-items: center;
+      font-size: $font-size-h2-mobile;
+      letter-spacing: 0.3px;
+      @include media-breakpoint-landscape-phone() {
+        font-size: $font-size-h2;
+        letter-spacing: 0.4px;
+      }
+    }
+    &--large {
+      display: flex;
+      align-items: center;
+      font-size: $font-size-h1-mobile;
+      letter-spacing: 0.3px;
+      @include media-breakpoint-landscape-phone() {
+        font-size: $font-size-h1;
+        letter-spacing: 0.4px;
+      }
+    }
   }
 
   &--small{

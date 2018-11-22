@@ -7,6 +7,8 @@ import { formatValue } from "../../utils/formatter";
 import NumberFormat from "react-number-format";
 
 const DetailsStatisticItem = ({
+  large,
+  big,
   small,
   label,
   children,
@@ -31,7 +33,9 @@ const DetailsStatisticItem = ({
       <div
         className={classnames("details-statistics-item__value", {
           "details-statistics-item__value--accent": accent,
-          "details-statistics-item__value--small": small
+          "details-statistics-item__value--small": small,
+          "details-statistics-item__value--big": big,
+          "details-statistics-item__value--large": large
         })}
       >
         {children}
