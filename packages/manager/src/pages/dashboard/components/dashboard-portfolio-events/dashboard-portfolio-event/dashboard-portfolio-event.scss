@@ -39,6 +39,9 @@
     }
     & .statistics-item {
       padding: 0;
+      &__label {
+        line-height: normal;
+      }
       &__value {
         word-break: break-word;
       }
