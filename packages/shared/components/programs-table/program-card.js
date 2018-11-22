@@ -9,11 +9,10 @@ import Popover from "shared/components/popover/popover";
 import Profitability from "shared/components/profitability/profitability";
 import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
-import { composeProgramDetailsUrl } from "shared/utils/compose-url";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { composeManagerDetailsUrl } from "shared/utils/compose-url";
+import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
-
-import DetailsStatisticItem from "../details-statistic-item/details-statistic-item";
 
 class ProgramCard extends Component {
   state = {
@@ -144,47 +143,39 @@ class ProgramCard extends Component {
         </div>
         <div className="programs-cards__table">
           <div className="programs-cards__table-column">
-            <DetailsStatisticItem
-              label={t("programs-page.programs-header.balance")}
-            >
+            <StatisticItem label={t("programs-page.programs-header.balance")}>
               <NumberFormat
                 value={program.statistic.balanceGVT.amount}
                 displayType="text"
                 decimalScale={0}
                 suffix=" GVT"
               />
-            </DetailsStatisticItem>
-            <DetailsStatisticItem
-              label={t("programs-page.programs-header.period")}
-            >
+            </StatisticItem>
+            <StatisticItem label={t("programs-page.programs-header.period")}>
               <ProgramPeriodPie
                 start={program.periodStarts}
                 end={program.periodEnds}
               />
-            </DetailsStatisticItem>
+            </StatisticItem>
           </div>
           <div className="programs-cards__table-column">
-            <DetailsStatisticItem
-              label={t("programs-page.programs-header.investors")}
-            >
+            <StatisticItem label={t("programs-page.programs-header.investors")}>
               <NumberFormat
                 value={program.statistic.investorsCount}
                 displayType="text"
                 decimalScale={0}
               />
-            </DetailsStatisticItem>
-            <DetailsStatisticItem
-              label={t("programs-page.programs-header.trades")}
-            >
+            </StatisticItem>
+            <StatisticItem label={t("programs-page.programs-header.trades")}>
               <NumberFormat
                 value={program.statistic.tradesCount}
                 displayType="text"
                 decimalScale={0}
               />
-            </DetailsStatisticItem>
+            </StatisticItem>
           </div>
           <div className="programs-cards__table-column">
-            <DetailsStatisticItem
+            <StatisticItem
               label={t("programs-page.programs-header.available-to-invest")}
             >
               <NumberFormat
@@ -192,16 +183,14 @@ class ProgramCard extends Component {
                 displayType="text"
                 suffix=" GVT"
               />
-            </DetailsStatisticItem>
-            <DetailsStatisticItem
-              label={t("programs-page.programs-header.drawdown")}
-            >
+            </StatisticItem>
+            <StatisticItem label={t("programs-page.programs-header.drawdown")}>
               <NumberFormat
                 value={formatValue(program.statistic.drawdownPercent, 2)}
                 displayType="text"
                 suffix="%"
               />
-            </DetailsStatisticItem>
+            </StatisticItem>
           </div>
         </div>
       </div>

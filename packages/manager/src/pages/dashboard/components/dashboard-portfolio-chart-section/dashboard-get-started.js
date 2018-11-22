@@ -2,8 +2,7 @@ import { GVButton } from "gv-react-components";
 import React from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
-
-import { WALLET_PAGE_ROUTE } from "../../../wallet/wallet-page";
+import { WALLET_PAGE_ROUTE } from "shared/components/wallet/wallet-page";
 
 const DashboardGetStarted = ({ t }) => {
   return (

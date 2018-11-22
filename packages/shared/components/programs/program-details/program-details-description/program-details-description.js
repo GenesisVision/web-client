@@ -6,11 +6,11 @@ import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
-import DetailsStatisticItem from "shared/components/details-statistic-item/details-statistic-item";
 import DetailsFavorite from "shared/components/details/details-description-section/details-description/details-favorite";
 import DetailsNotification from "shared/components/details/details-description-section/details-description/details-notificaton";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import Popover from "shared/components/popover/popover";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
 import {
   composeManagerDetailsUrl,
   composeProgramNotificationsUrl
@@ -208,7 +208,7 @@ class ProgramDetailsDescription extends PureComponent {
               {programDescription.description}
             </div>
             <div className="details-description__short-statistic">
-              <DetailsStatisticItem
+              <StatisticItem
                 label={t("program-details-page.description.avToInvest")}
                 className={"details-description__short-statistic-item"}
                 accent
@@ -218,8 +218,8 @@ class ProgramDetailsDescription extends PureComponent {
                   displayType="text"
                   suffix={` GVT`}
                 />
-              </DetailsStatisticItem>
-              <DetailsStatisticItem
+              </StatisticItem>
+              <StatisticItem
                 label={t("program-details-page.description.entryFee")}
                 className={"details-description__short-statistic-item"}
                 accent
@@ -229,8 +229,8 @@ class ProgramDetailsDescription extends PureComponent {
                   displayType="text"
                   suffix=" %"
                 />
-              </DetailsStatisticItem>
-              <DetailsStatisticItem
+              </StatisticItem>
+              <StatisticItem
                 label={t("program-details-page.description.successFee")}
                 className={"details-description__short-statistic-item"}
                 accent
@@ -240,7 +240,7 @@ class ProgramDetailsDescription extends PureComponent {
                   displayType="text"
                   suffix=" %"
                 />
-              </DetailsStatisticItem>
+              </StatisticItem>
             </div>
             {(isOwnProgram || canInvest) && (
               <Fragment>

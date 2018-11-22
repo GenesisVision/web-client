@@ -3,10 +3,10 @@ import fundDepositReducer from "modules/fund-deposit/reducer/fund-deposit.reduce
 import headerReducer from "modules/header/reducer/header-reducer";
 import programDepositReducer from "modules/program-deposit/reducer/program-deposit.reducer";
 import notificationsReducer from "pages/app/components/notifications/reducers/notifications.reducers";
-import walletReducer from "pages/wallet/reducers/wallet.reducers.js";
 import { loadingBarReducer } from "react-redux-loading-bar";
 import { routerReducer } from "react-router-redux";
 import { combineReducers } from "redux";
+import walletReducer from "shared/components/wallet/reducers/wallet.reducers";
 import alertMessagesReducer from "shared/modules/alert-message/reducers/alert-message-reducers";
 import fundNotificationsReducer from "shared/modules/fund-notifications/reducers/fund-notifications.reducers";
 import fundsReducer from "shared/modules/funds-table/reducers/funds-table.reducers";

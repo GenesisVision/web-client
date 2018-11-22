@@ -1,8 +1,8 @@
-import WalletAddFundsPopup from "modules/wallet-add-funds/wallet-add-funds-popup";
-import WalletWithdrawPopup from "modules/wallet-withdraw/wallet-withdraw-popup";
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
+import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
 
 import * as WalletServices from "../../services/wallet.services";
 import WalletBalance from "./wallet-balance";
@@ -78,6 +78,7 @@ const mapDispatchToProps = dispatch => ({
   service: bindActionCreators(WalletServices, dispatch)
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  WalletBalanceContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(WalletBalanceContainer);

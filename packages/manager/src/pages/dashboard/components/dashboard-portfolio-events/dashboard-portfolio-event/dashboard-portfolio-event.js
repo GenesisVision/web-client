@@ -7,6 +7,7 @@ import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import PortfolioEventLogo from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
 import Profitability from "shared/components/profitability/profitability";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatValue } from "shared/utils/formatter";
 
 import {
@@ -21,13 +22,33 @@ const formatDate = date => {
   const dayDifference = moment(now).diff(eventCreationDate, "days");
   const isShowFullDate = dayDifference > 1;
 
-  if (isShowFullDate) return eventCreationDate.format("DD MMM YYYY, HH:MM a");
-
-  return eventCreationDate.fromNow();
+  return isShowFullDate
+    ? eventCreationDate.format("DD MMM YYYY, HH:MM a")
+    : eventCreationDate.fromNow();
 };
 
 const DashboardPortfolioEvent = ({ t, event }) => {
   const valueDescription = valueDescriptionLocalizationConstant(event);
+  const renderValueDescription = () => (
+    <div className="portfolio-event__value">
+      {isUseProfitability(event) ? (
+        <Profitability value={event.value} prefix="sign">
+          <NumberFormat
+            value={formatValue(event.value)}
+            displayType="text"
+            allowNegative={false}
+            suffix={` ${event.currency}`}
+          />
+        </Profitability>
+      ) : (
+        <NumberFormat
+          value={formatValue(event.value)}
+          displayType="text"
+          suffix={` ${event.currency}`}
+        />
+      )}
+    </div>
+  );
   return (
     <div className="portfolio-event">
       <PortfolioEventLogo
@@ -36,35 +57,18 @@ const DashboardPortfolioEvent = ({ t, event }) => {
         color={event.color}
       />
       <div className="portfolio-event__info">
-        <span className="portfolio-event__time">{formatDate(event.date)}</span>
-        <div className="portfolio-event__values-container">
-          <div className="portfolio-event__description">
+        <StatisticItem label={formatDate(event.date)} small>
+          <div className="portfolio-event__values-container">
             {event.description}
           </div>
-          <div>
-            <div className="portfolio-event__value-description">
-              {t(valueDescription)}
-            </div>
-            <span className="portfolio-event__value">
-              {isUseProfitability(event) ? (
-                <Profitability value={event.value} prefix="sign">
-                  <NumberFormat
-                    value={formatValue(event.value)}
-                    displayType="text"
-                    allowNegative={false}
-                    suffix={` ${event.currency}`}
-                  />
-                </Profitability>
-              ) : (
-                <NumberFormat
-                  value={formatValue(event.value)}
-                  displayType="text"
-                  suffix={` ${event.currency}`}
-                />
-              )}
-            </span>
-          </div>
-        </div>
+          <StatisticItem
+            label={t(valueDescription)}
+            small
+            className="portfolio-event__values-container"
+          >
+            {renderValueDescription()}
+          </StatisticItem>
+        </StatisticItem>
       </div>
     </div>
   );

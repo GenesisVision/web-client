@@ -165,10 +165,16 @@ $description-block-width: 250px;
     padding: $padding;
     padding-right: $padding - $padding/2;
   }
+  @include media-breakpoint-tablet() {
+    justify-content: flex-start;
+    &__card {
+      flex-grow: 0;
+    }
+  }
   @include media-breakpoint-landscape-tablet() {
     justify-content: flex-start;
     &__card {
-      width: $program-width;
+      width: calc(33% - #{$padding}/ 2);
     }
     &__table {
       &--title {
@@ -182,6 +188,11 @@ $description-block-width: 250px;
           width: 25%;
         }
       }
+    }
+  }
+  @include media-breakpoint-desktop() {
+    &__card {
+      width: $program-width;
     }
   }
 }
@@ -200,7 +211,7 @@ $description-block-width: 250px;
   &--title {
     word-break: break-all;
     min-width: 100px;
-    max-width: 170px;
+    max-width: 1programs-cards70px;
     padding: 0;
     div {
       padding: $padding/10;

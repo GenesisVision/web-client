@@ -2,46 +2,83 @@
 @import "~shared/styles/_colors.scss";
 @import "~shared/styles/_sizes.scss";
 
-.statistic-item {
-  display: inline-flex;
+.statistics-item {
+  display: flex;
   flex-direction: column;
-  margin-right: 40px;
+  padding-right: $padding-xsmall-mobile;
+  padding-bottom: $padding-big-mobile;
 
-  @include media-breakpoint-landscape-phone() {
-    display: inline-flex;
-    justify-content: start;
-    align-items: start;
-    margin-bottom: 0;
-    margin-right: 70px;
+  &--half {
+    width: 70px;
+    @include media-breakpoint-landscape-phone() {
+      padding-right: 0;
+      width: auto;
+      box-sizing: border-box;
+    }
   }
 
-  &__heading {
-    color: $text-dark-color;
-    font-size: 11px;
-    letter-spacing: 0.1px;
-    font-weight: 600;
-    margin-bottom: 8px;
+  &__label {
+    color: $label-color;
+    font-size: $font-size-common-mobile;
+    letter-spacing: 0.4px;
+    margin-bottom: $padding-xsmall-mobile;
+    font-weight: normal;
     @include media-breakpoint-landscape-phone() {
       font-size: $font-size-common;
+      margin-bottom: $padding-xsmall/2;
     }
   }
 
   &__value {
-    display: flex;
-    align-items: center;
-    color: $text-light-color;
-    font-size: 18px;
-    letter-spacing: 0.3px;
-    font-weight: 400;
-    @include media-breakpoint-landscape-phone() {
-      font-size: $font-size-h2;
-      letter-spacing: 0.4px;
+    font-size: $font-size-paragraph-mobile;
+    letter-spacing: 0.6px;
+    white-space: nowrap;
+    &--accent {
       font-weight: 600;
+    }
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-paragraph;
+    }
+    &--big {
+      display: flex;
+      align-items: center;
+      font-size: $font-size-h2-mobile;
+      letter-spacing: 0.3px;
+      @include media-breakpoint-landscape-phone() {
+        font-size: $font-size-h2;
+        letter-spacing: 0.4px;
+      }
+    }
+    &--large {
+      display: flex;
+      align-items: center;
+      font-size: $font-size-h1-mobile;
+      letter-spacing: 0.3px;
+      @include media-breakpoint-landscape-phone() {
+        font-size: $font-size-h1;
+        letter-spacing: 0.4px;
+      }
+    }
+  }
+
+  &--small {
+    & > .details-statistics-item__label {
+      font-size: $font-size-small-mobile;
+      @include media-breakpoint-landscape-phone() {
+        font-size: $font-size-small;
+      }
+    }
+
+    & > .details-statistics-item__value {
+      font-size: $font-size-common-mobile;
+      @include media-breakpoint-landscape-phone() {
+        font-size: $font-size-common;
+      }
     }
   }
 
   &__equivalent {
-    font-size: 11px;
+    font-size: $font-size-common-mobile;
     letter-spacing: 0.3px;
     color: $label-color;
     @include media-breakpoint-landscape-phone() {

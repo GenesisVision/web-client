@@ -11,6 +11,17 @@
   justify-content: space-between;
   width: 100px;
 
+  & .chart-period {
+    margin-top: 0;
+  }
+
+  &__value {
+    padding-top: $padding-xsmall-mobile;
+    @include media-breakpoint-landscape-phone() {
+      padding-top: $padding-xsmall;
+    }
+  }
+
   &__heading {
     font-size: $font-size-h3-mobile;
     font-weight: 600;

@@ -1,6 +1,8 @@
 import React, { Fragment } from "react";
+import NumberFormat from "react-number-format";
 import ChartPeriod from "shared/components/chart/chart-period/chart-period";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import { formatValue } from "shared/utils/formatter";
 
 import FundProfitChart from "./fund-profit-chart";
 
@@ -14,14 +16,21 @@ const FundProfitChartSection = ({
   if (!profitChart) return null;
   return (
     <Fragment>
-      <div>
+      <div className="details-chart__value">
         <StatisticItem
-          heading={"Value"}
-          value={profitChart.totalGvtProfit}
+          label={"Value"}
           equivalent={profitChart.totalProgramCurrencyProfit}
-          currency={profitChart.programCurrency}
-          className="details-chart__stat-item"
-        />
+          equivalentCurrency={profitChart.programCurrency}
+          big
+          accent
+        >
+          <NumberFormat
+            value={formatValue(profitChart.totalGvtProfit)}
+            thousandSeparator={" "}
+            displayType="text"
+            suffix={" GVT"}
+          />
+        </StatisticItem>
         {/* <StatisticItem
           heading={"Change"}
           value={changeValue}

@@ -7,11 +7,11 @@ import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
-import DetailsStatisticItem from "shared/components/details-statistic-item/details-statistic-item";
 import DetailsFavorite from "shared/components/details/details-description-section/details-description/details-favorite";
 import DetailsNotification from "shared/components/details/details-description-section/details-description/details-notificaton";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
 import {
   composeFundNotificationsUrl,
   composeManagerDetailsUrl
@@ -112,9 +112,7 @@ class FundDetailsDescription extends PureComponent {
           </div>
         </div>
         <div className="details-description__main">
-          <h1 className="title-details">
-            {fundDescription.title}
-          </h1>
+          <h1 className="title-details">{fundDescription.title}</h1>
           <Link
             to={{
               pathname: composeManagerDetailsUrl(fundDescription.manager.url),
@@ -148,7 +146,7 @@ class FundDetailsDescription extends PureComponent {
               {fundDescription.description}
             </div>
             <div className="details-description__short-statistic">
-              <DetailsStatisticItem
+              <StatisticItem
                 label={t("fund-details-page.description.entryFee")}
                 className={"details-description__short-statistic-item"}
                 accent
@@ -158,8 +156,8 @@ class FundDetailsDescription extends PureComponent {
                   displayType="text"
                   suffix=" %"
                 />
-              </DetailsStatisticItem>
-              <DetailsStatisticItem
+              </StatisticItem>
+              <StatisticItem
                 label={t("fund-details-page.description.exitFee")}
                 className={"details-description__short-statistic-item"}
                 accent
@@ -169,7 +167,7 @@ class FundDetailsDescription extends PureComponent {
                   displayType="text"
                   suffix=" %"
                 />
-              </DetailsStatisticItem>
+              </StatisticItem>
             </div>
             {(isOwnProgram || canInvest) && (
               <Fragment>

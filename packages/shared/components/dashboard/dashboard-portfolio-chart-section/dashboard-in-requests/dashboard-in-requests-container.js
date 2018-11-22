@@ -8,9 +8,9 @@ import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
 import Popover from "shared/components/popover/popover";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
+import { formatValue } from "shared/utils/formatter";
 
-import { formatValue } from "../../../../utils/formatter";
-import DetailsStatisticItem from "../../../details-statistic-item/details-statistic-item";
 import DashboardRequest from "./dashboard-request";
 
 class DashboardInRequestsContainer extends PureComponent {
@@ -43,17 +43,15 @@ class DashboardInRequestsContainer extends PureComponent {
 
     return (
       <div className="dashboard-request">
-        <DetailsStatisticItem label={"In Requests"}>
-          <div className="dashboard-request__in-request">
-            <NumberFormat
-              value={formatValue(inRequests.totalValue)}
-              thousandSeparator={" "}
-              displayType="text"
-              suffix={" GVT"}
-            />
-            {this.renderActionsIcon()}
-          </div>
-        </DetailsStatisticItem>
+        <StatisticItem label={"In Requests"} big>
+          <NumberFormat
+            value={formatValue(inRequests.totalValue)}
+            thousandSeparator={" "}
+            displayType="text"
+            suffix={" GVT"}
+          />
+          {this.renderActionsIcon()}
+        </StatisticItem>
 
         <Popover
           horizontal="right"

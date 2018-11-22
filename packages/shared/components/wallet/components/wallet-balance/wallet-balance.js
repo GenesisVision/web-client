@@ -1,9 +1,11 @@
 import "./wallet-balance.scss";
 
-import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { GVButton } from "gv-react-components";
 import React from "react";
 import { translate } from "react-i18next";
+import NumberFormat from "react-number-format";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
+import { formatValue } from "shared/utils/formatter";
 
 const WalletBalance = ({
   t,
@@ -16,26 +18,49 @@ const WalletBalance = ({
     <h1 className="title-page title-page--wallet">{t("wallet.title")}</h1>
     <div className="wallet-balance__statistic">
       <StatisticItem
-        heading={t("wallet.total-balance")}
-        value={walletBalanceData.totalBalanceGVT}
+        label={t("wallet.total-balance")}
         equivalent={walletBalanceData.totalBalanceCurrency}
-        currency={currentCurrency}
-        valueClassName="wallet-balance__total-balance-value"
-      />
+        equivalentCurrency={currentCurrency}
+        large
+        accent
+      >
+        <NumberFormat
+          value={formatValue(walletBalanceData.totalBalanceGVT)}
+          thousandSeparator={" "}
+          displayType="text"
+          suffix={" GVT"}
+        />
+      </StatisticItem>
       <StatisticItem
-        heading={t("wallet.invested-value")}
-        value={walletBalanceData.investedGVT}
+        label={t("wallet.invested-value")}
         equivalent={walletBalanceData.investedCurrency}
-        currency={currentCurrency}
-        valueClassName="wallet-balance__statistic-item-value"
-      />
+        equivalentCurrency={currentCurrency}
+        className="wallet-balance__statistic-big"
+        big
+        accent
+      >
+        <NumberFormat
+          value={formatValue(walletBalanceData.investedGVT)}
+          thousandSeparator={" "}
+          displayType="text"
+          suffix={" GVT"}
+        />
+      </StatisticItem>
       <StatisticItem
-        heading={t("wallet.available")}
-        value={walletBalanceData.availableGVT}
+        label={t("wallet.available")}
         equivalent={walletBalanceData.availableCurrency}
-        currency={currentCurrency}
-        valueClassName="wallet-balance__statistic-item-value"
-      />
+        equivalentCurrency={currentCurrency}
+        className="wallet-balance__statistic-big"
+        big
+        accent
+      >
+        <NumberFormat
+          value={formatValue(walletBalanceData.availableGVT)}
+          thousandSeparator={" "}
+          displayType="text"
+          suffix={" GVT"}
+        />
+      </StatisticItem>
     </div>
     <div className="wallet-balance__footer">
       <GVButton className="wallet-balance__add-funds" onClick={handleAddFunds}>
