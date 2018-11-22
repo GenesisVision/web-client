@@ -16,7 +16,7 @@ import {
   composeManagerDetailsUrl
 } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
-import DetailsStatisticItem from "shared/components/details-statistic-item/details-statistic-item";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
 
 class FundDetailsDescription extends PureComponent {
   state = {
@@ -148,7 +148,7 @@ class FundDetailsDescription extends PureComponent {
               {fundDescription.description}
             </div>
             <div className="details-description__short-statistic">
-              <DetailsStatisticItem
+              <StatisticItem
                 label={t("fund-details-page.description.entryFee")}
                 className={"details-description__short-statistic-item"}
                 accent
@@ -158,8 +158,8 @@ class FundDetailsDescription extends PureComponent {
                   displayType="text"
                   suffix=" %"
                 />
-              </DetailsStatisticItem>
-              <DetailsStatisticItem
+              </StatisticItem>
+              <StatisticItem
                 label={t("fund-details-page.description.exitFee")}
                 className={"details-description__short-statistic-item"}
                 accent
@@ -169,7 +169,7 @@ class FundDetailsDescription extends PureComponent {
                   displayType="text"
                   suffix=" %"
                 />
-              </DetailsStatisticItem>
+              </StatisticItem>
             </div>
             {(isOwnProgram || canInvest) && (
               <Fragment>

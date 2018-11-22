@@ -13,7 +13,7 @@ import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 
 import { formatValue } from "shared/utils/formatter";
-import DetailsStatisticItem from "../details-statistic-item/details-statistic-item";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
 
 class ProgramCard extends Component {
   state = {
@@ -144,7 +144,7 @@ class ProgramCard extends Component {
         </div>
         <div className="programs-cards__table">
           <div className="programs-cards__table-column">
-            <DetailsStatisticItem
+            <StatisticItem
               label={t("programs-page.programs-header.balance")}
             >
               <NumberFormat
@@ -153,18 +153,18 @@ class ProgramCard extends Component {
                 decimalScale={0}
                 suffix=" GVT"
               />
-            </DetailsStatisticItem>
-            <DetailsStatisticItem
+            </StatisticItem>
+            <StatisticItem
               label={t("programs-page.programs-header.period")}
             >
               <ProgramPeriodPie
                 start={program.periodStarts}
                 end={program.periodEnds}
               />
-            </DetailsStatisticItem>
+            </StatisticItem>
           </div>
           <div className="programs-cards__table-column">
-            <DetailsStatisticItem
+            <StatisticItem
               label={t("programs-page.programs-header.investors")}
             >
               <NumberFormat
@@ -172,8 +172,8 @@ class ProgramCard extends Component {
                 displayType="text"
                 decimalScale={0}
               />
-            </DetailsStatisticItem>
-            <DetailsStatisticItem
+            </StatisticItem>
+            <StatisticItem
               label={t("programs-page.programs-header.trades")}
             >
               <NumberFormat
@@ -181,10 +181,10 @@ class ProgramCard extends Component {
                 displayType="text"
                 decimalScale={0}
               />
-            </DetailsStatisticItem>
+            </StatisticItem>
           </div>
           <div className="programs-cards__table-column">
-            <DetailsStatisticItem
+            <StatisticItem
               label={t("programs-page.programs-header.available-to-invest")}
             >
               <NumberFormat
@@ -192,8 +192,8 @@ class ProgramCard extends Component {
                 displayType="text"
                 suffix=" GVT"
               />
-            </DetailsStatisticItem>
-            <DetailsStatisticItem
+            </StatisticItem>
+            <StatisticItem
               label={t("programs-page.programs-header.drawdown")}
             >
               <NumberFormat
@@ -201,7 +201,7 @@ class ProgramCard extends Component {
                 displayType="text"
                 suffix="%"
               />
-            </DetailsStatisticItem>
+            </StatisticItem>
           </div>
         </div>
       </div>

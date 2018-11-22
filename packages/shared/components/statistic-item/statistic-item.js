@@ -3,60 +3,64 @@ import "./statistic-item.scss";
 import classnames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
+import { formatValue } from "../../utils/formatter";
 import NumberFormat from "react-number-format";
-import { formatValue } from "shared/utils/formatter";
 
 const StatisticItem = ({
-  heading,
-  value,
-  adornment,
-  equivalent,
-  currency,
+  large,
+  big,
+  small,
+  label,
+  children,
+  accent,
+  half,
   className,
-  headingClassName,
-  valueClassName,
-  equivalentClassName
+  equivalent,
+  equivalentCurrency
 }) => {
   return (
-    <div className={classnames("statistic-item", className)}>
-      <div className={classnames("statistic-item__heading", headingClassName)}>
-        {heading}
-      </div>
-      <div className={classnames("statistic-item__value", valueClassName)}>
-        <NumberFormat
-          value={formatValue(value)}
-          thousandSeparator={" "}
-          displayType="text"
-          suffix={" GVT"}
-        />
-        {adornment}
-      </div>
+    <div
+      className={classnames(
+        "statistics-item",
+        {
+          "statistics-item--half": half,
+          "statistics-item--small": small
+        },
+        className
+      )}
+    >
+      <div className="statistics-item__label">{label}</div>
       <div
-        className={classnames(
-          "statistic-item__equivalent",
-          equivalentClassName
-        )}
+        className={classnames("statistics-item__value", {
+          "statistics-item__value--accent": accent,
+          "statistics-item__value--small": small,
+          "statistics-item__value--big": big,
+          "statistics-item__value--large": large
+        })}
       >
-        <NumberFormat
-          value={formatValue(equivalent)}
-          thousandSeparator={" "}
-          displayType="text"
-          suffix={` ${currency}`}
-        />
+        {children}
       </div>
+      {equivalent ? (
+        <div className="statistics-item__equivalent">
+          {
+            <NumberFormat
+              value={formatValue(equivalent)}
+              thousandSeparator={" "}
+              displayType="text"
+              suffix={` ${equivalentCurrency}`}
+            />
+          }
+        </div>
+      ) : null}
     </div>
   );
 };
 
 StatisticItem.propTypes = {
-  heading: PropTypes.string.isRequired,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  equivalent: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  currency: PropTypes.string,
-  className: PropTypes.string,
-  headingClassName: PropTypes.string,
-  valueClassName: PropTypes.string,
-  equivalentClassName: PropTypes.string
+  label: PropTypes.string.isRequired,
+  accent: PropTypes.bool,
+  half: PropTypes.bool,
+  className: PropTypes.string
 };
 
 export default StatisticItem;

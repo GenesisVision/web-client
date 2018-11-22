@@ -8,7 +8,7 @@ import ProgramStatus from "shared/components/program-status/program-status";
 import Surface from "shared/components/surface/surface";
 import { formatValue } from "shared/utils/formatter";
 
-import DetailsStatisticItem from "../../../details-statistic-item/details-statistic-item";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
 
 class DetailsInvestment extends PureComponent {
   state = {
@@ -47,7 +47,7 @@ class DetailsInvestment extends PureComponent {
           {t("fund-details-page.description.yourInvestment")}
         </div>
         <div className="details-investment__short-statistic">
-          <DetailsStatisticItem
+          <StatisticItem
             accent
             label={t("fund-details-page.description.value")}
           >
@@ -56,15 +56,15 @@ class DetailsInvestment extends PureComponent {
               suffix={` ${balanceCurrency}`}
               displayType="text"
             />
-          </DetailsStatisticItem>
-          <DetailsStatisticItem
+          </StatisticItem>
+          <StatisticItem
             accent
             label={t("fund-details-page.description.status")}
           >
             <ProgramStatus status={status} />
-          </DetailsStatisticItem>
+          </StatisticItem>
           {pendingInput !== undefined && pendingInput !== 0 && (
-            <DetailsStatisticItem
+            <StatisticItem
               accent
               label={t("fund-details-page.description.pending-input")}
             >
@@ -73,10 +73,10 @@ class DetailsInvestment extends PureComponent {
                 suffix={` ${balanceCurrency}`}
                 displayType="text"
               />
-            </DetailsStatisticItem>
+            </StatisticItem>
           )}
           {pendingOutput !== undefined && pendingOutput !== 0 && (
-            <DetailsStatisticItem
+            <StatisticItem
               accent
               label={t("fund-details-page.description.pending-output")}
             >
@@ -85,7 +85,7 @@ class DetailsInvestment extends PureComponent {
                 suffix={` ${balanceCurrency}`}
                 displayType="text"
               />
-            </DetailsStatisticItem>
+            </StatisticItem>
           )}
         </div>
         <div className="details-investment__footer">

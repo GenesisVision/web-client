@@ -3,6 +3,8 @@ import ChartPeriod from "shared/components/chart/chart-period/chart-period";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 
 import FundBalanceChart from "./fund-balance-chart";
+import NumberFormat from "react-number-format";
+import { formatValue } from "shared/utils/formatter";
 
 const ProgramBalanceChartSection = ({
   balanceChartData,
@@ -14,14 +16,21 @@ const ProgramBalanceChartSection = ({
   if (!balanceChart) return null;
   return (
     <Fragment>
-      <div>
+      <div className="details-chart__value">
         <StatisticItem
-          heading={"Value"}
-          value={balanceChart.gvtBalance}
+          label={"Value"}
           equivalent={balanceChart.programCurrencyBalance}
-          currency={balanceChart.programCurrency}
-          className="details-chart__stat-item"
-        />
+          equivalentCurrency={balanceChart.programCurrency}
+          big
+          accent
+        >
+          <NumberFormat
+            value={formatValue(balanceChart.gvtBalance)}
+            thousandSeparator={" "}
+            displayType="text"
+            suffix={" GVT"}
+          />
+        </StatisticItem>
         {/* <StatisticItem
           heading={"Change"}
           value={changeValue}

@@ -1,9 +1,9 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 
 import { formatValue } from "shared/utils/formatter";
-import DetailsStatisticItem from "shared/components/details-statistic-item/details-statistic-item";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Profitability from "shared/components/profitability/profitability";
 
 const DashboardPortfolioChartStat = ({
@@ -16,18 +16,18 @@ const DashboardPortfolioChartStat = ({
   changeValueCurrency
 }) => {
   const renderValue = () => (
-    <div className="dashboard-portfolio-chart-stat__value">
+    <Fragment>
       <NumberFormat
         value={formatValue(value)}
         thousandSeparator={" "}
         displayType="text"
         suffix={" GVT"}
       />
-    </div>
+    </Fragment>
   );
 
   const renderChange = () => (
-    <div className="dashboard-portfolio-chart-stat__value">
+    <Fragment>
       <NumberFormat
         value={formatValue(changeValue)}
         thousandSeparator={" "}
@@ -48,26 +48,28 @@ const DashboardPortfolioChartStat = ({
           displayType="text"
         />
       </Profitability>
-    </div>
+    </Fragment>
   );
 
   return (
     <div className="dashboard-portfolio-chart-stat">
-      <DetailsStatisticItem
+      <StatisticItem
+        big
         accent
         label={"Value"}
         equivalent={formatValue(valueCurrency)}
         equivalentCurrency={currency}
       >
         {renderValue()}
-      </DetailsStatisticItem>
-      <DetailsStatisticItem
+      </StatisticItem>
+      <StatisticItem
         label={"Change"}
         equivalent={formatValue(changeValueCurrency)}
         equivalentCurrency={currency}
+        big
       >
         {renderChange()}
-      </DetailsStatisticItem>
+      </StatisticItem>
     </div>
   );
 };
