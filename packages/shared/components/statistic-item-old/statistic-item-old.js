@@ -1,4 +1,4 @@
-import "./statistic-item.scss";
+import "./statistic-item-old.scss";
 
 import classnames from "classnames";
 import PropTypes from "prop-types";
@@ -6,7 +6,7 @@ import React from "react";
 import NumberFormat from "react-number-format";
 import { formatValue } from "shared/utils/formatter";
 
-const StatisticItem = ({
+const StatisticItemOld = ({
   heading,
   value,
   adornment,
@@ -48,7 +48,7 @@ const StatisticItem = ({
   );
 };
 
-StatisticItem.propTypes = {
+StatisticItemOld.propTypes = {
   heading: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   equivalent: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -59,4 +59,4 @@ StatisticItem.propTypes = {
   equivalentClassName: PropTypes.string
 };
 
-export default StatisticItem;
+export default StatisticItemOld;
