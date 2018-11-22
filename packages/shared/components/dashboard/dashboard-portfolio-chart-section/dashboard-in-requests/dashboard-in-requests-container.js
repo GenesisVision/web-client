@@ -45,16 +45,14 @@ class DashboardInRequestsContainer extends PureComponent {
 
     return (
       <div className="dashboard-request">
-        <DetailsStatisticItem label={"In Requests"}>
-          <div className="dashboard-request__in-request">
-            <NumberFormat
-              value={formatValue(inRequests.totalValue)}
-              thousandSeparator={" "}
-              displayType="text"
-              suffix={" GVT"}
-            />
-            {this.renderActionsIcon()}
-          </div>
+        <DetailsStatisticItem label={"In Requests"} big>
+          <NumberFormat
+            value={formatValue(inRequests.totalValue)}
+            thousandSeparator={" "}
+            displayType="text"
+            suffix={" GVT"}
+          />
+          {this.renderActionsIcon()}
         </DetailsStatisticItem>
 
         <Popover
