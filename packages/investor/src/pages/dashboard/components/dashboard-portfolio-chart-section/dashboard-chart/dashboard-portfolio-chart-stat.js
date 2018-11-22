@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 
@@ -16,18 +16,18 @@ const DashboardPortfolioChartStat = ({
   changeValueCurrency
 }) => {
   const renderValue = () => (
-    <div className="dashboard-portfolio-chart-stat__value">
+    <Fragment>
       <NumberFormat
         value={formatValue(value)}
         thousandSeparator={" "}
         displayType="text"
         suffix={" GVT"}
       />
-    </div>
+    </Fragment>
   );
 
   const renderChange = () => (
-    <div className="dashboard-portfolio-chart-stat__value">
+    <Fragment>
       <NumberFormat
         value={formatValue(changeValue)}
         thousandSeparator={" "}
@@ -48,12 +48,13 @@ const DashboardPortfolioChartStat = ({
           displayType="text"
         />
       </Profitability>
-    </div>
+    </Fragment>
   );
 
   return (
     <div className="dashboard-portfolio-chart-stat">
       <DetailsStatisticItem
+        big
         accent
         label={"Value"}
         equivalent={formatValue(valueCurrency)}
@@ -65,6 +66,7 @@ const DashboardPortfolioChartStat = ({
         label={"Change"}
         equivalent={formatValue(changeValueCurrency)}
         equivalentCurrency={currency}
+        big
       >
         {renderChange()}
       </DetailsStatisticItem>
