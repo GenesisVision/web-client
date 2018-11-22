@@ -13,7 +13,7 @@ import {
   isUseProfitability,
   valueDescriptionLocalizationConstant
 } from "../../helpers/dashboard-portfolio.helpers";
-import DetailsStatisticItem from "shared/components/details-statistic-item/details-statistic-item";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
 
 const formatDate = date => {
   const now = moment(new Date());
@@ -57,18 +57,18 @@ const DashboardPortfolioEvent = ({ t, event }) => {
         color={event.color}
       />
       <div className="portfolio-event__info">
-        <DetailsStatisticItem label={formatDate(event.date)} small>
+        <StatisticItem label={formatDate(event.date)} small>
           <div className="portfolio-event__values-container">
             {event.description}
           </div>
-          <DetailsStatisticItem
+          <StatisticItem
             label={t(valueDescription)}
             small
             className="portfolio-event__values-container"
           >
             {renderValueDescription()}
-          </DetailsStatisticItem>
-        </DetailsStatisticItem>
+          </StatisticItem>
+        </StatisticItem>
       </div>
     </div>
   );

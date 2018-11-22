@@ -9,7 +9,7 @@ import Profitability from "shared/components/profitability/profitability";
 import { formatValue } from "shared/utils/formatter";
 
 import { isUseProfitability } from "../../helpers/dashboard-portfolio.helpers";
-import DetailsStatisticItem from "shared/components/details-statistic-item/details-statistic-item";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
 
 const formatDate = date => {
   const now = moment(new Date());
@@ -56,9 +56,9 @@ const DashboardPortfolioEvent = ({ event }) => {
         color={event.color}
       />
       <div className="portfolio-event__info">
-        <DetailsStatisticItem label={formatDate(event.date)}>
+        <StatisticItem label={formatDate(event.date)}>
           {eventDescription()}
-        </DetailsStatisticItem>
+        </StatisticItem>
       </div>
     </div>
   );

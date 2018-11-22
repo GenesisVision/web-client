@@ -15,7 +15,7 @@ import {
   composeProgramNotificationsUrl
 } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
-import DetailsStatisticItem from "shared/components/details-statistic-item/details-statistic-item";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
 
 class ProgramDetailsDescription extends PureComponent {
   state = {
@@ -208,7 +208,7 @@ class ProgramDetailsDescription extends PureComponent {
               {programDescription.description}
             </div>
             <div className="details-description__short-statistic">
-              <DetailsStatisticItem
+              <StatisticItem
                 label={t("program-details-page.description.avToInvest")}
                 className={"details-description__short-statistic-item"}
                 accent
@@ -218,8 +218,8 @@ class ProgramDetailsDescription extends PureComponent {
                   displayType="text"
                   suffix={` GVT`}
                 />
-              </DetailsStatisticItem>
-              <DetailsStatisticItem
+              </StatisticItem>
+              <StatisticItem
                 label={t("program-details-page.description.entryFee")}
                 className={"details-description__short-statistic-item"}
                 accent
@@ -229,8 +229,8 @@ class ProgramDetailsDescription extends PureComponent {
                   displayType="text"
                   suffix=" %"
                 />
-              </DetailsStatisticItem>
-              <DetailsStatisticItem
+              </StatisticItem>
+              <StatisticItem
                 label={t("program-details-page.description.successFee")}
                 className={"details-description__short-statistic-item"}
                 accent
@@ -240,7 +240,7 @@ class ProgramDetailsDescription extends PureComponent {
                   displayType="text"
                   suffix=" %"
                 />
-              </DetailsStatisticItem>
+              </StatisticItem>
             </div>
             {(isOwnProgram || canInvest) && (
               <Fragment>

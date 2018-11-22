@@ -10,8 +10,8 @@ import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
 import Popover from "shared/components/popover/popover";
 
 import DashboardRequest from "./dashboard-request";
-import DetailsStatisticItem from "../../../details-statistic-item/details-statistic-item";
-import { formatValue } from "../../../../utils/formatter";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
+import { formatValue } from "shared/utils/formatter";
 import NumberFormat from "react-number-format";
 
 class DashboardInRequestsContainer extends PureComponent {
@@ -44,7 +44,7 @@ class DashboardInRequestsContainer extends PureComponent {
 
     return (
       <div className="dashboard-request">
-        <DetailsStatisticItem label={"In Requests"} big>
+        <StatisticItem label={"In Requests"} big>
           <NumberFormat
             value={formatValue(inRequests.totalValue)}
             thousandSeparator={" "}
@@ -52,7 +52,7 @@ class DashboardInRequestsContainer extends PureComponent {
             suffix={" GVT"}
           />
           {this.renderActionsIcon()}
-        </DetailsStatisticItem>
+        </StatisticItem>
 
         <Popover
           horizontal="right"

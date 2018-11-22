@@ -3,7 +3,7 @@ import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 
 import { formatValue } from "shared/utils/formatter";
-import DetailsStatisticItem from "shared/components/details-statistic-item/details-statistic-item";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Profitability from "shared/components/profitability/profitability";
 
 const DashboardPortfolioChartStat = ({
@@ -53,7 +53,7 @@ const DashboardPortfolioChartStat = ({
 
   return (
     <div className="dashboard-portfolio-chart-stat">
-      <DetailsStatisticItem
+      <StatisticItem
         big
         accent
         label={"Value"}
@@ -61,15 +61,15 @@ const DashboardPortfolioChartStat = ({
         equivalentCurrency={currency}
       >
         {renderValue()}
-      </DetailsStatisticItem>
-      <DetailsStatisticItem
+      </StatisticItem>
+      <StatisticItem
         label={"Change"}
         equivalent={formatValue(changeValueCurrency)}
         equivalentCurrency={currency}
         big
       >
         {renderChange()}
-      </DetailsStatisticItem>
+      </StatisticItem>
     </div>
   );
 };

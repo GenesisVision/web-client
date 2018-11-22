@@ -1,6 +1,6 @@
 import "./wallet-balance.scss";
 
-import DetailsStatisticItem from "shared/components/details-statistic-item/details-statistic-item";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { GVButton } from "gv-react-components";
 import React from "react";
 import { translate } from "react-i18next";
@@ -17,7 +17,7 @@ const WalletBalance = ({
   <div className="wallet-balance">
     <h1 className="wallet-balance__heading">{t("wallet.title")}</h1>
     <div className="wallet-balance__statistic">
-      <DetailsStatisticItem
+      <StatisticItem
         label={t("wallet.total-balance")}
         equivalent={walletBalanceData.totalBalanceCurrency}
         equivalentCurrency={currentCurrency}
@@ -30,8 +30,8 @@ const WalletBalance = ({
           displayType="text"
           suffix={" GVT"}
         />
-      </DetailsStatisticItem>
-      <DetailsStatisticItem
+      </StatisticItem>
+      <StatisticItem
         label={t("wallet.invested-value")}
         equivalent={walletBalanceData.investedCurrency}
         equivalentCurrency={currentCurrency}
@@ -45,8 +45,8 @@ const WalletBalance = ({
           displayType="text"
           suffix={" GVT"}
         />
-      </DetailsStatisticItem>
-      <DetailsStatisticItem
+      </StatisticItem>
+      <StatisticItem
         label={t("wallet.available")}
         equivalent={walletBalanceData.availableCurrency}
         equivalentCurrency={currentCurrency}
@@ -60,7 +60,7 @@ const WalletBalance = ({
           displayType="text"
           suffix={" GVT"}
         />
-      </DetailsStatisticItem>
+      </StatisticItem>
     </div>
     <div className="wallet-balance__footer">
       <GVButton className="wallet-balance__add-funds" onClick={handleAddFunds}>
