@@ -10,13 +10,11 @@ const initialState = {
 };
 
 export const walletBalanceReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case WALLET_BALANCE:
-      return {
-        ...state,
-        ...action.wallet
-      };
-    default:
-      return state;
+  if (action.type === WALLET_BALANCE) {
+    return {
+      ...state,
+      ...action.wallet
+    };
   }
+  return state;
 };
