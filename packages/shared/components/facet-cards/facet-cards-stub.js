@@ -8,7 +8,7 @@ const FacetCardsStub = () => {
       <div className="facets__carousel">
         <div className="facets">
           {facetsStub.map(x => (
-            <Surface key={x} className="facet facet--stub" />
+            <Surface key={x} className="surface--without-paddings facet facet--stub" />
           ))}
         </div>
       </div>

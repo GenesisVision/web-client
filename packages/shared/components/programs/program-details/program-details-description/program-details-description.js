@@ -315,7 +315,6 @@ class ProgramDetailsDescription extends PureComponent {
                         "program-details-page.description.withdraw-notice-text"
                       )}
                       canWithdraw={canWithdraw}
-                      className={"details-description__your-investment"}
                       assetCurrency={programDescription.currency}
                       onChangeInvestmentStatus={onChangeInvestmentStatus}
                       {...investmentData}

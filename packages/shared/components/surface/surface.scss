@@ -12,6 +12,6 @@
   }
 
   &--horizontal-paddings {
-    @include horizontal-paddings($padding-medium);
+    @include horizontal-paddings($padding-small);
   }
 }

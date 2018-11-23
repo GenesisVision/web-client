@@ -30,7 +30,7 @@ class ProgramDetailsChartSection extends PureComponent {
     const { tab } = this.state;
 
     return (
-      <Surface className="details-chart">
+      <Surface className="surface--horizontal-paddings details-chart">
         <h3 className="details-chart__heading">
           {t("program-details-page.chart.heading")}
         </h3>

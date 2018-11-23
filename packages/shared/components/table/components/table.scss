@@ -38,7 +38,7 @@ $create-icon-width: 140px;
     align-items: center;
     padding: $padding/2;
     font-size: $td-font-size/1.5;
-    padding: 20px 30px;
+    padding: 20px 30px 0;
     .pagination {
       margin: 0;
     }
@@ -76,10 +76,8 @@ $create-icon-width: 140px;
 
   &__title {
     justify-self: flex-start;
-    font-size: $table-title-font-size/2;
-    font-weight: 600;
     letter-spacing: 0.2px;
-    color: $text-accent-color;
+    padding-bottom: 0;
   }
 
   &__filters {
@@ -238,9 +236,6 @@ $create-icon-width: 140px;
     }
     &__body {
       font-size: $td-font-size;
-    }
-    &__title {
-      font-size: $table-title-font-size;
     }
     &__footer {
       font-size: $td-font-size;

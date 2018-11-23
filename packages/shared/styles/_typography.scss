@@ -20,6 +20,7 @@ h2 {
 
 h3 {
   @include font-size($font-size-h3);
+  @include adaptive-padding(bottom, $padding-xsmall);
   font-weight: 600;
   color: $text-light-color;
   margin-top: 0;

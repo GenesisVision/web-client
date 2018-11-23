@@ -41,7 +41,7 @@ class DetailsInvestment extends PureComponent {
       pendingOutput
     } = this.props;
     return (
-      <Surface className={"details-investment " + className}>
+      <Surface className={"surface--horizontal-paddings details-investment " + className}>
         <h3 className="details-investment__heading">
           {t("fund-details-page.description.yourInvestment")}
         </h3>
