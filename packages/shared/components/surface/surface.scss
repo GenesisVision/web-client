@@ -14,4 +14,8 @@
   &--horizontal-paddings {
     @include horizontal-paddings($padding-small);
   }
+
+  .surface {
+    padding-top: 0;
+  }
 }

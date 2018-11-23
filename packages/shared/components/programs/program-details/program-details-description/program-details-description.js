@@ -121,7 +121,6 @@ class ProgramDetailsDescription extends PureComponent {
     };
 
     const title = programDescription.title;
-    console.log(programDescription);
     return (
       <div className="details-description">
         <div className="details-description__left">
