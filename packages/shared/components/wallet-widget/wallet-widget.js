@@ -11,6 +11,7 @@ import React, { Fragment } from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import { formatValue } from "shared/utils/formatter";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
 
 class WalletWidget extends React.Component {
   state = {
@@ -63,28 +64,19 @@ class WalletWidget extends React.Component {
         >
           <div className="wallet-details">
             <div className="wallet-details__item">
-              <div className="wallet-details__title">
-                {t("wallet-widget.total-balance")}
-              </div>
-              <div className="wallet-details__value">{`${formatValue(
-                totalBalanceGvt
-              )} GVT`}</div>
+              <StatisticItem label={t("wallet-widget.total-balance")}>
+                {`${formatValue(totalBalanceGvt)} GVT`}
+              </StatisticItem>
             </div>
             <div className="wallet-details__item">
-              <div className="wallet-details__title">
-                {t("wallet-widget.invested-value")}
-              </div>
-              <div className="wallet-details__value">{`${formatValue(
-                investedGvt
-              )} GVT`}</div>
+              <StatisticItem label={t("wallet-widget.invested-value")}>
+                {`${formatValue(investedGvt)} GVT`}
+              </StatisticItem>
             </div>
             <div className="wallet-details__item">
-              <div className="wallet-details__title">
-                {t("wallet-widget.available")}
-              </div>
-              <div className="wallet-details__value">{`${formatValue(
-                availableGvt
-              )} GVT`}</div>
+              <StatisticItem label={t("wallet-widget.available")}>
+                {`${formatValue(availableGvt)} GVT`}
+              </StatisticItem>
             </div>
             <div className="wallet-details__item">
               <div className="wallet-details__value">
