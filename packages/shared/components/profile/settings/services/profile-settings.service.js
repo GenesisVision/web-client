@@ -4,7 +4,7 @@ import { authApiProxy } from "shared/services/api-client/auth-api";
 import { profileApiProxy } from "shared/services/api-client/profile-api";
 import authService from "shared/services/auth-service";
 import filesService from "shared/services/file-service";
-import { fetchProfileHeaderInfo } from "../../../header/services/header-services";
+import { fetchProfileHeaderInfo } from "shared/components/header/services/header-services";
 
 export const updateProfileAvatar = ({
   croppedImage,
