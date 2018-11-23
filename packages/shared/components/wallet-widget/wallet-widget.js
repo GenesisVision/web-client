@@ -35,9 +35,9 @@ class WalletWidget extends React.Component {
   render() {
     const {
       t,
-      availableGvt,
-      investedGvt,
-      totalBalanceGvt,
+      availableGVT,
+      investedGVT,
+      totalBalanceGVT,
       className
     } = this.props;
     return (
@@ -48,7 +48,7 @@ class WalletWidget extends React.Component {
             onClick={this.handleOpenDetails}
           >
             <WalletIcon primary={this.state.anchorEl !== null} />
-            <span className="wallet-widget__value">{`${availableGvt} GVT`}</span>
+            <span className="wallet-widget__value">{`${availableGVT} GVT`}</span>
           </div>
           <div className="wallet-widget__add">
             <Chip type="positive" onClick={this.handleOpenAddFundsPopup}>
@@ -67,17 +67,17 @@ class WalletWidget extends React.Component {
           <div className="wallet-details">
             <div className="wallet-details__item">
               <StatisticItem label={t("wallet-widget.total-balance")}>
-                {`${formatValue(totalBalanceGvt)} GVT`}
+                {`${formatValue(totalBalanceGVT)} GVT`}
               </StatisticItem>
             </div>
             <div className="wallet-details__item">
               <StatisticItem label={t("wallet-widget.invested-value")}>
-                {`${formatValue(investedGvt)} GVT`}
+                {`${formatValue(investedGVT)} GVT`}
               </StatisticItem>
             </div>
             <div className="wallet-details__item">
               <StatisticItem label={t("wallet-widget.available")}>
-                {`${formatValue(availableGvt)} GVT`}
+                {`${formatValue(availableGVT)} GVT`}
               </StatisticItem>
             </div>
             <div className="wallet-details__item">
@@ -95,24 +95,20 @@ class WalletWidget extends React.Component {
 }
 
 WalletWidget.propTypes = {
-  availableGvt: PropTypes.number,
-  investedGvt: PropTypes.number,
-  totalBalanceGvt: PropTypes.number,
+  availableGVT: PropTypes.number,
+  investedGVT: PropTypes.number,
+  totalBalanceGVT: PropTypes.number,
   className: PropTypes.string
 };
 
 WalletWidget.defaultProps = {
-  availableGvt: 0,
-  investedGvt: 0,
-  totalBalanceGvt: 0,
+  availableGVT: 0,
+  investedGVT: 0,
+  totalBalanceGVT: 0,
   className: ""
 };
 
-const mapStateToProps = state => ({
-  totalBalanceGvt: state.wallet.balance.totalBalanceGVT,
-  investedGvt: state.wallet.balance.investedGVT,
-  availableGvt: state.wallet.balance.availableGVT
-});
+const mapStateToProps = state => state.wallet.balance;
 
 export default compose(
   translate(),
