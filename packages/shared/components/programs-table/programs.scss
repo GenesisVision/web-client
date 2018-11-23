@@ -30,15 +30,15 @@ $description-block-width: 250px;
 }
 
 .programs-cards {
-  .icon {
-    width: auto;
-  }
   box-sizing: border-box;
   padding: $padding/2;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
+  .icon {
+    width: auto;
+  }
   &__card {
     margin-bottom: $padding/2;
     display: flex;
@@ -166,14 +166,13 @@ $description-block-width: 250px;
     }
   }
   @include media-breakpoint-tablet() {
-    justify-content: flex-start;
     &__card {
       flex-grow: 0;
     }
   }
   @media (min-width: 1075px) {
     &__card {
-      width: calc(33% - #{$padding}/ 2);
+      width: calc(33.33% - #{$padding}/ 2);
     }
   }
   @include media-breakpoint-landscape-tablet() {
