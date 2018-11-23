@@ -1,6 +1,5 @@
 import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import { push } from "react-router-redux";
-import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { brokersApiProxy } from "shared/services/api-client/brokers-api";
 import { managerApiProxy } from "shared/services/api-client/manager-api";
@@ -8,6 +7,7 @@ import authService from "shared/services/auth-service";
 import filesService from "shared/services/file-service";
 
 import { getDataWithoutSuffixes } from "../helpers/create-program.helpers";
+import { fetchProfileHeaderInfo } from "shared/components/header/services/header-services";
 
 export const fetchBrokers = () => brokersApiProxy.v10BrokersGet();
 

@@ -1,4 +1,3 @@
-import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import authService from "shared/services/auth-service";
 
@@ -8,6 +7,7 @@ import {
   fetchInRequests
 } from "../actions/dashboard.actions";
 import { getPortfolioEvents } from "./dashboard.service";
+import { fetchProfileHeaderInfo } from "shared/components/header/services/header-services";
 
 export const getInRequests = () => (dispatch, getState) => {
   const authorization = authService.getAuthArg();

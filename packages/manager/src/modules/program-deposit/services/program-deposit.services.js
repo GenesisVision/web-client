@@ -2,8 +2,8 @@ import {
   fetchDepositProgramInfoById,
   investToProgramById
 } from "modules/program-deposit/actions/program-deposit.actions";
-import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
+import { fetchProfileHeaderInfo } from "shared/components/header/services/header-services";
 
 export const getDepositProgramInfoById = id => (dispatch, getState) => {
   const { accountSettings } = getState();
