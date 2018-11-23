@@ -25,9 +25,11 @@ $create-icon-width: 140px;
   @include media-breakpoint-landscape-phone() {
     margin-bottom: $padding-xsmall;
   }
-  .message {
+  & .message {
     padding: $padding;
     text-align: center;
+    width: 100%;
+    font-size: $font-size-common;
   }
   &__vertical-track {
     display: none;
