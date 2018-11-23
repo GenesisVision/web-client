@@ -8,11 +8,11 @@ import { GLOBAL_SEARCH_ROUTE } from "shared/components/global-search/global-sear
 import Header from "shared/components/header/header";
 
 import { logout } from "../../../pages/auth/login/services/login.service";
-import { getHeaderInfo } from "shared/components/header/services/header-services";
+import { fetchProfileHeaderInfo } from "shared/components/header/services/header-services";
 
 class HeaderContainer extends Component {
   componentDidMount() {
-    this.props.isAuthenticated && this.props.getHeaderInfo();
+    this.props.isAuthenticated && this.props.fetchProfileHeaderInfo();
     this.props.isAuthenticated && this.props.fetchTwoFactor();
   }
 
@@ -21,7 +21,6 @@ class HeaderContainer extends Component {
       info,
       logout,
       notificationsToggle,
-      fetchProfileHeaderInfo,
       isAuthenticated,
       ...other
     } = this.props;
@@ -41,7 +40,7 @@ class HeaderContainer extends Component {
 }
 
 const mapDispatchToProps = {
-  getHeaderInfo,
+  fetchProfileHeaderInfo,
   logout,
   notificationsToggle,
   fetchTwoFactor

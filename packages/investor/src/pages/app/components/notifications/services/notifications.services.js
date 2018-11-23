@@ -5,7 +5,7 @@ import {
   notificationsFetch,
   setNotificationsOptions
 } from "pages/app/components/notifications/actions/notifications.actions";
-import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
+import { fetchProfileHeaderInfo } from "shared/components/header/services/header-services";
 
 export const TAKE_COUNT = 10;
 

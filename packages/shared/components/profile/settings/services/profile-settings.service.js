@@ -1,10 +1,10 @@
 import authActions from "shared/actions/auth-actions";
-import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { authApiProxy } from "shared/services/api-client/auth-api";
 import { profileApiProxy } from "shared/services/api-client/profile-api";
 import authService from "shared/services/auth-service";
 import filesService from "shared/services/file-service";
+import { fetchProfileHeaderInfo } from "../../../header/services/header-services";
 
 export const updateProfileAvatar = ({
   croppedImage,
