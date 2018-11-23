@@ -1,10 +1,10 @@
 import React, { Fragment } from "react";
+import NumberFormat from "react-number-format";
 import ChartPeriod from "shared/components/chart/chart-period/chart-period";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import { formatValue } from "shared/utils/formatter";
 
 import ProgramBalanceChart from "./program-balance-chart";
-import NumberFormat from "react-number-format";
-import { formatValue } from "shared/utils/formatter";
 
 const ProgramBalanceChartSection = ({
   balanceChartData,

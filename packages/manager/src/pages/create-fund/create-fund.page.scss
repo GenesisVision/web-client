@@ -2,20 +2,6 @@
 @import "~shared/styles/_breakpoint.scss";
 @import "~shared/styles/_sizes.scss";
 
-.create-fund-page {
-  padding-top: $padding-large-mobile;
-  @include media-breakpoint-landscape-phone() {
-    padding-top: $padding-large;
-  }
-  &__title {
-    font-size: $font-size-h1-mobile;
-    font-weight: 700;
-    @include media-breakpoint-landscape-phone() {
-      font-size: $font-size-h1;
-    }
-  }
-}
-
 .create-fund {
   &__navigation-dialog {
     padding: 32px;

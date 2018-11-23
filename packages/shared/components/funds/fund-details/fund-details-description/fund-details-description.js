@@ -11,12 +11,12 @@ import DetailsFavorite from "shared/components/details/details-description-secti
 import DetailsNotification from "shared/components/details/details-description-section/details-description/details-notificaton";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
 import {
   composeFundNotificationsUrl,
   composeManagerDetailsUrl
 } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
-import StatisticItem from "shared/components/statistic-item/statistic-item";
 
 class FundDetailsDescription extends PureComponent {
   state = {
@@ -112,9 +112,7 @@ class FundDetailsDescription extends PureComponent {
           </div>
         </div>
         <div className="details-description__main">
-          <div className="details-description__heading">
-            {fundDescription.title}
-          </div>
+          <h1 className="app__title-details">{fundDescription.title}</h1>
           <Link
             to={{
               pathname: composeManagerDetailsUrl(fundDescription.manager.url),
@@ -129,9 +127,9 @@ class FundDetailsDescription extends PureComponent {
             </GVButton>
           </Link>
           <div className="details-description__info-block">
-            <div className="details-description__subheading">
+            <h4 className="details-description__subheading">
               {t("fund-details-page.description.assets")}
-            </div>
+            </h4>
             <div>
               <FundAssetContainer
                 type={"large"}
@@ -141,9 +139,9 @@ class FundDetailsDescription extends PureComponent {
             </div>
           </div>
           <div className="details-description__info">
-            <div className="details-description__subheading">
+            <h4 className="details-description__subheading">
               {t("fund-details-page.description.strategy")}
-            </div>
+            </h4>
             <div className="details-description__text">
               {fundDescription.description}
             </div>

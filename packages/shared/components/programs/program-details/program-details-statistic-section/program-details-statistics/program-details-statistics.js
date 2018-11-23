@@ -6,10 +6,9 @@ import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { ChartPeriodType } from "shared/components/chart/chart-period/chart-period.helpers";
 import ProgramPeriodLine from "shared/components/program-period/program-period-line/program-period-line";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Surface from "shared/components/surface/surface";
 import { formatValue } from "shared/utils/formatter";
-
-import StatisticItem from "shared/components/statistic-item/statistic-item";
 
 const ProgramDetailsStatistics = ({
   t,
@@ -23,9 +22,9 @@ const ProgramDetailsStatistics = ({
   if (!statistic || isPendingStatistic || isPendingProfitChart) return null;
   return (
     <Surface className="details-statistics">
-      <div className="details-statistics__heading">
+      <h3 className="details-statistics__heading">
         {t("program-details-page.statistics.heading")}
-      </div>
+      </h3>
       <div className="details-statistics__subheading">
         {t("program-details-page.statistics.current")}
       </div>
@@ -41,9 +40,7 @@ const ProgramDetailsStatistics = ({
             suffix={` ${profitChart.programCurrency}`}
           />
         </StatisticItem>
-        <StatisticItem
-          label={t("program-details-page.statistics.investors")}
-        >
+        <StatisticItem label={t("program-details-page.statistics.investors")}>
           <NumberFormat
             value={statistic.investors}
             thousandSeparator={" "}

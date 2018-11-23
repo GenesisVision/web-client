@@ -1,7 +1,7 @@
-import Page from "shared/components/page/page";
 import qs from "qs";
 import React from "react";
 import { translate } from "react-i18next";
+import Page from "shared/components/page/page";
 
 import WalletWithdrawConfirmContainer from "./wallet-withdraw-confirm-container";
 

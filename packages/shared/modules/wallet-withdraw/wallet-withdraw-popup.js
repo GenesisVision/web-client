@@ -1,7 +1,8 @@
-import Dialog from "shared/components/dialog/dialog";
-import WalletWithdrawContainer from "./components/wallet-withdraw-container";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
+import Dialog from "shared/components/dialog/dialog";
+
+import WalletWithdrawContainer from "./components/wallet-withdraw-container";
 
 class WalletWithdrawPopup extends Component {
   render() {

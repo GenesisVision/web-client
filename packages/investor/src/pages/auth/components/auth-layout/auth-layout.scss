@@ -31,10 +31,6 @@
     border-radius: $border-radius;
   }
 
-  h1 {
-    margin: 0 0 30px 0;
-  }
-
   &__content {
     display: flex;
     flex-direction: column;
@@ -146,9 +142,6 @@
   @include media-breakpoint-desktop() {
     padding: 80px 100px;
     justify-content: space-between;
-    h1 {
-      margin: 0 0 30px 0;
-    }
     &__right {
       display: flex;
       flex-direction: column;

@@ -32,7 +32,7 @@
   &__info {
     flex-grow: 3.5;
     margin-left: 12px;
-    @include media-breakpoint-landscape-phone(){
+    @include media-breakpoint-landscape-phone() {
       margin-left: 24px;
     }
     & .statistics-item {
@@ -53,7 +53,7 @@
     color: $text-color;
     line-height: 1.69;
     padding-right: $padding-small-mobile;
-    @include media-breakpoint-landscape-phone(){
+    @include media-breakpoint-landscape-phone() {
       font-size: $font-size-common;
     }
   }
@@ -68,7 +68,7 @@
     @include media-breakpoint-phone() {
       text-align: right;
     }
-    @include media-breakpoint-landscape-phone(){
+    @include media-breakpoint-landscape-phone() {
       font-size: $font-size-common;
     }
     @include media-breakpoint-tablet() {

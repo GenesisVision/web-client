@@ -4,9 +4,9 @@ import FacetCardsContainer from "shared/components/facet-cards/faset-cards-conta
 import NavigationTabsContainer from "shared/components/navigation-tabs/navigation-tabs-container";
 import Page from "shared/components/page/page";
 import FundsTableContainer from "shared/modules/funds-table/components/funds-table/funds-table-container";
+import { composeFundFacetUrl } from "shared/utils/compose-url";
 
 import * as routes from "../funds.routes";
-import { composeFundFacetUrl } from "shared/utils/compose-url";
 
 const FundsPage = ({ t }) => {
   const title = t("funds-page.title");

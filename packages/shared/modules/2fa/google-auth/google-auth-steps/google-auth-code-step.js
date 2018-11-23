@@ -13,7 +13,7 @@ const GoogleStep2 = ({ t, authenticatorUri, sharedKey, className }) => {
         <GVqr value={authenticatorUri} />
       </div>
       <p className="google-auth__alt-text">{t("2fa.alt-code")}</p>
-      <h2 className="google-auth__alt-code">{sharedKey}</h2>
+      <div className="google-auth__alt-code">{sharedKey}</div>
     </div>
   );
 };

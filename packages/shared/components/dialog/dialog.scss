@@ -78,13 +78,13 @@
     letter-spacing: 0.2px;
   }
 
-  &__top,
-  &__bottom {
-    padding: 30px;
+  &__top {
+    padding: 50px 30px 30px;
   }
 
   &__bottom {
     background-color: rgba(255, 255, 255, 0.02);
+    padding: 30px 30px 50px;
   }
 
   &__close {
@@ -126,11 +126,6 @@
   }
 
   &__header {
-    h2 {
-      font-size: 24px;
-      font-weight: 500;
-      margin-bottom: 11px;
-    }
     p {
       font-size: $font-size-common;
       font-weight: 300;
@@ -151,7 +146,7 @@
     }
 
     &__value {
-      font-size: 24px;
+      font-size: $font-size-h2;
       letter-spacing: 0.8px;
     }
   }

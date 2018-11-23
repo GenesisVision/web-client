@@ -3,20 +3,14 @@
 @import "~shared/styles/_sizes.scss";
 
 .wallet-balance {
-  &__heading {
-    color: $text-accent-color;
-
-    font-size: 28px;
-    margin: 0 0 30px;
-  }
-
   &__statistic {
+    @include padding-top($padding-xxsmall);
     display: flex;
     flex-wrap: wrap;
     & > * {
       margin-right: $padding-small-mobile;
     }
-    @include media-breakpoint-landscape-phone(){
+    @include media-breakpoint-landscape-phone() {
       & > * {
         margin-right: $padding-small;
       }
@@ -30,7 +24,7 @@
   }
 
   &__total-balance-value {
-    font-size: 24px;
+    font-size: $font-size-h2;
     letter-spacing: 0.3px;
     font-weight: 400;
     margin-top: 0;
@@ -65,11 +59,6 @@
 
   @include media-breakpoint-landscape-phone() {
     display: block;
-
-    &__heading {
-      margin-bottom: 45px;
-      font-size: 32px;
-    }
 
     &__statistic {
       &:first-child {

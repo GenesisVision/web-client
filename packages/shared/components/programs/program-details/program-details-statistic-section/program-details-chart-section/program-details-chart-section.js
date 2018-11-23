@@ -31,9 +31,9 @@ class ProgramDetailsChartSection extends PureComponent {
 
     return (
       <Surface className="details-chart">
-        <div className="details-chart__heading">
+        <h3 className="details-chart__heading">
           {t("program-details-page.chart.heading")}
-        </div>
+        </h3>
         <GVTabs value={tab} onChange={this.handleTabChange}>
           <GVTab
             value={PROFIT_TAB}
