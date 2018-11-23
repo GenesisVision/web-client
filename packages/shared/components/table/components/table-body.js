@@ -22,6 +22,7 @@ const TableBody = ({
       </div>
     );
   };
+
   const setMessage = message => {
     return Tag === "tbody" ? (
       <tr>
@@ -41,6 +42,7 @@ const TableBody = ({
       )
     );
   };
+
   const renderItems = () => {
     if (items === null || items === undefined)
       return setMessage(t("table.loading"));
