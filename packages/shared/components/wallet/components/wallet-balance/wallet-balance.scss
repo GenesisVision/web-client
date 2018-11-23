@@ -4,7 +4,7 @@
 
 .wallet-balance {
   &__statistic {
-    @include padding-top($padding-xxsmall);
+    @include adaptive-padding(top, $padding-xxsmall);
     display: flex;
     flex-wrap: wrap;
     & > * {

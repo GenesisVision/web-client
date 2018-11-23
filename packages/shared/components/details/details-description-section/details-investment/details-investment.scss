@@ -11,14 +11,13 @@ $withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
   display: inline-block;
   width: 100%;
   max-width: 500px;
-  &,
-  & div {
-    box-sizing: border-box;
-  }
   padding-right: $padding-small-mobile;
   padding-left: $padding-small-mobile;
   margin-top: $padding-small-mobile;
   margin-left: 0;
+  & div {
+    box-sizing: border-box;
+  }
   @include media-breakpoint-phone() {
     margin-left: -$padding-small-mobile;
   }

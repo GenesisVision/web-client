@@ -2,8 +2,16 @@
 @import "~shared/styles/_sizes.scss";
 
 .surface {
-  @include padding-top($padding-medium);
-  @include padding-bottom($padding-small);
+  @include vertical-paddings($padding-medium, $padding-small);
   background-color: $panel-background-color;
   border-radius: 0.5em;
+  box-sizing: border-box;
+
+  &--without-paddings {
+    padding: 0;
+  }
+
+  &--horizontal-paddings {
+    @include horizontal-paddings($padding-medium);
+  }
 }
