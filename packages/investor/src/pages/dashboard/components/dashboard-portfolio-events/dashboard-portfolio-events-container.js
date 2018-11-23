@@ -72,9 +72,9 @@ class DashboardPortfolioEventsContainer extends Component {
 
     return (
       <Surface className="dashboard-portfolio-events">
-        <div className="dashboard-portfolio-events__title">
+        <h3 className="dashboard-portfolio-events__title">
           {t("dashboard.portfolio-events.title")}
-        </div>
+        </h3>
         {this.renderEvents()}
       </Surface>
     );

@@ -3,8 +3,9 @@ import "./statistic-item.scss";
 import classnames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
-import { formatValue } from "../../utils/formatter";
 import NumberFormat from "react-number-format";
+
+import { formatValue } from "../../utils/formatter";
 
 const StatisticItem = ({
   large,
@@ -58,6 +59,11 @@ const StatisticItem = ({
 
 StatisticItem.propTypes = {
   label: PropTypes.string.isRequired,
+  equivalent: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  equivalentCurrency: PropTypes.string,
+  small: PropTypes.bool,
+  big: PropTypes.bool,
+  large: PropTypes.bool,
   accent: PropTypes.bool,
   half: PropTypes.bool,
   className: PropTypes.string

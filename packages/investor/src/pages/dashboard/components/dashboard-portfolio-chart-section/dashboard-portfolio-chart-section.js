@@ -4,8 +4,8 @@ import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import connect from "react-redux/es/connect/connect";
 import { compose } from "redux";
-import Surface from "shared/components/surface/surface";
 import DashboardInRequestsContainer from "shared/components/dashboard/dashboard-portfolio-chart-section/dashboard-in-requests/dashboard-in-requests-container";
+import Surface from "shared/components/surface/surface";
 
 import {
   cancelRequest,
@@ -20,9 +20,7 @@ class DashboardPortfolioChartSection extends Component {
     if (!isNewUser)
       return (
         <Fragment>
-          <div className="dashboard-portfolio-chart-section__heading">
-            Chart
-          </div>
+          <h3 className="dashboard-portfolio-chart-section__heading">Chart</h3>
           <DashboardInRequestsContainer
             cancelRequest={cancelRequest}
             getInRequests={getInRequests}

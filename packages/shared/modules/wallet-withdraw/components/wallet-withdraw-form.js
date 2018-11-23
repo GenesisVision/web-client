@@ -12,6 +12,7 @@ import { convertFromCurrency } from "shared/utils/currency-converter";
 import { formatValue } from "shared/utils/formatter";
 import { number, object, string } from "yup";
 import { ethWalletValidator } from "shared/utils/validators/validators";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
 
 const WalletWithdrawForm = ({
   t,
@@ -46,14 +47,9 @@ const WalletWithdrawForm = ({
           <h2>{t("wallet-withdraw.title")}</h2>
         </div>
         <div className="gv-text-field__wrapper">
-          <label className="gv-text-field__label gv-text-field__label--shrink">
-            {t("wallet-withdraw.available")}
-          </label>
-          <div className="gv-text-field wallet-withdraw__field">
-            <div className="gv-text-field__input dialog-field__value">
-              {availableToWithdrawal} GVT
-            </div>
-          </div>
+          <StatisticItem label={t("wallet-withdraw.available")} big>
+            {availableToWithdrawal} GVT
+          </StatisticItem>
         </div>
         <GVFormikField
           name="currency"
@@ -139,7 +135,7 @@ const WalletWithdrawForm = ({
             {t("buttons.confirm")}
           </GVButton>
         </div>
-        {currency !== "GVT" && (
+        {currency !== "GVT" && currency !== null && (
           <div className="dialog__info">{t("wallet-withdraw.info")}</div>
         )}
       </div>

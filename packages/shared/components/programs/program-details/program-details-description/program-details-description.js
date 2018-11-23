@@ -10,12 +10,12 @@ import DetailsFavorite from "shared/components/details/details-description-secti
 import DetailsNotification from "shared/components/details/details-description-section/details-description/details-notificaton";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import Popover from "shared/components/popover/popover";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
 import {
   composeManagerDetailsUrl,
   composeProgramNotificationsUrl
 } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
-import StatisticItem from "shared/components/statistic-item/statistic-item";
 
 class ProgramDetailsDescription extends PureComponent {
   state = {
@@ -144,10 +144,10 @@ class ProgramDetailsDescription extends PureComponent {
           >
             <div className="popover-levels">
               <div className="popover-levels__block">
-                <div className="popover-levels__title">
+                <h4 className="popover-levels__title">
                   {t("program-details-page.popover.genesis-level")}{" "}
                   {programDescription.level}
-                </div>
+                </h4>
                 <div className="popover-levels__subtitle">
                   {t("program-details-page.popover.invest-limit")}
                 </div>
@@ -183,7 +183,7 @@ class ProgramDetailsDescription extends PureComponent {
           />
         </div>
         <div className="details-description__main">
-          <div className="details-description__heading">{title}</div>
+          <h1 className="app__title-details">{title}</h1>
           <Link
             to={{
               pathname: composeManagerDetailsUrl(
@@ -201,9 +201,9 @@ class ProgramDetailsDescription extends PureComponent {
           </Link>
 
           <div className="details-description__info">
-            <div className="details-description__subheading">
+            <h4 className="details-description__subheading">
               {t("program-details-page.description.strategy")}
-            </div>
+            </h4>
             <div className="details-description__text">
               {programDescription.description}
             </div>

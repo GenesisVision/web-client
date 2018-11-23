@@ -6,7 +6,7 @@ import FacetCardsStub from "./facet-cards-stub";
 
 class FacetCardsContainer extends Component {
   render() {
-    const { isPending, facets, title,composeFacetUrl } = this.props;
+    const { isPending, facets, title, composeFacetUrl } = this.props;
     if (!facets || isPending) return <FacetCardsStub />;
     return (
       <FacetCards

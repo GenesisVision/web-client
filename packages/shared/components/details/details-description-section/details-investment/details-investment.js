@@ -5,10 +5,9 @@ import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import ProgramStatus from "shared/components/program-status/program-status";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Surface from "shared/components/surface/surface";
 import { formatValue } from "shared/utils/formatter";
-
-import StatisticItem from "shared/components/statistic-item/statistic-item";
 
 class DetailsInvestment extends PureComponent {
   state = {
@@ -43,9 +42,9 @@ class DetailsInvestment extends PureComponent {
     } = this.props;
     return (
       <Surface className={"details-investment " + className}>
-        <div className="details-investment__heading">
+        <h3 className="details-investment__heading">
           {t("fund-details-page.description.yourInvestment")}
-        </div>
+        </h3>
         <div className="details-investment__short-statistic">
           <StatisticItem
             accent

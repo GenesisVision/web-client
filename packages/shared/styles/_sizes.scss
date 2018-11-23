@@ -1,3 +1,5 @@
+@import "./_breakpoint.scss";
+
 //paddings
 $padding-xxlarge: 108px;
 $padding-xlarge: 90px;
@@ -26,7 +28,7 @@ $icon-size: 29px;
 $avatar-size: 120px;
 $asset-height: 40px;
 
-//dividers
+//dividers4
 $divider-padding: 3;
 $divider-text: 1.5;
 $divider-title: 2;
@@ -57,3 +59,33 @@ $btn-height-mobile: $btn-height/$divider-text;
 $btn-width-mobile: $btn-width/$divider-text;
 $icon-size-mobile: $icon-size/$divider-text;
 $avatar-size-mobile: $avatar-size/$divider-title;
+
+//mixins
+@mixin font-size($font-size) {
+  $divider: $divider-text;
+
+  @if $font-size == $font-size-h1 {
+    $divider: $divider-title;
+  }
+  font-size: $font-size/$divider;
+
+  @include media-breakpoint-landscape-phone() {
+    font-size: $font-size;
+  }
+}
+
+@mixin padding-bottom($padding-size) {
+  padding-bottom: $padding-size/$divider-padding;
+
+  @include media-breakpoint-landscape-phone() {
+    padding-bottom: $padding-size;
+  }
+}
+
+@mixin padding-top($padding-size) {
+  padding-top: $padding-size/$divider-padding;
+
+  @include media-breakpoint-landscape-phone() {
+    padding-top: $padding-size;
+  }
+}

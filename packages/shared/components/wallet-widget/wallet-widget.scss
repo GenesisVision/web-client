@@ -35,11 +35,7 @@
   width: 170px;
 
   &__item:last-child {
-    margin-top: 40px;
-  }
-
-  &__item:not(:last-child) {
-    margin-bottom: 24px;
+    margin-top: $padding-xsmall;
   }
 
   &__title {

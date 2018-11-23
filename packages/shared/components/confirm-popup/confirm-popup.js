@@ -26,12 +26,12 @@ const ConfirmPopup = ({
   return (
     <Dialog open={open} onClose={onClose}>
       <div className={classnames("confirm-popup", className)}>
-        <div className={classnames("confirm-popup__header", headerClassName)}>
+        <h2 className={classnames("confirm-popup__header", headerClassName)}>
           {header}
-        </div>
-        <div className={classnames("confirm-popup__body", bodyClassName)}>
+        </h2>
+        <p className={classnames("confirm-popup__body", bodyClassName)}>
           {body}
-        </div>
+        </p>
         <div className="confirm-popup__btns">
           <GVButton onClick={onApply}>{applyButtonText}</GVButton>
           {onCancel && (

@@ -27,9 +27,9 @@ class AboutLevelsComponent extends Component {
       <Dialog open={open} onClose={onClose} className="about-levels__dialog">
         <div className="about-levels-container">
           <div className="about-levels-container__header">
-            <div className="about-levels-container__title">
+            <h1 className="about-levels-container__title">
               {t("about-levels.titles.main")}
-            </div>
+            </h1>
             <div className="about-levels-container__description">
               {t("about-levels.description")}
             </div>

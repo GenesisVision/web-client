@@ -3,16 +3,15 @@ import "./dashboard-in-requests.scss";
 import React, { PureComponent } from "react";
 import Scrollbars from "react-custom-scrollbars";
 import { translate } from "react-i18next";
+import NumberFormat from "react-number-format";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
-
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
 import Popover from "shared/components/popover/popover";
-
-import DashboardRequest from "./dashboard-request";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatValue } from "shared/utils/formatter";
-import NumberFormat from "react-number-format";
+
+import DashboardRequest from "./dashboard-request";
 
 class DashboardInRequestsContainer extends PureComponent {
   state = {

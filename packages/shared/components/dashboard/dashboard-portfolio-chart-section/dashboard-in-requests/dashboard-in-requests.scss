@@ -5,10 +5,10 @@
 .dashboard-request {
   float: right;
   padding: 0 $padding-small-mobile;
-  & .details-statistics-item{
+  & .statistics-item{
     padding-right: 0;
   }
-  &__in-request{
+  &__in-request {
     display: flex;
     align-items: center;
     font-size: $font-size-h2-mobile;
@@ -42,7 +42,7 @@
     min-width: 400px;
   }
 
-  .portfolio-event-logo__photo{
+  .portfolio-event-logo__photo {
     border-color: #273642;
   }
 

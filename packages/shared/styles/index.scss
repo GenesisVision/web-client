@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700");
 @import "~gv-react-components/dist/index.css";
-@import "~shared/styles/_colors.scss";
+@import "./_colors.scss";
+@import "./_typography.scss";
 
 body {
   margin: 0;
@@ -27,4 +28,13 @@ button {
   //fix for hidden scroll after zoom page, because we are using custom scroll
   width: 0;
   height: 0;
+}
+
+.app__title-page {
+  @include padding-top($padding-medium);
+  @include padding-bottom($padding-small);
+}
+
+.app__title-details {
+  @include padding-bottom($padding-xxsmall);
 }

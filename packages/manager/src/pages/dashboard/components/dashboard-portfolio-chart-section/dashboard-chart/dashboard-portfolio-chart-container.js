@@ -18,17 +18,20 @@ class DashboardPortfolioChartContainer extends PureComponent {
 
     if (assets !== null) {
       const { programs, funds } = assets;
-      let asset;
-      if (programs.length > 0) {
-        asset = programs[0];
-      } else {
-        asset = funds[0];
-      }
-      if (asset) {
+      const assetProgram = programs.length ? programs[0] : null;
+      const assetFund = funds.length ? funds[0] : null;
+      if (assetProgram) {
         this.props.service.getAssetChart(
-          asset.id,
-          asset.title,
+          assetProgram.id,
+          assetProgram.title,
           "Program",
+          this.state.period
+        );
+      } else if (assetFund) {
+        this.props.service.getAssetChart(
+          assetFund.id,
+          assetFund.title,
+          "Fund",
           this.state.period
         );
       }
@@ -51,9 +54,9 @@ class DashboardPortfolioChartContainer extends PureComponent {
     if (!assetChart || assetChart.isPending) return null;
     return (
       <Fragment>
-        <div className="dashboard-portfolio-chart-section__heading">
+        <h3 className="dashboard-portfolio-chart-section__heading">
           {assetChart.title}
-        </div>
+        </h3>
         <ChartPeriod period={period} onChange={this.handleChangePeriod} />
         <div className="dashboard-portfolio-chart-section__chart">
           {assetChart.type === "Program" && (

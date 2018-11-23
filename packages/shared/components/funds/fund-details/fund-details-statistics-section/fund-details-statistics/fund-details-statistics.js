@@ -5,18 +5,17 @@ import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { ChartPeriodType } from "shared/components/chart/chart-period/chart-period.helpers";
-import Surface from "shared/components/surface/surface";
-
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import Surface from "shared/components/surface/surface";
 
 const FundDetailsStatistics = ({ t, statisticData, period }) => {
   const { data: statistic, isPending } = statisticData;
   if (!statistic || isPending) return null;
   return (
     <Surface className="details-statistics">
-      <div className="details-statistics__heading">
+      <h3 className="details-statistics__heading">
         {t("fund-details-page.statistics.heading")}
-      </div>
+      </h3>
       <div className="details-statistics__subheading">
         {t("fund-details-page.statistics.current")}
       </div>
@@ -34,16 +33,12 @@ const FundDetailsStatistics = ({ t, statisticData, period }) => {
               suffix={" GVT"}
             />
           </StatisticItem>
-          <StatisticItem
-            label={t("fund-details-page.statistics.start-day")}
-          >
+          <StatisticItem label={t("fund-details-page.statistics.start-day")}>
             {moment(statistic.creationDate).format("D MMM YYYY")}
           </StatisticItem>
         </div>
         <div className="details-statistics__vertical-info-block">
-          <StatisticItem
-            label={t("fund-details-page.statistics.investors")}
-          >
+          <StatisticItem label={t("fund-details-page.statistics.investors")}>
             <NumberFormat
               value={statistic.investors}
               thousandSeparator={" "}

@@ -1,10 +1,10 @@
 import "./wallet-balance.scss";
 
-import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { GVButton } from "gv-react-components";
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatValue } from "shared/utils/formatter";
 
 const WalletBalance = ({
@@ -15,7 +15,7 @@ const WalletBalance = ({
   currentCurrency
 }) => (
   <div className="wallet-balance">
-    <h1 className="wallet-balance__heading">{t("wallet.title")}</h1>
+    <h1 className="app__title-page">{t("wallet.title")}</h1>
     <div className="wallet-balance__statistic">
       <StatisticItem
         label={t("wallet.total-balance")}
