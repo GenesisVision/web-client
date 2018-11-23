@@ -10,6 +10,7 @@ import DashboardAssets from "shared/components/dashboard/dashboard-assets/dashbo
 
 import { getDashboardFunds } from "../../services/dashboard-funds.service";
 import { getDashboardPrograms } from "../../services/dashboard-programs.service";
+import { ChartIcon } from "shared/components/icon/chart-icon";
 
 class DashboardAssetsContainer extends Component {
   componentDidMount() {
@@ -20,6 +21,48 @@ class DashboardAssetsContainer extends Component {
 
   render() {
     const { t, title } = this.props;
+
+    const createFund = () => {
+      return (
+        <div className="create-asset">
+          <div className="create-asset__create-icon">
+            <ChartIcon />
+          </div>
+          <div className="create-asset__text">
+            {t("dashboard.create-fund-text")}
+          </div>
+          <div className="create-asset__button">
+            <Link
+              to={CREATE_FUND_PAGE_ROUTE}
+              className="dashboard__body-button"
+            >
+              <GVButton color="primary">{t("buttons.create-fund")}</GVButton>
+            </Link>
+          </div>
+        </div>
+      );
+    };
+    const createProgram = () => {
+      return (
+        <div className="create-asset">
+          <div className="create-asset__create-icon">
+            <ChartIcon />
+          </div>
+          <div className="create-asset__text">
+            {t("dashboard.create-program-text")}
+          </div>
+          <div className="create-asset__button">
+            <Link
+              to={CREATE_PROGRAM_PAGE_ROUTE}
+              className="dashboard__body-button"
+            >
+              <GVButton color="primary">{t("buttons.create-program")}</GVButton>
+            </Link>
+          </div>
+        </div>
+      );
+    };
+
     return (
       <DashboardAssets
         getDashboardPrograms={getDashboardPrograms}
@@ -28,20 +71,12 @@ class DashboardAssetsContainer extends Component {
           t("buttons.create-program"),
           CREATE_PROGRAM_PAGE_ROUTE
         )}
-        createProgramButtonBody={createButtonBody(
-          t("buttons.create-program"),
-          CREATE_PROGRAM_PAGE_ROUTE
-        )}
-        createProgramText={t("dashboard.create-program-text")}
         createFundButtonToolbar={createButtonToolbar(
           t("buttons.create-fund"),
           CREATE_FUND_PAGE_ROUTE
         )}
-        createFundButtonBody={createButtonBody(
-          t("buttons.create-fund"),
-          CREATE_FUND_PAGE_ROUTE
-        )}
-        createFundText={t("dashboard.create-fund-text")}
+        createFund={createFund()}
+        createProgram={createProgram()}
         title={title}
       />
     );
@@ -56,12 +91,6 @@ const createButtonToolbar = (text, route) => (
       </GVButton>
     </Link>
   </div>
-);
-
-const createButtonBody = (text, route) => (
-  <Link to={route} className="dashboard__body-button">
-    <GVButton color="primary">{text}</GVButton>
-  </Link>
 );
 
 const mapDispatchToProps = dispatch => ({
