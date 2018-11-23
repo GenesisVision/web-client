@@ -1,4 +1,4 @@
-import { UPDATE_WALLET_BALANCE } from "../actions/wallet.actions";
+import { WALLET_BALANCE } from "shared/components/wallet/actions/wallet.actions";
 
 const initialState = {
   availableGVT: 0,
@@ -11,7 +11,7 @@ const initialState = {
 
 export const walletBalanceReducer = (state = initialState, action) => {
   switch (action.type) {
-    case UPDATE_WALLET_BALANCE:
+    case WALLET_BALANCE:
       return {
         ...state,
         ...action.wallet

@@ -4,14 +4,15 @@ import authService from "shared/services/auth-service";
 
 import * as actions from "../actions/wallet.actions";
 import { updateWalletBalance } from "../actions/wallet.actions";
+import walletApi from "shared/services/api-client/wallet-api";
 
 export const fetchWalletBalance = () => (dispatch, getState) => {
   const authorization = authService.getAuthArg();
   const { currency } = getState().accountSettings;
 
-  dispatch(actions.fetchWalletBalance(currency, authorization)).then(data =>
-    dispatch(updateWalletBalance(data.value))
-  );
+  walletApi
+    .v10WalletByCurrencyGet(currency, authorization)
+    .then(data => dispatch(updateWalletBalance(data)));
 };
 
 export const fetchWalletTransactions = requestFilters => {
