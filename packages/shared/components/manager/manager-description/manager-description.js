@@ -5,6 +5,7 @@ import React from "react";
 import { translate } from "react-i18next";
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
+import StatisticItem from "../../statistic-item/statistic-item";
 
 const ManagerDescription = ({ t, managerProfile }) => {
   return (
@@ -32,16 +33,15 @@ const ManagerDescription = ({ t, managerProfile }) => {
           </div>
           <div className="manager-description__short-statistic">
             <div className="manager-description__short-statistic-item">
-              <span className="manager-description__short-statistic-subheading">
-                {t("manager.assets")}
-              </span>
-              <FundAssetContainer
-                assets={managerProfile.assets.map(item => {
-                  return { asset: item };
-                })}
-                type={"text"}
-                size={managerProfile.assets.length}
-              />
+              <StatisticItem label={t("manager.assets")}>
+                <FundAssetContainer
+                  assets={managerProfile.assets.map(item => {
+                    return { asset: item };
+                  })}
+                  type={"text"}
+                  size={managerProfile.assets.length}
+                />
+              </StatisticItem>
             </div>
           </div>
         </div>
