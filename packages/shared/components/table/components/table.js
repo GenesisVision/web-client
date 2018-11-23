@@ -53,8 +53,10 @@ class Table extends Component {
       renderBodyRow,
       paging,
       updatePaging,
-      isPending
+      isPending,
+      emptyMessage
     } = this.props;
+    if (!items && emptyMessage) return emptyMessage;
     return (
       <div className="table-wrapper">
         <TableToolbar
