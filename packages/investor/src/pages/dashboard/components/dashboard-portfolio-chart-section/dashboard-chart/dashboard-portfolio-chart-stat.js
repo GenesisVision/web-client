@@ -14,17 +14,6 @@ const DashboardPortfolioChartStat = ({
   changeValue,
   changeValueCurrency
 }) => {
-  const renderValue = () => (
-    <Fragment>
-      <NumberFormat
-        value={formatValue(value)}
-        thousandSeparator={" "}
-        displayType="text"
-        suffix={" GVT"}
-      />
-    </Fragment>
-  );
-
   const renderChange = () => (
     <Fragment>
       <NumberFormat
@@ -59,7 +48,12 @@ const DashboardPortfolioChartStat = ({
         equivalent={formatValue(valueCurrency)}
         equivalentCurrency={currency}
       >
-        {renderValue()}
+        <NumberFormat
+          value={formatValue(value)}
+          thousandSeparator={" "}
+          displayType="text"
+          suffix={" GVT"}
+        />
       </StatisticItem>
       <StatisticItem
         label={"Change"}

@@ -229,12 +229,16 @@ class CreateProgramSettings extends React.Component {
                   content={t("create-program-page.settings.hints.entry-fee")}
                   className="create-program-settings__fee-hint"
                   vertical={"bottom"}
-                  tooltipContent={t(
-                    "create-program-page.settings.hints.entry-fee-description",
-                    {
-                      maxFee: programsInfo.managerMaxEntryFee
-                    }
+                  tooltipContent={`
+                    ${t(
+                      "create-program-page.settings.hints.entry-fee-description",
+                      {
+                        maxFee: programsInfo.managerMaxEntryFee
+                      }
+                    )}. ${t(
+                    "create-program-page.settings.hints.entry-fee-levels"
                   )}
+                    `}
                 />
               </div>
               <div className="create-program-settings__fee">

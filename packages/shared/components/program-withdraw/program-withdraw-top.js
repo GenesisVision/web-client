@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { translate } from "react-i18next";
 import { formatValue } from "shared/utils/formatter";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
 
 const ProgramWithdrawTop = ({
   t,
@@ -16,12 +17,9 @@ const ProgramWithdrawTop = ({
         <p>{title}</p>
       </div>
       <div className="dialog-field">
-        <div className="dialog-field__description">
-          {t("withdraw-program.available-to-withdraw")}
-        </div>
-        <div className="dialog-field__value">
+        <StatisticItem label={t("withdraw-program.available-to-withdraw")} big>
           {formatValue(availableToWithdraw)} {programCurrency}
-        </div>
+        </StatisticItem>
       </div>
     </div>
   );

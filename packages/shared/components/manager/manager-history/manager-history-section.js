@@ -1,11 +1,9 @@
 import "./manager-history.scss";
 
 import { GVTab, GVTabs } from "gv-react-components";
-import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
-import { push } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
 import FundsTableRow from "shared/components/funds-table/fund-table-row";
 import { FUNDS_TABLE_COLUMNS } from "shared/components/funds-table/funds-table.constants";
@@ -15,7 +13,6 @@ import Surface from "shared/components/surface/surface";
 import { toggleFavoriteFundDispatchable } from "shared/modules/favorite-asset/services/favorite-fund.service";
 import { toggleFavoriteProgramDispatchable } from "shared/modules/favorite-asset/services/favorite-program.service";
 
-import * as managerService from "../../services/manager.service";
 import ManagerTable from "./manager-table/manager-table";
 
 const PROGRAMS_TAB = "programs";
@@ -23,45 +20,38 @@ const FUNDS_TAB = "funds";
 
 class ManagerHistorySection extends PureComponent {
   state = {
-    tab: PROGRAMS_TAB,
-    programs: null,
-    funds: null
+    tab: PROGRAMS_TAB
   };
-
-  componentDidMount() {
-    this.getFunds().then(data => this.setState({ funds: data }));
-    this.getPrograms().then(data => this.setState({ programs: data }));
-  }
 
   handleTabChange = (e, tab) => {
     this.setState({ tab });
   };
 
-  getFunds = filters => {
-    return managerService.getFunds(this.props.managerId, filters);
-  };
-
-  getPrograms = filters => {
-    return managerService.getPrograms(this.props.managerId, filters);
-  };
-
   render() {
-    const { tab, programs, funds } = this.state;
-    const { t, title, managerId, isAuthenticated, service } = this.props;
-    const { handleTabChange, getPrograms, getFunds } = this;
+    const { tab } = this.state;
+    const {
+      t,
+      title,
+      managerId,
+      isAuthenticated,
+      service,
+      getPrograms,
+      getFunds,
+      programs,
+      funds
+    } = this.props;
+    const { handleTabChange } = this;
     return (
       <Surface className="manager-history">
-        <h3 className="manager-history__header">
-          <div className="manager-history__tabs">
-            <GVTabs value={tab} onChange={handleTabChange}>
-              <GVTab
-                value={"programs"}
-                label={t("manager.history.tabs.programs")}
-              />
-              <GVTab value={"funds"} label={t("manager.history.tabs.funds")} />
-            </GVTabs>
-          </div>
-        </h3>
+        <div className="manager-history__tabs">
+          <GVTabs value={tab} onChange={handleTabChange}>
+            <GVTab
+              value={"programs"}
+              label={t("manager.history.tabs.programs")}
+            />
+            <GVTab value={"funds"} label={t("manager.history.tabs.funds")} />
+          </GVTabs>
+        </div>
         <div>
           {tab === PROGRAMS_TAB && (
             <ManagerTable
@@ -74,7 +64,6 @@ class ManagerHistorySection extends PureComponent {
                   title={title}
                   isAuthenticated={isAuthenticated}
                   program={program}
-                  redirectToLogin={service.redirectToLogin}
                   toggleFavorite={service.toggleFavoriteProgram}
                 />
               )}
@@ -130,8 +119,7 @@ const mapDispatchToProps = dispatch => {
     service: bindActionCreators(
       {
         toggleFavoriteProgram: toggleFavoriteProgramDispatchable,
-        toggleFavoriteFund: toggleFavoriteFundDispatchable,
-        redirectToLogin: () => push(LOGIN_ROUTE)
+        toggleFavoriteFund: toggleFavoriteFundDispatchable
       },
       dispatch
     )
