@@ -8,8 +8,8 @@ import { bindActionCreators } from "redux";
 import replaceParams from "shared/utils/replace-params";
 
 import { SLUG_URL_REGEXP } from "shared/utils/constants";
-import ManagerDescriptionContainer from "shared/components/manager/manager-description/manager-description-container";
-import ManagerHistorySection from "./components/program-details-history-section/manager-history-section";
+import ManagerDescriptionContainer from "shared/components/manager/manager-description/manager-description";
+import ManagerHistorySection from "shared/components/manager/manager-history/manager-history-section";
 import * as managerService from "./services/manager.service";
 
 export const MANAGER_SLUG_URL_PARAM_NAME = "managerSlugUrl";
