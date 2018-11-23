@@ -9,7 +9,7 @@ import { bindActionCreators } from "redux";
 import replaceParams from "shared/utils/replace-params";
 
 import { SLUG_URL_REGEXP } from "shared/utils/constants";
-import ManagerDescriptionContainer from "./components/manager-description/manager-description-container";
+import ManagerDescriptionContainer from "shared/components/manager/manager-description/manager-description-container";
 import ManagerHistorySection from "./components/program-details-history-section/manager-history-section";
 import * as managerService from "./services/manager.service";
 
@@ -48,7 +48,7 @@ class ManagerPage extends Component {
             <div className="manager__description">
               <ManagerDescriptionContainer
                 managerProfile={managerProfile}
-                goBack={service.goBack}
+                managerService={service}
               />
             </div>
             <div className="manager__history">
