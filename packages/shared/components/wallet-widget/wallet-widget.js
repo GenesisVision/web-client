@@ -12,6 +12,8 @@ import { WALLET_PAGE_ROUTE } from "shared/components/wallet/wallet-page";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
 import { formatValue } from "shared/utils/formatter";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import { connect } from "react-redux";
+import { compose } from "redux";
 
 class WalletWidget extends React.Component {
   state = {
@@ -106,4 +108,13 @@ WalletWidget.defaultProps = {
   className: ""
 };
 
-export default translate()(WalletWidget);
+const mapStateToProps = state => ({
+  totalBalanceGvt: state.wallet.balance.totalBalanceGVT,
+  investedGvt: state.wallet.balance.investedGVT,
+  availableGvt: state.wallet.balance.availableGVT
+});
+
+export default compose(
+  translate(),
+  connect(mapStateToProps)
+)(WalletWidget);

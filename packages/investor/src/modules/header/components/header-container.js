@@ -5,14 +5,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchTwoFactor } from "shared/actions/2fa-actions";
 import { GLOBAL_SEARCH_ROUTE } from "shared/components/global-search/global-search.routes";
-import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
 import Header from "shared/components/header/header";
 
 import { logout } from "../../../pages/auth/login/services/login.service";
+import { getHeaderInfo } from "shared/components/header/services/header-services";
 
 class HeaderContainer extends Component {
   componentDidMount() {
-    this.props.isAuthenticated && this.props.fetchProfileHeaderInfo();
+    this.props.isAuthenticated && this.props.getHeaderInfo();
     this.props.isAuthenticated && this.props.fetchTwoFactor();
   }
 
@@ -41,7 +41,7 @@ class HeaderContainer extends Component {
 }
 
 const mapDispatchToProps = {
-  fetchProfileHeaderInfo,
+  getHeaderInfo,
   logout,
   notificationsToggle,
   fetchTwoFactor

@@ -69,7 +69,7 @@ class WalletBalanceContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    walletBalanceData: state.wallet.balance.data,
+    walletBalanceData: state.wallet.balance,
     currency: state.accountSettings.currency
   };
 };

@@ -1,13 +1,10 @@
 import { combineReducers } from "redux";
-import apiReducerFactory from "shared/reducers/api-reducer/api-reducer";
 
-import { WALLET_BALANCE } from "../actions/wallet.actions";
 import walletTransactionsReducer from "./wallet-transactions.reducer";
+import { walletBalanceReducer } from "./wallet-balance.reducer";
 
 const walletReducer = combineReducers({
-  balance: apiReducerFactory({
-    apiType: WALLET_BALANCE
-  }),
+  balance: walletBalanceReducer,
   transactions: walletTransactionsReducer
 });
 export default walletReducer;

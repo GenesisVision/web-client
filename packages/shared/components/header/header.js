@@ -30,9 +30,6 @@ class Header extends Component {
       openNotifications,
       notificationsCount,
       isAuthenticated,
-      totalBalanceGvt,
-      availableGvt,
-      investedGvt,
       LOGIN_ROUTE,
       SIGNUP_ROUTE,
       GLOBAL_SEARCH_ROUTE
@@ -60,12 +57,7 @@ class Header extends Component {
         <div className="header__right">
           {isAuthenticated ? (
             <Fragment>
-              <WalletWidget
-                className="header__wallet"
-                totalBalanceGvt={totalBalanceGvt}
-                investedGvt={investedGvt}
-                availableGvt={availableGvt}
-              />
+              <WalletWidget className="header__wallet" />
               <NorificationsWidget
                 notificationsCount={notificationsCount}
                 openNotifications={openNotifications}
