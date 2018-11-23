@@ -25,15 +25,13 @@ class DashboardPrograms extends Component {
       t,
       getDashboardPrograms,
       createButtonToolbar,
-      createButtonBody,
-      createText,
+      createProgram,
       title
     } = this.props;
     return (
       <TableContainer
         createButtonToolbar={createButtonToolbar}
-        createButtonBody={createButtonBody}
-        createText={createText}
+        emptyMessage={createProgram}
         getItems={getDashboardPrograms}
         dataSelector={dashboardProgramsTableSelector}
         isFetchOnMount={true}

@@ -26,15 +26,13 @@ class DashboardFunds extends Component {
       DASHBOARD_FUNDS_COLUMNS,
       getDashboardFunds,
       createButtonToolbar,
-      createButtonBody,
-      createText,
+      createFund,
       title
     } = this.props;
     return (
       <TableContainer
         createButtonToolbar={createButtonToolbar}
-        createButtonBody={createButtonBody}
-        createText={createText}
+        emptyMessage={createFund}
         getItems={getDashboardFunds}
         dataSelector={dashboardFundsTableSelector}
         isFetchOnMount={true}

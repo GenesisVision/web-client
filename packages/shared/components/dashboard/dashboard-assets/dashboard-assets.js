@@ -24,11 +24,9 @@ class DashboardAssets extends Component {
       getDashboardPrograms,
       getDashboardFunds,
       createProgramButtonToolbar,
-      createProgramButtonBody,
-      createProgramText,
       createFundButtonToolbar,
-      createFundButtonBody,
-      createFundText
+      createFund,
+      createProgram
     } = this.props;
     return (
       <Surface className="dashboard-assets">
@@ -46,16 +44,14 @@ class DashboardAssets extends Component {
             <DashboardPrograms
               getDashboardPrograms={getDashboardPrograms}
               createButtonToolbar={createProgramButtonToolbar}
-              createButtonBody={createProgramButtonBody}
-              createText={createProgramText}
+              createProgram={createProgram}
               title={title}
             />
           )}
           {tab === "funds" && (
             <DashboardFunds
               createButtonToolbar={createFundButtonToolbar}
-              createButtonBody={createFundButtonBody}
-              createText={createFundText}
+              createFund={createFund}
               DASHBOARD_FUNDS_COLUMNS={DASHBOARD_FUNDS_COLUMNS}
               getDashboardFunds={getDashboardFunds}
               title={title}
