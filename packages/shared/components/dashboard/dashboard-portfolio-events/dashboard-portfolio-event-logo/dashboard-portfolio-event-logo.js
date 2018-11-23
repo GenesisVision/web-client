@@ -9,11 +9,13 @@ import EventEndedRedIcon from "shared/media/event-ended-red.svg";
 import EventEndedIcon from "shared/media/event-ended.svg";
 import EventInvestIcon from "shared/media/event-invest.svg";
 import EventLossIcon from "shared/media/event-loss.svg";
+import EventLossIconRed from "shared/media/event-loss-red.svg";
 import EventAssetFinished from "shared/media/event-manager-asset-finished.svg";
 import EventAssetStarted from "shared/media/event-manager-asset-started.svg";
 import EventPeriodEnds from "shared/media/event-manager-period-end.svg";
 import EventPeriodStarts from "shared/media/event-manager-period-start.svg";
 import EventProfitIcon from "shared/media/event-profit.svg";
+import EventProfitIconGreen from "shared/media/event-profit-green.svg";
 import EventReinvestIcon from "shared/media/event-reinvest.svg";
 import EventStartedIcon from "shared/media/event-started.svg";
 import EventWithdrawIcon from "shared/media/event-withdraw.svg";
@@ -23,9 +25,9 @@ import { EventLogoType } from "./dashboard-portfolio-event-logo.helper";
 export const EvenLogoIcon = ({ type }) => {
   switch (type) {
     case EventLogoType.profit:
-      return <img src={EventProfitIcon} alt="profit" />;
+      return <img src={EventProfitIconGreen} alt="profit" />;
     case EventLogoType.loss:
-      return <img src={EventLossIcon} alt="loss" />;
+      return <img src={EventLossIconRed} alt="loss" />;
     case EventLogoType.reinvest:
       return <img src={EventReinvestIcon} alt="reinvest" />;
     case EventLogoType.ended:
