@@ -4,6 +4,11 @@
 .app {
   margin: 0 auto;
 
+  &__wrapper {
+    position: relative;
+    min-height: 100vh;
+  }
+
   @media (min-width: 1360px) {
     max-width: 1360px;
   }

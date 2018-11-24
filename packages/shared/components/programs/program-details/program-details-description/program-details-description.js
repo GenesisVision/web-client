@@ -16,6 +16,7 @@ import {
   composeProgramNotificationsUrl
 } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
+import Hint from "shared/components/hint/hint";
 
 class ProgramDetailsDescription extends PureComponent {
   state = {
@@ -120,6 +121,7 @@ class ProgramDetailsDescription extends PureComponent {
     };
 
     const title = programDescription.title;
+    console.log(programDescription);
     return (
       <div className="details-description">
         <div className="details-description__left">
@@ -224,11 +226,28 @@ class ProgramDetailsDescription extends PureComponent {
                 className={"details-description__short-statistic-item"}
                 accent
               >
-                <NumberFormat
-                  value={formatValue(programDescription.entryFee, 2)}
-                  displayType="text"
-                  suffix=" %"
-                />
+                {programDescription.level < 3 ? (
+                  <Hint
+                    content={
+                      <NumberFormat
+                        value={formatValue(programDescription.entryFee, 2)}
+                        displayType="text"
+                        prefix="0 % ("
+                        suffix=" %)"
+                      />
+                    }
+                    vertical={"bottom"}
+                    tooltipContent={t(
+                      "program-details-page.description.entry-fee-levels"
+                    )}
+                  />
+                ) : (
+                  <NumberFormat
+                    value={formatValue(programDescription.entryFee, 2)}
+                    displayType="text"
+                    suffix=" %"
+                  />
+                )}
               </StatisticItem>
               <StatisticItem
                 label={t("program-details-page.description.successFee")}

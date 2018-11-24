@@ -7,8 +7,6 @@ $td-font-size: 13px;
 $table-title-font-size: 17px;
 $view-svg-size: 15px;
 $padding: 33px;
-$create-icon-height: 90px;
-$create-icon-width: 140px;
 
 %sortable-border-icon {
   position: absolute;
@@ -25,9 +23,11 @@ $create-icon-width: 140px;
   @include media-breakpoint-landscape-phone() {
     margin-bottom: $padding-xsmall;
   }
-  .message {
+  & .message {
     padding: $padding;
     text-align: center;
+    width: 100%;
+    font-size: $font-size-common;
   }
   &__vertical-track {
     display: none;
@@ -179,52 +179,6 @@ $create-icon-width: 140px;
           &::after {
             width: 10px;
           }
-        }
-      }
-    }
-  }
-  .create-asset {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    padding: $padding-xlarge-mobile 0;
-
-    @include media-breakpoint-landscape-phone() {
-      padding: $padding-xlarge 0;
-    }
-
-    &__create-icon {
-      &,
-      & svg,
-      & .icon {
-        width: $create-icon-width/$divider-text;
-        height: $create-icon-height/$divider-text;
-        @include media-breakpoint-landscape-phone() {
-          width: $create-icon-width;
-          height: $create-icon-height;
-        }
-      }
-    }
-
-    &__text {
-      font-size: $font-size-paragraph-mobile;
-      opacity: 0.4;
-      font-weight: 500;
-      padding: $padding-xsmall;
-      @include media-breakpoint-landscape-phone() {
-        font-size: $font-size-paragraph;
-      }
-    }
-
-    &__button {
-      & .gv-btn {
-        font-weight: 600;
-        font-size: $font-size-small-mobile;
-        padding: 9px 25px;
-        @include media-breakpoint-landscape-phone() {
-          font-size: $font-size-small;
-          padding: 17px 50px;
         }
       }
     }

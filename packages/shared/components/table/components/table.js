@@ -36,21 +36,42 @@ class Table extends Component {
 
   render() {
     const { view } = this.state;
+    const {
+      items,
+      title,
+      renderFilters,
+      updateFilter,
+      filtering,
+      columns,
+      sorting,
+      updateSorting,
+      renderHeader,
+      createButtonToolbar,
+      createButtonBody,
+      createText,
+      renderBodyCard,
+      renderBodyRow,
+      paging,
+      updatePaging,
+      isPending,
+      emptyMessage
+    } = this.props;
+    if (!items && emptyMessage) return emptyMessage;
     return (
       <div className="table-wrapper">
         <TableToolbar
-          title={this.props.title}
-          renderFilters={this.props.renderFilters}
-          updateFilter={this.props.updateFilter}
-          filtering={this.props.filtering}
+          title={title}
+          renderFilters={renderFilters}
+          updateFilter={updateFilter}
+          filtering={filtering}
           onChange={this.changeView}
           view={view}
-          columns={this.props.columns}
-          sorting={this.props.sorting}
-          updateSorting={this.props.updateSorting}
-          renderHeader={this.props.renderHeader}
+          columns={columns}
+          sorting={sorting}
+          updateSorting={updateSorting}
+          renderHeader={renderHeader}
           isViewSwitchEnabled={this.isViewSwitchEnabled}
-          createButtonToolbar={this.props.createButtonToolbar}
+          createButtonToolbar={createButtonToolbar}
         />
         <Scrollbars
           autoHeight
@@ -59,43 +80,31 @@ class Table extends Component {
         >
           {view === CARDS_VIEW && (
             <div className="table">
-              <TableBody
-                items={this.props.items}
-                className="programs-cards"
-                tag="div"
-                createButtonBody={this.props.createButtonBody}
-                createText={this.props.createText}
-              >
-                {this.props.renderBodyCard}
+              <TableBody items={items} className="programs-cards" tag="div">
+                {renderBodyCard}
               </TableBody>
             </div>
           )}
           {view === TABLE_VIEW && (
             <table className="table">
               <TableHeader
-                columns={this.props.columns}
-                sorting={this.props.sorting}
-                updateSorting={this.props.updateSorting}
+                columns={columns}
+                sorting={sorting}
+                updateSorting={updateSorting}
               >
-                {this.props.renderHeader}
+                {renderHeader}
               </TableHeader>
-              <TableBody
-                items={this.props.items}
-                className="table__body"
-                tag="tbody"
-                createButtonBody={this.props.createButtonBody}
-                createText={this.props.createText}
-              >
-                {this.props.renderBodyRow}
+              <TableBody items={items} className="table__body" tag="tbody">
+                {renderBodyRow}
               </TableBody>
             </table>
           )}
         </Scrollbars>
-        {this.props.paging && (
+        {paging && (
           <TableFooter
-            paging={this.props.paging}
-            updatePaging={this.props.updatePaging}
-            isPending={this.props.isPending}
+            paging={paging}
+            updatePaging={updatePaging}
+            isPending={isPending}
           />
         )}
       </div>
