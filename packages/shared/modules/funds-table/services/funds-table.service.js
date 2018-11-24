@@ -9,7 +9,7 @@ import {
   FUNDS_TABLE_COLUMNS,
   FUNDS_TABLE_FILTERS,
   SORTING_FILTER_VALUE
-} from "shared/components/funds-table/funds-table.constants";
+} from "../components/funds-table/funds-table.constants";
 import { composeFilters } from "shared/components/table/helpers/filtering.helpers";
 import {
   calculateSkipAndTake,
