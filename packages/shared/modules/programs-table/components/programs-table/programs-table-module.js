@@ -15,7 +15,7 @@ import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filte
 import LevelFilter from "shared/components/table/components/filtering/level-filter/level-filter";
 import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
 
-const ProgramsTable = ({
+const ProgramsTableModule = ({
   t,
   currencies,
   data,
@@ -100,4 +100,4 @@ const ProgramsTable = ({
   );
 };
 
-export default translate()(ProgramsTable);
+export default translate()(ProgramsTableModule);
