@@ -3,7 +3,7 @@ import "./manager.page.scss";
 import Page from "shared/components/page/page";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
-import connect from "react-redux/es/connect/connect";
+import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import { SLUG_URL_REGEXP } from "shared/utils/constants";
@@ -20,39 +20,20 @@ export const MANAGER_DETAILS_ROUTE_REGEXP = `${MANAGERS_ROUTE}/:${MANAGER_SLUG_U
 class ManagerPage extends Component {
   state = {
     managerProfile: {},
-    funds: null,
-    programs: null,
     isPending: true
   };
 
   componentDidMount() {
     const { service } = this.props;
-    service
-      .fetchManagerProfile()
-      .then(profile => {
-        this.setState({ managerProfile: profile, isPending: false });
-        return this.getFunds();
-      })
-      .then(funds => {
-        this.setState({ funds: funds });
-        return this.getPrograms();
-      })
-      .then(programs => {
-        this.setState({ programs: programs, isPending: false });
-      });
+    service.fetchManagerProfile().then(profile => {
+      this.setState({ managerProfile: profile, isPending: false });
+    });
   }
-
-  getFunds = filters => {
-    return managerService.getFunds(this.props.managerId, filters);
-  };
-
-  getPrograms = filters => {
-    return managerService.getPrograms(this.props.managerId, filters);
-  };
 
   render() {
     const { t } = this.props;
-    const { managerProfile, isPending, funds, programs } = this.state;
+    const { managerProfile, isPending } = this.state;
+
     return (
       !isPending && (
         <Page title={`${t("manager.title")} ${managerProfile.username}`}>
@@ -62,10 +43,7 @@ class ManagerPage extends Component {
             </div>
             <div className="manager__history">
               <ManagerHistorySection
-                programs={programs}
-                funds={funds}
-                getPrograms={this.getPrograms}
-                getFunds={this.getFunds}
+                managerService={managerService}
                 managerId={managerProfile.id}
                 title={managerProfile.username}
               />
@@ -76,6 +54,7 @@ class ManagerPage extends Component {
     );
   }
 }
+
 const mapStateToProps = state => {
   return {
     managerProfile: state.manager.data
