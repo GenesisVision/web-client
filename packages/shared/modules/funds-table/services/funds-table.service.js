@@ -27,11 +27,15 @@ const sortableColums = FUNDS_TABLE_COLUMNS.filter(
   x => x.sortingName !== undefined
 ).map(x => x.sortingName);
 
-export const getFunds = () => (dispatch, getState) => {
-  const requestFilters = dispatch(composeRequestFilters());
+export const getFunds = filters => (dispatch, getState) => {
+  let requestFilters = dispatch(composeRequestFilters());
   if (authService.getAuthArg()) {
     requestFilters.authorization = authService.getAuthArg();
   }
+  requestFilters = {
+    ...requestFilters,
+    ...filters
+  };
   dispatch(fundsTableActions.fetchFunds(requestFilters));
 };
 
