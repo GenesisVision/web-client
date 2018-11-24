@@ -9,7 +9,7 @@ import {
   FUNDS_TABLE_COLUMNS,
   FUNDS_TABLE_FILTERS,
   SORTING_FILTER_VALUE
-} from "shared/components/funds-table/funds-table.constants";
+} from "../components/funds-table/funds-table.constants";
 import { composeFilters } from "shared/components/table/helpers/filtering.helpers";
 import {
   calculateSkipAndTake,
@@ -27,11 +27,15 @@ const sortableColums = FUNDS_TABLE_COLUMNS.filter(
   x => x.sortingName !== undefined
 ).map(x => x.sortingName);
 
-export const getFunds = () => (dispatch, getState) => {
-  const requestFilters = dispatch(composeRequestFilters());
+export const getFunds = filters => (dispatch, getState) => {
+  let requestFilters = dispatch(composeRequestFilters());
   if (authService.getAuthArg()) {
     requestFilters.authorization = authService.getAuthArg();
   }
+  requestFilters = {
+    ...requestFilters,
+    ...filters
+  };
   dispatch(fundsTableActions.fetchFunds(requestFilters));
 };
 
