@@ -10,7 +10,7 @@ import {
   PROGRAMS_COLUMNS,
   PROGRAMS_TABLE_FILTERS,
   SORTING_FILTER_VALUE
-} from "shared/components/programs-table/programs.constants";
+} from "../components/programs-table/programs.constants";
 import { composeFilters } from "shared/components/table/helpers/filtering.helpers";
 import {
   calculateSkipAndTake,
