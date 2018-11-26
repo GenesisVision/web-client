@@ -10,8 +10,9 @@ const mapDispatchToProps = {
   navigationClose
 };
 
-const MobileNavContainer = connect(mapStateToProps, mapDispatchToProps)(
-  MobileNav
-);
+const MobileNavContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MobileNav);
 
 export default MobileNavContainer;
