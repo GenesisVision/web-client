@@ -46,10 +46,12 @@ const WalletWithdrawForm = ({
         <div className="dialog__header">
           <h2>{t("wallet-withdraw.title")}</h2>
         </div>
-        <div className="gv-text-field__wrapper">
-          <StatisticItem label={t("wallet-withdraw.available")} big>
-            {availableToWithdrawal} GVT
-          </StatisticItem>
+        <div className="dialog-field">
+          <div className="gv-text-field__wrapper">
+            <StatisticItem label={t("wallet-withdraw.available")} big>
+              {availableToWithdrawal} GVT
+            </StatisticItem>
+          </div>
         </div>
         <GVFormikField
           name="currency"

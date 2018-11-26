@@ -63,7 +63,7 @@
     margin-bottom: 27px;
   }
   &__alt-code {
-    @include padding-bottom($padding-xxsmall);
+    @include adaptive-padding(bottom, $padding-xxsmall);
     font-weight: 600;
     font-size: 14px;
     letter-spacing: 0.7px;

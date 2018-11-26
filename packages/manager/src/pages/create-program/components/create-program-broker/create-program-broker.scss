@@ -35,18 +35,17 @@
   }
 
   &__description {
-    box-sizing: border-box;
-    width: 300px;
-    padding: $padding-medium 32px;
+    width: 100%;
+    max-width: 300px;
 
     &-heading {
+      font-size: $font-size-h3;
+      padding-bottom: 0;
       color: $text-light-color;
-      font-weight: 600;
     }
   }
 
   &__info-title {
-    margin-top: 32px;
     margin-bottom: 14px;
     font-size: $font-size-common;
     color: $short-statistic-subheading-color;
@@ -60,8 +59,11 @@
     color: $text-light-color;
   }
 
-  &__leverage,
-  &__fee {
+  &__row {
+    @include adaptive-padding(top, $padding-small);
+  }
+
+  &__row--small {
     display: inline-block;
     box-sizing: border-box;
     width: 50%;

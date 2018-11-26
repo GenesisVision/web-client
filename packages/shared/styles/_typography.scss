@@ -11,7 +11,7 @@ h1 {
 
 h2 {
   @include font-size($font-size-h2);
-  @include padding-bottom($padding-xxsmall);
+  @include adaptive-padding(bottom, $padding-xxsmall);
   font-weight: 500;
   color: $text-light-color;
   margin-top: 0;
@@ -20,6 +20,7 @@ h2 {
 
 h3 {
   @include font-size($font-size-h3);
+  @include adaptive-padding(bottom, $padding-xsmall);
   font-weight: 600;
   color: $text-light-color;
   margin-top: 0;
@@ -35,4 +36,7 @@ h4 {
 
 p {
   @include font-size($font-size-paragraph);
+  @include adaptive-padding(bottom, $padding-xxsmall);
+  margin-top: 0;
+  margin-bottom: 0;
 }

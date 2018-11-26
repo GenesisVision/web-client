@@ -4,21 +4,14 @@
 
 .details-statistics {
   box-sizing: border-box;
-  padding: 0 $padding-small-mobile;
+  //padding: 0 $padding-small-mobile;
   width: 100%;
   color: $text-light-color;
-  @include media-breakpoint-landscape-phone() {
-    padding: 0 $padding-small;
-  }
+  //@include media-breakpoint-landscape-phone() {
+  //  padding: 0 $padding-small;
+  //}
   &__heading {
-    padding: $padding-small-mobile 0;
-    font-size: $font-size-h3-mobile;
     letter-spacing: 0.2px;
-    font-weight: 600;
-    @include media-breakpoint-landscape-phone() {
-      padding: $padding-small 0;
-      font-size: $font-size-h3;
-    }
   }
 
   &__subheading {
