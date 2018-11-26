@@ -4,7 +4,6 @@ import Chip from "shared/components/chip/chip";
 import { ControlsIcon } from "shared/components/icon/icon";
 import { RingIcon } from "shared/components/icon/ring-icon";
 import InfinityScroll from "shared/components/infinity-scroll/inifinity-scroll";
-import Spinner from "shared/components/spiner/spiner";
 import moment from "moment";
 import NotificationsGroup from "pages/app/components/notifications/components/notification-group/notification-group";
 import { notificationProps } from "pages/app/components/notifications/components/notification/notification";
@@ -13,6 +12,20 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
+import Sidebar from "shared/components/sidebar/sidebar";
+import posed, { PoseGroup } from "react-pose";
+
+const GroupBox = posed.div({
+  enter: {
+    opacity: 1,
+    y: 0,
+    delay: ({ i }) => i * 50
+  },
+  exit: {
+    y: 20,
+    opacity: 0
+  }
+});
 
 class Notifications extends Component {
   state = {
@@ -46,58 +59,73 @@ class Notifications extends Component {
     }, {});
   };
 
-  renderGroups = groups => group => (
-    <NotificationsGroup
-      key={group}
-      title={group}
-      notifications={groups[group]}
-    />
+  renderGroups = groups => (group, i) => (
+    <GroupBox key={group} i={i}>
+      <NotificationsGroup
+        key={group}
+        title={group}
+        notifications={groups[group]}
+      />
+    </GroupBox>
   );
 
   sortGroups = (a, b) => b - a;
 
-  componentDidMount() {
-    this.fetchNotification();
-  }
-
-  componentWillUnmount() {
+  handleClose = () => {
     this.props.clearNotifications();
-  }
+    this.props.closeNotifications();
+  };
+
+  close = () => {
+    this.sidebar.current.close();
+  };
+
+  handleOpen = () => {
+    this.fetchNotification();
+  };
+
+  sidebar = React.createRef();
 
   render() {
-    const { t } = this.props;
+    const { t, open } = this.props;
     const { notifications, total, count } = this.props;
     const groups = this.getGroups(notifications);
     const hasMore = total > notifications.length;
     const hasNotifications = count > 0;
     return (
-      <div className="notifications">
-        <InfinityScroll loadMore={this.fetchNotification} hasMore={hasMore}>
-          <div className="notifications__header">
-            <div className="notifications__ring">
-              <RingIcon />
-            </div>
-            {t("notifications-aside.header")}
-            <div className="notifications__count">
-              <Chip type={hasNotifications ? "negative" : null}>{count}</Chip>
-            </div>
-            <Link
-              to={NOTIFICATIONS_ROUTE}
-              onClick={this.props.closeNotifications}
-            >
-              <div className="profile-avatar notifications__link">
-                <ControlsIcon />
+      <Sidebar
+        ref={this.sidebar}
+        open={open}
+        position="right"
+        onClose={this.handleClose}
+        onOpen={this.handleOpen}
+      >
+        <div className="notifications">
+          <InfinityScroll loadMore={this.fetchNotification} hasMore={hasMore}>
+            <div className="notifications__header">
+              <div className="notifications__ring">
+                <RingIcon />
               </div>
-            </Link>
-          </div>
-          <div className="notifications__content">
-            {Object.keys(groups)
-              .sort(this.sortGroups)
-              .map(this.renderGroups(groups))}
-            <Spinner isShown={this.state.isPending} />
-          </div>
-        </InfinityScroll>
-      </div>
+              {t("notifications-aside.header")}
+              <div className="notifications__count">
+                <Chip type={hasNotifications ? "negative" : null}>{count}</Chip>
+              </div>
+              <Link to={NOTIFICATIONS_ROUTE} onClick={this.close}>
+                <div className="profile-avatar notifications__link">
+                  <ControlsIcon />
+                </div>
+              </Link>
+            </div>
+            <div className="notifications__content">
+              <PoseGroup animateOnMount>
+                {Object.keys(groups)
+                  .sort(this.sortGroups)
+                  .map(this.renderGroups(groups))}
+              </PoseGroup>
+            </div>
+          </InfinityScroll>
+        </div>
+      </Sidebar>
     );
   }
 }

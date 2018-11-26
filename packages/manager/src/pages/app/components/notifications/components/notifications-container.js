@@ -1,4 +1,3 @@
-import Sidebar from "shared/components/sidebar/sidebar";
 import { notificationsToggle } from "pages/app/components/notifications/actions/notifications.actions";
 import Notifications from "pages/app/components/notifications/components/notifications";
 import {
@@ -17,16 +16,15 @@ const NotificationsContainer = ({
   total
 }) => {
   return (
-    <Sidebar open={open} position="right" onClose={service.notificationsToggle}>
-      <Notifications
-        fetchNotifications={service.serviceGetNotifications}
-        count={count}
-        total={total}
-        notifications={notifications}
-        clearNotifications={service.serviceClearNotifications}
-        closeNotifications={service.notificationsToggle}
-      />
-    </Sidebar>
+    <Notifications
+      open={open}
+      count={count}
+      total={total}
+      notifications={notifications}
+      fetchNotifications={service.serviceGetNotifications}
+      clearNotifications={service.serviceClearNotifications}
+      closeNotifications={service.notificationsToggle}
+    />
   );
 };
 
@@ -54,6 +52,7 @@ const mapDispatchToProps = dispatch => ({
   )
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  NotificationsContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NotificationsContainer);

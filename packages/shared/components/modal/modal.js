@@ -23,6 +23,12 @@ class Modal extends Component {
     }
   };
 
+  componentDidUpdate(prev) {
+    if (!prev.open && this.props.open) {
+      this.props.onOpen && this.props.onOpen();
+    }
+  }
+
   render() {
     const {
       open,
@@ -58,6 +64,7 @@ class Modal extends Component {
 
 Modal.propTypes = {
   onClose: PropTypes.func,
+  onOpen: PropTypes.func,
   open: PropTypes.bool,
   disableBackdropClick: PropTypes.bool,
   transparentBackdrop: PropTypes.bool,
