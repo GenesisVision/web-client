@@ -235,7 +235,6 @@ class ProgramDetailsDescription extends PureComponent {
                         suffix=" %)"
                       />
                     }
-                    className="create-program-settings__fee-hint"
                     vertical={"bottom"}
                     tooltipContent={t(
                       "program-details-page.description.entry-fee-levels"

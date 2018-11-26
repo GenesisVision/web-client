@@ -64,6 +64,7 @@
       "notification-success": "Request to close the period was sent successfully."
     },
     "description": {
+      "entry-fee-levels": "Text about levels",
       "strategy": "Strategy",
       "addToFavorites": "Add to favorites",
       "notifications": "Notifications",
