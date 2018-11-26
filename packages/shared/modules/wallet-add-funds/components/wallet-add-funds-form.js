@@ -84,7 +84,10 @@ const WalletAddFundsForm = ({
       </div>
       <div className="dialog__bottom wallet-add-funds-popup__bottom">
         <GVqr className="wallet-add-funds-popup__qr" value={address} />
-        <StatisticItem label={t("wallet-add-funds.deposit-address")}>
+        <StatisticItem
+          className="wallet-add-funds-popup__address"
+          label={t("wallet-add-funds.deposit-address")}
+        >
           {address}
         </StatisticItem>
         <GVButton color="secondary" onClick={onCopy} disabled={!address}>
