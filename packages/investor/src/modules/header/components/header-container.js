@@ -5,10 +5,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchTwoFactor } from "shared/actions/2fa-actions";
 import { GLOBAL_SEARCH_ROUTE } from "shared/components/global-search/global-search.routes";
-import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
 import Header from "shared/components/header/header";
 
-import { logout } from "../../../pages/auth/login/services/login.service";
+import { logout } from "pages/auth/login/services/login.service";
 
 class HeaderContainer extends Component {
   componentDidMount() {
@@ -16,10 +15,11 @@ class HeaderContainer extends Component {
   }
 
   render() {
-    const { isAuthenticated, ...other } = this.props;
+    const { isAuthenticated, logout, notificationsToggle } = this.props;
     return (
       <Header
-        {...other}
+        logout={logout}
+        openNotifications={notificationsToggle}
         isAuthenticated={isAuthenticated}
         LOGIN_ROUTE={LOGIN_ROUTE}
         SIGNUP_ROUTE={SIGNUP_ROUTE}
@@ -30,7 +30,6 @@ class HeaderContainer extends Component {
 }
 
 const mapDispatchToProps = {
-  fetchProfileHeaderInfo,
   logout,
   notificationsToggle,
   fetchTwoFactor
