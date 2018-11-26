@@ -10,7 +10,7 @@ import {
   PROGRAMS_COLUMNS,
   PROGRAMS_TABLE_FILTERS,
   SORTING_FILTER_VALUE
-} from "shared/components/programs-table/programs.constants";
+} from "../components/programs-table/programs.constants";
 import { composeFilters } from "shared/components/table/helpers/filtering.helpers";
 import {
   calculateSkipAndTake,
@@ -28,11 +28,15 @@ const sortableColums = PROGRAMS_COLUMNS.filter(
   x => x.sortingName !== undefined
 ).map(x => x.sortingName);
 
-export const getPrograms = () => (dispatch, getState) => {
-  const requestFilters = dispatch(composeRequestFilters());
+export const getPrograms = filters => (dispatch, getState) => {
+  let requestFilters = dispatch(composeRequestFilters());
   if (authService.getAuthArg()) {
     requestFilters.authorization = authService.getAuthArg();
   }
+  requestFilters = {
+    ...requestFilters,
+    ...filters
+  };
   dispatch(programTableActions.fetchPrograms(requestFilters));
 };
 

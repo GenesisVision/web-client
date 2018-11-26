@@ -9,7 +9,7 @@ import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filte
 import FundsTableRow from "./fund-table-row";
 import { FUNDS_TABLE_COLUMNS } from "./funds-table.constants";
 
-const FundsTable = ({
+const FundsTableModule = ({
   t,
   data,
   isPending,
@@ -65,4 +65,4 @@ const FundsTable = ({
   );
 };
 
-export default translate()(FundsTable);
+export default translate()(FundsTableModule);

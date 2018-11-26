@@ -1,21 +1,21 @@
-import "shared/components/programs-table/programs.scss";
+import "./programs.scss";
 
 import React, { Fragment } from "react";
 import { translate } from "react-i18next";
-import ProgramCard from "shared/components/programs-table/program-card";
-import ProgramTableRow from "shared/components/programs-table/program-table-row";
+import ProgramCard from "./program-card";
+import ProgramTableRow from "./program-table-row";
 import {
   CURRENCY_FILTER_NAME,
   LEVEL_FILTER_NAME,
   PROGRAMS_COLUMNS
-} from "shared/components/programs-table/programs.constants";
+} from "./programs.constants";
 import { Table } from "shared/components/table/components";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import LevelFilter from "shared/components/table/components/filtering/level-filter/level-filter";
 import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
 
-const ProgramsTable = ({
+const ProgramsTableModule = ({
   t,
   currencies,
   data,
@@ -100,4 +100,4 @@ const ProgramsTable = ({
   );
 };
 
-export default translate()(ProgramsTable);
+export default translate()(ProgramsTableModule);
