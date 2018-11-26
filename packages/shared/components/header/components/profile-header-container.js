@@ -3,8 +3,6 @@ import WalletWidget from "shared/components/wallet-widget/wallet-widget";
 import NorificationsWidget from "shared/components/notifications-widget/notifications-widget";
 import ProfileWidget from "shared/components/profile-widget/profile-widget";
 import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
-import { notificationsToggle } from "manager-web-portal/src/pages/app/components/notifications/actions/notifications.actions";
-import { logout } from "investor-web-portal/src/pages/auth/login/services/login.service";
 import React from "react";
 import { connect } from "react-redux";
 
@@ -32,7 +30,7 @@ class ProfileHeader extends Component {
   };
 
   render() {
-    const { info, logout, notificationsToggle } = this.props;
+    const { info, logout, openNotifications } = this.props;
     const {
       avatar,
       notificationsCount,
@@ -52,7 +50,7 @@ class ProfileHeader extends Component {
         />
         <NorificationsWidget
           notificationsCount={notificationsCount}
-          openNotifications={notificationsToggle}
+          openNotifications={openNotifications}
         />
         <ProfileWidget
           className="header__profile"
@@ -66,9 +64,7 @@ class ProfileHeader extends Component {
 }
 
 const mapDispatchToProps = {
-  fetchProfileHeaderInfo,
-  notificationsToggle,
-  logout
+  fetchProfileHeaderInfo
 };
 
 const mapStateToProps = state => ({ ...state.profileHeader });

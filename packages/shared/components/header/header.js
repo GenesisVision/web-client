@@ -28,7 +28,8 @@ class Header extends Component {
       isAuthenticated,
       LOGIN_ROUTE,
       SIGNUP_ROUTE,
-      GLOBAL_SEARCH_ROUTE
+      GLOBAL_SEARCH_ROUTE,
+      openNotifications
     } = this.props;
     return (
       <div className="header">
@@ -52,7 +53,10 @@ class Header extends Component {
         <div className="header__separator" />
         <div className="header__right">
           {isAuthenticated ? (
-            <ProfileHeaderContainer />
+            <ProfileHeaderContainer
+              logout={logout}
+              openNotifications={openNotifications}
+            />
           ) : (
             <div className="header__buttons">
               <Link to={LOGIN_ROUTE}>
