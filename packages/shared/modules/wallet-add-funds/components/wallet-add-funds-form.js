@@ -33,27 +33,29 @@ const WalletAddFundsForm = ({
   };
 
   return (
-    <form id="add-funds">
+    <form id="add-funds" className="wallet-add-funds-popup">
       <div className="dialog__top">
         <div className="dialog__header">
           <h2>{t("wallet-add-funds.title")}</h2>
         </div>
-        <GVFormikField
-          name="currency"
-          component={GVTextField}
-          label={t("wallet-add-funds.select-currency")}
-          InputComponent={Select}
-        >
-          {wallets.map(wallet => {
-            const { description, currency } = wallet;
-            return (
-              <option
-                value={currency}
-                key={currency}
-              >{`${description} | ${currency}`}</option>
-            );
-          })}
-        </GVFormikField>
+        <div className="dialog-field">
+          <GVFormikField
+            name="currency"
+            component={GVTextField}
+            label={t("wallet-add-funds.select-currency")}
+            InputComponent={Select}
+          >
+            {wallets.map(wallet => {
+              const { description, currency } = wallet;
+              return (
+                <option
+                  value={currency}
+                  key={currency}
+                >{`${description} | ${currency}`}</option>
+              );
+            })}
+          </GVFormikField>
+        </div>
         <GVFormikField
           name="amount"
           label={t("wallet-add-funds.will-send")}

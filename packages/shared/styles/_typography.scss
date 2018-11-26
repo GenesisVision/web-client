@@ -36,4 +36,7 @@ h4 {
 
 p {
   @include font-size($font-size-paragraph);
+  @include adaptive-padding(bottom, $padding-xxsmall);
+  margin-top: 0;
+  margin-bottom: 0;
 }
