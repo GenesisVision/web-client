@@ -7,6 +7,7 @@ import DashboardPortfolioEvents from "shared/components/dashboard/dashboard-port
 import { DASHBOARD_EVENTS_ROUTE } from "../../dashboard.routes";
 import { getPortfolioEvents } from "../../services/dashboard.service";
 import DashboardPortfolioEvent from "./dashboard-portfolio-event/dashboard-portfolio-event";
+import DashboardPortfolioEmptyView from "./dashboard-portfolio-empty-view";
 
 class DashboardPortfolioEventsSection extends Component {
   componentDidMount() {
@@ -22,7 +23,7 @@ class DashboardPortfolioEventsSection extends Component {
         isPending={isPending}
         data={data}
         eventView={({ event }) => <DashboardPortfolioEvent event={event} />}
-        manager
+        emptyView={() => <DashboardPortfolioEmptyView />}
       />
     );
   }

@@ -1,8 +1,8 @@
 import React from "react";
 import { translate } from "react-i18next";
 
-import { EvenLogoIcon } from "./dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
-import { EventLogoType } from "./dashboard-portfolio-event-logo/dashboard-portfolio-event-logo.helper";
+import { EvenLogoIcon } from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
+import { EventLogoType } from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo.helper";
 
 const DashboardPortfolioEmptyView = ({ t }) => (
   <div className="dashboard__empty-events">

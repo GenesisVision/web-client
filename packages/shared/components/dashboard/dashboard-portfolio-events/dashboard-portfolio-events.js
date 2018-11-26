@@ -9,7 +9,6 @@ import { Link } from "react-router-dom";
 import { compose } from "redux";
 import Surface from "shared/components/surface/surface";
 
-import DashboardPortfolioEmptyView from "./dashboard-portfolio-empty-view";
 import DashboardPortfolioEventsListLoader from "./dashboard-portfolio-event-loader/dashboard-portfolio-event-list-loader";
 
 class DashboardPortfolioEvents extends Component {
@@ -17,8 +16,8 @@ class DashboardPortfolioEvents extends Component {
     const {
       isPending,
       data,
-      manager,
-      eventView: DashboardPortfolioEvent
+      eventView: DashboardPortfolioEvent,
+      emptyView: DashboardPortfolioEmptyView
     } = this.props;
     if (isPending && !data) return <DashboardPortfolioEventsListLoader />;
     if (data === undefined) return null;
@@ -27,8 +26,9 @@ class DashboardPortfolioEvents extends Component {
         data.events.map((event, idx) => (
           <DashboardPortfolioEvent event={event} key={idx} />
         ))) ||
-      (manager && <DashboardPortfolioEmptyView />) ||
-      null
+      (Boolean(DashboardPortfolioEmptyView) ? (
+        <DashboardPortfolioEmptyView />
+      ) : null)
     );
   };
   render() {
