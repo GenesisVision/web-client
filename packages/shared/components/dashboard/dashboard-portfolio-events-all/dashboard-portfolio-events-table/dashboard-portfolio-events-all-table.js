@@ -6,9 +6,7 @@ import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { isUseProfitability } from "shared/components/dashboard/helpers/dashboard-portfolio.helpers";
-import Page from "shared/components/page/page";
 import Profitability from "shared/components/profitability/profitability";
-import Surface from "shared/components/surface/surface";
 import { ASSET_TYPE_FILTER_VALUES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
@@ -34,67 +32,65 @@ class PortfolioEventsTableComponent extends Component {
     const {
       t,
       filtering,
-      pageTitle,
       tableTitle,
       className,
       fetchPortfolioEvents,
       dateRangeStartLabel
     } = this.props;
     return (
-      <Surface className="dashboard-portfolio-events-all">
-        <div className={className}>
-          <TableModule
-            title={tableTitle}
-            defaultFilters={PORTFOLIO_EVENTS_FILTERS}
-            getItems={fetchPortfolioEvents}
-            filtering={filtering}
-            renderFilters={(updateFilter, filtering) => (
-              <Fragment>
-                {filtering["type"] && (
-                  <SelectFilter
-                    name={EVENT_TYPE_FILTER_NAME}
-                    label="Type"
-                    value={filtering["type"]}
-                    values={EVENT_TYPE_FILTER_VALUES}
-                    onChange={updateFilter}
-                  />
-                )}
-                {filtering["assetType"] && (
-                  <SelectFilter
-                    name="assetType"
-                    label="Assets type"
-                    value={filtering["assetType"]}
-                    values={ASSET_TYPE_FILTER_VALUES}
-                    onChange={updateFilter}
-                  />
-                )}
-                {filtering["dateRange"] && (
-                  <DateRangeFilter
-                    name={DATE_RANGE_FILTER_NAME}
-                    value={filtering["dateRange"]}
-                    onChange={updateFilter}
-                    startLabel={dateRangeStartLabel}
-                  />
-                )}
-              </Fragment>
-            )}
-            paging={DEFAULT_PAGING}
-            columns={PORTFOLIO_EVENTS_COLUMNS}
-            renderHeader={column => (
-              <span
-                className={`portfolio-events-all__cell portfolio-events-all__cell--${
-                  column.name
-                }`}
-              >
-                {t(`dashboard.portfolio-events.table-header.${column.name}`)}
-              </span>
-            )}
-            renderBodyRow={event => (
-              <TableRow className="portfolio-events-all-table__row">
-                <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--date">
-                  {moment(event.date).format("DD-MM-YYYY, hh:mm a")}
-                </TableCell>
-                {/*<TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--type">
+      <div className={className}>
+        <TableModule
+          title={tableTitle}
+          defaultFilters={PORTFOLIO_EVENTS_FILTERS}
+          getItems={fetchPortfolioEvents}
+          filtering={filtering}
+          renderFilters={(updateFilter, filtering) => (
+            <Fragment>
+              {filtering["type"] && (
+                <SelectFilter
+                  name={EVENT_TYPE_FILTER_NAME}
+                  label="Type"
+                  value={filtering["type"]}
+                  values={EVENT_TYPE_FILTER_VALUES}
+                  onChange={updateFilter}
+                />
+              )}
+              {filtering["assetType"] && (
+                <SelectFilter
+                  name="assetType"
+                  label="Assets type"
+                  value={filtering["assetType"]}
+                  values={ASSET_TYPE_FILTER_VALUES}
+                  onChange={updateFilter}
+                />
+              )}
+              {filtering["dateRange"] && (
+                <DateRangeFilter
+                  name={DATE_RANGE_FILTER_NAME}
+                  value={filtering["dateRange"]}
+                  onChange={updateFilter}
+                  startLabel={dateRangeStartLabel}
+                />
+              )}
+            </Fragment>
+          )}
+          paging={DEFAULT_PAGING}
+          columns={PORTFOLIO_EVENTS_COLUMNS}
+          renderHeader={column => (
+            <span
+              className={`portfolio-events-all__cell portfolio-events-all__cell--${
+                column.name
+              }`}
+            >
+              {t(`dashboard.portfolio-events.table-header.${column.name}`)}
+            </span>
+          )}
+          renderBodyRow={event => (
+            <TableRow className="portfolio-events-all-table__row">
+              <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--date">
+                {moment(event.date).format("DD-MM-YYYY, hh:mm a")}
+              </TableCell>
+              {/*<TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--type">
                 {PORTFOLIO_EVENTS_TYPES_ENUM[event.type] &&
                   t(
                     `dashboard.portfolio-events.types.${
@@ -102,36 +98,32 @@ class PortfolioEventsTableComponent extends Component {
                     }`
                   )}
               </TableCell>*/}
-                <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--type">
-                  {event.description}
-                </TableCell>
-                <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--amount">
-                  {isUseProfitability(event) ? (
-                    <Profitability
-                      value={formatValue(event.value)}
-                      prefix="sign"
-                    >
-                      <NumberFormat
-                        value={formatValue(event.value)}
-                        thousandSeparator=" "
-                        displayType="text"
-                        suffix={" " + event.currency}
-                      />
-                    </Profitability>
-                  ) : (
+              <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--type">
+                {event.description}
+              </TableCell>
+              <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--amount">
+                {isUseProfitability(event) ? (
+                  <Profitability value={formatValue(event.value)} prefix="sign">
                     <NumberFormat
                       value={formatValue(event.value)}
                       thousandSeparator=" "
                       displayType="text"
                       suffix={" " + event.currency}
                     />
-                  )}
-                </TableCell>
-              </TableRow>
-            )}
-          />
-        </div>
-      </Surface>
+                  </Profitability>
+                ) : (
+                  <NumberFormat
+                    value={formatValue(event.value)}
+                    thousandSeparator=" "
+                    displayType="text"
+                    suffix={" " + event.currency}
+                  />
+                )}
+              </TableCell>
+            </TableRow>
+          )}
+        />
+      </div>
     );
   }
 }

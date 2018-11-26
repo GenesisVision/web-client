@@ -85,7 +85,9 @@ class DashboardPortfolioChartContainer extends PureComponent {
           changeValue={data.changeValue}
           changeValueCurrency={data.changeValueCurrency}
         />
-        <ChartPeriod period={period} onChange={this.handleChangePeriod} />
+        {!!data.balanceChart.length && (
+          <ChartPeriod period={period} onChange={this.handleChangePeriod} />
+        )}
         <div className="dashboard-portfolio-chart-section__chart">
           <DashboardPortfolioChart
             assets={composeAssetsChartData(data.investedProgramsInfo)}
