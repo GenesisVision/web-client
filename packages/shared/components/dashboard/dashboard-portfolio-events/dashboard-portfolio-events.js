@@ -10,7 +10,7 @@ import { compose } from "redux";
 import Surface from "shared/components/surface/surface";
 
 import DashboardPortfolioEmptyView from "./dashboard-portfolio-empty-view";
-import DashboardPortfolioEventsLoader from "./dashboard-portfolio-event-loader/dashboard-portfolio-event-list-loader";
+import DashboardPortfolioEventsListLoader from "./dashboard-portfolio-event-loader/dashboard-portfolio-event-list-loader";
 
 class DashboardPortfolioEvents extends Component {
   renderEvents = () => {
@@ -20,7 +20,7 @@ class DashboardPortfolioEvents extends Component {
       manager,
       eventView: DashboardPortfolioEvent
     } = this.props;
-    if (isPending && !data) return <DashboardPortfolioEventsLoader />;
+    if (isPending && !data) return <DashboardPortfolioEventsListLoader />;
     if (data === undefined) return null;
     return (
       (data.total &&
