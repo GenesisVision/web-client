@@ -3,12 +3,14 @@ import { walletApiProxy } from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
 
 import * as actions from "../actions/wallet.actions";
+import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
 
 export const fetchWalletBalance = () => (dispatch, getState) => {
   const authorization = authService.getAuthArg();
   const { currency } = getState().accountSettings;
 
   dispatch(actions.fetchWalletBalance(currency, authorization));
+  dispatch(fetchProfileHeaderInfo());
 };
 
 export const fetchWalletTransactions = requestFilters => {

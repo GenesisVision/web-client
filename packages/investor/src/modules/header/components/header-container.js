@@ -12,26 +12,15 @@ import { logout } from "../../../pages/auth/login/services/login.service";
 
 class HeaderContainer extends Component {
   componentDidMount() {
-    this.props.isAuthenticated && this.props.fetchProfileHeaderInfo();
     this.props.isAuthenticated && this.props.fetchTwoFactor();
   }
 
   render() {
-    const {
-      info,
-      logout,
-      notificationsToggle,
-      fetchProfileHeaderInfo,
-      isAuthenticated,
-      ...other
-    } = this.props;
+    const { isAuthenticated, ...other } = this.props;
     return (
       <Header
-        {...info.data}
         {...other}
         isAuthenticated={isAuthenticated}
-        logout={logout}
-        openNotifications={notificationsToggle}
         LOGIN_ROUTE={LOGIN_ROUTE}
         SIGNUP_ROUTE={SIGNUP_ROUTE}
         GLOBAL_SEARCH_ROUTE={GLOBAL_SEARCH_ROUTE}
