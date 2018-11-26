@@ -39,4 +39,9 @@
       content: none;
     }
   }
+  &__address {
+    & > .statistics-item__value {
+      font-size: $font-size-paragraph-mobile;
+    }
+  }
 }
