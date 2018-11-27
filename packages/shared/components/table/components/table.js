@@ -59,20 +59,22 @@ class Table extends Component {
     if (!items && emptyMessage) return emptyMessage;
     return (
       <div className="table-wrapper">
-        <TableToolbar
-          title={title}
-          renderFilters={renderFilters}
-          updateFilter={updateFilter}
-          filtering={filtering}
-          onChange={this.changeView}
-          view={view}
-          columns={columns}
-          sorting={sorting}
-          updateSorting={updateSorting}
-          renderHeader={renderHeader}
-          isViewSwitchEnabled={this.isViewSwitchEnabled}
-          createButtonToolbar={createButtonToolbar}
-        />
+        {(sorting || filtering) && (
+          <TableToolbar
+            title={title}
+            renderFilters={renderFilters}
+            updateFilter={updateFilter}
+            filtering={filtering}
+            onChange={this.changeView}
+            view={view}
+            columns={columns}
+            sorting={sorting}
+            updateSorting={updateSorting}
+            renderHeader={renderHeader}
+            isViewSwitchEnabled={this.isViewSwitchEnabled}
+            createButtonToolbar={createButtonToolbar}
+          />
+        )}
         <Scrollbars
           autoHeight
           autoHeightMax={14000}

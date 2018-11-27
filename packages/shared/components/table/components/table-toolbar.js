@@ -28,7 +28,7 @@ class TableToolbar extends Component {
     } = this.props;
     return (
       <div className="table__toolbar">
-        {(title && <h3 className="table__title">{title}</h3>) || <div />}
+        {(title && <h3 className="table__title">{title}</h3>)}
         <div className="table__filters">
           {view === CARDS_VIEW && sorting !== undefined && (
             <SortingFilter
