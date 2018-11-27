@@ -41,14 +41,12 @@ class ProgramsRatingTables extends Component {
             title="Your pretendents"
             data={selfPretendents}
             isPending={isPending}
-            updateSorting={this.updateSorting}
           />
         )}
         <ProgramsTableModule
           title="Pretendents"
           data={pretendents}
           isPending={isPending}
-          updateSorting={this.updateSorting}
         />
       </Fragment>
     );
