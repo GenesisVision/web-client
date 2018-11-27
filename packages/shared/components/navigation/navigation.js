@@ -11,7 +11,8 @@ import { FUNDS_ROUTE } from "pages/funds/funds.routes";
 import { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
-
+import { compose } from "redux";
+import { connect } from "react-redux";
 import { FundsIcon } from "../icon/funds-icon";
 
 class Navigation extends Component {
@@ -43,4 +44,9 @@ class Navigation extends Component {
   }
 }
 
-export default translate()(Navigation);
+const mapStateToProps = state => state.routing.location;
+
+export default compose(
+  connect(mapStateToProps),
+  translate()
+)(Navigation);
