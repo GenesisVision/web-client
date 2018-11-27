@@ -5,8 +5,24 @@ import Portal from "shared/components/portal/portal";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import EventListener from "react-event-listener";
+import posed, { PoseGroup } from "react-pose";
+
+const BackdropBox = posed.div({
+  enter: {
+    opacity: 0.7,
+    transition: { duration: 150 }
+  },
+  exit: {
+    opacity: 0,
+    transition: { duration: 150 }
+  }
+});
 
 class Modal extends Component {
+  state = {
+    isOpen: false
+  };
+
   handleKeyPress = event => {
     if (event.keyCode !== 27) return;
 
@@ -45,16 +61,22 @@ class Modal extends Component {
             "modal--position-fixed": fixed
           })}
         >
-          {disableBackdropClick || (
-            <EventListener target={document} onKeyUp={this.handleKeyPress}>
-              <div
+          <PoseGroup animateOnMount>
+            {disableBackdropClick ? null : (
+              <BackdropBox
+                key="backdrop-box"
                 className={classnames("modal__backdrop", {
                   "modal__backdrop--transparent": transparentBackdrop
                 })}
                 onClick={this.handleBackdropClick}
-              />
-            </EventListener>
-          )}
+              >
+                <EventListener
+                  target={document}
+                  onKeyUp={this.handleKeyPress}
+                />
+              </BackdropBox>
+            )}
+          </PoseGroup>
           {children}
         </div>
       </Portal>

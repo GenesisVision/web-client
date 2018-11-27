@@ -12,11 +12,11 @@ class Sidebar extends Component {
     this.box = posed.div({
       opened: {
         x: "0%",
-        transition: { duration: 300 }
+        transition: { duration: 150 }
       },
       closed: {
         x: `${props.position === "right" ? "100" : "-100"}%`,
-        transition: { duration: 300 }
+        transition: { duration: 150 }
       }
     });
   }

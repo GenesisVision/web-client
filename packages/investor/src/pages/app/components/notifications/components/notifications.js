@@ -19,10 +19,12 @@ const GroupBox = posed.div({
   enter: {
     opacity: 1,
     y: 0,
-    delay: ({ i }) => i * 50
+    transition: { duration: 150 },
+    delay: ({ i }) => i * 25
   },
   exit: {
     y: 20,
+    transition: { duration: 150 },
     opacity: 0
   }
 });
@@ -72,7 +74,6 @@ class Notifications extends Component {
   sortGroups = (a, b) => b - a;
 
   handleClose = () => {
-    this.props.clearNotifications();
     this.props.closeNotifications();
   };
 
@@ -83,6 +84,10 @@ class Notifications extends Component {
   handleOpen = () => {
     this.fetchNotification();
   };
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextState.isPending === this.state.isPending;
+  }
 
   sidebar = React.createRef();
 
@@ -132,7 +137,6 @@ class Notifications extends Component {
 
 Notifications.propTypes = {
   fetchNotifications: PropTypes.func.isRequired,
-  clearNotifications: PropTypes.func.isRequired,
   count: PropTypes.number,
   notifications: PropTypes.arrayOf(PropTypes.shape(notificationProps)),
   total: PropTypes.number,
