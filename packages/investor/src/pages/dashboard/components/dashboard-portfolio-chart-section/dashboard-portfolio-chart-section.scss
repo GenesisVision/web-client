@@ -64,13 +64,10 @@
   }
 
   &__chart {
+    @include horizontal-paddings($padding-small);
     height: 380px;
     width: 100%;
     margin-top: 20px;
-    padding: 0 $padding-small-mobile;
-    @include media-breakpoint-landscape-phone() {
-      padding: 0 $padding-small;
-    }
     .assets-tooltip {
       .gv-tooltip__heading,
       .gv-tooltip__date {

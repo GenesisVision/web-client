@@ -3,16 +3,15 @@
 @import "~shared/styles/_sizes.scss";
 
 .notification-settings {
-  padding-top: 30px;
-
   h3 {
+    @include adaptive-padding(bottom, $padding-small);
     opacity: 0.3;
     font-size: $font-size-common;
     letter-spacing: 0.4px;
-    margin-bottom: 35px;
   }
 
   &__title {
+    @include adaptive-padding(bottom, $padding-medium);
     overflow-wrap: break-word;
     font-size: $font-size-common;
     font-weight: 500;

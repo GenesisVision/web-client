@@ -4,12 +4,8 @@
 
 .details-statistics {
   box-sizing: border-box;
-  //padding: 0 $padding-small-mobile;
   width: 100%;
   color: $text-light-color;
-  //@include media-breakpoint-landscape-phone() {
-  //  padding: 0 $padding-small;
-  //}
   &__heading {
     letter-spacing: 0.2px;
   }

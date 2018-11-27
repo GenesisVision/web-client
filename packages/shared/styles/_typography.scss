@@ -4,7 +4,7 @@ h1 {
   @include font-size($font-size-h1);
   font-weight: 600;
   color: $text-light-color;
-  padding-bottom: $padding-small;
+  padding-bottom: $padding-medium;
   margin-top: 0;
   margin-bottom: 0;
 }
