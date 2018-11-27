@@ -21,8 +21,9 @@ const ProgramsPage = ({ t }) => {
         title={title}
         assetsFacets={"programsFacets"}
         composeFacetUrl={composeProgramFacetUrl}
+        PROGRAMS_RATING_ROUTE={routes.PROGRAMS_RATING_ROUTE}
       />
-      <ProgramsContainer title={"All programs"} />
+      <ProgramsContainer enableFiltering title={"All programs"} />
     </Page>
   );
 };
