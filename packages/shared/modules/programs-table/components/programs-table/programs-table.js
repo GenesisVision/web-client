@@ -34,28 +34,26 @@ class ProgramsContainer extends Component {
       title
     } = this.props;
     return (
-        <Surface className="programs-table-container">
-        <ProgramsTableModule
-          title={title}
-          data={data || {}}
-          isPending={isPending}
-          sorting={filters.sorting}
-          updateSorting={service.programsChangeSorting}
-          filtering={{
-            ...filters.filtering
-          }}
-          updateFilter={service.programsChangeFilter}
-          paging={{
-            totalPages: filters.pages,
-            currentPage: filters.page
-          }}
-          updatePaging={service.programsChangePage}
-          toggleFavorite={service.toggleFavoriteProgram}
-          redirectToLogin={service.redirectToLogin}
-          isAuthenticated={isAuthenticated}
-          currencies={currencies}
-        />
-        </Surface>
+      <ProgramsTableModule
+        title={title}
+        data={data || {}}
+        isPending={isPending}
+        sorting={filters.sorting}
+        updateSorting={service.programsChangeSorting}
+        filtering={{
+          ...filters.filtering
+        }}
+        updateFilter={service.programsChangeFilter}
+        paging={{
+          totalPages: filters.pages,
+          currentPage: filters.page
+        }}
+        updatePaging={service.programsChangePage}
+        toggleFavorite={service.toggleFavoriteProgram}
+        redirectToLogin={service.redirectToLogin}
+        isAuthenticated={isAuthenticated}
+        currencies={currencies}
+      />
     );
   }
 }
