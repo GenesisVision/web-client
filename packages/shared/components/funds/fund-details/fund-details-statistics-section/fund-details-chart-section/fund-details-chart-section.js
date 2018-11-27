@@ -31,7 +31,7 @@ class FundDetailsChartSection extends PureComponent {
 
     return (
       <Surface className="surface--horizontal-paddings details-chart">
-        <h3 className="details-chart__heading">
+        <h3>
           {t("fund-details-page.chart.heading")}
         </h3>
         <GVTabs value={tab} onChange={this.handleTabChange}>

@@ -18,7 +18,7 @@ const TwoFactorCodeForm = ({ t, handleSubmit, isSubmitting, error }) => {
       onSubmit={handleSubmit}
       noValidate
     >
-      <h3 className="login-two-factor__header">
+      <h3>
         {t("auth.login.two-factor.title")}
       </h3>
       <div className="login-two-factor__text">

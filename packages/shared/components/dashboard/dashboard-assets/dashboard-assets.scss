@@ -59,13 +59,4 @@ $create-icon-width: 140px;
       }
     }
   }
-  &__title {
-    font-weight: 600;
-    letter-spacing: 0.2px;
-    font-size: $font-size-h3-mobile;
-    padding-bottom: $padding-xsmall;
-    @include media-breakpoint-landscape-phone() {
-      font-size: $font-size-h3;
-    }
-  }
 }

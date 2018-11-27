@@ -79,7 +79,7 @@ class ProfileImage extends Component {
 
     return (
       <div className="profile-image">
-        <h3 className="profile-image__heading">
+        <h3>
           {t("profile.settings.profile-image")}
         </h3>
 

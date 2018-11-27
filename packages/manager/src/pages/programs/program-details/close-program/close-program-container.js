@@ -34,6 +34,7 @@ class CloseProgramContainer extends Component {
         setSubmitting(false);
       });
   };
+
   render() {
     const { open, twoFactorEnabled, onClose } = this.props;
     const { errorMessage } = this.state;

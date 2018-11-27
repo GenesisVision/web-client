@@ -43,7 +43,7 @@ $padding: 33px;
       margin: 0;
     }
   }
-  &__toolbar {
+  &> {
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
@@ -76,7 +76,6 @@ $padding: 33px;
 
   &__title {
     justify-self: flex-start;
-    letter-spacing: 0.2px;
     padding-bottom: 0;
     margin-right: auto;
   }
