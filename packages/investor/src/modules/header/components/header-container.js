@@ -16,19 +16,15 @@ class HeaderContainer extends Component {
     this.props.isAuthenticated && this.props.fetchTwoFactor();
   }
 
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    return JSON.stringify(nextProps.data) !== JSON.stringify(this.props.data);
+  }
+
   render() {
-    const {
-      info,
-      logout,
-      notificationsToggle,
-      fetchProfileHeaderInfo,
-      isAuthenticated,
-      ...other
-    } = this.props;
+    const { data, logout, notificationsToggle, isAuthenticated } = this.props;
     return (
       <Header
-        {...info.data}
-        {...other}
+        {...data}
         isAuthenticated={isAuthenticated}
         logout={logout}
         openNotifications={notificationsToggle}
@@ -48,7 +44,7 @@ const mapDispatchToProps = {
 };
 
 const mapStateToProps = state => ({
-  ...state.profileHeader,
+  data: state.profileHeader.info.data ? state.profileHeader.info.data : {},
   isAuthenticated: state.authData.isAuthenticated
 });
 

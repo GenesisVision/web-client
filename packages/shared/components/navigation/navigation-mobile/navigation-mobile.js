@@ -3,7 +3,7 @@ import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import { FUNDS_ROUTE } from "pages/funds/funds.routes";
 import { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
 import PropTypes from "prop-types";
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
 import { GLOBAL_SEARCH_ROUTE } from "shared/components/global-search/global-search.routes";
@@ -25,7 +25,7 @@ import {
 import Sidebar from "shared/components/sidebar/sidebar";
 import { WALLET_PAGE_ROUTE } from "shared/components/wallet/wallet-page";
 
-class NavigationMobile extends Component {
+class NavigationMobile extends PureComponent {
   sidebar = React.createRef();
   handleClose = () => this.sidebar.current.close();
   render() {

@@ -1,26 +1,18 @@
 import "./header.scss";
 
-import { MenuIcon } from "shared/components/icon/icon";
 import { SearchIcon } from "shared/components/icon/search-icon";
 import Navigation from "shared/components/navigation/navigation";
-import NavigationMobile from "shared/components/navigation/navigation-mobile/navigation-mobile";
 import NorificationsWidget from "shared/components/notifications-widget/notifications-widget";
 import ProfileWidget from "shared/components/profile-widget/profile-widget";
 import WalletWidget from "shared/components/wallet-widget/wallet-widget";
 import { GVButton } from "gv-react-components";
 import CurrencySelectContainer from "shared/modules/currency-select/components/currency-select-container";
-import React, { Component, Fragment } from "react";
+import React, { Fragment, PureComponent } from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
+import NavigationContainer from "shared/components/navigation/navigation-mobile/navigation-container";
 
-class Header extends Component {
-  state = {
-    isOpenNavigation: false
-  };
-
-  handleOpenMenu = () => this.setState({ isOpenNavigation: true });
-  handleCloseMenu = () => this.setState({ isOpenNavigation: false });
-
+class Header extends PureComponent {
   render() {
     const {
       t,
@@ -40,12 +32,13 @@ class Header extends Component {
     return (
       <div className="header">
         <div className="header__left">
-          <div
-            onClick={this.handleOpenMenu}
-            className="navigation__menu profile-avatar"
-          >
-            <MenuIcon />
-          </div>
+          <NavigationContainer
+            className={"navigation__menu"}
+            logout={logout}
+            email={email}
+            avatar={avatar}
+            isAuthenticated={isAuthenticated}
+          />
           <Navigation className="header__navigation" />
         </div>
         <div className="header__center">
@@ -92,14 +85,6 @@ class Header extends Component {
             </div>
           )}
         </div>
-        <NavigationMobile
-          logout={logout}
-          isOpenNavigation={this.state.isOpenNavigation}
-          email={email}
-          avatar={avatar}
-          isAuthenticated={isAuthenticated}
-          onClose={this.handleCloseMenu}
-        />
       </div>
     );
   }
