@@ -34,7 +34,7 @@ const ProgramsTableModule = ({
 }) => {
   const selectFilterValues = [
     { value: undefined, label: "All" },
-    ...currencies.map(x => ({ value: x, label: x }))
+    ...(currencies || []).map(x => ({ value: x, label: x }))
   ];
   return (
     <Table
