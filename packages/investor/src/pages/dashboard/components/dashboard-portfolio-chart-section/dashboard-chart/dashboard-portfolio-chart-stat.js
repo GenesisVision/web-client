@@ -22,20 +22,22 @@ const DashboardPortfolioChartStat = ({
         displayType="text"
         suffix={" GVT"}
       />
-      <Profitability
-        prefix="arrow"
-        variant="chips"
-        value={changePercent && formatValue(changePercent, 2)}
-        className="dashboard-portfolio-chart-stat__adornment"
-      >
-        <NumberFormat
-          value={formatValue(changePercent, 2, true)}
-          suffix="%"
-          allowNegative={false}
-          decimalScale={2}
-          displayType="text"
-        />
-      </Profitability>
+      {!!changePercent && (
+        <Profitability
+          prefix="arrow"
+          variant="chips"
+          value={changePercent && formatValue(changePercent, 2)}
+          className="dashboard-portfolio-chart-stat__adornment"
+        >
+          <NumberFormat
+            value={formatValue(changePercent, 2, true)}
+            suffix="%"
+            allowNegative={false}
+            decimalScale={2}
+            displayType="text"
+          />
+        </Profitability>
+      )}
     </Fragment>
   );
 

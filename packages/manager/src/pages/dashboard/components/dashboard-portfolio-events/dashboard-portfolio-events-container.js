@@ -71,7 +71,7 @@ class DashboardPortfolioEventsContainer extends Component {
     const { t } = this.props;
 
     return (
-      <Surface className="dashboard-portfolio-events">
+      <Surface className="surface--horizontal-paddings dashboard-portfolio-events">
         <h3 className="dashboard-portfolio-events__title">
           {t("dashboard.portfolio-events.title")}
         </h3>

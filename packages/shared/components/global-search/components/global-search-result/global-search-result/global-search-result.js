@@ -52,9 +52,9 @@ class GlobalSearchResult extends PureComponent {
     const { tab } = this.state;
     return (
       <Surface className="global-search-result">
-        <h4 className="global-search-result__heading">
+        <h3 className="global-search-result__heading">
           {t("global-search-page.heading")}
-        </h4>
+        </h3>
         <div className="global-search-result__tabs">
           <GVTabs value={tab} onChange={this.handleTabChange}>
             <GVTab

@@ -185,7 +185,6 @@ $padding-app: 20px;
     font-weight: 300;
     letter-spacing: 0.2px;
     color: $primary-color;
-    margin-top: $facet-padding/4;
     @include media-breakpoint-landscape-phone() {
       font-size: $__description-font-size;
     }

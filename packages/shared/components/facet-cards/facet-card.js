@@ -26,7 +26,7 @@ class FacetCard extends Component {
 
     return (
       <Surface
-        className={classnames("facet", {
+        className={classnames("surface--without-paddings facet", {
           "facet--hovered": this.state.isHovered
         })}
         onMouseEnter={this.handleMouseEnter}
