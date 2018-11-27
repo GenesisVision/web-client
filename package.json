@@ -5,7 +5,7 @@
     "gv-api-web": "git+https://github.com/GenesisVision/gv-api-web.git#development"
   },
   "scripts": {
-    "precommit": "git add"
+    "precommit": "lint-staged"
   },
   "lint-staged": {
     "linters": {
