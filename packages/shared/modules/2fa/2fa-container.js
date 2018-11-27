@@ -44,7 +44,7 @@ class TwoFactorAuthContainer extends Component {
 
     return (
       <div className="two-factor">
-        <h3>{t("2fa.title")}</h3>
+        <h3 className="two-factor__title">{t("2fa.title")}</h3>
         <GVTextField
           name="2fa"
           label={t("2fa.type")}
