@@ -47,8 +47,6 @@ class Table extends Component {
       updateSorting,
       renderHeader,
       createButtonToolbar,
-      createButtonBody,
-      createText,
       renderBodyCard,
       renderBodyRow,
       paging,
@@ -59,7 +57,7 @@ class Table extends Component {
     if (!items && emptyMessage) return emptyMessage;
     return (
       <div className="table-wrapper">
-        {(sorting || filtering) && (
+        {(title || sorting || filtering || createButtonToolbar || this.isViewSwitchEnabled) && (
           <TableToolbar
             title={title}
             renderFilters={renderFilters}

@@ -29,18 +29,20 @@ class TableToolbar extends Component {
     return (
       <div className="table__toolbar">
         {(title && <h3 className="table__title">{title}</h3>)}
-        <div className="table__filters">
-          {view === CARDS_VIEW && sorting !== undefined && (
-            <SortingFilter
-              sorting={sorting}
-              columns={columns}
-              updateSorting={updateSorting}
-              renderValueText={renderHeader}
-            />
-          )}
-          {renderFilters && renderFilters(updateFilter, filtering)}
-          {createButtonToolbar}
-        </div>
+        {(sorting || filtering || createButtonToolbar) && (
+          <div className="table__filters">
+            {view === CARDS_VIEW && sorting !== undefined && (
+              <SortingFilter
+                sorting={sorting}
+                columns={columns}
+                updateSorting={updateSorting}
+                renderValueText={renderHeader}
+              />
+            )}
+            {renderFilters && renderFilters(updateFilter, filtering)}
+            {createButtonToolbar}
+          </div>
+        )}
         {isViewSwitchEnabled && (
           <div className="table__toggle">
             <div onClick={this.handleIconClick(CARDS_VIEW)}>
