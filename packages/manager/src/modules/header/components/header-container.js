@@ -17,7 +17,7 @@ class HeaderContainer extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
-    return JSON.stringify(nextProps.data) !== JSON.stringify(this.props.data);
+    return JSON.stringify(nextProps) !== JSON.stringify(this.props);
   }
 
   render() {
