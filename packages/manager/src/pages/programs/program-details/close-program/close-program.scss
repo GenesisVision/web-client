@@ -4,6 +4,10 @@
 
 .close-program-popup {
   @include media-breakpoint-landscape-phone() {
-    min-width: 400px;
+    min-width: 420px;
+  }
+
+  & .dialog__top {
+    padding: 50px 40px;
   }
 }

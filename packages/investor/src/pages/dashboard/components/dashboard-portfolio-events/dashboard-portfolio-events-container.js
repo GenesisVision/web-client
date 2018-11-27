@@ -72,9 +72,7 @@ class DashboardPortfolioEventsContainer extends Component {
 
     return (
       <Surface className="surface--horizontal-paddings dashboard-portfolio-events">
-        <h3 className="dashboard-portfolio-events__title">
-          {t("dashboard.portfolio-events.title")}
-        </h3>
+        <h3>{t("dashboard.portfolio-events.title")}</h3>
         {this.renderEvents()}
       </Surface>
     );

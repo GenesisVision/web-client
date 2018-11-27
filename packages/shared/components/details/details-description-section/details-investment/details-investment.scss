@@ -24,11 +24,6 @@ $withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
     margin-left: -$padding-small;
   }
 
-  &__heading {
-    @include adaptive-padding(bottom, $padding-small);
-    letter-spacing: 0.21px;
-  }
-
   &__short-statistic-container {
     display: flex;
     justify-content: flex-start;

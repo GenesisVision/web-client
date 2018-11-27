@@ -25,7 +25,6 @@
 
   &__heading {
     @include horizontal-paddings($padding-small);
-    letter-spacing: 0.2px;
   }
 
   &__actions {
