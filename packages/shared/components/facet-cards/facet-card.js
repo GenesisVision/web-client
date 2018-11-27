@@ -22,8 +22,12 @@ class FacetCard extends Component {
   };
 
   render() {
-    const { facet, composeFacetUrl, title } = this.props;
-
+    const {
+      facet,
+      composeFacetUrl,
+      PROGRAMS_RATING_ROUTE,
+      title
+    } = this.props;
     return (
       <Surface
         className={classnames("surface--without-paddings facet", {
@@ -34,7 +38,10 @@ class FacetCard extends Component {
       >
         <Link
           to={{
-            pathname: composeFacetUrl(facet.url),
+            pathname:
+              facet.title === "New"
+                ? PROGRAMS_RATING_ROUTE
+                : composeFacetUrl(facet.url),
             state: `/ ${title}`
           }}
         >

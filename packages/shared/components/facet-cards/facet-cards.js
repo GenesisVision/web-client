@@ -39,7 +39,12 @@ class FacetCards extends Component {
   };
 
   render() {
-    const { facets, composeFacetUrl, title } = this.props;
+    const {
+      facets,
+      composeFacetUrl,
+      PROGRAMS_RATING_ROUTE,
+      title
+    } = this.props;
     return (
       <div className="facets__wrapper facets__shadow" ref={this.facetList}>
         <div className="facets" ref={this.scroll} onScroll={this.handleScroll}>
@@ -50,6 +55,7 @@ class FacetCards extends Component {
                 key={x.id}
                 facet={x}
                 composeFacetUrl={composeFacetUrl}
+                PROGRAMS_RATING_ROUTE={PROGRAMS_RATING_ROUTE}
               />
             ))}
           </div>
