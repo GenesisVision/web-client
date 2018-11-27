@@ -3,6 +3,7 @@ import {
   addTotalNotifications,
   clearNotifications,
   notificationsFetch,
+  notificationsToggle,
   setNotificationsOptions
 } from "pages/app/components/notifications/actions/notifications.actions";
 import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
@@ -33,7 +34,8 @@ export const serviceGetNotifications = () => (dispatch, getState) => {
   });
 };
 
-export const serviceClearNotifications = () => dispatch => {
+export const serviceNotificationsClose = () => dispatch => {
+  dispatch(notificationsToggle());
   dispatch(clearNotifications());
   dispatch(addTotalNotifications(0));
   dispatch(setNotificationsOptions(calculate()));

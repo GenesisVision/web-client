@@ -3,6 +3,9 @@ import React, { Component } from "react";
 import { Scrollbars } from "react-custom-scrollbars";
 
 class InfinityScroll extends Component {
+  state = {
+    isPending: false
+  };
   handleScroll = () => {
     const scroll = this.scroll.current;
     const scrollTop = scroll.getScrollTop();
@@ -10,8 +13,17 @@ class InfinityScroll extends Component {
     const scrollHeight = scroll.getScrollHeight();
     const offsetBottom = scrollHeight - scrollTop - clientHeight;
     if (offsetBottom < 100 && this.props.hasMore) {
-      this.props.loadMore();
+      this.loadMore();
     }
+  };
+
+  loadMore = () => {
+    if (this.state.isPending || !this.props.hasMore) return;
+    this.setState({ isPending: true });
+    this.props
+      .loadMore()
+      .then(data => this.setState({ isPending: false }))
+      .catch(data => this.setState({ isPending: false }));
   };
 
   scroll = React.createRef();

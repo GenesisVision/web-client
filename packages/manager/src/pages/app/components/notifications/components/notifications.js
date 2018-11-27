@@ -14,6 +14,7 @@ import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import Sidebar from "shared/components/sidebar/sidebar";
 import posed, { PoseGroup } from "react-pose";
+import Spinner from "shared/components/spiner/spiner";
 
 const GroupBox = posed.div({
   enter: {
@@ -29,13 +30,12 @@ const GroupBox = posed.div({
 
 class Notifications extends Component {
   state = {
-    isPending: false
+    isPending: true
   };
 
   fetchNotification = () => {
-    if (this.state.isPending) return;
     this.setState({ isPending: true });
-    this.props.fetchNotifications().then(() => {
+    return this.props.fetchNotifications().then(() => {
       this.setState({ isPending: false });
     });
   };
@@ -72,7 +72,6 @@ class Notifications extends Component {
   sortGroups = (a, b) => b - a;
 
   handleClose = () => {
-    this.props.clearNotifications();
     this.props.closeNotifications();
   };
 
@@ -122,6 +121,7 @@ class Notifications extends Component {
                   .sort(this.sortGroups)
                   .map(this.renderGroups(groups))}
               </PoseGroup>
+              <Spinner isShown={this.state.isPending} />
             </div>
           </InfinityScroll>
         </div>
@@ -132,7 +132,6 @@ class Notifications extends Component {
 
 Notifications.propTypes = {
   fetchNotifications: PropTypes.func.isRequired,
-  clearNotifications: PropTypes.func.isRequired,
   count: PropTypes.number,
   notifications: PropTypes.arrayOf(PropTypes.shape(notificationProps)),
   total: PropTypes.number,

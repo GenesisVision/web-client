@@ -1,8 +1,7 @@
-import { notificationsToggle } from "pages/app/components/notifications/actions/notifications.actions";
 import Notifications from "pages/app/components/notifications/components/notifications";
 import {
-  serviceClearNotifications,
-  serviceGetNotifications
+  serviceGetNotifications,
+  serviceNotificationsClose
 } from "pages/app/components/notifications/services/notifications.services";
 import React from "react";
 import { connect } from "react-redux";
@@ -22,8 +21,7 @@ const NotificationsContainer = ({
       total={total}
       notifications={notifications}
       fetchNotifications={service.serviceGetNotifications}
-      clearNotifications={service.serviceClearNotifications}
-      closeNotifications={service.notificationsToggle}
+      closeNotifications={service.serviceNotificationsClose}
     />
   );
 };
@@ -44,9 +42,8 @@ const mapStateToProps = ({ notifications, profileHeader }) => {
 const mapDispatchToProps = dispatch => ({
   service: bindActionCreators(
     {
-      notificationsToggle,
-      serviceGetNotifications,
-      serviceClearNotifications
+      serviceNotificationsClose,
+      serviceGetNotifications
     },
     dispatch
   )
