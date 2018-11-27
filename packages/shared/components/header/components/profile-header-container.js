@@ -1,15 +1,16 @@
 import { Component, Fragment } from "react";
-import WalletWidget from "shared/components/wallet-widget/wallet-widget";
-import NorificationsWidget from "shared/components/notifications-widget/notifications-widget";
-import ProfileWidget from "shared/components/profile-widget/profile-widget";
-import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
 import React from "react";
 import { connect } from "react-redux";
+import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
+import NorificationsWidget from "shared/components/notifications-widget/notifications-widget";
+import ProfileWidget from "shared/components/profile-widget/profile-widget";
+import WalletWidget from "shared/components/wallet-widget/wallet-widget";
 
 const FETCH_TIMER = 1000 * 60 * 2;
 
 class ProfileHeader extends Component {
   componentDidMount() {
+    this.props.fetchProfileHeaderInfo();
     this.setFetchInterval();
   }
 
@@ -18,7 +19,6 @@ class ProfileHeader extends Component {
   }
 
   setFetchInterval = () => {
-    this.props.fetchProfileHeaderInfo();
     this.interval = setInterval(() => {
       this.props.fetchProfileHeaderInfo();
     }, FETCH_TIMER);
