@@ -18,6 +18,7 @@ import SelectFilter from "shared/components/table/components/filtering/select-fi
 const ProgramsTableModule = ({
   t,
   enableFiltering,
+  showSwitchView,
   currencies,
   data,
   isPending,
@@ -39,6 +40,7 @@ const ProgramsTableModule = ({
   return (
     <Table
       title={title}
+      showSwitchView={showSwitchView}
       sorting={sorting}
       updateSorting={updateSorting}
       paging={paging}

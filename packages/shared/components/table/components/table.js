@@ -29,6 +29,7 @@ class Table extends Component {
   };
 
   isViewSwitchEnabled =
+    this.props.showSwitchView &&
     this.props.renderBodyRow !== undefined &&
     this.props.renderBodyCard !== undefined;
 
@@ -47,8 +48,6 @@ class Table extends Component {
       updateSorting,
       renderHeader,
       createButtonToolbar,
-      createButtonBody,
-      createText,
       renderBodyCard,
       renderBodyRow,
       paging,

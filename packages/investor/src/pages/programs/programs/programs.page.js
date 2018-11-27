@@ -23,7 +23,11 @@ const ProgramsPage = ({ t }) => {
         composeFacetUrl={composeProgramFacetUrl}
         PROGRAMS_RATING_ROUTE={routes.PROGRAMS_RATING_ROUTE}
       />
-      <ProgramsContainer enableFiltering title={"All programs"} />
+      <ProgramsContainer
+        enableFiltering
+        showSwitchView
+        title={"All programs"}
+      />
     </Page>
   );
 };
