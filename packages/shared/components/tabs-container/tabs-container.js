@@ -7,9 +7,10 @@ import { translate } from "react-i18next";
 
 import { GVTab, GVTabs } from "gv-react-components";
 
-class NavigationTabsContainer extends Component {
+class TabsContainer extends Component {
   render() {
     const { t, tabs, programFacetRoute, tab, handleTabChange } = this.props;
+    console.log("tab", tab);
     return (
       <GVTabs value={tab} onChange={handleTabChange}>
         {tabs.map(tab => (
@@ -36,4 +37,4 @@ export default compose(
   translate(),
   isAuthenticated,
   withRouter
-)(NavigationTabsContainer);
+)(TabsContainer);

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { translate } from "react-i18next";
 import Page from "shared/components/page/page";
 
-import NavigationTabsContainer from "shared/components/navigation-tabs-container/navigation-tabs-container";
+import TabsContainer from "shared/components/tabs-container/tabs-container";
 import * as routes from "../programs.routes";
 import { compose } from "redux";
 import connect from "react-redux/es/connect/connect";
@@ -38,7 +38,7 @@ class ProgramsRatingPage extends Component {
     return (
       <Page title={t("programs-page.title")}>
         <Surface>
-          <NavigationTabsContainer
+          <TabsContainer
             programFacetRoute={routes.PROGRAMS_RATING_TAB_ROUTE}
             tabs={tabs}
             handleTabChange={this.handleTabChange}
