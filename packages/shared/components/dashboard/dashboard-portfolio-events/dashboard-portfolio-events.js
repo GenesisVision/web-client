@@ -26,9 +26,7 @@ class DashboardPortfolioEvents extends Component {
         data.events.map((event, idx) => (
           <DashboardPortfolioEvent event={event} key={idx} />
         ))) ||
-      (Boolean(DashboardPortfolioEmptyView) ? (
-        <DashboardPortfolioEmptyView />
-      ) : null)
+      (DashboardPortfolioEmptyView ? <DashboardPortfolioEmptyView /> : null)
     );
   };
   render() {
