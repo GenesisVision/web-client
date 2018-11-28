@@ -57,6 +57,9 @@ export const PROGRAMS_TABLE_FILTERS = [
 
 export const PROGRAMS_COLUMNS = [
   {
+    name: "position"
+  },
+  {
     name: "title"
   },
   {

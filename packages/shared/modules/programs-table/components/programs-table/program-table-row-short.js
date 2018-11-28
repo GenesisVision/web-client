@@ -23,6 +23,7 @@ const ProgramTableRowShort = ({
 }) => {
   return (
     <TableRow onClick={onExpandClick}>
+      {true && <TableCell>{program.statistic.tradesCount}</TableCell>}
       <TableCell className="programs-table__cell programs-table__cell--name">
         <div className="programs-table__cell--avatar-title">
           <Link

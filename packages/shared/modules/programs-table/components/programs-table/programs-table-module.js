@@ -74,7 +74,11 @@ const ProgramsTableModule = ({
         ))
       }
       renderHeader={column => {
-        if (!isAuthenticated && column.name === "favorite") return null;
+        if (
+          (!isAuthenticated && column.name === "favorite") ||
+          (column.name === "position" && false)
+        )
+          return null;
         return (
           <span
             className={`programs-table__cell  programs-table__cell--${

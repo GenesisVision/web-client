@@ -546,6 +546,7 @@
       "favorites": "Favorites"
     },
     "programs-header": {
+      "position": "Position",
       "title": "Name",
       "balance": "Balance",
       "currency": "Curr.",
