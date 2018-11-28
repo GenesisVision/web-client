@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { compose } from "redux";
-import isAuthenticated from "shared/decorators/is-authenticated";
 import replaceParams from "shared/utils/replace-params";
 import { translate } from "react-i18next";
 
@@ -10,7 +9,6 @@ import { GVTab, GVTabs } from "gv-react-components";
 class TabsContainer extends Component {
   render() {
     const { t, tabs, programFacetRoute, tab, handleTabChange } = this.props;
-    console.log("tab", tab);
     return (
       <GVTabs value={tab} onChange={handleTabChange}>
         {tabs.map(tab => (
@@ -35,6 +33,5 @@ class TabsContainer extends Component {
 
 export default compose(
   translate(),
-  isAuthenticated,
   withRouter
 )(TabsContainer);
