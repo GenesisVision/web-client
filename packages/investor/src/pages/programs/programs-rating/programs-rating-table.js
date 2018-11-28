@@ -9,11 +9,9 @@ class ProgramsRatingTable extends Component {
   state = {
     programs: null,
     isPending: true,
-    paging: {
-      currentPage: 1,
-      itemsOnPage: 10,
-      totalPages: 0
-    }
+    currentPage: 1,
+    itemsOnPage: 10,
+    totalPages: 0
   };
 
   componentDidMount() {
@@ -22,34 +20,48 @@ class ProgramsRatingTable extends Component {
   }
 
   updatePaging = e => {
-    console.log(e);
-    this.setState({ paging: { ...this.paging, currentPage: 2 } });
-    this.updatePrograms({ page: 2 });
+    // const { paging } = this.state;
+    this.setState({ currentPage: e + 1 }, () => this.updatePrograms());
+    // console.log(e, this.state.currentPage);
   };
 
   updatePrograms = filters => {
     const { managerId, tab } = this.props;
-    const { paging } = this.state;
-    fetchPrograms({ managerId, tab, ...filters }).then(programs => {
-      const totalPages = Math.round(programs.total / paging.itemsOnPage);
+    const { itemsOnPage, currentPage } = this.state;
+    fetchPrograms({
+      managerId,
+      tab,
+      take: itemsOnPage,
+      skip: itemsOnPage * (currentPage - 1),
+      ...filters
+    }).then(programs => {
+      const totalPages = Math.round(programs.total / itemsOnPage);
       this.setState({
         programs,
         isPending: false,
-        paging: { ...paging, totalPages }
+        itemsOnPage,
+        currentPage,
+        totalPages
       });
     });
   };
 
   render() {
     const { title } = this.props;
-    const { programs, isPending, paging } = this.state;
-    if (isPending) return null;
+    const {
+      programs,
+      isPending,
+      totalPages,
+      currentPage,
+      itemsOnPage
+    } = this.state;
+    if (isPending || !totalPages) return null;
     return (
       <ProgramsTableModule
         title={title}
         data={programs}
+        paging={{ totalPages, currentPage, itemsOnPage }}
         isPending={isPending}
-        paging={paging}
         updatePaging={this.updatePaging}
       />
     );
