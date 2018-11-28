@@ -5,17 +5,11 @@ import { translate } from "react-i18next";
 import Surface from "shared/components/surface/surface";
 
 import FundStructure from "./fund-structure/fund-structure";
+import * as PropTypes from "prop-types";
 
-const TRADES_TAB = "trades";
 class FundDetailsHistorySection extends PureComponent {
   state = {
-    tab: TRADES_TAB,
-    tradesData: { data: null, isPending: true },
     prevProps: null
-  };
-
-  handleTabChange = (e, tab) => {
-    this.setState({ tab });
   };
 
   static getDerivedStateFromProps(props, state) {
@@ -28,23 +22,23 @@ class FundDetailsHistorySection extends PureComponent {
   }
 
   render() {
-    const { t, fundId, currency, structure } = this.props;
-    if (!structure) return null;
+    const { t, id, fetchFundStructure } = this.props;
     return (
       <Surface className="details-history">
         <h3 className="details-history__heading">
           {t("fund-details-page.history.structure.title")}
         </h3>
         <div>
-          <FundStructure
-            structure={structure}
-            fundId={fundId}
-            currency={currency}
-          />
+          <FundStructure id={id} fetchStructure={fetchFundStructure} />
         </div>
       </Surface>
     );
   }
 }
+
+FundDetailsHistorySection.propTypes = {
+  id: PropTypes.string.isRequired,
+  fetchFundStructure: PropTypes.func.isRequired
+};
 
 export default translate()(FundDetailsHistorySection);

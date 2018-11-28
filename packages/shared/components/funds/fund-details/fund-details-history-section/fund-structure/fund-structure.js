@@ -10,29 +10,41 @@ import TableModule from "shared/components/table/components/table-module";
 import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { formatValue } from "shared/utils/formatter";
-
-import * as service from "../../../services/fund-details.service";
+import * as PropTypes from "prop-types";
 
 class FundStructure extends Component {
-  fetchFundStructure = () => {
-    const { fundId } = this.props;
-    return service.getFundStructure(fundId).then(({ data }) => {
-      return { items: data.trades, total: data.total };
-    });
+  state = {
+    isPending: false,
+    data: null
   };
 
-  render() {
-    const { t, structure } = this.props;
-    let data = { structure: null, total: 0 };
-    if (structure) {
-      data.items = structure;
-      data.total = structure.length;
-    }
+  fetchFundStructure = () => {
+    this.setState({ isPending: true });
+    const { id, fetchStructure } = this.props;
+    return fetchStructure(id)
+      .then(data => this.setState(data))
+      .catch(error => this.setState(error));
+  };
 
+  componentDidMount() {
+    this.fetchFundStructure();
+  }
+
+  render() {
+    const { t } = this.props;
+
+    if (!this.state.data) return null;
+    const data = {
+      items: this.state.data.assets,
+      total: this.state.data.assets.length
+    };
     return (
       <TableModule
         data={data}
-        paging={{ ...DEFAULT_PAGING, itemsOnPage: data.total }}
+        paging={{
+          ...DEFAULT_PAGING,
+          itemsOnPage: data.total
+        }}
         getItems={this.fetchFundStructure}
         columns={FUND_STRUCTURE_COLUMNS}
         renderHeader={column => (
@@ -77,5 +89,10 @@ class FundStructure extends Component {
     );
   }
 }
+
+FundStructure.propTypes = {
+  id: PropTypes.string.isRequired,
+  fetchStructure: PropTypes.func.isRequired
+};
 
 export default translate()(FundStructure);
