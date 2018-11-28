@@ -5200,8 +5200,8 @@ gud@^1.0.0:
   integrity sha512-zGEOVKFM5sVPPrYs7J5/hYEw2Pof8KCyOwyhG8sAF26mCAeUFAcYPu1mwB7hhpIP29zOIBaDqwuHdLp0jvZXjw==
 
 "gv-api-web@git+https://github.com/GenesisVision/gv-api-web.git#development":
-  version "1.0.168"
-  resolved "git+https://github.com/GenesisVision/gv-api-web.git#94a1e1839fbd93bb57bba814b3f2eded9fd92be3"
+  version "1.0.187"
+  resolved "git+https://github.com/GenesisVision/gv-api-web.git#e328e98e2be5a97f808ba54e6a5315635c1379a4"
   dependencies:
     superagent "^3.8.3"
 
@@ -9429,10 +9429,15 @@ qrcode.react@^0.8.0:
     prop-types "^15.6.0"
     qr.js "0.0.0"
 
-qs@6.5.2, qs@^6.5.1, qs@~6.5.2:
+qs@6.5.2, qs@~6.5.2:
   version "6.5.2"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
   integrity sha512-N5ZAX4/LxJmF+7wN74pUD6qAh9/wnvdQcjq9TZjevvXzSUo7bfmw91saqMjzGS2xq91/odN2dW/WOl7qQHNDGA==
+
+qs@^6.5.1:
+  version "6.6.0"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.6.0.tgz#a99c0f69a8d26bf7ef012f871cdabb0aee4424c2"
+  integrity sha512-KIJqT9jQJDQx5h5uAVPimw6yVg2SekOKu959OCtktD3FjzbpvaPr8i4zzg07DOMz+igA4W/aNM7OV8H37pFYfA==
 
 querystring-es3@^0.2.0:
   version "0.2.1"
