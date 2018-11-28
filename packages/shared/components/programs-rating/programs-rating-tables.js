@@ -15,7 +15,7 @@ class ProgramsRatingTables extends Component {
     const { id, tab, rating, manager } = this.props;
     return (
       <Fragment>
-        {manager && (
+        {id && manager && (
           <ProgramsRatingTable
             tab={tab}
             title="Your pretendents"
