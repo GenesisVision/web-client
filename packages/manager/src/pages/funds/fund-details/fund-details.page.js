@@ -126,7 +126,6 @@ class FundDetailsPage extends PureComponent {
             <div className="details__history">
               <FundDetailsHistorySection
                 id={this.description.data.id}
-                currency={currency}
                 fetchFundStructure={fetchFundStructure}
               />
             </div>

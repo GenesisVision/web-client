@@ -92,7 +92,6 @@ class FundStructure extends Component {
 
 FundStructure.propTypes = {
   id: PropTypes.string.isRequired,
-  currency: PropTypes.string.isRequired,
   fetchStructure: PropTypes.func.isRequired
 };
 

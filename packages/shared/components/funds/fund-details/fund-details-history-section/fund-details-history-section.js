@@ -22,18 +22,14 @@ class FundDetailsHistorySection extends PureComponent {
   }
 
   render() {
-    const { t, id, fetchFundStructure, currency } = this.props;
+    const { t, id, fetchFundStructure } = this.props;
     return (
       <Surface className="details-history">
         <h3 className="details-history__heading">
           {t("fund-details-page.history.structure.title")}
         </h3>
         <div>
-          <FundStructure
-            id={id}
-            currency={currency}
-            fetchStructure={fetchFundStructure}
-          />
+          <FundStructure id={id} fetchStructure={fetchFundStructure} />
         </div>
       </Surface>
     );
@@ -42,7 +38,6 @@ class FundDetailsHistorySection extends PureComponent {
 
 FundDetailsHistorySection.propTypes = {
   id: PropTypes.string.isRequired,
-  currency: PropTypes.string.isRequired,
   fetchFundStructure: PropTypes.func.isRequired
 };
 
