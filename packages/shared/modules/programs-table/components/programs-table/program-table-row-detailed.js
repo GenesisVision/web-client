@@ -35,7 +35,7 @@ class ProgramTableRowDetailed extends Component {
       <TableRow>
         <td
           className={classnames("program-detailed", {
-            "program-detailed--pretender": program.statistic.tradesCount === 2
+            "program-detailed--pretender": program.rating.canLevelUp
           })}
           colSpan="11"
         >
