@@ -20,7 +20,7 @@ class ProgramsRatingTables extends Component {
           <ProgramsRatingTable
             tab={tab}
             title="Your pretendents"
-            managerId={id}
+            // managerId={id}
           />
         )}
         <ProgramsRatingTable tab={tab} title="Pretendents" />
