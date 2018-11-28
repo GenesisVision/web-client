@@ -23,7 +23,7 @@ class DashboardPortfolioEventsSection extends Component {
         isPending={isPending}
         data={data}
         eventView={({ event }) => <DashboardPortfolioEvent event={event} />}
-        emptyView={() => <DashboardPortfolioEmptyView />}
+        emptyView={DashboardPortfolioEmptyView}
       />
     );
   }
