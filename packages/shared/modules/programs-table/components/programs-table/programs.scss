@@ -223,9 +223,22 @@ $description-block-width: 250px;
   &--bottom {
     opacity: 0.3;
   }
+
+  &--name {
+    padding-right: 0;
+  }
+
   &--chart {
     min-width: 100px;
-    max-width: 120px;
+    max-width: 170px;
+    padding-right: 0;
+  }
+
+  &--favorite {
+    padding-right: 22px!important;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
   }
 }
 
