@@ -1,17 +1,17 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
 
-import { GVTab, GVTabs } from "gv-react-components";
-import React, { PureComponent } from "react";
-import { translate } from "react-i18next";
-import { connect } from "react-redux";
-import { compose } from "redux";
-import PortfolioEventsTableComponent from "shared/components/dashboard/dashboard-portfolio-events-all/dashboard-portfolio-events-table/dashboard-portfolio-events-all-table";
 import Surface from "shared/components/surface/surface";
+import { GVTab, GVTabs } from "gv-react-components";
 import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { EVENT_TYPE_FILTER_DEFAULT_VALUE } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
+import PortfolioEventsTableComponent from "shared/components/dashboard/dashboard-portfolio-events-all/dashboard-portfolio-events-table/dashboard-portfolio-events-all-table";
+import React, { PureComponent } from "react";
+import { translate } from "react-i18next";
+import connect from "react-redux/es/connect/connect";
+import { compose } from "redux";
 
-import { fetchPortfolioEvents } from "../../../../dashboard/services/dashboard-events.services";
-import ProgramTrades from "./program-trades/program-trades";
+import ProgramTrades from "shared/components/programs/program-details/program-trades/program-trades";
+import * as PropTypes from "prop-types";
 
 const TRADES_TAB = "trades";
 const EVENTS_TAB = "events";
@@ -41,15 +41,7 @@ class ProgramDetailsHistorySection extends PureComponent {
 
   render() {
     const { tab } = this.state;
-    const {
-      t,
-      programId,
-      currency,
-      tradesData,
-      isAuthenticated,
-      isInvested
-    } = this.props;
-    if (!tradesData) return null;
+    const { t, programId, currency, isAuthenticated, isInvested } = this.props;
     return (
       <Surface className="details-history">
         <div className="details-history__header">
@@ -78,7 +70,7 @@ class ProgramDetailsHistorySection extends PureComponent {
         <div>
           {tab === TRADES_TAB && (
             <ProgramTrades
-              trades={tradesData.data}
+              fetchTrades={this.props.fetchTrades}
               programId={programId}
               currency={currency}
             />
@@ -86,12 +78,7 @@ class ProgramDetailsHistorySection extends PureComponent {
           {tab === EVENTS_TAB && (
             <PortfolioEventsTableComponent
               filtering={EVENTS_FILTERING}
-              fetchPortfolioEvents={filters =>
-                fetchPortfolioEvents({
-                  ...filters,
-                  assetId: programId
-                })
-              }
+              fetchPortfolioEvents={this.props.fetchPortfolioEvents}
               dateRangeStartLabel={t("filters.date-range.program-start")}
             />
           )}
@@ -100,10 +87,21 @@ class ProgramDetailsHistorySection extends PureComponent {
     );
   }
 }
+
+ProgramDetailsHistorySection.propTypes = {
+  fetchPortfolioEvents: PropTypes.func.isRequired,
+  fetchTrades: PropTypes.func.isRequired,
+  programId: PropTypes.string.isRequired,
+  currency: PropTypes.string.isRequired,
+  isInvested: PropTypes.bool,
+  isAuthenticated: PropTypes.bool
+};
+
 const mapStateToProps = state => {
   const { isAuthenticated } = state.authData;
   return { isAuthenticated };
 };
+
 export default translate()(
   compose(connect(mapStateToProps))(ProgramDetailsHistorySection)
 );
