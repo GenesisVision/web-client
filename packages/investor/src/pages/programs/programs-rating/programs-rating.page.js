@@ -11,13 +11,7 @@ import connect from "react-redux/es/connect/connect";
 import ProgramsRatingTables from "./programs-rating-tables";
 import Surface from "shared/components/surface/surface";
 
-const tabs = [
-  { name: "1 > 2" },
-  { name: "2 > 3" },
-  { name: "3 > 4" },
-  { name: "5 > 6" },
-  { name: "7 > 8" }
-];
+const TABS = ["1 > 2", "2 > 3", "3 > 4", "5 > 6", "7 > 8"];
 
 const rating = {
   counts: "120",
@@ -27,7 +21,7 @@ const rating = {
 
 class ProgramsRatingPage extends Component {
   state = {
-    tab: "1 > 2"
+    tab: TABS[0]
   };
 
   componentDidMount() {
@@ -47,7 +41,7 @@ class ProgramsRatingPage extends Component {
           <div className="programs-rating__tabs">
             <TabsContainer
               programFacetRoute={routes.PROGRAMS_RATING_TAB_ROUTE}
-              tabs={tabs}
+              tabs={TABS}
               handleTabChange={this.handleTabChange}
               tab={tab}
             />
