@@ -1,17 +1,9 @@
-import "./dashboard-portfolio-event.scss";
-
 import React from "react";
 import ContentLoader from "react-content-loader";
 
-const DashboardPortfolioEventLoader = props => {
+const PortfolioEventLoader = props => {
   return (
-    <div
-      style={{
-        borderBottom: "2px solid #28323b",
-        paddingBottom: "24px",
-        marginBottom: "24px"
-      }}
-    >
+    <div className="portfolio-event">
       <div style={{ width: 252 }}>
         <ContentLoader
           height={84}
@@ -32,4 +24,4 @@ const DashboardPortfolioEventLoader = props => {
   );
 };
 
-export default DashboardPortfolioEventLoader;
+export default PortfolioEventLoader;
