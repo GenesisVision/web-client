@@ -15,15 +15,14 @@ class TabsContainer extends Component {
           <GVTab
             key={tab}
             value={tab}
-            label={
-              <Link
+            label={tab}
+            /*<Link
                 to={replaceParams(programFacetRoute, {
                   ":tab": tab
                 })}
               >
                 {t(tab)}
-              </Link>
-            }
+              </Link>*/
           />
         ))}
       </GVTabs>
