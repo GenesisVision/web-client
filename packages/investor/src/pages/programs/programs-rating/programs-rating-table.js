@@ -22,12 +22,10 @@ class ProgramsRatingTable extends Component {
   };
 
   componentDidMount() {
-    // const { tab } = this.props;
     this.updatePrograms();
   }
 
   updatePaging = e => {
-    // const { paging } = this.state;
     this.setState({ currentPage: e + 1 }, () => this.updatePrograms());
   };
 
