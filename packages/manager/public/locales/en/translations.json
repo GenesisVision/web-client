@@ -64,6 +64,7 @@
       "notification-success": "Request to close the period was sent successfully."
     },
     "description": {
+      "entry-fee-levels": "Text about levels",
       "strategy": "Strategy",
       "addToFavorites": "Add to favorites",
       "notifications": "Notifications",
@@ -763,7 +764,7 @@
         "available-in-wallet": "Available in wallet"
       },
       "hints": {
-        "entry-fee-levels": "Text about levels",
+        "entry-fee-levels": "",
         "entry-fee": "Description about entry fee is here",
         "entry-fee-description": "An entry fee is a fee charged to investors upon their investment to an investment program. The maximum entry fee is {{maxFee}} %",
         "success-fee": "Description about success fee is here",

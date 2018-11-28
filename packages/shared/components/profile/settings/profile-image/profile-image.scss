@@ -19,4 +19,12 @@
     letter-spacing: 0.4px;
     padding: 1em 2.4em;
   }
+
+  &__title {
+    @include adaptive-padding(bottom, $padding-medium);
+    text-transform: uppercase;
+    font-size: $font-size-small;
+    letter-spacing: 0.48px;
+    font-weight: 500;
+  }
 }

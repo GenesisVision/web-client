@@ -1,7 +1,7 @@
 import React from "react";
 import { translate } from "react-i18next";
-import FundsTableRow from "shared/components/funds-table/fund-table-row";
-import { FUNDS_TABLE_COLUMNS } from "shared/components/funds-table/funds-table.constants";
+import FundsTableRow from "shared/modules/funds-table/components/funds-table/fund-table-row";
+import { FUNDS_TABLE_COLUMNS } from "shared/modules/funds-table/components/funds-table/funds-table.constants";
 import { Table } from "shared/components/table/components";
 
 const FundsTable = ({ t, title, isPending, data }) => {
