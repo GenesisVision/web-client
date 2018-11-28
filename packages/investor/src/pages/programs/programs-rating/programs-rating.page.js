@@ -44,7 +44,7 @@ class ProgramsRatingPage extends Component {
             handleTabChange={this.handleTabChange}
             tab={tab}
           />
-          {id && <ProgramsRatingTables key={tab} tab={tab} id={id} />}
+          <ProgramsRatingTables key={tab} tab={tab} id={id} />
         </Surface>
       </Page>
     );

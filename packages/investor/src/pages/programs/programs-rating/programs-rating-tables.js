@@ -13,10 +13,10 @@ class ProgramsRatingTables extends Component {
   };
 
   render() {
-    const { id, tab } = this.props;
+    const { id, tab, manager } = this.props;
     return (
       <Fragment>
-        {true && (
+        {id && (
           <ProgramsRatingTable
             tab={tab}
             title="Your pretendents"
