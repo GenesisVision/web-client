@@ -69,7 +69,11 @@ class ProgramDetailsHistorySection extends PureComponent {
         </div>
         <div>
           {tab === TRADES_TAB && (
-            <ProgramTrades programId={programId} currency={currency} />
+            <ProgramTrades
+              fetchTrades={this.props.fetchTrades}
+              programId={programId}
+              currency={currency}
+            />
           )}
           {tab === EVENTS_TAB && (
             <PortfolioEventsTableComponent
@@ -86,6 +90,7 @@ class ProgramDetailsHistorySection extends PureComponent {
 
 ProgramDetailsHistorySection.propTypes = {
   fetchPortfolioEvents: PropTypes.func.isRequired,
+  fetchTrades: PropTypes.func.isRequired,
   programId: PropTypes.string.isRequired,
   currency: PropTypes.string.isRequired,
   isInvested: PropTypes.bool,

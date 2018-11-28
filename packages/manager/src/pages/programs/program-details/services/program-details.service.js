@@ -101,3 +101,10 @@ export const closePeriod = (programId, onSuccess) => dispatch => {
       dispatch(alertMessageActions.error(error.errorMessage));
     });
 };
+
+export const fetchProgramTrades = (id, filters, currency) => {
+  return programsApiProxy.v10ProgramsByIdTradesGet(id, {
+    ...filters,
+    currency
+  });
+};

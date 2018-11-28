@@ -40,20 +40,11 @@ class ProgramTrades extends Component {
   }
 
   fetchProgramTrades = filters => {
-    const { currency, programId } = this.props;
-    const opts = {
-      ...filters,
-      currency
-    };
-
+    const { currency, programId, fetchTrades } = this.props;
     this.setState({ isPending: true });
-
-    return programsApiProxy
-      .v10ProgramsByIdTradesGet(programId, opts)
-      .then(data => {
-        this.setState(data);
-      })
-      .catch(error => console.info(error) || this.setState({ ...error }));
+    return fetchTrades(programId, filters, currency)
+      .then(data => this.setState(data))
+      .catch(error => this.setState({ ...error }));
   };
 
   render() {
@@ -147,7 +138,8 @@ class ProgramTrades extends Component {
 
 ProgramTrades.propTypes = {
   programId: PropTypes.string.isRequired,
-  currency: PropTypes.string.isRequired
+  currency: PropTypes.string.isRequired,
+  fetchTrades: PropTypes.func.isRequired
 };
 
 export default translate()(ProgramTrades);

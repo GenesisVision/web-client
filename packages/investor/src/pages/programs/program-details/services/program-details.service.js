@@ -64,3 +64,10 @@ export const getProgramStatistic = (
     return { statisticData, profitChartData, balanceChartData };
   });
 };
+
+export const fetchProgramTrades = (id, filters, currency) => {
+  return programsApiProxy.v10ProgramsByIdTradesGet(id, {
+    ...filters,
+    currency
+  });
+};

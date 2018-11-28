@@ -20,7 +20,8 @@ import CloseProgramContainer from "./close-program/close-program-container";
 import ProgramDetailsHistorySection from "shared/components/programs/program-details/program-trades/program-details-history-section";
 import {
   getProgramDescription,
-  getProgramStatistic
+  getProgramStatistic,
+  fetchProgramTrades
 } from "./services/program-details.service";
 import { fetchPortfolioEvents } from "../../dashboard/services/dashboard-events.services";
 
@@ -129,6 +130,7 @@ class ProgramDetailsPage extends PureComponent {
             </div>
             <div className="details__history">
               <ProgramDetailsHistorySection
+                fetchTrades={fetchProgramTrades}
                 fetchPortfolioEvents={filters =>
                   fetchPortfolioEvents({
                     ...filters,

@@ -21,6 +21,7 @@ import AboutLevelsContainerComponent from "pages/app/components/about-levels/abo
 import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
 import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
 import { fetchPortfolioEvents } from "../../dashboard/services/dashboard-events.services";
+import { fetchProgramTrades } from "pages/programs/program-details/services/program-details.service";
 
 export const ProgramDetailContext = React.createContext({
   updateDetails: () => {}
@@ -134,6 +135,7 @@ class ProgramDetailsPage extends PureComponent {
                     assetId: this.description.data.id
                   })
                 }
+                fetchTrades={fetchProgramTrades}
                 programId={this.description.data.id}
                 currency={currency}
                 isInvested={isInvested}
