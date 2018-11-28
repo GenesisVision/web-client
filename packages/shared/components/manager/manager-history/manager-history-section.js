@@ -21,7 +21,7 @@ class ManagerHistorySection extends PureComponent {
 
   render() {
     const { tab } = this.state;
-    const { t, managerId } = this.props;
+    const { t, managerId, title } = this.props;
     const { handleTabChange } = this;
     const defaultFilters = { managerId };
     return (
@@ -38,9 +38,11 @@ class ManagerHistorySection extends PureComponent {
 
         <div>
           {tab === PROGRAMS_TAB && (
-            <ProgramsTable defaultFilters={defaultFilters} />
+            <ProgramsTable title={title} defaultFilters={defaultFilters} />
           )}
-          {tab === FUNDS_TAB && <FundsTable defaultFilters={defaultFilters} />}
+          {tab === FUNDS_TAB && (
+            <FundsTable title={title} defaultFilters={defaultFilters} />
+          )}
         </div>
       </Surface>
     );
