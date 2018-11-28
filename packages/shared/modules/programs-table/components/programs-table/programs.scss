@@ -234,8 +234,8 @@ $description-block-width: 250px;
     padding-right: 0;
   }
 
-  &--favorite {
-    padding-right: 22px!important;
+  &--favorite.table__cell:last-child {
+    padding-right: 22px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
