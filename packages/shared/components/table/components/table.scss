@@ -109,9 +109,16 @@ $padding: 33px;
     padding: 0 1.5rem;
     &:not(.table__row--head):hover {
       background-color: #212c34;
-      & .program-avatar__level {
-        border-color: #212c34;
+    }
+
+    &:hover {
+      .program-detailed--pretender .program-avatar__level {
+        border-color: #0b4b45;
       }
+    }
+
+    .program-avatar__level {
+      transition: border-color 300ms ease;
     }
 
     &--pretender {
@@ -119,7 +126,15 @@ $padding: 33px;
 
       &:not(.table__row--head):hover {
         background-color: rgba($positive-color, 0.3);
+
+	      .program-avatar__level {
+		      border-color: #00564b;
+	      }
       }
+
+	   .program-avatar__level {
+		    border-color: #064542;
+	    }
     }
   }
 

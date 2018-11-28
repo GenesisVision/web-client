@@ -52,7 +52,7 @@ $description-block-width: 250px;
     background-color: #212c34;
     flex-grow: 1;
     & .program-avatar__level {
-      border-color: #212c34 !important;
+      border-color: #212c34;
     }
     &--title {
       @include table-title;
@@ -274,7 +274,7 @@ $description-block-width: 250px;
       margin-left: $padding/2;
     }
     & .program-avatar__level {
-      border-color: $secondary-color !important;
+      border-color: $secondary-color;
     }
   }
 
@@ -374,11 +374,15 @@ $description-block-width: 250px;
     }
   }
 
-  &--pretend {
+  &--pretender{
     .program-detailed__info,
     .program-detailed__collapse {
       background-color: rgba($positive-color, 0.2);
     }
+
+	  .program-avatar__level {
+		  border-color: #064542;
+	  }
   }
 
   @include media-breakpoint-landscape-phone() {
