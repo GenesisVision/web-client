@@ -121,7 +121,6 @@ class ProgramDetailsDescription extends PureComponent {
     };
 
     const title = programDescription.title;
-    console.log(programDescription);
     return (
       <div className="details-description">
         <div className="details-description__left">
@@ -226,7 +225,8 @@ class ProgramDetailsDescription extends PureComponent {
                 className={"details-description__short-statistic-item"}
                 accent
               >
-                {programDescription.level < 3 ? (
+                {/*{programDescription.level < 3 ? (*/}
+                {false ? (
                   <Hint
                     content={
                       <NumberFormat
@@ -236,7 +236,6 @@ class ProgramDetailsDescription extends PureComponent {
                         suffix=" %)"
                       />
                     }
-                    className="create-program-settings__fee-hint"
                     vertical={"bottom"}
                     tooltipContent={t(
                       "program-details-page.description.entry-fee-levels"
@@ -335,7 +334,6 @@ class ProgramDetailsDescription extends PureComponent {
                         "program-details-page.description.withdraw-notice-text"
                       )}
                       canWithdraw={canWithdraw}
-                      className={"details-description__your-investment"}
                       assetCurrency={programDescription.currency}
                       onChangeInvestmentStatus={onChangeInvestmentStatus}
                       {...investmentData}

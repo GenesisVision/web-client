@@ -4,7 +4,7 @@
 
 .wallet-balance {
   &__statistic {
-    @include padding-top($padding-xxsmall);
+    @include adaptive-padding(top, $padding-xxsmall);
     display: flex;
     flex-wrap: wrap;
     & > * {
@@ -35,8 +35,8 @@
   }
 
   &__footer {
+    @include adaptive-margin(top, $padding-small);
     display: block;
-    margin-top: 40px;
   }
 
   &__add-funds {
@@ -75,7 +75,6 @@
 
     &__footer {
       display: block;
-      margin-top: 66px;
     }
 
     &__add-funds {

@@ -62,14 +62,14 @@
   }
 
   &--small {
-    & > .details-statistics-item__label {
+    & > .statistics-item__label {
       font-size: $font-size-small-mobile;
       @include media-breakpoint-landscape-phone() {
         font-size: $font-size-small;
       }
     }
 
-    & > .details-statistics-item__value {
+    & > .statistics-item__value {
       font-size: $font-size-common-mobile;
       @include media-breakpoint-landscape-phone() {
         font-size: $font-size-common;

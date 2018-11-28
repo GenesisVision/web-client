@@ -16,7 +16,6 @@
   }
 
   & .table__toolbar {
-    padding-top: $padding-medium;
     flex-direction: column;
     align-items: flex-start;
   }
@@ -75,7 +74,7 @@
     }
 
     & .table__toolbar {
-      padding: $padding-medium 32px 32px;
+      padding: 0 32px 32px;
       flex-direction: row;
     }
   }

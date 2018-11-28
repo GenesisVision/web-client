@@ -18,7 +18,7 @@ button {
 }
 
 .root,
-.app,
+.app__scroll,
 .app__body {
   height: 100vh;
   color: white;
@@ -31,10 +31,9 @@ button {
 }
 
 .app__title-page {
-  @include padding-top($padding-medium);
-  @include padding-bottom($padding-small);
+  @include adaptive-padding(bottom, $padding-medium);
 }
 
 .app__title-details {
-  @include padding-bottom($padding-xxsmall);
+  @include adaptive-padding(bottom, $padding-xxsmall);
 }

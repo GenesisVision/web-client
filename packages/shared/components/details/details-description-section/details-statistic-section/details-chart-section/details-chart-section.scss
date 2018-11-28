@@ -3,8 +3,6 @@
 @import "~shared/styles/_sizes.scss";
 
 .details-chart {
-  padding: 0 $padding-small-mobile;
-  padding-bottom: $padding-small-mobile;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -20,13 +18,6 @@
     @include media-breakpoint-landscape-phone() {
       padding-top: $padding-xsmall;
     }
-  }
-
-  &__heading {
-    font-size: $font-size-h3-mobile;
-    font-weight: 600;
-    letter-spacing: 0.2px;
-    padding: $padding-small-mobile 0;
   }
 
   &__profit {
@@ -58,14 +49,6 @@
     }
   }
   @include media-breakpoint-landscape-phone() {
-    padding: 0 $padding-small;
-    padding-bottom: $padding-small;
-
-    &__heading {
-      font-size: $font-size-h3;
-      padding: $padding-small 0;
-    }
-
     .details-tooltip {
       &__title {
         font-size: $font-size-paragraph;

@@ -15,12 +15,17 @@ class AppLayout extends Component {
 
   render() {
     return (
-      <div className="app">
-        <div className="app__header">
-          <HeaderContainer />
+      <div className="app__scroll">
+        <div className="app__wrapper">
+          <div className="app">
+            <div className="app__header">
+              <HeaderContainer />
+            </div>
+            <div className="app__main">{this.props.children}</div>
+            <NotificationsContainer />
+          </div>
+          <div id="modal-root" />
         </div>
-        <div className="app__main">{this.props.children}</div>
-        <NotificationsContainer />
       </div>
     );
   }

@@ -33,27 +33,29 @@ const WalletAddFundsForm = ({
   };
 
   return (
-    <form id="add-funds">
+    <form id="add-funds" className="wallet-add-funds-popup">
       <div className="dialog__top">
         <div className="dialog__header">
           <h2>{t("wallet-add-funds.title")}</h2>
         </div>
-        <GVFormikField
-          name="currency"
-          component={GVTextField}
-          label={t("wallet-add-funds.select-currency")}
-          InputComponent={Select}
-        >
-          {wallets.map(wallet => {
-            const { description, currency } = wallet;
-            return (
-              <option
-                value={currency}
-                key={currency}
-              >{`${description} | ${currency}`}</option>
-            );
-          })}
-        </GVFormikField>
+        <div className="dialog-field">
+          <GVFormikField
+            name="currency"
+            component={GVTextField}
+            label={t("wallet-add-funds.select-currency")}
+            InputComponent={Select}
+          >
+            {wallets.map(wallet => {
+              const { description, currency } = wallet;
+              return (
+                <option
+                  value={currency}
+                  key={currency}
+                >{`${description} | ${currency}`}</option>
+              );
+            })}
+          </GVFormikField>
+        </div>
         <GVFormikField
           name="amount"
           label={t("wallet-add-funds.will-send")}
@@ -82,7 +84,10 @@ const WalletAddFundsForm = ({
       </div>
       <div className="dialog__bottom wallet-add-funds-popup__bottom">
         <GVqr className="wallet-add-funds-popup__qr" value={address} />
-        <StatisticItem label={t("wallet-add-funds.deposit-address")}>
+        <StatisticItem
+          className="wallet-add-funds-popup__address"
+          label={t("wallet-add-funds.deposit-address")}
+        >
           {address}
         </StatisticItem>
         <GVButton color="secondary" onClick={onCopy} disabled={!address}>

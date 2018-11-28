@@ -4,6 +4,11 @@
 .app {
   margin: 0 auto;
 
+  &__wrapper {
+    position: relative;
+    min-height: 100vh;
+  }
+
   @media (min-width: 1360px) {
     max-width: 1360px;
   }
@@ -17,9 +22,9 @@
   }
 
   &__main {
-    padding: 0 $padding-xsmall $padding-big;
+    padding: $padding-medium-mobile $padding-xsmall $padding-big;
     @media (min-width: 1360px) {
-      padding: 0 0 $padding-big;
+      padding: $padding-medium 0 $padding-big;
     }
   }
 }

@@ -30,10 +30,8 @@ class ProgramDetailsChartSection extends PureComponent {
     const { tab } = this.state;
 
     return (
-      <Surface className="details-chart">
-        <h3 className="details-chart__heading">
-          {t("program-details-page.chart.heading")}
-        </h3>
+      <Surface className="surface--horizontal-paddings details-chart">
+        <h3>{t("program-details-page.chart.heading")}</h3>
         <GVTabs value={tab} onChange={this.handleTabChange}>
           <GVTab
             value={PROFIT_TAB}
