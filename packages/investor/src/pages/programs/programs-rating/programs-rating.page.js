@@ -1,4 +1,4 @@
-import "./programs-rating.scss";
+import "shared/components/programs-rating/programs-rating.scss";
 
 import React, { Component } from "react";
 import { translate } from "react-i18next";
@@ -8,7 +8,7 @@ import TabsContainer from "shared/components/tabs-container/tabs-container";
 import * as routes from "../programs.routes";
 import { compose } from "redux";
 import connect from "react-redux/es/connect/connect";
-import ProgramsRatingTables from "./programs-rating-tables";
+import ProgramsRatingTables from "shared/components/programs-rating/programs-rating-tables";
 import Surface from "shared/components/surface/surface";
 
 const TABS = ["1 > 2", "2 > 3", "3 > 4", "5 > 6", "7 > 8"];
