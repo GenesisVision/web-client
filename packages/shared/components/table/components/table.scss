@@ -79,6 +79,7 @@ $padding: 33px;
     @include vertical-paddings($padding-xxsmall);
     justify-self: flex-start;
     letter-spacing: 0.2px;
+    margin-right: auto;
   }
 
   &__filters {
