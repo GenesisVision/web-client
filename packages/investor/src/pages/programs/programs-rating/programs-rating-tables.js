@@ -3,6 +3,7 @@ import { translate } from "react-i18next";
 import { compose } from "redux";
 import { fetchPrograms } from "shared/modules/programs-table/services/programs-table.service";
 import ProgramsTableModule from "shared/modules/programs-table/components/programs-table/programs-table-module";
+import ProgramsRatingTable from "./programs-rating-table";
 
 class ProgramsRatingTables extends Component {
   state = {
@@ -11,43 +12,18 @@ class ProgramsRatingTables extends Component {
     isPending: true
   };
 
-  componentDidMount() {
-    const { tab } = this.props;
-    this.updatePretendents(tab);
-  }
-
-  updateSorting = e => {};
-
-  updatePretendents = tab => {
-    const { id } = this.props;
-    fetchPrograms({})
-      .then(pretendents => {
-        this.setState({ pretendents });
-        return true ? fetchPrograms({ managerId: id }) : [];
-      })
-      .then(selfPretendents => {
-        this.setState({ selfPretendents, isPending: false });
-      });
-  };
-
   render() {
-    const { manager } = this.props;
-    const { pretendents, selfPretendents, isPending } = this.state;
-    if (isPending) return null;
+    const { id, tab } = this.props;
     return (
       <Fragment>
         {true && (
-          <ProgramsTableModule
+          <ProgramsRatingTable
+            tab={tab}
             title="Your pretendents"
-            data={selfPretendents}
-            isPending={isPending}
+            managerId={id}
           />
         )}
-        <ProgramsTableModule
-          title="Pretendents"
-          data={pretendents}
-          isPending={isPending}
-        />
+        <ProgramsRatingTable tab={tab} title="Pretendents" />
       </Fragment>
     );
   }
