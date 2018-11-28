@@ -11,6 +11,7 @@ import React from "react";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import { formatValue } from "shared/utils/formatter";
+import classnames from "classnames";
 
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 
@@ -22,7 +23,12 @@ const ProgramTableRowShort = ({
   onExpandClick
 }) => {
   return (
-    <TableRow onClick={onExpandClick}>
+    <TableRow
+      className={classnames({
+        "table__row--pretend": program.statistic.tradesCount === 2
+      })}
+      onClick={onExpandClick}
+    >
       {true && <TableCell>{program.statistic.tradesCount}</TableCell>}
       <TableCell className="programs-table__cell programs-table__cell--name">
         <div className="programs-table__cell--avatar-title">

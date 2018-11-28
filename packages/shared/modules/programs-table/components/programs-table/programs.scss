@@ -374,6 +374,13 @@ $description-block-width: 250px;
     }
   }
 
+  &--pretend {
+    .program-detailed__info,
+    .program-detailed__collapse {
+      background-color: rgba($positive-color, 0.2);
+    }
+  }
+
   @include media-breakpoint-landscape-phone() {
     &__info {
       padding: $padding;

@@ -1,3 +1,5 @@
+import "./programs-rating.scss";
+
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import Page from "shared/components/page/page";
@@ -10,18 +12,22 @@ import ProgramsRatingTables from "./programs-rating-tables";
 import Surface from "shared/components/surface/surface";
 
 const tabs = [
-  { name: "1>2" },
-  { name: "2>3" },
-  { name: "3>4" },
-  { name: "5>6" },
-  { name: "7>8" },
-  { name: "9>10" },
-  { name: "11>12" }
+  { name: "1 > 2" },
+  { name: "2 > 3" },
+  { name: "3 > 4" },
+  { name: "5 > 6" },
+  { name: "7 > 8" }
 ];
+
+const rating = {
+  counts: "120",
+  quota: "12",
+  currentProfit: "24.54675"
+};
 
 class ProgramsRatingPage extends Component {
   state = {
-    tab: "1>2"
+    tab: "1 > 2"
   };
 
   componentDidMount() {
@@ -37,14 +43,16 @@ class ProgramsRatingPage extends Component {
     if (!tab) return null;
     return (
       <Page title={t("programs-page.title")}>
-        <Surface>
-          <TabsContainer
-            programFacetRoute={routes.PROGRAMS_RATING_TAB_ROUTE}
-            tabs={tabs}
-            handleTabChange={this.handleTabChange}
-            tab={tab}
-          />
-          <ProgramsRatingTables key={tab} tab={tab} id={id} />
+        <Surface className="programs-rating">
+          <div className="programs-rating__tabs">
+            <TabsContainer
+              programFacetRoute={routes.PROGRAMS_RATING_TAB_ROUTE}
+              tabs={tabs}
+              handleTabChange={this.handleTabChange}
+              tab={tab}
+            />
+          </div>
+          <ProgramsRatingTables key={tab} tab={tab} id={id} rating={rating} />
         </Surface>
       </Page>
     );

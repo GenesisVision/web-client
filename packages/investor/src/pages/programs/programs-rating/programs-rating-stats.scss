@@ -1,0 +1,13 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
+
+.programs-rating-stats {
+	@include horizontal-paddings($padding-small);
+	@include vertical-paddings($padding-medium, $padding-small);
+	display: flex;
+
+	.statistics-item {
+		@include adaptive-margin(right, $padding-small);
+	}
+}

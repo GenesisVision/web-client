@@ -112,6 +112,14 @@ $padding: 33px;
         border-color: #212c34;
       }
     }
+
+    &--pretend {
+      background-color: rgba($positive-color, 0.2);
+
+      &:not(.table__row--head):hover {
+        background-color: rgba($positive-color, 0.3);
+      }
+    }
   }
 
   &__cell {

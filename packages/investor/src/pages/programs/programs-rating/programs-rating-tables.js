@@ -1,9 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import { compose } from "redux";
-import { fetchPrograms } from "shared/modules/programs-table/services/programs-table.service";
-import ProgramsTableModule from "shared/modules/programs-table/components/programs-table/programs-table-module";
 import ProgramsRatingTable from "./programs-rating-table";
+import ProgramsRatingStats from "./programs-rating-stats";
 
 class ProgramsRatingTables extends Component {
   state = {
@@ -13,16 +12,18 @@ class ProgramsRatingTables extends Component {
   };
 
   render() {
-    const { id, tab, manager } = this.props;
+    const { id, tab, rating, manager } = this.props;
+    console.log(rating);
     return (
       <Fragment>
         {id && (
           <ProgramsRatingTable
             tab={tab}
             title="Your pretendents"
-            // managerId={id}
+            managerId={id}
           />
         )}
+        <ProgramsRatingStats rating={rating} />
         <ProgramsRatingTable tab={tab} title="Pretendents" />
       </Fragment>
     );
