@@ -91,3 +91,11 @@ $avatar-size-mobile: $avatar-size/$divider-title;
   @include adaptive-padding(left, $padding-left);
   @include adaptive-padding(right, $padding-right);
 }
+
+@mixin adaptive-margin($direction, $margin-size) {
+  margin-#{$direction}: $margin-size/$divider-padding;
+
+  @include media-breakpoint-landscape-phone() {
+    margin-#{$direction}: $margin-size;
+  }
+}

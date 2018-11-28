@@ -1,4 +1,5 @@
 @import "~shared/styles/_colors.scss";
+@import "~shared/styles/_sizes.scss";
 
 .profile {
   &__edit-link {
@@ -12,6 +13,10 @@
   &__container {
     width: 100%;
     overflow: auto;
+
+    &--padding-top {
+      @include adaptive-padding(top, $padding-medium);
+    }
   }
   &__left {
     position: relative;

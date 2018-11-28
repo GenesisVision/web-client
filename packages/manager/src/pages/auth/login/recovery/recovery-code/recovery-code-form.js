@@ -14,9 +14,7 @@ const RecoveryCodeForm = ({ t, handleSubmit, isSubmitting, error }) => {
       onSubmit={handleSubmit}
       noValidate
     >
-      <h3 className="recovery-form__header">
-        {t("auth.login.recovery.title")}
-      </h3>
+      <h3>{t("auth.login.recovery.title")}</h3>
       <p className="recovery-form__text">{t("auth.login.recovery.text")}</p>
       <GVFormikField
         name="recoveryCode"

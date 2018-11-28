@@ -50,7 +50,7 @@ class ProgramNotificationsCustom extends Component {
     const { t, program, errorMessage } = this.props;
     return (
       <div className="notification-settings custom-notifications">
-        <h3>{t("notifications.program.custom.title")}</h3>
+        <h3 className="notification-settings__subtitle">{t("notifications.program.custom.title")}</h3>
         {program.settingsCustom.map(settings => (
           <CustomNotification settings={settings} key={settings.assetId} />
         ))}

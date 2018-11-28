@@ -31,7 +31,7 @@ button {
 }
 
 .app__title-page {
-  @include vertical-paddings($padding-medium, $padding-small);
+  @include adaptive-padding(bottom, $padding-medium);
 }
 
 .app__title-details {

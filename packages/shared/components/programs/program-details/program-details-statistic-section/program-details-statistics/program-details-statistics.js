@@ -22,9 +22,7 @@ const ProgramDetailsStatistics = ({
   if (!statistic || isPendingStatistic || isPendingProfitChart) return null;
   return (
     <Surface className="surface--horizontal-paddings details-statistics">
-      <h3 className="details-statistics__heading">
-        {t("program-details-page.statistics.heading")}
-      </h3>
+      <h3>{t("program-details-page.statistics.heading")}</h3>
       <div className="details-statistics__subheading">
         {t("program-details-page.statistics.current")}
       </div>
