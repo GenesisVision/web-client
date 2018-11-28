@@ -17,12 +17,13 @@ import ProgramDetailsStatisticSection from "shared/components/programs/program-d
 import { LOGIN_ROUTE } from "../../auth/login/login.routes";
 import ClosePeriodContainer from "./close-period/close-period-container";
 import CloseProgramContainer from "./close-program/close-program-container";
-import ProgramDetailsHistorySection from "./components/program-details-history-section/program-details-history-section";
+import ProgramDetailsHistorySection from "shared/components/programs/program-details/program-trades/program-details-history-section";
 import {
   getProgramDescription,
-  getProgramHistory,
-  getProgramStatistic
+  getProgramStatistic,
+  fetchProgramTrades
 } from "./services/program-details.service";
+import { fetchPortfolioEvents } from "../../dashboard/services/dashboard-events.services";
 
 export const ProgramDetailContext = React.createContext({
   updateDetails: () => {}
@@ -48,7 +49,7 @@ class ProgramDetailsPage extends PureComponent {
   }
 
   updateDetails = () => {
-    const { service, currency } = this.props;
+    const { service } = this.props;
     this.setState({ isPending: true });
     service
       .getProgramDescription()
@@ -68,10 +69,6 @@ class ProgramDetailsPage extends PureComponent {
         this.profitChart = data.profitChartData;
         this.balanceChart = data.balanceChartData;
         this.statistic = data.statisticData;
-        return getProgramHistory(this.description.data.id, currency);
-      })
-      .then(data => {
-        this.trades = data.trades;
         this.setState({ isPending: false });
       })
       .catch(e => {
@@ -103,9 +100,7 @@ class ProgramDetailsPage extends PureComponent {
     return (
       <Page title={this.description.data.title}>
         <ProgramDetailContext.Provider
-          value={{
-            updateDetails: this.updateDetails
-          }}
+          value={{ updateDetails: this.updateDetails }}
         >
           <div className="details">
             <div className="details__section">
@@ -136,10 +131,15 @@ class ProgramDetailsPage extends PureComponent {
             </div>
             <div className="details__history">
               <ProgramDetailsHistorySection
+                fetchTrades={fetchProgramTrades}
+                fetchPortfolioEvents={filters =>
+                  fetchPortfolioEvents({
+                    ...filters,
+                    assetId: this.description.data.id
+                  })
+                }
                 programId={this.description.data.id}
                 currency={currency}
-                tradesData={this.trades}
-                eventsData={this.events}
                 isInvested={isInvested}
               />
             </div>
