@@ -33,10 +33,8 @@ class DashboardPortfolioEvents extends Component {
     const { t, fullEventsUrl, title } = this.props;
 
     return (
-      <Surface className="dashboard-portfolio-events">
-        <h3 className="dashboard-portfolio-events__title">
-          {t("dashboard.portfolio-events.title")}
-        </h3>
+      <Surface className="surface--horizontal-paddings dashboard-portfolio-events">
+        <h3>{t("dashboard.portfolio-events.title")}</h3>
         <div className="dashboard-portfolio-events__scroll-container">
           <Scrollbars
             autoHide

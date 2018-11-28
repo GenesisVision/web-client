@@ -3,20 +3,8 @@
 @import "~shared/styles/_sizes.scss";
 
 .details-history {
-  padding-bottom: $padding-small-mobile;
-  @include media-breakpoint-landscape-phone() {
-    padding-bottom: $padding-small;
-  }
-
   &__heading {
-    padding: $padding-small-mobile;
-    font-size: $font-size-h3-mobile;
-    letter-spacing: 0.2px;
-    font-weight: 600;
-    @include media-breakpoint-landscape-phone() {
-      padding: $padding-small;
-      font-size: $font-size-h3;
-    }
+    @include horizontal-paddings($padding-small);
   }
 
   &__subheading {

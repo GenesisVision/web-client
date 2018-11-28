@@ -30,21 +30,11 @@
   }
 
   &__tabs {
-    padding: 0 $padding-small-mobile;
-    @include media-breakpoint-landscape-phone() {
-      padding: 0 $padding-small;
-    }
+    @include horizontal-paddings($padding-small);
   }
 
   &__heading {
-    padding: $padding-small-mobile;
-    font-size: $font-size-h3-mobile;
-    letter-spacing: 0.2px;
-    font-weight: 600;
-    @include media-breakpoint-landscape-phone() {
-      padding: $padding-small;
-      font-size: $font-size-h3;
-    }
+    @include horizontal-paddings($padding-small);
   }
 
   &__loading {

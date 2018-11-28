@@ -11,31 +11,17 @@ $withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
   display: inline-block;
   width: 100%;
   max-width: 500px;
-  &,
+  margin-top: $padding-small-mobile;
+  margin-left: 0;
   & div {
     box-sizing: border-box;
   }
-  padding: $padding-small-mobile;
-  margin-top: $padding-small-mobile;
-  margin-left: 0;
   @include media-breakpoint-phone() {
     margin-left: -$padding-small-mobile;
   }
   @include media-breakpoint-landscape-phone() {
-    padding: $padding-small;
     margin-top: $padding-small;
     margin-left: -$padding-small;
-  }
-
-  &__heading {
-    font-size: $font-size-h3-mobile;
-    letter-spacing: 0.21px;
-    padding-bottom: $padding-small-mobile;
-    font-weight: 600;
-    @include media-breakpoint-landscape-phone() {
-      font-size: $font-size-h3;
-      padding-bottom: $padding-small;
-    }
   }
 
   &__short-statistic-container {

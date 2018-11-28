@@ -3,15 +3,13 @@
 @import "~shared/styles/_sizes.scss";
 
 .dashboard-portfolio-chart-section {
+  flex: 1;
+  width: 100px;
+
   & div {
     box-sizing: border-box;
   }
-  flex: 1;
-  box-sizing: border-box;
-  padding: $padding-small-mobile 0;
-  width: 100px;
   @include media-breakpoint-landscape-phone() {
-    padding: $padding-small 0;
     min-height: 683px;
   }
   & .chart-period {
@@ -27,18 +25,7 @@
   }
 
   &__heading {
-    font-size: $font-size-h3-mobile;
-    font-weight: 600;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: 0.2px;
-    margin-bottom: 20px;
-    padding: 0 $padding-small-mobile;
-    @include media-breakpoint-landscape-phone() {
-      font-size: $font-size-h3;
-      padding: 0 $padding-small;
-    }
+    @include horizontal-paddings($padding-small);
   }
 
   &__chart {
@@ -59,6 +46,7 @@
   }
 
   &__chart {
+    @include horizontal-paddings($padding-small);
     height: 380px;
     width: 100%;
     margin-top: 20px;

@@ -255,7 +255,6 @@ class FundDetailsDescription extends PureComponent {
               <DetailsInvestment
                 WithdrawContainer={FundWithdrawContainer}
                 canWithdraw={canWithdraw}
-                className={"details-description__your-investment"}
                 assetCurrency={"GVT"}
                 {...investmentData}
                 onChangeInvestmentStatus={onChangeInvestmentStatus}

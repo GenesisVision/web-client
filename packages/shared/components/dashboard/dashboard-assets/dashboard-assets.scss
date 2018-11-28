@@ -5,10 +5,6 @@ $create-icon-height: 90px;
 $create-icon-width: 140px;
 
 .dashboard-assets {
-  padding-top: $padding-small-mobile;
-  @include media-breakpoint-landscape-phone() {
-    padding-top: $padding-small;
-  }
   &__head {
     padding-left: $padding-small-mobile;
     @include media-breakpoint-landscape-phone() {
@@ -61,15 +57,6 @@ $create-icon-width: 140px;
           }
         }
       }
-    }
-  }
-  &__title {
-    font-weight: 600;
-    letter-spacing: 0.2px;
-    font-size: $font-size-h3-mobile;
-    padding-bottom: $padding-xsmall;
-    @include media-breakpoint-landscape-phone() {
-      font-size: $font-size-h3;
     }
   }
 }

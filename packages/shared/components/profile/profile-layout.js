@@ -10,7 +10,7 @@ import { KYC_ROUTE, PROFILE_ROUTE, SETTINGS_ROUTE } from "./profile.constants";
 const ProfileLayout = ({ route, children, t = string => string }) => {
   return (
     <Page title={t("profile.title")}>
-      <h1 className="app__title-page">{t("profile.title")}</h1>
+      <h1>{t("profile.title")}</h1>
       <GVTabs value={route}>
         <GVTab
           label={

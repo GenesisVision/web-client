@@ -52,11 +52,11 @@ const CreateProgramBroker = ({
           </GVButton>
         </div>
       </div>
-      <Surface className="create-program-broker__description">
-        <div className="create-program-broker__description-heading">
+      <Surface className="surface--horizontal-paddings create-program-broker__description">
+        <h3 className="create-program-broker__description-heading">
           {choosedBroker.name}
-        </div>
-        <div className="create-program-broker__about">
+        </h3>
+        <div className="create-program-broker__row">
           <div className="create-program-broker__info-title">
             {t("create-program-page.broker-info.about")}
           </div>
@@ -64,7 +64,7 @@ const CreateProgramBroker = ({
             {choosedBroker.description}
           </div>
         </div>
-        <div className="create-program-broker__terms">
+        <div className="create-program-broker__row">
           <div className="create-program-broker__info-title">
             {t("create-program-page.broker-info.terms")}
           </div>
@@ -72,7 +72,7 @@ const CreateProgramBroker = ({
             {choosedBroker.terms}
           </div>
         </div>
-        <div className="create-program-broker__leverage">
+        <div className="create-program-broker__row create-program-broker__row--small">
           <div className="create-program-broker__info-title">
             {t("create-program-page.broker-info.leverage")}
           </div>
@@ -80,7 +80,7 @@ const CreateProgramBroker = ({
             {getLeverageDescription(choosedBroker)}
           </div>
         </div>
-        <div className="create-program-broker__fee">
+        <div className="create-program-broker__row create-program-broker__row--small">
           <div className="create-program-broker__info-title">
             {t("create-program-page.broker-info.fee")}
           </div>
@@ -88,7 +88,7 @@ const CreateProgramBroker = ({
             {choosedBroker.fee} %
           </div>
         </div>
-        <div className="create-program-broker__assets">
+        <div className="create-program-broker__row">
           <div className="create-program-broker__info-title">
             {t("create-program-page.broker-info.assets")}
           </div>

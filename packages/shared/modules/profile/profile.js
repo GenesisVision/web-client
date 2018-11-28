@@ -12,7 +12,7 @@ class Profile extends Component {
   render() {
     const { t, info, personal } = this.props;
     return (
-      <div className="profile__container">
+      <div className="profile__container profile__container--padding-top">
         <Scrollbars autoHeight autoHeightMax={14000}>
           <table className="profile profile--is-disabled">
             <tbody>
