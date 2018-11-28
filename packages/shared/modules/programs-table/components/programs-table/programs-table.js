@@ -34,7 +34,7 @@ class ProgramsContainer extends Component {
       title
     } = this.props;
     return (
-        <Surface className="programs-table-container">
+      <Surface className="programs-table-container">
         <ProgramsTableModule
           title={title}
           data={data || {}}
@@ -55,7 +55,7 @@ class ProgramsContainer extends Component {
           isAuthenticated={isAuthenticated}
           currencies={currencies}
         />
-        </Surface>
+      </Surface>
     );
   }
 }
