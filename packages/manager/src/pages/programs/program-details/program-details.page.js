@@ -69,6 +69,7 @@ class ProgramDetailsPage extends PureComponent {
         this.profitChart = data.profitChartData;
         this.balanceChart = data.balanceChartData;
         this.statistic = data.statisticData;
+        this.setState({ isPending: false });
       })
       .catch(e => {
         this.setState({ isPending: false });
