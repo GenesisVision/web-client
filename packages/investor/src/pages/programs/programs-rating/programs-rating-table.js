@@ -55,7 +55,8 @@ class ProgramsRatingTable extends Component {
       currentPage,
       itemsOnPage
     } = this.state;
-    if (isPending || !totalPages) return null;
+    if (isPending ) return null;
+    // if (isPending || !totalPages) return null;
     return (
       <ProgramsTableModule
         title={title}
