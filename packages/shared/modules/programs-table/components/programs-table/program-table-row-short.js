@@ -22,10 +22,12 @@ const ProgramTableRowShort = ({
   toggleFavorite,
   onExpandClick
 }) => {
+  const isPretender = program.statistic.tradesCount > 0;
+
   return (
     <TableRow
       className={classnames({
-        "table__row--pretend": program.statistic.tradesCount === 2
+        "table__row--pretender": isPretender
       })}
       onClick={onExpandClick}
     >

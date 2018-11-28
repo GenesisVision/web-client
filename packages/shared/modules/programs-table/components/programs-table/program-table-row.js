@@ -22,7 +22,6 @@ class ProgramTableRow extends Component {
   render() {
     const { title, program, isAuthenticated, toggleFavorite } = this.props;
     const { isDetailed } = this.state;
-    console.log(program.statistic.tradesCount === 2);
     if (isDetailed)
       return (
         <ProgramTableRowDetailed

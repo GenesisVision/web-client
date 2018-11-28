@@ -105,6 +105,7 @@ $padding: 33px;
   }
 
   &__row {
+    transition: background-color 300ms ease;
     padding: 0 1.5rem;
     &:not(.table__row--head):hover {
       background-color: #212c34;
@@ -113,7 +114,7 @@ $padding: 33px;
       }
     }
 
-    &--pretend {
+    &--pretender {
       background-color: rgba($positive-color, 0.2);
 
       &:not(.table__row--head):hover {
@@ -127,6 +128,11 @@ $padding: 33px;
       padding-left: $padding/1.5;
       @include media-breakpoint-landscape-phone() {
         padding-left: $padding;
+      }
+
+      .programs-table__cell,
+      .funds-table__cell {
+        padding: 0;
       }
     }
     &:last-child {
