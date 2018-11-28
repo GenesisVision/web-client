@@ -20,6 +20,7 @@ $padding: 33px;
   width: 100%;
   border-spacing: 0;
   margin-bottom: $padding-xsmall-mobile;
+  padding-top: 16px;
   @include media-breakpoint-landscape-phone() {
     margin-bottom: $padding-xsmall;
   }
@@ -75,9 +76,10 @@ $padding: 33px;
   }
 
   &__title {
+    @include vertical-paddings($padding-xxsmall);
     justify-self: flex-start;
     letter-spacing: 0.2px;
-    padding-bottom: 0;
+    margin-right: auto;
   }
 
   &__filters {
@@ -89,7 +91,6 @@ $padding: 33px;
     justify-content: space-between;
     flex-wrap: wrap;
     order: 99;
-    padding-bottom: 10px;
 
     .filter {
       padding: 10px;
@@ -195,14 +196,14 @@ $padding: 33px;
       font-size: $td-font-size;
     }
     &__toolbar {
-      padding: 0 $padding $padding;
+      padding: 0 $padding;
     }
     &__toggle {
       display: flex;
       justify-content: space-between;
       align-items: center;
       div {
-        padding: 0 $view-svg-size;
+        padding-top: 10px ;
         &:last-child {
           padding-right: 0;
         }
@@ -211,7 +212,6 @@ $padding: 33px;
     &__filters {
       justify-content: flex-end;
       font-size: $td-font-size;
-      padding-top: 15px;
       padding-bottom: 0;
 
       .filter {
@@ -225,7 +225,7 @@ $padding: 33px;
       }
     }
   }
-  @include media-breakpoint-landscape-tablet() {
+  @media (min-width: 900px) {
     &__filters {
       justify-content: flex-end;
       order: 0;
@@ -237,16 +237,17 @@ $padding: 33px;
         margin-left: 15px;
         padding-right: 5px;
       }
-
-      .sorting-filter {
-        margin-right: 60px;
-      }
     }
   }
 
   @include media-breakpoint-desktop() {
     &__toolbar {
       justify-content: flex-end;
+    }
+    &__filters {
+      .sorting-filter {
+        margin-right: 60px;
+      }
     }
   }
 }
