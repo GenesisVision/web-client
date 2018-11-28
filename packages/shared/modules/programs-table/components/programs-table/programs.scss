@@ -12,6 +12,8 @@ $program-height: 372px;
 $multiplier: 1.5;
 $border-radius: 5px;
 $description-block-width: 250px;
+$background-pretender: #064542;
+
 
 @mixin table-title() {
   opacity: 0.3;
@@ -377,11 +379,11 @@ $description-block-width: 250px;
   &--pretender{
     .program-detailed__info,
     .program-detailed__collapse {
-      background-color: rgba($positive-color, 0.2);
+      background-color: $background-pretender;
     }
 
 	  .program-avatar__level {
-		  border-color: #064542;
+		  border-color: $background-pretender;
 	  }
   }
 

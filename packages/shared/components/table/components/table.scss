@@ -7,6 +7,8 @@ $td-font-size: 13px;
 $table-title-font-size: 17px;
 $view-svg-size: 15px;
 $padding: 33px;
+$background-pretender: #064542;
+$background-pretender-hover: #0b4b45;
 
 %sortable-border-icon {
   position: absolute;
@@ -113,7 +115,7 @@ $padding: 33px;
 
     &:hover {
       .program-detailed--pretender .program-avatar__level {
-        border-color: #0b4b45;
+        border-color: $background-pretender-hover;
       }
     }
 
@@ -122,19 +124,20 @@ $padding: 33px;
     }
 
     &--pretender {
-      background-color: rgba($positive-color, 0.2);
+      background-color: $background-pretender;
+
+
+      .program-avatar__level {
+        border-color: $background-pretender;
+      }
 
       &:not(.table__row--head):hover {
-        background-color: rgba($positive-color, 0.3);
+        background-color: $background-pretender-hover;
 
 	      .program-avatar__level {
 		      border-color: #00564b;
 	      }
       }
-
-	   .program-avatar__level {
-		    border-color: #064542;
-	    }
     }
   }
 
