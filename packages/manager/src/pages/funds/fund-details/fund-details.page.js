@@ -18,7 +18,8 @@ import { LOGIN_ROUTE } from "../../auth/login/login.routes";
 import FundDetailsHistorySection from "shared/components/funds/fund-details/fund-details-history-section/fund-details-history-section";
 import {
   getFundDescription,
-  getFundStatistic
+  getFundStatistic,
+  fetchFundStructure
 } from "./services/fund-details.service";
 
 export const FundDetailContext = React.createContext({
@@ -124,8 +125,9 @@ class FundDetailsPage extends PureComponent {
             </div>
             <div className="details__history">
               <FundDetailsHistorySection
-                fundId={this.description.data.id}
+                id={this.description.data.id}
                 currency={currency}
+                fetchFundStructure={fetchFundStructure}
               />
             </div>
           </div>

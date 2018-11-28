@@ -10,7 +10,7 @@ import TableModule from "shared/components/table/components/table-module";
 import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { formatValue } from "shared/utils/formatter";
-import { fundsApiProxy } from "../../../../../services/api-client/funds-api";
+import * as PropTypes from "prop-types";
 
 class FundStructure extends Component {
   state = {
@@ -20,9 +20,8 @@ class FundStructure extends Component {
 
   fetchFundStructure = () => {
     this.setState({ isPending: true });
-    const { fundId } = this.props;
-    return fundsApiProxy
-      .v10FundsByIdAssetsGet(fundId)
+    const { id, fetchStructure } = this.props;
+    return fetchStructure(id)
       .then(data => this.setState(data))
       .catch(error => this.setState(error));
   };
@@ -90,5 +89,11 @@ class FundStructure extends Component {
     );
   }
 }
+
+FundStructure.propTypes = {
+  id: PropTypes.string.isRequired,
+  currency: PropTypes.string.isRequired,
+  fetchStructure: PropTypes.func.isRequired
+};
 
 export default translate()(FundStructure);

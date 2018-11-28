@@ -14,6 +14,7 @@ import Page from "shared/components/page/page";
 import { LOGIN_ROUTE } from "../../auth/login/login.routes";
 import FundDetailsHistorySection from "shared/components/funds/fund-details/fund-details-history-section/fund-details-history-section";
 import {
+  fetchFundStructure,
   getFundDescription,
   getFundStatistic
 } from "./services/fund-details.service";
@@ -118,8 +119,9 @@ class FundDetailsPage extends PureComponent {
             </div>
             <div className="details__history">
               <FundDetailsHistorySection
-                fundId={this.description.data.id}
                 currency={currency}
+                id={this.description.data.id}
+                fetchFundStructure={fetchFundStructure}
               />
             </div>
           </div>
