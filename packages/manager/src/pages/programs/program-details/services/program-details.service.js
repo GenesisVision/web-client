@@ -74,34 +74,6 @@ export const getProgramStatistic = (
   });
 };
 
-export const getProgramHistory = (programId, currency) => {
-  const tradesFilters = composeRequestFilters({
-    paging: DEFAULT_PAGING,
-    sorting: undefined,
-    filtering: PROGRAM_TRADES_FILTERS,
-    defaultFilters: PROGRAM_TRADES_DEFAULT_FILTERS
-  });
-
-  return Promise.all([
-    getProgramTrades({ programId, currency, filters: tradesFilters }),
-    getProgramEvents()
-  ]).then(([trades]) => ({
-    trades
-  }));
-};
-
-export const getProgramTrades = ({ programId, currency, filters }) => {
-  const opts = {
-    ...filters,
-    currency
-  };
-  return programsApiProxy.v10ProgramsByIdTradesGet(programId, opts);
-};
-
-export const getProgramEvents = () => {
-  return Promise.resolve();
-};
-
 export const closeProgram = (programId, opts) => dispatch => {
   const authorization = authService.getAuthArg();
 
@@ -128,4 +100,11 @@ export const closePeriod = (programId, onSuccess) => dispatch => {
     .catch(error => {
       dispatch(alertMessageActions.error(error.errorMessage));
     });
+};
+
+export const fetchProgramTrades = (id, filters, currency) => {
+  return programsApiProxy.v10ProgramsByIdTradesGet(id, {
+    ...filters,
+    currency
+  });
 };

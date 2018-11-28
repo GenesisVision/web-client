@@ -1,17 +1,10 @@
-import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
 import { DEFAULT_PERIOD } from "shared/components/chart/chart-period/chart-period.helpers";
-import {
-  PROGRAM_TRADES_DEFAULT_FILTERS,
-  PROGRAM_TRADES_FILTERS
-} from "shared/components/programs/program-details/program-details.constants";
-import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
-import { composeRequestFilters } from "shared/components/table/services/table.service";
+import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
 import { programsApiProxy } from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
 
 import { PROGRAM_SLUG_URL_PARAM_NAME } from "../../programs.routes";
-
 export const getProgramDescription = () => (dispatch, getState) => {
   const authorization = authService.getAuthArg();
   const { routing } = getState();
@@ -72,30 +65,9 @@ export const getProgramStatistic = (
   });
 };
 
-export const getProgramHistory = (programId, currency) => {
-  const tradesFilters = composeRequestFilters({
-    paging: DEFAULT_PAGING,
-    sorting: undefined,
-    filtering: PROGRAM_TRADES_FILTERS,
-    defaultFilters: PROGRAM_TRADES_DEFAULT_FILTERS
-  });
-
-  return Promise.all([
-    getProgramTrades({ programId, currency, filters: tradesFilters }),
-    getProgramEvents()
-  ]).then(([trades]) => ({
-    trades
-  }));
-};
-
-export const getProgramTrades = ({ programId, currency, filters }) => {
-  const opts = {
+export const fetchProgramTrades = (id, filters, currency) => {
+  return programsApiProxy.v10ProgramsByIdTradesGet(id, {
     ...filters,
     currency
-  };
-  return programsApiProxy.v10ProgramsByIdTradesGet(programId, opts);
-};
-
-export const getProgramEvents = () => {
-  return Promise.resolve();
+  });
 };
