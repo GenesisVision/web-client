@@ -69,7 +69,7 @@ class DashboardPortfolioEvents extends Component {
 }
 
 DashboardPortfolioEvents.propTypes = {
-  eventView: PropTypes.node.isRequired
+  eventView: PropTypes.oneOfType([PropTypes.object, PropTypes.func]).isRequired
 };
 
 export default compose(translate())(DashboardPortfolioEvents);
