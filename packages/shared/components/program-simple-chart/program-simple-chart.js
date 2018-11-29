@@ -1,12 +1,14 @@
 import "./program-simple-chart.scss";
 
+import React from "react";
+import { Area, AreaChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 import { formartChartMinValue } from "shared/components/chart/chart-components/chart-components.helpers";
 import ProgramChartGradient, {
   gradientOffset
 } from "shared/components/chart/chart-gradient/chart-gradient";
 import { getStrokeColor } from "shared/components/chart/chart-gradient/chart-gradient";
-import React from "react";
-import { Area, AreaChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
+
+const AREA_MARGIN = { left: 0, right: 0 };
 
 const ProgramSimpleChart = ({ data, programId }) => {
   if (data.length === 0) return null;
@@ -18,10 +20,11 @@ const ProgramSimpleChart = ({ data, programId }) => {
   const programChartDataValues = programChartData.map(x => x.equity);
   const off = gradientOffset(programChartDataValues);
   const areaColor = getStrokeColor(programChartDataValues);
+
   return (
     <div className="program-simple-chart">
       <ResponsiveContainer>
-        <AreaChart data={programChartData}>
+        <AreaChart data={programChartData} margin={AREA_MARGIN}>
           <defs>
             <ProgramChartGradient
               offset={off}

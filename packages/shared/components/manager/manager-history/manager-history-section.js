@@ -4,8 +4,8 @@ import { GVTab, GVTabs } from "gv-react-components";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import Surface from "shared/components/surface/surface";
-import ProgramsTable from "shared/modules/programs-table/components/programs-table/programs-table";
 import FundsTable from "shared/modules/funds-table/components/funds-table/funds-table";
+import ProgramsTable from "shared/modules/programs-table/components/programs-table/programs-table";
 
 const PROGRAMS_TAB = "programs";
 const FUNDS_TAB = "funds";
@@ -21,7 +21,7 @@ class ManagerHistorySection extends PureComponent {
 
   render() {
     const { tab } = this.state;
-    const { t, managerId } = this.props;
+    const { t, managerId, title } = this.props;
     const { handleTabChange } = this;
     const defaultFilters = { managerId };
     return (
@@ -38,9 +38,11 @@ class ManagerHistorySection extends PureComponent {
 
         <div>
           {tab === PROGRAMS_TAB && (
-            <ProgramsTable defaultFilters={defaultFilters} />
+            <ProgramsTable title={title} defaultFilters={defaultFilters} />
           )}
-          {tab === FUNDS_TAB && <FundsTable defaultFilters={defaultFilters} />}
+          {tab === FUNDS_TAB && (
+            <FundsTable title={title} defaultFilters={defaultFilters} />
+          )}
         </div>
       </Surface>
     );

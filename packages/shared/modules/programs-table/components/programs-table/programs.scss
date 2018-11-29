@@ -14,7 +14,6 @@ $border-radius: 5px;
 $description-block-width: 250px;
 $background-pretender: #064542;
 
-
 @mixin table-title() {
   opacity: 0.3;
   font-size: $th-text-size/1.5;
@@ -225,9 +224,22 @@ $background-pretender: #064542;
   &--bottom {
     opacity: 0.3;
   }
+
+  &--name {
+    padding-right: 0;
+  }
+
   &--chart {
     min-width: 100px;
-    max-width: 200px;
+    max-width: 170px;
+    padding-right: 0;
+  }
+
+  &--favorite.table__cell:last-child {
+    padding-right: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
   }
 }
 
@@ -376,15 +388,15 @@ $background-pretender: #064542;
     }
   }
 
-  &--pretender{
+  &--pretender {
     .program-detailed__info,
     .program-detailed__collapse {
       background-color: $background-pretender;
     }
 
-	  .program-avatar__level {
-		  border-color: $background-pretender;
-	  }
+    .program-avatar__level {
+      border-color: $background-pretender;
+    }
   }
 
   @include media-breakpoint-landscape-phone() {
