@@ -7,6 +7,10 @@
 		@include adaptive-padding(bottom, $padding-xsmall);
 		padding-left: $padding-small/2;
 		padding-right: $padding-small/2;
+
+		.gv-tab {
+			white-space: nowrap;
+		}
 	}
 
 	@include media-breakpoint-landscape-phone() {
