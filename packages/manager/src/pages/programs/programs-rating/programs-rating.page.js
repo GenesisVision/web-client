@@ -11,9 +11,10 @@ import connect from "react-redux/es/connect/connect";
 import ProgramsRatingTables from "shared/components/programs-rating/programs-rating-tables";
 import Surface from "shared/components/surface/surface";
 import { getLevelUpSummary } from "shared/components/programs-rating/services/program-rating-service";
-import { LEVELS } from "shared/components/programs-rating/programs-rating-table";
-
-const TABS = ["1 > 2", "2 > 3", "3 > 4", "5 > 6", "7 > 8"];
+import {
+  LEVELS,
+  TABS
+} from "shared/components/programs-rating/programs-rating-table";
 
 class ProgramsRatingPage extends Component {
   state = {
@@ -22,9 +23,8 @@ class ProgramsRatingPage extends Component {
   };
 
   componentDidMount() {
-    const { match, service } = this.props;
+    const { service } = this.props;
     service.getLevelUpSummary();
-    if (match.params.tab) this.setState({ tab: match.params.tab });
   }
   handleTabChange = (e, tab) => {
     this.setState({ tab, level: LEVELS[tab] });
@@ -59,12 +59,10 @@ class ProgramsRatingPage extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state.programsRating);
   const { data } = state.profileHeader.info;
-  const levelData = state.programsRating.levelupSummary.data
-    ? state.programsRating.levelupSummary.data.levelData
-    : {};
-  return { id: data ? data.id : {}, levelData };
+  const { levelupSummary } = state.programsRating;
+  if (!levelupSummary.data || !data) return {};
+  return { id: data.id, levelData: levelupSummary.data.levelData };
 };
 
 const mapDispatchToProps = dispatch => ({
