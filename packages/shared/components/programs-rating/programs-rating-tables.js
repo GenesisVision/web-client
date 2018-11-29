@@ -7,7 +7,9 @@ import ProgramsRatingTable from "./programs-rating-table";
 
 class ProgramsRatingTables extends Component {
   render() {
-    const { id, tab, rating } = this.props;
+    const { id, tab, levelData } = this.props;
+    console.log("levelData");
+    console.log(levelData);
     return (
       <Fragment>
         {id && (
@@ -17,7 +19,7 @@ class ProgramsRatingTables extends Component {
             managerId={id}
           />
         )}
-        <ProgramsRatingStats rating={rating} />
+        {levelData && <ProgramsRatingStats levelData={levelData} />}
         <ProgramsRatingTable tab={tab} title="Pretendents" />
       </Fragment>
     );

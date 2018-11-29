@@ -11,31 +11,38 @@ import ProgramsRatingTables from "shared/components/programs-rating/programs-rat
 import { getLevelUpSummary } from "shared/components/programs-rating/services/program-rating-service";
 import Surface from "shared/components/surface/surface";
 import connect from "react-redux/es/connect/connect";
+import { LEVELS } from "shared/components/programs-rating/programs-rating-table";
 
 const TABS = ["1 > 2", "2 > 3", "3 > 4", "5 > 6", "7 > 8"];
 
-const rating = {
-  programCounts: "120",
-  quota: "12",
-  currentProfit: "24.54675"
-};
-
 class ProgramsRatingPage extends Component {
   state = {
-    tab: TABS[0]
+    tab: TABS[0],
+    level: LEVELS[TABS[0]]
   };
 
   componentDidMount() {
     const { match, service } = this.props;
     service.getLevelUpSummary();
-    if (match.params.tab) this.setState({ tab: match.params.tab });
+    if (match.params.tab) {
+      this.setState({
+        tab: match.params.tab
+      });
+
+      if (LEVELS[this.state.tab])
+        this.setState({
+          level: LEVELS[this.state.tab]
+        });
+    }
   }
   handleTabChange = (e, tab) => {
-    this.setState({ tab });
+    this.setState({ tab, level: LEVELS[tab] });
   };
   render() {
-    const { t } = this.props;
-    const { tab } = this.state;
+    const { t, levelData } = this.props;
+    const { tab, level } = this.state;
+    console.log(levelData);
+    const currentLevelData = levelData ? levelData[level] : null;
     if (!tab) return null;
     return (
       <Page title={t("programs-page.title")}>
@@ -46,17 +53,25 @@ class ProgramsRatingPage extends Component {
               tabs={TABS}
               handleTabChange={this.handleTabChange}
               tab={tab}
+              levelData={levelData}
             />
           </div>
-          <ProgramsRatingTables key={tab} tab={tab} rating={rating} />
+          <ProgramsRatingTables
+            key={tab}
+            tab={tab}
+            levelData={currentLevelData}
+          />
         </Surface>
       </Page>
     );
   }
 }
-const mapStateToProps = (state, props) => {
-  console.log(state)
-  return {};
+const mapStateToProps = state => {
+  console.log(state);
+  const levelData = state.programsRating.levelupSummary.data
+    ? state.programsRating.levelupSummary.data
+    : null;
+  return levelData;
 };
 
 const mapDispatchToProps = dispatch => ({
