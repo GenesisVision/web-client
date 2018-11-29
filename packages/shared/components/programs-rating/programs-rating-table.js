@@ -5,6 +5,7 @@ import { bindActionCreators, compose } from "redux";
 import ProgramsTableModule from "shared/modules/programs-table/components/programs-table/programs-table-module";
 
 import { getProgramsRating } from "./services/program-rating-service";
+import { PROGRAMS_COLUMNS } from "shared/modules/programs-table/components/programs-table/programs.constants";
 
 export const LEVELS = {
   "1 > 2": 1,
@@ -13,6 +14,16 @@ export const LEVELS = {
   "5 > 6": 5,
   "7 > 8": 7
 };
+
+const COLUMNS = [
+  {
+    name: "position"
+  },
+  ...PROGRAMS_COLUMNS
+];
+
+const SELF_PROGRAMS = "selfPrograms";
+const PROGRAMS = "programs";
 
 class ProgramsRatingTable extends Component {
   state = {
@@ -54,6 +65,8 @@ class ProgramsRatingTable extends Component {
     if (!programs || !programs.total) return null;
     return (
       <ProgramsTableModule
+        columns={COLUMNS}
+        showRating
         title={title}
         data={programs}
         paging={{ totalPages, currentPage, itemsOnPage }}
@@ -64,7 +77,7 @@ class ProgramsRatingTable extends Component {
 }
 
 const mapStateToProps = (state, props) => {
-  const table = props.managerId ? "selfPrograms" : "programs";
+  const table = props.managerId ? SELF_PROGRAMS : PROGRAMS;
   const programs = state.programsRating[table];
   if (!programs.data) return {};
   return { programs: programs.data };

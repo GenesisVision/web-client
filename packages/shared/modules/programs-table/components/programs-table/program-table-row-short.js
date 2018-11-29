@@ -17,6 +17,7 @@ import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 
 const ProgramTableRowShort = ({
   title,
+  showRating,
   program,
   isAuthenticated,
   toggleFavorite,
@@ -45,7 +46,7 @@ const ProgramTableRowShort = ({
       })}
       onClick={onExpandClick}
     >
-      {rating && <TableCell>{rating.rating}</TableCell>}
+      {showRating && <TableCell>{rating.rating}</TableCell>}
       <TableCell className="programs-table__cell programs-table__cell--name">
         <div className="programs-table__cell--avatar-title">
           <Link

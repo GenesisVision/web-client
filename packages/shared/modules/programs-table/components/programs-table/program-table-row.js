@@ -20,7 +20,13 @@ class ProgramTableRow extends Component {
   };
 
   render() {
-    const { title, program, isAuthenticated, toggleFavorite } = this.props;
+    const {
+      title,
+      program,
+      isAuthenticated,
+      toggleFavorite,
+      showRating
+    } = this.props;
     const { isDetailed } = this.state;
     if (isDetailed)
       return (
