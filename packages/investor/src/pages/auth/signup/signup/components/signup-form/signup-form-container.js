@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { getRef } from "shared/utils/ref";
 
 import * as signUpService from "../../../services/signup.service";
 import SignUpForm from "./signup-form";
@@ -15,7 +16,15 @@ const SignUpFormContainer = ({
     service.signUp(signUpFormData, setSubmitting);
   };
 
-  return <SignUpForm onSubmit={handleSubmit} error={errorMessage} />;
+  let refCode = getRef();
+
+  return (
+    <SignUpForm
+      refCode={refCode}
+      onSubmit={handleSubmit}
+      error={errorMessage}
+    />
+  );
 };
 
 const mapStateToProps = ({ signUpData, authData }) => {
