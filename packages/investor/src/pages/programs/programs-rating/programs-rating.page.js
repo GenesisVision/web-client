@@ -6,9 +6,11 @@ import Page from "shared/components/page/page";
 
 import TabsContainer from "shared/components/tabs-container/tabs-container";
 import * as routes from "../programs.routes";
-import { compose } from "redux";
+import { bindActionCreators, compose } from "redux";
 import ProgramsRatingTables from "shared/components/programs-rating/programs-rating-tables";
+import { getLevelUpSummary } from "shared/components/programs-rating/services/program-rating-service";
 import Surface from "shared/components/surface/surface";
+import connect from "react-redux/es/connect/connect";
 
 const TABS = ["1 > 2", "2 > 3", "3 > 4", "5 > 6", "7 > 8"];
 
@@ -24,7 +26,8 @@ class ProgramsRatingPage extends Component {
   };
 
   componentDidMount() {
-    const { match } = this.props;
+    const { match, service } = this.props;
+    service.getLevelUpSummary();
     if (match.params.tab) this.setState({ tab: match.params.tab });
   }
   handleTabChange = (e, tab) => {
@@ -51,5 +54,19 @@ class ProgramsRatingPage extends Component {
     );
   }
 }
+const mapStateToProps = (state, props) => {
+  console.log(state)
+  return {};
+};
 
-export default compose(translate())(ProgramsRatingPage);
+const mapDispatchToProps = dispatch => ({
+  service: bindActionCreators({ getLevelUpSummary }, dispatch)
+});
+
+export default compose(
+  translate(),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
+)(ProgramsRatingPage);
