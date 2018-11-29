@@ -1251,5 +1251,10 @@
         }
       }
     }
+  },
+  "rating": {
+    "programCounts": "Programs",
+    "quota": "Quota",
+    "currentProfit": "Current target profit"
   }
 }
