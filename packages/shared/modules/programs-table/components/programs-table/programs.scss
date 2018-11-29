@@ -12,6 +12,8 @@ $program-height: 372px;
 $multiplier: 1.5;
 $border-radius: 5px;
 $description-block-width: 250px;
+$background-pretender: #064542;
+
 
 @mixin table-title() {
   opacity: 0.3;
@@ -52,7 +54,7 @@ $description-block-width: 250px;
     background-color: #212c34;
     flex-grow: 1;
     & .program-avatar__level {
-      border-color: #212c34 !important;
+      border-color: #212c34;
     }
     &--title {
       @include table-title;
@@ -212,7 +214,7 @@ $description-block-width: 250px;
     word-break: break-all;
     min-width: 100px;
     max-width: 170px;
-    padding: 0;
+    //padding: 0;
     div {
       padding: $padding/10;
     }
@@ -274,7 +276,7 @@ $description-block-width: 250px;
       margin-left: $padding/2;
     }
     & .program-avatar__level {
-      border-color: $secondary-color !important;
+      border-color: $secondary-color;
     }
   }
 
@@ -372,6 +374,17 @@ $description-block-width: 250px;
         color: $positive-color;
       }
     }
+  }
+
+  &--pretender{
+    .program-detailed__info,
+    .program-detailed__collapse {
+      background-color: $background-pretender;
+    }
+
+	  .program-avatar__level {
+		  border-color: $background-pretender;
+	  }
   }
 
   @include media-breakpoint-landscape-phone() {

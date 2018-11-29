@@ -7,6 +7,8 @@ $td-font-size: 13px;
 $table-title-font-size: 17px;
 $view-svg-size: 15px;
 $padding: 33px;
+$background-pretender: #064542;
+$background-pretender-hover: #0b4b45;
 
 %sortable-border-icon {
   position: absolute;
@@ -105,11 +107,36 @@ $padding: 33px;
   }
 
   &__row {
+    transition: background-color 300ms ease;
     padding: 0 1.5rem;
     &:not(.table__row--head):hover {
       background-color: #212c34;
-      & .program-avatar__level {
-        border-color: #212c34;
+    }
+
+    &:hover {
+      .program-detailed--pretender .program-avatar__level {
+        border-color: $background-pretender-hover;
+      }
+    }
+
+    .program-avatar__level {
+      transition: border-color 300ms ease;
+    }
+
+    &--pretender {
+      background-color: $background-pretender;
+
+
+      .program-avatar__level {
+        border-color: $background-pretender;
+      }
+
+      &:not(.table__row--head):hover {
+        background-color: $background-pretender-hover;
+
+	      .program-avatar__level {
+		      border-color: #00564b;
+	      }
       }
     }
   }
@@ -119,6 +146,11 @@ $padding: 33px;
       padding-left: $padding/1.5;
       @include media-breakpoint-landscape-phone() {
         padding-left: $padding;
+      }
+
+      .programs-table__cell,
+      .funds-table__cell {
+        padding: 0;
       }
     }
     &:last-child {

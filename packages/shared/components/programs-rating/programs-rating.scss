@@ -1,0 +1,10 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
+
+.programs-rating {
+	&__tabs {
+		@include horizontal-paddings($padding-small);
+		@include adaptive-padding(bottom, $padding-xsmall);
+	}
+}

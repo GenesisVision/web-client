@@ -7,6 +7,7 @@ import replaceParams from "shared/utils/replace-params";
 import PrivateRoute from "../private-route";
 import ProgramDetailsPage from "./program-details/program-details.page";
 import ProgramsFacetPage from "./programs-facet/programs-facet.page";
+import ProgramsRatingPage from "./programs-rating/programs-rating.page";
 import ProgramsPage from "./programs/programs.page";
 
 export const PROGRAMS_FAVORITES_TAB_NAME = "favorites";
@@ -24,6 +25,10 @@ export const PROGRAMS_TAB_ROUTE = `${PROGRAMS_ROUTE}/:tab`;
 export const PROGRAMS_EXPLORE_TAB_ROUTE = `${PROGRAMS_ROUTE}/:tab(${PROGRAMS_EXPLORE_TAB_NAME})`;
 export const PROGRAMS_FAVORITES_TAB_ROUTE = `${PROGRAMS_ROUTE}/:tab(${PROGRAMS_FAVORITES_TAB_NAME})`;
 
+export const PROGRAMS_RATING_TAB = "rating";
+export const PROGRAMS_RATING_ROUTE = `${PROGRAMS_ROUTE}/${PROGRAMS_RATING_TAB}`;
+export const PROGRAMS_RATING_TAB_ROUTE = `${PROGRAMS_RATING_ROUTE}/:tab`;
+
 export const composeProgramDetailsUrl = slugUrl =>
   replaceParams(PROGRAM_DETAILS_ROUTE, {
     [`:${PROGRAM_SLUG_URL_PARAM_NAME}`]: slugUrl
@@ -37,6 +42,8 @@ const ProgramsRoutes = () => (
       component={ProgramsPage}
     />
     <Route path={PROGRAMS_FACET_ROUTE_REGEX} component={ProgramsFacetPage} />
+    <Route path={PROGRAMS_RATING_TAB_ROUTE} component={ProgramsRatingPage} />
+    <Route path={PROGRAMS_RATING_ROUTE} component={ProgramsRatingPage} />
     <Route path={PROGRAM_DETAILS_ROUTE_REGEX} component={ProgramDetailsPage} />
     <Route component={NotFoundPage} />
   </Switch>

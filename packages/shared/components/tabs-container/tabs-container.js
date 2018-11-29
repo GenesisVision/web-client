@@ -13,17 +13,16 @@ class TabsContainer extends Component {
       <GVTabs value={tab} onChange={handleTabChange}>
         {tabs.map(tab => (
           <GVTab
-            key={tab.name}
-            value={tab.name}
-            label={
-              <Link
+            key={tab}
+            value={tab}
+            label={tab}
+            /*<Link
                 to={replaceParams(programFacetRoute, {
-                  ":tab": tab.name
+                  ":tab": tab
                 })}
               >
-                {t(tab.name)}
-              </Link>
-            }
+                {t(tab)}
+              </Link>*/
           />
         ))}
       </GVTabs>

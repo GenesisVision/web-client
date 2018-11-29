@@ -5,7 +5,11 @@ import Surface from "shared/components/surface/surface";
 
 const ProgramsContainer = ({ title, enableFiltering, showSwitchView }) => (
   <Surface className="programs-table-container">
-    <ProgramsTable showSwitchView={showSwitchView} enableFiltering={enableFiltering} title={title} />
+    <ProgramsTable
+      showSwitchView={showSwitchView}
+      enableFiltering={enableFiltering}
+      title={title}
+    />
   </Surface>
 );
 export default ProgramsContainer;

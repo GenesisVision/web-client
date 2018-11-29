@@ -1,9 +1,16 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { compose } from "redux";
 import { fetchPrograms } from "shared/modules/programs-table/services/programs-table.service";
 import ProgramsTableModule from "shared/modules/programs-table/components/programs-table/programs-table-module";
-import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
+
+export const LEVELS = {
+  "1 > 2": 1,
+  "2 > 3": 2,
+  "3 > 4": 3,
+  "5 > 6": 5,
+  "7 > 8": 7
+};
 
 class ProgramsRatingTable extends Component {
   state = {
@@ -15,14 +22,11 @@ class ProgramsRatingTable extends Component {
   };
 
   componentDidMount() {
-    // const { tab } = this.props;
     this.updatePrograms();
   }
 
   updatePaging = e => {
-    // const { paging } = this.state;
     this.setState({ currentPage: e + 1 }, () => this.updatePrograms());
-    // console.log(e, this.state.currentPage);
   };
 
   updatePrograms = filters => {
@@ -30,7 +34,7 @@ class ProgramsRatingTable extends Component {
     const { itemsOnPage, currentPage } = this.state;
     fetchPrograms({
       managerId,
-      tab,
+      levelUpFrom: LEVELS[tab],
       take: itemsOnPage,
       skip: itemsOnPage * (currentPage - 1),
       ...filters
@@ -55,8 +59,7 @@ class ProgramsRatingTable extends Component {
       currentPage,
       itemsOnPage
     } = this.state;
-    if (isPending ) return null;
-    // if (isPending || !totalPages) return null;
+    if (isPending || !programs.total) return null;
     return (
       <ProgramsTableModule
         title={title}

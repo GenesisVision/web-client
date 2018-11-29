@@ -41,7 +41,9 @@ class ProgramNotificationsGeneral extends Component {
     const { t, settings, assetId } = this.props;
     return (
       <div className="notification-settings">
-        <h3 className="notification-settings__subtitle">{t("notifications.program.general.title")}</h3>
+        <h3 className="notification-settings__subtitle">
+          {t("notifications.program.general.title")}
+        </h3>
         <GeneralNotification
           name="ProgramNewsAndUpdates"
           label={t("notifications.program.general.news-updates")}

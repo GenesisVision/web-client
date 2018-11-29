@@ -46,7 +46,13 @@ class ProgramsRatingPage extends Component {
               tab={tab}
             />
           </div>
-          <ProgramsRatingTables key={tab} tab={tab} id={id} rating={rating} />
+          <ProgramsRatingTables
+            manager
+            key={tab}
+            tab={tab}
+            id={id}
+            rating={rating}
+          />
         </Surface>
       </Page>
     );
