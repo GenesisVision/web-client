@@ -1,0 +1,62 @@
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
+
+$create-icon-height: 90px;
+$create-icon-width: 140px;
+
+.dashboard-assets {
+  &__head {
+    padding-left: $padding-small-mobile;
+    @include media-breakpoint-landscape-phone() {
+      padding-left: $padding-small;
+    }
+  }
+  &__table {
+    .create-asset {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      padding-top: $padding-big-mobile;
+      padding-bottom: $padding-xxlarge-mobile;
+      @include media-breakpoint-landscape-phone() {
+        padding-top: $padding-big;
+        padding-bottom: $padding-xxlarge;
+      }
+      &__create-icon {
+        &,
+        & svg,
+        & .icon {
+          width: $create-icon-width/$divider-text;
+          height: $create-icon-height/$divider-text;
+          @include media-breakpoint-landscape-phone() {
+            width: $create-icon-width;
+            height: $create-icon-height;
+          }
+        }
+      }
+
+      &__text {
+        font-size: $font-size-paragraph-mobile;
+        opacity: 0.4;
+        font-weight: 500;
+        padding: $padding-xsmall;
+        @include media-breakpoint-landscape-phone() {
+          font-size: $font-size-paragraph;
+        }
+      }
+
+      &__button {
+        & .gv-btn {
+          font-weight: 600;
+          font-size: $font-size-small-mobile;
+          padding: 9px 25px;
+          @include media-breakpoint-landscape-phone() {
+            font-size: $font-size-small;
+            padding: 17px 50px;
+          }
+        }
+      }
+    }
+  }
+}

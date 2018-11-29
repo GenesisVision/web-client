@@ -1,0 +1,84 @@
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_sizes.scss";
+
+.dashboard-chart-assets {
+  padding: 0 $padding-small-mobile $padding-xxsmall-mobile;
+  @include media-breakpoint-landscape-phone() {
+    padding: 0 $padding-small $padding-xxsmall;
+  }
+  &__title {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  &__icon {
+    cursor: pointer;
+    margin-left: 10px;
+  }
+}
+
+.dashboard-chart-assets-popover {
+  min-width: 200px;
+  max-height: 200px;
+  padding: 30px;
+
+  &__chart-asset {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: $text-accent-color;
+    cursor: pointer;
+    & > * {
+      flex: 1;
+    }
+    &:not(:last-of-type) {
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid $border-color;
+    }
+  }
+
+  &__info {
+    flex: 1;
+  }
+
+  &__btns {
+    text-align: center;
+    .gv-btn {
+      padding: 0;
+    }
+  }
+
+  &__header {
+    font-size: 12px;
+    margin-bottom: 10px;
+    color: $text-color;
+  }
+
+  &__title {
+    font-weight: bold;
+    line-height: 22px;
+    font-size: $font-size-common;
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+  }
+
+  &__profitability {
+    line-height: 22px;
+    font-size: $font-size-common;
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+  }
+
+  &__label {
+    font-weight: normal;
+    line-height: 22px;
+    font-size: 12px;
+    letter-spacing: 0.184615px;
+    mix-blend-mode: normal;
+    opacity: 0.3;
+    white-space: nowrap;
+  }
+}

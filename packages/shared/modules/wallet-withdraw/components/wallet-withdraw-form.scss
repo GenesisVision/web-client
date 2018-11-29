@@ -1,0 +1,28 @@
+.wallet-withdraw {
+  &__field {
+    &:before {
+      content: none;
+    }
+    &:after {
+      content: none;
+    }
+  }
+
+  &-popup {
+    & .dialog__bottom {
+      padding-top: 20px;
+    }
+
+    &__two-factor-input {
+      margin-bottom: 20px;
+    }
+
+    & .statistics-item {
+      padding-bottom: 0;
+    }
+
+    & .dialog-list {
+      margin-top: 20px;
+    }
+  }
+}

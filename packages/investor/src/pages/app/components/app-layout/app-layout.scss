@@ -1,0 +1,30 @@
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
+
+.app {
+  margin: 0 auto;
+
+  &__wrapper {
+    position: relative;
+    min-height: 100vh;
+  }
+
+  @media (min-width: 1360px) {
+    max-width: 1360px;
+  }
+
+  &__header {
+    padding: $padding-xsmall;
+
+    @media (min-width: 1360px) {
+      padding: $padding-xsmall 0;
+    }
+  }
+
+  &__main {
+    padding: $padding-medium-mobile $padding-xsmall $padding-big;
+    @media (min-width: 1360px) {
+      padding: $padding-medium 0 $padding-big;
+    }
+  }
+}

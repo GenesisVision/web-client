@@ -1,0 +1,479 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
+
+$asset-icon-size: 26px;
+$asset-height: 40px;
+$asset-height-mobile: $asset-height/$divider-text;
+
+.create-fund-settings {
+  @include adaptive-padding(bottom, $padding-large);
+
+  & .gv-text-field__input {
+    font-size: $font-size-h4-mobile;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-h4;
+    }
+  }
+  & .fund-assets {
+    flex-direction: row;
+  }
+  & .fund-asset {
+    &--hover {
+      background: #143344 !important;
+    }
+  }
+  .fund-asset {
+    font-size: $font-size-small-mobile;
+    &__currency-short {
+      opacity: 1;
+    }
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-small;
+    }
+  }
+  &__assets-and-line {
+    padding-top: $padding-small;
+    padding-bottom: $padding-small;
+  }
+  &__remainder {
+    box-sizing: border-box;
+    width: 65px;
+    background: rgba(59, 205, 189, 0.1);
+    color: #14beb4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: $border-radius-middle-mobile;
+    font-weight: 400;
+    padding: $padding-xxsmall-mobile;
+    height: $asset-height-mobile;
+    margin-right: $padding-xsmall/2/$divider-padding;
+    margin-bottom: $padding-xsmall/2/$divider-padding;
+    font-size: $font-size-paragraph-mobile;
+    @include media-breakpoint-landscape-phone() {
+      height: $asset-height;
+      padding: $padding-xxsmall;
+      font-size: $font-size-paragraph;
+    }
+  }
+  &__add-assets {
+    display: flex;
+  }
+  &__add-assets-button {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: $font-size-paragraph;
+    font-weight: 600;
+    & > div {
+      padding-right: $padding-small/2;
+    }
+    .add-button {
+      background: rgb(21, 187, 175);
+      color: $text-accent-color;
+    }
+  }
+  &__regulator-indicator {
+  }
+  &__line {
+    width: 100%;
+  }
+  &__description {
+    font-size: $font-size-small;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 2;
+    letter-spacing: 0.1px;
+    color: rgb(232, 239, 243);
+    .notify {
+      opacity: 0.5;
+    }
+  }
+  &__form {
+    color: $text-light-color;
+  }
+
+  &__subheading {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: $font-size-small-mobile;
+    letter-spacing: 0.4px;
+
+    padding-top: $padding-xxsmall-mobile;
+
+    &:first-child {
+      margin-left: 2px;
+    }
+    @include media-breakpoint-landscape-phone() {
+      padding-top: $padding-xxsmall;
+      font-size: $font-size-small;
+    }
+  }
+
+  &__fill-block {
+    padding-bottom: $padding-medium;
+
+    &:last-child {
+      padding-bottom: 0;
+    }
+
+    @include media-breakpoint-tablet() {
+      padding-left: $padding-large;
+      padding-bottom: 60px;
+
+      &--with-border {
+        border-left: 2px solid $secondary-color;
+      }
+      &--with-border,
+      &--without-border {
+        margin-left: 8px;
+      }
+    }
+  }
+
+  &__block-number {
+    display: none;
+
+    @include media-breakpoint-tablet() {
+      margin-right: 70px;
+      display: inline;
+    }
+  }
+
+  &__description {
+    font-size: $font-size-small-mobile;
+    &-info {
+      margin-top: 4px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 250px;
+      @include media-breakpoint-phone() {
+        width: 300px;
+      }
+      @include media-breakpoint-landscape-phone() {
+        width: 500px;
+      }
+    }
+
+    &-requirements {
+      color: $label-color;
+      letter-spacing: 0.4px;
+    }
+
+    &-chars {
+      display: flex;
+      align-items: center;
+      color: $text-light-color;
+      font-size: $font-size-small-mobile;
+      @include media-breakpoint-landscape-phone() {
+        font-size: $font-size-small;
+      }
+    }
+    &-chars-value {
+      padding: 0 $padding-xxsmall;
+    }
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-small;
+    }
+  }
+
+  &__logo-title {
+    margin-top: 44px;
+    margin-bottom: 8px;
+    font-size: $font-size-common;
+    letter-spacing: 0.3px;
+    font-weight: 600;
+  }
+
+  &__logo-notice {
+    font-size: 11px;
+    color: $label-color;
+    letter-spacing: 0.2px;
+    width: 210px;
+    line-height: 1.4;
+  }
+
+  &__logo-section {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    @include media-breakpoint-landscape-phone() {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  &__file-field-container {
+    position: relative;
+  }
+
+  &__fee {
+    display: inline-flex;
+    position: relative;
+    top: 3px;
+    width: 250px;
+    margin-right: 24px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &:first-child {
+      margin-bottom: 16px;
+    }
+
+    &-hint {
+      font-size: 12px;
+      color: $label-color;
+      letter-spacing: 0.4px;
+      position: absolute;
+      top: 86px;
+      left: 0px;
+      cursor: pointer;
+
+      & .hint__content {
+        width: 237px;
+      }
+    }
+
+    @include media-breakpoint-phone() {
+      width: 300px;
+    }
+    @include media-breakpoint-landscape-phone() {
+      width: 500px;
+    }
+  }
+
+  &__image {
+    box-sizing: border-box;
+    width: 170px;
+    height: 170px;
+    overflow: hidden;
+
+    &-info {
+      font-size: 14px;
+      letter-spacing: 0.4px;
+      margin-top: 14px;
+
+      @include media-breakpoint-landscape-phone() {
+        margin-top: 0;
+        margin-left: 40px;
+      }
+    }
+
+    &-title {
+      margin-bottom: 8px;
+    }
+
+    &-author {
+      color: $primary-color;
+    }
+  }
+
+  &__deposit-amount {
+    &-title {
+      color: $label-color;
+      margin-bottom: 14px;
+    }
+
+    &-value {
+      font-size: $font-size-h2;
+      letter-spacing: 0.4px;
+    }
+  }
+
+  &__available-amount {
+    font-size: $font-size-common;
+    margin-top: 4px;
+    letter-spacing: 0.4px;
+
+    &-value {
+      color: $text-accent-color;
+      margin-right: 8px;
+      margin-left: 4px;
+      font-weight: 600;
+      &--error {
+        color: #eb3b5a;
+      }
+    }
+
+    & .icon--refresh {
+      position: relative;
+      top: 6px;
+      cursor: pointer;
+    }
+  }
+
+  &__row {
+    & .gv-text-field {
+      width: 250px;
+    }
+
+    & .gv-text-field__wrapper {
+      margin: 16px 0;
+    }
+
+    & .gv-text-field__wrapper:first-child {
+      margin: 16px 24px 16px 0;
+    }
+
+    @include media-breakpoint-phone() {
+      & .gv-text-field {
+        width: 300px;
+      }
+    }
+    @include media-breakpoint-landscape-phone() {
+      & .gv-text-field {
+        width: 500px;
+      }
+    }
+  }
+
+  &__navigation {
+    margin-top: 50px;
+    margin-bottom: 40px;
+
+    &-back {
+      margin-top: 14px;
+
+      @media (min-width: 377px) {
+        margin-top: 0;
+      }
+
+      @include media-breakpoint-tablet() {
+        margin-left: 24px;
+        margin-top: 70px;
+      }
+    }
+  }
+
+  @include media-breakpoint-tablet() {
+    margin-left: 0;
+  }
+}
+
+.popover-add {
+  background: #1c2730;
+  &__regulator-indicator {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  &__regulator-input {
+    width: 23px;
+    display: block;
+    background: transparent;
+    border-width: 0;
+    font-size: $font-size-paragraph-mobile;
+    line-height: $font-size-paragraph-mobile;
+    color: $text-accent-color;
+    text-align: right;
+    &:focus {
+      border-width: 0;
+      outline-width: 0;
+    }
+    &--mute {
+      color: rgba(255, 255, 255, 0.3);
+    }
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-paragraph;
+      line-height: $font-size-paragraph;
+    }
+  }
+  &__asset-currency-short {
+    opacity: 0.4;
+  }
+  &__search {
+    padding: 0 $padding-xsmall;
+  }
+  &__assets {
+    padding-bottom: $padding-xsmall;
+    table {
+      padding: 0 $padding-xsmall;
+      border-spacing: 0;
+    }
+    td {
+      padding-right: $padding-xsmall;
+      padding-top: 12px;
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+  }
+  &__search {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-bottom: $padding-xsmall;
+  }
+  &__search-input {
+    margin: 0;
+    padding: 0;
+  }
+  &__asset {
+    font-size: $font-size-small;
+    padding-top: $padding-small/2;
+  }
+
+  &__asset-icon {
+    width: $asset-icon-size;
+    height: $asset-icon-size;
+  }
+
+  &__block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: $padding-xsmall;
+  }
+  &__title,
+  &__subtitle,
+  &__text {
+    padding: $padding-xsmall/2 0;
+  }
+  &__title,
+  &__subtitle,
+  &__text,
+  &__balance,
+  &__text {
+    word-wrap: break-word;
+    max-width: 165px;
+  }
+  &__title {
+    font-size: $font-size-h1;
+    color: $primary-color;
+    font-weight: bold;
+  }
+  &__subtitle {
+    font-size: $font-size-h4;
+    opacity: 0.4;
+  }
+  &__balance {
+    font-weight: bold;
+  }
+  &__text {
+    font-size: $font-size-small;
+    opacity: 0.4;
+    line-height: 1.54;
+    letter-spacing: 0.3px;
+  }
+  &__about {
+    padding: $padding-xsmall/2 0;
+    font-size: $font-size-small;
+    font-weight: 600;
+    line-height: 1.67;
+    letter-spacing: 0.3px;
+  }
+}
+
+.create-fund-settings__fee-hint-tooltip-content {
+  width: 248px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: $text-light-color;
+}

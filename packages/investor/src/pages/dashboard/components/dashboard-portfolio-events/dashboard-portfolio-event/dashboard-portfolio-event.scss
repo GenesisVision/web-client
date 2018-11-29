@@ -1,0 +1,134 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
+
+.portfolio-event {
+  display: flex;
+  padding-top: 24px;
+  align-items: center;
+  //width: 252px;
+  @include media-breakpoint-tablet() {
+    width: 252px;
+  }
+
+  &:not(:last-of-type) {
+    border-bottom: 2px solid $separator-color;
+    padding-bottom: 24px;
+  }
+
+  &__values-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    white-space: normal;
+    @include media-breakpoint-phone() {
+      flex-direction: row;
+    }
+    @include media-breakpoint-tablet() {
+      flex-direction: column;
+    }
+  }
+
+  &__info {
+    flex-grow: 3.5;
+    margin-left: 12px;
+    @include media-breakpoint-landscape-phone() {
+      margin-left: 24px;
+    }
+    & .statistics-item {
+      padding: 0;
+    }
+  }
+
+  &__time {
+    color: $text-dark-color;
+    margin-bottom: 17px;
+    font-size: 12px;
+  }
+
+  &__description {
+    letter-spacing: 0.2px;
+    margin-bottom: 0px;
+    font-size: $font-size-common-mobile;
+    color: $text-color;
+    line-height: 1.69;
+    padding-right: $padding-small-mobile;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-common;
+    }
+  }
+
+  &__value {
+    letter-spacing: 0.4px;
+    font-size: $font-size-common-mobile;
+    font-weight: 600;
+    line-height: 1.69;
+    text-align: left;
+    word-break: normal;
+    @include media-breakpoint-phone() {
+      text-align: right;
+    }
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-common;
+    }
+    @include media-breakpoint-tablet() {
+      text-align: left;
+    }
+  }
+
+  &__art {
+    width: 44px;
+    height: 44px;
+    position: relative;
+  }
+
+  &__logo-photo {
+    box-sizing: border-box;
+    width: 32px;
+    height: 32px;
+    border: solid 2px #1c2730;
+    border-radius: 18px;
+    background-color: #27323a;
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    line-height: 28px;
+    text-align: center;
+  }
+
+  &__logo-type {
+    box-sizing: border-box;
+    width: 28px;
+    height: 28px;
+    border-radius: 18px;
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    z-index: 1;
+    line-height: 28px;
+    text-align: center;
+  }
+
+  &--positive {
+    & .portfolio-event__value {
+      color: $positive-color;
+    }
+
+    & .portfolio-event__logo-type {
+      background-color: $positive-background-color;
+      color: $positive-color;
+    }
+  }
+
+  &--negative {
+    & .portfolio-event__value {
+      color: $negative-color;
+    }
+
+    & .portfolio-event__logo-type {
+      background-color: $negative-background-color;
+      color: $negative-color;
+    }
+  }
+}

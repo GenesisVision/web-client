@@ -1,0 +1,6 @@
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
+
+.manager {
+  @include adaptive-margin(top, $padding-medium);
+}

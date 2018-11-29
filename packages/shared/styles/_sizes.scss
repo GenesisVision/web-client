@@ -1,0 +1,101 @@
+@import "./_breakpoint.scss";
+
+//paddings
+$padding-xxlarge: 108px;
+$padding-xlarge: 90px;
+$padding-large: 80px;
+$padding-big: 62px;
+$padding-medium: 40px;
+$padding-small: 32px;
+$padding-xsmall: 20px;
+$padding-xxsmall: 10px;
+
+//fonts
+$font-size-h1: 32px;
+$font-size-h2: 24px;
+$font-size-h3: 17px;
+$font-size-h4: 16px;
+$font-size-paragraph: 14px;
+$font-size-common: 13px;
+$font-size-small: 12px;
+
+//others
+$border-radius: 5px;
+$border-radius-middle: 8px;
+$btn-height: 50px;
+$btn-width: 149px;
+$icon-size: 29px;
+$avatar-size: 120px;
+$asset-height: 40px;
+
+//dividers4
+$divider-padding: 3;
+$divider-text: 1.5;
+$divider-title: 2;
+
+//paddings for mobile
+$padding-xxlarge-mobile: $padding-xxlarge/$divider-padding;
+$padding-xlarge-mobile: $padding-xlarge/$divider-padding;
+$padding-large-mobile: $padding-large/$divider-padding;
+$padding-big-mobile: $padding-big/$divider-padding;
+$padding-medium-mobile: $padding-medium/$divider-padding;
+$padding-small-mobile: $padding-small/$divider-padding;
+$padding-xsmall-mobile: $padding-xsmall/$divider-padding;
+$padding-xxsmall-mobile: $padding-xxsmall/$divider-padding;
+
+//fonts for mobile
+$font-size-h1-mobile: $font-size-h1/$divider-title;
+$font-size-h2-mobile: $font-size-h2/$divider-text;
+$font-size-h3-mobile: $font-size-h3/$divider-text;
+$font-size-h4-mobile: $font-size-h4/$divider-text;
+$font-size-paragraph-mobile: $font-size-paragraph/$divider-text;
+$font-size-common-mobile: $font-size-common/$divider-text;
+$font-size-small-mobile: $font-size-small/$divider-text;
+
+//others for mobile
+$border-radius-mobile: $border-radius/$divider-text;
+$border-radius-middle-mobile: $border-radius-middle/$divider-text;
+$btn-height-mobile: $btn-height/$divider-text;
+$btn-width-mobile: $btn-width/$divider-text;
+$icon-size-mobile: $icon-size/$divider-text;
+$avatar-size-mobile: $avatar-size/$divider-title;
+
+//mixins
+@mixin font-size($font-size) {
+  $divider: $divider-text;
+
+  @if $font-size == $font-size-h1 {
+    $divider: $divider-title;
+  }
+  font-size: $font-size/$divider;
+
+  @include media-breakpoint-landscape-phone() {
+    font-size: $font-size;
+  }
+}
+
+@mixin adaptive-padding($direction, $padding-size) {
+  padding-#{$direction}: $padding-size/$divider-padding;
+
+  @include media-breakpoint-landscape-phone() {
+    padding-#{$direction}: $padding-size;
+  }
+}
+
+@mixin vertical-paddings($padding-top, $padding-bottom: $padding-top) {
+  @include adaptive-padding(top, $padding-top);
+  @include adaptive-padding(bottom, $padding-bottom);
+}
+
+@mixin horizontal-paddings($padding-left, $padding-right: $padding-left) {
+  @include adaptive-padding(left, $padding-left);
+  @include adaptive-padding(right, $padding-right);
+}
+
+@mixin adaptive-margin($direction, $margin-size) {
+  margin-#{$direction}: $margin-size/$divider-padding;
+
+  @include media-breakpoint-landscape-phone() {
+    margin-#{$direction}: $margin-size;
+  }
+}

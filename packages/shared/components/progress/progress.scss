@@ -1,0 +1,19 @@
+@import "~shared/styles/_colors.scss";
+
+.gv-progress__container {
+  display: flex;
+  height: 0.3rem;
+  overflow: hidden;
+  font-size: 0.75rem;
+  background-color: $border-color;
+  border-radius: 0.25rem;
+}
+
+.gv-progress__value {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  background-color: $primary-color;
+  border-radius: 0.25rem;
+}

@@ -1,0 +1,47 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+
+.pis-item {
+  min-width: 15%;
+  text-align: center;
+  flex-grow: 1;
+
+  &:not(:last-of-type) {
+    border-right: 1px solid $border-color;
+  }
+
+  @include media-breakpoint-phone() {
+    flex-grow: 0;
+    width: 33%;
+    &:nth-of-type(3n) {
+      padding: 0 1rem/2;
+      border-right: 0px;
+    }
+  }
+  .metric__value {
+    @include media-breakpoint-desktop() {
+      font-size: 1.5rem;
+    }
+  }
+
+  .metric__description {
+    font-size: 0.875rem;
+  }
+}
+
+.pis-item__value {
+  font-size: 1.7rem;
+  font-family: "NeuzeitGroLig";
+  @include media-breakpoint-desktop() {
+    font-size: 1.5rem;
+  }
+}
+
+.pis-item__label {
+  color: $text-sub-color;
+  font-size: 0.9rem;
+  line-height: 0.5;
+  @include media-breakpoint-desktop() {
+    font-size: 0.7rem;
+  }
+}

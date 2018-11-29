@@ -1,0 +1,30 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_sizes.scss";
+
+.profile-image {
+  &__requirements {
+    font-size: $font-size-common;
+    color: $label-color;
+    letter-spacing: 0.2px;
+    margin-bottom: 16px;
+    width: 250px;
+    line-height: 1.4;
+  }
+
+  &__submit-btn {
+    margin-top: 40px;
+    color: $primary-color;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    padding: 1em 2.4em;
+  }
+
+  &__title {
+    @include adaptive-padding(bottom, $padding-medium);
+    text-transform: uppercase;
+    font-size: $font-size-small;
+    letter-spacing: 0.48px;
+    font-weight: 500;
+  }
+}

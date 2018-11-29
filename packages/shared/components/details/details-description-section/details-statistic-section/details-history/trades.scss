@@ -1,0 +1,62 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
+
+.details-trades {
+  overflow: hidden;
+
+  & .table__row--head,
+  &__row:nth-child(2n + 1) {
+    background-color: $table-background-subcolor;
+  }
+
+  &__cell,
+  &__head-cell {
+    font-size: $font-size-paragraph-mobile;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-paragraph;
+    }
+  }
+
+  &__cell {
+    &--direction {
+      width: 10%;
+      min-width: 83px;
+    }
+
+    &--symbol {
+      width: 16%;
+      min-width: 80px;
+    }
+
+    &--volume {
+      width: 16%;
+      min-width: 90px;
+    }
+
+    &--price {
+      width: 16%;
+      min-width: 95px;
+    }
+
+    &--profit {
+      width: 16%;
+      min-width: 90px;
+    }
+
+    &--date {
+      width: 23%;
+      min-width: 168px;
+    }
+
+    &--ticket {
+      width: 16%;
+      min-width: 83px;
+    }
+
+    &--entry {
+      width: 16%;
+      min-width: 62px;
+    }
+  }
+}
