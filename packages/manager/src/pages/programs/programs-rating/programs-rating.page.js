@@ -11,30 +11,28 @@ import connect from "react-redux/es/connect/connect";
 import ProgramsRatingTables from "shared/components/programs-rating/programs-rating-tables";
 import Surface from "shared/components/surface/surface";
 import { getLevelUpSummary } from "shared/components/programs-rating/services/program-rating-service";
+import { LEVELS } from "shared/components/programs-rating/programs-rating-table";
 
 const TABS = ["1 > 2", "2 > 3", "3 > 4", "5 > 6", "7 > 8"];
 
-const rating = {
-  programCounts: "120",
-  quota: "12",
-  currentProfit: "24.54675"
-};
-
 class ProgramsRatingPage extends Component {
   state = {
-    tab: TABS[0]
+    tab: TABS[0],
+    level: LEVELS[TABS[0]]
   };
 
   componentDidMount() {
-    const { match } = this.props;
+    const { match, service } = this.props;
+    service.getLevelUpSummary();
     if (match.params.tab) this.setState({ tab: match.params.tab });
   }
   handleTabChange = (e, tab) => {
-    this.setState({ tab });
+    this.setState({ tab, level: LEVELS[tab] });
   };
   render() {
-    const { t, id } = this.props;
-    const { tab } = this.state;
+    const { t, id, levelData } = this.props;
+    const { tab, level } = this.state;
+    const currentLevelData = levelData ? levelData[level] : null;
     if (!tab) return null;
     return (
       <Page title={t("programs-page.title")}>
@@ -45,9 +43,15 @@ class ProgramsRatingPage extends Component {
               tabs={TABS}
               handleTabChange={this.handleTabChange}
               tab={tab}
+              levelData={levelData}
             />
           </div>
-          <ProgramsRatingTables key={tab} tab={tab} id={id} rating={rating} />
+          <ProgramsRatingTables
+            key={tab}
+            tab={tab}
+            id={id}
+            levelData={currentLevelData}
+          />
         </Surface>
       </Page>
     );
@@ -55,10 +59,12 @@ class ProgramsRatingPage extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
+  console.log(state.programsRating);
   const { data } = state.profileHeader.info;
-  if (!data) return {};
-  return { id: data.id };
+  const levelData = state.programsRating.levelupSummary.data
+    ? state.programsRating.levelupSummary.data.levelData
+    : {};
+  return { id: data ? data.id : {}, levelData };
 };
 
 const mapDispatchToProps = dispatch => ({

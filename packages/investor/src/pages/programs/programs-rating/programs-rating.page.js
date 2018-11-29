@@ -24,16 +24,7 @@ class ProgramsRatingPage extends Component {
   componentDidMount() {
     const { match, service } = this.props;
     service.getLevelUpSummary();
-    if (match.params.tab) {
-      this.setState({
-        tab: match.params.tab
-      });
-
-      if (LEVELS[this.state.tab])
-        this.setState({
-          level: LEVELS[this.state.tab]
-        });
-    }
+    if (match.params.tab) this.setState({ tab: match.params.tab });
   }
   handleTabChange = (e, tab) => {
     this.setState({ tab, level: LEVELS[tab] });
@@ -67,9 +58,9 @@ class ProgramsRatingPage extends Component {
 }
 const mapStateToProps = state => {
   const levelData = state.programsRating.levelupSummary.data
-    ? state.programsRating.levelupSummary.data
-    : null;
-  return levelData;
+    ? state.programsRating.levelupSummary.data.levelData
+    : {};
+  return { levelData };
 };
 
 const mapDispatchToProps = dispatch => ({
