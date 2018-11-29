@@ -40,6 +40,7 @@ class ProgramTableRow extends Component {
       );
     return (
       <ProgramTableRowShort
+        showRating={showRating}
         title={title}
         program={program}
         onExpandClick={this.openProgramDetail}
