@@ -60,7 +60,7 @@ class ProgramsRatingTable extends Component {
   };
 
   render() {
-    const { title, programs } = this.props;
+    const { title, programs, isPending } = this.props;
     const { totalPages, currentPage, itemsOnPage } = this.state;
     if (!programs || !programs.total) return null;
     return (
@@ -79,8 +79,9 @@ class ProgramsRatingTable extends Component {
 const mapStateToProps = (state, props) => {
   const table = props.managerId ? SELF_PROGRAMS : PROGRAMS;
   const programs = state.programsRating[table];
+  const { isPending } = state.programsRating[table];
   if (!programs.data) return {};
-  return { programs: programs.data };
+  return { programs: programs.data, isPending };
 };
 
 const mapDispatchToProps = dispatch => ({
