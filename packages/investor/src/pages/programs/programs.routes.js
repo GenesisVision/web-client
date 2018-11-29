@@ -25,7 +25,8 @@ export const PROGRAMS_EXPLORE_TAB_ROUTE = `${PROGRAMS_ROUTE}/:tab(${PROGRAMS_EXP
 export const PROGRAMS_FAVORITES_TAB_ROUTE = `${PROGRAMS_ROUTE}/:tab(${PROGRAMS_FAVORITES_TAB_NAME})`;
 
 export const PROGRAMS_RATING_TAB = "rating";
-export const PROGRAMS_RATING_ROUTE = `${PROGRAMS_ROUTE}/${PROGRAMS_RATING_TAB}`;
+export const PROGRAMS_RATING_ROUTE_ = `${PROGRAMS_ROUTE}/${PROGRAMS_RATING_TAB}`; // temp
+export const PROGRAMS_RATING_ROUTE = `${PROGRAMS_ROUTE}/facets/new`; // temp
 export const PROGRAMS_RATING_TAB_ROUTE = `${PROGRAMS_RATING_ROUTE}/:tab`;
 
 const ProgramsRoutes = () => (
@@ -35,9 +36,9 @@ const ProgramsRoutes = () => (
       path={PROGRAMS_FAVORITES_TAB_ROUTE}
       component={ProgramsPage}
     />
+    <Route path={PROGRAMS_RATING_ROUTE} component={ProgramsRatingPage} />
     <Route path={PROGRAMS_FACET_ROUTE_REGEX} component={ProgramsFacetPage} />
     <Route path={PROGRAMS_RATING_TAB_ROUTE} component={ProgramsRatingPage} />
-    <Route path={PROGRAMS_RATING_ROUTE} component={ProgramsRatingPage} />
     <Route path={PROGRAM_DETAILS_ROUTE_REGEX} component={ProgramDetailsPage} />
     <Route component={NotFoundPage} />
   </Switch>

@@ -33,10 +33,7 @@ class FacetCard extends Component {
       >
         <Link
           to={{
-            pathname:
-              facet.title === "New"
-                ? PROGRAMS_RATING_ROUTE
-                : composeFacetUrl(facet.url),
+            pathname: composeFacetUrl(facet.url),
             state: `/ ${title}`
           }}
         >
