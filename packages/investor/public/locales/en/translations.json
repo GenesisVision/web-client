@@ -1011,5 +1011,10 @@
     "username": "Username",
     "assets": "Assets",
     "memberSince": "Member Since"
+  },
+  "rating": {
+    "programCounts": "Programs",
+    "quota": "Quota",
+    "currentProfit": "Current target profit"
   }
 }

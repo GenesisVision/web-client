@@ -14,7 +14,7 @@ import Surface from "shared/components/surface/surface";
 const TABS = ["1 > 2", "2 > 3", "3 > 4", "5 > 6", "7 > 8"];
 
 const rating = {
-  counts: "120",
+  programCounts: "120",
   quota: "12",
   currentProfit: "24.54675"
 };
