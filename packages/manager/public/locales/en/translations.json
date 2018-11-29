@@ -789,7 +789,8 @@
       }
     },
     "notifications": {
-      "create-success": "Successful program creating."
+      "create-success": "Successful program creating.",
+      "validate-error": "Please fix all the errors on the screen before proceeding"
     }
   },
   "edit-program": {
@@ -862,7 +863,8 @@
     "title": "Create Fund",
     "navigation-back-text": "All data will be deleted. Do you want to continue?",
     "notifications": {
-      "create-success": "Successful program creating."
+      "create-success": "Successful program creating.",
+      "validate-error": "Please fix all the errors on the screen before proceeding"
     },
     "tabs": {
       "select-broker": "Select broker",

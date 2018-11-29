@@ -51,3 +51,12 @@ export const createFund = (createFundData, setSubmitting) => dispatch => {
       dispatch(alertMessageActions.error(error.errorMessage));
     });
 };
+
+export const showValidationError = () => dispatch => {
+  dispatch(
+    alertMessageActions.error(
+      "create-fund-page.notifications.validate-error",
+      true
+    )
+  );
+};

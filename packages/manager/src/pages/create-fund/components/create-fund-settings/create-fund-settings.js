@@ -110,13 +110,27 @@ class CreateFundSettings extends React.Component {
       setFieldValue,
       deposit,
       errors,
-      programsInfo
+      programsInfo,
+      onValidateError,
+      setSubmitting
     } = this.props;
 
     const imageInputError =
       errors &&
       errors.logo &&
       (errors.logo.width || errors.logo.height || errors.logo.size);
+
+    const onSubmit = () => {
+      createFundSettingsValidationSchema({ t, programsInfo, deposit })
+        .isValid(values)
+        .then(status => {
+          console.info(status);
+          if (!status) {
+            onValidateError();
+          }
+        });
+      handleSubmit(values, { setSubmitting });
+    };
 
     return (
       <div className="create-fund-settings">
@@ -322,7 +336,7 @@ class CreateFundSettings extends React.Component {
             title={t("buttons.create-fund")}
             color="primary"
             type="submit"
-            onClick={handleSubmit}
+            onClick={onSubmit}
             disabled={isSubmitting}
           >
             {t("buttons.create-fund")}

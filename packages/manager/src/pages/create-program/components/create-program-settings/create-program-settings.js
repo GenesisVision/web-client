@@ -1,9 +1,6 @@
 import "./create-program-settings.scss";
 
 import classnames from "classnames";
-import Hint from "shared/components/hint/hint";
-import { RefreshIcon } from "shared/components/icon/refresh-icon";
-import Select from "shared/components/select/select";
 import { Field, withFormik } from "formik";
 import {
   GVButton,
@@ -15,6 +12,9 @@ import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import InputImage from "shared/components/form/input-image/input-image";
+import Hint from "shared/components/hint/hint";
+import { RefreshIcon } from "shared/components/icon/refresh-icon";
+import Select from "shared/components/select/select";
 import { formatValue } from "shared/utils/formatter";
 import { allowValuesNumberFormat } from "shared/utils/helpers";
 
@@ -58,13 +58,26 @@ class CreateProgramSettings extends React.Component {
       isLeverageChooseAvailable,
       programsInfo,
       notifyError,
-      errors
+      errors,
+      onValidateError,
+      setSubmitting
     } = this.props;
 
     const imageInputError =
       errors &&
       errors.logo &&
       (errors.logo.width || errors.logo.height || errors.logo.size);
+
+    const onSubmit = () => {
+      createProgramSettingsValidationSchema({ t, programsInfo })
+        .isValid(values)
+        .then(status => {
+          if (!status) {
+            onValidateError();
+          }
+        });
+      handleSubmit(values, { setSubmitting });
+    };
 
     return (
       <div className="create-program-settings">
@@ -306,7 +319,7 @@ class CreateProgramSettings extends React.Component {
             title={t("buttons.create-program")}
             color="secondary"
             type="submit"
-            onClick={handleSubmit}
+            onClick={onSubmit}
             disabled={isSubmitting}
           >
             {t("buttons.create-program")}
