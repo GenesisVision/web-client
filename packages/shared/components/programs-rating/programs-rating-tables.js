@@ -8,8 +8,6 @@ import ProgramsRatingTable from "./programs-rating-table";
 class ProgramsRatingTables extends Component {
   render() {
     const { id, tab, levelData } = this.props;
-    console.log("levelData");
-    console.log(levelData);
     return (
       <Fragment>
         {id && (

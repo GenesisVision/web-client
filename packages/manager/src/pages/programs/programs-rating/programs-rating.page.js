@@ -55,6 +55,7 @@ class ProgramsRatingPage extends Component {
 }
 
 const mapStateToProps = state => {
+  console.log(state);
   const { data } = state.profileHeader.info;
   if (!data) return {};
   return { id: data.id };

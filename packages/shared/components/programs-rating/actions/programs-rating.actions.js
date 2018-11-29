@@ -18,9 +18,9 @@ export const fetchSelfProgramsRating = filters => {
   };
 };
 
-export const fetchLevelUpSummary = () => {
+export const fetchLevelUpSummary = authorization => {
   return {
     type: LEVELUP_SUMMARY,
-    payload: programApi.v10ProgramsLevelupSummaryGet()
+    payload: programApi.v10ProgramsLevelupSummaryGet(authorization)
   };
 };

@@ -4,6 +4,7 @@ import {
   fetchLevelUpSummary
 } from "../actions/programs-rating.actions";
 import { LEVELS } from "../programs-rating-table";
+import authService from "shared/services/auth-service";
 
 export const getProgramsRating = filters => dispatch => {
   const { tab, managerId, itemsOnPage, currentPage } = filters;
@@ -21,5 +22,5 @@ export const getProgramsRating = filters => dispatch => {
 };
 
 export const getLevelUpSummary = () => dispatch => {
-  dispatch(fetchLevelUpSummary());
+  dispatch(fetchLevelUpSummary(authService.getAuthArg()));
 };
