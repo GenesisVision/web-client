@@ -1,4 +1,4 @@
-import "./programs-rating-stats.scss";
+import "./programs-rating.scss";
 
 import React from "react";
 import { translate } from "react-i18next";

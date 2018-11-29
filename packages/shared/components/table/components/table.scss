@@ -6,7 +6,7 @@ $th-font-size: 12px;
 $td-font-size: 13px;
 $table-title-font-size: 17px;
 $view-svg-size: 15px;
-$padding: 33px;
+$padding: $padding-small;
 $background-pretender: #064542;
 $background-pretender-hover: #0b4b45;
 
@@ -159,6 +159,7 @@ $background-pretender-hover: #0b4b45;
         padding-right: $padding;
       }
     }
+    @include font-size($font-size-common);
     text-align: left;
     cursor: default;
     box-sizing: border-box;
@@ -168,8 +169,8 @@ $background-pretender-hover: #0b4b45;
     overflow: hidden; // Or flex might break
     list-style: none;
     font-weight: normal;
-    font-size: $font-size-common;
     letter-spacing: 0.433333px;
+    white-space: nowrap;
 
     &#{&} {
       &--head {

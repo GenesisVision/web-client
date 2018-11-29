@@ -199,7 +199,8 @@ $background-pretender: #064542;
 }
 
 .programs-table__cell {
-  padding: $padding-xsmall/2 $padding-xsmall;
+  @include vertical-paddings($padding-xxsmall);
+  @include horizontal-paddings($padding-xsmall);
   &--avatar-title {
     display: flex;
     flex-direction: row;
@@ -235,11 +236,22 @@ $background-pretender: #064542;
     padding-right: 0;
   }
 
-  &--favorite.table__cell:last-child {
-    padding-right: 22px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+  &--favorite {
+    &.table__cell:last-child {
+      padding-right: 22px;
+      //display: flex;
+      //align-items: center;
+      //justify-content: flex-end;
+    }
+	  .favorite-icon {
+		  width: 20px;
+		  height: 19px;
+
+		  @include media-breakpoint-landscape-phone() {
+			  width: 28px;
+			  height: 27px;
+		  }
+	  }
   }
 }
 
