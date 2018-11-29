@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { translate } from "react-i18next";
-import { compose } from "redux";
-import { fetchPrograms } from "shared/modules/programs-table/services/programs-table.service";
+import connect from "react-redux/es/connect/connect";
+import { bindActionCreators, compose } from "redux";
 import ProgramsTableModule from "shared/modules/programs-table/components/programs-table/programs-table-module";
+
+import { getProgramsRating } from "./services/program-rating-service";
 
 export const LEVELS = {
   "1 > 2": 1,
@@ -14,62 +16,67 @@ export const LEVELS = {
 
 class ProgramsRatingTable extends Component {
   state = {
-    programs: null,
-    isPending: true,
     currentPage: 1,
     itemsOnPage: 10,
     totalPages: 0
   };
 
   componentDidMount() {
-    this.updatePrograms();
+    this.updateProgramsDispatch();
   }
 
   updatePaging = e => {
-    this.setState({ currentPage: e + 1 }, () => this.updatePrograms());
+    this.setState({ currentPage: e + 1 }, () => this.updateProgramsDispatch());
   };
 
-  updatePrograms = filters => {
-    const { managerId, tab } = this.props;
+  updateProgramsDispatch = () => {
+    const { managerId, tab, service } = this.props;
     const { itemsOnPage, currentPage } = this.state;
-    fetchPrograms({
-      managerId,
-      levelUpFrom: LEVELS[tab],
-      take: itemsOnPage,
-      skip: itemsOnPage * (currentPage - 1),
-      ...filters
-    }).then(programs => {
-      const totalPages = Math.round(programs.total / itemsOnPage);
-      this.setState({
-        programs,
-        isPending: false,
+    service
+      .getProgramsRating({
+        managerId,
+        tab,
         itemsOnPage,
-        currentPage,
-        totalPages
+        currentPage
+      })
+      .then(programs => {
+        const totalPages = Math.round(programs.value.total / itemsOnPage);
+        this.setState({
+          currentPage,
+          totalPages
+        });
       });
-    });
   };
 
   render() {
-    const { title } = this.props;
-    const {
-      programs,
-      isPending,
-      totalPages,
-      currentPage,
-      itemsOnPage
-    } = this.state;
-    if (isPending || !programs.total) return null;
+    const { title, programs } = this.props;
+    const { totalPages, currentPage, itemsOnPage } = this.state;
+    if (!programs || !programs.total) return null;
     return (
       <ProgramsTableModule
         title={title}
         data={programs}
         paging={{ totalPages, currentPage, itemsOnPage }}
-        isPending={isPending}
         updatePaging={this.updatePaging}
       />
     );
   }
 }
 
-export default compose(translate())(ProgramsRatingTable);
+const mapStateToProps = (state, props) => {
+  const table = props.managerId ? "selfPrograms" : "programs";
+  const programs = state.programsRating[table];
+  if (!programs.data) return {};
+  return { programs: programs.data };
+};
+
+const mapDispatchToProps = dispatch => ({
+  service: bindActionCreators({ getProgramsRating }, dispatch)
+});
+export default compose(
+  translate(),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
+)(ProgramsRatingTable);
