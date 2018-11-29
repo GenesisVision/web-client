@@ -22,5 +22,6 @@ export const getProgramsRating = filters => dispatch => {
 };
 
 export const getLevelUpSummary = () => dispatch => {
-  dispatch(fetchLevelUpSummary(authService.getAuthArg()));
+  const authorization = authService.getAuthArg();
+  dispatch(fetchLevelUpSummary({ authorization }));
 };
