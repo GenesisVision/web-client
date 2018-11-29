@@ -28,7 +28,8 @@ $chart-width: 160px;
 }
 
 .funds-table__cell {
-  padding: $padding-xsmall/2 $padding-xsmall;
+  @include vertical-paddings($padding-xxsmall);
+  @include horizontal-paddings($padding-xsmall);
   & .fund-assets {
     flex-direction: row;
     flex-wrap: nowrap;
