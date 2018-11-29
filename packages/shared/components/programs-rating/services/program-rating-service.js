@@ -1,6 +1,7 @@
 import {
   fetchProgramsRating,
-  fetchSelfProgramsRating
+  fetchSelfProgramsRating,
+  fetchLevelUpSummary
 } from "../actions/programs-rating.actions";
 import { LEVELS } from "../programs-rating-table";
 
@@ -17,4 +18,8 @@ export const getProgramsRating = filters => dispatch => {
       ? fetchSelfProgramsRating(requestFilters)
       : fetchProgramsRating(requestFilters)
   );
+};
+
+export const getLevelUpSummary = () => dispatch => {
+  dispatch(fetchLevelUpSummary());
 };
