@@ -126,7 +126,7 @@ class CreateFundSettings extends React.Component {
             {t("create-fund-page.settings.main-settings")}
           </div>
           <div className="create-fund-settings__fill-block create-fund-settings__fill-block--with-border">
-            <div className="create-fund-settings__row">
+            <div className="create-fund-settings__row create-fund-settings__row--description">
               <GVFormikField
                 type="text"
                 name="title"
@@ -134,6 +134,11 @@ class CreateFundSettings extends React.Component {
                 autoComplete="off"
                 component={GVTextField}
               />
+              <div className="create-fund-settings__description-info">
+                <span className="create-fund-settings__description create-fund-settings__description-requirements">
+                  {t("create-fund-page.settings.fields.name-requirements")}
+                </span>
+              </div>
             </div>
             <div className="create-fund-settings__row create-fund-settings__row--description">
               <GVFormikField

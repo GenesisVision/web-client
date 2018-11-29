@@ -883,6 +883,7 @@
       "fields": {
         "asset-description": "Total share of all assets should be equal to 100%",
         "name": "Name",
+        "name-requirements": "Requirement from 4 to 20 symbols",
         "account-type": "Account type",
         "currency": "Currency",
         "description": "Description",
@@ -899,6 +900,7 @@
       },
       "validation": {
         "title-required": "Title is required",
+        "title-is-short": "Title is too short",
         "title-is-long": "Title is too long",
         "title-is-latin-and-numbers": "Latin letters and numbers only.",
         "description-is-long": "Description is too long",

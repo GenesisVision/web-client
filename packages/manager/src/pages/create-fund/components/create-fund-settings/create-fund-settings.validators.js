@@ -18,6 +18,7 @@ const createFundSettingsValidationSchema = ({ t, ...props }) =>
     }),
     title: string()
       .required(t("create-fund-page.settings.validation.title-required"))
+      .min(4, t("create-fund-page.settings.validation.title-is-short"))
       .max(20, t("create-fund-page.settings.validation.title-is-long"))
       .matches(
         /^[-a-zA-Z0-9\s]{4,20}$/,
