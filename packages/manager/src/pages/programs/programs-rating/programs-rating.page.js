@@ -6,10 +6,11 @@ import Page from "shared/components/page/page";
 
 import TabsContainer from "shared/components/tabs-container/tabs-container";
 import * as routes from "../programs.routes";
-import { compose } from "redux";
+import { bindActionCreators, compose } from "redux";
 import connect from "react-redux/es/connect/connect";
 import ProgramsRatingTables from "shared/components/programs-rating/programs-rating-tables";
 import Surface from "shared/components/surface/surface";
+import { getLevelUpSummary } from "shared/components/programs-rating/services/program-rating-service";
 
 const TABS = ["1 > 2", "2 > 3", "3 > 4", "5 > 6", "7 > 8"];
 
@@ -59,7 +60,14 @@ const mapStateToProps = state => {
   return { id: data.id };
 };
 
+const mapDispatchToProps = dispatch => ({
+  service: bindActionCreators({ getLevelUpSummary }, dispatch)
+});
+
 export default compose(
   translate(),
-  connect(mapStateToProps)
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
 )(ProgramsRatingPage);
