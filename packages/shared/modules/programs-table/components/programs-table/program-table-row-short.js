@@ -21,6 +21,7 @@ const ProgramTableRowShort = ({
   toggleFavorite,
   onExpandClick
 }) => {
+  const stopPropagationEvent = event => event.stopPropagation();
   return (
     <TableRow onClick={onExpandClick}>
       <TableCell className="programs-table__cell programs-table__cell--name">
@@ -30,6 +31,7 @@ const ProgramTableRowShort = ({
               pathname: composeProgramDetailsUrl(program.url),
               state: `/ ${title}`
             }}
+            onClick={stopPropagationEvent}
           >
             <AssetAvatar
               url={program.logo}
@@ -45,6 +47,7 @@ const ProgramTableRowShort = ({
                   pathname: composeProgramDetailsUrl(program.url),
                   state: `/ ${title}`
                 }}
+                onClick={stopPropagationEvent}
               >
                 <GVButton variant="text" color="secondary">
                   {program.title}
