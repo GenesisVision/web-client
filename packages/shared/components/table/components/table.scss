@@ -7,8 +7,6 @@ $td-font-size: 13px;
 $table-title-font-size: 17px;
 $view-svg-size: 15px;
 $padding: $padding-small;
-$background-pretender: #064542;
-$background-pretender-hover: #0b4b45;
 
 %sortable-border-icon {
   position: absolute;
@@ -113,31 +111,8 @@ $background-pretender-hover: #0b4b45;
       background-color: #212c34;
     }
 
-    &:hover {
-      .program-detailed--pretender .program-avatar__level {
-        border-color: $background-pretender-hover;
-      }
-    }
-
     .program-avatar__level {
       transition: border-color 300ms ease;
-    }
-
-    &--pretender {
-      background-color: $background-pretender;
-
-
-      .program-avatar__level {
-        border-color: $background-pretender;
-      }
-
-      &:not(.table__row--head):hover {
-        background-color: $background-pretender-hover;
-
-	      .program-avatar__level {
-		      border-color: #00564b;
-	      }
-      }
     }
   }
 
