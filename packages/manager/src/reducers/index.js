@@ -25,6 +25,7 @@ import loginReducer from "../pages/auth/login/reducers/login.reducers";
 import signUpReducer from "../pages/auth/signup/reducers/signup.reducers";
 import dashboardReducer from "../pages/dashboard/reducers/dashboard.reducers";
 import managerReducer from "../pages/manager/reducers/manager.reducers";
+import programsRatingReducer from "shared/components/programs-rating/reducers/programs-rating.reducers";
 
 export default combineReducers({
   dashboard: dashboardReducer,
@@ -35,6 +36,7 @@ export default combineReducers({
   fundDeposit: fundDepositReducer,
   manager: managerReducer,
   programsData: programsReducer,
+  programsRating: programsRatingReducer,
   fundsData: fundsReducer,
   routing: routerReducer,
   loadingBar: loadingBarReducer,
