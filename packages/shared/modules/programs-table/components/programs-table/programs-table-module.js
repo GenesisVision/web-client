@@ -17,6 +17,8 @@ import SelectFilter from "shared/components/table/components/filtering/select-fi
 
 const ProgramsTableModule = ({
   t,
+  columns,
+  showRating,
   enableFiltering,
   showSwitchView,
   currencies,
@@ -45,7 +47,7 @@ const ProgramsTableModule = ({
       updateSorting={updateSorting}
       paging={paging}
       updatePaging={updatePaging}
-      columns={PROGRAMS_COLUMNS}
+      columns={columns || PROGRAMS_COLUMNS}
       items={data.programs}
       isPending={data.isPending}
       renderFilters={
@@ -74,11 +76,7 @@ const ProgramsTableModule = ({
         ))
       }
       renderHeader={column => {
-        if (
-          (!isAuthenticated && column.name === "favorite") ||
-          (column.name === "position" && false)
-        )
-          return null;
+        if (!isAuthenticated && column.name === "favorite") return null;
         return (
           <span
             className={`programs-table__cell  programs-table__cell--${
@@ -91,6 +89,7 @@ const ProgramsTableModule = ({
       }}
       renderBodyRow={program => (
         <ProgramTableRow
+          showRating={showRating}
           title={title}
           program={program}
           toggleFavorite={toggleFavorite}
