@@ -41,7 +41,6 @@ class ProgramsRatingPage extends Component {
   render() {
     const { t, levelData } = this.props;
     const { tab, level } = this.state;
-    console.log(levelData);
     const currentLevelData = levelData ? levelData[level] : null;
     if (!tab) return null;
     return (
@@ -67,7 +66,6 @@ class ProgramsRatingPage extends Component {
   }
 }
 const mapStateToProps = state => {
-  console.log(state);
   const levelData = state.programsRating.levelupSummary.data
     ? state.programsRating.levelupSummary.data
     : null;
