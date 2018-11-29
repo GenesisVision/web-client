@@ -1,9 +1,0 @@
-@import "styles/_breakpoint.scss";
-@import "styles/_sizes.scss";
-
-.manager {
-  margin-top: $padding-large-mobile;
-  @include media-breakpoint-landscape-phone() {
-    margin-top: $padding-large;
-  }
-}
