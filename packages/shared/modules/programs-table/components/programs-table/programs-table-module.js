@@ -49,7 +49,7 @@ const ProgramsTableModule = ({
       updatePaging={updatePaging}
       columns={columns || PROGRAMS_COLUMNS}
       items={data.programs}
-      isPending={data.isPending}
+      isPending={isPending || data.isPending}
       renderFilters={
         enableFiltering &&
         (() => (
