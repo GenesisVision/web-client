@@ -7,7 +7,6 @@ import Page from "shared/components/page/page";
 import TabsContainer from "shared/components/tabs-container/tabs-container";
 import * as routes from "../programs.routes";
 import { compose } from "redux";
-import connect from "react-redux/es/connect/connect";
 import ProgramsRatingTables from "shared/components/programs-rating/programs-rating-tables";
 import Surface from "shared/components/surface/surface";
 
@@ -32,7 +31,7 @@ class ProgramsRatingPage extends Component {
     this.setState({ tab });
   };
   render() {
-    const { t, id } = this.props;
+    const { t } = this.props;
     const { tab } = this.state;
     if (!tab) return null;
     return (
@@ -46,20 +45,11 @@ class ProgramsRatingPage extends Component {
               tab={tab}
             />
           </div>
-          <ProgramsRatingTables key={tab} tab={tab} id={id} rating={rating} />
+          <ProgramsRatingTables key={tab} tab={tab} rating={rating} />
         </Surface>
       </Page>
     );
   }
 }
 
-const mapStateToProps = state => {
-  const { data } = state.profileHeader.info;
-  if (!data) return {};
-  return { id: data.id };
-};
-
-export default compose(
-  translate(),
-  connect(mapStateToProps)
-)(ProgramsRatingPage);
+export default compose(translate())(ProgramsRatingPage);
