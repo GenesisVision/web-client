@@ -93,7 +93,12 @@ class Table extends Component {
               >
                 {renderHeader}
               </TableHeader>
-              <TableBody items={items} className="table__body" tag="tbody">
+              <TableBody
+                isPending={isPending}
+                items={items}
+                className="table__body"
+                tag="tbody"
+              >
                 {renderBodyRow}
               </TableBody>
             </table>

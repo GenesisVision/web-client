@@ -65,6 +65,7 @@ class ProgramsRatingTable extends Component {
     if (!programs || !programs.total) return null;
     return (
       <ProgramsTableModule
+        isPending={isPending}
         columns={COLUMNS}
         showRating
         title={title}
