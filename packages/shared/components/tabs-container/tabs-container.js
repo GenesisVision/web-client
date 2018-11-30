@@ -11,9 +11,13 @@ class TabsContainer extends Component {
     const { tabs, tab, handleTabChange } = this.props;
     return (
       <Scrollbars autoHeight autoHeightMax={40}>
-        <GVTabs value={tab} onChange={handleTabChange}>
+        <GVTabs value={tab.name} onChange={handleTabChange}>
           {tabs.map(tab => (
-            <GVTab key={tab} value={tab} label={tab} />
+            <GVTab
+              key={tab.name}
+              value={tab.name}
+              label={`${tab.name} ${tab.count ? ` (${tab.count})` : ""}`}
+            />
           ))}
         </GVTabs>
       </Scrollbars>
