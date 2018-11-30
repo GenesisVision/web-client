@@ -23,7 +23,11 @@ const ProgramsPage = ({ t }) => {
         assetsFacets={"programsFacets"}
         composeFacetUrl={composeProgramFacetUrl}
       />
-      <ProgramsContainer title={"All programs"} />
+      <ProgramsContainer
+        enableFiltering
+        showSwitchView
+        title={"All programs"}
+      />
     </Page>
   );
 };
