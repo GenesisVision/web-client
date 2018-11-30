@@ -62,7 +62,7 @@ class AuthLayout extends Component {
           </div>
           {Footer && (
             <div className="auth__footer">
-              <Footer SIGNUP_ROUTE={SIGNUP_ROUTE || LOGIN_ROUTE} />
+              <Footer ROUTE={SIGNUP_ROUTE || LOGIN_ROUTE} />
             </div>
           )}
         </div>
