@@ -16,14 +16,14 @@
   &__header {
     padding: $padding-xsmall;
 
-    @media (min-width: 14000px) {
+    @media (min-width: 1400px) {
       padding: $padding-xsmall 0;
     }
   }
 
   &__main {
     padding: $padding-medium-mobile $padding-xsmall $padding-big;
-    @media (min-width: 14000px) {
+    @media (min-width: 1400px) {
       padding: $padding-medium 0 $padding-big;
     }
   }
