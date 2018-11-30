@@ -32,7 +32,10 @@ class EmailConfirmContainer extends PureComponent {
 }
 
 const mapDispatchToProps = (dispatch, props) => ({
-  service: bindActionCreators({emailConfirmService: props.emailConfirmService}, dispatch),
+  service: bindActionCreators(
+    { emailConfirmService: props.emailConfirmService },
+    dispatch
+  ),
   showNotFoundPage: () => dispatch(replace(NOT_FOUND_PAGE_ROUTE))
 });
 
