@@ -3,7 +3,7 @@ import React, { Fragment } from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
 
-const signUpFooter = ({ t, LOGIN_ROUTE }) => (
+const SignUpFooter = ({ t, LOGIN_ROUTE }) => (
   <Fragment>
     <span className="signup-footer__desc">{t("auth.signup.footer-text")}</span>
     <Link to={LOGIN_ROUTE}>
@@ -14,4 +14,4 @@ const signUpFooter = ({ t, LOGIN_ROUTE }) => (
   </Fragment>
 );
 
-export default translate()(signUpFooter);
+export default translate()(SignUpFooter);
