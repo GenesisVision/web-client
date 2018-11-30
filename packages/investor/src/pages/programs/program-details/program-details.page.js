@@ -13,7 +13,7 @@ import ProgramDetailsHistorySection from "shared/components/programs/program-det
 import ProgramDetailsStatisticSection from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import {
   getProgramDescription,
-  getProgramStatistic,
+  getProgramStatistic
 } from "./services/program-details.service";
 import { toggleReinvesting } from "modules/program-reinvesting/services/program-reinvesting.service";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";

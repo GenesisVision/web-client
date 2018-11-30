@@ -23,7 +23,6 @@ class FacetCard extends Component {
 
   render() {
     const { facet, composeFacetUrl, title } = this.props;
-
     return (
       <Surface
         className={classnames("surface--without-paddings facet", {

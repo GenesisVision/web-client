@@ -79,7 +79,9 @@ class ProfileImage extends Component {
 
     return (
       <div className="profile-image">
-        <h3 className="profile-image__title">{t("profile.settings.profile-image")}</h3>
+        <h3 className="profile-image__title">
+          {t("profile.settings.profile-image")}
+        </h3>
 
         <div className="profile-image__requirements">
           {t("profile.settings.image-requirements")}

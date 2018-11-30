@@ -30,21 +30,18 @@
   }
 
   &__tabs {
-    @include horizontal-paddings($padding-small);
+    @include horizontal-paddings($padding-small, 2);
   }
 
   &__heading {
-    @include horizontal-paddings($padding-small);
+    @include horizontal-paddings($padding-small, 2);
   }
 
   &__loading {
-    padding: $padding-small-mobile;
-    font-size: $font-size-h4-mobile;
+    @include horizontal-paddings($padding-small, 2);
+    @include vertical-paddings($padding-small);
+    @include font-size($font-size-h4);
     letter-spacing: 0.2px;
     opacity: 0.4;
-    @include media-breakpoint-landscape-phone() {
-      padding: $padding-small;
-      font-size: $font-size-h4;
-    }
   }
 }

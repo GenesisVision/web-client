@@ -21,6 +21,7 @@
       "favorites": "Favorites"
     },
     "programs-header": {
+      "position": "Position",
       "title": "Name",
       "balance": "Balance",
       "currency": "Curr.",
@@ -1250,5 +1251,13 @@
         }
       }
     }
+  },
+  "rating": {
+    "title": "Programs rating",
+    "pretendents-title": "Pretendents",
+    "self-pretendents-title": "Your pretendents",
+    "programCounts": "Programs",
+    "quota": "Quota",
+    "currentProfit": "Current target profit"
   }
 }

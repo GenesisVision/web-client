@@ -1,12 +1,12 @@
 import "./program-simple-chart.scss";
 
+import React from "react";
+import { Area, AreaChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 import { formartChartMinValue } from "shared/components/chart/chart-components/chart-components.helpers";
 import ProgramChartGradient, {
   gradientOffset
 } from "shared/components/chart/chart-gradient/chart-gradient";
 import { getStrokeColor } from "shared/components/chart/chart-gradient/chart-gradient";
-import React from "react";
-import { Area, AreaChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 
 const AREA_MARGIN = { left: 0, right: 0 };
 

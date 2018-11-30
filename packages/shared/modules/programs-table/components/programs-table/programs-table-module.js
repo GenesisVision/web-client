@@ -17,6 +17,10 @@ import SelectFilter from "shared/components/table/components/filtering/select-fi
 
 const ProgramsTableModule = ({
   t,
+  columns,
+  showRating,
+  enableFiltering,
+  showSwitchView,
   currencies,
   data,
   isPending,
@@ -33,40 +37,44 @@ const ProgramsTableModule = ({
 }) => {
   const selectFilterValues = [
     { value: undefined, label: "All" },
-    ...currencies.map(x => ({ value: x, label: x }))
+    ...(currencies || []).map(x => ({ value: x, label: x }))
   ];
   return (
     <Table
       title={title}
+      showSwitchView={showSwitchView}
       sorting={sorting}
       updateSorting={updateSorting}
       paging={paging}
       updatePaging={updatePaging}
-      columns={PROGRAMS_COLUMNS}
+      columns={columns || PROGRAMS_COLUMNS}
       items={data.programs}
-      isPending={data.isPending}
-      renderFilters={() => (
-        <Fragment>
-          <LevelFilter
-            name={LEVEL_FILTER_NAME}
-            value={filtering[LEVEL_FILTER_NAME]}
-            onChange={updateFilter}
-          />
-          <SelectFilter
-            name={CURRENCY_FILTER_NAME}
-            label="Currency"
-            value={filtering[CURRENCY_FILTER_NAME]}
-            values={selectFilterValues}
-            onChange={updateFilter}
-          />
-          <DateRangeFilter
-            name={DATE_RANGE_FILTER_NAME}
-            value={filtering[DATE_RANGE_FILTER_NAME]}
-            onChange={updateFilter}
-            startLabel={t("filters.date-range.program-start")}
-          />
-        </Fragment>
-      )}
+      isPending={isPending || data.isPending}
+      renderFilters={
+        enableFiltering &&
+        (() => (
+          <Fragment>
+            <LevelFilter
+              name={LEVEL_FILTER_NAME}
+              value={filtering[LEVEL_FILTER_NAME]}
+              onChange={updateFilter}
+            />
+            <SelectFilter
+              name={CURRENCY_FILTER_NAME}
+              label="Currency"
+              value={filtering[CURRENCY_FILTER_NAME]}
+              values={selectFilterValues}
+              onChange={updateFilter}
+            />
+            <DateRangeFilter
+              name={DATE_RANGE_FILTER_NAME}
+              value={filtering[DATE_RANGE_FILTER_NAME]}
+              onChange={updateFilter}
+              startLabel={t("filters.date-range.program-start")}
+            />
+          </Fragment>
+        ))
+      }
       renderHeader={column => {
         if (!isAuthenticated && column.name === "favorite") return null;
         return (
@@ -81,6 +89,7 @@ const ProgramsTableModule = ({
       }}
       renderBodyRow={program => (
         <ProgramTableRow
+          showRating={showRating}
           title={title}
           program={program}
           toggleFavorite={toggleFavorite}

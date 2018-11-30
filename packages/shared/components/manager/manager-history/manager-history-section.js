@@ -4,8 +4,8 @@ import { GVTab, GVTabs } from "gv-react-components";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import Surface from "shared/components/surface/surface";
-import ProgramsTable from "shared/modules/programs-table/components/programs-table/programs-table";
 import FundsTable from "shared/modules/funds-table/components/funds-table/funds-table";
+import ProgramsTable from "shared/modules/programs-table/components/programs-table/programs-table";
 
 const PROGRAMS_TAB = "programs";
 const FUNDS_TAB = "funds";
