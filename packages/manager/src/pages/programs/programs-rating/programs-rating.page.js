@@ -11,7 +11,6 @@ import ProgramsRatingContainer from "shared/components/programs-rating/programs-
 class ProgramsRatingPage extends Component {
   render() {
     const { t, id } = this.props;
-    if (!id) return null;
     return (
       <Page title={t("rating.title")}>
         <ProgramsRatingContainer routes={routes} id={id} />
