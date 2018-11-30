@@ -39,6 +39,7 @@ const ProgramTableRowShort = ({
     tags,
     rating
   } = program;
+  const stopPropagationEvent = event => event.stopPropagation();
   return (
     <TableRow
       className={classnames({
@@ -54,6 +55,7 @@ const ProgramTableRowShort = ({
               pathname: composeProgramDetailsUrl(url),
               state: `/ ${title}`
             }}
+            onClick={stopPropagationEvent}
           >
             <AssetAvatar
               url={logo}
@@ -69,6 +71,7 @@ const ProgramTableRowShort = ({
                   pathname: composeProgramDetailsUrl(url),
                   state: `/ ${title}`
                 }}
+                onClick={stopPropagationEvent}
               >
                 <GVButton variant="text" color="secondary">
                   {program.title}
