@@ -9,21 +9,21 @@
     min-height: 100vh;
   }
 
-  @media (min-width: 1360px) {
+  @media (min-width: 1400px) {
     max-width: 1360px;
   }
 
   &__header {
     padding: $padding-xsmall;
 
-    @media (min-width: 1360px) {
+    @media (min-width: 1400px) {
       padding: $padding-xsmall 0;
     }
   }
 
   &__main {
     padding: $padding-medium-mobile $padding-xsmall $padding-big;
-    @media (min-width: 1360px) {
+    @media (min-width: 1400px) {
       padding: $padding-medium 0 $padding-big;
     }
   }

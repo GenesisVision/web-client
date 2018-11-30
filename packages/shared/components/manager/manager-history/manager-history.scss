@@ -9,25 +9,24 @@
   }
 
   &__heading {
-    padding: $padding-small-mobile;
+    @include horizontal-paddings($padding-small, 2);
+    @include vertical-paddings($padding-small);
     font-size: $font-size-h3-mobile;
     letter-spacing: 0.2px;
     font-weight: 600;
     @include media-breakpoint-landscape-phone() {
-      padding: $padding-small;
       font-size: $font-size-h3;
     }
   }
 
   &__subheading {
+    @include adaptive-padding(left, $padding-small, 2);
     font-size: $font-size-paragraph-mobile;
     padding-bottom: $padding-xsmall-mobile;
-    padding-left: $padding-small-mobile;
     letter-spacing: 0.2px;
     font-weight: 600;
     @include media-breakpoint-landscape-phone() {
       padding-bottom: $padding-xsmall;
-      padding-left: $padding-small;
       font-size: $font-size-paragraph;
     }
   }
@@ -40,12 +39,11 @@
     }
   }
   &__tabs {
-    padding: 0 $padding-small-mobile;
+    @include horizontal-paddings($padding-small, 2);
     .gv-tab {
       font-size: $font-size-paragraph-mobile;
     }
     @include media-breakpoint-landscape-phone() {
-      padding: 0 $padding-small;
       .gv-tab {
         font-size: $font-size-paragraph;
       }
