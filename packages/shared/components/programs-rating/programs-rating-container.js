@@ -34,7 +34,7 @@ class ProgramsRatingContainer extends Component {
   handleTabChange = (e, tab) => {
     const { navigateTabs } = this.state;
     const navigateTab = navigateTabs.find(item => item.name === tab);
-    this.setState({ tab: navigateTab, level: navigateTab.level });
+    this.setState({ tab: navigateTab });
   };
   render() {
     const { id, levelData, routes } = this.props;
