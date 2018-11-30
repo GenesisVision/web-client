@@ -5,25 +5,7 @@ import { bindActionCreators, compose } from "redux";
 import ProgramsTableModule from "shared/modules/programs-table/components/programs-table/programs-table-module";
 
 import { getProgramsRating } from "./services/program-rating-service";
-import { PROGRAMS_COLUMNS } from "shared/modules/programs-table/components/programs-table/programs.constants";
-
-export const LEVELS = {
-  "2": "2 > 3",
-  "3": "3 > 4",
-  "4": "4 > 5",
-  "5": "5 > 6",
-  "6": "6 > 7"
-};
-
-const COLUMNS = [
-  {
-    name: "position"
-  },
-  ...PROGRAMS_COLUMNS
-];
-
-const SELF_PROGRAMS = "selfPrograms";
-const PROGRAMS = "programs";
+import { COLUMNS, PROGRAMS, SELF_PROGRAMS } from "./program-rating.constants";
 
 class ProgramsRatingTable extends Component {
   state = {

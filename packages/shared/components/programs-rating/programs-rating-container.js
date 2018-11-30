@@ -8,7 +8,7 @@ import connect from "react-redux/es/connect/connect";
 import ProgramsRatingTables from "shared/components/programs-rating/programs-rating-tables";
 import Surface from "shared/components/surface/surface";
 import { getLevelUpSummary } from "shared/components/programs-rating/services/program-rating-service";
-import { LEVELS } from "shared/components/programs-rating/programs-rating-table";
+import { LEVELS } from "./program-rating.constants";
 
 class ProgramsRatingContainer extends Component {
   state = {
