@@ -13,7 +13,7 @@ class ProgramsRatingPage extends Component {
     const { t, id } = this.props;
     if (!id) return null;
     return (
-      <Page title={t("programs-page.title")}>
+      <Page title={t("rating.title")}>
         <ProgramsRatingContainer routes={routes} id={id} />
       </Page>
     );
