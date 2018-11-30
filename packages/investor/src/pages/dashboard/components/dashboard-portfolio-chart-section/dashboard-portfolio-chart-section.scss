@@ -33,10 +33,7 @@
   }
 
   .dashboard-portfolio-chart-stat {
-    padding: 0 $padding-small-mobile;
-    @include media-breakpoint-landscape-phone() {
-      padding: 0 $padding-small;
-    }
+    @include horizontal-paddings($padding-small, 2);
     & > div {
       display: inline-flex;
       margin-right: 40px;

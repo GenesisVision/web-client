@@ -34,6 +34,8 @@
   }
 
   .dashboard-portfolio-chart-stat {
+    @include horizontal-paddings($padding-small, 2);
+
     &__statistic-item {
       margin-top: 15px;
     }
