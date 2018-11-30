@@ -1,10 +1,10 @@
 import { getCookie } from "./cookie";
-import { getItem } from "./localstorage";
+import { loadData } from "./localstorage";
 
 export const getRef = () => {
-  const ref = getItem("ref");
+  const ref = loadData("ref");
   if (ref) {
-    return ref;
+    return ref.value;
   }
   return getCookie("ref");
 };

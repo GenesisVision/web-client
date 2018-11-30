@@ -16,7 +16,7 @@ const SignUpFormContainer = ({
     service.signUp(signUpFormData, setSubmitting);
   };
 
-  let refCode = getRef();
+  const refCode = getRef();
 
   return (
     <SignUpForm
