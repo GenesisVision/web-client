@@ -23,7 +23,7 @@ class AuthLayout extends Component {
   }
 
   render() {
-    const { t, children, title, Footer, HOME_ROUTE } = this.props;
+    const { t, children, title, Footer, HOME_ROUTE, SIGNUP_ROUTE } = this.props;
     const { quoteNo } = this.state;
 
     return (
@@ -54,7 +54,7 @@ class AuthLayout extends Component {
           </div>
           {Footer && (
             <div className="auth__footer">
-              <Footer />
+              <Footer SIGNUP_ROUTE={SIGNUP_ROUTE} />
             </div>
           )}
         </div>
