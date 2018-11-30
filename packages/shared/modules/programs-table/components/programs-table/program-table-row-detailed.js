@@ -14,6 +14,7 @@ import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import { formatValue } from "shared/utils/formatter";
 import ProgramBigChart from "./program-big-chart/program-big-chart";
+import classnames from "classnames";
 
 class ProgramTableRowDetailed extends Component {
   state = {
@@ -32,7 +33,12 @@ class ProgramTableRowDetailed extends Component {
 
     return (
       <TableRow>
-        <td className="program-detailed" colSpan="11">
+        <td
+          className={classnames("program-detailed", {
+            "program-detailed--pretender": program.rating.canLevelUp
+          })}
+          colSpan="11"
+        >
           <div className="program-detailed__container program-detailed__container--outer">
             <div className="program-detailed__container program-detailed__container--inner">
               <div className="program-detailed__info">

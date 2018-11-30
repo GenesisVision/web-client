@@ -25,12 +25,14 @@ import loginReducer from "../pages/auth/login/reducers/login.reducers";
 import signUpReducer from "../pages/auth/signup/reducers/signup.reducers";
 import dashboardReducer from "../pages/dashboard/reducers/dashboard.reducers";
 import managerReducer from "../pages/manager/reducers/manager.reducers";
+import programsRatingReducer from "shared/components/programs-rating/reducers/programs-rating.reducers";
 
 export default combineReducers({
   routing: routerReducer,
   loadingBar: loadingBarReducer,
   platformData: platformReducer,
   programsData: programsReducer,
+  programsRating: programsRatingReducer,
   fundsData: fundsReducer,
   loginData: loginReducer,
   signUpData: signUpReducer,

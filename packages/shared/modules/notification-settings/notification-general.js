@@ -40,7 +40,9 @@ class NotificationGeneral extends Component {
     const { PlatformNewsAndUpdates, PlatformEmergency, programId } = settings;
     return (
       <div className="notification-settings">
-        <h3 className="notification-settings__subtitle">{t("notifications.general.title")}</h3>
+        <h3 className="notification-settings__subtitle">
+          {t("notifications.general.title")}
+        </h3>
         <GeneralNotification
           name="PlatformNewsAndUpdates"
           label={t("notifications.general.news-updates")}

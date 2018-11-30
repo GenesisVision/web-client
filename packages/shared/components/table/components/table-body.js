@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { translate } from "react-i18next";
 
-const TableBody = ({ t, items, children, tag: Tag, className }) => {
+const TableBody = ({ t, items, children, tag: Tag, className, isPending }) => {
   const setMessage = message => {
     return Tag === "tbody" ? (
       <tr>
@@ -15,7 +15,7 @@ const TableBody = ({ t, items, children, tag: Tag, className }) => {
   };
 
   const renderItems = () => {
-    if (items === null || items === undefined)
+    if (isPending || items === null || items === undefined)
       return setMessage(t("table.loading"));
     if (items.length === 0) return setMessage(t("table.no-items"));
     return items.map((x, idx) => (

@@ -19,6 +19,9 @@
   }
 
   &__cell {
+    @include adaptive-padding(right, $padding-medium);
+    @include vertical-paddings($padding-xxsmall);
+
     &--direction {
       width: 10%;
       min-width: 83px;
