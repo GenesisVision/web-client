@@ -10,7 +10,7 @@ export const getProgramsRating = filters => dispatch => {
   const { tab, managerId, itemsOnPage, currentPage } = filters;
   const requestFilters = {
     managerId,
-    levelUpFrom: LEVELS[tab],
+    levelUpFrom: tab,
     take: itemsOnPage,
     skip: itemsOnPage * (currentPage - 1)
   };
@@ -23,5 +23,5 @@ export const getProgramsRating = filters => dispatch => {
 
 export const getLevelUpSummary = () => dispatch => {
   const authorization = authService.getAuthArg();
-  dispatch(fetchLevelUpSummary({ authorization }));
+  return dispatch(fetchLevelUpSummary({ authorization }));
 };
