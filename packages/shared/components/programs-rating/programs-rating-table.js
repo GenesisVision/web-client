@@ -8,14 +8,12 @@ import { getProgramsRating } from "./services/program-rating-service";
 import { PROGRAMS_COLUMNS } from "shared/modules/programs-table/components/programs-table/programs.constants";
 
 export const LEVELS = {
-  "1 > 2": 1,
-  "2 > 3": 2,
-  "3 > 4": 3,
-  "5 > 6": 5,
-  "7 > 8": 7
+  "2": "2 > 3",
+  "3": "3 > 4",
+  "4": "4 > 5",
+  "5": "5 > 6",
+  "6": "6 > 7"
 };
-
-export const TABS = ["1 > 2", "2 > 3", "3 > 4", "5 > 6", "7 > 8"];
 
 const COLUMNS = [
   {
