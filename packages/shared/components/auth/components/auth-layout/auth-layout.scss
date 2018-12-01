@@ -17,6 +17,7 @@
     display: flex;
     position: relative;
     flex-direction: column;
+    padding: $padding-small 0;
   }
 
   &__right {
