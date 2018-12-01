@@ -12,8 +12,14 @@ class LoginFormContainer extends Component {
     this.props.service.login(loginFormData, this.props.from, setSubmitting);
   };
   render() {
-    const { errorMessage } = this.props;
-    return <LoginForm onSubmit={this.handleSubmit} error={errorMessage} />;
+    const { errorMessage, FORGOT_PASSWORD_ROUTE } = this.props;
+    return (
+      <LoginForm
+        onSubmit={this.handleSubmit}
+        error={errorMessage}
+        FORGOT_PASSWORD_ROUTE={FORGOT_PASSWORD_ROUTE}
+      />
+    );
   }
 }
 
