@@ -1,0 +1,22 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
+
+.details-history {
+  &__heading {
+    @include horizontal-paddings($padding-small, 2);
+  }
+
+  &__subheading {
+    @include adaptive-padding(left, $padding-small, 2);
+    @include adaptive-padding(bottom, $padding-xsmall);
+    @include font-size($font-size-paragraph);
+    font-size: $font-size-paragraph-mobile;
+    letter-spacing: 0.2px;
+    font-weight: 600;
+  }
+
+  &__tabs {
+    @include horizontal-paddings($padding-small, 2);
+  }
+}

@@ -1,0 +1,106 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+
+.broker-card {
+  box-sizing: border-box;
+  width: 115px;
+  height: 115px;
+  border-radius: 8px;
+  background-color: transparent;
+  border: 1px solid $panel-background-color;
+  margin-right: 25px;
+  margin-bottom: 25px;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &--active {
+    background-color: $panel-background-color;
+  }
+
+  &--coming-soon {
+    overflow: hidden;
+    cursor: not-allowed;
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.008);
+    }
+  }
+
+  &__coming-soon-text {
+    font-size: 11px;
+    color: $text-color;
+    letter-spacing: 0.14px;
+    font-weight: 600;
+    opacity: 0.3;
+    position: absolute;
+    bottom: 12%;
+    left: 12%;
+  }
+
+  &__logo {
+    width: 70%;
+    height: 30%;
+
+    &--gm {
+      width: 90%;
+      height: 90%;
+    }
+  }
+
+  &--coming-soon &__logo {
+    &--okex {
+      width: 61.6%;
+      height: 23%;
+    }
+    &--huobi {
+      width: 70%;
+      height: 17.5%;
+    }
+    &--just2trade {
+      width: 79%;
+      height: 11.6%;
+    }
+    &--roboforex {
+      width: 70%;
+      height: 15%;
+    }
+    &--idex {
+      width: 65.7%;
+      height: 16.2%;
+    }
+  }
+
+  &__active-mark {
+    display: inline-flex;
+    justify-content: center;
+    line-height: 34px;
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    border-radius: 17px;
+    background-color: $primary-color;
+    color: $text-light-color;
+    content: "&#10004;";
+    top: -8px;
+    right: -8px;
+  }
+
+  @include media-breakpoint-tablet() {
+    width: 137px;
+    height: 137px;
+    border-radius: 10px;
+  }
+
+  @include media-breakpoint-desktop() {
+    width: 150px;
+    height: 150px;
+    border-radius: 12px;
+  }
+}

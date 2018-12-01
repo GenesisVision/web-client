@@ -1,0 +1,39 @@
+@import "~shared/styles/_colors.scss";
+
+.level-filter {
+  width: 200px;
+  margin: 0 25px;
+
+  &__btns {
+    text-align: end;
+  }
+
+  &__btn {
+    padding: 1em;
+  }
+
+  .rc-slider {
+    margin: 1.5rem 0;
+  }
+
+  .rc-slider-track {
+    background-color: $primary-color;
+  }
+
+  .rc-slider-handle {
+    border-color: $primary-color;
+  }
+
+  .rc-slider-handle:hover {
+    border-color: $primary-color;
+  }
+  .rc-slider-handle:active,
+  .rc-slider-handle:focus {
+    border-color: $primary-color;
+    box-shadow: 0 0 5px $primary-color;
+  }
+
+  .rc-slider-dot-active {
+    border-color: $primary-color;
+  }
+}

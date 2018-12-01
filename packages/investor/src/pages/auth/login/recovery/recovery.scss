@@ -1,0 +1,24 @@
+@import "~shared/styles/_colors.scss";
+
+.recovery-page {
+  display: flex;
+  flex-grow: 1;
+}
+
+.recovery-form {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  &__text {
+    line-height: 24px;
+    margin-bottom: 40px;
+    color: $text-color;
+    font-size: 16px;
+  }
+
+  &__submit {
+    margin-top: auto;
+    align-self: flex-start;
+  }
+}

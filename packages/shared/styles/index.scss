@@ -1,0 +1,39 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700");
+@import "~gv-react-components/dist/index.css";
+@import "./_colors.scss";
+@import "./_typography.scss";
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: $background-color;
+  font-family: "Montserrat", sans-serif;
+}
+
+input,
+textarea,
+select,
+button {
+  font-family: "Montserrat", sans-serif;
+}
+
+.root,
+.app__scroll,
+.app__body {
+  height: 100vh;
+  color: white;
+}
+
+*::-webkit-scrollbar {
+  //fix for hidden scroll after zoom page, because we are using custom scroll
+  width: 0;
+  height: 0;
+}
+
+.app__title-page {
+  @include adaptive-padding(bottom, $padding-medium);
+}
+
+.app__title-details {
+  @include adaptive-padding(bottom, $padding-xxsmall);
+}
