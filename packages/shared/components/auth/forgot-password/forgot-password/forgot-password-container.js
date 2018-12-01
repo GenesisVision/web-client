@@ -6,13 +6,20 @@ import ForgotPassword from "./forgot-password";
 const ForgotPasswordContainer = ({
   isPending,
   errorMessage,
-  forgotPassword
+  forgotPassword,
+  LOGIN_ROUTE
 }) => {
   const handleSubmit = (formData, setSubmitting) => {
     forgotPassword(formData, setSubmitting);
   };
 
-  return <ForgotPassword error={errorMessage} onSubmit={handleSubmit} />;
+  return (
+    <ForgotPassword
+      error={errorMessage}
+      onSubmit={handleSubmit}
+      LOGIN_ROUTE={LOGIN_ROUTE}
+    />
+  );
 };
 
 const mapStateToProps = state => {
