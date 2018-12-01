@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { replace } from "react-router-redux";
 import { NOT_FOUND_PAGE_ROUTE } from "shared/components/not-found/not-found.routes";
-
-import { RECOVERY_CODE } from "../../actions/login.actions";
-import { clearLoginData, twoFactorLogin } from "../../services/login.service";
 import RecoveryCodeForm from "./recovery-code-form";
 
 class RecoveryCodeContainer extends Component {
@@ -39,13 +36,13 @@ const mapStateToProps = state => {
   return { errorMessage, email, password };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, props) => ({
   twoFactorLogin: (code, setSubmitting) => {
-    dispatch(twoFactorLogin(code, RECOVERY_CODE, setSubmitting));
+    dispatch(props.twoFactorLogin(code, props.RECOVERY_CODE, setSubmitting));
   },
   showNotFoundPage: () => dispatch(replace(NOT_FOUND_PAGE_ROUTE)),
   clearLoginData: () => {
-    dispatch(clearLoginData());
+    dispatch(props.clearLoginData());
   }
 });
 
