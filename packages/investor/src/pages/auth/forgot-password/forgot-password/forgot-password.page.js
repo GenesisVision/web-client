@@ -1,9 +1,11 @@
-import "./forgot-password.scss";
+import "shared/components/auth/forgot-password/forgot-password/forgot-password.scss";
 
 import React from "react";
 import { translate } from "react-i18next";
 
-import ForgotPasswordContainer from "./components/forgot-password-container";
+import ForgotPasswordContainer from "shared/components/auth/forgot-password/forgot-password/forgot-password-container";
+import forgotPasswordService from "../services/forgot-password.service";
+import { LOGIN_ROUTE } from "../../login/login.routes";
 
 const ForgotPasswordPage = ({ t }) => {
   return (
@@ -11,7 +13,10 @@ const ForgotPasswordPage = ({ t }) => {
       <p className="forgot-password__text">
         {t("auth.password-restore.forgot-password.text")}
       </p>
-      <ForgotPasswordContainer />
+      <ForgotPasswordContainer
+        forgotPasswordService={forgotPasswordService}
+        LOGIN_ROUTE={LOGIN_ROUTE}
+      />
     </div>
   );
 };
