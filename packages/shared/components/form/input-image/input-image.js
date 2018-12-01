@@ -123,18 +123,18 @@ class InputImage extends Component {
                 />
               )}
 
-              {!isNew &&
-                !isDefault && (
-                  <span
-                    className="input-image__preview-img"
-                    style={{
-                      backgroundImage: `url(${src})`
-                    }}
-                  />
-                )}
+              {!isNew && !isDefault && (
+                <span
+                  className="input-image__preview-img"
+                  style={{
+                    backgroundImage: `url(${src})`
+                  }}
+                />
+              )}
 
-              {!isNew &&
-                isDefault && <InputImageDefault defaultImage={defaultImage} />}
+              {!isNew && isDefault && (
+                <InputImageDefault defaultImage={defaultImage} />
+              )}
             </div>
             <p className="input-image__text input-image__text--big">
               Drag the image here or click{" "}
