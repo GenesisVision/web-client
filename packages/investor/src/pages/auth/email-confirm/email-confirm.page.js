@@ -4,7 +4,7 @@ import React from "react";
 import { translate } from "react-i18next";
 
 import AuthLayout from "shared/components/auth/components/auth-layout/auth-layout";
-import EmailConfirmContainer from "shared/components/auth/email-confirm/components/email-confirm-container";
+import EmailConfirmContainer from "shared/components/auth/email-confirm/email-confirm-container";
 import { HOME_ROUTE } from "pages/app/app.routes";
 import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
 import * as emailConfirmService from "./service/email-confirm.service";
