@@ -34,7 +34,9 @@ class TableHeader extends Component {
       return (
         <TableHeadCell
           key={column.name}
-          sortable={this.isSortable(column.sortingName)}
+          sortable={
+            !!this.props.updateSorting && this.isSortable(column.sortingName)
+          }
           onClick={this.handleSorting(column.sortingName)}
           sortingDirection={this.getSortingDirection(column.sortingName)}
         >

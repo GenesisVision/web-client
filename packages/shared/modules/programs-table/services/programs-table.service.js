@@ -40,6 +40,18 @@ export const getPrograms = filters => (dispatch, getState) => {
   dispatch(programTableActions.fetchPrograms(requestFilters));
 };
 
+export const fetchPrograms = filters => {
+  const requestFilters = { ...filters };
+  if (authService.getAuthArg()) {
+    requestFilters.authorization = authService.getAuthArg();
+  }
+  return programTableActions
+    .fetchPrograms(requestFilters)
+    .payload.then(data => {
+      return { programs: data.programs, total: data.total };
+    });
+};
+
 const composeRequestFilters = () => (dispatch, getState) => {
   let itemsOnPage = DEFAULT_ITEMS_ON_PAGE;
   const existingFilters = dispatch(getProgramsFilters());

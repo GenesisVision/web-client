@@ -12,7 +12,7 @@
   }
 
   &--horizontal-paddings {
-    @include horizontal-paddings($padding-small);
+    @include horizontal-paddings($padding-small, 2);
   }
 
   .surface {
