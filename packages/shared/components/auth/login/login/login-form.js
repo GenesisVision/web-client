@@ -8,7 +8,13 @@ import FormError from "shared/components/form/form-error/form-error";
 
 import validationSchema from "./login-form.validators";
 
-const LoginForm = ({ t, isSubmitting, handleSubmit, error, FORGOT_PASSWORD_ROUTE }) => {
+const LoginForm = ({
+  t,
+  isSubmitting,
+  handleSubmit,
+  error,
+  FORGOT_PASSWORD_ROUTE
+}) => {
   return (
     <form
       id="loginForm"

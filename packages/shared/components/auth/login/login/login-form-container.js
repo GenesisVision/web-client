@@ -24,7 +24,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = (dispatch, props) => ({
-  service: bindActionCreators({loginService: props.loginService}, dispatch)
+  service: bindActionCreators({ loginService: props.loginService }, dispatch)
 });
 
 export default connect(
