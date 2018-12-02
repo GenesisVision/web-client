@@ -1,9 +1,10 @@
-import "./signup-email-pending.scss";
+import "shared/components/auth/signup/signup-email-pending.scss";
 
 import React from "react";
 import { translate } from "react-i18next";
 
-import SignupEmailPendingContainer from "./components/signup-email-pending/signup-email-pending-container";
+import SignupEmailPendingContainer from "shared/components/auth/signup/signup-email-pending/signup-email-pending-container";
+import { sendConfirmationLink } from "../services/signup-email-pending.service";
 
 const EmailPending = ({ t }) => {
   return (
@@ -12,7 +13,9 @@ const EmailPending = ({ t }) => {
       <p className="signup-email-pending__text">
         {t("auth.signup-email-pending.text-section")}
       </p>
-      <SignupEmailPendingContainer />
+      <SignupEmailPendingContainer
+        sendConfirmationLink={sendConfirmationLink}
+      />
     </div>
   );
 };

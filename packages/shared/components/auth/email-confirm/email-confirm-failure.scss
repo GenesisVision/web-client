@@ -1,0 +1,17 @@
+@import "../../../../../node_modules/shared/styles/colors";
+
+.email-confirm-failure {
+  &__main-text {
+    line-height: 24px;
+    margin-bottom: 40px;
+    color: $text-color;
+    font-size: 16px;
+  }
+
+  &__error-text {
+    color: $text-error;
+    line-height: 24px;
+    margin-bottom: 40px;
+    font-size: 16px;
+  }
+}
