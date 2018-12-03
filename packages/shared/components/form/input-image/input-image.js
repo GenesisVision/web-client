@@ -110,6 +110,7 @@ class InputImage extends Component {
             <div className="input-image__image-container">
               {isNew && (
                 <Cropper
+                  style={{ width: "100%" }}
                   ref={cropper => {
                     this.cropper = cropper;
                   }}
@@ -133,7 +134,9 @@ class InputImage extends Component {
               )}
 
               {!isNew && isDefault && (
-                <InputImageDefault defaultImage={defaultImage} />
+                <span className="input-image__preview-img">
+                  <InputImageDefault defaultImage={defaultImage} />
+                </span>
               )}
             </div>
             <p className="input-image__text input-image__text--big">

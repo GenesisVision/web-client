@@ -144,7 +144,7 @@
     margin-top: 30px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
 
     @include media-breakpoint-landscape-phone() {
       flex-direction: row;
@@ -245,8 +245,8 @@
     }
 
     &
-    .create-program-settings__leverage.gv-text-field--disabled
-    .select__value {
+      .create-program-settings__leverage.gv-text-field--disabled
+      .select__value {
       color: $text-light-color;
     }
 

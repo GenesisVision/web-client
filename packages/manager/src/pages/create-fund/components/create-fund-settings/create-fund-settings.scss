@@ -200,7 +200,7 @@ $asset-height-mobile: $asset-height/$divider-text;
     margin-top: 30px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
 
     @include media-breakpoint-landscape-phone() {
       flex-direction: row;
@@ -354,6 +354,10 @@ $asset-height-mobile: $asset-height/$divider-text;
 
   @include media-breakpoint-tablet() {
     margin-left: 0;
+  }
+  svg.fund-avatar__default-image {
+    width: 100%;
+    height: 100%;
   }
 }
 

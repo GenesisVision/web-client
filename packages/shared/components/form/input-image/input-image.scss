@@ -2,9 +2,10 @@
 @import "~shared/styles/_breakpoint.scss";
 
 .input-image {
-  width: 200px;
-  height: 200px;
+  width: 100%;
+  min-height: 200px;
   position: relative;
+  box-sizing: border-box;
 
   &--error {
     border-color: $text-error;
@@ -71,9 +72,8 @@
   &__text {
     font-size: 12px;
     color: $text-color;
-    margin-top: 6px;
-    margin-bottom: 0;
     text-align: center;
+    margin: 20px 20px 0;
 
     &-upload {
       color: $primary-color;
@@ -104,9 +104,7 @@
   }
 
   &__image-container {
-    padding: 20px;
     width: 100%;
-    height: 160px;
     box-sizing: border-box;
     display: flex;
     align-content: center;
@@ -117,6 +115,7 @@
     width: 120px;
     height: 120px;
     background-size: 120px 120px;
+    margin-top: 20px;
   }
 
   & img {
@@ -124,6 +123,7 @@
   }
 
   @include media-breakpoint-tablet() {
-    height: 210px;
+    width: 200px;
+    min-height: 200px;
   }
 }
