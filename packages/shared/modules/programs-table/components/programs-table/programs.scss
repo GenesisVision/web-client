@@ -214,13 +214,8 @@ $description-block-width: 250px;
       padding: $padding/10;
     }
     .gv-btn {
+      @include font-size($font-size-paragraph);
       padding: 0;
-      font-size: $font-size-paragraph-mobile;
-    }
-    @include media-breakpoint-landscape-phone() {
-      .gv-btn {
-        font-size: $font-size-paragraph;
-      }
     }
   }
   &--bottom {
