@@ -3,7 +3,8 @@
 
 .profile-input-image {
   width: 100%;
-  min-height: 200px;
+  min-width: 280px;
+  min-height: 280px;
   position: relative;
   box-sizing: border-box;
 
@@ -110,21 +111,28 @@
     display: flex;
     align-content: center;
     justify-content: center;
+
+    img {
+      max-width: 100%;
+    }
   }
 
   &__preview-img {
     margin: 20px 20px 0 20px;
-    width: 120px;
-    height: 120px;
-    background-size: 120px 120px;
-  }
-
-  & img {
-    max-width: 100%;
-  }
-
-  @include media-breakpoint-tablet() {
     width: 200px;
-    min-height: 200px;
+    height: 200px;
+    background-size: 120px 120px;
+    background-repeat: no-repeat;
+    background-position: center;
+    @include media-breakpoint-landscape-phone() {
+      width: 120px;
+      height: 120px;
+    }
+  }
+
+  @include media-breakpoint-landscape-phone() {
+    width: 220px;
+    min-width: 220px;
+    min-height: 220px;
   }
 }
