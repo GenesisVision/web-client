@@ -41,7 +41,6 @@ class ProgramDetailsPage extends PureComponent {
     this.profitChart = null;
     this.balanceChart = null;
     this.statistic = null;
-    this.trades = null;
   }
 
   componentDidMount() {

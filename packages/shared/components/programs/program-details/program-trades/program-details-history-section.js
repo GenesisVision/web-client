@@ -20,8 +20,7 @@ const EVENTS_FILTERING = {
 };
 class ProgramDetailsHistorySection extends PureComponent {
   state = {
-    tab: TRADES_TAB,
-    prevProps: null
+    tab: TRADES_TAB
   };
 
   handleTabChange = (e, tab) => {

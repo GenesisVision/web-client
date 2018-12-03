@@ -20,7 +20,7 @@ export const createFund = (createFundData, setSubmitting) => dispatch => {
   const authorization = authService.getAuthArg();
   let promise = Promise.resolve(null);
   if (createFundData.logo.cropped) {
-    promise = filesService.uploadFileProxy(
+    promise = filesService.uploadFile(
       createFundData.logo.cropped,
       authorization
     );

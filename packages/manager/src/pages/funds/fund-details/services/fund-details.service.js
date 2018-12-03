@@ -16,7 +16,7 @@ export const getFundDescription = () => (dispatch, getState) => {
     FUND_DETAILS_ROUTE
   )[FUNDS_SLUG_URL_PARAM_NAME];
 
-  return fundsApi.v10FundsByIdGetWithHttpInfo(programSlugUrl, {
+  return fundsApi.v10FundsByIdGet(programSlugUrl, {
     authorization
   });
 };
@@ -33,26 +33,26 @@ export const getFundStatistic = (fundId, currency, period = DEFAULT_PERIOD) => {
     fundsApi.v10FundsByIdChartsBalanceGet(fundId, chartFilter)
   ]).then(([profitChart, balanceChart]) => {
     const statistic = {
-      calmarRatio: profitChart.data.calmarRatio,
-      profitChangePercent: profitChart.data.profitChangePercent,
-      rebalances: profitChart.data.rebalances,
-      balance: profitChart.data.balance,
-      trades: profitChart.data.trades,
-      successTradesPercent: profitChart.data.successTradesPercent,
-      profitFactor: profitChart.data.profitFactor,
-      investors: profitChart.data.investors,
-      sharpeRatio: profitChart.data.sharpeRatio,
-      sortinoRatio: profitChart.data.sortinoRatio,
-      maxDrawdown: profitChart.data.maxDrawdown,
-      creationDate: profitChart.data.creationDate
+      calmarRatio: profitChart.calmarRatio,
+      profitChangePercent: profitChart.profitChangePercent,
+      rebalances: profitChart.rebalances,
+      balance: profitChart.balance,
+      trades: profitChart.trades,
+      successTradesPercent: profitChart.successTradesPercent,
+      profitFactor: profitChart.profitFactor,
+      investors: profitChart.investors,
+      sharpeRatio: profitChart.sharpeRatio,
+      sortinoRatio: profitChart.sortinoRatio,
+      maxDrawdown: profitChart.maxDrawdown,
+      creationDate: profitChart.creationDate
     };
     const profitChartData = {
-      totalGvtProfit: profitChart.data.totalGvtProfit,
-      totalProgramCurrencyProfit: profitChart.data.totalProgramCurrencyProfit,
-      programCurrency: profitChart.data.programCurrency,
-      profitChangePercent: profitChart.data.profitChangePercent,
-      pnLChart: profitChart.data.pnLChart,
-      equityChart: profitChart.data.equityChart
+      totalGvtProfit: profitChart.totalGvtProfit,
+      totalProgramCurrencyProfit: profitChart.totalProgramCurrencyProfit,
+      programCurrency: profitChart.programCurrency,
+      profitChangePercent: profitChart.profitChangePercent,
+      pnLChart: profitChart.pnLChart,
+      equityChart: profitChart.equityChart
     };
 
     return { statistic, profitChart: profitChartData, balanceChart };

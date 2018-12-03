@@ -14,7 +14,7 @@ export const editAsset = (id, editAssetData, type) => dispatch => {
   let data = editAssetData;
   let promise = Promise.resolve(null);
   if (data.logo.cropped) {
-    promise = filesService.uploadFileProxy(data.logo.cropped, authorization);
+    promise = filesService.uploadFile(data.logo.cropped, authorization);
   }
   return promise
     .then(response => {

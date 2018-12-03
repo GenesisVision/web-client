@@ -14,7 +14,7 @@ export const updateProfileAvatar = ({
   let photoSrc = null;
 
   filesService
-    .uploadFileProxy(croppedImage, authorization)
+    .uploadFile(croppedImage, authorization)
     .then(logoId => {
       photoSrc = filesService.getFileUrl(logoId);
       return profileApi.v10ProfileAvatarUpdateByFileIdPost(
