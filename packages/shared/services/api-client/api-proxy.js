@@ -6,20 +6,11 @@ const withApiProxy = api => {
       const originalMethod = target[property];
       if (typeof originalMethod !== "function") return originalMethod;
       return (...args) => {
-        return originalMethod
-          .apply(target, args)
-          .then(result => {
-            return {
-              isPending: false,
-              data: result
-            };
-          })
-          .catch(ex => {
-            return Promise.reject({
-              isPending: false,
-              ...handleErrorResponse(ex.response)
-            });
+        return originalMethod.apply(target, args).catch(ex => {
+          return Promise.reject({
+            ...handleErrorResponse(ex.response)
           });
+        });
       };
     }
   });
