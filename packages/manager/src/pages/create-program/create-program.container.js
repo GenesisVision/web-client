@@ -111,7 +111,7 @@ class CreateProgramContainer extends Component {
               <CreateProgramSettings
                 navigateBack={navigateToBroker}
                 broker={choosedBroker}
-                balance={headerData.totalBalanceGvt}
+                balance={headerData.availableGvt}
                 updateBalance={service.fetchBalance}
                 onSubmit={handleSubmit}
                 author={headerData.name}
@@ -155,5 +155,8 @@ const mapDispatchToProps = dispatch => {
 
 export default compose(
   translate(),
-  connect(mapStateToProps, mapDispatchToProps)
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
 )(CreateProgramContainer);
