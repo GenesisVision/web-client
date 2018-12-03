@@ -111,6 +111,7 @@ class ProfileInputImage extends Component {
             <div className="profile-input-image__image-container">
               {isNew && (
                 <Cropper
+                  style={{ width: "100%" }}
                   ref={cropper => {
                     this.cropper = cropper;
                   }}
