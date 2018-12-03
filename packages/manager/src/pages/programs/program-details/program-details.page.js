@@ -4,7 +4,7 @@ import AssetEditContainer from "modules/asset-edit/asset-edit-container";
 import { PROGRAM } from "modules/asset-edit/asset-edit.constants";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
-import AboutLevelsContainerComponent from "pages/app/components/about-levels/about-levels-container";
+import AboutLevelsContainerComponent from "shared/components/about-levels/about-levels-container";
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
