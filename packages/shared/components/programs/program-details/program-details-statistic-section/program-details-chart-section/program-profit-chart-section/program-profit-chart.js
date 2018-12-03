@@ -61,7 +61,7 @@ class ProgramProfitChart extends PureComponent {
               fill: GVColors.$labelColor,
               fontSize: "12"
             }}
-            tickFormatter={x => +x.toFixed(2)}
+            tickFormatter={x => formatValue(x, 2)}
             unit="%"
             width={35}
           />
