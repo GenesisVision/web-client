@@ -29,11 +29,3 @@ button {
   width: 0;
   height: 0;
 }
-
-.app__title-page {
-  @include adaptive-padding(bottom, $padding-medium);
-}
-
-.app__title-details {
-  @include adaptive-padding(bottom, $padding-xxsmall);
-}
