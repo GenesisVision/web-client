@@ -37,7 +37,10 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = (dispatch, props) => ({
-  services: bindActionCreators({forgotPasswordService: props.forgotPasswordService}, dispatch),
+  services: bindActionCreators(
+    { forgotPasswordService: props.forgotPasswordService },
+    dispatch
+  ),
   showNotFoundPage: () => dispatch(replace(NOT_FOUND_PAGE_ROUTE))
 });
 

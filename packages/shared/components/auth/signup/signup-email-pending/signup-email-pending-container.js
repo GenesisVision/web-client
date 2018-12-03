@@ -4,7 +4,10 @@ import { bindActionCreators } from "redux";
 import SignupEmailPending from "./signup-email-pending";
 
 const mapDispatchToProps = (dispatch, props) => ({
-  service: bindActionCreators({ sendConfirmationLink: props.sendConfirmationLink }, dispatch)
+  service: bindActionCreators(
+    { sendConfirmationLink: props.sendConfirmationLink },
+    dispatch
+  )
 });
 
 const SignupEmailPendingContainer = connect(

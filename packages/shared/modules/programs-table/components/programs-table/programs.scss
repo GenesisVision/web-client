@@ -25,17 +25,15 @@ $description-block-width: 250px;
   }
 }
 
-.programs-table-container {
-  padding-top: $padding;
-}
-
 .programs-cards {
+  @include horizontal-paddings($padding, 2);
+  @include adaptive-padding(top, $padding-xsmall);
+  @include adaptive-padding(bottom, $padding, 2);
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
-  padding: 0 $padding/2 $padding/2;
   .icon {
     width: auto;
   }
@@ -157,7 +155,6 @@ $description-block-width: 250px;
     }
   }
   @include media-breakpoint-landscape-phone() {
-    padding: $padding;
     padding-right: $padding - $padding/2;
     &__card {
       min-width: $program-width;
