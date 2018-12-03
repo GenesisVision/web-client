@@ -1,0 +1,144 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
+
+.portfolio-event {
+  display: flex;
+  padding-top: 24px;
+  align-items: center;
+  //width: 252px;
+  @include media-breakpoint-tablet() {
+    width: 252px;
+  }
+
+  &:not(:last-of-type) {
+    border-bottom: 2px solid $separator-color;
+    padding-bottom: 24px;
+  }
+
+  &__values-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    white-space: normal;
+    line-height: 1.69;
+    padding-bottom: $padding-xxsmall;
+    @include media-breakpoint-phone() {
+      flex-direction: row;
+    }
+    @include media-breakpoint-tablet() {
+      flex-direction: column;
+    }
+  }
+
+  &__info {
+    flex-grow: 3.5;
+    margin-left: 12px;
+    @include media-breakpoint-landscape-phone() {
+      margin-left: 24px;
+    }
+    & .statistics-item {
+      padding: 0;
+      &__label {
+        line-height: normal;
+      }
+      &__value {
+        word-break: break-word;
+      }
+    }
+  }
+
+  &__time {
+    color: $text-dark-color;
+    margin-bottom: 17px;
+    font-size: 12px;
+  }
+
+  &__description {
+    letter-spacing: 0.2px;
+    margin-bottom: 0px;
+    font-size: $font-size-common;
+    color: $text-accent-color;
+    @include media-breakpoint-landscape-phone() {
+      line-height: 1.69;
+      margin-top: 5px;
+    }
+  }
+
+  &__value-description {
+    color: $text-color;
+    font-weight: normal;
+    line-height: normal;
+    font-size: 12px;
+    letter-spacing: 0.4px;
+    margin-bottom: 5px;
+    @include media-breakpoint-landscape-phone() {
+      margin-top: 10px;
+    }
+  }
+
+  &__value {
+    letter-spacing: 0.4px;
+    font-size: $font-size-common-mobile;
+    font-weight: 600;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-common;
+    }
+  }
+
+  &__art {
+    width: 44px;
+    height: 44px;
+    position: relative;
+  }
+
+  &__logo-photo {
+    box-sizing: border-box;
+    width: 32px;
+    height: 32px;
+    border: solid 2px #1c2730;
+    border-radius: 18px;
+    background-color: #27323a;
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    line-height: 28px;
+    text-align: center;
+  }
+
+  &__logo-type {
+    box-sizing: border-box;
+    width: 28px;
+    height: 28px;
+    border-radius: 18px;
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    z-index: 1;
+    line-height: 28px;
+    text-align: center;
+  }
+
+  &--positive {
+    & .portfolio-event__value {
+      color: $positive-color;
+    }
+
+    & .portfolio-event__logo-type {
+      background-color: $positive-background-color;
+      color: $positive-color;
+    }
+  }
+
+  &--negative {
+    & .portfolio-event__value {
+      color: $negative-color;
+    }
+
+    & .portfolio-event__logo-type {
+      background-color: $negative-background-color;
+      color: $negative-color;
+    }
+  }
+}

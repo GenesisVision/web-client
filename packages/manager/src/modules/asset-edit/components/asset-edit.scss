@@ -1,0 +1,31 @@
+@import "~shared/styles/_sizes.scss";
+
+.invest-popup {
+  &__currency {
+    font-size: 12px;
+    opacity: 0.5;
+    margin-bottom: 30px;
+    letter-spacing: 0.4px;
+  }
+
+  &__entry {
+    font-size: 14px;
+    opacity: 0.5;
+    margin-bottom: 44px;
+    letter-spacing: 0.5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.edit-program {
+  &__logo-section {
+    margin-bottom: $padding-small;
+  }
+  &__description {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+}

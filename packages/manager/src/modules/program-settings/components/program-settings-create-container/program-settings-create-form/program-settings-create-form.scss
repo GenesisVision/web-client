@@ -1,0 +1,58 @@
+@import "~shared/styles/_breakpoint.scss";
+
+.create-program-form {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  max-width: 1000px;
+  margin: 2rem auto;
+
+  @include media-breakpoint-phone() {
+    margin: 1rem auto;
+    padding: 1rem;
+  }
+}
+
+.create-program-form__program-detail {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.create-program-form__header {
+  font-size: 2.2rem;
+}
+
+.create-program-form__program-description,
+.create-program-form__program-settings {
+  flex: 1;
+  max-width: 436px;
+  min-width: 436px;
+  @include media-breakpoint-phone() {
+    max-width: 100%;
+    min-width: 100%;
+  }
+}
+
+.create-program-form__program-image {
+  max-width: 300px;
+  @include media-breakpoint-phone() {
+    max-width: 100%;
+  }
+}
+
+.create-program-form__couple-field {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  & > div {
+    flex: 1;
+    max-width: 45%;
+  }
+}
+
+.create-program-form__submit {
+  margin-top: 2rem;
+  max-width: 10rem;
+}

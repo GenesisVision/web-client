@@ -1,0 +1,18 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_sizes.scss";
+
+.program-period-tooltip {
+  &__header {
+    font-size: $font-size-common;
+    letter-spacing: 0.2px;
+    color: $text-dark-color;
+  }
+
+  &__content {
+    margin-top: 0.5rem;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: $text-color;
+  }
+}

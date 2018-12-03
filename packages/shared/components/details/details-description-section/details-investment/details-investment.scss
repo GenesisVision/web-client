@@ -1,0 +1,93 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
+
+$withdraw-button-height: 50px;
+$withdraw-button-width: 150px;
+$withdraw-button-height-mobile: $withdraw-button-height/$divider-text;
+$withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
+
+.details-investment {
+  display: inline-block;
+  width: 100%;
+  max-width: 500px;
+  margin-top: $padding-small-mobile;
+  margin-left: 0;
+  & div {
+    box-sizing: border-box;
+  }
+  @include media-breakpoint-phone() {
+    margin-left: -$padding-small-mobile;
+  }
+  @include media-breakpoint-landscape-phone() {
+    margin-top: $padding-small;
+    margin-left: -$padding-small;
+  }
+
+  &__short-statistic-container {
+    display: flex;
+    justify-content: flex-start;
+  }
+  &__short-statistic {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    &-item {
+      white-space: nowrap;
+      letter-spacing: 0.44px;
+      font-size: $font-size-paragraph-mobile;
+      display: flex;
+      flex-direction: column;
+      margin-right: $padding-big-mobile;
+      margin-bottom: $font-size-small-mobile;
+      font-weight: 600;
+      @include media-breakpoint-landscape-phone() {
+        font-size: $font-size-paragraph;
+        margin-right: $padding-big;
+        margin-bottom: $font-size-small;
+      }
+    }
+
+    &-subheading {
+      color: $label-color;
+      font-size: $font-size-small-mobile;
+      margin-bottom: $font-size-small-mobile;
+      font-weight: normal;
+      @include media-breakpoint-landscape-phone() {
+        font-size: $font-size-small;
+      }
+    }
+  }
+
+  &__footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    & .gv-btn {
+      width: $withdraw-button-width-mobile;
+      height: $withdraw-button-height-mobile;
+      letter-spacing: 0.3px;
+      font-size: $font-size-small-mobile;
+      font-weight: 600;
+      @include media-breakpoint-landscape-phone() {
+        width: $withdraw-button-width;
+        height: $withdraw-button-height;
+        font-size: $font-size-small;
+      }
+    }
+  }
+
+  &__withdraw-notice {
+    color: $short-statistic-notice-color;
+    line-height: $font-size-h3-mobile;
+    font-size: $font-size-small-mobile;
+    letter-spacing: 0.15px;
+    margin-left: 5%;
+    @include media-breakpoint-landscape-phone() {
+      line-height: $font-size-h3;
+      font-size: $font-size-small;
+    }
+  }
+}

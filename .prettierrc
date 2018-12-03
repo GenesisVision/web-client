@@ -1,18 +1,32 @@
 {
-  "prettier.arrowParens": "avoid",
-  "prettier.bracketSpacing": true,
-  "prettier.disableLanguages": ["vue"],
-  "prettier.eslintIntegration": true,
-  "prettier.ignorePath": ".prettierignore",
-  "prettier.jsxBracketSameLine": false,
-  "prettier.parser": "babylon",
-  "prettier.printWidth": 80,
-  "prettier.proseWrap": "preserve",
-  "prettier.requireConfig": false,
-  "prettier.semi": true,
-  "prettier.singleQuote": false,
-  "prettier.stylelintIntegration": false,
-  "prettier.tabWidth": 2,
-  "prettier.trailingComma": "none",
-  "prettier.useTabs": false
+  "arrowParens": "avoid",
+  "bracketSpacing": true,
+  "disableLanguages": ["vue"],
+  "eslintIntegration": true,
+  "ignorePath": ".prettierignore",
+  "jsxBracketSameLine": false,
+  "parser": "babylon",
+  "printWidth": 80,
+  "proseWrap": "preserve",
+  "requireConfig": false,
+  "semi": true,
+  "singleQuote": false,
+  "stylelintIntegration": false,
+  "tabWidth": 2,
+  "trailingComma": "none",
+  "useTabs": false,
+  "overrides": [
+    {
+      "files": "*.json",
+      "options": {
+        "parser": "json"
+      }
+    },
+    {
+      "files": "*.scss",
+      "options": {
+        "parser": "scss"
+      }
+    }
+  ]
 }

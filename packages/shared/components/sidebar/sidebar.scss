@@ -1,0 +1,22 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+.sidebar {
+  position: fixed;
+  overflow: auto;
+  top: 0;
+  bottom: 0;
+  width: 360px;
+  max-width: 90%;
+  background-color: $background-color;
+  display: flex;
+  box-sizing: border-box;
+  color: $main-color;
+
+  &--left {
+    left: 0;
+  }
+
+  &--right {
+    right: 0;
+  }
+}

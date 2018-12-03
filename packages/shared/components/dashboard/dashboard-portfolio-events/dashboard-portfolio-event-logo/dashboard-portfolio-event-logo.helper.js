@@ -1,0 +1,22 @@
+export const EventLogoType = {
+  assetStarted: "AssetStarted",
+  assetFinished: "AssetFinished",
+  programPeriodStars: "ProgramPeriodStats",
+  programPeriodEnds: "ProgramPeriodEnds",
+  investorInvest: "InvestorInvest",
+  investorWithdraw: "InvestorWithdraw",
+  managerInvest: "ManagerInvest",
+  managerWithdraw: "ManagerWithdraw",
+  entranceFee: "EntranceFee",
+  exitFee: "ExitFee",
+  profit: "Profit",
+  loss: "Loss",
+  reinvest: "Reinvest",
+  cancelled: "Cancelled",
+  cancelledRed: "CancelledRed",
+  invest: "Invest",
+  withdraw: "Withdraw",
+  started: "Started",
+  ended: "Ended",
+  endedRed: "EndedRed"
+};

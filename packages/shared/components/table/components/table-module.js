@@ -1,0 +1,128 @@
+import PropTypes from "prop-types";
+import React, { PureComponent } from "react";
+import { updateFilter } from "shared/components/table//helpers/filtering.helpers";
+import { calculateTotalPages } from "shared/components/table//helpers/paging.helpers";
+
+import { composeRequestFilters } from "../services/table.service";
+import Table from "./table";
+
+const defaultData = { items: null, total: 0 };
+
+class TableModule extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    const { paging, sorting, filtering } = this.props;
+
+    this.state = {
+      paging: paging,
+      sorting: sorting,
+      filtering: filtering,
+      data: defaultData,
+      isPending: false
+    };
+  }
+
+  componentDidMount() {
+    const { data, paging } = this.props;
+    if (data) {
+      const totalPages = calculateTotalPages(data.total, paging.itemsOnPage);
+      this.setState({
+        data,
+        paging: { ...paging, totalPages }
+      });
+    } else {
+      this.updateItems();
+    }
+  }
+
+  updateItems = () => {
+    const { paging, sorting, filtering } = this.state;
+    const { defaultFilters, getItems } = this.props;
+
+    this.setState({ isPending: true });
+
+    const filters = composeRequestFilters({
+      paging,
+      sorting,
+      filtering,
+      defaultFilters
+    });
+    getItems(filters)
+      .then(data => {
+        const totalPages = calculateTotalPages(data.total, paging.itemsOnPage);
+        this.setState(prevState => ({
+          data,
+          paging: { ...prevState.paging, totalPages },
+          isPending: false
+        }));
+      })
+      .catch(e => {
+        this.setState({ isPending: false });
+      });
+  };
+
+  handleUpdateSorting = sorting => {
+    this.setState(
+      prevState => ({
+        sorting: sorting,
+        paging: {
+          ...prevState.paging,
+          currentPage: 1
+        }
+      }),
+      this.updateItems
+    );
+  };
+
+  handleUpdateFilter = filter => {
+    this.setState(prevState => {
+      return {
+        filtering: updateFilter(prevState.filtering, filter),
+        paging: {
+          ...prevState.paging,
+          currentPage: 1
+        }
+      };
+    }, this.updateItems);
+  };
+
+  handleUpdatePaging = nextPageIndex => {
+    this.setState(
+      prevState => ({
+        paging: {
+          ...prevState.paging,
+          currentPage: nextPageIndex + 1
+        }
+      }),
+      this.updateItems
+    );
+  };
+
+  render() {
+    const { data, isPending } = this.state;
+
+    return (
+      <Table
+        {...this.props}
+        {...this.state}
+        items={data.items}
+        isPending={isPending}
+        updateSorting={this.handleUpdateSorting}
+        updatePaging={this.handleUpdatePaging}
+        updateFilter={this.handleUpdateFilter}
+      />
+    );
+  }
+}
+
+TableModule.propTypes = {
+  paging: PropTypes.object,
+  sorting: PropTypes.object,
+  filtering: PropTypes.object,
+  defaultFilters: PropTypes.array,
+  getItems: PropTypes.func,
+  data: PropTypes.object
+};
+
+export default TableModule;

@@ -1,0 +1,13 @@
+.dialog-withdraw-request {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  min-height: 300px;
+
+  &__image {
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+}

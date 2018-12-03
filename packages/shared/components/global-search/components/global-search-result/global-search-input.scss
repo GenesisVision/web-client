@@ -1,0 +1,47 @@
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
+
+.global-search {
+  &-input {
+    &__wrapper {
+      width: 100%;
+    }
+  }
+  &-hidden {
+    display: none;
+  }
+}
+
+.global-search-input {
+  & .gv-text-field__wrapper,
+  & .gv-text-field {
+    margin: 0;
+  }
+}
+
+.global-search-result {
+  margin-top: $padding-xsmall-mobile;
+  @include media-breakpoint-landscape-phone() {
+    margin-top: $padding-xsmall;
+  }
+
+  & .table__toolbar {
+    padding: 0;
+  }
+
+  &__tabs {
+    @include horizontal-paddings($padding-small, 2);
+  }
+
+  &__heading {
+    @include horizontal-paddings($padding-small, 2);
+  }
+
+  &__loading {
+    @include horizontal-paddings($padding-small, 2);
+    @include vertical-paddings($padding-small);
+    @include font-size($font-size-h4);
+    letter-spacing: 0.2px;
+    opacity: 0.4;
+  }
+}
