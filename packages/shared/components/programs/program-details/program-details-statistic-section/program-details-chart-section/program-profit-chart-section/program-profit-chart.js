@@ -73,7 +73,7 @@ class ProgramProfitChart extends PureComponent {
             axisLine={false}
             tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
             unit={currency}
-            tickFormatter={x => formatValue(x)}
+            tickFormatter={x => formatValue(x, 5)}
             width={60}
           />
           <Tooltip content={ProgramProfitTooltip} />
