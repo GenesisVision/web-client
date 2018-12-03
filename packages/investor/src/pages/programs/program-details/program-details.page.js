@@ -17,7 +17,7 @@ import {
 } from "./services/program-details.service";
 import { toggleReinvesting } from "modules/program-reinvesting/services/program-reinvesting.service";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
-import AboutLevelsContainerComponent from "pages/app/components/about-levels/about-levels-container";
+import AboutLevelsContainerComponent from "shared/components/about-levels/about-levels-container";
 import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
 import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
 import { fetchPortfolioEvents } from "../../dashboard/services/dashboard-events.services";
