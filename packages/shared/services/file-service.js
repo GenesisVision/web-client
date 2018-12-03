@@ -11,12 +11,6 @@ const uploadFile = (file, authorization) => {
     .then(response => response.id);
 };
 
-const uploadFileProxy = (file, authorization) => {
-  return fileApi
-    .v10FileUploadPost(file, { authorization })
-    .then(response => response.id);
-};
-
 const uploadDocument = (file, authorization) => {
   return fileApi
     .v10FileDocumentUploadPost(authorization, file)
@@ -26,7 +20,6 @@ const uploadDocument = (file, authorization) => {
 const filesService = {
   getFileUrl,
   uploadFile,
-  uploadFileProxy,
   uploadDocument
 };
 export default filesService;
