@@ -53,10 +53,7 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    .gv-btn {
-      font-size: $font-size-paragraph-mobile;
-      padding: 0;
-    }
+
     .program-avatar {
       width: 20px;
       margin: 0;
@@ -66,10 +63,10 @@
         padding-right: $padding-xxsmall;
       }
     }
-    @include media-breakpoint-landscape-phone() {
-      .gv-btn {
-        font-size: $font-size-paragraph;
-      }
+
+    .gv-btn {
+      @include font-size($font-size-paragraph);
+      padding: 5px;
     }
   }
   &--title {

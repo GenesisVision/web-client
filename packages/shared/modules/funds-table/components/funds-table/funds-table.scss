@@ -8,25 +8,6 @@ $program-height: 312px;
 $multiplier: 1.5;
 $chart-width: 160px;
 
-@mixin table-title() {
-  opacity: 0.3;
-  font-size: $font-size-small-mobile;
-  color: white;
-  text-align: left;
-  padding-bottom: $font-size-small-mobile;
-  @include media-breakpoint-landscape-phone() {
-    font-size: $font-size-small;
-    padding-bottom: $font-size-small;
-  }
-}
-
-.funds-table-container {
-  padding-top: $padding-small-mobile;
-  @include media-breakpoint-landscape-phone() {
-    padding-top: $padding-small;
-  }
-}
-
 .funds-table__cell {
   @include vertical-paddings($padding-xxsmall);
   @include horizontal-paddings($padding-xsmall);

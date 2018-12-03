@@ -17,13 +17,10 @@ $padding: $padding-small;
 }
 
 .table {
+  @include adaptive-padding(bottom, $padding-xsmall);
+  @include adaptive-padding(top, $padding-xsmall, 2);
   width: 100%;
   border-spacing: 0;
-  margin-bottom: $padding-xsmall-mobile;
-  padding-top: 16px;
-  @include media-breakpoint-landscape-phone() {
-    margin-bottom: $padding-xsmall;
-  }
   & .message {
     padding: $padding;
     text-align: center;
@@ -61,7 +58,7 @@ $padding: $padding-small;
     align-items: center;
     div {
       cursor: pointer;
-      padding: $view-svg-size;
+      padding: 0 $view-svg-size;
       line-height: 0;
       .icon {
         width: auto;
@@ -76,10 +73,10 @@ $padding: $padding-small;
   }
 
   &__title {
-    @include vertical-paddings($padding-xxsmall);
+    padding-bottom: 0;
     justify-self: flex-start;
-    letter-spacing: 0.2px;
     margin-right: auto;
+    line-height: 22px;
   }
 
   &__filters {
@@ -125,6 +122,19 @@ $padding: $padding-small;
   }
 
   &__cell {
+    @include vertical-paddings($padding-xsmall);
+    @include font-size($font-size-common);
+    text-align: left;
+    cursor: default;
+    box-sizing: border-box;
+    align-items: center;
+    flex-grow: 1;
+    overflow: hidden; // Or flex might break
+    list-style: none;
+    font-weight: normal;
+    letter-spacing: 0.433333px;
+    white-space: nowrap;
+
     &:first-child {
       padding-left: $padding/2;
       @include media-breakpoint-landscape-phone() {
@@ -142,18 +152,6 @@ $padding: $padding-small;
         padding-right: $padding;
       }
     }
-    @include font-size($font-size-common);
-    text-align: left;
-    cursor: default;
-    box-sizing: border-box;
-    align-items: center;
-    flex-grow: 1;
-    padding: $padding-xsmall-mobile 0;
-    overflow: hidden; // Or flex might break
-    list-style: none;
-    font-weight: normal;
-    letter-spacing: 0.433333px;
-    white-space: nowrap;
 
     &#{&} {
       &--head {
@@ -202,9 +200,6 @@ $padding: $padding-small;
     &__head {
       font-size: $th-font-size;
     }
-    &__cell {
-      padding: $padding-xsmall 0;
-    }
     &__body {
       font-size: $td-font-size;
     }
@@ -219,7 +214,6 @@ $padding: $padding-small;
       justify-content: space-between;
       align-items: center;
       div {
-        padding-top: 10px ;
         &:last-child {
           padding-right: 0;
         }
