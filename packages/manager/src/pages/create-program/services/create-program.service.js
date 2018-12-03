@@ -3,7 +3,7 @@ import { push } from "react-router-redux";
 import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import brokersApi from "shared/services/api-client/brokers-api";
-import { managerApiProxy } from "shared/services/api-client/manager-api";
+import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
 import filesService from "shared/services/file-service";
 
@@ -35,7 +35,7 @@ export const createProgram = (createProgramData, setSubmitting) => dispatch => {
         logo: response || ""
       };
 
-      return managerApiProxy.v10ManagerProgramsCreatePost(authorization, {
+      return managerApi.v10ManagerProgramsCreatePost(authorization, {
         request: data
       });
     })

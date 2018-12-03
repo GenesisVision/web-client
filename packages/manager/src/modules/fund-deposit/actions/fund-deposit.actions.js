@@ -4,9 +4,7 @@ import {
   INVEST_TO_FUND_BY_ID,
   INVEST_TO_FUND_BY_ID_CLEAR
 } from "modules/fund-deposit/fund-deposit.constants";
-import managerApi, {
-  managerApiProxy
-} from "shared/services/api-client/manager-api";
+import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
 
 export const fetchDepositFundInfoById = (id, currency) => {
@@ -29,7 +27,7 @@ export const clearDepositFundInfo = () => {
 export const investToFundById = (id, amount) => {
   return {
     type: INVEST_TO_FUND_BY_ID,
-    payload: managerApiProxy.v10ManagerFundsByIdInvestByAmountPost(
+    payload: managerApi.v10ManagerFundsByIdInvestByAmountPost(
       id,
       amount,
       authService.getAuthArg()

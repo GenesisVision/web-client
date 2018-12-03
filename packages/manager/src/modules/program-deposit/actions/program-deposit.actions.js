@@ -4,9 +4,7 @@ import {
   INVEST_TO_PROGRAM_BY_ID,
   INVEST_TO_PROGRAM_BY_ID_CLEAR
 } from "modules/program-deposit/program-deposit.constants";
-import managerApi, {
-  managerApiProxy
-} from "shared/services/api-client/manager-api";
+import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
 
 export const fetchDepositProgramInfoById = (id, currency) => {
@@ -29,7 +27,7 @@ export const clearDepositProgramInfo = () => {
 export const investToProgramById = (id, amount) => {
   return {
     type: INVEST_TO_PROGRAM_BY_ID,
-    payload: managerApiProxy.v10ManagerProgramsByIdInvestByAmountPost(
+    payload: managerApi.v10ManagerProgramsByIdInvestByAmountPost(
       id,
       amount,
       authService.getAuthArg()

@@ -1,7 +1,7 @@
 import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
 import { DEFAULT_PERIOD } from "shared/components/chart/chart-period/chart-period.helpers";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import { managerApiProxy } from "shared/services/api-client/manager-api";
+import managerApi from "shared/services/api-client/manager-api";
 import { programsApiProxy } from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
@@ -71,7 +71,7 @@ export const getProgramStatistic = (
 export const closeProgram = (programId, opts) => dispatch => {
   const authorization = authService.getAuthArg();
 
-  return managerApiProxy.v10ManagerProgramsByIdClosePost(
+  return managerApi.v10ManagerProgramsByIdClosePost(
     programId,
     authorization,
     opts
@@ -80,7 +80,7 @@ export const closeProgram = (programId, opts) => dispatch => {
 
 export const closePeriod = (programId, onSuccess) => dispatch => {
   const authorization = authService.getAuthArg();
-  return managerApiProxy
+  return managerApi
     .v10ManagerProgramsByIdPeriodClosePost(programId, authorization)
     .then(() => {
       onSuccess();
