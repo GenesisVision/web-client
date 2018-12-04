@@ -3,7 +3,7 @@ import { loadData } from "./localstorage";
 
 export const getRef = () => {
   const ref = loadData("ref");
-  if (ref) {
+  if (ref && ref.value) {
     return ref.value;
   }
   return getCookie("ref");

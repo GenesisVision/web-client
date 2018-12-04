@@ -1,6 +1,8 @@
 export const getCookie = cookieName => {
+  const name = encodeURIComponent(cookieName).replace(/[\-\.\+\*]/g, "\\$&");
   const regExp = new RegExp(
-    `(?:(?:^|.*;)\\s*${cookieName}\\s*\\=\\s*([^;]*).*$)|^.*$`
+    `(?:(?:^|.*;)\\s*${name}\\s*\\=\\s*([^;]*).*$)|^.*$`
   );
-  return document.cookie.replace(regExp, "$1") || null;
+  const cookie = document.cookie.replace(regExp, "$1");
+  return decodeURIComponent(cookie) || null;
 };
