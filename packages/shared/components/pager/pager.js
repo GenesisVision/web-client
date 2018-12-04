@@ -40,12 +40,12 @@ class Pager extends PureComponent {
     return (
       <div className="pager">
         {current > 1 && (
-          <Fragment>
+          <div className="pager__pager-block">
             <PagerButton value={1} label={t("pager.first")} />
             <PagerButton value={current - 1} label={t("pager.prev")} />
-          </Fragment>
+          </div>
         )}
-        <div className="pager__visible-pages">
+        <div className="pager__pager-block">
           {visiblePages
             .filter(page => page <= total)
             .map(page => (
@@ -53,10 +53,10 @@ class Pager extends PureComponent {
             ))}
         </div>
         {current < total && (
-          <Fragment>
+          <div className="pager__pager-block">
             <PagerButton value={current + 1} label={t("pager.next")} />
             <PagerButton value={total} label={t("pager.last")} />
-          </Fragment>
+          </div>
         )}
       </div>
     );

@@ -7,11 +7,11 @@ $pager-button-size-mobile: $pager-button-size/$divider-text;
 
 .pager {
   display: flex;
-  &__visible-pages {
+  &__pager-block {
     display: flex;
-    padding: 0 $padding-xsmall-mobile;
+    padding-left:  $padding-xsmall-mobile;
     @include media-breakpoint-landscape-phone() {
-      padding: 0 $padding-xsmall;
+      padding-left:  $padding-xsmall;
     }
   }
   &__button {
