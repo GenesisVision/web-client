@@ -17,7 +17,7 @@ import {
   fetchFundStructure,
   getFundDescription,
   getFundStatistic
-} from "./services/fund-details.service";
+} from "shared/components/funds/fund-details/services/fund-details.service";
 
 export const FundDetailContext = React.createContext({
   updateDetails: () => {}
