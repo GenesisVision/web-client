@@ -20,11 +20,11 @@ class Pager extends PureComponent {
     const handleChange = page => () => {
       onPageChanged(page);
     };
-    const PagerButton = ({ value, label, current }) => {
+    const PagerButton = ({ value, label }) => {
       return (
         <div
           className={classNames("pager__button", {
-            "pager__button--current": current
+            "pager__button--current": value === current
           })}
           onClick={handleChange(value)}
         >
@@ -49,7 +49,7 @@ class Pager extends PureComponent {
           {visiblePages
             .filter(page => page <= total)
             .map(page => (
-              <PagerButton key={page} current={page === current} value={page} />
+              <PagerButton key={page} value={page} />
             ))}
         </div>
         {current < total && (
