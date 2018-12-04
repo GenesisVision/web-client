@@ -110,13 +110,29 @@ class CreateFundSettings extends React.Component {
       setFieldValue,
       deposit,
       errors,
-      programsInfo
+      programsInfo,
+      onValidateError,
+      setSubmitting
     } = this.props;
 
     const imageInputError =
       errors &&
       errors.logo &&
       (errors.logo.width || errors.logo.height || errors.logo.size);
+
+    const onSubmit = () => {
+      const isValid = createFundSettingsValidationSchema({
+        t,
+        programsInfo,
+        deposit
+      }).isValidSync(values);
+
+      if (!isValid) {
+        onValidateError();
+      }
+
+      handleSubmit(values, { setSubmitting });
+    };
 
     return (
       <div className="create-fund-settings">
@@ -126,7 +142,7 @@ class CreateFundSettings extends React.Component {
             {t("create-fund-page.settings.main-settings")}
           </div>
           <div className="create-fund-settings__fill-block create-fund-settings__fill-block--with-border">
-            <div className="create-fund-settings__row">
+            <div className="create-fund-settings__row create-fund-settings__row--description">
               <GVFormikField
                 type="text"
                 name="title"
@@ -134,6 +150,11 @@ class CreateFundSettings extends React.Component {
                 autoComplete="off"
                 component={GVTextField}
               />
+              <div className="create-fund-settings__description-info">
+                <span className="create-fund-settings__description create-fund-settings__description-requirements">
+                  {t("create-fund-page.settings.fields.name-requirements")}
+                </span>
+              </div>
             </div>
             <div className="create-fund-settings__row create-fund-settings__row--description">
               <GVFormikField
@@ -317,7 +338,7 @@ class CreateFundSettings extends React.Component {
             title={t("buttons.create-fund")}
             color="primary"
             type="submit"
-            onClick={handleSubmit}
+            onClick={onSubmit}
             disabled={isSubmitting}
           >
             {t("buttons.create-fund")}

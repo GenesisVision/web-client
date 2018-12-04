@@ -62,6 +62,10 @@ class CreateProgramContainer extends Component {
     );
   };
 
+  handleValidateError = () => {
+    this.props.service.showValidationError();
+  };
+
   setLeverageChooseAvailable = isAvailable => {
     this.setState({ isLeverageChooseAvailable: isAvailable });
   };
@@ -109,6 +113,7 @@ class CreateProgramContainer extends Component {
             )}
             {tab === "settings" && (
               <CreateProgramSettings
+                onValidateError={this.handleValidateError}
                 navigateBack={navigateToBroker}
                 broker={choosedBroker}
                 balance={(headerData && headerData.availableGvt) || 0}

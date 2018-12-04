@@ -54,3 +54,12 @@ export const createProgram = (createProgramData, setSubmitting) => dispatch => {
       dispatch(alertMessageActions.error(error.errorMessage));
     });
 };
+
+export const showValidationError = () => dispatch => {
+  dispatch(
+    alertMessageActions.error(
+      "create-program-page.notifications.validate-error",
+      true
+    )
+  );
+};
