@@ -5,15 +5,16 @@ import { translate } from "react-i18next";
 
 const CreateFundNavigationDialog = ({ t, open, onClose, onConfirm }) => (
   <Dialog open={open} onClose={onClose}>
-    <div className="create-fund__navigation-dialog">
-      <div className="create-fund__navigation-dialog-text">
+    <div className="dialog__top">
+      <div className="dialog__text">
         {t("create-fund-page.navigation-back-text")}
       </div>
-      <GVButton
-        className="create-fund__navigation-dialog-button"
-        onClick={onConfirm}
-        children={t("buttons.continue")}
-      />
+      <div className="dialog__buttons">
+        <GVButton
+          onClick={onConfirm}
+          children={t("buttons.continue")}
+        />
+      </div>
     </div>
   </Dialog>
 );

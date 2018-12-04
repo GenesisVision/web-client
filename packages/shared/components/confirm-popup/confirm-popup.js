@@ -22,9 +22,11 @@ const ConfirmPopup = ({
   return (
     <Dialog open={open} onClose={onClose} className="dialog--wider">
       <div className={classnames("dialog__top", className)}>
-        <h2>
-          {header}
-        </h2>
+        {header && (
+          <h2>
+            {header}
+          </h2>
+        )}
         <div className="dialog__text">
           <p>
             {body}

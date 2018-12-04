@@ -5,15 +5,16 @@ import { translate } from "react-i18next";
 
 const CreateProgramNavigationDialog = ({ t, open, onClose, onConfirm }) => (
   <Dialog open={open} onClose={onClose}>
-    <div className="create-program__navigation-dialog">
-      <div className="create-program__navigation-dialog-text">
+    <div className="dialog__top">
+      <div className="dialog__text">
         {t("create-program-page.navigation-back-text")}
       </div>
-      <GVButton
-        className="create-program__navigation-dialog-button"
-        onClick={onConfirm}
-        children={t("buttons.continue")}
-      />
+      <div className="dialog__buttons">
+        <GVButton
+          onClick={onConfirm}
+          children={t("buttons.continue")}
+        />
+      </div>
     </div>
   </Dialog>
 );
