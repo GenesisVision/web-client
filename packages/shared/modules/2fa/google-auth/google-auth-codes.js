@@ -46,7 +46,7 @@ const GoogleAuth = ({ t, codes, notifySuccess, notifyError }) => {
           {t("buttons.copy")}
         </GVButton>
       </div>
-      <p className="dialog__info">{t("2fa.codes.warning")}</p>
+      <div className="dialog__info">{t("2fa.codes.warning")}</div>
     </div>
   );
 };

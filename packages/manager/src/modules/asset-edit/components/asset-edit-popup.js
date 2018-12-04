@@ -10,8 +10,9 @@ class AssetEditPopup extends Component {
     const { info, submitInfo, edit, serverError, type } = this.props;
     return info ? (
       <Fragment>
-        <AssetEditTop title={info.title} type={type} />
+        {/*<AssetEditTop title={info.title} type={type} />*/}
         <AssetEditForm
+          title={info.title}
           errorMessage={submitInfo.errorMessage}
           info={info}
           disabled={submitInfo.isPending}

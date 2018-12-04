@@ -35,13 +35,13 @@ class Dialog extends Component {
               >
                 <CloseIcon />
               </GVButton>
-              {this.props.top && (
-                <div className="dialog__top">{this.props.top}</div>
-              )}
+              {/*{this.props.top && (*/}
+              {/*<div className="dialog__top">{this.props.top}</div>*/}
+              {/*)}*/}
               {this.props.children}
-              {this.props.bottom && (
-                <div className="dialog__bottom">{this.props.bottom}</div>
-              )}
+              {/*{this.props.bottom && (*/}
+              {/*<div className="dialog__bottom">{this.props.bottom}</div>*/}
+              {/*)}*/}
             </div>
           </div>
         </Scrollbars>
