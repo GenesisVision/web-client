@@ -12,6 +12,7 @@ import Select from "shared/components/select/select";
 import DisableAuthContainer from "./disable-auth/disable-auth-container";
 import GenerateRecoveryCode from "./google-auth/generate-recovery-codes/generate-recovery-codes";
 import GoogleAuthContainer from "./google-auth/google-auth-container";
+import classnames from "classnames";
 
 const components = {
   google: <GoogleAuthContainer />,
@@ -58,7 +59,9 @@ class TwoFactorAuthContainer extends Component {
         </GVTextField>
         <GenerateRecoveryCode disabled={twoFactorAuth.data.twoFactorEnabled} />
         <Dialog
-          className="two-factor-auth"
+          className={classnames({
+            "dialog--width-auto": !twoFactorAuth.data.twoFactorEnabled
+          })}
           open={Boolean(this.state.component)}
           onClose={this.handleClose}
         >

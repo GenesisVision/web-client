@@ -12,7 +12,7 @@ const DisableAuth = ({ t, handleSubmit, errorMessage, disabled }) => {
     <form
       id="disable-auth"
       onSubmit={handleSubmit}
-      className="dialog__top disable-auth"
+      className="dialog__top"
       autoComplete="off"
     >
       <div className="dialog__title">{t("2fa.disable.title")}</div>

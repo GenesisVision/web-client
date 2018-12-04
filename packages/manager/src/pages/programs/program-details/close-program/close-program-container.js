@@ -1,5 +1,3 @@
-import "./close-program.scss";
-
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -42,7 +40,7 @@ class CloseProgramContainer extends Component {
       <Dialog
         open={open}
         onClose={this.handleClose}
-        className="close-program-popup"
+        className="dialog--wider"
       >
         <CloseProgramForm
           onSubmit={this.handleSubmit}

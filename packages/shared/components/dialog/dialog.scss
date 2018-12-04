@@ -103,10 +103,6 @@
     background-color: rgba(255, 255, 255, 0.02);
     padding: $padding-small $padding-small 50px;
 
-    &:first-child {
-      padding-top: 50px;
-    }
-
     .gv-text-field__wrapper:first-child {
       margin-top: 0;
     }
@@ -203,6 +199,14 @@
     }
   }
 
+  &__text {
+    padding-top: 20px;
+
+    p {
+      padding-bottom: 0;
+    }
+  }
+
   .form-error {
     margin-bottom: 20px;
     font-size: $font-size-common;
@@ -210,5 +214,16 @@
 
   .gv-btn {
     font-size: $font-size-common;
+  }
+
+  &--wider {
+    max-width: 420px;
+  }
+
+  &--width-auto {
+    display: flex;
+    box-sizing: border-box;
+    width: auto;
+    max-width: none;
   }
 }
