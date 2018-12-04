@@ -18,9 +18,7 @@ class CreateFundContainer extends Component {
     createFundService
       .fetchAssets()
       .then(response => {
-        this.setState({
-          assets: response.assets
-        });
+        this.setState({ assets: response.assets });
       })
       .then(() => {
         createFundService.fetchInvestmentAmount().then(response => {
@@ -34,6 +32,10 @@ class CreateFundContainer extends Component {
 
   handleSubmit = (values, setSubmitting) => {
     this.props.service.createFund({ ...values }, setSubmitting);
+  };
+
+  handleValidateError = () => {
+    this.props.service.showValidationError();
   };
 
   navigateBack = () => {
@@ -55,8 +57,9 @@ class CreateFundContainer extends Component {
         <div>
           {!isPending && (
             <CreateFundSettings
+              onValidateError={this.handleValidateError}
               navigateBack={navigateBack}
-              balance={headerData.availableGvt || 0}
+              balance={(headerData && headerData.availableGvt) || 0}
               updateBalance={service.fetchBalance}
               onSubmit={handleSubmit}
               author={(headerData && headerData.name) || null} //headerData.name
