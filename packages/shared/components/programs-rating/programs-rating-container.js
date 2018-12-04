@@ -1,13 +1,13 @@
 import "shared/components/programs-rating/programs-rating.scss";
 
 import React, { Component } from "react";
-
-import TabsContainer from "shared/components/tabs-container/tabs-container";
-import { bindActionCreators, compose } from "redux";
 import connect from "react-redux/es/connect/connect";
+import { bindActionCreators, compose } from "redux";
 import ProgramsRatingTables from "shared/components/programs-rating/programs-rating-tables";
-import Surface from "shared/components/surface/surface";
 import { getLevelUpSummary } from "shared/components/programs-rating/services/program-rating-service";
+import Surface from "shared/components/surface/surface";
+import TabsContainer from "shared/components/tabs-container/tabs-container";
+
 import { LEVELS } from "./program-rating.constants";
 
 class ProgramsRatingContainer extends Component {
@@ -20,28 +20,26 @@ class ProgramsRatingContainer extends Component {
     const { service } = this.props;
     service.getLevelUpSummary().then(res => {
       const { levelData } = res.value;
-      const navigateTabs = Object.keys(levelData)
-        .filter(tab => LEVELS[tab])
-        .map(tab => ({
-          level: tab,
-          name: LEVELS[tab],
-          count: levelData[tab].totalOwn
-        }));
+      const navigateTabs = levelData.map(item => ({
+        ...item,
+        count: item.totalOwn,
+        name: LEVELS[item.level]
+      }));
       const tab = navigateTabs[0];
       this.setState({ navigateTabs, tab });
     });
   }
+
   handleTabChange = (e, tab) => {
     const { navigateTabs } = this.state;
-    const navigateTab = navigateTabs.find(item => item.name === tab);
-    this.setState({ tab: navigateTab });
+    this.setState({ tab: navigateTabs.find(item => item.name === tab) });
   };
+
   render() {
     const { id, levelData, routes } = this.props;
     const { tab, navigateTabs } = this.state;
 
     if (!tab || !levelData || !navigateTabs) return null;
-    const currentLevelData = levelData[tab.level];
     return (
       <Surface className="programs-rating">
         <div className="programs-rating__tabs">
@@ -53,12 +51,7 @@ class ProgramsRatingContainer extends Component {
             levelData={levelData}
           />
         </div>
-        <ProgramsRatingTables
-          key={tab.level}
-          tab={tab.level}
-          id={id}
-          levelData={currentLevelData}
-        />
+        <ProgramsRatingTables key={tab.level} tab={tab} id={id} />
       </Surface>
     );
   }

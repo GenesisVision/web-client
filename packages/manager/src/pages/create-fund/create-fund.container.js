@@ -56,7 +56,7 @@ class CreateFundContainer extends Component {
           {!isPending && (
             <CreateFundSettings
               navigateBack={navigateBack}
-              balance={headerData.totalBalanceGvt || 0}
+              balance={headerData.availableGvt || 0}
               updateBalance={service.fetchBalance}
               onSubmit={handleSubmit}
               author={(headerData && headerData.name) || null} //headerData.name
@@ -89,6 +89,9 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default compose(connect(mapStateToProps, mapDispatchToProps))(
-  CreateFundContainer
-);
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
+)(CreateFundContainer);

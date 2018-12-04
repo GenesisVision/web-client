@@ -111,7 +111,7 @@ class CreateProgramContainer extends Component {
               <CreateProgramSettings
                 navigateBack={navigateToBroker}
                 broker={choosedBroker}
-                balance={headerData.totalBalanceGvt}
+                balance={headerData.availableGvt}
                 updateBalance={service.fetchBalance}
                 onSubmit={handleSubmit}
                 author={headerData.name}

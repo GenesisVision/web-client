@@ -4,12 +4,12 @@ import ProgramDepositContainer from "modules/program-deposit/program-deposit-con
 import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
 import { toggleReinvesting } from "modules/program-reinvesting/services/program-reinvesting.service";
 import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
-import AboutLevelsContainerComponent from "pages/app/components/about-levels/about-levels-container";
 import { fetchProgramTrades } from "pages/programs/program-details/services/program-details.service";
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
+import AboutLevelsContainerComponent from "shared/components/about-levels/about-levels-container";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
 import Page from "shared/components/page/page";
 import ProgramDetailsDescriptionSection from "shared/components/programs/program-details/program-details-description/program-details-description-section";

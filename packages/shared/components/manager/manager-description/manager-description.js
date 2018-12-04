@@ -5,6 +5,7 @@ import React from "react";
 import { translate } from "react-i18next";
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
+
 import StatisticItem from "../../statistic-item/statistic-item";
 
 const ManagerDescription = ({ t, managerProfile }) => {
@@ -18,7 +19,7 @@ const ManagerDescription = ({ t, managerProfile }) => {
         />
       </div>
       <div className="manager-description__main">
-        <h1 className="app__title-details">{managerProfile.username}</h1>
+        <h1 className="title-small-padding">{managerProfile.username}</h1>
         <div className="manager-description__date">
           {`${t("manager.member-since")} ${moment(
             managerProfile.regDate
