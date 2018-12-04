@@ -26,9 +26,8 @@ $description-block-width: 250px;
 }
 
 .programs-cards {
-  @include horizontal-paddings($padding, 2);
+  @include horizontal-paddings($padding-small, 2);
   @include adaptive-padding(top, $padding-xsmall);
-  @include adaptive-padding(bottom, $padding, 2);
   box-sizing: border-box;
   display: flex;
   flex-direction: row;

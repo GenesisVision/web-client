@@ -1,7 +1,7 @@
 import "./pager.scss";
 
 import PropTypes from "prop-types";
-import React, { Fragment, PureComponent } from "react";
+import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import classNames from "classnames";
 
@@ -9,26 +9,22 @@ class Pager extends PureComponent {
   generateVisiblePages = (first, count) => {
     const pages = [];
     first = first > 0 ? first : 1;
-    for (let i = first; i < first + count; i++) {
-      pages.push(i);
-    }
+    for (let i = first; i < first + count; i++) pages.push(i);
     return pages;
   };
 
   render() {
     const { t, total, current, countVisiblePages, onPageChanged } = this.props;
-    const handleChange = page => () => {
-      onPageChanged(page);
-    };
-    const PagerButton = ({ value, label }) => {
+    const handleChange = page => () => onPageChanged(page);
+    const PagerButton = ({ page, label }) => {
       return (
         <div
           className={classNames("pager__button", {
-            "pager__button--current": value === current
+            "pager__button--current": page === current
           })}
-          onClick={handleChange(value)}
+          onClick={handleChange(page)}
         >
-          {label || value}
+          {label || page}
         </div>
       );
     };
@@ -41,21 +37,21 @@ class Pager extends PureComponent {
       <div className="pager">
         {current > 1 && (
           <div className="pager__pager-block">
-            <PagerButton value={1} label={t("pager.first")} />
-            <PagerButton value={current - 1} label={t("pager.prev")} />
+            <PagerButton page={1} label={t("pager.first")} />
+            <PagerButton page={current - 1} label={t("pager.prev")} />
           </div>
         )}
         <div className="pager__pager-block">
           {visiblePages
             .filter(page => page <= total)
             .map(page => (
-              <PagerButton key={page} value={page} />
+              <PagerButton key={page} page={page} />
             ))}
         </div>
         {current < total && (
           <div className="pager__pager-block">
-            <PagerButton value={current + 1} label={t("pager.next")} />
-            <PagerButton value={total} label={t("pager.last")} />
+            <PagerButton page={current + 1} label={t("pager.next")} />
+            <PagerButton page={total} label={t("pager.last")} />
           </div>
         )}
       </div>
