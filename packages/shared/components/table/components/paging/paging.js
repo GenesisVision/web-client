@@ -2,7 +2,7 @@ import "./paging.scss";
 
 import PropTypes from "prop-types";
 import React, { PureComponent } from "react";
-import Pager from "react-pager";
+import Pager from "shared/components/pager/pager";
 
 class Paging extends PureComponent {
   render() {
@@ -12,9 +12,9 @@ class Paging extends PureComponent {
     return (
       <Pager
         total={paging.total}
-        current={paging.current - 1}
-        visiblePages={3}
-        onPageChanged={nextPage => updatePaging({ currentPage: nextPage })}
+        current={paging.current}
+        countVisiblePages={3}
+        onPageChanged={nextPage => updatePaging({ currentPage: nextPage - 1 })}
       />
     );
   }

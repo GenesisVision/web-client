@@ -1,4 +1,4 @@
-import { fundsApiProxy } from "shared/services/api-client/funds-api";
+import fundsApi from "shared/services/api-client/funds-api";
 import authService from "shared/services/auth-service";
 
 import {
@@ -20,11 +20,11 @@ export const toggleFavoriteFundDispatchable = (id, isFavorite) => dispatch => {
 };
 
 const addFavorite = ({ id, authorization }) => {
-  return fundsApiProxy.v10FundsByIdFavoriteAddPost(id, authorization);
+  return fundsApi.v10FundsByIdFavoriteAddPost(id, authorization);
 };
 
 const removeFavorite = ({ id, authorization }) => {
-  return fundsApiProxy.v10FundsByIdFavoriteRemovePost(id, authorization);
+  return fundsApi.v10FundsByIdFavoriteRemovePost(id, authorization);
 };
 
 export const toggleFavoriteFund = (id, isFavorite) => {

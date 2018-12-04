@@ -1,5 +1,3 @@
-import Dialog from "shared/components/dialog/dialog";
-import ProgramWithdrawPopup from "shared/components/program-withdraw/program-withdraw-popup";
 import {
   alert,
   getProgramWithdrawInfo,
@@ -9,16 +7,18 @@ import PropTypes from "prop-types";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import { compose } from "redux";
-import { investorApiProxy } from "shared/services/api-client/investor-api";
+import { bindActionCreators } from "redux";
+import Dialog from "shared/components/dialog/dialog";
+import ProgramWithdrawPopup from "shared/components/program-withdraw/program-withdraw-popup";
+import investorApi from "shared/services/api-client/investor-api";
 import authService from "shared/services/auth-service";
 
 class ProgramWithdrawContainer extends PureComponent {
   state = { error: "" };
 
   handleWithdraw = (id, percent) => {
-    return investorApiProxy
+    return investorApi
       .v10InvestorProgramsByIdWithdrawByAmountPost(
         id,
         percent,

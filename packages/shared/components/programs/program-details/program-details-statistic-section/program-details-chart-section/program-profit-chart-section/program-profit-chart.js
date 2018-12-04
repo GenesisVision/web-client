@@ -1,9 +1,3 @@
-import { formartChartMinValue } from "shared/components/chart/chart-components/chart-components.helpers";
-import chartXAxis from "shared/components/chart/chart-components/chart-xaxis";
-import ProgramChartGradient, {
-  gradientOffset
-} from "shared/components/chart/chart-gradient/chart-gradient";
-import { getStrokeColor } from "shared/components/chart/chart-gradient/chart-gradient";
 import { GVColors } from "gv-react-components";
 import React, { PureComponent } from "react";
 import {
@@ -15,6 +9,13 @@ import {
   Tooltip,
   YAxis
 } from "recharts";
+import { formartChartMinValue } from "shared/components/chart/chart-components/chart-components.helpers";
+import chartXAxis from "shared/components/chart/chart-components/chart-xaxis";
+import ProgramChartGradient, {
+  gradientOffset
+} from "shared/components/chart/chart-gradient/chart-gradient";
+import { getStrokeColor } from "shared/components/chart/chart-gradient/chart-gradient";
+import { formatValue } from "shared/utils/formatter";
 
 import ProgramProfitTooltip from "./program-profit-tooltip";
 
@@ -60,7 +61,7 @@ class ProgramProfitChart extends PureComponent {
               fill: GVColors.$labelColor,
               fontSize: "12"
             }}
-            tickFormatter={x => +x.toFixed(2)}
+            tickFormatter={x => formatValue(x, 2)}
             unit="%"
             width={35}
           />
@@ -72,7 +73,7 @@ class ProgramProfitChart extends PureComponent {
             axisLine={false}
             tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
             unit={currency}
-            tickFormatter={x => +x.toFixed(4)}
+            tickFormatter={x => formatValue(x, 5)}
             width={60}
           />
           <Tooltip content={ProgramProfitTooltip} />

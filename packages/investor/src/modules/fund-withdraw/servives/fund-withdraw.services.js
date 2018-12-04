@@ -1,10 +1,10 @@
-import { investorApiProxy } from "shared/services/api-client/investor-api";
-import authService from "shared/services/auth-service";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
+import investorApi from "shared/services/api-client/investor-api";
+import authService from "shared/services/auth-service";
 
 export const getFundWithdrawInfo = id => (dispatch, getState) => {
   const { accountSettings } = getState();
-  return investorApiProxy.v10InvestorFundsByIdWithdrawInfoByCurrencyGet(
+  return investorApi.v10InvestorFundsByIdWithdrawInfoByCurrencyGet(
     id,
     accountSettings.currency,
     authService.getAuthArg()
@@ -12,7 +12,7 @@ export const getFundWithdrawInfo = id => (dispatch, getState) => {
 };
 
 export const withdrawFundById = (id, percent) => {
-  return investorApiProxy
+  return investorApi
     .v10InvestorFundsByIdWithdrawByPercentPost(
       id,
       percent,

@@ -1,6 +1,6 @@
 import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import { walletApiProxy } from "shared/services/api-client/wallet-api";
+import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
 
 import * as actions from "../actions/wallet.actions";
@@ -26,7 +26,7 @@ export const updateWalletTransactionsFilters = filters => dispatch => {
 export const cancelWithdrawRequest = txId => (dispatch, getState) => {
   const authorization = authService.getAuthArg();
 
-  return walletApiProxy
+  return walletApi
     .v10WalletWithdrawRequestCancelByTxIdPost(txId, authorization)
     .then(response => {
       dispatch(
@@ -47,7 +47,7 @@ export const cancelWithdrawRequest = txId => (dispatch, getState) => {
 export const resendWithdrawRequest = txId => (dispatch, getState) => {
   const authorization = authService.getAuthArg();
 
-  return walletApiProxy
+  return walletApi
     .v10WalletWithdrawRequestResendByTxIdPost(txId, authorization)
     .then(response => {
       dispatch(

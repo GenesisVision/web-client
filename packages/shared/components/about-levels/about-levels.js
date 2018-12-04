@@ -1,12 +1,11 @@
 import "./about-level.scss";
 
-import Dialog from "shared/components/dialog/dialog";
-import CurrencySelect from "shared/modules/currency-select/components/currency-select";
-import { CURRENCY_VALUES } from "shared/modules/currency-select/currency-select.constants";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-
+import Dialog from "shared/components/dialog/dialog";
+import CurrencySelect from "shared/modules/currency-select/components/currency-select";
+import { CURRENCY_VALUES } from "shared/modules/currency-select/currency-select.constants";
 import { convertToCurrency } from "shared/utils/currency-converter";
 
 class AboutLevelsComponent extends Component {

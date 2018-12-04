@@ -9,12 +9,6 @@ $large-padding: 42px;
     background-color: $table-background-subcolor;
   }
 
-  & .table__title {
-    font-size: 16px;
-    letter-spacing: 0.1px;
-    color: $text-light-color;
-  }
-
   & .table__toolbar {
     flex-direction: column;
     align-items: flex-start;

@@ -1,4 +1,4 @@
-import { searchApiProxy } from "shared/services/api-client/search-api";
+import searchApi from "shared/services/api-client/search-api";
 
 export const search = (queryValue = "") => {
   const trimmedQuery = queryValue.trim();
@@ -8,5 +8,5 @@ export const search = (queryValue = "") => {
     take: 10
   };
 
-  return searchApiProxy.v10SearchGet(filters);
+  return searchApi.v10SearchGet(filters);
 };

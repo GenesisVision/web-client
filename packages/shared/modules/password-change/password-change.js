@@ -9,7 +9,7 @@ import authActions from "shared/actions/auth-actions";
 import { SETTINGS_ROUTE } from "shared/components/profile/profile.constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import PasswordChangeForm from "shared/modules/password-change/password-change-form";
-import { authApiProxy } from "shared/services/api-client/auth-api";
+import authApi from "shared/services/api-client/auth-api";
 import authService from "shared/services/auth-service";
 
 class PasswordChange extends Component {
@@ -33,15 +33,15 @@ class PasswordChange extends Component {
 
   handleSubmit = model => {
     this.setState({ isPending: true, errorMessage: null });
-    authApiProxy
+    authApi
       .v10AuthPasswordChangePost(authService.getAuthArg(), {
         model
       })
-      .then(({ data }) => {
+      .then(data => {
         this.updateToken(data);
       })
       .catch(data => {
-        this.setState({ ...data });
+        this.setState({ data });
       });
   };
 
