@@ -69,14 +69,18 @@ class CreateProgramSettings extends React.Component {
       (errors.logo.width || errors.logo.height || errors.logo.size);
 
     const onSubmit = () => {
-      createProgramSettingsValidationSchema({ t, programsInfo })
-        .isValid(values)
-        .then(status => {
-          if (!status) {
-            onValidateError();
-          }
-        });
-      handleSubmit(values, { setSubmitting });
+      const isValid = createProgramSettingsValidationSchema({
+        t,
+        programsInfo
+      }).isValidSync(values);
+
+      if (!isValid) {
+        onValidateError();
+      }
+
+      handleSubmit(values, {
+        setSubmitting
+      });
     };
 
     return (

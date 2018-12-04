@@ -121,13 +121,16 @@ class CreateFundSettings extends React.Component {
       (errors.logo.width || errors.logo.height || errors.logo.size);
 
     const onSubmit = () => {
-      createFundSettingsValidationSchema({ t, programsInfo, deposit })
-        .isValid(values)
-        .then(status => {
-          if (!status) {
-            onValidateError();
-          }
-        });
+      const isValid = createFundSettingsValidationSchema({
+        t,
+        programsInfo,
+        deposit
+      }).isValidSync(values);
+
+      if (!isValid) {
+        onValidateError();
+      }
+
       handleSubmit(values, { setSubmitting });
     };
 
