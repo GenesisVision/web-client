@@ -1,10 +1,13 @@
-import { DEFAULT_PERIOD } from "shared/components/chart/chart-period/chart-period.helpers";
 import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
-import { programsApiProxy } from "shared/services/api-client/programs-api";
+import { DEFAULT_PERIOD } from "shared/components/chart/chart-period/chart-period.helpers";
+import programsApi, {
+  programsApiProxy
+} from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
 
 import { PROGRAM_SLUG_URL_PARAM_NAME } from "../../programs.routes";
+
 export const getProgramDescription = () => (dispatch, getState) => {
   const authorization = authService.getAuthArg();
   const { routing } = getState();
@@ -66,8 +69,15 @@ export const getProgramStatistic = (
 };
 
 export const fetchProgramTrades = (id, filters, currency) => {
-  return programsApiProxy.v10ProgramsByIdTradesGet(id, {
-    ...filters,
-    currency
-  });
+  return programsApi
+    .v10ProgramsByIdTradesGet(id, {
+      ...filters,
+      currency
+    })
+    .then(data => {
+      return Promise.resolve({
+        total: data.total,
+        items: data.trades
+      });
+    });
 };

@@ -2,7 +2,9 @@ import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
 import { DEFAULT_PERIOD } from "shared/components/chart/chart-period/chart-period.helpers";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import { managerApiProxy } from "shared/services/api-client/manager-api";
-import { programsApiProxy } from "shared/services/api-client/programs-api";
+import programsApi, {
+  programsApiProxy
+} from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
 
@@ -97,8 +99,15 @@ export const closePeriod = (programId, onSuccess) => dispatch => {
 };
 
 export const fetchProgramTrades = (id, filters, currency) => {
-  return programsApiProxy.v10ProgramsByIdTradesGet(id, {
-    ...filters,
-    currency
-  });
+  return programsApi
+    .v10ProgramsByIdTradesGet(id, {
+      ...filters,
+      currency
+    })
+    .then(data => {
+      return Promise.resolve({
+        total: data.total,
+        items: data.trades
+      });
+    });
 };
