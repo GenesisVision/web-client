@@ -112,7 +112,7 @@ class FundDetailsDescription extends PureComponent {
           </div>
         </div>
         <div className="details-description__main">
-          <h1 className="app__title-details">{fundDescription.title}</h1>
+          <h1 className="title-small-padding">{fundDescription.title}</h1>
           <Link
             to={{
               pathname: composeManagerDetailsUrl(fundDescription.manager.url),

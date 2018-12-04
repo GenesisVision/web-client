@@ -25,17 +25,14 @@ $description-block-width: 250px;
   }
 }
 
-.programs-table-container {
-  padding-top: $padding;
-}
-
 .programs-cards {
+  @include horizontal-paddings($padding-small, 2);
+  @include adaptive-padding(top, $padding-xsmall);
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
-  padding: 0 $padding/2 $padding/2;
   .icon {
     width: auto;
   }
@@ -157,7 +154,6 @@ $description-block-width: 250px;
     }
   }
   @include media-breakpoint-landscape-phone() {
-    padding: $padding;
     padding-right: $padding - $padding/2;
     &__card {
       min-width: $program-width;
@@ -217,13 +213,8 @@ $description-block-width: 250px;
       padding: $padding/10;
     }
     .gv-btn {
+      @include font-size($font-size-paragraph);
       padding: 0;
-      font-size: $font-size-paragraph-mobile;
-    }
-    @include media-breakpoint-landscape-phone() {
-      .gv-btn {
-        font-size: $font-size-paragraph;
-      }
     }
   }
   &--bottom {
@@ -244,15 +235,15 @@ $description-block-width: 250px;
     &.table__cell:last-child {
       padding-right: 22px;
     }
-	  .favorite-icon {
-		  width: 20px;
-		  height: 19px;
+    .favorite-icon {
+      width: 20px;
+      height: 19px;
 
-		  @include media-breakpoint-landscape-phone() {
-			  width: 28px;
-			  height: 27px;
-		  }
-	  }
+      @include media-breakpoint-landscape-phone() {
+        width: 28px;
+        height: 27px;
+      }
+    }
   }
 }
 

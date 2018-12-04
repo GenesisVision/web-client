@@ -18,7 +18,7 @@ class WalletWithdrawContainer extends Component {
     this.setState({ isPending: true });
     walletWithdrawService
       .fetchPaymentInfo()
-      .then(data => this.setState({ ...data }));
+      .then(data => this.setState({ data, isPending: false }));
   }
 
   handleSubmit = values => {
@@ -27,9 +27,15 @@ class WalletWithdrawContainer extends Component {
       .newWithdrawRequest({ ...values, amount: Number(values.amount) })
       .then(response => {
         this.setState({
-          isPending: response.isPending,
-          success: !Boolean(response.errorMessage),
-          errorMessage: response.errorMessage
+          isPending: false,
+          success: true
+        });
+      })
+      .catch(error => {
+        this.setState({
+          isPending: false,
+          success: false,
+          errorMessage: error.errorMessage
         });
       });
   };

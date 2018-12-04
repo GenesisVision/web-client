@@ -1259,5 +1259,11 @@
     "programCounts": "Programs",
     "quota": "Quota",
     "currentProfit": "Current target profit"
+  },
+  "pager": {
+    "first": "First",
+    "prev": "Prev",
+    "next": "Next",
+    "last": "Last"
   }
 }

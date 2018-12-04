@@ -1,8 +1,8 @@
 import authActions from "shared/actions/auth-actions";
 import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import { authApiProxy } from "shared/services/api-client/auth-api";
-import { profileApiProxy } from "shared/services/api-client/profile-api";
+import authApi from "shared/services/api-client/auth-api";
+import profileApi from "shared/services/api-client/profile-api";
 import authService from "shared/services/auth-service";
 import filesService from "shared/services/file-service";
 
@@ -14,10 +14,10 @@ export const updateProfileAvatar = ({
   let photoSrc = null;
 
   filesService
-    .uploadFileProxy(croppedImage, authorization)
+    .uploadFile(croppedImage, authorization)
     .then(logoId => {
       photoSrc = filesService.getFileUrl(logoId);
-      return profileApiProxy.v10ProfileAvatarUpdateByFileIdPost(
+      return profileApi.v10ProfileAvatarUpdateByFileIdPost(
         logoId,
         authorization
       );
@@ -40,7 +40,7 @@ export const updateProfileAvatar = ({
 export const removeProfileAvatar = ({ submitCallback }) => dispatch => {
   const authorization = authService.getAuthArg();
 
-  profileApiProxy
+  profileApi
     .v10ProfileAvatarRemovePost(authorization)
     .then(() => dispatch(fetchProfileHeaderInfo()))
     .then(() => {
@@ -52,16 +52,14 @@ export const removeProfileAvatar = ({ submitCallback }) => dispatch => {
       );
       submitCallback();
     })
-    .catch(error =>
-      alertMessageActions.error(error.errorMessage || error.message)
-    );
+    .catch(error => alertMessageActions.error(error.errorMessage));
 };
 
 export const logoutFromDevices = () => dispatch => {
-  return authApiProxy
+  return authApi
     .v10AuthTokenDevicesLogoutPost(authService.getAuthArg())
     .then(response => {
-      authService.storeToken(response.data);
+      authService.storeToken(response);
       dispatch(authActions.updateToken());
       dispatch(
         alertMessageActions.success(
@@ -72,7 +70,7 @@ export const logoutFromDevices = () => dispatch => {
       return response;
     })
     .catch(error => {
-      dispatch(alertMessageActions.error(error.errorMessage || error.message));
+      dispatch(alertMessageActions.error(error.errorMessage));
       return error;
     });
 };

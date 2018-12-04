@@ -1,10 +1,11 @@
-import { DEFAULT_PERIOD } from "shared/components/chart/chart-period/chart-period.helpers";
 import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
-import { programsApiProxy } from "shared/services/api-client/programs-api";
+import { DEFAULT_PERIOD } from "shared/components/chart/chart-period/chart-period.helpers";
+import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
 
 import { PROGRAM_SLUG_URL_PARAM_NAME } from "../../programs.routes";
+
 export const getProgramDescription = () => (dispatch, getState) => {
   const authorization = authService.getAuthArg();
   const { routing } = getState();
@@ -14,7 +15,7 @@ export const getProgramDescription = () => (dispatch, getState) => {
     PROGRAM_DETAILS_ROUTE
   )[PROGRAM_SLUG_URL_PARAM_NAME];
 
-  return programsApiProxy.v10ProgramsByIdGet(programSlugUrl, { authorization });
+  return programsApi.v10ProgramsByIdGet(programSlugUrl, { authorization });
 };
 
 export const getProgramStatistic = (
@@ -29,44 +30,36 @@ export const getProgramStatistic = (
     maxPointCount: 100
   };
   return Promise.all([
-    programsApiProxy.v10ProgramsByIdChartsProfitGet(programId, chartFilter),
-    programsApiProxy.v10ProgramsByIdChartsBalanceGet(programId, chartFilter)
+    programsApi.v10ProgramsByIdChartsProfitGet(programId, chartFilter),
+    programsApi.v10ProgramsByIdChartsBalanceGet(programId, chartFilter)
   ]).then(([profitChart, balanceChart]) => {
-    const statisticData = {
-      data: {
-        trades: profitChart.data.trades,
-        successTradesPercent: profitChart.data.successTradesPercent,
-        profitFactor: profitChart.data.profitFactor,
-        investors: profitChart.data.investors,
-        sharpeRatio: profitChart.data.sharpeRatio,
-        sortinoRatio: profitChart.data.sortinoRatio,
-        maxDrawdown: profitChart.data.maxDrawdown,
-        periodStarts: profitChart.data.lastPeriodStarts,
-        periodEnds: profitChart.data.lastPeriodEnds
-      },
-      isPending: profitChart.isPending
+    const statistic = {
+      trades: profitChart.trades,
+      successTradesPercent: profitChart.successTradesPercent,
+      profitFactor: profitChart.profitFactor,
+      investors: profitChart.investors,
+      sharpeRatio: profitChart.sharpeRatio,
+      sortinoRatio: profitChart.sortinoRatio,
+      maxDrawdown: profitChart.maxDrawdown,
+      periodStarts: profitChart.lastPeriodStarts,
+      periodEnds: profitChart.lastPeriodEnds
     };
     const profitChartData = {
-      data: {
-        balance: profitChart.data.balance,
-        totalGvtProfit: profitChart.data.totalGvtProfit,
-        totalProgramCurrencyProfit: profitChart.data.totalProgramCurrencyProfit,
-        programCurrency: profitChart.data.programCurrency,
-        profitChangePercent: profitChart.data.profitChangePercent,
-        pnLChart: profitChart.data.pnLChart,
-        equityChart: profitChart.data.equityChart
-      },
-      isPending: profitChart.isPending
+      balance: profitChart.balance,
+      totalGvtProfit: profitChart.totalGvtProfit,
+      totalProgramCurrencyProfit: profitChart.totalProgramCurrencyProfit,
+      programCurrency: profitChart.programCurrency,
+      profitChangePercent: profitChart.profitChangePercent,
+      pnLChart: profitChart.pnLChart,
+      equityChart: profitChart.equityChart
     };
 
-    const balanceChartData = balanceChart;
-
-    return { statisticData, profitChartData, balanceChartData };
+    return { statistic, profitChart: profitChartData, balanceChart };
   });
 };
 
 export const fetchProgramTrades = (id, filters, currency) => {
-  return programsApiProxy.v10ProgramsByIdTradesGet(id, {
+  return programsApi.v10ProgramsByIdTradesGet(id, {
     ...filters,
     currency
   });

@@ -19,7 +19,7 @@ class GlobalSearchResultConatiner extends Component {
 
   searchDebounced = debounce(value => {
     search(value).then(data => {
-      this.setState({ ...data });
+      this.setState({ data });
     });
   }, 300);
 

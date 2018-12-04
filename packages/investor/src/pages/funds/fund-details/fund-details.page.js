@@ -7,12 +7,12 @@ import { connect } from "react-redux";
 import { push } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
 import FundDetailsDescriptionSection from "shared/components/funds/fund-details/fund-details-description/fund-details-description-section";
+import FundDetailsHistorySection from "shared/components/funds/fund-details/fund-details-history-section/fund-details-history-section";
 import FundDetailsStatisticSection from "shared/components/funds/fund-details/fund-details-statistics-section/fund-details-statistic-section";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
 import Page from "shared/components/page/page";
 
 import { LOGIN_ROUTE } from "../../auth/login/login.routes";
-import FundDetailsHistorySection from "shared/components/funds/fund-details/fund-details-history-section/fund-details-history-section";
 import {
   fetchFundStructure,
   getFundDescription,
@@ -31,21 +31,18 @@ class FundDetailsPage extends PureComponent {
 
   constructor(props) {
     super(props);
-    this.description = { data: null, isPending: true };
-    this.profitChart = { data: null, isPending: true };
-    this.balanceChart = { data: null, isPending: true };
-    this.statistic = { data: null, isPending: true };
-    this.trades = { data: null, isPending: true };
+    this.description = null;
+    this.profitChart = null;
+    this.balanceChart = null;
+    this.statistic = null;
   }
 
   changeInvestmentStatus = () => {
     this.setState({ isPending: true });
-    this.props.service
-      .getFundDescription(this.description.data.id)
-      .then(data => {
-        this.description = data.data;
-        this.setState({ isPending: false });
-      });
+    this.props.service.getFundDescription(this.description.id).then(data => {
+      this.description = data;
+      this.setState({ isPending: false });
+    });
   };
 
   componentDidMount() {
@@ -58,7 +55,7 @@ class FundDetailsPage extends PureComponent {
     service
       .getFundDescription()
       .then(data => {
-        this.description = data.data;
+        this.description = data;
         this.setState({ isPending: false });
       })
       .catch(e => {
@@ -67,12 +64,12 @@ class FundDetailsPage extends PureComponent {
       })
       .then(() => {
         this.setState({ isPending: true });
-        return getFundStatistic(this.description.data.id);
+        return getFundStatistic(this.description.id);
       })
       .then(data => {
-        this.profitChart = data.profitChartData;
-        this.balanceChart = data.balanceChartData;
-        this.statistic = data.statisticData;
+        this.profitChart = data.profitChart;
+        this.balanceChart = data.balanceChart;
+        this.statistic = data.statistic;
         this.setState({ isPending: false });
       })
       .catch(e => {
@@ -87,9 +84,9 @@ class FundDetailsPage extends PureComponent {
       return <NotFoundPage />;
     }
 
-    if (!this.description.data) return null;
+    if (!this.description) return null;
     return (
-      <Page title={this.description.data.title}>
+      <Page title={this.description.title}>
         <FundDetailContext.Provider
           value={{
             updateDetails: this.updateDetails
@@ -101,7 +98,7 @@ class FundDetailsPage extends PureComponent {
                 FundWithdrawContainer={FundWithdrawContainer}
                 FundDepositContainer={FundDepositContainer}
                 FundDetailContext={FundDetailContext}
-                fundDescriptionData={this.description}
+                fundDescription={this.description}
                 isAuthenticated={isAuthenticated}
                 redirectToLogin={service.redirectToLogin}
                 onChangeInvestmentStatus={this.changeInvestmentStatus}
@@ -110,16 +107,16 @@ class FundDetailsPage extends PureComponent {
             <div className="details__section">
               <FundDetailsStatisticSection
                 getFundStatistic={getFundStatistic}
-                programId={this.description.data.id}
+                programId={this.description.id}
                 currency={currency}
-                statisticData={this.statistic}
-                profitChartData={this.profitChart}
-                balanceChartData={this.balanceChart}
+                statistic={this.statistic}
+                profitChart={this.profitChart}
+                balanceChart={this.balanceChart}
               />
             </div>
             <div className="details__history">
               <FundDetailsHistorySection
-                id={this.description.data.id}
+                id={this.description.id}
                 fetchFundStructure={fetchFundStructure}
               />
             </div>

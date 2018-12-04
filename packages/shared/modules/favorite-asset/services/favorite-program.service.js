@@ -1,4 +1,4 @@
-import { programsApiProxy } from "shared/services/api-client/programs-api";
+import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 
 import {
@@ -25,14 +25,11 @@ export const toggleFavoriteProgramDispatchable = (
 };
 
 const addFavorite = ({ programId, authorization }) => {
-  return programsApiProxy.v10ProgramsByIdFavoriteAddPost(
-    programId,
-    authorization
-  );
+  return programsApi.v10ProgramsByIdFavoriteAddPost(programId, authorization);
 };
 
 const removeFavorite = ({ programId, authorization }) => {
-  return programsApiProxy.v10ProgramsByIdFavoriteRemovePost(
+  return programsApi.v10ProgramsByIdFavoriteRemovePost(
     programId,
     authorization
   );

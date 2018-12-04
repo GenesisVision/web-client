@@ -11,12 +11,12 @@ import { compose } from "redux";
 import { bindActionCreators } from "redux";
 import Dialog from "shared/components/dialog/dialog";
 import FundWithdrawPopup from "shared/components/fund-withdraw/fund-withdraw-popup";
-import { investorApiProxy } from "shared/services/api-client/investor-api";
+import investorApi from "shared/services/api-client/investor-api";
 import authService from "shared/services/auth-service";
 
 class FundWithdrawContainer extends PureComponent {
   handleWithdraw = (id, percent) => {
-    return investorApiProxy
+    return investorApi
       .v10InvestorFundsByIdWithdrawByPercentPost(
         id,
         percent,
