@@ -59,8 +59,15 @@ export const getProgramStatistic = (
 };
 
 export const fetchProgramTrades = (id, filters, currency) => {
-  return programsApi.v10ProgramsByIdTradesGet(id, {
-    ...filters,
-    currency
-  });
+  return programsApi
+    .v10ProgramsByIdTradesGet(id, {
+      ...filters,
+      currency
+    })
+    .then(data => {
+      return Promise.resolve({
+        total: data.total,
+        items: data.trades
+      });
+    });
 };

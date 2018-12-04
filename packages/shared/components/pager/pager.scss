@@ -14,11 +14,12 @@ $pager-button-size-mobile: $pager-button-size/$divider-text;
     }
   }
 
-  &__separator,&__button  {
+  &__separator,
+  &__button {
     display: flex;
     justify-content: center;
     box-sizing: border-box;
-    opacity: .4;
+    opacity: 0.4;
     font-weight: 700;
     width: $pager-button-size-mobile;
     height: $pager-button-size-mobile;
@@ -28,7 +29,6 @@ $pager-button-size-mobile: $pager-button-size/$divider-text;
       height: $pager-button-size;
       font-size: $font-size-common;
     }
-
   }
 
   &__button {

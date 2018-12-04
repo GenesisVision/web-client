@@ -1,9 +1,9 @@
 import "./pager.scss";
 
+import classNames from "classnames";
 import PropTypes from "prop-types";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
-import classNames from "classnames";
 
 class Pager extends PureComponent {
   generateVisiblePages = (first, count) => {
