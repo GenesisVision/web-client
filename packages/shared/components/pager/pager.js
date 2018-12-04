@@ -5,7 +5,7 @@ import React, { Fragment, PureComponent } from "react";
 import { translate } from "react-i18next";
 import classNames from "classnames";
 
-class PagerNew extends PureComponent {
+class Pager extends PureComponent {
   generateVisiblePages = (first, count) => {
     const pages = [];
     first = first > 0 ? first : 1;
@@ -63,11 +63,11 @@ class PagerNew extends PureComponent {
   }
 }
 
-PagerNew.propTypes = {
+Pager.propTypes = {
   total: PropTypes.number.isRequired,
   current: PropTypes.number.isRequired,
   countVisiblePages: PropTypes.number.isRequired,
   onPageChanged: PropTypes.func.isRequired
 };
 
-export default translate()(PagerNew);
+export default translate()(Pager);
