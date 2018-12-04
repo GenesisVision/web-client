@@ -124,7 +124,6 @@ class CreateFundSettings extends React.Component {
       createFundSettingsValidationSchema({ t, programsInfo, deposit })
         .isValid(values)
         .then(status => {
-          console.info(status);
           if (!status) {
             onValidateError();
           }
