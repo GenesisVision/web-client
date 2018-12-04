@@ -184,7 +184,7 @@ class ProgramDetailsDescription extends PureComponent {
           />
         </div>
         <div className="details-description__main">
-          <h1 className="app__title-details">{title}</h1>
+          <h1 className="title-small-padding">{title}</h1>
           <Link
             to={{
               pathname: composeManagerDetailsUrl(

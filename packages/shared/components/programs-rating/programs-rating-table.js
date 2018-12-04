@@ -4,8 +4,8 @@ import connect from "react-redux/es/connect/connect";
 import { bindActionCreators, compose } from "redux";
 import ProgramsTableModule from "shared/modules/programs-table/components/programs-table/programs-table-module";
 
-import { getProgramsRating } from "./services/program-rating-service";
 import { COLUMNS, PROGRAMS, SELF_PROGRAMS } from "./program-rating.constants";
+import { getProgramsRating } from "./services/program-rating-service";
 
 class ProgramsRatingTable extends Component {
   state = {
@@ -33,7 +33,7 @@ class ProgramsRatingTable extends Component {
         currentPage
       })
       .then(programs => {
-        const totalPages = Math.round(programs.value.total / itemsOnPage);
+        const totalPages = Math.ceil(programs.value.total / itemsOnPage);
         this.setState({
           currentPage,
           totalPages
