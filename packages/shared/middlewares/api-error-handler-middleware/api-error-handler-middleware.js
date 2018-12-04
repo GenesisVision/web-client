@@ -1,7 +1,5 @@
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import handleErrorResponse, {
-  SERVER_CONNECTION_ERROR_CODE
-} from "shared/utils/handle-error-response";
+import { SERVER_CONNECTION_ERROR_CODE } from "shared/utils/handle-error-response";
 
 const REJECTED_SUFFIX = "FAILURE";
 
@@ -12,7 +10,7 @@ const apiErrorHandlerMiddleware = (
   var isRejected = new RegExp(REJECTED + "$", "g");
 
   if (isRejected && action.error) {
-    const handledError = handleErrorResponse(action.payload.response);
+    const handledError = action.payload;
     if (handledError.code === SERVER_CONNECTION_ERROR_CODE) {
       dispatch(
         alertMessageActions.error(
