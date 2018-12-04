@@ -23,7 +23,7 @@ class CreateFundContainer extends Component {
       .then(() => {
         createFundService.fetchInvestmentAmount().then(response => {
           this.setState({
-            deposit: response.data,
+            deposit: response,
             isPending: false
           });
         });
