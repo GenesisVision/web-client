@@ -16,18 +16,17 @@ class Pager extends PureComponent {
   render() {
     const { t, total, current, countVisiblePages, onPageChanged } = this.props;
     const handleChange = page => () => onPageChanged(page);
-    const PagerButton = ({ page, label }) => {
-      return (
-        <div
-          className={classNames("pager__button", {
-            "pager__button--current": page === current
-          })}
-          onClick={handleChange(page)}
-        >
-          {label || page}
-        </div>
-      );
-    };
+    const PagerSeparator = () => <div className="pager__separator">...</div>;
+    const PagerButton = ({ page, label }) => (
+      <div
+        className={classNames("pager__button", {
+          "pager__button--current": page === current
+        })}
+        onClick={handleChange(page)}
+      >
+        {label || page}
+      </div>
+    );
     const firstPage = current - Math.floor(countVisiblePages / 2);
     const visiblePages = this.generateVisiblePages(
       firstPage,
@@ -35,10 +34,10 @@ class Pager extends PureComponent {
     );
     return (
       <div className="pager">
-        {current > 1 && (
+        {firstPage > 1 && (
           <div className="pager__pager-block">
-            <PagerButton page={1} label={t("pager.first")} />
-            <PagerButton page={current - 1} label={t("pager.prev")} />
+            <PagerButton page={1} />
+            {firstPage > 2 && <PagerSeparator />}
           </div>
         )}
         <div className="pager__pager-block">
@@ -48,10 +47,10 @@ class Pager extends PureComponent {
               <PagerButton key={page} page={page} />
             ))}
         </div>
-        {current < total && (
+        {firstPage + countVisiblePages - 1 < total && (
           <div className="pager__pager-block">
-            <PagerButton page={current + 1} label={t("pager.next")} />
-            <PagerButton page={total} label={t("pager.last")} />
+            {firstPage + countVisiblePages < total && <PagerSeparator />}
+            <PagerButton page={total} />
           </div>
         )}
       </div>
