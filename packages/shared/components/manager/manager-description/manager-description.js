@@ -5,6 +5,7 @@ import React from "react";
 import { translate } from "react-i18next";
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
+
 import StatisticItem from "../../statistic-item/statistic-item";
 
 const ManagerDescription = ({ t, managerProfile }) => {

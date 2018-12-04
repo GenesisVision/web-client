@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { authApiProxy } from "shared/services/api-client/auth-api";
+import authApi from "shared/services/api-client/auth-api";
 import authService from "shared/services/auth-service";
 
 import PhoneVerificationForm from "./phone-verification-form";
@@ -13,14 +13,14 @@ class PhoneVerification extends Component {
   };
 
   sendCode = () => {
-    authApiProxy
+    authApi
       .v10AuthPhoneCodePost(authService.getAuthArg())
-      .then(data => this.setState({ ...data }))
-      .catch(data => this.setState({ ...data }));
+      .then(data => this.setState({ data }))
+      .catch(data => this.setState({ data }));
   };
 
   verifyCode = code => {
-    authApiProxy
+    authApi
       .v10AuthPhoneVerifyPost(authService.getAuthArg(), {
         code
       })
@@ -29,7 +29,7 @@ class PhoneVerification extends Component {
           this.props.onVerify();
         }
       })
-      .catch(data => this.setState({ ...data }));
+      .catch(data => this.setState({ data }));
   };
 
   startTimer() {

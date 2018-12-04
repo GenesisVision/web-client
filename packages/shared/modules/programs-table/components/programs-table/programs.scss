@@ -236,15 +236,15 @@ $description-block-width: 250px;
     &.table__cell:last-child {
       padding-right: 22px;
     }
-	  .favorite-icon {
-		  width: 20px;
-		  height: 19px;
+    .favorite-icon {
+      width: 20px;
+      height: 19px;
 
-		  @include media-breakpoint-landscape-phone() {
-			  width: 28px;
-			  height: 27px;
-		  }
-	  }
+      @include media-breakpoint-landscape-phone() {
+        width: 28px;
+        height: 27px;
+      }
+    }
   }
 }
 

@@ -24,9 +24,9 @@ class CreateProgramContainer extends Component {
   componentDidMount() {
     createProgramService.fetchBrokers().then(response => {
       this.setState({
-        brokers: response.data.brokers,
+        brokers: response.brokers,
         isPending: false,
-        choosedBroker: response.data.brokers[0]
+        choosedBroker: response.brokers[0]
       });
     });
   }

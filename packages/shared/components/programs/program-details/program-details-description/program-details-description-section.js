@@ -29,10 +29,10 @@ class ProgramDetailsDescriptionSection extends PureComponent {
 
   static getDerivedStateFromProps(props, state) {
     let newState = {};
-    if (state.prevProps !== props.programDescriptionData) {
-      newState.prevProps = props.programDescriptionData;
-      newState.programDescription = props.programDescriptionData.data;
-      newState.ui = { isPending: props.programDescriptionData.isPending };
+    if (state.prevProps !== props.programDescription) {
+      newState.prevProps = props.programDescription;
+      newState.programDescription = props.programDescription;
+      newState.ui = { isPending: props.programDescription };
     }
 
     return newState;

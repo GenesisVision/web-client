@@ -10,16 +10,8 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Surface from "shared/components/surface/surface";
 import { formatValue } from "shared/utils/formatter";
 
-const ProgramDetailsStatistics = ({
-  t,
-  statisticData,
-  profitChartData,
-  period
-}) => {
-  const { data: statistic, isPendingStatistic } = statisticData;
-  const { data: profitChart, isPendingProfitChart } = profitChartData;
-
-  if (!statistic || isPendingStatistic || isPendingProfitChart) return null;
+const ProgramDetailsStatistics = ({ t, statistic, profitChart, period }) => {
+  if (!statistic) return null;
   return (
     <Surface className="surface--horizontal-paddings details-statistics">
       <h3>{t("program-details-page.statistics.heading")}</h3>
