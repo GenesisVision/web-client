@@ -1,10 +1,10 @@
-import GVCheckbox from "shared/components/gv-checkbox/gv-checkbox";
 import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import React from "react";
 import { translate } from "react-i18next";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
+import GVCheckbox from "shared/components/gv-checkbox/gv-checkbox";
 
 import validationSchema from "./signup-form.validators";
 
@@ -105,7 +105,8 @@ const withTranslationAndFormik = compose(
   translate(),
   withFormik({
     displayName: "signup-form",
-    mapPropsToValues: () => ({
+    mapPropsToValues: props => ({
+      refCode: props.refCode,
       email: "",
       password: "",
       confirmPassword: "",
