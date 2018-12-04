@@ -1,5 +1,7 @@
 import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
 import { DEFAULT_PERIOD } from "shared/components/chart/chart-period/chart-period.helpers";
+import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
+import managerApi from "shared/services/api-client/manager-api";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
@@ -56,6 +58,34 @@ export const getProgramStatistic = (
 
     return { statistic, profitChart: profitChartData, balanceChart };
   });
+};
+
+export const closeProgram = (programId, opts) => dispatch => {
+  const authorization = authService.getAuthArg();
+
+  return managerApi.v10ManagerProgramsByIdClosePost(
+    programId,
+    authorization,
+    opts
+  );
+};
+
+export const closePeriod = (programId, onSuccess) => dispatch => {
+  const authorization = authService.getAuthArg();
+  return managerApi
+    .v10ManagerProgramsByIdPeriodClosePost(programId, authorization)
+    .then(() => {
+      onSuccess();
+      dispatch(
+        alertMessageActions.success(
+          "program-details-page.close-period.notification-success",
+          true
+        )
+      );
+    })
+    .catch(error => {
+      dispatch(alertMessageActions.error(error.errorMessage));
+    });
 };
 
 export const fetchProgramTrades = (id, filters, currency) => {
