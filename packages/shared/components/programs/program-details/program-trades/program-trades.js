@@ -20,45 +20,17 @@ import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { formatValue } from "shared/utils/formatter";
 
-import programsApi from "../../../../services/api-client/programs-api";
-import { composeRequestFilters } from "../../../table/services/table.service";
-
 class ProgramTrades extends Component {
-  state = {
-    isPending: false,
-    data: null
-  };
-
-  componentDidMount() {
-    const tradesFilters = composeRequestFilters({
-      paging: DEFAULT_PAGING,
-      sorting: undefined,
-      filtering: PROGRAM_TRADES_FILTERS,
-      defaultFilters: PROGRAM_TRADES_DEFAULT_FILTERS
-    });
-    this.fetchProgramTrades(tradesFilters);
-  }
-
   fetchProgramTrades = filters => {
     const { currency, programId, fetchTrades } = this.props;
-    this.setState({ isPending: true });
-    return fetchTrades(programId, filters, currency)
-      .then(data => this.setState({ data, isPending: false }))
-      .catch(error => this.setState({ ...error }));
+    return fetchTrades(programId, filters, currency);
   };
 
   render() {
     const { t } = this.props;
-    if (!this.state.data) return null;
-
-    const data = {
-      items: this.state.data.trades,
-      total: this.state.data.total
-    };
 
     return (
       <TableModule
-        data={data}
         getItems={this.fetchProgramTrades}
         defaultFilters={PROGRAM_TRADES_DEFAULT_FILTERS}
         filtering={PROGRAM_TRADES_FILTERS}
