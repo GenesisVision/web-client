@@ -56,7 +56,7 @@ class CreateFundContainer extends Component {
           {!isPending && (
             <CreateFundSettings
               navigateBack={navigateBack}
-              balance={headerData.availableGvt || 0}
+              balance={(headerData && headerData.availableGvt) || 0}
               updateBalance={service.fetchBalance}
               onSubmit={handleSubmit}
               author={(headerData && headerData.name) || null} //headerData.name
