@@ -1,0 +1,39 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
+
+$pager-button-size: 40px;
+$pager-button-size-mobile: $pager-button-size/$divider-text;
+
+.pager {
+  display: flex;
+  &__visible-pages {
+    display: flex;
+    padding: 0 $padding-xsmall-mobile;
+    @include media-breakpoint-landscape-phone() {
+      padding: 0 $padding-xsmall;
+    }
+  }
+  &__button {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $pager-button-size-mobile;
+    height: $pager-button-size-mobile;
+    font-size: $font-size-common-mobile;
+    font-weight: 700;
+    border-radius: 8px;
+    opacity: .4;
+    cursor: pointer;
+    @include media-breakpoint-landscape-phone() {
+      width: $pager-button-size;
+      height: $pager-button-size;
+      font-size: $font-size-common;
+    }
+    &--current {
+      background-color: #1b2a35;
+      opacity: 1;
+    }
+  }
+}
