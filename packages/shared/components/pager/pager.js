@@ -47,12 +47,13 @@ class Pager extends PureComponent {
               <PagerButton key={page} page={page} />
             ))}
         </div>
-        {firstPage + countVisiblePages - 1 < total && (
-          <div className="pager__pager-block">
-            {firstPage + countVisiblePages < total && <PagerSeparator />}
-            <PagerButton page={total} />
-          </div>
-        )}
+        {countVisiblePages + 1 < total &&
+          countVisiblePages + firstPage - 1 < total && (
+            <div className="pager__pager-block">
+              {firstPage + countVisiblePages < total && <PagerSeparator />}
+              <PagerButton page={total} />
+            </div>
+          )}
       </div>
     );
   }
