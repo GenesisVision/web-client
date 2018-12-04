@@ -36,9 +36,12 @@ $padding: $padding-small;
     align-items: center;
     padding: $padding/2;
     font-size: $td-font-size/1.5;
-    padding: 20px 30px 0;
+    padding:  0 $padding-small/2;
     .pagination {
       margin: 0;
+    }
+    @include media-breakpoint-landscape-phone() {
+      padding:  0 $padding-small;
     }
   }
   &__toolbar {
