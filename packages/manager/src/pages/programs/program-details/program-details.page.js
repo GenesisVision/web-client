@@ -23,7 +23,7 @@ import {
   fetchProgramTrades,
   getProgramDescription,
   getProgramStatistic
-} from "./services/program-details.service";
+} from "shared/components/programs/program-details/services/program-details.service";
 
 export const ProgramDetailContext = React.createContext({
   updateDetails: () => {}

@@ -1,12 +1,13 @@
-import { PROGRAM_DETAILS_ROUTE } from "pages/programs/programs.routes";
+import {
+  PROGRAM_DETAILS_ROUTE,
+  PROGRAM_SLUG_URL_PARAM_NAME
+} from "pages/programs/programs.routes";
 import { DEFAULT_PERIOD } from "shared/components/chart/chart-period/chart-period.helpers";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import managerApi from "shared/services/api-client/manager-api";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
-
-import { PROGRAM_SLUG_URL_PARAM_NAME } from "../../programs.routes";
 
 export const getProgramDescription = () => (dispatch, getState) => {
   const authorization = authService.getAuthArg();
