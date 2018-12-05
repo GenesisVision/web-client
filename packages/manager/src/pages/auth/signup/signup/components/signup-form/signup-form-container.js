@@ -28,6 +28,7 @@ const mapDispatchToProps = dispatch => ({
   service: bindActionCreators(signUpService, dispatch)
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  SignUpFormContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SignUpFormContainer);

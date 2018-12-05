@@ -9,6 +9,7 @@ import Surface from "shared/components/surface/surface";
 import TabsContainer from "shared/components/tabs-container/tabs-container";
 
 import { LEVELS } from "./program-rating.constants";
+import { setArrow } from "./program-rating.helper";
 
 class ProgramsRatingContainer extends Component {
   state = {
@@ -23,7 +24,7 @@ class ProgramsRatingContainer extends Component {
       const navigateTabs = levelData.map(item => ({
         ...item,
         count: item.totalOwn,
-        name: LEVELS[item.level]
+        name: setArrow(LEVELS[item.level])
       }));
       const tab = navigateTabs[0];
       this.setState({ navigateTabs, tab });

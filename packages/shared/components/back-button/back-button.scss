@@ -13,20 +13,24 @@
   align-items: center;
 
   &__container {
-    display: flex;
-    align-items: center;
+    display: block;
   }
 
   &__back {
     font-size: $font-size-common;
     letter-spacing: 0.4px;
     font-weight: 600;
+    line-height: $font-size-common;
+    vertical-align: bottom;
+    display: inline-block;
   }
 
   &__back-arrow {
     margin-right: 10px;
-    font-size: $font-size-h4;
-    line-height: 13px;
+    font-size: $font-size-common;
+    line-height: 1;
+    vertical-align: top;
+    display: inline-block;
   }
 
   & .gv-btn--text {
