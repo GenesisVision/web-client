@@ -9,15 +9,15 @@ import { bindActionCreators, compose } from "redux";
 import FundDetailsDescriptionSection from "shared/components/funds/fund-details/fund-details-description/fund-details-description-section";
 import FundDetailsHistorySection from "shared/components/funds/fund-details/fund-details-history-section/fund-details-history-section";
 import FundDetailsStatisticSection from "shared/components/funds/fund-details/fund-details-statistics-section/fund-details-statistic-section";
-import NotFoundPage from "shared/components/not-found/not-found.routes";
-import Page from "shared/components/page/page";
-
-import { LOGIN_ROUTE } from "../../auth/login/login.routes";
 import {
   fetchFundStructure,
   getFundDescription,
   getFundStatistic
-} from "./services/fund-details.service";
+} from "shared/components/funds/fund-details/services/fund-details.service";
+import NotFoundPage from "shared/components/not-found/not-found.routes";
+import Page from "shared/components/page/page";
+
+import { LOGIN_ROUTE } from "../../auth/login/login.routes";
 
 export const FundDetailContext = React.createContext({
   updateDetails: () => {}
