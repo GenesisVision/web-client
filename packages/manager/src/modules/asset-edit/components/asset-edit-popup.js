@@ -1,7 +1,6 @@
 import "./asset-edit.scss";
 
 import AssetEditForm from "modules/asset-edit/components/asset-edit-form";
-import AssetEditTop from "modules/asset-edit/components/asset-edit-top";
 import PropTypes from "prop-types";
 import React, { Component, Fragment } from "react";
 
@@ -10,8 +9,8 @@ class AssetEditPopup extends Component {
     const { info, submitInfo, edit, serverError, type } = this.props;
     return info ? (
       <Fragment>
-        <AssetEditTop title={info.title} type={type} />
         <AssetEditForm
+          title={info.title}
           errorMessage={submitInfo.errorMessage}
           info={info}
           disabled={submitInfo.isPending}

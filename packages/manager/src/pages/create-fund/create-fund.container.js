@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { goBack } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
+import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 
 import CreateFundNavigationDialog from "./components/create-fund-navigation-dialog/create-fund-navigation-dialog";
 import CreateFundSettings from "./components/create-fund-settings/create-fund-settings";
@@ -68,10 +69,12 @@ class CreateFundContainer extends Component {
               programsInfo={platformSettings.programsInfo}
             />
           )}
-          <CreateFundNavigationDialog
+          <ConfirmPopup
             open={isNavigationDialogVisible}
             onClose={() => this.setState({ isNavigationDialogVisible: false })}
-            onConfirm={service.goBack}
+            onApply={service.goBack}
+            body={t("create-fund-page.navigation-back-text")}
+            applyButtonText={t("buttons.continue")}
           />
         </div>
       </div>

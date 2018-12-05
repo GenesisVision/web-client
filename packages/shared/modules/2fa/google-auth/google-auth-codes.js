@@ -36,8 +36,10 @@ const GoogleAuth = ({ t, codes, notifySuccess, notifyError }) => {
       <div className="dialog__header">
         <h2>{t("2fa.codes.title")}</h2>
       </div>
-      <p>{t("2fa.codes.successfully")}</p>
-      <p>{t("2fa.codes.recovery_codes")}</p>
+      <div className="dialog__text">
+        <p>{t("2fa.codes.successfully")}</p>
+        <p>{t("2fa.codes.recovery_codes")}</p>
+      </div>
       <CodeList codes={codes} />
       <div className="dialog__buttons">
         <GVButton color="secondary" onClick={onCopy}>
@@ -46,7 +48,7 @@ const GoogleAuth = ({ t, codes, notifySuccess, notifyError }) => {
           {t("buttons.copy")}
         </GVButton>
       </div>
-      <p className="dialog__info">{t("2fa.codes.warning")}</p>
+      <div className="dialog__info">{t("2fa.codes.warning")}</div>
     </div>
   );
 };

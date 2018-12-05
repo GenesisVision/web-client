@@ -1,5 +1,3 @@
-import "./confirm-popup.scss";
-
 import classnames from "classnames";
 import Dialog from "shared/components/dialog/dialog";
 import { GVButton } from "gv-react-components";
@@ -17,22 +15,24 @@ const ConfirmPopup = ({
   body,
   applyButtonText,
   cancelButtonText,
-  className,
-  headerClassName,
-  bodyClassName
+  className
 }) => {
   applyButtonText = applyButtonText || t("buttons.apply");
   cancelButtonText = cancelButtonText || t("buttons.cancel");
   return (
-    <Dialog open={open} onClose={onClose}>
-      <div className={classnames("confirm-popup", className)}>
-        <h2 className={classnames("confirm-popup__header", headerClassName)}>
-          {header}
-        </h2>
-        <p className={classnames("confirm-popup__body", bodyClassName)}>
-          {body}
-        </p>
-        <div className="confirm-popup__btns">
+    <Dialog open={open} onClose={onClose} className={className}>
+      <div className="dialog__top">
+        {header && (
+          <h2>
+            {header}
+          </h2>
+        )}
+        <div className="dialog__text">
+          <p>
+            {body}
+          </p>
+        </div>
+        <div className="dialog__buttons">
           <GVButton onClick={onApply}>{applyButtonText}</GVButton>
           {onCancel && (
             <GVButton color="secondary" variant="outlined" onClick={onCancel}>
