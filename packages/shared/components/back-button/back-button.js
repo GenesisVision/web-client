@@ -6,6 +6,7 @@ import { translate } from "react-i18next";
 import connect from "react-redux/es/connect/connect";
 import { goBack } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
+import LeftArrow from "shared/media/left_arrow.svg";
 
 const BackButton = ({ t, service, backPath }) => {
   if (!backPath) return null;
@@ -18,7 +19,9 @@ const BackButton = ({ t, service, backPath }) => {
         color="secondary"
         className="back-button__container"
       >
-        <span className="back-button__back-arrow">&larr;</span>
+        <span className="back-button__back-arrow">
+          <img src={LeftArrow} />
+        </span>
         <span className="back-button__back">{t("buttons.back")}</span>
       </GVButton>
       <div className="back-button__path">{backPath}</div>

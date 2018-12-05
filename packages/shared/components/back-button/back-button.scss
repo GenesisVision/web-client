@@ -3,18 +3,23 @@
 @import "~shared/styles/_sizes.scss";
 
 .back-button {
-  //margin: 12px 0 12px;
-  margin-bottom: 12px;
-  @include media-breakpoint-landscape-phone() {
-    //margin: 25px 0 25px;
-    margin-bottom: 25px;
-  }
   display: flex;
   align-items: center;
+  margin-bottom: 12px;
+
+  @include media-breakpoint-landscape-phone() {
+    margin-bottom: 25px;
+  }
 
   &__container {
     display: flex;
     align-items: center;
+    transition: opacity 250ms;
+
+    &:hover.gv-btn--text:not(:disabled) {
+      color: inherit;
+      opacity: 0.4;
+    }
   }
 
   &__back {
@@ -25,8 +30,7 @@
 
   &__back-arrow {
     margin-right: 10px;
-    font-size: $font-size-h4;
-    line-height: 13px;
+    height: $font-size-h4;
   }
 
   & .gv-btn--text {
