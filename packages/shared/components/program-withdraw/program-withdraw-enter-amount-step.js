@@ -5,9 +5,16 @@ import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { convertFromCurrency } from "shared/utils/currency-converter";
-import { formatValue } from "shared/utils/formatter";
+import { formatValue, validateFraction } from "shared/utils/formatter";
 
 const WithdrawEnterAmountStep = props => {
+  const isAllow = values => {
+    const { formattedValue } = values;
+    return (
+      formattedValue === "" ||
+      validateFraction(formattedValue, props.programCurrency)
+    );
+  };
   return (
     <Fragment>
       <GVFormikField
@@ -19,6 +26,7 @@ const WithdrawEnterAmountStep = props => {
         autoComplete="off"
         InputComponent={NumberFormat}
         allowNegative={false}
+        isAllowed={isAllow}
       />
       {props.programCurrency !== props.accountCurrency && (
         <div className="invest-popup__currency">
