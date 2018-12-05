@@ -1,5 +1,6 @@
 import "./2fa.scss";
 
+import classnames from "classnames";
 import { GVTextField } from "gv-react-components";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
@@ -12,7 +13,6 @@ import Select from "shared/components/select/select";
 import DisableAuthContainer from "./disable-auth/disable-auth-container";
 import GenerateRecoveryCode from "./google-auth/generate-recovery-codes/generate-recovery-codes";
 import GoogleAuthContainer from "./google-auth/google-auth-container";
-import classnames from "classnames";
 
 const components = {
   google: <GoogleAuthContainer />,
