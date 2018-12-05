@@ -45,17 +45,17 @@ class TwoFactorAuthContainer extends Component {
 
     return (
       <div className="two-factor">
-        <h3 className="two-factor__title">{t("2fa.title")}</h3>
+        <h3 className="two-factor__title">{t("2fa-page.title")}</h3>
         <GVTextField
           name="2fa"
-          label={t("2fa.type")}
+          label={t("2fa-page.type")}
           value={twoFactorAuth.data.twoFactorEnabled ? "google" : "disable"}
           onChange={this.handleChange}
           InputComponent={Select}
           disabled={twoFactorAuth.isPending}
         >
-          <option value={"disable"}>{t("2fa.none")}</option>
-          <option value={"google"}>{t("2fa.google")}</option>
+          <option value={"disable"}>{t("2fa-page.none")}</option>
+          <option value={"google"}>{t("2fa-page.google")}</option>
         </GVTextField>
         <GenerateRecoveryCode disabled={twoFactorAuth.data.twoFactorEnabled} />
         <Dialog

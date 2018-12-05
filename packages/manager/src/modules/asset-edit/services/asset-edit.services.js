@@ -27,8 +27,9 @@ export const editAsset = (id, editAssetData, type) => dispatch => {
     .then(() => {
       dispatch(
         alertMessageActions.success(
-          (type === PROGRAM && "edit-program.notifications.edit-success") ||
-            (type === FUND && "edit-fund.notifications.edit-success"),
+          (type === PROGRAM &&
+            "manager.edit-program.notifications.edit-success") ||
+            (type === FUND && "manager.edit-fund.notifications.edit-success"),
           true
         )
       );

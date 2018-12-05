@@ -94,11 +94,11 @@ class CreateProgramContainer extends Component {
         <GVTabs value={tab}>
           <GVTab
             value={"broker"}
-            label={t("create-program-page.tabs.select-broker")}
+            label={t("manager.create-program-page.tabs.select-broker")}
           />
           <GVTab
             value={"settings"}
-            label={t("create-program-page.tabs.settings")}
+            label={t("manager.create-program-page.tabs.settings")}
           />
         </GVTabs>
         {!isPending && (

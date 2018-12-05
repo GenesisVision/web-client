@@ -8,15 +8,13 @@ const DepositTop = ({ info, t, program }) => {
   return (
     <div className="dialog__top">
       <div className="dialog__header">
-        <h2>
-          {program ? t("deposit-program.title") : t("deposit-fund.title")}
-        </h2>
+        <h2>{program ? t("deposit-asset.title") : t("deposit-asset.title")}</h2>
         <p>{info.title}</p>
       </div>
       <div className="dialog-field">
         {program && (
           <StatisticItem
-            label={t("deposit-program.available-to-invest-in-program")}
+            label={t("deposit-asset.program.available-to-invest")}
             big
           >
             {formatValue(info.availableToInvest)} GVT
@@ -25,8 +23,8 @@ const DepositTop = ({ info, t, program }) => {
         <StatisticItem
           label={
             program
-              ? t("deposit-program.available-in-wallet")
-              : t("deposit-fund.available-to-invest-in-fund")
+              ? t("deposit-asset.available-in-wallet")
+              : t("deposit-asset.fund.available-to-invest")
           }
           big
         >

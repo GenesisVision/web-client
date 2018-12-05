@@ -12,7 +12,7 @@ class ProgramsRatingPage extends Component {
   render() {
     const { t } = this.props;
     return (
-      <Page title={t("rating.title")}>
+      <Page title={t("rating-page.title")}>
         <ProgramsRatingContainer routes={routes} />
       </Page>
     );

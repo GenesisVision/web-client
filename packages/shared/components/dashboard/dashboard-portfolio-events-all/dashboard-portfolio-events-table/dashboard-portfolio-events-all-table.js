@@ -82,7 +82,11 @@ class PortfolioEventsTableComponent extends Component {
                 column.name
               }`}
             >
-              {t(`dashboard.portfolio-events.table-header.${column.name}`)}
+              {t(
+                `${
+                  process.env.REACT_APP_PLATFORM
+                }.dashboard-pageportfolio-events.table-header.${column.name}`
+              )}
             </span>
           )}
           renderBodyRow={event => (
@@ -93,7 +97,7 @@ class PortfolioEventsTableComponent extends Component {
               {/*<TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--type">
                 {PORTFOLIO_EVENTS_TYPES_ENUM[event.type] &&
                   t(
-                    `dashboard.portfolio-events.types.${
+                    dashboard-pageportfolio-events.types.${
                       PORTFOLIO_EVENTS_TYPES_ENUM[event.type]
                     }`
                   )}

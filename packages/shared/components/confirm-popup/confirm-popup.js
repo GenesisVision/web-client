@@ -22,15 +22,9 @@ const ConfirmPopup = ({
   return (
     <Dialog open={open} onClose={onClose} className={className}>
       <div className="dialog__top">
-        {header && (
-          <h2>
-            {header}
-          </h2>
-        )}
+        {header && <h2>{header}</h2>}
         <div className="dialog__text">
-          <p>
-            {body}
-          </p>
+          <p>{body}</p>
         </div>
         <div className="dialog__buttons">
           <GVButton onClick={onApply}>{applyButtonText}</GVButton>

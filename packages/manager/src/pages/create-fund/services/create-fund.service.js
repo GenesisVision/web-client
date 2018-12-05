@@ -40,7 +40,7 @@ export const createFund = (createFundData, setSubmitting) => dispatch => {
       setSubmitting(false);
       dispatch(
         alertMessageActions.success(
-          "create-fund-page.notifications.create-success",
+          "manager.create-fund-page.notifications.create-success",
           true
         )
       );
@@ -55,7 +55,7 @@ export const createFund = (createFundData, setSubmitting) => dispatch => {
 export const showValidationError = () => dispatch => {
   dispatch(
     alertMessageActions.error(
-      "create-fund-page.notifications.validate-error",
+      "manager.create-fund-page.notifications.validate-error",
       true
     )
   );

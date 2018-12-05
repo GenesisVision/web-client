@@ -9,14 +9,14 @@ const ProgramsRatingTables = ({ t, id, tab }) => (
     {id && (
       <ProgramsRatingTable
         tab={tab.level}
-        title={t("rating.self-pretendents-title")}
+        title={t("rating-page.self-pretendents-title")}
         managerId={id}
       />
     )}
     <ProgramsRatingStats levelData={tab} />
     <ProgramsRatingTable
       tab={tab.level}
-      title={t("rating.pretendents-title")}
+      title={t("rating-page.pretendents-title")}
     />
   </Fragment>
 );

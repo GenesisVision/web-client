@@ -15,11 +15,11 @@ const DisableAuth = ({ t, handleSubmit, errorMessage, disabled }) => {
       className="dialog__top"
       autoComplete="off"
     >
-      <div className="dialog__title">{t("2fa.disable.title")}</div>
+      <div className="dialog__title">{t("2fa-page.disable.title")}</div>
       <GVFormikField
         name="twoFactorCode"
         type="text"
-        label={t("2fa.google-code")}
+        label={t("2fa-page.google-code")}
         component={GVTextField}
         autoComplete="off"
         InputComponent={NumberFormat}
@@ -29,7 +29,7 @@ const DisableAuth = ({ t, handleSubmit, errorMessage, disabled }) => {
       <GVFormikField
         name="password"
         type="password"
-        label={t("2fa.password")}
+        label={t("2fa-page.password")}
         component={GVTextField}
         autoComplete="new-password"
       />
@@ -59,8 +59,8 @@ const DisableAuthForm = compose(
     }),
     validationSchema: ({ t }) =>
       object().shape({
-        twoFactorCode: number().required(t("2fa.code-required")),
-        password: string().required(t("2fa.password-required"))
+        twoFactorCode: number().required(t("2fa-page.code-required")),
+        password: string().required(t("2fa-page.password-required"))
       }),
     handleSubmit: (values, { props }) => {
       props.onSubmit(values);
