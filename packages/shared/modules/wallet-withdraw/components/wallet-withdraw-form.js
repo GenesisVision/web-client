@@ -81,7 +81,8 @@ const WalletWithdrawForm = ({
             const { floatValue, formattedValue } = values;
             return (
               formattedValue === "" ||
-              floatValue <= parseFloat(availableToWithdrawal)
+              (validateFraction(formattedValue, "GVT") &&
+                floatValue <= parseFloat(availableToWithdrawal))
             );
           }}
         />
