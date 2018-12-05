@@ -32,7 +32,7 @@ class ProgramNotificationsCustom extends Component {
       })
       .then(() => this.handleClosePopup())
       .then(() => {
-        this.success(t(`notifications.program.custom.create-alert`));
+        this.success(t(`notifications-page.custom.create-alert`));
       });
   };
 
@@ -51,7 +51,7 @@ class ProgramNotificationsCustom extends Component {
     return (
       <div className="notification-settings custom-notifications">
         <h3 className="notification-settings__subtitle">
-          {t("notifications.program.custom.title")}
+          {t("notifications-page.custom.title")}
         </h3>
         {program.settingsCustom.map(settings => (
           <CustomNotification settings={settings} key={settings.assetId} />
@@ -59,7 +59,7 @@ class ProgramNotificationsCustom extends Component {
         <div className="custom-notification__create">
           <GVButton variant="text" onClick={this.handleOpenPopup}>
             <Chip type="positive">+</Chip>
-            {t("notifications.program.create.title")}
+            {t("notifications-page.create.title")}
           </GVButton>
         </div>
         <Dialog

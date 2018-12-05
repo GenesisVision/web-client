@@ -2,17 +2,18 @@ import { Field, withFormik } from "formik";
 import {
   GVButton,
   GVFormikField,
-  GVTextField,
-  GVProgramPeriod
+  GVProgramPeriod,
+  GVTextField
 } from "gv-react-components";
 import React from "react";
 import { translate } from "react-i18next";
 import { compose } from "redux";
-import ProgramDefaultImage from "../../../pages/create-program/components/create-program-settings/program-default-image";
 import InputImage from "shared/components/form/input-image/input-image";
-import editAssetSettingsValidationSchema from "./asset-edit.validators";
 import filesService from "shared/services/file-service";
+
+import ProgramDefaultImage from "../../../pages/create-program/components/create-program-settings/program-default-image";
 import { FUND, PROGRAM } from "../asset-edit.constants";
+import editAssetSettingsValidationSchema from "./asset-edit.validators";
 
 const AssetEditForm = ({
   t,
@@ -38,7 +39,7 @@ const AssetEditForm = ({
       <GVFormikField
         type="text"
         name="title"
-        label={t("create-program-page.settings.fields.name")}
+        label={t("manager.create-program-page.settings.fields.name")}
         autoComplete="off"
         component={GVTextField}
       />
@@ -46,7 +47,7 @@ const AssetEditForm = ({
         <GVFormikField
           type="textarea"
           name="description"
-          label={t("create-program-page.settings.fields.description")}
+          label={t("manager.create-program-page.settings.fields.description")}
           component={GVTextField}
         />
         {values.description.length > 0 && (
@@ -62,11 +63,12 @@ const AssetEditForm = ({
       </div>
       <div className="create-program-settings__logo-title">
         {type === PROGRAM &&
-          t("create-program-page.settings.fields.upload-logo")}
-        {type === FUND && t("create-fund-page.settings.fields.upload-logo")}
+          t("manager.create-program-page.settings.fields.upload-logo")}
+        {type === FUND &&
+          t("manager.create-fund-page.settings.fields.upload-logo")}
       </div>
       <div className="create-program-settings__logo-notice">
-        {t("create-program-page.settings.fields.upload-logo-rules")}
+        {t("manager.create-program-page.settings.fields.upload-logo-rules")}
       </div>
       <div className="create-program-settings__logo-section edit-program__logo-section">
         <div className="create-program-settings__file-field-container">
@@ -93,7 +95,7 @@ const AssetEditForm = ({
           className="invest-form__submit-button"
           disabled={disabled || !dirty}
         >
-          {t("edit-program.confirm")}
+          {t("manager.edit-program.confirm")}
         </GVButton>
       </div>
     </form>

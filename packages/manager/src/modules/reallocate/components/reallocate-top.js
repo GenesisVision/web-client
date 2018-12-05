@@ -5,7 +5,7 @@ const ReallocateTop = ({ title, t }) => {
   return (
     <div className="dialog__top">
       <div className="dialog__header">
-        <h2>{t("reallocate.title")}</h2>
+        <h2>{t("manager.reallocate.title")}</h2>
       </div>
     </div>
   );

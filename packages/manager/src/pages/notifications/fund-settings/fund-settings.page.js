@@ -6,8 +6,10 @@ import FundNotificationsContainer from "shared/modules/fund-notifications/fund-n
 const FundNotificationPage = ({ t, match }) => {
   const { id } = match.params;
   return (
-    <Page title={t("notifications.fund.title")}>
-      <h1 className="title-small-padding">{t("notifications.fund.title")}</h1>
+    <Page title={t("notifications-page.fund.title")}>
+      <h1 className="title-small-padding">
+        {t("notifications-page.fund.title")}
+      </h1>
       <FundNotificationsContainer id={id} />
     </Page>
   );

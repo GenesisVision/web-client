@@ -5,9 +5,9 @@ const DisableSuccess = ({ t }) => {
   return (
     <div className="dialog__top disable-auth__success">
       <div className="dialog__header">
-        <h2>{t("2fa.disable.title")}</h2>
+        <h2>{t("2fa-page.disable.title")}</h2>
       </div>
-      <p>{t("2fa.disable.success")}</p>
+      <p>{t("2fa-page.disable.success")}</p>
     </div>
   );
 };

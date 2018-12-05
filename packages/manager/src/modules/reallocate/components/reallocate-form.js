@@ -100,7 +100,7 @@ class ReallocateForm extends Component {
         />
         <div className="dialog__buttons">
           <GVButton type={"submit"} disabled={!isValid || !dirty}>
-            {t("reallocate.apply")}
+            {t("manager.reallocate.apply")}
           </GVButton>
         </div>
       </form>
@@ -115,11 +115,21 @@ export default compose(
     validationSchema: ({ t }) =>
       object().shape({
         remainder: number()
-          .required(t("create-fund-page.settings.validation.assets-share"))
-          .max(0, t("create-fund-page.settings.validation.assets-share")),
+          .required(
+            t("manager.create-fund-page.settings.validation.assets-share")
+          )
+          .max(
+            0,
+            t("manager.create-fund-page.settings.validation.assets-share")
+          ),
         assets: array()
-          .required(t("create-fund-page.settings.validation.assets-count"))
-          .min(2, t("create-fund-page.settings.validation.assets-count"))
+          .required(
+            t("manager.create-fund-page.settings.validation.assets-count")
+          )
+          .min(
+            2,
+            t("manager.create-fund-page.settings.validation.assets-count")
+          )
       }),
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);

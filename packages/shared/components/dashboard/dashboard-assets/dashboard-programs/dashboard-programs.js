@@ -52,7 +52,11 @@ class DashboardPrograms extends Component {
               column.name
             }`}
           >
-            {t(`dashboard-page.programs-header.${column.name}`)}
+            {t(
+              `${
+                process.env.REACT_APP_PLATFORM
+              }.dashboard-page.programs-header.${column.name}`
+            )}
           </span>
         )}
         renderBodyRow={program => (

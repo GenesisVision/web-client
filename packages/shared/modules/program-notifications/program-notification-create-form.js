@@ -16,27 +16,27 @@ class ProgramNotificationCreateForm extends Component {
       <form id="create-notification" onSubmit={handleSubmit}>
         <div className="dialog__top">
           <div className="dialog__header">
-            <h2>{t("notifications.program.create.title")}</h2>
+            <h2>{t("notifications-page.create.title")}</h2>
             <p>{program.title}</p>
           </div>
           <GVFormikField
             name="conditionType"
             component={GVTextField}
-            label={t("notifications.program.create.type-label")}
+            label={t("notifications-page.create.type-label")}
             InputComponent={Select}
           >
             <options value="Profit">
-              {t("notifications.program.create.Profit.title")}
+              {t("notifications-page.create.Profit.title")}
             </options>
             <options value="Level">
-              {t("notifications.program.create.Level.title")}
+              {t("notifications-page.create.Level.title")}
             </options>
           </GVFormikField>
         </div>
         <div className="dialog__bottom">
           <GVFormikField
             name="conditionAmount"
-            label={t("notifications.program.create.amount-label")}
+            label={t("notifications-page.create.amount-label")}
             component={GVTextField}
             adornment={isProfit ? "%" : null}
             autoComplete="off"
@@ -80,7 +80,7 @@ export default compose(
     validationSchema: ({ t }) =>
       object().shape({
         conditionAmount: number().required(
-          t("notifications.program.create.amount-required")
+          t("notifications-page.create.amount-required")
         )
       }),
     handleSubmit: (values, { props }) => props.onSubmit(values)
