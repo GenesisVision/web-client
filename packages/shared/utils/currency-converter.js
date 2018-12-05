@@ -22,3 +22,7 @@ export const CURRENCY_FRACTIONS = currency => {
       return 4;
   }
 };
+
+export const formatCurrencyValue = (value, currency) => {
+  return value < Math.pow(10, -CURRENCY_FRACTIONS(currency)) ? 0 : value;
+};
