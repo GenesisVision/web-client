@@ -4,7 +4,7 @@ import FacetContainer from "shared/components/facet-container/facet-container";
 import Page from "shared/components/page/page";
 import ProgramsContainer from "shared/modules/programs-table/components/programs-table/programs-table-container";
 
-import { getCurrentFacet } from "./services/programs-facet.service";
+import { getCurrentFacet } from "shared/components/programs/programs-facet/services/programs-facet.service";
 
 const ProgramsFacetPage = ({ t }) => (
   <Page title={t("programs-page.title")}>

@@ -117,7 +117,6 @@
   }
 
   @include media-breakpoint-landscape-tablet() {
-    height: 100%;
     padding: 80px 0;
     flex-direction: row;
     align-items: inherit;

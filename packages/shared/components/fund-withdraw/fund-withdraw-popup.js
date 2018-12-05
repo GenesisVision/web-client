@@ -18,9 +18,9 @@ class FundWithdrawPopup extends Component {
     this.props
       .fetchInfo()
       .then(data => {
-        this.setState({ ...data });
+        this.setState({ data });
       })
-      .catch(data => this.setState({ ...data }));
+      .catch(data => this.setState({ data }));
   }
 
   handleSumbit = percent => {

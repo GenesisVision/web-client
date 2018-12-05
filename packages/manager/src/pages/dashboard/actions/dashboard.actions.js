@@ -1,4 +1,4 @@
-import managerApi, { managerApiProxy } from "shared/services/api-client/manager-api";
+import managerApi from "shared/services/api-client/manager-api";
 
 export const DASHBOARD_PORTFOLIO_CHART = "DASHBOARD_PORTFOLIO_CHART";
 export const DASHBOARD_PORTFOLIO_EVENTS = "DASHBOARD_PORTFOLIO_EVENTS";
@@ -54,14 +54,14 @@ export const updateDashboardFundsFilters = filters => ({
 export const cancelFundRequest = (auth, id) => {
   return {
     type: DASHBOARD_CANCEL_FUND_REQUESTS,
-    payload: managerApiProxy.v10ManagerFundsRequestsByIdCancelPost(id, auth)
+    payload: managerApi.v10ManagerFundsRequestsByIdCancelPost(id, auth)
   };
 };
 
 export const cancelProgramRequest = (auth, id) => {
   return {
     type: DASHBOARD_CANCEL_PROGRAM_REQUESTS,
-    payload: managerApiProxy.v10ManagerProgramsRequestsByIdCancelPost(id, auth)
+    payload: managerApi.v10ManagerProgramsRequestsByIdCancelPost(id, auth)
   };
 };
 

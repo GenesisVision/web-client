@@ -24,9 +24,9 @@ class CreateProgramContainer extends Component {
   componentDidMount() {
     createProgramService.fetchBrokers().then(response => {
       this.setState({
-        brokers: response.data.brokers,
+        brokers: response.brokers,
         isPending: false,
-        choosedBroker: response.data.brokers[0]
+        choosedBroker: response.brokers[0]
       });
     });
   }
@@ -60,6 +60,10 @@ class CreateProgramContainer extends Component {
       { ...values, brokerAccountTypeId },
       setSubmitting
     );
+  };
+
+  handleValidateError = () => {
+    this.props.service.showValidationError();
   };
 
   setLeverageChooseAvailable = isAvailable => {
@@ -109,12 +113,13 @@ class CreateProgramContainer extends Component {
             )}
             {tab === "settings" && (
               <CreateProgramSettings
+                onValidateError={this.handleValidateError}
                 navigateBack={navigateToBroker}
                 broker={choosedBroker}
-                balance={headerData.totalBalanceGvt}
+                balance={(headerData && headerData.availableGvt) || 0}
                 updateBalance={service.fetchBalance}
                 onSubmit={handleSubmit}
-                author={headerData.name}
+                author={(headerData && headerData.name) || null}
                 setLeverageChooseAvailable={setLeverageChooseAvailable}
                 isLeverageChooseAvailable={isLeverageChooseAvailable}
                 programsInfo={platformSettings.programsInfo}
@@ -155,5 +160,8 @@ const mapDispatchToProps = dispatch => {
 
 export default compose(
   translate(),
-  connect(mapStateToProps, mapDispatchToProps)
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
 )(CreateProgramContainer);

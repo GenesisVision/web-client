@@ -3,7 +3,7 @@ import getParams from "shared/utils/get-params";
 import {
   FUNDS_FACET_ROUTE,
   FUNDS_SLUG_URL_PARAM_NAME
-} from "../../funds.routes";
+} from "pages/funds/funds.routes";
 
 export const getCurrentFacet = () => (dispatch, getState) => {
   const { routing, platformData } = getState();

@@ -4,7 +4,7 @@ import FacetContainer from "shared/components/facet-container/facet-container";
 import Page from "shared/components/page/page";
 import FundsTableContainer from "shared/modules/funds-table/components/funds-table/funds-table-container";
 
-import { getCurrentFacet } from "./services/funds-facet.service";
+import { getCurrentFacet } from "shared/components/funds/funds-facet/services/funds-facet.service";
 
 const FundsFacetPage = ({ t }) => (
   <Page title={t("funds-page.title")}>
