@@ -1,5 +1,3 @@
-import "shared/modules/programs-table/components/programs-table/programs.scss";
-
 import React, { Fragment } from "react";
 import ContentLoader from "react-content-loader";
 
