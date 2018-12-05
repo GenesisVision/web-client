@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { goBack } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
@@ -50,7 +51,7 @@ class CreateFundContainer extends Component {
       deposit
     } = this.state;
     const { navigateBack, handleSubmit } = this;
-    const { headerData, service, platformSettings } = this.props;
+    const { t, headerData, service, platformSettings } = this.props;
     if (!platformSettings) return null;
     return (
       <div className="create-fund-container">
@@ -95,6 +96,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default compose(
+  translate(),
   connect(
     mapStateToProps,
     mapDispatchToProps
