@@ -1,9 +1,9 @@
 import classnames from "classnames";
-import Dialog from "shared/components/dialog/dialog";
 import { GVButton } from "gv-react-components";
 import PropTypes from "prop-types";
 import React from "react";
 import { translate } from "react-i18next";
+import Dialog from "shared/components/dialog/dialog";
 
 const ConfirmPopup = ({
   t,
