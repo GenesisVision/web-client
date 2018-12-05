@@ -4,7 +4,6 @@ import { goBack } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 
-import CreateFundNavigationDialog from "./components/create-fund-navigation-dialog/create-fund-navigation-dialog";
 import CreateFundSettings from "./components/create-fund-settings/create-fund-settings";
 import * as createFundService from "./services/create-fund.service";
 
