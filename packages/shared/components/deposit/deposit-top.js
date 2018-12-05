@@ -1,6 +1,7 @@
 import React from "react";
 import { translate } from "react-i18next";
 import { formatValue } from "shared/utils/formatter";
+
 import StatisticItem from "../statistic-item/statistic-item";
 
 const DepositTop = ({ info, t, program }) => {

@@ -1,9 +1,10 @@
 import "./deposit.scss";
 
-import DepositForm from "./deposit-form";
-import DepositTop from "./deposit-top";
 import PropTypes from "prop-types";
 import React, { Component, Fragment } from "react";
+
+import DepositForm from "./deposit-form";
+import DepositTop from "./deposit-top";
 
 class DepositPopup extends Component {
   componentDidMount() {
