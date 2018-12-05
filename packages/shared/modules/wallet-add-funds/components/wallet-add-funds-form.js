@@ -10,7 +10,10 @@ import GVqr from "shared/components/gv-qr/gv-qr";
 import CopyIcon from "shared/components/icon/copy-icon";
 import Select from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { convertToCurrency } from "shared/utils/currency-converter";
+import {
+  convertToCurrency,
+  formatCurrencyValue
+} from "shared/utils/currency-converter";
 import { formatValue, validateFraction } from "shared/utils/formatter";
 
 const WalletAddFundsForm = ({
@@ -81,7 +84,9 @@ const WalletAddFundsForm = ({
             }
           >
             <NumberFormat
-              value={formatValue(convertToCurrency(values.amount, rateToGVT))}
+              value={formatCurrencyValue(
+                formatValue(convertToCurrency(values.amount, rateToGVT))
+              )}
               suffix=" GVT"
               displayType="text"
             />
