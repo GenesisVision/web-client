@@ -76,10 +76,6 @@ NotificationGeneral.propTypes = {
   })
 };
 
-NotificationGeneral.defaultProps = {
-  settings: []
-};
-
 const mapDispatchToProps = dispatch => ({
   services: bindActionCreators(
     { removeNotificationSettingService, addNotificationSettingService },

@@ -54,7 +54,7 @@ class ProgramNotificationsCustom extends Component {
           {t("notifications-page.custom.title")}
         </h3>
         {program.settingsCustom.map(settings => (
-          <CustomNotification settings={settings} key={settings.assetId} />
+          <CustomNotification settings={settings} key={settings.id} />
         ))}
         <div className="custom-notification__create">
           <GVButton variant="text" onClick={this.handleOpenPopup}>

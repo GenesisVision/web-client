@@ -1,3 +1,5 @@
+import { CURRENCY_FRACTIONS } from "./currency-converter";
+
 const reverseString = value =>
   String(value)
     .split("")
@@ -43,4 +45,9 @@ const formatPercent = value => {
   return formatValue(value, value > 1 || value < -1 ? 0 : 1);
 };
 
-export { formatValue, formatPercent };
+const validateFraction = (value, currency) => {
+  const fraction = value.split(".")[1];
+  return fraction ? fraction.length <= CURRENCY_FRACTIONS(currency) : true;
+};
+
+export { formatValue, formatPercent, validateFraction };

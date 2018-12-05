@@ -74,10 +74,13 @@ class ReallocateForm extends Component {
     const { t, handleSubmit, isValid, dirty, errors } = this.props;
     return (
       <form
-        className="reallocate-container dialog__bottom"
+        className="reallocate-container dialog__top"
         id="reallocate"
         onSubmit={handleSubmit}
       >
+        <div className="dialog__header">
+          <h2>{t("reallocate.title")}</h2>
+        </div>
         {(errors.assets && (
           <ErrorMessage error={errors.assets} type={OVER} />
         )) ||

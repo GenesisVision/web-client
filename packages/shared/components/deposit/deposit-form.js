@@ -9,7 +9,7 @@ import {
   calculateValueOfEntryFee,
   convertFromCurrency
 } from "shared/utils/currency-converter";
-import { formatValue } from "shared/utils/formatter";
+import { formatValue, validateFraction } from "shared/utils/formatter";
 import { number, object } from "yup";
 
 const DepositForm = ({
@@ -36,7 +36,9 @@ const DepositForm = ({
     const gvFee = calculateValueOfEntryFee(floatValue, info.gvCommission);
     return (
       formattedValue === "" ||
-      floatValue <= parseFloat(availableInWallet - gvFee - (entryFee ? fee : 0))
+      (validateFraction(formattedValue, "GVT") &&
+        floatValue <=
+          parseFloat(availableInWallet - gvFee - (entryFee ? fee : 0)))
     );
   };
 

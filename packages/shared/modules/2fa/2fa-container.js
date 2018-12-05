@@ -1,5 +1,6 @@
 import "./2fa.scss";
 
+import classnames from "classnames";
 import { GVTextField } from "gv-react-components";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
@@ -58,7 +59,9 @@ class TwoFactorAuthContainer extends Component {
         </GVTextField>
         <GenerateRecoveryCode disabled={twoFactorAuth.data.twoFactorEnabled} />
         <Dialog
-          className="two-factor-auth"
+          className={classnames({
+            "dialog--width-auto": !twoFactorAuth.data.twoFactorEnabled
+          })}
           open={Boolean(this.state.component)}
           onClose={this.handleClose}
         >
