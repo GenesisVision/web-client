@@ -6,10 +6,10 @@ import { bindActionCreators, compose } from "redux";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
 import CreateProgramBroker from "./components/create-program-broker/create-program-broker";
-import CreateProgramNavigationDialog from "./components/create-program-navigation-dialog/create-program-navigation-dialog";
 import CreateProgramSettings from "./components/create-program-settings/create-program-settings";
 import { checkIsModelFilled } from "./helpers/create-program.helpers";
 import * as createProgramService from "./services/create-program.service";
+import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 
 class CreateProgramContainer extends Component {
   state = {
@@ -126,12 +126,14 @@ class CreateProgramContainer extends Component {
                 notifyError={service.notifyError}
               />
             )}
-            <CreateProgramNavigationDialog
+            <ConfirmPopup
               open={isNavigationDialogVisible}
               onClose={() =>
                 this.setState({ isNavigationDialogVisible: false })
               }
-              onConfirm={confirmNavigateToBroker}
+              onApply={confirmNavigateToBroker}
+              body={t("create-program-page.navigation-back-text")}
+              applyButtonText={t("buttons.continue")}
             />
           </div>
         )}

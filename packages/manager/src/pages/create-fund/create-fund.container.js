@@ -6,6 +6,7 @@ import { bindActionCreators, compose } from "redux";
 import CreateFundNavigationDialog from "./components/create-fund-navigation-dialog/create-fund-navigation-dialog";
 import CreateFundSettings from "./components/create-fund-settings/create-fund-settings";
 import * as createFundService from "./services/create-fund.service";
+import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 
 class CreateFundContainer extends Component {
   state = {
@@ -68,10 +69,12 @@ class CreateFundContainer extends Component {
               programsInfo={platformSettings.programsInfo}
             />
           )}
-          <CreateFundNavigationDialog
+          <ConfirmPopup
             open={isNavigationDialogVisible}
             onClose={() => this.setState({ isNavigationDialogVisible: false })}
-            onConfirm={service.goBack}
+            onApply={service.goBack}
+            body={t("create-fund-page.navigation-back-text")}
+            applyButtonText={t("buttons.continue")}
           />
         </div>
       </div>

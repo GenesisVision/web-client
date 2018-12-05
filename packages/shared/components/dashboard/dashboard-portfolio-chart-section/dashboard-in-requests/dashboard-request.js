@@ -76,6 +76,7 @@ class DashboardRequest extends Component {
             header={"Cancel request"}
             body={"Please confirm that you want to cancel the request."}
             applyButtonText={t("buttons.confirm")}
+            className="dialog--wider"
           />
         </div>
       </div>

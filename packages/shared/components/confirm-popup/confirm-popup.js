@@ -20,8 +20,8 @@ const ConfirmPopup = ({
   applyButtonText = applyButtonText || t("buttons.apply");
   cancelButtonText = cancelButtonText || t("buttons.cancel");
   return (
-    <Dialog open={open} onClose={onClose} className="dialog--wider">
-      <div className={classnames("dialog__top", className)}>
+    <Dialog open={open} onClose={onClose} className={className}>
+      <div className="dialog__top">
         {header && (
           <h2>
             {header}
