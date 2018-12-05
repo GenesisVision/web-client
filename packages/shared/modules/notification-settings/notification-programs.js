@@ -15,7 +15,7 @@ class NotificationPrograms extends Component {
         <NotificationEntity
           href={href}
           level={setting.level}
-          key={setting.programId}
+          key={setting.assetId}
           title={setting.title}
           logo={setting.logo}
           count={setting.settingsCustom.length + setting.settingsGeneral.length}

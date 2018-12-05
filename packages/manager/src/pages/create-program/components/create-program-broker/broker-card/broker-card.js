@@ -19,7 +19,7 @@ const BrokerCard = ({ t, broker, onChoose, isActive, isComingSoon }) => {
   return (
     <div
       className={className}
-      onClick={!isComingSoon && onChoose.bind(null, broker)}
+      onClick={!isComingSoon ? onChoose.bind(null, broker) : null}
     >
       <img
         className={logoClassName}
