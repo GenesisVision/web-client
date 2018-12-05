@@ -31,9 +31,9 @@ AssetEditPopup.propTypes = {
     id: PropTypes.string,
     title: PropTypes.string,
     description: PropTypes.string,
-    logo: {
+    logo: PropTypes.shape({
       src: PropTypes.string
-    }
+    })
   })
 };
 
