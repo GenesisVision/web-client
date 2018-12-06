@@ -1,15 +1,16 @@
 import "./manager.page.scss";
 
-import Page from "shared/components/page/page";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { goBack } from "react-router-redux";
 import { bindActionCreators } from "redux";
-
-import { SLUG_URL_REGEXP } from "shared/utils/constants";
 import ManagerDescription from "shared/components/manager/manager-description/manager-description";
 import ManagerHistorySection from "shared/components/manager/manager-history/manager-history-section";
+import Page from "shared/components/page/page";
+import { programsChangePage } from "shared/modules/programs-table/services/programs-table.service";
+import { SLUG_URL_REGEXP } from "shared/utils/constants";
+
 import * as managerService from "./services/manager.service";
 
 export const MANAGER_SLUG_URL_PARAM_NAME = "managerSlugUrl";
@@ -32,7 +33,7 @@ class ManagerPage extends Component {
   }
 
   render() {
-    const { t } = this.props;
+    const { t, location, service } = this.props;
     const { managerProfile, isPending } = this.state;
 
     return (
@@ -44,6 +45,8 @@ class ManagerPage extends Component {
             </div>
             <div className="manager__history">
               <ManagerHistorySection
+                location={location}
+                programsChangePage={service.programsChangePage}
                 managerService={managerService}
                 managerId={managerProfile.id}
                 title={managerProfile.username}
@@ -64,7 +67,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    service: bindActionCreators({ ...managerService, goBack }, dispatch)
+    service: bindActionCreators(
+      { ...managerService, goBack, programsChangePage },
+      dispatch
+    )
   };
 };
 

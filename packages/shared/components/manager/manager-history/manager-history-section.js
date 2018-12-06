@@ -16,8 +16,14 @@ class ManagerHistorySection extends PureComponent {
   };
 
   handleTabChange = (e, tab) => {
-    this.setState({ tab });
+    this.setState({ tab }, () => {
+      this.props.programsChangePage();
+    });
   };
+
+  componentDidMount() {
+    this.props.programsChangePage();
+  }
 
   render() {
     const { tab } = this.state;
