@@ -132,7 +132,7 @@ class CreateProgramContainer extends Component {
                 this.setState({ isNavigationDialogVisible: false })
               }
               onApply={confirmNavigateToBroker}
-              body={t("create-program-page.navigation-back-text")}
+              body={t("manager.create-program-page.navigation-back-text")}
               applyButtonText={t("buttons.continue")}
             />
           </div>

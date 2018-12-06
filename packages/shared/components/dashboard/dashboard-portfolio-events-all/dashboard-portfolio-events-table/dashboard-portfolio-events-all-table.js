@@ -85,7 +85,7 @@ class PortfolioEventsTableComponent extends Component {
               {t(
                 `${
                   process.env.REACT_APP_PLATFORM
-                }.dashboard-pageportfolio-events.table-header.${column.name}`
+                }.dashboard-page.portfolio-events.table-header.${column.name}`
               )}
             </span>
           )}
