@@ -14,6 +14,13 @@ $background-pretender-hover: #0b4b45;
 		.gv-tab {
 			white-space: nowrap;
 		}
+
+		.gv-tab--active {
+			.programs-rating__tab-count {
+				background-color: rgba($primary-color, 0.1);
+				color: $primary-color;
+			}
+		}
 	}
 
 	.table__row--pretender {
@@ -56,7 +63,6 @@ $background-pretender-hover: #0b4b45;
 	}
 
 	&__tab-arrow {
-		vertical-align: top;
 		display: inline-block;
 		padding: 0 5px;
 		font-size: $font-size-common;
@@ -68,10 +74,9 @@ $background-pretender-hover: #0b4b45;
 		display: inline-block;
 		margin-left: 10px;
 		border-radius: 8px;
-		background-color: rgba($primary-color, 0.1);
-		color: $primary-color;
 		padding: 4px 7px;
 		line-height: 1;
+		background-color: rgba($text-accent-color, 0.05);
 	}
 
 	@include media-breakpoint-landscape-phone() {
