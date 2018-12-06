@@ -9,7 +9,7 @@ i18n
   .use(reactI18nextModule)
   .init({
     fallbackLng: "en",
-    ns: ["translations, shared"],
+    ns: ["translations"],
     defaultNS: "translations",
     preload: ["en"],
     whitelist: ["en"],

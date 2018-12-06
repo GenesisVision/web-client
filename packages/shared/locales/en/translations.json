@@ -248,6 +248,7 @@
       "explore": "Explore",
       "favorites": "Favorites"
     },
+    "programs-table": "All programs",
     "programs-header": {
       "position": "Position",
       "title": "Name",
@@ -773,7 +774,7 @@
   },
   "investor": {
     "app": {
-      "title": "Manager Portal: "
+      "title": "Investor Portal: "
     },
     "auth-quotes": {
       "0": {
@@ -876,7 +877,7 @@
   },
   "manager": {
     "app": {
-      "title": "Investor Portal: "
+      "title": "Manager Portal: "
     },
     "auth-quotes": {
       "0": {

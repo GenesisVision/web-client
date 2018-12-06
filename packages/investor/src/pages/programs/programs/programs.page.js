@@ -26,10 +26,10 @@ const ProgramsPage = ({ t }) => {
       <ProgramsContainer
         enableFiltering
         showSwitchView
-        title={t("shared:sharedKey")}
+        title={t("programs-page.programs-table")}
       />
     </Page>
   );
 };
 
-export default translate(["translations", "shared"])(ProgramsPage);
+export default translate()(ProgramsPage);
