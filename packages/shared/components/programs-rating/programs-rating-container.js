@@ -8,8 +8,6 @@ import { getLevelUpSummary } from "shared/components/programs-rating/services/pr
 import Surface from "shared/components/surface/surface";
 import TabsContainer from "shared/components/tabs-container/tabs-container";
 
-import { LEVELS } from "./program-rating.constants";
-
 class ProgramsRatingContainer extends Component {
   state = {
     tab: null,
@@ -22,8 +20,19 @@ class ProgramsRatingContainer extends Component {
       const { levelData } = res.value;
       const navigateTabs = levelData.map(item => ({
         ...item,
-        count: item.totalOwn,
-        name: LEVELS[item.level]
+        name: String(item.level),
+        label: (
+          <span className="programs-rating__tab-label">
+            {item.level}
+            <span className="programs-rating__tab-arrow">&rarr;</span>
+            {++item.level}
+            {item.totalOwn !== 0 && (
+              <span className="programs-rating__tab-count">
+                {item.totalOwn}
+              </span>
+            )}
+          </span>
+        )
       }));
       const tab = navigateTabs[0];
       this.setState({ navigateTabs, tab });

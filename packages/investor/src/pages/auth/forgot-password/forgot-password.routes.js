@@ -16,7 +16,12 @@ export const PASSWORD_RESTORE_ROUTE = `${FORGOT_PASSWORD_ROUTE}/restore`;
 
 const ForgotPasswordRoutes = ({ t }) => {
   return (
-    <AuthLayout Footer={LoginFooter} title={t("auth.password-restore.title")} HOME_ROUTE={HOME_ROUTE} SIGNUP_ROUTE={SIGNUP_ROUTE}>
+    <AuthLayout
+      Footer={LoginFooter}
+      title={t("auth.password-restore.title")}
+      HOME_ROUTE={HOME_ROUTE}
+      SIGNUP_ROUTE={SIGNUP_ROUTE}
+    >
       <Switch>
         <Route path={EMAIL_PENDING_ROUTE} component={EmailPendingPage} />
         <Route path={PASSWORD_RESTORE_ROUTE} component={PasswordRestore} />

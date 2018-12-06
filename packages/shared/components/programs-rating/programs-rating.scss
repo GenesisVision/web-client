@@ -14,6 +14,13 @@ $background-pretender-hover: #0b4b45;
 		.gv-tab {
 			white-space: nowrap;
 		}
+
+		.gv-tab--active {
+			.programs-rating__tab-count {
+				background-color: rgba($primary-color, 0.1);
+				color: $primary-color;
+			}
+		}
 	}
 
 	.table__row--pretender {
@@ -48,6 +55,28 @@ $background-pretender-hover: #0b4b45;
 		.program-avatar__level {
 			border-color: $background-pretender;
 		}
+	}
+
+	&__tab-name {
+		display: inline-block;
+		line-height: 1;
+	}
+
+	&__tab-arrow {
+		display: inline-block;
+		padding: 0 5px;
+		font-size: $font-size-common;
+		line-height: 1;
+		align-self: center;
+	}
+
+	&__tab-count {
+		display: inline-block;
+		margin-left: 10px;
+		border-radius: 8px;
+		padding: 4px 7px;
+		line-height: 1;
+		background-color: rgba($text-accent-color, 0.05);
 	}
 
 	@include media-breakpoint-landscape-phone() {

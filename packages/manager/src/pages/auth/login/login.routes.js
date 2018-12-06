@@ -15,7 +15,12 @@ export const LOGIN_ROUTE_TWO_FACTOR_ROUTE = `${LOGIN_ROUTE}/two-factor`;
 export const LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE = `${LOGIN_ROUTE_TWO_FACTOR_ROUTE}/recovery`;
 
 const LoginRoutes = ({ t }) => (
-  <AuthLayout Footer={LoginFooter} title={t("auth.login.title")} HOME_ROUTE={HOME_ROUTE} SIGNUP_ROUTE={SIGNUP_ROUTE}>
+  <AuthLayout
+    Footer={LoginFooter}
+    title={t("auth.login.title")}
+    HOME_ROUTE={HOME_ROUTE}
+    SIGNUP_ROUTE={SIGNUP_ROUTE}
+  >
     <Switch>
       <Route
         path={LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE}
