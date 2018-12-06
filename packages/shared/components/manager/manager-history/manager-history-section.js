@@ -22,8 +22,9 @@ class ManagerHistorySection extends PureComponent {
 
   render() {
     const { tab } = this.state;
-    const { t, managerId, title } = this.props;
+    const { t, managerId, title, isAuthenticated } = this.props;
     const { handleTabChange } = this;
+
     return (
       <Surface className="manager-history">
         <div className="manager-history__tabs">
@@ -38,10 +39,18 @@ class ManagerHistorySection extends PureComponent {
 
         <div>
           {tab === PROGRAMS_TAB && (
-            <ManagerPrograms title={title} managerId={managerId} />
+            <ManagerPrograms
+              title={title}
+              managerId={managerId}
+              isAuthenticated={isAuthenticated}
+            />
           )}
           {tab === FUNDS_TAB && (
-            <ManagerFunds title={title} managerId={managerId} />
+            <ManagerFunds
+              title={title}
+              managerId={managerId}
+              isAuthenticated={isAuthenticated}
+            />
           )}
         </div>
       </Surface>

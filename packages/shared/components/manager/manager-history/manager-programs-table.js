@@ -69,16 +69,8 @@ class ManagerPrograms extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  const { isAuthenticated } = state.authData;
-  return { isAuthenticated };
-};
-
 ManagerPrograms.propTypes = {
   managerId: PropTypes.string.isRequired
 };
 
-export default compose(
-  connect(mapStateToProps),
-  translate()
-)(ManagerPrograms);
+export default translate()(ManagerPrograms);

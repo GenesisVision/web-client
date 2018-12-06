@@ -65,16 +65,8 @@ class ManagerFunds extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  const { isAuthenticated } = state.authData;
-  return { isAuthenticated };
-};
-
 ManagerFunds.propTypes = {
   managerId: PropTypes.string.isRequired
 };
 
-export default compose(
-  connect(mapStateToProps),
-  translate()
-)(ManagerFunds);
+export default translate()(ManagerFunds);

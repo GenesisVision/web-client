@@ -1,15 +1,15 @@
 import "./manager.page.scss";
 
-import Page from "shared/components/page/page";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { goBack } from "react-router-redux";
 import { bindActionCreators } from "redux";
-
-import { SLUG_URL_REGEXP } from "shared/utils/constants";
 import ManagerDescription from "shared/components/manager/manager-description/manager-description";
 import ManagerHistorySection from "shared/components/manager/manager-history/manager-history-section";
+import Page from "shared/components/page/page";
+import { SLUG_URL_REGEXP } from "shared/utils/constants";
+
 import * as managerService from "./services/manager.service";
 
 export const MANAGER_SLUG_URL_PARAM_NAME = "managerSlugUrl";
@@ -32,7 +32,7 @@ class ManagerPage extends Component {
   }
 
   render() {
-    const { t } = this.props;
+    const { t, isAuthenticated } = this.props;
     const { managerProfile, isPending } = this.state;
 
     return (
@@ -44,6 +44,7 @@ class ManagerPage extends Component {
             </div>
             <div className="manager__history">
               <ManagerHistorySection
+                isAuthenticated={isAuthenticated}
                 managerService={managerService}
                 managerId={managerProfile.id}
                 title={managerProfile.username}
@@ -58,7 +59,8 @@ class ManagerPage extends Component {
 
 const mapStateToProps = state => {
   return {
-    managerProfile: state.manager.data
+    managerProfile: state.manager.data,
+    isAuthenticated: state.authData.isAuthenticated
   };
 };
 
