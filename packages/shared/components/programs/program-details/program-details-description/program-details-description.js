@@ -108,7 +108,8 @@ class ProgramDetailsDescription extends PureComponent {
       programDescription,
       onFavoriteClick,
       investmentData,
-      onChangeInvestmentStatus
+      onChangeInvestmentStatus,
+      isReinvest
     } = this.props;
 
     const composeEditInfo = {
@@ -318,9 +319,7 @@ class ProgramDetailsDescription extends PureComponent {
                       <ProgramReinvestingWidget
                         className="details-description__reinvest"
                         toggleReinvesting={onReinvestingClick}
-                        isReinvesting={
-                          programDescription.personalProgramDetails.isReinvest
-                        }
+                        isReinvesting={isReinvest}
                         disabled={isReinvestPending}
                       />
                     )}
