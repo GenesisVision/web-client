@@ -5,11 +5,14 @@ import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import TableModule from "shared/components/table/components/table-module";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
+import FundsTableRow from "shared/modules/funds-table/components/funds-table/fund-table-row";
+import { FUNDS_TABLE_COLUMNS } from "shared/modules/funds-table/components/funds-table/funds-table.constants";
 
-import FundsTableRow from "../../../modules/funds-table/components/funds-table/fund-table-row";
-import { FUNDS_TABLE_COLUMNS } from "../../../modules/funds-table/components/funds-table/funds-table.constants";
+import { DATE_RANGE_FILTER_NAME } from "../../table/components/filtering/date-range-filter/date-range-filter.constants";
+import { FUND_DEFAULT_FILTERS, FUND_FILTERING } from "../manager.constants";
 import { fetchManagerFunds } from "../services/manager.service";
 
 class ManagerFunds extends Component {
@@ -23,8 +26,18 @@ class ManagerFunds extends Component {
     return (
       <TableModule
         getItems={this.fetchManagerFunds}
+        defaultFilters={FUND_DEFAULT_FILTERS}
+        filtering={FUND_FILTERING}
         paging={DEFAULT_PAGING}
         columns={FUNDS_TABLE_COLUMNS}
+        renderFilters={(updateFilter, filtering) => (
+          <DateRangeFilter
+            name={DATE_RANGE_FILTER_NAME}
+            value={filtering[DATE_RANGE_FILTER_NAME]}
+            onChange={updateFilter}
+            startLabel={t("filters.date-range.program-start")}
+          />
+        )}
         renderHeader={column => {
           if (!isAuthenticated && column.name === "favorite") return null;
           return (
