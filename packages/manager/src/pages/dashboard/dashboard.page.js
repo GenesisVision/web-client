@@ -9,7 +9,7 @@ import DashboardChartSection from "./components/dashboard-portfolio-chart-sectio
 import DashboardPortfolioEventsSection from "./components/dashboard-portfolio-events/dashboard-portfolio-events-section";
 
 const DashboardPage = ({ t }) => {
-  const title = t("dashboard-page.title");
+  const title = t(`${process.env.REACT_APP_PLATFORM}.dashboard-page.title`);
   return (
     <Page title={title}>
       <div className="dashboard">

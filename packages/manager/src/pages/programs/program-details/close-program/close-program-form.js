@@ -18,9 +18,11 @@ const CloseProgramForm = ({
     <form id="closeProgramForm" onSubmit={handleSubmit} noValidate>
       <div className="dialog__top">
         <h2>{t("program-details-page.description.close-program")}</h2>
-        <p>
-          {t("program-details-page.description.close-program-notification")}
-        </p>
+        <div className="dialog__text">
+          <p>
+            {t("program-details-page.description.close-program-notification")}
+          </p>
+        </div>
         {twoFactorEnabled && (
           <GVFormikField
             type="text"

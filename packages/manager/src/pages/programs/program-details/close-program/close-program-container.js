@@ -1,12 +1,10 @@
-import "./close-program.scss";
-
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Dialog from "shared/components/dialog/dialog";
+import { closeProgram } from "shared/components/programs/program-details/services/program-details.service";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
-import { closeProgram } from "shared/components/programs/program-details/services/program-details.service";
 import CloseProgramForm from "./close-program-form";
 
 class CloseProgramContainer extends Component {
@@ -39,11 +37,7 @@ class CloseProgramContainer extends Component {
     const { open, twoFactorEnabled, onClose } = this.props;
     const { errorMessage } = this.state;
     return (
-      <Dialog
-        open={open}
-        onClose={this.handleClose}
-        className="close-program-popup"
-      >
+      <Dialog open={open} onClose={this.handleClose} className="dialog--wider">
         <CloseProgramForm
           onSubmit={this.handleSubmit}
           onCancel={onClose}

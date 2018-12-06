@@ -24,7 +24,7 @@ const SettingsPage = ({ t }) => {
           <Link
             to={{
               pathname: PASSWORD_ROUTE,
-              state: `/ ${t("profile.title")}`
+              state: `/ ${t("profile-page.title")}`
             }}
           >
             <GVButton
@@ -32,7 +32,7 @@ const SettingsPage = ({ t }) => {
               color="secondary"
               className={"profile-settings__password"}
             >
-              {`${t("profile.settings.change-password")} `}
+              {`${t("profile-page.settings.change-password")} `}
               <span className="profile-settings__password-arrow">&#8250;</span>
             </GVButton>
           </Link>

@@ -3,10 +3,10 @@ import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
+import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
 import CreateProgramBroker from "./components/create-program-broker/create-program-broker";
-import CreateProgramNavigationDialog from "./components/create-program-navigation-dialog/create-program-navigation-dialog";
 import CreateProgramSettings from "./components/create-program-settings/create-program-settings";
 import { checkIsModelFilled } from "./helpers/create-program.helpers";
 import * as createProgramService from "./services/create-program.service";
@@ -94,11 +94,11 @@ class CreateProgramContainer extends Component {
         <GVTabs value={tab}>
           <GVTab
             value={"broker"}
-            label={t("create-program-page.tabs.select-broker")}
+            label={t("manager.create-program-page.tabs.select-broker")}
           />
           <GVTab
             value={"settings"}
-            label={t("create-program-page.tabs.settings")}
+            label={t("manager.create-program-page.tabs.settings")}
           />
         </GVTabs>
         {!isPending && (
@@ -126,12 +126,14 @@ class CreateProgramContainer extends Component {
                 notifyError={service.notifyError}
               />
             )}
-            <CreateProgramNavigationDialog
+            <ConfirmPopup
               open={isNavigationDialogVisible}
               onClose={() =>
                 this.setState({ isNavigationDialogVisible: false })
               }
-              onConfirm={confirmNavigateToBroker}
+              onApply={confirmNavigateToBroker}
+              body={t("manager.create-program-page.navigation-back-text")}
+              applyButtonText={t("buttons.continue")}
             />
           </div>
         )}

@@ -1,5 +1,3 @@
-import "./disable-auth.scss";
-
 import React, { Component } from "react";
 import authApi from "shared/services/api-client/auth-api";
 import authService from "shared/services/auth-service";

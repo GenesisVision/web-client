@@ -10,7 +10,10 @@ export const updateAssets = (id, values) => dispatch => {
     })
     .then(res => {
       dispatch(
-        alertMessageActions.success("reallocate.success-alert-message", true)
+        alertMessageActions.success(
+          "manager.reallocate.success-alert-message",
+          true
+        )
       );
     });
 };

@@ -9,8 +9,16 @@ const PortfolioEventsAllComponent = ({ t }) => {
   return (
     <PortfolioEventsTableContainerComponent
       fetchPortfolioEvents={fetchPortfolioEvents}
-      pageTitle={t("dashboard.portfolio-events.title")}
-      tableTitle={t("dashboard.portfolio-events.table-title")}
+      pageTitle={t(
+        `${
+          process.env.REACT_APP_PLATFORM
+        }.dashboard-page.portfolio-events.title`
+      )}
+      tableTitle={t(
+        `${
+          process.env.REACT_APP_PLATFORM
+        }.dashboard-page.portfolio-events.table-title`
+      )}
       className="portfolio-events-all-table"
       dateRangeStartLabel={t("filters.date-range.account-creation")}
     />

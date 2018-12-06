@@ -23,7 +23,9 @@ class Profile extends Component {
                 </td>
                 <td className="profile__center" />
                 <td className="profile__right">
-                  <h4 className="profile__subtitle">{t("profile.contacts")}</h4>
+                  <h4 className="profile__subtitle">
+                    {t("profile-page.contacts")}
+                  </h4>
                   <VerificationStatus checked={true} />
                 </td>
               </tr>
@@ -34,7 +36,7 @@ class Profile extends Component {
                 <td className="profile__center" />
                 <td className="profile__right">
                   <ProfileField
-                    label={t("profile.email")}
+                    label={t("profile-page.email")}
                     value={info.email}
                     name="phone"
                   />
@@ -47,7 +49,7 @@ class Profile extends Component {
                 <td className="profile__center" />
                 <td className="profile__right">
                   <h4 className="profile__subtitle">
-                    {t("profile.personal-info")}
+                    {t("profile-page.personal-info")}
                   </h4>
                   <VerificationStatus
                     verificationStatus={info.verificationStatus}

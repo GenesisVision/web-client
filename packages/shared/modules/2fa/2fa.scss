@@ -1,12 +1,5 @@
 @import "~shared/styles/_sizes.scss";
 
-.two-factor-auth {
-  p {
-    font-size: $font-size-common;
-    letter-spacing: 0.4px;
-  }
-}
-
 .two-factor__title {
   @include adaptive-padding(bottom, $padding-medium);
   text-transform: uppercase;

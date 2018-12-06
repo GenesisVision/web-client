@@ -31,7 +31,7 @@ export const cancelWithdrawRequest = txId => (dispatch, getState) => {
     .then(response => {
       dispatch(
         alertMessageActions.success(
-          "wallet.alert-messages.cancel-request-success",
+          "wallet-page.alert-messages.cancel-request-success",
           true
         )
       );
@@ -52,7 +52,7 @@ export const resendWithdrawRequest = txId => (dispatch, getState) => {
     .then(response => {
       dispatch(
         alertMessageActions.success(
-          "wallet.alert-messages.resend-email-success",
+          "wallet-page.alert-messages.resend-email-success",
           true
         )
       );

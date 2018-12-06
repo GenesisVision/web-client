@@ -17,8 +17,12 @@ export const valueDescriptionLocalizationConstant = event => {
     type === EventLogoType.assetStarted ||
     type === EventLogoType.programPeriodStars
   )
-    return "dashboard.portfolio-events.balance";
+    return `${
+      process.env.REACT_APP_PLATFORM
+    }.dashboard-page.portfolio-events.balance`;
   if (type === EventLogoType.programPeriodEnds)
-    return "dashboard.portfolio-events.profit";
+    return `${
+      process.env.REACT_APP_PLATFORM
+    }.dashboard-page.portfolio-events.profit`;
   return null;
 };

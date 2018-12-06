@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 
 import ReallocateForm from "./reallocate-form";
-import ReallocateTop from "./reallocate-top";
 
 class ReallocatePopup extends Component {
   render() {
@@ -14,7 +13,6 @@ class ReallocatePopup extends Component {
     } = this.props;
     return (
       <Fragment>
-        <ReallocateTop />
         <ReallocateForm
           assets={assets}
           remainder={remainder}

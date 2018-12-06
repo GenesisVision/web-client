@@ -16,8 +16,8 @@ const GoogleAuth = ({
   return (
     <div className="google-auth google-auth--desktop">
       <div className="dialog__header">
-        <h2>{t("2fa.title")}</h2>
-        <p>{t("2fa.google")}</p>
+        <h2>{t("2fa-page.title")}</h2>
+        <p>{t("2fa-page.google")}</p>
       </div>
 
       <div className="google-auth__steps">

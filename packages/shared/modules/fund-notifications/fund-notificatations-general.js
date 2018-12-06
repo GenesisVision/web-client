@@ -23,7 +23,7 @@ class FundNotificationsGeneral extends Component {
       .addFundNotificationService(options)
       .then(() =>
         this.success(
-          t(`notifications.fund.general.${options.type}.enabled-alert`)
+          t(`notifications-page.fund.general.${options.type}.enabled-alert`)
         )
       );
   };
@@ -34,7 +34,7 @@ class FundNotificationsGeneral extends Component {
       .removeFundNotificationService(options)
       .then(() =>
         this.success(
-          t(`notifications.fund.general.${options.type}.disabled-alert`)
+          t(`notifications-page.fund.general.${options.type}.disabled-alert`)
         )
       );
   };
@@ -43,11 +43,11 @@ class FundNotificationsGeneral extends Component {
     return (
       <div className="notification-settings">
         <h3 className="notification-settings__subtitle">
-          {t("notifications.fund.general.title")}
+          {t("notifications-page.fund.general.title")}
         </h3>
         <GeneralNotification
           name="FundNewsAndUpdates"
-          label={t("notifications.fund.general.news-updates")}
+          label={t("notifications-page.fund.general.news-updates")}
           assetId={assetId}
           setting={settings.FundNewsAndUpdates}
           addNotification={this.handleAdd}
@@ -55,7 +55,7 @@ class FundNotificationsGeneral extends Component {
         />
         <GeneralNotification
           name="FundEndOfPeriod"
-          label={t("notifications.fund.general.end-of-period")}
+          label={t("notifications-page.fund.general.end-of-period")}
           assetId={assetId}
           setting={settings.FundEndOfPeriod}
           addNotification={this.handleAdd}
@@ -63,7 +63,7 @@ class FundNotificationsGeneral extends Component {
         />
         <GeneralNotification
           name="FundRebalancing"
-          label={t("notifications.fund.general.fund-rebalancing")}
+          label={t("notifications-page.fund.general.fund-rebalancing")}
           assetId={assetId}
           setting={settings.FundRebalancing}
           addNotification={this.handleAdd}
