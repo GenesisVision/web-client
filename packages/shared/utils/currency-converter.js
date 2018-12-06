@@ -23,6 +23,6 @@ export const CURRENCY_FRACTIONS = currency => {
   }
 };
 
-export const formatCurrencyValue = (value, currency) => {
+export const checkCurrencyValue = (value, currency) => {
   return value < Math.pow(10, -CURRENCY_FRACTIONS(currency)) ? 0 : value;
 };
