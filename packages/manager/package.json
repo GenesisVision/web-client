@@ -76,6 +76,6 @@
     "build": "yarn copy && react-app-rewired build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "copy": "cpx ../shared/locales/**/*.json public/locales"
+    "copy": "cpx \"../shared/locales/**/*.json\" \"public/locales\""
   }
 }
