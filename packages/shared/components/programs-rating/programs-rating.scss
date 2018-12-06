@@ -50,6 +50,24 @@ $background-pretender-hover: #0b4b45;
 		}
 	}
 
+	&__tab-label {
+		display: inline-block;
+		vertical-align: bottom;
+	}
+
+	&__tab-arrow {
+		vertical-align: top;
+		display: inline-block;
+		padding: 0 5px;
+		font-size: $font-size-common;
+		line-height: 1;
+	}
+
+	&__tab-count {
+		display: inline-block;
+		margin-left: 5px;
+	}
+
 	@include media-breakpoint-landscape-phone() {
 		&__tabs {
 			padding-left: $padding-small;
