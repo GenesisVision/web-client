@@ -5,14 +5,17 @@ import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
+import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import TableModule from "shared/components/table/components/table-module";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
+import ProgramTableRow from "shared/modules/programs-table/components/programs-table/program-table-row";
+import { PROGRAMS_COLUMNS } from "shared/modules/programs-table/components/programs-table/programs.constants";
 
-import ProgramTableRow from "../../../modules/programs-table/components/programs-table/program-table-row";
 import {
-  PROGRAMS_COLUMNS,
-  PROGRAMS_TABLE_FILTERS
-} from "../../../modules/programs-table/components/programs-table/programs.constants";
+  MANAGER_DEFAULT_FILTERS,
+  MANAGER_FILTERING
+} from "../manager.constants";
 import { fetchManagerPrograms } from "../services/manager.service";
 
 class ManagerPrograms extends Component {
@@ -26,10 +29,20 @@ class ManagerPrograms extends Component {
 
     return (
       <TableModule
+        title={title}
         getItems={this.fetchManagerPrograms}
-        filtering={PROGRAMS_TABLE_FILTERS}
+        defaultFilters={MANAGER_DEFAULT_FILTERS}
+        filtering={MANAGER_FILTERING}
         paging={DEFAULT_PAGING}
         columns={PROGRAMS_COLUMNS}
+        renderFilters={(updateFilter, filtering) => (
+          <DateRangeFilter
+            name={DATE_RANGE_FILTER_NAME}
+            value={filtering[DATE_RANGE_FILTER_NAME]}
+            onChange={updateFilter}
+            startLabel={t("filters.date-range.program-start")}
+          />
+        )}
         renderHeader={column => {
           if (!isAuthenticated && column.name === "favorite") return null;
           return (
