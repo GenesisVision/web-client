@@ -31,3 +31,6 @@ yarn-error.log*
 
 # styles
 src/**/*.css
+
+# locales
+**/public/locales/**/*.json
