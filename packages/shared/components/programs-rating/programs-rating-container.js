@@ -43,7 +43,7 @@ class ProgramsRatingContainer extends Component {
     if (!tab || !levelData || !navigateTabs) return null;
     return (
       <Surface className="programs-rating">
-        <h3 className="programs-rating__title">{t("rating.title")}</h3>
+        <h3 className="programs-rating__head">{t("rating.title")}</h3>
         <div className="programs-rating__tabs">
           <TabsContainer
             programFacetRoute={routes.PROGRAMS_RATING_TAB_ROUTE}
