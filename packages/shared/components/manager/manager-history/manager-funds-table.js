@@ -12,6 +12,7 @@ import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.re
 import FundsTableRow from "shared/modules/funds-table/components/funds-table/fund-table-row";
 import { FUNDS_TABLE_COLUMNS } from "shared/modules/funds-table/components/funds-table/funds-table.constants";
 
+import { toggleFavoriteFund } from "../../../modules/favorite-asset/services/favorite-fund.service";
 import {
   MANAGER_DEFAULT_FILTERS,
   MANAGER_FILTERING
@@ -19,9 +20,31 @@ import {
 import { fetchManagerFunds } from "../services/manager.service";
 
 class ManagerFunds extends Component {
+  state = {};
   fetchManagerFunds = filters => {
     const { managerId } = this.props;
     return fetchManagerFunds({ ...filters, managerId });
+  };
+
+  toggleFavorite = isFavorite => id => {
+    const isf = this.state[id] === undefined ? isFavorite : this.state[id];
+    this.setState({ [id]: !isf });
+    toggleFavoriteFund(id, isf).catch(() => {
+      this.setState({ [id]: isf });
+    });
+  };
+
+  getFund = fund => {
+    if (this.state[fund.id] !== undefined) {
+      return {
+        ...fund,
+        personalDetails: {
+          ...fund.personalDetails,
+          isFavorite: this.state[fund.id]
+        }
+      };
+    }
+    return fund;
   };
 
   render() {
@@ -55,8 +78,10 @@ class ManagerFunds extends Component {
         renderBodyRow={fund => (
           <FundsTableRow
             title={title}
-            fund={fund}
-            toggleFavorite={() => {}}
+            fund={this.getFund(fund)}
+            toggleFavorite={this.toggleFavorite(
+              fund.personalDetails.isFavorite
+            )}
             isAuthenticated={isAuthenticated}
           />
         )}
