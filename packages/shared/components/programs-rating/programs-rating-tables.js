@@ -14,10 +14,7 @@ const ProgramsRatingTables = ({ t, id, tab }) => (
       />
     )}
     <ProgramsRatingStats levelData={tab} />
-    <ProgramsRatingTable
-      tab={tab.level}
-      title={t("rating.pretendents-title")}
-    />
+    <ProgramsRatingTable tab={tab.level} />
   </Fragment>
 );
 

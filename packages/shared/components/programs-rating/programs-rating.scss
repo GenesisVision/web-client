@@ -6,6 +6,10 @@ $background-pretender: #064542;
 $background-pretender-hover: #0b4b45;
 
 .programs-rating {
+	&__title {
+		padding-left: $padding-small/2;
+		padding-right: $padding-small/2;
+	}
 	&__tabs {
 		@include adaptive-padding(bottom, $padding-xsmall);
 		padding-left: $padding-small/2;
@@ -55,18 +59,20 @@ $background-pretender-hover: #0b4b45;
 			padding-left: $padding-small;
 			padding-right: $padding-small;
 		}
+		&__title {
+			padding-left: $padding-small;
+			padding-right: $padding-small;
+		}
 	}
 }
 
 .programs-rating-stats {
-	@include vertical-paddings($padding-medium, $padding-small);
+	@include adaptive-padding(top,$padding-small);
 	padding-left: $padding-small/2;
 	padding-right: $padding-small/2;
 	display: flex;
-
-	.statistics-item {
-		@include adaptive-margin(right, $padding-small);
-	}
+	align-items: center;
+	flex-wrap: wrap;
 
 	@include media-breakpoint-landscape-phone() {
 		padding-left: $padding-small;

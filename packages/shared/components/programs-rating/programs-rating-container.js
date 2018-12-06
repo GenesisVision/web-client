@@ -7,6 +7,7 @@ import ProgramsRatingTables from "shared/components/programs-rating/programs-rat
 import { getLevelUpSummary } from "shared/components/programs-rating/services/program-rating-service";
 import Surface from "shared/components/surface/surface";
 import TabsContainer from "shared/components/tabs-container/tabs-container";
+import { translate } from "react-i18next";
 
 import { LEVELS } from "./program-rating.constants";
 
@@ -36,12 +37,13 @@ class ProgramsRatingContainer extends Component {
   };
 
   render() {
-    const { id, levelData, routes } = this.props;
+    const { t, id, levelData, routes } = this.props;
     const { tab, navigateTabs } = this.state;
 
     if (!tab || !levelData || !navigateTabs) return null;
     return (
       <Surface className="programs-rating">
+        <h3 className="programs-rating__title">{t("rating.title")}</h3>
         <div className="programs-rating__tabs">
           <TabsContainer
             programFacetRoute={routes.PROGRAMS_RATING_TAB_ROUTE}
@@ -68,6 +70,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default compose(
+  translate(),
   connect(
     mapStateToProps,
     mapDispatchToProps
