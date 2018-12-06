@@ -10,13 +10,13 @@ import { formatValue } from "shared/utils/formatter";
 
 const ProgramsRatingStats = ({ t, levelData }) => (
   <div className="programs-rating-stats">
-    <StatisticRatingItem label={t("rating.programCounts")}>
+    <StatisticRatingItem label={t("rating-page.programCounts")}>
       <NumberFormat value={levelData.total} displayType="text" />
     </StatisticRatingItem>
-    <StatisticRatingItem label={t("rating.quota")}>
+    <StatisticRatingItem label={t("rating-page.quota")}>
       <NumberFormat value={levelData.quota} displayType="text" />
     </StatisticRatingItem>
-    <StatisticRatingItem ellipse label={t("rating.currentProfit")}>
+    <StatisticRatingItem ellipse label={t("rating-page.currentProfit")}>
       <Profitability value={levelData.targetProfit} prefix="arrow">
         <NumberFormat
           value={formatValue(levelData.targetProfit, 2)}
