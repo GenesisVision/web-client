@@ -17,6 +17,7 @@ import TableRow from "shared/components/table/components/table-row";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatPercent, formatValue } from "shared/utils/formatter";
 
+import DashboardProgramsStatusBlock from "./dashboard-programs-status-block";
 import dashboardProgramsTableSelector from "./dashboard-programs.selector";
 
 class DashboardPrograms extends Component {
@@ -111,7 +112,9 @@ class DashboardPrograms extends Component {
               <ProgramSimpleChart data={program.chart} programId={program.id} />
             </TableCell>
             <TableCell className="programs-table__cell dashboard-programs__cell--status">
-              {program.personalDetails.status}
+              <DashboardProgramsStatusBlock
+                status={program.personalDetails.status}
+              />
             </TableCell>
           </TableRow>
         )}
