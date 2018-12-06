@@ -1,9 +1,9 @@
 import "./create-program-broker.scss";
 
-import Surface from "shared/components/surface/surface";
 import { GVButton } from "gv-react-components";
 import React from "react";
 import { translate } from "react-i18next";
+import Surface from "shared/components/surface/surface";
 
 import BrokerCard from "./broker-card/broker-card";
 import { comingSoonBrokers } from "./coming-soon-brokers";
@@ -58,7 +58,7 @@ const CreateProgramBroker = ({
         </h3>
         <div className="create-program-broker__row">
           <div className="create-program-broker__info-title">
-            {t("create-program-page.broker-info.about")}
+            {t("manager.create-program-page.broker-info.about")}
           </div>
           <div className="create-program-broker__info-text">
             {choosedBroker.description}
@@ -66,7 +66,7 @@ const CreateProgramBroker = ({
         </div>
         <div className="create-program-broker__row">
           <div className="create-program-broker__info-title">
-            {t("create-program-page.broker-info.terms")}
+            {t("manager.create-program-page.broker-info.terms")}
           </div>
           <div className="create-program-broker__info-text">
             {choosedBroker.terms}
@@ -74,7 +74,7 @@ const CreateProgramBroker = ({
         </div>
         <div className="create-program-broker__row create-program-broker__row--small">
           <div className="create-program-broker__info-title">
-            {t("create-program-page.broker-info.leverage")}
+            {t("manager.create-program-page.broker-info.leverage")}
           </div>
           <div className="create-program-broker__info-text">
             {getLeverageDescription(choosedBroker)}
@@ -82,7 +82,7 @@ const CreateProgramBroker = ({
         </div>
         <div className="create-program-broker__row create-program-broker__row--small">
           <div className="create-program-broker__info-title">
-            {t("create-program-page.broker-info.fee")}
+            {t("manager.create-program-page.broker-info.fee")}
           </div>
           <div className="create-program-broker__info-text">
             {choosedBroker.fee} %
@@ -90,7 +90,7 @@ const CreateProgramBroker = ({
         </div>
         <div className="create-program-broker__row">
           <div className="create-program-broker__info-title">
-            {t("create-program-page.broker-info.assets")}
+            {t("manager.create-program-page.broker-info.assets")}
           </div>
           <div className="create-program-broker__info-text">
             {choosedBroker.assets}

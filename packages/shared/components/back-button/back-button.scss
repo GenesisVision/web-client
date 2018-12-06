@@ -13,24 +13,22 @@
   align-items: center;
 
   &__container {
-    display: block;
+    display: flex;
+    align-items: stretch;
+    font-size: $font-size-common;
   }
 
   &__back {
-    font-size: $font-size-common;
-    letter-spacing: 0.4px;
     font-weight: 600;
-    line-height: $font-size-common;
-    vertical-align: bottom;
-    display: inline-block;
+    line-height: 5px;
+    padding-top:6.5px;
   }
 
   &__back-arrow {
-    margin-right: 10px;
-    font-size: $font-size-common;
-    line-height: 1;
-    vertical-align: top;
-    display: inline-block;
+    border: 1px solid transparent;
+    margin-right: 5px;
+    height: 16.5px;
+    font-family: "Times New Roman";
   }
 
   & .gv-btn--text {

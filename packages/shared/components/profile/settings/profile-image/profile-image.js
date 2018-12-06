@@ -29,9 +29,9 @@ class ProfileImage extends Component {
     const { width, height, size } = value;
 
     if (width < 300 || height < 300)
-      return t("profile.settings.validation.image-resolution-incorrect");
+      return t("profile-page.settings.validation.image-resolution-incorrect");
     if (size > 2097152)
-      return t("profile.settings.validation.image-file-is-large");
+      return t("profile-page.settings.validation.image-file-is-large");
 
     return "";
   };
@@ -80,11 +80,11 @@ class ProfileImage extends Component {
     return (
       <div className="profile-image">
         <h3 className="profile-image__title">
-          {t("profile.settings.profile-image")}
+          {t("profile-page.settings.profile-image")}
         </h3>
 
         <div className="profile-image__requirements">
-          {t("profile.settings.image-requirements")}
+          {t("profile-page.settings.image-requirements")}
         </div>
 
         <ProfileInputImage
@@ -103,7 +103,7 @@ class ProfileImage extends Component {
           disabled={isSubmitDisabled}
           className="profile-image__submit-btn"
         >
-          {t("profile.settings.save-photo")}
+          {t("profile-page.settings.save-photo")}
         </GVButton>
       </div>
     );

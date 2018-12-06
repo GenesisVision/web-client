@@ -23,6 +23,11 @@
   &__profit {
     height: 350px;
     width: 100%;
+
+    svg.recharts-surface {
+      // fix for recharts
+      overflow: visible;
+    }
   }
 
   .details-tooltip {

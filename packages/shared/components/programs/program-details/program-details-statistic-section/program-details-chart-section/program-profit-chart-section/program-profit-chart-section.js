@@ -7,12 +7,11 @@ import { formatValue } from "shared/utils/formatter";
 import ProgramProfitChart from "./program-profit-chart";
 
 const ProgramProfitChartSection = ({
-  profitChartData,
+  profitChart,
   period,
   onPeriodChange,
   currency
 }) => {
-  const { data: profitChart } = profitChartData;
   if (!profitChart) return null;
   return (
     <Fragment>

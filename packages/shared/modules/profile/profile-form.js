@@ -55,7 +55,7 @@ class Profile extends Component {
                   <td className="profile__center" />
                   <td className="profile__right">
                     <h4 className="profile__subtitle">
-                      {t("profile.contacts")}
+                      {t("profile-page.contacts")}
                     </h4>
                     <VerificationStatus checked={info.phoneNumberConfirmed} />
                   </td>
@@ -69,7 +69,7 @@ class Profile extends Component {
                     <div className="profile__row">
                       <GVFormikField
                         disabled
-                        label={t("profile.email")}
+                        label={t("profile-page.email")}
                         value={info.email}
                         component={GVTextField}
                         name="email"
@@ -84,7 +84,7 @@ class Profile extends Component {
                   <td className="profile__center" />
                   <td className="profile__right">
                     <h4 className="profile__subtitle">
-                      {t("profile.personal-info")}
+                      {t("profile-page.personal-info")}
                     </h4>
                     <VerificationStatus
                       verificationStatus={info.verificationStatus}

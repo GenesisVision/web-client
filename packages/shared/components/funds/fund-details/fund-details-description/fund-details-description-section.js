@@ -29,10 +29,10 @@ class FundDetailsDescriptionSection extends PureComponent {
 
   static getDerivedStateFromProps(props, state) {
     let newState = {};
-    if (state.prevProps !== props.fundDescriptionData) {
-      newState.prevProps = props.fundDescriptionData;
-      newState.fundDescription = props.fundDescriptionData.data;
-      newState.ui = { isPending: props.fundDescriptionData.isPending };
+    if (state.prevProps !== props.fundDescription) {
+      newState.prevProps = props.fundDescription;
+      newState.fundDescription = props.fundDescription;
+      newState.ui = { isPending: props.fundDescription };
     }
 
     return newState;

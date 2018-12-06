@@ -19,13 +19,7 @@ class FundDetailsChartSection extends PureComponent {
     this.setState({ tab });
   };
   render() {
-    const {
-      t,
-      period,
-      onPeriodChange,
-      profitChartData,
-      balanceChartData
-    } = this.props;
+    const { t, period, onPeriodChange, profitChart, balanceChart } = this.props;
 
     const { tab } = this.state;
 
@@ -44,14 +38,14 @@ class FundDetailsChartSection extends PureComponent {
         </GVTabs>
         {tab === PROFIT_TAB && (
           <FundProfitChartSection
-            profitChartData={profitChartData}
+            profitChart={profitChart}
             period={period}
             onPeriodChange={onPeriodChange}
           />
         )}
         {tab === BALANCE_TAB && (
           <ProgramBalanceChartSection
-            balanceChartData={balanceChartData}
+            balanceChart={balanceChart}
             period={period}
             onPeriodChange={onPeriodChange}
           />

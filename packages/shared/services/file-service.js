@@ -1,4 +1,4 @@
-import FileApi, { fileApiProxy } from "./api-client/file-api";
+import fileApi from "./api-client/file-api";
 
 const getFileUrl = id => {
   if (!id) return "";
@@ -6,27 +6,20 @@ const getFileUrl = id => {
 };
 
 const uploadFile = (file, authorization) => {
-  return FileApi.v10FileUploadPost(file, { authorization }).then(
-    response => response.id
-  );
-};
-
-const uploadFileProxy = (file, authorization) => {
-  return fileApiProxy
+  return fileApi
     .v10FileUploadPost(file, { authorization })
-    .then(response => response.data.id);
+    .then(response => response.id);
 };
 
 const uploadDocument = (file, authorization) => {
-  return FileApi.v10FileDocumentUploadPost(authorization, file).then(
-    response => response.id
-  );
+  return fileApi
+    .v10FileDocumentUploadPost(authorization, file)
+    .then(response => response.id);
 };
 
 const filesService = {
   getFileUrl,
   uploadFile,
-  uploadFileProxy,
   uploadDocument
 };
 export default filesService;

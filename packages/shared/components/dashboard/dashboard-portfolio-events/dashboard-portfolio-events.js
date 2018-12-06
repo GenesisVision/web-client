@@ -34,7 +34,13 @@ class DashboardPortfolioEvents extends Component {
 
     return (
       <Surface className="surface--horizontal-paddings dashboard-portfolio-events">
-        <h3>{t("dashboard.portfolio-events.title")}</h3>
+        <h3>
+          {t(
+            `${
+              process.env.REACT_APP_PLATFORM
+            }.dashboard-page.portfolio-events.title`
+          )}
+        </h3>
         <div className="dashboard-portfolio-events__scroll-container">
           <Scrollbars
             autoHide
@@ -56,7 +62,12 @@ class DashboardPortfolioEvents extends Component {
           }}
         >
           <GVButton variant="text" color="secondary">
-            {t("dashboard.portfolio-events.see-all-button")} &#8250;
+            {t(
+              `${
+                process.env.REACT_APP_PLATFORM
+              }.dashboard-page.portfolio-events.see-all-button`
+            )}{" "}
+            &#8250;
           </GVButton>
         </Link>
       </Surface>

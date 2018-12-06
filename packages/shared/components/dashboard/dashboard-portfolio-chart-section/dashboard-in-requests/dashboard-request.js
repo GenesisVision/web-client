@@ -5,6 +5,7 @@ import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import PortfolioEventLogo from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
+import { formatCurrencyValue } from "shared/utils/formatter";
 
 class DashboardRequest extends Component {
   state = {
@@ -46,7 +47,7 @@ class DashboardRequest extends Component {
         <div className="dashboard-request-popover__value">
           <div className="dashboard-request-popover__profitability">
             <NumberFormat
-              value={request.value}
+              value={formatCurrencyValue(request.value, request.currency)}
               decimalScale={8}
               displayType="text"
               allowNegative={false}
@@ -76,6 +77,7 @@ class DashboardRequest extends Component {
             header={"Cancel request"}
             body={"Please confirm that you want to cancel the request."}
             applyButtonText={t("buttons.confirm")}
+            className="dialog--wider"
           />
         </div>
       </div>

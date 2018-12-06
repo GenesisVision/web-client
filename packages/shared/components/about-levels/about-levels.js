@@ -1,12 +1,11 @@
 import "./about-level.scss";
 
-import Dialog from "shared/components/dialog/dialog";
-import CurrencySelect from "shared/modules/currency-select/components/currency-select";
-import { CURRENCY_VALUES } from "shared/modules/currency-select/currency-select.constants";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-
+import Dialog from "shared/components/dialog/dialog";
+import CurrencySelect from "shared/modules/currency-select/components/currency-select";
+import { CURRENCY_VALUES } from "shared/modules/currency-select/currency-select.constants";
 import { convertToCurrency } from "shared/utils/currency-converter";
 
 class AboutLevelsComponent extends Component {
@@ -28,32 +27,32 @@ class AboutLevelsComponent extends Component {
         <div className="about-levels-container">
           <div className="about-levels-container__header">
             <h1 className="about-levels-container__title">
-              {t("about-levels.titles.main")}
+              {t("about-levels-page.titles.main")}
             </h1>
             <div className="about-levels-container__description">
-              {t("about-levels.description")}
+              {t("about-levels-page.description")}
             </div>
           </div>
           <div className="about-levels-container__text">
             <div className="about-levels-container__left-block">
               <div className="about-levels-container__paragraph">
-                {t("about-levels.sections.section-1")}
+                {t("about-levels-page.sections.section-1")}
               </div>
               <div className="about-levels-container__paragraph">
-                {t("about-levels.sections.section-2")}
+                {t("about-levels-page.sections.section-2")}
               </div>
               <div className="about-levels-container__subtitle">
-                {t("about-levels.titles.table")}
+                {t("about-levels-page.titles.table")}
               </div>
               <div className="about-levels-container__table">
                 <table>
                   <thead>
                     <tr>
-                      <th>{t("about-levels.table-header.level")}</th>
-                      <th>{t("about-levels.table-header.age")}</th>
-                      <th>{t("about-levels.table-header.avg-profit")}</th>
+                      <th>{t("about-levels-page.table-header.level")}</th>
+                      <th>{t("about-levels-page.table-header.age")}</th>
+                      <th>{t("about-levels-page.table-header.avg-profit")}</th>
                       <th className="total-profit">
-                        {t("about-levels.table-header.total-profit")}
+                        {t("about-levels-page.table-header.total-profit")}
                       </th>
                     </tr>
                   </thead>
@@ -104,28 +103,32 @@ class AboutLevelsComponent extends Component {
                 </table>
               </div>
               <div className="about-levels-container__paragraph">
-                <b> {t("about-levels.sections.section-age-title")}</b>
-                {t("about-levels.sections.section-age")}
+                <b> {t("about-levels-page.sections.section-age-title")}</b>
+                {t("about-levels-page.sections.section-age")}
               </div>
               <div className="about-levels-container__paragraph">
-                <b>{t("about-levels.sections.section-avg-profit-title")}</b>
-                {t("about-levels.sections.section-avg-profit")}
+                <b>
+                  {t("about-levels-page.sections.section-avg-profit-title")}
+                </b>
+                {t("about-levels-page.sections.section-avg-profit")}
               </div>
               <div className="about-levels-container__paragraph">
-                <b>{t("about-levels.sections.section-total-profit-title")}</b>
-                {t("about-levels.sections.section-total-profit")}
+                <b>
+                  {t("about-levels-page.sections.section-total-profit-title")}
+                </b>
+                {t("about-levels-page.sections.section-total-profit")}
               </div>
               <div className="about-levels-container__paragraph about-levels-container__paragraph--mute">
-                {t("about-levels.sections.section-6")}
+                {t("about-levels-page.sections.section-6")}
               </div>
             </div>
             <div className="about-levels-container__right-block">
               <div className="about-levels-container__subtitle">
-                {t("about-levels.titles.limits")}
+                {t("about-levels-page.titles.limits")}
               </div>
               <div className="about-levels-container__currency">
                 <div className="about-levels-container__mute-title">
-                  {t("about-levels.select")}
+                  {t("about-levels-page.select")}
                 </div>
                 <div className="about-levels-container__select">
                   <CurrencySelect
@@ -141,11 +144,11 @@ class AboutLevelsComponent extends Component {
                   <div className="div about-levels-container__icon one">1</div>
                   <div className="about-levels-container__values">
                     <div className="about-levels-container__mute-title">
-                      {t("about-levels.titles.limit")}
+                      {t("about-levels-page.titles.limit")}
                     </div>
                     <div className="about-levels-container__value">
                       {this.numberFormat(
-                        t("about-levels.limits.1"),
+                        t("about-levels-page.limits.1"),
                         rate,
                         currency
                       )}
@@ -156,11 +159,11 @@ class AboutLevelsComponent extends Component {
                   <div className="div about-levels-container__icon two">2</div>
                   <div className="about-levels-container__values">
                     <div className="about-levels-container__mute-title">
-                      {t("about-levels.titles.limit")}
+                      {t("about-levels-page.titles.limit")}
                     </div>
                     <div className="about-levels-container__value">
                       {this.numberFormat(
-                        t("about-levels.limits.2"),
+                        t("about-levels-page.limits.2"),
                         rate,
                         currency
                       )}
@@ -173,11 +176,11 @@ class AboutLevelsComponent extends Component {
                   </div>
                   <div className="about-levels-container__values">
                     <div className="about-levels-container__mute-title">
-                      {t("about-levels.titles.limit")}
+                      {t("about-levels-page.titles.limit")}
                     </div>
                     <div className="about-levels-container__value">
                       {this.numberFormat(
-                        t("about-levels.limits.3"),
+                        t("about-levels-page.limits.3"),
                         rate,
                         currency
                       )}
@@ -188,11 +191,11 @@ class AboutLevelsComponent extends Component {
                   <div className="div about-levels-container__icon four">4</div>
                   <div className="about-levels-container__values">
                     <div className="about-levels-container__mute-title">
-                      {t("about-levels.titles.limit")}
+                      {t("about-levels-page.titles.limit")}
                     </div>
                     <div className="about-levels-container__value">
                       {this.numberFormat(
-                        t("about-levels.limits.4"),
+                        t("about-levels-page.limits.4"),
                         rate,
                         currency
                       )}
@@ -203,11 +206,11 @@ class AboutLevelsComponent extends Component {
                   <div className="div about-levels-container__icon five">5</div>
                   <div className="about-levels-container__values">
                     <div className="about-levels-container__mute-title">
-                      {t("about-levels.titles.limit")}
+                      {t("about-levels-page.titles.limit")}
                     </div>
                     <div className="about-levels-container__value">
                       {this.numberFormat(
-                        t("about-levels.limits.5"),
+                        t("about-levels-page.limits.5"),
                         rate,
                         currency
                       )}
@@ -218,11 +221,11 @@ class AboutLevelsComponent extends Component {
                   <div className="div about-levels-container__icon six">6</div>
                   <div className="about-levels-container__values">
                     <div className="about-levels-container__mute-title">
-                      {t("about-levels.titles.limit")}
+                      {t("about-levels-page.titles.limit")}
                     </div>
                     <div className="about-levels-container__value">
                       {this.numberFormat(
-                        t("about-levels.limits.6"),
+                        t("about-levels-page.limits.6"),
                         rate,
                         currency
                       )}
@@ -235,11 +238,11 @@ class AboutLevelsComponent extends Component {
                   </div>
                   <div className="about-levels-container__values">
                     <div className="about-levels-container__mute-title">
-                      {t("about-levels.titles.limit")}
+                      {t("about-levels-page.titles.limit")}
                     </div>
                     <div className="about-levels-container__value">
                       {this.numberFormat(
-                        t("about-levels.limits.7"),
+                        t("about-levels-page.limits.7"),
                         rate,
                         currency
                       )}

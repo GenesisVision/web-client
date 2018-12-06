@@ -3,10 +3,10 @@ import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
+import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
 import CreateProgramBroker from "./components/create-program-broker/create-program-broker";
-import CreateProgramNavigationDialog from "./components/create-program-navigation-dialog/create-program-navigation-dialog";
 import CreateProgramSettings from "./components/create-program-settings/create-program-settings";
 import { checkIsModelFilled } from "./helpers/create-program.helpers";
 import * as createProgramService from "./services/create-program.service";
@@ -24,9 +24,9 @@ class CreateProgramContainer extends Component {
   componentDidMount() {
     createProgramService.fetchBrokers().then(response => {
       this.setState({
-        brokers: response.data.brokers,
+        brokers: response.brokers,
         isPending: false,
-        choosedBroker: response.data.brokers[0]
+        choosedBroker: response.brokers[0]
       });
     });
   }
@@ -62,6 +62,10 @@ class CreateProgramContainer extends Component {
     );
   };
 
+  handleValidateError = () => {
+    this.props.service.showValidationError();
+  };
+
   setLeverageChooseAvailable = isAvailable => {
     this.setState({ isLeverageChooseAvailable: isAvailable });
   };
@@ -90,11 +94,11 @@ class CreateProgramContainer extends Component {
         <GVTabs value={tab}>
           <GVTab
             value={"broker"}
-            label={t("create-program-page.tabs.select-broker")}
+            label={t("manager.create-program-page.tabs.select-broker")}
           />
           <GVTab
             value={"settings"}
-            label={t("create-program-page.tabs.settings")}
+            label={t("manager.create-program-page.tabs.settings")}
           />
         </GVTabs>
         {!isPending && (
@@ -109,24 +113,27 @@ class CreateProgramContainer extends Component {
             )}
             {tab === "settings" && (
               <CreateProgramSettings
+                onValidateError={this.handleValidateError}
                 navigateBack={navigateToBroker}
                 broker={choosedBroker}
-                balance={headerData.availableGvt}
+                balance={(headerData && headerData.availableGvt) || 0}
                 updateBalance={service.fetchBalance}
                 onSubmit={handleSubmit}
-                author={headerData.name}
+                author={(headerData && headerData.name) || null}
                 setLeverageChooseAvailable={setLeverageChooseAvailable}
                 isLeverageChooseAvailable={isLeverageChooseAvailable}
                 programsInfo={platformSettings.programsInfo}
                 notifyError={service.notifyError}
               />
             )}
-            <CreateProgramNavigationDialog
+            <ConfirmPopup
               open={isNavigationDialogVisible}
               onClose={() =>
                 this.setState({ isNavigationDialogVisible: false })
               }
-              onConfirm={confirmNavigateToBroker}
+              onApply={confirmNavigateToBroker}
+              body={t("manager.create-program-page.navigation-back-text")}
+              applyButtonText={t("buttons.continue")}
             />
           </div>
         )}
