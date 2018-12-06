@@ -104,13 +104,13 @@ class ProgramDetailsDescriptionSection extends PureComponent {
       <Fragment>
         <ProgramDetailsDescription
           onReinvestingClick={this.handleOnReinvestingClick}
+          programDescription={programDescription}
           isReinvestPending={ui.isReinvestPending}
           onFavoriteClick={this.handleOnFavoriteClick}
           isFavoritePending={ui.isFavoritePending}
           investmentData={composeInvestmentData(programDescription)}
           {...programDescription.personalProgramDetails}
           {...this.props}
-          programDescription={programDescription}
         />
       </Fragment>
     );
