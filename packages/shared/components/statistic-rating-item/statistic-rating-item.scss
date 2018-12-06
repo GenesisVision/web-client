@@ -1,0 +1,28 @@
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_sizes.scss";
+
+.statistics-rating-item {
+	@include font-size($font-size-h3);
+	@include adaptive-padding(right, $padding-medium);
+	@include adaptive-padding(bottom, $padding-xsmall);
+	display: flex;
+	align-items: center;
+
+	&__label {
+		color: $text-light-color;
+		letter-spacing: 0.21px;
+	}
+
+	&__value {
+		background-color: rgba($primary-color, 0.1);
+		color: $primary-color;
+		border-radius: 6px;
+		padding: 4px 8px;
+		margin-left: 10px;
+
+		&--ellipse {
+			padding: 4px 14px;
+		}
+	}
+}

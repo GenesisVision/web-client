@@ -563,10 +563,10 @@
     }
   },
   "rating-page": {
-    "title": "Programs rating",
+    "title": "Rating",
     "pretendents-title": "Pretendents",
-    "self-pretendents-title": "Your pretendents",
-    "programCounts": "Programs",
+    "self-pretendents-title": "Your programs",
+    "programCounts": "All programs",
     "quota": "Quota",
     "currentProfit": "Current target profit"
   },
