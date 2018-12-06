@@ -9,7 +9,7 @@ const ProgramsRatingTables = ({ t, id, tab }) => (
     {id && (
       <ProgramsRatingTable
         tab={tab.level}
-        title={t("rating.self-pretendents-title")}
+        title={t("rating-page.self-pretendents-title")}
         managerId={id}
       />
     )}

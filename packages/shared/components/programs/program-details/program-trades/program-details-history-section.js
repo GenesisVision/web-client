@@ -1,17 +1,16 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
 
-import Surface from "shared/components/surface/surface";
 import { GVTab, GVTabs } from "gv-react-components";
-import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import { EVENT_TYPE_FILTER_DEFAULT_VALUE } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
-import PortfolioEventsTableComponent from "shared/components/dashboard/dashboard-portfolio-events-all/dashboard-portfolio-events-table/dashboard-portfolio-events-all-table";
+import * as PropTypes from "prop-types";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import connect from "react-redux/es/connect/connect";
 import { compose } from "redux";
-
+import PortfolioEventsTableComponent from "shared/components/dashboard/dashboard-portfolio-events-all/dashboard-portfolio-events-table/dashboard-portfolio-events-all-table";
 import ProgramTrades from "shared/components/programs/program-details/program-trades/program-trades";
-import * as PropTypes from "prop-types";
+import Surface from "shared/components/surface/surface";
+import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { EVENT_TYPE_FILTER_DEFAULT_VALUE } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
 
 const TRADES_TAB = "trades";
 const EVENTS_TAB = "events";
@@ -21,23 +20,12 @@ const EVENTS_FILTERING = {
 };
 class ProgramDetailsHistorySection extends PureComponent {
   state = {
-    tab: TRADES_TAB,
-    tradesData: { data: null, isPending: true },
-    prevProps: null
+    tab: TRADES_TAB
   };
 
   handleTabChange = (e, tab) => {
     this.setState({ tab });
   };
-
-  static getDerivedStateFromProps(props, state) {
-    let newState = {};
-    if (state.prevProps !== props) {
-      newState.prevProps = props;
-      newState.tradesData = props.tradesData;
-    }
-    return newState;
-  }
 
   render() {
     const { tab } = this.state;

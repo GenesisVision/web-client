@@ -2,7 +2,7 @@ import pickBy from "lodash.pickby";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import { profileApiProxy } from "shared/services/api-client/profile-api";
+import profileApi from "shared/services/api-client/profile-api";
 import authService from "shared/services/auth-service";
 
 class ProfileContainer extends Component {
@@ -20,32 +20,32 @@ class ProfileContainer extends Component {
   handleEdit = values => {
     const model = pickBy(values, str => Boolean(str));
     this.setState({ isPending: true });
-    profileApiProxy
+    profileApi
       .v10ProfilePersonalUpdatePost(authService.getAuthArg(), {
         model
       })
       .then(() => {
         this.setState({ isPending: false });
-        this.success(this.props.t("profile.success-edit"));
+        this.success(this.props.t("profile-page.success-edit"));
       });
   };
 
   handleVerify = () => {
-    this.success(this.props.t("profile.success-verify"));
+    this.success(this.props.t("profile-page.success-verify"));
   };
 
   componentDidMount() {
     this.setState({ isPending: true });
-    profileApiProxy
+    profileApi
       .v10ProfileGet(authService.getAuthArg())
-      .then(data => this.setState({ ...data }));
+      .then(data => this.setState({ data }));
   }
 
   fetch() {
     this.setState({ isPending: true });
-    profileApiProxy
+    profileApi
       .v10ProfileGet(authService.getAuthArg())
-      .then(data => this.setState({ ...data }));
+      .then(data => this.setState({ data }));
   }
 
   render() {

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import Dialog from "shared/components/dialog/dialog";
-import { authApiProxy } from "shared/services/api-client/auth-api";
+import authApi from "shared/services/api-client/auth-api";
 import authService from "shared/services/auth-service";
 
 import GoogleAuthCodes from "../google-auth-codes";
@@ -24,12 +24,12 @@ class GenerateRecoveryCode extends Component {
   };
   handleSubmit = values => {
     this.setState({ isPending: true });
-    authApiProxy
+    authApi
       .v10Auth2faRecoverycodesNewPost(authService.getAuthArg(), {
         model: values
       })
-      .then(data => this.setState({ ...data }))
-      .catch(data => this.setState({ ...data }));
+      .then(data => this.setState({ data }))
+      .catch(data => this.setState({ data }));
   };
 
   render() {
@@ -37,7 +37,7 @@ class GenerateRecoveryCode extends Component {
     return (
       <div className="generate-recovery-codes">
         <GVButton variant="text" type="button" onClick={this.handleClick}>
-          {this.props.t("2fa.codes.generate-recovery-codes")}
+          {this.props.t("2fa-page.codes.generate-recovery-codes")}
         </GVButton>
         <Dialog open={this.state.isOpenPopup} onClose={this.handleClose}>
           {this.state.data ? (

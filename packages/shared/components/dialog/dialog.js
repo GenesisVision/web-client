@@ -1,13 +1,13 @@
 import "./dialog.scss";
 
 import classnames from "classnames";
-import { CloseIcon } from "shared/components/icon/close-icon";
-import Modal from "shared/components/modal/modal";
 import { GVButton } from "gv-react-components";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { Scrollbars } from "react-custom-scrollbars";
 import { translate } from "react-i18next";
+import { CloseIcon } from "shared/components/icon/close-icon";
+import Modal from "shared/components/modal/modal";
 
 class Dialog extends Component {
   render() {
@@ -35,13 +35,7 @@ class Dialog extends Component {
               >
                 <CloseIcon />
               </GVButton>
-              {this.props.top && (
-                <div className="dialog__top">{this.props.top}</div>
-              )}
               {this.props.children}
-              {this.props.bottom && (
-                <div className="dialog__bottom">{this.props.bottom}</div>
-              )}
             </div>
           </div>
         </Scrollbars>

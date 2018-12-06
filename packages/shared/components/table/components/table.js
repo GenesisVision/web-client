@@ -79,7 +79,12 @@ class Table extends Component {
         >
           {view === CARDS_VIEW && (
             <div className="table">
-              <TableBody items={items} className="programs-cards" tag="div">
+              <TableBody
+                items={items}
+                className="programs-cards"
+                tag="div"
+                view={CARDS_VIEW}
+              >
                 {renderBodyCard}
               </TableBody>
             </div>
@@ -98,6 +103,7 @@ class Table extends Component {
                 items={items}
                 className="table__body"
                 tag="tbody"
+                view={TABLE_VIEW}
               >
                 {renderBodyRow}
               </TableBody>

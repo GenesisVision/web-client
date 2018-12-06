@@ -7,9 +7,9 @@ import FundDetailsStatistic from "shared/components/funds/fund-details/fund-deta
 
 class FundDetailsStatisticSection extends PureComponent {
   state = {
-    statisticData: { data: null, isPending: true },
-    profitChartData: { data: null, isPending: true },
-    balanceChartData: { data: null, isPending: true },
+    statistic: null,
+    profitChart: null,
+    balanceChart: null,
     period: DEFAULT_PERIOD,
     prevProps: null
   };
@@ -18,9 +18,9 @@ class FundDetailsStatisticSection extends PureComponent {
     let newState = {};
     if (state.prevProps !== props) {
       newState.prevProps = props;
-      newState.statisticData = props.statisticData;
-      newState.profitChartData = props.profitChartData;
-      newState.balanceChartData = props.balanceChartData;
+      newState.statistic = props.statistic;
+      newState.profitChart = props.profitChart;
+      newState.balanceChart = props.balanceChart;
       return newState;
     }
 
@@ -36,18 +36,17 @@ class FundDetailsStatisticSection extends PureComponent {
   };
 
   render() {
-    const { statisticData, profitChartData, balanceChartData } = this.state;
-    const { period } = this.state;
-    if (!profitChartData.data) return null;
+    const { statistic, profitChart, balanceChart, period } = this.state;
+    if (!profitChart) return null;
     return (
       <div className="details-statistic-section">
         <div className="details-statistic-section__statistic">
-          <FundDetailsStatistic statisticData={statisticData} period={period} />
+          <FundDetailsStatistic statistic={statistic} period={period} />
         </div>
         <div className="details-statistic-section__chart">
           <FundDetailsChartSection
-            profitChartData={profitChartData}
-            balanceChartData={balanceChartData}
+            profitChart={profitChart}
+            balanceChart={balanceChart}
             period={period}
             onPeriodChange={this.handlePeriodChange}
           />

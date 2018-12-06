@@ -31,7 +31,9 @@ export const cancelRequest = (requestId, type, onFinally) => (
       dispatch(getPortfolioEvents());
       dispatch(
         alertMessageActions.success(
-          "dashboard-page.requests.success-cancel-request",
+          `${
+            process.env.REACT_APP_PLATFORM
+          }..dashboard-pagerequests.success-cancel-request`,
           true
         )
       );
@@ -40,7 +42,9 @@ export const cancelRequest = (requestId, type, onFinally) => (
     .catch(ex => {
       dispatch(
         alertMessageActions.error(
-          "dashboard-page.requests.failure-cancel-request",
+          `${
+            process.env.REACT_APP_PLATFORM
+          }.dashboard-page.requests.failure-cancel-request`,
           true
         )
       );

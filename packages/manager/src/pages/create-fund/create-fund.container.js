@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { goBack } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
+import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 
-import CreateFundNavigationDialog from "./components/create-fund-navigation-dialog/create-fund-navigation-dialog";
 import CreateFundSettings from "./components/create-fund-settings/create-fund-settings";
 import * as createFundService from "./services/create-fund.service";
 
@@ -18,14 +19,12 @@ class CreateFundContainer extends Component {
     createFundService
       .fetchAssets()
       .then(response => {
-        this.setState({
-          assets: response.assets
-        });
+        this.setState({ assets: response.assets });
       })
       .then(() => {
         createFundService.fetchInvestmentAmount().then(response => {
           this.setState({
-            deposit: response.data,
+            deposit: response,
             isPending: false
           });
         });
@@ -34,6 +33,10 @@ class CreateFundContainer extends Component {
 
   handleSubmit = (values, setSubmitting) => {
     this.props.service.createFund({ ...values }, setSubmitting);
+  };
+
+  handleValidateError = () => {
+    this.props.service.showValidationError();
   };
 
   navigateBack = () => {
@@ -48,15 +51,16 @@ class CreateFundContainer extends Component {
       deposit
     } = this.state;
     const { navigateBack, handleSubmit } = this;
-    const { headerData, service, platformSettings } = this.props;
+    const { t, headerData, service, platformSettings } = this.props;
     if (!platformSettings) return null;
     return (
       <div className="create-fund-container">
         <div>
           {!isPending && (
             <CreateFundSettings
+              onValidateError={this.handleValidateError}
               navigateBack={navigateBack}
-              balance={headerData.availableGvt || 0}
+              balance={(headerData && headerData.availableGvt) || 0}
               updateBalance={service.fetchBalance}
               onSubmit={handleSubmit}
               author={(headerData && headerData.name) || null} //headerData.name
@@ -65,10 +69,12 @@ class CreateFundContainer extends Component {
               programsInfo={platformSettings.programsInfo}
             />
           )}
-          <CreateFundNavigationDialog
+          <ConfirmPopup
             open={isNavigationDialogVisible}
             onClose={() => this.setState({ isNavigationDialogVisible: false })}
-            onConfirm={service.goBack}
+            onApply={service.goBack}
+            body={t("create-fund-page.navigation-back-text")}
+            applyButtonText={t("buttons.continue")}
           />
         </div>
       </div>
@@ -90,6 +96,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default compose(
+  translate(),
   connect(
     mapStateToProps,
     mapDispatchToProps

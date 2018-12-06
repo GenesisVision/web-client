@@ -18,12 +18,12 @@ class FundWithdrawPopup extends Component {
     this.props
       .fetchInfo()
       .then(data => {
-        this.setState({ ...data });
+        this.setState({ data, isPending: false });
       })
-      .catch(data => this.setState({ ...data }));
+      .catch(data => this.setState({ data, isPending: false }));
   }
 
-  handleSumbit = percent => {
+  handleSubmit = percent => {
     this.setState({ isPending: true });
     return this.props
       .withdraw(percent)
@@ -61,7 +61,7 @@ class FundWithdrawPopup extends Component {
           availableToWithdraw={availableToWithdraw}
           periodEnds={periodEnds}
           rate={rate}
-          onSubmit={this.handleSumbit}
+          onSubmit={this.handleSubmit}
           errorMessage={errorMessage}
           disabled={isPending}
           step={step}

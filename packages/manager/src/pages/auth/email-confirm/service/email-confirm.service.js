@@ -1,12 +1,12 @@
-import authActions from "shared/actions/auth-actions";
 import { HOME_ROUTE } from "pages/app/app.routes";
 import { push } from "react-router-redux";
-import { authApiProxy } from "shared/services/api-client/auth-api";
-import authService from "shared/services/auth-service";
+import authActions from "shared/actions/auth-actions";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
+import authApi from "shared/services/api-client/auth-api";
+import authService from "shared/services/auth-service";
 
 export const confirmEmail = (userId, code) => dispatch => {
-  return authApiProxy
+  return authApi
     .v10AuthSignupConfirmPost({
       userId,
       code

@@ -2,14 +2,14 @@ import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import { push } from "react-router-redux";
 import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import { brokersApiProxy } from "shared/services/api-client/brokers-api";
-import { managerApiProxy } from "shared/services/api-client/manager-api";
+import brokersApi from "shared/services/api-client/brokers-api";
+import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
 import filesService from "shared/services/file-service";
 
 import { getDataWithoutSuffixes } from "../helpers/create-program.helpers";
 
-export const fetchBrokers = () => brokersApiProxy.v10BrokersGet();
+export const fetchBrokers = () => brokersApi.v10BrokersGet();
 
 export const fetchBalance = () => dispatch =>
   dispatch(fetchProfileHeaderInfo());
@@ -26,7 +26,7 @@ export const createProgram = (createProgramData, setSubmitting) => dispatch => {
 
   let promise = Promise.resolve(null);
   if (data.logo.cropped) {
-    promise = filesService.uploadFileProxy(data.logo.cropped, authorization);
+    promise = filesService.uploadFile(data.logo.cropped, authorization);
   }
   promise
     .then(response => {
@@ -35,7 +35,7 @@ export const createProgram = (createProgramData, setSubmitting) => dispatch => {
         logo: response || ""
       };
 
-      return managerApiProxy.v10ManagerProgramsCreatePost(authorization, {
+      return managerApi.v10ManagerProgramsCreatePost(authorization, {
         request: data
       });
     })
@@ -43,7 +43,7 @@ export const createProgram = (createProgramData, setSubmitting) => dispatch => {
       setSubmitting(false);
       dispatch(
         alertMessageActions.success(
-          "create-program-page.notifications.create-success",
+          "manager.create-program-page.notifications.create-success",
           true
         )
       );
@@ -53,4 +53,13 @@ export const createProgram = (createProgramData, setSubmitting) => dispatch => {
       setSubmitting(false);
       dispatch(alertMessageActions.error(error.errorMessage));
     });
+};
+
+export const showValidationError = () => dispatch => {
+  dispatch(
+    alertMessageActions.error(
+      "manager.create-program-page.notifications.validate-error",
+      true
+    )
+  );
 };

@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import React, { Component, Fragment } from "react";
+
 import ProgramWithdrawForm from "./program-withdraw-form";
 import ProgramWithdrawTop from "./program-withdraw-top";
 
@@ -15,17 +16,17 @@ class ProgramWithdrawPopup extends Component {
     this.props
       .fetchInfo()
       .then(data => {
-        this.setState({ ...data });
+        this.setState({ data, isPending: false });
       })
-      .catch(data => this.setState({ ...data }));
+      .catch(data => this.setState({ data, isPending: false }));
   }
 
-  handleSumbit = amount => {
+  handleSubmit = amount => {
     this.setState({ isPending: true });
     return this.props
       .withdraw(amount)
-      .then(data => this.setState({ ...data }))
-      .catch(data => this.setState({ ...data }));
+      .then(data => this.setState({ data, isPending: false }))
+      .catch(data => this.setState({ data, isPending: false }));
   };
 
   render() {
@@ -45,7 +46,7 @@ class ProgramWithdrawPopup extends Component {
           availableToWithdraw={availableToWithdraw}
           periodEnds={periodEnds}
           rate={rate}
-          onSubmit={this.handleSumbit}
+          onSubmit={this.handleSubmit}
           errorMessage={error}
           disabled={this.state.isPending}
         />

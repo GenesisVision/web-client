@@ -9,6 +9,7 @@ import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import DetailsFavorite from "shared/components/details/details-description-section/details-description/details-favorite";
 import DetailsNotification from "shared/components/details/details-description-section/details-description/details-notificaton";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
+import Hint from "shared/components/hint/hint";
 import Popover from "shared/components/popover/popover";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import {
@@ -16,7 +17,6 @@ import {
   composeProgramNotificationsUrl
 } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
-import Hint from "shared/components/hint/hint";
 
 class ProgramDetailsDescription extends PureComponent {
   state = {
@@ -108,7 +108,8 @@ class ProgramDetailsDescription extends PureComponent {
       programDescription,
       onFavoriteClick,
       investmentData,
-      onChangeInvestmentStatus
+      onChangeInvestmentStatus,
+      isReinvest
     } = this.props;
 
     const composeEditInfo = {
@@ -167,14 +168,14 @@ class ProgramDetailsDescription extends PureComponent {
                 <div className="popover-levels__text">
                   {t("program-details-page.popover.text")}
                 </div>
-                {/*<GVButton
+                <GVButton
                   variant="text"
                   onClick={this.handleOpenAboutLevels}
                   color="secondary"
                   className="popover-levels__about"
                 >
                   {t("program-details-page.popover.about-levels")} &#8250;
-                </GVButton>*/}
+                </GVButton>
               </div>
             </div>
           </Popover>
@@ -184,7 +185,7 @@ class ProgramDetailsDescription extends PureComponent {
           />
         </div>
         <div className="details-description__main">
-          <h1 className="app__title-details">{title}</h1>
+          <h1 className="title-small-padding">{title}</h1>
           <Link
             to={{
               pathname: composeManagerDetailsUrl(
@@ -318,9 +319,7 @@ class ProgramDetailsDescription extends PureComponent {
                       <ProgramReinvestingWidget
                         className="details-description__reinvest"
                         toggleReinvesting={onReinvestingClick}
-                        isReinvesting={
-                          programDescription.personalProgramDetails.isReinvest
-                        }
+                        isReinvesting={isReinvest}
                         disabled={isReinvestPending}
                       />
                     )}
