@@ -5,7 +5,8 @@ import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import Surface from "shared/components/surface/surface";
 import FundsTable from "shared/modules/funds-table/components/funds-table/funds-table";
-import ProgramsTable from "shared/modules/programs-table/components/programs-table/programs-table";
+
+import ManagerPrograms from "./manager-programs-table";
 
 const PROGRAMS_TAB = "programs";
 const FUNDS_TAB = "funds";
@@ -38,7 +39,7 @@ class ManagerHistorySection extends PureComponent {
 
         <div>
           {tab === PROGRAMS_TAB && (
-            <ProgramsTable title={title} defaultFilters={defaultFilters} />
+            <ManagerPrograms title={title} managerId={managerId} />
           )}
           {tab === FUNDS_TAB && (
             <FundsTable title={title} defaultFilters={defaultFilters} />
