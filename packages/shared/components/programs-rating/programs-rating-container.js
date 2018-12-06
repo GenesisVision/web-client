@@ -22,18 +22,18 @@ class ProgramsRatingContainer extends Component {
         ...item,
         name: String(item.level),
         label: (
-          <span className="programs-rating__tab-label">
-            {item.level}
-            <span className="programs-rating__tab-arrow">&rarr;</span>
-            {++item.level}
-            {item.totalOwn ? (
-              <span className="programs-rating__tab-count">
-                {item.totalOwn}
-              </span>
-            ) : (
-              ""
-            )}
-          </span>
+          <div>
+            <span className="programs-rating__tab-label">
+              {item.level}
+              <span className="programs-rating__tab-arrow">&rarr;</span>
+              {++item.level}
+              {item.totalOwn === 0 && (
+                <span className="programs-rating__tab-count">
+                  {item.totalOwn}
+                </span>
+              )}
+            </span>
+          </div>
         )
       }));
       const tab = navigateTabs[0];

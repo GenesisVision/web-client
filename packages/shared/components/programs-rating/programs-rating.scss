@@ -50,9 +50,9 @@ $background-pretender-hover: #0b4b45;
 		}
 	}
 
-	&__tab-label {
+	&__tab-name {
 		display: inline-block;
-		vertical-align: bottom;
+		line-height: 1;
 	}
 
 	&__tab-arrow {
@@ -61,11 +61,18 @@ $background-pretender-hover: #0b4b45;
 		padding: 0 5px;
 		font-size: $font-size-common;
 		line-height: 1;
+		align-self: center;
 	}
 
 	&__tab-count {
 		display: inline-block;
-		margin-left: 5px;
+		margin-left: 10px;
+		border-radius: 8px;
+		background-color: rgba($primary-color, 0.1);
+		color: $primary-color;
+		padding: 4px 7px;
+		line-height: 1;
+		//vertical-align: bottom;
 	}
 
 	@include media-breakpoint-landscape-phone() {
