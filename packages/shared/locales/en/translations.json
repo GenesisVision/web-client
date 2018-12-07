@@ -772,6 +772,11 @@
       "error-during-confirmation": "An error occurred during confirmation of email:"
     }
   },
+  "level-tooltip": {
+    "genesis-level": "Genesis level",
+    "level-up": "Level Up",
+    "top10": "Top 10%"
+  },
   "investor": {
     "app": {
       "title": "Investor Portal: "

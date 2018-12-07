@@ -7,10 +7,12 @@ import StatisticItem from "../statistic-item/statistic-item";
 
 const LevelTooltip = ({ t, level, canLevelUp }) => (
   <div className="level-tooltip">
-    <div className="level-tooltip__level">Genesis level {level}</div>
+    <div className="level-tooltip__level">
+      {t("level-tooltip.genesis-level")} {level}
+    </div>
     {canLevelUp && (
-      <StatisticItem accent label={"Level Up"}>
-        Top 10%
+      <StatisticItem accent label={t("level-tooltip.level-up")}>
+        {t("level-tooltip.top10")}
       </StatisticItem>
     )}
   </div>
