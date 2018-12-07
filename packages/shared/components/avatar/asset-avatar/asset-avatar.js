@@ -19,32 +19,27 @@ class AssetAvatar extends PureComponent {
 
   handleMouseLeave = () => {
     if (this.props.click) return;
-    this.closePopup();
-  };
-
-  closePopup = () => {
     this.setState({ anchor: null });
   };
 
   render() {
-    const { tooltip, click } = this.props;
+    const { tooltip, onClickLevel } = this.props;
     return (
       <Fragment>
         <GVProgramAvatar
           onMouseEnterLevel={this.handleMouseEnter}
           onMouseLeaveLevel={this.handleMouseLeave}
-          onClickLevel={this.handleClick}
+          onClickLevel={onClickLevel}
           {...this.props}
         />
         {tooltip && (
           <Popover
-            disableBackdropClick={!click}
+            disableBackdropClick
             noPadding
             anchorEl={this.state.anchor}
             className="tooltip__popover"
             vertical={this.props.vertical}
             horizontal={this.props.horizontal}
-            onClose={this.closePopup}
           >
             {tooltip}
           </Popover>

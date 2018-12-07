@@ -10,7 +10,6 @@ import DetailsFavorite from "shared/components/details/details-description-secti
 import DetailsNotification from "shared/components/details/details-description-section/details-description/details-notificaton";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import Hint from "shared/components/hint/hint";
-import LevelTooltip from "shared/components/level-tooltip/level-tooltip";
 import Popover from "shared/components/popover/popover";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import {
@@ -133,13 +132,7 @@ class ProgramDetailsDescription extends PureComponent {
               alt={title}
               size="big"
               color={programDescription.color}
-              click
-              tooltip={
-                <LevelTooltip
-                  level={programDescription.level}
-                  canLevelUp={programDescription.rating.canLevelUp}
-                />
-              }
+              onClickLevel={this.handleOpenDropdown}
             />
           </div>
           <Popover
