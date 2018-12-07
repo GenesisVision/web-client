@@ -1,13 +1,13 @@
 import "shared/components/programs-rating/programs-rating.scss";
 
 import React, { Component } from "react";
+import { translate } from "react-i18next";
 import connect from "react-redux/es/connect/connect";
 import { bindActionCreators, compose } from "redux";
 import ProgramsRatingTables from "shared/components/programs-rating/programs-rating-tables";
 import { getLevelUpSummary } from "shared/components/programs-rating/services/program-rating-service";
 import Surface from "shared/components/surface/surface";
 import TabsContainer from "shared/components/tabs-container/tabs-container";
-import { translate } from "react-i18next";
 
 class ProgramsRatingContainer extends Component {
   state = {
@@ -23,16 +23,18 @@ class ProgramsRatingContainer extends Component {
         ...item,
         name: String(item.level),
         label: (
-          <span className="programs-rating__tab-label">
-            {item.level}
-            <span className="programs-rating__tab-arrow">&rarr;</span>
-            {item.level + 1}
+          <div className="programs-rating__tab">
+            <div className="programs-rating__tab-container">
+              <div className="programs-rating__back">{item.level}</div>
+              <div className="programs-rating__back-arrow">&larr;</div>
+              <div className="programs-rating__back">{item.level + 1}</div>
+            </div>
             {item.totalOwn !== 0 && (
               <span className="programs-rating__tab-count">
                 {item.totalOwn}
               </span>
             )}
-          </span>
+          </div>
         )
       }));
       const tab = navigateTabs[0];

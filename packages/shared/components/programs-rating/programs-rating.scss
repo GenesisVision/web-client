@@ -7,6 +7,33 @@
 		padding-left: $padding-small/2;
 		padding-right: $padding-small/2;
 	}
+
+	&__tab {
+		display: flex;
+		align-items: center;
+	}
+
+	&__tab-container {
+		display: flex;
+		align-items: stretch;
+		font-size: $font-size-common;
+		padding: 4px 0;
+	}
+
+	&__back {
+		font-weight: 600;
+		line-height: 4px;
+		padding-top:7px;
+		margin-right: 3px;
+	}
+
+	&__back-arrow {
+		border: 1px solid transparent;
+		margin-right: 3px;
+		height: 16.5px;
+		font-family: "Times New Roman";
+	}
+
 	&__tabs {
 		@include adaptive-padding(bottom, $padding-xsmall);
 		padding-left: $padding-small/2;
@@ -69,8 +96,10 @@
 
 	&__tab-count {
 		display: inline-block;
+		text-align: center;
+		min-width: 8px;
 		margin-left: 10px;
-		border-radius: 8px;
+		border-radius: 6px;
 		padding: 4px 7px;
 		line-height: 1;
 		background-color: rgba($text-accent-color, 0.05);
