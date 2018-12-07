@@ -16,6 +16,7 @@ class AssetAvatar extends PureComponent {
     this.setState({ anchor: null });
   };
   render() {
+    const { tooltip } = this.props;
     return (
       <Fragment>
         <GVProgramAvatar
@@ -31,7 +32,7 @@ class AssetAvatar extends PureComponent {
           vertical={this.props.vertical}
           horizontal={this.props.horizontal}
         >
-          {"title || component || render()"}
+          {tooltip}
         </Popover>
       </Fragment>
     );
