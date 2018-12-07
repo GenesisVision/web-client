@@ -2,10 +2,6 @@
 @import "~shared/styles/_breakpoint.scss";
 @import "~shared/styles/_sizes.scss";
 
-$background-pretender: #16b9ad;
-$background-pretender-level: #1b2f38;
-$background-pretender-level-hover: #20353b;
-
 .programs-rating {
 	&__head {
 		padding-left: $padding-small/2;
@@ -29,7 +25,7 @@ $background-pretender-level-hover: #20353b;
 	}
 
 	.table__row--pretender {
-		background: linear-gradient(90deg, rgba($background-pretender, 0.07) 1.83%, rgba($background-pretender, 0.0001) 100%);
+		background: linear-gradient(90deg, rgba($background-pretender, 0.13) 1.83%, rgba($background-pretender, 0.03) 100%);
 
 		.table__cell:first-child {
 			border-left: 1px solid $primary-color;
