@@ -352,7 +352,6 @@ export default translate()(
     mapPropsToValues: props => {
       return {
         assets: [],
-        balance: 10,
         remainder: 100,
         exitFee: "",
         title: "",

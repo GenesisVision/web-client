@@ -52,7 +52,7 @@ DepositDetails.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const headerData = state.profileHeader.info.data;
+  const headerData = state.profileHeader.info.data || {};
   return {
     available: headerData.availableGvt || 0
   };
