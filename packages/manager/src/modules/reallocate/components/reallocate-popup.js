@@ -9,19 +9,16 @@ class ReallocatePopup extends Component {
       remainder,
       submitInfo,
       reallocate,
-      serverError
+      errorMessage
     } = this.props;
     return (
-      <Fragment>
-        <ReallocateForm
-          assets={assets}
-          remainder={remainder}
-          disabled={submitInfo.isPending}
-          onSubmit={reallocate}
-          errorMessage={submitInfo.errorMessage}
-          serverError={serverError}
-        />
-      </Fragment>
+      <ReallocateForm
+        assets={assets}
+        remainder={remainder}
+        disabled={submitInfo.isPending}
+        onSubmit={reallocate}
+        errorMessage={errorMessage}
+      />
     );
   }
 }
