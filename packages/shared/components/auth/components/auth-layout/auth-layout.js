@@ -52,7 +52,11 @@ class AuthLayout extends Component {
             <footer className="auth__quote-footer">
               —{" "}
               <cite className="auth__quote-author">
-                {t(`auth-quotes.${quoteNo}.author`)}
+                {t(
+                  `${
+                    process.env.REACT_APP_PLATFORM
+                  }.auth-quotes.${quoteNo}.author`
+                )}
               </cite>
             </footer>
           </blockquote>
