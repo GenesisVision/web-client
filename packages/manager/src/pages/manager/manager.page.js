@@ -7,6 +7,7 @@ import { bindActionCreators } from "redux";
 import ManagerDescription from "shared/components/manager/manager-description/manager-description";
 import ManagerHistorySection from "shared/components/manager/manager-history/manager-history-section";
 import Page from "shared/components/page/page";
+import { programsChangePage } from "shared/modules/programs-table/services/programs-table.service";
 import { SLUG_URL_REGEXP } from "shared/utils/constants";
 
 import * as managerService from "./services/manager.service";
@@ -31,7 +32,7 @@ class ManagerPage extends Component {
   }
 
   render() {
-    const { t } = this.props;
+    const { t, location } = this.props;
     const { managerProfile, isPending } = this.state;
 
     return (
@@ -43,6 +44,8 @@ class ManagerPage extends Component {
             </div>
             <div className="manager__history">
               <ManagerHistorySection
+                programsChangePage={programsChangePage}
+                location={location}
                 managerService={managerService}
                 managerId={managerProfile.id}
                 title={managerProfile.username}
@@ -63,7 +66,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    service: bindActionCreators({ ...managerService }, dispatch)
+    service: bindActionCreators({ ...managerService, programsChangePage }, dispatch)
   };
 };
 
