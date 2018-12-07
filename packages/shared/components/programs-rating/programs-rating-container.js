@@ -26,7 +26,7 @@ class ProgramsRatingContainer extends Component {
           <span className="programs-rating__tab-label">
             {item.level}
             <span className="programs-rating__tab-arrow">&rarr;</span>
-            {++item.level}
+            {item.level + 1}
             {item.totalOwn !== 0 && (
               <span className="programs-rating__tab-count">
                 {item.totalOwn}
