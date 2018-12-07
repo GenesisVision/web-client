@@ -119,6 +119,16 @@ $padding: $padding-small;
       background-color: #212c34;
     }
 
+    &:hover {
+      .program-avatar__level {
+        border-color: #212c34;
+      }
+
+      .program-detailed__avatar .program-avatar__level {
+        border-color: $secondary-color;
+      }
+    }
+
     .program-avatar__level {
       transition: border-color 300ms ease;
     }
