@@ -118,10 +118,14 @@ $padding: $padding-small;
     &:not(.table__row--head):hover {
       background-color: #212c34;
     }
-    
+
     &:hover {
       .program-avatar__level {
         border-color: #212c34;
+      }
+
+      .program-detailed__avatar .program-avatar__level {
+        border-color: $secondary-color;
       }
     }
 
