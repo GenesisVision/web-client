@@ -14,7 +14,10 @@ export const getDepositFundInfoById = id => (dispatch, getState) => {
 export const investServiceInvestById = ({ id, amount }) => dispatch => {
   return dispatch(investToFundById(id, amount)).then(() => {
     dispatch(
-      alertMessageActions.success("deposit-asset.success-alert-message", true)
+      alertMessageActions.success(
+        "deposit-asset.fund.success-alert-message",
+        true
+      )
     );
     dispatch(fetchProfileHeaderInfo());
   });

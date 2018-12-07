@@ -33,7 +33,7 @@ export const cancelRequest = (requestId, type, onFinally) => (
         alertMessageActions.success(
           `${
             process.env.REACT_APP_PLATFORM
-          }..dashboard-pagerequests.success-cancel-request`,
+          }.dashboard-page.requests.success-cancel-request`,
           true
         )
       );
