@@ -1,6 +1,5 @@
 import "./create-fund-settings.scss";
 
-import classnames from "classnames";
 import { Field, withFormik } from "formik";
 import {
   GVButton,
@@ -11,10 +10,9 @@ import {
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import DepositDetails from "shared/components/deposit-details/deposit-details";
+import DepositDetailsContainer from "shared/components/deposit-details/deposit-details-container";
 import InputImage from "shared/components/form/input-image/input-image";
 import Hint from "shared/components/hint/hint";
-import { RefreshIcon } from "shared/components/icon/refresh-icon";
 import { allowValuesNumberFormat } from "shared/utils/helpers";
 
 import CreateFundSettingsAddAsset from "./create-fund-settings-add-asset/create-fund-settings-add-asset";
@@ -312,7 +310,11 @@ class CreateFundSettings extends React.Component {
             <span className="create-fund-settings__block-number">04</span>
             {t("manager.create-fund-page.settings.deposit-details")}
           </div>
-          <DepositDetails deposit={deposit} />
+          <DepositDetailsContainer
+            deposit={deposit}
+            className="create-fund-settings__fill-block create-fund-settings__fill-block--without-border"
+            titleClassName="create-fund-settings__description"
+          />
         </form>
         <div className="create-fund-settings__navigation">
           <GVButton
