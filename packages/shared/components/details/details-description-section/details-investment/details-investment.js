@@ -23,9 +23,15 @@ class DetailsInvestment extends PureComponent {
     this.setState({ isOpenWithdrawalPopup: false });
   };
 
+  handleOnCancelRequest = () => {
+    this.props.onChangeInvestmentStatus();
+  };
+
   render() {
     const {
       t,
+      role,
+      asset,
       notice,
       WithdrawContainer,
       canWithdraw,
@@ -62,7 +68,13 @@ class DetailsInvestment extends PureComponent {
             accent
             label={t("fund-details-page.description.status")}
           >
-            <ProgramStatus status={status} />
+            <ProgramStatus
+              status={status}
+              id={id}
+              role={role}
+              asset={asset}
+              onCancel={this.handleOnCancelRequest}
+            />
           </StatisticItem>
           {pendingInput !== undefined && pendingInput !== 0 && (
             <StatisticItem

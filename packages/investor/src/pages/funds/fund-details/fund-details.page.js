@@ -18,6 +18,7 @@ import NotFoundPage from "shared/components/not-found/not-found.routes";
 import Page from "shared/components/page/page";
 
 import { LOGIN_ROUTE } from "../../auth/login/login.routes";
+import { INVESTOR } from "shared/constants/constants";
 
 export const FundDetailContext = React.createContext({
   updateDetails: () => {}
@@ -102,6 +103,7 @@ class FundDetailsPage extends PureComponent {
                 isAuthenticated={isAuthenticated}
                 redirectToLogin={service.redirectToLogin}
                 onChangeInvestmentStatus={this.changeInvestmentStatus}
+                role={INVESTOR}
               />
             </div>
             <div className="details__section">

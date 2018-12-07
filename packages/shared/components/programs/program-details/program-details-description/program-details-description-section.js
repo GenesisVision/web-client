@@ -1,5 +1,6 @@
 import React, { Fragment, PureComponent } from "react";
 import ProgramDetailsDescription from "shared/components/programs/program-details/program-details-description/program-details-description";
+import { PROGRAM } from "shared/constants/constants";
 import { toggleFavoriteProgram } from "shared/modules/favorite-asset/services/favorite-program.service";
 
 const composeInvestmentData = programDetails => {
@@ -103,6 +104,7 @@ class ProgramDetailsDescriptionSection extends PureComponent {
     return (
       <Fragment>
         <ProgramDetailsDescription
+          PROGRAM={PROGRAM}
           onReinvestingClick={this.handleOnReinvestingClick}
           programDescription={programDescription}
           isReinvestPending={ui.isReinvestPending}

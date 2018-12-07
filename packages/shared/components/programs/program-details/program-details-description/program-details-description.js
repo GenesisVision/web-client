@@ -86,6 +86,7 @@ class ProgramDetailsDescription extends PureComponent {
     } = this.state;
     const {
       t,
+      role,
       status,
       isFavorite,
       canCloseProgram,
@@ -335,6 +336,8 @@ class ProgramDetailsDescription extends PureComponent {
                       canWithdraw={canWithdraw}
                       assetCurrency={programDescription.currency}
                       onChangeInvestmentStatus={onChangeInvestmentStatus}
+                      asset={PROGRAM}
+                      role={role}
                       {...investmentData}
                     />
                   )}
