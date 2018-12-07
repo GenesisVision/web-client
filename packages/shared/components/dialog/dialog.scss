@@ -147,7 +147,17 @@
       &--outside {
         display: inherit;
       }
+
+	    &--wider {
+		    display: none;
+	    }
     }
+
+	  @media (min-width: 1600px) {
+		  &--wider {
+			  display: inherit;
+		  }
+	  }
   }
 
   &__header {

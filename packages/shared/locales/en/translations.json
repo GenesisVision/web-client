@@ -282,26 +282,30 @@
     }
   },
   "about-levels-page": {
-    "description": "Genesis level shows the experience and reliability of the Manager",
-    "sections": {
-      "section-1": "Let's take a moment to talk about the level system. We will now share the parameters of the system, but please keep in mind, that these parameters are subject to change and are relevant only for the time of the Alpha version. Only emphasizes that there is a deep curiosity in all humans about nature and astronomy, even if many people would not know to call it astronomy.,",
-      "section-2": "Astronomy is one of the oldest sciences of all time. When archeologists unearth ancient civilizations, even as far back as the cavemen, they invariably find art that shows mans unquenchable fascination with the stars. To this day, you can easily get an animated discussion at any gathering on the topic of “Is there intelligent life on other planets?”",
-      "section-age-title": "Age",
-      "section-age": " stands for the lifetime of a manager account. During the Alpha it will be counted as days, so you will need to have your investment program running for at least two days to have a third level.",
-      "section-avg-profit-title": "Avg. Profit",
-      "section-avg-profit": " means an average profit that is made daily. So if you want to reach the second level, you would need to achieve at least 0.5% of an average daily gain. ",
-      "section-total-profit-title": "Total profit",
-      "section-total-profit": " is calculated in USD. It shows how much USD you would need to make per day on an average basis.",
-      "section-6": "A manager would need to achieve all three parameters to receive the next level of his investment program. You can also skip levels if you outperform them. "
+    "title": "About levels",
+    "section": {
+      "text-1": "Genesis level shows the experience and reliability of a manager.",
+      "text-2": "All of the investment programs of a manager that have not passed KYC are stuck on the first level and can’t level up unless the manager passes the KYC procedure. Once the verification process is completed, the investment programs of a manager receive a second level.",
+      "text-3": "Basic rules of levelling up"
+    },
+    "list": {
+      "subtitle": "Further levels are given according to the algorithm:",
+      "list-item-1": "All of the managers are levelled up only on the first day of each month.",
+      "list-item-2": "A manager can go up only one level at a time.",
+      "list-item-3": "In order to level-up, you need to end up in the top 10% of investment programs ranked by profit among all of the other competing programs of the same level.",
+      "list-item-4": "Profit is calculated as a percentage and is calculated over a certain period. The general rule of thumb is that the period of time is calculated as “managers’ level — 1 month”. For example: if your current level is 4, then the last three months of your trading will be counted.",
+      "list-item-5": "All programs that have completed at least one trade participate in the rating.",
+      "list-item-6": "Each level needs to have a minimum of ten participators. You can’t level up if fewer than ten people are competing against you.",
+      "list-item-7": "The higher a manager’s level is — the more funds he can attract."
     },
     "limits": {
-      "1": 1000,
-      "2": 10000,
-      "3": 50000,
-      "4": 100000,
-      "5": 200000,
-      "6": 500000,
-      "7": 1000000
+      "1": 70,
+      "2": 700,
+      "3": 3500,
+      "4": 7000,
+      "5": 14000,
+      "6": 35000,
+      "7": 70000
     },
     "table-header": {
       "level": "Level",
@@ -312,7 +316,7 @@
     "titles": {
       "main": "About levels",
       "table": "Requirements for levels",
-      "limits": "Available investments",
+      "limits": "Levels limits",
       "limit": "Invest limit"
     },
     "select": "Show in:"
