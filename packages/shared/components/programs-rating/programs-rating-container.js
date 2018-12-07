@@ -26,7 +26,7 @@ class ProgramsRatingContainer extends Component {
           <div className="programs-rating__tab">
             <div className="programs-rating__tab-container">
               <div className="programs-rating__back">{item.level}</div>
-              <div className="programs-rating__back-arrow">&larr;</div>
+              <div className="programs-rating__back-arrow">&rarr;</div>
               <div className="programs-rating__back">{item.level + 1}</div>
             </div>
             {item.totalOwn !== 0 && (
