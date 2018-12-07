@@ -7,10 +7,10 @@ import DateRangeFilter from "shared/components/table/components/filtering/date-r
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import TableModule from "shared/components/table/components/table-module";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
+import { toggleFavoriteProgram } from "shared/modules/favorite-asset/services/favorite-program.service";
 import ProgramTableRow from "shared/modules/programs-table/components/programs-table/program-table-row";
 import { PROGRAMS_COLUMNS } from "shared/modules/programs-table/components/programs-table/programs.constants";
 
-import { toggleFavoriteProgram } from "../../../modules/favorite-asset/services/favorite-program.service";
 import {
   MANAGER_DEFAULT_FILTERS,
   MANAGER_FILTERING

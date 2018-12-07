@@ -1,7 +1,6 @@
 import fundsApi from "shared/services/api-client/funds-api";
 import programsApi from "shared/services/api-client/programs-api";
-
-import authService from "../../../services/auth-service";
+import authService from "shared/services/auth-service";
 
 export const fetchManagerPrograms = filter => {
   return programsApi

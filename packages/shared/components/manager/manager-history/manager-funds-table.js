@@ -3,16 +3,14 @@ import "shared/components/details/details-description-section/details-statistic-
 import * as PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
-import { connect } from "react-redux";
-import { compose } from "redux";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import TableModule from "shared/components/table/components/table-module";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
+import { toggleFavoriteFund } from "shared/modules/favorite-asset/services/favorite-fund.service";
 import FundsTableRow from "shared/modules/funds-table/components/funds-table/fund-table-row";
 import { FUNDS_TABLE_COLUMNS } from "shared/modules/funds-table/components/funds-table/funds-table.constants";
 
-import { toggleFavoriteFund } from "../../../modules/favorite-asset/services/favorite-fund.service";
 import {
   MANAGER_DEFAULT_FILTERS,
   MANAGER_FILTERING
