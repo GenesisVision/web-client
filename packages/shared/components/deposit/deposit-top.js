@@ -23,7 +23,7 @@ const DepositTop = ({ info, t, program }) => {
         <StatisticItem
           label={
             program
-              ? t("deposit-asset.program.available-in-wallet")
+              ? t("deposit-asset.available-in-wallet")
               : t("deposit-asset.fund.available-to-invest")
           }
           big
