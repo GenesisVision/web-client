@@ -24,16 +24,18 @@ class AssetAvatar extends PureComponent {
           onMouseLeaveLevel={this.handleMouseLeave}
           {...this.props}
         />
-        <Popover
-          disableBackdropClick
-          noPadding
-          anchorEl={this.state.anchor}
-          className="tooltip__popover"
-          vertical={this.props.vertical}
-          horizontal={this.props.horizontal}
-        >
-          {tooltip}
-        </Popover>
+        {tooltip && (
+          <Popover
+            disableBackdropClick
+            noPadding
+            anchorEl={this.state.anchor}
+            className="tooltip__popover"
+            vertical={this.props.vertical}
+            horizontal={this.props.horizontal}
+          >
+            {tooltip}
+          </Popover>
+        )}
       </Fragment>
     );
   }

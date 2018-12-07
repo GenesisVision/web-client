@@ -45,7 +45,10 @@ class ProgramCard extends Component {
                 color={program.color}
                 size="medium"
                 tooltip={
-                  <LevelTooltip level={program.level} canLevelUp={program.rating.canLevelUp} />
+                  <LevelTooltip
+                    level={program.level}
+                    canLevelUp={program.rating.canLevelUp}
+                  />
                 }
               />
             </Link>
