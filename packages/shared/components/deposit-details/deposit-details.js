@@ -19,7 +19,7 @@ const DepositDetails = props => {
       >
         {t("manager.create-fund-page.settings.fields.deposit-amount")}
       </div>
-      <div className="deposit-details__deposit-amount-value">{deposit}</div>
+      <div className="deposit-details__deposit-amount-value">{`${deposit} GVT`}</div>
       <div className="deposit-details__available-amount">
         {t("manager.create-fund-page.settings.fields.available-in-wallet")}
         <span
@@ -49,11 +49,6 @@ DepositDetails.propTypes = {
   }),
   className: PropTypes.string,
   titleClassName: PropTypes.string
-};
-
-DepositDetails.defaultProps = {
-  className: "",
-  titleClassName: ""
 };
 
 export default translate()(DepositDetails);

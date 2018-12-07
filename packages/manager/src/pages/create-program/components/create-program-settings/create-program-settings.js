@@ -1,6 +1,5 @@
 import "./create-program-settings.scss";
 
-import classnames from "classnames";
 import { Field, withFormik } from "formik";
 import {
   GVButton,
@@ -11,11 +10,10 @@ import {
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import DepositDetailsContainer from "shared/components/deposit-details/deposit-details-container";
 import InputImage from "shared/components/form/input-image/input-image";
 import Hint from "shared/components/hint/hint";
-import { RefreshIcon } from "shared/components/icon/refresh-icon";
 import Select from "shared/components/select/select";
-import { formatValue } from "shared/utils/formatter";
 import { allowValuesNumberFormat } from "shared/utils/helpers";
 
 import {
@@ -305,38 +303,11 @@ class CreateProgramSettings extends React.Component {
             <span className="create-program-settings__block-number">03</span>
             {t("manager.create-program-page.settings.deposit-details")}
           </div>
-          <div className="create-program-settings__fill-block">
-            <div className="create-program-settings__deposit-amount-title">
-              {t("manager.create-program-page.settings.fields.deposit-amount")}
-            </div>
-            <div className="create-program-settings__deposit-amount-value">
-              {programsInfo.managerProgramInvestment + " GVT"}
-            </div>
-            <div className="create-program-settings__available-amount">
-              {t(
-                "manager.create-program-page.settings.fields.available-in-wallet"
-              )}
-              <span
-                className={classnames(
-                  "create-program-settings__available-amount-value",
-                  {
-                    "create-program-settings__available-amount-value--error":
-                      balance < programsInfo.managerProgramInvestment
-                  }
-                )}
-              >
-                <NumberFormat
-                  value={formatValue(balance)}
-                  thousandSeparator=" "
-                  displayType="text"
-                  suffix=" GVT"
-                />
-              </span>
-              <span onClick={updateBalance}>
-                <RefreshIcon />
-              </span>
-            </div>
-          </div>
+          <DepositDetailsContainer
+            deposit={programsInfo.managerProgramInvestment}
+            className="create-program-settings__fill-block"
+            titleClassName="create-program-settings__deposit-amount-title"
+          />
         </form>
         <div className="create-program-settings__navigation">
           <GVButton

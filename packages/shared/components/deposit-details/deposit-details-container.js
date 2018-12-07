@@ -1,3 +1,4 @@
+import * as PropTypes from "prop-types";
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -5,8 +6,8 @@ import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-
 
 import DepositDetails from "./deposit-details";
 
-const DepositDetailsContainer = () => {
-  return <DepositDetails />;
+const DepositDetailsContainer = props => {
+  return <DepositDetails {...props} />;
 };
 
 const mapStateToProps = state => {
@@ -19,6 +20,17 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   service: bindActionCreators({ fetchProfileHeaderInfo }, dispatch)
 });
+
+DepositDetailsContainer.propTypes = {
+  deposit: PropTypes.number.isRequired,
+  className: PropTypes.string,
+  titleClassName: PropTypes.string
+};
+
+DepositDetailsContainer.defaultProps = {
+  className: "",
+  titleClassName: ""
+};
 
 export default connect(
   mapStateToProps,
