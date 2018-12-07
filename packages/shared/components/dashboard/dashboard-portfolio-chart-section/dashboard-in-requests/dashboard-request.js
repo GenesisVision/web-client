@@ -19,10 +19,23 @@ class DashboardRequest extends Component {
   handleOpenConfirmPopup = () => this.setState({ isConfirmPopupOpen: true });
   handleCloseConfirmPopup = () => this.setState({ isConfirmPopupOpen: false });
   handleApplyCancelRequest = () => {
-    const { request, cancelRequest, onApplyCancelRequest } = this.props;
-    cancelRequest(request.id, request.programType, () => {
+    const {
+      request,
+      cancelRequest,
+      onApplyCancelRequest,
+      role,
+      asset
+    } = this.props;
+    const onFinally = () => {
       this.handleCloseConfirmPopup();
       onApplyCancelRequest();
+    };
+    cancelRequest({
+      id: request.id,
+      type: request.programType,
+      onFinally,
+      role,
+      asset
     });
   };
 
