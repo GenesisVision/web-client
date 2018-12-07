@@ -2,15 +2,38 @@
 @import "~shared/styles/_breakpoint.scss";
 @import "~shared/styles/_sizes.scss";
 
-$background-pretender: #16b9ad;
-$background-pretender-level: #1b2f38;
-$background-pretender-level-hover: #20353b;
-
 .programs-rating {
 	&__head {
 		padding-left: $padding-small/2;
 		padding-right: $padding-small/2;
 	}
+
+	&__tab {
+		display: flex;
+		align-items: center;
+	}
+
+	&__tab-container {
+		display: flex;
+		align-items: stretch;
+		font-size: $font-size-common;
+		padding: 4px 0;
+	}
+
+	&__back {
+		font-weight: 600;
+		line-height: 4px;
+		padding-top:7px;
+		margin-right: 3px;
+	}
+
+	&__back-arrow {
+		border: 1px solid transparent;
+		margin-right: 3px;
+		height: 16.5px;
+		font-family: "Times New Roman";
+	}
+
 	&__tabs {
 		@include adaptive-padding(bottom, $padding-xsmall);
 		padding-left: $padding-small/2;
@@ -29,7 +52,7 @@ $background-pretender-level-hover: #20353b;
 	}
 
 	.table__row--pretender {
-		background: linear-gradient(90deg, rgba($background-pretender, 0.07) 1.83%, rgba($background-pretender, 0.0001) 100%);
+		background: linear-gradient(90deg, rgba($background-pretender, 0.13) 1.83%, rgba($background-pretender, 0.03) 100%);
 
 		.table__cell:first-child {
 			border-left: 1px solid $primary-color;
@@ -73,8 +96,10 @@ $background-pretender-level-hover: #20353b;
 
 	&__tab-count {
 		display: inline-block;
+		text-align: center;
+		min-width: 8px;
 		margin-left: 10px;
-		border-radius: 8px;
+		border-radius: 6px;
 		padding: 4px 7px;
 		line-height: 1;
 		background-color: rgba($text-accent-color, 0.05);
@@ -85,7 +110,7 @@ $background-pretender-level-hover: #20353b;
 			padding-left: $padding-small;
 			padding-right: $padding-small;
 		}
-		&__title {
+		&__head {
 			padding-left: $padding-small;
 			padding-right: $padding-small;
 		}
