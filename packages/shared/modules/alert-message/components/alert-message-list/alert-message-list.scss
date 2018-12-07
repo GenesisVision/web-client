@@ -16,6 +16,12 @@ $radius: 8px;
   right: 0;
   padding: $padding/2;
   z-index: 9999;
+  pointer-events: none;
+
+  * {
+    pointer-events: visible;
+  }
+
   &__text {
     word-wrap: break-word;
     max-width: 300px;
