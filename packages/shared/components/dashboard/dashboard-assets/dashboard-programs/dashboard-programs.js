@@ -18,6 +18,7 @@ import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatPercent, formatValue } from "shared/utils/formatter";
 
 import dashboardProgramsTableSelector from "./dashboard-programs.selector";
+import classnames from "classnames";
 
 class DashboardPrograms extends Component {
   render() {
@@ -60,7 +61,11 @@ class DashboardPrograms extends Component {
           </span>
         )}
         renderBodyRow={program => (
-          <TableRow>
+          <TableRow
+            className={classnames({
+              "table__row--pretender": !program.rating.canLevelUp
+            })}
+          >
             <TableCell className="programs-table__cell dashboard-programs__cell--title">
               <div className="dashboard-programs__cell--avatar-title">
                 <Link

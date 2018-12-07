@@ -1,8 +1,12 @@
 @import "~shared/styles/_breakpoint.scss";
 @import "~shared/styles/_sizes.scss";
+@import "~shared/styles/_colors.scss";
 
 $create-icon-height: 90px;
 $create-icon-width: 140px;
+$background-pretender: #16b9ad;
+$background-pretender-level: #1b2f38;
+$background-pretender-level-hover: #20353b;
 
 .dashboard-assets {
   &__head {
@@ -53,6 +57,24 @@ $create-icon-width: 140px;
             padding: 17px 50px;
           }
         }
+      }
+    }
+  }
+
+  .table__row--pretender {
+    background: linear-gradient(90deg, rgba($background-pretender, 0.07) 1.83%, rgba($background-pretender, 0.0001) 100%);
+
+    .table__cell:first-child {
+      border-left: 1px solid $primary-color;
+    }
+
+    .program-avatar__level {
+      border-color: $background-pretender-level;
+    }
+
+    &:not(.table__row--head):hover {
+      .program-avatar__level {
+        border-color: $background-pretender-level-hover;
       }
     }
   }
