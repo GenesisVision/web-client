@@ -250,7 +250,7 @@
     },
     "programs-table": "All programs",
     "programs-header": {
-      "position": "Position",
+      "position": "Pos.",
       "title": "Name",
       "balance": "Balance",
       "currency": "Curr.",
