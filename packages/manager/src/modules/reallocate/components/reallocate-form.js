@@ -79,7 +79,7 @@ class ReallocateForm extends Component {
         onSubmit={handleSubmit}
       >
         <div className="dialog__header">
-          <h2>{t("reallocate.title")}</h2>
+          <h2>{t("manager.reallocate.title")}</h2>
         </div>
         {(errors.assets && (
           <ErrorMessage error={errors.assets} type={OVER} />
