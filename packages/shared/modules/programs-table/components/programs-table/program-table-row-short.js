@@ -14,6 +14,10 @@ import { formatValue } from "shared/utils/formatter";
 import classnames from "classnames";
 
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
+import Popover from "../../../../components/popover/popover";
+import Scrollbars from "react-custom-scrollbars";
+import DashboardChartAsset from "manager-web-portal/src/pages/dashboard/components/dashboard-portfolio-chart-section/dashboard-chart-assets/dashboard-chart-asset";
+import Surface from "../../../../components/surface/surface";
 
 const ProgramTableRowShort = ({
   title,
@@ -40,6 +44,14 @@ const ProgramTableRowShort = ({
     rating
   } = program;
   const stopPropagationEvent = event => event.stopPropagation();
+
+  const handleMouseEnter = () => {
+    this.setState({ isHovered: true });
+  };
+
+  const handleMouseLeave = () => {
+    this.setState({ isHovered: false });
+  };
   return (
     <TableRow
       className={classnames({
@@ -56,6 +68,8 @@ const ProgramTableRowShort = ({
               state: `/ ${title}`
             }}
             onClick={stopPropagationEvent}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           >
             <AssetAvatar
               url={logo}
