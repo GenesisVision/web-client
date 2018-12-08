@@ -1,7 +1,6 @@
 import "shared/components/details/details.scss";
 
 import AssetEditContainer from "modules/asset-edit/asset-edit-container";
-import { PROGRAM } from "modules/asset-edit/asset-edit.constants";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
 import React, { PureComponent } from "react";
@@ -19,6 +18,7 @@ import {
   getProgramDescription,
   getProgramStatistic
 } from "shared/components/programs/program-details/services/program-details.service";
+import { MANAGER, PROGRAM } from "shared/constants/constants";
 
 import { LOGIN_ROUTE } from "../../auth/login/login.routes";
 import { fetchPortfolioEvents } from "../../dashboard/services/dashboard-events.services";
@@ -102,6 +102,7 @@ class ProgramDetailsPage extends PureComponent {
           <div className="details">
             <div className="details__section">
               <ProgramDetailsDescriptionSection
+                role={MANAGER}
                 ProgramDepositContainer={ProgramDepositContainer}
                 AboutLevelsContainerComponent={AboutLevelsContainerComponent}
                 AssetEditContainer={AssetEditContainer}

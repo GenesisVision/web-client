@@ -1,10 +1,12 @@
 import "./dashboard-programs.scss";
 
+import classnames from "classnames";
 import { GVButton } from "gv-react-components";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
+import AssetStatus from "shared/components/asset-status/asset-status";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import { DASHBOARD_PROGRAMS_COLUMNS } from "shared/components/dashboard/dashboard.constants";
 import LevelTooltip from "shared/components/level-tooltip/level-tooltip";
@@ -15,16 +17,18 @@ import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filte
 import TableCell from "shared/components/table/components/table-cell";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
+import { PROGRAM } from "shared/constants/constants";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatPercent, formatValue } from "shared/utils/formatter";
 
 import dashboardProgramsTableSelector from "./dashboard-programs.selector";
-import classnames from "classnames";
 
 class DashboardPrograms extends Component {
   render() {
     const {
       t,
+      role,
+      onChangeStatus,
       getDashboardPrograms,
       createButtonToolbar,
       createProgram,
@@ -123,7 +127,13 @@ class DashboardPrograms extends Component {
               <ProgramSimpleChart data={program.chart} programId={program.id} />
             </TableCell>
             <TableCell className="programs-table__cell dashboard-programs__cell--status">
-              {program.personalDetails.status}
+              <AssetStatus
+                status={program.personalDetails.status}
+                id={program.id}
+                role={role}
+                asset={PROGRAM}
+                onCancel={onChangeStatus}
+              />
             </TableCell>
           </TableRow>
         )}

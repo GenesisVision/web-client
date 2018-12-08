@@ -86,6 +86,7 @@ class ProgramDetailsDescription extends PureComponent {
     } = this.state;
     const {
       t,
+      role,
       status,
       isFavorite,
       canCloseProgram,
@@ -260,7 +261,7 @@ class ProgramDetailsDescription extends PureComponent {
                 />
               </StatisticItem>
             </div>
-            {(isOwnProgram || canInvest) && (
+            {(isOwnProgram || canInvest || canWithdraw) && (
               <Fragment>
                 <div className="details-description__investing-container">
                   <div className="details-description__invest-button-container">
@@ -333,6 +334,8 @@ class ProgramDetailsDescription extends PureComponent {
                       canWithdraw={canWithdraw}
                       assetCurrency={programDescription.currency}
                       onChangeInvestmentStatus={onChangeInvestmentStatus}
+                      asset={PROGRAM}
+                      role={role}
                       {...investmentData}
                     />
                   )}

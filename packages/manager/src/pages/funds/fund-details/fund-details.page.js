@@ -1,7 +1,7 @@
 import "shared/components/details/details.scss";
 
 import AssetEditContainer from "modules/asset-edit/asset-edit-container";
-import { FUND } from "modules/asset-edit/asset-edit.constants";
+import { FUND, MANAGER } from "shared/constants/constants";
 import FundDepositContainer from "modules/fund-deposit/fund-deposit-container";
 import FundWithdrawContainer from "modules/fund-withdraw/fund-withdraw-container";
 import ReallocateContainer from "modules/reallocate/reallocate-container";
@@ -98,6 +98,7 @@ class FundDetailsPage extends PureComponent {
           <div className="details">
             <div className="details__section">
               <FundDetailsDescriptionSection
+                role={MANAGER}
                 AssetEditContainer={AssetEditContainer}
                 FUND={FUND}
                 FundDepositContainer={FundDepositContainer}

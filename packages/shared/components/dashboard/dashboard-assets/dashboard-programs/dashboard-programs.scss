@@ -43,5 +43,9 @@
     &--status {
       width: 13%;
     }
+    &--status-block {
+      display: flex;
+      align-items: center;
+    }
   }
 }
