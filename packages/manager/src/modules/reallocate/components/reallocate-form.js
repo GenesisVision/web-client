@@ -6,6 +6,7 @@ import { compose } from "redux";
 import ErrorMessage, {
   OVER
 } from "shared/components/error-message/error-message";
+import FormError from "shared/components/form/form-error/form-error";
 import { array, number, object } from "yup";
 
 import CreateFundSettingsAddAsset from "../../../pages/create-fund/components/create-fund-settings/create-fund-settings-add-asset/create-fund-settings-add-asset";
@@ -71,7 +72,14 @@ class ReallocateForm extends Component {
   handleCloseDropdown = () => this.setState({ anchor: null });
   render() {
     const { anchor, assets, remainder } = this.state;
-    const { t, handleSubmit, isValid, dirty, errors } = this.props;
+    const {
+      t,
+      handleSubmit,
+      isValid,
+      dirty,
+      errors,
+      errorMessage
+    } = this.props;
     return (
       <form
         className="reallocate-container dialog__top"
@@ -79,7 +87,7 @@ class ReallocateForm extends Component {
         onSubmit={handleSubmit}
       >
         <div className="dialog__header">
-          <h2>{t("reallocate.title")}</h2>
+          <h2>{t("manager.reallocate.title")}</h2>
         </div>
         {(errors.assets && (
           <ErrorMessage error={errors.assets} type={OVER} />
@@ -101,6 +109,9 @@ class ReallocateForm extends Component {
           handleUp={this.handleUp}
           handlePercentChange={this.handlePercentChange}
         />
+        <div className="reallocate-container__form-error">
+          <FormError error={errorMessage} />
+        </div>
         <div className="dialog__buttons">
           <GVButton type={"submit"} disabled={!isValid || !dirty}>
             {t("manager.reallocate.apply")}

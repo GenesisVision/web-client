@@ -1,4 +1,4 @@
-import { CURRENCY_FRACTIONS } from "./currency-converter";
+import { CURRENCY_FRACTIONS, checkCurrencyValue } from "./currency-converter";
 
 const reverseString = value =>
   String(value)
@@ -50,4 +50,10 @@ const validateFraction = (value, currency) => {
   return fraction ? fraction.length <= CURRENCY_FRACTIONS(currency) : true;
 };
 
-export { formatValue, formatPercent, validateFraction };
+const formatCurrencyValue = (value, currency) =>
+  formatValue(
+    checkCurrencyValue(value, currency),
+    CURRENCY_FRACTIONS(currency)
+  );
+
+export { formatValue, formatPercent, validateFraction, formatCurrencyValue };

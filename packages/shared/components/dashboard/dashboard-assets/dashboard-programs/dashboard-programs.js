@@ -7,6 +7,7 @@ import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import { DASHBOARD_PROGRAMS_COLUMNS } from "shared/components/dashboard/dashboard.constants";
+import LevelTooltip from "shared/components/level-tooltip/level-tooltip";
 import ProgramPeriodEnd from "shared/components/program-period/program-period-end/program-period-end";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
@@ -19,6 +20,7 @@ import { formatPercent, formatValue } from "shared/utils/formatter";
 
 import DashboardProgramsStatusBlock from "./dashboard-programs-status-block";
 import dashboardProgramsTableSelector from "./dashboard-programs.selector";
+import classnames from "classnames";
 
 class DashboardPrograms extends Component {
   render() {
@@ -61,7 +63,11 @@ class DashboardPrograms extends Component {
           </span>
         )}
         renderBodyRow={program => (
-          <TableRow>
+          <TableRow
+            className={classnames({
+              "table__row--pretender": !program.rating.canLevelUp
+            })}
+          >
             <TableCell className="programs-table__cell dashboard-programs__cell--title">
               <div className="dashboard-programs__cell--avatar-title">
                 <Link
@@ -75,6 +81,12 @@ class DashboardPrograms extends Component {
                     level={program.level}
                     alt={program.title}
                     color={program.color}
+                    tooltip={
+                      <LevelTooltip
+                        level={program.level}
+                        canLevelUp={program.rating.canLevelUp}
+                      />
+                    }
                   />
                 </Link>
                 <Link

@@ -126,16 +126,14 @@ class ProgramDetailsDescription extends PureComponent {
     return (
       <div className="details-description">
         <div className="details-description__left">
-          <div
-            className="details-description__avatar"
-            onClick={this.handleOpenDropdown}
-          >
+          <div className="details-description__avatar">
             <AssetAvatar
               url={programDescription.logo}
               level={programDescription.level}
               alt={title}
               size="big"
               color={programDescription.color}
+              onClickLevel={this.handleOpenDropdown}
             />
           </div>
           <Popover

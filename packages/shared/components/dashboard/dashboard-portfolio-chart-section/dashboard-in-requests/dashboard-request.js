@@ -5,7 +5,7 @@ import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import PortfolioEventLogo from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
-import { formatCurrencyValue } from "shared/utils/currency-converter";
+import { formatCurrencyValue } from "shared/utils/formatter";
 
 class DashboardRequest extends Component {
   state = {

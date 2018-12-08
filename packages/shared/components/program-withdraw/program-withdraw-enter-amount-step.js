@@ -4,11 +4,8 @@ import { Fragment } from "react";
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import {
-  convertFromCurrency,
-  formatCurrencyValue
-} from "shared/utils/currency-converter";
-import { formatValue, validateFraction } from "shared/utils/formatter";
+import { convertFromCurrency } from "shared/utils/currency-converter";
+import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 
 const WithdrawEnterAmountStep = props => {
   const isAllow = values => {
@@ -34,11 +31,9 @@ const WithdrawEnterAmountStep = props => {
       {props.programCurrency !== props.accountCurrency && (
         <div className="invest-popup__currency">
           <NumberFormat
-            value={formatValue(
-              formatCurrencyValue(
-                convertFromCurrency(props.amount, props.rate),
-                props.accountCurrency
-              )
+            value={formatCurrencyValue(
+              convertFromCurrency(props.amount, props.rate),
+              props.accountCurrency
             )}
             prefix="= "
             suffix={` ${props.accountCurrency}`}

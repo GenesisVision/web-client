@@ -1,14 +1,13 @@
 import "shared/components/programs-rating/programs-rating.scss";
 
 import React, { Component } from "react";
+import { translate } from "react-i18next";
 import connect from "react-redux/es/connect/connect";
 import { bindActionCreators, compose } from "redux";
 import ProgramsRatingTables from "shared/components/programs-rating/programs-rating-tables";
 import { getLevelUpSummary } from "shared/components/programs-rating/services/program-rating-service";
 import Surface from "shared/components/surface/surface";
 import TabsContainer from "shared/components/tabs-container/tabs-container";
-
-import { LEVELS } from "./program-rating.constants";
 
 class ProgramsRatingContainer extends Component {
   state = {
@@ -22,8 +21,21 @@ class ProgramsRatingContainer extends Component {
       const { levelData } = res.value;
       const navigateTabs = levelData.map(item => ({
         ...item,
-        count: item.totalOwn,
-        name: LEVELS[item.level]
+        name: String(item.level),
+        label: (
+          <div className="programs-rating__tab">
+            <div className="programs-rating__tab-container">
+              <div className="programs-rating__back">{item.level}</div>
+              <div className="programs-rating__back-arrow">&rarr;</div>
+              <div className="programs-rating__back">{item.level + 1}</div>
+            </div>
+            {item.totalOwn !== 0 && (
+              <span className="programs-rating__tab-count">
+                {item.totalOwn}
+              </span>
+            )}
+          </div>
+        )
       }));
       const tab = navigateTabs[0];
       this.setState({ navigateTabs, tab });
@@ -36,12 +48,13 @@ class ProgramsRatingContainer extends Component {
   };
 
   render() {
-    const { id, levelData, routes } = this.props;
+    const { t, id, levelData, routes } = this.props;
     const { tab, navigateTabs } = this.state;
 
     if (!tab || !levelData || !navigateTabs) return null;
     return (
       <Surface className="programs-rating">
+        <h3 className="programs-rating__head">{t("rating-page.title")}</h3>
         <div className="programs-rating__tabs">
           <TabsContainer
             programFacetRoute={routes.PROGRAMS_RATING_TAB_ROUTE}
@@ -68,6 +81,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default compose(
+  translate(),
   connect(
     mapStateToProps,
     mapDispatchToProps

@@ -250,7 +250,7 @@
     },
     "programs-table": "All programs",
     "programs-header": {
-      "position": "Position",
+      "position": "Pos.",
       "title": "Name",
       "balance": "Balance",
       "currency": "Curr.",
@@ -563,10 +563,10 @@
     }
   },
   "rating-page": {
-    "title": "Programs rating",
+    "title": "Rating",
     "pretendents-title": "Pretendents",
-    "self-pretendents-title": "Your pretendents",
-    "programCounts": "Programs",
+    "self-pretendents-title": "Your programs",
+    "programCounts": "All programs",
     "quota": "Quota",
     "currentProfit": "Current target profit"
   },
@@ -771,6 +771,11 @@
       "success-alert-message": "Email address successfully verified",
       "error-during-confirmation": "An error occurred during confirmation of email:"
     }
+  },
+  "level-tooltip": {
+    "genesis-level": "Genesis level",
+    "level-up": "Level Up",
+    "top10": "Top 10%"
   },
   "investor": {
     "app": {
