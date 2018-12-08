@@ -4,8 +4,7 @@ import classnames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 import NumberFormat from "react-number-format";
-
-import { formatValue } from "../../utils/formatter";
+import { formatCurrencyValue } from "shared/utils/formatter";
 
 const LABEL = "LABEL";
 const VALUE = "VALUE";
@@ -57,7 +56,7 @@ const StatisticItem = ({
         <div className="statistics-item__equivalent">
           {
             <NumberFormat
-              value={formatValue(equivalent)}
+              value={formatCurrencyValue(equivalent, equivalentCurrency)}
               thousandSeparator={" "}
               displayType="text"
               suffix={` ${equivalentCurrency}`}
