@@ -7,11 +7,11 @@ import { bindActionCreators, compose } from "redux";
 
 import DashboardRequest from "../dashboard/dashboard-portfolio-chart-section/dashboard-in-requests/dashboard-request";
 import {
-  getAssetRequests,
-  cancelRequestDispatch
-} from "./services/status.service";
+  cancelRequestDispatch,
+  getAssetRequests
+} from "./services/asset-status.service";
 
-class ProgramStatusRequests extends PureComponent {
+class AssetStatusRequests extends PureComponent {
   state = { requests: null };
 
   componentDidMount() {
@@ -65,4 +65,4 @@ export default compose(
     mapStateToProps,
     mapDispatchToProps
   )
-)(ProgramStatusRequests);
+)(AssetStatusRequests);

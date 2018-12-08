@@ -1,14 +1,15 @@
+import { FUND, INVESTOR, MANAGER, PROGRAM } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import authService from "shared/services/auth-service";
 import investorApi from "shared/services/api-client/investor-api";
-import { MANAGER, INVESTOR, FUND, PROGRAM } from "shared/constants/constants";
 import managerApi from "shared/services/api-client/manager-api";
+import authService from "shared/services/auth-service";
+
 import { fetchProfileHeaderInfo } from "../../header/actions/header-actions";
 import {
   cancelInvestorProgramRequest,
   cancelManagerFundRequest,
   cancelManagerProgramRequest
-} from "../actions/program-status-actions";
+} from "../actions/asset-status-actions";
 
 export const getAssetRequests = (id, role, asset) => {
   const authorization = authService.getAuthArg();

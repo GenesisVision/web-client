@@ -1,23 +1,23 @@
-import "./program-status.scss";
+import "./asset-status.scss";
 
 import classnames from "classnames";
 import React, { Fragment, PureComponent } from "react";
 import { translate } from "react-i18next";
 
 import Popover from "../popover/popover";
-import ProgramStatusRequests from "./program-status-requests";
+import AssetStatusRequests from "./asset-status-requests";
 
 const getStatusClassName = (status, className) => {
-  return classnames("program-status", className, {
-    "program-status__active": status === "Active",
-    "program-status__investing": status === "Investing",
-    "program-status__withdrawing": status === "Withdrawing",
-    "program-status__ended": status === "Ended",
-    "program-status__pending": status === "Pending"
+  return classnames("asset-status", className, {
+    "asset-status__active": status === "Active",
+    "asset-status__investing": status === "Investing",
+    "asset-status__withdrawing": status === "Withdrawing",
+    "asset-status__ended": status === "Ended",
+    "asset-status__pending": status === "Pending"
   });
 };
 
-class ProgramStatus extends PureComponent {
+class AssetStatus extends PureComponent {
   state = {
     anchor: null
   };
@@ -42,7 +42,7 @@ class ProgramStatus extends PureComponent {
           noPadding
           onClose={this.handleCloseDropdown}
         >
-          <ProgramStatusRequests
+          <AssetStatusRequests
             id={id}
             role={role}
             asset={asset}
@@ -55,4 +55,4 @@ class ProgramStatus extends PureComponent {
   }
 }
 
-export default translate()(ProgramStatus);
+export default translate()(AssetStatus);
