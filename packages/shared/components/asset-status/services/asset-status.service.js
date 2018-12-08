@@ -13,25 +13,19 @@ import {
 
 export const getAssetRequests = (id, role, asset) => {
   const authorization = authService.getAuthArg();
-  let api, method;
-  switch (role) {
-    case MANAGER:
-      api = managerApi;
-      method =
-        asset === PROGRAM
-          ? api.v10ManagerProgramsByIdRequestsBySkipByTakeGet
-          : asset === FUND
-          ? api.v10ManagerFundsByIdRequestsBySkipByTakeGet
-          : null;
+  let method;
+  switch (role + asset) {
+    case MANAGER + PROGRAM:
+      method = managerApi.v10ManagerProgramsByIdRequestsBySkipByTakeGet;
       break;
-    case INVESTOR:
-      api = investorApi;
-      method =
-        asset === PROGRAM
-          ? api.v10InvestorProgramsByIdRequestsBySkipByTakeGet
-          : asset === FUND
-          ? api.v10InvestorFundsByIdRequestsBySkipByTakeGet
-          : null;
+    case MANAGER + FUND:
+      method = managerApi.v10ManagerFundsByIdRequestsBySkipByTakeGet;
+      break;
+    case INVESTOR + PROGRAM:
+      method = investorApi.v10InvestorProgramsByIdRequestsBySkipByTakeGet;
+      break;
+    case INVESTOR + FUND:
+      method = investorApi.v10InvestorFundsByIdRequestsBySkipByTakeGet;
       break;
     default:
       method = null;
@@ -41,18 +35,16 @@ export const getAssetRequests = (id, role, asset) => {
 
 export const cancelRequest = (id, role, asset) => {
   const authorization = authService.getAuthArg();
-  let api, method;
-  switch (role) {
-    case MANAGER:
-      api = managerApi;
-      method =
-        asset === PROGRAM
-          ? api.v10ManagerProgramsRequestsByIdCancelPost
-          : asset === FUND
-          ? api.v10ManagerFundsRequestsByIdCancelPost
-          : null;
+  let method;
+
+  switch (role + asset) {
+    case MANAGER + PROGRAM:
+      method = managerApi.v10ManagerProgramsRequestsByIdCancelPost;
       break;
-    case INVESTOR:
+    case MANAGER + FUND:
+      method = managerApi.v10ManagerFundsRequestsByIdCancelPost;
+      break;
+    case INVESTOR + PROGRAM:
       method = investorApi.v10InvestorProgramsRequestsByIdCancelPost;
       break;
     default:
@@ -69,16 +61,15 @@ export const cancelRequestDispatch = ({
 }) => dispatch => {
   const authorization = authService.getAuthArg();
   let action;
-  switch (role) {
-    case MANAGER:
-      action =
-        asset === PROGRAM
-          ? cancelManagerProgramRequest
-          : asset === FUND
-          ? cancelManagerFundRequest
-          : null;
+
+  switch (role + asset) {
+    case MANAGER + PROGRAM:
+      action = cancelManagerProgramRequest;
       break;
-    case INVESTOR:
+    case MANAGER + FUND:
+      action = cancelManagerFundRequest;
+      break;
+    case INVESTOR + PROGRAM:
       action = cancelInvestorProgramRequest;
       break;
     default:
