@@ -30,12 +30,12 @@ class AssetStatus extends PureComponent {
     const { t, className, status, id, role, asset, onCancel } = this.props;
     return (
       <Fragment>
-        <div
+        <span
           className={getStatusClassName(status, className)}
           onClick={this.handleOpenDropdown}
         >
           {status ? t(`program-statuses.${status}`) : ""}
-        </div>
+        </span>
         <Popover
           horizontal="right"
           vertical="bottom"
