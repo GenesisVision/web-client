@@ -4,7 +4,7 @@ import { GVButton } from "gv-react-components";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import ProgramStatus from "shared/components/program-status/program-status";
+import AssetStatus from "shared/components/asset-status/asset-status";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Surface from "shared/components/surface/surface";
 import { formatValue } from "shared/utils/formatter";
@@ -68,7 +68,7 @@ class DetailsInvestment extends PureComponent {
             accent
             label={t("fund-details-page.description.status")}
           >
-            <ProgramStatus
+            <AssetStatus
               status={status}
               id={id}
               role={role}
