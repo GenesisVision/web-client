@@ -4,11 +4,11 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { push } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
-import ProgramsTableModule from "./programs-table-module";
 import Surface from "shared/components/surface/surface";
 import { toggleFavoriteProgramDispatchable } from "shared/modules/favorite-asset/services/favorite-program.service";
 
 import * as programsService from "../../services/programs-table.service";
+import ProgramsTableModule from "./programs-table-module";
 
 class ProgramsContainer extends Component {
   componentDidMount() {
