@@ -23,7 +23,7 @@ class AssetStatusRequests extends PureComponent {
 
   handleCancel = () => {
     const { onCancel, handleCloseDropdown } = this.props;
-    onCancel();
+    if (onCancel) onCancel();
     handleCloseDropdown();
   };
 
