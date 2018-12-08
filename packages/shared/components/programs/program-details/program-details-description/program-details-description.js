@@ -261,7 +261,7 @@ class ProgramDetailsDescription extends PureComponent {
                 />
               </StatisticItem>
             </div>
-            {(isOwnProgram || canInvest) && (
+            {(isOwnProgram || canInvest || canWithdraw) && (
               <Fragment>
                 <div className="details-description__investing-container">
                   <div className="details-description__invest-button-container">
