@@ -1,6 +1,5 @@
 import { PureComponent } from "react";
-import React from "react";
-import Scrollbars from "react-custom-scrollbars";
+import React, { Fragment } from "react";
 import { translate } from "react-i18next";
 import connect from "react-redux/es/connect/connect";
 import { bindActionCreators, compose } from "redux";
@@ -32,20 +31,18 @@ class AssetStatusRequests extends PureComponent {
     const { requests } = this.state;
     if (!requests) return null;
     return (
-      <Scrollbars autoHeight>
-        <div className="dashboard-request-popover">
-          {requests.map(x => (
-            <DashboardRequest
-              key={x.id}
-              request={x}
-              cancelRequest={service.cancelRequestDispatch}
-              asset={asset}
-              role={role}
-              onApplyCancelRequest={this.handleCancel}
-            />
-          ))}
-        </div>
-      </Scrollbars>
+      <Fragment>
+        {requests.map(x => (
+          <DashboardRequest
+            key={x.id}
+            request={x}
+            cancelRequest={service.cancelRequestDispatch}
+            asset={asset}
+            role={role}
+            onApplyCancelRequest={this.handleCancel}
+          />
+        ))}
+      </Fragment>
     );
   }
 }
