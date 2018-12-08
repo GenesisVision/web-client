@@ -11,9 +11,10 @@ import * as routes from "../programs.routes";
 class ProgramsRatingPage extends Component {
   render() {
     const { t } = this.props;
+    const title = t("rating-page.title");
     return (
-      <Page title={t("rating-page.title")}>
-        <ProgramsRatingContainer routes={routes} />
+      <Page title={title}>
+        <ProgramsRatingContainer routes={routes} title={title} />
       </Page>
     );
   }

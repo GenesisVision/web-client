@@ -48,7 +48,7 @@ class ProgramsRatingContainer extends Component {
   };
 
   render() {
-    const { t, id, levelData, routes } = this.props;
+    const { t, id, levelData, routes, title } = this.props;
     const { tab, navigateTabs } = this.state;
 
     if (!tab || !levelData || !navigateTabs) return null;
@@ -64,7 +64,7 @@ class ProgramsRatingContainer extends Component {
             levelData={levelData}
           />
         </div>
-        <ProgramsRatingTables key={tab.level} tab={tab} id={id} />
+        <ProgramsRatingTables key={tab.level} tab={tab} id={id} title={title} />
       </Surface>
     );
   }
