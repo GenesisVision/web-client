@@ -9,10 +9,10 @@ import React from "react";
 import { translate } from "react-i18next";
 import { compose } from "redux";
 import InputImage from "shared/components/form/input-image/input-image";
+import { FUND, PROGRAM } from "shared/constants/constants";
 import filesService from "shared/services/file-service";
 
 import ProgramDefaultImage from "../../../pages/create-program/components/create-program-settings/program-default-image";
-import { FUND, PROGRAM } from "../asset-edit.constants";
 import editAssetSettingsValidationSchema from "./asset-edit.validators";
 
 const AssetEditForm = ({

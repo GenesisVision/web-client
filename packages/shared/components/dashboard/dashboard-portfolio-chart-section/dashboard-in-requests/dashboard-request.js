@@ -7,6 +7,8 @@ import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import PortfolioEventLogo from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
+import StatisticItem from "shared/components/statistic-item/statistic-item";
+
 class DashboardRequest extends Component {
   state = {
     isConfirmPopupOpen: false
@@ -19,10 +21,23 @@ class DashboardRequest extends Component {
   handleOpenConfirmPopup = () => this.setState({ isConfirmPopupOpen: true });
   handleCloseConfirmPopup = () => this.setState({ isConfirmPopupOpen: false });
   handleApplyCancelRequest = () => {
-    const { request, cancelRequest, onApplyCancelRequest } = this.props;
-    cancelRequest(request.id, request.programType, () => {
+    const {
+      request,
+      cancelRequest,
+      onApplyCancelRequest,
+      role,
+      asset
+    } = this.props;
+    const onFinally = () => {
       this.handleCloseConfirmPopup();
       onApplyCancelRequest();
+    };
+    cancelRequest({
+      id: request.id,
+      type: request.programType,
+      onFinally,
+      role,
+      asset
     });
   };
 
@@ -38,14 +53,17 @@ class DashboardRequest extends Component {
             color={request.color}
           />
         </div>
-        <div className="dashboard-request-popover__info">
-          <div className="dashboard-request-popover__title">
-            {request.title}
-          </div>
-          <div className="dashboard-request-popover__label">{request.type}</div>
-        </div>
-        <div className="dashboard-request-popover__value">
-          <div className="dashboard-request-popover__profitability">
+        <StatisticItem
+          className={"dashboard-request-popover__statistic-item"}
+          label={request.title}
+          invert
+          accent
+        >
+          {request.type}
+        </StatisticItem>
+        <StatisticItem
+          className={"dashboard-request-popover__statistic-item"}
+          label={
             <NumberFormat
               value={formatCurrencyValue(request.value, request.currency)}
               decimalScale={8}
@@ -53,12 +71,11 @@ class DashboardRequest extends Component {
               allowNegative={false}
               suffix={` ${request.currency}`}
             />
-          </div>
-          <div className="dashboard-request-popover__label">
-            {moment(request.date).format("ll")}
-          </div>
-        </div>
-
+          }
+          invert
+        >
+          {moment(request.date).format("ll")}
+        </StatisticItem>
         <div className="dashboard-request-popover__btns">
           {request.canCancelRequest && (
             <GVButton

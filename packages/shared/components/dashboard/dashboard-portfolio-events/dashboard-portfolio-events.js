@@ -11,6 +11,8 @@ import Surface from "shared/components/surface/surface";
 
 import DashboardPortfolioEventsListLoader from "./dashboard-portfolio-event-loader/dashboard-portfolio-event-list-loader";
 
+const DASHBOARD_EVENTS_STYLE = { height: "100%", minHeight: "450px" };
+
 class DashboardPortfolioEvents extends Component {
   renderEvents = () => {
     const {
@@ -45,8 +47,7 @@ class DashboardPortfolioEvents extends Component {
           <Scrollbars
             autoHide
             autoHideTimeout={1000}
-            autoHeight
-            autoHeightMax="541px"
+            style={DASHBOARD_EVENTS_STYLE}
           >
             <div className="dashboard-portfolio-events__list">
               {this.renderEvents()}

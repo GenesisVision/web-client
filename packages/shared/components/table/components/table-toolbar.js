@@ -14,6 +14,7 @@ class TableToolbar extends Component {
 
   render() {
     const {
+      disableTitle,
       createButtonToolbar,
       title,
       renderFilters,
@@ -28,7 +29,7 @@ class TableToolbar extends Component {
     } = this.props;
     return (
       <div className="table__toolbar">
-        {title && <h3 className="table__title">{title}</h3>}
+        {title && !disableTitle && <h3 className="table__title">{title}</h3>}
         <div className="table__filters">
           {view === CARDS_VIEW && sorting !== undefined && (
             <SortingFilter

@@ -3,6 +3,10 @@
 @import "~shared/styles/_sizes.scss";
 
 .reallocate-container {
+  &__form-error {
+    margin-top: 20px;
+  }
+
   &__header {
     font-size: $font-size-h3-mobile;
     font-weight: 500;

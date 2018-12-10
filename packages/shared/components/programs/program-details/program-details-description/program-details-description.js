@@ -86,6 +86,7 @@ class ProgramDetailsDescription extends PureComponent {
     } = this.state;
     const {
       t,
+      role,
       status,
       isFavorite,
       canCloseProgram,
@@ -125,16 +126,14 @@ class ProgramDetailsDescription extends PureComponent {
     return (
       <div className="details-description">
         <div className="details-description__left">
-          <div
-            className="details-description__avatar"
-            onClick={this.handleOpenDropdown}
-          >
+          <div className="details-description__avatar">
             <AssetAvatar
               url={programDescription.logo}
               level={programDescription.level}
               alt={title}
               size="big"
               color={programDescription.color}
+              onClickLevel={this.handleOpenDropdown}
             />
           </div>
           <Popover
@@ -262,7 +261,7 @@ class ProgramDetailsDescription extends PureComponent {
                 />
               </StatisticItem>
             </div>
-            {(isOwnProgram || canInvest) && (
+            {(isOwnProgram || canInvest || canWithdraw) && (
               <Fragment>
                 <div className="details-description__investing-container">
                   <div className="details-description__invest-button-container">
@@ -335,6 +334,8 @@ class ProgramDetailsDescription extends PureComponent {
                       canWithdraw={canWithdraw}
                       assetCurrency={programDescription.currency}
                       onChangeInvestmentStatus={onChangeInvestmentStatus}
+                      asset={PROGRAM}
+                      role={role}
                       {...investmentData}
                     />
                   )}

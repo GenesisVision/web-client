@@ -4,7 +4,7 @@ import { translate } from "react-i18next";
 import ProgramsRatingStats from "./programs-rating-stats";
 import ProgramsRatingTable from "./programs-rating-table";
 
-const ProgramsRatingTables = ({ t, id, tab }) => (
+const ProgramsRatingTables = ({ t, id, tab, title }) => (
   <Fragment>
     {id && (
       <ProgramsRatingTable
@@ -14,7 +14,7 @@ const ProgramsRatingTables = ({ t, id, tab }) => (
       />
     )}
     <ProgramsRatingStats levelData={tab} />
-    <ProgramsRatingTable tab={tab.level} />
+    <ProgramsRatingTable tab={tab.level} title={title} disableTitle />
   </Fragment>
 );
 

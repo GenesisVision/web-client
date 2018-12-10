@@ -26,7 +26,7 @@ class ProgramsRatingContainer extends Component {
           <div className="programs-rating__tab">
             <div className="programs-rating__tab-container">
               <div className="programs-rating__back">{item.level}</div>
-              <div className="programs-rating__back-arrow">&larr;</div>
+              <div className="programs-rating__back-arrow">&rarr;</div>
               <div className="programs-rating__back">{item.level + 1}</div>
             </div>
             {item.totalOwn !== 0 && (
@@ -48,7 +48,7 @@ class ProgramsRatingContainer extends Component {
   };
 
   render() {
-    const { t, id, levelData, routes } = this.props;
+    const { t, id, levelData, routes, title } = this.props;
     const { tab, navigateTabs } = this.state;
 
     if (!tab || !levelData || !navigateTabs) return null;
@@ -64,7 +64,7 @@ class ProgramsRatingContainer extends Component {
             levelData={levelData}
           />
         </div>
-        <ProgramsRatingTables key={tab.level} tab={tab} id={id} />
+        <ProgramsRatingTables key={tab.level} tab={tab} id={id} title={title} />
       </Surface>
     );
   }

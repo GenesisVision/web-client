@@ -1,19 +1,19 @@
-import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
-import Profitability from "shared/components/profitability/profitability";
-import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
-import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
-import Tooltip from "shared/components/tooltip/tooltip";
+import classnames from "classnames";
 import { GVButton } from "gv-react-components";
-import FavoriteIcon from "shared/components/favorite-asset/favorite-icon/favorite-icon";
-import TableCell from "shared/components/table/components/table-cell";
-import TableRow from "shared/components/table/components/table-row";
 import React from "react";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
-import { formatValue } from "shared/utils/formatter";
-import classnames from "classnames";
-
+import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import FavoriteIcon from "shared/components/favorite-asset/favorite-icon/favorite-icon";
+import LevelTooltip from "shared/components/level-tooltip/level-tooltip";
+import Profitability from "shared/components/profitability/profitability";
+import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
+import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
+import TableCell from "shared/components/table/components/table-cell";
+import TableRow from "shared/components/table/components/table-row";
+import Tooltip from "shared/components/tooltip/tooltip";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
+import { formatValue } from "shared/utils/formatter";
 
 const ProgramTableRowShort = ({
   title,
@@ -62,6 +62,9 @@ const ProgramTableRowShort = ({
               level={level}
               alt={program.title}
               color={color}
+              tooltip={
+                <LevelTooltip level={level} canLevelUp={rating.canLevelUp} />
+              }
             />
           </Link>
           <div className="programs-table__cell--title">

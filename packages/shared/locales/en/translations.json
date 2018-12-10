@@ -250,7 +250,7 @@
     },
     "programs-table": "All programs",
     "programs-header": {
-      "position": "Position",
+      "position": "Pos.",
       "title": "Name",
       "balance": "Balance",
       "currency": "Curr.",
@@ -775,6 +775,11 @@
       "success-alert-message": "Email address successfully verified",
       "error-during-confirmation": "An error occurred during confirmation of email:"
     }
+  },
+  "level-tooltip": {
+    "genesis-level": "Genesis level",
+    "level-up": "Level Up",
+    "top10": "Top 10%"
   },
   "investor": {
     "app": {

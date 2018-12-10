@@ -38,6 +38,7 @@ class Table extends Component {
   render() {
     const { view } = this.state;
     const {
+      disableTitle,
       items,
       title,
       renderFilters,
@@ -59,6 +60,7 @@ class Table extends Component {
     return (
       <div className="table-wrapper">
         <TableToolbar
+          disableTitle={disableTitle}
           title={title}
           renderFilters={renderFilters}
           updateFilter={updateFilter}

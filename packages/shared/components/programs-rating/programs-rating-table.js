@@ -42,11 +42,12 @@ class ProgramsRatingTable extends Component {
   };
 
   render() {
-    const { title, programs, isPending } = this.props;
+    const { title, programs, isPending, disableTitle } = this.props;
     const { totalPages, currentPage, itemsOnPage } = this.state;
     if (!programs || !programs.total) return null;
     return (
       <ProgramsTableModule
+        disableTitle={disableTitle}
         isPending={isPending}
         columns={COLUMNS}
         showRating

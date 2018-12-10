@@ -14,15 +14,15 @@ export const getInRequests = () => (dispatch, getState) => {
   dispatch(fetchInRequests(authorization, 0, 100));
 };
 
-export const cancelRequest = (requestId, type, onFinally) => (
+export const cancelRequest = ({ id, type, onFinally }) => (
   dispatch,
   getState
 ) => {
   const authorization = authService.getAuthArg();
   const action =
     type === "Program"
-      ? cancelProgramRequest(authorization, requestId)
-      : cancelFundRequest(authorization, requestId);
+      ? cancelProgramRequest(authorization, id)
+      : cancelFundRequest(authorization, id);
 
   return dispatch(action)
     .then(() => {
