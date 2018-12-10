@@ -9,7 +9,7 @@ import { bindActionCreators, compose } from "redux";
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
 import Popover from "shared/components/popover/popover";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { formatValue } from "shared/utils/formatter";
+import { formatCurrencyValue } from "shared/utils/formatter";
 
 import DashboardRequest from "./dashboard-request";
 
@@ -45,7 +45,7 @@ class DashboardInRequestsContainer extends PureComponent {
       <div className="dashboard-request">
         <StatisticItem label={"In Requests"} big>
           <NumberFormat
-            value={formatValue(inRequests.totalValue)}
+            value={formatCurrencyValue(inRequests.totalValue, "GVT")}
             thousandSeparator={" "}
             displayType="text"
             suffix={" GVT"}

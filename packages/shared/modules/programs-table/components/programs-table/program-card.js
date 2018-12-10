@@ -5,6 +5,7 @@ import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
+import LevelTooltip from "shared/components/level-tooltip/level-tooltip";
 import Popover from "shared/components/popover/popover";
 import Profitability from "shared/components/profitability/profitability";
 import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
@@ -43,6 +44,12 @@ class ProgramCard extends Component {
                 alt={program.title}
                 color={program.color}
                 size="medium"
+                tooltip={
+                  <LevelTooltip
+                    level={program.level}
+                    canLevelUp={program.rating.canLevelUp}
+                  />
+                }
               />
             </Link>
           </div>

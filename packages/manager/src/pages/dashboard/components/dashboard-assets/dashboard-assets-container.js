@@ -7,17 +7,22 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { bindActionCreators, compose } from "redux";
 import DashboardAssets from "shared/components/dashboard/dashboard-assets/dashboard-assets";
+import { ChartIcon } from "shared/components/icon/chart-icon";
+import { MANAGER } from "shared/constants/constants";
 
 import { getDashboardFunds } from "../../services/dashboard-funds.service";
 import { getDashboardPrograms } from "../../services/dashboard-programs.service";
-import { ChartIcon } from "shared/components/icon/chart-icon";
 
 class DashboardAssetsContainer extends Component {
-  componentDidMount() {
+  componentDidMount = () => this.getAssets();
+
+  getAssets = () => {
     const { service } = this.props;
     service.getDashboardFunds();
     service.getDashboardPrograms();
-  }
+  };
+
+  onChangeStatus = () => this.getAssets();
 
   render() {
     const { t, title } = this.props;
@@ -29,7 +34,11 @@ class DashboardAssetsContainer extends Component {
             <ChartIcon />
           </div>
           <div className="create-asset__text">
-            {t("dashboard.create-fund-text")}
+            {t(
+              `${
+                process.env.REACT_APP_PLATFORM
+              }.dashboard-page.create-fund-text`
+            )}
           </div>
           <div className="create-asset__button">
             <Link
@@ -49,7 +58,11 @@ class DashboardAssetsContainer extends Component {
             <ChartIcon />
           </div>
           <div className="create-asset__text">
-            {t("dashboard.create-program-text")}
+            {t(
+              `${
+                process.env.REACT_APP_PLATFORM
+              }.dashboard-page.create-program-text`
+            )}
           </div>
           <div className="create-asset__button">
             <Link
@@ -78,6 +91,8 @@ class DashboardAssetsContainer extends Component {
         createFund={createFund()}
         createProgram={createProgram()}
         title={title}
+        role={MANAGER}
+        onChangeStatus={this.onChangeStatus}
       />
     );
   }

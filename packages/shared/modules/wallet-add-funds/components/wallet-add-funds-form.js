@@ -9,9 +9,9 @@ import { compose } from "redux";
 import GVqr from "shared/components/gv-qr/gv-qr";
 import CopyIcon from "shared/components/icon/copy-icon";
 import Select from "shared/components/select/select";
-import { convertToCurrency } from "shared/utils/currency-converter";
-import { formatValue } from "shared/utils/formatter";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import { convertToCurrency } from "shared/utils/currency-converter";
+import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 
 const WalletAddFundsForm = ({
   t,
@@ -30,6 +30,11 @@ const WalletAddFundsForm = ({
     } catch (error) {
       notifyError(t("wallet-add-funds.copy-to-clipboard-error"));
     }
+  };
+
+  const isAllow = values => {
+    const { formattedValue } = values;
+    return formattedValue === "" || validateFraction(formattedValue, currency);
   };
 
   return (
@@ -64,6 +69,7 @@ const WalletAddFundsForm = ({
           autoComplete="off"
           InputComponent={NumberFormat}
           allowNegative={false}
+          isAllowed={isAllow}
         />
         <div className="gv-text-field__wrapper">
           <StatisticItem
@@ -75,7 +81,10 @@ const WalletAddFundsForm = ({
             }
           >
             <NumberFormat
-              value={formatValue(convertToCurrency(values.amount, rateToGVT))}
+              value={formatCurrencyValue(
+                convertToCurrency(values.amount, rateToGVT),
+                "GVT"
+              )}
               suffix=" GVT"
               displayType="text"
             />

@@ -64,6 +64,7 @@ class FundDetailsDescription extends PureComponent {
     } = this.state;
     const {
       t,
+      role,
       possibleReallocationTime,
       canReallocate,
       status,
@@ -258,6 +259,8 @@ class FundDetailsDescription extends PureComponent {
                 assetCurrency={"GVT"}
                 {...investmentData}
                 onChangeInvestmentStatus={onChangeInvestmentStatus}
+                asset={FUND}
+                role={role}
               />
             )}
           </div>

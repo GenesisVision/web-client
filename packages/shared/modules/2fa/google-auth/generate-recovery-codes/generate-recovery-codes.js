@@ -37,7 +37,7 @@ class GenerateRecoveryCode extends Component {
     return (
       <div className="generate-recovery-codes">
         <GVButton variant="text" type="button" onClick={this.handleClick}>
-          {this.props.t("2fa.codes.generate-recovery-codes")}
+          {this.props.t("2fa-page.codes.generate-recovery-codes")}
         </GVButton>
         <Dialog open={this.state.isOpenPopup} onClose={this.handleClose}>
           {this.state.data ? (

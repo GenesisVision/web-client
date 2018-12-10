@@ -31,9 +31,12 @@ class ManagerHistorySection extends PureComponent {
           <GVTabs value={tab} onChange={handleTabChange}>
             <GVTab
               value={"programs"}
-              label={t("manager.history.tabs.programs")}
+              label={t("manager-page.history.tabs.programs")}
             />
-            <GVTab value={"funds"} label={t("manager.history.tabs.funds")} />
+            <GVTab
+              value={"funds"}
+              label={t("manager-page.history.tabs.funds")}
+            />
           </GVTabs>
         </div>
 

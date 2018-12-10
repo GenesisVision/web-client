@@ -11,12 +11,12 @@ export const GoogleStep3 = ({ t, handleSubmit, errorMessage, disabled }) => {
   return (
     <div className="google-auth__step">
       <div className="google-auth__count">03</div>
-      <div className="google-auth__title">{t("2fa.enter-code")}</div>
+      <div className="google-auth__title">{t("2fa-page.enter-code")}</div>
       <form id="google-auth" onSubmit={handleSubmit} autoComplete="off">
         <GVFormikField
           name="code"
           type="text"
-          label={t("2fa.google-code")}
+          label={t("2fa-page.google-code")}
           component={GVTextField}
           autoComplete="off"
           InputComponent={NumberFormat}
@@ -26,7 +26,7 @@ export const GoogleStep3 = ({ t, handleSubmit, errorMessage, disabled }) => {
         <GVFormikField
           name="password"
           type="password"
-          label={t("2fa.password")}
+          label={t("2fa-page.password")}
           component={GVTextField}
           autoComplete="new-password"
         />
@@ -55,8 +55,8 @@ const GoogleActivateStep = compose(
     }),
     validationSchema: ({ t }) =>
       object().shape({
-        code: number().required(t("2fa.code-required")),
-        password: string().required(t("2fa.password-required"))
+        code: number().required(t("2fa-page.code-required")),
+        password: string().required(t("2fa-page.password-required"))
       }),
     handleSubmit: (values, { props }) => {
       props.onSubmit(values);

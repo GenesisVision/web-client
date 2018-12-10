@@ -37,7 +37,7 @@ class ManagerPage extends Component {
 
     return (
       !isPending && (
-        <Page title={`${t("manager.title")} ${managerProfile.username}`}>
+        <Page title={`${t("manager-page.title")} ${managerProfile.username}`}>
           <div className="manager">
             <div className="manager__description">
               <ManagerDescription managerProfile={managerProfile} />

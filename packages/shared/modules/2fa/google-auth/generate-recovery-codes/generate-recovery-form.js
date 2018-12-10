@@ -10,7 +10,7 @@ const GenerateRecoveryForm = ({ t, handleSubmit, errorMessage, disabled }) => {
   return (
     <div className="dialog__top">
       <div className="dialog__header">
-        <h2>{t("2fa.codes.generate-recovery-codes")}</h2>
+        <h2>{t("2fa-page.codes.generate-recovery-codes")}</h2>
       </div>
       <form
         id="generate-recovery-form"
@@ -20,7 +20,7 @@ const GenerateRecoveryForm = ({ t, handleSubmit, errorMessage, disabled }) => {
         <GVFormikField
           name="password"
           type="password"
-          label={t("2fa.password")}
+          label={t("2fa-page.password")}
           component={GVTextField}
           autoComplete="new-password"
         />
@@ -50,7 +50,7 @@ const GenerateRecoveryWithFormik = compose(
     }),
     validationSchema: ({ t }) =>
       object().shape({
-        password: string().required(t("2fa.password-required"))
+        password: string().required(t("2fa-page.password-required"))
       }),
     handleSubmit: (values, { props }) => {
       props.onSubmit(values);

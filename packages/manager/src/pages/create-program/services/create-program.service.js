@@ -43,7 +43,7 @@ export const createProgram = (createProgramData, setSubmitting) => dispatch => {
       setSubmitting(false);
       dispatch(
         alertMessageActions.success(
-          "create-program-page.notifications.create-success",
+          "manager.create-program-page.notifications.create-success",
           true
         )
       );
@@ -58,7 +58,7 @@ export const createProgram = (createProgramData, setSubmitting) => dispatch => {
 export const showValidationError = () => dispatch => {
   dispatch(
     alertMessageActions.error(
-      "create-program-page.notifications.validate-error",
+      "manager.create-program-page.notifications.validate-error",
       true
     )
   );

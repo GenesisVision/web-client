@@ -11,6 +11,8 @@ import Surface from "shared/components/surface/surface";
 
 import DashboardPortfolioEventsListLoader from "./dashboard-portfolio-event-loader/dashboard-portfolio-event-list-loader";
 
+const DASHBOARD_EVENTS_STYLE = { height: "100%", minHeight: "450px" };
+
 class DashboardPortfolioEvents extends Component {
   renderEvents = () => {
     const {
@@ -34,13 +36,18 @@ class DashboardPortfolioEvents extends Component {
 
     return (
       <Surface className="surface--horizontal-paddings dashboard-portfolio-events">
-        <h3>{t("dashboard.portfolio-events.title")}</h3>
+        <h3>
+          {t(
+            `${
+              process.env.REACT_APP_PLATFORM
+            }.dashboard-page.portfolio-events.title`
+          )}
+        </h3>
         <div className="dashboard-portfolio-events__scroll-container">
           <Scrollbars
             autoHide
             autoHideTimeout={1000}
-            autoHeight
-            autoHeightMax="541px"
+            style={DASHBOARD_EVENTS_STYLE}
           >
             <div className="dashboard-portfolio-events__list">
               {this.renderEvents()}
@@ -56,7 +63,12 @@ class DashboardPortfolioEvents extends Component {
           }}
         >
           <GVButton variant="text" color="secondary">
-            {t("dashboard.portfolio-events.see-all-button")} &#8250;
+            {t(
+              `${
+                process.env.REACT_APP_PLATFORM
+              }.dashboard-page.portfolio-events.see-all-button`
+            )}{" "}
+            &#8250;
           </GVButton>
         </Link>
       </Surface>

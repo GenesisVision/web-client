@@ -3,9 +3,8 @@
 @import "~shared/styles/_sizes.scss";
 
 .reallocate-container {
-  padding: $padding-small;
-  @include media-breakpoint-landscape-phone() {
-    padding: $padding-small;
+  &__form-error {
+    margin-top: 20px;
   }
 
   &__header {

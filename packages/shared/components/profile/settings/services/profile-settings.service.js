@@ -26,7 +26,7 @@ export const updateProfileAvatar = ({
     .then(() => {
       dispatch(
         alertMessageActions.success(
-          "profile.settings.image-success-save-message",
+          "profile-page.settings.image-success-save-message",
           true
         )
       );
@@ -46,7 +46,7 @@ export const removeProfileAvatar = ({ submitCallback }) => dispatch => {
     .then(() => {
       dispatch(
         alertMessageActions.success(
-          "profile.settings.image-success-save-message",
+          "profile-page.settings.image-success-save-message",
           true
         )
       );

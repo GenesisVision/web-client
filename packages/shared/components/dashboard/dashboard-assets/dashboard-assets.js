@@ -20,6 +20,8 @@ class DashboardAssets extends Component {
   render() {
     const { tab } = this.state;
     const {
+      role,
+      onChangeStatus,
       title,
       getDashboardPrograms,
       getDashboardFunds,
@@ -46,6 +48,8 @@ class DashboardAssets extends Component {
               createButtonToolbar={createProgramButtonToolbar}
               createProgram={createProgram}
               title={title}
+              role={role}
+              onChangeStatus={onChangeStatus}
             />
           )}
           {tab === "funds" && (
@@ -55,6 +59,8 @@ class DashboardAssets extends Component {
               DASHBOARD_FUNDS_COLUMNS={DASHBOARD_FUNDS_COLUMNS}
               getDashboardFunds={getDashboardFunds}
               title={title}
+              role={role}
+              onChangeStatus={onChangeStatus}
             />
           )}
         </div>

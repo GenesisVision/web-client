@@ -2,6 +2,12 @@ import "./programs.scss";
 
 import React, { Fragment } from "react";
 import { translate } from "react-i18next";
+import { Table } from "shared/components/table/components";
+import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
+import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import LevelFilter from "shared/components/table/components/filtering/level-filter/level-filter";
+import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
+
 import ProgramCard from "./program-card";
 import ProgramTableRow from "./program-table-row";
 import {
@@ -9,14 +15,10 @@ import {
   LEVEL_FILTER_NAME,
   PROGRAMS_COLUMNS
 } from "./programs.constants";
-import { Table } from "shared/components/table/components";
-import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
-import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import LevelFilter from "shared/components/table/components/filtering/level-filter/level-filter";
-import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
 
 const ProgramsTableModule = ({
   t,
+  disableTitle,
   columns,
   showRating,
   enableFiltering,
@@ -41,6 +43,7 @@ const ProgramsTableModule = ({
   ];
   return (
     <Table
+      disableTitle={disableTitle}
       title={title}
       showSwitchView={showSwitchView}
       sorting={sorting}

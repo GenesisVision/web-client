@@ -24,12 +24,12 @@ class PhoneVerificationForm extends Component {
       >
         <div className="dialog__top">
           <div className="dialog__title">
-            <h2>{t("profile.verification.phone.title")}</h2>
-            <p>{t("profile.verification.phone.description")}</p>
+            <h2>{t("profile-page.verification.phone.title")}</h2>
+            <p>{t("profile-page.verification.phone.description")}</p>
           </div>
           <div className="gv-text-field__wrapper">
             <label className="gv-text-field__label gv-text-field__label--shrink">
-              {t("profile.verification.phone.number")}
+              {t("profile-page.verification.phone.number")}
             </label>
             <div className="gv-text-field wallet-add-funds-popup__will-get">
               <div className="gv-text-field__input dialog-field__value">
@@ -42,7 +42,7 @@ class PhoneVerificationForm extends Component {
           <GVFormikField
             className="phone-verification__code"
             name="code"
-            label={t("profile.verification.phone.code")}
+            label={t("profile-page.verification.phone.code")}
             component={GVTextField}
             adornment={
               <GVButton
@@ -50,7 +50,7 @@ class PhoneVerificationForm extends Component {
                 onClick={this.props.onResendClick}
                 disabled={this.props.disabledResend}
               >
-                {t("profile.verification.phone.resend")}
+                {t("profile-page.verification.phone.resend")}
               </GVButton>
             }
             autoComplete="off"
@@ -84,7 +84,7 @@ export default compose(
     }),
     validationSchema: ({ t }) =>
       object().shape({
-        code: number().required(t("profile.verification.phone.required"))
+        code: number().required(t("profile-page.verification.phone.required"))
       }),
     handleSubmit: (values, { props }) => {
       props.onSubmit(values.code);

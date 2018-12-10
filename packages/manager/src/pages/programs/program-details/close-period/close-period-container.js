@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-
 import { closePeriod } from "shared/components/programs/program-details/services/program-details.service";
+
 import ClosePeriod from "./close-period";
 
 const mapDispatchToProps = dispatch => ({

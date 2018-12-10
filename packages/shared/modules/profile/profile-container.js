@@ -26,12 +26,12 @@ class ProfileContainer extends Component {
       })
       .then(() => {
         this.setState({ isPending: false });
-        this.success(this.props.t("profile.success-edit"));
+        this.success(this.props.t("profile-page.success-edit"));
       });
   };
 
   handleVerify = () => {
-    this.success(this.props.t("profile.success-verify"));
+    this.success(this.props.t("profile-page.success-verify"));
   };
 
   componentDidMount() {

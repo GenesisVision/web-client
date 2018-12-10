@@ -14,14 +14,15 @@ import Page from "shared/components/page/page";
 import ProgramDetailsDescriptionSection from "shared/components/programs/program-details/program-details-description/program-details-description-section";
 import ProgramDetailsStatisticSection from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import ProgramDetailsHistorySection from "shared/components/programs/program-details/program-trades/program-details-history-section";
+import {
+  fetchProgramTrades,
+  getProgramDescription,
+  getProgramStatistic
+} from "shared/components/programs/program-details/services/program-details.service";
+import { INVESTOR } from "shared/constants/constants";
 
 import { LOGIN_ROUTE } from "../../auth/login/login.routes";
 import { fetchPortfolioEvents } from "../../dashboard/services/dashboard-events.services";
-import {
-  getProgramDescription,
-  getProgramStatistic,
-  fetchProgramTrades
-} from "shared/components/programs/program-details/services/program-details.service";
 
 export const ProgramDetailContext = React.createContext({
   updateDetails: () => {}
@@ -113,6 +114,7 @@ class ProgramDetailsPage extends PureComponent {
                 isAuthenticated={isAuthenticated}
                 redirectToLogin={service.redirectToLogin}
                 onChangeInvestmentStatus={this.changeInvestmentStatus}
+                role={INVESTOR}
               />
             </div>
             <div className="details__section">

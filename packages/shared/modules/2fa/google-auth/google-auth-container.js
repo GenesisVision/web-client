@@ -21,7 +21,7 @@ class GoogleAuthContainer extends Component {
   componentDidMount() {
     this.setState({ isPending: true });
     authApi.v10Auth2faCreatePost(authService.getAuthArg()).then(data => {
-      this.setState({ data });
+      this.setState({ data, isPending: false });
     });
   }
 
@@ -39,7 +39,7 @@ class GoogleAuthContainer extends Component {
         this.setState({ data, isPending: false }, this.props.onSubmit);
       })
       .catch(data => {
-        this.setState({ data, isPending: false });
+        this.setState({ errorMessage: data.errorMessage, isPending: false });
       });
   };
 

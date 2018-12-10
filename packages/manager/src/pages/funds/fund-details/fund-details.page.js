@@ -1,7 +1,7 @@
 import "shared/components/details/details.scss";
 
 import AssetEditContainer from "modules/asset-edit/asset-edit-container";
-import { FUND } from "modules/asset-edit/asset-edit.constants";
+import { FUND, MANAGER } from "shared/constants/constants";
 import FundDepositContainer from "modules/fund-deposit/fund-deposit-container";
 import FundWithdrawContainer from "modules/fund-withdraw/fund-withdraw-container";
 import ReallocateContainer from "modules/reallocate/reallocate-container";
@@ -12,15 +12,15 @@ import { bindActionCreators, compose } from "redux";
 import FundDetailsDescriptionSection from "shared/components/funds/fund-details/fund-details-description/fund-details-description-section";
 import FundDetailsHistorySection from "shared/components/funds/fund-details/fund-details-history-section/fund-details-history-section";
 import FundDetailsStatisticSection from "shared/components/funds/fund-details/fund-details-statistics-section/fund-details-statistic-section";
-import NotFoundPage from "shared/components/not-found/not-found.routes";
-import Page from "shared/components/page/page";
-
-import { LOGIN_ROUTE } from "../../auth/login/login.routes";
 import {
   fetchFundStructure,
   getFundDescription,
   getFundStatistic
 } from "shared/components/funds/fund-details/services/fund-details.service";
+import NotFoundPage from "shared/components/not-found/not-found.routes";
+import Page from "shared/components/page/page";
+
+import { LOGIN_ROUTE } from "../../auth/login/login.routes";
 
 export const FundDetailContext = React.createContext({
   updateDetails: () => {}
@@ -98,6 +98,7 @@ class FundDetailsPage extends PureComponent {
           <div className="details">
             <div className="details__section">
               <FundDetailsDescriptionSection
+                role={MANAGER}
                 AssetEditContainer={AssetEditContainer}
                 FUND={FUND}
                 FundDepositContainer={FundDepositContainer}

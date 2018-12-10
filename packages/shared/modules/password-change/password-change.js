@@ -28,7 +28,7 @@ class PasswordChange extends Component {
     authService.storeToken(token);
     this.props.dispatch(authActions.updateToken());
     this.props.dispatch(push(SETTINGS_ROUTE));
-    this.success(this.props.t("password-change.success-alert"));
+    this.success(this.props.t("auth.password-change.success-alert"));
   };
 
   handleSubmit = model => {
