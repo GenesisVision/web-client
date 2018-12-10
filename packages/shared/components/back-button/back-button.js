@@ -18,8 +18,8 @@ const BackButton = ({ t, service, backPath }) => {
         color="secondary"
         className="back-button__container"
       >
-        <span className="back-button__back-arrow">&larr;</span>
-        <span className="back-button__back">{t("buttons.back")}</span>
+        <div className="back-button__back-arrow">&larr;</div>
+        <div className="back-button__back">{t("buttons.back")}</div>
       </GVButton>
       <div className="back-button__path">{backPath}</div>
     </div>

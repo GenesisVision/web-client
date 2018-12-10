@@ -1,5 +1,6 @@
 import React, { Fragment, PureComponent } from "react";
 import FundDetailsDescription from "shared/components/funds/fund-details/fund-details-description/fund-details-description";
+import { FUND } from "shared/constants/constants";
 import { toggleFavoriteFund } from "shared/modules/favorite-asset/services/favorite-fund.service";
 
 const composeInvestmentData = fundDetails => {
@@ -29,10 +30,10 @@ class FundDetailsDescriptionSection extends PureComponent {
 
   static getDerivedStateFromProps(props, state) {
     let newState = {};
-    if (state.prevProps !== props.fundDescriptionData) {
-      newState.prevProps = props.fundDescriptionData;
-      newState.fundDescription = props.fundDescriptionData.data;
-      newState.ui = { isPending: props.fundDescriptionData.isPending };
+    if (state.prevProps !== props.fundDescription) {
+      newState.prevProps = props.fundDescription;
+      newState.fundDescription = props.fundDescription;
+      newState.ui = { isPending: props.fundDescription };
     }
 
     return newState;
@@ -70,6 +71,7 @@ class FundDetailsDescriptionSection extends PureComponent {
     return (
       <Fragment>
         <FundDetailsDescription
+          FUND={FUND}
           fundDescription={fundDescription}
           onFavoriteClick={this.handleOnFavoriteClick}
           isFavoritePending={ui.isFavoritePending}

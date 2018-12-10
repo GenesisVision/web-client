@@ -6,8 +6,8 @@ import DashboardPortfolioEvents from "shared/components/dashboard/dashboard-port
 
 import { DASHBOARD_EVENTS_ROUTE } from "../../dashboard.routes";
 import { getPortfolioEvents } from "../../services/dashboard.service";
-import DashboardPortfolioEvent from "./dashboard-portfolio-event/dashboard-portfolio-event";
 import DashboardPortfolioEmptyView from "./dashboard-portfolio-empty-view";
+import DashboardPortfolioEvent from "./dashboard-portfolio-event/dashboard-portfolio-event";
 
 class DashboardPortfolioEventsSection extends Component {
   componentDidMount() {

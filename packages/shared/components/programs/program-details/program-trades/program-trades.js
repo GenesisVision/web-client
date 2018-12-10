@@ -1,11 +1,17 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/trades.scss";
 
 import moment from "moment";
+import * as PropTypes from "prop-types";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import BaseProfitability from "shared/components/profitability/base-profitability";
 import Profitability from "shared/components/profitability/profitability";
+import {
+  PROGRAM_TRADES_COLUMNS,
+  PROGRAM_TRADES_DEFAULT_FILTERS,
+  PROGRAM_TRADES_FILTERS
+} from "shared/components/programs/program-details/program-details.constants";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import TableCell from "shared/components/table/components/table-cell";
@@ -14,51 +20,17 @@ import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { formatValue } from "shared/utils/formatter";
 
-import {
-  PROGRAM_TRADES_COLUMNS,
-  PROGRAM_TRADES_DEFAULT_FILTERS,
-  PROGRAM_TRADES_FILTERS
-} from "shared/components/programs/program-details/program-details.constants";
-import { programsApiProxy } from "../../../../services/api-client/programs-api";
-import * as PropTypes from "prop-types";
-import { composeRequestFilters } from "../../../table/services/table.service";
-
 class ProgramTrades extends Component {
-  state = {
-    isPending: false,
-    data: null
-  };
-
-  componentDidMount() {
-    const tradesFilters = composeRequestFilters({
-      paging: DEFAULT_PAGING,
-      sorting: undefined,
-      filtering: PROGRAM_TRADES_FILTERS,
-      defaultFilters: PROGRAM_TRADES_DEFAULT_FILTERS
-    });
-    this.fetchProgramTrades(tradesFilters);
-  }
-
   fetchProgramTrades = filters => {
     const { currency, programId, fetchTrades } = this.props;
-    this.setState({ isPending: true });
-    return fetchTrades(programId, filters, currency)
-      .then(data => this.setState(data))
-      .catch(error => this.setState({ ...error }));
+    return fetchTrades(programId, filters, currency);
   };
 
   render() {
     const { t } = this.props;
-    if (!this.state.data) return null;
-
-    const data = {
-      items: this.state.data.trades,
-      total: this.state.data.total
-    };
 
     return (
       <TableModule
-        data={data}
         getItems={this.fetchProgramTrades}
         defaultFilters={PROGRAM_TRADES_DEFAULT_FILTERS}
         filtering={PROGRAM_TRADES_FILTERS}

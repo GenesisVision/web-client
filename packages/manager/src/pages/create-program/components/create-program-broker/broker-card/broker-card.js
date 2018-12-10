@@ -19,7 +19,7 @@ const BrokerCard = ({ t, broker, onChoose, isActive, isComingSoon }) => {
   return (
     <div
       className={className}
-      onClick={!isComingSoon && onChoose.bind(null, broker)}
+      onClick={!isComingSoon ? onChoose.bind(null, broker) : null}
     >
       <img
         className={logoClassName}
@@ -28,7 +28,7 @@ const BrokerCard = ({ t, broker, onChoose, isActive, isComingSoon }) => {
       />
       {isComingSoon && (
         <div className="broker-card__coming-soon-text">
-          {t("create-program-page.broker-card.coming-soon")}
+          {t("manager.create-program-page.broker-card.coming-soon")}
         </div>
       )}
       {isActive && <div className="broker-card__active-mark"> &#10004;</div>}

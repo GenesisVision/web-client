@@ -12,7 +12,7 @@ export const GoogleStep1 = ({ t }) => {
   return (
     <div className="google-auth__step">
       <div className="google-auth__count">01</div>
-      <div className="google-auth__title">{t("2fa.download-app")}</div>
+      <div className="google-auth__title">{t("2fa-page.download-app")}</div>
       <a href={AuthAndroidLink} className="google-auth__link">
         <img src={GooglePlay} alt={"link to android market"} />
       </a>

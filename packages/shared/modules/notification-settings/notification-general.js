@@ -22,7 +22,9 @@ class NotificationGeneral extends Component {
     return services
       .addNotificationSettingService(options)
       .then(() =>
-        this.success(t(`notifications.general.${options.type}.enabled-alert`))
+        this.success(
+          t(`notifications-page.general.${options.type}.enabled-alert`)
+        )
       );
   };
 
@@ -31,7 +33,9 @@ class NotificationGeneral extends Component {
     return services
       .removeNotificationSettingService(options.id)
       .then(() =>
-        this.success(t(`notifications.general.${options.type}.disabled-alert`))
+        this.success(
+          t(`notifications-page.general.${options.type}.disabled-alert`)
+        )
       );
   };
 
@@ -41,11 +45,11 @@ class NotificationGeneral extends Component {
     return (
       <div className="notification-settings">
         <h3 className="notification-settings__subtitle">
-          {t("notifications.general.title")}
+          {t("notifications-page.general.title")}
         </h3>
         <GeneralNotification
           name="PlatformNewsAndUpdates"
-          label={t("notifications.general.news-updates")}
+          label={t("notifications-page.general.news-updates")}
           programId={programId}
           setting={PlatformNewsAndUpdates}
           addNotification={this.handleAdd}
@@ -53,7 +57,7 @@ class NotificationGeneral extends Component {
         />
         <GeneralNotification
           name="PlatformEmergency"
-          label={t("notifications.general.emergency")}
+          label={t("notifications-page.general.emergency")}
           programId={programId}
           setting={PlatformEmergency}
           addNotification={this.handleAdd}
@@ -70,10 +74,6 @@ NotificationGeneral.propTypes = {
     removeNotificationSettingService: PropTypes.func,
     addNotificationSettingService: PropTypes.func
   })
-};
-
-NotificationGeneral.defaultProps = {
-  settings: []
 };
 
 const mapDispatchToProps = dispatch => ({

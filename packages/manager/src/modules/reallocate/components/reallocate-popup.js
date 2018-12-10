@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 
 import ReallocateForm from "./reallocate-form";
-import ReallocateTop from "./reallocate-top";
 
 class ReallocatePopup extends Component {
   render() {
@@ -10,20 +9,16 @@ class ReallocatePopup extends Component {
       remainder,
       submitInfo,
       reallocate,
-      serverError
+      errorMessage
     } = this.props;
     return (
-      <Fragment>
-        <ReallocateTop />
-        <ReallocateForm
-          assets={assets}
-          remainder={remainder}
-          disabled={submitInfo.isPending}
-          onSubmit={reallocate}
-          errorMessage={submitInfo.errorMessage}
-          serverError={serverError}
-        />
-      </Fragment>
+      <ReallocateForm
+        assets={assets}
+        remainder={remainder}
+        disabled={submitInfo.isPending}
+        onSubmit={reallocate}
+        errorMessage={errorMessage}
+      />
     );
   }
 }

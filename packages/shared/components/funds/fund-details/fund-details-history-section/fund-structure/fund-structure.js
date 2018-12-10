@@ -1,5 +1,6 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/structure.scss";
 
+import * as PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -10,7 +11,6 @@ import TableModule from "shared/components/table/components/table-module";
 import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { formatValue } from "shared/utils/formatter";
-import * as PropTypes from "prop-types";
 
 class FundStructure extends Component {
   state = {
@@ -22,8 +22,8 @@ class FundStructure extends Component {
     this.setState({ isPending: true });
     const { id, fetchStructure } = this.props;
     return fetchStructure(id)
-      .then(data => this.setState(data))
-      .catch(error => this.setState(error));
+      .then(data => this.setState({ data, isPending: false }))
+      .catch(error => this.setState({ isPending: false }));
   };
 
   componentDidMount() {

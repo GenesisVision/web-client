@@ -1,8 +1,8 @@
 import "./about-level.scss";
 
-import { CURRENCY_VALUES } from "shared/modules/currency-select/currency-select.constants";
 import React, { Component } from "react";
-import rateApiProxy from "shared/services/api-client/rate-api";
+import { CURRENCY_VALUES } from "shared/modules/currency-select/currency-select.constants";
+import rateApi from "shared/services/api-client/rate-api";
 
 import AboutLevelsComponent from "./about-levels";
 
@@ -13,7 +13,7 @@ class AboutLevelsContainerComponent extends Component {
   };
   handlerCurrencyChange = e => {
     this.setState({ currency: e.target.value });
-    rateApiProxy
+    rateApi
       .v10RateByFromByToGet(e.target.value, CURRENCY_VALUES.GVT)
       .then(value => {
         this.setState({ rate: value });

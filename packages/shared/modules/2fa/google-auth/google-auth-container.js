@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
-import { authApiProxy } from "shared/services/api-client/auth-api";
+import authApi from "shared/services/api-client/auth-api";
 import authService from "shared/services/auth-service";
 
 import GoogleAuthCodes from "../google-auth/google-auth-codes";
@@ -20,8 +20,8 @@ class GoogleAuthContainer extends Component {
 
   componentDidMount() {
     this.setState({ isPending: true });
-    authApiProxy.v10Auth2faCreatePost(authService.getAuthArg()).then(data => {
-      this.setState({ ...data });
+    authApi.v10Auth2faCreatePost(authService.getAuthArg()).then(data => {
+      this.setState({ data, isPending: false });
     });
   }
 
@@ -36,10 +36,10 @@ class GoogleAuthContainer extends Component {
         sharedKey
       })
       .then(data => {
-        this.setState({ ...data }, this.props.onSubmit);
+        this.setState({ data, isPending: false }, this.props.onSubmit);
       })
       .catch(data => {
-        this.setState({ ...data });
+        this.setState({ errorMessage: data.errorMessage, isPending: false });
       });
   };
 

@@ -42,7 +42,6 @@ p {
   margin-bottom: 0;
 }
 
-
 .title-small-padding {
   @include adaptive-padding(bottom, $padding-xxsmall);
 }

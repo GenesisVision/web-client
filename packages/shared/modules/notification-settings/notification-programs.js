@@ -15,7 +15,7 @@ class NotificationPrograms extends Component {
         <NotificationEntity
           href={href}
           level={setting.level}
-          key={setting.programId}
+          key={setting.assetId}
           title={setting.title}
           logo={setting.logo}
           count={setting.settingsCustom.length + setting.settingsGeneral.length}
@@ -25,7 +25,7 @@ class NotificationPrograms extends Component {
     return (
       <div className="notification-settings">
         <h3 className="notification-settings__subtitle">
-          {t("notifications.programs")}
+          {t("notifications-page.programs")}
         </h3>
         <div className="program-notification__list">{items}</div>
       </div>

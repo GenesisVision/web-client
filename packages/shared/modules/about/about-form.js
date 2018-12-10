@@ -20,7 +20,7 @@ const AboutForm = ({ t, handleSubmit, disabled, errorMessage }) => {
               <td className="profile__right">
                 <div className="profile__row">
                   <GVFormikField
-                    label={t("profile.login")}
+                    label={t("profile-page.login")}
                     component={GVTextField}
                     name="userName"
                     disabled={disabled}
@@ -28,7 +28,7 @@ const AboutForm = ({ t, handleSubmit, disabled, errorMessage }) => {
                 </div>
                 <div className="profile__row">
                   <GVFormikField
-                    label={t("profile.about")}
+                    label={t("profile-page.about")}
                     component={GVTextField}
                     type="textarea"
                     name="about"

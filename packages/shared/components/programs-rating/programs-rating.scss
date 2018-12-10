@@ -2,10 +2,38 @@
 @import "~shared/styles/_breakpoint.scss";
 @import "~shared/styles/_sizes.scss";
 
-$background-pretender: #064542;
-$background-pretender-hover: #0b4b45;
-
 .programs-rating {
+	&__head {
+		padding-left: $padding-small/2;
+		padding-right: $padding-small/2;
+	}
+
+	&__tab {
+		display: flex;
+		align-items: center;
+	}
+
+	&__tab-container {
+		display: flex;
+		align-items: stretch;
+		font-size: $font-size-common;
+		padding: 4px 0;
+	}
+
+	&__back {
+		font-weight: 600;
+		line-height: 4px;
+		padding-top:7px;
+		margin-right: 3px;
+	}
+
+	&__back-arrow {
+		border: 1px solid transparent;
+		margin-right: 3px;
+		height: 16.5px;
+		font-family: "Times New Roman";
+	}
+
 	&__tabs {
 		@include adaptive-padding(bottom, $padding-xsmall);
 		padding-left: $padding-small/2;
@@ -14,40 +42,67 @@ $background-pretender-hover: #0b4b45;
 		.gv-tab {
 			white-space: nowrap;
 		}
+
+		.gv-tab--active {
+			.programs-rating__tab-count {
+				background-color: rgba($primary-color, 0.1);
+				color: $primary-color;
+			}
+		}
 	}
 
 	.table__row--pretender {
-		background-color: $background-pretender;
+		background: linear-gradient(90deg, rgba($background-pretender, 0.13) 1.83%, rgba($background-pretender, 0.03) 100%);
 
+		.table__cell:first-child {
+			border-left: 1px solid $primary-color;
+		}
 
 		.program-avatar__level {
-			border-color: $background-pretender;
+			border-color: $background-pretender-level;
 		}
 
 		&:not(.table__row--head):hover {
-			background-color: $background-pretender-hover;
-
 			.program-avatar__level {
-				border-color: $background-pretender-hover;
+				border-color: $background-pretender-level-hover;
 			}
 		}
 
 		&:hover {
 			.program-detailed--pretender .program-avatar__level {
-				border-color: $background-pretender-hover;
+				border-color: $background-pretender-level-hover;
 			}
 		}
 	}
 
 	.program-detailed--pretender {
-		.program-detailed__info,
-		.program-detailed__collapse {
-			background-color: $background-pretender;
+		.program-detailed__info {
+			border-left: 1px solid $primary-color;
 		}
+	}
 
-		.program-avatar__level {
-			border-color: $background-pretender;
-		}
+	&__tab-name {
+		display: inline-block;
+		line-height: 1;
+	}
+
+	&__tab-arrow {
+		display: inline-block;
+		padding: 0 5px;
+		font-size: $font-size-common;
+		line-height: 1;
+		align-self: center;
+	}
+
+	&__tab-count {
+		display: inline-block;
+		text-align: center;
+		min-width: 8px;
+		margin-left: 10px;
+		border-radius: 6px;
+		padding: 4px 7px;
+		line-height: 1;
+		background-color: rgba($text-accent-color, 0.05);
 	}
 
 	@include media-breakpoint-landscape-phone() {
@@ -55,18 +110,20 @@ $background-pretender-hover: #0b4b45;
 			padding-left: $padding-small;
 			padding-right: $padding-small;
 		}
+		&__head {
+			padding-left: $padding-small;
+			padding-right: $padding-small;
+		}
 	}
 }
 
 .programs-rating-stats {
-	@include vertical-paddings($padding-medium, $padding-small);
+	@include adaptive-padding(top,$padding-small);
 	padding-left: $padding-small/2;
 	padding-right: $padding-small/2;
 	display: flex;
-
-	.statistics-item {
-		@include adaptive-margin(right, $padding-small);
-	}
+	align-items: center;
+	flex-wrap: wrap;
 
 	@include media-breakpoint-landscape-phone() {
 		padding-left: $padding-small;

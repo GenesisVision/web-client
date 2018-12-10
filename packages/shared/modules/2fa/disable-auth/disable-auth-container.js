@@ -1,7 +1,5 @@
-import "./disable-auth.scss";
-
 import React, { Component } from "react";
-import { authApiProxy } from "shared/services/api-client/auth-api";
+import authApi from "shared/services/api-client/auth-api";
 import authService from "shared/services/auth-service";
 
 import DisableAuthForm from "./disable-auth-form";
@@ -15,15 +13,15 @@ class DisableAuthContainer extends Component {
   };
   handleSubmit = model => {
     this.setState({ isPending: true });
-    authApiProxy
+    authApi
       .v10Auth2faDisablePost(authService.getAuthArg(), {
         model
       })
       .then(data => {
-        this.setState({ ...data, success: true }, this.props.onSubmit);
+        this.setState({ data, success: true }, this.props.onSubmit);
       })
       .catch(data => {
-        this.setState({ ...data, success: false });
+        this.setState({ data, success: false });
       });
   };
   render() {
