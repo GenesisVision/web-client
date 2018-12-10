@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import Dialog from "shared/components/dialog/dialog";
+
 import { formatValue } from "../../utils/formatter";
 import StatisticItem from "../statistic-item/statistic-item";
 

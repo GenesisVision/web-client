@@ -21,8 +21,8 @@ $mobile-title-divider: 2;
     box-sizing: border-box;
   }
   &__container {
-	  @include vertical-paddings($padding-large);
-	  @include horizontal-paddings($padding-large);
+    @include vertical-paddings($padding-large);
+    @include horizontal-paddings($padding-large);
     background: $panel-background-color;
     display: flex;
     flex-direction: column;
@@ -31,7 +31,7 @@ $mobile-title-divider: 2;
   }
   &__description {
     font-size: $large-font-size/$mobile-title-divider;
-	  color: $label-color;
+    color: $label-color;
   }
   &__row {
     display: flex;
@@ -50,31 +50,31 @@ $mobile-title-divider: 2;
     &--mute {
       padding-top: $padding-small/$mobile-padding-divider;
       padding-bottom: $padding-large/$mobile-padding-divider;
-	    color: $label-color;
+      color: $label-color;
     }
   }
   &__subtitle {
-	  @include adaptive-padding(bottom, $small-padding);
+    @include adaptive-padding(bottom, $small-padding);
   }
-	&__list {
-		@include adaptive-padding(right, $padding-small);
-		@include adaptive-padding(bottom, $padding-small);
-		@include font-size($font-size-paragraph);
-		margin: 0;
-		color: $label-color;
-		counter-reset: myCounter;
-	}
-	&__list-item {
-		list-style: none;
-		position: relative;
-		&:before {
-			counter-increment: myCounter;
-			content:counter(myCounter)".";
-			color: $text-light-color;
-			position: absolute;
-			left: -$padding-small/2;
-		}
-	}
+  &__list {
+    @include adaptive-padding(right, $padding-small);
+    @include adaptive-padding(bottom, $padding-small);
+    @include font-size($font-size-paragraph);
+    margin: 0;
+    color: $label-color;
+    counter-reset: myCounter;
+  }
+  &__list-item {
+    list-style: none;
+    position: relative;
+    &:before {
+      counter-increment: myCounter;
+      content: counter(myCounter) ".";
+      color: $text-light-color;
+      position: absolute;
+      left: -$padding-small/2;
+    }
+  }
   &__table {
     padding-bottom: $padding-big/$mobile-padding-divider;
     font-size: $middle-font-size/$mobile-text-divider;
@@ -83,7 +83,7 @@ $mobile-title-divider: 2;
       width: 100%;
       th {
         font-weight: 200;
-	      color: $label-color;
+        color: $label-color;
         text-align: left;
       }
       tbody {
@@ -106,15 +106,15 @@ $mobile-title-divider: 2;
     border-radius: $border-radius 0 0 $border-radius;
   }
   &__limit {
-	  @include vertical-paddings($small-padding);
+    @include vertical-paddings($small-padding);
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
 
-	  .statistics-item {
-		  padding-bottom: 0;
-	  }
+    .statistics-item {
+      padding-bottom: 0;
+    }
   }
   &__currency {
     display: flex;
@@ -127,11 +127,11 @@ $mobile-title-divider: 2;
     padding: 0 $small-padding;
   }
   &__mute-title {
-	  color: $label-color;
+    color: $label-color;
     font-size: $small-font-size/$mobile-text-divider;
     letter-spacing: 0.4px;
     white-space: nowrap;
-	  padding-bottom: 5px;
+    padding-bottom: 5px;
   }
   &__values {
     padding: 0 $small-padding;
@@ -151,8 +151,8 @@ $mobile-title-divider: 2;
     display: flex;
     justify-content: center;
     align-items: center;
-	  flex: 0 0 auto;
-	  margin-right: 24px;
+    flex: 0 0 auto;
+    margin-right: 24px;
     &--1 {
       background-color: $level-color-1;
     }
@@ -192,7 +192,7 @@ $mobile-title-divider: 2;
     &__right-block {
       margin-left: $padding-small;
       padding: $padding-small;
-	    max-width: 300px;
+      max-width: 300px;
     }
     &__mute-title {
       font-size: $small-font-size;
@@ -200,18 +200,18 @@ $mobile-title-divider: 2;
     &__value {
       font-size: $middle-font-size;
     }
-	  &__list-item {
-		  &:before {
-			  left: -$padding-small;
-		  }
-	  }
-	  .dialog__close--inside {
-		  display: block;
-	  }
+    &__list-item {
+      &:before {
+        left: -$padding-small;
+      }
+    }
+    .dialog__close--inside {
+      display: block;
+    }
   }
-	@media (min-width: 1600px) {
-		.dialog__close--inside {
-			display: none;
-		}
-	}
+  @media (min-width: 1600px) {
+    .dialog__close--inside {
+      display: none;
+    }
+  }
 }

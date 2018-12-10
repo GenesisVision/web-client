@@ -148,16 +148,16 @@
         display: inherit;
       }
 
-	    &--wider {
-		    display: none;
-	    }
+      &--wider {
+        display: none;
+      }
     }
 
-	  @media (min-width: 1600px) {
-		  &--wider {
-			  display: inherit;
-		  }
-	  }
+    @media (min-width: 1600px) {
+      &--wider {
+        display: inherit;
+      }
+    }
   }
 
   &__header {
