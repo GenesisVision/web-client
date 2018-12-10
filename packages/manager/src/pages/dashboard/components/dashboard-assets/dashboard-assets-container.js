@@ -14,8 +14,6 @@ import { getDashboardFunds } from "../../services/dashboard-funds.service";
 import { getDashboardPrograms } from "../../services/dashboard-programs.service";
 
 class DashboardAssetsContainer extends Component {
-  componentDidMount = () => this.getAssets();
-
   getAssets = () => {
     const { service } = this.props;
     service.getDashboardFunds();
