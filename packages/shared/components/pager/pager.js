@@ -26,12 +26,12 @@ class Pager extends PureComponent {
         {label || page}
       </div>
     );
-    const pureFirstPage = current - Math.floor(countVisiblePages / 2);
-    const firstPage = pureFirstPage
-      ? pureFirstPage + countVisiblePages <= total
+    let pureFirstPage = current - Math.floor(countVisiblePages / 2);
+    pureFirstPage =
+      pureFirstPage + countVisiblePages <= total
         ? pureFirstPage
-        : total - countVisiblePages + 1
-      : 1;
+        : total - countVisiblePages + 1;
+    const firstPage = pureFirstPage > 0 ? pureFirstPage : 1;
 
     const visiblePages = this.generateVisiblePages(
       firstPage,
@@ -46,9 +46,11 @@ class Pager extends PureComponent {
           </div>
         )}
         <div className="pager__pager-block">
-          {visiblePages.map(page => (
-            <PagerButton key={page} page={page} />
-          ))}
+          {visiblePages
+            .filter(page => page <= total)
+            .map(page => (
+              <PagerButton key={page} page={page} />
+            ))}
         </div>
         {countVisiblePages + firstPage <= total && (
           <div className="pager__pager-block">
