@@ -26,6 +26,6 @@
       "last 2 firefox versions",
       "last 2 edge versions"
     ],
-    "production": [">0.25%", "not op_mini all", "ie 11"]
+    "production": [">0.26%", "not op_mini all", "ie 11"]
   }
 }
