@@ -24,25 +24,16 @@ class ManagerFunds extends Component {
     return fetchManagerFunds({ ...filters, managerId });
   };
 
-  toggleFavorite = isFavorite => id => {
-    const isf = this.state[id] === undefined ? isFavorite : this.state[id];
-    this.setState({ [id]: !isf });
-    toggleFavoriteFund(id, isf).catch(() => {
-      this.setState({ [id]: isf });
+  toggleFavorite = (fund, updateRow) => () => {
+    const isFavorite = fund.personalDetails.isFavorite;
+    const newProgram = {
+      ...fund,
+      personalDetails: { ...fund.personalDetails, isFavorite: !isFavorite }
+    };
+    updateRow(newProgram);
+    toggleFavoriteFund(fund.id, isFavorite).catch(() => {
+      updateRow(fund);
     });
-  };
-
-  getFund = fund => {
-    if (this.state[fund.id] !== undefined) {
-      return {
-        ...fund,
-        personalDetails: {
-          ...fund.personalDetails,
-          isFavorite: this.state[fund.id]
-        }
-      };
-    }
-    return fund;
   };
 
   render() {
@@ -73,13 +64,11 @@ class ManagerFunds extends Component {
             </span>
           );
         }}
-        renderBodyRow={fund => (
+        renderBodyRow={(fund, updateRow) => (
           <FundsTableRow
             title={title}
-            fund={this.getFund(fund)}
-            toggleFavorite={this.toggleFavorite(
-              fund.personalDetails.isFavorite
-            )}
+            fund={fund}
+            toggleFavorite={this.toggleFavorite(fund, updateRow)}
             isAuthenticated={isAuthenticated}
           />
         )}

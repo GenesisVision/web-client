@@ -25,25 +25,16 @@ class ManagerPrograms extends Component {
     return fetchManagerPrograms({ ...filters, managerId });
   };
 
-  toggleFavorite = isFavorite => id => {
-    const isf = this.state[id] === undefined ? isFavorite : this.state[id];
-    this.setState({ [id]: !isf });
-    toggleFavoriteProgram(id, isf).catch(() => {
-      this.setState({ [id]: isf });
+  toggleFavorite = (program, updateRow) => () => {
+    const isFavorite = program.personalDetails.isFavorite;
+    const newProgram = {
+      ...program,
+      personalDetails: { ...program.personalDetails, isFavorite: !isFavorite }
+    };
+    updateRow(newProgram);
+    toggleFavoriteProgram(program.id, isFavorite).catch(() => {
+      updateRow(program);
     });
-  };
-
-  getProgram = program => {
-    if (this.state[program.id] !== undefined) {
-      return {
-        ...program,
-        personalDetails: {
-          ...program.personalDetails,
-          isFavorite: this.state[program.id]
-        }
-      };
-    }
-    return program;
   };
 
   render() {
@@ -77,13 +68,11 @@ class ManagerPrograms extends Component {
             </span>
           );
         }}
-        renderBodyRow={program => (
+        renderBodyRow={(program, updateRow) => (
           <ProgramTableRow
             title={title}
-            program={this.getProgram(program)}
-            toggleFavorite={this.toggleFavorite(
-              program.personalDetails.isFavorite
-            )}
+            program={program}
+            toggleFavorite={this.toggleFavorite(program, updateRow)}
             isAuthenticated={isAuthenticated}
           />
         )}

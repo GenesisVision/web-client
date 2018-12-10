@@ -11,7 +11,8 @@ const TableBody = ({
   tag: Tag,
   className,
   isPending,
-  view
+  view,
+  updateRow
 }) => {
   const setMessage = message => {
     switch (view) {
@@ -34,7 +35,7 @@ const TableBody = ({
       return <TableLoader view={view} />;
     if (items.length === 0) return setMessage(t("table.no-items"));
     return items.map((x, idx) => (
-      <Fragment key={x.id || idx}>{children(x)}</Fragment>
+      <Fragment key={x.id || idx}>{children(x, updateRow)}</Fragment>
     ));
   };
 
