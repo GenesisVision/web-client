@@ -22,8 +22,7 @@ class AboutLevelsContainerComponent extends Component {
     this.getInvestmentsLimits();
   }
   handlerCurrencyChange = e => {
-    this.setState({ currency: e.target.value });
-    this.getInvestmentsLimits();
+    this.setState({ currency: e.target.value }, this.getInvestmentsLimits);
   };
   render() {
     return (

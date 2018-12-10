@@ -1,8 +1,6 @@
 {
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
+  "workspaces": ["packages/*"],
   "dependencies": {
     "gv-api-web": "git+https://github.com/GenesisVision/gv-api-web.git#development",
     "gv-react-components": "^0.0.26"
@@ -12,14 +10,8 @@
   },
   "lint-staged": {
     "linters": {
-      "*.{js,json,scss,md}": [
-        "prettier --write",
-        "git add"
-      ],
-      "*.js": [
-        "import-sort --write",
-        "git add"
-      ]
+      "*.{js,json,scss,md}": ["prettier --write", "git add"],
+      "*.js": ["import-sort --write", "git add"]
     }
   },
   "importSort": {
@@ -34,10 +26,6 @@
       "last 2 firefox versions",
       "last 2 edge versions"
     ],
-    "production": [
-      ">0.25%",
-      "not op_mini all",
-      "ie 11"
-    ]
+    "production": [">0.25%", "not op_mini all", "ie 11"]
   }
 }
