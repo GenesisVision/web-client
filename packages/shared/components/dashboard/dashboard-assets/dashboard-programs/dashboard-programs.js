@@ -68,7 +68,7 @@ class DashboardPrograms extends Component {
         renderBodyRow={program => (
           <TableRow
             className={classnames({
-              "table__row--pretender": !program.rating.canLevelUp
+              "table__row--pretender": program.rating.canLevelUp
             })}
           >
             <TableCell className="programs-table__cell dashboard-programs__cell--title">
