@@ -14,13 +14,13 @@ class AboutLevelsContainerComponent extends Component {
     investmentsLimits: {}
   };
   getInvestmentsLimits() {
-    platformApi.v10PlatformLevelsGet(this.state.currency).then(data => {
+    platformApi.v10PlatformLevelsGet({currency: this.state.currency}).then(data => {
       this.setState({ investmentsLimits: data.levels });
     });
-  }
+  };
   componentDidMount() {
     this.getInvestmentsLimits();
-  }
+  };
   handlerCurrencyChange = e => {
     this.setState({ currency: e.target.value }, this.getInvestmentsLimits);
   };
