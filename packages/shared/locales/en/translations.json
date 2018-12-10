@@ -285,8 +285,7 @@
     "title": "About levels",
     "section": {
       "text-1": "Genesis level shows the experience and reliability of a manager.",
-      "text-2": "All of the investment programs of a manager that have not passed KYC are stuck on the first level and can’t level up unless the manager passes the KYC procedure. Once the verification process is completed, the investment programs of a manager receive a second level.",
-      "text-3": "Basic rules of levelling up"
+      "text-2": "All of the investment programs of a manager that have not passed KYC are stuck on the first level and can’t level up unless the manager passes the KYC procedure. Once the verification process is completed, the investment programs of a manager receive a second level."
     },
     "list": {
       "subtitle": "Further levels are given according to the algorithm:",
@@ -297,15 +296,6 @@
       "list-item-5": "All programs that have completed at least one trade participate in the rating.",
       "list-item-6": "Each level needs to have a minimum of ten participators. You can’t level up if fewer than ten people are competing against you.",
       "list-item-7": "The higher a manager’s level is — the more funds he can attract."
-    },
-    "limits": {
-      "1": 70,
-      "2": 700,
-      "3": 3500,
-      "4": 7000,
-      "5": 14000,
-      "6": 35000,
-      "7": 70000
     },
     "table-header": {
       "level": "Level",

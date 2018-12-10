@@ -49,9 +49,6 @@ class AboutLevelsComponent extends Component {
               <p className="about-levels__paragraph">
                 {t("about-levels-page.section.text-2")}
               </p>
-              <p className="about-levels__paragraph">
-                {t("about-levels-page.section.text-3")}
-              </p>
               <h4 className="about-levels__subtitle">
                 {t("about-levels-page.list.subtitle")}
               </h4>
