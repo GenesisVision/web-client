@@ -8,13 +8,12 @@ import { translate } from "react-i18next";
 class Pager extends PureComponent {
   generateVisiblePages = (first, count) => {
     const pages = [];
-    first = first > 0 ? first : 1;
     for (let i = first; i < first + count; i++) pages.push(i);
     return pages;
   };
 
   render() {
-    const { t, total, current, countVisiblePages, onPageChanged } = this.props;
+    const { total, current, countVisiblePages, onPageChanged } = this.props;
     const handleChange = page => () => onPageChanged(page);
     const PagerSeparator = () => <div className="pager__separator">...</div>;
     const PagerButton = ({ page, label }) => (
@@ -27,7 +26,13 @@ class Pager extends PureComponent {
         {label || page}
       </div>
     );
-    const firstPage = current - Math.floor(countVisiblePages / 2);
+    const pureFirstPage = current - Math.floor(countVisiblePages / 2);
+    const firstPage = pureFirstPage
+      ? pureFirstPage + countVisiblePages <= total
+        ? pureFirstPage
+        : total - countVisiblePages + 1
+      : 1;
+
     const visiblePages = this.generateVisiblePages(
       firstPage,
       countVisiblePages
@@ -41,19 +46,16 @@ class Pager extends PureComponent {
           </div>
         )}
         <div className="pager__pager-block">
-          {visiblePages
-            .filter(page => page <= total)
-            .map(page => (
-              <PagerButton key={page} page={page} />
-            ))}
+          {visiblePages.map(page => (
+            <PagerButton key={page} page={page} />
+          ))}
         </div>
-        {countVisiblePages + 1 < total &&
-          countVisiblePages + firstPage - 1 < total && (
-            <div className="pager__pager-block">
-              {firstPage + countVisiblePages < total && <PagerSeparator />}
-              <PagerButton page={total} />
-            </div>
-          )}
+        {countVisiblePages + firstPage <= total && (
+          <div className="pager__pager-block">
+            {firstPage + countVisiblePages < total && <PagerSeparator />}
+            <PagerButton page={total} />
+          </div>
+        )}
       </div>
     );
   }
