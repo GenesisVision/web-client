@@ -46,9 +46,11 @@ class Pager extends PureComponent {
           </div>
         )}
         <div className="pager__pager-block">
-          {visiblePages.map(page => (
-            <PagerButton key={page} page={page} />
-          ))}
+          {visiblePages
+            .filter(page => page <= total)
+            .map(page => (
+              <PagerButton key={page} page={page} />
+            ))}
         </div>
         {countVisiblePages + firstPage <= total && (
           <div className="pager__pager-block">
