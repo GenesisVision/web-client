@@ -8,13 +8,19 @@ import { translate } from "react-i18next";
 import Popover from "../popover/popover";
 import AssetStatusRequests from "./asset-status-requests";
 
+const ACTIVE = "Active";
+const INVESTING = "Investing";
+const WITHDRAWING = "Withdrawing";
+const ENDED = "Ended";
+const PENDING = "Pending";
+
 const getStatusClassName = (status, className) => {
   return classnames("asset-status", className, {
-    "asset-status__active": status === "Active",
-    "asset-status__investing": status === "Investing",
-    "asset-status__withdrawing": status === "Withdrawing",
-    "asset-status__ended": status === "Ended",
-    "asset-status__pending": status === "Pending"
+    "asset-status__active": status === ACTIVE,
+    "asset-status__investing": status === INVESTING,
+    "asset-status__withdrawing": status === WITHDRAWING,
+    "asset-status__ended": status === ENDED,
+    "asset-status__pending": status === PENDING
   });
 };
 
@@ -23,7 +29,10 @@ class AssetStatus extends PureComponent {
     anchor: null
   };
 
-  handleOpenDropdown = event => this.setState({ anchor: event.currentTarget });
+  handleOpenDropdown = event => {
+    if (this.props.status === INVESTING || this.props.status === WITHDRAWING)
+      this.setState({ anchor: event.currentTarget });
+  };
   handleCloseDropdown = () => this.setState({ anchor: null });
 
   render() {
