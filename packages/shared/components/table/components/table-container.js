@@ -8,7 +8,8 @@ import Table from "./table";
 
 class TableContainer extends PureComponent {
   componentDidMount() {
-    this.updateItems();
+    const { isFetchOnMount } = this.props;
+    if (isFetchOnMount) this.updateItems();
   }
 
   updateItems = changedFilters => {
