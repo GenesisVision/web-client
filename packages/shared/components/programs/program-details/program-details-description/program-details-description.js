@@ -18,6 +18,8 @@ import {
 } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
 
+import platformApi from "shared/services/api-client/platform-api";
+
 class ProgramDetailsDescription extends PureComponent {
   state = {
     isOpenInvestmentPopup: false,
@@ -25,7 +27,8 @@ class ProgramDetailsDescription extends PureComponent {
     isOpenEditProgramPopup: false,
     isOpenClosePeriodPopup: false,
     isOpenAboutLevels: false,
-    anchor: null
+    anchor: null,
+    investmentsLimits: {}
   };
 
   handleOpenAboutLevels = () => {
@@ -74,7 +77,16 @@ class ProgramDetailsDescription extends PureComponent {
   handleApplyClosePeriodPopup = updateDetails => () => {
     updateDetails();
   };
-
+  componentDidMount() {
+    platformApi.v10PlatformLevelsGet({currency: "GVT"}).then(data => {
+      this.setState({ investmentsLimits: data.levels });
+    });
+  };
+  getCurrentLimit(currentLevel) {
+    return this.state.investmentsLimits
+      .find(LevelInfo => LevelInfo.level === currentLevel)
+      .investmentLimit;
+  };
   render() {
     const {
       isOpenInvestmentPopup,
@@ -82,7 +94,8 @@ class ProgramDetailsDescription extends PureComponent {
       isOpenEditProgramPopup,
       isOpenClosePeriodPopup,
       isOpenAboutLevels,
-      anchor
+      anchor,
+      investmentsLimits
     } = this.state;
     const {
       t,
@@ -149,19 +162,18 @@ class ProgramDetailsDescription extends PureComponent {
                   {t("program-details-page.popover.genesis-level")}{" "}
                   {programDescription.level}
                 </h4>
-                <div className="popover-levels__subtitle">
-                  {t("program-details-page.popover.invest-limit")}
-                </div>
-                <div className="popover-levels__balance">
-                  <NumberFormat
-                    value={formatValue(
-                      programDescription.availableInvestment,
-                      5
-                    )}
-                    displayType="text"
-                    suffix={` GVT`}
-                  />
-                </div>
+                {investmentsLimits.length && (
+                  <StatisticItem
+                    accent
+                    label={t("program-details-page.popover.invest-limit")}>
+                    <NumberFormat
+                      value={formatValue(this.getCurrentLimit(programDescription.level))}
+                      thousandSeparator={" "}
+                      displayType="text"
+                      suffix={` GVT`}
+                    />
+                  </StatisticItem>
+                )}
               </div>
               <div className="popover-levels__block popover-levels__text-block">
                 <div className="popover-levels__text">
