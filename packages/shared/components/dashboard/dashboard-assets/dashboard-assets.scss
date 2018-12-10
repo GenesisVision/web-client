@@ -60,6 +60,7 @@ $create-icon-width: 140px;
 
   .table__row--pretender {
     background: linear-gradient(90deg, rgba($background-pretender, 0.13) 1.83%, rgba($background-pretender, 0.03) 100%);
+	  background-attachment: fixed;
 
     .table__cell:first-child {
       border-left: 1px solid $primary-color;
