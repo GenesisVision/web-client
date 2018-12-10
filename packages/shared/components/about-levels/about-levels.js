@@ -4,23 +4,36 @@ import React, { Component } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import Dialog from "shared/components/dialog/dialog";
-import { convertToCurrency } from "shared/utils/currency-converter";
+import { formatValue } from "../../utils/formatter";
+import StatisticItem from "../statistic-item/statistic-item";
+
+const renderLimits = (t, investmentsLimits, currency) => {
+  return investmentsLimits.map(levelInfo => {
+    return (
+      <div key={levelInfo.level} className="about-levels__limit">
+        <div
+          className={`about-levels__icon about-levels__icon--${
+            levelInfo.level
+          }`}
+        >
+          {levelInfo.level}
+        </div>
+        <StatisticItem accent label={t("about-levels-page.titles.limit")}>
+          <NumberFormat
+            value={formatValue(levelInfo.investmentLimit)}
+            thousandSeparator={" "}
+            displayType="text"
+            suffix={` ${currency}`}
+          />
+        </StatisticItem>
+      </div>
+    );
+  });
+};
 
 class AboutLevelsComponent extends Component {
-  numberFormat = (val, rate, currency) => {
-    return (
-      <NumberFormat
-        value={convertToCurrency(val, rate)}
-        prefix=""
-        suffix={` ${currency}`}
-        thousandSeparator={" "}
-        decimalScale={2}
-        displayType="text"
-      />
-    );
-  };
   render() {
-    const { t, open, onClose, rate } = this.props;
+    const { t, open, onClose, investmentsLimits, currency } = this.props;
     return (
       <Dialog wider open={open} onClose={onClose} className="about-levels">
         <div className="about-levels__container">
@@ -73,111 +86,8 @@ class AboutLevelsComponent extends Component {
                 {t("about-levels-page.titles.limits")}
               </h4>
               <div className="about-levels__limits">
-                <div className="about-levels__limit">
-                  <div className="div about-levels__icon one">1</div>
-                  <div className="about-levels__values">
-                    <div className="about-levels__mute-title">
-                      {t("about-levels-page.titles.limit")}
-                    </div>
-                    <div className="about-levels__value">
-                      {this.numberFormat(
-                        t("about-levels-page.limits.1"),
-                        rate,
-                        "GVT"
-                      )}
-                    </div>
-                  </div>
-                </div>
-                <div className="about-levels__limit">
-                  <div className="div about-levels__icon two">2</div>
-                  <div className="about-levels__values">
-                    <div className="about-levels__mute-title">
-                      {t("about-levels-page.titles.limit")}
-                    </div>
-                    <div className="about-levels__value">
-                      {this.numberFormat(
-                        t("about-levels-page.limits.2"),
-                        rate,
-                        "GVT"
-                      )}
-                    </div>
-                  </div>
-                </div>
-                <div className="about-levels__limit">
-                  <div className="div about-levels__icon three">3</div>
-                  <div className="about-levels__values">
-                    <div className="about-levels__mute-title">
-                      {t("about-levels-page.titles.limit")}
-                    </div>
-                    <div className="about-levels__value">
-                      {this.numberFormat(
-                        t("about-levels-page.limits.3"),
-                        rate,
-                        "GVT"
-                      )}
-                    </div>
-                  </div>
-                </div>
-                <div className="about-levels__limit">
-                  <div className="div about-levels__icon four">4</div>
-                  <div className="about-levels__values">
-                    <div className="about-levels__mute-title">
-                      {t("about-levels-page.titles.limit")}
-                    </div>
-                    <div className="about-levels__value">
-                      {this.numberFormat(
-                        t("about-levels-page.limits.4"),
-                        rate,
-                        "GVT"
-                      )}
-                    </div>
-                  </div>
-                </div>
-                <div className="about-levels__limit">
-                  <div className="div about-levels__icon five">5</div>
-                  <div className="about-levels__values">
-                    <div className="about-levels__mute-title">
-                      {t("about-levels-page.titles.limit")}
-                    </div>
-                    <div className="about-levels__value">
-                      {this.numberFormat(
-                        t("about-levels-page.limits.5"),
-                        rate,
-                        "GVT"
-                      )}
-                    </div>
-                  </div>
-                </div>
-                <div className="about-levels__limit">
-                  <div className="div about-levels__icon six">6</div>
-                  <div className="about-levels__values">
-                    <div className="about-levels__mute-title">
-                      {t("about-levels-page.titles.limit")}
-                    </div>
-                    <div className="about-levels__value">
-                      {this.numberFormat(
-                        t("about-levels-page.limits.6"),
-                        rate,
-                        "GVT"
-                      )}
-                    </div>
-                  </div>
-                </div>
-                <div className="about-levels__limit">
-                  <div className="div about-levels__icon seven">7</div>
-                  <div className="about-levels__values">
-                    <div className="about-levels__mute-title">
-                      {t("about-levels-page.titles.limit")}
-                    </div>
-                    <div className="about-levels__value">
-                      {this.numberFormat(
-                        t("about-levels-page.limits.7"),
-                        rate,
-                        "GVT"
-                      )}
-                    </div>
-                  </div>
-                </div>
+                {investmentsLimits.length &&
+                  renderLimits(t, investmentsLimits, currency)}
               </div>
             </div>
           </div>

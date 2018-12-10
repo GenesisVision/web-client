@@ -106,11 +106,15 @@ $mobile-title-divider: 2;
     border-radius: $border-radius 0 0 $border-radius;
   }
   &__limit {
+	  @include vertical-paddings($small-padding);
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    padding: $small-padding/$mobile-padding-divider 0;
+
+	  .statistics-item {
+		  padding-bottom: 0;
+	  }
   }
   &__currency {
     display: flex;
@@ -148,25 +152,26 @@ $mobile-title-divider: 2;
     justify-content: center;
     align-items: center;
 	  flex: 0 0 auto;
-    &.one {
+	  margin-right: 24px;
+    &--1 {
       background-color: $level-color-1;
     }
-    &.two {
+    &--2 {
       background-color: $level-color-2;
     }
-    &.three {
+    &--3 {
       background-color: $level-color-3;
     }
-    &.four {
+    &--4 {
       background-color: $level-color-4;
     }
-    &.five {
+    &--5 {
       background-color: $level-color-5;
     }
-    &.six {
+    &--6 {
       background-color: $level-color-6;
     }
-    &.seven {
+    &--7 {
       background-color: $level-color-7;
     }
   }
@@ -188,9 +193,6 @@ $mobile-title-divider: 2;
       margin-left: $padding-small;
       padding: $padding-small;
 	    max-width: 300px;
-    }
-    &__limit {
-      padding: $small-padding 0;
     }
     &__mute-title {
       font-size: $small-font-size;
