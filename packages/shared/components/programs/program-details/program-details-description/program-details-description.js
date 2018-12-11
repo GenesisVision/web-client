@@ -162,6 +162,12 @@ class ProgramDetailsDescription extends PureComponent {
                   {t("program-details-page.popover.genesis-level")}{" "}
                   {programDescription.level}
                 </h4>
+                {programDescription.rating.canLevelUp && (
+                  <StatisticItem accent label={t("level-tooltip.level-up")}>
+                    {t("level-tooltip.top10")}
+                  </StatisticItem>
+                )}
+
                 {investmentsLimits.length && (
                   <StatisticItem
                     accent
