@@ -2,6 +2,7 @@ import "./dashboard-portfolio-chart-section.scss";
 
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import DashboardInRequestsContainer from "shared/components/dashboard/dashboard-portfolio-chart-section/dashboard-in-requests/dashboard-in-requests-container";
 import Surface from "shared/components/surface/surface";
 
@@ -9,46 +10,38 @@ import {
   cancelRequest,
   getInRequests
 } from "../../services/dashboard-in-requests.service";
+import { getTopAssets } from "../../services/dashboard.service";
 import DashboardChartAssetsContainer from "./dashboard-chart-assets/dashboard-chart-assets-container";
 import DashboardPortfolioChartContainer from "./dashboard-chart/dashboard-portfolio-chart-container";
 import DashboardGetStarted from "./dashboard-get-started";
 
 class DashboardPortfolioChartSection extends Component {
-  getAssets = () => {
-    const { programsData, fundsData } = this.props;
+  componentWillMount() {
+    const { service } = this.props;
+    service.getTopAssets();
+  }
 
-    if (programsData && fundsData) {
-      return { programs: programsData.programs, funds: fundsData.funds };
-    }
-    return null;
-  };
-
-  hasAssets = () => {
-    const assets = this.getAssets();
-    return assets && (assets.programs.length > 0 || assets.funds.length > 0);
-  };
   render() {
-    const assets = this.getAssets();
-    const { isNewUser } = this.props;
-    if (!assets) return null;
-    if (!isNewUser)
+    const { isNewUser, topAssets } = this.props;
+    if (isNewUser) {
       return (
         <Surface className="dashboard-portfolio-chart-section">
-          <h3 className="dashboard-portfolio-chart-section__heading">Chart</h3>
-          <div className="dashboard-portfolio-chart-section__actions">
-            <DashboardChartAssetsContainer assets={this.getAssets()} />
-            <DashboardInRequestsContainer
-              cancelRequest={cancelRequest}
-              getInRequests={getInRequests}
-            />
-          </div>
-          <DashboardPortfolioChartContainer assets={this.getAssets()} />
+          <DashboardGetStarted />
         </Surface>
       );
-
+    }
+    if (!topAssets) return null;
     return (
       <Surface className="dashboard-portfolio-chart-section">
-        <DashboardGetStarted />
+        <h3 className="dashboard-portfolio-chart-section__heading">Chart</h3>
+        <div className="dashboard-portfolio-chart-section__actions">
+          <DashboardChartAssetsContainer />
+          <DashboardInRequestsContainer
+            cancelRequest={cancelRequest}
+            getInRequests={getInRequests}
+          />
+        </div>
+        <DashboardPortfolioChartContainer />
       </Surface>
     );
   }
@@ -56,16 +49,20 @@ class DashboardPortfolioChartSection extends Component {
 
 const mapStateToProps = state => {
   const { info } = state.profileHeader;
-  let isNewUser = null;
-  if (info.data) {
-    isNewUser = info.data.isNewUser;
-  }
-  const { programs, funds } = state.dashboard;
+  const { topAssets } = state.dashboard;
   return {
-    isNewUser,
-    programsData: programs.itemsData.data,
-    fundsData: funds.itemsData.data
+    isNewUser: info.data && info.data.isNewUser,
+    topAssets
   };
 };
 
-export default connect(mapStateToProps)(DashboardPortfolioChartSection);
+const mapDispatchToProps = dispatch => {
+  return {
+    service: bindActionCreators({ getTopAssets }, dispatch)
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DashboardPortfolioChartSection);
