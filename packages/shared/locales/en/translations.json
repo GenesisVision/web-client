@@ -334,6 +334,9 @@
       "profit": "Profit",
       "status": "Status",
       "withdraw": "Withdraw",
+      "close-fund": "Close fund",
+      "close-fund-notification": "You are about to close the fund. After you confirm this, all your funds will be withdrawn, no one will be able to invest in the fund anymore, investors will still be able to withdraw their funds with a zero commission.",
+      "close-fund-notification-success": "Request to close the fund was sent successfully.",
       "withdraw-notice-text": "You can withdraw only the invested funds, the profit will be withdrawn to your account at the end of the period automatically"
     },
     "statistics": {
