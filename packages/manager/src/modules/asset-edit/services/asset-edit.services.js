@@ -1,9 +1,8 @@
+import { FUND, PROGRAM } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
 import filesService from "shared/services/file-service";
-
-import { FUND, PROGRAM } from "../asset-edit.constants";
 
 export const editAsset = (id, editAssetData, type) => dispatch => {
   const authorization = authService.getAuthArg();
