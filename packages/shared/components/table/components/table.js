@@ -54,7 +54,8 @@ class Table extends Component {
       paging,
       updatePaging,
       isPending,
-      emptyMessage
+      emptyMessage,
+      updateRow
     } = this.props;
     if (!items && emptyMessage) return emptyMessage;
     return (
@@ -106,6 +107,7 @@ class Table extends Component {
                 className="table__body"
                 tag="tbody"
                 view={TABLE_VIEW}
+                updateRow={updateRow}
               >
                 {renderBodyRow}
               </TableBody>
