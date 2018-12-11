@@ -687,6 +687,7 @@
       "success-message": "Successful logout on another devices."
     },
     "signup": {
+      "username-field-text": "Username",
       "footer-text": "Have an account already?",
       "title": "Sign up",
       "email-field-text": "Email address",
@@ -813,6 +814,9 @@
     },
     "dashboard-page": {
       "title": "Dashboard",
+      "chart-section": {
+        "in-requests": "In Requests"
+      },
       "requests": {
         "success-cancel-request": "Request canceled successfully",
         "failure-cancel-request": "Failed to cancel request"
@@ -922,6 +926,13 @@
       "favorite-programs": "Favorite programs",
       "create-program-text": "Do not have any programs yet",
       "create-fund-text": "Do not have any fund yet",
+      "chart-section": {
+        "header": "Chart",
+        "my-assets": "My Assets",
+        "in-requests": "In Requests",
+        "programs": "Programs",
+        "funds": "Funds"
+      },
       "requests": {
         "success-cancel-request": "Request canceled successfully",
         "failure-cancel-request": "Failed to cancel request"

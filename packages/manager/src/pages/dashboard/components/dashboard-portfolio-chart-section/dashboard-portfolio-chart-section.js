@@ -1,8 +1,10 @@
 import "./dashboard-portfolio-chart-section.scss";
 
 import React, { Component } from "react";
+import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { compose } from "redux";
 import DashboardInRequestsContainer from "shared/components/dashboard/dashboard-portfolio-chart-section/dashboard-in-requests/dashboard-in-requests-container";
 import Surface from "shared/components/surface/surface";
 
@@ -22,7 +24,7 @@ class DashboardPortfolioChartSection extends Component {
   }
 
   render() {
-    const { isNewUser, topAssets } = this.props;
+    const { t, isNewUser, topAssets } = this.props;
     if (isNewUser) {
       return (
         <Surface className="dashboard-portfolio-chart-section">
@@ -33,7 +35,9 @@ class DashboardPortfolioChartSection extends Component {
     if (!topAssets) return null;
     return (
       <Surface className="dashboard-portfolio-chart-section">
-        <h3 className="dashboard-portfolio-chart-section__heading">Chart</h3>
+        <h3 className="dashboard-portfolio-chart-section__heading">
+          {t("manager.dashboard-page.chart-section.header")}
+        </h3>
         <div className="dashboard-portfolio-chart-section__actions">
           <DashboardChartAssetsContainer />
           <DashboardInRequestsContainer
@@ -62,7 +66,10 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+export default compose(
+  translate(),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
 )(DashboardPortfolioChartSection);
