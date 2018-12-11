@@ -1,10 +1,10 @@
-import { setTwoFactorRequirement } from "shared/actions/2fa-actions";
-import authActions from "shared/actions/auth-actions";
 import { HOME_ROUTE } from "pages/app/app.routes";
 import { LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "pages/auth/login/login.routes";
 import { push } from "react-router-redux";
-import authService from "shared/services/auth-service";
+import { setTwoFactorRequirement } from "shared/actions/2fa-actions";
+import authActions from "shared/actions/auth-actions";
 import clearDataActionFactory from "shared/actions/clear-data.factory";
+import authService from "shared/services/auth-service";
 
 import {
   LOGIN,
@@ -25,11 +25,7 @@ export const login = (loginData, from, setSubmitting) => dispatch => {
       dispatch(push(from));
     })
     .catch(e => {
-      if (
-        e.response &&
-        e.response.body &&
-        e.response.body.code === "RequiresTwoFactor"
-      ) {
+      if (e.code === "RequiresTwoFactor") {
         dispatch(
           storeTwoFactor({
             ...loginData,

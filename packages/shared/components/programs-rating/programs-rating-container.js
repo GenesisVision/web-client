@@ -1,14 +1,13 @@
 import "shared/components/programs-rating/programs-rating.scss";
 
 import React, { Component } from "react";
-
-import TabsContainer from "shared/components/tabs-container/tabs-container";
-import { bindActionCreators, compose } from "redux";
+import { translate } from "react-i18next";
 import connect from "react-redux/es/connect/connect";
+import { bindActionCreators, compose } from "redux";
 import ProgramsRatingTables from "shared/components/programs-rating/programs-rating-tables";
-import Surface from "shared/components/surface/surface";
 import { getLevelUpSummary } from "shared/components/programs-rating/services/program-rating-service";
-import { LEVELS } from "./program-rating.constants";
+import Surface from "shared/components/surface/surface";
+import TabsContainer from "shared/components/tabs-container/tabs-container";
 
 class ProgramsRatingContainer extends Component {
   state = {
@@ -20,30 +19,42 @@ class ProgramsRatingContainer extends Component {
     const { service } = this.props;
     service.getLevelUpSummary().then(res => {
       const { levelData } = res.value;
-      const navigateTabs = Object.keys(levelData)
-        .filter(tab => LEVELS[tab])
-        .map(tab => ({
-          level: tab,
-          name: LEVELS[tab],
-          count: levelData[tab].totalOwn
-        }));
+      const navigateTabs = levelData.map(item => ({
+        ...item,
+        name: String(item.level),
+        label: (
+          <div className="programs-rating__tab">
+            <div className="programs-rating__tab-container">
+              <div className="programs-rating__back">{item.level}</div>
+              <div className="programs-rating__back-arrow">&rarr;</div>
+              <div className="programs-rating__back">{item.level + 1}</div>
+            </div>
+            {item.totalOwn !== 0 && (
+              <span className="programs-rating__tab-count">
+                {item.totalOwn}
+              </span>
+            )}
+          </div>
+        )
+      }));
       const tab = navigateTabs[0];
       this.setState({ navigateTabs, tab });
     });
   }
+
   handleTabChange = (e, tab) => {
     const { navigateTabs } = this.state;
-    const navigateTab = navigateTabs.find(item => item.name === tab);
-    this.setState({ tab: navigateTab });
+    this.setState({ tab: navigateTabs.find(item => item.name === tab) });
   };
+
   render() {
-    const { id, levelData, routes } = this.props;
+    const { t, id, levelData, routes, title } = this.props;
     const { tab, navigateTabs } = this.state;
 
     if (!tab || !levelData || !navigateTabs) return null;
-    const currentLevelData = levelData[tab.level];
     return (
       <Surface className="programs-rating">
+        <h3 className="programs-rating__head">{t("rating-page.title")}</h3>
         <div className="programs-rating__tabs">
           <TabsContainer
             programFacetRoute={routes.PROGRAMS_RATING_TAB_ROUTE}
@@ -53,12 +64,7 @@ class ProgramsRatingContainer extends Component {
             levelData={levelData}
           />
         </div>
-        <ProgramsRatingTables
-          key={tab.level}
-          tab={tab.level}
-          id={id}
-          levelData={currentLevelData}
-        />
+        <ProgramsRatingTables key={tab.level} tab={tab} id={id} title={title} />
       </Surface>
     );
   }
@@ -75,6 +81,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default compose(
+  translate(),
   connect(
     mapStateToProps,
     mapDispatchToProps

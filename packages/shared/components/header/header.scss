@@ -33,6 +33,10 @@
     align-items: center;
   }
 
+  .header__currency {
+    min-width: auto;
+  }
+
   &__search {
     display: none;
 
@@ -63,7 +67,7 @@
       flex-grow: 2;
       justify-content: space-between;
 
-      .select {
+      .header__currency {
         min-width: 100px;
       }
     }

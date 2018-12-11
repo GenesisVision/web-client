@@ -4,17 +4,17 @@ import { translate } from "react-i18next";
 import ProgramsRatingStats from "./programs-rating-stats";
 import ProgramsRatingTable from "./programs-rating-table";
 
-const ProgramsRatingTables = ({ t, id, tab, levelData }) => (
+const ProgramsRatingTables = ({ t, id, tab, title }) => (
   <Fragment>
     {id && (
       <ProgramsRatingTable
-        tab={tab}
-        title={t("rating.self-pretendents-title")}
+        tab={tab.level}
+        title={t("rating-page.self-pretendents-title")}
         managerId={id}
       />
     )}
-    {levelData && <ProgramsRatingStats levelData={levelData} />}
-    <ProgramsRatingTable tab={tab} title={t("rating.pretendents-title")} />
+    <ProgramsRatingStats levelData={tab} />
+    <ProgramsRatingTable tab={tab.level} title={title} disableTitle />
   </Fragment>
 );
 

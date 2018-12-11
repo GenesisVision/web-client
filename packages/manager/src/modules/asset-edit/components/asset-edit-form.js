@@ -2,17 +2,18 @@ import { Field, withFormik } from "formik";
 import {
   GVButton,
   GVFormikField,
-  GVTextField,
-  GVProgramPeriod
+  GVProgramPeriod,
+  GVTextField
 } from "gv-react-components";
 import React from "react";
 import { translate } from "react-i18next";
 import { compose } from "redux";
-import ProgramDefaultImage from "../../../pages/create-program/components/create-program-settings/program-default-image";
 import InputImage from "shared/components/form/input-image/input-image";
-import editAssetSettingsValidationSchema from "./asset-edit.validators";
+import { FUND, PROGRAM } from "shared/constants/constants";
 import filesService from "shared/services/file-service";
-import { FUND, PROGRAM } from "../asset-edit.constants";
+
+import ProgramDefaultImage from "../../../pages/create-program/components/create-program-settings/program-default-image";
+import editAssetSettingsValidationSchema from "./asset-edit.validators";
 
 const AssetEditForm = ({
   t,
@@ -22,6 +23,7 @@ const AssetEditForm = ({
   currency,
   disabled,
   handleSubmit,
+  title,
   errorMessage,
   setFieldValue,
   errors,
@@ -34,67 +36,79 @@ const AssetEditForm = ({
     errors.logo &&
     (errors.logo.width || errors.logo.height || errors.logo.size);
   return (
-    <form className="dialog__bottom" id="edit-form" onSubmit={handleSubmit}>
-      <GVFormikField
-        type="text"
-        name="title"
-        label={t("create-program-page.settings.fields.name")}
-        autoComplete="off"
-        component={GVTextField}
-      />
-      <div className="edit-program__description">
+    <form id="edit-form" onSubmit={handleSubmit}>
+      <div className="dialog__top">
+        <div className="dialog__header">
+          <h2>
+            {type === PROGRAM && t("manager.edit-program.title")}
+            {type === FUND && t("manager.edit-fund.title")}
+          </h2>
+          <p>{title}</p>
+        </div>
         <GVFormikField
-          type="textarea"
-          name="description"
-          label={t("create-program-page.settings.fields.description")}
+          type="text"
+          name="title"
+          label={t("manager.create-program-page.settings.fields.name")}
+          autoComplete="off"
           component={GVTextField}
         />
-        {values.description.length > 0 && (
-          <span className="create-program-settings__description-chars">
-            {values.description.length}
-            <GVProgramPeriod
-              start={0}
-              end={500}
-              value={values.description.length}
-            />
-          </span>
-        )}
-      </div>
-      <div className="create-program-settings__logo-title">
-        {type === PROGRAM &&
-          t("create-program-page.settings.fields.upload-logo")}
-        {type === FUND && t("create-fund-page.settings.fields.upload-logo")}
-      </div>
-      <div className="create-program-settings__logo-notice">
-        {t("create-program-page.settings.fields.upload-logo-rules")}
-      </div>
-      <div className="create-program-settings__logo-section edit-program__logo-section">
-        <div className="create-program-settings__file-field-container">
-          <Field
-            name="logo"
-            render={({ field }) => (
-              <InputImage
-                {...field}
-                defaultImage={ProgramDefaultImage}
-                onChange={setFieldValue}
-                notifyError={notifyError}
-                alt="Program logo"
-                error={imageInputError}
-              />
-            )}
+        <div className="edit-program__description">
+          <GVFormikField
+            type="textarea"
+            name="description"
+            label={t("manager.create-program-page.settings.fields.description")}
+            component={GVTextField}
           />
+          {values.description.length > 0 && (
+            <span className="create-program-settings__description-chars">
+              {values.description.length}
+              <GVProgramPeriod
+                start={0}
+                end={500}
+                value={values.description.length}
+              />
+            </span>
+          )}
         </div>
       </div>
-      <div className="form-error">{errorMessage || serverError}</div>
-      <div className="dialog__buttons">
-        <GVButton
-          type="submit"
-          id="signUpFormSubmit"
-          className="invest-form__submit-button"
-          disabled={disabled || !dirty}
-        >
-          {t("edit-program.confirm")}
-        </GVButton>
+      <div className="dialog__bottom">
+        <div className="create-program-settings__logo-title">
+          {type === PROGRAM &&
+            t("manager.create-program-page.settings.fields.upload-logo")}
+          {type === FUND &&
+            t("manager.create-fund-page.settings.fields.upload-logo")}
+        </div>
+        <div className="create-program-settings__logo-notice">
+          {t("manager.create-program-page.settings.fields.upload-logo-rules")}
+        </div>
+        <div className="create-program-settings__logo-section edit-program__logo-section">
+          <div className="create-program-settings__file-field-container">
+            <Field
+              name="logo"
+              render={({ field }) => (
+                <InputImage
+                  {...field}
+                  defaultImage={ProgramDefaultImage}
+                  onChange={setFieldValue}
+                  notifyError={notifyError}
+                  alt="Program logo"
+                  error={imageInputError}
+                />
+              )}
+            />
+          </div>
+        </div>
+        <div className="form-error">{errorMessage || serverError}</div>
+        <div className="dialog__buttons">
+          <GVButton
+            type="submit"
+            id="signUpFormSubmit"
+            className="invest-form__submit-button"
+            disabled={disabled || !dirty}
+          >
+            {t("manager.edit-program.confirm")}
+          </GVButton>
+        </div>
       </div>
     </form>
   );

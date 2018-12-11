@@ -14,15 +14,15 @@ export const getInRequests = () => (dispatch, getState) => {
   dispatch(fetchInRequests(authorization, 0, 100));
 };
 
-export const cancelRequest = (requestId, type, onFinally) => (
+export const cancelRequest = ({ id, type, onFinally }) => (
   dispatch,
   getState
 ) => {
   const authorization = authService.getAuthArg();
   const action =
     type === "Program"
-      ? cancelProgramRequest(authorization, requestId)
-      : cancelFundRequest(authorization, requestId);
+      ? cancelProgramRequest(authorization, id)
+      : cancelFundRequest(authorization, id);
 
   return dispatch(action)
     .then(() => {
@@ -31,7 +31,9 @@ export const cancelRequest = (requestId, type, onFinally) => (
       dispatch(getPortfolioEvents());
       dispatch(
         alertMessageActions.success(
-          "dashboard-page.requests.success-cancel-request",
+          `${
+            process.env.REACT_APP_PLATFORM
+          }.dashboard-page.requests.success-cancel-request`,
           true
         )
       );
@@ -40,7 +42,9 @@ export const cancelRequest = (requestId, type, onFinally) => (
     .catch(ex => {
       dispatch(
         alertMessageActions.error(
-          "dashboard-page.requests.failure-cancel-request",
+          `${
+            process.env.REACT_APP_PLATFORM
+          }.dashboard-page.requests.failure-cancel-request`,
           true
         )
       );

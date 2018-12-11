@@ -8,11 +8,11 @@ const GoogleStep2 = ({ t, authenticatorUri, sharedKey, className }) => {
   return (
     <div className={classnames("google-auth__step", className)}>
       <div className="google-auth__count">02</div>
-      <div className="google-auth__title">{t("2fa.scan-code")}</div>
+      <div className="google-auth__title">{t("2fa-page.scan-code")}</div>
       <div className="google-auth__qr">
         <GVqr value={authenticatorUri} />
       </div>
-      <p className="google-auth__alt-text">{t("2fa.alt-code")}</p>
+      <p className="google-auth__alt-text">{t("2fa-page.alt-code")}</p>
       <div className="google-auth__alt-code">{sharedKey}</div>
     </div>
   );

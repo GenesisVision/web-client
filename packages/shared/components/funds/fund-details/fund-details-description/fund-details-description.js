@@ -64,6 +64,7 @@ class FundDetailsDescription extends PureComponent {
     } = this.state;
     const {
       t,
+      role,
       possibleReallocationTime,
       canReallocate,
       status,
@@ -112,7 +113,7 @@ class FundDetailsDescription extends PureComponent {
           </div>
         </div>
         <div className="details-description__main">
-          <h1 className="app__title-details">{fundDescription.title}</h1>
+          <h1 className="title-small-padding">{fundDescription.title}</h1>
           <Link
             to={{
               pathname: composeManagerDetailsUrl(fundDescription.manager.url),
@@ -258,6 +259,8 @@ class FundDetailsDescription extends PureComponent {
                 assetCurrency={"GVT"}
                 {...investmentData}
                 onChangeInvestmentStatus={onChangeInvestmentStatus}
+                asset={FUND}
+                role={role}
               />
             )}
           </div>

@@ -8,9 +8,8 @@ import { ChartPeriodType } from "shared/components/chart/chart-period/chart-peri
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Surface from "shared/components/surface/surface";
 
-const FundDetailsStatistics = ({ t, statisticData, period }) => {
-  const { data: statistic, isPending } = statisticData;
-  if (!statistic || isPending) return null;
+const FundDetailsStatistics = ({ t, statistic, period }) => {
+  if (!statistic) return null;
   return (
     <Surface className="surface--horizontal-paddings details-statistics">
       <h3>{t("fund-details-page.statistics.heading")}</h3>

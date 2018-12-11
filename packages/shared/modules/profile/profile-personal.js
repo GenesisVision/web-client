@@ -30,14 +30,14 @@ class ProfilePersonal extends Component {
             <div className="profile__row">
               <ProfileField
                 className="profile__id"
-                label={t("profile.id")}
+                label={t("profile-page.id")}
                 value={info.id}
                 name="id"
               />
             </div>
             <div className="profile__row">
               <ProfileField
-                label={t("profile.login")}
+                label={t("profile-page.login")}
                 value={info.userName}
                 name="userName"
               />
@@ -48,7 +48,7 @@ class ProfilePersonal extends Component {
                 type="textarea"
                 name="about"
                 value={info.about}
-                label={t("profile.about")}
+                label={t("profile-page.about")}
               />
             </div>
           </td>

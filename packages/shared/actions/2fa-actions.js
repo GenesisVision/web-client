@@ -1,4 +1,4 @@
-import authProxy from "shared/services/api-client/auth-api";
+import authApi from "shared/services/api-client/auth-api";
 import authService from "shared/services/auth-service";
 
 export const TWO_FACTOR_AUTH = "TWO_FACTOR_AUTH";
@@ -7,7 +7,7 @@ export const TWO_FACTOR_SET_REQUIREMENT = "TWO_FACTOR_SET_REQUIREMENT";
 export const fetchTwoFactor = () => {
   return {
     type: TWO_FACTOR_AUTH,
-    payload: authProxy.v10Auth2faGet(authService.getAuthArg())
+    payload: authApi.v10Auth2faGet(authService.getAuthArg())
   };
 };
 

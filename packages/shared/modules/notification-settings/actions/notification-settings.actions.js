@@ -1,6 +1,4 @@
-import notificationsApi, {
-  notificationsProxyApi
-} from "shared/services/api-client/notifications-api";
+import notificationsApi from "shared/services/api-client/notifications-api";
 import authService from "shared/services/auth-service";
 
 export const NOTIFICATION_SETTINGS = "NOTIFICATION_SETTINGS";
@@ -24,7 +22,7 @@ export const fetchNotificationSettings = () => ({
 
 export const addNotificationSetting = opts => ({
   type: ADD_NOTIFICATION_SETTING,
-  payload: notificationsProxyApi.v10NotificationsSettingsAddPost(
+  payload: notificationsApi.v10NotificationsSettingsAddPost(
     authService.getAuthArg(),
     opts
   )

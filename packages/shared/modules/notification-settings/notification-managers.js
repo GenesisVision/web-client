@@ -26,7 +26,7 @@ class NotificationManagers extends Component {
     });
     return (
       <div>
-        <h3>{t("notifications.managers")}</h3>
+        <h3>{t("notifications-page.managers")}</h3>
         <div className="program-notification__list">{items}</div>
       </div>
     );

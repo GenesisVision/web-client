@@ -1,10 +1,10 @@
-import authService from "shared/services/auth-service";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import { managerApiProxy } from "shared/services/api-client/manager-api";
+import managerApi from "shared/services/api-client/manager-api";
+import authService from "shared/services/auth-service";
 
 export const getProgramWithdrawInfo = id => (dispatch, getState) => {
   const { accountSettings } = getState();
-  return managerApiProxy.v10ManagerProgramsByIdWithdrawInfoByCurrencyGet(
+  return managerApi.v10ManagerProgramsByIdWithdrawInfoByCurrencyGet(
     id,
     accountSettings.currency,
     authService.getAuthArg()

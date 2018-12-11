@@ -1,5 +1,6 @@
 import React, { Fragment, PureComponent } from "react";
 import ProgramDetailsDescription from "shared/components/programs/program-details/program-details-description/program-details-description";
+import { PROGRAM } from "shared/constants/constants";
 import { toggleFavoriteProgram } from "shared/modules/favorite-asset/services/favorite-program.service";
 
 const composeInvestmentData = programDetails => {
@@ -29,10 +30,10 @@ class ProgramDetailsDescriptionSection extends PureComponent {
 
   static getDerivedStateFromProps(props, state) {
     let newState = {};
-    if (state.prevProps !== props.programDescriptionData) {
-      newState.prevProps = props.programDescriptionData;
-      newState.programDescription = props.programDescriptionData.data;
-      newState.ui = { isPending: props.programDescriptionData.isPending };
+    if (state.prevProps !== props.programDescription) {
+      newState.prevProps = props.programDescription;
+      newState.programDescription = props.programDescription;
+      newState.ui = { isPending: props.programDescription };
     }
 
     return newState;
@@ -103,6 +104,7 @@ class ProgramDetailsDescriptionSection extends PureComponent {
     return (
       <Fragment>
         <ProgramDetailsDescription
+          PROGRAM={PROGRAM}
           onReinvestingClick={this.handleOnReinvestingClick}
           programDescription={programDescription}
           isReinvestPending={ui.isReinvestPending}

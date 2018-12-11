@@ -46,11 +46,17 @@ class AuthLayout extends Component {
             <GvBrand />
           </NavLink>
           <blockquote className="auth__quote">
-            {t(`auth.quotes.${quoteNo}.quote`)}
+            {t(
+              `${process.env.REACT_APP_PLATFORM}.auth-quotes.${quoteNo}.quote`
+            )}
             <footer className="auth__quote-footer">
               —{" "}
               <cite className="auth__quote-author">
-                {t(`auth.quotes.${quoteNo}.author`)}
+                {t(
+                  `${
+                    process.env.REACT_APP_PLATFORM
+                  }.auth-quotes.${quoteNo}.author`
+                )}
               </cite>
             </footer>
           </blockquote>

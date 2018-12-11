@@ -9,21 +9,25 @@ import { KYC_ROUTE, PROFILE_ROUTE, SETTINGS_ROUTE } from "./profile.constants";
 
 const ProfileLayout = ({ route, children, t = string => string }) => {
   return (
-    <Page title={t("profile.title")}>
-      <h1>{t("profile.title")}</h1>
+    <Page title={t("profile-page.title")}>
+      <h1>{t("profile-page.title")}</h1>
       <GVTabs value={route}>
         <GVTab
           label={
-            <Link to={PROFILE_ROUTE}>{t("profile.tabs.personal-details")}</Link>
+            <Link to={PROFILE_ROUTE}>
+              {t("profile-page.tabs.personal-details")}
+            </Link>
           }
           value="details"
         />
         <GVTab
-          label={<Link to={KYC_ROUTE}>{t("profile.tabs.verify")}</Link>}
+          label={<Link to={KYC_ROUTE}>{t("profile-page.tabs.verify")}</Link>}
           value="verify"
         />
         <GVTab
-          label={<Link to={SETTINGS_ROUTE}>{t("profile.tabs.settings")}</Link>}
+          label={
+            <Link to={SETTINGS_ROUTE}>{t("profile-page.tabs.settings")}</Link>
+          }
           value="settings"
         />
       </GVTabs>

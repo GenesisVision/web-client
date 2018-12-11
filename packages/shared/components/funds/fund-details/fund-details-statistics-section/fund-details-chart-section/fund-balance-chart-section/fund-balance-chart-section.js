@@ -7,12 +7,11 @@ import { formatValue } from "shared/utils/formatter";
 import FundBalanceChart from "./fund-balance-chart";
 
 const ProgramBalanceChartSection = ({
-  balanceChartData,
+  balanceChart,
   period,
   onPeriodChange,
   currency
 }) => {
-  const { data: balanceChart } = balanceChartData;
   if (!balanceChart) return null;
   return (
     <Fragment>
@@ -43,7 +42,7 @@ const ProgramBalanceChartSection = ({
       <div className="details-chart__profit">
         <FundBalanceChart
           balanceChart={balanceChart.balanceChart}
-          currency={"BTC"}
+          currency={"GVT"}
         />
       </div>
     </Fragment>

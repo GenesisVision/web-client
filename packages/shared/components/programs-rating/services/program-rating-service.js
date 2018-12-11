@@ -3,7 +3,6 @@ import {
   fetchSelfProgramsRating,
   fetchLevelUpSummary
 } from "../actions/programs-rating.actions";
-import { LEVELS } from "../programs-rating-table";
 import authService from "shared/services/auth-service";
 
 export const getProgramsRating = filters => dispatch => {

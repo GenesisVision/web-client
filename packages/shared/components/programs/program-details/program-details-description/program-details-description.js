@@ -9,6 +9,7 @@ import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import DetailsFavorite from "shared/components/details/details-description-section/details-description/details-favorite";
 import DetailsNotification from "shared/components/details/details-description-section/details-description/details-notificaton";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
+import Hint from "shared/components/hint/hint";
 import Popover from "shared/components/popover/popover";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import {
@@ -16,7 +17,8 @@ import {
   composeProgramNotificationsUrl
 } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
-import Hint from "shared/components/hint/hint";
+
+import platformApi from "shared/services/api-client/platform-api";
 
 class ProgramDetailsDescription extends PureComponent {
   state = {
@@ -25,7 +27,8 @@ class ProgramDetailsDescription extends PureComponent {
     isOpenEditProgramPopup: false,
     isOpenClosePeriodPopup: false,
     isOpenAboutLevels: false,
-    anchor: null
+    anchor: null,
+    investmentsLimits: {}
   };
 
   handleOpenAboutLevels = () => {
@@ -74,7 +77,16 @@ class ProgramDetailsDescription extends PureComponent {
   handleApplyClosePeriodPopup = updateDetails => () => {
     updateDetails();
   };
-
+  componentDidMount() {
+    platformApi.v10PlatformLevelsGet({currency: "GVT"}).then(data => {
+      this.setState({ investmentsLimits: data.levels });
+    });
+  };
+  getCurrentLimit(currentLevel) {
+    return this.state.investmentsLimits
+      .find(LevelInfo => LevelInfo.level === currentLevel)
+      .investmentLimit;
+  };
   render() {
     const {
       isOpenInvestmentPopup,
@@ -82,10 +94,12 @@ class ProgramDetailsDescription extends PureComponent {
       isOpenEditProgramPopup,
       isOpenClosePeriodPopup,
       isOpenAboutLevels,
-      anchor
+      anchor,
+      investmentsLimits
     } = this.state;
     const {
       t,
+      role,
       status,
       isFavorite,
       canCloseProgram,
@@ -108,7 +122,8 @@ class ProgramDetailsDescription extends PureComponent {
       programDescription,
       onFavoriteClick,
       investmentData,
-      onChangeInvestmentStatus
+      onChangeInvestmentStatus,
+      isReinvest
     } = this.props;
 
     const composeEditInfo = {
@@ -124,16 +139,14 @@ class ProgramDetailsDescription extends PureComponent {
     return (
       <div className="details-description">
         <div className="details-description__left">
-          <div
-            className="details-description__avatar"
-            onClick={this.handleOpenDropdown}
-          >
+          <div className="details-description__avatar">
             <AssetAvatar
               url={programDescription.logo}
               level={programDescription.level}
               alt={title}
               size="big"
               color={programDescription.color}
+              onClickLevel={this.handleOpenDropdown}
             />
           </div>
           <Popover
@@ -149,32 +162,31 @@ class ProgramDetailsDescription extends PureComponent {
                   {t("program-details-page.popover.genesis-level")}{" "}
                   {programDescription.level}
                 </h4>
-                <div className="popover-levels__subtitle">
-                  {t("program-details-page.popover.invest-limit")}
-                </div>
-                <div className="popover-levels__balance">
-                  <NumberFormat
-                    value={formatValue(
-                      programDescription.availableInvestment,
-                      5
-                    )}
-                    displayType="text"
-                    suffix={` GVT`}
-                  />
-                </div>
+                {investmentsLimits.length && (
+                  <StatisticItem
+                    accent
+                    label={t("program-details-page.popover.invest-limit")}>
+                    <NumberFormat
+                      value={formatValue(this.getCurrentLimit(programDescription.level))}
+                      thousandSeparator={" "}
+                      displayType="text"
+                      suffix={` GVT`}
+                    />
+                  </StatisticItem>
+                )}
               </div>
               <div className="popover-levels__block popover-levels__text-block">
                 <div className="popover-levels__text">
                   {t("program-details-page.popover.text")}
                 </div>
-                {/*<GVButton
+                <GVButton
                   variant="text"
                   onClick={this.handleOpenAboutLevels}
                   color="secondary"
                   className="popover-levels__about"
                 >
                   {t("program-details-page.popover.about-levels")} &#8250;
-                </GVButton>*/}
+                </GVButton>
               </div>
             </div>
           </Popover>
@@ -184,7 +196,7 @@ class ProgramDetailsDescription extends PureComponent {
           />
         </div>
         <div className="details-description__main">
-          <h1 className="app__title-details">{title}</h1>
+          <h1 className="title-small-padding">{title}</h1>
           <Link
             to={{
               pathname: composeManagerDetailsUrl(
@@ -261,7 +273,7 @@ class ProgramDetailsDescription extends PureComponent {
                 />
               </StatisticItem>
             </div>
-            {(isOwnProgram || canInvest) && (
+            {(isOwnProgram || canInvest || canWithdraw) && (
               <Fragment>
                 <div className="details-description__investing-container">
                   <div className="details-description__invest-button-container">
@@ -318,9 +330,7 @@ class ProgramDetailsDescription extends PureComponent {
                       <ProgramReinvestingWidget
                         className="details-description__reinvest"
                         toggleReinvesting={onReinvestingClick}
-                        isReinvesting={
-                          programDescription.personalProgramDetails.isReinvest
-                        }
+                        isReinvesting={isReinvest}
                         disabled={isReinvestPending}
                       />
                     )}
@@ -336,6 +346,8 @@ class ProgramDetailsDescription extends PureComponent {
                       canWithdraw={canWithdraw}
                       assetCurrency={programDescription.currency}
                       onChangeInvestmentStatus={onChangeInvestmentStatus}
+                      asset={PROGRAM}
+                      role={role}
                       {...investmentData}
                     />
                   )}

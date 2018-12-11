@@ -7,12 +7,11 @@ import { formatValue } from "shared/utils/formatter";
 import FundProfitChart from "./fund-profit-chart";
 
 const FundProfitChartSection = ({
-  profitChartData,
+  profitChart,
   period,
   onPeriodChange,
   currency
 }) => {
-  const { data: profitChart } = profitChartData;
   if (!profitChart) return null;
   return (
     <Fragment>

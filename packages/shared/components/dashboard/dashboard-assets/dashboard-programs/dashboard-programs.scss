@@ -10,13 +10,16 @@
     &--avatar-title {
       display: flex;
       align-items: center;
+
+      .gv-btn {
+        @include font-size($font-size-paragraph);
+        padding: 5px;
+      }
     }
+
     &--title {
       width: 22%;
       padding: 0;
-      .gv-btn {
-        padding: 5px;
-      }
     }
     &--share {
       width: 10%;
@@ -39,6 +42,10 @@
     }
     &--status {
       width: 13%;
+    }
+    &--status-block {
+      display: flex;
+      align-items: center;
     }
   }
 }

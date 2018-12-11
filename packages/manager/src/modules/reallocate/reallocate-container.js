@@ -11,7 +11,7 @@ import ReallocatePopup from "./components/reallocate-popup";
 import { updateAssets } from "./services/reallocate.services";
 
 class ReallocateContainer extends Component {
-  state = { serverError: "", assets: [] };
+  state = { errorMessage: "", assets: [] };
 
   fillAssets = (target, data) => {
     data.forEach(dataItem => {
@@ -43,11 +43,11 @@ class ReallocateContainer extends Component {
           onClose();
         })
         .catch(error => {
-          this.setState({ serverError: error.errorMessage });
+          this.setState({ errorMessage: error.errorMessage });
         });
     };
     const handleClose = () => {
-      this.setState({ serverError: "" });
+      this.setState({ errorMessage: "" });
       onClose();
     };
     if (!assets.length) return null;
@@ -58,7 +58,7 @@ class ReallocateContainer extends Component {
           remainder={remainder}
           reallocate={handleApply}
           submitInfo={submitInfo}
-          serverError={this.state.serverError}
+          errorMessage={this.state.errorMessage}
         />
       </Dialog>
     );

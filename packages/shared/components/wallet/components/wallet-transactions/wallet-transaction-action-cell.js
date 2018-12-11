@@ -69,7 +69,7 @@ class WalletTransactionActions extends Component {
               onClick={resendWithdrawRequest}
               disabled={!transaction.destinationWithdrawalInfo.canResendEmail}
             >
-              {t("wallet.transaction-actions.resend-email")}
+              {t("wallet-page.transaction-actions.resend-email")}
             </GVButton>
             <GVButton
               variant="text"
@@ -77,7 +77,7 @@ class WalletTransactionActions extends Component {
               onClick={cancelWithdrawRequest}
               disabled={!transaction.destinationWithdrawalInfo.canCancelRequest}
             >
-              {t("wallet.transaction-actions.cancel-request")}
+              {t("wallet-page.transaction-actions.cancel-request")}
             </GVButton>
           </div>
         </Popover>

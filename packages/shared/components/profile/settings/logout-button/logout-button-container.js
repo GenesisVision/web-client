@@ -12,7 +12,7 @@ class LogoutButtonContainer extends PureComponent {
     this.setState({ isPending: true }, () => {
       this.props.services
         .logoutFromDevices()
-        .then(({ isPending }) => this.setState({ isPending }))
+        .then(() => this.setState({ isPending: false }))
         .catch(() => this.setState({ isPending: false }));
     });
   };
@@ -26,7 +26,7 @@ class LogoutButtonContainer extends PureComponent {
         disabled={this.state.isPending}
         className="profile-settings__logout-devices"
       >
-        {this.props.t("profile.settings.logout-from-another-devices")}
+        {this.props.t("profile-page.settings.logout-from-another-devices")}
       </GVButton>
     );
   }

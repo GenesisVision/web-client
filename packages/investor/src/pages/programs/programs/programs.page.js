@@ -26,7 +26,7 @@ const ProgramsPage = ({ t }) => {
       <ProgramsContainer
         enableFiltering
         showSwitchView
-        title={"All programs"}
+        title={t("programs-page.programs-table")}
       />
     </Page>
   );
