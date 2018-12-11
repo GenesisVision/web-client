@@ -1,9 +1,7 @@
-import Dialog from "shared/components/dialog/dialog";
 import {
   clearDepositProgramInfo,
   clearInvestSubmit
 } from "modules/program-deposit/actions/program-deposit.actions";
-import DepositPopup from "shared/components/deposit/deposit-popup";
 import {
   getDepositProgramInfoById,
   investServiceInvestById
@@ -12,13 +10,25 @@ import PropTypes from "prop-types";
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import DepositPopup from "shared/components/deposit/deposit-popup";
+import Dialog from "shared/components/dialog/dialog";
 
 const ProgramDepositContainer = props => {
-  const { service, id, type, onInvest } = props;
+  const {
+    service,
+    id,
+    type,
+    onInvest,
+    open,
+    submitInfo,
+    currency,
+    info,
+    onClose
+  } = props;
   const handleClose = () => {
-    props.onClose();
-    props.service.clearDepositProgramInfo();
-    props.service.clearInvestSubmit();
+    onClose();
+    service.clearDepositProgramInfo();
+    service.clearInvestSubmit();
   };
   const handleInvest = amount => {
     service
@@ -34,14 +44,14 @@ const ProgramDepositContainer = props => {
       });
   };
   return (
-    <Dialog open={props.open} onClose={handleClose}>
+    <Dialog open={open} onClose={handleClose}>
       <DepositPopup
         program
-        submitInfo={props.submitInfo}
-        currency={props.currency}
-        info={props.info.data}
-        id={props.id}
-        fetchInfo={props.service.getDepositProgramInfoById}
+        submitInfo={submitInfo}
+        currency={currency}
+        info={info.data}
+        id={id}
+        fetchInfo={service.getDepositProgramInfoById}
         invest={handleInvest}
         type={type}
       />
@@ -66,8 +76,7 @@ ProgramDepositContainer.propTypes = {
 
 const mapStateToProps = state => ({
   info: state.programDeposit.info,
-  submitInfo: state.programDeposit.submit,
-  currency: state.accountSettings.currency
+  submitInfo: state.programDeposit.submit
 });
 
 const mapDispatchToProps = dispatch => ({
