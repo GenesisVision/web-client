@@ -1,7 +1,6 @@
 import "shared/components/details/details.scss";
 
 import AssetEditContainer from "modules/asset-edit/asset-edit-container";
-import { FUND, MANAGER } from "shared/constants/constants";
 import FundDepositContainer from "modules/fund-deposit/fund-deposit-container";
 import FundWithdrawContainer from "modules/fund-withdraw/fund-withdraw-container";
 import ReallocateContainer from "modules/reallocate/reallocate-container";
@@ -19,8 +18,10 @@ import {
 } from "shared/components/funds/fund-details/services/fund-details.service";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
 import Page from "shared/components/page/page";
+import { FUND, MANAGER } from "shared/constants/constants";
 
 import { LOGIN_ROUTE } from "../../auth/login/login.routes";
+import CloseFundContainer from "./close-fund/close-fund-container";
 
 export const FundDetailContext = React.createContext({
   updateDetails: () => {}
@@ -98,6 +99,7 @@ class FundDetailsPage extends PureComponent {
           <div className="details">
             <div className="details__section">
               <FundDetailsDescriptionSection
+                CloseFundContainer={CloseFundContainer}
                 role={MANAGER}
                 AssetEditContainer={AssetEditContainer}
                 FUND={FUND}
