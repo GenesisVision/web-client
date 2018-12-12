@@ -8,7 +8,8 @@ import DepositTop from "./deposit-top";
 
 class DepositPopup extends Component {
   componentDidMount() {
-    this.props.fetchInfo(this.props.id);
+    const { id, fetchInfo, currency } = this.props;
+    fetchInfo(id, currency);
   }
 
   render() {

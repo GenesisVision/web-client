@@ -38,12 +38,19 @@ class DashboardInRequestsContainer extends PureComponent {
   };
 
   render() {
-    const { inRequests, isPending, service } = this.props;
+    const { t, inRequests, isPending, service } = this.props;
     if (!inRequests || isPending) return null;
 
     return (
       <div className="dashboard-request">
-        <StatisticItem label={"In Requests"} big>
+        <StatisticItem
+          label={t(
+            `${
+              process.env.REACT_APP_PLATFORM
+            }.dashboard-page.chart-section.in-requests`
+          )}
+          big
+        >
           <NumberFormat
             value={formatCurrencyValue(inRequests.totalValue, "GVT")}
             thousandSeparator={" "}

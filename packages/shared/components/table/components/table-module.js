@@ -99,6 +99,15 @@ class TableModule extends PureComponent {
     );
   };
 
+  handleUpdateRow = row => {
+    const { data } = this.state;
+    const newData = {
+      ...data,
+      items: data.items.map(x => (x.id === row.id ? row : x))
+    };
+    this.setState({ data: newData });
+  };
+
   render() {
     const { data, isPending } = this.state;
 
@@ -111,6 +120,7 @@ class TableModule extends PureComponent {
         updateSorting={this.handleUpdateSorting}
         updatePaging={this.handleUpdatePaging}
         updateFilter={this.handleUpdateFilter}
+        updateRow={this.handleUpdateRow}
       />
     );
   }

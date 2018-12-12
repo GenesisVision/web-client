@@ -20,6 +20,7 @@ import { formatValue } from "shared/utils/formatter";
 
 class FundDetailsDescription extends PureComponent {
   state = {
+    isOpenCloseFundPopup: false,
     isOpenInvestmentPopup: false,
     isOpenAboutLevels: false,
     isOpenEditFundPopup: false,
@@ -55,15 +56,25 @@ class FundDetailsDescription extends PureComponent {
     this.setState({ isOpenReallocateFundPopup: false });
     updateDetails();
   };
-
+  handleOpenCloseFundPopup = () => {
+    this.setState({ isOpenCloseFundPopup: true });
+  };
+  handleCloseCloseFundPopup = () => {
+    this.setState({ isOpenCloseFundPopup: false });
+  };
+  handleApplyCloseFundPopup = updateDetails => () => {
+    updateDetails();
+  };
   render() {
     const {
+      isOpenCloseFundPopup,
       isOpenInvestmentPopup,
       isOpenEditFundPopup,
       isOpenReallocateFundPopup
     } = this.state;
     const {
       t,
+      CloseFundContainer,
       role,
       possibleReallocationTime,
       canReallocate,
@@ -191,6 +202,19 @@ class FundDetailsDescription extends PureComponent {
                       >
                         {t("fund-details-page.description.edit-fund")}
                       </GVButton>
+                      {false && CloseFundContainer && (
+                        <GVButton
+                          className="details-description__invest-btn"
+                          color="secondary"
+                          variant="outlined"
+                          onClick={this.handleOpenCloseFundPopup}
+                          disabled={
+                            !fundDescription.personalFundDetails.canCloseProgram
+                          }
+                        >
+                          {t("fund-details-page.description.close-fund")}
+                        </GVButton>
+                      )}
                       <div className="details-description__reallocate-container">
                         <GVButton
                           className="details-description__invest-btn"
@@ -224,6 +248,17 @@ class FundDetailsDescription extends PureComponent {
                           onClose={this.handleCloseInvestmentPopup}
                           onInvest={updateDetails}
                         />
+                        {CloseFundContainer && (
+                          <CloseFundContainer
+                            open={isOpenCloseFundPopup}
+                            onClose={this.handleCloseCloseFundPopup}
+                            onCancel={this.handleCloseCloseFundPopup}
+                            onApply={this.handleApplyCloseFundPopup(
+                              updateDetails
+                            )}
+                            id={fundDescription.id}
+                          />
+                        )}
                         {AssetEditContainer && (
                           <AssetEditContainer
                             open={isOpenEditFundPopup}

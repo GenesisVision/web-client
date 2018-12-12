@@ -1,57 +1,31 @@
-import ChartPeriod from "shared/components/chart/chart-period/chart-period";
-import { DEFAULT_PERIOD } from "shared/components/chart/chart-period/chart-period.helpers";
 import React, { Fragment, PureComponent } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-
+import ChartPeriod from "shared/components/chart/chart-period/chart-period";
 import FundProfitChart from "shared/components/funds/fund-details/fund-details-statistics-section/fund-details-chart-section/fund-profit-chart-section/fund-profit-chart";
 import ProgramProfitChart from "shared/components/programs/program-details/program-details-statistic-section/program-details-chart-section/program-profit-chart-section/program-profit-chart";
-import { getAssetChart } from "../../../services/dashboard.service";
+
+import {
+  composeAssetChart,
+  getAssetChart,
+  setPeriod
+} from "../../../services/dashboard.service";
 
 class DashboardPortfolioChartContainer extends PureComponent {
-  state = {
-    period: DEFAULT_PERIOD
-  };
-
   componentDidMount() {
-    const { assets } = this.props;
-
-    if (assets !== null) {
-      const { programs, funds } = assets;
-      const assetProgram = programs.length ? programs[0] : null;
-      const assetFund = funds.length ? funds[0] : null;
-      if (assetProgram) {
-        this.props.service.getAssetChart(
-          assetProgram.id,
-          assetProgram.title,
-          "Program",
-          this.state.period
-        );
-      } else if (assetFund) {
-        this.props.service.getAssetChart(
-          assetFund.id,
-          assetFund.title,
-          "Fund",
-          this.state.period
-        );
-      }
-    }
+    const { service } = this.props;
+    service.composeAssetChart();
   }
 
   handleChangePeriod = period => {
-    this.props.service.getAssetChart(
-      this.props.assetChart.id,
-      this.props.assetChart.title,
-      this.props.assetChart.type,
-      period
-    );
-    this.setState({ period });
+    const { service, assetChart } = this.props;
+    service.setPeriod(period);
+    service.getAssetChart(assetChart.id, assetChart.title, assetChart.type);
   };
 
   render() {
-    const { assetChart, currency } = this.props;
-    const { period } = this.state;
-    if (!assetChart || assetChart.isPending) return null;
+    const { assetChart, currency, period } = this.props;
+    if (!assetChart) return null;
     return (
       <Fragment>
         <h3 className="dashboard-portfolio-chart-section__heading">
@@ -81,11 +55,12 @@ class DashboardPortfolioChartContainer extends PureComponent {
 }
 
 const mapStateToProps = state => {
-  const { assetChart } = state.dashboard;
+  const { assetChart, period } = state.dashboard;
   const { currency } = state.accountSettings;
   const { programs, funds } = state.dashboard;
   return {
     assetChart,
+    period,
     currency,
     programsData: programs.itemsData.data,
     fundsData: funds.itemsData.data
@@ -94,7 +69,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    service: bindActionCreators({ getAssetChart }, dispatch)
+    service: bindActionCreators(
+      { getAssetChart, composeAssetChart, setPeriod },
+      dispatch
+    )
   };
 };
 

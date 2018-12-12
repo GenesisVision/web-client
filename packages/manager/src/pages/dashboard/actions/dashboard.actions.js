@@ -12,6 +12,8 @@ export const DASHBOARD_CANCEL_PROGRAM_REQUESTS =
   "DASHBOARD_CANCEL_PROGRAM_REQUESTS";
 
 export const DASHBOARD_ASSET_CHART = "DASHBOARD_ASSET_CHART";
+export const DASHBOARD_TOP_ASSETS = "DASHBOARD_TOP_ASSETS";
+export const DASHBOARD_PERIOD = "DASHBOARD_PERIOD";
 
 export const fetchPortfolioEvents = (auth, filters) => {
   return {
@@ -69,5 +71,19 @@ export const dashboardChart = assetChart => {
   return {
     type: DASHBOARD_ASSET_CHART,
     payload: assetChart
+  };
+};
+
+export const topAssets = assets => {
+  return {
+    type: DASHBOARD_TOP_ASSETS,
+    payload: assets
+  };
+};
+
+export const setPeriod = period => {
+  return {
+    type: DASHBOARD_PERIOD,
+    payload: period
   };
 };
