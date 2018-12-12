@@ -75,6 +75,7 @@ const WalletWithdrawForm = ({
           component={GVTextField}
           adornment="GVT"
           autoComplete="off"
+          autoFocus
           InputComponent={NumberFormat}
           allowNegative={false}
           isAllowed={values => {

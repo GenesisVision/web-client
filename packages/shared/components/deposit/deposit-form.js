@@ -9,7 +9,11 @@ import {
   calculateValueOfEntryFee,
   convertFromCurrency
 } from "shared/utils/currency-converter";
-import { formatCurrencyValue, formatValue, validateFraction } from "shared/utils/formatter";
+import {
+  formatCurrencyValue,
+  formatValue,
+  validateFraction
+} from "shared/utils/formatter";
 import { number, object } from "yup";
 
 const DepositForm = ({
@@ -51,6 +55,7 @@ const DepositForm = ({
         component={GVTextField}
         adornment="GVT"
         autoComplete="off"
+        autoFocus
         InputComponent={NumberFormat}
         allowNegative={false}
         isAllowed={isAllow}

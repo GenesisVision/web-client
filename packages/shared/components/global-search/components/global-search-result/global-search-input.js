@@ -23,6 +23,7 @@ class GlobalSearchInput extends PureComponent {
           adornmentPosition="start"
           value={query}
           onChange={this.handleOnChange}
+          autoFocus
         />
       </div>
     );

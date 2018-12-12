@@ -29,6 +29,7 @@ const FundWithdrawEnterPercentStep = props => {
         component={GVTextField}
         adornment="%"
         autoComplete="off"
+        autoFocus
         InputComponent={NumberFormat}
         allowNegative={false}
         isAllowed={isAllow}
