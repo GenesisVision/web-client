@@ -4,7 +4,7 @@ import authService from "shared/services/auth-service";
 export const loadKycIFrame = () => {
   const authorization = authService.getAuthArg();
 
-  profileApi.v10ProfileVerificationTokenPost(authorization).then(({ data }) => {
+  profileApi.v10ProfileVerificationTokenPost(authorization).then(data => {
     window.idensic.init(
       // selector of an IFrame container (see above)
       "#idensic",
