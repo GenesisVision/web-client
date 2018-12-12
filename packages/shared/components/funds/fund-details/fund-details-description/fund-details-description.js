@@ -12,6 +12,7 @@ import DetailsNotification from "shared/components/details/details-description-s
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import { STATUS } from "shared/constants/constants";
 import {
   composeFundNotificationsUrl,
   composeManagerDetailsUrl
@@ -225,16 +226,19 @@ class FundDetailsDescription extends PureComponent {
                         >
                           {t("fund-details-page.description.reallocate")}
                         </GVButton>
-                        {!canReallocate && possibleReallocationTime && (
-                          <div className="details-description__reallocate-message">
-                            {t(
-                              "fund-details-page.description.disable-reallocation-message"
-                            )}{" "}
-                            {moment(possibleReallocationTime).format(
-                              "D MMM YYYY"
-                            )}
-                          </div>
-                        )}
+                        {!canReallocate &&
+                          possibleReallocationTime &&
+                          fundDescription.status !== STATUS.CLOSED &&
+                          fundDescription.status !== STATUS.ARCHIVED && (
+                            <div className="details-description__reallocate-message">
+                              {t(
+                                "fund-details-page.description.disable-reallocation-message"
+                              )}{" "}
+                              {moment(possibleReallocationTime).format(
+                                "D MMM YYYY"
+                              )}
+                            </div>
+                          )}
                       </div>
                     </Fragment>
                   )}
@@ -287,7 +291,7 @@ class FundDetailsDescription extends PureComponent {
                 </div>
               </Fragment>
             )}
-            {fundDescription.personalFundDetails && status !== "Ended" && (
+            {fundDescription.personalFundDetails && status !== STATUS.ENDED && (
               <DetailsInvestment
                 WithdrawContainer={FundWithdrawContainer}
                 canWithdraw={canWithdraw}
