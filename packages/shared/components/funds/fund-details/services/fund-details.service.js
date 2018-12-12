@@ -7,6 +7,8 @@ import fundsApi from "shared/services/api-client/funds-api";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
 
+import managerApi from "shared/services/api-client/manager-api";
+
 export const getFundDescription = () => (dispatch, getState) => {
   const authorization = authService.getAuthArg();
   const { routing } = getState();
@@ -61,4 +63,14 @@ export const getFundStatistic = (fundId, currency, period = DEFAULT_PERIOD) => {
 
 export const fetchFundStructure = fundId => {
   return fundsApi.v10FundsByIdAssetsGet(fundId);
+};
+
+export const closeFund = (id, opts) => dispatch => {
+  const authorization = authService.getAuthArg();
+
+  return managerApi.v10ManagerFundsByIdClosePost(
+    id,
+    authorization,
+    opts
+  );
 };
