@@ -8,13 +8,11 @@ import EventCancelledIcon from "shared/media/event-cancelled.svg";
 import EventEndedRedIcon from "shared/media/event-ended-red.svg";
 import EventEndedIcon from "shared/media/event-ended.svg";
 import EventInvestIcon from "shared/media/event-invest.svg";
-import EventLossIcon from "shared/media/event-loss.svg";
 import EventLossIconRed from "shared/media/event-loss-red.svg";
 import EventAssetFinished from "shared/media/event-manager-asset-finished.svg";
 import EventAssetStarted from "shared/media/event-manager-asset-started.svg";
 import EventPeriodEnds from "shared/media/event-manager-period-end.svg";
 import EventPeriodStarts from "shared/media/event-manager-period-start.svg";
-import EventProfitIcon from "shared/media/event-profit.svg";
 import EventProfitIconGreen from "shared/media/event-profit-green.svg";
 import EventReinvestIcon from "shared/media/event-reinvest.svg";
 import EventStartedIcon from "shared/media/event-started.svg";
@@ -54,10 +52,10 @@ export const EvenLogoIcon = ({ type }) => {
       return <img src={EventPeriodEnds} alt="Period ends" />;
     case EventLogoType.investorInvest:
     case EventLogoType.managerInvest:
-      return <img src={EventProfitIcon} alt="Invest" />;
+      return <img src={EventInvestIcon} alt="Invest" />;
     case EventLogoType.investorWithdraw:
     case EventLogoType.managerWithdraw:
-      return <img src={EventLossIcon} alt="withdraw" />;
+      return <img src={EventWithdrawIcon} alt="withdraw" />;
     default:
       return null;
   }
