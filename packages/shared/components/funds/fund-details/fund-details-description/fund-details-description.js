@@ -202,7 +202,7 @@ class FundDetailsDescription extends PureComponent {
                       >
                         {t("fund-details-page.description.edit-fund")}
                       </GVButton>
-                      {false && CloseFundContainer && (
+                      {CloseFundContainer && (
                         <GVButton
                           className="details-description__invest-btn"
                           color="secondary"
