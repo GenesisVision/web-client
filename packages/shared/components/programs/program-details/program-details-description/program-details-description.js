@@ -12,13 +12,13 @@ import DetailsInvestment from "shared/components/details/details-description-sec
 import Hint from "shared/components/hint/hint";
 import Popover from "shared/components/popover/popover";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import { STATUS } from "shared/constants/constants";
+import platformApi from "shared/services/api-client/platform-api";
 import {
   composeManagerDetailsUrl,
   composeProgramNotificationsUrl
 } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
-
-import platformApi from "shared/services/api-client/platform-api";
 
 class ProgramDetailsDescription extends PureComponent {
   state = {
@@ -343,7 +343,7 @@ class ProgramDetailsDescription extends PureComponent {
                   </div>
                 </div>
                 {programDescription.personalProgramDetails &&
-                  status !== "Ended" && (
+                  status !== STATUS.ENDED && (
                     <DetailsInvestment
                       WithdrawContainer={ProgramWithdrawContainer}
                       notice={t(

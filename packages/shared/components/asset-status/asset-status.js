@@ -4,23 +4,18 @@ import classnames from "classnames";
 import React, { Fragment, PureComponent } from "react";
 import Scrollbars from "react-custom-scrollbars";
 import { translate } from "react-i18next";
+import { STATUS } from "shared/constants/constants";
 
 import Popover from "../popover/popover";
 import AssetStatusRequests from "./asset-status-requests";
 
-const ACTIVE = "Active";
-const INVESTING = "Investing";
-const WITHDRAWING = "Withdrawing";
-const ENDED = "Ended";
-const PENDING = "Pending";
-
 const getStatusClassName = (status, className) => {
   return classnames("asset-status", className, {
-    "asset-status__active": status === ACTIVE,
-    "asset-status__investing": status === INVESTING,
-    "asset-status__withdrawing": status === WITHDRAWING,
-    "asset-status__ended": status === ENDED,
-    "asset-status__pending": status === PENDING
+    "asset-status__active": status === STATUS.ACTIVE,
+    "asset-status__investing": status === STATUS.INVESTING,
+    "asset-status__withdrawing": status === STATUS.WITHDRAWING,
+    "asset-status__ended": status === STATUS.ENDED,
+    "asset-status__pending": status === STATUS.PENDING
   });
 };
 
@@ -30,7 +25,10 @@ class AssetStatus extends PureComponent {
   };
 
   handleOpenDropdown = event => {
-    if (this.props.status === INVESTING || this.props.status === WITHDRAWING)
+    if (
+      this.props.status === STATUS.INVESTING ||
+      this.props.status === STATUS.WITHDRAWING
+    )
       this.setState({ anchor: event.currentTarget });
   };
   handleCloseDropdown = () => this.setState({ anchor: null });
