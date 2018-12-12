@@ -22,6 +22,7 @@ const SignUpForm = ({ isSubmitting, handleSubmit, error, t }) => {
         label={t("auth.signup.username-field-text")}
         autoComplete="off"
         className="signup-form__username"
+        autoFocus
         component={GVTextField}
       />
 
