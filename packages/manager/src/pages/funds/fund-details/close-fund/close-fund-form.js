@@ -15,7 +15,7 @@ const CloseFundForm = ({
   errorMessage
 }) => {
   return (
-    <form id="closeProgramForm" onSubmit={handleSubmit} noValidate>
+    <form id="closeFundForm" onSubmit={handleSubmit} noValidate>
       <div className="dialog__top">
         <h2>{t("fund-details-page.description.close-fund")}</h2>
         <div className="dialog__text">
@@ -69,7 +69,7 @@ const twoFactorvalidator = (t, twoFactorEnabled) => {
 export default compose(
   translate(),
   withFormik({
-    displayName: "close-program",
+    displayName: "close-fund",
     mapPropsToValues: props => {
       return { twoFactorCode: "" };
     },
