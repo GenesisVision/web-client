@@ -7,15 +7,10 @@ import EventListener from "react-event-listener";
 import Modal from "shared/components/modal/modal";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 
 import "./dialog.scss";
 
 class Dialog extends Component {
-  componentDidMount() {
-    this.myRef = ReactDOM.findDOMNode(this);
-  }
-
   handleKeyPress = event => {
     const { onClose } = this.props;
 
@@ -43,7 +38,7 @@ class Dialog extends Component {
             >
               <CloseIcon /> {t("buttons.close")}
             </GVButton>
-            <div className={classnames("dialog", className)} ref={this.myRef}>
+            <div className={classnames("dialog", className)}>
               <GVButton
                 variant="text"
                 color="secondary"
