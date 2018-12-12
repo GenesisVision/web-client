@@ -9847,13 +9847,6 @@ react-onclickoutside@^6.7.1:
   resolved "https://registry.yarnpkg.com/react-onclickoutside/-/react-onclickoutside-6.7.1.tgz#6a5b5b8b4eae6b776259712c89c8a2b36b17be93"
   integrity sha512-p84kBqGaMoa7VYT0vZ/aOYRfJB+gw34yjpda1Z5KeLflg70HipZOT+MXQenEhdkPAABuE2Astq4zEPdMqUQxcg==
 
-react-pager@^1.3.3:
-  version "1.3.3"
-  resolved "https://registry.yarnpkg.com/react-pager/-/react-pager-1.3.3.tgz#471ccf36aa6799987657ccf5d400c45d83fda51d"
-  integrity sha512-d5QqLaqa7BXt9V4Usls5EqoQN+xycktetT/cAZhSyiE/DB8aMxTbzpqn/ezoJwAHl0Mp6L3bjrTenIynobIryQ==
-  dependencies:
-    prop-types "^15.5.10"
-
 react-popper@^0.10.1:
   version "0.10.4"
   resolved "https://registry.yarnpkg.com/react-popper/-/react-popper-0.10.4.tgz#af2a415ea22291edd504678d7afda8a6ee3295aa"
