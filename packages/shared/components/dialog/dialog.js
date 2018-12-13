@@ -1,19 +1,29 @@
-import "./dialog.scss";
-
-import classnames from "classnames";
+import { CloseIcon } from "shared/components/icon/close-icon";
 import { GVButton } from "gv-react-components";
-import PropTypes from "prop-types";
-import React, { Component } from "react";
 import { Scrollbars } from "react-custom-scrollbars";
 import { translate } from "react-i18next";
-import { CloseIcon } from "shared/components/icon/close-icon";
+import classnames from "classnames";
+import EventListener from "react-event-listener";
 import Modal from "shared/components/modal/modal";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+
+import "./dialog.scss";
 
 class Dialog extends Component {
+  handleKeyPress = event => {
+    const { onClose } = this.props;
+
+    //Esc
+    if (event.keyCode === 27) {
+      onClose(event);
+    }
+  };
   render() {
     const { t, open, onClose, className, children, wider } = this.props;
     return (
       <Modal open={open} fixed disableBackdropClick>
+        <EventListener target={document} onKeyUp={this.handleKeyPress} />
         <Scrollbars>
           <div className="dialog__content">
             <div className="dialog__background" />

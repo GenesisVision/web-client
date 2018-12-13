@@ -55,6 +55,7 @@ class CreateFundSettingsAddAsset extends React.Component {
               adornment={<SearchIcon secondary />}
               adornmentPosition="start"
               onChange={this.search}
+              autoFocus
             />
           </div>
           <div className="popover-add__assets">

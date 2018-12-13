@@ -27,6 +27,7 @@ const TwoFactorCodeForm = ({ t, handleSubmit, isSubmitting, error }) => {
         name="twoFactorCode"
         label={t("auth.login.two-factor.input-label")}
         autoComplete="off"
+        autoFocus
         component={GVTextField}
       />
 

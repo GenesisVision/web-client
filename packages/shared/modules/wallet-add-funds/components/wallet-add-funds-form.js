@@ -67,6 +67,7 @@ const WalletAddFundsForm = ({
           component={GVTextField}
           adornment={currency}
           autoComplete="off"
+          autoFocus
           InputComponent={NumberFormat}
           allowNegative={false}
           isAllowed={isAllow}
