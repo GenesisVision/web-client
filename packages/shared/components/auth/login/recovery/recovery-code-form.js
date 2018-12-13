@@ -19,6 +19,7 @@ const RecoveryCodeForm = ({ t, handleSubmit, isSubmitting, error }) => {
       <GVFormikField
         name="recoveryCode"
         placeholder="Recovery code"
+        autoFocus
         component={GVTextField}
       />
       <FormError error={error} />

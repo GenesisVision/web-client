@@ -36,22 +36,15 @@ class DetailsInvestment extends PureComponent {
       WithdrawContainer,
       canWithdraw,
       assetCurrency,
-      className,
       id,
-      investedAmount,
       balanceCurrency,
-      profitPercent,
       status,
       value,
       pendingInput,
       pendingOutput
     } = this.props;
     return (
-      <Surface
-        className={
-          "surface--horizontal-paddings details-investment " + className
-        }
-      >
+      <Surface className="surface--horizontal-paddings details-investment">
         <h3>{t("fund-details-page.description.yourInvestment")}</h3>
         <div className="details-investment__short-statistic">
           <StatisticItem

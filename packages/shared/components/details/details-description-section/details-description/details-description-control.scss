@@ -1,0 +1,43 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
+
+.details-description-control {
+  @include adaptive-padding(bottom, $padding-xsmall);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  &__icon {
+    width: 20px;
+    @include media-breakpoint-landscape-phone() {
+      max-width: 17px;
+      max-height: 17px;
+    }
+    svg [stroke] {
+      stroke: $label-color;
+    }
+    &.icon--active {
+      svg [stroke] {
+        stroke: $primary-color;
+      }
+    }
+    &:hover {
+      svg [stroke] {
+        stroke: $main-color;
+      }
+    }
+  }
+  &__text {
+    @include font-size($font-size-common);
+    @include adaptive-padding(right, $padding-xsmall);
+    color: $main-color;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+    display: none;
+    @include media-breakpoint-phone() {
+      display: inherit;
+    }
+  }
+}

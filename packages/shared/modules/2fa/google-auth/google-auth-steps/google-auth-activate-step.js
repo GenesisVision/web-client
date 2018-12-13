@@ -19,6 +19,7 @@ export const GoogleStep3 = ({ t, handleSubmit, errorMessage, disabled }) => {
           label={t("2fa-page.google-code")}
           component={GVTextField}
           autoComplete="off"
+          autoFocus
           InputComponent={NumberFormat}
           allowNegative={false}
           format="######"

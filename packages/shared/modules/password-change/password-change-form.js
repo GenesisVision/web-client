@@ -30,6 +30,7 @@ const PasswordChangeForm = props => {
         name="oldPassword"
         type="password"
         autoComplete="new-password"
+        autoFocus
       />
       <div className="change-password__new">
         <GVFormikField

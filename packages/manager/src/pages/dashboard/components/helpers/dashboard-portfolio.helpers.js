@@ -1,11 +1,7 @@
 import { EventLogoType } from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo.helper";
 
 export const profitabilityTypes = [
-  EventLogoType.programPeriodEnds,
-  EventLogoType.investorInvest,
-  EventLogoType.investorWithdraw,
-  EventLogoType.managerInvest,
-  EventLogoType.managerWithdraw
+  EventLogoType.programPeriodEnds
 ];
 
 export const isUseProfitability = event =>

@@ -84,6 +84,21 @@
     width: 14px;
   }
 
+	&--active {
+		svg {
+			fill: $primary-color;
+		}
+		svg [stroke] {
+			stroke: $primary-color;
+		}
+
+		&:hover {
+			svg [stroke] {
+				stroke: $text-accent-color;
+			}
+		}
+	}
+
   &--actions-circle {
     circle[fill] {
       fill: rgba($label-color, 0.3);

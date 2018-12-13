@@ -61,7 +61,7 @@ const mapDispatchToProps = dispatch => ({
       closeFund,
       alertSuccess: () =>
         alertMessageActions.success(
-          "program-details-page.description.close-program-notification-success",
+          "fund-details-page.description.close-fund-notification-success",
           true
         )
     },

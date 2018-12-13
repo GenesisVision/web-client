@@ -24,6 +24,7 @@ const WithdrawEnterAmountStep = props => {
         component={GVTextField}
         adornment={props.programCurrency}
         autoComplete="off"
+        autoFocus
         InputComponent={NumberFormat}
         allowNegative={false}
         isAllowed={isAllow}

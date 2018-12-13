@@ -4,11 +4,13 @@
 
 .details-description {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  flex-wrap: wrap;
   white-space: pre-wrap;
-  @include media-breakpoint-phone() {
-    flex-direction: row;
+  @include adaptive-margin(bottom, $padding-small);
+
+  @include media-breakpoint-tablet() {
+    flex-wrap: nowrap;
+    margin-bottom: $padding-xlarge;
   }
 
   &__your-investment {
@@ -57,30 +59,40 @@
     & .program-avatar__level {
       border-color: $background-color;
     }
+
     @include media-breakpoint-phone() {
-      padding: 0;
       .program-avatar {
         width: $avatar-size;
         height: $avatar-size;
+        margin: 0;
       }
+    }
+    @include media-breakpoint-tablet() {
+      padding: 0;
     }
   }
 
   &__left {
     padding-right: $padding-xsmall-mobile;
-    @include media-breakpoint-landscape-phone() {
-      padding-right: 0;
+    width: 50%;
+    box-sizing: border-box;
+
+    @include media-breakpoint-tablet() {
+      width: auto;
+      padding: 0;
     }
   }
 
   &__right {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: $padding-big-mobile;
-    @include media-breakpoint-phone() {
-      flex-direction: column;
-      justify-content: flex-start;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 50%;
+    box-sizing: border-box;
+    padding: $padding-xsmall-mobile 0 $padding-xsmall;
+
+    @include media-breakpoint-tablet() {
+      width: auto;
       padding: 0;
     }
 
@@ -97,10 +109,17 @@
   }
 
   &__main {
+    order: 1;
     width: 100%;
-    padding-left: 0;
-    @include media-breakpoint-phone() {
-      padding-left: $padding-big-mobile;
+
+    @include media-breakpoint-tablet() {
+      order: 0;
+    }
+
+    @include media-breakpoint-tablet() {
+      padding-left: $padding-big;
+      width: auto;
+      flex: 1 1 auto;
     }
   }
 
@@ -113,7 +132,7 @@
 
   &__info {
     padding-top: $padding-xxlarge-mobile;
-    @include media-breakpoint-landscape-phone() {
+    @include media-breakpoint-tablet() {
       padding-top: $padding-xxlarge;
     }
   }
@@ -157,6 +176,10 @@
     font-weight: bold;
     padding-bottom: $padding-small-mobile;
     letter-spacing: 0.21px;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-h4;
+      padding-bottom: $padding-small;
+    }
   }
 
   &__info-block {
@@ -168,6 +191,12 @@
 
   &__short-statistic-subheading {
     margin-bottom: $padding-xsmall-mobile/2;
+    @include media-breakpoint-landscape-phone() {
+      margin-bottom: $padding-xsmall/2;
+    }
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-paragraph;
+    }
   }
 
   &__text {
@@ -177,6 +206,11 @@
     text-align: left;
     color: $text-color;
     padding-bottom: $padding-small;
+    word-break: break-word;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-paragraph;
+      line-height: $font-size-paragraph * 2;
+    }
   }
 
   &__invest-btn {
@@ -186,6 +220,11 @@
     box-sizing: border-box;
     width: $btn-width-mobile;
     height: $btn-height-mobile;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-paragraph;
+      width: $btn-width;
+      height: $btn-height;
+    }
   }
 
   &__reinvest {
@@ -221,6 +260,10 @@
       &:last-child {
         margin-right: 0;
       }
+      @include media-breakpoint-landscape-phone() {
+        margin-right: $padding-small;
+        font-size: $font-size-paragraph;
+      }
     }
 
     &-subheading {
@@ -228,115 +271,6 @@
       font-size: $font-size-paragraph-mobile;
       letter-spacing: 0.43px;
       font-weight: normal;
-    }
-  }
-
-  &__control {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    color: $label-color;
-    .icon path {
-      stroke: $label-color;
-    }
-    &-icon svg [stroke] {
-      stroke: $label-color;
-    }
-    .icon--ring {
-      width: 27px;
-      height: 27px;
-    }
-    &:hover {
-      path {
-        stroke: $text-accent-color;
-      }
-    }
-    &-icon,
-    &-text {
-      padding: $padding-xsmall-mobile $padding-xsmall-mobile/2;
-    }
-    &-text {
-      font-size: $font-size-small-mobile;
-      font-weight: 300;
-      opacity: 0.4;
-      letter-spacing: 0.3px;
-      color: $main-color;
-      text-align: center;
-    }
-
-    & &-icon--active path {
-      fill: $primary-color;
-      stroke: $primary-color;
-    }
-    &:hover &-icon--active path {
-      stroke: $text-accent-color;
-    }
-    &-icon-notification path {
-      stroke: $label-color;
-    }
-  }
-
-  @include media-breakpoint-phone() {
-    &__avatar {
-      .program-avatar {
-        width: $avatar-size-mobile;
-        height: $avatar-size-mobile;
-        margin: 0;
-      }
-    }
-  }
-  @include media-breakpoint-landscape-phone() {
-    &__avatar {
-      .program-avatar {
-        width: $avatar-size;
-        height: $avatar-size;
-        margin: 0;
-      }
-    }
-    &__main {
-      padding-left: $padding-big;
-    }
-    &__subheading {
-      font-size: $font-size-h4;
-      padding-bottom: $padding-small;
-    }
-    &__text {
-      font-size: $font-size-paragraph;
-      line-height: $font-size-paragraph * 2;
-    }
-    &__short-statistic-subheading {
-      margin-bottom: $padding-xsmall/2;
-    }
-    &__invest-btn {
-      font-size: $font-size-paragraph;
-      width: $btn-width;
-      height: $btn-height;
-    }
-    &__short-statistic {
-      &-item {
-        margin-right: $padding-small;
-        font-size: $font-size-paragraph;
-      }
-      &-subheading {
-        font-size: $font-size-paragraph;
-      }
-    }
-    &__control {
-      &-icon,
-      &-text {
-        padding: $padding-xsmall/2 $padding-xsmall;
-        white-space: nowrap;
-      }
-      &-icon {
-        width: $icon-size;
-        height: $icon-size;
-      }
-      &-text {
-        font-size: $font-size-small;
-      }
     }
   }
 }

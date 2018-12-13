@@ -27,6 +27,7 @@ const LoginForm = ({
         name="email"
         label={t("auth.login.placeholder.email")}
         autoComplete="email"
+        autoFocus
         component={GVTextField}
       />
       <GVFormikField
