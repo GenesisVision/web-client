@@ -11,14 +11,16 @@ export const Icon = ({
   primary,
   secondary,
   children,
-  rotate
+  rotate,
+  selected
 }) => {
   return (
     <span
       className={classnames("icon", `icon--${type}`, className, {
         "icon--primary": primary,
         "icon--secondary": secondary,
-        "icon--rotate": rotate
+        "icon--rotate": rotate,
+        "icon--selected": selected
       })}
       onClick={onClick}
     >
@@ -31,6 +33,8 @@ Icon.propTypes = {
   type: PropTypes.string.isRequired,
   primary: PropTypes.bool,
   secondary: PropTypes.bool,
+  rotate: PropTypes.bool,
+  selected: PropTypes.bool,
   className: PropTypes.string
 };
 
