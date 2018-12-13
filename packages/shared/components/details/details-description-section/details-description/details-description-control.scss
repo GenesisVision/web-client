@@ -27,7 +27,7 @@
   }
   &__text {
     @include font-size($font-size-common);
-    padding-right: $padding-xsmall;
+    @include adaptive-padding(right, $padding-xsmall);
     color: $main-color;
     font-weight: 600;
     letter-spacing: 0.3px;

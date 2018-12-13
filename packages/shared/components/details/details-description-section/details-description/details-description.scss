@@ -75,10 +75,6 @@
     width: 50%;
     box-sizing: border-box;
 
-    @include media-breakpoint-landscape-phone() {
-      padding-left: $padding-big;
-    }
-
     @include media-breakpoint-tablet() {
       width: auto;
       padding: 0;
@@ -111,16 +107,17 @@
   }
 
   &__main {
-    @include adaptive-padding(left, $padding-big);
     order: 1;
     width: 100%;
-    padding-left: 0;
 
     @include media-breakpoint-tablet() {
       order: 0;
     }
-    @include media-breakpoint-landscape-phone() {
+
+    @include media-breakpoint-tablet() {
       padding-left: $padding-big;
+      width: auto;
+      flex: 1 1 auto;
     }
   }
 

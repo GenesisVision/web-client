@@ -10,16 +10,18 @@ $withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
 .details-investment {
   display: inline-block;
   width: 100%;
-  max-width: 500px;
+  max-width: 350px;
   margin-top: $padding-small-mobile;
   margin-left: 0;
   & div {
     box-sizing: border-box;
   }
-  @include media-breakpoint-phone() {
-    margin-left: -$padding-small-mobile;
-  }
+
   @include media-breakpoint-landscape-phone() {
+    max-width: 500px;
+  }
+
+  @include media-breakpoint-tablet() {
     margin-top: $padding-small;
     margin-left: -$padding-small;
   }
