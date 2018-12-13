@@ -243,8 +243,7 @@ class ProgramDetailsDescription extends PureComponent {
                 className={"details-description__short-statistic-item"}
                 accent
               >
-                {/*{programDescription.level < 3 ? (*/}
-                {false ? (
+                {programDescription.level < 3 ? (
                   <Hint
                     content={
                       <NumberFormat
