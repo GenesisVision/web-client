@@ -11,19 +11,6 @@
   &__icon {
     max-width: 17px;
     max-height: 17px;
-    svg [stroke] {
-      stroke: $label-color;
-    }
-    &.icon--active {
-      svg [stroke] {
-        stroke: $primary-color;
-      }
-    }
-    &:hover {
-      svg [stroke] {
-        stroke: $main-color;
-      }
-    }
   }
   &__text {
     @include font-size($font-size-common);

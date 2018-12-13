@@ -80,14 +80,38 @@
     height: 18px;
   }
 
+  &--favorite {
+    cursor: pointer;
+    svg [stroke] {
+      stroke: $label-color;
+    }
+    svg [fill] {
+      fill: none;
+    }
+    &:hover {
+      svg [stroke] {
+        stroke: $text-accent-color;
+      }
+    }
+    &.icon--selected {
+      svg [stroke] {
+        stroke: none;
+      }
+    }
+  }
+
   &--copy {
     width: 14px;
   }
 
-	&--active {
+	&--selected {
 		svg {
 			fill: $primary-color;
+      stroke: $primary-color;
 		}
+    svg [fill] {
+      fill: $primary-color;
+    }
 		svg [stroke] {
 			stroke: $primary-color;
 		}

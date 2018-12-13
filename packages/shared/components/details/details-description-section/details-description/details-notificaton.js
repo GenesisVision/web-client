@@ -6,7 +6,6 @@ import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
 import isAuthenticated from "shared/decorators/is-authenticated";
-import classnames from "classnames";
 import DetailsDescriptionControl from "./details-description-control";
 
 const DetailsNotificaton = ({ t, url, hasNotifications, title }) => {
@@ -19,9 +18,8 @@ const DetailsNotificaton = ({ t, url, hasNotifications, title }) => {
     >
       <DetailsDescriptionControl text={t("fund-details-page.description.notifications")}>
         <RingIcon
-          className={classnames("details-description-control__icon", {
-            "icon--active": hasNotifications
-          })}
+          selected={hasNotifications}
+          className="details-description-control__icon"
         />
       </DetailsDescriptionControl>
     </Link>
