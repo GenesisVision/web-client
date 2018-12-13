@@ -45,27 +45,11 @@
       flex-direction: row;
       width: 100%;
       justify-content: space-between;
-
-      .statistics-item {
-        min-width: 80px;
-        box-sizing: border-box;
-        padding-right: 0;
-      }
     }
     @include media-breakpoint-landscape-phone() {
-      .statistics-item {
-        min-width: 110px;
-      }
-    }
-    @include media-breakpoint-tablet() {
       flex-direction: column;
       width: auto;
       justify-content: space-between;
-
-      .statistics-item {
-        width: auto;
-        box-sizing: border-box;
-      }
     }
   }
 

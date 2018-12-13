@@ -9,8 +9,11 @@
   align-items: center;
   justify-content: flex-end;
   &__icon {
-    max-width: 17px;
-    max-height: 17px;
+    width: 20px;
+    @include media-breakpoint-landscape-phone() {
+      max-width: 17px;
+      max-height: 17px;
+    }
     svg [stroke] {
       stroke: $label-color;
     }

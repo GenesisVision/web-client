@@ -7,12 +7,15 @@
   align-items: stretch;
   &__statistic,
   &__chart {
-    @include adaptive-margin(bottom, $padding-small);
+    margin-top: $padding-big-mobile;
+    @include media-breakpoint-landscape-phone() {
+      margin-top: $padding-big;
+    }
   }
   &__statistic {
     display: flex;
     width: 100%;
-    @include media-breakpoint-tablet() {
+    @include media-breakpoint-landscape-phone() {
       margin-right: $padding-big-mobile;
       max-width: 300px;
     }
@@ -20,12 +23,8 @@
 
   &__chart {
     display: flex;
-    flex: 1 1 100%;
+    flex: 1;
     min-height: 400px;
-
-    @include media-breakpoint-tablet() {
-      flex-basis: auto;
-    }
   }
 }
 
