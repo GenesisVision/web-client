@@ -19,8 +19,6 @@ export const createProgram = (createProgramData, setSubmitting) => dispatch => {
 
   let data = getDataWithoutSuffixes(createProgramData, [
     "periodLength",
-    "successFee",
-    "entryFee",
     "leverage"
   ]);
 
