@@ -206,6 +206,7 @@
     text-align: left;
     color: $text-color;
     padding-bottom: $padding-small;
+    word-break: break-word;
     @include media-breakpoint-landscape-phone() {
       font-size: $font-size-paragraph;
       line-height: $font-size-paragraph * 2;
