@@ -7,18 +7,11 @@
   align-items: stretch;
   &__statistic,
   &__chart {
-    margin-top: $padding-big-mobile;
-    @include media-breakpoint-tablet() {
-      margin-top: $padding-big;
-    }
+    @include adaptive-margin(bottom, $padding-small);
   }
   &__statistic {
     display: flex;
     width: 100%;
-    max-width: 350px;
-    @include media-breakpoint-landscape-phone() {
-      max-width: 500px;
-    }
     @include media-breakpoint-tablet() {
       margin-right: $padding-big-mobile;
       max-width: 300px;

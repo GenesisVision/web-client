@@ -3,11 +3,8 @@
 @import "~shared/styles/_sizes.scss";
 
 .details {
-  &__section {
-    @include adaptive-margin(bottom, $padding-big-mobile);
-    @include media-breakpoint-landscape-phone() {
-      margin-top: 40px;
-    }
+  @include media-breakpoint-landscape-phone() {
+    margin-top: 40px;
   }
 }
 

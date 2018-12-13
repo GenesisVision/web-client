@@ -32,5 +32,9 @@
     font-weight: 600;
     letter-spacing: 0.3px;
     white-space: nowrap;
+    display: none;
+    @include media-breakpoint-phone() {
+      display: inherit;
+    }
   }
 }

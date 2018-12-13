@@ -6,9 +6,11 @@
   display: flex;
   flex-wrap: wrap;
   white-space: pre-wrap;
+  @include adaptive-margin(bottom, $padding-small);
 
   @include media-breakpoint-tablet() {
     flex-wrap: nowrap;
+    margin-bottom: $padding-xlarge;
   }
 
   &__your-investment {
