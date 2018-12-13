@@ -254,6 +254,7 @@ class ProgramDetailsDescription extends PureComponent {
                         suffix=" %)"
                       />
                     }
+                    className="details-description__short-statistic-hint"
                     vertical={"bottom"}
                     tooltipContent={t(
                       "program-details-page.description.entry-fee-levels"

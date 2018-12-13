@@ -192,6 +192,12 @@
     letter-spacing: 0.3px;
     font-weight: 600;
     padding-left: $padding-small-mobile;
+    .gv-switch__input-wrapper {
+      z-index: 0;
+    }
+    .gv-switch__track {
+      z-index: -1;
+    }
     .gv-switch-wrapper {
       display: inline-flex;
       align-items: center;
@@ -339,4 +345,12 @@
       }
     }
   }
+}
+
+.details-description__short-statistic-hint-tooltip-content {
+  z-index: 2;
+  max-width: 248px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: $text-light-color;
 }
