@@ -373,16 +373,14 @@ $description-block-width: 250px;
     align-items: flex-start;
   }
 
-  &__favorites-block,
-  &__favorites-block span {
+  &__favorites-block {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     margin-bottom: $padding/4;
-    span {
-      svg {
-        margin: 0 10px;
-      }
+
+    .icon {
+      margin: 0 10px;
     }
   }
 

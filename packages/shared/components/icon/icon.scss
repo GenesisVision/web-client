@@ -1,4 +1,5 @@
 @import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
 
 .icon {
   height: 22px;
@@ -82,7 +83,16 @@
 
   &--favorite {
     cursor: pointer;
+    width: 20px;
+    height: 19px;
+
+    @include media-breakpoint-landscape-phone() {
+      width: 28px;
+      height: 27px;
+    }
+
     svg [stroke] {
+      transition: stroke 300ms ease;
       stroke: $label-color;
     }
     svg [fill] {

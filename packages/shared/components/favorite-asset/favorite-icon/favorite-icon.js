@@ -13,12 +13,11 @@ class FavoriteIcon extends Component {
     }
   };
   render() {
-    // console.log(this.props);
-    // console.log(this.props.selected);
+    const { selected, className } = this.props;
     return (
-      <Icon type={"favorite"} {...this.props} onclick={this.handleClick}>
-        <Favorite />
-      </Icon>
+        <Icon type={"favorite"} selected={selected} className={className} onClick={this.handleClick}>
+          <Favorite />
+        </Icon>
     );
   }
 }
