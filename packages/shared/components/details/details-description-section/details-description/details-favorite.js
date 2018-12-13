@@ -1,23 +1,21 @@
-import "./details-description-controls.scss";
+import "./details-description-control.scss";
 
 import FavoriteIcon from "shared/components/favorite-asset/favorite-icon/favorite-icon";
 import React from "react";
 import { translate } from "react-i18next";
 import { compose } from "redux";
 import isAuthenticated from "shared/decorators/is-authenticated";
+import DetailsDescriptionControl from "./details-description-control";
 
 const DetailsFavorite = ({ t, toggleFavorite, id, isFavorite }) => (
-  <div className="details-description__control">
+  <DetailsDescriptionControl text={t("fund-details-page.description.addToFavorites")}>
     <FavoriteIcon
-      className="details-description__control-icon"
+      className="details-description-control__icon"
       id={id}
       selected={isFavorite}
       onClick={toggleFavorite}
     />
-    <div className="details-description__control-text">
-      {t("fund-details-page.description.addToFavorites")}
-    </div>
-  </div>
+  </DetailsDescriptionControl>
 );
 
 export default compose(
