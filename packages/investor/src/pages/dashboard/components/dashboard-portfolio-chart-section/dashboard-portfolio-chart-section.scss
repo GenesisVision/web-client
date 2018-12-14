@@ -135,6 +135,23 @@
     }
   }
 
+  &__chart-loader {
+    width: 100%;
+
+    svg {
+      width: 100%;
+    }
+
+    #mask {
+      animation: mask 1s ease infinite;
+    }
+    @keyframes mask {
+      from {transform: translateX(0)}
+      to {transform: translateX(100%)}
+    }
+  }
+
+
   .get-started {
     display: flex;
     justify-content: center;
