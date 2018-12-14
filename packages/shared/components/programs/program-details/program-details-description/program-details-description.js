@@ -78,15 +78,15 @@ class ProgramDetailsDescription extends PureComponent {
     updateDetails();
   };
   componentDidMount() {
-    platformApi.v10PlatformLevelsGet({currency: "GVT"}).then(data => {
+    platformApi.v10PlatformLevelsGet({ currency: "GVT" }).then(data => {
       this.setState({ investmentsLimits: data.levels });
     });
-  };
+  }
   getCurrentLimit(currentLevel) {
-    return this.state.investmentsLimits
-      .find(LevelInfo => LevelInfo.level === currentLevel)
-      .investmentLimit;
-  };
+    return this.state.investmentsLimits.find(
+      LevelInfo => LevelInfo.level === currentLevel
+    ).investmentLimit;
+  }
   render() {
     const {
       isOpenInvestmentPopup,
@@ -171,9 +171,12 @@ class ProgramDetailsDescription extends PureComponent {
                 {investmentsLimits.length && (
                   <StatisticItem
                     accent
-                    label={t("program-details-page.popover.invest-limit")}>
+                    label={t("program-details-page.popover.invest-limit")}
+                  >
                     <NumberFormat
-                      value={formatValue(this.getCurrentLimit(programDescription.level))}
+                      value={formatValue(
+                        this.getCurrentLimit(programDescription.level)
+                      )}
                       thousandSeparator={" "}
                       displayType="text"
                       suffix={` GVT`}
@@ -243,17 +246,21 @@ class ProgramDetailsDescription extends PureComponent {
                 className={"details-description__short-statistic-item"}
                 accent
               >
-                {/*{programDescription.level < 3 ? (*/}
-                {false ? (
+                {programDescription.entryFeeSelected !==
+                programDescription.entryFeeCurrent ? (
                   <Hint
                     content={
                       <NumberFormat
-                        value={formatValue(programDescription.entryFee, 2)}
+                        value={formatValue(
+                          programDescription.entryFeeSelected,
+                          2
+                        )}
                         displayType="text"
-                        prefix="0 % ("
+                        prefix={`${programDescription.entryFeeCurrent} % (`}
                         suffix=" %)"
                       />
                     }
+                    className="details-description__short-statistic-hint"
                     vertical={"bottom"}
                     tooltipContent={t(
                       "program-details-page.description.entry-fee-levels"
@@ -261,7 +268,7 @@ class ProgramDetailsDescription extends PureComponent {
                   />
                 ) : (
                   <NumberFormat
-                    value={formatValue(programDescription.entryFee, 2)}
+                    value={formatValue(programDescription.entryFeeCurrent, 2)}
                     displayType="text"
                     suffix=" %"
                   />
