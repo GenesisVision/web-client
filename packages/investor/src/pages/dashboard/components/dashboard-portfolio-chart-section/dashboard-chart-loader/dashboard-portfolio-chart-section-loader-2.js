@@ -5,7 +5,7 @@ const DashboardPortfolioChartSectionLoader2 = props => {
   return (
     <div className="dashboard-portfolio-chart-section__chart-loader">
         <ContentLoader
-          height={683}
+          height={351}
           width={1011}
           speed={2}
           primaryColor="#333d45"
