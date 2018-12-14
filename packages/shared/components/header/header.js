@@ -1,6 +1,6 @@
 import "./header.scss";
 
-import { MenuIcon } from "shared/components/icon/icon";
+import { Icon } from "shared/components/icon/icon";
 import { SearchIcon } from "shared/components/icon/search-icon";
 import Navigation from "shared/components/navigation/navigation";
 import NavigationMobile from "shared/components/navigation/navigation-mobile/navigation-mobile";
@@ -40,11 +40,8 @@ class Header extends Component {
     return (
       <div className="header">
         <div className="header__left">
-          <div
-            onClick={this.handleOpenMenu}
-            className="navigation__menu profile-avatar"
-          >
-            <MenuIcon />
+          <div className="navigation__menu profile-avatar">
+            <Icon type={"menu"} onClick={this.handleOpenMenu} />
           </div>
           <Navigation className="header__navigation" />
         </div>

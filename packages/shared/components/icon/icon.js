@@ -38,11 +38,3 @@ Icon.propTypes = {
   className: PropTypes.string,
   onClick: PropTypes.func
 };
-
-export const ControlsIcon = props => {
-  return <Icon type={"controls"} {...props} />;
-};
-
-export const MenuIcon = props => {
-  return <Icon type={"menu"} {...props} />;
-};
