@@ -71,11 +71,7 @@ class CustomNotification extends Component {
             onChange={this.handleSwitch}
           />
           <span className="notification-setting__label">
-            {t(
-              `notifications-page.program.create.${
-                settings.conditionType
-              }.title`
-            )}
+            {t(`notifications-page.create.${settings.conditionType}.title`)}
           </span>
         </label>
         <div className="custom-notification__offset">
@@ -84,9 +80,7 @@ class CustomNotification extends Component {
             value={settings.conditionAmount.toString()}
             disabled
             label={t(
-              `notifications-page.program.create.${
-                settings.conditionType
-              }.label`
+              `notifications-page.create.${settings.conditionType}.label`
             )}
             adornment={settings.conditionType === "Profit" ? "%" : undefined}
             autoComplete="off"
