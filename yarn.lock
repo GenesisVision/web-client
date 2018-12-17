@@ -5258,10 +5258,10 @@ gud@^1.0.0:
   dependencies:
     superagent "^3.8.3"
 
-gv-react-components@^0.0.26:
-  version "0.0.26"
-  resolved "https://registry.yarnpkg.com/gv-react-components/-/gv-react-components-0.0.26.tgz#bc0734630bf6a1a5a965eb94170d9b6252685578"
-  integrity sha512-lZL4ar9uuaC+wVzDiDvREcj9nQTEu5X68V1lVoT5iSbUyqTQ50qTgnxtTXwap7DJbndIYIWCw4yyOJFCUURbfA==
+gv-react-components@^0.0.28:
+  version "0.0.28"
+  resolved "https://registry.yarnpkg.com/gv-react-components/-/gv-react-components-0.0.28.tgz#4452c2dd3f216a76d6ff6d963c4553088209357f"
+  integrity sha512-aUdyFjxlzi4KUwItCVuE9yrYJAubWEg0nvlIPYLw+xg9RnrGxSQZ2WkIVpQbRgoyAdjzBnSs6tsXG7EKFzYI6g==
   dependencies:
     classnames "^2.2.6"
     prop-types "^15.6.1"
