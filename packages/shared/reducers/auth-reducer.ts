@@ -1,6 +1,11 @@
 import authService from "shared/services/auth-service";
 import { UPDATE_TOKEN } from "shared/actions/auth-actions";
 
+export interface IAuthReducer {
+  isAuthenticated: boolean;
+  username: string;
+}
+
 const initialState = {
   isAuthenticated: authService.isAuthenticated(),
   username: authService.getUserName()
@@ -11,7 +16,7 @@ const authReducer = (state = initialState, action) => {
     case UPDATE_TOKEN:
       return {
         isAuthenticated: action.isAuthenticated,
-        username: authService.username
+        username: authService.getUserName()
       };
     default:
       return state;

@@ -12,16 +12,13 @@ import CurrencySelectContainer from "shared/modules/currency-select/components/c
 import * as React from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
-import { ProfileHeaderViewModel, ProgramsApi } from "gv-api-web";
-import apiClient from "shared/services/api-client/swagger-custom-client";
+import { ProfileHeaderViewModel } from "gv-api-web";
 
 interface IHeaderState {
   isOpenNavigation: boolean;
 }
 
-const api = new ProgramsApi(apiClient);
-
-interface IHeaderProps {
+export interface IHeaderProps {
   profileHeader: ProfileHeaderViewModel;
   isAuthenticated: boolean;
   LOGIN_ROUTE: string;
@@ -43,12 +40,6 @@ class Header extends React.Component<IHeaderProps, IHeaderState> {
   handleOpenMenu = () => this.setState({ isOpenNavigation: true });
   handleCloseMenu = () => this.setState({ isOpenNavigation: false });
 
-  componentDidMount() {
-    api
-      .v10ProgramsGet()
-      .then(data => console.info(data.programs[0] && data.programs[0].id));
-  }
-
   render(): React.ReactNode {
     const {
       t,
@@ -69,8 +60,6 @@ class Header extends React.Component<IHeaderProps, IHeaderState> {
       investedGvt,
       notificationsCount
     } = profileHeader;
-
-    console.info(profileHeader.investedGvt);
 
     return (
       <div className="header">
