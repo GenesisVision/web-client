@@ -6,11 +6,11 @@ import dashboardFundsReducer from "./dashboard-funds.reducer";
 import dashboardInRequestsReducer from "./dashboard-in-requests.reducer";
 import dashboardPeriodReducer from "./dashboard-period.redicer";
 import dashboardProgramsReducer from "./dashboard-programs.reducer";
-import dashboardTopAssetReducer from "./dashboard-top-assets.reducer";
+import dashboardAssetReducer from "./dashboard-assets.reducer";
 
 const dashboardReducer = combineReducers({
   period: dashboardPeriodReducer,
-  topAssets: dashboardTopAssetReducer,
+  assets: dashboardAssetReducer,
   assetChart: dashboardAssetChartReducer,
   eventsData: dashboardEventsReducer,
   programs: dashboardProgramsReducer,
