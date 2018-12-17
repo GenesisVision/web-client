@@ -31,7 +31,7 @@ class ManagerPage extends Component {
   }
 
   render() {
-    const { t } = this.props;
+    const { t, isAuthenticated } = this.props;
     const { managerProfile, isPending } = this.state;
 
     return (
@@ -46,6 +46,7 @@ class ManagerPage extends Component {
                 managerService={managerService}
                 managerId={managerProfile.id}
                 title={managerProfile.username}
+                isAuthenticated={isAuthenticated}
               />
             </div>
           </div>
@@ -57,7 +58,8 @@ class ManagerPage extends Component {
 
 const mapStateToProps = state => {
   return {
-    managerProfile: state.manager.data
+    managerProfile: state.manager.data,
+    isAuthenticated: state.authData.isAuthenticated
   };
 };
 

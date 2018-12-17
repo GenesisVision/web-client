@@ -1,12 +1,14 @@
-import "./details-description-controls.scss";
+import "./details-description-control.scss";
 
-import { RingIcon } from "shared/components/icon/ring-icon";
+import classnames from "classnames";
 import React from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
+import { RingIcon } from "shared/components/icon/ring-icon";
 import isAuthenticated from "shared/decorators/is-authenticated";
-import classnames from "classnames";
+
+import DetailsDescriptionControl from "./details-description-control";
 
 const DetailsNotificaton = ({ t, url, hasNotifications, title }) => {
   return (
@@ -16,16 +18,15 @@ const DetailsNotificaton = ({ t, url, hasNotifications, title }) => {
         state: `/ ${title}`
       }}
     >
-      <div className="details-description__control">
+      <DetailsDescriptionControl
+        text={t("fund-details-page.description.notifications")}
+      >
         <RingIcon
-          className={classnames("details-description__control-icon", {
-            "details-description__control-icon--active": hasNotifications
+          className={classnames("details-description-control__icon", {
+            "icon--active": hasNotifications
           })}
         />
-        <div className="details-description__control-text">
-          {t("program-details-page.description.notifications")}
-        </div>
-      </div>
+      </DetailsDescriptionControl>
     </Link>
   );
 };

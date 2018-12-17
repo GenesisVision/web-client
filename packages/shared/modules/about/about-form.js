@@ -23,7 +23,7 @@ const AboutForm = ({ t, handleSubmit, disabled, errorMessage }) => {
                     label={t("profile-page.login")}
                     component={GVTextField}
                     name="userName"
-                    disabled={disabled}
+                    autoFocus
                   />
                 </div>
                 <div className="profile__row">
@@ -32,7 +32,6 @@ const AboutForm = ({ t, handleSubmit, disabled, errorMessage }) => {
                     component={GVTextField}
                     type="textarea"
                     name="about"
-                    disabled={disabled}
                   />
                 </div>
                 <div className="form-error">{errorMessage}</div>

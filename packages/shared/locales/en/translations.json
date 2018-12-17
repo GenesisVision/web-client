@@ -285,8 +285,7 @@
     "title": "About levels",
     "section": {
       "text-1": "Genesis level shows the experience and reliability of a manager.",
-      "text-2": "All of the investment programs of a manager that have not passed KYC are stuck on the first level and can’t level up unless the manager passes the KYC procedure. Once the verification process is completed, the investment programs of a manager receive a second level.",
-      "text-3": "Basic rules of levelling up"
+      "text-2": "All of the investment programs of a manager that have not passed KYC are stuck on the first level and can’t level up unless the manager passes the KYC procedure. Once the verification process is completed, the investment programs of a manager receive a second level."
     },
     "list": {
       "subtitle": "Further levels are given according to the algorithm:",
@@ -297,15 +296,6 @@
       "list-item-5": "All programs that have completed at least one trade participate in the rating.",
       "list-item-6": "Each level needs to have a minimum of ten participators. You can’t level up if fewer than ten people are competing against you.",
       "list-item-7": "The higher a manager’s level is — the more funds he can attract."
-    },
-    "limits": {
-      "1": 70,
-      "2": 700,
-      "3": 3500,
-      "4": 7000,
-      "5": 14000,
-      "6": 35000,
-      "7": 70000
     },
     "table-header": {
       "level": "Level",
@@ -344,6 +334,9 @@
       "profit": "Profit",
       "status": "Status",
       "withdraw": "Withdraw",
+      "close-fund": "Close fund",
+      "close-fund-notification": "You are about to close the fund. After you confirm this, all your funds will be withdrawn, no one will be able to invest in the fund anymore, investors will still be able to withdraw their funds with a zero commission.",
+      "close-fund-notification-success": "Request to close the fund was sent successfully.",
       "withdraw-notice-text": "You can withdraw only the invested funds, the profit will be withdrawn to your account at the end of the period automatically"
     },
     "statistics": {
@@ -394,7 +387,7 @@
       "notification-success": "Request to close the period was sent successfully."
     },
     "description": {
-      "entry-fee-levels": "Text about levels",
+      "entry-fee-levels": "The entry fee is disabled for programs that have not reached level 3. It will be charged only for programs with level 3 or higher.",
       "strategy": "Strategy",
       "addToFavorites": "Add to favorites",
       "notifications": "Notifications",
@@ -687,6 +680,7 @@
       "success-message": "Successful logout on another devices."
     },
     "signup": {
+      "username-field-text": "Username",
       "footer-text": "Have an account already?",
       "title": "Sign up",
       "email-field-text": "Email address",
@@ -813,6 +807,9 @@
     },
     "dashboard-page": {
       "title": "Dashboard",
+      "chart-section": {
+        "in-requests": "In Requests"
+      },
       "requests": {
         "success-cancel-request": "Request canceled successfully",
         "failure-cancel-request": "Failed to cancel request"
@@ -922,6 +919,13 @@
       "favorite-programs": "Favorite programs",
       "create-program-text": "Do not have any programs yet",
       "create-fund-text": "Do not have any fund yet",
+      "chart-section": {
+        "header": "Chart",
+        "my-assets": "My Assets",
+        "in-requests": "In Requests",
+        "programs": "Programs",
+        "funds": "Funds"
+      },
       "requests": {
         "success-cancel-request": "Request canceled successfully",
         "failure-cancel-request": "Failed to cancel request"
@@ -1033,7 +1037,7 @@
           "available-in-wallet": "Available in wallet"
         },
         "hints": {
-          "entry-fee-levels": "",
+          "entry-fee-levels": "The entry fee is disabled for programs that have not reached level 3. It will be charged only for programs with level 3 or higher.",
           "entry-fee": "Description about entry fee is here",
           "entry-fee-description": "An entry fee is a fee charged to investors upon their investment to an investment program. The maximum entry fee is {{maxFee}} %",
           "success-fee": "Description about success fee is here",

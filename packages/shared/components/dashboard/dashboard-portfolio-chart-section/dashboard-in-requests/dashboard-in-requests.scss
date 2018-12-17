@@ -5,7 +5,7 @@
 .dashboard-request {
   @include horizontal-paddings($padding-small, 2);
   float: right;
-  & .statistics-item{
+  & .statistics-item {
     padding-right: 0;
   }
   &__in-request {
@@ -34,10 +34,7 @@
   min-width: 300px;
   padding: 20px;
   overflow: hidden;
-
-  @include media-breakpoint-landscape-phone() {
-    min-width: 400px;
-  }
+  box-sizing: border-box;
 
   &__statistic-item {
     padding: 0;
@@ -52,9 +49,18 @@
     align-items: center;
     justify-content: space-between;
     color: $text-accent-color;
-    & > * {
-      flex: 1;
+
+    .dashboard-request-popover__statistic-item {
+      padding: 0 10px;
+
+      &:last-child {
+        padding-right: 0;
+      }
     }
+    .dashboard-request-popover__btns:last-child {
+      padding-left: 10px;
+    }
+
     &:not(:last-of-type) {
       padding-bottom: 20px;
       margin-bottom: 20px;

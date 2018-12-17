@@ -1,12 +1,14 @@
 @import "~shared/styles/_colors.scss";
 
 .asset-status {
-  cursor: pointer;
-  border-bottom: 1px dashed;
-
   &__active {
     color: $program-status-active-color;
-    border-color: transparent;
+  }
+
+  &__investing,
+  &__withdrawing {
+    border-bottom: 1px dashed;
+    cursor: pointer;
   }
 
   &__investing {
@@ -22,6 +24,5 @@
   &__ended,
   &__pending {
     color: $program-status-ended-color;
-    border-color: transparent;
   }
 }

@@ -1,5 +1,5 @@
-import { DEFAULT_PERIOD } from "shared/components/chart/chart-period/chart-period.helpers";
 import fundsApi from "shared/services/api-client/funds-api";
+import managerApi from "shared/services/api-client/manager-api";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 
@@ -11,13 +11,12 @@ export const getPortfolioEvents = () => (dispatch, getState) => {
   dispatch(actions.fetchPortfolioEvents(authorization, { take: 5 }));
 };
 
-export const getAssetChart = (
-  assetId,
-  assetTitle,
-  assetType,
-  period = DEFAULT_PERIOD
-) => (dispatch, getState) => {
+export const getAssetChart = (assetId, assetTitle, assetType) => (
+  dispatch,
+  getState
+) => {
   const { currency } = getState().accountSettings;
+  const { period } = getState().dashboard;
   const chartFilter = {
     currency,
     dateFrom: period.start,
@@ -25,7 +24,6 @@ export const getAssetChart = (
     maxPointCount: 100
   };
 
-  dispatch(actions.dashboardChart({ isPending: true }));
   if (assetType === "Program") {
     programsApi
       .v10ProgramsByIdChartsProfitGet(assetId, chartFilter)
@@ -52,4 +50,31 @@ export const getAssetChart = (
       );
     });
   }
+};
+
+export const getAssets = () => (dispatch, getState) => {
+  const authorization = authService.getAuthArg();
+  managerApi.v10ManagerAssetsGet(authorization).then(data => {
+    return dispatch(actions.fetchAssets(data));
+  });
+};
+
+export const composeAssetChart = () => (dispatch, getState) => {
+  const { assets } = getState().dashboard;
+  let asset, assetType;
+  if (assets.programs.length > 0) {
+    asset = assets.programs[0];
+    assetType = "Program";
+  } else if (assets.funds.length > 0) {
+    asset = assets.funds[0];
+    assetType = "Fund";
+  }
+
+  if (asset !== undefined) {
+    dispatch(getAssetChart(asset.id, asset.title, assetType));
+  }
+};
+
+export const setPeriod = period => (dispatch, getState) => {
+  dispatch(actions.setPeriod(period));
 };
