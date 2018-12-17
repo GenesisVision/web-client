@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { fetchTwoFactor } from "shared/actions/2fa-actions";
 import { GLOBAL_SEARCH_ROUTE } from "shared/components/global-search/global-search.routes";
 import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
-import Header from "shared/components/header/header";
+import Header from "shared/components/header/header.tsx";
 
 import { logout } from "../../../pages/auth/login/services/login.service";
 
@@ -25,16 +25,17 @@ class HeaderContainer extends Component {
       isAuthenticated,
       ...other
     } = this.props;
+
     return (
       <Header
-        {...info.data}
-        {...other}
+        profileHeader={info.data}
         isAuthenticated={isAuthenticated}
         logout={logout}
         openNotifications={notificationsToggle}
         LOGIN_ROUTE={LOGIN_ROUTE}
         SIGNUP_ROUTE={SIGNUP_ROUTE}
         GLOBAL_SEARCH_ROUTE={GLOBAL_SEARCH_ROUTE}
+        {...other}
       />
     );
   }

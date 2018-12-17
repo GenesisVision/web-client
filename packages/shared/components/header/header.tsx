@@ -9,11 +9,33 @@ import ProfileWidget from "shared/components/profile-widget/profile-widget";
 import WalletWidget from "shared/components/wallet-widget/wallet-widget";
 import { GVButton } from "gv-react-components";
 import CurrencySelectContainer from "shared/modules/currency-select/components/currency-select-container";
-import React, { Component, Fragment } from "react";
+import * as React from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
+import { ProfileHeaderViewModel, ProgramsApi } from "gv-api-web";
+import apiClient from "shared/services/api-client/swagger-custom-client";
 
-class Header extends Component {
+interface IHeaderState {
+  isOpenNavigation: boolean;
+}
+
+const api = new ProgramsApi(apiClient);
+
+interface IHeaderProps {
+  profileHeader: ProfileHeaderViewModel;
+  isAuthenticated: boolean;
+  LOGIN_ROUTE: string;
+  SIGNUP_ROUTE: string;
+  GLOBAL_SEARCH_ROUTE: string;
+  t(string: string): void;
+  logout(): void;
+  openNotifications(): void;
+}
+
+class Header extends React.Component<IHeaderProps, IHeaderState> {
+  static defaultProps = {
+    profileHeader: {}
+  };
   state = {
     isOpenNavigation: false
   };
@@ -21,22 +43,35 @@ class Header extends Component {
   handleOpenMenu = () => this.setState({ isOpenNavigation: true });
   handleCloseMenu = () => this.setState({ isOpenNavigation: false });
 
-  render() {
+  componentDidMount() {
+    api
+      .v10ProgramsGet()
+      .then(data => console.info(data.programs[0] && data.programs[0].id));
+  }
+
+  render(): React.ReactNode {
     const {
       t,
-      avatar,
       logout,
-      email,
       openNotifications,
-      notificationsCount,
       isAuthenticated,
+      LOGIN_ROUTE,
+      SIGNUP_ROUTE,
+      GLOBAL_SEARCH_ROUTE,
+      profileHeader
+    } = this.props;
+
+    const {
+      avatar,
+      email,
       totalBalanceGvt,
       availableGvt,
       investedGvt,
-      LOGIN_ROUTE,
-      SIGNUP_ROUTE,
-      GLOBAL_SEARCH_ROUTE
-    } = this.props;
+      notificationsCount
+    } = profileHeader;
+
+    console.info(profileHeader.investedGvt);
+
     return (
       <div className="header">
         <div className="header__left">
@@ -59,7 +94,7 @@ class Header extends Component {
         <div className="header__separator" />
         <div className="header__right">
           {isAuthenticated ? (
-            <Fragment>
+            <React.Fragment>
               <WalletWidget
                 className="header__wallet"
                 totalBalanceGvt={totalBalanceGvt}
@@ -76,7 +111,7 @@ class Header extends Component {
                 avatar={avatar}
                 email={email}
               />
-            </Fragment>
+            </React.Fragment>
           ) : (
             <div className="header__buttons">
               <Link to={LOGIN_ROUTE}>

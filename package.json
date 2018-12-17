@@ -2,7 +2,7 @@
   "private": true,
   "workspaces": ["packages/*"],
   "dependencies": {
-    "gv-api-web": "git+https://github.com/GenesisVision/gv-api-web.git#development",
+    "gv-api-web": "git+https://github.com/GenesisVision/gv-api-web.git#typescript",
     "gv-react-components": "^0.0.26"
   },
   "scripts": {
