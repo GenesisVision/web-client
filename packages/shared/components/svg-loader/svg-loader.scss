@@ -1,0 +1,15 @@
+.svg-loader {
+  //width: 100%;
+}
+
+.svg-loader__cube {
+  animation: mask 2s ease infinite;
+}
+
+.svg-loader__path {
+  fill: #333d45;
+}
+
+.svg-loader__path-mask {
+  fill: #4c5257;
+}
