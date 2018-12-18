@@ -1,9 +1,9 @@
-import fundDepositReducer from "../modules/fund-deposit/reducer/fund-deposit.reducer";
+import fundDepositReducer from "modules/fund-deposit/reducer/fund-deposit.reducer";
 import headerReducer, {
   IHeaderReducer
-} from "../modules/header/reducer/header-reducer";
-import programDepositReducer from "../modules/program-deposit/reducer/program-deposit.reducer";
-import notificationsReducer from "../pages/app/components/notifications/reducers/notifications.reducers";
+} from "modules/header/reducer/header-reducer";
+import programDepositReducer from "modules/program-deposit/reducer/program-deposit.reducer";
+import notificationsReducer from "pages/app/components/notifications/reducers/notifications.reducers";
 import { loadingBarReducer } from "react-redux-loading-bar";
 import { routerReducer } from "react-router-redux";
 import { combineReducers } from "redux";
@@ -20,16 +20,16 @@ import emailPendingReducer from "shared/reducers/email-pending-reducer";
 import platformReducer from "shared/reducers/platform-reducer";
 import uiReducer from "shared/reducers/ui-reducer";
 
-import fundWithdrawReducer from "../modules/fund-withdraw/reducer/fund-withdraw.reducer";
-import programWithdrawReducer from "../modules/program-withdraw/reducer/program-withdraw.reducer";
-import passwordRestoreReducer from "../pages/auth/forgot-password/reducers/password-restore-reducers";
-import loginReducer from "../pages/auth/login/reducers/login.reducers";
-import signUpReducer from "../pages/auth/signup/reducers/signup.reducers";
-import dashboardReducer from "../pages/dashboard/reducers/dashboard.reducers";
-import managerReducer from "../pages/manager/reducers/manager.reducers";
+import fundWithdrawReducer from "modules/fund-withdraw/reducer/fund-withdraw.reducer";
+import programWithdrawReducer from "modules/program-withdraw/reducer/program-withdraw.reducer";
+import passwordRestoreReducer from "pages/auth/forgot-password/reducers/password-restore-reducers";
+import loginReducer from "pages/auth/login/reducers/login.reducers";
+import signUpReducer from "pages/auth/signup/reducers/signup.reducers";
+import dashboardReducer from "pages/dashboard/reducers/dashboard.reducers";
+import managerReducer from "pages/manager/reducers/manager.reducers";
 import programsRatingReducer from "shared/components/programs-rating/reducers/programs-rating.reducers";
 import { NotificationSettingList } from "gv-api-web";
-import { IAuthReducer } from "../../../shared/reducers/auth-reducer";
+import { IAuthReducer } from "shared/reducers/auth-reducer";
 
 export interface IState {
   notificationSettings: NotificationSettingList;
