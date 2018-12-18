@@ -52,31 +52,21 @@ export const getAssetChart = (assetId, assetTitle, assetType) => (
   }
 };
 
-export const getTopAssets = () => (dispatch, getState) => {
-  const { period } = getState().dashboard;
-  const chartFilter = {
-    dateFrom: period.start,
-    dateTo: period.end,
-    maxPointCount: 0,
-    take: 5
-  };
+export const getAssets = () => (dispatch, getState) => {
   const authorization = authService.getAuthArg();
-  Promise.all([
-    managerApi.v10ManagerProgramsGet(authorization, chartFilter),
-    managerApi.v10ManagerFundsGet(authorization, chartFilter)
-  ]).then(([{ programs }, { funds }]) => {
-    return dispatch(actions.topAssets({ programs, funds }));
+  managerApi.v10ManagerAssetsGet(authorization).then(data => {
+    return dispatch(actions.fetchAssets(data));
   });
 };
 
 export const composeAssetChart = () => (dispatch, getState) => {
-  const { topAssets } = getState().dashboard;
+  const { assets } = getState().dashboard;
   let asset, assetType;
-  if (topAssets.programs.length > 0) {
-    asset = topAssets.programs[0];
+  if (assets.programs.length > 0) {
+    asset = assets.programs[0];
     assetType = "Program";
-  } else if (topAssets.funds.length > 0) {
-    asset = topAssets.funds[0];
+  } else if (assets.funds.length > 0) {
+    asset = assets.funds[0];
     assetType = "Fund";
   }
 

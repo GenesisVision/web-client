@@ -23,19 +23,13 @@ class ProgramsRatingContainer extends Component {
         ...item,
         name: String(item.level),
         label: (
-          <div className="programs-rating__tab">
-            <div className="programs-rating__tab-container">
-              <div className="programs-rating__back">{item.level}</div>
-              <div className="programs-rating__back-arrow">&rarr;</div>
-              <div className="programs-rating__back">{item.level + 1}</div>
-            </div>
-            {item.totalOwn !== 0 && (
-              <span className="programs-rating__tab-count">
-                {item.totalOwn}
-              </span>
-            )}
+          <div className="programs-rating__tab-container">
+            <div className="programs-rating__back">{item.level}</div>
+            <div className="programs-rating__back-arrow">&rarr;</div>
+            <div className="programs-rating__back">{item.level + 1}</div>
           </div>
-        )
+        ),
+        count: item.totalOwn !== 0 ? item.totalOwn : undefined
       }));
       const tab = navigateTabs[0];
       this.setState({ navigateTabs, tab });
