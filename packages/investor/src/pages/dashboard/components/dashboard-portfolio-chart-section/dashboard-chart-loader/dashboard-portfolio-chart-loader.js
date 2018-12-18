@@ -1,6 +1,6 @@
 import "./../dashboard-portfolio-chart-section.scss";
 
-import React from "react";
+import React, { Fragment } from "react";
 import SvgLoader from "shared/components/svg-loader/svg-loader.js";
 
 const DashboardPortfolioChartLoader = () => {
@@ -15,7 +15,6 @@ const DashboardPortfolioChartLoader = () => {
 const ChartLoader = () => (
   <div className="dashboard-portfolio-chart-section__chart-loader">
     <SvgLoader
-      id="7"
       height="351"
       width="1011"
     >
@@ -26,38 +25,25 @@ const ChartLoader = () => (
 
 const ChartLoaderHeader = () => (
   <div className="dashboard-portfolio-chart-section__loader-header">
-    <ChartLoaderTextHeader />
+    <ChartLoaderText header />
     <ChartLoaderText />
     <ChartLoaderRight />
-    <ChartLoaderLabelText id="10" />
-    <ChartLoaderLabelText id="11" />
+    <ChartLoaderLabelText />
+    <ChartLoaderLabelText />
   </div>
 );
 
-const ChartLoaderTextHeader = () => (
-  <div className="dashboard-portfolio-chart-section__loader-text">
-    <SvgLoader
-      id="1"
-      height="120"
-      width="220"
-    >
-      <rect x="0" y="0" rx="8" ry="8" width="57" height="15" />
-      <rect x="0" y="40" width="40" height="15" rx="8" ry="8"></rect>
-      <rect x="0" y="70" width="200" height="22" rx="8" ry="8"></rect>
-      <rect x="0" y="105" width="100" height="10" rx="8" ry="8"></rect>
-    </SvgLoader>
-  </div>
-);
+const svgTextHeader = <rect x="0" y="0" rx="8" ry="8" width="57" height="15" />;
 
-const ChartLoaderText = () => (
+const ChartLoaderText = ({header}) => (
   <div className="dashboard-portfolio-chart-section__loader-text">
     <SvgLoader
-      id="2"
       height="120"
       width="220"
     >
+      {header && svgTextHeader}
       <rect x="0" y="40" width="40" height="15" rx="8" ry="8"></rect>
-      <rect x="0" y="70" width="200" height="22" rx="8" ry="8"></rect>
+      <rect x="0" y="70" width="200" height="20" rx="8" ry="8"></rect>
       <rect x="0" y="105" width="100" height="10" rx="8" ry="8"></rect>
     </SvgLoader>
   </div>
@@ -66,20 +52,18 @@ const ChartLoaderText = () => (
 const ChartLoaderRight = () => (
   <div className="dashboard-portfolio-chart-section__loader-right">
     <SvgLoader
-      id="3"
       height="120"
       width="70"
     >
       <rect x="0" y="40" width="40" height="15" rx="8" ry="8"></rect>
-      <rect x="0" y="70" width="60" height="22" rx="8" ry="8"></rect>
+      <rect x="0" y="70" width="60" height="20" rx="8" ry="8"></rect>
     </SvgLoader>
   </div>
 );
 
-const ChartLoaderLabelText = ({id}) => (
+const ChartLoaderLabelText = () => (
   <div className="dashboard-portfolio-chart-section__loader-label-text">
     <SvgLoader
-      id={id}
       height="20"
       width="210"
     >

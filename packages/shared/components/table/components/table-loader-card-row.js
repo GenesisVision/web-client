@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import ContentLoader from "react-content-loader";
+import SvgLoader from "../../svg-loader/svg-loader";
 
 const TableLoaderCardRow = () => {
   return (
@@ -14,12 +14,9 @@ const TableLoaderCardRow = () => {
 
 const CardLoader = () => (
   <div className="programs-cards__card">
-    <ContentLoader
-      height={307}
-      width={271}
-      speed={2}
-      primaryColor="#333d45"
-      secondaryColor="#4c5257"
+    <SvgLoader
+      height="307"
+      width="271"
     >
       <rect x="0" y="0" rx="8" ry="8" width="80" height="80" />
       <rect x="110" y="10" rx="4" ry="4" width="100" height="20" />
@@ -41,7 +38,7 @@ const CardLoader = () => (
       <rect x="100" y="270" rx="4" ry="4" width="80" height="20" />
       <rect x="200" y="250" rx="4" ry="4" width="60" height="10" />
       <rect x="200" y="270" rx="4" ry="4" width="80" height="20" />
-    </ContentLoader>
+    </SvgLoader>
   </div>
 );
 
