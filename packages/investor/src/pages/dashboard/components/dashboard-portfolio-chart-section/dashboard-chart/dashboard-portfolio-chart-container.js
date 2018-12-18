@@ -8,6 +8,7 @@ import { bindActionCreators } from "redux";
 import { getPortfolioChart } from "../../../services/dashboard-chart.service";
 import DashboardPortfolioChart from "./dashboard-portfolio-chart";
 import DashboardPortfolioChartStat from "./dashboard-portfolio-chart-stat";
+import DashboardChartLoader from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-loader";
 
 const composeBalanceChartData = balanceChart => {
   const balance = balanceChart.map(x => ({
@@ -72,8 +73,10 @@ class DashboardPortfolioChartContainer extends PureComponent {
   };
 
   render() {
-    const { data, currency } = this.props;
+    const { data, currency, isPending } = this.props;
     const { period } = this.state;
+    if (isPending && !data)
+      return <DashboardChartLoader />;
     if (data === undefined) return null;
     return (
       <Fragment>

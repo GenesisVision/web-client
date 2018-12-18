@@ -10,6 +10,8 @@ import {
   getAssetChart,
   setPeriod
 } from "../../../services/dashboard.service";
+import DashboardChartLoader
+  from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-loader";
 
 class DashboardPortfolioChartContainer extends PureComponent {
   componentDidMount() {
@@ -25,6 +27,8 @@ class DashboardPortfolioChartContainer extends PureComponent {
 
   render() {
     const { assetChart, currency, period } = this.props;
+    if (!assetChart)
+      return <DashboardChartLoader />;
     if (!assetChart) return null;
     return (
       <Fragment>
@@ -58,6 +62,7 @@ const mapStateToProps = state => {
   const { assetChart, period } = state.dashboard;
   const { currency } = state.accountSettings;
   const { programs, funds } = state.dashboard;
+  console.log(state.dashboard);
   return {
     assetChart,
     period,

@@ -9,7 +9,6 @@ const SvgLoader = ({
   children
 }) => {
   const id = uuid.v4();
-  console.log(id);
   return (
   <svg className="svg-loader" width={`${width}px`} height={`${height}px`} viewBox={`0 0 ${ width } ${ height }`} version="1.1">
     <defs>

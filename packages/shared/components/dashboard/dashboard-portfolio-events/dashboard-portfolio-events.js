@@ -21,7 +21,7 @@ class DashboardPortfolioEvents extends Component {
       eventView: DashboardPortfolioEvent,
       emptyView: DashboardPortfolioEmptyView
     } = this.props;
-    if (true) return <DashboardPortfolioEventsListLoader />;
+    if (isPending && !data) return <DashboardPortfolioEventsListLoader />;
     if (data === undefined) return null;
     return (
       (data.total &&

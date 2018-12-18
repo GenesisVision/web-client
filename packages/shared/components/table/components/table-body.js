@@ -31,7 +31,7 @@ const TableBody = ({
   };
 
   const renderItems = () => {
-    if (true)
+    if (isPending || items === null || items === undefined)
       return <TableLoader view={view} />;
     if (items.length === 0) return setMessage(t("table.no-items"));
     return items.map((x, idx) => (

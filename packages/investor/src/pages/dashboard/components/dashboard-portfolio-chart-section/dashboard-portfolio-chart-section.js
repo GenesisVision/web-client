@@ -6,14 +6,12 @@ import connect from "react-redux/es/connect/connect";
 import { compose } from "redux";
 import DashboardInRequestsContainer from "shared/components/dashboard/dashboard-portfolio-chart-section/dashboard-in-requests/dashboard-in-requests-container";
 import Surface from "shared/components/surface/surface";
-// import DashboardPortfolioChartLoader from "./dashboard-chart-loader/dashboard-portfolio-chart-loader.js";
 
 import {
   cancelRequest,
   getInRequests
 } from "../../services/dashboard-in-requests.service";
 import DashboardPortfolioChartContainer from "./dashboard-chart/dashboard-portfolio-chart-container";
-import DashboardPortfolioChartLoader from "./dashboard-chart-loader/dashboard-portfolio-chart-loader";
 import DashboardGetStarted from "./dashboard-get-started";
 
 class DashboardPortfolioChartSection extends Component {
@@ -35,8 +33,7 @@ class DashboardPortfolioChartSection extends Component {
   render() {
     return (
       <Surface className="dashboard-portfolio-chart-section">
-        {/*{this.renderSectionBody()}*/}
-        <DashboardPortfolioChartLoader />
+        {this.renderSectionBody()}
       </Surface>
     );
   }

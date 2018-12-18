@@ -1,0 +1,120 @@
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
+
+.dashboard-chart-loader {
+  &__header {
+    width: 100%;
+    position: relative;
+
+    .svg-loader {
+      max-width: 80%;
+      height: auto;
+
+      @include media-breakpoint-landscape-phone() {
+        max-width: none;
+      }
+    }
+  }
+
+  &__row {
+    @include horizontal-paddings($padding-small, 2);
+    display: flex;
+    flex-wrap: wrap;
+
+    .dashboard-portfolio-chart-section__stat {
+      &:last-child {
+        padding-right: 70px;
+      }
+    }
+
+    .svg-loader {
+      max-width: 80%;
+      height: auto;
+
+      @include media-breakpoint-landscape-phone() {
+        max-width: none;
+      }
+    }
+  }
+
+  &__stat {
+    padding-bottom: 20px;
+    padding-right: 70px;
+    width: 100%;
+
+    @include media-breakpoint-landscape-phone() {
+      padding-right: 20px;
+    }
+
+    @include media-breakpoint-landscape-tablet() {
+      width: auto;
+      padding-right: 40px;
+      padding-bottom: 50px;
+    }
+  }
+
+  &__chart {
+    padding-top: 20px;
+    overflow: hidden;
+
+
+    .svg-loader {
+      max-width: 100%;
+    }
+
+    @include media-breakpoint-landscape-phone() {
+      min-height: 320px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+
+      .svg-loader {
+        min-width: 600px;
+      }
+    }
+
+    @include media-breakpoint-landscape-tablet() {
+      .svg-loader {
+        min-width: 1000px;
+        width: 100%;
+      }
+    }
+
+    @include media-breakpoint-desktop() {
+      min-height: 400px;
+    }
+  }
+
+  &__request {
+    @include horizontal-paddings($padding-small, 2);
+    position: absolute;
+    padding-top: 5px;
+    right: 0;
+    top: 0;
+
+    @include media-breakpoint-landscape-tablet() {
+      width: auto;
+    }
+  }
+
+  &__chart-period {
+    width: 50%;
+    padding-right: 10px;
+
+    .svg-loader {
+      max-width: 100%;
+    }
+
+    &:last-child {
+      padding-right: 0;
+      text-align: right;
+      padding-left: 10px;
+    }
+
+    @include media-breakpoint-landscape-tablet() {
+      .svg-loader {
+        width: auto;
+      }
+    }
+  }
+}

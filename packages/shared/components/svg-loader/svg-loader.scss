@@ -1,5 +1,5 @@
 .svg-loader__cube {
-  animation: mask 2.5s ease infinite;
+  animation: mask 2s ease infinite;
 }
 
 .svg-loader__path {
@@ -8,4 +8,9 @@
 
 .svg-loader__path-mask {
   fill: #4c5257;
+}
+
+@keyframes mask {
+  from {transform: translateY(-100%)}
+  to {transform: translateY(100%)}
 }
