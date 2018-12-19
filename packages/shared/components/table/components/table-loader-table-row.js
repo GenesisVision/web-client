@@ -5,7 +5,7 @@ const TableLoaderTableRow = () => {
   return (
     <tr>
       <td className="table__cell programs-table__cell programs-table__cell--name">
-        <TableLoaderCell width={100} id={23243} />
+        <TableLoaderCell width={100} />
       </td>
       <td className="table__cell programs-table__cell ">
         <TableLoaderCell width={100} />

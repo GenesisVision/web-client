@@ -20,6 +20,7 @@
     @include horizontal-paddings($padding-small, 2);
     display: flex;
     flex-wrap: wrap;
+    width: 100%;
 
     .dashboard-portfolio-chart-section__stat {
       &:last-child {
@@ -116,5 +117,10 @@
         width: auto;
       }
     }
+  }
+
+  &__description {
+    @include horizontal-paddings($padding-small, 2);
+    width: 100%;
   }
 }

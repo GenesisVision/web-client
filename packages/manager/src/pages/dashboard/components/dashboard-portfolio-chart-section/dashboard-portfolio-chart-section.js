@@ -16,6 +16,7 @@ import { getAssets } from "../../services/dashboard.service";
 import DashboardChartAssetsContainer from "./dashboard-chart-assets/dashboard-chart-assets-container";
 import DashboardPortfolioChartContainer from "./dashboard-chart/dashboard-portfolio-chart-container";
 import DashboardGetStarted from "./dashboard-get-started";
+import DashboardChartLoader from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-loader";
 
 class DashboardPortfolioChartSection extends Component {
   componentWillMount() {
@@ -32,7 +33,6 @@ class DashboardPortfolioChartSection extends Component {
         </Surface>
       );
     }
-    if (!assets) return null;
     return (
       <Surface className="dashboard-portfolio-chart-section">
         <h3 className="dashboard-portfolio-chart-section__heading">
@@ -45,7 +45,9 @@ class DashboardPortfolioChartSection extends Component {
             getInRequests={getInRequests}
           />
         </div>
-        <DashboardPortfolioChartContainer />
+        {(!assets) ?
+         ( <DashboardChartLoader />) :
+          (<DashboardPortfolioChartContainer />)}
       </Surface>
     );
   }
