@@ -11,7 +11,7 @@ export const fetchHistoryCounts = id => {
     filtering
   );
   const eventsCountPromise = isAuthenticated
-    ? fetchPortfolioEvents(filtering)
+    ? fetchPortfolioEvents({ ...filtering, assetId: id })
     : Promise.resolve({ total: 0 });
   return Promise.all([tradesCountPromise, eventsCountPromise]).then(
     ([tradesData, eventsData]) => ({
