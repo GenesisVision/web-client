@@ -10,6 +10,7 @@ import {
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import DepositButtonContainer from "shared/components/deposit-button-submit/deposit-button";
 import DepositDetailsContainer from "shared/components/deposit-details/deposit-details-container";
 import InputImage from "shared/components/form/input-image/input-image";
 import Hint from "shared/components/hint/hint";
@@ -317,15 +318,14 @@ class CreateFundSettings extends React.Component {
           />
         </form>
         <div className="create-fund-settings__navigation">
-          <GVButton
+          <DepositButtonContainer
             title={t("buttons.create-fund")}
-            color="primary"
-            type="submit"
-            onClick={onSubmit}
+            deposit={deposit}
+            onSubmit={onSubmit}
             disabled={isSubmitting}
           >
             {t("buttons.create-fund")}
-          </GVButton>
+          </DepositButtonContainer>
           <GVButton
             variant="text"
             onClick={() => navigateBack(values)}

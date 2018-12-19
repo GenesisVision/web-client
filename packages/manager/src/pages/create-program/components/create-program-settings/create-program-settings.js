@@ -10,6 +10,7 @@ import {
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import DepositButtonContainer from "shared/components/deposit-button-submit/deposit-button";
 import DepositDetailsContainer from "shared/components/deposit-details/deposit-details-container";
 import InputImage from "shared/components/form/input-image/input-image";
 import Hint from "shared/components/hint/hint";
@@ -45,9 +46,7 @@ class CreateProgramSettings extends React.Component {
       t,
       navigateBack,
       broker,
-      balance,
       author,
-      updateBalance,
       isSubmitting,
       handleSubmit,
       values,
@@ -310,15 +309,14 @@ class CreateProgramSettings extends React.Component {
           />
         </form>
         <div className="create-program-settings__navigation">
-          <GVButton
+          <DepositButtonContainer
             title={t("buttons.create-program")}
-            color="secondary"
-            type="submit"
-            onClick={onSubmit}
+            deposit={programsInfo.managerProgramInvestment}
+            onSubmit={onSubmit}
             disabled={isSubmitting}
           >
             {t("buttons.create-program")}
-          </GVButton>
+          </DepositButtonContainer>
           <GVButton
             variant="text"
             onClick={() => navigateBack(values)}
