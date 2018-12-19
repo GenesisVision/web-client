@@ -1,13 +1,13 @@
+import "./manager-history.scss";
+
 import { GVTab, GVTabs } from "gv-react-components";
-import { translate } from "react-i18next";
 import React, { PureComponent } from "react";
+import { translate } from "react-i18next";
 import Surface from "shared/components/surface/surface";
 
+import { fetchManagerAssetsCount } from "../services/manager.service";
 import ManagerFunds from "./manager-funds-table";
 import ManagerPrograms from "./manager-programs-table";
-
-import "./manager-history.scss";
-import { fetchManagerAssetsCount } from "../services/manager.service";
 
 const PROGRAMS_TAB = "programs";
 const FUNDS_TAB = "funds";

@@ -1,20 +1,19 @@
-import { bindActionCreators, compose } from "redux";
-import { connect } from "react-redux";
-import { push } from "react-router-redux";
-import AboutLevelsContainerComponent from "shared/components/about-levels/about-levels-container";
-import Page from "shared/components/page/page";
+import "shared/components/details/details.scss";
+
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
-import ProgramDetailsDescriptionSection from "shared/components/programs/program-details/program-details-description/program-details-description-section";
-import ProgramDetailsHistorySection from "shared/components/programs/program-details/program-trades/program-details-history-section";
-import ProgramDetailsStatisticSection from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
+import { toggleReinvesting } from "modules/program-reinvesting/services/program-reinvesting.service";
 import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
 import React, { PureComponent } from "react";
-
-import "shared/components/details/details.scss";
-import { toggleReinvesting } from "modules/program-reinvesting/services/program-reinvesting.service";
+import { connect } from "react-redux";
+import { push } from "react-router-redux";
+import { bindActionCreators, compose } from "redux";
+import AboutLevelsContainerComponent from "shared/components/about-levels/about-levels-container";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
-
+import Page from "shared/components/page/page";
+import ProgramDetailsDescriptionSection from "shared/components/programs/program-details/program-details-description/program-details-description-section";
+import ProgramDetailsStatisticSection from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
+import ProgramDetailsHistorySection from "shared/components/programs/program-details/program-trades/program-details-history-section";
 import {
   fetchProgramTrades,
   getProgramDescription,
