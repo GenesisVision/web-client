@@ -15,6 +15,7 @@ import DepositDetailsContainer from "shared/components/deposit-details/deposit-d
 import InputImage from "shared/components/form/input-image/input-image";
 import Hint from "shared/components/hint/hint";
 import { allowValuesNumberFormat } from "shared/utils/helpers";
+import { hasFormikValidationErrors } from "shared/utils/validators/validators";
 
 import CreateFundSettingsAddAsset from "./create-fund-settings-add-asset/create-fund-settings-add-asset";
 import CreateFundSettingsAssetsComponent from "./create-fund-settings-assets-block/create-fund-settings-assets-block";
@@ -109,9 +110,11 @@ class CreateFundSettings extends React.Component {
       errors,
       programsInfo,
       onValidateError,
-      setSubmitting
+      setSubmitting,
+      touched
     } = this.props;
 
+    const hasErrors = hasFormikValidationErrors(errors, touched);
     const imageInputError =
       errors &&
       errors.logo &&
@@ -322,7 +325,7 @@ class CreateFundSettings extends React.Component {
             title={t("buttons.create-fund")}
             deposit={deposit}
             onSubmit={onSubmit}
-            disabled={isSubmitting}
+            disabled={isSubmitting || hasErrors}
           >
             {t("buttons.create-fund")}
           </DepositButtonContainer>

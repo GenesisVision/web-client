@@ -16,6 +16,7 @@ import InputImage from "shared/components/form/input-image/input-image";
 import Hint from "shared/components/hint/hint";
 import Select from "shared/components/select/select";
 import { allowValuesNumberFormat } from "shared/utils/helpers";
+import { hasFormikValidationErrors } from "shared/utils/validators/validators";
 
 import {
   getAccountTypes,
@@ -56,10 +57,12 @@ class CreateProgramSettings extends React.Component {
       programsInfo,
       notifyError,
       errors,
+      touched,
       onValidateError,
       setSubmitting
     } = this.props;
 
+    const hasErrors = hasFormikValidationErrors(errors, touched);
     const imageInputError =
       errors &&
       errors.logo &&
@@ -313,7 +316,7 @@ class CreateProgramSettings extends React.Component {
             title={t("buttons.create-program")}
             deposit={programsInfo.managerProgramInvestment}
             onSubmit={onSubmit}
-            disabled={isSubmitting}
+            disabled={isSubmitting || hasErrors}
           >
             {t("buttons.create-program")}
           </DepositButtonContainer>
