@@ -1,9 +1,11 @@
-import React, { Component } from "react";
-import classnames from "classnames";
-import NavButton from "../../modules/navigation/nav-button/nav-button";
-import history from "../../utils/history";
 import "./mobile-nav.css";
+
+import classnames from "classnames";
+import React, { Component } from "react";
+
+import NavButton from "../../modules/navigation/nav-button/nav-button";
 import NavigationContainer from "../../modules/navigation/navigation-container";
+import history from "../../utils/history";
 
 export default class MobileNav extends Component {
   componentDidMount() {

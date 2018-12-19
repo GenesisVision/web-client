@@ -1,5 +1,5 @@
-import authService from "shared/services/auth-service";
 import investorApi from "shared/services/api-client/investor-api";
+import authService from "shared/services/auth-service";
 
 import * as actions from "../actions/dashboard.actions";
 

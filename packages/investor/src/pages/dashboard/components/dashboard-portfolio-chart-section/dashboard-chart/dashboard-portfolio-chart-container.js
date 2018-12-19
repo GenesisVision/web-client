@@ -1,9 +1,9 @@
-import { formartChartMinValue } from "shared/components/chart/chart-components/chart-components.helpers";
-import ChartPeriod from "shared/components/chart/chart-period/chart-period";
-import { DEFAULT_PERIOD } from "shared/components/chart/chart-period/chart-period.helpers";
 import React, { Fragment, PureComponent } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { formartChartMinValue } from "shared/components/chart/chart-components/chart-components.helpers";
+import ChartPeriod from "shared/components/chart/chart-period/chart-period";
+import { DEFAULT_PERIOD } from "shared/components/chart/chart-period/chart-period.helpers";
 
 import { getPortfolioChart } from "../../../services/dashboard-chart.service";
 import DashboardPortfolioChart from "./dashboard-portfolio-chart";

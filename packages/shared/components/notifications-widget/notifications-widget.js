@@ -1,10 +1,10 @@
 import "./notifications-widget.scss";
 
 import classnames from "classnames";
-import Chip from "shared/components/chip/chip";
-import { RingIcon } from "shared/components/icon/ring-icon";
 import PropTypes from "prop-types";
 import React from "react";
+import Chip from "shared/components/chip/chip";
+import { RingIcon } from "shared/components/icon/ring-icon";
 
 const NorificationsWidget = ({ openNotifications, notificationsCount }) => {
   const hasNotifications = notificationsCount > 0;

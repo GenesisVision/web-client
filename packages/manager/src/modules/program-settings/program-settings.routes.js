@@ -1,9 +1,8 @@
-import { Route } from "react-router-dom";
 import React from "react";
+import { Route } from "react-router-dom";
 
 import ProgramSettingsCreateContainer from "./components/program-settings-create-container/program-settings-create-container";
 import ProgramSettingsEditContainer from "./components/program-settings-edit-container/program-settings-edit-container";
-
 import {
   PROGRAM_SETTINGS_CREATE_ROUTE,
   PROGRAM_SETTINGS_EDIT_ROUTE

@@ -1,7 +1,7 @@
-import authService from "shared/services/auth-service";
 import fundsApi from "shared/services/api-client/funds-api";
 import managerApi from "shared/services/api-client/manager-api";
 import programsApi from "shared/services/api-client/programs-api";
+import authService from "shared/services/auth-service";
 
 import * as actions from "../actions/dashboard.actions";
 

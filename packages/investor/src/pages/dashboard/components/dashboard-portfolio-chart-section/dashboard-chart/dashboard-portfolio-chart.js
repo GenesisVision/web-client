@@ -1,7 +1,3 @@
-import chartXAxis from "shared/components/chart/chart-components/chart-xaxis";
-import ProgramChartGradient, {
-  gradientOffset
-} from "shared/components/chart/chart-gradient/chart-gradient";
 import { GVColors } from "gv-react-components";
 import React, { PureComponent } from "react";
 import {
@@ -13,6 +9,10 @@ import {
   Tooltip,
   YAxis
 } from "recharts";
+import chartXAxis from "shared/components/chart/chart-components/chart-xaxis";
+import ProgramChartGradient, {
+  gradientOffset
+} from "shared/components/chart/chart-gradient/chart-gradient";
 
 import { BAR_COLORS } from "./dashboard-chart.constants";
 import DasboardPortfolioTooltip from "./dashboard-portfoio-tooltip";

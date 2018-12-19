@@ -2,10 +2,10 @@ import "shared/components/auth/forgot-password/forgot-password/forgot-password.s
 
 import React from "react";
 import { translate } from "react-i18next";
-
 import ForgotPasswordContainer from "shared/components/auth/forgot-password/forgot-password/forgot-password-container";
-import forgotPasswordService from "../services/forgot-password.service";
+
 import { LOGIN_ROUTE } from "../../login/login.routes";
+import forgotPasswordService from "../services/forgot-password.service";
 
 const ForgotPasswordPage = ({ t }) => {
   return (

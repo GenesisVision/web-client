@@ -1,6 +1,5 @@
-import authService from "../../../services/auth-service";
 import SwaggerManagerApi from "../../../services/api-client/swagger-manager-api";
-
+import authService from "../../../services/auth-service";
 import * as actionTypes from "./program-withdraw-actions.constants";
 
 const submitProgramWithdraw = (programId, amount) => {

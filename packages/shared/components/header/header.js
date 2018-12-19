@@ -1,5 +1,9 @@
 import "./header.scss";
 
+import { GVButton } from "gv-react-components";
+import React, { Component, Fragment } from "react";
+import { translate } from "react-i18next";
+import { Link } from "react-router-dom";
 import { MenuIcon } from "shared/components/icon/icon";
 import { SearchIcon } from "shared/components/icon/search-icon";
 import Navigation from "shared/components/navigation/navigation";
@@ -7,11 +11,7 @@ import NavigationMobile from "shared/components/navigation/navigation-mobile/nav
 import NorificationsWidget from "shared/components/notifications-widget/notifications-widget";
 import ProfileWidget from "shared/components/profile-widget/profile-widget";
 import WalletWidget from "shared/components/wallet-widget/wallet-widget";
-import { GVButton } from "gv-react-components";
 import CurrencySelectContainer from "shared/modules/currency-select/components/currency-select-container";
-import React, { Component, Fragment } from "react";
-import { translate } from "react-i18next";
-import { Link } from "react-router-dom";
 
 class Header extends Component {
   state = {

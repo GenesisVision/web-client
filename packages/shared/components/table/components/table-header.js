@@ -5,8 +5,8 @@ import {
   getSortingColumnName,
   getSortingDirection
 } from "../helpers/sorting.helpers";
-import TableRow from "./table-row";
 import TableHeadCell from "./table-head-cell";
+import TableRow from "./table-row";
 
 class TableHeader extends Component {
   sortingName = () => getSortingColumnName(this.props.sorting);

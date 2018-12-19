@@ -1,6 +1,8 @@
+import "./gv-select.css";
+
 import React from "react";
 import Select from "react-select";
-import "./gv-select.css";
+
 const GVSelect = ({ field, setFieldValue, onChange, onBlur, ...other }) => {
   const handleChange = value => {
     setFieldValue(field.name, value);

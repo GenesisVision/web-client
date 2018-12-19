@@ -1,4 +1,4 @@
-import { object, string, number, ref } from "yup";
+import { number, object, ref, string } from "yup";
 
 const programSettingsCreateFormValidationSchema = object().shape({
   tradePlatformPassword: string()

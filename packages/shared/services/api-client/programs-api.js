@@ -1,7 +1,7 @@
 import { ProgramsApi } from "gv-api-web";
 
-import apiClient from "./swagger-custom-client";
 import withApiProxy from "./api-proxy";
+import apiClient from "./swagger-custom-client";
 
 const programsApi = withApiProxy(new ProgramsApi(apiClient));
 

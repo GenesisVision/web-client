@@ -1,14 +1,14 @@
-import { compose } from "redux";
+import "shared/components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
+
 import { GVTab, GVTabs } from "gv-react-components";
-import { translate } from "react-i18next";
 import * as PropTypes from "prop-types";
+import React, { PureComponent } from "react";
+import { translate } from "react-i18next";
 import connect from "react-redux/es/connect/connect";
+import { compose } from "redux";
 import PortfolioEventsTable from "shared/components/portfolio-events-table/portfolio-events-table";
 import ProgramTrades from "shared/components/programs/program-details/program-trades/program-trades";
-import React, { PureComponent } from "react";
 import Surface from "shared/components/surface/surface";
-
-import "shared/components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
 import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { EVENT_TYPE_FILTER_DEFAULT_VALUE } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
 
