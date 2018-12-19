@@ -10,6 +10,7 @@ import Popover from "shared/components/popover/popover";
 
 import { getAssetChart } from "../../../services/dashboard.service";
 import DashboardChartAsset from "./dashboard-chart-asset";
+import { DashboardChartAssetsLoader } from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-loaders";
 
 class DashboardChartAssetsContainer extends PureComponent {
   state = {
@@ -34,7 +35,7 @@ class DashboardChartAssetsContainer extends PureComponent {
 
   render() {
     const { t, assets } = this.props;
-    if (!assets) return null;
+    if (!assets) return <DashboardChartAssetsLoader />;
     const programs = assets.programs;
     const funds = assets.funds;
     const hasPrograms = programs.length > 0;

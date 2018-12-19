@@ -11,7 +11,7 @@ import {
   setPeriod
 } from "../../../services/dashboard.service";
 import DashboardChartLoader from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-loader";
-import DashboardChartDescriptionLoader from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-description-loader";
+import { DashboardChartDescriptionLoader } from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-loaders";
 
 class DashboardPortfolioChartContainer extends PureComponent {
   componentDidMount() {

@@ -3,7 +3,7 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { translate } from "react-i18next";
 import DashboardInRequestsContainer from "shared/components/dashboard/dashboard-portfolio-chart-section/dashboard-in-requests/dashboard-in-requests-container";
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 
 import "./dashboard-portfolio-chart-section.scss";
 
@@ -27,7 +27,7 @@ class DashboardPortfolioChartSection extends Component {
     if (isNewUser) return <DashboardGetStarted />;
 
     return (
-      <React.Fragment>
+      <Fragment>
         <h3 className="dashboard-portfolio-chart-section__heading">
           {t("manager.dashboard-page.chart-section.header")}
         </h3>
@@ -39,7 +39,7 @@ class DashboardPortfolioChartSection extends Component {
           />
         </div>
         <DashboardPortfolioChartContainer assets={assets} key={!assets} />
-      </React.Fragment>
+      </Fragment>
     );
   }
 }

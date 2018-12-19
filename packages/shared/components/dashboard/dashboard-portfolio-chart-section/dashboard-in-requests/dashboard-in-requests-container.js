@@ -1,6 +1,6 @@
 import "./dashboard-in-requests.scss";
 
-import React, { PureComponent } from "react";
+import React, { Fragment, PureComponent } from "react";
 import Scrollbars from "react-custom-scrollbars";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -8,11 +8,11 @@ import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
 import Popover from "shared/components/popover/popover";
+import { DashboardChartRequestLoader } from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-loaders";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 import DashboardRequest from "./dashboard-request";
-import DashboardChartHeaderLoader from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-header-loader";
 
 class DashboardInRequestsContainer extends PureComponent {
   state = {
@@ -38,17 +38,16 @@ class DashboardInRequestsContainer extends PureComponent {
     );
   };
 
-  render() {
+  renderRequest = () => {
     const { t, inRequests, isPending, service } = this.props;
-    if (!inRequests || isPending) return <DashboardChartHeaderLoader />;
-
+    if (!inRequests || isPending) return <DashboardChartRequestLoader />;
     return (
-      <div className="dashboard-request">
+      <Fragment>
         <StatisticItem
           label={t(
             `${
               process.env.REACT_APP_PLATFORM
-            }.dashboard-page.chart-section.in-requests`
+              }.dashboard-page.chart-section.in-requests`
           )}
           big
         >
@@ -81,6 +80,14 @@ class DashboardInRequestsContainer extends PureComponent {
             </div>
           </Scrollbars>
         </Popover>
+      </Fragment>
+    )
+  }
+
+  render() {
+    return (
+      <div className="dashboard-request">
+        {this.renderRequest()}
       </div>
     );
   }
