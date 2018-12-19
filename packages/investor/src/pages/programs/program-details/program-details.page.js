@@ -23,7 +23,7 @@ import {
 import { INVESTOR } from "shared/constants/constants";
 
 import { LOGIN_ROUTE } from "../../auth/login/login.routes";
-import { getPortfolioEvents } from "../../dashboard/services/dashboard-events.services";
+import { fetchPortfolioEvents } from "../../dashboard/services/dashboard-events.services";
 import { fetchHistoryCounts } from "./services/program-details.service";
 
 export const ProgramDetailContext = React.createContext({
@@ -133,7 +133,7 @@ class ProgramDetailsPage extends PureComponent {
               <ProgramDetailsHistorySection
                 fetchHistoryCounts={fetchHistoryCounts}
                 fetchPortfolioEvents={filters =>
-                  getPortfolioEvents({
+                  fetchPortfolioEvents({
                     ...filters,
                     assetId: this.description.id
                   })

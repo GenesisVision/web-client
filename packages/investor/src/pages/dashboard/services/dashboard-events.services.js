@@ -3,7 +3,7 @@ import authService from "shared/services/auth-service";
 
 import * as actions from "../actions/dashboard.actions";
 
-export const getPortfolioEvents = filters => {
+export const fetchPortfolioEvents = filters => {
   const authorization = authService.getAuthArg();
 
   return investorApi

@@ -2,13 +2,13 @@ import React from "react";
 import { translate } from "react-i18next";
 import PortfolioEventsTableContainer from "shared/components/portfolio-events-table/portfolio-events-table-container";
 
-import { getPortfolioEvents } from "../../services/dashboard-events.services";
+import { fetchPortfolioEvents } from "../../services/dashboard-events.services";
 
 export const PORTFOLIO_EVENTS_ALL_PAGE_ROUTE = "portfolio-events";
 const PortfolioEventsAllComponent = ({ t }) => {
   return (
     <PortfolioEventsTableContainer
-      fetchPortfolioEvents={getPortfolioEvents}
+      fetchPortfolioEvents={fetchPortfolioEvents}
       pageTitle={t(
         `${
           process.env.REACT_APP_PLATFORM
