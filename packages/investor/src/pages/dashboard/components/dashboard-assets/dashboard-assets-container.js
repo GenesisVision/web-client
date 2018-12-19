@@ -7,6 +7,7 @@ import { INVESTOR } from "shared/constants/constants";
 import { clearDashboardAssetsTable } from "../../actions/dashboard.actions";
 import { getDashboardFunds } from "../../services/dashboard-funds.service";
 import { getDashboardPrograms } from "../../services/dashboard-programs.service";
+import { fetchAssetsCount } from "../../services/dashboard.service";
 
 class DashboardAssetsContainer extends Component {
   getAssets = () => {
@@ -24,6 +25,7 @@ class DashboardAssetsContainer extends Component {
         clearAssets={service.clearDashboardAssetsTable}
         getDashboardPrograms={getDashboardPrograms}
         getDashboardFunds={getDashboardFunds}
+        fetchAssetsCount={fetchAssetsCount}
         title={title}
         role={INVESTOR}
         onChangeStatus={this.onChangeStatus}

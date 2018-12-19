@@ -13,6 +13,7 @@ import { MANAGER } from "shared/constants/constants";
 import { clearDashboardAssetsTable } from "../../actions/dashboard.actions";
 import { getDashboardFunds } from "../../services/dashboard-funds.service";
 import { getDashboardPrograms } from "../../services/dashboard-programs.service";
+import { fetchAssetsCount } from "../../services/dashboard.service";
 
 class DashboardAssetsContainer extends Component {
   getAssets = () => {
@@ -80,6 +81,7 @@ class DashboardAssetsContainer extends Component {
         clearAssets={this.props.service.clearDashboardAssetsTable}
         getDashboardPrograms={getDashboardPrograms}
         getDashboardFunds={getDashboardFunds}
+        fetchAssetsCount={fetchAssetsCount}
         createProgramButtonToolbar={createButtonToolbar(
           t("buttons.create-program"),
           CREATE_PROGRAM_PAGE_ROUTE

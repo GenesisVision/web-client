@@ -759,6 +759,7 @@
       }
     },
     "password-change": {
+      "title": "Change password",
       "current-password": "Current password",
       "password": "Password",
       "confirm-password": "Confirm password",
