@@ -10,6 +10,7 @@ import DashboardAssets from "shared/components/dashboard/dashboard-assets/dashbo
 import { ChartIcon } from "shared/components/icon/chart-icon";
 import { MANAGER } from "shared/constants/constants";
 
+import { clearDashboardAssetsTable } from "../../actions/dashboard.actions";
 import { getDashboardFunds } from "../../services/dashboard-funds.service";
 import { getDashboardPrograms } from "../../services/dashboard-programs.service";
 
@@ -76,6 +77,7 @@ class DashboardAssetsContainer extends Component {
 
     return (
       <DashboardAssets
+        clearAssets={this.props.service.clearDashboardAssetsTable}
         getDashboardPrograms={getDashboardPrograms}
         getDashboardFunds={getDashboardFunds}
         createProgramButtonToolbar={createButtonToolbar(
@@ -108,7 +110,7 @@ const createButtonToolbar = (text, route) => (
 
 const mapDispatchToProps = dispatch => ({
   service: bindActionCreators(
-    { getDashboardFunds, getDashboardPrograms },
+    { getDashboardFunds, getDashboardPrograms, clearDashboardAssetsTable },
     dispatch
   )
 });

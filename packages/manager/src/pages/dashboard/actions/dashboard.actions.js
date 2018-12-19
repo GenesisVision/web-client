@@ -15,6 +15,8 @@ export const DASHBOARD_ASSET_CHART = "DASHBOARD_ASSET_CHART";
 export const DASHBOARD_ASSETS = "DASHBOARD_ASSETS";
 export const DASHBOARD_PERIOD = "DASHBOARD_PERIOD";
 
+export const CLEAR_DASHBOARD_ASSETS_TABLE = "CLEAR_DASHBOARD_ASSETS_TABLE";
+
 export const fetchPortfolioEvents = (auth, filters) => {
   return {
     type: DASHBOARD_PORTFOLIO_EVENTS,
@@ -87,3 +89,7 @@ export const setPeriod = period => {
     payload: period
   };
 };
+
+export const clearDashboardAssetsTable = () => ({
+  type: CLEAR_DASHBOARD_ASSETS_TABLE
+});

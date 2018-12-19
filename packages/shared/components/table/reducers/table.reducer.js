@@ -1,6 +1,5 @@
 import { combineReducers } from "redux";
 import apiReducerFactory from "shared/reducers/api-reducer/api-reducer";
-
 import clearableReducer from "shared/reducers/clearable.reducer";
 
 import tableFiltersReducer from "./table-filters.reducer";
@@ -12,7 +11,7 @@ const tableReducerFactory = ({
   filtering,
   defaultFilters,
   clearable = false,
-  clearableAction
+  clearableActionType
 }) => {
   const clearableWrapper = clearable ? clearableReducer : f => f;
 
@@ -34,7 +33,7 @@ const tableReducerFactory = ({
         type
       })
     }),
-    clearableAction
+    clearableActionType
   );
 };
 
