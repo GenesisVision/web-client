@@ -1,7 +1,7 @@
+import authService from "shared/services/auth-service";
 import fundsApi from "shared/services/api-client/funds-api";
 import managerApi from "shared/services/api-client/manager-api";
 import programsApi from "shared/services/api-client/programs-api";
-import authService from "shared/services/auth-service";
 
 import * as actions from "../actions/dashboard.actions";
 
@@ -77,4 +77,16 @@ export const composeAssetChart = () => (dispatch, getState) => {
 
 export const setPeriod = period => (dispatch, getState) => {
   dispatch(actions.setPeriod(period));
+};
+
+export const fetchAssetsCount = () => {
+  const authorization = authService.getAuthArg();
+  const filtering = { take: 0 };
+  return Promise.all([
+    managerApi.v10ManagerProgramsGet(authorization, filtering),
+    managerApi.v10ManagerFundsGet(authorization, filtering)
+  ]).then(([programsData, fundsData]) => ({
+    programsCount: programsData.total,
+    fundsCount: fundsData.total
+  }));
 };
