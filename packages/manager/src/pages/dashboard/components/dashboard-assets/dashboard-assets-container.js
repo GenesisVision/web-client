@@ -1,7 +1,6 @@
 import { GVButton } from "gv-react-components";
 import { CREATE_FUND_PAGE_ROUTE } from "pages/create-fund/create-fund.constants";
 import { CREATE_PROGRAM_PAGE_ROUTE } from "pages/create-program/create-program.constants";
-import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -9,6 +8,8 @@ import { bindActionCreators, compose } from "redux";
 import DashboardAssets from "shared/components/dashboard/dashboard-assets/dashboard-assets";
 import { ChartIcon } from "shared/components/icon/chart-icon";
 import { MANAGER } from "shared/constants/constants";
+
+import React, { Component } from "react";
 
 import { getDashboardFunds } from "../../services/dashboard-funds.service";
 import { getDashboardPrograms } from "../../services/dashboard-programs.service";
