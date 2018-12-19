@@ -1,19 +1,20 @@
-import "shared/components/details/details.scss";
-
-import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
-import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
-import { toggleReinvesting } from "modules/program-reinvesting/services/program-reinvesting.service";
-import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
-import React, { PureComponent } from "react";
+import { bindActionCreators, compose } from "redux";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
-import { bindActionCreators, compose } from "redux";
 import AboutLevelsContainerComponent from "shared/components/about-levels/about-levels-container";
-import NotFoundPage from "shared/components/not-found/not-found.routes";
 import Page from "shared/components/page/page";
+import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import ProgramDetailsDescriptionSection from "shared/components/programs/program-details/program-details-description/program-details-description-section";
-import ProgramDetailsStatisticSection from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import ProgramDetailsHistorySection from "shared/components/programs/program-details/program-trades/program-details-history-section";
+import ProgramDetailsStatisticSection from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
+import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
+import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
+import React, { PureComponent } from "react";
+
+import "shared/components/details/details.scss";
+import { toggleReinvesting } from "modules/program-reinvesting/services/program-reinvesting.service";
+import NotFoundPage from "shared/components/not-found/not-found.routes";
+
 import {
   fetchProgramTrades,
   getProgramDescription,
@@ -23,6 +24,7 @@ import { INVESTOR } from "shared/constants/constants";
 
 import { LOGIN_ROUTE } from "../../auth/login/login.routes";
 import { getPortfolioEvents } from "../../dashboard/services/dashboard-events.services";
+import { fetchHistoryCounts } from "./services/program-details.service";
 
 export const ProgramDetailContext = React.createContext({
   updateDetails: () => {}
@@ -129,6 +131,7 @@ class ProgramDetailsPage extends PureComponent {
             </div>
             <div className="details__history">
               <ProgramDetailsHistorySection
+                fetchHistoryCounts={fetchHistoryCounts}
                 fetchPortfolioEvents={filters =>
                   getPortfolioEvents({
                     ...filters,
