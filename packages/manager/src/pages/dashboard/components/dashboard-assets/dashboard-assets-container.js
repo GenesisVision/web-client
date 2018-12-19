@@ -8,11 +8,11 @@ import DashboardAssets from "shared/components/dashboard/dashboard-assets/dashbo
 import { ChartIcon } from "shared/components/icon/chart-icon";
 import { MANAGER } from "shared/constants/constants";
 
-import { getDashboardFunds } from "../../services/dashboard-funds.service";
 import { getDashboardPrograms } from "../../services/dashboard-programs.service";
 import { fetchAssetsCount } from "../../services/dashboard.service";
 import React, { Component } from "react";
 import { GVButton } from "gv-react-components";
+import { getDashboardFunds } from "../../services/dashboard-funds.service";
 class DashboardAssetsContainer extends Component {
   getAssets = () => {
     const { service } = this.props;
