@@ -2,9 +2,9 @@ import { CREATE_FUND_PAGE_ROUTE } from "pages/create-fund/create-fund.constants"
 import { CREATE_PROGRAM_PAGE_ROUTE } from "pages/create-program/create-program.constants";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { bindActionCreators, compose } from "redux";
 
+import { bindActionCreators, compose } from "redux";
+import { Link } from "react-router-dom";
 import { getDashboardPrograms } from "../../services/dashboard-programs.service";
 import { fetchAssetsCount } from "../../services/dashboard.service";
 import React, { Component } from "react";
