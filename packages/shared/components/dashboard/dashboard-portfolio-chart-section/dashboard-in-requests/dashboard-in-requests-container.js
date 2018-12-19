@@ -12,8 +12,7 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 import DashboardRequest from "./dashboard-request";
-import DashboardChartHeaderLoader
-  from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-header-loader";
+import DashboardChartHeaderLoader from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-header-loader";
 
 class DashboardInRequestsContainer extends PureComponent {
   state = {
@@ -41,8 +40,7 @@ class DashboardInRequestsContainer extends PureComponent {
 
   render() {
     const { t, inRequests, isPending, service } = this.props;
-    if (isPending && !inRequests) return <DashboardChartHeaderLoader />;
-    if (!inRequests || isPending) return null;
+    if (!inRequests || isPending) return <DashboardChartHeaderLoader />;
 
     return (
       <div className="dashboard-request">

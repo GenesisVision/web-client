@@ -10,15 +10,15 @@ import {
   getAssetChart,
   setPeriod
 } from "../../../services/dashboard.service";
-import DashboardChartLoader
-  from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-loader";
-import DashboardChartDescriptionLoader
-  from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-description-loader";
+import DashboardChartLoader from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-loader";
+import DashboardChartDescriptionLoader from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-description-loader";
 
 class DashboardPortfolioChartContainer extends PureComponent {
   componentDidMount() {
-    const { service } = this.props;
-    service.composeAssetChart();
+    const { assets, service } = this.props;
+    if (assets) {
+      service.composeAssetChart();
+    }
   }
 
   handleChangePeriod = period => {
@@ -29,6 +29,7 @@ class DashboardPortfolioChartContainer extends PureComponent {
 
   render() {
     const { assetChart, currency, period } = this.props;
+
     if (!assetChart)
       return (
         <Fragment>

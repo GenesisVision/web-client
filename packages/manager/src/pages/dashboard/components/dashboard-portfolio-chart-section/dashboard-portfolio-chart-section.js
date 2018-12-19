@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { translate } from "react-i18next";
 import DashboardInRequestsContainer from "shared/components/dashboard/dashboard-portfolio-chart-section/dashboard-in-requests/dashboard-in-requests-container";
 import React, { Component } from "react";
-import Surface from "shared/components/surface/surface";
 
 import "./dashboard-portfolio-chart-section.scss";
 
@@ -16,7 +15,6 @@ import { getAssets } from "../../services/dashboard.service";
 import DashboardChartAssetsContainer from "./dashboard-chart-assets/dashboard-chart-assets-container";
 import DashboardPortfolioChartContainer from "./dashboard-chart/dashboard-portfolio-chart-container";
 import DashboardGetStarted from "./dashboard-get-started";
-import DashboardChartLoader from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-loader";
 
 class DashboardPortfolioChartSection extends Component {
   componentWillMount() {
@@ -26,15 +24,10 @@ class DashboardPortfolioChartSection extends Component {
 
   render() {
     const { t, isNewUser, assets } = this.props;
-    if (isNewUser) {
-      return (
-        <Surface className="dashboard-portfolio-chart-section">
-          <DashboardGetStarted />
-        </Surface>
-      );
-    }
+    if (isNewUser) return <DashboardGetStarted />;
+
     return (
-      <Surface className="dashboard-portfolio-chart-section">
+      <React.Fragment>
         <h3 className="dashboard-portfolio-chart-section__heading">
           {t("manager.dashboard-page.chart-section.header")}
         </h3>
@@ -45,10 +38,8 @@ class DashboardPortfolioChartSection extends Component {
             getInRequests={getInRequests}
           />
         </div>
-        {(!assets) ?
-         ( <DashboardChartLoader />) :
-          (<DashboardPortfolioChartContainer />)}
-      </Surface>
+        <DashboardPortfolioChartContainer assets={assets} key={!assets} />
+      </React.Fragment>
     );
   }
 }
