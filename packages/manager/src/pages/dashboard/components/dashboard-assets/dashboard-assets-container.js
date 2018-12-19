@@ -1,4 +1,3 @@
-import { GVButton } from "gv-react-components";
 import { CREATE_FUND_PAGE_ROUTE } from "pages/create-fund/create-fund.constants";
 import { CREATE_PROGRAM_PAGE_ROUTE } from "pages/create-program/create-program.constants";
 import { translate } from "react-i18next";
@@ -13,7 +12,7 @@ import { getDashboardFunds } from "../../services/dashboard-funds.service";
 import { getDashboardPrograms } from "../../services/dashboard-programs.service";
 import { fetchAssetsCount } from "../../services/dashboard.service";
 import React, { Component } from "react";
-
+import { GVButton } from "gv-react-components";
 class DashboardAssetsContainer extends Component {
   getAssets = () => {
     const { service } = this.props;
