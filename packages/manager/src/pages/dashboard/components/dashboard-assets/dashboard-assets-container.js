@@ -4,8 +4,6 @@ import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { bindActionCreators, compose } from "redux";
-import DashboardAssets from "shared/components/dashboard/dashboard-assets/dashboard-assets";
-import { ChartIcon } from "shared/components/icon/chart-icon";
 
 import { getDashboardPrograms } from "../../services/dashboard-programs.service";
 import { fetchAssetsCount } from "../../services/dashboard.service";
@@ -13,6 +11,8 @@ import React, { Component } from "react";
 import { GVButton } from "gv-react-components";
 import { getDashboardFunds } from "../../services/dashboard-funds.service";
 import { MANAGER } from "shared/constants/constants";
+import DashboardAssets from "shared/components/dashboard/dashboard-assets/dashboard-assets";
+import { ChartIcon } from "shared/components/icon/chart-icon";
 class DashboardAssetsContainer extends Component {
   getAssets = () => {
     const { service } = this.props;
