@@ -1,14 +1,14 @@
-import Dialog from "shared/components/dialog/dialog";
 import PropTypes from "prop-types";
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import DepositPopup from "shared/components/deposit/deposit-popup";
+import Dialog from "shared/components/dialog/dialog";
 
 import {
   clearDepositFundInfo,
   clearInvestSubmitFund
 } from "./actions/fund-deposit.actions";
-import DepositPopup from "shared/components/deposit/deposit-popup";
 import {
   getDepositFundInfoById,
   investServiceInvestById

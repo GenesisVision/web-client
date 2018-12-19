@@ -1,6 +1,6 @@
 import React from "react";
-
 import TwoFactorCodeContainer from "shared/components/auth/login/two-factor/two-factor-code-container";
+
 import { TWO_FACTOR_CODE } from "../actions/login.actions";
 import { clearLoginData, twoFactorLogin } from "../services/login.service";
 

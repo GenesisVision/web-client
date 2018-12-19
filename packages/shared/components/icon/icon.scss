@@ -84,20 +84,20 @@
     width: 14px;
   }
 
-	&--active {
-		svg {
-			fill: $primary-color;
-		}
-		svg [stroke] {
-			stroke: $primary-color;
-		}
+  &--active {
+    svg {
+      fill: $primary-color;
+    }
+    svg [stroke] {
+      stroke: $primary-color;
+    }
 
-		&:hover {
-			svg [stroke] {
-				stroke: $text-accent-color;
-			}
-		}
-	}
+    &:hover {
+      svg [stroke] {
+        stroke: $text-accent-color;
+      }
+    }
+  }
 
   &--actions-circle {
     circle[fill] {

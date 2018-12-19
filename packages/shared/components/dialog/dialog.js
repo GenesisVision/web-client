@@ -1,14 +1,14 @@
-import { CloseIcon } from "shared/components/icon/close-icon";
-import { GVButton } from "gv-react-components";
-import { Scrollbars } from "react-custom-scrollbars";
-import { translate } from "react-i18next";
+import "./dialog.scss";
+
 import classnames from "classnames";
-import EventListener from "react-event-listener";
-import Modal from "shared/components/modal/modal";
+import { GVButton } from "gv-react-components";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-
-import "./dialog.scss";
+import { Scrollbars } from "react-custom-scrollbars";
+import EventListener from "react-event-listener";
+import { translate } from "react-i18next";
+import { CloseIcon } from "shared/components/icon/close-icon";
+import Modal from "shared/components/modal/modal";
 
 class Dialog extends Component {
   handleKeyPress = event => {

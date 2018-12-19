@@ -1,12 +1,12 @@
+import "./dashboard-portfolio-chart-section.scss";
+
+import React, { Component } from "react";
+import { translate } from "react-i18next";
+import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { compose } from "redux";
-import { connect } from "react-redux";
-import { translate } from "react-i18next";
 import DashboardInRequestsContainer from "shared/components/dashboard/dashboard-portfolio-chart-section/dashboard-in-requests/dashboard-in-requests-container";
-import React, { Component } from "react";
 import Surface from "shared/components/surface/surface";
-
-import "./dashboard-portfolio-chart-section.scss";
 
 import {
   cancelRequest,

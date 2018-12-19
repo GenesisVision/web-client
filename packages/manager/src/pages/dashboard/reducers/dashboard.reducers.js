@@ -1,12 +1,12 @@
 import { combineReducers } from "redux";
 
 import dashboardAssetChartReducer from "./dashboard-asset-chart.reducer";
+import dashboardAssetReducer from "./dashboard-assets.reducer";
 import dashboardEventsReducer from "./dashboard-events.reducer";
 import dashboardFundsReducer from "./dashboard-funds.reducer";
 import dashboardInRequestsReducer from "./dashboard-in-requests.reducer";
 import dashboardPeriodReducer from "./dashboard-period.redicer";
 import dashboardProgramsReducer from "./dashboard-programs.reducer";
-import dashboardAssetReducer from "./dashboard-assets.reducer";
 
 const dashboardReducer = combineReducers({
   period: dashboardPeriodReducer,

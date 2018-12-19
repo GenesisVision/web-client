@@ -1,9 +1,9 @@
-import { connect } from "react-redux";
 import React from "react";
-
+import { connect } from "react-redux";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import PeriodClose from "./program-close-period/program-close-period";
+
 import programClosePeriodActions from "../actions/program-close-period-actions";
+import PeriodClose from "./program-close-period/program-close-period";
 
 const ProgramClosePeriodContainer = ({
   programId,
@@ -55,6 +55,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
-  ProgramClosePeriodContainer
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  mergeProps
+)(ProgramClosePeriodContainer);
