@@ -12,7 +12,12 @@ class TabsContainer extends Component {
       <Scrollbars autoHeight autoHeightMax={40}>
         <GVTabs value={tab.name} onChange={handleTabChange}>
           {tabs.map(tab => (
-            <GVTab key={tab.name} value={tab.name} label={tab.label} />
+            <GVTab
+              key={tab.name}
+              value={tab.name}
+              label={tab.label}
+              count={tab.count}
+            />
           ))}
         </GVTabs>
       </Scrollbars>

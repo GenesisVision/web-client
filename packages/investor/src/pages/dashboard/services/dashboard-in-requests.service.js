@@ -7,7 +7,7 @@ import {
   cancelProgramRequest,
   fetchInRequests
 } from "../actions/dashboard.actions";
-import { getPortfolioEvents } from "./dashboard.service";
+import { getTopPortfolioEvents } from "./dashboard-events.services";
 
 export const getInRequests = () => (dispatch, getState) => {
   const authorization = authService.getAuthArg();
@@ -28,7 +28,7 @@ export const cancelRequest = ({ id, type, onFinally }) => (
     .then(() => {
       dispatch(getInRequests());
       dispatch(fetchProfileHeaderInfo());
-      dispatch(getPortfolioEvents());
+      dispatch(getTopPortfolioEvents());
       dispatch(
         alertMessageActions.success(
           `${

@@ -1,5 +1,5 @@
-import "./dashboard-portfolio-events-all-table.scss";
-import "./dashboard-portfolio-events-all.scss";
+import "./portfolio-events-table.scss";
+import "./portfolio-events.scss";
 
 import moment from "moment";
 import React, { Component, Fragment } from "react";
@@ -25,9 +25,9 @@ import {
   PORTFOLIO_EVENTS_COLUMNS,
   PORTFOLIO_EVENTS_DEFAULT_FILTERING,
   PORTFOLIO_EVENTS_FILTERS
-} from "./dashboard-portfolio-events-all-table.constants";
+} from "./portfolio-events-table.constants";
 
-class PortfolioEventsTableComponent extends Component {
+class PortfolioEventsTable extends Component {
   render() {
     const {
       t,
@@ -132,8 +132,8 @@ class PortfolioEventsTableComponent extends Component {
   }
 }
 
-PortfolioEventsTableComponent.defaultProps = {
+PortfolioEventsTable.defaultProps = {
   filtering: PORTFOLIO_EVENTS_DEFAULT_FILTERING
 };
 
-export default translate()(PortfolioEventsTableComponent);
+export default translate()(PortfolioEventsTable);

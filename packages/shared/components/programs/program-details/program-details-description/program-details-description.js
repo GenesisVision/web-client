@@ -246,17 +246,21 @@ class ProgramDetailsDescription extends PureComponent {
                 className={"details-description__short-statistic-item"}
                 accent
               >
-                {/*{programDescription.level < 3 ? (*/}
-                {false ? (
+                {programDescription.entryFeeSelected !==
+                programDescription.entryFeeCurrent ? (
                   <Hint
                     content={
                       <NumberFormat
-                        value={formatValue(programDescription.entryFee, 2)}
+                        value={formatValue(
+                          programDescription.entryFeeSelected,
+                          2
+                        )}
                         displayType="text"
-                        prefix="0 % ("
+                        prefix={`${programDescription.entryFeeCurrent} % (`}
                         suffix=" %)"
                       />
                     }
+                    className="details-description__short-statistic-hint"
                     vertical={"bottom"}
                     tooltipContent={t(
                       "program-details-page.description.entry-fee-levels"
@@ -264,7 +268,7 @@ class ProgramDetailsDescription extends PureComponent {
                   />
                 ) : (
                   <NumberFormat
-                    value={formatValue(programDescription.entryFee, 2)}
+                    value={formatValue(programDescription.entryFeeCurrent, 2)}
                     displayType="text"
                     suffix=" %"
                   />

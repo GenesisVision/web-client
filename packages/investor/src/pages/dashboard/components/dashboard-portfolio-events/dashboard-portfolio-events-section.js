@@ -5,13 +5,13 @@ import { compose } from "redux";
 import DashboardPortfolioEvents from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-events";
 
 import { DASHBOARD_EVENTS_ROUTE } from "../../dashboard.routes";
-import { getPortfolioEvents } from "../../services/dashboard.service";
+import { getTopPortfolioEvents } from "../../services/dashboard-events.services";
 import DashboardPortfolioEvent from "./dashboard-portfolio-event/dashboard-portfolio-event";
 
 class DashboardPortfolioEventsSection extends Component {
   componentDidMount() {
     const { service } = this.props;
-    service.getPortfolioEvents();
+    service.getTopPortfolioEvents();
   }
   render() {
     const { title, isPending, data } = this.props;
@@ -28,7 +28,7 @@ class DashboardPortfolioEventsSection extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  service: bindActionCreators({ getPortfolioEvents }, dispatch)
+  service: bindActionCreators({ getTopPortfolioEvents }, dispatch)
 });
 const mapStateToProps = state => {
   const { isPending, data } = state.dashboard.eventsData;

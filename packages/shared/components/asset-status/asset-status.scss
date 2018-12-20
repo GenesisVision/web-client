@@ -5,7 +5,8 @@
     color: $program-status-active-color;
   }
 
-  &__investing, &__withdrawing {
+  &__investing,
+  &__withdrawing {
     border-bottom: 1px dashed;
     cursor: pointer;
   }

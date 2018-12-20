@@ -33,10 +33,10 @@ class DashboardChartAssetsContainer extends PureComponent {
   };
 
   render() {
-    const { t, topAssets } = this.props;
-    if (!topAssets) return null;
-    const programs = topAssets.programs;
-    const funds = topAssets.funds;
+    const { t, assets } = this.props;
+    if (!assets) return null;
+    const programs = assets.programs;
+    const funds = assets.funds;
     const hasPrograms = programs.length > 0;
     const hasFunds = funds.length > 0;
 
@@ -90,9 +90,9 @@ class DashboardChartAssetsContainer extends PureComponent {
 }
 
 const mapStateToProps = state => {
-  const { topAssets } = state.dashboard;
+  const { assets } = state.dashboard;
   return {
-    topAssets
+    assets
   };
 };
 

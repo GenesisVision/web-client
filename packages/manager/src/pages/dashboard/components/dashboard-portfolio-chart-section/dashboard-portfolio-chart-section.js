@@ -12,7 +12,7 @@ import {
   cancelRequest,
   getInRequests
 } from "../../services/dashboard-in-requests.service";
-import { getTopAssets } from "../../services/dashboard.service";
+import { getAssets } from "../../services/dashboard.service";
 import DashboardChartAssetsContainer from "./dashboard-chart-assets/dashboard-chart-assets-container";
 import DashboardPortfolioChartContainer from "./dashboard-chart/dashboard-portfolio-chart-container";
 import DashboardGetStarted from "./dashboard-get-started";
@@ -20,11 +20,11 @@ import DashboardGetStarted from "./dashboard-get-started";
 class DashboardPortfolioChartSection extends Component {
   componentWillMount() {
     const { service } = this.props;
-    service.getTopAssets();
+    service.getAssets();
   }
 
   render() {
-    const { t, isNewUser, topAssets } = this.props;
+    const { t, isNewUser, assets } = this.props;
     if (isNewUser) {
       return (
         <Surface className="dashboard-portfolio-chart-section">
@@ -32,7 +32,7 @@ class DashboardPortfolioChartSection extends Component {
         </Surface>
       );
     }
-    if (!topAssets) return null;
+    if (!assets) return null;
     return (
       <Surface className="dashboard-portfolio-chart-section">
         <h3 className="dashboard-portfolio-chart-section__heading">
@@ -53,16 +53,16 @@ class DashboardPortfolioChartSection extends Component {
 
 const mapStateToProps = state => {
   const { info } = state.profileHeader;
-  const { topAssets } = state.dashboard;
+  const { assets } = state.dashboard;
   return {
     isNewUser: info.data && info.data.isNewUser,
-    topAssets
+    assets
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    service: bindActionCreators({ getTopAssets }, dispatch)
+    service: bindActionCreators({ getAssets }, dispatch)
   };
 };
 
