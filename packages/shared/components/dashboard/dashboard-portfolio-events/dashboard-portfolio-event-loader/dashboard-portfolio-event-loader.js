@@ -5,10 +5,7 @@ const PortfolioEventLoader = () => {
   return (
     <div className="portfolio-event">
       <div style={{ width: 252 }}>
-        <SvgLoader
-          height="84"
-          width="252"
-        >
+        <SvgLoader height="84" width="252">
           <rect x="65" y="20.87" rx="3" ry="3" width="164.27" height="10" />
           <rect x="65" y="1" rx="3" ry="3" width="85" height="10" />
           <rect x="65" y="69.16" rx="3" ry="3" width="122.5" height="10" />

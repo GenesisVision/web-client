@@ -68,9 +68,5 @@ export const fetchFundStructure = fundId => {
 export const closeFund = (id, opts) => dispatch => {
   const authorization = authService.getAuthArg();
 
-  return managerApi.v10ManagerFundsByIdClosePost(
-    id,
-    authorization,
-    opts
-  );
+  return managerApi.v10ManagerFundsByIdClosePost(id, authorization, opts);
 };

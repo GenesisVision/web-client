@@ -48,7 +48,10 @@ const middleware = [
   updateAccountCurrencyMiddleware
 ];
 
-const composedEnhancers = compose(applyMiddleware(...middleware), ...enhancers);
+const composedEnhancers = compose(
+  applyMiddleware(...middleware),
+  ...enhancers
+);
 
 const store = createStore(rootReducer, initialState, composedEnhancers);
 

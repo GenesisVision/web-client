@@ -47,7 +47,7 @@ class DashboardInRequestsContainer extends PureComponent {
           label={t(
             `${
               process.env.REACT_APP_PLATFORM
-              }.dashboard-page.chart-section.in-requests`
+            }.dashboard-page.chart-section.in-requests`
           )}
           big
         >
@@ -81,15 +81,11 @@ class DashboardInRequestsContainer extends PureComponent {
           </Scrollbars>
         </Popover>
       </Fragment>
-    )
-  }
+    );
+  };
 
   render() {
-    return (
-      <div className="dashboard-request">
-        {this.renderRequest()}
-      </div>
-    );
+    return <div className="dashboard-request">{this.renderRequest()}</div>;
   }
 }
 

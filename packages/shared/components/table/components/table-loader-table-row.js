@@ -16,12 +16,9 @@ const TableLoaderTableRow = () => {
     </tr>
   );
 };
-const TableLoaderCell = ({ width}) => (
+const TableLoaderCell = ({ width }) => (
   <div style={{ width: width }}>
-    <SvgLoader
-      height="20"
-      width={width}
-    >
+    <SvgLoader height="20" width={width}>
       <rect x="0" y="0" rx="8" ry="8" width={width} height="20" />
     </SvgLoader>
   </div>

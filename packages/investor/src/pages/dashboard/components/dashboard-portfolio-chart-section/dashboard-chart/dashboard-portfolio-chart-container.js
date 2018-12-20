@@ -77,10 +77,12 @@ class DashboardPortfolioChartContainer extends PureComponent {
     const { data, currency, isPending } = this.props;
     const { period } = this.state;
     if (isPending || !data)
-      return <Fragment>
-        <DashboardChartStatsLoader />
-        <DashboardChartLoader />
-      </Fragment>;
+      return (
+        <Fragment>
+          <DashboardChartStatsLoader />
+          <DashboardChartLoader />
+        </Fragment>
+      );
     return (
       <Fragment>
         <DashboardPortfolioChartStat

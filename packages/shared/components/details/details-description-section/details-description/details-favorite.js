@@ -8,7 +8,9 @@ import isAuthenticated from "shared/decorators/is-authenticated";
 import DetailsDescriptionControl from "./details-description-control";
 
 const DetailsFavorite = ({ t, toggleFavorite, id, isFavorite }) => (
-  <DetailsDescriptionControl text={t("fund-details-page.description.addToFavorites")}>
+  <DetailsDescriptionControl
+    text={t("fund-details-page.description.addToFavorites")}
+  >
     <FavoriteIcon
       className="details-description-control__icon"
       id={id}

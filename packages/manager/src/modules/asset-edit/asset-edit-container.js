@@ -76,4 +76,7 @@ const mapDispatchToProps = dispatch => ({
   )
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(AssetEditContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AssetEditContainer);

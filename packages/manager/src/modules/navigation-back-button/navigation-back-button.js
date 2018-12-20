@@ -24,7 +24,12 @@ const mapDispatchToProps = dispatch => ({
 
 const NavigationBackButton = compose(
   translate(),
-  connect(null, mapDispatchToProps, null, { pure: false })
+  connect(
+    null,
+    mapDispatchToProps,
+    null,
+    { pure: false }
+  )
 )(BackButton);
 
 export default NavigationBackButton;

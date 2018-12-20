@@ -14,10 +14,7 @@ const TableLoaderCardRow = () => {
 
 const CardLoader = () => (
   <div className="programs-cards__card">
-    <SvgLoader
-      height="307"
-      width="271"
-    >
+    <SvgLoader height="307" width="271">
       <rect x="0" y="0" rx="8" ry="8" width="80" height="80" />
       <rect x="110" y="10" rx="4" ry="4" width="100" height="20" />
       <rect x="110" y="40" rx="4" ry="4" width="50" height="10" />
