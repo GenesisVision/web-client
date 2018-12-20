@@ -9,6 +9,7 @@ import { getPortfolioChart } from "../../../services/dashboard-chart.service";
 import DashboardPortfolioChart from "./dashboard-portfolio-chart";
 import DashboardPortfolioChartStat from "./dashboard-portfolio-chart-stat";
 import DashboardChartLoader from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-loader";
+import DashboardChartStatsLoader from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-stats-loader";
 
 const composeBalanceChartData = balanceChart => {
   const balance = balanceChart.map(x => ({
@@ -75,9 +76,11 @@ class DashboardPortfolioChartContainer extends PureComponent {
   render() {
     const { data, currency, isPending } = this.props;
     const { period } = this.state;
-    if (isPending && !data)
-      return <DashboardChartLoader />;
-    if (data === undefined) return null;
+    if (isPending || !data)
+      return <Fragment>
+        <DashboardChartStatsLoader />
+        <DashboardChartLoader />
+      </Fragment>;
     return (
       <Fragment>
         <DashboardPortfolioChartStat

@@ -3,9 +3,9 @@ import "./dashboard-chart-loader.scss";
 import React from "react";
 import SvgLoader from "shared/components/svg-loader/svg-loader";
 
-const DashboardChartStats = () => {
+const DashboardChartStatsLoader = () => {
   return (
-    <div className="dashboard-chart-loader__row">
+    <div className="dashboard-chart-loader__row dashboard-chart-loader__row--stats">
       <ChartLoaderStat />
       <ChartLoaderStat />
     </div>
@@ -25,5 +25,5 @@ const ChartLoaderStat = () => (
   </div>
 );
 
-export default DashboardChartStats;
+export default DashboardChartStatsLoader;
 
