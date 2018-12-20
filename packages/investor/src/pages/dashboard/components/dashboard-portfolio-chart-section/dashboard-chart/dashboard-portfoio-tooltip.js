@@ -1,7 +1,7 @@
-import ChartTooltip from "shared/components/chart/chart-tooltip/chart-tooltip";
-import Profitability from "shared/components/profitability/profitability";
 import React, { Fragment } from "react";
 import NumberFormat from "react-number-format";
+import ChartTooltip from "shared/components/chart/chart-tooltip/chart-tooltip";
+import Profitability from "shared/components/profitability/profitability";
 import { formatValue } from "shared/utils/formatter";
 
 import { BAR_COLORS } from "./dashboard-chart.constants";

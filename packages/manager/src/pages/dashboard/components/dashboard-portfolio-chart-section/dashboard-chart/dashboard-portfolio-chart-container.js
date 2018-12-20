@@ -2,6 +2,8 @@ import React, { Fragment, PureComponent } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import ChartPeriod from "shared/components/chart/chart-period/chart-period";
+import DashboardChartLoader from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-loader";
+import { DashboardChartDescriptionLoader } from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-loaders";
 import FundProfitChart from "shared/components/funds/fund-details/fund-details-statistics-section/fund-details-chart-section/fund-profit-chart-section/fund-profit-chart";
 import ProgramProfitChart from "shared/components/programs/program-details/program-details-statistic-section/program-details-chart-section/program-profit-chart-section/program-profit-chart";
 
@@ -13,8 +15,10 @@ import {
 
 class DashboardPortfolioChartContainer extends PureComponent {
   componentDidMount() {
-    const { service } = this.props;
-    service.composeAssetChart();
+    const { assets, service } = this.props;
+    if (assets) {
+      service.composeAssetChart();
+    }
   }
 
   handleChangePeriod = period => {
@@ -25,7 +29,14 @@ class DashboardPortfolioChartContainer extends PureComponent {
 
   render() {
     const { assetChart, currency, period } = this.props;
-    if (!assetChart) return null;
+
+    if (!assetChart)
+      return (
+        <Fragment>
+          <DashboardChartDescriptionLoader />
+          <DashboardChartLoader />
+        </Fragment>
+      );
     return (
       <Fragment>
         <h3 className="dashboard-portfolio-chart-section__heading">

@@ -2,14 +2,14 @@ import Enzyme, { shallow } from "enzyme";
 import React from "react";
 
 import {
-  AlertMessageList,
-  mapStateToProps,
-  mapDispatchToProps
-} from "./alert-message-list";
-import {
-  alertMessageActions,
-  alertMessageActionTypes
+  alertMessageActionTypes,
+  alertMessageActions
 } from "../../actions/alert-message-actions";
+import {
+  AlertMessageList,
+  mapDispatchToProps,
+  mapStateToProps
+} from "./alert-message-list";
 
 describe("AlertMessageList", () => {
   let wrapper;

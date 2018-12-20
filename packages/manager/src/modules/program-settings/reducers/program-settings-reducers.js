@@ -1,12 +1,11 @@
 import { combineReducers } from "redux";
-
 import apiReducerFactory from "shared/reducers/api-reducer/api-reducer";
 
 import {
-  PROGRAM_SETTINGS_FETCH_FORM,
+  PROGRAM_SETTINGS,
   PROGRAM_SETTINGS_CREATE_FORM,
   PROGRAM_SETTINGS_EDIT_FORM,
-  PROGRAM_SETTINGS
+  PROGRAM_SETTINGS_FETCH_FORM
 } from "../actions/program-settings-actions.constants";
 
 const programSettingsEditFormReducer = apiReducerFactory({

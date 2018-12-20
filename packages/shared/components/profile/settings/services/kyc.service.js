@@ -1,6 +1,6 @@
 import $script from "scriptjs";
-import authService from "shared/services/auth-service";
 import profileApi from "shared/services/api-client/profile-api";
+import authService from "shared/services/auth-service";
 
 export const loadKycIFrame = () => {
   const authorization = authService.getAuthArg();

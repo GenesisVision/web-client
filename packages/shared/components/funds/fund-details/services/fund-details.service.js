@@ -4,10 +4,9 @@ import {
 } from "pages/funds/funds.routes";
 import { DEFAULT_PERIOD } from "shared/components/chart/chart-period/chart-period.helpers";
 import fundsApi from "shared/services/api-client/funds-api";
+import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
-
-import managerApi from "shared/services/api-client/manager-api";
 
 export const getFundDescription = () => (dispatch, getState) => {
   const authorization = authService.getAuthArg();
@@ -68,9 +67,5 @@ export const fetchFundStructure = fundId => {
 export const closeFund = (id, opts) => dispatch => {
   const authorization = authService.getAuthArg();
 
-  return managerApi.v10ManagerFundsByIdClosePost(
-    id,
-    authorization,
-    opts
-  );
+  return managerApi.v10ManagerFundsByIdClosePost(id, authorization, opts);
 };

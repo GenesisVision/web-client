@@ -1,7 +1,7 @@
+import "./gv-textarea.css";
+
 import classnames from "classnames";
 import React from "react";
-
-import "./gv-textarea.css";
 
 const GVTextarea = ({
   field, // { name, value, onChange, onBlur }

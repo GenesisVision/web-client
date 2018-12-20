@@ -51,7 +51,7 @@ class CreateFundContainer extends Component {
       deposit
     } = this.state;
     const { navigateBack, handleSubmit } = this;
-    const { t, headerData, service, platformSettings } = this.props;
+    const { t, author, service, platformSettings } = this.props;
     if (!platformSettings) return null;
     return (
       <div className="create-fund-container">
@@ -60,10 +60,9 @@ class CreateFundContainer extends Component {
             <CreateFundSettings
               onValidateError={this.handleValidateError}
               navigateBack={navigateBack}
-              balance={(headerData && headerData.availableGvt) || 0}
               updateBalance={service.fetchBalance}
               onSubmit={handleSubmit}
-              author={(headerData && headerData.name) || null} //headerData.name
+              author={author}
               assets={assets}
               deposit={deposit}
               programsInfo={platformSettings.programsInfo}
@@ -73,7 +72,7 @@ class CreateFundContainer extends Component {
             open={isNavigationDialogVisible}
             onClose={() => this.setState({ isNavigationDialogVisible: false })}
             onApply={service.goBack}
-            body={t("create-fund-page.navigation-back-text")}
+            body={t("manager.create-fund-page.navigation-back-text")}
             applyButtonText={t("buttons.continue")}
           />
         </div>
@@ -83,8 +82,9 @@ class CreateFundContainer extends Component {
 }
 
 const mapStateToProps = state => {
+  const headerData = state.profileHeader.info.data;
   return {
-    headerData: state.profileHeader.info.data,
+    author: headerData ? headerData.name : "",
     platformSettings: state.platformData.data
   };
 };
