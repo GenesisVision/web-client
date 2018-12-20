@@ -88,7 +88,7 @@ class CreateProgramContainer extends Component {
       setLeverageChooseAvailable
     } = this;
     const { t, headerData, service, platformSettings } = this.props;
-    if (!platformSettings) return null;
+    if (!platformSettings || !headerData) return null;
     return (
       <div className="create-program-container">
         <GVTabs value={tab}>
@@ -109,6 +109,7 @@ class CreateProgramContainer extends Component {
                 brokers={brokers}
                 choosedBroker={choosedBroker}
                 chooseBroker={chooseBroker}
+                isForexAllowed={headerData.allowForex}
               />
             )}
             {tab === "settings" && (
@@ -116,10 +117,10 @@ class CreateProgramContainer extends Component {
                 onValidateError={this.handleValidateError}
                 navigateBack={navigateToBroker}
                 broker={choosedBroker}
-                balance={(headerData && headerData.availableGvt) || 0}
+                balance={headerData.availableGvt}
                 updateBalance={service.fetchBalance}
                 onSubmit={handleSubmit}
-                author={(headerData && headerData.name) || null}
+                author={headerData.name}
                 setLeverageChooseAvailable={setLeverageChooseAvailable}
                 isLeverageChooseAvailable={isLeverageChooseAvailable}
                 programsInfo={platformSettings.programsInfo}

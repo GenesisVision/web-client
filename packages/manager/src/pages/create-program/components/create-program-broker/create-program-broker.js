@@ -26,7 +26,8 @@ const CreateProgramBroker = ({
   brokers,
   navigateToSettings,
   choosedBroker,
-  chooseBroker
+  chooseBroker,
+  isForexAllowed
 }) => (
   <div className="create-program-broker-container">
     <div className="create-program-broker">
@@ -37,6 +38,11 @@ const CreateProgramBroker = ({
             broker={broker}
             isSelected={broker === choosedBroker}
             onSelect={chooseBroker}
+            cardState={
+              !isForexAllowed && broker.isForex
+                ? BrokerCardState.notAvailable
+                : BrokerCardState.active
+            }
           />
         ))}
         {comingSoonBrokers.map(broker => (
