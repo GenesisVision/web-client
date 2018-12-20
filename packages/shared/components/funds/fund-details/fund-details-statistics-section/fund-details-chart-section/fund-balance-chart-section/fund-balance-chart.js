@@ -1,4 +1,3 @@
-import chartXAxis from "shared/components/chart/chart-components/chart-xaxis";
 import { GVColors } from "gv-react-components";
 import React, { PureComponent } from "react";
 import {
@@ -9,6 +8,7 @@ import {
   Tooltip,
   YAxis
 } from "recharts";
+import chartXAxis from "shared/components/chart/chart-components/chart-xaxis";
 
 import FundBalanceTooltip from "./fund-balance-tooltip";
 

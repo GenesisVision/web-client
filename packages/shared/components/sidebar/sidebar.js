@@ -1,9 +1,9 @@
 import "./sidebar.scss";
 
 import * as classnames from "classnames";
-import Modal from "shared/components/modal/modal";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
+import Modal from "shared/components/modal/modal";
 
 class Sidebar extends Component {
   render() {

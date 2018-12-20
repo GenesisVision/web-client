@@ -3,6 +3,7 @@ import "./dashboard-portfolio-events-all.scss";
 
 import React, { Component } from "react";
 import Surface from "shared/components/surface/surface";
+
 import PortfolioEventsTableComponent from "./dashboard-portfolio-events-all-table";
 
 class PortfolioEventsTableContainerComponent extends Component {

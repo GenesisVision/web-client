@@ -5,11 +5,6 @@ import {
 } from "pages/funds/funds.routes";
 import qs from "qs";
 import { push } from "react-router-redux";
-import {
-  FUNDS_TABLE_COLUMNS,
-  FUNDS_TABLE_FILTERS,
-  SORTING_FILTER_VALUE
-} from "../components/funds-table/funds-table.constants";
 import { composeFilters } from "shared/components/table/helpers/filtering.helpers";
 import {
   calculateSkipAndTake,
@@ -20,6 +15,11 @@ import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
 
 import * as fundsTableActions from "../actions/funds-table.actions";
+import {
+  FUNDS_TABLE_COLUMNS,
+  FUNDS_TABLE_FILTERS,
+  SORTING_FILTER_VALUE
+} from "../components/funds-table/funds-table.constants";
 
 const DEFAULT_ITEMS_ON_PAGE = 12;
 

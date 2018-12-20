@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import ChartTooltip from "shared/components/chart/chart-tooltip/chart-tooltip";
-import { formatValue } from "shared/utils/formatter";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import { formatValue } from "shared/utils/formatter";
 
 const TooltipBody = ({ managersFunds, investorsFunds, profit }) => {
   return (

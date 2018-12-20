@@ -1,11 +1,11 @@
-import React from "react";
-
 import "./progress.css";
+
+import React from "react";
 
 const Progress = ({ value, min, max, labelMin, labelMax }) => {
   const minValue = min || 0;
   const maxValue = max || 100;
-  const val = (value - minValue) / (maxValue - minValue || 1) * 100;
+  const val = ((value - minValue) / (maxValue - minValue || 1)) * 100;
   const renderLabelMin = () => {
     if (!labelMin) {
       return null;

@@ -78,15 +78,15 @@ class ProgramDetailsDescription extends PureComponent {
     updateDetails();
   };
   componentDidMount() {
-    platformApi.v10PlatformLevelsGet({currency: "GVT"}).then(data => {
+    platformApi.v10PlatformLevelsGet({ currency: "GVT" }).then(data => {
       this.setState({ investmentsLimits: data.levels });
     });
-  };
+  }
   getCurrentLimit(currentLevel) {
-    return this.state.investmentsLimits
-      .find(LevelInfo => LevelInfo.level === currentLevel)
-      .investmentLimit;
-  };
+    return this.state.investmentsLimits.find(
+      LevelInfo => LevelInfo.level === currentLevel
+    ).investmentLimit;
+  }
   render() {
     const {
       isOpenInvestmentPopup,
@@ -171,9 +171,12 @@ class ProgramDetailsDescription extends PureComponent {
                 {investmentsLimits.length && (
                   <StatisticItem
                     accent
-                    label={t("program-details-page.popover.invest-limit")}>
+                    label={t("program-details-page.popover.invest-limit")}
+                  >
                     <NumberFormat
-                      value={formatValue(this.getCurrentLimit(programDescription.level))}
+                      value={formatValue(
+                        this.getCurrentLimit(programDescription.level)
+                      )}
                       thousandSeparator={" "}
                       displayType="text"
                       suffix={` GVT`}

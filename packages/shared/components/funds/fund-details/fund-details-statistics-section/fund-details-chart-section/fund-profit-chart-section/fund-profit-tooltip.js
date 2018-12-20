@@ -1,6 +1,6 @@
-import ChartTooltip from "shared/components/chart/chart-tooltip/chart-tooltip";
 import React from "react";
 import NumberFormat from "react-number-format";
+import ChartTooltip from "shared/components/chart/chart-tooltip/chart-tooltip";
 
 const FundProfitTooltip = ({ active, label, payload, value }) => {
   if (!active) return null;

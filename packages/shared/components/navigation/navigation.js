@@ -1,16 +1,16 @@
 import "./navigation.scss";
 
 import classnames from "classnames";
-import GVLogo from "shared/components/gv-logo/gv-logo";
-import { DashboardIcon } from "shared/components/icon/dashboard-icon";
-import { ProgramsIcon } from "shared/components/icon/programs-icon";
-import NavigationItem from "shared/components/navigation/navigation-item";
 import { HOME_ROUTE } from "pages/app/app.routes";
 import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import { FUNDS_ROUTE } from "pages/funds/funds.routes";
 import { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
+import GVLogo from "shared/components/gv-logo/gv-logo";
+import { DashboardIcon } from "shared/components/icon/dashboard-icon";
+import { ProgramsIcon } from "shared/components/icon/programs-icon";
+import NavigationItem from "shared/components/navigation/navigation-item";
 
 import { FundsIcon } from "../icon/funds-icon";
 
