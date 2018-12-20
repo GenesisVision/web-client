@@ -1,4 +1,3 @@
-import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
 import React from "react";
 import Surface from "shared/components/surface/surface";
 

@@ -22,7 +22,7 @@ const FundsPage = ({ t }) => {
         assetsFacets={"fundsFacets"}
         composeFacetUrl={composeFundFacetUrl}
       />
-      <FundsTableContainer title={"All funds"} />
+      <FundsTableContainer title={"All funds"} enableFiltering />
     </Page>
   );
 };
