@@ -3,6 +3,7 @@ import {
   calculateSkipAndTake,
   calculateTotalPages
 } from "shared/components/table/helpers/paging.helpers";
+
 import { updateFilters as updateFiltersActionCreator } from "../actions/table.actions";
 
 export const composeRequestFilters = ({

@@ -1,10 +1,11 @@
 import "./details-description-control.scss";
 
-import FavoriteIcon from "shared/components/favorite-asset/favorite-icon/favorite-icon";
 import React from "react";
 import { translate } from "react-i18next";
 import { compose } from "redux";
+import FavoriteIcon from "shared/components/favorite-asset/favorite-icon/favorite-icon";
 import isAuthenticated from "shared/decorators/is-authenticated";
+
 import DetailsDescriptionControl from "./details-description-control";
 
 const DetailsFavorite = ({ t, toggleFavorite, id, isFavorite }) => (

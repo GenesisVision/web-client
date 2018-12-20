@@ -1,7 +1,7 @@
-import NumberFormat from "react-number-format";
-import React from "react";
-
 import "./input-text.css";
+
+import React from "react";
+import NumberFormat from "react-number-format";
 
 const InputText = ({
   field, // { name, value, onChange, onBlur }

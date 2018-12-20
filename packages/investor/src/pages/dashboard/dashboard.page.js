@@ -3,11 +3,11 @@ import "shared/components/dashboard/dashboard.scss";
 import React from "react";
 import { translate } from "react-i18next";
 import Page from "shared/components/page/page";
+import Surface from "shared/components/surface/surface";
 
 import DashboardAssetsContainer from "./components/dashboard-assets/dashboard-assets-container";
 import DashboardChartSection from "./components/dashboard-portfolio-chart-section/dashboard-portfolio-chart-section";
 import DashboardPortfolioEventsSection from "./components/dashboard-portfolio-events/dashboard-portfolio-events-section";
-import Surface from "shared/components/surface/surface";
 
 const DashboardPage = ({ t }) => {
   const title = t(`${process.env.REACT_APP_PLATFORM}.dashboard-page.title`);

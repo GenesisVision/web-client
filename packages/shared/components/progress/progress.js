@@ -1,6 +1,6 @@
-import React from "react";
-
 import "./progress.css";
+
+import React from "react";
 
 const Progress = ({ value, min, max, labelMin, labelMax }) => {
   const minValue = min || 0;

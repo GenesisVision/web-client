@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+
 import SvgLoader from "../../svg-loader/svg-loader";
 
 const TableLoaderCardRow = () => {

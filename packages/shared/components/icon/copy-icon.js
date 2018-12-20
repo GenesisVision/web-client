@@ -1,5 +1,5 @@
-import { Icon } from "shared/components/icon/icon";
 import React from "react";
+import { Icon } from "shared/components/icon/icon";
 
 const CopyIcon = props => {
   return (

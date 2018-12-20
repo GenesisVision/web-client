@@ -1,9 +1,9 @@
-import { connect } from "react-redux";
 import React from "react";
-
+import { connect } from "react-redux";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import ProgramClose from "./program-close/program-close";
+
 import programCloseActions from "../../actions/program-close-actions";
+import ProgramClose from "./program-close/program-close";
 
 const ProgramCloseContainer = ({
   programId,

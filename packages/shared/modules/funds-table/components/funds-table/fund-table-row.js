@@ -1,17 +1,16 @@
-import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
-import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
-import Profitability from "shared/components/profitability/profitability";
-import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import { GVButton } from "gv-react-components";
-import TableCell from "shared/components/table/components/table-cell";
-import TableRow from "shared/components/table/components/table-row";
 import React, { Component } from "react";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
-import { formatValue } from "shared/utils/formatter";
-
-import { composeFundsDetailsUrl } from "shared/utils/compose-url";
+import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import FavoriteIcon from "shared/components/favorite-asset/favorite-icon/favorite-icon";
+import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
+import Profitability from "shared/components/profitability/profitability";
+import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
+import TableCell from "shared/components/table/components/table-cell";
+import TableRow from "shared/components/table/components/table-row";
+import { composeFundsDetailsUrl } from "shared/utils/compose-url";
+import { formatValue } from "shared/utils/formatter";
 
 class FundsTableRow extends Component {
   constructor(props) {

@@ -1,9 +1,9 @@
-import { windowScroll } from "shared/actions/ui-actions";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { Scrollbars } from "react-custom-scrollbars";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { windowScroll } from "shared/actions/ui-actions";
 
 class GVScroll extends Component {
   ref = React.createRef();
