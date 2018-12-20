@@ -13,6 +13,8 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { convertToCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 
+const MAX_AMOUNT_GVT = 4436644;
+
 const WalletAddFundsForm = ({
   t,
   notifySuccess,
@@ -34,7 +36,9 @@ const WalletAddFundsForm = ({
 
   const isAllow = values => {
     const { formattedValue } = values;
-    return formattedValue === "" || validateFraction(formattedValue, currency);
+    return formattedValue === "" ||
+      validateFraction(formattedValue, currency) &&
+      convertToCurrency(formattedValue, rateToGVT) <= MAX_AMOUNT_GVT;
   };
 
   return (
@@ -72,14 +76,10 @@ const WalletAddFundsForm = ({
           allowNegative={false}
           isAllowed={isAllow}
         />
-        <div className="gv-text-field__wrapper">
+        {currency !== "GVT" && <div className="gv-text-field__wrapper">
           <StatisticItem
             big
-            label={
-              currency === "GVT"
-                ? t("wallet-add-funds.will-get-gvt")
-                : t("wallet-add-funds.will-get")
-            }
+            label={t("wallet-add-funds.will-get")}
           >
             <NumberFormat
               value={formatCurrencyValue(
@@ -90,7 +90,7 @@ const WalletAddFundsForm = ({
               displayType="text"
             />
           </StatisticItem>
-        </div>
+        </div>}
       </div>
       <div className="dialog__bottom wallet-add-funds-popup__bottom">
         <GVqr className="wallet-add-funds-popup__qr" value={address} />
