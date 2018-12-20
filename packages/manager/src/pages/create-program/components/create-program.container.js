@@ -31,7 +31,7 @@ class CreateProgramContainer extends Component {
     });
   }
 
-  chooseBroker = broker => {
+  chooseBroker = broker => () => {
     this.setState({ choosedBroker: broker });
   };
 
