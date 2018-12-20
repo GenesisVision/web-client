@@ -205,14 +205,14 @@ class ProgramTableRowDetailed extends Component {
                 </div>
                 {isAuthenticated && program.personalDetails && (
                   <div className="program-detailed__favorites-block">
-                    <span className="program-detailed__favorites-text">
+                    <span style={{ float: "right" }}>
                       {t("program-details-page.description.addToFavorites")}
+                      <FavoriteIcon
+                        onClick={toggleFavorite}
+                        id={program.id}
+                        selected={program.personalDetails.isFavorite}
+                      />
                     </span>
-                    <FavoriteIcon
-                      onClick={toggleFavorite}
-                      id={program.id}
-                      selected={program.personalDetails.isFavorite}
-                    />
                   </div>
                 )}
                 <div className="program-detailed__bottom-block">

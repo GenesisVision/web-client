@@ -15,10 +15,9 @@
       max-height: 17px;
     }
     svg [stroke] {
-      transition: stroke 300ms ease;
       stroke: $label-color;
     }
-    &.icon--selected {
+    &.icon--active {
       svg [stroke] {
         stroke: $primary-color;
       }

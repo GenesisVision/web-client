@@ -378,14 +378,16 @@ $description-block-width: 250px;
     align-items: flex-start;
   }
 
-  &__favorites-block {
+  &__favorites-block,
+  &__favorites-block span {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     margin-bottom: $padding/4;
-
-    .icon {
-      margin: 0 10px;
+    span {
+      svg {
+        margin: 0 10px;
+      }
     }
   }
 
