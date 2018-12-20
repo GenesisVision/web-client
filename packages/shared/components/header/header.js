@@ -4,7 +4,7 @@ import { GVButton } from "gv-react-components";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
-import { Icon } from "shared/components/icon/icon";
+import { MenuIcon } from "shared/components/icon/icon";
 import { SearchIcon } from "shared/components/icon/search-icon";
 import Navigation from "shared/components/navigation/navigation";
 import NavigationMobile from "shared/components/navigation/navigation-mobile/navigation-mobile";
@@ -40,8 +40,11 @@ class Header extends Component {
     return (
       <div className="header">
         <div className="header__left">
-          <div className="navigation__menu profile-avatar">
-            <Icon type={"menu"} onClick={this.handleOpenMenu} />
+          <div
+            onClick={this.handleOpenMenu}
+            className="navigation__menu profile-avatar"
+          >
+            <MenuIcon />
           </div>
           <Navigation className="header__navigation" />
         </div>

@@ -1,5 +1,4 @@
 @import "~shared/styles/_colors.scss";
-@import "~shared/styles/_breakpoint.scss";
 
 .icon {
   height: 22px;
@@ -81,45 +80,12 @@
     height: 18px;
   }
 
-  &--favorite {
-    cursor: pointer;
-    width: 20px;
-    height: 19px;
-
-    @include media-breakpoint-landscape-phone() {
-      width: 28px;
-      height: 27px;
-    }
-
-    svg [stroke] {
-      transition: stroke 300ms ease;
-      stroke: $label-color;
-    }
-    svg [fill] {
-      fill: none;
-    }
-    &:hover {
-      svg [stroke] {
-        stroke: $text-accent-color;
-      }
-    }
-    &.icon--selected {
-      svg [stroke] {
-        stroke: none;
-      }
-    }
-  }
-
   &--copy {
     width: 14px;
   }
 
-  &--selected {
+  &--active {
     svg {
-      fill: $primary-color;
-      stroke: $primary-color;
-    }
-    svg [fill] {
       fill: $primary-color;
     }
     svg [stroke] {

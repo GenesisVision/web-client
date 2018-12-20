@@ -1,12 +1,9 @@
-import "./dashboard-portfolio-events-all-table.scss";
-import "./dashboard-portfolio-events-all.scss";
-
 import React, { Component } from "react";
 import Surface from "shared/components/surface/surface";
 
-import PortfolioEventsTableComponent from "./dashboard-portfolio-events-all-table";
+import PortfolioEventsTable from "./portfolio-events-table";
 
-class PortfolioEventsTableContainerComponent extends Component {
+class PortfolioEventsTableContainer extends Component {
   render() {
     const {
       pageTitle,
@@ -17,7 +14,7 @@ class PortfolioEventsTableContainerComponent extends Component {
     } = this.props;
     return (
       <Surface className="dashboard-portfolio-events-all">
-        <PortfolioEventsTableComponent
+        <PortfolioEventsTable
           fetchPortfolioEvents={fetchPortfolioEvents}
           pageTitle={pageTitle}
           tableTitle={tableTitle}
@@ -29,4 +26,4 @@ class PortfolioEventsTableContainerComponent extends Component {
   }
 }
 
-export default PortfolioEventsTableContainerComponent;
+export default PortfolioEventsTableContainer;
