@@ -1004,7 +1004,8 @@
         "settings": "Settings"
       },
       "broker-card": {
-        "coming-soon": "Coming soon"
+        "coming-soon": "Coming soon",
+        "not-available": "Not available"
       },
       "broker-info": {
         "about": "About",

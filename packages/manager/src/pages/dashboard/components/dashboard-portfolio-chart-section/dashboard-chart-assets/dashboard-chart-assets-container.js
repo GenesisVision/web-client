@@ -5,6 +5,7 @@ import Scrollbars from "react-custom-scrollbars";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
+import { DashboardChartAssetsLoader } from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-loaders";
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
 import Popover from "shared/components/popover/popover";
 
@@ -34,7 +35,7 @@ class DashboardChartAssetsContainer extends PureComponent {
 
   render() {
     const { t, assets } = this.props;
-    if (!assets) return null;
+    if (!assets) return <DashboardChartAssetsLoader />;
     const programs = assets.programs;
     const funds = assets.funds;
     const hasPrograms = programs.length > 0;
