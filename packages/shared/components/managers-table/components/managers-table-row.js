@@ -27,7 +27,7 @@ const ManagersTableRow = ({ t, manager, title }) => {
         </Link>
       </TableCell>
       <TableCell className="">
-        {manager.assets.map(x => x).join(", ")}
+        {manager.assets.map(asset => asset).join(", ")}
       </TableCell>
       <TableCell className="">{moment(manager.regDate).format("ll")}</TableCell>
     </TableRow>
