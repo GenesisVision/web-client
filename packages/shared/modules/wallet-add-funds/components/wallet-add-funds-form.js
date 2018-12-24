@@ -20,36 +20,36 @@ class WalletAddFundsForm extends Component {
     currentAmount: ""
   };
 
-  onCopy = () => {
-    const { t, notifySuccess, notifyError } = this.props;
-    try {
-      copy(address);
-      notifySuccess(t("wallet-add-funds.copy-to-clipboard-success"));
-    } catch (error) {
-      notifyError(t("wallet-add-funds.copy-to-clipboard-error"));
-    }
-  };
-
   onChangeCurrency = (name, target) => {
     const { setFieldValue } = this.props;
     setFieldValue("currency", target.props.value);
     this.setState({ currentAmount: "" });
   };
 
-  onChangeAmount = (event) => {
+  onChangeAmount = event => {
     this.setState({ currentAmount: event.target.value });
   };
 
   render() {
-    const { t, values, wallets } = this.props;
+    const { t, values, wallets, notifySuccess, notifyError } = this.props;
     const { currentAmount } = this.state;
     const selected = wallets.find(w => w.currency === values.currency) || {};
     const { address, currency, rateToGVT } = selected;
-    const isAllow = (values) => {
+    const isAllow = values => {
       const { formattedValue } = values;
-      return formattedValue === "" ||
-        validateFraction(formattedValue, currency) &&
-        convertToCurrency(formattedValue, rateToGVT) <= MAX_AMOUNT_GVT;
+      return (
+        formattedValue === "" ||
+        (validateFraction(formattedValue, currency) &&
+          convertToCurrency(formattedValue, rateToGVT) <= MAX_AMOUNT_GVT)
+      );
+    };
+    const onCopy = () => {
+      try {
+        copy(address);
+        notifySuccess(t("wallet-add-funds.copy-to-clipboard-success"));
+      } catch (error) {
+        notifyError(t("wallet-add-funds.copy-to-clipboard-error"));
+      }
     };
 
     return (
@@ -92,20 +92,18 @@ class WalletAddFundsForm extends Component {
           />
           {currency !== "GVT" && (
             <div className="gv-text-field__wrapper">
-            <StatisticItem
-              big
-              label={t("wallet-add-funds.will-get")}
-            >
-              <NumberFormat
-                value={formatCurrencyValue(
-                  convertToCurrency(currentAmount, rateToGVT),
-                  "GVT"
-                )}
-                suffix=" GVT"
-                displayType="text"
-              />
-            </StatisticItem>
-          </div>)}
+              <StatisticItem big label={t("wallet-add-funds.will-get")}>
+                <NumberFormat
+                  value={formatCurrencyValue(
+                    convertToCurrency(currentAmount, rateToGVT),
+                    "GVT"
+                  )}
+                  suffix=" GVT"
+                  displayType="text"
+                />
+              </StatisticItem>
+            </div>
+          )}
         </div>
         <div className="dialog__bottom wallet-add-funds-popup__bottom">
           <GVqr className="wallet-add-funds-popup__qr" value={address} />
@@ -115,7 +113,7 @@ class WalletAddFundsForm extends Component {
           >
             {address}
           </StatisticItem>
-          <GVButton color="secondary" onClick={this.onCopy} disabled={!address}>
+          <GVButton color="secondary" onClick={onCopy} disabled={!address}>
             <CopyIcon />
             &nbsp;
             {t("buttons.copy")}
