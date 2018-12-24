@@ -21,8 +21,7 @@ const FundsTableModule = ({
   updatePaging,
   toggleFavorite,
   isAuthenticated,
-  title,
-  enableFiltering
+  title
 }) => {
   return (
     <Table
@@ -34,19 +33,16 @@ const FundsTableModule = ({
       columns={FUNDS_TABLE_COLUMNS}
       items={data.funds}
       isPending={data.isPending}
-      renderFilters={
-        enableFiltering &&
-        (() => (
-          <Fragment>
-            <DateRangeFilter
-              name={DATE_RANGE_FILTER_NAME}
-              value={filtering[DATE_RANGE_FILTER_NAME]}
-              onChange={updateFilter}
-              startLabel={t("filters.date-range.fund-start")}
-            />
-          </Fragment>
-        ))
-      }
+      renderFilters={() => (
+        <Fragment>
+          <DateRangeFilter
+            name={DATE_RANGE_FILTER_NAME}
+            value={filtering[DATE_RANGE_FILTER_NAME]}
+            onChange={updateFilter}
+            startLabel={t("filters.date-range.fund-start")}
+          />
+        </Fragment>
+      )}
       renderHeader={column => {
         if (!isAuthenticated && column.name === "favorite") return null;
         return (

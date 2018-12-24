@@ -24,7 +24,6 @@ const ProgramsPage = ({ t }) => {
         PROGRAMS_RATING_ROUTE={routes.PROGRAMS_RATING_ROUTE}
       />
       <ProgramsContainer
-        enableFiltering
         showSwitchView
         title={t("programs-page.programs-table")}
       />

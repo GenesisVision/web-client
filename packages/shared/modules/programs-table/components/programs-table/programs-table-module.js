@@ -21,7 +21,6 @@ const ProgramsTableModule = ({
   disableTitle,
   columns,
   showRating,
-  enableFiltering,
   showSwitchView,
   currencies,
   data,
@@ -53,31 +52,28 @@ const ProgramsTableModule = ({
       columns={columns || PROGRAMS_COLUMNS}
       items={data.programs}
       isPending={isPending || data.isPending}
-      renderFilters={
-        enableFiltering &&
-        (() => (
-          <Fragment>
-            <LevelFilter
-              name={LEVEL_FILTER_NAME}
-              value={filtering[LEVEL_FILTER_NAME]}
-              onChange={updateFilter}
-            />
-            <SelectFilter
-              name={CURRENCY_FILTER_NAME}
-              label="Currency"
-              value={filtering[CURRENCY_FILTER_NAME]}
-              values={selectFilterValues}
-              onChange={updateFilter}
-            />
-            <DateRangeFilter
-              name={DATE_RANGE_FILTER_NAME}
-              value={filtering[DATE_RANGE_FILTER_NAME]}
-              onChange={updateFilter}
-              startLabel={t("filters.date-range.program-start")}
-            />
-          </Fragment>
-        ))
-      }
+      renderFilters={() => (
+        <Fragment>
+          <LevelFilter
+            name={LEVEL_FILTER_NAME}
+            value={filtering[LEVEL_FILTER_NAME]}
+            onChange={updateFilter}
+          />
+          <SelectFilter
+            name={CURRENCY_FILTER_NAME}
+            label="Currency"
+            value={filtering[CURRENCY_FILTER_NAME]}
+            values={selectFilterValues}
+            onChange={updateFilter}
+          />
+          <DateRangeFilter
+            name={DATE_RANGE_FILTER_NAME}
+            value={filtering[DATE_RANGE_FILTER_NAME]}
+            onChange={updateFilter}
+            startLabel={t("filters.date-range.program-start")}
+          />
+        </Fragment>
+      )}
       renderHeader={column => {
         if (!isAuthenticated && column.name === "favorite") return null;
         return (

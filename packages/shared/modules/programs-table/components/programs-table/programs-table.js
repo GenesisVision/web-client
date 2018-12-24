@@ -24,7 +24,6 @@ class ProgramsContainer extends Component {
 
   render() {
     const {
-      enableFiltering,
       showSwitchView,
       currencies,
       isPending,
@@ -36,7 +35,6 @@ class ProgramsContainer extends Component {
     } = this.props;
     return (
       <ProgramsTableModule
-        enableFiltering={enableFiltering}
         showSwitchView={showSwitchView}
         title={title}
         data={data || {}}

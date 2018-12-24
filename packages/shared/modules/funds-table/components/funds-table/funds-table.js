@@ -27,12 +27,10 @@ class FundsTable extends Component {
       filters,
       service,
       isAuthenticated,
-      title,
-      enableFiltering
+      title
     } = this.props;
     return (
       <FundsTableModule
-        enableFiltering={enableFiltering}
         title={title}
         data={data || {}}
         isPending={isPending}

@@ -24,7 +24,6 @@ const ProgramsPage = ({ t }) => {
         composeFacetUrl={composeProgramFacetUrl}
       />
       <ProgramsContainer
-        enableFiltering
         showSwitchView
         title={t("programs-page.programs-table")}
       />
