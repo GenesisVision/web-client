@@ -1,20 +1,22 @@
-import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
-import { Icon } from "shared/components/icon/icon";
-import Profitability from "shared/components/profitability/profitability";
-import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
+import classnames from "classnames";
 import { GVButton } from "gv-react-components";
-import FavoriteIcon from "shared/components/favorite-asset/favorite-icon/favorite-icon";
-import TableRow from "shared/components/table/components/table-row";
-import { composeProgramDetailsUrl } from "shared/utils/compose-url";
-import { composeManagerDetailsUrl } from "shared/utils/compose-url";
 import React, { Component } from "react";
 import { Scrollbars } from "react-custom-scrollbars";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
+import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import FavoriteIcon from "shared/components/favorite-asset/favorite-icon/favorite-icon";
+import { Icon } from "shared/components/icon/icon";
+import LevelTooltip from "shared/components/level-tooltip/level-tooltip";
+import Profitability from "shared/components/profitability/profitability";
+import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
+import TableRow from "shared/components/table/components/table-row";
+import { composeProgramDetailsUrl } from "shared/utils/compose-url";
+import { composeManagerDetailsUrl } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
+
 import ProgramBigChart from "./program-big-chart/program-big-chart";
-import classnames from "classnames";
 
 class ProgramTableRowDetailed extends Component {
   state = {
@@ -55,6 +57,12 @@ class ProgramTableRowDetailed extends Component {
                       alt={program.title}
                       size="medium"
                       color={program.color}
+                      tooltip={
+                        <LevelTooltip
+                          level={program.level}
+                          canLevelUp={program.rating.canLevelUp}
+                        />
+                      }
                     />
                   </Link>
                   <div className="program-detailed__avatar--name">
@@ -197,14 +205,14 @@ class ProgramTableRowDetailed extends Component {
                 </div>
                 {isAuthenticated && program.personalDetails && (
                   <div className="program-detailed__favorites-block">
-                    <span style={{ float: "right" }}>
+                    <span className="program-detailed__favorites-text">
                       {t("program-details-page.description.addToFavorites")}
-                      <FavoriteIcon
-                        onClick={toggleFavorite}
-                        id={program.id}
-                        selected={program.personalDetails.isFavorite}
-                      />
                     </span>
+                    <FavoriteIcon
+                      onClick={toggleFavorite}
+                      id={program.id}
+                      selected={program.personalDetails.isFavorite}
+                    />
                   </div>
                 )}
                 <div className="program-detailed__bottom-block">

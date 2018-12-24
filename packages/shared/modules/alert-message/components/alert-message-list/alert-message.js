@@ -1,7 +1,5 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import posed from "react-pose";
 import classnames from "classnames";
+import React, { Component } from "react";
 import { translate } from "react-i18next";
 
 class AlertMessage extends Component {

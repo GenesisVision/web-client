@@ -1,9 +1,3 @@
-import { formartChartMinValue } from "shared/components/chart/chart-components/chart-components.helpers";
-import chartXAxis from "shared/components/chart/chart-components/chart-xaxis";
-import ProgramChartGradient, {
-  gradientOffset
-} from "shared/components/chart/chart-gradient/chart-gradient";
-import { getStrokeColor } from "shared/components/chart/chart-gradient/chart-gradient";
 import { GVColors } from "gv-react-components";
 import React, { PureComponent } from "react";
 import {
@@ -14,6 +8,12 @@ import {
   Tooltip,
   YAxis
 } from "recharts";
+import { formartChartMinValue } from "shared/components/chart/chart-components/chart-components.helpers";
+import chartXAxis from "shared/components/chart/chart-components/chart-xaxis";
+import ProgramChartGradient, {
+  gradientOffset
+} from "shared/components/chart/chart-gradient/chart-gradient";
+import { getStrokeColor } from "shared/components/chart/chart-gradient/chart-gradient";
 
 import FundProfitTooltip from "./fund-profit-tooltip";
 

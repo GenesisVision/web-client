@@ -1,25 +1,41 @@
 import React, { Fragment } from "react";
 import { translate } from "react-i18next";
 
-const TableBody = ({ t, items, children, tag: Tag, className, isPending }) => {
+import { CARDS_VIEW, TABLE_VIEW } from "../table.constants";
+import TableLoader from "./table-loader";
+
+const TableBody = ({
+  t,
+  items,
+  children,
+  tag: Tag,
+  className,
+  isPending,
+  view,
+  updateRow
+}) => {
   const setMessage = message => {
-    return Tag === "tbody" ? (
-      <tr>
-        <td colSpan="11">
-          <div className="message">{message}</div>
-        </td>
-      </tr>
-    ) : (
-      <div className="message">{message}</div>
-    );
+    switch (view) {
+      case CARDS_VIEW:
+        return <div className="message">{message}</div>;
+      case TABLE_VIEW:
+      default:
+        return (
+          <tr>
+            <td colSpan="11">
+              <div className="message">{message}</div>
+            </td>
+          </tr>
+        );
+    }
   };
 
   const renderItems = () => {
     if (isPending || items === null || items === undefined)
-      return setMessage(t("table.loading"));
+      return <TableLoader view={view} />;
     if (items.length === 0) return setMessage(t("table.no-items"));
     return items.map((x, idx) => (
-      <Fragment key={x.id || idx}>{children(x)}</Fragment>
+      <Fragment key={x.id || idx}>{children(x, updateRow)}</Fragment>
     ));
   };
 

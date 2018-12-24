@@ -1,12 +1,13 @@
 import "./create-program-broker.scss";
 
-import Surface from "shared/components/surface/surface";
 import { GVButton } from "gv-react-components";
 import React from "react";
 import { translate } from "react-i18next";
+import Surface from "shared/components/surface/surface";
 
 import BrokerCard from "./broker-card/broker-card";
-import { comingSoonBrokers } from "./coming-soon-brokers";
+import { BrokerCardState } from "./broker-card/broker-card.constants";
+import { comingSoonBrokers } from "./create-program-broker.constants";
 
 const getLeverageDescription = ({ leverageMax, leverageMin }) => {
   let result;
@@ -25,7 +26,8 @@ const CreateProgramBroker = ({
   brokers,
   navigateToSettings,
   choosedBroker,
-  chooseBroker
+  chooseBroker,
+  isForexAllowed
 }) => (
   <div className="create-program-broker-container">
     <div className="create-program-broker">
@@ -34,12 +36,21 @@ const CreateProgramBroker = ({
           <BrokerCard
             key={broker.name + broker.description}
             broker={broker}
-            isActive={broker === choosedBroker}
-            onChoose={chooseBroker}
+            isSelected={broker === choosedBroker}
+            onSelect={chooseBroker}
+            cardState={
+              !isForexAllowed && broker.isForex
+                ? BrokerCardState.notAvailable
+                : BrokerCardState.active
+            }
           />
         ))}
         {comingSoonBrokers.map(broker => (
-          <BrokerCard key={broker.name} broker={broker} isComingSoon={true} />
+          <BrokerCard
+            key={broker}
+            broker={{ name: broker }}
+            cardState={BrokerCardState.comingSoon}
+          />
         ))}
 
         <div className="create-program-broker__navigation">
@@ -58,7 +69,7 @@ const CreateProgramBroker = ({
         </h3>
         <div className="create-program-broker__row">
           <div className="create-program-broker__info-title">
-            {t("create-program-page.broker-info.about")}
+            {t("manager.create-program-page.broker-info.about")}
           </div>
           <div className="create-program-broker__info-text">
             {choosedBroker.description}
@@ -66,7 +77,7 @@ const CreateProgramBroker = ({
         </div>
         <div className="create-program-broker__row">
           <div className="create-program-broker__info-title">
-            {t("create-program-page.broker-info.terms")}
+            {t("manager.create-program-page.broker-info.terms")}
           </div>
           <div className="create-program-broker__info-text">
             {choosedBroker.terms}
@@ -74,7 +85,7 @@ const CreateProgramBroker = ({
         </div>
         <div className="create-program-broker__row create-program-broker__row--small">
           <div className="create-program-broker__info-title">
-            {t("create-program-page.broker-info.leverage")}
+            {t("manager.create-program-page.broker-info.leverage")}
           </div>
           <div className="create-program-broker__info-text">
             {getLeverageDescription(choosedBroker)}
@@ -82,7 +93,7 @@ const CreateProgramBroker = ({
         </div>
         <div className="create-program-broker__row create-program-broker__row--small">
           <div className="create-program-broker__info-title">
-            {t("create-program-page.broker-info.fee")}
+            {t("manager.create-program-page.broker-info.fee")}
           </div>
           <div className="create-program-broker__info-text">
             {choosedBroker.fee} %
@@ -90,7 +101,7 @@ const CreateProgramBroker = ({
         </div>
         <div className="create-program-broker__row">
           <div className="create-program-broker__info-title">
-            {t("create-program-page.broker-info.assets")}
+            {t("manager.create-program-page.broker-info.assets")}
           </div>
           <div className="create-program-broker__info-text">
             {choosedBroker.assets}

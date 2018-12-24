@@ -1,10 +1,9 @@
+import { GVTab, GVTabs } from "gv-react-components";
 import React, { Component } from "react";
+import Scrollbars from "react-custom-scrollbars";
+import { translate } from "react-i18next";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
-import { translate } from "react-i18next";
-
-import { GVTab, GVTabs } from "gv-react-components";
-import Scrollbars from "react-custom-scrollbars";
 
 class TabsContainer extends Component {
   render() {
@@ -16,7 +15,8 @@ class TabsContainer extends Component {
             <GVTab
               key={tab.name}
               value={tab.name}
-              label={`${tab.name} ${tab.count ? ` (${tab.count})` : ""}`}
+              label={tab.label}
+              count={tab.count}
             />
           ))}
         </GVTabs>

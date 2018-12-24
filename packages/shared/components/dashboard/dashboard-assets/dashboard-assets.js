@@ -10,16 +10,27 @@ import Surface from "shared/components/surface/surface";
 
 class DashboardAssets extends Component {
   state = {
-    tab: "programs"
+    tab: "programs",
+    programsCount: undefined,
+    fundsCount: undefined
   };
+
+  componentDidMount() {
+    const { fetchAssetsCount } = this.props;
+    fetchAssetsCount().then(data => {
+      this.setState({ ...data });
+    });
+  }
 
   handleTabChange = (e, tab) => {
     this.setState({ tab });
   };
 
   render() {
-    const { tab } = this.state;
+    const { tab, programsCount, fundsCount } = this.state;
     const {
+      role,
+      onChangeStatus,
       title,
       getDashboardPrograms,
       getDashboardFunds,
@@ -34,8 +45,12 @@ class DashboardAssets extends Component {
           <h3>Assets</h3>
           <div className="dashboard-assets__tabs">
             <GVTabs value={tab} onChange={this.handleTabChange}>
-              <GVTab value={"programs"} label="Programs" />
-              <GVTab value={"funds"} label="Funds" />
+              <GVTab
+                value={"programs"}
+                label="Programs"
+                count={programsCount}
+              />
+              <GVTab value={"funds"} label="Funds" count={fundsCount} />
             </GVTabs>
           </div>
         </div>
@@ -46,6 +61,8 @@ class DashboardAssets extends Component {
               createButtonToolbar={createProgramButtonToolbar}
               createProgram={createProgram}
               title={title}
+              role={role}
+              onChangeStatus={onChangeStatus}
             />
           )}
           {tab === "funds" && (
@@ -55,6 +72,8 @@ class DashboardAssets extends Component {
               DASHBOARD_FUNDS_COLUMNS={DASHBOARD_FUNDS_COLUMNS}
               getDashboardFunds={getDashboardFunds}
               title={title}
+              role={role}
+              onChangeStatus={onChangeStatus}
             />
           )}
         </div>

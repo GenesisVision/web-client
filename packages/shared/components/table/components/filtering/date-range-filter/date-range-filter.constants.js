@@ -10,7 +10,7 @@ export const DateRangeFilterTypes = {
 };
 
 export const DEFAULT_DATE_RANGE_FILTER_VALUE = {
-  type: DateRangeFilterTypes.lastWeek,
+  type: DateRangeFilterTypes.all,
   dateStart: undefined,
   dateEnd: undefined
 };

@@ -15,10 +15,10 @@ const WalletBalance = ({
   currentCurrency
 }) => (
   <div className="wallet-balance">
-    <h1>{t("wallet.title")}</h1>
+    <h1>{t("wallet-page.title")}</h1>
     <div className="wallet-balance__statistic">
       <StatisticItem
-        label={t("wallet.total-balance")}
+        label={t("wallet-page.total-balance")}
         equivalent={walletBalanceData.totalBalanceCurrency}
         equivalentCurrency={currentCurrency}
         large
@@ -32,7 +32,7 @@ const WalletBalance = ({
         />
       </StatisticItem>
       <StatisticItem
-        label={t("wallet.invested-value")}
+        label={t("wallet-page.invested-value")}
         equivalent={walletBalanceData.investedCurrency}
         equivalentCurrency={currentCurrency}
         className="wallet-balance__statistic-big"
@@ -47,7 +47,7 @@ const WalletBalance = ({
         />
       </StatisticItem>
       <StatisticItem
-        label={t("wallet.available")}
+        label={t("wallet-page.available")}
         equivalent={walletBalanceData.availableCurrency}
         equivalentCurrency={currentCurrency}
         className="wallet-balance__statistic-big"
@@ -64,7 +64,7 @@ const WalletBalance = ({
     </div>
     <div className="wallet-balance__footer">
       <GVButton className="wallet-balance__add-funds" onClick={handleAddFunds}>
-        {t("wallet.add-funds")}
+        {t("wallet-page.add-funds")}
       </GVButton>
       <GVButton
         className="wallet-balance__withdraw"
@@ -72,7 +72,7 @@ const WalletBalance = ({
         variant="outlined"
         onClick={handleWithdraw}
       >
-        {t("wallet.withdraw")}
+        {t("wallet-page.withdraw")}
       </GVButton>
     </div>
   </div>

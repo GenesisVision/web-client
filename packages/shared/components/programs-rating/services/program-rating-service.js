@@ -1,10 +1,10 @@
-import {
-  fetchProgramsRating,
-  fetchSelfProgramsRating,
-  fetchLevelUpSummary
-} from "../actions/programs-rating.actions";
-import { LEVELS } from "../programs-rating-table";
 import authService from "shared/services/auth-service";
+
+import {
+  fetchLevelUpSummary,
+  fetchProgramsRating,
+  fetchSelfProgramsRating
+} from "../actions/programs-rating.actions";
 
 export const getProgramsRating = filters => dispatch => {
   const { tab, managerId, itemsOnPage, currentPage } = filters;

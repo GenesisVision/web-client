@@ -1,7 +1,7 @@
-import InputRange from "react-input-range";
-import React from "react";
-
 import "./gv-input-range.css";
+
+import React from "react";
+import InputRange from "react-input-range";
 
 const GVInputRange = ({ field, setFieldValue, ...other }) => {
   const handleChange = value => {

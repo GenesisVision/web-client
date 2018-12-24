@@ -4,34 +4,48 @@ import classnames from "classnames";
 import React from "react";
 import { translate } from "react-i18next";
 
-import GMLogo from "../../../media/gm.png";
+import { BrokerCardState } from "./broker-card.constants";
+import { getBrokerCardImage, slugBrokerName } from "./broker-card.helpers";
 
-const BrokerCard = ({ t, broker, onChoose, isActive, isComingSoon }) => {
+const BrokerCard = ({
+  t,
+  broker,
+  onSelect,
+  isSelected,
+  cardState = BrokerCardState.active
+}) => {
   const className = classnames("broker-card", {
-    "broker-card--active": isActive,
-    "broker-card--coming-soon": isComingSoon
+    "broker-card--active": cardState === BrokerCardState.active,
+    "broker-card--inactive": cardState !== BrokerCardState.active
   });
-  let logoClassName = classnames("broker-card__logo", {
-    ["broker-card__logo--" + broker.name]: isComingSoon,
-    "broker-card__logo--gm": broker.name === "Genesis Markets"
-  });
+  let logoClassName = classnames(
+    "broker-card__logo",
+    "broker-card__logo--" + slugBrokerName(broker.name)
+  );
+
+  let renderAdornmentText = () => {
+    if (cardState === BrokerCardState.active) return null;
+
+    return (
+      <div className="broker-card__adornment-text">
+        {t(`manager.create-program-page.broker-card.${cardState}`)}
+      </div>
+    );
+  };
+
+  let isClickable = cardState === BrokerCardState.active;
 
   return (
-    <div
-      className={className}
-      onClick={!isComingSoon && onChoose.bind(null, broker)}
-    >
+    <div className={className} onClick={isClickable ? onSelect(broker) : null}>
+      {isSelected && (
+        <div className="broker-card__selected-mark"> &#10004;</div>
+      )}
       <img
         className={logoClassName}
-        src={broker.name === "Genesis Markets" ? GMLogo : broker.logo}
+        src={getBrokerCardImage(broker.name)}
         alt={broker.name}
       />
-      {isComingSoon && (
-        <div className="broker-card__coming-soon-text">
-          {t("create-program-page.broker-card.coming-soon")}
-        </div>
-      )}
-      {isActive && <div className="broker-card__active-mark"> &#10004;</div>}
+      {renderAdornmentText()}
     </div>
   );
 };

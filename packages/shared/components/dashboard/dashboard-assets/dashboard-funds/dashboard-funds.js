@@ -53,7 +53,11 @@ class DashboardFunds extends Component {
               column.name
             }`}
           >
-            {t(`dashboard-page.funds-header.${column.name}`)}
+            {t(
+              `${process.env.REACT_APP_PLATFORM}.dashboard-page.funds-header.${
+                column.name
+              }`
+            )}
           </span>
         )}
         renderBodyRow={fund => (

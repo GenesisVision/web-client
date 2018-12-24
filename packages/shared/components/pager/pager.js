@@ -8,13 +8,12 @@ import { translate } from "react-i18next";
 class Pager extends PureComponent {
   generateVisiblePages = (first, count) => {
     const pages = [];
-    first = first > 0 ? first : 1;
     for (let i = first; i < first + count; i++) pages.push(i);
     return pages;
   };
 
   render() {
-    const { t, total, current, countVisiblePages, onPageChanged } = this.props;
+    const { total, current, countVisiblePages, onPageChanged } = this.props;
     const handleChange = page => () => onPageChanged(page);
     const PagerSeparator = () => <div className="pager__separator">...</div>;
     const PagerButton = ({ page, label }) => (
@@ -27,7 +26,12 @@ class Pager extends PureComponent {
         {label || page}
       </div>
     );
-    const firstPage = current - Math.floor(countVisiblePages / 2);
+    const half = Math.floor(countVisiblePages / 2);
+    const firstPage =
+      (current <= half + 1 && 1) ||
+      (current >= total - half && total - countVisiblePages + 1) ||
+      current - half;
+
     const visiblePages = this.generateVisiblePages(
       firstPage,
       countVisiblePages
@@ -47,13 +51,12 @@ class Pager extends PureComponent {
               <PagerButton key={page} page={page} />
             ))}
         </div>
-        {countVisiblePages + 1 < total &&
-          countVisiblePages + firstPage - 1 < total && (
-            <div className="pager__pager-block">
-              {firstPage + countVisiblePages < total && <PagerSeparator />}
-              <PagerButton page={total} />
-            </div>
-          )}
+        {total - firstPage >= countVisiblePages && (
+          <div className="pager__pager-block">
+            {total - firstPage > countVisiblePages && <PagerSeparator />}
+            <PagerButton page={total} />
+          </div>
+        )}
       </div>
     );
   }

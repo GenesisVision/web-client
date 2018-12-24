@@ -38,6 +38,7 @@ class Table extends Component {
   render() {
     const { view } = this.state;
     const {
+      disableTitle,
       items,
       title,
       renderFilters,
@@ -53,12 +54,14 @@ class Table extends Component {
       paging,
       updatePaging,
       isPending,
-      emptyMessage
+      emptyMessage,
+      updateRow
     } = this.props;
     if (!items && emptyMessage) return emptyMessage;
     return (
       <div className="table-wrapper">
         <TableToolbar
+          disableTitle={disableTitle}
           title={title}
           renderFilters={renderFilters}
           updateFilter={updateFilter}
@@ -79,7 +82,12 @@ class Table extends Component {
         >
           {view === CARDS_VIEW && (
             <div className="table">
-              <TableBody items={items} className="programs-cards" tag="div">
+              <TableBody
+                items={items}
+                className="programs-cards"
+                tag="div"
+                view={CARDS_VIEW}
+              >
                 {renderBodyCard}
               </TableBody>
             </div>
@@ -98,6 +106,8 @@ class Table extends Component {
                 items={items}
                 className="table__body"
                 tag="tbody"
+                view={TABLE_VIEW}
+                updateRow={updateRow}
               >
                 {renderBodyRow}
               </TableBody>

@@ -23,6 +23,7 @@ const ForgotPasswordForm = ({
         label={t("auth.password-restore.forgot-password.email-field-text")}
         addon="fas fa-envelope"
         autoComplete="email"
+        autoFocus
         component={GVTextField}
       />
       <FormError error={error} />

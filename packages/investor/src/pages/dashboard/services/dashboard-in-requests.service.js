@@ -7,31 +7,33 @@ import {
   cancelProgramRequest,
   fetchInRequests
 } from "../actions/dashboard.actions";
-import { getPortfolioEvents } from "./dashboard.service";
+import { getTopPortfolioEvents } from "./dashboard-events.services";
 
 export const getInRequests = () => (dispatch, getState) => {
   const authorization = authService.getAuthArg();
   dispatch(fetchInRequests(authorization, 0, 100));
 };
 
-export const cancelRequest = (requestId, type, onFinally) => (
+export const cancelRequest = ({ id, type, onFinally }) => (
   dispatch,
   getState
 ) => {
   const authorization = authService.getAuthArg();
   const action =
     type === "Program"
-      ? cancelProgramRequest(authorization, requestId)
-      : cancelFundRequest(authorization, requestId);
+      ? cancelProgramRequest(authorization, id)
+      : cancelFundRequest(authorization, id);
 
   return dispatch(action)
     .then(() => {
       dispatch(getInRequests());
       dispatch(fetchProfileHeaderInfo());
-      dispatch(getPortfolioEvents());
+      dispatch(getTopPortfolioEvents());
       dispatch(
         alertMessageActions.success(
-          "dashboard-page.requests.success-cancel-request",
+          `${
+            process.env.REACT_APP_PLATFORM
+          }.dashboard-page.requests.success-cancel-request`,
           true
         )
       );
@@ -40,7 +42,9 @@ export const cancelRequest = (requestId, type, onFinally) => (
     .catch(ex => {
       dispatch(
         alertMessageActions.error(
-          "dashboard-page.requests.failure-cancel-request",
+          `${
+            process.env.REACT_APP_PLATFORM
+          }.dashboard-page.requests.failure-cancel-request`,
           true
         )
       );

@@ -9,7 +9,11 @@ import {
   calculateValueOfEntryFee,
   convertFromCurrency
 } from "shared/utils/currency-converter";
-import { formatValue } from "shared/utils/formatter";
+import {
+  formatCurrencyValue,
+  formatValue,
+  validateFraction
+} from "shared/utils/formatter";
 import { number, object } from "yup";
 
 const DepositForm = ({
@@ -36,7 +40,9 @@ const DepositForm = ({
     const gvFee = calculateValueOfEntryFee(floatValue, info.gvCommission);
     return (
       formattedValue === "" ||
-      floatValue <= parseFloat(availableInWallet - gvFee - (entryFee ? fee : 0))
+      (validateFraction(formattedValue, "GVT") &&
+        floatValue <=
+          parseFloat(availableInWallet - gvFee - (entryFee ? fee : 0)))
     );
   };
 
@@ -45,17 +51,21 @@ const DepositForm = ({
       <GVFormikField
         className="invest-field"
         name="amount"
-        label={program ? t("deposit-program.amount") : t("deposit-fund.amount")}
+        label={program ? t("deposit-asset.amount") : t("deposit-asset.amount")}
         component={GVTextField}
         adornment="GVT"
         autoComplete="off"
+        autoFocus
         InputComponent={NumberFormat}
         allowNegative={false}
         isAllowed={isAllow}
       />
       <div className="invest-popup__currency">
         <NumberFormat
-          value={formatValue(convertFromCurrency(values.amount, info.rate))}
+          value={formatCurrencyValue(
+            convertFromCurrency(values.amount, info.rate),
+            currency
+          )}
           prefix="= "
           suffix={` ${currency}`}
           displayType="text"
@@ -66,8 +76,8 @@ const DepositForm = ({
           <li className="dialog-list__item">
             <span className="dialog-list__title">
               {program
-                ? t("deposit-program.entry-fee")
-                : t("deposit-fund.entry-fee")}
+                ? t("deposit-asset.entry-fee")
+                : t("deposit-asset.entry-fee")}
             </span>
             <span className="dialog-list__value">
               {info.entryFee} %{" "}
@@ -83,8 +93,8 @@ const DepositForm = ({
         <li className="dialog-list__item">
           <span className="dialog-list__title">
             {program
-              ? t("deposit-program.gv-commission")
-              : t("deposit-fund.gv-commission")}
+              ? t("deposit-asset.gv-commission")
+              : t("deposit-asset.gv-commission")}
           </span>
           <span className="dialog-list__value">
             {info.gvCommission} %
@@ -99,8 +109,8 @@ const DepositForm = ({
         <li className="dialog-list__item">
           <span className="dialog-list__title">
             {program
-              ? t("deposit-program.investment-amount")
-              : t("deposit-fund.investment-amount")}
+              ? t("deposit-asset.investment-amount")
+              : t("deposit-asset.investment-amount")}
           </span>
           <span className="dialog-list__value">
             <NumberFormat
@@ -121,7 +131,7 @@ const DepositForm = ({
           className="invest-form__submit-button"
           disabled={disabled}
         >
-          {program ? t("deposit-program.confirm") : t("deposit-fund.confirm")}
+          {program ? t("deposit-asset.confirm") : t("deposit-asset.confirm")}
         </GVButton>
       </div>
     </form>
@@ -140,15 +150,15 @@ export default compose(
         amount: number()
           .min(
             info.minInvestmentAmount,
-            t("deposit-program.validation.amount-min-value", {
+            t("deposit-asset.validation.amount-min-value", {
               min: info.minInvestmentAmount
             })
           )
           .max(
             info.availableInWallet,
-            t("deposit-program.validation.amount-more-than-available")
+            t("deposit-asset.validation.amount-more-than-available")
           )
-          .required(t("deposit-program.validation.amount-is-required"))
+          .required(t("deposit-asset.validation.amount-is-required"))
       }),
     handleSubmit: (values, { props }) => {
       props.onSubmit(values.amount);

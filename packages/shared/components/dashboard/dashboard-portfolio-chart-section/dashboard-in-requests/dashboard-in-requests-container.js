@@ -1,15 +1,16 @@
 import "./dashboard-in-requests.scss";
 
-import React, { PureComponent } from "react";
+import React, { Fragment, PureComponent } from "react";
 import Scrollbars from "react-custom-scrollbars";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
+import { DashboardChartRequestLoader } from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-loaders";
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
 import Popover from "shared/components/popover/popover";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { formatValue } from "shared/utils/formatter";
+import { formatCurrencyValue } from "shared/utils/formatter";
 
 import DashboardRequest from "./dashboard-request";
 
@@ -37,15 +38,21 @@ class DashboardInRequestsContainer extends PureComponent {
     );
   };
 
-  render() {
-    const { inRequests, isPending, service } = this.props;
-    if (!inRequests || isPending) return null;
-
+  renderRequest = () => {
+    const { t, inRequests, isPending, service } = this.props;
+    if (!inRequests || isPending) return <DashboardChartRequestLoader />;
     return (
-      <div className="dashboard-request">
-        <StatisticItem label={"In Requests"} big>
+      <Fragment>
+        <StatisticItem
+          label={t(
+            `${
+              process.env.REACT_APP_PLATFORM
+            }.dashboard-page.chart-section.in-requests`
+          )}
+          big
+        >
           <NumberFormat
-            value={formatValue(inRequests.totalValue)}
+            value={formatCurrencyValue(inRequests.totalValue, "GVT")}
             thousandSeparator={" "}
             displayType="text"
             suffix={" GVT"}
@@ -73,8 +80,12 @@ class DashboardInRequestsContainer extends PureComponent {
             </div>
           </Scrollbars>
         </Popover>
-      </div>
+      </Fragment>
     );
+  };
+
+  render() {
+    return <div className="dashboard-request">{this.renderRequest()}</div>;
   }
 }
 

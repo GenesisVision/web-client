@@ -1,12 +1,12 @@
 import "./select.scss";
 
 import classnames from "classnames";
-import Popover from "shared/components/popover/popover";
-import SelectItem from "shared/components/select/select-item";
-import FilterArrowIcon from "shared/components/table/components/filtering/filter-arrow-icon";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import Scrollbars from "react-custom-scrollbars";
+import Popover from "shared/components/popover/popover";
+import SelectItem from "shared/components/select/select-item";
+import FilterArrowIcon from "shared/components/table/components/filtering/filter-arrow-icon";
 
 class Select extends Component {
   state = {

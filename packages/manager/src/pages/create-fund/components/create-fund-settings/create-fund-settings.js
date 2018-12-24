@@ -1,6 +1,5 @@
 import "./create-fund-settings.scss";
 
-import classnames from "classnames";
 import { Field, withFormik } from "formik";
 import {
   GVButton,
@@ -11,9 +10,10 @@ import {
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import DepositButtonContainer from "shared/components/deposit-button-submit/deposit-button";
+import DepositDetailsContainer from "shared/components/deposit-details/deposit-details-container";
 import InputImage from "shared/components/form/input-image/input-image";
 import Hint from "shared/components/hint/hint";
-import { RefreshIcon } from "shared/components/icon/refresh-icon";
 import { allowValuesNumberFormat } from "shared/utils/helpers";
 
 import CreateFundSettingsAddAsset from "./create-fund-settings-add-asset/create-fund-settings-add-asset";
@@ -81,7 +81,6 @@ class CreateFundSettings extends React.Component {
       assets: [...this.state.assets],
       remainder: newRemainder
     });
-    this.props.setFieldValue("balance", this.props.balance);
     this.props.setFieldValue("remainder", newRemainder);
     this.props.setFieldValue(
       "assets",
@@ -101,9 +100,7 @@ class CreateFundSettings extends React.Component {
     const {
       t,
       navigateBack,
-      balance,
       author,
-      updateBalance,
       isSubmitting,
       handleSubmit,
       values,
@@ -112,7 +109,8 @@ class CreateFundSettings extends React.Component {
       errors,
       programsInfo,
       onValidateError,
-      setSubmitting
+      setSubmitting,
+      isValid
     } = this.props;
 
     const imageInputError =
@@ -139,20 +137,22 @@ class CreateFundSettings extends React.Component {
         <form className="create-fund-settings__form">
           <div className="create-fund-settings__subheading">
             <span className="create-fund-settings__block-number">01</span>
-            {t("create-fund-page.settings.main-settings")}
+            {t("manager.create-fund-page.settings.main-settings")}
           </div>
           <div className="create-fund-settings__fill-block create-fund-settings__fill-block--with-border">
             <div className="create-fund-settings__row create-fund-settings__row--description">
               <GVFormikField
                 type="text"
                 name="title"
-                label={t("create-fund-page.settings.fields.name")}
+                label={t("manager.create-fund-page.settings.fields.name")}
                 autoComplete="off"
                 component={GVTextField}
               />
               <div className="create-fund-settings__description-info">
                 <span className="create-fund-settings__description create-fund-settings__description-requirements">
-                  {t("create-fund-page.settings.fields.name-requirements")}
+                  {t(
+                    "manager.create-fund-page.settings.fields.name-requirements"
+                  )}
                 </span>
               </div>
             </div>
@@ -160,13 +160,15 @@ class CreateFundSettings extends React.Component {
               <GVFormikField
                 type="textarea"
                 name="description"
-                label={t("create-fund-page.settings.fields.description")}
+                label={t(
+                  "manager.create-fund-page.settings.fields.description"
+                )}
                 component={GVTextField}
               />
               <div className="create-fund-settings__description-info">
                 <span className="create-fund-settings__description create-fund-settings__description-requirements">
                   {t(
-                    "create-fund-page.settings.fields.description-requirements"
+                    "manager.create-fund-page.settings.fields.description-requirements"
                   )}
                 </span>
                 {values.description.length > 0 && (
@@ -184,10 +186,10 @@ class CreateFundSettings extends React.Component {
               </div>
             </div>
             <div className="create-fund-settings__logo-title">
-              {t("create-fund-page.settings.fields.upload-logo")}
+              {t("manager.create-fund-page.settings.fields.upload-logo")}
             </div>
             <div className="create-fund-settings__logo-notice">
-              {t("create-fund-page.settings.fields.upload-logo-rules")}
+              {t("manager.create-fund-page.settings.fields.upload-logo-rules")}
             </div>
             <div className="create-fund-settings__logo-section">
               <div className="create-fund-settings__file-field-container">
@@ -216,7 +218,7 @@ class CreateFundSettings extends React.Component {
           </div>
           <div className="create-fund-settings__subheading">
             <span className="create-fund-settings__block-number">02</span>
-            {t("create-fund-page.settings.asset-selection")}
+            {t("manager.create-fund-page.settings.asset-selection")}
           </div>
           <div className="create-fund-settings__fill-block create-fund-settings__fill-block--with-border">
             <div className="create-fund-settings__description">
@@ -225,7 +227,7 @@ class CreateFundSettings extends React.Component {
                 render={({ field, form }) => (
                   <ErrorNotifier
                     placeholder={t(
-                      "create-fund-page.settings.fields.asset-description"
+                      "manager.create-fund-page.settings.fields.asset-description"
                     )}
                     {...field}
                     {...form}
@@ -250,14 +252,16 @@ class CreateFundSettings extends React.Component {
           </div>
           <div className="create-fund-settings__subheading">
             <span className="create-fund-settings__block-number">03</span>
-            {t("create-fund-page.settings.fees-settings")}
+            {t("manager.create-fund-page.settings.fees-settings")}
           </div>
           <div className="create-fund-settings__fill-block create-fund-settings__fill-block--with-border">
             <div className="create-fund-settings__row">
               <div className="create-fund-settings__fee">
                 <GVFormikField
                   name="entryFee"
-                  label={t("create-fund-page.settings.fields.entry-fee")}
+                  label={t(
+                    "manager.create-fund-page.settings.fields.entry-fee"
+                  )}
                   adornment="%"
                   //isAllowed={this.allowEntryFee}
                   component={GVTextField}
@@ -266,11 +270,13 @@ class CreateFundSettings extends React.Component {
                   decimalScale={4}
                 />
                 <Hint
-                  content={t("create-program-page.settings.hints.entry-fee")}
+                  content={t(
+                    "manager.create-program-page.settings.hints.entry-fee"
+                  )}
                   className="create-fund-settings__fee-hint"
                   vertical={"bottom"}
                   tooltipContent={t(
-                    "create-fund-page.settings.hints.entry-fee-description",
+                    "manager.create-fund-page.settings.hints.entry-fee-description",
                     { maxFee: programsInfo.managerMaxEntryFee }
                   )}
                 />
@@ -278,7 +284,7 @@ class CreateFundSettings extends React.Component {
               <div className="create-fund-settings__fee">
                 <GVFormikField
                   name="exitFee"
-                  label={t("create-fund-page.settings.fields.exit-fee")}
+                  label={t("manager.create-fund-page.settings.fields.exit-fee")}
                   adornment="%"
                   //isAllowed={this.allowExitFee}
                   component={GVTextField}
@@ -287,11 +293,13 @@ class CreateFundSettings extends React.Component {
                   decimalScale={4}
                 />
                 <Hint
-                  content={t("create-fund-page.settings.hints.exit-fee")}
+                  content={t(
+                    "manager.create-fund-page.settings.hints.exit-fee"
+                  )}
                   className="create-fund-settings__fee-hint"
                   vertical={"bottom"}
                   tooltipContent={t(
-                    "create-fund-page.settings.hints.exit-fee-description",
+                    "manager.create-fund-page.settings.hints.exit-fee-description",
                     {
                       maxFee: programsInfo.managerMaxExitFee
                     }
@@ -302,47 +310,23 @@ class CreateFundSettings extends React.Component {
           </div>
           <div className="create-fund-settings__subheading">
             <span className="create-fund-settings__block-number">04</span>
-            {t("create-fund-page.settings.deposit-details")}
+            {t("manager.create-fund-page.settings.deposit-details")}
           </div>
-          <div className="create-fund-settings__fill-block create-fund-settings__fill-block--without-border">
-            <div className="create-fund-settings__deposit-amount-title create-fund-settings__description">
-              {t("create-fund-page.settings.fields.deposit-amount")}
-            </div>
-            <div className="create-fund-settings__deposit-amount-value">
-              {deposit}
-            </div>
-            <div className="create-fund-settings__available-amount">
-              {t("create-fund-page.settings.fields.available-in-wallet")}
-              <span
-                className={classnames(
-                  "create-fund-settings__available-amount-value",
-                  {
-                    "create-fund-settings__available-amount-value--error":
-                      balance < deposit
-                  }
-                )}
-              >
-                <NumberFormat
-                  value={balance}
-                  thousandSeparator=" "
-                  displayType="text"
-                  suffix=" GVT"
-                />
-              </span>
-              <span onClick={updateBalance}>{<RefreshIcon />}</span>
-            </div>
-          </div>
+          <DepositDetailsContainer
+            deposit={deposit}
+            className="create-fund-settings__fill-block create-fund-settings__fill-block--without-border"
+            titleClassName="create-fund-settings__description"
+          />
         </form>
         <div className="create-fund-settings__navigation">
-          <GVButton
+          <DepositButtonContainer
             title={t("buttons.create-fund")}
-            color="primary"
-            type="submit"
-            onClick={onSubmit}
-            disabled={isSubmitting}
+            deposit={deposit}
+            onSubmit={onSubmit}
+            disabled={isSubmitting || !isValid}
           >
             {t("buttons.create-fund")}
-          </GVButton>
+          </DepositButtonContainer>
           <GVButton
             variant="text"
             onClick={() => navigateBack(values)}
@@ -371,7 +355,6 @@ export default translate()(
     mapPropsToValues: props => {
       return {
         assets: [],
-        balance: props.balance,
         remainder: 100,
         exitFee: "",
         title: "",

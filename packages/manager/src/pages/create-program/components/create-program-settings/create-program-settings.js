@@ -1,6 +1,5 @@
 import "./create-program-settings.scss";
 
-import classnames from "classnames";
 import { Field, withFormik } from "formik";
 import {
   GVButton,
@@ -11,11 +10,11 @@ import {
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import DepositButtonContainer from "shared/components/deposit-button-submit/deposit-button";
+import DepositDetailsContainer from "shared/components/deposit-details/deposit-details-container";
 import InputImage from "shared/components/form/input-image/input-image";
 import Hint from "shared/components/hint/hint";
-import { RefreshIcon } from "shared/components/icon/refresh-icon";
 import Select from "shared/components/select/select";
-import { formatValue } from "shared/utils/formatter";
 import { allowValuesNumberFormat } from "shared/utils/helpers";
 
 import {
@@ -47,9 +46,7 @@ class CreateProgramSettings extends React.Component {
       t,
       navigateBack,
       broker,
-      balance,
       author,
-      updateBalance,
       isSubmitting,
       handleSubmit,
       values,
@@ -60,7 +57,8 @@ class CreateProgramSettings extends React.Component {
       notifyError,
       errors,
       onValidateError,
-      setSubmitting
+      setSubmitting,
+      isValid
     } = this.props;
 
     const imageInputError =
@@ -88,7 +86,7 @@ class CreateProgramSettings extends React.Component {
         <form className="create-program-settings__form">
           <div className="create-program-settings__subheading">
             <span className="create-program-settings__block-number">01</span>
-            {t("create-program-page.settings.main-settings")}
+            {t("manager.create-program-page.settings.main-settings")}
           </div>
           <div className="create-program-settings__fill-block create-program-settings__fill-block--with-border">
             <div className="create-program-settings__row">
@@ -96,17 +94,21 @@ class CreateProgramSettings extends React.Component {
                 <GVFormikField
                   type="text"
                   name="title"
-                  label={t("create-program-page.settings.fields.name")}
+                  label={t("manager.create-program-page.settings.fields.name")}
                   autoComplete="off"
                   component={GVTextField}
                 />
                 <div className="create-program-settings__name-requirements">
-                  {t("create-program-page.settings.fields.name-requirements")}
+                  {t(
+                    "manager.create-program-page.settings.fields.name-requirements"
+                  )}
                 </div>
               </div>
               <AccountTypeField
                 accountTypes={getAccountTypes(broker)}
-                label={t("create-program-page.settings.fields.account-type")}
+                label={t(
+                  "manager.create-program-page.settings.fields.account-type"
+                )}
                 setLeverageChooseAvailable={setLeverageChooseAvailable}
                 setFieldValue={setFieldValue}
                 broker={broker}
@@ -116,7 +118,9 @@ class CreateProgramSettings extends React.Component {
               <GVFormikField
                 name="currency"
                 component={GVTextField}
-                label={t("create-program-page.settings.fields.currency")}
+                label={t(
+                  "manager.create-program-page.settings.fields.currency"
+                )}
                 InputComponent={Select}
                 disabled={!values["accountType"]}
               >
@@ -133,13 +137,15 @@ class CreateProgramSettings extends React.Component {
               <GVFormikField
                 type="textarea"
                 name="description"
-                label={t("create-program-page.settings.fields.description")}
+                label={t(
+                  "manager.create-program-page.settings.fields.description"
+                )}
                 component={GVTextField}
               />
               <div className="create-program-settings__description-info">
                 <span className="create-program-settings__description-requirements">
                   {t(
-                    "create-program-page.settings.fields.description-requirements"
+                    "manager.create-program-page.settings.fields.description-requirements"
                   )}
                 </span>
                 {values.description.length > 0 && (
@@ -159,7 +165,7 @@ class CreateProgramSettings extends React.Component {
                 name="leverage"
                 component={GVTextField}
                 label={t(
-                  "create-program-page.settings.fields.brokers-leverage"
+                  "manager.create-program-page.settings.fields.brokers-leverage"
                 )}
                 InputComponent={Select}
                 disabled={!values["accountType"] || !isLeverageChooseAvailable}
@@ -176,7 +182,7 @@ class CreateProgramSettings extends React.Component {
               <GVFormikField
                 name="periodLength"
                 component={GVTextField}
-                label={t("create-program-page.settings.fields.period")}
+                label={t("manager.create-program-page.settings.fields.period")}
                 InputComponent={Select}
               >
                 {programsInfo.periods.map(period => {
@@ -185,7 +191,7 @@ class CreateProgramSettings extends React.Component {
                       {period +
                         " " +
                         t(
-                          "create-program-page.settings.fields.period-option-notation.day",
+                          "manager.create-program-page.settings.fields.period-option-notation.day",
                           { count: period }
                         )}
                     </option>
@@ -194,10 +200,12 @@ class CreateProgramSettings extends React.Component {
               </GVFormikField>
             </div>
             <div className="create-program-settings__logo-title">
-              {t("create-program-page.settings.fields.upload-logo")}
+              {t("manager.create-program-page.settings.fields.upload-logo")}
             </div>
             <div className="create-program-settings__logo-notice">
-              {t("create-program-page.settings.fields.upload-logo-rules")}
+              {t(
+                "manager.create-program-page.settings.fields.upload-logo-rules"
+              )}
             </div>
             <div className="create-program-settings__logo-section">
               <div className="create-program-settings__file-field-container">
@@ -227,15 +235,17 @@ class CreateProgramSettings extends React.Component {
           </div>
           <div className="create-program-settings__subheading">
             <span className="create-program-settings__block-number">02</span>
-            {t("create-program-page.settings.fees-settings")}
+            {t("manager.create-program-page.settings.fees-settings")}
           </div>
           <div className="create-program-settings__fill-block create-program-settings__fill-block--with-border">
             <div className="create-program-settings__row">
               <div className="create-program-settings__fee">
                 <GVFormikField
                   name="entryFee"
-                  label={t("create-program-page.settings.fields.entry-fee")}
-                  suffix=" %"
+                  label={t(
+                    "manager.create-program-page.settings.fields.entry-fee"
+                  )}
+                  adornment="%"
                   //isAllowed={this.allowEntryFee}
                   component={GVTextField}
                   InputComponent={NumberFormat}
@@ -243,17 +253,19 @@ class CreateProgramSettings extends React.Component {
                   decimalScale={4}
                 />
                 <Hint
-                  content={t("create-program-page.settings.hints.entry-fee")}
+                  content={t(
+                    "manager.create-program-page.settings.hints.entry-fee"
+                  )}
                   className="create-program-settings__fee-hint"
                   vertical={"bottom"}
                   tooltipContent={`
                     ${t(
-                      "create-program-page.settings.hints.entry-fee-description",
+                      "manager.create-program-page.settings.hints.entry-fee-description",
                       {
                         maxFee: programsInfo.managerMaxEntryFee
                       }
                     )}. ${t(
-                    "create-program-page.settings.hints.entry-fee-levels"
+                    "manager.create-program-page.settings.hints.entry-fee-levels"
                   )}
                     `}
                 />
@@ -261,8 +273,10 @@ class CreateProgramSettings extends React.Component {
               <div className="create-program-settings__fee">
                 <GVFormikField
                   name="successFee"
-                  label={t("create-program-page.settings.fields.success-fee")}
-                  suffix=" %"
+                  label={t(
+                    "manager.create-program-page.settings.fields.success-fee"
+                  )}
+                  adornment="%"
                   //isAllowed={this.allowSuccessFee}
                   component={GVTextField}
                   InputComponent={NumberFormat}
@@ -270,11 +284,13 @@ class CreateProgramSettings extends React.Component {
                   decimalScale={4}
                 />
                 <Hint
-                  content={t("create-program-page.settings.hints.success-fee")}
+                  content={t(
+                    "manager.create-program-page.settings.hints.success-fee"
+                  )}
                   className="create-program-settings__fee-hint"
                   vertical={"bottom"}
                   tooltipContent={t(
-                    "create-program-page.settings.hints.success-fee-description",
+                    "manager.create-program-page.settings.hints.success-fee-description",
                     {
                       maxFee: programsInfo.managerMaxSuccessFee
                     }
@@ -285,49 +301,23 @@ class CreateProgramSettings extends React.Component {
           </div>
           <div className="create-program-settings__subheading">
             <span className="create-program-settings__block-number">03</span>
-            {t("create-program-page.settings.deposit-details")}
+            {t("manager.create-program-page.settings.deposit-details")}
           </div>
-          <div className="create-program-settings__fill-block">
-            <div className="create-program-settings__deposit-amount-title">
-              {t("create-program-page.settings.fields.deposit-amount")}
-            </div>
-            <div className="create-program-settings__deposit-amount-value">
-              {programsInfo.managerProgramInvestment + " GVT"}
-            </div>
-            <div className="create-program-settings__available-amount">
-              {t("create-program-page.settings.fields.available-in-wallet")}
-              <span
-                className={classnames(
-                  "create-program-settings__available-amount-value",
-                  {
-                    "create-program-settings__available-amount-value--error":
-                      balance < programsInfo.managerProgramInvestment
-                  }
-                )}
-              >
-                <NumberFormat
-                  value={formatValue(balance)}
-                  thousandSeparator=" "
-                  displayType="text"
-                  suffix=" GVT"
-                />
-              </span>
-              <span onClick={updateBalance}>
-                <RefreshIcon />
-              </span>
-            </div>
-          </div>
+          <DepositDetailsContainer
+            deposit={programsInfo.managerProgramInvestment}
+            className="create-program-settings__fill-block"
+            titleClassName="create-program-settings__deposit-amount-title"
+          />
         </form>
         <div className="create-program-settings__navigation">
-          <GVButton
+          <DepositButtonContainer
             title={t("buttons.create-program")}
-            color="secondary"
-            type="submit"
-            onClick={onSubmit}
-            disabled={isSubmitting}
+            deposit={programsInfo.managerProgramInvestment}
+            onSubmit={onSubmit}
+            disabled={isSubmitting || !isValid}
           >
             {t("buttons.create-program")}
-          </GVButton>
+          </DepositButtonContainer>
           <GVButton
             variant="text"
             onClick={() => navigateBack(values)}

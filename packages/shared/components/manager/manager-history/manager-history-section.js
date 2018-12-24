@@ -4,44 +4,67 @@ import { GVTab, GVTabs } from "gv-react-components";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import Surface from "shared/components/surface/surface";
-import FundsTable from "shared/modules/funds-table/components/funds-table/funds-table";
-import ProgramsTable from "shared/modules/programs-table/components/programs-table/programs-table";
+
+import { fetchManagerAssetsCount } from "../services/manager.service";
+import ManagerFunds from "./manager-funds-table";
+import ManagerPrograms from "./manager-programs-table";
 
 const PROGRAMS_TAB = "programs";
 const FUNDS_TAB = "funds";
 
 class ManagerHistorySection extends PureComponent {
   state = {
-    tab: PROGRAMS_TAB
+    tab: PROGRAMS_TAB,
+    programsCount: undefined,
+    fundsCount: undefined
   };
+
+  componentDidMount() {
+    const { managerId } = this.props;
+    fetchManagerAssetsCount(managerId).then(assetsCounts => {
+      this.setState({ ...assetsCounts });
+    });
+  }
 
   handleTabChange = (e, tab) => {
     this.setState({ tab });
   };
 
   render() {
-    const { tab } = this.state;
-    const { t, managerId, title } = this.props;
-    const { handleTabChange } = this;
-    const defaultFilters = { managerId };
+    const { tab, programsCount, fundsCount } = this.state;
+    const { t, managerId, title, isAuthenticated } = this.props;
+
     return (
       <Surface className="manager-history">
         <div className="manager-history__tabs">
-          <GVTabs value={tab} onChange={handleTabChange}>
+          <GVTabs value={tab} onChange={this.handleTabChange}>
             <GVTab
               value={"programs"}
-              label={t("manager.history.tabs.programs")}
+              label={t("manager-page.history.tabs.programs")}
+              count={programsCount}
             />
-            <GVTab value={"funds"} label={t("manager.history.tabs.funds")} />
+            <GVTab
+              value={"funds"}
+              label={t("manager-page.history.tabs.funds")}
+              count={fundsCount}
+            />
           </GVTabs>
         </div>
 
         <div>
           {tab === PROGRAMS_TAB && (
-            <ProgramsTable title={title} defaultFilters={defaultFilters} />
+            <ManagerPrograms
+              title={title}
+              managerId={managerId}
+              isAuthenticated={isAuthenticated}
+            />
           )}
           {tab === FUNDS_TAB && (
-            <FundsTable title={title} defaultFilters={defaultFilters} />
+            <ManagerFunds
+              title={title}
+              managerId={managerId}
+              isAuthenticated={isAuthenticated}
+            />
           )}
         </div>
       </Surface>

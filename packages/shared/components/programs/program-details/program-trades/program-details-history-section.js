@@ -6,7 +6,7 @@ import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import connect from "react-redux/es/connect/connect";
 import { compose } from "redux";
-import PortfolioEventsTableComponent from "shared/components/dashboard/dashboard-portfolio-events-all/dashboard-portfolio-events-table/dashboard-portfolio-events-all-table";
+import PortfolioEventsTable from "shared/components/portfolio-events-table/portfolio-events-table";
 import ProgramTrades from "shared/components/programs/program-details/program-trades/program-trades";
 import Surface from "shared/components/surface/surface";
 import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
@@ -20,15 +20,24 @@ const EVENTS_FILTERING = {
 };
 class ProgramDetailsHistorySection extends PureComponent {
   state = {
-    tab: TRADES_TAB
+    tab: TRADES_TAB,
+    tradesCount: undefined,
+    eventsCount: undefined
   };
+
+  componentDidMount() {
+    const { programId, fetchHistoryCounts } = this.props;
+    fetchHistoryCounts(programId).then(data => {
+      this.setState({ ...data });
+    });
+  }
 
   handleTabChange = (e, tab) => {
     this.setState({ tab });
   };
 
   render() {
-    const { tab } = this.state;
+    const { tab, tradesCount, eventsCount } = this.state;
     const { t, programId, currency, isAuthenticated, isInvested } = this.props;
     return (
       <Surface className="details-history">
@@ -42,10 +51,12 @@ class ProgramDetailsHistorySection extends PureComponent {
                 <GVTab
                   value={"trades"}
                   label={t("program-details-page.history.tabs.trades")}
+                  count={tradesCount}
                 />
                 <GVTab
                   value={"events"}
                   label={t("program-details-page.history.tabs.events")}
+                  count={eventsCount}
                 />
               </GVTabs>
             </div>
@@ -64,7 +75,8 @@ class ProgramDetailsHistorySection extends PureComponent {
             />
           )}
           {tab === EVENTS_TAB && (
-            <PortfolioEventsTableComponent
+            <PortfolioEventsTable
+              programId={programId}
               filtering={EVENTS_FILTERING}
               fetchPortfolioEvents={this.props.fetchPortfolioEvents}
               dateRangeStartLabel={t("filters.date-range.program-start")}

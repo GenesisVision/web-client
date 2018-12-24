@@ -1,9 +1,9 @@
 import "./verification-status.scss";
 
-import Chip from "shared/components/chip/chip";
 import PropTypes from "prop-types";
 import React from "react";
 import { translate } from "react-i18next";
+import Chip from "shared/components/chip/chip";
 
 const Status = props => {
   const { t } = props;

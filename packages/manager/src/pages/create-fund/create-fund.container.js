@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { goBack } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
+import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 
-import CreateFundNavigationDialog from "./components/create-fund-navigation-dialog/create-fund-navigation-dialog";
 import CreateFundSettings from "./components/create-fund-settings/create-fund-settings";
 import * as createFundService from "./services/create-fund.service";
 
@@ -50,7 +51,7 @@ class CreateFundContainer extends Component {
       deposit
     } = this.state;
     const { navigateBack, handleSubmit } = this;
-    const { headerData, service, platformSettings } = this.props;
+    const { t, author, service, platformSettings } = this.props;
     if (!platformSettings) return null;
     return (
       <div className="create-fund-container">
@@ -59,19 +60,20 @@ class CreateFundContainer extends Component {
             <CreateFundSettings
               onValidateError={this.handleValidateError}
               navigateBack={navigateBack}
-              balance={(headerData && headerData.availableGvt) || 0}
               updateBalance={service.fetchBalance}
               onSubmit={handleSubmit}
-              author={(headerData && headerData.name) || null} //headerData.name
+              author={author}
               assets={assets}
               deposit={deposit}
               programsInfo={platformSettings.programsInfo}
             />
           )}
-          <CreateFundNavigationDialog
+          <ConfirmPopup
             open={isNavigationDialogVisible}
             onClose={() => this.setState({ isNavigationDialogVisible: false })}
-            onConfirm={service.goBack}
+            onApply={service.goBack}
+            body={t("manager.create-fund-page.navigation-back-text")}
+            applyButtonText={t("buttons.continue")}
           />
         </div>
       </div>
@@ -80,8 +82,9 @@ class CreateFundContainer extends Component {
 }
 
 const mapStateToProps = state => {
+  const headerData = state.profileHeader.info.data;
   return {
-    headerData: state.profileHeader.info.data,
+    author: headerData ? headerData.name : "",
     platformSettings: state.platformData.data
   };
 };
@@ -93,6 +96,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default compose(
+  translate(),
   connect(
     mapStateToProps,
     mapDispatchToProps

@@ -1,6 +1,5 @@
 import "./wallet-withdraw-form.scss";
 
-import Select from "shared/components/select/select";
 import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import PropTypes from "prop-types";
@@ -8,11 +7,12 @@ import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
-import { convertFromCurrency } from "shared/utils/currency-converter";
-import { formatValue } from "shared/utils/formatter";
-import { number, object, string } from "yup";
-import { ethWalletValidator } from "shared/utils/validators/validators";
+import Select from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import { convertFromCurrency } from "shared/utils/currency-converter";
+import { formatValue, validateFraction } from "shared/utils/formatter";
+import { ethWalletValidator } from "shared/utils/validators/validators";
+import { number, object, string } from "yup";
 
 const WalletWithdrawForm = ({
   t,
@@ -75,13 +75,15 @@ const WalletWithdrawForm = ({
           component={GVTextField}
           adornment="GVT"
           autoComplete="off"
+          autoFocus
           InputComponent={NumberFormat}
           allowNegative={false}
           isAllowed={values => {
             const { floatValue, formattedValue } = values;
             return (
               formattedValue === "" ||
-              floatValue <= parseFloat(availableToWithdrawal)
+              (validateFraction(formattedValue, "GVT") &&
+                floatValue <= parseFloat(availableToWithdrawal))
             );
           }}
         />

@@ -1,12 +1,15 @@
 import "./dashboard-programs.scss";
 
+import classnames from "classnames";
 import { GVButton } from "gv-react-components";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
+import AssetStatus from "shared/components/asset-status/asset-status";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import { DASHBOARD_PROGRAMS_COLUMNS } from "shared/components/dashboard/dashboard.constants";
+import LevelTooltip from "shared/components/level-tooltip/level-tooltip";
 import ProgramPeriodEnd from "shared/components/program-period/program-period-end/program-period-end";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
@@ -14,6 +17,7 @@ import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filte
 import TableCell from "shared/components/table/components/table-cell";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
+import { PROGRAM } from "shared/constants/constants";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatPercent, formatValue } from "shared/utils/formatter";
 
@@ -23,6 +27,8 @@ class DashboardPrograms extends Component {
   render() {
     const {
       t,
+      role,
+      onChangeStatus,
       getDashboardPrograms,
       createButtonToolbar,
       createProgram,
@@ -52,11 +58,19 @@ class DashboardPrograms extends Component {
               column.name
             }`}
           >
-            {t(`dashboard-page.programs-header.${column.name}`)}
+            {t(
+              `${
+                process.env.REACT_APP_PLATFORM
+              }.dashboard-page.programs-header.${column.name}`
+            )}
           </span>
         )}
         renderBodyRow={program => (
-          <TableRow>
+          <TableRow
+            className={classnames({
+              "table__row--pretender": program.rating.canLevelUp
+            })}
+          >
             <TableCell className="programs-table__cell dashboard-programs__cell--title">
               <div className="dashboard-programs__cell--avatar-title">
                 <Link
@@ -70,6 +84,12 @@ class DashboardPrograms extends Component {
                     level={program.level}
                     alt={program.title}
                     color={program.color}
+                    tooltip={
+                      <LevelTooltip
+                        level={program.level}
+                        canLevelUp={program.rating.canLevelUp}
+                      />
+                    }
                   />
                 </Link>
                 <Link
@@ -107,7 +127,13 @@ class DashboardPrograms extends Component {
               <ProgramSimpleChart data={program.chart} programId={program.id} />
             </TableCell>
             <TableCell className="programs-table__cell dashboard-programs__cell--status">
-              {program.personalDetails.status}
+              <AssetStatus
+                status={program.personalDetails.status}
+                id={program.id}
+                role={role}
+                asset={PROGRAM}
+                onCancel={onChangeStatus}
+              />
             </TableCell>
           </TableRow>
         )}

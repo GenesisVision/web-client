@@ -31,14 +31,14 @@ const getStatus = transaction => {
 const emptyTransactions = t => (
   <div className="empty-transactions">
     <div className="empty-transactions__subtitle">
-      {t("wallet.transactions.title")}
+      {t("wallet-page.transactions.title")}
     </div>
     <div className="empty-transactions__disclaimer">
       <div className="empty-transactions__icon">
         <img src={EmptyTransactionsIcon} alt="" />
       </div>
       <div className="empty-transactions__text">
-        {t("wallet.transactions.empty-transactions")}
+        {t("wallet-page.transactions.empty-transactions")}
       </div>
     </div>
   </div>
@@ -61,7 +61,8 @@ class WalletTransactions extends Component {
       <Surface className="wallet-transactions">
         {(this.state.transactionsCount && (
           <TableContainer
-            title={t("wallet.transactions.title")}
+            isFetchOnMount
+            title={t("wallet-page.transactions.title")}
             getItems={fetchWalletTransactions}
             dataSelector={walletTableTransactionsSelector}
             renderFilters={(updateFilter, filtering) => {
@@ -83,7 +84,7 @@ class WalletTransactions extends Component {
                   column.name
                 }`}
               >
-                {t(`wallet.transactions.${column.name}`)}
+                {t(`wallet-page.transactions.${column.name}`)}
               </span>
             )}
             renderBodyRow={transaction => {
@@ -105,7 +106,8 @@ class WalletTransactions extends Component {
                     />
                   </TableCell>
                   <TableCell className="wallet-transactions__cell wallet-transactions__cell--status">
-                    {(status && t(`wallet.transaction-statuses.${status}`)) ||
+                    {(status &&
+                      t(`wallet-page.transaction-statuses.${status}`)) ||
                       "-"}
                   </TableCell>
                   <TableCell className="wallet-transactions__cell wallet-transactions__cell--actions">

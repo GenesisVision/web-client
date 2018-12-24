@@ -74,7 +74,7 @@ $avatar-size-mobile: $avatar-size/$divider-title;
   }
 }
 
-@mixin adaptive-padding($direction, $padding-size, $divider:$divider-padding) {
+@mixin adaptive-padding($direction, $padding-size, $divider: $divider-padding) {
   padding-#{$direction}: $padding-size/$divider;
 
   @include media-breakpoint-landscape-phone() {
@@ -87,7 +87,7 @@ $avatar-size-mobile: $avatar-size/$divider-title;
   @include adaptive-padding(bottom, $padding-bottom);
 }
 
-@mixin horizontal-paddings($horizontal-padding, $divider:$divider-padding) {
+@mixin horizontal-paddings($horizontal-padding, $divider: $divider-padding) {
   @include adaptive-padding(left, $horizontal-padding, $divider);
   @include adaptive-padding(right, $horizontal-padding, $divider);
 }

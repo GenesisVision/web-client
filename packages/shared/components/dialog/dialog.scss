@@ -71,7 +71,7 @@
   }
 
   &__info {
-    margin-top: 35px;
+    margin-top: 30px;
     opacity: 0.5;
     font-size: 11px;
     line-height: 1.64;
@@ -80,7 +80,19 @@
 
   &__top {
     max-width: 360px;
-    padding: 50px 30px 30px;
+    padding: 50px $padding-small $padding-medium;
+
+    &:last-child {
+      padding-bottom: 50px;
+    }
+
+    .statistics-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .gv-text-field__wrapper:last-child {
+      margin-bottom: 0;
+    }
   }
 
   &__top-wrapper {
@@ -89,7 +101,15 @@
 
   &__bottom {
     background-color: rgba(255, 255, 255, 0.02);
-    padding: 30px 30px 50px;
+    padding: $padding-small $padding-small 50px;
+
+    .gv-text-field__wrapper:first-child {
+      margin-top: 0;
+    }
+
+    .create-program-settings__logo-title {
+      margin-top: 0;
+    }
   }
 
   &__close {
@@ -125,6 +145,16 @@
       }
 
       &--outside {
+        display: inherit;
+      }
+
+      &--wider {
+        display: none;
+      }
+    }
+
+    @media (min-width: 1600px) {
+      &--wider {
         display: inherit;
       }
     }
@@ -179,8 +209,35 @@
     }
   }
 
+  &__text {
+    padding-top: 20px;
+
+    &:first-child {
+      padding-top: 0;
+    }
+
+    p {
+      padding-bottom: 0;
+    }
+  }
+
   .form-error {
     margin-bottom: 20px;
     font-size: $font-size-common;
+  }
+
+  .gv-btn {
+    font-size: $font-size-common;
+  }
+
+  &--wider {
+    max-width: 420px;
+  }
+
+  &--width-auto {
+    display: flex;
+    box-sizing: border-box;
+    width: auto;
+    max-width: none;
   }
 }

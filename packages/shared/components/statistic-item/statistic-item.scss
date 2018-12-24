@@ -17,15 +17,20 @@
     }
   }
 
+  &__top {
+    margin-bottom: $padding-xsmall-mobile;
+    @include media-breakpoint-landscape-phone() {
+      margin-bottom: $padding-xsmall/2;
+    }
+  }
+
   &__label {
     color: $label-color;
     font-size: $font-size-common-mobile;
     letter-spacing: 0.4px;
-    margin-bottom: $padding-xsmall-mobile;
     font-weight: normal;
     @include media-breakpoint-landscape-phone() {
       font-size: $font-size-common;
-      margin-bottom: $padding-xsmall/2;
     }
   }
 

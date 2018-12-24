@@ -26,16 +26,17 @@ const PasswordChangeForm = props => {
     >
       <GVFormikField
         component={GVTextField}
-        label={t("password-change.current-password")}
+        label={t("auth.password-change.current-password")}
         name="oldPassword"
         type="password"
         autoComplete="new-password"
+        autoFocus
       />
       <div className="change-password__new">
         <GVFormikField
           className={className}
           component={GVTextField}
-          label={t("password-change.password")}
+          label={t("auth.password-change.password")}
           type="password"
           name="password"
           autoComplete="new-password"
@@ -43,7 +44,7 @@ const PasswordChangeForm = props => {
         <GVFormikField
           className={className}
           component={GVTextField}
-          label={t("password-change.confirm-password")}
+          label={t("auth.password-change.confirm-password")}
           type="password"
           name="confirmPassword"
           autoComplete="new-password"
