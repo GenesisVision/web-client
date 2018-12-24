@@ -32,10 +32,13 @@ class ManagerHistorySection extends PureComponent {
 
   render() {
     const { tab, programsCount, fundsCount } = this.state;
-    const { t, managerId, title, isAuthenticated } = this.props;
+    const { t, managerId, isAuthenticated } = this.props;
 
     return (
       <Surface className="manager-history">
+        <div className="manager-history__heading">
+          <h3>Assets</h3>
+        </div>
         <div className="manager-history__tabs">
           <GVTabs value={tab} onChange={this.handleTabChange}>
             <GVTab
@@ -54,14 +57,12 @@ class ManagerHistorySection extends PureComponent {
         <div>
           {tab === PROGRAMS_TAB && (
             <ManagerPrograms
-              title={title}
               managerId={managerId}
               isAuthenticated={isAuthenticated}
             />
           )}
           {tab === FUNDS_TAB && (
             <ManagerFunds
-              title={title}
               managerId={managerId}
               isAuthenticated={isAuthenticated}
             />

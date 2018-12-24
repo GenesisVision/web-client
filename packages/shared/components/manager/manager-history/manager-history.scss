@@ -10,13 +10,6 @@
 
   &__heading {
     @include horizontal-paddings($padding-small, 2);
-    @include vertical-paddings($padding-small);
-    font-size: $font-size-h3-mobile;
-    letter-spacing: 0.2px;
-    font-weight: 600;
-    @include media-breakpoint-landscape-phone() {
-      font-size: $font-size-h3;
-    }
   }
 
   &__subheading {
