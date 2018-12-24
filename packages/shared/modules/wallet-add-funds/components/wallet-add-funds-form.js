@@ -44,7 +44,7 @@ class WalletAddFundsForm extends Component {
     const { t, values, wallets } = this.props;
     const { currentAmount } = this.state;
     const selected = wallets.find(w => w.currency === values.currency) || {};
-    const { address = "", currency = null, rateToGVT = null } = selected;
+    const { address, currency, rateToGVT } = selected;
     const isAllow = (values) => {
       const { formattedValue } = values;
       return formattedValue === "" ||
