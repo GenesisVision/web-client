@@ -14,7 +14,6 @@ import { convertToCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 
 const MAX_AMOUNT_GVT = 4436644;
-const MAX_AMOUNT_DEFAULT = 1000000;
 
 class WalletAddFundsForm extends Component {
   state = {
@@ -29,14 +28,6 @@ class WalletAddFundsForm extends Component {
     } catch (error) {
       notifyError(t("wallet-add-funds.copy-to-clipboard-error"));
     }
-  };
-
-  isAllow = (values, currency) => {
-    const { formattedValue } = values;
-    const maxAmount = currency === "GVT" ? MAX_AMOUNT_GVT : MAX_AMOUNT_DEFAULT;
-    return formattedValue === "" ||
-      validateFraction(formattedValue, currency) &&
-      formattedValue <= maxAmount;
   };
 
   onChangeCurrency = (name, target) => {
@@ -54,6 +45,7 @@ class WalletAddFundsForm extends Component {
     const { currentAmount } = this.state;
     const selected = wallets.find(w => w.currency === values.currency) || {};
     const { address = "", currency = null, rateToGVT = null } = selected;
+
     return (
       <form id="add-funds" className="wallet-add-funds-popup">
         <div className="dialog__top">
@@ -88,7 +80,12 @@ class WalletAddFundsForm extends Component {
             autoFocus
             InputComponent={NumberFormat}
             allowNegative={false}
-            isAllowed={this.isAllow}
+            isAllowed={values => {
+              const { formattedValue } = values;
+              return formattedValue === "" ||
+                validateFraction(formattedValue, currency) &&
+                convertToCurrency(formattedValue, rateToGVT) <= MAX_AMOUNT_GVT;
+            }}
             onChange={this.onChangeAmount}
             value={currentAmount}
           />
