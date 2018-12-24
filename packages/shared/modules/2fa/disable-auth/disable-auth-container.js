@@ -18,10 +18,13 @@ class DisableAuthContainer extends Component {
         model
       })
       .then(data => {
-        this.setState({ data, success: true }, this.props.onSubmit);
+        this.setState(
+          { ...data, success: true, isPending: false },
+          this.props.onSubmit
+        );
       })
-      .catch(data => {
-        this.setState({ data, success: false });
+      .catch(error => {
+        this.setState({ ...error, success: false, isPending: false });
       });
   };
   render() {
