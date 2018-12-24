@@ -9,6 +9,11 @@ $create-icon-width: 140px;
   &__head {
     @include horizontal-paddings($padding-small, 2);
   }
+  &__tabs {
+    @include media-breakpoint-tablet() {
+      position: absolute;
+    }
+  }
   &__table {
     .create-asset {
       display: flex;

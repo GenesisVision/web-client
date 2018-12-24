@@ -41,5 +41,8 @@
         font-size: $font-size-paragraph;
       }
     }
+    @include media-breakpoint-tablet() {
+      position: absolute;
+    }
   }
 }
