@@ -45,6 +45,12 @@ class WalletAddFundsForm extends Component {
     const { currentAmount } = this.state;
     const selected = wallets.find(w => w.currency === values.currency) || {};
     const { address = "", currency = null, rateToGVT = null } = selected;
+    const isAllow = (values) => {
+      const { formattedValue } = values;
+      return formattedValue === "" ||
+        validateFraction(formattedValue, currency) &&
+        convertToCurrency(formattedValue, rateToGVT) <= MAX_AMOUNT_GVT;
+    };
 
     return (
       <form id="add-funds" className="wallet-add-funds-popup">
@@ -80,12 +86,7 @@ class WalletAddFundsForm extends Component {
             autoFocus
             InputComponent={NumberFormat}
             allowNegative={false}
-            isAllowed={values => {
-              const { formattedValue } = values;
-              return formattedValue === "" ||
-                validateFraction(formattedValue, currency) &&
-                convertToCurrency(formattedValue, rateToGVT) <= MAX_AMOUNT_GVT;
-            }}
+            isAllowed={isAllow}
             onChange={this.onChangeAmount}
             value={currentAmount}
           />
