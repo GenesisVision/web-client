@@ -40,8 +40,11 @@ class Header extends Component {
     return (
       <div className="header">
         <div className="header__left">
-          <div className="navigation__menu profile-avatar">
-            <Icon type={"menu"} onClick={this.handleOpenMenu} />
+          <div
+            className="navigation__menu profile-avatar"
+            onClick={this.handleOpenMenu}
+          >
+            <Icon type={"menu"} />
           </div>
           <Navigation className="header__navigation" />
         </div>
