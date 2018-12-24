@@ -6,10 +6,10 @@ import { bindActionCreators, compose } from "redux";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
-import CreateProgramBroker from "./components/create-program-broker/create-program-broker";
-import CreateProgramSettings from "./components/create-program-settings/create-program-settings";
-import { checkIsModelFilled } from "./helpers/create-program.helpers";
-import * as createProgramService from "./services/create-program.service";
+import { checkIsModelFilled } from "../helpers/create-program.helpers";
+import * as createProgramService from "../services/create-program.service";
+import CreateProgramBroker from "./create-program-broker/create-program-broker";
+import CreateProgramSettings from "./create-program-settings/create-program-settings";
 
 class CreateProgramContainer extends Component {
   state = {
@@ -31,7 +31,7 @@ class CreateProgramContainer extends Component {
     });
   }
 
-  chooseBroker = broker => {
+  chooseBroker = broker => () => {
     this.setState({ choosedBroker: broker });
   };
 
@@ -88,7 +88,7 @@ class CreateProgramContainer extends Component {
       setLeverageChooseAvailable
     } = this;
     const { t, headerData, service, platformSettings } = this.props;
-    if (!platformSettings) return null;
+    if (!platformSettings || !headerData) return null;
     return (
       <div className="create-program-container">
         <GVTabs value={tab}>
@@ -109,6 +109,7 @@ class CreateProgramContainer extends Component {
                 brokers={brokers}
                 choosedBroker={choosedBroker}
                 chooseBroker={chooseBroker}
+                isForexAllowed={headerData.allowForex}
               />
             )}
             {tab === "settings" && (
@@ -116,10 +117,10 @@ class CreateProgramContainer extends Component {
                 onValidateError={this.handleValidateError}
                 navigateBack={navigateToBroker}
                 broker={choosedBroker}
-                balance={(headerData && headerData.availableGvt) || 0}
+                balance={headerData.availableGvt}
                 updateBalance={service.fetchBalance}
                 onSubmit={handleSubmit}
-                author={(headerData && headerData.name) || null}
+                author={headerData.name}
                 setLeverageChooseAvailable={setLeverageChooseAvailable}
                 isLeverageChooseAvailable={isLeverageChooseAvailable}
                 programsInfo={platformSettings.programsInfo}

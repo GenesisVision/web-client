@@ -72,7 +72,7 @@ class CreateFundContainer extends Component {
             open={isNavigationDialogVisible}
             onClose={() => this.setState({ isNavigationDialogVisible: false })}
             onApply={service.goBack}
-            body={t("create-fund-page.navigation-back-text")}
+            body={t("manager.create-fund-page.navigation-back-text")}
             applyButtonText={t("buttons.continue")}
           />
         </div>

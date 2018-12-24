@@ -5278,8 +5278,8 @@ gud@^1.0.0:
   integrity sha512-zGEOVKFM5sVPPrYs7J5/hYEw2Pof8KCyOwyhG8sAF26mCAeUFAcYPu1mwB7hhpIP29zOIBaDqwuHdLp0jvZXjw==
 
 "gv-api-web@git+https://github.com/GenesisVision/gv-api-web.git#development":
-  version "1.0.207"
-  resolved "git+https://github.com/GenesisVision/gv-api-web.git#1a39f1e621cbdffd259fd36d29c59ed11ef14746"
+  version "1.0.213"
+  resolved "git+https://github.com/GenesisVision/gv-api-web.git#7f1069cca0f8b3e55a5992306f0ac81398ce06d8"
   dependencies:
     superagent "^3.8.3"
 
@@ -9711,11 +9711,6 @@ react-calendar@^2.17.4, react-calendar@^2.17.5:
     merge-class-names "^1.1.1"
     prop-types "^15.6.0"
     react-lifecycles-compat "^3.0.4"
-
-react-content-loader@^3.1.2:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/react-content-loader/-/react-content-loader-3.2.0.tgz#39a6a035a5dddc2270432c1df7950e37f179dcf2"
-  integrity sha512-1+wg2rhUD8s1HNUIODKXrQC2nb8Iu/KKJJgt7KW8vPEP3+8vvzkmYkVdlZk302qypmS8DsGHoZTgjw3SD+EhBw==
 
 react-cropper@^1.0.1:
   version "1.0.1"

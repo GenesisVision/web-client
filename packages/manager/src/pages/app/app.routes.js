@@ -1,7 +1,7 @@
 import { CREATE_FUND_PAGE_ROUTE } from "pages/create-fund/create-fund.constants";
 import createFundPage from "pages/create-fund/create-fund.page";
-import { CREATE_PROGRAM_PAGE_ROUTE } from "pages/create-program/create-program.constants";
 import createProgramPage from "pages/create-program/create-program.page";
+import { CREATE_PROGRAM_PAGE_ROUTE } from "pages/create-program/create-program.routes";
 import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import DashboardRoutes from "pages/dashboard/dashboard.routes";
 import ManagerPage, {

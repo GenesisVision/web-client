@@ -4,6 +4,8 @@ import { bindActionCreators } from "redux";
 import { formartChartMinValue } from "shared/components/chart/chart-components/chart-components.helpers";
 import ChartPeriod from "shared/components/chart/chart-period/chart-period";
 import { DEFAULT_PERIOD } from "shared/components/chart/chart-period/chart-period.helpers";
+import DashboardChartLoader from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-loader";
+import DashboardChartStatsLoader from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-stats-loader";
 
 import { getPortfolioChart } from "../../../services/dashboard-chart.service";
 import DashboardPortfolioChart from "./dashboard-portfolio-chart";
@@ -72,9 +74,15 @@ class DashboardPortfolioChartContainer extends PureComponent {
   };
 
   render() {
-    const { data, currency } = this.props;
+    const { data, currency, isPending } = this.props;
     const { period } = this.state;
-    if (data === undefined) return null;
+    if (isPending || !data)
+      return (
+        <Fragment>
+          <DashboardChartStatsLoader />
+          <DashboardChartLoader />
+        </Fragment>
+      );
     return (
       <Fragment>
         <DashboardPortfolioChartStat

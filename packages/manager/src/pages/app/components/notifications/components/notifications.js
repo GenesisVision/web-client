@@ -9,7 +9,7 @@ import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import Chip from "shared/components/chip/chip";
-import { ControlsIcon } from "shared/components/icon/icon";
+import { Icon } from "shared/components/icon/icon";
 import { RingIcon } from "shared/components/icon/ring-icon";
 import InfinityScroll from "shared/components/infinity-scroll/inifinity-scroll";
 import Spinner from "shared/components/spiner/spiner";
@@ -86,7 +86,7 @@ class Notifications extends Component {
               onClick={this.props.closeNotifications}
             >
               <div className="profile-avatar notifications__link">
-                <ControlsIcon />
+                <Icon type={"controls"} />
               </div>
             </Link>
           </div>

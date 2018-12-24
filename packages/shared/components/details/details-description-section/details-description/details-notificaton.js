@@ -1,6 +1,5 @@
 import "./details-description-control.scss";
 
-import classnames from "classnames";
 import React from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -22,9 +21,8 @@ const DetailsNotificaton = ({ t, url, hasNotifications, title }) => {
         text={t("fund-details-page.description.notifications")}
       >
         <RingIcon
-          className={classnames("details-description-control__icon", {
-            "icon--active": hasNotifications
-          })}
+          selected={hasNotifications}
+          className="details-description-control__icon"
         />
       </DetailsDescriptionControl>
     </Link>
