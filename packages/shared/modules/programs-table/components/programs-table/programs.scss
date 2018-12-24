@@ -222,8 +222,7 @@ $description-block-width: 250px;
   }
   &--title {
     word-break: break-all;
-    min-width: 100px;
-    max-width: 170px;
+    width: 170px;
     div {
       padding: $padding/10;
     }
@@ -241,8 +240,7 @@ $description-block-width: 250px;
   }
 
   &--chart {
-    min-width: 100px;
-    max-width: 170px;
+    width: 170px;
     padding-right: 0;
   }
 
@@ -269,7 +267,7 @@ $description-block-width: 250px;
     align-items: stretch;
     justify-content: space-between;
     &--inner {
-      width: 100%;
+      width: calc(100% - 45px);
     }
   }
   &__info {
