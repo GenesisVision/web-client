@@ -76,7 +76,12 @@ class Header extends Component {
             </Fragment>
           ) : (
             <div className="header__buttons">
-              <Link to={LOGIN_ROUTE}>
+              <Link
+                to={{
+                  pathname: LOGIN_ROUTE,
+                  state: this.props.backPath
+                }}
+              >
                 <GVButton variant="outlined" color="secondary">
                   {t("auth.login.title")}
                 </GVButton>
@@ -90,6 +95,7 @@ class Header extends Component {
           )}
         </div>
         <NavigationMobile
+          backPath={this.props.backPath}
           logout={logout}
           isOpenNavigation={this.state.isOpenNavigation}
           email={email}
