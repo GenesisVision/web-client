@@ -117,7 +117,8 @@ export const getFundsFilters = () => (dispatch, getState) => {
     page,
     pages,
     sorting,
-    filtering
+    filtering,
+    itemsOnPage: DEFAULT_ITEMS_ON_PAGE
   };
   return filters;
 };
