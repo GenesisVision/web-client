@@ -13,6 +13,8 @@ const LoginForm = ({
   isSubmitting,
   handleSubmit,
   error,
+  isValid,
+  dirty,
   FORGOT_PASSWORD_ROUTE
 }) => {
   return (
@@ -48,7 +50,7 @@ const LoginForm = ({
       <GVButton
         className="login__submit-button"
         id="loginSubmit"
-        disabled={isSubmitting}
+        disabled={isSubmitting || !isValid || !dirty}
         type="submit"
       >
         {t("auth.login.confirm-button-text")}
