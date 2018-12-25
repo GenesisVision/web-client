@@ -31,6 +31,7 @@ class DepositPopup extends Component {
           errorMessage={submitInfo.errorMessage}
           currency={currency}
           info={info}
+          disabled={submitInfo.isPending}
           onSubmit={invest}
         />
       </Fragment>
