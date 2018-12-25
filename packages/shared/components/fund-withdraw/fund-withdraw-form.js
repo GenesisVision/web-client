@@ -28,7 +28,9 @@ class FundWithdrawForm extends Component {
       errors,
       step,
       goToConfirmStep,
-      goToEnterAmountStep
+      goToEnterAmountStep,
+      isValid,
+      dirty
     } = this.props;
     const valueInCurrency = calculateValueOfEntryFee(
       availableToWithdraw,
@@ -55,7 +57,7 @@ class FundWithdrawForm extends Component {
             accountCurrency={accountCurrency}
             availableToWithdraw={availableToWithdraw}
             onClick={goToConfirmStep}
-            disabled={errors.percent !== undefined}
+            disabled={errors.percent !== undefined || !isValid || !dirty}
           />
         )}
         {step === CONFIRM_STEP && (
