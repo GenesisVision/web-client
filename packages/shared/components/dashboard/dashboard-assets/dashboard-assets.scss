@@ -9,6 +9,7 @@ $create-icon-width: 140px;
   &__head {
     @include horizontal-paddings($padding-small, 2);
   }
+
   &__table {
     .create-asset {
       display: flex;
@@ -77,6 +78,19 @@ $create-icon-width: 140px;
     &:not(.table__row--head):hover {
       .program-avatar__level {
         border-color: $background-pretender-level-hover;
+      }
+    }
+  }
+  @media (min-width: 620px) {
+    &__tabs {
+      position: absolute;
+      padding-top: 5px;
+    }
+    .table__filters {
+      justify-content: flex-end;
+
+      .filter {
+        margin-left: 20px;
       }
     }
   }
