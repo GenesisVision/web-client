@@ -6,11 +6,9 @@
   display: flex;
   flex-wrap: wrap;
   white-space: pre-wrap;
-  @include adaptive-margin(bottom, $padding-small);
 
   @include media-breakpoint-tablet() {
     flex-wrap: nowrap;
-    margin-bottom: $padding-xlarge;
   }
 
   &__your-investment {
@@ -42,6 +40,7 @@
   }
 
   &__investing-container {
+    @include adaptive-padding(bottom, $padding-xsmall);
     display: flex;
     align-items: center;
   }
@@ -138,7 +137,7 @@
   }
 
   &__invest-button-container {
-    padding-bottom: $padding-small-mobile;
+    //padding-bottom: $padding-small-mobile;
     & > button,
     .details-description__reallocate-container {
       margin-top: $padding-small-mobile;
@@ -147,7 +146,7 @@
       margin-right: $padding-small-mobile;
     }
     @include media-breakpoint-landscape-phone() {
-      padding-bottom: $padding-small;
+      //padding-bottom: $padding-small;
       & > button,
       .details-description__reallocate-container {
         margin-top: $padding-small;
