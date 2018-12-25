@@ -9,7 +9,9 @@ import LevelFilter from "shared/components/table/components/filtering/level-filt
 import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
 
 import ProgramCard from "./program-card";
+import ProgramTableHeaderCell from "./program-table-header-cell";
 import ProgramTableRow from "./program-table-row";
+import { composeCurrencyFilter } from "./program-table.helpers";
 import {
   CURRENCY_FILTER_NAME,
   LEVEL_FILTER_NAME,
@@ -36,10 +38,6 @@ const ProgramsTable = ({
   isAuthenticated,
   title
 }) => {
-  const selectFilterValues = [
-    { value: undefined, label: "All" },
-    ...(currencies || []).map(x => ({ value: x, label: x }))
-  ];
   return (
     <Table
       disableTitle={disableTitle}
@@ -63,7 +61,7 @@ const ProgramsTable = ({
             name={CURRENCY_FILTER_NAME}
             label="Currency"
             value={filtering[CURRENCY_FILTER_NAME]}
-            values={selectFilterValues}
+            values={composeCurrencyFilter(currencies)}
             onChange={updateFilter}
           />
           <DateRangeFilter
@@ -74,18 +72,12 @@ const ProgramsTable = ({
           />
         </Fragment>
       )}
-      renderHeader={column => {
-        if (!isAuthenticated && column.name === "favorite") return null;
-        return (
-          <span
-            className={`programs-table__cell  programs-table__cell--${
-              column.name
-            }`}
-          >
-            {t(`programs-page.programs-header.${column.name}`)}
-          </span>
-        );
-      }}
+      renderHeader={column => (
+        <ProgramTableHeaderCell
+          column={column}
+          isAuthenticated={isAuthenticated}
+        />
+      )}
       renderBodyRow={program => (
         <ProgramTableRow
           showRating={showRating}
@@ -93,7 +85,6 @@ const ProgramsTable = ({
           program={program}
           toggleFavorite={toggleFavorite}
           isAuthenticated={isAuthenticated}
-          redirectToLogin={redirectToLogin}
         />
       )}
       renderBodyCard={program => (

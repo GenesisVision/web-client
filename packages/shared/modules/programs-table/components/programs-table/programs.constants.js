@@ -4,7 +4,6 @@ import {
   validateDateRange
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 import { FilterType } from "shared/components/table/helpers/filtering.helpers";
-import { CURRENCY_VALUES } from "shared/modules/currency-select/currency-select.constants";
 
 import {
   DEFAULT_DATE_RANGE_FILTER_VALUE,
@@ -27,8 +26,6 @@ export const LEVEL_MAX_FILTER_VALUE = 7;
 export const SORTING_FILTER_VALUE = "ByProfitDesc";
 export const CURRENCY_FILTER_VALUE = undefined;
 
-export const CURRENCY_FILTER_VALUES = Object.keys(CURRENCY_VALUES);
-
 export const PROGRAMS_TABLE_FILTERS = [
   {
     name: LEVEL_FILTER_NAME,
@@ -46,8 +43,8 @@ export const PROGRAMS_TABLE_FILTERS = [
   {
     name: CURRENCY_FILTER_NAME,
     type: FilterType.general,
-    defaultValue: CURRENCY_FILTER_VALUE,
-    validate: value => CURRENCY_FILTER_VALUES.includes(value)
+    defaultValue: CURRENCY_FILTER_VALUE
+    //validate: value => CURRENCY_FILTER_VALUES.includes(value) <--fetched from server
   },
   {
     ...composeDefaultDateRangeFilter({
@@ -63,6 +60,12 @@ export const PROGRAMS_TABLE_FILTERS = [
     validate: validateDateRange
   }
 ];
+
+export const PROGRAMS_MODULE_FILTERING = {
+  level: [LEVEL_MIN_FILTER_VALUE, LEVEL_MAX_FILTER_VALUE],
+  programCurrency: CURRENCY_FILTER_VALUE,
+  dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE
+};
 
 export const PROGRAMS_COLUMNS = [
   {

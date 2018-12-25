@@ -28,11 +28,7 @@ class FacetContainer extends Component {
     const { facetData } = this.state;
     if (!facetData || facetData.isPending) return null;
     if (facetData.notFound) return <NotFoundPage />;
-    return (
-      <Fragment>
-        <TableContainer title={facetData.facet.title} />
-      </Fragment>
-    );
+    return <TableContainer title={facetData.facet.title} />;
   }
 }
 
