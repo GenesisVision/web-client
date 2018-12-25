@@ -4,6 +4,7 @@ import { bindActionCreators, compose } from "redux";
 import DashboardAssets from "shared/components/dashboard/dashboard-assets/dashboard-assets";
 import { INVESTOR } from "shared/constants/constants";
 
+import { clearDashboardAssetsTable } from "../../actions/dashboard.actions";
 import { getDashboardFunds } from "../../services/dashboard-funds.service";
 import { getDashboardPrograms } from "../../services/dashboard-programs.service";
 import { fetchAssetsCount } from "../../services/dashboard.service";
@@ -18,9 +19,10 @@ class DashboardAssetsContainer extends Component {
   onChangeStatus = () => this.getAssets();
 
   render() {
-    const { title } = this.props;
+    const { title, service } = this.props;
     return (
       <DashboardAssets
+        clearAssets={service.clearDashboardAssetsTable}
         getDashboardPrograms={getDashboardPrograms}
         getDashboardFunds={getDashboardFunds}
         fetchAssetsCount={fetchAssetsCount}
@@ -34,7 +36,7 @@ class DashboardAssetsContainer extends Component {
 
 const mapDispatchToProps = dispatch => ({
   service: bindActionCreators(
-    { getDashboardFunds, getDashboardPrograms },
+    { getDashboardFunds, getDashboardPrograms, clearDashboardAssetsTable },
     dispatch
   )
 });

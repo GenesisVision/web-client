@@ -5,13 +5,18 @@ import {
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import tableReducerFactory from "shared/components/table/reducers/table.reducer";
 
-import { DASHBOARD_FUNDS } from "../actions/dashboard.actions";
+import {
+  CLEAR_DASHBOARD_ASSETS_TABLE,
+  DASHBOARD_FUNDS
+} from "../actions/dashboard.actions";
 
 const dashboardFundsReducer = tableReducerFactory({
   type: DASHBOARD_FUNDS,
   paging: DEFAULT_PAGING,
   filtering: DASHBOARD_FUNDS_DEFAULT_FILTERING,
-  defaultFilters: DASHBOARD_FUNDS_FILTERS
+  defaultFilters: DASHBOARD_FUNDS_FILTERS,
+  clearable: true,
+  clearableActionType: CLEAR_DASHBOARD_ASSETS_TABLE
 });
 
 export default dashboardFundsReducer;
