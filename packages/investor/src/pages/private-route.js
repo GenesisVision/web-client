@@ -12,7 +12,7 @@ class Private extends Component {
       <Redirect
         to={{
           pathname: LOGIN_ROUTE,
-          state: { from: props.location }
+          state: props.location
         }}
       />
     );
