@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { push } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
-import Surface from "shared/components/surface/surface";
 import { toggleFavoriteProgramDispatchable } from "shared/modules/favorite-asset/services/favorite-program.service";
 
 import * as programsService from "../../services/programs-table.service";
@@ -50,7 +49,9 @@ class ProgramsContainer extends Component {
         updateFilter={service.programsChangeFilter}
         paging={{
           totalPages: filters.pages,
-          currentPage: filters.page
+          currentPage: filters.page,
+          itemsOnPage: filters.itemsOnPage,
+          totalItems: data ? data.total : 0
         }}
         updatePaging={service.programsChangePage}
         toggleFavorite={service.toggleFavoriteProgram}

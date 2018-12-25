@@ -9,7 +9,7 @@ import { FORGOT_PASSWORD_ROUTE } from "../../forgot-password/forgot-password.rou
 import * as loginService from "../services/login.service";
 
 const LoginPage = ({ location }) => {
-  const { from } = location.state || { from: { pathname: HOME_ROUTE } };
+  const from = location.state || HOME_ROUTE;
   return (
     <div className="login">
       <AuthTabs />

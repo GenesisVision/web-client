@@ -32,13 +32,15 @@ $padding: $padding-small;
   }
   &__footer {
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
+    align-items: baseline;
     padding: $padding/2;
     font-size: $td-font-size/1.5;
     padding: 0 $padding-small/2;
     .pagination {
       margin: 0;
+    }
+    .pager {
+      margin-left: auto;
     }
     @include media-breakpoint-landscape-phone() {
       padding: 0 $padding-small;

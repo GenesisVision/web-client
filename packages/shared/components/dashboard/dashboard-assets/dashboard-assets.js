@@ -23,6 +23,9 @@ class DashboardAssets extends Component {
   }
 
   handleTabChange = (e, tab) => {
+    if (this.props.clearAssets) {
+      this.props.clearAssets();
+    }
     this.setState({ tab });
   };
 

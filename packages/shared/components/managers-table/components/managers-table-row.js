@@ -26,7 +26,7 @@ const ManagersTableRow = ({ t, manager, title }) => {
           </GVButton>
         </Link>
       </TableCell>
-      <TableCell className="">{manager.assets.map(x => x)}</TableCell>
+      <TableCell className="">{manager.assets.join(", ")}</TableCell>
       <TableCell className="">{moment(manager.regDate).format("ll")}</TableCell>
     </TableRow>
   );
