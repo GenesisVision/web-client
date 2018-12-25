@@ -14,17 +14,24 @@
     font-size: $font-size-paragraph-mobile;
     letter-spacing: 0.2px;
     font-weight: 600;
-
-    @include media-breakpoint-tablet() {
-      position: absolute;
-    }
   }
 
   &__tabs {
     @include horizontal-paddings($padding-small, 2);
+  }
 
-    @include media-breakpoint-tablet() {
+  @media (min-width: 450px) {
+    &__subheading,
+    &__tabs {
       position: absolute;
+      padding-top: 5px;
+    }
+    .table__filters {
+      justify-content: flex-end;
+
+      .filter {
+        margin-left: 20px;
+      }
     }
   }
 }

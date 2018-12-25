@@ -3,46 +3,33 @@
 @import "~shared/styles/_sizes.scss";
 
 .manager-history {
-  padding: $padding-small-mobile 0;
-  @include media-breakpoint-landscape-phone() {
-    padding: $padding-small 0;
-  }
+  @include vertical-paddings($padding-small);
 
   &__heading {
     @include horizontal-paddings($padding-small, 2);
   }
 
-  &__subheading {
-    @include adaptive-padding(left, $padding-small, 2);
-    font-size: $font-size-paragraph-mobile;
-    padding-bottom: $padding-xsmall-mobile;
-    letter-spacing: 0.2px;
-    font-weight: 600;
-    @include media-breakpoint-landscape-phone() {
-      padding-bottom: $padding-xsmall;
-      font-size: $font-size-paragraph;
-    }
-  }
-
   &__title {
+    @include font-size($font-size-h3);
     letter-spacing: 0.2px;
-    font-size: $font-size-h3-mobile;
-    @include media-breakpoint-landscape-phone() {
-      font-size: $font-size-h3;
-    }
   }
   &__tabs {
     @include horizontal-paddings($padding-small, 2);
     .gv-tab {
-      font-size: $font-size-paragraph-mobile;
+      @include font-size($font-size-paragraph);
     }
-    @include media-breakpoint-landscape-phone() {
-      .gv-tab {
-        font-size: $font-size-paragraph;
-      }
-    }
-    @include media-breakpoint-tablet() {
+  }
+  @media (min-width: 450px) {
+    &__tabs {
       position: absolute;
+      padding-top: 5px;
+    }
+    .table__filters {
+      justify-content: flex-end;
+
+      .filter {
+        margin-left: 20px;
+      }
     }
   }
 }
