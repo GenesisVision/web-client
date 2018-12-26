@@ -1,13 +1,20 @@
 import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
+import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { push } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
+import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
+import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import LevelFilter from "shared/components/table/components/filtering/level-filter/level-filter";
+import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
 import { toggleFavoriteProgramDispatchable } from "shared/modules/favorite-asset/services/favorite-program.service";
 
 import * as programsService from "../../services/programs-table.service";
+import { composeCurrencyFilter } from "./program-table.helpers";
 import ProgramsTable from "./programs-table";
+import { CURRENCY_FILTER_NAME, LEVEL_FILTER_NAME } from "./programs.constants";
 
 class ProgramsTableContainer extends Component {
   componentDidMount() {
@@ -24,6 +31,7 @@ class ProgramsTableContainer extends Component {
 
   render() {
     const {
+      t,
       showSwitchView,
       currencies,
       isPending,
@@ -45,6 +53,30 @@ class ProgramsTableContainer extends Component {
           ...filters.filtering
         }}
         updateFilter={service.programsChangeFilter}
+        renderFilters={(updateFilter, filtering) => {
+          return (
+            <Fragment>
+              <LevelFilter
+                name={LEVEL_FILTER_NAME}
+                value={filtering[LEVEL_FILTER_NAME]}
+                onChange={updateFilter}
+              />
+              <SelectFilter
+                name={CURRENCY_FILTER_NAME}
+                label="Currency"
+                value={filtering[CURRENCY_FILTER_NAME]}
+                values={composeCurrencyFilter(currencies)}
+                onChange={updateFilter}
+              />
+              <DateRangeFilter
+                name={DATE_RANGE_FILTER_NAME}
+                value={filtering[DATE_RANGE_FILTER_NAME]}
+                onChange={updateFilter}
+                startLabel={t("filters.date-range.program-start")}
+              />
+            </Fragment>
+          );
+        }}
         paging={{
           totalPages: filters.pages,
           currentPage: filters.page
@@ -96,6 +128,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 
 export default compose(
   withRouter,
+  translate(),
   connect(
     mapStateToProps,
     mapDispatchToProps,
