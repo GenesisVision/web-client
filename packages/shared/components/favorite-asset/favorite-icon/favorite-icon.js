@@ -1,9 +1,8 @@
 import "./favorite-icon.scss";
 
-import classnames from "classnames";
-import PropTypes from "prop-types";
 import React, { Component } from "react";
 
+import { Icon } from "../../icon/icon";
 import { ReactComponent as Favorite } from "./favorite.svg";
 
 class FavoriteIcon extends Component {
@@ -16,20 +15,16 @@ class FavoriteIcon extends Component {
   render() {
     const { selected, className } = this.props;
     return (
-      <Favorite
+      <Icon
+        type={"favorite"}
+        selected={selected}
+        className={className}
         onClick={this.handleClick}
-        className={classnames("favorite-icon", className, {
-          "favorite-icon__selected": selected
-        })}
-      />
+      >
+        <Favorite />
+      </Icon>
     );
   }
 }
 
-FavoriteIcon.propTypes = {
-  id: PropTypes.string,
-  className: PropTypes.string,
-  selected: PropTypes.bool.isRequired,
-  onClick: PropTypes.func
-};
 export default FavoriteIcon;

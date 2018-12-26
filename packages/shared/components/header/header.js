@@ -1,17 +1,17 @@
 import "./header.scss";
 
-import { MenuIcon } from "shared/components/icon/icon";
+import { GVButton } from "gv-react-components";
+import React, { Component, Fragment } from "react";
+import { translate } from "react-i18next";
+import { Link } from "react-router-dom";
+import { Icon } from "shared/components/icon/icon";
 import { SearchIcon } from "shared/components/icon/search-icon";
 import Navigation from "shared/components/navigation/navigation";
 import NavigationMobile from "shared/components/navigation/navigation-mobile/navigation-mobile";
 import NorificationsWidget from "shared/components/notifications-widget/notifications-widget";
 import ProfileWidget from "shared/components/profile-widget/profile-widget";
 import WalletWidget from "shared/components/wallet-widget/wallet-widget";
-import { GVButton } from "gv-react-components";
 import CurrencySelectContainer from "shared/modules/currency-select/components/currency-select-container";
-import React, { Component, Fragment } from "react";
-import { translate } from "react-i18next";
-import { Link } from "react-router-dom";
 
 class Header extends Component {
   state = {
@@ -41,10 +41,10 @@ class Header extends Component {
       <div className="header">
         <div className="header__left">
           <div
-            onClick={this.handleOpenMenu}
             className="navigation__menu profile-avatar"
+            onClick={this.handleOpenMenu}
           >
-            <MenuIcon />
+            <Icon type={"menu"} />
           </div>
           <Navigation className="header__navigation" />
         </div>
@@ -79,7 +79,12 @@ class Header extends Component {
             </Fragment>
           ) : (
             <div className="header__buttons">
-              <Link to={LOGIN_ROUTE}>
+              <Link
+                to={{
+                  pathname: LOGIN_ROUTE,
+                  state: this.props.backPath
+                }}
+              >
                 <GVButton variant="outlined" color="secondary">
                   {t("auth.login.title")}
                 </GVButton>
@@ -93,6 +98,7 @@ class Header extends Component {
           )}
         </div>
         <NavigationMobile
+          backPath={this.props.backPath}
           logout={logout}
           isOpenNavigation={this.state.isOpenNavigation}
           email={email}

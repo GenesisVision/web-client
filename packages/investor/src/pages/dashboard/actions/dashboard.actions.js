@@ -9,6 +9,8 @@ export const DASHBOARD_CANCEL_FUND_REQUESTS = "DASHBOARD_CANCEL_FUND_REQUESTS";
 export const DASHBOARD_CANCEL_PROGRAM_REQUESTS =
   "DASHBOARD_CANCEL_PROGRAM_REQUESTS";
 
+export const CLEAR_DASHBOARD_ASSETS_TABLE = "CLEAR_DASHBOARD_ASSETS_TABLE";
+
 export const fetchDashboardPrograms = (auth, filters) => {
   return {
     type: DASHBOARD_PROGRAMS,
@@ -57,3 +59,7 @@ export const cancelProgramRequest = (auth, id) => {
     payload: investorApi.v10InvestorProgramsRequestsByIdCancelPost(id, auth)
   };
 };
+
+export const clearDashboardAssetsTable = () => ({
+  type: CLEAR_DASHBOARD_ASSETS_TABLE
+});

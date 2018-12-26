@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { bindActionCreators, compose } from "redux";
-import FundsTableModule from "./funds-table-module";
 import { toggleFavoriteFundDispatchable } from "shared/modules/favorite-asset/services/favorite-fund.service";
 
 import * as fundsService from "../../services/funds-table.service";
+import FundsTableModule from "./funds-table-module";
 
 class FundsTable extends Component {
   componentDidMount() {
@@ -42,7 +42,9 @@ class FundsTable extends Component {
         updateFilter={service.fundsChangeFilter}
         paging={{
           totalPages: filters.pages,
-          currentPage: filters.page
+          currentPage: filters.page,
+          itemsOnPage: filters.itemsOnPage,
+          totalItems: data ? data.total : 0
         }}
         updatePaging={service.fundsChangePage}
         toggleFavorite={service.toggleFavoriteFund}

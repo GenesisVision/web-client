@@ -1,6 +1,5 @@
 import "./create-fund-settings.scss";
 
-import classnames from "classnames";
 import { Field, withFormik } from "formik";
 import {
   GVButton,
@@ -11,9 +10,10 @@ import {
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import DepositButtonContainer from "shared/components/deposit-button-submit/deposit-button";
+import DepositDetailsContainer from "shared/components/deposit-details/deposit-details-container";
 import InputImage from "shared/components/form/input-image/input-image";
 import Hint from "shared/components/hint/hint";
-import { RefreshIcon } from "shared/components/icon/refresh-icon";
 import { allowValuesNumberFormat } from "shared/utils/helpers";
 
 import CreateFundSettingsAddAsset from "./create-fund-settings-add-asset/create-fund-settings-add-asset";
@@ -81,7 +81,6 @@ class CreateFundSettings extends React.Component {
       assets: [...this.state.assets],
       remainder: newRemainder
     });
-    this.props.setFieldValue("balance", this.props.balance);
     this.props.setFieldValue("remainder", newRemainder);
     this.props.setFieldValue(
       "assets",
@@ -101,9 +100,7 @@ class CreateFundSettings extends React.Component {
     const {
       t,
       navigateBack,
-      balance,
       author,
-      updateBalance,
       isSubmitting,
       handleSubmit,
       values,
@@ -112,7 +109,8 @@ class CreateFundSettings extends React.Component {
       errors,
       programsInfo,
       onValidateError,
-      setSubmitting
+      setSubmitting,
+      isValid
     } = this.props;
 
     const imageInputError =
@@ -314,47 +312,21 @@ class CreateFundSettings extends React.Component {
             <span className="create-fund-settings__block-number">04</span>
             {t("manager.create-fund-page.settings.deposit-details")}
           </div>
-          <div className="create-fund-settings__fill-block create-fund-settings__fill-block--without-border">
-            <div className="create-fund-settings__deposit-amount-title create-fund-settings__description">
-              {t("manager.create-fund-page.settings.fields.deposit-amount")}
-            </div>
-            <div className="create-fund-settings__deposit-amount-value">
-              {deposit}
-            </div>
-            <div className="create-fund-settings__available-amount">
-              {t(
-                "manager.create-fund-page.settings.fields.available-in-wallet"
-              )}
-              <span
-                className={classnames(
-                  "create-fund-settings__available-amount-value",
-                  {
-                    "create-fund-settings__available-amount-value--error":
-                      balance < deposit
-                  }
-                )}
-              >
-                <NumberFormat
-                  value={balance}
-                  thousandSeparator=" "
-                  displayType="text"
-                  suffix=" GVT"
-                />
-              </span>
-              <span onClick={updateBalance}>{<RefreshIcon />}</span>
-            </div>
-          </div>
+          <DepositDetailsContainer
+            deposit={deposit}
+            className="create-fund-settings__fill-block create-fund-settings__fill-block--without-border"
+            titleClassName="create-fund-settings__description"
+          />
         </form>
         <div className="create-fund-settings__navigation">
-          <GVButton
+          <DepositButtonContainer
             title={t("buttons.create-fund")}
-            color="primary"
-            type="submit"
-            onClick={onSubmit}
-            disabled={isSubmitting}
+            deposit={deposit}
+            onSubmit={onSubmit}
+            disabled={isSubmitting || !isValid}
           >
             {t("buttons.create-fund")}
-          </GVButton>
+          </DepositButtonContainer>
           <GVButton
             variant="text"
             onClick={() => navigateBack(values)}
@@ -383,7 +355,6 @@ export default translate()(
     mapPropsToValues: props => {
       return {
         assets: [],
-        balance: props.balance,
         remainder: 100,
         exitFee: "",
         title: "",

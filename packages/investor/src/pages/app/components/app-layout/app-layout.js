@@ -1,11 +1,11 @@
 import "./app-layout.scss";
 
-import platformActions from "shared/actions/platform-actions";
-import { initOnResizeEvent } from "shared/actions/ui-actions";
 import HeaderContainer from "modules/header/components/header-container";
 import NotificationsContainer from "pages/app/components/notifications/components/notifications-container";
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import platformActions from "shared/actions/platform-actions";
+import { initOnResizeEvent } from "shared/actions/ui-actions";
 
 class AppLayout extends Component {
   componentDidMount() {

@@ -1,5 +1,4 @@
 import { composeClearDataActionType } from "shared/actions/clear-data.factory";
-
 import { EMAIL_PENDING } from "shared/actions/email-pending-actions";
 
 const initialState = {

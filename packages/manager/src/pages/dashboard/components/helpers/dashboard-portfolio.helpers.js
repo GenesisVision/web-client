@@ -1,8 +1,6 @@
 import { EventLogoType } from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo.helper";
 
-export const profitabilityTypes = [
-  EventLogoType.programPeriodEnds
-];
+export const profitabilityTypes = [EventLogoType.programPeriodEnds];
 
 export const isUseProfitability = event =>
   profitabilityTypes.includes(event.type);

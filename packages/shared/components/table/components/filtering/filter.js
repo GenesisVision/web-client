@@ -2,8 +2,8 @@ import "rc-slider/assets/index.css";
 
 import "./filter.scss";
 
-import Popover from "shared/components/popover/popover";
 import React, { Component, Fragment } from "react";
+import Popover from "shared/components/popover/popover";
 
 import FilterArrowIcon from "./filter-arrow-icon";
 

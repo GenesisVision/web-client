@@ -1,11 +1,11 @@
 import "./gv-datepicker.scss";
 
-import Popover from "shared/components/popover/popover";
 import moment from "moment";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import Calendar from "react-calendar";
 import { translate } from "react-i18next";
+import Popover from "shared/components/popover/popover";
 
 export const DATE_FORMAT = "DD-MM-YYYY";
 

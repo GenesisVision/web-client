@@ -48,7 +48,7 @@ class GlobalSearchResult extends PureComponent {
   };
 
   render() {
-    const { t } = this.props;
+    const { t, data } = this.props;
     const { tab } = this.state;
     return (
       <Surface className="global-search-result">
@@ -60,14 +60,17 @@ class GlobalSearchResult extends PureComponent {
             <GVTab
               value={PROGRAMS_TABLE_TAB}
               label={t("global-search-page.programs")}
+              count={data.programs && data.programs.total}
             />
             <GVTab
               value={FUNDS_TABLE_TAB}
               label={t("global-search-page.funds")}
+              count={data.funds && data.funds.total}
             />
             <GVTab
               value={MANAGERS_TABLE_TAB}
               label={t("global-search-page.managers")}
+              count={data.managers && data.managers.total}
             />
           </GVTabs>
         </div>

@@ -3,131 +3,111 @@
 @import "~shared/styles/_sizes.scss";
 
 .programs-rating {
-	&__head {
-		padding-left: $padding-small/2;
-		padding-right: $padding-small/2;
-	}
+  &__head {
+    padding-left: $padding-small/2;
+    padding-right: $padding-small/2;
+  }
 
-	&__tab {
-		display: flex;
-		align-items: center;
-	}
+  &__tab-container {
+    display: inline-block;
+  }
 
-	&__tab-container {
-		display: flex;
-		align-items: stretch;
-		font-size: $font-size-common;
-		padding: 4px 0;
-	}
+  &__back {
+    display: inline-block;
+    font-weight: 600;
+    line-height: 4px;
+    padding-top: 7px;
+    margin-right: 3px;
+  }
 
-	&__back {
-		font-weight: 600;
-		line-height: 4px;
-		padding-top:7px;
-		margin-right: 3px;
-	}
+  &__back-arrow {
+    display: inline-block;
+    border: 1px solid transparent;
+    margin-right: 3px;
+    height: 16.5px;
+    font-family: "Times New Roman";
+  }
 
-	&__back-arrow {
-		border: 1px solid transparent;
-		margin-right: 3px;
-		height: 16.5px;
-		font-family: "Times New Roman";
-	}
+  &__tabs {
+    @include adaptive-padding(bottom, $padding-xsmall);
+    padding-left: $padding-small/2;
+    padding-right: $padding-small/2;
 
-	&__tabs {
-		@include adaptive-padding(bottom, $padding-xsmall);
-		padding-left: $padding-small/2;
-		padding-right: $padding-small/2;
+    .gv-tab {
+      white-space: nowrap;
+    }
+  }
 
-		.gv-tab {
-			white-space: nowrap;
-		}
+  .table__row--pretender {
+    background: linear-gradient(
+      90deg,
+      rgba($background-pretender, 0.13) 1.83%,
+      rgba($background-pretender, 0.03) 100%
+    );
+    background-attachment: fixed;
 
-		.gv-tab--active {
-			.programs-rating__tab-count {
-				background-color: rgba($primary-color, 0.1);
-				color: $primary-color;
-			}
-		}
-	}
+    .table__cell:first-child {
+      border-left: 1px solid $primary-color;
+    }
 
-	.table__row--pretender {
-		background: linear-gradient(90deg, rgba($background-pretender, 0.13) 1.83%, rgba($background-pretender, 0.03) 100%);
-		background-attachment: fixed;
+    .program-avatar__level {
+      border-color: $background-pretender-level;
+    }
 
-		.table__cell:first-child {
-			border-left: 1px solid $primary-color;
-		}
+    &:not(.table__row--head):hover {
+      .program-avatar__level {
+        border-color: $background-pretender-level-hover;
+      }
+    }
 
-		.program-avatar__level {
-			border-color: $background-pretender-level;
-		}
+    &:hover {
+      .program-detailed--pretender .program-avatar__level {
+        border-color: $background-pretender-level-hover;
+      }
+    }
+  }
 
-		&:not(.table__row--head):hover {
-			.program-avatar__level {
-				border-color: $background-pretender-level-hover;
-			}
-		}
+  .program-detailed--pretender {
+    .program-detailed__info {
+      border-left: 1px solid $primary-color;
+    }
+  }
 
-		&:hover {
-			.program-detailed--pretender .program-avatar__level {
-				border-color: $background-pretender-level-hover;
-			}
-		}
-	}
+  &__tab-name {
+    display: inline-block;
+    line-height: 1;
+  }
 
-	.program-detailed--pretender {
-		.program-detailed__info {
-			border-left: 1px solid $primary-color;
-		}
-	}
+  &__tab-arrow {
+    display: inline-block;
+    padding: 0 5px;
+    font-size: $font-size-common;
+    line-height: 1;
+    align-self: center;
+  }
 
-	&__tab-name {
-		display: inline-block;
-		line-height: 1;
-	}
-
-	&__tab-arrow {
-		display: inline-block;
-		padding: 0 5px;
-		font-size: $font-size-common;
-		line-height: 1;
-		align-self: center;
-	}
-
-	&__tab-count {
-		display: inline-block;
-		text-align: center;
-		min-width: 8px;
-		margin-left: 10px;
-		border-radius: 6px;
-		padding: 4px 7px;
-		line-height: 1;
-		background-color: rgba($text-accent-color, 0.05);
-	}
-
-	@include media-breakpoint-landscape-phone() {
-		&__tabs {
-			padding-left: $padding-small;
-			padding-right: $padding-small;
-		}
-		&__head {
-			padding-left: $padding-small;
-			padding-right: $padding-small;
-		}
-	}
+  @include media-breakpoint-landscape-phone() {
+    &__tabs {
+      padding-left: $padding-small;
+      padding-right: $padding-small;
+    }
+    &__head {
+      padding-left: $padding-small;
+      padding-right: $padding-small;
+    }
+  }
 }
 
 .programs-rating-stats {
-	@include adaptive-padding(top,$padding-small);
-	padding-left: $padding-small/2;
-	padding-right: $padding-small/2;
-	display: flex;
-	align-items: center;
-	flex-wrap: wrap;
+  @include adaptive-padding(top, $padding-small);
+  padding-left: $padding-small/2;
+  padding-right: $padding-small/2;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 
-	@include media-breakpoint-landscape-phone() {
-		padding-left: $padding-small;
-		padding-right: $padding-small;
-	}
+  @include media-breakpoint-landscape-phone() {
+    padding-left: $padding-small;
+    padding-right: $padding-small;
+  }
 }

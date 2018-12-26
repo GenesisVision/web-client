@@ -22,6 +22,8 @@ const WalletWithdrawForm = ({
   wallets,
   values,
   disabled,
+  isValid,
+  dirty,
   errorMessage
 }) => {
   const { currency, amount } = values;
@@ -134,7 +136,7 @@ const WalletWithdrawForm = ({
             type="submit"
             variant="contained"
             color="primary"
-            disabled={disabled}
+            disabled={disabled || !isValid || !dirty}
           >
             {t("buttons.confirm")}
           </GVButton>

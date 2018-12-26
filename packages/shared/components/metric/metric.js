@@ -1,9 +1,9 @@
-import { UncontrolledTooltip } from "reactstrap";
+import "./metric.css";
+
 import classnames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
-
-import "./metric.css";
+import { UncontrolledTooltip } from "reactstrap";
 
 const Metric = ({ value, description, id, tooltip, bubble, className }) => {
   const tooltipId = `description-${id}`;

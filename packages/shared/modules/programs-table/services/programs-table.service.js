@@ -6,11 +6,6 @@ import {
 } from "pages/programs/programs.routes";
 import qs from "qs";
 import { push } from "react-router-redux";
-import {
-  PROGRAMS_COLUMNS,
-  PROGRAMS_TABLE_FILTERS,
-  SORTING_FILTER_VALUE
-} from "../components/programs-table/programs.constants";
 import { composeFilters } from "shared/components/table/helpers/filtering.helpers";
 import {
   calculateSkipAndTake,
@@ -21,6 +16,11 @@ import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
 
 import * as programTableActions from "../actions/programs-table.actions";
+import {
+  PROGRAMS_COLUMNS,
+  PROGRAMS_TABLE_FILTERS,
+  SORTING_FILTER_VALUE
+} from "../components/programs-table/programs.constants";
 
 const DEFAULT_ITEMS_ON_PAGE = 12;
 
@@ -132,7 +132,8 @@ export const getProgramsFilters = () => (dispatch, getState) => {
     page,
     pages,
     sorting,
-    filtering
+    filtering,
+    itemsOnPage: DEFAULT_ITEMS_ON_PAGE
   };
   return filters;
 };

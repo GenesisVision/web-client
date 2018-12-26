@@ -2,9 +2,9 @@ import { combineReducers } from "redux";
 import apiReducerFactory from "shared/reducers/api-reducer/api-reducer";
 
 import {
+  LEVELUP_SUMMARY,
   PROGRAMS_RATING,
-  SELF_PROGRAMS_RATING,
-  LEVELUP_SUMMARY
+  SELF_PROGRAMS_RATING
 } from "../actions/programs-rating.actions";
 
 const allProgramsRatingReducer = apiReducerFactory({

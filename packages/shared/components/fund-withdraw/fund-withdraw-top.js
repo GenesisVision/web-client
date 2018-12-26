@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { translate } from "react-i18next";
-import { formatValue } from "shared/utils/formatter";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import { formatValue } from "shared/utils/formatter";
 
 const FundWithdrawTop = ({ t, availableToWithdraw, title }) => {
   return (

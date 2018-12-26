@@ -1,13 +1,14 @@
 import "./currency-select.scss";
 
 import classnames from "classnames";
-import CurrencySelect from "./currency-select";
-import { HEADER_CURRENCY_VALUES } from "../currency-select.constants";
-import { updateCurrency } from "../services/currency-select.service";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+
+import { HEADER_CURRENCY_VALUES } from "../currency-select.constants";
+import { updateCurrency } from "../services/currency-select.service";
+import CurrencySelect from "./currency-select";
 
 class CurrencySelectContainer extends Component {
   handleChange = event => {

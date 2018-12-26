@@ -23,12 +23,14 @@ class HeaderContainer extends Component {
       notificationsToggle,
       fetchProfileHeaderInfo,
       isAuthenticated,
+      backPath,
       ...other
     } = this.props;
     return (
       <Header
         {...info.data}
         {...other}
+        backPath={backPath}
         isAuthenticated={isAuthenticated}
         logout={logout}
         openNotifications={notificationsToggle}
@@ -49,7 +51,8 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => ({
   ...state.profileHeader,
-  isAuthenticated: state.authData.isAuthenticated
+  isAuthenticated: state.authData.isAuthenticated,
+  backPath: state.routing.location.pathname
 });
 
 export default connect(

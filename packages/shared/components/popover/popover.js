@@ -1,10 +1,10 @@
 import "./popover.scss";
 
 import classnames from "classnames";
-import Modal from "shared/components/modal/modal";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import Modal from "shared/components/modal/modal";
 
 const MARGIN_OFFSET = 10;
 

@@ -1,5 +1,4 @@
 import { FilterType } from "../../../helpers/filtering.helpers";
-
 import {
   ASSET_TYPE_FILTER_DEFAULT_VALUE,
   ASSET_TYPE_FILTER_NAME

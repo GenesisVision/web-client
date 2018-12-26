@@ -6,7 +6,8 @@ import { translate } from "react-i18next";
 import Surface from "shared/components/surface/surface";
 
 import BrokerCard from "./broker-card/broker-card";
-import { comingSoonBrokers } from "./coming-soon-brokers";
+import { BrokerCardState } from "./broker-card/broker-card.constants";
+import { comingSoonBrokers } from "./create-program-broker.constants";
 
 const getLeverageDescription = ({ leverageMax, leverageMin }) => {
   let result;
@@ -25,7 +26,8 @@ const CreateProgramBroker = ({
   brokers,
   navigateToSettings,
   choosedBroker,
-  chooseBroker
+  chooseBroker,
+  isForexAllowed
 }) => (
   <div className="create-program-broker-container">
     <div className="create-program-broker">
@@ -34,12 +36,21 @@ const CreateProgramBroker = ({
           <BrokerCard
             key={broker.name + broker.description}
             broker={broker}
-            isActive={broker === choosedBroker}
-            onChoose={chooseBroker}
+            isSelected={broker === choosedBroker}
+            onSelect={chooseBroker}
+            cardState={
+              !isForexAllowed && broker.isForex
+                ? BrokerCardState.notAvailable
+                : BrokerCardState.active
+            }
           />
         ))}
         {comingSoonBrokers.map(broker => (
-          <BrokerCard key={broker.name} broker={broker} isComingSoon={true} />
+          <BrokerCard
+            key={broker}
+            broker={{ name: broker }}
+            cardState={BrokerCardState.comingSoon}
+          />
         ))}
 
         <div className="create-program-broker__navigation">
@@ -69,7 +80,13 @@ const CreateProgramBroker = ({
             {t("manager.create-program-page.broker-info.terms")}
           </div>
           <div className="create-program-broker__info-text">
-            {choosedBroker.terms}
+            <a
+              href={choosedBroker.terms}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Read Terms
+            </a>
           </div>
         </div>
         <div className="create-program-broker__row create-program-broker__row--small">
@@ -80,14 +97,14 @@ const CreateProgramBroker = ({
             {getLeverageDescription(choosedBroker)}
           </div>
         </div>
-        <div className="create-program-broker__row create-program-broker__row--small">
+        {/*<div className="create-program-broker__row create-program-broker__row--small">
           <div className="create-program-broker__info-title">
             {t("manager.create-program-page.broker-info.fee")}
           </div>
           <div className="create-program-broker__info-text">
             {choosedBroker.fee} %
           </div>
-        </div>
+        </div>*/}
         <div className="create-program-broker__row">
           <div className="create-program-broker__info-title">
             {t("manager.create-program-page.broker-info.assets")}

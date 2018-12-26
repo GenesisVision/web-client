@@ -7,10 +7,7 @@
   align-items: stretch;
   &__statistic,
   &__chart {
-    margin-top: $padding-big-mobile;
-    @include media-breakpoint-landscape-phone() {
-      margin-top: $padding-big;
-    }
+    @include adaptive-margin(top, $padding-medium);
   }
   &__statistic {
     display: flex;

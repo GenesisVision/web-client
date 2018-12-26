@@ -16,9 +16,9 @@ import {
 } from "shared/components/funds/fund-details/services/fund-details.service";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
 import Page from "shared/components/page/page";
+import { INVESTOR } from "shared/constants/constants";
 
 import { LOGIN_ROUTE } from "../../auth/login/login.routes";
-import { INVESTOR } from "shared/constants/constants";
 
 export const FundDetailContext = React.createContext({
   updateDetails: () => {}
