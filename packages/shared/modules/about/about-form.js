@@ -8,7 +8,14 @@ import { compose } from "redux";
 
 import styles from "./About.module.scss";
 
-const AboutForm = ({ t, handleSubmit, disabled, errorMessage }) => {
+const AboutForm = ({
+  t,
+  handleSubmit,
+  disabled,
+  errorMessage,
+  isValid,
+  dirty
+}) => {
   return (
     <form id="about-manager" onSubmit={handleSubmit} className={styles.about}>
       <Scrollbars autoHeight autoHeightMax={14000}>
@@ -42,7 +49,10 @@ const AboutForm = ({ t, handleSubmit, disabled, errorMessage }) => {
               <td />
               <td className="profile__right">
                 <div className="profile__row">
-                  <GVButton type="submit" disabled={disabled}>
+                  <GVButton
+                    type="submit"
+                    disabled={disabled || !isValid || !dirty}
+                  >
                     {t("buttons.save")}
                   </GVButton>
                 </div>
