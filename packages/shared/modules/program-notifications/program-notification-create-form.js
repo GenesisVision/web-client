@@ -9,7 +9,7 @@ import { number, object } from "yup";
 
 class ProgramNotificationCreateForm extends Component {
   render() {
-    const { t, program, handleSubmit, values } = this.props;
+    const { t, program, handleSubmit, values, isValid, dirty } = this.props;
     const { conditionType } = values;
     const isProfit = conditionType === "Profit";
     return (
@@ -56,7 +56,11 @@ class ProgramNotificationCreateForm extends Component {
           />
           <div className="form-error">{this.props.errorMessage}</div>
           <div className="dialog__buttons">
-            <GVButton color="primary" type="submit">
+            <GVButton
+              color="primary"
+              type="submit"
+              disabled={!isValid || !dirty}
+            >
               {t("buttons.create")}
             </GVButton>
           </div>
