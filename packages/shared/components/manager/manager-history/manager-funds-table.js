@@ -5,12 +5,11 @@ import React, { Component } from "react";
 import { translate } from "react-i18next";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import TableModule from "shared/components/table/components/table-module";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { toggleFavoriteFund } from "shared/modules/favorite-asset/services/favorite-fund.service";
-import FundsTableRow from "shared/modules/funds-table/components/funds-table/fund-table-row";
 import { FUNDS_TABLE_COLUMNS } from "shared/modules/funds-table/components/funds-table/funds-table.constants";
 
+import FundsTableModule from "../../../modules/funds-table/components/funds-table/funds-table-modulle";
 import {
   MANAGER_DEFAULT_FILTERS,
   MANAGER_FILTERING
@@ -18,7 +17,6 @@ import {
 import { fetchManagerFunds } from "../services/manager.service";
 
 class ManagerFunds extends Component {
-  state = {};
   fetchManagerFunds = filters => {
     const { managerId } = this.props;
     return fetchManagerFunds({ ...filters, managerId });
@@ -39,7 +37,7 @@ class ManagerFunds extends Component {
   render() {
     const { t, title, isAuthenticated } = this.props;
     return (
-      <TableModule
+      <FundsTableModule
         title={title}
         getItems={this.fetchManagerFunds}
         defaultFilters={MANAGER_DEFAULT_FILTERS}
@@ -54,24 +52,8 @@ class ManagerFunds extends Component {
             startLabel={t("filters.date-range.program-start")}
           />
         )}
-        renderHeader={column => {
-          if (!isAuthenticated && column.name === "favorite") return null;
-          return (
-            <span
-              className={`funds-table__cell funds-table__cell--${column.name}`}
-            >
-              {t(`funds-page.funds-header.${column.name}`)}
-            </span>
-          );
-        }}
-        renderBodyRow={(fund, updateRow) => (
-          <FundsTableRow
-            title={title}
-            fund={fund}
-            toggleFavorite={this.toggleFavorite(fund, updateRow)}
-            isAuthenticated={isAuthenticated}
-          />
-        )}
+        toggleFavorite={this.toggleFavorite}
+        isAuthenticated={isAuthenticated}
       />
     );
   }

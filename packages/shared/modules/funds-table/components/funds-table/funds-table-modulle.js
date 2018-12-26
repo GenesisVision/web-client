@@ -6,7 +6,6 @@ import FundsTableHeaderCell from "./funds-table-header-cell";
 import { FUNDS_TABLE_COLUMNS } from "./funds-table.constants";
 
 class FundsTableModule extends Component {
-  toggleFavorite = () => {};
   render() {
     const {
       getItems,
@@ -16,7 +15,8 @@ class FundsTableModule extends Component {
       defaultFilters,
       paging,
       isAuthenticated,
-      title
+      title,
+      toggleFavorite
     } = this.props;
 
     return (
@@ -35,11 +35,11 @@ class FundsTableModule extends Component {
             isAuthenticated={isAuthenticated}
           />
         )}
-        renderBodyRow={fund => (
+        renderBodyRow={(fund, updateRow) => (
           <FundsTableRow
             title={title}
             fund={fund}
-            toggleFavorite={this.toggleFavorite}
+            toggleFavorite={toggleFavorite(fund, updateRow)}
             isAuthenticated={isAuthenticated}
           />
         )}

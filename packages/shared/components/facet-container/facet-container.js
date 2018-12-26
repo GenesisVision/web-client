@@ -4,6 +4,8 @@ import { withRouter } from "react-router-dom";
 import { bindActionCreators, compose } from "redux";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
 
+import { withAuthenticated } from "../../decorators/is-authenticated";
+
 class FacetContainer extends Component {
   state = {
     facetData: null
@@ -30,7 +32,7 @@ class FacetContainer extends Component {
   };
 
   render() {
-    const { TableContainer } = this.props;
+    const { TableContainer, isAuthenticated } = this.props;
     const { facetData } = this.state;
     if (!facetData || facetData.isPending) return null;
     if (facetData.notFound) return <NotFoundPage />;
@@ -38,6 +40,7 @@ class FacetContainer extends Component {
       <TableContainer
         title={facetData.facet.title}
         getItems={this.getFacetItems}
+        isAuthenticated={isAuthenticated}
       />
     );
   }
@@ -59,6 +62,7 @@ const mapDispatchToProps = (dispatch, props) => {
 
 export default compose(
   withRouter,
+  withAuthenticated,
   connect(
     mapStateToProps,
     mapDispatchToProps

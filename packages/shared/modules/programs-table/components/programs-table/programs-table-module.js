@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import TableModule from "shared/components/table/components/table-module";
-import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 
 import ProgramTableHeaderCell from "./program-table-header-cell";
 import ProgramTableRow from "./program-table-row";
@@ -17,7 +16,8 @@ class ProgramTableModule extends Component {
       paging,
       isAuthenticated,
       showRating,
-      title
+      title,
+      toggleFavorite
     } = this.props;
 
     return (
@@ -36,12 +36,12 @@ class ProgramTableModule extends Component {
             isAuthenticated={isAuthenticated}
           />
         )}
-        renderBodyRow={program => (
+        renderBodyRow={(program, updateRow) => (
           <ProgramTableRow
             showRating={showRating}
             title={title}
             program={program}
-            toggleFavorite={this.toggleFavorite}
+            toggleFavorite={toggleFavorite(program, updateRow)}
             isAuthenticated={isAuthenticated}
           />
         )}
