@@ -1,6 +1,6 @@
 import { Component } from "react";
-import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
 import React from "react";
+import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
 import Popover from "shared/components/popover/popover";
 
 class DashboardProgramsStatusBlock extends Component {

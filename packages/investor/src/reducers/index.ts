@@ -5,8 +5,9 @@ import headerReducer, {
 import programDepositReducer from "modules/program-deposit/reducer/program-deposit.reducer";
 import notificationsReducer from "pages/app/components/notifications/reducers/notifications.reducers";
 import { loadingBarReducer } from "react-redux-loading-bar";
-import { routerReducer } from "react-router-redux";
+import { routerReducer, RouterState } from "react-router-redux";
 import { combineReducers } from "redux";
+import programsRatingReducer from "shared/components/programs-rating/reducers/programs-rating.reducers";
 import walletReducer from "shared/components/wallet/reducers/wallet.reducers";
 import alertMessagesReducer from "shared/modules/alert-message/reducers/alert-message-reducers";
 import fundNotificationsReducer from "shared/modules/fund-notifications/reducers/fund-notifications.reducers";
@@ -27,7 +28,6 @@ import loginReducer from "pages/auth/login/reducers/login.reducers";
 import signUpReducer from "pages/auth/signup/reducers/signup.reducers";
 import dashboardReducer from "pages/dashboard/reducers/dashboard.reducers";
 import managerReducer from "pages/manager/reducers/manager.reducers";
-import programsRatingReducer from "shared/components/programs-rating/reducers/programs-rating.reducers";
 import { NotificationSettingList } from "gv-api-web";
 import { IAuthReducer } from "shared/reducers/auth-reducer";
 
@@ -35,6 +35,7 @@ export interface IState {
   notificationSettings: NotificationSettingList;
   profileHeader: IHeaderReducer;
   authData: IAuthReducer;
+  routing: RouterState;
 }
 
 export default combineReducers({

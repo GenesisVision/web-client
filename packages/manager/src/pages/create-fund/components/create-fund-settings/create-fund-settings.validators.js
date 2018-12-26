@@ -71,13 +71,7 @@ const createFundSettingsValidationSchema = ({ t, ...props }) =>
       .max(0, t("manager.create-fund-page.settings.validation.assets-share")),
     assets: array()
       .required(t("manager.create-fund-page.settings.validation.assets-count"))
-      .min(2, t("manager.create-fund-page.settings.validation.assets-count")),
-    balance: number()
-      .required()
-      .min(
-        props.deposit,
-        t("manager.create-fund-page.settings.validation.deposit-min")
-      )
+      .min(2, t("manager.create-fund-page.settings.validation.assets-count"))
   });
 
 export default createFundSettingsValidationSchema;

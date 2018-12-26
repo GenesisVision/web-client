@@ -1,5 +1,4 @@
 import { alertMessageActions } from "./alert-message-actions";
-
 import * as alertMessageActionTypes from "./alert-message-actions.constants";
 
 describe("alertMessageActions", () => {

@@ -16,7 +16,7 @@ export const calcPercent = (value: number, start: number, end: number) => {
   let progress = value - start;
   if (duration === 0 || progress < 0) return 0;
   if (progress > duration) return 100;
-  return progress * 100 / duration;
+  return (progress * 100) / duration;
 };
 
 const FundAssetRatio: React.SFC<GVProgramPeriodProps> = ({

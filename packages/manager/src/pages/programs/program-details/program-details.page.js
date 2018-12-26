@@ -24,6 +24,7 @@ import { LOGIN_ROUTE } from "../../auth/login/login.routes";
 import { fetchPortfolioEvents } from "../../dashboard/services/dashboard-events.services";
 import ClosePeriodContainer from "./close-period/close-period-container";
 import CloseProgramContainer from "./close-program/close-program-container";
+import { fetchHistoryCounts } from "./service/program-details.service";
 
 export const ProgramDetailContext = React.createContext({
   updateDetails: () => {}
@@ -136,6 +137,7 @@ class ProgramDetailsPage extends PureComponent {
                     assetId: this.description.id
                   })
                 }
+                fetchHistoryCounts={fetchHistoryCounts}
                 programId={this.description.id}
                 currency={currency}
                 isInvested={isInvested}

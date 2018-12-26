@@ -1,8 +1,8 @@
 import React from "react";
 import { translate } from "react-i18next";
+import { Table } from "shared/components/table/components";
 import ProgramTableRowShort from "shared/modules/programs-table/components/programs-table/program-table-row-short";
 import { PROGRAMS_COLUMNS } from "shared/modules/programs-table/components/programs-table/programs.constants";
-import { Table } from "shared/components/table/components";
 
 const ProgramsTable = ({ t, isPending, data, title }) => {
   return (

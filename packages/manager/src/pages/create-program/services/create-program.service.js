@@ -9,7 +9,18 @@ import filesService from "shared/services/file-service";
 
 import { getDataWithoutSuffixes } from "../helpers/create-program.helpers";
 
-export const fetchBrokers = () => brokersApi.v10BrokersGet();
+export const fetchBrokers = () =>
+  brokersApi.v10BrokersGet().then(data => {
+    const sortedBrokers = [];
+    data.brokers.forEach(broker => {
+      if (broker.name === "Genesis Markets") {
+        sortedBrokers.unshift(broker);
+      } else {
+        sortedBrokers.push(broker);
+      }
+    });
+    return { brokers: sortedBrokers };
+  });
 
 export const fetchBalance = () => dispatch =>
   dispatch(fetchProfileHeaderInfo());

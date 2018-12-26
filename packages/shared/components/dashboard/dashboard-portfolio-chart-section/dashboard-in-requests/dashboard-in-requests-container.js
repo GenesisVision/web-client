@@ -1,11 +1,12 @@
 import "./dashboard-in-requests.scss";
 
-import React, { PureComponent } from "react";
+import React, { Fragment, PureComponent } from "react";
 import Scrollbars from "react-custom-scrollbars";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
+import { DashboardChartRequestLoader } from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-loaders";
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
 import Popover from "shared/components/popover/popover";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
@@ -37,12 +38,11 @@ class DashboardInRequestsContainer extends PureComponent {
     );
   };
 
-  render() {
+  renderRequest = () => {
     const { t, inRequests, isPending, service } = this.props;
-    if (!inRequests || isPending) return null;
-
+    if (!inRequests || isPending) return <DashboardChartRequestLoader />;
     return (
-      <div className="dashboard-request">
+      <Fragment>
         <StatisticItem
           label={t(
             `${
@@ -80,8 +80,12 @@ class DashboardInRequestsContainer extends PureComponent {
             </div>
           </Scrollbars>
         </Popover>
-      </div>
+      </Fragment>
     );
+  };
+
+  render() {
+    return <div className="dashboard-request">{this.renderRequest()}</div>;
   }
 }
 

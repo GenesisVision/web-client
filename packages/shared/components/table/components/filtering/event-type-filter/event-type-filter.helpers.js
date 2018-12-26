@@ -1,5 +1,4 @@
 import { FilterType } from "../../../helpers/filtering.helpers";
-
 import {
   EVENT_TYPE_FILTER_DEFAULT_VALUE,
   EVENT_TYPE_FILTER_NAME

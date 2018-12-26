@@ -19,6 +19,7 @@ export interface IHeaderContainerProps {
   fetchTwoFactor(): any;
   logout(): any;
   notificationsToggle(): any;
+  backPath: string;
 }
 
 class HeaderContainer extends Component<IHeaderContainerProps> {
@@ -28,11 +29,18 @@ class HeaderContainer extends Component<IHeaderContainerProps> {
   }
 
   render() {
-    const { info, logout, notificationsToggle, isAuthenticated } = this.props;
-
+    const {
+      info,
+      logout,
+      notificationsToggle,
+      fetchProfileHeaderInfo,
+      isAuthenticated,
+      backPath
+    } = this.props;
     return (
       <Header
         profileHeader={info}
+        backPath={backPath}
         isAuthenticated={isAuthenticated}
         logout={logout}
         openNotifications={notificationsToggle}
@@ -53,7 +61,8 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state: IState) => ({
   info: state.profileHeader.info.data,
-  isAuthenticated: state.authData.isAuthenticated
+  isAuthenticated: state.authData.isAuthenticated,
+  backPath: state.routing.location ? state.routing.location.pathname : null
 });
 
 export default connect(

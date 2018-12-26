@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { fetchTwoFactor } from "shared/actions/2fa-actions";
 import { GLOBAL_SEARCH_ROUTE } from "shared/components/global-search/global-search.routes";
 import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
-import Header from "shared/components/header/header.tsx";
+import Header from "shared/components/header/header";
 
 import { logout } from "../../../pages/auth/login/services/login.service";
 
@@ -23,11 +23,14 @@ class HeaderContainer extends Component {
       notificationsToggle,
       fetchProfileHeaderInfo,
       isAuthenticated,
+      backPath,
       ...other
     } = this.props;
     return (
       <Header
-        profileHeader={info.data}
+        {...info.data}
+        {...other}
+        backPath={backPath}
         isAuthenticated={isAuthenticated}
         logout={logout}
         openNotifications={notificationsToggle}
@@ -49,7 +52,8 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => ({
   ...state.profileHeader,
-  isAuthenticated: state.authData.isAuthenticated
+  isAuthenticated: state.authData.isAuthenticated,
+  backPath: state.routing.location.pathname
 });
 
 export default connect(

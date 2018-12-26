@@ -1,12 +1,11 @@
 import "./dashboard-portfolio-chart-section.scss";
 
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { compose } from "redux";
 import DashboardInRequestsContainer from "shared/components/dashboard/dashboard-portfolio-chart-section/dashboard-in-requests/dashboard-in-requests-container";
-import Surface from "shared/components/surface/surface";
 
 import {
   cancelRequest,
@@ -25,16 +24,10 @@ class DashboardPortfolioChartSection extends Component {
 
   render() {
     const { t, isNewUser, assets } = this.props;
-    if (isNewUser) {
-      return (
-        <Surface className="dashboard-portfolio-chart-section">
-          <DashboardGetStarted />
-        </Surface>
-      );
-    }
-    if (!assets) return null;
+    if (isNewUser) return <DashboardGetStarted />;
+
     return (
-      <Surface className="dashboard-portfolio-chart-section">
+      <Fragment>
         <h3 className="dashboard-portfolio-chart-section__heading">
           {t("manager.dashboard-page.chart-section.header")}
         </h3>
@@ -45,8 +38,8 @@ class DashboardPortfolioChartSection extends Component {
             getInRequests={getInRequests}
           />
         </div>
-        <DashboardPortfolioChartContainer />
-      </Surface>
+        <DashboardPortfolioChartContainer assets={assets} key={!assets} />
+      </Fragment>
     );
   }
 }

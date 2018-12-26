@@ -11,14 +11,16 @@ export const Icon = ({
   primary,
   secondary,
   children,
-  rotate
+  rotate,
+  selected
 }) => {
   return (
     <span
       className={classnames("icon", `icon--${type}`, className, {
         "icon--primary": primary,
         "icon--secondary": secondary,
-        "icon--rotate": rotate
+        "icon--rotate": rotate,
+        "icon--selected": selected
       })}
       onClick={onClick}
     >
@@ -31,64 +33,8 @@ Icon.propTypes = {
   type: PropTypes.string.isRequired,
   primary: PropTypes.bool,
   secondary: PropTypes.bool,
-  className: PropTypes.string
-};
-
-export const DashboardIcon = props => {
-  return <Icon type={"dashboard"} {...props} />;
-};
-
-export const RingIcon = props => {
-  return <Icon type={"ring"} {...props} />;
-};
-
-export const RingCircleIcon = props => {
-  return <Icon type={"ring-circle"} {...props} />;
-};
-
-export const WalletIcon = props => {
-  return <Icon type={"wallet"} {...props} />;
-};
-
-export const DetailsIcon = props => {
-  return <Icon type={"details"} {...props} />;
-};
-
-export const SettingsIcon = props => {
-  return <Icon type={"settings"} {...props} />;
-};
-
-export const LogoutIcon = props => {
-  return <Icon type={"logout"} {...props} />;
-};
-export const QuestionCircleIcon = props => {
-  return <Icon type={"question-circle"} {...props} />;
-};
-
-export const ControlsIcon = props => {
-  return <Icon type={"controls"} {...props} />;
-};
-
-export const SearchIcon = props => {
-  return <Icon type={"search"} {...props} />;
-};
-
-export const ArrowIcon = props => {
-  return <Icon type={"arrow"} {...props} />;
-};
-
-export const MenuIcon = props => {
-  return <Icon type={"menu"} {...props} />;
-};
-
-export const TableIcon = props => {
-  return <Icon type={"table"} {...props} />;
-};
-
-export const CardsIcon = props => {
-  return <Icon type={"cards"} {...props} />;
-};
-
-export const ActionsCircleIcon = props => {
-  return <Icon type={"actions-circle"} {...props} />;
+  rotate: PropTypes.bool,
+  selected: PropTypes.bool,
+  className: PropTypes.string,
+  onClick: PropTypes.func
 };

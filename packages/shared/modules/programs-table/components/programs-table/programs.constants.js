@@ -6,6 +6,11 @@ import {
 import { FilterType } from "shared/components/table/helpers/filtering.helpers";
 import { CURRENCY_VALUES } from "shared/modules/currency-select/currency-select.constants";
 
+import {
+  DEFAULT_DATE_RANGE_FILTER_VALUE,
+  DateRangeFilterTypes
+} from "../../../../components/table/components/filtering/date-range-filter/date-range-filter.constants";
+
 export const LEVEL_FILTER_NAME = "level";
 export const CURRENCY_FILTER_NAME = "programCurrency";
 export const DATE_RANGE_FILTER_NAME = "dateRange";
@@ -49,7 +54,11 @@ export const PROGRAMS_TABLE_FILTERS = [
       composeApiRequestValue: composeRequestValue(
         SERVER_DATE_RANGE_MIN_FILTER_NAME,
         SERVER_DATE_RANGE_MAX_FILTER_NAME
-      )
+      ),
+      defaultValue: {
+        ...DEFAULT_DATE_RANGE_FILTER_VALUE,
+        type: DateRangeFilterTypes.lastWeek
+      }
     }),
     validate: validateDateRange
   }

@@ -32,13 +32,15 @@ $padding: $padding-small;
   }
   &__footer {
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
+    align-items: baseline;
     padding: $padding/2;
     font-size: $td-font-size/1.5;
     padding: 0 $padding-small/2;
     .pagination {
       margin: 0;
+    }
+    .pager {
+      margin-left: auto;
     }
     @include media-breakpoint-landscape-phone() {
       padding: 0 $padding-small;
@@ -213,6 +215,9 @@ $padding: $padding-small;
     &__head {
       font-size: $th-font-size;
     }
+    &__filters {
+      font-size: $td-font-size;
+    }
     &__body {
       font-size: $td-font-size;
     }
@@ -232,10 +237,19 @@ $padding: $padding-small;
         }
       }
     }
+  }
+  @include media-breakpoint-tablet() {
     &__filters {
-      justify-content: flex-end;
       font-size: $td-font-size;
       padding-bottom: 0;
+    }
+  }
+  @media (min-width: 900px) {
+    &__filters {
+      justify-content: flex-end;
+      order: 0;
+      flex-basis: 0;
+      padding-top: 0;
 
       .filter {
         margin-left: 20px;
@@ -246,14 +260,6 @@ $padding: $padding-small;
           padding-right: 0;
         }
       }
-    }
-  }
-  @media (min-width: 900px) {
-    &__filters {
-      justify-content: flex-end;
-      order: 0;
-      flex-basis: 0;
-      padding-top: 0;
     }
   }
 

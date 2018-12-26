@@ -33,7 +33,9 @@ class ProgramWithdrawForm extends Component {
       periodEnds,
       programCurrency,
       accountCurrency,
-      errors
+      errors,
+      isValid,
+      dirty
     } = this.props;
     return (
       <form
@@ -49,7 +51,7 @@ class ProgramWithdrawForm extends Component {
             accountCurrency={accountCurrency}
             availableToWithdraw={availableToWithdraw}
             onClick={this.goToConfirmStep}
-            disabled={errors.amount !== undefined}
+            disabled={errors.amount !== undefined || !isValid || !dirty}
           />
         )}
         {this.state.step === CONFIRM_STEP && (

@@ -1,4 +1,3 @@
-import Sidebar from "shared/components/sidebar/sidebar";
 import { notificationsToggle } from "pages/app/components/notifications/actions/notifications.actions";
 import Notifications from "pages/app/components/notifications/components/notifications";
 import {
@@ -8,6 +7,7 @@ import {
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import Sidebar from "shared/components/sidebar/sidebar";
 
 const NotificationsContainer = ({
   service,

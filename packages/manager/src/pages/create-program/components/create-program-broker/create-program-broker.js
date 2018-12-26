@@ -6,7 +6,8 @@ import { translate } from "react-i18next";
 import Surface from "shared/components/surface/surface";
 
 import BrokerCard from "./broker-card/broker-card";
-import { comingSoonBrokers } from "./coming-soon-brokers";
+import { BrokerCardState } from "./broker-card/broker-card.constants";
+import { comingSoonBrokers } from "./create-program-broker.constants";
 
 const getLeverageDescription = ({ leverageMax, leverageMin }) => {
   let result;
@@ -25,7 +26,8 @@ const CreateProgramBroker = ({
   brokers,
   navigateToSettings,
   choosedBroker,
-  chooseBroker
+  chooseBroker,
+  isForexAllowed
 }) => (
   <div className="create-program-broker-container">
     <div className="create-program-broker">
@@ -34,12 +36,21 @@ const CreateProgramBroker = ({
           <BrokerCard
             key={broker.name + broker.description}
             broker={broker}
-            isActive={broker === choosedBroker}
-            onChoose={chooseBroker}
+            isSelected={broker === choosedBroker}
+            onSelect={chooseBroker}
+            cardState={
+              !isForexAllowed && broker.isForex
+                ? BrokerCardState.notAvailable
+                : BrokerCardState.active
+            }
           />
         ))}
         {comingSoonBrokers.map(broker => (
-          <BrokerCard key={broker.name} broker={broker} isComingSoon={true} />
+          <BrokerCard
+            key={broker}
+            broker={{ name: broker }}
+            cardState={BrokerCardState.comingSoon}
+          />
         ))}
 
         <div className="create-program-broker__navigation">

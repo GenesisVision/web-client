@@ -1,7 +1,8 @@
 {
   "table": {
     "loading": "Loading...",
-    "no-items": "There are no items."
+    "no-items": "There are no items.",
+    "items-counter": "Showing {{from}}-{{to}} of {{total}}"
   },
   "alerts": {
     "clear-all": "Clear all",
@@ -759,6 +760,7 @@
       }
     },
     "password-change": {
+      "title": "Change password",
       "current-password": "Current password",
       "password": "Password",
       "confirm-password": "Confirm password",
@@ -1003,7 +1005,8 @@
         "settings": "Settings"
       },
       "broker-card": {
-        "coming-soon": "Coming soon"
+        "coming-soon": "Coming soon",
+        "not-available": "Not available"
       },
       "broker-info": {
         "about": "About",

@@ -78,3 +78,15 @@ export const composeAssetChart = () => (dispatch, getState) => {
 export const setPeriod = period => (dispatch, getState) => {
   dispatch(actions.setPeriod(period));
 };
+
+export const fetchAssetsCount = () => {
+  const authorization = authService.getAuthArg();
+  const filtering = { take: 0 };
+  return Promise.all([
+    managerApi.v10ManagerProgramsGet(authorization, filtering),
+    managerApi.v10ManagerFundsGet(authorization, filtering)
+  ]).then(([programsData, fundsData]) => ({
+    programsCount: programsData.total,
+    fundsCount: fundsData.total
+  }));
+};

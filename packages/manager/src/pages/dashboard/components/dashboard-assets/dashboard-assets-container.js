@@ -1,6 +1,6 @@
 import { GVButton } from "gv-react-components";
 import { CREATE_FUND_PAGE_ROUTE } from "pages/create-fund/create-fund.constants";
-import { CREATE_PROGRAM_PAGE_ROUTE } from "pages/create-program/create-program.constants";
+import { CREATE_PROGRAM_PAGE_ROUTE } from "pages/create-program/create-program.routes";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
@@ -10,8 +10,10 @@ import DashboardAssets from "shared/components/dashboard/dashboard-assets/dashbo
 import { ChartIcon } from "shared/components/icon/chart-icon";
 import { MANAGER } from "shared/constants/constants";
 
+import { clearDashboardAssetsTable } from "../../actions/dashboard.actions";
 import { getDashboardFunds } from "../../services/dashboard-funds.service";
 import { getDashboardPrograms } from "../../services/dashboard-programs.service";
+import { fetchAssetsCount } from "../../services/dashboard.service";
 
 class DashboardAssetsContainer extends Component {
   getAssets = () => {
@@ -76,8 +78,10 @@ class DashboardAssetsContainer extends Component {
 
     return (
       <DashboardAssets
+        clearAssets={this.props.service.clearDashboardAssetsTable}
         getDashboardPrograms={getDashboardPrograms}
         getDashboardFunds={getDashboardFunds}
+        fetchAssetsCount={fetchAssetsCount}
         createProgramButtonToolbar={createButtonToolbar(
           t("buttons.create-program"),
           CREATE_PROGRAM_PAGE_ROUTE
@@ -108,7 +112,7 @@ const createButtonToolbar = (text, route) => (
 
 const mapDispatchToProps = dispatch => ({
   service: bindActionCreators(
-    { getDashboardFunds, getDashboardPrograms },
+    { getDashboardFunds, getDashboardPrograms, clearDashboardAssetsTable },
     dispatch
   )
 });

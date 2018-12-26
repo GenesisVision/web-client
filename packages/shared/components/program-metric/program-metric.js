@@ -1,9 +1,9 @@
+import "./program-metric.css";
+
 import PropTypes from "prop-types";
 import React from "react";
 
 import MetricWithId from "../metric/metric-with-id";
-
-import "./program-metric.css";
 
 const ProgramMetric = props => (
   <MetricWithId className="program-metric" {...props} />

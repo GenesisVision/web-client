@@ -32,7 +32,8 @@ const NavigationMobile = ({
   avatar,
   isOpenNavigation,
   onClose,
-  logout
+  logout,
+  backPath
 }) => {
   return (
     <Sidebar open={isOpenNavigation} onClose={onClose}>
@@ -90,7 +91,7 @@ const NavigationMobile = ({
           ) : (
             <NavigationItem
               icon={<LogoutIcon primary rotate />}
-              href={LOGIN_ROUTE}
+              href={{ pathname: LOGIN_ROUTE, state: backPath }}
             >
               {t("navigation.login")}
             </NavigationItem>

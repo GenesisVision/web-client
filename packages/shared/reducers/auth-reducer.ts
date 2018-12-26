@@ -1,5 +1,5 @@
-import authService from "shared/services/auth-service";
 import { UPDATE_TOKEN } from "shared/actions/auth-actions";
+import authService from "shared/services/auth-service";
 
 export interface IAuthReducer {
   isAuthenticated: boolean;

@@ -5,7 +5,6 @@ import { translate } from "react-i18next";
 import connect from "react-redux/es/connect/connect";
 import { compose } from "redux";
 import DashboardInRequestsContainer from "shared/components/dashboard/dashboard-portfolio-chart-section/dashboard-in-requests/dashboard-in-requests-container";
-import Surface from "shared/components/surface/surface";
 
 import {
   cancelRequest,
@@ -15,26 +14,21 @@ import DashboardPortfolioChartContainer from "./dashboard-chart/dashboard-portfo
 import DashboardGetStarted from "./dashboard-get-started";
 
 class DashboardPortfolioChartSection extends Component {
-  renderSectionBody = () => {
-    const { isNewUser } = this.props;
-    if (!isNewUser)
-      return (
-        <Fragment>
-          <h3 className="dashboard-portfolio-chart-section__heading">Chart</h3>
-          <DashboardInRequestsContainer
-            cancelRequest={cancelRequest}
-            getInRequests={getInRequests}
-          />
-          <DashboardPortfolioChartContainer />
-        </Fragment>
-      );
-    return <DashboardGetStarted />;
-  };
   render() {
+    const { t, isNewUser } = this.props;
+    if (isNewUser) return <DashboardGetStarted />;
+
     return (
-      <Surface className="dashboard-portfolio-chart-section">
-        {this.renderSectionBody()}
-      </Surface>
+      <Fragment>
+        <h3 className="dashboard-portfolio-chart-section__heading">
+          {t("manager.dashboard-page.chart-section.header")}
+        </h3>
+        <DashboardInRequestsContainer
+          cancelRequest={cancelRequest}
+          getInRequests={getInRequests}
+        />
+        <DashboardPortfolioChartContainer />
+      </Fragment>
     );
   }
 }

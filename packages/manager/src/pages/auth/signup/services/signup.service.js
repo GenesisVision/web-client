@@ -1,5 +1,5 @@
-import emailPendingActions from "shared/actions/email-pending-actions";
 import { push } from "react-router-redux";
+import emailPendingActions from "shared/actions/email-pending-actions";
 
 import { signUpUser } from "../actions/signup.actions";
 import { SIGNUP_ROUTE_PENDING } from "../signup.routes";
