@@ -17,6 +17,8 @@ const LoginForm = ({
   dirty,
   FORGOT_PASSWORD_ROUTE
 }) => {
+  console.log(!isValid);
+  console.log(!dirty);
   return (
     <form
       id="loginForm"
