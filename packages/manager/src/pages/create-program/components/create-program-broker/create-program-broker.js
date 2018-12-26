@@ -80,7 +80,13 @@ const CreateProgramBroker = ({
             {t("manager.create-program-page.broker-info.terms")}
           </div>
           <div className="create-program-broker__info-text">
-            {choosedBroker.terms}
+            <a
+              href={choosedBroker.terms}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Read Terms
+            </a>
           </div>
         </div>
         <div className="create-program-broker__row create-program-broker__row--small">
@@ -91,14 +97,14 @@ const CreateProgramBroker = ({
             {getLeverageDescription(choosedBroker)}
           </div>
         </div>
-        <div className="create-program-broker__row create-program-broker__row--small">
+        {/*<div className="create-program-broker__row create-program-broker__row--small">
           <div className="create-program-broker__info-title">
             {t("manager.create-program-page.broker-info.fee")}
           </div>
           <div className="create-program-broker__info-text">
             {choosedBroker.fee} %
           </div>
-        </div>
+        </div>*/}
         <div className="create-program-broker__row">
           <div className="create-program-broker__info-title">
             {t("manager.create-program-page.broker-info.assets")}
