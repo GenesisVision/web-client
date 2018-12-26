@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { translate } from "react-i18next";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import ProgramTableModule from "shared/modules/programs-table/components/programs-table/programs-table-module";
+import FundsTableModule from "shared/modules/funds-table/components/funds-table/funds-table-modulle";
 
 import {
   FUNDS_FACET_PAGING,
@@ -11,9 +11,9 @@ import {
   FUNDS_FACET_TABLE_SORTING
 } from "./funds-facet.constants";
 
-const ProgramsFacetTable = ({ t, title, ...props }) => {
+const FundsFacetTable = ({ t, title, ...props }) => {
   return (
-    <ProgramTableModule
+    <FundsTableModule
       renderFilters={(updateFilter, filtering) => (
         <Fragment>
           <DateRangeFilter
@@ -34,4 +34,4 @@ const ProgramsFacetTable = ({ t, title, ...props }) => {
   );
 };
 
-export default translate()(ProgramsFacetTable);
+export default translate()(FundsFacetTable);
