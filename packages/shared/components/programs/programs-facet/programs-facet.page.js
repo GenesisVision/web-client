@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import { translate } from "react-i18next";
 import FacetContainer from "shared/components/facet-container/facet-container";
 import Page from "shared/components/page/page";
-import { getCurrentFacet } from "shared/components/programs/programs-facet/services/programs-facet.service";
 import Surface from "shared/components/surface/surface";
 import { fetchPrograms } from "shared/modules/programs-table/services/programs-table.service";
 
-import ProgramsFacetTable from "./programs-facet-table";
+import ProgramsFacetTable from "./components/programs-facet-table";
+import { getCurrentFacet } from "./services/programs-facet.service";
 
 class ProgramsFacetPage extends Component {
   fetchPrograms = filters => {
