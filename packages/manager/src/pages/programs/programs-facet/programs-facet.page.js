@@ -1,20 +1,34 @@
-import React from "react";
+import React, { Component } from "react";
 import { translate } from "react-i18next";
 import FacetContainer from "shared/components/facet-container/facet-container";
 import Page from "shared/components/page/page";
 import { getCurrentFacet } from "shared/components/programs/programs-facet/services/programs-facet.service";
 import Surface from "shared/components/surface/surface";
-import ProgramsTableModule from "shared/modules/programs-table/components/programs-table/programs-table-module";
+import { fetchPrograms } from "shared/modules/programs-table/services/programs-table.service";
 
-const ProgramsFacetPage = ({ t }) => (
-  <Page title={t("programs-page.title")}>
-    <Surface className="programs-table-container">
-      <FacetContainer
-        asset={"programsFacets"}
-        TableContainer={ProgramsTableModule}
-        getCurrentFacet={getCurrentFacet}
-      />
-    </Surface>
-  </Page>
-);
+import ProgramsFacetTable from "./programs-facet-table";
+
+class ProgramsFacetPage extends Component {
+  fetchPrograms = filters => {
+    return fetchPrograms(filters).then(data => ({
+      total: data.total,
+      items: data.programs
+    }));
+  };
+  render() {
+    const { t } = this.props;
+    return (
+      <Page title={t("programs-page.title")}>
+        <Surface className="programs-table-container">
+          <FacetContainer
+            asset={"programsFacets"}
+            TableContainer={ProgramsFacetTable}
+            getCurrentFacet={getCurrentFacet}
+            getItems={this.fetchPrograms}
+          />
+        </Surface>
+      </Page>
+    );
+  }
+}
 export default translate()(ProgramsFacetPage);

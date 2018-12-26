@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { bindActionCreators, compose } from "redux";
@@ -23,12 +23,23 @@ class FacetContainer extends Component {
     }
   }
 
+  getFacetItems = filtering => {
+    const { getItems } = this.props;
+    const { facetData } = this.state;
+    return getItems({ ...filtering, facetId: facetData.facet.id });
+  };
+
   render() {
     const { TableContainer } = this.props;
     const { facetData } = this.state;
     if (!facetData || facetData.isPending) return null;
     if (facetData.notFound) return <NotFoundPage />;
-    return <TableContainer title={facetData.facet.title} />;
+    return (
+      <TableContainer
+        title={facetData.facet.title}
+        getItems={this.getFacetItems}
+      />
+    );
   }
 }
 

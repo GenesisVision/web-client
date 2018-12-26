@@ -26,46 +26,46 @@ export const LEVEL_MAX_FILTER_VALUE = 7;
 export const SORTING_FILTER_VALUE = "ByProfitDesc";
 export const CURRENCY_FILTER_VALUE = undefined;
 
-export const PROGRAMS_TABLE_FILTERS = [
-  {
-    name: LEVEL_FILTER_NAME,
-    type: FilterType.range,
-    defaultValue: [LEVEL_MIN_FILTER_VALUE, LEVEL_MAX_FILTER_VALUE],
-    validate: value => {
-      const levelRegex = /[0-7]/;
-      if (Array.isArray(value) && value.length === 2) {
-        const [a, b] = value;
-        return levelRegex.test(a) && levelRegex.test(b) && a < b;
-      }
-      return false;
+const programsLevelFilter = {
+  name: LEVEL_FILTER_NAME,
+  type: FilterType.range,
+  defaultValue: [LEVEL_MIN_FILTER_VALUE, LEVEL_MAX_FILTER_VALUE],
+  validate: value => {
+    const levelRegex = /[0-7]/;
+    if (Array.isArray(value) && value.length === 2) {
+      const [a, b] = value;
+      return levelRegex.test(a) && levelRegex.test(b) && a < b;
     }
-  },
-  {
-    name: CURRENCY_FILTER_NAME,
-    type: FilterType.general,
-    defaultValue: CURRENCY_FILTER_VALUE
-    //validate: value => CURRENCY_FILTER_VALUES.includes(value) <--fetched from server
-  },
-  {
-    ...composeDefaultDateRangeFilter({
-      composeApiRequestValue: composeRequestValue(
-        SERVER_DATE_RANGE_MIN_FILTER_NAME,
-        SERVER_DATE_RANGE_MAX_FILTER_NAME
-      ),
-      defaultValue: {
-        ...DEFAULT_DATE_RANGE_FILTER_VALUE,
-        type: DateRangeFilterTypes.lastWeek
-      }
-    }),
-    validate: validateDateRange
+    return false;
   }
-];
-
-export const PROGRAMS_MODULE_FILTERING = {
-  level: [LEVEL_MIN_FILTER_VALUE, LEVEL_MAX_FILTER_VALUE],
-  programCurrency: CURRENCY_FILTER_VALUE,
-  dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE
 };
+
+const programsCurrencyFilter = {
+  name: CURRENCY_FILTER_NAME,
+  type: FilterType.general,
+  defaultValue: CURRENCY_FILTER_VALUE
+  //validate: value => CURRENCY_FILTER_VALUES.includes(value) <--fetched from server
+};
+
+export const programsDateRangeFilter = {
+  ...composeDefaultDateRangeFilter({
+    composeApiRequestValue: composeRequestValue(
+      SERVER_DATE_RANGE_MIN_FILTER_NAME,
+      SERVER_DATE_RANGE_MAX_FILTER_NAME
+    ),
+    defaultValue: {
+      ...DEFAULT_DATE_RANGE_FILTER_VALUE,
+      type: DateRangeFilterTypes.lastWeek
+    }
+  }),
+  validate: validateDateRange
+};
+
+export const PROGRAMS_TABLE_FILTERS = [
+  programsLevelFilter,
+  programsCurrencyFilter,
+  programsDateRangeFilter
+];
 
 export const PROGRAMS_COLUMNS = [
   {
