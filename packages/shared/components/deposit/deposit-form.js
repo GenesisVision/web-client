@@ -24,6 +24,8 @@ const DepositForm = ({
   info,
   currency,
   disabled,
+  isValid,
+  dirty,
   handleSubmit,
   errorMessage
 }) => {
@@ -129,7 +131,7 @@ const DepositForm = ({
           type="submit"
           id="signUpFormSubmit"
           className="invest-form__submit-button"
-          disabled={disabled}
+          disabled={disabled || !isValid || !dirty}
         >
           {program ? t("deposit-asset.confirm") : t("deposit-asset.confirm")}
         </GVButton>
