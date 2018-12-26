@@ -9,16 +9,6 @@ $large-padding: 42px;
     background-color: $table-background-subcolor;
   }
 
-  & .table__toolbar {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  & .table__filters {
-    margin-top: 16px;
-    margin-left: 0;
-  }
-
   & .table__row {
     padding: 0 32px;
   }
@@ -47,18 +37,6 @@ $large-padding: 42px;
 
     &__value {
       color: $text-light-color;
-    }
-  }
-
-  @include media-breakpoint-tablet() {
-    & .table__filters {
-      margin-left: 20px;
-      margin-top: 0;
-    }
-
-    & .table__toolbar {
-      padding: 0 $middle-padding $middle-padding;
-      flex-direction: row;
     }
   }
 }

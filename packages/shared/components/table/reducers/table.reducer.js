@@ -11,7 +11,7 @@ const tableReducerFactory = ({
   filtering,
   defaultFilters,
   clearable = false,
-  clearableAction
+  clearableActionType
 }) => {
   const clearableWrapper = clearable ? clearableReducer : f => f;
 
@@ -33,7 +33,7 @@ const tableReducerFactory = ({
         type
       })
     }),
-    clearableAction
+    clearableActionType
   );
 };
 

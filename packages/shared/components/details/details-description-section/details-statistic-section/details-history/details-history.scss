@@ -19,4 +19,19 @@
   &__tabs {
     @include horizontal-paddings($padding-small, 2);
   }
+
+  @media (min-width: 450px) {
+    &__subheading,
+    &__tabs {
+      position: absolute;
+      padding-top: 5px;
+    }
+    .table__filters {
+      justify-content: flex-end;
+
+      .filter {
+        margin-left: 20px;
+      }
+    }
+  }
 }

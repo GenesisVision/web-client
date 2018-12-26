@@ -52,10 +52,12 @@ class TableContainer extends PureComponent {
   };
 
   render() {
-    const { data, isPending, ...otherProps } = this.props;
+    const { data, isPending, paging, ...otherProps } = this.props;
+    const newPaging = { ...paging, totalItems: data ? data.total : 0 };
     return (
       <Table
         {...otherProps}
+        paging={newPaging}
         items={data.items}
         isPending={isPending}
         updateSorting={this.handleUpdateSorting}
@@ -70,7 +72,6 @@ const mapStateToProps = (state, props) => {
   const selector = props.dataSelector(state);
   const { itemsData, filters, defaults } = selector;
   const { sorting, paging, filtering } = filters;
-
   return {
     data: itemsData.data,
     isPending: itemsData.isPending,

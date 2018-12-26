@@ -109,12 +109,13 @@ class TableModule extends PureComponent {
   };
 
   render() {
-    const { data, isPending } = this.state;
-
+    const { data, isPending, paging } = this.state;
+    const newPaging = { ...paging, totalItems: data.total ? data.total : 0 };
     return (
       <Table
         {...this.props}
         {...this.state}
+        paging={newPaging}
         items={data.items}
         isPending={isPending}
         updateSorting={this.handleUpdateSorting}

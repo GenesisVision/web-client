@@ -1,7 +1,8 @@
 {
   "table": {
     "loading": "Loading...",
-    "no-items": "There are no items."
+    "no-items": "There are no items.",
+    "items-counter": "Showing {{from}}-{{to}} of {{total}}"
   },
   "alerts": {
     "clear-all": "Clear all",

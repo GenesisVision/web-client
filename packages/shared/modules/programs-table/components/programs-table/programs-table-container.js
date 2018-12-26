@@ -79,7 +79,9 @@ class ProgramsTableContainer extends Component {
         }}
         paging={{
           totalPages: filters.pages,
-          currentPage: filters.page
+          currentPage: filters.page,
+          itemsOnPage: filters.itemsOnPage,
+          totalItems: data ? data.total : 0
         }}
         updatePaging={service.programsChangePage}
         toggleFavorite={service.toggleFavoriteProgram}

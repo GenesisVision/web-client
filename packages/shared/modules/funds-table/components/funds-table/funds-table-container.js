@@ -42,7 +42,9 @@ class FundsTableContainer extends Component {
         updateFilter={service.fundsChangeFilter}
         paging={{
           totalPages: filters.pages,
-          currentPage: filters.page
+          currentPage: filters.page,
+          itemsOnPage: filters.itemsOnPage,
+          totalItems: data ? data.total : 0
         }}
         updatePaging={service.fundsChangePage}
         toggleFavorite={service.toggleFavoriteFund}
