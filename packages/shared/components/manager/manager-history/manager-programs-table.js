@@ -41,6 +41,7 @@ class ManagerPrograms extends Component {
 
     return (
       <ProgramTableModule
+        disableTitle
         title={title}
         getItems={this.fetchManagerPrograms}
         defaultFilters={MANAGER_DEFAULT_FILTERS}

@@ -16,11 +16,13 @@ class FundsTableModule extends Component {
       paging,
       isAuthenticated,
       title,
+      disableTitle,
       toggleFavorite
     } = this.props;
 
     return (
       <TableModule
+        disableTitle={disableTitle}
         getItems={getItems}
         defaultFilters={defaultFilters}
         filtering={filtering}
