@@ -17,11 +17,13 @@ class ProgramTableModule extends Component {
       isAuthenticated,
       showRating,
       title,
+      disableTitle,
       toggleFavorite
     } = this.props;
 
     return (
       <TableModule
+        disableTitle={disableTitle}
         getItems={getItems}
         defaultFilters={defaultFilters}
         filtering={filtering}
