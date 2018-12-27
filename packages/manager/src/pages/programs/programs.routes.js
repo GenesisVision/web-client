@@ -1,12 +1,12 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
+import ProgramsFacetPage from "shared/components/programs/programs-facet/programs-facet.page";
 import { SLUG_URL_REGEXP } from "shared/utils/constants";
 import replaceParams from "shared/utils/replace-params";
 
 import PrivateRoute from "../private-route";
 import ProgramDetailsPage from "./program-details/program-details.page";
-import ProgramsFacetPage from "./programs-facet/programs-facet.page";
 import ProgramsRatingPage from "./programs-rating/programs-rating.page";
 import ProgramsPage from "./programs/programs.page";
 

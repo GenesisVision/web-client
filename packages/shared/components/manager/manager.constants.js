@@ -12,6 +12,8 @@ import {
   SERVER_DATE_RANGE_MIN_FILTER_NAME
 } from "shared/modules/funds-table/components/funds-table/funds-table.constants";
 
+import { DateRangeFilterTypes } from "../table/components/filtering/date-range-filter/date-range-filter.constants";
+
 export const MANAGER_TABLE_DATE_RANGE_FILTER = {
   ...composeDefaultDateRangeFilter({
     composeApiRequestValue: composeRequestValue(
@@ -24,5 +26,10 @@ export const MANAGER_TABLE_DATE_RANGE_FILTER = {
 
 export const MANAGER_DEFAULT_FILTERS = [MANAGER_TABLE_DATE_RANGE_FILTER];
 export const MANAGER_FILTERING = {
-  [DATE_RANGE_FILTER_NAME]: DEFAULT_DATE_RANGE_FILTER_VALUE
+  [DATE_RANGE_FILTER_NAME]: {
+    ...DEFAULT_DATE_RANGE_FILTER_VALUE,
+    type: DateRangeFilterTypes.lastWeek
+  }
 };
+
+export const MANAGER_SORTING = "ByProfitDesc";

@@ -1,95 +1,65 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
-import { bindActionCreators, compose } from "redux";
-import { toggleFavoriteFundDispatchable } from "shared/modules/favorite-asset/services/favorite-fund.service";
+import "./funds-table.scss";
 
-import * as fundsService from "../../services/funds-table.service";
-import FundsTableModule from "./funds-table-module";
+import React, { Fragment } from "react";
+import { translate } from "react-i18next";
+import { Table } from "shared/components/table/components";
+import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
+import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 
-class FundsTable extends Component {
-  componentDidMount() {
-    const { service, defaultFilters } = this.props;
-    service.getFunds(defaultFilters);
-  }
+import FundsTableRow from "./fund-table-row";
+import FundsTableHeaderCell from "./funds-table-header-cell";
+import { FUNDS_TABLE_COLUMNS } from "./funds-table.constants";
 
-  componentDidUpdate(prevProps) {
-    const { service, isLocationChanged, defaultFilters } = this.props;
-    if (isLocationChanged(prevProps.location)) {
-      service.getFunds(defaultFilters);
-    }
-  }
-
-  render() {
-    const {
-      isPending,
-      data,
-      filters,
-      service,
-      isAuthenticated,
-      title
-    } = this.props;
-    return (
-      <FundsTableModule
-        title={title}
-        data={data || {}}
-        isPending={isPending}
-        sorting={filters.sorting}
-        updateSorting={service.fundsChangeSorting}
-        filtering={{
-          ...filters.filtering
-        }}
-        updateFilter={service.fundsChangeFilter}
-        paging={{
-          totalPages: filters.pages,
-          currentPage: filters.page,
-          itemsOnPage: filters.itemsOnPage,
-          totalItems: data ? data.total : 0
-        }}
-        updatePaging={service.fundsChangePage}
-        toggleFavorite={service.toggleFavoriteFund}
-        isAuthenticated={isAuthenticated}
-      />
-    );
-  }
-}
-
-const mapStateToProps = state => {
-  const { isAuthenticated } = state.authData;
-  const { isPending, data } = state.fundsData.items;
-  return { isPending, data, isAuthenticated };
+const FundsTable = ({
+  t,
+  data,
+  isPending,
+  sorting,
+  updateSorting,
+  filtering,
+  updateFilter,
+  paging,
+  updatePaging,
+  toggleFavorite,
+  isAuthenticated,
+  title
+}) => {
+  return (
+    <Table
+      title={title}
+      sorting={sorting}
+      updateSorting={updateSorting}
+      paging={paging}
+      updatePaging={updatePaging}
+      columns={FUNDS_TABLE_COLUMNS}
+      items={data.funds}
+      isPending={data.isPending}
+      renderFilters={() => (
+        <Fragment>
+          <DateRangeFilter
+            name={DATE_RANGE_FILTER_NAME}
+            value={filtering[DATE_RANGE_FILTER_NAME]}
+            onChange={updateFilter}
+            startLabel={t("filters.date-range.fund-start")}
+          />
+        </Fragment>
+      )}
+      renderHeader={column => (
+        <FundsTableHeaderCell
+          column={column}
+          isAuthenticated={isAuthenticated}
+        />
+      )}
+      renderBodyRow={fund => (
+        <FundsTableRow
+          title={title}
+          fund={fund}
+          toggleFavorite={toggleFavorite}
+          isAuthenticated={isAuthenticated}
+        />
+      )}
+    />
+  );
 };
 
-const mapDispatchToProps = dispatch => ({
-  service: bindActionCreators(
-    {
-      ...fundsService,
-      toggleFavoriteFund: toggleFavoriteFundDispatchable
-    },
-    dispatch
-  )
-});
-
-const mergeProps = (stateProps, dispatchProps, ownProps) => {
-  const { location } = ownProps;
-  const isLocationChanged = prevLocation => {
-    return location.key !== prevLocation.key;
-  };
-  const filters = dispatchProps.service.getFundsFilters();
-  return {
-    ...stateProps,
-    ...dispatchProps,
-    ...ownProps,
-    filters,
-    isLocationChanged
-  };
-};
-
-export default compose(
-  withRouter,
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-    mergeProps
-  )
-)(FundsTable);
+export default translate()(FundsTable);

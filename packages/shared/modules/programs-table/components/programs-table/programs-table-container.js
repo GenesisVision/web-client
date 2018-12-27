@@ -1,16 +1,139 @@
 import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
-import React from "react";
-import Surface from "shared/components/surface/surface";
+import React, { Component, Fragment } from "react";
+import { translate } from "react-i18next";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { push } from "react-router-redux";
+import { bindActionCreators, compose } from "redux";
+import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
+import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import LevelFilter from "shared/components/table/components/filtering/level-filter/level-filter";
+import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
+import { toggleFavoriteProgramDispatchable } from "shared/modules/favorite-asset/services/favorite-program.service";
 
+import * as programsService from "../../services/programs-table.service";
+import { composeCurrencyFilter } from "./program-table.helpers";
 import ProgramsTable from "./programs-table";
+import { CURRENCY_FILTER_NAME, LEVEL_FILTER_NAME } from "./programs.constants";
 
-const ProgramsContainer = ({ title, enableFiltering, showSwitchView }) => (
-  <Surface className="programs-table-container">
-    <ProgramsTable
-      showSwitchView={showSwitchView}
-      enableFiltering={enableFiltering}
-      title={title}
-    />
-  </Surface>
-);
-export default ProgramsContainer;
+class ProgramsTableContainer extends Component {
+  componentDidMount() {
+    const { service, defaultFilters } = this.props;
+    service.getPrograms(defaultFilters);
+  }
+
+  componentDidUpdate(prevProps) {
+    const { service, isLocationChanged, defaultFilters } = this.props;
+    if (isLocationChanged(prevProps.location)) {
+      service.getPrograms(defaultFilters);
+    }
+  }
+
+  render() {
+    const {
+      t,
+      showSwitchView,
+      currencies,
+      isPending,
+      data,
+      filters,
+      service,
+      isAuthenticated,
+      title
+    } = this.props;
+    return (
+      <ProgramsTable
+        showSwitchView={showSwitchView}
+        title={title}
+        data={data || {}}
+        isPending={isPending}
+        sorting={filters.sorting}
+        updateSorting={service.programsChangeSorting}
+        filtering={{
+          ...filters.filtering
+        }}
+        updateFilter={service.programsChangeFilter}
+        renderFilters={(updateFilter, filtering) => {
+          return (
+            <Fragment>
+              <LevelFilter
+                name={LEVEL_FILTER_NAME}
+                value={filtering[LEVEL_FILTER_NAME]}
+                onChange={updateFilter}
+              />
+              <SelectFilter
+                name={CURRENCY_FILTER_NAME}
+                label="Currency"
+                value={filtering[CURRENCY_FILTER_NAME]}
+                values={composeCurrencyFilter(currencies)}
+                onChange={updateFilter}
+              />
+              <DateRangeFilter
+                name={DATE_RANGE_FILTER_NAME}
+                value={filtering[DATE_RANGE_FILTER_NAME]}
+                onChange={updateFilter}
+                startLabel={t("filters.date-range.program-start")}
+              />
+            </Fragment>
+          );
+        }}
+        paging={{
+          totalPages: filters.pages,
+          currentPage: filters.page,
+          itemsOnPage: filters.itemsOnPage,
+          totalItems: data ? data.total : 0
+        }}
+        updatePaging={service.programsChangePage}
+        toggleFavorite={service.toggleFavoriteProgram}
+        redirectToLogin={service.redirectToLogin}
+        isAuthenticated={isAuthenticated}
+        currencies={currencies}
+      />
+    );
+  }
+}
+
+const mapStateToProps = state => {
+  const { isAuthenticated } = state.authData;
+  const { isPending, data } = state.programsData.items;
+  const currencies = state.platformData.data
+    ? state.platformData.data.currencies
+    : [];
+  return { isPending, data, isAuthenticated, currencies };
+};
+
+const mapDispatchToProps = dispatch => ({
+  service: bindActionCreators(
+    {
+      ...programsService,
+      toggleFavoriteProgram: toggleFavoriteProgramDispatchable,
+      redirectToLogin: () => push(LOGIN_ROUTE)
+    },
+    dispatch
+  )
+});
+
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+  const { location } = ownProps;
+  const isLocationChanged = prevLocation => {
+    return location.key !== prevLocation.key;
+  };
+  const filters = dispatchProps.service.getProgramsFilters();
+  return {
+    ...stateProps,
+    ...dispatchProps,
+    ...ownProps,
+    filters,
+    isLocationChanged
+  };
+};
+
+export default compose(
+  withRouter,
+  translate(),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+    mergeProps
+  )
+)(ProgramsTableContainer);
