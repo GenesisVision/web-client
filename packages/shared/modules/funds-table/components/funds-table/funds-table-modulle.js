@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import TableModule from "shared/components/table/components/table-module";
 
-import ProgramTableHeaderCell from "./program-table-header-cell";
-import ProgramTableRow from "./program-table-row";
-import { PROGRAMS_COLUMNS } from "./programs.constants";
+import FundsTableRow from "./fund-table-row";
+import FundsTableHeaderCell from "./funds-table-header-cell";
+import { FUNDS_TABLE_COLUMNS } from "./funds-table.constants";
 
-class ProgramTableModule extends Component {
+class FundsTableModule extends Component {
   render() {
     const {
       getItems,
@@ -15,7 +15,6 @@ class ProgramTableModule extends Component {
       defaultFilters,
       paging,
       isAuthenticated,
-      showRating,
       title,
       toggleFavorite
     } = this.props;
@@ -29,19 +28,18 @@ class ProgramTableModule extends Component {
         renderFilters={renderFilters}
         paging={paging}
         title={title}
-        columns={PROGRAMS_COLUMNS}
+        columns={FUNDS_TABLE_COLUMNS}
         renderHeader={column => (
-          <ProgramTableHeaderCell
+          <FundsTableHeaderCell
             column={column}
             isAuthenticated={isAuthenticated}
           />
         )}
-        renderBodyRow={(program, updateRow) => (
-          <ProgramTableRow
-            showRating={showRating}
+        renderBodyRow={(fund, updateRow) => (
+          <FundsTableRow
             title={title}
-            program={program}
-            toggleFavorite={toggleFavorite(program, updateRow)}
+            fund={fund}
+            toggleFavorite={toggleFavorite(fund, updateRow)}
             isAuthenticated={isAuthenticated}
           />
         )}
@@ -50,4 +48,4 @@ class ProgramTableModule extends Component {
   }
 }
 
-export default ProgramTableModule;
+export default FundsTableModule;

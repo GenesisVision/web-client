@@ -39,6 +39,13 @@ export const getFunds = filters => (dispatch, getState) => {
   dispatch(fundsTableActions.fetchFunds(requestFilters));
 };
 
+export const fetchFunds = filters => {
+  if (authService.getAuthArg()) {
+    filters.authorization = authService.getAuthArg();
+  }
+  return fundsTableActions.fetchFunds(filters).payload;
+};
+
 const composeRequestFilters = () => (dispatch, getState) => {
   let itemsOnPage = DEFAULT_ITEMS_ON_PAGE;
   const existingFilters = dispatch(getFundsFilters());

@@ -3,7 +3,8 @@ import { translate } from "react-i18next";
 import FacetCardsContainer from "shared/components/facet-cards/faset-cards-container";
 import NavigationTabsContainer from "shared/components/navigation-tabs/navigation-tabs-container";
 import Page from "shared/components/page/page";
-import ProgramsContainer from "shared/modules/programs-table/components/programs-table/programs-table-container";
+import Surface from "shared/components/surface/surface";
+import ProgramsTableContainer from "shared/modules/programs-table/components/programs-table/programs-table-container";
 import { composeProgramFacetUrl } from "shared/utils/compose-url";
 
 import * as routes from "../programs.routes";
@@ -23,11 +24,12 @@ const ProgramsPage = ({ t }) => {
         composeFacetUrl={composeProgramFacetUrl}
         PROGRAMS_RATING_ROUTE={routes.PROGRAMS_RATING_ROUTE}
       />
-      <ProgramsContainer
-        enableFiltering
-        showSwitchView
-        title={t("programs-page.programs-table")}
-      />
+      <Surface className="programs-table-container">
+        <ProgramsTableContainer
+          showSwitchView
+          title={t("programs-page.programs-table")}
+        />
+      </Surface>
     </Page>
   );
 };
