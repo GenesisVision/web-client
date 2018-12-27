@@ -129,7 +129,7 @@ class TableModule extends PureComponent {
 
 TableModule.propTypes = {
   paging: PropTypes.object,
-  sorting: PropTypes.object,
+  sorting: PropTypes.string,
   filtering: PropTypes.object,
   defaultFilters: PropTypes.array,
   getItems: PropTypes.func,

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { translate } from "react-i18next";
 import connect from "react-redux/es/connect/connect";
 import { bindActionCreators, compose } from "redux";
-import ProgramsTableModule from "shared/modules/programs-table/components/programs-table/programs-table-module";
+import ProgramsTable from "shared/modules/programs-table/components/programs-table/programs-table";
 
 import { COLUMNS, PROGRAMS, SELF_PROGRAMS } from "./program-rating.constants";
 import { getProgramsRating } from "./services/program-rating-service";
@@ -46,7 +46,7 @@ class ProgramsRatingTable extends Component {
     const { totalPages, currentPage, itemsOnPage } = this.state;
     if (!programs || !programs.total) return null;
     return (
-      <ProgramsTableModule
+      <ProgramsTable
         disableTitle={disableTitle}
         isPending={isPending}
         columns={COLUMNS}

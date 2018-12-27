@@ -202,7 +202,7 @@
   },
   "withdraw-program": {
     "title": "Withdraw",
-    "available-to-withdraw": "Current invested value",
+    "available-to-withdraw": "Available for withdrawing",
     "amount-to-withdraw": "Amount to withdraw",
     "next": "Next",
     "info": "Your request will be processed at the end of the reporting period. The requested amount will be converted to GVT and transferred to your wallet",
@@ -225,7 +225,7 @@
     "title": "Withdraw",
     "exit-fee": "Exit fee",
     "withdraw-amount": "Withdraw amount",
-    "available-to-withdraw": "Current invested value",
+    "available-to-withdraw": "Available for withdrawing",
     "amount-to-withdraw": "Amount to withdraw",
     "next": "Next",
     "info": "Amount of withdrawals can be changed depending on the exchange rate or the success of the Manager",
