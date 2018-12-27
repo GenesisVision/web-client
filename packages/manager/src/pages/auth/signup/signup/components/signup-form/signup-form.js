@@ -8,7 +8,14 @@ import GVCheckbox from "shared/components/gv-checkbox/gv-checkbox";
 
 import validationSchema from "./signup-form.validators";
 
-const SignUpForm = ({ isSubmitting, handleSubmit, error, t }) => {
+const SignUpForm = ({
+  isSubmitting,
+  handleSubmit,
+  error,
+  t,
+  isValid,
+  dirty
+}) => {
   return (
     <form
       id="signUpForm"
@@ -96,6 +103,7 @@ const SignUpForm = ({ isSubmitting, handleSubmit, error, t }) => {
         type="submit"
         id="signUpFormSubmit"
         className="signup-form__submit-button"
+        disabled={!isValid || !dirty}
       >
         {t("auth.signup.title")}
       </GVButton>

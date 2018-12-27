@@ -13,6 +13,8 @@ const LoginForm = ({
   isSubmitting,
   handleSubmit,
   error,
+  isValid,
+  dirty,
   FORGOT_PASSWORD_ROUTE
 }) => {
   return (
@@ -27,7 +29,6 @@ const LoginForm = ({
         name="email"
         label={t("auth.login.placeholder.email")}
         autoComplete="email"
-        autoFocus
         component={GVTextField}
       />
       <GVFormikField
@@ -48,7 +49,7 @@ const LoginForm = ({
       <GVButton
         className="login__submit-button"
         id="loginSubmit"
-        disabled={isSubmitting}
+        disabled={isSubmitting || !isValid}
         type="submit"
       >
         {t("auth.login.confirm-button-text")}
@@ -61,6 +62,7 @@ const withTranslationAndFormik = compose(
   translate(),
   withFormik({
     displayName: "loginForm",
+    isInitialValid: true,
     mapPropsToValues: () => ({
       email: "",
       password: ""
