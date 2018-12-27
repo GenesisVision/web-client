@@ -57,6 +57,27 @@ class Select extends Component {
     this.setState({ anchor: null });
   };
 
+  setDefaultValue() {
+    const { name, onChange, value } = this.props;
+    if (value && value.length) return;
+    const children = React.Children.toArray(this.props.children);
+    const child = children[0];
+    if (child) {
+      const event = {
+        target: { value: child.props.value, name }
+      };
+      onChange(event, child);
+    }
+  }
+
+  componentDidMount() {
+    this.setDefaultValue();
+  }
+
+  componentDidUpdate() {
+    this.setDefaultValue();
+  }
+
   render() {
     let displayValue = this.props.value;
     const items = React.Children.map(this.props.children, child => {
