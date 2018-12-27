@@ -1,6 +1,8 @@
 import "./header.scss";
 
+import { ProfileHeaderViewModel } from "gv-api-web";
 import { GVButton } from "gv-react-components";
+import * as React from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Icon } from "shared/components/icon/icon";
@@ -11,8 +13,6 @@ import NorificationsWidget from "shared/components/notifications-widget/notifica
 import ProfileWidget from "shared/components/profile-widget/profile-widget";
 import WalletWidget from "shared/components/wallet-widget/wallet-widget";
 import CurrencySelectContainer from "shared/modules/currency-select/components/currency-select-container";
-import * as React from "react";
-import { ProfileHeaderViewModel } from "gv-api-web";
 
 interface IHeaderState {
   isOpenNavigation: boolean;
@@ -24,7 +24,8 @@ export interface IHeaderProps {
   LOGIN_ROUTE: string;
   SIGNUP_ROUTE: string;
   GLOBAL_SEARCH_ROUTE: string;
-  t(string: string): void;
+  backPath?: string;
+  t(string: string): string;
   logout(): void;
   openNotifications(): void;
 }

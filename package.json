@@ -24,6 +24,10 @@
     ".js": {
       "parser": "babylon",
       "style": "module"
+    },
+    ".ts, .tsx": {
+      "parser": "typescript",
+      "style": "module"
     }
   },
   "browserslist": {
