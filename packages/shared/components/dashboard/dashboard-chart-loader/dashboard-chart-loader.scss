@@ -96,6 +96,7 @@
 
     @include media-breakpoint-landscape-phone() {
       padding-top: 0;
+      padding-bottom: 60px;
     }
   }
 
@@ -105,6 +106,7 @@
   }
 
   &__chart-period {
+    @include adaptive-padding(bottom, $padding-small);
     width: 50%;
     padding-right: 10px;
 
