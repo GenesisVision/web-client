@@ -12,13 +12,13 @@
       );
     }
   }
-  &::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-  }
   .facets {
     &:after {
       content: "";
+    }
+    &::-webkit-scrollbar {
+      width: 0;
+      height: 0;
     }
   }
 }
@@ -43,7 +43,7 @@ $padding-app: 20px;
   justify-content: flex-start;
   overflow-x: scroll;
   overflow-y: hidden;
-  z-index: 2;
+  z-index: 0;
 
   margin-bottom: -50px;
   padding-bottom: 30px;
@@ -64,6 +64,7 @@ $padding-app: 20px;
     margin: 0 0-$padding-app;
     overflow: hidden;
     height: $facet-height/1.5 + $facet-margin;
+    z-index: 0;
 
     @include media-breakpoint-landscape-phone() {
       height: $facet-height + 2 * $facet-margin;
