@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { Scrollbars } from "react-custom-scrollbars";
+import GVScroll from "shared/components/scroll/gvscroll";
 
 class InfinityScroll extends Component {
   handleScroll = () => {
@@ -18,9 +18,9 @@ class InfinityScroll extends Component {
 
   render() {
     return (
-      <Scrollbars onScroll={this.handleScroll} ref={this.scroll}>
+      <GVScroll onScroll={this.handleScroll} ref={this.scroll}>
         {this.props.children}
-      </Scrollbars>
+      </GVScroll>
     );
   }
 }

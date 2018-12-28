@@ -1,7 +1,7 @@
 import "shared/components/table/components/table.scss";
 
 import React, { Component } from "react";
-import Scrollbars from "react-custom-scrollbars";
+import GVScroll from "shared/components/scroll/gvscroll";
 import TableBody from "shared/components/table/components/table-body";
 import TableFooter from "shared/components/table/components/table-footer";
 import TableHeader from "shared/components/table/components/table-header";
@@ -75,7 +75,7 @@ class Table extends Component {
           isViewSwitchEnabled={this.isViewSwitchEnabled}
           createButtonToolbar={createButtonToolbar}
         />
-        <Scrollbars
+        <GVScroll
           autoHeight
           autoHeightMax={14000}
           renderTrackVertical={this.renderTrackVertical}
@@ -113,7 +113,7 @@ class Table extends Component {
               </TableBody>
             </table>
           )}
-        </Scrollbars>
+        </GVScroll>
         {paging && (
           <TableFooter
             paging={paging}

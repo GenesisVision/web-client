@@ -1,15 +1,15 @@
 import { GVTab, GVTabs } from "gv-react-components";
 import React, { Component } from "react";
-import Scrollbars from "react-custom-scrollbars";
 import { translate } from "react-i18next";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
+import GVScroll from "shared/components/scroll/gvscroll";
 
 class TabsContainer extends Component {
   render() {
     const { tabs, tab, handleTabChange } = this.props;
     return (
-      <Scrollbars autoHeight autoHeightMax={40}>
+      <GVScroll autoHeight autoHeightMax={60}>
         <GVTabs value={tab.name} onChange={handleTabChange}>
           {tabs.map(tab => (
             <GVTab
@@ -20,7 +20,7 @@ class TabsContainer extends Component {
             />
           ))}
         </GVTabs>
-      </Scrollbars>
+      </GVScroll>
     );
   }
 }

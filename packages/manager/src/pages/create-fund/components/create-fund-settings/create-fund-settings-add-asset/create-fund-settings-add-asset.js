@@ -3,11 +3,11 @@ import "../create-fund-settings.scss";
 import classnames from "classnames";
 import { GVTextField } from "gv-react-components";
 import React from "react";
-import Scrollbars from "react-custom-scrollbars";
 import FundAssetImage from "shared/components/avatar/fund-asset-image/fund-asset-image";
 import { SearchIcon } from "shared/components/icon/search-icon";
 import Popover from "shared/components/popover/popover";
 import Regulator from "shared/components/regulator/regulator";
+import GVScroll from "shared/components/scroll/gvscroll";
 
 class CreateFundSettingsAddAsset extends React.Component {
   state = {
@@ -58,7 +58,7 @@ class CreateFundSettingsAddAsset extends React.Component {
             />
           </div>
           <div className="popover-add__assets">
-            <Scrollbars autoHeightMax={180} autoHeight={true}>
+            <GVScroll autoHeightMax={180} autoHeight={true}>
               <table>
                 <tbody>
                   {filteredAssets.map((asset, idx) => (
@@ -102,7 +102,7 @@ class CreateFundSettingsAddAsset extends React.Component {
                   ))}
                 </tbody>
               </table>
-            </Scrollbars>
+            </GVScroll>
           </div>
         </div>
       </Popover>
