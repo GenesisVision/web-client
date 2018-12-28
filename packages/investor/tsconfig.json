@@ -17,5 +17,5 @@
   },
   "include": ["../../packages", "src"],
   "files": ["../../node_modules/gv-api-web/distribution/types.d.ts"],
-  "exclude": ["config-overrides.js"]
+  "exclude": ["node_modules", "config-overrides.js"]
 }

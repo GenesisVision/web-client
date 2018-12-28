@@ -5,6 +5,7 @@ import { fetchTwoFactor } from "shared/actions/2fa-actions";
 import { GLOBAL_SEARCH_ROUTE } from "shared/components/global-search/global-search.routes";
 import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
 import Header from "shared/components/header/header";
+import { IDispatchable } from "shared/utils/types";
 
 import { notificationsToggle } from "../../../pages/app/components/notifications/actions/notifications.actions";
 import { LOGIN_ROUTE } from "../../../pages/auth/login/login.routes";
@@ -12,17 +13,21 @@ import { logout } from "../../../pages/auth/login/services/login.service";
 import { SIGNUP_ROUTE } from "../../../pages/auth/signup/signup.routes";
 import { IState } from "../../../reducers";
 
-export interface IHeaderContainerProps {
+export interface IHeaderContainerStateProps {
   isAuthenticated: boolean;
   info: ProfileHeaderViewModel | undefined;
-  fetchProfileHeaderInfo(): any;
-  fetchTwoFactor(): any;
-  logout(): any;
-  notificationsToggle(): any;
-  backPath: string;
+  backPath: string | undefined;
+}
+export interface IHeaderContainerDispatchProps {
+  fetchProfileHeaderInfo: any;
+  logout(): IDispatchable<void>;
+  notificationsToggle: any;
+  fetchTwoFactor: any;
 }
 
-class HeaderContainer extends Component<IHeaderContainerProps> {
+class HeaderContainer extends Component<
+  IHeaderContainerStateProps & IHeaderContainerDispatchProps
+> {
   componentDidMount() {
     this.props.isAuthenticated && this.props.fetchProfileHeaderInfo();
     this.props.isAuthenticated && this.props.fetchTwoFactor();
@@ -33,7 +38,6 @@ class HeaderContainer extends Component<IHeaderContainerProps> {
       info,
       logout,
       notificationsToggle,
-      fetchProfileHeaderInfo,
       isAuthenticated,
       backPath
     } = this.props;
@@ -52,17 +56,17 @@ class HeaderContainer extends Component<IHeaderContainerProps> {
   }
 }
 
-const mapDispatchToProps = {
+const mapDispatchToProps: IHeaderContainerDispatchProps = {
   fetchProfileHeaderInfo,
   logout,
   notificationsToggle,
   fetchTwoFactor
 };
 
-const mapStateToProps = (state: IState) => ({
+const mapStateToProps = (state: IState): IHeaderContainerStateProps => ({
   info: state.profileHeader.info.data,
   isAuthenticated: state.authData.isAuthenticated,
-  backPath: state.routing.location ? state.routing.location.pathname : null
+  backPath: state.routing.location ? state.routing.location.pathname : undefined
 });
 
 export default connect(

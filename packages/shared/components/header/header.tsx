@@ -14,25 +14,27 @@ import ProfileWidget from "shared/components/profile-widget/profile-widget";
 import WalletWidget from "shared/components/wallet-widget/wallet-widget";
 import CurrencySelectContainer from "shared/modules/currency-select/components/currency-select-container";
 
+import { IDispatchable } from "../../utils/types";
+
 interface IHeaderState {
   isOpenNavigation: boolean;
 }
 
 export interface IHeaderProps {
-  profileHeader: ProfileHeaderViewModel;
+  profileHeader?: ProfileHeaderViewModel;
   isAuthenticated: boolean;
   LOGIN_ROUTE: string;
   SIGNUP_ROUTE: string;
   GLOBAL_SEARCH_ROUTE: string;
-  backPath?: string;
+  backPath: string | undefined;
   t(string: string): string;
-  logout(): void;
+  logout(): IDispatchable<void>;
   openNotifications(): void;
 }
 
 class Header extends React.Component<IHeaderProps, IHeaderState> {
   static defaultProps = {
-    profileHeader: {}
+    profileHeader: {} as ProfileHeaderViewModel
   };
   state = {
     isOpenNavigation: false
@@ -41,7 +43,7 @@ class Header extends React.Component<IHeaderProps, IHeaderState> {
   handleOpenMenu = () => this.setState({ isOpenNavigation: true });
   handleCloseMenu = () => this.setState({ isOpenNavigation: false });
 
-  render(): React.ReactNode {
+  render() {
     const {
       t,
       logout,
@@ -53,6 +55,7 @@ class Header extends React.Component<IHeaderProps, IHeaderState> {
       profileHeader
     } = this.props;
 
+    if (!profileHeader) return null;
     const {
       avatar,
       email,
@@ -61,7 +64,6 @@ class Header extends React.Component<IHeaderProps, IHeaderState> {
       investedGvt,
       notificationsCount
     } = profileHeader;
-
     return (
       <div className="header">
         <div className="header__left">
@@ -69,7 +71,7 @@ class Header extends React.Component<IHeaderProps, IHeaderState> {
             className="navigation__menu profile-avatar"
             onClick={this.handleOpenMenu}
           >
-            <Icon type={"menu"} />
+            <Icon type="menu" />
           </div>
           <Navigation className="header__navigation" />
         </div>
