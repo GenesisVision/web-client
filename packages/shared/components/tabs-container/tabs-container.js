@@ -9,7 +9,7 @@ class TabsContainer extends Component {
   render() {
     const { tabs, tab, handleTabChange } = this.props;
     return (
-      <GVScroll autoHeight autoHeightMax={60}>
+      <GVScroll autoHide autoHeight autoHeightMax={60}>
         <GVTabs value={tab.name} onChange={handleTabChange}>
           {tabs.map(tab => (
             <GVTab
