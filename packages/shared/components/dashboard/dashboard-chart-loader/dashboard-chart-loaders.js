@@ -1,6 +1,10 @@
 import "./dashboard-chart-loader.scss";
 
-import React from "react";
+import React, { Fragment } from "react";
+import {
+  ChartLoader,
+  ChartPeriodLoader
+} from "shared/components/chart/chart-loader/chart-loader";
 import SvgLoader from "shared/components/svg-loader/svg-loader";
 
 export const DashboardChartDescriptionLoader = () => (
@@ -27,3 +31,17 @@ export const DashboardChartRequestLoader = () => (
     </SvgLoader>
   </div>
 );
+
+export const DashboardChartLoader = () => {
+  return (
+    <Fragment>
+      <div className="dashboard-chart-loader__row">
+        <ChartPeriodLoader className="dashboard-chart-loader__chart-period" />
+        <ChartPeriodLoader className="dashboard-chart-loader__chart-period" />
+      </div>
+      <div className="dashboard-chart-loader__row">
+        <ChartLoader className="dashboard-chart-loader__chart" />
+      </div>
+    </Fragment>
+  );
+};
