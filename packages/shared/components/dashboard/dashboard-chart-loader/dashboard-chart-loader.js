@@ -27,8 +27,8 @@ const ChartLoader = () => (
 
 const ChartPeriodLoader = () => (
   <div className="dashboard-chart-loader__chart-period">
-    <SvgLoader height="20" width="210">
-      <rect x="0" y="0" width="210" height="20" rx="8" ry="8" />
+    <SvgLoader height="18" width="210">
+      <rect x="0" y="0" width="210" height="18" rx="8" ry="8" />
     </SvgLoader>
   </div>
 );

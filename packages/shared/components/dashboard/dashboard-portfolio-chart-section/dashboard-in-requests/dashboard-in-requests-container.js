@@ -34,14 +34,15 @@ class DashboardInRequestsContainer extends PureComponent {
         className="dashboard-request__icon"
         primary={this.state.anchor !== null}
         onClick={this.handleOpenDropdown}
+        dashboard__portfolio-events-aside
       />
     );
   };
 
   renderRequest = () => {
     const { t, inRequests, isPending, service } = this.props;
-    // if (!inRequests || isPending) return <DashboardChartRequestLoader />;
-    if (true) return <DashboardChartRequestLoader />;
+    if (!inRequests || isPending) return <DashboardChartRequestLoader />;
+    // if (true) return <DashboardChartRequestLoader />;
     return (
       <Fragment>
         <StatisticItem

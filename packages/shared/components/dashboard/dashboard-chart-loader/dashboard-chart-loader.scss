@@ -52,26 +52,21 @@
   }
 
   &__chart {
-    padding-top: 20px;
     overflow: hidden;
+    margin-top: 20px;
+    height: 380px;
 
     .svg-loader {
-      max-width: 100%;
+      //max-width: 100%;
+      min-width: 800px;
+      min-height: 380px;
     }
 
     @include media-breakpoint-landscape-phone() {
-      min-height: 320px;
+      //min-height: 400px;
       display: flex;
       align-items: flex-end;
       justify-content: center;
-
-      .svg-loader {
-        min-width: 600px;
-      }
-    }
-
-    @include media-breakpoint-landscape-phone() {
-      min-height: 400px;
 
       .svg-loader {
         min-width: 800px;
@@ -86,17 +81,21 @@
     }
 
     @include media-breakpoint-desktop() {
-      min-height: 430px;
+      //min-height: 430px;
     }
   }
 
   &__request {
-    padding-bottom: 30px;
-    padding-top: 10px;
+    .svg-loader {
+      max-width: 80%;
+    }
 
     @include media-breakpoint-landscape-phone() {
-      padding-top: 0;
-      padding-bottom: 60px;
+      padding-bottom: $padding-xsmall;
+
+      .svg-loader {
+        max-width: none;
+      }
     }
   }
 
@@ -107,8 +106,10 @@
 
   &__chart-period {
     @include adaptive-padding(bottom, $padding-small);
+    line-height: 0;
     width: 50%;
     padding-right: 10px;
+    margin-top: 30px;
 
     .svg-loader {
       max-width: 100%;
@@ -120,7 +121,13 @@
       padding-left: 10px;
     }
 
+    @include media-breakpoint-tablet() {
+      margin-bottom: 25px;
+    }
+
     @include media-breakpoint-landscape-tablet() {
+      margin-bottom: 0;
+
       .svg-loader {
         width: auto;
       }
@@ -129,6 +136,7 @@
 
   &__description {
     @include horizontal-paddings($padding-small, 2);
+    @include adaptive-padding(bottom, $padding-xsmall);
     width: 50%;
 
     .svg-loader {
