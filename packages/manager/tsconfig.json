@@ -15,7 +15,14 @@
     "noEmit": true,
     "jsx": "preserve"
   },
-  "include": ["../../packages", "src"],
-  "files": ["../../node_modules/gv-api-web/distribution/types.d.ts"],
-  "exclude": ["config-overrides.js"]
+  "include": [
+    "../../packages",
+    "src"
+  ],
+  "files": [
+    "../../node_modules/gv-api-web/distribution/types.d.ts"
+  ],
+  "exclude": [
+    "config-overrides.js"
+  ]
 }
