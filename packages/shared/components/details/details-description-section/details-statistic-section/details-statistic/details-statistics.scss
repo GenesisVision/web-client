@@ -106,23 +106,4 @@
       font-size: $font-size-paragraph;
     }
   }
-
-  &__loader-row {
-    @include adaptive-padding(bottom, $padding-medium);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-
-    &:last-child {
-      padding-bottom: 0;
-    }
-  }
-
-  &__loader-stat {
-    padding-bottom: $padding-xsmall;
-  }
-
-  &__loader-subheading {
-    @include adaptive-padding(bottom, $padding-xsmall);
-  }
 }

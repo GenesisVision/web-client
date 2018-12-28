@@ -1,12 +1,12 @@
-import "../details-statistic/details-statistics.scss";
+import "./details-statistic-loader.scss";
 
-import React, { Fragment } from "react";
+import React from "react";
 import SvgLoader from "shared/components/svg-loader/svg-loader";
 
 const DetailsStatisticsLoader = () => {
   return (
-    <Fragment>
-      <div className="details-statistics__loader-row">
+    <div className="details-statistics-loader">
+      <div className="details-statistics-loader__row">
         <DetailsSubheading />
         <DetailsStat />
         <DetailsStat />
@@ -14,7 +14,7 @@ const DetailsStatisticsLoader = () => {
         <DetailsStat />
         <DetailsStat />
       </div>
-      <div className="details-statistics__loader-row">
+      <div className="details-statistics-loader__row">
         <DetailsSubheading />
         <DetailsStat />
         <DetailsStat />
@@ -23,12 +23,12 @@ const DetailsStatisticsLoader = () => {
         <DetailsStat />
         <DetailsStat />
       </div>
-    </Fragment>
+    </div>
   );
 };
 
 const DetailsStat = () => (
-  <div className="details-statistics__loader-stat">
+  <div className="details-statistics-loader__stat">
     <SvgLoader height="44" width="110">
       <rect x="0" y="0" width="110" height="16" rx="8" ry="8" />
       <rect x="0" y="26" width="50" height="18" rx="8" ry="8" />
@@ -37,7 +37,7 @@ const DetailsStat = () => (
 );
 
 const DetailsSubheading = () => (
-  <div className="details-statistics__loader-subheading">
+  <div className="details-statistics-loader__subheading">
     <SvgLoader height="18" width="230">
       <rect x="0" y="0" width="130" height="18" rx="8" ry="8" />
     </SvgLoader>
