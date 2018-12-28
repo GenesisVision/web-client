@@ -33,21 +33,35 @@
 
     &--stats {
       width: auto;
+
+      .svg-loader {
+        max-width: 100%;
+        height: 100%;
+      }
+
+      @include media-breakpoint-tablet() {
+        padding-right: 0;
+      }
     }
   }
 
   &__stat {
-    padding-bottom: 20px;
+    padding-bottom: $padding-xsmall;
     padding-top: 10px;
-    width: 100%;
+    line-height: 0;
+    width: 176px;
 
     @include media-breakpoint-landscape-phone() {
+      width: auto;
       padding-top: 0;
+    }
+
+    @include media-breakpoint-tablet() {
+      padding-right: 30px;
     }
 
     @include media-breakpoint-landscape-tablet() {
       width: auto;
-      padding-bottom: 50px;
     }
   }
 

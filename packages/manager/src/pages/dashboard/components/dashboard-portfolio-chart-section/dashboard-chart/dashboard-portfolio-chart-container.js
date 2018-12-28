@@ -31,7 +31,6 @@ class DashboardPortfolioChartContainer extends PureComponent {
     const { assetChart, currency, period } = this.props;
 
     if (!assetChart)
-      // if (true)
       return (
         <Fragment>
           <DashboardChartDescriptionLoader />

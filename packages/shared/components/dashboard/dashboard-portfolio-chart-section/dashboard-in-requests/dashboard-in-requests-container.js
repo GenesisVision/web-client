@@ -42,7 +42,6 @@ class DashboardInRequestsContainer extends PureComponent {
   renderRequest = () => {
     const { t, inRequests, isPending, service } = this.props;
     if (!inRequests || isPending) return <DashboardChartRequestLoader />;
-    // if (true) return <DashboardChartRequestLoader />;
     return (
       <Fragment>
         <StatisticItem
