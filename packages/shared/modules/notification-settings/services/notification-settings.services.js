@@ -3,7 +3,7 @@ import {
   addNotificationSettings,
   fetchNotificationSettings,
   removeNotificationSetting
-} from "../actions/notification-settings.actions";
+} from "shared/modules/notification-settings/actions/notification-settings.actions";
 
 export const fetchNotificationSettingsService = () => dispatch => {
   return dispatch(fetchNotificationSettings()).then(data =>

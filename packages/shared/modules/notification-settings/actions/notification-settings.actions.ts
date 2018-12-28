@@ -1,3 +1,4 @@
+import { NotificationSettingList } from "gv-api-web";
 import notificationsApi from "shared/services/api-client/notifications-api";
 import authService from "shared/services/auth-service";
 
@@ -6,7 +7,14 @@ export const ADD_NOTIFICATION_SETTINGS = "ADD_NOTIFICATION_SETTINGS";
 export const REMOVE_NOTIFICATION_SETTING = "REMOVE_NOTIFICATION_SETTING";
 export const ADD_NOTIFICATION_SETTING = "ADD_NOTIFICATION_SETTING";
 
-export const addNotificationSettings = settings => {
+interface IAddNotificationSettings {
+  type: string;
+  settings: NotificationSettingList;
+}
+
+export const addNotificationSettings = (
+  settings: NotificationSettingList
+): IAddNotificationSettings => {
   return {
     type: ADD_NOTIFICATION_SETTINGS,
     settings

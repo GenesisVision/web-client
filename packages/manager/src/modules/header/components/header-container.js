@@ -37,6 +37,7 @@ class HeaderContainer extends Component {
         LOGIN_ROUTE={LOGIN_ROUTE}
         SIGNUP_ROUTE={SIGNUP_ROUTE}
         GLOBAL_SEARCH_ROUTE={GLOBAL_SEARCH_ROUTE}
+        {...other}
       />
     );
   }
