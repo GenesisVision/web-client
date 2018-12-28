@@ -97,15 +97,17 @@ class ProgramTableRowDetailed extends Component {
                 <div className="program-detailed__strategy">
                   {t("programs-page.programs-header.strategy")}
                 </div>
-                <GVScroll
-                  autoHide
-                  autoHideTimeout={1000}
-                  style={{ width: "100%", height: "100%" }}
-                >
-                  <div className="program-detailed__description">
-                    {program.description}
-                  </div>
-                </GVScroll>
+                <div className="program-detailed__scroll">
+                  <GVScroll
+                    autoHide
+                    autoHideTimeout={1000}
+                    style={{ width: "100%", height: "100%" }}
+                  >
+                    <div className="program-detailed__description">
+                      {program.description}
+                    </div>
+                  </GVScroll>
+                </div>
               </div>
               <div className="program-detailed__statistic">
                 <div className="program-detailed__chart">
