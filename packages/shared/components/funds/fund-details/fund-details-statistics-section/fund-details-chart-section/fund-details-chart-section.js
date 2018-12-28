@@ -1,8 +1,9 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-chart-section/details-chart-section.scss";
 
 import { GVTab, GVTabs } from "gv-react-components";
-import React, { PureComponent } from "react";
+import React, { Fragment, PureComponent } from "react";
 import { translate } from "react-i18next";
+import DetailsChartLoader from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-chart-loader";
 import Surface from "shared/components/surface/surface";
 
 import ProgramBalanceChartSection from "./fund-balance-chart-section/fund-balance-chart-section";
@@ -23,9 +24,8 @@ class FundDetailsChartSection extends PureComponent {
 
     const { tab } = this.state;
 
-    return (
-      <Surface className="surface--horizontal-paddings details-chart">
-        <h3>{t("fund-details-page.chart.heading")}</h3>
+    const renderDetailsChart = () => (
+      <Fragment>
         <GVTabs value={tab} onChange={this.handleTabChange}>
           <GVTab
             value={PROFIT_TAB}
@@ -49,6 +49,17 @@ class FundDetailsChartSection extends PureComponent {
             period={period}
             onPeriodChange={onPeriodChange}
           />
+        )}
+      </Fragment>
+    );
+
+    return (
+      <Surface className="surface--horizontal-paddings details-chart">
+        <h3>{t("fund-details-page.chart.heading")}</h3>
+        {!profitChart && !balanceChart ? (
+          <DetailsChartLoader />
+        ) : (
+          renderDetailsChart()
         )}
       </Surface>
     );

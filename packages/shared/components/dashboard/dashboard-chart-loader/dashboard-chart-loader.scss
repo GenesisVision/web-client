@@ -71,13 +71,11 @@
     height: 380px;
 
     .svg-loader {
-      //max-width: 100%;
       min-width: 800px;
       min-height: 380px;
     }
 
     @include media-breakpoint-landscape-phone() {
-      //min-height: 400px;
       display: flex;
       align-items: flex-end;
       justify-content: center;
@@ -92,10 +90,6 @@
         min-width: 1000px;
         width: 100%;
       }
-    }
-
-    @include media-breakpoint-desktop() {
-      //min-height: 430px;
     }
   }
 
