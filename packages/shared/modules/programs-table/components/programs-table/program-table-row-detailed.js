@@ -1,7 +1,6 @@
 import classnames from "classnames";
 import { GVButton } from "gv-react-components";
 import React, { Component } from "react";
-import { Scrollbars } from "react-custom-scrollbars";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
@@ -11,6 +10,7 @@ import { Icon } from "shared/components/icon/icon";
 import LevelTooltip from "shared/components/level-tooltip/level-tooltip";
 import Profitability from "shared/components/profitability/profitability";
 import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
+import GVScroll from "shared/components/scroll/gvscroll";
 import TableRow from "shared/components/table/components/table-row";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { composeManagerDetailsUrl } from "shared/utils/compose-url";
@@ -97,15 +97,17 @@ class ProgramTableRowDetailed extends Component {
                 <div className="program-detailed__strategy">
                   {t("programs-page.programs-header.strategy")}
                 </div>
-                <Scrollbars
-                  autoHide
-                  autoHideTimeout={1000}
-                  style={{ width: "100%", height: "100%" }}
-                >
-                  <div className="program-detailed__description">
-                    {program.description}
-                  </div>
-                </Scrollbars>
+                <div className="program-detailed__scroll">
+                  <GVScroll
+                    autoHide
+                    autoHideTimeout={1000}
+                    style={{ width: "100%", height: "100%" }}
+                  >
+                    <div className="program-detailed__description">
+                      {program.description}
+                    </div>
+                  </GVScroll>
+                </div>
               </div>
               <div className="program-detailed__statistic">
                 <div className="program-detailed__chart">

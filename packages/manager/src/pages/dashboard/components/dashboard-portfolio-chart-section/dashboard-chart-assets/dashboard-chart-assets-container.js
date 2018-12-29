@@ -1,13 +1,13 @@
 import "./dashboard-chart-assets.scss";
 
 import React, { PureComponent } from "react";
-import Scrollbars from "react-custom-scrollbars";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 import { DashboardChartAssetsLoader } from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-loaders";
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
 import Popover from "shared/components/popover/popover";
+import GVScroll from "shared/components/scroll/gvscroll";
 
 import { getAssetChart } from "../../../services/dashboard.service";
 import DashboardChartAsset from "./dashboard-chart-asset";
@@ -54,7 +54,7 @@ class DashboardChartAssetsContainer extends PureComponent {
           noPadding
           onClose={this.handleCloseDropdown}
         >
-          <Scrollbars autoHeight autoHeightMax="260px">
+          <GVScroll autoHeight autoHeightMax="260px">
             <div className="dashboard-chart-assets-popover">
               {hasPrograms && (
                 <div className="dashboard-chart-assets-popover__header">
@@ -83,7 +83,7 @@ class DashboardChartAssetsContainer extends PureComponent {
                 />
               ))}
             </div>
-          </Scrollbars>
+          </GVScroll>
         </Popover>
       </div>
     );

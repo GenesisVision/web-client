@@ -3,8 +3,8 @@ import "./select.scss";
 import classnames from "classnames";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import Scrollbars from "react-custom-scrollbars";
 import Popover from "shared/components/popover/popover";
+import GVScroll from "shared/components/scroll/gvscroll";
 import SelectItem from "shared/components/select/select-item";
 import FilterArrowIcon from "shared/components/table/components/filtering/filter-arrow-icon";
 
@@ -123,9 +123,9 @@ class Select extends Component {
           anchorEl={this.state.anchor}
           onClose={this.handleClose}
         >
-          <Scrollbars autoHeight autoHeightMax="300px">
+          <GVScroll autoHeight autoHeightMax="300px">
             <div className="select__options">{items}</div>
-          </Scrollbars>
+          </GVScroll>
         </Popover>
       </div>
     );

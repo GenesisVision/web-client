@@ -2,8 +2,8 @@ import "./profile.scss";
 
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import Scrollbars from "react-custom-scrollbars";
 import { translate } from "react-i18next";
+import GVScroll from "shared/components/scroll/gvscroll";
 import VerificationStatus from "shared/components/verification-status/verification-status";
 
 import ProfilePersonal, { ProfileField } from "./profile-personal";
@@ -13,7 +13,7 @@ class Profile extends Component {
     const { t, info, personal } = this.props;
     return (
       <div className="profile__container profile__container--padding-top">
-        <Scrollbars autoHeight autoHeightMax={14000}>
+        <GVScroll autoHeight autoHeightMax={14000}>
           <table className="profile profile--is-disabled">
             <tbody>
               {personal && <ProfilePersonal info={info} />}
@@ -58,7 +58,7 @@ class Profile extends Component {
               </tr>
             </tbody>
           </table>
-        </Scrollbars>
+        </GVScroll>
       </div>
     );
   }

@@ -1,55 +1,57 @@
-import PropTypes from "prop-types";
-import React, { Component } from "react";
-import { Scrollbars } from "react-custom-scrollbars";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { windowScroll } from "shared/actions/ui-actions";
+import React from "react";
+import Scrollbars from "react-custom-scrollbars";
 
-class GVScroll extends Component {
-  ref = React.createRef();
-  handleScroll = () => {
-    const scroll = this.ref.current.getScrollTop();
-    this.props.services.handleScroll(scroll);
-  };
-  componentDidUpdate() {
-    const scroll = this.ref.current.getScrollTop();
-    this.props.services.handleScroll(scroll);
+function getInnerHeight(el) {
+  const { clientHeight } = el;
+  const { paddingTop, paddingBottom } = getComputedStyle(el);
+  return clientHeight - parseFloat(paddingTop) - parseFloat(paddingBottom);
+}
+
+function getInnerWidth(el) {
+  const { clientWidth } = el;
+  const { paddingLeft, paddingRight } = getComputedStyle(el);
+  return clientWidth - parseFloat(paddingLeft) - parseFloat(paddingRight);
+}
+
+class GVScrollbar extends Scrollbars {
+  getThumbHorizontalWidth() {
+    const { thumbSize, thumbMinSize } = this.props;
+    const { scrollWidth, clientWidth } = this.view;
+    const trackWidth = getInnerWidth(this.trackHorizontal);
+    const width = Math.floor((clientWidth / scrollWidth) * trackWidth);
+    if (trackWidth === width) return 0;
+    if (thumbSize) return thumbSize;
+    return Math.max(width, thumbMinSize);
   }
-  render() {
-    return (
-      <Scrollbars
-        ref={this.ref}
-        autoHide
-        autoHideTimeout={1000}
-        style={{ width: "100%", height: "100%" }}
-        onScrollStop={this.handleScroll}
-      >
-        {this.props.children}
-      </Scrollbars>
-    );
+
+  getThumbVerticalHeight() {
+    const { thumbSize, thumbMinSize } = this.props;
+    const { scrollHeight, clientHeight } = this.view;
+    const trackHeight = getInnerHeight(this.trackVertical);
+    const height = Math.floor((clientHeight / scrollHeight) * trackHeight);
+    if (trackHeight === height) return 0;
+    if (thumbSize) return thumbSize;
+    return Math.max(height, thumbMinSize);
   }
 }
 
-GVScroll.propTypes = {
-  services: PropTypes.shape({
-    handleScroll: PropTypes.func.isRequired
-  })
+const renderThumb = ({ style, props }) => {
+  const thumbStyle = { backgroundColor: `rgba(255,255,255,0.3)` };
+  return <div style={{ ...style, ...thumbStyle }} {...props} />;
 };
 
-const mapDispatchToProps = dispatch => ({
-  services: bindActionCreators(
-    {
-      handleScroll: windowScroll
-    },
-    dispatch
-  )
+const GVScroll = React.forwardRef((props, ref) => {
+  const { children, ...other } = props;
+  return (
+    <GVScrollbar
+      ref={ref}
+      renderThumbVertical={renderThumb}
+      renderThumbHorizontal={renderThumb}
+      {...other}
+    >
+      {children}
+    </GVScrollbar>
+  );
 });
 
-export default connect(
-  undefined,
-  mapDispatchToProps,
-  null,
-  {
-    pure: false
-  }
-)(GVScroll);
+export default GVScroll;
