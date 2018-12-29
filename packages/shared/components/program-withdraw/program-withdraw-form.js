@@ -90,6 +90,7 @@ export default compose(
     validationSchema: ({ t, availableToWithdraw }) =>
       object().shape({
         amount: number()
+          .moreThan(0, t("withdraw-program.validation.amount-is-zero"))
           .max(
             availableToWithdraw,
             t("withdraw-program.validation.amount-more-than-available")
