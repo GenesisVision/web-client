@@ -4,11 +4,11 @@ import classnames from "classnames";
 import { GVButton } from "gv-react-components";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { Scrollbars } from "react-custom-scrollbars";
 import EventListener from "react-event-listener";
 import { translate } from "react-i18next";
 import { CloseIcon } from "shared/components/icon/close-icon";
 import Modal from "shared/components/modal/modal";
+import GVScroll from "shared/components/scroll/gvscroll";
 
 class Dialog extends Component {
   handleKeyPress = event => {
@@ -24,7 +24,7 @@ class Dialog extends Component {
     return (
       <Modal open={open} fixed disableBackdropClick>
         <EventListener target={document} onKeyUp={this.handleKeyPress} />
-        <Scrollbars>
+        <GVScroll autoHide>
           <div className="dialog__content">
             <div className="dialog__background" />
             <div className="dialog__backdrop" onClick={onClose} />
@@ -50,7 +50,7 @@ class Dialog extends Component {
               {children}
             </div>
           </div>
-        </Scrollbars>
+        </GVScroll>
       </Modal>
     );
   }

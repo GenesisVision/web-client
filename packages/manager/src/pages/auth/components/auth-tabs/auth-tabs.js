@@ -2,13 +2,13 @@ import { GVTab, GVTabs } from "gv-react-components";
 import React from "react";
 import { translate } from "react-i18next";
 
-const Tabs = ({ t }) => {
+const Tabs = ({ t, authPartUrl }) => {
   return (
     <GVTabs value={"manager"}>
       <GVTab
         value={"investor"}
         label={
-          <a href={process.env.REACT_APP_INVESTOR_PORTAL_URL}>
+          <a href={process.env.REACT_APP_INVESTOR_PORTAL_URL + authPartUrl}>
             {t("auth.tabs.investor")}
           </a>
         }

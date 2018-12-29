@@ -3,10 +3,10 @@ import "./dashboard-portfolio-events.scss";
 import { GVButton } from "gv-react-components";
 import * as PropTypes from "prop-types";
 import React, { Component } from "react";
-import { Scrollbars } from "react-custom-scrollbars";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
+import GVScroll from "shared/components/scroll/gvscroll";
 import Surface from "shared/components/surface/surface";
 
 import DashboardPortfolioEventsListLoader from "./dashboard-portfolio-event-loader/dashboard-portfolio-event-list-loader";
@@ -44,7 +44,7 @@ class DashboardPortfolioEvents extends Component {
           )}
         </h3>
         <div className="dashboard-portfolio-events__scroll-container">
-          <Scrollbars
+          <GVScroll
             autoHide
             autoHideTimeout={1000}
             style={DASHBOARD_EVENTS_STYLE}
@@ -52,7 +52,7 @@ class DashboardPortfolioEvents extends Component {
             <div className="dashboard-portfolio-events__list">
               {this.renderEvents()}
             </div>
-          </Scrollbars>
+          </GVScroll>
         </div>
 
         <Link

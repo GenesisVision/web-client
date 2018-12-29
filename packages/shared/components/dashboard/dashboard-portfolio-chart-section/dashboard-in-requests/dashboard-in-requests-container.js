@@ -1,7 +1,6 @@
 import "./dashboard-in-requests.scss";
 
 import React, { Fragment, PureComponent } from "react";
-import Scrollbars from "react-custom-scrollbars";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { connect } from "react-redux";
@@ -9,6 +8,7 @@ import { bindActionCreators, compose } from "redux";
 import { DashboardChartRequestLoader } from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-loaders";
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
 import Popover from "shared/components/popover/popover";
+import GVScroll from "shared/components/scroll/gvscroll";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
@@ -68,7 +68,7 @@ class DashboardInRequestsContainer extends PureComponent {
           noPadding
           onClose={this.handleCloseDropdown}
         >
-          <Scrollbars autoHeight>
+          <GVScroll autoHeight>
             <div className="dashboard-request-popover">
               {inRequests.requests.map(x => (
                 <DashboardRequest
@@ -79,7 +79,7 @@ class DashboardInRequestsContainer extends PureComponent {
                 />
               ))}
             </div>
-          </Scrollbars>
+          </GVScroll>
         </Popover>
       </Fragment>
     );

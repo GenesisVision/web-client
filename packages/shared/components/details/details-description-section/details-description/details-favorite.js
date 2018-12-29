@@ -10,13 +10,15 @@ import DetailsDescriptionControl from "./details-description-control";
 
 const DetailsFavorite = ({ t, toggleFavorite, id, isFavorite }) => (
   <DetailsDescriptionControl
+    tag="button"
+    className="details-description-control--button"
+    onClick={toggleFavorite}
     text={t("fund-details-page.description.addToFavorites")}
   >
     <FavoriteIcon
       className="details-description-control__icon"
       id={id}
       selected={isFavorite}
-      onClick={toggleFavorite}
     />
   </DetailsDescriptionControl>
 );

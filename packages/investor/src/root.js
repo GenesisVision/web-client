@@ -5,7 +5,7 @@ import React from "react";
 import { Provider } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import { ConnectedRouter } from "react-router-redux";
-import GVScroll from "shared/components/scroll/gvscroll";
+import GVScrollContainer from "shared/components/scroll/gvscroll-container";
 import AlertMessageList from "shared/modules/alert-message/components/alert-message-list/alert-message-list";
 import history from "shared/utils/history";
 
@@ -16,13 +16,13 @@ const Root = () => {
   return (
     <Provider store={store}>
       <ConnectedRouter history={history}>
-        <GVScroll>
+        <GVScrollContainer>
           <Switch>
             <Route path={AUTH_ROUTES_REGEX} component={AuthRoutes} />
             <Route path={HOME_ROUTE} component={AppRoutes} />
           </Switch>
           <AlertMessageList />
-        </GVScroll>
+        </GVScrollContainer>
       </ConnectedRouter>
     </Provider>
   );

@@ -1,16 +1,33 @@
-import { notificationsToggle } from "pages/app/components/notifications/actions/notifications.actions";
-import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
-import { SIGNUP_ROUTE } from "pages/auth/signup/signup.routes";
+import { ProfileHeaderViewModel } from "gv-api-web";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchTwoFactor } from "shared/actions/2fa-actions";
 import { GLOBAL_SEARCH_ROUTE } from "shared/components/global-search/global-search.routes";
 import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
 import Header from "shared/components/header/header";
+import { IDispatchable } from "shared/utils/types";
 
+import { notificationsToggle } from "../../../pages/app/components/notifications/actions/notifications.actions";
+import { LOGIN_ROUTE } from "../../../pages/auth/login/login.routes";
 import { logout } from "../../../pages/auth/login/services/login.service";
+import { SIGNUP_ROUTE } from "../../../pages/auth/signup/signup.routes";
+import { IState } from "../../../reducers";
 
-class HeaderContainer extends Component {
+export interface IHeaderContainerStateProps {
+  isAuthenticated: boolean;
+  info: ProfileHeaderViewModel | undefined;
+  backPath: string | undefined;
+}
+export interface IHeaderContainerDispatchProps {
+  fetchProfileHeaderInfo: any;
+  logout(): IDispatchable<void>;
+  notificationsToggle: any;
+  fetchTwoFactor: any;
+}
+
+class HeaderContainer extends Component<
+  IHeaderContainerStateProps & IHeaderContainerDispatchProps
+> {
   componentDidMount() {
     this.props.isAuthenticated && this.props.fetchProfileHeaderInfo();
     this.props.isAuthenticated && this.props.fetchTwoFactor();
@@ -21,15 +38,12 @@ class HeaderContainer extends Component {
       info,
       logout,
       notificationsToggle,
-      fetchProfileHeaderInfo,
       isAuthenticated,
-      backPath,
-      ...other
+      backPath
     } = this.props;
     return (
       <Header
-        {...info.data}
-        {...other}
+        profileHeader={info}
         backPath={backPath}
         isAuthenticated={isAuthenticated}
         logout={logout}
@@ -42,17 +56,17 @@ class HeaderContainer extends Component {
   }
 }
 
-const mapDispatchToProps = {
+const mapDispatchToProps: IHeaderContainerDispatchProps = {
   fetchProfileHeaderInfo,
   logout,
   notificationsToggle,
   fetchTwoFactor
 };
 
-const mapStateToProps = state => ({
-  ...state.profileHeader,
+const mapStateToProps = (state: IState): IHeaderContainerStateProps => ({
+  info: state.profileHeader.info.data,
   isAuthenticated: state.authData.isAuthenticated,
-  backPath: state.routing.location.pathname
+  backPath: state.routing.location ? state.routing.location.pathname : undefined
 });
 
 export default connect(

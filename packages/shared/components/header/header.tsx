@@ -1,7 +1,8 @@
 import "./header.scss";
 
+import { ProfileHeaderViewModel } from "gv-api-web";
 import { GVButton } from "gv-react-components";
-import React, { Component, Fragment } from "react";
+import * as React from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Icon } from "shared/components/icon/icon";
@@ -13,7 +14,28 @@ import ProfileWidget from "shared/components/profile-widget/profile-widget";
 import WalletWidget from "shared/components/wallet-widget/wallet-widget";
 import CurrencySelectContainer from "shared/modules/currency-select/components/currency-select-container";
 
-class Header extends Component {
+import { IDispatchable } from "../../utils/types";
+
+interface IHeaderState {
+  isOpenNavigation: boolean;
+}
+
+export interface IHeaderProps {
+  profileHeader?: ProfileHeaderViewModel;
+  isAuthenticated: boolean;
+  LOGIN_ROUTE: string;
+  SIGNUP_ROUTE: string;
+  GLOBAL_SEARCH_ROUTE: string;
+  backPath: string | undefined;
+  t(string: string): string;
+  logout(): IDispatchable<void>;
+  openNotifications(): void;
+}
+
+class Header extends React.Component<IHeaderProps, IHeaderState> {
+  static defaultProps = {
+    profileHeader: {} as ProfileHeaderViewModel
+  };
   state = {
     isOpenNavigation: false
   };
@@ -24,19 +46,24 @@ class Header extends Component {
   render() {
     const {
       t,
-      avatar,
       logout,
-      email,
       openNotifications,
-      notificationsCount,
       isAuthenticated,
+      LOGIN_ROUTE,
+      SIGNUP_ROUTE,
+      GLOBAL_SEARCH_ROUTE,
+      profileHeader
+    } = this.props;
+
+    if (!profileHeader) return null;
+    const {
+      avatar,
+      email,
       totalBalanceGvt,
       availableGvt,
       investedGvt,
-      LOGIN_ROUTE,
-      SIGNUP_ROUTE,
-      GLOBAL_SEARCH_ROUTE
-    } = this.props;
+      notificationsCount
+    } = profileHeader;
     return (
       <div className="header">
         <div className="header__left">
@@ -44,7 +71,7 @@ class Header extends Component {
             className="navigation__menu profile-avatar"
             onClick={this.handleOpenMenu}
           >
-            <Icon type={"menu"} />
+            <Icon type="menu" />
           </div>
           <Navigation className="header__navigation" />
         </div>
@@ -59,7 +86,7 @@ class Header extends Component {
         <div className="header__separator" />
         <div className="header__right">
           {isAuthenticated ? (
-            <Fragment>
+            <React.Fragment>
               <WalletWidget
                 className="header__wallet"
                 totalBalanceGvt={totalBalanceGvt}
@@ -76,7 +103,7 @@ class Header extends Component {
                 avatar={avatar}
                 email={email}
               />
-            </Fragment>
+            </React.Fragment>
           ) : (
             <div className="header__buttons">
               <Link

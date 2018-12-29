@@ -5,19 +5,31 @@ export const REQUEST_SUFFIX = "REQUEST";
 export const SUCCESS_SUFFIX = "SUCCESS";
 export const FAILURE_SUFFIX = "FAILURE";
 
+export interface IApiReducerFactory<T> {
+  isPending: boolean;
+  errorMessage: string;
+  code: null;
+  data?: T;
+}
+
 const initialState = {
   isPending: false,
   errorMessage: "",
   code: null
 };
 
+interface IReducerFactoryConfig {
+  apiType: string;
+  suffixes?: Array<string>;
+}
+
 const apiReducerFactory = (
-  config = {
+  config: IReducerFactoryConfig = {
     apiType: API_TYPE,
     suffixes: [REQUEST_SUFFIX, SUCCESS_SUFFIX, FAILURE_SUFFIX]
   },
-  subReducer
-) => (state = initialState, action) => {
+  subReducer?: any
+) => (state = initialState, action: any) => {
   const apiType = config.apiType || API_TYPE;
   const suffixes = config.suffixes || [
     REQUEST_SUFFIX,

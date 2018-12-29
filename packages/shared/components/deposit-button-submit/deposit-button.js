@@ -4,8 +4,8 @@ import React from "react";
 import { connect } from "react-redux";
 
 const DepositButton = props => {
-  const { onSubmit, available, deposit, children, title } = props;
-  const disabled = props.disabled || available < deposit;
+  const { onSubmit /*, available, deposit*/, children, title } = props;
+  const disabled = props.disabled /*|| available < deposit*/;
   return (
     <GVButton
       title={title}
