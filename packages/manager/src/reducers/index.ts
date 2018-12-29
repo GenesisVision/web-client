@@ -1,10 +1,12 @@
+import { NotificationSettingList } from "gv-api-web";
+import { IHeaderReducer } from "investor-web-portal/src/modules/header/reducer/header-reducer";
 import assetEditReducer from "modules/asset-edit/reducer/asset-edit.reducer";
 import fundDepositReducer from "modules/fund-deposit/reducer/fund-deposit.reducer";
 import headerReducer from "modules/header/reducer/header-reducer";
 import programDepositReducer from "modules/program-deposit/reducer/program-deposit.reducer";
 import notificationsReducer from "pages/app/components/notifications/reducers/notifications.reducers";
 import { loadingBarReducer } from "react-redux-loading-bar";
-import { routerReducer } from "react-router-redux";
+import { RouterState, routerReducer } from "react-router-redux";
 import { combineReducers } from "redux";
 import programsRatingReducer from "shared/components/programs-rating/reducers/programs-rating.reducers";
 import walletReducer from "shared/components/wallet/reducers/wallet.reducers";
@@ -20,12 +22,20 @@ import emailPendingReducer from "shared/reducers/email-pending-reducer";
 import platformReducer from "shared/reducers/platform-reducer";
 import uiReducer from "shared/reducers/ui-reducer";
 
+import { IAuthReducer } from "../../../shared/reducers/auth-reducer";
 import programSettingsReducer from "../modules/program-settings/reducers/program-settings-reducers";
 import passwordRestoreReducer from "../pages/auth/forgot-password/reducers/password-restore-reducers";
 import loginReducer from "../pages/auth/login/reducers/login.reducers";
 import signUpReducer from "../pages/auth/signup/reducers/signup.reducers";
 import dashboardReducer from "../pages/dashboard/reducers/dashboard.reducers";
 import managerReducer from "../pages/manager/reducers/manager.reducers";
+
+export interface IState {
+  notificationSettings: NotificationSettingList;
+  profileHeader: IHeaderReducer;
+  authData: IAuthReducer;
+  routing: RouterState;
+}
 
 export default combineReducers({
   dashboard: dashboardReducer,
