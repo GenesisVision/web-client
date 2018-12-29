@@ -1,0 +1,29 @@
+{
+  "extends": "./tsconfig.paths.json",
+  "compilerOptions": {
+    "target": "es5",
+    "allowJs": true,
+    "skipLibCheck": false,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "preserve"
+  },
+  "include": [
+    "../../packages",
+    "src"
+  ],
+  "files": [
+    "../../node_modules/gv-api-web/distribution/types.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "config-overrides.js"
+  ]
+}

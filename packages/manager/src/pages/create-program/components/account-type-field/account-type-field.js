@@ -6,10 +6,10 @@ import Select from "shared/components/select/select";
 import { getLeverages } from "../../helpers/create-program.helpers";
 
 class AccountTypeField extends Component {
-  onChange = (name, target) => {
+  onChange = event => {
     const { setLeverageChooseAvailable, setFieldValue, broker } = this.props;
 
-    const leverages = getLeverages(broker, target.props.value);
+    const leverages = getLeverages(broker, event.target.value);
     if (leverages.length < 2) {
       setFieldValue("leverage", leverages[0].toString());
       setLeverageChooseAvailable(false);
@@ -17,7 +17,7 @@ class AccountTypeField extends Component {
       setLeverageChooseAvailable(true);
     }
 
-    setFieldValue("accountType", target.props.value);
+    setFieldValue("accountType", event.target.value);
   };
 
   render() {

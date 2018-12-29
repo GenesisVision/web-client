@@ -11,6 +11,7 @@ import emailPendingActions from "shared/actions/email-pending-actions";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import authService from "shared/services/auth-service";
 
+import { LOGIN_ROUTE } from "../../login/login.routes";
 import passwordRestoreActions from "../actions/forgot-password.actions";
 
 const forgotPassword = data => dispatch => {
@@ -33,8 +34,18 @@ const restorePassword = ({ userId, code, data, setSubmitting }) => dispatch => {
         )
       );
     })
-    .catch(() => {
-      setSubmitting(false);
+    .catch(e => {
+      if (e.code === "RequiresTwoFactor") {
+        dispatch(push(LOGIN_ROUTE));
+        dispatch(
+          alertMessageActions.success(
+            "auth.password-restore.success-alert-message",
+            true
+          )
+        );
+      } else {
+        setSubmitting(false);
+      }
     });
 };
 

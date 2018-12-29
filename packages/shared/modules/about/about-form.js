@@ -2,9 +2,9 @@ import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import PropTypes from "prop-types";
 import React from "react";
-import Scrollbars from "react-custom-scrollbars";
 import { translate } from "react-i18next";
 import { compose } from "redux";
+import GVScroll from "shared/components/scroll/gvscroll";
 
 import styles from "./About.module.scss";
 
@@ -18,7 +18,7 @@ const AboutForm = ({
 }) => {
   return (
     <form id="about-manager" onSubmit={handleSubmit} className={styles.about}>
-      <Scrollbars autoHeight autoHeightMax={14000}>
+      <GVScroll autoHeight autoHeightMax={14000}>
         <table className={"profile"}>
           <tbody>
             <tr className="profile__content">
@@ -60,7 +60,7 @@ const AboutForm = ({
             </tr>
           </tbody>
         </table>
-      </Scrollbars>
+      </GVScroll>
     </form>
   );
 };

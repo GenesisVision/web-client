@@ -11,6 +11,10 @@
 }
 
 @keyframes mask {
-  from {transform: translateY(-100%)}
-  to {transform: translateY(100%)}
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(100%);
+  }
 }

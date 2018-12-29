@@ -17,8 +17,8 @@ $padding: $padding-small;
 }
 
 .table {
-  @include adaptive-padding(bottom, $padding-xsmall);
   @include adaptive-padding(top, $padding-xsmall, 2);
+  @include adaptive-padding(bottom, $padding-xsmall, 2);
   width: 100%;
   border-spacing: 0;
   & .message {
@@ -31,19 +31,16 @@ $padding: $padding-small;
     display: none;
   }
   &__footer {
+    @include adaptive-padding(top, $padding-xxsmall, 2);
+    @include horizontal-paddings($padding-small, 2);
     display: flex;
     align-items: baseline;
-    padding: $padding/2;
     font-size: $td-font-size/1.5;
-    padding: 0 $padding-small/2;
     .pagination {
       margin: 0;
     }
     .pager {
       margin-left: auto;
-    }
-    @include media-breakpoint-landscape-phone() {
-      padding: 0 $padding-small;
     }
   }
   &__toolbar {

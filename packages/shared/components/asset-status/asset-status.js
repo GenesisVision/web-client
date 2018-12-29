@@ -2,8 +2,8 @@ import "./asset-status.scss";
 
 import classnames from "classnames";
 import React, { Fragment, PureComponent } from "react";
-import Scrollbars from "react-custom-scrollbars";
 import { translate } from "react-i18next";
+import GVScroll from "shared/components/scroll/gvscroll";
 import { STATUS } from "shared/constants/constants";
 
 import Popover from "../popover/popover";
@@ -50,7 +50,7 @@ class AssetStatus extends PureComponent {
           noPadding
           onClose={this.handleCloseDropdown}
         >
-          <Scrollbars autoHeight>
+          <GVScroll autoHeight>
             <div className="dashboard-request-popover">
               <AssetStatusRequests
                 id={id}
@@ -60,7 +60,7 @@ class AssetStatus extends PureComponent {
                 onCancel={onCancel}
               />
             </div>
-          </Scrollbars>
+          </GVScroll>
         </Popover>
       </Fragment>
     );

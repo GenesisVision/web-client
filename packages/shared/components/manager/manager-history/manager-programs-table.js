@@ -9,17 +9,16 @@ import TableModule from "shared/components/table/components/table-module";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { toggleFavoriteProgram } from "shared/modules/favorite-asset/services/favorite-program.service";
 import ProgramTableRow from "shared/modules/programs-table/components/programs-table/program-table-row";
-import { PROGRAMS_COLUMNS } from "shared/modules/programs-table/components/programs-table/programs.constants";
 
+import ProgramTableModule from "../../../modules/programs-table/components/programs-table/programs-table-module";
 import {
   MANAGER_DEFAULT_FILTERS,
-  MANAGER_FILTERING
+  MANAGER_FILTERING,
+  MANAGER_SORTING
 } from "../manager.constants";
 import { fetchManagerPrograms } from "../services/manager.service";
 
 class ManagerPrograms extends Component {
-  state = {};
-
   fetchManagerPrograms = filters => {
     const { managerId } = this.props;
     return fetchManagerPrograms({ ...filters, managerId });
@@ -41,13 +40,14 @@ class ManagerPrograms extends Component {
     const { t, title, isAuthenticated } = this.props;
 
     return (
-      <TableModule
+      <ProgramTableModule
+        disableTitle
         title={title}
         getItems={this.fetchManagerPrograms}
         defaultFilters={MANAGER_DEFAULT_FILTERS}
         filtering={MANAGER_FILTERING}
         paging={DEFAULT_PAGING}
-        columns={PROGRAMS_COLUMNS}
+        sorting={MANAGER_SORTING}
         renderFilters={(updateFilter, filtering) => (
           <DateRangeFilter
             name={DATE_RANGE_FILTER_NAME}
@@ -56,26 +56,8 @@ class ManagerPrograms extends Component {
             startLabel={t("filters.date-range.program-start")}
           />
         )}
-        renderHeader={column => {
-          if (!isAuthenticated && column.name === "favorite") return null;
-          return (
-            <span
-              className={`programs-table__cell  programs-table__cell--${
-                column.name
-              }`}
-            >
-              {t(`programs-page.programs-header.${column.name}`)}
-            </span>
-          );
-        }}
-        renderBodyRow={(program, updateRow) => (
-          <ProgramTableRow
-            title={title}
-            program={program}
-            toggleFavorite={this.toggleFavorite(program, updateRow)}
-            isAuthenticated={isAuthenticated}
-          />
-        )}
+        toggleFavorite={this.toggleFavorite}
+        isAuthenticated={isAuthenticated}
       />
     );
   }

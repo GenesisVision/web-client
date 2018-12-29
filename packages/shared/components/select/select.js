@@ -3,8 +3,8 @@ import "./select.scss";
 import classnames from "classnames";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import Scrollbars from "react-custom-scrollbars";
 import Popover from "shared/components/popover/popover";
+import GVScroll from "shared/components/scroll/gvscroll";
 import SelectItem from "shared/components/select/select-item";
 import FilterArrowIcon from "shared/components/table/components/filtering/filter-arrow-icon";
 
@@ -57,6 +57,27 @@ class Select extends Component {
     this.setState({ anchor: null });
   };
 
+  setDefaultValue() {
+    const { name, onChange, value } = this.props;
+    if (value && value.length) return;
+    const children = React.Children.toArray(this.props.children);
+    const child = children[0];
+    if (child) {
+      const event = {
+        target: { value: child.props.value, name }
+      };
+      onChange(event, child);
+    }
+  }
+
+  componentDidMount() {
+    this.setDefaultValue();
+  }
+
+  componentDidUpdate() {
+    this.setDefaultValue();
+  }
+
   render() {
     let displayValue = this.props.value;
     const items = React.Children.map(this.props.children, child => {
@@ -102,9 +123,9 @@ class Select extends Component {
           anchorEl={this.state.anchor}
           onClose={this.handleClose}
         >
-          <Scrollbars autoHeight autoHeightMax="300px">
+          <GVScroll autoHeight autoHeightMax="300px">
             <div className="select__options">{items}</div>
-          </Scrollbars>
+          </GVScroll>
         </Popover>
       </div>
     );

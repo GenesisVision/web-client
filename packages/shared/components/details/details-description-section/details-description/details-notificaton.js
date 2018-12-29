@@ -11,21 +11,19 @@ import DetailsDescriptionControl from "./details-description-control";
 
 const DetailsNotificaton = ({ t, url, hasNotifications, title }) => {
   return (
-    <Link
+    <DetailsDescriptionControl
+      tag={Link}
       to={{
         pathname: url,
         state: `/ ${title}`
       }}
+      text={t("fund-details-page.description.notifications")}
     >
-      <DetailsDescriptionControl
-        text={t("fund-details-page.description.notifications")}
-      >
-        <RingIcon
-          selected={hasNotifications}
-          className="details-description-control__icon"
-        />
-      </DetailsDescriptionControl>
-    </Link>
+      <RingIcon
+        selected={hasNotifications}
+        className="details-description-control__icon"
+      />
+    </DetailsDescriptionControl>
   );
 };
 

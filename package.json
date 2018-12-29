@@ -16,13 +16,17 @@
   },
   "lint-staged": {
     "linters": {
-      "**/*.{js,json,scss}": ["prettier --write", "git add"],
-      "**/*.js": ["import-sort --write", "git add"]
+      "**/*.{ts,tsx,js,json,scss}": ["prettier --write", "git add"],
+      "**/*.{ts,tsx,js}": ["import-sort --write", "git add"]
     }
   },
   "importSort": {
     ".js": {
       "parser": "babylon",
+      "style": "module"
+    },
+    ".ts, .tsx": {
+      "parser": "typescript",
       "style": "module"
     }
   },

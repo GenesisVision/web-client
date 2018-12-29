@@ -5,8 +5,8 @@ import { GVFormikField, GVTextField } from "gv-react-components";
 import moment from "moment";
 import PropTypes from "prop-types";
 import React, { Component, Fragment } from "react";
-import Scrollbars from "react-custom-scrollbars";
 import { translate } from "react-i18next";
+import GVScroll from "shared/components/scroll/gvscroll";
 import VerificationStatus from "shared/components/verification-status/verification-status";
 import About from "shared/modules/about/about";
 
@@ -45,7 +45,7 @@ class Profile extends Component {
           className="profile__container"
           onSubmit={handleSubmit}
         >
-          <Scrollbars autoHeight autoHeightMax={14000}>
+          <GVScroll autoHeight autoHeightMax={14000}>
             <table className={"profile"}>
               <tbody>
                 <tr className="profile__title">
@@ -93,7 +93,7 @@ class Profile extends Component {
                 </tr>
               </tbody>
             </table>
-          </Scrollbars>
+          </GVScroll>
         </form>
       </Fragment>
     );
