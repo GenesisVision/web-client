@@ -44,8 +44,6 @@ class WalletBalanceContainer extends Component {
   render() {
     const { walletBalanceData, currency } = this.props;
 
-    if (!walletBalanceData) return null;
-
     return (
       <Fragment>
         <WalletBalance

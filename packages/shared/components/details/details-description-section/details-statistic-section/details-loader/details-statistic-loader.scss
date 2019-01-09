@@ -1,0 +1,22 @@
+@import "~shared/styles/_sizes.scss";
+
+.details-statistics-loader {
+  &__row {
+    @include adaptive-padding(bottom, $padding-medium);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    &:last-child {
+      padding-bottom: 0;
+    }
+  }
+
+  &__stat {
+    padding-bottom: $padding-xsmall;
+  }
+
+  &__subheading {
+    @include adaptive-padding(bottom, $padding-xsmall);
+  }
+}

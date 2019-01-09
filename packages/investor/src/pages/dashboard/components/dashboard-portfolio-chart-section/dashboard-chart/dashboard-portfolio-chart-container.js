@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import { formartChartMinValue } from "shared/components/chart/chart-components/chart-components.helpers";
 import ChartPeriod from "shared/components/chart/chart-period/chart-period";
 import { DEFAULT_PERIOD } from "shared/components/chart/chart-period/chart-period.helpers";
-import DashboardChartLoader from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-loader";
+import { DashboardChartLoader } from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-loaders";
 import DashboardChartStatsLoader from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-stats-loader";
 
 import { getPortfolioChart } from "../../../services/dashboard-chart.service";
