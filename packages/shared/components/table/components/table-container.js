@@ -57,6 +57,7 @@ class TableContainer extends PureComponent {
     return (
       <Table
         {...otherProps}
+        updateRow={this.updateItems}
         paging={newPaging}
         items={data.items}
         isPending={isPending}

@@ -22,8 +22,6 @@ class DashboardAssetsContainer extends Component {
     service.getDashboardPrograms();
   };
 
-  onChangeStatus = () => this.getAssets();
-
   render() {
     const { t, title } = this.props;
 
@@ -94,7 +92,6 @@ class DashboardAssetsContainer extends Component {
         createProgram={createProgram()}
         title={title}
         role={MANAGER}
-        onChangeStatus={this.onChangeStatus}
       />
     );
   }
