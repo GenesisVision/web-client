@@ -835,7 +835,8 @@
         "drawdown": "D.down",
         "profit": "Profit",
         "chart": "Chart",
-        "value": "Value"
+        "value": "Value",
+        "status": "Status"
       },
       "get-started": {
         "title": "Get started",
@@ -951,7 +952,8 @@
         "drawdown": "D.down",
         "profit": "Profit",
         "chart": "Chart",
-        "value": "Value"
+        "value": "Value",
+        "status": "Status"
       },
       "get-started": {
         "title": "Get started",
