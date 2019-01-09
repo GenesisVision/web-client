@@ -7,31 +7,27 @@ import ProgramWithdrawTop from "./program-withdraw-top";
 class ProgramWithdrawPopup extends Component {
   state = {
     data: undefined,
-    isPending: false,
-    errorMessage: null
+    isPending: false
   };
 
   componentDidMount() {
     this.setState({ isPending: true });
     this.props
       .fetchInfo()
-      .then(data => {
-        this.setState({ data, isPending: false });
-      })
-      .catch(data => this.setState({ data, isPending: false }));
+      .then(data => this.setState({ data, isPending: false }))
+      .catch(() => this.setState({ isPending: false }));
   }
 
   handleSubmit = amount => {
     this.setState({ isPending: true });
     return this.props
       .withdraw(amount)
-      .then(data => this.setState({ data, isPending: false }))
-      .catch(data => this.setState({ data, isPending: false }));
+      .catch(() => this.setState({ isPending: false }));
   };
 
   render() {
     if (!this.state.data) return null;
-    const { programCurrency, accountCurrency, error } = this.props;
+    const { programCurrency, accountCurrency, errorMessage } = this.props;
     const { title, availableToWithdraw, periodEnds, rate } = this.state.data;
     return (
       <Fragment>
@@ -47,7 +43,7 @@ class ProgramWithdrawPopup extends Component {
           periodEnds={periodEnds}
           rate={rate}
           onSubmit={this.handleSubmit}
-          errorMessage={error}
+          errorMessage={errorMessage}
           disabled={this.state.isPending}
         />
       </Fragment>

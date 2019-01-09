@@ -15,7 +15,7 @@ import investorApi from "shared/services/api-client/investor-api";
 import authService from "shared/services/auth-service";
 
 class ProgramWithdrawContainer extends PureComponent {
-  state = { error: "" };
+  state = { errorMessage: null };
 
   handleWithdraw = (id, percent) => {
     return investorApi
@@ -33,7 +33,7 @@ class ProgramWithdrawContainer extends PureComponent {
         );
       })
       .catch(error => {
-        this.setState({ error: error.errorMessage || error.error });
+        this.setState(error);
       });
   };
 
@@ -53,7 +53,7 @@ class ProgramWithdrawContainer extends PureComponent {
           accountCurrency={accountCurrency}
           fetchInfo={() => services.getProgramWithdrawInfo(id)}
           withdraw={amount => this.handleWithdraw(id, amount)}
-          error={this.state.error}
+          errorMessage={this.state.errorMessage}
         />
       </Dialog>
     );

@@ -217,6 +217,7 @@
     "withdraw-all": "Withdraw all invested tokens",
     "success-alert-message": "Request to withdrawal sent successfully.",
     "validation": {
+      "amount-is-zero": "Amount must be greater than zero",
       "amount-more-than-available": "Amount is more than available for withdraw",
       "amount-is-required": "Amount is required."
     }
