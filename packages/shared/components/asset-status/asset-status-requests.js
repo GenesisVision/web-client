@@ -27,9 +27,14 @@ class AssetStatusRequests extends PureComponent {
   };
 
   render() {
-    const { service, role, asset } = this.props;
+    const { t, service, role, asset } = this.props;
     const { requests } = this.state;
     if (!requests) return null;
+    if (requests.length === 0) {
+      return (
+        <div>{t("program-details-page.description.requests-completed")}</div>
+      );
+    }
     return (
       <Fragment>
         {requests.map(x => (
@@ -46,9 +51,6 @@ class AssetStatusRequests extends PureComponent {
     );
   }
 }
-const mapStateToProps = state => {
-  return {};
-};
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -59,7 +61,7 @@ const mapDispatchToProps = dispatch => {
 export default compose(
   translate(),
   connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
   )
 )(AssetStatusRequests);
