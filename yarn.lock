@@ -3927,7 +3927,7 @@ dom-converter@~0.2:
   dependencies:
     utila "~0.4"
 
-dom-css@^2.0.0:
+dom-css@^2.0.0, dom-css@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/dom-css/-/dom-css-2.1.0.tgz#fdbc2d5a015d0a3e1872e11472bbd0e7b9e6a202"
   integrity sha1-/bwtWgFdCj4YcuEUcrvQ57nmogI=
@@ -9632,7 +9632,7 @@ raf@3.4.0:
   dependencies:
     performance-now "^2.1.0"
 
-raf@^3.1.0, raf@^3.2.0, raf@^3.4.0:
+raf@^3.1.0, raf@^3.2.0, raf@^3.4.0, raf@^3.4.1:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/raf/-/raf-3.4.1.tgz#0742e99a4a6552f445d73e3ee0328af0ff1ede39"
   integrity sha512-Sq4CW4QhwOHE8ucn6J34MqtZCeWFP2aQSmrlroYgqAV1PjStIhJXxYuTgUIfkEk7zTLjmIjLmU5q+fbD1NnOJA==
