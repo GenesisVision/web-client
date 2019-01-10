@@ -1,17 +1,44 @@
-import { PureComponent } from "react";
-import React, { Fragment } from "react";
-import { translate } from "react-i18next";
-import connect from "react-redux/es/connect/connect";
+import { ProgramRequest } from "gv-api-web";
+import React, { Fragment, PureComponent } from "react";
+import { TranslationFunction, translate } from "react-i18next";
+import { connect } from "react-redux";
+import { Dispatch } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
+import { ActionType, IDispatchable } from "../../utils/types";
 import DashboardRequest from "../dashboard/dashboard-portfolio-chart-section/dashboard-in-requests/dashboard-request";
 import {
+  CancelReqestType,
   cancelRequestDispatch,
   getAssetRequests
 } from "./services/asset-status.service";
 
-class AssetStatusRequests extends PureComponent {
-  state = { requests: null };
+export interface IAssetStatusRequestsOwnProps {
+  id: string;
+  role: string;
+  asset: string;
+  onCancel(): void;
+  handleCloseDropdown(): void;
+  t: TranslationFunction;
+}
+
+export interface IAssetStatusRequestsDispatchProps {
+  service: {
+    cancelRequestDispatch(x: CancelReqestType): IDispatchable<void>;
+  };
+}
+
+export interface IAssetStatusRequestsState {
+  requests?: Array<ProgramRequest>;
+}
+
+class AssetStatusRequests extends PureComponent<
+  IAssetStatusRequestsOwnProps & IAssetStatusRequestsDispatchProps,
+  IAssetStatusRequestsState
+> {
+  state: IAssetStatusRequestsState = {
+    requests: undefined
+  };
 
   componentDidMount() {
     const { id, role, asset } = this.props;
@@ -52,7 +79,9 @@ class AssetStatusRequests extends PureComponent {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (
+  dispatch: Dispatch<ActionType>
+): IAssetStatusRequestsDispatchProps => {
   return {
     service: bindActionCreators({ cancelRequestDispatch }, dispatch)
   };

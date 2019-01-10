@@ -1,6 +1,17 @@
 import { Dispatch } from "react-redux";
-import { ActionCreatorsMapObject } from "redux";
+import { Action } from "redux";
 
 export interface IDispatchable<T> {
-  (dispatch: Dispatch<ActionCreatorsMapObject>): T;
+  (dispatch: Dispatch<ActionType>): T;
 }
+
+export interface ActionType extends Action {
+  type: string;
+  payload?: any;
+}
+
+export interface DispatchType<R> {
+  (asyncAction: ActionType): R;
+}
+
+export type Nullable<T> = T | null;
