@@ -12,10 +12,8 @@ export const dateTickFormatter = (start, end) => date => {
   return moment(date).format(dateFormat);
 };
 
-const getTicksCountByPeriod = (start, end) => {
-  const duration = end.getTime() - start.getTime();
+const getTicksCountByPeriod = duration => {
   const msInDay = 1000 * 60 * 60 * 24;
-  if (duration <= msInDay) return 6;
   if (duration <= msInDay * 7) return 7;
   if (duration <= msInDay * 30) return 10;
   if (duration <= msInDay * 90) return 4;
@@ -23,11 +21,29 @@ const getTicksCountByPeriod = (start, end) => {
 };
 
 export const composeTicks = (start, end) => {
-  const periodStart = start.getTime();
-  const periodEnd = end.getTime();
-  const ticks = getTicksCountByPeriod(start, end);
-  const diff = (periodEnd - periodStart) / (ticks - 1);
-  return [...Array(ticks).keys()].map(x => periodStart + diff * x);
+  const periodStart = moment(start)
+    .add(1, "days")
+    .startOf("day")
+    .toDate()
+    .getTime();
+
+  const periodEnd = moment(end)
+    .startOf("day")
+    .toDate()
+    .getTime();
+
+  const isOneDay = !Boolean(periodEnd - periodStart);
+
+  const duration = !isOneDay
+    ? periodEnd - periodStart
+    : end.getTime() - start.getTime();
+
+  const ticks = getTicksCountByPeriod(duration);
+
+  const diff = duration / (ticks - 1);
+  return [...Array(ticks).keys()].map(
+    x => (isOneDay ? start.getTime() : periodStart) + diff * x
+  );
 };
 
 const MIN_CHART_VALUE = 1e-6;
