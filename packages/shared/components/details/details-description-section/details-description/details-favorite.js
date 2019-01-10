@@ -19,6 +19,7 @@ const DetailsFavorite = ({ t, toggleFavorite, id, isFavorite }) => (
       className="details-description-control__icon"
       id={id}
       selected={isFavorite}
+      onClick={toggleFavorite}
     />
   </DetailsDescriptionControl>
 );
