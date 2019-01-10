@@ -33,7 +33,6 @@ class DashboardAssets extends Component {
     const { tab, programsCount, fundsCount } = this.state;
     const {
       role,
-      onChangeStatus,
       title,
       getDashboardPrograms,
       getDashboardFunds,
@@ -65,7 +64,6 @@ class DashboardAssets extends Component {
               createProgram={createProgram}
               title={title}
               role={role}
-              onChangeStatus={onChangeStatus}
             />
           )}
           {tab === "funds" && (
@@ -76,7 +74,6 @@ class DashboardAssets extends Component {
               getDashboardFunds={getDashboardFunds}
               title={title}
               role={role}
-              onChangeStatus={onChangeStatus}
             />
           )}
         </div>
