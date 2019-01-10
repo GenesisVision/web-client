@@ -23,6 +23,7 @@
     "../../node_modules/gv-api-web/distribution/types.d.ts"
   ],
   "exclude": [
+    "node_modules",
     "config-overrides.js"
   ]
 }
