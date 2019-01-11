@@ -51,7 +51,9 @@ const DepositForm = ({
       formattedValue === "" ||
       (isValidateFraction &&
         isAvailableInWallet &&
-        (investor ? isAvailableToInvest : true))
+        (investor && availableToInvest !== undefined
+          ? isAvailableToInvest
+          : true))
     );
   };
 
