@@ -37,12 +37,13 @@ const DepositForm = ({
     (entryFee ? parseFloat(fee) : 0);
   const isAllow = values => {
     const { floatValue, formattedValue } = values;
-    const { availableInWallet } = info;
+    const { availableToInvest, availableInWallet } = info;
     const fee = calculateValueOfEntryFee(floatValue, info.entryFee);
     const gvFee = calculateValueOfEntryFee(floatValue, info.gvCommission);
     return (
       formattedValue === "" ||
       (validateFraction(formattedValue, "GVT") &&
+        floatValue <= parseFloat(availableToInvest) &&
         floatValue <=
           parseFloat(availableInWallet - gvFee - (entryFee ? fee : 0)))
     );
