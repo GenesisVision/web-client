@@ -1,10 +1,17 @@
 import "./details-description-control.scss";
 
 import classnames from "classnames";
+import H from "history";
 import React from "react";
 
-const DetailsDescriptionControl = ({
-  t,
+export interface IDetailsDescriptionControlProps {
+  text: string;
+  className?: string;
+  onClick?(): void;
+  to?: H.LocationDescriptor;
+  tag: React.ComponentType<any> | string;
+}
+const DetailsDescriptionControl: React.SFC<IDetailsDescriptionControlProps> = ({
   children,
   text,
   tag: Tag,
