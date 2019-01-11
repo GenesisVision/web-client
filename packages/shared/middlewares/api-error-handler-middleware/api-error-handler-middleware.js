@@ -7,7 +7,7 @@ const apiErrorHandlerMiddleware = (
   config = { failureSuffix: REJECTED_SUFFIX }
 ) => ({ dispatch }) => next => action => {
   const REJECTED = config.failureSuffix;
-  var isRejected = new RegExp(REJECTED + "$", "g");
+  const isRejected = new RegExp(REJECTED + "$", "g");
 
   if (isRejected && action.error) {
     const handledError = action.payload;
