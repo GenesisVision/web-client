@@ -5,7 +5,6 @@ import { fetchTwoFactor } from "shared/actions/2fa-actions";
 import { GLOBAL_SEARCH_ROUTE } from "shared/components/global-search/global-search.routes";
 import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
 import Header from "shared/components/header/header";
-import { IDispatchable } from "shared/utils/types";
 
 import { notificationsToggle } from "../../../pages/app/components/notifications/actions/notifications.actions";
 import { LOGIN_ROUTE } from "../../../pages/auth/login/login.routes";
@@ -20,7 +19,7 @@ export interface IHeaderContainerStateProps {
 }
 export interface IHeaderContainerDispatchProps {
   fetchProfileHeaderInfo: any;
-  logout(): IDispatchable<void>;
+  logout(): void;
   notificationsToggle: any;
   fetchTwoFactor: any;
 }
