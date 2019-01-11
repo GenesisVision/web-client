@@ -20,14 +20,21 @@ class DepositPopup extends Component {
       currency,
       invest,
       entryFee,
-      program
+      program,
+      investor
     } = this.props;
     return info ? (
       <Fragment>
-        <DepositTop info={info} type={type} program={program} />
+        <DepositTop
+          info={info}
+          type={type}
+          program={program}
+          investor={investor}
+        />
         <DepositForm
           entryFee={entryFee}
           program={program}
+          investor={investor}
           errorMessage={submitInfo.errorMessage}
           currency={currency}
           info={info}

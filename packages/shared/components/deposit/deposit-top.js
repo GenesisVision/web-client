@@ -4,7 +4,7 @@ import { formatValue } from "shared/utils/formatter";
 
 import StatisticItem from "../statistic-item/statistic-item";
 
-const DepositTop = ({ info, t, program }) => {
+const DepositTop = ({ info, t, program, investor }) => {
   return (
     <div className="dialog__top">
       <div className="dialog__header">
@@ -12,7 +12,7 @@ const DepositTop = ({ info, t, program }) => {
         <p>{info.title}</p>
       </div>
       <div className="dialog-field">
-        {program && (
+        {program && investor && (
           <StatisticItem
             label={t("deposit-asset.program.available-to-invest")}
             big
