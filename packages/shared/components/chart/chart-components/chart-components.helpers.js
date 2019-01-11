@@ -34,9 +34,9 @@ export const composeTicks = (start, end) => {
 
   const isOneDay = !Boolean(periodEnd - periodStart);
 
-  const duration = !isOneDay
-    ? periodEnd - periodStart
-    : end.getTime() - start.getTime();
+  const duration = isOneDay
+    ? end.getTime() - start.getTime()
+    : periodEnd - periodStart;
 
   const ticks = getTicksCountByPeriod(duration);
 
