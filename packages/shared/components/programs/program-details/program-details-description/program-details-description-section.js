@@ -102,19 +102,17 @@ class ProgramDetailsDescriptionSection extends PureComponent {
     const { programDescription, ui } = this.state;
     if (!programDescription) return null;
     return (
-      <Fragment>
-        <ProgramDetailsDescription
-          PROGRAM={PROGRAM}
-          onReinvestingClick={this.handleOnReinvestingClick}
-          programDescription={programDescription}
-          isReinvestPending={ui.isReinvestPending}
-          onFavoriteClick={this.handleOnFavoriteClick}
-          isFavoritePending={ui.isFavoritePending}
-          investmentData={composeInvestmentData(programDescription)}
-          {...programDescription.personalProgramDetails}
-          {...this.props}
-        />
-      </Fragment>
+      <ProgramDetailsDescription
+        PROGRAM={PROGRAM}
+        onReinvestingClick={this.handleOnReinvestingClick}
+        programDescription={programDescription}
+        isReinvestPending={ui.isReinvestPending}
+        onFavoriteClick={this.handleOnFavoriteClick}
+        isFavoritePending={ui.isFavoritePending}
+        investmentData={composeInvestmentData(programDescription)}
+        {...programDescription.personalProgramDetails}
+        {...this.props}
+      />
     );
   }
 }

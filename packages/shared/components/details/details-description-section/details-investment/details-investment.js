@@ -5,8 +5,10 @@ import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import AssetStatus from "shared/components/asset-status/asset-status";
+import Profitability from "shared/components/profitability/profitability";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Surface from "shared/components/surface/surface";
+import { PROGRAM } from "shared/constants/constants";
 import { formatValue } from "shared/utils/formatter";
 
 class DetailsInvestment extends PureComponent {
@@ -41,7 +43,15 @@ class DetailsInvestment extends PureComponent {
       status,
       value,
       pendingInput,
-      pendingOutput
+      pendingOutput,
+      profit,
+      invested,
+      isInvested,
+      canInvest,
+      ProgramReinvestingWidget,
+      onReinvestingClick,
+      isReinvestPending,
+      isReinvest
     } = this.props;
     return (
       <Surface className="surface--horizontal-paddings details-investment">
@@ -57,6 +67,17 @@ class DetailsInvestment extends PureComponent {
               displayType="text"
             />
           </StatisticItem>
+          {asset === PROGRAM ? (
+            <StatisticItem accent label={t("Profit")}>
+              <Profitability value={value - invested} prefix="sign">
+                <NumberFormat
+                  value={formatValue(value - invested, null, true)}
+                  suffix={` ${balanceCurrency} (${formatValue(profit)}%)`}
+                  displayType="text"
+                />
+              </Profitability>
+            </StatisticItem>
+          ) : null}
           <StatisticItem
             accent
             label={t("fund-details-page.description.status")}
@@ -80,6 +101,14 @@ class DetailsInvestment extends PureComponent {
                 displayType="text"
               />
             </StatisticItem>
+          )}
+          {ProgramReinvestingWidget && isInvested && canInvest && (
+            <ProgramReinvestingWidget
+              className="details-description__reinvest"
+              toggleReinvesting={onReinvestingClick}
+              isReinvesting={isReinvest}
+              disabled={isReinvestPending}
+            />
           )}
           {pendingOutput !== undefined && pendingOutput !== 0 && (
             <StatisticItem
