@@ -3,6 +3,8 @@
 @import "~shared/styles/_sizes.scss";
 
 .wallet-balance {
+  padding: 0 $padding-xsmall;
+
   &__statistic {
     @include adaptive-padding(top, $padding-xxsmall);
     display: flex;
@@ -129,6 +131,8 @@
   }
 
   @include media-breakpoint-tablet() {
+    padding: 0;
+
     &__loader-stat {
       padding-top: 10px;
     }

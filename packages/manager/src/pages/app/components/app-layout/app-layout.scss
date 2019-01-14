@@ -32,4 +32,12 @@
       padding: $padding-medium 0 $padding-big;
     }
   }
+
+  &__main-wrapper {
+    padding: 0 $padding-xsmall;
+
+    @include media-breakpoint-tablet() {
+      padding: 0;
+    }
+  }
 }

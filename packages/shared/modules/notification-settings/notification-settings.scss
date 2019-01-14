@@ -59,11 +59,3 @@
     max-width: 100%;
   }
 }
-
-.notification-settings-page {
-  padding: 0 $padding-xsmall;
-
-  @include media-breakpoint-tablet() {
-    padding: 0;
-  }
-}

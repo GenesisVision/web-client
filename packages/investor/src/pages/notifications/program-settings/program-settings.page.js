@@ -7,7 +7,7 @@ const ProgramNotificationPage = ({ t, match }) => {
   const { id } = match.params;
   return (
     <Page title={t("notifications-page.program.title")}>
-      <div className="notification-settings-page">
+      <div className="app__main-wrapper">
         <h1 className="title-small-padding">
           {t("notifications-page.program.title")}
         </h1>

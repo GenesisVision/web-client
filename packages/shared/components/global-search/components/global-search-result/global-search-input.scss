@@ -13,6 +13,12 @@
 }
 
 .global-search-input {
+  padding: 0 $padding-xsmall;
+
+  @include media-breakpoint-tablet() {
+    padding: 0 $padding-small;
+  }
+
   & .gv-text-field__wrapper,
   & .gv-text-field {
     margin: 0;
@@ -30,18 +36,32 @@
   }
 
   &__tabs {
-    @include horizontal-paddings($padding-small, 2);
+    padding: 0 $padding-xsmall;
+
+    @include media-breakpoint-tablet() {
+      padding: 0 $padding-small;
+    }
   }
 
   &__heading {
-    @include horizontal-paddings($padding-small, 2);
+    padding: 0 $padding-xsmall;
+
+    @include media-breakpoint-tablet() {
+      padding: 0 $padding-small;
+    }
   }
 
   &__loading {
-    @include horizontal-paddings($padding-small, 2);
     @include vertical-paddings($padding-small);
     @include font-size($font-size-h4);
     letter-spacing: 0.2px;
     opacity: 0.4;
+    padding-left: $padding-xsmall;
+    padding-right: $padding-xsmall;
+
+    @include media-breakpoint-tablet() {
+      padding-left: $padding-small;
+      padding-right: $padding-small;
+    }
   }
 }
