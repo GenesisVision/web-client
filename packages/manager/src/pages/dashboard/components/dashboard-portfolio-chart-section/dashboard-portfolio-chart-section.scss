@@ -13,7 +13,11 @@
     min-height: 683px;
   }
   & .chart-period {
-    @include horizontal-paddings($padding-small, 2);
+    padding: 0 $padding-xsmall;
+
+    @include media-breakpoint-tablet() {
+      padding: 0 $padding-small;
+    }
   }
 
   &__chart-head {
@@ -22,7 +26,11 @@
   }
 
   &__heading {
-    @include horizontal-paddings($padding-small, 2);
+    padding: 0 $padding-xsmall;
+
+    @include media-breakpoint-tablet() {
+      padding: 0 $padding-small;
+    }
   }
 
   &__actions {
@@ -30,7 +38,11 @@
   }
 
   .dashboard-portfolio-chart-stat {
-    @include horizontal-paddings($padding-small, 2);
+    padding: 0 $padding-xsmall;
+
+    @include media-breakpoint-tablet() {
+      padding: 0 $padding-small;
+    }
 
     &__statistic-item {
       margin-top: 15px;
@@ -41,10 +53,14 @@
   }
 
   &__chart {
-    @include horizontal-paddings($padding-small, 2);
     height: 380px;
     width: 100%;
     margin-top: 20px;
+    padding: 0 $padding-xsmall;
+
+    @include media-breakpoint-tablet() {
+      padding: 0 $padding-small;
+    }
 
     .assets-tooltip {
       .gv-tooltip__heading,

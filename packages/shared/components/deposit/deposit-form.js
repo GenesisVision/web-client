@@ -45,7 +45,7 @@ const DepositForm = ({
       (validateFraction(formattedValue, "GVT") &&
         floatValue <= parseFloat(availableToInvest) &&
         floatValue <=
-          parseFloat(availableInWallet - gvFee - (entryFee ? fee : 0)))
+          parsapp__maineFloat(availableInWallet - gvFee - (entryFee ? fee : 0)))
     );
   };
 

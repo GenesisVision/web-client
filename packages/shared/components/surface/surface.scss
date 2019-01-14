@@ -12,7 +12,13 @@
   }
 
   &--horizontal-paddings {
-    @include horizontal-paddings($padding-small, 2);
+    padding-left: $padding-xsmall;
+    padding-right: $padding-xsmall;
+
+    @include media-breakpoint-tablet() {
+      padding-left: $padding-small;
+      padding-right: $padding-small;
+    }
   }
 
   .surface {
