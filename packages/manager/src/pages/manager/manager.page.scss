@@ -3,4 +3,12 @@
 
 .manager {
   @include adaptive-margin(top, $padding-medium);
+
+  &__description {
+    padding: 0 $padding-xsmall;
+
+    @include media-breakpoint-tablet() {
+      padding: 0;
+    }
+  }
 }
