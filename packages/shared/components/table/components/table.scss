@@ -45,6 +45,11 @@ $padding: $padding-small;
       margin-left: auto;
     }
   }
+  &__footer-text {
+    @include font-size($font-size-paragraph);
+    letter-spacing: 0.56px;
+    color: rgba($text-light-color, 0.4);
+  }
   &__toolbar {
     box-sizing: border-box;
     display: flex;

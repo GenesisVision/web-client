@@ -3,14 +3,18 @@
 @import "~shared/styles/_sizes.scss";
 
 .back-button {
-  //margin: 12px 0 12px;
   margin-bottom: 12px;
-  @include media-breakpoint-landscape-phone() {
-    //margin: 25px 0 25px;
-    margin-bottom: 25px;
-  }
   display: flex;
   align-items: center;
+  padding: 0 $padding-xsmall;
+
+  @include media-breakpoint-landscape-phone() {
+    margin-bottom: 25px;
+  }
+
+  @include media-breakpoint-tablet() {
+    padding: 0;
+  }
 
   &__container {
     display: flex;

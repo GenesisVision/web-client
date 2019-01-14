@@ -4,20 +4,32 @@
 
 .details-history {
   &__heading {
-    @include horizontal-paddings($padding-small, 2);
+    padding: 0 $padding-xsmall;
+
+    @include media-breakpoint-tablet() {
+      padding: 0 $padding-small;
+    }
   }
 
   &__subheading {
-    @include adaptive-padding(left, $padding-small, 2);
     @include adaptive-padding(bottom, $padding-xsmall);
     @include font-size($font-size-paragraph);
     font-size: $font-size-paragraph-mobile;
     letter-spacing: 0.2px;
     font-weight: 600;
+    padding-left: $padding-xsmall;
+
+    @include media-breakpoint-tablet() {
+      padding-left: $padding-small;
+    }
   }
 
   &__tabs {
-    @include horizontal-paddings($padding-small, 2);
+    padding: 0 $padding-xsmall;
+
+    @include media-breakpoint-tablet() {
+      padding: 0 $padding-small;
+    }
   }
 
   @media (min-width: 450px) {
