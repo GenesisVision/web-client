@@ -11,13 +11,17 @@ $withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
   @include adaptive-margin(top, $padding-medium);
   @include adaptive-margin(bottom, $padding-xsmall);
   display: inline-block;
-  width: 100%;
+  margin-left: -$padding-xsmall;
+  margin-right: -$padding-xsmall;
+  width: calc(100% + 20px * 2);
   & div {
     box-sizing: border-box;
   }
 
   @include media-breakpoint-tablet() {
     margin-left: -$padding-small;
+    margin-right: 0;
+    width: 100%;
     max-width: 500px;
   }
 
