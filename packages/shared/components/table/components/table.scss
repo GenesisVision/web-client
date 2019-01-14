@@ -32,10 +32,12 @@ $padding: $padding-small;
   }
   &__footer {
     @include adaptive-padding(top, $padding-xxsmall, 2);
-    @include horizontal-paddings($padding-small, 2);
     display: flex;
     align-items: baseline;
     font-size: $td-font-size/1.5;
+    padding-left: $padding-xsmall;
+    padding-right: $padding-xsmall;
+
     .pagination {
       margin: 0;
     }
@@ -246,6 +248,10 @@ $padding: $padding-small;
     }
     &__toolbar {
       padding: 0 $padding;
+    }
+    &__footer {
+      padding-left: $padding-small;
+      padding-right: $padding-small;
     }
   }
   @media (min-width: 900px) {

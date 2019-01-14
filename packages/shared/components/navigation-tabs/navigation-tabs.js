@@ -12,32 +12,34 @@ const NavigationTabs = ({
   tab = exploreTabName
 }) => {
   return (
-    <GVTabs value={tab}>
-      <GVTab
-        value={exploreTabName}
-        label={
-          <Link
-            to={replaceParams(fundsTabRoute, {
-              ":tab": exploreTabName
-            })}
-          >
-            {t("funds-page.tabs.explore")}
-          </Link>
-        }
-      />
-      <GVTab
-        value={fundsFavoritesTabName}
-        label={
-          <Link
-            to={replaceParams(fundsTabRoute, {
-              ":tab": fundsFavoritesTabName
-            })}
-          >
-            {t("funds-page.tabs.favorites")}
-          </Link>
-        }
-      />
-    </GVTabs>
+    <div className="facets-tabs">
+      <GVTabs value={tab}>
+        <GVTab
+          value={exploreTabName}
+          label={
+            <Link
+              to={replaceParams(fundsTabRoute, {
+                ":tab": exploreTabName
+              })}
+            >
+              {t("funds-page.tabs.explore")}
+            </Link>
+          }
+        />
+        <GVTab
+          value={fundsFavoritesTabName}
+          label={
+            <Link
+              to={replaceParams(fundsTabRoute, {
+                ":tab": fundsFavoritesTabName
+              })}
+            >
+              {t("funds-page.tabs.favorites")}
+            </Link>
+          }
+        />
+      </GVTabs>
+    </div>
   );
 };
 

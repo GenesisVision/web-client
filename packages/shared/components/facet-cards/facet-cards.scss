@@ -1,6 +1,7 @@
 @import "~shared/styles/_colors.scss";
 @import "~shared/styles/_breakpoint.scss";
 @import "~shared/styles/_constants.scss";
+@import "~shared/styles/_sizes.scss";
 
 @media (max-width: 1360px) {
   .facets-shadow {
@@ -61,13 +62,17 @@ $padding-app: 20px;
 
   &__wrapper {
     position: relative;
-    margin: 0 0-$padding-app;
     overflow: hidden;
     height: $facet-height/1.5 + $facet-margin;
     z-index: 0;
 
     @include media-breakpoint-landscape-phone() {
       height: $facet-height + 2 * $facet-margin;
+    }
+
+    @include media-breakpoint-tablet() {
+      padding: 0;
+      margin: 0 0-$padding-app;
     }
   }
 
@@ -193,5 +198,14 @@ $padding-app: 20px;
 
   &:not(.facet--stub) {
     cursor: pointer;
+  }
+}
+
+.facets-tabs {
+  padding: 0 $padding-xsmall;
+  box-sizing: border-box;
+
+  @include media-breakpoint-tablet() {
+    padding: 0;
   }
 }
