@@ -21,10 +21,15 @@
     }
   }
 
-  //&__main {
-  //  padding: $padding-medium-mobile $padding-xsmall $padding-big;
-  //  @media (min-width: 1400px) {
-  //    padding: $padding-medium 0 $padding-big;
-  //  }
-  //}
+  &__main {
+    padding: $padding-medium-mobile 0 $padding-big;
+
+    @include media-breakpoint-tablet() {
+      padding: $padding-medium-mobile $padding-xsmall $padding-big;
+    }
+
+    @media (min-width: 1400px) {
+      padding: $padding-medium 0 $padding-big;
+    }
+  }
 }
