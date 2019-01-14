@@ -3,15 +3,19 @@
 @import "~shared/styles/_sizes.scss";
 
 .create-program-broker {
-  &-container {
-    margin-bottom: 20px;
-  }
-
   margin-top: 50px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+
+  @include media-breakpoint-landscape-phone() {
+    flex-direction: row;
+  }
+
+  &-container {
+    margin-bottom: 20px;
+  }
 
   &__list {
     display: flex;
@@ -22,10 +26,12 @@
     width: 59%;
     margin-right: 1%;
     min-width: 280px;
+    padding: 0 $padding-xsmall;
 
     @include media-breakpoint-tablet() {
       margin-right: 4%;
       min-width: 324px;
+      padding: 0;
     }
 
     @include media-breakpoint-desktop() {
@@ -36,7 +42,10 @@
 
   &__description {
     width: 100%;
-    max-width: 300px;
+
+    @include media-breakpoint-tablet() {
+      max-width: 300px;
+    }
 
     &-heading {
       padding-bottom: 0;
@@ -78,9 +87,5 @@
       width: 110px;
       padding: 0;
     }
-  }
-
-  @include media-breakpoint-landscape-phone() {
-    flex-direction: row;
   }
 }

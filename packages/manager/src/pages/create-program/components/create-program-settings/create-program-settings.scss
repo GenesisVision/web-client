@@ -4,7 +4,7 @@
 
 .create-program-settings {
   margin-top: 40px;
-  margin-left: 24px;
+  padding-left: $padding-xsmall;
 
   &__name {
     padding-bottom: $padding-small;
@@ -280,7 +280,7 @@
 
   @include media-breakpoint-tablet() {
     margin-top: 60px;
-    margin-left: 0;
+    padding-left: 0;
   }
 }
 

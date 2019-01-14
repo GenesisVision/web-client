@@ -1,4 +1,5 @@
 @import "~shared/styles/_colors.scss";
+@import "~shared/styles/_sizes.scss";
 
 .create-program {
   &__navigation-dialog {
@@ -14,8 +15,19 @@
       padding: 8px 24px;
     }
   }
+}
 
-  &-page .gv-tab {
+.create-program-page {
+  &__header,
+  &__tabs {
+    padding: 0 $padding-xsmall;
+
+    @include media-breakpoint-tablet() {
+      padding: 0;
+    }
+  }
+
+  .gv-tab {
     cursor: default;
   }
 }
