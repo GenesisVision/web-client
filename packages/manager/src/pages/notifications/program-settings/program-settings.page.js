@@ -6,10 +6,12 @@ const ProgramNotificationPage = ({ t, match }) => {
   const { id } = match.params;
   return (
     <Page title={t("notifications-page.program.title")}>
-      <h1 className="title-small-padding">
-        {t("notifications-page.program.title")}
-      </h1>
-      <ProgramNotificationsContainer id={id} />
+      <div className="notification-settings-page">
+        <h1 className="title-small-padding">
+          {t("notifications-page.program.title")}
+        </h1>
+        <ProgramNotificationsContainer id={id} />
+      </div>
     </Page>
   );
 };

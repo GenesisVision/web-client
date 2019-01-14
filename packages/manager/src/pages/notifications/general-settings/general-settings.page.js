@@ -6,8 +6,10 @@ import NotificationSettingsContainer from "shared/modules/notification-settings/
 const NotificationsPage = ({ t }) => {
   return (
     <Page title={t("notifications-page.title")}>
-      <h1>{t("notifications-page.title")}</h1>
-      <NotificationSettingsContainer />
+      <div className="notification-settings-page">
+        <h1>{t("notifications-page.title")}</h1>
+        <NotificationSettingsContainer />
+      </div>
     </Page>
   );
 };
