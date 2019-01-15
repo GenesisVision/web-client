@@ -16,9 +16,14 @@ $withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
     box-sizing: border-box;
   }
 
+  .profitability--chips {
+    margin-top: -5px;
+    margin-left: 5px;
+  }
+
   @include media-breakpoint-tablet() {
     margin-left: -$padding-small;
-    max-width: 500px;
+    max-width: 750px;
   }
 
   &__short-statistic-container {
@@ -29,22 +34,6 @@ $withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-
-    &-item {
-      white-space: nowrap;
-      letter-spacing: 0.44px;
-      font-size: $font-size-paragraph-mobile;
-      display: flex;
-      flex-direction: column;
-      margin-right: $padding-big-mobile;
-      margin-bottom: $font-size-small-mobile;
-      font-weight: 600;
-      @include media-breakpoint-landscape-phone() {
-        font-size: $font-size-paragraph;
-        margin-right: $padding-big;
-        margin-bottom: $font-size-small;
-      }
-    }
 
     &-subheading {
       color: $label-color;

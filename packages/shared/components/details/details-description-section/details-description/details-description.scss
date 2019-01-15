@@ -227,28 +227,22 @@
   &__reinvest {
     letter-spacing: 0.3px;
     font-weight: 600;
-    padding-left: $padding-small-mobile;
-    .gv-switch__input-wrapper {
-      z-index: 0;
-    }
-    .gv-switch__track {
-      z-index: -1;
-    }
+
     .gv-switch-wrapper {
       display: inline-flex;
       align-items: center;
-      padding-top: $padding-small-mobile;
+      padding-top: 0;
     }
     .gv-switch__label {
       color: $text-accent-color;
       font-size: $font-size-paragraph-mobile;
-      line-height: $font-size-paragraph-mobile;
       font-weight: 600;
     }
     @include media-breakpoint-landscape-phone() {
-      padding-left: $padding-small;
+      .gv-switch-wrapper {
+        padding-top: $padding-xxsmall;
+      }
       .gv-switch__label {
-        line-height: $font-size-paragraph;
         font-size: $font-size-paragraph;
       }
     }

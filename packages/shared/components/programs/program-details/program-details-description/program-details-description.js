@@ -339,19 +339,15 @@ class ProgramDetailsDescription extends PureComponent {
                         {t("program-details-page.description.edit-program")}
                       </GVButton>
                     )}
-                    {ProgramReinvestingWidget && isInvested && canInvest && (
-                      <ProgramReinvestingWidget
-                        className="details-description__reinvest"
-                        toggleReinvesting={onReinvestingClick}
-                        isReinvesting={isReinvest}
-                        disabled={isReinvestPending}
-                      />
-                    )}
                   </div>
                 </div>
                 {programDescription.personalProgramDetails &&
                   status !== STATUS.ENDED && (
                     <DetailsInvestment
+                      ProgramReinvestingWidget={ProgramReinvestingWidget}
+                      onReinvestingClick={onReinvestingClick}
+                      isReinvestPending={isReinvestPending}
+                      isInvested={isInvested}
                       WithdrawContainer={ProgramWithdrawContainer}
                       notice={t(
                         "program-details-page.description.withdraw-notice-text"
