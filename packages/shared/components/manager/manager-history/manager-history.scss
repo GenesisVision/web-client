@@ -8,7 +8,7 @@
   &__heading {
     padding: 0 $padding-xsmall;
 
-    @include media-breakpoint-tablet() {
+    @include media-breakpoint-landscape-phone() {
       padding: 0 $padding-small;
     }
   }
@@ -20,7 +20,7 @@
   &__tabs {
     padding: 0 $padding-xsmall;
 
-    @include media-breakpoint-tablet() {
+    @include media-breakpoint-landscape-phone {
       padding: 0 $padding-small;
     }
     .gv-tab {
