@@ -19,6 +19,7 @@ import { number, object } from "yup";
 const DepositForm = ({
   t,
   program,
+  investor,
   entryFee,
   values,
   info,
@@ -40,12 +41,19 @@ const DepositForm = ({
     const { availableToInvest, availableInWallet } = info;
     const fee = calculateValueOfEntryFee(floatValue, info.entryFee);
     const gvFee = calculateValueOfEntryFee(floatValue, info.gvCommission);
+    const isAvailableToInvest = floatValue <= parseFloat(availableToInvest);
+    const isValidateFraction = validateFraction(formattedValue, "GVT");
+    const isAvailableInWallet =
+      floatValue <=
+      parseFloat(availableInWallet - gvFee - (entryFee ? fee : 0));
+
     return (
       formattedValue === "" ||
-      (validateFraction(formattedValue, "GVT") &&
-        floatValue <= parseFloat(availableToInvest) &&
-        floatValue <=
-          parseFloat(availableInWallet - gvFee - (entryFee ? fee : 0)))
+      (isValidateFraction &&
+        isAvailableInWallet &&
+        (investor && availableToInvest !== undefined
+          ? isAvailableToInvest
+          : true))
     );
   };
 
