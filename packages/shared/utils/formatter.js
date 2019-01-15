@@ -48,7 +48,7 @@ const formatPercent = value => {
 const roundPercents = value => {
   const abs = Math.abs(value);
   const sign = Math.sign(value);
-  const newValue = Math.max(abs, 0.01) * sign;
+  const newValue = formatValue(Math.max(abs, 0.01), 2) * sign;
   const signString = abs < 0.01 && abs > 0 ? (sign < 0 ? ">" : "<") : "";
   return `${signString}${newValue}%`;
 };
