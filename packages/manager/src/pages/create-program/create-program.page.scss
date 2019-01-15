@@ -1,22 +1,6 @@
 @import "~shared/styles/_colors.scss";
 @import "~shared/styles/_sizes.scss";
 
-.create-program {
-  &__navigation-dialog {
-    padding: 32px;
-
-    &-text {
-      font-size: 14px;
-      color: $text-light-color;
-    }
-
-    &-button {
-      margin-top: 20px;
-      padding: 8px 24px;
-    }
-  }
-}
-
 .create-program-page {
   &__header,
   &__tabs {
