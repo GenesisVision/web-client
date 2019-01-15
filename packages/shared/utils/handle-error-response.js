@@ -18,7 +18,8 @@ const handleErrorResponse = response => {
     }
   }
   const error = {
-    errorMessage: "Server Error. Please contact administrator.",
+    errorMessage:
+      "Server error occurred. Please try again later or contact the support department.",
     code: SERVER_CONNECTION_ERROR_CODE
   };
 

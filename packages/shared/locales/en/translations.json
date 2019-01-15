@@ -6,7 +6,7 @@
   },
   "alerts": {
     "clear-all": "Clear all",
-    "server-error": "Server Error. Please contact administrator."
+    "server-error": "Server error occurred. Please try again later or contact the support department."
   },
   "verification-status": {
     "verified": "Verified",
