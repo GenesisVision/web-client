@@ -18,14 +18,18 @@ const WithdrawEnterAmountStep = ({
   rate,
   onClick,
   disabled,
-  setFieldValue,
-  errors
+  availableToWithdraw,
+  setFieldValue
 }) => {
   const isAllow = values => {
     const { formattedValue } = values;
     return (
       formattedValue === "" || validateFraction(formattedValue, programCurrency)
     );
+  };
+
+  const setMaxAmount = () => {
+    setFieldValue("amount", availableToWithdraw);
   };
 
   return (
@@ -35,6 +39,7 @@ const WithdrawEnterAmountStep = ({
         label={t("withdraw-program.amount-to-withdraw")}
         currency={programCurrency}
         isAllow={isAllow}
+        setMax={setMaxAmount}
       />
 
       {programCurrency !== accountCurrency && (

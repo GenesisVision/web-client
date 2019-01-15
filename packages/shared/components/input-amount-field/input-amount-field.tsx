@@ -10,12 +10,12 @@ export interface IInputAmountFieldProps {
   label: string;
   currency: string;
   isAllow: boolean;
+  setMax(): void;
 }
 
 class InputAmountField extends Component<IInputAmountFieldProps> {
-  setMaxValue = () => {};
   render() {
-    const { t, name, label, currency, isAllow } = this.props;
+    const { t, name, label, currency, isAllow, setMax } = this.props;
     return (
       <GVFormikField
         name={name}
@@ -23,7 +23,7 @@ class InputAmountField extends Component<IInputAmountFieldProps> {
         component={GVNumberFiled}
         adornment={
           <GVButton
-            onClick={this.setMaxValue}
+            onClick={setMax}
             variant="text"
             color="secondary"
             className="gv-btn--no-padding"
