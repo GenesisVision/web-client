@@ -68,9 +68,6 @@ $padding-app: 20px;
 
     @include media-breakpoint-landscape-phone() {
       height: $facet-height + 2 * $facet-margin;
-    }
-
-    @include media-breakpoint-tablet() {
       padding: 0;
       margin: 0 0-$padding-app;
     }
@@ -205,7 +202,7 @@ $padding-app: 20px;
   padding: 0 $padding-xsmall;
   box-sizing: border-box;
 
-  @include media-breakpoint-tablet() {
+  @include media-breakpoint-landscape-phone() {
     padding: 0;
   }
 }
