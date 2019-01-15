@@ -4,10 +4,12 @@
 
 .programs-rating {
   &__head {
-    padding: 0 $padding-xsmall;
+    padding-left: $padding-xsmall;
+    padding-right: $padding-xsmall;
 
-    @include media-breakpoint-tablet() {
-      padding: 0 $padding-small;
+    @include media-breakpoint-landscape-phone() {
+      padding-left: $padding-small;
+      padding-right: $padding-small;
     }
   }
 
@@ -36,7 +38,7 @@
     padding-left: $padding-xsmall;
     padding-right: $padding-xsmall;
 
-    @include media-breakpoint-tablet() {
+    @include media-breakpoint-landscape-phone() {
       padding-left: $padding-small;
       padding-right: $padding-small;
     }
@@ -103,7 +105,7 @@
   align-items: center;
   flex-wrap: wrap;
 
-  @include media-breakpoint-tablet() {
+  @include media-breakpoint-landscape-phone() {
     padding-left: $padding-small;
     padding-right: $padding-small;
   }

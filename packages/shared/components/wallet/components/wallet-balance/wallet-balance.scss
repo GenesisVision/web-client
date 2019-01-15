@@ -86,6 +86,7 @@
 
   @include media-breakpoint-landscape-phone() {
     display: block;
+    padding: 0;
 
     &__statistic {
       &:first-child {
@@ -131,8 +132,6 @@
   }
 
   @include media-breakpoint-tablet() {
-    padding: 0;
-
     &__loader-stat {
       padding-top: 10px;
     }

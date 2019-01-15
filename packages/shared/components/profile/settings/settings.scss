@@ -9,16 +9,16 @@
     flex-direction: column;
     align-items: baseline;
 
-    @include media-breakpoint-landscape-tablet() {
-      flex-direction: row;
-    }
-
-    @include media-breakpoint-tablet() {
+    @include media-breakpoint-landscape-phone() {
       & .two-factor,
       & .profile-image {
         min-width: 340px;
         margin-right: 20px;
       }
+    }
+
+    @include media-breakpoint-landscape-tablet() {
+      flex-direction: row;
     }
   }
 

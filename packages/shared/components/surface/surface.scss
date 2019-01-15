@@ -6,6 +6,10 @@
   background-color: $panel-background-color;
   box-sizing: border-box;
 
+  @include media-breakpoint-landscape-phone() {
+    border-radius: 0.5em;
+  }
+
   &--without-paddings {
     padding: 0;
     border-radius: 0.5em;
@@ -18,7 +22,6 @@
     @include media-breakpoint-landscape-phone() {
       padding-left: $padding-small;
       padding-right: $padding-small;
-      border-radius: 0.5em;
     }
   }
 
