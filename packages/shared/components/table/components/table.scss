@@ -156,7 +156,7 @@ $padding: $padding-small;
 
     &:first-child {
       padding-left: $padding-xsmall;
-      @include media-breakpoint-tablet() {
+      @include media-breakpoint-landscape-phone() {
         padding-left: $padding;
       }
 
@@ -232,7 +232,12 @@ $padding: $padding-small;
     &__body {
       font-size: $td-font-size;
     }
+    &__toolbar {
+      padding: 0 $padding;
+    }
     &__footer {
+      padding-left: $padding-small;
+      padding-right: $padding-small;
       font-size: $td-font-size;
     }
     &__toggle {
@@ -250,13 +255,6 @@ $padding: $padding-small;
     &__filters {
       font-size: $td-font-size;
       padding-bottom: 0;
-    }
-    &__toolbar {
-      padding: 0 $padding;
-    }
-    &__footer {
-      padding-left: $padding-small;
-      padding-right: $padding-small;
     }
   }
   @media (min-width: 900px) {

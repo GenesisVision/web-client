@@ -9,7 +9,7 @@ $create-icon-width: 140px;
   &__head {
     padding: 0 $padding-xsmall;
 
-    @include media-breakpoint-tablet() {
+    @include media-breakpoint-landscape-phone() {
       padding: 0 $padding-small;
     }
   }

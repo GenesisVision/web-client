@@ -5,7 +5,7 @@
 .dashboard-request {
   padding: 0 $padding-xsmall;
   float: right;
-  @include media-breakpoint-tablet() {
+  @include media-breakpoint-landscape-phone() {
     padding: 0 $padding-small;
   }
   & .statistics-item {

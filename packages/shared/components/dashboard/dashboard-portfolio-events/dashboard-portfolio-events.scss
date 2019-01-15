@@ -22,7 +22,7 @@
     flex: 1;
     position: relative;
     margin: 0 -20px 10px;
-    @include media-breakpoint-tablet() {
+    @include media-breakpoint-landscape-phone() {
       margin: 0 -32px 24px;
     }
     &:after {
