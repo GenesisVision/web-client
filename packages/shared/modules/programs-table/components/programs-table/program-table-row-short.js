@@ -83,7 +83,11 @@ const ProgramTableRowShort = ({
             </div>
             {tags && (
               <div className="programs-table__cell--bottom">
-                {tags.join(` \u00B7 `)}
+                {tags.map(tag => (
+                  <span key={tag.name} style={{ color: tag.color }}>
+                    {tag.name}
+                  </span>
+                ))}
               </div>
             )}
           </div>
