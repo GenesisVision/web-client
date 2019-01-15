@@ -28,10 +28,13 @@
     min-width: 280px;
     padding: 0 $padding-xsmall;
 
+    @include media-breakpoint-landscape-phone {
+      padding: 0;
+    }
+
     @include media-breakpoint-tablet() {
       margin-right: 4%;
       min-width: 324px;
-      padding: 0;
     }
 
     @include media-breakpoint-desktop() {
@@ -43,7 +46,7 @@
   &__description {
     width: 100%;
 
-    @include media-breakpoint-tablet() {
+    @include media-breakpoint-landscape-phone() {
       max-width: 300px;
     }
 
