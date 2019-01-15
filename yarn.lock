@@ -5371,10 +5371,10 @@ gud@^1.0.0:
   dependencies:
     superagent "^3.8.3"
 
-gv-react-components@^0.0.30:
-  version "0.0.30"
-  resolved "https://registry.yarnpkg.com/gv-react-components/-/gv-react-components-0.0.30.tgz#dca7f463219dd8b5c9121c9aa9ef5710fe090ab2"
-  integrity sha512-5uo/dIrztjizRTFdmTO+KwZBqA3g7zrCLJyd+FlNE72T/Fjzwr/mHFa2dGC/uRc/EkNPsJFFc/VVGOsCIPbsig==
+gv-react-components@^0.0.31:
+  version "0.0.31"
+  resolved "https://registry.yarnpkg.com/gv-react-components/-/gv-react-components-0.0.31.tgz#ee1015a9758caedd935811453ac23c3b2d9226a0"
+  integrity sha512-ivtUjuCxJDhNCBd65j70q37M3UKlTXg2NiZmDZGtnT5jEx48iY14GPgT7rYb9xo/FovYoxW/Bd1J5j/Pz4wnmw==
   dependencies:
     classnames "^2.2.6"
     prop-types "^15.6.1"
