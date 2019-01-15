@@ -11,3 +11,4 @@ export const STATUS = {
   ARCHIVED: "Archived",
   PENDING: "Pending"
 };
+export const PROFIT_EVENT = "Profit";
