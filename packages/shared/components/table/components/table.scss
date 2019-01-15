@@ -32,16 +32,23 @@ $padding: $padding-small;
   }
   &__footer {
     @include adaptive-padding(top, $padding-xxsmall, 2);
-    @include horizontal-paddings($padding-small, 2);
     display: flex;
     align-items: baseline;
     font-size: $td-font-size/1.5;
+    padding-left: $padding-xsmall;
+    padding-right: $padding-xsmall;
+
     .pagination {
       margin: 0;
     }
     .pager {
       margin-left: auto;
     }
+  }
+  &__footer-text {
+    @include font-size($font-size-paragraph);
+    letter-spacing: 0.56px;
+    color: rgba($text-light-color, 0.4);
   }
   &__toolbar {
     box-sizing: border-box;
@@ -50,8 +57,8 @@ $padding: $padding-small;
     flex-wrap: wrap;
     width: 100%;
     align-items: center;
-    padding: 0 $padding/2;
     justify-content: space-between;
+    padding: 0 $padding-xsmall;
   }
 
   &__toggle {
@@ -148,7 +155,7 @@ $padding: $padding-small;
     white-space: nowrap;
 
     &:first-child {
-      padding-left: $padding/2;
+      padding-left: $padding-xsmall;
       @include media-breakpoint-landscape-phone() {
         padding-left: $padding;
       }
@@ -159,7 +166,7 @@ $padding: $padding-small;
       }
     }
     &:last-child {
-      padding-right: $padding/2;
+      padding-right: $padding-xsmall;
       @include media-breakpoint-landscape-phone() {
         padding-right: $padding;
       }
@@ -169,6 +176,13 @@ $padding: $padding-small;
       &--head {
         padding-right: $padding/2;
         opacity: 0.3;
+
+        &:last-child {
+          padding-right: $padding-xsmall;
+          @include media-breakpoint-landscape-phone() {
+            padding-right: $padding;
+          }
+        }
       }
       &--sortable {
         cursor: pointer;
@@ -218,11 +232,13 @@ $padding: $padding-small;
     &__body {
       font-size: $td-font-size;
     }
-    &__footer {
-      font-size: $td-font-size;
-    }
     &__toolbar {
       padding: 0 $padding;
+    }
+    &__footer {
+      padding-left: $padding-small;
+      padding-right: $padding-small;
+      font-size: $td-font-size;
     }
     &__toggle {
       display: flex;

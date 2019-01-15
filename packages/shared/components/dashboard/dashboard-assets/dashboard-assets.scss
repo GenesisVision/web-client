@@ -7,7 +7,11 @@ $create-icon-width: 140px;
 
 .dashboard-assets {
   &__head {
-    @include horizontal-paddings($padding-small, 2);
+    padding: 0 $padding-xsmall;
+
+    @include media-breakpoint-landscape-phone() {
+      padding: 0 $padding-small;
+    }
   }
 
   &__table {

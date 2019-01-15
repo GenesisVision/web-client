@@ -3,6 +3,8 @@
 @import "~shared/styles/_sizes.scss";
 
 .wallet-balance {
+  padding: 0 $padding-xsmall;
+
   &__statistic {
     @include adaptive-padding(top, $padding-xxsmall);
     display: flex;
@@ -84,6 +86,7 @@
 
   @include media-breakpoint-landscape-phone() {
     display: block;
+    padding: 0;
 
     &__statistic {
       &:first-child {

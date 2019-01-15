@@ -22,9 +22,22 @@
   }
 
   &__main {
-    padding: $padding-medium-mobile $padding-xsmall $padding-big;
+    padding: $padding-medium-mobile 0 $padding-big;
+
+    @include media-breakpoint-landscape-phone() {
+      padding: $padding-medium-mobile $padding-xsmall $padding-big;
+    }
+
     @media (min-width: 1400px) {
       padding: $padding-medium 0 $padding-big;
+    }
+  }
+
+  &__main-wrapper {
+    padding: 0 $padding-xsmall;
+
+    @include media-breakpoint-landscape-phone() {
+      padding: 0;
     }
   }
 }
