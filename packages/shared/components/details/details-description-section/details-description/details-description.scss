@@ -8,9 +8,12 @@
   white-space: pre-wrap;
   padding: 0 $padding-xsmall;
 
+  @include media-breakpoint-landscape-phone() {
+    padding: 0;
+  }
+
   @include media-breakpoint-tablet() {
     flex-wrap: nowrap;
-    padding: 0;
   }
 
   &__your-investment {

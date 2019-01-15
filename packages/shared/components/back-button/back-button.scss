@@ -10,9 +10,6 @@
 
   @include media-breakpoint-landscape-phone() {
     margin-bottom: 25px;
-  }
-
-  @include media-breakpoint-tablet() {
     padding: 0;
   }
 
