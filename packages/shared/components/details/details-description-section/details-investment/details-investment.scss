@@ -16,6 +16,11 @@ $withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
     box-sizing: border-box;
   }
 
+  .profitability--chips {
+    margin-top: -5px;
+    margin-left: 5px;
+  }
+
   @include media-breakpoint-tablet() {
     margin-left: -$padding-small;
     max-width: 750px;

@@ -9,7 +9,7 @@ import Profitability from "shared/components/profitability/profitability";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Surface from "shared/components/surface/surface";
 import { PROGRAM } from "shared/constants/constants";
-import { formatValue } from "shared/utils/formatter";
+import { formatValue, roundPercents } from "shared/utils/formatter";
 
 class DetailsInvestment extends PureComponent {
   state = {
@@ -53,6 +53,7 @@ class DetailsInvestment extends PureComponent {
       isReinvestPending,
       isReinvest
     } = this.props;
+
     return (
       <Surface className="surface--horizontal-paddings details-investment">
         <h3>{t("fund-details-page.description.yourInvestment")}</h3>
@@ -68,13 +69,19 @@ class DetailsInvestment extends PureComponent {
             />
           </StatisticItem>
           {asset === PROGRAM ? (
-            <StatisticItem accent label={t("Profit")}>
+            <StatisticItem
+              accent
+              label={t("fund-details-page.description.profit")}
+            >
               <Profitability value={value - invested} prefix="sign">
                 <NumberFormat
                   value={formatValue(value - invested, null, true)}
-                  suffix={` ${balanceCurrency} (${formatValue(profit)}%)`}
+                  suffix={` ${balanceCurrency}`}
                   displayType="text"
                 />
+              </Profitability>
+              <Profitability value={formatValue(profit)} variant="chips">
+                {roundPercents(profit)}
               </Profitability>
             </StatisticItem>
           ) : null}
