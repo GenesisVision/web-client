@@ -1,4 +1,4 @@
-import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
+import { GVButton } from "gv-react-components";
 import PropTypes from "prop-types";
 import { Fragment } from "react";
 import React from "react";
@@ -7,49 +7,62 @@ import NumberFormat from "react-number-format";
 import { convertFromCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 
-const WithdrawEnterAmountStep = props => {
+import InputAmountField from "../input-amount-field/input-amount-field";
+
+const WithdrawEnterAmountStep = ({
+  t,
+  programCurrency,
+  accountCurrency,
+  amount,
+  rate,
+  onClick,
+  disabled,
+  availableToWithdraw,
+  setFieldValue
+}) => {
   const isAllow = values => {
-    const { formattedValue } = values;
-    return (
-      formattedValue === "" ||
-      validateFraction(formattedValue, props.programCurrency)
+    const { formattedValue, value } = values;
+    return formattedValue === "" || validateFraction(value, programCurrency);
+  };
+
+  const setMaxAmount = () => {
+    setFieldValue(
+      "amount",
+      formatCurrencyValue(availableToWithdraw, programCurrency)
     );
   };
+
   return (
     <Fragment>
-      <GVFormikField
-        className="invest-field"
+      <InputAmountField
         name="amount"
-        label={props.t("withdraw-program.amount-to-withdraw")}
-        component={GVTextField}
-        adornment={props.programCurrency}
-        autoComplete="off"
-        autoFocus
-        InputComponent={NumberFormat}
-        allowNegative={false}
-        isAllowed={isAllow}
+        label={t("withdraw-program.amount-to-withdraw")}
+        currency={programCurrency}
+        isAllow={isAllow}
+        setMax={setMaxAmount}
       />
-      {props.programCurrency !== props.accountCurrency && (
-        <div className="invest-popup__currency">
+
+      {programCurrency !== accountCurrency && (
+        <div className="">
           <NumberFormat
             value={formatCurrencyValue(
-              convertFromCurrency(props.amount, props.rate),
-              props.accountCurrency
+              convertFromCurrency(amount, rate),
+              accountCurrency
             )}
             prefix="= "
-            suffix={` ${props.accountCurrency}`}
+            suffix={` ${accountCurrency}`}
             displayType="text"
           />
         </div>
       )}
       <div className="dialog__buttons">
         <GVButton
-          onClick={props.onClick}
+          onClick={onClick}
           id="signUpFormSubmit"
           className="invest-form__submit-button"
-          disabled={props.disabled}
+          disabled={disabled}
         >
-          {props.t("withdraw-program.next")}
+          {t("withdraw-program.next")}
         </GVButton>
       </div>
     </Fragment>

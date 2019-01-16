@@ -30,7 +30,8 @@ class FundWithdrawForm extends Component {
       goToConfirmStep,
       goToEnterAmountStep,
       isValid,
-      dirty
+      dirty,
+      setFieldValue
     } = this.props;
     const valueInCurrency = calculateValueOfEntryFee(
       availableToWithdraw,
@@ -58,6 +59,7 @@ class FundWithdrawForm extends Component {
             availableToWithdraw={availableToWithdraw}
             onClick={goToConfirmStep}
             disabled={errors.percent !== undefined || !isValid || !dirty}
+            setFieldValue={setFieldValue}
           />
         )}
         {step === CONFIRM_STEP && (
@@ -99,7 +101,6 @@ export default compose(
         percent: number()
           .min(0.01)
           .max(100, t("withdraw-fund.validation.amount-more-than-available"))
-          .required(t("withdraw-fund.validation.amount-is-required"))
       }),
     handleSubmit: (values, { props }) => {
       props.onSubmit(values.percent);

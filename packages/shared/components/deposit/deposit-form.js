@@ -1,6 +1,6 @@
 import { withFormik } from "formik";
-import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
-import React from "react";
+import { GVButton } from "gv-react-components";
+import React, { Component } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
@@ -16,138 +16,176 @@ import {
 } from "shared/utils/formatter";
 import { number, object } from "yup";
 
-const DepositForm = ({
-  t,
-  program,
-  investor,
-  entryFee,
-  values,
-  info,
-  currency,
-  disabled,
-  isValid,
-  dirty,
-  handleSubmit,
-  errorMessage
-}) => {
-  const fee = calculateValueOfEntryFee(values.amount, info.entryFee);
-  const gvFee = calculateValueOfEntryFee(values.amount, info.gvCommission);
-  const investAmount =
-    parseFloat(values.amount || 0) -
-    parseFloat(gvFee) -
-    (entryFee ? parseFloat(fee) : 0);
-  const isAllow = values => {
-    const { floatValue, formattedValue } = values;
-    const { availableToInvest, availableInWallet } = info;
-    const fee = calculateValueOfEntryFee(floatValue, info.entryFee);
-    const gvFee = calculateValueOfEntryFee(floatValue, info.gvCommission);
-    const isAvailableToInvest = floatValue <= parseFloat(availableToInvest);
-    const isValidateFraction = validateFraction(formattedValue, "GVT");
-    const isAvailableInWallet =
-      floatValue <=
-      parseFloat(availableInWallet - gvFee - (entryFee ? fee : 0));
+import InputAmountField from "../input-amount-field/input-amount-field";
 
-    return (
-      formattedValue === "" ||
-      (isValidateFraction &&
-        isAvailableInWallet &&
-        (investor && availableToInvest !== undefined
-          ? isAvailableToInvest
-          : true))
+class DepositForm extends Component {
+  composeEntryFee = fee => {
+    const { entryFee } = this.props;
+    return entryFee ? fee : 0;
+  };
+
+  entryFee = amount => {
+    const { info } = this.props;
+    return this.composeEntryFee(
+      calculateValueOfEntryFee(amount, info.entryFee)
     );
   };
 
-  return (
-    <form className="dialog__bottom" id="invest-form" onSubmit={handleSubmit}>
-      <GVFormikField
-        className="invest-field"
-        name="amount"
-        label={program ? t("deposit-asset.amount") : t("deposit-asset.amount")}
-        component={GVTextField}
-        adornment="GVT"
-        autoComplete="off"
-        autoFocus
-        InputComponent={NumberFormat}
-        allowNegative={false}
-        isAllowed={isAllow}
-      />
-      <div className="invest-popup__currency">
-        <NumberFormat
-          value={formatCurrencyValue(
-            convertFromCurrency(values.amount, info.rate),
-            currency
-          )}
-          prefix="= "
-          suffix={` ${currency}`}
-          displayType="text"
+  gvFee = amount => {
+    const { info } = this.props;
+    return calculateValueOfEntryFee(amount, info.gvCommission);
+  };
+
+  investAmount = amount => {
+    return (amount || 0) - this.gvFee(amount) - this.entryFee(amount);
+  };
+
+  isAllow = values => {
+    const { investor, info } = this.props;
+    const { floatValue, formattedValue, value } = values;
+    const { availableToInvest, availableInWallet } = info;
+
+    const isValidateFraction = validateFraction(value, "GVT");
+
+    const isAvailableInWallet =
+      availableInWallet >= this.investAmount(floatValue);
+
+    const isAvailableToInvest =
+      !investor ||
+      availableToInvest === undefined ||
+      floatValue <= parseFloat(availableToInvest);
+
+    return (
+      formattedValue === "" ||
+      (isValidateFraction && isAvailableInWallet && isAvailableToInvest)
+    );
+  };
+
+  setMaxAmount = () => {
+    const { setFieldValue, info } = this.props;
+    const { availableToInvest, availableInWallet } = info;
+    const maxFromWallet = availableInWallet;
+
+    let maxAvailable = Number.MAX_SAFE_INTEGER;
+    if (availableToInvest !== undefined)
+      maxAvailable =
+        (availableToInvest /
+          (100 - info.gvCommission - this.composeEntryFee(info.entryFee))) *
+        100;
+
+    const maxInvest = formatCurrencyValue(
+      Math.min(maxFromWallet, maxAvailable),
+      "GVT"
+    );
+
+    setFieldValue("amount", maxInvest);
+  };
+
+  render() {
+    const {
+      t,
+      program,
+      entryFee,
+      values,
+      info,
+      currency,
+      disabled,
+      isValid,
+      dirty,
+      handleSubmit,
+      errorMessage
+    } = this.props;
+
+    return (
+      <form className="dialog__bottom" id="invest-form" onSubmit={handleSubmit}>
+        <InputAmountField
+          name="amount"
+          label={
+            program ? t("deposit-asset.amount") : t("deposit-asset.amount")
+          }
+          currency={"GVT"}
+          isAllow={this.isAllow}
+          setMax={this.setMaxAmount}
         />
-      </div>
-      <ul className="dialog-list">
-        {entryFee && (
+
+        <div className="invest-popup__currency">
+          <NumberFormat
+            value={formatCurrencyValue(
+              convertFromCurrency(values.amount, info.rate),
+              currency
+            )}
+            prefix="= "
+            suffix={` ${currency}`}
+            displayType="text"
+          />
+        </div>
+        <ul className="dialog-list">
+          {entryFee && (
+            <li className="dialog-list__item">
+              <span className="dialog-list__title">
+                {program
+                  ? t("deposit-asset.entry-fee")
+                  : t("deposit-asset.entry-fee")}
+              </span>
+              <span className="dialog-list__value">
+                {info.entryFee} %{" "}
+                <NumberFormat
+                  value={formatValue(this.entryFee(values.amount))}
+                  prefix=" ("
+                  suffix={" GVT)"}
+                  displayType="text"
+                />
+              </span>
+            </li>
+          )}
           <li className="dialog-list__item">
             <span className="dialog-list__title">
               {program
-                ? t("deposit-asset.entry-fee")
-                : t("deposit-asset.entry-fee")}
+                ? t("deposit-asset.gv-commission")
+                : t("deposit-asset.gv-commission")}
             </span>
             <span className="dialog-list__value">
-              {info.entryFee} %{" "}
+              {info.gvCommission} %
               <NumberFormat
-                value={formatValue(fee)}
-                prefix=" ("
+                value={formatValue(this.gvFee(values.amount))}
+                prefix={" ("}
                 suffix={" GVT)"}
                 displayType="text"
               />
             </span>
           </li>
-        )}
-        <li className="dialog-list__item">
-          <span className="dialog-list__title">
-            {program
-              ? t("deposit-asset.gv-commission")
-              : t("deposit-asset.gv-commission")}
-          </span>
-          <span className="dialog-list__value">
-            {info.gvCommission} %
-            <NumberFormat
-              value={formatValue(gvFee)}
-              prefix={" ("}
-              suffix={" GVT)"}
-              displayType="text"
-            />
-          </span>
-        </li>
-        <li className="dialog-list__item">
-          <span className="dialog-list__title">
-            {program
-              ? t("deposit-asset.investment-amount")
-              : t("deposit-asset.investment-amount")}
-          </span>
-          <span className="dialog-list__value">
-            <NumberFormat
-              value={formatValue(investAmount)}
-              suffix={" GVT"}
-              displayType="text"
-            />
-          </span>
-        </li>
-      </ul>
-      <div className="form-error">
-        <FormError error={errorMessage} />
-      </div>
-      <div className="dialog__buttons">
-        <GVButton
-          type="submit"
-          id="signUpFormSubmit"
-          className="invest-form__submit-button"
-          disabled={disabled || !isValid || !dirty}
-        >
-          {program ? t("deposit-asset.confirm") : t("deposit-asset.confirm")}
-        </GVButton>
-      </div>
-    </form>
-  );
-};
+          <li className="dialog-list__item">
+            <span className="dialog-list__title">
+              {program
+                ? t("deposit-asset.investment-amount")
+                : t("deposit-asset.investment-amount")}
+            </span>
+            <span className="dialog-list__value">
+              <NumberFormat
+                value={formatValue(this.investAmount(values.amount))}
+                suffix={" GVT"}
+                displayType="text"
+              />
+            </span>
+          </li>
+        </ul>
+        <div className="form-error">
+          <FormError error={errorMessage} />
+        </div>
+        <div className="dialog__buttons">
+          <GVButton
+            type="submit"
+            id="signUpFormSubmit"
+            className="invest-form__submit-button"
+            disabled={disabled || !isValid || !dirty}
+          >
+            {program ? t("deposit-asset.confirm") : t("deposit-asset.confirm")}
+          </GVButton>
+        </div>
+      </form>
+    );
+  }
+}
 
 export default compose(
   translate(),
@@ -169,7 +207,6 @@ export default compose(
             info.availableInWallet,
             t("deposit-asset.validation.amount-more-than-available")
           )
-          .required(t("deposit-asset.validation.amount-is-required"))
       }),
     handleSubmit: (values, { props }) => {
       props.onSubmit(values.amount);
