@@ -68,18 +68,18 @@ class ProgramTableRowDetailed extends Component {
                   <div className="program-detailed__avatar--name">
                     <div className="program-detailed__title">
                       <Link
+                        className="program-detailed__title-link"
                         to={{
                           pathname: composeProgramDetailsUrl(program.url),
                           state: `/ ${title}`
                         }}
                       >
-                        <GVButton variant="text" color="secondary">
-                          {program.title}
-                        </GVButton>
+                        {program.title}
                       </Link>
                     </div>
                     <div className="program-detailed__manager">
                       <Link
+                        className="program-detailed__manager-link"
                         to={{
                           pathname: composeManagerDetailsUrl(
                             program.manager.url
@@ -87,9 +87,7 @@ class ProgramTableRowDetailed extends Component {
                           state: `/ ${title}`
                         }}
                       >
-                        <GVButton variant="text" color="primary">
-                          {program.manager.username}
-                        </GVButton>
+                        {program.manager.username}
                       </Link>
                     </div>
                   </div>
@@ -220,14 +218,13 @@ class ProgramTableRowDetailed extends Component {
                 <div className="program-detailed__bottom-block">
                   <div className="program-detailed__details">
                     <Link
+                      className="program-detailed__details-link"
                       to={{
                         pathname: composeProgramDetailsUrl(program.url),
                         state: `/ ${title}`
                       }}
                     >
-                      <GVButton variant="text" color="secondary">
-                        {t("program-actions.details")} &#8250;
-                      </GVButton>
+                      {t("program-actions.details")} &#8250;
                     </Link>
                   </div>
                 </div>
