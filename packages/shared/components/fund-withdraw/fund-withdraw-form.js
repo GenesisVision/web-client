@@ -101,7 +101,6 @@ export default compose(
         percent: number()
           .min(0.01)
           .max(100, t("withdraw-fund.validation.amount-more-than-available"))
-          .required(t("withdraw-fund.validation.amount-is-required"))
       }),
     handleSubmit: (values, { props }) => {
       props.onSubmit(values.percent);

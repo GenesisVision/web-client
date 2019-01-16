@@ -50,7 +50,7 @@ const WalletWithdrawForm = ({
   };
 
   const setMaxAmount = () => {
-    setFieldValue("amount", availableToWithdrawal);
+    setFieldValue("amount", availableToWithdrawal.toString());
   };
 
   return (
@@ -197,12 +197,10 @@ export default compose(
     },
     validationSchema: ({ t, availableToWithdrawal, twoFactorEnabled }) =>
       object().shape({
-        amount: number()
-          .max(
-            availableToWithdrawal,
-            t("wallet-withdraw.validation.amount-more-than-available")
-          )
-          .required(t("wallet-withdraw.validation.amount-is-required")),
+        amount: number().max(
+          availableToWithdrawal,
+          t("wallet-withdraw.validation.amount-more-than-available")
+        ),
         address: ethWalletValidator.required(
           t("wallet-withdraw.validation.address-is-required")
         ),

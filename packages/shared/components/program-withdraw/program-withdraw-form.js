@@ -97,7 +97,6 @@ export default compose(
             availableToWithdraw,
             t("withdraw-program.validation.amount-more-than-available")
           )
-          .required(t("withdraw-program.validation.amount-is-required"))
       }),
     handleSubmit: (values, { props }) => {
       props.onSubmit(values.amount);

@@ -161,7 +161,6 @@
     },
     "validation": {
       "amount-more-than-available": "Amount is more than available in your wallet",
-      "amount-is-required": "Amount is required",
       "address-is-required": "Address is required.",
       "two-factor-6digits": "Authentication code should contain 6 digits.",
       "two-factor-required": "Authentication code is required."
@@ -188,7 +187,6 @@
     "confirm": "Confirm",
     "validation": {
       "amount-more-than-available": "Amount is more than available in your wallet",
-      "amount-is-required": "Amount is required.",
       "amount-min-value": "Min amount is {{min}} GVT"
     },
     "program": {
@@ -218,8 +216,7 @@
     "success-alert-message": "Request to withdrawal sent successfully.",
     "validation": {
       "amount-is-zero": "Amount must be greater than zero",
-      "amount-more-than-available": "Amount is more than available for withdraw",
-      "amount-is-required": "Amount is required."
+      "amount-more-than-available": "Amount is more than available for withdraw"
     }
   },
   "withdraw-fund": {
@@ -236,8 +233,7 @@
     "submit": "Submit",
     "success-alert-message": "Request to withdrawal sent successfully.",
     "validation": {
-      "amount-more-than-available": "Amount is more than available for withdraw",
-      "amount-is-required": "Amount is required."
+      "amount-more-than-available": "Amount is more than available for withdraw"
     }
   },
   "not-found-page": {
@@ -1128,7 +1124,7 @@
           "assets-count": "Must be at least two assets.",
           "image-resolution-incorrect": "The resolution of the uploaded image is too low.",
           "image-file-is-large": "The uploaded image file is too large.",
-          "deposit-min": "Not enought money."
+          "deposit-min": "Not enough money."
         },
         "hints": {
           "entry-fee": "Description about entry fee is here",
