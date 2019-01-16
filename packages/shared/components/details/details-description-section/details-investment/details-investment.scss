@@ -11,7 +11,6 @@ $withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
   @include adaptive-margin(top, $padding-medium);
   @include adaptive-margin(bottom, $padding-xsmall);
   display: inline-block;
-  width: 100%;
   & div {
     box-sizing: border-box;
   }
@@ -22,7 +21,6 @@ $withdraw-button-width-mobile: $withdraw-button-width/$divider-text;
   }
 
   @include media-breakpoint-tablet() {
-    margin-left: -$padding-small;
     max-width: 750px;
   }
 
