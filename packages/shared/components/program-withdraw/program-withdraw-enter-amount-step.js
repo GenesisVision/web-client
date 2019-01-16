@@ -21,14 +21,15 @@ const WithdrawEnterAmountStep = ({
   setFieldValue
 }) => {
   const isAllow = values => {
-    const { formattedValue } = values;
-    return (
-      formattedValue === "" || validateFraction(formattedValue, programCurrency)
-    );
+    const { formattedValue, value } = values;
+    return formattedValue === "" || validateFraction(value, programCurrency);
   };
 
   const setMaxAmount = () => {
-    setFieldValue("amount", availableToWithdraw);
+    setFieldValue(
+      "amount",
+      formatCurrencyValue(availableToWithdraw, programCurrency)
+    );
   };
 
   return (

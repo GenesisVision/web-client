@@ -15,6 +15,7 @@ import { ethWalletValidator } from "shared/utils/validators/validators";
 import { number, object, string } from "yup";
 
 import InputAmountField from "../../../components/input-amount-field/input-amount-field";
+import { formatCurrencyValue } from "../../../utils/formatter";
 
 const WalletWithdrawForm = ({
   t,
@@ -41,16 +42,16 @@ const WalletWithdrawForm = ({
   );
 
   const isAllow = values => {
-    const { floatValue, formattedValue } = values;
+    const { floatValue, formattedValue, value } = values;
     return (
       formattedValue === "" ||
-      (validateFraction(formattedValue, "GVT") &&
+      (validateFraction(value, "GVT") &&
         floatValue <= parseFloat(availableToWithdrawal))
     );
   };
 
   const setMaxAmount = () => {
-    setFieldValue("amount", availableToWithdrawal.toString());
+    setFieldValue("amount", formatCurrencyValue(availableToWithdrawal, "GVT"));
   };
 
   return (

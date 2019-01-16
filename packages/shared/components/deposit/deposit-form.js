@@ -42,10 +42,10 @@ class DepositForm extends Component {
 
   isAllow = values => {
     const { investor, info } = this.props;
-    const { floatValue, formattedValue } = values;
+    const { floatValue, formattedValue, value } = values;
     const { availableToInvest, availableInWallet } = info;
 
-    const isValidateFraction = validateFraction(formattedValue, "GVT");
+    const isValidateFraction = validateFraction(value, "GVT");
 
     const isAvailableInWallet =
       availableInWallet >= this.investAmount(floatValue);
@@ -73,7 +73,10 @@ class DepositForm extends Component {
           (100 - info.gvCommission - this.composeEntryFee(info.entryFee))) *
         100;
 
-    const maxInvest = Math.min(maxFromWallet, maxAvailable);
+    const maxInvest = formatCurrencyValue(
+      Math.min(maxFromWallet, maxAvailable),
+      "GVT"
+    );
 
     setFieldValue("amount", maxInvest);
   };
