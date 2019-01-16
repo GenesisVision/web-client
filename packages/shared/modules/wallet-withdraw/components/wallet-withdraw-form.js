@@ -14,6 +14,8 @@ import { formatValue, validateFraction } from "shared/utils/formatter";
 import { ethWalletValidator } from "shared/utils/validators/validators";
 import { number, object, string } from "yup";
 
+import InputAmountField from "../../../components/input-amount-field/input-amount-field";
+
 const WalletWithdrawForm = ({
   t,
   twoFactorEnabled,
@@ -24,7 +26,8 @@ const WalletWithdrawForm = ({
   disabled,
   isValid,
   dirty,
-  errorMessage
+  errorMessage,
+  setFieldValue
 }) => {
   const { currency, amount } = values;
   const currentWallet =
@@ -36,6 +39,19 @@ const WalletWithdrawForm = ({
     convertFromCurrency(amount, rateToGvt) - commission,
     0
   );
+
+  const isAllow = values => {
+    const { floatValue, formattedValue } = values;
+    return (
+      formattedValue === "" ||
+      (validateFraction(formattedValue, "GVT") &&
+        floatValue <= parseFloat(availableToWithdrawal))
+    );
+  };
+
+  const setMaxAmount = () => {
+    setFieldValue("amount", availableToWithdrawal);
+  };
 
   return (
     <form
@@ -71,23 +87,12 @@ const WalletWithdrawForm = ({
         </GVFormikField>
       </div>
       <div className="dialog__bottom">
-        <GVFormikField
+        <InputAmountField
           name="amount"
           label={t("wallet-withdraw.amount")}
-          component={GVTextField}
-          adornment="GVT"
-          autoComplete="off"
-          autoFocus
-          InputComponent={NumberFormat}
-          allowNegative={false}
-          isAllowed={values => {
-            const { floatValue, formattedValue } = values;
-            return (
-              formattedValue === "" ||
-              (validateFraction(formattedValue, "GVT") &&
-                floatValue <= parseFloat(availableToWithdrawal))
-            );
-          }}
+          currency="GVT"
+          isAllow={isAllow}
+          setMax={setMaxAmount}
         />
         <GVFormikField
           name="address"
