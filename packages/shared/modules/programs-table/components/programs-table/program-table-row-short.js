@@ -70,15 +70,14 @@ const ProgramTableRowShort = ({
           <div className="programs-table__cell--title">
             <div className="programs-table__cell--top">
               <Link
+                className="programs-table__cell--link"
                 to={{
                   pathname: composeProgramDetailsUrl(url),
                   state: `/ ${title}`
                 }}
                 onClick={stopPropagationEvent}
               >
-                <GVButton variant="text" color="secondary">
-                  {program.title}
-                </GVButton>
+                {program.title}
               </Link>
             </div>
             {tags && (
