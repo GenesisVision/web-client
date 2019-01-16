@@ -43,7 +43,7 @@ export const loadKycIFrame = () => {
           },
           requiredDocuments: "IDENTITY:PASSPORT,ID_CARD,DRIVERS;SELFIE:SELFIE",
           uiConf: {
-            customCssUrl: "https://genesis.vision/assets/kyc/style.css",
+            customCssUrl: "https://genesis.vision/assets/kyc/style.css?v=1",
             steps: {}
           }
         },

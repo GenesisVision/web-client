@@ -6,6 +6,7 @@ $padding: 32px;
 $text-size: 13px;
 $th-text-size: 12px;
 $title-text-size: 15px;
+$detailed-text: 11px;
 $chart-width: 160px;
 $program-width: 312px;
 $program-height: 372px;
@@ -25,14 +26,26 @@ $description-block-width: 250px;
   }
 }
 
+@mixin table-link($color-link, $color-link-hover: $color-link) {
+  transition: 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  font-size: inherit;
+  color: $color-link;
+
+  &:hover {
+    color: rgba(darken($color-link-hover, 10%), 0.9);
+  }
+}
+
 .programs-cards {
-  @include horizontal-paddings($padding-small, 2);
   @include adaptive-padding(top, $padding-xsmall);
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
+  padding-left: $padding-xsmall;
+  padding-right: $padding-xsmall;
+
   .icon {
     width: auto;
   }
@@ -165,7 +178,8 @@ $description-block-width: 250px;
     }
   }
   @include media-breakpoint-landscape-phone() {
-    padding-right: $padding - $padding/2;
+    padding-left: $padding-small;
+    padding-right: $padding-small - $padding/2;
     &__card,
     &__card-loader {
       min-width: $program-width;
@@ -221,15 +235,19 @@ $description-block-width: 250px;
     }
   }
   &--title {
+    @include font-size($font-size-paragraph);
     word-break: break-all;
     width: 170px;
     div {
       padding: $padding/10;
     }
-    .gv-btn {
-      @include font-size($font-size-paragraph);
-      padding: 0;
-    }
+  }
+  &--link {
+    @include table-link($text-accent-color, $text-color);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: block;
   }
   &--bottom {
     opacity: 0.3;
@@ -296,7 +314,6 @@ $description-block-width: 250px;
   &__avatar {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
     margin-bottom: $padding/1.5;
     &--name {
@@ -308,22 +325,25 @@ $description-block-width: 250px;
   }
 
   &__title {
-    font-size: $title-text-size/1.5;
+    font-size: $detailed-text;
     letter-spacing: 0.2px;
     margin-bottom: $padding/2.5/1.5;
-    .gv-btn {
-      padding: 0;
-    }
+    word-break: break-word;
+  }
+
+  &__title-link {
+    @include table-link($text-accent-color, $text-color);
   }
 
   &__manager {
-    font-size: $text-size/1.5;
+    font-size: $detailed-text;
     letter-spacing: 0.2px;
     color: $primary-color;
     word-break: break-all;
-    .gv-btn {
-      padding: 0;
-    }
+  }
+
+  &__manager-link {
+    @include table-link($primary-color);
   }
 
   &__strategy {
@@ -372,6 +392,11 @@ $description-block-width: 250px;
     justify-content: space-between;
     flex-direction: column;
     align-items: center;
+    font-size: 11px;
+  }
+
+  &__details-link {
+    @include table-link($text-accent-color, $text-color);
   }
 
   &__statistic-data,
@@ -421,13 +446,6 @@ $description-block-width: 250px;
     &__strategy {
       margin-bottom: $padding/2;
     }
-    &__title {
-      font-size: $title-text-size;
-    }
-
-    &__manager {
-      font-size: $text-size;
-    }
 
     &__strategy {
       font-size: $text-size;
@@ -436,7 +454,6 @@ $description-block-width: 250px;
     &__description {
       font-size: $text-size;
       padding: 0 $padding;
-      //width: $description-block-width;
     }
     &__avatar__img {
       height: 80px;

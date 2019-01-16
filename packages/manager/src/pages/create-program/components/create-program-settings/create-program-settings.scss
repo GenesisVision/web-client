@@ -4,7 +4,15 @@
 
 .create-program-settings {
   margin-top: 40px;
-  margin-left: 24px;
+  padding-left: $padding-xsmall;
+
+  @include media-breakpoint-landscape-phone() {
+    padding-left: 0;
+  }
+
+  @include media-breakpoint-tablet() {
+    margin-top: 60px;
+  }
 
   &__name {
     padding-bottom: $padding-small;
@@ -276,11 +284,6 @@
         margin-top: 70px;
       }
     }
-  }
-
-  @include media-breakpoint-tablet() {
-    margin-top: 60px;
-    margin-left: 0;
   }
 }
 

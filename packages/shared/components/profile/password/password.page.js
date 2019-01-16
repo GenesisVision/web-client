@@ -6,8 +6,10 @@ import PasswordChangeContainer from "shared/modules/password-change/password-cha
 const PasswordPage = ({ t }) => {
   return (
     <Page title={t("auth.password-change.title")}>
-      <h1>{t("auth.password-change.title")}</h1>
-      <PasswordChangeContainer />
+      <div className="app__main-wrapper">
+        <h1>{t("auth.password-change.title")}</h1>
+        <PasswordChangeContainer />
+      </div>
     </Page>
   );
 };

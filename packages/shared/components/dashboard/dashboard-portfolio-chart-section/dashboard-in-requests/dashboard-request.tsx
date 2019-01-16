@@ -1,14 +1,33 @@
+import { ProgramRequest } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import moment from "moment";
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { TranslationFunction, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import PortfolioEventLogo from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-class DashboardRequest extends Component {
+import { CancelReqestType } from "../../../asset-status/services/asset-status.service";
+
+export interface IDashboardRequestProps {
+  role: string;
+  asset: string;
+  request: ProgramRequest;
+  cancelRequest(x: CancelReqestType): void;
+  onApplyCancelRequest(): void;
+  t: TranslationFunction;
+}
+
+export interface IDashboardRequestState {
+  isConfirmPopupOpen: boolean;
+}
+
+class DashboardRequest extends Component<
+  IDashboardRequestProps,
+  IDashboardRequestState
+> {
   state = {
     isConfirmPopupOpen: false
   };
@@ -33,7 +52,6 @@ class DashboardRequest extends Component {
     };
     cancelRequest({
       id: request.id,
-      type: request.programType,
       onFinally,
       role,
       asset

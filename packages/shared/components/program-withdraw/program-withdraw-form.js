@@ -35,7 +35,8 @@ class ProgramWithdrawForm extends Component {
       accountCurrency,
       errors,
       isValid,
-      dirty
+      dirty,
+      setFieldValue
     } = this.props;
     return (
       <form
@@ -52,6 +53,7 @@ class ProgramWithdrawForm extends Component {
             availableToWithdraw={availableToWithdraw}
             onClick={this.goToConfirmStep}
             disabled={errors.amount !== undefined || !isValid || !dirty}
+            setFieldValue={setFieldValue}
           />
         )}
         {this.state.step === CONFIRM_STEP && (
@@ -95,7 +97,6 @@ export default compose(
             availableToWithdraw,
             t("withdraw-program.validation.amount-more-than-available")
           )
-          .required(t("withdraw-program.validation.amount-is-required"))
       }),
     handleSubmit: (values, { props }) => {
       props.onSubmit(values.amount);

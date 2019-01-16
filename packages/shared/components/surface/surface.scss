@@ -4,15 +4,25 @@
 .surface {
   @include vertical-paddings($padding-medium, $padding-small);
   background-color: $panel-background-color;
-  border-radius: 0.5em;
   box-sizing: border-box;
+
+  @include media-breakpoint-landscape-phone() {
+    border-radius: 0.5em;
+  }
 
   &--without-paddings {
     padding: 0;
+    border-radius: 0.5em;
   }
 
   &--horizontal-paddings {
-    @include horizontal-paddings($padding-small, 2);
+    padding-left: $padding-xsmall;
+    padding-right: $padding-xsmall;
+
+    @include media-breakpoint-landscape-phone() {
+      padding-left: $padding-small;
+      padding-right: $padding-small;
+    }
   }
 
   .surface {

@@ -12,9 +12,11 @@ class FundDetailsHistorySection extends PureComponent {
     const { t, id, fetchFundStructure } = this.props;
     return (
       <Surface className="details-history">
-        <h3 className="details-history__heading">
-          {t("fund-details-page.history.structure.title")}
-        </h3>
+        <div className="details-history__header">
+          <h3 className="details-history__heading">
+            {t("fund-details-page.history.structure.title")}
+          </h3>
+        </div>
         <div>
           <FundStructure id={id} fetchStructure={fetchFundStructure} />
         </div>

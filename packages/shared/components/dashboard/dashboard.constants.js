@@ -71,6 +71,9 @@ export const DASHBOARD_FUNDS_COLUMNS = [
   },
   {
     name: "chart"
+  },
+  {
+    name: "status"
   }
 ];
 
