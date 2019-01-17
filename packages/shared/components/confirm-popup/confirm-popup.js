@@ -15,7 +15,8 @@ const ConfirmPopup = ({
   body,
   applyButtonText,
   cancelButtonText,
-  className
+  className,
+  disabled
 }) => {
   applyButtonText = applyButtonText || t("buttons.apply");
   cancelButtonText = cancelButtonText || t("buttons.cancel");
@@ -27,7 +28,9 @@ const ConfirmPopup = ({
           <p>{body}</p>
         </div>
         <div className="dialog__buttons">
-          <GVButton onClick={onApply}>{applyButtonText}</GVButton>
+          <GVButton onClick={onApply} disabled={disabled}>
+            {applyButtonText}
+          </GVButton>
           {onCancel && (
             <GVButton color="secondary" variant="outlined" onClick={onCancel}>
               {cancelButtonText}

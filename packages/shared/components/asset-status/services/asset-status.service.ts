@@ -76,6 +76,7 @@ export type CancelReqestType = {
   role: string;
   asset: string;
   onFinally: Function;
+  removeDisableBtn: Function;
 };
 
 export const cancelRequestDispatch = ({
