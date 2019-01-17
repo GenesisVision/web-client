@@ -44,6 +44,5 @@ export const cancelRequest = ({ id, type, onFinally }) => (
           true
         )
       );
-      onFinally();
     });
 };
