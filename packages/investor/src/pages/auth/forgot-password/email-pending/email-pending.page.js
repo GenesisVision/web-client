@@ -12,6 +12,12 @@ const EmailPendingPage = ({ t }) => {
       <p className="password-pending__text">
         {t("auth.password-restore.email-pending.text-section-1")}
       </p>
+      <p className="password-pending__text">
+        {t("auth.password-restore.email-pending.text-section-2")}
+      </p>
+      <p className="password-pending__text">
+        {t("auth.password-restore.email-pending.text-section-3")}
+      </p>
       <EmailPendingContainer forgotPasswordService={forgotPasswordService} />
     </div>
   );
