@@ -26,6 +26,7 @@ $padding: $padding-small;
     text-align: center;
     width: 100%;
     font-size: $font-size-common;
+    box-sizing: border-box;
   }
   &__vertical-track {
     display: none;
