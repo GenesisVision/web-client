@@ -287,58 +287,54 @@ class ProgramDetailsDescription extends PureComponent {
               </StatisticItem>
             </div>
             {(isOwnProgram || canInvest || canWithdraw) && (
-              <div className="details-description__investing-container">
-                <div className="details-description__invest-button-container">
+              <div className="details-description__invest-button-container">
+                <GVButton
+                  className="details-description__invest-btn"
+                  onClick={this.handleOpenInvestmentPopup}
+                  disabled={
+                    !programDescription.personalProgramDetails ||
+                    !programDescription.personalProgramDetails.canInvest
+                  }
+                >
+                  {t("program-details-page.description.invest")}
+                </GVButton>
+                {CloseProgramContainer && (
                   <GVButton
                     className="details-description__invest-btn"
-                    onClick={this.handleOpenInvestmentPopup}
+                    color="secondary"
+                    variant="outlined"
+                    onClick={this.handleOpenCloseProgramPopup}
                     disabled={
-                      !programDescription.personalProgramDetails ||
-                      !programDescription.personalProgramDetails.canInvest
+                      !programDescription.personalProgramDetails.canCloseProgram
                     }
                   >
-                    {t("program-details-page.description.invest")}
+                    {t("program-details-page.description.close-program")}
                   </GVButton>
-                  {CloseProgramContainer && (
-                    <GVButton
-                      className="details-description__invest-btn"
-                      color="secondary"
-                      variant="outlined"
-                      onClick={this.handleOpenCloseProgramPopup}
-                      disabled={
-                        !programDescription.personalProgramDetails
-                          .canCloseProgram
-                      }
-                    >
-                      {t("program-details-page.description.close-program")}
-                    </GVButton>
-                  )}
-                  {ClosePeriodContainer && (
-                    <GVButton
-                      className="details-description__invest-btn"
-                      color="secondary"
-                      variant="outlined"
-                      onClick={this.handleOpenClosePeriodPopup}
-                      disabled={
-                        !programDescription.personalProgramDetails
-                          .canClosePeriod
-                      }
-                    >
-                      {t("program-details-page.close-period.title")}
-                    </GVButton>
-                  )}
-                  {AssetEditContainer && (
-                    <GVButton
-                      className="details-description__invest-btn"
-                      color="secondary"
-                      variant="outlined"
-                      onClick={this.handleOpenEditProgramPopup}
-                      disabled={!canCloseProgram}
-                    >
-                      {t("program-details-page.description.edit-program")}
-                    </GVButton>
-                  )}
-                </div>
+                )}
+                {ClosePeriodContainer && (
+                  <GVButton
+                    className="details-description__invest-btn"
+                    color="secondary"
+                    variant="outlined"
+                    onClick={this.handleOpenClosePeriodPopup}
+                    disabled={
+                      !programDescription.personalProgramDetails.canClosePeriod
+                    }
+                  >
+                    {t("program-details-page.close-period.title")}
+                  </GVButton>
+                )}
+                {AssetEditContainer && (
+                  <GVButton
+                    className="details-description__invest-btn"
+                    color="secondary"
+                    variant="outlined"
+                    onClick={this.handleOpenEditProgramPopup}
+                    disabled={!canCloseProgram}
+                  >
+                    {t("program-details-page.description.edit-program")}
+                  </GVButton>
+                )}
               </div>
             )}
             <ProgramDetailContext.Consumer>
