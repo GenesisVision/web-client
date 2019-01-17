@@ -3,17 +3,18 @@
 @import "~shared/styles/_sizes.scss";
 
 .details-description {
-  display: flex;
-  flex-wrap: wrap;
-  white-space: pre-wrap;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: auto auto auto;
+  grid-template-areas: "logo links" "main main" "details details";
   padding: 0 $padding-xsmall;
 
-  @include media-breakpoint-landscape-phone() {
-    padding: 0;
-  }
-
   @include media-breakpoint-tablet() {
-    flex-wrap: nowrap;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto auto;
+    grid-template-areas: "logo main links" ". details details";
+    grid-column-gap: 50px;
+    padding: 0;
   }
 
   &__your-investment {
@@ -77,26 +78,20 @@
   }
 
   &__left {
-    padding-right: $padding-xsmall-mobile;
-    width: 50%;
-    box-sizing: border-box;
+    grid-area: logo;
+  }
 
-    @include media-breakpoint-tablet() {
-      width: auto;
-      padding: 0;
-    }
+  &__bottom {
+    grid-area: details;
   }
 
   &__right {
+    grid-area: links;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    width: 50%;
-    box-sizing: border-box;
     padding: $padding-xsmall-mobile 0 $padding-xsmall;
 
     @include media-breakpoint-tablet() {
-      width: auto;
       padding: 0;
     }
 
@@ -113,18 +108,7 @@
   }
 
   &__main {
-    order: 1;
-    width: 100%;
-
-    @include media-breakpoint-tablet() {
-      order: 0;
-    }
-
-    @include media-breakpoint-tablet() {
-      padding-left: $padding-big;
-      width: auto;
-      flex: 1 1 auto;
-    }
+    grid-area: main;
   }
 
   &__author-btn {
@@ -237,6 +221,8 @@
       display: inline-flex;
       align-items: center;
       padding-top: 0;
+      margin-left: 0;
+      margin-right: 0;
     }
     .gv-switch__label {
       color: $text-accent-color;
