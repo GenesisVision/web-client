@@ -751,7 +751,9 @@
         "email-required": "Email is required."
       },
       "email-pending": {
-        "text-section-1": "Please check your inbox for a confirmation email. Click the link in the email to create new password.",
+        "text-section-1": "If a user with this email address exists, we sent an email with a link to reset your password.",
+        "text-section-2": "Please check your inbox for a confirmation email. Click the link in the email to create a new password.",
+        "text-section-3": "If you didn't receive the email, please check the spam folder. Or recheck the email you specified for password resetting.",
         "email-resend-button-text": "Resend email",
         "confirm-button-text": "Continue",
         "back-button-text": "Back"
