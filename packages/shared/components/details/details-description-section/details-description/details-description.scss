@@ -45,12 +45,6 @@
     }
   }
 
-  &__investing-container {
-    @include adaptive-padding(bottom, $padding-xsmall);
-    display: flex;
-    align-items: center;
-  }
-
   &__avatar {
     cursor: pointer;
     width: 100%;
@@ -126,6 +120,7 @@
   }
 
   &__invest-button-container {
+    @include adaptive-padding(bottom, $padding-xsmall);
     & > button,
     .details-description__reallocate-container {
       margin-top: $padding-small-mobile;
