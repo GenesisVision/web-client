@@ -8,6 +8,9 @@
   & div {
     box-sizing: border-box;
   }
+  svg.recharts-surface {
+    overflow: visible;
+  }
   @include media-breakpoint-landscape-phone() {
     min-height: 683px;
   }
