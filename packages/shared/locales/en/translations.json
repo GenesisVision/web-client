@@ -877,7 +877,7 @@
           "InvestorInvest": "Investor invest",
           "AssetFinished": "Asset finished",
           "ProgramPeriodStats": "Program period stats",
-          "ProgramPeriodEnds": "Programp period ends"
+          "ProgramPeriodEnds": "Program period ends"
         }
       }
     }
@@ -987,13 +987,17 @@
           "reinvest": "Reinvest",
           "canceled": "Canceled",
           "ended": "Ended",
+          "All": "All",
           "ManagerInvest": "Manager invest",
+          "ManagerWithdraw": "Manager withdraw",
           "EntranceFee": "Entrance fee",
+          "ExitFee": "ExitFee",
           "AssetStarted": "Asset started",
           "InvestorInvest": "Investor invest",
+          "InvestorWithdraw": "Investor withdraw",
           "AssetFinished": "Asset finished",
           "ProgramPeriodStats": "Program period stats",
-          "ProgramPeriodEnds": "Programp period ends"
+          "ProgramPeriodEnds": "Program period ends"
         }
       }
     },

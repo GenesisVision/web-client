@@ -1,11 +1,19 @@
 import classnames from "classnames";
 import { GVButton } from "gv-react-components";
 import React, { Component } from "react";
+import { translate } from "react-i18next";
 
 class SelectFilterPopover extends Component {
   handleClick = (selected, value) => e => {
     return this.props.changeFilter(value);
   };
+
+  renderLabel = item => {
+    const { t } = this.props;
+    if (item.labelKey !== undefined) return t(item.labelKey);
+    return item.label;
+  };
+
   render() {
     const { values, value } = this.props;
 
@@ -23,7 +31,7 @@ class SelectFilterPopover extends Component {
               key={idx}
               onClick={this.handleClick(selected, x.value)}
             >
-              {x.label}
+              {this.renderLabel(x)}
             </GVButton>
           );
         })}
@@ -32,4 +40,4 @@ class SelectFilterPopover extends Component {
   }
 }
 
-export default SelectFilterPopover;
+export default translate()(SelectFilterPopover);

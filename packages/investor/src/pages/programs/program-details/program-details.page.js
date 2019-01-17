@@ -19,6 +19,7 @@ import {
   getProgramDescription,
   getProgramStatistic
 } from "shared/components/programs/program-details/services/program-details.service";
+import { INVESTOR_EVENT_TYPE_FILTER_VALUES } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
 import { INVESTOR } from "shared/constants/constants";
 
 import { LOGIN_ROUTE } from "../../auth/login/login.routes";
@@ -141,6 +142,7 @@ class ProgramDetailsPage extends PureComponent {
                 programId={this.description.id}
                 currency={currency}
                 isInvested={isInvested}
+                eventTypeFilterValues={INVESTOR_EVENT_TYPE_FILTER_VALUES}
               />
             </div>
           </div>
