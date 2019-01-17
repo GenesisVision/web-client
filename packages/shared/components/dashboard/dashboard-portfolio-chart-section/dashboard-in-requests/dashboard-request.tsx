@@ -47,7 +47,6 @@ class DashboardRequest extends Component<
       asset
     } = this.props;
     const onFinally = () => {
-      this.handleCloseConfirmPopup();
       onApplyCancelRequest();
     };
     cancelRequest({

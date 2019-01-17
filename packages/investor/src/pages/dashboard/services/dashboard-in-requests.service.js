@@ -3,7 +3,6 @@ import { alertMessageActions } from "shared/modules/alert-message/actions/alert-
 import authService from "shared/services/auth-service";
 
 import {
-  cancelFundRequest,
   cancelProgramRequest,
   fetchInRequests
 } from "../actions/dashboard.actions";
@@ -19,10 +18,7 @@ export const cancelRequest = ({ id, type, onFinally }) => (
   getState
 ) => {
   const authorization = authService.getAuthArg();
-  const action =
-    type === "Program"
-      ? cancelProgramRequest(authorization, id)
-      : cancelFundRequest(authorization, id);
+  const action = cancelProgramRequest(authorization, id);
 
   return dispatch(action)
     .then(() => {
@@ -48,6 +44,5 @@ export const cancelRequest = ({ id, type, onFinally }) => (
           true
         )
       );
-      onFinally();
     });
 };
