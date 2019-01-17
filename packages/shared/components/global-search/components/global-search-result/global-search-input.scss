@@ -37,9 +37,32 @@
 
   &__tabs {
     padding: 0 $padding-xsmall;
+    height: 25px;
+    overflow: hidden;
 
     @include media-breakpoint-landscape-phone() {
       padding: 0 $padding-small;
+      height: auto;
+      overflow: auto;
+    }
+
+    .gv-tabs {
+      display: flex;
+      overflow-x: scroll;
+      -ms-overflow-style: none;
+
+      @include media-breakpoint-landscape-phone() {
+        overflow-x: auto;
+      }
+
+      &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+      }
+    }
+
+    .gv-tab {
+      white-space: nowrap;
     }
   }
 
