@@ -1,10 +1,8 @@
-import { DEFAULT_PERIOD } from "shared/components/chart/chart-period/chart-period.helpers";
+import { getDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 
 import { DASHBOARD_PERIOD } from "../actions/dashboard.actions";
 
-const initialState = DEFAULT_PERIOD;
-
-const dashboardPeriodReducer = (state = initialState, action) => {
+const dashboardPeriodReducer = (state = getDefaultPeriod(), action) => {
   switch (action.type) {
     case DASHBOARD_PERIOD:
       return {

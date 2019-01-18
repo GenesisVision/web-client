@@ -2,7 +2,7 @@ import {
   FUNDS_SLUG_URL_PARAM_NAME,
   FUND_DETAILS_ROUTE
 } from "pages/funds/funds.routes";
-import { DEFAULT_PERIOD } from "shared/components/chart/chart-period/chart-period.helpers";
+import { getDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import fundsApi from "shared/services/api-client/funds-api";
 import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
@@ -22,7 +22,11 @@ export const getFundDescription = () => (dispatch, getState) => {
   });
 };
 
-export const getFundStatistic = (fundId, currency, period = DEFAULT_PERIOD) => {
+export const getFundStatistic = (
+  fundId,
+  currency,
+  period = getDefaultPeriod()
+) => {
   const chartFilter = {
     currency,
     dateFrom: period.start,
