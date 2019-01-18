@@ -42,7 +42,7 @@ class DashboardPortfolioChart extends PureComponent {
 
     return (
       <ResponsiveContainer>
-        <ComposedChart stackOffset="sign" data={assets}>
+        <ComposedChart stackOffset="sign" data={assets} margin={{ top: 20 }}>
           <defs>
             <ProgramChartGradient
               offset={this.grOffset()}

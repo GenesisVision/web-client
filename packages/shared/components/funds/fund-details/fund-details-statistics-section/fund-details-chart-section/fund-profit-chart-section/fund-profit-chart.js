@@ -31,7 +31,7 @@ class FundProfitChart extends PureComponent {
     const areaStrokeColor = getStrokeColor(equityValues);
     return (
       <ResponsiveContainer>
-        <ComposedChart data={equity}>
+        <ComposedChart data={equity} margin={{ top: 20 }}>
           <defs>
             <ProgramChartGradient
               offset={off}
