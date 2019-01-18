@@ -13,7 +13,7 @@ export const getInRequests = () => (dispatch, getState) => {
   dispatch(fetchInRequests(authorization, 0, 100));
 };
 
-export const cancelRequest = ({ id, type, onFinally }) => (
+export const cancelRequest = ({ id, type, onFinally, removeDisableBtn }) => (
   dispatch,
   getState
 ) => {
@@ -44,5 +44,6 @@ export const cancelRequest = ({ id, type, onFinally }) => (
           true
         )
       );
+      removeDisableBtn();
     });
 };
