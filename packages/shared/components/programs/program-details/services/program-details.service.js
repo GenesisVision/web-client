@@ -2,7 +2,7 @@ import {
   PROGRAM_DETAILS_ROUTE,
   PROGRAM_SLUG_URL_PARAM_NAME
 } from "pages/programs/programs.routes";
-import { DEFAULT_PERIOD } from "shared/components/chart/chart-period/chart-period.helpers";
+import { getDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import managerApi from "shared/services/api-client/manager-api";
 import programsApi from "shared/services/api-client/programs-api";
@@ -24,7 +24,7 @@ export const getProgramDescription = () => (dispatch, getState) => {
 export const getProgramStatistic = (
   programId,
   currency,
-  period = DEFAULT_PERIOD
+  period = getDefaultPeriod()
 ) => {
   const chartFilter = {
     currency,
