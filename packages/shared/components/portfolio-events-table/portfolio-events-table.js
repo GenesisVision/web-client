@@ -10,10 +10,7 @@ import Profitability from "shared/components/profitability/profitability";
 import { ASSET_TYPE_FILTER_VALUES } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.constants";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import {
-  EVENT_TYPE_FILTER_NAME,
-  EVENT_TYPE_FILTER_VALUES
-} from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
+import { EVENT_TYPE_FILTER_NAME } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
 import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
 import TableCell from "shared/components/table/components/table-cell";
 import TableModule from "shared/components/table/components/table-module";
@@ -35,7 +32,8 @@ class PortfolioEventsTable extends Component {
       tableTitle,
       className,
       fetchPortfolioEvents,
-      dateRangeStartLabel
+      dateRangeStartLabel,
+      eventTypeFilterValues
     } = this.props;
     return (
       <div className={className}>
@@ -51,7 +49,7 @@ class PortfolioEventsTable extends Component {
                   name={EVENT_TYPE_FILTER_NAME}
                   label="Type"
                   value={filtering["type"]}
-                  values={EVENT_TYPE_FILTER_VALUES}
+                  values={eventTypeFilterValues}
                   onChange={updateFilter}
                 />
               )}

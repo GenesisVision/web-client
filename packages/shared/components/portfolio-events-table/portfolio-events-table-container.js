@@ -10,7 +10,8 @@ class PortfolioEventsTableContainer extends Component {
       tableTitle,
       className,
       fetchPortfolioEvents,
-      dateRangeStartLabel
+      dateRangeStartLabel,
+      eventTypeFilterValues
     } = this.props;
     return (
       <Surface className="dashboard-portfolio-events-all">
@@ -20,6 +21,7 @@ class PortfolioEventsTableContainer extends Component {
           tableTitle={tableTitle}
           className={className}
           dateRangeStartLabel={dateRangeStartLabel}
+          eventTypeFilterValues={eventTypeFilterValues}
         />
       </Surface>
     );

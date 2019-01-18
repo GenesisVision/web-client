@@ -38,7 +38,14 @@ class ProgramDetailsHistorySection extends PureComponent {
 
   render() {
     const { tab, tradesCount, eventsCount } = this.state;
-    const { t, programId, currency, isAuthenticated, isInvested } = this.props;
+    const {
+      t,
+      programId,
+      currency,
+      isAuthenticated,
+      isInvested,
+      eventTypeFilterValues
+    } = this.props;
     return (
       <Surface className="details-history">
         <div className="details-history__header">
@@ -80,6 +87,7 @@ class ProgramDetailsHistorySection extends PureComponent {
               filtering={EVENTS_FILTERING}
               fetchPortfolioEvents={this.props.fetchPortfolioEvents}
               dateRangeStartLabel={t("filters.date-range.program-start")}
+              eventTypeFilterValues={eventTypeFilterValues}
             />
           )}
         </div>
