@@ -22,6 +22,7 @@ export interface IDashboardRequestProps {
 
 export interface IDashboardRequestState {
   isConfirmPopupOpen: boolean;
+  disabled: boolean;
 }
 
 class DashboardRequest extends Component<
@@ -29,7 +30,8 @@ class DashboardRequest extends Component<
   IDashboardRequestState
 > {
   state = {
-    isConfirmPopupOpen: false
+    isConfirmPopupOpen: false,
+    disabled: false
   };
 
   handleCancelRequestClick = () => {
@@ -46,19 +48,24 @@ class DashboardRequest extends Component<
       role,
       asset
     } = this.props;
+    this.setState({ disabled: true });
     const onFinally = () => {
       onApplyCancelRequest();
+    };
+    const removeDisableBtn = () => {
+      this.setState({ disabled: false });
     };
     cancelRequest({
       id: request.id,
       onFinally,
+      removeDisableBtn,
       role,
       asset
     });
   };
 
   render() {
-    const { isConfirmPopupOpen } = this.state;
+    const { isConfirmPopupOpen, disabled } = this.state;
     const { t, request } = this.props;
     return (
       <div className="dashboard-request-popover__request">
@@ -111,6 +118,7 @@ class DashboardRequest extends Component<
             body={"Please confirm that you want to cancel the request."}
             applyButtonText={t("buttons.confirm")}
             className="dialog--wider"
+            disabled={disabled}
           />
         </div>
       </div>
