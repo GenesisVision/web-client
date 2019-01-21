@@ -530,6 +530,7 @@
     "total-balance": "Total balance",
     "invested-value": "Invested value",
     "available": "Available",
+    "pending": "Pending",
     "add-funds": "Add funds",
     "withdraw": "Withdraw",
     "transactions": {

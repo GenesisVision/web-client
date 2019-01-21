@@ -20,7 +20,7 @@ const WalletBalanceElements = ({
         label={t("wallet-page.total-balance")}
         equivalent={walletBalanceData.totalBalanceCurrency}
         equivalentCurrency={currentCurrency}
-        large
+        big
         accent
       >
         <NumberFormat
@@ -46,6 +46,21 @@ const WalletBalanceElements = ({
         />
       </StatisticItem>
       <StatisticItem
+        label={t("wallet-page.pending")}
+        equivalent={walletBalanceData.availableCurrency}
+        equivalentCurrency={currentCurrency}
+        className="wallet-balance__statistic-big"
+        big
+        accent
+      >
+        <NumberFormat
+          value={formatValue(walletBalanceData.availableGVT)}
+          thousandSeparator={" "}
+          displayType="text"
+          suffix={" GVT"}
+        />
+      </StatisticItem>
+      <StatisticItem
         label={t("wallet-page.available")}
         equivalent={walletBalanceData.availableCurrency}
         equivalentCurrency={currentCurrency}
@@ -61,19 +76,19 @@ const WalletBalanceElements = ({
         />
       </StatisticItem>
     </div>
-    <div className="wallet-balance__footer">
-      <GVButton className="wallet-balance__add-funds" onClick={handleAddFunds}>
-        {t("wallet-page.add-funds")}
-      </GVButton>
-      <GVButton
-        className="wallet-balance__withdraw"
-        color="secondary"
-        variant="outlined"
-        onClick={handleWithdraw}
-      >
-        {t("wallet-page.withdraw")}
-      </GVButton>
-    </div>
+    {/*<div className="wallet-balance__footer">*/}
+    {/*<GVButton className="wallet-balance__add-funds" onClick={handleAddFunds}>*/}
+    {/*{t("wallet-page.add-funds")}*/}
+    {/*</GVButton>*/}
+    {/*<GVButton*/}
+    {/*className="wallet-balance__withdraw"*/}
+    {/*color="secondary"*/}
+    {/*variant="outlined"*/}
+    {/*onClick={handleWithdraw}*/}
+    {/*>*/}
+    {/*{t("wallet-page.withdraw")}*/}
+    {/*</GVButton>*/}
+    {/*</div>*/}
   </Fragment>
 );
 
