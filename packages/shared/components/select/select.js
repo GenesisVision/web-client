@@ -79,7 +79,6 @@ class Select extends Component {
   }
 
   render() {
-    console.info(this.props);
     let displayValue = this.props.value;
     const items = React.Children.map(this.props.children, child => {
       const isSelected =
