@@ -536,11 +536,11 @@
     "transactions": {
       "title": "Transactions",
       "empty-transactions": "There are no transactions",
+      "wallet": "Wallet",
       "date": "Date",
-      "information": "Information",
-      "status": "Status",
-      "amount": "Amount",
-      "actions": "Actions"
+      "type": "",
+      "description": "Description",
+      "amount": "Amount"
     },
     "transaction-actions": {
       "resend-email": "Resend confirmation email",

@@ -1,13 +1,14 @@
+import "./wallet-info.scss";
+
 import { GVTab, GVTabs } from "gv-react-components";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
-import ProgramTrades from "shared/components/programs/program-details/program-trades/program-trades";
-// import WalletList from "wallet-container"
+// import WalletList from "wallet-info"
 import Surface from "shared/components/surface/surface";
 import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { EVENT_TYPE_FILTER_DEFAULT_VALUE } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
 
-import WalletTransactions from "../wallet-transactions/wallet-transactions";
+import WalletTransactionsTotal from "../wallet-transactions/wallet-transactions-total";
 
 const WALLETS_TAB = "wallets";
 const TRANSACTIONS_TAB = "transactions";
@@ -16,7 +17,7 @@ const EVENTS_FILTERING = {
   type: EVENT_TYPE_FILTER_DEFAULT_VALUE
 };
 
-class WalletsContainer extends PureComponent {
+class WalletInfo extends PureComponent {
   state = {
     tab: TRANSACTIONS_TAB
   };
@@ -27,18 +28,10 @@ class WalletsContainer extends PureComponent {
 
   render() {
     const { tab } = this.state;
-    // const {
-    //   t,
-    //   programId,
-    //   currency,
-    //   isAuthenticated,
-    //   isInvested,
-    //   eventTypeFilterValues
-    // } = this.props;
     return (
-      <Surface className="wallet-container">
-        <div className="wallet-container__header">
-          <div className="wallet-container__tabs">
+      <Surface className="wallet-info">
+        <div className="wallet-info__header">
+          <div className="wallet-info__tabs">
             <GVTabs value={tab} onChange={this.handleTabChange}>
               <GVTab value={WALLETS_TAB} label={"My wallets"} />
               <GVTab value={TRANSACTIONS_TAB} label={"All transactions"} />
@@ -49,11 +42,11 @@ class WalletsContainer extends PureComponent {
           {/*{tab === WALLETS_TAB && (*/}
           {/*<WalletList />*/}
           {/*)}*/}
-          {tab === TRANSACTIONS_TAB && <WalletTransactions />}
+          {tab === TRANSACTIONS_TAB && <WalletTransactionsTotal />}
         </div>
       </Surface>
     );
   }
 }
 
-export default translate()(WalletsContainer);
+export default translate()(WalletInfo);

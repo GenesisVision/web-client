@@ -1,0 +1,33 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
+
+.wallet-info {
+  @include adaptive-margin(top, $padding-xxsmall);
+
+  &__header {
+    padding-left: $padding-xsmall;
+    padding-right: $padding-xsmall;
+  }
+
+  @media (min-width: 450px) {
+    &__tabs {
+      position: absolute;
+      padding-top: 5px;
+    }
+    .table__filters {
+      justify-content: flex-end;
+
+      .filter {
+        margin-left: 20px;
+      }
+    }
+  }
+
+  @include media-breakpoint-landscape-phone() {
+    &__header {
+      padding-left: $padding-small;
+      padding-right: $padding-small;
+    }
+  }
+}

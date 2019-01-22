@@ -1,11 +1,13 @@
 import React, { Component, Fragment } from "react";
+import { translate } from "react-i18next";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import { bindActionCreators, compose } from "redux";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
 import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
 
 import * as WalletServices from "../../services/wallet.services";
 import WalletBalance from "./wallet-balance";
+import WalletBalanceLoader from "./wallet-balance-loader";
 
 class WalletBalanceContainer extends Component {
   state = {
@@ -42,16 +44,25 @@ class WalletBalanceContainer extends Component {
   }
 
   render() {
-    const { walletBalanceData, currency } = this.props;
+    const { t, walletBalanceData, currency } = this.props;
+
+    console.log(walletBalanceData);
 
     return (
       <Fragment>
-        <WalletBalance
-          walletBalanceData={walletBalanceData}
-          currentCurrency={currency}
-          handleAddFunds={this.handleOpenAddFundsPopup}
-          handleWithdraw={this.handleOpenWithdrawPopup}
-        />
+        <div className="wallet-balance">
+          <h1>{t("wallet-page.title")}</h1>
+          {!walletBalanceData ? (
+            <WalletBalanceLoader />
+          ) : (
+            <WalletBalance
+              walletBalanceData={walletBalanceData}
+              currentCurrency={currency}
+              handleAddFunds={this.handleOpenAddFundsPopup}
+              handleWithdraw={this.handleOpenWithdrawPopup}
+            />
+          )}
+        </div>
         <WalletAddFundsPopup
           open={this.state.isOpenAddFundsPopup}
           onClose={this.handleCloseAddFundsPopup}
@@ -76,7 +87,10 @@ const mapDispatchToProps = dispatch => ({
   service: bindActionCreators(WalletServices, dispatch)
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+export default compose(
+  translate(),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
 )(WalletBalanceContainer);

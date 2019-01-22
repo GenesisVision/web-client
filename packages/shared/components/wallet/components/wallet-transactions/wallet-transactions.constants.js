@@ -10,16 +10,31 @@ export const WALLET_TRANSACTIONS_COLUMNS = [
     name: "date"
   },
   {
-    name: "information"
+    name: "type"
+  },
+  {
+    name: "description"
   },
   {
     name: "amount"
+  }
+];
+
+export const WALLET_TOTAL_TRANSACTIONS_COLUMNS = [
+  {
+    name: "wallet"
   },
   {
-    name: "status"
+    name: "date"
   },
   {
-    name: "actions"
+    name: "type"
+  },
+  {
+    name: "description"
+  },
+  {
+    name: "amount"
   }
 ];
 

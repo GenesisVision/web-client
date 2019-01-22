@@ -14,9 +14,10 @@
   }
 
   &__statistic-item {
+    @include adaptive-margin(bottom, $padding-medium);
     display: flex;
     align-items: flex-end;
-    margin-right: 45px;
+    margin-right: $padding-xxsmall;
 
     .statistics-item {
       padding: 0;
@@ -96,14 +97,15 @@
   }
 
   @include media-breakpoint-landscape-phone() {
-    display: block;
-    padding: 0;
-
     &__statistic {
       &:first-child {
         width: auto;
         margin-bottom: 0;
       }
+    }
+
+    &__statistic-item {
+      margin-right: 45px;
     }
 
     &__total-balance-value {

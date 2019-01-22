@@ -10,6 +10,7 @@ import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filte
 import TableCell from "shared/components/table/components/table-cell";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
+import GVTIcon from "shared/media/currency/GVT.svg";
 import EmptyTransactionsIcon from "shared/media/empty-wallet.svg";
 import ErrorTransactionsIcon from "shared/media/transactions/error.svg";
 import PendingTransactionsIcon from "shared/media/transactions/pending.svg";
@@ -20,7 +21,7 @@ import { formatValue } from "shared/utils/formatter";
 import Profitability from "../../../profitability/profitability";
 import * as actions from "../../actions/wallet.actions";
 import { fetchWalletTransactions } from "../../services/wallet.services";
-import { WALLET_TRANSACTIONS_COLUMNS } from "./wallet-transactions.constants";
+import { WALLET_TOTAL_TRANSACTIONS_COLUMNS } from "./wallet-transactions.constants";
 import { walletTableTransactionsSelector } from "./wallet-transactions.selector";
 
 const emptyTransactions = t => (
@@ -39,7 +40,7 @@ const emptyTransactions = t => (
   </div>
 );
 
-class WalletTransactions extends Component {
+class WalletTransactionsTotal extends Component {
   state = {
     transactionsCount: []
   };
@@ -71,7 +72,7 @@ class WalletTransactions extends Component {
                 </Fragment>
               );
             }}
-            columns={WALLET_TRANSACTIONS_COLUMNS}
+            columns={WALLET_TOTAL_TRANSACTIONS_COLUMNS}
             renderHeader={column => (
               <span
                 className={`wallet-transactions__cell wallet-transactions__cell--${
@@ -84,6 +85,14 @@ class WalletTransactions extends Component {
             renderBodyRow={transaction => {
               return (
                 <TableRow className="wallet-transactions__row">
+                  <TableCell className="wallet-transactions__cell wallet-transactions__cell--wallet">
+                    <img
+                      src={GVTIcon}
+                      className="wallet-transactions__icon"
+                      alt="Icon"
+                    />
+                    Genesis Vision
+                  </TableCell>
                   <TableCell className="wallet-transactions__cell wallet-transactions__cell--date">
                     {moment(transaction.date).format("DD-MM-YYYY, hh:mm a")}
                   </TableCell>
@@ -118,4 +127,4 @@ class WalletTransactions extends Component {
   }
 }
 
-export default translate()(WalletTransactions);
+export default translate()(WalletTransactionsTotal);
