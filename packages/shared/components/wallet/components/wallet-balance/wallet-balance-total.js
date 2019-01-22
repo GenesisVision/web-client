@@ -6,10 +6,10 @@ import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-fund
 import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
 
 import * as WalletServices from "../../services/wallet.services";
-import WalletBalance from "./wallet-balance";
+import WalletBalanceElements from "./wallet-balance-elements";
 import WalletBalanceLoader from "./wallet-balance-loader";
 
-class WalletBalanceContainer extends Component {
+class WalletBalanceTotal extends Component {
   state = {
     isOpenAddFundsPopup: false,
     isOpenWithdrawPopup: false
@@ -55,7 +55,7 @@ class WalletBalanceContainer extends Component {
           {!walletBalanceData ? (
             <WalletBalanceLoader />
           ) : (
-            <WalletBalance
+            <WalletBalanceElements
               walletBalanceData={walletBalanceData}
               currentCurrency={currency}
               handleAddFunds={this.handleOpenAddFundsPopup}
@@ -93,4 +93,4 @@ export default compose(
     mapStateToProps,
     mapDispatchToProps
   )
-)(WalletBalanceContainer);
+)(WalletBalanceTotal);

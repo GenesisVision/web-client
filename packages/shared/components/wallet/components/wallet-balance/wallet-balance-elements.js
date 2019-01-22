@@ -1,10 +1,11 @@
 import "./wallet-balance.scss";
 
 import { GVButton } from "gv-react-components";
-import React, { Fragment } from "react";
+import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import ArrowIcon from "shared/media/arrow-up.svg";
 import { formatValue } from "shared/utils/formatter";
 
 const WalletBalanceElements = ({
@@ -14,82 +15,115 @@ const WalletBalanceElements = ({
   walletBalanceData,
   currentCurrency
 }) => (
-  <Fragment>
-    <div className="wallet-balance__statistic">
-      <StatisticItem
-        label={t("wallet-page.total-balance")}
-        equivalent={walletBalanceData.totalBalanceCurrency}
-        equivalentCurrency={currentCurrency}
-        big
-        accent
-      >
-        <NumberFormat
-          value={formatValue(walletBalanceData.totalBalanceGVT)}
-          thousandSeparator={" "}
-          displayType="text"
-          suffix={" GVT"}
-        />
-      </StatisticItem>
-      <StatisticItem
-        label={t("wallet-page.invested-value")}
-        equivalent={walletBalanceData.investedCurrency}
-        equivalentCurrency={currentCurrency}
-        className="wallet-balance__statistic-big"
-        big
-        accent
-      >
-        <NumberFormat
-          value={formatValue(walletBalanceData.investedGVT)}
-          thousandSeparator={" "}
-          displayType="text"
-          suffix={" GVT"}
-        />
-      </StatisticItem>
-      <StatisticItem
-        label={t("wallet-page.pending")}
-        equivalent={walletBalanceData.availableCurrency}
-        equivalentCurrency={currentCurrency}
-        className="wallet-balance__statistic-big"
-        big
-        accent
-      >
-        <NumberFormat
-          value={formatValue(walletBalanceData.availableGVT)}
-          thousandSeparator={" "}
-          displayType="text"
-          suffix={" GVT"}
-        />
-      </StatisticItem>
-      <StatisticItem
-        label={t("wallet-page.available")}
-        equivalent={walletBalanceData.availableCurrency}
-        equivalentCurrency={currentCurrency}
-        className="wallet-balance__statistic-big"
-        big
-        accent
-      >
-        <NumberFormat
-          value={formatValue(walletBalanceData.availableGVT)}
-          thousandSeparator={" "}
-          displayType="text"
-          suffix={" GVT"}
-        />
-      </StatisticItem>
-    </div>
-    {/*<div className="wallet-balance__footer">*/}
-    {/*<GVButton className="wallet-balance__add-funds" onClick={handleAddFunds}>*/}
-    {/*{t("wallet-page.add-funds")}*/}
-    {/*</GVButton>*/}
-    {/*<GVButton*/}
-    {/*className="wallet-balance__withdraw"*/}
-    {/*color="secondary"*/}
-    {/*variant="outlined"*/}
-    {/*onClick={handleWithdraw}*/}
-    {/*>*/}
-    {/*{t("wallet-page.withdraw")}*/}
-    {/*</GVButton>*/}
-    {/*</div>*/}
-  </Fragment>
+  <div className="wallet-balance__wrapper">
+    <ul className="wallet-balance__statistic">
+      <li className="wallet-balance__statistic-item">
+        <StatisticItem
+          label={t("wallet-page.total-balance")}
+          equivalent={formatValue(walletBalanceData.totalBalanceGVT)}
+          equivalentCurrency={"GVT"}
+          big
+          accent
+        >
+          <NumberFormat
+            value={formatValue(walletBalanceData.totalBalanceCurrency)}
+            thousandSeparator={" "}
+            displayType="text"
+            suffix={` ${currentCurrency}`}
+          />
+        </StatisticItem>
+      </li>
+      <li className="wallet-balance__statistic-item">
+        <div
+          className="b-indicator"
+          style={{ width: "40px", height: "40px", marginRight: "25px" }}
+        >
+          75%
+        </div>
+        <StatisticItem
+          label={t("wallet-page.invested-value")}
+          equivalent={formatValue(walletBalanceData.investedGVT)}
+          equivalentCurrency={" GVT"}
+          className="wallet-balance__statistic-big"
+          big
+          accent
+        >
+          <NumberFormat
+            value={"0"}
+            thousandSeparator={" "}
+            displayType="text"
+            suffix={` ${currentCurrency}`}
+          />
+        </StatisticItem>
+      </li>
+      <li className="wallet-balance__statistic-item">
+        <div
+          className="b-indicator"
+          style={{ width: "40px", height: "40px", marginRight: "25px" }}
+        >
+          10%
+        </div>
+        <StatisticItem
+          label={t("wallet-page.pending")}
+          equivalent={"0"}
+          equivalentCurrency={" GVT"}
+          className="wallet-balance__statistic-big"
+          big
+          accent
+        >
+          <NumberFormat
+            value={formatValue(walletBalanceData.availableGVT)}
+            thousandSeparator={" "}
+            displayType="text"
+            suffix={` ${currentCurrency}`}
+          />
+        </StatisticItem>
+      </li>
+      <div className="wallet-balance__statistic-item">
+        <div
+          className="b-indicator"
+          style={{ width: "40px", height: "40px", marginRight: "25px" }}
+        >
+          15%
+        </div>
+        <StatisticItem
+          label={t("wallet-page.available")}
+          equivalent={formatValue(walletBalanceData.availableGVT)}
+          equivalentCurrency={" GVT"}
+          className="wallet-balance__statistic-big"
+          big
+          accent
+        >
+          <NumberFormat
+            value={formatValue(walletBalanceData.availableCurrency)}
+            thousandSeparator={" "}
+            displayType="text"
+            suffix={` ${currentCurrency}`}
+          />
+        </StatisticItem>
+      </div>
+    </ul>
+    {handleAddFunds && handleWithdraw && (
+      <div className="wallet-balance__buttons">
+        <GVButton
+          className="wallet-balance__withdraw"
+          color="secondary"
+          variant="outlined"
+          onClick={handleWithdraw}
+        >
+          <img className="wallet-balance__icon" src={ArrowIcon} alt="Icon" />
+          {t("wallet-page.withdraw")}
+        </GVButton>
+        <GVButton
+          className="wallet-balance__add-funds"
+          onClick={handleAddFunds}
+        >
+          <span className="wallet-balance__icon">+</span>
+          {t("wallet-page.add-funds")}
+        </GVButton>
+      </div>
+    )}
+  </div>
 );
 
 export default translate()(WalletBalanceElements);
