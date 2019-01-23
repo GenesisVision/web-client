@@ -8,7 +8,7 @@
   &__wrapper {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-between;
   }
 
@@ -22,16 +22,15 @@
 
   &__statistic-item {
     @include adaptive-margin(bottom, $padding-medium);
+    @include adaptive-margin(right, $padding-small);
     display: flex;
     align-items: flex-end;
-    margin-right: $padding-xxsmall;
 
     .statistics-item {
       padding: 0;
     }
 
     &:first-child {
-      @include adaptive-margin(right, $padding-small);
       @include adaptive-padding(right, $padding-small);
       border-right: 1px solid rgba($text-dark-color, 0.3);
       align-items: flex-start;
@@ -112,6 +111,12 @@
   &__buttons {
     .gv-btn {
       @include adaptive-margin(left, $padding-small);
+      margin-bottom: $padding-medium-mobile;
+      margin-right: 0;
+
+      &:first-child {
+        margin-left: 0;
+      }
     }
   }
 
@@ -121,10 +126,6 @@
         width: auto;
         margin-bottom: 0;
       }
-    }
-
-    &__statistic-item {
-      margin-right: 45px;
     }
 
     &__total-balance-value {
@@ -160,6 +161,12 @@
       font-weight: 600;
       width: 150px;
       height: 50px;
+    }
+
+    &__buttons {
+      .gv-btn {
+        margin-bottom: 45px;
+      }
     }
   }
 

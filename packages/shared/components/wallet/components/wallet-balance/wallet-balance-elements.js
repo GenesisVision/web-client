@@ -6,7 +6,7 @@ import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import ArrowIcon from "shared/media/arrow-up.svg";
-import { formatValue } from "shared/utils/formatter";
+import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 const WalletBalanceElements = ({
   t,
@@ -26,7 +26,7 @@ const WalletBalanceElements = ({
           accent
         >
           <NumberFormat
-            value={formatValue(walletBalanceData.totalBalanceCurrency)}
+            value={formatCurrencyValue(walletBalanceData.totalBalanceCurrency)}
             thousandSeparator={" "}
             displayType="text"
             suffix={` ${currentCurrency}`}
@@ -36,7 +36,7 @@ const WalletBalanceElements = ({
       <li className="wallet-balance__statistic-item">
         <div
           className="b-indicator"
-          style={{ width: "40px", height: "40px", marginRight: "25px" }}
+          style={{ width: "40px", height: "40px", marginRight: "15px" }}
         >
           75%
         </div>
@@ -49,7 +49,7 @@ const WalletBalanceElements = ({
           accent
         >
           <NumberFormat
-            value={"0"}
+            value={formatCurrencyValue(walletBalanceData.investedCurrency)}
             thousandSeparator={" "}
             displayType="text"
             suffix={` ${currentCurrency}`}
@@ -59,20 +59,20 @@ const WalletBalanceElements = ({
       <li className="wallet-balance__statistic-item">
         <div
           className="b-indicator"
-          style={{ width: "40px", height: "40px", marginRight: "25px" }}
+          style={{ width: "40px", height: "40px", marginRight: "15px" }}
         >
           10%
         </div>
         <StatisticItem
           label={t("wallet-page.pending")}
-          equivalent={"0"}
+          equivalent="0.4"
           equivalentCurrency={" GVT"}
           className="wallet-balance__statistic-big"
           big
           accent
         >
           <NumberFormat
-            value={formatValue(walletBalanceData.availableGVT)}
+            value="3.245"
             thousandSeparator={" "}
             displayType="text"
             suffix={` ${currentCurrency}`}
@@ -82,7 +82,7 @@ const WalletBalanceElements = ({
       <div className="wallet-balance__statistic-item">
         <div
           className="b-indicator"
-          style={{ width: "40px", height: "40px", marginRight: "25px" }}
+          style={{ width: "40px", height: "40px", marginRight: "15px" }}
         >
           15%
         </div>
@@ -95,7 +95,7 @@ const WalletBalanceElements = ({
           accent
         >
           <NumberFormat
-            value={formatValue(walletBalanceData.availableCurrency)}
+            value={formatCurrencyValue(walletBalanceData.availableCurrency)}
             thousandSeparator={" "}
             displayType="text"
             suffix={` ${currentCurrency}`}

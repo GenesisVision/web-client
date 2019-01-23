@@ -7,7 +7,7 @@ import WalletInfo from "./components/wallet-total/wallet-info";
 
 export const WALLET_PAGE_ROUTE = "/wallet";
 
-const WalletPage = ({ t }) => {
+const WalletTotalPage = ({ t }) => {
   return (
     <Page title={t("wallet-page.title")}>
       <WalletBalanceTotal />
@@ -16,4 +16,4 @@ const WalletPage = ({ t }) => {
   );
 };
 
-export default translate()(WalletPage);
+export default translate()(WalletTotalPage);
