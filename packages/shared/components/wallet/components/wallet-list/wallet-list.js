@@ -14,7 +14,6 @@ import EmptyTransactionsIcon from "shared/media/empty-wallet.svg";
 import ArrowIcon from "../../../../media/arrow-up.svg";
 import WalletAddFundsPopup from "../../../../modules/wallet-add-funds/wallet-add-funds-popup";
 import WalletWithdrawPopup from "../../../../modules/wallet-withdraw/wallet-withdraw-popup";
-import { composeProgramDetailsUrl } from "../../../../utils/compose-url";
 import Chip from "../../../chip/chip";
 import { fetchWalletTransactions } from "../../services/wallet.services";
 import { walletTableTransactionsSelector } from "../wallet-transactions/wallet-transactions.selector";

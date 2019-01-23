@@ -18,12 +18,9 @@ import { PROFILE_ROUTE } from "shared/components/profile/profile.constants";
 import WalletWithdrawConfirmPage, {
   WALLET_WITHDRAW_CONFIRM_ROUTE
 } from "shared/components/wallet-withdraw-confirm/wallet-withdraw-confirm.page";
-import WalletPage, {
+import WalletRoutes, {
   WALLET_PAGE_ROUTE
-} from "shared/components/wallet/wallet-page";
-import WalletTotalPage, {
-  WALLET_TOTAL_PAGE_ROUTE
-} from "shared/components/wallet/wallet-total-page";
+} from "shared/components/wallet/wallet.routes";
 
 import FundsRoutes, { FUNDS_ROUTE } from "../funds/funds.routes";
 import AppLayout from "./components/app-layout/app-layout";
@@ -49,11 +46,7 @@ const AppRoutes = () => {
           component={NotificationRoutes}
         />
         <PrivateRoute path={DASHBOARD_ROUTE} component={DashboardRoutes} />
-        <PrivateRoute
-          path={WALLET_TOTAL_PAGE_ROUTE}
-          component={WalletTotalPage}
-        />
-        <PrivateRoute path={WALLET_PAGE_ROUTE} component={WalletPage} />
+        <PrivateRoute path={WALLET_PAGE_ROUTE} component={WalletRoutes} />
         <Route component={NotFoundPage} />
       </Switch>
     </AppLayout>
