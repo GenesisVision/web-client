@@ -46,7 +46,6 @@ class ProgramDetailsHistorySection extends PureComponent {
       isInvested,
       eventTypeFilterValues
     } = this.props;
-    console.log(eventTypeFilterValues);
     return (
       <Surface className="details-history">
         <div className="details-history__header">
