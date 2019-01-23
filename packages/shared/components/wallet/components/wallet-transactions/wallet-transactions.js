@@ -51,12 +51,13 @@ class WalletTransactions extends Component {
   }
 
   render() {
-    const { t } = this.props;
+    const { t, createButtonToolbar } = this.props;
     return (
       <Surface className="wallet-transactions">
         {(this.state.transactionsCount && (
           <TableContainer
             isFetchOnMount
+            createButtonToolbar={createButtonToolbar}
             getItems={fetchWalletTransactions}
             dataSelector={walletTableTransactionsSelector}
             renderFilters={(updateFilter, filtering) => {

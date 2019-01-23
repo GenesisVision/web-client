@@ -1,4 +1,4 @@
-import "./wallet-total.scss";
+import "./wallet-container.scss";
 
 import { GVTab, GVTabs } from "gv-react-components";
 import React, { PureComponent } from "react";
@@ -14,14 +14,14 @@ const WALLETS_TAB = "wallets";
 const TRANSACTIONS_TAB = "transactions";
 
 const createButtonSearch = route => (
-  <div className="wallet-total__button-container">
+  <div className="wallet-container__button-container">
     <Link to={route}>
       <SearchIcon />
     </Link>
   </div>
 );
 
-class WalletTotal extends PureComponent {
+class WalletContainerTotal extends PureComponent {
   state = {
     tab: WALLETS_TAB
   };
@@ -33,9 +33,9 @@ class WalletTotal extends PureComponent {
   render() {
     const { tab } = this.state;
     return (
-      <Surface className="wallet-total">
-        <div className="wallet-total__header">
-          <div className="wallet-total__tabs">
+      <Surface className="wallet-container">
+        <div className="wallet-container__header">
+          <div className="wallet-container__tabs">
             <GVTabs value={tab} onChange={this.handleTabChange}>
               <GVTab value={WALLETS_TAB} label={"My wallets"} />
               <GVTab value={TRANSACTIONS_TAB} label={"All transactions"} />
@@ -57,4 +57,4 @@ class WalletTotal extends PureComponent {
   }
 }
 
-export default translate()(WalletTotal);
+export default translate()(WalletContainerTotal);

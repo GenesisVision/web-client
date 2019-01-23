@@ -1,4 +1,4 @@
-import "../wallet-total/wallet-total.scss";
+import "./wallet-container.scss";
 
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
@@ -9,23 +9,19 @@ import Surface from "shared/components/surface/surface";
 import WalletTransactions from "../wallet-transactions/wallet-transactions";
 
 const createButtonSearch = route => (
-  <div className="wallet-total__button-container">
+  <div className="wallet-container__button-container">
     <Link to={route}>
       <SearchIcon />
     </Link>
   </div>
 );
 
-class WalletInfo extends PureComponent {
-  handleTabChange = (e, tab) => {
-    this.setState({ tab });
-  };
-
+class WalletContainer extends PureComponent {
   render() {
     return (
-      <Surface className="wallet-total">
-        <div className="wallet-total__header">
-          <div className="wallet-total__subheading">Transactions</div>
+      <Surface className="wallet-container">
+        <div className="wallet-container__header">
+          <div className="wallet-container__subheading">Transactions</div>
         </div>
         <div>
           <WalletTransactions createButtonToolbar={createButtonSearch("/")} />
@@ -35,4 +31,4 @@ class WalletInfo extends PureComponent {
   }
 }
 
-export default translate()(WalletInfo);
+export default translate()(WalletContainer);

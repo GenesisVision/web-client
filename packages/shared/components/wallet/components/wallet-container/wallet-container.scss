@@ -1,8 +1,8 @@
-@import "~shared/styles/_colors.scss";
-@import "~shared/styles/_breakpoint.scss";
-@import "~shared/styles/_sizes.scss";
+@import "../../../../../../node_modules/shared/styles/colors";
+@import "../../../../../../node_modules/shared/styles/breakpoint";
+@import "../../../../../../node_modules/shared/styles/sizes";
 
-.wallet-total {
+.wallet-container {
   @include adaptive-margin(top, $padding-xxsmall);
 
   &__header {

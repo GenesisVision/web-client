@@ -3,6 +3,7 @@ import "./wallet-list.scss";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { Link } from "react-router-dom";
 import Surface from "shared/components/surface/surface";
 import TableCell from "shared/components/table/components/table-cell";
 import TableContainer from "shared/components/table/components/table-container";
@@ -13,6 +14,7 @@ import EmptyTransactionsIcon from "shared/media/empty-wallet.svg";
 import ArrowIcon from "../../../../media/arrow-up.svg";
 import WalletAddFundsPopup from "../../../../modules/wallet-add-funds/wallet-add-funds-popup";
 import WalletWithdrawPopup from "../../../../modules/wallet-withdraw/wallet-withdraw-popup";
+import { composeProgramDetailsUrl } from "../../../../utils/compose-url";
 import Chip from "../../../chip/chip";
 import { fetchWalletTransactions } from "../../services/wallet.services";
 import { walletTableTransactionsSelector } from "../wallet-transactions/wallet-transactions.selector";
@@ -72,12 +74,24 @@ class WalletList extends Component {
               {t(`wallet-page.list.${column.name}`)}
             </span>
           )}
-          renderBodyRow={transaction => {
+          renderBodyRow={() => {
             return (
               <TableRow className="wallet-list__row">
                 <TableCell className="wallet-list__cell wallet-list__cell--currency">
-                  <img src={BTCIcon} className="wallet-list__icon" alt="Icon" />
-                  Bitcoin
+                  <Link
+                    className="wallet-list__link"
+                    to={{
+                      pathname: "/wallet-1",
+                      state: "Bitcoin"
+                    }}
+                  >
+                    <img
+                      src={BTCIcon}
+                      className="wallet-list__icon"
+                      alt="Icon"
+                    />
+                    Bitcoin
+                  </Link>
                 </TableCell>
                 <TableCell className="wallet-list__cell">
                   <NumberFormat
