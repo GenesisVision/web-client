@@ -32,6 +32,7 @@ class WalletContainerTotal extends PureComponent {
 
   render() {
     const { tab } = this.state;
+    const { eventTypeFilterValues } = this.props;
     return (
       <Surface className="wallet-container">
         <div className="wallet-container__header">
@@ -48,6 +49,7 @@ class WalletContainerTotal extends PureComponent {
           )}
           {tab === TRANSACTIONS_TAB && (
             <WalletTransactionsTotal
+              eventTypeFilterValues={eventTypeFilterValues}
               createButtonToolbar={createButtonSearch("/")}
             />
           )}

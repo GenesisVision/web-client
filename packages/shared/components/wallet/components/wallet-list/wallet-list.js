@@ -4,17 +4,17 @@ import React, { Component } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
+import Chip from "shared/components/chip/chip";
 import Surface from "shared/components/surface/surface";
 import TableCell from "shared/components/table/components/table-cell";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
+import ArrowIcon from "shared/media/arrow-up.svg";
 import BTCIcon from "shared/media/currency/BTC.svg";
 import EmptyTransactionsIcon from "shared/media/empty-wallet.svg";
+import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
+import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
 
-import ArrowIcon from "../../../../media/arrow-up.svg";
-import WalletAddFundsPopup from "../../../../modules/wallet-add-funds/wallet-add-funds-popup";
-import WalletWithdrawPopup from "../../../../modules/wallet-withdraw/wallet-withdraw-popup";
-import Chip from "../../../chip/chip";
 import { fetchWalletTransactions } from "../../services/wallet.services";
 import { walletTableTransactionsSelector } from "../wallet-transactions/wallet-transactions.selector";
 import { WALLET_LIST_COLUMNS } from "./wallet-list.constants";
@@ -37,7 +37,8 @@ const emptyWallets = t => (
 
 class WalletList extends Component {
   state = {
-    transactionsCount: []
+    isOpenAddFundsPopup: false,
+    isOpenWithdrawPopup: false
   };
 
   handleOpenAddFundsPopup = () => {

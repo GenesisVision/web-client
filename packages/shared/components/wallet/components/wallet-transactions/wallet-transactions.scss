@@ -40,6 +40,10 @@
     }
   }
 
+  & .table__cell:last-child {
+    text-align: right;
+  }
+
   &__icon {
     @include adaptive-margin(right, $padding-xsmall);
     display: inline-block;

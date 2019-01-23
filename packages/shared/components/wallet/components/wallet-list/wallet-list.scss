@@ -21,12 +21,16 @@
         @include adaptive-margin(left, $padding-xsmall);
         width: 32px;
         height: 32px;
+
+        &.wallet-list__button-add-funds {
+          font-size: 18px;
+        }
       }
     }
+  }
 
-    &__button-add-funds {
-      font-size: 18px;
-    }
+  & .table__cell:last-child {
+    text-align: right;
   }
 
   &__link {

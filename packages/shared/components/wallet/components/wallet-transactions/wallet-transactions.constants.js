@@ -2,6 +2,7 @@ import { ASSET_TYPE_FILTER_DEFAULT_VALUE } from "shared/components/table/compone
 import { composeDefaultAssetTypeFilter } from "shared/components/table/components/filtering/asset-type-filter/asset-type-filter.helpers";
 import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { composeDefaultDateRangeFilter } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
+import { EVENT_TYPE_FILTER_DEFAULT_VALUE } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
 
 import { composeDefaultTransactionTypeFilter } from "./wallet-transaction-type-filter.helpers";
 
@@ -49,6 +50,7 @@ export const WALLET_TRANSACTIONS_FILTERS_DEFAULT = [
 export const WALLET_TRANSACTIONS_DEFAULT_FILTERING = {
   dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE,
   assetType: ASSET_TYPE_FILTER_DEFAULT_VALUE,
+  type: EVENT_TYPE_FILTER_DEFAULT_VALUE,
   txAction: undefined
 };
 

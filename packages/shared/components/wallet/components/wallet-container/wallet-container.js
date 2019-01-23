@@ -18,13 +18,17 @@ const createButtonSearch = route => (
 
 class WalletContainer extends PureComponent {
   render() {
+    const { eventTypeFilterValues } = this.props;
     return (
       <Surface className="wallet-container">
         <div className="wallet-container__header">
           <div className="wallet-container__subheading">Transactions</div>
         </div>
         <div>
-          <WalletTransactions createButtonToolbar={createButtonSearch("/")} />
+          <WalletTransactions
+            eventTypeFilterValues={eventTypeFilterValues}
+            createButtonToolbar={createButtonSearch("/")}
+          />
         </div>
       </Surface>
     );
