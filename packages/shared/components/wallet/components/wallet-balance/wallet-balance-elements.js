@@ -111,14 +111,18 @@ const WalletBalanceElements = ({
           variant="outlined"
           onClick={handleWithdraw}
         >
-          <img className="wallet-balance__icon" src={ArrowIcon} alt="Icon" />
+          <img
+            className="wallet-balance__button-icon"
+            src={ArrowIcon}
+            alt="Icon"
+          />
           {t("wallet-page.withdraw")}
         </GVButton>
         <GVButton
           className="wallet-balance__add-funds"
           onClick={handleAddFunds}
         >
-          <span className="wallet-balance__icon">+</span>
+          <span className="wallet-balance__button-icon">+</span>
           {t("wallet-page.add-funds")}
         </GVButton>
       </div>

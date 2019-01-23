@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
+import BTCIcon from "shared/media/currency/BTC.svg";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
 import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
 
@@ -49,7 +50,14 @@ class WalletBalanceTotal extends Component {
     return (
       <Fragment>
         <div className="wallet-balance">
-          <h1>Ethereum wallet</h1>
+          <h1>
+            Bitcoin wallet
+            <img
+              src={BTCIcon}
+              className="wallet-balance__header-icon"
+              alt="Icon"
+            />
+          </h1>
           {!walletBalanceData ? (
             <WalletBalanceLoader />
           ) : (

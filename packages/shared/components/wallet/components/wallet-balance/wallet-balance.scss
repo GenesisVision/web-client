@@ -5,6 +5,14 @@
 .wallet-balance {
   padding: 0 $padding-xsmall;
 
+  &__header-icon {
+    width: 30px;
+    height: 30px;
+    margin-left: 15px;
+    vertical-align: middle;
+    display: inline-block;
+  }
+
   &__wrapper {
     display: flex;
     flex-wrap: wrap;
@@ -71,7 +79,7 @@
     font-size: $font-size-common;
   }
 
-  &__icon {
+  &__button-icon {
     display: inline-block;
     margin-right: 10px;
     font-size: 18px;
