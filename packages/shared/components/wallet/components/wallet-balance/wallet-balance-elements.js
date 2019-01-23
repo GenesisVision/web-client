@@ -20,16 +20,16 @@ const WalletBalanceElements = ({
       <li className="wallet-balance__statistic-item">
         <StatisticItem
           label={t("wallet-page.total-balance")}
-          equivalent={formatValue(walletBalanceData.totalBalanceGVT)}
-          equivalentCurrency={"GVT"}
+          equivalent={formatValue(walletBalanceData.total)}
+          equivalentCurrency={walletBalanceData.currency}
           big
           accent
         >
           <NumberFormat
-            value={formatCurrencyValue(walletBalanceData.totalBalanceCurrency)}
+            value={formatCurrencyValue(walletBalanceData.totalCcy)}
             thousandSeparator={" "}
             displayType="text"
-            suffix={` ${currentCurrency}`}
+            suffix={` ${walletBalanceData.currencyCcy}`}
           />
         </StatisticItem>
       </li>
@@ -42,17 +42,17 @@ const WalletBalanceElements = ({
         </div>
         <StatisticItem
           label={t("wallet-page.invested-value")}
-          equivalent={formatValue(walletBalanceData.investedGVT)}
-          equivalentCurrency={" GVT"}
+          equivalent={formatValue(walletBalanceData.invested)}
+          equivalentCurrency={walletBalanceData.currency}
           className="wallet-balance__statistic-big"
           big
           accent
         >
           <NumberFormat
-            value={formatCurrencyValue(walletBalanceData.investedCurrency)}
+            value={formatCurrencyValue(walletBalanceData.investedCcy)}
             thousandSeparator={" "}
             displayType="text"
-            suffix={` ${currentCurrency}`}
+            suffix={` ${walletBalanceData.currencyCcy}`}
           />
         </StatisticItem>
       </li>
@@ -66,16 +66,16 @@ const WalletBalanceElements = ({
         <StatisticItem
           label={t("wallet-page.pending")}
           equivalent="0.4"
-          equivalentCurrency={" GVT"}
+          equivalentCurrency={walletBalanceData.currency}
           className="wallet-balance__statistic-big"
           big
           accent
         >
           <NumberFormat
-            value="3.245"
+            value={walletBalanceData.pending}
             thousandSeparator={" "}
             displayType="text"
-            suffix={` ${currentCurrency}`}
+            suffix={` ${walletBalanceData.currencyCcy}`}
           />
         </StatisticItem>
       </li>
@@ -88,14 +88,14 @@ const WalletBalanceElements = ({
         </div>
         <StatisticItem
           label={t("wallet-page.available")}
-          equivalent={formatValue(walletBalanceData.availableGVT)}
-          equivalentCurrency={" GVT"}
+          equivalent={formatValue(walletBalanceData.available)}
+          equivalentCurrency={walletBalanceData.currency}
           className="wallet-balance__statistic-big"
           big
           accent
         >
           <NumberFormat
-            value={formatCurrencyValue(walletBalanceData.availableCurrency)}
+            value={formatCurrencyValue(walletBalanceData.availableCcy)}
             thousandSeparator={" "}
             displayType="text"
             suffix={` ${currentCurrency}`}

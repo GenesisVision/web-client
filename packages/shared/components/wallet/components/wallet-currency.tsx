@@ -9,6 +9,9 @@ interface IWalletState {
 }
 
 class WalletCurrency extends React.Component<IWalletProps, IWalletState> {
+  state = {
+    info: null
+  };
   componentDidMount() {
     const currency = this.props.currency;
   }

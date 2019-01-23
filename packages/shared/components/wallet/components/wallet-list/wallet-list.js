@@ -1,5 +1,6 @@
 import "./wallet-list.scss";
 
+import { WalletData } from "gv-api-web";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -8,7 +9,10 @@ import Chip from "shared/components/chip/chip";
 import Surface from "shared/components/surface/surface";
 import TableCell from "shared/components/table/components/table-cell";
 import TableContainer from "shared/components/table/components/table-container";
+import TableModule from "shared/components/table/components/table-module";
 import TableRow from "shared/components/table/components/table-row";
+import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
+import { composeWalletCurrencytUrl } from "shared/components/wallet/wallet.routes";
 import ArrowIcon from "shared/media/arrow-up.svg";
 import BTCIcon from "shared/media/currency/BTC.svg";
 import EmptyTransactionsIcon from "shared/media/empty-wallet.svg";
@@ -58,13 +62,13 @@ class WalletList extends Component {
   };
 
   render() {
-    const { t, createButtonToolbar } = this.props;
+    const { t, createButtonToolbar, wallets } = this.props;
     return (
       <Surface className="wallet-list">
-        <TableContainer
-          isFetchOnMount
+        <TableModule
+          paging={DEFAULT_PAGING}
           createButtonToolbar={createButtonToolbar}
-          getItems={fetchWalletTransactions}
+          data={{ items: wallets, total: wallets.length }}
           dataSelector={walletTableTransactionsSelector}
           columns={WALLET_LIST_COLUMNS}
           renderHeader={column => (
@@ -74,15 +78,17 @@ class WalletList extends Component {
               {t(`wallet-page.list.${column.name}`)}
             </span>
           )}
-          renderBodyRow={() => {
+          renderBodyRow={(wallet: WalletData) => {
             return (
               <TableRow className="wallet-list__row">
                 <TableCell className="wallet-list__cell wallet-list__cell--currency">
                   <Link
                     className="wallet-list__link"
                     to={{
-                      pathname: "/wallet-1",
-                      state: "Bitcoin"
+                      pathname: composeWalletCurrencytUrl(
+                        wallet.currency.toLowerCase()
+                      ),
+                      state: "Wallet"
                     }}
                   >
                     <img
@@ -90,33 +96,33 @@ class WalletList extends Component {
                       className="wallet-list__icon"
                       alt="Icon"
                     />
-                    Bitcoin
+                    {wallet.currency}
                   </Link>
                 </TableCell>
                 <TableCell className="wallet-list__cell">
                   <NumberFormat
-                    value={547.678}
+                    value={wallet.total}
                     thousandSeparator=" "
                     displayType="text"
                   />
                 </TableCell>
                 <TableCell className="wallet-list__cell">
                   <NumberFormat
-                    value={547.678}
+                    value={wallet.invested}
                     thousandSeparator=" "
                     displayType="text"
                   />
                 </TableCell>
                 <TableCell className="wallet-list__cell">
                   <NumberFormat
-                    value={547.678}
+                    value={wallet.available}
                     thousandSeparator=" "
                     displayType="text"
                   />
                 </TableCell>
                 <TableCell className="wallet-list__cell">
                   <NumberFormat
-                    value={547.678}
+                    value={wallet.pending}
                     thousandSeparator=" "
                     displayType="text"
                   />
