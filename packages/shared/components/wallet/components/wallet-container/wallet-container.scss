@@ -1,6 +1,6 @@
-@import "../../../../../../node_modules/shared/styles/colors";
-@import "../../../../../../node_modules/shared/styles/breakpoint";
-@import "../../../../../../node_modules/shared/styles/sizes";
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
 
 .wallet-container {
   @include adaptive-margin(top, $padding-xxsmall);
@@ -8,6 +8,12 @@
   &__header {
     padding-left: $padding-xsmall;
     padding-right: $padding-xsmall;
+  }
+
+  &__subheading {
+    @include font-size($font-size-paragraph);
+    letter-spacing: 0.2px;
+    font-weight: 600;
   }
 
   &__button-container {

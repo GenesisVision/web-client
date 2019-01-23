@@ -4,9 +4,12 @@ import moment from "moment";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import Profitability from "shared/components/profitability/profitability";
 import Surface from "shared/components/surface/surface";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { EVENT_TYPE_FILTER_NAME } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
+import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
 import TableCell from "shared/components/table/components/table-cell";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
@@ -18,7 +21,6 @@ import SuccessTransactionsIcon from "shared/media/transactions/success.svg";
 import authService from "shared/services/auth-service";
 import { formatValue } from "shared/utils/formatter";
 
-import Profitability from "../../../profitability/profitability";
 import * as actions from "../../actions/wallet.actions";
 import { fetchWalletTransactions } from "../../services/wallet.services";
 import { WALLET_TOTAL_TRANSACTIONS_COLUMNS } from "./wallet-transactions.constants";
@@ -52,7 +54,12 @@ class WalletTransactionsTotal extends Component {
   }
 
   render() {
-    const { t, createButtonToolbar } = this.props;
+    const {
+      t,
+      createButtonToolbar,
+      eventTypeFilterValues,
+      filtering
+    } = this.props;
     return (
       <Surface className="wallet-transactions">
         {(this.state.transactionsCount && (
@@ -61,18 +68,23 @@ class WalletTransactionsTotal extends Component {
             createButtonToolbar={createButtonToolbar}
             getItems={fetchWalletTransactions}
             dataSelector={walletTableTransactionsSelector}
-            renderFilters={(updateFilter, filtering) => {
-              return (
-                <Fragment>
-                  <DateRangeFilter
-                    name={DATE_RANGE_FILTER_NAME}
-                    value={filtering["dateRange"]}
-                    onChange={updateFilter}
-                    startLabel={t("filters.date-range.account-creation")}
-                  />
-                </Fragment>
-              );
-            }}
+            renderFilters={(updateFilter, filtering) => (
+              <Fragment>
+                <SelectFilter
+                  name={EVENT_TYPE_FILTER_NAME}
+                  label="Type"
+                  value={filtering["type"]}
+                  values={eventTypeFilterValues}
+                  onChange={updateFilter}
+                />
+                <DateRangeFilter
+                  name={DATE_RANGE_FILTER_NAME}
+                  value={filtering["dateRange"]}
+                  onChange={updateFilter}
+                  startLabel={t("filters.date-range.account-creation")}
+                />
+              </Fragment>
+            )}
             columns={WALLET_TOTAL_TRANSACTIONS_COLUMNS}
             renderHeader={column => (
               <span
