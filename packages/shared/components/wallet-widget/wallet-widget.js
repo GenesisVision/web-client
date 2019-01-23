@@ -9,7 +9,7 @@ import Chip from "shared/components/chip/chip";
 import { WalletIcon } from "shared/components/icon/wallet-icon";
 import Popover from "shared/components/popover/popover";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { WALLET_PAGE_ROUTE } from "shared/components/wallet/wallet-total-page";
+import { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet-total-page";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
 import { formatValue } from "shared/utils/formatter";
 
@@ -80,7 +80,10 @@ class WalletWidget extends React.Component {
             </div>
             <div className="wallet-details__item">
               <div className="wallet-details__value">
-                <Link to={WALLET_PAGE_ROUTE} onClick={this.handleCloseDetails}>
+                <Link
+                  to={WALLET_TOTAL_PAGE_ROUTE}
+                  onClick={this.handleCloseDetails}
+                >
                   {t("wallet-widget.details")} ›
                 </Link>
               </div>

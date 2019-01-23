@@ -542,6 +542,14 @@
       "description": "Description",
       "amount": "Amount"
     },
+    "list": {
+      "currency": "Currency",
+      "total-balance": "Total balance",
+      "invested": "Invested value",
+      "available": "Available",
+      "pending": "Pending",
+      "buttons": ""
+    },
     "transaction-actions": {
       "resend-email": "Resend confirmation email",
       "cancel-request": "Cancel request"

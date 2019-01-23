@@ -49,7 +49,7 @@ class WalletBalanceTotal extends Component {
     return (
       <Fragment>
         <div className="wallet-balance">
-          <h1>{t("wallet-page.title")}</h1>
+          <h1>Ethereum wallet</h1>
           {!walletBalanceData ? (
             <WalletBalanceLoader />
           ) : (

@@ -2,7 +2,7 @@
 @import "~shared/styles/_breakpoint.scss";
 @import "~shared/styles/_sizes.scss";
 
-.wallet-transactions {
+.wallet-list {
   &__row:nth-child(2n + 1) {
     background-color: $table-background-subcolor;
   }
@@ -10,10 +10,6 @@
   & .table__toolbar {
     flex-direction: column;
     align-items: flex-start;
-  }
-
-  & .table__filters {
-    margin-left: 0;
   }
 
   & .table__row {
@@ -26,24 +22,9 @@
 
   &__cell {
     color: $text-light-color;
+    min-width: 150px;
 
-    &--date {
-      min-width: 200px;
-    }
-    &--information {
-      min-width: 350px;
-      white-space: normal;
-    }
-    &--amount {
-      min-width: 140px;
-    }
-    &--amount {
-      min-width: 140px;
-    }
-    &--type {
-      text-align: right;
-    }
-    &--wallet {
+    &--currency {
       min-width: 200px;
     }
   }
@@ -56,42 +37,15 @@
     height: 24px;
   }
 
-  & .filter {
-    &__label {
-      color: $short-statistic-notice-color;
-    }
-
-    &__value {
-      color: $text-light-color;
-    }
-  }
-
-  & .icon.icon--actions-circle {
-    cursor: pointer;
-  }
-
   @include media-breakpoint-tablet() {
-    & .table__filters {
-      margin-left: 20px;
-      margin-top: 0;
-    }
-
     & .table__toolbar {
       padding: 0 32px;
       flex-direction: row;
     }
   }
 }
-.wallet-transaction-actions {
-  &__disabled-actions {
-    opacity: 0.4;
-    &.icon.icon--actions-circle {
-      cursor: auto;
-    }
-  }
-}
 
-.empty-transactions {
+.empty-wallets {
   padding: $padding-xsmall-mobile $padding-small-mobile;
   @include media-breakpoint-landscape-phone() {
     padding: $padding-xsmall $padding-small;
