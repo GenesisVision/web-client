@@ -3,21 +3,13 @@
 @import "~shared/styles/_sizes.scss";
 
 .wallet-list {
-  &__row:nth-child(2n + 1) {
-    background-color: $table-background-subcolor;
-  }
+  //&__row:nth-child(2n + 1) {
+  //  background-color: $table-background-subcolor;
+  //}
 
   & .table__toolbar {
     flex-direction: column;
     align-items: flex-start;
-  }
-
-  & .table__row {
-    padding: 0 32px;
-  }
-
-  & .table__row .table__cell:last-child {
-    padding-right: 36px;
   }
 
   &__cell {
@@ -26,6 +18,18 @@
 
     &--currency {
       min-width: 200px;
+    }
+
+    &--buttons {
+      .chip {
+        @include adaptive-margin(left, $padding-xsmall);
+        width: 32px;
+        height: 32px;
+      }
+    }
+
+    &__button-add-funds {
+      font-size: 18px;
     }
   }
 

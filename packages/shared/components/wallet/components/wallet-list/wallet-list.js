@@ -9,9 +9,11 @@ import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
 import BTCIcon from "shared/media/currency/BTC.svg";
 import EmptyTransactionsIcon from "shared/media/empty-wallet.svg";
-import authService from "shared/services/auth-service";
-import { formatValue } from "shared/utils/formatter";
 
+import ArrowIcon from "../../../../media/arrow-up.svg";
+import WalletAddFundsPopup from "../../../../modules/wallet-add-funds/wallet-add-funds-popup";
+import WalletWithdrawPopup from "../../../../modules/wallet-withdraw/wallet-withdraw-popup";
+import Chip from "../../../chip/chip";
 import { fetchWalletTransactions } from "../../services/wallet.services";
 import { walletTableTransactionsSelector } from "../wallet-transactions/wallet-transactions.selector";
 import { WALLET_LIST_COLUMNS } from "./wallet-list.constants";
@@ -35,6 +37,22 @@ const emptyWallets = t => (
 class WalletList extends Component {
   state = {
     transactionsCount: []
+  };
+
+  handleOpenAddFundsPopup = () => {
+    this.setState({ isOpenAddFundsPopup: true });
+  };
+
+  handleCloseAddFundsPopup = () => {
+    this.setState({ isOpenAddFundsPopup: false });
+  };
+
+  handleOpenWithdrawPopup = () => {
+    this.setState({ isOpenWithdrawPopup: true });
+  };
+
+  handleCloseWithdrawPopup = () => {
+    this.setState({ isOpenWithdrawPopup: false });
   };
 
   render() {
@@ -89,10 +107,29 @@ class WalletList extends Component {
                     displayType="text"
                   />
                 </TableCell>
-                <TableCell className="wallet-list__cell wallet-list__cell--buttons" />
+                <TableCell className="wallet-list__cell wallet-list__cell--buttons">
+                  <Chip onClick={this.handleOpenWithdrawPopup}>
+                    <img src={ArrowIcon} alt="Icon" />
+                  </Chip>
+                  <Chip
+                    className="wallet-list__button-add-funds"
+                    type="positive"
+                    onClick={this.handleOpenAddFundsPopup}
+                  >
+                    +
+                  </Chip>
+                </TableCell>
               </TableRow>
             );
           }}
+        />
+        <WalletAddFundsPopup
+          open={this.state.isOpenAddFundsPopup}
+          onClose={this.handleCloseAddFundsPopup}
+        />
+        <WalletWithdrawPopup
+          open={this.state.isOpenWithdrawPopup}
+          onClose={this.handleCloseWithdrawPopup}
         />
       </Surface>
     );

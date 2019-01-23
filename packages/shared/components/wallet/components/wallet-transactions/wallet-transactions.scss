@@ -16,14 +16,6 @@
     margin-left: 0;
   }
 
-  & .table__row {
-    padding: 0 32px;
-  }
-
-  & .table__row .table__cell:last-child {
-    padding-right: 36px;
-  }
-
   &__cell {
     color: $text-light-color;
 

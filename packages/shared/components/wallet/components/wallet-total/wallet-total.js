@@ -4,7 +4,6 @@ import { GVTab, GVTabs } from "gv-react-components";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
-// import GVButton from "gv-react-components/dist/gv-button";
 import { SearchIcon } from "shared/components/icon/search-icon";
 import Surface from "shared/components/surface/surface";
 
@@ -14,6 +13,14 @@ import WalletTransactionsTotal from "../wallet-transactions/wallet-transactions-
 const WALLETS_TAB = "wallets";
 const TRANSACTIONS_TAB = "transactions";
 
+const createButtonSearch = route => (
+  <div className="wallet-total__button-container">
+    <Link to={route}>
+      <SearchIcon />
+    </Link>
+  </div>
+);
+
 class WalletTotal extends PureComponent {
   state = {
     tab: WALLETS_TAB
@@ -22,14 +29,6 @@ class WalletTotal extends PureComponent {
   handleTabChange = (e, tab) => {
     this.setState({ tab });
   };
-
-  createButtonSearch = route => (
-    <div className="wallet-total__button-container">
-      <Link to={route}>
-        <SearchIcon />
-      </Link>
-    </div>
-  );
 
   render() {
     const { tab } = this.state;
@@ -45,11 +44,11 @@ class WalletTotal extends PureComponent {
         </div>
         <div>
           {tab === WALLETS_TAB && (
-            <WalletList createButtonToolbar={this.createButtonSearch("")} />
+            <WalletList createButtonToolbar={createButtonSearch("/")} />
           )}
           {tab === TRANSACTIONS_TAB && (
             <WalletTransactionsTotal
-              createButtonToolbar={this.createButtonSearch("")}
+              createButtonToolbar={createButtonSearch("/")}
             />
           )}
         </div>
