@@ -7,10 +7,16 @@ import React from "react";
 import styles from "./pie.scss";
 
 export interface GVProgramPeriodProps {
+  pieDirection: PIE_DIRECTION;
   color: string;
   start: Date | number;
   end: Date | number;
   value: Date | number;
+}
+
+export enum PIE_DIRECTION {
+  CLOCKWISE,
+  COUNTERCLOCKWISE
 }
 
 export const calcPercent = (
@@ -42,7 +48,13 @@ export const calcPercent = (
 
 const calcDash = (percent: number) => `${percent} ${100 - percent}`;
 
-const Pie: React.SFC<GVProgramPeriodProps> = ({ color, start, end, value }) => {
+const Pie: React.SFC<GVProgramPeriodProps> = ({
+  pieDirection = PIE_DIRECTION.CLOCKWISE,
+  color,
+  start,
+  end,
+  value
+}) => {
   const valuePercent = calcPercent(value, start, end);
   return (
     <svg
@@ -70,6 +82,11 @@ const Pie: React.SFC<GVProgramPeriodProps> = ({ color, start, end, value }) => {
         strokeWidth="2"
         strokeDasharray={calcDash(valuePercent)}
         strokeDashoffset={25}
+        transform={
+          pieDirection === PIE_DIRECTION.COUNTERCLOCKWISE
+            ? "scale(-1, 1)  translate(-34, 0)"
+            : ""
+        }
       />
     </svg>
   );
