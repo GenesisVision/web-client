@@ -17,9 +17,6 @@ const WalletBalanceElements = ({
 }) => (
   <Fragment>
     <div className="wallet-balance__statistic">
-      <div className="wallet-pie-container">
-        <PieContainer start={0} end={100} value={75} color={"#ff0000"} />
-      </div>
       <StatisticItem
         label={t("wallet-page.total-balance")}
         equivalent={walletBalanceData.totalBalanceCurrency}
