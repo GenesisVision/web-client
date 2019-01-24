@@ -34,10 +34,10 @@ const renderDurationText = (t, start, end) => {
   })}`;
 };
 
-const PieContainer = ({ t, start, end, value, className }) => {
+const PieContainer = ({ color, t, start, end, value, className }) => {
   return (
     <div className="pie-container">
-      <Pie start={start} end={end} value={value} />
+      <Pie start={start} end={end} value={value} color={color} />
       <div className="pie-container__value-container">
         <div className="pie-container__value">{value}%</div>
       </div>
