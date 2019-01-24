@@ -7,8 +7,6 @@ import NumberFormat from "react-number-format";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatValue } from "shared/utils/formatter";
 
-import PieContainer from "../../../pie-container/pie-container";
-
 const WalletBalanceElements = ({
   t,
   handleAddFunds,
