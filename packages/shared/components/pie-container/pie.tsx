@@ -7,7 +7,7 @@ import React from "react";
 import styles from "./pie.scss";
 
 export interface GVProgramPeriodProps {
-  pieDirection: PIE_DIRECTION;
+  pieDirection?: PIE_DIRECTION;
   color: string;
   start: Date | number;
   end: Date | number;
@@ -15,8 +15,8 @@ export interface GVProgramPeriodProps {
 }
 
 export enum PIE_DIRECTION {
-  CLOCKWISE,
-  COUNTERCLOCKWISE
+  CLOCKWISE = "CLOCKWISE",
+  COUNTERCLOCKWISE = "COUNTERCLOCKWISE"
 }
 
 export const calcPercent = (
