@@ -8,6 +8,8 @@ import PieLarge from "shared/components/pie-large/pie-large";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatValue } from "shared/utils/formatter";
 
+import PieContainer from "../../../pie-container/pie-container";
+
 const WalletBalanceElements = ({
   t,
   handleAddFunds,
@@ -18,7 +20,7 @@ const WalletBalanceElements = ({
   <Fragment>
     <div className="wallet-balance__statistic">
       <div className="wallet-pie-container">
-        <PieLarge start={0} end={100} value={75} />
+        <PieContainer start={0} end={100} value={75} />
       </div>
       <StatisticItem
         label={t("wallet-page.total-balance")}

@@ -9,6 +9,7 @@ import * as GVColors from "./colors";
 import styles from "./pie.scss";
 
 export interface GVProgramPeriodProps {
+  color: string;
   start: Date | number;
   end: Date | number;
   value: Date | number;
@@ -47,6 +48,7 @@ export const calcPercent = (
 const calcDash = (percent: number) => `${percent} ${100 - percent}`;
 
 const Pie: React.SFC<GVProgramPeriodProps> = ({
+  color,
   start,
   end,
   value,
@@ -72,7 +74,8 @@ const Pie: React.SFC<GVProgramPeriodProps> = ({
           cy="17"
           r="15.91549430918954"
           fill="transparent"
-          stroke="#2a353f"
+          stroke={color}
+          strokeOpacity={0.2}
           strokeWidth="2"
         />
 
@@ -81,7 +84,7 @@ const Pie: React.SFC<GVProgramPeriodProps> = ({
           cy="17"
           r="15.91549430918954"
           fill="transparent"
-          stroke={GVColors.$primaryColor}
+          stroke={color}
           strokeWidth="2"
           strokeDasharray={calcDash(valuePercent)}
           strokeDashoffset={25}
@@ -103,18 +106,6 @@ const Pie: React.SFC<GVProgramPeriodProps> = ({
         />
       </div>
     );
-};
-
-Pie.propTypes = {
-  value: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.number])
-    .isRequired,
-  start: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.number])
-    .isRequired,
-  end: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.number])
-    .isRequired,
-  variant: PropTypes.oneOf(["pie", "line"]),
-  className: PropTypes.string,
-  valueClassName: PropTypes.string
 };
 
 Pie.defaultProps = {

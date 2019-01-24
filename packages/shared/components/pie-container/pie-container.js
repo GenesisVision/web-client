@@ -1,4 +1,4 @@
-import "./pie-large.scss";
+import "./pie-container.scss";
 
 import moment from "moment";
 import PropTypes from "prop-types";
@@ -34,7 +34,7 @@ const renderDurationText = (t, start, end) => {
   })}`;
 };
 
-const PieLarge = ({ t, start, end, value, className }) => {
+const PieContainer = ({ t, start, end, value, className }) => {
   return (
     <div className="pie-container">
       <Pie start={start} end={end} value={value} />
@@ -45,7 +45,7 @@ const PieLarge = ({ t, start, end, value, className }) => {
   );
 };
 
-PieLarge.propTypes = {
+PieContainer.propTypes = {
   start: PropTypes.number.isRequired,
   end: PropTypes.number.isRequired,
   value: PropTypes.number.isRequired,
@@ -53,4 +53,4 @@ PieLarge.propTypes = {
   className: PropTypes.string
 };
 
-export default translate()(PieLarge);
+export default translate()(PieContainer);
