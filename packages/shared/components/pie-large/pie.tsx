@@ -58,9 +58,9 @@ const Pie: React.SFC<GVProgramPeriodProps> = ({
   if (variant === "pie")
     return (
       <svg
-        width="40"
-        height="40"
-        viewBox="0 0 40 40"
+        width="100%"
+        height="100%"
+        viewBox="0 0 34 34"
         className={classnames(
           styles.gvProgramPeriod,
           styles.gvProgramPeriodPie,
@@ -68,8 +68,8 @@ const Pie: React.SFC<GVProgramPeriodProps> = ({
         )}
       >
         <circle
-          cx="20"
-          cy="20"
+          cx="17"
+          cy="17"
           r="15.91549430918954"
           fill="transparent"
           stroke="#2a353f"
@@ -77,8 +77,8 @@ const Pie: React.SFC<GVProgramPeriodProps> = ({
         />
 
         <circle
-          cx="20"
-          cy="20"
+          cx="17"
+          cy="17"
           r="15.91549430918954"
           fill="transparent"
           stroke={GVColors.$primaryColor}
