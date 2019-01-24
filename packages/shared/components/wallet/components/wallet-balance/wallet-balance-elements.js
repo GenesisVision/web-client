@@ -4,7 +4,6 @@ import { GVButton } from "gv-react-components";
 import React, { Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import PieLarge from "shared/components/pie-large/pie-large";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatValue } from "shared/utils/formatter";
 
@@ -19,9 +18,6 @@ const WalletBalanceElements = ({
 }) => (
   <Fragment>
     <div className="wallet-balance__statistic">
-      <div className="wallet-pie-container">
-        <PieContainer start={0} end={100} value={75} />
-      </div>
       <StatisticItem
         label={t("wallet-page.total-balance")}
         equivalent={walletBalanceData.totalBalanceCurrency}
