@@ -79,7 +79,7 @@ const WalletBalanceElements = ({
           />
         </StatisticItem>
       </li>
-      <div className="wallet-balance__statistic-item">
+      <li className="wallet-balance__statistic-item">
         <div
           className="b-indicator"
           style={{ width: "40px", height: "40px", marginRight: "15px" }}
@@ -101,7 +101,7 @@ const WalletBalanceElements = ({
             suffix={` ${currentCurrency}`}
           />
         </StatisticItem>
-      </div>
+      </li>
     </ul>
     {handleAddFunds && handleWithdraw && (
       <div className="wallet-balance__buttons">
@@ -122,7 +122,9 @@ const WalletBalanceElements = ({
           className="wallet-balance__add-funds"
           onClick={handleAddFunds}
         >
-          <span className="wallet-balance__button-icon">+</span>
+          <span className="wallet-balance__button-icon wallet-balance__button-icon--sign">
+            +
+          </span>
           {t("wallet-page.add-funds")}
         </GVButton>
       </div>
