@@ -1,0 +1,25 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
+
+.gv-program-period {
+  display: block;
+  &--pie {
+    width: 20px;
+    height: 20px;
+  }
+
+  &--line {
+    height: 2px;
+    background-color: #2a353f;
+    border-radius: 0.25rem;
+    width: 100%;
+
+    .gv-program-period__value {
+      height: 4px;
+      margin-top: -1px;
+      background-color: $primary-color;
+      border-radius: 0.25rem;
+    }
+  }
+}
