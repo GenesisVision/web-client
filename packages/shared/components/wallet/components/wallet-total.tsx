@@ -22,31 +22,20 @@ interface IWalletState {
 }
 
 class WalletTotal extends React.Component<IWalletProps, IWalletState> {
-  componentDidMount() {
-    const currency = this.props.currency;
-    walletApi
-      .v10WalletMultiByCurrencyGet(currency, authService.getAuthArg())
-      .then(
-        (info: WalletMultiSummary): any => {
-          this.setState({ info });
-        }
-      );
-  }
-
   render() {
     const { t } = this.props;
-    if (!this.state || !this.state.info) return null;
+    if (!this.props.info) return null;
     return (
       <React.Fragment>
         <h1>{t("wallet-page.title")}</h1>
         <div className="wallet-balance">
           <WalletBalanceElements
-            walletBalanceData={this.state.info.grandTotal}
+            walletBalanceData={this.props.info.grandTotal}
             currentCurrency={this.props.currency}
           />
         </div>
         <WalletContainerTotal
-          wallets={this.state.info.wallets}
+          wallets={this.props.info.wallets}
           eventTypeFilterValues={INVESTOR_EVENT_TYPE_FILTER_VALUES}
         />
       </React.Fragment>
@@ -54,11 +43,4 @@ class WalletTotal extends React.Component<IWalletProps, IWalletState> {
   }
 }
 
-const mapStateToProps = (state: IState) => ({
-  currency: state.accountSettings.currency
-});
-
-export default compose(
-  connect(mapStateToProps),
-  translate()
-)(WalletTotal);
+export default compose(translate())(WalletTotal);

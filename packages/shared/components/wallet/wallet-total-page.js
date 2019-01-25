@@ -5,10 +5,11 @@ import WalletTotal from "shared/components/wallet/components/wallet-total";
 
 export const WALLET_TOTAL_PAGE_ROUTE = "/wallet";
 
-const WalletTotalPage = ({ t }) => {
+const WalletTotalPage = ({ t, isPending, info }) => {
+  if (isPending) return <p>...Loading</p>;
   return (
     <Page title={t("wallet-page.title")}>
-      <WalletTotal />
+      <WalletTotal info={info} />
     </Page>
   );
 };
