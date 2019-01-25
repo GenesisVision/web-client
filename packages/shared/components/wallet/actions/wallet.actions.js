@@ -4,9 +4,9 @@ export const WALLET_BALANCE = "WALLET_BALANCE";
 export const WALLET_TRANSACTIONS = "WALLET_TRANSACTIONS";
 export const WALLET_TRANSACTIONS_FILTERS = "WALLET_TRANSACTIONS_FILTERS";
 
-export const fetchWalletBalance = (currentCurrency, authorization) => ({
+export const fetchWallets = (currentCurrency, authorization) => ({
   type: WALLET_BALANCE,
-  payload: walletApi.v10WalletByCurrencyGet(currentCurrency, authorization)
+  payload: walletApi.v10WalletMultiByCurrencyGet(currentCurrency, authorization)
 });
 
 export const fetchWalletTransactionsDispatch = (authorization, filters) => ({

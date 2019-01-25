@@ -12,8 +12,7 @@ const WalletBalanceElements = ({
   t,
   handleAddFunds,
   handleWithdraw,
-  walletBalanceData,
-  currentCurrency
+  walletBalanceData
 }) => (
   <div className="wallet-balance__wrapper">
     <ul className="wallet-balance__statistic">
@@ -65,14 +64,14 @@ const WalletBalanceElements = ({
         </div>
         <StatisticItem
           label={t("wallet-page.pending")}
-          equivalent="0.4"
+          equivalent={formatValue(walletBalanceData.pending)}
           equivalentCurrency={walletBalanceData.currency}
           className="wallet-balance__statistic-big"
           big
           accent
         >
           <NumberFormat
-            value={walletBalanceData.pending}
+            value={walletBalanceData.pendingCcy}
             thousandSeparator={" "}
             displayType="text"
             suffix={` ${walletBalanceData.currencyCcy}`}
@@ -88,17 +87,17 @@ const WalletBalanceElements = ({
         </div>
         <StatisticItem
           label={t("wallet-page.available")}
-          equivalent={formatValue(walletBalanceData.available)}
-          equivalentCurrency={walletBalanceData.currency}
+          equivalent={formatValue(walletBalanceData.availableCcy)}
+          equivalentCurrency={walletBalanceData.currencyCcy}
           className="wallet-balance__statistic-big"
           big
           accent
         >
           <NumberFormat
-            value={formatCurrencyValue(walletBalanceData.availableCcy)}
+            value={formatCurrencyValue(walletBalanceData.available)}
             thousandSeparator={" "}
             displayType="text"
-            suffix={` ${currentCurrency}`}
+            suffix={` ${walletBalanceData.currency}`}
           />
         </StatisticItem>
       </li>

@@ -5,11 +5,11 @@ import authService from "shared/services/auth-service";
 
 import * as actions from "../actions/wallet.actions";
 
-export const fetchWalletBalance = () => (dispatch, getState) => {
+export const fetchWallets = () => (dispatch, getState) => {
   const authorization = authService.getAuthArg();
   const { currency } = getState().accountSettings;
 
-  dispatch(actions.fetchWalletBalance(currency, authorization));
+  dispatch(actions.fetchWallets(currency, authorization));
   dispatch(fetchProfileHeaderInfo());
 };
 
@@ -35,7 +35,7 @@ export const cancelWithdrawRequest = txId => (dispatch, getState) => {
           true
         )
       );
-      dispatch(fetchWalletBalance());
+      dispatch(fetchWallets());
       dispatch(fetchWalletTransactions());
       return response;
     })
@@ -56,7 +56,7 @@ export const resendWithdrawRequest = txId => (dispatch, getState) => {
           true
         )
       );
-      dispatch(fetchWalletBalance());
+      dispatch(fetchWallets());
       dispatch(fetchWalletTransactions());
       return response;
     })

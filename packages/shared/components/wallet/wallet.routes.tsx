@@ -1,13 +1,11 @@
-import { WalletMultiSummary } from "gv-api-web";
 import { IState } from "investor-web-portal/src/reducers";
 import * as React from "react";
 import { connect } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
-import { walletApi } from "shared/services/api-client/wallet-api";
 import replaceParams from "shared/utils/replace-params";
 
-import authService from "../../services/auth-service";
+import { fetchWallets } from "./services/wallet.services";
 import WalletCurrencyPage from "./wallet-page";
 import WalletTotalPage from "./wallet-total-page";
 
@@ -20,22 +18,20 @@ export const composeWalletCurrencytUrl = (url: string): string =>
     [`:${CURRENCY_SLUG}`]: url
   });
 
-class WalletRoutes extends React.Component<any, any> {
-  state = {
-    isPending: false,
-    info: null
-  };
+interface IWalletDispatchToProps {
+  fetchWallets(): void;
+}
 
+interface IWalletStateToProps {
+  currency: string;
+}
+
+class WalletRoutes extends React.Component<
+  IWalletDispatchToProps & IWalletStateToProps,
+  any
+> {
   getWallets = () => {
-    const currency = this.props.currency;
-    this.setState({ isPending: true });
-    walletApi
-      .v10WalletMultiByCurrencyGet(currency, authService.getAuthArg())
-      .then(
-        (info: WalletMultiSummary): any => {
-          this.setState({ info, isPending: false });
-        }
-      );
+    this.props.fetchWallets();
   };
 
   componentDidMount() {
@@ -55,16 +51,7 @@ class WalletRoutes extends React.Component<any, any> {
   render() {
     return (
       <Switch>
-        <Route
-          exact
-          path={WALLET_PAGE_ROUTE}
-          route={() => (
-            <WalletTotalPage
-              isPending={this.state.isPending}
-              info={this.state.info}
-            />
-          )}
-        />
+        <Route exact path={WALLET_PAGE_ROUTE} component={WalletTotalPage} />
         <Route
           path={WALLET_CURRENCY_PAGE_ROUTE}
           component={WalletCurrencyPage}
@@ -79,4 +66,7 @@ const mapStateToProps = (state: IState) => ({
   currency: state.accountSettings.currency
 });
 
-export default connect(mapStateToProps)(WalletRoutes);
+export default connect(
+  mapStateToProps,
+  { fetchWallets }
+)(WalletRoutes);

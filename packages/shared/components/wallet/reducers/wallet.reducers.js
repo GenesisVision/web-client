@@ -5,7 +5,7 @@ import { WALLET_BALANCE } from "../actions/wallet.actions";
 import walletTransactionsReducer from "./wallet-transactions.reducer";
 
 const walletReducer = combineReducers({
-  balance: apiReducerFactory({
+  info: apiReducerFactory({
     apiType: WALLET_BALANCE
   }),
   transactions: walletTransactionsReducer
