@@ -3,18 +3,16 @@ import "./wallet-balance.scss";
 import React, { Fragment } from "react";
 import SvgLoader from "shared/components/svg-loader/svg-loader";
 
-const WalletBalanceLoader = () => {
-  return (
-    <Fragment>
-      <div className="wallet-balance__loader-row">
-        <WalletLoaderStat />
-        <WalletLoaderStatIndicator />
-        <WalletLoaderStatIndicator />
-        <WalletLoaderStatIndicator />
-      </div>
-    </Fragment>
-  );
-};
+const WalletBalanceLoader = () => (
+  <Fragment>
+    <div className="wallet-balance__loader-row">
+      <WalletLoaderStat />
+      <WalletLoaderStatIndicator />
+      <WalletLoaderStatIndicator />
+      <WalletLoaderStatIndicator />
+    </div>
+  </Fragment>
+);
 
 const WalletLoaderStat = () => (
   <div className="wallet-balance__loader-stat">
