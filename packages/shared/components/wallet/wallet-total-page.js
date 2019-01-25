@@ -6,11 +6,7 @@ import WalletTotal from "shared/components/wallet/components/wallet-total";
 export const WALLET_TOTAL_PAGE_ROUTE = "/wallet";
 
 const WalletTotalPage = ({ t }) => {
-  return (
-    <Page title={t("wallet-page.title")}>
-      <WalletTotal />
-    </Page>
-  );
+  return <WalletTotal />;
 };
 
 export default translate()(WalletTotalPage);

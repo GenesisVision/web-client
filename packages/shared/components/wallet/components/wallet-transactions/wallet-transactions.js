@@ -46,6 +46,7 @@ class WalletTransactions extends Component {
   state = {
     transactionsCount: []
   };
+
   componentDidMount() {
     const authorization = authService.getAuthArg();
     actions.fetchWalletTransactions(authorization).then(res => {
@@ -54,13 +55,19 @@ class WalletTransactions extends Component {
   }
 
   render() {
-    const { t, createButtonToolbar, eventTypeFilterValues } = this.props;
+    const {
+      t,
+      createButtonToolbar,
+      eventTypeFilterValues,
+      currency
+    } = this.props;
     return (
       <Surface className="wallet-transactions">
         {(this.state.transactionsCount && (
           <TableContainer
             isFetchOnMount
             createButtonToolbar={createButtonToolbar}
+            defaultFilters={{ wallet: currency }}
             getItems={fetchWalletTransactions}
             dataSelector={walletTableTransactionsSelector}
             renderFilters={(updateFilter, filtering) => (

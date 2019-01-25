@@ -1,3 +1,4 @@
+import { WalletData } from "gv-api-web";
 import { IState } from "manager-web-portal/src/reducers";
 import * as React from "react";
 import { translate } from "react-i18next";
@@ -9,19 +10,18 @@ import Page from "../../page/page";
 import { INVESTOR_EVENT_TYPE_FILTER_VALUES } from "../../table/components/filtering/event-type-filter/event-type-filter.constants";
 import WalletBalanceElements from "./wallet-balance/wallet-balance-elements";
 import WalletBalanceLoader from "./wallet-balance/wallet-balance-loader";
-import WalletContainerTotal from "./wallet-container/wallet-container-total";
+import WalletContainer from "./wallet-container/wallet-container";
 
 interface IWalletProps {
   currency: string;
+  info?: WalletData;
+  isPending: boolean;
+  t(str: string): string;
 }
 
-interface IWalletState {
-  info?: object;
-}
-
-class WalletCurrency extends React.Component<IWalletProps, IWalletState> {
+class WalletCurrency extends React.Component<IWalletProps> {
   render() {
-    const { t, info, isPending } = this.props;
+    const { info, isPending } = this.props;
     if (!info && isPending) return <WalletBalanceLoader />;
     if (!info) return <NotFoundPage />;
     return (
@@ -30,6 +30,10 @@ class WalletCurrency extends React.Component<IWalletProps, IWalletState> {
         <div className="wallet-balance">
           <WalletBalanceElements walletBalanceData={info} />
         </div>
+        <WalletContainer
+          currency={this.props.currency}
+          eventTypeFilterValues={INVESTOR_EVENT_TYPE_FILTER_VALUES}
+        />
       </Page>
     );
   }
