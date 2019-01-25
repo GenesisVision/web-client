@@ -1,17 +1,16 @@
 import "./wallet-balance.scss";
 
-import { GVButton } from "gv-react-components";
+import { GVButton, GVColors } from "gv-react-components";
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import * as InnerColors from "shared/components/gv-styles/color";
 import PieContainer from "shared/components/pie-container/pie-container";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import ArrowIcon from "shared/media/arrow-up.svg";
-import PieContainer from "shared/components/pie-container/pie-container";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 const getPercentageValue = (value, totalValue) => {
-  console.log((value / totalValue) * 100);
   return Math.round((value / totalValue) * 100);
 };
 
@@ -23,7 +22,6 @@ const WalletBalanceElements = ({
   currentCurrency
 }) => {
   const totalValue = walletBalanceData.totalBalanceCurrency;
-  console.log(totalValue);
   return (
     <div className="wallet-balance__wrapper">
       <ul className="wallet-balance__statistic">
@@ -47,13 +45,12 @@ const WalletBalanceElements = ({
         </li>
         <li className="wallet-balance__statistic-item">
           <PieContainer
-            start={0}
-            end={100}
             value={getPercentageValue(
               walletBalanceData.investedCurrency,
               totalValue
             )}
-            color={"#00BDAF"}
+            color={GVColors.$primaryColor}
+            pieDiraction={"COUNTERCLOCKWISE"}
           />
           <StatisticItem
             label={t("wallet-page.invested-value")}
@@ -73,24 +70,22 @@ const WalletBalanceElements = ({
         </li>
         <li className="wallet-balance__statistic-item">
           <PieContainer
-            start={0}
-            end={100}
             value={getPercentageValue(
               walletBalanceData.investedCurrency,
               totalValue
             )}
-            color={"#F7931A"}
+            color={InnerColors.$piePendingColor}
           />
           <StatisticItem
             label={t("wallet-page.pending")}
-            equivalent="0.4"
+            equivalent={formatValue(walletBalanceData.investedGVT)}
             equivalentCurrency={" GVT"}
             className="wallet-balance__statistic-big"
             big
             accent
           >
             <NumberFormat
-              value="3.245"
+              value={walletBalanceData.investedCurrency}
               thousandSeparator={" "}
               displayType="text"
               suffix={` ${currentCurrency}`}
@@ -99,13 +94,11 @@ const WalletBalanceElements = ({
         </li>
         <li className="wallet-balance__statistic-item">
           <PieContainer
-            start={0}
-            end={100}
             value={getPercentageValue(
               walletBalanceData.availableCurrency,
               totalValue
             )}
-            color={"#5758A5"}
+            color={InnerColors.$pieAvailableColor}
           />
           <StatisticItem
             label={t("wallet-page.available")}
