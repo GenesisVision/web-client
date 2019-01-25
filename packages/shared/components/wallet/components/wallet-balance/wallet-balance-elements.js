@@ -4,6 +4,7 @@ import { GVButton } from "gv-react-components";
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import PieContainer from "shared/components/pie-container/pie-container";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import ArrowIcon from "shared/media/arrow-up.svg";
 import PieContainer from "shared/components/pie-container/pie-container";
