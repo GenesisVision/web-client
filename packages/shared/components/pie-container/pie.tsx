@@ -2,20 +2,21 @@ import "./pie.scss";
 
 import classnames from "classnames";
 import moment from "moment";
-import PropTypes from "prop-types";
 import React from "react";
 
-import * as GVColors from "./colors";
 import styles from "./pie.scss";
 
 export interface GVProgramPeriodProps {
+  pieDirection?: PIE_DIRECTION;
   color: string;
   start: Date | number;
   end: Date | number;
   value: Date | number;
-  variant: string;
-  className?: string;
-  valueClassName?: string;
+}
+
+export enum PIE_DIRECTION {
+  CLOCKWISE = "CLOCKWISE",
+  COUNTERCLOCKWISE = "COUNTERCLOCKWISE"
 }
 
 export const calcPercent = (
@@ -48,68 +49,47 @@ export const calcPercent = (
 const calcDash = (percent: number) => `${percent} ${100 - percent}`;
 
 const Pie: React.SFC<GVProgramPeriodProps> = ({
+  pieDirection = PIE_DIRECTION.CLOCKWISE,
   color,
   start,
   end,
-  value,
-  variant,
-  className,
-  valueClassName
+  value
 }) => {
   const valuePercent = calcPercent(value, start, end);
-  if (variant === "pie")
-    return (
-      <svg
-        width="100%"
-        height="100%"
-        viewBox="0 0 34 34"
-        className={classnames(
-          styles.gvProgramPeriod,
-          styles.gvProgramPeriodPie,
-          className
-        )}
-      >
-        <circle
-          cx="17"
-          cy="17"
-          r="15.91549430918954"
-          fill="transparent"
-          stroke={color}
-          strokeOpacity={0.2}
-          strokeWidth="2"
-        />
+  return (
+    <svg
+      width="100%"
+      height="100%"
+      viewBox="0 0 34 34"
+      className={classnames(styles.gvProgramPeriod, styles.gvProgramPeriodPie)}
+    >
+      <circle
+        cx="17"
+        cy="17"
+        r="15.91549430918954"
+        fill="transparent"
+        stroke={color}
+        strokeOpacity={0.2}
+        strokeWidth="2"
+      />
 
-        <circle
-          cx="17"
-          cy="17"
-          r="15.91549430918954"
-          fill="transparent"
-          stroke={color}
-          strokeWidth="2"
-          strokeDasharray={calcDash(valuePercent)}
-          strokeDashoffset={25}
-        />
-      </svg>
-    );
-  else
-    return (
-      <div
-        className={classnames(
-          styles.gvProgramPeriod,
-          styles.gvProgramPeriodLine,
-          className
-        )}
-      >
-        <div
-          className={classnames(styles.gvProgramPeriodValue, valueClassName)}
-          style={{ width: `${valuePercent}%` }}
-        />
-      </div>
-    );
-};
-
-Pie.defaultProps = {
-  variant: "pie"
+      <circle
+        cx="17"
+        cy="17"
+        r="15.91549430918954"
+        fill="transparent"
+        stroke={color}
+        strokeWidth="2"
+        strokeDasharray={calcDash(valuePercent)}
+        strokeDashoffset={25}
+        transform={
+          pieDirection === PIE_DIRECTION.COUNTERCLOCKWISE
+            ? "scale(-1, 1)  translate(-34, 0)"
+            : ""
+        }
+      />
+    </svg>
+  );
 };
 
 export default Pie;
