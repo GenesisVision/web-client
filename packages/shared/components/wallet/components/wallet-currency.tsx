@@ -41,14 +41,16 @@ class WalletCurrency extends React.Component<IWalletProps> {
 
 const mapStateToProps = (state: IState, ownProps) => {
   const isPending = state.wallet.info.isPending;
+  const { currency } = ownProps.match.params;
   const info = state.wallet.info.data
     ? state.wallet.info.data.wallets.find(
-        wallet => wallet.currency.toLowerCase() === ownProps.currency
+        wallet => wallet.currency === currency.toUpperCase()
       )
     : null;
   return {
     info,
-    isPending
+    isPending,
+    currency: currency.toUpperCase()
   };
 };
 

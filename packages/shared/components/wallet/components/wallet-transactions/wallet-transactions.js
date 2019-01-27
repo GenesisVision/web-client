@@ -43,7 +43,7 @@ class WalletTransactions extends Component {
   fetch = filters => {
     const { currency } = this.props;
     return fetchWalletTransactions({
-      wallet: currency.toUpperCase(),
+      wallet: currency,
       ...filters
     });
   };
