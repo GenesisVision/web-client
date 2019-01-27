@@ -9,9 +9,9 @@ import WalletCurrency from "./components/wallet-currency";
 import WalletTotal from "./components/wallet-total";
 import { fetchWallets } from "./services/wallet.services";
 
-export const WALLET_PAGE_ROUTE = "/wallet";
+export const WALLET_TOTAL_PAGE_ROUTE = "/wallet";
 export const CURRENCY_SLUG = "currency";
-export const WALLET_CURRENCY_PAGE_ROUTE = `${WALLET_PAGE_ROUTE}/:${CURRENCY_SLUG}`;
+export const WALLET_CURRENCY_PAGE_ROUTE = `${WALLET_TOTAL_PAGE_ROUTE}/:${CURRENCY_SLUG}`;
 
 export const composeWalletCurrencytUrl = (url: string): string =>
   replaceParams(WALLET_CURRENCY_PAGE_ROUTE, {
@@ -51,7 +51,7 @@ class WalletRoutes extends React.Component<
   render() {
     return (
       <Switch>
-        <Route exact path={WALLET_PAGE_ROUTE} component={WalletTotal} />
+        <Route exact path={WALLET_TOTAL_PAGE_ROUTE} component={WalletTotal} />
         <Route path={WALLET_CURRENCY_PAGE_ROUTE} component={WalletCurrency} />
         <Route component={NotFoundPage} />
       </Switch>

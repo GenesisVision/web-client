@@ -21,7 +21,7 @@ import WalletWithdrawConfirmPage, {
 } from "shared/components/wallet-withdraw-confirm/wallet-withdraw-confirm.page";
 import WalletTotalPage, {
   WALLET_TOTAL_PAGE_ROUTE
-} from "shared/components/wallet/wallet-total-page";
+} from "shared/components/wallet/wallet.routes";
 
 import FundsRoutes, { FUNDS_ROUTE } from "../funds/funds.routes";
 import { NOTIFICATIONS_ROUTE } from "../notifications/notifications.routes";
