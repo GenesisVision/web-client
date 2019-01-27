@@ -13,15 +13,12 @@ import SelectFilter from "shared/components/table/components/filtering/select-fi
 import TableCell from "shared/components/table/components/table-cell";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
+import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import EmptyTransactionsIcon from "shared/media/empty-wallet.svg";
-import ErrorTransactionsIcon from "shared/media/transactions/error.svg";
-import PendingTransactionsIcon from "shared/media/transactions/pending.svg";
 import SuccessTransactionsIcon from "shared/media/transactions/success.svg";
-import authService from "shared/services/auth-service";
 import { formatValue } from "shared/utils/formatter";
 
 import Profitability from "../../../profitability/profitability";
-import * as actions from "../../actions/wallet.actions";
 import { fetchWalletTransactions } from "../../services/wallet.services";
 import { WALLET_TRANSACTIONS_COLUMNS } from "./wallet-transactions.constants";
 import { walletTableTransactionsSelector } from "./wallet-transactions.selector";
@@ -43,91 +40,80 @@ const emptyTransactions = t => (
 );
 
 class WalletTransactions extends Component {
-  state = {
-    transactionsCount: []
+  fetch = filters => {
+    const { currency } = this.props;
+    return fetchWalletTransactions({
+      wallet: currency.toUpperCase(),
+      ...filters
+    });
   };
 
-  componentDidMount() {
-    const authorization = authService.getAuthArg();
-    actions.fetchWalletTransactions(authorization).then(res => {
-      this.setState({ transactionsCount: res.total });
-    });
-  }
-
   render() {
-    const {
-      t,
-      createButtonToolbar,
-      eventTypeFilterValues,
-      currency
-    } = this.props;
+    const { t, createButtonToolbar, eventTypeFilterValues } = this.props;
     return (
       <Surface className="wallet-transactions">
-        {(this.state.transactionsCount && (
-          <TableContainer
-            isFetchOnMount
-            createButtonToolbar={createButtonToolbar}
-            defaultFilters={{ wallet: currency }}
-            getItems={fetchWalletTransactions}
-            dataSelector={walletTableTransactionsSelector}
-            renderFilters={(updateFilter, filtering) => (
-              <Fragment>
-                <SelectFilter
-                  name={EVENT_TYPE_FILTER_NAME}
-                  label="Type"
-                  value={filtering["type"]}
-                  values={eventTypeFilterValues}
-                  onChange={updateFilter}
-                />
-                <DateRangeFilter
-                  name={DATE_RANGE_FILTER_NAME}
-                  value={filtering["dateRange"]}
-                  onChange={updateFilter}
-                  startLabel={t("filters.date-range.account-creation")}
-                />
-              </Fragment>
-            )}
-            columns={WALLET_TRANSACTIONS_COLUMNS}
-            renderHeader={column => (
-              <span
-                className={`wallet-transactions__cell wallet-transactions__cell--${
-                  column.name
-                }`}
-              >
-                {t(`wallet-page.transactions.${column.name}`)}
-              </span>
-            )}
-            renderBodyRow={transaction => {
-              return (
-                <TableRow className="wallet-transactions__row">
-                  <TableCell className="wallet-transactions__cell wallet-transactions__cell--date">
-                    {moment(transaction.date).format("DD-MM-YYYY, hh:mm a")}
-                  </TableCell>
-                  <TableCell className="wallet-transactions__cell wallet-transactions__cell--type">
-                    <img
-                      src={SuccessTransactionsIcon}
-                      className="wallet-transactions__icon"
-                      alt="TransactionsIcon"
+        <TableContainer
+          isFetchOnMount
+          paging={DEFAULT_PAGING}
+          createButtonToolbar={createButtonToolbar}
+          getItems={this.fetch}
+          dataSelector={walletTableTransactionsSelector}
+          renderFilters={(updateFilter, filtering) => (
+            <Fragment>
+              <SelectFilter
+                name={EVENT_TYPE_FILTER_NAME}
+                label="Type"
+                value={filtering["type"]}
+                values={eventTypeFilterValues}
+                onChange={updateFilter}
+              />
+              <DateRangeFilter
+                name={DATE_RANGE_FILTER_NAME}
+                value={filtering["dateRange"]}
+                onChange={updateFilter}
+                startLabel={t("filters.date-range.account-creation")}
+              />
+            </Fragment>
+          )}
+          columns={WALLET_TRANSACTIONS_COLUMNS}
+          renderHeader={column => (
+            <span
+              className={`wallet-transactions__cell wallet-transactions__cell--${
+                column.name
+              }`}
+            >
+              {t(`wallet-page.transactions.${column.name}`)}
+            </span>
+          )}
+          renderBodyRow={transaction => {
+            return (
+              <TableRow className="wallet-transactions__row">
+                <TableCell className="wallet-transactions__cell wallet-transactions__cell--date">
+                  {moment(transaction.date).format("DD-MM-YYYY, hh:mm a")}
+                </TableCell>
+                <TableCell className="wallet-transactions__cell wallet-transactions__cell--type">
+                  <img
+                    src={SuccessTransactionsIcon}
+                    className="wallet-transactions__icon"
+                    alt="TransactionsIcon"
+                  />
+                </TableCell>
+                <TableCell className="wallet-transactions__cell wallet-transactions__cell--information">
+                  {transaction.information}
+                </TableCell>
+                <TableCell className="wallet-transactions__cell wallet-transactions__cell--amount">
+                  <Profitability value={formatValue(transaction.amount)}>
+                    <NumberFormat
+                      value={formatValue(transaction.amount)}
+                      thousandSeparator=" "
+                      displayType="text"
                     />
-                  </TableCell>
-                  <TableCell className="wallet-transactions__cell wallet-transactions__cell--information">
-                    {transaction.information}
-                  </TableCell>
-                  <TableCell className="wallet-transactions__cell wallet-transactions__cell--amount">
-                    <Profitability value={formatValue(transaction.amount)}>
-                      <NumberFormat
-                        value={formatValue(transaction.amount)}
-                        thousandSeparator=" "
-                        displayType="text"
-                      />
-                    </Profitability>
-                  </TableCell>
-                </TableRow>
-              );
-            }}
-          />
-        )) ||
-          emptyTransactions(t)}
+                  </Profitability>
+                </TableCell>
+              </TableRow>
+            );
+          }}
+        />
       </Surface>
     );
   }
