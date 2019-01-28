@@ -4,6 +4,9 @@ import * as React from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import BTCIcon from "shared/media/currency/BTC.svg";
+import ETHIcon from "shared/media/currency/ETH.svg";
+import GVTIcon from "shared/media/currency/GVT.svg";
 
 import NotFoundPage from "../../not-found/not-found.routes";
 import Page from "../../page/page";
@@ -11,6 +14,16 @@ import { INVESTOR_EVENT_TYPE_FILTER_VALUES } from "../../table/components/filter
 import WalletBalanceElements from "./wallet-balance/wallet-balance-elements";
 import WalletBalanceLoader from "./wallet-balance/wallet-balance-loader";
 import WalletContainer from "./wallet-container/wallet-container";
+
+const Icons = {
+  GVT: GVTIcon,
+  BTC: BTCIcon,
+  ETH: ETHIcon
+};
+
+export const getWalletIcon = (currency: "GVT" | "BTC" | "ETH"): string => {
+  return Icons[currency];
+};
 
 interface IWalletProps {
   currency: string;
@@ -26,7 +39,14 @@ class WalletCurrency extends React.Component<IWalletProps> {
     if (!info) return <NotFoundPage />;
     return (
       <Page title={info.title}>
-        <h1>{info.title}</h1>
+        <h1>
+          {info.title}
+          <img
+            src={getWalletIcon[info.currency]}
+            className="wallet-balance__header-icon"
+            alt="Icon"
+          />
+        </h1>
         <div className="wallet-balance">
           <WalletBalanceElements walletBalanceData={info} />
         </div>

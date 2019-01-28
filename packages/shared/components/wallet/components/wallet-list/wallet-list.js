@@ -12,6 +12,7 @@ import TableContainer from "shared/components/table/components/table-container";
 import TableModule from "shared/components/table/components/table-module";
 import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
+import { getWalletIcon } from "shared/components/wallet/components/wallet-currency";
 import { composeWalletCurrencytUrl } from "shared/components/wallet/wallet.routes";
 import ArrowIcon from "shared/media/arrow-up.svg";
 import BTCIcon from "shared/media/currency/BTC.svg";
@@ -92,7 +93,7 @@ class WalletList extends Component {
                     }}
                   >
                     <img
-                      src={BTCIcon}
+                      src={getWalletIcon(wallet.currency)}
                       className="wallet-list__icon"
                       alt="Icon"
                     />
