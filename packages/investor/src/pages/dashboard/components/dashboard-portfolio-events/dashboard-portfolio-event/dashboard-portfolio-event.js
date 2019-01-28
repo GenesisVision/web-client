@@ -55,14 +55,14 @@ const DashboardPortfolioEvent = ({ event }) => {
             <NumberFormat
               value={formatValue(event.feeSuccessManager)}
               displayType="text"
-              suffix={` ${event.currency}`}
+              suffix={` ${event.feeSuccessManagerCurrency || ""}`}
             />
           </StatisticItem>
           <StatisticItem label={"GV commission"} accent>
             <NumberFormat
               value={formatValue(event.feeSuccessPlatform)}
               displayType="text"
-              suffix={` ${event.currency}`}
+              suffix={` ${event.feeSuccessPlatformCurrency || ""}`}
             />
           </StatisticItem>
           <StatisticItem label={"You've earned"} accent>
