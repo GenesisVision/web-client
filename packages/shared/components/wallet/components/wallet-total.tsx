@@ -30,10 +30,7 @@ class WalletTotal extends React.Component<IWalletProps, IWalletState> {
         <div className="wallet-balance">
           <WalletBalanceElements walletBalanceData={info} />
         </div>
-        <WalletContainerTotal
-          wallets={wallets}
-          eventTypeFilterValues={INVESTOR_EVENT_TYPE_FILTER_VALUES}
-        />
+        <WalletContainerTotal wallets={wallets} />
       </Page>
     );
   }

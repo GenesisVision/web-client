@@ -8,7 +8,6 @@ import { PORTFOLIO_EVENTS_DEFAULT_FILTERING } from "shared/components/portfolio-
 import Surface from "shared/components/surface/surface";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import { EVENT_TYPE_FILTER_NAME } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
 import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
 import TableCell from "shared/components/table/components/table-cell";
 import TableContainer from "shared/components/table/components/table-container";

@@ -8,7 +8,7 @@ import { SearchIcon } from "shared/components/icon/search-icon";
 import Surface from "shared/components/surface/surface";
 
 import WalletList from "../wallet-list/wallet-list";
-import WalletTransactionsTotal from "../wallet-transactions/wallet-transactions-total";
+import WalletTransactions from "../wallet-transactions/wallet-transactions";
 
 const WALLETS_TAB = "wallets";
 const TRANSACTIONS_TAB = "transactions";
@@ -32,7 +32,7 @@ class WalletContainerTotal extends PureComponent {
 
   render() {
     const { tab } = this.state;
-    const { eventTypeFilterValues, wallets } = this.props;
+    const { wallets } = this.props;
     return (
       <Surface className="wallet-container">
         <div className="wallet-container__header">
@@ -51,10 +51,7 @@ class WalletContainerTotal extends PureComponent {
             />
           )}
           {tab === TRANSACTIONS_TAB && (
-            <WalletTransactionsTotal
-              eventTypeFilterValues={eventTypeFilterValues}
-              createButtonToolbar={createButtonSearch("/")}
-            />
+            <WalletTransactions createButtonToolbar={createButtonSearch("/")} />
           )}
         </div>
       </Surface>
