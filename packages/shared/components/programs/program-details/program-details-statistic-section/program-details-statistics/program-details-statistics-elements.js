@@ -9,6 +9,7 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatValue } from "shared/utils/formatter";
 
 const ProgramDetailsStatisticsElements = ({
+  status,
   t,
   statistic,
   profitChart,
@@ -44,6 +45,7 @@ const ProgramDetailsStatisticsElements = ({
         <ProgramPeriodLine
           start={statistic.periodStarts}
           end={statistic.periodEnds}
+          status={status}
         />
       </div>
     </div>
