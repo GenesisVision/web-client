@@ -25,15 +25,17 @@ const formatDate = date => {
 };
 
 const DashboardPortfolioEvent = ({ event }) => {
+  const valueTotal =
+    event.type === PROFIT_EVENT ? event.valueTotal : event.value;
   const eventDescription = () => (
     <Fragment>
       <div className="portfolio-event__values-container">
         <div className="portfolio-event__description">{event.description}</div>
         <span className="portfolio-event__value">
           {isUseProfitability(event) ? (
-            <Profitability value={event.value} prefix="sign">
+            <Profitability value={valueTotal} prefix="sign">
               <NumberFormat
-                value={formatValue(event.value)}
+                value={formatValue(valueTotal)}
                 displayType="text"
                 allowNegative={false}
                 suffix={` ${event.currency}`}
@@ -66,17 +68,9 @@ const DashboardPortfolioEvent = ({ event }) => {
             />
           </StatisticItem>
           <StatisticItem label={"You've earned"} accent>
-            <Profitability
-              value={formatValue(
-                event.value - event.feeSuccessManager - event.feeSuccessPlatform
-              )}
-            >
+            <Profitability value={formatValue(event.value)}>
               <NumberFormat
-                value={formatValue(
-                  event.value -
-                    event.feeSuccessManager -
-                    event.feeSuccessPlatform
-                )}
+                value={formatValue(event.value)}
                 displayType="text"
                 suffix={` ${event.currency}`}
               />
