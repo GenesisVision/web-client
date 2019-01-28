@@ -1,5 +1,4 @@
 import classnames from "classnames";
-import { GVButton } from "gv-react-components";
 import React from "react";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
@@ -14,8 +13,11 @@ import TableRow from "shared/components/table/components/table-row";
 import Tooltip from "shared/components/tooltip/tooltip";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
+import { STATUS } from "shared/constants/constants";
+import { translate } from "react-i18next";
 
 const ProgramTableRowShort = ({
+  t,
   title,
   showRating,
   program,
@@ -24,6 +26,7 @@ const ProgramTableRowShort = ({
   onExpandClick
 }) => {
   const {
+    status,
     availableInvestment,
     statistic,
     logo,
@@ -119,9 +122,11 @@ const ProgramTableRowShort = ({
         {formatValue(availableInvestment)} GVT
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--period">
-        {periodStarts && (
-          <ProgramPeriodPie start={periodStarts} end={periodEnds} />
-        )}
+        {periodStarts &&
+          ((status !== STATUS.CLOSED && (
+            <ProgramPeriodPie start={periodStarts} end={periodEnds} />
+          )) ||
+            t("program-period.program-closed"))}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--trades">
         {statistic.tradesCount}
@@ -159,4 +164,4 @@ const ProgramTableRowShort = ({
   );
 };
 
-export default ProgramTableRowShort;
+export default translate()(ProgramTableRowShort);
