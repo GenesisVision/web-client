@@ -1,6 +1,7 @@
 import { WalletData } from "gv-api-web";
 import { IState } from "manager-web-portal/src/reducers";
 import * as React from "react";
+import { Fragment } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -8,6 +9,8 @@ import BTCIcon from "shared/media/currency/BTC.svg";
 import ETHIcon from "shared/media/currency/ETH.svg";
 import GVTIcon from "shared/media/currency/GVT.svg";
 
+import WalletAddFundsPopup from "../../../modules/wallet-add-funds/wallet-add-funds-popup";
+import WalletWithdrawPopup from "../../../modules/wallet-withdraw/wallet-withdraw-popup";
 import NotFoundPage from "../../not-found/not-found.routes";
 import Page from "../../page/page";
 import { INVESTOR_EVENT_TYPE_FILTER_VALUES } from "../../table/components/filtering/event-type-filter/event-type-filter.constants";
@@ -33,26 +36,60 @@ interface IWalletProps {
 }
 
 class WalletCurrency extends React.Component<IWalletProps> {
+  state = {
+    isOpenAddFundsPopup: false,
+    isOpenWithdrawPopup: false
+  };
+
+  handleOpenAddFundsPopup = () => {
+    this.setState({ isOpenAddFundsPopup: true });
+  };
+
+  handleCloseAddFundsPopup = () => {
+    this.setState({ isOpenAddFundsPopup: false });
+  };
+
+  handleOpenWithdrawPopup = () => {
+    this.setState({ isOpenWithdrawPopup: true });
+  };
+
+  handleCloseWithdrawPopup = () => {
+    this.setState({ isOpenWithdrawPopup: false });
+  };
+
   render() {
     const { info, isPending } = this.props;
     if (!info && isPending) return <WalletBalanceLoader />;
     if (!info) return <NotFoundPage />;
     return (
       <Page title={info.title}>
-        <h1>
-          {info.title}
-          <img
-            src={getWalletIcon(info.currency)}
-            className="wallet-balance__header-icon"
-            alt="Icon"
-          />
-        </h1>
         <div className="wallet-balance">
-          <WalletBalanceElements walletBalanceData={info} />
+          <h1>
+            {info.title}
+            <img
+              src={getWalletIcon(info.currency)}
+              className="wallet-balance__header-icon"
+              alt="Icon"
+            />
+          </h1>
+
+          <WalletBalanceElements
+            walletBalanceData={info}
+            handleAddFunds={this.handleOpenAddFundsPopup}
+            handleWithdraw={this.handleOpenWithdrawPopup}
+          />
         </div>
         <WalletContainer
           currency={this.props.currency}
           eventTypeFilterValues={INVESTOR_EVENT_TYPE_FILTER_VALUES}
+        />
+        <WalletAddFundsPopup
+          open={this.state.isOpenAddFundsPopup}
+          onClose={this.handleCloseAddFundsPopup}
+        />
+        <WalletWithdrawPopup
+          open={this.state.isOpenWithdrawPopup}
+          onClose={this.handleCloseWithdrawPopup}
         />
       </Page>
     );
