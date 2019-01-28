@@ -26,8 +26,8 @@ class WalletTotal extends React.Component<IWalletProps, IWalletState> {
     if (!info) return <WalletBalanceLoader />;
     return (
       <Page title={t("wallet-page.title")}>
-        <h1>{t("wallet-page.title")}</h1>
         <div className="wallet-balance">
+          <h1>{t("wallet-page.title")}</h1>
           <WalletBalanceElements walletBalanceData={info} />
         </div>
         <WalletContainerTotal wallets={wallets} />
