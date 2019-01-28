@@ -21,7 +21,7 @@ const Icons = {
   ETH: ETHIcon
 };
 
-export const getWalletIcon = (currency: "GVT" | "BTC" | "ETH"): string => {
+export const getWalletIcon = (currency: string): string => {
   return Icons[currency];
 };
 
@@ -42,7 +42,7 @@ class WalletCurrency extends React.Component<IWalletProps> {
         <h1>
           {info.title}
           <img
-            src={getWalletIcon[info.currency]}
+            src={getWalletIcon(info.currency)}
             className="wallet-balance__header-icon"
             alt="Icon"
           />
