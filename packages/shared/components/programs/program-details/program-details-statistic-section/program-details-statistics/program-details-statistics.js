@@ -7,7 +7,13 @@ import Surface from "shared/components/surface/surface";
 
 import ProgramDetailsStatisticsElements from "./program-details-statistics-elements";
 
-const ProgramDetailsStatistics = ({ t, statistic, profitChart, period }) => {
+const ProgramDetailsStatistics = ({
+  t,
+  statistic,
+  profitChart,
+  period,
+  status
+}) => {
   return (
     <Surface className="surface--horizontal-paddings details-statistics">
       <h3>{t("program-details-page.statistics.heading")}</h3>
@@ -18,6 +24,7 @@ const ProgramDetailsStatistics = ({ t, statistic, profitChart, period }) => {
           statistic={statistic}
           profitChart={profitChart}
           period={period}
+          status={status}
         />
       )}
     </Surface>
