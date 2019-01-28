@@ -14,6 +14,7 @@ import TableCell from "shared/components/table/components/table-cell";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
+import { WALLET_TRANSACTION_ACTIONS_VALUES } from "shared/components/wallet/components/wallet-list/wallet-list.constants";
 import EmptyTransactionsIcon from "shared/media/empty-wallet.svg";
 import SuccessTransactionsIcon from "shared/media/transactions/success.svg";
 import { formatValue } from "shared/utils/formatter";
@@ -49,7 +50,7 @@ class WalletTransactions extends Component {
   };
 
   render() {
-    const { t, createButtonToolbar, eventTypeFilterValues } = this.props;
+    const { t, createButtonToolbar } = this.props;
     return (
       <Surface className="wallet-transactions">
         <TableContainer
@@ -61,10 +62,10 @@ class WalletTransactions extends Component {
           renderFilters={(updateFilter, filtering) => (
             <Fragment>
               <SelectFilter
-                name={EVENT_TYPE_FILTER_NAME}
-                label="Type"
-                value={filtering["type"]}
-                values={eventTypeFilterValues}
+                name={"txAction"}
+                label="Action"
+                value={filtering["txAction"]}
+                values={WALLET_TRANSACTION_ACTIONS_VALUES}
                 onChange={updateFilter}
               />
               <DateRangeFilter
