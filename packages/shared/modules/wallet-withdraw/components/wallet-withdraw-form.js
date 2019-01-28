@@ -68,7 +68,7 @@ const WalletWithdrawForm = ({
         <div className="dialog-field">
           <div className="gv-text-field__wrapper">
             <StatisticItem label={t("wallet-withdraw.available")} big>
-              {availableToWithdrawal} GVT
+              {formatCurrencyValue(availableToWithdrawal, "GVT")} GVT
             </StatisticItem>
           </div>
         </div>
