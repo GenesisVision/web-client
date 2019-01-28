@@ -83,7 +83,7 @@ const ProgramTableRowShort = ({
                 {program.title}
               </Link>
             </div>
-            {tags && (
+            {/*{tags && (
               <div className="programs-table__cell--bottom">
                 {tags.map((tag, index) => (
                   <span key={tag.name} style={{ color: tag.color }}>
@@ -92,7 +92,7 @@ const ProgramTableRowShort = ({
                   </span>
                 ))}
               </div>
-            )}
+            )}*/}
           </div>
         </div>
       </TableCell>

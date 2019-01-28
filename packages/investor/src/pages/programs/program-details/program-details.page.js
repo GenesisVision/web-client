@@ -121,6 +121,7 @@ class ProgramDetailsPage extends PureComponent {
             </div>
             <div className="details__section">
               <ProgramDetailsStatisticSection
+                status={this.description.status}
                 getProgramStatistic={getProgramStatistic}
                 programId={this.description.id}
                 currency={currency}
