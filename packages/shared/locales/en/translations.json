@@ -68,7 +68,8 @@
     "period-is-over": "The period is over.",
     "time-left": "Time left",
     "period-ends": "Period ends",
-    "left": "left"
+    "left": "left",
+    "program-closed": "Program closed"
   },
   "chart-period": {
     "day-short": "1D",
