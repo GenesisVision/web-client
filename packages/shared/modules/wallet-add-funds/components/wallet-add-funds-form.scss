@@ -30,10 +30,6 @@
     align-items: center;
   }
 
-  &__from-text {
-    align-self: flex-start;
-  }
-
   &__will-get {
     &:before {
       content: none;
@@ -42,12 +38,18 @@
       content: none;
     }
   }
+
   &__address {
     text-align: center;
     & > .statistics-item__value {
       font-size: $font-size-paragraph-mobile;
     }
   }
+
+  &__right-text {
+    align-self: flex-start;
+  }
+
   &__icon {
     margin-right: 20px;
     vertical-align: middle;

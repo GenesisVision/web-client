@@ -20,5 +20,20 @@
     & .dialog-list {
       margin-top: 20px;
     }
+
+    &__right-text {
+      align-self: flex-start;
+    }
+
+    &__icon {
+      margin-right: 20px;
+      vertical-align: middle;
+      width: 24px;
+      height: 24px;
+      &--currency {
+        width: 40px;
+        height: 40px;
+      }
+    }
   }
 }

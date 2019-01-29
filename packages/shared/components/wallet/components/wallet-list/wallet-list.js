@@ -55,12 +55,12 @@ class WalletList extends Component {
     this.setState({ isOpenAddFundsPopup: false, currentWallet: {} });
   };
 
-  handleOpenWithdrawPopup = () => {
-    this.setState({ isOpenWithdrawPopup: true });
+  handleOpenWithdrawPopup = wallet => {
+    this.setState({ isOpenWithdrawPopup: true, currentWallet: wallet });
   };
 
   handleCloseWithdrawPopup = () => {
-    this.setState({ isOpenWithdrawPopup: false });
+    this.setState({ isOpenWithdrawPopup: false, currentWallet: {} });
   };
 
   render() {
@@ -130,7 +130,9 @@ class WalletList extends Component {
                   />
                 </TableCell>
                 <TableCell className="wallet-list__cell wallet-list__cell--buttons">
-                  <Chip onClick={this.handleOpenWithdrawPopup}>
+                  <Chip
+                    onClick={this.handleOpenWithdrawPopup.bind(this, wallet)}
+                  >
                     <img src={ArrowIcon} alt="Icon" />
                   </Chip>
                   <Chip
@@ -151,6 +153,7 @@ class WalletList extends Component {
           onClose={this.handleCloseAddFundsPopup}
         />
         <WalletWithdrawPopup
+          currentWallet={this.state.currentWallet}
           open={this.state.isOpenWithdrawPopup}
           onClose={this.handleCloseWithdrawPopup}
         />

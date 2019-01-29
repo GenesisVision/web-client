@@ -89,6 +89,7 @@ class WalletCurrency extends React.Component<IWalletProps> {
           onClose={this.handleCloseAddFundsPopup}
         />
         <WalletWithdrawPopup
+          currentWallet={info}
           open={this.state.isOpenWithdrawPopup}
           onClose={this.handleCloseWithdrawPopup}
         />

@@ -9,7 +9,6 @@ import CopyIcon from "shared/components/icon/copy-icon";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { getWalletIcon } from "shared/components/wallet/components/wallet-currency";
 import ArrowIcon from "shared/media/arrow-down.svg";
-import { formatValue } from "shared/utils/formatter";
 
 class WalletAddFundsForm extends Component {
   render() {
@@ -46,8 +45,7 @@ class WalletAddFundsForm extends Component {
                 alt={currentWallet.currency}
               />
               <StatisticItem
-                label=""
-                equivalent={formatValue(currentWallet.available)}
+                equivalent={currentWallet.available}
                 equivalentCurrency={currentWallet.currency}
                 big
                 accent
@@ -59,7 +57,7 @@ class WalletAddFundsForm extends Component {
         </div>
         <div className="dialog__bottom wallet-add-funds-popup__bottom">
           <StatisticItem
-            className="wallet-add-funds-popup__from-text"
+            className="wallet-add-funds-popup__right-text"
             label={t("wallet-add-funds.from")}
           >
             <img
