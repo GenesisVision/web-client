@@ -21,7 +21,7 @@
     font-weight: 600;
   }
 
-  @media (min-width: 450px) {
+  @include media-breakpoint-landscape-phone() {
     &__subheading,
     &__tabs {
       position: absolute;
