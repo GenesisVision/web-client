@@ -23,7 +23,7 @@ const EVENTS_FILTERING = {
 };
 class ProgramDetailsHistorySection extends PureComponent {
   state = {
-    tab: TRADES_TAB,
+    tab: OPEN_POSITIONS_TAB,
     tradesCount: undefined,
     eventsCount: undefined,
     openPositionsCount: undefined
@@ -60,25 +60,38 @@ class ProgramDetailsHistorySection extends PureComponent {
             {t("program-details-page.history.heading")}
           </h3>*/}
           <div className="details-history__tabs">
-            <GVTabs value={tab} onChange={this.handleTabChange}>
-              <GVTab
-                value={TRADES_TAB}
-                label={t("program-details-page.history.tabs.trades")}
-                count={tradesCount}
-              />
-              {isAuthenticated && isInvested && (
+            {(isAuthenticated && isInvested && (
+              <GVTabs value={tab} onChange={this.handleTabChange}>
+                <GVTab
+                  value={OPEN_POSITIONS_TAB}
+                  label={t("program-details-page.history.tabs.open-positions")}
+                  count={openPositionsCount}
+                />
+                <GVTab
+                  value={TRADES_TAB}
+                  label={t("program-details-page.history.tabs.trades")}
+                  count={tradesCount}
+                />
                 <GVTab
                   value={EVENTS_TAB}
                   label={t("program-details-page.history.tabs.events")}
                   count={eventsCount}
                 />
-              )}
-              <GVTab
-                value={OPEN_POSITIONS_TAB}
-                label={t("program-details-page.history.tabs.open-positions")}
-                count={openPositionsCount}
-              />
-            </GVTabs>
+              </GVTabs>
+            )) || (
+              <GVTabs value={tab} onChange={this.handleTabChange}>
+                <GVTab
+                  value={OPEN_POSITIONS_TAB}
+                  label={t("program-details-page.history.tabs.open-positions")}
+                  count={openPositionsCount}
+                />
+                <GVTab
+                  value={TRADES_TAB}
+                  label={t("program-details-page.history.tabs.trades")}
+                  count={tradesCount}
+                />
+              </GVTabs>
+            )}
           </div>
         </div>
         <div>
