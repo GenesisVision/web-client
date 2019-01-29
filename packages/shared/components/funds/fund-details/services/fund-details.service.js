@@ -52,9 +52,8 @@ export const getFundStatistic = (
       creationDate: profitChart.creationDate
     };
     const profitChartData = {
-      totalGvtProfit: profitChart.totalGvtProfit,
-      totalProgramCurrencyProfit: profitChart.totalProgramCurrencyProfit,
-      programCurrency: profitChart.programCurrency,
+      timeFrameGvtProfit: profitChart.timeframeGvtProfit,
+      timeFrameUsdProfit: profitChart.timeframeUsdProfit,
       profitChangePercent: profitChart.profitChangePercent,
       pnLChart: profitChart.pnLChart,
       equityChart: profitChart.equityChart

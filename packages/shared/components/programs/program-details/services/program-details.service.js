@@ -49,8 +49,9 @@ export const getProgramStatistic = (
     };
     const profitChartData = {
       balance: profitChart.balance,
-      totalGvtProfit: profitChart.totalGvtProfit,
-      totalProgramCurrencyProfit: profitChart.totalProgramCurrencyProfit,
+      timeFrameProgramCurrencyProfit:
+        profitChart.timeframeProgramCurrencyProfit,
+      timeFrameGvtProfit: profitChart.timeframeGvtProfit,
       programCurrency: profitChart.programCurrency,
       profitChangePercent: profitChart.profitChangePercent,
       pnLChart: profitChart.pnLChart,
