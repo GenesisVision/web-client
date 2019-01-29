@@ -102,3 +102,12 @@ export const fetchProgramTrades = (id, filters, currency) => {
       });
     });
 };
+
+export const fetchOpenPositions = id => {
+  return programsApi.v10ProgramsByIdTradesOpenGet(id).then(data => {
+    return Promise.resolve({
+      total: data.total,
+      items: data.trades
+    });
+  });
+};
