@@ -12,7 +12,7 @@ export interface IApiReducerFactory<T> {
   data?: T;
 }
 
-const initialState = {
+const initialState: IApiReducerFactory<any> = {
   isPending: false,
   errorMessage: "",
   code: null
@@ -23,13 +23,13 @@ interface IReducerFactoryConfig {
   suffixes?: Array<string>;
 }
 
-const apiReducerFactory = (
+const apiReducerFactory = <T>(
   config: IReducerFactoryConfig = {
     apiType: API_TYPE,
     suffixes: [REQUEST_SUFFIX, SUCCESS_SUFFIX, FAILURE_SUFFIX]
   },
   subReducer?: any
-) => (state = initialState, action: any) => {
+) => (state = initialState, action: any): IApiReducerFactory<T> => {
   const apiType = config.apiType || API_TYPE;
   const suffixes = config.suffixes || [
     REQUEST_SUFFIX,

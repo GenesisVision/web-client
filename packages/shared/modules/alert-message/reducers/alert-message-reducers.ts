@@ -2,9 +2,18 @@ import uuid from "uuid";
 
 import * as actionTypes from "../actions/alert-message-actions.constants";
 
-const initialState = [];
+export interface IMessage {
+  id: string;
+  text: string;
+  className?: string;
+  isUseLocalization: boolean;
+}
 
-const addMessage = (state, action) => {
+export type IAlertMessagesReducer = Array<IMessage>;
+
+const initialState: IAlertMessagesReducer = [];
+
+const addMessage = (state: IAlertMessagesReducer, action: any) => {
   const newMessage = {
     id: uuid.v4(),
     text: action.text,
@@ -14,15 +23,20 @@ const addMessage = (state, action) => {
   return [...state.slice(-2), newMessage];
 };
 
-const removeMessage = (state, action) => {
+const removeMessage = (state: IAlertMessagesReducer, action: any) => {
   return state.filter(message => message.id !== action.id);
 };
 
-const removeAllMessages = state => {
+const removeAllMessages = (
+  state: IAlertMessagesReducer
+): IAlertMessagesReducer => {
   return [];
 };
 
-const alertMessagesReducer = (state = initialState, action) => {
+const alertMessagesReducer = (
+  state: IAlertMessagesReducer = initialState,
+  action: any
+): IAlertMessagesReducer => {
   switch (action.type) {
     case actionTypes.ALERT_MESSAGE_SUCCESS:
     case actionTypes.ALERT_MESSAGE_WARNING:

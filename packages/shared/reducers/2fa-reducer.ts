@@ -1,16 +1,22 @@
+import { TwoFactorStatus } from "gv-api-web";
 import { TWO_FACTOR_AUTH } from "shared/actions/2fa-actions";
 import { TWO_FACTOR_SET_REQUIREMENT } from "shared/actions/2fa-actions";
-import apiReducerFactory from "shared/reducers/api-reducer/api-reducer";
+import apiReducerFactory, {
+  IApiReducerFactory
+} from "shared/reducers/api-reducer/api-reducer";
 
 const data = {
   twoFactorEnabled: false
 };
 
-const twoFactorReducer = apiReducerFactory(
+export interface ITwoFactorReducer
+  extends IApiReducerFactory<TwoFactorStatus> {}
+
+const twoFactorReducer = apiReducerFactory<TwoFactorStatus>(
   {
     apiType: TWO_FACTOR_AUTH
   },
-  (state, action) => {
+  (state: ITwoFactorReducer, action: any): ITwoFactorReducer => {
     if (!state.data) {
       return {
         ...state,

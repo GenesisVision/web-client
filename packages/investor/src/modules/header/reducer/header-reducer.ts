@@ -8,8 +8,8 @@ export interface IHeaderReducer {
   info: IApiReducerFactory<ProfileHeaderViewModel>;
 }
 
-const headerReducer = combineReducers({
-  info: apiReducerFactory({
+const headerReducer = combineReducers<IHeaderReducer>({
+  info: apiReducerFactory<ProfileHeaderViewModel>({
     apiType: PROFILE_HEADER
   })
 });

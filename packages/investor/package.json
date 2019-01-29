@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/uuid": "^3.4.4",
     "classnames": "^2.2.5",
     "copy-to-clipboard": "^3.0.8",
     "debounce": "^1.2.0",

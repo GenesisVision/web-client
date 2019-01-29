@@ -11,7 +11,16 @@ export const initialState = {
 
 const clearDataActionType = composeClearDataActionType(LOGIN_TWO_FACTOR);
 
-const twoFactorReducer = (state = initialState, action) => {
+export interface ITwoFactorReducer {
+  email: string;
+  password: string;
+  from: string | object;
+}
+
+const twoFactorReducer = (
+  state: ITwoFactorReducer = initialState,
+  action: any
+): ITwoFactorReducer => {
   switch (action.type) {
     case LOGIN_TWO_FACTOR: {
       return {

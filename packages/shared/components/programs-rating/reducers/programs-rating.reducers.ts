@@ -1,5 +1,8 @@
+import { LevelUpSummary, ProgramsList } from "gv-api-web";
 import { combineReducers } from "redux";
-import apiReducerFactory from "shared/reducers/api-reducer/api-reducer";
+import apiReducerFactory, {
+  IApiReducerFactory
+} from "shared/reducers/api-reducer/api-reducer";
 
 import {
   LEVELUP_SUMMARY,
@@ -17,7 +20,13 @@ const levelupSummaryReducer = apiReducerFactory({
   apiType: LEVELUP_SUMMARY
 });
 
-const programsRatingReducer = combineReducers({
+export interface IProgramsRatingReducer {
+  programs: IApiReducerFactory<ProgramsList>;
+  selfPrograms: IApiReducerFactory<ProgramsList>;
+  levelupSummary: IApiReducerFactory<LevelUpSummary>;
+}
+
+const programsRatingReducer = combineReducers<IProgramsRatingReducer>({
   programs: allProgramsRatingReducer,
   selfPrograms: selfProgramsRatingReducer,
   levelupSummary: levelupSummaryReducer
