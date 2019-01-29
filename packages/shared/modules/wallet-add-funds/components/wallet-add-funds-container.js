@@ -24,11 +24,13 @@ class WalletAddFundsContainer extends Component {
   render() {
     if (!this.state.data) return null;
     const { wallets } = this.state.data;
+    const { currentWallet, notifySuccess, notifyError } = this.props;
     return (
       <WalletAddFundsForm
         wallets={wallets}
-        notifySuccess={this.props.notifySuccess}
-        notifyError={this.props.notifyError}
+        currentWallet={currentWallet}
+        notifySuccess={notifySuccess}
+        notifyError={notifyError}
       />
     );
   }

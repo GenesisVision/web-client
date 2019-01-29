@@ -84,6 +84,7 @@ class WalletCurrency extends React.Component<IWalletProps> {
           eventTypeFilterValues={INVESTOR_EVENT_TYPE_FILTER_VALUES}
         />
         <WalletAddFundsPopup
+          currentWallet={info}
           open={this.state.isOpenAddFundsPopup}
           onClose={this.handleCloseAddFundsPopup}
         />

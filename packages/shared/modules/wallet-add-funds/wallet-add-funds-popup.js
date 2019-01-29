@@ -11,7 +11,7 @@ class WalletAddFundsPopup extends Component {
   render() {
     return (
       <Dialog open={this.props.open} onClose={this.handleClose}>
-        <WalletAddFundsContainer />
+        <WalletAddFundsContainer currentWallet={this.props.currentWallet} />
       </Dialog>
     );
   }

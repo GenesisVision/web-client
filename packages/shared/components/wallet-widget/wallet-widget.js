@@ -38,6 +38,7 @@ class WalletWidget extends React.Component {
       totalBalanceGvt,
       className
     } = this.props;
+    const currentWallet = { available: availableGvt, currency: "GVT" };
     return (
       <Fragment>
         <div className={classnames("wallet-widget", className)}>
@@ -55,6 +56,7 @@ class WalletWidget extends React.Component {
           </div>
         </div>
         <WalletAddFundsPopup
+          currentWallet={currentWallet}
           onClose={this.handleClodsAddFundsPopup}
           open={this.state.isOpenAddFundsPopup}
         />

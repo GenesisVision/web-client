@@ -28,7 +28,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
+  }
+
+  &__from-text {
+    align-self: flex-start;
   }
 
   &__will-get {
@@ -40,8 +43,19 @@
     }
   }
   &__address {
+    text-align: center;
     & > .statistics-item__value {
       font-size: $font-size-paragraph-mobile;
+    }
+  }
+  &__icon {
+    margin-right: 20px;
+    vertical-align: middle;
+    width: 24px;
+    height: 24px;
+    &--currency {
+      width: 40px;
+      height: 40px;
     }
   }
 }

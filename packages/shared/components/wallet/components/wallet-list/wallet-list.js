@@ -43,15 +43,16 @@ const emptyWallets = t => (
 class WalletList extends Component {
   state = {
     isOpenAddFundsPopup: false,
-    isOpenWithdrawPopup: false
+    isOpenWithdrawPopup: false,
+    currentWallet: {}
   };
 
-  handleOpenAddFundsPopup = () => {
-    this.setState({ isOpenAddFundsPopup: true });
+  handleOpenAddFundsPopup = wallet => {
+    this.setState({ isOpenAddFundsPopup: true, currentWallet: wallet });
   };
 
   handleCloseAddFundsPopup = () => {
-    this.setState({ isOpenAddFundsPopup: false });
+    this.setState({ isOpenAddFundsPopup: false, currentWallet: {} });
   };
 
   handleOpenWithdrawPopup = () => {
@@ -135,7 +136,7 @@ class WalletList extends Component {
                   <Chip
                     className="wallet-list__button-add-funds"
                     type="positive"
-                    onClick={this.handleOpenAddFundsPopup}
+                    onClick={this.handleOpenAddFundsPopup.bind(this, wallet)}
                   >
                     +
                   </Chip>
@@ -145,6 +146,7 @@ class WalletList extends Component {
           }}
         />
         <WalletAddFundsPopup
+          currentWallet={this.state.currentWallet}
           open={this.state.isOpenAddFundsPopup}
           onClose={this.handleCloseAddFundsPopup}
         />
