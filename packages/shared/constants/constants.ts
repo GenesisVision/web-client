@@ -12,3 +12,8 @@ export const STATUS = {
   PENDING: "Pending"
 };
 export const PROFIT_EVENT = "Profit";
+
+export enum SORTING {
+  DESC = "Desc",
+  ASC = "Asc"
+}
