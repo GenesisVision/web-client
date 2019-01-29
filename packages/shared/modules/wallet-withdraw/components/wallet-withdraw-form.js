@@ -92,25 +92,10 @@ const WalletWithdrawForm = ({
           <img
             src={ArrowIcon}
             alt="Icon"
-            className="wallet-withdraw-popup__icon"
+            className="wallet-withdraw-popup__icon wallet-withdraw-popup__icon--rotate"
           />
           {t("wallet-add-funds.external")}
         </StatisticItem>
-        <GVFormikField
-          name="address"
-          label={t("wallet-withdraw.address")}
-          component={GVTextField}
-          autoComplete="off"
-        />
-        {twoFactorEnabled && (
-          <GVFormikField
-            type="text"
-            name="twoFactorCode"
-            label={t("wallet-withdraw.two-factor-code-label")}
-            autoComplete="off"
-            component={GVTextField}
-          />
-        )}
         <InputAmountField
           name="amount"
           label={t("wallet-withdraw.amount")}
@@ -144,6 +129,21 @@ const WalletWithdrawForm = ({
             </span>
           </li>
         </ul>
+        <GVFormikField
+          name="address"
+          label={t("wallet-withdraw.address")}
+          component={GVTextField}
+          autoComplete="off"
+        />
+        {twoFactorEnabled && (
+          <GVFormikField
+            type="text"
+            name="twoFactorCode"
+            label={t("wallet-withdraw.two-factor-code-label")}
+            autoComplete="off"
+            component={GVTextField}
+          />
+        )}
         <div className="form-error">{errorMessage}</div>
         <div className="dialog__buttons">
           <GVButton

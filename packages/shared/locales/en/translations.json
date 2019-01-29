@@ -152,6 +152,7 @@
     "amount": "Enter correct amount",
     "will-get": "You'll get",
     "address": "Withdraw address",
+    "to": "To",
     "fee": "Fee",
     "withdrawing": "Withdrawing",
     "info": "Amount of withdrawals can be changed depending on the exchange rate.",
