@@ -436,7 +436,8 @@
       "heading": "History",
       "tabs": {
         "trades": "Trades",
-        "events": "Events"
+        "events": "Events",
+        "open-positions": "Open positions"
       },
       "trades": {
         "direction": "Dir",
@@ -447,6 +448,16 @@
         "price": "Price",
         "entry": "Entry",
         "date": "Date"
+      },
+      "open-positions": {
+        "date": "Date Open",
+        "symbol": "Symbol",
+        "direction": "Dir",
+        "volume": "Volume",
+        "price": "Price Open",
+        "priceCurrent": "Price",
+        "profit": "Profit",
+        "profitPercentCurrent": "Profit %"
       }
     },
     "chart": {

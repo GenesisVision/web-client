@@ -27,10 +27,11 @@
       @include font-size($font-size-paragraph);
     }
   }
-  @media (min-width: 450px) {
+  @include media-breakpoint-landscape-phone() {
     &__tabs {
       position: absolute;
       padding-top: 5px;
+      z-index: 9;
     }
     .table__filters {
       justify-content: flex-end;

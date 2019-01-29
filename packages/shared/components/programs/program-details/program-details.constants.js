@@ -31,6 +31,40 @@ export const PROGRAM_TRADES_COLUMNS = [
     name: "entry"
   }
 ];
+export const PROGRAM_OPEN_POSITIONS_COLUMNS = [
+  {
+    name: "date",
+    sortingName: "ByDate"
+  },
+  {
+    name: "symbol",
+    sortingName: "BySymbol"
+  },
+  {
+    name: "direction",
+    sortingName: "ByDirection"
+  },
+  {
+    name: "volume",
+    sortingName: "ByVolume"
+  },
+  {
+    name: "price",
+    sortingName: "ByPrice"
+  },
+  {
+    name: "priceCurrent",
+    sortingName: "ByPriceCurrent"
+  },
+  {
+    name: "profit",
+    sortingName: "ByProfit"
+  },
+  {
+    name: "profitPercentCurrent",
+    sortingName: "ByProfitPercentCurrent"
+  }
+];
 
 export const PROGRAM_TRADES_DEFAULT_FILTERS = [
   {

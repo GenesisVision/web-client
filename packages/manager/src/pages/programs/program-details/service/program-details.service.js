@@ -13,10 +13,16 @@ export const fetchHistoryCounts = id => {
   const eventsCountPromise = isAuthenticated
     ? fetchPortfolioEvents({ ...filtering, assetId: id })
     : Promise.resolve({ total: 0 });
-  return Promise.all([tradesCountPromise, eventsCountPromise]).then(
-    ([tradesData, eventsData]) => ({
-      tradesCount: tradesData.total,
-      eventsCount: eventsData.total
-    })
+  const openPositionsCountPromise = programsApi.v10ProgramsByIdTradesOpenGet(
+    id
   );
+  return Promise.all([
+    tradesCountPromise,
+    eventsCountPromise,
+    openPositionsCountPromise
+  ]).then(([tradesData, eventsData, openPositionsData]) => ({
+    tradesCount: tradesData.total,
+    eventsCount: eventsData.total,
+    openPositionsCount: openPositionsData.total
+  }));
 };
