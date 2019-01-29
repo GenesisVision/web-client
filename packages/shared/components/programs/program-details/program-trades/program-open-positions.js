@@ -2,23 +2,15 @@ import "shared/components/details/details-description-section/details-statistic-
 
 import moment from "moment";
 import * as PropTypes from "prop-types";
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import BaseProfitability from "shared/components/profitability/base-profitability";
 import Profitability from "shared/components/profitability/profitability";
-import {
-  PROGRAM_OPEN_POSITIONS_COLUMNS,
-  PROGRAM_TRADES_COLUMNS,
-  PROGRAM_TRADES_DEFAULT_FILTERS,
-  PROGRAM_TRADES_FILTERS
-} from "shared/components/programs/program-details/program-details.constants";
-import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
-import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { PROGRAM_OPEN_POSITIONS_COLUMNS } from "shared/components/programs/program-details/program-details.constants";
 import TableCell from "shared/components/table/components/table-cell";
 import TableModule from "shared/components/table/components/table-module";
 import TableRow from "shared/components/table/components/table-row";
-import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { formatValue } from "shared/utils/formatter";
 
 const PAGING = {
@@ -30,8 +22,7 @@ const PAGING = {
 class ProgramOpenPositions extends Component {
   getOpenPositions = filters => {
     const { programId, fetchOpenPositions } = this.props;
-    console.log(filters);
-    return fetchOpenPositions(programId);
+    return fetchOpenPositions(programId, filters);
   };
 
   render() {
@@ -39,19 +30,6 @@ class ProgramOpenPositions extends Component {
     return (
       <TableModule
         getItems={this.getOpenPositions}
-        // defaultFilters={PROGRAM_TRADES_DEFAULT_FILTERS}
-        // filtering={PROGRAM_TRADES_FILTERS}
-        /*renderFilters={(updateFilter, filtering) => (
-          <Fragment>
-            <DateRangeFilter
-              name={DATE_RANGE_FILTER_NAME}
-              value={filtering[DATE_RANGE_FILTER_NAME]}
-              onChange={updateFilter}
-              startLabel={t("filters.date-range.program-start")}
-            />
-          </Fragment>
-        )}*/
-        selfSorting
         paging={PAGING}
         columns={PROGRAM_OPEN_POSITIONS_COLUMNS}
         renderHeader={column => (
@@ -66,7 +44,7 @@ class ProgramOpenPositions extends Component {
         renderBodyRow={position => {
           return (
             <TableRow className="details-trades__row">
-              <TableCell className="details-trades__cell program-details-trades__cell--date-open">
+              <TableCell className="details-trades__cell program-details-trades__cell--date">
                 {moment(position.date).format("DD-MM-YYYY, hh:mm a")}
               </TableCell>
               <TableCell className="details-trades__cell program-details-trades__cell--symbol">
@@ -87,16 +65,16 @@ class ProgramOpenPositions extends Component {
                   thousandSeparator=" "
                 />
               </TableCell>
-              <TableCell className="details-trades__cell program-details-trades__cell--price-open">
+              <TableCell className="details-trades__cell program-details-trades__cell--price">
                 <NumberFormat
                   value={formatValue(position.price)}
                   displayType="text"
                   thousandSeparator=" "
                 />
               </TableCell>
-              <TableCell className="details-trades__cell program-details-trades__cell--price">
+              <TableCell className="details-trades__cell program-details-trades__cell--priceCurrent">
                 <NumberFormat
-                  value={formatValue(position.price)}
+                  value={formatValue(position.priceCurrent)}
                   displayType="text"
                   thousandSeparator=" "
                 />
@@ -113,13 +91,17 @@ class ProgramOpenPositions extends Component {
                   />
                 </Profitability>
               </TableCell>
-              <TableCell className="details-trades__cell program-details-trades__cell--profit-perc">
+              <TableCell className="details-trades__cell program-details-trades__cell--profitPercentCurrent">
                 <Profitability
-                  value={+formatValue(position.profit)}
+                  value={+formatValue(position.profitPercentCurrent)}
                   prefix="sign"
                 >
                   <NumberFormat
-                    value={formatValue(position.profit, null, true)}
+                    value={formatValue(
+                      position.profitPercentCurrent,
+                      null,
+                      true
+                    )}
                     thousandSeparator=" "
                     displayType="text"
                   />
