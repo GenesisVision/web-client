@@ -5,6 +5,7 @@ import { calculateTotalPages } from "shared/components/table//helpers/paging.hel
 
 import { composeRequestFilters } from "../services/table.service";
 import Table from "./table";
+import { SORTING } from "shared/constants/constants";
 
 const defaultData = { items: null, total: 0 };
 
@@ -71,7 +72,26 @@ class TableModule extends PureComponent {
           currentPage: 1
         }
       }),
-      this.updateItems
+      () => {
+        if (this.props.selfSorting) {
+          const direction = ~sorting.indexOf(SORTING.ASC)
+            ? SORTING.ASC
+            : SORTING.DESC;
+          const column = sorting.slice(0, -direction.length);
+          this.setState({
+            data: {
+              ...this.state.data,
+              items: this.state.data.items.sort((a, b) => {
+                if (a[column] > b[column])
+                  return direction === SORTING.ASC ? 1 : -1;
+                else if (a[column] < b[column])
+                  return direction === SORTING.ASC ? -1 : 1;
+                else return 0;
+              })
+            }
+          });
+        } else this.updateItems();
+      }
     );
   };
 
