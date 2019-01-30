@@ -97,13 +97,10 @@ class ProgramOpenPositions extends Component {
                   prefix="sign"
                 >
                   <NumberFormat
-                    value={formatValue(
-                      position.profitPercentCurrent,
-                      null,
-                      true
-                    )}
+                    value={formatValue(position.profitPercentCurrent, 2, true)}
                     thousandSeparator=" "
                     displayType="text"
+                    suffix={"%"}
                   />
                 </Profitability>
               </TableCell>
