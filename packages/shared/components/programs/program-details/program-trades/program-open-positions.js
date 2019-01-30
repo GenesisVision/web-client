@@ -15,7 +15,7 @@ import { formatValue } from "shared/utils/formatter";
 
 const PAGING = {
   currentPage: 1,
-  itemsOnPage: 20,
+  itemsOnPage: 2000,
   totalPages: 0
 };
 
