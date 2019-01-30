@@ -5,7 +5,7 @@ import {
   IAddNotificationSettings
 } from "../actions/notification-settings.actions";
 
-const initialState = {
+const initialState: NotificationSettingList = {
   settingsGeneral: [],
   settingsProgram: [],
   settingsManager: [],
@@ -14,8 +14,8 @@ const initialState = {
 
 const notificationSettingsReducer = (
   state: NotificationSettingList = initialState,
-  action: IAddNotificationSettings
-) => {
+  action
+): NotificationSettingList => {
   switch (action.type) {
     case ADD_NOTIFICATION_SETTINGS:
       return { ...action.settings };

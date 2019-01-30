@@ -9,14 +9,7 @@ export const ADD_NOTIFICATION_SETTINGS = "ADD_NOTIFICATION_SETTINGS";
 export const REMOVE_NOTIFICATION_SETTING = "REMOVE_NOTIFICATION_SETTING";
 export const ADD_NOTIFICATION_SETTING = "ADD_NOTIFICATION_SETTING";
 
-export interface IAddNotificationSettings {
-  type: string;
-  settings: NotificationSettingList;
-}
-
-export const addNotificationSettings = (
-  settings: NotificationSettingList
-): IAddNotificationSettings => {
+export const addNotificationSettings = (settings: NotificationSettingList) => {
   return { type: ADD_NOTIFICATION_SETTINGS, settings };
 };
 
