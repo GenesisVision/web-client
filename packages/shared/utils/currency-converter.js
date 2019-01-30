@@ -24,5 +24,7 @@ export const CURRENCY_FRACTIONS = currency => {
 };
 
 export const checkCurrencyValue = (value, currency) => {
-  return value < Math.pow(10, -CURRENCY_FRACTIONS(currency)) ? 0 : value;
+  return Math.abs(value) < Math.pow(10, -CURRENCY_FRACTIONS(currency))
+    ? 0
+    : value;
 };
