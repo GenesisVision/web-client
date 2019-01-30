@@ -28,7 +28,6 @@ export const getWalletIcon = (currency: string): string => {
 };
 
 interface IWalletProps {
-  currency: string;
   info?: WalletData;
   isPending: boolean;
   t(str: string): string;
@@ -57,10 +56,13 @@ class WalletCurrency extends React.Component<IWalletProps> {
   };
 
   render() {
-    const { currency, info, isPending } = this.props;
+    const { info, isPending } = this.props;
     if (!info && isPending) return <WalletBalanceLoader />;
     if (!info) return <NotFoundPage />;
-    const { available } = info;
+    const currentWallet = {
+      currency: info.currency,
+      available: info.available
+    };
     return (
       <Page title={info.title}>
         <div className="wallet-balance">
@@ -80,11 +82,11 @@ class WalletCurrency extends React.Component<IWalletProps> {
           />
         </div>
         <WalletContainer
-          currency={currency}
+          currency={info.currency}
           eventTypeFilterValues={INVESTOR_EVENT_TYPE_FILTER_VALUES}
         />
         <WalletAddFundsPopup
-          currentWallet={{ currency, available }}
+          currentWallet={currentWallet}
           open={this.state.isOpenAddFundsPopup}
           onClose={this.handleCloseAddFundsPopup}
         />
@@ -108,8 +110,7 @@ const mapStateToProps = (state: IState, ownProps) => {
     : null;
   return {
     info,
-    isPending,
-    currency: currency.toUpperCase()
+    isPending
   };
 };
 
