@@ -56,9 +56,6 @@ class ProgramDetailsHistorySection extends PureComponent {
     return (
       <Surface className="details-history">
         <div className="details-history__header">
-          {/*<h3 className="details-history__heading">
-            {t("program-details-page.history.heading")}
-          </h3>*/}
           <div className="details-history__tabs">
             {(isAuthenticated && isInvested && (
               <GVTabs value={tab} onChange={this.handleTabChange}>
@@ -115,7 +112,6 @@ class ProgramDetailsHistorySection extends PureComponent {
             <ProgramOpenPositions
               fetchOpenPositions={fetchOpenPositions}
               programId={programId}
-              // currency={currency}
             />
           )}
         </div>
