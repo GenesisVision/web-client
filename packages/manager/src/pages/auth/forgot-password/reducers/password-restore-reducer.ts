@@ -10,5 +10,4 @@ export type PasswordRestoreState = IApiReducerFactory<ResetPasswordViewModel>;
 const passwordRestoreReducer = apiReducerFactory<ResetPasswordViewModel>({
   apiType: PASSWORD_RESTORE
 });
-
 export default passwordRestoreReducer;

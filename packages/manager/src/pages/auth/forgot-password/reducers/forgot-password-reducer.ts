@@ -10,5 +10,4 @@ export type ForgotPasswordState = IApiReducerFactory<ForgotPasswordViewModel>;
 const forgotPasswordReducer = apiReducerFactory<ForgotPasswordViewModel>({
   apiType: FORGOT_PASSWORD
 });
-
 export default forgotPasswordReducer;
