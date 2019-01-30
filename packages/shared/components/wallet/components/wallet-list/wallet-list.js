@@ -8,19 +8,16 @@ import { Link } from "react-router-dom";
 import Chip from "shared/components/chip/chip";
 import Surface from "shared/components/surface/surface";
 import TableCell from "shared/components/table/components/table-cell";
-import TableContainer from "shared/components/table/components/table-container";
 import TableModule from "shared/components/table/components/table-module";
 import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { getWalletIcon } from "shared/components/wallet/components/wallet-currency";
 import { composeWalletCurrencytUrl } from "shared/components/wallet/wallet.routes";
 import ArrowIcon from "shared/media/arrow-up.svg";
-import BTCIcon from "shared/media/currency/BTC.svg";
 import EmptyTransactionsIcon from "shared/media/empty-wallet.svg";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
 import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
 
-import { fetchWalletTransactions } from "../../services/wallet.services";
 import { walletTableTransactionsSelector } from "../wallet-transactions/wallet-transactions.selector";
 import { WALLET_LIST_COLUMNS } from "./wallet-list.constants";
 
@@ -48,7 +45,11 @@ class WalletList extends Component {
   };
 
   handleOpenAddFundsPopup = wallet => {
-    this.setState({ isOpenAddFundsPopup: true, currentWallet: wallet });
+    const { currency, available } = wallet;
+    this.setState({
+      isOpenAddFundsPopup: true,
+      currentWallet: { currency, available }
+    });
   };
 
   handleCloseAddFundsPopup = () => {

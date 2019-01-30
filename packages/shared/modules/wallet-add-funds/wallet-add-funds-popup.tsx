@@ -1,10 +1,16 @@
-import PropTypes from "prop-types";
-import React, { Component } from "react";
+import * as React from "react";
 import Dialog from "shared/components/dialog/dialog";
 
 import WalletAddFundsContainer from "./components/wallet-add-funds-container";
+import { CurrentWallet } from "./components/wallet-add-funds-form";
 
-class WalletAddFundsPopup extends Component {
+interface IWalletAddFundsPopupProps {
+  currentWallet: CurrentWallet;
+  open: boolean;
+  onClose(): void;
+}
+
+class WalletAddFundsPopup extends React.Component<IWalletAddFundsPopupProps> {
   handleClose = () => {
     this.props.onClose();
   };
@@ -16,10 +22,5 @@ class WalletAddFundsPopup extends Component {
     );
   }
 }
-
-WalletAddFundsPopup.propTypes = {
-  open: PropTypes.bool,
-  onClose: PropTypes.func.isRequired
-};
 
 export default WalletAddFundsPopup;

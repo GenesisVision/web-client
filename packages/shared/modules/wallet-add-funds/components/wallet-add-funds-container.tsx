@@ -1,15 +1,34 @@
 import "./wallet-add-funds-form.scss";
 
-import React, { Component } from "react";
+import { WalletsInfo } from "gv-api-web";
+import * as React from "react";
 import { connect } from "react-redux";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
+import { IDispatchable } from "shared/utils/types";
 
-import WalletAddFundsForm from "./wallet-add-funds-form";
+import WalletAddFundsForm, { CurrentWallet } from "./wallet-add-funds-form";
 
-class WalletAddFundsContainer extends Component {
-  state = {
+interface IWalletAddFundsContainerState {
+  isPending: boolean;
+  data?: WalletsInfo;
+}
+
+interface IWalletAddFundsContainerProps {
+  currentWallet: CurrentWallet;
+}
+
+interface IWalletAddFundsContainerDispatchProps {
+  notifySuccess(x: string): IDispatchable<void>;
+  notifyError(x: string): IDispatchable<void>;
+}
+
+class WalletAddFundsContainer extends React.Component<
+  IWalletAddFundsContainerProps & IWalletAddFundsContainerDispatchProps,
+  IWalletAddFundsContainerState
+> {
+  state: IWalletAddFundsContainerState = {
     isPending: false,
     data: null
   };

@@ -1,16 +1,30 @@
 import copy from "copy-to-clipboard";
+import { WalletInfo } from "gv-api-web";
 import { GVButton } from "gv-react-components";
-import PropTypes from "prop-types";
-import React, { Component } from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { TranslationFunction, translate } from "react-i18next";
 import { compose } from "redux";
 import GVqr from "shared/components/gv-qr/gv-qr";
 import CopyIcon from "shared/components/icon/copy-icon";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { getWalletIcon } from "shared/components/wallet/components/wallet-currency";
 import ArrowIcon from "shared/media/arrow-down.svg";
+import { IDispatchable } from "shared/utils/types";
 
-class WalletAddFundsForm extends Component {
+export interface CurrentWallet {
+  currency: string;
+  available: number;
+}
+
+export interface IWalletAddFundsFormProps {
+  wallets: WalletInfo[];
+  currentWallet: CurrentWallet;
+  notifySuccess(x: string): IDispatchable<void>;
+  notifyError(x: string): IDispatchable<void>;
+  t: TranslationFunction;
+}
+
+class WalletAddFundsForm extends React.Component<IWalletAddFundsFormProps> {
   render() {
     const {
       t,
@@ -89,18 +103,5 @@ class WalletAddFundsForm extends Component {
     );
   }
 }
-
-WalletAddFundsForm.propTypes = {
-  wallets: PropTypes.arrayOf(
-    PropTypes.shape({
-      address: PropTypes.string,
-      currency: PropTypes.string,
-      rateToGVT: PropTypes.number,
-      description: PropTypes.string,
-      logo: PropTypes.string
-    })
-  ),
-  t: PropTypes.func
-};
 
 export default compose(translate())(WalletAddFundsForm);

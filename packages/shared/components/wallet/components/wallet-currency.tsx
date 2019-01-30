@@ -1,19 +1,18 @@
 import { WalletData } from "gv-api-web";
 import { IState } from "manager-web-portal/src/reducers";
 import * as React from "react";
-import { Fragment } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import NotFoundPage from "shared/components/not-found/not-found.routes";
+import Page from "shared/components/page/page";
+import { INVESTOR_EVENT_TYPE_FILTER_VALUES } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
 import BTCIcon from "shared/media/currency/BTC.svg";
 import ETHIcon from "shared/media/currency/ETH.svg";
 import GVTIcon from "shared/media/currency/GVT.svg";
+import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
+import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
 
-import WalletAddFundsPopup from "../../../modules/wallet-add-funds/wallet-add-funds-popup";
-import WalletWithdrawPopup from "../../../modules/wallet-withdraw/wallet-withdraw-popup";
-import NotFoundPage from "../../not-found/not-found.routes";
-import Page from "../../page/page";
-import { INVESTOR_EVENT_TYPE_FILTER_VALUES } from "../../table/components/filtering/event-type-filter/event-type-filter.constants";
 import WalletBalanceElements from "./wallet-balance/wallet-balance-elements";
 import WalletBalanceLoader from "./wallet-balance/wallet-balance-loader";
 import WalletContainer from "./wallet-container/wallet-container";
@@ -58,9 +57,10 @@ class WalletCurrency extends React.Component<IWalletProps> {
   };
 
   render() {
-    const { info, isPending } = this.props;
+    const { currency, info, isPending } = this.props;
     if (!info && isPending) return <WalletBalanceLoader />;
     if (!info) return <NotFoundPage />;
+    const { available } = info;
     return (
       <Page title={info.title}>
         <div className="wallet-balance">
@@ -80,11 +80,11 @@ class WalletCurrency extends React.Component<IWalletProps> {
           />
         </div>
         <WalletContainer
-          currency={this.props.currency}
+          currency={currency}
           eventTypeFilterValues={INVESTOR_EVENT_TYPE_FILTER_VALUES}
         />
         <WalletAddFundsPopup
-          currentWallet={info}
+          currentWallet={{ currency, available }}
           open={this.state.isOpenAddFundsPopup}
           onClose={this.handleCloseAddFundsPopup}
         />
