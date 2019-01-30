@@ -10,7 +10,6 @@ import {
   clearInvestSubmit
 } from "./actions/program-deposit.actions";
 import {
-  getDepositFundInfoById,
   getDepositProgramInfoById,
   investServiceInvestById
 } from "./services/program-deposit.services";
@@ -69,7 +68,6 @@ ProgramDepositContainer.propTypes = {
   onInvest: PropTypes.func,
   service: PropTypes.shape({
     getDepositProgramInfoById: PropTypes.func,
-    getDepositFundInfoById: PropTypes.func,
     clearDepositProgramInfo: PropTypes.func,
     investServiceInvestById: PropTypes.func,
     clearInvestSubmit: PropTypes.func
@@ -85,7 +83,6 @@ const mapDispatchToProps = dispatch => ({
   service: bindActionCreators(
     {
       getDepositProgramInfoById,
-      getDepositFundInfoById,
       clearDepositProgramInfo,
       investServiceInvestById,
       clearInvestSubmit

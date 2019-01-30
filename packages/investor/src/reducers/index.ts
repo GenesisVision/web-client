@@ -1,10 +1,14 @@
 import { NotificationSettingList } from "gv-api-web";
-import fundDepositReducer from "modules/fund-deposit/reducer/fund-deposit.reducer";
+import fundDepositReducer, {
+  IFundDepositReducer
+} from "modules/fund-deposit/reducer/fund-deposit.reducer";
 import fundWithdrawReducer from "modules/fund-withdraw/reducer/fund-withdraw.reducer";
 import headerReducer, {
   IHeaderReducer
 } from "modules/header/reducer/header-reducer";
-import programDepositReducer from "modules/program-deposit/reducer/program-deposit.reducer";
+import programDepositReducer, {
+  IProgramsDepositReducer
+} from "modules/program-deposit/reducer/program-deposit.reducer";
 import programWithdrawReducer from "modules/program-withdraw/reducer/program-withdraw.reducer";
 import notificationsReducer from "pages/app/components/notifications/reducers/notifications.reducers";
 import passwordRestoreReducer, {
@@ -59,6 +63,8 @@ export interface IState {
   platformData: IPlatformReducer;
   programsData: IProgramsReducer;
   programsRating: IProgramsRatingReducer;
+  programDeposit: IProgramsDepositReducer;
+  fundDeposit: IFundDepositReducer;
   signUpData: ISignUpReducer;
   loginData: ILoginReducer;
   fundsData: IFundsTableReducer;
