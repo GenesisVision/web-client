@@ -251,7 +251,7 @@
     "programs-header": {
       "position": "Pos.",
       "title": "Name",
-      "balance": "Balance",
+      "equity": "Equity",
       "currency": "Curr.",
       "investors": "Investors",
       "available-to-invest": "Av. to invest",
