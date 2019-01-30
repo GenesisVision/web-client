@@ -1,9 +1,6 @@
 import { NotificationSettingList } from "gv-api-web";
 
-import {
-  ADD_NOTIFICATION_SETTINGS,
-  IAddNotificationSettings
-} from "../actions/notification-settings.actions";
+import { ADD_NOTIFICATION_SETTINGS } from "../actions/notification-settings.actions";
 
 const initialState: NotificationSettingList = {
   settingsGeneral: [],

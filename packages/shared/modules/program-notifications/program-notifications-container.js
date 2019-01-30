@@ -23,7 +23,7 @@ ProgramNotificationsContainer.propTypes = {
 };
 
 const mapStateToProps = (state, props) => ({
-  program: state.programNotifications[props.id]
+  program: state.programNotifications.data[props.id]
 });
 
 const mapDispatchToProps = dispatch => ({
