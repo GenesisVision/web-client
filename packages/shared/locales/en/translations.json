@@ -414,7 +414,7 @@
       "heading": "Statistics",
       "current": "Current",
       "for": "For",
-      "balance": "Balance",
+      "equity": "Equity",
       "investors": "Investors",
       "trades": "Trades",
       "success-trades": "Success trades",
@@ -464,7 +464,7 @@
       "heading": "Chart",
       "tabs": {
         "profit": "Profit",
-        "balance": "Balance"
+        "equity": "Equity"
       }
     }
   },
