@@ -1,13 +1,21 @@
 import { composeClearDataActionType } from "shared/actions/clear-data.factory";
 import { EMAIL_PENDING } from "shared/actions/email-pending-actions";
+import { ActionType } from "shared/utils/types";
 
-const initialState = {
+export interface IEmailPendingStore {
+  readonly email: string;
+}
+
+const initialState: IEmailPendingStore = {
   email: ""
-};
+} as IEmailPendingStore;
 
-const clearDataActionType = composeClearDataActionType(EMAIL_PENDING);
+const clearDataActionType: string = composeClearDataActionType(EMAIL_PENDING);
 
-const emailPendingReducer = (state = initialState, action) => {
+const emailPendingReducer = (
+  state: IEmailPendingStore = initialState,
+  action: ActionType
+): IEmailPendingStore => {
   switch (action.type) {
     case EMAIL_PENDING:
       return {

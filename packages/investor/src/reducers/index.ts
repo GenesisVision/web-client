@@ -2,14 +2,12 @@ import { NotificationSettingList } from "gv-api-web";
 import fundDepositReducer, {
   IFundDepositReducer
 } from "modules/fund-deposit/reducer/fund-deposit.reducer";
-import fundWithdrawReducer from "modules/fund-withdraw/reducer/fund-withdraw.reducer";
 import headerReducer, {
   IHeaderReducer
 } from "modules/header/reducer/header-reducer";
 import programDepositReducer, {
   IProgramsDepositReducer
 } from "modules/program-deposit/reducer/program-deposit.reducer";
-import programWithdrawReducer from "modules/program-withdraw/reducer/program-withdraw.reducer";
 import notificationsReducer from "pages/app/components/notifications/reducers/notifications.reducers";
 import passwordRestoreReducer, {
   IPasswordRestoreReducers
@@ -48,7 +46,9 @@ import programsReducer, {
 import accountSettingsReducer from "shared/reducers/account-settings";
 import authReducer from "shared/reducers/auth-reducer";
 import { IAuthReducer } from "shared/reducers/auth-reducer";
-import emailPendingReducer from "shared/reducers/email-pending-reducer";
+import emailPendingReducer, {
+  IEmailPendingStore
+} from "shared/reducers/email-pending-reducer";
 import platformReducer, {
   IPlatformReducer
 } from "shared/reducers/platform-reducer";
@@ -64,10 +64,11 @@ export interface IState {
   programsData: IProgramsReducer;
   programsRating: IProgramsRatingReducer;
   programDeposit: IProgramsDepositReducer;
+  fundsData: IFundsTableReducer;
   fundDeposit: IFundDepositReducer;
+  emailPending: IEmailPendingStore;
   signUpData: ISignUpReducer;
   loginData: ILoginReducer;
-  fundsData: IFundsTableReducer;
   authData: IAuthReducer;
   routing: RouterState;
   passwordRestoreData: IPasswordRestoreReducers;
@@ -77,7 +78,7 @@ export interface IState {
   wallet: IWalletReducer;
 }
 
-export default combineReducers({
+const rootReducer = combineReducers({
   routing: routerReducer,
   loadingBar: loadingBarReducer,
   platformData: platformReducer,
@@ -93,8 +94,6 @@ export default combineReducers({
   dashboard: dashboardReducer,
   programDeposit: programDepositReducer,
   fundDeposit: fundDepositReducer,
-  programWithdraw: programWithdrawReducer,
-  fundWithdraw: fundWithdrawReducer,
   emailPending: emailPendingReducer,
   notifications: notificationsReducer,
   notificationSettings: notificationSettingsReducer,
@@ -105,3 +104,5 @@ export default combineReducers({
   accountSettings: accountSettingsReducer,
   ui: uiReducer
 });
+
+export default rootReducer;
