@@ -1,5 +1,6 @@
 import { HOME_ROUTE } from "pages/app/app.routes";
 import { composeClearDataActionType } from "shared/actions/clear-data.factory";
+import { DeepReadonly } from "utility-types";
 
 import { LOGIN_TWO_FACTOR } from "../actions/login.actions";
 
@@ -11,11 +12,11 @@ export const initialState = {
 
 const clearDataActionType = composeClearDataActionType(LOGIN_TWO_FACTOR);
 
-export interface ITwoFactorReducer {
+export type ITwoFactorReducer = DeepReadonly<{
   email: string;
   password: string;
   from: string | object;
-}
+}>;
 
 const twoFactorReducer = (
   state: ITwoFactorReducer = initialState,
