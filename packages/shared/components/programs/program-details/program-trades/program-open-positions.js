@@ -29,6 +29,7 @@ class ProgramOpenPositions extends Component {
     const { t } = this.props;
     return (
       <TableModule
+        loader={false}
         getItems={this.getOpenPositions}
         paging={PAGING}
         columns={PROGRAM_OPEN_POSITIONS_COLUMNS}
@@ -97,13 +98,10 @@ class ProgramOpenPositions extends Component {
                   prefix="sign"
                 >
                   <NumberFormat
-                    value={formatValue(
-                      position.profitPercentCurrent,
-                      null,
-                      true
-                    )}
+                    value={formatValue(position.profitPercentCurrent, 2, true)}
                     thousandSeparator=" "
                     displayType="text"
+                    suffix={"%"}
                   />
                 </Profitability>
               </TableCell>

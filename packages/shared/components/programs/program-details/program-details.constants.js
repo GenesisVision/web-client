@@ -61,8 +61,8 @@ export const PROGRAM_OPEN_POSITIONS_COLUMNS = [
     sortingName: "ByProfit"
   },
   {
-    name: "profitPercentCurrent",
-    sortingName: "ByProfitPercentCurrent"
+    name: "profitPercent",
+    sortingName: "ByProfitPercent"
   }
 ];
 
