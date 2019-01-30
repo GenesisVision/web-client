@@ -45,6 +45,7 @@ class ProgramDetailsHistorySection extends PureComponent {
     const {
       t,
       programId,
+      programCurrency,
       currency,
       isAuthenticated,
       isInvested,
@@ -98,6 +99,7 @@ class ProgramDetailsHistorySection extends PureComponent {
             <ProgramOpenPositions
               fetchOpenPositions={fetchOpenPositions}
               programId={programId}
+              currency={programCurrency}
             />
           )}
         </div>

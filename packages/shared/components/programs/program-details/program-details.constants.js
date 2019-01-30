@@ -59,11 +59,11 @@ export const PROGRAM_OPEN_POSITIONS_COLUMNS = [
   {
     name: "profit",
     sortingName: "ByProfit"
-  },
-  {
+  }
+  /*{
     name: "profitPercent",
     sortingName: "ByProfitPercent"
-  }
+  }*/
 ];
 
 export const PROGRAM_TRADES_DEFAULT_FILTERS = [
