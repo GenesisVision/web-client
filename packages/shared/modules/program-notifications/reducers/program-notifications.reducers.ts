@@ -1,23 +1,24 @@
 import { ProgramNotificationSettingList } from "gv-api-web";
+import { DeepReadonly } from "utility-types";
 
 import {
   ADD_ERROR_MESSAGE,
   ADD_PROGRAM_NOTIFICATIONS
 } from "../actions/program-notifications.actions";
 
-export interface IProgramNotificationsStore {
+export type ProgramNotificationsState = DeepReadonly<{
   data: { [name: string]: ProgramNotificationSettingList };
   errorMessage?: string;
-}
+}>;
 
-const initialState: IProgramNotificationsStore = {
+const initialState: ProgramNotificationsState = {
   data: {}
 };
 
 const programNotificationsReducer = (
-  state: IProgramNotificationsStore = initialState,
-  action
-): IProgramNotificationsStore => {
+  state: ProgramNotificationsState = initialState,
+  action: any
+): ProgramNotificationsState => {
   switch (action.type) {
     case ADD_PROGRAM_NOTIFICATIONS:
       return {

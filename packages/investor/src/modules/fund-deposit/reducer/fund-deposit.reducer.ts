@@ -15,12 +15,12 @@ const investFundSubmitReducer = apiReducerFactory<any>({
   apiType: INVEST_TO_FUND_BY_ID
 });
 
-export interface IFundDepositReducer {
-  info: IApiReducerFactory<FundInvestInfo>;
-  submit: IApiReducerFactory<any>;
+export interface FundDepositState {
+  readonly info: IApiReducerFactory<FundInvestInfo>;
+  readonly submit: IApiReducerFactory<any>;
 }
 
-const fundDepositReducer = combineReducers<IFundDepositReducer>({
+const fundDepositReducer = combineReducers<FundDepositState>({
   info: depositInfo,
   submit: investFundSubmitReducer
 });

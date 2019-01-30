@@ -5,8 +5,7 @@ import apiReducerFactory, {
 
 import { DASHBOARD_IN_REQUESTS } from "../actions/dashboard.actions";
 
-export interface IDashboardInRequestsReducer
-  extends IApiReducerFactory<DashboardChartValue> {}
+export type DashboardInRequestsState = IApiReducerFactory<DashboardChartValue>;
 
 const dashboardInRequestsReducer = apiReducerFactory<DashboardChartValue>({
   apiType: DASHBOARD_IN_REQUESTS

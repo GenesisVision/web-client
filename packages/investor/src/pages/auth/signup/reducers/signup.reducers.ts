@@ -4,9 +4,9 @@ import apiReducerFactory, {
 
 import { SIGN_UP } from "../actions/signup.actions";
 
-export interface ISignUpReducer extends IApiReducerFactory<any> {}
+export type SignUpState = IApiReducerFactory<any>;
 
-const signUpReducer = apiReducerFactory({
+const signUpReducer = apiReducerFactory<any>({
   apiType: SIGN_UP
 });
 

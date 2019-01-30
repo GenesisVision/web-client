@@ -1,5 +1,8 @@
 {
   "name": "shared",
   "version": "1.0.0",
-  "dependencies": {}
+  "dependencies": {
+    "@types/uuid": "^3.4.4",
+    "@typescript-eslint/parser": "^1.1.1"
+  }
 }

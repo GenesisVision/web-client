@@ -5,12 +5,12 @@ export const REQUEST_SUFFIX = "REQUEST";
 export const SUCCESS_SUFFIX = "SUCCESS";
 export const FAILURE_SUFFIX = "FAILURE";
 
-export interface IApiReducerFactory<T> {
-  isPending: boolean;
-  errorMessage: string;
-  code: null;
-  data?: T;
-}
+export type IApiReducerFactory<T> = {
+  readonly isPending: boolean;
+  readonly errorMessage: string;
+  readonly code: null;
+  readonly data?: T;
+};
 
 const initialState: IApiReducerFactory<any> = {
   isPending: false,

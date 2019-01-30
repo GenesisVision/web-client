@@ -3,16 +3,17 @@ import { combineReducers } from "redux";
 import apiReducerFactory, {
   IApiReducerFactory
 } from "shared/reducers/api-reducer/api-reducer";
+import { DeepReadonly } from "utility-types";
 
 import { LOGIN } from "../actions/login.actions";
 import twoFactorReducer, { ITwoFactorReducer } from "./two-factor.reducer";
 
-export interface ILoginReducer {
+export type LoginState = DeepReadonly<{
   login: IApiReducerFactory<LoginViewModel>;
   twoFactor: ITwoFactorReducer;
-}
+}>;
 
-export default combineReducers<ILoginReducer>({
+export default combineReducers<LoginState>({
   login: apiReducerFactory({ apiType: LOGIN }),
   twoFactor: twoFactorReducer
 });

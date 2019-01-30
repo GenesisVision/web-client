@@ -1,26 +1,27 @@
 import { combineReducers } from "redux";
+import { DeepReadonly } from "utility-types";
 
 import dashboardEventsReducer, {
-  IDashboardEventsReducer
+  DashboardEventsState
 } from "./dashboard-events.reducer";
 import dashboardFundsReducer from "./dashboard-funds.reducer";
 import dashboardInRequestsReducer, {
-  IDashboardInRequestsReducer
+  DashboardInRequestsState
 } from "./dashboard-in-requests.reducer";
 import dashboardPortfolioChartReducer, {
-  IDashboardPortfolioChartReducer
+  DashboardPortfolioChartState
 } from "./dashboard-portfolio-chart.reducer";
 import dashboardProgramsReducer from "./dashboard-programs.reducer";
 
-export interface IDashboard {
+export type DashboardState = DeepReadonly<{
   programs: any;
   funds: any;
-  portfolioChartData: IDashboardPortfolioChartReducer;
-  inRequestsData: IDashboardInRequestsReducer;
-  eventsData: IDashboardEventsReducer;
-}
+  portfolioChartData: DashboardPortfolioChartState;
+  inRequestsData: DashboardInRequestsState;
+  eventsData: DashboardEventsState;
+}>;
 
-const dashboardReducer = combineReducers({
+const dashboardReducer = combineReducers<DashboardState>({
   programs: dashboardProgramsReducer,
   funds: dashboardFundsReducer,
   portfolioChartData: dashboardPortfolioChartReducer,

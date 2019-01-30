@@ -48,6 +48,7 @@
     "redux-thunk": "^2.2.0",
     "reselect": "^4.0.0",
     "typescript": "^3.2.2",
+    "utility-types": "^3.4.1",
     "uuid": "^3.2.1",
     "yup": "^0.26.6"
   },

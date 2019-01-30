@@ -16,12 +16,12 @@ const investSubmitReducer = apiReducerFactory<any>({
   apiType: INVEST_TO_PROGRAM_BY_ID
 });
 
-export interface IProgramsDepositReducer {
-  info: IApiReducerFactory<ProgramInvestInfo>;
-  submit: IApiReducerFactory<any>;
-}
+export type ProgramsDepositState = {
+  readonly info: IApiReducerFactory<ProgramInvestInfo>;
+  readonly submit: IApiReducerFactory<any>;
+};
 
-export default combineReducers<IProgramsDepositReducer>({
+export default combineReducers<ProgramsDepositState>({
   info: programDepositReducer,
   submit: investSubmitReducer
 });

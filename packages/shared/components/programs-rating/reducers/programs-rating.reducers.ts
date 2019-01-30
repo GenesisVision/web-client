@@ -3,6 +3,7 @@ import { combineReducers } from "redux";
 import apiReducerFactory, {
   IApiReducerFactory
 } from "shared/reducers/api-reducer/api-reducer";
+import { DeepReadonly } from "utility-types";
 
 import {
   LEVELUP_SUMMARY,
@@ -10,23 +11,23 @@ import {
   SELF_PROGRAMS_RATING
 } from "../actions/programs-rating.actions";
 
-const allProgramsRatingReducer = apiReducerFactory({
+const allProgramsRatingReducer = apiReducerFactory<ProgramsList>({
   apiType: PROGRAMS_RATING
 });
-const selfProgramsRatingReducer = apiReducerFactory({
+const selfProgramsRatingReducer = apiReducerFactory<ProgramsList>({
   apiType: SELF_PROGRAMS_RATING
 });
-const levelupSummaryReducer = apiReducerFactory({
+const levelupSummaryReducer = apiReducerFactory<LevelUpSummary>({
   apiType: LEVELUP_SUMMARY
 });
 
-export interface IProgramsRatingReducer {
-  programs: IApiReducerFactory<ProgramsList>;
-  selfPrograms: IApiReducerFactory<ProgramsList>;
-  levelupSummary: IApiReducerFactory<LevelUpSummary>;
-}
+export type ProgramsRatingState = DeepReadonly<{
+  readonly programs: IApiReducerFactory<ProgramsList>;
+  readonly selfPrograms: IApiReducerFactory<ProgramsList>;
+  readonly levelupSummary: IApiReducerFactory<LevelUpSummary>;
+}>;
 
-const programsRatingReducer = combineReducers<IProgramsRatingReducer>({
+const programsRatingReducer = combineReducers<ProgramsRatingState>({
   programs: allProgramsRatingReducer,
   selfPrograms: selfProgramsRatingReducer,
   levelupSummary: levelupSummaryReducer

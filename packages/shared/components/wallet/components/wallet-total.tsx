@@ -1,5 +1,5 @@
 import { WalletData, WalletsGrandTotal } from "gv-api-web";
-import { IState } from "investor-web-portal/src/reducers";
+import { RootState } from "investor-web-portal/src/reducers";
 import * as React from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
@@ -33,7 +33,7 @@ class WalletTotal extends React.Component<IWalletProps, any> {
   }
 }
 
-const mapStateToProps = (state: IState) => ({
+const mapStateToProps = (state: RootState) => ({
   info: state.wallet.info.data ? state.wallet.info.data.grandTotal : null,
   wallets: state.wallet.info.data ? state.wallet.info.data.wallets : []
 });

@@ -52,6 +52,7 @@
     "redux-thunk": "^2.2.0",
     "reselect": "^3.0.1",
     "typescript": "^3.2.2",
+    "utility-types": "^3.4.1",
     "yup": "^0.26.6"
   },
   "devDependencies": {

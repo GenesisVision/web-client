@@ -1,8 +1,11 @@
 import { NotificationSettingList } from "gv-api-web";
+import { DeepReadonly } from "utility-types";
 
 import { ADD_NOTIFICATION_SETTINGS } from "../actions/notification-settings.actions";
 
-const initialState: NotificationSettingList = {
+export type NotificationSettingsState = DeepReadonly<NotificationSettingList>;
+
+const initialState: NotificationSettingsState = {
   settingsGeneral: [],
   settingsProgram: [],
   settingsManager: [],
@@ -10,9 +13,9 @@ const initialState: NotificationSettingList = {
 };
 
 const notificationSettingsReducer = (
-  state: NotificationSettingList = initialState,
-  action
-): NotificationSettingList => {
+  state: NotificationSettingsState = initialState,
+  action: any
+): NotificationSettingsState => {
   switch (action.type) {
     case ADD_NOTIFICATION_SETTINGS:
       return { ...action.settings };

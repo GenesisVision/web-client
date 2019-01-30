@@ -5,8 +5,7 @@ import apiReducerFactory, {
 
 import { PASSWORD_RESTORE } from "../actions/forgot-password.actions";
 
-export interface IPasswordRestoreReducer
-  extends IApiReducerFactory<ResetPasswordViewModel> {}
+export type IPasswordRestoreState = IApiReducerFactory<ResetPasswordViewModel>;
 
 const passwordRestoreReducer = apiReducerFactory<ResetPasswordViewModel>({
   apiType: PASSWORD_RESTORE

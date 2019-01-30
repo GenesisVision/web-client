@@ -4,11 +4,11 @@ import { PROFILE_HEADER } from "shared/components/header/header.constants";
 import apiReducerFactory from "shared/reducers/api-reducer/api-reducer";
 import { IApiReducerFactory } from "shared/reducers/api-reducer/api-reducer";
 
-export interface IHeaderReducer {
-  info: IApiReducerFactory<ProfileHeaderViewModel>;
-}
+export type HeaderState = {
+  readonly info: IApiReducerFactory<ProfileHeaderViewModel>;
+};
 
-const headerReducer = combineReducers<IHeaderReducer>({
+const headerReducer = combineReducers<HeaderState>({
   info: apiReducerFactory<ProfileHeaderViewModel>({
     apiType: PROFILE_HEADER
   })

@@ -5,8 +5,9 @@ import apiReducerFactory, {
 
 import { DASHBOARD_PORTFOLIO_CHART } from "../actions/dashboard.actions";
 
-export interface IDashboardPortfolioChartReducer
-  extends IApiReducerFactory<DashboardChartValue> {}
+export type DashboardPortfolioChartState = IApiReducerFactory<
+  DashboardChartValue
+>;
 
 const dashboardPortfolioChartReducer = apiReducerFactory<DashboardChartValue>({
   apiType: DASHBOARD_PORTFOLIO_CHART

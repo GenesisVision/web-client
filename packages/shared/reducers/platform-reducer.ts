@@ -4,7 +4,7 @@ import apiReducerFactory, {
   IApiReducerFactory
 } from "shared/reducers/api-reducer/api-reducer";
 
-export interface IPlatformReducer extends IApiReducerFactory<PlatformInfo> {}
+export type PlatformState = IApiReducerFactory<PlatformInfo>;
 
 const platformReducer = apiReducerFactory<PlatformInfo>({
   apiType: PLATFORM_SETTINGS

@@ -1,23 +1,24 @@
 import { FundNotificationSettingList } from "gv-api-web";
+import { DeepReadonly } from "utility-types";
 
 import {
   ADD_ERROR_MESSAGE,
   ADD_FUND_NOTIFICATIONS
 } from "../actions/fund-notifications.actions";
 
-export interface IFundNotificationsState {
+export type FundNotificationsState = DeepReadonly<{
   data: { [name: string]: FundNotificationSettingList };
   errorMessage?: string;
-}
+}>;
 
 const initialState = {
   data: {}
 };
 
 const fundNotificationsReducer = (
-  state: IFundNotificationsState = initialState,
-  action
-): IFundNotificationsState => {
+  state: FundNotificationsState = initialState,
+  action: any
+): FundNotificationsState => {
   switch (action.type) {
     case ADD_FUND_NOTIFICATIONS:
       return {
