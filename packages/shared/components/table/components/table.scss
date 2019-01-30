@@ -17,7 +17,6 @@ $padding: $padding-small;
 }
 
 .table {
-  @include adaptive-padding(top, $padding-xsmall, 2);
   @include adaptive-padding(bottom, $padding-xsmall, 2);
   width: 100%;
   border-spacing: 0;
@@ -66,26 +65,22 @@ $padding: $padding-small;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    div {
-      cursor: pointer;
-      padding: 0 $view-svg-size;
-      line-height: 0;
-      .icon {
-        width: auto;
-      }
-      svg {
-        width: $view-svg-size/1.2;
-      }
-      &:last-child {
-        padding-right: 0;
-      }
+  }
+
+  &__toggle-item {
+    cursor: pointer;
+    line-height: 0;
+    padding-left: $view-svg-size * 2;
+    .icon {
+      width: auto;
+    }
+    svg {
+      width: $view-svg-size/1.2;
     }
   }
 
   &__title {
-    padding-bottom: 0;
-    justify-self: flex-start;
-    margin-right: auto;
+    padding: 0;
     line-height: 22px;
   }
 
@@ -94,20 +89,16 @@ $padding: $padding-small;
     width: 100%;
     font-size: $table-title-font-size/2;
     display: flex;
-    flex: 1 1 100%;
-    justify-content: space-between;
     flex-wrap: wrap;
-    order: 99;
 
     .filter {
-      padding: 10px 0;
-
-      &:first-child {
-        padding-left: 0;
-      }
+      @include adaptive-margin(right, $padding-xsmall);
+      padding-left: 0;
+      padding-right: 0;
 
       &:last-child {
         padding-right: 0;
+        margin-right: 0;
       }
     }
   }
@@ -230,6 +221,11 @@ $padding: $padding-small;
     &__filters {
       font-size: $td-font-size;
     }
+    &__title {
+      ~ .table__filters {
+        padding-top: 5px;
+      }
+    }
     &__body {
       font-size: $td-font-size;
     }
@@ -245,46 +241,48 @@ $padding: $padding-small;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      div {
-        &:last-child {
-          padding-right: 0;
-        }
-      }
     }
   }
   @include media-breakpoint-tablet() {
     &__filters {
       font-size: $td-font-size;
       padding-bottom: 0;
+      width: auto;
+    }
+    &__title {
+      ~ .table__filters {
+        padding-top: 0;
+        margin-left: auto;
+        justify-content: flex-end;
+      }
+    }
+    &__toggle {
+      order: 99;
     }
   }
   @media (min-width: 900px) {
     &__filters {
-      justify-content: flex-end;
-      order: 0;
-      flex-basis: 0;
       padding-top: 0;
 
       .filter {
-        margin-left: 20px;
-        padding: 5px 0;
-
         &:last-child {
           margin-right: 0;
-          padding-right: 0;
         }
       }
     }
   }
 
   @include media-breakpoint-desktop() {
-    &__toolbar {
-      justify-content: flex-end;
-    }
     &__filters {
       .sorting-filter {
         margin-right: 60px;
       }
     }
+  }
+}
+
+.table-wrapper {
+  @include media-breakpoint-landscape-phone() {
+    padding-top: $padding-xxsmall;
   }
 }

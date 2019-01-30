@@ -30,6 +30,22 @@ class TableToolbar extends Component {
     return (
       <div className="table__toolbar">
         {title && !disableTitle && <h3 className="table__title">{title}</h3>}
+        {isViewSwitchEnabled && (
+          <div className="table__toggle">
+            <div
+              className="table__toggle-item"
+              onClick={this.handleIconClick(CARDS_VIEW)}
+            >
+              <CardsIcon primary={view === CARDS_VIEW} />
+            </div>
+            <div
+              className="table__toggle-item"
+              onClick={this.handleIconClick(TABLE_VIEW)}
+            >
+              <TableIcon primary={view === TABLE_VIEW} />
+            </div>
+          </div>
+        )}
         <div className="table__filters">
           {view === CARDS_VIEW && sorting !== undefined && (
             <SortingFilter
@@ -42,16 +58,6 @@ class TableToolbar extends Component {
           {renderFilters && renderFilters(updateFilter, filtering)}
           {createButtonToolbar}
         </div>
-        {isViewSwitchEnabled && (
-          <div className="table__toggle">
-            <div onClick={this.handleIconClick(CARDS_VIEW)}>
-              <CardsIcon primary={view === CARDS_VIEW} />
-            </div>
-            <div onClick={this.handleIconClick(TABLE_VIEW)}>
-              <TableIcon primary={view === TABLE_VIEW} />
-            </div>
-          </div>
-        )}
       </div>
     );
   }

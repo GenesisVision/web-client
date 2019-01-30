@@ -65,12 +65,9 @@
   }
 
   &__button {
+    @include adaptive-padding(left, $padding-xxsmall);
     display: flex;
     align-items: center;
-    padding-left: $padding-small-mobile;
-    @include media-breakpoint-landscape-phone() {
-      padding-left: $padding-small;
-    }
 
     & .gv-btn {
       font-size: $font-size-paragraph-mobile;
