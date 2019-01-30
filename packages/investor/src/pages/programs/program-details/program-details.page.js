@@ -143,6 +143,7 @@ class ProgramDetailsPage extends PureComponent {
                 }
                 fetchTrades={fetchProgramTrades}
                 programId={this.description.id}
+                programCurrency={this.description.currency}
                 currency={currency}
                 isInvested={isInvested}
                 eventTypeFilterValues={INVESTOR_EVENT_TYPE_FILTER_VALUES}

@@ -26,7 +26,7 @@ class ProgramOpenPositions extends Component {
   };
 
   render() {
-    const { t } = this.props;
+    const { t, currency } = this.props;
     return (
       <TableModule
         loader={false}
@@ -89,10 +89,11 @@ class ProgramOpenPositions extends Component {
                     value={formatValue(position.profit, null, true)}
                     thousandSeparator=" "
                     displayType="text"
+                    suffix={` ${currency}`}
                   />
                 </Profitability>
               </TableCell>
-              <TableCell className="details-trades__cell program-details-trades__cell--profitPercentCurrent">
+              {/*<TableCell className="details-trades__cell program-details-trades__cell--profitPercentCurrent">
                 <Profitability
                   value={+formatValue(position.profitPercentCurrent)}
                   prefix="sign"
@@ -104,7 +105,7 @@ class ProgramOpenPositions extends Component {
                     suffix={"%"}
                   />
                 </Profitability>
-              </TableCell>
+              </TableCell>*/}
             </TableRow>
           );
         }}

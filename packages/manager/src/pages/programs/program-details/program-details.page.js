@@ -143,6 +143,7 @@ class ProgramDetailsPage extends PureComponent {
                 }
                 fetchHistoryCounts={fetchHistoryCounts}
                 programId={this.description.id}
+                programCurrency={this.description.currency}
                 currency={currency}
                 isInvested={isInvested}
                 eventTypeFilterValues={MANAGER_EVENT_TYPE_FILTER_VALUES}
