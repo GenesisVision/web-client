@@ -1,6 +1,9 @@
 import { NotificationSettingList } from "gv-api-web";
 
-import { ADD_NOTIFICATION_SETTINGS } from "../actions/notification-settings.actions";
+import {
+  ADD_NOTIFICATION_SETTINGS,
+  IAddNotificationSettings
+} from "../actions/notification-settings.actions";
 
 const initialState = {
   settingsGeneral: [],
@@ -11,7 +14,7 @@ const initialState = {
 
 const notificationSettingsReducer = (
   state: NotificationSettingList = initialState,
-  action
+  action: IAddNotificationSettings
 ) => {
   switch (action.type) {
     case ADD_NOTIFICATION_SETTINGS:

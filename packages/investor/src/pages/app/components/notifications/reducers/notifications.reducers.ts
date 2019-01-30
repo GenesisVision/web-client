@@ -1,3 +1,4 @@
+import { NotificationViewModel } from "gv-api-web";
 import {
   ADD_NOTIFICATIONS,
   ADD_TOTAL_NOTIFICATIONS,
@@ -8,7 +9,10 @@ import isOpenReducer from "pages/app/components/notifications/reducers/is-open.r
 import { TAKE_COUNT } from "pages/app/components/notifications/services/notifications.services";
 import { combineReducers } from "redux";
 
-const optionsReducer = (options = { take: TAKE_COUNT, skip: 0 }, action) => {
+const optionsReducer = (
+  options = { take: TAKE_COUNT, skip: 0 },
+  action: { type: string; options: { take: number; skip: number } }
+) => {
   if (action.type === SET_NOTIFICATIONS_OPTIONS) {
     return action.options;
   }
@@ -16,7 +20,10 @@ const optionsReducer = (options = { take: TAKE_COUNT, skip: 0 }, action) => {
 };
 
 // TODO: добавить нормализацию, когда буду уникальные ID
-const addNotificationsReducer = (notifications = [], action) => {
+const addNotificationsReducer = (
+  notifications: NotificationViewModel[] = [],
+  action: any
+): NotificationViewModel[] => {
   switch (action.type) {
     case ADD_NOTIFICATIONS:
       return [...notifications, ...action.notifications];
@@ -27,14 +34,21 @@ const addNotificationsReducer = (notifications = [], action) => {
   }
 };
 
-const addTotalCount = (total = 0, action) => {
+const addTotalCount = (total: number = 0, action: any): number => {
   if (action.type === ADD_TOTAL_NOTIFICATIONS) {
     return action.total;
   }
   return total;
 };
 
-const notificationsReducer = combineReducers({
+export interface INotificationsStore {
+  notifications: NotificationViewModel[];
+  isOpen: boolean;
+  total: number;
+  options: { take: number; skip: number };
+}
+
+const notificationsReducer = combineReducers<INotificationsStore>({
   notifications: addNotificationsReducer,
   isOpen: isOpenReducer,
   options: optionsReducer,
