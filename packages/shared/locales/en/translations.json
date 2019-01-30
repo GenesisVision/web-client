@@ -6,7 +6,7 @@
   },
   "alerts": {
     "clear-all": "Clear all",
-    "server-error": "Server Error. Please contact administrator."
+    "server-error": "Server error occurred. Please try again later or contact the support department."
   },
   "verification-status": {
     "verified": "Verified",
@@ -68,7 +68,8 @@
     "period-is-over": "The period is over.",
     "time-left": "Time left",
     "period-ends": "Period ends",
-    "left": "left"
+    "left": "left",
+    "program-closed": "Program is closed"
   },
   "chart-period": {
     "day-short": "1D",
@@ -161,7 +162,6 @@
     },
     "validation": {
       "amount-more-than-available": "Amount is more than available in your wallet",
-      "amount-is-required": "Amount is required",
       "address-is-required": "Address is required.",
       "two-factor-6digits": "Authentication code should contain 6 digits.",
       "two-factor-required": "Authentication code is required."
@@ -188,7 +188,6 @@
     "confirm": "Confirm",
     "validation": {
       "amount-more-than-available": "Amount is more than available in your wallet",
-      "amount-is-required": "Amount is required.",
       "amount-min-value": "Min amount is {{min}} GVT"
     },
     "program": {
@@ -217,8 +216,8 @@
     "withdraw-all": "Withdraw all invested tokens",
     "success-alert-message": "Request to withdrawal sent successfully.",
     "validation": {
-      "amount-more-than-available": "Amount is more than available for withdraw",
-      "amount-is-required": "Amount is required."
+      "amount-is-zero": "Amount must be greater than zero",
+      "amount-more-than-available": "Amount is more than available for withdraw"
     }
   },
   "withdraw-fund": {
@@ -235,8 +234,7 @@
     "submit": "Submit",
     "success-alert-message": "Request to withdrawal sent successfully.",
     "validation": {
-      "amount-more-than-available": "Amount is more than available for withdraw",
-      "amount-is-required": "Amount is required."
+      "amount-more-than-available": "Amount is more than available for withdraw"
     }
   },
   "not-found-page": {
@@ -409,7 +407,8 @@
       "edit-program": "Edit Program",
       "close-program": "Close Program",
       "close-program-notification": "Investment program will be closed after this reporting period. Current investment requests will be cancelled and new requests won’t be accepted. Profit and funds from the trading account will be deposited to GVT wallets of investors and manager according to their shares.",
-      "close-program-notification-success": "Request to close the program was sent successfully."
+      "close-program-notification-success": "Request to close the program was sent successfully.",
+      "requests-completed": "All requests completed successfully"
     },
     "statistics": {
       "heading": "Statistics",
@@ -437,7 +436,8 @@
       "heading": "History",
       "tabs": {
         "trades": "Trades",
-        "events": "Events"
+        "events": "Events",
+        "open-positions": "Open positions"
       },
       "trades": {
         "direction": "Dir",
@@ -448,6 +448,16 @@
         "price": "Price",
         "entry": "Entry",
         "date": "Date"
+      },
+      "open-positions": {
+        "date": "Date Open",
+        "symbol": "Symbol",
+        "direction": "Dir",
+        "volume": "Volume",
+        "price": "Price Open",
+        "priceCurrent": "Price",
+        "profit": "Profit",
+        "profitPercent": "Profit %"
       }
     },
     "chart": {
@@ -753,7 +763,9 @@
         "email-required": "Email is required."
       },
       "email-pending": {
-        "text-section-1": "Please check your inbox for a confirmation email. Click the link in the email to create new password.",
+        "text-section-1": "If a user with this email address exists, we sent an email with a link to reset your password.",
+        "text-section-2": "Please check your inbox for a confirmation email. Click the link in the email to create a new password.",
+        "text-section-3": "If you didn't receive the email, please check the spam folder. Or recheck the email you specified for password resetting.",
         "email-resend-button-text": "Resend email",
         "confirm-button-text": "Continue",
         "back-button-text": "Back"
@@ -834,7 +846,8 @@
         "drawdown": "D.down",
         "profit": "Profit",
         "chart": "Chart",
-        "value": "Value"
+        "value": "Value",
+        "status": "Status"
       },
       "get-started": {
         "title": "Get started",
@@ -878,7 +891,7 @@
           "InvestorInvest": "Investor invest",
           "AssetFinished": "Asset finished",
           "ProgramPeriodStats": "Program period stats",
-          "ProgramPeriodEnds": "Programp period ends"
+          "ProgramPeriodEnds": "Program period ends"
         }
       }
     }
@@ -950,7 +963,8 @@
         "drawdown": "D.down",
         "profit": "Profit",
         "chart": "Chart",
-        "value": "Value"
+        "value": "Value",
+        "status": "Status"
       },
       "get-started": {
         "title": "Get started",
@@ -987,13 +1001,17 @@
           "reinvest": "Reinvest",
           "canceled": "Canceled",
           "ended": "Ended",
+          "All": "All",
           "ManagerInvest": "Manager invest",
+          "ManagerWithdraw": "Manager withdraw",
           "EntranceFee": "Entrance fee",
+          "ExitFee": "ExitFee",
           "AssetStarted": "Asset started",
           "InvestorInvest": "Investor invest",
+          "InvestorWithdraw": "Investor withdraw",
           "AssetFinished": "Asset finished",
           "ProgramPeriodStats": "Program period stats",
-          "ProgramPeriodEnds": "Programp period ends"
+          "ProgramPeriodEnds": "Program period ends"
         }
       }
     },
@@ -1124,7 +1142,7 @@
           "assets-count": "Must be at least two assets.",
           "image-resolution-incorrect": "The resolution of the uploaded image is too low.",
           "image-file-is-large": "The uploaded image file is too large.",
-          "deposit-min": "Not enought money."
+          "deposit-min": "Not enough money."
         },
         "hints": {
           "entry-fee": "Description about entry fee is here",

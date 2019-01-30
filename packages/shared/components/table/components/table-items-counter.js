@@ -12,13 +12,7 @@ const ItemsCounter = ({
   const from = (currentPage - 1) * itemsOnPage + 1;
   const to = Math.min(currentPage * itemsOnPage, total);
   return (
-    <span
-      style={{
-        letterSpacing: 0.56,
-        color: "rgba(232, 239, 243, 0.4)",
-        fontSize: 14
-      }}
-    >
+    <span className="table__footer-text">
       {t("table.items-counter", { from, to, total })}
     </span>
   );

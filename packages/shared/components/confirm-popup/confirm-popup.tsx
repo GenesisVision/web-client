@@ -1,11 +1,23 @@
-import classnames from "classnames";
 import { GVButton } from "gv-react-components";
-import PropTypes from "prop-types";
 import React from "react";
-import { translate } from "react-i18next";
+import { TranslationFunction, translate } from "react-i18next";
 import Dialog from "shared/components/dialog/dialog";
 
-const ConfirmPopup = ({
+export interface IConfirmPopupProps {
+  t: TranslationFunction;
+  open: boolean;
+  onClose(): void;
+  onApply(): void;
+  onCancel?(): void;
+  header?: React.ReactNode;
+  body?: React.ReactNode;
+  applyButtonText?: string;
+  cancelButtonText?: string;
+  className?: string;
+  disabled?: boolean;
+}
+
+const ConfirmPopup: React.SFC<IConfirmPopupProps> = ({
   t,
   open,
   onClose,
@@ -15,7 +27,8 @@ const ConfirmPopup = ({
   body,
   applyButtonText,
   cancelButtonText,
-  className
+  className,
+  disabled
 }) => {
   applyButtonText = applyButtonText || t("buttons.apply");
   cancelButtonText = cancelButtonText || t("buttons.cancel");
@@ -27,7 +40,9 @@ const ConfirmPopup = ({
           <p>{body}</p>
         </div>
         <div className="dialog__buttons">
-          <GVButton onClick={onApply}>{applyButtonText}</GVButton>
+          <GVButton onClick={onApply} disabled={disabled}>
+            {applyButtonText}
+          </GVButton>
           {onCancel && (
             <GVButton color="secondary" variant="outlined" onClick={onCancel}>
               {cancelButtonText}
@@ -37,16 +52,6 @@ const ConfirmPopup = ({
       </div>
     </Dialog>
   );
-};
-
-ConfirmPopup.propTypes = {
-  open: PropTypes.bool.isRequired,
-  onApply: PropTypes.func.isRequired,
-  onCancel: PropTypes.func,
-  onClose: PropTypes.func.isRequired,
-  header: PropTypes.node,
-  body: PropTypes.node,
-  applyButtonText: PropTypes.string
 };
 
 export default translate()(ConfirmPopup);

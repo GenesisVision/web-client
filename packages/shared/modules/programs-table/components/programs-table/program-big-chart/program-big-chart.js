@@ -32,7 +32,7 @@ const ProgramBigChart = ({ programId, data }) => {
 
   return (
     <ResponsiveContainer width="99%" height="99%" className="program-big-chart">
-      <AreaChart data={programChartData}>
+      <AreaChart data={programChartData} margin={{ top: 20 }}>
         <ReferenceLine y={0} strokeDasharray="1 10" />
         {chartXAxis(data[0].date, data[data.length - 1].date)}
         <YAxis

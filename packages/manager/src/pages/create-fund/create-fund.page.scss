@@ -2,18 +2,10 @@
 @import "~shared/styles/_breakpoint.scss";
 @import "~shared/styles/_sizes.scss";
 
-.create-fund {
-  &__navigation-dialog {
-    padding: 32px;
+.create-fund-page {
+  padding: 0 $padding-xsmall;
 
-    &-text {
-      font-size: 14px;
-      color: $text-light-color;
-    }
-
-    &-button {
-      margin-top: 20px;
-      padding: 8px 24px;
-    }
+  @include media-breakpoint-landscape-phone() {
+    padding: 0;
   }
 }

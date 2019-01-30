@@ -4,22 +4,35 @@
 
 .create-program-settings {
   margin-top: 40px;
-  margin-left: 24px;
+  padding-left: $padding-xsmall;
+
+  @include media-breakpoint-landscape-phone() {
+    padding-left: 0;
+  }
+
+  @include media-breakpoint-tablet() {
+    margin-top: 60px;
+  }
 
   &__name {
+    padding-bottom: $padding-small;
     display: inline-flex;
     position: relative;
     top: 3px;
     width: 230px;
     margin-right: 24px;
 
+    @include media-breakpoint-landscape-phone() {
+      padding-bottom: $padding-xsmall;
+    }
+
     &-requirements {
       font-size: 12px;
       color: $label-color;
       letter-spacing: 0.4px;
       position: absolute;
-      top: 86px;
-      left: 0px;
+      top: 80px;
+      left: 0;
     }
   }
 
@@ -271,11 +284,6 @@
         margin-top: 70px;
       }
     }
-  }
-
-  @include media-breakpoint-tablet() {
-    margin-top: 60px;
-    margin-left: 0;
   }
 }
 

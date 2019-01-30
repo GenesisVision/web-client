@@ -1,10 +1,12 @@
-import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
+import { GVButton } from "gv-react-components";
 import PropTypes from "prop-types";
 import { Fragment } from "react";
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { formatValue } from "shared/utils/formatter";
+
+import InputAmountField from "../input-amount-field/input-amount-field";
 
 const FundWithdrawEnterPercentStep = props => {
   const {
@@ -14,25 +16,25 @@ const FundWithdrawEnterPercentStep = props => {
     exitFee,
     feeInCurrency,
     valueInCurrency,
-    withdrawAmount
+    withdrawAmount,
+    setFieldValue
   } = props;
   const isAllow = values =>
     !values.floatValue ||
     (values.floatValue >= 0.01 && values.floatValue <= 100);
 
+  const setMaxAmount = () => {
+    setFieldValue("percent", 100);
+  };
+
   return (
     <Fragment>
-      <GVFormikField
-        className="invest-field"
+      <InputAmountField
         name="percent"
         label={t("withdraw-fund.amount-to-withdraw")}
-        component={GVTextField}
-        adornment="%"
-        autoComplete="off"
-        autoFocus
-        InputComponent={NumberFormat}
-        allowNegative={false}
-        isAllowed={isAllow}
+        currency="%"
+        isAllow={isAllow}
+        setMax={setMaxAmount}
       />
       <div className="invest-popup__currency">
         <NumberFormat

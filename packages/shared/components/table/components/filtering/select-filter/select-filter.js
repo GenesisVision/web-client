@@ -2,13 +2,19 @@ import "./select-filter.scss";
 
 import PropTypes from "prop-types";
 import React, { Component } from "react";
+import { translate } from "react-i18next";
 
 import Filter from "../filter";
 import SelectFilterPopover from "./select-filter-popover";
 
 class SelectFilter extends Component {
-  renderValueText = value =>
-    this.props.values.find(x => x.value === value).label;
+  renderValueText = value => {
+    const { t } = this.props;
+    const selectedValue = this.props.values.find(x => x.value === value);
+    if (selectedValue.labelKey !== undefined) return t(selectedValue.labelKey);
+
+    return selectedValue.label;
+  };
 
   render() {
     return (
@@ -33,4 +39,4 @@ SelectFilter.propTypes = {
   onChange: PropTypes.func
 };
 
-export default SelectFilter;
+export default translate()(SelectFilter);

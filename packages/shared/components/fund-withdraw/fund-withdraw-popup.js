@@ -25,14 +25,9 @@ class FundWithdrawPopup extends Component {
 
   handleSubmit = percent => {
     this.setState({ isPending: true });
-    return this.props
-      .withdraw(percent)
-      .then(data => {
-        this.setState({ isPending: false });
-      })
-      .catch(data => {
-        this.setState({ isPending: false, errorMessage: data.errorMessage });
-      });
+    return this.props.withdraw(percent).catch(data => {
+      this.setState({ isPending: false, errorMessage: data.errorMessage });
+    });
   };
 
   goToConfirmStep = () => {

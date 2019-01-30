@@ -3,6 +3,8 @@
 @import "~shared/styles/_sizes.scss";
 
 .wallet-balance {
+  padding: 0 $padding-xsmall;
+
   &__statistic {
     @include adaptive-padding(top, $padding-xxsmall);
     display: flex;
@@ -14,12 +16,6 @@
       & > * {
         margin-right: $padding-small;
       }
-    }
-  }
-
-  &__statistic-big {
-    & .details-statistics-item__value {
-      //margin-top: 7px;
     }
   }
 
@@ -57,8 +53,40 @@
     font-size: $font-size-common;
   }
 
+  &__loader-row {
+    display: flex;
+    flex-wrap: wrap;
+
+    .svg-loader {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &__loader-stat {
+    @include adaptive-margin(right, $padding-small);
+    padding-bottom: $padding-xsmall;
+    width: 130px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &__loader-button {
+    @include adaptive-margin(top, $padding-small);
+    margin-right: 12px;
+    width: 130px;
+    margin-bottom: 26px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
   @include media-breakpoint-landscape-phone() {
     display: block;
+    padding: 0;
 
     &__statistic {
       &:first-child {
@@ -85,10 +113,27 @@
       height: 50px;
     }
 
+    &__loader-button {
+      @include adaptive-margin(top, $padding-small);
+      margin-right: 30px;
+      width: auto;
+      margin-bottom: 0;
+    }
+
+    &__loader-stat {
+      width: auto;
+    }
+
     &__withdraw {
       font-weight: 600;
       width: 150px;
       height: 50px;
+    }
+  }
+
+  @include media-breakpoint-tablet() {
+    &__loader-stat {
+      padding-top: 10px;
     }
   }
 }

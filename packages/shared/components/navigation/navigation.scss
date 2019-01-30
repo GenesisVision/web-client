@@ -20,6 +20,7 @@
     justify-content: flex-start;
     width: 100%;
     opacity: 0.4;
+    padding: 15px 32px;
   }
 
   &__menu {
@@ -98,6 +99,15 @@
 
 .mobile {
   width: 100%;
+
+  .navigation__icon {
+    margin-right: 24px;
+  }
+
+  .navigation__item {
+    padding: 15px 32px;
+    margin-right: 0;
+  }
 
   &__top {
     padding: 10px 0;

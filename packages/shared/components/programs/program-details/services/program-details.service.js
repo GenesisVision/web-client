@@ -2,7 +2,7 @@ import {
   PROGRAM_DETAILS_ROUTE,
   PROGRAM_SLUG_URL_PARAM_NAME
 } from "pages/programs/programs.routes";
-import { DEFAULT_PERIOD } from "shared/components/chart/chart-period/chart-period.helpers";
+import { getDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import managerApi from "shared/services/api-client/manager-api";
 import programsApi from "shared/services/api-client/programs-api";
@@ -24,7 +24,7 @@ export const getProgramDescription = () => (dispatch, getState) => {
 export const getProgramStatistic = (
   programId,
   currency,
-  period = DEFAULT_PERIOD
+  period = getDefaultPeriod()
 ) => {
   const chartFilter = {
     currency,
@@ -49,8 +49,9 @@ export const getProgramStatistic = (
     };
     const profitChartData = {
       balance: profitChart.balance,
-      totalGvtProfit: profitChart.totalGvtProfit,
-      totalProgramCurrencyProfit: profitChart.totalProgramCurrencyProfit,
+      timeFrameProgramCurrencyProfit:
+        profitChart.timeframeProgramCurrencyProfit,
+      timeFrameGvtProfit: profitChart.timeframeGvtProfit,
       programCurrency: profitChart.programCurrency,
       profitChangePercent: profitChart.profitChangePercent,
       pnLChart: profitChart.pnLChart,
@@ -95,6 +96,17 @@ export const fetchProgramTrades = (id, filters, currency) => {
       ...filters,
       currency
     })
+    .then(data => {
+      return Promise.resolve({
+        total: data.total,
+        items: data.trades
+      });
+    });
+};
+
+export const fetchOpenPositions = (id, filters) => {
+  return programsApi
+    .v10ProgramsByIdTradesOpenGet(id, { sorting: filters.sorting })
     .then(data => {
       return Promise.resolve({
         total: data.total,

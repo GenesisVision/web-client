@@ -287,84 +287,55 @@ class ProgramDetailsDescription extends PureComponent {
               </StatisticItem>
             </div>
             {(isOwnProgram || canInvest || canWithdraw) && (
-              <Fragment>
-                <div className="details-description__investing-container">
-                  <div className="details-description__invest-button-container">
-                    <GVButton
-                      className="details-description__invest-btn"
-                      onClick={this.handleOpenInvestmentPopup}
-                      disabled={
-                        !programDescription.personalProgramDetails ||
-                        !programDescription.personalProgramDetails.canInvest
-                      }
-                    >
-                      {t("program-details-page.description.invest")}
-                    </GVButton>
-                    {CloseProgramContainer && (
-                      <GVButton
-                        className="details-description__invest-btn"
-                        color="secondary"
-                        variant="outlined"
-                        onClick={this.handleOpenCloseProgramPopup}
-                        disabled={
-                          !programDescription.personalProgramDetails
-                            .canCloseProgram
-                        }
-                      >
-                        {t("program-details-page.description.close-program")}
-                      </GVButton>
-                    )}
-                    {ClosePeriodContainer && (
-                      <GVButton
-                        className="details-description__invest-btn"
-                        color="secondary"
-                        variant="outlined"
-                        onClick={this.handleOpenClosePeriodPopup}
-                        disabled={
-                          !programDescription.personalProgramDetails
-                            .canClosePeriod
-                        }
-                      >
-                        {t("program-details-page.close-period.title")}
-                      </GVButton>
-                    )}
-                    {AssetEditContainer && (
-                      <GVButton
-                        className="details-description__invest-btn"
-                        color="secondary"
-                        variant="outlined"
-                        onClick={this.handleOpenEditProgramPopup}
-                        disabled={!canCloseProgram}
-                      >
-                        {t("program-details-page.description.edit-program")}
-                      </GVButton>
-                    )}
-                    {ProgramReinvestingWidget && isInvested && canInvest && (
-                      <ProgramReinvestingWidget
-                        className="details-description__reinvest"
-                        toggleReinvesting={onReinvestingClick}
-                        isReinvesting={isReinvest}
-                        disabled={isReinvestPending}
-                      />
-                    )}
-                  </div>
-                </div>
-                {programDescription.personalProgramDetails &&
-                  status !== STATUS.ENDED && (
-                    <DetailsInvestment
-                      WithdrawContainer={ProgramWithdrawContainer}
-                      notice={t(
-                        "program-details-page.description.withdraw-notice-text"
-                      )}
-                      canWithdraw={canWithdraw}
-                      assetCurrency={programDescription.currency}
-                      onChangeInvestmentStatus={onChangeInvestmentStatus}
-                      asset={PROGRAM}
-                      role={role}
-                      {...investmentData}
-                    />
-                  )}
-              </Fragment>
+              <div className="details-description__invest-button-container">
+                <GVButton
+                  className="details-description__invest-btn"
+                  onClick={this.handleOpenInvestmentPopup}
+                  disabled={
+                    !programDescription.personalProgramDetails ||
+                    !programDescription.personalProgramDetails.canInvest
+                  }
+                >
+                  {t("program-details-page.description.invest")}
+                </GVButton>
+                {CloseProgramContainer && (
+                  <GVButton
+                    className="details-description__invest-btn"
+                    color="secondary"
+                    variant="outlined"
+                    onClick={this.handleOpenCloseProgramPopup}
+                    disabled={
+                      !programDescription.personalProgramDetails.canCloseProgram
+                    }
+                  >
+                    {t("program-details-page.description.close-program")}
+                  </GVButton>
+                )}
+                {ClosePeriodContainer && (
+                  <GVButton
+                    className="details-description__invest-btn"
+                    color="secondary"
+                    variant="outlined"
+                    onClick={this.handleOpenClosePeriodPopup}
+                    disabled={
+                      !programDescription.personalProgramDetails.canClosePeriod
+                    }
+                  >
+                    {t("program-details-page.close-period.title")}
+                  </GVButton>
+                )}
+                {AssetEditContainer && (
+                  <GVButton
+                    className="details-description__invest-btn"
+                    color="secondary"
+                    variant="outlined"
+                    onClick={this.handleOpenEditProgramPopup}
+                    disabled={!canCloseProgram}
+                  >
+                    {t("program-details-page.description.edit-program")}
+                  </GVButton>
+                )}
+              </div>
             )}
             <ProgramDetailContext.Consumer>
               {({ updateDetails }) => (
@@ -410,6 +381,27 @@ class ProgramDetailsDescription extends PureComponent {
             </ProgramDetailContext.Consumer>
           </div>
         </div>
+
+        {programDescription.personalProgramDetails && status !== STATUS.ENDED && (
+          <div className="details-description__bottom">
+            <DetailsInvestment
+              ProgramReinvestingWidget={ProgramReinvestingWidget}
+              onReinvestingClick={onReinvestingClick}
+              isReinvestPending={isReinvestPending}
+              isInvested={isInvested}
+              WithdrawContainer={ProgramWithdrawContainer}
+              notice={t(
+                "program-details-page.description.withdraw-notice-text"
+              )}
+              canWithdraw={canWithdraw}
+              assetCurrency={programDescription.currency}
+              onChangeInvestmentStatus={onChangeInvestmentStatus}
+              asset={PROGRAM}
+              role={role}
+              {...investmentData}
+            />
+          </div>
+        )}
         <div className="details-description__right">
           <DetailsFavorite
             id={programDescription.id}

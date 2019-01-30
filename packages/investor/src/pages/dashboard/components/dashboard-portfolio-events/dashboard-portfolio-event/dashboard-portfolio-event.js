@@ -2,11 +2,12 @@ import "./dashboard-portfolio-event.scss";
 
 import * as moment from "moment";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { Fragment } from "react";
 import NumberFormat from "react-number-format";
 import PortfolioEventLogo from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
 import Profitability from "shared/components/profitability/profitability";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import { PROFIT_EVENT } from "shared/constants/constants";
 import { formatValue } from "shared/utils/formatter";
 
 import { isUseProfitability } from "../../helpers/dashboard-portfolio.helpers";
@@ -24,28 +25,60 @@ const formatDate = date => {
 };
 
 const DashboardPortfolioEvent = ({ event }) => {
+  const valueTotal =
+    event.type === PROFIT_EVENT ? event.valueTotal : event.value;
   const eventDescription = () => (
-    <div className="portfolio-event__values-container">
-      <div className="portfolio-event__description">{event.description}</div>
-      <span className="portfolio-event__value">
-        {isUseProfitability(event) ? (
-          <Profitability value={event.value} prefix="sign">
+    <Fragment>
+      <div className="portfolio-event__values-container">
+        <div className="portfolio-event__description">{event.description}</div>
+        <span className="portfolio-event__value">
+          {isUseProfitability(event) ? (
+            <Profitability value={valueTotal} prefix="sign">
+              <NumberFormat
+                value={formatValue(valueTotal)}
+                displayType="text"
+                allowNegative={false}
+                suffix={` ${event.currency}`}
+              />
+            </Profitability>
+          ) : (
             <NumberFormat
               value={formatValue(event.value)}
               displayType="text"
-              allowNegative={false}
               suffix={` ${event.currency}`}
             />
-          </Profitability>
-        ) : (
-          <NumberFormat
-            value={formatValue(event.value)}
-            displayType="text"
-            suffix={` ${event.currency}`}
-          />
-        )}
-      </span>
-    </div>
+          )}
+        </span>
+      </div>
+
+      {event.type === PROFIT_EVENT && (
+        <div className="portfolio-event__profit-info">
+          <StatisticItem label={"Success fee"} accent>
+            <NumberFormat
+              value={formatValue(event.feeSuccessManager)}
+              displayType="text"
+              suffix={` ${event.feeSuccessManagerCurrency || ""}`}
+            />
+          </StatisticItem>
+          <StatisticItem label={"GV commission"} accent>
+            <NumberFormat
+              value={formatValue(event.feeSuccessPlatform)}
+              displayType="text"
+              suffix={` ${event.feeSuccessPlatformCurrency || ""}`}
+            />
+          </StatisticItem>
+          <StatisticItem label={"You've earned"} accent>
+            <Profitability value={formatValue(event.value)}>
+              <NumberFormat
+                value={formatValue(event.value)}
+                displayType="text"
+                suffix={` ${event.currency}`}
+              />
+            </Profitability>
+          </StatisticItem>
+        </div>
+      )}
+    </Fragment>
   );
 
   return (

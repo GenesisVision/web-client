@@ -1,6 +1,7 @@
 import React from "react";
 import { translate } from "react-i18next";
 import PortfolioEventsTableContainerComponent from "shared/components/portfolio-events-table/portfolio-events-table-container";
+import { MANAGER_EVENT_TYPE_FILTER_VALUES } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
 
 import { fetchPortfolioEvents } from "../../services/dashboard-events.services";
 
@@ -21,6 +22,7 @@ const PortfolioEventsAllComponent = ({ t }) => {
       )}
       className="portfolio-events-all-table"
       dateRangeStartLabel={t("filters.date-range.account-creation")}
+      eventTypeFilterValues={MANAGER_EVENT_TYPE_FILTER_VALUES}
     />
   );
 };

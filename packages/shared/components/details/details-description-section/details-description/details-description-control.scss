@@ -3,7 +3,7 @@
 @import "~shared/styles/_sizes.scss";
 
 .details-description-control {
-  @include adaptive-padding(bottom, $padding-xsmall);
+  @include adaptive-margin(bottom, $padding-xsmall);
   text-align: center;
   display: flex;
   align-items: center;
@@ -11,10 +11,10 @@
   &--button {
     cursor: pointer;
     border: none;
-    margin: 0;
-    padding-top: 0;
-    padding-left: 0;
-    padding-right: 0;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
     width: auto;
     overflow: visible;
     outline: none;

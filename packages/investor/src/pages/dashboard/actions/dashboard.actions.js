@@ -46,13 +46,6 @@ export const fetchInRequests = (auth, skip, take) => {
   };
 };
 
-export const cancelFundRequest = (auth, id) => {
-  return {
-    type: DASHBOARD_CANCEL_FUND_REQUESTS,
-    payload: investorApi.v10InvestorFundsRequestsByIdCancelPost(id, auth)
-  };
-};
-
 export const cancelProgramRequest = (auth, id) => {
   return {
     type: DASHBOARD_CANCEL_PROGRAM_REQUESTS,

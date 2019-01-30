@@ -9,10 +9,12 @@
     flex-direction: column;
     align-items: baseline;
 
-    & .two-factor,
-    & .profile-image {
-      min-width: 340px;
-      margin-right: 20px;
+    @include media-breakpoint-landscape-phone() {
+      & .two-factor,
+      & .profile-image {
+        min-width: 340px;
+        margin-right: 20px;
+      }
     }
 
     @include media-breakpoint-landscape-tablet() {

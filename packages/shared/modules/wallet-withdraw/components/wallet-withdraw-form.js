@@ -14,6 +14,9 @@ import { formatValue, validateFraction } from "shared/utils/formatter";
 import { ethWalletValidator } from "shared/utils/validators/validators";
 import { number, object, string } from "yup";
 
+import InputAmountField from "../../../components/input-amount-field/input-amount-field";
+import { formatCurrencyValue } from "../../../utils/formatter";
+
 const WalletWithdrawForm = ({
   t,
   twoFactorEnabled,
@@ -24,7 +27,8 @@ const WalletWithdrawForm = ({
   disabled,
   isValid,
   dirty,
-  errorMessage
+  errorMessage,
+  setFieldValue
 }) => {
   const { currency, amount } = values;
   const currentWallet =
@@ -36,6 +40,19 @@ const WalletWithdrawForm = ({
     convertFromCurrency(amount, rateToGvt) - commission,
     0
   );
+
+  const isAllow = values => {
+    const { floatValue, formattedValue, value } = values;
+    return (
+      formattedValue === "" ||
+      (validateFraction(value, "GVT") &&
+        floatValue <= parseFloat(availableToWithdrawal))
+    );
+  };
+
+  const setMaxAmount = () => {
+    setFieldValue("amount", formatCurrencyValue(availableToWithdrawal, "GVT"));
+  };
 
   return (
     <form
@@ -51,7 +68,7 @@ const WalletWithdrawForm = ({
         <div className="dialog-field">
           <div className="gv-text-field__wrapper">
             <StatisticItem label={t("wallet-withdraw.available")} big>
-              {availableToWithdrawal} GVT
+              {formatCurrencyValue(availableToWithdrawal, "GVT")} GVT
             </StatisticItem>
           </div>
         </div>
@@ -71,23 +88,12 @@ const WalletWithdrawForm = ({
         </GVFormikField>
       </div>
       <div className="dialog__bottom">
-        <GVFormikField
+        <InputAmountField
           name="amount"
           label={t("wallet-withdraw.amount")}
-          component={GVTextField}
-          adornment="GVT"
-          autoComplete="off"
-          autoFocus
-          InputComponent={NumberFormat}
-          allowNegative={false}
-          isAllowed={values => {
-            const { floatValue, formattedValue } = values;
-            return (
-              formattedValue === "" ||
-              (validateFraction(formattedValue, "GVT") &&
-                floatValue <= parseFloat(availableToWithdrawal))
-            );
-          }}
+          currency="GVT"
+          isAllow={isAllow}
+          setMax={setMaxAmount}
         />
         <GVFormikField
           name="address"
@@ -192,12 +198,10 @@ export default compose(
     },
     validationSchema: ({ t, availableToWithdrawal, twoFactorEnabled }) =>
       object().shape({
-        amount: number()
-          .max(
-            availableToWithdrawal,
-            t("wallet-withdraw.validation.amount-more-than-available")
-          )
-          .required(t("wallet-withdraw.validation.amount-is-required")),
+        amount: number().max(
+          availableToWithdrawal,
+          t("wallet-withdraw.validation.amount-more-than-available")
+        ),
         address: ethWalletValidator.required(
           t("wallet-withdraw.validation.address-is-required")
         ),

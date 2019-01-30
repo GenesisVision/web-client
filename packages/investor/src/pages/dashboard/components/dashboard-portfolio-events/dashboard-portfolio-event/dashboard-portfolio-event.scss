@@ -5,7 +5,7 @@
 .portfolio-event {
   display: flex;
   padding-top: 24px;
-  align-items: center;
+  align-items: flex-start;
   //width: 252px;
   @include media-breakpoint-tablet() {
     width: 252px;
@@ -14,6 +14,19 @@
   &:not(:last-of-type) {
     border-bottom: 2px solid $separator-color;
     padding-bottom: 24px;
+  }
+
+  &__profit-info {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    @include media-breakpoint-tablet() {
+      flex-direction: column;
+    }
+    & > div {
+      margin-top: $padding-xsmall;
+      margin-right: $padding-xsmall;
+    }
   }
 
   &__values-container {
@@ -49,12 +62,12 @@
   &__description {
     letter-spacing: 0.2px;
     margin-bottom: 0px;
-    font-size: $font-size-common-mobile;
-    color: $text-color;
+    font-size: $font-size-paragraph-mobile;
+    //color: white;
     line-height: 1.69;
     padding-right: $padding-small-mobile;
     @include media-breakpoint-landscape-phone() {
-      font-size: $font-size-common;
+      font-size: $font-size-paragraph;
     }
   }
 
@@ -72,6 +85,7 @@
       font-size: $font-size-common;
     }
     @include media-breakpoint-tablet() {
+      margin-top: $padding-xxsmall;
       text-align: left;
     }
   }

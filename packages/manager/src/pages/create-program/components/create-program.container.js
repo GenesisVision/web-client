@@ -90,17 +90,19 @@ class CreateProgramContainer extends Component {
     const { t, headerData, service, platformSettings } = this.props;
     if (!platformSettings || !headerData) return null;
     return (
-      <div className="create-program-container">
-        <GVTabs value={tab}>
-          <GVTab
-            value={"broker"}
-            label={t("manager.create-program-page.tabs.select-broker")}
-          />
-          <GVTab
-            value={"settings"}
-            label={t("manager.create-program-page.tabs.settings")}
-          />
-        </GVTabs>
+      <div className="create-program-page__container">
+        <div className="create-program-page__tabs">
+          <GVTabs value={tab}>
+            <GVTab
+              value={"broker"}
+              label={t("manager.create-program-page.tabs.select-broker")}
+            />
+            <GVTab
+              value={"settings"}
+              label={t("manager.create-program-page.tabs.settings")}
+            />
+          </GVTabs>
+        </div>
         {!isPending && (
           <div>
             {tab === "broker" && (

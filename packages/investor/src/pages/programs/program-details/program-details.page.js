@@ -15,10 +15,12 @@ import ProgramDetailsDescriptionSection from "shared/components/programs/program
 import ProgramDetailsStatisticSection from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import ProgramDetailsHistorySection from "shared/components/programs/program-details/program-trades/program-details-history-section";
 import {
+  fetchOpenPositions,
   fetchProgramTrades,
   getProgramDescription,
   getProgramStatistic
 } from "shared/components/programs/program-details/services/program-details.service";
+import { INVESTOR_EVENT_TYPE_FILTER_VALUES } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
 import { INVESTOR } from "shared/constants/constants";
 
 import { LOGIN_ROUTE } from "../../auth/login/login.routes";
@@ -120,6 +122,7 @@ class ProgramDetailsPage extends PureComponent {
             </div>
             <div className="details__section">
               <ProgramDetailsStatisticSection
+                status={this.description.status}
                 getProgramStatistic={getProgramStatistic}
                 programId={this.description.id}
                 currency={currency}
@@ -130,6 +133,7 @@ class ProgramDetailsPage extends PureComponent {
             </div>
             <div className="details__history">
               <ProgramDetailsHistorySection
+                fetchOpenPositions={fetchOpenPositions}
                 fetchHistoryCounts={fetchHistoryCounts}
                 fetchPortfolioEvents={filters =>
                   fetchPortfolioEvents({
@@ -141,6 +145,7 @@ class ProgramDetailsPage extends PureComponent {
                 programId={this.description.id}
                 currency={currency}
                 isInvested={isInvested}
+                eventTypeFilterValues={INVESTOR_EVENT_TYPE_FILTER_VALUES}
               />
             </div>
           </div>

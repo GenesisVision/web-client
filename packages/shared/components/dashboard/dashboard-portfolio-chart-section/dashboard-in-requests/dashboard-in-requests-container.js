@@ -34,6 +34,7 @@ class DashboardInRequestsContainer extends PureComponent {
         className="dashboard-request__icon"
         primary={this.state.anchor !== null}
         onClick={this.handleOpenDropdown}
+        dashboard__portfolio-events-aside
       />
     );
   };

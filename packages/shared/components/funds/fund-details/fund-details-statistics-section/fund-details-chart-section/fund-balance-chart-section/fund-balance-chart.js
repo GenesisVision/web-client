@@ -22,7 +22,7 @@ class FundBalanceChart extends PureComponent {
     }));
     return (
       <ResponsiveContainer>
-        <AreaChart data={chart}>
+        <AreaChart data={chart} margin={{ top: 20 }}>
           {chartXAxis(
             balanceChart[0].date,
             balanceChart[balanceChart.length - 1].date

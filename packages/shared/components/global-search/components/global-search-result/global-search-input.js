@@ -17,7 +17,7 @@ class GlobalSearchInput extends PureComponent {
         <GVTextField
           name="queryValue"
           wrapperClassName="global-search-input__wrapper"
-          placeholder="Search for programs or managers"
+          placeholder="Search for programs or funds or managers"
           autoComplete="off"
           adornment={<SearchIcon primary />}
           adornmentPosition="start"

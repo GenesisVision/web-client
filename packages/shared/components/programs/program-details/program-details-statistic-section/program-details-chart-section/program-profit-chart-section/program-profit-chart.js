@@ -37,7 +37,7 @@ class ProgramProfitChart extends PureComponent {
 
     return (
       <ResponsiveContainer>
-        <ComposedChart data={pnl}>
+        <ComposedChart data={pnl} margin={{ top: 20 }}>
           <defs>
             <ProgramChartGradient
               offset={off}

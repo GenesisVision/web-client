@@ -25,3 +25,11 @@ export const DEFAULT_PERIOD = {
   start: getPeriodStartDate(ChartPeriodType.week),
   end: moment().toDate()
 };
+
+export const getDefaultPeriod = () => {
+  return {
+    type: ChartPeriodType.week,
+    start: getPeriodStartDate(ChartPeriodType.week),
+    end: moment().toDate()
+  };
+};

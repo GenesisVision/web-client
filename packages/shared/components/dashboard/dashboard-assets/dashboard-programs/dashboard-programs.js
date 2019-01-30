@@ -28,7 +28,6 @@ class DashboardPrograms extends Component {
     const {
       t,
       role,
-      onChangeStatus,
       getDashboardPrograms,
       createButtonToolbar,
       createProgram,
@@ -65,7 +64,7 @@ class DashboardPrograms extends Component {
             )}
           </span>
         )}
-        renderBodyRow={program => (
+        renderBodyRow={(program, updateRow) => (
           <TableRow
             className={classnames({
               "table__row--pretender": program.rating.canLevelUp
@@ -132,7 +131,7 @@ class DashboardPrograms extends Component {
                 id={program.id}
                 role={role}
                 asset={PROGRAM}
-                onCancel={onChangeStatus}
+                onCancel={updateRow}
               />
             </TableCell>
           </TableRow>

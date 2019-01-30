@@ -52,7 +52,7 @@ const StatisticItem = ({
         {label}
       </div>
       <div className={generateClasses(VALUE, invert)}>{children}</div>
-      {equivalent ? (
+      {equivalent !== undefined ? (
         <div className="statistics-item__equivalent">
           {
             <NumberFormat

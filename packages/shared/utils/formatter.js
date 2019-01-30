@@ -45,6 +45,12 @@ const formatPercent = value => {
   return formatValue(value, value > 1 || value < -1 ? 0 : 1);
 };
 
+const roundPercents = value => {
+  const abs = Math.abs(value);
+  const newValue = value === 0 ? 0 : formatValue(Math.max(abs, 0.01), 2);
+  return `${value < 0.01 && value > 0 ? "<" : ""}${newValue}%`;
+};
+
 const validateFraction = (value, currency) => {
   const fraction = value.split(".")[1];
   return fraction ? fraction.length <= CURRENCY_FRACTIONS(currency) : true;
@@ -56,4 +62,10 @@ const formatCurrencyValue = (value, currency) =>
     CURRENCY_FRACTIONS(currency)
   );
 
-export { formatValue, formatPercent, validateFraction, formatCurrencyValue };
+export {
+  formatValue,
+  formatPercent,
+  validateFraction,
+  formatCurrencyValue,
+  roundPercents
+};

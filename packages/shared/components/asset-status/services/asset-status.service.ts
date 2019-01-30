@@ -1,17 +1,29 @@
+import { type } from "os";
+
+import { ProgramRequest, ProgramRequests } from "gv-api-web";
+import { Dispatch } from "react-redux";
+import { Action } from "redux";
+import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { FUND, INVESTOR, MANAGER, PROGRAM } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import investorApi from "shared/services/api-client/investor-api";
 import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
 
+import { ActionType, DispatchType } from "../../../utils/types";
 import { fetchProfileHeaderInfo } from "../../header/actions/header-actions";
 import {
+  ICancelRequest,
   cancelInvestorProgramRequest,
   cancelManagerFundRequest,
   cancelManagerProgramRequest
 } from "../actions/asset-status-actions";
 
-export const getAssetRequests = (id, role, asset) => {
+export const getAssetRequests = (
+  id: string,
+  role: string,
+  asset: string
+): Promise<Array<ProgramRequest>> => {
   const authorization = authService.getAuthArg();
   let method;
   switch (role + asset) {
@@ -30,10 +42,16 @@ export const getAssetRequests = (id, role, asset) => {
     default:
       method = null;
   }
-  return method(id, 0, 10, authorization).then(requests => requests.requests);
+  return method(id, 0, 10, authorization).then(
+    (response: ProgramRequests) => response.requests
+  );
 };
 
-export const cancelRequest = (id, role, asset) => {
+export const cancelRequest = (
+  id: string,
+  role: string,
+  asset: string
+): Promise<void> => {
   const authorization = authService.getAuthArg();
   let method;
 
@@ -53,29 +71,38 @@ export const cancelRequest = (id, role, asset) => {
   return method(id, authorization);
 };
 
+export type CancelReqestType = {
+  id: string;
+  role: string;
+  asset: string;
+  onFinally: Function;
+  removeDisableBtn: Function;
+};
+
 export const cancelRequestDispatch = ({
   id,
   role,
   asset,
   onFinally
-}) => dispatch => {
+}: CancelReqestType) => dispatch => {
   const authorization = authService.getAuthArg();
-  let action;
+  let actionCreator: ICancelRequest;
 
   switch (role + asset) {
     case MANAGER + PROGRAM:
-      action = cancelManagerProgramRequest;
+      actionCreator = cancelManagerProgramRequest;
       break;
     case MANAGER + FUND:
-      action = cancelManagerFundRequest;
+      actionCreator = cancelManagerFundRequest;
       break;
     case INVESTOR + PROGRAM:
-      action = cancelInvestorProgramRequest;
+      actionCreator = cancelInvestorProgramRequest;
       break;
     default:
-      action = null;
+      throw `Error role or type [${role}|${asset}]`;
   }
-  return dispatch(action(id, authorization))
+
+  return dispatch(actionCreator(id, authorization))
     .then(() => {
       dispatch(fetchProfileHeaderInfo());
       dispatch(
@@ -88,7 +115,7 @@ export const cancelRequestDispatch = ({
       );
       onFinally();
     })
-    .catch(error => {
+    .catch(() => {
       dispatch(
         alertMessageActions.error(
           `${
