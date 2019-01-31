@@ -26,74 +26,40 @@ import managerReducer, {
   ManagerState
 } from "pages/manager/reducers/manager.reducers";
 import { loadingBarReducer } from "react-redux-loading-bar";
-import { RouterState, routerReducer } from "react-router-redux";
-import { Reducer, combineReducers } from "redux";
-import programsRatingReducer, {
-  ProgramsRatingState
-} from "shared/components/programs-rating/reducers/programs-rating.reducers";
-import walletReducer, {
-  WalletState
-} from "shared/components/wallet/reducers/wallet.reducers";
-import alertMessagesReducer, {
-  AlertMessagesState
-} from "shared/modules/alert-message/reducers/alert-message-reducers";
-import fundNotificationsReducer, {
-  FundNotificationsState
-} from "shared/modules/fund-notifications/reducers/fund-notifications.reducers";
-import fundsReducer, {
-  FundsTableState
-} from "shared/modules/funds-table/reducers/funds-table.reducers";
-import notificationSettingsReducer, {
-  NotificationSettingsState
-} from "shared/modules/notification-settings/reducers/notification-settings.reducers";
-import programNotificationsReducer, {
-  ProgramNotificationsState
-} from "shared/modules/program-notifications/reducers/program-notifications.reducers";
-import programsReducer, {
-  ProgramsListState
-} from "shared/modules/programs-table/reducers/programs-table.reducers";
-import accountSettingsReducer, {
-  AccountSettingsState
-} from "shared/reducers/account-settings";
+import { routerReducer } from "react-router-redux";
+import { combineReducers } from "redux";
+import programsRatingReducer from "shared/components/programs-rating/reducers/programs-rating.reducers";
+import walletReducer from "shared/components/wallet/reducers/wallet.reducers";
+import alertMessagesReducer from "shared/modules/alert-message/reducers/alert-message-reducers";
+import fundNotificationsReducer from "shared/modules/fund-notifications/reducers/fund-notifications.reducers";
+import fundsReducer from "shared/modules/funds-table/reducers/funds-table.reducers";
+import notificationSettingsReducer from "shared/modules/notification-settings/reducers/notification-settings.reducers";
+import programNotificationsReducer from "shared/modules/program-notifications/reducers/program-notifications.reducers";
+import programsReducer from "shared/modules/programs-table/reducers/programs-table.reducers";
+import accountSettingsReducer from "shared/reducers/account-settings";
 import authReducer from "shared/reducers/auth-reducer";
-import { AuthState } from "shared/reducers/auth-reducer";
-import emailPendingReducer, {
-  EmailPendingState
-} from "shared/reducers/email-pending-reducer";
-import platformReducer, {
-  PlatformState
-} from "shared/reducers/platform-reducer";
-import uiReducer, { IUiState } from "shared/reducers/ui-reducer";
+import emailPendingReducer from "shared/reducers/email-pending-reducer";
+import platformReducer from "shared/reducers/platform-reducer";
+import uiReducer from "shared/reducers/ui-reducer";
 import { DeepReadonly } from "utility-types";
 
-export type RootState = DeepReadonly<{
-  notificationSettings: NotificationSettingsState;
-  loadingBar: Reducer<any>;
+import RootState from "../../../shared/reducers/root-reducer";
+
+type State = DeepReadonly<{
   profileHeader: HeaderState;
-  platformData: PlatformState;
-  programsData: ProgramsListState;
-  programsRating: ProgramsRatingState;
   programDeposit: ProgramsDepositState;
-  fundsData: FundsTableState;
   fundDeposit: FundDepositState;
-  emailPending: EmailPendingState;
   notifications: NotificationsState;
-  programNotifications: ProgramNotificationsState;
-  fundNotifications: FundNotificationsState;
   manager: ManagerState;
   signUpData: SignUpState;
   loginData: LoginState;
-  authData: AuthState;
-  routing: RouterState;
   passwordRestoreData: PasswordState;
-  alertMessages: AlertMessagesState;
   dashboard: DashboardState;
-  accountSettings: AccountSettingsState;
-  wallet: WalletState;
-  ui: IUiState;
 }>;
 
-const rootReducer = combineReducers<RootState>({
+export type InvestorRootState = State & RootState;
+
+const rootReducer = combineReducers<InvestorRootState>({
   routing: routerReducer,
   loadingBar: loadingBarReducer,
   platformData: platformReducer,
