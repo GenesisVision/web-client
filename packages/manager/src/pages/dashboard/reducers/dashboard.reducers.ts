@@ -8,7 +8,9 @@ import dashboardEventsReducer, {
   ManagerPortfolioEventsState
 } from "./dashboard-events.reducer";
 import dashboardFundsReducer from "./dashboard-funds.reducer";
-import dashboardInRequestsReducer from "./dashboard-in-requests.reducer";
+import dashboardInRequestsReducer, {
+  ProgramRequestsState
+} from "./dashboard-in-requests.reducer";
 import dashboardPeriodReducer from "./dashboard-period.reducer";
 import dashboardProgramsReducer from "./dashboard-programs.reducer";
 
@@ -19,10 +21,10 @@ export type ManagerDashboardState = DeepReadonly<{
   eventsData: ManagerPortfolioEventsState;
   programs: any;
   funds: any;
-  inRequestsData: any;
+  inRequestsData: ProgramRequestsState;
 }>;
 
-const dashboardReducer = combineReducers({
+const dashboardReducer = combineReducers<ManagerDashboardState>({
   period: dashboardPeriodReducer,
   assets: dashboardAssetReducer,
   assetChart: dashboardAssetChartReducer,
