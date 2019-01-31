@@ -4,8 +4,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@types/uuid": "^3.4.4",
-    "@typescript-eslint/parser": "^1.1.1",
     "classnames": "^2.2.5",
     "copy-to-clipboard": "^3.0.8",
     "cropperjs": "^1.3.5",
@@ -56,6 +54,8 @@
     "yup": "^0.26.6"
   },
   "devDependencies": {
+    "@types/uuid": "^3.4.4",
+    "@typescript-eslint/parser": "^1.1.1",
     "@types/classnames": "^2.2.7",
     "@types/jest": "^23.3.12",
     "@types/node": "^10.12.18",

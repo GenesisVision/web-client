@@ -1,4 +1,4 @@
-import moment from "moment";
+import moment, { unitOfTime } from "moment";
 
 export enum ChartPeriodType {
   day = "day",
@@ -12,12 +12,13 @@ export enum ChartPeriodType {
 export const getPeriodStartDate = (
   periodType: keyof typeof ChartPeriodType
 ) => {
+  const type: unitOfTime.DurationConstructor = `${periodType}s` as unitOfTime.DurationConstructor;
   switch (periodType) {
     case ChartPeriodType.all:
       return undefined;
     default:
       return moment()
-        .subtract(1, `${periodType}s`)
+        .subtract(1, type)
         .toDate();
   }
 };
