@@ -117,7 +117,7 @@ class ProgramTableRowDetailed extends Component {
                 <div className="program-detailed__statistic-data">
                   <div>
                     <div className="program-detailed__statistic-data--label">
-                      {t("programs-page.programs-header.balance")}
+                      {t("programs-page.programs-header.equity")}
                     </div>
                     <div className="program-detailed__statistic-data--value">
                       {(+program.statistic.balanceGVT.amount).toFixed(0)} GVT

@@ -20,10 +20,7 @@ const ProgramDetailsStatisticsElements = ({
       {t("program-details-page.statistics.current")}
     </div>
     <div className="details-statistics__particular-information">
-      <StatisticItem
-        label={t("program-details-page.statistics.balance")}
-        accent
-      >
+      <StatisticItem label={t("program-details-page.statistics.equity")} accent>
         <NumberFormat
           value={formatValue(profitChart.balance)}
           thousandSeparator={" "}
