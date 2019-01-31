@@ -1,5 +1,4 @@
 import { HeaderState } from "investor-web-portal/src/modules/header/reducer/header-reducer";
-import assetEditReducer from "modules/asset-edit/reducer/asset-edit.reducer";
 import fundDepositReducer, {
   FundDepositState
 } from "modules/fund-deposit/reducer/fund-deposit.reducer";
@@ -7,7 +6,6 @@ import headerReducer from "modules/header/reducer/header-reducer";
 import programDepositReducer, {
   ProgramsDepositState
 } from "modules/program-deposit/reducer/program-deposit.reducer";
-import programSettingsReducer from "modules/program-settings/reducers/program-settings-reducers";
 import notificationsReducer, {
   NotificationsState
 } from "pages/app/components/notifications/reducers/notifications.reducers";
@@ -21,7 +19,7 @@ import signUpReducer, {
   SignUpState
 } from "pages/auth/signup/reducers/signup.reducers";
 import dashboardReducer, {
-  DashboardState
+  ManagerDashboardState
 } from "pages/dashboard/reducers/dashboard.reducers";
 import managerReducer, {
   ManagerState
@@ -88,7 +86,7 @@ export type RootState = DeepReadonly<{
   routing: RouterState;
   passwordRestoreData: PasswordState;
   alertMessages: AlertMessagesState;
-  dashboard: DashboardState;
+  dashboard: ManagerDashboardState;
   accountSettings: AccountSettingsState;
   wallet: WalletState;
   ui: IUiState;
@@ -99,7 +97,6 @@ export default combineReducers<RootState>({
   programNotifications: programNotificationsReducer,
   fundNotifications: fundNotificationsReducer,
   programDeposit: programDepositReducer,
-  assetEdit: assetEditReducer,
   fundDeposit: fundDepositReducer,
   manager: managerReducer,
   programsData: programsReducer,
@@ -113,7 +110,6 @@ export default combineReducers<RootState>({
   signUpData: signUpReducer,
   authData: authReducer,
   profileHeader: headerReducer,
-  programSettingsData: programSettingsReducer,
   passwordRestoreData: passwordRestoreReducer,
   notifications: notificationsReducer,
   accountSettings: accountSettingsReducer,
