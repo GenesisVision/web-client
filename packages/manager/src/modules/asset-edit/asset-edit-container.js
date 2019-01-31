@@ -9,15 +9,7 @@ import Dialog from "shared/components/dialog/dialog";
 class AssetEditContainer extends Component {
   state = { serverError: "" };
   render() {
-    const {
-      service,
-      info,
-      onApply,
-      submitInfo,
-      open,
-      onClose,
-      type
-    } = this.props;
+    const { service, info, onApply, open, onClose, type } = this.props;
     const handleClose = () => {
       this.setState({ serverError: "" });
       onClose();
@@ -39,7 +31,6 @@ class AssetEditContainer extends Component {
       <Dialog open={open} onClose={handleClose}>
         <AssetEditPopup
           type={type}
-          submitInfo={submitInfo}
           info={info}
           edit={handleEdit}
           serverError={this.state.serverError}
@@ -63,10 +54,6 @@ AssetEditContainer.propTypes = {
   })
 };
 
-const mapStateToProps = state => ({
-  submitInfo: state.assetEdit.submit
-});
-
 const mapDispatchToProps = dispatch => ({
   service: bindActionCreators(
     {
@@ -77,6 +64,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(
-  mapStateToProps,
+  undefined,
   mapDispatchToProps
 )(AssetEditContainer);
