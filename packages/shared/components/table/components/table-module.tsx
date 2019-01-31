@@ -1,15 +1,39 @@
-import PropTypes from "prop-types";
-import React, { PureComponent } from "react";
+import React from "react";
 import { updateFilter } from "shared/components/table//helpers/filtering.helpers";
 import { calculateTotalPages } from "shared/components/table//helpers/paging.helpers";
+import { IDataModel, IPaging } from "shared/constants/constants";
 
 import { composeRequestFilters } from "../services/table.service";
 import Table from "./table";
 
-const defaultData = { items: null, total: 0 };
+const defaultData: IDataModel = { items: null, total: 0 };
 
-class TableModule extends PureComponent {
-  constructor(props) {
+interface ITableModuleState {
+  paging: IPaging;
+  sorting: Object;
+  filtering: Object;
+  data: IDataModel;
+  isPending: boolean;
+}
+
+export interface ITableModuleProps {
+  loader: boolean;
+  paging: IPaging;
+  sorting: string;
+  filtering: Object;
+  defaultFilters: any[];
+  getItems: Function;
+  data: IDataModel;
+}
+
+class TableModule extends React.Component<
+  ITableModuleProps,
+  ITableModuleState
+> {
+  static defaultProps = {
+    loader: true
+  };
+  constructor(props: ITableModuleProps) {
     super(props);
 
     const { paging, sorting, filtering } = this.props;
@@ -38,9 +62,9 @@ class TableModule extends PureComponent {
 
   updateItems = () => {
     const { paging, sorting, filtering } = this.state;
-    const { defaultFilters, getItems } = this.props;
+    const { defaultFilters, getItems, loader } = this.props;
 
-    this.setState({ isPending: true });
+    if (loader) this.setState({ isPending: true });
 
     const filters = composeRequestFilters({
       paging,
@@ -49,7 +73,7 @@ class TableModule extends PureComponent {
       defaultFilters
     });
     getItems(filters)
-      .then(data => {
+      .then((data: any) => {
         const totalPages = calculateTotalPages(data.total, paging.itemsOnPage);
         this.setState(prevState => ({
           data,
@@ -57,12 +81,12 @@ class TableModule extends PureComponent {
           isPending: false
         }));
       })
-      .catch(e => {
+      .catch((e: any) => {
         this.setState({ isPending: false });
       });
   };
 
-  handleUpdateSorting = sorting => {
+  handleUpdateSorting = (sorting: Object) => {
     this.setState(
       prevState => ({
         sorting: sorting,
@@ -75,7 +99,7 @@ class TableModule extends PureComponent {
     );
   };
 
-  handleUpdateFilter = filter => {
+  handleUpdateFilter = (filter: Object) => {
     this.setState(prevState => {
       return {
         filtering: updateFilter(prevState.filtering, filter),
@@ -87,7 +111,7 @@ class TableModule extends PureComponent {
     }, this.updateItems);
   };
 
-  handleUpdatePaging = nextPageIndex => {
+  handleUpdatePaging = (nextPageIndex: number) => {
     this.setState(
       prevState => ({
         paging: {
@@ -99,11 +123,11 @@ class TableModule extends PureComponent {
     );
   };
 
-  handleUpdateRow = row => {
+  handleUpdateRow = (row: any) => {
     const { data } = this.state;
     const newData = {
       ...data,
-      items: data.items.map(x => (x.id === row.id ? row : x))
+      items: data.items.map((x: any) => (x.id === row.id ? row : x))
     };
     this.setState({ data: newData });
   };
@@ -126,14 +150,5 @@ class TableModule extends PureComponent {
     );
   }
 }
-
-TableModule.propTypes = {
-  paging: PropTypes.object,
-  sorting: PropTypes.string,
-  filtering: PropTypes.object,
-  defaultFilters: PropTypes.array,
-  getItems: PropTypes.func,
-  data: PropTypes.object
-};
 
 export default TableModule;

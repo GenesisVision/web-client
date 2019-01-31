@@ -49,8 +49,9 @@ export const getProgramStatistic = (
     };
     const profitChartData = {
       balance: profitChart.balance,
-      totalGvtProfit: profitChart.totalGvtProfit,
-      totalProgramCurrencyProfit: profitChart.totalProgramCurrencyProfit,
+      timeFrameProgramCurrencyProfit:
+        profitChart.timeframeProgramCurrencyProfit,
+      timeFrameGvtProfit: profitChart.timeframeGvtProfit,
       programCurrency: profitChart.programCurrency,
       profitChangePercent: profitChart.profitChangePercent,
       pnLChart: profitChart.pnLChart,
@@ -95,6 +96,17 @@ export const fetchProgramTrades = (id, filters, currency) => {
       ...filters,
       currency
     })
+    .then(data => {
+      return Promise.resolve({
+        total: data.total,
+        items: data.trades
+      });
+    });
+};
+
+export const fetchOpenPositions = (id, filters) => {
+  return programsApi
+    .v10ProgramsByIdTradesOpenGet(id, { sorting: filters.sorting })
     .then(data => {
       return Promise.resolve({
         total: data.total,

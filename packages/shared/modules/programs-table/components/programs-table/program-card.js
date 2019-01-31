@@ -150,7 +150,7 @@ class ProgramCard extends Component {
         </div>
         <div className="programs-cards__table">
           <div className="programs-cards__table-column">
-            <StatisticItem label={t("programs-page.programs-header.balance")}>
+            <StatisticItem label={t("programs-page.programs-header.equity")}>
               <NumberFormat
                 value={program.statistic.balanceGVT.amount}
                 displayType="text"

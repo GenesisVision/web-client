@@ -40,7 +40,7 @@ const ProgramBalanceTooltip = ({
 
   return (
     <ChartTooltip
-      heading="Balance"
+      heading="Equity"
       body={
         <TooltipBody
           managersFunds={managersFunds}

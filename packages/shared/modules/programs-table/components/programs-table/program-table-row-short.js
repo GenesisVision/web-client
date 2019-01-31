@@ -1,6 +1,6 @@
 import classnames from "classnames";
-import { GVButton } from "gv-react-components";
 import React from "react";
+import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
@@ -12,10 +12,12 @@ import ProgramSimpleChart from "shared/components/program-simple-chart/program-s
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import Tooltip from "shared/components/tooltip/tooltip";
+import { STATUS } from "shared/constants/constants";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
 
 const ProgramTableRowShort = ({
+  t,
   title,
   showRating,
   program,
@@ -24,6 +26,7 @@ const ProgramTableRowShort = ({
   onExpandClick
 }) => {
   const {
+    status,
     availableInvestment,
     statistic,
     logo,
@@ -80,7 +83,7 @@ const ProgramTableRowShort = ({
                 {program.title}
               </Link>
             </div>
-            {tags && (
+            {/*{tags && (
               <div className="programs-table__cell--bottom">
                 {tags.map((tag, index) => (
                   <span key={tag.name} style={{ color: tag.color }}>
@@ -89,7 +92,7 @@ const ProgramTableRowShort = ({
                   </span>
                 ))}
               </div>
-            )}
+            )}*/}
           </div>
         </div>
       </TableCell>
@@ -119,9 +122,11 @@ const ProgramTableRowShort = ({
         {formatValue(availableInvestment)} GVT
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--period">
-        {periodStarts && (
-          <ProgramPeriodPie start={periodStarts} end={periodEnds} />
-        )}
+        {periodStarts &&
+          ((status !== STATUS.CLOSED && (
+            <ProgramPeriodPie start={periodStarts} end={periodEnds} />
+          )) ||
+            t("program-period.program-closed"))}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--trades">
         {statistic.tradesCount}
@@ -159,4 +164,4 @@ const ProgramTableRowShort = ({
   );
 };
 
-export default ProgramTableRowShort;
+export default translate()(ProgramTableRowShort);

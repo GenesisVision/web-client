@@ -14,6 +14,7 @@ import ProgramDetailsDescriptionSection from "shared/components/programs/program
 import ProgramDetailsStatisticSection from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import ProgramDetailsHistorySection from "shared/components/programs/program-details/program-trades/program-details-history-section";
 import {
+  fetchOpenPositions,
   fetchProgramTrades,
   getProgramDescription,
   getProgramStatistic
@@ -121,6 +122,7 @@ class ProgramDetailsPage extends PureComponent {
             </div>
             <div className="details__section">
               <ProgramDetailsStatisticSection
+                status={this.description.status}
                 getProgramStatistic={getProgramStatistic}
                 programId={this.description.id}
                 currency={currency}
@@ -131,6 +133,7 @@ class ProgramDetailsPage extends PureComponent {
             </div>
             <div className="details__history">
               <ProgramDetailsHistorySection
+                fetchOpenPositions={fetchOpenPositions}
                 fetchTrades={fetchProgramTrades}
                 fetchPortfolioEvents={filters =>
                   fetchPortfolioEvents({
@@ -140,6 +143,7 @@ class ProgramDetailsPage extends PureComponent {
                 }
                 fetchHistoryCounts={fetchHistoryCounts}
                 programId={this.description.id}
+                programCurrency={this.description.currency}
                 currency={currency}
                 isInvested={isInvested}
                 eventTypeFilterValues={MANAGER_EVENT_TYPE_FILTER_VALUES}

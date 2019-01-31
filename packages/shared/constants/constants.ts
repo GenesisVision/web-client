@@ -12,3 +12,17 @@ export const STATUS = {
   PENDING: "Pending"
 };
 export const PROFIT_EVENT = "Profit";
+
+export enum SORTING {
+  DESC = "Desc",
+  ASC = "Asc"
+}
+export interface IDataModel {
+  items: any;
+  total: number;
+}
+export interface IPaging {
+  currentPage: number;
+  itemsOnPage: number;
+  totalPages: number;
+}
