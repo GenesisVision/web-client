@@ -3,7 +3,7 @@
   "workspaces": ["packages/*"],
   "dependencies": {
     "gv-api-web": "git+https://github.com/GenesisVision/gv-api-web.git#development",
-    "gv-react-components": "^0.0.32",
+    "gv-react-components": "^0.0.33",
     "scriptjs": "^2.5.9"
   },
   "devDependencies": {

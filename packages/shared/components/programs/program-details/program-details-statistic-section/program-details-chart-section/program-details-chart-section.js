@@ -10,7 +10,7 @@ import ProgramBalanceChartSection from "./program-balance-chart-section/program-
 import ProgramProfitChartSection from "./program-profit-chart-section/program-profit-chart-section";
 
 const PROFIT_TAB = "profit";
-const BALANCE_TAB = "balance";
+const EQUITY_TAB = "equity";
 class ProgramDetailsChartSection extends PureComponent {
   state = {
     tab: PROFIT_TAB
@@ -32,8 +32,8 @@ class ProgramDetailsChartSection extends PureComponent {
             label={t("program-details-page.chart.tabs.profit")}
           />
           <GVTab
-            value={BALANCE_TAB}
-            label={t("program-details-page.chart.tabs.balance")}
+            value={EQUITY_TAB}
+            label={t("program-details-page.chart.tabs.equity")}
           />
         </GVTabs>
         {tab === PROFIT_TAB && (
@@ -43,7 +43,7 @@ class ProgramDetailsChartSection extends PureComponent {
             onPeriodChange={onPeriodChange}
           />
         )}
-        {tab === BALANCE_TAB && (
+        {tab === EQUITY_TAB && (
           <ProgramBalanceChartSection
             balanceChart={balanceChart}
             period={period}

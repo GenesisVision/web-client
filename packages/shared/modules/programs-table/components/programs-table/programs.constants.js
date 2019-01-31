@@ -72,8 +72,8 @@ export const PROGRAMS_COLUMNS = [
     name: "title"
   },
   {
-    name: "balance",
-    sortingName: "ByBalance"
+    name: "equity",
+    sortingName: "ByEquity"
   },
   {
     name: "currency"
