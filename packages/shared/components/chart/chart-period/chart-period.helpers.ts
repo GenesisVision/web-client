@@ -1,15 +1,17 @@
 import moment from "moment";
 
-export const ChartPeriodType = {
-  day: "day",
-  week: "week",
-  month: "month",
-  quarter: "quarter",
-  year: "year",
-  all: "all"
-};
+export enum ChartPeriodType {
+  day = "day",
+  week = "week",
+  month = "month",
+  quarter = "quarter",
+  year = "year",
+  all = "all"
+}
 
-export const getPeriodStartDate = periodType => {
+export const getPeriodStartDate = (
+  periodType: keyof typeof ChartPeriodType
+) => {
   switch (periodType) {
     case ChartPeriodType.all:
       return undefined;
@@ -26,7 +28,13 @@ export const DEFAULT_PERIOD = {
   end: moment().toDate()
 };
 
-export const getDefaultPeriod = () => {
+export type ChartDefaultPeriod = {
+  type: keyof typeof ChartPeriodType;
+  start?: Date;
+  end?: Date;
+};
+
+export const getDefaultPeriod = (): ChartDefaultPeriod => {
   return {
     type: ChartPeriodType.week,
     start: getPeriodStartDate(ChartPeriodType.week),

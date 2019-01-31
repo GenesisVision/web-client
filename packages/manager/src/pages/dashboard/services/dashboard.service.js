@@ -25,6 +25,7 @@ export const getAssetChart = (assetId, assetTitle, assetType) => (
   };
 
   if (assetType === "Program") {
+    //TODO удалить if, отрефакторить
     programsApi
       .v10ProgramsByIdChartsProfitGet(assetId, chartFilter)
       .then(data => {

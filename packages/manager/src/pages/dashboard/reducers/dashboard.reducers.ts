@@ -1,12 +1,26 @@
 import { combineReducers } from "redux";
+import { ChartDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
+import { DeepReadonly } from "utility-types";
 
 import dashboardAssetChartReducer from "./dashboard-asset-chart.reducer";
 import dashboardAssetReducer from "./dashboard-assets.reducer";
-import dashboardEventsReducer from "./dashboard-events.reducer";
+import dashboardEventsReducer, {
+  ManagerPortfolioEventsState
+} from "./dashboard-events.reducer";
 import dashboardFundsReducer from "./dashboard-funds.reducer";
 import dashboardInRequestsReducer from "./dashboard-in-requests.reducer";
-import dashboardPeriodReducer from "./dashboard-period.redicer";
+import dashboardPeriodReducer from "./dashboard-period.reducer";
 import dashboardProgramsReducer from "./dashboard-programs.reducer";
+
+export type ManagerDashboardState = DeepReadonly<{
+  period: ChartDefaultPeriod;
+  assets: any;
+  assetChart: any;
+  eventsData: ManagerPortfolioEventsState;
+  programs: any;
+  funds: any;
+  inRequestsData: any;
+}>;
 
 const dashboardReducer = combineReducers({
   period: dashboardPeriodReducer,
