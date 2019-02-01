@@ -7,19 +7,13 @@ import NumberFormat from "react-number-format";
 import * as InnerColors from "shared/components/gv-styles/color";
 import PieContainer from "shared/components/pie-container/pie-container";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import ArrowIcon from "shared/media/arrow-up.svg";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 const getPercentageValue = (value, totalValue) => {
   return Math.round((value / totalValue) * 100);
 };
 
-const WalletBalanceElements = ({
-  t,
-  handleAddFunds,
-  handleWithdraw,
-  walletBalanceData
-}) => {
+const WalletBalanceElements = ({ t, walletBalanceData }) => {
   const totalValue = walletBalanceData.totalCcy;
   return (
     <div className="wallet-balance__wrapper">
@@ -111,32 +105,6 @@ const WalletBalanceElements = ({
           </StatisticItem>
         </li>
       </ul>
-      {handleAddFunds && handleWithdraw && (
-        <div className="wallet-balance__buttons">
-          <GVButton
-            className="wallet-balance__withdraw"
-            color="secondary"
-            variant="outlined"
-            onClick={handleWithdraw}
-          >
-            <img
-              className="wallet-balance__button-icon"
-              src={ArrowIcon}
-              alt="Icon"
-            />
-            {t("wallet-page.withdraw")}
-          </GVButton>
-          <GVButton
-            className="wallet-balance__add-funds"
-            onClick={handleAddFunds}
-          >
-            <span className="wallet-balance__button-icon wallet-balance__button-icon--sign">
-              +
-            </span>
-            {t("wallet-page.add-funds")}
-          </GVButton>
-        </div>
-      )}
     </div>
   );
 };

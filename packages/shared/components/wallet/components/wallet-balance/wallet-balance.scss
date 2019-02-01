@@ -5,6 +5,14 @@
 .wallet-balance {
   padding: 0 $padding-xsmall;
 
+  &__header {
+    @include adaptive-padding(right, $padding-medium);
+
+    span {
+      font-weight: 400;
+    }
+  }
+
   &__header-icon {
     width: 30px;
     height: 30px;
@@ -16,8 +24,7 @@
   &__wrapper {
     display: flex;
     flex-wrap: wrap;
-    align-items: flex-end;
-    justify-content: space-between;
+    align-items: center;
     padding-bottom: $padding-xsmall;
   }
 
@@ -128,13 +135,8 @@
 
   &__buttons {
     .gv-btn {
-      @include adaptive-margin(left, $padding-small);
+      margin-right: $padding-small;
       margin-bottom: $padding-medium-mobile;
-      margin-right: 0;
-
-      &:first-child {
-        margin-left: 0;
-      }
     }
   }
 

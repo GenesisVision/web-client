@@ -543,12 +543,14 @@
   },
   "wallet-page": {
     "title": "Wallet",
+    "wallet": "wallet",
     "total-balance": "Total balance",
     "invested-value": "Invested value",
     "available": "Available",
     "pending": "Pending",
     "add-funds": "Add funds",
     "withdraw": "Withdraw",
+    "convert": "Convert",
     "transactions": {
       "title": "Transactions",
       "empty-transactions": "There are no transactions",

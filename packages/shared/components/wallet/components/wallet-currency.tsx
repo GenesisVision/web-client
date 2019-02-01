@@ -14,6 +14,7 @@ import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-fund
 import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
 
 import WalletBalanceElements from "./wallet-balance/wallet-balance-elements";
+import WalletBalanceButtons from "./wallet-balance/wallet-balance-buttons";
 import WalletBalanceLoader from "./wallet-balance/wallet-balance-loader";
 import WalletContainer from "./wallet-container/wallet-container";
 
@@ -56,7 +57,7 @@ class WalletCurrency extends React.Component<IWalletProps> {
   };
 
   render() {
-    const { info, isPending } = this.props;
+    const { t, info, isPending } = this.props;
     if (!info && isPending) return <WalletBalanceLoader />;
     if (!info) return <NotFoundPage />;
     const currentWallet = {
@@ -66,20 +67,22 @@ class WalletCurrency extends React.Component<IWalletProps> {
     return (
       <Page title={info.title}>
         <div className="wallet-balance">
-          <h1>
-            {info.title}
-            <img
-              src={getWalletIcon(info.currency)}
-              className="wallet-balance__header-icon"
-              alt="Icon"
+          <div className="wallet-balance__wrapper">
+            <h1 className="wallet-balance__header">
+              {info.title}
+              <span> {t("wallet-page.wallet")}</span>
+              <img
+                src={getWalletIcon(info.currency)}
+                className="wallet-balance__header-icon"
+                alt="Icon"
+              />
+            </h1>
+            <WalletBalanceButtons
+              handleAddFunds={this.handleOpenAddFundsPopup}
+              handleWithdraw={this.handleOpenWithdrawPopup}
             />
-          </h1>
-
-          <WalletBalanceElements
-            walletBalanceData={info}
-            handleAddFunds={this.handleOpenAddFundsPopup}
-            handleWithdraw={this.handleOpenWithdrawPopup}
-          />
+          </div>
+          <WalletBalanceElements walletBalanceData={info} />
         </div>
         <WalletContainer
           currency={info.currency}
