@@ -14,28 +14,11 @@ import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.re
 import { getWalletIcon } from "shared/components/wallet/components/wallet-currency";
 import { composeWalletCurrencytUrl } from "shared/components/wallet/wallet.routes";
 import ArrowIcon from "shared/media/arrow-up.svg";
-import EmptyTransactionsIcon from "shared/media/empty-wallet.svg";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
 import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
 
 import { walletTableTransactionsSelector } from "../wallet-transactions/wallet-transactions.selector";
 import { WALLET_LIST_COLUMNS } from "./wallet-list.constants";
-
-const emptyWallets = t => (
-  <div className="empty-wallets">
-    <div className="empty-wallets__subtitle">
-      {t("wallet-page.transactions.title")}
-    </div>
-    <div className="empty-wallets__disclaimer">
-      <div className="empty-wallets__icon">
-        <img src={EmptyTransactionsIcon} alt="" />
-      </div>
-      <div className="empty-wallets__text">
-        {t("wallet-page.transactions.empty-wallets")}
-      </div>
-    </div>
-  </div>
-);
 
 class WalletList extends Component {
   state = {
