@@ -27,9 +27,9 @@ const optionsReducer = (
 
 // TODO: добавить нормализацию, когда буду уникальные ID
 const addNotificationsReducer = (
-  notifications: DeepReadonly<Array<NotificationViewModel>> = [],
+  notifications: DeepReadonly<NotificationViewModel[]> = [],
   action: any
-): DeepReadonly<Array<NotificationViewModel>> => {
+): DeepReadonly<NotificationViewModel[]> => {
   switch (action.type) {
     case ADD_NOTIFICATIONS:
       return [...notifications, ...action.notifications];

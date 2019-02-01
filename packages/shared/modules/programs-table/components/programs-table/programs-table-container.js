@@ -41,7 +41,6 @@ class ProgramsTableContainer extends Component {
       isAuthenticated,
       title
     } = this.props;
-    console.info(data);
     return (
       <ProgramsTable
         showSwitchView={showSwitchView}
