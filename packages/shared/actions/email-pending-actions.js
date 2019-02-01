@@ -7,8 +7,8 @@ const saveEmail = ({ email }) => ({
   }
 });
 
-const emailPeningActions = {
+const emailPendingActions = {
   saveEmail
 };
 
-export default emailPeningActions;
+export default emailPendingActions;

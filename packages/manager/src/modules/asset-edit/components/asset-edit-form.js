@@ -21,10 +21,8 @@ const AssetEditForm = ({
   values,
   info,
   currency,
-  disabled,
   handleSubmit,
   title,
-  errorMessage,
   setFieldValue,
   errors,
   notifyError,
@@ -98,13 +96,13 @@ const AssetEditForm = ({
             />
           </div>
         </div>
-        <div className="form-error">{errorMessage || serverError}</div>
+        <div className="form-error">{serverError}</div>
         <div className="dialog__buttons">
           <GVButton
             type="submit"
             id="signUpFormSubmit"
             className="invest-form__submit-button"
-            disabled={disabled || !dirty}
+            disabled={!dirty}
           >
             {t("manager.edit-program.confirm")}
           </GVButton>
