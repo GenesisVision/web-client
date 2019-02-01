@@ -17,10 +17,10 @@ $padding: $padding-small;
 }
 
 .table {
-  @include adaptive-padding(top, $padding-xsmall, 2);
   @include adaptive-padding(bottom, $padding-xsmall, 2);
   width: 100%;
   border-spacing: 0;
+
   & .message {
     padding: $padding;
     text-align: center;
@@ -54,61 +54,59 @@ $padding: $padding-small;
   &__toolbar {
     box-sizing: border-box;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
     width: 100%;
-    align-items: center;
-    justify-content: space-between;
+    align-items: flex-start;
+    justify-content: flex-end;
     padding: 0 $padding-xsmall;
+    min-height: 20px;
   }
 
   &__toggle {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    div {
-      cursor: pointer;
-      padding: 0 $view-svg-size;
-      line-height: 0;
-      .icon {
-        width: auto;
-      }
-      svg {
-        width: $view-svg-size/1.2;
-      }
-      &:last-child {
-        padding-right: 0;
-      }
+  }
+
+  &__toggle-icon {
+    cursor: pointer;
+    padding: 0 $view-svg-size;
+    line-height: 0;
+    .icon {
+      width: $view-svg-size/1.2;
+    }
+    svg {
+      width: $view-svg-size/1.2;
+    }
+    &:last-child {
+      padding-right: 0;
     }
   }
 
   &__title {
-    padding-bottom: 0;
+    @include adaptive-padding(bottom, $padding-xsmall);
     justify-self: flex-start;
     margin-right: auto;
     line-height: 22px;
+    white-space: nowrap;
   }
 
   &__filters {
     align-items: center;
-    width: 100%;
     font-size: $table-title-font-size/2;
     display: flex;
-    flex: 1 1 100%;
-    justify-content: space-between;
     flex-wrap: wrap;
-    order: 99;
+    margin-left: 10px;
 
     .filter {
-      padding: 10px 0;
-
-      &:first-child {
-        padding-left: 0;
-      }
+      margin-right: 15px;
 
       &:last-child {
-        padding-right: 0;
+        margin-right: 0;
       }
+    }
+
+    .sorting-filter {
+      margin-right: 10px;
     }
   }
 
@@ -229,12 +227,17 @@ $padding: $padding-small;
     }
     &__filters {
       font-size: $td-font-size;
+
+      .filter {
+        padding-top: 0;
+      }
     }
     &__body {
       font-size: $td-font-size;
     }
     &__toolbar {
       padding: 0 $padding;
+      min-height: 26px;
     }
     &__footer {
       padding-left: $padding-small;
@@ -245,34 +248,14 @@ $padding: $padding-small;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      div {
-        &:last-child {
-          padding-right: 0;
-        }
-      }
     }
   }
   @include media-breakpoint-tablet() {
     &__filters {
       font-size: $td-font-size;
-      padding-bottom: 0;
-    }
-  }
-  @media (min-width: 900px) {
-    &__filters {
-      justify-content: flex-end;
-      order: 0;
-      flex-basis: 0;
-      padding-top: 0;
 
       .filter {
-        margin-left: 20px;
-        padding: 5px 0;
-
-        &:last-child {
-          margin-right: 0;
-          padding-right: 0;
-        }
+        margin-right: 25px;
       }
     }
   }

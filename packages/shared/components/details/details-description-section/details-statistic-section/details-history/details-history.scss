@@ -20,20 +20,4 @@
     letter-spacing: 0.2px;
     font-weight: 600;
   }
-
-  @include media-breakpoint-landscape-phone() {
-    &__subheading,
-    &__tabs {
-      position: absolute;
-      padding-top: 5px;
-      z-index: 9;
-    }
-    .table__filters {
-      justify-content: flex-end;
-
-      .filter {
-        margin-left: 20px;
-      }
-    }
-  }
 }

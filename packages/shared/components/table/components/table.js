@@ -48,6 +48,7 @@ class Table extends Component {
       sorting,
       updateSorting,
       renderHeader,
+      renderSorting,
       createButtonToolbar,
       renderBodyCard,
       renderBodyRow,
@@ -71,7 +72,7 @@ class Table extends Component {
           columns={columns}
           sorting={sorting}
           updateSorting={updateSorting}
-          renderHeader={renderHeader}
+          renderSorting={renderSorting}
           isViewSwitchEnabled={this.isViewSwitchEnabled}
           createButtonToolbar={createButtonToolbar}
         />
