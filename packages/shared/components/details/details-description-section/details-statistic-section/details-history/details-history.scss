@@ -13,8 +13,11 @@
     }
   }
 
+  &__heading {
+    padding-bottom: 0;
+  }
+
   &__subheading {
-    @include adaptive-padding(bottom, $padding-xsmall);
     @include font-size($font-size-paragraph);
     font-size: $font-size-paragraph-mobile;
     letter-spacing: 0.2px;
