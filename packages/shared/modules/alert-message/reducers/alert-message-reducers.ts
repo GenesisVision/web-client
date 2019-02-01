@@ -3,14 +3,14 @@ import uuid from "uuid";
 
 import * as actionTypes from "../actions/alert-message-actions.constants";
 
-export interface IMessage {
+export type IMessage = DeepReadonly<{
   id: string;
   text: string;
   className?: string;
   isUseLocalization: boolean;
-}
+}>;
 
-export type AlertMessagesState = DeepReadonly<Array<IMessage>>;
+export type AlertMessagesState = DeepReadonly<IMessage[]>;
 
 const initialState: AlertMessagesState = [];
 
@@ -28,7 +28,7 @@ const removeMessage = (state: AlertMessagesState, action: any) => {
   return state.filter(message => message.id !== action.id);
 };
 
-const removeAllMessages = (state: AlertMessagesState): AlertMessagesState => {
+const removeAllMessages = (): AlertMessagesState => {
   return [];
 };
 
@@ -44,7 +44,7 @@ const alertMessagesReducer = (
     case actionTypes.ALERT_MESSAGE_REMOVE_AT:
       return removeMessage(state, action);
     case actionTypes.ALERT_MESSAGE_CLEAR_ALL:
-      return removeAllMessages(state);
+      return removeAllMessages();
     default:
       return state;
   }

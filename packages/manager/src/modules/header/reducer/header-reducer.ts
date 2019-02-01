@@ -4,10 +4,11 @@ import { PROFILE_HEADER } from "shared/components/header/header.constants";
 import apiReducerFactory, {
   IApiReducerFactory
 } from "shared/reducers/api-reducer/api-reducer";
+import { DeepReadonly } from "utility-types";
 
-export type HeaderState = {
-  readonly info: IApiReducerFactory<ProfileHeaderViewModel>;
-};
+export type HeaderState = DeepReadonly<{
+  info: IApiReducerFactory<ProfileHeaderViewModel>;
+}>;
 
 const headerReducer = combineReducers<HeaderState>({
   info: apiReducerFactory({
