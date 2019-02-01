@@ -1,19 +1,32 @@
-import { NotificationSettingList } from "gv-api-web";
-import fundDepositReducer from "modules/fund-deposit/reducer/fund-deposit.reducer";
-import fundWithdrawReducer from "modules/fund-withdraw/reducer/fund-withdraw.reducer";
+import fundDepositReducer, {
+  FundDepositState
+} from "modules/fund-deposit/reducer/fund-deposit.reducer";
 import headerReducer, {
-  IHeaderReducer
+  HeaderState
 } from "modules/header/reducer/header-reducer";
-import programDepositReducer from "modules/program-deposit/reducer/program-deposit.reducer";
-import programWithdrawReducer from "modules/program-withdraw/reducer/program-withdraw.reducer";
-import notificationsReducer from "pages/app/components/notifications/reducers/notifications.reducers";
-import passwordRestoreReducer from "pages/auth/forgot-password/reducers/password-restore-reducers";
-import loginReducer from "pages/auth/login/reducers/login.reducers";
-import signUpReducer from "pages/auth/signup/reducers/signup.reducers";
-import dashboardReducer from "pages/dashboard/reducers/dashboard.reducers";
-import managerReducer from "pages/manager/reducers/manager.reducers";
+import programDepositReducer, {
+  ProgramsDepositState
+} from "modules/program-deposit/reducer/program-deposit.reducer";
+import notificationsReducer, {
+  NotificationsState
+} from "pages/app/components/notifications/reducers/notifications.reducers";
+import passwordRestoreReducer, {
+  PasswordState
+} from "pages/auth/forgot-password/reducers/password-restore-reducers";
+import loginReducer, {
+  LoginState
+} from "pages/auth/login/reducers/login.reducers";
+import signUpReducer, {
+  SignUpState
+} from "pages/auth/signup/reducers/signup.reducers";
+import dashboardReducer, {
+  DashboardState
+} from "pages/dashboard/reducers/dashboard.reducers";
+import managerReducer, {
+  ManagerState
+} from "pages/manager/reducers/manager.reducers";
 import { loadingBarReducer } from "react-redux-loading-bar";
-import { RouterState, routerReducer } from "react-router-redux";
+import { routerReducer } from "react-router-redux";
 import { combineReducers } from "redux";
 import programsRatingReducer from "shared/components/programs-rating/reducers/programs-rating.reducers";
 import walletReducer from "shared/components/wallet/reducers/wallet.reducers";
@@ -25,19 +38,28 @@ import programNotificationsReducer from "shared/modules/program-notifications/re
 import programsReducer from "shared/modules/programs-table/reducers/programs-table.reducers";
 import accountSettingsReducer from "shared/reducers/account-settings";
 import authReducer from "shared/reducers/auth-reducer";
-import { IAuthReducer } from "shared/reducers/auth-reducer";
 import emailPendingReducer from "shared/reducers/email-pending-reducer";
 import platformReducer from "shared/reducers/platform-reducer";
 import uiReducer from "shared/reducers/ui-reducer";
+import { DeepReadonly } from "utility-types";
 
-export interface IState {
-  notificationSettings: NotificationSettingList;
-  profileHeader: IHeaderReducer;
-  authData: IAuthReducer;
-  routing: RouterState;
-}
+import RootState from "../../../shared/reducers/root-reducer";
 
-export default combineReducers({
+type State = DeepReadonly<{
+  profileHeader: HeaderState;
+  programDeposit: ProgramsDepositState;
+  fundDeposit: FundDepositState;
+  notifications: NotificationsState;
+  manager: ManagerState;
+  signUpData: SignUpState;
+  loginData: LoginState;
+  passwordRestoreData: PasswordState;
+  dashboard: DashboardState;
+}>;
+
+export type InvestorRootState = State & RootState;
+
+const rootReducer = combineReducers<InvestorRootState>({
   routing: routerReducer,
   loadingBar: loadingBarReducer,
   platformData: platformReducer,
@@ -53,8 +75,6 @@ export default combineReducers({
   dashboard: dashboardReducer,
   programDeposit: programDepositReducer,
   fundDeposit: fundDepositReducer,
-  programWithdraw: programWithdrawReducer,
-  fundWithdraw: fundWithdrawReducer,
   emailPending: emailPendingReducer,
   notifications: notificationsReducer,
   notificationSettings: notificationSettingsReducer,
@@ -65,3 +85,5 @@ export default combineReducers({
   accountSettings: accountSettingsReducer,
   ui: uiReducer
 });
+
+export default rootReducer;

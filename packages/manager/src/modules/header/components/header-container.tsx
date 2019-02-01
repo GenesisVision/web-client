@@ -10,7 +10,7 @@ import { notificationsToggle } from "../../../pages/app/components/notifications
 import { LOGIN_ROUTE } from "../../../pages/auth/login/login.routes";
 import { logout } from "../../../pages/auth/login/services/login.service";
 import { SIGNUP_ROUTE } from "../../../pages/auth/signup/signup.routes";
-import { IState } from "../../../reducers";
+import { ManagerRootState } from "../../../reducers";
 
 export interface IHeaderContainerStateProps {
   isAuthenticated: boolean;
@@ -62,7 +62,9 @@ const mapDispatchToProps: IHeaderContainerDispatchProps = {
   fetchTwoFactor
 };
 
-const mapStateToProps = (state: IState): IHeaderContainerStateProps => ({
+const mapStateToProps = (
+  state: ManagerRootState
+): IHeaderContainerStateProps => ({
   info: state.profileHeader.info.data,
   isAuthenticated: state.authData.isAuthenticated,
   backPath: state.routing.location ? state.routing.location.pathname : undefined

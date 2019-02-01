@@ -18,17 +18,6 @@ export const fetchDepositProgramInfoById = (id, currency) => {
   };
 };
 
-export const fetchDepositFundInfoById = (id, currency) => {
-  return {
-    type: FETCH_DEPOSIT_PROGRAM_INFO,
-    payload: investorApi.v10InvestorFundsByIdInvestInfoByCurrencyGet(
-      id,
-      currency,
-      authService.getAuthArg()
-    )
-  };
-};
-
 export const clearDepositProgramInfo = () => {
   return {
     type: FETCH_DEPOSIT_PROGRAM_INFO_CLEAR

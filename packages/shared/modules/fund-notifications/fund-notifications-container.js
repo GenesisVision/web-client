@@ -23,7 +23,7 @@ FundNotificationsContainer.propTypes = {
 };
 
 const mapStateToProps = (state, props) => ({
-  fund: state.fundNotifications[props.id]
+  fund: state.fundNotifications.data[props.id]
 });
 
 const mapDispatchToProps = dispatch => ({
