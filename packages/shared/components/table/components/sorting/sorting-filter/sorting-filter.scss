@@ -1,8 +1,18 @@
+@import "~shared/styles/_breakpoint.scss";
+
 .sorting-filter {
   display: flex;
   align-items: center;
   &__btn {
-    padding: 0;
-    font-size: 15px;
+    font-size: 13px;
+    padding: 0 0 5px;
+
+    @include media-breakpoint-landscape-phone() {
+      font-size: 17px;
+    }
+  }
+
+  .filter {
+    margin-right: 5px;
   }
 }
