@@ -25,7 +25,11 @@ import authService from "shared/services/auth-service";
 import { formatValue } from "shared/utils/formatter";
 
 import Profitability from "../../../profitability/profitability";
-import { WALLET_TRANSACTIONS_COLUMNS } from "./wallet-transactions.constants";
+import {
+  WALLET_TRANSACTIONS_COLUMNS,
+  WALLET_TOTAL_TRANSACTIONS_COLUMNS
+} from "./wallet-transactions.constants";
+import { getWalletIcon } from "../wallet-currency";
 
 const TRANSACTIONS_FILTERS = {
   dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE
@@ -39,6 +43,43 @@ const DEFAULT_FILTERS = [
   }
 ];
 
+const renderWalletCell = typeAction => {
+  typeAction = "Convert";
+  if (typeAction === "Convert") {
+    return (
+      <Fragment>
+        <span>
+          <img
+            src={getWalletIcon("GVT")}
+            className="wallet-transactions__icon"
+            alt="Icon"
+          />
+          Genesis Vision
+        </span>
+        <span>
+          <img
+            src={getWalletIcon("BTC")}
+            className="wallet-transactions__icon"
+            alt="Icon"
+          />
+          Bitcoin
+        </span>
+      </Fragment>
+    );
+  } else {
+    return (
+      <Fragment>
+        <img
+          src={getWalletIcon("GVT")}
+          className="wallet-transactions__icon"
+          alt="Icon"
+        />
+        Genesis Vision
+      </Fragment>
+    );
+  }
+};
+
 class WalletTransactions extends Component {
   fetch = filters => {
     const { currency } = this.props;
@@ -51,7 +92,10 @@ class WalletTransactions extends Component {
   };
 
   render() {
-    const { t, createButtonToolbar } = this.props;
+    const { t, createButtonToolbar, isTotalWallet } = this.props;
+    const columns = isTotalWallet
+      ? WALLET_TOTAL_TRANSACTIONS_COLUMNS
+      : WALLET_TRANSACTIONS_COLUMNS;
     return (
       <Surface className="wallet-transactions">
         <TableModule
@@ -79,7 +123,7 @@ class WalletTransactions extends Component {
               </Fragment>
             );
           }}
-          columns={WALLET_TRANSACTIONS_COLUMNS}
+          columns={columns}
           renderHeader={column => (
             <span
               className={`wallet-transactions__cell wallet-transactions__cell--${
@@ -92,6 +136,11 @@ class WalletTransactions extends Component {
           renderBodyRow={transaction => {
             return (
               <TableRow className="wallet-transactions__row">
+                {isTotalWallet && (
+                  <TableCell className="wallet-transactions__cell wallet-transactions__cell--wallet">
+                    {renderWalletCell(transaction.action)}
+                  </TableCell>
+                )}
                 <TableCell className="wallet-transactions__cell wallet-transactions__cell--date">
                   {moment(transaction.date).format("DD-MM-YYYY, hh:mm a")}
                 </TableCell>
@@ -111,6 +160,7 @@ class WalletTransactions extends Component {
                       value={formatValue(transaction.amount)}
                       thousandSeparator=" "
                       displayType="text"
+                      suffix=" GVT"
                     />
                   </Profitability>
                 </TableCell>

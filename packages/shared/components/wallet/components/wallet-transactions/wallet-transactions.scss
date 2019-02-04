@@ -16,6 +16,10 @@
     margin-left: 0;
   }
 
+  &__icon-currency {
+    @include adaptive-margin(right, $padding-xsmall);
+  }
+
   &__cell {
     color: $text-light-color;
 

@@ -26,6 +26,7 @@ class WalletContainer extends PureComponent {
         </div>
         <div>
           <WalletTransactions
+            isCurrentWallet="true"
             currency={currency}
             eventTypeFilterValues={eventTypeFilterValues}
             createButtonToolbar={createButtonSearch("/")}

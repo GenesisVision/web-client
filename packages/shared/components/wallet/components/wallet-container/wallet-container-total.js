@@ -12,6 +12,7 @@ import WalletTransactions from "../wallet-transactions/wallet-transactions";
 
 const WALLETS_TAB = "wallets";
 const TRANSACTIONS_TAB = "transactions";
+const EXTERNAL_TAB = "external";
 
 const createButtonSearch = route => (
   <div className="wallet-container__button-container">
@@ -40,6 +41,7 @@ class WalletContainerTotal extends PureComponent {
             <GVTabs value={tab} onChange={this.handleTabChange}>
               <GVTab value={WALLETS_TAB} label={"My wallets"} />
               <GVTab value={TRANSACTIONS_TAB} label={"All transactions"} />
+              <GVTab value={EXTERNAL_TAB} label={"External transactions"} />
             </GVTabs>
           </div>
         </div>
@@ -51,6 +53,12 @@ class WalletContainerTotal extends PureComponent {
             />
           )}
           {tab === TRANSACTIONS_TAB && (
+            <WalletTransactions
+              isTotalWallet="true"
+              createButtonToolbar={createButtonSearch("/")}
+            />
+          )}
+          {tab === EXTERNAL_TAB && (
             <WalletTransactions createButtonToolbar={createButtonSearch("/")} />
           )}
         </div>
