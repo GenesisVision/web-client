@@ -31,6 +31,12 @@ class DashboardAssets extends Component {
     this.setState({ tab });
   };
 
+  componentWillUnmount() {
+    if (this.props.clearAssets) {
+      this.props.clearAssets();
+    }
+  }
+
   render() {
     const { tab, programsCount, fundsCount } = this.state;
     const {
