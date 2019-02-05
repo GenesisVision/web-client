@@ -577,6 +577,12 @@
     "add-funds": "Add funds",
     "withdraw": "Withdraw",
     "convert": "Convert",
+    "tabs": {
+      "wallets": "My wallets",
+      "copytrading": "Copytrading accounts",
+      "transactions": "Transactions",
+      "external": "Deposit/withdrawals"
+    },
     "transactions": {
       "title": "Transactions",
       "empty-transactions": "There are no transactions",

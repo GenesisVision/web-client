@@ -97,14 +97,14 @@ class WalletList extends Component {
                 </TableCell>
                 <TableCell className="wallet-list__cell">
                   <NumberFormat
-                    value={wallet.invested}
+                    value={wallet.available}
                     thousandSeparator=" "
                     displayType="text"
                   />
                 </TableCell>
                 <TableCell className="wallet-list__cell">
                   <NumberFormat
-                    value={wallet.available}
+                    value={wallet.invested}
                     thousandSeparator=" "
                     displayType="text"
                   />
