@@ -9,18 +9,13 @@ import ConvertIcon from "shared/media/convert.svg";
 const WalletBalanceButtons = ({ t, handleAddFunds, handleWithdraw }) => {
   return (
     <div className="wallet-balance__buttons">
-      <GVButton className="wallet-balance__add-funds" onClick={handleAddFunds}>
+      <GVButton onClick={handleAddFunds}>
         <span className="wallet-balance__button-icon wallet-balance__button-icon--sign">
           +
         </span>
         {t("wallet-page.add-funds")}
       </GVButton>
-      <GVButton
-        className="wallet-balance__withdraw"
-        color="secondary"
-        variant="outlined"
-        onClick={handleWithdraw}
-      >
+      <GVButton color="secondary" variant="outlined" onClick={handleWithdraw}>
         <img
           className="wallet-balance__button-icon"
           src={ArrowIcon}
@@ -28,12 +23,7 @@ const WalletBalanceButtons = ({ t, handleAddFunds, handleWithdraw }) => {
         />
         {t("wallet-page.withdraw")}
       </GVButton>
-      <GVButton
-        className="wallet-balance__withdraw"
-        color="secondary"
-        variant="outlined"
-        onClick={handleWithdraw}
-      >
+      <GVButton color="secondary" variant="outlined" onClick={handleWithdraw}>
         <img
           className="wallet-balance__button-icon"
           src={ConvertIcon}
