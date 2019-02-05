@@ -6,12 +6,7 @@ import { translate } from "react-i18next";
 import ArrowIcon from "shared/media/arrow-up.svg";
 import ConvertIcon from "shared/media/convert.svg";
 
-const WalletBalanceButtons = ({
-  t,
-  handleAddFunds,
-  handleWithdraw,
-  handleConvert
-}) => {
+const WalletBalanceButtons = ({ t, handleAddFunds, handleWithdraw }) => {
   return (
     <div className="wallet-balance__buttons">
       <GVButton className="wallet-balance__add-funds" onClick={handleAddFunds}>
@@ -37,7 +32,7 @@ const WalletBalanceButtons = ({
         className="wallet-balance__withdraw"
         color="secondary"
         variant="outlined"
-        onClick={handleConvert}
+        onClick={handleWithdraw}
       >
         <img
           className="wallet-balance__button-icon"

@@ -42,17 +42,6 @@ class WalletList extends Component {
     this.setState({ isOpenAddFundsPopup: false, currentWallet: {} });
   };
 
-  handleOpenConvertPopup = wallet => {
-    this.setState({
-      isOpenConvertPopup: true,
-      currentWallet: wallet
-    });
-  };
-
-  handleCloseConvertPopup = () => {
-    this.setState({ isOpenConvertPopup: false, currentWallet: {} });
-  };
-
   handleOpenWithdrawPopup = wallet => {
     this.setState({ isOpenWithdrawPopup: true, currentWallet: wallet });
   };
@@ -130,7 +119,7 @@ class WalletList extends Component {
                 <TableCell className="wallet-list__cell wallet-list__cell--buttons">
                   <Chip
                     className="wallet-list__button-convert"
-                    onClick={this.handleOpenConvertPopup.bind(this, wallet)}
+                    onClick={this.handleOpenWithdrawPopup.bind(this, wallet)}
                   >
                     <img src={ConvertIcon} alt="Convert Icon" />
                   </Chip>
@@ -161,11 +150,6 @@ class WalletList extends Component {
           currentWallet={this.state.currentWallet}
           open={this.state.isOpenWithdrawPopup}
           onClose={this.handleCloseWithdrawPopup}
-        />
-        <WalletConvertPopup
-          currentWallet={this.state.currentWallet}
-          open={this.state.isOpenConvertPopup}
-          onClose={this.handleCloseConvertPopup}
         />
       </Surface>
     );

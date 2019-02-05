@@ -50,16 +50,6 @@ class WalletCurrency extends React.Component<IWalletProps> {
     this.setState({ isOpenAddFundsPopup: false });
   };
 
-  handleOpenConvertPopup = wallet => {
-    this.setState({
-      isOpenConvertPopup: true
-    });
-  };
-
-  handleCloseConvertPopup = () => {
-    this.setState({ isOpenConvertPopup: false });
-  };
-
   handleOpenWithdrawPopup = () => {
     this.setState({ isOpenWithdrawPopup: true });
   };
@@ -92,7 +82,6 @@ class WalletCurrency extends React.Component<IWalletProps> {
             <WalletBalanceButtons
               handleAddFunds={this.handleOpenAddFundsPopup}
               handleWithdraw={this.handleOpenWithdrawPopup}
-              handleConvert={this.handleOpenConvertPopup}
             />
           </div>
           <WalletBalanceElements walletBalanceData={info} />
@@ -110,11 +99,6 @@ class WalletCurrency extends React.Component<IWalletProps> {
           currentWallet={info}
           open={this.state.isOpenWithdrawPopup}
           onClose={this.handleCloseWithdrawPopup}
-        />
-        <WalletConvertPopup
-          currentWallet={currentWallet}
-          open={this.state.isOpenConvertPopup}
-          onClose={this.handleCloseConvertPopup}
         />
       </Page>
     );
