@@ -71,16 +71,12 @@
   }
 
   &__info {
-    margin-bottom: 30px;
+    margin-top: 30px;
     opacity: 0.5;
     font-size: 11px;
     line-height: 1.64;
     letter-spacing: 0.2px;
     text-align: center;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
   }
 
   &__top {
@@ -211,10 +207,6 @@
 
     .gv-btn + .gv-btn {
       margin-left: 16px;
-    }
-
-    ~ .dialog__info {
-      margin-top: 30px;
     }
   }
 

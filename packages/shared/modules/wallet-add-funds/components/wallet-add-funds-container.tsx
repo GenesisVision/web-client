@@ -8,7 +8,12 @@ import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
 import { IDispatchable } from "shared/utils/types";
 
-import WalletAddFundsForm, { CurrentWallet } from "./wallet-add-funds-form";
+import WalletAddFundsForm from "./wallet-add-funds-form.js";
+
+export interface CurrentWallet {
+  currency: string;
+  available: number;
+}
 
 interface IWalletAddFundsContainerState {
   isPending: boolean;
