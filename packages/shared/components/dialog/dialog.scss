@@ -77,6 +77,10 @@
     line-height: 1.64;
     letter-spacing: 0.2px;
     text-align: center;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 
   &__top {
@@ -207,6 +211,10 @@
 
     .gv-btn + .gv-btn {
       margin-left: 16px;
+    }
+
+    ~ .dialog__info {
+      margin-top: 30px;
     }
   }
 

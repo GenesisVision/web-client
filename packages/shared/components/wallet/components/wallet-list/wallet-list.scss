@@ -16,17 +16,15 @@
       min-width: 200px;
     }
 
-    &--buttons {
-      .chip {
-        @include adaptive-margin(left, $padding-xsmall);
-        width: 32px;
-        height: 32px;
-
-        &.wallet-list__button-add-funds {
-          font-size: 18px;
-        }
-      }
+    &--buttons .chip {
+      @include adaptive-margin(left, $padding-xsmall);
+      width: 32px;
+      height: 32px;
     }
+  }
+
+  &__button-add-funds {
+    font-size: 18px;
   }
 
   & .table__cell:last-child {
@@ -45,45 +43,16 @@
     height: 24px;
   }
 
+  &__button-convert {
+    img {
+      max-height: 13px;
+    }
+  }
+
   @include media-breakpoint-tablet() {
     & .table__toolbar {
       padding: 0 32px;
       flex-direction: row;
-    }
-  }
-}
-
-.empty-wallets {
-  padding: $padding-xsmall-mobile $padding-small-mobile;
-  @include media-breakpoint-landscape-phone() {
-    padding: $padding-xsmall $padding-small;
-  }
-  &__subtitle {
-    font-weight: 600;
-    font-size: $font-size-h3-mobile;
-    padding: $padding-xsmall-mobile 0;
-    @include media-breakpoint-landscape-phone() {
-      font-size: $font-size-h3;
-      padding: $padding-xsmall 0;
-    }
-  }
-  &__disclaimer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: $padding-big-mobile 0;
-    @include media-breakpoint-landscape-phone() {
-      padding: $padding-big 0;
-    }
-  }
-  &__text {
-    font-size: $font-size-paragraph-mobile;
-    font-weight: 500;
-    opacity: 0.4;
-    padding: $padding-xsmall-mobile 0;
-    @include media-breakpoint-landscape-phone() {
-      font-size: $font-size-paragraph;
-      padding: $padding-xsmall 0;
     }
   }
 }
