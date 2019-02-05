@@ -17,94 +17,85 @@ const WalletBalanceElements = ({ t, walletBalanceData }) => {
   const totalValue = walletBalanceData.totalCcy;
   return (
     <div className="wallet-balance__wrapper">
-      <ul className="wallet-balance__statistic">
-        <li className="wallet-balance__statistic-item">
-          <StatisticItem
-            label={t("wallet-page.total-balance")}
-            equivalent={formatValue(walletBalanceData.total)}
-            equivalentCurrency={walletBalanceData.currency}
-            big
-            accent
-          >
-            <NumberFormat
-              value={formatCurrencyValue(walletBalanceData.totalCcy)}
-              thousandSeparator={" "}
-              displayType="text"
-              suffix={` ${walletBalanceData.currencyCcy}`}
-            />
-          </StatisticItem>
-        </li>
-        <li className="wallet-balance__statistic-item">
-          <PieContainer
-            value={getPercentageValue(
-              walletBalanceData.investedCcy,
-              totalValue
-            )}
-            color={GVColors.$primaryColor}
-            pieDiraction={"COUNTERCLOCKWISE"}
+      <div className="wallet-balance__statistic-item">
+        <StatisticItem
+          label={t("wallet-page.total-balance")}
+          equivalent={formatValue(walletBalanceData.total)}
+          equivalentCurrency={walletBalanceData.currency}
+          big
+          accent
+        >
+          <NumberFormat
+            value={formatCurrencyValue(walletBalanceData.totalCcy)}
+            thousandSeparator={" "}
+            displayType="text"
+            suffix={` ${walletBalanceData.currencyCcy}`}
           />
-          <StatisticItem
-            label={t("wallet-page.invested-value")}
-            equivalent={formatValue(walletBalanceData.invested)}
-            equivalentCurrency={walletBalanceData.currency}
-            className="wallet-balance__statistic-big"
-            big
-            accent
-          >
-            <NumberFormat
-              value={formatCurrencyValue(walletBalanceData.investedCcy)}
-              thousandSeparator={" "}
-              displayType="text"
-              suffix={` ${walletBalanceData.currencyCcy}`}
-            />
-          </StatisticItem>
-        </li>
-        <li className="wallet-balance__statistic-item">
-          <PieContainer
-            value={getPercentageValue(walletBalanceData.pendingCcy, totalValue)}
-            color={InnerColors.$piePendingColor}
+        </StatisticItem>
+      </div>
+      <div className="wallet-balance__statistic-item">
+        <PieContainer
+          value={getPercentageValue(walletBalanceData.investedCcy, totalValue)}
+          color={GVColors.$primaryColor}
+        />
+        <StatisticItem
+          label={t("wallet-page.invested-value")}
+          equivalent={formatValue(walletBalanceData.invested)}
+          equivalentCurrency={walletBalanceData.currency}
+          className="wallet-balance__statistic-big"
+          big
+          accent
+        >
+          <NumberFormat
+            value={formatCurrencyValue(walletBalanceData.investedCcy)}
+            thousandSeparator={" "}
+            displayType="text"
+            suffix={` ${walletBalanceData.currencyCcy}`}
           />
-          <StatisticItem
-            label={t("wallet-page.pending")}
-            equivalent={formatValue(walletBalanceData.pending)}
-            equivalentCurrency={walletBalanceData.currency}
-            className="wallet-balance__statistic-big"
-            big
-            accent
-          >
-            <NumberFormat
-              value={walletBalanceData.pendingCcy}
-              thousandSeparator={" "}
-              displayType="text"
-              suffix={` ${walletBalanceData.currencyCcy}`}
-            />
-          </StatisticItem>
-        </li>
-        <li className="wallet-balance__statistic-item">
-          <PieContainer
-            value={getPercentageValue(
-              walletBalanceData.availableCcy,
-              totalValue
-            )}
-            color={InnerColors.$pieAvailableColor}
+        </StatisticItem>
+      </div>
+      <div className="wallet-balance__statistic-item">
+        <PieContainer
+          value={getPercentageValue(walletBalanceData.pendingCcy, totalValue)}
+          color={InnerColors.$piePendingColor}
+        />
+        <StatisticItem
+          label={t("wallet-page.pending")}
+          equivalent={formatValue(walletBalanceData.pending)}
+          equivalentCurrency={walletBalanceData.currency}
+          className="wallet-balance__statistic-big"
+          big
+          accent
+        >
+          <NumberFormat
+            value={walletBalanceData.pendingCcy}
+            thousandSeparator={" "}
+            displayType="text"
+            suffix={` ${walletBalanceData.currencyCcy}`}
           />
-          <StatisticItem
-            label={t("wallet-page.available")}
-            equivalent={formatValue(walletBalanceData.available)}
-            equivalentCurrency={walletBalanceData.currency}
-            className="wallet-balance__statistic-big"
-            big
-            accent
-          >
-            <NumberFormat
-              value={formatCurrencyValue(walletBalanceData.availableCcy)}
-              thousandSeparator={" "}
-              displayType="text"
-              suffix={` ${walletBalanceData.currencyCcy}`}
-            />
-          </StatisticItem>
-        </li>
-      </ul>
+        </StatisticItem>
+      </div>
+      <div className="wallet-balance__statistic-item">
+        <PieContainer
+          value={getPercentageValue(walletBalanceData.availableCcy, totalValue)}
+          color={InnerColors.$pieAvailableColor}
+        />
+        <StatisticItem
+          label={t("wallet-page.available")}
+          equivalent={formatValue(walletBalanceData.available)}
+          equivalentCurrency={walletBalanceData.currency}
+          className="wallet-balance__statistic-big"
+          big
+          accent
+        >
+          <NumberFormat
+            value={formatCurrencyValue(walletBalanceData.availableCcy)}
+            thousandSeparator={" "}
+            displayType="text"
+            suffix={` ${walletBalanceData.currencyCcy}`}
+          />
+        </StatisticItem>
+      </div>
     </div>
   );
 };
