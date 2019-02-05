@@ -6,10 +6,6 @@
   align-items: center;
   padding: 5px;
 
-  & + & {
-    padding-left: 1.5rem;
-  }
-
   &__label {
     opacity: 0.5;
     letter-spacing: 0.2px;
