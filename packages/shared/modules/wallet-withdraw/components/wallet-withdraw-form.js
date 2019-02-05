@@ -7,15 +7,16 @@ import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
-import InputAmountField from "shared/components/input-amount-field/input-amount-field";
+import Select from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { getWalletIcon } from "shared/components/wallet/components/wallet-currency";
-import ArrowIcon from "shared/media/arrow-down.svg";
 import { convertFromCurrency } from "shared/utils/currency-converter";
-import { formatCurrencyValue } from "shared/utils/formatter";
 import { formatValue, validateFraction } from "shared/utils/formatter";
 import { ethWalletValidator } from "shared/utils/validators/validators";
 import { number, object, string } from "yup";
+
+import InputAmountField from "../../../components/input-amount-field/input-amount-field";
+import { formatCurrencyValue } from "../../../utils/formatter";
+import { getWalletIcon } from "../../../components/wallet/components/wallet-currency";
 
 const WalletWithdrawForm = ({
   t,
@@ -31,9 +32,8 @@ const WalletWithdrawForm = ({
   errorMessage,
   setFieldValue
 }) => {
-  const { amount } = values;
-  const selected =
-    wallets.find(wallet => wallet.currency === currentWallet.currency) || {};
+  const { currency, amount } = values;
+  const selected = wallets.find(wallet => wallet.currency === currency) || {};
 
   const { commission = null, rateToGvt = null } = selected;
 
@@ -43,16 +43,19 @@ const WalletWithdrawForm = ({
   );
 
   const isAllow = values => {
-    const { floatValue, formattedValue, value } = values;
+    const { floatValue, formattedValue, value, currency } = values;
     return (
       formattedValue === "" ||
-      (validateFraction(value, "GVT") &&
+      (validateFraction(value, currency) &&
         floatValue <= parseFloat(availableToWithdrawal))
     );
   };
 
   const setMaxAmount = () => {
-    setFieldValue("amount", formatCurrencyValue(availableToWithdrawal, "GVT"));
+    setFieldValue(
+      "amount",
+      formatCurrencyValue(availableToWithdrawal, currency)
+    );
   };
 
   return (
@@ -67,68 +70,43 @@ const WalletWithdrawForm = ({
           <h2>{t("wallet-withdraw.title")}</h2>
         </div>
         <div className="dialog-field">
-          <div className="dialog__row">
-            <img
-              src={getWalletIcon(currentWallet.currency)}
-              className="wallet-withdraw-popup__icon wallet-withdraw-popup__icon--currency"
-              alt={currentWallet.currency}
-            />
-            <StatisticItem
-              equivalent={currentWallet.available}
-              equivalentCurrency={currentWallet.currency}
-              big
-              accent
-            >
-              {currentWallet.currency}
+          <div className="gv-text-field__wrapper">
+            <StatisticItem label={t("wallet-withdraw.available")} big>
+              {`${formatCurrencyValue(
+                availableToWithdrawal,
+                currency
+              )} ${currency}`}
             </StatisticItem>
           </div>
         </div>
+        <GVFormikField
+          name="currency"
+          component={GVTextField}
+          label={t("wallet-withdraw.select-currency")}
+          InputComponent={Select}
+        >
+          {wallets.map(wallet => {
+            return (
+              <option value={wallet.currency} key={wallet.currency}>
+                <img
+                  src={getWalletIcon(wallet.currency)}
+                  className="wallet-withdraw-popup__icon"
+                  alt={wallet.currency}
+                />
+                {`${wallet.description} | ${wallet.currency}`}
+              </option>
+            );
+          })}
+        </GVFormikField>
       </div>
       <div className="dialog__bottom">
-        <StatisticItem
-          className="wallet-withdraw-popup__from-text"
-          label={t("wallet-withdraw.to")}
-        >
-          <img
-            src={ArrowIcon}
-            alt="Icon"
-            className="wallet-withdraw-popup__icon wallet-withdraw-popup__icon--rotate"
-          />
-          {t("wallet-add-funds.external")}
-        </StatisticItem>
         <InputAmountField
           name="amount"
           label={t("wallet-withdraw.amount")}
-          currency="GVT"
+          currency={currency}
           isAllow={isAllow}
           setMax={setMaxAmount}
         />
-        <ul className="dialog-list">
-          <li className="dialog-list__item">
-            <span className="dialog-list__title">
-              {t("wallet-withdraw.will-get")}
-            </span>
-            <span className="dialog-list__value">
-              <NumberFormat
-                value={formatValue(willGet)}
-                suffix={` ${currentWallet.currency}`}
-                displayType="text"
-              />
-            </span>
-          </li>
-          <li className="dialog-list__item">
-            <span className="dialog-list__title">
-              {t("wallet-withdraw.fee")}
-            </span>
-            <span className="dialog-list__value">
-              <NumberFormat
-                value={formatValue(commission)}
-                suffix={` ${currentWallet.currency}`}
-                displayType="text"
-              />
-            </span>
-          </li>
-        </ul>
         <GVFormikField
           name="address"
           label={t("wallet-withdraw.address")}
@@ -144,6 +122,32 @@ const WalletWithdrawForm = ({
             component={GVTextField}
           />
         )}
+        <ul className="dialog-list">
+          <li className="dialog-list__item">
+            <span className="dialog-list__title">
+              {t("wallet-withdraw.will-get")}
+            </span>
+            <span className="dialog-list__value">
+              <NumberFormat
+                value={formatValue(willGet)}
+                suffix={` ${currency}`}
+                displayType="text"
+              />
+            </span>
+          </li>
+          <li className="dialog-list__item">
+            <span className="dialog-list__title">
+              {t("wallet-withdraw.fee")}
+            </span>
+            <span className="dialog-list__value">
+              <NumberFormat
+                value={formatValue(commission)}
+                suffix={` ${currency}`}
+                displayType="text"
+              />
+            </span>
+          </li>
+        </ul>
         <div className="form-error">{errorMessage}</div>
         <div className="dialog__buttons">
           <GVButton
@@ -155,6 +159,9 @@ const WalletWithdrawForm = ({
             {t("buttons.confirm")}
           </GVButton>
         </div>
+        {currency !== "GVT" && currency !== null && (
+          <div className="dialog__info">{t("wallet-withdraw.info")}</div>
+        )}
       </div>
     </form>
   );
@@ -194,8 +201,12 @@ export default compose(
   translate(),
   withFormik({
     displayName: "wallet-withdraw",
-    mapPropsToValues: () => {
-      return { amount: "", address: "", twoFactorCode: "" };
+    mapPropsToValues: props => {
+      let currency = props.currentWallet ? props.currentWallet.currency : "GVT";
+      if (!props.wallets.find(wallet => wallet.currency === currency)) {
+        currency = props.wallets[0] ? props.wallets[0].currency : "";
+      }
+      return { currency, amount: "", address: "", twoFactorCode: "" };
     },
     validationSchema: ({ t, availableToWithdrawal, twoFactorEnabled }) =>
       object().shape({
