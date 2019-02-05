@@ -129,6 +129,7 @@
   "wallet-widget": {
     "total-balance": "Total balance",
     "invested-value": "Invested value",
+    "pending-value": "Pending",
     "available": "Available",
     "details": "Details"
   },
