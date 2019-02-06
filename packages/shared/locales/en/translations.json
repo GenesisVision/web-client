@@ -172,19 +172,12 @@
       "two-factor-required": "Authentication code is required."
     }
   },
-  "wallet-convert": {
-    "title": "Convert",
+  "wallet-transfer": {
+    "title": "Transfer",
     "available": "Available in wallet",
-    "select-currency": "Select a wallet currency",
-    "amount": "Enter correct amount",
-    "will-get": "You'll get",
-    "address": "Withdraw address",
     "to": "To",
     "from": "From",
-    "fee": "Fee",
-    "withdrawing": "Withdrawing",
-    "info": "Amount of withdrawals can be changed depending on the exchange rate.",
-    "withdraw-request": "Please approve the withdrawal request via the link in the confirmation email.",
+    "info": "The funds will be converted according to the current market price (Market order on Binance).",
     "two-factor-code-label": "Two factor code",
     "confirmation": {
       "page-title": "Wallet withdraw confirm",
