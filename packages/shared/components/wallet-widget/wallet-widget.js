@@ -75,13 +75,18 @@ class WalletWidget extends React.Component {
               </StatisticItem>
             </div>
             <div className="wallet-details__item">
+              <StatisticItem label={t("wallet-widget.available")}>
+                {`${formatCurrencyValue(availableGvt, "GVT")} GVT`}
+              </StatisticItem>
+            </div>
+            <div className="wallet-details__item">
               <StatisticItem label={t("wallet-widget.invested-value")}>
                 {`${formatCurrencyValue(investedGvt, "GVT")} GVT`}
               </StatisticItem>
             </div>
             <div className="wallet-details__item">
-              <StatisticItem label={t("wallet-widget.available")}>
-                {`${formatCurrencyValue(availableGvt, "GVT")} GVT`}
+              <StatisticItem label={t("wallet-widget.pending-value")}>
+                {`${formatCurrencyValue(pendingGvt, "GVT")} GVT`}
               </StatisticItem>
             </div>
             <div className="wallet-details__item">
