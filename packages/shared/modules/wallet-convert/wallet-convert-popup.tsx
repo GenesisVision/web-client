@@ -1,9 +1,9 @@
 import * as React from "react";
 import Dialog from "shared/components/dialog/dialog";
 
-import WalletAddFundsContainer, {
+import WalletConvertContainer, {
   CurrentWallet
-} from "./components/wallet-add-funds-container";
+} from "./components/wallet-convert-container";
 
 interface IWalletAddFundsPopupProps {
   currentWallet: CurrentWallet;
@@ -11,17 +11,17 @@ interface IWalletAddFundsPopupProps {
   onClose(): void;
 }
 
-class WalletAddFundsPopup extends React.Component<IWalletAddFundsPopupProps> {
+class WalletConvertPopup extends React.Component<IWalletAddFundsPopupProps> {
   handleClose = () => {
     this.props.onClose();
   };
   render() {
     return (
       <Dialog open={this.props.open} onClose={this.handleClose}>
-        <WalletAddFundsContainer currentWallet={this.props.currentWallet} />
+        <WalletConvertContainer currentWallet={this.props.currentWallet} />
       </Dialog>
     );
   }
 }
 
-export default WalletAddFundsPopup;
+export default WalletConvertPopup;

@@ -60,6 +60,7 @@ class Header extends React.Component<IHeaderProps, IHeaderState> {
       totalBalanceGvt,
       availableGvt,
       investedGvt,
+      pendingGvt,
       notificationsCount
     } = profileHeader;
     return (
@@ -90,6 +91,7 @@ class Header extends React.Component<IHeaderProps, IHeaderState> {
                 totalBalanceGvt={totalBalanceGvt}
                 investedGvt={investedGvt}
                 availableGvt={availableGvt}
+                pendingGvt={pendingGvt}
               />
               <NorificationsWidget
                 notificationsCount={notificationsCount}

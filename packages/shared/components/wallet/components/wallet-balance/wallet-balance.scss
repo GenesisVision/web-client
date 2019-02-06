@@ -75,24 +75,6 @@
     display: block;
   }
 
-  &__add-funds {
-    box-sizing: border-box;
-    height: 42px;
-    width: 129px;
-    letter-spacing: 0.3px;
-    font-size: $font-size-common;
-    margin-bottom: 30px;
-    margin-right: 12px;
-  }
-
-  &__withdraw {
-    box-sizing: border-box;
-    height: 42px;
-    width: 129px;
-    letter-spacing: 0.3px;
-    font-size: $font-size-common;
-  }
-
   &__button-icon {
     display: inline-block;
     margin-right: 10px;
@@ -137,6 +119,9 @@
     .gv-btn {
       margin-right: $padding-small;
       margin-bottom: $padding-medium-mobile;
+      font-weight: 600;
+      font-size: $font-size-common;
+      min-height: 45px;
     }
   }
 
@@ -169,14 +154,6 @@
       display: block;
     }
 
-    &__add-funds {
-      margin-right: 30px;
-      margin-bottom: 0;
-      font-weight: 600;
-      width: 150px;
-      height: 50px;
-    }
-
     &__loader-button {
       @include adaptive-margin(top, $padding-small);
       margin-right: 30px;
@@ -188,15 +165,10 @@
       width: auto;
     }
 
-    &__withdraw {
-      font-weight: 600;
-      width: 150px;
-      height: 50px;
-    }
-
     &__buttons {
       .gv-btn {
         margin-bottom: 45px;
+        min-height: 50px;
       }
     }
 
@@ -209,10 +181,4 @@
       }
     }
   }
-
-  //@include media-breakpoint-tablet() {
-  //  &__loader-stat {
-  //    padding-top: 10px;
-  //  }
-  //}
 }

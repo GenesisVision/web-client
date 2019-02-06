@@ -14,7 +14,9 @@ import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.re
 import { getWalletIcon } from "shared/components/wallet/components/wallet-currency";
 import { composeWalletCurrencytUrl } from "shared/components/wallet/wallet.routes";
 import ArrowIcon from "shared/media/arrow-up.svg";
+import ConvertIcon from "shared/media/convert.svg";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
+import WalletConvertPopup from "shared/modules/wallet-convert/wallet-convert-popup";
 import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
 
 import { walletTableTransactionsSelector } from "../wallet-transactions/wallet-transactions.selector";
@@ -24,6 +26,7 @@ class WalletList extends Component {
   state = {
     isOpenAddFundsPopup: false,
     isOpenWithdrawPopup: false,
+    isOpenConvertPopup: false,
     currentWallet: {}
   };
 
@@ -94,14 +97,14 @@ class WalletList extends Component {
                 </TableCell>
                 <TableCell className="wallet-list__cell">
                   <NumberFormat
-                    value={wallet.invested}
+                    value={wallet.available}
                     thousandSeparator=" "
                     displayType="text"
                   />
                 </TableCell>
                 <TableCell className="wallet-list__cell">
                   <NumberFormat
-                    value={wallet.available}
+                    value={wallet.invested}
                     thousandSeparator=" "
                     displayType="text"
                   />
@@ -115,9 +118,16 @@ class WalletList extends Component {
                 </TableCell>
                 <TableCell className="wallet-list__cell wallet-list__cell--buttons">
                   <Chip
+                    className="wallet-list__button-convert"
                     onClick={this.handleOpenWithdrawPopup.bind(this, wallet)}
                   >
-                    <img src={ArrowIcon} alt="Icon" />
+                    <img src={ConvertIcon} alt="Convert Icon" />
+                  </Chip>
+                  <Chip
+                    className="wallet-list__withdraw"
+                    onClick={this.handleOpenWithdrawPopup.bind(this, wallet)}
+                  >
+                    <img src={ArrowIcon} alt="Arrow Icon" />
                   </Chip>
                   <Chip
                     className="wallet-list__button-add-funds"

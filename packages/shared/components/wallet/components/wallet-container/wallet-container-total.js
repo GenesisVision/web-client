@@ -23,6 +23,7 @@ import TransactionDetailsPopup from "shared/modules/transaction-details/transact
 import AllTransactionsRow from "../wallet-transactions/all-transactions-row";
 
 const WALLETS_TAB = "wallets";
+const COPYTRADING_TAB = "copytrading";
 const TRANSACTIONS_TAB = "transactions";
 const EXTERNAL_TAB = "external";
 
@@ -37,15 +38,22 @@ class WalletContainerTotal extends PureComponent {
 
   render() {
     const { tab } = this.state;
-    const { wallets } = this.props;
+    const { t, wallets } = this.props;
     return (
       <Surface className="wallet-container">
         <div className="wallet-container__header">
           <div className="wallet-container__tabs">
             <GVTabs value={tab} onChange={this.handleTabChange}>
-              <GVTab value={WALLETS_TAB} label={"My wallets"} />
-              <GVTab value={TRANSACTIONS_TAB} label={"All transactions"} />
-              <GVTab value={EXTERNAL_TAB} label={"External transactions"} />
+              <GVTab
+                value={WALLETS_TAB}
+                label={t("wallet-page.tabs.wallets")}
+              />
+              {/*<GVTab value={COPYTRADING_TAB} label={t("wallet-page.tabs.copytrading")} />*/}
+              <GVTab
+                value={TRANSACTIONS_TAB}
+                label={t("wallet-page.tabs.transactions")}
+              />
+              {/*<GVTab value={EXTERNAL_TAB} label={t("wallet-page.tabs.external")} />*/}
             </GVTabs>
           </div>
         </div>

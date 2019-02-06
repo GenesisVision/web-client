@@ -13,8 +13,9 @@ import GVTIcon from "shared/media/currency/GVT.svg";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
 import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
 
-import WalletBalanceElements from "./wallet-balance/wallet-balance-elements";
+import WalletConvertPopup from "../../../modules/wallet-convert/wallet-convert-popup";
 import WalletBalanceButtons from "./wallet-balance/wallet-balance-buttons";
+import WalletBalanceElements from "./wallet-balance/wallet-balance-elements";
 import WalletBalanceLoader from "./wallet-balance/wallet-balance-loader";
 import WalletContainer from "./wallet-container/wallet-container";
 
@@ -37,7 +38,8 @@ interface IWalletProps {
 class WalletCurrency extends React.Component<IWalletProps> {
   state = {
     isOpenAddFundsPopup: false,
-    isOpenWithdrawPopup: false
+    isOpenWithdrawPopup: false,
+    isOpenConvertPopup: false
   };
 
   handleOpenAddFundsPopup = () => {

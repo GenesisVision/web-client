@@ -129,6 +129,7 @@
   "wallet-widget": {
     "total-balance": "Total balance",
     "invested-value": "Invested value",
+    "pending-value": "Pending",
     "available": "Available",
     "details": "Details"
   },
@@ -154,6 +155,32 @@
     "will-get": "You'll get",
     "address": "Withdraw address",
     "to": "To",
+    "fee": "Fee",
+    "withdrawing": "Withdrawing",
+    "info": "Amount of withdrawals can be changed depending on the exchange rate.",
+    "withdraw-request": "Please approve the withdrawal request via the link in the confirmation email.",
+    "two-factor-code-label": "Two factor code",
+    "confirmation": {
+      "page-title": "Wallet withdraw confirm",
+      "error": "An error occurred during confirmation of email: ",
+      "success": "Withdrawal request is confirmed"
+    },
+    "validation": {
+      "amount-more-than-available": "Amount is more than available in your wallet",
+      "address-is-required": "Address is required.",
+      "two-factor-6digits": "Authentication code should contain 6 digits.",
+      "two-factor-required": "Authentication code is required."
+    }
+  },
+  "wallet-convert": {
+    "title": "Convert",
+    "available": "Available in wallet",
+    "select-currency": "Select a wallet currency",
+    "amount": "Enter correct amount",
+    "will-get": "You'll get",
+    "address": "Withdraw address",
+    "to": "To",
+    "from": "From",
     "fee": "Fee",
     "withdrawing": "Withdrawing",
     "info": "Amount of withdrawals can be changed depending on the exchange rate.",
@@ -551,6 +578,12 @@
     "add-funds": "Add funds",
     "withdraw": "Withdraw",
     "convert": "Convert",
+    "tabs": {
+      "wallets": "My wallets",
+      "copytrading": "Copytrading accounts",
+      "transactions": "Transactions",
+      "external": "Deposit/withdrawals"
+    },
     "transactions": {
       "title": "Transactions",
       "empty-transactions": "There are no transactions",

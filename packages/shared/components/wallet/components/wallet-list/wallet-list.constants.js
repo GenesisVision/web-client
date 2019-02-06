@@ -6,10 +6,10 @@ export const WALLET_LIST_COLUMNS = [
     name: "total-balance"
   },
   {
-    name: "invested"
+    name: "available"
   },
   {
-    name: "available"
+    name: "invested"
   },
   {
     name: "pending"

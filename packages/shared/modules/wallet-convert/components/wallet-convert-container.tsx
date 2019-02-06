@@ -1,4 +1,4 @@
-import "./wallet-add-funds-form.scss";
+import "./wallet-convert-form.scss";
 
 import { WalletsInfo } from "gv-api-web";
 import * as React from "react";
@@ -8,32 +8,32 @@ import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
 import { IDispatchable } from "shared/utils/types";
 
-import WalletAddFundsForm from "./wallet-add-funds-form.js";
+import WalletConvertForm from "./wallet-covert-form";
 
 export interface CurrentWallet {
   currency: string;
   available: number;
 }
 
-interface IWalletAddFundsContainerState {
+interface IWalletConvertContainerState {
   isPending: boolean;
   data?: WalletsInfo;
 }
 
-interface IWalletAddFundsContainerProps {
+interface IWalletConvertContainerProps {
   currentWallet: CurrentWallet;
 }
 
-interface IWalletAddFundsContainerDispatchProps {
+interface IWalletConvertContainerDispatchProps {
   notifySuccess(x: string): IDispatchable<void>;
   notifyError(x: string): IDispatchable<void>;
 }
 
-class WalletAddFundsContainer extends React.Component<
-  IWalletAddFundsContainerProps & IWalletAddFundsContainerDispatchProps,
-  IWalletAddFundsContainerState
+class WalletConvertContainer extends React.Component<
+  IWalletConvertContainerProps & IWalletConvertContainerDispatchProps,
+  IWalletConvertContainerState
 > {
-  state: IWalletAddFundsContainerState = {
+  state: IWalletConvertContainerState = {
     isPending: false,
     data: null
   };
@@ -50,7 +50,7 @@ class WalletAddFundsContainer extends React.Component<
     const { wallets } = this.state.data;
     const { currentWallet, notifySuccess, notifyError } = this.props;
     return (
-      <WalletAddFundsForm
+      <WalletConvertForm
         wallets={wallets}
         currentWallet={currentWallet}
         notifySuccess={notifySuccess}
@@ -68,4 +68,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   null,
   mapDispatchToProps
-)(WalletAddFundsContainer);
+)(WalletConvertContainer);

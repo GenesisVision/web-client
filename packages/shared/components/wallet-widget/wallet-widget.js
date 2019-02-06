@@ -36,6 +36,7 @@ class WalletWidget extends React.Component {
       availableGvt,
       investedGvt,
       totalBalanceGvt,
+      pendingGvt,
       className
     } = this.props;
     const currentWallet = { available: availableGvt, currency: "GVT" };
@@ -71,13 +72,18 @@ class WalletWidget extends React.Component {
               </StatisticItem>
             </div>
             <div className="wallet-details__item">
+              <StatisticItem label={t("wallet-widget.available")}>
+                {`${formatValue(availableGvt)} GVT`}
+              </StatisticItem>
+            </div>
+            <div className="wallet-details__item">
               <StatisticItem label={t("wallet-widget.invested-value")}>
                 {`${formatValue(investedGvt)} GVT`}
               </StatisticItem>
             </div>
             <div className="wallet-details__item">
-              <StatisticItem label={t("wallet-widget.available")}>
-                {`${formatValue(availableGvt)} GVT`}
+              <StatisticItem label={t("wallet-widget.pending-value")}>
+                {`${formatValue(pendingGvt)} GVT`}
               </StatisticItem>
             </div>
             <div className="wallet-details__item">
@@ -100,6 +106,7 @@ class WalletWidget extends React.Component {
 WalletWidget.propTypes = {
   availableGvt: PropTypes.number,
   investedGvt: PropTypes.number,
+  pendingGvt: PropTypes.number,
   totalBalanceGvt: PropTypes.number,
   className: PropTypes.string
 };
@@ -107,6 +114,7 @@ WalletWidget.propTypes = {
 WalletWidget.defaultProps = {
   availableGvt: 0,
   investedGvt: 0,
+  pendingGvt: 0,
   totalBalanceGvt: 0,
   className: ""
 };
