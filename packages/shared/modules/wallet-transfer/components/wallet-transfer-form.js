@@ -5,32 +5,42 @@ import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
-import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import Select from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { getWalletIcon } from "shared/components/wallet/components/wallet-currency";
-import { convertFromCurrency } from "shared/utils/currency-converter";
-import { formatValue, validateFraction } from "shared/utils/formatter";
+import { validateFraction } from "shared/utils/formatter";
 import { formatCurrencyValue } from "shared/utils/formatter";
-import { ethWalletValidator } from "shared/utils/validators/validators";
-import { number, object, string } from "yup";
+
+const getWalletsTo = (wallets, newCurrencyFrom) => {
+  const index = wallets.findIndex(
+    wallet => wallet.currency === newCurrencyFrom
+  );
+  const walletsTo = [...wallets];
+  walletsTo.splice(index, 1);
+  return walletsTo;
+};
 
 class WalletTransferForm extends Component {
   onChangeCurrencyFrom = (name, target) => {
-    const { setFieldValue } = this.props;
-    setFieldValue("fromWallet", target.props.value);
+    const { setFieldValue, values } = this.props;
+    const currencyFromNew = target.props.value;
+    if (currencyFromNew === values.currencyTo) {
+      setFieldValue("currencyTo", values.currencyFrom);
+    }
+    setFieldValue("currencyFrom", currencyFromNew);
   };
+
   onChangeCurrencyTo = (name, target) => {
     const { setFieldValue } = this.props;
-    setFieldValue("toWallet", target.props.value);
+    setFieldValue("currencyTo", target.props.value);
   };
+
   render() {
     const {
       t,
       handleSubmit,
-      availableToWithdrawal,
       wallets,
       values,
       disabled,
@@ -40,23 +50,33 @@ class WalletTransferForm extends Component {
       setFieldValue
     } = this.props;
 
-    const { fromWallet, toWallet } = values;
-    const selected =
-      wallets.find(wallet => wallet.currency === fromWallet) || {};
+    const { currencyFrom, currencyTo } = values;
+
+    const walletsTo = getWalletsTo(wallets, currencyFrom);
+
+    const selectedFromWallet =
+      wallets.find(wallet => wallet.currency === currencyFrom) || {};
+
+    const availableToWithdrawalFrom = selectedFromWallet.availableToWithdrawal;
+
+    const selectedToWallet =
+      walletsTo.find(wallet => wallet.currency === currencyTo) || {};
+
+    const availableToWithdrawalTo = selectedToWallet.availableToWithdrawal;
 
     const isAllow = values => {
-      const { floatValue, formattedValue, value, fromWallet } = values;
+      const { floatValue, formattedValue, value, currencyFrom } = values;
       return (
         formattedValue === "" ||
-        (validateFraction(value, fromWallet) &&
-          floatValue <= parseFloat(availableToWithdrawal))
+        (validateFraction(value, currencyFrom) &&
+          floatValue <= parseFloat(availableToWithdrawalFrom))
       );
     };
 
     const setMaxAmount = () => {
       setFieldValue(
         "amount",
-        formatCurrencyValue(availableToWithdrawal, fromWallet)
+        formatCurrencyValue(availableToWithdrawalFrom, currencyFrom)
       );
     };
 
@@ -72,7 +92,7 @@ class WalletTransferForm extends Component {
             <h2>{t("wallet-transfer.title")}</h2>
           </div>
           <GVFormikField
-            name="fromWallet"
+            name="currencyFrom"
             component={GVTextField}
             label={t("wallet-transfer.from")}
             InputComponent={Select}
@@ -93,20 +113,20 @@ class WalletTransferForm extends Component {
           </GVFormikField>
           <StatisticItem label={t("wallet-transfer.availableFrom")}>
             {`${formatCurrencyValue(
-              availableToWithdrawal,
-              fromWallet
-            )} ${fromWallet}`}
+              availableToWithdrawalFrom,
+              currencyFrom
+            )} ${currencyFrom}`}
           </StatisticItem>
         </div>
         <div className="dialog__bottom">
           <GVFormikField
-            name="toWallet"
+            name="currencyTo"
             component={GVTextField}
             label={t("wallet-transfer.to")}
             InputComponent={Select}
             onChange={this.onChangeCurrencyTo}
           >
-            {wallets.map(wallet => {
+            {walletsTo.map(wallet => {
               return (
                 <option value={wallet.currency} key={wallet.currency}>
                   <img
@@ -121,15 +141,15 @@ class WalletTransferForm extends Component {
           </GVFormikField>
           <StatisticItem label={t("wallet-transfer.availableTo")}>
             {`${formatCurrencyValue(
-              availableToWithdrawal,
-              toWallet
-            )} ${toWallet}`}
+              availableToWithdrawalTo,
+              currencyTo
+            )} ${currencyTo}`}
           </StatisticItem>
           <div className="dialog-field">
             <InputAmountField
               name="amount"
               label={t("wallet-transfer.amount")}
-              currency={fromWallet}
+              currency={currencyFrom}
               isAllow={isAllow}
               setMax={setMaxAmount}
             />
@@ -176,19 +196,16 @@ export default compose(
   withFormik({
     displayName: "wallet-transfer",
     mapPropsToValues: props => {
-      let currency = props.currentWallet ? props.currentWallet.currency : "GVT";
-      if (!props.wallets.find(wallet => wallet.currency === currency)) {
-        currency = props.wallets[0] ? props.wallets[0].currency : "";
+      const { currencyWallet, wallets } = props;
+      if (!wallets === undefined || wallets.length <= 1) return null;
+      let currencyFrom = currencyWallet ? currencyWallet.currency : "GVT";
+      if (!wallets.find(wallet => wallet.currency === currencyFrom)) {
+        currencyFrom = wallets[0].currency;
       }
-      return { fromWallet: currency, amount: "", toWallet: "GVT" }; //@todo когда будет приходить несколько кошельков, нужно сделать, чтобы кошелек from, to не совпадали
+      const walletTo = getWalletsTo(wallets, currencyFrom);
+      const currencyTo = walletTo.length ? walletTo[0].currency : "";
+      return { currencyFrom, amount: "", currencyTo };
     },
-    validationSchema: ({ t, availableToWithdrawal }) =>
-      object().shape({
-        amount: number().max(
-          availableToWithdrawal,
-          t("wallet-transfer.validation.amount-more-than-available")
-        )
-      }),
     handleSubmit: (values, { props }) => props.onSubmit(values)
   })
 )(WalletTransferForm);

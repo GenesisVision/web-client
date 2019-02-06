@@ -11,23 +11,22 @@ import InputAmountField from "shared/components/input-amount-field/input-amount-
 import Select from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { getWalletIcon } from "shared/components/wallet/components/wallet-currency";
-import { convertFromCurrency } from "shared/utils/currency-converter";
 import { formatValue, validateFraction } from "shared/utils/formatter";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { ethWalletValidator } from "shared/utils/validators/validators";
-import { number, object, string } from "yup";
+import { object, string } from "yup";
 
 class WalletWithdrawForm extends Component {
   onChangeCurrency = (name, target) => {
     const { setFieldValue } = this.props;
     setFieldValue("currency", target.props.value);
   };
+
   render() {
     const {
       t,
       twoFactorEnabled,
       handleSubmit,
-      availableToWithdrawal,
       wallets,
       values,
       disabled,
@@ -38,14 +37,12 @@ class WalletWithdrawForm extends Component {
     } = this.props;
 
     const { currency, amount } = values;
+
     const selected = wallets.find(wallet => wallet.currency === currency) || {};
 
-    const { commission = null, rateToGvt = null } = selected;
+    const { commission = null, availableToWithdrawal = null } = selected;
 
-    const willGet = Math.max(
-      convertFromCurrency(amount, rateToGvt) - commission,
-      0
-    );
+    const willGet = Math.max(parseFloat(amount) - commission, 0);
 
     const isAllow = values => {
       const { floatValue, formattedValue, value, currency } = values;
@@ -215,12 +212,8 @@ export default compose(
       }
       return { currency, amount: "", address: "", twoFactorCode: "" };
     },
-    validationSchema: ({ t, availableToWithdrawal, twoFactorEnabled }) =>
+    validationSchema: ({ t, twoFactorEnabled }) =>
       object().shape({
-        amount: number().max(
-          availableToWithdrawal,
-          t("wallet-withdraw.validation.amount-more-than-available")
-        ),
         address: ethWalletValidator.required(
           t("wallet-withdraw.validation.address-is-required")
         ),

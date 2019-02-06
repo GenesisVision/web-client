@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as walletWithdrawService from "shared/modules/wallet-withdraw/services/wallet-withdraw.services";
 
-import WalletWithdrawForm from "./wallet-transfer-form";
+import WalletTransferForm from "./wallet-transfer-form";
 
 class WalletTransferContainer extends Component {
   state = {
@@ -25,8 +25,8 @@ class WalletTransferContainer extends Component {
     this.setState({ isPending: true });
     this.props.service
       .walletTransferRequest({
-        from: values.fromWallet,
-        to: values.toWallet,
+        from: values.currencyFrom,
+        to: values.currencyTo,
         amount
       })
       .then(response => {
@@ -47,12 +47,11 @@ class WalletTransferContainer extends Component {
   render() {
     if (!this.state.data) return null;
     const { isPending, data, errorMessage, success } = this.state;
-    const { wallets, availableToWithdrawal } = data;
+    const { wallets } = data;
     const { twoFactorEnabled, currentWallet } = this.props;
 
     return (
-      <WalletWithdrawForm
-        availableToWithdrawal={availableToWithdrawal}
+      <WalletTransferForm
         wallets={wallets}
         currentWallet={currentWallet}
         disabled={isPending}
