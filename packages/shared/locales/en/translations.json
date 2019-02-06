@@ -177,6 +177,7 @@
     "available": "Available in wallet",
     "to": "To",
     "from": "From",
+    "amount": "Enter correct amount",
     "info": "The funds will be converted according to the current market price (Market order on Binance).",
     "two-factor-code-label": "Two factor code",
     "confirmation": {
@@ -570,7 +571,7 @@
     "pending": "Pending",
     "add-funds": "Add funds",
     "withdraw": "Withdraw",
-    "convert": "Convert",
+    "transfer": "Transfer",
     "tabs": {
       "wallets": "My wallets",
       "copytrading": "Copytrading accounts",

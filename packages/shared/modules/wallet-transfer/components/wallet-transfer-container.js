@@ -21,9 +21,14 @@ class WalletTransferContainer extends Component {
   }
 
   handleSubmit = values => {
+    const { amount } = values;
     this.setState({ isPending: true });
     this.props.service
-      .newWithdrawRequest({ ...values, amount: Number(values.amount) })
+      .walletTransferRequest({
+        from: values.fromWallet,
+        to: values.toWallet,
+        amount
+      })
       .then(response => {
         this.setState({
           isPending: false,

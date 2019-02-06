@@ -6,7 +6,12 @@ import { translate } from "react-i18next";
 import ArrowIcon from "shared/media/arrow-up.svg";
 import ConvertIcon from "shared/media/convert.svg";
 
-const WalletBalanceButtons = ({ t, handleAddFunds, handleWithdraw }) => {
+const WalletBalanceButtons = ({
+  t,
+  handleAddFunds,
+  handleWithdraw,
+  handleTransfer
+}) => {
   return (
     <div className="wallet-balance__buttons">
       <GVButton onClick={handleAddFunds}>
@@ -23,13 +28,13 @@ const WalletBalanceButtons = ({ t, handleAddFunds, handleWithdraw }) => {
         />
         {t("wallet-page.withdraw")}
       </GVButton>
-      <GVButton color="secondary" variant="outlined" onClick={handleWithdraw}>
+      <GVButton color="secondary" variant="outlined" onClick={handleTransfer}>
         <img
           className="wallet-balance__button-icon"
           src={ConvertIcon}
           alt="Convert icon"
         />
-        {t("wallet-page.convert")}
+        {t("wallet-page.transfer")}
       </GVButton>
     </div>
   );

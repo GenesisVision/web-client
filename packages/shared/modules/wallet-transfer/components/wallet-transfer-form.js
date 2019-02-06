@@ -18,14 +18,17 @@ import { ethWalletValidator } from "shared/utils/validators/validators";
 import { number, object, string } from "yup";
 
 class WalletTransferForm extends Component {
-  onChangeCurrency = (name, target) => {
+  onChangeCurrencyFrom = (name, target) => {
     const { setFieldValue } = this.props;
-    setFieldValue("currency", target.props.value);
+    setFieldValue("fromWallet", target.props.value);
+  };
+  onChangeCurrencyTo = (name, target) => {
+    const { setFieldValue } = this.props;
+    setFieldValue("toWallet", target.props.value);
   };
   render() {
     const {
       t,
-      twoFactorEnabled,
       handleSubmit,
       availableToWithdrawal,
       wallets,
@@ -37,21 +40,15 @@ class WalletTransferForm extends Component {
       setFieldValue
     } = this.props;
 
-    const { currency, amount } = values;
-    const selected = wallets.find(wallet => wallet.currency === currency) || {};
-
-    const { commission = null, rateToGvt = null } = selected;
-
-    const willGet = Math.max(
-      convertFromCurrency(amount, rateToGvt) - commission,
-      0
-    );
+    const { fromWallet, toWallet } = values;
+    const selected =
+      wallets.find(wallet => wallet.currency === fromWallet) || {};
 
     const isAllow = values => {
-      const { floatValue, formattedValue, value, currency } = values;
+      const { floatValue, formattedValue, value, fromWallet } = values;
       return (
         formattedValue === "" ||
-        (validateFraction(value, currency) &&
+        (validateFraction(value, fromWallet) &&
           floatValue <= parseFloat(availableToWithdrawal))
       );
     };
@@ -59,7 +56,7 @@ class WalletTransferForm extends Component {
     const setMaxAmount = () => {
       setFieldValue(
         "amount",
-        formatCurrencyValue(availableToWithdrawal, currency)
+        formatCurrencyValue(availableToWithdrawal, fromWallet)
       );
     };
 
@@ -79,17 +76,17 @@ class WalletTransferForm extends Component {
               <StatisticItem label={t("wallet-transfer.available")} big>
                 {`${formatCurrencyValue(
                   availableToWithdrawal,
-                  currency
-                )} ${currency}`}
+                  fromWallet
+                )} ${fromWallet}`}
               </StatisticItem>
             </div>
           </div>
           <GVFormikField
-            name="currency"
+            name="fromWallet"
             component={GVTextField}
             label={t("wallet-transfer.from")}
             InputComponent={Select}
-            onChange={this.onChangeCurrency}
+            onChange={this.onChangeCurrencyFrom}
           >
             {wallets.map(wallet => {
               return (
@@ -106,29 +103,22 @@ class WalletTransferForm extends Component {
           </GVFormikField>
         </div>
         <div className="dialog__bottom">
-          <InputAmountField
-            name="amount"
-            label={t("wallet-transfer.amount")}
-            currency={currency}
-            isAllow={isAllow}
-            setMax={setMaxAmount}
-          />
           <div className="dialog-field">
             <div className="gv-text-field__wrapper">
               <StatisticItem label={t("wallet-transfer.available")} big>
                 {`${formatCurrencyValue(
                   availableToWithdrawal,
-                  currency
-                )} ${currency}`}
+                  toWallet
+                )} ${toWallet}`}
               </StatisticItem>
             </div>
           </div>
           <GVFormikField
-            name="currency"
+            name="toWallet"
             component={GVTextField}
             label={t("wallet-transfer.to")}
             InputComponent={Select}
-            onChange={this.onChangeCurrency}
+            onChange={this.onChangeCurrencyTo}
           >
             {wallets.map(wallet => {
               return (
@@ -143,6 +133,13 @@ class WalletTransferForm extends Component {
               );
             })}
           </GVFormikField>
+          <InputAmountField
+            name="amount"
+            label={t("wallet-transfer.amount")}
+            currency={fromWallet}
+            isAllow={isAllow}
+            setMax={setMaxAmount}
+          />
           <div className="form-error">{errorMessage}</div>
           <div className="dialog__buttons">
             <GVButton
@@ -180,17 +177,6 @@ WalletTransferForm.propTypes = {
   onSubmit: PropTypes.func
 };
 
-const twoFactorvalidator = (t, twoFactorEnabled) => {
-  return twoFactorEnabled
-    ? string()
-        .trim()
-        .matches(/^\d{6}$/, t("wallet-transfer.validation.two-factor-6digits"))
-        .required(t("wallet-transfer.validation.two-factor-required"))
-    : string()
-        .trim()
-        .matches(/^\d{6}$/, t("wallet-transfer.validation.two-factor-6digits"));
-};
-
 export default compose(
   translate(),
   withFormik({
@@ -200,18 +186,14 @@ export default compose(
       if (!props.wallets.find(wallet => wallet.currency === currency)) {
         currency = props.wallets[0] ? props.wallets[0].currency : "";
       }
-      return { currency, amount: "", address: "", twoFactorCode: "" };
+      return { fromWallet: currency, amount: "", toWallet: "GVT" }; //@todo когда будет приходить несколько кошельков, нужно сделать, чтобы кошелек from, to не совпадали
     },
-    validationSchema: ({ t, availableToWithdrawal, twoFactorEnabled }) =>
+    validationSchema: ({ t, availableToWithdrawal }) =>
       object().shape({
         amount: number().max(
           availableToWithdrawal,
           t("wallet-transfer.validation.amount-more-than-available")
-        ),
-        address: ethWalletValidator.required(
-          t("wallet-transfer.validation.address-is-required")
-        ),
-        twoFactorCode: twoFactorvalidator(t, twoFactorEnabled)
+        )
       }),
     handleSubmit: (values, { props }) => props.onSubmit(values)
   })
