@@ -1,6 +1,6 @@
 import React from "react";
 import { translate } from "react-i18next";
-import { formatValue } from "shared/utils/formatter";
+import { formatCurrencyValue } from "shared/utils/formatter";
 
 import StatisticItem from "../statistic-item/statistic-item";
 
@@ -17,7 +17,7 @@ const DepositTop = ({ info, t, program, investor }) => {
             label={t("deposit-asset.program.available-to-invest")}
             big
           >
-            {formatValue(info.availableToInvest)} GVT
+            {formatCurrencyValue(info.availableToInvest, "GVT")} GVT
           </StatisticItem>
         )}
         <StatisticItem
@@ -28,7 +28,7 @@ const DepositTop = ({ info, t, program, investor }) => {
           }
           big
         >
-          {formatValue(info.availableInWallet)} GVT
+          {formatCurrencyValue(info.availableInWallet, "GVT")} GVT
         </StatisticItem>
       </div>
     </div>
