@@ -128,7 +128,7 @@
   },
   "wallet-widget": {
     "total-balance": "Total balance",
-    "invested-value": "Invested value",
+    "invested-value": "Invested",
     "pending-value": "Pending",
     "available": "Available",
     "details": "Details"
@@ -572,7 +572,7 @@
     "title": "Wallet",
     "wallet": "wallet",
     "total-balance": "Total balance",
-    "invested-value": "Invested value",
+    "invested-value": "Invested",
     "available": "Available",
     "pending": "Pending",
     "add-funds": "Add funds",
@@ -596,7 +596,7 @@
     "list": {
       "currency": "Currency",
       "total-balance": "Total balance",
-      "invested": "Invested value",
+      "invested": "Invested",
       "available": "Available",
       "pending": "Pending",
       "buttons": ""
