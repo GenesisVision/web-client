@@ -147,7 +147,7 @@ class DepositForm extends Component {
             <span className="dialog-list__value">
               {info.gvCommission} %
               <NumberFormat
-                value={formatValue(this.gvFee(values.amount))}
+                value={formatCurrencyValue(this.gvFee(values.amount), "GVT")}
                 prefix={" ("}
                 suffix={" GVT)"}
                 displayType="text"
@@ -162,7 +162,10 @@ class DepositForm extends Component {
             </span>
             <span className="dialog-list__value">
               <NumberFormat
-                value={formatValue(this.investAmount(values.amount))}
+                value={formatCurrencyValue(
+                  this.investAmount(values.amount),
+                  "GVT"
+                )}
                 suffix={" GVT"}
                 displayType="text"
               />
