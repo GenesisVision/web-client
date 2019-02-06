@@ -15,7 +15,6 @@ import TableModule from "shared/components/table/components/table-module";
 import { FilterType } from "shared/components/table/helpers/filtering.helpers";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { WALLET_TRANSACTION_ACTIONS_VALUES } from "shared/components/wallet/components/wallet-list/wallet-list.constants";
-
 import { walletApi } from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
 
@@ -37,23 +36,12 @@ class WalletTransactions extends Component {
   fetch = filters => {
     const { currency } = this.props;
     return walletApi
-      .v10WalletTransactionsGet(authService.getAuthArg(), {
+      .v10WalletMultiTransactionsGet(authService.getAuthArg(), {
         wallet: currency,
         ...filters
       })
       .then(data => ({ total: data.total, items: data.transactions }));
   };
-
-  renderWalletCell = () => (
-    <Fragment>
-      <img
-        src={getWalletIcon("GVT")}
-        className="wallet-transactions__icon"
-        alt="Icon"
-      />
-      Genesis Vision
-    </Fragment>
-  );
 
   render() {
     const { t, createButtonToolbar, renderBodyRow, columns } = this.props;

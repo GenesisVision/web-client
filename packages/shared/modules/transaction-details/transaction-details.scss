@@ -1,0 +1,18 @@
+.transaction-asset {
+  display: flex;
+  flex-direction: row;
+
+  &__description {
+    margin-left: 20px;
+
+    p {
+      padding-bottom: 4px;
+    }
+  }
+  &__title {
+    font-size: 16px;
+  }
+  &__trader {
+    font-size: 12px;
+  }
+}
