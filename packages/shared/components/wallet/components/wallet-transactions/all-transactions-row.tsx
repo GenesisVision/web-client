@@ -76,10 +76,10 @@ class AllTransactionsRow extends React.Component<
     isOpen: false
   };
   openPopup = () => {
-    this.setState({ isOpen: !state.isOpen });
+    this.setState({ isOpen: true });
   };
   closePopup = () => {
-    this.setState({ isOpen: !state.isOpen });
+    this.setState({ isOpen: false });
   };
   render() {
     const { transaction } = this.props;
