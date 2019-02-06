@@ -11,16 +11,17 @@ import Profitability from "shared/components/profitability/profitability";
 import Surface from "shared/components/surface/surface";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
+import { reduceFilters } from "shared/components/wallet/components/wallet-transactions/wallet-transaction-type-filter.helpers";
 import SuccessTransactionsIcon from "shared/media/transactions/success.svg";
+import { TransactionDetails } from "shared/modules/transaction-details/transaction-details";
+import TransactionDetailsPopup from "shared/modules/transaction-details/transaction-details-popup";
 import { formatValue } from "shared/utils/formatter";
 
 import { getWalletIcon } from "../wallet-currency";
 import WalletList from "../wallet-list/wallet-list";
+import AllTransactionsRow from "../wallet-transactions/all-transactions-row";
 import WalletTransactions from "../wallet-transactions/wallet-transactions";
 import { WALLET_TOTAL_TRANSACTIONS_COLUMNS } from "../wallet-transactions/wallet-transactions.constants";
-import { TransactionDetails } from "shared/modules/transaction-details/transaction-details";
-import TransactionDetailsPopup from "shared/modules/transaction-details/transaction-details-popup";
-import AllTransactionsRow from "../wallet-transactions/all-transactions-row";
 
 const WALLETS_TAB = "wallets";
 const COPYTRADING_TAB = "copytrading";
@@ -29,7 +30,7 @@ const EXTERNAL_TAB = "external";
 
 class WalletContainerTotal extends PureComponent {
   state = {
-    tab: TRANSACTIONS_TAB
+    tab: WALLETS_TAB
   };
 
   handleTabChange = (e, tab) => {
@@ -38,7 +39,8 @@ class WalletContainerTotal extends PureComponent {
 
   render() {
     const { tab } = this.state;
-    const { t, wallets } = this.props;
+    const { t, wallets, filters, currencies } = this.props;
+    if (!filters) return <h1>huj</h1>;
     return (
       <Surface className="wallet-container">
         <div className="wallet-container__header">
@@ -49,10 +51,12 @@ class WalletContainerTotal extends PureComponent {
                 label={t("wallet-page.tabs.wallets")}
               />
               {/*<GVTab value={COPYTRADING_TAB} label={t("wallet-page.tabs.copytrading")} />*/}
-              <GVTab
-                value={TRANSACTIONS_TAB}
-                label={t("wallet-page.tabs.transactions")}
-              />
+              {filters && (
+                <GVTab
+                  value={TRANSACTIONS_TAB}
+                  label={t("wallet-page.tabs.transactions")}
+                />
+              )}
               {/*<GVTab value={EXTERNAL_TAB} label={t("wallet-page.tabs.external")} />*/}
             </GVTabs>
           </div>
@@ -62,6 +66,8 @@ class WalletContainerTotal extends PureComponent {
           {tab === TRANSACTIONS_TAB && (
             <WalletTransactions
               columns={WALLET_TOTAL_TRANSACTIONS_COLUMNS}
+              filters={filters}
+              currencies={currencies}
               renderBodyRow={transaction => (
                 <AllTransactionsRow transaction={transaction} />
               )}

@@ -76,34 +76,36 @@ class AllTransactionsRow extends React.Component<
     isOpen: false
   };
   openPopup = () => {
-    this.setState({ isOpen: true });
+    this.setState({ isOpen: !state.isOpen });
   };
   closePopup = () => {
-    this.setState({ isOpen: false });
+    this.setState({ isOpen: !state.isOpen });
   };
   render() {
     const { transaction } = this.props;
     const isConvertAction = transaction.type === "Converting";
     return (
-      <TableRow className="wallet-transactions__row">
+      <TableRow className="wallet-transactions__row" onClick={this.openPopup}>
         <TableCell className="wallet-transactions__cell wallet-transactions__cell--wallet">
           {isConvertAction ? (
             <ConvertTransaction />
           ) : (
             <Fragment>
               <img
-                src={getWalletIcon("GVT")}
+                src={getWalletIcon(
+                  transaction.currencyFrom || transaction.currencyTo
+                )}
                 className="wallet-transactions__icon"
                 alt="Icon"
               />
-              <button onClick={this.openPopup}>Genesis Vision</button>
-              <TransactionDetailsPopup
-                transactionId={transaction.id}
-                open={this.state.isOpen}
-                onClose={this.closePopup}
-              />
+              Genesis Vision
             </Fragment>
           )}
+          <TransactionDetailsPopup
+            transactionId={transaction.id}
+            open={this.state.isOpen}
+            onClose={this.closePopup}
+          />
         </TableCell>
         <TableCell className="wallet-transactions__cell wallet-transactions__cell--date">
           {moment(transaction.date).format("DD-MM-YYYY, hh:mm a")}

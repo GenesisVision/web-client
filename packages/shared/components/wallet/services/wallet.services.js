@@ -19,8 +19,8 @@ export const fetchWalletTransactions = requestFilters => {
   return actions.fetchWalletTransactionsDispatch(authorization, requestFilters);
 };
 
-export const updateWalletTransactionsFilters = filters => dispatch => {
-  dispatch(actions.updateWalletTransactionsFilters(filters));
+export const fetchWalletTransactionsFilters = () => dispatch => {
+  dispatch(actions.fetchWalletTransactionsFilters());
 };
 
 export const cancelWithdrawRequest = txId => (dispatch, getState) => {
