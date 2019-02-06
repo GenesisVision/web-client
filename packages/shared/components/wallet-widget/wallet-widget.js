@@ -11,7 +11,7 @@ import Popover from "shared/components/popover/popover";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
-import { formatValue } from "shared/utils/formatter";
+import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 class WalletWidget extends React.Component {
   state = {
@@ -48,7 +48,10 @@ class WalletWidget extends React.Component {
             onClick={this.handleOpenDetails}
           >
             <WalletIcon primary={this.state.anchorEl !== null} />
-            <span className="wallet-widget__value">{`${availableGvt} GVT`}</span>
+            <span className="wallet-widget__value">{`${formatCurrencyValue(
+              availableGvt,
+              "GVT"
+            )} GVT`}</span>
           </div>
           <div className="wallet-widget__add">
             <Chip type="positive" onClick={this.handleOpenAddFundsPopup}>
@@ -68,22 +71,22 @@ class WalletWidget extends React.Component {
           <div className="wallet-details">
             <div className="wallet-details__item">
               <StatisticItem label={t("wallet-widget.total-balance")}>
-                {`${formatValue(totalBalanceGvt)} GVT`}
+                {`${formatCurrencyValue(totalBalanceGvt, "GVT")} GVT`}
               </StatisticItem>
             </div>
             <div className="wallet-details__item">
               <StatisticItem label={t("wallet-widget.available")}>
-                {`${formatValue(availableGvt)} GVT`}
+                {`${formatCurrencyValue(availableGvt, "GVT")} GVT`}
               </StatisticItem>
             </div>
             <div className="wallet-details__item">
               <StatisticItem label={t("wallet-widget.invested-value")}>
-                {`${formatValue(investedGvt)} GVT`}
+                {`${formatCurrencyValue(investedGvt, "GVT")} GVT`}
               </StatisticItem>
             </div>
             <div className="wallet-details__item">
               <StatisticItem label={t("wallet-widget.pending-value")}>
-                {`${formatValue(pendingGvt)} GVT`}
+                {`${formatCurrencyValue(pendingGvt, "GVT")} GVT`}
               </StatisticItem>
             </div>
             <div className="wallet-details__item">
