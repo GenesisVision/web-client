@@ -71,16 +71,6 @@ class WalletTransferForm extends Component {
           <div className="dialog__header">
             <h2>{t("wallet-transfer.title")}</h2>
           </div>
-          <div className="dialog-field">
-            <div className="gv-text-field__wrapper">
-              <StatisticItem label={t("wallet-transfer.available")} big>
-                {`${formatCurrencyValue(
-                  availableToWithdrawal,
-                  fromWallet
-                )} ${fromWallet}`}
-              </StatisticItem>
-            </div>
-          </div>
           <GVFormikField
             name="fromWallet"
             component={GVTextField}
@@ -101,18 +91,14 @@ class WalletTransferForm extends Component {
               );
             })}
           </GVFormikField>
+          <StatisticItem label={t("wallet-transfer.availableFrom")}>
+            {`${formatCurrencyValue(
+              availableToWithdrawal,
+              fromWallet
+            )} ${fromWallet}`}
+          </StatisticItem>
         </div>
         <div className="dialog__bottom">
-          <div className="dialog-field">
-            <div className="gv-text-field__wrapper">
-              <StatisticItem label={t("wallet-transfer.available")} big>
-                {`${formatCurrencyValue(
-                  availableToWithdrawal,
-                  toWallet
-                )} ${toWallet}`}
-              </StatisticItem>
-            </div>
-          </div>
           <GVFormikField
             name="toWallet"
             component={GVTextField}
@@ -133,13 +119,21 @@ class WalletTransferForm extends Component {
               );
             })}
           </GVFormikField>
-          <InputAmountField
-            name="amount"
-            label={t("wallet-transfer.amount")}
-            currency={fromWallet}
-            isAllow={isAllow}
-            setMax={setMaxAmount}
-          />
+          <StatisticItem label={t("wallet-transfer.availableTo")}>
+            {`${formatCurrencyValue(
+              availableToWithdrawal,
+              toWallet
+            )} ${toWallet}`}
+          </StatisticItem>
+          <div className="dialog-field">
+            <InputAmountField
+              name="amount"
+              label={t("wallet-transfer.amount")}
+              currency={fromWallet}
+              isAllow={isAllow}
+              setMax={setMaxAmount}
+            />
+          </div>
           <div className="form-error">{errorMessage}</div>
           <div className="dialog__buttons">
             <GVButton

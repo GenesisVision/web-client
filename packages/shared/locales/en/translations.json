@@ -174,7 +174,8 @@
   },
   "wallet-transfer": {
     "title": "Transfer",
-    "available": "Available in wallet",
+    "availableTo": "Available in wallet",
+    "availableFrom": "Available in wallet",
     "to": "To",
     "from": "From",
     "amount": "Enter correct amount",
