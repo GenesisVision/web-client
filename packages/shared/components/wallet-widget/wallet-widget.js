@@ -33,13 +33,13 @@ class WalletWidget extends React.Component {
   render() {
     const {
       t,
-      availableGvt,
-      investedGvt,
-      totalBalanceGvt,
-      pendingGvt,
+      available,
+      invested,
+      totalBalance,
+      pending,
       className
     } = this.props;
-    const currentWallet = { available: availableGvt, currency: "GVT" };
+    const currentWallet = { available: available, currency: "GVT" };
     return (
       <Fragment>
         <div className={classnames("wallet-widget", className)}>
@@ -48,7 +48,7 @@ class WalletWidget extends React.Component {
             onClick={this.handleOpenDetails}
           >
             <WalletIcon primary={this.state.anchorEl !== null} />
-            <span className="wallet-widget__value">{`${availableGvt} GVT`}</span>
+            <span className="wallet-widget__value">{`${available} GVT`}</span>
           </div>
           <div className="wallet-widget__add">
             <Chip type="positive" onClick={this.handleOpenAddFundsPopup}>
@@ -68,22 +68,22 @@ class WalletWidget extends React.Component {
           <div className="wallet-details">
             <div className="wallet-details__item">
               <StatisticItem label={t("wallet-widget.total-balance")}>
-                {`${formatValue(totalBalanceGvt)} GVT`}
+                {`${formatValue(totalBalance)} GVT`}
               </StatisticItem>
             </div>
             <div className="wallet-details__item">
               <StatisticItem label={t("wallet-widget.available")}>
-                {`${formatValue(availableGvt)} GVT`}
+                {`${formatValue(available)} GVT`}
               </StatisticItem>
             </div>
             <div className="wallet-details__item">
               <StatisticItem label={t("wallet-widget.invested-value")}>
-                {`${formatValue(investedGvt)} GVT`}
+                {`${formatValue(invested)} GVT`}
               </StatisticItem>
             </div>
             <div className="wallet-details__item">
               <StatisticItem label={t("wallet-widget.pending-value")}>
-                {`${formatValue(pendingGvt)} GVT`}
+                {`${formatValue(pending)} GVT`}
               </StatisticItem>
             </div>
             <div className="wallet-details__item">
@@ -104,18 +104,18 @@ class WalletWidget extends React.Component {
 }
 
 WalletWidget.propTypes = {
-  availableGvt: PropTypes.number,
-  investedGvt: PropTypes.number,
-  pendingGvt: PropTypes.number,
-  totalBalanceGvt: PropTypes.number,
+  available: PropTypes.number,
+  invested: PropTypes.number,
+  pending: PropTypes.number,
+  totalBalance: PropTypes.number,
   className: PropTypes.string
 };
 
 WalletWidget.defaultProps = {
-  availableGvt: 0,
-  investedGvt: 0,
-  pendingGvt: 0,
-  totalBalanceGvt: 0,
+  available: 0,
+  invested: 0,
+  pending: 0,
+  totalBalance: 0,
   className: ""
 };
 
