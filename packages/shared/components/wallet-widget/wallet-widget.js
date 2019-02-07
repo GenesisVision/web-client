@@ -11,7 +11,7 @@ import Popover from "shared/components/popover/popover";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
-import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
+import { formatCurrencyValue } from "shared/utils/formatter";
 
 class WalletWidget extends React.Component {
   state = {
@@ -33,13 +33,14 @@ class WalletWidget extends React.Component {
   render() {
     const {
       t,
-      availableGvt,
-      investedGvt,
-      totalBalanceGvt,
-      pendingGvt,
+      currency,
+      available,
+      invested,
+      totalBalance,
+      pending,
       className
     } = this.props;
-    const currentWallet = { available: availableGvt, currency: "GVT" };
+    const currentWallet = { available, currency };
     return (
       <Fragment>
         <div className={classnames("wallet-widget", className)}>
@@ -49,9 +50,8 @@ class WalletWidget extends React.Component {
           >
             <WalletIcon primary={this.state.anchorEl !== null} />
             <span className="wallet-widget__value">{`${formatCurrencyValue(
-              availableGvt,
-              "GVT"
-            )} GVT`}</span>
+              available
+            )} ${currency}`}</span>
           </div>
           <div className="wallet-widget__add">
             <Chip type="positive" onClick={this.handleOpenAddFundsPopup}>
@@ -71,22 +71,22 @@ class WalletWidget extends React.Component {
           <div className="wallet-details">
             <div className="wallet-details__item">
               <StatisticItem label={t("wallet-widget.total-balance")}>
-                {`${formatCurrencyValue(totalBalanceGvt, "GVT")} GVT`}
+                {`${formatCurrencyValue(totalBalance)} ${currency}`}
               </StatisticItem>
             </div>
             <div className="wallet-details__item">
               <StatisticItem label={t("wallet-widget.available")}>
-                {`${formatCurrencyValue(availableGvt, "GVT")} GVT`}
+                {`${formatCurrencyValue(available)} ${currency}`}
               </StatisticItem>
             </div>
             <div className="wallet-details__item">
               <StatisticItem label={t("wallet-widget.invested-value")}>
-                {`${formatCurrencyValue(investedGvt, "GVT")} GVT`}
+                {`${formatCurrencyValue(invested)} ${currency}`}
               </StatisticItem>
             </div>
             <div className="wallet-details__item">
               <StatisticItem label={t("wallet-widget.pending-value")}>
-                {`${formatCurrencyValue(pendingGvt, "GVT")} GVT`}
+                {`${formatCurrencyValue(pending)} ${currency}`}
               </StatisticItem>
             </div>
             <div className="wallet-details__item">
@@ -107,18 +107,20 @@ class WalletWidget extends React.Component {
 }
 
 WalletWidget.propTypes = {
-  availableGvt: PropTypes.number,
-  investedGvt: PropTypes.number,
-  pendingGvt: PropTypes.number,
-  totalBalanceGvt: PropTypes.number,
-  className: PropTypes.string
+  available: PropTypes.number,
+  invested: PropTypes.number,
+  pending: PropTypes.number,
+  totalBalance: PropTypes.number,
+  className: PropTypes.string,
+  currency: PropTypes.string
 };
 
 WalletWidget.defaultProps = {
-  availableGvt: 0,
-  investedGvt: 0,
-  pendingGvt: 0,
-  totalBalanceGvt: 0,
+  available: 0,
+  invested: 0,
+  pending: 0,
+  totalBalance: 0,
+  currency: "",
   className: ""
 };
 

@@ -30,9 +30,13 @@
     }
     &--type {
       text-align: right;
+      padding-top: 0;
+      padding-bottom: 0;
     }
     &--wallet {
       min-width: 250px;
+      padding-top: 0;
+      padding-bottom: 0;
     }
   }
 
@@ -73,18 +77,6 @@
 
   & .icon.icon--actions-circle {
     cursor: pointer;
-  }
-
-  @include media-breakpoint-tablet() {
-    & .table__filters {
-      margin-left: 20px;
-      margin-top: 0;
-    }
-
-    & .table__toolbar {
-      padding: 0 32px 32px;
-      flex-direction: row;
-    }
   }
 }
 .wallet-transaction-actions {

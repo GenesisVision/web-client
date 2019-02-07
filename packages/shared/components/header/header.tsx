@@ -11,7 +11,7 @@ import Navigation from "shared/components/navigation/navigation";
 import NavigationMobile from "shared/components/navigation/navigation-mobile/navigation-mobile";
 import NorificationsWidget from "shared/components/notifications-widget/notifications-widget";
 import ProfileWidget from "shared/components/profile-widget/profile-widget";
-import WalletWidget from "shared/components/wallet-widget/wallet-widget";
+import WalletWidgetContainer from "shared/components/wallet-widget/wallet-widget-container";
 import CurrencySelectContainer from "shared/modules/currency-select/components/currency-select-container";
 
 interface IHeaderState {
@@ -54,15 +54,7 @@ class Header extends React.Component<IHeaderProps, IHeaderState> {
     } = this.props;
 
     if (!profileHeader) return null;
-    const {
-      avatar,
-      email,
-      totalBalanceGvt,
-      availableGvt,
-      investedGvt,
-      pendingGvt,
-      notificationsCount
-    } = profileHeader;
+    const { avatar, email, notificationsCount } = profileHeader;
     return (
       <div className="header">
         <div className="header__left">
@@ -86,13 +78,7 @@ class Header extends React.Component<IHeaderProps, IHeaderState> {
         <div className="header__right">
           {isAuthenticated ? (
             <React.Fragment>
-              <WalletWidget
-                className="header__wallet"
-                totalBalanceGvt={totalBalanceGvt}
-                investedGvt={investedGvt}
-                availableGvt={availableGvt}
-                pendingGvt={pendingGvt}
-              />
+              <WalletWidgetContainer className="header__wallet" />
               <NorificationsWidget
                 notificationsCount={notificationsCount}
                 openNotifications={openNotifications}

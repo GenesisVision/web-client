@@ -7,6 +7,8 @@ import * as actions from "../actions/wallet.actions";
 
 export const fetchWallets = () => (dispatch, getState) => {
   const authorization = authService.getAuthArg();
+  const { info } = getState().wallet;
+  if (info.isPending) return;
   const { currency } = getState().accountSettings;
 
   dispatch(actions.fetchWallets(currency, authorization));

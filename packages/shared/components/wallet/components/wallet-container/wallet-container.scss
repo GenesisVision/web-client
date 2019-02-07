@@ -21,28 +21,13 @@
     font-weight: 600;
   }
 
-  &__button-container {
+  &__search-container {
     @include adaptive-margin(left, $padding-medium);
     line-height: 0;
 
     .icon {
       height: 14px;
       padding: 6px 0;
-    }
-  }
-
-  @media (min-width: 450px) {
-    &__tabs,
-    &__subheading {
-      position: absolute;
-      padding-top: 5px;
-    }
-    .table__filters {
-      justify-content: flex-end;
-
-      .filter {
-        margin-left: 20px;
-      }
     }
   }
 

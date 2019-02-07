@@ -128,7 +128,7 @@
   },
   "wallet-widget": {
     "total-balance": "Total balance",
-    "invested-value": "Invested value",
+    "invested-value": "Invested",
     "pending-value": "Pending",
     "available": "Available",
     "details": "Details"
@@ -172,19 +172,14 @@
       "two-factor-required": "Authentication code is required."
     }
   },
-  "wallet-convert": {
-    "title": "Convert",
-    "available": "Available in wallet",
-    "select-currency": "Select a wallet currency",
-    "amount": "Enter correct amount",
-    "will-get": "You'll get",
-    "address": "Withdraw address",
+  "wallet-transfer": {
+    "title": "Transfer",
+    "availableTo": "Available in wallet",
+    "availableFrom": "Available in wallet",
     "to": "To",
     "from": "From",
-    "fee": "Fee",
-    "withdrawing": "Withdrawing",
-    "info": "Amount of withdrawals can be changed depending on the exchange rate.",
-    "withdraw-request": "Please approve the withdrawal request via the link in the confirmation email.",
+    "amount": "Enter correct amount",
+    "info": "The funds will be converted according to the current market price (Market order on Binance).",
     "two-factor-code-label": "Two factor code",
     "confirmation": {
       "page-title": "Wallet withdraw confirm",
@@ -572,12 +567,12 @@
     "title": "Wallet",
     "wallet": "wallet",
     "total-balance": "Total balance",
-    "invested-value": "Invested value",
+    "invested-value": "Invested",
     "available": "Available",
     "pending": "Pending",
     "add-funds": "Add funds",
     "withdraw": "Withdraw",
-    "convert": "Convert",
+    "transfer": "Transfer",
     "tabs": {
       "wallets": "My wallets",
       "copytrading": "Copytrading accounts",
@@ -596,7 +591,7 @@
     "list": {
       "currency": "Currency",
       "total-balance": "Total balance",
-      "invested": "Invested value",
+      "invested": "Invested",
       "available": "Available",
       "pending": "Pending",
       "buttons": ""

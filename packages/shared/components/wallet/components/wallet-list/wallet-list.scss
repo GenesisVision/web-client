@@ -3,23 +3,25 @@
 @import "~shared/styles/_sizes.scss";
 
 .wallet-list {
-  & .table__toolbar {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
   &__cell {
     color: $text-light-color;
     min-width: 150px;
 
     &--currency {
       min-width: 200px;
+      padding-top: 0;
+      padding-bottom: 0;
     }
 
-    &--buttons .chip {
-      @include adaptive-margin(left, $padding-xsmall);
-      width: 32px;
-      height: 32px;
+    &--buttons {
+      padding-top: 0;
+      padding-bottom: 0;
+
+      .chip {
+        @include adaptive-margin(left, $padding-xsmall);
+        width: 32px;
+        height: 32px;
+      }
     }
   }
 
@@ -43,16 +45,9 @@
     height: 24px;
   }
 
-  &__button-convert {
+  &__button-transfer {
     img {
       max-height: 13px;
-    }
-  }
-
-  @include media-breakpoint-tablet() {
-    & .table__toolbar {
-      padding: 0 32px;
-      flex-direction: row;
     }
   }
 }
