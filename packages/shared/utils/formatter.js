@@ -30,7 +30,7 @@ const formatValue = (value, decimalScale, abs) => {
   value = typeof value !== "number" ? +value : value;
   value = abs ? Math.abs(value) : value;
   if (value === undefined || isNaN(value) || value.toFixed(0) == value)
-    return value;
+    return String(value);
 
   return [...[value.toFixed(10).split(".")]]
     .map(sliceFraction(decimalScale))
