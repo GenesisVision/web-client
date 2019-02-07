@@ -40,7 +40,6 @@ class WalletContainerTotal extends PureComponent {
   render() {
     const { tab } = this.state;
     const { t, wallets, filters } = this.props;
-    console.info(filters);
     return (
       <Surface className="wallet-container">
         <div className="wallet-container__header">

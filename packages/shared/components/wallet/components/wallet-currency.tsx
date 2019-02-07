@@ -18,6 +18,7 @@ import WalletBalanceButtons from "./wallet-balance/wallet-balance-buttons";
 import WalletBalanceElements from "./wallet-balance/wallet-balance-elements";
 import WalletBalanceLoader from "./wallet-balance/wallet-balance-loader";
 import WalletContainer from "./wallet-container/wallet-container";
+import RootState from "../../../reducers/root-reducer";
 
 const Icons = {
   GVT: GVTIcon,
@@ -59,8 +60,8 @@ class WalletCurrency extends React.Component<IWalletProps> {
   };
 
   render() {
-    const { t, info, isPending } = this.props;
-    if (!info && isPending) return <WalletBalanceLoader />;
+    const { t, info, isPending, filters } = this.props;
+    if ((!info && isPending) || !filters) return <WalletBalanceLoader />;
     if (!info) return <NotFoundPage />;
     const currentWallet = {
       currency: info.currency,
@@ -86,10 +87,7 @@ class WalletCurrency extends React.Component<IWalletProps> {
           </div>
           <WalletBalanceElements walletBalanceData={info} />
         </div>
-        <WalletContainer
-          currency={info.currency}
-          eventTypeFilterValues={INVESTOR_EVENT_TYPE_FILTER_VALUES}
-        />
+        <WalletContainer filters={filters} currency={info.currency} />
         <WalletAddFundsPopup
           currentWallet={currentWallet}
           open={this.state.isOpenAddFundsPopup}
@@ -105,7 +103,7 @@ class WalletCurrency extends React.Component<IWalletProps> {
   }
 }
 
-const mapStateToProps = (state: IState, ownProps) => {
+const mapStateToProps = (state: RootState, ownProps) => {
   const isPending = state.wallet.info.isPending;
   const { currency } = ownProps.match.params;
   const info = state.wallet.info.data
@@ -115,7 +113,8 @@ const mapStateToProps = (state: IState, ownProps) => {
     : null;
   return {
     info,
-    isPending
+    isPending,
+    filters: state.wallet.filters.data ? state.wallet.filters.data : null
   };
 };
 

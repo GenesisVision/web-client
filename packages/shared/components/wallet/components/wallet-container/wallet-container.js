@@ -47,7 +47,7 @@ class WalletContainer extends PureComponent {
         />
       </TableCell>
       <TableCell className="wallet-transactions__cell wallet-transactions__cell--information">
-        {transaction.information}
+        {transaction.description}
       </TableCell>
       <TableCell className="wallet-transactions__cell wallet-transactions__cell--amount">
         {transaction.action === "ProgramRequestInvest" ? (
@@ -62,7 +62,7 @@ class WalletContainer extends PureComponent {
   );
 
   render() {
-    const { eventTypeFilterValues, currency } = this.props;
+    const { currency, filters } = this.props;
     return (
       <Surface className="wallet-container">
         <div className="wallet-container__header">
@@ -70,11 +70,10 @@ class WalletContainer extends PureComponent {
         </div>
         <div>
           <WalletTransactions
+            filters={filters}
             columns={WALLET_TRANSACTIONS_COLUMNS}
             renderBodyRow={this.renderBodyRow}
             currency={currency}
-            eventTypeFilterValues={eventTypeFilterValues}
-            createButtonToolbar={createButtonSearch("/")}
           />
         </div>
       </Surface>
