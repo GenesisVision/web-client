@@ -61,7 +61,7 @@ class WalletList extends Component {
   render() {
     const { t, createButtonToolbar, wallets } = this.props;
     return (
-      <Surface className="wallet-list">
+      <div className="wallet-list">
         <TableModule
           paging={DEFAULT_PAGING}
           createButtonToolbar={createButtonToolbar}
@@ -164,7 +164,7 @@ class WalletList extends Component {
           open={this.state.isOpenTransferPopup}
           onClose={this.handleCloseTransferPopup}
         />
-      </Surface>
+      </div>
     );
   }
 }

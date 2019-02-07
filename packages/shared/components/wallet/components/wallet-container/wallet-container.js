@@ -17,7 +17,7 @@ import WalletTransactions from "../wallet-transactions/wallet-transactions";
 import { WALLET_TRANSACTIONS_COLUMNS } from "../wallet-transactions/wallet-transactions.constants";
 
 const createButtonSearch = route => (
-  <div className="wallet-container__button-container">
+  <div className="wallet-container__search-container">
     <Link to={route}>
       <SearchIcon />
     </Link>
@@ -74,7 +74,6 @@ class WalletContainer extends PureComponent {
             renderBodyRow={this.renderBodyRow}
             currency={currency}
             eventTypeFilterValues={eventTypeFilterValues}
-            createButtonToolbar={createButtonSearch("/")}
           />
         </div>
       </Surface>

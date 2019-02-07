@@ -25,7 +25,7 @@ const TRANSACTIONS_TAB = "transactions";
 const EXTERNAL_TAB = "external";
 
 const createButtonSearch = route => (
-  <div className="wallet-container__button-container">
+  <div className="wallet-container__search-container">
     <Link to={route}>
       <SearchIcon />
     </Link>
@@ -156,17 +156,11 @@ class WalletContainerTotal extends PureComponent {
           </div>
         </div>
         <div>
-          {tab === WALLETS_TAB && (
-            <WalletList
-              wallets={wallets}
-              createButtonToolbar={createButtonSearch("/")}
-            />
-          )}
+          {tab === WALLETS_TAB && <WalletList wallets={wallets} />}
           {tab === TRANSACTIONS_TAB && (
             <WalletTransactions
               columns={WALLET_TOTAL_TRANSACTIONS_COLUMNS}
               renderBodyRow={this.renderBodyRow}
-              createButtonToolbar={createButtonSearch("/")}
             />
           )}
           {/*{tab === EXTERNAL_TAB && (*/}

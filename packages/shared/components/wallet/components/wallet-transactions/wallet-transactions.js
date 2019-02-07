@@ -15,7 +15,6 @@ import TableModule from "shared/components/table/components/table-module";
 import { FilterType } from "shared/components/table/helpers/filtering.helpers";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { WALLET_TRANSACTION_ACTIONS_VALUES } from "shared/components/wallet/components/wallet-list/wallet-list.constants";
-
 import { walletApi } from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
 
@@ -58,7 +57,7 @@ class WalletTransactions extends Component {
   render() {
     const { t, createButtonToolbar, renderBodyRow, columns } = this.props;
     return (
-      <Surface className="wallet-transactions">
+      <div className="wallet-transactions">
         <TableModule
           defaultFilters={DEFAULT_FILTERS}
           paging={DEFAULT_PAGING}
@@ -96,7 +95,7 @@ class WalletTransactions extends Component {
           )}
           renderBodyRow={renderBodyRow}
         />
-      </Surface>
+      </div>
     );
   }
 }
