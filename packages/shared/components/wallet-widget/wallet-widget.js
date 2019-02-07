@@ -9,9 +9,9 @@ import Chip from "shared/components/chip/chip";
 import { WalletIcon } from "shared/components/icon/wallet-icon";
 import Popover from "shared/components/popover/popover";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { WALLET_PAGE_ROUTE } from "shared/components/wallet/wallet-page";
+import { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
-import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
+import { formatValue } from "shared/utils/formatter";
 
 class WalletWidget extends React.Component {
   state = {
@@ -36,8 +36,10 @@ class WalletWidget extends React.Component {
       availableGvt,
       investedGvt,
       totalBalanceGvt,
+      pendingGvt,
       className
     } = this.props;
+    const currentWallet = { available: availableGvt, currency: "GVT" };
     return (
       <Fragment>
         <div className={classnames("wallet-widget", className)}>
@@ -46,10 +48,7 @@ class WalletWidget extends React.Component {
             onClick={this.handleOpenDetails}
           >
             <WalletIcon primary={this.state.anchorEl !== null} />
-            <span className="wallet-widget__value">{`${formatCurrencyValue(
-              availableGvt,
-              "GVT"
-            )} GVT`}</span>
+            <span className="wallet-widget__value">{`${availableGvt} GVT`}</span>
           </div>
           <div className="wallet-widget__add">
             <Chip type="positive" onClick={this.handleOpenAddFundsPopup}>
@@ -58,6 +57,7 @@ class WalletWidget extends React.Component {
           </div>
         </div>
         <WalletAddFundsPopup
+          currentWallet={currentWallet}
           onClose={this.handleClodsAddFundsPopup}
           open={this.state.isOpenAddFundsPopup}
         />
@@ -68,22 +68,30 @@ class WalletWidget extends React.Component {
           <div className="wallet-details">
             <div className="wallet-details__item">
               <StatisticItem label={t("wallet-widget.total-balance")}>
-                {`${formatCurrencyValue(totalBalanceGvt, "GVT")} GVT`}
-              </StatisticItem>
-            </div>
-            <div className="wallet-details__item">
-              <StatisticItem label={t("wallet-widget.invested-value")}>
-                {`${formatCurrencyValue(investedGvt, "GVT")} GVT`}
+                {`${formatValue(totalBalanceGvt)} GVT`}
               </StatisticItem>
             </div>
             <div className="wallet-details__item">
               <StatisticItem label={t("wallet-widget.available")}>
-                {`${formatCurrencyValue(availableGvt, "GVT")} GVT`}
+                {`${formatValue(availableGvt)} GVT`}
+              </StatisticItem>
+            </div>
+            <div className="wallet-details__item">
+              <StatisticItem label={t("wallet-widget.invested-value")}>
+                {`${formatValue(investedGvt)} GVT`}
+              </StatisticItem>
+            </div>
+            <div className="wallet-details__item">
+              <StatisticItem label={t("wallet-widget.pending-value")}>
+                {`${formatValue(pendingGvt)} GVT`}
               </StatisticItem>
             </div>
             <div className="wallet-details__item">
               <div className="wallet-details__value">
-                <Link to={WALLET_PAGE_ROUTE} onClick={this.handleCloseDetails}>
+                <Link
+                  to={WALLET_TOTAL_PAGE_ROUTE}
+                  onClick={this.handleCloseDetails}
+                >
                   {t("wallet-widget.details")} ›
                 </Link>
               </div>
@@ -98,6 +106,7 @@ class WalletWidget extends React.Component {
 WalletWidget.propTypes = {
   availableGvt: PropTypes.number,
   investedGvt: PropTypes.number,
+  pendingGvt: PropTypes.number,
   totalBalanceGvt: PropTypes.number,
   className: PropTypes.string
 };
@@ -105,6 +114,7 @@ WalletWidget.propTypes = {
 WalletWidget.defaultProps = {
   availableGvt: 0,
   investedGvt: 0,
+  pendingGvt: 0,
   totalBalanceGvt: 0,
   className: ""
 };
