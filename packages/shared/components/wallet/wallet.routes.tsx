@@ -26,14 +26,7 @@ interface IWalletDispatchToProps {
   fetchWalletTransactionsFilters(): void;
 }
 
-interface IWalletStateToProps {
-  currency: string;
-}
-
-class WalletRoutes extends React.Component<
-  IWalletDispatchToProps & IWalletStateToProps,
-  any
-> {
+class WalletRoutes extends React.Component<IWalletDispatchToProps, any> {
   getWallets = () => {
     this.props.fetchWallets();
     this.props.fetchWalletTransactionsFilters();
@@ -41,16 +34,6 @@ class WalletRoutes extends React.Component<
 
   componentDidMount() {
     this.getWallets();
-  }
-
-  componentDidUpdate(
-    prevProps: Readonly<any>,
-    prevState: Readonly<any>,
-    snapshot?: any
-  ): void {
-    if (prevProps.currency !== this.props.currency) {
-      this.getWallets();
-    }
   }
 
   render() {
@@ -64,11 +47,7 @@ class WalletRoutes extends React.Component<
   }
 }
 
-const mapStateToProps = (state: RootState) => ({
-  currency: state.accountSettings.currency
-});
-
 export default connect(
-  mapStateToProps,
+  undefined,
   { fetchWallets, fetchWalletTransactionsFilters }
 )(WalletRoutes);

@@ -39,8 +39,8 @@ class WalletContainerTotal extends PureComponent {
 
   render() {
     const { tab } = this.state;
-    const { t, wallets, filters, currencies } = this.props;
-    if (!filters) return <h1>huj</h1>;
+    const { t, wallets, filters } = this.props;
+    console.info(filters);
     return (
       <Surface className="wallet-container">
         <div className="wallet-container__header">
@@ -51,12 +51,13 @@ class WalletContainerTotal extends PureComponent {
                 label={t("wallet-page.tabs.wallets")}
               />
               {/*<GVTab value={COPYTRADING_TAB} label={t("wallet-page.tabs.copytrading")} />*/}
-              {filters && (
-                <GVTab
-                  value={TRANSACTIONS_TAB}
-                  label={t("wallet-page.tabs.transactions")}
-                />
-              )}
+
+              <GVTab
+                className={filters ? "gv-tab" : "gv-tab gv-tab--disabled"}
+                value={TRANSACTIONS_TAB} //TODO add disable prop
+                label={t("wallet-page.tabs.transactions")}
+              />
+
               {/*<GVTab value={EXTERNAL_TAB} label={t("wallet-page.tabs.external")} />*/}
             </GVTabs>
           </div>

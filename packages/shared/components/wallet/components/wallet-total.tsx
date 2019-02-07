@@ -19,7 +19,7 @@ interface IWalletProps {
 
 class WalletTotal extends React.Component<IWalletProps> {
   render() {
-    const { t, info, wallets, filters, currencies } = this.props;
+    const { t, info, wallets, filters } = this.props;
     if (!info) return <WalletBalanceLoader />;
     return (
       <Page title={t("wallet-page.title")}>
@@ -27,11 +27,7 @@ class WalletTotal extends React.Component<IWalletProps> {
           <h1>{t("wallet-page.title")}</h1>
           <WalletBalanceElements walletBalanceData={info} />
         </div>
-        <WalletContainerTotal
-          wallets={wallets}
-          filters={filters}
-          currencies={currencies}
-        />
+        <WalletContainerTotal wallets={wallets} filters={filters} />
       </Page>
     );
   }
@@ -40,10 +36,7 @@ class WalletTotal extends React.Component<IWalletProps> {
 const mapStateToProps = (state: RootState) => ({
   info: state.wallet.info.data ? state.wallet.info.data.grandTotal : null,
   wallets: state.wallet.info.data ? state.wallet.info.data.wallets : [],
-  filters: state.wallet.filters.data ? state.wallet.filters.data : null,
-  currencies: state.platformData.data
-    ? state.platformData.data.currencies
-    : null
+  filters: state.wallet.filters.data ? state.wallet.filters.data : null
 });
 
 export default compose(

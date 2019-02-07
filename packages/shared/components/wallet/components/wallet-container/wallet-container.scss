@@ -5,6 +5,11 @@
 .wallet-container {
   @include adaptive-margin(top, $padding-xxsmall);
 
+  .gv-tab--disabled {
+    pointer-events: none;
+    cursor: default;
+  }
+
   &__header {
     padding-left: $padding-xsmall;
     padding-right: $padding-xsmall;
