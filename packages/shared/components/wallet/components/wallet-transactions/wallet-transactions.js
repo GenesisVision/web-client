@@ -33,7 +33,7 @@ class WalletTransactions extends Component {
     return walletApi
       .v10WalletMultiTransactionsGet(authService.getAuthArg(), {
         ...filters,
-        currency: "GVT" //TODO
+        currency: this.props.currency
       })
       .then(data => ({ total: data.total, items: data.transactions }));
   };
@@ -44,8 +44,7 @@ class WalletTransactions extends Component {
       createButtonToolbar,
       renderBodyRow,
       columns,
-      filters,
-      currencies
+      filters
     } = this.props;
     return (
       <TableModule
@@ -53,7 +52,6 @@ class WalletTransactions extends Component {
         paging={DEFAULT_PAGING}
         filtering={{
           ...TRANSACTIONS_FILTERS,
-          currency: currencies ? currencies[0] : "GVT",
           type: filters.multiWalletTransactionType[0]
         }}
         createButtonToolbar={createButtonToolbar}
@@ -61,13 +59,6 @@ class WalletTransactions extends Component {
         renderFilters={(updateFilter, filtering) => {
           return (
             <Fragment>
-              <SelectFilter
-                name={"currency"}
-                label="Currency"
-                value={filtering["currency"]}
-                values={reduceFilters(currencies)}
-                onChange={updateFilter}
-              />
               <SelectFilter
                 name={"type"}
                 label="Type"
