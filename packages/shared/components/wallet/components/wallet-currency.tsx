@@ -13,7 +13,7 @@ import GVTIcon from "shared/media/currency/GVT.svg";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
 import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
 
-import WalletConvertPopup from "../../../modules/wallet-convert/wallet-convert-popup";
+import WalletTransferPopup from "../../../modules/wallet-transfer/wallet-transfer-popup";
 import WalletBalanceButtons from "./wallet-balance/wallet-balance-buttons";
 import WalletBalanceElements from "./wallet-balance/wallet-balance-elements";
 import WalletBalanceLoader from "./wallet-balance/wallet-balance-loader";
@@ -39,7 +39,7 @@ class WalletCurrency extends React.Component<IWalletProps> {
   state = {
     isOpenAddFundsPopup: false,
     isOpenWithdrawPopup: false,
-    isOpenConvertPopup: false
+    isOpenTransferPopup: false
   };
 
   handleOpenAddFundsPopup = () => {
@@ -56,6 +56,14 @@ class WalletCurrency extends React.Component<IWalletProps> {
 
   handleCloseWithdrawPopup = () => {
     this.setState({ isOpenWithdrawPopup: false });
+  };
+
+  handleOpenTransferPopup = wallet => {
+    this.setState({ isOpenTransferPopup: true, currentWallet: wallet });
+  };
+
+  handleCloseTransferPopup = () => {
+    this.setState({ isOpenTransferPopup: false, currentWallet: {} });
   };
 
   render() {
@@ -82,6 +90,7 @@ class WalletCurrency extends React.Component<IWalletProps> {
             <WalletBalanceButtons
               handleAddFunds={this.handleOpenAddFundsPopup}
               handleWithdraw={this.handleOpenWithdrawPopup}
+              handleTransfer={this.handleOpenTransferPopup}
             />
           </div>
           <WalletBalanceElements walletBalanceData={info} />
@@ -99,6 +108,11 @@ class WalletCurrency extends React.Component<IWalletProps> {
           currentWallet={info}
           open={this.state.isOpenWithdrawPopup}
           onClose={this.handleCloseWithdrawPopup}
+        />
+        <WalletTransferPopup
+          currentWallet={info}
+          open={this.state.isOpenTransferPopup}
+          onClose={this.handleCloseTransferPopup}
         />
       </Page>
     );

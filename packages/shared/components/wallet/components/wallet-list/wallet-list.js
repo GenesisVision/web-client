@@ -16,7 +16,7 @@ import { composeWalletCurrencytUrl } from "shared/components/wallet/wallet.route
 import ArrowIcon from "shared/media/arrow-up.svg";
 import ConvertIcon from "shared/media/convert.svg";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
-import WalletConvertPopup from "shared/modules/wallet-convert/wallet-convert-popup";
+import WalletTransferPopup from "shared/modules/wallet-transfer/wallet-transfer-popup";
 import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
 
 import { walletTableTransactionsSelector } from "../wallet-transactions/wallet-transactions.selector";
@@ -26,7 +26,7 @@ class WalletList extends Component {
   state = {
     isOpenAddFundsPopup: false,
     isOpenWithdrawPopup: false,
-    isOpenConvertPopup: false,
+    isOpenTransferPopup: false,
     currentWallet: {}
   };
 
@@ -48,6 +48,14 @@ class WalletList extends Component {
 
   handleCloseWithdrawPopup = () => {
     this.setState({ isOpenWithdrawPopup: false, currentWallet: {} });
+  };
+
+  handleOpenTransferPopup = wallet => {
+    this.setState({ isOpenTransferPopup: true, currentWallet: wallet });
+  };
+
+  handleCloseTransferPopup = () => {
+    this.setState({ isOpenTransferPopup: false, currentWallet: {} });
   };
 
   render() {
@@ -118,8 +126,8 @@ class WalletList extends Component {
                 </TableCell>
                 <TableCell className="wallet-list__cell wallet-list__cell--buttons">
                   <Chip
-                    className="wallet-list__button-convert"
-                    onClick={this.handleOpenWithdrawPopup.bind(this, wallet)}
+                    className="wallet-list__button-transfer"
+                    onClick={this.handleOpenTransferPopup.bind(this, wallet)}
                   >
                     <img src={ConvertIcon} alt="Convert Icon" />
                   </Chip>
@@ -150,6 +158,11 @@ class WalletList extends Component {
           currentWallet={this.state.currentWallet}
           open={this.state.isOpenWithdrawPopup}
           onClose={this.handleCloseWithdrawPopup}
+        />
+        <WalletTransferPopup
+          currentWallet={this.state.currentWallet}
+          open={this.state.isOpenTransferPopup}
+          onClose={this.handleCloseTransferPopup}
         />
       </Surface>
     );

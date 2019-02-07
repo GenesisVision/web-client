@@ -57,10 +57,10 @@ class Header extends React.Component<IHeaderProps, IHeaderState> {
     const {
       avatar,
       email,
-      totalBalanceGvt,
-      availableGvt,
-      investedGvt,
-      pendingGvt,
+      totalBalance,
+      available,
+      invested,
+      pending,
       notificationsCount
     } = profileHeader;
     return (
@@ -88,10 +88,10 @@ class Header extends React.Component<IHeaderProps, IHeaderState> {
             <React.Fragment>
               <WalletWidget
                 className="header__wallet"
-                totalBalanceGvt={totalBalanceGvt}
-                investedGvt={investedGvt}
-                availableGvt={availableGvt}
-                pendingGvt={pendingGvt}
+                totalBalance={totalBalance}
+                invested={invested}
+                available={available}
+                pending={pending}
               />
               <NorificationsWidget
                 notificationsCount={notificationsCount}

@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import * as walletWithdrawService from "shared/modules/wallet-withdraw/services/wallet-withdraw.services";
 
-import * as walletWithdrawService from "../services/wallet-withdraw.services";
-import WalletWithdrawForm from "./wallet-withdraw-form";
-import WalletWithdrawRequest from "./wallet-withdraw-request/wallet-withdraw-request";
+import WalletTransferForm from "./wallet-transfer-form";
 
-class WalletWithdrawContainer extends Component {
+class WalletTransferContainer extends Component {
   state = {
     isPending: false,
     data: null,
@@ -22,9 +21,14 @@ class WalletWithdrawContainer extends Component {
   }
 
   handleSubmit = values => {
+    const { amount } = values;
     this.setState({ isPending: true });
     this.props.service
-      .newWithdrawRequest({ ...values, amount: Number(values.amount) })
+      .walletTransferRequest({
+        from: values.currencyFrom,
+        to: values.currencyTo,
+        amount
+      })
       .then(response => {
         this.setState({
           isPending: false,
@@ -46,10 +50,8 @@ class WalletWithdrawContainer extends Component {
     const { wallets } = data;
     const { twoFactorEnabled, currentWallet } = this.props;
 
-    return success ? (
-      <WalletWithdrawRequest />
-    ) : (
-      <WalletWithdrawForm
+    return (
+      <WalletTransferForm
         wallets={wallets}
         currentWallet={currentWallet}
         disabled={isPending}
@@ -74,4 +76,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(WalletWithdrawContainer);
+)(WalletTransferContainer);
