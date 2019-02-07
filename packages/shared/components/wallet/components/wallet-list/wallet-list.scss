@@ -9,12 +9,19 @@
 
     &--currency {
       min-width: 200px;
+      padding-top: 0;
+      padding-bottom: 0;
     }
 
-    &--buttons .chip {
-      @include adaptive-margin(left, $padding-xsmall);
-      width: 32px;
-      height: 32px;
+    &--buttons {
+      padding-top: 0;
+      padding-bottom: 0;
+
+      .chip {
+        @include adaptive-margin(left, $padding-xsmall);
+        width: 32px;
+        height: 32px;
+      }
     }
   }
 

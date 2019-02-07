@@ -30,9 +30,13 @@
     }
     &--type {
       text-align: right;
+      padding-top: 0;
+      padding-bottom: 0;
     }
     &--wallet {
       min-width: 250px;
+      padding-top: 0;
+      padding-bottom: 0;
     }
   }
 
