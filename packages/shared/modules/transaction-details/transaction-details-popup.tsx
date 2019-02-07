@@ -12,12 +12,9 @@ interface ITransactionDetailsProps {
 class TransactionDetailsPopup extends React.Component<
   ITransactionDetailsProps
 > {
-  handleClose = () => {
-    this.props.onClose();
-  };
   render() {
     return (
-      <Dialog open={this.props.open} onClose={this.handleClose}>
+      <Dialog open={this.props.open} onClose={this.props.onClose}>
         <TransactionDetails transactionId={"hello world"} />
       </Dialog>
     );

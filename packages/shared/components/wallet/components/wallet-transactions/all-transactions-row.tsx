@@ -85,56 +85,58 @@ class AllTransactionsRow extends React.Component<
     const { transaction } = this.props;
     const isConvertAction = transaction.type === "Converting";
     return (
-      <TableRow className="wallet-transactions__row" onClick={this.openPopup}>
-        <TableCell className="wallet-transactions__cell wallet-transactions__cell--wallet">
-          {isConvertAction ? (
-            <ConvertTransaction />
-          ) : (
-            <Fragment>
-              <img
-                src={getWalletIcon(
-                  transaction.currencyFrom || transaction.currencyTo
-                )}
-                className="wallet-transactions__icon"
-                alt="Icon"
-              />
-              Genesis Vision
-            </Fragment>
-          )}
-          <TransactionDetailsPopup
-            transactionId={transaction.id}
-            open={this.state.isOpen}
-            onClose={this.closePopup}
-          />
-        </TableCell>
-        <TableCell className="wallet-transactions__cell wallet-transactions__cell--date">
-          {moment(transaction.date).format("DD-MM-YYYY, hh:mm a")}
-        </TableCell>
-        <TableCell className="wallet-transactions__cell wallet-transactions__cell--type">
-          <img
-            src={SuccessTransactionsIcon}
-            className="wallet-transactions__icon"
-            alt="TransactionsIcon"
-          />
-        </TableCell>
-        <TableCell className="wallet-transactions__cell wallet-transactions__cell--information">
-          {transaction.description}
-        </TableCell>
-        <TableCell className="wallet-transactions__cell wallet-transactions__cell--amount">
-          {isConvertAction ? (
-            <AmountConvertTransaction transaction={transaction} />
-          ) : (
-            <Profitability value={formatValue(transaction.amount)}>
-              <NumberFormat
-                value={formatValue(transaction.amount)}
-                thousandSeparator=" "
-                displayType="text"
-                suffix=" GVT"
-              />
-            </Profitability>
-          )}
-        </TableCell>
-      </TableRow>
+      <React.Fragment>
+        <TransactionDetailsPopup
+          transactionId={transaction.id}
+          open={this.state.isOpen}
+          onClose={this.closePopup}
+        />
+        <TableRow className="wallet-transactions__row" onClick={this.openPopup}>
+          <TableCell className="wallet-transactions__cell wallet-transactions__cell--wallet">
+            {isConvertAction ? (
+              <ConvertTransaction />
+            ) : (
+              <Fragment>
+                <img
+                  src={getWalletIcon(
+                    transaction.currencyFrom || transaction.currencyTo
+                  )}
+                  className="wallet-transactions__icon"
+                  alt="Icon"
+                />
+                Genesis Vision
+              </Fragment>
+            )}
+          </TableCell>
+          <TableCell className="wallet-transactions__cell wallet-transactions__cell--date">
+            {moment(transaction.date).format("DD-MM-YYYY, hh:mm a")}
+          </TableCell>
+          <TableCell className="wallet-transactions__cell wallet-transactions__cell--type">
+            <img
+              src={SuccessTransactionsIcon}
+              className="wallet-transactions__icon"
+              alt="TransactionsIcon"
+            />
+          </TableCell>
+          <TableCell className="wallet-transactions__cell wallet-transactions__cell--information">
+            {transaction.description}
+          </TableCell>
+          <TableCell className="wallet-transactions__cell wallet-transactions__cell--amount">
+            {isConvertAction ? (
+              <AmountConvertTransaction transaction={transaction} />
+            ) : (
+              <Profitability value={formatValue(transaction.amount)}>
+                <NumberFormat
+                  value={formatValue(transaction.amount)}
+                  thousandSeparator=" "
+                  displayType="text"
+                  suffix=" GVT"
+                />
+              </Profitability>
+            )}
+          </TableCell>
+        </TableRow>
+      </React.Fragment>
     );
   }
 }

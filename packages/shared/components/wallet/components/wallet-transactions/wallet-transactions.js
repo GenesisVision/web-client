@@ -53,7 +53,7 @@ class WalletTransactions extends Component {
         paging={DEFAULT_PAGING}
         filtering={{
           ...TRANSACTIONS_FILTERS,
-          currency: currencies[0],
+          currency: currencies ? currencies[0] : "GVT",
           type: filters.multiWalletTransactionType[0]
         }}
         createButtonToolbar={createButtonToolbar}
