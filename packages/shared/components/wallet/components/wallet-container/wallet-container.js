@@ -1,5 +1,6 @@
 import "./wallet-container.scss";
 
+import { GVTab, GVTabs } from "gv-react-components";
 import moment from "moment";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
@@ -13,12 +14,12 @@ import TableRow from "shared/components/table/components/table-row";
 import SuccessTransactionsIcon from "shared/media/transactions/success.svg";
 import { formatValue } from "shared/utils/formatter";
 
-import WalletTransactions from "../wallet-transactions/wallet-transactions";
-import { WALLET_TRANSACTIONS_COLUMNS } from "../wallet-transactions/wallet-transactions.constants";
-import { GVTab, GVTabs } from "gv-react-components";
+import GVScroll from "../../../scroll/gvscroll";
+import DepositsWithdrawalsRow from "../wallet-deposits-withdrawals/deposits-withdrawals-row";
 import WalletDepositsWithdrawals from "../wallet-deposits-withdrawals/wallet-deposits-withdrawals";
 import { WALLET_DEPOSITS_WITHDRAWALS_COLUMNS } from "../wallet-deposits-withdrawals/wallet-deposits-withdrawals.constants";
-import DepositsWithdrawalsRow from "../wallet-deposits-withdrawals/deposits-withdrawals-row";
+import WalletTransactions from "../wallet-transactions/wallet-transactions";
+import { WALLET_TRANSACTIONS_COLUMNS } from "../wallet-transactions/wallet-transactions.constants";
 
 const TRANSACTIONS_TAB = "transactions";
 const EXTERNAL_TAB = "external";
@@ -83,17 +84,19 @@ class WalletContainer extends PureComponent {
       <Surface className="wallet-container">
         <div className="wallet-container__header">
           <div className="wallet-container__tabs">
-            <GVTabs value={tab} onChange={this.handleTabChange}>
-              <GVTab
-                className={filters ? "gv-tab" : "gv-tab gv-tab--disabled"}
-                value={TRANSACTIONS_TAB} //TODO add disable prop
-                label={t("wallet-page.tabs.transactions")}
-              />
-              <GVTab
-                value={EXTERNAL_TAB}
-                label={t("wallet-page.tabs.external")}
-              />
-            </GVTabs>
+            <GVScroll autoHide autoHeight autoHeightMax={60}>
+              <GVTabs value={tab} onChange={this.handleTabChange}>
+                <GVTab
+                  className={filters ? "gv-tab" : "gv-tab gv-tab--disabled"}
+                  value={TRANSACTIONS_TAB} //TODO add disable prop
+                  label={t("wallet-page.tabs.transactions")}
+                />
+                <GVTab
+                  value={EXTERNAL_TAB}
+                  label={t("wallet-page.tabs.external")}
+                />
+              </GVTabs>
+            </GVScroll>
           </div>
         </div>
         <div>

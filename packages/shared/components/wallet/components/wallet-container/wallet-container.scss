@@ -5,6 +5,10 @@
 .wallet-container {
   @include adaptive-margin(top, $padding-xxsmall);
 
+  .gv-tab {
+    white-space: nowrap;
+  }
+
   .gv-tab--disabled {
     pointer-events: none;
     cursor: default;

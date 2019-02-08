@@ -2,7 +2,7 @@
 @import "~shared/styles/_breakpoint.scss";
 @import "~shared/styles/_sizes.scss";
 
-.wallet-deposits-withdrawals {
+.wallet-copytrading {
   &__row:nth-child(2n + 1) {
     background-color: $table-background-subcolor;
   }
@@ -11,7 +11,12 @@
     @include adaptive-padding(right, $padding-xsmall, 2);
     color: $text-light-color;
 
-    &--amount {
+    &--information {
+      min-width: 350px;
+      white-space: normal;
+    }
+
+    &--actions {
       padding-right: 0;
     }
   }
@@ -48,9 +53,15 @@
         padding-top: 0;
         padding-bottom: 0;
       }
+
+      &--actions {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
     }
   }
 }
+
 .wallet-transaction-actions {
   &__disabled-actions {
     opacity: 0.4;
