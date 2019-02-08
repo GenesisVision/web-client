@@ -46,7 +46,6 @@ class WalletDepositsWithdrawals extends Component {
       columns,
       filters
     } = this.props;
-    console.log(filters);
     return (
       <TableModule
         defaultFilters={DEFAULT_FILTERS}
