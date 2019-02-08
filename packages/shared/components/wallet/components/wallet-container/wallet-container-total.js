@@ -17,14 +17,16 @@ import { TransactionDetails } from "shared/modules/transaction-details/transacti
 import TransactionDetailsPopup from "shared/modules/transaction-details/transaction-details-popup";
 import { formatValue } from "shared/utils/formatter";
 
+import GVScroll from "../../../scroll/gvscroll";
+import WalletCopytrading from "../wallet-copytrading/wallet-copytrading";
 import { getWalletIcon } from "../wallet-currency";
+import AllDepositsWithdrawalsRow from "../wallet-deposits-withdrawals/all-deposits-withdrawals-row";
+import WalletDepositsWithdrawals from "../wallet-deposits-withdrawals/wallet-deposits-withdrawals";
+import { WALLET_TOTAL_DEPOSITS_WITHDRAWALS_COLUMNS } from "../wallet-deposits-withdrawals/wallet-deposits-withdrawals.constants";
 import WalletList from "../wallet-list/wallet-list";
 import AllTransactionsRow from "../wallet-transactions/all-transactions-row";
 import WalletTransactions from "../wallet-transactions/wallet-transactions";
 import { WALLET_TOTAL_TRANSACTIONS_COLUMNS } from "../wallet-transactions/wallet-transactions.constants";
-import { WALLET_TOTAL_DEPOSITS_WITHDRAWALS_COLUMNS } from "../wallet-deposits-withdrawals/wallet-deposits-withdrawals.constants";
-import AllDepositsWithdrawalsRow from "../wallet-deposits-withdrawals/all-deposits-withdrawals-row";
-import WalletDepositsWithdrawals from "../wallet-deposits-withdrawals/wallet-deposits-withdrawals";
 
 const WALLETS_TAB = "wallets";
 const COPYTRADING_TAB = "copytrading";
@@ -42,52 +44,57 @@ class WalletContainerTotal extends PureComponent {
 
   render() {
     const { tab } = this.state;
-    const { t, wallets, filters } = this.props;
+    const { t, wallets, filters, copytrading } = this.props;
     return (
       <Surface className="wallet-container">
         <div className="wallet-container__header">
           <div className="wallet-container__tabs">
-            <GVTabs value={tab} onChange={this.handleTabChange}>
-              <GVTab
-                value={WALLETS_TAB}
-                label={t("wallet-page.tabs.wallets")}
-              />
-              {/*<GVTab value={COPYTRADING_TAB} label={t("wallet-page.tabs.copytrading")} />*/}
+            <GVScroll autoHide autoHeight autoHeightMax={60}>
+              <GVTabs value={tab} onChange={this.handleTabChange}>
+                <GVTab
+                  value={WALLETS_TAB}
+                  label={t("wallet-page.tabs.wallets")}
+                />
+                <GVTab
+                  visible={copytrading}
+                  value={COPYTRADING_TAB}
+                  label={t("wallet-page.tabs.copytrading")}
+                />
 
-              <GVTab
-                className={filters ? "gv-tab" : "gv-tab gv-tab--disabled"}
-                value={TRANSACTIONS_TAB} //TODO add disable prop
-                label={t("wallet-page.tabs.transactions")}
-              />
+                <GVTab
+                  className={filters ? "gv-tab" : "gv-tab gv-tab--disabled"}
+                  value={TRANSACTIONS_TAB} //TODO add disable prop
+                  label={t("wallet-page.tabs.transactions")}
+                />
 
-              <GVTab
-                value={EXTERNAL_TAB}
-                label={t("wallet-page.tabs.external")}
-              />
-            </GVTabs>
+                <GVTab
+                  value={EXTERNAL_TAB}
+                  label={t("wallet-page.tabs.external")}
+                />
+              </GVTabs>
+            </GVScroll>
           </div>
         </div>
-        <div>
-          {tab === WALLETS_TAB && <WalletList wallets={wallets} />}
-          {tab === TRANSACTIONS_TAB && (
-            <WalletTransactions
-              columns={WALLET_TOTAL_TRANSACTIONS_COLUMNS}
-              filters={filters}
-              renderBodyRow={transaction => (
-                <AllTransactionsRow transaction={transaction} />
-              )}
-            />
-          )}
-          {tab === EXTERNAL_TAB && (
-            <WalletDepositsWithdrawals
-              columns={WALLET_TOTAL_DEPOSITS_WITHDRAWALS_COLUMNS}
-              filters={filters}
-              renderBodyRow={transaction => (
-                <AllDepositsWithdrawalsRow transaction={transaction} />
-              )}
-            />
-          )}
-        </div>
+        {tab === WALLETS_TAB && <WalletList wallets={wallets} />}
+        {tab === COPYTRADING_TAB && <WalletCopytrading />}
+        {tab === TRANSACTIONS_TAB && (
+          <WalletTransactions
+            columns={WALLET_TOTAL_TRANSACTIONS_COLUMNS}
+            filters={filters}
+            renderBodyRow={transaction => (
+              <AllTransactionsRow transaction={transaction} />
+            )}
+          />
+        )}
+        {tab === EXTERNAL_TAB && (
+          <WalletDepositsWithdrawals
+            columns={WALLET_TOTAL_DEPOSITS_WITHDRAWALS_COLUMNS}
+            filters={filters}
+            renderBodyRow={transaction => (
+              <AllDepositsWithdrawalsRow transaction={transaction} />
+            )}
+          />
+        )}
       </Surface>
     );
   }

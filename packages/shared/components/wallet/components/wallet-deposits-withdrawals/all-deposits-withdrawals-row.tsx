@@ -10,6 +10,7 @@ import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import FundAsset from "shared/media/fund-asset.svg";
 import ImageBase from "shared/components/avatar/image-base";
+import { Fragment } from "react";
 
 export interface ITransactionRowProps {
   transaction: MultiWalletExternalTransaction;
@@ -59,9 +60,11 @@ class AllDepositsWithdrawalsRow extends React.Component<
             {moment(transaction.date).format("DD-MM-YYYY, hh:mm a")}
           </TableCell>
           <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--status">
-            <a href={transaction.statusUrl} target="_blank">
-              {transaction.status}
-            </a>
+            {(transaction.statusUrl && (
+              <a href={transaction.statusUrl} target="_blank">
+                {transaction.status}
+              </a>
+            )) || <Fragment>{transaction.status}</Fragment>}
           </TableCell>
           <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--amount">
             <Profitability

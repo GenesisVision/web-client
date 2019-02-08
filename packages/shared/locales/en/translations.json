@@ -598,6 +598,14 @@
       "description": "Description",
       "amount": "Amount"
     },
+    "copytrading": {
+      "currency": "Currency",
+      "balance": "Balance",
+      "amount": "Amount",
+      "equity": "Equity",
+      "free-margin": "Free-margin",
+      "actions": "Actions"
+    },
     "list": {
       "currency": "Currency",
       "total-balance": "Total balance",
@@ -609,6 +617,10 @@
     "transaction-actions": {
       "resend-email": "Resend confirmation email",
       "cancel-request": "Cancel request"
+    },
+    "copytrading-actions": {
+      "transfer": "Transfer",
+      "trade-history": "Trade history"
     },
     "transaction-statuses": {
       "Done": "Completed",

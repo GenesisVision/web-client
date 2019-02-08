@@ -47,48 +47,50 @@ class WalletDepositsWithdrawals extends Component {
       filters
     } = this.props;
     return (
-      <TableModule
-        defaultFilters={DEFAULT_FILTERS}
-        paging={DEFAULT_PAGING}
-        filtering={{
-          ...TRANSACTIONS_FILTERS,
-          type: filters.multiWalletExternalTransactionType[0]
-        }}
-        createButtonToolbar={createButtonToolbar}
-        getItems={this.fetch}
-        renderFilters={(updateFilter, filtering) => {
-          return (
-            <Fragment>
-              <SelectFilter
-                name={"type"}
-                label="Type"
-                value={filtering["type"]}
-                values={reduceFilters(
-                  filters.multiWalletExternalTransactionType
-                )}
-                onChange={updateFilter}
-              />
-              <DateRangeFilter
-                name={DATE_RANGE_FILTER_NAME}
-                value={filtering["dateRange"]}
-                onChange={updateFilter}
-                startLabel={t("filters.date-range.account-creation")}
-              />
-            </Fragment>
-          );
-        }}
-        columns={columns}
-        renderHeader={column => (
-          <span
-            className={`wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--${
-              column.name
-            }`}
-          >
-            {t(`wallet-page.deposits-withdrawals.${column.name}`)}
-          </span>
-        )}
-        renderBodyRow={renderBodyRow}
-      />
+      <div className="wallet-deposits-withdrawals">
+        <TableModule
+          defaultFilters={DEFAULT_FILTERS}
+          paging={DEFAULT_PAGING}
+          filtering={{
+            ...TRANSACTIONS_FILTERS,
+            type: filters.multiWalletExternalTransactionType[0]
+          }}
+          createButtonToolbar={createButtonToolbar}
+          getItems={this.fetch}
+          renderFilters={(updateFilter, filtering) => {
+            return (
+              <Fragment>
+                <SelectFilter
+                  name={"type"}
+                  label="Type"
+                  value={filtering["type"]}
+                  values={reduceFilters(
+                    filters.multiWalletExternalTransactionType
+                  )}
+                  onChange={updateFilter}
+                />
+                <DateRangeFilter
+                  name={DATE_RANGE_FILTER_NAME}
+                  value={filtering["dateRange"]}
+                  onChange={updateFilter}
+                  startLabel={t("filters.date-range.account-creation")}
+                />
+              </Fragment>
+            );
+          }}
+          columns={columns}
+          renderHeader={column => (
+            <span
+              className={`wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--${
+                column.name
+              }`}
+            >
+              {t(`wallet-page.deposits-withdrawals.${column.name}`)}
+            </span>
+          )}
+          renderBodyRow={renderBodyRow}
+        />
+      </div>
     );
   }
 }

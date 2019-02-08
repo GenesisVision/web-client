@@ -2,31 +2,22 @@
 @import "~shared/styles/_breakpoint.scss";
 @import "~shared/styles/_sizes.scss";
 
-.wallet-transactions {
+.wallet-copytrading {
   &__row:nth-child(2n + 1) {
     background-color: $table-background-subcolor;
-  }
-
-  &__icon-currency {
-    @include adaptive-margin(right, $padding-xsmall);
   }
 
   &__cell {
     @include adaptive-padding(right, $padding-xsmall, 2);
     color: $text-light-color;
 
-    &--date {
-      min-width: 150px;
-    }
     &--information {
-      min-width: 300px;
+      min-width: 350px;
       white-space: normal;
     }
-    &--amount {
-      min-width: 140px;
+
+    &--actions {
       padding-right: 0;
-    }
-    &--type {
       text-align: right;
     }
   }
@@ -41,19 +32,6 @@
     vertical-align: middle;
     width: 24px;
     height: 24px;
-  }
-
-  &__back-arrow {
-    @include horizontal-paddings($padding-xxsmall);
-    display: inline-block;
-    border: 1px solid transparent;
-    height: 16.5px;
-    font-family: "Times New Roman";
-  }
-
-  &__col {
-    display: inline-block;
-    line-height: 4px;
   }
 
   & .filter {
@@ -72,24 +50,22 @@
 
   @include media-breakpoint-landscape-phone() {
     &__cell {
-      &--type {
+      &--wallet {
         padding-top: 0;
         padding-bottom: 0;
       }
-      &--wallet {
+
+      &--actions {
         padding-top: 0;
         padding-bottom: 0;
       }
     }
   }
 }
-
-.wallet-transaction-actions {
-  &__disabled-actions {
-    opacity: 0.4;
-    &.icon.icon--actions-circle {
-      cursor: auto;
-    }
+.wallet-copytrading-actions {
+  .chip {
+    @include adaptive-margin(left, $padding-xsmall);
+    font-weight: normal;
   }
 }
 
