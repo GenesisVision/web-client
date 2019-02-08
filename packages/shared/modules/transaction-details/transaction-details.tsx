@@ -1,31 +1,72 @@
-import * as React from "react";
-import ArrowIcon from "../../media/arrow-down.svg";
-import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { GVProgramAvatar } from "gv-react-components";
-import filesService from "../../services/file-service";
-
 import "./transaction-details.scss";
+
+import { TransactionDetatils } from "gv-api-web";
+import { GVProgramAvatar } from "gv-react-components";
+import * as React from "react";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
+import walletApi from "shared/services/api-client/wallet-api";
+
+import authService from "../../services/auth-service";
 
 export interface ITransactionDetailsProps {
   transactionId: string;
 }
 
-const TransactionAsset = props => {
+export interface ITransactionDetailsState {
+  isPending: boolean;
+  data: TransactionDetatils;
+  errorMessage?: string;
+}
+
+const TransactionAsset = (props: {
+  program: string;
+  trader: string;
+  logo: string;
+  level: number;
+}) => {
   return (
     <div className="transaction-asset">
-      <GVProgramAvatar alt={"mega programs"} />
+      <GVProgramAvatar
+        alt={"mega programs"}
+        url={props.logo}
+        level={props.level}
+      />
       <div className="transaction-asset__description">
-        <p className="transaction-asset__title">Hello Program</p>
-        <p className="transaction-asset__trader">Mega Trader</p>
+        <p className="transaction-asset__title">{props.program}</p>
+        <p className="transaction-asset__trader">{props.trader}</p>
       </div>
     </div>
   );
 };
 
 export class TransactionDetails extends React.Component<
-  ITransactionDetailsProps
+  ITransactionDetailsProps,
+  ITransactionDetailsState
 > {
+  state = {
+    isPending: false,
+    data: {} as TransactionDetatils
+  };
+
+  componentDidMount() {
+    this.fetch();
+  }
+
+  fetch = () => {
+    this.setState({ isPending: true });
+    walletApi
+      .v10WalletTransactionByIdGet(
+        this.props.transactionId,
+        authService.getAuthArg()
+      )
+      .then((data: TransactionDetatils) =>
+        this.setState({ data, isPending: false })
+      )
+      .catch((error: string) => this.setState({ error, isPending: false }));
+  };
+
   render() {
+    if (this.state.isPending) return null;
     return (
       <React.Fragment>
         <div className="dialog__top">
@@ -36,13 +77,24 @@ export class TransactionDetails extends React.Component<
         </div>
         <div className="dialog__bottom">
           <StatisticItem label={"To"}>
-            <TransactionAsset />
+            <TransactionAsset
+              level={this.state.data.rateValue}
+              logo={this.state.data.logo}
+              program={this.state.data.name}
+              trader={this.state.data.name}
+            />
           </StatisticItem>
-          <StatisticItem label={"Entry fee"}>5345</StatisticItem>
-          <StatisticItem label={"GV Commission"}>345345</StatisticItem>
-          <StatisticItem label={"Status"}>Done</StatisticItem>
+          <StatisticItem label={"Entry fee"}>
+            {this.state.data.entryFee}
+          </StatisticItem>
+          <StatisticItem label={"GV Commission"}>
+            {this.state.data.gvCommission}
+          </StatisticItem>
+          <StatisticItem label={"Status"}>
+            {this.state.data.description}
+          </StatisticItem>
           <StatisticItem label={"Investment amount"} big>
-            34.234234 BTC
+            {`${this.state.data.amountFrom} ${this.state.data.currencyFrom}`}
           </StatisticItem>
         </div>
       </React.Fragment>
