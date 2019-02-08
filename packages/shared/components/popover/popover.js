@@ -135,8 +135,10 @@ class Popover extends Component {
     if (this.popover.current) {
       const left = this.getLeft();
       const top = this.getTop();
+      const width = this.getAnchorBounds().width;
       this.popover.current.style.left = left;
       this.popover.current.style.top = top;
+      this.popover.current.style.minWidth = `${width}px`;
     }
   }
 }
