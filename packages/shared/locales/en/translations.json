@@ -588,6 +588,16 @@
       "description": "Description",
       "amount": "Amount"
     },
+    "deposits-withdrawals": {
+      "status": "Status",
+      "title": "Deposits/withdrawals",
+      "empty-transactions": "There are no transactions",
+      "wallet": "Wallet",
+      "date": "Date",
+      "type": "",
+      "description": "Description",
+      "amount": "Amount"
+    },
     "list": {
       "currency": "Currency",
       "total-balance": "Total balance",
