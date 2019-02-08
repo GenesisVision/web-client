@@ -18,25 +18,8 @@
 
   &__cell {
     color: $text-light-color;
-
-    &--date {
-      min-width: 200px;
-    }
-    &--information {
-      min-width: 350px;
-      white-space: normal;
-    }
-    &--amount {
-      min-width: 140px;
-    }
-    &--amount {
-      min-width: 140px;
-    }
-    &--type {
+    &--actions{
       text-align: right;
-    }
-    &--wallet {
-      min-width: 200px;
     }
   }
 
@@ -78,12 +61,16 @@
     }
   }
 }
-.wallet-transaction-actions {
+.wallet-copytrading-actions {
   &__disabled-actions {
     opacity: 0.4;
     &.icon.icon--actions-circle {
       cursor: auto;
     }
+  }
+  .chip {
+    @include adaptive-margin(left, $padding-xsmall);
+    font-weight: normal;
   }
 }
 
