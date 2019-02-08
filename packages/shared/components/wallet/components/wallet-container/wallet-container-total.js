@@ -22,6 +22,9 @@ import WalletList from "../wallet-list/wallet-list";
 import AllTransactionsRow from "../wallet-transactions/all-transactions-row";
 import WalletTransactions from "../wallet-transactions/wallet-transactions";
 import { WALLET_TOTAL_TRANSACTIONS_COLUMNS } from "../wallet-transactions/wallet-transactions.constants";
+import { WALLET_TOTAL_DEPOSITS_WITHDRAWALS_COLUMNS } from "../wallet-deposits-withdrawals/wallet-deposits-withdrawals.constants";
+import AllDepositsWithdrawalsRow from "../wallet-deposits-withdrawals/all-deposits-withdrawals-row";
+import WalletDepositsWithdrawals from "../wallet-deposits-withdrawals/wallet-deposits-withdrawals";
 
 const WALLETS_TAB = "wallets";
 const COPYTRADING_TAB = "copytrading";
@@ -57,7 +60,10 @@ class WalletContainerTotal extends PureComponent {
                 label={t("wallet-page.tabs.transactions")}
               />
 
-              {/*<GVTab value={EXTERNAL_TAB} label={t("wallet-page.tabs.external")} />*/}
+              <GVTab
+                value={EXTERNAL_TAB}
+                label={t("wallet-page.tabs.external")}
+              />
             </GVTabs>
           </div>
         </div>
@@ -72,8 +78,15 @@ class WalletContainerTotal extends PureComponent {
               )}
             />
           )}
-          {/*{tab === EXTERNAL_TAB && (*/}
-          {/*)}*/}
+          {tab === EXTERNAL_TAB && (
+            <WalletDepositsWithdrawals
+              columns={WALLET_TOTAL_DEPOSITS_WITHDRAWALS_COLUMNS}
+              filters={filters}
+              renderBodyRow={transaction => (
+                <AllDepositsWithdrawalsRow transaction={transaction} />
+              )}
+            />
+          )}
         </div>
       </Surface>
     );
