@@ -74,28 +74,26 @@ class WalletContainerTotal extends PureComponent {
             </GVScroll>
           </div>
         </div>
-        <div>
-          {tab === WALLETS_TAB && <WalletList wallets={wallets} />}
-          {tab === COPYTRADING_TAB && <WalletCopytrading />}
-          {tab === TRANSACTIONS_TAB && (
-            <WalletTransactions
-              columns={WALLET_TOTAL_TRANSACTIONS_COLUMNS}
-              filters={filters}
-              renderBodyRow={transaction => (
-                <AllTransactionsRow transaction={transaction} />
-              )}
-            />
-          )}
-          {tab === EXTERNAL_TAB && (
-            <WalletDepositsWithdrawals
-              columns={WALLET_TOTAL_DEPOSITS_WITHDRAWALS_COLUMNS}
-              filters={filters}
-              renderBodyRow={transaction => (
-                <AllDepositsWithdrawalsRow transaction={transaction} />
-              )}
-            />
-          )}
-        </div>
+        {tab === WALLETS_TAB && <WalletList wallets={wallets} />}
+        {tab === COPYTRADING_TAB && <WalletCopytrading />}
+        {tab === TRANSACTIONS_TAB && (
+          <WalletTransactions
+            columns={WALLET_TOTAL_TRANSACTIONS_COLUMNS}
+            filters={filters}
+            renderBodyRow={transaction => (
+              <AllTransactionsRow transaction={transaction} />
+            )}
+          />
+        )}
+        {tab === EXTERNAL_TAB && (
+          <WalletDepositsWithdrawals
+            columns={WALLET_TOTAL_DEPOSITS_WITHDRAWALS_COLUMNS}
+            filters={filters}
+            renderBodyRow={transaction => (
+              <AllDepositsWithdrawalsRow transaction={transaction} />
+            )}
+          />
+        )}
       </Surface>
     );
   }

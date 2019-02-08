@@ -2,14 +2,14 @@ import { MultiWalletExternalTransaction } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
 import NumberFormat from "react-number-format";
-
-import TransactionDetailsPopup from "shared/modules/transaction-details/transaction-details-popup";
-import { formatCurrencyValue } from "shared/utils/formatter";
 import Profitability from "shared/components/profitability/profitability";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
-import WalletCopytradingActions from "./wallet-copytrading-action-cell";
 import GVTIcon from "shared/media/currency/GVT.svg";
+import TransactionDetailsPopup from "shared/modules/transaction-details/transaction-details-popup";
+import { formatCurrencyValue } from "shared/utils/formatter";
+
+import WalletCopytradingActions from "./wallet-copytrading-action-cell";
 
 export interface ITransactionRowProps {
   transaction: MultiWalletExternalTransaction;
@@ -45,7 +45,7 @@ class WalletCopytradingRow extends React.Component<
           className="wallet-copytrading__row"
           // onClick={this.openPopup}
         >
-          <TableCell className="wallet-copytrading__cell wallet-copytrading__cell--currency">
+          <TableCell className="wallet-copytrading__cell wallet-copytrading__cell--wallet">
             <img
               src={GVTIcon}
               className="wallet-copytrading__icon"

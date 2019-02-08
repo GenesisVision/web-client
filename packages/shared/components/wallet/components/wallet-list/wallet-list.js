@@ -78,7 +78,7 @@ class WalletList extends Component {
           renderBodyRow={(wallet: WalletData) => {
             return (
               <TableRow className="wallet-list__row">
-                <TableCell className="wallet-list__cell wallet-list__cell--currency">
+                <TableCell className="wallet-list__cell wallet-list__cell--wallet">
                   <Link
                     className="wallet-list__link"
                     to={{
