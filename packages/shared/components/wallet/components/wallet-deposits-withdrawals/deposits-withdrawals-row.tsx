@@ -3,12 +3,12 @@ import moment from "moment";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 
-import TransactionDetailsPopup from "../../../../modules/transaction-details/transaction-details-popup";
-import { formatCurrencyValue } from "../../../../utils/formatter";
-import Profitability from "../../../profitability/profitability";
-import TableCell from "../../../table/components/table-cell";
-import TableRow from "../../../table/components/table-row";
-import GVTIcon from "shared/media/currency/GVT.svg";
+import TransactionDetailsPopup from "shared/modules/transaction-details/transaction-details-popup";
+import { formatCurrencyValue } from "shared/utils/formatter";
+import Profitability from "shared/components/profitability/profitability";
+import TableCell from "shared/components/table/components/table-cell";
+import TableRow from "shared/components/table/components/table-row";
+import { Fragment } from "react";
 
 export interface ITransactionRowProps {
   transaction: MultiWalletExternalTransaction;
@@ -40,7 +40,10 @@ class DepositsWithdrawalsRow extends React.Component<
           open={this.state.isOpen}
           onClose={this.closePopup}
         />
-        <TableRow className="wallet-deposits-withdrawals__row" onClick={this.openPopup}>
+        <TableRow
+          className="wallet-deposits-withdrawals__row"
+          onClick={this.openPopup}
+        >
           <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--date">
             {moment(transaction.date).format("DD-MM-YYYY, hh:mm a")}
           </TableCell>
