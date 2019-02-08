@@ -62,12 +62,6 @@
   }
 }
 .wallet-copytrading-actions {
-  &__disabled-actions {
-    opacity: 0.4;
-    &.icon.icon--actions-circle {
-      cursor: auto;
-    }
-  }
   .chip {
     @include adaptive-margin(left, $padding-xsmall);
     font-weight: normal;
