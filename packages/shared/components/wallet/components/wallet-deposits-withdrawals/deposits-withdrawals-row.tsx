@@ -45,9 +45,11 @@ class DepositsWithdrawalsRow extends React.Component<
             {moment(transaction.date).format("DD-MM-YYYY, hh:mm a")}
           </TableCell>
           <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--status">
-            <a href={transaction.statusUrl} target="_blank">
-              {transaction.status}
-            </a>
+            {(transaction.statusUrl && (
+              <a href={transaction.statusUrl} target="_blank">
+                {transaction.status}
+              </a>
+            )) || <Fragment>{transaction.status}</Fragment>}
           </TableCell>
           <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--amount">
             <Profitability
