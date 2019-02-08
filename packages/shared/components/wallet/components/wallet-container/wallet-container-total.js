@@ -44,7 +44,7 @@ class WalletContainerTotal extends PureComponent {
 
   render() {
     const { tab } = this.state;
-    const { t, wallets, filters } = this.props;
+    const { t, wallets, filters, copytrading } = this.props;
     return (
       <Surface className="wallet-container">
         <div className="wallet-container__header">
@@ -56,6 +56,7 @@ class WalletContainerTotal extends PureComponent {
                   label={t("wallet-page.tabs.wallets")}
                 />
                 <GVTab
+                  visible={copytrading}
                   value={COPYTRADING_TAB}
                   label={t("wallet-page.tabs.copytrading")}
                 />
