@@ -2,9 +2,10 @@
 
 h1 {
   @include font-size($font-size-h1);
+  @include adaptive-padding(bottom, $padding-medium);
   font-weight: 600;
   color: $text-light-color;
-  padding-bottom: $padding-medium;
+  //padding-bottom: $padding-medium;
   margin-top: 0;
   margin-bottom: 0;
 }

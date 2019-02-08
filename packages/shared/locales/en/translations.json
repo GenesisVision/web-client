@@ -633,6 +633,9 @@
     "alert-messages": {
       "resend-email-success": "A withdrawal confirmation letter has just been resent to your email address.",
       "cancel-request-success": "The withdrawal request was successfully canceled"
+    },
+    "settings": {
+      "label": "Using GVT to pay for fees"
     }
   },
   "rating-page": {

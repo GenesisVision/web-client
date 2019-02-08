@@ -5,7 +5,7 @@
 .wallet-balance {
   padding: 0 $padding-xsmall;
 
-  &__header {
+  &__title {
     @include adaptive-padding(right, $padding-medium);
 
     span {
@@ -26,6 +26,10 @@
     flex-wrap: wrap;
     align-items: center;
     padding-bottom: $padding-xsmall;
+
+    &--baseline {
+      align-items: baseline;
+    }
   }
 
   &__statistic {

@@ -79,12 +79,12 @@ class WalletCurrency extends React.Component<IWalletProps> {
       <Page title={info.title}>
         <div className="wallet-balance">
           <div className="wallet-balance__wrapper">
-            <h1 className="wallet-balance__header">
+            <h1 className="wallet-balance__title">
               {info.title}
               <span> {t("wallet-page.wallet")}</span>
               <img
                 src={getWalletIcon(info.currency)}
-                className="wallet-balance__header-icon"
+                className="wallet-balance__title-icon"
                 alt="Icon"
               />
             </h1>

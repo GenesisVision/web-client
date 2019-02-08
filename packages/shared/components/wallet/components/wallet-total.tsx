@@ -9,6 +9,7 @@ import Page from "../../page/page";
 import WalletBalanceElements from "./wallet-balance/wallet-balance-elements";
 import WalletBalanceLoader from "./wallet-balance/wallet-balance-loader";
 import WalletContainerTotal from "./wallet-container/wallet-container-total";
+import WalletSettingsContainer from "./wallet-settings/wallet-settings-container";
 
 interface IWalletProps {
   t(str: string): string;
@@ -25,7 +26,10 @@ class WalletTotal extends React.Component<IWalletProps> {
     return (
       <Page title={t("wallet-page.title")}>
         <div className="wallet-balance">
-          <h1>{t("wallet-page.title")}</h1>
+          <div className="wallet-balance__wrapper wallet-balance__wrapper--baseline">
+            <h1 className="wallet-balance__title">{t("wallet-page.title")}</h1>
+            <WalletSettingsContainer />
+          </div>
           <WalletBalanceElements walletBalanceData={info} />
         </div>
         <WalletContainerTotal
