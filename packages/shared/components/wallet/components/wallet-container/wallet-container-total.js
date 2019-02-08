@@ -25,6 +25,7 @@ import { WALLET_TOTAL_TRANSACTIONS_COLUMNS } from "../wallet-transactions/wallet
 import { WALLET_TOTAL_DEPOSITS_WITHDRAWALS_COLUMNS } from "../wallet-deposits-withdrawals/wallet-deposits-withdrawals.constants";
 import AllDepositsWithdrawalsRow from "../wallet-deposits-withdrawals/all-deposits-withdrawals-row";
 import WalletDepositsWithdrawals from "../wallet-deposits-withdrawals/wallet-deposits-withdrawals";
+import WalletCopytrading from "../wallet-copytrading/wallet-copytrading";
 
 const WALLETS_TAB = "wallets";
 const COPYTRADING_TAB = "copytrading";
@@ -52,7 +53,7 @@ class WalletContainerTotal extends PureComponent {
                 value={WALLETS_TAB}
                 label={t("wallet-page.tabs.wallets")}
               />
-              {/*<GVTab value={COPYTRADING_TAB} label={t("wallet-page.tabs.copytrading")} />*/}
+              <GVTab value={COPYTRADING_TAB} label={t("wallet-page.tabs.copytrading")} />
 
               <GVTab
                 className={filters ? "gv-tab" : "gv-tab gv-tab--disabled"}
@@ -69,6 +70,7 @@ class WalletContainerTotal extends PureComponent {
         </div>
         <div>
           {tab === WALLETS_TAB && <WalletList wallets={wallets} />}
+          {tab === COPYTRADING_TAB && <WalletCopytrading />}
           {tab === TRANSACTIONS_TAB && (
             <WalletTransactions
               columns={WALLET_TOTAL_TRANSACTIONS_COLUMNS}
