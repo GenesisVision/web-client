@@ -18,7 +18,7 @@ export interface ITransactionRowState {
   isOpen: boolean;
 }
 
-class AllDepositsWithdrawalsRow extends React.Component<
+class DepositsWithdrawalsRow extends React.Component<
   ITransactionRowProps,
   ITransactionRowState
 > {
@@ -40,24 +40,16 @@ class AllDepositsWithdrawalsRow extends React.Component<
           open={this.state.isOpen}
           onClose={this.closePopup}
         />
-        <TableRow className="wallet-deposits-withdrawals____row">
-          <TableCell className="wallet-deposits-withdrawals____cell wallet-deposits-withdrawals____cell--wallet">
-            <img
-              src={GVTIcon}
-              className="wallet-deposits-withdrawals____icon"
-              alt="Icon"
-            />
-            Genesis Vision
-          </TableCell>
-          <TableCell className="wallet-deposits-withdrawals____cell wallet-deposits-withdrawals____cell--date">
+        <TableRow className="wallet-deposits-withdrawals__row" onClick={this.openPopup}>
+          <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--date">
             {moment(transaction.date).format("DD-MM-YYYY, hh:mm a")}
           </TableCell>
-          <TableCell className="wallet-deposits-withdrawals____cell wallet-deposits-withdrawals____cell--status">
+          <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--status">
             <a href={transaction.statusUrl} target="_blank">
               {transaction.status}
             </a>
           </TableCell>
-          <TableCell className="wallet-deposits-withdrawals____cell wallet-deposits-withdrawals____cell--amount">
+          <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--amount">
             <Profitability
               value={formatCurrencyValue(
                 transaction.amount,
@@ -81,4 +73,4 @@ class AllDepositsWithdrawalsRow extends React.Component<
   }
 }
 
-export default AllDepositsWithdrawalsRow;
+export default DepositsWithdrawalsRow;
