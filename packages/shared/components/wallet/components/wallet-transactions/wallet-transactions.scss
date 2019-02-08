@@ -24,19 +24,10 @@
     }
     &--amount {
       min-width: 140px;
-    }
-    &--amount {
-      min-width: 140px;
+      padding-right: 0;
     }
     &--type {
       text-align: right;
-      padding-top: 0;
-      padding-bottom: 0;
-    }
-    &--wallet {
-      min-width: 250px;
-      padding-top: 0;
-      padding-bottom: 0;
     }
   }
 
@@ -78,7 +69,21 @@
   & .icon.icon--actions-circle {
     cursor: pointer;
   }
+
+  @include media-breakpoint-landscape-phone() {
+    &__cell {
+      &--type {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+      &--wallet {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+    }
+  }
 }
+
 .wallet-transaction-actions {
   &__disabled-actions {
     opacity: 0.4;

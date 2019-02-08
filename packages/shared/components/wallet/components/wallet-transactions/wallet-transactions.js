@@ -47,46 +47,48 @@ class WalletTransactions extends Component {
       filters
     } = this.props;
     return (
-      <TableModule
-        defaultFilters={DEFAULT_FILTERS}
-        paging={DEFAULT_PAGING}
-        filtering={{
-          ...TRANSACTIONS_FILTERS,
-          type: filters.multiWalletTransactionType[0]
-        }}
-        createButtonToolbar={createButtonToolbar}
-        getItems={this.fetch}
-        renderFilters={(updateFilter, filtering) => {
-          return (
-            <Fragment>
-              <SelectFilter
-                name={"type"}
-                label="Type"
-                value={filtering["type"]}
-                values={reduceFilters(filters.multiWalletTransactionType)}
-                onChange={updateFilter}
-              />
-              <DateRangeFilter
-                name={DATE_RANGE_FILTER_NAME}
-                value={filtering["dateRange"]}
-                onChange={updateFilter}
-                startLabel={t("filters.date-range.account-creation")}
-              />
-            </Fragment>
-          );
-        }}
-        columns={columns}
-        renderHeader={column => (
-          <span
-            className={`wallet-transactions__cell wallet-transactions__cell--${
-              column.name
-            }`}
-          >
-            {t(`wallet-page.transactions.${column.name}`)}
-          </span>
-        )}
-        renderBodyRow={renderBodyRow}
-      />
+      <div className="wallet-transactions">
+        <TableModule
+          defaultFilters={DEFAULT_FILTERS}
+          paging={DEFAULT_PAGING}
+          filtering={{
+            ...TRANSACTIONS_FILTERS,
+            type: filters.multiWalletTransactionType[0]
+          }}
+          createButtonToolbar={createButtonToolbar}
+          getItems={this.fetch}
+          renderFilters={(updateFilter, filtering) => {
+            return (
+              <Fragment>
+                <SelectFilter
+                  name={"type"}
+                  label="Type"
+                  value={filtering["type"]}
+                  values={reduceFilters(filters.multiWalletTransactionType)}
+                  onChange={updateFilter}
+                />
+                <DateRangeFilter
+                  name={DATE_RANGE_FILTER_NAME}
+                  value={filtering["dateRange"]}
+                  onChange={updateFilter}
+                  startLabel={t("filters.date-range.account-creation")}
+                />
+              </Fragment>
+            );
+          }}
+          columns={columns}
+          renderHeader={column => (
+            <span
+              className={`wallet-transactions__cell wallet-transactions__cell--${
+                column.name
+              }`}
+            >
+              {t(`wallet-page.transactions.${column.name}`)}
+            </span>
+          )}
+          renderBodyRow={renderBodyRow}
+        />
+      </div>
     );
   }
 }

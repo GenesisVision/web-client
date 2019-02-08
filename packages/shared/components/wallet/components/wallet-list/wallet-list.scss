@@ -4,19 +4,10 @@
 
 .wallet-list {
   &__cell {
+    @include adaptive-padding(right, $padding-xsmall, 2);
     color: $text-light-color;
-    min-width: 150px;
-
-    &--currency {
-      min-width: 200px;
-      padding-top: 0;
-      padding-bottom: 0;
-    }
 
     &--buttons {
-      padding-top: 0;
-      padding-bottom: 0;
-
       .chip {
         @include adaptive-margin(left, $padding-xsmall);
         width: 32px;
@@ -48,6 +39,20 @@
   &__button-transfer {
     img {
       max-height: 13px;
+    }
+  }
+
+  @include media-breakpoint-landscape-phone() {
+    &__cell {
+      &--currency {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+
+      &--buttons {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
     }
   }
 }

@@ -7,18 +7,17 @@
     background-color: $table-background-subcolor;
   }
 
-  & .table__toolbar {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  & .table__filters {
-    margin-left: 0;
-  }
-
   &__cell {
+    @include adaptive-padding(right, $padding-xsmall, 2);
     color: $text-light-color;
-    &--actions{
+
+    &--information {
+      min-width: 350px;
+      white-space: normal;
+    }
+
+    &--actions {
+      padding-right: 0;
       text-align: right;
     }
   }
@@ -49,15 +48,17 @@
     cursor: pointer;
   }
 
-  @include media-breakpoint-tablet() {
-    & .table__filters {
-      margin-left: 20px;
-      margin-top: 0;
-    }
+  @include media-breakpoint-landscape-phone() {
+    &__cell {
+      &--wallet {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
 
-    & .table__toolbar {
-      padding: 0 32px;
-      flex-direction: row;
+      &--actions {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
     }
   }
 }
