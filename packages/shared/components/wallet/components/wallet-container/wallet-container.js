@@ -15,6 +15,13 @@ import { formatValue } from "shared/utils/formatter";
 
 import WalletTransactions from "../wallet-transactions/wallet-transactions";
 import { WALLET_TRANSACTIONS_COLUMNS } from "../wallet-transactions/wallet-transactions.constants";
+import { GVTab, GVTabs } from "gv-react-components";
+import WalletDepositsWithdrawals from "../wallet-deposits-withdrawals/wallet-deposits-withdrawals";
+import { WALLET_DEPOSITS_WITHDRAWALS_COLUMNS } from "../wallet-deposits-withdrawals/wallet-deposits-withdrawals.constants";
+import DepositsWithdrawalsRow from "../wallet-deposits-withdrawals/deposits-withdrawals-row";
+
+const TRANSACTIONS_TAB = "transactions";
+const EXTERNAL_TAB = "external";
 
 const createButtonSearch = route => (
   <div className="wallet-container__button-container">
@@ -33,6 +40,14 @@ const renderAmountTransaction = amount => (
 );
 
 class WalletContainer extends PureComponent {
+  state = {
+    tab: TRANSACTIONS_TAB
+  };
+
+  handleTabChange = (e, tab) => {
+    this.setState({ tab });
+  };
+
   // @todo when add type of action "Convert" have to change from "ProgramRequestInvest" to action "Convert" in the method of below
   renderBodyRow = transaction => (
     <TableRow className="wallet-transactions__row">
@@ -62,19 +77,44 @@ class WalletContainer extends PureComponent {
   );
 
   render() {
-    const { currency, filters } = this.props;
+    const { t, currency, filters } = this.props;
+    const { tab } = this.state;
     return (
       <Surface className="wallet-container">
         <div className="wallet-container__header">
-          <div className="wallet-container__subheading">Transactions</div>
+          <div className="wallet-container__tabs">
+            <GVTabs value={tab} onChange={this.handleTabChange}>
+              <GVTab
+                className={filters ? "gv-tab" : "gv-tab gv-tab--disabled"}
+                value={TRANSACTIONS_TAB} //TODO add disable prop
+                label={t("wallet-page.tabs.transactions")}
+              />
+              <GVTab
+                value={EXTERNAL_TAB}
+                label={t("wallet-page.tabs.external")}
+              />
+            </GVTabs>
+          </div>
         </div>
         <div>
-          <WalletTransactions
-            filters={filters}
-            columns={WALLET_TRANSACTIONS_COLUMNS}
-            renderBodyRow={this.renderBodyRow}
-            currency={currency}
-          />
+          {tab === TRANSACTIONS_TAB && (
+            <WalletTransactions
+              filters={filters}
+              columns={WALLET_TRANSACTIONS_COLUMNS}
+              renderBodyRow={this.renderBodyRow}
+              currency={currency}
+            />
+          )}
+          {tab === EXTERNAL_TAB && (
+            <WalletDepositsWithdrawals
+              columns={WALLET_DEPOSITS_WITHDRAWALS_COLUMNS}
+              filters={filters}
+              renderBodyRow={transaction => (
+                <DepositsWithdrawalsRow transaction={transaction} />
+              )}
+              currency={currency}
+            />
+          )}
         </div>
       </Surface>
     );
