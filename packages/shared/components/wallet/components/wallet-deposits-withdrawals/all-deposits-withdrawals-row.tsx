@@ -8,7 +8,8 @@ import { formatCurrencyValue } from "shared/utils/formatter";
 import Profitability from "shared/components/profitability/profitability";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
-import GVTIcon from "shared/media/currency/GVT.svg";
+import FundAsset from "shared/media/fund-asset.svg";
+import ImageBase from "shared/components/avatar/image-base";
 import { Fragment } from "react";
 
 export interface ITransactionRowProps {
@@ -46,12 +47,14 @@ class AllDepositsWithdrawalsRow extends React.Component<
           onClick={this.openPopup}
         >
           <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--wallet">
-            <img
-              src={GVTIcon}
-              className="wallet-deposits-withdrawals__icon"
-              alt="Icon"
+            <ImageBase
+              url={transaction.logo}
+              alt={transaction.currency}
+              defaultImage={FundAsset}
+              className="wallet-deposits-withdrawals__icon-container"
+              imageClassName="wallet-deposits-withdrawals__icon"
             />
-            Genesis Vision
+            {transaction.currency}
           </TableCell>
           <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--date">
             {moment(transaction.date).format("DD-MM-YYYY, hh:mm a")}

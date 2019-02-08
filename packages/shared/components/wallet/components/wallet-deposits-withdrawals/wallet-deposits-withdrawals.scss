@@ -3,6 +3,9 @@
 @import "~shared/styles/_sizes.scss";
 
 .wallet-deposits-withdrawals {
+  &__icon-container {
+    display: inline;
+  }
   &__row:nth-child(2n + 1) {
     background-color: $table-background-subcolor;
   }
