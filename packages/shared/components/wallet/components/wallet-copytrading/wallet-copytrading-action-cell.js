@@ -1,12 +1,12 @@
-import { GVButton } from "gv-react-components";
+import "./wallet-copytrading.scss";
+
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
-import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
-import Popover from "shared/components/popover/popover";
 
 import * as walletService from "../../services/wallet.services";
+import Chip from "shared/components/chip/chip";
 
 class WalletCopytradingActions extends Component {
   state = {
@@ -50,37 +50,19 @@ class WalletCopytradingActions extends Component {
     }*/
 
     return (
-      <div className="wallet-transaction-actions">
-        <ActionsCircleIcon
-          primary={!!this.state.anchor}
-          onClick={this.handleOpenDropdown}
-        />
-        <Popover
-          horizontal="right"
-          vertical="bottom"
-          anchorEl={this.state.anchor}
-          noPadding
-          onClose={this.handleCloseDropdown}
+      <div className="wallet-copytrading-actions">
+        <Chip
+          className="wallet-list__button-transfer"
+          // onClick={this.handleOpenTransferPopup.bind(this, wallet)}
         >
-          <div className="popover-list">
-            <GVButton
-              variant="text"
-              color="secondary"
-              // onClick={resendWithdrawRequest}
-              // disabled={!transaction.destinationWithdrawalInfo.canResendEmail}
-            >
-              {t("wallet-page.copytrading-actions.transfer")}
-            </GVButton>
-            <GVButton
-              variant="text"
-              color="secondary"
-              // onClick={cancelWithdrawRequest}
-              // disabled={!transaction.destinationWithdrawalInfo.canCancelRequest}
-            >
-              {t("wallet-page.copytrading-actions.trade-history")}
-            </GVButton>
-          </div>
-        </Popover>
+          {t("wallet-page.copytrading-actions.transfer")}
+        </Chip>
+        <Chip
+          className="wallet-list__withdraw"
+          // onClick={this.handleOpenWithdrawPopup.bind(this, wallet)}
+        >
+          {t("wallet-page.copytrading-actions.trade-history")}
+        </Chip>
       </div>
     );
   }

@@ -9,6 +9,7 @@ import Profitability from "shared/components/profitability/profitability";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import GVTIcon from "shared/media/currency/GVT.svg";
+import { Fragment } from "react";
 
 export interface ITransactionRowProps {
   transaction: MultiWalletExternalTransaction;
@@ -40,7 +41,10 @@ class AllDepositsWithdrawalsRow extends React.Component<
           open={this.state.isOpen}
           onClose={this.closePopup}
         />
-        <TableRow className="wallet-deposits-withdrawals__row" onClick={this.openPopup}>
+        <TableRow
+          className="wallet-deposits-withdrawals__row"
+          onClick={this.openPopup}
+        >
           <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--wallet">
             <img
               src={GVTIcon}
@@ -53,9 +57,11 @@ class AllDepositsWithdrawalsRow extends React.Component<
             {moment(transaction.date).format("DD-MM-YYYY, hh:mm a")}
           </TableCell>
           <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--status">
-            <a href={transaction.statusUrl} target="_blank">
-              {transaction.status}
-            </a>
+            {(transaction.statusUrl && (
+              <a href={transaction.statusUrl} target="_blank">
+                {transaction.status}
+              </a>
+            )) || <Fragment>{transaction.status}</Fragment>}
           </TableCell>
           <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--amount">
             <Profitability

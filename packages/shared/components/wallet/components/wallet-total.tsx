@@ -15,11 +15,12 @@ interface IWalletProps {
   info?: WalletsGrandTotal;
   filters?: MultiWalletFilters;
   wallets?: WalletsInfo;
+  role?: boolean;
 }
 
 class WalletTotal extends React.Component<IWalletProps> {
   render() {
-    const { t, info, wallets, filters } = this.props;
+    const { t, info, wallets, filters, role } = this.props;
     if (!info) return <WalletBalanceLoader />;
     return (
       <Page title={t("wallet-page.title")}>
@@ -27,13 +28,20 @@ class WalletTotal extends React.Component<IWalletProps> {
           <h1>{t("wallet-page.title")}</h1>
           <WalletBalanceElements walletBalanceData={info} />
         </div>
-        <WalletContainerTotal wallets={wallets} filters={filters} />
+        <WalletContainerTotal
+          wallets={wallets}
+          filters={filters}
+          copytrading={!role}
+        />
       </Page>
     );
   }
 }
 
 const mapStateToProps = (state: RootState) => ({
+  role: state.profileHeader.info.data
+    ? state.profileHeader.info.data.isNewUser
+    : null,
   info: state.wallet.info.data ? state.wallet.info.data.grandTotal : null,
   wallets: state.wallet.info.data ? state.wallet.info.data.wallets : [],
   filters: state.wallet.filters.data ? state.wallet.filters.data : null
