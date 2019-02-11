@@ -9,6 +9,7 @@ import {
   DEFAULT_DATE_RANGE_FILTER_VALUE,
   DateRangeFilterTypes
 } from "../../../../components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { composeDefaultTagFilter } from "../../../../components/table/components/filtering/tag-filter/tag-filter.helpers";
 
 export const LEVEL_FILTER_NAME = "level";
 export const CURRENCY_FILTER_NAME = "programCurrency";
@@ -62,6 +63,7 @@ export const programsDateRangeFilter = {
 };
 
 export const PROGRAMS_TABLE_FILTERS = [
+  composeDefaultTagFilter(),
   programsLevelFilter,
   programsCurrencyFilter,
   programsDateRangeFilter

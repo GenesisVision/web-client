@@ -11,6 +11,11 @@ import LevelFilter from "shared/components/table/components/filtering/level-filt
 import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
 import { toggleFavoriteProgramDispatchable } from "shared/modules/favorite-asset/services/favorite-program.service";
 
+import TagFilter from "../../../../components/table/components/filtering/tag-filter/tag-filter";
+import {
+  TAG_FILTER_NAME,
+  TAG_FILTER_VALUES
+} from "../../../../components/table/components/filtering/tag-filter/tag-filter.constants";
 import * as programsService from "../../services/programs-table.service";
 import { composeCurrencyFilter } from "./program-table.helpers";
 import ProgramsTable from "./programs-table";
@@ -56,6 +61,12 @@ class ProgramsTableContainer extends Component {
         renderFilters={(updateFilter, filtering) => {
           return (
             <Fragment>
+              <TagFilter
+                name={TAG_FILTER_NAME}
+                value={filtering[TAG_FILTER_NAME]}
+                values={TAG_FILTER_VALUES}
+                onChange={updateFilter}
+              />
               <LevelFilter
                 name={LEVEL_FILTER_NAME}
                 value={filtering[LEVEL_FILTER_NAME]}
