@@ -7,7 +7,7 @@ import NumberFormat from "react-number-format";
 import * as InnerColors from "shared/components/gv-styles/color";
 import PieContainer from "shared/components/pie-container/pie-container";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
+import { formatCurrencyValue } from "shared/utils/formatter";
 
 const getPercentageValue = (value, totalValue) => {
   return Math.round((value / totalValue) * 100);
