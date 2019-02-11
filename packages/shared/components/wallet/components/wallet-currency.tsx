@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
 import Page from "shared/components/page/page";
-import { INVESTOR_EVENT_TYPE_FILTER_VALUES } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
 import BTCIcon from "shared/media/currency/BTC.svg";
 import ETHIcon from "shared/media/currency/ETH.svg";
 import GVTIcon from "shared/media/currency/GVT.svg";

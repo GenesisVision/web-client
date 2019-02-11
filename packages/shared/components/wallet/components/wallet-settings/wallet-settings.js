@@ -5,13 +5,9 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 class WalletSettings extends Component {
-  state = {
-    isPending: false
-  };
-
   handleSwitch = () => {
-    const { setting, offPayGVTFee, onPayGVTFee } = this.props;
-    if (Boolean(setting)) {
+    const { isPayFeesWithGvt, offPayGVTFee, onPayGVTFee } = this.props;
+    if (isPayFeesWithGvt) {
       offPayGVTFee();
     } else {
       onPayGVTFee();
@@ -19,7 +15,7 @@ class WalletSettings extends Component {
   };
 
   render() {
-    const { setting, name, label, isPending } = this.props;
+    const { isPayFeesWithGvt, name, label, isPending } = this.props;
     return (
       <div className="wallet-settings">
         <button type="button" className="wallet-settings__question">
@@ -29,7 +25,7 @@ class WalletSettings extends Component {
         <GVSwitch
           className="wallet-settings__switch"
           name={name}
-          value={Boolean(setting)}
+          value={isPayFeesWithGvt}
           disabled={isPending}
           color="primary"
           onChange={this.handleSwitch}
@@ -40,7 +36,7 @@ class WalletSettings extends Component {
 }
 
 WalletSettings.propTypes = {
-  setting: PropTypes.bool,
+  isPayFeesWithGvt: PropTypes.bool,
   name: PropTypes.string,
   label: PropTypes.string,
   assetId: PropTypes.string,
