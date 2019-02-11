@@ -26,7 +26,7 @@ class WalletTotal extends React.Component<IWalletProps> {
     return (
       <Page title={t("wallet-page.title")}>
         <div className="wallet-balance">
-          <div className="wallet-balance__wrapper wallet-balance__wrapper--baseline">
+          <div className="wallet-balance__wrapper">
             <h1 className="wallet-balance__title">{t("wallet-page.title")}</h1>
             <WalletSettingsContainer />
           </div>

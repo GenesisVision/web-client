@@ -2,6 +2,7 @@
 @import "~shared/styles/_colors.scss";
 
 .wallet-settings {
+  @include adaptive-padding(bottom, $padding-medium);
   display: flex;
   align-items: center;
 
