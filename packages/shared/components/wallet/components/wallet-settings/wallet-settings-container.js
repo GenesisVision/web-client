@@ -6,16 +6,22 @@ import { bindActionCreators, compose } from "redux";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
 import {
-  offWalletPayGVTFee,
-  onWalletPayGVTFee
+  offPayFeesWithGvt,
+  onPayFeesWithGvt
 } from "../../services/wallet.services";
 import WalletSettings from "./wallet-settings";
 
 class WalletSettingsContainer extends Component {
-  state = {
-    currentSetting: false,
-    isPending: false
-  };
+  constructor(props) {
+    super(props);
+
+    const { isPayFeesWithGvt } = this.props;
+
+    this.state = {
+      isPayFeesWithGvt: isPayFeesWithGvt,
+      isPending: false
+    };
+  }
 
   success = text => {
     const { dispatch } = this.props;
@@ -26,9 +32,9 @@ class WalletSettingsContainer extends Component {
     const { services, t } = this.props;
     this.setState({ isPending: true });
     return services
-      .onWalletPayGVTFee()
+      .onPayFeesWithGvt()
       .then(() => {
-        this.setState({ currentSetting: true, isPending: false });
+        this.setState({ isPayFeesWithGvt: true, isPending: false });
         this.success(
           "You won!"
           // t(`notifications-page.general.${options.type}.enabled-alert`)
@@ -41,9 +47,9 @@ class WalletSettingsContainer extends Component {
     const { services, t } = this.props;
     this.setState({ isPending: true });
     return services
-      .offWalletPayGVTFee()
+      .offPayFeesWithGvt()
       .then(() => {
-        this.setState({ currentSetting: false, isPending: false });
+        this.setState({ isPayFeesWithGvt: false, isPending: false });
         this.success(
           "You lose :("
           // t(`notifications-page.general.${options.type}.disabled-alert`)
@@ -54,13 +60,13 @@ class WalletSettingsContainer extends Component {
 
   render() {
     const { t } = this.props;
-    const { currentSetting, isPending } = this.state;
+    const { isPayFeesWithGvt, isPending } = this.state;
 
     return (
       <WalletSettings
         name="PayGVTFee"
         label={t("wallet-page.settings.label")}
-        setting={currentSetting}
+        isPayFeesWithGvt={isPayFeesWithGvt}
         isPending={isPending}
         onPayGVTFee={this.handleOn}
         offPayGVTFee={this.handleOff}
@@ -70,7 +76,7 @@ class WalletSettingsContainer extends Component {
 }
 
 WalletSettingsContainer.propTypes = {
-  settings: PropTypes.object,
+  isPayFeesWithGvt: PropTypes.bool,
   services: PropTypes.shape({
     walletPayGVTFeeOff: PropTypes.func,
     walletPayGVTFeeOn: PropTypes.func
@@ -79,7 +85,7 @@ WalletSettingsContainer.propTypes = {
 
 const mapDispatchToProps = dispatch => ({
   services: bindActionCreators(
-    { onWalletPayGVTFee, offWalletPayGVTFee },
+    { onPayFeesWithGvt, offPayFeesWithGvt },
     dispatch
   ),
   dispatch
