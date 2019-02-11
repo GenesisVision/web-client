@@ -13,7 +13,7 @@
     }
   }
 
-  &__header-icon {
+  &__title-icon {
     width: 30px;
     height: 30px;
     margin-left: 15px;
@@ -26,10 +26,6 @@
     flex-wrap: wrap;
     align-items: center;
     padding-bottom: $padding-xsmall;
-
-    &--baseline {
-      align-items: baseline;
-    }
   }
 
   &__statistic {
