@@ -25,11 +25,11 @@ export const fetchWalletTransactionsFilters = () => dispatch => {
   dispatch(actions.fetchWalletTransactionsFilters());
 };
 
-export const offWalletPayGVTFee = () => () => {
+export const offPayFeesWithGvt = () => () => {
   return walletApi.v10WalletPaygvtfeeOffPost(authService.getAuthArg());
 };
 
-export const onWalletPayGVTFee = () => () => {
+export const onPayFeesWithGvt = () => () => {
   return walletApi.v10WalletPaygvtfeeOnPost(authService.getAuthArg());
 };
 
