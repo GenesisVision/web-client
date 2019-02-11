@@ -18,6 +18,7 @@ import ConvertIcon from "shared/media/convert.svg";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
 import WalletTransferPopup from "shared/modules/wallet-transfer/wallet-transfer-popup";
 import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
+import { formatCurrencyValue } from "shared/utils/formatter";
 
 import { walletTableTransactionsSelector } from "../wallet-transactions/wallet-transactions.selector";
 import { WALLET_LIST_COLUMNS } from "./wallet-list.constants";
@@ -98,28 +99,34 @@ class WalletList extends Component {
                 </TableCell>
                 <TableCell className="wallet-list__cell">
                   <NumberFormat
-                    value={wallet.total}
+                    value={formatCurrencyValue(wallet.total, wallet.currency)}
                     thousandSeparator=" "
                     displayType="text"
                   />
                 </TableCell>
                 <TableCell className="wallet-list__cell">
                   <NumberFormat
-                    value={wallet.available}
+                    value={formatCurrencyValue(
+                      wallet.available,
+                      wallet.currency
+                    )}
                     thousandSeparator=" "
                     displayType="text"
                   />
                 </TableCell>
                 <TableCell className="wallet-list__cell">
                   <NumberFormat
-                    value={wallet.invested}
+                    value={formatCurrencyValue(
+                      wallet.invested,
+                      wallet.currency
+                    )}
                     thousandSeparator=" "
                     displayType="text"
                   />
                 </TableCell>
                 <TableCell className="wallet-list__cell">
                   <NumberFormat
-                    value={wallet.pending}
+                    value={formatCurrencyValue(wallet.pending, wallet.currency)}
                     thousandSeparator=" "
                     displayType="text"
                   />
