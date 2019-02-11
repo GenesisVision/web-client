@@ -99,28 +99,34 @@ class WalletList extends Component {
                 </TableCell>
                 <TableCell className="wallet-list__cell">
                   <NumberFormat
-                    value={formatCurrencyValue(wallet.total)}
+                    value={formatCurrencyValue(wallet.total, wallet.currency)}
                     thousandSeparator=" "
                     displayType="text"
                   />
                 </TableCell>
                 <TableCell className="wallet-list__cell">
                   <NumberFormat
-                    value={formatCurrencyValue(wallet.available)}
+                    value={formatCurrencyValue(
+                      wallet.available,
+                      wallet.currency
+                    )}
                     thousandSeparator=" "
                     displayType="text"
                   />
                 </TableCell>
                 <TableCell className="wallet-list__cell">
                   <NumberFormat
-                    value={formatCurrencyValue(wallet.invested)}
+                    value={formatCurrencyValue(
+                      wallet.invested,
+                      wallet.currency
+                    )}
                     thousandSeparator=" "
                     displayType="text"
                   />
                 </TableCell>
                 <TableCell className="wallet-list__cell">
                   <NumberFormat
-                    value={formatCurrencyValue(wallet.pending)}
+                    value={formatCurrencyValue(wallet.pending, wallet.currency)}
                     thousandSeparator=" "
                     displayType="text"
                   />
