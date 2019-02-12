@@ -1,11 +1,26 @@
 @import "~shared/styles/_colors.scss";
+@import "~shared/styles/_sizes.scss";
 
 .tag-filter {
-  width: 200px;
-  margin: 0 25px;
+  width: 236px;
+  padding: $padding-xsmall;
 
-  &__btns {
-    text-align: end;
+  &__title {
+    @include font-size($font-size-paragraph);
+    font-weight: 600;
+    font-size: 14px;
+    color: #ffffff;
+    letter-spacing: 0.47px;
+  }
+
+  &__tags-list {
+    padding-top: $padding-xsmall;
+  }
+
+  &__search {
+    .gv-text-field__wrapper {
+      margin: 0;
+    }
   }
 
   &__button {
@@ -37,8 +52,14 @@
     }
   }
 
-  &__btn {
-    padding: 1em;
+  &__tags-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .tag-program {
+    margin-right: 10px;
+    margin-bottom: 10px;
   }
 
   .rc-slider {

@@ -1,7 +1,7 @@
+import { GVTextField } from "gv-react-components";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
-import { GVTextField } from "gv-react-components";
-import { SearchIcon } from "shared/components/icon/search-icon";
+import TagProgramItem from "shared/components/tag-program/tag-program-item";
 
 class TagFilterPopover extends Component {
   state = {
@@ -57,20 +57,19 @@ class TagFilterPopover extends Component {
             wrapperClassName="popover-add__search-input"
             placeholder="Search for tags"
             autoComplete="off"
-            adornment={<SearchIcon secondary />}
             adornmentPosition="start"
             onChange={this.search}
             autoFocus
           />
         </div>
-        <div className="tag-filter__tags">
+        <div className="tag-filter__tags-list">
           {filteredTags.map(tag => (
             <div
               key={tag.name}
               className="tag-filter__tag"
               onClick={this.handleSubmit(tag.name)}
             >
-              {tag.name}
+              <TagProgramItem name={tag.name} color={tag.color} />
             </div>
           ))}
         </div>

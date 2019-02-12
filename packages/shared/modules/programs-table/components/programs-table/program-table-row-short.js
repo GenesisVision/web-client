@@ -11,7 +11,7 @@ import ProgramPeriodPie from "shared/components/program-period/program-period-pi
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
-import ProgramTagContainer from "shared/components/tag-program/tag-program-container";
+import TagProgramContainer from "shared/components/tag-program/tag-program-container";
 import Tooltip from "shared/components/tooltip/tooltip";
 import { STATUS } from "shared/constants/constants";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
@@ -92,7 +92,7 @@ const ProgramTableRowShort = ({
               </Link>
             </div>
             <div className="programs-table__cell--bottom">
-              <ProgramTagContainer tags={TAGS} />
+              <TagProgramContainer tags={TAGS} />
             </div>
           </div>
         </div>
