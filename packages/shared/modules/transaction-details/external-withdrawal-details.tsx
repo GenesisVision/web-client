@@ -7,9 +7,10 @@ import NumberFormat from "react-number-format";
 import CopyIcon from "../../components/icon/copy-icon";
 import Profitability from "../../components/profitability/profitability";
 import StatisticItem from "../../components/statistic-item/statistic-item";
+import filesService from "../../services/file-service";
 import { formatCurrencyValue } from "../../utils/formatter";
 
-const ExternalDeposit = (props: { data: TransactionDetails }) => {
+const ExternalWithdrawal = (props: { data: TransactionDetails }) => {
   const onCopy = () => {
     try {
       copy(data.externalTransactionDetails.fromAddress); // add notifications
@@ -21,8 +22,21 @@ const ExternalDeposit = (props: { data: TransactionDetails }) => {
       <div className="dialog__top">
         <div className="dialog__header">
           <h2>Transaction Details</h2>
-          <p>Deposit</p>
+          <p>Withdrawal</p>
         </div>
+        <StatisticItem label={`From address`}>
+          <img src={filesService.getFileUrl(data.currencyLogo)} alt="wallet" />
+        </StatisticItem>
+        <StatisticItem label={"Amount"} big>
+          <Profitability value={data.amount} prefix="sign">
+            <NumberFormat
+              value={formatCurrencyValue(data.amount, "BTC")}
+              suffix=" BTC"
+              allowNegative={false}
+              displayType="text"
+            />
+          </Profitability>
+        </StatisticItem>
       </div>
       <div className="dialog__bottom">
         <StatisticItem label={`From address`}>
@@ -36,19 +50,9 @@ const ExternalDeposit = (props: { data: TransactionDetails }) => {
         <StatisticItem label={"Status"}>
           {data.status} {data.externalTransactionDetails.description}
         </StatisticItem>
-        <StatisticItem label={"Amount"} big>
-          <Profitability value={data.amount} prefix="sign">
-            <NumberFormat
-              value={formatCurrencyValue(data.amount, "BTC")}
-              suffix=" BTC"
-              allowNegative={false}
-              displayType="text"
-            />
-          </Profitability>
-        </StatisticItem>
       </div>
     </React.Fragment>
   );
 };
 
-export default ExternalDeposit;
+export default ExternalWithdrawal;
