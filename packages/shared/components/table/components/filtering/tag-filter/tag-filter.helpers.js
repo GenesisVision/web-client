@@ -1,4 +1,4 @@
-import { FilterType } from "../../../helpers/filtering.helpers";
+import { FilterType } from "shared/components/table/helpers/filtering.helpers";
 import {
   TAG_FILTER_DEFAULT_VALUE,
   TAG_FILTER_NAME
