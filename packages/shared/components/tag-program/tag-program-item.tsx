@@ -1,5 +1,6 @@
 import "./tag-program.scss";
 
+import classnames from "classnames";
 import { ProgramTag } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import React from "react";
@@ -7,23 +8,28 @@ import React from "react";
 import { CloseIcon } from "../icon/close-icon";
 
 export interface IProgramTag {
-  removeBtn?: boolean;
+  handleRemove?(): void;
 }
 
 const TagProgramItem: React.FC<ProgramTag & IProgramTag> = ({
   color,
   name,
-  removeBtn
+  handleRemove
 }) => {
   const styleTag = { color, backgroundColor: `${color}1a` };
   return (
-    <div className="tag-program tag-button" style={styleTag}>
-      {removeBtn && (
+    <div
+      className={classnames("tag-program tag-button", {
+        "tag-program--self-remove": handleRemove
+      })}
+      style={styleTag}
+    >
+      {handleRemove && (
         <GVButton
           variant="text"
           color="secondary"
           className="tag-program__button-remove"
-          // onClick={onRemove}
+          onClick={handleRemove}
         >
           <CloseIcon />
         </GVButton>

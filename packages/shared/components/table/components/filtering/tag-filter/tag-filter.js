@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import Popover from "shared/components/popover/popover";
+import TagProgramItem from "shared/components/tag-program/tag-program-item";
 
 import TagFilterButton from "./tag-filter-button";
 import TagFilterPopover from "./tag-filter-popover";
@@ -26,6 +27,8 @@ class TagFilter extends Component {
     this.props.onChange({ name: this.props.name, value });
   };
 
+  handleRemoveTag = () => {};
+
   render() {
     const { t, values, value } = this.props;
     const { anchor } = this.state;
@@ -34,7 +37,12 @@ class TagFilter extends Component {
         <div className="filter" onClick={this.handleOpenPopover}>
           <div className="filter__value">
             {this.filterChoosed(values).map(tag => (
-              <span key={tag.name}>{tag.name}, </span>
+              <TagProgramItem
+                name={tag.name}
+                color={tag.color}
+                key={tag.name}
+                handleRemove={this.handleRemoveTag}
+              />
             ))}
           </div>
           <TagFilterButton isActive={anchor} />

@@ -5,6 +5,7 @@
 .tag-program {
   display: inline-block;
   position: relative;
+  margin-right: 10px;
 
   &__button-remove {
     padding: 0;
@@ -29,6 +30,10 @@
     .tag-program {
       margin-bottom: 10px;
     }
+  }
+
+  &--self-remove {
+    @include adaptive-margin(right, $padding-xsmall);
   }
 }
 
