@@ -20,7 +20,8 @@ import { formatValue } from "shared/utils/formatter";
 const TAGS = [
   { name: "Crypto", color: "#F7931A" },
   { name: "Forex", color: "#00A478" },
-  { name: "High risk", color: "#EA1D3D" }
+  { name: "High risk", color: "#EA1D3D" },
+  { name: "Low risk", color: "#5094D1" }
 ];
 
 const ProgramTableRowShort = ({

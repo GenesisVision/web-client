@@ -22,6 +22,14 @@
       width: 7px;
     }
   }
+
+  &-tooltip {
+    max-width: 205px;
+
+    .tag-program {
+      margin-bottom: 10px;
+    }
+  }
 }
 
 .tag-button {
@@ -32,5 +40,4 @@
   padding: 0 12px;
   max-height: 18px;
   line-height: 18px;
-  vertical-align: middle;
 }
