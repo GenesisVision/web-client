@@ -5,16 +5,25 @@ import { SearchIcon } from "shared/components/icon/search-icon";
 
 class TagFilterPopover extends Component {
   state = {
-    chooses: this.props.value,
+    choosed: this.props.value,
     filteredTags: this.props.values
-    // chooses: this.props.value
   };
-
+  componentDidMount() {
+    this.setState({
+      filteredTags: this.removeChoosed(this.props.values)
+    });
+  }
   search = e => {
     this.setState({
-      filteredAssets: this.filtering(e.target.value, this.props.values)
+      filteredTags: this.removeChoosed(
+        this.filtering(e.target.value, this.props.values)
+      )
     });
   };
+  removeChoosed = arr =>
+    arr.filter(
+      item => !this.state.choosed.find(choose => item.name === choose)
+    );
   filtering = (searchValue, array) => {
     return searchValue
       ? array.filter(
@@ -26,10 +35,10 @@ class TagFilterPopover extends Component {
     this.setState({ value: e });
   };
   handleSubmit = value => e => {
-    const { chooses } = this.state;
-    if (chooses.includes(value)) return;
-    const newValue = [...chooses, value];
-    this.setState({ chooses: newValue });
+    const { choosed } = this.state;
+    if (choosed.includes(value)) return;
+    const newValue = [...choosed, value];
+    this.setState({ choosed: newValue });
     this.props.changeFilter(newValue);
   };
   handleAdd = value => e => {
@@ -37,7 +46,8 @@ class TagFilterPopover extends Component {
   };
 
   render() {
-    const { t, values } = this.props;
+    const { t } = this.props;
+    const { filteredTags } = this.state;
     return (
       <div className="tag-filter">
         <div className="tag-filter__title">Add tag</div>
@@ -54,13 +64,13 @@ class TagFilterPopover extends Component {
           />
         </div>
         <div className="tag-filter__tags">
-          {values.map(value => (
+          {filteredTags.map(tag => (
             <div
-              key={value.name}
-              classname="tag-filter__tag"
-              onClick={this.handleSubmit(value.name)}
+              key={tag.name}
+              className="tag-filter__tag"
+              onClick={this.handleSubmit(tag.name)}
             >
-              {value.name}
+              {tag.name}
             </div>
           ))}
         </div>
