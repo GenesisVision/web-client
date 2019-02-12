@@ -9,7 +9,7 @@ import { Icon } from "shared/components/icon/icon";
 import { SearchIcon } from "shared/components/icon/search-icon";
 import Navigation from "shared/components/navigation/navigation";
 import NavigationMobile from "shared/components/navigation/navigation-mobile/navigation-mobile";
-import NorificationsWidget from "shared/components/notifications-widget/notifications-widget";
+import NotificationsWidget from "shared/components/notifications-widget/notifications-widget";
 import ProfileWidget from "shared/components/profile-widget/profile-widget";
 import WalletWidget from "shared/components/wallet-widget/wallet-widget";
 import CurrencySelectContainer from "shared/modules/currency-select/components/currency-select-container";
@@ -91,7 +91,7 @@ class Header extends React.Component<IHeaderProps, IHeaderState> {
                 investedGvt={investedGvt}
                 availableGvt={availableGvt}
               />
-              <NorificationsWidget
+              <NotificationsWidget
                 notificationsCount={notificationsCount}
                 openNotifications={openNotifications}
               />
