@@ -1,13 +1,16 @@
 import "./transaction-details.scss";
 
-import { ProgramTransactionDetails, TransactionDetails } from "gv-api-web";
-import { GVProgramAvatar } from "gv-react-components";
+import { TransactionDetails } from "gv-api-web";
 import * as React from "react";
+import NumberFormat from "react-number-format";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import walletApi from "shared/services/api-client/wallet-api";
 
+import Profitability from "../../components/profitability/profitability";
+import TableCell from "../../components/table/components/table-cell";
 import authService from "../../services/auth-service";
-import filesService from "../../services/file-service";
+import { formatCurrencyValue, formatValue } from "../../utils/formatter";
+import TransactionAsset from "./details-asset";
 
 export interface ITransactionDetailsProps {
   transactionId: string;
@@ -18,22 +21,6 @@ export interface ITransactionDetailsState {
   data?: TransactionDetails;
   errorMessage?: string;
 }
-
-const TransactionAsset = (props: { data: ProgramTransactionDetails }) => {
-  return (
-    <div className="transaction-asset">
-      <GVProgramAvatar
-        alt={props.data.title}
-        url={filesService.getFileUrl(props.data.logo)}
-        level={props.data.level}
-      />
-      <div className="transaction-asset__description">
-        <p className="transaction-asset__title">{props.data.title}</p>
-        <p className="transaction-asset__trader">{props.data.programType}</p>
-      </div>
-    </div>
-  );
-};
 
 export class TransactionDetailsDialog extends React.Component<
   ITransactionDetailsProps,
@@ -47,21 +34,18 @@ export class TransactionDetailsDialog extends React.Component<
   }
 
   componentDidMount() {
-    console.info("cdm");
     this.fetch();
   }
 
   fetch = () => {
-    console.info(this.state, "fetch");
     this.setState({ isPending: true });
     walletApi
       .v10WalletTransactionByIdGet(
         "00000000-0000-0000-0000-000000000001",
         authService.getAuthArg()
       )
-      .then(
-        (data: TransactionDetails) =>
-          console.info(data) || this.setState({ data, isPending: false })
+      .then((data: TransactionDetails) =>
+        this.setState({ data, isPending: false })
       )
       .catch((errorMessage: string) =>
         this.setState({ errorMessage, isPending: false })
@@ -76,24 +60,48 @@ export class TransactionDetailsDialog extends React.Component<
         <div className="dialog__top">
           <div className="dialog__header">
             <h2>Transaction Details</h2>
-            <p>Program investment</p>
+            <p>{`${this.state.data.programDetails.programType}`} investment</p>
           </div>
         </div>
         <div className="dialog__bottom">
-          <StatisticItem label={"To"}>
+          <StatisticItem
+            label={`To the ${this.state.data.programDetails.programType.toLowerCase()}`}
+          >
             <TransactionAsset data={this.state.data.programDetails} />
           </StatisticItem>
           <StatisticItem label={"Entry fee"}>
-            {this.state.data.entryFee}
+            {this.state.data.programDetails.entryFeePercent} %
+            <NumberFormat
+              value={formatCurrencyValue(
+                this.state.data.programDetails.entryFee,
+                "BTC"
+              )}
+              prefix={" ("}
+              suffix={" BTC)"}
+              displayType="text"
+            />
           </StatisticItem>
           <StatisticItem label={"GV Commission"}>
-            {this.state.data.gvCommission}
+            {this.state.data.gvCommissionPercent} %
+            <NumberFormat
+              value={formatCurrencyValue(this.state.data.gvCommission, "BTC")}
+              prefix={" ("}
+              suffix={" BTC)"}
+              displayType="text"
+            />
           </StatisticItem>
           <StatisticItem label={"Status"}>
-            {this.state.data.description}
+            {this.state.data.status}
           </StatisticItem>
           <StatisticItem label={"Investment amount"} big>
-            {`${this.state.data.amountFrom} ${this.state.data.currencyFrom}`}
+            <Profitability value={this.state.data.amount} prefix="sign">
+              <NumberFormat
+                value={formatCurrencyValue(this.state.data.amount, "BTC")}
+                suffix=" BTC"
+                allowNegative={false}
+                displayType="text"
+              />
+            </Profitability>
           </StatisticItem>
         </div>
       </React.Fragment>

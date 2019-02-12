@@ -2,6 +2,12 @@
   display: flex;
   flex-direction: row;
 
+  &--fund {
+    .program-avatar {
+      margin-right: 0;
+    }
+  }
+
   &__description {
     margin-left: 20px;
 
