@@ -61,7 +61,11 @@ class ProgramsTableContainer extends Component {
             <Fragment>
               <TagFilter
                 name={TAG_FILTER_NAME}
-                value={filtering[TAG_FILTER_NAME]}
+                value={
+                  Array.isArray(filtering[TAG_FILTER_NAME])
+                    ? filtering[TAG_FILTER_NAME]
+                    : [filtering[TAG_FILTER_NAME]]
+                }
                 values={programTags}
                 onChange={updateFilter}
               />

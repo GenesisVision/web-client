@@ -11,6 +11,12 @@ class TagFilter extends Component {
   state = {
     anchor: null
   };
+  filterChoosed = arr =>
+    arr.filter(
+      item =>
+        this.props.value &&
+        this.props.value.find(choose => item.name === choose)
+    );
   renderValueText = value => value;
   handleOpenPopover = event => this.setState({ anchor: event.currentTarget });
   handleClosePopover = () => this.setState({ anchor: null });
@@ -25,8 +31,12 @@ class TagFilter extends Component {
     return (
       <Fragment>
         <div className="filter" onClick={this.handleOpenPopover}>
-          <div className="filter__value">{value}</div>
-          <div className="filter__values">Values</div>
+          <div className="filter__value">
+            {this.filterChoosed(values).map(tag => (
+              <span key={tag.name}>{tag.name}, </span>
+            ))}
+          </div>
+          <div className="filter__values">Add tags +</div>
         </div>
         <Popover
           anchorEl={anchor}
@@ -35,7 +45,7 @@ class TagFilter extends Component {
           noPadding
         >
           <TagFilterPopover
-            value={Array.isArray(value) ? value : [value]}
+            value={value}
             changeFilter={this.handleChangeFilter}
             values={values}
           />
