@@ -26,7 +26,7 @@ class TagFilter extends Component {
       <Fragment>
         <div className="filter" onClick={this.handleOpenPopover}>
           <div className="filter__value">{value}</div>
-          <div className="filter__values">Values</div>
+          <div className="filter__values">Add tags +</div>
         </div>
         <Popover
           anchorEl={anchor}
