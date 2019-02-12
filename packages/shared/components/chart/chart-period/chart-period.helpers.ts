@@ -23,18 +23,18 @@ export const getPeriodStartDate = (
   }
 };
 
-export const DEFAULT_PERIOD = {
-  type: ChartPeriodType.month,
-  start: getPeriodStartDate(ChartPeriodType.month),
-  end: moment().toDate()
+export const getDefaultPeriod = (): ChartDefaultPeriod => {
+  return {
+    type: ChartPeriodType.month,
+    start: getPeriodStartDate(ChartPeriodType.month),
+    end: moment().toDate()
+  };
 };
+
+export const DEFAULT_PERIOD = getDefaultPeriod();
 
 export type ChartDefaultPeriod = {
   type: keyof typeof ChartPeriodType;
   start?: Date;
   end?: Date;
-};
-
-export const getDefaultPeriod = (): ChartDefaultPeriod => {
-  return DEFAULT_PERIOD;
 };
