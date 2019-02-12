@@ -15,6 +15,13 @@ import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
 import { STATUS } from "shared/constants/constants";
 import { translate } from "react-i18next";
+import ProgramTagContainer from "shared/components/program-tag/program-tag-container";
+
+const TAGS = [
+  { name: "Crypto", color: "#F7931A" },
+  { name: "Forex", color: "#00A478" },
+  { name: "High risk", color: "#EA1D3D" }
+];
 
 const ProgramTableRowShort = ({
   t,
@@ -83,16 +90,9 @@ const ProgramTableRowShort = ({
                 {program.title}
               </Link>
             </div>
-            {/*{tags && (
-              <div className="programs-table__cell--bottom">
-                {tags.map((tag, index) => (
-                  <span key={tag.name} style={{ color: tag.color }}>
-                    {tag.name}
-                    {index < tags.length - 1 && ", "}
-                  </span>
-                ))}
-              </div>
-            )}*/}
+            <div className="programs-table__cell--bottom">
+              <ProgramTagContainer tags={TAGS} />
+            </div>
           </div>
         </div>
       </TableCell>
