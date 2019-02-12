@@ -5,14 +5,22 @@ import { translate } from "react-i18next";
 
 class TagFilterPopover extends Component {
   state = {
-    value: this.props.value
+    chooses: this.props.value
+    // chooses: this.props.value
   };
 
   handleChange = e => {
     this.setState({ value: e });
   };
-  handleSubmit = e => {
-    this.props.changeFilter(["All", "All"]);
+  handleSubmit = value => e => {
+    const { chooses } = this.state;
+    if (chooses.includes(value)) return;
+    const newValue = [...chooses, value];
+    this.setState({ chooses: newValue });
+    this.props.changeFilter(newValue);
+  };
+  handleAdd = value => e => {
+    this.props.handleAdd(value);
   };
 
   render() {
@@ -20,8 +28,8 @@ class TagFilterPopover extends Component {
     return (
       <div className="tag-filter">
         {values.map(value => (
-          <div id={value.value} onClick={this.handleSubmit}>
-            {value.label}
+          <div key={value.name} onClick={this.handleSubmit(value.name)}>
+            {value.name}
           </div>
         ))}
       </div>

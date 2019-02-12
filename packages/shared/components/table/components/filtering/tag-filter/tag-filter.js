@@ -17,10 +17,13 @@ class TagFilter extends Component {
         label={t("filters.level.label")}
         name={this.props.name}
         renderValueText={this.renderValueText}
-        value={value}
+        value={Array.isArray(value) ? value : [value]}
         updateFilter={this.props.onChange}
       >
-        <TagFilterPopover value={value} values={values} />
+        <TagFilterPopover
+          // value={Array.isArray(value) ? value : [value]}
+          values={values}
+        />
       </Filter>
     );
   }

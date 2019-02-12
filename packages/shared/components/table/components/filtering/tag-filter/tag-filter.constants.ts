@@ -16,4 +16,4 @@ export const TAG_FILTER_VALUES = Object.keys(TAGS).map(x => ({
   label: x
 }));
 
-export const TAG_FILTER_DEFAULT_VALUE = "All";
+export const TAG_FILTER_DEFAULT_VALUE = [];
