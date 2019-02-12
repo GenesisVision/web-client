@@ -7,14 +7,17 @@ import StatisticItem from "../../components/statistic-item/statistic-item";
 import { formatCurrencyValue } from "../../utils/formatter";
 import TransactionAsset from "./details-asset";
 
-const OpenTransaction = (props: { data: TransactionDetails }) => {
+const OpenCloseTransaction = (props: { data: TransactionDetails }) => {
   const { data } = props;
   return (
     <React.Fragment>
       <div className="dialog__top">
         <div className="dialog__header">
           <h2>Transaction Details</h2>
-          <p>Open {`${data.programDetails.programType.toLowerCase()}`}</p>
+          <p>
+            {`${data.type}`}{" "}
+            {`${data.programDetails.programType.toLowerCase()}`}
+          </p>
         </div>
       </div>
       <div className="dialog__bottom">
@@ -37,4 +40,4 @@ const OpenTransaction = (props: { data: TransactionDetails }) => {
   );
 };
 
-export default OpenTransaction;
+export default OpenCloseTransaction;
