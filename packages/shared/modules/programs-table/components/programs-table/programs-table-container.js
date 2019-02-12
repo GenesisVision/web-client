@@ -33,6 +33,7 @@ class ProgramsTableContainer extends Component {
 
   render() {
     const {
+      programTags,
       t,
       showSwitchView,
       currencies,
@@ -61,7 +62,7 @@ class ProgramsTableContainer extends Component {
               <TagFilter
                 name={TAG_FILTER_NAME}
                 value={filtering[TAG_FILTER_NAME]}
-                values={TAG_FILTER_VALUES}
+                values={programTags}
                 onChange={updateFilter}
               />
               <LevelFilter
@@ -107,7 +108,10 @@ const mapStateToProps = state => {
   const currencies = state.platformData.data
     ? state.platformData.data.currencies
     : [];
-  return { isPending, data, isAuthenticated, currencies };
+  const programTags = state.platformData.data
+    ? state.platformData.data.programTags
+    : [];
+  return { isPending, data, isAuthenticated, currencies, programTags };
 };
 
 const mapDispatchToProps = dispatch => ({
