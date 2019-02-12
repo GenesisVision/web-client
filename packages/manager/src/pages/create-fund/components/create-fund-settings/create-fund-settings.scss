@@ -324,7 +324,7 @@ $asset-height-mobile: $asset-height/$divider-text;
 }
 
 .popover-add {
-  background: #1c2730;
+  background: $panel-background-color;
   &__regulator-indicator {
     display: flex;
     align-items: center;

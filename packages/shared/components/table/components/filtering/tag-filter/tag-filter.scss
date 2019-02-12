@@ -8,6 +8,35 @@
     text-align: end;
   }
 
+  &__button {
+    border: 1px solid #6e757b;
+    background-color: transparent;
+    font-weight: 600;
+    line-height: 1;
+    color: $main-color;
+
+    &.gv-btn--text {
+      &:hover:not(:disabled),
+      &:active:not(:disabled) {
+        border-color: $main-color;
+        background-color: $main-color;
+        color: $panel-background-color;
+      }
+    }
+
+    &--active {
+      border-color: $main-color;
+      background-color: $main-color;
+      color: $panel-background-color;
+    }
+
+    &-plus {
+      font-size: 17px;
+      font-weight: 400;
+      padding-right: 3px;
+    }
+  }
+
   &__btn {
     padding: 1em;
   }

@@ -3,9 +3,10 @@ import "./tag-filter.scss";
 import PropTypes from "prop-types";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
-
-import TagFilterPopover from "./tag-filter-popover";
 import Popover from "shared/components/popover/popover";
+
+import TagFilterButton from "./tag-filter-button";
+import TagFilterPopover from "./tag-filter-popover";
 
 class TagFilter extends Component {
   state = {
@@ -36,7 +37,7 @@ class TagFilter extends Component {
               <span key={tag.name}>{tag.name}, </span>
             ))}
           </div>
-          <div className="filter__values">Add tags +</div>
+          <TagFilterButton isActive={anchor} />
         </div>
         <Popover
           anchorEl={anchor}
