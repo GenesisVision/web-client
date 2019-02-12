@@ -6,11 +6,13 @@ import walletApi from "shared/services/api-client/wallet-api";
 
 import authService from "../../services/auth-service";
 import InvestingTransaction from "./investment-details";
+import OpenTransaction from "./open-details";
 import WithdrawalTransaction from "./withdrawal-details";
 
 const Types = {
   Investing: InvestingTransaction,
-  Withdrawal: WithdrawalTransaction
+  Withdrawal: WithdrawalTransaction,
+  Open: OpenTransaction
 };
 
 export interface ITransactionDetailsProps {
@@ -42,7 +44,7 @@ export class TransactionDetailsDialog extends React.Component<
     this.setState({ isPending: true });
     walletApi
       .v10WalletTransactionByIdGet(
-        "00000000-0000-0000-0000-000000000003",
+        "00000000-0000-0000-0000-000000000006",
         authService.getAuthArg()
       )
       .then((data: TransactionDetails) =>
