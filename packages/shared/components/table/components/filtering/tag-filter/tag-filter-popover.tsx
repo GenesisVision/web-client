@@ -1,52 +1,69 @@
 import { GVTextField } from "gv-react-components";
-import React, { Component } from "react";
+import React from "react";
 import { translate } from "react-i18next";
 import TagProgramItem from "shared/components/tag-program/tag-program-item";
+import { ProgramTag } from "gv-api-web";
 
-class TagFilterPopover extends Component {
+interface ITagFilterPopoverState {
+  choosed: ProgramTag[];
+  filteredTags: ProgramTag[];
+}
+
+export interface ITagFilterPopoverProps {
+  value: ProgramTag[];
+  values: ProgramTag[];
+  changeFilter(value: any[]): void;
+}
+class TagFilterPopover extends React.Component<
+  ITagFilterPopoverProps,
+  ITagFilterPopoverState
+> {
+  constructor(props: ITagFilterPopoverProps) {
+    super(props);
+    const { value, values } = this.props;
+    this.state = {
+      choosed: value,
+      filteredTags: values
+    };
+  }
   state = {
     choosed: this.props.value,
     filteredTags: this.props.values
   };
   componentDidMount() {
     this.setState({
-      filteredTags: this.removeChoosed(this.props.values)
+      filteredTags: this.removeChoosed(this.props.values, this.state.choosed)
     });
   }
-  search = e => {
+  search = (e: any) => {
     this.setState({
       filteredTags: this.removeChoosed(
-        this.filtering(e.target.value, this.props.values)
+        this.filtering(e.target.value, this.props.values),
+        this.state.choosed
       )
     });
   };
-  removeChoosed = arr =>
+  removeChoosed = (arr: any[], choosedArr: any[]): any[] =>
     arr.filter(
-      item => !this.state.choosed.find(choose => item.name === choose)
+      item => !choosedArr.find((choose: string) => item.name === choose)
     );
-  filtering = (searchValue, array) => {
+  filtering = (searchValue: string, array: any[]) => {
     return searchValue
       ? array.filter(
-          item => ~item.name.toLowerCase().indexOf(searchValue.toLowerCase())
+          (item: { [key: string]: string }) =>
+            ~item.name.toLowerCase().indexOf(searchValue.toLowerCase())
         )
       : array;
   };
-  handleChange = e => {
-    this.setState({ value: e });
-  };
-  handleSubmit = value => e => {
+  handleSubmit = (value: string) => () => {
     const { choosed } = this.state;
     if (choosed.includes(value)) return;
-    const newValue = [...choosed, value];
+    const newValue: ProgramTag[] = [...choosed, value];
     this.setState({ choosed: newValue });
     this.props.changeFilter(newValue);
   };
-  handleAdd = value => e => {
-    this.props.handleAdd(value);
-  };
 
   render() {
-    const { t } = this.props;
     const { filteredTags } = this.state;
     return (
       <div className="tag-filter">
