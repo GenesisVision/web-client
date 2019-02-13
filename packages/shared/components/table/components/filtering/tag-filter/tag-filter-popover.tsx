@@ -1,6 +1,5 @@
 import { GVTextField } from "gv-react-components";
-import React from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
 import TagProgramItem from "shared/components/tag-program/tag-program-item";
 import { ProgramTag } from "gv-api-web";
 
@@ -91,4 +90,4 @@ class TagFilterPopover extends React.Component<
   }
 }
 
-export default translate()(TagFilterPopover);
+export default TagFilterPopover;
