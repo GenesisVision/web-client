@@ -26,10 +26,6 @@ class TagFilterPopover extends React.Component<
       filteredTags: values
     };
   }
-  state = {
-    choosed: this.props.value,
-    filteredTags: this.props.values
-  };
   componentDidMount() {
     this.setState({
       filteredTags: this.removeChoosed(this.props.values, this.state.choosed)
