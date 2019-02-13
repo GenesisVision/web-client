@@ -38,18 +38,18 @@ class TagFilterPopover extends React.Component<
       )
     });
   };
-  removeChoosed = (arr: any[], choosedArr: any[]): any[] =>
+  removeChoosed = (arr: ProgramTag[], choosedArr: ProgramTag[]): ProgramTag[] =>
     arr.filter(
       item => !choosedArr.find((choose: any) => item.name === choose.name)
     );
-  filtering = (searchValue: string, array: any[]) => {
-    return searchValue
+  filtering = (searchValue: string, array: ProgramTag[]) =>
+    searchValue
       ? array.filter(
-          (item: { [key: string]: string }) =>
+          (item: ProgramTag) =>
             ~item.name.toLowerCase().indexOf(searchValue.toLowerCase())
         )
       : array;
-  };
+
   handleSubmit = (value: ProgramTag) => () => {
     const { choosed } = this.state;
     if (choosed.includes(value)) return;

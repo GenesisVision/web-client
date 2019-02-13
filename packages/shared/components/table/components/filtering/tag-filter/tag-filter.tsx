@@ -8,6 +8,7 @@ import TagProgramItem from "shared/components/tag-program/tag-program-item";
 import TagFilterButton from "./tag-filter-button";
 import TagFilterPopover from "./tag-filter-popover";
 import { ProgramTag } from "gv-api-web";
+import { TAG_NAME_TYPE } from "./tag-filter.constants";
 
 interface ITagFilterState {
   anchor: any;
@@ -45,7 +46,7 @@ class TagFilter extends React.Component<ITagFilterProps, ITagFilterState> {
     });
   };
 
-  handleRemoveTag = (name: string) => (): void => {
+  handleRemoveTag = (name: TAG_NAME_TYPE) => (): void => {
     const value = [...this.props.value].find(item => item.name === name).name;
     this.props.onChange({
       name: this.props.name,
