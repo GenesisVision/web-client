@@ -1,28 +1,43 @@
 import "./tag-filter.scss";
 
-import PropTypes from "prop-types";
-import React, { Component, Fragment } from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { Fragment } from "react";
 import Popover from "shared/components/popover/popover";
 import TagProgramItem from "shared/components/tag-program/tag-program-item";
 
 import TagFilterButton from "./tag-filter-button";
 import TagFilterPopover from "./tag-filter-popover";
+import { ProgramTag } from "gv-api-web";
 
-class TagFilter extends Component {
+interface ITagFilterState {
+  anchor: any;
+}
+
+export interface ITagFilterProps {
+  name: string;
+  value: ProgramTag[];
+  values: ProgramTag[];
+  onChange(value: { name: string; value: string[] }): void;
+}
+
+class TagFilter extends React.Component<ITagFilterProps, ITagFilterState> {
   state = {
     anchor: null
   };
-  filterChoosed = arr =>
+  constructor(props: ITagFilterProps) {
+    super(props);
+  }
+  filterChoosed = (arr: ProgramTag[]): ProgramTag[] =>
     arr.filter(
       item =>
         this.props.value &&
         this.props.value.find(choose => item.name === choose.name)
     );
   renderValueText = value => value;
-  handleOpenPopover = event => this.setState({ anchor: event.currentTarget });
-  handleClosePopover = () => this.setState({ anchor: null });
-  handleChangeFilter = value => {
+  handleOpenPopover = (event: any): void =>
+    this.setState({ anchor: event.currentTarget });
+  handleClosePopover = (): void => this.setState({ anchor: null });
+  handleChangeFilter = (value: ProgramTag[]): void => {
     this.handleClosePopover();
     this.props.onChange({
       name: this.props.name,
@@ -30,7 +45,7 @@ class TagFilter extends Component {
     });
   };
 
-  handleRemoveTag = name => e => {
+  handleRemoveTag = (name: string) => (): void => {
     const value = [...this.props.value]
       .filter(item => item.name !== name)
       .map(item => item.name);
@@ -41,7 +56,7 @@ class TagFilter extends Component {
   };
 
   render() {
-    const { t, values, value } = this.props;
+    const { values, value } = this.props;
     const { anchor } = this.state;
     return (
       <Fragment>
@@ -78,10 +93,4 @@ class TagFilter extends Component {
   }
 }
 
-TagFilter.propTypes = {
-  name: PropTypes.string.isRequired,
-  value: PropTypes.any,
-  onChange: PropTypes.func
-};
-
-export default translate()(TagFilter);
+export default TagFilter;
