@@ -6,6 +6,7 @@
   display: inline-block;
   position: relative;
   margin-right: 10px;
+  cursor: default;
 
   &__button-remove {
     padding: 0;
@@ -22,6 +23,10 @@
       height: 7px;
       width: 7px;
     }
+  }
+
+  .gv-btn:hover:not(disabled).gv-btn--secondary {
+    background-color: #161b20;
   }
 
   &-tooltip {
