@@ -1,0 +1,13 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
+
+.tag-program-container {
+  display: flex;
+
+  &__other {
+    padding: 2px 12px;
+    font-size: 11px;
+    cursor: pointer;
+  }
+}

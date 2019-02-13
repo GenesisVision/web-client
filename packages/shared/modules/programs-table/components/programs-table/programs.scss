@@ -238,9 +238,9 @@ $description-block-width: 250px;
     @include font-size($font-size-paragraph);
     word-break: break-all;
     width: 170px;
-    div {
-      padding: $padding/10;
-    }
+  }
+  &--top {
+    padding: $padding/10 $padding/10 $padding/5;
   }
   &--link {
     @include table-link($text-accent-color, $text-color);
@@ -248,9 +248,6 @@ $description-block-width: 250px;
     text-overflow: ellipsis;
     overflow: hidden;
     display: block;
-  }
-  &--bottom {
-    opacity: 0.3;
   }
 
   &--name {

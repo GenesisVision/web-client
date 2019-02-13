@@ -11,6 +11,8 @@ import LevelFilter from "shared/components/table/components/filtering/level-filt
 import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
 import { toggleFavoriteProgramDispatchable } from "shared/modules/favorite-asset/services/favorite-program.service";
 
+import TagFilter from "shared/components/table/components/filtering/tag-filter/tag-filter";
+import { TAG_FILTER_NAME } from "shared/components/table/components/filtering/tag-filter/tag-filter.constants";
 import * as programsService from "../../services/programs-table.service";
 import { composeCurrencyFilter } from "./program-table.helpers";
 import ProgramsTable from "./programs-table";
@@ -31,6 +33,7 @@ class ProgramsTableContainer extends Component {
 
   render() {
     const {
+      programTags,
       t,
       showSwitchView,
       currencies,
@@ -56,6 +59,16 @@ class ProgramsTableContainer extends Component {
         renderFilters={(updateFilter, filtering) => {
           return (
             <Fragment>
+              <TagFilter
+                name={TAG_FILTER_NAME}
+                value={
+                  Array.isArray(filtering[TAG_FILTER_NAME])
+                    ? filtering[TAG_FILTER_NAME]
+                    : [filtering[TAG_FILTER_NAME]]
+                }
+                values={programTags}
+                onChange={updateFilter}
+              />
               <LevelFilter
                 name={LEVEL_FILTER_NAME}
                 value={filtering[LEVEL_FILTER_NAME]}
@@ -99,7 +112,10 @@ const mapStateToProps = state => {
   const currencies = state.platformData.data
     ? state.platformData.data.currencies
     : [];
-  return { isPending, data, isAuthenticated, currencies };
+  const programTags = state.platformData.data
+    ? state.platformData.data.programTags
+    : [];
+  return { isPending, data, isAuthenticated, currencies, programTags };
 };
 
 const mapDispatchToProps = dispatch => ({

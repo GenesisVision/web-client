@@ -1,0 +1,89 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_sizes.scss";
+
+.tag-filter {
+  width: 236px;
+  padding: $padding-xsmall;
+
+  &__title {
+    @include font-size($font-size-paragraph);
+    font-weight: 600;
+    font-size: 14px;
+    color: #ffffff;
+    letter-spacing: 0.47px;
+  }
+
+  &__tags-list {
+    padding-top: $padding-xsmall;
+  }
+
+  &__search {
+    .gv-text-field__wrapper {
+      margin: 0;
+    }
+  }
+
+  &__button {
+    border: 1px solid #6e757b;
+    background-color: transparent;
+    font-weight: 600;
+    line-height: 1;
+    color: $main-color;
+
+    &.gv-btn--text {
+      &:hover:not(:disabled),
+      &:active:not(:disabled) {
+        border-color: $main-color;
+        background-color: $main-color;
+        color: $panel-background-color;
+      }
+    }
+
+    &--active {
+      border-color: $main-color;
+      background-color: $main-color;
+      color: $panel-background-color;
+    }
+
+    &-plus {
+      font-size: 17px;
+      font-weight: 400;
+      padding-right: 3px;
+    }
+  }
+
+  &__tags-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .tag-program {
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+
+  .rc-slider {
+    margin: 1.5rem 0;
+  }
+
+  .rc-slider-track {
+    background-color: $primary-color;
+  }
+
+  .rc-slider-handle {
+    border-color: $primary-color;
+  }
+
+  .rc-slider-handle:hover {
+    border-color: $primary-color;
+  }
+  .rc-slider-handle:active,
+  .rc-slider-handle:focus {
+    border-color: $primary-color;
+    box-shadow: 0 0 5px $primary-color;
+  }
+
+  .rc-slider-dot-active {
+    border-color: $primary-color;
+  }
+}
