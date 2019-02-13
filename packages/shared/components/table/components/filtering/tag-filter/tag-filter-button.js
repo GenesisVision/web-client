@@ -3,7 +3,7 @@ import { GVButton } from "gv-react-components";
 import React from "react";
 import { translate } from "react-i18next";
 
-const TagFilterButton = ({ t, isActive }) => {
+const TagFilterButton = ({ t, isActive, onClickHandle }) => {
   return (
     <GVButton
       variant="text"
@@ -11,6 +11,7 @@ const TagFilterButton = ({ t, isActive }) => {
       className={classnames("tag-filter__button tag-button", {
         "tag-filter__button--active": isActive
       })}
+      onClick={onClickHandle}
     >
       <span className="tag-filter__button-plus">+</span>Add tag
     </GVButton>

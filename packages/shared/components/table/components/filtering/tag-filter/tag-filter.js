@@ -34,7 +34,7 @@ class TagFilter extends Component {
     const { anchor } = this.state;
     return (
       <Fragment>
-        <div className="filter" onClick={this.handleOpenPopover}>
+        <div className="filter">
           <div className="filter__value">
             {this.filterChoosed(values).map(tag => (
               <TagProgramItem
@@ -45,7 +45,10 @@ class TagFilter extends Component {
               />
             ))}
           </div>
-          <TagFilterButton isActive={anchor} />
+          <TagFilterButton
+            isActive={anchor}
+            onClickHandle={this.handleOpenPopover}
+          />
         </div>
         <Popover
           anchorEl={anchor}
