@@ -17,6 +17,7 @@ import * as programsService from "../../services/programs-table.service";
 import { composeCurrencyFilter } from "./program-table.helpers";
 import ProgramsTable from "./programs-table";
 import { CURRENCY_FILTER_NAME, LEVEL_FILTER_NAME } from "./programs.constants";
+import { convertToArray } from "shared/utils/helpers";
 
 class ProgramsTableContainer extends Component {
   componentDidMount() {
@@ -44,6 +45,15 @@ class ProgramsTableContainer extends Component {
       isAuthenticated,
       title
     } = this.props;
+    const tagsFilterValue = value => {
+      if (!programTags.length) return [];
+      return convertToArray(value).map(tag => {
+        const { color } = programTags.find(
+          programTag => programTag.name === tag
+        );
+        return { name: tag, color };
+      });
+    };
     return (
       <ProgramsTable
         showSwitchView={showSwitchView}
@@ -61,11 +71,7 @@ class ProgramsTableContainer extends Component {
             <Fragment>
               <TagFilter
                 name={TAG_FILTER_NAME}
-                value={
-                  Array.isArray(filtering[TAG_FILTER_NAME])
-                    ? filtering[TAG_FILTER_NAME]
-                    : [filtering[TAG_FILTER_NAME]]
-                }
+                value={tagsFilterValue(filtering[TAG_FILTER_NAME])}
                 values={programTags}
                 onChange={updateFilter}
               />
