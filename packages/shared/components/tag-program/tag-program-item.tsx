@@ -29,7 +29,7 @@ const TagProgramItem: React.FC<ProgramTag & IProgramTag> = ({
           variant="text"
           color="secondary"
           className="tag-program__button-remove"
-          onClick={handleRemove}
+          onClick={handleRemove(name)}
         >
           <CloseIcon />
         </GVButton>

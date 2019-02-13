@@ -27,7 +27,10 @@ class TagFilter extends Component {
     this.props.onChange({ name: this.props.name, value });
   };
 
-  handleRemoveTag = () => {};
+  handleRemoveTag = name => e => {
+    const value = [...this.props.value].filter(item => item !== name);
+    this.props.onChange({ name: this.props.name, value });
+  };
 
   render() {
     const { t, values, value } = this.props;
