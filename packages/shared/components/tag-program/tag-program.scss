@@ -2,6 +2,9 @@
 @import "~shared/styles/_breakpoint.scss";
 @import "~shared/styles/_sizes.scss";
 
+$tag-font-size: 11px;
+$tag-vertical-padding: 12px;
+
 .tag-program {
   display: inline-block;
   position: relative;
@@ -43,11 +46,17 @@
 }
 
 .tag-button {
+  @include font-size($tag-font-size);
   border-radius: 19.5px;
-  font-size: 11px;
   font-weight: 500;
   text-transform: uppercase;
-  padding: 0 12px;
-  max-height: 18px;
+  height: 18px;
   line-height: 18px;
+  padding: 0 12px;
+
+  @include media-breakpoint-landscape-phone() {
+    padding: 0 12px;
+    max-height: 18px;
+    line-height: 18px;
+  }
 }

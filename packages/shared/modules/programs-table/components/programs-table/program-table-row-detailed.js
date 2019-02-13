@@ -16,6 +16,7 @@ import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { composeManagerDetailsUrl } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
 
+import TagProgramContainer from "../../../../components/tag-program/tag-program-container";
 import ProgramBigChart from "./program-big-chart/program-big-chart";
 
 class ProgramTableRowDetailed extends Component {
@@ -90,6 +91,7 @@ class ProgramTableRowDetailed extends Component {
                         {program.manager.username}
                       </Link>
                     </div>
+                    <TagProgramContainer tags={program.tags} />
                   </div>
                 </div>
                 <div className="program-detailed__strategy">

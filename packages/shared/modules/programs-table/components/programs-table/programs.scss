@@ -236,6 +236,7 @@ $description-block-width: 250px;
   }
   &--title {
     @include font-size($font-size-paragraph);
+    @include adaptive-padding(left, 15px);
     word-break: break-all;
     width: 170px;
   }
@@ -291,7 +292,7 @@ $description-block-width: 250px;
     background: $secondary-color;
     padding: $padding/1.5;
     border-radius: $border-radius 0 0 $border-radius;
-    min-width: 218px;
+    min-width: 255px;
   }
 
   &__collapse {
@@ -324,7 +325,7 @@ $description-block-width: 250px;
   &__title {
     font-size: $detailed-text;
     letter-spacing: 0.2px;
-    margin-bottom: $padding/2.5/1.5;
+    margin-bottom: $padding/3.75;
     word-break: break-word;
   }
 
@@ -337,6 +338,7 @@ $description-block-width: 250px;
     letter-spacing: 0.2px;
     color: $primary-color;
     word-break: break-all;
+    margin-bottom: $padding/3.75;
   }
 
   &__manager-link {

@@ -26,7 +26,7 @@ class TagProgramContainer extends Component {
           <Tooltip render={() => <TagProgramTooltip tags={tags} />}>
             <div>
               <Profitability
-                className="tag-program-container__other"
+                className="tag-button"
                 value={reminder}
                 variant="chips"
               >
