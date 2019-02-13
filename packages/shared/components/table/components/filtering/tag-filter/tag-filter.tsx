@@ -46,9 +46,7 @@ class TagFilter extends React.Component<ITagFilterProps, ITagFilterState> {
   };
 
   handleRemoveTag = (name: string) => (): void => {
-    const value = [...this.props.value]
-      .filter(item => item.name !== name)
-      .map(item => item.name);
+    const value = [...this.props.value].find(item => item.name === name).name;
     this.props.onChange({
       name: this.props.name,
       value
