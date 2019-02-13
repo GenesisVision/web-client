@@ -15,6 +15,8 @@ import { composeManagerDetailsUrl } from "shared/utils/compose-url";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
 
+import TagProgramContainer from "../../../../components/tag-program/tag-program-container";
+
 class ProgramCard extends Component {
   state = {
     anchor: null,
@@ -76,6 +78,7 @@ class ProgramCard extends Component {
                 </GVButton>
               </Link>
             </div>
+            <TagProgramContainer tags={program.tags} />
           </div>
           <div className="programs-cards__actions">
             <ActionsCircleIcon
