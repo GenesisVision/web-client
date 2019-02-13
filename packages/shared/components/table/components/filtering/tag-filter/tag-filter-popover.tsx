@@ -41,7 +41,7 @@ class TagFilterPopover extends React.Component<
   };
   removeChoosed = (arr: any[], choosedArr: any[]): any[] =>
     arr.filter(
-      item => !choosedArr.find((choose: string) => item.name === choose)
+      item => !choosedArr.find((choose: any) => item.name === choose.name)
     );
   filtering = (searchValue: string, array: any[]) => {
     return searchValue
@@ -51,10 +51,10 @@ class TagFilterPopover extends React.Component<
         )
       : array;
   };
-  handleSubmit = (value: string) => () => {
+  handleSubmit = (value: ProgramTag) => () => {
     const { choosed } = this.state;
     if (choosed.includes(value)) return;
-    const newValue: ProgramTag[] = [...choosed, value];
+    const newValue = [...choosed, value];
     this.setState({ choosed: newValue });
     this.props.changeFilter(newValue);
   };
@@ -80,7 +80,7 @@ class TagFilterPopover extends React.Component<
             <div
               key={tag.name}
               className="tag-filter__tag"
-              onClick={this.handleSubmit(tag.name)}
+              onClick={this.handleSubmit(tag)}
             >
               <TagProgramItem name={tag.name} color={tag.color} />
             </div>

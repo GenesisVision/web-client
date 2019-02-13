@@ -17,19 +17,27 @@ class TagFilter extends Component {
     arr.filter(
       item =>
         this.props.value &&
-        this.props.value.find(choose => item.name === choose)
+        this.props.value.find(choose => item.name === choose.name)
     );
   renderValueText = value => value;
   handleOpenPopover = event => this.setState({ anchor: event.currentTarget });
   handleClosePopover = () => this.setState({ anchor: null });
   handleChangeFilter = value => {
     this.handleClosePopover();
-    this.props.onChange({ name: this.props.name, value });
+    this.props.onChange({
+      name: this.props.name,
+      value: value.map(item => item.name)
+    });
   };
 
   handleRemoveTag = name => e => {
-    const value = [...this.props.value].filter(item => item !== name);
-    this.props.onChange({ name: this.props.name, value });
+    const value = [...this.props.value]
+      .filter(item => item.name !== name)
+      .map(item => item.name);
+    this.props.onChange({
+      name: this.props.name,
+      value
+    });
   };
 
   render() {
