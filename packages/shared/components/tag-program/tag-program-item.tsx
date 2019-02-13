@@ -7,11 +7,11 @@ import React from "react";
 
 import { CloseIcon } from "../icon/close-icon";
 
-export interface IProgramTag {
-  handleRemove?(): void;
+export interface IProgramTagItem {
+  handleRemove?(name: string): void;
 }
 
-const TagProgramItem: React.FC<ProgramTag & IProgramTag> = ({
+const TagProgramItem: React.FC<ProgramTag & IProgramTagItem> = ({
   color,
   name,
   handleRemove
