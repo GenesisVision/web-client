@@ -15,7 +15,7 @@ import Hint from "shared/components/hint/hint";
 import Popover from "shared/components/popover/popover";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import TagProgramItem from "shared/components/tag-program/tag-program-item";
-import { STATUS } from "shared/constants/constants";
+import { INVESTOR, STATUS } from "shared/constants/constants";
 import platformApi from "shared/services/api-client/platform-api";
 import {
   composeManagerDetailsUrl,
