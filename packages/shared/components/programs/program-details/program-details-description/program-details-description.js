@@ -1,18 +1,10 @@
 import "./program-details-description.scss";
 
-import { GVButton } from "gv-react-components";
-import React, { Fragment, PureComponent } from "react";
+import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
-import NumberFormat from "react-number-format";
-import DetailsFavorite from "shared/components/details/details-description-section/details-description/details-favorite";
-import DetailsNotification from "shared/components/details/details-description-section/details-description/details-notificaton";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
-import Hint from "shared/components/hint/hint";
-import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { STATUS } from "shared/constants/constants";
 import platformApi from "shared/services/api-client/platform-api";
-import { composeProgramNotificationsUrl } from "shared/utils/compose-url";
-import { formatValue } from "shared/utils/formatter";
 
 import ProgramDetailsDescriptionCenter from "./program-details-description-center";
 import ProgramDetailsDescriptionTop from "./program-details-description-top";
@@ -54,6 +46,8 @@ class ProgramDetailsDescription extends PureComponent {
       onFavoriteClick,
       investmentData,
       onChangeInvestmentStatus,
+      isAuthenticated,
+      redirectToLogin,
       isReinvest
     } = this.props;
 
@@ -63,6 +57,9 @@ class ProgramDetailsDescription extends PureComponent {
           programDescription={programDescription}
           AboutLevelsContainerComponent={AboutLevelsContainerComponent}
           investmentsLimits={this.state.investmentsLimits}
+          isFavorite={isFavorite}
+          onFavoriteClick={onFavoriteClick}
+          hasNotifications={hasNotifications}
         />
         <ProgramDetailsDescriptionCenter
           programDescription={programDescription}
@@ -76,6 +73,8 @@ class ProgramDetailsDescription extends PureComponent {
           PROGRAM={PROGRAM}
           canInvest={canInvest}
           canWithdraw={canWithdraw}
+          isAuthenticated={isAuthenticated}
+          redirectToLogin={redirectToLogin}
         />
 
         {programDescription.personalProgramDetails && status !== STATUS.ENDED && (

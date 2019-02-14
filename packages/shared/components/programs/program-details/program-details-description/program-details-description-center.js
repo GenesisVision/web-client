@@ -4,10 +4,9 @@ import { GVButton } from "gv-react-components";
 import React, { Fragment } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import Hint from "shared/components/hint/hint";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatValue } from "shared/utils/formatter";
-
-import Hint from "../../../hint/hint";
 
 class ProgramDetailsDescriptionCenter extends React.Component {
   state = {
