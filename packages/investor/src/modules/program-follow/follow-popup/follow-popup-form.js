@@ -16,10 +16,13 @@ import {
   validateFraction
 } from "shared/utils/formatter";
 import { number, object } from "yup";
+import FollowCreateAccount from "./follow-popup-create-account";
 
 class FollowForm extends Component {
   render() {
     const {
+      walletsAddresses,
+      currency
       /*t,
       program,
       entryFee,
@@ -33,7 +36,23 @@ class FollowForm extends Component {
       errorMessage*/
     } = this.props;
 
-    return <div>form</div>;
+    return (
+      <div>
+        <FollowCreateAccount
+          walletsAddresses={walletsAddresses}
+          currency={currency}
+          /*investor
+      program
+      entryFee
+      submitInfo={submitInfo}
+      currency={currency}
+      info={info.data}
+      id={id}
+      fetchInfo={service.getDepositProgramInfoById}
+      invest={handleFollow}*/
+        />
+      </div>
+    );
   }
 }
 

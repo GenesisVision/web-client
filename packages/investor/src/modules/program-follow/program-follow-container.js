@@ -8,6 +8,7 @@ import FollowPopup from "./follow-popup/follow-popup";
 import FollowCreateAccount from "./follow-popup/follow-popup-create-account";
 import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
+import FollowForm from "./follow-popup/follow-popup-form";
 
 /*import {
   clearDepositProgramInfo,
@@ -66,19 +67,7 @@ class ProgramFollowContainer extends Component {
     };
     return (
       <Dialog open={open} onClose={handleClose}>
-        <FollowCreateAccount
-          walletsAddresses={walletsAddresses}
-          currency={"ETH"}
-          /*investor
-        program
-        entryFee
-        submitInfo={submitInfo}
-        currency={currency}
-        info={info.data}
-        id={id}
-        fetchInfo={service.getDepositProgramInfoById}
-        invest={handleFollow}*/
-        />
+        <FollowForm walletsAddresses={walletsAddresses} currency={"ETH"} />
       </Dialog>
     );
   }

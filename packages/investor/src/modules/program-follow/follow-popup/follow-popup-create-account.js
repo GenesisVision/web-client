@@ -138,7 +138,7 @@ class FollowCreateAccount extends Component {
             </div>
             <div className="dialog__buttons">
               <GVButton
-                // onClick={onClick}
+                onClick={onClick}
                 id="signUpFormSubmit"
                 className="invest-form__submit-button"
                 // disabled={disabled}
