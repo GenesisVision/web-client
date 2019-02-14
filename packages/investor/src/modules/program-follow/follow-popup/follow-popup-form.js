@@ -30,9 +30,13 @@ class FollowForm extends Component {
   createdCopytradingAccount = () => {
     this.setState({ step: PARAMS });
   };
+  componentDidMount() {
+    if (this.props.copytradingAccount) this.setState({ step: PARAMS });
+  }
   submit = () => {};
   render() {
     const {
+      copytradingAccount,
       setFieldValue,
       values,
       wallets,
@@ -40,10 +44,9 @@ class FollowForm extends Component {
       handleSubmit,
       currency
     } = this.props;
-
     return (
       <div>
-        {this.state.step === CREATE_ACCOUNT && (
+        {!copytradingAccount && this.state.step === CREATE_ACCOUNT && (
           <FollowCreateAccount
             values={values}
             setFieldValue={setFieldValue}
@@ -55,6 +58,7 @@ class FollowForm extends Component {
         )}
         {this.state.step === PARAMS && (
           <FollowParams
+            copytradingAccount={copytradingAccount}
             values={values}
             setFieldValue={setFieldValue}
             onClick={this.submit}

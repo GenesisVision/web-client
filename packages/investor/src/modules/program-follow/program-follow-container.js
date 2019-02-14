@@ -75,6 +75,7 @@ class ProgramFollowContainer extends Component {
           walletsAddresses={walletsAddresses}
           currency={"GVT"}
           wallets={wallets}
+          copytradingAccount={""}
         />
       </Dialog>
     );
