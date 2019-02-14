@@ -31,13 +31,13 @@ class FollowParams extends Component {
     } = this.props;
     const { tolerancePercent, type } = values;
     const setMaxTolerancePercent = () => {
-      setFieldValue("tolerancePercent", "100");
+      setFieldValue("tolerancePercent", "20");
     };
     const setMaxVolumePercent = () => {
-      setFieldValue("volumePercent", "100");
+      setFieldValue("volumePercent", "999");
     };
     const setMaxAmountUSDEquivalent = () => {
-      setFieldValue("tolerancePercent", "100");
+      setFieldValue("USDEquivalent", "99999");
     };
     /*const isAllow = values => {
       const { tolerancePercent } = values;
@@ -94,7 +94,7 @@ class FollowParams extends Component {
             <InputAmountField
               name="USDEquivalent"
               label={"USD equivalent"}
-              currency={"%"}
+              currency={"USD"}
               // isAllow={isAllow}
               setMax={setMaxAmountUSDEquivalent}
             />
@@ -124,24 +124,16 @@ export default compose(
     },
     validationSchema: ({ t }) =>
       object().shape({
-        USDEquivalent: number(),
+        USDEquivalent: number()
+          .min(0)
+          .max(99999),
         volumePercent: number()
-          .max(100)
-          .min(
-            0,
-            t("deposit-asset.validation.amount-min-value", {
-              min: 0
-            })
-          ),
+          .max(999)
+          .min(1),
         tolerancePercent: number()
           .required()
-          .max(100)
-          .min(
-            0,
-            t("deposit-asset.validation.amount-min-value", {
-              min: 0
-            })
-          )
+          .max(20)
+          .min(0.01)
       }),
     handleSubmit: (values, { props }) => {
       props.onSubmit(values.amount);
