@@ -12,7 +12,7 @@ import DetailsInvestment from "shared/components/details/details-description-sec
 import Hint from "shared/components/hint/hint";
 import Popover from "shared/components/popover/popover";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { STATUS } from "shared/constants/constants";
+import { INVESTOR, STATUS } from "shared/constants/constants";
 import platformApi from "shared/services/api-client/platform-api";
 import {
   composeManagerDetailsUrl,
@@ -24,6 +24,7 @@ import connect from "react-redux/es/connect/connect";
 
 class ProgramDetailsDescription extends PureComponent {
   state = {
+    isOpenFollowPopup: false,
     isOpenInvestmentPopup: false,
     isOpenCloseProgramPopup: false,
     isOpenEditProgramPopup: false,
@@ -69,6 +70,15 @@ class ProgramDetailsDescription extends PureComponent {
   handleApplyEditProgramPopup = updateDetails => () => {
     updateDetails();
   };
+  handleOpenFollowPopup = () => {
+    this.setState({ isOpenFollowPopup: true });
+  };
+  handleCloseFollowPopup = () => {
+    this.setState({ isOpenFollowPopup: false });
+  };
+  handleApplyFollowPopup = updateDetails => () => {
+    updateDetails();
+  };
 
   handleOpenClosePeriodPopup = () => {
     this.setState({ isOpenClosePeriodPopup: true });
@@ -91,7 +101,7 @@ class ProgramDetailsDescription extends PureComponent {
   }
   render() {
     const {
-      role,
+      isOpenFollowPopup,
       isOpenInvestmentPopup,
       isOpenCloseProgramPopup,
       isOpenEditProgramPopup,
@@ -114,6 +124,8 @@ class ProgramDetailsDescription extends PureComponent {
       ClosePeriodContainer,
       CloseProgramContainer,
       ProgramDepositContainer,
+      role,
+      ProgramFollowContainer,
       AboutLevelsContainerComponent,
       ProgramDetailContext,
       AssetEditContainer,
@@ -337,6 +349,17 @@ class ProgramDetailsDescription extends PureComponent {
                     {t("program-details-page.description.edit-program")}
                   </GVButton>
                 )}
+                {role === INVESTOR && (
+                  <GVButton
+                    className="details-description__invest-btn"
+                    color="secondary"
+                    variant="outlined"
+                    onClick={this.handleOpenFollowPopup}
+                    // disabled={!canCloseProgram}
+                  >
+                    Follow
+                  </GVButton>
+                )}
               </div>
             )}
             <ProgramDetailContext.Consumer>
@@ -376,6 +399,14 @@ class ProgramDetailsDescription extends PureComponent {
                       onClose={this.handleCloseEditProgramPopup}
                       onApply={this.handleApplyEditProgramPopup(updateDetails)}
                       type={PROGRAM}
+                    />
+                  )}
+                  {ProgramFollowContainer && (
+                    <ProgramFollowContainer
+                      open={isOpenFollowPopup}
+                      // info={composeEditInfo}
+                      onClose={this.handleCloseFollowPopup}
+                      onApply={this.handleApplyFollowPopup(updateDetails)}
                     />
                   )}
                 </Fragment>
@@ -424,7 +455,7 @@ class ProgramDetailsDescription extends PureComponent {
 const mapStateToProps = state => {
   const { accountSettings, authData, profileHeader } = state;
   return {
-    role: (profileHeader.info.data && profileHeader.info.data.role) || null,
+    role: (profileHeader.info.data && profileHeader.info.data.userType) || null,
     currency: accountSettings.currency,
     isAuthenticated: authData.isAuthenticated
   };
