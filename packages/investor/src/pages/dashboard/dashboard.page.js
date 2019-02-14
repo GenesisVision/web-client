@@ -8,6 +8,7 @@ import Surface from "shared/components/surface/surface";
 import DashboardAssetsContainer from "./components/dashboard-assets/dashboard-assets-container";
 import DashboardChartSection from "./components/dashboard-portfolio-chart-section/dashboard-portfolio-chart-section";
 import DashboardPortfolioEventsSection from "./components/dashboard-portfolio-events/dashboard-portfolio-events-section";
+import DashboardTrades from "./components/dashboard-trades/dashboard-trades-container";
 
 const DashboardPage = ({ t }) => {
   const title = t(`${process.env.REACT_APP_PLATFORM}.dashboard-page.title`);
@@ -15,7 +16,7 @@ const DashboardPage = ({ t }) => {
     <Page title={title}>
       <div className="dashboard">
         <div className="dashboard__row">
-          <div className="dashboard__chart">
+          {/* <div className="dashboard__chart">
             <Surface className="dashboard-portfolio-chart-section">
               <DashboardChartSection />
             </Surface>
@@ -24,8 +25,12 @@ const DashboardPage = ({ t }) => {
             <DashboardPortfolioEventsSection title={title} />
           </div>
         </div>
-        <div className="dashboard__assets">
+        <div className="dashboard__table-section">
           <DashboardAssetsContainer title={title} />
+        </div> */}
+          <div className="dashboard__table-section">
+            <DashboardTrades title={title} />
+          </div>
         </div>
       </div>
     </Page>
