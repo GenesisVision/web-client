@@ -87,70 +87,68 @@ class FollowCreateAccount extends Component {
     };
     return (
       <form className="dialog__bottom" id="follow-create-account">
-        <div className="dialog__top">
-          <div className="dialog-field">
-            <GVFormikField
-              name="walletFrom"
-              component={GVTextField}
-              label={t("wallet-transfer.from")}
-              InputComponent={Select}
-              onChange={this.onChangeCurrencyFrom}
-            >
-              {walletsAddresses.map(wallet => {
-                return (
-                  <option value={wallet.currency} key={wallet.currency}>
-                    <img
-                      src={getWalletIcon(wallet.currency)}
-                      className="wallet-transfer-popup__icon"
-                      alt={wallet.currency}
-                    />
-                    {`${wallet.description} | ${wallet.currency}`}
-                  </option>
-                );
-              })}
-            </GVFormikField>
-          </div>
-          <div className="dialog-field">
-            <StatisticItem label={"Available to withdraw"}>
+        <div className="dialog-field">
+          <GVFormikField
+            name="walletFrom"
+            component={GVTextField}
+            label={t("wallet-transfer.from")}
+            InputComponent={Select}
+            onChange={this.onChangeCurrencyFrom}
+          >
+            {walletsAddresses.map(wallet => {
+              return (
+                <option value={wallet.currency} key={wallet.currency}>
+                  <img
+                    src={getWalletIcon(wallet.currency)}
+                    className="wallet-transfer-popup__icon"
+                    alt={wallet.currency}
+                  />
+                  {`${wallet.description} | ${wallet.currency}`}
+                </option>
+              );
+            })}
+          </GVFormikField>
+        </div>
+        <div className="dialog-field">
+          <StatisticItem label={"Available to withdraw"}>
+            <NumberFormat
+              value={formatCurrencyValue(availableToWithdraw, currency)}
+              suffix={` ${currency}`}
+              displayType="text"
+            />
+          </StatisticItem>
+        </div>
+        <div className="dialog-field">
+          <InputAmountField
+            name="amount"
+            label={t("wallet-transfer.amount")}
+            currency={currency}
+            isAllow={isAllow}
+            setMax={setMaxAmount}
+          />
+          {currency !== walletFrom && (
+            <div className="invest-popup__currency">
               <NumberFormat
-                value={formatCurrencyValue(availableToWithdraw, currency)}
-                suffix={` ${currency}`}
+                value={formatCurrencyValue(
+                  convertFromCurrency(amount, rate),
+                  walletFrom
+                )}
+                prefix="= "
+                suffix={` ${walletFrom}`}
                 displayType="text"
               />
-            </StatisticItem>
-          </div>
-          <div className="dialog-field">
-            <InputAmountField
-              name="amount"
-              label={t("wallet-transfer.amount")}
-              currency={currency}
-              isAllow={isAllow}
-              setMax={setMaxAmount}
-            />
-            {currency !== walletFrom && (
-              <div className="invest-popup__currency">
-                <NumberFormat
-                  value={formatCurrencyValue(
-                    convertFromCurrency(amount, rate),
-                    walletFrom
-                  )}
-                  prefix="= "
-                  suffix={` ${walletFrom}`}
-                  displayType="text"
-                />
-              </div>
-            )}
-          </div>
-          <div className="dialog__buttons">
-            <GVButton
-              onClick={onClick}
-              id="signUpFormSubmit"
-              className="invest-form__submit-button"
-              disabled={disableButton()}
-            >
-              {t("withdraw-program.next")}
-            </GVButton>
-          </div>
+            </div>
+          )}
+        </div>
+        <div className="dialog__buttons">
+          <GVButton
+            onClick={onClick}
+            id="signUpFormSubmit"
+            className="invest-form__submit-button"
+            disabled={disableButton()}
+          >
+            {t("withdraw-program.next")}
+          </GVButton>
         </div>
       </form>
     );
