@@ -229,114 +229,171 @@ class ProgramDetailsDescription extends PureComponent {
             <div className="details-description__text">
               {programDescription.description}
             </div>
-            <div className="details-description__short-statistic">
-              <StatisticItem
-                label={t("program-details-page.description.avToInvest")}
-                className={"details-description__short-statistic-item"}
-                accent
-              >
-                <NumberFormat
-                  value={formatValue(programDescription.availableInvestment, 2)}
-                  displayType="text"
-                  suffix={` GVT`}
-                />
-              </StatisticItem>
-              <StatisticItem
-                label={t("program-details-page.description.entryFee")}
-                className={"details-description__short-statistic-item"}
-                accent
-              >
-                {programDescription.entryFeeSelected !==
-                programDescription.entryFeeCurrent ? (
-                  <Hint
-                    content={
-                      <NumberFormat
-                        value={formatValue(
-                          programDescription.entryFeeSelected,
-                          2
-                        )}
-                        displayType="text"
-                        prefix={`${programDescription.entryFeeCurrent} % (`}
-                        suffix=" %)"
-                      />
-                    }
-                    className="details-description__short-statistic-hint"
-                    vertical={"bottom"}
-                    tooltipContent={t(
-                      "program-details-page.description.entry-fee-levels"
-                    )}
-                  />
-                ) : (
+          </div>
+          <div className="details-description__row">
+            <div className="details-description__col">
+              <div className="details-description__statistic-container">
+                <StatisticItem
+                  label={t("program-details-page.description.avToInvest")}
+                  className="details-description__short-statistic-item"
+                  accent
+                >
                   <NumberFormat
-                    value={formatValue(programDescription.entryFeeCurrent, 2)}
+                    value={formatValue(
+                      programDescription.availableInvestment,
+                      2
+                    )}
+                    displayType="text"
+                    suffix={` GVT`}
+                  />
+                </StatisticItem>
+                <StatisticItem
+                  label={t("program-details-page.description.entryFee")}
+                  className="details-description__short-statistic-item"
+                  accent
+                >
+                  {programDescription.entryFeeSelected !==
+                  programDescription.entryFeeCurrent ? (
+                    <Hint
+                      content={
+                        <NumberFormat
+                          value={formatValue(
+                            programDescription.entryFeeSelected,
+                            2
+                          )}
+                          displayType="text"
+                          prefix={`${programDescription.entryFeeCurrent} % (`}
+                          suffix=" %)"
+                        />
+                      }
+                      className="details-description__short-statistic-hint"
+                      vertical={"bottom"}
+                      tooltipContent={t(
+                        "program-details-page.description.entry-fee-levels"
+                      )}
+                    />
+                  ) : (
+                    <NumberFormat
+                      value={formatValue(programDescription.entryFeeCurrent, 2)}
+                      displayType="text"
+                      suffix=" %"
+                    />
+                  )}
+                </StatisticItem>
+                <StatisticItem
+                  label={t("program-details-page.description.successFee")}
+                  className="details-description__short-statistic-item"
+                  accent
+                >
+                  <NumberFormat
+                    value={formatValue(programDescription.successFee, 2)}
                     displayType="text"
                     suffix=" %"
                   />
-                )}
-              </StatisticItem>
-              <StatisticItem
-                label={t("program-details-page.description.successFee")}
-                className={"details-description__short-statistic-item"}
-                accent
-              >
-                <NumberFormat
-                  value={formatValue(programDescription.successFee, 2)}
-                  displayType="text"
-                  suffix=" %"
-                />
-              </StatisticItem>
-            </div>
-            {(isOwnProgram || canInvest || canWithdraw) && (
-              <div className="details-description__invest-button-container">
-                <GVButton
-                  className="details-description__invest-btn"
-                  onClick={this.handleOpenInvestmentPopup}
-                  disabled={
-                    !programDescription.personalProgramDetails ||
-                    !programDescription.personalProgramDetails.canInvest
-                  }
-                >
-                  {t("program-details-page.description.invest")}
-                </GVButton>
-                {CloseProgramContainer && (
-                  <GVButton
-                    className="details-description__invest-btn"
-                    color="secondary"
-                    variant="outlined"
-                    onClick={this.handleOpenCloseProgramPopup}
-                    disabled={
-                      !programDescription.personalProgramDetails.canCloseProgram
-                    }
-                  >
-                    {t("program-details-page.description.close-program")}
-                  </GVButton>
-                )}
-                {ClosePeriodContainer && (
-                  <GVButton
-                    className="details-description__invest-btn"
-                    color="secondary"
-                    variant="outlined"
-                    onClick={this.handleOpenClosePeriodPopup}
-                    disabled={
-                      !programDescription.personalProgramDetails.canClosePeriod
-                    }
-                  >
-                    {t("program-details-page.close-period.title")}
-                  </GVButton>
-                )}
-                {AssetEditContainer && (
-                  <GVButton
-                    className="details-description__invest-btn"
-                    color="secondary"
-                    variant="outlined"
-                    onClick={this.handleOpenEditProgramPopup}
-                    disabled={!canCloseProgram}
-                  >
-                    {t("program-details-page.description.edit-program")}
-                  </GVButton>
-                )}
+                </StatisticItem>
               </div>
-            )}
+              {(isOwnProgram || canInvest || canWithdraw) && (
+                <div className="details-description__invest-button-container">
+                  <GVButton
+                    className="details-description__invest-btn"
+                    onClick={this.handleOpenInvestmentPopup}
+                    disabled={
+                      !programDescription.personalProgramDetails ||
+                      !programDescription.personalProgramDetails.canInvest
+                    }
+                  >
+                    {t("program-details-page.description.invest")}
+                  </GVButton>
+                  {CloseProgramContainer && (
+                    <GVButton
+                      className="details-description__invest-btn"
+                      color="secondary"
+                      variant="outlined"
+                      onClick={this.handleOpenCloseProgramPopup}
+                      disabled={
+                        !programDescription.personalProgramDetails
+                          .canCloseProgram
+                      }
+                    >
+                      {t("program-details-page.description.close-program")}
+                    </GVButton>
+                  )}
+                  {ClosePeriodContainer && (
+                    <GVButton
+                      className="details-description__invest-btn"
+                      color="secondary"
+                      variant="outlined"
+                      onClick={this.handleOpenClosePeriodPopup}
+                      disabled={
+                        !programDescription.personalProgramDetails
+                          .canClosePeriod
+                      }
+                    >
+                      {t("program-details-page.close-period.title")}
+                    </GVButton>
+                  )}
+                  {AssetEditContainer && (
+                    <GVButton
+                      className="details-description__invest-btn"
+                      color="secondary"
+                      variant="outlined"
+                      onClick={this.handleOpenEditProgramPopup}
+                      disabled={!canCloseProgram}
+                    >
+                      {t("program-details-page.description.edit-program")}
+                    </GVButton>
+                  )}
+                </div>
+              )}
+            </div>
+            <div className="details-description__col details-description__col--small-size">
+              <div className="details-description__statistic-container">
+                <StatisticItem
+                  label={t("program-details-page.description.successFee")}
+                  className="details-description__short-statistic-item"
+                  accent
+                >
+                  <NumberFormat
+                    value={formatValue(programDescription.successFee, 2)}
+                    displayType="text"
+                    suffix=" %"
+                  />
+                </StatisticItem>
+                <StatisticItem
+                  label="Subscription fee"
+                  className="details-description__short-statistic-item"
+                  accent
+                >
+                  <NumberFormat value="3" displayType="text" suffix=" GVT" />
+                </StatisticItem>
+              </div>
+              {(isOwnProgram || canInvest || canWithdraw) && (
+                <div className="details-description__invest-button-container">
+                  <GVButton
+                    className="details-description__invest-btn"
+                    onClick={this.handleOpenInvestmentPopup}
+                    disabled={
+                      !programDescription.personalProgramDetails ||
+                      !programDescription.personalProgramDetails.canInvest
+                    }
+                  >
+                    Follow trades
+                    {/*{t("program-details-page.description.invest")}*/}
+                  </GVButton>
+                  {/*{AssetEditContainer && (*/}
+                  {/*<GVButton*/}
+                  {/*className="details-description__invest-btn"*/}
+                  {/*color="secondary"*/}
+                  {/*variant="outlined"*/}
+                  {/*onClick={this.handleOpenEditProgramPopup}*/}
+                  {/*disabled={!canCloseProgram}*/}
+                  {/*>*/}
+                  {/*{t("program-details-page.description.edit-program")}*/}
+                  {/*</GVButton>*/}
+                  {/*)}*/}
+                </div>
+              )}
+            </div>
             <ProgramDetailContext.Consumer>
               {({ updateDetails }) => (
                 <Fragment>
