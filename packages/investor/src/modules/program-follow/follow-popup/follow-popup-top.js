@@ -5,18 +5,17 @@ import { formatCurrencyValue } from "shared/utils/formatter";
 
 const FollowTop = ({ info, t, program, investor }) => {
   return (
-    <div className="follow__top">
-      <div className="follow__header">
-        <h2>{program ? t("deposit-asset.title") : t("deposit-asset.title")}</h2>
-        <p>Title</p>
+    <div className="dialog__top">
+      <div className="dialog__header">
+        <h2>Title</h2>
       </div>
-      <div className="dialog-field">
+      {/*<div className="dialog-field">
         {program && investor && (
           <StatisticItem
             label={t("deposit-asset.program.available-to-invest")}
             big
           >
-            {/*{formatCurrencyValue(info.availableToInvest, "GVT")} GVT*/}
+            {formatCurrencyValue(info.availableToInvest, "GVT")} GVT
           </StatisticItem>
         )}
         <StatisticItem
@@ -28,9 +27,9 @@ const FollowTop = ({ info, t, program, investor }) => {
           big
         >
           Any
-          {/*{formatCurrencyValue(info.availableInWallet, "GVT")} GVT*/}
+          {formatCurrencyValue(info.availableInWallet, "GVT")} GVT
         </StatisticItem>
-      </div>
+      </div>*/}
     </div>
   );
 };

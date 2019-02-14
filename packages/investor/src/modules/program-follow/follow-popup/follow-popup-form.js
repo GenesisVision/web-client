@@ -16,79 +16,53 @@ import {
   validateFraction
 } from "shared/utils/formatter";
 import { number, object } from "yup";
+
 import FollowCreateAccount from "./follow-popup-create-account";
+import FollowParams from "./follow-popup-params";
+
 const CREATE_ACCOUNT = "CREATE_ACCOUNT";
-const FORM = "FORM";
+const PARAMS = "PARAMS";
 
 class FollowForm extends Component {
   state = {
     step: CREATE_ACCOUNT
   };
   createdCopytradingAccount = () => {
-    this.setState({ step: FORM });
+    this.setState({ step: PARAMS });
   };
+  submit = () => {};
   render() {
     const {
+      setFieldValue,
+      values,
       wallets,
       walletsAddresses,
       handleSubmit,
       currency
-      /*t,
-      program,
-      entryFee,
-      values,
-      info,
-      currency,
-      disabled,
-      isValid,
-      dirty,
-      errorMessage*/
     } = this.props;
 
     return (
-      <form
-        className="dialog__bottom"
-        id="withdraw-form"
-        onSubmit={handleSubmit}
-      >
+      <div>
         {this.state.step === CREATE_ACCOUNT && (
           <FollowCreateAccount
+            values={values}
+            setFieldValue={setFieldValue}
             wallets={wallets}
             walletsAddresses={walletsAddresses}
             currency={currency}
             onClick={this.createdCopytradingAccount}
           />
         )}
-      </form>
+        {this.state.step === PARAMS && (
+          <FollowParams
+            values={values}
+            setFieldValue={setFieldValue}
+            onClick={this.submit}
+          />
+        )}
+      </div>
     );
   }
 }
 
-export default compose(
-  translate(),
-  withFormik({
-    displayName: "follow-program",
-    mapPropsToValues: props => {
-      const { walletsAddresses, currency } = props;
-      if (!walletsAddresses === undefined || walletsAddresses.length <= 1)
-        return null;
-      let walletFrom = currency || "GVT";
-      if (!walletsAddresses.find(wallet => wallet.currency === walletFrom)) {
-        walletFrom = walletsAddresses[0].currency;
-      }
-      return { walletFrom };
-    },
-    validationSchema: ({ t, info }) =>
-      object().shape({
-        amount: number().min(
-          0,
-          t("deposit-asset.validation.amount-min-value", {
-            min: info.minInvestmentAmount
-          })
-        )
-      }),
-    handleSubmit: (values, { props }) => {
-      props.onSubmit(values.amount);
-    }
-  })
-)(FollowForm);
+export default compose(translate())(FollowForm);

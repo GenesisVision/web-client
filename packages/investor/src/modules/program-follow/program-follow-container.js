@@ -4,11 +4,13 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import DepositPopup from "shared/components/deposit/deposit-popup";
 import Dialog from "shared/components/dialog/dialog";
-import FollowPopup from "./follow-popup/follow-popup";
-import FollowCreateAccount from "./follow-popup/follow-popup-create-account";
 import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
+
+import FollowPopup from "./follow-popup/follow-popup";
+import FollowCreateAccount from "./follow-popup/follow-popup-create-account";
 import FollowForm from "./follow-popup/follow-popup-form";
+import FollowTop from "./follow-popup/follow-popup-top";
 
 /*import {
   clearDepositProgramInfo,
@@ -68,9 +70,10 @@ class ProgramFollowContainer extends Component {
     };
     return (
       <Dialog open={open} onClose={handleClose}>
+        <FollowTop />
         <FollowForm
           walletsAddresses={walletsAddresses}
-          currency={"ETH"}
+          currency={"GVT"}
           wallets={wallets}
         />
       </Dialog>

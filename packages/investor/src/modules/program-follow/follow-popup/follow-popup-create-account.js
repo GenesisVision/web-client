@@ -1,10 +1,17 @@
 import { withFormik } from "formik";
+import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
+import Select from "shared/components/select/select";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
+import { getWalletIcon } from "shared/components/wallet/components/wallet-currency";
+import rateApi from "shared/services/api-client/rate-api";
+import walletApi from "shared/services/api-client/wallet-api";
+import authService from "shared/services/auth-service";
 import {
   calculateValueOfEntryFee,
   convertFromCurrency
@@ -15,19 +22,13 @@ import {
   validateFraction
 } from "shared/utils/formatter";
 import { number, object } from "yup";
-import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
-import Select from "shared/components/select/select";
-import { getWalletIcon } from "shared/components/wallet/components/wallet-currency";
-import StatisticItem from "shared/components/statistic-item/statistic-item";
-import rateApi from "shared/services/api-client/rate-api";
-import authService from "shared/services/auth-service";
-import walletApi from "shared/services/api-client/wallet-api";
 
 class FollowCreateAccount extends Component {
   state = {
     rate: null,
     isPending: false
   };
+
   componentDidMount() {
     this.fetchRate();
   }
@@ -49,45 +50,43 @@ class FollowCreateAccount extends Component {
 
   render() {
     const {
+      errors,
+      isValid,
+      dirty,
       walletsAddresses,
       wallets,
       t,
       currency,
-      info,
       values,
       setFieldValue,
       onClick
-      /*t,
-      program,
-      entryFee,
-      disabled,
-      isValid,
-      dirty,
-      handleSubmit,
-      errorMessage*/
     } = this.props;
     const { walletFrom, amount } = values;
     const { rate } = this.state;
     if (!rate) return null;
+    const wallet = wallets.find(wallet => wallet.currency === walletFrom);
+    const availableToWithdraw = wallet.available / rate;
     const isAllow = values => {
       const { formattedValue, value } = values;
       return formattedValue === "" || validateFraction(value, currency);
     };
 
     const setMaxAmount = () => {
-      const wallet = wallets.find(wallet => (wallet.currency = walletFrom));
-      walletApi
-        .v10WalletByCurrencyGet(walletFrom, authService.getAuthArg())
-        .then(wallet => {
-          const availableToWithdraw = wallet.availableCurrency / rate;
-          setFieldValue(
-            "amount",
-            formatCurrencyValue(availableToWithdraw, currency)
-          );
-        });
+      setFieldValue(
+        "amount",
+        formatCurrencyValue(availableToWithdraw, currency)
+      );
+    };
+    const disableButton = () => {
+      return (
+        errors.amount !== undefined ||
+        !isValid ||
+        !dirty ||
+        amount > availableToWithdraw
+      );
     };
     return (
-      <div>
+      <form className="dialog__bottom" id="follow-create-account">
         <div className="dialog__top">
           <div className="dialog-field">
             <GVFormikField
@@ -110,6 +109,15 @@ class FollowCreateAccount extends Component {
                 );
               })}
             </GVFormikField>
+          </div>
+          <div className="dialog-field">
+            <StatisticItem label={"Available to withdraw"}>
+              <NumberFormat
+                value={formatCurrencyValue(availableToWithdraw, currency)}
+                suffix={` ${currency}`}
+                displayType="text"
+              />
+            </StatisticItem>
           </div>
           <div className="dialog-field">
             <InputAmountField
@@ -138,13 +146,13 @@ class FollowCreateAccount extends Component {
               onClick={onClick}
               id="signUpFormSubmit"
               className="invest-form__submit-button"
-              // disabled={disabled}
+              disabled={disableButton()}
             >
               {t("withdraw-program.next")}
             </GVButton>
           </div>
         </div>
-      </div>
+      </form>
     );
   }
 }
@@ -152,7 +160,7 @@ class FollowCreateAccount extends Component {
 export default compose(
   translate(),
   withFormik({
-    displayName: "follow-program",
+    displayName: "follow-create-account",
     mapPropsToValues: props => {
       const { walletsAddresses, currency } = props;
       if (!walletsAddresses === undefined || walletsAddresses.length <= 1)
@@ -163,6 +171,19 @@ export default compose(
       }
       return { walletFrom };
     },
-    handleSubmit: (values, { props }) => props.onSubmit(values)
+    validationSchema: ({ t, info }) =>
+      object().shape({
+        amount: number()
+          .required()
+          .min(
+            0,
+            t("deposit-asset.validation.amount-min-value", {
+              min: 0
+            })
+          )
+      }),
+    handleSubmit: (values, { props }) => {
+      props.onSubmit(values.amount);
+    }
   })
 )(FollowCreateAccount);
