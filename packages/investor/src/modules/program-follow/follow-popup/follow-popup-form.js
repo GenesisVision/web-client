@@ -29,6 +29,7 @@ class FollowForm extends Component {
   };
   render() {
     const {
+      wallets,
       walletsAddresses,
       handleSubmit,
       currency
@@ -52,6 +53,7 @@ class FollowForm extends Component {
       >
         {this.state.step === CREATE_ACCOUNT && (
           <FollowCreateAccount
+            wallets={wallets}
             walletsAddresses={walletsAddresses}
             currency={currency}
             onClick={this.createdCopytradingAccount}

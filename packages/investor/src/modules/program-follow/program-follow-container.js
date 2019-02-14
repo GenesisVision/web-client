@@ -36,6 +36,7 @@ class ProgramFollowContainer extends Component {
 
   render() {
     const {
+      wallets,
       service,
       id,
       onInvest,
@@ -67,7 +68,11 @@ class ProgramFollowContainer extends Component {
     };
     return (
       <Dialog open={open} onClose={handleClose}>
-        <FollowForm walletsAddresses={walletsAddresses} currency={"ETH"} />
+        <FollowForm
+          walletsAddresses={walletsAddresses}
+          currency={"ETH"}
+          wallets={wallets}
+        />
       </Dialog>
     );
   }

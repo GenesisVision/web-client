@@ -50,6 +50,7 @@ class FollowCreateAccount extends Component {
   render() {
     const {
       walletsAddresses,
+      wallets,
       t,
       currency,
       info,
@@ -74,6 +75,7 @@ class FollowCreateAccount extends Component {
     };
 
     const setMaxAmount = () => {
+      const wallet = wallets.find(wallet => (wallet.currency = walletFrom));
       walletApi
         .v10WalletByCurrencyGet(walletFrom, authService.getAuthArg())
         .then(wallet => {
