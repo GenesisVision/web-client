@@ -85,7 +85,7 @@ const ProgramTableRowShort = ({
               </Link>
             </div>
             <div className="programs-table__cell--bottom">
-              <TagProgramContainer tags={TAGS} />
+              <TagProgramContainer tags={tags} />
             </div>
           </div>
         </div>

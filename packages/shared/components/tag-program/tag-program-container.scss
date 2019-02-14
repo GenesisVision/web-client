@@ -4,10 +4,11 @@
 
 .tag-program-container {
   display: flex;
+  align-items: center;
 
   &__other {
+    @include font-size(11px);
     padding: 2px 12px;
-    font-size: 11px;
     cursor: pointer;
   }
 }

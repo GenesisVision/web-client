@@ -12,6 +12,7 @@ import Profitability from "shared/components/profitability/profitability";
 import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
 import GVScroll from "shared/components/scroll/gvscroll";
 import TableRow from "shared/components/table/components/table-row";
+import TagProgramContainer from "shared/components/tag-program/tag-program-container";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { composeManagerDetailsUrl } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
@@ -90,6 +91,7 @@ class ProgramTableRowDetailed extends Component {
                         {program.manager.username}
                       </Link>
                     </div>
+                    <TagProgramContainer tags={program.tags} />
                   </div>
                 </div>
                 <div className="program-detailed__strategy">

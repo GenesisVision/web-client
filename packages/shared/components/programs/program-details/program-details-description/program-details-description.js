@@ -4,7 +4,9 @@ import { GVButton } from "gv-react-components";
 import React, { Fragment, PureComponent } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import connect from "react-redux/es/connect/connect";
 import { Link } from "react-router-dom";
+import { compose } from "redux";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import DetailsFavorite from "shared/components/details/details-description-section/details-description/details-favorite";
 import DetailsNotification from "shared/components/details/details-description-section/details-description/details-notificaton";
@@ -12,15 +14,14 @@ import DetailsInvestment from "shared/components/details/details-description-sec
 import Hint from "shared/components/hint/hint";
 import Popover from "shared/components/popover/popover";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { INVESTOR, STATUS } from "shared/constants/constants";
+import TagProgramItem from "shared/components/tag-program/tag-program-item";
+import { STATUS } from "shared/constants/constants";
 import platformApi from "shared/services/api-client/platform-api";
 import {
   composeManagerDetailsUrl,
   composeProgramNotificationsUrl
 } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
-import { compose } from "redux";
-import connect from "react-redux/es/connect/connect";
 
 class ProgramDetailsDescription extends PureComponent {
   state = {
@@ -235,7 +236,11 @@ class ProgramDetailsDescription extends PureComponent {
               {programDescription.manager.username}
             </GVButton>
           </Link>
-
+          <div className="details-description__tag">
+            {programDescription.tags.map((tag, idx) => (
+              <TagProgramItem name={tag.name} color={tag.color} key={idx} />
+            ))}
+          </div>
           <div className="details-description__info">
             <h4 className="details-description__subheading">
               {t("program-details-page.description.strategy")}
