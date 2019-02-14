@@ -1,25 +1,11 @@
-import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import DepositPopup from "shared/components/deposit/deposit-popup";
 import Dialog from "shared/components/dialog/dialog";
 import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
 
-import FollowPopup from "./follow-popup/follow-popup";
-import FollowCreateAccount from "./follow-popup/follow-popup-create-account";
 import FollowForm from "./follow-popup/follow-popup-form";
 import FollowTop from "./follow-popup/follow-popup-top";
-
-/*import {
-  clearDepositProgramInfo,
-  clearInvestSubmit
-} from "./actions/program-deposit.actions";
-import {
-  getDepositProgramInfoById,
-  investServiceInvestById
-} from "./services/program-deposit.services";*/
 
 class ProgramFollowContainer extends Component {
   state = {
@@ -37,36 +23,11 @@ class ProgramFollowContainer extends Component {
   }
 
   render() {
-    const {
-      wallets,
-      service,
-      id,
-      onInvest,
-      open,
-      submitInfo,
-      currency,
-      info,
-      onClose
-    } = this.props;
+    const { wallets, open, onClose } = this.props;
     const { isPending, walletsAddresses } = this.state;
     if (!walletsAddresses || isPending) return null;
     const handleClose = () => {
       onClose();
-      /* service.clearDepositProgramInfo();
-       service.clearInvestSubmit();*/
-    };
-    const handleFollow = amount => {
-      /*service
-      .investServiceInvestById({
-        id,
-        amount
-      })
-      .then(() => {
-        handleClose();
-        if (onInvest) {
-          onInvest();
-        }
-      });*/
     };
     return (
       <Dialog open={open} onClose={handleClose}>
@@ -82,19 +43,7 @@ class ProgramFollowContainer extends Component {
   }
 }
 
-ProgramFollowContainer.propTypes = {
-  /*open: PropTypes.bool,
-  id: PropTypes.string.isRequired,
-  currency: PropTypes.string,
-  onClose: PropTypes.func,
-  onInvest: PropTypes.func,
-  service: PropTypes.shape({
-    getDepositProgramInfoById: PropTypes.func,
-    clearDepositProgramInfo: PropTypes.func,
-    investServiceInvestById: PropTypes.func,
-    clearInvestSubmit: PropTypes.func
-  })*/
-};
+ProgramFollowContainer.propTypes = {};
 
 const mapStateToProps = state => {
   const { programDeposit, wallet } = state;
@@ -104,20 +53,5 @@ const mapStateToProps = state => {
     submitInfo: programDeposit.submit
   };
 };
-/*
-const mapDispatchToProps = dispatch => ({
-  service: bindActionCreators(
-    {
-      getDepositProgramInfoById,
-      clearDepositProgramInfo,
-      investServiceInvestById,
-      clearInvestSubmit
-    },
-    dispatch
-  )
-});*/
 
-export default connect(
-  mapStateToProps
-  // mapDispatchToProps
-)(ProgramFollowContainer);
+export default connect(mapStateToProps)(ProgramFollowContainer);
