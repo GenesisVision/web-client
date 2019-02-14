@@ -3,17 +3,21 @@ import React, { Component } from "react";
 import { TranslationFunction, translate } from "react-i18next";
 import Surface from "shared/components/surface/surface";
 
+import {
+  IDashboardTradesCounts,
+  fetchTradesCount
+} from "../../services/dashboard.service";
+
 enum TRADES_TABS {
   OPEN_TRADES = "OPEN_TRADES",
   HISTORY = "HISTORY"
 }
 
 interface IDashboardTradesProps {
-  title: any;
   t: TranslationFunction;
 }
 
-interface IDashboardTradesState {
+interface IDashboardTradesState extends IDashboardTradesCounts {
   tab: TRADES_TABS;
 }
 
@@ -23,15 +27,14 @@ class DashboardTrades extends Component<
 > {
   state = {
     tab: TRADES_TABS.OPEN_TRADES,
-    programsCount: undefined,
-    fundsCount: undefined
+    openTradesCount: undefined,
+    historyCount: undefined
   };
 
   componentDidMount() {
-    // const { fetchAssetsCount } = this.props;
-    // fetchAssetsCount().then(data => {
-    //   this.setState({ ...data });
-    // });
+    fetchTradesCount().then(data => {
+      this.setState({ ...data });
+    });
   }
 
   handleTabChange = (e: any, tab: string) => {
@@ -39,7 +42,7 @@ class DashboardTrades extends Component<
   };
 
   render() {
-    const { tab, programsCount, fundsCount } = this.state;
+    const { tab, openTradesCount, historyCount } = this.state;
     const { t } = this.props;
     return (
       <Surface className="">
@@ -50,12 +53,12 @@ class DashboardTrades extends Component<
               <GVTab
                 value={TRADES_TABS.OPEN_TRADES}
                 label={t("investor.dashboard-page.trades.open-trades")}
-                count={programsCount}
+                count={openTradesCount}
               />
               <GVTab
                 value={TRADES_TABS.HISTORY}
                 label={t("investor.dashboard-page.trades.history")}
-                count={fundsCount}
+                count={historyCount}
               />
             </GVTabs>
           </div>

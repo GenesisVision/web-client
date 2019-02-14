@@ -29,7 +29,7 @@ const DashboardPage = ({ t }) => {
           <DashboardAssetsContainer title={title} />
         </div> */}
           <div className="dashboard__table-section">
-            <DashboardTrades title={title} />
+            <DashboardTrades />
           </div>
         </div>
       </div>
