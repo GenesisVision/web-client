@@ -117,7 +117,6 @@ class ProgramDetailsPage extends PureComponent {
                 isAuthenticated={isAuthenticated}
                 redirectToLogin={service.redirectToLogin}
                 onChangeInvestmentStatus={this.changeInvestmentStatus}
-                role={INVESTOR}
               />
             </div>
             <div className="details__section">

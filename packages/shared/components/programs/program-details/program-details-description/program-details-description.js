@@ -19,6 +19,8 @@ import {
   composeProgramNotificationsUrl
 } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
+import { compose } from "redux";
+import connect from "react-redux/es/connect/connect";
 
 class ProgramDetailsDescription extends PureComponent {
   state = {
@@ -89,6 +91,7 @@ class ProgramDetailsDescription extends PureComponent {
   }
   render() {
     const {
+      role,
       isOpenInvestmentPopup,
       isOpenCloseProgramPopup,
       isOpenEditProgramPopup,
@@ -99,7 +102,6 @@ class ProgramDetailsDescription extends PureComponent {
     } = this.state;
     const {
       t,
-      role,
       status,
       isFavorite,
       canCloseProgram,
@@ -419,4 +421,17 @@ class ProgramDetailsDescription extends PureComponent {
   }
 }
 
-export default translate()(ProgramDetailsDescription);
+const mapStateToProps = state => {
+  const { accountSettings, authData, profileHeader } = state;
+  return {
+    role: (profileHeader.info.data && profileHeader.info.data.role) || null,
+    currency: accountSettings.currency,
+    isAuthenticated: authData.isAuthenticated
+  };
+};
+export default compose(
+  translate(),
+  connect(mapStateToProps)
+)(ProgramDetailsDescription);
+
+// export default translate()(ProgramDetailsDescription);
