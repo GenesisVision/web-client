@@ -18,71 +18,9 @@ import {
 import { number, object } from "yup";
 
 class FollowForm extends Component {
-  composeEntryFee = fee => {
-    const { entryFee } = this.props;
-    return entryFee ? fee : 0;
-  };
-
-  entryFee = amount => {
-    const { info } = this.props;
-    return this.composeEntryFee(
-      calculateValueOfEntryFee(amount, info.entryFee)
-    );
-  };
-
-  gvFee = amount => {
-    const { info } = this.props;
-    return calculateValueOfEntryFee(amount, info.gvCommission);
-  };
-
-  investAmount = amount => {
-    return (amount || 0) - this.gvFee(amount) - this.entryFee(amount);
-  };
-
-  isAllow = values => {
-    const { investor, info } = this.props;
-    const { floatValue, formattedValue, value } = values;
-    const { availableToInvest, availableInWallet } = info;
-
-    const isValidateFraction = validateFraction(value, "GVT");
-
-    const isAvailableInWallet =
-      availableInWallet >= this.investAmount(floatValue);
-
-    const isAvailableToInvest =
-      !investor ||
-      availableToInvest === undefined ||
-      floatValue <= parseFloat(availableToInvest);
-
-    return (
-      formattedValue === "" ||
-      (isValidateFraction && isAvailableInWallet && isAvailableToInvest)
-    );
-  };
-
-  setMaxAmount = () => {
-    const { setFieldValue, info } = this.props;
-    const { availableToInvest, availableInWallet } = info;
-    const maxFromWallet = availableInWallet;
-
-    let maxAvailable = Number.MAX_SAFE_INTEGER;
-    if (availableToInvest !== undefined)
-      maxAvailable =
-        (availableToInvest /
-          (100 - info.gvCommission - this.composeEntryFee(info.entryFee))) *
-        100;
-
-    const maxInvest = formatCurrencyValue(
-      Math.min(maxFromWallet, maxAvailable),
-      "GVT"
-    );
-
-    setFieldValue("amount", maxInvest);
-  };
-
   render() {
     const {
-      t,
+      /*t,
       program,
       entryFee,
       values,
@@ -92,100 +30,10 @@ class FollowForm extends Component {
       isValid,
       dirty,
       handleSubmit,
-      errorMessage
+      errorMessage*/
     } = this.props;
 
-    return (
-      <form className="follow__bottom" id="invest-form" onSubmit={handleSubmit}>
-        <InputAmountField
-          name="amount"
-          label={
-            program ? t("deposit-asset.amount") : t("deposit-asset.amount")
-          }
-          currency={"GVT"}
-          isAllow={this.isAllow}
-          setMax={this.setMaxAmount}
-        />
-
-        <div className="follow-popup__currency">
-          <NumberFormat
-            value={formatCurrencyValue(
-              convertFromCurrency(values.amount, info.rate),
-              currency
-            )}
-            prefix="= "
-            suffix={` ${currency}`}
-            displayType="text"
-          />
-        </div>
-        <ul className="dialog-form">
-          {entryFee && (
-            <li className="dialog-form__item">
-              <span className="dialog-form__title">
-                {program
-                  ? t("deposit-asset.entry-fee")
-                  : t("deposit-asset.entry-fee")}
-              </span>
-              <span className="dialog-form__value">
-                {info.entryFee} %{" "}
-                <NumberFormat
-                  value={formatValue(this.entryFee(values.amount))}
-                  prefix=" ("
-                  suffix={" GVT)"}
-                  displayType="text"
-                />
-              </span>
-            </li>
-          )}
-          <li className="dialog-form__item">
-            <span className="dialog-form__title">
-              {program
-                ? t("deposit-asset.gv-commission")
-                : t("deposit-asset.gv-commission")}
-            </span>
-            <span className="dialog-form__value">
-              {info.gvCommission} %
-              <NumberFormat
-                value={formatCurrencyValue(this.gvFee(values.amount), "GVT")}
-                prefix={" ("}
-                suffix={" GVT)"}
-                displayType="text"
-              />
-            </span>
-          </li>
-          <li className="dialog-form__item">
-            <span className="dialog-form__title">
-              {program
-                ? t("deposit-asset.investment-amount")
-                : t("deposit-asset.investment-amount")}
-            </span>
-            <span className="dialog-form__value">
-              <NumberFormat
-                value={formatCurrencyValue(
-                  this.investAmount(values.amount),
-                  "GVT"
-                )}
-                suffix={" GVT"}
-                displayType="text"
-              />
-            </span>
-          </li>
-        </ul>
-        <div className="form-error">
-          <FormError error={errorMessage} />
-        </div>
-        <div className="follow__buttons">
-          <GVButton
-            type="submit"
-            id="signUpFormSubmit"
-            className="invest-form__submit-button"
-            disabled={disabled || !isValid || !dirty}
-          >
-            {program ? t("deposit-asset.confirm") : t("deposit-asset.confirm")}
-          </GVButton>
-        </div>
-      </form>
-    );
+    return <div>form</div>;
   }
 }
 

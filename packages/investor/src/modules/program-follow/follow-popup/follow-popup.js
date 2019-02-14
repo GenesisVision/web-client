@@ -8,8 +8,8 @@ import FollowTop from "./follow-popup-top";
 
 class FollowPopup extends Component {
   componentDidMount() {
-    const { id, fetchInfo, currency } = this.props;
-    fetchInfo(id, currency);
+    /*const { id, fetchInfo, currency } = this.props;
+    fetchInfo(id, currency);*/
   }
 
   render() {
@@ -23,31 +23,32 @@ class FollowPopup extends Component {
       program,
       investor
     } = this.props;
-    return info ? (
+    return (
       <Fragment>
         <FollowTop
-          info={info}
-          type={type}
-          program={program}
-          investor={investor}
+          program
+          /*info={info}
+        type={type}
+        program={program}
+        investor={investor}*/
         />
         <FollowForm
-          entryFee={entryFee}
-          program={program}
-          investor={investor}
-          errorMessage={submitInfo.errorMessage}
-          currency={currency}
-          info={info}
-          disabled={submitInfo.isPending}
-          onSubmit={invest}
+        /*entryFee={entryFee}
+        program={program}
+        investor={investor}
+        errorMessage={submitInfo.errorMessage}
+        currency={currency}
+        info={info}
+        disabled={submitInfo.isPending}
+        onSubmit={invest}*/
         />
       </Fragment>
-    ) : null;
+    );
   }
 }
 
 FollowPopup.propTypes = {
-  fetchInfo: PropTypes.func,
+  /*fetchInfo: PropTypes.func,
   invest: PropTypes.func,
   currency: PropTypes.string,
   info: PropTypes.shape({
@@ -57,7 +58,7 @@ FollowPopup.propTypes = {
     periodEnds: PropTypes.instanceOf(Date),
     rate: PropTypes.number,
     title: PropTypes.string
-  })
+  })*/
 };
 
 export default FollowPopup;

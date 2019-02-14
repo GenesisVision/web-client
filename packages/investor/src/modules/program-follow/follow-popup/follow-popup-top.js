@@ -8,7 +8,7 @@ const FollowTop = ({ info, t, program, investor }) => {
     <div className="follow__top">
       <div className="follow__header">
         <h2>{program ? t("deposit-asset.title") : t("deposit-asset.title")}</h2>
-        <p>{info.title}</p>
+        <p>Title</p>
       </div>
       <div className="dialog-field">
         {program && investor && (
@@ -16,7 +16,7 @@ const FollowTop = ({ info, t, program, investor }) => {
             label={t("deposit-asset.program.available-to-invest")}
             big
           >
-            {formatCurrencyValue(info.availableToInvest, "GVT")} GVT
+            {/*{formatCurrencyValue(info.availableToInvest, "GVT")} GVT*/}
           </StatisticItem>
         )}
         <StatisticItem
@@ -27,7 +27,8 @@ const FollowTop = ({ info, t, program, investor }) => {
           }
           big
         >
-          {formatCurrencyValue(info.availableInWallet, "GVT")} GVT
+          Any
+          {/*{formatCurrencyValue(info.availableInWallet, "GVT")} GVT*/}
         </StatisticItem>
       </div>
     </div>
