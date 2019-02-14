@@ -24,6 +24,10 @@
       stroke: $primary-color;
     }
   }
+
+  &--tags {
+    cursor: default;
+  }
 }
 
 .gv-hangle__text {

@@ -1,5 +1,6 @@
 import "./tag-filter.scss";
 
+import { ProgramTag } from "gv-api-web";
 import * as React from "react";
 import { Fragment } from "react";
 import Popover from "shared/components/popover/popover";
@@ -7,7 +8,6 @@ import TagProgramItem from "shared/components/tag-program/tag-program-item";
 
 import TagFilterButton from "./tag-filter-button";
 import TagFilterPopover from "./tag-filter-popover";
-import { ProgramTag } from "gv-api-web";
 import { TAG_NAME_TYPE } from "./tag-filter.constants";
 
 interface ITagFilterState {
@@ -61,7 +61,7 @@ class TagFilter extends React.Component<ITagFilterProps, ITagFilterState> {
     const { anchor } = this.state;
     return (
       <Fragment>
-        <div className="filter">
+        <div className="filter filter--tags">
           <div className="filter__value">
             {this.filterChoosed(values).map(tag => (
               <TagProgramItem
