@@ -41,11 +41,10 @@ import authReducer from "shared/reducers/auth-reducer";
 import emailPendingReducer from "shared/reducers/email-pending-reducer";
 import platformReducer from "shared/reducers/platform-reducer";
 import uiReducer from "shared/reducers/ui-reducer";
-import { DeepReadonly } from "utility-types";
 
 import RootState from "../../../shared/reducers/root-reducer";
 
-type State = DeepReadonly<{
+type State = Readonly<{
   profileHeader: HeaderState;
   programDeposit: ProgramsDepositState;
   fundDeposit: FundDepositState;

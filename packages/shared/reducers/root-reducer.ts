@@ -1,3 +1,5 @@
+import { RouterState } from "react-router-redux";
+import { Reducer } from "redux";
 import { ProgramsRatingState } from "shared/components/programs-rating/reducers/programs-rating.reducers";
 import { WalletState } from "shared/components/wallet/reducers/wallet.reducers";
 import { AlertMessagesState } from "shared/modules/alert-message/reducers/alert-message-reducers";
@@ -11,11 +13,8 @@ import { AuthState } from "shared/reducers/auth-reducer";
 import { EmailPendingState } from "shared/reducers/email-pending-reducer";
 import { PlatformState } from "shared/reducers/platform-reducer";
 import { IUiState } from "shared/reducers/ui-reducer";
-import { Reducer } from "redux";
-import { RouterState } from "react-router-redux";
-import { DeepReadonly } from "utility-types";
 
-type RootState = DeepReadonly<{
+type RootState = Readonly<{
   notificationSettings: NotificationSettingsState;
   loadingBar: Reducer<any>;
   platformData: PlatformState;
