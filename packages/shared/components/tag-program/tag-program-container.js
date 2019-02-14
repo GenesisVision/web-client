@@ -13,7 +13,7 @@ class TagProgramContainer extends Component {
   render() {
     const { tags } = this.props;
     const length = tags.length;
-    const reminder = length > MAX_VISIBLE_TAGS ? length - 1 : 0;
+    const reminder = length > MAX_VISIBLE_TAGS ? length - 1 : null;
     return (
       <div className="tag-program-container">
         {tags.map(
@@ -26,7 +26,7 @@ class TagProgramContainer extends Component {
           <Tooltip render={() => <TagProgramTooltip tags={tags} />}>
             <div>
               <Profitability
-                className="tag-program-container__other"
+                className="tag-button"
                 value={reminder}
                 variant="chips"
               >
