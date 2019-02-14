@@ -13,17 +13,17 @@ enum TRADES_TABS {
   HISTORY = "HISTORY"
 }
 
-interface IDashboardTradesProps {
+interface IDashboardTradesSectionProps {
   t: TranslationFunction;
 }
 
-interface IDashboardTradesState extends IDashboardTradesCounts {
+interface IDashboardTradesSectionState extends IDashboardTradesCounts {
   tab: TRADES_TABS;
 }
 
-class DashboardTrades extends Component<
-  IDashboardTradesProps,
-  IDashboardTradesState
+class DashboardTradesSection extends Component<
+  IDashboardTradesSectionProps,
+  IDashboardTradesSectionState
 > {
   state = {
     tab: TRADES_TABS.OPEN_TRADES,
@@ -72,4 +72,4 @@ class DashboardTrades extends Component<
   }
 }
 
-export default translate()(DashboardTrades);
+export default translate()(DashboardTradesSection);

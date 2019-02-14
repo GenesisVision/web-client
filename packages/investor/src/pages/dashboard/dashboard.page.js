@@ -8,7 +8,7 @@ import Surface from "shared/components/surface/surface";
 import DashboardAssetsContainer from "./components/dashboard-assets/dashboard-assets-container";
 import DashboardChartSection from "./components/dashboard-portfolio-chart-section/dashboard-portfolio-chart-section";
 import DashboardPortfolioEventsSection from "./components/dashboard-portfolio-events/dashboard-portfolio-events-section";
-import DashboardTrades from "./components/dashboard-trades/dashboard-trades-container";
+import DashboardTradesSection from "./components/dashboard-trades/dashboard-trades-section";
 
 const DashboardPage = ({ t }) => {
   const title = t(`${process.env.REACT_APP_PLATFORM}.dashboard-page.title`);
@@ -29,7 +29,7 @@ const DashboardPage = ({ t }) => {
           <DashboardAssetsContainer title={title} />
         </div> */}
           <div className="dashboard__table-section">
-            <DashboardTrades />
+            <DashboardTradesSection />
           </div>
         </div>
       </div>
