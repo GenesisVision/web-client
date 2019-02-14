@@ -101,7 +101,7 @@
   &__center {
     display: flex;
     flex-wrap: wrap;
-    margin: 0 -$padding-xxsmall/2;
+    margin: 0 (-$padding-xxsmall/2);
 
     @include media-breakpoint-tablet() {
       flex-wrap: nowrap;
@@ -146,23 +146,22 @@
   }
 
   &__button-container {
-    @include adaptive-padding(bottom, $padding-xsmall);
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 (-$padding-small-mobile/2);
 
     .gv-btn {
-      margin-top: $padding-small-mobile;
+      @include adaptive-margin(top, $padding-small);
+      margin-right: $padding-small-mobile/2;
+      margin-left: $padding-small-mobile/2;
     }
 
-    .gv-btn:not(:last-child) {
-      margin-right: $padding-small-mobile;
-    }
+    @include media-breakpoint-tablet() {
+      margin: 0 (-$padding-small/2);
 
-    @include media-breakpoint-landscape-phone() {
       .gv-btn {
-        margin-top: $padding-small;
-      }
-
-      .gv-btn:not(:last-child) {
-        margin-right: $padding-small;
+        margin-right: $padding-small/2;
+        margin-left: $padding-small/2;
       }
     }
   }

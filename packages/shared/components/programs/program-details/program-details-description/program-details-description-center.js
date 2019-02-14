@@ -212,7 +212,7 @@ class ProgramDetailsDescriptionCenter extends React.Component {
               />
             </StatisticItem>
             <StatisticItem
-              label="Subscription fee"
+              label={t("program-details-page.description.subscriptionFee")}
               className="program-details-description__short-statistic-item"
               accent
             >
@@ -229,20 +229,8 @@ class ProgramDetailsDescriptionCenter extends React.Component {
                   !programDescription.personalProgramDetails.canInvest
                 }
               >
-                Follow trades
-                {/*{t("program-details-page.description.invest")}*/}
+                {t("program-details-page.description.follow-trade")}
               </GVButton>
-              {/*{AssetEditContainer && (*/}
-              {/*<GVButton*/}
-              {/*className="program-details-description__invest-btn"*/}
-              {/*color="secondary"*/}
-              {/*variant="outlined"*/}
-              {/*onClick={this.handleOpenEditProgramPopup}*/}
-              {/*disabled={!canCloseProgram}*/}
-              {/*>*/}
-              {/*{t("program-details-page.description.edit-program")}*/}
-              {/*</GVButton>*/}
-              {/*)}*/}
             </div>
           )}
         </div>
