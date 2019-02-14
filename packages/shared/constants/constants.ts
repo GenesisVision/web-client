@@ -1,5 +1,5 @@
-export const MANAGER = "MANAGER";
-export const INVESTOR = "INVESTOR";
+export const MANAGER = "Manager";
+export const INVESTOR = "Investor";
 export const PROGRAM = "PROGRAM";
 export const FUND = "FUND";
 export const STATUS = {
