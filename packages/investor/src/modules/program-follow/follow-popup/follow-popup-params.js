@@ -45,9 +45,15 @@ class FollowParams extends Component {
       dirty,
       values
     } = this.props;
-    const { tolerancePercent } = values;
-    const setMaxAmount = () => {
-      setFieldValue("tolerancePercent", 100);
+    const { tolerancePercent, type } = values;
+    const setMaxTolerancePercent = () => {
+      setFieldValue("tolerancePercent", "100");
+    };
+    const setMaxVolumePercent = () => {
+      setFieldValue("volumePercent", "100");
+    };
+    const setMaxAmountUSDEquivalent = () => {
+      setFieldValue("tolerancePercent", "100");
     };
     const isAllow = values => {
       const { tolerancePercent } = values;
@@ -62,43 +68,63 @@ class FollowParams extends Component {
     };
     return (
       <form className="dialog__bottom" id="follow-params" onSubmit={() => {}}>
-        <div className="dialog__top">
-          <div className="dialog-field">
-            <GVFormikField
-              name="type"
-              component={GVTextField}
-              label={"Type"}
-              InputComponent={Select}
-              // onChange={this.onChangeCurrencyFrom}
-            >
-              {Object.keys(types).map(type => {
-                return (
-                  <option value={types[type].value} key={types[type].value}>
-                    {types[type].label}
-                  </option>
-                );
-              })}
-            </GVFormikField>
-          </div>
+        <div className="dialog-field">
+          <GVFormikField
+            name="type"
+            component={GVTextField}
+            label={"Type"}
+            InputComponent={Select}
+            // onChange={this.onChangeCurrencyFrom}
+          >
+            {Object.keys(types).map(type => {
+              return (
+                <option value={types[type].value} key={types[type].value}>
+                  {types[type].label}
+                </option>
+              );
+            })}
+          </GVFormikField>
+        </div>
+        <div className="dialog-field">
+          <InputAmountField
+            name="tolerancePercent"
+            label={"Tolerance percent"}
+            currency={"%"}
+            // isAllow={isAllow}
+            setMax={setMaxTolerancePercent}
+          />
+        </div>
+        {type === types.percentage.value && (
           <div className="dialog-field">
             <InputAmountField
-              name="tolerancePercent"
-              label={"Tolerance percent"}
+              name="volumePercent"
+              label={"Volume percent"}
               currency={"%"}
               // isAllow={isAllow}
-              setMax={setMaxAmount}
+              setMax={setMaxVolumePercent}
             />
           </div>
-          <div className="dialog__buttons">
-            <GVButton
-              onClick={onClick}
-              id="signUpFormSubmit"
-              className="invest-form__submit-button"
-              disabled={disableButton()}
-            >
-              {"Submit"}
-            </GVButton>
+        )}
+        {type === types.fixed.value && (
+          <div className="dialog-field">
+            <InputAmountField
+              name="USDEquivalent"
+              label={"USD equivalent"}
+              currency={"%"}
+              // isAllow={isAllow}
+              setMax={setMaxAmountUSDEquivalent}
+            />
           </div>
+        )}
+        <div className="dialog__buttons">
+          <GVButton
+            onClick={onClick}
+            id="signUpFormSubmit"
+            className="invest-form__submit-button"
+            disabled={disableButton()}
+          >
+            {"Submit"}
+          </GVButton>
         </div>
       </form>
     );
@@ -114,6 +140,15 @@ export default compose(
     },
     validationSchema: ({ t, info }) =>
       object().shape({
+        USDEquivalent: number(),
+        volumePercent: number()
+          .max(100)
+          .min(
+            0,
+            t("deposit-asset.validation.amount-min-value", {
+              min: 0
+            })
+          ),
         tolerancePercent: number()
           .required()
           .max(100)
