@@ -20,8 +20,7 @@ import DetailsNotification from "../../../details/details-description-section/de
 class ProgramDetailsDescriptionTop extends React.Component {
   state = {
     isOpenAboutLevels: false,
-    anchor: null,
-    investmentsLimits: {}
+    anchor: null
   };
   handleOpenAboutLevels = () => {
     this.setState({ isOpenAboutLevels: true });
@@ -31,34 +30,34 @@ class ProgramDetailsDescriptionTop extends React.Component {
   handleOpenDropdown = event => this.setState({ anchor: event.currentTarget });
   handleCloseDropdown = () => this.setState({ anchor: null });
   getCurrentLimit(currentLevel) {
-    return this.state.investmentsLimits.find(
+    return this.props.investmentsLimits.find(
       LevelInfo => LevelInfo.level === currentLevel
     ).investmentLimit;
   }
 
   render() {
-    const { anchor, isOpenAboutLevels, investmentsLimits } = this.state;
+    const { anchor, isOpenAboutLevels } = this.state;
     const {
       t,
       programDescription,
       AboutLevelsContainerComponent,
       isFavorite,
       onFavoriteClick,
-      hasNotifications
+      hasNotifications,
+      investmentsLimits
     } = this.props;
+
     return (
       <div className="program-details-description__top">
-        <div className="program-details-description__top-col">
-          <div className="program-details-description__avatar">
-            <AssetAvatar
-              url={programDescription.logo}
-              level={programDescription.level}
-              alt={programDescription.title}
-              size="big"
-              color={programDescription.color}
-              onClickLevel={this.handleOpenDropdown}
-            />
-          </div>
+        <div className="program-details-description__avatar">
+          <AssetAvatar
+            url={programDescription.logo}
+            level={programDescription.level}
+            alt={programDescription.title}
+            size="big"
+            color={programDescription.color}
+            onClickLevel={this.handleOpenDropdown}
+          />
           <Popover
             horizontal="left"
             vertical="bottom"
@@ -114,9 +113,10 @@ class ProgramDetailsDescriptionTop extends React.Component {
             onClose={this.handleCloseAboutLevels}
           />
         </div>
-        <div className="program-details-description__top-col">
+        <div className="program-details-description__info">
           <h1 className="title-small-padding">{programDescription.title}</h1>
           <Link
+            className="program-details-description__manager-link"
             to={{
               pathname: composeManagerDetailsUrl(
                 programDescription.manager.url
@@ -131,16 +131,14 @@ class ProgramDetailsDescriptionTop extends React.Component {
               {programDescription.manager.username}
             </GVButton>
           </Link>
-          <div className="program-details-description__info">
-            <h4 className="program-details-description__subheading">
-              {t("program-details-page.description.strategy")}
-            </h4>
-            <div className="program-details-description__text">
-              {programDescription.description}
-            </div>
+          <h4 className="program-details-description__subheading">
+            {t("program-details-page.description.strategy")}
+          </h4>
+          <div className="program-details-description__text">
+            {programDescription.description}
           </div>
         </div>
-        <div className="program-details-description__top-col">
+        <div className="program-details-description__settings">
           <DetailsFavorite
             id={programDescription.id}
             isFavorite={isFavorite}

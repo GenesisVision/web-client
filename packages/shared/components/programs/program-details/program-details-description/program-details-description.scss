@@ -3,53 +3,29 @@
 @import "~shared/styles/_sizes.scss";
 
 .program-details-description {
-  display: flex;
-  flex-wrap: wrap;
   padding: 0 $padding-xsmall;
 
   @include media-breakpoint-tablet() {
-    grid-template-columns: auto 1fr auto;
-    grid-template-rows: auto auto;
-    grid-template-areas: "logo main links" ". details details";
-    grid-column-gap: 50px;
     padding: 0;
   }
 
   &__top {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    @include media-breakpoint-tablet() {
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+    }
   }
 
   &__your-investment {
     max-width: 750px;
   }
 
-  & .fund-asset {
-    background: rgba(216, 216, 216, 0.05);
-    height: 50px / $divider-title;
-    padding: 15px / $divider-padding;
-    justify-content: space-between;
-    &__container {
-      &--others-count {
-        cursor: pointer;
-      }
-    }
-    &--others-count {
-      min-width: auto;
-      background: rgba(216, 216, 216, 0.1);
-    }
-    @include media-breakpoint-landscape-phone() {
-      height: 50px;
-      padding: 15px;
-      min-width: 240px;
-      &--others-count {
-        min-width: auto;
-      }
-    }
-  }
-
   &__avatar {
     cursor: pointer;
-    width: 100%;
     padding: $padding-xsmall-mobile 0 $padding-xsmall;
     .program-avatar {
       justify-content: flex-start;
@@ -73,21 +49,28 @@
     }
   }
 
-  &__left {
-    grid-area: logo;
+  &__info {
+    order: 99;
+    width: 100%;
+
+    @include media-breakpoint-tablet() {
+      order: 0;
+      width: auto;
+      margin-left: 50px;
+    }
   }
 
   &__bottom {
-    grid-area: details;
+    @include media-breakpoint-tablet() {
+      margin-left: $avatar-size;
+    }
   }
 
-  &__right {
-    grid-area: links;
-    display: flex;
-    flex-direction: column;
+  &__settings {
     padding: $padding-xsmall-mobile 0 $padding-xsmall;
 
     @include media-breakpoint-tablet() {
+      margin-left: auto;
       padding: 0;
     }
 
@@ -103,10 +86,6 @@
     opacity: 0.3;
   }
 
-  &__main {
-    grid-area: main;
-  }
-
   &__author-btn {
     padding: 0;
     font-size: $font-size-common;
@@ -114,36 +93,48 @@
     font-weight: bold;
   }
 
-  &__info {
-    padding-top: $padding-xxlarge-mobile;
-    @include media-breakpoint-tablet() {
-      padding-top: $padding-xxlarge;
-    }
+  &__manager-link {
+    @include adaptive-padding(bottom, $padding-xxlarge);
+    display: block;
   }
 
-  &__row {
+  &__center {
     display: flex;
     flex-wrap: wrap;
+    margin: 0 -$padding-xxsmall/2;
 
     @include media-breakpoint-tablet() {
       flex-wrap: nowrap;
+      margin-left: $avatar-size;
+      margin-right: 0;
     }
   }
 
   &__col {
     @include vertical-paddings($padding-small);
     @include horizontal-paddings($padding-small);
-    @include adaptive-margin(right, $padding-small);
     @include adaptive-margin(bottom, $padding-small);
     border: 1px solid rgba($main-color, 0.06);
     border-radius: 8px;
+    margin-left: $padding-xxsmall/2;
+    margin-right: $padding-xxsmall/2;
+    flex-grow: 1;
 
-    &:last-child {
-      margin-right: 0;
+    @include media-breakpoint-landscape-phone() {
+      width: auto;
+
+      &--small-size {
+        min-width: 30%;
+      }
     }
 
-    &--small-size {
-      min-width: 30%;
+    @include media-breakpoint-tablet() {
+      margin-right: $padding-small;
+      margin-left: 0;
+
+      &:last-child {
+        margin-right: 0;
+      }
     }
   }
 
@@ -153,7 +144,7 @@
     justify-content: space-between;
   }
 
-  &__invest-button-container {
+  &__button-container {
     @include adaptive-padding(bottom, $padding-xsmall);
 
     .gv-btn {
