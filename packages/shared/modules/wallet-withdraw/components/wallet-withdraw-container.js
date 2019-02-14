@@ -43,15 +43,15 @@ class WalletWithdrawContainer extends Component {
   render() {
     if (!this.state.data) return null;
     const { isPending, data, errorMessage, success } = this.state;
-    const { wallets, availableToWithdrawal } = data;
-    const { twoFactorEnabled } = this.props;
+    const { wallets } = data;
+    const { twoFactorEnabled, currentWallet } = this.props;
 
     return success ? (
       <WalletWithdrawRequest />
     ) : (
       <WalletWithdrawForm
-        availableToWithdrawal={availableToWithdrawal}
         wallets={wallets}
+        currentWallet={currentWallet}
         disabled={isPending}
         errorMessage={errorMessage}
         onSubmit={this.handleSubmit}

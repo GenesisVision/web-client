@@ -1,0 +1,58 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
+
+.wallet-list {
+  &__cell {
+    @include adaptive-padding(right, $padding-xsmall, 2);
+    color: $text-light-color;
+
+    &--buttons {
+      .chip {
+        @include adaptive-margin(left, $padding-xsmall);
+        width: 32px;
+        height: 32px;
+      }
+    }
+  }
+
+  &__button-add-funds {
+    font-size: 18px;
+  }
+
+  & .table__cell:last-child {
+    text-align: right;
+  }
+
+  &__link {
+    color: $main-color;
+  }
+
+  &__icon {
+    @include adaptive-margin(right, $padding-xsmall);
+    display: inline-block;
+    vertical-align: middle;
+    width: 24px;
+    height: 24px;
+  }
+
+  &__button-transfer {
+    img {
+      max-height: 13px;
+    }
+  }
+
+  @include media-breakpoint-landscape-phone() {
+    &__cell {
+      &--wallet {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+
+      &--buttons {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+    }
+  }
+}

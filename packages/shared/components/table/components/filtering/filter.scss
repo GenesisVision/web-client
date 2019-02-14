@@ -19,7 +19,7 @@
   }
 
   &__arrow {
-    stroke: #d8d8d8;
+    stroke: $icon-color;
     &__is-open {
       stroke: $primary-color;
     }

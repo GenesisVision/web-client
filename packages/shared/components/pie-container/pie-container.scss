@@ -9,7 +9,6 @@
 
   &__text {
     white-space: nowrap;
-    //min-width: 95px;
     padding-left: 0.5rem;
   }
 }
@@ -17,6 +16,7 @@
   position: relative;
   width: 43px;
   height: 43px;
+  flex-shrink: 0;
   &__value-container {
     font-size: $font-size-small;
   }
