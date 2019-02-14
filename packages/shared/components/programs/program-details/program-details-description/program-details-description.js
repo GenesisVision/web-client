@@ -409,7 +409,7 @@ class ProgramDetailsDescription extends PureComponent {
                   {ProgramFollowContainer && (
                     <ProgramFollowContainer
                       open={isOpenFollowPopup}
-                      // info={composeEditInfo}
+                      currency={programDescription.currency}
                       onClose={this.handleCloseFollowPopup}
                       onApply={this.handleApplyFollowPopup(updateDetails)}
                     />

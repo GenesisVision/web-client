@@ -23,7 +23,7 @@ class ProgramFollowContainer extends Component {
   }
 
   render() {
-    const { wallets, open, onClose } = this.props;
+    const { wallets, open, onClose, currency } = this.props;
     const { isPending, walletsAddresses } = this.state;
     if (!walletsAddresses || isPending) return null;
     const handleClose = () => {
@@ -34,7 +34,7 @@ class ProgramFollowContainer extends Component {
         <FollowTop />
         <FollowForm
           walletsAddresses={walletsAddresses}
-          currency={"GVT"}
+          currency={currency}
           wallets={wallets}
           copytradingAccount={""}
         />
