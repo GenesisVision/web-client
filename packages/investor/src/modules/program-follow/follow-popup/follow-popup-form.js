@@ -1,21 +1,6 @@
-import { withFormik } from "formik";
-import { GVButton } from "gv-react-components";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
-import NumberFormat from "react-number-format";
 import { compose } from "redux";
-import FormError from "shared/components/form/form-error/form-error";
-import InputAmountField from "shared/components/input-amount-field/input-amount-field";
-import {
-  calculateValueOfEntryFee,
-  convertFromCurrency
-} from "shared/utils/currency-converter";
-import {
-  formatCurrencyValue,
-  formatValue,
-  validateFraction
-} from "shared/utils/formatter";
-import { number, object } from "yup";
 
 import FollowCreateAccount from "./follow-popup-create-account";
 import FollowParams from "./follow-popup-params";
@@ -41,7 +26,6 @@ class FollowForm extends Component {
       values,
       wallets,
       walletsAddresses,
-      handleSubmit,
       currency
     } = this.props;
     return (

@@ -4,23 +4,13 @@ import React, { Component } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
-import FormError from "shared/components/form/form-error/form-error";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import Select from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { getWalletIcon } from "shared/components/wallet/components/wallet-currency";
 import rateApi from "shared/services/api-client/rate-api";
-import walletApi from "shared/services/api-client/wallet-api";
-import authService from "shared/services/auth-service";
-import {
-  calculateValueOfEntryFee,
-  convertFromCurrency
-} from "shared/utils/currency-converter";
-import {
-  formatCurrencyValue,
-  formatValue,
-  validateFraction
-} from "shared/utils/formatter";
+import { convertFromCurrency } from "shared/utils/currency-converter";
+import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { number, object } from "yup";
 
 class FollowCreateAccount extends Component {
@@ -169,7 +159,7 @@ export default compose(
       }
       return { walletFrom };
     },
-    validationSchema: ({ t, info }) =>
+    validationSchema: ({ t }) =>
       object().shape({
         amount: number()
           .required()

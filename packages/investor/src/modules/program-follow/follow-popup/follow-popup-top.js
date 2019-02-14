@@ -1,35 +1,12 @@
 import React from "react";
 import { translate } from "react-i18next";
-import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { formatCurrencyValue } from "shared/utils/formatter";
 
-const FollowTop = ({ info, t, program, investor }) => {
+const FollowTop = () => {
   return (
     <div className="dialog__top">
       <div className="dialog__header">
         <h2>Title</h2>
       </div>
-      {/*<div className="dialog-field">
-        {program && investor && (
-          <StatisticItem
-            label={t("deposit-asset.program.available-to-invest")}
-            big
-          >
-            {formatCurrencyValue(info.availableToInvest, "GVT")} GVT
-          </StatisticItem>
-        )}
-        <StatisticItem
-          label={
-            program
-              ? t("deposit-asset.available-in-wallet")
-              : t("deposit-asset.fund.available-to-invest")
-          }
-          big
-        >
-          Any
-          {formatCurrencyValue(info.availableInWallet, "GVT")} GVT
-        </StatisticItem>
-      </div>*/}
     </div>
   );
 };
