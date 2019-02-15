@@ -112,6 +112,16 @@
     font-weight: bold;
   }
 
+  &__tag {
+    @include adaptive-padding(top, $padding-xsmall);
+    display: flex;
+    flex-wrap: wrap;
+
+    .tag-program {
+      margin-bottom: 10px;
+    }
+  }
+
   &__info {
     padding-top: $padding-xxlarge-mobile;
     @include media-breakpoint-tablet() {
