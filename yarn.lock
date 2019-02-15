@@ -5402,19 +5402,10 @@ gud@^1.0.0:
   integrity sha512-zGEOVKFM5sVPPrYs7J5/hYEw2Pof8KCyOwyhG8sAF26mCAeUFAcYPu1mwB7hhpIP29zOIBaDqwuHdLp0jvZXjw==
 
 "gv-api-web@git+https://github.com/GenesisVision/gv-api-web.git#development":
-  version "1.0.284"
-  resolved "git+https://github.com/GenesisVision/gv-api-web.git#df7b6f6e14fd4135511f19a12a9439571c8bdd82"
+  version "1.0.287"
+  resolved "git+https://github.com/GenesisVision/gv-api-web.git#38ae1f45c7abe2db524dce4c1b96063021882c20"
   dependencies:
     superagent "^3.8.3"
-
-gv-react-components@^0.0.32:
-  version "0.0.32"
-  resolved "https://registry.yarnpkg.com/gv-react-components/-/gv-react-components-0.0.32.tgz#88d685f35051fa41b6a5ff07351522b45c032d59"
-  integrity sha512-SxwSyOAgKhg/rBLfsAoC79QqDhYGMlPMtV6t0RSniyaAwQ2GDv5jdYUEwC8lnCPfbZn0MbITuHAfxZw1lASrYw==
-  dependencies:
-    classnames "^2.2.6"
-    prop-types "^15.6.1"
-    react "^16.4.1"
 
 gv-react-components@^0.0.33:
   version "0.0.33"
@@ -7759,7 +7750,19 @@ miller-rabin@^4.0.0:
   resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.37.0.tgz#0b6a0ce6fdbe9576e25f1f2d2fde8830dc0ad0d8"
   integrity sha512-R3C4db6bgQhlIhPU48fUtdVmKnflq+hRdad7IyKhtFj06VPNVdk2RhiYL3UjQIlso8L+YxAtFkobT0VK+S/ybg==
 
-mime-types@^2.1.12, mime-types@~2.1.17, mime-types@~2.1.18, mime-types@~2.1.19:
+mime-db@~1.38.0:
+  version "1.38.0"
+  resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.38.0.tgz#1a2aab16da9eb167b49c6e4df2d9c68d63d8e2ad"
+  integrity sha512-bqVioMFFzc2awcdJZIzR3HjZFX20QhilVS7hytkKrv7xFAn8bM1gzc/FOX2awLISvWe0PV8ptFKcon+wZ5qYkg==
+
+mime-types@^2.1.12:
+  version "2.1.22"
+  resolved "https://registry.yarnpkg.com/mime-types/-/mime-types-2.1.22.tgz#fe6b355a190926ab7698c9a0556a11199b2199bd"
+  integrity sha512-aGl6TZGnhm/li6F7yx82bJiBZwgiEa4Hf6CNr8YO+r5UHr53tSTYZb102zyU50DOWWKeOv0uQLRL0/9EiKWCog==
+  dependencies:
+    mime-db "~1.38.0"
+
+mime-types@~2.1.17, mime-types@~2.1.18, mime-types@~2.1.19:
   version "2.1.21"
   resolved "https://registry.yarnpkg.com/mime-types/-/mime-types-2.1.21.tgz#28995aa1ecb770742fe6ae7e58f9181c744b3f96"
   integrity sha512-3iL6DbwpyLzjR3xHSFNFeb9Nz/M8WDkX33t1GFQnFOllWk8pOrh/LSrB5OXlnlW5P9LH73X6loW/eogc+F5lJg==
