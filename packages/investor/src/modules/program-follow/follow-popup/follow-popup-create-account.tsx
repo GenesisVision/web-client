@@ -27,7 +27,7 @@ export interface IFollowCreateAccountProps {
   setFieldValue?: any;
 }
 interface IFollowCreateAccountState {
-  rate: number;
+  rate: string;
   isPending: boolean;
 }
 
@@ -42,7 +42,7 @@ class FollowCreateAccount extends React.Component<
   IFollowCreateAccountState
 > {
   state = {
-    rate: 1,
+    rate: "1",
     isPending: false
   };
   constructor(props: OwnProps) {
@@ -63,7 +63,7 @@ class FollowCreateAccount extends React.Component<
     const { values, currency } = this.props;
     rateApi
       .v10RateByFromByToGet(currency, walletFrom || values.walletFrom)
-      .then((rate: number) => {
+      .then((rate: string) => {
         if (rate !== this.state.rate) this.setState({ rate });
       });
   };
@@ -87,7 +87,7 @@ class FollowCreateAccount extends React.Component<
     const wallet = wallets.find(
       (wallet: any) => wallet.currency === walletFrom
     );
-    const availableToWithdraw = wallet.available / rate;
+    const availableToWithdraw = wallet.available / +rate;
     const isAllow = (values: any) => {
       const { formattedValue, value } = values;
       return formattedValue === "" || validateFraction(value, currency);
