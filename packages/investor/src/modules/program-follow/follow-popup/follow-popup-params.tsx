@@ -55,10 +55,9 @@ class FollowParams extends React.Component<OwnProps> {
     const setMaxAmountUSDEquivalent = () => {
       setFieldValue("USDEquivalent", "99999");
     };
-    /*const isAllow = values => {
-      const { tolerancePercent } = values;
-      return tolerancePercent <= 100;
-    };*/
+    const isAllow = (values: any) => {
+      return true;
+    };
     const disableButton = () => {
       return (
         errors.amount !== undefined ||
@@ -90,7 +89,7 @@ class FollowParams extends React.Component<OwnProps> {
             name="tolerancePercent"
             label={"Tolerance percent"}
             currency={"%"}
-            isAllow={true}
+            isAllow={isAllow}
             setMax={setMaxTolerancePercent}
           />
         </div>
@@ -100,7 +99,7 @@ class FollowParams extends React.Component<OwnProps> {
               name="volumePercent"
               label={"Volume percent"}
               currency={"%"}
-              isAllow={true}
+              isAllow={isAllow}
               setMax={setMaxVolumePercent}
             />
           </div>
@@ -111,7 +110,7 @@ class FollowParams extends React.Component<OwnProps> {
               name="USDEquivalent"
               label={"USD equivalent"}
               currency={"USD"}
-              isAllow={true}
+              isAllow={isAllow}
               setMax={setMaxAmountUSDEquivalent}
             />
           </div>

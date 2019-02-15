@@ -27,6 +27,7 @@ export interface IFollowCreateAccountProps {
   values?: FormValues;
   setFieldValue?: any;
 }
+
 interface IFollowCreateAccountState {
   rate: string;
   isPending: boolean;
@@ -38,6 +39,7 @@ export interface FormValues {
 }
 
 type OwnProps = IFollowCreateAccountProps & FormikProps<FormValues>;
+
 class FollowCreateAccount extends React.Component<
   OwnProps,
   IFollowCreateAccountState
@@ -46,6 +48,7 @@ class FollowCreateAccount extends React.Component<
     rate: "1",
     isPending: false
   };
+
   constructor(props: OwnProps) {
     super(props);
   }
@@ -146,7 +149,7 @@ class FollowCreateAccount extends React.Component<
             name="amount"
             label={t("wallet-transfer.amount")}
             currency={currency}
-            isAllow={isAllow(values)}
+            isAllow={isAllow}
             setMax={setMaxAmount}
           />
           {currency !== walletFrom && (
@@ -192,7 +195,7 @@ export default compose<React.ComponentType<IFollowCreateAccountProps>>(
       ) {
         walletFrom = walletsAddresses[0].currency;
       }
-      return { walletFrom, amount: 0 };
+      return { walletFrom, amount: "0" };
     },
     validationSchema: ({ t }: { t: TranslationFunction }) =>
       object().shape({
