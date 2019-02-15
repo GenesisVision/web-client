@@ -9,7 +9,7 @@ export interface IInputAmountFieldProps {
   name: string;
   label: string;
   currency: string;
-  isAllow: boolean;
+  isAllow: (values?: any) => boolean;
   setMax(): void;
 }
 
