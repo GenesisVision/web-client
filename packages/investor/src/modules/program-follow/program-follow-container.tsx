@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import Dialog from "shared/components/dialog/dialog";
 import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
+import signalApi from "shared/services/api-client/signal-api";
 
 import FollowForm from "./follow-popup/follow-popup-form";
 import FollowTop from "./follow-popup/follow-popup-top";
@@ -17,6 +18,7 @@ export interface IProgramFollowContainerProps {
 interface IProgramFollowContainerState {
   isPending: boolean;
   walletsAddresses: WalletInfo[] | null;
+  signalAccounts: any | null;
 }
 class ProgramFollowContainer extends React.Component<
   IProgramFollowContainerProps,
@@ -24,21 +26,30 @@ class ProgramFollowContainer extends React.Component<
 > {
   state = {
     isPending: false,
-    walletsAddresses: null
+    walletsAddresses: null,
+    signalAccounts: null
   };
 
   componentDidMount() {
+    const auth = String(authService.getAuthArg());
     this.setState({ isPending: true });
+
     walletApi
-      .v10WalletAddressesGet(authService.getAuthArg())
+      .v10WalletAddressesGet(auth)
       .then((wallets: WalletsInfo) =>
         this.setState({ walletsAddresses: wallets.wallets, isPending: false })
-      );
+      )
+      .then(() => {
+        return signalApi.v10SignalAccountsPost(auth);
+      })
+      .then((signalAccounts: any) => {
+        this.setState({ signalAccounts, isPending: false });
+      });
   }
 
   render() {
     const { wallets, open, onClose, currency } = this.props;
-    const { isPending, walletsAddresses } = this.state;
+    const { isPending, walletsAddresses, signalAccounts } = this.state;
     if (!walletsAddresses || isPending) return null;
     const handleClose = () => {
       onClose();
@@ -48,9 +59,9 @@ class ProgramFollowContainer extends React.Component<
         <FollowTop />
         <FollowForm
           walletsAddresses={walletsAddresses}
+          signalAccounts={signalAccounts}
           currency={currency}
           wallets={wallets}
-          copytradingAccount={""}
         />
       </Dialog>
     );

@@ -10,7 +10,7 @@ enum TABS {
   PARAMS = "PARAMS"
 }
 export interface IFollowFormProps {
-  copytradingAccount: any;
+  signalAccounts: any;
   wallets: WalletData[];
   walletsAddresses: WalletInfo[];
   currency: string;
@@ -26,19 +26,14 @@ class FollowForm extends React.Component<IFollowFormProps, IFollowFormState> {
     this.setState({ step: TABS.PARAMS });
   };
   componentDidMount() {
-    if (this.props.copytradingAccount) this.setState({ step: TABS.PARAMS });
+    if (this.props.signalAccounts) this.setState({ step: TABS.PARAMS });
   }
   submit = () => {};
   render() {
-    const {
-      copytradingAccount,
-      wallets,
-      walletsAddresses,
-      currency
-    } = this.props;
+    const { signalAccounts, wallets, walletsAddresses, currency } = this.props;
     return (
       <Fragment>
-        {!copytradingAccount && this.state.step === TABS.CREATE_ACCOUNT && (
+        {!signalAccounts && this.state.step === TABS.CREATE_ACCOUNT && (
           <FollowCreateAccount
             wallets={wallets}
             walletsAddresses={walletsAddresses}
