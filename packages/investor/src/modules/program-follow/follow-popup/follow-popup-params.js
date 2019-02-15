@@ -120,7 +120,12 @@ export default compose(
   withFormik({
     displayName: "follow-params",
     mapPropsToValues: () => {
-      return { type: types.byBalance.value, tolerancePercent: "0.5" };
+      return {
+        type: types.byBalance.value,
+        tolerancePercent: "0.5",
+        USDEquivalent: "100",
+        volumePercent: "10"
+      };
     },
     validationSchema: ({ t }) =>
       object().shape({
