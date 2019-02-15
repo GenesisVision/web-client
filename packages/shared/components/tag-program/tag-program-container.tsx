@@ -29,7 +29,7 @@ class TagProgramContainer extends React.Component<ITagProgramContainerProps> {
         )}
         {reminder && (
           <Tooltip render={() => <TagProgramTooltip tags={tags} />}>
-            <div>
+            <div className="tag-program-container__others">
               <Profitability
                 className="tag-button"
                 value={reminder}
