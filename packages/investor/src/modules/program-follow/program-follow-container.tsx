@@ -36,10 +36,8 @@ class ProgramFollowContainer extends React.Component<
 
     walletApi
       .v10WalletAddressesGet(auth)
-      .then((wallets: WalletsInfo) =>
-        this.setState({ walletsAddresses: wallets.wallets, isPending: false })
-      )
-      .then(() => {
+      .then((wallets: WalletsInfo) => {
+        this.setState({ walletsAddresses: wallets.wallets, isPending: false });
         return signalApi.v10SignalAccountsPost(auth);
       })
       .then((signalAccounts: any) => {
