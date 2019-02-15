@@ -60,7 +60,7 @@ class TransactionDetailsDialog extends React.Component<
     this.setState({ isPending: true });
     walletApi
       .v10WalletTransactionByIdGet(
-        "00000000-0000-0000-0000-000000000003",
+        "00000000-0000-0000-0000-000000000009",
         authService.getAuthArg()
       )
       .then((data: TransactionDetails) =>
@@ -77,7 +77,7 @@ class TransactionDetailsDialog extends React.Component<
     const Component =
       Types[this.state.data.type] ||
       function() {
-        return <h1>дло</h1>;
+        return <p>type isn't define</p>;
       };
     return <Component t={this.props.t} data={this.state.data} />;
   }

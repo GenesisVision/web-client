@@ -1,4 +1,5 @@
 @import "~shared/styles/_sizes.scss";
+@import "~shared/styles/_colors.scss";
 
 .transaction-details {
   .dialog {
@@ -30,5 +31,25 @@
   }
   &__trader {
     font-size: 12px;
+  }
+}
+
+.external-transaction {
+  &__address {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    .gv-btn.gv-btn--text {
+      padding: 10px 0;
+      justify-content: start;
+      color: $primary-color;
+      transition: opacity 250ms;
+
+      &:hover {
+        color: $primary-color;
+        opacity: 0.5;
+      }
+    }
   }
 }
