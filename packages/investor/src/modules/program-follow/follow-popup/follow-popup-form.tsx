@@ -1,6 +1,4 @@
 import * as React from "react";
-import { translate } from "react-i18next";
-import { compose } from "redux";
 
 import FollowCreateAccount from "./follow-popup-create-account";
 import FollowParams from "./follow-popup-params";
@@ -11,8 +9,6 @@ enum TABS {
 }
 export interface IFollowFormProps {
   copytradingAccount: any;
-  setFieldValue: any;
-  values: any;
   wallets: any;
   walletsAddresses: any;
   currency: any;
@@ -34,8 +30,6 @@ class FollowForm extends React.Component<IFollowFormProps, IFollowFormState> {
   render() {
     const {
       copytradingAccount,
-      setFieldValue,
-      values,
       wallets,
       walletsAddresses,
       currency
@@ -51,14 +45,11 @@ class FollowForm extends React.Component<IFollowFormProps, IFollowFormState> {
           />
         )}
         {this.state.step === TABS.PARAMS && (
-          <FollowParams
-            copytradingAccount={copytradingAccount}
-            onClick={this.submit}
-          />
+          <FollowParams onClick={this.submit} />
         )}
       </div>
     );
   }
 }
 
-export default compose(translate())(FollowForm);
+export default FollowForm;

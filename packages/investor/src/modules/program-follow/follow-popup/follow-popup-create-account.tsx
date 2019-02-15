@@ -177,7 +177,7 @@ class FollowCreateAccount extends React.Component<
   }
 }
 
-export default compose(
+export default compose<React.ComponentType<IFollowCreateAccountProps>>(
   translate(),
   withFormik({
     displayName: "follow-create-account",

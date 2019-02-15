@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import * as React from "react";
 import { connect } from "react-redux";
 import Dialog from "shared/components/dialog/dialog";
 import walletApi from "shared/services/api-client/wallet-api";
@@ -6,8 +6,22 @@ import authService from "shared/services/auth-service";
 
 import FollowForm from "./follow-popup/follow-popup-form";
 import FollowTop from "./follow-popup/follow-popup-top";
+import { WalletInfo, WalletsInfo } from "gv-api-web";
 
-class ProgramFollowContainer extends Component {
+export interface IProgramFollowContainerProps {
+  wallets: any;
+  open: any;
+  onClose: any;
+  currency: any;
+}
+interface IProgramFollowContainerState {
+  isPending: boolean;
+  walletsAddresses: WalletInfo[] | null;
+}
+class ProgramFollowContainer extends React.Component<
+  IProgramFollowContainerProps,
+  IProgramFollowContainerState
+> {
   state = {
     isPending: false,
     walletsAddresses: null
@@ -17,7 +31,7 @@ class ProgramFollowContainer extends Component {
     this.setState({ isPending: true });
     walletApi
       .v10WalletAddressesGet(authService.getAuthArg())
-      .then(wallets =>
+      .then((wallets: WalletsInfo) =>
         this.setState({ walletsAddresses: wallets.wallets, isPending: false })
       );
   }
@@ -43,9 +57,7 @@ class ProgramFollowContainer extends Component {
   }
 }
 
-ProgramFollowContainer.propTypes = {};
-
-const mapStateToProps = state => {
+const mapStateToProps = (state: any) => {
   const { programDeposit, wallet } = state;
   return {
     wallets: wallet.info.data ? wallet.info.data.wallets : null,

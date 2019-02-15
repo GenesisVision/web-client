@@ -1,4 +1,4 @@
-import { withFormik } from "formik";
+import { FormikProps, withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
 import { translate } from "react-i18next";
@@ -27,9 +27,16 @@ export interface IFollowParamsProps {
   dirty?: any;
   values?: any;
 }
+export interface FormValues {
+  type: string;
+  tolerancePercent: string;
+  volumePercent: string;
+  USDEquivalent: string;
+}
 
-class FollowParams extends React.Component<IFollowParamsProps> {
-  constructor(props: IFollowParamsProps) {
+type OwnProps = IFollowParamsProps & FormikProps<FormValues>;
+class FollowParams extends React.Component<OwnProps> {
+  constructor(props: OwnProps) {
     super(props);
   }
   render() {
@@ -127,7 +134,7 @@ class FollowParams extends React.Component<IFollowParamsProps> {
   }
 }
 
-export default compose(
+export default compose<React.ComponentType<IFollowParamsProps>>(
   translate(),
   withFormik({
     displayName: "follow-params",
