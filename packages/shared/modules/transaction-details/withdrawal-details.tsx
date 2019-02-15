@@ -1,38 +1,47 @@
-import { TransactionDetails } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 
-import Profitability from "../../components/profitability/profitability";
 import StatisticItem from "../../components/statistic-item/statistic-item";
 import { formatCurrencyValue } from "../../utils/formatter";
 import TransactionAsset from "./details-asset";
+import { ITransactionDetailsProps } from "./transaction-details";
 
-const WithdrawalTransaction = (props: { data: TransactionDetails }) => {
-  const { data } = props;
+const WithdrawalTransaction = (props: ITransactionDetailsProps) => {
+  const { data, t } = props;
   return (
     <React.Fragment>
       <div className="dialog__top">
         <div className="dialog__header">
-          <h2>Transaction Details</h2>
-          <p>{`${data.programDetails.programType}`} withdrawal</p>
+          <h2>{t(`transactions-details.title`)}</h2>
+          <p>
+            {t(
+              `transactions-details.withdrawal.${
+                data.programDetails.programType
+              }`
+            )}
+          </p>
         </div>
-      </div>
-      <div className="dialog__bottom">
         <StatisticItem
-          label={`From the ${data.programDetails.programType.toLowerCase()}`}
+          label={t(
+            `transactions-details.withdrawal.from-${
+              data.programDetails.programType
+            }`
+          )}
         >
           <TransactionAsset data={data.programDetails} />
         </StatisticItem>
-        <StatisticItem label={"Status"}>{data.status}</StatisticItem>
-        <StatisticItem label={"Investment amount"} big>
-          <Profitability value={data.amount} prefix="sign">
-            <NumberFormat
-              value={formatCurrencyValue(data.amount, data.currency)}
-              suffix={` ${data.currency}`}
-              allowNegative={false}
-              displayType="text"
-            />
-          </Profitability>
+      </div>
+      <div className="dialog__bottom">
+        <StatisticItem label={t(`transactions-details.status.title`)}>
+          {data.status}
+        </StatisticItem>
+        <StatisticItem label={t(`transactions-details.withdrawal.amount`)} big>
+          <NumberFormat
+            value={formatCurrencyValue(data.amount, data.currency)}
+            suffix={` ${data.currency}`}
+            allowNegative={true}
+            displayType="text"
+          />
         </StatisticItem>
       </div>
     </React.Fragment>

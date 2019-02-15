@@ -2,6 +2,7 @@ import "./transaction-details.scss";
 
 import { TransactionDetails } from "gv-api-web";
 import * as React from "react";
+import { translate } from "react-i18next";
 import walletApi from "shared/services/api-client/wallet-api";
 
 import authService from "../../services/auth-service";
@@ -10,9 +11,8 @@ import ExternalDeposit from "./external-deposit-details";
 import ExternalWithdrawal from "./external-withdrawal-details";
 import InvestingTransaction from "./investment-details";
 import OpenCloseTransaction from "./open-close-details";
-import WithdrawalTransaction from "./withdrawal-details";
 import ProfitDetails from "./profit-details";
-import { translate } from "react-i18next";
+import WithdrawalTransaction from "./withdrawal-details";
 
 const Types = {
   Investing: InvestingTransaction,
@@ -25,7 +25,7 @@ const Types = {
   Profit: ProfitDetails
 };
 
-export interface ITransactionDetailsProps {
+export interface ITransactionDetailsDialogProps {
   transactionId: string;
   t(string: string): string;
 }
@@ -36,16 +36,16 @@ export interface ITransactionDetailsState {
   errorMessage?: string;
 }
 
-export interface TransactionDetailsProps {
+export interface ITransactionDetailsProps {
   data: TransactionDetails;
   t(string: string): string;
 }
 
 class TransactionDetailsDialog extends React.Component<
-  ITransactionDetailsProps,
+  ITransactionDetailsDialogProps,
   ITransactionDetailsState
 > {
-  constructor(props: ITransactionDetailsProps) {
+  constructor(props: ITransactionDetailsDialogProps) {
     super(props);
     this.state = {
       isPending: false
@@ -60,7 +60,7 @@ class TransactionDetailsDialog extends React.Component<
     this.setState({ isPending: true });
     walletApi
       .v10WalletTransactionByIdGet(
-        "00000000-0000-0000-0000-000000000001",
+        "00000000-0000-0000-0000-000000000003",
         authService.getAuthArg()
       )
       .then((data: TransactionDetails) =>

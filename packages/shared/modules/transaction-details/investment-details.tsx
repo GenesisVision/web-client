@@ -1,15 +1,12 @@
-import { TransactionDetails } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 
 import StatisticItem from "../../components/statistic-item/statistic-item";
 import { formatCurrencyValue } from "../../utils/formatter";
 import TransactionAsset from "./details-asset";
+import { ITransactionDetailsProps } from "./transaction-details";
 
-const InvestingTransaction = (props: {
-  data: TransactionDetails;
-  t(string: string): string;
-}) => {
+const InvestingTransaction = (props: ITransactionDetailsProps) => {
   const { data, t } = props;
   return (
     <React.Fragment>
