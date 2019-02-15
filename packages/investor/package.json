@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/yup": "^0.26.9",
     "classnames": "^2.2.5",
     "copy-to-clipboard": "^3.0.8",
     "debounce": "^1.2.0",
