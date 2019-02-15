@@ -89,7 +89,6 @@ class FollowParams extends React.Component<OwnProps> {
             name="tolerancePercent"
             label={"Tolerance percent"}
             currency={"%"}
-            isAllow={isAllow}
             setMax={setMaxTolerancePercent}
           />
         </div>
@@ -99,7 +98,6 @@ class FollowParams extends React.Component<OwnProps> {
               name="volumePercent"
               label={"Volume percent"}
               currency={"%"}
-              isAllow={isAllow}
               setMax={setMaxVolumePercent}
             />
           </div>
@@ -110,7 +108,6 @@ class FollowParams extends React.Component<OwnProps> {
               name="USDEquivalent"
               label={"USD equivalent"}
               currency={"USD"}
-              isAllow={isAllow}
               setMax={setMaxAmountUSDEquivalent}
             />
           </div>

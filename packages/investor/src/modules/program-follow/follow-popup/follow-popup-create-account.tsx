@@ -149,7 +149,6 @@ class FollowCreateAccount extends React.Component<
             name="amount"
             label={t("wallet-transfer.amount")}
             currency={currency}
-            isAllow={isAllow}
             setMax={setMaxAmount}
           />
           {currency !== walletFrom && (
