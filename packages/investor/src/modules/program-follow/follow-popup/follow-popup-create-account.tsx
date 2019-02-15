@@ -1,7 +1,7 @@
 import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
-import React, { Component } from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { translate, TranslationFunction } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
@@ -12,28 +12,58 @@ import rateApi from "shared/services/api-client/rate-api";
 import { convertFromCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { number, object } from "yup";
+import { FieldProps, FormikProps } from "formik";
 
-class FollowCreateAccount extends Component {
+export interface IFollowCreateAccountProps {
+  walletsAddresses: any;
+  wallets: any;
+  currency: any;
+  onClick: any;
+  errors?: any;
+  isValid?: any;
+  dirty?: any;
+  t?: any;
+  values?: any;
+  setFieldValue?: any;
+}
+interface IFollowCreateAccountState {
+  rate: number;
+  isPending: boolean;
+}
+
+export interface FormValues {
+  walletFrom: string;
+  amount: number;
+}
+
+type OwnProps = IFollowCreateAccountProps & FormikProps<FormValues>;
+class FollowCreateAccount extends React.Component<
+  OwnProps,
+  IFollowCreateAccountState
+> {
   state = {
-    rate: null,
+    rate: 1,
     isPending: false
   };
+  constructor(props: OwnProps) {
+    super(props);
+  }
 
   componentDidMount() {
     this.fetchRate();
   }
 
-  onChangeCurrencyFrom = (name, target) => {
+  onChangeCurrencyFrom = (name: any, target: any) => {
     const { setFieldValue } = this.props;
     const walletFromNew = target.props.value;
     setFieldValue("walletFrom", walletFromNew);
     this.fetchRate(walletFromNew);
   };
-  fetchRate = walletFrom => {
+  fetchRate = (walletFrom?: any) => {
     const { values, currency } = this.props;
     rateApi
       .v10RateByFromByToGet(currency, walletFrom || values.walletFrom)
-      .then(rate => {
+      .then((rate: number) => {
         if (rate !== this.state.rate) this.setState({ rate });
       });
   };
@@ -54,9 +84,11 @@ class FollowCreateAccount extends Component {
     const { walletFrom, amount } = values;
     const { rate } = this.state;
     if (!rate) return null;
-    const wallet = wallets.find(wallet => wallet.currency === walletFrom);
+    const wallet = wallets.find(
+      (wallet: any) => wallet.currency === walletFrom
+    );
     const availableToWithdraw = wallet.available / rate;
-    const isAllow = values => {
+    const isAllow = (values: any) => {
       const { formattedValue, value } = values;
       return formattedValue === "" || validateFraction(value, currency);
     };
@@ -85,7 +117,7 @@ class FollowCreateAccount extends Component {
             InputComponent={Select}
             onChange={this.onChangeCurrencyFrom}
           >
-            {walletsAddresses.map(wallet => {
+            {walletsAddresses.map((wallet: any) => {
               return (
                 <option value={wallet.currency} key={wallet.currency}>
                   <img
@@ -113,7 +145,7 @@ class FollowCreateAccount extends Component {
             name="amount"
             label={t("wallet-transfer.amount")}
             currency={currency}
-            isAllow={isAllow}
+            isAllow={isAllow(values)}
             setMax={setMaxAmount}
           />
           {currency !== walletFrom && (
@@ -133,7 +165,7 @@ class FollowCreateAccount extends Component {
         <div className="dialog__buttons">
           <GVButton
             onClick={onClick}
-            id="signUpFormSubmit"
+            // id="signUpFormSubmit"
             className="invest-form__submit-button"
             disabled={disableButton()}
           >
@@ -149,17 +181,19 @@ export default compose(
   translate(),
   withFormik({
     displayName: "follow-create-account",
-    mapPropsToValues: props => {
+    mapPropsToValues: (props: { [key: string]: any }) => {
       const { walletsAddresses, currency } = props;
       if (!walletsAddresses === undefined || walletsAddresses.length <= 1)
-        return null;
+        return {};
       let walletFrom = currency || "GVT";
-      if (!walletsAddresses.find(wallet => wallet.currency === walletFrom)) {
+      if (
+        !walletsAddresses.find((wallet: any) => wallet.currency === walletFrom)
+      ) {
         walletFrom = walletsAddresses[0].currency;
       }
-      return { walletFrom };
+      return { walletFrom, amount: 0 };
     },
-    validationSchema: ({ t }) =>
+    validationSchema: ({ t }: { t: TranslationFunction }) =>
       object().shape({
         amount: number()
           .required()

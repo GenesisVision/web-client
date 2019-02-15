@@ -1,25 +1,37 @@
 import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
-import React, { Component } from "react";
+import * as React from "react";
 import { translate } from "react-i18next";
 import { compose } from "redux";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import Select from "shared/components/select/select";
 import { number, object } from "yup";
+import { TranslationFunction } from "i18next";
 
-const types = {
+type type = {
+  label: string;
+  value: string;
+};
+
+const types: { [key: string]: type } = {
   byBalance: { label: "By balance", value: "byBalance" },
   percentage: { label: "Percentage", value: "percentage" },
   fixed: { label: "Fixed", value: "fixed" }
 };
-class FollowParams extends Component {
-  state = {
-    rate: null,
-    isPending: false
-  };
 
-  componentDidMount() {}
+export interface IFollowParamsProps {
+  onClick: any;
+  setFieldValue?: any;
+  errors?: any;
+  isValid?: any;
+  dirty?: any;
+  values?: any;
+}
 
+class FollowParams extends React.Component<IFollowParamsProps> {
+  constructor(props: IFollowParamsProps) {
+    super(props);
+  }
   render() {
     const {
       onClick,
@@ -51,7 +63,7 @@ class FollowParams extends Component {
       );
     };
     return (
-      <form className="dialog__bottom" id="follow-params" onSubmit={() => {}}>
+      <form className="dialog__bottom" id="follow-params">
         <div className="dialog-field">
           <GVFormikField
             name="type"
@@ -60,7 +72,7 @@ class FollowParams extends Component {
             InputComponent={Select}
             // onChange={this.onChangeCurrencyFrom}
           >
-            {Object.keys(types).map(type => {
+            {Object.keys(types).map((type: string) => {
               return (
                 <option value={types[type].value} key={types[type].value}>
                   {types[type].label}
@@ -74,7 +86,7 @@ class FollowParams extends Component {
             name="tolerancePercent"
             label={"Tolerance percent"}
             currency={"%"}
-            // isAllow={isAllow}
+            isAllow={true}
             setMax={setMaxTolerancePercent}
           />
         </div>
@@ -84,7 +96,7 @@ class FollowParams extends Component {
               name="volumePercent"
               label={"Volume percent"}
               currency={"%"}
-              // isAllow={isAllow}
+              isAllow={true}
               setMax={setMaxVolumePercent}
             />
           </div>
@@ -95,7 +107,7 @@ class FollowParams extends Component {
               name="USDEquivalent"
               label={"USD equivalent"}
               currency={"USD"}
-              // isAllow={isAllow}
+              isAllow={true}
               setMax={setMaxAmountUSDEquivalent}
             />
           </div>
@@ -103,7 +115,7 @@ class FollowParams extends Component {
         <div className="dialog__buttons">
           <GVButton
             onClick={onClick}
-            id="signUpFormSubmit"
+            // id="signUpFormSubmit"
             className="invest-form__submit-button"
             disabled={disableButton()}
           >
@@ -127,7 +139,7 @@ export default compose(
         volumePercent: "10"
       };
     },
-    validationSchema: ({ t }) =>
+    validationSchema: ({ t }: { t: TranslationFunction }) =>
       object().shape({
         USDEquivalent: number()
           .min(0)
@@ -141,7 +153,7 @@ export default compose(
           .min(0.01)
       }),
     handleSubmit: (values, { props }) => {
-      props.onSubmit(values.amount);
+      // props.onSubmit(values);
     }
   })
 )(FollowParams);
