@@ -12,18 +12,19 @@ import rateApi from "shared/services/api-client/rate-api";
 import { convertFromCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { number, object } from "yup";
-import { FieldProps, FormikProps } from "formik";
+import { FormikProps } from "formik";
+import { WalletData, WalletInfo } from "gv-api-web";
 
 export interface IFollowCreateAccountProps {
-  walletsAddresses: any;
-  wallets: any;
-  currency: any;
-  onClick: any;
+  walletsAddresses: WalletInfo[];
+  wallets: any; // WalletData[];
+  currency: string;
+  onClick: () => void;
   errors?: any;
-  isValid?: any;
-  dirty?: any;
+  isValid?: boolean;
+  dirty?: boolean;
   t?: any;
-  values?: any;
+  values?: FormValues;
   setFieldValue?: any;
 }
 interface IFollowCreateAccountState {

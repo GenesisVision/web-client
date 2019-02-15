@@ -6,13 +6,13 @@ import authService from "shared/services/auth-service";
 
 import FollowForm from "./follow-popup/follow-popup-form";
 import FollowTop from "./follow-popup/follow-popup-top";
-import { WalletInfo, WalletsInfo } from "gv-api-web";
+import { WalletData, WalletInfo, WalletsInfo } from "gv-api-web";
 
 export interface IProgramFollowContainerProps {
-  wallets: any;
-  open: any;
-  onClose: any;
-  currency: any;
+  wallets: WalletData[];
+  open: boolean;
+  onClose: () => {};
+  currency: string;
 }
 interface IProgramFollowContainerState {
   isPending: boolean;

@@ -20,12 +20,9 @@ const types: { [key: string]: type } = {
 };
 
 export interface IFollowParamsProps {
-  onClick: any;
-  setFieldValue?: any;
+  onClick: () => void;
   errors?: any;
-  isValid?: any;
-  dirty?: any;
-  values?: any;
+  values?: FormValues;
 }
 export interface FormValues {
   type: string;
@@ -66,7 +63,7 @@ class FollowParams extends React.Component<OwnProps> {
       return (
         errors.amount !== undefined ||
         (dirty && !isValid) ||
-        tolerancePercent <= 0
+        +tolerancePercent <= 0
       );
     };
     return (

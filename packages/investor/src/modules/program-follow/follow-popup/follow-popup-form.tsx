@@ -1,7 +1,9 @@
 import * as React from "react";
+import { Fragment } from "react";
 
 import FollowCreateAccount from "./follow-popup-create-account";
 import FollowParams from "./follow-popup-params";
+import { WalletData, WalletInfo } from "gv-api-web";
 
 enum TABS {
   CREATE_ACCOUNT = "CREATE_ACCOUNT",
@@ -9,9 +11,9 @@ enum TABS {
 }
 export interface IFollowFormProps {
   copytradingAccount: any;
-  wallets: any;
-  walletsAddresses: any;
-  currency: any;
+  wallets: WalletData[];
+  walletsAddresses: WalletInfo[];
+  currency: string;
 }
 interface IFollowFormState {
   step: TABS;
@@ -35,7 +37,7 @@ class FollowForm extends React.Component<IFollowFormProps, IFollowFormState> {
       currency
     } = this.props;
     return (
-      <div>
+      <Fragment>
         {!copytradingAccount && this.state.step === TABS.CREATE_ACCOUNT && (
           <FollowCreateAccount
             wallets={wallets}
@@ -47,7 +49,7 @@ class FollowForm extends React.Component<IFollowFormProps, IFollowFormState> {
         {this.state.step === TABS.PARAMS && (
           <FollowParams onClick={this.submit} />
         )}
-      </div>
+      </Fragment>
     );
   }
 }

@@ -11,6 +11,4 @@ const FollowTop = () => {
   );
 };
 
-FollowTop.propTypes = {};
-
 export default translate()(FollowTop);
