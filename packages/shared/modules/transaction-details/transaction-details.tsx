@@ -11,6 +11,7 @@ import ExternalWithdrawal from "./external-withdrawal-details";
 import InvestingTransaction from "./investment-details";
 import OpenCloseTransaction from "./open-close-details";
 import WithdrawalTransaction from "./withdrawal-details";
+import ProfitDetails from "./profit-details";
 
 const Types = {
   Investing: InvestingTransaction,
@@ -19,7 +20,8 @@ const Types = {
   Close: OpenCloseTransaction,
   ExternalDeposit: ExternalDeposit,
   ExternalWithdrawal: ExternalWithdrawal,
-  Converting: ConvertingDetails
+  Converting: ConvertingDetails,
+  Profit: ProfitDetails
 };
 
 export interface ITransactionDetailsProps {
@@ -51,7 +53,7 @@ export class TransactionDetailsDialog extends React.Component<
     this.setState({ isPending: true });
     walletApi
       .v10WalletTransactionByIdGet(
-        "00000000-0000-0000-0000-000000000011",
+        "00000000-0000-0000-0000-000000000012",
         authService.getAuthArg()
       )
       .then((data: TransactionDetails) =>
@@ -65,7 +67,11 @@ export class TransactionDetailsDialog extends React.Component<
   render() {
     if (this.state.isPending) return null;
     if (!this.state.data) return null;
-    const Component = Types[this.state.data.type] || <h1>дло</h1>;
+    const Component =
+      Types[this.state.data.type] ||
+      function() {
+        return <h1>дло</h1>;
+      };
     return <Component data={this.state.data} />;
   }
 }

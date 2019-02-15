@@ -15,7 +15,7 @@ const TransactionAsset = (props: { data: ProgramTransactionDetails }) => {
       />
       <div className="transaction-asset__description">
         <p className="transaction-asset__title">{props.data.title}</p>
-        <p className="transaction-asset__trader">{props.data.title}</p>
+        <p className="transaction-asset__trader">{props.data.managerName}</p>
       </div>
     </div>
   );
