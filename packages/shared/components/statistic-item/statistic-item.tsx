@@ -1,16 +1,29 @@
 import "./statistic-item.scss";
 
 import classnames from "classnames";
-import PropTypes from "prop-types";
 import React from "react";
 import NumberFormat from "react-number-format";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-const LABEL = "LABEL";
-const VALUE = "VALUE";
+enum ITEM {
+  LABEL = "LABEL",
+  VALUE = "VALUE"
+}
 
-const StatisticItem = ({
-  invert,
+export interface IFollowStatisticItemProps {
+  label: string;
+  equivalent?: string | number;
+  equivalentCurrency?: string;
+  small?: boolean;
+  big?: boolean;
+  large?: boolean;
+  accent?: boolean;
+  half?: boolean;
+  invert?: boolean;
+  className?: string;
+}
+const StatisticItem: React.FC<IFollowStatisticItemProps> = ({
+  invert = false,
   large,
   big,
   small,
@@ -22,8 +35,10 @@ const StatisticItem = ({
   equivalent,
   equivalentCurrency
 }) => {
-  const generateClasses = (item, invert) => {
-    switch ((item === VALUE && !invert) || (item === LABEL && invert)) {
+  const generateClasses = (item: ITEM, invert: boolean) => {
+    switch (
+      (item === ITEM.VALUE && !invert) || (item === ITEM.LABEL && invert)
+    ) {
       case true:
         return classnames("statistics-item__value", {
           "statistics-item__value--accent": accent,
@@ -50,12 +65,14 @@ const StatisticItem = ({
     >
       {label && (
         <div
-          className={"statistics-item__top " + generateClasses(LABEL, invert)}
+          className={
+            "statistics-item__top " + generateClasses(ITEM.LABEL, invert)
+          }
         >
           {label}
         </div>
       )}
-      <div className={generateClasses(VALUE, invert)}>{children}</div>
+      <div className={generateClasses(ITEM.VALUE, invert)}>{children}</div>
       {equivalent !== undefined ? (
         <div className="statistics-item__equivalent">
           {
@@ -70,18 +87,6 @@ const StatisticItem = ({
       ) : null}
     </div>
   );
-};
-
-StatisticItem.propTypes = {
-  label: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-  equivalent: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  equivalentCurrency: PropTypes.string,
-  small: PropTypes.bool,
-  big: PropTypes.bool,
-  large: PropTypes.bool,
-  accent: PropTypes.bool,
-  half: PropTypes.bool,
-  className: PropTypes.string
 };
 
 export default StatisticItem;
