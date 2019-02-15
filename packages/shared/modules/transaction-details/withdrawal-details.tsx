@@ -27,8 +27,8 @@ const WithdrawalTransaction = (props: { data: TransactionDetails }) => {
         <StatisticItem label={"Investment amount"} big>
           <Profitability value={data.amount} prefix="sign">
             <NumberFormat
-              value={formatCurrencyValue(data.amount, "BTC")}
-              suffix=" BTC"
+              value={formatCurrencyValue(data.amount, data.currency)}
+              suffix={` ${data.currency}`}
               allowNegative={false}
               displayType="text"
             />

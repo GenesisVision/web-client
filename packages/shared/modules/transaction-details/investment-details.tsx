@@ -26,18 +26,21 @@ const InvestingTransaction = (props: { data: TransactionDetails }) => {
         <StatisticItem label={"Entry fee"}>
           {data.programDetails.entryFeePercent} %
           <NumberFormat
-            value={formatCurrencyValue(data.programDetails.entryFee, "BTC")}
+            value={formatCurrencyValue(
+              data.programDetails.entryFee,
+              data.currency
+            )}
             prefix={" ("}
-            suffix={" BTC)"}
+            suffix={` ${data.currency})`}
             displayType="text"
           />
         </StatisticItem>
         <StatisticItem label={"GV Commission"}>
           {data.gvCommissionPercent} %
           <NumberFormat
-            value={formatCurrencyValue(data.gvCommission, "BTC")}
+            value={formatCurrencyValue(data.gvCommission, data.currency)}
             prefix={" ("}
-            suffix={" BTC)"}
+            suffix={` ${data.currency})`}
             displayType="text"
           />
         </StatisticItem>
@@ -45,8 +48,8 @@ const InvestingTransaction = (props: { data: TransactionDetails }) => {
         <StatisticItem label={"Investment amount"} big>
           <Profitability value={data.amount} prefix="sign">
             <NumberFormat
-              value={formatCurrencyValue(data.amount, "BTC")}
-              suffix=" BTC"
+              value={formatCurrencyValue(data.amount, data.currency)}
+              suffix={` ${data.currency})`}
               allowNegative={false}
               displayType="text"
             />
