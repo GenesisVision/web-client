@@ -5,6 +5,7 @@ import * as React from "react";
 import walletApi from "shared/services/api-client/wallet-api";
 
 import authService from "../../services/auth-service";
+import ConvertingDetails from "./converting-details";
 import ExternalDeposit from "./external-deposit-details";
 import ExternalWithdrawal from "./external-withdrawal-details";
 import InvestingTransaction from "./investment-details";
@@ -17,7 +18,8 @@ const Types = {
   Open: OpenCloseTransaction,
   Close: OpenCloseTransaction,
   ExternalDeposit: ExternalDeposit,
-  ExternalWithdrawal: ExternalWithdrawal
+  ExternalWithdrawal: ExternalWithdrawal,
+  Converting: ConvertingDetails
 };
 
 export interface ITransactionDetailsProps {
@@ -49,7 +51,7 @@ export class TransactionDetailsDialog extends React.Component<
     this.setState({ isPending: true });
     walletApi
       .v10WalletTransactionByIdGet(
-        "00000000-0000-0000-0000-000000000010",
+        "00000000-0000-0000-0000-000000000011",
         authService.getAuthArg()
       )
       .then((data: TransactionDetails) =>

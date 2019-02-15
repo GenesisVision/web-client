@@ -23,8 +23,6 @@ const ExternalDeposit = (props: { data: TransactionDetails }) => {
           <h2>Transaction Details</h2>
           <p>Deposit</p>
         </div>
-      </div>
-      <div className="dialog__bottom">
         <StatisticItem label={`From address`}>
           {data.externalTransactionDetails.fromAddress}
           <GVButton color="secondary" onClick={onCopy}>
@@ -33,6 +31,8 @@ const ExternalDeposit = (props: { data: TransactionDetails }) => {
             {"buttons.copy"}
           </GVButton>
         </StatisticItem>
+      </div>
+      <div className="dialog__bottom">
         <StatisticItem label={"Status"}>
           {data.status} {data.externalTransactionDetails.description}
         </StatisticItem>
