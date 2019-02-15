@@ -1,3 +1,13 @@
+@import "~shared/styles/_sizes.scss";
+
+.transaction-details {
+  .dialog {
+    &__header {
+      margin-bottom: $padding-xsmall;
+    }
+  }
+}
+
 .transaction-asset {
   display: flex;
   flex-direction: row;

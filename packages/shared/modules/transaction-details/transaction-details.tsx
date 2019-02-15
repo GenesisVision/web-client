@@ -12,6 +12,7 @@ import InvestingTransaction from "./investment-details";
 import OpenCloseTransaction from "./open-close-details";
 import WithdrawalTransaction from "./withdrawal-details";
 import ProfitDetails from "./profit-details";
+import { translate } from "react-i18next";
 
 const Types = {
   Investing: InvestingTransaction,
@@ -26,6 +27,7 @@ const Types = {
 
 export interface ITransactionDetailsProps {
   transactionId: string;
+  t(string: string): string;
 }
 
 export interface ITransactionDetailsState {
@@ -34,7 +36,12 @@ export interface ITransactionDetailsState {
   errorMessage?: string;
 }
 
-export class TransactionDetailsDialog extends React.Component<
+export interface TransactionDetailsProps {
+  data: TransactionDetails;
+  t(string: string): string;
+}
+
+class TransactionDetailsDialog extends React.Component<
   ITransactionDetailsProps,
   ITransactionDetailsState
 > {
@@ -53,7 +60,7 @@ export class TransactionDetailsDialog extends React.Component<
     this.setState({ isPending: true });
     walletApi
       .v10WalletTransactionByIdGet(
-        "00000000-0000-0000-0000-000000000012",
+        "00000000-0000-0000-0000-000000000001",
         authService.getAuthArg()
       )
       .then((data: TransactionDetails) =>
@@ -72,6 +79,8 @@ export class TransactionDetailsDialog extends React.Component<
       function() {
         return <h1>дло</h1>;
       };
-    return <Component data={this.state.data} />;
+    return <Component t={this.props.t} data={this.state.data} />;
   }
 }
+
+export default translate()(TransactionDetailsDialog);
