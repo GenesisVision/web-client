@@ -60,6 +60,16 @@
     }
   }
 
+  &__tag {
+    @include adaptive-padding(top, $padding-xsmall, 2);
+    display: flex;
+    flex-wrap: wrap;
+
+    .tag-program {
+      margin-bottom: 10px;
+    }
+  }
+
   &__bottom {
     @include media-breakpoint-tablet() {
       margin-left: $avatar-size;
@@ -91,11 +101,6 @@
     font-size: $font-size-common;
     letter-spacing: 0.19px;
     font-weight: bold;
-  }
-
-  &__manager-link {
-    @include adaptive-padding(bottom, $padding-xxlarge);
-    display: block;
   }
 
   &__center {
@@ -185,14 +190,10 @@
   }
 
   &__subheading {
-    font-size: $font-size-h4-mobile;
+    @include vertical-paddings($padding-big, $padding-small);
+    @include font-size($font-size-h4);
     font-weight: bold;
-    padding-bottom: $padding-small-mobile;
     letter-spacing: 0.21px;
-    @include media-breakpoint-landscape-phone() {
-      font-size: $font-size-h4;
-      padding-bottom: $padding-small;
-    }
   }
 
   &__info-block {

@@ -10,6 +10,7 @@ import DetailsFavorite from "shared/components/details/details-description-secti
 import DetailsNotification from "shared/components/details/details-description-section/details-description/details-notificaton";
 import Popover from "shared/components/popover/popover";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import TagProgramItem from "shared/components/tag-program/tag-program-item";
 import {
   composeManagerDetailsUrl,
   composeProgramNotificationsUrl
@@ -115,7 +116,6 @@ class ProgramDetailsDescriptionTop extends Component {
         <div className="program-details-description__info">
           <h1 className="title-small-padding">{programDescription.title}</h1>
           <Link
-            className="program-details-description__manager-link"
             to={{
               pathname: composeManagerDetailsUrl(
                 programDescription.manager.url
@@ -130,6 +130,11 @@ class ProgramDetailsDescriptionTop extends Component {
               {programDescription.manager.username}
             </GVButton>
           </Link>
+          <div className="program-details-description__tag">
+            {programDescription.tags.map((tag, idx) => (
+              <TagProgramItem name={tag.name} color={tag.color} key={idx} />
+            ))}
+          </div>
           <h4 className="program-details-description__subheading">
             {t("program-details-page.description.strategy")}
           </h4>
