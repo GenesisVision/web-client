@@ -33,11 +33,10 @@ class ProgramFollowContainer extends React.Component<
   componentDidMount() {
     const auth = String(authService.getAuthArg());
     this.setState({ isPending: true });
-
     walletApi
       .v10WalletAddressesGet(auth)
       .then((wallets: WalletsInfo) => {
-        this.setState({ walletsAddresses: wallets.wallets, isPending: false });
+        this.setState({ walletsAddresses: wallets.wallets });
         return signalApi.v10SignalAccountsPost(auth);
       })
       .then((signalAccounts: any) => {
