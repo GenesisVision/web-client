@@ -4,6 +4,7 @@ import { Fragment } from "react";
 import FollowCreateAccount from "./follow-popup-create-account";
 import FollowParams from "./follow-popup-params";
 import { WalletData, WalletInfo } from "gv-api-web";
+import { attachToSignal } from "../services/program-follow-service";
 
 enum TABS {
   CREATE_ACCOUNT = "CREATE_ACCOUNT",
