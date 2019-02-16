@@ -8,6 +8,10 @@ import signalApi from "shared/services/api-client/signal-api";
 import FollowForm from "./follow-popup/follow-popup-form";
 import FollowTop from "./follow-popup/follow-popup-top";
 import { WalletData, WalletInfo, WalletsInfo } from "gv-api-web";
+import {
+  getSignalAccounts,
+  getWalletsAddresses
+} from "./services/program-follow-service";
 
 export interface IProgramFollowContainerProps {
   wallets: WalletData[];
@@ -33,11 +37,10 @@ class ProgramFollowContainer extends React.Component<
   componentDidMount() {
     const auth = String(authService.getAuthArg());
     this.setState({ isPending: true });
-    walletApi
-      .v10WalletAddressesGet(auth)
+    getWalletsAddresses()
       .then((wallets: WalletsInfo) => {
         this.setState({ walletsAddresses: wallets.wallets });
-        return signalApi.v10SignalAccountsPost(auth);
+        return getSignalAccounts();
       })
       .then((signalAccounts: any) => {
         this.setState({ signalAccounts, isPending: false });
