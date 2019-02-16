@@ -27,9 +27,9 @@ export interface IFollowParamsProps {
 }
 export interface FormValues {
   mode: string;
-  openTolerancePercent: string;
-  percent: string;
-  fixedVolume: string;
+  openTolerancePercent: number;
+  percent: number;
+  fixedVolume: number;
 }
 
 type OwnProps = IFollowParamsProps & FormikProps<FormValues>;
