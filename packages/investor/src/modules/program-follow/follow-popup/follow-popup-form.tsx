@@ -42,7 +42,11 @@ class FollowForm extends React.Component<IFollowFormProps, IFollowFormState> {
     });
   };
   componentDidMount() {
-    if (this.props.signalAccounts) this.setState({ step: TABS.PARAMS });
+    const { signalAccounts, currency } = this.props;
+    const signalAccount =
+      signalAccounts &&
+      signalAccounts.data.find((account: any) => account.currency === currency);
+    if (signalAccount) this.setState({ step: TABS.PARAMS });
   }
   submit = (values: IRequestParams) => {
     this.setState(
