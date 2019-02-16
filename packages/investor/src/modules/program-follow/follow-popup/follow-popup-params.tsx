@@ -15,9 +15,9 @@ type mode = {
 };
 
 const modes: { [key: string]: mode } = {
-  byBalance: { label: "By balance", value: "byBalance" },
-  percentage: { label: "Percentage", value: "percentage" },
-  fixed: { label: "Fixed", value: "fixed" }
+  byBalance: { label: "By balance", value: "ByBalance" },
+  percentage: { label: "Percentage", value: "Percentage" },
+  fixed: { label: "Fixed", value: "Fixed" }
 };
 
 export interface IFollowParamsProps {
@@ -42,13 +42,7 @@ class FollowParams extends React.Component<OwnProps> {
     onClick(values);
   };
   render() {
-    const {
-      setFieldValue,
-      errors,
-      isValid,
-      dirty,
-      values
-    } = this.props;
+    const { setFieldValue, errors, isValid, dirty, values } = this.props;
     const { openTolerancePercent, mode } = values;
     const setMaxOpenTolerancePercent = () => {
       setFieldValue("openTolerancePercent", "20");
