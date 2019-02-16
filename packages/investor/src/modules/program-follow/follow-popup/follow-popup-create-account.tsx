@@ -201,18 +201,13 @@ export default compose<React.ComponentType<IFollowCreateAccountProps>>(
       ) {
         initialDepositCurrency = walletsAddresses[0].currency;
       }
-      return { initialDepositCurrency, initialDepositAmount: "0" };
+      return { initialDepositCurrency, initialDepositAmount: "" };
     },
     validationSchema: ({ t }: { t: TranslationFunction }) =>
       object().shape({
         initialDepositAmount: number()
           .required()
-          .moreThan(
-            0,
-            t("deposit-asset.validation.amount-min-value", {
-              min: 0
-            })
-          )
+          .moreThan(0)
       }),
     handleSubmit: (values, { props }) => {
       props.onSubmit(values.initialDepositAmount);
