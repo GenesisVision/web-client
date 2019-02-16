@@ -108,8 +108,9 @@ class FollowCreateAccount extends React.Component<
     };
     const disableButton = () => {
       return (
-        errors.InitialDepositAmount !== undefined ||
-        InitialDepositAmount > availableToWithdraw
+        errors.initialDepositAmount !== undefined ||
+        (!dirty && !isValid) ||
+        initialDepositAmount > availableToWithdraw
       );
     };
     return (
