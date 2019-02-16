@@ -109,8 +109,6 @@ class FollowCreateAccount extends React.Component<
     const disableButton = () => {
       return (
         errors.InitialDepositAmount !== undefined ||
-        !isValid ||
-        !dirty ||
         InitialDepositAmount > availableToWithdraw
       );
     };
@@ -205,7 +203,7 @@ export default compose<React.ComponentType<IFollowCreateAccountProps>>(
       object().shape({
         InitialDepositAmount: number()
           .required()
-          .min(
+          .moreThan(
             0,
             t("deposit-asset.validation.amount-min-value", {
               min: 0
