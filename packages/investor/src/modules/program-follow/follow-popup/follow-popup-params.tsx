@@ -43,7 +43,6 @@ class FollowParams extends React.Component<OwnProps> {
   };
   render() {
     const {
-      onClick,
       setFieldValue,
       errors,
       isValid,
@@ -78,7 +77,6 @@ class FollowParams extends React.Component<OwnProps> {
             component={GVTextField}
             label={"Type"}
             InputComponent={Select}
-            // onChange={this.onChangeCurrencyFrom}
           >
             {Object.keys(modes).map((mode: string) => {
               return (
@@ -119,9 +117,7 @@ class FollowParams extends React.Component<OwnProps> {
         )}
         <div className="dialog__buttons">
           <GVButton
-            // type="submit"
             onClick={this.handleSubmit}
-            // id="signUpFormSubmit"
             className="invest-form__submit-button"
             disabled={disableButton()}
           >
