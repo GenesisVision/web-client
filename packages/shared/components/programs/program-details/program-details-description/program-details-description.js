@@ -408,6 +408,7 @@ class ProgramDetailsDescription extends PureComponent {
                   )}
                   {ProgramFollowContainer && (
                     <ProgramFollowContainer
+                      programName={title}
                       type={FOLLOW_TYPE.CREATE}
                       id={programDescription.id}
                       open={isOpenFollowPopup}

@@ -14,6 +14,7 @@ import {
 import { FOLLOW_TYPE } from "shared/constants/constants";
 
 export interface IProgramFollowContainerProps {
+  programName: string;
   type: FOLLOW_TYPE;
   wallets: WalletData[];
   open: boolean;
@@ -49,7 +50,15 @@ class ProgramFollowContainer extends React.Component<
   }
 
   render() {
-    const { wallets, open, onClose, currency, id, type } = this.props;
+    const {
+      wallets,
+      open,
+      onClose,
+      currency,
+      id,
+      type,
+      programName
+    } = this.props;
     const { isPending, walletsAddresses, signalAccounts } = this.state;
     if (!walletsAddresses || isPending) return null;
     const handleClose = () => {
@@ -62,7 +71,7 @@ class ProgramFollowContainer extends React.Component<
       type === FOLLOW_TYPE.CREATE ? attachToSignal : updateAttachToSignal;
     return (
       <Dialog open={open} onClose={handleClose}>
-        <FollowTop />
+        <FollowTop programName={programName} />
         <FollowForm
           id={id}
           walletsAddresses={walletsAddresses}
