@@ -242,7 +242,7 @@ $description-block-width: 250px;
     width: 170px;
   }
   &--top {
-    padding: $padding/10 $padding/10 $padding/5;
+    padding-bottom: 3px;
   }
   &--link {
     @include table-link($text-accent-color, $text-color);

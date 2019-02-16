@@ -24,6 +24,21 @@
       stroke: $primary-color;
     }
   }
+
+  &--tags {
+    cursor: default;
+    display: flex;
+    flex-wrap: wrap;
+
+    .filter__value {
+      padding-left: 0;
+    }
+
+    .tag-button {
+      margin-top: 2.5px;
+      margin-bottom: 2.5px;
+    }
+  }
 }
 
 .gv-hangle__text {

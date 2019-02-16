@@ -6,9 +6,7 @@
   display: flex;
   align-items: center;
 
-  &__other {
-    @include font-size(11px);
-    padding: 2px 12px;
-    cursor: pointer;
+  &__others {
+    line-height: 1;
   }
 }

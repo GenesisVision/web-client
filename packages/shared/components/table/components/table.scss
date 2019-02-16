@@ -73,9 +73,7 @@ $padding: $padding-small;
     line-height: 0;
     .icon {
       width: $view-svg-size/1.2;
-    }
-    svg {
-      width: $view-svg-size/1.2;
+      height: 18px;
     }
     &:last-child {
       padding-right: 0;
