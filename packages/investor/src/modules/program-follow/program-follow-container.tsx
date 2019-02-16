@@ -1,9 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import Dialog from "shared/components/dialog/dialog";
-import walletApi from "shared/services/api-client/wallet-api";
-import authService from "shared/services/auth-service";
-import signalApi from "shared/services/api-client/signal-api";
 
 import FollowForm from "./follow-popup/follow-popup-form";
 import FollowTop from "./follow-popup/follow-popup-top";
