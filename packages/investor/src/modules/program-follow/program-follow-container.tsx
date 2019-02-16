@@ -58,6 +58,9 @@ class ProgramFollowContainer extends React.Component<
     const handleClose = () => {
       onClose();
     };
+    const handleSubmit = () => {
+      onClose();
+    };
     const submitMethod =
       type === FOLLOW_TYPE.CREATE ? attachToSignal : updateAttachToSignal;
     return (
@@ -70,6 +73,7 @@ class ProgramFollowContainer extends React.Component<
           currency={currency}
           wallets={wallets}
           submitMethod={submitMethod}
+          handleSubmit={handleSubmit}
         />
       </Dialog>
     );

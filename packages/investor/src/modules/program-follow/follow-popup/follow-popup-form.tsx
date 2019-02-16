@@ -1,3 +1,4 @@
+import "./follow-popup.scss";
 import * as React from "react";
 import { Fragment } from "react";
 
@@ -11,6 +12,7 @@ enum TABS {
   PARAMS = "PARAMS"
 }
 export interface IFollowFormProps {
+  handleSubmit: () => void;
   submitMethod: (
     programId: string,
     requestParams: IRequestParams
@@ -24,6 +26,7 @@ export interface IFollowFormProps {
 interface IFollowFormState {
   step: TABS;
   requestParams: IRequestParams;
+  errors: { code: string; errorMessage: string };
 }
 export interface IRequestParams {
   mode?: string;
@@ -37,7 +40,8 @@ export interface IRequestParams {
 class FollowForm extends React.Component<IFollowFormProps, IFollowFormState> {
   state = {
     requestParams: {},
-    step: TABS.CREATE_ACCOUNT
+    step: TABS.CREATE_ACCOUNT,
+    errors: { code: "", errorMessage: "" }
   };
   createdCopytradingAccount = (values: IRequestParams) => {
     this.setState({
@@ -53,20 +57,29 @@ class FollowForm extends React.Component<IFollowFormProps, IFollowFormState> {
     if (signalAccount) this.setState({ step: TABS.PARAMS });
   }
   submit = (values: IRequestParams) => {
+    const { handleSubmit, id } = this.props;
     this.setState(
       {
         requestParams: { ...this.state.requestParams, ...values }
       },
       () =>
-        this.props
-          .submitMethod(this.props.id, this.state.requestParams)
-          .then((res: any) => {
+        this.props.submitMethod(id, this.state.requestParams).then(
+          (res: any) => {
+            handleSubmit();
             console.log(res);
-          })
+          },
+          (errors: any) => {
+            console.log(errors);
+            this.setState({
+              errors
+            });
+          }
+        )
     );
   };
   render() {
     const { signalAccounts, wallets, walletsAddresses, currency } = this.props;
+    const { errors } = this.state;
     return (
       <Fragment>
         {!signalAccounts && this.state.step === TABS.CREATE_ACCOUNT && (
@@ -79,6 +92,9 @@ class FollowForm extends React.Component<IFollowFormProps, IFollowFormState> {
         )}
         {this.state.step === TABS.PARAMS && (
           <FollowParams onClick={this.submit} />
+        )}
+        {errors.errorMessage && (
+          <div className="follow-popup__errors">{errors.errorMessage}</div>
         )}
       </Fragment>
     );
