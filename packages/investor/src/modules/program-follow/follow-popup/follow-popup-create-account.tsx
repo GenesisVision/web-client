@@ -14,12 +14,13 @@ import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { number, object } from "yup";
 import { FormikProps } from "formik";
 import { WalletData, WalletInfo } from "gv-api-web";
+import { IRequestParams } from "./follow-popup-form";
 
 export interface IFollowCreateAccountProps {
   walletsAddresses: WalletInfo[];
   wallets: any; // WalletData[];
   currency: string;
-  onClick: () => void;
+  onClick: (values: IRequestParams) => void;
   errors?: any;
   isValid?: boolean;
   dirty?: boolean;
@@ -74,7 +75,10 @@ class FollowCreateAccount extends React.Component<
         if (rate !== this.state.rate) this.setState({ rate });
       });
   };
-
+  handleNext = () => {
+    const { values, onClick } = this.props;
+    onClick(values);
+  };
   render() {
     const {
       errors,
@@ -85,8 +89,7 @@ class FollowCreateAccount extends React.Component<
       t,
       currency,
       values,
-      setFieldValue,
-      onClick
+      setFieldValue
     } = this.props;
     const { initialDepositCurrency, initialDepositAmount } = values;
     const { rate } = this.state;
@@ -169,7 +172,7 @@ class FollowCreateAccount extends React.Component<
         </div>
         <div className="dialog__buttons">
           <GVButton
-            onClick={onClick}
+            onClick={this.handleNext}
             // id="signUpFormSubmit"
             className="invest-form__submit-button"
             disabled={disableButton()}

@@ -10,6 +10,7 @@ enum TABS {
   PARAMS = "PARAMS"
 }
 export interface IFollowFormProps {
+  id: string;
   signalAccounts: any;
   wallets: WalletData[];
   walletsAddresses: WalletInfo[];
@@ -17,18 +18,44 @@ export interface IFollowFormProps {
 }
 interface IFollowFormState {
   step: TABS;
+  requestParams: IRequestParams;
+}
+export interface IRequestParams {
+  mode?: string;
+  percent?: number;
+  openTolerancePercent?: number;
+  fixedVolume?: number;
+  fixedCurrency?: string;
+  initialDepositCurrency?: string;
+  initialDepositAmount?: number;
 }
 class FollowForm extends React.Component<IFollowFormProps, IFollowFormState> {
   state = {
+    requestParams: {},
     step: TABS.CREATE_ACCOUNT
   };
-  createdCopytradingAccount = () => {
-    this.setState({ step: TABS.PARAMS });
+  createdCopytradingAccount = (values: IRequestParams) => {
+    this.setState({
+      step: TABS.PARAMS,
+      requestParams: { ...this.state.requestParams, ...values }
+    });
   };
   componentDidMount() {
     if (this.props.signalAccounts) this.setState({ step: TABS.PARAMS });
   }
-  submit = () => {};
+  submit = (values: IRequestParams) => {
+    this.setState(
+      {
+        requestParams: { ...this.state.requestParams, ...values }
+      },
+      () =>
+        attachToSignal(this.props.id, this.state.requestParams).then(
+          (res: any) => {
+            console.log(res);
+          }
+        )
+    );
+  };
   render() {
     const { signalAccounts, wallets, walletsAddresses, currency } = this.props;
     return (

@@ -7,6 +7,7 @@ import InputAmountField from "shared/components/input-amount-field/input-amount-
 import Select from "shared/components/select/select";
 import { number, object } from "yup";
 import { TranslationFunction } from "i18next";
+import { IRequestParams } from "./follow-popup-form";
 
 type mode = {
   label: string;
@@ -20,7 +21,7 @@ const modes: { [key: string]: mode } = {
 };
 
 export interface IFollowParamsProps {
-  onClick: () => void;
+  onClick: (values: IRequestParams) => void;
   errors?: any;
   values?: FormValues;
 }
@@ -36,6 +37,10 @@ class FollowParams extends React.Component<OwnProps> {
   constructor(props: OwnProps) {
     super(props);
   }
+  handleSubmit = () => {
+    const { onClick, values } = this.props;
+    onClick(values);
+  };
   render() {
     const {
       onClick,
@@ -114,7 +119,8 @@ class FollowParams extends React.Component<OwnProps> {
         )}
         <div className="dialog__buttons">
           <GVButton
-            onClick={onClick}
+            // type="submit"
+            onClick={this.handleSubmit}
             // id="signUpFormSubmit"
             className="invest-form__submit-button"
             disabled={disableButton()}

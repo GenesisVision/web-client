@@ -18,6 +18,7 @@ export interface IProgramFollowContainerProps {
   open: boolean;
   onClose: () => {};
   currency: string;
+  id: string;
 }
 interface IProgramFollowContainerState {
   isPending: boolean;
@@ -48,7 +49,7 @@ class ProgramFollowContainer extends React.Component<
   }
 
   render() {
-    const { wallets, open, onClose, currency } = this.props;
+    const { wallets, open, onClose, currency, id } = this.props;
     const { isPending, walletsAddresses, signalAccounts } = this.state;
     if (!walletsAddresses || isPending) return null;
     const handleClose = () => {
@@ -58,6 +59,7 @@ class ProgramFollowContainer extends React.Component<
       <Dialog open={open} onClose={handleClose}>
         <FollowTop />
         <FollowForm
+          id={id}
           walletsAddresses={walletsAddresses}
           signalAccounts={signalAccounts}
           currency={currency}

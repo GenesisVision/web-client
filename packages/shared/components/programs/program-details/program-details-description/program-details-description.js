@@ -408,6 +408,7 @@ class ProgramDetailsDescription extends PureComponent {
                   )}
                   {ProgramFollowContainer && (
                     <ProgramFollowContainer
+                      id={programDescription.id}
                       open={isOpenFollowPopup}
                       currency={programDescription.currency}
                       onClose={this.handleCloseFollowPopup}
