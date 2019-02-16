@@ -26,3 +26,8 @@ export interface IPaging {
   itemsOnPage: number;
   totalPages: number;
 }
+
+export enum FOLLOW_TYPE {
+  CREATE = "CREATE",
+  EDIT = "EDIT"
+}
