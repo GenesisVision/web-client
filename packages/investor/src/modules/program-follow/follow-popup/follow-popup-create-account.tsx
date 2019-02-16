@@ -35,7 +35,7 @@ interface IFollowCreateAccountState {
 
 export interface FormValues {
   initialDepositCurrency: string;
-  InitialDepositAmount: number;
+  initialDepositAmount: number;
 }
 
 type OwnProps = IFollowCreateAccountProps & FormikProps<FormValues>;
@@ -88,7 +88,7 @@ class FollowCreateAccount extends React.Component<
       setFieldValue,
       onClick
     } = this.props;
-    const { initialDepositCurrency, InitialDepositAmount } = values;
+    const { initialDepositCurrency, initialDepositAmount } = values;
     const { rate } = this.state;
     if (!rate) return null;
     const wallet = wallets.find(
@@ -102,7 +102,7 @@ class FollowCreateAccount extends React.Component<
 
     const setMaxAmount = () => {
       setFieldValue(
-        "InitialDepositAmount",
+        "initialDepositAmount",
         formatCurrencyValue(availableToWithdraw, currency)
       );
     };
@@ -148,7 +148,7 @@ class FollowCreateAccount extends React.Component<
         </div>
         <div className="dialog-field">
           <InputAmountField
-            name="InitialDepositAmount"
+            name="initialDepositAmount"
             label={t("wallet-transfer.amount")}
             currency={currency}
             setMax={setMaxAmount}
@@ -157,7 +157,7 @@ class FollowCreateAccount extends React.Component<
             <div className="invest-popup__currency">
               <NumberFormat
                 value={formatCurrencyValue(
-                  convertFromCurrency(InitialDepositAmount, rate),
+                  convertFromCurrency(initialDepositAmount, rate),
                   initialDepositCurrency
                 )}
                 prefix="= "
@@ -198,11 +198,11 @@ export default compose<React.ComponentType<IFollowCreateAccountProps>>(
       ) {
         initialDepositCurrency = walletsAddresses[0].currency;
       }
-      return { initialDepositCurrency, InitialDepositAmount: "0" };
+      return { initialDepositCurrency, initialDepositAmount: "0" };
     },
     validationSchema: ({ t }: { t: TranslationFunction }) =>
       object().shape({
-        InitialDepositAmount: number()
+        initialDepositAmount: number()
           .required()
           .moreThan(
             0,
@@ -212,7 +212,7 @@ export default compose<React.ComponentType<IFollowCreateAccountProps>>(
           )
       }),
     handleSubmit: (values, { props }) => {
-      props.onSubmit(values.InitialDepositAmount);
+      props.onSubmit(values.initialDepositAmount);
     }
   })
 )(FollowCreateAccount);
