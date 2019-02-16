@@ -180,6 +180,7 @@ class FollowCreateAccount extends React.Component<
             {t("withdraw-program.next")}
           </GVButton>
         </div>
+        <div className="dialog__info">{t("withdraw-program.info")}</div>
       </form>
     );
   }
