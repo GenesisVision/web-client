@@ -8,12 +8,12 @@ import Select from "shared/components/select/select";
 import { number, object } from "yup";
 import { TranslationFunction } from "i18next";
 
-type type = {
+type mode = {
   label: string;
   value: string;
 };
 
-const types: { [key: string]: type } = {
+const modes: { [key: string]: mode } = {
   byBalance: { label: "By balance", value: "byBalance" },
   percentage: { label: "Percentage", value: "percentage" },
   fixed: { label: "Fixed", value: "fixed" }
@@ -25,10 +25,10 @@ export interface IFollowParamsProps {
   values?: FormValues;
 }
 export interface FormValues {
-  type: string;
-  tolerancePercent: string;
-  volumePercent: string;
-  USDEquivalent: string;
+  mode: string;
+  openTolerancePercent: string;
+  percent: string;
+  fixedVolume: string;
 }
 
 type OwnProps = IFollowParamsProps & FormikProps<FormValues>;
@@ -45,15 +45,15 @@ class FollowParams extends React.Component<OwnProps> {
       dirty,
       values
     } = this.props;
-    const { tolerancePercent, type } = values;
-    const setMaxTolerancePercent = () => {
-      setFieldValue("tolerancePercent", "20");
+    const { openTolerancePercent, mode } = values;
+    const setMaxOpenTolerancePercent = () => {
+      setFieldValue("openTolerancePercent", "20");
     };
     const setMaxVolumePercent = () => {
-      setFieldValue("volumePercent", "999");
+      setFieldValue("percent", "999");
     };
-    const setMaxAmountUSDEquivalent = () => {
-      setFieldValue("USDEquivalent", "99999");
+    const setMaxAmountFixedVolume = () => {
+      setFieldValue("fixedVolume", "99999");
     };
     const isAllow = (values: any) => {
       return true;
@@ -62,23 +62,23 @@ class FollowParams extends React.Component<OwnProps> {
       return (
         errors.amount !== undefined ||
         (dirty && !isValid) ||
-        +tolerancePercent <= 0
+        +openTolerancePercent <= 0
       );
     };
     return (
       <form className="dialog__bottom" id="follow-params">
         <div className="dialog-field">
           <GVFormikField
-            name="type"
+            name="mode"
             component={GVTextField}
             label={"Type"}
             InputComponent={Select}
             // onChange={this.onChangeCurrencyFrom}
           >
-            {Object.keys(types).map((type: string) => {
+            {Object.keys(modes).map((mode: string) => {
               return (
-                <option value={types[type].value} key={types[type].value}>
-                  {types[type].label}
+                <option value={modes[mode].value} key={modes[mode].value}>
+                  {modes[mode].label}
                 </option>
               );
             })}
@@ -86,29 +86,29 @@ class FollowParams extends React.Component<OwnProps> {
         </div>
         <div className="dialog-field">
           <InputAmountField
-            name="tolerancePercent"
+            name="openTolerancePercent"
             label={"Tolerance percent"}
             currency={"%"}
-            setMax={setMaxTolerancePercent}
+            setMax={setMaxOpenTolerancePercent}
           />
         </div>
-        {type === types.percentage.value && (
+        {mode === modes.percentage.value && (
           <div className="dialog-field">
             <InputAmountField
-              name="volumePercent"
+              name="percent"
               label={"Volume percent"}
               currency={"%"}
               setMax={setMaxVolumePercent}
             />
           </div>
         )}
-        {type === types.fixed.value && (
+        {mode === modes.fixed.value && (
           <div className="dialog-field">
             <InputAmountField
-              name="USDEquivalent"
+              name="fixedVolume"
               label={"USD equivalent"}
               currency={"USD"}
-              setMax={setMaxAmountUSDEquivalent}
+              setMax={setMaxAmountFixedVolume}
             />
           </div>
         )}
@@ -133,21 +133,21 @@ export default compose<React.ComponentType<IFollowParamsProps>>(
     displayName: "follow-params",
     mapPropsToValues: () => {
       return {
-        type: types.byBalance.value,
-        tolerancePercent: "0.5",
-        USDEquivalent: "100",
-        volumePercent: "10"
+        mode: modes.byBalance.value,
+        openTolerancePercent: "0.5",
+        fixedVolume: "100",
+        percent: "10"
       };
     },
     validationSchema: ({ t }: { t: TranslationFunction }) =>
       object().shape({
-        USDEquivalent: number()
+        fixedVolume: number()
           .min(0)
           .max(99999),
-        volumePercent: number()
+        percent: number()
           .max(999)
           .min(1),
-        tolerancePercent: number()
+        openTolerancePercent: number()
           .required()
           .max(20)
           .min(0.01)

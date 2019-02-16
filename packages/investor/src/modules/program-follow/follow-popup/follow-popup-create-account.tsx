@@ -34,8 +34,8 @@ interface IFollowCreateAccountState {
 }
 
 export interface FormValues {
-  walletFrom: string;
-  amount: number;
+  initialDepositCurrency: string;
+  InitialDepositAmount: number;
 }
 
 type OwnProps = IFollowCreateAccountProps & FormikProps<FormValues>;
@@ -59,14 +59,17 @@ class FollowCreateAccount extends React.Component<
 
   onChangeCurrencyFrom = (name: any, target: any) => {
     const { setFieldValue } = this.props;
-    const walletFromNew = target.props.value;
-    setFieldValue("walletFrom", walletFromNew);
-    this.fetchRate(walletFromNew);
+    const initialDepositCurrencyNew = target.props.value;
+    setFieldValue("initialDepositCurrency", initialDepositCurrencyNew);
+    this.fetchRate(initialDepositCurrencyNew);
   };
-  fetchRate = (walletFrom?: any) => {
+  fetchRate = (initialDepositCurrency?: any) => {
     const { values, currency } = this.props;
     rateApi
-      .v10RateByFromByToGet(currency, walletFrom || values.walletFrom)
+      .v10RateByFromByToGet(
+        currency,
+        initialDepositCurrency || values.initialDepositCurrency
+      )
       .then((rate: string) => {
         if (rate !== this.state.rate) this.setState({ rate });
       });
@@ -85,11 +88,11 @@ class FollowCreateAccount extends React.Component<
       setFieldValue,
       onClick
     } = this.props;
-    const { walletFrom, amount } = values;
+    const { initialDepositCurrency, InitialDepositAmount } = values;
     const { rate } = this.state;
     if (!rate) return null;
     const wallet = wallets.find(
-      (wallet: any) => wallet.currency === walletFrom
+      (wallet: any) => wallet.currency === initialDepositCurrency
     );
     const availableToWithdraw = wallet.available / +rate;
     const isAllow = (values: any) => {
@@ -99,23 +102,23 @@ class FollowCreateAccount extends React.Component<
 
     const setMaxAmount = () => {
       setFieldValue(
-        "amount",
+        "InitialDepositAmount",
         formatCurrencyValue(availableToWithdraw, currency)
       );
     };
     const disableButton = () => {
       return (
-        errors.amount !== undefined ||
+        errors.InitialDepositAmount !== undefined ||
         !isValid ||
         !dirty ||
-        amount > availableToWithdraw
+        InitialDepositAmount > availableToWithdraw
       );
     };
     return (
       <form className="dialog__bottom" id="follow-create-account">
         <div className="dialog-field">
           <GVFormikField
-            name="walletFrom"
+            name="initialDepositCurrency"
             component={GVTextField}
             label={t("wallet-transfer.from")}
             InputComponent={Select}
@@ -146,20 +149,20 @@ class FollowCreateAccount extends React.Component<
         </div>
         <div className="dialog-field">
           <InputAmountField
-            name="amount"
+            name="InitialDepositAmount"
             label={t("wallet-transfer.amount")}
             currency={currency}
             setMax={setMaxAmount}
           />
-          {currency !== walletFrom && (
+          {currency !== initialDepositCurrency && (
             <div className="invest-popup__currency">
               <NumberFormat
                 value={formatCurrencyValue(
-                  convertFromCurrency(amount, rate),
-                  walletFrom
+                  convertFromCurrency(InitialDepositAmount, rate),
+                  initialDepositCurrency
                 )}
                 prefix="= "
-                suffix={` ${walletFrom}`}
+                suffix={` ${initialDepositCurrency}`}
                 displayType="text"
               />
             </div>
@@ -188,17 +191,19 @@ export default compose<React.ComponentType<IFollowCreateAccountProps>>(
       const { walletsAddresses, currency } = props;
       if (!walletsAddresses === undefined || walletsAddresses.length <= 1)
         return {};
-      let walletFrom = currency || "GVT";
+      let initialDepositCurrency = currency || "GVT";
       if (
-        !walletsAddresses.find((wallet: any) => wallet.currency === walletFrom)
+        !walletsAddresses.find(
+          (wallet: any) => wallet.currency === initialDepositCurrency
+        )
       ) {
-        walletFrom = walletsAddresses[0].currency;
+        initialDepositCurrency = walletsAddresses[0].currency;
       }
-      return { walletFrom, amount: "0" };
+      return { initialDepositCurrency, InitialDepositAmount: "0" };
     },
     validationSchema: ({ t }: { t: TranslationFunction }) =>
       object().shape({
-        amount: number()
+        InitialDepositAmount: number()
           .required()
           .min(
             0,
@@ -208,7 +213,7 @@ export default compose<React.ComponentType<IFollowCreateAccountProps>>(
           )
       }),
     handleSubmit: (values, { props }) => {
-      props.onSubmit(values.amount);
+      props.onSubmit(values.InitialDepositAmount);
     }
   })
 )(FollowCreateAccount);
