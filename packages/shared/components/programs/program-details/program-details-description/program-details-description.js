@@ -15,7 +15,7 @@ import Hint from "shared/components/hint/hint";
 import Popover from "shared/components/popover/popover";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import TagProgramItem from "shared/components/tag-program/tag-program-item";
-import { INVESTOR, STATUS } from "shared/constants/constants";
+import { FOLLOW_TYPE, INVESTOR, STATUS } from "shared/constants/constants";
 import platformApi from "shared/services/api-client/platform-api";
 import {
   composeManagerDetailsUrl,
@@ -408,6 +408,7 @@ class ProgramDetailsDescription extends PureComponent {
                   )}
                   {ProgramFollowContainer && (
                     <ProgramFollowContainer
+                      type={FOLLOW_TYPE.CREATE}
                       id={programDescription.id}
                       open={isOpenFollowPopup}
                       currency={programDescription.currency}

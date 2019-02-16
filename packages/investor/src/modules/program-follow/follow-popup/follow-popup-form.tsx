@@ -11,6 +11,10 @@ enum TABS {
   PARAMS = "PARAMS"
 }
 export interface IFollowFormProps {
+  submitMethod: (
+    programId: string,
+    requestParams: IRequestParams
+  ) => Promise<any>;
   id: string;
   signalAccounts: any;
   wallets: WalletData[];
@@ -54,11 +58,11 @@ class FollowForm extends React.Component<IFollowFormProps, IFollowFormState> {
         requestParams: { ...this.state.requestParams, ...values }
       },
       () =>
-        attachToSignal(this.props.id, this.state.requestParams).then(
-          (res: any) => {
+        this.props
+          .submitMethod(this.props.id, this.state.requestParams)
+          .then((res: any) => {
             console.log(res);
-          }
-        )
+          })
     );
   };
   render() {
