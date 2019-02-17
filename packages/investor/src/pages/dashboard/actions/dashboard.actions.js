@@ -8,6 +8,7 @@ export const DASHBOARD_IN_REQUESTS = "DASHBOARD_IN_REQUESTS";
 export const DASHBOARD_CANCEL_FUND_REQUESTS = "DASHBOARD_CANCEL_FUND_REQUESTS";
 export const DASHBOARD_CANCEL_PROGRAM_REQUESTS =
   "DASHBOARD_CANCEL_PROGRAM_REQUESTS";
+export const DASHBOARD_OPEN_TRADES = "DASHBOARD_OPEN_TRADES";
 
 export const CLEAR_DASHBOARD_ASSETS_TABLE = "CLEAR_DASHBOARD_ASSETS_TABLE";
 
@@ -56,3 +57,12 @@ export const cancelProgramRequest = (auth, id) => {
 export const clearDashboardAssetsTable = () => ({
   type: CLEAR_DASHBOARD_ASSETS_TABLE
 });
+
+export const fetchDashboardOpenTrades = (auth, filters) => {
+  return {
+    type: DASHBOARD_OPEN_TRADES,
+    payload: new Promise(() => {
+      return {};
+    })
+  };
+};

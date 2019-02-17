@@ -1,12 +1,17 @@
 import classnames from "classnames";
 import { TranslationFunction } from "i18next";
 import React, { Component, Fragment } from "react";
+import { connect } from "react-redux";
+import { Action, Dispatch, bindActionCreators } from "redux";
 import { TableCell } from "shared/components/table/components";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
+import { Column } from "shared/components/table/components/table.types";
+import { IUpdateFilterFunc } from "shared/components/table/components/table.types";
 
+import { getDashboardOpenTrades } from "../../services/dashboard-trades.service";
 import { DASHBOARD_OPEN_TRADES_COLUMNS } from "./dashboard-trades.constants";
 import { dashboardOpenTradesTableSelector } from "./dashboard-trades.selectors";
 
@@ -14,16 +19,22 @@ interface IOpenTradesTableProps {
   t: TranslationFunction;
 }
 
-class OpenTradesTable extends Component<IOpenTradesTableProps> {
+interface IOpenTradesDispatchProps {
+  getDashboardOpenTrades(): void;
+}
+
+class OpenTradesTable extends Component<
+  IOpenTradesTableProps & IOpenTradesDispatchProps
+> {
   render() {
-    const { t } = this.props;
+    const { t, getDashboardOpenTrades } = this.props;
     return (
       <TableContainer
-        getItems={getDashboardPrograms}
+        getItems={getDashboardOpenTrades}
         dataSelector={dashboardOpenTradesTableSelector}
         isFetchOnMount={true}
         columns={DASHBOARD_OPEN_TRADES_COLUMNS}
-        renderFilters={(updateFilter, filtering) => (
+        renderFilters={(updateFilter: IUpdateFilterFunc, filtering: any) => (
           <Fragment>
             <DateRangeFilter
               name={DATE_RANGE_FILTER_NAME}
@@ -33,7 +44,7 @@ class OpenTradesTable extends Component<IOpenTradesTableProps> {
             />
           </Fragment>
         )}
-        renderHeader={column => (
+        renderHeader={(column: Column) => (
           <span
             className={`programs-table__cell dashboard-programs__cell dashboard-programs__cell--${
               column.name
@@ -46,7 +57,7 @@ class OpenTradesTable extends Component<IOpenTradesTableProps> {
             )}
           </span>
         )}
-        renderBodyRow={(program, updateRow) => (
+        renderBodyRow={(program: any) => (
           <TableRow
             className={classnames({
               "table__row--pretender": program.rating.canLevelUp
@@ -60,4 +71,11 @@ class OpenTradesTable extends Component<IOpenTradesTableProps> {
   }
 }
 
-export default OpenTradesTable;
+const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
+  service: bindActionCreators({ getDashboardOpenTrades }, dispatch)
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(OpenTradesTable);
