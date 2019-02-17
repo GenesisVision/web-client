@@ -4,7 +4,7 @@ import { Fragment } from "react";
 
 import FollowCreateAccount from "./follow-popup-create-account";
 import FollowParams from "./follow-popup-params";
-import { WalletData, WalletInfo } from "gv-api-web";
+import { CopyTradingAccountInfo, WalletData, WalletInfo } from "gv-api-web";
 
 enum TABS {
   CREATE_ACCOUNT = "CREATE_ACCOUNT",
@@ -17,7 +17,7 @@ export interface IFollowFormProps {
     requestParams: IRequestParams
   ) => Promise<any>;
   id: string;
-  signalAccounts: any;
+  signalAccounts: any; //CopyTradingAccountInfo[];
   wallets: WalletData[];
   walletsAddresses: WalletInfo[];
   currency: string;
@@ -52,7 +52,7 @@ class FollowForm extends React.Component<IFollowFormProps, IFollowFormState> {
     const { signalAccounts, currency } = this.props;
     const signalAccount =
       signalAccounts &&
-      signalAccounts.data.find((account: any) => account.currency === currency);
+      signalAccounts.find((account: any) => account.currency === currency);
     if (signalAccount) this.setState({ step: TABS.PARAMS });
   }
   submit = (values: IRequestParams) => {

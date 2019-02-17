@@ -4,7 +4,12 @@ import Dialog from "shared/components/dialog/dialog";
 
 import FollowForm from "./follow-popup/follow-popup-form";
 import FollowTop from "./follow-popup/follow-popup-top";
-import { WalletData, WalletInfo, WalletsInfo } from "gv-api-web";
+import {
+  CopyTradingAccountsList,
+  WalletData,
+  WalletInfo,
+  WalletsInfo
+} from "gv-api-web";
 import {
   attachToSignal,
   getSignalAccounts,
@@ -39,14 +44,15 @@ class ProgramFollowContainer extends React.Component<
 
   componentDidMount() {
     this.setState({ isPending: true });
-    getWalletsAddresses()
-      .then((wallets: WalletsInfo) => {
-        this.setState({ walletsAddresses: wallets.wallets });
-        return getSignalAccounts();
-      })
-      .then((signalAccounts: any) => {
-        this.setState({ signalAccounts, isPending: false });
-      });
+    getWalletsAddresses().then((wallets: WalletsInfo) => {
+      this.setState({ walletsAddresses: wallets.wallets });
+    });
+    getSignalAccounts().then(
+      (CopyTradingAccountsList: CopyTradingAccountsList) => {
+        const { accounts } = CopyTradingAccountsList;
+        this.setState({ signalAccounts: accounts, isPending: false });
+      }
+    );
   }
 
   render() {
