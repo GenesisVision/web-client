@@ -566,12 +566,16 @@
   "transactions-details": {
     "title": "Transaction details",
     "entry-fee": "Entry fee",
+    "success-fee": "Success fee",
     "gv-fee": "GV Commission",
     "deposit": "Deposit",
+    "converting": "Converting",
+    "profit": "Profit program",
     "external": {
       "from-wallet": "From",
       "from": "From address",
       "to": "To external address",
+      "to-wallet": "To",
       "amount": "Amount"
     },
     "status": {
