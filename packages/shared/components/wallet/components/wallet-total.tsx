@@ -15,7 +15,7 @@ interface IWalletProps {
   t(str: string): string;
   info?: WalletsGrandTotal;
   filters?: MultiWalletFilters;
-  payFeesWithGvt?: boolean;
+  isPayFeesWithGvt?: boolean;
   wallets?: WalletsInfo;
   role?: boolean;
 }
