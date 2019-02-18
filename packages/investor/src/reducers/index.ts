@@ -1,9 +1,7 @@
 import fundDepositReducer, {
   FundDepositState
 } from "modules/fund-deposit/reducer/fund-deposit.reducer";
-import headerReducer, {
-  HeaderState
-} from "modules/header/reducer/header-reducer";
+import headerReducer  from "shared/reducers/header-reducer";
 import programDepositReducer, {
   ProgramsDepositState
 } from "modules/program-deposit/reducer/program-deposit.reducer";
@@ -43,10 +41,9 @@ import platformReducer from "shared/reducers/platform-reducer";
 import uiReducer from "shared/reducers/ui-reducer";
 import { DeepReadonly } from "utility-types";
 
-import RootState from "../../../shared/reducers/root-reducer";
+import RootState from "shared/reducers/root-reducer";
 
 type State = DeepReadonly<{
-  profileHeader: HeaderState;
   programDeposit: ProgramsDepositState;
   fundDeposit: FundDepositState;
   notifications: NotificationsState;

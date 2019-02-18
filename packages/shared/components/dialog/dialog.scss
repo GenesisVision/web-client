@@ -76,6 +76,7 @@
     font-size: 11px;
     line-height: 1.64;
     letter-spacing: 0.2px;
+    text-align: center;
   }
 
   &__top {
@@ -219,6 +220,11 @@
     p {
       padding-bottom: 0;
     }
+  }
+
+  &__row {
+    display: flex;
+    width: 100%;
   }
 
   .form-error {

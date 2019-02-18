@@ -23,7 +23,7 @@ import {
   SETTINGS_ROUTE
 } from "shared/components/profile/profile.constants";
 import Sidebar from "shared/components/sidebar/sidebar";
-import { WALLET_PAGE_ROUTE } from "shared/components/wallet/wallet-page";
+import { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes";
 
 const NavigationMobile = ({
   t,
@@ -77,7 +77,7 @@ const NavigationMobile = ({
           </NavigationItem>
           <NavigationItem
             icon={<WalletIcon primary />}
-            href={WALLET_PAGE_ROUTE}
+            href={WALLET_TOTAL_PAGE_ROUTE}
           >
             {t("navigation.wallet")}
           </NavigationItem>

@@ -48,9 +48,13 @@ const StatisticItem = ({
         className
       )}
     >
-      <div className={"statistics-item__top " + generateClasses(LABEL, invert)}>
-        {label}
-      </div>
+      {label && (
+        <div
+          className={"statistics-item__top " + generateClasses(LABEL, invert)}
+        >
+          {label}
+        </div>
+      )}
       <div className={generateClasses(VALUE, invert)}>{children}</div>
       {equivalent !== undefined ? (
         <div className="statistics-item__equivalent">
@@ -69,7 +73,7 @@ const StatisticItem = ({
 };
 
 StatisticItem.propTypes = {
-  label: PropTypes.oneOfType([PropTypes.object, PropTypes.string]).isRequired,
+  label: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   equivalent: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   equivalentCurrency: PropTypes.string,
   small: PropTypes.bool,

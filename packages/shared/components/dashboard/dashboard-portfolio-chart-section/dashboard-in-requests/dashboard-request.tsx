@@ -1,7 +1,7 @@
 import { ProgramRequest } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import moment from "moment";
-import React, { Component } from "react";
+import * as React from "react";
 import { TranslationFunction, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
@@ -25,7 +25,7 @@ export interface IDashboardRequestState {
   disabled: boolean;
 }
 
-class DashboardRequest extends Component<
+class DashboardRequest extends React.Component<
   IDashboardRequestProps,
   IDashboardRequestState
 > {
