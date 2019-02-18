@@ -565,6 +565,50 @@
       }
     }
   },
+  "transactions-details": {
+    "title": "Transaction details",
+    "entry-fee": "Entry fee",
+    "success-fee": "Success fee",
+    "gv-fee": "GV Commission",
+    "deposit": "Deposit",
+    "converting": "Converting",
+    "profit": "Profit program",
+    "external": {
+      "from-wallet": "From",
+      "from": "From address",
+      "to": "To external address",
+      "to-wallet": "To",
+      "amount": "Amount"
+    },
+    "status": {
+      "title": "Status"
+    },
+    "Program": "Program",
+    "Fund": "Fund",
+    "Open": {
+      "Program": "Open program",
+      "Fund": "Open fund"
+    },
+    "Close": {
+      "Program": "Close program",
+      "Fund": "Close fund"
+    },
+    "investment": {
+      "amount": "Investment amount",
+      "Program": "Program investment",
+      "Fund": "Fund investment",
+      "to-Program": "To the program",
+      "to-Fund": "To the fund"
+    },
+    "withdrawal": {
+      "title": "Withdrawal",
+      "amount": "Withdrawal amount",
+      "Program": "Program withdrawal",
+      "Fund": "Fund withdrawal",
+      "from-Program": "From the program",
+      "from-Fund": "From the fund"
+    }
+  },
   "wallet-page": {
     "title": "Wallet",
     "wallet": "wallet",

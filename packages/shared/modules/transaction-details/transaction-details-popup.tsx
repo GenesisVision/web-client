@@ -1,7 +1,7 @@
 import * as React from "react";
 import Dialog from "shared/components/dialog/dialog";
 
-import { TransactionDetails } from "./transaction-details";
+import TransactionDetailsDialog from "./transaction-details";
 
 interface ITransactionDetailsProps {
   transactionId: string;
@@ -14,8 +14,12 @@ class TransactionDetailsPopup extends React.Component<
 > {
   render() {
     return (
-      <Dialog open={this.props.open} onClose={this.props.onClose}>
-        <TransactionDetails transactionId={"hello world"} />
+      <Dialog
+        open={this.props.open}
+        onClose={this.props.onClose}
+        className="transaction-details"
+      >
+        <TransactionDetailsDialog transactionId={this.props.transactionId} />
       </Dialog>
     );
   }
