@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg version="1.1" viewBox="0 0 13 14" xmlns="http://www.w3.org/2000/svg">
-    <title>Group 12</title>
-    <desc>Created with Sketch.</desc>
-    <g fill="none" fill-rule="evenodd">
-        <g transform="translate(-1020 -606)" stroke="#fff" stroke-width="1.4">
-            <g transform="translate(970 551)">
-                <g transform="translate(36 14)">
-                    <g transform="translate(0 28)">
-                        <g transform="translate(20.5 21) rotate(180) translate(-5.5 -7)">
-                            <path d="m5.5 1.5556v12.444"/>
-                            <polyline points="1.2246e-16 9.3333 5.5 14 11 9.3333"/>
+<svg width="13px" height="14px" viewBox="0 0 13 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="ui" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="1600_3_3_Transaction-Components" transform="translate(-1020.000000, -606.000000)" stroke="#FFFFFF" stroke-width="1.4">
+            <g id="Group-28-Copy-2" transform="translate(970.000000, 551.000000)">
+                <g id="Group-7" transform="translate(36.000000, 14.000000)">
+                    <g id="Group-11" transform="translate(0.000000, 28.000000)">
+                        <g id="Group-12" transform="translate(20.500000, 21.000000) rotate(-180.000000) translate(-20.500000, -21.000000) translate(15.000000, 14.000000)">
+                            <path d="M5.5,1.55555556 L5.5,14" id="Path-2"></path>
+                            <polyline id="Path-4" points="1.2246468e-16 9.33333333 5.5 14 11 9.33333333"></polyline>
                         </g>
                     </g>
                 </g>

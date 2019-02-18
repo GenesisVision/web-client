@@ -567,6 +567,13 @@
     "title": "Transaction details",
     "entry-fee": "Entry fee",
     "gv-fee": "GV Commission",
+    "deposit": "Deposit",
+    "external": {
+      "from-wallet": "From",
+      "from": "From address",
+      "to": "To external address",
+      "amount": "Amount"
+    },
     "status": {
       "title": "Status"
     },
@@ -588,6 +595,7 @@
       "to-Fund": "To the fund"
     },
     "withdrawal": {
+      "title": "Withdrawal",
       "amount": "Withdrawal amount",
       "Program": "Program withdrawal",
       "Fund": "Fund withdrawal",
