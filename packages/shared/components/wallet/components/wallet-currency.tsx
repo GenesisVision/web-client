@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
 import Page from "shared/components/page/page";
-import { INVESTOR_EVENT_TYPE_FILTER_VALUES } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
 import BTCIcon from "shared/media/currency/BTC.svg";
 import ETHIcon from "shared/media/currency/ETH.svg";
 import GVTIcon from "shared/media/currency/GVT.svg";
@@ -79,12 +78,12 @@ class WalletCurrency extends React.Component<IWalletProps> {
       <Page title={info.title}>
         <div className="wallet-balance">
           <div className="wallet-balance__wrapper">
-            <h1 className="wallet-balance__header">
+            <h1 className="wallet-balance__title">
               {info.title}
               <span> {t("wallet-page.wallet")}</span>
               <img
                 src={getWalletIcon(info.currency)}
-                className="wallet-balance__header-icon"
+                className="wallet-balance__title-icon"
                 alt="Icon"
               />
             </h1>

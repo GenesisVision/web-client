@@ -11,6 +11,7 @@ import Profitability from "shared/components/profitability/profitability";
 import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import TagProgramContainer from "shared/components/tag-program/tag-program-container";
 import { composeManagerDetailsUrl } from "shared/utils/compose-url";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
@@ -76,6 +77,7 @@ class ProgramCard extends Component {
                 </GVButton>
               </Link>
             </div>
+            <TagProgramContainer tags={program.tags} />
           </div>
           <div className="programs-cards__actions">
             <ActionsCircleIcon

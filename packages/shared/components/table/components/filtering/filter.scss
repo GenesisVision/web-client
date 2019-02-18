@@ -19,9 +19,24 @@
   }
 
   &__arrow {
-    stroke: #d8d8d8;
+    stroke: $icon-color;
     &__is-open {
       stroke: $primary-color;
+    }
+  }
+
+  &--tags {
+    cursor: default;
+    display: flex;
+    flex-wrap: wrap;
+
+    .filter__value {
+      padding-left: 0;
+    }
+
+    .tag-button {
+      margin-top: 2.5px;
+      margin-bottom: 2.5px;
     }
   }
 }

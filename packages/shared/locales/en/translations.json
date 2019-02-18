@@ -419,6 +419,7 @@
       "avToInvest": "Av. to invest",
       "entryFee": "Entry fee",
       "successFee": "Success fee",
+      "subscriptionFee": "Subscription fee",
       "invest": "Invest",
       "reinvest": "Reinvest",
       "yourInvestment": "Current investment",
@@ -432,6 +433,7 @@
       "withdraw-notice-text": "You can withdraw only the invested funds, the profit will be withdrawn to your account at the end of the period automatically",
       "edit-program": "Edit Program",
       "close-program": "Close Program",
+      "follow-trade": "Follow trades",
       "close-program-notification": "Investment program will be closed after this reporting period. Current investment requests will be cancelled and new requests won’t be accepted. Profit and funds from the trading account will be deposited to GVT wallets of investors and manager according to their shares.",
       "close-program-notification-success": "Request to close the program was sent successfully.",
       "requests-completed": "All requests completed successfully"
@@ -677,6 +679,9 @@
     "alert-messages": {
       "resend-email-success": "A withdrawal confirmation letter has just been resent to your email address.",
       "cancel-request-success": "The withdrawal request was successfully canceled"
+    },
+    "settings": {
+      "label": "Using GVT to pay for fees"
     }
   },
   "rating-page": {

@@ -101,6 +101,7 @@ $description-block-width: 250px;
   &__name {
     font-size: $text-size/1.5;
     color: $primary-color;
+    margin-bottom: 10px;
     .gv-btn {
       white-space: normal;
       padding: 0;
@@ -236,11 +237,12 @@ $description-block-width: 250px;
   }
   &--title {
     @include font-size($font-size-paragraph);
+    @include adaptive-padding(left, 15px);
     word-break: break-all;
     width: 170px;
-    div {
-      padding: $padding/10;
-    }
+  }
+  &--top {
+    padding-bottom: 3px;
   }
   &--link {
     @include table-link($text-accent-color, $text-color);
@@ -248,9 +250,6 @@ $description-block-width: 250px;
     text-overflow: ellipsis;
     overflow: hidden;
     display: block;
-  }
-  &--bottom {
-    opacity: 0.3;
   }
 
   &--name {
@@ -294,7 +293,7 @@ $description-block-width: 250px;
     background: $secondary-color;
     padding: $padding/1.5;
     border-radius: $border-radius 0 0 $border-radius;
-    min-width: 218px;
+    min-width: 255px;
   }
 
   &__collapse {
@@ -327,7 +326,7 @@ $description-block-width: 250px;
   &__title {
     font-size: $detailed-text;
     letter-spacing: 0.2px;
-    margin-bottom: $padding/2.5/1.5;
+    margin-bottom: $padding/3.75;
     word-break: break-word;
   }
 
@@ -340,6 +339,7 @@ $description-block-width: 250px;
     letter-spacing: 0.2px;
     color: $primary-color;
     word-break: break-all;
+    margin-bottom: $padding/3.75;
   }
 
   &__manager-link {

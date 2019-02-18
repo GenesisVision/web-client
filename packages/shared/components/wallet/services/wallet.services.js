@@ -25,6 +25,14 @@ export const fetchWalletTransactionsFilters = () => dispatch => {
   dispatch(actions.fetchWalletTransactionsFilters());
 };
 
+export const offPayFeesWithGvt = () => () => {
+  return walletApi.v10WalletPaygvtfeeOffPost(authService.getAuthArg());
+};
+
+export const onPayFeesWithGvt = () => () => {
+  return walletApi.v10WalletPaygvtfeeOnPost(authService.getAuthArg());
+};
+
 export const cancelWithdrawRequest = txId => (dispatch, getState) => {
   const authorization = authService.getAuthArg();
 
