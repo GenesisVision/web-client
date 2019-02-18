@@ -1,9 +1,9 @@
 import * as React from "react";
 import NumberFormat from "react-number-format";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
+import filesService from "shared/services/file-service";
+import { formatCurrencyValue } from "shared/utils/formatter";
 
-import StatisticItem from "../../components/statistic-item/statistic-item";
-import filesService from "../../services/file-service";
-import { formatCurrencyValue } from "../../utils/formatter";
 import { ITransactionDetailsProps } from "./transaction-details";
 
 const ConvertingDetails = (props: ITransactionDetailsProps) => {

@@ -1,10 +1,9 @@
 import * as React from "react";
 import NumberFormat from "react-number-format";
-
-import StatisticItem from "../../components/statistic-item/statistic-item";
-import { formatCurrencyValue } from "../../utils/formatter";
-import TransactionAsset from "./details-asset";
-import { ITransactionDetailsProps } from "./transaction-details";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
+import TransactionAsset from "shared/modules/transaction-details/details-asset";
+import { ITransactionDetailsProps } from "shared/modules/transaction-details/transaction-details";
+import { formatCurrencyValue } from "shared/utils/formatter";
 
 const WithdrawalTransaction = (props: ITransactionDetailsProps) => {
   const { data, t } = props;

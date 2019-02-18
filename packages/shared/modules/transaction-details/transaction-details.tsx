@@ -3,16 +3,15 @@ import "./transaction-details.scss";
 import { TransactionDetails } from "gv-api-web";
 import * as React from "react";
 import { translate } from "react-i18next";
+import ConvertingDetails from "shared/modules/transaction-details/converting-details";
+import ExternalDeposit from "shared/modules/transaction-details/external-deposit-details";
+import ExternalWithdrawal from "shared/modules/transaction-details/external-withdrawal-details";
+import InvestingTransaction from "shared/modules/transaction-details/investment-details";
+import OpenCloseTransaction from "shared/modules/transaction-details/open-close-details";
+import ProfitDetails from "shared/modules/transaction-details/profit-details";
+import WithdrawalTransaction from "shared/modules/transaction-details/withdrawal-details";
 import walletApi from "shared/services/api-client/wallet-api";
-
-import authService from "../../services/auth-service";
-import ConvertingDetails from "./converting-details";
-import ExternalDeposit from "./external-deposit-details";
-import ExternalWithdrawal from "./external-withdrawal-details";
-import InvestingTransaction from "./investment-details";
-import OpenCloseTransaction from "./open-close-details";
-import ProfitDetails from "./profit-details";
-import WithdrawalTransaction from "./withdrawal-details";
+import authService from "shared/services/auth-service";
 
 const Types = {
   Investing: InvestingTransaction,
