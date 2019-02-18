@@ -6,3 +6,7 @@ export const composeDefaultTransactionTypeFilter = () => ({
   defaultValue: undefined,
   type: FilterType.general
 });
+
+export const reduceFilters = filters => {
+  return filters.map(filter => ({ value: filter, label: filter }));
+};

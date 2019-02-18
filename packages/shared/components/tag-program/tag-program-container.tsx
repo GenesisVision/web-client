@@ -1,6 +1,7 @@
 import "./tag-program-container.scss";
 
-import React, { Component } from "react";
+import { ProgramTag } from "gv-api-web";
+import * as React from "react";
 import Tooltip from "shared/components/tooltip/tooltip";
 
 import Profitability from "../profitability/profitability";
@@ -9,11 +10,15 @@ import TagProgramTooltip from "./tag-program-tooltip";
 
 const MAX_VISIBLE_TAGS = 2;
 
-class TagProgramContainer extends Component {
+interface ITagProgramContainerProps {
+  tags: ProgramTag[];
+}
+
+class TagProgramContainer extends React.Component<ITagProgramContainerProps> {
   render() {
     const { tags } = this.props;
     const length = tags.length;
-    const reminder = length > MAX_VISIBLE_TAGS ? length - 1 : 0;
+    const reminder = length > MAX_VISIBLE_TAGS ? length - 1 : null;
     return (
       <div className="tag-program-container">
         {tags.map(
@@ -24,9 +29,9 @@ class TagProgramContainer extends Component {
         )}
         {reminder && (
           <Tooltip render={() => <TagProgramTooltip tags={tags} />}>
-            <div>
+            <div className="tag-program-container__others">
               <Profitability
-                className="tag-program-container__other"
+                className="tag-button"
                 value={reminder}
                 variant="chips"
               >

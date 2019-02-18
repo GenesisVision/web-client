@@ -1,10 +1,10 @@
 import React from "react";
 import { updateFilter } from "shared/components/table//helpers/filtering.helpers";
 import { calculateTotalPages } from "shared/components/table//helpers/paging.helpers";
+import { IDataModel, IPaging } from "shared/constants/constants";
 
 import { composeRequestFilters } from "../services/table.service";
 import Table from "./table";
-import { IDataModel, IPaging } from "shared/constants/constants";
 
 const defaultData: IDataModel = { items: null, total: 0 };
 

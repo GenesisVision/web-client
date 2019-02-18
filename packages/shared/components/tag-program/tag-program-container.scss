@@ -4,10 +4,9 @@
 
 .tag-program-container {
   display: flex;
+  align-items: center;
 
-  &__other {
-    padding: 2px 12px;
-    font-size: 11px;
-    cursor: pointer;
+  &__others {
+    line-height: 1;
   }
 }

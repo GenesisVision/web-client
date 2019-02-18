@@ -14,7 +14,10 @@ import { EmailPendingState } from "shared/reducers/email-pending-reducer";
 import { PlatformState } from "shared/reducers/platform-reducer";
 import { IUiState } from "shared/reducers/ui-reducer";
 
+import { HeaderState } from "./header-reducer";
+
 type RootState = Readonly<{
+  profileHeader: HeaderState;
   notificationSettings: NotificationSettingsState;
   loadingBar: Reducer<any>;
   platformData: PlatformState;

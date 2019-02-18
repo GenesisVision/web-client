@@ -8,9 +8,7 @@
   &__title {
     @include font-size($font-size-paragraph);
     font-weight: 600;
-    font-size: 14px;
-    color: #ffffff;
-    letter-spacing: 0.47px;
+    color: $main-color;
   }
 
   &__tags-list {
@@ -24,9 +22,9 @@
   }
 
   &__button {
+    transition-property: border-color;
     border: 1px solid #6e757b;
     background-color: transparent;
-    font-weight: 600;
     line-height: 1;
     color: $main-color;
 
@@ -46,7 +44,7 @@
     }
 
     &-plus {
-      font-size: 17px;
+      @include font-size(17px);
       font-weight: 400;
       padding-right: 3px;
     }
@@ -60,30 +58,5 @@
   .tag-program {
     margin-bottom: 10px;
     cursor: pointer;
-  }
-
-  .rc-slider {
-    margin: 1.5rem 0;
-  }
-
-  .rc-slider-track {
-    background-color: $primary-color;
-  }
-
-  .rc-slider-handle {
-    border-color: $primary-color;
-  }
-
-  .rc-slider-handle:hover {
-    border-color: $primary-color;
-  }
-  .rc-slider-handle:active,
-  .rc-slider-handle:focus {
-    border-color: $primary-color;
-    box-shadow: 0 0 5px $primary-color;
-  }
-
-  .rc-slider-dot-active {
-    border-color: $primary-color;
   }
 }

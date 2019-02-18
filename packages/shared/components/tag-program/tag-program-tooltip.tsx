@@ -1,8 +1,13 @@
-import React from "react";
+import { ProgramTag } from "gv-api-web";
+import * as React from "react";
 
 import TagProgramItem from "./tag-program-item";
 
-const TagProgramTooltip = ({ tags }) => {
+interface ITagProgramTooltip {
+  tags: ProgramTag[];
+}
+
+const TagProgramTooltip: React.FC<ITagProgramTooltip> = ({ tags }) => {
   return (
     <div className="tag-program-tooltip">
       {tags.map(

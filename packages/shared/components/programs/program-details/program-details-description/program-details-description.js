@@ -12,6 +12,7 @@ import DetailsInvestment from "shared/components/details/details-description-sec
 import Hint from "shared/components/hint/hint";
 import Popover from "shared/components/popover/popover";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import TagProgramItem from "shared/components/tag-program/tag-program-item";
 import { STATUS } from "shared/constants/constants";
 import platformApi from "shared/services/api-client/platform-api";
 import {
@@ -221,7 +222,11 @@ class ProgramDetailsDescription extends PureComponent {
               {programDescription.manager.username}
             </GVButton>
           </Link>
-
+          <div className="details-description__tag">
+            {programDescription.tags.map((tag, idx) => (
+              <TagProgramItem name={tag.name} color={tag.color} key={idx} />
+            ))}
+          </div>
           <div className="details-description__info">
             <h4 className="details-description__subheading">
               {t("program-details-page.description.strategy")}

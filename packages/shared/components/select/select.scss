@@ -10,6 +10,7 @@
     flex-direction: column;
     padding: 10px 0;
     overflow: hidden;
+    align-items: flex-start;
   }
 
   &__content {
@@ -36,6 +37,8 @@
   }
 
   &__text {
+    display: inline-flex;
+    align-items: center;
     margin-right: 8px;
   }
 
