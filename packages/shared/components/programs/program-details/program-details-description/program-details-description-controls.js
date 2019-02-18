@@ -6,12 +6,13 @@ import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import Hint from "shared/components/hint/hint";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { formatValue } from "shared/utils/formatter";
 import { FOLLOW_TYPE } from "shared/constants/constants";
+import { formatValue } from "shared/utils/formatter";
 
 class ProgramDetailsDescriptionControls extends React.Component {
   state = {
     isOpenFollowPopup: false,
+    isOpenUnfollowPopup: false,
     isOpenInvestmentPopup: false,
     isOpenCloseProgramPopup: false,
     isOpenEditProgramPopup: false,
@@ -49,6 +50,12 @@ class ProgramDetailsDescriptionControls extends React.Component {
   };
   handleCloseFollowPopup = () => {
     this.setState({ isOpenFollowPopup: false });
+  };
+  handleOpenUnfollowPopup = () => {
+    this.setState({ isOpenUnfollowPopup: true });
+  };
+  handleCloseUnfollowPopup = () => {
+    this.setState({ isOpenUnfollowPopup: false });
   };
   handleApplyFollowPopup = updateDetails => () => {
     updateDetails();
@@ -219,7 +226,7 @@ class ProgramDetailsDescriptionControls extends React.Component {
               accent
             >
               <NumberFormat
-                value={formatValue(programDescription.successFee, 2)}
+                value={formatValue(programDescription.signalSuccessFee, 2)}
                 displayType="text"
                 suffix=" %"
               />
@@ -229,23 +236,30 @@ class ProgramDetailsDescriptionControls extends React.Component {
               className="program-details-description__short-statistic-item"
               accent
             >
-              <NumberFormat value="3" displayType="text" suffix=" GVT" />
+              <NumberFormat
+                value={formatValue(programDescription.signalSubscriptionFee, 2)}
+                displayType="text"
+                suffix=" GVT"
+              />
             </StatisticItem>
           </div>
-          {(isOwnProgram || canInvest || canWithdraw) && (
-            <div className="program-details-description__button-container">
+          <div className="program-details-description__button-container">
+            {programDescription.personalProgramDetails.isFollowSignals ? (
+              <GVButton
+                className="program-details-description__invest-btn"
+                onClick={this.handleOpenUnfollowPopup}
+              >
+                {t("program-details-page.description.unfollow-trade")}
+              </GVButton>
+            ) : (
               <GVButton
                 className="program-details-description__invest-btn"
                 onClick={this.handleOpenFollowPopup}
-                disabled={
-                  !programDescription.personalProgramDetails ||
-                  !programDescription.personalProgramDetails.canInvest
-                }
               >
                 {t("program-details-page.description.follow-trade")}
               </GVButton>
-            </div>
-          )}
+            )}
+          </div>
         </div>
         <ProgramDetailContext.Consumer>
           {({ updateDetails }) => (
