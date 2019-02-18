@@ -17,6 +17,7 @@ import {
   updateAttachToSignal
 } from "./services/program-follow-service";
 import { FOLLOW_TYPE } from "shared/constants/constants";
+import authService from "shared/services/auth-service";
 
 export interface IProgramFollowContainerProps {
   programName: string;
@@ -43,6 +44,7 @@ class ProgramFollowContainer extends React.Component<
   };
 
   componentDidMount() {
+    if (!authService.getAuthArg()) return;
     this.setState({ isPending: true });
     getWalletsAddresses().then((wallets: WalletsInfo) => {
       this.setState({ walletsAddresses: wallets.wallets });
