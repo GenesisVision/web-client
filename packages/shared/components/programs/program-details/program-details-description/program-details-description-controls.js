@@ -7,9 +7,11 @@ import NumberFormat from "react-number-format";
 import Hint from "shared/components/hint/hint";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatValue } from "shared/utils/formatter";
+import { FOLLOW_TYPE } from "shared/constants/constants";
 
 class ProgramDetailsDescriptionControls extends React.Component {
   state = {
+    isOpenFollowPopup: false,
     isOpenInvestmentPopup: false,
     isOpenCloseProgramPopup: false,
     isOpenEditProgramPopup: false,
@@ -42,6 +44,15 @@ class ProgramDetailsDescriptionControls extends React.Component {
   handleCloseEditProgramPopup = () => {
     this.setState({ isOpenEditProgramPopup: false });
   };
+  handleOpenFollowPopup = () => {
+    this.setState({ isOpenFollowPopup: true });
+  };
+  handleCloseFollowPopup = () => {
+    this.setState({ isOpenFollowPopup: false });
+  };
+  handleApplyFollowPopup = updateDetails => () => {
+    updateDetails();
+  };
   handleApplyEditProgramPopup = updateDetails => () => {
     updateDetails();
   };
@@ -58,6 +69,7 @@ class ProgramDetailsDescriptionControls extends React.Component {
 
   render() {
     const {
+      isOpenFollowPopup,
       isOpenInvestmentPopup,
       isOpenCloseProgramPopup,
       isOpenEditProgramPopup,
@@ -67,6 +79,7 @@ class ProgramDetailsDescriptionControls extends React.Component {
       t,
       canCloseProgram,
       isOwnProgram,
+      ProgramFollowContainer,
       ClosePeriodContainer,
       CloseProgramContainer,
       ProgramDepositContainer,
@@ -223,7 +236,7 @@ class ProgramDetailsDescriptionControls extends React.Component {
             <div className="program-details-description__button-container">
               <GVButton
                 className="program-details-description__invest-btn"
-                onClick={this.handleOpenInvestmentPopup}
+                onClick={this.handleOpenFollowPopup}
                 disabled={
                   !programDescription.personalProgramDetails ||
                   !programDescription.personalProgramDetails.canInvest
@@ -271,6 +284,17 @@ class ProgramDetailsDescriptionControls extends React.Component {
                   onClose={this.handleCloseEditProgramPopup}
                   onApply={this.handleApplyEditProgramPopup(updateDetails)}
                   type={PROGRAM}
+                />
+              )}
+              {ProgramFollowContainer && (
+                <ProgramFollowContainer
+                  programName={programDescription.title}
+                  type={FOLLOW_TYPE.CREATE}
+                  id={programDescription.id}
+                  open={isOpenFollowPopup}
+                  currency={programDescription.currency}
+                  onClose={this.handleCloseFollowPopup}
+                  onApply={this.handleApplyFollowPopup(updateDetails)}
                 />
               )}
             </Fragment>
