@@ -2,13 +2,13 @@ import copy from "copy-to-clipboard";
 import { GVButton } from "gv-react-components";
 import * as React from "react";
 import NumberFormat from "react-number-format";
+import ArrowIcon from "shared/media/arrow-up-thin.svg";
 
 import CopyIcon from "../../components/icon/copy-icon";
 import Profitability from "../../components/profitability/profitability";
 import StatisticItem from "../../components/statistic-item/statistic-item";
 import filesService from "../../services/file-service";
 import { formatCurrencyValue } from "../../utils/formatter";
-import ArrowIcon from "shared/media/arrow-up-thin.svg";
 import { ITransactionDetailsProps } from "./transaction-details";
 
 const ExternalWithdrawal = (props: ITransactionDetailsProps) => {
@@ -42,14 +42,12 @@ const ExternalWithdrawal = (props: ITransactionDetailsProps) => {
           </div>
         </StatisticItem>
         <StatisticItem label={t(`transactions-details.external.amount`)} big>
-          <Profitability value={data.amount} prefix="sign">
-            <NumberFormat
-              value={formatCurrencyValue(data.amount, data.currency)}
-              suffix={` ${data.currency}`}
-              allowNegative={false}
-              displayType="text"
-            />
-          </Profitability>
+          <NumberFormat
+            value={formatCurrencyValue(data.amount, data.currency)}
+            suffix={` ${data.currency}`}
+            allowNegative={true}
+            displayType="text"
+          />
         </StatisticItem>
       </div>
       <div className="dialog__bottom">

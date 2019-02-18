@@ -1,8 +1,6 @@
-import { TransactionDetails } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 
-import Profitability from "../../components/profitability/profitability";
 import StatisticItem from "../../components/statistic-item/statistic-item";
 import filesService from "../../services/file-service";
 import { formatCurrencyValue } from "../../utils/formatter";
@@ -34,14 +32,12 @@ const ConvertingDetails = (props: ITransactionDetailsProps) => {
           </div>
         </StatisticItem>
         <StatisticItem label={t(`transactions-details.external.amount`)}>
-          <Profitability value={data.amount} prefix="sign">
-            <NumberFormat
-              value={formatCurrencyValue(data.amount, data.currency)}
-              suffix={` ${data.currency}`}
-              allowNegative={true}
-              displayType="text"
-            />
-          </Profitability>
+          <NumberFormat
+            value={formatCurrencyValue(data.amount, data.currency)}
+            suffix={` ${data.currency}`}
+            allowNegative={true}
+            displayType="text"
+          />
         </StatisticItem>
       </div>
       <div className="dialog__bottom">
@@ -64,17 +60,15 @@ const ConvertingDetails = (props: ITransactionDetailsProps) => {
           </div>
         </StatisticItem>
         <StatisticItem label={t(`transactions-details.external.amount`)}>
-          <Profitability value={data.convertingDetails.amountTo} prefix="sign">
-            <NumberFormat
-              value={formatCurrencyValue(
-                data.convertingDetails.amountTo,
-                data.convertingDetails.currencyTo
-              )}
-              suffix={` ${data.convertingDetails.currencyTo}`}
-              allowNegative={true}
-              displayType="text"
-            />
-          </Profitability>
+          <NumberFormat
+            value={formatCurrencyValue(
+              data.convertingDetails.amountTo,
+              data.convertingDetails.currencyTo
+            )}
+            suffix={` ${data.convertingDetails.currencyTo}`}
+            allowNegative={true}
+            displayType="text"
+          />
         </StatisticItem>
         <StatisticItem label={t(`transactions-details.status.title`)}>
           {data.status}

@@ -47,14 +47,12 @@ const ExternalDeposit = (props: ITransactionDetailsProps) => {
           {data.status} {data.externalTransactionDetails.description}
         </StatisticItem>
         <StatisticItem label={t(`transactions-details.external.amount`)} big>
-          <Profitability value={data.amount} prefix="sign">
-            <NumberFormat
-              value={formatCurrencyValue(data.amount, data.currency)}
-              suffix={` ${data.currency}`}
-              allowNegative={false}
-              displayType="text"
-            />
-          </Profitability>
+          <NumberFormat
+            value={formatCurrencyValue(data.amount, data.currency)}
+            suffix={` ${data.currency}`}
+            allowNegative={true}
+            displayType="text"
+          />
         </StatisticItem>
       </div>
     </React.Fragment>
