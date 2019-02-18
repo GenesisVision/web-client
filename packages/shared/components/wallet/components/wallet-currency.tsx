@@ -11,10 +11,10 @@ import ETHIcon from "shared/media/currency/ETH.svg";
 import GVTIcon from "shared/media/currency/GVT.svg";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
 import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
+import filesService from "shared/services/file-service";
 
 import WalletTransferPopup from "../../../modules/wallet-transfer/wallet-transfer-popup";
 import RootState from "../../../reducers/root-reducer";
-import filesService from "../../../services/file-service";
 import WalletBalanceButtons from "./wallet-balance/wallet-balance-buttons";
 import WalletBalanceElements from "./wallet-balance/wallet-balance-elements";
 import WalletBalanceLoader from "./wallet-balance/wallet-balance-loader";

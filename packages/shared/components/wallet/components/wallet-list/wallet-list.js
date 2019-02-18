@@ -16,9 +16,9 @@ import ConvertIcon from "shared/media/convert.svg";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
 import WalletTransferPopup from "shared/modules/wallet-transfer/wallet-transfer-popup";
 import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
+import filesService from "shared/services/file-service";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-import filesService from "../../../../services/file-service";
 import { walletTableTransactionsSelector } from "../wallet-transactions/wallet-transactions.selector";
 import { WALLET_LIST_COLUMNS } from "./wallet-list.constants";
 
