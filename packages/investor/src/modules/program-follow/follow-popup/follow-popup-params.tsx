@@ -21,10 +21,11 @@ const modes: { [key: string]: mode } = {
 };
 
 export interface IFollowParamsProps {
-  t: TranslationFunction;
   onClick: (values: IRequestParams) => void;
+  onPrevStep(): void;
   errors?: any;
   values?: FormValues;
+  t?: any;
 }
 export interface FormValues {
   mode: string;
@@ -43,7 +44,15 @@ class FollowParams extends React.Component<OwnProps> {
     onClick(values);
   };
   render() {
-    const { t, setFieldValue, errors, isValid, dirty, values } = this.props;
+    const {
+      t,
+      setFieldValue,
+      errors,
+      onPrevStep,
+      isValid,
+      dirty,
+      values
+    } = this.props;
     const { openTolerancePercent, mode } = values;
     const setMaxOpenTolerancePercent = () => {
       setFieldValue("openTolerancePercent", "20");
@@ -104,19 +113,22 @@ class FollowParams extends React.Component<OwnProps> {
           <div className="dialog-field">
             <InputAmountField
               name="fixedVolume"
-              label={"USD equivalent"}
+              label={t("follow-program.params.usd-equivalent")}
               currency={"USD"}
               setMax={setMaxAmountFixedVolume}
             />
           </div>
         )}
         <div className="dialog__buttons">
+          <GVButton onClick={onPrevStep} color="secondary" variant="outlined">
+            {t("follow-program.params.back")}
+          </GVButton>
           <GVButton
             onClick={this.handleSubmit}
             className="invest-form__submit-button"
             disabled={disableButton()}
           >
-            {"Submit"}
+            {t("follow-program.params.submit")}
           </GVButton>
         </div>
       </form>

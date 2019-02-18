@@ -51,6 +51,9 @@ class FollowForm extends React.Component<IFollowFormProps, IFollowFormState> {
       requestParams: { ...this.state.requestParams, ...values }
     });
   };
+  returnCopytradingAccount = () => {
+    this.setState({ step: TABS.CREATE_ACCOUNT });
+  };
   componentDidMount() {
     const { signalAccounts, currency } = this.props;
     const signalAccount =
@@ -68,10 +71,8 @@ class FollowForm extends React.Component<IFollowFormProps, IFollowFormState> {
         this.props.submitMethod(id, this.state.requestParams).then(
           (res: any) => {
             handleSubmit();
-            console.log(res);
           },
           (errors: any) => {
-            console.log(errors);
             this.setState({
               errors
             });
@@ -101,9 +102,12 @@ class FollowForm extends React.Component<IFollowFormProps, IFollowFormState> {
             onClick={this.createdCopytradingAccount}
           />
         )}
-        {/*{step === TABS.PARAMS && (*/}
-        {/*<FollowParams onClick={this.submit} />*/}
-        {/*)}*/}
+        {step === TABS.PARAMS && (
+          <FollowParams
+            onClick={this.submit}
+            onPrevStep={this.returnCopytradingAccount}
+          />
+        )}
         {errors.errorMessage && (
           <div className="follow-popup__errors">{errors.errorMessage}</div>
         )}

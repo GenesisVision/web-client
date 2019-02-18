@@ -123,7 +123,7 @@ class FollowCreateAccount extends React.Component<
           <GVFormikField
             name="initialDepositCurrency"
             component={GVTextField}
-            label={t("follow-program.from")}
+            label={t("follow-program.create-account.from")}
             InputComponent={Select}
             onChange={this.onChangeCurrencyFrom}
           >
@@ -142,7 +142,7 @@ class FollowCreateAccount extends React.Component<
           </GVFormikField>
         </div>
         <div className="dialog-field">
-          <StatisticItem label={"follow-program.available-to-create"}>
+          <StatisticItem label={t("follow-program.create-account.available")}>
             <NumberFormat
               value={formatCurrencyValue(availableToWithdraw, currency)}
               suffix={` ${currency}`}
@@ -153,7 +153,7 @@ class FollowCreateAccount extends React.Component<
         <div className="dialog-field">
           <InputAmountField
             name="initialDepositAmount"
-            label={t("follow-program.amount-to-create")}
+            label={t("follow-program.create-account.amount")}
             currency={currency}
             setMax={setMaxAmount}
           />
@@ -178,7 +178,7 @@ class FollowCreateAccount extends React.Component<
             className="invest-form__submit-button"
             disabled={disableButton()}
           >
-            {t("follow-program.next")}
+            {t("follow-program.create-account.next")}
           </GVButton>
         </div>
       </form>
