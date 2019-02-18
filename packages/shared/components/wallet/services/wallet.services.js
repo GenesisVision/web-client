@@ -5,11 +5,13 @@ import authService from "shared/services/auth-service";
 
 import * as actions from "../actions/wallet.actions";
 
-export const fetchWalletBalance = () => (dispatch, getState) => {
+export const fetchWallets = () => (dispatch, getState) => {
   const authorization = authService.getAuthArg();
+  const { info } = getState().wallet;
+  if (info.isPending) return;
   const { currency } = getState().accountSettings;
 
-  dispatch(actions.fetchWalletBalance(currency, authorization));
+  dispatch(actions.fetchWallets(currency, authorization));
   dispatch(fetchProfileHeaderInfo());
 };
 
@@ -19,8 +21,16 @@ export const fetchWalletTransactions = requestFilters => {
   return actions.fetchWalletTransactionsDispatch(authorization, requestFilters);
 };
 
-export const updateWalletTransactionsFilters = filters => dispatch => {
-  dispatch(actions.updateWalletTransactionsFilters(filters));
+export const fetchWalletTransactionsFilters = () => dispatch => {
+  dispatch(actions.fetchWalletTransactionsFilters());
+};
+
+export const offPayFeesWithGvt = () => () => {
+  return walletApi.v10WalletPaygvtfeeOffPost(authService.getAuthArg());
+};
+
+export const onPayFeesWithGvt = () => () => {
+  return walletApi.v10WalletPaygvtfeeOnPost(authService.getAuthArg());
 };
 
 export const cancelWithdrawRequest = txId => (dispatch, getState) => {
@@ -35,7 +45,7 @@ export const cancelWithdrawRequest = txId => (dispatch, getState) => {
           true
         )
       );
-      dispatch(fetchWalletBalance());
+      dispatch(fetchWallets());
       dispatch(fetchWalletTransactions());
       return response;
     })
@@ -56,7 +66,7 @@ export const resendWithdrawRequest = txId => (dispatch, getState) => {
           true
         )
       );
-      dispatch(fetchWalletBalance());
+      dispatch(fetchWallets());
       dispatch(fetchWalletTransactions());
       return response;
     })

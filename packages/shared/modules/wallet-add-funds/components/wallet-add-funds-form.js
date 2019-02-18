@@ -4,45 +4,23 @@ import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
-import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import GVqr from "shared/components/gv-qr/gv-qr";
 import CopyIcon from "shared/components/icon/copy-icon";
 import Select from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { convertToCurrency } from "shared/utils/currency-converter";
-import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
-
-const MAX_AMOUNT_GVT = 4436644;
+import { getWalletIcon } from "shared/components/wallet/components/wallet-currency";
 
 class WalletAddFundsForm extends Component {
-  state = {
-    currentAmount: ""
-  };
-
   onChangeCurrency = (name, target) => {
     const { setFieldValue } = this.props;
     setFieldValue("currency", target.props.value);
-    this.setState({ currentAmount: "" });
-  };
-
-  onChangeAmount = event => {
-    this.setState({ currentAmount: event.target.value });
   };
 
   render() {
     const { t, values, wallets, notifySuccess, notifyError } = this.props;
-    const { currentAmount } = this.state;
     const selected = wallets.find(w => w.currency === values.currency) || {};
-    const { address, currency, rateToGVT } = selected;
-    const isAllow = values => {
-      const { formattedValue } = values;
-      return (
-        formattedValue === "" ||
-        (validateFraction(formattedValue, currency) &&
-          convertToCurrency(formattedValue, rateToGVT) <= MAX_AMOUNT_GVT)
-      );
-    };
+    const { address, currency } = selected;
     const onCopy = () => {
       try {
         copy(address);
@@ -69,41 +47,18 @@ class WalletAddFundsForm extends Component {
               {wallets.map(wallet => {
                 const { description, currency } = wallet;
                 return (
-                  <option
-                    value={currency}
-                    key={currency}
-                  >{`${description} | ${currency}`}</option>
+                  <option value={currency} key={currency}>
+                    <img
+                      src={getWalletIcon(wallet.currency)}
+                      className="wallet-withdraw-popup__icon"
+                      alt={wallet.currency}
+                    />
+                    {`${description} | ${currency}`}
+                  </option>
                 );
               })}
             </GVFormikField>
           </div>
-          <GVFormikField
-            name="amount"
-            label={t("wallet-add-funds.will-send")}
-            component={GVTextField}
-            adornment={currency}
-            autoComplete="off"
-            autoFocus
-            InputComponent={NumberFormat}
-            allowNegative={false}
-            isAllowed={isAllow}
-            onChange={this.onChangeAmount}
-            value={currentAmount}
-          />
-          {currency !== "GVT" && (
-            <div className="gv-text-field__wrapper">
-              <StatisticItem big label={t("wallet-add-funds.will-get")}>
-                <NumberFormat
-                  value={formatCurrencyValue(
-                    convertToCurrency(currentAmount, rateToGVT),
-                    "GVT"
-                  )}
-                  suffix=" GVT"
-                  displayType="text"
-                />
-              </StatisticItem>
-            </div>
-          )}
         </div>
         <div className="dialog__bottom wallet-add-funds-popup__bottom">
           <GVqr className="wallet-add-funds-popup__qr" value={address} />
@@ -147,7 +102,7 @@ export default compose(
   withFormik({
     displayName: "add-funds",
     mapPropsToValues: props => {
-      let currency = "GVT";
+      let currency = props.currentWallet ? props.currentWallet.currency : "GVT";
       if (!props.wallets.find(wallet => wallet.currency === currency)) {
         currency = props.wallets[0] ? props.wallets[0].currency : "";
       }
