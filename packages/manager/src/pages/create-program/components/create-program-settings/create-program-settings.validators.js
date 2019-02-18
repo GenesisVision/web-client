@@ -2,6 +2,7 @@ import { number, object, string, boolean } from "yup";
 
 const createProgramSettingsValidationSchema = ({ t, ...props }) =>
   object().shape({
+    amount: number().required(),
     logo: object().shape({
       width: number().min(
         300,
