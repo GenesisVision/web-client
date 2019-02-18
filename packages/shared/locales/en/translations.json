@@ -922,6 +922,16 @@
         "value": "Value",
         "status": "Status"
       },
+      "open-trades-header": {
+        "manager": "Manager",
+        "symbol": "Symbol",
+        "open-date": "Open Date",
+        "volume": "Volume",
+        "open-price": "Open Price",
+        "price": "Price",
+        "profit": "Current Profit",
+        "close": "Close"
+      },
       "get-started": {
         "title": "Get started",
         "text-1": "There's no data right now.",

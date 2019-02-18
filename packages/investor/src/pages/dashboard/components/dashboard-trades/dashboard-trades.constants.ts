@@ -1,18 +1,12 @@
 export const DASHBOARD_OPEN_TRADES_COLUMNS = [
   {
-    name: "title"
-  },
-  {
-    name: "direction"
-  },
-  {
-    name: "open-date"
-  },
-  {
-    name: "close-date"
+    name: "manager"
   },
   {
     name: "symbol"
+  },
+  {
+    name: "open-date"
   },
   {
     name: "volume"
@@ -21,9 +15,9 @@ export const DASHBOARD_OPEN_TRADES_COLUMNS = [
     name: "open-price"
   },
   {
-    name: "close-price"
+    name: "profit"
   },
   {
-    name: "profit"
+    name: "close"
   }
 ];

@@ -7,6 +7,7 @@ import {
   IDashboardTradesCounts,
   fetchTradesCount
 } from "../../services/dashboard.service";
+import OpenTradesTable from "./open-trades-table";
 
 enum TRADES_TABS {
   OPEN_TRADES = "OPEN_TRADES",
@@ -14,6 +15,7 @@ enum TRADES_TABS {
 }
 
 interface IDashboardTradesSectionProps {
+  title: string;
   t: TranslationFunction;
 }
 
@@ -43,7 +45,7 @@ class DashboardTradesSection extends Component<
 
   render() {
     const { tab, openTradesCount, historyCount } = this.state;
-    const { t } = this.props;
+    const { t, title } = this.props;
     return (
       <Surface className="">
         <div className="">
@@ -64,7 +66,7 @@ class DashboardTradesSection extends Component<
           </div>
         </div>
         <div className="">
-          {tab === TRADES_TABS.OPEN_TRADES && 1}
+          {tab === TRADES_TABS.OPEN_TRADES && <OpenTradesTable title={title} />}
           {tab === TRADES_TABS.HISTORY && 2}
         </div>
       </Surface>

@@ -8,6 +8,7 @@ import dashboardFundsReducer from "./dashboard-funds.reducer";
 import dashboardInRequestsReducer, {
   DashboardInRequestsState
 } from "./dashboard-in-requests.reducer";
+import dashboardOpenTradesReducer from "./dashboard-open-trades.reducer";
 import dashboardPortfolioChartReducer, {
   DashboardPortfolioChartState
 } from "./dashboard-portfolio-chart.reducer";
@@ -16,6 +17,7 @@ import dashboardProgramsReducer from "./dashboard-programs.reducer";
 export type DashboardState = DeepReadonly<{
   programs: any;
   funds: any;
+  openTrades: any;
   portfolioChartData: DashboardPortfolioChartState;
   inRequestsData: DashboardInRequestsState;
   eventsData: DashboardEventsState;
@@ -24,6 +26,7 @@ export type DashboardState = DeepReadonly<{
 const dashboardReducer = combineReducers<DashboardState>({
   programs: dashboardProgramsReducer,
   funds: dashboardFundsReducer,
+  openTrades: dashboardOpenTradesReducer,
   portfolioChartData: dashboardPortfolioChartReducer,
   inRequestsData: dashboardInRequestsReducer,
   eventsData: dashboardEventsReducer

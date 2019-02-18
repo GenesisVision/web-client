@@ -1,4 +1,5 @@
 import investorApi from "shared/services/api-client/investor-api";
+import signalApi from "shared/services/api-client/signal-api";
 
 export const DASHBOARD_PROGRAMS = "DASHBOARD_PROGRAMS";
 export const DASHBOARD_FUNDS = "DASHBOARD_FUNDS";
@@ -11,6 +12,7 @@ export const DASHBOARD_CANCEL_PROGRAM_REQUESTS =
 export const DASHBOARD_OPEN_TRADES = "DASHBOARD_OPEN_TRADES";
 
 export const CLEAR_DASHBOARD_ASSETS_TABLE = "CLEAR_DASHBOARD_ASSETS_TABLE";
+export const CLEAR_DASHBOARD_TRADES_TABLE = "CLEAR_DASHBOARD_TRADES_TABLE";
 
 export const fetchDashboardPrograms = (auth, filters) => {
   return {
@@ -61,8 +63,6 @@ export const clearDashboardAssetsTable = () => ({
 export const fetchDashboardOpenTrades = (auth, filters) => {
   return {
     type: DASHBOARD_OPEN_TRADES,
-    payload: new Promise(() => {
-      return {};
-    })
+    payload: signalApi.v10SignalOpensignaltradesGet(auth)
   };
 };

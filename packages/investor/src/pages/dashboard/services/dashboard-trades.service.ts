@@ -1,11 +1,8 @@
-import { Action, Dispatch } from "redux";
 import authService from "shared/services/auth-service";
 
 import * as actions from "../actions/dashboard.actions";
 
-export const getDashboardOpenTrades = (filters: any) => (
-  dispatch: Dispatch<Action>
-) => {
+export const getDashboardOpenTrades = (filters: any) => {
   const authorization = authService.getAuthArg();
-  dispatch(actions.fetchDashboardOpenTrades(authorization, filters));
+  return actions.fetchDashboardOpenTrades(authorization, filters);
 };
