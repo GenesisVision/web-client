@@ -8,7 +8,7 @@ import Hint from "shared/components/hint/hint";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatValue } from "shared/utils/formatter";
 
-class ProgramDetailsDescriptionCenter extends React.Component {
+class ProgramDetailsDescriptionControls extends React.Component {
   state = {
     isOpenInvestmentPopup: false,
     isOpenCloseProgramPopup: false,
@@ -87,7 +87,7 @@ class ProgramDetailsDescriptionCenter extends React.Component {
     };
 
     return (
-      <div className="program-details-description__center">
+      <div className="program-details-description__controls">
         <div className="program-details-description__col">
           <div className="program-details-description__statistic-container">
             <StatisticItem
@@ -281,4 +281,4 @@ class ProgramDetailsDescriptionCenter extends React.Component {
   }
 }
 
-export default translate()(ProgramDetailsDescriptionCenter);
+export default translate()(ProgramDetailsDescriptionControls);

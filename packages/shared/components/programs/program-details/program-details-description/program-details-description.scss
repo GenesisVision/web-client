@@ -9,7 +9,7 @@
     padding: 0;
   }
 
-  &__top {
+  &__main {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -70,7 +70,7 @@
     }
   }
 
-  &__bottom {
+  &__additionally {
     @include media-breakpoint-tablet() {
       margin-left: $avatar-size;
     }
@@ -103,7 +103,7 @@
     font-weight: bold;
   }
 
-  &__center {
+  &__controls {
     display: flex;
     flex-wrap: wrap;
     margin: 0 (-$padding-xxsmall/2);

@@ -6,8 +6,8 @@ import DetailsInvestment from "shared/components/details/details-description-sec
 import { STATUS } from "shared/constants/constants";
 import platformApi from "shared/services/api-client/platform-api";
 
-import ProgramDetailsDescriptionCenter from "./program-details-description-center";
-import ProgramDetailsDescriptionTop from "./program-details-description-top";
+import ProgramDetailsDescriptionControls from "./program-details-description-controls";
+import ProgramDetailsDescriptionMain from "./program-details-description-main";
 
 class ProgramDetailsDescription extends PureComponent {
   state = {
@@ -53,7 +53,7 @@ class ProgramDetailsDescription extends PureComponent {
 
     return (
       <div className="program-details-description">
-        <ProgramDetailsDescriptionTop
+        <ProgramDetailsDescriptionMain
           programDescription={programDescription}
           AboutLevelsContainerComponent={AboutLevelsContainerComponent}
           investmentsLimits={this.state.investmentsLimits}
@@ -61,7 +61,7 @@ class ProgramDetailsDescription extends PureComponent {
           onFavoriteClick={onFavoriteClick}
           hasNotifications={hasNotifications}
         />
-        <ProgramDetailsDescriptionCenter
+        <ProgramDetailsDescriptionControls
           programDescription={programDescription}
           canCloseProgram={canCloseProgram}
           isOwnProgram={isOwnProgram}
@@ -78,7 +78,7 @@ class ProgramDetailsDescription extends PureComponent {
         />
 
         {programDescription.personalProgramDetails && status !== STATUS.ENDED && (
-          <div className="program-details-description__bottom">
+          <div className="program-details-description__additionally">
             <DetailsInvestment
               ProgramReinvestingWidget={ProgramReinvestingWidget}
               onReinvestingClick={onReinvestingClick}

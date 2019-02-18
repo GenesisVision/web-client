@@ -17,7 +17,7 @@ import {
 } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
 
-class ProgramDetailsDescriptionTop extends Component {
+class ProgramDetailsDescriptionMain extends Component {
   state = {
     isOpenAboutLevels: false,
     anchor: null
@@ -48,7 +48,7 @@ class ProgramDetailsDescriptionTop extends Component {
     } = this.props;
 
     return (
-      <div className="program-details-description__top">
+      <div className="program-details-description__main">
         <div className="program-details-description__avatar">
           <AssetAvatar
             url={programDescription.logo}
@@ -159,4 +159,4 @@ class ProgramDetailsDescriptionTop extends Component {
   }
 }
 
-export default translate()(ProgramDetailsDescriptionTop);
+export default translate()(ProgramDetailsDescriptionMain);
