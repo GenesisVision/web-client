@@ -6,18 +6,17 @@ import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import Chip from "shared/components/chip/chip";
-import Surface from "shared/components/surface/surface";
 import TableCell from "shared/components/table/components/table-cell";
 import TableModule from "shared/components/table/components/table-module";
 import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
-import { getWalletIcon } from "shared/components/wallet/components/wallet-currency";
 import { composeWalletCurrencytUrl } from "shared/components/wallet/wallet.routes";
 import ArrowIcon from "shared/media/arrow-up.svg";
 import ConvertIcon from "shared/media/convert.svg";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
 import WalletTransferPopup from "shared/modules/wallet-transfer/wallet-transfer-popup";
 import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
+import filesService from "shared/services/file-service";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 import { walletTableTransactionsSelector } from "../wallet-transactions/wallet-transactions.selector";
@@ -90,7 +89,7 @@ class WalletList extends Component {
                     }}
                   >
                     <img
-                      src={getWalletIcon(wallet.currency)}
+                      src={filesService.getFileUrl(wallet.logo)}
                       className="wallet-list__icon"
                       alt="Icon"
                     />

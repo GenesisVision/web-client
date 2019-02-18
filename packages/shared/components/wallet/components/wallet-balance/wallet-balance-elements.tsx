@@ -1,6 +1,6 @@
 import "./wallet-balance.scss";
 
-import { GVButton, GVColors } from "gv-react-components";
+import { GVColors } from "gv-react-components";
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -9,27 +9,37 @@ import PieContainer from "shared/components/pie-container/pie-container";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-const getPercentageValue = (value, totalValue) => {
-  return Math.round((value / totalValue) * 100);
+const getPercentageValue = (value: number, totalValue: number): number => {
+  const percentage = Math.round((value / totalValue) * 100);
+  return isNaN(percentage) ? 0 : percentage;
 };
 
-const WalletBalanceElements = ({ t, walletBalanceData }) => {
-  const totalValue = walletBalanceData.totalCcy;
+interface IWalletBalanceElement {
+  t(string: string): string;
+  total: number;
+  available: number;
+  invested: number;
+  pending: number;
+  currency: string;
+}
+
+const WalletBalanceElements = (props: IWalletBalanceElement) => {
+  const { t } = props;
   return (
     <div className="wallet-balance__wrapper">
       <div className="wallet-balance__statistic-item">
         <StatisticItem label={t("wallet-page.total-balance")} big accent>
           <NumberFormat
-            value={formatCurrencyValue(walletBalanceData.totalCcy)}
+            value={formatCurrencyValue(props.total)}
             thousandSeparator={" "}
             displayType="text"
-            suffix={` ${walletBalanceData.currencyCcy}`}
+            suffix={` ${props.currency}`}
           />
         </StatisticItem>
       </div>
       <div className="wallet-balance__statistic-item">
         <PieContainer
-          value={getPercentageValue(walletBalanceData.availableCcy, totalValue)}
+          value={getPercentageValue(props.available, props.total)}
           color={InnerColors.$pieAvailableColor}
         />
         <StatisticItem
@@ -39,16 +49,16 @@ const WalletBalanceElements = ({ t, walletBalanceData }) => {
           accent
         >
           <NumberFormat
-            value={formatCurrencyValue(walletBalanceData.availableCcy)}
+            value={formatCurrencyValue(props.available)}
             thousandSeparator={" "}
             displayType="text"
-            suffix={` ${walletBalanceData.currencyCcy}`}
+            suffix={` ${props.currency}`}
           />
         </StatisticItem>
       </div>
       <div className="wallet-balance__statistic-item">
         <PieContainer
-          value={getPercentageValue(walletBalanceData.investedCcy, totalValue)}
+          value={getPercentageValue(props.invested, props.total)}
           color={GVColors.$primaryColor}
         />
         <StatisticItem
@@ -58,16 +68,16 @@ const WalletBalanceElements = ({ t, walletBalanceData }) => {
           accent
         >
           <NumberFormat
-            value={formatCurrencyValue(walletBalanceData.investedCcy)}
+            value={formatCurrencyValue(props.invested)}
             thousandSeparator={" "}
             displayType="text"
-            suffix={` ${walletBalanceData.currencyCcy}`}
+            suffix={` ${props.currency}`}
           />
         </StatisticItem>
       </div>
       <div className="wallet-balance__statistic-item">
         <PieContainer
-          value={getPercentageValue(walletBalanceData.pendingCcy, totalValue)}
+          value={getPercentageValue(props.pending, props.total)}
           color={InnerColors.$piePendingColor}
         />
         <StatisticItem
@@ -77,10 +87,10 @@ const WalletBalanceElements = ({ t, walletBalanceData }) => {
           accent
         >
           <NumberFormat
-            value={walletBalanceData.pendingCcy}
+            value={props.pending}
             thousandSeparator={" "}
             displayType="text"
-            suffix={` ${walletBalanceData.currencyCcy}`}
+            suffix={` ${props.currency}`}
           />
         </StatisticItem>
       </div>

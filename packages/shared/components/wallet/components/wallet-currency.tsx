@@ -13,6 +13,7 @@ import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-fund
 import WalletTransferPopup from "shared/modules/wallet-transfer/wallet-transfer-popup";
 import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
 import RootState from "shared/reducers/root-reducer";
+import filesService from "shared/services/file-service";
 
 import WalletBalanceButtons from "./wallet-balance/wallet-balance-buttons";
 import WalletBalanceElements from "./wallet-balance/wallet-balance-elements";
@@ -82,7 +83,7 @@ class WalletCurrency extends React.Component<IWalletProps> {
               {info.title}
               <span> {t("wallet-page.wallet")}</span>
               <img
-                src={getWalletIcon(info.currency)}
+                src={filesService.getFileUrl(info.logo)}
                 className="wallet-balance__title-icon"
                 alt="Icon"
               />
@@ -93,7 +94,13 @@ class WalletCurrency extends React.Component<IWalletProps> {
               handleTransfer={this.handleOpenTransferPopup}
             />
           </div>
-          <WalletBalanceElements walletBalanceData={info} />
+          <WalletBalanceElements
+            available={info.available}
+            pending={info.pending}
+            total={info.total}
+            invested={info.invested}
+            currency={info.currency}
+          />
         </div>
         <WalletContainer filters={filters} currency={info.currency} />
         <WalletAddFundsPopup
