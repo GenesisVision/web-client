@@ -8,7 +8,7 @@ import NumberFormat from "react-number-format";
 import { RefreshIcon } from "shared/components/icon/refresh-icon";
 
 const DepositDetails = props => {
-  const { t, available, service, deposit, className, titleClassName } = props;
+  const { t, available, service, deposit, className, titleClassName, currency } = props;
   return (
     <div className={classnames("deposit-details", className)}>
       <div
@@ -19,7 +19,7 @@ const DepositDetails = props => {
       >
         {t("manager.create-fund-page.settings.fields.deposit-amount")}
       </div>
-      <div className="deposit-details__deposit-amount-value">{`${deposit} GVT`}</div>
+      <div className="deposit-details__deposit-amount-value">{`${deposit} ${currency}`}</div>
       <div className="deposit-details__available-amount">
         {t("manager.create-fund-page.settings.fields.available-in-wallet")}
         <span

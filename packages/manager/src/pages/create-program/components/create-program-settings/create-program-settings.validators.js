@@ -1,4 +1,4 @@
-import { number, object, string } from "yup";
+import { number, object, string, boolean } from "yup";
 
 const createProgramSettingsValidationSchema = ({ t, ...props }) =>
   object().shape({
@@ -63,7 +63,7 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) =>
     leverage: string().required(
       t("manager.create-program-page.settings.validation.leverage-required")
     ),
-    entryFee: number()
+    entryFeeInvest: number()
       .required(
         t("manager.create-program-page.settings.validation.entry-fee-required")
       )
@@ -74,7 +74,7 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) =>
           props.programsInfo.managerMaxEntryFee +
           " %"
       ),
-    successFee: number()
+    successFeeInvest: number()
       .min(0.01, "Success fee must be greater than 0.01 % ")
       .required(
         t(
@@ -87,6 +87,40 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) =>
           props.programsInfo.managerMaxSuccessFee +
           " %"
       ),
+    provideSignals: boolean(),
+    entryFeeSignal: number().when("provideSignals", {
+      is: true,
+      then: number()
+        .required(
+          t(
+            "manager.create-program-page.settings.validation.entry-fee-required"
+          )
+        )
+        .min(0.01, "Monthly subscription fee must be greater than 0.01 % ")
+        .max(
+          props.programsInfo.managerMaxEntryFee,
+          " Monthly subscription fee must be less than  " +
+            props.programsInfo.managerMaxEntryFee
+        ),
+      otherwise: number()
+    }),
+    successFeeSignal: number().when("provideSignals", {
+      is: true,
+      then: number()
+        .min(0.01, "Success fee must be greater than 0.01 % ")
+        .required(
+          t(
+            "manager.create-program-page.settings.validation.success-fee-required"
+          )
+        )
+        .max(
+          props.programsInfo.managerMaxSuccessFee,
+          "Success fee must be less than  " +
+            props.programsInfo.managerMaxSuccessFee +
+            " %"
+        ),
+      otherwise: number()
+    }),
     accountType: string().required(
       t("manager.create-program-page.settings.validation.account-type-required")
     )

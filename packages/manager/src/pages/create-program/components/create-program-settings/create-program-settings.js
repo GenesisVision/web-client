@@ -25,6 +25,7 @@ import {
 import AccountTypeField from "../account-type-field/account-type-field";
 import createProgramSettingsValidationSchema from "./create-program-settings.validators";
 import ProgramDefaultImage from "./program-default-image";
+import GVCheckbox from "shared/components/gv-checkbox/gv-checkbox";
 
 class CreateProgramSettings extends React.Component {
   allowEntryFee = values => {
@@ -60,7 +61,7 @@ class CreateProgramSettings extends React.Component {
       setSubmitting,
       isValid
     } = this.props;
-
+    const { provideSignals, accountType, description, title, currency } = values;
     const imageInputError =
       errors &&
       errors.logo &&
@@ -122,9 +123,9 @@ class CreateProgramSettings extends React.Component {
                   "manager.create-program-page.settings.fields.currency"
                 )}
                 InputComponent={Select}
-                disabled={!values["accountType"]}
+                disabled={!accountType}
               >
-                {getCurrencies(broker, values["accountType"]).map(currency => {
+                {getCurrencies(broker, accountType).map(currency => {
                   return (
                     <option value={currency} key={currency}>
                       {currency}
@@ -148,13 +149,13 @@ class CreateProgramSettings extends React.Component {
                     "manager.create-program-page.settings.fields.description-requirements"
                   )}
                 </span>
-                {values.description.length > 0 && (
+                {description.length > 0 && (
                   <span className="create-program-settings__description-chars">
-                    {values.description.length}
+                    {description.length}
                     <GVProgramPeriod
                       start={0}
                       end={500}
-                      value={values.description.length}
+                      value={description.length}
                     />
                   </span>
                 )}
@@ -168,10 +169,10 @@ class CreateProgramSettings extends React.Component {
                   "manager.create-program-page.settings.fields.brokers-leverage"
                 )}
                 InputComponent={Select}
-                disabled={!values["accountType"] || !isLeverageChooseAvailable}
+                disabled={!accountType || !isLeverageChooseAvailable}
                 className="create-program-settings__leverage"
               >
-                {getLeverages(broker, values["accountType"]).map(leverage => {
+                {getLeverages(broker, accountType).map(leverage => {
                   return (
                     <option value={leverage.toString()} key={leverage}>
                       {leverage}
@@ -225,12 +226,21 @@ class CreateProgramSettings extends React.Component {
               </div>
               <div className="create-program-settings__image-info">
                 <div className="create-program-settings__image-title">
-                  {values.title}
+                  {title}
                 </div>
                 <div className="create-program-settings__image-author">
                   {author}
                 </div>
               </div>
+            </div>
+            <div className="create-program-settings__row create-program-settings__row--provide-signals">
+              <GVFormikField
+                type="checkbox"
+                color="primary"
+                name="provideSignals"
+                label={<span>{"Provide signals"}</span>}
+                component={GVCheckbox}
+              />
             </div>
           </div>
           <div className="create-program-settings__subheading">
@@ -239,9 +249,12 @@ class CreateProgramSettings extends React.Component {
           </div>
           <div className="create-program-settings__fill-block create-program-settings__fill-block--with-border">
             <div className="create-program-settings__row">
+              <div className="create-program-settings__row-title">
+                {"Investment program fees"}
+              </div>
               <div className="create-program-settings__fee">
                 <GVFormikField
-                  name="entryFee"
+                  name="entryFeeInvest"
                   label={t(
                     "manager.create-program-page.settings.fields.entry-fee"
                   )}
@@ -272,7 +285,7 @@ class CreateProgramSettings extends React.Component {
               </div>
               <div className="create-program-settings__fee">
                 <GVFormikField
-                  name="successFee"
+                  name="successFeeInvest"
                   label={t(
                     "manager.create-program-page.settings.fields.success-fee"
                   )}
@@ -298,12 +311,76 @@ class CreateProgramSettings extends React.Component {
                 />
               </div>
             </div>
+            {provideSignals && (
+              <div className="create-program-settings__row">
+                <div className="create-program-settings__row-title">
+                  {"Signal provider fees"}
+                </div>
+                <div className="create-program-settings__fee">
+                  <GVFormikField
+                    name="entryFeeSignal"
+                    label={"Monthly subscription fee"}
+                    adornment="GVT"
+                    //isAllowed={this.allowEntryFee}
+                    component={GVTextField}
+                    InputComponent={NumberFormat}
+                    autoComplete="off"
+                    decimalScale={4}
+                  />
+                  <Hint
+                    content={t(
+                      "manager.create-program-page.settings.hints.entry-fee"
+                    )}
+                    className="create-program-settings__fee-hint"
+                    vertical={"bottom"}
+                    tooltipContent={`
+                    ${t(
+                      "manager.create-program-page.settings.hints.entry-fee-description",
+                      {
+                        maxFee: programsInfo.managerMaxEntryFee
+                      }
+                    )}. ${t(
+                      "manager.create-program-page.settings.hints.entry-fee-levels"
+                    )}
+                    `}
+                  />
+                </div>
+                <div className="create-program-settings__fee">
+                  <GVFormikField
+                    name="successFeeSignal"
+                    label={t(
+                      "manager.create-program-page.settings.fields.success-fee"
+                    )}
+                    adornment="%"
+                    //isAllowed={this.allowSuccessFee}
+                    component={GVTextField}
+                    InputComponent={NumberFormat}
+                    autoComplete="off"
+                    decimalScale={4}
+                  />
+                  <Hint
+                    content={t(
+                      "manager.create-program-page.settings.hints.success-fee"
+                    )}
+                    className="create-program-settings__fee-hint"
+                    vertical={"bottom"}
+                    tooltipContent={t(
+                      "manager.create-program-page.settings.hints.success-fee-description",
+                      {
+                        maxFee: programsInfo.managerMaxSuccessFee
+                      }
+                    )}
+                  />
+                </div>
+              </div>
+            )}
           </div>
           <div className="create-program-settings__subheading">
             <span className="create-program-settings__block-number">03</span>
             {t("manager.create-program-page.settings.deposit-details")}
           </div>
           <DepositDetailsContainer
+            currency={currency}
             deposit={programsInfo.managerProgramInvestment}
             className="create-program-settings__fill-block"
             titleClassName="create-program-settings__deposit-amount-title"
@@ -335,8 +412,10 @@ export default translate()(
   withFormik({
     displayName: "CreateProgramSettingsForm",
     mapPropsToValues: () => ({
+      provideSignals: true,
       periodLength: "",
-      successFee: "",
+      successFeeInvest: "",
+      successFeeSignal: "",
       leverage: "",
       title: "",
       description: "",
@@ -350,7 +429,8 @@ export default translate()(
         size: undefined
       },
       brokerAccountTypeId: "",
-      entryFee: "",
+      entryFeeInvest: "",
+      entryFeeSignal: "",
       currency: "",
       accountType: ""
     }),
