@@ -2,52 +2,30 @@
 @import "~shared/styles/_breakpoint.scss";
 @import "~shared/styles/_sizes.scss";
 
-.details-description {
-  display: grid;
-  grid-template-columns: 50% 50%;
-  grid-template-rows: auto auto auto;
-  grid-template-areas: "logo links" "main main" "details details";
+.program-details-description {
   padding: 0 $padding-xsmall;
 
   @include media-breakpoint-tablet() {
-    grid-template-columns: auto 1fr auto;
-    grid-template-rows: auto auto;
-    grid-template-areas: "logo main links" ". details details";
-    grid-column-gap: 50px;
     padding: 0;
+  }
+
+  &__main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    @include media-breakpoint-tablet() {
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+    }
   }
 
   &__your-investment {
     max-width: 750px;
   }
 
-  & .fund-asset {
-    background: rgba(216, 216, 216, 0.05);
-    height: 50px / $divider-title;
-    padding: 15px / $divider-padding;
-    justify-content: space-between;
-    &__container {
-      &--others-count {
-        cursor: pointer;
-      }
-    }
-    &--others-count {
-      min-width: auto;
-      background: rgba(216, 216, 216, 0.1);
-    }
-    @include media-breakpoint-landscape-phone() {
-      height: 50px;
-      padding: 15px;
-      min-width: 240px;
-      &--others-count {
-        min-width: auto;
-      }
-    }
-  }
-
   &__avatar {
     cursor: pointer;
-    width: 100%;
     padding: $padding-xsmall-mobile 0 $padding-xsmall;
     .program-avatar {
       justify-content: flex-start;
@@ -71,21 +49,38 @@
     }
   }
 
-  &__left {
-    grid-area: logo;
+  &__info {
+    order: 99;
+    width: 100%;
+
+    @include media-breakpoint-tablet() {
+      order: 0;
+      width: auto;
+      margin-left: 50px;
+    }
   }
 
-  &__bottom {
-    grid-area: details;
-  }
-
-  &__right {
-    grid-area: links;
+  &__tag {
+    @include adaptive-padding(top, $padding-xsmall, 2);
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+
+    .tag-program {
+      margin-bottom: 10px;
+    }
+  }
+
+  &__additionally {
+    @include media-breakpoint-tablet() {
+      margin-left: $avatar-size;
+    }
+  }
+
+  &__settings {
     padding: $padding-xsmall-mobile 0 $padding-xsmall;
 
     @include media-breakpoint-tablet() {
+      margin-left: auto;
       padding: 0;
     }
 
@@ -101,10 +96,6 @@
     opacity: 0.3;
   }
 
-  &__main {
-    grid-area: main;
-  }
-
   &__author-btn {
     padding: 0;
     font-size: $font-size-common;
@@ -112,29 +103,70 @@
     font-weight: bold;
   }
 
-  &__info {
-    padding-top: $padding-xxlarge-mobile;
+  &__controls {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 (-$padding-xxsmall/2);
+
     @include media-breakpoint-tablet() {
-      padding-top: $padding-xxlarge;
+      flex-wrap: nowrap;
+      margin-left: $avatar-size;
+      margin-right: 0;
+      max-width: 750px;
     }
   }
 
-  &__invest-button-container {
-    @include adaptive-padding(bottom, $padding-xsmall);
-    & > button,
-    .details-description__reallocate-container {
-      margin-top: $padding-small-mobile;
-    }
-    & button:not(:last-child) {
-      margin-right: $padding-small-mobile;
-    }
+  &__col {
+    @include vertical-paddings($padding-small);
+    @include horizontal-paddings($padding-small);
+    @include adaptive-margin(bottom, $padding-small);
+    border: 1px solid rgba($main-color, 0.06);
+    border-radius: 8px;
+    margin-left: $padding-xxsmall/2;
+    margin-right: $padding-xxsmall/2;
+    flex-grow: 1;
+
     @include media-breakpoint-landscape-phone() {
-      & > button,
-      .details-description__reallocate-container {
-        margin-top: $padding-small;
+      width: auto;
+
+      &--small-size {
+        min-width: 30%;
       }
-      & button:not(:last-child) {
-        margin-right: $padding-small;
+    }
+
+    @include media-breakpoint-tablet() {
+      margin-right: $padding-small;
+      margin-left: 0;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  &__statistic-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__button-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 (-$padding-small-mobile/2);
+
+    .gv-btn {
+      @include adaptive-margin(top, $padding-small);
+      margin-right: $padding-small-mobile/2;
+      margin-left: $padding-small-mobile/2;
+    }
+
+    @include media-breakpoint-tablet() {
+      margin: 0 (-$padding-small/2);
+
+      .gv-btn {
+        margin-right: $padding-small/2;
+        margin-left: $padding-small/2;
       }
     }
   }
@@ -142,6 +174,11 @@
   &__reallocate-container {
     display: flex;
     align-items: center;
+    margin-top: $padding-small-mobile;
+
+    @include media-breakpoint-landscape-phone() {
+      margin-top: $padding-small;
+    }
   }
 
   &__reallocate-message {
@@ -153,14 +190,10 @@
   }
 
   &__subheading {
-    font-size: $font-size-h4-mobile;
+    @include vertical-paddings($padding-big, $padding-small);
+    @include font-size($font-size-h4);
     font-weight: bold;
-    padding-bottom: $padding-small-mobile;
     letter-spacing: 0.21px;
-    @include media-breakpoint-landscape-phone() {
-      font-size: $font-size-h4;
-      padding-bottom: $padding-small;
-    }
   }
 
   &__info-block {
@@ -239,12 +272,9 @@
     justify-content: flex-start;
 
     &-item {
-      margin-right: $padding-small-mobile;
-      &:last-child {
-        margin-right: 0;
-      }
+      flex-grow: 1;
+
       @include media-breakpoint-landscape-phone() {
-        margin-right: $padding-small;
         font-size: $font-size-paragraph;
       }
     }
@@ -258,7 +288,7 @@
   }
 }
 
-.details-description__short-statistic-hint-tooltip-content {
+.program-details-description__short-statistic-hint-tooltip-content {
   z-index: 2;
   max-width: 248px;
   font-size: 12px;
