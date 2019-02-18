@@ -32,6 +32,7 @@ export const getWalletIcon = (currency: string): string => {
 interface IWalletProps {
   info?: WalletData;
   isPending: boolean;
+
   t(str: string): string;
 }
 
@@ -93,7 +94,13 @@ class WalletCurrency extends React.Component<IWalletProps> {
               handleTransfer={this.handleOpenTransferPopup}
             />
           </div>
-          <WalletBalanceElements walletBalanceData={info} />
+          <WalletBalanceElements
+            available={info.available}
+            pending={info.pending}
+            total={info.total}
+            invested={info.invested}
+            currency={info.currency}
+          />
         </div>
         <WalletContainer filters={filters} currency={info.currency} />
         <WalletAddFundsPopup

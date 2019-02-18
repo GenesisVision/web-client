@@ -31,7 +31,13 @@ class WalletTotal extends React.Component<IWalletProps> {
             <h1 className="wallet-balance__title">{t("wallet-page.title")}</h1>
             <WalletSettingsContainer isPayFeesWithGvt={isPayFeesWithGvt} />
           </div>
-          <WalletBalanceElements walletBalanceData={info} />
+          <WalletBalanceElements
+            available={info.availableCcy}
+            pending={info.pendingCcy}
+            total={info.totalCcy}
+            invested={info.investedCcy}
+            currency={info.currencyCcy}
+          />
         </div>
         <WalletContainerTotal
           wallets={wallets}
