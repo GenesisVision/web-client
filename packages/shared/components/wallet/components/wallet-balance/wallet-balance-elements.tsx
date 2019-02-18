@@ -14,7 +14,7 @@ const getPercentageValue = (value: number, totalValue: number): number => {
   return isNaN(percentage) ? 0 : percentage;
 };
 
-interface IWalletBelanceElement {
+interface IWalletBalanceElement {
   t(string: string): string;
   total: number;
   available: number;
@@ -23,7 +23,7 @@ interface IWalletBelanceElement {
   currency: string;
 }
 
-const WalletBalanceElements = (props: IWalletBelanceElement) => {
+const WalletBalanceElements = (props: IWalletBalanceElement) => {
   const { t } = props;
   return (
     <div className="wallet-balance__wrapper">
