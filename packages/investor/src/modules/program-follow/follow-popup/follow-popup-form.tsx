@@ -1,10 +1,12 @@
 import "./follow-popup.scss";
+
+import { CopyTradingAccountInfo, WalletData, WalletInfo } from "gv-api-web";
 import * as React from "react";
 import { Fragment } from "react";
 
 import FollowCreateAccount from "./follow-popup-create-account";
 import FollowParams from "./follow-popup-params";
-import { CopyTradingAccountInfo, WalletData, WalletInfo } from "gv-api-web";
+import FollowTop from "./follow-popup-top";
 
 enum TABS {
   CREATE_ACCOUNT = "CREATE_ACCOUNT",
@@ -21,6 +23,7 @@ export interface IFollowFormProps {
   wallets: WalletData[];
   walletsAddresses: WalletInfo[];
   currency: string;
+  programName: string;
 }
 interface IFollowFormState {
   step: TABS;
@@ -77,11 +80,20 @@ class FollowForm extends React.Component<IFollowFormProps, IFollowFormState> {
     );
   };
   render() {
-    const { signalAccounts, wallets, walletsAddresses, currency } = this.props;
-    const { errors } = this.state;
+    const {
+      signalAccounts,
+      wallets,
+      walletsAddresses,
+      currency,
+      programName
+    } = this.props;
+    const { errors, step } = this.state;
+    const adaptStep =
+      step === TABS.CREATE_ACCOUNT ? "create-account" : "params";
     return (
       <Fragment>
-        {!signalAccounts && this.state.step === TABS.CREATE_ACCOUNT && (
+        <FollowTop programName={programName} step={adaptStep} />
+        {!signalAccounts && step === TABS.CREATE_ACCOUNT && (
           <FollowCreateAccount
             wallets={wallets}
             walletsAddresses={walletsAddresses}
@@ -89,9 +101,9 @@ class FollowForm extends React.Component<IFollowFormProps, IFollowFormState> {
             onClick={this.createdCopytradingAccount}
           />
         )}
-        {this.state.step === TABS.PARAMS && (
-          <FollowParams onClick={this.submit} />
-        )}
+        {/*{step === TABS.PARAMS && (*/}
+        {/*<FollowParams onClick={this.submit} />*/}
+        {/*)}*/}
         {errors.errorMessage && (
           <div className="follow-popup__errors">{errors.errorMessage}</div>
         )}

@@ -246,6 +246,36 @@
       "amount-more-than-available": "Amount is more than available for withdraw"
     }
   },
+  "follow-program": {
+    "create-account": {
+      "title": "Account creation",
+      "available-to-create": "Available for creating",
+      "amount-to-create": "Amount for creating",
+      "from": "From",
+      "next": "Next"
+    },
+    "params": {
+      "title": "Trading settings",
+      "type": "Type",
+      "tolerance-percent": "Tolerance percent",
+      "volume-percent": "Volume percent"
+    },
+    "info": "Your request will be processed at the end of the reporting period. The requested amount will be converted to GVT and transferred to your wallet",
+    "withdrawing": "Withdrawing",
+    "payout-date": "Payout date",
+    "back": "Back",
+    "submit": "Submit",
+    "header": "Sell Tokens",
+    "invested": "Invested",
+    "how-much-withdraw": "How much would you like to withdraw?",
+    "enter-amount": "Enter {{token}} amount",
+    "withdraw-all": "Withdraw all invested tokens",
+    "success-alert-message": "Request to withdrawal sent successfully.",
+    "validation": {
+      "amount-is-zero": "Amount must be greater than zero",
+      "amount-more-than-available": "Amount is more than available for withdraw"
+    }
+  },
   "withdraw-fund": {
     "title": "Withdraw",
     "exit-fee": "Exit fee",

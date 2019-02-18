@@ -1,12 +1,12 @@
 import { FormikProps, withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
-import { translate } from "react-i18next";
+import { TranslationFunction, translate } from "react-i18next";
 import { compose } from "redux";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import Select from "shared/components/select/select";
 import { number, object } from "yup";
-import { TranslationFunction } from "i18next";
+
 import { IRequestParams } from "./follow-popup-form";
 
 type mode = {
@@ -21,6 +21,7 @@ const modes: { [key: string]: mode } = {
 };
 
 export interface IFollowParamsProps {
+  t: TranslationFunction;
   onClick: (values: IRequestParams) => void;
   errors?: any;
   values?: FormValues;
@@ -42,7 +43,7 @@ class FollowParams extends React.Component<OwnProps> {
     onClick(values);
   };
   render() {
-    const { setFieldValue, errors, isValid, dirty, values } = this.props;
+    const { t, setFieldValue, errors, isValid, dirty, values } = this.props;
     const { openTolerancePercent, mode } = values;
     const setMaxOpenTolerancePercent = () => {
       setFieldValue("openTolerancePercent", "20");
@@ -69,7 +70,7 @@ class FollowParams extends React.Component<OwnProps> {
           <GVFormikField
             name="mode"
             component={GVTextField}
-            label={"Type"}
+            label={t("follow-program.params.type")}
             InputComponent={Select}
           >
             {Object.keys(modes).map((mode: string) => {
@@ -84,7 +85,7 @@ class FollowParams extends React.Component<OwnProps> {
         <div className="dialog-field">
           <InputAmountField
             name="openTolerancePercent"
-            label={"Tolerance percent"}
+            label={t("follow-program.params.tolerance-percent")}
             currency={"%"}
             setMax={setMaxOpenTolerancePercent}
           />
@@ -93,7 +94,7 @@ class FollowParams extends React.Component<OwnProps> {
           <div className="dialog-field">
             <InputAmountField
               name="percent"
-              label={"Volume percent"}
+              label={t("follow-program.params.volume-percent")}
               currency={"%"}
               setMax={setMaxVolumePercent}
             />

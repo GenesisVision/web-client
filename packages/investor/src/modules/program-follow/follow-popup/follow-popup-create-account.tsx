@@ -1,7 +1,9 @@
 import { withFormik } from "formik";
+import { FormikProps } from "formik";
+import { WalletData, WalletInfo } from "gv-api-web";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
-import { translate, TranslationFunction } from "react-i18next";
+import { TranslationFunction, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
@@ -12,8 +14,7 @@ import rateApi from "shared/services/api-client/rate-api";
 import { convertFromCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { number, object } from "yup";
-import { FormikProps } from "formik";
-import { WalletData, WalletInfo } from "gv-api-web";
+
 import { IRequestParams } from "./follow-popup-form";
 
 export interface IFollowCreateAccountProps {
@@ -122,7 +123,7 @@ class FollowCreateAccount extends React.Component<
           <GVFormikField
             name="initialDepositCurrency"
             component={GVTextField}
-            label={t("wallet-transfer.from")}
+            label={t("follow-program.from")}
             InputComponent={Select}
             onChange={this.onChangeCurrencyFrom}
           >
@@ -141,7 +142,7 @@ class FollowCreateAccount extends React.Component<
           </GVFormikField>
         </div>
         <div className="dialog-field">
-          <StatisticItem label={"Available to withdraw"}>
+          <StatisticItem label={"follow-program.available-to-create"}>
             <NumberFormat
               value={formatCurrencyValue(availableToWithdraw, currency)}
               suffix={` ${currency}`}
@@ -152,7 +153,7 @@ class FollowCreateAccount extends React.Component<
         <div className="dialog-field">
           <InputAmountField
             name="initialDepositAmount"
-            label={t("wallet-transfer.amount")}
+            label={t("follow-program.amount-to-create")}
             currency={currency}
             setMax={setMaxAmount}
           />
@@ -177,10 +178,9 @@ class FollowCreateAccount extends React.Component<
             className="invest-form__submit-button"
             disabled={disableButton()}
           >
-            {t("withdraw-program.next")}
+            {t("follow-program.next")}
           </GVButton>
         </div>
-        <div className="dialog__info">{t("withdraw-program.info")}</div>
       </form>
     );
   }
