@@ -60,7 +60,7 @@ class TransactionDetailsDialog extends React.Component<
     this.setState({ isPending: true });
     walletApi
       .v10WalletTransactionByIdGet(
-        "00000000-0000-0000-0000-000000000012",
+        this.props.transactionId,
         authService.getAuthArg()
       )
       .then((data: TransactionDetails) =>
