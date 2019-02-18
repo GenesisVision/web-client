@@ -12,7 +12,9 @@ const DepositDetailsContainer = props => {
 
 const mapStateToProps = state => {
   const headerData = state.profileHeader.info.data || {};
+  const walletsData = state.wallet.info.data || {};
   return {
+    wallets: walletsData.wallets,
     available: headerData.availableGvt || 0
   };
 };

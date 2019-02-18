@@ -61,7 +61,13 @@ class CreateProgramSettings extends React.Component {
       setSubmitting,
       isValid
     } = this.props;
-    const { provideSignals, accountType, description, title, currency } = values;
+    const {
+      provideSignals,
+      accountType,
+      description,
+      title,
+      currency
+    } = values;
     const imageInputError =
       errors &&
       errors.logo &&
@@ -380,6 +386,8 @@ class CreateProgramSettings extends React.Component {
             {t("manager.create-program-page.settings.deposit-details")}
           </div>
           <DepositDetailsContainer
+            values={values}
+            setFieldValue={setFieldValue}
             currency={currency}
             deposit={programsInfo.managerProgramInvestment}
             className="create-program-settings__fill-block"
@@ -412,6 +420,8 @@ export default translate()(
   withFormik({
     displayName: "CreateProgramSettingsForm",
     mapPropsToValues: () => ({
+      wallet: "GVT",
+      walletId: "",
       provideSignals: true,
       periodLength: "",
       successFeeInvest: "",

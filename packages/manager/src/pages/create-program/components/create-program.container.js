@@ -10,6 +10,7 @@ import { checkIsModelFilled } from "../helpers/create-program.helpers";
 import * as createProgramService from "../services/create-program.service";
 import CreateProgramBroker from "./create-program-broker/create-program-broker";
 import CreateProgramSettings from "./create-program-settings/create-program-settings";
+import * as WalletServices from "shared/components/wallet/services/wallet.services";
 
 class CreateProgramContainer extends Component {
   state = {
@@ -22,6 +23,8 @@ class CreateProgramContainer extends Component {
   };
 
   componentDidMount() {
+    const { service } = this.props;
+    service.fetchWallets();
     createProgramService.fetchBrokers().then(response => {
       this.setState({
         brokers: response.brokers,
@@ -155,6 +158,7 @@ const mapDispatchToProps = dispatch => {
     service: bindActionCreators(
       {
         ...createProgramService,
+        ...WalletServices,
         notifyError: (text, isUseLocalization) =>
           alertMessageActions.error(text, isUseLocalization)
       },

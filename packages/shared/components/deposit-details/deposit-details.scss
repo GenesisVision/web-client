@@ -2,6 +2,9 @@
 @import "~shared/styles/_sizes.scss";
 
 .deposit-details {
+  & .gv-text-field__wrapper {
+    margin: 16px 0;
+  }
   &__deposit-amount {
     &-title {
       color: $label-color;
