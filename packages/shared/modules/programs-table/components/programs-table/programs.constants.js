@@ -55,7 +55,7 @@ export const programsDateRangeFilter = {
     ),
     defaultValue: {
       ...DEFAULT_DATE_RANGE_FILTER_VALUE,
-      type: DateRangeFilterTypes.lastWeek
+      type: DateRangeFilterTypes.lastMonth
     }
   }),
   validate: validateDateRange
