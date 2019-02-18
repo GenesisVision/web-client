@@ -6,40 +6,64 @@ import Profitability from "../../components/profitability/profitability";
 import StatisticItem from "../../components/statistic-item/statistic-item";
 import filesService from "../../services/file-service";
 import { formatCurrencyValue } from "../../utils/formatter";
+import { ITransactionDetailsProps } from "./transaction-details";
 
-const ConvertingDetails = (props: { data: TransactionDetails }) => {
-  const { data } = props;
+const ConvertingDetails = (props: ITransactionDetailsProps) => {
+  const { data, t } = props;
   return (
     <React.Fragment>
       <div className="dialog__top">
         <div className="dialog__header">
-          <h2>Transaction Details</h2>
-          <p>Converting</p>
+          <h2>{t(`transactions-details.title`)}</h2>
+          <p>{t("transactions-details.converting")}</p>
         </div>
-        <StatisticItem label={`From`}>
-          <img src={filesService.getFileUrl(data.currencyLogo)} alt="wallet" />
-          <p>{data.currencyName}</p>
+        <StatisticItem label={t(`transactions-details.external.from-wallet`)}>
+          <div className="external-transaction">
+            <div className="external-transaction__icon">
+              <div className="profile-avatar">
+                <img
+                  className="external-transaction__wallet"
+                  src={filesService.getFileUrl(data.currencyLogo)}
+                  alt="wallet"
+                />
+              </div>
+            </div>
+            <div className="external-transaction__address">
+              <p>{data.currencyName}</p>
+            </div>
+          </div>
         </StatisticItem>
-        <StatisticItem label={`Amount`}>
+        <StatisticItem label={t(`transactions-details.external.amount`)}>
           <Profitability value={data.amount} prefix="sign">
             <NumberFormat
               value={formatCurrencyValue(data.amount, data.currency)}
               suffix={` ${data.currency}`}
-              allowNegative={false}
+              allowNegative={true}
               displayType="text"
             />
           </Profitability>
         </StatisticItem>
       </div>
       <div className="dialog__bottom">
-        <StatisticItem label={`From`}>
-          <img
-            src={filesService.getFileUrl(data.convertingDetails.currencyToLogo)}
-            alt="wallet"
-          />
-          <p>{data.convertingDetails.currencyToName}</p>
+        <StatisticItem label={t(`transactions-details.external.to-wallet`)}>
+          <div className="external-transaction">
+            <div className="external-transaction__icon">
+              <div className="profile-avatar">
+                <img
+                  className="external-transaction__wallet"
+                  src={filesService.getFileUrl(
+                    data.convertingDetails.currencyToLogo
+                  )}
+                  alt="wallet"
+                />
+              </div>
+            </div>
+            <div className="external-transaction__address">
+              <p>{data.convertingDetails.currencyToName}</p>
+            </div>
+          </div>
         </StatisticItem>
-        <StatisticItem label={`Amount`}>
+        <StatisticItem label={t(`transactions-details.external.amount`)}>
           <Profitability value={data.convertingDetails.amountTo} prefix="sign">
             <NumberFormat
               value={formatCurrencyValue(
@@ -47,12 +71,14 @@ const ConvertingDetails = (props: { data: TransactionDetails }) => {
                 data.convertingDetails.currencyTo
               )}
               suffix={` ${data.convertingDetails.currencyTo}`}
-              allowNegative={false}
+              allowNegative={true}
               displayType="text"
             />
           </Profitability>
         </StatisticItem>
-        <StatisticItem label={"Status"}>{data.status}</StatisticItem>
+        <StatisticItem label={t(`transactions-details.status.title`)}>
+          {data.status}
+        </StatisticItem>
       </div>
     </React.Fragment>
   );
