@@ -90,7 +90,7 @@ class CreateProgramContainer extends Component {
       handleSubmit,
       setLeverageChooseAvailable
     } = this;
-    const { t, headerData, service, platformSettings } = this.props;
+    const { t, headerData, service, platformSettings, wallets } = this.props;
     if (!platformSettings || !headerData) return null;
     return (
       <div className="create-program-page__container">
@@ -119,6 +119,7 @@ class CreateProgramContainer extends Component {
             )}
             {tab === "settings" && (
               <CreateProgramSettings
+                wallets={wallets}
                 onValidateError={this.handleValidateError}
                 navigateBack={navigateToBroker}
                 broker={choosedBroker}
@@ -149,6 +150,7 @@ class CreateProgramContainer extends Component {
 }
 
 const mapStateToProps = state => ({
+  wallets: state.wallet.info.data ? state.wallet.info.data.wallets : {},
   headerData: state.profileHeader.info.data,
   platformSettings: state.platformData.data
 });
