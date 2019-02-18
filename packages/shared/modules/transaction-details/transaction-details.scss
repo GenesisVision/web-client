@@ -35,6 +35,11 @@
 }
 
 .external-transaction {
+  display: flex;
+  flex-direction: row;
+  &__icon {
+    margin-right: 30px;
+  }
   &__address {
     display: flex;
     flex-direction: column;
