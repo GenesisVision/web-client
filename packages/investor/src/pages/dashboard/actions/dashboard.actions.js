@@ -10,6 +10,7 @@ export const DASHBOARD_CANCEL_FUND_REQUESTS = "DASHBOARD_CANCEL_FUND_REQUESTS";
 export const DASHBOARD_CANCEL_PROGRAM_REQUESTS =
   "DASHBOARD_CANCEL_PROGRAM_REQUESTS";
 export const DASHBOARD_OPEN_TRADES = "DASHBOARD_OPEN_TRADES";
+export const DASHBOARD_TRADES_HISTORY = "DASHBOARD_TRADES_HISTORY";
 
 export const CLEAR_DASHBOARD_ASSETS_TABLE = "CLEAR_DASHBOARD_ASSETS_TABLE";
 export const CLEAR_DASHBOARD_TRADES_TABLE = "CLEAR_DASHBOARD_TRADES_TABLE";
@@ -63,6 +64,13 @@ export const clearDashboardAssetsTable = () => ({
 export const fetchDashboardOpenTrades = (auth, filters) => {
   return {
     type: DASHBOARD_OPEN_TRADES,
-    payload: signalApi.v10SignalOpensignaltradesGet(auth)
+    payload: signalApi.v10SignalOpensignaltradesGet(auth, filters)
+  };
+};
+
+export const fetchDashboardTradesHistory = (auth, filters) => {
+  return {
+    type: DASHBOARD_OPEN_TRADES,
+    payload: signalApi.v10SignalOpensignaltradesGet(auth, filters) //Use api for trades history
   };
 };

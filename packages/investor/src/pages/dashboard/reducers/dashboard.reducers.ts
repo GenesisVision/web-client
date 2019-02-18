@@ -13,11 +13,13 @@ import dashboardPortfolioChartReducer, {
   DashboardPortfolioChartState
 } from "./dashboard-portfolio-chart.reducer";
 import dashboardProgramsReducer from "./dashboard-programs.reducer";
+import dashboardTradesHistoryReducer from "./dashboard-trades-history.reducer";
 
 export type DashboardState = DeepReadonly<{
   programs: any;
   funds: any;
   openTrades: any;
+  tradesHistory: any;
   portfolioChartData: DashboardPortfolioChartState;
   inRequestsData: DashboardInRequestsState;
   eventsData: DashboardEventsState;
@@ -27,6 +29,7 @@ const dashboardReducer = combineReducers<DashboardState>({
   programs: dashboardProgramsReducer,
   funds: dashboardFundsReducer,
   openTrades: dashboardOpenTradesReducer,
+  tradesHistory: dashboardTradesHistoryReducer,
   portfolioChartData: dashboardPortfolioChartReducer,
   inRequestsData: dashboardInRequestsReducer,
   eventsData: dashboardEventsReducer

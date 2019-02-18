@@ -6,3 +6,8 @@ export const getDashboardOpenTrades = (filters: any) => {
   const authorization = authService.getAuthArg();
   return actions.fetchDashboardOpenTrades(authorization, filters);
 };
+
+export const getDashboardTradesHistory = (filters: any) => {
+  const authorization = authService.getAuthArg();
+  return actions.fetchDashboardTradesHistory(authorization, filters);
+};

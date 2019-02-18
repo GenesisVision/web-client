@@ -8,6 +8,7 @@ import {
   fetchTradesCount
 } from "../../services/dashboard.service";
 import OpenTradesTable from "./open-trades-table";
+import TradesHistoryTable from "./trades-history-table";
 
 enum TRADES_TABS {
   OPEN_TRADES = "OPEN_TRADES",
@@ -67,7 +68,7 @@ class DashboardTradesSection extends Component<
         </div>
         <div className="">
           {tab === TRADES_TABS.OPEN_TRADES && <OpenTradesTable title={title} />}
-          {tab === TRADES_TABS.HISTORY && 2}
+          {tab === TRADES_TABS.HISTORY && <TradesHistoryTable title={title} />}
         </div>
       </Surface>
     );
