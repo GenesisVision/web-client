@@ -23,9 +23,10 @@ class WalletSettingsContainer extends Component {
     };
   }
 
-  success = text => {
+  catchError = err => {
     const { dispatch } = this.props;
-    dispatch(alertMessageActions.success(text));
+    dispatch(alertMessageActions.error(err.errorMessage));
+    this.setState({ isPending: false });
   };
 
   handleOn = () => {
@@ -35,12 +36,8 @@ class WalletSettingsContainer extends Component {
       .onPayFeesWithGvt()
       .then(() => {
         this.setState({ isPayFeesWithGvt: true, isPending: false });
-        this.success(
-          "You won!"
-          // t(`notifications-page.general.${options.type}.enabled-alert`)
-        );
       })
-      .catch(() => this.setState({ isPending: false }));
+      .catch(this.catchError);
   };
 
   handleOff = () => {
@@ -50,12 +47,8 @@ class WalletSettingsContainer extends Component {
       .offPayFeesWithGvt()
       .then(() => {
         this.setState({ isPayFeesWithGvt: false, isPending: false });
-        this.success(
-          "You lose :("
-          // t(`notifications-page.general.${options.type}.disabled-alert`)
-        );
       })
-      .catch(() => this.setState({ isPending: false }));
+      .catch(this.catchError);
   };
 
   render() {
