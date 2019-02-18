@@ -61,7 +61,7 @@ class TagFilter extends React.Component<ITagFilterProps, ITagFilterState> {
     const { anchor } = this.state;
     return (
       <Fragment>
-        <div className="filter">
+        <div className="filter filter--tags">
           <div className="filter__value">
             {this.filterChoosed(values).map(tag => (
               <TagProgramItem

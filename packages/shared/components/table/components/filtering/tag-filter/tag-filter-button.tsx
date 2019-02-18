@@ -20,7 +20,7 @@ const TagFilterButton: React.FC<ITagFilterButton> = ({
       })}
       onClick={onClickHandle}
     >
-      <span className="tag-filter__button-plus">+</span>Add tag
+      <span className="tag-filter__button-plus">+</span>Tag
     </GVButton>
   );
 };
