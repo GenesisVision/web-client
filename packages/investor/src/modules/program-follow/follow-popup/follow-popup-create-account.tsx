@@ -209,18 +209,30 @@ export default compose<React.ComponentType<IFollowCreateAccountOwnProps>>(
       }
       return { initialDepositCurrency, initialDepositAmount: "" };
     },
-    validationSchema: (params: TranslationFunction & OwnProps) =>
+    validationSchema: (params: OwnProps & TranslationFunction) =>
       lazy(
         (values: FormValues): Schema<any> =>
           object().shape({
             initialDepositAmount: number()
-              .required()
-              .moreThan(0)
+              .required(
+                params.t(
+                  "follow-program.create-account.validation.amount-required"
+                )
+              )
+              .moreThan(
+                0,
+                params.t(
+                  "follow-program.create-account.validation.amount-is-zero"
+                )
+              )
               .max(
                 params.wallets.find(
                   (wallet: WalletData) =>
                     wallet.currency == values.initialDepositCurrency
-                ).available
+                ).available,
+                params.t(
+                  "follow-program.create-account.validation.amount-more-than-available"
+                )
               )
           })
       ),

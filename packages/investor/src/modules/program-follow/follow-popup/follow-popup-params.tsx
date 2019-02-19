@@ -20,21 +20,27 @@ const modes: { [key: string]: mode } = {
   fixed: { label: "Fixed", value: "Fixed" }
 };
 
-export interface IFollowParamsProps {
-  onClick: (values: IRequestParams) => void;
-  onPrevStep(): void;
+interface IFollowParamsProps {
   errors?: any;
   values?: FormValues;
-  t?: any;
+  t: TranslationFunction;
 }
-export interface FormValues {
+
+interface FormValues {
   mode: string;
   openTolerancePercent: number;
   percent: number;
   fixedVolume: number;
 }
 
-type OwnProps = IFollowParamsProps & FormikProps<FormValues>;
+interface IFollowParamsOwnProps {
+  onClick: (values: IRequestParams) => void;
+  onPrevStep(): void;
+}
+
+type OwnProps = IFollowParamsOwnProps &
+  IFollowParamsProps &
+  FormikProps<FormValues>;
 class FollowParams extends React.Component<OwnProps> {
   constructor(props: OwnProps) {
     super(props);
@@ -64,7 +70,7 @@ class FollowParams extends React.Component<OwnProps> {
       setFieldValue("fixedVolume", "99999");
     };
     const isAllow = (values: any) => {
-      return true;
+      // return true;
     };
     const disableButton = () => {
       return (
@@ -136,7 +142,7 @@ class FollowParams extends React.Component<OwnProps> {
   }
 }
 
-export default compose<React.ComponentType<IFollowParamsProps>>(
+export default compose<React.ComponentType<IFollowParamsOwnProps>>(
   translate(),
   withFormik({
     displayName: "follow-params",
@@ -151,15 +157,18 @@ export default compose<React.ComponentType<IFollowParamsProps>>(
     validationSchema: ({ t }: { t: TranslationFunction }) =>
       object().shape({
         fixedVolume: number()
-          .min(0)
-          .max(99999),
+          .min(0, t("follow-program.params.validation.fixedVolume-min"))
+          .max(99999, t("follow-program.params.validation.fixedVolume-max")),
         percent: number()
-          .max(999)
-          .min(1),
+          .max(999, t("follow-program.params.validation.percent-max"))
+          .min(1, t("follow-program.params.validation.percent-min")),
         openTolerancePercent: number()
-          .required()
-          .max(20)
-          .min(0.01)
+          .required(t("follow-program.params.validation.tolerance-required"))
+          .max(20, t("follow-program.params.validation.tolerance-percent-max"))
+          .min(
+            0.01,
+            t("follow-program.params.validation.tolerance-percent-min")
+          )
       }),
     handleSubmit: (values, { props }) => {
       // props.onSubmit(values);
