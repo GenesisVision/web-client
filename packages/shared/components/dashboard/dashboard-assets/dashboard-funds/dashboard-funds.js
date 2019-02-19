@@ -19,6 +19,7 @@ import { composeFundsDetailsUrl } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
 
 import AssetStatus from "../../../asset-status/asset-status";
+import { DASHBOARD_FUNDS_COLUMNS } from "../../dashboard.constants";
 import dashboardFundsTableSelector from "./dashboard-funds.selector";
 
 class DashboardFunds extends Component {
@@ -27,7 +28,6 @@ class DashboardFunds extends Component {
       t,
       role,
       onChangeStatus,
-      DASHBOARD_FUNDS_COLUMNS,
       getDashboardFunds,
       createButtonToolbar,
       createFund,

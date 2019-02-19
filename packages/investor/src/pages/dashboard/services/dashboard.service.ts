@@ -11,7 +11,12 @@ export const getPortfolioChart = () => (dispatch: Dispatch) => {
   dispatch(actions.fetchPortfolioChart(authorization));
 };
 
-export const fetchAssetsCount = () => {
+export interface IDashboardAssetsCounts {
+  programsCount?: number;
+  fundsCount?: number;
+}
+
+export const fetchAssetsCount = (): Promise<IDashboardAssetsCounts> => {
   const authorization = authService.getAuthArg();
   const filtering = { take: 0 };
   return Promise.all([
