@@ -53,7 +53,7 @@ class CreateProgramSettings extends React.Component {
       if (rate !== this.state.rate) this.setState({ rate });
     });
   };
-  onChangeCurrencyFrom = (name, target) => {
+  onChangeDepositWallet = (name, target) => {
     const { setFieldValue, values, wallets } = this.props;
     const depositWalletCurrency = target.props.value;
     setFieldValue("depositWalletCurrency", depositWalletCurrency);
@@ -429,7 +429,7 @@ class CreateProgramSettings extends React.Component {
                 component={GVTextField}
                 label={t("wallet-transfer.from")}
                 InputComponent={Select}
-                onChange={this.onChangeCurrencyFrom}
+                onChange={this.onChangeDepositWallet}
               >
                 {wallets.map(wallet => {
                   return (
