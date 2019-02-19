@@ -11,7 +11,7 @@ export interface IInputAmountFieldProps {
   currency: string;
   isAllow?: (values?: any) => boolean;
   setMax(): void;
-  autoFocus: boolean;
+  autoFocus?: boolean;
 }
 
 class InputAmountField extends Component<IInputAmountFieldProps> {
