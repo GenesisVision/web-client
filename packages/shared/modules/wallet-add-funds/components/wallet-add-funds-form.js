@@ -11,6 +11,8 @@ import Select from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { getWalletIcon } from "shared/components/wallet/components/wallet-currency";
 
+import filesService from "../../../services/file-service";
+
 class WalletAddFundsForm extends Component {
   onChangeCurrency = (name, target) => {
     const { setFieldValue } = this.props;
@@ -49,7 +51,7 @@ class WalletAddFundsForm extends Component {
                 return (
                   <option value={currency} key={currency}>
                     <img
-                      src={getWalletIcon(wallet.currency)}
+                      src={filesService.getFileUrl(wallet.logo)}
                       className="wallet-withdraw-popup__icon"
                       alt={wallet.currency}
                     />

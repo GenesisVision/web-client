@@ -1,8 +1,9 @@
-import { MultiWalletTransaction } from "gv-api-web";
+import { MultiWalletTransaction, TransactionDetails } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
 import { Fragment } from "react";
 import NumberFormat from "react-number-format";
+import filesService from "shared/services/file-service";
 
 import SuccessTransactionsIcon from "../../../../media/transactions/success.svg";
 import TransactionDetailsPopup from "../../../../modules/transaction-details/transaction-details-popup";
@@ -20,25 +21,25 @@ export interface ITransactionRowState {
   isOpen: boolean;
 }
 
-const ConvertTransaction = () => {
+const ConvertTransaction = (transaction: TransactionDetails) => {
   return (
     <Fragment>
       <span className="wallet-transactions__col">
         <img
-          src={getWalletIcon("GVT")}
+          src={filesService.getFileUrl(transaction.currencyLogo)}
           className="wallet-transactions__icon"
           alt="Icon"
         />
-        Genesis Vision
+        {transaction.currencyName}
       </span>
       <span className="wallet-transactions__back-arrow">&rarr;</span>
       <span className="wallet-transactions__col">
         <img
-          src={getWalletIcon("BTC")}
+          src={filesService.getFileUrl(transaction.convertingDetails.currencyToLogo)}
           className="wallet-transactions__icon"
           alt="Icon"
         />
-        Bitcoin
+        {transaction.convertingDetails.currencyToName}
       </span>
     </Fragment>
   );
@@ -94,17 +95,15 @@ class AllTransactionsRow extends React.Component<
         <TableRow className="wallet-transactions__row" onClick={this.openPopup}>
           <TableCell className="wallet-transactions__cell wallet-transactions__cell--wallet">
             {isConvertAction ? (
-              <ConvertTransaction />
+              <ConvertTransaction transaction={transaction}/>
             ) : (
               <Fragment>
                 <img
-                  src={getWalletIcon(
-                    transaction.currencyFrom || transaction.currencyTo
-                  )}
+                  src={filesService.getFileUrl(transaction.logoFrom)}
                   className="wallet-transactions__icon"
                   alt="Icon"
                 />
-                Genesis Vision
+                {transaction.currencyFrom}
               </Fragment>
             )}
           </TableCell>

@@ -13,6 +13,8 @@ import { getWalletIcon } from "shared/components/wallet/components/wallet-curren
 import { validateFraction } from "shared/utils/formatter";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
+import filesService from "../../../services/file-service";
+
 const getWalletsTo = (wallets, newCurrencyFrom) => {
   const index = wallets.findIndex(
     wallet => wallet.currency === newCurrencyFrom
@@ -102,7 +104,7 @@ class WalletTransferForm extends Component {
               return (
                 <option value={wallet.currency} key={wallet.currency}>
                   <img
-                    src={getWalletIcon(wallet.currency)}
+                    src={filesService.getFileUrl(wallet.logo)}
                     className="wallet-transfer-popup__icon"
                     alt={wallet.currency}
                   />
@@ -130,7 +132,7 @@ class WalletTransferForm extends Component {
               return (
                 <option value={wallet.currency} key={wallet.currency}>
                   <img
-                    src={getWalletIcon(wallet.currency)}
+                    src={filesService.getFileUrl(wallet.logo)}
                     className="wallet-transfer-popup__icon"
                     alt={wallet.currency}
                   />

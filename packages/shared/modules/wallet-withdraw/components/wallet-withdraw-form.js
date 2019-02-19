@@ -16,6 +16,8 @@ import { formatCurrencyValue } from "shared/utils/formatter";
 import { ethWalletValidator } from "shared/utils/validators/validators";
 import { object, string } from "yup";
 
+import filesService from "../../../services/file-service";
+
 class WalletWithdrawForm extends Component {
   onChangeCurrency = (name, target) => {
     const { setFieldValue } = this.props;
@@ -92,7 +94,7 @@ class WalletWithdrawForm extends Component {
               return (
                 <option value={wallet.currency} key={wallet.currency}>
                   <img
-                    src={getWalletIcon(wallet.currency)}
+                    src={filesService.getFileUrl(wallet.logo)}
                     className="wallet-withdraw-popup__icon"
                     alt={wallet.currency}
                   />
