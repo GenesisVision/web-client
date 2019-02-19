@@ -70,7 +70,7 @@ class FollowParams extends React.Component<OwnProps> {
       setFieldValue("fixedVolume", "99999");
     };
     const isAllow = (values: any) => {
-      return true;
+      // return true;
     };
     const disableButton = () => {
       return (
@@ -163,7 +163,7 @@ export default compose<React.ComponentType<IFollowParamsOwnProps>>(
           .max(999, t("follow-program.params.validation.percent-max"))
           .min(1, t("follow-program.params.validation.percent-min")),
         openTolerancePercent: number()
-          .required(t("follow-program.params.validation.tolerance-percent-max"))
+          .required(t("follow-program.params.validation.tolerance-required"))
           .max(20, t("follow-program.params.validation.tolerance-percent-max"))
           .min(
             0.01,
