@@ -11,15 +11,17 @@ import { FOLLOW_TYPE } from "shared/constants/constants";
 import authService from "shared/services/auth-service";
 
 import FollowForm from "./follow-popup/follow-popup-form";
-import FollowTop from "./follow-popup/follow-popup-top";
 import {
   attachToSignal,
   getSignalAccounts,
   getWalletsAddresses,
   updateAttachToSignal
 } from "./services/program-follow-service";
+import { bindActionCreators } from "redux";
+import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
 export interface IProgramFollowContainerProps {
+  service: any;
   programName: string;
   type: FOLLOW_TYPE;
   wallets: WalletData[];
@@ -59,6 +61,7 @@ class ProgramFollowContainer extends React.Component<
 
   render() {
     const {
+      service,
       wallets,
       open,
       onClose,
@@ -80,6 +83,8 @@ class ProgramFollowContainer extends React.Component<
     return (
       <Dialog open={open} onClose={handleClose}>
         <FollowForm
+          alertError={service.alertError}
+          alertSuccess={service.alertSuccess}
           id={id}
           walletsAddresses={walletsAddresses}
           signalAccounts={signalAccounts}
@@ -102,5 +107,16 @@ const mapStateToProps = (state: any) => {
     submitInfo: programDeposit.submit
   };
 };
-
-export default connect(mapStateToProps)(ProgramFollowContainer);
+const mapDispatchToProps = (dispatch: any) => ({
+  service: bindActionCreators(
+    {
+      alertError: (msg: string) => alertMessageActions.error(msg),
+      alertSuccess: (msg: string) => alertMessageActions.success(msg)
+    },
+    dispatch
+  )
+});
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProgramFollowContainer);

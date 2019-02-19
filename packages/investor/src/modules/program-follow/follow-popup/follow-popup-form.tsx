@@ -13,6 +13,8 @@ enum TABS {
   PARAMS = "PARAMS"
 }
 export interface IFollowFormProps {
+  alertSuccess: (msg: string) => void;
+  alertError: (msg: string) => void;
   handleSubmit: () => void;
   submitMethod: (
     programId: string,
@@ -62,7 +64,7 @@ class FollowForm extends React.Component<IFollowFormProps, IFollowFormState> {
     if (signalAccount) this.setState({ step: TABS.PARAMS });
   }
   submit = (values: IRequestParams) => {
-    const { handleSubmit, id } = this.props;
+    const { handleSubmit, id, alertError, alertSuccess } = this.props;
     this.setState(
       {
         requestParams: { ...this.state.requestParams, ...values }
@@ -70,12 +72,11 @@ class FollowForm extends React.Component<IFollowFormProps, IFollowFormState> {
       () =>
         this.props.submitMethod(id, this.state.requestParams).then(
           (res: any) => {
+            alertSuccess("Success");
             handleSubmit();
           },
           (errors: any) => {
-            this.setState({
-              errors
-            });
+            alertError(errors.errorMessage);
           }
         )
     );
