@@ -244,21 +244,21 @@ class ProgramDetailsDescriptionControls extends React.Component {
             </StatisticItem>
           </div>
           <div className="program-details-description__button-container">
-            {programDescription.personalProgramDetails.isFollowSignals ? (
-              <GVButton
-                className="program-details-description__invest-btn"
-                onClick={this.handleOpenUnfollowPopup}
-              >
-                {t("program-details-page.description.unfollow-trade")}
-              </GVButton>
-            ) : (
-              <GVButton
-                className="program-details-description__invest-btn"
-                onClick={this.handleOpenFollowPopup}
-              >
-                {t("program-details-page.description.follow-trade")}
-              </GVButton>
-            )}
+            {/*{programDescription.personalProgramDetails.isFollowSignals ? (*/}
+            <GVButton
+              className="program-details-description__invest-btn"
+              onClick={this.handleOpenUnfollowPopup}
+            >
+              {t("program-details-page.description.unfollow-trade")}
+            </GVButton>
+            {/*) : (*/}
+            {/*<GVButton*/}
+            {/*className="program-details-description__invest-btn"*/}
+            {/*onClick={this.handleOpenFollowPopup}*/}
+            {/*>*/}
+            {/*{t("program-details-page.description.follow-trade")}*/}
+            {/*</GVButton>*/}
+            {/*)}*/}
           </div>
         </div>
         <ProgramDetailContext.Consumer>
