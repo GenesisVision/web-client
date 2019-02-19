@@ -1,7 +1,6 @@
 import fundDepositReducer, {
   FundDepositState
 } from "modules/fund-deposit/reducer/fund-deposit.reducer";
-import headerReducer  from "shared/reducers/header-reducer";
 import programDepositReducer, {
   ProgramsDepositState
 } from "modules/program-deposit/reducer/program-deposit.reducer";
@@ -37,6 +36,7 @@ import programsReducer from "shared/modules/programs-table/reducers/programs-tab
 import accountSettingsReducer from "shared/reducers/account-settings";
 import authReducer from "shared/reducers/auth-reducer";
 import emailPendingReducer from "shared/reducers/email-pending-reducer";
+import headerReducer from "shared/reducers/header-reducer";
 import platformReducer from "shared/reducers/platform-reducer";
 import RootState from "shared/reducers/root-reducer";
 import uiReducer from "shared/reducers/ui-reducer";

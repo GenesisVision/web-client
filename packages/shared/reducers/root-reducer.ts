@@ -14,6 +14,7 @@ import { EmailPendingState } from "shared/reducers/email-pending-reducer";
 import { PlatformState } from "shared/reducers/platform-reducer";
 import { IUiState } from "shared/reducers/ui-reducer";
 import { DeepReadonly } from "utility-types";
+
 import { HeaderState } from "./header-reducer";
 
 type RootState = DeepReadonly<{
