@@ -194,16 +194,15 @@ export default compose<React.ComponentType<IFollowCreateAccountOwnProps>>(
   withFormik({
     displayName: "follow-create-account",
     mapPropsToValues: (props: { [key: string]: any }) => {
-      const { walletsAddresses, currency } = props;
-      if (!walletsAddresses === undefined || walletsAddresses.length <= 1)
-        return {};
+      const { wallets, currency } = props;
+      if (!wallets === undefined || wallets.length <= 1) return {};
       let initialDepositCurrency = currency || "GVT";
       if (
-        !walletsAddresses.find(
+        !wallets.find(
           (wallet: any) => wallet.currency === initialDepositCurrency
         )
       ) {
-        initialDepositCurrency = walletsAddresses[0].currency;
+        initialDepositCurrency = wallets[0].currency;
       }
       return { initialDepositCurrency, initialDepositAmount: "" };
     },
