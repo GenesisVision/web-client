@@ -51,7 +51,7 @@ class FollowForm extends React.Component<IFollowFormProps, IFollowFormState> {
       requestParams: { ...this.state.requestParams, ...values }
     });
   };
-  returnCopytradingAccount = () => {
+  returnToCreateCopytradingAccount = () => {
     this.setState({ step: TABS.CREATE_ACCOUNT });
   };
   componentDidMount() {
@@ -105,7 +105,7 @@ class FollowForm extends React.Component<IFollowFormProps, IFollowFormState> {
         {step === TABS.PARAMS && (
           <FollowParams
             onClick={this.submit}
-            onPrevStep={this.returnCopytradingAccount}
+            onPrevStep={this.returnToCreateCopytradingAccount}
           />
         )}
         {errors.errorMessage && (
