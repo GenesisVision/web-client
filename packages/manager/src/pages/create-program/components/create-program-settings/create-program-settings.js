@@ -114,7 +114,7 @@ class CreateProgramSettings extends React.Component {
         programsInfo
       })
         .validate(values)
-        .then(res => {}, res => onValidateError());
+        .then(res => {}, () => onValidateError());
 
       handleSubmit(values, {
         setSubmitting
