@@ -20,21 +20,27 @@ const modes: { [key: string]: mode } = {
   fixed: { label: "Fixed", value: "Fixed" }
 };
 
-export interface IFollowParamsProps {
-  onClick: (values: IRequestParams) => void;
-  onPrevStep(): void;
+interface IFollowParamsProps {
   errors?: any;
   values?: FormValues;
-  t?: any;
+  t: TranslationFunction;
 }
-export interface FormValues {
+
+interface FormValues {
   mode: string;
   openTolerancePercent: number;
   percent: number;
   fixedVolume: number;
 }
 
-type OwnProps = IFollowParamsProps & FormikProps<FormValues>;
+interface IFollowParamsOwnProps {
+  onClick: (values: IRequestParams) => void;
+  onPrevStep(): void;
+}
+
+type OwnProps = IFollowParamsOwnProps &
+  IFollowParamsProps &
+  FormikProps<FormValues>;
 class FollowParams extends React.Component<OwnProps> {
   constructor(props: OwnProps) {
     super(props);
@@ -136,7 +142,7 @@ class FollowParams extends React.Component<OwnProps> {
   }
 }
 
-export default compose<React.ComponentType<IFollowParamsProps>>(
+export default compose<React.ComponentType<IFollowParamsOwnProps>>(
   translate(),
   withFormik({
     displayName: "follow-params",

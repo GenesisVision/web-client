@@ -252,7 +252,12 @@
       "available": "Available for creating",
       "amount": "Amount for creating",
       "from": "From",
-      "next": "Next"
+      "next": "Next",
+      "validation": {
+        "amount-required": "Amount is required field",
+        "amount-is-zero": "Amount must be greater than zero",
+        "amount-more-than-available": "Amount is more than available for creating"
+      }
     },
     "params": {
       "title": "Trading settings",
@@ -263,11 +268,7 @@
       "back": "Back",
       "submit": "Submit"
     },
-    "success-alert-message": "Request to withdrawal sent successfully.",
-    "validation": {
-      "amount-is-zero": "Amount must be greater than zero",
-      "amount-more-than-available": "Amount is more than available for withdraw"
-    }
+    "success-alert-message": "Request to withdrawal sent successfully."
   },
   "withdraw-fund": {
     "title": "Withdraw",
