@@ -19,7 +19,10 @@ class TransactionDetailsPopup extends React.Component<
         onClose={this.props.onClose}
         className="transaction-details"
       >
-        <TransactionDetailsDialog transactionId={this.props.transactionId} />
+        <TransactionDetailsDialog
+          transactionId={this.props.transactionId}
+          close={this.props.onClose}
+        />
       </Dialog>
     );
   }

@@ -3,6 +3,9 @@ import "./transaction-details.scss";
 import { TransactionDetails } from "gv-api-web";
 import * as React from "react";
 import { translate } from "react-i18next";
+import { connect } from "react-redux";
+import { compose } from "redux";
+import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import ConvertingDetails from "shared/modules/transaction-details/converting-details";
 import ExternalDeposit from "shared/modules/transaction-details/external-deposit-details";
 import ExternalWithdrawal from "shared/modules/transaction-details/external-withdrawal-details";
@@ -27,6 +30,8 @@ const Types = {
 export interface ITransactionDetailsDialogProps {
   transactionId: string;
   t(string: string): string;
+  error(message: string): void;
+  close(): void;
 }
 
 export interface ITransactionDetailsState {
@@ -65,9 +70,10 @@ class TransactionDetailsDialog extends React.Component<
       .then((data: TransactionDetails) =>
         this.setState({ data, isPending: false })
       )
-      .catch((errorMessage: string) =>
-        this.setState({ errorMessage, isPending: false })
-      );
+      .catch(errorMessage => {
+        this.props.error(errorMessage.errorMessage);
+        this.props.close();
+      });
   };
 
   render() {
@@ -82,4 +88,14 @@ class TransactionDetailsDialog extends React.Component<
   }
 }
 
-export default translate()(TransactionDetailsDialog);
+const mapDispatchToProps = {
+  error: alertMessageActions.error
+};
+
+export default compose(
+  translate(),
+  connect(
+    null,
+    mapDispatchToProps
+  )
+)(TransactionDetailsDialog);
