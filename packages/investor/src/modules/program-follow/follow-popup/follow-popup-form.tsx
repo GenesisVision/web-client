@@ -24,7 +24,6 @@ export interface IFollowFormProps {
   id: string;
   signalAccounts: any; //CopyTradingAccountInfo[];
   wallets: WalletData[];
-  walletsAddresses: WalletInfo[];
   currency: string;
   programName: string;
   t: TranslationFunction;
@@ -84,13 +83,7 @@ class FollowForm extends React.Component<IFollowFormProps, IFollowFormState> {
     );
   };
   render() {
-    const {
-      signalAccounts,
-      wallets,
-      walletsAddresses,
-      currency,
-      programName
-    } = this.props;
+    const { signalAccounts, wallets, currency, programName } = this.props;
     const { errors, step } = this.state;
     const adaptStep =
       step === TABS.CREATE_ACCOUNT ? "create-account" : "params";
@@ -100,7 +93,6 @@ class FollowForm extends React.Component<IFollowFormProps, IFollowFormState> {
         {!signalAccounts && step === TABS.CREATE_ACCOUNT && (
           <FollowCreateAccount
             wallets={wallets}
-            walletsAddresses={walletsAddresses}
             currency={currency}
             onClick={this.createdCopytradingAccount}
           />

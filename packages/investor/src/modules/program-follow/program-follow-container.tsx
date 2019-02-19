@@ -1,9 +1,4 @@
-import {
-  CopyTradingAccountsList,
-  WalletData,
-  WalletInfo,
-  WalletsInfo
-} from "gv-api-web";
+import { CopyTradingAccountsList, WalletData } from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
 import Dialog from "shared/components/dialog/dialog";
@@ -14,7 +9,6 @@ import FollowForm from "./follow-popup/follow-popup-form";
 import {
   attachToSignal,
   getSignalAccounts,
-  getWalletsAddresses,
   updateAttachToSignal
 } from "./services/program-follow-service";
 import { bindActionCreators } from "redux";
@@ -32,7 +26,6 @@ export interface IProgramFollowContainerProps {
 }
 interface IProgramFollowContainerState {
   isPending: boolean;
-  walletsAddresses: WalletInfo[] | null;
   signalAccounts: any | null;
 }
 class ProgramFollowContainer extends React.Component<
@@ -41,16 +34,12 @@ class ProgramFollowContainer extends React.Component<
 > {
   state = {
     isPending: false,
-    walletsAddresses: null,
-    signalAccounts: null
+    signalAccounts: []
   };
 
   componentDidMount() {
     if (!authService.getAuthArg()) return;
     this.setState({ isPending: true });
-    getWalletsAddresses().then((wallets: WalletsInfo) => {
-      this.setState({ walletsAddresses: wallets.wallets });
-    });
     getSignalAccounts().then(
       (CopyTradingAccountsList: CopyTradingAccountsList) => {
         const { accounts } = CopyTradingAccountsList;
@@ -70,8 +59,8 @@ class ProgramFollowContainer extends React.Component<
       type,
       programName
     } = this.props;
-    const { isPending, walletsAddresses, signalAccounts } = this.state;
-    if (!walletsAddresses || isPending) return null;
+    const { isPending, signalAccounts } = this.state;
+    if (isPending) return null;
     const handleClose = () => {
       onClose();
     };
@@ -86,7 +75,6 @@ class ProgramFollowContainer extends React.Component<
           alertError={service.alertError}
           alertSuccess={service.alertSuccess}
           id={id}
-          walletsAddresses={walletsAddresses}
           signalAccounts={signalAccounts}
           currency={currency}
           wallets={wallets}

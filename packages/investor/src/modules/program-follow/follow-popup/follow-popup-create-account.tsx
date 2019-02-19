@@ -1,6 +1,6 @@
 import { withFormik } from "formik";
 import { FormikProps } from "formik";
-import { WalletData, WalletInfo } from "gv-api-web";
+import { WalletData } from "gv-api-web";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
 import { TranslationFunction, translate } from "react-i18next";
@@ -18,8 +18,7 @@ import { Schema, lazy, number, object } from "yup";
 import { IRequestParams } from "./follow-popup-form";
 
 interface IFollowCreateAccountOwnProps {
-  walletsAddresses: WalletInfo[];
-  wallets: any; // WalletData[];
+  wallets: WalletData[];
   currency: string;
   onClick: (values: IRequestParams) => void;
 }
@@ -90,7 +89,6 @@ class FollowCreateAccount extends React.Component<
       errors,
       isValid,
       dirty,
-      walletsAddresses,
       wallets,
       t,
       currency,
@@ -132,7 +130,7 @@ class FollowCreateAccount extends React.Component<
             InputComponent={Select}
             onChange={this.onChangeCurrencyFrom}
           >
-            {walletsAddresses.map((wallet: any) => {
+            {wallets.map((wallet: WalletData) => {
               return (
                 <option value={wallet.currency} key={wallet.currency}>
                   <img
@@ -140,7 +138,7 @@ class FollowCreateAccount extends React.Component<
                     className="wallet-transfer-popup__icon"
                     alt={wallet.currency}
                   />
-                  {`${wallet.description} | ${wallet.currency}`}
+                  {`${wallet.title} | ${wallet.currency}`}
                 </option>
               );
             })}
