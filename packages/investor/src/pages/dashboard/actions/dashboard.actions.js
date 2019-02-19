@@ -64,13 +64,13 @@ export const clearDashboardAssetsTable = () => ({
 export const fetchDashboardOpenTrades = (auth, filters) => {
   return {
     type: DASHBOARD_OPEN_TRADES,
-    payload: signalApi.v10SignalOpensignaltradesGet(auth, filters)
+    payload: signalApi.v10SignalTradesOpenGet(auth, filters)
   };
 };
 
 export const fetchDashboardTradesHistory = (auth, filters) => {
   return {
     type: DASHBOARD_OPEN_TRADES,
-    payload: signalApi.v10SignalOpensignaltradesGet(auth, filters) //Use api for trades history
+    payload: signalApi.v10SignalTradesOpenGet(auth, filters) //Use api for trades history
   };
 };

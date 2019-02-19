@@ -31,7 +31,7 @@ export const fetchTradesCount = (): Promise<IDashboardTradesCounts> => {
   const authorization = authService.getAuthArg();
   const filtering = { take: 0 };
   return Promise.all([
-    signalApi.v10SignalOpensignaltradesGet(authorization, filtering),
+    signalApi.v10SignalTradesOpenGet(authorization, filtering),
     /*investorApi.v10InvestorFundsGet(authorization, filtering)*/ Promise.resolve(
       { total: 1 }
     )

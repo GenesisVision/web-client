@@ -17,10 +17,8 @@ import { composeManagerDetailsUrl } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
 import { formatPercent } from "shared/utils/formatter";
 
-import {
-  getDashboardOpenTrades,
-  getDashboardTradesHistory
-} from "../../services/dashboard-trades.service";
+import { clearDashboardAssetsTable } from "../../actions/dashboard.actions";
+import { getDashboardOpenTrades } from "../../services/dashboard-trades.service";
 import { DASHBOARD_OPEN_TRADES_COLUMNS } from "./dashboard-trades.constants";
 import { dashboardOpenTradesTableSelector } from "./dashboard-trades.selectors";
 
@@ -34,7 +32,7 @@ interface ITradesHistoryTableProps {
 
 interface ITradesHistoryDispatchProps {
   service: {
-    getDashboardOpenTrades(): void;
+    clearDashboardAssetsTable(): void;
   };
 }
 
@@ -43,6 +41,9 @@ class TradesHistoryTable extends Component<
     ITradesHistoryTableProps &
     ITradesHistoryDispatchProps
 > {
+  componentWillUnmount() {
+    this.props.service.clearDashboardAssetsTable();
+  }
   render() {
     const { t, title } = this.props;
     return (
@@ -116,7 +117,7 @@ class TradesHistoryTable extends Component<
 }
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
-  service: bindActionCreators({ getDashboardTradesHistory }, dispatch)
+  service: bindActionCreators({ clearDashboardAssetsTable }, dispatch)
 });
 
 export default compose<ComponentType<ITradesHistoryTableOwnProps>>(
