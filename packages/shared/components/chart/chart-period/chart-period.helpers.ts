@@ -9,9 +9,7 @@ export enum ChartPeriodType {
   all = "all"
 }
 
-export const getPeriodStartDate = (
-  periodType: keyof typeof ChartPeriodType
-) => {
+export const getPeriodStartDate = (periodType: ChartPeriodType) => {
   const type: unitOfTime.DurationConstructor = `${periodType}s` as unitOfTime.DurationConstructor;
   switch (periodType) {
     case ChartPeriodType.all:
@@ -34,7 +32,7 @@ export const getDefaultPeriod = (): ChartDefaultPeriod => {
 export const DEFAULT_PERIOD = getDefaultPeriod();
 
 export type ChartDefaultPeriod = {
-  type: keyof typeof ChartPeriodType;
+  type: ChartPeriodType;
   start?: Date;
   end?: Date;
 };
