@@ -266,9 +266,18 @@
       "volume-percent": "Volume percent",
       "usd-equivalent": "USD equivalent",
       "back": "Back",
-      "submit": "Submit"
+      "submit": "Submit",
+      "validation": {
+        "fixedVolume-min": "USD equivalent must be greater than or equal to 0",
+        "fixedVolume-max": "USD equivalent must be less than or equal to 99999",
+        "percent-min": "Percent must be greater than or equal to 1%",
+        "percent-max": "Percent must be less than or equal to 999%",
+        "tolerance-percent-min": "Tolerance percent must be greater than or equal to 0.01",
+        "tolerance-percent-max": "Tolerance percent must be less than or equal to 20%",
+        "tolerance-required": "Tolerance percent is required field"
+      }
     },
-    "success-alert-message": "Request to withdrawal sent successfully."
+    "success-alert-message": "You have been subscribed."
   },
   "withdraw-fund": {
     "title": "Withdraw",
