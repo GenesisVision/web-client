@@ -33,6 +33,7 @@ class ProgramDetailsDescription extends PureComponent {
       isInvested,
       ProgramReinvestingWidget,
       ProgramFollowContainer,
+      ProgramUnfollowContainer,
       ClosePeriodContainer,
       CloseProgramContainer,
       ProgramDepositContainer,

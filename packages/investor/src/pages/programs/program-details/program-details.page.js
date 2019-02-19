@@ -4,6 +4,7 @@ import ProgramDepositContainer from "modules/program-deposit/program-deposit-con
 import ProgramFollowContainer from "modules/program-follow/program-follow-container";
 import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
 import { toggleReinvesting } from "modules/program-reinvesting/services/program-reinvesting.service";
+import ProgramUnfollowContainer from "modules/program-unfollow/program-unfollow-container";
 import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
@@ -108,6 +109,7 @@ class ProgramDetailsPage extends PureComponent {
             <div className="details__section">
               <ProgramDetailsDescriptionSection
                 ProgramFollowContainer={ProgramFollowContainer}
+                ProgramUnfollowContainer={ProgramUnfollowContainer}
                 toggleReinvesting={toggleReinvesting}
                 ProgramDepositContainer={ProgramDepositContainer}
                 AboutLevelsContainerComponent={AboutLevelsContainerComponent}

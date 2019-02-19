@@ -6,7 +6,7 @@ import { alertMessageActions } from "shared/modules/alert-message/actions/alert-
 
 import UnfollowPopupForm from "./unfollow-popup-form";
 
-class ProgramFollowContainer extends Component {
+class ProgramUnfollowContainer extends Component {
   state = { errorMessage: "" };
   handleClose = () => {
     const { onClose } = this.props;
@@ -61,4 +61,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ProgramFollowContainer);
+)(ProgramUnfollowContainer);
