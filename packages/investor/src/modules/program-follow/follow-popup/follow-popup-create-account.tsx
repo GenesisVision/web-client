@@ -13,19 +13,22 @@ import { getWalletIcon } from "shared/components/wallet/components/wallet-curren
 import rateApi from "shared/services/api-client/rate-api";
 import { convertFromCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
-import { number, object, lazy, Schema } from "yup";
+import { Schema, lazy, number, object } from "yup";
 
 import { IRequestParams } from "./follow-popup-form";
 
-export interface IFollowCreateAccountProps {
+interface IFollowCreateAccountOwnProps {
   walletsAddresses: WalletInfo[];
   wallets: any; // WalletData[];
   currency: string;
   onClick: (values: IRequestParams) => void;
+}
+
+interface IFollowCreateAccountProps {
   errors?: any;
   isValid?: boolean;
   dirty?: boolean;
-  t?: any;
+  t: TranslationFunction;
   values?: FormValues;
   setFieldValue?: any;
 }
@@ -40,7 +43,9 @@ export interface FormValues {
   initialDepositAmount: number;
 }
 
-type OwnProps = IFollowCreateAccountProps & FormikProps<FormValues>;
+type OwnProps = IFollowCreateAccountOwnProps &
+  IFollowCreateAccountProps &
+  FormikProps<FormValues>;
 
 class FollowCreateAccount extends React.Component<
   OwnProps,
@@ -186,7 +191,7 @@ class FollowCreateAccount extends React.Component<
   }
 }
 
-export default compose<React.ComponentType<IFollowCreateAccountProps>>(
+export default compose<React.ComponentType<IFollowCreateAccountOwnProps>>(
   translate(),
   withFormik({
     displayName: "follow-create-account",
