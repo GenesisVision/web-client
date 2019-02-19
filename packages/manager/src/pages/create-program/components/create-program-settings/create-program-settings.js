@@ -96,7 +96,7 @@ class CreateProgramSettings extends React.Component {
     const {
       depositWalletCurrency,
       depositAmount,
-      provideSignals,
+      isSignalProgram,
       accountType,
       description,
       title,
@@ -280,7 +280,7 @@ class CreateProgramSettings extends React.Component {
               <GVFormikField
                 type="checkbox"
                 color="primary"
-                name="provideSignals"
+                name="isSignalProgram"
                 label={<span>{"Provide signals"}</span>}
                 component={GVCheckbox}
               />
@@ -297,7 +297,7 @@ class CreateProgramSettings extends React.Component {
               </div>
               <div className="create-program-settings__fee">
                 <GVFormikField
-                  name="entryFeeInvest"
+                  name="entryFee"
                   label={t(
                     "manager.create-program-page.settings.fields.entry-fee"
                   )}
@@ -327,7 +327,7 @@ class CreateProgramSettings extends React.Component {
               </div>
               <div className="create-program-settings__fee">
                 <GVFormikField
-                  name="successFeeInvest"
+                  name="successFee"
                   label={t(
                     "manager.create-program-page.settings.fields.success-fee"
                   )}
@@ -352,14 +352,14 @@ class CreateProgramSettings extends React.Component {
                 />
               </div>
             </div>
-            {provideSignals && (
+            {isSignalProgram && (
               <div className="create-program-settings__row">
                 <div className="create-program-settings__row-title">
                   {"Signal provider fees"}
                 </div>
                 <div className="create-program-settings__fee">
                   <GVFormikField
-                    name="entryFeeSignal"
+                    name="signalSubscriptionFee"
                     label={"Monthly subscription fee"}
                     adornment="GVT" //isAllowed={this.allowEntryFee}
                     component={GVTextField}
@@ -387,7 +387,7 @@ class CreateProgramSettings extends React.Component {
                 </div>
                 <div className="create-program-settings__fee">
                   <GVFormikField
-                    name="successFeeSignal"
+                    name="signalSuccessFee"
                     label={t(
                       "manager.create-program-page.settings.fields.success-fee"
                     )}
@@ -518,10 +518,10 @@ export default translate()(
     mapPropsToValues: props => ({
       depositWalletCurrency: "GVT",
       depositWalletId: props.wallets.find(item => item.currency === "GVT").id,
-      provideSignals: true,
+      isSignalProgram: true,
       periodLength: "",
-      successFeeInvest: "",
-      successFeeSignal: "",
+      successFee: "",
+      signalSuccessFee: "",
       leverage: "",
       title: "",
       description: "",
@@ -535,8 +535,8 @@ export default translate()(
         size: undefined
       },
       brokerAccountTypeId: "",
-      entryFeeInvest: "",
-      entryFeeSignal: "",
+      entryFee: "",
+      signalSubscriptionFee: "",
       currency: "",
       accountType: ""
     }),

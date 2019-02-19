@@ -77,7 +77,7 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) =>
       leverage: string().required(
         t("manager.create-program-page.settings.validation.leverage-required")
       ),
-      entryFeeInvest: number()
+      entryFee: number()
         .required(
           t(
             "manager.create-program-page.settings.validation.entry-fee-required"
@@ -90,7 +90,7 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) =>
             props.programsInfo.managerMaxEntryFee +
             " %"
         ),
-      successFeeInvest: number()
+      successFee: number()
         .min(0.01, "Success fee must be greater than 0.01 % ")
         .required(
           t(
@@ -103,8 +103,8 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) =>
             props.programsInfo.managerMaxSuccessFee +
             " %"
         ),
-      provideSignals: boolean(),
-      entryFeeSignal: number().when("provideSignals", {
+      isSignalProgram: boolean(),
+      signalSubscriptionFee: number().when("isSignalProgram", {
         is: true,
         then: number()
           .required(
@@ -120,7 +120,7 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) =>
           ),
         otherwise: number()
       }),
-      successFeeSignal: number().when("provideSignals", {
+      signalSuccessFee: number().when("isSignalProgram", {
         is: true,
         then: number()
           .min(0.01, "Success fee must be greater than 0.01 % ")
