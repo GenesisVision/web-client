@@ -10,6 +10,7 @@ import { checkIsModelFilled } from "../helpers/create-program.helpers";
 import * as createProgramService from "../services/create-program.service";
 import CreateProgramBroker from "./create-program-broker/create-program-broker";
 import CreateProgramSettings from "./create-program-settings/create-program-settings";
+import * as WalletServices from "shared/components/wallet/services/wallet.services";
 
 class CreateProgramContainer extends Component {
   state = {
@@ -22,6 +23,8 @@ class CreateProgramContainer extends Component {
   };
 
   componentDidMount() {
+    const { service } = this.props;
+    service.fetchWallets();
     createProgramService.fetchBrokers().then(response => {
       this.setState({
         brokers: response.brokers,
@@ -87,7 +90,7 @@ class CreateProgramContainer extends Component {
       handleSubmit,
       setLeverageChooseAvailable
     } = this;
-    const { t, headerData, service, platformSettings } = this.props;
+    const { t, headerData, service, platformSettings, wallets } = this.props;
     if (!platformSettings || !headerData) return null;
     return (
       <div className="create-program-page__container">
@@ -116,6 +119,8 @@ class CreateProgramContainer extends Component {
             )}
             {tab === "settings" && (
               <CreateProgramSettings
+                fetchWallets={service.fetchWallets}
+                wallets={wallets}
                 onValidateError={this.handleValidateError}
                 navigateBack={navigateToBroker}
                 broker={choosedBroker}
@@ -146,6 +151,7 @@ class CreateProgramContainer extends Component {
 }
 
 const mapStateToProps = state => ({
+  wallets: state.wallet.info.data ? state.wallet.info.data.wallets : {},
   headerData: state.profileHeader.info.data,
   platformSettings: state.platformData.data
 });
@@ -155,6 +161,7 @@ const mapDispatchToProps = dispatch => {
     service: bindActionCreators(
       {
         ...createProgramService,
+        ...WalletServices,
         notifyError: (text, isUseLocalization) =>
           alertMessageActions.error(text, isUseLocalization)
       },
