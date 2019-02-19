@@ -22,7 +22,7 @@ export interface IFollowFormProps {
     requestParams: IRequestParams
   ) => Promise<any>;
   id: string;
-  signalAccounts: any; //CopyTradingAccountInfo[];
+  signalAccounts: CopyTradingAccountInfo[];
   wallets: WalletData[];
   currency: string;
   programName: string;

@@ -99,9 +99,9 @@ class FollowCreateAccount extends React.Component<
     const { rate } = this.state;
     if (!rate) return null;
     const wallet = wallets.find(
-      (wallet: any) => wallet.currency === initialDepositCurrency
+      (wallet: WalletData) => wallet.currency === initialDepositCurrency
     );
-    const availableToWithdraw = wallet.available / +rate;
+    const availableToWithdraw = (wallet ? wallet.available : 0) / +rate;
     const isAllow = (values: any) => {
       const { formattedValue, value } = values;
       return formattedValue === "" || validateFraction(value, currency);
@@ -207,8 +207,14 @@ export default compose<React.ComponentType<IFollowCreateAccountOwnProps>>(
       }
       return { initialDepositCurrency, initialDepositAmount: "" };
     },
-    validationSchema: (params: OwnProps & TranslationFunction) =>
-      lazy(
+    validationSchema: (params: TranslationFunction & OwnProps) => {
+      const getAvailable = (currency: string): number => {
+        const wallet = params.wallets.find(
+          (wallet: WalletData) => wallet.currency == currency
+        );
+        return wallet ? wallet.available : 0;
+      };
+      return lazy(
         (values: FormValues): Schema<any> =>
           object().shape({
             initialDepositAmount: number()
@@ -224,16 +230,14 @@ export default compose<React.ComponentType<IFollowCreateAccountOwnProps>>(
                 )
               )
               .max(
-                params.wallets.find(
-                  (wallet: WalletData) =>
-                    wallet.currency == values.initialDepositCurrency
-                ).available,
+                getAvailable(values.initialDepositCurrency),
                 params.t(
                   "follow-program.create-account.validation.amount-more-than-available"
                 )
               )
           })
-      ),
+      );
+    },
     handleSubmit: (values, { props }) => {
       props.onSubmit(values.initialDepositAmount);
     }
