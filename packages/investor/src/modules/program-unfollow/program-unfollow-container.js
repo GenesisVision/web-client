@@ -14,8 +14,10 @@ class ProgramUnfollowContainer extends Component {
     onClose();
   };
   handleSubmit = (data, setSubmitting) => {
-    const { service, onApply, id } = this.props;
-    let opts = {};
+    const { onApply } = this.props;
+    onApply();
+    // const { service, onApply, id } = this.props;
+    // let opts = {};
     // service
     //   .closeProgram(id, opts)
     //   .then(() => {
@@ -30,13 +32,14 @@ class ProgramUnfollowContainer extends Component {
   };
 
   render() {
-    const { open, onClose } = this.props;
+    const { open, onClose, onApply } = this.props;
     const { errorMessage } = this.state;
     return (
       <Dialog open={open} onClose={this.handleClose} className="dialog--wider">
         <UnfollowPopupForm
           onSubmit={this.handleSubmit}
           onCancel={onClose}
+          onApply={onApply}
           errorMessage={errorMessage}
         />
       </Dialog>
@@ -58,7 +61,4 @@ const mapDispatchToProps = dispatch => ({
   // )
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProgramUnfollowContainer);
+export default connect(mapDispatchToProps)(ProgramUnfollowContainer);

@@ -57,6 +57,9 @@ class ProgramDetailsDescriptionControls extends React.Component {
   handleCloseUnfollowPopup = () => {
     this.setState({ isOpenUnfollowPopup: false });
   };
+  handleApplyUnfollowPopup = updateDetails => () => {
+    updateDetails();
+  };
   handleApplyFollowPopup = updateDetails => () => {
     updateDetails();
   };
@@ -108,7 +111,7 @@ class ProgramDetailsDescriptionControls extends React.Component {
       }
     };
 
-    console.log(programDescription.IsSignalProgram);
+    console.log(programDescription.isSignalProgram);
 
     return (
       <div className="program-details-description__controls">
@@ -224,7 +227,8 @@ class ProgramDetailsDescriptionControls extends React.Component {
         </div>
         {ProgramFollowContainer &&
         ProgramUnfollowContainer &&
-        programDescription.IsSignalProgram ? (
+        // programDescription.isSignalProgram ? (
+        true ? (
           <div className="program-details-description__col program-details-description__col--small-size">
             <div className="program-details-description__statistic-container">
               <StatisticItem
@@ -254,12 +258,13 @@ class ProgramDetailsDescriptionControls extends React.Component {
               </StatisticItem>
             </div>
             <div className="program-details-description__button-container">
-              {programDescription.personalProgramDetails.isFollowSignals ? (
+              {/*{programDescription.personalProgramDetails.isFollowSignals ? (*/}
+              {true ? (
                 <GVButton
                   className="program-details-description__invest-btn"
                   onClick={this.handleOpenUnfollowPopup}
                 >
-                  {t("program-details-page.description.unfollow-trade")}
+                  {t("program-details-page.description.unfollow")}
                 </GVButton>
               ) : (
                 <GVButton
@@ -269,7 +274,6 @@ class ProgramDetailsDescriptionControls extends React.Component {
                   {t("program-details-page.description.follow-trade")}
                 </GVButton>
               )}
-              }
             </div>
           </div>
         ) : null}
@@ -326,7 +330,9 @@ class ProgramDetailsDescriptionControls extends React.Component {
               {ProgramUnfollowContainer && (
                 <ProgramUnfollowContainer
                   open={isOpenUnfollowPopup}
+                  onClose={this.handleCloseUnfollowPopup}
                   onCancel={this.handleCloseUnfollowPopup}
+                  onApply={this.handleApplyUnfollowPopup(updateDetails)}
                 />
               )}
             </Fragment>

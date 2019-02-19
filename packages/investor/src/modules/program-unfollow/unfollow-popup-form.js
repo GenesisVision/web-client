@@ -15,11 +15,9 @@ const UnfollowPopupForm = ({
   return (
     <form id="UnfollowPopupForm" onSubmit={handleSubmit} noValidate>
       <div className="dialog__top">
-        <h2>{t("program-details-page.description.close-program")}</h2>
+        <h2>{t("program-details-page.description.unfollow-trades")}</h2>
         <div className="dialog__text">
-          <p>
-            {t("program-details-page.description.close-program-notification")}
-          </p>
+          <p>{t("program-details-page.description.unfollow-trade-text")}</p>
         </div>
         {errorMessage && <div className="form-error">{errorMessage}</div>}
         <div className="dialog__buttons">
