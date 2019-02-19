@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>GV</title>
+    <desc>Created with Sketch.</desc>
+    <g id="ui" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="1600_3_2_wallet" transform="translate(-155.000000, -581.000000)">
+            <g id="Group-16-Copy-2" transform="translate(155.000000, 581.000000)">
+                <g id="logo/Ethereum">
+                    <path d="M23.9348882,12.0002175 C23.9348882,18.5927492 18.590719,23.9370634 11.9982598,23.9370634 C5.4057281,23.9370634 0.0614864048,18.5927492 0.0614864048,12.0002175 C0.0614864048,5.40775831 5.4057281,0.0635166163 11.9982598,0.0635166163 C18.5906465,0.0635166163 23.9348882,5.40775831 23.9348882,12.0002175" id="Shape" fill="#505050" fill-rule="nonzero" opacity="0.200000003"></path>
+                    <g id="Group" opacity="0.800000012" stroke-width="1" fill-rule="evenodd" transform="translate(8.584615, 6.461538)" fill="#FFFFFF">
+                        <polygon id="Shape" fill-rule="nonzero" points="3.37547002 0 3.30174101 0.25059952 3.30174101 7.52241727 3.37547002 7.59601439 6.75096643 5.60076739"></polygon>
+                        <polygon id="Shape" fill-rule="nonzero" points="3.3754964 0 0 5.60076739 3.3754964 7.59604077 3.3754964 4.06651799"></polygon>
+                        <polygon id="Shape" fill-rule="nonzero" points="3.37547002 8.6942446 3.33392326 8.74489209 3.33392326 11.3352734 3.37547002 11.4566163 6.7529976 6.7"></polygon>
+                        <polygon id="Shape" fill-rule="nonzero" points="3.3754964 11.4566427 3.3754964 8.6942446 0 6.7"></polygon>
+                        <polygon id="Shape" fill-rule="nonzero" points="3.37547002 7.59601439 6.75091367 5.60079376 3.37547002 4.06654436"></polygon>
+                        <polygon id="Shape" fill-rule="nonzero" points="0 5.60076739 3.37544365 7.59601439 3.37544365 4.06651799"></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

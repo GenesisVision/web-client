@@ -2,7 +2,7 @@ import { GVButton } from "gv-react-components";
 import React from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
-import { WALLET_PAGE_ROUTE } from "shared/components/wallet/wallet-page";
+import { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes";
 
 const DashboardGetStarted = ({ t }) => {
   return (
@@ -29,7 +29,7 @@ const DashboardGetStarted = ({ t }) => {
         </div>
       </div>
       <div className="get-started__deposit">
-        <Link to={WALLET_PAGE_ROUTE}>
+        <Link to={WALLET_TOTAL_PAGE_ROUTE}>
           <GVButton
             id="signUpFormSubmit"
             className="invest-form__submit-button"

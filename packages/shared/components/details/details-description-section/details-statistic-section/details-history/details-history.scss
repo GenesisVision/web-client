@@ -19,7 +19,6 @@
 
   &__subheading {
     @include font-size($font-size-paragraph);
-    font-size: $font-size-paragraph-mobile;
     letter-spacing: 0.2px;
     font-weight: 600;
   }

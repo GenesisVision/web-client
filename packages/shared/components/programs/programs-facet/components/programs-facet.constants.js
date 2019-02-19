@@ -8,7 +8,7 @@ import { programsDateRangeFilter } from "shared/modules/programs-table/component
 export const PROGRAMS_FACET_TABLE_FILTERING = {
   dateRange: {
     ...DEFAULT_DATE_RANGE_FILTER_VALUE,
-    type: DateRangeFilterTypes.lastWeek
+    type: DateRangeFilterTypes.lastMonth
   }
 };
 

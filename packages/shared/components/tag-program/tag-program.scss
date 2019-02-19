@@ -1,0 +1,62 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
+
+$tag-font-size: 11px;
+$tag-vertical-padding: 12px;
+
+.tag-program {
+  display: inline-block;
+  position: relative;
+  margin-right: 10px;
+  cursor: default;
+
+  &__button-remove {
+    padding: 0;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #293842;
+    border: 2px solid $panel-background-color;
+    border-radius: 50%;
+    top: -10px;
+    right: -10px;
+
+    .icon {
+      height: 6px;
+      width: 6px;
+    }
+  }
+
+  .gv-btn:hover:not(disabled).gv-btn--secondary {
+    background-color: #161b20;
+  }
+
+  &-tooltip {
+    max-width: 205px;
+
+    .tag-program {
+      margin-bottom: 10px;
+    }
+  }
+
+  &--self-remove {
+    @include adaptive-margin(right, $padding-xsmall);
+  }
+}
+
+.tag-button {
+  @include font-size($tag-font-size);
+  border-radius: 19.5px;
+  font-weight: 500;
+  text-transform: uppercase;
+  height: 18px;
+  line-height: 18px;
+  padding: 0 12px;
+
+  @include media-breakpoint-landscape-phone() {
+    padding: 0 12px;
+    max-height: 18px;
+    line-height: 18px;
+  }
+}

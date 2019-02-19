@@ -23,10 +23,10 @@
 
   &--secondary {
     svg [fill] {
-      fill: #d8d8d8;
+      fill: $icon-color;
     }
     svg [stroke] {
-      stroke: #d8d8d8;
+      stroke: $icon-color;
     }
   }
 

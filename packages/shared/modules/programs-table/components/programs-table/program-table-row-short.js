@@ -1,5 +1,6 @@
 import classnames from "classnames";
 import React from "react";
+import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
@@ -10,11 +11,11 @@ import ProgramPeriodPie from "shared/components/program-period/program-period-pi
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
+import TagProgramContainer from "shared/components/tag-program/tag-program-container";
 import Tooltip from "shared/components/tooltip/tooltip";
+import { STATUS } from "shared/constants/constants";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
-import { STATUS } from "shared/constants/constants";
-import { translate } from "react-i18next";
 
 const ProgramTableRowShort = ({
   t,
@@ -83,16 +84,9 @@ const ProgramTableRowShort = ({
                 {program.title}
               </Link>
             </div>
-            {/*{tags && (
-              <div className="programs-table__cell--bottom">
-                {tags.map((tag, index) => (
-                  <span key={tag.name} style={{ color: tag.color }}>
-                    {tag.name}
-                    {index < tags.length - 1 && ", "}
-                  </span>
-                ))}
-              </div>
-            )}*/}
+            <div className="programs-table__cell--bottom">
+              <TagProgramContainer tags={tags} />
+            </div>
           </div>
         </div>
       </TableCell>

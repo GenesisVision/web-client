@@ -9,7 +9,10 @@ import DateRangeFilter from "shared/components/table/components/filtering/date-r
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import LevelFilter from "shared/components/table/components/filtering/level-filter/level-filter";
 import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
+import TagFilter from "shared/components/table/components/filtering/tag-filter/tag-filter";
+import { TAG_FILTER_NAME } from "shared/components/table/components/filtering/tag-filter/tag-filter.constants";
 import { toggleFavoriteProgramDispatchable } from "shared/modules/favorite-asset/services/favorite-program.service";
+import { convertToArray } from "shared/utils/helpers";
 
 import * as programsService from "../../services/programs-table.service";
 import { composeCurrencyFilter } from "./program-table.helpers";
@@ -31,6 +34,7 @@ class ProgramsTableContainer extends Component {
 
   render() {
     const {
+      programTags,
       t,
       showSwitchView,
       currencies,
@@ -41,6 +45,15 @@ class ProgramsTableContainer extends Component {
       isAuthenticated,
       title
     } = this.props;
+    const tagsFilterValue = value => {
+      if (!programTags.length) return [];
+      return convertToArray(value).map(tag => {
+        const { color } = programTags.find(
+          programTag => programTag.name === tag
+        );
+        return { name: tag, color };
+      });
+    };
     return (
       <ProgramsTable
         showSwitchView={showSwitchView}
@@ -56,6 +69,12 @@ class ProgramsTableContainer extends Component {
         renderFilters={(updateFilter, filtering) => {
           return (
             <Fragment>
+              <TagFilter
+                name={TAG_FILTER_NAME}
+                value={tagsFilterValue(filtering[TAG_FILTER_NAME])}
+                values={programTags}
+                onChange={updateFilter}
+              />
               <LevelFilter
                 name={LEVEL_FILTER_NAME}
                 value={filtering[LEVEL_FILTER_NAME]}
@@ -99,7 +118,10 @@ const mapStateToProps = state => {
   const currencies = state.platformData.data
     ? state.platformData.data.currencies
     : [];
-  return { isPending, data, isAuthenticated, currencies };
+  const programTags = state.platformData.data
+    ? state.platformData.data.programTags
+    : [];
+  return { isPending, data, isAuthenticated, currencies, programTags };
 };
 
 const mapDispatchToProps = dispatch => ({
