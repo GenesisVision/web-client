@@ -1,5 +1,7 @@
 import "shared/components/dashboard/dashboard.scss";
 
+import "./dashboard.scss";
+
 import React from "react";
 import { translate } from "react-i18next";
 import Page from "shared/components/page/page";
@@ -8,6 +10,7 @@ import Surface from "shared/components/surface/surface";
 import DashboardAssetsContainer from "./components/dashboard-assets/dashboard-assets-container";
 import DashboardChartSection from "./components/dashboard-portfolio-chart-section/dashboard-portfolio-chart-section";
 import DashboardPortfolioEventsSection from "./components/dashboard-portfolio-events/dashboard-portfolio-events-section";
+import DashboardTradesSection from "./components/dashboard-trades/dashboard-trades-section";
 
 const DashboardPage = ({ t }) => {
   const title = t(`${process.env.REACT_APP_PLATFORM}.dashboard-page.title`);
@@ -24,8 +27,11 @@ const DashboardPage = ({ t }) => {
             <DashboardPortfolioEventsSection title={title} />
           </div>
         </div>
-        <div className="dashboard__assets">
+        <div className="dashboard__table-section">
           <DashboardAssetsContainer title={title} />
+        </div>
+        <div className="dashboard__table-section">
+          <DashboardTradesSection title={title} />
         </div>
       </div>
     </Page>

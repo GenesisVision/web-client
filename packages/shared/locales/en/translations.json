@@ -942,6 +942,11 @@
         "success-cancel-request": "Request canceled successfully",
         "failure-cancel-request": "Failed to cancel request"
       },
+      "trades": {
+        "title": "Trades",
+        "open-trades": "Open trades",
+        "history": "Trades History"
+      },
       "programs-header": {
         "title": "Name",
         "share": "Share",
@@ -962,6 +967,16 @@
         "chart": "Chart",
         "value": "Value",
         "status": "Status"
+      },
+      "open-trades-header": {
+        "manager": "Manager",
+        "symbol": "Symbol",
+        "open-date": "Open Date",
+        "volume": "Volume",
+        "open-price": "Open Price",
+        "price": "Price",
+        "profit": "Current Profit",
+        "close": "Close"
       },
       "get-started": {
         "title": "Get started",
@@ -1080,6 +1095,8 @@
         "value": "Value",
         "status": "Status"
       },
+      "open-trades": {},
+      "trades-history": {},
       "get-started": {
         "title": "Get started",
         "text-1": "There's no data right now.",

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import connect from "react-redux/es/connect/connect";
+import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 import DashboardAssets from "shared/components/dashboard/dashboard-assets/dashboard-assets";
 import { INVESTOR } from "shared/constants/constants";

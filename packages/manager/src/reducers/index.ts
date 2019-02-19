@@ -40,9 +40,8 @@ import headerReducer from "shared/reducers/header-reducer";
 import platformReducer from "shared/reducers/platform-reducer";
 import RootState from "shared/reducers/root-reducer";
 import uiReducer from "shared/reducers/ui-reducer";
-import { DeepReadonly } from "utility-types";
 
-type State = DeepReadonly<{
+type State = Readonly<{
   programDeposit: ProgramsDepositState;
   fundDeposit: FundDepositState;
   notifications: NotificationsState;
