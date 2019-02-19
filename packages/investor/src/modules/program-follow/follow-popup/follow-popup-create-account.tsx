@@ -13,7 +13,7 @@ import { getWalletIcon } from "shared/components/wallet/components/wallet-curren
 import rateApi from "shared/services/api-client/rate-api";
 import { convertFromCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
-import { number, object } from "yup";
+import { number, object, lazy, Schema } from "yup";
 
 import { IRequestParams } from "./follow-popup-form";
 
@@ -204,12 +204,21 @@ export default compose<React.ComponentType<IFollowCreateAccountProps>>(
       }
       return { initialDepositCurrency, initialDepositAmount: "" };
     },
-    validationSchema: ({ t }: { t: TranslationFunction }) =>
-      object().shape({
-        initialDepositAmount: number()
-          .required()
-          .moreThan(0)
-      }),
+    validationSchema: (params: TranslationFunction & OwnProps) =>
+      lazy(
+        (values: FormValues): Schema<any> =>
+          object().shape({
+            initialDepositAmount: number()
+              .required()
+              .moreThan(0)
+              .max(
+                params.wallets.find(
+                  (wallet: WalletData) =>
+                    wallet.currency == values.initialDepositCurrency
+                ).available
+              )
+          })
+      ),
     handleSubmit: (values, { props }) => {
       props.onSubmit(values.initialDepositAmount);
     }
