@@ -111,7 +111,10 @@ class ProgramDetailsDescriptionControls extends React.Component {
       }
     };
 
-    console.log(programDescription.isSignalProgram);
+    const isAvailableFollowingTrades =
+      ProgramFollowContainer &&
+      ProgramUnfollowContainer &&
+      programDescription.isSignalProgram;
 
     return (
       <div className="program-details-description__controls">
@@ -225,10 +228,7 @@ class ProgramDetailsDescriptionControls extends React.Component {
             </div>
           )}
         </div>
-        {ProgramFollowContainer &&
-        ProgramUnfollowContainer &&
-        // programDescription.isSignalProgram ? (
-        true ? (
+        {isAvailableFollowingTrades ? (
           <div className="program-details-description__col program-details-description__col--small-size">
             <div className="program-details-description__statistic-container">
               <StatisticItem
@@ -258,8 +258,7 @@ class ProgramDetailsDescriptionControls extends React.Component {
               </StatisticItem>
             </div>
             <div className="program-details-description__button-container">
-              {/*{programDescription.personalProgramDetails.isFollowSignals ? (*/}
-              {true ? (
+              {programDescription.personalProgramDetails.isFollowSignals ? (
                 <GVButton
                   className="program-details-description__invest-btn"
                   onClick={this.handleOpenUnfollowPopup}

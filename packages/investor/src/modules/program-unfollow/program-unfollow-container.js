@@ -16,6 +16,7 @@ class ProgramUnfollowContainer extends Component {
   handleSubmit = (data, setSubmitting) => {
     const { onApply } = this.props;
     onApply();
+    this.handleClose();
     // const { service, onApply, id } = this.props;
     // let opts = {};
     // service
