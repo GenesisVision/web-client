@@ -10,13 +10,14 @@ import { compose } from "redux";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import Select from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { getWalletIcon } from "shared/components/wallet/components/wallet-currency";
+import filesService from "shared/services/file-service";
 import { formatValue, validateFraction } from "shared/utils/formatter";
 import { formatCurrencyValue } from "shared/utils/formatter";
-import { ethWalletValidator } from "shared/utils/validators/validators";
-import { object, string } from "yup";
-
-import filesService from "../../../services/file-service";
+import {
+  btcUsdtWalletValidator,
+  ethGvtWalletValidator
+} from "shared/utils/validators/validators";
+import { lazy, object, string } from "yup";
 
 class WalletWithdrawForm extends Component {
   onChangeCurrency = (name, target) => {
@@ -214,13 +215,28 @@ export default compose(
       }
       return { currency, amount: "", address: "", twoFactorCode: "" };
     },
-    validationSchema: ({ t, twoFactorEnabled }) =>
-      object().shape({
-        address: ethWalletValidator.required(
-          t("wallet-withdraw.validation.address-is-required")
-        ),
-        twoFactorCode: twoFactorvalidator(t, twoFactorEnabled)
-      }),
+    validationSchema: (props, a) => {
+      const { t, twoFactorEnabled } = props;
+      return lazy(values => {
+        switch (values.currency) {
+          case "GVT":
+          case "ETH":
+            return object().shape({
+              address: ethGvtWalletValidator.required(
+                t("wallet-withdraw.validation.address-is-required")
+              ),
+              twoFactorCode: twoFactorvalidator(t, twoFactorEnabled)
+            });
+          default:
+            return object().shape({
+              address: btcUsdtWalletValidator.required(
+                t("wallet-withdraw.validation.address-is-required")
+              ),
+              twoFactorCode: twoFactorvalidator(t, twoFactorEnabled)
+            });
+        }
+      });
+    },
     handleSubmit: (values, { props }) => props.onSubmit(values)
   })
 )(WalletWithdrawForm);
