@@ -48,23 +48,21 @@ class DashboardTradesSection extends Component<
     const { tab, openTradesCount, historyCount } = this.state;
     const { t, title } = this.props;
     return (
-      <Surface className="">
-        <div className="">
+      <Surface>
+        <div className="dashboard-assets__head">
           <h3>{t("investor.dashboard-page.trades.title")}</h3>
-          <div className="">
-            <GVTabs value={tab} onChange={this.handleTabChange}>
-              <GVTab
-                value={TRADES_TABS.OPEN_TRADES}
-                label={t("investor.dashboard-page.trades.open-trades")}
-                count={openTradesCount}
-              />
-              <GVTab
-                value={TRADES_TABS.HISTORY}
-                label={t("investor.dashboard-page.trades.history")}
-                count={historyCount}
-              />
-            </GVTabs>
-          </div>
+          <GVTabs value={tab} onChange={this.handleTabChange}>
+            <GVTab
+              value={TRADES_TABS.OPEN_TRADES}
+              label={t("investor.dashboard-page.trades.open-trades")}
+              count={openTradesCount}
+            />
+            <GVTab
+              value={TRADES_TABS.HISTORY}
+              label={t("investor.dashboard-page.trades.history")}
+              count={historyCount}
+            />
+          </GVTabs>
         </div>
         <div className="">
           {tab === TRADES_TABS.OPEN_TRADES && <OpenTradesTable title={title} />}

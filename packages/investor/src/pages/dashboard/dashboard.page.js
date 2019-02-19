@@ -1,5 +1,7 @@
 import "shared/components/dashboard/dashboard.scss";
 
+import "./dashboard.scss";
+
 import React from "react";
 import { translate } from "react-i18next";
 import Page from "shared/components/page/page";
@@ -16,7 +18,7 @@ const DashboardPage = ({ t }) => {
     <Page title={title}>
       <div className="dashboard">
         <div className="dashboard__row">
-          {/* <div className="dashboard__chart">
+          <div className="dashboard__chart">
             <Surface className="dashboard-portfolio-chart-section">
               <DashboardChartSection />
             </Surface>
@@ -27,10 +29,9 @@ const DashboardPage = ({ t }) => {
         </div>
         <div className="dashboard__table-section">
           <DashboardAssetsContainer title={title} />
-        </div> */}
-          <div className="dashboard__table-section">
-            <DashboardTradesSection />
-          </div>
+        </div>
+        <div className="dashboard__table-section">
+          <DashboardTradesSection title={title} />
         </div>
       </div>
     </Page>
