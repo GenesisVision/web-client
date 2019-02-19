@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import Dialog from "shared/components/dialog/dialog";
-import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
 import UnfollowPopupForm from "./unfollow-popup-form";
 
