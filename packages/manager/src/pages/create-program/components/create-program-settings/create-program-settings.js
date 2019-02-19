@@ -95,7 +95,6 @@ class CreateProgramSettings extends React.Component {
     const { rate } = this.state;
     const {
       depositWalletCurrency,
-      depositWalletId,
       depositAmount,
       provideSignals,
       accountType,
@@ -447,6 +446,7 @@ class CreateProgramSettings extends React.Component {
             </div>
             <div className="deposit-details__amount">
               <InputAmountField
+                autoFocus={false}
                 name="depositAmount"
                 label={t("wallet-transfer.amount")}
                 currency={depositWalletCurrency}
