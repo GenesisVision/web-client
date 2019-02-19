@@ -1,16 +1,15 @@
 import { MultiWalletExternalTransaction } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
+import { Fragment } from "react";
 import NumberFormat from "react-number-format";
-
-import TransactionDetailsPopup from "shared/modules/transaction-details/transaction-details-popup";
-import { formatCurrencyValue } from "shared/utils/formatter";
+import ImageBase from "shared/components/avatar/image-base";
 import Profitability from "shared/components/profitability/profitability";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import FundAsset from "shared/media/fund-asset.svg";
-import ImageBase from "shared/components/avatar/image-base";
-import { Fragment } from "react";
+import TransactionDetailsPopup from "shared/modules/transaction-details/transaction-details-popup";
+import { formatCurrencyValue } from "shared/utils/formatter";
 
 export interface ITransactionRowProps {
   transaction: MultiWalletExternalTransaction;

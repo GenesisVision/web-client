@@ -37,7 +37,7 @@ export const DASHBOARD_PROGRAMS_FILTERS = [
     ...composeDefaultDateRangeFilter({
       defaultValue: {
         ...DEFAULT_DATE_RANGE_FILTER_VALUE,
-        type: DateRangeFilterTypes.lastWeek
+        type: DateRangeFilterTypes.lastMonth
       }
     })
   }
@@ -46,7 +46,7 @@ export const DASHBOARD_PROGRAMS_FILTERS = [
 export const DASHBOARD_PROGRAMS_DEFAULT_FILTERING = {
   dateRange: {
     ...DEFAULT_DATE_RANGE_FILTER_VALUE,
-    type: DateRangeFilterTypes.lastWeek
+    type: DateRangeFilterTypes.lastMonth
   }
 };
 
@@ -82,7 +82,7 @@ export const DASHBOARD_FUNDS_FILTERS = [
     ...composeDefaultDateRangeFilter({
       defaultValue: {
         ...DEFAULT_DATE_RANGE_FILTER_VALUE,
-        type: DateRangeFilterTypes.lastWeek
+        type: DateRangeFilterTypes.lastMonth
       }
     })
   }
@@ -91,6 +91,6 @@ export const DASHBOARD_FUNDS_FILTERS = [
 export const DASHBOARD_FUNDS_DEFAULT_FILTERING = {
   dateRange: {
     ...DEFAULT_DATE_RANGE_FILTER_VALUE,
-    type: DateRangeFilterTypes.lastWeek
+    type: DateRangeFilterTypes.lastMonth
   }
 };

@@ -1,51 +1,85 @@
-import * as React from "react";
-import ArrowIcon from "../../media/arrow-down.svg";
-import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { GVProgramAvatar } from "gv-react-components";
-import filesService from "../../services/file-service";
-
 import "./transaction-details.scss";
 
-export interface ITransactionDetailsProps {
-  transactionId: string;
-}
+import { TransactionDetails } from "gv-api-web";
+import * as React from "react";
+import { translate } from "react-i18next";
+import ConvertingDetails from "shared/modules/transaction-details/converting-details";
+import ExternalDeposit from "shared/modules/transaction-details/external-deposit-details";
+import ExternalWithdrawal from "shared/modules/transaction-details/external-withdrawal-details";
+import InvestingTransaction from "shared/modules/transaction-details/investment-details";
+import OpenCloseTransaction from "shared/modules/transaction-details/open-close-details";
+import ProfitDetails from "shared/modules/transaction-details/profit-details";
+import WithdrawalTransaction from "shared/modules/transaction-details/withdrawal-details";
+import walletApi from "shared/services/api-client/wallet-api";
+import authService from "shared/services/auth-service";
 
-const TransactionAsset = props => {
-  return (
-    <div className="transaction-asset">
-      <GVProgramAvatar alt={"mega programs"} />
-      <div className="transaction-asset__description">
-        <p className="transaction-asset__title">Hello Program</p>
-        <p className="transaction-asset__trader">Mega Trader</p>
-      </div>
-    </div>
-  );
+const Types = {
+  Investing: InvestingTransaction,
+  Withdrawal: WithdrawalTransaction,
+  Open: OpenCloseTransaction,
+  Close: OpenCloseTransaction,
+  ExternalDeposit: ExternalDeposit,
+  ExternalWithdrawal: ExternalWithdrawal,
+  Converting: ConvertingDetails,
+  Profit: ProfitDetails
 };
 
-export class TransactionDetails extends React.Component<
-  ITransactionDetailsProps
+export interface ITransactionDetailsDialogProps {
+  transactionId: string;
+  t(string: string): string;
+}
+
+export interface ITransactionDetailsState {
+  isPending: boolean;
+  data?: TransactionDetails;
+  errorMessage?: string;
+}
+
+export interface ITransactionDetailsProps {
+  data: TransactionDetails;
+  t(string: string): string;
+}
+
+class TransactionDetailsDialog extends React.Component<
+  ITransactionDetailsDialogProps,
+  ITransactionDetailsState
 > {
+  constructor(props: ITransactionDetailsDialogProps) {
+    super(props);
+    this.state = {
+      isPending: false
+    };
+  }
+
+  componentDidMount() {
+    this.fetch();
+  }
+
+  fetch = () => {
+    this.setState({ isPending: true });
+    walletApi
+      .v10WalletTransactionByIdGet(
+        this.props.transactionId,
+        authService.getAuthArg()
+      )
+      .then((data: TransactionDetails) =>
+        this.setState({ data, isPending: false })
+      )
+      .catch((errorMessage: string) =>
+        this.setState({ errorMessage, isPending: false })
+      );
+  };
+
   render() {
-    return (
-      <React.Fragment>
-        <div className="dialog__top">
-          <div className="dialog__header">
-            <h2>Transaction Details</h2>
-            <p>Program investment</p>
-          </div>
-        </div>
-        <div className="dialog__bottom">
-          <StatisticItem label={"To"}>
-            <TransactionAsset />
-          </StatisticItem>
-          <StatisticItem label={"Entry fee"}>5345</StatisticItem>
-          <StatisticItem label={"GV Commission"}>345345</StatisticItem>
-          <StatisticItem label={"Status"}>Done</StatisticItem>
-          <StatisticItem label={"Investment amount"} big>
-            34.234234 BTC
-          </StatisticItem>
-        </div>
-      </React.Fragment>
-    );
+    if (this.state.isPending) return null;
+    if (!this.state.data) return null;
+    const Component =
+      Types[this.state.data.type] ||
+      function() {
+        return <p>type isn't define</p>;
+      };
+    return <Component t={this.props.t} data={this.state.data} />;
   }
 }
+
+export default translate()(TransactionDetailsDialog);

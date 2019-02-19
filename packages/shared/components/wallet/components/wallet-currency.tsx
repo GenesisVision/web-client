@@ -10,10 +10,11 @@ import BTCIcon from "shared/media/currency/BTC.svg";
 import ETHIcon from "shared/media/currency/ETH.svg";
 import GVTIcon from "shared/media/currency/GVT.svg";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
+import WalletTransferPopup from "shared/modules/wallet-transfer/wallet-transfer-popup";
 import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
+import RootState from "shared/reducers/root-reducer";
+import filesService from "shared/services/file-service";
 
-import WalletTransferPopup from "../../../modules/wallet-transfer/wallet-transfer-popup";
-import RootState from "../../../reducers/root-reducer";
 import WalletBalanceButtons from "./wallet-balance/wallet-balance-buttons";
 import WalletBalanceElements from "./wallet-balance/wallet-balance-elements";
 import WalletBalanceLoader from "./wallet-balance/wallet-balance-loader";
@@ -82,7 +83,7 @@ class WalletCurrency extends React.Component<IWalletProps> {
               {info.title}
               <span> {t("wallet-page.wallet")}</span>
               <img
-                src={getWalletIcon(info.currency)}
+                src={filesService.getFileUrl(info.logo)}
                 className="wallet-balance__title-icon"
                 alt="Icon"
               />
@@ -93,7 +94,13 @@ class WalletCurrency extends React.Component<IWalletProps> {
               handleTransfer={this.handleOpenTransferPopup}
             />
           </div>
-          <WalletBalanceElements walletBalanceData={info} />
+          <WalletBalanceElements
+            available={info.available}
+            pending={info.pending}
+            total={info.total}
+            invested={info.invested}
+            currency={info.currency}
+          />
         </div>
         <WalletContainer filters={filters} currency={info.currency} />
         <WalletAddFundsPopup

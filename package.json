@@ -30,6 +30,10 @@
       "style": "module"
     }
   },
+  "scripts": {
+    "investor": "cd packages/investor && yarn start",
+    "manager": "cd packages/manager && yarn start"
+  },
   "browserslist": {
     "development": [
       "last 2 chrome versions",
