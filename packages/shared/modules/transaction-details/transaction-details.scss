@@ -1,6 +1,23 @@
+@import "~shared/styles/_sizes.scss";
+@import "~shared/styles/_colors.scss";
+
+.transaction-details {
+  .dialog {
+    &__header {
+      margin-bottom: $padding-xsmall;
+    }
+  }
+}
+
 .transaction-asset {
   display: flex;
   flex-direction: row;
+
+  &--fund {
+    .program-avatar {
+      margin-right: 0;
+    }
+  }
 
   &__description {
     margin-left: 20px;
@@ -14,5 +31,34 @@
   }
   &__trader {
     font-size: 12px;
+  }
+}
+
+.external-transaction {
+  display: flex;
+  flex-direction: row;
+  &__wallet {
+    width: 44px;
+    height: 44px;
+  }
+  &__icon {
+    margin-right: 30px;
+  }
+  &__address {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    .gv-btn.gv-btn--text {
+      padding: 10px 0;
+      justify-content: start;
+      color: $primary-color;
+      transition: opacity 250ms;
+
+      &:hover {
+        color: $primary-color;
+        opacity: 0.5;
+      }
+    }
   }
 }

@@ -28,7 +28,7 @@ export const MANAGER_DEFAULT_FILTERS = [MANAGER_TABLE_DATE_RANGE_FILTER];
 export const MANAGER_FILTERING = {
   [DATE_RANGE_FILTER_NAME]: {
     ...DEFAULT_DATE_RANGE_FILTER_VALUE,
-    type: DateRangeFilterTypes.lastWeek
+    type: DateRangeFilterTypes.lastMonth
   }
 };
 

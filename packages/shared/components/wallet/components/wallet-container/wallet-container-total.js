@@ -1,25 +1,12 @@
 import "./wallet-container.scss";
 
 import { GVTab, GVTabs } from "gv-react-components";
-import moment from "moment";
-import React, { Fragment, PureComponent } from "react";
+import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
-import NumberFormat from "react-number-format";
-import { Link } from "react-router-dom";
-import { SearchIcon } from "shared/components/icon/search-icon";
-import Profitability from "shared/components/profitability/profitability";
 import Surface from "shared/components/surface/surface";
-import TableCell from "shared/components/table/components/table-cell";
-import TableRow from "shared/components/table/components/table-row";
-import { reduceFilters } from "shared/components/wallet/components/wallet-transactions/wallet-transaction-type-filter.helpers";
-import SuccessTransactionsIcon from "shared/media/transactions/success.svg";
-import { TransactionDetails } from "shared/modules/transaction-details/transaction-details";
-import TransactionDetailsPopup from "shared/modules/transaction-details/transaction-details-popup";
-import { formatValue } from "shared/utils/formatter";
 
 import GVScroll from "../../../scroll/gvscroll";
 import WalletCopytrading from "../wallet-copytrading/wallet-copytrading";
-import { getWalletIcon } from "../wallet-currency";
 import AllDepositsWithdrawalsRow from "../wallet-deposits-withdrawals/all-deposits-withdrawals-row";
 import WalletDepositsWithdrawals from "../wallet-deposits-withdrawals/wallet-deposits-withdrawals";
 import { WALLET_TOTAL_DEPOSITS_WITHDRAWALS_COLUMNS } from "../wallet-deposits-withdrawals/wallet-deposits-withdrawals.constants";

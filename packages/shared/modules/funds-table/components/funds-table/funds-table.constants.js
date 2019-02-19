@@ -26,7 +26,7 @@ export const FUNDS_TABLE_FILTERS = [
       ),
       defaultValue: {
         ...DEFAULT_DATE_RANGE_FILTER_VALUE,
-        type: DateRangeFilterTypes.lastWeek
+        type: DateRangeFilterTypes.lastMonth
       }
     }),
     validate: validateDateRange
