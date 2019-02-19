@@ -490,17 +490,6 @@ class CreateProgramSettings extends React.Component {
               </span>
             </div>
           </div>
-          {/*
-          <DepositDetailsContainer
-            rate={rate}
-            onChangeCurrencyFrom={this.onChangeCurrencyFrom}
-            values={values}
-            setFieldValue={setFieldValue}
-            currency={currency}
-            deposit={programsInfo.managerProgramInvestment}
-            className="create-program-settings__fill-block"
-            titleClassName="create-program-settings__deposit-amount-title"
-          />*/}
         </form>
         <div className="create-program-settings__navigation">
           <DepositButtonContainer
