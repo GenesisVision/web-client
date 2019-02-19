@@ -54,7 +54,7 @@ class CreateProgramSettings extends React.Component {
     });
   };
   onChangeDepositWallet = (name, target) => {
-    const { setFieldValue, values, wallets } = this.props;
+    const { setFieldValue, values, wallets, fetchWallets } = this.props;
     const depositWalletCurrency = target.props.value;
     setFieldValue("depositWalletCurrency", depositWalletCurrency);
     setFieldValue(
@@ -62,6 +62,7 @@ class CreateProgramSettings extends React.Component {
       wallets.find(item => item.currency === (values && depositWalletCurrency))
         .id
     );
+    fetchWallets();
     this.fetchRate(depositWalletCurrency, values.currency);
   };
   onChangeCurrency = (name, target) => {
@@ -102,7 +103,6 @@ class CreateProgramSettings extends React.Component {
       title,
       currency
     } = values;
-    console.log(depositWalletId);
     const imageInputError =
       errors &&
       errors.logo &&
