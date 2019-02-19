@@ -69,6 +69,7 @@ class ProgramDetailsDescription extends PureComponent {
           ProgramFollowContainer={ProgramFollowContainer}
           ClosePeriodContainer={ClosePeriodContainer}
           CloseProgramContainer={CloseProgramContainer}
+          ProgramUnfollowContainer={ProgramUnfollowContainer}
           ProgramDepositContainer={ProgramDepositContainer}
           ProgramDetailContext={ProgramDetailContext}
           AssetEditContainer={AssetEditContainer}

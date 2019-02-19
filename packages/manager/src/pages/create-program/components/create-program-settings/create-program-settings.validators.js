@@ -1,6 +1,6 @@
 import { number, object, string } from "yup";
 
-const createProgramSettingsValidationSchema = ({ t, ...props }) => {
+const createProgramSettingsValidationSchema = ({ t, ...props }) =>
   object().shape({
     logo: object().shape({
       width: number().min(
@@ -91,6 +91,5 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) => {
       t("manager.create-program-page.settings.validation.account-type-required")
     )
   });
-};
 
 export default createProgramSettingsValidationSchema;

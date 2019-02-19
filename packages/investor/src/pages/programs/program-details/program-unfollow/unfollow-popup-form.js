@@ -1,12 +1,10 @@
-import { withFormik } from "formik";
-import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
+import { GVButton } from "gv-react-components";
 import PropTypes from "prop-types";
 import React from "react";
 import { translate } from "react-i18next";
 import { compose } from "redux";
-import { object, string } from "yup";
 
-const UnfollowTradesForm = ({
+const UnfollowPopupForm = ({
   t,
   onCancel,
   twoFactorEnabled,
@@ -15,7 +13,7 @@ const UnfollowTradesForm = ({
   errorMessage
 }) => {
   return (
-    <form id="UnfollowTradesForm" onSubmit={handleSubmit} noValidate>
+    <form id="UnfollowPopupForm" onSubmit={handleSubmit} noValidate>
       <div className="dialog__top">
         <h2>{t("program-details-page.description.close-program")}</h2>
         <div className="dialog__text">
@@ -42,18 +40,10 @@ const UnfollowTradesForm = ({
   );
 };
 
-UnfollowTradesForm.propTypes = {
+UnfollowPopupForm.propTypes = {
   errorMessage: PropTypes.string,
   onSubmit: PropTypes.func,
   onCancel: PropTypes.func
 };
 
-export default compose(
-  translate(),
-  withFormik({
-    displayName: "unfollow-trades",
-    handleSubmit: ({ props, setSubmitting }) => {
-      props.onSubmit(setSubmitting);
-    }
-  })
-)(UnfollowTradesForm);
+export default compose(translate())(UnfollowPopupForm);

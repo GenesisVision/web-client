@@ -77,6 +77,7 @@ class ProgramDetailsDescriptionControls extends React.Component {
   render() {
     const {
       isOpenFollowPopup,
+      isOpenUnfollowPopup,
       isOpenInvestmentPopup,
       isOpenCloseProgramPopup,
       isOpenEditProgramPopup,
@@ -309,6 +310,12 @@ class ProgramDetailsDescriptionControls extends React.Component {
                   currency={programDescription.currency}
                   onClose={this.handleCloseFollowPopup}
                   onApply={this.handleApplyFollowPopup(updateDetails)}
+                />
+              )}
+              {UnfollowPopupContainer && (
+                <UnfollowPopupContainer
+                  open={isOpenUnfollowPopup}
+                  onCancel={this.handleCloseUnfollowPopup}
                 />
               )}
             </Fragment>
