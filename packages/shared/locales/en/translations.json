@@ -573,6 +573,10 @@
     "deposit": "Deposit",
     "converting": "Converting",
     "profit": "Profit program",
+    "copy": {
+      "error": "Copy failed",
+      "success": "Copy was successful"
+    },
     "external": {
       "from-wallet": "From",
       "from": "From address",

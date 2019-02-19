@@ -48,6 +48,8 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    word-break: break-all;
+    white-space: normal;
 
     .gv-btn.gv-btn--text {
       padding: 10px 0;
