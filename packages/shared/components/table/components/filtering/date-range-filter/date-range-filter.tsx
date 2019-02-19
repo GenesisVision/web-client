@@ -1,15 +1,24 @@
 import "./date-range-filter.scss";
 
-import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { TranslationFunction, translate } from "react-i18next";
 
+import { IUpdateFilterFunc } from "../../table.types";
 import Filter from "../filter";
 import DateRangeFilterPopover from "./date-range-filter-popover";
 import { DateRangeFilterTypes } from "./date-range-filter.constants";
 
-class DateRangeFilter extends Component {
-  renderValueText = value => {
+interface IDateRangeFilterProps {
+  t: TranslationFunction;
+  name: string;
+  value: any;
+  onChange: IUpdateFilterFunc;
+
+  startLabel: string;
+}
+
+class DateRangeFilter extends Component<IDateRangeFilterProps> {
+  renderValueText = (value: any) => {
     const { t } = this.props;
     switch (value.type) {
       case DateRangeFilterTypes.all:
@@ -32,19 +41,10 @@ class DateRangeFilter extends Component {
         value={this.props.value}
         updateFilter={this.props.onChange}
       >
-        <DateRangeFilterPopover
-          values={this.props.values}
-          startLabel={this.props.startLabel}
-        />
+        <DateRangeFilterPopover startLabel={this.props.startLabel} />
       </Filter>
     );
   }
 }
-
-DateRangeFilter.propTypes = {
-  name: PropTypes.string.isRequired,
-  value: PropTypes.any,
-  onChange: PropTypes.func
-};
 
 export default translate()(DateRangeFilter);

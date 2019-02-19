@@ -6,7 +6,7 @@ import UserIcon from "shared/media/user-avatar.svg";
 
 import ImageBase from "../image-base";
 
-const ProfileAvatar = ({ url, alt, className, imageClassName }) => {
+const ProfileAvatar = ({ url, alt, className = "", imageClassName = "" }) => {
   className = classnames("profile-avatar", className);
   imageClassName = classnames("profile-avatar__image", imageClassName, {
     "profile-avatar__image--default": !url

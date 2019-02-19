@@ -14,7 +14,7 @@ import dashboardInRequestsReducer, {
 import dashboardPeriodReducer from "./dashboard-period.reducer";
 import dashboardProgramsReducer from "./dashboard-programs.reducer";
 
-export type ManagerDashboardState = DeepReadonly<{
+export type ManagerDashboardState = Readonly<{
   period: ChartDefaultPeriod;
   assets: any;
   assetChart: any;

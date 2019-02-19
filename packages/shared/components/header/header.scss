@@ -33,12 +33,19 @@
     align-items: center;
   }
 
-  .header__currency {
+  &__center {
+    flex-grow: 2;
+    justify-content: flex-end;
+  }
+
+  &__currency {
     min-width: auto;
+    margin: auto;
   }
 
   &__search {
-    display: none;
+    display: flex;
+    margin-right: 20px;
 
     a {
       display: inline-flex;
@@ -64,12 +71,7 @@
 
   @include media-breakpoint-landscape-tablet() {
     &__center {
-      flex-grow: 2;
       justify-content: space-between;
-
-      .header__currency {
-        min-width: 100px;
-      }
     }
     &__right {
       flex-grow: 2;
@@ -82,8 +84,13 @@
       display: inherit !important;
     }
 
+    &__currency {
+      min-width: 100px;
+      margin: initial;
+    }
+
     &__search {
-      display: flex;
+      margin-right: 0;
     }
 
     &__profile {

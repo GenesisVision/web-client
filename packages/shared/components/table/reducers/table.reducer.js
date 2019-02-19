@@ -8,8 +8,8 @@ const tableReducerFactory = ({
   type,
   paging,
   sorting = undefined,
-  filtering,
-  defaultFilters,
+  filtering = undefined,
+  defaultFilters = undefined,
   clearable = false,
   clearableActionType
 }) => {
