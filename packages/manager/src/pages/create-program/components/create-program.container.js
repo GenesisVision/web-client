@@ -119,6 +119,7 @@ class CreateProgramContainer extends Component {
             )}
             {tab === "settings" && (
               <CreateProgramSettings
+                fetchWallets={service.fetchWallets}
                 wallets={wallets}
                 onValidateError={this.handleValidateError}
                 navigateBack={navigateToBroker}
