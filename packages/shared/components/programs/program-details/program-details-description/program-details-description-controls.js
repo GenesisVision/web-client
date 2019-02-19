@@ -6,10 +6,13 @@ import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import Hint from "shared/components/hint/hint";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import { FOLLOW_TYPE } from "shared/constants/constants";
 import { formatValue } from "shared/utils/formatter";
 
 class ProgramDetailsDescriptionControls extends React.Component {
   state = {
+    isOpenFollowPopup: false,
+    isOpenUnfollowPopup: false,
     isOpenInvestmentPopup: false,
     isOpenCloseProgramPopup: false,
     isOpenEditProgramPopup: false,
@@ -42,6 +45,24 @@ class ProgramDetailsDescriptionControls extends React.Component {
   handleCloseEditProgramPopup = () => {
     this.setState({ isOpenEditProgramPopup: false });
   };
+  handleOpenFollowPopup = () => {
+    this.setState({ isOpenFollowPopup: true });
+  };
+  handleCloseFollowPopup = () => {
+    this.setState({ isOpenFollowPopup: false });
+  };
+  handleOpenUnfollowPopup = () => {
+    this.setState({ isOpenUnfollowPopup: true });
+  };
+  handleCloseUnfollowPopup = () => {
+    this.setState({ isOpenUnfollowPopup: false });
+  };
+  handleApplyUnfollowPopup = updateDetails => () => {
+    updateDetails();
+  };
+  handleApplyFollowPopup = updateDetails => () => {
+    updateDetails();
+  };
   handleApplyEditProgramPopup = updateDetails => () => {
     updateDetails();
   };
@@ -58,6 +79,8 @@ class ProgramDetailsDescriptionControls extends React.Component {
 
   render() {
     const {
+      isOpenFollowPopup,
+      isOpenUnfollowPopup,
       isOpenInvestmentPopup,
       isOpenCloseProgramPopup,
       isOpenEditProgramPopup,
@@ -67,6 +90,8 @@ class ProgramDetailsDescriptionControls extends React.Component {
       t,
       canCloseProgram,
       isOwnProgram,
+      ProgramFollowContainer,
+      ProgramUnfollowContainer,
       ClosePeriodContainer,
       CloseProgramContainer,
       ProgramDepositContainer,
@@ -85,6 +110,11 @@ class ProgramDetailsDescriptionControls extends React.Component {
         src: programDescription.logo
       }
     };
+
+    const isAvailableFollowingTrades =
+      ProgramFollowContainer &&
+      ProgramUnfollowContainer &&
+      programDescription.isSignalProgram;
 
     return (
       <div className="program-details-description__controls">
@@ -198,42 +228,54 @@ class ProgramDetailsDescriptionControls extends React.Component {
             </div>
           )}
         </div>
-        <div className="program-details-description__col program-details-description__col--small-size">
-          <div className="program-details-description__statistic-container">
-            <StatisticItem
-              label={t("program-details-page.description.successFee")}
-              className="program-details-description__short-statistic-item"
-              accent
-            >
-              <NumberFormat
-                value={formatValue(programDescription.successFee, 2)}
-                displayType="text"
-                suffix=" %"
-              />
-            </StatisticItem>
-            <StatisticItem
-              label={t("program-details-page.description.subscriptionFee")}
-              className="program-details-description__short-statistic-item"
-              accent
-            >
-              <NumberFormat value="3" displayType="text" suffix=" GVT" />
-            </StatisticItem>
-          </div>
-          {(isOwnProgram || canInvest || canWithdraw) && (
-            <div className="program-details-description__button-container">
-              <GVButton
-                className="program-details-description__invest-btn"
-                onClick={this.handleOpenInvestmentPopup}
-                disabled={
-                  !programDescription.personalProgramDetails ||
-                  !programDescription.personalProgramDetails.canInvest
-                }
+        {isAvailableFollowingTrades ? (
+          <div className="program-details-description__col program-details-description__col--small-size">
+            <div className="program-details-description__statistic-container">
+              <StatisticItem
+                label={t("program-details-page.description.successFee")}
+                className="program-details-description__short-statistic-item"
+                accent
               >
-                {t("program-details-page.description.follow-trade")}
-              </GVButton>
+                <NumberFormat
+                  value={formatValue(programDescription.signalSuccessFee, 2)}
+                  displayType="text"
+                  suffix=" %"
+                />
+              </StatisticItem>
+              <StatisticItem
+                label={t("program-details-page.description.subscriptionFee")}
+                className="program-details-description__short-statistic-item"
+                accent
+              >
+                <NumberFormat
+                  value={formatValue(
+                    programDescription.signalSubscriptionFee,
+                    2
+                  )}
+                  displayType="text"
+                  suffix=" GVT"
+                />
+              </StatisticItem>
             </div>
-          )}
-        </div>
+            <div className="program-details-description__button-container">
+              {programDescription.personalProgramDetails.isFollowSignals ? (
+                <GVButton
+                  className="program-details-description__invest-btn"
+                  onClick={this.handleOpenUnfollowPopup}
+                >
+                  {t("program-details-page.description.unfollow")}
+                </GVButton>
+              ) : (
+                <GVButton
+                  className="program-details-description__invest-btn"
+                  onClick={this.handleOpenFollowPopup}
+                >
+                  {t("program-details-page.description.follow-trade")}
+                </GVButton>
+              )}
+            </div>
+          </div>
+        ) : null}
         <ProgramDetailContext.Consumer>
           {({ updateDetails }) => (
             <Fragment>
@@ -271,6 +313,25 @@ class ProgramDetailsDescriptionControls extends React.Component {
                   onClose={this.handleCloseEditProgramPopup}
                   onApply={this.handleApplyEditProgramPopup(updateDetails)}
                   type={PROGRAM}
+                />
+              )}
+              {ProgramFollowContainer && (
+                <ProgramFollowContainer
+                  programName={programDescription.title}
+                  type={FOLLOW_TYPE.CREATE}
+                  id={programDescription.id}
+                  open={isOpenFollowPopup}
+                  currency={programDescription.currency}
+                  onClose={this.handleCloseFollowPopup}
+                  onApply={this.handleApplyFollowPopup(updateDetails)}
+                />
+              )}
+              {ProgramUnfollowContainer && (
+                <ProgramUnfollowContainer
+                  open={isOpenUnfollowPopup}
+                  onClose={this.handleCloseUnfollowPopup}
+                  onCancel={this.handleCloseUnfollowPopup}
+                  onApply={this.handleApplyUnfollowPopup(updateDetails)}
                 />
               )}
             </Fragment>

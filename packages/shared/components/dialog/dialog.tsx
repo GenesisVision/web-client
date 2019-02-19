@@ -2,16 +2,24 @@ import "./dialog.scss";
 
 import classnames from "classnames";
 import { GVButton } from "gv-react-components";
-import PropTypes from "prop-types";
-import React, { Component } from "react";
+import React, { Fragment } from "react";
 import EventListener from "react-event-listener";
 import { translate } from "react-i18next";
 import { CloseIcon } from "shared/components/icon/close-icon";
 import Modal from "shared/components/modal/modal";
 import GVScroll from "shared/components/scroll/gvscroll";
+import { TranslationFunction } from "i18next";
 
-class Dialog extends Component {
-  handleKeyPress = event => {
+export interface IDialogProps {
+  t: TranslationFunction;
+  open: boolean;
+  onClose: (param?: any) => void;
+  className?: string;
+  children?: any;
+  wider?: boolean;
+}
+class Dialog extends React.Component<IDialogProps> {
+  handleKeyPress = (event: any) => {
     const { onClose } = this.props;
 
     //Esc
@@ -36,7 +44,9 @@ class Dialog extends Component {
               })}
               onClick={onClose}
             >
-              <CloseIcon /> {t("buttons.close")}
+              <Fragment>
+                <CloseIcon /> {t("buttons.close")}
+              </Fragment>
             </GVButton>
             <div className={classnames("dialog", className)}>
               <GVButton
@@ -55,13 +65,5 @@ class Dialog extends Component {
     );
   }
 }
-
-Dialog.propTypes = {
-  open: PropTypes.bool,
-  onClose: PropTypes.func,
-  top: PropTypes.element,
-  bottom: PropTypes.element,
-  className: PropTypes.string
-};
 
 export default translate()(Dialog);

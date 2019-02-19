@@ -246,6 +246,39 @@
       "amount-more-than-available": "Amount is more than available for withdraw"
     }
   },
+  "follow-program": {
+    "create-account": {
+      "title": "Account creation",
+      "available": "Available for creating",
+      "amount": "Amount for creating",
+      "from": "From",
+      "next": "Next",
+      "validation": {
+        "amount-required": "Amount is required field",
+        "amount-is-zero": "Amount must be greater than zero",
+        "amount-more-than-available": "Amount is more than available for creating"
+      }
+    },
+    "params": {
+      "title": "Trading settings",
+      "type": "Type",
+      "tolerance-percent": "Tolerance percent",
+      "volume-percent": "Volume percent",
+      "usd-equivalent": "USD equivalent",
+      "back": "Back",
+      "submit": "Submit",
+      "validation": {
+        "fixedVolume-min": "USD equivalent must be greater than or equal to 0",
+        "fixedVolume-max": "USD equivalent must be less than or equal to 99999",
+        "percent-min": "Percent must be greater than or equal to 1%",
+        "percent-max": "Percent must be less than or equal to 999%",
+        "tolerance-percent-min": "Tolerance percent must be greater than or equal to 0.01",
+        "tolerance-percent-max": "Tolerance percent must be less than or equal to 20%",
+        "tolerance-required": "Tolerance percent is required field"
+      }
+    },
+    "success-alert-message": "You have been subscribed."
+  },
   "withdraw-fund": {
     "title": "Withdraw",
     "exit-fee": "Exit fee",
@@ -434,6 +467,9 @@
       "edit-program": "Edit Program",
       "close-program": "Close Program",
       "follow-trade": "Follow trades",
+      "unfollow": "Unfollow",
+      "unfollow-trades": "Unfollow trades",
+      "unfollow-trade-text": "Do you really want to unsubscribe?",
       "close-program-notification": "Investment program will be closed after this reporting period. Current investment requests will be cancelled and new requests won’t be accepted. Profit and funds from the trading account will be deposited to GVT wallets of investors and manager according to their shares.",
       "close-program-notification-success": "Request to close the program was sent successfully.",
       "requests-completed": "All requests completed successfully"
