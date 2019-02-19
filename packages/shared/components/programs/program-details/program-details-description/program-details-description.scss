@@ -2,6 +2,9 @@
 @import "~shared/styles/_breakpoint.scss";
 @import "~shared/styles/_sizes.scss";
 
+$padding-info-left: 50px;
+$padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
+
 .program-details-description {
   padding: 0 $padding-xsmall;
 
@@ -56,7 +59,7 @@
     @include media-breakpoint-tablet() {
       order: 0;
       width: auto;
-      margin-left: 50px;
+      margin-left: $padding-info-left;
     }
   }
 
@@ -72,7 +75,7 @@
 
   &__additionally {
     @include media-breakpoint-tablet() {
-      margin-left: $avatar-size;
+      margin-left: $padding-controls-left;
     }
   }
 
@@ -110,7 +113,7 @@
 
     @include media-breakpoint-tablet() {
       flex-wrap: nowrap;
-      margin-left: $avatar-size;
+      margin-left: $padding-controls-left;
       margin-right: 0;
       max-width: 750px;
     }
