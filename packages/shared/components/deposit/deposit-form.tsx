@@ -206,15 +206,17 @@ class DepositForm extends React.Component<OwnProps, IDepositFormState> {
         />
 
         <div className="invest-popup__currency">
-          <NumberFormat
-            value={formatCurrencyValue(
-              convertFromCurrency(values.amount, rate),
-              currency
-            )}
-            prefix="≈ "
-            suffix={` ${currency}`}
-            displayType="text"
-          />
+          {currency !== walletCurrency && (
+            <NumberFormat
+              value={formatCurrencyValue(
+                convertFromCurrency(values.amount, rate),
+                currency
+              )}
+              prefix="≈ "
+              suffix={` ${currency}`}
+              displayType="text"
+            />
+          )}
         </div>
         <ul className="dialog-list">
           {entryFee && (
