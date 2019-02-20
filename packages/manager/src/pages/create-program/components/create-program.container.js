@@ -4,13 +4,13 @@ import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
+import * as WalletServices from "shared/components/wallet/services/wallet.services";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
 import { checkIsModelFilled } from "../helpers/create-program.helpers";
 import * as createProgramService from "../services/create-program.service";
 import CreateProgramBroker from "./create-program-broker/create-program-broker";
 import CreateProgramSettings from "./create-program-settings/create-program-settings";
-import * as WalletServices from "shared/components/wallet/services/wallet.services";
 
 class CreateProgramContainer extends Component {
   state = {
