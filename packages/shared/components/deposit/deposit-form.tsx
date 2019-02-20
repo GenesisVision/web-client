@@ -1,4 +1,4 @@
-import { FormikProps, withFormik } from "formik";
+import { FormikProps, FormikActions, withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -37,7 +37,6 @@ interface IDepositFormProps {
   isValid?: boolean;
   dirty?: boolean;
   values?: FormValues;
-  setFieldValue?: any;
 }
 
 export interface FormValues {
@@ -51,6 +50,7 @@ interface IDepositFormState {
 type OwnProps = InjectedTranslateProps &
   IDepositFormOwnProps &
   IDepositFormProps &
+  FormikActions<FormValues> &
   FormikProps<FormValues>;
 
 class DepositForm extends React.Component<OwnProps, IDepositFormState> {
