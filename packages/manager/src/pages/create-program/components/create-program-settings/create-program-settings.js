@@ -95,7 +95,6 @@ class CreateProgramSettings extends React.Component {
     if (!wallets) return;
     const { rate } = this.state;
     const {
-      // stopOutLevel,
       depositWalletCurrency,
       depositAmount,
       isSignalProgram,
@@ -125,7 +124,6 @@ class CreateProgramSettings extends React.Component {
     const selectedWallet = wallets.find(
       item => item.currency === (values && values.depositWalletCurrency)
     );
-
     return (
       <div className="create-program-settings">
         <form className="create-program-settings__form">
@@ -500,7 +498,7 @@ class CreateProgramSettings extends React.Component {
                   value={minimumDepositsAmount[currency]}
                   thousandSeparator=" "
                   displayType="text"
-                  suffix={` ${values.currency}`}
+                  suffix={` ${currency}`}
                 />
               </span>
             </div>
