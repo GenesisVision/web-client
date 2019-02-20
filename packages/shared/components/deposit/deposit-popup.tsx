@@ -9,7 +9,7 @@ import RootState from "shared/reducers/root-reducer";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import translate from "react-i18next/src/translate";
-import { ProgramInvestInfo } from "gv-api-web";
+import { ProgramInvestInfo, WalletData } from "gv-api-web";
 
 export type SubmitInfo = {
   code: any;
@@ -18,6 +18,7 @@ export type SubmitInfo = {
 };
 
 export interface IDepositPopupProps {
+  wallets: WalletData[];
   id: string;
   fetchInfo: (id: string, currency: string) => {};
   info: ProgramInvestInfo;
@@ -37,6 +38,7 @@ class DepositPopup extends React.Component<IDepositPopupProps> {
 
   render() {
     const {
+      wallets,
       info,
       submitInfo,
       currency,
@@ -49,6 +51,7 @@ class DepositPopup extends React.Component<IDepositPopupProps> {
       <Fragment>
         <DepositTop info={info} program={program} role={role} />
         <DepositForm
+          wallets={wallets}
           entryFee={entryFee}
           program={program}
           role={role}
@@ -64,6 +67,7 @@ class DepositPopup extends React.Component<IDepositPopupProps> {
 }
 
 const mapStateToProps = (state: RootState) => ({
+  wallets: state.wallet.info.data ? state.wallet.info.data.wallets : null,
   role: state.profileHeader.info.data
     ? state.profileHeader.info.data.userType
     : null

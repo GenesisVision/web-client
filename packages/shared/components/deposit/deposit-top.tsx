@@ -32,16 +32,6 @@ const DepositTop: React.FC<IDepositTop & InjectedTranslateProps> = ({
             {formatCurrencyValue(info.availableToInvest, "GVT")} GVT
           </StatisticItem>
         )}
-        <StatisticItem
-          label={
-            program
-              ? t("deposit-asset.available-in-wallet")
-              : t("deposit-asset.fund.available-to-invest")
-          }
-          big
-        >
-          {formatCurrencyValue(info.availableInWallet, "GVT")} GVT
-        </StatisticItem>
       </div>
     </div>
   );

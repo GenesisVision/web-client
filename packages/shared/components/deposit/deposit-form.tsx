@@ -1,5 +1,5 @@
 import { FormikProps, withFormik } from "formik";
-import { GVButton } from "gv-react-components";
+import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -18,9 +18,14 @@ import { number, object } from "yup";
 
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import { ROLE } from "shared/constants/constants";
-import { ProgramInvestInfo } from "gv-api-web";
+import { ProgramInvestInfo, WalletData } from "gv-api-web";
+import StatisticItem from "../statistic-item/statistic-item";
+import Select from "../select/select";
+import { getWalletIcon } from "../wallet/components/wallet-currency";
+import rateApi from "../../services/api-client/rate-api";
 
 interface IDepositFormOwnProps {
+  wallets: WalletData[];
   role: ROLE;
   program: boolean;
   entryFee: boolean;
@@ -41,14 +46,21 @@ interface IDepositFormProps {
 
 export interface FormValues {
   amount: any;
+  walletCurrency: string;
 }
 
+interface IDepositFormState {
+  rate: string;
+}
 type OwnProps = InjectedTranslateProps &
   IDepositFormOwnProps &
   IDepositFormProps &
   FormikProps<FormValues>;
 
-class DepositForm extends React.Component<OwnProps> {
+class DepositForm extends React.Component<OwnProps, IDepositFormState> {
+  state = {
+    rate: "1"
+  };
   composeEntryFee = (fee: any) => {
     const { entryFee } = this.props;
     return entryFee ? fee : 0;
@@ -91,6 +103,23 @@ class DepositForm extends React.Component<OwnProps> {
     );
   };
 
+  onChangeCurrencyFrom = (name: any, target: any) => {
+    const { setFieldValue } = this.props;
+    const walletCurrency = target.props.value;
+    setFieldValue("walletCurrency", walletCurrency);
+    this.fetchRate(walletCurrency);
+  };
+  fetchRate = (initialDepositCurrency?: any) => {
+    const { values, currency } = this.props;
+    rateApi
+      .v10RateByFromByToGet(
+        currency,
+        initialDepositCurrency || values.walletCurrency
+      )
+      .then((rate: string) => {
+        if (rate !== this.state.rate) this.setState({ rate });
+      });
+  };
   setMaxAmount = () => {
     const { setFieldValue, info } = this.props;
     const { availableToInvest, availableInWallet } = info;
@@ -113,6 +142,7 @@ class DepositForm extends React.Component<OwnProps> {
 
   render() {
     const {
+      wallets,
       t,
       program,
       entryFee,
@@ -128,6 +158,36 @@ class DepositForm extends React.Component<OwnProps> {
 
     return (
       <form className="dialog__bottom" id="invest-form" onSubmit={handleSubmit}>
+        <GVFormikField
+          name="walletCurrency"
+          component={GVTextField}
+          label={t("follow-program.create-account.from")}
+          InputComponent={Select}
+          onChange={this.onChangeCurrencyFrom}
+        >
+          {wallets.map((wallet: WalletData) => {
+            return (
+              <option value={wallet.currency} key={wallet.currency}>
+                <img
+                  src={getWalletIcon(wallet.currency)}
+                  className="wallet-transfer-popup__icon"
+                  alt={wallet.currency}
+                />
+                {`${wallet.title} | ${wallet.currency}`}
+              </option>
+            );
+          })}
+        </GVFormikField>
+        <StatisticItem
+          label={
+            program
+              ? t("deposit-asset.available-in-wallet")
+              : t("deposit-asset.fund.available-to-invest")
+          }
+          big
+        >
+          {formatCurrencyValue(info.availableInWallet, "GVT")} GVT
+        </StatisticItem>
         <InputAmountField
           name="amount"
           label={
@@ -224,7 +284,8 @@ export default compose<React.ComponentType<IDepositFormOwnProps>>(
   withFormik({
     displayName: "invest-form",
     mapPropsToValues: () => ({
-      amount: ""
+      amount: "",
+      walletCurrency: "GVT"
     }),
     validationSchema: (params: InjectedTranslateProps & OwnProps) => {
       const { info, t } = params;
