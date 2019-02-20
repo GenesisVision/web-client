@@ -9,8 +9,7 @@ const UnfollowPopupForm = ({
   onCancel,
   twoFactorEnabled,
   handleSubmit,
-  isSubmitting,
-  errorMessage
+  isSubmitting
 }) => {
   return (
     <form id="UnfollowPopupForm" onSubmit={handleSubmit} noValidate>
@@ -19,7 +18,6 @@ const UnfollowPopupForm = ({
         <div className="dialog__text">
           <p>{t("program-details-page.description.unfollow-trade-text")}</p>
         </div>
-        {errorMessage && <div className="form-error">{errorMessage}</div>}
         <div className="dialog__buttons">
           <GVButton type="submit" disabled={isSubmitting}>
             {t("buttons.confirm")}
