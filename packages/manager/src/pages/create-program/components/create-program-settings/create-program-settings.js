@@ -73,6 +73,7 @@ class CreateProgramSettings extends React.Component {
   };
   render() {
     const {
+      minimumDepositsAmount,
       wallets,
       t,
       navigateBack,
@@ -496,7 +497,7 @@ class CreateProgramSettings extends React.Component {
               {"Min. deposit"}
               <span className={"deposit-details__available-amount-value"}>
                 <NumberFormat
-                  value={50}
+                  value={minimumDepositsAmount[currency]}
                   thousandSeparator=" "
                   displayType="text"
                   suffix={` ${values.currency}`}
