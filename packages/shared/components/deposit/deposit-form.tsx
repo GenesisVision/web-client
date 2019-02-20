@@ -205,7 +205,7 @@ class DepositForm extends React.Component<OwnProps, IDepositFormState> {
               convertFromCurrency(values.amount, info.rate),
               currency
             )}
-            prefix="= "
+            prefix="≈ "
             suffix={` ${currency}`}
             displayType="text"
           />
