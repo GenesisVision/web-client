@@ -5,5 +5,5 @@ const dashboardCopytradingSelector = (state: InvestorRootState) =>
   state.dashboard.copytrading;
 export const dashboardCopytradingTableSelector = tableSelectorCreator(
   dashboardCopytradingSelector,
-  "trades"
+  "programs"
 );

@@ -2,7 +2,7 @@ import { SignalDetails } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import moment from "moment";
 import { getDashboardCopytrading } from "pages/dashboard/services/dashboard-assets.service";
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
@@ -10,9 +10,12 @@ import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import Profitability from "shared/components/profitability/profitability";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import { TableCell } from "shared/components/table/components";
+import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
+import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
 import { Column } from "shared/components/table/components/table.types";
+import { IUpdateFilterFunc } from "shared/components/table/components/table.types";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatPercent } from "shared/utils/formatter";
 import { formatValue } from "shared/utils/formatter";
@@ -35,6 +38,16 @@ class DashboardCopytrading extends Component<
         dataSelector={dashboardCopytradingTableSelector}
         isFetchOnMount={true}
         columns={DASHBOARD_COPYTRADING_COLUMNS}
+        renderFilters={(updateFilter: IUpdateFilterFunc, filtering: any) => (
+          <Fragment>
+            <DateRangeFilter
+              name={DATE_RANGE_FILTER_NAME}
+              value={filtering[DATE_RANGE_FILTER_NAME]}
+              onChange={updateFilter}
+              startLabel={t("filters.date-range.program-start")}
+            />
+          </Fragment>
+        )}
         renderHeader={(column: Column) =>
           t(`investor.dashboard-page.copytrading-header.${column.name}`)
         }
