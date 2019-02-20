@@ -52,7 +52,7 @@ class WalletTotal extends React.Component<IWalletProps> {
 
 const mapStateToProps = (state: RootState) => ({
   role: state.profileHeader.info.data
-    ? state.profileHeader.info.data.isNewUser
+    ? state.profileHeader.info.data.userType
     : null,
   info: state.wallet.info.data ? state.wallet.info.data.grandTotal : null,
   wallets: state.wallet.info.data ? state.wallet.info.data.wallets : [],
