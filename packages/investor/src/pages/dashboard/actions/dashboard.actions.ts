@@ -80,6 +80,10 @@ export const clearDashboardAssetsTable = () => ({
   type: CLEAR_DASHBOARD_ASSETS_TABLE
 });
 
+export const clearDashboardTradesTable = () => ({
+  type: CLEAR_DASHBOARD_TRADES_TABLE
+});
+
 export const fetchDashboardOpenTrades = (
   auth: Nullable<string>,
   filters: any
@@ -96,6 +100,6 @@ export const fetchDashboardTradesHistory = (
 ) => {
   return {
     type: DASHBOARD_OPEN_TRADES,
-    payload: signalApi.v10SignalTradesOpenGet(auth, filters) //Use api for trades history
+    payload: signalApi.v10SignalTradesGet(auth, filters)
   };
 };

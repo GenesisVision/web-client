@@ -1028,6 +1028,18 @@
         "profit": "Current Profit",
         "close": "Close"
       },
+      "trades-history-header": {
+        "program": "Program",
+        "manager": "Manager",
+        "direction": "Dir",
+        "open-date": "Open Date",
+        "close-date": "Close Date",
+        "symbol": "Symbol",
+        "volume": "Volume",
+        "open-price": "Open Price",
+        "close-price": "Close Price",
+        "profit": "Profit"
+      },
       "get-started": {
         "title": "Get started",
         "text-1": "There's no data right now.",
