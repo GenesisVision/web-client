@@ -13,6 +13,7 @@ import {
   getDepositProgramInfoById,
   investServiceInvestById
 } from "./services/program-deposit.services";
+import { ASSET } from "shared/constants/constants";
 
 const ProgramDepositContainer = props => {
   const {
@@ -46,7 +47,7 @@ const ProgramDepositContainer = props => {
   return (
     <Dialog open={open} onClose={handleClose}>
       <DepositPopup
-        program
+        asset={ASSET.PROGRAM}
         entryFee
         submitInfo={submitInfo}
         currency={currency}

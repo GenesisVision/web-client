@@ -13,7 +13,7 @@ import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { number, object } from "yup";
 
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
-import { ROLE } from "shared/constants/constants";
+import { ASSET, ROLE } from "shared/constants/constants";
 import { ProgramInvestInfo, WalletData } from "gv-api-web";
 import StatisticItem from "../statistic-item/statistic-item";
 import Select from "../select/select";
@@ -23,7 +23,7 @@ import rateApi from "../../services/api-client/rate-api";
 interface IDepositFormOwnProps {
   wallets: WalletData[];
   role: ROLE;
-  program: boolean;
+  asset: ASSET;
   entryFee: boolean;
   info: ProgramInvestInfo;
   currency: string;
@@ -103,13 +103,16 @@ class DepositForm extends React.Component<OwnProps, IDepositFormState> {
     );
   };
 
-  onChangeCurrencyFrom = (name: any, target: any) => {
+  onChangeCurrencyFrom = (name: any, target: any): void => {
     const { setFieldValue } = this.props;
     const walletCurrency = target.props.value;
     setFieldValue("walletCurrency", walletCurrency);
     this.fetchRate({ currencyFrom: walletCurrency });
   };
-  fetchRate = (params: { currencyFrom?: string; currencyTo?: string }) => {
+  fetchRate = (params: {
+    currencyFrom?: string;
+    currencyTo?: string;
+  }): void => {
     const { values, currency } = this.props;
     rateApi
       .v10RateByFromByToGet(
@@ -120,7 +123,7 @@ class DepositForm extends React.Component<OwnProps, IDepositFormState> {
         if (rate !== this.state.rate) this.setState({ rate });
       });
   };
-  setMaxAmount = () => {
+  setMaxAmount = (): void => {
     const { setFieldValue, info } = this.props;
     const { availableToInvest, availableInWallet } = info;
     const maxFromWallet = availableInWallet;
@@ -144,7 +147,7 @@ class DepositForm extends React.Component<OwnProps, IDepositFormState> {
     const {
       wallets,
       t,
-      program,
+      asset,
       entryFee,
       values,
       info,
@@ -194,7 +197,9 @@ class DepositForm extends React.Component<OwnProps, IDepositFormState> {
         <InputAmountField
           name="amount"
           label={
-            program ? t("deposit-asset.amount") : t("deposit-asset.amount")
+            asset === ASSET.PROGRAM
+              ? t("deposit-asset.amount")
+              : t("deposit-asset.amount")
           }
           currency={walletCurrency}
           // isAllow={this.isAllow}
@@ -218,7 +223,7 @@ class DepositForm extends React.Component<OwnProps, IDepositFormState> {
           {entryFee && (
             <li className="dialog-list__item">
               <span className="dialog-list__title">
-                {program
+                {asset === ASSET.PROGRAM
                   ? t("deposit-asset.entry-fee")
                   : t("deposit-asset.entry-fee")}
               </span>
@@ -238,7 +243,7 @@ class DepositForm extends React.Component<OwnProps, IDepositFormState> {
           )}
           <li className="dialog-list__item">
             <span className="dialog-list__title">
-              {program
+              {asset === ASSET.PROGRAM
                 ? t("deposit-asset.gv-commission")
                 : t("deposit-asset.gv-commission")}
             </span>

@@ -4,7 +4,7 @@ import React, { Fragment } from "react";
 
 import DepositForm from "./deposit-form";
 import DepositTop from "./deposit-top";
-import { ROLE } from "shared/constants/constants";
+import { ASSET, ROLE } from "shared/constants/constants";
 import RootState from "shared/reducers/root-reducer";
 import { compose } from "redux";
 import { connect } from "react-redux";
@@ -26,7 +26,7 @@ export interface IDepositPopupProps {
   currency: string;
   invest: (amount: string) => {};
   entryFee: boolean;
-  program: boolean;
+  asset: ASSET;
   role: ROLE;
 }
 
@@ -44,16 +44,16 @@ class DepositPopup extends React.Component<IDepositPopupProps> {
       currency,
       invest,
       entryFee,
-      program,
+      asset,
       role
     } = this.props;
     return info ? (
       <Fragment>
-        <DepositTop info={info} program={program} role={role} />
+        <DepositTop info={info} asset={asset} role={role} />
         <DepositForm
           wallets={wallets}
           entryFee={entryFee}
-          program={program}
+          asset={asset}
           role={role}
           errorMessage={submitInfo.errorMessage}
           currency={currency}
