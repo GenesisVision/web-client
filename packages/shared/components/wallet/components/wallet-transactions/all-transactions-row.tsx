@@ -1,4 +1,4 @@
-import { MultiWalletTransaction, TransactionDetails } from "gv-api-web";
+import { MultiWalletTransaction } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
 import { Fragment } from "react";
@@ -11,7 +11,6 @@ import { formatValue } from "../../../../utils/formatter";
 import Profitability from "../../../profitability/profitability";
 import TableCell from "../../../table/components/table-cell";
 import TableRow from "../../../table/components/table-row";
-import { getWalletIcon } from "../wallet-currency";
 
 export interface ITransactionRowProps {
   transaction: MultiWalletTransaction;
@@ -21,25 +20,27 @@ export interface ITransactionRowState {
   isOpen: boolean;
 }
 
-const ConvertTransaction = (transaction: TransactionDetails) => {
+const ConvertTransaction: React.FunctionComponent<
+  ITransactionRowProps
+> = props => {
   return (
     <Fragment>
       <span className="wallet-transactions__col">
         <img
-          src={filesService.getFileUrl(transaction.currencyLogo)}
+          src={filesService.getFileUrl(props.transaction.logoFrom)}
           className="wallet-transactions__icon"
           alt="Icon"
         />
-        {transaction.currencyName}
+        {props.transaction.currencyFrom}
       </span>
       <span className="wallet-transactions__back-arrow">&rarr;</span>
       <span className="wallet-transactions__col">
         <img
-          src={filesService.getFileUrl(transaction.convertingDetails.currencyToLogo)}
+          src={filesService.getFileUrl(props.transaction.logoTo)}
           className="wallet-transactions__icon"
           alt="Icon"
         />
-        {transaction.convertingDetails.currencyToName}
+        {props.transaction.currencyTo}
       </span>
     </Fragment>
   );
@@ -48,25 +49,14 @@ const ConvertTransaction = (transaction: TransactionDetails) => {
 const AmountConvertTransaction: React.FunctionComponent<{
   transaction: MultiWalletTransaction;
 }> = props => (
-  <Fragment>
-    <span className="wallet-transactions__col">
-      <NumberFormat
-        value={formatValue(props.transaction.amount)}
-        thousandSeparator=" "
-        displayType="text"
-        suffix=" GVT"
-      />
-    </span>
-    <span className="wallet-transactions__back-arrow">&rarr;</span>
-    <span className="wallet-transactions__col">
-      <NumberFormat
-        value={formatValue(props.transaction.amount)}
-        thousandSeparator=" "
-        displayType="text"
-        suffix=" BTC"
-      />
-    </span>
-  </Fragment>
+  <span className="wallet-transactions__col">
+    <NumberFormat
+      value={formatValue(props.transaction.amount)}
+      thousandSeparator=" "
+      displayType="text"
+      suffix=" GVT"
+    />
+  </span>
 );
 
 class AllTransactionsRow extends React.Component<
@@ -95,7 +85,7 @@ class AllTransactionsRow extends React.Component<
         <TableRow className="wallet-transactions__row" onClick={this.openPopup}>
           <TableCell className="wallet-transactions__cell wallet-transactions__cell--wallet">
             {isConvertAction ? (
-              <ConvertTransaction transaction={transaction}/>
+              <ConvertTransaction transaction={transaction} />
             ) : (
               <Fragment>
                 <img
