@@ -10,6 +10,7 @@ import WalletBalanceElements from "./wallet-balance/wallet-balance-elements";
 import WalletBalanceLoader from "./wallet-balance/wallet-balance-loader";
 import WalletContainerTotal from "./wallet-container/wallet-container-total";
 import WalletSettingsContainer from "./wallet-settings/wallet-settings-container";
+import { ROLE } from "shared/constants/constants";
 
 interface IWalletProps {
   t(str: string): string;
@@ -17,7 +18,7 @@ interface IWalletProps {
   filters?: MultiWalletFilters;
   isPayFeesWithGvt?: boolean;
   wallets?: WalletsInfo;
-  role?: boolean;
+  role?: ROLE;
 }
 
 class WalletTotal extends React.Component<IWalletProps> {
@@ -42,7 +43,7 @@ class WalletTotal extends React.Component<IWalletProps> {
         <WalletContainerTotal
           wallets={wallets}
           filters={filters}
-          copytrading={!role}
+          copytrading={role === ROLE.INVESTOR}
         />
       </Page>
     );
