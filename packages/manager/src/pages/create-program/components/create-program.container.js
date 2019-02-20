@@ -14,6 +14,7 @@ import * as WalletServices from "shared/components/wallet/services/wallet.servic
 
 class CreateProgramContainer extends Component {
   state = {
+    minimumDepositsAmount: null,
     tab: "broker",
     choosedBroker: null,
     brokers: null,
@@ -32,6 +33,9 @@ class CreateProgramContainer extends Component {
         choosedBroker: response.brokers[0]
       });
     });
+    createProgramService
+      .fetchMinDepositsAmount()
+      .then(minimumDepositsAmount => this.setState({ minimumDepositsAmount }));
   }
 
   chooseBroker = broker => () => {
@@ -75,6 +79,7 @@ class CreateProgramContainer extends Component {
 
   render() {
     const {
+      minimumDepositsAmount,
       tab,
       choosedBroker,
       isPending,
@@ -119,6 +124,7 @@ class CreateProgramContainer extends Component {
             )}
             {tab === "settings" && (
               <CreateProgramSettings
+                minimumDepositsAmount={minimumDepositsAmount}
                 fetchWallets={service.fetchWallets}
                 wallets={wallets}
                 onValidateError={this.handleValidateError}

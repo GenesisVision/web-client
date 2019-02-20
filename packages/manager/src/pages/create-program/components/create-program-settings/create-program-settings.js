@@ -73,6 +73,7 @@ class CreateProgramSettings extends React.Component {
   };
   render() {
     const {
+      minimumDepositsAmount,
       wallets,
       t,
       navigateBack,
@@ -94,7 +95,6 @@ class CreateProgramSettings extends React.Component {
     if (!wallets) return;
     const { rate } = this.state;
     const {
-      // stopOutLevel,
       depositWalletCurrency,
       depositAmount,
       isSignalProgram,
@@ -124,7 +124,6 @@ class CreateProgramSettings extends React.Component {
     const selectedWallet = wallets.find(
       item => item.currency === (values && values.depositWalletCurrency)
     );
-
     return (
       <div className="create-program-settings">
         <form className="create-program-settings__form">
@@ -417,7 +416,7 @@ class CreateProgramSettings extends React.Component {
                   <GVFormikField
                     name="signalSuccessFee"
                     label={t(
-                      "manager.create-program-page.settings.fields.success-fee"
+                      "manager.create-program-page.settings.fields.signal-success-fee"
                     )}
                     adornment="%" //isAllowed={this.allowSuccessFee}
                     component={GVTextField}
@@ -493,13 +492,13 @@ class CreateProgramSettings extends React.Component {
               )}
             </div>
             <div className="deposit-details__available-amount">
-              {"Min. deposit"}
+              {t("manager.create-program-page.settings.fields.min-deposit")}
               <span className={"deposit-details__available-amount-value"}>
                 <NumberFormat
-                  value={50}
+                  value={minimumDepositsAmount[currency]}
                   thousandSeparator=" "
                   displayType="text"
-                  suffix={` ${values.currency}`}
+                  suffix={` ${currency}`}
                 />
               </span>
             </div>
