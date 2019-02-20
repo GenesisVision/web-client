@@ -276,15 +276,17 @@ class CreateProgramSettings extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="create-program-settings__row create-program-settings__row--provide-signals">
-              <GVFormikField
-                type="checkbox"
-                color="primary"
-                name="isSignalProgram"
-                label={<span>{"Provide signals"}</span>}
-                component={GVCheckbox}
-              />
-            </div>
+            {broker.signalsAvailable && (
+              <div className="create-program-settings__row create-program-settings__row--provide-signals">
+                <GVFormikField
+                  type="checkbox"
+                  color="primary"
+                  name="isSignalProgram"
+                  label={<span>{"Provide signals"}</span>}
+                  component={GVCheckbox}
+                />
+              </div>
+            )}
           </div>
           <div className="create-program-settings__subheading">
             <span className="create-program-settings__block-number">02</span>
@@ -518,7 +520,7 @@ export default translate()(
     mapPropsToValues: props => ({
       depositWalletCurrency: "GVT",
       depositWalletId: props.wallets.find(item => item.currency === "GVT").id,
-      isSignalProgram: true,
+      isSignalProgram: props.broker.signalsAvailable,
       periodLength: "",
       successFee: "",
       signalSuccessFee: "",
