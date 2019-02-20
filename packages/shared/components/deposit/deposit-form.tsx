@@ -15,10 +15,10 @@ import { number, object } from "yup";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import { ASSET, ROLE } from "shared/constants/constants";
 import { ProgramInvestInfo, WalletData } from "gv-api-web";
-import StatisticItem from "../statistic-item/statistic-item";
-import Select from "../select/select";
-import { getWalletIcon } from "../wallet/components/wallet-currency";
-import rateApi from "../../services/api-client/rate-api";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
+import Select from "shared/components/select/select";
+import { getWalletIcon } from "shared/components/wallet/components/wallet-currency";
+import rateApi from "shared/services/api-client/rate-api";
 
 interface IDepositFormOwnProps {
   wallets: WalletData[];
