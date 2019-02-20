@@ -1,7 +1,7 @@
-import { withFormik } from "formik";
+import { FormikProps, withFormik } from "formik";
 import { GVButton } from "gv-react-components";
-import React, { Component } from "react";
-import { translate } from "react-i18next";
+import React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
@@ -16,32 +16,62 @@ import {
 } from "shared/utils/formatter";
 import { number, object } from "yup";
 
-import InputAmountField from "../input-amount-field/input-amount-field";
+import InputAmountField from "shared/components/input-amount-field/input-amount-field";
+import { ROLE } from "shared/constants/constants";
+import { ProgramInvestInfo } from "gv-api-web";
 
-class DepositForm extends Component {
-  composeEntryFee = fee => {
+interface IDepositFormOwnProps {
+  role: ROLE;
+  program: boolean;
+  entryFee: boolean;
+  info: ProgramInvestInfo;
+  currency: string;
+  disabled: boolean;
+  errorMessage: string;
+  onSubmit: (params: any) => {};
+}
+
+interface IDepositFormProps {
+  errors?: any;
+  isValid?: boolean;
+  dirty?: boolean;
+  values?: FormValues;
+  setFieldValue?: any;
+}
+
+export interface FormValues {
+  amount: any;
+}
+
+type OwnProps = InjectedTranslateProps &
+  IDepositFormOwnProps &
+  IDepositFormProps &
+  FormikProps<FormValues>;
+
+class DepositForm extends React.Component<OwnProps> {
+  composeEntryFee = (fee: any) => {
     const { entryFee } = this.props;
     return entryFee ? fee : 0;
   };
 
-  entryFee = amount => {
+  entryFee = (amount: any) => {
     const { info } = this.props;
     return this.composeEntryFee(
       calculateValueOfEntryFee(amount, info.entryFee)
     );
   };
 
-  gvFee = amount => {
+  gvFee = (amount: any) => {
     const { info } = this.props;
     return calculateValueOfEntryFee(amount, info.gvCommission);
   };
 
-  investAmount = amount => {
+  investAmount = (amount: any) => {
     return (amount || 0) - this.gvFee(amount) - this.entryFee(amount);
   };
 
-  isAllow = values => {
-    const { investor, info } = this.props;
+  isAllow = (values: any) => {
+    const { role, info } = this.props;
     const { floatValue, formattedValue, value } = values;
     const { availableToInvest, availableInWallet } = info;
 
@@ -51,9 +81,9 @@ class DepositForm extends Component {
       availableInWallet >= this.investAmount(floatValue);
 
     const isAvailableToInvest =
-      !investor ||
+      role === ROLE.MANAGER ||
       availableToInvest === undefined ||
-      floatValue <= parseFloat(availableToInvest);
+      floatValue <= parseFloat(String(availableToInvest));
 
     return (
       formattedValue === "" ||
@@ -178,7 +208,6 @@ class DepositForm extends Component {
         <div className="dialog__buttons">
           <GVButton
             type="submit"
-            id="signUpFormSubmit"
             className="invest-form__submit-button"
             disabled={disabled || !isValid || !dirty}
           >
@@ -190,15 +219,16 @@ class DepositForm extends Component {
   }
 }
 
-export default compose(
+export default compose<React.ComponentType<IDepositFormOwnProps>>(
   translate(),
   withFormik({
     displayName: "invest-form",
     mapPropsToValues: () => ({
       amount: ""
     }),
-    validationSchema: ({ t, info }) =>
-      object().shape({
+    validationSchema: (params: InjectedTranslateProps & OwnProps) => {
+      const { info, t } = params;
+      return object().shape({
         amount: number()
           .min(
             info.minInvestmentAmount,
@@ -210,8 +240,9 @@ export default compose(
             info.availableInWallet,
             t("deposit-asset.validation.amount-more-than-available")
           )
-      }),
-    handleSubmit: (values, { props }) => {
+      });
+    },
+    handleSubmit: (values, { props }: { props: OwnProps }) => {
       props.onSubmit(values.amount);
     }
   })

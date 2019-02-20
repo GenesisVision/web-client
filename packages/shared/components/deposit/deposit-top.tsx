@@ -1,10 +1,22 @@
 import React from "react";
-import { translate } from "react-i18next";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-import StatisticItem from "../statistic-item/statistic-item";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
+import { ROLE } from "shared/constants/constants";
+import { ProgramInvestInfo } from "gv-api-web";
 
-const DepositTop = ({ info, t, program, investor }) => {
+export interface IDepositTop {
+  info: ProgramInvestInfo;
+  program: boolean;
+  role: ROLE;
+}
+const DepositTop: React.FC<IDepositTop & InjectedTranslateProps> = ({
+  info,
+  t,
+  program,
+  role
+}) => {
   return (
     <div className="dialog__top">
       <div className="dialog__header">
@@ -12,7 +24,7 @@ const DepositTop = ({ info, t, program, investor }) => {
         <p>{info.title}</p>
       </div>
       <div className="dialog-field">
-        {program && investor && (
+        {program && role === ROLE.INVESTOR && (
           <StatisticItem
             label={t("deposit-asset.program.available-to-invest")}
             big
@@ -34,7 +46,5 @@ const DepositTop = ({ info, t, program, investor }) => {
     </div>
   );
 };
-
-DepositTop.propTypes = {};
 
 export default translate()(DepositTop);

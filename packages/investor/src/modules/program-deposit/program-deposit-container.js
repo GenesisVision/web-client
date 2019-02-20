@@ -46,7 +46,6 @@ const ProgramDepositContainer = props => {
   return (
     <Dialog open={open} onClose={handleClose}>
       <DepositPopup
-        investor
         program
         entryFee
         submitInfo={submitInfo}

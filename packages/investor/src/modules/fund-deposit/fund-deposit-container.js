@@ -37,7 +37,6 @@ const FundDepositContainer = props => {
   return (
     <Dialog open={props.open} onClose={handleClose}>
       <DepositPopup
-        investor
         entryFee
         submitInfo={props.submitInfo}
         currency={props.currency}
