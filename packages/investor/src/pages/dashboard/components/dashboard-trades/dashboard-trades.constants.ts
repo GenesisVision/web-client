@@ -9,10 +9,10 @@ export const DASHBOARD_OPEN_TRADES_COLUMNS = [
     name: "manager"
   },
   {
-    name: "symbol"
+    name: "open-date"
   },
   {
-    name: "open-date"
+    name: "symbol"
   },
   {
     name: "volume"
