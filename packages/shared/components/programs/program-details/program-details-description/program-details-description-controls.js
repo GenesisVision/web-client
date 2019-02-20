@@ -331,7 +331,6 @@ class ProgramDetailsDescriptionControls extends React.Component {
                   open={isOpenUnfollowPopup}
                   id={programDescription.id}
                   onClose={this.handleCloseUnfollowPopup}
-                  onCancel={this.handleCloseUnfollowPopup}
                   onApply={this.handleApplyUnfollowPopup(updateDetails)}
                 />
               )}

@@ -1,14 +1,23 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import { Dispatch, bindActionCreators } from "redux";
 
 import ProgramUnfollow from "./program-unfollow";
 import { detachToSignal } from "./services/program-unfollow.service";
 
-class ProgramUnfollowContainer extends Component {
+export interface ITProgramUnfollowContainerProps {
+  service: any;
+  id: string;
+  open: boolean;
+  onClose(): void;
+  onApply(): void;
+}
+
+class ProgramUnfollowContainer extends React.Component<
+  ITProgramUnfollowContainerProps
+> {
   handleClose = () => {
     const { onClose } = this.props;
-    this.setState({ errorMessage: "" });
     onClose();
   };
   handleSubmit = () => {
@@ -23,13 +32,13 @@ class ProgramUnfollowContainer extends Component {
       <ProgramUnfollow
         open={open}
         onApply={this.handleSubmit}
-        onCancel={this.handleClose}
+        onClose={this.handleClose}
       />
     );
   }
 }
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch: Dispatch) => ({
   service: bindActionCreators({ detachToSignal }, dispatch)
 });
 
