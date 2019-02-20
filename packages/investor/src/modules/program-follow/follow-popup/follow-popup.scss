@@ -1,0 +1,29 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_sizes.scss";
+.follow-popup {
+  &__currency {
+    font-size: 12px;
+    opacity: 0.5;
+    margin-bottom: 30px;
+    letter-spacing: 0.4px;
+  }
+
+  &__entry {
+    font-size: 14px;
+    opacity: 0.5;
+    margin-bottom: 44px;
+    letter-spacing: 0.5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  &__errors {
+    padding: $padding-xsmall;
+    font-size: $font-size-small;
+    color: $negative-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

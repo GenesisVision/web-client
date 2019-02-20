@@ -32,6 +32,8 @@ class ProgramDetailsDescription extends PureComponent {
       isReinvestPending,
       isInvested,
       ProgramReinvestingWidget,
+      ProgramFollowContainer,
+      ProgramUnfollowContainer,
       ClosePeriodContainer,
       CloseProgramContainer,
       ProgramDepositContainer,
@@ -65,8 +67,10 @@ class ProgramDetailsDescription extends PureComponent {
           programDescription={programDescription}
           canCloseProgram={canCloseProgram}
           isOwnProgram={isOwnProgram}
+          ProgramFollowContainer={ProgramFollowContainer}
           ClosePeriodContainer={ClosePeriodContainer}
           CloseProgramContainer={CloseProgramContainer}
+          ProgramUnfollowContainer={ProgramUnfollowContainer}
           ProgramDepositContainer={ProgramDepositContainer}
           ProgramDetailContext={ProgramDetailContext}
           AssetEditContainer={AssetEditContainer}

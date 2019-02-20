@@ -991,6 +991,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-event-listener@^0.4.9":
+  version "0.4.9"
+  resolved "https://registry.yarnpkg.com/@types/react-event-listener/-/react-event-listener-0.4.9.tgz#7cd62145e78e80d1d427b061b29655d77248967a"
+  integrity sha512-IGC/0CSoqOBEj4D2RRkMlNMp84eAmzyDcLoeqqye8AtdPbmcfcdbHYeqAP+hK+MWw4o6+zuhysoLYUetmY3SBg==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-i18next@7.8.3":
   version "7.8.3"
   resolved "https://registry.yarnpkg.com/@types/react-i18next/-/react-i18next-7.8.3.tgz#ba1820c91923c7f2b2abf6755d4372e503821c4b"
@@ -1061,6 +1068,11 @@
   integrity sha512-tPIgT0GUmdJQNSHxp0X2jnpQfBSTfGxUMc/2CXBU2mnyTFVYVa2ojpoQ74w0U2yn2vw3jnC640+77lkFFpdVDw==
   dependencies:
     "@types/node" "*"
+
+"@types/yup@^0.26.9":
+  version "0.26.9"
+  resolved "https://registry.yarnpkg.com/@types/yup/-/yup-0.26.9.tgz#8a619ac4d2b8dcacb0d81345746018303b479919"
+  integrity sha512-C7HdLLs1ZNPbYeNsSX++fMosxWAwzVeUs9wc76XlKJrKvLEyNwXMDUjag75EVAPxlZ36YiRJ6iTy4zc5Dbtndw==
 
 "@typescript-eslint/parser@^1.1.1":
   version "1.1.1"
@@ -5390,8 +5402,8 @@ gud@^1.0.0:
   integrity sha512-zGEOVKFM5sVPPrYs7J5/hYEw2Pof8KCyOwyhG8sAF26mCAeUFAcYPu1mwB7hhpIP29zOIBaDqwuHdLp0jvZXjw==
 
 "gv-api-web@git+https://github.com/GenesisVision/gv-api-web.git#development":
-  version "1.0.301"
-  resolved "git+https://github.com/GenesisVision/gv-api-web.git#c54a0b1f20a86d87cc2ca90d7f792904b9dd8ac9"
+  version "1.0.306"
+  resolved "git+https://github.com/GenesisVision/gv-api-web.git#5e60dcb92e7e58af575780a9e7adef0e6eecbb66"
   dependencies:
     superagent "^3.8.3"
 

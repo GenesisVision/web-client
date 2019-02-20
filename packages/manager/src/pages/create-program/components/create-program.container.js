@@ -4,6 +4,7 @@ import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
+import * as WalletServices from "shared/components/wallet/services/wallet.services";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
 import { checkIsModelFilled } from "../helpers/create-program.helpers";
@@ -13,6 +14,7 @@ import CreateProgramSettings from "./create-program-settings/create-program-sett
 
 class CreateProgramContainer extends Component {
   state = {
+    minimumDepositsAmount: null,
     tab: "broker",
     choosedBroker: null,
     brokers: null,
@@ -22,6 +24,8 @@ class CreateProgramContainer extends Component {
   };
 
   componentDidMount() {
+    const { service } = this.props;
+    service.fetchWallets();
     createProgramService.fetchBrokers().then(response => {
       this.setState({
         brokers: response.brokers,
@@ -29,6 +33,9 @@ class CreateProgramContainer extends Component {
         choosedBroker: response.brokers[0]
       });
     });
+    createProgramService
+      .fetchMinDepositsAmount()
+      .then(minimumDepositsAmount => this.setState({ minimumDepositsAmount }));
   }
 
   chooseBroker = broker => () => {
@@ -72,6 +79,7 @@ class CreateProgramContainer extends Component {
 
   render() {
     const {
+      minimumDepositsAmount,
       tab,
       choosedBroker,
       isPending,
@@ -87,7 +95,7 @@ class CreateProgramContainer extends Component {
       handleSubmit,
       setLeverageChooseAvailable
     } = this;
-    const { t, headerData, service, platformSettings } = this.props;
+    const { t, headerData, service, platformSettings, wallets } = this.props;
     if (!platformSettings || !headerData) return null;
     return (
       <div className="create-program-page__container">
@@ -116,6 +124,9 @@ class CreateProgramContainer extends Component {
             )}
             {tab === "settings" && (
               <CreateProgramSettings
+                minimumDepositsAmount={minimumDepositsAmount}
+                fetchWallets={service.fetchWallets}
+                wallets={wallets}
                 onValidateError={this.handleValidateError}
                 navigateBack={navigateToBroker}
                 broker={choosedBroker}
@@ -146,6 +157,7 @@ class CreateProgramContainer extends Component {
 }
 
 const mapStateToProps = state => ({
+  wallets: state.wallet.info.data ? state.wallet.info.data.wallets : {},
   headerData: state.profileHeader.info.data,
   platformSettings: state.platformData.data
 });
@@ -155,6 +167,7 @@ const mapDispatchToProps = dispatch => {
     service: bindActionCreators(
       {
         ...createProgramService,
+        ...WalletServices,
         notifyError: (text, isUseLocalization) =>
           alertMessageActions.error(text, isUseLocalization)
       },

@@ -246,6 +246,39 @@
       "amount-more-than-available": "Amount is more than available for withdraw"
     }
   },
+  "follow-program": {
+    "create-account": {
+      "title": "Account creation",
+      "available": "Available for creating",
+      "amount": "Amount for creating",
+      "from": "From",
+      "next": "Next",
+      "validation": {
+        "amount-required": "Amount is required field",
+        "amount-is-zero": "Amount must be greater than zero",
+        "amount-more-than-available": "Amount is more than available for creating"
+      }
+    },
+    "params": {
+      "title": "Trading settings",
+      "type": "Type",
+      "tolerance-percent": "Tolerance percent",
+      "volume-percent": "Volume percent",
+      "usd-equivalent": "USD equivalent",
+      "back": "Back",
+      "submit": "Submit",
+      "validation": {
+        "fixedVolume-min": "USD equivalent must be greater than or equal to 0",
+        "fixedVolume-max": "USD equivalent must be less than or equal to 99999",
+        "percent-min": "Percent must be greater than or equal to 1%",
+        "percent-max": "Percent must be less than or equal to 999%",
+        "tolerance-percent-min": "Tolerance percent must be greater than or equal to 0.01",
+        "tolerance-percent-max": "Tolerance percent must be less than or equal to 20%",
+        "tolerance-required": "Tolerance percent is required field"
+      }
+    },
+    "success-alert-message": "You have been subscribed."
+  },
   "withdraw-fund": {
     "title": "Withdraw",
     "exit-fee": "Exit fee",
@@ -434,6 +467,9 @@
       "edit-program": "Edit Program",
       "close-program": "Close Program",
       "follow-trade": "Follow trades",
+      "unfollow": "Unfollow",
+      "unfollow-trades": "Unfollow trades",
+      "unfollow-trade-text": "Do you really want to unsubscribe?",
       "close-program-notification": "Investment program will be closed after this reporting period. Current investment requests will be cancelled and new requests won’t be accepted. Profit and funds from the trading account will be deposited to GVT wallets of investors and manager according to their shares.",
       "close-program-notification-success": "Request to close the program was sent successfully.",
       "requests-completed": "All requests completed successfully"
@@ -1182,7 +1218,13 @@
         "main-settings": "Main settings",
         "fees-settings": "Fees settings",
         "deposit-details": "Deposit details",
+        "investment-program-fees": "Investment program fees",
+        "signal-provider-fees": "Signal provider fees",
         "fields": {
+          "min-deposit": "Min. deposit",
+          "provide-signals": "Provide signals",
+          "monthly-subscription-fee": "Subscription fee",
+          "stop-out-level": "Stop out level",
           "name": "Name",
           "name-requirements": "Requirement from 4 to 20 symbols",
           "account-type": "Account type",
@@ -1199,6 +1241,7 @@
           "upload-logo-rules": "At least 300 x 300px PNG or JPG file. The maximum file size is 2MB.",
           "entry-fee": "Entry fee",
           "success-fee": "Success fee",
+          "signal-success-fee": "Signal success fee",
           "deposit-amount": "Deposit amount",
           "available-in-wallet": "Available in wallet"
         },
@@ -1210,6 +1253,12 @@
           "success-fee-description": "A success fee is paid to a manager at the end of the reporting period for successfully closing the period at a profit. The maximum success fee is {{maxFee}} %"
         },
         "validation": {
+          "stop-out-required": "Stop out is required",
+          "stop-out-is-large": "Must be less than 100",
+          "stop-out-is-zero": "Must be more than 0",
+          "amount-required": "Amount out is required",
+          "amount-is-large": "Must be less than available in wallet",
+          "amount-is-zero": "Must be more than 0",
           "title-required": "Title is required",
           "title-is-long": "Title is too long",
           "title-is-short": "Title is too short",
@@ -1221,7 +1270,11 @@
           "period-required": "Period is required",
           "leverage-required": "Leverage is required",
           "entry-fee-required": "Entry fee is required",
+          "entry-fee-min": "Entry fee must be greater than 0.01 % ",
           "success-fee-required": "Success fee is required",
+          "success-fee-min": "Success fee must be greater than 0.01 % ",
+          "signal-subscription-fee-required": "Monthly subscription fee is required",
+          "signal-subscription-fee-min": "Monthly subscription fee must be greater than 0.01 % ",
           "account-type-required": "Account type is required",
           "image-resolution-incorrect": "The resolution of the uploaded image is too low.",
           "image-file-is-large": "The uploaded image file is too large."
