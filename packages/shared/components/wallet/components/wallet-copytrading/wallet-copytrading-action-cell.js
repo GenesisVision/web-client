@@ -4,9 +4,9 @@ import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
+import Chip from "shared/components/chip/chip";
 
 import * as walletService from "../../services/wallet.services";
-import Chip from "shared/components/chip/chip";
 
 class WalletCopytradingActions extends Component {
   state = {

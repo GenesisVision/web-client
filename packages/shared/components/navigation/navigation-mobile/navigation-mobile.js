@@ -63,12 +63,6 @@ const NavigationMobile = ({
             {t("navigation.funds")}
           </NavigationItem>
           <NavigationItem
-            icon={<SearchIcon primary />}
-            href={GLOBAL_SEARCH_ROUTE}
-          >
-            {t("navigation.search")}
-          </NavigationItem>
-          <NavigationItem
             exact
             icon={<DetailsIcon primary />}
             href={PROFILE_ROUTE}

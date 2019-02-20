@@ -9,13 +9,22 @@ export interface IInputAmountFieldProps {
   name: string;
   label: string;
   currency: string;
-  isAllow: boolean | Function;
+  isAllow?: (values?: any) => boolean;
   setMax(): void;
+  autoFocus?: boolean;
 }
 
 class InputAmountField extends React.Component<IInputAmountFieldProps> {
   render() {
-    const { t, name, label, currency, isAllow, setMax } = this.props;
+    const {
+      t,
+      name,
+      label,
+      currency,
+      isAllow,
+      setMax,
+      autoFocus = true
+    } = this.props;
     return (
       <GVFormikField
         name={name}
@@ -32,7 +41,7 @@ class InputAmountField extends React.Component<IInputAmountFieldProps> {
           </GVButton>
         }
         autoComplete="off"
-        autoFocus
+        autoFocus={autoFocus}
         suffix={` ${currency}`}
         allowNegative={false}
         isAllowed={isAllow}

@@ -46,7 +46,9 @@
     &:last-child {
       margin-right: 0;
     }
-
+    & .gv-text-field__label {
+      font-size: 15.8px;
+    }
     &-hint {
       font-size: 12px;
       color: $label-color;
@@ -229,7 +231,12 @@
       cursor: pointer;
     }
   }
-
+  &__row-title {
+    font-weight: 500;
+    font-size: $font-size-small;
+    letter-spacing: 0.4px;
+    margin: $padding-xsmall 0 $padding-xxsmall;
+  }
   &__row {
     margin-bottom: 8px;
     width: auto;
@@ -251,6 +258,10 @@
 
     & .gv-text-field__wrapper {
       margin: 16px 0;
+    }
+
+    & .gv-checkbox-wrapper {
+      margin: $padding-big 0 0;
     }
 
     & .gv-text-field__wrapper:first-child {
