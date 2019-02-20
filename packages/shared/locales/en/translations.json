@@ -942,6 +942,12 @@
         "success-cancel-request": "Request canceled successfully",
         "failure-cancel-request": "Failed to cancel request"
       },
+      "assets": {
+        "title": "Assets",
+        "programs": "Programs",
+        "funds": "Funds",
+        "copytrading": "Copytrading"
+      },
       "trades": {
         "title": "Trades",
         "open-trades": "Open trades",

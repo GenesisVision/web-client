@@ -6,7 +6,7 @@ import {
   getDashboardPrograms
 } from "pages/dashboard/services/dashboard-assets.service";
 import React, { Component, ComponentType } from "react";
-import { translate } from "react-i18next";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { Action, Dispatch, bindActionCreators, compose } from "redux";
 import DashboardFunds from "shared/components/dashboard/dashboard-assets/dashboard-funds/dashboard-funds";
@@ -42,7 +42,7 @@ interface IDashboardAssetsState extends IDashboardAssetsCounts {
 }
 
 class DashboardAssetsSection extends Component<
-  IDashboardOwnProps & IDashboardAssetsProps,
+  IDashboardOwnProps & IDashboardAssetsProps & InjectedTranslateProps,
   IDashboardAssetsState
 > {
   state = {
@@ -71,22 +71,26 @@ class DashboardAssetsSection extends Component<
 
   render() {
     const { tab, programsCount, fundsCount, tradesCount } = this.state;
-    const { title } = this.props;
+    const { t, title } = this.props;
     return (
       <Surface className="dashboard-assets">
         <div className="dashboard-assets__head">
-          <h3>Assets</h3>
+          <h3>{t("investor.dashboard-page.assets.title")}</h3>
           <div className="dashboard-assets__tabs">
             <GVTabs value={tab} onChange={this.handleTabChange}>
               <GVTab
                 value={ASSET_TAB.PROGRAMS}
-                label="Programs"
+                label={t("investor.dashboard-page.assets.programs")}
                 count={programsCount}
               />
-              <GVTab value={ASSET_TAB.FUNDS} label="Funds" count={fundsCount} />
+              <GVTab
+                value={ASSET_TAB.FUNDS}
+                label={t("investor.dashboard-page.assets.funds")}
+                count={fundsCount}
+              />
               <GVTab
                 value={ASSET_TAB.COPYTRADING}
-                label="Copytrading"
+                label={t("investor.dashboard-page.assets.copytrading")}
                 count={tradesCount}
               />
             </GVTabs>
