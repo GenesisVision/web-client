@@ -4,6 +4,7 @@ import { Nullable } from "shared/utils/types";
 
 export const DASHBOARD_PROGRAMS = "DASHBOARD_PROGRAMS";
 export const DASHBOARD_FUNDS = "DASHBOARD_FUNDS";
+export const DASHBOARD_COPYTRADING = "DASHBOARD_COPYTRADING";
 export const DASHBOARD_PORTFOLIO_CHART = "DASHBOARD_PORTFOLIO_CHART";
 export const DASHBOARD_PORTFOLIO_EVENTS = "DASHBOARD_PORTFOLIO_EVENTS";
 export const DASHBOARD_IN_REQUESTS = "DASHBOARD_IN_REQUESTS";
@@ -30,6 +31,16 @@ export const fetchDashboardFunds = (auth: Nullable<string>, filters: any) => {
   return {
     type: DASHBOARD_FUNDS,
     payload: investorApi.v10InvestorFundsGet(auth, filters)
+  };
+};
+
+export const fetchDashboardCopytrading = (
+  auth: Nullable<string>,
+  filters: any
+) => {
+  return {
+    type: DASHBOARD_COPYTRADING,
+    payload: investorApi.v10InvestorSignalsGet(auth, filters)
   };
 };
 

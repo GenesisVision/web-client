@@ -968,6 +968,14 @@
         "value": "Value",
         "status": "Status"
       },
+      "copytrading-header": {
+        "program": "Program",
+        "start-date": "Start Date",
+        "subscribers": "Subscribers",
+        "trades": "Trades",
+        "profit": "Profit",
+        "chart": "Chart"
+      },
       "open-trades-header": {
         "manager": "Manager",
         "symbol": "Symbol",

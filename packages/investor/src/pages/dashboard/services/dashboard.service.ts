@@ -14,6 +14,7 @@ export const getPortfolioChart = () => (dispatch: Dispatch) => {
 export interface IDashboardAssetsCounts {
   programsCount?: number;
   fundsCount?: number;
+  tradesCount?: number;
 }
 
 export const fetchAssetsCount = (): Promise<IDashboardAssetsCounts> => {
@@ -21,10 +22,12 @@ export const fetchAssetsCount = (): Promise<IDashboardAssetsCounts> => {
   const filtering = { take: 0 };
   return Promise.all([
     investorApi.v10InvestorProgramsGet(authorization, filtering),
-    investorApi.v10InvestorFundsGet(authorization, filtering)
-  ]).then(([programsData, fundsData]) => ({
+    investorApi.v10InvestorFundsGet(authorization, filtering),
+    investorApi.v10InvestorSignalsGet(authorization, filtering)
+  ]).then(([programsData, fundsData, copytradingData]) => ({
     programsCount: programsData.total,
-    fundsCount: fundsData.total
+    fundsCount: fundsData.total,
+    tradesCount: copytradingData.total
   }));
 };
 

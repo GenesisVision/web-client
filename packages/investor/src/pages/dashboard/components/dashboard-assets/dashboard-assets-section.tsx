@@ -1,6 +1,10 @@
 import "shared/components/dashboard/dashboard-assets/dashboard-assets.scss";
 
 import { GVTab, GVTabs } from "gv-react-components";
+import {
+  getDashboardFunds,
+  getDashboardPrograms
+} from "pages/dashboard/services/dashboard-assets.service";
 import React, { Component, ComponentType } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
@@ -11,9 +15,11 @@ import Surface from "shared/components/surface/surface";
 import { INVESTOR } from "shared/constants/constants";
 
 import { clearDashboardAssetsTable } from "../../actions/dashboard.actions";
-import { getDashboardFunds } from "../../services/dashboard-funds.service";
-import { getDashboardPrograms } from "../../services/dashboard-programs.service";
-import { fetchAssetsCount } from "../../services/dashboard.service";
+import {
+  IDashboardAssetsCounts,
+  fetchAssetsCount
+} from "../../services/dashboard.service";
+import DashboardCopytrading from "./dashboard-copytrading";
 
 enum ASSET_TAB {
   PROGRAMS = "PROGRAMS",
@@ -31,10 +37,8 @@ interface IDashboardAssetsProps {
   };
 }
 
-interface IDashboardAssetsState {
+interface IDashboardAssetsState extends IDashboardAssetsCounts {
   tab: ASSET_TAB;
-  programsCount?: number;
-  fundsCount?: number;
 }
 
 class DashboardAssetsSection extends Component<
@@ -44,7 +48,8 @@ class DashboardAssetsSection extends Component<
   state = {
     tab: ASSET_TAB.PROGRAMS,
     programsCount: undefined,
-    fundsCount: undefined
+    fundsCount: undefined,
+    tradesCount: undefined
   };
 
   componentDidMount() {
@@ -65,7 +70,7 @@ class DashboardAssetsSection extends Component<
   }
 
   render() {
-    const { tab, programsCount, fundsCount } = this.state;
+    const { tab, programsCount, fundsCount, tradesCount } = this.state;
     const { title } = this.props;
     return (
       <Surface className="dashboard-assets">
@@ -79,6 +84,11 @@ class DashboardAssetsSection extends Component<
                 count={programsCount}
               />
               <GVTab value={ASSET_TAB.FUNDS} label="Funds" count={fundsCount} />
+              <GVTab
+                value={ASSET_TAB.COPYTRADING}
+                label="Copytrading"
+                count={tradesCount}
+              />
             </GVTabs>
           </div>
         </div>
@@ -96,6 +106,9 @@ class DashboardAssetsSection extends Component<
               title={title}
               role={INVESTOR}
             />
+          )}
+          {tab === ASSET_TAB.COPYTRADING && (
+            <DashboardCopytrading title={title} />
           )}
         </div>
       </Surface>
