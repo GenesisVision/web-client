@@ -9,11 +9,7 @@ import {
   calculateValueOfEntryFee,
   convertFromCurrency
 } from "shared/utils/currency-converter";
-import {
-  formatCurrencyValue,
-  formatValue,
-  validateFraction
-} from "shared/utils/formatter";
+import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { number, object } from "yup";
 
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
@@ -261,9 +257,7 @@ class DepositForm extends React.Component<OwnProps, IDepositFormState> {
           </li>
           <li className="dialog-list__item">
             <span className="dialog-list__title">
-              {program
-                ? t("deposit-asset.investment-amount")
-                : t("deposit-asset.investment-amount")}
+              {t("deposit-asset.investment-amount")}
             </span>
             <span className="dialog-list__value">
               <NumberFormat
@@ -286,7 +280,7 @@ class DepositForm extends React.Component<OwnProps, IDepositFormState> {
             className="invest-form__submit-button"
             disabled={disabled || !isValid || !dirty}
           >
-            {program ? t("deposit-asset.confirm") : t("deposit-asset.confirm")}
+            {t("deposit-asset.confirm")}
           </GVButton>
         </div>
       </form>
