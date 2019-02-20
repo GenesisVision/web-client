@@ -186,9 +186,10 @@ class DepositForm extends React.Component<OwnProps, IDepositFormState> {
         </GVFormikField>
         <StatisticItem
           label={
-            program
+            t("deposit-asset.available-in-wallet")
+            /*program
               ? t("deposit-asset.available-in-wallet")
-              : t("deposit-asset.fund.available-to-invest")
+              : t("deposit-asset.fund.available-to-invest")*/
           }
           big
         >
