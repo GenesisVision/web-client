@@ -61,7 +61,11 @@ class DepositForm extends React.Component<OwnProps, IDepositFormState> {
   state = {
     rate: "1"
   };
-  composeEntryFee = (fee: any) => {
+  componentDidMount(): void {
+    this.fetchRate({ currencyFrom: this.props.values.walletCurrency });
+  }
+
+  composeEntryFee = (fee: any): number => {
     const { entryFee } = this.props;
     return entryFee ? fee : 0;
   };
