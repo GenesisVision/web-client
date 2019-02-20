@@ -155,7 +155,8 @@ class DepositForm extends React.Component<OwnProps, IDepositFormState> {
       handleSubmit,
       errorMessage
     } = this.props;
-
+    const { walletCurrency } = values;
+    const wallet = wallets.find(wallet => wallet.currency === walletCurrency);
     return (
       <form className="dialog__bottom" id="invest-form" onSubmit={handleSubmit}>
         <GVFormikField
@@ -186,7 +187,7 @@ class DepositForm extends React.Component<OwnProps, IDepositFormState> {
           }
           big
         >
-          {formatCurrencyValue(info.availableInWallet, "GVT")} GVT
+          {formatCurrencyValue(wallet ? wallet.available : 0, "GVT")} GVT
         </StatisticItem>
         <InputAmountField
           name="amount"
