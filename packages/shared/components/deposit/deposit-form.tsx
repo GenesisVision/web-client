@@ -200,8 +200,8 @@ class DepositForm extends React.Component<OwnProps, IDepositFormState> {
           label={
             program ? t("deposit-asset.amount") : t("deposit-asset.amount")
           }
-          currency={"GVT"}
-          isAllow={this.isAllow}
+          currency={walletCurrency}
+          // isAllow={this.isAllow}
           setMax={this.setMaxAmount}
         />
 
