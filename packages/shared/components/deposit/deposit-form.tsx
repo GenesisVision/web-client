@@ -107,14 +107,14 @@ class DepositForm extends React.Component<OwnProps, IDepositFormState> {
     const { setFieldValue } = this.props;
     const walletCurrency = target.props.value;
     setFieldValue("walletCurrency", walletCurrency);
-    this.fetchRate(walletCurrency);
+    this.fetchRate({ currencyFrom: walletCurrency });
   };
   fetchRate = (params: { currencyFrom?: string; currencyTo?: string }) => {
     const { values, currency } = this.props;
     rateApi
       .v10RateByFromByToGet(
-        currency,
-        initialDepositCurrency || values.walletCurrency
+        params.currencyFrom || values.walletCurrency,
+        params.currencyTo || currency
       )
       .then((rate: string) => {
         if (rate !== this.state.rate) this.setState({ rate });
@@ -155,6 +155,7 @@ class DepositForm extends React.Component<OwnProps, IDepositFormState> {
       handleSubmit,
       errorMessage
     } = this.props;
+    const { rate } = this.state;
     const { walletCurrency } = values;
     const wallet = wallets.find(wallet => wallet.currency === walletCurrency);
     return (
@@ -202,7 +203,7 @@ class DepositForm extends React.Component<OwnProps, IDepositFormState> {
         <div className="invest-popup__currency">
           <NumberFormat
             value={formatCurrencyValue(
-              convertFromCurrency(values.amount, info.rate),
+              convertFromCurrency(values.amount, rate),
               currency
             )}
             prefix="≈ "
