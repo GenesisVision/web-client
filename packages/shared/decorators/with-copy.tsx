@@ -28,18 +28,14 @@ type IOwnProps = ITranslatable & ICopyProps & IDispatchMap;
 
 class CopyHOC extends React.Component<IOwnProps> {
   onCopy = (message: string): void => {
-    const {
-      t,
-      error,
-      success,
-      errorMessage = t("copy.error"),
-      successMessage = t("copy.success")
-    } = this.props;
+    const { t, error, success, errorMessage, successMessage } = this.props;
+    const sMessage = successMessage || t("copy.success");
+    const eMessage = errorMessage || t("copy.error");
     try {
       copy(message);
-      success(t(successMessage));
+      success(sMessage);
     } catch (error) {
-      error(t(errorMessage));
+      error(eMessage);
     }
   };
 

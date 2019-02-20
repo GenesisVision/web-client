@@ -9,6 +9,7 @@ import { compose } from "redux";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import Select from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import TransferRate from "shared/modules/wallet-transfer/components/transfer-rate";
 import filesService from "shared/services/file-service";
 import { validateFraction } from "shared/utils/formatter";
 import { formatCurrencyValue } from "shared/utils/formatter";
@@ -172,6 +173,20 @@ class WalletTransferForm extends React.Component<IWalletTransferForm> {
               setMax={setMaxAmount}
             />
           </div>
+          <TransferRate
+            destinationCurrency={selectedToWallet.currency}
+            sourceCurrency={selectedFromWallet.currency}
+          >
+            {props => {
+              const value = formatCurrencyValue(
+                props.rate * values.amount,
+                selectedToWallet.currency
+              );
+              return value ? (
+                <span>{`= ${value} ${selectedToWallet.currency}`}</span>
+              ) : null;
+            }}
+          </TransferRate>
           <div className="form-error">{errorMessage}</div>
           <div className="dialog__buttons">
             <GVButton
