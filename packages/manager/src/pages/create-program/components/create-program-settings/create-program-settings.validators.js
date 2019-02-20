@@ -3,14 +3,31 @@ import { number, object, string, boolean, lazy } from "yup";
 const createProgramSettingsValidationSchema = ({ t, ...props }) =>
   lazy(values =>
     object().shape({
+      stopOutLevel: number()
+        .required(
+          t("manager.create-program-page.settings.validation.stop-out-required")
+        )
+        .moreThan(
+          0,
+          t("manager.create-program-page.settings.validation.stop-out-is-zero")
+        )
+        .max(
+          100,
+          t("manager.create-program-page.settings.validation.stop-out-is-large")
+        ),
       depositAmount: number()
-        .required()
-        .moreThan(0)
+        .required(
+          t("manager.create-program-page.settings.validation.amount-required")
+        )
+        .moreThan(
+          0,
+          t("manager.create-program-page.settings.validation.amount-is-zero")
+        )
         .max(
           props.wallets.find(
             item => item.currency === values.depositWalletCurrency
           ).available,
-          "Must be less than available in wallet"
+          t("manager.create-program-page.settings.validation.amount-is-large")
         ),
       logo: object().shape({
         width: number().min(
@@ -83,7 +100,10 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) =>
             "manager.create-program-page.settings.validation.entry-fee-required"
           )
         )
-        .min(0.01, "Entry fee must be greater than 0.01 % ")
+        .min(
+          0.01,
+          t("manager.create-program-page.settings.validation.entry-fee-min")
+        )
         .max(
           props.programsInfo.managerMaxEntryFee,
           "Entry fee must be less than  " +
@@ -91,7 +111,10 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) =>
             " %"
         ),
       successFee: number()
-        .min(0.01, "Success fee must be greater than 0.01 % ")
+        .min(
+          0.01,
+          t("manager.create-program-page.settings.validation.success-fee-min")
+        )
         .required(
           t(
             "manager.create-program-page.settings.validation.success-fee-required"
@@ -109,10 +132,15 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) =>
         then: number()
           .required(
             t(
-              "manager.create-program-page.settings.validation.entry-fee-required"
+              "manager.create-program-page.settings.validation.signal-subscription-fee-required"
             )
           )
-          .min(0.01, "Monthly subscription fee must be greater than 0.01 % ")
+          .min(
+            0.01,
+            t(
+              "manager.create-program-page.settings.validation.signal-subscription-fee-min"
+            )
+          )
           .max(
             props.programsInfo.managerMaxEntryFee,
             " Monthly subscription fee must be less than  " +
