@@ -1,7 +1,7 @@
 import "shared/components/dashboard/dashboard-assets/dashboard-assets.scss";
 
 import { GVTab, GVTabs } from "gv-react-components";
-import React, { Component } from "react";
+import React, { Component, ComponentType } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { Action, Dispatch, bindActionCreators, compose } from "redux";
@@ -21,8 +21,11 @@ enum ASSET_TAB {
   COPYTRADING = "COPYTRADING"
 }
 
-interface IDashboardAssetsProps {
+interface IDashboardOwnProps {
   title: string;
+}
+
+interface IDashboardAssetsProps {
   service: {
     clearDashboardAssetsTable(): void;
   };
@@ -35,7 +38,7 @@ interface IDashboardAssetsState {
 }
 
 class DashboardAssetsSection extends Component<
-  IDashboardAssetsProps,
+  IDashboardOwnProps & IDashboardAssetsProps,
   IDashboardAssetsState
 > {
   state = {
@@ -104,7 +107,7 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
   service: bindActionCreators({ clearDashboardAssetsTable }, dispatch)
 });
 
-export default compose(
+export default compose<ComponentType<IDashboardOwnProps>>(
   translate(),
   connect(
     null,
