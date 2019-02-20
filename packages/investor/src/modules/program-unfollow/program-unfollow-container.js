@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import Dialog from "shared/components/dialog/dialog";
 
+import ProgramUnfollow from "./program-unfollow";
 import { detachToSignal } from "./services/program-unfollow.service";
-import UnfollowPopupForm from "./unfollow-popup/unfollow-popup-form";
 
 class ProgramUnfollowContainer extends Component {
   handleClose = () => {
@@ -19,15 +18,13 @@ class ProgramUnfollowContainer extends Component {
   };
 
   render() {
-    const { open, onClose, onApply } = this.props;
+    const { open } = this.props;
     return (
-      <Dialog open={open} onClose={this.handleClose} className="dialog--wider">
-        <UnfollowPopupForm
-          onSubmit={this.handleSubmit}
-          onCancel={onClose}
-          onApply={onApply}
-        />
-      </Dialog>
+      <ProgramUnfollow
+        open={open}
+        onApply={this.handleSubmit}
+        onCancel={this.handleClose}
+      />
     );
   }
 }
@@ -36,4 +33,7 @@ const mapDispatchToProps = dispatch => ({
   service: bindActionCreators({ detachToSignal }, dispatch)
 });
 
-export default connect(mapDispatchToProps)(ProgramUnfollowContainer);
+export default connect(
+  null,
+  mapDispatchToProps
+)(ProgramUnfollowContainer);
