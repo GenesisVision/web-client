@@ -418,7 +418,7 @@ class CreateProgramSettings extends React.Component {
                   <GVFormikField
                     name="signalSuccessFee"
                     label={t(
-                      "manager.create-program-page.settings.fields.success-fee"
+                      "manager.create-program-page.settings.fields.signal-success-fee"
                     )}
                     adornment="%" //isAllowed={this.allowSuccessFee}
                     component={GVTextField}
@@ -494,7 +494,7 @@ class CreateProgramSettings extends React.Component {
               )}
             </div>
             <div className="deposit-details__available-amount">
-              {"Min. deposit"}
+              {t("manager.create-program-page.settings.fields.min-deposit")}
               <span className={"deposit-details__available-amount-value"}>
                 <NumberFormat
                   value={minimumDepositsAmount[currency]}
