@@ -229,9 +229,12 @@ class DepositForm extends React.Component<OwnProps, IDepositFormState> {
               <span className="dialog-list__value">
                 {info.entryFee} %{" "}
                 <NumberFormat
-                  value={formatValue(this.entryFee(values.amount))}
+                  value={formatCurrencyValue(
+                    this.entryFee(values.amount),
+                    walletCurrency
+                  )}
                   prefix=" ("
-                  suffix={" GVT)"}
+                  suffix={` ${walletCurrency})`}
                   displayType="text"
                 />
               </span>
@@ -246,9 +249,12 @@ class DepositForm extends React.Component<OwnProps, IDepositFormState> {
             <span className="dialog-list__value">
               {info.gvCommission} %
               <NumberFormat
-                value={formatCurrencyValue(this.gvFee(values.amount), "GVT")}
+                value={formatCurrencyValue(
+                  this.gvFee(values.amount),
+                  walletCurrency
+                )}
                 prefix={" ("}
-                suffix={" GVT)"}
+                suffix={` ${walletCurrency})`}
                 displayType="text"
               />
             </span>
@@ -263,9 +269,9 @@ class DepositForm extends React.Component<OwnProps, IDepositFormState> {
               <NumberFormat
                 value={formatCurrencyValue(
                   this.investAmount(values.amount),
-                  "GVT"
+                  walletCurrency
                 )}
-                suffix={" GVT"}
+                suffix={` ${walletCurrency}`}
                 displayType="text"
               />
             </span>
