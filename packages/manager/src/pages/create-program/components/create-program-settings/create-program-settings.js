@@ -290,7 +290,7 @@ class CreateProgramSettings extends React.Component {
                 </div>
               </div>
             </div>
-            {broker.signalsAvailable && (
+            {broker.isSignalsAvailable && (
               <div className="create-program-settings__row create-program-settings__row--provide-signals">
                 <GVFormikField
                   type="checkbox"
@@ -547,7 +547,7 @@ export default translate()(
       stopOutLevel: "",
       depositWalletCurrency: "GVT",
       depositWalletId: props.wallets.find(item => item.currency === "GVT").id,
-      isSignalProgram: props.broker.signalsAvailable,
+      isSignalProgram: props.broker.isSignalsAvailable,
       periodLength: "",
       successFee: "",
       signalSuccessFee: "",
