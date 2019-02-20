@@ -10,20 +10,33 @@ export interface ImageBaseProps {
 }
 
 interface ImageBaseState {
-  error: boolean;
+  imageLoadError: boolean;
 }
 
 class ImageBase extends Component<ImageBaseProps, ImageBaseState> {
-  state = {
-    error: false
-  };
-  handleError(e: any) {
-    e.target.onerror = null;
-    this.setState({ error: true });
+  private readonly image: React.RefObject<any>;
+
+  constructor(props: ImageBaseProps) {
+    super(props);
+    this.image = React.createRef();
   }
+
+  state = {
+    imageLoadError: false
+  };
+
+  handleImageError = (event: any) => {
+    event.target.onerror = null;
+    this.setState({ imageLoadError: true });
+  };
+
+  componentDidMount() {
+    this.image.current.onerror = this.handleImageError;
+  }
+
   render() {
     const { url, alt, defaultImage, className, imageClassName } = this.props;
-    const currentSrc = this.state.error || !url ? defaultImage : url;
+    const currentSrc = this.state.imageLoadError || !url ? defaultImage : url;
 
     return (
       <div className={className}>
@@ -31,7 +44,7 @@ class ImageBase extends Component<ImageBaseProps, ImageBaseState> {
           alt={alt}
           className={imageClassName}
           src={currentSrc}
-          onError={this.handleError}
+          ref={this.image}
         />
       </div>
     );
