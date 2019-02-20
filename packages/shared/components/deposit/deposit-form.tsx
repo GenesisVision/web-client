@@ -66,23 +66,23 @@ class DepositForm extends React.Component<OwnProps, IDepositFormState> {
     return entryFee ? fee : 0;
   };
 
-  entryFee = (amount: any) => {
+  entryFee = (amount: number): number => {
     const { info } = this.props;
     return this.composeEntryFee(
       calculateValueOfEntryFee(amount, info.entryFee)
     );
   };
 
-  gvFee = (amount: any) => {
+  gvFee = (amount: number): number => {
     const { info } = this.props;
     return calculateValueOfEntryFee(amount, info.gvCommission);
   };
 
-  investAmount = (amount: any) => {
+  investAmount = (amount: number): number => {
     return (amount || 0) - this.gvFee(amount) - this.entryFee(amount);
   };
 
-  isAllow = (values: any) => {
+  isAllow = (values: any): boolean => {
     const { role, info } = this.props;
     const { floatValue, formattedValue, value } = values;
     const { availableToInvest, availableInWallet } = info;
@@ -109,7 +109,7 @@ class DepositForm extends React.Component<OwnProps, IDepositFormState> {
     setFieldValue("walletCurrency", walletCurrency);
     this.fetchRate(walletCurrency);
   };
-  fetchRate = (initialDepositCurrency?: any) => {
+  fetchRate = (params: { currencyFrom?: string; currencyTo?: string }) => {
     const { values, currency } = this.props;
     rateApi
       .v10RateByFromByToGet(
