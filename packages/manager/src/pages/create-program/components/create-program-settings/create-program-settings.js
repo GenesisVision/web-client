@@ -550,7 +550,7 @@ export default translate()(
       isSignalProgram: props.broker.isSignalsAvailable,
       periodLength: "",
       successFee: "",
-      signalSuccessFee: "",
+      signalSuccessFee: props.broker.isSignalsAvailable ? "" : 0,
       leverage: "",
       title: "",
       description: "",
@@ -565,7 +565,7 @@ export default translate()(
       },
       brokerAccountTypeId: "",
       entryFee: "",
-      signalSubscriptionFee: "",
+      signalSubscriptionFee: props.broker.isSignalsAvailable ? "" : 0,
       currency: "",
       accountType: ""
     }),
