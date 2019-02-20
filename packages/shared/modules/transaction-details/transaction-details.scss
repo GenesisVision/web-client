@@ -37,6 +37,15 @@
 .external-transaction {
   display: flex;
   flex-direction: row;
+  &__status {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+
+    img {
+      margin-left: 20px;
+    }
+  }
   &__wallet {
     width: 44px;
     height: 44px;

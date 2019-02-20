@@ -1,6 +1,7 @@
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import Status from "shared/components/status/status";
 import TransactionAsset from "shared/modules/transaction-details/details-asset";
 import { ITransactionDetailsProps } from "shared/modules/transaction-details/transaction-details";
 import { formatCurrencyValue } from "shared/utils/formatter";
@@ -53,7 +54,9 @@ const InvestingTransaction = (props: ITransactionDetailsProps) => {
           />
         </StatisticItem>
         <StatisticItem label={t(`transactions-details.status.title`)}>
-          {data.status}
+          <div className="external-transaction__status">
+            {data.status} <Status status={data.status} />
+          </div>
         </StatisticItem>
         <StatisticItem label={t(`transactions-details.investment.amount`)} big>
           {formatCurrencyValue(data.amount, data.currency)} {data.currency}

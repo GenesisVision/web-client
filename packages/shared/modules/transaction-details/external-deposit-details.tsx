@@ -3,6 +3,7 @@ import * as React from "react";
 import NumberFormat from "react-number-format";
 import CopyIcon from "shared/components/icon/copy-icon";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import Status from "shared/components/status/status";
 import Copy from "shared/decorators/with-copy";
 import ArrowIcon from "shared/media/arrow-up-thin.svg";
 import { ITransactionDetailsProps } from "shared/modules/transaction-details/transaction-details";
@@ -50,7 +51,10 @@ const ExternalDeposit = (props: ITransactionDetailsProps) => {
       </div>
       <div className="dialog__bottom">
         <StatisticItem label={t(`transactions-details.status.title`)}>
-          {data.status} {data.externalTransactionDetails.description}
+          <div className="external-transaction__status">
+            {data.status} {data.externalTransactionDetails.description}{" "}
+            <Status status={data.status} />
+          </div>
         </StatisticItem>
         <StatisticItem label={t(`transactions-details.external.amount`)} big>
           <NumberFormat

@@ -3,9 +3,9 @@ import moment from "moment";
 import * as React from "react";
 import { Fragment } from "react";
 import NumberFormat from "react-number-format";
+import Status from "shared/components/status/status";
 import filesService from "shared/services/file-service";
 
-import SuccessTransactionsIcon from "../../../../media/transactions/success.svg";
 import TransactionDetailsPopup from "../../../../modules/transaction-details/transaction-details-popup";
 import { formatValue } from "../../../../utils/formatter";
 import Profitability from "../../../profitability/profitability";
@@ -101,10 +101,9 @@ class AllTransactionsRow extends React.Component<
             {moment(transaction.date).format("DD-MM-YYYY, hh:mm a")}
           </TableCell>
           <TableCell className="wallet-transactions__cell wallet-transactions__cell--type">
-            <img
-              src={SuccessTransactionsIcon}
+            <Status
+              status={transaction.status}
               className="wallet-transactions__icon"
-              alt="TransactionsIcon"
             />
           </TableCell>
           <TableCell className="wallet-transactions__cell wallet-transactions__cell--information">
