@@ -36,11 +36,12 @@ import programsReducer from "shared/modules/programs-table/reducers/programs-tab
 import accountSettingsReducer from "shared/reducers/account-settings";
 import authReducer from "shared/reducers/auth-reducer";
 import emailPendingReducer from "shared/reducers/email-pending-reducer";
+import headerReducer from "shared/reducers/header-reducer";
 import platformReducer from "shared/reducers/platform-reducer";
 import RootState from "shared/reducers/root-reducer";
 import uiReducer from "shared/reducers/ui-reducer";
 
-type State = Readonly<{
+type State = {
   programDeposit: ProgramsDepositState;
   fundDeposit: FundDepositState;
   notifications: NotificationsState;
@@ -49,7 +50,7 @@ type State = Readonly<{
   loginData: LoginState;
   passwordRestoreData: PasswordState;
   dashboard: DashboardState;
-}>;
+};
 
 export type InvestorRootState = State & RootState;
 
