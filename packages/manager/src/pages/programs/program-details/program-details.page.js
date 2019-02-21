@@ -24,8 +24,9 @@ import { MANAGER, PROGRAM } from "shared/constants/constants";
 
 import { LOGIN_ROUTE } from "../../auth/login/login.routes";
 import { fetchPortfolioEvents } from "../../dashboard/services/dashboard-events.services";
-import ClosePeriodContainer from "./close-period/close-period-container";
-import CloseProgramContainer from "./close-program/close-program-container";
+import ClosePeriodContainer from "./components/close-period/close-period-container";
+import CloseProgramContainer from "./components/close-program/close-program-container";
+import ProgramControls from "./components/program-controls/program-controls";
 import { fetchHistoryCounts } from "./service/program-details.service";
 
 export const ProgramDetailContext = React.createContext({
@@ -118,6 +119,7 @@ class ProgramDetailsPage extends PureComponent {
                 isAuthenticated={isAuthenticated}
                 redirectToLogin={service.redirectToLogin}
                 onChangeInvestmentStatus={this.changeInvestmentStatus}
+                ProgramControls={ProgramControls}
               />
             </div>
             <div className="details__section">
