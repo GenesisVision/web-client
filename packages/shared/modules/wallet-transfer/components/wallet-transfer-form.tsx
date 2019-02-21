@@ -16,7 +16,7 @@ import { formatCurrencyValue } from "shared/utils/formatter";
 import { DeepReadonly } from "utility-types";
 
 const getWalletsTo = (
-  wallets: WalletData[],
+  wallets: DeepReadonly<WalletData[]>,
   sourceId: string
 ): WalletData[] => {
   return wallets.filter(wallet => wallet.id !== sourceId);
@@ -25,7 +25,7 @@ const getWalletsTo = (
 export interface ITransferFormValues {
   sourceId: string;
   destinationId: string;
-  amount: number;
+  amount?: number;
 }
 
 type IWalletTransferForm = InjectedTranslateProps &
@@ -178,13 +178,14 @@ class WalletTransferForm extends React.Component<IWalletTransferForm> {
             sourceCurrency={selectedFromWallet.currency}
           >
             {props => {
-              const value = formatCurrencyValue(
-                props.rate * values.amount,
-                selectedToWallet.currency
-              );
-              return value ? (
-                <span>{`= ${value} ${selectedToWallet.currency}`}</span>
-              ) : null;
+              if (values.amount) {
+                const value = formatCurrencyValue(
+                  props.rate * values.amount,
+                  selectedToWallet.currency
+                );
+                return <span>{`= ${value} ${selectedToWallet.currency}`}</span>;
+              }
+              return null;
             }}
           </TransferRate>
           <div className="form-error">{errorMessage}</div>
@@ -207,14 +208,14 @@ class WalletTransferForm extends React.Component<IWalletTransferForm> {
 
 export default compose<React.FunctionComponent<IWalletTransferForm>>(
   translate(),
-  withFormik({
+  withFormik<IWalletTransferForm, ITransferFormValues>({
     displayName: "wallet-transfer",
-    mapPropsToValues: (props: { [key: string]: any }) => {
+    mapPropsToValues: props => {
       const { currentWallet, wallets } = props;
       let sourceId = currentWallet ? currentWallet.id : wallets[0].id;
       const walletTo = getWalletsTo(wallets, sourceId);
       const destinationId = walletTo[0].id;
-      return { sourceId, amount: null, destinationId };
+      return { sourceId, amount: undefined, destinationId };
     },
     handleSubmit: (values, { props }) => props.onSubmit(values)
   })
