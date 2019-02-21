@@ -4,16 +4,17 @@ import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
+import * as WalletServices from "shared/components/wallet/services/wallet.services";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
 import { checkIsModelFilled } from "../helpers/create-program.helpers";
 import * as createProgramService from "../services/create-program.service";
 import CreateProgramBroker from "./create-program-broker/create-program-broker";
 import CreateProgramSettings from "./create-program-settings/create-program-settings";
-import * as WalletServices from "shared/components/wallet/services/wallet.services";
 
 class CreateProgramContainer extends Component {
   state = {
+    minimumDepositsAmount: null,
     tab: "broker",
     choosedBroker: null,
     brokers: null,
@@ -32,6 +33,9 @@ class CreateProgramContainer extends Component {
         choosedBroker: response.brokers[0]
       });
     });
+    createProgramService
+      .fetchMinDepositsAmount()
+      .then(minimumDepositsAmount => this.setState({ minimumDepositsAmount }));
   }
 
   chooseBroker = broker => () => {
@@ -75,6 +79,7 @@ class CreateProgramContainer extends Component {
 
   render() {
     const {
+      minimumDepositsAmount,
       tab,
       choosedBroker,
       isPending,
@@ -91,7 +96,7 @@ class CreateProgramContainer extends Component {
       setLeverageChooseAvailable
     } = this;
     const { t, headerData, service, platformSettings, wallets } = this.props;
-    if (!platformSettings || !headerData) return null;
+    if (!platformSettings || !headerData || !wallets) return null;
     return (
       <div className="create-program-page__container">
         <div className="create-program-page__tabs">
@@ -119,6 +124,7 @@ class CreateProgramContainer extends Component {
             )}
             {tab === "settings" && (
               <CreateProgramSettings
+                minimumDepositsAmount={minimumDepositsAmount}
                 fetchWallets={service.fetchWallets}
                 wallets={wallets}
                 onValidateError={this.handleValidateError}

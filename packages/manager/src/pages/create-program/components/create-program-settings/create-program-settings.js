@@ -12,8 +12,14 @@ import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import DepositButtonContainer from "shared/components/deposit-button-submit/deposit-button";
 import InputImage from "shared/components/form/input-image/input-image";
+import GVCheckbox from "shared/components/gv-checkbox/gv-checkbox";
 import Hint from "shared/components/hint/hint";
+import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import Select from "shared/components/select/select";
+import { getWalletIcon } from "shared/components/wallet/components/wallet-currency";
+import rateApi from "shared/services/api-client/rate-api";
+import { convertFromCurrency } from "shared/utils/currency-converter";
+import { formatCurrencyValue } from "shared/utils/formatter";
 import { allowValuesNumberFormat } from "shared/utils/helpers";
 
 import {
@@ -24,12 +30,6 @@ import {
 import AccountTypeField from "../account-type-field/account-type-field";
 import createProgramSettingsValidationSchema from "./create-program-settings.validators";
 import ProgramDefaultImage from "./program-default-image";
-import GVCheckbox from "shared/components/gv-checkbox/gv-checkbox";
-import rateApi from "shared/services/api-client/rate-api";
-import { getWalletIcon } from "shared/components/wallet/components/wallet-currency";
-import InputAmountField from "shared/components/input-amount-field/input-amount-field";
-import { formatCurrencyValue } from "shared/utils/formatter";
-import { convertFromCurrency } from "shared/utils/currency-converter";
 
 class CreateProgramSettings extends React.Component {
   state = {
@@ -73,6 +73,7 @@ class CreateProgramSettings extends React.Component {
   };
   render() {
     const {
+      minimumDepositsAmount,
       wallets,
       t,
       navigateBack,
@@ -94,7 +95,6 @@ class CreateProgramSettings extends React.Component {
     if (!wallets) return;
     const { rate } = this.state;
     const {
-      // stopOutLevel,
       depositWalletCurrency,
       depositAmount,
       isSignalProgram,
@@ -124,7 +124,6 @@ class CreateProgramSettings extends React.Component {
     const selectedWallet = wallets.find(
       item => item.currency === (values && values.depositWalletCurrency)
     );
-
     return (
       <div className="create-program-settings">
         <form className="create-program-settings__form">
@@ -417,7 +416,7 @@ class CreateProgramSettings extends React.Component {
                   <GVFormikField
                     name="signalSuccessFee"
                     label={t(
-                      "manager.create-program-page.settings.fields.success-fee"
+                      "manager.create-program-page.settings.fields.signal-success-fee"
                     )}
                     adornment="%" //isAllowed={this.allowSuccessFee}
                     component={GVTextField}
@@ -493,13 +492,13 @@ class CreateProgramSettings extends React.Component {
               )}
             </div>
             <div className="deposit-details__available-amount">
-              {"Min. deposit"}
+              {t("manager.create-program-page.settings.fields.min-deposit")}
               <span className={"deposit-details__available-amount-value"}>
                 <NumberFormat
-                  value={50}
+                  value={minimumDepositsAmount[currency]}
                   thousandSeparator=" "
                   displayType="text"
-                  suffix={` ${values.currency}`}
+                  suffix={` ${currency}`}
                 />
               </span>
             </div>
@@ -550,7 +549,7 @@ export default translate()(
       isSignalProgram: props.broker.isSignalsAvailable,
       periodLength: "",
       successFee: "",
-      signalSuccessFee: "",
+      signalSuccessFee: props.broker.isSignalsAvailable ? "" : 0,
       leverage: "",
       title: "",
       description: "",
@@ -565,7 +564,7 @@ export default translate()(
       },
       brokerAccountTypeId: "",
       entryFee: "",
-      signalSubscriptionFee: "",
+      signalSubscriptionFee: props.broker.isSignalsAvailable ? "" : 0,
       currency: "",
       accountType: ""
     }),

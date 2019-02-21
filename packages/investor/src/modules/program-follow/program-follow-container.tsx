@@ -1,8 +1,10 @@
 import { CopyTradingAccountsList, WalletData } from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import Dialog from "shared/components/dialog/dialog";
 import { FOLLOW_TYPE } from "shared/constants/constants";
+import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import authService from "shared/services/auth-service";
 
 import FollowForm from "./follow-popup/follow-popup-form";
@@ -11,8 +13,6 @@ import {
   getSignalAccounts,
   updateAttachToSignal
 } from "./services/program-follow-service";
-import { bindActionCreators } from "redux";
-import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
 export interface IProgramFollowContainerProps {
   service: any;

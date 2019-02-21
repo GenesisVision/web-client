@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 import { DeepReadonly } from "utility-types";
 
+import dashboardCopytradingReducer from "./dashboard-copytrading.reducer";
 import dashboardEventsReducer, {
   DashboardEventsState
 } from "./dashboard-events.reducer";
@@ -18,6 +19,7 @@ import dashboardTradesHistoryReducer from "./dashboard-trades-history.reducer";
 export type DashboardState = DeepReadonly<{
   programs: any;
   funds: any;
+  copytrading: any;
   openTrades: any;
   tradesHistory: any;
   portfolioChartData: DashboardPortfolioChartState;
@@ -28,6 +30,7 @@ export type DashboardState = DeepReadonly<{
 const dashboardReducer = combineReducers<DashboardState>({
   programs: dashboardProgramsReducer,
   funds: dashboardFundsReducer,
+  copytrading: dashboardCopytradingReducer,
   openTrades: dashboardOpenTradesReducer,
   tradesHistory: dashboardTradesHistoryReducer,
   portfolioChartData: dashboardPortfolioChartReducer,

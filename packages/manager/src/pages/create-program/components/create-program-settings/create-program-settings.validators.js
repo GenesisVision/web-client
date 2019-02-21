@@ -1,4 +1,4 @@
-import { number, object, string, boolean, lazy } from "yup";
+import { boolean, lazy, number, object, string } from "yup";
 
 const createProgramSettingsValidationSchema = ({ t, ...props }) =>
   lazy(values =>

@@ -3,16 +3,20 @@ import "shared/components/dashboard/dashboard.scss";
 import "./dashboard.scss";
 
 import React from "react";
-import { translate } from "react-i18next";
+import { TranslationFunction, translate } from "react-i18next";
 import Page from "shared/components/page/page";
 import Surface from "shared/components/surface/surface";
 
-import DashboardAssetsContainer from "./components/dashboard-assets/dashboard-assets-container";
+import DashboardAssetsSection from "./components/dashboard-assets/dashboard-assets-section";
 import DashboardChartSection from "./components/dashboard-portfolio-chart-section/dashboard-portfolio-chart-section";
 import DashboardPortfolioEventsSection from "./components/dashboard-portfolio-events/dashboard-portfolio-events-section";
 import DashboardTradesSection from "./components/dashboard-trades/dashboard-trades-section";
 
-const DashboardPage = ({ t }) => {
+interface IDashboardPageProps {
+  t: TranslationFunction;
+}
+
+const DashboardPage: React.FunctionComponent<IDashboardPageProps> = ({ t }) => {
   const title = t(`${process.env.REACT_APP_PLATFORM}.dashboard-page.title`);
   return (
     <Page title={title}>
@@ -28,7 +32,7 @@ const DashboardPage = ({ t }) => {
           </div>
         </div>
         <div className="dashboard__table-section">
-          <DashboardAssetsContainer title={title} />
+          <DashboardAssetsSection title={title} />
         </div>
         <div className="dashboard__table-section">
           <DashboardTradesSection title={title} />

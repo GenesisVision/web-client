@@ -2,13 +2,13 @@ import "./dialog.scss";
 
 import classnames from "classnames";
 import { GVButton } from "gv-react-components";
+import { TranslationFunction } from "i18next";
 import React, { Fragment } from "react";
 import EventListener from "react-event-listener";
 import { translate } from "react-i18next";
 import { CloseIcon } from "shared/components/icon/close-icon";
 import Modal from "shared/components/modal/modal";
 import GVScroll from "shared/components/scroll/gvscroll";
-import { TranslationFunction } from "i18next";
 
 export interface IDialogProps {
   t: TranslationFunction;

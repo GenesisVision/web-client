@@ -981,6 +981,12 @@
         "success-cancel-request": "Request canceled successfully",
         "failure-cancel-request": "Failed to cancel request"
       },
+      "assets": {
+        "title": "Assets",
+        "programs": "Programs",
+        "funds": "Funds",
+        "copytrading": "Copytrading"
+      },
       "trades": {
         "title": "Trades",
         "open-trades": "Open trades",
@@ -1007,6 +1013,14 @@
         "value": "Value",
         "status": "Status"
       },
+      "copytrading-header": {
+        "program": "Program",
+        "start-date": "Start Date",
+        "subscribers": "Subscribers",
+        "trades": "Trades",
+        "profit": "Profit",
+        "chart": "Chart"
+      },
       "open-trades-header": {
         "manager": "Manager",
         "symbol": "Symbol",
@@ -1016,6 +1030,18 @@
         "price": "Price",
         "profit": "Current Profit",
         "close": "Close"
+      },
+      "trades-history-header": {
+        "program": "Program",
+        "manager": "Manager",
+        "direction": "Dir",
+        "open-date": "Open Date",
+        "close-date": "Close Date",
+        "symbol": "Symbol",
+        "volume": "Volume",
+        "open-price": "Open Price",
+        "close-price": "Close Price",
+        "profit": "Profit"
       },
       "get-started": {
         "title": "Get started",
@@ -1210,8 +1236,9 @@
         "investment-program-fees": "Investment program fees",
         "signal-provider-fees": "Signal provider fees",
         "fields": {
+          "min-deposit": "Min. deposit",
           "provide-signals": "Provide signals",
-          "monthly-subscription-fee": "Monthly subscription fee",
+          "monthly-subscription-fee": "Subscription fee",
           "stop-out-level": "Stop out level",
           "name": "Name",
           "name-requirements": "Requirement from 4 to 20 symbols",
@@ -1229,6 +1256,7 @@
           "upload-logo-rules": "At least 300 x 300px PNG or JPG file. The maximum file size is 2MB.",
           "entry-fee": "Entry fee",
           "success-fee": "Success fee",
+          "signal-success-fee": "Signal success fee",
           "deposit-amount": "Deposit amount",
           "available-in-wallet": "Available in wallet"
         },
@@ -1243,9 +1271,9 @@
           "stop-out-required": "Stop out is required",
           "stop-out-is-large": "Must be less than 100",
           "stop-out-is-zero": "Must be more than 0",
-          "amount-out-required": "Amount out is required",
-          "amount-out-is-large": "Must be less than available in wallet",
-          "amount-out-is-zero": "Must be more than 0",
+          "amount-required": "Amount out is required",
+          "amount-is-large": "Must be less than available in wallet",
+          "amount-is-zero": "Must be more than 0",
           "title-required": "Title is required",
           "title-is-long": "Title is too long",
           "title-is-short": "Title is too short",

@@ -11,15 +11,23 @@ export const getPortfolioChart = () => (dispatch: Dispatch) => {
   dispatch(actions.fetchPortfolioChart(authorization));
 };
 
-export const fetchAssetsCount = () => {
+export interface IDashboardAssetsCounts {
+  programsCount?: number;
+  fundsCount?: number;
+  tradesCount?: number;
+}
+
+export const fetchAssetsCount = (): Promise<IDashboardAssetsCounts> => {
   const authorization = authService.getAuthArg();
   const filtering = { take: 0 };
   return Promise.all([
     investorApi.v10InvestorProgramsGet(authorization, filtering),
-    investorApi.v10InvestorFundsGet(authorization, filtering)
-  ]).then(([programsData, fundsData]) => ({
+    investorApi.v10InvestorFundsGet(authorization, filtering),
+    investorApi.v10InvestorSignalsGet(authorization, filtering)
+  ]).then(([programsData, fundsData, copytradingData]) => ({
     programsCount: programsData.total,
-    fundsCount: fundsData.total
+    fundsCount: fundsData.total,
+    tradesCount: copytradingData.total
   }));
 };
 
@@ -32,9 +40,7 @@ export const fetchTradesCount = (): Promise<IDashboardTradesCounts> => {
   const filtering = { take: 0 };
   return Promise.all([
     signalApi.v10SignalTradesOpenGet(authorization, filtering),
-    /*investorApi.v10InvestorFundsGet(authorization, filtering)*/ Promise.resolve(
-      { total: 1 }
-    )
+    signalApi.v10SignalTradesGet(authorization, filtering)
   ]).then(([openTradesData, historyData]) => ({
     openTradesCount: openTradesData.total,
     historyCount: historyData.total
