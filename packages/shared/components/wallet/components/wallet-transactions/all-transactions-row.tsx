@@ -3,14 +3,14 @@ import moment from "moment";
 import * as React from "react";
 import { Fragment } from "react";
 import NumberFormat from "react-number-format";
+import Status from "shared/components/status/status";
+import filesService from "shared/services/file-service";
 
-import SuccessTransactionsIcon from "../../../../media/transactions/success.svg";
 import TransactionDetailsPopup from "../../../../modules/transaction-details/transaction-details-popup";
 import { formatValue } from "../../../../utils/formatter";
 import Profitability from "../../../profitability/profitability";
 import TableCell from "../../../table/components/table-cell";
 import TableRow from "../../../table/components/table-row";
-import { getWalletIcon } from "../wallet-currency";
 
 export interface ITransactionRowProps {
   transaction: MultiWalletTransaction;
@@ -20,25 +20,27 @@ export interface ITransactionRowState {
   isOpen: boolean;
 }
 
-const ConvertTransaction = () => {
+const ConvertTransaction: React.FunctionComponent<
+  ITransactionRowProps
+> = props => {
   return (
     <Fragment>
       <span className="wallet-transactions__col">
         <img
-          src={getWalletIcon("GVT")}
+          src={filesService.getFileUrl(props.transaction.logoFrom)}
           className="wallet-transactions__icon"
           alt="Icon"
         />
-        Genesis Vision
+        {props.transaction.currencyFrom}
       </span>
       <span className="wallet-transactions__back-arrow">&rarr;</span>
       <span className="wallet-transactions__col">
         <img
-          src={getWalletIcon("BTC")}
+          src={filesService.getFileUrl(props.transaction.logoTo)}
           className="wallet-transactions__icon"
           alt="Icon"
         />
-        Bitcoin
+        {props.transaction.currencyTo}
       </span>
     </Fragment>
   );
@@ -47,25 +49,14 @@ const ConvertTransaction = () => {
 const AmountConvertTransaction: React.FunctionComponent<{
   transaction: MultiWalletTransaction;
 }> = props => (
-  <Fragment>
-    <span className="wallet-transactions__col">
-      <NumberFormat
-        value={formatValue(props.transaction.amount)}
-        thousandSeparator=" "
-        displayType="text"
-        suffix=" GVT"
-      />
-    </span>
-    <span className="wallet-transactions__back-arrow">&rarr;</span>
-    <span className="wallet-transactions__col">
-      <NumberFormat
-        value={formatValue(props.transaction.amount)}
-        thousandSeparator=" "
-        displayType="text"
-        suffix=" BTC"
-      />
-    </span>
-  </Fragment>
+  <span className="wallet-transactions__col">
+    <NumberFormat
+      value={formatValue(props.transaction.amount)}
+      thousandSeparator=" "
+      displayType="text"
+      suffix=" GVT"
+    />
+  </span>
 );
 
 class AllTransactionsRow extends React.Component<
@@ -94,17 +85,15 @@ class AllTransactionsRow extends React.Component<
         <TableRow className="wallet-transactions__row" onClick={this.openPopup}>
           <TableCell className="wallet-transactions__cell wallet-transactions__cell--wallet">
             {isConvertAction ? (
-              <ConvertTransaction />
+              <ConvertTransaction transaction={transaction} />
             ) : (
               <Fragment>
                 <img
-                  src={getWalletIcon(
-                    transaction.currencyFrom || transaction.currencyTo
-                  )}
+                  src={filesService.getFileUrl(transaction.logoFrom)}
                   className="wallet-transactions__icon"
                   alt="Icon"
                 />
-                Genesis Vision
+                {transaction.currencyFrom}
               </Fragment>
             )}
           </TableCell>
@@ -112,10 +101,9 @@ class AllTransactionsRow extends React.Component<
             {moment(transaction.date).format("DD-MM-YYYY, hh:mm a")}
           </TableCell>
           <TableCell className="wallet-transactions__cell wallet-transactions__cell--type">
-            <img
-              src={SuccessTransactionsIcon}
+            <Status
+              status={transaction.status}
               className="wallet-transactions__icon"
-              alt="TransactionsIcon"
             />
           </TableCell>
           <TableCell className="wallet-transactions__cell wallet-transactions__cell--information">

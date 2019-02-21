@@ -8,7 +8,10 @@ class WalletTransferPopup extends Component {
   render() {
     return (
       <Dialog open={this.props.open} onClose={this.props.onClose}>
-        <WalletWithdrawContainer currentWallet={this.props.currentWallet} />
+        <WalletWithdrawContainer
+          currentWallet={this.props.currentWallet}
+          onClose={this.props.onClose}
+        />
       </Dialog>
     );
   }

@@ -1,6 +1,7 @@
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import Status from "shared/components/status/status";
 import filesService from "shared/services/file-service";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
@@ -71,7 +72,9 @@ const ConvertingDetails = (props: ITransactionDetailsProps) => {
           />
         </StatisticItem>
         <StatisticItem label={t(`transactions-details.status.title`)}>
-          {data.status}
+          <div className="external-transaction__status">
+            {data.status} <Status status={data.status} />
+          </div>
         </StatisticItem>
       </div>
     </React.Fragment>

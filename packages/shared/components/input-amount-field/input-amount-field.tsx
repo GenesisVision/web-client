@@ -1,5 +1,5 @@
 import { GVButton, GVFormikField } from "gv-react-components";
-import React, { Component } from "react";
+import * as React from "react";
 import { TranslationFunction, translate } from "react-i18next";
 
 import GVNumberFiled from "../gv-number-field/gv-number-field";
@@ -14,7 +14,7 @@ export interface IInputAmountFieldProps {
   autoFocus?: boolean;
 }
 
-class InputAmountField extends Component<IInputAmountFieldProps> {
+class InputAmountField extends React.Component<IInputAmountFieldProps> {
   render() {
     const {
       t,

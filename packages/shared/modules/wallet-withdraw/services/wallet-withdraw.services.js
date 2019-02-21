@@ -16,11 +16,13 @@ export const newWithdrawRequest = data => (dispatch, getState) => {
 };
 
 //@todo возможно нужно перенести в services of wallet-transfer
-export const walletTransferRequest = data => () => {
-  const { from, to, amount } = data;
+export const walletTransferRequest = data => {
+  const { sourceId, destinationId, amount } = data;
   return walletApi.v10WalletTransferPost(authService.getAuthArg(), {
-    from,
-    to,
-    amount
+    sourceId,
+    destinationId,
+    amount,
+    sourceType: "Wallet",
+    destinationType: "Wallet"
   });
 };
