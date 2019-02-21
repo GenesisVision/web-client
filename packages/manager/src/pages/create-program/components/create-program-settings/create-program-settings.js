@@ -12,8 +12,14 @@ import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import DepositButtonContainer from "shared/components/deposit-button-submit/deposit-button";
 import InputImage from "shared/components/form/input-image/input-image";
+import GVCheckbox from "shared/components/gv-checkbox/gv-checkbox";
 import Hint from "shared/components/hint/hint";
+import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import Select from "shared/components/select/select";
+import { getWalletIcon } from "shared/components/wallet/components/wallet-currency";
+import rateApi from "shared/services/api-client/rate-api";
+import { convertFromCurrency } from "shared/utils/currency-converter";
+import { formatCurrencyValue } from "shared/utils/formatter";
 import { allowValuesNumberFormat } from "shared/utils/helpers";
 
 import {
@@ -24,12 +30,6 @@ import {
 import AccountTypeField from "../account-type-field/account-type-field";
 import createProgramSettingsValidationSchema from "./create-program-settings.validators";
 import ProgramDefaultImage from "./program-default-image";
-import GVCheckbox from "shared/components/gv-checkbox/gv-checkbox";
-import rateApi from "shared/services/api-client/rate-api";
-import { getWalletIcon } from "shared/components/wallet/components/wallet-currency";
-import InputAmountField from "shared/components/input-amount-field/input-amount-field";
-import { formatCurrencyValue } from "shared/utils/formatter";
-import { convertFromCurrency } from "shared/utils/currency-converter";
 
 class CreateProgramSettings extends React.Component {
   state = {

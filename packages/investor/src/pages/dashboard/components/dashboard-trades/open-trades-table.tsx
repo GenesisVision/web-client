@@ -2,7 +2,11 @@ import { OpenSignalTrade } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import moment from "moment";
 import React, { Component, ComponentType } from "react";
-import { TranslationFunction, translate } from "react-i18next";
+import {
+  InjectedTranslateProps,
+  TranslationFunction,
+  translate
+} from "react-i18next";
 import NumberFormat from "react-number-format";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -17,7 +21,7 @@ import { composeManagerDetailsUrl } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
 import { formatPercent } from "shared/utils/formatter";
 
-import { clearDashboardAssetsTable } from "../../actions/dashboard.actions";
+import { clearDashboardTradesTable } from "../../actions/dashboard.actions";
 import { getDashboardOpenTrades } from "../../services/dashboard-trades.service";
 import { DASHBOARD_OPEN_TRADES_COLUMNS } from "./dashboard-trades.constants";
 import { dashboardOpenTradesTableSelector } from "./dashboard-trades.selectors";
@@ -26,21 +30,17 @@ interface IOpenTradesTableOwnProps {
   title: string;
 }
 
-interface IOpenTradesTableProps {
-  t: TranslationFunction;
-}
-
 interface IOpenTradesDispatchProps {
   service: {
-    clearDashboardAssetsTable(): void;
+    clearDashboardTradesTable(): void;
   };
 }
 
 class OpenTradesTable extends Component<
-  IOpenTradesTableOwnProps & IOpenTradesTableProps & IOpenTradesDispatchProps
+  IOpenTradesTableOwnProps & InjectedTranslateProps & IOpenTradesDispatchProps
 > {
   componentWillUnmount() {
-    this.props.service.clearDashboardAssetsTable();
+    this.props.service.clearDashboardTradesTable();
   }
   render() {
     const { t, title } = this.props;
@@ -115,7 +115,7 @@ class OpenTradesTable extends Component<
 }
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
-  service: bindActionCreators({ clearDashboardAssetsTable }, dispatch)
+  service: bindActionCreators({ clearDashboardTradesTable }, dispatch)
 });
 
 export default compose<ComponentType<IOpenTradesTableOwnProps>>(

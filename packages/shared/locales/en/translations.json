@@ -978,6 +978,12 @@
         "success-cancel-request": "Request canceled successfully",
         "failure-cancel-request": "Failed to cancel request"
       },
+      "assets": {
+        "title": "Assets",
+        "programs": "Programs",
+        "funds": "Funds",
+        "copytrading": "Copytrading"
+      },
       "trades": {
         "title": "Trades",
         "open-trades": "Open trades",
@@ -1004,6 +1010,14 @@
         "value": "Value",
         "status": "Status"
       },
+      "copytrading-header": {
+        "program": "Program",
+        "start-date": "Start Date",
+        "subscribers": "Subscribers",
+        "trades": "Trades",
+        "profit": "Profit",
+        "chart": "Chart"
+      },
       "open-trades-header": {
         "manager": "Manager",
         "symbol": "Symbol",
@@ -1013,6 +1027,18 @@
         "price": "Price",
         "profit": "Current Profit",
         "close": "Close"
+      },
+      "trades-history-header": {
+        "program": "Program",
+        "manager": "Manager",
+        "direction": "Dir",
+        "open-date": "Open Date",
+        "close-date": "Close Date",
+        "symbol": "Symbol",
+        "volume": "Volume",
+        "open-price": "Open Price",
+        "close-price": "Close Price",
+        "profit": "Profit"
       },
       "get-started": {
         "title": "Get started",
