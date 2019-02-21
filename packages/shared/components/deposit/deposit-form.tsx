@@ -243,9 +243,7 @@ class DepositForm extends React.Component<OwnProps, IDepositFormState> {
           )}
           <li className="dialog-list__item">
             <span className="dialog-list__title">
-              {asset === ASSET.PROGRAM
-                ? t("deposit-asset.gv-commission")
-                : t("deposit-asset.gv-commission")}
+              {t("deposit-asset.gv-commission")}
             </span>
             <span className="dialog-list__value">
               {info.gvCommission} %
