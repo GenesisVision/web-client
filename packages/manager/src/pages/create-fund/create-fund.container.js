@@ -7,6 +7,7 @@ import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 
 import CreateFundSettings from "./components/create-fund-settings/create-fund-settings";
 import * as createFundService from "./services/create-fund.service";
+import * as WalletServices from "shared/components/wallet/services/wallet.services";
 
 class CreateFundContainer extends Component {
   state = {
@@ -16,6 +17,8 @@ class CreateFundContainer extends Component {
   };
 
   componentDidMount() {
+    const { service } = this.props;
+    service.fetchWallets();
     createFundService
       .fetchAssets()
       .then(response => {
@@ -51,13 +54,16 @@ class CreateFundContainer extends Component {
       deposit
     } = this.state;
     const { navigateBack, handleSubmit } = this;
-    const { t, author, service, platformSettings } = this.props;
-    if (!platformSettings) return null;
+    const { t, author, service, platformSettings, wallets } = this.props;
+    if (!platformSettings || !wallets) return null;
     return (
       <div className="create-fund-container">
         <div>
           {!isPending && (
             <CreateFundSettings
+              fetchWallets={service.fetchWallets}
+              wallets={wallets}
+              currency={"GVT"}
               onValidateError={this.handleValidateError}
               navigateBack={navigateBack}
               updateBalance={service.fetchBalance}
@@ -84,6 +90,7 @@ class CreateFundContainer extends Component {
 const mapStateToProps = state => {
   const headerData = state.profileHeader.info.data;
   return {
+    wallets: state.wallet.info.data ? state.wallet.info.data.wallets : {},
     author: headerData ? headerData.name : "",
     platformSettings: state.platformData.data
   };
@@ -91,7 +98,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    service: bindActionCreators({ goBack, ...createFundService }, dispatch)
+    service: bindActionCreators(
+      { goBack, ...WalletServices, ...createFundService },
+      dispatch
+    )
   };
 };
 
