@@ -38,8 +38,6 @@ class ProgramDetailsDescription extends PureComponent {
       CloseProgramContainer,
       ProgramDepositContainer,
       AboutLevelsContainerComponent,
-      ProgramDetailContext,
-      AssetEditContainer,
       PROGRAM,
       ProgramWithdrawContainer,
       canInvest,
@@ -64,44 +62,15 @@ class ProgramDetailsDescription extends PureComponent {
           onFavoriteClick={onFavoriteClick}
           hasNotifications={hasNotifications}
         />
-        {ProgramControls ? (
-          <ProgramControls
-            programDescription={programDescription}
-            canCloseProgram={canCloseProgram}
-            isOwnProgram={isOwnProgram}
-            ProgramFollowContainer={ProgramFollowContainer}
-            ClosePeriodContainer={ClosePeriodContainer}
-            CloseProgramContainer={CloseProgramContainer}
-            ProgramUnfollowContainer={ProgramUnfollowContainer}
-            ProgramDepositContainer={ProgramDepositContainer}
-            ProgramDetailContext={ProgramDetailContext}
-            AssetEditContainer={AssetEditContainer}
-            PROGRAM={PROGRAM}
-            canInvest={canInvest}
-            canWithdraw={canWithdraw}
-            isAuthenticated={isAuthenticated}
-            redirectToLogin={redirectToLogin}
-          />
-        ) : (
-          <ProgramDetailsDescriptionControls
-            programDescription={programDescription}
-            canCloseProgram={canCloseProgram}
-            isOwnProgram={isOwnProgram}
-            ProgramFollowContainer={ProgramFollowContainer}
-            ClosePeriodContainer={ClosePeriodContainer}
-            CloseProgramContainer={CloseProgramContainer}
-            ProgramUnfollowContainer={ProgramUnfollowContainer}
-            ProgramDepositContainer={ProgramDepositContainer}
-            ProgramDetailContext={ProgramDetailContext}
-            AssetEditContainer={AssetEditContainer}
-            PROGRAM={PROGRAM}
-            canInvest={canInvest}
-            canWithdraw={canWithdraw}
-            isAuthenticated={isAuthenticated}
-            redirectToLogin={redirectToLogin}
-          />
-        )}
-
+        <ProgramControls
+          programDescription={programDescription}
+          canCloseProgram={canCloseProgram}
+          isOwnProgram={isOwnProgram}
+          canInvest={canInvest}
+          canWithdraw={canWithdraw}
+          isAuthenticated={isAuthenticated}
+          redirectToLogin={redirectToLogin}
+        />
         {programDescription.personalProgramDetails && status !== STATUS.ENDED && (
           <div className="program-details-description__additionally">
             <DetailsInvestment

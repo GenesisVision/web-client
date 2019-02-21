@@ -20,7 +20,8 @@ export interface IProgramFollowContainerProps {
   type: FOLLOW_TYPE;
   wallets: WalletData[];
   open: boolean;
-  onClose: () => {};
+  onClose(): void;
+  onApply(): void;
   currency: string;
   id: string;
 }
@@ -54,6 +55,7 @@ class ProgramFollowContainer extends React.Component<
       wallets,
       open,
       onClose,
+      onApply,
       currency,
       id,
       type,
@@ -98,8 +100,8 @@ const mapStateToProps = (state: any) => {
 const mapDispatchToProps = (dispatch: any) => ({
   service: bindActionCreators(
     {
-      alertError: (msg: string) => alertMessageActions.error(msg),
-      alertSuccess: (msg: string) => alertMessageActions.success(msg)
+      alertError: alertMessageActions.error,
+      alertSuccess: alertMessageActions.success
     },
     dispatch
   )

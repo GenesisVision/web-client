@@ -1,7 +1,5 @@
 import "shared/components/details/details.scss";
 
-import AssetEditContainer from "modules/asset-edit/asset-edit-container";
-import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
@@ -20,12 +18,10 @@ import {
   getProgramStatistic
 } from "shared/components/programs/program-details/services/program-details.service";
 import { MANAGER_EVENT_TYPE_FILTER_VALUES } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
-import { MANAGER, PROGRAM } from "shared/constants/constants";
+import { MANAGER } from "shared/constants/constants";
 
 import { LOGIN_ROUTE } from "../../auth/login/login.routes";
 import { fetchPortfolioEvents } from "../../dashboard/services/dashboard-events.services";
-import ClosePeriodContainer from "./components/close-period/close-period-container";
-import CloseProgramContainer from "./components/close-program/close-program-container";
 import ProgramControls from "./components/program-controls/program-controls";
 import { fetchHistoryCounts } from "./service/program-details.service";
 
@@ -107,14 +103,8 @@ class ProgramDetailsPage extends PureComponent {
             <div className="details__section">
               <ProgramDetailsDescriptionSection
                 role={MANAGER}
-                ProgramDepositContainer={ProgramDepositContainer}
                 AboutLevelsContainerComponent={AboutLevelsContainerComponent}
-                AssetEditContainer={AssetEditContainer}
-                PROGRAM={PROGRAM}
                 ProgramWithdrawContainer={ProgramWithdrawContainer}
-                ClosePeriodContainer={ClosePeriodContainer}
-                CloseProgramContainer={CloseProgramContainer}
-                ProgramDetailContext={ProgramDetailContext}
                 programDescription={this.description}
                 isAuthenticated={isAuthenticated}
                 redirectToLogin={service.redirectToLogin}

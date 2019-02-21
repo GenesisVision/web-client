@@ -1,6 +1,4 @@
 import { GVButton } from "gv-react-components";
-import AssetEditContainer from "modules/asset-edit/asset-edit-container";
-import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import React, { Component, Fragment } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -9,28 +7,19 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { PROGRAM } from "shared/constants/constants";
 import { formatValue } from "shared/utils/formatter";
 
-import { ProgramDetailContext } from "../../program-details.page";
-import ClosePeriodContainer from "../close-period/close-period-container";
-import CloseProgramContainer from "../close-program/close-program-container";
-
-enum INVESTMENT_POPUP {
-  INVEST = "INVEST",
-  CLOSE_PROGRAM = "CLOSE_PROGRAM",
-  CLOSE_PERIOD = "CLOSE_PERIOD",
-  EDIT = "EDIT"
-}
+import { ProgramDetailContext } from "../program-details.page";
 
 interface IInvestmentProgramControlsOwnProps {
   isAuthenticated: boolean;
   redirectToLogin(): void;
 
-  canCloseProgram: boolean;
-  isOwnProgram: boolean;
+  ProgramDepositContainer: any;
+  canInvest: boolean;
   programDescription: any;
 }
 
 interface IInvestmentProgramControlsState {
-  popups: { [k: string]: boolean };
+  isOpenInvestmentPopup: boolean;
 }
 
 type InvestmentProgramControlsProps = InjectedTranslateProps &
@@ -40,47 +29,34 @@ class InvestmentProgramControls extends Component<
   InvestmentProgramControlsProps,
   IInvestmentProgramControlsState
 > {
-  constructor(props: InvestmentProgramControlsProps) {
-    super(props);
-    this.state = {
-      popups: Object.keys(INVESTMENT_POPUP).reduce((curr: any, next: any) => {
-        curr[INVESTMENT_POPUP[next]] = false;
-        return curr;
-      }, {})
-    };
-  }
-  openPopup = (popupName: INVESTMENT_POPUP) => () => {
+  state = {
+    isOpenInvestmentPopup: false
+  };
+  openInvestmentPopup = () => {
     const { isAuthenticated, redirectToLogin } = this.props;
     if (isAuthenticated) {
-      let popups = { ...this.state.popups, [popupName]: true };
-
-      this.setState({ popups });
+      this.setState({ isOpenInvestmentPopup: true });
     } else {
       redirectToLogin();
     }
   };
 
-  closePopup = (popupName: INVESTMENT_POPUP) => () => {
-    let popups = { ...this.state.popups, [popupName]: false };
-    this.setState({ popups });
+  closeInvestmentPopup = () => {
+    this.setState({ isOpenInvestmentPopup: false });
   };
 
-  applyChanges = (updateDetails: any) => () => {
+  applyInvestmentChanges = (updateDetails: any) => () => {
     updateDetails();
   };
-
   render() {
-    const { popups } = this.state;
-    const { t, canCloseProgram, isOwnProgram, programDescription } = this.props;
+    const {
+      t,
+      canInvest,
+      programDescription,
+      ProgramDepositContainer
+    } = this.props;
 
-    const composeEditInfo = {
-      id: programDescription.id,
-      title: programDescription.title,
-      description: programDescription.description,
-      logo: {
-        src: programDescription.logo
-      }
-    };
+    const { isOpenInvestmentPopup } = this.state;
     return (
       <Fragment>
         <div className="program-details-description__statistic-container">
@@ -137,48 +113,17 @@ class InvestmentProgramControls extends Component<
             />
           </StatisticItem>
         </div>
-        {isOwnProgram && (
+        {canInvest && (
           <div className="program-details-description__button-container">
             <GVButton
               className="program-details-description__invest-btn"
-              onClick={this.openPopup(INVESTMENT_POPUP.INVEST)}
+              onClick={this.openInvestmentPopup}
               disabled={
                 !programDescription.personalProgramDetails ||
                 !programDescription.personalProgramDetails.canInvest
               }
             >
               {t("program-details-page.description.invest")}
-            </GVButton>
-            <GVButton
-              className="program-details-description__invest-btn"
-              color="secondary"
-              variant="outlined"
-              onClick={this.openPopup(INVESTMENT_POPUP.CLOSE_PROGRAM)}
-              disabled={
-                !programDescription.personalProgramDetails.canCloseProgram
-              }
-            >
-              {t("program-details-page.description.close-program")}
-            </GVButton>
-            <GVButton
-              className="program-details-description__invest-btn"
-              color="secondary"
-              variant="outlined"
-              onClick={this.openPopup(INVESTMENT_POPUP.CLOSE_PERIOD)}
-              disabled={
-                !programDescription.personalProgramDetails.canClosePeriod
-              }
-            >
-              {t("program-details-page.close-period.title")}
-            </GVButton>
-            <GVButton
-              className="program-details-description__invest-btn"
-              color="secondary"
-              variant="outlined"
-              onClick={this.openPopup(INVESTMENT_POPUP.EDIT)}
-              disabled={!canCloseProgram}
-            >
-              {t("program-details-page.description.edit-program")}
             </GVButton>
           </div>
         )}
@@ -187,31 +132,11 @@ class InvestmentProgramControls extends Component<
             <Fragment>
               <ProgramDepositContainer
                 currency={programDescription.currency}
-                open={popups[INVESTMENT_POPUP.INVEST]}
+                open={isOpenInvestmentPopup}
                 type={PROGRAM}
                 id={programDescription.id}
-                onClose={this.closePopup(INVESTMENT_POPUP.INVEST)}
+                onClose={this.closeInvestmentPopup}
                 onInvest={updateDetails}
-              />
-              <ClosePeriodContainer
-                open={popups[INVESTMENT_POPUP.CLOSE_PERIOD]}
-                onCancel={this.closePopup(INVESTMENT_POPUP.CLOSE_PERIOD)}
-                onApply={this.applyChanges(updateDetails)}
-                id={programDescription.id}
-              />
-              <CloseProgramContainer
-                open={popups[INVESTMENT_POPUP.CLOSE_PROGRAM]}
-                onClose={this.closePopup(INVESTMENT_POPUP.CLOSE_PROGRAM)}
-                onCancel={this.closePopup(INVESTMENT_POPUP.CLOSE_PROGRAM)}
-                onApply={this.applyChanges(updateDetails)}
-                id={programDescription.id}
-              />
-              <AssetEditContainer
-                open={popups[INVESTMENT_POPUP.EDIT]}
-                info={composeEditInfo}
-                onClose={this.closePopup(INVESTMENT_POPUP.EDIT)}
-                onApply={this.applyChanges(updateDetails)}
-                type={PROGRAM}
               />
             </Fragment>
           )}
