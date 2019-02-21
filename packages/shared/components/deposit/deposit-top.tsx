@@ -7,11 +7,13 @@ import { ASSET, ROLE } from "shared/constants/constants";
 import { ProgramInvestInfo } from "gv-api-web";
 
 export interface IDepositTop {
+  currency: string;
   info: ProgramInvestInfo;
   asset: ASSET;
   role: ROLE;
 }
 const DepositTop: React.FC<IDepositTop & InjectedTranslateProps> = ({
+  currency,
   info,
   t,
   asset,
@@ -29,7 +31,7 @@ const DepositTop: React.FC<IDepositTop & InjectedTranslateProps> = ({
             label={t("deposit-asset.program.available-to-invest")}
             big
           >
-            {formatCurrencyValue(info.availableToInvest, "GVT")} GVT
+            {formatCurrencyValue(info.availableToInvest, currency)} {currency}
           </StatisticItem>
         )}
       </div>

@@ -7,10 +7,11 @@ import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
 import {
   calculateValueOfEntryFee,
-  convertFromCurrency
+  convertFromCurrency,
+  convertToCurrency
 } from "shared/utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
-import { number, object } from "yup";
+import { number, object, lazy } from "yup";
 
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import { ASSET, ROLE } from "shared/constants/constants";
@@ -40,7 +41,8 @@ interface IDepositFormProps {
 }
 
 export interface FormValues {
-  amount: any;
+  maxAmount: number;
+  amount: number;
   walletCurrency: string;
 }
 
@@ -123,10 +125,13 @@ class DepositForm extends React.Component<OwnProps, IDepositFormState> {
         if (rate !== this.state.rate) this.setState({ rate });
       });
   };
-  setMaxAmount = (): void => {
-    const { setFieldValue, info } = this.props;
-    const { availableToInvest, availableInWallet } = info;
-    const maxFromWallet = availableInWallet;
+  getMaxAmount = () => {
+    const { setFieldValue, info, wallets, values } = this.props;
+    const { rate } = this.state;
+    const { walletCurrency } = values;
+    const { availableToInvest } = info;
+    const wallet = wallets.find(wallet => wallet.currency === walletCurrency);
+    const maxFromWallet = wallet ? wallet.available : 0;
 
     let maxAvailable = Number.MAX_SAFE_INTEGER;
     if (availableToInvest !== undefined)
@@ -134,16 +139,21 @@ class DepositForm extends React.Component<OwnProps, IDepositFormState> {
         (availableToInvest /
           (100 - info.gvCommission - this.composeEntryFee(info.entryFee))) *
         100;
-
+    const maxAvailableInWalletCurrency = convertToCurrency(maxAvailable, rate);
     const maxInvest = formatCurrencyValue(
-      Math.min(maxFromWallet, maxAvailable),
-      "GVT"
+      Math.min(maxFromWallet, maxAvailableInWalletCurrency),
+      walletCurrency
     );
-
-    setFieldValue("amount", maxInvest);
+    if (+maxInvest !== +values.maxAmount) setFieldValue("maxAmount", maxInvest);
+  };
+  setMaxAmount = (): void => {
+    const { setFieldValue, values } = this.props;
+    const { maxAmount } = values;
+    setFieldValue("amount", maxAmount);
   };
 
   render() {
+    this.getMaxAmount();
     const {
       wallets,
       t,
@@ -296,24 +306,28 @@ export default compose<React.ComponentType<IDepositFormOwnProps>>(
   withFormik({
     displayName: "invest-form",
     mapPropsToValues: () => ({
+      maxAmount: "",
       amount: "",
       walletCurrency: "GVT"
     }),
     validationSchema: (params: InjectedTranslateProps & OwnProps) => {
       const { info, t } = params;
-      return object().shape({
-        amount: number()
-          .min(
-            info.minInvestmentAmount,
-            t("deposit-asset.validation.amount-min-value", {
-              min: info.minInvestmentAmount
-            })
-          )
-          .max(
-            info.availableInWallet,
-            t("deposit-asset.validation.amount-more-than-available")
-          )
-      });
+      return lazy(values =>
+        object().shape({
+          maxAmount: number(),
+          amount: number()
+            .min(
+              info.minInvestmentAmount,
+              t("deposit-asset.validation.amount-min-value", {
+                min: info.minInvestmentAmount
+              })
+            )
+            .max(
+              values.maxAmount,
+              t("deposit-asset.validation.amount-more-than-available")
+            )
+        })
+      );
     },
     handleSubmit: (values, { props }: { props: OwnProps }) => {
       props.onSubmit(values.amount);

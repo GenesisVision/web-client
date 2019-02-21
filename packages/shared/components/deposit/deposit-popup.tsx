@@ -47,9 +47,10 @@ class DepositPopup extends React.Component<IDepositPopupProps> {
       asset,
       role
     } = this.props;
-    return info ? (
+    if (!info) return null;
+    return (
       <Fragment>
-        <DepositTop info={info} asset={asset} role={role} />
+        <DepositTop info={info} asset={asset} role={role} currency={currency} />
         <DepositForm
           wallets={wallets}
           entryFee={entryFee}
@@ -62,7 +63,7 @@ class DepositPopup extends React.Component<IDepositPopupProps> {
           onSubmit={invest}
         />
       </Fragment>
-    ) : null;
+    );
   }
 }
 
