@@ -11,7 +11,6 @@ import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import DepositButtonContainer from "shared/components/deposit-button-submit/deposit-button";
-import DepositDetailsContainer from "shared/components/deposit-details/deposit-details-container";
 import InputImage from "shared/components/form/input-image/input-image";
 import Hint from "shared/components/hint/hint";
 import { allowValuesNumberFormat } from "shared/utils/helpers";
@@ -21,8 +20,25 @@ import CreateFundSettingsAssetsComponent from "./create-fund-settings-assets-blo
 import createFundSettingsValidationSchema from "./create-fund-settings.validators";
 import ErrorNotifier from "./error-notifier/error-notifier";
 import FundDefaultImage from "./fund-default-image";
+import Select from "shared/components/select/select";
+import { getWalletIcon } from "shared/components/wallet/components/wallet-currency";
+import InputAmountField from "shared/components/input-amount-field/input-amount-field";
+import { formatCurrencyValue } from "shared/utils/formatter";
+import { convertFromCurrency } from "shared/utils/currency-converter";
+import rateApi from "shared/services/api-client/rate-api";
 
 class CreateFundSettings extends React.Component {
+  state = {
+    rate: "1",
+    anchor: null,
+    assets: this.props.assets.map(asset => {
+      return {
+        ...asset,
+        percent: 0
+      };
+    }),
+    remainder: 100
+  };
   allowEntryFee = values => {
     const { managerMaxEntryFee } = this.props.programsInfo;
 
@@ -35,15 +51,28 @@ class CreateFundSettings extends React.Component {
     return allowValuesNumberFormat({ from: 0, to: managerMaxExitFee })(values);
   };
 
-  state = {
-    anchor: null,
-    assets: this.props.assets.map(asset => {
-      return {
-        ...asset,
-        percent: 0
-      };
-    }),
-    remainder: 100
+  fetchRate = (fromCurrency, toCurrency) => {
+    rateApi.v10RateByFromByToGet(fromCurrency, toCurrency).then(rate => {
+      if (rate !== this.state.rate) this.setState({ rate });
+    });
+  };
+  onChangeDepositWallet = (name, target) => {
+    const {
+      setFieldValue,
+      values,
+      wallets,
+      fetchWallets,
+      currency
+    } = this.props;
+    const depositWalletCurrency = target.props.value;
+    setFieldValue("depositWalletCurrency", depositWalletCurrency);
+    setFieldValue(
+      "depositWalletId",
+      wallets.find(item => item.currency === (values && depositWalletCurrency))
+        .id
+    );
+    fetchWallets();
+    this.fetchRate(depositWalletCurrency, currency);
   };
   handlePercentChange = asset => e => {
     let value = +e.target.value;
@@ -96,8 +125,10 @@ class CreateFundSettings extends React.Component {
   };
   handleCloseDropdown = () => this.setState({ anchor: null });
   render() {
-    const { anchor, assets, remainder } = this.state;
+    const { anchor, assets, remainder, rate } = this.state;
     const {
+      currency,
+      wallets,
       t,
       navigateBack,
       author,
@@ -112,6 +143,7 @@ class CreateFundSettings extends React.Component {
       setSubmitting,
       isValid
     } = this.props;
+    const { depositWalletCurrency, depositAmount, description, title } = values;
 
     const imageInputError =
       errors &&
@@ -133,6 +165,9 @@ class CreateFundSettings extends React.Component {
       });
     };
 
+    const selectedWallet = wallets.find(
+      item => item.currency === (values && values.depositWalletCurrency)
+    );
     return (
       <div className="create-fund-settings">
         <form className="create-fund-settings__form">
@@ -172,15 +207,15 @@ class CreateFundSettings extends React.Component {
                     "manager.create-fund-page.settings.fields.description-requirements"
                   )}
                 </span>
-                {values.description.length > 0 && (
+                {description.length > 0 && (
                   <div className="create-fund-settings__description-chars">
                     <div className="create-fund-settings__description-chars-value">
-                      {values.description.length}
+                      {description.length}
                     </div>
                     <GVProgramPeriod
                       start={0}
                       end={500}
-                      value={values.description.length}
+                      value={description.length}
                     />
                   </div>
                 )}
@@ -208,9 +243,7 @@ class CreateFundSettings extends React.Component {
                 />
               </div>
               <div className="create-fund-settings__image-info">
-                <div className="create-fund-settings__image-title">
-                  {values.title}
-                </div>
+                <div className="create-fund-settings__image-title">{title}</div>
                 <div className="create-fund-settings__image-author">
                   {author}
                 </div>
@@ -313,11 +346,75 @@ class CreateFundSettings extends React.Component {
             <span className="create-fund-settings__block-number">04</span>
             {t("manager.create-fund-page.settings.deposit-details")}
           </div>
-          <DepositDetailsContainer
-            deposit={deposit}
-            className="create-fund-settings__fill-block create-fund-settings__fill-block--without-border"
-            titleClassName="create-fund-settings__description"
-          />
+          <div className={"deposit-details create-fund-settings__fill-block"}>
+            <div className="deposit-details__wallets">
+              <GVFormikField
+                name="depositWalletCurrency" // value={"GVT"}
+                component={GVTextField}
+                label={t("wallet-transfer.from")}
+                InputComponent={Select}
+                onChange={this.onChangeDepositWallet}
+              >
+                {wallets.map(wallet => {
+                  return (
+                    <option value={wallet.currency} key={wallet.currency}>
+                      <img
+                        src={getWalletIcon(wallet.currency)}
+                        className="wallet-transfer-popup__icon"
+                        alt={wallet.currency}
+                      />
+                      {`${wallet.title} | ${wallet.currency}`}
+                    </option>
+                  );
+                })}
+              </GVFormikField>
+            </div>
+            <div className="deposit-details__amount">
+              <InputAmountField
+                autoFocus={false}
+                name="depositAmount"
+                label={t("wallet-transfer.amount")}
+                currency={depositWalletCurrency}
+              />
+              {currency !== depositWalletCurrency && (
+                <div className="invest-popup__currency">
+                  <NumberFormat
+                    value={formatCurrencyValue(
+                      convertFromCurrency(depositAmount, rate),
+                      currency
+                    )}
+                    prefix="= "
+                    suffix={` ${currency}`}
+                    displayType="text"
+                  />
+                </div>
+              )}
+            </div>
+            <div className="deposit-details__available-amount">
+              {t("manager.create-program-page.settings.fields.min-deposit")}
+              <span className={"deposit-details__available-amount-value"}>
+                <NumberFormat
+                  value={50}
+                  thousandSeparator=" "
+                  displayType="text"
+                  suffix={` ${currency}`}
+                />
+              </span>
+            </div>
+            <div className="deposit-details__available-amount">
+              {t(
+                "manager.create-fund-page.settings.fields.available-in-wallet"
+              )}
+              <span className={"deposit-details__available-amount-value"}>
+                <NumberFormat
+                  value={selectedWallet.available}
+                  thousandSeparator=" "
+                  displayType="text"
+                  suffix={values ? ` ${depositWalletCurrency}` : " GVT"}
+                />
+              </span>
+            </div>
+          </div>
         </form>
         <div className="create-fund-settings__navigation">
           <DepositButtonContainer
@@ -355,6 +452,8 @@ export default translate()(
     enableReinitialize: true,
     mapPropsToValues: props => {
       return {
+        depositWalletCurrency: "GVT",
+        depositWalletId: props.wallets.find(item => item.currency === "GVT").id,
         assets: [],
         remainder: 100,
         exitFee: "",
