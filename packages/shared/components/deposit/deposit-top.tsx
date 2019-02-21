@@ -20,11 +20,7 @@ const DepositTop: React.FC<IDepositTop & InjectedTranslateProps> = ({
   return (
     <div className="dialog__top">
       <div className="dialog__header">
-        <h2>
-          {asset === ASSET.PROGRAM
-            ? t("deposit-asset.title")
-            : t("deposit-asset.title")}
-        </h2>
+        <h2>{t("deposit-asset.title")}</h2>
         <p>{info.title}</p>
       </div>
       <div className="dialog-field">
