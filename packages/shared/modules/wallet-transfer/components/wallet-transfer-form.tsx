@@ -32,7 +32,7 @@ type IWalletTransferForm = InjectedTranslateProps &
   FormikProps<ITransferFormValues> &
   DeepReadonly<{
     wallets: Array<WalletData>;
-    currencyWallet: WalletData;
+    currentWallet: WalletData;
   }> & {
     onSubmit(values: ITransferFormValues): void;
     disabled: boolean;
@@ -40,18 +40,18 @@ type IWalletTransferForm = InjectedTranslateProps &
   };
 
 class WalletTransferForm extends React.Component<IWalletTransferForm> {
-  onChangeSourceId = (name, target) => {
+  onChangeSourceId = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { setFieldValue, values } = this.props;
-    const currencyFromNew = target.props.value;
+    const currencyFromNew = event.target.value;
     if (currencyFromNew === values.destinationId) {
       setFieldValue("destinationId", values.sourceId);
     }
     setFieldValue("sourceId", currencyFromNew);
   };
 
-  onChangeDestinationId = (name, target) => {
+  onChangeDestinationId = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { setFieldValue } = this.props;
-    setFieldValue("destinationId", target.props.value);
+    setFieldValue("destinationId", event.target.value);
   };
 
   render() {
@@ -207,11 +207,11 @@ class WalletTransferForm extends React.Component<IWalletTransferForm> {
 
 export default compose<React.FunctionComponent<IWalletTransferForm>>(
   translate(),
-  withFormik<IWalletTransferForm, ITransferFormValues>({
+  withFormik({
     displayName: "wallet-transfer",
-    mapPropsToValues: props => {
-      const { currencyWallet, wallets } = props;
-      let sourceId = currencyWallet ? currencyWallet.id : wallets[0].id;
+    mapPropsToValues: (props: { [key: string]: any }) => {
+      const { currentWallet, wallets } = props;
+      let sourceId = currentWallet ? currentWallet.id : wallets[0].id;
       const walletTo = getWalletsTo(wallets, sourceId);
       const destinationId = walletTo[0].id;
       return { sourceId, amount: null, destinationId };
