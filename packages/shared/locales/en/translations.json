@@ -987,7 +987,13 @@
       "trades": {
         "title": "Trades",
         "open-trades": "Open trades",
-        "history": "Trades History"
+        "history": "Trades History",
+        "close-trade-confirm": {
+          "header": "Closing the trade",
+          "body": "Are you sure you want to close {{symbol}} trade in volume {{volume}}?",
+          "success-message": "The trade has been successfully closed",
+          "error-message": "An error occurred while closing the trade"
+        }
       },
       "programs-header": {
         "title": "Name",
@@ -1019,6 +1025,7 @@
         "chart": "Chart"
       },
       "open-trades-header": {
+        "program": "Program",
         "manager": "Manager",
         "symbol": "Symbol",
         "open-date": "Open Date",
@@ -1157,8 +1164,6 @@
         "value": "Value",
         "status": "Status"
       },
-      "open-trades": {},
-      "trades-history": {},
       "get-started": {
         "title": "Get started",
         "text-1": "There's no data right now.",

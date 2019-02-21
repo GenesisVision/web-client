@@ -1,5 +1,6 @@
 import "shared/components/table/components/table.scss";
 
+import classnames from "classnames";
 import React, { Component } from "react";
 import GVScroll from "shared/components/scroll/gvscroll";
 import TableBody from "shared/components/table/components/table-body";
@@ -38,6 +39,7 @@ class Table extends Component {
   render() {
     const { view } = this.state;
     const {
+      className,
       disableTitle,
       items,
       title,
@@ -82,7 +84,7 @@ class Table extends Component {
           renderTrackVertical={this.renderTrackVertical}
         >
           {view === CARDS_VIEW && (
-            <div className="table">
+            <div className={classnames("table", className)}>
               <TableBody
                 items={items}
                 className="programs-cards"
@@ -94,7 +96,7 @@ class Table extends Component {
             </div>
           )}
           {view === TABLE_VIEW && (
-            <table className="table">
+            <table className={classnames("table", className)}>
               <TableHeader
                 columns={columns}
                 sorting={sorting}
