@@ -1025,6 +1025,7 @@
         "chart": "Chart"
       },
       "open-trades-header": {
+        "program": "Program",
         "manager": "Manager",
         "symbol": "Symbol",
         "open-date": "Open Date",

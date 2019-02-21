@@ -1,6 +1,6 @@
 import "./open-trades-table.scss";
 
-import { OpenSignalTrade } from "gv-api-web";
+import { OrderOpenSignalSlaveModel } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import moment from "moment";
 import { closeTrade } from "pages/dashboard/services/dashboard.service";
@@ -10,6 +10,7 @@ import NumberFormat from "react-number-format";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Action, Dispatch, bindActionCreators, compose } from "redux";
+import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import { CloseIcon } from "shared/components/icon/close-icon";
@@ -18,7 +19,10 @@ import { TableCell } from "shared/components/table/components";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
 import { Column } from "shared/components/table/components/table.types";
-import { composeManagerDetailsUrl } from "shared/utils/compose-url";
+import {
+  composeManagerDetailsUrl,
+  composeProgramDetailsUrl
+} from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
 import { formatPercent } from "shared/utils/formatter";
 
@@ -80,8 +84,37 @@ class OpenTradesTable extends Component<
         renderHeader={(column: Column) =>
           t(`investor.dashboard-page.open-trades-header.${column.name}`)
         }
-        renderBodyRow={(signalTrade: OpenSignalTrade, updateRow: any) => (
+        renderBodyRow={(
+          signalTrade: OrderOpenSignalSlaveModel,
+          updateRow: any
+        ) => (
           <TableRow>
+            <TableCell className="programs-table__cell dashboard-programs__cell--title">
+              <div className="dashboard-programs__cell--avatar-title">
+                <Link
+                  to={{
+                    pathname: composeProgramDetailsUrl(signalTrade.program.url),
+                    state: `/ ${title}`
+                  }}
+                >
+                  <AssetAvatar
+                    url={signalTrade.program.logo}
+                    alt={signalTrade.program.title}
+                    color={signalTrade.program.color}
+                  />
+                </Link>
+                <Link
+                  to={{
+                    pathname: composeProgramDetailsUrl(signalTrade.program.url),
+                    state: `/ ${title}`
+                  }}
+                >
+                  <GVButton variant="text" color="secondary">
+                    {signalTrade.program.title}
+                  </GVButton>
+                </Link>
+              </div>
+            </TableCell>
             <TableCell className="managers-table__cell--username">
               <ProfileAvatar
                 url={signalTrade.manager.avatar}
@@ -98,7 +131,7 @@ class OpenTradesTable extends Component<
                 </GVButton>
               </Link>
             </TableCell>
-            <TableCell>{moment(signalTrade.openDate).format("lll")}</TableCell>
+            <TableCell>{moment(signalTrade.date).format("lll")}</TableCell>
             <TableCell>{signalTrade.symbol}</TableCell>
             <TableCell>
               <NumberFormat
@@ -109,7 +142,7 @@ class OpenTradesTable extends Component<
             </TableCell>
             <TableCell>
               <NumberFormat
-                value={formatValue(signalTrade.openPrice)}
+                value={formatValue(signalTrade.price)}
                 displayType="text"
                 thousandSeparator=" "
               />

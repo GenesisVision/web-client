@@ -6,6 +6,9 @@ import { composeDefaultDateRangeFilter } from "shared/components/table/component
 
 export const DASHBOARD_OPEN_TRADES_COLUMNS = [
   {
+    name: "program"
+  },
+  {
     name: "manager"
   },
   {

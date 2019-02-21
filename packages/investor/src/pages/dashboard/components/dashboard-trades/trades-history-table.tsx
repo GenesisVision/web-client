@@ -1,4 +1,4 @@
-import { OpenSignalTrade, OrderSignalSlaveModel } from "gv-api-web";
+import { OrderClosedSignalSlaveModel } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import moment from "moment";
 import React, { Component, ComponentType, Fragment } from "react";
@@ -18,7 +18,10 @@ import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
 import { Column } from "shared/components/table/components/table.types";
 import { IUpdateFilterFunc } from "shared/components/table/components/table.types";
-import { composeManagerDetailsUrl } from "shared/utils/compose-url";
+import {
+  composeManagerDetailsUrl,
+  composeProgramDetailsUrl
+} from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
 import { formatPercent } from "shared/utils/formatter";
 
@@ -66,34 +69,34 @@ class TradesHistoryTable extends Component<
         renderHeader={(column: Column) =>
           t(`investor.dashboard-page.trades-history-header.${column.name}`)
         }
-        renderBodyRow={(signalTrade: OrderSignalSlaveModel) => (
+        renderBodyRow={(signalTrade: OrderClosedSignalSlaveModel) => (
           <TableRow>
-            {/* <TableCell className="programs-table__cell dashboard-programs__cell--title">
+            <TableCell className="programs-table__cell dashboard-programs__cell--title">
               <div className="dashboard-programs__cell--avatar-title">
                 <Link
                   to={{
-                    pathname: composeProgramDetailsUrl(signalTrade.programUrl),
+                    pathname: composeProgramDetailsUrl(signalTrade.program.url),
                     state: `/ ${title}`
                   }}
                 >
                   <AssetAvatar
-                    url={signalTrade.programLogo}
-                    alt={signalTrade.programTitle}
-                    color={signalTrade.programColor}
+                    url={signalTrade.program.logo}
+                    alt={signalTrade.program.title}
+                    color={signalTrade.program.color}
                   />
                 </Link>
                 <Link
                   to={{
-                    pathname: composeProgramDetailsUrl(signalTrade.programUrl),
+                    pathname: composeProgramDetailsUrl(signalTrade.program.url),
                     state: `/ ${title}`
                   }}
                 >
                   <GVButton variant="text" color="secondary">
-                    {signalTrade.programTitle}
+                    {signalTrade.program.title}
                   </GVButton>
                 </Link>
               </div>
-            </TableCell> */}
+            </TableCell>
             <TableCell className="managers-table__cell--username">
               <ProfileAvatar
                 url={signalTrade.manager.avatar}
@@ -118,8 +121,8 @@ class TradesHistoryTable extends Component<
                 {signalTrade.direction}
               </BaseProfitability>
             </TableCell>
-            {/* <TableCell>{moment(signalTrade.openDate).format("lll")}</TableCell>
-            <TableCell>{moment(signalTrade.closeDate).format("lll")}</TableCell> */}
+            <TableCell>{moment(signalTrade.date).format("lll")}</TableCell>
+            <TableCell>{moment(signalTrade.date).format("lll")}</TableCell>
             <TableCell>{signalTrade.symbol}</TableCell>
             <TableCell>
               <NumberFormat
@@ -128,20 +131,20 @@ class TradesHistoryTable extends Component<
                 thousandSeparator=" "
               />
             </TableCell>
-            {/* <TableCell>
+            <TableCell>
               <NumberFormat
-                value={formatValue(signalTrade.openPrice)}
+                value={formatValue(signalTrade.price)}
                 displayType="text"
                 thousandSeparator=" "
               />
             </TableCell>
             <TableCell>
               <NumberFormat
-                value={formatValue(signalTrade.closePrice)}
+                value={formatValue(signalTrade.priceClose)}
                 displayType="text"
                 thousandSeparator=" "
               />
-            </TableCell> */}
+            </TableCell>
             <TableCell>
               <Profitability
                 value={+formatValue(signalTrade.profit)}
