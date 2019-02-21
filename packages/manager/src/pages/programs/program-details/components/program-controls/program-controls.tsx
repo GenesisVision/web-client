@@ -11,7 +11,6 @@ interface IProgramControlsProps {
 
   canCloseProgram: boolean;
   isOwnProgram: boolean;
-  canInvest: boolean;
   programDescription: any;
 }
 

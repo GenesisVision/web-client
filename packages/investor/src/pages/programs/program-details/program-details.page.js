@@ -106,10 +106,7 @@ class ProgramDetailsPage extends PureComponent {
           <div className="details">
             <div className="details__section">
               <ProgramDetailsDescriptionSection
-                ProgramFollowContainer={ProgramFollowContainer}
-                ProgramUnfollowContainer={ProgramUnfollowContainer}
                 toggleReinvesting={toggleReinvesting}
-                ProgramDepositContainer={ProgramDepositContainer}
                 AboutLevelsContainerComponent={AboutLevelsContainerComponent}
                 ProgramWithdrawContainer={ProgramWithdrawContainer}
                 ProgramReinvestingWidget={ProgramReinvestingWidget}

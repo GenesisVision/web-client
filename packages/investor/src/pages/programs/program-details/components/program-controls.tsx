@@ -10,8 +10,6 @@ interface IProgramControlsProps {
   isAuthenticated: boolean;
   redirectToLogin(): void;
 
-  ProgramDepositContainer: any;
-  canInvest: boolean;
   programDescription: any;
 }
 
@@ -19,13 +17,7 @@ class ProgramControls extends Component<
   IProgramControlsProps & InjectedTranslateProps
 > {
   render() {
-    const {
-      canInvest,
-      programDescription,
-      ProgramDepositContainer,
-      isAuthenticated,
-      redirectToLogin
-    } = this.props;
+    const { programDescription, isAuthenticated, redirectToLogin } = this.props;
 
     const isAvailableFollowingTrades = programDescription.isSignalProgram;
 
@@ -34,8 +26,6 @@ class ProgramControls extends Component<
         <div className="program-details-description__col">
           <InvestmentProgramControls
             programDescription={programDescription}
-            canInvest={canInvest}
-            ProgramDepositContainer={ProgramDepositContainer}
             isAuthenticated={isAuthenticated}
             redirectToLogin={redirectToLogin}
           />
