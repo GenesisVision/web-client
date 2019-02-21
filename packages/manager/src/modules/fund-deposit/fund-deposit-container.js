@@ -13,6 +13,7 @@ import {
   getDepositFundInfoById,
   investServiceInvestById
 } from "./services/fund-deposit.services";
+import { ASSET } from "shared/constants/constants";
 
 const FundDepositContainer = props => {
   const { service, id, onInvest } = props;
@@ -37,6 +38,7 @@ const FundDepositContainer = props => {
   return (
     <Dialog open={props.open} onClose={handleClose}>
       <DepositPopup
+        asset={ASSET.FUND}
         submitInfo={props.submitInfo}
         currency={props.currency}
         info={props.info.data}

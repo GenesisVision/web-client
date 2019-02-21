@@ -31,3 +31,12 @@ export enum FOLLOW_TYPE {
   CREATE = "CREATE",
   EDIT = "EDIT"
 }
+
+export enum ROLE {
+  INVESTOR = "Investor",
+  MANAGER = "Manager"
+}
+export enum ASSET {
+  PROGRAM = "PROGRAM",
+  FUND = "FUND"
+}
