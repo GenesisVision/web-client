@@ -9,9 +9,7 @@ import GVqr from "shared/components/gv-qr/gv-qr";
 import CopyIcon from "shared/components/icon/copy-icon";
 import Select from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { getWalletIcon } from "shared/components/wallet/components/wallet-currency";
-
-import filesService from "../../../services/file-service";
+import filesService from "shared/services/file-service";
 
 class WalletAddFundsForm extends Component {
   onChangeCurrency = (name, target) => {

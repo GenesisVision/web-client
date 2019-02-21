@@ -1,16 +1,12 @@
 import copy from "copy-to-clipboard";
 import * as React from "react";
-import { TranslationFunction, translate } from "react-i18next";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 
 export interface InjectedCopyProps {
   copy(message: string): void;
-}
-
-interface ITranslatable {
-  t: TranslationFunction;
 }
 
 interface ICopyProps {
@@ -24,7 +20,7 @@ interface IDispatchMap {
   error(string: string): void;
 }
 
-type IOwnProps = ITranslatable & ICopyProps & IDispatchMap;
+type IOwnProps = InjectedTranslateProps & ICopyProps & IDispatchMap;
 
 class CopyHOC extends React.Component<IOwnProps> {
   onCopy = (message: string): void => {
@@ -34,7 +30,7 @@ class CopyHOC extends React.Component<IOwnProps> {
     try {
       copy(message);
       success(sMessage);
-    } catch (error) {
+    } catch (e) {
       error(eMessage);
     }
   };
