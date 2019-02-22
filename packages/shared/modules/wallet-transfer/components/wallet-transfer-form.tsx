@@ -14,12 +14,22 @@ import filesService from "shared/services/file-service";
 import { validateFraction } from "shared/utils/formatter";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { DeepReadonly } from "utility-types";
+import { lazy, number, object } from "yup";
 
 const getWalletsTo = (
   wallets: DeepReadonly<WalletData[]>,
   sourceId: string
 ): WalletData[] => {
   return wallets.filter(wallet => wallet.id !== sourceId);
+};
+
+const getAvailableToWithdrawal = (
+  wallets: DeepReadonly<WalletData[]>,
+  currentWalletId: string
+): number => {
+  const selectedWallet =
+    wallets.find(wallet => wallet.id === currentWalletId) || ({} as WalletData);
+  return selectedWallet.available;
 };
 
 export interface ITransferFormValues {
@@ -98,6 +108,11 @@ class WalletTransferForm extends React.Component<IWalletTransferForm> {
         )
       );
     };
+
+    console.log("!dirty");
+    console.log(!dirty);
+    console.log("!isValid");
+    console.log(!isValid);
 
     return (
       <form
@@ -216,6 +231,28 @@ export default compose<React.FunctionComponent<IWalletTransferForm>>(
       const walletTo = getWalletsTo(wallets, sourceId);
       const destinationId = walletTo[0].id;
       return { sourceId, amount: undefined, destinationId };
+    },
+    validationSchema: (params: IWalletTransferForm) => {
+      return lazy(values =>
+        object().shape({
+          amount: number()
+            .required(
+              params.t(
+                "follow-program.create-account.validation.amount-required"
+              )
+            )
+            .moreThan(
+              0,
+              params.t(
+                "follow-program.create-account.validation.amount-is-zero"
+              )
+            )
+          // .max(
+          //   values.maxAmount,
+          //   t("deposit-asset.validation.amount-more-than-available")
+          // )
+        })
+      );
     },
     handleSubmit: (values, { props }) => props.onSubmit(values)
   })
