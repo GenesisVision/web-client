@@ -14,7 +14,7 @@ import filesService from "shared/services/file-service";
 import { validateFraction } from "shared/utils/formatter";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { DeepReadonly } from "utility-types";
-import { lazy, number, object, Schema } from "yup";
+import { Schema, lazy, number, object } from "yup";
 
 const getWalletsTo = (
   wallets: DeepReadonly<WalletData[]>,
@@ -86,15 +86,6 @@ class WalletTransferForm extends React.Component<IWalletTransferForm> {
 
     const availableToWithdrawalFrom = selectedFromWallet.available;
     const availableToWithdrawalTo = selectedToWallet.available;
-
-    const isAllow = (values: any) => {
-      const { floatValue, formattedValue, value, sourceId } = values;
-      return (
-        formattedValue === "" ||
-        (validateFraction(value, sourceId) &&
-          floatValue <= parseFloat(availableToWithdrawalFrom.toString()))
-      );
-    };
 
     const setMaxAmount = () => {
       setFieldValue(
@@ -176,7 +167,6 @@ class WalletTransferForm extends React.Component<IWalletTransferForm> {
               name="amount"
               label={t("wallet-transfer.amount")}
               currency={selectedFromWallet.currency}
-              isAllow={isAllow}
               setMax={setMaxAmount}
             />
           </div>
