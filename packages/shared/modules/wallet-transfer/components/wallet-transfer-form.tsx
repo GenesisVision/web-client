@@ -14,7 +14,8 @@ import filesService from "shared/services/file-service";
 import { validateFraction } from "shared/utils/formatter";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { DeepReadonly } from "utility-types";
-import { lazy, number, object } from "yup";
+import { lazy, number, object, Schema } from "yup";
+import { FormValues } from "investor-web-portal/src/modules/program-follow/follow-popup/follow-popup-create-account";
 
 const getWalletsTo = (
   wallets: DeepReadonly<WalletData[]>,
@@ -23,13 +24,13 @@ const getWalletsTo = (
   return wallets.filter(wallet => wallet.id !== sourceId);
 };
 
-const getAvailableToWithdrawal = (
+const getSelectedWallet = (
   wallets: DeepReadonly<WalletData[]>,
   currentWalletId: string
-): number => {
-  const selectedWallet =
-    wallets.find(wallet => wallet.id === currentWalletId) || ({} as WalletData);
-  return selectedWallet.available;
+): WalletData => {
+  return (
+    wallets.find(wallet => wallet.id === currentWalletId) || ({} as WalletData)
+  );
 };
 
 export interface ITransferFormValues {
@@ -80,12 +81,11 @@ class WalletTransferForm extends React.Component<IWalletTransferForm> {
     const { sourceId, destinationId } = values;
 
     const walletsTo = getWalletsTo(wallets, sourceId);
-    const selectedFromWallet =
-      wallets.find(wallet => wallet.id === sourceId) || ({} as WalletData);
+    const selectedFromWallet = getSelectedWallet(wallets, sourceId);
 
-    const selectedToWallet =
-      walletsTo.find(wallet => wallet.id === destinationId) ||
-      ({} as WalletData);
+    const selectedToWallet = getSelectedWallet(walletsTo, destinationId);
+
+    console.log(selectedToWallet);
 
     const availableToWithdrawalFrom = selectedFromWallet.available;
     const availableToWithdrawalTo = selectedToWallet.available;
@@ -233,25 +233,26 @@ export default compose<React.FunctionComponent<IWalletTransferForm>>(
       return { sourceId, amount: undefined, destinationId };
     },
     validationSchema: (params: IWalletTransferForm) => {
-      return lazy(values =>
-        object().shape({
-          amount: number()
-            .required(
-              params.t(
-                "follow-program.create-account.validation.amount-required"
+      return lazy(
+        (values: ITransferFormValues): Schema<any> =>
+          object().shape({
+            amount: number()
+              .required(
+                params.t(
+                  "follow-program.create-account.validation.amount-required"
+                )
               )
-            )
-            .moreThan(
-              0,
-              params.t(
-                "follow-program.create-account.validation.amount-is-zero"
+              .moreThan(
+                0,
+                params.t(
+                  "follow-program.create-account.validation.amount-is-zero"
+                )
               )
-            )
-          // .max(
-          //   values.maxAmount,
-          //   t("deposit-asset.validation.amount-more-than-available")
-          // )
-        })
+              .max(
+                getSelectedWallet(params.wallets, values.sourceId).available,
+                params.t("deposit-asset.validation.amount-more-than-available")
+              )
+          })
       );
     },
     handleSubmit: (values, { props }) => props.onSubmit(values)
