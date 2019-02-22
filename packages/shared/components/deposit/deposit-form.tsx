@@ -47,7 +47,7 @@ export interface FormValues {
 }
 
 interface IDepositFormState {
-  rate: string;
+  rate: number;
 }
 type OwnProps = InjectedTranslateProps &
   IDepositFormOwnProps &
@@ -57,7 +57,7 @@ type OwnProps = InjectedTranslateProps &
 
 class DepositForm extends React.Component<OwnProps, IDepositFormState> {
   state = {
-    rate: "1"
+    rate: 1
   };
   componentDidMount(): void {
     this.fetchRate({ currencyFrom: this.props.values.walletCurrency });
@@ -121,7 +121,7 @@ class DepositForm extends React.Component<OwnProps, IDepositFormState> {
         params.currencyFrom || values.walletCurrency,
         params.currencyTo || currency
       )
-      .then((rate: string) => {
+      .then((rate: number) => {
         if (rate !== this.state.rate) this.setState({ rate });
       });
   };
@@ -202,7 +202,8 @@ class DepositForm extends React.Component<OwnProps, IDepositFormState> {
           }
           big
         >
-          {formatCurrencyValue(wallet ? wallet.available : 0, "GVT")} GVT
+          {formatCurrencyValue(wallet ? wallet.available : 0, walletCurrency)}{" "}
+          {walletCurrency}
         </StatisticItem>
         <InputAmountField
           name="amount"
