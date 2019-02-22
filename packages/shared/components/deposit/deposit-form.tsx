@@ -312,7 +312,7 @@ export default compose<React.ComponentType<IDepositFormOwnProps>>(
       walletCurrency: "GVT"
     }),
     validationSchema: (params: InjectedTranslateProps & OwnProps) => {
-      const { info, t } = params;
+      const { info, t, currency } = params;
       return lazy((values: any) =>
         object().shape({
           maxAmount: number(),
@@ -320,7 +320,8 @@ export default compose<React.ComponentType<IDepositFormOwnProps>>(
             .min(
               info.minInvestmentAmount,
               t("deposit-asset.validation.amount-min-value", {
-                min: info.minInvestmentAmount
+                min: info.minInvestmentAmount,
+                currency
               })
             )
             .max(
