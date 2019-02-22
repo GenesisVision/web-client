@@ -6,11 +6,11 @@ import NumberFormat from "react-number-format";
 import Status from "shared/components/status/status";
 import filesService from "shared/services/file-service";
 
-import TransactionDetailsPopup from "../../../../modules/transaction-details/transaction-details-popup";
-import { formatValue } from "../../../../utils/formatter";
-import Profitability from "../../../profitability/profitability";
-import TableCell from "../../../table/components/table-cell";
-import TableRow from "../../../table/components/table-row";
+import TransactionDetailsPopup from "shared/modules/transaction-details/transaction-details-popup";
+import { formatValue } from "shared/utils/formatter";
+import Profitability from "shared/components/profitability/profitability";
+import TableCell from "shared/components/table/components/table-cell";
+import TableRow from "shared/components/table/components/table-row";
 
 export interface ITransactionRowProps {
   transaction: MultiWalletTransaction;
@@ -49,14 +49,25 @@ const ConvertTransaction: React.FunctionComponent<
 const AmountConvertTransaction: React.FunctionComponent<{
   transaction: MultiWalletTransaction;
 }> = props => (
-  <span className="wallet-transactions__col">
-    <NumberFormat
-      value={formatValue(props.transaction.amount)}
-      thousandSeparator=" "
-      displayType="text"
-      suffix=" GVT"
-    />
-  </span>
+  <Fragment>
+    <span className="wallet-transactions__col">
+      <NumberFormat
+        value={formatValue(props.transaction.amount)}
+        thousandSeparator=" "
+        displayType="text"
+        suffix={` ${props.transaction.currencyFrom}`}
+      />
+    </span>
+    <span className="wallet-transactions__back-arrow">&rarr;</span>
+    <span className="wallet-transactions__col">
+      <NumberFormat
+        value={formatValue(props.transaction.amountTo)}
+        thousandSeparator=" "
+        displayType="text"
+        suffix={` ${props.transaction.currencyTo}`}
+      />
+    </span>
+  </Fragment>
 );
 
 class AllTransactionsRow extends React.Component<
@@ -118,7 +129,7 @@ class AllTransactionsRow extends React.Component<
                   value={formatValue(transaction.amount)}
                   thousandSeparator=" "
                   displayType="text"
-                  suffix=" GVT"
+                  suffix={` ${transaction.currencyFrom}`}
                 />
               </Profitability>
             )}
