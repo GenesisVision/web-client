@@ -1,5 +1,5 @@
 import { MultiWalletTransaction } from "gv-api-web";
-import moment from "moment";
+import * as moment from "moment";
 import * as React from "react";
 import { Fragment } from "react";
 import NumberFormat from "react-number-format";
