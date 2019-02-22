@@ -3,9 +3,9 @@ import "./wallet-container.scss";
 import { GVTab, GVTabs } from "gv-react-components";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
+import GVScroll from "shared/components/scroll/gvscroll";
 import Surface from "shared/components/surface/surface";
 
-import GVScroll from "../../../scroll/gvscroll";
 import WalletCopytrading from "../wallet-copytrading/wallet-copytrading";
 import AllDepositsWithdrawalsRow from "../wallet-deposits-withdrawals/all-deposits-withdrawals-row";
 import WalletDepositsWithdrawals from "../wallet-deposits-withdrawals/wallet-deposits-withdrawals";
