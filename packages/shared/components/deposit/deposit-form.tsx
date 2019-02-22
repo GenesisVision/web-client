@@ -18,8 +18,8 @@ import { ASSET, ROLE } from "shared/constants/constants";
 import { ProgramInvestInfo, WalletData } from "gv-api-web";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Select from "shared/components/select/select";
-import { getWalletIcon } from "shared/components/wallet/components/wallet-currency";
 import rateApi from "shared/services/api-client/rate-api";
+import filesService from "shared/services/file-service";
 
 interface IDepositFormOwnProps {
   wallets: WalletData[];
@@ -184,7 +184,7 @@ class DepositForm extends React.Component<OwnProps, IDepositFormState> {
             return (
               <option value={wallet.currency} key={wallet.currency}>
                 <img
-                  src={getWalletIcon(wallet.currency)}
+                  src={filesService.getFileUrl(wallet.logo)}
                   className="wallet-transfer-popup__icon"
                   alt={wallet.currency}
                 />
@@ -312,7 +312,7 @@ export default compose<React.ComponentType<IDepositFormOwnProps>>(
     }),
     validationSchema: (params: InjectedTranslateProps & OwnProps) => {
       const { info, t } = params;
-      return lazy(values =>
+      return lazy((values: any) =>
         object().shape({
           maxAmount: number(),
           amount: number()

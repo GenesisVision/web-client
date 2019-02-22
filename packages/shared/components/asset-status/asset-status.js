@@ -8,6 +8,8 @@ import { STATUS } from "shared/constants/constants";
 
 import Popover from "../popover/popover";
 import AssetStatusRequests from "./asset-status-requests";
+import { compose } from "redux";
+import connect from "react-redux/es/connect/connect";
 
 const getStatusClassName = (status, className) => {
   return classnames("asset-status", className, {
@@ -67,4 +69,12 @@ class AssetStatus extends PureComponent {
   }
 }
 
-export default translate()(AssetStatus);
+const mapStateToProps = state => ({
+  role: state.profileHeader.info.data
+    ? state.profileHeader.info.data.userType
+    : null
+});
+export default compose(
+  translate(),
+  connect(mapStateToProps)
+)(AssetStatus);
