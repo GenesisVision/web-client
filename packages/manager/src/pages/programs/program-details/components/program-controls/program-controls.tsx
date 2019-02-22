@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 
 import InvestmentProgramControls from "./investment-program-controls";
+import SignalProviderControls from "./signal-provider-controls";
 
 interface IProgramControlsProps {
   isAuthenticated: boolean;
@@ -36,8 +37,6 @@ class ProgramControls extends Component<
       redirectToLogin
     } = this.props;
 
-    const isAvailableFollowingTrades = programDescription.isSignalProgram;
-
     return (
       <div className="program-details-description__controls">
         <div className="program-details-description__col">
@@ -49,9 +48,13 @@ class ProgramControls extends Component<
             redirectToLogin={redirectToLogin}
           />
         </div>
-        {isAvailableFollowingTrades ? (
+        {programDescription.canMakeSignalProvider || true ? (
           <div className="program-details-description__col program-details-description__col--small-size">
-            123
+            <SignalProviderControls
+              programDescription={programDescription}
+              isAuthenticated={isAuthenticated}
+              redirectToLogin={redirectToLogin}
+            />
           </div>
         ) : null}
       </div>
