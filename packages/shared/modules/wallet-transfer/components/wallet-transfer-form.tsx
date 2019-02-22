@@ -11,7 +11,6 @@ import Select from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import TransferRate from "shared/modules/wallet-transfer/components/transfer-rate";
 import filesService from "shared/services/file-service";
-import { validateFraction } from "shared/utils/formatter";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { DeepReadonly } from "utility-types";
 import { Schema, lazy, number, object } from "yup";
@@ -96,6 +95,8 @@ class WalletTransferForm extends React.Component<IWalletTransferForm> {
         )
       );
     };
+
+    const disableButton = disabled || !values.amount || !isValid || !dirty;
 
     return (
       <form
@@ -191,7 +192,7 @@ class WalletTransferForm extends React.Component<IWalletTransferForm> {
               type="submit"
               variant="contained"
               color="primary"
-              disabled={disabled || !isValid || !dirty}
+              disabled={disableButton}
             >
               {t("buttons.confirm")}
             </GVButton>
