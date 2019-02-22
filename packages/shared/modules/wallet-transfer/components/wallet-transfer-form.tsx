@@ -25,11 +25,8 @@ const getWalletsTo = (
 const getSelectedWallet = (
   wallets: DeepReadonly<WalletData[]>,
   currentWalletId: string
-): WalletData => {
-  return (
-    wallets.find(wallet => wallet.id === currentWalletId) || ({} as WalletData)
-  );
-};
+): WalletData =>
+  wallets.find(wallet => wallet.id === currentWalletId) || ({} as WalletData);
 
 export interface ITransferFormValues {
   sourceId: string;
