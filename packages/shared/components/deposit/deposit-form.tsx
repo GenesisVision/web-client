@@ -139,7 +139,7 @@ class DepositForm extends React.Component<OwnProps, IDepositFormState> {
         (availableToInvest /
           (100 - info.gvCommission - this.composeEntryFee(info.entryFee))) *
         100;
-    const maxAvailableInWalletCurrency = convertToCurrency(maxAvailable, rate);
+    const maxAvailableInWalletCurrency = convertToCurrency(maxAvailable, +rate);
     const maxInvest = formatCurrencyValue(
       Math.min(maxFromWallet, maxAvailableInWalletCurrency),
       walletCurrency
