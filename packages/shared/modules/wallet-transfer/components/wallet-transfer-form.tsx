@@ -11,28 +11,34 @@ import Select from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import TransferRate from "shared/modules/wallet-transfer/components/transfer-rate";
 import filesService from "shared/services/file-service";
-import { validateFraction } from "shared/utils/formatter";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { DeepReadonly } from "utility-types";
+import { Schema, lazy, number, object } from "yup";
 
 const getWalletsTo = (
-  wallets: WalletData[],
+  wallets: DeepReadonly<WalletData[]>,
   sourceId: string
 ): WalletData[] => {
   return wallets.filter(wallet => wallet.id !== sourceId);
 };
 
+const getSelectedWallet = (
+  wallets: DeepReadonly<WalletData[]>,
+  currentWalletId: string
+): WalletData =>
+  wallets.find(wallet => wallet.id === currentWalletId) || ({} as WalletData);
+
 export interface ITransferFormValues {
   sourceId: string;
   destinationId: string;
-  amount: number;
+  amount: string;
 }
 
 type IWalletTransferForm = InjectedTranslateProps &
   FormikProps<ITransferFormValues> &
   DeepReadonly<{
     wallets: Array<WalletData>;
-    currencyWallet: WalletData;
+    currentWallet: WalletData;
   }> & {
     onSubmit(values: ITransferFormValues): void;
     disabled: boolean;
@@ -40,18 +46,18 @@ type IWalletTransferForm = InjectedTranslateProps &
   };
 
 class WalletTransferForm extends React.Component<IWalletTransferForm> {
-  onChangeSourceId = (name, target) => {
+  onChangeSourceId = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { setFieldValue, values } = this.props;
-    const currencyFromNew = target.props.value;
+    const currencyFromNew = event.target.value;
     if (currencyFromNew === values.destinationId) {
       setFieldValue("destinationId", values.sourceId);
     }
     setFieldValue("sourceId", currencyFromNew);
   };
 
-  onChangeDestinationId = (name, target) => {
+  onChangeDestinationId = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { setFieldValue } = this.props;
-    setFieldValue("destinationId", target.props.value);
+    setFieldValue("destinationId", event.target.value);
   };
 
   render() {
@@ -70,24 +76,12 @@ class WalletTransferForm extends React.Component<IWalletTransferForm> {
     const { sourceId, destinationId } = values;
 
     const walletsTo = getWalletsTo(wallets, sourceId);
-    const selectedFromWallet =
-      wallets.find(wallet => wallet.id === sourceId) || ({} as WalletData);
+    const selectedFromWallet = getSelectedWallet(wallets, sourceId);
 
-    const selectedToWallet =
-      walletsTo.find(wallet => wallet.id === destinationId) ||
-      ({} as WalletData);
+    const selectedToWallet = getSelectedWallet(walletsTo, destinationId);
 
     const availableToWithdrawalFrom = selectedFromWallet.available;
     const availableToWithdrawalTo = selectedToWallet.available;
-
-    const isAllow = (values: any) => {
-      const { floatValue, formattedValue, value, sourceId } = values;
-      return (
-        formattedValue === "" ||
-        (validateFraction(value, sourceId) &&
-          floatValue <= parseFloat(availableToWithdrawalFrom.toString()))
-      );
-    };
 
     const setMaxAmount = () => {
       setFieldValue(
@@ -98,6 +92,8 @@ class WalletTransferForm extends React.Component<IWalletTransferForm> {
         )
       );
     };
+
+    const disableButton = disabled || !values.amount || !isValid || !dirty;
 
     return (
       <form
@@ -169,7 +165,6 @@ class WalletTransferForm extends React.Component<IWalletTransferForm> {
               name="amount"
               label={t("wallet-transfer.amount")}
               currency={selectedFromWallet.currency}
-              isAllow={isAllow}
               setMax={setMaxAmount}
             />
           </div>
@@ -178,13 +173,14 @@ class WalletTransferForm extends React.Component<IWalletTransferForm> {
             sourceCurrency={selectedFromWallet.currency}
           >
             {props => {
-              const value = formatCurrencyValue(
-                props.rate * values.amount,
-                selectedToWallet.currency
-              );
-              return value ? (
-                <span>{`= ${value} ${selectedToWallet.currency}`}</span>
-              ) : null;
+              if (values.amount) {
+                const value = formatCurrencyValue(
+                  props.rate * Number(values.amount),
+                  selectedToWallet.currency
+                );
+                return <span>{`= ${value} ${selectedToWallet.currency}`}</span>;
+              }
+              return null;
             }}
           </TransferRate>
           <div className="form-error">{errorMessage}</div>
@@ -193,7 +189,7 @@ class WalletTransferForm extends React.Component<IWalletTransferForm> {
               type="submit"
               variant="contained"
               color="primary"
-              disabled={disabled || !isValid || !dirty}
+              disabled={disableButton}
             >
               {t("buttons.confirm")}
             </GVButton>
@@ -210,11 +206,29 @@ export default compose<React.FunctionComponent<IWalletTransferForm>>(
   withFormik<IWalletTransferForm, ITransferFormValues>({
     displayName: "wallet-transfer",
     mapPropsToValues: props => {
-      const { currencyWallet, wallets } = props;
-      let sourceId = currencyWallet ? currencyWallet.id : wallets[0].id;
+      const { currentWallet, wallets } = props;
+      let sourceId = currentWallet ? currentWallet.id : wallets[0].id;
       const walletTo = getWalletsTo(wallets, sourceId);
       const destinationId = walletTo[0].id;
-      return { sourceId, amount: null, destinationId };
+      return { sourceId, amount: "", destinationId };
+    },
+    validationSchema: (params: IWalletTransferForm) => {
+      return lazy(
+        (values: ITransferFormValues): Schema<any> =>
+          object().shape({
+            amount: number()
+              .moreThan(
+                0,
+                params.t("wallet-transfer.validation.amount-is-zero")
+              )
+              .max(
+                getSelectedWallet(params.wallets, values.sourceId).available,
+                params.t(
+                  "wallet-transfer.validation.amount-more-than-available"
+                )
+              )
+          })
+      );
     },
     handleSubmit: (values, { props }) => props.onSubmit(values)
   })

@@ -2,13 +2,13 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 import Dialog from "shared/components/dialog/dialog";
 
-import WalletWithdrawContainer from "./components/wallet-transfer-container";
+import WalletTransferContainer from "./components/wallet-transfer-container";
 
 class WalletTransferPopup extends Component {
   render() {
     return (
       <Dialog open={this.props.open} onClose={this.props.onClose}>
-        <WalletWithdrawContainer
+        <WalletTransferContainer
           currentWallet={this.props.currentWallet}
           onClose={this.props.onClose}
         />

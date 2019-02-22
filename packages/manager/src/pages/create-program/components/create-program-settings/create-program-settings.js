@@ -16,7 +16,6 @@ import GVCheckbox from "shared/components/gv-checkbox/gv-checkbox";
 import Hint from "shared/components/hint/hint";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import Select from "shared/components/select/select";
-import { getWalletIcon } from "shared/components/wallet/components/wallet-currency";
 import rateApi from "shared/services/api-client/rate-api";
 import { convertFromCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
@@ -30,6 +29,7 @@ import {
 import AccountTypeField from "../account-type-field/account-type-field";
 import createProgramSettingsValidationSchema from "./create-program-settings.validators";
 import ProgramDefaultImage from "./program-default-image";
+import filesService from "shared/services/file-service";
 
 class CreateProgramSettings extends React.Component {
   state = {
@@ -460,7 +460,7 @@ class CreateProgramSettings extends React.Component {
                   return (
                     <option value={wallet.currency} key={wallet.currency}>
                       <img
-                        src={getWalletIcon(wallet.currency)}
+                        src={filesService.getFileUrl(wallet.logo)}
                         className="wallet-transfer-popup__icon"
                         alt={wallet.currency}
                       />

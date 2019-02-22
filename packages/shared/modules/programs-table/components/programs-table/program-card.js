@@ -54,9 +54,10 @@ class ProgramCard extends Component {
               />
             </Link>
           </div>
-          <div className="programs-cards__names">
-            <div className="programs-cards__title">
+          <div className="programs-cards__main-info">
+            <div className="programs-cards__title-wrapper">
               <Link
+                className="programs-cards__title"
                 to={{
                   pathname: composeProgramDetailsUrl(program.url),
                   state: `/ ${title}`
@@ -64,69 +65,67 @@ class ProgramCard extends Component {
               >
                 {program.title}
               </Link>
-            </div>
-            <div className="programs-cards__name">
               <Link
+                className="programs-cards__name"
                 to={{
                   pathname: composeManagerDetailsUrl(program.manager.url),
                   state: `/ ${title}`
                 }}
               >
-                <GVButton variant="text" color="primary">
-                  {program.manager.username}
-                </GVButton>
+                {program.manager.username}
               </Link>
             </div>
-            <TagProgramContainer tags={program.tags} />
-          </div>
-          <div className="programs-cards__actions">
-            <ActionsCircleIcon
-              primary={!!this.state.anchor}
-              onClick={this.handleOpenDropdown}
-            />
-            <Popover
-              horizontal="right"
-              vertical="bottom"
-              anchorEl={this.state.anchor}
-              noPadding
-              onClose={this.handleCloseDropdown}
-            >
-              <div className="popover-list">
-                <Link
-                  to={{
-                    pathname: composeProgramDetailsUrl(program.url),
-                    state: `/ ${title}`
-                  }}
-                >
-                  <GVButton
-                    variant="text"
-                    color="secondary"
-                    onClick={this.handleCloseDropdown}
+            <div className="programs-cards__actions">
+              <ActionsCircleIcon
+                primary={!!this.state.anchor}
+                onClick={this.handleOpenDropdown}
+              />
+              <Popover
+                horizontal="right"
+                vertical="bottom"
+                anchorEl={this.state.anchor}
+                noPadding
+                onClose={this.handleCloseDropdown}
+              >
+                <div className="popover-list">
+                  <Link
+                    to={{
+                      pathname: composeProgramDetailsUrl(program.url),
+                      state: `/ ${title}`
+                    }}
                   >
-                    {t("program-actions.details")}
-                  </GVButton>
-                </Link>
-                {program.personalDetails &&
-                  !program.personalDetails.isFavorite && (
                     <GVButton
                       variant="text"
                       color="secondary"
-                      onClick={handleToggleFavorite}
+                      onClick={this.handleCloseDropdown}
                     >
-                      {t("program-actions.add-to-favorites")}
+                      {t("program-actions.details")}
                     </GVButton>
-                  )}
-                {program.personalDetails && program.personalDetails.isFavorite && (
-                  <GVButton
-                    variant="text"
-                    color="secondary"
-                    onClick={handleToggleFavorite}
-                  >
-                    {t("program-actions.remove-from-favorites")}
-                  </GVButton>
-                )}
-              </div>
-            </Popover>
+                  </Link>
+                  {program.personalDetails &&
+                    !program.personalDetails.isFavorite && (
+                      <GVButton
+                        variant="text"
+                        color="secondary"
+                        onClick={handleToggleFavorite}
+                      >
+                        {t("program-actions.add-to-favorites")}
+                      </GVButton>
+                    )}
+                  {program.personalDetails &&
+                    program.personalDetails.isFavorite && (
+                      <GVButton
+                        variant="text"
+                        color="secondary"
+                        onClick={handleToggleFavorite}
+                      >
+                        {t("program-actions.remove-from-favorites")}
+                      </GVButton>
+                    )}
+                </div>
+              </Popover>
+            </div>
+            <TagProgramContainer tags={program.tags} />
           </div>
         </div>
         <div className="programs-cards__row">

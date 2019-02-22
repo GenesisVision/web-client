@@ -18,8 +18,8 @@ import { ASSET, ROLE } from "shared/constants/constants";
 import { ProgramInvestInfo, WalletData } from "gv-api-web";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Select from "shared/components/select/select";
-import { getWalletIcon } from "shared/components/wallet/components/wallet-currency";
 import rateApi from "shared/services/api-client/rate-api";
+import filesService from "shared/services/file-service";
 
 interface IDepositFormOwnProps {
   wallets: WalletData[];
@@ -47,7 +47,7 @@ export interface FormValues {
 }
 
 interface IDepositFormState {
-  rate: string;
+  rate: number;
 }
 type OwnProps = InjectedTranslateProps &
   IDepositFormOwnProps &
@@ -57,7 +57,7 @@ type OwnProps = InjectedTranslateProps &
 
 class DepositForm extends React.Component<OwnProps, IDepositFormState> {
   state = {
-    rate: "1"
+    rate: 1
   };
   componentDidMount(): void {
     this.fetchRate({ currencyFrom: this.props.values.walletCurrency });
@@ -121,7 +121,7 @@ class DepositForm extends React.Component<OwnProps, IDepositFormState> {
         params.currencyFrom || values.walletCurrency,
         params.currencyTo || currency
       )
-      .then((rate: string) => {
+      .then((rate: number) => {
         if (rate !== this.state.rate) this.setState({ rate });
       });
   };
@@ -184,7 +184,7 @@ class DepositForm extends React.Component<OwnProps, IDepositFormState> {
             return (
               <option value={wallet.currency} key={wallet.currency}>
                 <img
-                  src={getWalletIcon(wallet.currency)}
+                  src={filesService.getFileUrl(wallet.logo)}
                   className="wallet-transfer-popup__icon"
                   alt={wallet.currency}
                 />
@@ -202,7 +202,8 @@ class DepositForm extends React.Component<OwnProps, IDepositFormState> {
           }
           big
         >
-          {formatCurrencyValue(wallet ? wallet.available : 0, "GVT")} GVT
+          {formatCurrencyValue(wallet ? wallet.available : 0, walletCurrency)}{" "}
+          {walletCurrency}
         </StatisticItem>
         <InputAmountField
           name="amount"
@@ -311,15 +312,16 @@ export default compose<React.ComponentType<IDepositFormOwnProps>>(
       walletCurrency: "GVT"
     }),
     validationSchema: (params: InjectedTranslateProps & OwnProps) => {
-      const { info, t } = params;
-      return lazy(values =>
+      const { info, t, currency } = params;
+      return lazy((values: any) =>
         object().shape({
           maxAmount: number(),
           amount: number()
             .min(
               info.minInvestmentAmount,
               t("deposit-asset.validation.amount-min-value", {
-                min: info.minInvestmentAmount
+                min: info.minInvestmentAmount,
+                currency
               })
             )
             .max(

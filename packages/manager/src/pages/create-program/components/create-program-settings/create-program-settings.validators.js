@@ -1,4 +1,4 @@
-import { boolean, lazy, number, object, string } from "yup";
+import { boolean, lazy, number, object, string, mixed } from "yup";
 
 const createProgramSettingsValidationSchema = ({ t, ...props }) =>
   lazy(values =>
@@ -127,7 +127,7 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) =>
             " %"
         ),
       isSignalProgram: boolean(),
-      signalSubscriptionFee: number().when("isSignalProgram", {
+      signalSubscriptionFee: mixed().when("isSignalProgram", {
         is: true,
         then: number()
           .required(
@@ -145,10 +145,9 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) =>
             props.programsInfo.managerMaxEntryFee,
             " Monthly subscription fee must be less than  " +
               props.programsInfo.managerMaxEntryFee
-          ),
-        otherwise: number()
+          )
       }),
-      signalSuccessFee: number().when("isSignalProgram", {
+      signalSuccessFee: mixed().when("isSignalProgram", {
         is: true,
         then: number()
           .min(0.01, "Success fee must be greater than 0.01 % ")
@@ -162,8 +161,7 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) =>
             "Success fee must be less than  " +
               props.programsInfo.managerMaxSuccessFee +
               " %"
-          ),
-        otherwise: number()
+          )
       }),
       accountType: string().required(
         t(
