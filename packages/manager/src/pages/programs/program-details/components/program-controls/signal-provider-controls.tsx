@@ -2,10 +2,10 @@ import "./signal-provider-controls.scss";
 
 import { GVButton } from "gv-react-components";
 import { ProgramDetailContext } from "manager-web-portal/src/pages/programs/program-details/program-details.page";
+import ProgramMakeSignalContainer from "modules/program-make-signal/program-make-signal.container";
 import React, { Component, Fragment } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import SignalProgramInfo from "shared/components/programs/program-details/program-details-description/signal-program-info";
-import { FOLLOW_TYPE } from "shared/constants/constants";
 
 interface ISignalProviderControlOwnProps {
   isAuthenticated: boolean;
@@ -72,15 +72,13 @@ class SignalProviderControls extends Component<
         <ProgramDetailContext.Consumer>
           {({ updateDetails }: any) => (
             <Fragment>
-              {/* <ProgramFollowContainer
+              <ProgramMakeSignalContainer
                 programName={programDescription.title}
-                type={FOLLOW_TYPE.CREATE}
+                open={isOpenCreateSignalPopup}
                 id={programDescription.id}
-                open={popups[SIGNAL_POPUP.FOLLOW]}
-                currency={programDescription.currency}
-                onClose={this.closePopup(SIGNAL_POPUP.FOLLOW)}
+                onClose={this.closePopup}
                 onApply={this.applyChanges(updateDetails)}
-              /> */}
+              />
             </Fragment>
           )}
         </ProgramDetailContext.Consumer>
