@@ -22,7 +22,6 @@ class ProgramDetailsDescription extends PureComponent {
   render() {
     const {
       t,
-      role,
       status,
       isFavorite,
       canCloseProgram,
@@ -49,8 +48,7 @@ class ProgramDetailsDescription extends PureComponent {
       investmentData,
       onChangeInvestmentStatus,
       isAuthenticated,
-      redirectToLogin,
-      isReinvest
+      redirectToLogin
     } = this.props;
 
     return (
@@ -96,7 +94,6 @@ class ProgramDetailsDescription extends PureComponent {
               assetCurrency={programDescription.currency}
               onChangeInvestmentStatus={onChangeInvestmentStatus}
               asset={PROGRAM}
-              role={role}
               {...investmentData}
             />
           </div>

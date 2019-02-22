@@ -32,7 +32,6 @@ class DetailsInvestment extends PureComponent {
   render() {
     const {
       t,
-      role,
       asset,
       notice,
       WithdrawContainer,
@@ -92,7 +91,6 @@ class DetailsInvestment extends PureComponent {
             <AssetStatus
               status={status}
               id={id}
-              role={role}
               asset={asset}
               onCancel={this.handleOnCancelRequest}
             />
