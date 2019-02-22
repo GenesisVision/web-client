@@ -2,10 +2,8 @@ import { GVButton } from "gv-react-components";
 import { ProgramDetailContext } from "manager-web-portal/src/pages/programs/program-details/program-details.page";
 import React, { Component, Fragment } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
-import NumberFormat from "react-number-format";
-import StatisticItem from "shared/components/statistic-item/statistic-item";
+import SignalProgramInfo from "shared/components/programs/program-details/program-details-description/signal-program-info";
 import { FOLLOW_TYPE } from "shared/constants/constants";
-import { formatValue } from "shared/utils/formatter";
 
 import ProgramFollowContainer from "../../../../modules/program-follow/program-follow-container";
 import ProgramUnfollowContainer from "../../../../modules/program-unfollow/program-unfollow-container";
@@ -66,30 +64,7 @@ class SignalProviderControls extends Component<
     const { popups } = this.state;
     return (
       <Fragment>
-        <div className="program-details-description__statistic-container">
-          <StatisticItem
-            label={t("program-details-page.description.successFee")}
-            className="program-details-description__short-statistic-item"
-            accent
-          >
-            <NumberFormat
-              value={formatValue(programDescription.signalSuccessFee, 2)}
-              displayType="text"
-              suffix=" %"
-            />
-          </StatisticItem>
-          <StatisticItem
-            label={t("program-details-page.description.subscriptionFee")}
-            className="program-details-description__short-statistic-item"
-            accent
-          >
-            <NumberFormat
-              value={formatValue(programDescription.signalSubscriptionFee, 2)}
-              displayType="text"
-              suffix=" GVT"
-            />
-          </StatisticItem>
-        </div>
+        <SignalProgramInfo programDescription={programDescription} />
         <div className="program-details-description__button-container">
           {programDescription.personalProgramDetails.isFollowSignals ? (
             <GVButton
