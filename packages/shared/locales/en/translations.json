@@ -608,7 +608,11 @@
     "success-fee": "Success fee",
     "gv-fee": "GV Commission",
     "deposit": "Deposit",
-    "converting": "Converting",
+    "converting": {
+      "title": "Converting",
+      "from": "Written off wallet",
+      "to": "Credited to the wallet"
+    },
     "profit": "Profit program",
     "copy": {
       "error": "Copy failed",
