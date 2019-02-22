@@ -16,7 +16,7 @@ import { formatCurrencyValue } from "shared/utils/formatter";
 import { DeepReadonly } from "utility-types";
 
 const getWalletsTo = (
-  wallets: WalletData[],
+  wallets: DeepReadonly<WalletData[]>,
   sourceId: string
 ): WalletData[] => {
   return wallets.filter(wallet => wallet.id !== sourceId);
@@ -25,14 +25,14 @@ const getWalletsTo = (
 export interface ITransferFormValues {
   sourceId: string;
   destinationId: string;
-  amount: number;
+  amount?: number;
 }
 
 type IWalletTransferForm = InjectedTranslateProps &
   FormikProps<ITransferFormValues> &
   DeepReadonly<{
     wallets: Array<WalletData>;
-    currencyWallet: WalletData;
+    currentWallet: WalletData;
   }> & {
     onSubmit(values: ITransferFormValues): void;
     disabled: boolean;
@@ -40,18 +40,18 @@ type IWalletTransferForm = InjectedTranslateProps &
   };
 
 class WalletTransferForm extends React.Component<IWalletTransferForm> {
-  onChangeSourceId = (name, target) => {
+  onChangeSourceId = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { setFieldValue, values } = this.props;
-    const currencyFromNew = target.props.value;
+    const currencyFromNew = event.target.value;
     if (currencyFromNew === values.destinationId) {
       setFieldValue("destinationId", values.sourceId);
     }
     setFieldValue("sourceId", currencyFromNew);
   };
 
-  onChangeDestinationId = (name, target) => {
+  onChangeDestinationId = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { setFieldValue } = this.props;
-    setFieldValue("destinationId", target.props.value);
+    setFieldValue("destinationId", event.target.value);
   };
 
   render() {
@@ -178,13 +178,14 @@ class WalletTransferForm extends React.Component<IWalletTransferForm> {
             sourceCurrency={selectedFromWallet.currency}
           >
             {props => {
-              const value = formatCurrencyValue(
-                props.rate * values.amount,
-                selectedToWallet.currency
-              );
-              return value ? (
-                <span>{`= ${value} ${selectedToWallet.currency}`}</span>
-              ) : null;
+              if (values.amount) {
+                const value = formatCurrencyValue(
+                  props.rate * values.amount,
+                  selectedToWallet.currency
+                );
+                return <span>{`= ${value} ${selectedToWallet.currency}`}</span>;
+              }
+              return null;
             }}
           </TransferRate>
           <div className="form-error">{errorMessage}</div>
@@ -210,11 +211,11 @@ export default compose<React.FunctionComponent<IWalletTransferForm>>(
   withFormik<IWalletTransferForm, ITransferFormValues>({
     displayName: "wallet-transfer",
     mapPropsToValues: props => {
-      const { currencyWallet, wallets } = props;
-      let sourceId = currencyWallet ? currencyWallet.id : wallets[0].id;
+      const { currentWallet, wallets } = props;
+      let sourceId = currentWallet ? currentWallet.id : wallets[0].id;
       const walletTo = getWalletsTo(wallets, sourceId);
       const destinationId = walletTo[0].id;
-      return { sourceId, amount: null, destinationId };
+      return { sourceId, amount: undefined, destinationId };
     },
     handleSubmit: (values, { props }) => props.onSubmit(values)
   })
