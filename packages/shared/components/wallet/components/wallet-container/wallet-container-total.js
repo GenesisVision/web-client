@@ -11,7 +11,7 @@ import AllDepositsWithdrawalsRow from "../wallet-deposits-withdrawals/all-deposi
 import WalletDepositsWithdrawals from "../wallet-deposits-withdrawals/wallet-deposits-withdrawals";
 import { WALLET_TOTAL_DEPOSITS_WITHDRAWALS_COLUMNS } from "../wallet-deposits-withdrawals/wallet-deposits-withdrawals.constants";
 import WalletList from "../wallet-list/wallet-list";
-import AllTransactionsRow from "../wallet-transactions/all-transactions-row";
+import TransactionsRow from "../wallet-transactions/transactions-row";
 import WalletTransactions from "../wallet-transactions/wallet-transactions";
 import { WALLET_TOTAL_TRANSACTIONS_COLUMNS } from "../wallet-transactions/wallet-transactions.constants";
 
@@ -69,7 +69,7 @@ class WalletContainerTotal extends PureComponent {
             columns={WALLET_TOTAL_TRANSACTIONS_COLUMNS}
             filters={filters}
             renderBodyRow={transaction => (
-              <AllTransactionsRow transaction={transaction} />
+              <TransactionsRow transaction={transaction} />
             )}
           />
         )}

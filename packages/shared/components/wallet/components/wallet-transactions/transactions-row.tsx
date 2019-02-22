@@ -3,17 +3,17 @@ import moment from "moment";
 import * as React from "react";
 import { Fragment } from "react";
 import NumberFormat from "react-number-format";
-import Status from "shared/components/status/status";
-import filesService from "shared/services/file-service";
-
-import TransactionDetailsPopup from "shared/modules/transaction-details/transaction-details-popup";
-import { formatValue } from "shared/utils/formatter";
 import Profitability from "shared/components/profitability/profitability";
+import Status from "shared/components/status/status";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
+import TransactionDetailsPopup from "shared/modules/transaction-details/transaction-details-popup";
+import filesService from "shared/services/file-service";
+import { formatValue } from "shared/utils/formatter";
 
 export interface ITransactionRowProps {
   transaction: MultiWalletTransaction;
+  walletCurrency?: string;
 }
 
 export interface ITransactionRowState {
@@ -70,7 +70,7 @@ const AmountConvertTransaction: React.FunctionComponent<{
   </Fragment>
 );
 
-class AllTransactionsRow extends React.Component<
+class TransactionsRow extends React.Component<
   ITransactionRowProps,
   ITransactionRowState
 > {
@@ -84,7 +84,7 @@ class AllTransactionsRow extends React.Component<
     this.setState({ isOpen: false });
   };
   render() {
-    const { transaction } = this.props;
+    const { transaction, walletCurrency } = this.props;
     const isConvertAction = transaction.type === "Converting";
     return (
       <React.Fragment>
@@ -94,20 +94,22 @@ class AllTransactionsRow extends React.Component<
           onClose={this.closePopup}
         />
         <TableRow className="wallet-transactions__row" onClick={this.openPopup}>
-          <TableCell className="wallet-transactions__cell wallet-transactions__cell--wallet">
-            {isConvertAction ? (
-              <ConvertTransaction transaction={transaction} />
-            ) : (
-              <Fragment>
-                <img
-                  src={filesService.getFileUrl(transaction.logoFrom)}
-                  className="wallet-transactions__icon"
-                  alt="Icon"
-                />
-                {transaction.currencyFrom}
-              </Fragment>
-            )}
-          </TableCell>
+          {!walletCurrency && (
+            <TableCell className="wallet-transactions__cell wallet-transactions__cell--wallet">
+              {isConvertAction ? (
+                <ConvertTransaction transaction={transaction} />
+              ) : (
+                <Fragment>
+                  <img
+                    src={filesService.getFileUrl(transaction.logoFrom)}
+                    className="wallet-transactions__icon"
+                    alt="Icon"
+                  />
+                  {transaction.currencyFrom}
+                </Fragment>
+              )}
+            </TableCell>
+          )}
           <TableCell className="wallet-transactions__cell wallet-transactions__cell--date">
             {moment(transaction.date).format("DD-MM-YYYY, hh:mm a")}
           </TableCell>
@@ -140,4 +142,4 @@ class AllTransactionsRow extends React.Component<
   }
 }
 
-export default AllTransactionsRow;
+export default TransactionsRow;
