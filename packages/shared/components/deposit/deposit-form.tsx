@@ -202,7 +202,8 @@ class DepositForm extends React.Component<OwnProps, IDepositFormState> {
           }
           big
         >
-          {formatCurrencyValue(wallet ? wallet.available : 0, "GVT")} GVT
+          {formatCurrencyValue(wallet ? wallet.available : 0, walletCurrency)}{" "}
+          {walletCurrency}
         </StatisticItem>
         <InputAmountField
           name="amount"
