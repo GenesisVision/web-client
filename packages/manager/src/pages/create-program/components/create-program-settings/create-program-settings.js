@@ -543,7 +543,7 @@ export default translate()(
   withFormik({
     displayName: "CreateProgramSettingsForm",
     mapPropsToValues: props => ({
-      stopOutLevel: "",
+      stopOutLevel: "100",
       depositWalletCurrency: "GVT",
       depositWalletId: props.wallets.find(item => item.currency === "GVT").id,
       isSignalProgram: props.broker.isSignalsAvailable,
