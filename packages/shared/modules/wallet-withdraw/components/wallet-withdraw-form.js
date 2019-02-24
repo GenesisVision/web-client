@@ -135,7 +135,7 @@ class WalletWithdrawForm extends Component {
               </span>
               <span className="dialog-list__value">
                 <NumberFormat
-                  value={formatValue(willGet)}
+                  value={formatCurrencyValue(willGet, currency)}
                   suffix={` ${currency}`}
                   displayType="text"
                 />
@@ -147,7 +147,7 @@ class WalletWithdrawForm extends Component {
               </span>
               <span className="dialog-list__value">
                 <NumberFormat
-                  value={formatValue(commission)}
+                  value={formatCurrencyValue(commission, currency)}
                   suffix={` ${currency}`}
                   displayType="text"
                 />
