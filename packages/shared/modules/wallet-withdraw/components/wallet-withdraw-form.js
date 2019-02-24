@@ -23,6 +23,7 @@ class WalletWithdrawForm extends Component {
   onChangeCurrency = (name, target) => {
     const { setFieldValue } = this.props;
     setFieldValue("currency", target.props.value);
+    setFieldValue("amount", "");
   };
 
   render() {
