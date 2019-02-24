@@ -41,24 +41,19 @@ interface IDepositFormProps {
 }
 
 export interface FormValues {
+  rate: number;
   maxAmount: number;
   amount: number;
   walletCurrency: string;
 }
 
-interface IDepositFormState {
-  rate: number;
-}
 type OwnProps = InjectedTranslateProps &
   IDepositFormOwnProps &
   IDepositFormProps &
   FormikActions<FormValues> &
   FormikProps<FormValues>;
 
-class DepositForm extends React.Component<OwnProps, IDepositFormState> {
-  state = {
-    rate: 1
-  };
+class DepositForm extends React.Component<OwnProps> {
   componentDidMount(): void {
     this.fetchRate({ currencyFrom: this.props.values.walletCurrency });
   }
@@ -115,20 +110,19 @@ class DepositForm extends React.Component<OwnProps, IDepositFormState> {
     currencyFrom?: string;
     currencyTo?: string;
   }): void => {
-    const { values, currency } = this.props;
+    const { values, currency, setFieldValue } = this.props;
     rateApi
       .v10RateByFromByToGet(
         params.currencyFrom || values.walletCurrency,
         params.currencyTo || currency
       )
       .then((rate: number) => {
-        if (rate !== this.state.rate) this.setState({ rate });
+        setFieldValue("rate", rate);
       });
   };
   getMaxAmount = () => {
     const { setFieldValue, info, wallets, values } = this.props;
-    const { rate } = this.state;
-    const { walletCurrency } = values;
+    const { walletCurrency, rate } = values;
     const { availableToInvest } = info;
     const wallet = wallets.find(wallet => wallet.currency === walletCurrency);
     const maxFromWallet = wallet ? wallet.available : 0;
@@ -168,8 +162,7 @@ class DepositForm extends React.Component<OwnProps, IDepositFormState> {
       handleSubmit,
       errorMessage
     } = this.props;
-    const { rate } = this.state;
-    const { walletCurrency } = values;
+    const { walletCurrency, rate } = values;
     const wallet = wallets.find(wallet => wallet.currency === walletCurrency);
     return (
       <form className="dialog__bottom" id="invest-form" onSubmit={handleSubmit}>
@@ -193,15 +186,7 @@ class DepositForm extends React.Component<OwnProps, IDepositFormState> {
             );
           })}
         </GVFormikField>
-        <StatisticItem
-          label={
-            t("deposit-asset.available-in-wallet")
-            /*program
-              ? t("deposit-asset.available-in-wallet")
-              : t("deposit-asset.fund.available-to-invest")*/
-          }
-          big
-        >
+        <StatisticItem label={t("deposit-asset.available-in-wallet")} big>
           {formatCurrencyValue(wallet ? wallet.available : 0, walletCurrency)}{" "}
           {walletCurrency}
         </StatisticItem>
@@ -307,6 +292,7 @@ export default compose<React.ComponentType<IDepositFormOwnProps>>(
   withFormik({
     displayName: "invest-form",
     mapPropsToValues: () => ({
+      rate: 1,
       maxAmount: "",
       amount: "",
       walletCurrency: "GVT"
@@ -315,10 +301,14 @@ export default compose<React.ComponentType<IDepositFormOwnProps>>(
       const { info, t, currency } = params;
       return lazy((values: any) =>
         object().shape({
+          rate: number(),
           maxAmount: number(),
           amount: number()
             .min(
-              info.minInvestmentAmount,
+              +formatCurrencyValue(
+                convertToCurrency(info.minInvestmentAmount, values.rate),
+                values.walletCurrency
+              ),
               t("deposit-asset.validation.amount-min-value", {
                 min: info.minInvestmentAmount,
                 currency
