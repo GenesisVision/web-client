@@ -73,11 +73,6 @@ class WalletAddFundsForm extends Component {
             &nbsp;
             {t("buttons.copy")}
           </GVButton>
-          {currency !== "GVT" && currency !== null && (
-            <div className="dialog__info">
-              {t("wallet-add-funds.disclaimer", { currency })}
-            </div>
-          )}
         </div>
       </form>
     );
