@@ -23,6 +23,7 @@ class WalletWithdrawForm extends Component {
   onChangeCurrency = (name, target) => {
     const { setFieldValue } = this.props;
     setFieldValue("currency", target.props.value);
+    setFieldValue("amount", "");
   };
 
   render() {
@@ -135,7 +136,7 @@ class WalletWithdrawForm extends Component {
               </span>
               <span className="dialog-list__value">
                 <NumberFormat
-                  value={formatValue(willGet)}
+                  value={formatCurrencyValue(willGet, currency)}
                   suffix={` ${currency}`}
                   displayType="text"
                 />
@@ -147,7 +148,7 @@ class WalletWithdrawForm extends Component {
               </span>
               <span className="dialog-list__value">
                 <NumberFormat
-                  value={formatValue(commission)}
+                  value={formatCurrencyValue(commission, currency)}
                   suffix={` ${currency}`}
                   displayType="text"
                 />
@@ -165,9 +166,6 @@ class WalletWithdrawForm extends Component {
               {t("buttons.confirm")}
             </GVButton>
           </div>
-          {currency !== "GVT" && currency !== null && (
-            <div className="dialog__info">{t("wallet-withdraw.info")}</div>
-          )}
         </div>
       </form>
     );
