@@ -42,7 +42,7 @@ const ProgramsTable = ({
       updatePaging={updatePaging}
       columns={columns || PROGRAMS_COLUMNS}
       items={data.programs}
-      isPending={isPending || data.isPending}
+      // isPending={isPending || data.isPending}
       renderFilters={renderFilters}
       renderHeader={column => (
         <ProgramTableHeaderCell
