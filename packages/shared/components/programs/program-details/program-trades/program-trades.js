@@ -83,10 +83,7 @@ class ProgramTrades extends Component {
               />
             </TableCell>
             <TableCell className="details-trades__cell program-details-trades__cell--profit">
-              <Profitability
-                value={+formatValue(trade.profit, 8)}
-                prefix="sign"
-              >
+              <Profitability value={+trade.profit} prefix="sign">
                 <NumberFormat
                   value={formatValue(trade.profit, 8, true)}
                   thousandSeparator=" "
