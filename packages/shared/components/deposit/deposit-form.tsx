@@ -304,6 +304,7 @@ export default compose<React.ComponentType<IDepositFormOwnProps>>(
           rate: number(),
           maxAmount: number(),
           amount: number()
+            .required()
             .min(
               +formatCurrencyValue(
                 convertToCurrency(info.minInvestmentAmount, values.rate),
