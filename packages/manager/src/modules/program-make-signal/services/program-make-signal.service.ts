@@ -1,6 +1,6 @@
-import { Action, Dispatch } from "redux";
+import { Dispatch } from "redux";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
-import signalApi from "shared/services/api-client/signal-api";
+import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
 
 export interface IProgramMakeSignalRequest {
@@ -20,7 +20,7 @@ export const programMakeSignal = (
     successFee: successFee,
     subscriptionFee: subscriptionFee
   };
-  return signalApi
+  return managerApi
     .v10ManagerSignalCreatePost(authorization, requestData)
     .then(() => {
       dispatch(

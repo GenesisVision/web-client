@@ -1,10 +1,9 @@
 import { FormikProps, withFormik } from "formik";
-import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
+import { GVButton } from "gv-react-components";
+import SignalsFeeFormPartial from "pages/create-program/components/create-program-settings/signals-fee-form.partial";
 import React, { ComponentType, FunctionComponent } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
-import NumberFormat from "react-number-format";
 import { compose } from "redux";
-import Hint from "shared/components/hint/hint";
 
 import { makeSignalValidationSchema } from "./program-make-signal.validators";
 
@@ -17,9 +16,14 @@ interface IMakeSignalFormOwnProps {
   ): void;
 }
 
+enum FORM_FIELDS {
+  successFee = "successFee",
+  subscriptionFee = "subscriptionFee"
+}
+
 export interface IMakeSignalFormValues {
-  successFee: string;
-  subscriptionFee: string;
+  [FORM_FIELDS.successFee]: string;
+  [FORM_FIELDS.subscriptionFee]: string;
 }
 
 type MakeSignalFormProps = InjectedTranslateProps &
@@ -36,72 +40,16 @@ const MakeSignalForm: FunctionComponent<MakeSignalFormProps> = ({
     <form id="makeSignalForm" onSubmit={handleSubmit}>
       <div className="dialog__top">
         <div className="dialog__header">
-          <h2>{t("manager.program-make-signal.title")}</h2>
+          <h2>{t("program-details-page.description.signal-provider.title")}</h2>
           <p>{programName}</p>
         </div>
-        ---
-        <div className="create-program-settings__row">
-          <div className="create-program-settings__row-title">
-            {t("manager.create-program-page.settings.signal-provider-fees")}
-          </div>
-          <div className="create-program-settings__fee">
-            <GVFormikField
-              name="signalSubscriptionFee"
-              label={t(
-                "manager.create-program-page.settings.fields.monthly-subscription-fee"
-              )}
-              adornment="GVT"
-              component={GVTextField}
-              InputComponent={NumberFormat}
-              autoComplete="off"
-              decimalScale={4}
-            />
-            <Hint
-              content={t(
-                "manager.create-program-page.settings.hints.entry-fee"
-              )}
-              className="create-program-settings__fee-hint"
-              vertical={"bottom"}
-              tooltipContent={`
-                    ${t(
-                      "manager.create-program-page.settings.hints.entry-fee-description",
-                      {
-                        maxFee: 10 //programsInfo.managerMaxEntryFee
-                      }
-                    )}. ${t(
-                "manager.create-program-page.settings.hints.entry-fee-levels"
-              )}
-                    `}
-            />
-          </div>
-          <div className="create-program-settings__fee">
-            <GVFormikField
-              name="signalSuccessFee"
-              label={t(
-                "manager.create-program-page.settings.fields.signal-success-fee"
-              )}
-              adornment="%"
-              component={GVTextField}
-              InputComponent={NumberFormat}
-              autoComplete="off"
-              decimalScale={4}
-            />
-            <Hint
-              content={t(
-                "manager.create-program-page.settings.hints.success-fee"
-              )}
-              className="create-program-settings__fee-hint"
-              vertical={"bottom"}
-              tooltipContent={t(
-                "manager.create-program-page.settings.hints.success-fee-description",
-                {
-                  maxFee: 10 //programsInfo.managerMaxSuccessFee
-                }
-              )}
-            />
-          </div>
-        </div>
-        ---
+        <SignalsFeeFormPartial
+          subscriptionFeeFieldName={FORM_FIELDS.subscriptionFee}
+          successFeeFieldName={FORM_FIELDS.successFee}
+          maxEntryFee={100}
+          maxSuccessFee={50}
+          hasSubscriptionFeeAutofocus={true}
+        />
       </div>
       <div className="dialog__bottom">
         <div className="form-error">{errorMessage}</div>
@@ -111,7 +59,7 @@ const MakeSignalForm: FunctionComponent<MakeSignalFormProps> = ({
             id="programMakeSignalSubmit"
             disabled={!dirty}
           >
-            {t("manager.edit-program.confirm")}
+            {t("buttons.confirm")}
           </GVButton>
         </div>
       </div>
@@ -124,8 +72,8 @@ export default compose<ComponentType<IMakeSignalFormOwnProps>>(
   withFormik<IMakeSignalFormOwnProps, IMakeSignalFormValues>({
     displayName: "make-signal-form",
     mapPropsToValues: () => ({
-      successFee: "",
-      subscriptionFee: ""
+      [FORM_FIELDS.successFee]: "",
+      [FORM_FIELDS.subscriptionFee]: ""
     }),
     validationSchema: makeSignalValidationSchema,
     handleSubmit: (values, { props, setSubmitting }) => {
