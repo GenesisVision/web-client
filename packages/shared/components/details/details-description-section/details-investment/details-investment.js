@@ -9,7 +9,11 @@ import Profitability from "shared/components/profitability/profitability";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Surface from "shared/components/surface/surface";
 import { PROGRAM } from "shared/constants/constants";
-import { formatValue, roundPercents } from "shared/utils/formatter";
+import {
+  formatCurrencyValue,
+  formatValue,
+  roundPercents
+} from "shared/utils/formatter";
 
 class DetailsInvestment extends PureComponent {
   state = {
@@ -62,7 +66,7 @@ class DetailsInvestment extends PureComponent {
             label={t("fund-details-page.description.value")}
           >
             <NumberFormat
-              value={formatValue(value)}
+              value={formatCurrencyValue(value, balanceCurrency)}
               suffix={` ${balanceCurrency}`}
               displayType="text"
             />
@@ -72,9 +76,12 @@ class DetailsInvestment extends PureComponent {
               accent
               label={t("fund-details-page.description.profit")}
             >
-              <Profitability value={value - invested} prefix="sign">
+              <Profitability
+                value={formatCurrencyValue(value - invested, balanceCurrency)}
+                prefix="sign"
+              >
                 <NumberFormat
-                  value={formatValue(value - invested, null, true)}
+                  value={formatCurrencyValue(value - invested, balanceCurrency)}
                   suffix={` ${balanceCurrency}`}
                   displayType="text"
                 />
@@ -101,7 +108,7 @@ class DetailsInvestment extends PureComponent {
               label={t("fund-details-page.description.pending-input")}
             >
               <NumberFormat
-                value={formatValue(pendingInput)}
+                value={formatCurrencyValue(pendingInput, balanceCurrency)}
                 suffix={` ${balanceCurrency}`}
                 displayType="text"
               />
@@ -121,7 +128,7 @@ class DetailsInvestment extends PureComponent {
               label={t("fund-details-page.description.pending-output")}
             >
               <NumberFormat
-                value={formatValue(pendingOutput)}
+                value={formatCurrencyValue(pendingOutput, balanceCurrency)}
                 suffix={` ${balanceCurrency}`}
                 displayType="text"
               />
