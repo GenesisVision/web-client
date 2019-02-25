@@ -22,11 +22,12 @@ const FundDepositContainer = props => {
     props.service.clearDepositFundInfo();
     props.service.clearInvestSubmitFund();
   };
-  const handleInvest = amount => {
+  const handleInvest = (amount, opts) => {
     service
       .investServiceInvestById({
         id,
-        amount
+        amount,
+        opts
       })
       .then(() => {
         handleClose();
