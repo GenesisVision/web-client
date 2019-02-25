@@ -1,0 +1,217 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
+
+$small-padding: 20px;
+$title-size: 32px;
+$subtitle-size: 17.5px;
+$large-font-size: 16px;
+$middle-font-size: 14px;
+$small-font-size: 12px;
+$border-radius: 5px;
+$mobile-padding-divider: 3;
+$mobile-text-divider: 1.5;
+$mobile-title-divider: 2;
+
+.gvt-fees {
+  max-width: 1100px;
+  margin: $padding-small/2;
+
+  * {
+    box-sizing: border-box;
+  }
+  &__container {
+    @include vertical-paddings($padding-large);
+    @include horizontal-paddings($padding-large);
+    background: $panel-background-color;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+  }
+  &__description {
+    font-size: $large-font-size/$mobile-title-divider;
+    color: $label-color;
+  }
+  &__row {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  &__left-block {
+    line-height: 2;
+    letter-spacing: 0.2px;
+  }
+  &__paragraph {
+    & b {
+      font-weight: 600;
+    }
+    &--mute {
+      padding-top: $padding-small/$mobile-padding-divider;
+      padding-bottom: $padding-large/$mobile-padding-divider;
+      color: $label-color;
+    }
+  }
+  &__subtitle {
+    @include adaptive-padding(bottom, $small-padding);
+  }
+  &__list {
+    @include adaptive-padding(right, $padding-small);
+    @include adaptive-padding(bottom, $padding-small);
+    @include font-size($font-size-paragraph);
+    margin: 0;
+    color: $label-color;
+    counter-reset: myCounter;
+  }
+  &__list-item {
+    list-style: none;
+    position: relative;
+    &:before {
+      counter-increment: myCounter;
+      content: counter(myCounter) ".";
+      color: $text-light-color;
+      position: absolute;
+      left: -$padding-small/2;
+    }
+  }
+  &__table {
+    padding-bottom: $padding-big/$mobile-padding-divider;
+    font-size: $middle-font-size/$mobile-text-divider;
+    table {
+      border-spacing: 0;
+      width: 100%;
+      th {
+        font-weight: 200;
+        color: $label-color;
+        text-align: left;
+      }
+      tbody {
+        tr {
+          background: rgba(232, 239, 243, 0.04);
+        }
+        tr:nth-child(even) {
+          background: none;
+        }
+      }
+      .total-profit {
+        text-align: right;
+      }
+    }
+  }
+  &__right-block {
+    padding: $padding-small/$mobile-title-divider;
+    background: rgba(232, 239, 243, 0.04);
+    width: 100%;
+    border-radius: $border-radius 0 0 $border-radius;
+  }
+  &__limit {
+    @include vertical-paddings($small-padding);
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    .statistics-item {
+      padding-bottom: 0;
+    }
+  }
+  &__currency {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: $small-padding 0;
+  }
+  &__select {
+    padding: 0 $small-padding;
+  }
+  &__mute-title {
+    color: $label-color;
+    font-size: $small-font-size/$mobile-text-divider;
+    letter-spacing: 0.4px;
+    white-space: nowrap;
+    padding-bottom: 5px;
+  }
+  &__values {
+    padding: 0 $small-padding;
+  }
+  &__value {
+    font-size: $middle-font-size/$mobile-text-divider;
+    font-weight: bold;
+    letter-spacing: 0.2px;
+  }
+  &__icon {
+    font-size: $small-font-size;
+    font-weight: bold;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #28768d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 auto;
+    margin-right: 24px;
+    &--1 {
+      background-color: $level-color-1;
+    }
+    &--2 {
+      background-color: $level-color-2;
+    }
+    &--3 {
+      background-color: $level-color-3;
+    }
+    &--4 {
+      background-color: $level-color-4;
+    }
+    &--5 {
+      background-color: $level-color-5;
+    }
+    &--6 {
+      background-color: $level-color-6;
+    }
+    &--7 {
+      background-color: $level-color-7;
+    }
+  }
+  @include media-breakpoint-landscape-phone() {
+    &__container {
+      padding-right: 0;
+    }
+    &__row {
+      flex-direction: row;
+    }
+    &__description {
+      font-size: $large-font-size;
+    }
+    &__table {
+      padding-bottom: $padding-big;
+      font-size: $middle-font-size;
+    }
+    &__right-block {
+      margin-left: $padding-small;
+      padding: $padding-small;
+      max-width: 300px;
+    }
+    &__mute-title {
+      font-size: $small-font-size;
+    }
+    &__value {
+      font-size: $middle-font-size;
+    }
+    &__list-item {
+      &:before {
+        left: -$padding-small;
+      }
+    }
+    .dialog__close--inside {
+      display: block;
+    }
+  }
+  @media (min-width: 1600px) {
+    .dialog__close--inside {
+      display: none;
+    }
+  }
+}
