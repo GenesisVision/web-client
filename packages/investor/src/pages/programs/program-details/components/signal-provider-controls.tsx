@@ -1,12 +1,12 @@
 import { GVButton } from "gv-react-components";
-import { ProgramDetailContext } from "manager-web-portal/src/pages/programs/program-details/program-details.page";
+import ProgramFollowContainer from "modules/program-follow/program-follow-container";
+import ProgramUnfollowContainer from "modules/program-unfollow/program-unfollow-container";
 import React, { Component, Fragment } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import SignalProgramInfo from "shared/components/programs/program-details/program-details-description/signal-program-info";
 import { FOLLOW_TYPE } from "shared/constants/constants";
 
-import ProgramFollowContainer from "../../../../modules/program-follow/program-follow-container";
-import ProgramUnfollowContainer from "../../../../modules/program-unfollow/program-unfollow-container";
+import { ProgramDetailContext } from "../program-details.page";
 
 enum SIGNAL_POPUP {
   FOLLOW = "FOLLOW",
