@@ -1,5 +1,3 @@
-//import "./program-details-description.scss";
-
 import React, { Component } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 
