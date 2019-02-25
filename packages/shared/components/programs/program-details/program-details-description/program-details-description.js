@@ -25,6 +25,7 @@ class ProgramDetailsDescription extends PureComponent {
       status,
       isFavorite,
       canCloseProgram,
+      canMakeSignalProvider,
       hasNotifications,
       isOwnProgram,
       onReinvestingClick,
@@ -63,6 +64,7 @@ class ProgramDetailsDescription extends PureComponent {
         <ProgramControls
           programDescription={programDescription}
           canCloseProgram={canCloseProgram}
+          canMakeSignalProvider={canMakeSignalProvider}
           isOwnProgram={isOwnProgram}
           canInvest={canInvest}
           canWithdraw={canWithdraw}

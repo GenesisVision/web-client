@@ -11,6 +11,7 @@ interface IProgramControlsProps {
   redirectToLogin(): void;
 
   canCloseProgram: boolean;
+  canMakeSignalProvider: boolean;
   isOwnProgram: boolean;
   programDescription: any;
 }
@@ -31,6 +32,7 @@ class ProgramControls extends Component<
   render() {
     const {
       canCloseProgram,
+      canMakeSignalProvider,
       isOwnProgram,
       programDescription,
       isAuthenticated,
@@ -48,7 +50,7 @@ class ProgramControls extends Component<
             redirectToLogin={redirectToLogin}
           />
         </div>
-        {programDescription.canMakeSignalProvider || true ? (
+        {canMakeSignalProvider || programDescription.isSignalProgram ? (
           <div className="program-details-description__col program-details-description__col--small-size">
             <SignalProviderControls
               programDescription={programDescription}
