@@ -19,6 +19,8 @@ const PAGING = {
   totalPages: 0
 };
 
+const DECIMAL_SCALE = 8;
+
 class ProgramOpenPositions extends Component {
   getOpenPositions = filters => {
     const { programId, fetchOpenPositions } = this.props;
@@ -61,32 +63,29 @@ class ProgramOpenPositions extends Component {
               </TableCell>
               <TableCell className="details-trades__cell program-details-trades__cell--volume">
                 <NumberFormat
-                  value={formatValue(position.volume)}
+                  value={formatValue(position.volume, DECIMAL_SCALE / 2)}
                   displayType="text"
                   thousandSeparator=" "
                 />
               </TableCell>
               <TableCell className="details-trades__cell program-details-trades__cell--price">
                 <NumberFormat
-                  value={formatValue(position.price)}
+                  value={formatValue(position.price, DECIMAL_SCALE)}
                   displayType="text"
                   thousandSeparator=" "
                 />
               </TableCell>
               <TableCell className="details-trades__cell program-details-trades__cell--priceCurrent">
                 <NumberFormat
-                  value={formatValue(position.priceCurrent)}
+                  value={formatValue(position.priceCurrent, DECIMAL_SCALE)}
                   displayType="text"
                   thousandSeparator=" "
                 />
               </TableCell>
               <TableCell className="details-trades__cell program-details-trades__cell--profit">
-                <Profitability
-                  value={+formatValue(position.profit)}
-                  prefix="sign"
-                >
+                <Profitability value={+position.profit} prefix="sign">
                   <NumberFormat
-                    value={formatValue(position.profit, null, true)}
+                    value={formatValue(position.profit, DECIMAL_SCALE, true)}
                     thousandSeparator=" "
                     displayType="text"
                     suffix={` ${currency}`}
