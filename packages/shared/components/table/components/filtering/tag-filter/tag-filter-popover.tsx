@@ -71,7 +71,6 @@ class TagFilterPopover extends React.Component<
             autoComplete="off"
             adornmentPosition="start"
             onChange={this.search}
-            autoFocus
           />
         </div>
         <div className="tag-filter__tags-list">
