@@ -70,22 +70,25 @@ class ProgramTrades extends Component {
             </TableCell>
             <TableCell className="details-trades__cell program-details-trades__cell--volume">
               <NumberFormat
-                value={formatValue(trade.volume)}
+                value={formatValue(trade.volume, 4)}
                 displayType="text"
                 thousandSeparator=" "
               />
             </TableCell>
             <TableCell className="details-trades__cell program-details-trades__cell--price">
               <NumberFormat
-                value={formatValue(trade.price)}
+                value={formatValue(trade.price, 8)}
                 displayType="text"
                 thousandSeparator=" "
               />
             </TableCell>
             <TableCell className="details-trades__cell program-details-trades__cell--profit">
-              <Profitability value={+formatValue(trade.profit)} prefix="sign">
+              <Profitability
+                value={+formatValue(trade.profit, 8)}
+                prefix="sign"
+              >
                 <NumberFormat
-                  value={formatValue(trade.profit, null, true)}
+                  value={formatValue(trade.profit, 8, true)}
                   thousandSeparator=" "
                   displayType="text"
                 />
