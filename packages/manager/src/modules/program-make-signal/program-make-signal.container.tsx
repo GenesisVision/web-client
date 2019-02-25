@@ -44,7 +44,7 @@ class ProgramMakeSignalContainer extends Component<
     const { id, service, onClose } = this.props;
 
     service
-      .programMakeSignal(id, +values.successFee, +values.subscriptionFee)
+      .programMakeSignal(id, values.successFee!, values.subscriptionFee!)
       .then(() => {
         onClose();
       })

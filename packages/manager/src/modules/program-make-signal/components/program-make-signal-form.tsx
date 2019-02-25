@@ -22,8 +22,8 @@ enum FORM_FIELDS {
 }
 
 export interface IMakeSignalFormValues {
-  [FORM_FIELDS.successFee]: string;
-  [FORM_FIELDS.subscriptionFee]: string;
+  [FORM_FIELDS.successFee]?: number;
+  [FORM_FIELDS.subscriptionFee]?: number;
 }
 
 type MakeSignalFormProps = InjectedTranslateProps &
@@ -72,8 +72,8 @@ export default compose<ComponentType<IMakeSignalFormOwnProps>>(
   withFormik<IMakeSignalFormOwnProps, IMakeSignalFormValues>({
     displayName: "make-signal-form",
     mapPropsToValues: () => ({
-      [FORM_FIELDS.successFee]: "",
-      [FORM_FIELDS.subscriptionFee]: ""
+      [FORM_FIELDS.successFee]: undefined,
+      [FORM_FIELDS.subscriptionFee]: undefined
     }),
     validationSchema: makeSignalValidationSchema,
     handleSubmit: (values, { props, setSubmitting }) => {
