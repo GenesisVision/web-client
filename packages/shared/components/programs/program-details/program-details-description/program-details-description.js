@@ -6,7 +6,6 @@ import DetailsInvestment from "shared/components/details/details-description-sec
 import { STATUS } from "shared/constants/constants";
 import platformApi from "shared/services/api-client/platform-api";
 
-import ProgramDetailsDescriptionControls from "./program-details-description-controls";
 import ProgramDetailsDescriptionMain from "./program-details-description-main";
 
 class ProgramDetailsDescription extends PureComponent {
