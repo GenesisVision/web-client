@@ -61,10 +61,15 @@ const validateFraction = (value: string, currency: string): boolean => {
   return fraction ? fraction.length <= CURRENCY_FRACTIONS(currency) : true;
 };
 
-const formatCurrencyValue = (value: number, currency: string): string =>
+const formatCurrencyValue = (
+  value: number,
+  currency: string,
+  abs?: boolean
+): string =>
   formatValue(
     checkCurrencyValue(value, currency),
-    CURRENCY_FRACTIONS(currency)
+    CURRENCY_FRACTIONS(currency),
+    abs
   );
 
 export {
