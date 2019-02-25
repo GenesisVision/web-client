@@ -76,17 +76,18 @@ class DetailsInvestment extends PureComponent {
               accent
               label={t("fund-details-page.description.profit")}
             >
-              <Profitability
-                value={formatCurrencyValue(value - invested, balanceCurrency)}
-                prefix="sign"
-              >
+              <Profitability value={value - invested} prefix="sign">
                 <NumberFormat
-                  value={formatCurrencyValue(value - invested, balanceCurrency)}
+                  value={formatCurrencyValue(
+                    value - invested,
+                    balanceCurrency,
+                    true
+                  )}
                   suffix={` ${balanceCurrency}`}
                   displayType="text"
                 />
               </Profitability>
-              <Profitability value={formatValue(profit)} variant="chips">
+              <Profitability value={profit} variant="chips">
                 {roundPercents(profit)}
               </Profitability>
             </StatisticItem>
