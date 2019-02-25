@@ -9,8 +9,8 @@ import { compose } from "redux";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import Select from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { getWalletIcon } from "shared/components/wallet/components/wallet-currency";
 import rateApi from "shared/services/api-client/rate-api";
+import filesService from "shared/services/file-service";
 import { convertFromCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { Schema, lazy, number, object } from "yup";
@@ -134,7 +134,7 @@ class FollowCreateAccount extends React.Component<
               return (
                 <option value={wallet.currency} key={wallet.currency}>
                   <img
-                    src={getWalletIcon(wallet.currency)}
+                    src={filesService.getFileUrl(wallet.logo)}
                     className="wallet-transfer-popup__icon"
                     alt={wallet.currency}
                   />
