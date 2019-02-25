@@ -9,6 +9,7 @@ import { alertMessageActions } from "shared/modules/alert-message/actions/alert-
 import ConvertingDetails from "shared/modules/transaction-details/converting-details";
 import ExternalDeposit from "shared/modules/transaction-details/external-deposit-details";
 import ExternalWithdrawal from "shared/modules/transaction-details/external-withdrawal-details";
+import FeeDetails from "shared/modules/transaction-details/fee-details";
 import InvestingTransaction from "shared/modules/transaction-details/investment-details";
 import OpenCloseTransaction from "shared/modules/transaction-details/open-close-details";
 import ProfitDetails from "shared/modules/transaction-details/profit-details";
@@ -24,7 +25,8 @@ const Types = {
   ExternalDeposit: ExternalDeposit,
   ExternalWithdrawal: ExternalWithdrawal,
   Converting: ConvertingDetails,
-  Profit: ProfitDetails
+  Profit: ProfitDetails,
+  PlatformFee: FeeDetails
 };
 
 export interface ITransactionDetailsDialogProps extends InjectedTranslateProps {

@@ -607,6 +607,7 @@
     "entry-fee": "Entry fee",
     "success-fee": "Success fee",
     "gv-fee": "GV Commission",
+    "platform-fee": "Platform fee",
     "deposit": "Deposit",
     "converting": {
       "title": "Converting",
