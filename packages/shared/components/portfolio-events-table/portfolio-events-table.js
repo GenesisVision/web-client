@@ -105,12 +105,13 @@ class PortfolioEventsTable extends Component {
               </TableCell>
               <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--amount">
                 {isUseProfitability(event) ? (
-                  <Profitability
-                    value={formatCurrencyValue(event.value, event.currency)}
-                    prefix="sign"
-                  >
+                  <Profitability value={event.value} prefix="sign">
                     <NumberFormat
-                      value={formatCurrencyValue(event.value, event.currency)}
+                      value={formatCurrencyValue(
+                        event.value,
+                        event.currency,
+                        true
+                      )}
                       thousandSeparator=" "
                       displayType="text"
                       suffix={" " + event.currency}
