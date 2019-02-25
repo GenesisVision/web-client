@@ -178,7 +178,7 @@ class WalletTransferForm extends React.Component<IWalletTransferForm> {
                   props.rate * Number(values.amount),
                   selectedToWallet.currency
                 );
-                return <span>{`= ${value} ${selectedToWallet.currency}`}</span>;
+                return <span>{`≈ ${value} ${selectedToWallet.currency}`}</span>;
               }
               return null;
             }}
