@@ -31,11 +31,12 @@ const ProgramDepositContainer = props => {
     service.clearDepositProgramInfo();
     service.clearInvestSubmit();
   };
-  const handleInvest = amount => {
+  const handleInvest = (amount, opts) => {
     service
       .investServiceInvestById({
         id,
-        amount
+        amount,
+        opts
       })
       .then(() => {
         handleClose();

@@ -30,7 +30,7 @@ interface IDepositFormOwnProps {
   currency: string;
   disabled: boolean;
   errorMessage: string;
-  onSubmit: (params: any) => {};
+  onSubmit: (amount: any, currency: object) => {};
 }
 
 interface IDepositFormProps {
@@ -322,7 +322,8 @@ export default compose<React.ComponentType<IDepositFormOwnProps>>(
       );
     },
     handleSubmit: (values, { props }: { props: OwnProps }) => {
-      props.onSubmit(values.amount);
+      const { walletCurrency, amount } = values;
+      props.onSubmit(amount, { currency: walletCurrency });
     }
   })
 )(DepositForm);
