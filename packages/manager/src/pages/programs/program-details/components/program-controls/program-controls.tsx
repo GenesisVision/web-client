@@ -50,7 +50,8 @@ class ProgramControls extends Component<
             redirectToLogin={redirectToLogin}
           />
         </div>
-        {canMakeSignalProvider || programDescription.isSignalProgram ? (
+        {isOwnProgram &&
+        (canMakeSignalProvider || programDescription.isSignalProgram) ? (
           <div className="program-details-description__col program-details-description__col--small-size">
             <SignalProviderControls
               programDescription={programDescription}
