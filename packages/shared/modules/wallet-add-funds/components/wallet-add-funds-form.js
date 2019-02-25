@@ -9,7 +9,7 @@ import GVqr from "shared/components/gv-qr/gv-qr";
 import CopyIcon from "shared/components/icon/copy-icon";
 import Select from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { getWalletIcon } from "shared/components/wallet/components/wallet-currency";
+import filesService from "shared/services/file-service";
 
 class WalletAddFundsForm extends Component {
   onChangeCurrency = (name, target) => {
@@ -49,7 +49,7 @@ class WalletAddFundsForm extends Component {
                 return (
                   <option value={currency} key={currency}>
                     <img
-                      src={getWalletIcon(wallet.currency)}
+                      src={filesService.getFileUrl(wallet.logo)}
                       className="wallet-withdraw-popup__icon"
                       alt={wallet.currency}
                     />
@@ -73,11 +73,6 @@ class WalletAddFundsForm extends Component {
             &nbsp;
             {t("buttons.copy")}
           </GVButton>
-          {currency !== "GVT" && currency !== null && (
-            <div className="dialog__info">
-              {t("wallet-add-funds.disclaimer", { currency })}
-            </div>
-          )}
         </div>
       </form>
     );

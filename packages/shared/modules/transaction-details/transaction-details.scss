@@ -37,6 +37,15 @@
 .external-transaction {
   display: flex;
   flex-direction: row;
+  &__status {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+
+    img {
+      margin-left: 20px;
+    }
+  }
   &__wallet {
     width: 44px;
     height: 44px;
@@ -44,10 +53,15 @@
   &__icon {
     margin-right: 30px;
   }
+  &__rate {
+    opacity: 0.5;
+  }
   &__address {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    word-break: break-all;
+    white-space: normal;
 
     .gv-btn.gv-btn--text {
       padding: 10px 0;

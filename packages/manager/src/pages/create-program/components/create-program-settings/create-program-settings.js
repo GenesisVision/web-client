@@ -16,8 +16,8 @@ import GVCheckbox from "shared/components/gv-checkbox/gv-checkbox";
 import Hint from "shared/components/hint/hint";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import Select from "shared/components/select/select";
-import { getWalletIcon } from "shared/components/wallet/components/wallet-currency";
 import rateApi from "shared/services/api-client/rate-api";
+import filesService from "shared/services/file-service";
 import { convertFromCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { allowValuesNumberFormat } from "shared/utils/helpers";
@@ -404,7 +404,7 @@ class CreateProgramSettings extends React.Component {
                   return (
                     <option value={wallet.currency} key={wallet.currency}>
                       <img
-                        src={getWalletIcon(wallet.currency)}
+                        src={filesService.getFileUrl(wallet.logo)}
                         className="wallet-transfer-popup__icon"
                         alt={wallet.currency}
                       />
@@ -487,7 +487,7 @@ export default translate()(
   withFormik({
     displayName: "CreateProgramSettingsForm",
     mapPropsToValues: props => ({
-      stopOutLevel: "",
+      stopOutLevel: "100",
       depositWalletCurrency: "GVT",
       depositWalletId: props.wallets.find(item => item.currency === "GVT").id,
       isSignalProgram: props.broker.isSignalsAvailable,

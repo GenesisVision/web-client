@@ -10,16 +10,20 @@ import { compose } from "redux";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import Select from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { getWalletIcon } from "shared/components/wallet/components/wallet-currency";
+import filesService from "shared/services/file-service";
 import { formatValue, validateFraction } from "shared/utils/formatter";
 import { formatCurrencyValue } from "shared/utils/formatter";
-import { ethWalletValidator } from "shared/utils/validators/validators";
-import { object, string } from "yup";
+import {
+  btcUsdtWalletValidator,
+  ethGvtWalletValidator
+} from "shared/utils/validators/validators";
+import { lazy, object, string } from "yup";
 
 class WalletWithdrawForm extends Component {
   onChangeCurrency = (name, target) => {
     const { setFieldValue } = this.props;
     setFieldValue("currency", target.props.value);
+    setFieldValue("amount", "");
   };
 
   render() {
@@ -92,7 +96,7 @@ class WalletWithdrawForm extends Component {
               return (
                 <option value={wallet.currency} key={wallet.currency}>
                   <img
-                    src={getWalletIcon(wallet.currency)}
+                    src={filesService.getFileUrl(wallet.logo)}
                     className="wallet-withdraw-popup__icon"
                     alt={wallet.currency}
                   />
@@ -132,7 +136,7 @@ class WalletWithdrawForm extends Component {
               </span>
               <span className="dialog-list__value">
                 <NumberFormat
-                  value={formatValue(willGet)}
+                  value={formatCurrencyValue(willGet, currency)}
                   suffix={` ${currency}`}
                   displayType="text"
                 />
@@ -144,7 +148,7 @@ class WalletWithdrawForm extends Component {
               </span>
               <span className="dialog-list__value">
                 <NumberFormat
-                  value={formatValue(commission)}
+                  value={formatCurrencyValue(commission, currency)}
                   suffix={` ${currency}`}
                   displayType="text"
                 />
@@ -162,9 +166,6 @@ class WalletWithdrawForm extends Component {
               {t("buttons.confirm")}
             </GVButton>
           </div>
-          {currency !== "GVT" && currency !== null && (
-            <div className="dialog__info">{t("wallet-withdraw.info")}</div>
-          )}
         </div>
       </form>
     );
@@ -212,13 +213,28 @@ export default compose(
       }
       return { currency, amount: "", address: "", twoFactorCode: "" };
     },
-    validationSchema: ({ t, twoFactorEnabled }) =>
-      object().shape({
-        address: ethWalletValidator.required(
-          t("wallet-withdraw.validation.address-is-required")
-        ),
-        twoFactorCode: twoFactorvalidator(t, twoFactorEnabled)
-      }),
+    validationSchema: (props, a) => {
+      const { t, twoFactorEnabled } = props;
+      return lazy(values => {
+        switch (values.currency) {
+          case "GVT":
+          case "ETH":
+            return object().shape({
+              address: ethGvtWalletValidator.required(
+                t("wallet-withdraw.validation.address-is-required")
+              ),
+              twoFactorCode: twoFactorvalidator(t, twoFactorEnabled)
+            });
+          default:
+            return object().shape({
+              address: btcUsdtWalletValidator.required(
+                t("wallet-withdraw.validation.address-is-required")
+              ),
+              twoFactorCode: twoFactorvalidator(t, twoFactorEnabled)
+            });
+        }
+      });
+    },
     handleSubmit: (values, { props }) => props.onSubmit(values)
   })
 )(WalletWithdrawForm);

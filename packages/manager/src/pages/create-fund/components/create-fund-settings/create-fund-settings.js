@@ -13,6 +13,12 @@ import NumberFormat from "react-number-format";
 import DepositButtonContainer from "shared/components/deposit-button-submit/deposit-button";
 import InputImage from "shared/components/form/input-image/input-image";
 import Hint from "shared/components/hint/hint";
+import InputAmountField from "shared/components/input-amount-field/input-amount-field";
+import Select from "shared/components/select/select";
+import rateApi from "shared/services/api-client/rate-api";
+import filesService from "shared/services/file-service";
+import { convertFromCurrency } from "shared/utils/currency-converter";
+import { formatCurrencyValue } from "shared/utils/formatter";
 import { allowValuesNumberFormat } from "shared/utils/helpers";
 
 import CreateFundSettingsAddAsset from "./create-fund-settings-add-asset/create-fund-settings-add-asset";
@@ -20,12 +26,6 @@ import CreateFundSettingsAssetsComponent from "./create-fund-settings-assets-blo
 import createFundSettingsValidationSchema from "./create-fund-settings.validators";
 import ErrorNotifier from "./error-notifier/error-notifier";
 import FundDefaultImage from "./fund-default-image";
-import Select from "shared/components/select/select";
-import { getWalletIcon } from "shared/components/wallet/components/wallet-currency";
-import InputAmountField from "shared/components/input-amount-field/input-amount-field";
-import { formatCurrencyValue } from "shared/utils/formatter";
-import { convertFromCurrency } from "shared/utils/currency-converter";
-import rateApi from "shared/services/api-client/rate-api";
 
 class CreateFundSettings extends React.Component {
   state = {
@@ -359,7 +359,7 @@ class CreateFundSettings extends React.Component {
                   return (
                     <option value={wallet.currency} key={wallet.currency}>
                       <img
-                        src={getWalletIcon(wallet.currency)}
+                        src={filesService.getFileUrl(wallet.logo)}
                         className="wallet-transfer-popup__icon"
                         alt={wallet.currency}
                       />

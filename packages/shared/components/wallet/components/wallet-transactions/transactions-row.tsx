@@ -1,44 +1,46 @@
 import { MultiWalletTransaction } from "gv-api-web";
-import moment from "moment";
+import * as moment from "moment";
 import * as React from "react";
 import { Fragment } from "react";
 import NumberFormat from "react-number-format";
-
-import SuccessTransactionsIcon from "../../../../media/transactions/success.svg";
-import TransactionDetailsPopup from "../../../../modules/transaction-details/transaction-details-popup";
-import { formatValue } from "../../../../utils/formatter";
-import Profitability from "../../../profitability/profitability";
-import TableCell from "../../../table/components/table-cell";
-import TableRow from "../../../table/components/table-row";
-import { getWalletIcon } from "../wallet-currency";
+import Profitability from "shared/components/profitability/profitability";
+import Status from "shared/components/status/status";
+import TableCell from "shared/components/table/components/table-cell";
+import TableRow from "shared/components/table/components/table-row";
+import TransactionDetailsPopup from "shared/modules/transaction-details/transaction-details-popup";
+import filesService from "shared/services/file-service";
+import { formatValue } from "shared/utils/formatter";
 
 export interface ITransactionRowProps {
   transaction: MultiWalletTransaction;
+  walletCurrency?: string;
 }
 
 export interface ITransactionRowState {
   isOpen: boolean;
 }
 
-const ConvertTransaction = () => {
+const ConvertTransaction: React.FunctionComponent<
+  ITransactionRowProps
+> = props => {
   return (
     <Fragment>
       <span className="wallet-transactions__col">
         <img
-          src={getWalletIcon("GVT")}
+          src={filesService.getFileUrl(props.transaction.logoFrom)}
           className="wallet-transactions__icon"
           alt="Icon"
         />
-        Genesis Vision
+        {props.transaction.currencyFrom}
       </span>
       <span className="wallet-transactions__back-arrow">&rarr;</span>
       <span className="wallet-transactions__col">
         <img
-          src={getWalletIcon("BTC")}
+          src={filesService.getFileUrl(props.transaction.logoTo)}
           className="wallet-transactions__icon"
           alt="Icon"
         />
-        Bitcoin
+        {props.transaction.currencyTo}
       </span>
     </Fragment>
   );
@@ -53,22 +55,22 @@ const AmountConvertTransaction: React.FunctionComponent<{
         value={formatValue(props.transaction.amount)}
         thousandSeparator=" "
         displayType="text"
-        suffix=" GVT"
+        suffix={` ${props.transaction.currencyFrom}`}
       />
     </span>
     <span className="wallet-transactions__back-arrow">&rarr;</span>
     <span className="wallet-transactions__col">
       <NumberFormat
-        value={formatValue(props.transaction.amount)}
+        value={formatValue(props.transaction.amountTo)}
         thousandSeparator=" "
         displayType="text"
-        suffix=" BTC"
+        suffix={` ${props.transaction.currencyTo}`}
       />
     </span>
   </Fragment>
 );
 
-class AllTransactionsRow extends React.Component<
+class TransactionsRow extends React.Component<
   ITransactionRowProps,
   ITransactionRowState
 > {
@@ -82,7 +84,7 @@ class AllTransactionsRow extends React.Component<
     this.setState({ isOpen: false });
   };
   render() {
-    const { transaction } = this.props;
+    const { transaction, walletCurrency } = this.props;
     const isConvertAction = transaction.type === "Converting";
     return (
       <React.Fragment>
@@ -92,30 +94,29 @@ class AllTransactionsRow extends React.Component<
           onClose={this.closePopup}
         />
         <TableRow className="wallet-transactions__row" onClick={this.openPopup}>
-          <TableCell className="wallet-transactions__cell wallet-transactions__cell--wallet">
-            {isConvertAction ? (
-              <ConvertTransaction />
-            ) : (
-              <Fragment>
-                <img
-                  src={getWalletIcon(
-                    transaction.currencyFrom || transaction.currencyTo
-                  )}
-                  className="wallet-transactions__icon"
-                  alt="Icon"
-                />
-                Genesis Vision
-              </Fragment>
-            )}
-          </TableCell>
+          {!walletCurrency && (
+            <TableCell className="wallet-transactions__cell wallet-transactions__cell--wallet">
+              {isConvertAction ? (
+                <ConvertTransaction transaction={transaction} />
+              ) : (
+                <Fragment>
+                  <img
+                    src={filesService.getFileUrl(transaction.logoFrom)}
+                    className="wallet-transactions__icon"
+                    alt="Icon"
+                  />
+                  {transaction.currencyFrom}
+                </Fragment>
+              )}
+            </TableCell>
+          )}
           <TableCell className="wallet-transactions__cell wallet-transactions__cell--date">
             {moment(transaction.date).format("DD-MM-YYYY, hh:mm a")}
           </TableCell>
           <TableCell className="wallet-transactions__cell wallet-transactions__cell--type">
-            <img
-              src={SuccessTransactionsIcon}
+            <Status
+              status={transaction.status}
               className="wallet-transactions__icon"
-              alt="TransactionsIcon"
             />
           </TableCell>
           <TableCell className="wallet-transactions__cell wallet-transactions__cell--information">
@@ -130,7 +131,7 @@ class AllTransactionsRow extends React.Component<
                   value={formatValue(transaction.amount)}
                   thousandSeparator=" "
                   displayType="text"
-                  suffix=" GVT"
+                  suffix={` ${transaction.currencyFrom}`}
                 />
               </Profitability>
             )}
@@ -141,4 +142,4 @@ class AllTransactionsRow extends React.Component<
   }
 }
 
-export default AllTransactionsRow;
+export default TransactionsRow;

@@ -188,9 +188,7 @@
     },
     "validation": {
       "amount-more-than-available": "Amount is more than available in your wallet",
-      "address-is-required": "Address is required.",
-      "two-factor-6digits": "Authentication code should contain 6 digits.",
-      "two-factor-required": "Authentication code is required."
+      "amount-is-zero": "Amount must be greater than zero"
     }
   },
   "profile-widget": {
@@ -214,7 +212,7 @@
     "confirm": "Confirm",
     "validation": {
       "amount-more-than-available": "Amount is more than available in your wallet",
-      "amount-min-value": "Min amount is {{min}} GVT"
+      "amount-min-value": "Min amount is {{min}} {{currency}}"
     },
     "program": {
       "available-to-invest": "Available to invest in program",
@@ -614,8 +612,16 @@
     "success-fee": "Success fee",
     "gv-fee": "GV Commission",
     "deposit": "Deposit",
-    "converting": "Converting",
+    "converting": {
+      "title": "Converting",
+      "from": "Written off wallet",
+      "to": "Credited to the wallet"
+    },
     "profit": "Profit program",
+    "copy": {
+      "error": "Copy failed",
+      "success": "Copy was successful"
+    },
     "external": {
       "from-wallet": "From",
       "from": "From address",

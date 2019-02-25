@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import DepositPopup from "shared/components/deposit/deposit-popup";
 import Dialog from "shared/components/dialog/dialog";
+import { ASSET } from "shared/constants/constants";
 
 import {
   clearDepositFundInfo,
@@ -37,7 +38,7 @@ const FundDepositContainer = props => {
   return (
     <Dialog open={props.open} onClose={handleClose}>
       <DepositPopup
-        investor
+        asset={ASSET.FUND}
         entryFee
         submitInfo={props.submitInfo}
         currency={props.currency}

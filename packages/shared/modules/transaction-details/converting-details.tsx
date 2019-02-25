@@ -1,6 +1,7 @@
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import Status from "shared/components/status/status";
 import filesService from "shared/services/file-service";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
@@ -13,7 +14,7 @@ const ConvertingDetails = (props: ITransactionDetailsProps) => {
       <div className="dialog__top">
         <div className="dialog__header">
           <h2>{t(`transactions-details.title`)}</h2>
-          <p>{t("transactions-details.converting")}</p>
+          <p>{t("transactions-details.converting.title")}</p>
         </div>
         <StatisticItem label={t(`transactions-details.external.from-wallet`)}>
           <div className="external-transaction">
@@ -31,7 +32,7 @@ const ConvertingDetails = (props: ITransactionDetailsProps) => {
             </div>
           </div>
         </StatisticItem>
-        <StatisticItem label={t(`transactions-details.external.amount`)}>
+        <StatisticItem label={t("transactions-details.converting.from")}>
           <NumberFormat
             value={formatCurrencyValue(data.amount, data.currency)}
             suffix={` ${data.currency}`}
@@ -59,7 +60,7 @@ const ConvertingDetails = (props: ITransactionDetailsProps) => {
             </div>
           </div>
         </StatisticItem>
-        <StatisticItem label={t(`transactions-details.external.amount`)}>
+        <StatisticItem label={t("transactions-details.converting.to")}>
           <NumberFormat
             value={formatCurrencyValue(
               data.convertingDetails.amountTo,
@@ -70,8 +71,27 @@ const ConvertingDetails = (props: ITransactionDetailsProps) => {
             displayType="text"
           />
         </StatisticItem>
+        <StatisticItem label={"   "} className={"external-transaction__rate"}>
+          <NumberFormat
+            value={1}
+            suffix={`${data.currency} = `}
+            allowNegative={true}
+            displayType="text"
+          />
+          <NumberFormat
+            value={formatCurrencyValue(
+              data.convertingDetails.rateValue,
+              data.convertingDetails.currencyTo
+            )}
+            suffix={`${data.convertingDetails.currencyTo}`}
+            allowNegative={true}
+            displayType="text"
+          />
+        </StatisticItem>
         <StatisticItem label={t(`transactions-details.status.title`)}>
-          {data.status}
+          <div className="external-transaction__status">
+            {data.status} <Status status={data.status} />
+          </div>
         </StatisticItem>
       </div>
     </React.Fragment>

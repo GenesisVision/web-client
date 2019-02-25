@@ -7,7 +7,8 @@ import {
 
 export const programsTagFilter = {
   name: TAG_FILTER_NAME,
-  composeRequestValue: value => value,
+  composeRequestValue: (value: string[]) =>
+    Array.isArray(value) ? [...value] : [value],
   defaultValue: TAG_FILTER_DEFAULT_VALUE,
   type: FilterType.custom
 };

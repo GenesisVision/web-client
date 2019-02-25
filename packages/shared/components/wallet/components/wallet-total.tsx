@@ -3,6 +3,7 @@ import * as React from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import { ROLE } from "shared/constants/constants";
 import RootState from "shared/reducers/root-reducer";
 
 import Page from "../../page/page";
@@ -17,7 +18,7 @@ interface IWalletProps {
   filters?: MultiWalletFilters;
   isPayFeesWithGvt?: boolean;
   wallets?: WalletsInfo;
-  role?: boolean;
+  role?: ROLE;
 }
 
 class WalletTotal extends React.Component<IWalletProps> {
@@ -42,7 +43,7 @@ class WalletTotal extends React.Component<IWalletProps> {
         <WalletContainerTotal
           wallets={wallets}
           filters={filters}
-          copytrading={!role}
+          copytrading={role === ROLE.INVESTOR}
         />
       </Page>
     );
@@ -51,7 +52,7 @@ class WalletTotal extends React.Component<IWalletProps> {
 
 const mapStateToProps = (state: RootState) => ({
   role: state.profileHeader.info.data
-    ? state.profileHeader.info.data.isNewUser
+    ? state.profileHeader.info.data.userType
     : null,
   info: state.wallet.info.data ? state.wallet.info.data.grandTotal : null,
   wallets: state.wallet.info.data ? state.wallet.info.data.wallets : [],

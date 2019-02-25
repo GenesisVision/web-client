@@ -41,7 +41,7 @@ import platformReducer from "shared/reducers/platform-reducer";
 import RootState from "shared/reducers/root-reducer";
 import uiReducer from "shared/reducers/ui-reducer";
 
-type State = Readonly<{
+type State = {
   programDeposit: ProgramsDepositState;
   fundDeposit: FundDepositState;
   notifications: NotificationsState;
@@ -50,7 +50,7 @@ type State = Readonly<{
   loginData: LoginState;
   passwordRestoreData: PasswordState;
   dashboard: DashboardState;
-}>;
+};
 
 export type InvestorRootState = State & RootState;
 

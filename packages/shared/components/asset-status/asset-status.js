@@ -3,6 +3,8 @@ import "./asset-status.scss";
 import classnames from "classnames";
 import React, { Fragment, PureComponent } from "react";
 import { translate } from "react-i18next";
+import connect from "react-redux/es/connect/connect";
+import { compose } from "redux";
 import GVScroll from "shared/components/scroll/gvscroll";
 import { STATUS } from "shared/constants/constants";
 
@@ -67,4 +69,12 @@ class AssetStatus extends PureComponent {
   }
 }
 
-export default translate()(AssetStatus);
+const mapStateToProps = state => ({
+  role: state.profileHeader.info.data
+    ? state.profileHeader.info.data.userType
+    : null
+});
+export default compose(
+  translate(),
+  connect(mapStateToProps)
+)(AssetStatus);
