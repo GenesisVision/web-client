@@ -44,24 +44,21 @@ class WalletWithdrawForm extends Component {
 
     const selected = wallets.find(wallet => wallet.currency === currency) || {};
 
-    const { commission = null, availableToWithdrawal = null } = selected;
+    const { withdrawalCommission = null, available = null } = selected;
 
-    const willGet = Math.max(parseFloat(amount) - commission, 0);
+    const willGet = Math.max(parseFloat(amount) - withdrawalCommission, 0);
 
     const isAllow = values => {
       const { floatValue, formattedValue, value, currency } = values;
       return (
         formattedValue === "" ||
         (validateFraction(value, currency) &&
-          floatValue <= parseFloat(availableToWithdrawal))
+          floatValue <= parseFloat(available))
       );
     };
 
     const setMaxAmount = () => {
-      setFieldValue(
-        "amount",
-        formatCurrencyValue(availableToWithdrawal, currency)
-      );
+      setFieldValue("amount", formatCurrencyValue(available, currency));
     };
 
     return (
@@ -78,10 +75,7 @@ class WalletWithdrawForm extends Component {
           <div className="dialog-field">
             <div className="gv-text-field__wrapper">
               <StatisticItem label={t("wallet-withdraw.available")} big>
-                {`${formatCurrencyValue(
-                  availableToWithdrawal,
-                  currency
-                )} ${currency}`}
+                {`${formatCurrencyValue(available, currency)} ${currency}`}
               </StatisticItem>
             </div>
           </div>
@@ -100,7 +94,7 @@ class WalletWithdrawForm extends Component {
                     className="wallet-withdraw-popup__icon"
                     alt={wallet.currency}
                   />
-                  {`${wallet.description} | ${wallet.currency}`}
+                  {`${wallet.title} | ${wallet.currency}`}
                 </option>
               );
             })}
@@ -148,7 +142,7 @@ class WalletWithdrawForm extends Component {
               </span>
               <span className="dialog-list__value">
                 <NumberFormat
-                  value={formatCurrencyValue(commission, currency)}
+                  value={formatCurrencyValue(withdrawalCommission, currency)}
                   suffix={` ${currency}`}
                   displayType="text"
                 />
@@ -173,15 +167,11 @@ class WalletWithdrawForm extends Component {
 }
 
 WalletWithdrawForm.propTypes = {
-  availableToWithdrawal: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ]),
   wallets: PropTypes.arrayOf(
     PropTypes.shape({
-      commission: PropTypes.number,
+      withdrawalCommission: PropTypes.number,
       currency: PropTypes.string,
-      description: PropTypes.string,
+      title: PropTypes.string,
       logo: PropTypes.string,
       rateToGvt: PropTypes.number
     })
