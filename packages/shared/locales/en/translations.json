@@ -1236,7 +1236,7 @@
       },
       "broker-card": {
         "coming-soon": "Coming soon",
-        "not-available": "Not available"
+        "KYC-required": "KYC required"
       },
       "broker-info": {
         "about": "About",
