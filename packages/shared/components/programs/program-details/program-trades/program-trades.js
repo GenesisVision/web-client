@@ -85,10 +85,14 @@ class ProgramTrades extends Component {
               />
             </TableCell>
             <TableCell className="details-trades__cell program-details-trades__cell--profit">
-              <Profitability value={+trade.profit} prefix="sign">
+              <Profitability
+                value={+formatValue(trade.profit, DECIMAL_SCALE)}
+                prefix="sign"
+              >
                 <NumberFormat
-                  value={formatValue(trade.profit, DECIMAL_SCALE, true)}
+                  value={formatValue(trade.profit, DECIMAL_SCALE)}
                   thousandSeparator=" "
+                  allowNegative={false}
                   displayType="text"
                 />
               </Profitability>

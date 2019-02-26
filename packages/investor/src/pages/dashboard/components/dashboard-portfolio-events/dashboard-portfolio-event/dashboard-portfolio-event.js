@@ -35,7 +35,7 @@ const DashboardPortfolioEvent = ({ event }) => {
           {isUseProfitability(event) ? (
             <Profitability value={valueTotal} prefix="sign">
               <NumberFormat
-                value={formatCurrencyValue(valueTotal, event.currency, true)}
+                value={formatCurrencyValue(valueTotal, event.currency)}
                 displayType="text"
                 allowNegative={false}
                 suffix={` ${event.currency}`}
