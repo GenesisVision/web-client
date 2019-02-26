@@ -214,20 +214,28 @@ export default compose<React.FunctionComponent<IWalletTransferForm>>(
     },
     validationSchema: (params: IWalletTransferForm) => {
       return lazy(
-        (values: ITransferFormValues): Schema<any> =>
-          object().shape({
+        (values: ITransferFormValues): Schema<any> => {
+          const selectedWallet = getSelectedWallet(
+            params.wallets,
+            values.sourceId
+          );
+          return object().shape({
             amount: number()
               .moreThan(
                 0,
                 params.t("wallet-transfer.validation.amount-is-zero")
               )
               .max(
-                getSelectedWallet(params.wallets, values.sourceId).available,
+                +formatCurrencyValue(
+                  selectedWallet.available,
+                  selectedWallet.currency
+                ),
                 params.t(
                   "wallet-transfer.validation.amount-more-than-available"
                 )
               )
-          })
+          });
+        }
       );
     },
     handleSubmit: (values, { props }) => props.onSubmit(values)
