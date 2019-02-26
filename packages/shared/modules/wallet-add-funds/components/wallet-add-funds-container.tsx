@@ -49,9 +49,10 @@ class WalletAddFundsContainer extends React.Component<
     if (!this.state.data) return null;
     const { wallets } = this.state.data;
     const { currentWallet, notifySuccess, notifyError } = this.props;
+    const enabledWallets = wallets.filter(wallet => wallet.isDepositEnabled);
     return (
       <WalletAddFundsForm
-        wallets={wallets}
+        wallets={enabledWallets}
         currentWallet={currentWallet}
         notifySuccess={notifySuccess}
         notifyError={notifyError}
