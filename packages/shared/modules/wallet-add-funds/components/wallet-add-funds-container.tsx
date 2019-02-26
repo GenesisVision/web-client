@@ -38,18 +38,10 @@ class WalletAddFundsContainer extends React.Component<
     data: null
   };
 
-  componentDidMount() {
-    this.setState({ isPending: true });
-    walletApi
-      .v10WalletAddressesGet(authService.getAuthArg())
-      .then(data => this.setState({ data, isPending: false }));
-  }
-
   render() {
-    if (!this.state.data) return null;
-    const { wallets } = this.state.data;
-    const { currentWallet, notifySuccess, notifyError } = this.props;
+    const { currentWallet, notifySuccess, notifyError, wallets } = this.props;
     const enabledWallets = wallets.filter(wallet => wallet.isDepositEnabled);
+    console.log();
     return (
       <WalletAddFundsForm
         wallets={enabledWallets}
@@ -61,12 +53,17 @@ class WalletAddFundsContainer extends React.Component<
   }
 }
 
+const mapStateToProps = state => {
+  if (!state.wallet.info.data) return;
+  return { wallets: state.wallet.info.data.wallets };
+};
+
 const mapDispatchToProps = dispatch => ({
   notifySuccess: text => dispatch(alertMessageActions.success(text)),
   notifyError: text => dispatch(alertMessageActions.error(text))
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(WalletAddFundsContainer);
