@@ -119,7 +119,7 @@ const mapStateToProps = state => {
     ? state.platformData.data.currencies
     : [];
   const programTags = state.platformData.data
-    ? state.platformData.data.programTags
+    ? state.platformData.data.enums.program.programTags
     : [];
   return { isPending, data, isAuthenticated, currencies, programTags };
 };
