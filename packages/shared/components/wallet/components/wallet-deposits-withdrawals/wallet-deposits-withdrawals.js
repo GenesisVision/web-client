@@ -53,7 +53,7 @@ class WalletDepositsWithdrawals extends Component {
           paging={DEFAULT_PAGING}
           filtering={{
             ...TRANSACTIONS_FILTERS,
-            type: filters.multiWalletExternalTransactionType[0]
+            type: filters[0]
           }}
           createButtonToolbar={createButtonToolbar}
           getItems={this.fetch}
@@ -64,9 +64,7 @@ class WalletDepositsWithdrawals extends Component {
                   name={"type"}
                   label="Type"
                   value={filtering["type"]}
-                  values={reduceFilters(
-                    filters.multiWalletExternalTransactionType
-                  )}
+                  values={reduceFilters(filters)}
                   onChange={updateFilter}
                 />
                 <DateRangeFilter
