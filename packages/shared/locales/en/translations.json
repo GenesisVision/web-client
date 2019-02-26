@@ -735,34 +735,49 @@
     }
   },
   "gvt-fees": {
-    "title": "About levels",
+    "title": "Fees and Discounts",
     "section": {
-      "text-1": "Genesis level shows the experience and reliability of a manager.",
-      "text-2": "All of the investment programs of a manager that have not passed KYC are stuck on the first level and can’t level up unless the manager passes the KYC procedure. Once the verification process is completed, the investment programs of a manager receive a second level."
-    },
-    "list": {
-      "subtitle": "Further levels are given according to the algorithm:",
-      "list-item-1": "All of the managers are levelled up only on the first day of each month.",
-      "list-item-2": "A manager can go up only one level at a time.",
-      "list-item-3": "In order to level-up, you need to end up in the top 10% of investment programs ranked by profit among all of the other competing programs of the same level.",
-      "list-item-4": "Profit is calculated as a percentage and is calculated over a certain period. The general rule of thumb is that the period of time is calculated as “managers’ level — 1 month”. For example: if your current level is 4, then the last three months of your trading will be counted.",
-      "list-item-5": "All programs that have completed at least one trade participate in the rating.",
-      "list-item-6": "Each level needs to have a minimum of ten participators. You can’t level up if fewer than ten people are competing against you.",
-      "list-item-7": "The higher a manager’s level is — the more funds he can attract."
+      "text-1": "Any Genesis Markets user who holds a certain amount of GVT for 7 days receives a discount for transaction fees. The size of a discount can vary and depends on the amount of GVT that is being held. The regular trading fee is 0.3%, and the information on the tiered discount system can be found in the Genesis Markets Trading Conditions section.",
+      "text-2": "Users of the Genesis Vision copy trading feature who hold any GVT on the Genesis Markets balance are eligible for discounts and also have the platform success fee of 10% for both investment programs and copy trading signals reduced by 1% for each 1000 GVT held."
     },
     "table-header": {
-      "level": "Level",
-      "age": "Age",
-      "avg-profit": "Avg. Profit",
-      "total-profit": "Total profit"
+      "amount": "Amount held for 7 days*",
+      "discount": "Discount",
+      "fees": "Fees"
+    },
+    "table-row-1": {
+      "amount": "Any GVT",
+      "discount": "30%",
+      "fees": "0.210%"
+    },
+    "table-row-2": {
+      "amount": "Any GVT",
+      "discount": "30%",
+      "fees": "0.210%"
+    },
+    "table-row-3": {
+      "amount": "Any GVT",
+      "discount": "30%",
+      "fees": "0.210%"
+    },
+    "table-row-4": {
+      "amount": "Any GVT",
+      "discount": "30%",
+      "fees": "0.210%"
+    },
+    "table-row-5": {
+      "amount": "Any GVT",
+      "discount": "30%",
+      "fees": "0.210%"
+    },
+    "table-row-6": {
+      "amount": "Any GVT",
+      "discount": "30%",
+      "fees": "0.210%"
     },
     "titles": {
-      "main": "About levels",
-      "table": "Requirements for levels",
-      "limits": "Levels limits",
-      "limit": "Invest limit"
-    },
-    "select": "Show in:"
+      "main": "Fees and Discounts"
+    }
   },
   "rating-page": {
     "title": "Rating",
