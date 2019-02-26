@@ -140,6 +140,7 @@ class TransactionsRow extends React.Component<
                   )}
                   thousandSeparator=" "
                   displayType="text"
+                  allowNegative={false}
                   suffix={` ${transaction.currencyFrom}`}
                 />
               </Profitability>

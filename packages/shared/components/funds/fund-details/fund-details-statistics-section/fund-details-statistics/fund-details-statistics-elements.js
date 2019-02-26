@@ -6,6 +6,7 @@ import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { ChartPeriodType } from "shared/components/chart/chart-period/chart-period.helpers";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import { formatCurrencyValue } from "shared/utils/formatter";
 
 const FundDetailsStatisticsElements = ({ t, statistic, period }) => (
   <Fragment>
@@ -16,7 +17,7 @@ const FundDetailsStatisticsElements = ({ t, statistic, period }) => (
       <div className="details-statistics__vertical-info-block">
         <StatisticItem label={t("fund-details-page.statistics.balance")} accent>
           <NumberFormat
-            value={statistic.balance}
+            value={formatCurrencyValue(statistic.balance, "GVT")}
             thousandSeparator={" "}
             displayType="text"
             decimalScale={2}

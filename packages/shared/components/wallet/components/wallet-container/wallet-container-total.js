@@ -67,7 +67,7 @@ class WalletContainerTotal extends PureComponent {
         {tab === TRANSACTIONS_TAB && (
           <WalletTransactions
             columns={WALLET_TOTAL_TRANSACTIONS_COLUMNS}
-            filters={filters}
+            filters={filters.transactionType}
             renderBodyRow={transaction => (
               <TransactionsRow transaction={transaction} />
             )}
@@ -76,7 +76,7 @@ class WalletContainerTotal extends PureComponent {
         {tab === EXTERNAL_TAB && (
           <WalletDepositsWithdrawals
             columns={WALLET_TOTAL_DEPOSITS_WITHDRAWALS_COLUMNS}
-            filters={filters}
+            filters={filters.externalTransactionType}
             renderBodyRow={transaction => (
               <AllDepositsWithdrawalsRow transaction={transaction} />
             )}

@@ -24,10 +24,6 @@ export const fetchWalletTransactions = requestFilters => {
   return actions.fetchWalletTransactionsDispatch(authorization, requestFilters);
 };
 
-export const fetchWalletTransactionsFilters = () => dispatch => {
-  dispatch(actions.fetchWalletTransactionsFilters());
-};
-
 export const offPayFeesWithGvt = () => () => {
   return walletApi.v10WalletPaygvtfeeOffPost(authService.getAuthArg());
 };

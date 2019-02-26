@@ -59,7 +59,9 @@ const mapStateToProps = (state: RootState) => ({
   isPayFeesWithGvt: state.wallet.info.data
     ? state.wallet.info.data.payFeesWithGvt
     : null,
-  filters: state.wallet.filters.data ? state.wallet.filters.data : null
+  filters: state.platformData.data
+    ? state.platformData.data.enums.multiWallet
+    : []
 });
 
 export default compose(

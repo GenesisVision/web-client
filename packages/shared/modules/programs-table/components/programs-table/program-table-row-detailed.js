@@ -189,7 +189,7 @@ class ProgramTableRowDetailed extends Component {
                     </div>
                     <div className="program-detailed__statistic-data--value">
                       <Profitability
-                        value={program.statistic.profitPercent}
+                        value={formatValue(program.statistic.profitPercent, 2)}
                         prefix="sign"
                       >
                         <NumberFormat
