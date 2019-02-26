@@ -388,7 +388,10 @@
       "exitFee": "Exit fee",
       "invest": "Invest",
       "reinvest": "Reinvest",
-      "yourInvestment": "Current investment",
+      "yourInvestment": {
+        "PROGRAM": "Current period investment",
+        "FUND": "Current investment"
+      },
       "pending-input": "Pending input",
       "pending-output": "Pending output",
       "invested": "Invested",
