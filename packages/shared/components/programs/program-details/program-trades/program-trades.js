@@ -20,6 +20,8 @@ import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { formatValue } from "shared/utils/formatter";
 
+const DECIMAL_SCALE = 8;
+
 class ProgramTrades extends Component {
   fetchProgramTrades = filters => {
     const { currency, programId, fetchTrades } = this.props;
@@ -70,23 +72,27 @@ class ProgramTrades extends Component {
             </TableCell>
             <TableCell className="details-trades__cell program-details-trades__cell--volume">
               <NumberFormat
-                value={formatValue(trade.volume)}
+                value={formatValue(trade.volume, DECIMAL_SCALE / 2)}
                 displayType="text"
                 thousandSeparator=" "
               />
             </TableCell>
             <TableCell className="details-trades__cell program-details-trades__cell--price">
               <NumberFormat
-                value={formatValue(trade.price)}
+                value={formatValue(trade.price, DECIMAL_SCALE)}
                 displayType="text"
                 thousandSeparator=" "
               />
             </TableCell>
             <TableCell className="details-trades__cell program-details-trades__cell--profit">
-              <Profitability value={+formatValue(trade.profit)} prefix="sign">
+              <Profitability
+                value={+formatValue(trade.profit, DECIMAL_SCALE)}
+                prefix="sign"
+              >
                 <NumberFormat
-                  value={formatValue(trade.profit, null, true)}
+                  value={formatValue(trade.profit, DECIMAL_SCALE)}
                   thousandSeparator=" "
+                  allowNegative={false}
                   displayType="text"
                 />
               </Profitability>

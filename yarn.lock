@@ -5402,15 +5402,15 @@ gud@^1.0.0:
   integrity sha512-zGEOVKFM5sVPPrYs7J5/hYEw2Pof8KCyOwyhG8sAF26mCAeUFAcYPu1mwB7hhpIP29zOIBaDqwuHdLp0jvZXjw==
 
 "gv-api-web@git+https://github.com/GenesisVision/gv-api-web.git#development":
-  version "1.0.314"
-  resolved "git+https://github.com/GenesisVision/gv-api-web.git#669e37845533e140315683bb030e6fc1994b8a7d"
+  version "1.0.332"
+  resolved "git+https://github.com/GenesisVision/gv-api-web.git#6f091e1ba490aa9b8d744c0a000ff51d8db538f1"
   dependencies:
     superagent "^3.8.3"
 
-gv-react-components@^0.0.33:
-  version "0.0.33"
-  resolved "https://registry.yarnpkg.com/gv-react-components/-/gv-react-components-0.0.33.tgz#65f93f047154936e616326ca00ddaf14b6e079e2"
-  integrity sha512-6Y3B0d9uqNfIH31kisDBoLIhmwV8ohkwNr5RPB0pID+oc7/gTaJM4mynV6KbpoLMD0VjcDU8ssMHK9F7CN/huA==
+gv-react-components@^0.0.34:
+  version "0.0.34"
+  resolved "https://registry.yarnpkg.com/gv-react-components/-/gv-react-components-0.0.34.tgz#aaa5e9fa065e89e8eada4b28184841d2dc048038"
+  integrity sha512-QREgyTTxDyS2paU8gQdUWhyQ5Whry19nlLOobjhSk86cDcZ2pSg066V++gOjhsCSllepojnRW7E4eDHHz6ph3A==
   dependencies:
     classnames "^2.2.6"
     prop-types "^15.6.1"

@@ -40,7 +40,7 @@ const CreateProgramBroker = ({
             onSelect={chooseBroker}
             cardState={
               !isForexAllowed && broker.isForex
-                ? BrokerCardState.notAvailable
+                ? BrokerCardState.KYCRequired
                 : BrokerCardState.active
             }
           />

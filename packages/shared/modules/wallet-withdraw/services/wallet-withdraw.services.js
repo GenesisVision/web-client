@@ -19,10 +19,12 @@ export const newWithdrawRequest = data => (dispatch, getState) => {
 export const walletTransferRequest = data => {
   const { sourceId, destinationId, amount } = data;
   return walletApi.v10WalletTransferPost(authService.getAuthArg(), {
-    sourceId,
-    destinationId,
-    amount,
-    sourceType: "Wallet",
-    destinationType: "Wallet"
+    request: {
+      sourceId,
+      destinationId,
+      amount,
+      sourceType: "Wallet",
+      destinationType: "Wallet"
+    }
   });
 };

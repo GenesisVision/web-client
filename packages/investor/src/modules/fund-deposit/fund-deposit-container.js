@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import DepositPopup from "shared/components/deposit/deposit-popup";
 import Dialog from "shared/components/dialog/dialog";
+import { ASSET } from "shared/constants/constants";
 
 import {
   clearDepositFundInfo,
@@ -13,7 +14,6 @@ import {
   getDepositFundInfoById,
   investServiceInvestById
 } from "./services/fund-deposit.services";
-import { ASSET } from "shared/constants/constants";
 
 const FundDepositContainer = props => {
   const { service, id, onInvest } = props;
@@ -22,11 +22,12 @@ const FundDepositContainer = props => {
     props.service.clearDepositFundInfo();
     props.service.clearInvestSubmitFund();
   };
-  const handleInvest = amount => {
+  const handleInvest = (amount, opts) => {
     service
       .investServiceInvestById({
         id,
-        amount
+        amount,
+        opts
       })
       .then(() => {
         handleClose();

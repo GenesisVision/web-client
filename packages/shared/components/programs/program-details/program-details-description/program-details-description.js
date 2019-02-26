@@ -6,7 +6,6 @@ import DetailsInvestment from "shared/components/details/details-description-sec
 import { STATUS } from "shared/constants/constants";
 import platformApi from "shared/services/api-client/platform-api";
 
-import ProgramDetailsDescriptionControls from "./program-details-description-controls";
 import ProgramDetailsDescriptionMain from "./program-details-description-main";
 
 class ProgramDetailsDescription extends PureComponent {
@@ -25,6 +24,7 @@ class ProgramDetailsDescription extends PureComponent {
       status,
       isFavorite,
       canCloseProgram,
+      canMakeSignalProvider,
       hasNotifications,
       isOwnProgram,
       onReinvestingClick,
@@ -37,8 +37,6 @@ class ProgramDetailsDescription extends PureComponent {
       CloseProgramContainer,
       ProgramDepositContainer,
       AboutLevelsContainerComponent,
-      ProgramDetailContext,
-      AssetEditContainer,
       PROGRAM,
       ProgramWithdrawContainer,
       canInvest,
@@ -48,7 +46,8 @@ class ProgramDetailsDescription extends PureComponent {
       investmentData,
       onChangeInvestmentStatus,
       isAuthenticated,
-      redirectToLogin
+      redirectToLogin,
+      ProgramControls
     } = this.props;
 
     return (
@@ -61,24 +60,16 @@ class ProgramDetailsDescription extends PureComponent {
           onFavoriteClick={onFavoriteClick}
           hasNotifications={hasNotifications}
         />
-        <ProgramDetailsDescriptionControls
+        <ProgramControls
           programDescription={programDescription}
           canCloseProgram={canCloseProgram}
+          canMakeSignalProvider={canMakeSignalProvider}
           isOwnProgram={isOwnProgram}
-          ProgramFollowContainer={ProgramFollowContainer}
-          ClosePeriodContainer={ClosePeriodContainer}
-          CloseProgramContainer={CloseProgramContainer}
-          ProgramUnfollowContainer={ProgramUnfollowContainer}
-          ProgramDepositContainer={ProgramDepositContainer}
-          ProgramDetailContext={ProgramDetailContext}
-          AssetEditContainer={AssetEditContainer}
-          PROGRAM={PROGRAM}
           canInvest={canInvest}
           canWithdraw={canWithdraw}
           isAuthenticated={isAuthenticated}
           redirectToLogin={redirectToLogin}
         />
-
         {programDescription.personalProgramDetails && status !== STATUS.ENDED && (
           <div className="program-details-description__additionally">
             <DetailsInvestment

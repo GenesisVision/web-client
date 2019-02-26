@@ -3,6 +3,7 @@ import * as React from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import { ROLE } from "shared/constants/constants";
 import RootState from "shared/reducers/root-reducer";
 
 import Page from "../../page/page";
@@ -10,7 +11,6 @@ import WalletBalanceElements from "./wallet-balance/wallet-balance-elements";
 import WalletBalanceLoader from "./wallet-balance/wallet-balance-loader";
 import WalletContainerTotal from "./wallet-container/wallet-container-total";
 import WalletSettingsContainer from "./wallet-settings/wallet-settings-container";
-import { ROLE } from "shared/constants/constants";
 
 interface IWalletProps {
   t(str: string): string;
@@ -59,7 +59,9 @@ const mapStateToProps = (state: RootState) => ({
   isPayFeesWithGvt: state.wallet.info.data
     ? state.wallet.info.data.payFeesWithGvt
     : null,
-  filters: state.wallet.filters.data ? state.wallet.filters.data : null
+  filters: state.platformData.data
+    ? state.platformData.data.enums.multiWallet
+    : []
 });
 
 export default compose(

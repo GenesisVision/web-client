@@ -149,11 +149,12 @@ class OpenTradesTable extends Component<
             </TableCell>
             <TableCell>
               <Profitability
-                value={+formatValue(signalTrade.profit)}
+                value={+formatPercent(signalTrade.profit)}
                 prefix="sign"
               >
                 <NumberFormat
                   value={formatPercent(signalTrade.profit)}
+                  allowNegative={false}
                   thousandSeparator=" "
                   displayType="text"
                   suffix=" %"

@@ -1,15 +1,15 @@
 import "./deposit.scss";
 
+import { ProgramInvestInfo, WalletData } from "gv-api-web";
 import React, { Fragment } from "react";
+import translate from "react-i18next/src/translate";
+import { connect } from "react-redux";
+import { compose } from "redux";
+import { ASSET, ROLE } from "shared/constants/constants";
+import RootState from "shared/reducers/root-reducer";
 
 import DepositForm from "./deposit-form";
 import DepositTop from "./deposit-top";
-import { ASSET, ROLE } from "shared/constants/constants";
-import RootState from "shared/reducers/root-reducer";
-import { compose } from "redux";
-import { connect } from "react-redux";
-import translate from "react-i18next/src/translate";
-import { ProgramInvestInfo, WalletData } from "gv-api-web";
 
 export type SubmitInfo = {
   code: any;

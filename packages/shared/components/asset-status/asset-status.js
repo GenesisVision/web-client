@@ -3,13 +3,13 @@ import "./asset-status.scss";
 import classnames from "classnames";
 import React, { Fragment, PureComponent } from "react";
 import { translate } from "react-i18next";
+import connect from "react-redux/es/connect/connect";
+import { compose } from "redux";
 import GVScroll from "shared/components/scroll/gvscroll";
 import { STATUS } from "shared/constants/constants";
 
 import Popover from "../popover/popover";
 import AssetStatusRequests from "./asset-status-requests";
-import { compose } from "redux";
-import connect from "react-redux/es/connect/connect";
 
 const getStatusClassName = (status, className) => {
   return classnames("asset-status", className, {

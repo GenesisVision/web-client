@@ -1,4 +1,4 @@
-import { MultiWalletFilters, WalletMultiSummary } from "gv-api-web";
+import { WalletMultiSummary } from "gv-api-web";
 import { combineReducers } from "redux";
 import apiReducerFactory, {
   IApiReducerFactory
@@ -12,15 +12,11 @@ import {
 
 export type WalletState = DeepReadonly<{
   info: IApiReducerFactory<WalletMultiSummary>;
-  filters: IApiReducerFactory<MultiWalletFilters>;
 }>;
 
 const walletReducer = combineReducers<WalletState>({
   info: apiReducerFactory<WalletMultiSummary>({
     apiType: WALLET_BALANCE
-  }),
-  filters: apiReducerFactory<MultiWalletFilters>({
-    apiType: WALLET_TRANSACTIONS_FILTERS
   })
 });
 

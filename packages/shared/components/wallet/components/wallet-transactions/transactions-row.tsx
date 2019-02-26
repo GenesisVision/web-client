@@ -9,7 +9,7 @@ import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import TransactionDetailsPopup from "shared/modules/transaction-details/transaction-details-popup";
 import filesService from "shared/services/file-service";
-import { formatValue } from "shared/utils/formatter";
+import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 export interface ITransactionRowProps {
   transaction: MultiWalletTransaction;
@@ -52,7 +52,10 @@ const AmountConvertTransaction: React.FunctionComponent<{
   <Fragment>
     <span className="wallet-transactions__col">
       <NumberFormat
-        value={formatValue(props.transaction.amount)}
+        value={formatCurrencyValue(
+          props.transaction.amount,
+          props.transaction.currencyFrom
+        )}
         thousandSeparator=" "
         displayType="text"
         suffix={` ${props.transaction.currencyFrom}`}
@@ -61,7 +64,10 @@ const AmountConvertTransaction: React.FunctionComponent<{
     <span className="wallet-transactions__back-arrow">&rarr;</span>
     <span className="wallet-transactions__col">
       <NumberFormat
-        value={formatValue(props.transaction.amountTo)}
+        value={formatCurrencyValue(
+          props.transaction.amountTo,
+          props.transaction.currencyTo
+        )}
         thousandSeparator=" "
         displayType="text"
         suffix={` ${props.transaction.currencyTo}`}
@@ -126,11 +132,15 @@ class TransactionsRow extends React.Component<
             {isConvertAction ? (
               <AmountConvertTransaction transaction={transaction} />
             ) : (
-              <Profitability value={formatValue(transaction.amount)}>
+              <Profitability value={transaction.amount}>
                 <NumberFormat
-                  value={formatValue(transaction.amount)}
+                  value={formatCurrencyValue(
+                    transaction.amount,
+                    transaction.currencyFrom
+                  )}
                   thousandSeparator=" "
                   displayType="text"
+                  allowNegative={false}
                   suffix={` ${transaction.currencyFrom}`}
                 />
               </Profitability>

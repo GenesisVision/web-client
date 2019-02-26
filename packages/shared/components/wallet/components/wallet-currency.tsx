@@ -6,9 +6,6 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
 import Page from "shared/components/page/page";
-import BTCIcon from "shared/media/currency/BTC.svg";
-import ETHIcon from "shared/media/currency/ETH.svg";
-import GVTIcon from "shared/media/currency/GVT.svg";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
 import WalletTransferPopup from "shared/modules/wallet-transfer/wallet-transfer-popup";
 import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
@@ -19,16 +16,6 @@ import WalletBalanceButtons from "./wallet-balance/wallet-balance-buttons";
 import WalletBalanceElements from "./wallet-balance/wallet-balance-elements";
 import WalletBalanceLoader from "./wallet-balance/wallet-balance-loader";
 import WalletContainer from "./wallet-container/wallet-container";
-
-const Icons = {
-  GVT: GVTIcon,
-  BTC: BTCIcon,
-  ETH: ETHIcon
-};
-
-export const getWalletIcon = (currency: string): string => {
-  return Icons[currency];
-};
 
 interface IWalletProps {
   info?: WalletData;
@@ -134,7 +121,9 @@ const mapStateToProps = (state: RootState, ownProps) => {
   return {
     info,
     isPending,
-    filters: state.wallet.filters.data ? state.wallet.filters.data : null
+    filters: state.platformData.data
+      ? state.platformData.data.enums.multiWallet
+      : []
   };
 };
 
