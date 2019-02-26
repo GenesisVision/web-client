@@ -52,7 +52,7 @@ class WalletSettingsContainer extends Component {
   };
 
   render() {
-    const { t } = this.props;
+    const { t, role } = this.props;
     const { isPayFeesWithGvt, isPending } = this.state;
 
     return (
@@ -61,6 +61,7 @@ class WalletSettingsContainer extends Component {
         label={t("wallet-page.settings.label")}
         isPayFeesWithGvt={isPayFeesWithGvt}
         isPending={isPending}
+        role={role}
         onPayGVTFee={this.handleOn}
         offPayGVTFee={this.handleOff}
       />
@@ -76,6 +77,12 @@ WalletSettingsContainer.propTypes = {
   })
 };
 
+const mapStateToProps = state => ({
+  role: state.profileHeader.info.data
+    ? state.profileHeader.info.data.userType
+    : null
+});
+
 const mapDispatchToProps = dispatch => ({
   services: bindActionCreators(
     { onPayFeesWithGvt, offPayFeesWithGvt },
@@ -87,7 +94,7 @@ const mapDispatchToProps = dispatch => ({
 export default compose(
   translate(),
   connect(
-    undefined,
+    mapStateToProps,
     mapDispatchToProps
   )
 )(WalletSettingsContainer);

@@ -24,7 +24,7 @@ class WalletSettings extends Component {
   };
 
   render() {
-    const { isPayFeesWithGvt, name, label, isPending } = this.props;
+    const { isPayFeesWithGvt, name, label, isPending, role } = this.props;
     const { isOpenGVTFees } = this.state;
     return (
       <div className="wallet-settings">
@@ -46,7 +46,11 @@ class WalletSettings extends Component {
           color="primary"
           onChange={this.handleSwitch}
         />
-        <GVTFees open={isOpenGVTFees} onClose={this.handleCloseGVTFees} />
+        <GVTFees
+          open={isOpenGVTFees}
+          onClose={this.handleCloseGVTFees}
+          role={role}
+        />
       </div>
     );
   }
