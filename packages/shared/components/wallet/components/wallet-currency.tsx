@@ -121,7 +121,9 @@ const mapStateToProps = (state: RootState, ownProps) => {
   return {
     info,
     isPending,
-    filters: state.wallet.filters.data ? state.wallet.filters.data : null
+    filters: state.platformData.data
+      ? state.platformData.data.enums.multiWallet
+      : []
   };
 };
 
