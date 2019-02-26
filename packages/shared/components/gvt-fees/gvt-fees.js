@@ -2,88 +2,79 @@ import "./gvt-fees.scss";
 
 import React, { Component } from "react";
 import { translate } from "react-i18next";
-import NumberFormat from "react-number-format";
 import Dialog from "shared/components/dialog/dialog";
-
-import { formatValue } from "../../utils/formatter";
-import StatisticItem from "../statistic-item/statistic-item";
-
-// const renderLimits = (t, investmentsLimits, currency) => {
-//   return investmentsLimits.map(levelInfo => {
-//     return (
-//       <div key={levelInfo.level} className="gvt-fees__limit">
-//         <div
-//           className={`gvt-fees__icon gvt-fees__icon--${
-//             levelInfo.level
-//           }`}
-//         >
-//           {levelInfo.level}
-//         </div>
-//         <StatisticItem accent label={t("gvt-fees.titles.limit")}>
-//           <NumberFormat
-//             value={formatValue(levelInfo.investmentLimit)}
-//             thousandSeparator={" "}
-//             displayType="text"
-//             suffix={` ${currency}`}
-//           />
-//         </StatisticItem>
-//       </div>
-//     );
-//   });
-// };
+import { ROLE } from "shared/constants/constants";
 
 class GVTFees extends Component {
   render() {
-    const { t, open, onClose } = this.props;
+    const { t, open, onClose, role } = this.props;
     return (
-      <Dialog wider open={open} onClose={onClose} className="gvt-fees">
+      <Dialog wider open={true} onClose={onClose} className="gvt-fees">
         <div className="gvt-fees__container">
           <div className="gvt-fees__header">
             <h1>{t("gvt-fees.titles.main")}</h1>
           </div>
           <div className="gvt-fees__row">
-            <div className="gvt-fees__left-block">
+            <div className="gvt-fees__text-block">
               <p className="gvt-fees__paragraph">
                 {t("gvt-fees.section.text-1")}
               </p>
-              <p className="gvt-fees__paragraph">
-                {t("gvt-fees.section.text-2")}
-              </p>
-              <h4 className="gvt-fees__subtitle">
-                {t("gvt-fees.list.subtitle")}
-              </h4>
-              <ol className="gvt-fees__list">
-                <li className="gvt-fees__list-item">
-                  {t("gvt-fees.list.list-item-1")}
-                </li>
-                <li className="gvt-fees__list-item">
-                  {t("gvt-fees.list.list-item-2")}
-                </li>
-                <li className="gvt-fees__list-item">
-                  {t("gvt-fees.list.list-item-3")}
-                </li>
-                <li className="gvt-fees__list-item">
-                  {t("gvt-fees.list.list-item-4")}
-                </li>
-                <li className="gvt-fees__list-item">
-                  {t("gvt-fees.list.list-item-5")}
-                </li>
-                <li className="gvt-fees__list-item">
-                  {t("gvt-fees.list.list-item-6")}
-                </li>
-                <li className="gvt-fees__list-item">
-                  {t("gvt-fees.list.list-item-7")}
-                </li>
-              </ol>
+              {role === ROLE.INVESTOR ? (
+                <p className="gvt-fees__paragraph">
+                  {t("gvt-fees.section.text-2")}
+                </p>
+              ) : null}
             </div>
-            <div className="gvt-fees__right-block">
-              <h4 className="gvt-fees__subtitle">
-                {t("gvt-fees.titles.limits")}
-              </h4>
-              <div className="gvt-fees__limits">
-                {/*{investmentsLimits.length &&*/}
-                {/*renderLimits(t, investmentsLimits, currency)}*/}
-              </div>
+            <table className="gvt-fees__table">
+              <thead>
+                <tr>
+                  <th className="gvt-fees__table-head">
+                    Amount held for 7 days*
+                  </th>
+                  <th className="gvt-fees__table-head">Discount</th>
+                  <th className="gvt-fees__table-head">Fees</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="gvt-fees__table-value">Any GVT</td>
+                  <td className="gvt-fees__table-value">30%</td>
+                  <td className="gvt-fees__table-value">0.210%</td>
+                </tr>
+                <tr>
+                  <td className="gvt-fees__table-value">
+                    From 10 GVT up to 25
+                  </td>
+                  <td className="gvt-fees__table-value">35%</td>
+                  <td className="gvt-fees__table-value">0.195%</td>
+                </tr>
+                <tr>
+                  <td className="gvt-fees__table-value">Up to 50 GVT</td>
+                  <td className="gvt-fees__table-value">40%</td>
+                  <td className="gvt-fees__table-value">0.180%</td>
+                </tr>
+                <tr>
+                  <td className="gvt-fees__table-value">Up to 100 GVT</td>
+                  <td className="gvt-fees__table-value">45%</td>
+                  <td className="gvt-fees__table-value">0.165%</td>
+                </tr>
+                <tr>
+                  <td className="gvt-fees__table-value">Up to 500 GVT</td>
+                  <td className="gvt-fees__table-value">50%</td>
+                  <td className="gvt-fees__table-value">0.150%</td>
+                </tr>
+                <tr>
+                  <td className="gvt-fees__table-value">500 GVT+</td>
+                  <td className="gvt-fees__table-value">55%</td>
+                  <td className="gvt-fees__table-value">0.135%</td>
+                </tr>
+              </tbody>
+            </table>
+            <div className="gvt-fees__text-block">
+              <p className="gvt-fees__paragraph">
+                * Please note that to be eligible for a discount tier you should
+                hold GVT on your Genesis Markets wallet for at least 7 days
+              </p>
             </div>
           </div>
         </div>
