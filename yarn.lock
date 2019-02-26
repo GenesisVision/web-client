@@ -853,6 +853,11 @@
   resolved "https://registry.yarnpkg.com/@emotion/memoize/-/memoize-0.6.6.tgz#004b98298d04c7ca3b4f50ca2035d4f60d2eed1b"
   integrity sha512-h4t4jFjtm1YV7UirAFuSuFGyLa+NNxjdkq6DpFLANNQY5rHueFZHVY+8Cu1HYVP6DrheB0kv4m5xPjo7eKT7yQ==
 
+"@juggle/resize-observer@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@juggle/resize-observer/-/resize-observer-1.1.1.tgz#c7a8cfb0628b4f885c68dfe021722c0f106b5c1f"
+  integrity sha512-oftbnYD1oCNk5wM0UlA6d6rp0j0U2Omx0LIuyxkdRXf6kqAftUCwbMvt3ztWs6x6yvkQ32Mr/dEjyge3pon6rw==
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"

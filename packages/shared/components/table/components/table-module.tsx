@@ -1,6 +1,6 @@
 import React from "react";
-import { updateFilter } from "shared/components/table//helpers/filtering.helpers";
 import { calculateTotalPages } from "shared/components/table//helpers/paging.helpers";
+import { updateFilter } from "shared/components/table/helpers/filtering.helpers";
 import { IDataModel, IPaging } from "shared/constants/constants";
 
 import { composeRequestFilters } from "../services/table.service";
@@ -81,7 +81,7 @@ class TableModule extends React.Component<
           isPending: false
         }));
       })
-      .catch((e: any) => {
+      .catch(() => {
         this.setState({ isPending: false });
       });
   };
