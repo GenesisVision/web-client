@@ -8,8 +8,8 @@ import Status from "shared/components/status/status";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import TransactionDetailsPopup from "shared/modules/transaction-details/transaction-details-popup";
-import filesService from "shared/services/file-service";
-import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
+import { formatCurrencyValue } from "shared/utils/formatter";
+import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
 
 export interface ITransactionRowProps {
   transaction: MultiWalletTransaction;
@@ -20,27 +20,27 @@ export interface ITransactionRowState {
   isOpen: boolean;
 }
 
-const ConvertTransaction: React.FunctionComponent<
-  ITransactionRowProps
-> = props => {
+const ConvertTransaction: React.FunctionComponent<ITransactionRowProps> = ({
+  transaction
+}) => {
   return (
     <Fragment>
       <span className="wallet-transactions__col">
-        <img
-          src={filesService.getFileUrl(props.transaction.logoFrom)}
-          className="wallet-transactions__icon"
-          alt="Icon"
+        <WalletImage
+          url={transaction.logoFrom}
+          imageClassName="wallet-transactions__icon"
+          alt={transaction.currencyFrom}
         />
-        {props.transaction.currencyFrom}
+        {transaction.currencyFrom}
       </span>
       <span className="wallet-transactions__back-arrow">&rarr;</span>
       <span className="wallet-transactions__col">
-        <img
-          src={filesService.getFileUrl(props.transaction.logoTo)}
-          className="wallet-transactions__icon"
-          alt="Icon"
+        <WalletImage
+          url={transaction.logoTo}
+          imageClassName="wallet-transactions__icon"
+          alt={transaction.currencyTo}
         />
-        {props.transaction.currencyTo}
+        {transaction.currencyTo}
       </span>
     </Fragment>
   );
@@ -102,18 +102,20 @@ class TransactionsRow extends React.Component<
         <TableRow className="wallet-transactions__row" onClick={this.openPopup}>
           {!walletCurrency && (
             <TableCell className="wallet-transactions__cell wallet-transactions__cell--wallet">
-              {isConvertAction ? (
-                <ConvertTransaction transaction={transaction} />
-              ) : (
-                <Fragment>
-                  <img
-                    src={filesService.getFileUrl(transaction.logoFrom)}
-                    className="wallet-transactions__icon"
-                    alt="Icon"
-                  />
-                  {transaction.currencyFrom}
-                </Fragment>
-              )}
+              <div className="wallet-transactions__cell--wallet-wrapper">
+                {isConvertAction ? (
+                  <ConvertTransaction transaction={transaction} />
+                ) : (
+                  <Fragment>
+                    <WalletImage
+                      url={transaction.logoFrom}
+                      imageClassName="wallet-transactions__icon"
+                      alt={transaction.currencyFrom}
+                    />
+                    {transaction.currencyFrom}
+                  </Fragment>
+                )}
+              </div>
             </TableCell>
           )}
           <TableCell className="wallet-transactions__cell wallet-transactions__cell--date">

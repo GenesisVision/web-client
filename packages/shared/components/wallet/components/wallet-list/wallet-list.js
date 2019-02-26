@@ -1,26 +1,26 @@
-import "./wallet-list.scss";
-
-import { WalletData } from "gv-api-web";
-import React, { Component } from "react";
-import { translate } from "react-i18next";
-import NumberFormat from "react-number-format";
+import { formatCurrencyValue } from "shared/utils/formatter";
 import { Link } from "react-router-dom";
+import { translate } from "react-i18next";
+import { WalletData } from "gv-api-web";
 import Chip from "shared/components/chip/chip";
+import NumberFormat from "react-number-format";
+import React, { Component } from "react";
 import TableCell from "shared/components/table/components/table-cell";
 import TableModule from "shared/components/table/components/table-module";
 import TableRow from "shared/components/table/components/table-row";
-import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
-import { composeWalletCurrencyUrl } from "shared/components/wallet/wallet.routes";
-import ArrowIcon from "shared/media/arrow-up.svg";
-import ConvertIcon from "shared/media/convert.svg";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
+import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
 import WalletTransferPopup from "shared/modules/wallet-transfer/wallet-transfer-popup";
 import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
-import filesService from "shared/services/file-service";
-import { formatCurrencyValue } from "shared/utils/formatter";
 
-import { walletTableTransactionsSelector } from "../wallet-transactions/wallet-transactions.selector";
+import { composeWalletCurrencyUrl } from "shared/components/wallet/wallet.routes";
+import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
+import ArrowIcon from "shared/media/arrow-up.svg";
+import ConvertIcon from "shared/media/convert.svg";
+
+import "./wallet-list.scss";
 import { WALLET_LIST_COLUMNS } from "./wallet-list.constants";
+import { walletTableTransactionsSelector } from "../wallet-transactions/wallet-transactions.selector";
 
 class WalletList extends Component {
   state = {
@@ -88,10 +88,10 @@ class WalletList extends Component {
                       state: "Wallet"
                     }}
                   >
-                    <img
-                      src={filesService.getFileUrl(wallet.logo)}
-                      className="wallet-list__icon"
-                      alt="Icon"
+                    <WalletImage
+                      url={wallet.logo}
+                      imageClassName="wallet-list__icon"
+                      alt={wallet.currency}
                     />
                     {wallet.currency}
                   </Link>

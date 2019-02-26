@@ -3,13 +3,12 @@ import moment from "moment";
 import * as React from "react";
 import { Fragment } from "react";
 import NumberFormat from "react-number-format";
-import ImageBase from "shared/components/avatar/image-base";
 import Profitability from "shared/components/profitability/profitability";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
-import FundAsset from "shared/media/fund-asset.svg";
 import TransactionDetailsPopup from "shared/modules/transaction-details/transaction-details-popup";
 import { formatCurrencyValue } from "shared/utils/formatter";
+import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
 
 export interface ITransactionRowProps {
   transaction: MultiWalletExternalTransaction;
@@ -46,10 +45,9 @@ class AllDepositsWithdrawalsRow extends React.Component<
           onClick={this.openPopup}
         >
           <TableCell className="wallet-deposits-withdrawals__cell wallet-deposits-withdrawals__cell--wallet">
-            <ImageBase
+            <WalletImage
               url={transaction.logo}
               alt={transaction.currency}
-              defaultImage={FundAsset}
               className="wallet-deposits-withdrawals__icon-container"
               imageClassName="wallet-deposits-withdrawals__icon"
             />

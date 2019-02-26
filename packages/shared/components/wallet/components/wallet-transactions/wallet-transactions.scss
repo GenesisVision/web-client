@@ -29,6 +29,10 @@
     &--type {
       text-align: right;
     }
+    &--wallet-wrapper {
+      display: flex;
+      align-items: center;
+    }
   }
 
   & .table__cell:last-child {
