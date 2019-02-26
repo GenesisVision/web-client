@@ -79,6 +79,8 @@ class WalletCurrency extends React.Component<IWalletProps> {
               handleAddFunds={this.handleOpenAddFundsPopup}
               handleWithdraw={this.handleOpenWithdrawPopup}
               handleTransfer={this.handleOpenTransferPopup}
+              isDepositEnabled={info.isDepositEnabled}
+              isWithdrawalEnabled={info.isWithdrawalEnabled}
             />
           </div>
           <WalletBalanceElements
