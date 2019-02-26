@@ -75,7 +75,11 @@ class DepositForm extends React.Component<OwnProps> {
   };
 
   investAmount = (amount: number): number => {
-    return (amount || 0) - this.gvFee(amount) - this.entryFee(amount);
+    return (
+      (amount || 0) -
+      (this.props.asset === ASSET.PROGRAM ? this.gvFee(amount) : 0) -
+      this.entryFee(amount)
+    );
   };
 
   isAllow = (values: any): boolean => {
@@ -120,7 +124,7 @@ class DepositForm extends React.Component<OwnProps> {
       });
   };
   getMaxAmount = () => {
-    const { setFieldValue, info, wallets, values } = this.props;
+    const { setFieldValue, info, wallets, values, asset } = this.props;
     const { walletCurrency, rate } = values;
     const { availableToInvest } = info;
     const wallet = wallets.find(wallet => wallet.currency === walletCurrency);
@@ -130,7 +134,9 @@ class DepositForm extends React.Component<OwnProps> {
     if (availableToInvest !== undefined)
       maxAvailable =
         (availableToInvest /
-          (100 - info.gvCommission - this.composeEntryFee(info.entryFee))) *
+          (100 -
+            (asset === ASSET.PROGRAM ? info.gvCommission : 0) -
+            this.composeEntryFee(info.entryFee))) *
         100;
     const maxAvailableInWalletCurrency = convertToCurrency(maxAvailable, rate);
     const maxInvest = formatCurrencyValue(
@@ -236,23 +242,25 @@ class DepositForm extends React.Component<OwnProps> {
               </span>
             </li>
           )}
-          <li className="dialog-list__item">
-            <span className="dialog-list__title">
-              {t("deposit-asset.gv-commission")}
-            </span>
-            <span className="dialog-list__value">
-              {info.gvCommission} %
-              <NumberFormat
-                value={formatCurrencyValue(
-                  this.gvFee(values.amount),
-                  walletCurrency
-                )}
-                prefix={" ("}
-                suffix={` ${walletCurrency})`}
-                displayType="text"
-              />
-            </span>
-          </li>
+          {asset === ASSET.PROGRAM && (
+            <li className="dialog-list__item">
+              <span className="dialog-list__title">
+                {t("deposit-asset.gv-commission")}
+              </span>
+              <span className="dialog-list__value">
+                {info.gvCommission} %
+                <NumberFormat
+                  value={formatCurrencyValue(
+                    this.gvFee(values.amount),
+                    walletCurrency
+                  )}
+                  prefix={" ("}
+                  suffix={` ${walletCurrency})`}
+                  displayType="text"
+                />
+              </span>
+            </li>
+          )}
           <li className="dialog-list__item">
             <span className="dialog-list__title">
               {t("deposit-asset.investment-amount")}
