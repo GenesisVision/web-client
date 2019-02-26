@@ -75,7 +75,11 @@ class DepositForm extends React.Component<OwnProps> {
   };
 
   investAmount = (amount: number): number => {
-    return (amount || 0) - this.gvFee(amount) - this.entryFee(amount);
+    return (
+      (amount || 0) -
+      (this.props.asset === ASSET.PROGRAM ? this.gvFee(amount) : 0) -
+      this.entryFee(amount)
+    );
   };
 
   isAllow = (values: any): boolean => {
