@@ -20,7 +20,7 @@ import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
 import { PROGRAM } from "shared/constants/constants";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
-import { formatPercent, formatValue } from "shared/utils/formatter";
+import { formatCurrencyValue, formatPercent } from "shared/utils/formatter";
 
 import {
   Column,
@@ -126,11 +126,11 @@ const DashboardPrograms: FunctionComponent<
             <ProgramPeriodEnd periodEnds={program.periodEnds} />
           </TableCell>
           <TableCell className="programs-table__cell dashboard-programs__cell--value">
-            {formatPercent(program.personalDetails.gvtValue)} GVT
+            {formatCurrencyValue(program.personalDetails.gvtValue, "GVT")} GVT
           </TableCell>
           <TableCell className="programs-table__cell dashboard-programs__cell--profit">
             <NumberFormat
-              value={formatValue(program.statistic.profitPercent)}
+              value={formatPercent(program.statistic.profitPercent)}
               suffix="%"
               displayType="text"
             />
