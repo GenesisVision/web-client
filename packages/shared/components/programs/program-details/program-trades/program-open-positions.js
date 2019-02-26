@@ -83,11 +83,15 @@ class ProgramOpenPositions extends Component {
                 />
               </TableCell>
               <TableCell className="details-trades__cell program-details-trades__cell--profit">
-                <Profitability value={+position.profit} prefix="sign">
+                <Profitability
+                  value={+formatValue(position.profit, DECIMAL_SCALE)}
+                  prefix="sign"
+                >
                   <NumberFormat
-                    value={formatValue(position.profit, DECIMAL_SCALE, true)}
+                    value={formatValue(position.profit, DECIMAL_SCALE)}
                     thousandSeparator=" "
                     displayType="text"
+                    allowNegative={false}
                     suffix={` ${currency}`}
                   />
                 </Profitability>

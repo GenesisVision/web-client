@@ -86,12 +86,13 @@ class DashboardCopytrading extends Component<
             <TableCell>{signal.personalDetails.investorTrades}</TableCell>
             <TableCell>
               <Profitability
-                value={+formatValue(signal.personalDetails.investorProfit)}
+                value={+formatPercent(signal.personalDetails.investorProfit)}
                 prefix="sign"
               >
                 <NumberFormat
                   value={formatPercent(signal.personalDetails.investorProfit)}
                   thousandSeparator=" "
+                  allowNegative={false}
                   displayType="text"
                   suffix=" %"
                 />

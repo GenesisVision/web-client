@@ -79,7 +79,10 @@ class FundsTableRow extends Component {
           />
         </TableCell>
         <TableCell className="funds-table__cell funds-table__cell--profit">
-          <Profitability value={fund.statistic.profitPercent} prefix="sign">
+          <Profitability
+            value={formatValue(fund.statistic.profitPercent, 2)}
+            prefix="sign"
+          >
             <NumberFormat
               value={formatValue(fund.statistic.profitPercent, 2)}
               suffix="%"

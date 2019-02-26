@@ -147,13 +147,14 @@ class TradesHistoryTable extends Component<
             </TableCell>
             <TableCell>
               <Profitability
-                value={+formatValue(signalTrade.profit)}
+                value={+formatPercent(signalTrade.profit)}
                 prefix="sign"
               >
                 <NumberFormat
                   value={formatPercent(signalTrade.profit)}
                   thousandSeparator=" "
                   displayType="text"
+                  allowNegative={false}
                   suffix=" %"
                 />
               </Profitability>

@@ -78,12 +78,9 @@ class DetailsInvestment extends PureComponent {
             >
               <Profitability value={value - invested} prefix="sign">
                 <NumberFormat
-                  value={formatCurrencyValue(
-                    value - invested,
-                    balanceCurrency,
-                    true
-                  )}
+                  value={formatCurrencyValue(value - invested, balanceCurrency)}
                   suffix={` ${balanceCurrency}`}
+                  allowNegative={false}
                   displayType="text"
                 />
               </Profitability>
