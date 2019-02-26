@@ -16,7 +16,7 @@ export const WALLET_TOTAL_PAGE_ROUTE = "/wallet";
 export const CURRENCY_SLUG = "currency";
 export const WALLET_CURRENCY_PAGE_ROUTE = `${WALLET_TOTAL_PAGE_ROUTE}/:${CURRENCY_SLUG}`;
 
-export const composeWalletCurrencytUrl = (url: string): string =>
+export const composeWalletCurrencyUrl = (url: string): string =>
   replaceParams(WALLET_CURRENCY_PAGE_ROUTE, {
     [`:${CURRENCY_SLUG}`]: url
   });

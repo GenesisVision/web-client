@@ -1,109 +1,70 @@
-import { MultiWalletExternalTransaction } from "gv-api-web";
-import moment from "moment";
+import { CopyTradingAccountInfo } from "gv-api-web";
 import * as React from "react";
+import { InjectedTranslateProps } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { Link } from "react-router-dom";
 import Profitability from "shared/components/profitability/profitability";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
-import GVTIcon from "shared/media/currency/GVT.svg";
-import TransactionDetailsPopup from "shared/modules/transaction-details/transaction-details-popup";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
+import { composeWalletCurrencyUrl } from "../../wallet.routes";
 import WalletCopytradingActions from "./wallet-copytrading-action-cell";
 
 export interface ITransactionRowProps {
-  transaction: MultiWalletExternalTransaction;
-}
-
-export interface ITransactionRowState {
-  isOpen: boolean;
+  wallet: CopyTradingAccountInfo;
 }
 
 class WalletCopytradingRow extends React.Component<
-  ITransactionRowProps,
-  ITransactionRowState
+  ITransactionRowProps & InjectedTranslateProps
 > {
-  state = {
-    isOpen: false
-  };
-  openPopup = () => {
-    this.setState({ isOpen: true });
-  };
-  closePopup = () => {
-    this.setState({ isOpen: false });
-  };
   render() {
-    const { transaction } = this.props;
+    const { t, wallet } = this.props;
     return (
       <React.Fragment>
-        <TransactionDetailsPopup
-          transactionId={transaction.id}
-          open={this.state.isOpen}
-          onClose={this.closePopup}
-        />
-        <TableRow
-          className="wallet-copytrading__row"
-          // onClick={this.openPopup}
-        >
-          <TableCell className="wallet-copytrading__cell wallet-copytrading__cell--wallet">
-            <img
-              src={GVTIcon}
-              className="wallet-copytrading__icon"
-              alt="Icon"
-            />
-            Genesis Vision
+        <TableRow className="wallet-copytrading__row">
+          <TableCell className="wallet-list__cell wallet-list__cell--wallet">
+            <Link
+              className="wallet-list__link"
+              to={{
+                pathname: composeWalletCurrencyUrl(
+                  wallet.currency.toLowerCase()
+                ),
+                state: `/ ${t("wallet-page.title")}`
+              }}
+            >
+              <img
+                src={filesService.getFileUrl(wallet.logo)}
+                className="wallet-list__icon"
+                alt="Icon"
+              />
+              {wallet.currency}
+            </Link>
           </TableCell>
           <TableCell className="wallet-copytrading__cell wallet-copytrading__cell--balance">
-            <Profitability
-              value={formatCurrencyValue(
-                100, //transaction.balance,
-                transaction.currency
-              )}
-            >
+            <Profitability value={wallet.balance}>
               <NumberFormat
-                value={formatCurrencyValue(
-                  100, //transaction.balance,
-                  transaction.currency
-                )}
+                value={formatCurrencyValue(wallet.balance, wallet.currency)}
                 thousandSeparator=" "
                 displayType="text"
-                suffix={` ${transaction.currency}`}
               />
             </Profitability>
           </TableCell>
           <TableCell className="wallet-copytrading__cell wallet-copytrading__cell--equity">
-            <Profitability
-              value={formatCurrencyValue(
-                100, //transaction.equity,
-                transaction.currency
-              )}
-            >
+            <Profitability value={wallet.equity}>
               <NumberFormat
-                value={formatCurrencyValue(
-                  100, //100, //transaction.equity,
-                  transaction.currency
-                )}
+                value={formatCurrencyValue(wallet.equity, wallet.currency)}
                 thousandSeparator=" "
                 displayType="text"
-                suffix={` ${transaction.currency}`}
               />
             </Profitability>
           </TableCell>
           <TableCell className="wallet-copytrading__cell wallet-copytrading__cell--freeMargin">
-            <Profitability
-              value={formatCurrencyValue(
-                100, //transaction.freeMargin,
-                transaction.currency
-              )}
-            >
+            <Profitability value={wallet.freeMargin}>
               <NumberFormat
-                value={formatCurrencyValue(
-                  100, //transaction.freeMargin,
-                  transaction.currency
-                )}
+                value={formatCurrencyValue(wallet.equity, wallet.currency)}
                 thousandSeparator=" "
                 displayType="text"
-                suffix={` ${transaction.currency}`}
               />
             </Profitability>
           </TableCell>

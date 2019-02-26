@@ -10,7 +10,7 @@ import TableCell from "shared/components/table/components/table-cell";
 import TableModule from "shared/components/table/components/table-module";
 import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
-import { composeWalletCurrencytUrl } from "shared/components/wallet/wallet.routes";
+import { composeWalletCurrencyUrl } from "shared/components/wallet/wallet.routes";
 import ArrowIcon from "shared/media/arrow-up.svg";
 import ConvertIcon from "shared/media/convert.svg";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
@@ -82,7 +82,7 @@ class WalletList extends Component {
                   <Link
                     className="wallet-list__link"
                     to={{
-                      pathname: composeWalletCurrencytUrl(
+                      pathname: composeWalletCurrencyUrl(
                         wallet.currency.toLowerCase()
                       ),
                       state: "Wallet"
