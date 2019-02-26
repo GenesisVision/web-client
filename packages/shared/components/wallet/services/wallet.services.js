@@ -1,8 +1,11 @@
+import { CopyTradingAccountInfo } from "gv-api-web";
 import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
+import signalApi from "shared/services/api-client/signal-api";
 import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
 
+import { mapToTableItems } from "../../table/helpers/mapper";
 import * as actions from "../actions/wallet.actions";
 
 export const fetchWallets = () => (dispatch, getState) => {
@@ -73,4 +76,36 @@ export const resendWithdrawRequest = txId => (dispatch, getState) => {
     .catch(err => {
       dispatch(alertMessageActions.error(err.errorMessage));
     });
+};
+
+export const fetchMultiTransactionsExternal = (
+  currency: string,
+  filters: any
+) => {
+  const authorization = authService.getAuthArg();
+  const filtering = {
+    ...filters,
+    currency
+  };
+  return walletApi
+    .v10WalletMultiTransactionsExternalGet(authorization, filtering)
+    .then(mapToTableItems("transactions"));
+};
+
+export const fetchMultiTransactions = (currency: string, filters: any) => {
+  const authorization = authService.getAuthArg();
+  const filtering = {
+    ...filters,
+    currency
+  };
+  return walletApi
+    .v10WalletMultiTransactionsGet(authorization, filtering)
+    .then(mapToTableItems("transactions"));
+};
+
+export const fetchCopytradingAccounts = () => {
+  const authorization = authService.getAuthArg();
+  return signalApi
+    .v10SignalAccountsGet(authorization)
+    .then(mapToTableItems<CopyTradingAccountInfo>("accounts"));
 };

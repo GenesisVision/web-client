@@ -13,8 +13,8 @@ import TableModule from "shared/components/table/components/table-module";
 import { FilterType } from "shared/components/table/helpers/filtering.helpers";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { reduceFilters } from "shared/components/wallet/components/wallet-transactions/wallet-transaction-type-filter.helpers";
-import { walletApi } from "shared/services/api-client/wallet-api";
-import authService from "shared/services/auth-service";
+
+import { fetchMultiTransactionsExternal } from "../../services/wallet.services";
 
 const TRANSACTIONS_FILTERS = {
   dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE
@@ -29,13 +29,8 @@ const DEFAULT_FILTERS = [
 ];
 
 class WalletDepositsWithdrawals extends Component {
-  fetch = filters => {
-    return walletApi
-      .v10WalletMultiTransactionsExternalGet(authService.getAuthArg(), {
-        ...filters,
-        currency: this.props.currency
-      })
-      .then(data => ({ total: data.total, items: data.transactions }));
+  fetchMultiTransactionsExternal = filters => {
+    return fetchMultiTransactionsExternal(this.props.currency, filters);
   };
 
   render() {
@@ -56,7 +51,7 @@ class WalletDepositsWithdrawals extends Component {
             type: filters.multiWalletExternalTransactionType[0]
           }}
           createButtonToolbar={createButtonToolbar}
-          getItems={this.fetch}
+          getItems={this.fetchMultiTransactionsExternal}
           renderFilters={(updateFilter, filtering) => {
             return (
               <Fragment>
