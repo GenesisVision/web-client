@@ -2,15 +2,11 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
-import RootState from "shared/reducers/root-reducer";
 import replaceParams from "shared/utils/replace-params";
 
 import WalletCurrency from "./components/wallet-currency";
 import WalletTotal from "./components/wallet-total";
-import {
-  fetchWalletTransactionsFilters,
-  fetchWallets
-} from "./services/wallet.services";
+import { fetchWallets } from "./services/wallet.services";
 
 export const WALLET_TOTAL_PAGE_ROUTE = "/wallet";
 export const CURRENCY_SLUG = "currency";
@@ -23,13 +19,11 @@ export const composeWalletCurrencytUrl = (url: string): string =>
 
 interface IWalletDispatchToProps {
   fetchWallets(): void;
-  fetchWalletTransactionsFilters(): void;
 }
 
 class WalletRoutes extends React.Component<IWalletDispatchToProps, any> {
   getWallets = () => {
     this.props.fetchWallets();
-    this.props.fetchWalletTransactionsFilters();
   };
 
   componentDidMount() {
@@ -49,5 +43,5 @@ class WalletRoutes extends React.Component<IWalletDispatchToProps, any> {
 
 export default connect(
   undefined,
-  { fetchWallets, fetchWalletTransactionsFilters }
+  { fetchWallets }
 )(WalletRoutes);
