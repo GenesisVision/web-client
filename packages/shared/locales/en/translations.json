@@ -220,7 +220,8 @@
     },
     "fund": {
       "available-to-invest": "Available to invest in fund",
-      "success-alert-message": "Successful request for investment in the fund."
+      "success-alert-message": "Successful request for investment in the fund.",
+      "disclaimer": "After clicking the \"Confirm\" button, your request will be processed within a few minutes."
     }
   },
   "withdraw-program": {
