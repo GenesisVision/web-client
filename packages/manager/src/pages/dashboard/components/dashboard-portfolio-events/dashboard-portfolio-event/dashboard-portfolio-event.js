@@ -8,7 +8,7 @@ import NumberFormat from "react-number-format";
 import PortfolioEventLogo from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
 import Profitability from "shared/components/profitability/profitability";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { formatValue } from "shared/utils/formatter";
+import { formatCurrencyValue } from "shared/utils/formatter";
 
 import {
   isUseProfitability,
@@ -34,7 +34,7 @@ const DashboardPortfolioEvent = ({ t, event }) => {
       {isUseProfitability(event) ? (
         <Profitability value={event.value} prefix="sign">
           <NumberFormat
-            value={formatValue(event.value)}
+            value={formatCurrencyValue(event.value, event.currency, true)}
             displayType="text"
             allowNegative={false}
             suffix={` ${event.currency}`}
@@ -42,7 +42,7 @@ const DashboardPortfolioEvent = ({ t, event }) => {
         </Profitability>
       ) : (
         <NumberFormat
-          value={formatValue(event.value)}
+          value={formatCurrencyValue(event.value, event.currency)}
           displayType="text"
           suffix={` ${event.currency}`}
         />

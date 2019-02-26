@@ -8,7 +8,7 @@ import PortfolioEventLogo from "shared/components/dashboard/dashboard-portfolio-
 import Profitability from "shared/components/profitability/profitability";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { PROFIT_EVENT } from "shared/constants/constants";
-import { formatValue } from "shared/utils/formatter";
+import { formatCurrencyValue } from "shared/utils/formatter";
 
 import { isUseProfitability } from "../../helpers/dashboard-portfolio.helpers";
 
@@ -35,7 +35,7 @@ const DashboardPortfolioEvent = ({ event }) => {
           {isUseProfitability(event) ? (
             <Profitability value={valueTotal} prefix="sign">
               <NumberFormat
-                value={formatValue(valueTotal)}
+                value={formatCurrencyValue(valueTotal, event.currency, true)}
                 displayType="text"
                 allowNegative={false}
                 suffix={` ${event.currency}`}
@@ -43,7 +43,7 @@ const DashboardPortfolioEvent = ({ event }) => {
             </Profitability>
           ) : (
             <NumberFormat
-              value={formatValue(event.value)}
+              value={formatCurrencyValue(event.value, event.currency)}
               displayType="text"
               suffix={` ${event.currency}`}
             />
@@ -55,22 +55,28 @@ const DashboardPortfolioEvent = ({ event }) => {
         <div className="portfolio-event__profit-info">
           <StatisticItem label={"Success fee"} accent>
             <NumberFormat
-              value={formatValue(event.feeSuccessManager)}
+              value={formatCurrencyValue(
+                event.feeSuccessManager,
+                event.feeSuccessManagerCurrency
+              )}
               displayType="text"
               suffix={` ${event.feeSuccessManagerCurrency || ""}`}
             />
           </StatisticItem>
           <StatisticItem label={"GV commission"} accent>
             <NumberFormat
-              value={formatValue(event.feeSuccessPlatform)}
+              value={formatCurrencyValue(
+                event.feeSuccessPlatform,
+                event.feeSuccessPlatformCurrency
+              )}
               displayType="text"
               suffix={` ${event.feeSuccessPlatformCurrency || ""}`}
             />
           </StatisticItem>
           <StatisticItem label={"You've earned"} accent>
-            <Profitability value={formatValue(event.value)}>
+            <Profitability value={event.value}>
               <NumberFormat
-                value={formatValue(event.value)}
+                value={formatCurrencyValue(event.value, event.currency, true)}
                 displayType="text"
                 suffix={` ${event.currency}`}
               />
