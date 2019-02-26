@@ -20,13 +20,18 @@ import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
 import { PROGRAM } from "shared/constants/constants";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
-import { formatCurrencyValue, formatPercent } from "shared/utils/formatter";
+import {
+  formatCurrencyValue,
+  formatPercent,
+  formatValue
+} from "shared/utils/formatter";
 
 import {
   Column,
   IUpdateFilterFunc
-} from "../../../table/components/table.types";
+} from "shared/components/table/components/table.types";
 import dashboardProgramsTableSelector from "./dashboard-programs.selector";
+import Profitability from "shared/components/profitability/profitability";
 
 interface IDashboardProgramsProps {
   role: string;
@@ -129,11 +134,17 @@ const DashboardPrograms: FunctionComponent<
             {formatCurrencyValue(program.personalDetails.gvtValue, "GVT")} GVT
           </TableCell>
           <TableCell className="programs-table__cell dashboard-programs__cell--profit">
-            <NumberFormat
-              value={formatPercent(program.statistic.profitPercent)}
-              suffix="%"
-              displayType="text"
-            />
+            <Profitability
+              value={formatValue(program.statistic.profitPercent, 2)}
+              prefix="sign"
+            >
+              <NumberFormat
+                value={formatValue(program.statistic.profitPercent, 2)}
+                suffix="%"
+                allowNegative={false}
+                displayType="text"
+              />
+            </Profitability>
           </TableCell>
           <TableCell className="programs-table__cell dashboard-programs__cell--chart">
             <ProgramSimpleChart data={program.chart} programId={program.id} />
