@@ -1,25 +1,24 @@
-import { FormikProps, FormikActions, withFormik } from "formik";
+import { FormikActions, FormikProps, withFormik } from "formik";
+import { ProgramInvestInfo, WalletData } from "gv-api-web";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
+import InputAmountField from "shared/components/input-amount-field/input-amount-field";
+import Select from "shared/components/select/select";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
+import { ASSET, ROLE } from "shared/constants/constants";
+import rateApi from "shared/services/api-client/rate-api";
+import filesService from "shared/services/file-service";
 import {
   calculateValueOfEntryFee,
   convertFromCurrency,
   convertToCurrency
 } from "shared/utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
-import { number, object, lazy } from "yup";
-
-import InputAmountField from "shared/components/input-amount-field/input-amount-field";
-import { ASSET, ROLE } from "shared/constants/constants";
-import { ProgramInvestInfo, WalletData } from "gv-api-web";
-import StatisticItem from "shared/components/statistic-item/statistic-item";
-import Select from "shared/components/select/select";
-import rateApi from "shared/services/api-client/rate-api";
-import filesService from "shared/services/file-service";
+import { lazy, number, object } from "yup";
 
 interface IDepositFormOwnProps {
   wallets: WalletData[];

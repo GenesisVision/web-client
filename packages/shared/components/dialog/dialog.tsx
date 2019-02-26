@@ -2,23 +2,22 @@ import "./dialog.scss";
 
 import classnames from "classnames";
 import { GVButton } from "gv-react-components";
-import { TranslationFunction } from "i18next";
 import React, { Fragment } from "react";
 import EventListener from "react-event-listener";
+import { InjectedTranslateProps } from "react-i18next";
 import { translate } from "react-i18next";
 import { CloseIcon } from "shared/components/icon/close-icon";
 import Modal from "shared/components/modal/modal";
 import GVScroll from "shared/components/scroll/gvscroll";
 
 export interface IDialogProps {
-  t: TranslationFunction;
   open: boolean;
   onClose: (param?: any) => void;
   className?: string;
   children?: any;
   wider?: boolean;
 }
-class Dialog extends React.Component<IDialogProps> {
+class Dialog extends React.Component<IDialogProps & InjectedTranslateProps> {
   handleKeyPress = (event: any) => {
     const { onClose } = this.props;
 

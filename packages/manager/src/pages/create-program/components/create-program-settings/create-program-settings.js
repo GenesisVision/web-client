@@ -17,6 +17,7 @@ import Hint from "shared/components/hint/hint";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import Select from "shared/components/select/select";
 import rateApi from "shared/services/api-client/rate-api";
+import filesService from "shared/services/file-service";
 import { convertFromCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { allowValuesNumberFormat } from "shared/utils/helpers";
@@ -29,7 +30,7 @@ import {
 import AccountTypeField from "../account-type-field/account-type-field";
 import createProgramSettingsValidationSchema from "./create-program-settings.validators";
 import ProgramDefaultImage from "./program-default-image";
-import filesService from "shared/services/file-service";
+import SignalsFeeFormPartial from "./signals-fee-form.partial";
 
 class CreateProgramSettings extends React.Component {
   state = {
@@ -376,69 +377,12 @@ class CreateProgramSettings extends React.Component {
               </div>
             </div>
             {isSignalProgram && (
-              <div className="create-program-settings__row">
-                <div className="create-program-settings__row-title">
-                  {t(
-                    "manager.create-program-page.settings.signal-provider-fees"
-                  )}
-                </div>
-                <div className="create-program-settings__fee">
-                  <GVFormikField
-                    name="signalSubscriptionFee"
-                    label={t(
-                      "manager.create-program-page.settings.fields.monthly-subscription-fee"
-                    )}
-                    adornment="GVT" //isAllowed={this.allowEntryFee}
-                    component={GVTextField}
-                    InputComponent={NumberFormat}
-                    autoComplete="off"
-                    decimalScale={4}
-                  />
-                  <Hint
-                    content={t(
-                      "manager.create-program-page.settings.hints.entry-fee"
-                    )}
-                    className="create-program-settings__fee-hint"
-                    vertical={"bottom"}
-                    tooltipContent={`
-                    ${t(
-                      "manager.create-program-page.settings.hints.entry-fee-description",
-                      {
-                        maxFee: programsInfo.managerMaxEntryFee
-                      }
-                    )}. ${t(
-                      "manager.create-program-page.settings.hints.entry-fee-levels"
-                    )}
-                    `}
-                  />
-                </div>
-                <div className="create-program-settings__fee">
-                  <GVFormikField
-                    name="signalSuccessFee"
-                    label={t(
-                      "manager.create-program-page.settings.fields.signal-success-fee"
-                    )}
-                    adornment="%" //isAllowed={this.allowSuccessFee}
-                    component={GVTextField}
-                    InputComponent={NumberFormat}
-                    autoComplete="off"
-                    decimalScale={4}
-                  />
-                  <Hint
-                    content={t(
-                      "manager.create-program-page.settings.hints.success-fee"
-                    )}
-                    className="create-program-settings__fee-hint"
-                    vertical={"bottom"}
-                    tooltipContent={t(
-                      "manager.create-program-page.settings.hints.success-fee-description",
-                      {
-                        maxFee: programsInfo.managerMaxSuccessFee
-                      }
-                    )}
-                  />
-                </div>
-              </div>
+              <SignalsFeeFormPartial
+                subscriptionFeeFieldName="signalSubscriptionFee"
+                successFeeFieldName="signalSuccessFee"
+                maxEntryFee={100}
+                maxSuccessFee={50}
+              />
             )}
           </div>
           <div className="create-program-settings__subheading">

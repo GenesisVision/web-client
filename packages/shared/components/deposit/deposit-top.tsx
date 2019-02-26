@@ -1,10 +1,9 @@
+import { ProgramInvestInfo } from "gv-api-web";
 import React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
-import { formatCurrencyValue } from "shared/utils/formatter";
-
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { ASSET, ROLE } from "shared/constants/constants";
-import { ProgramInvestInfo } from "gv-api-web";
+import { formatCurrencyValue } from "shared/utils/formatter";
 
 export interface IDepositTop {
   currency: string;

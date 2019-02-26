@@ -1,8 +1,9 @@
 import "./asset-edit.scss";
 
-import AssetEditForm from "modules/asset-edit/components/asset-edit-form";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
+
+import AssetEditForm from "./asset-edit-form";
 
 class AssetEditPopup extends Component {
   render() {

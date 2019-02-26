@@ -1,10 +1,11 @@
-import AssetEditPopup from "modules/asset-edit/components/asset-edit-popup";
-import { editAsset } from "modules/asset-edit/services/asset-edit.services";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Dialog from "shared/components/dialog/dialog";
+
+import AssetEditPopup from "./components/asset-edit-popup";
+import { editAsset } from "./services/asset-edit.services";
 
 class AssetEditContainer extends Component {
   state = { serverError: "" };

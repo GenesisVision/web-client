@@ -471,6 +471,10 @@
       "close-program": "Close Program",
       "follow-trade": "Follow trades",
       "unfollow": "Unfollow",
+      "signal-provider": {
+        "title": "Make a signal provider",
+        "disclaimer": "Parameters can not be changed in the future"
+      },
       "close-program-notification": "Investment program will be closed after this reporting period. Current investment requests will be cancelled and new requests won’t be accepted. Profit and funds from the trading account will be deposited to GVT wallets of investors and manager according to their shares.",
       "close-program-notification-success": "Request to close the program was sent successfully.",
       "requests-completed": "All requests completed successfully"
