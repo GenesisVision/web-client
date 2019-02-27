@@ -97,7 +97,6 @@ class CreateProgramContainer extends Component {
     } = this;
     const { t, headerData, service, platformSettings, wallets } = this.props;
     if (!platformSettings || !headerData || !wallets) return null;
-
     return (
       <div className="create-program-page__container">
         <div className="create-program-page__tabs">
