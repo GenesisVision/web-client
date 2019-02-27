@@ -33,11 +33,9 @@ $mobile-title-divider: 2;
     font-size: $large-font-size/$mobile-title-divider;
     color: $label-color;
   }
-  &__text-block {
+  &__paragraph {
     line-height: 2;
     letter-spacing: 0.2px;
-  }
-  &__paragraph {
     & b {
       font-weight: 600;
     }
@@ -47,10 +45,12 @@ $mobile-title-divider: 2;
       color: $label-color;
     }
   }
-  &__subtitle {
-    @include adaptive-padding(bottom, $small-padding);
+  &__table-wrapper {
+    @include adaptive-padding(top, $padding-small);
+    width: 100%;
   }
   &__table {
+    @include adaptive-padding(bottom, $padding-xsmall);
     @include font-size($font-size-common);
     width: 100%;
     text-align: left;
@@ -68,7 +68,7 @@ $mobile-title-divider: 2;
   }
 
   @include media-breakpoint-landscape-phone() {
-    &__table {
+    &__table-wrapper {
       width: 70%;
     }
     .dialog__close--inside {
