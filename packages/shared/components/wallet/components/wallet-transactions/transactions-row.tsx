@@ -90,7 +90,7 @@ class TransactionsRow extends React.Component<
   closePopup = () => {
     this.setState({ isOpen: false });
   };
-  handleAcion = () => {
+  handleAction = () => {
     if (this.props.update) this.props.update();
     this.closePopup();
   };
@@ -103,7 +103,7 @@ class TransactionsRow extends React.Component<
           transactionId={transaction.id}
           open={this.state.isOpen}
           onClose={this.closePopup}
-          onAction={this.handleAcion}
+          onAction={this.handleAction}
         />
         <TableRow className="wallet-transactions__row" onClick={this.openPopup}>
           {!walletCurrency && (
