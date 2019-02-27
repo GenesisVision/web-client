@@ -48,6 +48,6 @@ export const PORTFOLIO_EVENTS_TYPES_ENUM = {
   AssetStarted: "AssetStarted",
   InvestorInvest: "InvestorInvest",
   AssetFinished: "AssetFinished",
-  ProgramPeriodStats: "ProgramPeriodStats",
+  ProgramPeriodStarts: "ProgramPeriodStarts",
   ProgramPeriodEnds: "ProgramPeriodEnds"
 };
