@@ -68,8 +68,8 @@ class WalletContainerTotal extends PureComponent {
           <WalletTransactions
             columns={WALLET_TOTAL_TRANSACTIONS_COLUMNS}
             filters={filters.transactionType}
-            renderBodyRow={transaction => (
-              <TransactionsRow transaction={transaction} />
+            renderBodyRow={(transaction, updateRow, updateItems) => (
+              <TransactionsRow transaction={transaction} update={updateItems} />
             )}
           />
         )}

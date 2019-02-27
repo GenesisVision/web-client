@@ -33,6 +33,7 @@ export interface ITransactionDetailsDialogProps extends InjectedTranslateProps {
   transactionId: string;
   error(message: string): void;
   close(): void;
+  onAction(): void;
 }
 
 export interface ITransactionDetailsState {
@@ -85,11 +86,11 @@ class TransactionDetailsDialog extends React.Component<
         authService.getAuthArg()
       )
       .then((res: any) => {
-        console.log(res);
+        this.props.onAction();
       })
       .catch(errorMessage => {
         this.props.error(errorMessage.errorMessage);
-        this.props.close();
+        // this.props.close();
       });
   };
   resendEmail = () => {
@@ -99,11 +100,11 @@ class TransactionDetailsDialog extends React.Component<
         authService.getAuthArg()
       )
       .then((res: any) => {
-        console.log(res);
+        // console.log(res);
       })
       .catch(errorMessage => {
         this.props.error(errorMessage.errorMessage);
-        this.props.close();
+        // this.props.close();
       });
   };
 
