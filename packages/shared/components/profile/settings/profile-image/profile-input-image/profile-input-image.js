@@ -1,5 +1,6 @@
 import "cropperjs/dist/cropper.css";
 
+import "./edge-canvas-polyfill";
 import "./profile-input-image.scss";
 
 import classnames from "classnames";
