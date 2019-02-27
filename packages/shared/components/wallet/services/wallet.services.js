@@ -15,7 +15,6 @@ export const fetchWallets = () => (dispatch, getState) => {
   const { currency } = getState().accountSettings;
 
   dispatch(actions.fetchWallets(currency, authorization));
-  dispatch(fetchProfileHeaderInfo());
 };
 
 export const fetchWalletTransactions = requestFilters => {

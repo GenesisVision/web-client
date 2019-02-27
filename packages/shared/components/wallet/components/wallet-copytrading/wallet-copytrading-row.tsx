@@ -9,7 +9,7 @@ import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-import { composeWalletCurrencyUrl } from "../../wallet.routes";
+import { composeWalletCopytradingCurrencyUrl } from "../../wallet.routes";
 import WalletCopytradingActions from "./wallet-copytrading-action-cell";
 
 export interface ITransactionRowProps {
@@ -28,7 +28,7 @@ class WalletCopytradingRow extends React.Component<
             <Link
               className="wallet-list__link"
               to={{
-                pathname: composeWalletCurrencyUrl(
+                pathname: composeWalletCopytradingCurrencyUrl(
                   wallet.currency.toLowerCase()
                 ),
                 state: `/ ${t("wallet-page.title")}`
