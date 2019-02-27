@@ -232,11 +232,11 @@ class DepositForm extends React.Component<OwnProps> {
                 {info.entryFee} %{" "}
                 <NumberFormat
                   value={formatCurrencyValue(
-                    this.entryFee(values.amount),
-                    walletCurrency
+                    this.entryFee(convertFromCurrency(values.amount, rate)),
+                    currency
                   )}
                   prefix=" ("
-                  suffix={` ${walletCurrency})`}
+                  suffix={` ${currency})`}
                   displayType="text"
                 />
               </span>
@@ -251,11 +251,11 @@ class DepositForm extends React.Component<OwnProps> {
                 {info.gvCommission} %
                 <NumberFormat
                   value={formatCurrencyValue(
-                    this.gvFee(values.amount),
-                    walletCurrency
+                    this.gvFee(convertFromCurrency(values.amount, rate)),
+                    currency
                   )}
                   prefix={" ("}
-                  suffix={` ${walletCurrency})`}
+                  suffix={` ${currency})`}
                   displayType="text"
                 />
               </span>
@@ -268,10 +268,10 @@ class DepositForm extends React.Component<OwnProps> {
             <span className="dialog-list__value">
               <NumberFormat
                 value={formatCurrencyValue(
-                  this.investAmount(values.amount),
-                  walletCurrency
+                  this.investAmount(convertFromCurrency(values.amount, rate)),
+                  currency
                 )}
-                suffix={` ${walletCurrency}`}
+                suffix={` ${currency}`}
                 displayType="text"
               />
             </span>
@@ -323,8 +323,13 @@ export default compose<React.ComponentType<IDepositFormOwnProps>>(
                 values.walletCurrency
               ),
               t("deposit-asset.validation.amount-min-value", {
-                min: info.minInvestmentAmount,
-                currency
+                min: formatCurrencyValue(info.minInvestmentAmount, currency),
+                currency,
+                walletMin: formatCurrencyValue(
+                  convertToCurrency(info.minInvestmentAmount, values.rate),
+                  values.walletCurrency
+                ),
+                walletCurrency: values.walletCurrency
               })
             )
             .max(
