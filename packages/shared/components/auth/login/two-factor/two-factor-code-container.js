@@ -18,7 +18,7 @@ class TwoFactorCodeContainer extends Component {
   }
 
   handleSubmit = (twoFactor, setSubmitting) => {
-    this.props.twoFactorLogin(twoFactor, setSubmitting);
+    return this.props.twoFactorLogin(twoFactor, setSubmitting);
   };
 
   render() {
@@ -42,7 +42,7 @@ const mapDispatchToProps = (dispatch, props) => ({
     const onCatch = () => {
       setSubmitting(false);
     };
-    dispatch(props.twoFactorLogin(code, props.TWO_FACTOR_CODE, onCatch));
+    return dispatch(props.twoFactorLogin(code, props.TWO_FACTOR_CODE, onCatch));
   },
   showNotFoundPage: () => dispatch(replace(NOT_FOUND_PAGE_ROUTE)),
   clearLoginData: () => {
