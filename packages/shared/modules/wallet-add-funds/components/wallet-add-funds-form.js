@@ -20,10 +20,10 @@ class WalletAddFundsForm extends Component {
   render() {
     const { t, values, wallets, notifySuccess, notifyError } = this.props;
     const selected = wallets.find(w => w.currency === values.currency) || {};
-    const { address, currency } = selected;
+    const { depositAddress } = selected;
     const onCopy = () => {
       try {
-        copy(address);
+        copy(depositAddress);
         notifySuccess(t("wallet-add-funds.copy-to-clipboard-success"));
       } catch (error) {
         notifyError(t("wallet-add-funds.copy-to-clipboard-error"));
@@ -45,7 +45,7 @@ class WalletAddFundsForm extends Component {
               onChange={this.onChangeCurrency}
             >
               {wallets.map(wallet => {
-                const { description, currency } = wallet;
+                const { title, currency } = wallet;
                 return (
                   <option value={currency} key={currency}>
                     <img
@@ -53,7 +53,7 @@ class WalletAddFundsForm extends Component {
                       className="wallet-withdraw-popup__icon"
                       alt={wallet.currency}
                     />
-                    {`${description} | ${currency}`}
+                    {`${title} | ${currency}`}
                   </option>
                 );
               })}
@@ -61,14 +61,18 @@ class WalletAddFundsForm extends Component {
           </div>
         </div>
         <div className="dialog__bottom wallet-add-funds-popup__bottom">
-          <GVqr className="wallet-add-funds-popup__qr" value={address} />
+          <GVqr className="wallet-add-funds-popup__qr" value={depositAddress} />
           <StatisticItem
             className="wallet-add-funds-popup__address"
             label={t("wallet-add-funds.deposit-address")}
           >
-            {address}
+            {depositAddress}
           </StatisticItem>
-          <GVButton color="secondary" onClick={onCopy} disabled={!address}>
+          <GVButton
+            color="secondary"
+            onClick={onCopy}
+            disabled={!depositAddress}
+          >
             <CopyIcon />
             &nbsp;
             {t("buttons.copy")}
@@ -82,10 +86,10 @@ class WalletAddFundsForm extends Component {
 WalletAddFundsForm.propTypes = {
   wallets: PropTypes.arrayOf(
     PropTypes.shape({
-      address: PropTypes.string,
+      depositAddress: PropTypes.string,
       currency: PropTypes.string,
       rateToGVT: PropTypes.number,
-      description: PropTypes.string,
+      title: PropTypes.string,
       logo: PropTypes.string
     })
   ),

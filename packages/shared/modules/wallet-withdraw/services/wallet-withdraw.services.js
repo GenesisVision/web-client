@@ -17,12 +17,9 @@ export const newWithdrawRequest = data => (dispatch, getState) => {
 
 //@todo возможно нужно перенести в services of wallet-transfer
 export const walletTransferRequest = data => {
-  const { sourceId, destinationId, amount } = data;
   return walletApi.v10WalletTransferPost(authService.getAuthArg(), {
     request: {
-      sourceId,
-      destinationId,
-      amount,
+      ...data,
       sourceType: "Wallet",
       destinationType: "Wallet"
     }

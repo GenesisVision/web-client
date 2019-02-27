@@ -59,7 +59,7 @@ class DetailsInvestment extends PureComponent {
 
     return (
       <Surface className="surface--horizontal-paddings details-investment">
-        <h3>{t("fund-details-page.description.yourInvestment")}</h3>
+        <h3>{t(`fund-details-page.description.yourInvestment.${asset}`)}</h3>
         <div className="details-investment__short-statistic">
           <StatisticItem
             accent

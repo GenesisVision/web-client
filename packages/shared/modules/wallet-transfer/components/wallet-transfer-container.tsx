@@ -45,13 +45,8 @@ class WalletTransferContainer extends Component<
   };
 
   handleSubmit = (values: ITransferFormValues) => {
-    const { amount } = values;
     this.setState({ isPending: true });
-    walletTransferRequest({
-      sourceId: values.sourceId,
-      destinationId: values.destinationId,
-      amount
-    })
+    walletTransferRequest({ ...values })
       .then(() => {
         this.setState({ isPending: false }, () => this.props.onClose());
       })

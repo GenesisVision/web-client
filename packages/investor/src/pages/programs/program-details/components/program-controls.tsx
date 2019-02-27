@@ -28,7 +28,7 @@ class ProgramControls extends Component<
             redirectToLogin={redirectToLogin}
           />
         </div>
-        {isAvailableFollowingTrades ? (
+        {/*{isAvailableFollowingTrades ? (
           <div className="program-details-description__col program-details-description__col--small-size">
             <SignalProviderControls
               programDescription={programDescription}
@@ -36,7 +36,7 @@ class ProgramControls extends Component<
               redirectToLogin={redirectToLogin}
             />
           </div>
-        ) : null}
+        ) : null}*/}
       </div>
     );
   }

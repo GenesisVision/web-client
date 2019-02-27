@@ -220,7 +220,8 @@
     },
     "fund": {
       "available-to-invest": "Available to invest in fund",
-      "success-alert-message": "Successful request for investment in the fund."
+      "success-alert-message": "Successful request for investment in the fund.",
+      "disclaimer": "After clicking the \"Confirm\" button, your request will be processed within a few minutes."
     }
   },
   "withdraw-program": {
@@ -387,7 +388,10 @@
       "exitFee": "Exit fee",
       "invest": "Invest",
       "reinvest": "Reinvest",
-      "yourInvestment": "Current investment",
+      "yourInvestment": {
+        "PROGRAM": "Current period investment",
+        "FUND": "Current investment"
+      },
       "pending-input": "Pending input",
       "pending-output": "Pending output",
       "invested": "Invested",

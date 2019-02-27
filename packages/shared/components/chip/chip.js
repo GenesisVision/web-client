@@ -12,15 +12,23 @@ class Chip extends Component {
   };
 
   render() {
-    const { type, children, rounded, onClick, className } = this.props;
+    const {
+      type,
+      children,
+      rounded,
+      onClick,
+      className,
+      disabled
+    } = this.props;
     return (
       <div
         className={classnames("chip", className, {
           [`chip--${type}`]: type,
           "chip--rounded": rounded,
-          "chip--pointer": typeof onClick === "function"
+          "chip--disabled": disabled,
+          "chip--pointer": !disabled && typeof onClick === "function"
         })}
-        onClick={this.handleClick}
+        onClick={!disabled && this.handleClick}
       >
         <div className="chip__content">{children}</div>
       </div>

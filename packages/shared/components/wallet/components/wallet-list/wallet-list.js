@@ -30,7 +30,7 @@ class WalletList extends Component {
     currentWallet: {}
   };
 
-  handleOpenAddFundsPopup = wallet => {
+  handleOpenAddFundsPopup = wallet => () => {
     const { currency, available } = wallet;
     this.setState({
       isOpenAddFundsPopup: true,
@@ -42,7 +42,7 @@ class WalletList extends Component {
     this.setState({ isOpenAddFundsPopup: false, currentWallet: {} });
   };
 
-  handleOpenWithdrawPopup = wallet => {
+  handleOpenWithdrawPopup = wallet => () => {
     this.setState({ isOpenWithdrawPopup: true, currentWallet: wallet });
   };
 
@@ -50,7 +50,7 @@ class WalletList extends Component {
     this.setState({ isOpenWithdrawPopup: false, currentWallet: {} });
   };
 
-  handleOpenTransferPopup = wallet => {
+  handleOpenTransferPopup = wallet => () => {
     this.setState({ isOpenTransferPopup: true, currentWallet: wallet });
   };
 
@@ -133,20 +133,22 @@ class WalletList extends Component {
                 <TableCell className="wallet-list__cell wallet-list__cell--buttons">
                   <Chip
                     className="wallet-list__button-transfer"
-                    onClick={this.handleOpenTransferPopup.bind(this, wallet)}
+                    onClick={this.handleOpenTransferPopup(wallet)}
                   >
                     <img src={ConvertIcon} alt="Convert Icon" />
                   </Chip>
                   <Chip
                     className="wallet-list__withdraw"
-                    onClick={this.handleOpenWithdrawPopup.bind(this, wallet)}
+                    onClick={this.handleOpenWithdrawPopup(wallet)}
+                    disabled={wallet.isWithdrawalEnabled === false}
                   >
                     <img src={ArrowIcon} alt="Arrow Icon" />
                   </Chip>
                   <Chip
                     className="wallet-list__button-add-funds"
                     type="positive"
-                    onClick={this.handleOpenAddFundsPopup.bind(this, wallet)}
+                    onClick={this.handleOpenAddFundsPopup(wallet)}
+                    disabled={wallet.isDepositEnabled === false}
                   >
                     +
                   </Chip>

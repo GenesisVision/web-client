@@ -9,23 +9,15 @@ import WalletWithdrawRequest from "./wallet-withdraw-request/wallet-withdraw-req
 class WalletWithdrawContainer extends Component {
   state = {
     isPending: false,
-    data: null,
     errorMessage: null,
     success: false
   };
-
-  componentDidMount() {
-    this.setState({ isPending: true });
-    walletWithdrawService
-      .fetchPaymentInfo()
-      .then(data => this.setState({ data, isPending: false }));
-  }
 
   handleSubmit = values => {
     this.setState({ isPending: true });
     this.props.service
       .newWithdrawRequest({ ...values, amount: Number(values.amount) })
-      .then(response => {
+      .then(() => {
         this.setState({
           isPending: false,
           success: true
@@ -41,16 +33,15 @@ class WalletWithdrawContainer extends Component {
   };
 
   render() {
-    if (!this.state.data) return null;
-    const { isPending, data, errorMessage, success } = this.state;
-    const { wallets } = data;
-    const { twoFactorEnabled, currentWallet } = this.props;
+    const { isPending, errorMessage, success } = this.state;
+    const { twoFactorEnabled, wallets, currentWallet } = this.props;
+    const enabledWallets = wallets.filter(wallet => wallet.isWithdrawalEnabled);
 
     return success ? (
       <WalletWithdrawRequest />
     ) : (
       <WalletWithdrawForm
-        wallets={wallets}
+        wallets={enabledWallets}
         currentWallet={currentWallet}
         disabled={isPending}
         errorMessage={errorMessage}
@@ -62,9 +53,10 @@ class WalletWithdrawContainer extends Component {
 }
 
 const mapStateToProps = state => {
-  if (!state.accountSettings) return;
+  if (!state.accountSettings && !state.wallet.info.data) return;
   const { twoFactorEnabled } = state.accountSettings.twoFactorAuth.data;
-  return { twoFactorEnabled };
+  const { wallets } = state.wallet.info.data;
+  return { twoFactorEnabled, wallets };
 };
 
 const mapDispatchToProps = dispatch => ({
