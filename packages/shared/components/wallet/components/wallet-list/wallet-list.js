@@ -1,26 +1,26 @@
-import { formatCurrencyValue } from "shared/utils/formatter";
-import { Link } from "react-router-dom";
-import { translate } from "react-i18next";
+import "./wallet-list.scss";
+
 import { WalletData } from "gv-api-web";
-import Chip from "shared/components/chip/chip";
-import NumberFormat from "react-number-format";
 import React, { Component } from "react";
+import { translate } from "react-i18next";
+import NumberFormat from "react-number-format";
+import { Link } from "react-router-dom";
+import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
+import Chip from "shared/components/chip/chip";
 import TableCell from "shared/components/table/components/table-cell";
 import TableModule from "shared/components/table/components/table-module";
 import TableRow from "shared/components/table/components/table-row";
-import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
-import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
-import WalletTransferPopup from "shared/modules/wallet-transfer/wallet-transfer-popup";
-import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
-
-import { composeWalletCurrencyUrl } from "shared/components/wallet/wallet.routes";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
+import { composeWalletCurrencyUrl } from "shared/components/wallet/wallet.routes";
 import ArrowIcon from "shared/media/arrow-up.svg";
 import ConvertIcon from "shared/media/convert.svg";
+import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
+import WalletTransferPopup from "shared/modules/wallet-transfer/wallet-transfer-popup";
+import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
+import { formatCurrencyValue } from "shared/utils/formatter";
 
-import "./wallet-list.scss";
-import { WALLET_LIST_COLUMNS } from "./wallet-list.constants";
 import { walletTableTransactionsSelector } from "../wallet-transactions/wallet-transactions.selector";
+import { WALLET_LIST_COLUMNS } from "./wallet-list.constants";
 
 class WalletList extends Component {
   state = {
@@ -30,7 +30,7 @@ class WalletList extends Component {
     currentWallet: {}
   };
 
-  handleOpenAddFundsPopup = wallet => {
+  handleOpenAddFundsPopup = wallet => () => {
     const { currency, available } = wallet;
     this.setState({
       isOpenAddFundsPopup: true,
@@ -42,7 +42,7 @@ class WalletList extends Component {
     this.setState({ isOpenAddFundsPopup: false, currentWallet: {} });
   };
 
-  handleOpenWithdrawPopup = wallet => {
+  handleOpenWithdrawPopup = wallet => () => {
     this.setState({ isOpenWithdrawPopup: true, currentWallet: wallet });
   };
 
@@ -50,7 +50,7 @@ class WalletList extends Component {
     this.setState({ isOpenWithdrawPopup: false, currentWallet: {} });
   };
 
-  handleOpenTransferPopup = wallet => {
+  handleOpenTransferPopup = wallet => () => {
     this.setState({ isOpenTransferPopup: true, currentWallet: wallet });
   };
 
@@ -133,20 +133,22 @@ class WalletList extends Component {
                 <TableCell className="wallet-list__cell wallet-list__cell--buttons">
                   <Chip
                     className="wallet-list__button-transfer"
-                    onClick={this.handleOpenTransferPopup.bind(this, wallet)}
+                    onClick={this.handleOpenTransferPopup(wallet)}
                   >
                     <img src={ConvertIcon} alt="Convert Icon" />
                   </Chip>
                   <Chip
                     className="wallet-list__withdraw"
-                    onClick={this.handleOpenWithdrawPopup.bind(this, wallet)}
+                    onClick={this.handleOpenWithdrawPopup(wallet)}
+                    disabled={wallet.isWithdrawalEnabled === false}
                   >
                     <img src={ArrowIcon} alt="Arrow Icon" />
                   </Chip>
                   <Chip
                     className="wallet-list__button-add-funds"
                     type="positive"
-                    onClick={this.handleOpenAddFundsPopup.bind(this, wallet)}
+                    onClick={this.handleOpenAddFundsPopup(wallet)}
+                    disabled={wallet.isDepositEnabled === false}
                   >
                     +
                   </Chip>

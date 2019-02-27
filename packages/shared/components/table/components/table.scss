@@ -117,7 +117,6 @@ $padding: $padding-small;
 
   &__row {
     transition: background-color 300ms ease;
-    padding: 0 1.5rem;
     &:not(.table__row--head):hover {
       background-color: #212c34;
     }
@@ -153,9 +152,6 @@ $padding: $padding-small;
 
     &:first-child {
       padding-left: $padding-xsmall;
-      @include media-breakpoint-landscape-phone() {
-        padding-left: $padding;
-      }
 
       .programs-table__cell,
       .funds-table__cell {
@@ -164,9 +160,6 @@ $padding: $padding-small;
     }
     &:last-child {
       padding-right: $padding-xsmall;
-      @include media-breakpoint-landscape-phone() {
-        padding-right: $padding;
-      }
     }
 
     &#{&} {

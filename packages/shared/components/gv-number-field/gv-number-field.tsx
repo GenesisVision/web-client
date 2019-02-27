@@ -12,7 +12,8 @@ class GVNumberFiled extends Component<
   GVTextFieldProps & { form: FormikActions<void> }
 > {
   handleOnChange = (value: NumberFormatValues) => {
-    const { form, name } = this.props;
+    const { form, name, onChange } = this.props;
+    onChange(value.value);
     form.setFieldValue(name, value.value);
   };
   render() {

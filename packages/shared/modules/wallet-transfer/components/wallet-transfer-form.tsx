@@ -13,7 +13,7 @@ import TransferRate from "shared/modules/wallet-transfer/components/transfer-rat
 import filesService from "shared/services/file-service";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { DeepReadonly } from "utility-types";
-import { Schema, lazy, number, object } from "yup";
+import { Schema, boolean, lazy, number, object } from "yup";
 
 const getWalletsTo = (
   wallets: DeepReadonly<WalletData[]>,
@@ -29,6 +29,7 @@ const getSelectedWallet = (
   wallets.find(wallet => wallet.id === currentWalletId) || ({} as WalletData);
 
 export interface ITransferFormValues {
+  transferAll: boolean;
   sourceId: string;
   destinationId: string;
   amount: string;
@@ -53,6 +54,19 @@ class WalletTransferForm extends React.Component<IWalletTransferForm> {
       setFieldValue("destinationId", values.sourceId);
     }
     setFieldValue("sourceId", currencyFromNew);
+  };
+  onChangeAmount = (amount: string) => {
+    const { setFieldValue, values, wallets } = this.props;
+    const { sourceId } = values;
+    const selectedFromWallet = getSelectedWallet(wallets, sourceId);
+    const availableToWithdrawalFrom = formatCurrencyValue(
+      selectedFromWallet.available,
+      selectedFromWallet.currency
+    );
+    if (amount === availableToWithdrawalFrom)
+      setFieldValue("transferAll", true);
+    else setFieldValue("transferAll", false);
+    setFieldValue("amount", amount);
   };
 
   onChangeDestinationId = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -91,6 +105,7 @@ class WalletTransferForm extends React.Component<IWalletTransferForm> {
           selectedFromWallet.currency
         )
       );
+      setFieldValue("transferAll", true);
     };
 
     const disableButton = disabled || !values.amount || !isValid || !dirty;
@@ -166,6 +181,7 @@ class WalletTransferForm extends React.Component<IWalletTransferForm> {
               label={t("wallet-transfer.amount")}
               currency={selectedFromWallet.currency}
               setMax={setMaxAmount}
+              onChange={this.onChangeAmount}
             />
           </div>
           <TransferRate
@@ -210,24 +226,33 @@ export default compose<React.FunctionComponent<IWalletTransferForm>>(
       let sourceId = currentWallet ? currentWallet.id : wallets[0].id;
       const walletTo = getWalletsTo(wallets, sourceId);
       const destinationId = walletTo[0].id;
-      return { sourceId, amount: "", destinationId };
+      return { sourceId, amount: "", destinationId, transferAll: false };
     },
     validationSchema: (params: IWalletTransferForm) => {
       return lazy(
-        (values: ITransferFormValues): Schema<any> =>
-          object().shape({
+        (values: ITransferFormValues): Schema<any> => {
+          const selectedWallet = getSelectedWallet(
+            params.wallets,
+            values.sourceId
+          );
+          return object().shape({
+            transferAll: boolean(),
             amount: number()
               .moreThan(
                 0,
                 params.t("wallet-transfer.validation.amount-is-zero")
               )
               .max(
-                getSelectedWallet(params.wallets, values.sourceId).available,
+                +formatCurrencyValue(
+                  selectedWallet.available,
+                  selectedWallet.currency
+                ),
                 params.t(
                   "wallet-transfer.validation.amount-more-than-available"
                 )
               )
-          })
+          });
+        }
       );
     },
     handleSubmit: (values, { props }) => props.onSubmit(values)

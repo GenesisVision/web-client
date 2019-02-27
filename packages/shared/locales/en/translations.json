@@ -220,7 +220,8 @@
     },
     "fund": {
       "available-to-invest": "Available to invest in fund",
-      "success-alert-message": "Successful request for investment in the fund."
+      "success-alert-message": "Successful request for investment in the fund.",
+      "disclaimer": "After clicking the \"Confirm\" button, your request will be processed within a few minutes."
     }
   },
   "withdraw-program": {
@@ -387,7 +388,10 @@
       "exitFee": "Exit fee",
       "invest": "Invest",
       "reinvest": "Reinvest",
-      "yourInvestment": "Current investment",
+      "yourInvestment": {
+        "PROGRAM": "Current period investment",
+        "FUND": "Current investment"
+      },
       "pending-input": "Pending input",
       "pending-output": "Pending output",
       "invested": "Invested",
@@ -732,6 +736,52 @@
     },
     "settings": {
       "label": "Using GVT to pay for fees"
+    }
+  },
+  "gvt-fees": {
+    "title": "Fees and Discounts",
+    "section": {
+      "text-1": "Any Genesis Markets user who holds a certain amount of GVT for 7 days receives a discount for transaction fees. The size of a discount can vary and depends on the amount of GVT that is being held. The regular trading fee is 0.3%, and the information on the tiered discount system can be found in the Genesis Markets Trading Conditions section.",
+      "text-2": "Users of the Genesis Vision copy trading feature who hold any GVT on the Genesis Markets balance are eligible for discounts and also have the platform success fee of 10% for both investment programs and copy trading signals reduced by 1% for each 1000 GVT held."
+    },
+    "note": "* Please note that to be eligible for a discount tier you should hold GVT on your Genesis Markets wallet for at least 7 days",
+    "table-header": {
+      "amount": "Amount held for 7 days*",
+      "discount": "Discount",
+      "fees": "Fees"
+    },
+    "table-row-1": {
+      "amount": "Any GVT",
+      "discount": "30%",
+      "fees": "0.210%"
+    },
+    "table-row-2": {
+      "amount": "From 10 GVT up to 25",
+      "discount": "35%",
+      "fees": "0.195%"
+    },
+    "table-row-3": {
+      "amount": "Up to 50 GVT",
+      "discount": "40%",
+      "fees": "0.180%"
+    },
+    "table-row-4": {
+      "amount": "Up to 100 GVT",
+      "discount": "45%",
+      "fees": "0.165%"
+    },
+    "table-row-5": {
+      "amount": "Up to 500 GVT",
+      "discount": "50%",
+      "fees": "0.150%"
+    },
+    "table-row-6": {
+      "amount": "500 GVT+",
+      "discount": "55%",
+      "fees": "0.135%"
+    },
+    "titles": {
+      "main": "Fees and Discounts"
     }
   },
   "rating-page": {
@@ -1102,7 +1152,7 @@
           "AssetStarted": "Asset started",
           "InvestorInvest": "Investor invest",
           "AssetFinished": "Asset finished",
-          "ProgramPeriodStats": "Program period stats",
+          "ProgramPeriodStarts": "Program period starts",
           "ProgramPeriodEnds": "Program period ends"
         }
       }
@@ -1222,7 +1272,7 @@
           "InvestorInvest": "Investor invest",
           "InvestorWithdraw": "Investor withdraw",
           "AssetFinished": "Asset finished",
-          "ProgramPeriodStats": "Program period stats",
+          "ProgramPeriodStarts": "Program period starts",
           "ProgramPeriodEnds": "Program period ends"
         }
       }
