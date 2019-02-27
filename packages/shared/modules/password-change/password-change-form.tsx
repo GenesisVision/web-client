@@ -1,24 +1,39 @@
 import classnames from "classnames";
-import { withFormik } from "formik";
+import { FormikProps, withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
-import PropTypes from "prop-types";
-import React from "react";
-import { translate } from "react-i18next";
+import React, { ComponentType, FunctionComponent } from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
-import { passwordValidator } from "shared/utils/validators/validators";
-import { object, ref, string } from "yup";
 
-const PasswordChangeForm = props => {
-  const {
-    t,
-    touched,
-    values,
-    errorMessage,
-    errors,
-    handleSubmit,
-    isValid,
-    dirty
-  } = props;
+import { passwordChangeValidationSchema } from "./password-change.validators";
+
+interface IPasswordChangeFormOwnProps {
+  programName: string;
+  errorMessage: string;
+  isPending: boolean;
+  onSubmit(values: IPasswordChangeFormValues): void;
+}
+
+export interface IPasswordChangeFormValues {
+  oldPassword: string;
+  password: string;
+  confirmPassword: string;
+}
+
+type PasswordChangeFormProps = InjectedTranslateProps &
+  IPasswordChangeFormOwnProps &
+  FormikProps<IPasswordChangeFormValues>;
+const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({
+  t,
+  touched,
+  values,
+  errorMessage,
+  errors,
+  isPending,
+  handleSubmit,
+  isValid,
+  dirty
+}) => {
   const className = classnames({
     "change-password__equal":
       !errors.password &&
@@ -60,36 +75,23 @@ const PasswordChangeForm = props => {
         />
         <div className="form-error">{errorMessage}</div>
       </div>
-      <GVButton type="submit" disabled={props.isPending || !isValid || !dirty}>
+      <GVButton type="submit" disabled={isPending || !isValid || !dirty}>
         {t("buttons.confirm")}
       </GVButton>
     </form>
   );
 };
 
-PasswordChangeForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  errorMessage: PropTypes.string,
-  isPending: PropTypes.bool
-};
-
-export default compose(
+export default compose<ComponentType<IPasswordChangeFormOwnProps>>(
   translate(),
-  withFormik({
+  withFormik<IPasswordChangeFormOwnProps, IPasswordChangeFormValues>({
     displayName: "change-password",
     mapPropsToValues: () => ({
       oldPassword: "",
       password: "",
       confirmPassword: ""
     }),
-    validationSchema: ({ t }) =>
-      object().shape({
-        oldPassword: string().required(t("Password is required")),
-        password: passwordValidator,
-        confirmPassword: string()
-          .oneOf([ref("password")], t("Passwords don't match."))
-          .required(t("Confirm Password is required"))
-      }),
+    validationSchema: passwordChangeValidationSchema,
     handleSubmit: (values, { props }) => props.onSubmit(values)
   })
 )(PasswordChangeForm);
