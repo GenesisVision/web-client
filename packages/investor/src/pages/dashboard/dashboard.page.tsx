@@ -34,9 +34,9 @@ const DashboardPage: React.FunctionComponent<IDashboardPageProps> = ({ t }) => {
         <div className="dashboard__table-section">
           <DashboardAssetsSection title={title} />
         </div>
-        <div className="dashboard__table-section">
+        {/*<div className="dashboard__table-section">
           <DashboardTradesSection title={title} />
-        </div>
+        </div>*/}
       </div>
     </Page>
   );
