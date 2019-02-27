@@ -1,0 +1,84 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
+
+$small-padding: 20px;
+$title-size: 32px;
+$subtitle-size: 17.5px;
+$large-font-size: 16px;
+$middle-font-size: 14px;
+$small-font-size: 12px;
+$border-radius: 5px;
+$mobile-padding-divider: 3;
+$mobile-text-divider: 1.5;
+$mobile-title-divider: 2;
+
+.gvt-fees {
+  max-width: 1100px;
+  margin: $padding-small/2;
+
+  * {
+    box-sizing: border-box;
+  }
+  &__container {
+    @include vertical-paddings($padding-large);
+    @include horizontal-paddings($padding-large);
+    background: $panel-background-color;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+  }
+  &__description {
+    font-size: $large-font-size/$mobile-title-divider;
+    color: $label-color;
+  }
+  &__paragraph {
+    line-height: 2;
+    letter-spacing: 0.2px;
+    & b {
+      font-weight: 600;
+    }
+    &--mute {
+      padding-top: $padding-small/$mobile-padding-divider;
+      padding-bottom: $padding-large/$mobile-padding-divider;
+      color: $label-color;
+    }
+  }
+  &__table-wrapper {
+    @include adaptive-padding(top, $padding-small);
+    width: 100%;
+  }
+  &__table {
+    @include adaptive-padding(bottom, $padding-xsmall);
+    @include font-size($font-size-common);
+    width: 100%;
+    text-align: left;
+  }
+  &__table-head {
+    color: rgba($text-light-color, 0.3);
+    font-weight: 400;
+  }
+  &__table-value {
+    @include vertical-paddings($padding-xsmall);
+
+    &:nth-child(2) {
+      font-weight: 700;
+    }
+  }
+
+  @include media-breakpoint-landscape-phone() {
+    &__table-wrapper {
+      width: 70%;
+    }
+    .dialog__close--inside {
+      display: block;
+    }
+  }
+
+  @media (min-width: 1600px) {
+    .dialog__close--inside {
+      display: none;
+    }
+  }
+}
