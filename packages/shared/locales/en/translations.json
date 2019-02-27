@@ -1291,9 +1291,12 @@
       "broker-info": {
         "about": "About",
         "terms": "Terms",
+        "read-terms": "Read Terms",
         "leverage": "Leverage",
         "fee": "Fee",
-        "assets": "Assets"
+        "assets": "Assets",
+        "account-type": "Account type",
+        "trading-platform": "Trading platform"
       },
       "settings": {
         "main-settings": "Main settings",
