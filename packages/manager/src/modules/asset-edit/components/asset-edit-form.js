@@ -70,17 +70,19 @@ const AssetEditForm = ({
             </span>
           )}
         </div>
-        <GVFormikField
-          name="stopOutLevel"
-          label={t(
-            "manager.create-program-page.settings.fields.stop-out-level"
-          )}
-          adornment="%"
-          component={GVTextField}
-          InputComponent={NumberFormat}
-          autoComplete="off"
-          decimalScale={4}
-        />
+        {type === PROGRAM && (
+          <GVFormikField
+            name="stopOutLevel"
+            label={t(
+              "manager.create-program-page.settings.fields.stop-out-level"
+            )}
+            adornment="%"
+            component={GVTextField}
+            InputComponent={NumberFormat}
+            autoComplete="off"
+            decimalScale={4}
+          />
+        )}
       </div>
       <div className="dialog__bottom">
         <div className="create-program-settings__logo-title">
