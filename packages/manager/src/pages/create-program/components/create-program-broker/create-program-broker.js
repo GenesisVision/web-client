@@ -82,7 +82,7 @@ const CreateProgramBroker = ({
         </div>
         <div className="create-program-broker__row">
           <div className="create-program-broker__info-title">
-            {t("manager.create-program-page.broker-info.assets")}
+            {t("manager.create-program-page.broker-info.account-type")}
           </div>
           <div className="create-program-broker__info-text">
             {getAcountTypes(choosedBroker.accountTypes)}
@@ -90,10 +90,10 @@ const CreateProgramBroker = ({
         </div>
         <div className="create-program-broker__row">
           <div className="create-program-broker__info-title">
-            {t("manager.create-program-page.broker-info.assets")}
+            {t("manager.create-program-page.broker-info.trading-platform")}
           </div>
           <div className="create-program-broker__info-text">
-            {choosedBroker.assets}
+            {choosedBroker.accountTypes[0].type}
           </div>
         </div>
         <div className="create-program-broker__row">
@@ -106,7 +106,7 @@ const CreateProgramBroker = ({
               target="_blank"
               rel="noopener noreferrer"
             >
-              Read Terms
+              {t("manager.create-program-page.broker-info.read-terms")}
             </a>
           </div>
         </div>
