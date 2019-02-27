@@ -126,18 +126,18 @@ class DepositForm extends React.Component<OwnProps> {
   getMaxAmount = () => {
     const { setFieldValue, info, wallets, values, asset } = this.props;
     const { walletCurrency, rate } = values;
-    const { availableToInvest } = info;
+    const { availableToInvestBase } = info;
     const wallet = wallets.find(wallet => wallet.currency === walletCurrency);
     const maxFromWallet = wallet ? wallet.available : 0;
 
     let maxAvailable = Number.MAX_SAFE_INTEGER;
-    if (availableToInvest !== undefined)
-      maxAvailable =
-        (availableToInvest /
+    if (availableToInvestBase !== undefined)
+      maxAvailable = availableToInvestBase;
+    /*(availableToInvestBase /
           (100 -
             (asset === ASSET.PROGRAM ? info.gvCommission : 0) -
             this.composeEntryFee(info.entryFee))) *
-        100;
+        100;*/
     const maxAvailableInWalletCurrency = convertToCurrency(maxAvailable, rate);
     const maxInvest = formatCurrencyValue(
       Math.min(maxFromWallet, maxAvailableInWalletCurrency),
