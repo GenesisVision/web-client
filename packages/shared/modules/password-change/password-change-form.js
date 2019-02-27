@@ -9,7 +9,16 @@ import { passwordValidator } from "shared/utils/validators/validators";
 import { object, ref, string } from "yup";
 
 const PasswordChangeForm = props => {
-  const { t, touched, values, errors, handleSubmit, isValid, dirty } = props;
+  const {
+    t,
+    touched,
+    values,
+    errorMessage,
+    errors,
+    handleSubmit,
+    isValid,
+    dirty
+  } = props;
   const className = classnames({
     "change-password__equal":
       !errors.password &&
@@ -49,8 +58,8 @@ const PasswordChangeForm = props => {
           name="confirmPassword"
           autoComplete="new-password"
         />
+        <div className="form-error">{errorMessage}</div>
       </div>
-      <div className="form-error">{props.errorMessage}</div>
       <GVButton type="submit" disabled={props.isPending || !isValid || !dirty}>
         {t("buttons.confirm")}
       </GVButton>

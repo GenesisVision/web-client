@@ -40,8 +40,8 @@ class PasswordChange extends Component {
       .then(data => {
         this.updateToken(data);
       })
-      .catch(data => {
-        this.setState({ data });
+      .catch(error => {
+        this.setState({ errorMessage: error.errorMessage });
       });
   };
 
