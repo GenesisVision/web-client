@@ -16,10 +16,7 @@ const WalletBalanceButtons = ({
 }) => {
   return (
     <div className="wallet-balance__buttons">
-      <GVButton
-        onClick={handleAddFunds}
-        disabled={!isDepositEnabled && isDepositEnabled !== undefined}
-      >
+      <GVButton onClick={handleAddFunds} disabled={isDepositEnabled === false}>
         <span className="wallet-balance__button-icon wallet-balance__button-icon--sign">
           +
         </span>
@@ -29,7 +26,7 @@ const WalletBalanceButtons = ({
         color="secondary"
         variant="outlined"
         onClick={handleWithdraw}
-        disabled={!isWithdrawalEnabled && isWithdrawalEnabled !== undefined}
+        disabled={isWithdrawalEnabled === false}
       >
         <img
           className="wallet-balance__button-icon"

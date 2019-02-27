@@ -140,10 +140,7 @@ class WalletList extends Component {
                   <Chip
                     className="wallet-list__withdraw"
                     onClick={this.handleOpenWithdrawPopup(wallet)}
-                    disabled={
-                      !wallet.isWithdrawalEnabled &&
-                      wallet.isWithdrawalEnabled !== undefined
-                    }
+                    disabled={wallet.isWithdrawalEnabled === false}
                   >
                     <img src={ArrowIcon} alt="Arrow Icon" />
                   </Chip>
@@ -151,10 +148,7 @@ class WalletList extends Component {
                     className="wallet-list__button-add-funds"
                     type="positive"
                     onClick={this.handleOpenAddFundsPopup(wallet)}
-                    disabled={
-                      !wallet.isDepositEnabled &&
-                      wallet.isDepositEnabled !== undefined
-                    }
+                    disabled={wallet.isDepositEnabled === false}
                   >
                     +
                   </Chip>
