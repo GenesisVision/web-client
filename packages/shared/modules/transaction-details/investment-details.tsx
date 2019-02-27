@@ -7,7 +7,7 @@ import { ITransactionDetailsProps } from "shared/modules/transaction-details/tra
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 const InvestingTransaction = (props: ITransactionDetailsProps) => {
-  const { data, t, handleCancel, handleResend } = props;
+  const { data, t } = props;
   return (
     <React.Fragment>
       <div className="dialog__top">
@@ -58,14 +58,6 @@ const InvestingTransaction = (props: ITransactionDetailsProps) => {
             {data.status} <Status status={data.status} />
           </div>
         </StatisticItem>
-        <div className="external-transaction__actions">
-          <div className="action-button" onClick={handleCancel}>
-            Cancel
-          </div>
-          <div className="action-button" onClick={handleResend}>
-            Resend email
-          </div>
-        </div>
         <StatisticItem label={t(`transactions-details.investment.amount`)} big>
           {formatCurrencyValue(data.amount, data.currency)} {data.currency}
         </StatisticItem>
