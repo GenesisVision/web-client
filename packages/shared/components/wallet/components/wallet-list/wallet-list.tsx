@@ -1,13 +1,13 @@
 import "./wallet-list.scss";
 
 import { WalletData } from "gv-api-web";
-import React, { Component } from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import Chip from "shared/components/chip/chip";
+import Table from "shared/components/table/components/table";
 import TableCell from "shared/components/table/components/table-cell";
-import TableModule from "shared/components/table/components/table-module";
 import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { composeWalletCurrencytUrl } from "shared/components/wallet/wallet.routes";
@@ -22,7 +22,19 @@ import { formatCurrencyValue } from "shared/utils/formatter";
 import { walletTableTransactionsSelector } from "../wallet-transactions/wallet-transactions.selector";
 import { WALLET_LIST_COLUMNS } from "./wallet-list.constants";
 
-class WalletList extends Component {
+interface IWalletListProps extends InjectedTranslateProps {
+  wallets: WalletData[];
+  createButtonToolbar(): void;
+}
+
+interface IWalletListState {
+  isOpenAddFundsPopup: boolean;
+  isOpenWithdrawPopup: boolean;
+  isOpenTransferPopup: boolean;
+  currentWallet: any;
+}
+
+class WalletList extends React.Component<IWalletListProps, IWalletListState> {
   state = {
     isOpenAddFundsPopup: false,
     isOpenWithdrawPopup: false,
@@ -62,10 +74,10 @@ class WalletList extends Component {
     const { t, createButtonToolbar, wallets } = this.props;
     return (
       <div className="wallet-list">
-        <TableModule
+        <Table
           paging={DEFAULT_PAGING}
           createButtonToolbar={createButtonToolbar}
-          data={{ items: wallets, total: wallets.length }}
+          items={wallets}
           dataSelector={walletTableTransactionsSelector}
           columns={WALLET_LIST_COLUMNS}
           renderHeader={column => (
@@ -77,7 +89,7 @@ class WalletList extends Component {
           )}
           renderBodyRow={(wallet: WalletData) => {
             return (
-              <TableRow className="wallet-list__row">
+              <TableRow className="wallet-list__row" key={wallet.id}>
                 <TableCell className="wallet-list__cell wallet-list__cell--wallet">
                   <Link
                     className="wallet-list__link"
