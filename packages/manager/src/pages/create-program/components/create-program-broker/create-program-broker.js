@@ -21,6 +21,11 @@ const getLeverageDescription = ({ leverageMax, leverageMin }) => {
   return result;
 };
 
+const getAcountTypes = accountTypes => {
+  if (!accountTypes[0].currencies) return null;
+  return accountTypes[0].currencies.join(", ");
+};
+
 const CreateProgramBroker = ({
   t,
   brokers,
@@ -77,6 +82,22 @@ const CreateProgramBroker = ({
         </div>
         <div className="create-program-broker__row">
           <div className="create-program-broker__info-title">
+            {t("manager.create-program-page.broker-info.account-type")}
+          </div>
+          <div className="create-program-broker__info-text">
+            {getAcountTypes(choosedBroker.accountTypes)}
+          </div>
+        </div>
+        <div className="create-program-broker__row">
+          <div className="create-program-broker__info-title">
+            {t("manager.create-program-page.broker-info.trading-platform")}
+          </div>
+          <div className="create-program-broker__info-text">
+            {choosedBroker.accountTypes[0].type}
+          </div>
+        </div>
+        <div className="create-program-broker__row">
+          <div className="create-program-broker__info-title">
             {t("manager.create-program-page.broker-info.terms")}
           </div>
           <div className="create-program-broker__info-text">
@@ -85,7 +106,7 @@ const CreateProgramBroker = ({
               target="_blank"
               rel="noopener noreferrer"
             >
-              Read Terms
+              {t("manager.create-program-page.broker-info.read-terms")}
             </a>
           </div>
         </div>
@@ -97,14 +118,6 @@ const CreateProgramBroker = ({
             {getLeverageDescription(choosedBroker)}
           </div>
         </div>
-        {/*<div className="create-program-broker__row create-program-broker__row--small">
-          <div className="create-program-broker__info-title">
-            {t("manager.create-program-page.broker-info.fee")}
-          </div>
-          <div className="create-program-broker__info-text">
-            {choosedBroker.fee} %
-          </div>
-        </div>*/}
         <div className="create-program-broker__row">
           <div className="create-program-broker__info-title">
             {t("manager.create-program-page.broker-info.assets")}
