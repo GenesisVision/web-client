@@ -1,8 +1,9 @@
 import { CopyTradingAccountInfo } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps } from "react-i18next";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
+import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
 import Profitability from "shared/components/profitability/profitability";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
@@ -33,10 +34,10 @@ class WalletCopytradingRow extends React.Component<
                 state: `/ ${t("wallet-page.title")}`
               }}
             >
-              <img
-                src={filesService.getFileUrl(wallet.logo)}
-                className="wallet-list__icon"
-                alt="Icon"
+              <WalletImage
+                url={wallet.logo}
+                alt={wallet.currency}
+                imageClassName="wallet-list__icon"
               />
               {wallet.currency}
             </Link>
@@ -77,4 +78,4 @@ class WalletCopytradingRow extends React.Component<
   }
 }
 
-export default WalletCopytradingRow;
+export default translate()(WalletCopytradingRow);

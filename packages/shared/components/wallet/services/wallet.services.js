@@ -103,5 +103,18 @@ export const fetchCopytradingAccounts = () => {
   const authorization = authService.getAuthArg();
   return signalApi
     .v10SignalAccountsGet(authorization)
-    .then(mapToTableItems<CopyTradingAccountInfo>("accounts"));
+    .then(data => ({ ...mockCopytrading, total: 0 }))
+    .then(mapToTableItems("accounts"));
+};
+
+let mockCopytrading = {
+  accounts: [
+    {
+      currency: "GVT",
+      logo: "d3d2bc3e-eb20-4941-91e7-c8af00d0efe7",
+      balance: 100,
+      equity: 10,
+      freeMargin: 90
+    }
+  ]
 };

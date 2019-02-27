@@ -28,43 +28,17 @@ import WalletCopytradingActions from "./wallet-copytrading-action-cell";
 import WalletCopytradingRow from "./wallet-copytrading-row";
 import { WALLET_COPYTRADING_COLUMNS } from "./wallet-copytrading.constants";
 
-const TRANSACTIONS_FILTERS = {
-  dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE
-};
-
-const DEFAULT_FILTERS = [
-  { ...composeDefaultDateRangeFilter() },
-  {
-    name: "type",
-    type: FilterType.general
-  }
-];
-
 class WalletCopytrading extends Component {
-  state = {
-    isOpen: false
-  };
-  openPopup = () => {
-    this.setState({ isOpen: true });
-  };
-  closePopup = () => {
-    this.setState({ isOpen: false });
-  };
   fetchCopytradingAccounts = () => {
     return fetchCopytradingAccounts();
   };
 
   render() {
-    const { t, createButtonToolbar, filters } = this.props;
+    const { t } = this.props;
     return (
       <div className="wallet-copytrading">
         <TableModule
-          defaultFilters={DEFAULT_FILTERS}
           paging={DEFAULT_PAGING}
-          filtering={{
-            ...TRANSACTIONS_FILTERS
-          }}
-          createButtonToolbar={createButtonToolbar}
           getItems={this.fetchCopytradingAccounts}
           columns={WALLET_COPYTRADING_COLUMNS}
           renderHeader={column => (
@@ -76,9 +50,7 @@ class WalletCopytrading extends Component {
               {t(`wallet-page.copytrading.${column.name}`)}
             </span>
           )}
-          renderBodyRow={transaction => (
-            <WalletCopytradingRow transaction={transaction} />
-          )}
+          renderBodyRow={wallet => <WalletCopytradingRow wallet={wallet} />}
         />
       </div>
     );
