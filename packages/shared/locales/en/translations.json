@@ -738,6 +738,12 @@
       "label": "Using GVT to pay for fees"
     }
   },
+  "wallet-copytrading-page": {
+    "title": "Copytrading account",
+    "balance": "Balance",
+    "equity": "Equity",
+    "profit": "Profit"
+  },
   "gvt-fees": {
     "title": "Fees and Discounts",
     "section": {

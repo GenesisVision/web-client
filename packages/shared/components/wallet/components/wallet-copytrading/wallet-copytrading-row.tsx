@@ -31,7 +31,7 @@ class WalletCopytradingRow extends React.Component<
                 pathname: composeWalletCopytradingCurrencyUrl(
                   wallet.currency.toLowerCase()
                 ),
-                state: `/ ${t("wallet-page.title")}`
+                state: `/ ${t("wallet-copytrading-page.title")}`
               }}
             >
               <WalletImage

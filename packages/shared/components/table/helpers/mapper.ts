@@ -1,4 +1,4 @@
-type TableItems<T> = {
+export type TableItems<T> = {
   total: number;
   items: T[];
 };
