@@ -12,11 +12,13 @@ export interface IInputAmountFieldProps {
   isAllow?: (values?: any) => boolean;
   setMax(): void;
   autoFocus?: boolean;
+  onChange?(event: string | number): void;
 }
 
 class InputAmountField extends React.Component<IInputAmountFieldProps> {
   render() {
     const {
+      onChange,
       t,
       name,
       label,
@@ -27,6 +29,7 @@ class InputAmountField extends React.Component<IInputAmountFieldProps> {
     } = this.props;
     return (
       <GVFormikField
+        onChange={onChange}
         name={name}
         label={label}
         component={GVNumberFiled}
