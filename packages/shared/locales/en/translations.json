@@ -1152,7 +1152,7 @@
           "AssetStarted": "Asset started",
           "InvestorInvest": "Investor invest",
           "AssetFinished": "Asset finished",
-          "ProgramPeriodStats": "Program period stats",
+          "ProgramPeriodStarts": "Program period starts",
           "ProgramPeriodEnds": "Program period ends"
         }
       }
@@ -1272,7 +1272,7 @@
           "InvestorInvest": "Investor invest",
           "InvestorWithdraw": "Investor withdraw",
           "AssetFinished": "Asset finished",
-          "ProgramPeriodStats": "Program period stats",
+          "ProgramPeriodStarts": "Program period starts",
           "ProgramPeriodEnds": "Program period ends"
         }
       }
