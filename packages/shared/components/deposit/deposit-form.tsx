@@ -289,6 +289,11 @@ class DepositForm extends React.Component<OwnProps> {
             {t("deposit-asset.confirm")}
           </GVButton>
         </div>
+        {asset === ASSET.FUND ? (
+          <div className="dialog__info">
+            {t("deposit-asset.fund.disclaimer")}
+          </div>
+        ) : null}
       </form>
     );
   }
