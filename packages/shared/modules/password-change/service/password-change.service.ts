@@ -15,7 +15,6 @@ export const changePassword = (model: ChangePasswordViewModel) => (
       model
     })
     .then((response: string) => {
-      console.log(response);
       authService.storeToken(response);
       dispatch(authActions.updateToken());
       dispatch(push(SETTINGS_ROUTE));

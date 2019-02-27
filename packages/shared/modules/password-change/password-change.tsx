@@ -31,14 +31,9 @@ class PasswordChange extends React.Component<
 
   handleSubmit = (model: ChangePasswordViewModel) => {
     this.setState({ isPending: true });
-    this.props.service
-      .changePassword(model)
-      .then(() => {
-        this.setState({ isPending: false });
-      })
-      .catch((errors: any) => {
-        this.setState({ isPending: false, errorMessage: errors.errorMessage });
-      });
+    this.props.service.changePassword(model).catch((errors: any) => {
+      this.setState({ isPending: false, errorMessage: errors.errorMessage });
+    });
   };
 
   render() {
