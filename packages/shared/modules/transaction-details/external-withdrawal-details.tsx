@@ -81,14 +81,16 @@ const ExternalWithdrawal = (props: ITransactionDetailsProps) => {
             <Status status={data.status} />
           </div>{" "}
         </StatisticItem>
-        <div className="external-transaction__actions">
-          <div className="action-button" onClick={handleCancel}>
-            Cancel
+        {data.externalTransactionDetails.isEnableActions && (
+          <div className="external-transaction__actions">
+            <div className="action-button" onClick={handleCancel}>
+              Cancel
+            </div>
+            <div className="action-button" onClick={handleResend}>
+              Resend email
+            </div>
           </div>
-          <div className="action-button" onClick={handleResend}>
-            Resend email
-          </div>
-        </div>
+        )}
       </div>
     </React.Fragment>
   );
