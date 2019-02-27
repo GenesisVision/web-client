@@ -1,28 +1,22 @@
 import classnames from "classnames";
 import { FormikProps, withFormik } from "formik";
+import { ChangePasswordViewModel } from "gv-api-web";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
-import React, { ComponentType, FunctionComponent } from "react";
+import React, { ComponentType } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
 
 import { passwordChangeValidationSchema } from "./password-change.validators";
 
 interface IPasswordChangeFormOwnProps {
-  programName: string;
-  errorMessage: string;
+  errorMessage?: string | null;
   isPending: boolean;
-  onSubmit(values: IPasswordChangeFormValues): void;
-}
-
-export interface IPasswordChangeFormValues {
-  oldPassword: string;
-  password: string;
-  confirmPassword: string;
+  onSubmit(values: ChangePasswordViewModel): void;
 }
 
 type PasswordChangeFormProps = InjectedTranslateProps &
   IPasswordChangeFormOwnProps &
-  FormikProps<IPasswordChangeFormValues>;
+  FormikProps<ChangePasswordViewModel>;
 const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({
   t,
   touched,
@@ -84,7 +78,7 @@ const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({
 
 export default compose<ComponentType<IPasswordChangeFormOwnProps>>(
   translate(),
-  withFormik<IPasswordChangeFormOwnProps, IPasswordChangeFormValues>({
+  withFormik<IPasswordChangeFormOwnProps, ChangePasswordViewModel>({
     displayName: "change-password",
     mapPropsToValues: () => ({
       oldPassword: "",
