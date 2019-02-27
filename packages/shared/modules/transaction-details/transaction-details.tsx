@@ -43,6 +43,8 @@ export interface ITransactionDetailsState {
 
 export interface ITransactionDetailsProps extends InjectedTranslateProps {
   data: TransactionDetails;
+  handleCancel?(): void;
+  handleResend?(): void;
 }
 
 class TransactionDetailsDialog extends React.Component<
@@ -76,6 +78,35 @@ class TransactionDetailsDialog extends React.Component<
       });
   };
 
+  cancel = () => {
+    walletApi
+      .v10WalletWithdrawRequestCancelByTxIdPost(
+        this.props.transactionId,
+        authService.getAuthArg()
+      )
+      .then((res: any) => {
+        console.log(res);
+      })
+      .catch(errorMessage => {
+        this.props.error(errorMessage.errorMessage);
+        this.props.close();
+      });
+  };
+  resendEmail = () => {
+    walletApi
+      .v10WalletWithdrawRequestResendByTxIdPost(
+        this.props.transactionId,
+        authService.getAuthArg()
+      )
+      .then((res: any) => {
+        console.log(res);
+      })
+      .catch(errorMessage => {
+        this.props.error(errorMessage.errorMessage);
+        this.props.close();
+      });
+  };
+
   render() {
     if (this.state.isPending) return null;
     if (!this.state.data) return null;
@@ -84,7 +115,14 @@ class TransactionDetailsDialog extends React.Component<
       function() {
         return <p>type isn't define</p>;
       };
-    return <Component t={this.props.t} data={this.state.data} />;
+    return (
+      <Component
+        t={this.props.t}
+        data={this.state.data}
+        handleCancel={this.cancel}
+        handleResend={this.resendEmail}
+      />
+    );
   }
 }
 
