@@ -133,7 +133,7 @@ export default compose(
     displayName: "edit-form",
     mapPropsToValues: props => {
       return {
-        stopOutLevel: String(props.info.stopOutLevel),
+        stopOutLevel: String(props.info.stopOutLevel || 100),
         title: props.info.title,
         description: props.info.description,
         logo: {
