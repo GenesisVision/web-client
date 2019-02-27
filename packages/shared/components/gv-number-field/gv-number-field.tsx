@@ -13,7 +13,7 @@ class GVNumberFiled extends Component<
 > {
   handleOnChange = (value: NumberFormatValues) => {
     const { form, name, onChange } = this.props;
-    onChange(value.value);
+    if (onChange) onChange(value.value);
     form.setFieldValue(name, value.value);
   };
   render() {
