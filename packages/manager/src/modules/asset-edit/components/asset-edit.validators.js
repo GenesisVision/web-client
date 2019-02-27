@@ -4,7 +4,7 @@ const editAssetSettingsValidationSchema = ({ t, ...props }) =>
   object().shape({
     stopOutLevel: number()
       .moreThan(0)
-      .max(props.info.stopOutLevel),
+      .max(props.info.stopOutLevel || 100),
     logo: object().shape({
       width: number().min(
         300,
