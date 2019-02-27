@@ -2,6 +2,9 @@ import { number, object, string } from "yup";
 
 const editAssetSettingsValidationSchema = ({ t, ...props }) =>
   object().shape({
+    stopOutLevel: number()
+      .moreThan(0)
+      .max(props.info.stopOutLevel),
     logo: object().shape({
       width: number().min(
         300,

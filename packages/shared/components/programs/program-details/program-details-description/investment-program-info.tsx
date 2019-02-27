@@ -1,3 +1,4 @@
+import { ProgramDetailsFull } from "gv-api-web";
 import React, { FunctionComponent } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -6,12 +7,13 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatValue } from "shared/utils/formatter";
 
 interface IInvestmentProgramInfoProps {
-  programDescription: any;
+  isOwnProgram?: boolean;
+  programDescription: ProgramDetailsFull;
 }
 
 const InvestmentProgramInfo: FunctionComponent<
   InjectedTranslateProps & IInvestmentProgramInfoProps
-> = ({ t, programDescription }) => {
+> = ({ t, programDescription, isOwnProgram }) => {
   return (
     <div className="program-details-description__statistic-container">
       <StatisticItem
@@ -66,6 +68,19 @@ const InvestmentProgramInfo: FunctionComponent<
           suffix=" %"
         />
       </StatisticItem>
+      {isOwnProgram && (
+        <StatisticItem
+          label={t("program-details-page.description.stop-out-level")}
+          className="program-details-description__short-statistic-item"
+          accent
+        >
+          <NumberFormat
+            value={formatValue(programDescription.stopOutLevel, 2)}
+            displayType="text"
+            suffix=" %"
+          />
+        </StatisticItem>
+      )}
     </div>
   );
 };

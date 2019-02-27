@@ -5,17 +5,19 @@ import {
   GVProgramPeriod,
   GVTextField
 } from "gv-react-components";
+import ProgramDefaultImage from "pages/create-program/components/create-program-settings/program-default-image";
 import React from "react";
 import { translate } from "react-i18next";
+import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import InputImage from "shared/components/form/input-image/input-image";
 import { FUND, PROGRAM } from "shared/constants/constants";
 import filesService from "shared/services/file-service";
 
-import ProgramDefaultImage from "../../../pages/create-program/components/create-program-settings/program-default-image";
 import editAssetSettingsValidationSchema from "./asset-edit.validators";
 
 const AssetEditForm = ({
+  isValid,
   t,
   dirty,
   values,
@@ -68,6 +70,17 @@ const AssetEditForm = ({
             </span>
           )}
         </div>
+        <GVFormikField
+          name="stopOutLevel"
+          label={t(
+            "manager.create-program-page.settings.fields.stop-out-level"
+          )}
+          adornment="%"
+          component={GVTextField}
+          InputComponent={NumberFormat}
+          autoComplete="off"
+          decimalScale={4}
+        />
       </div>
       <div className="dialog__bottom">
         <div className="create-program-settings__logo-title">
@@ -102,7 +115,7 @@ const AssetEditForm = ({
             type="submit"
             id="signUpFormSubmit"
             className="invest-form__submit-button"
-            disabled={!dirty}
+            disabled={!dirty || !isValid}
           >
             {t("manager.edit-program.confirm")}
           </GVButton>
@@ -116,20 +129,23 @@ export default compose(
   translate(),
   withFormik({
     displayName: "edit-form",
-    mapPropsToValues: props => ({
-      title: props.info.title,
-      description: props.info.description,
-      logo: {
-        cropped: null,
-        src: filesService.getFileUrl(props.info.logo.src),
-        id: props.info.logo.src,
-        isNew: false,
-        isDefault: !!!props.info.logo.src,
-        width: undefined,
-        height: undefined,
-        size: undefined
-      }
-    }),
+    mapPropsToValues: props => {
+      return {
+        stopOutLevel: String(props.info.stopOutLevel),
+        title: props.info.title,
+        description: props.info.description,
+        logo: {
+          cropped: null,
+          src: filesService.getFileUrl(props.info.logo.src),
+          id: props.info.logo.src,
+          isNew: false,
+          isDefault: !!!props.info.logo.src,
+          width: undefined,
+          height: undefined,
+          size: undefined
+        }
+      };
+    },
     validationSchema: editAssetSettingsValidationSchema,
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(values, setSubmitting);
