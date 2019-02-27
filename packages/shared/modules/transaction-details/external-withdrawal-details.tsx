@@ -11,7 +11,7 @@ import filesService from "shared/services/file-service";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 const ExternalWithdrawal = (props: ITransactionDetailsProps) => {
-  const { data, t } = props;
+  const { data, t, handleCancel, handleResend } = props;
   return (
     <React.Fragment>
       <div className="dialog__top">
@@ -81,6 +81,16 @@ const ExternalWithdrawal = (props: ITransactionDetailsProps) => {
             <Status status={data.status} />
           </div>{" "}
         </StatisticItem>
+        {data.externalTransactionDetails.isEnableActions && (
+          <div className="external-transaction__actions">
+            <div className="action-button" onClick={handleCancel}>
+              Cancel
+            </div>
+            <div className="action-button" onClick={handleResend}>
+              Resend email
+            </div>
+          </div>
+        )}
       </div>
     </React.Fragment>
   );

@@ -13,6 +13,7 @@ import { formatCurrencyValue } from "shared/utils/formatter";
 
 export interface ITransactionRowProps {
   transaction: MultiWalletExternalTransaction;
+  update(): void;
 }
 
 export interface ITransactionRowState {
@@ -32,6 +33,10 @@ class AllDepositsWithdrawalsRow extends React.Component<
   closePopup = () => {
     this.setState({ isOpen: false });
   };
+  handleAction = () => {
+    if (this.props.update) this.props.update();
+    this.closePopup();
+  };
   render() {
     const { transaction } = this.props;
     return (
@@ -40,6 +45,7 @@ class AllDepositsWithdrawalsRow extends React.Component<
           transactionId={transaction.id}
           open={this.state.isOpen}
           onClose={this.closePopup}
+          onAction={this.handleAction}
         />
         <TableRow
           className="wallet-deposits-withdrawals__row"
