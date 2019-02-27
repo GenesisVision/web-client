@@ -1,5 +1,5 @@
 import { WalletData } from "gv-api-web";
-import React, { Component } from "react";
+import * as React from "react";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators } from "redux";
 import { fetchWallets } from "shared/components/wallet/services/wallet.services";
@@ -35,7 +35,7 @@ interface IWalletTransferContainerState {
   errorMessage?: string;
 }
 
-class WalletTransferContainer extends Component<
+class WalletTransferContainer extends React.Component<
   IWalletTransferContainerProps,
   IWalletTransferContainerState
 > {
@@ -48,7 +48,10 @@ class WalletTransferContainer extends Component<
     this.setState({ isPending: true });
     walletTransferRequest({ ...values })
       .then(() => {
-        this.setState({ isPending: false }, () => this.props.onClose());
+        this.setState({ isPending: false }, () => {
+          this.props.onClose();
+          this.props.service.fetchWallets();
+        });
       })
       .catch((error: any) => {
         this.setState({
