@@ -212,7 +212,7 @@
     "confirm": "Confirm",
     "validation": {
       "amount-more-than-available": "Amount is more than available in your wallet",
-      "amount-min-value": "Min amount is {{min}} {{currency}}"
+      "amount-min-value": "Min amount is {{min}} {{currency}} ( ≈ {{walletMin}} {{walletCurrency}})"
     },
     "program": {
       "available-to-invest": "Available to invest in program",

@@ -30,7 +30,10 @@ const DepositTop: React.FC<IDepositTop & InjectedTranslateProps> = ({
             label={t("deposit-asset.program.available-to-invest")}
             big
           >
-            {formatCurrencyValue(info.availableToInvest, currency)} {currency}
+            {`${formatCurrencyValue(
+              info.availableToInvestBase,
+              currency
+            )} ${currency}`}
           </StatisticItem>
         )}
       </div>

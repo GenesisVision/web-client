@@ -126,18 +126,18 @@ class DepositForm extends React.Component<OwnProps> {
   getMaxAmount = () => {
     const { setFieldValue, info, wallets, values, asset } = this.props;
     const { walletCurrency, rate } = values;
-    const { availableToInvest } = info;
+    const { availableToInvestBase } = info;
     const wallet = wallets.find(wallet => wallet.currency === walletCurrency);
     const maxFromWallet = wallet ? wallet.available : 0;
 
     let maxAvailable = Number.MAX_SAFE_INTEGER;
-    if (availableToInvest !== undefined)
-      maxAvailable =
-        (availableToInvest /
+    if (availableToInvestBase !== undefined)
+      maxAvailable = availableToInvestBase;
+    /*(availableToInvestBase /
           (100 -
             (asset === ASSET.PROGRAM ? info.gvCommission : 0) -
             this.composeEntryFee(info.entryFee))) *
-        100;
+        100;*/
     const maxAvailableInWalletCurrency = convertToCurrency(maxAvailable, rate);
     const maxInvest = formatCurrencyValue(
       Math.min(maxFromWallet, maxAvailableInWalletCurrency),
@@ -232,11 +232,11 @@ class DepositForm extends React.Component<OwnProps> {
                 {info.entryFee} %{" "}
                 <NumberFormat
                   value={formatCurrencyValue(
-                    this.entryFee(values.amount),
-                    walletCurrency
+                    this.entryFee(convertFromCurrency(values.amount, rate)),
+                    currency
                   )}
                   prefix=" ("
-                  suffix={` ${walletCurrency})`}
+                  suffix={` ${currency})`}
                   displayType="text"
                 />
               </span>
@@ -251,11 +251,11 @@ class DepositForm extends React.Component<OwnProps> {
                 {info.gvCommission} %
                 <NumberFormat
                   value={formatCurrencyValue(
-                    this.gvFee(values.amount),
-                    walletCurrency
+                    this.gvFee(convertFromCurrency(values.amount, rate)),
+                    currency
                   )}
                   prefix={" ("}
-                  suffix={` ${walletCurrency})`}
+                  suffix={` ${currency})`}
                   displayType="text"
                 />
               </span>
@@ -268,10 +268,10 @@ class DepositForm extends React.Component<OwnProps> {
             <span className="dialog-list__value">
               <NumberFormat
                 value={formatCurrencyValue(
-                  this.investAmount(values.amount),
-                  walletCurrency
+                  this.investAmount(convertFromCurrency(values.amount, rate)),
+                  currency
                 )}
-                suffix={` ${walletCurrency}`}
+                suffix={` ${currency}`}
                 displayType="text"
               />
             </span>
@@ -323,8 +323,13 @@ export default compose<React.ComponentType<IDepositFormOwnProps>>(
                 values.walletCurrency
               ),
               t("deposit-asset.validation.amount-min-value", {
-                min: info.minInvestmentAmount,
-                currency
+                min: formatCurrencyValue(info.minInvestmentAmount, currency),
+                currency,
+                walletMin: formatCurrencyValue(
+                  convertToCurrency(info.minInvestmentAmount, values.rate),
+                  values.walletCurrency
+                ),
+                walletCurrency: values.walletCurrency
               })
             )
             .max(
