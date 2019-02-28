@@ -167,7 +167,7 @@ class FollowCreateAccount extends React.Component<
                   convertFromCurrency(initialDepositAmount, rate),
                   initialDepositCurrency
                 )}
-                prefix="= "
+                prefix="≈ "
                 suffix={` ${initialDepositCurrency}`}
                 displayType="text"
               />

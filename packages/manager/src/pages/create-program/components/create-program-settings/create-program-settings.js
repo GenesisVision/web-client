@@ -428,7 +428,7 @@ class CreateProgramSettings extends React.Component {
                       convertFromCurrency(depositAmount, rate),
                       currency
                     )}
-                    prefix="= "
+                    prefix="≈ "
                     suffix={` ${currency}`}
                     displayType="text"
                   />
