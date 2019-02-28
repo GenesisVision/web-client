@@ -5,15 +5,11 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
-import Chip from "shared/components/chip/chip";
 import Table from "shared/components/table/components/table";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
-import Tooltip from "shared/components/tooltip/tooltip";
 import { composeWalletCurrencytUrl } from "shared/components/wallet/wallet.routes";
-import ArrowIcon from "shared/media/arrow-up.svg";
-import ConvertIcon from "shared/media/convert.svg";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
 import WalletTransferPopup from "shared/modules/wallet-transfer/wallet-transfer-popup";
 import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
@@ -21,6 +17,7 @@ import filesService from "shared/services/file-service";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 import { walletTableTransactionsSelector } from "../wallet-transactions/wallet-transactions.selector";
+import WalletListButton from "./wallet-list-button";
 import { WALLET_LIST_COLUMNS } from "./wallet-list.constants";
 
 interface IWalletListProps extends InjectedTranslateProps {
@@ -144,57 +141,12 @@ class WalletList extends React.Component<IWalletListProps, IWalletListState> {
                   />
                 </TableCell>
                 <TableCell className="wallet-list__cell wallet-list__cell--buttons">
-                  <Tooltip
-                    render={() => (
-                      <div className="wallet-list__tooltip-button">
-                        {t("wallet-page.buttons.internal-transfer")}
-                      </div>
-                    )}
-                  >
-                    <div className="wallet-list__button">
-                      <Chip
-                        className="wallet-list__button-transfer"
-                        onClick={this.handleOpenTransferPopup(wallet)}
-                      >
-                        <img src={ConvertIcon} alt="Convert Icon" />
-                      </Chip>
-                    </div>
-                  </Tooltip>
-                  <Tooltip
-                    render={() => (
-                      <div className="wallet-list__tooltip-button">
-                        {t("wallet-page.buttons.deposit")}
-                      </div>
-                    )}
-                  >
-                    <div className="wallet-list__button">
-                      <Chip
-                        className="wallet-list__withdraw"
-                        onClick={this.handleOpenWithdrawPopup(wallet)}
-                        disabled={wallet.isWithdrawalEnabled === false}
-                      >
-                        <img src={ArrowIcon} alt="Arrow Icon" />
-                      </Chip>
-                    </div>
-                  </Tooltip>
-                  <Tooltip
-                    render={() => (
-                      <div className="wallet-list__tooltip-button">
-                        {t("wallet-page.buttons.withdrawal")}
-                      </div>
-                    )}
-                  >
-                    <div className="wallet-list__button">
-                      <Chip
-                        className="wallet-list__button-add-funds"
-                        type="positive"
-                        onClick={this.handleOpenAddFundsPopup(wallet)}
-                        disabled={wallet.isDepositEnabled === false}
-                      >
-                        +
-                      </Chip>
-                    </div>
-                  </Tooltip>
+                  <WalletListButton
+                    wallet={wallet}
+                    handleOpenTransferPopup={this.handleOpenTransferPopup}
+                    handleOpenWithdrawPopup={this.handleOpenWithdrawPopup}
+                    handleOpenAddFundsPopup={this.handleOpenAddFundsPopup}
+                  />
                 </TableCell>
               </TableRow>
             );
