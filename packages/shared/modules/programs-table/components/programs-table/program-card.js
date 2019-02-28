@@ -15,6 +15,7 @@ import TagProgramContainer from "shared/components/tag-program/tag-program-conta
 import { composeManagerDetailsUrl } from "shared/utils/compose-url";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
+import Tooltip from "shared/components/tooltip/tooltip";
 
 class ProgramCard extends Component {
   state = {
@@ -152,12 +153,27 @@ class ProgramCard extends Component {
         <div className="programs-cards__table">
           <div className="programs-cards__table-column">
             <StatisticItem label={t("programs-page.programs-header.equity")}>
-              <NumberFormat
-                value={program.statistic.balanceGVT.amount}
-                displayType="text"
-                decimalScale={0}
-                suffix=" GVT"
-              />
+              <Tooltip
+                render={() => (
+                  <div>
+                    {formatCurrencyValue(
+                      program.statistic.balanceGVT.amount,
+                      "GVT"
+                    )}{" "}
+                    {"GVT"}
+                  </div>
+                )}
+              >
+                <NumberFormat
+                  value={formatCurrencyValue(
+                    program.statistic.balanceBase.amount,
+                    program.currency
+                  )}
+                  suffix={` ${program.currency}`}
+                  decimalScale={0}
+                  displayType="text"
+                />
+              </Tooltip>
             </StatisticItem>
             <StatisticItem label={t("programs-page.programs-header.period")}>
               <ProgramPeriodPie

@@ -95,13 +95,13 @@ const ProgramTableRowShort = ({
         <Tooltip
           render={() => (
             <div>
-              {formatValue(statistic.balanceBase.amount)} {currency}
+              {formatCurrencyValue(statistic.balanceGVT.amount, "GVT")} {"GVT"}
             </div>
           )}
         >
           <NumberFormat
-            value={statistic.balanceGVT.amount}
-            suffix=" GVT"
+            value={formatCurrencyValue(statistic.balanceBase.amount, currency)}
+            suffix={` ${currency}`}
             decimalScale={0}
             displayType="text"
           />

@@ -18,6 +18,7 @@ import { composeManagerDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 import ProgramBigChart from "./program-big-chart/program-big-chart";
+import Tooltip from "shared/components/tooltip/tooltip";
 
 class ProgramTableRowDetailed extends Component {
   state = {
@@ -122,7 +123,27 @@ class ProgramTableRowDetailed extends Component {
                       {t("programs-page.programs-header.equity")}
                     </div>
                     <div className="program-detailed__statistic-data--value">
-                      {(+program.statistic.balanceGVT.amount).toFixed(0)} GVT
+                      <Tooltip
+                        render={() => (
+                          <div>
+                            {formatCurrencyValue(
+                              program.statistic.balanceGVT.amount,
+                              "GVT"
+                            )}{" "}
+                            {"GVT"}
+                          </div>
+                        )}
+                      >
+                        <NumberFormat
+                          value={formatCurrencyValue(
+                            program.statistic.balanceBase.amount,
+                            program.currency
+                          )}
+                          suffix={` ${program.currency}`}
+                          decimalScale={0}
+                          displayType="text"
+                        />
+                      </Tooltip>
                     </div>
                   </div>
                   <div>
