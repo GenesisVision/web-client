@@ -1,4 +1,8 @@
 import { boolean, lazy, mixed, number, object, string } from "yup";
+import { formatCurrencyValue } from "shared/utils/formatter";
+import {
+  convertToCurrency
+} from "shared/utils/currency-converter";
 
 const createProgramSettingsValidationSchema = ({ t, ...props }) =>
   lazy(values =>
@@ -20,8 +24,22 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) =>
           t("manager.create-program-page.settings.validation.amount-required")
         )
         .moreThan(
-          0,
-          t("manager.create-program-page.settings.validation.amount-is-zero")
+          formatCurrencyValue(
+            convertToCurrency(
+              props.minimumDepositsAmount[values.currency],
+              values.rate
+            ),
+            values.currency
+          ),
+          t("manager.create-program-page.settings.validation.amount-is-zero", {
+            min: formatCurrencyValue(
+              convertToCurrency(
+                props.minimumDepositsAmount[values.currency],
+                values.rate
+              ),
+              values.currency
+            )
+          })
         )
         .max(
           props.wallets.find(
@@ -100,7 +118,7 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) =>
             "manager.create-program-page.settings.validation.entry-fee-required"
           )
         )
-        .min(
+        .moreThan(
           0.01,
           t("manager.create-program-page.settings.validation.entry-fee-min")
         )
@@ -111,7 +129,7 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) =>
             " %"
         ),
       successFee: number()
-        .min(
+        .moreThan(
           0.01,
           t("manager.create-program-page.settings.validation.success-fee-min")
         )
