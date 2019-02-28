@@ -15,7 +15,7 @@ import TableRow from "shared/components/table/components/table-row";
 import TagProgramContainer from "shared/components/tag-program/tag-program-container";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { composeManagerDetailsUrl } from "shared/utils/compose-url";
-import { formatValue } from "shared/utils/formatter";
+import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 import ProgramBigChart from "./program-big-chart/program-big-chart";
 
@@ -146,7 +146,10 @@ class ProgramTableRowDetailed extends Component {
                       {t("programs-page.programs-header.available-to-invest")}
                     </div>
                     <div className="program-detailed__statistic-data--value">
-                      {formatValue(program.availableInvestment, 2)} GVT
+                      {`${formatCurrencyValue(
+                        program.availableInvestmentBase,
+                        program.currency
+                      )} ${program.currency}`}
                     </div>
                   </div>
                   <div>

@@ -15,7 +15,7 @@ import TagProgramContainer from "shared/components/tag-program/tag-program-conta
 import Tooltip from "shared/components/tooltip/tooltip";
 import { STATUS } from "shared/constants/constants";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
-import { formatValue } from "shared/utils/formatter";
+import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 const ProgramTableRowShort = ({
   t,
@@ -29,6 +29,7 @@ const ProgramTableRowShort = ({
   const {
     status,
     availableInvestment,
+    availableInvestmentBase,
     statistic,
     logo,
     level,
@@ -113,7 +114,7 @@ const ProgramTableRowShort = ({
         {statistic.investorsCount}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--available-to-invest">
-        {formatValue(availableInvestment)} GVT
+        {formatCurrencyValue(availableInvestmentBase, currency)} {currency}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--period">
         {periodStarts &&
