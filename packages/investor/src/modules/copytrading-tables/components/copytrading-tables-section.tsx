@@ -17,6 +17,7 @@ enum TRADES_TABS {
 
 interface ICopytradingTablesSectionProps {
   title: string;
+  currency?: string;
 }
 
 interface ICopytradingTablesSectionState extends ICopytradingTradesCounts {
@@ -34,7 +35,7 @@ class ICopytradingTablesSection extends Component<
   };
 
   componentDidMount() {
-    fetchCopytradingTradesCount().then(data => {
+    fetchCopytradingTradesCount(this.props.currency).then(data => {
       this.setState({ ...data });
     });
   }
@@ -45,7 +46,7 @@ class ICopytradingTablesSection extends Component<
 
   render() {
     const { tab, openTradesCount, historyCount } = this.state;
-    const { t, title } = this.props;
+    const { t, title, currency } = this.props;
     return (
       <Surface>
         <div className="dashboard-assets__head">
@@ -64,8 +65,12 @@ class ICopytradingTablesSection extends Component<
           </GVTabs>
         </div>
         <div className="">
-          {tab === TRADES_TABS.OPEN_TRADES && <OpenTradesTable title={title} />}
-          {tab === TRADES_TABS.HISTORY && <TradesHistoryTable title={title} />}
+          {tab === TRADES_TABS.OPEN_TRADES && (
+            <OpenTradesTable title={title} currency={currency} />
+          )}
+          {tab === TRADES_TABS.HISTORY && (
+            <TradesHistoryTable title={title} currency={currency} />
+          )}
         </div>
       </Surface>
     );

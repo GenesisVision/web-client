@@ -5,13 +5,23 @@ import authService from "shared/services/auth-service";
 
 import * as actions from "../actions/copytrading-tables.actions";
 
-export const getCopytradingOpenTrades = (filters: any) => {
+export const getCopytradingOpenTrades = (currency?: string) => (
+  filters: any
+) => {
   const authorization = authService.getAuthArg();
+  if (currency) {
+    filters = { ...filters, symbol: currency };
+  }
   return actions.fetchCopytradingOpenTrades(authorization, filters);
 };
 
-export const getCopytradingTradesHistory = (filters: any) => {
+export const getCopytradingTradesHistory = (currency?: string) => (
+  filters: any
+) => {
   const authorization = authService.getAuthArg();
+  if (currency) {
+    filters = { ...filters, symbol: currency };
+  }
   return actions.fetchCopytradingTradesHistory(authorization, filters);
 };
 
@@ -19,11 +29,11 @@ export interface ICopytradingTradesCounts {
   openTradesCount?: number;
   historyCount?: number;
 }
-export const fetchCopytradingTradesCount = (): Promise<
-  ICopytradingTradesCounts
-> => {
+export const fetchCopytradingTradesCount = (
+  currency?: string
+): Promise<ICopytradingTradesCounts> => {
   const authorization = authService.getAuthArg();
-  const filtering = { take: 0 };
+  const filtering = { take: 0, symbol: currency };
   return Promise.all([
     signalApi.v10SignalTradesOpenGet(authorization, filtering),
     signalApi.v10SignalTradesGet(authorization, filtering)

@@ -99,7 +99,10 @@ class WalletCopytradingAccount extends Component<
           </div>
           <WalletCopytradingBalance wallet={wallet} />
         </div>
-        <CopytradingTablesSection title={t("wallet-copytrading-page.title")} />
+        <CopytradingTablesSection
+          title={t("wallet-copytrading-page.title")}
+          currency={wallet.currency}
+        />
       </Page>
     );
   }

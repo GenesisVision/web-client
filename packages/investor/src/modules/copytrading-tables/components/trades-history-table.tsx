@@ -32,6 +32,7 @@ import { dashboardTradesHistoryTableSelector } from "./copytrading-tables.select
 
 interface ITradesHistoryTableOwnProps {
   title: string;
+  currency?: string;
 }
 
 interface ITradesHistoryDispatchProps {
@@ -49,10 +50,10 @@ class TradesHistoryTable extends Component<
     this.props.service.clearCopytradingTable();
   }
   render() {
-    const { t, title } = this.props;
+    const { t, title, currency } = this.props;
     return (
       <TableContainer
-        getItems={getCopytradingTradesHistory}
+        getItems={getCopytradingTradesHistory(currency)}
         dataSelector={dashboardTradesHistoryTableSelector}
         isFetchOnMount={true}
         columns={COPYTRADING_TRADES_HISTORY_COLUMNS}

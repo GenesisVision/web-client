@@ -35,6 +35,7 @@ import { dashboardOpenTradesTableSelector } from "./copytrading-tables.selectors
 
 interface IOpenTradesTableOwnProps {
   title: string;
+  currency?: string;
 }
 
 interface IOpenTradesDispatchProps {
@@ -74,12 +75,12 @@ class OpenTradesTable extends Component<
   };
 
   render() {
-    const { t, title } = this.props;
+    const { t, title, currency } = this.props;
     const { isConfirmPopupOpen } = this.state;
     return (
       <TableContainer
         className="open-trades-table"
-        getItems={getCopytradingOpenTrades}
+        getItems={getCopytradingOpenTrades(currency)}
         dataSelector={dashboardOpenTradesTableSelector}
         isFetchOnMount={true}
         columns={COPYTRADING_OPEN_TRADES_COLUMNS}
