@@ -20,7 +20,6 @@ const FundDetailsStatisticsElements = ({ t, statistic, period }) => (
             value={formatCurrencyValue(statistic.balance, "GVT")}
             thousandSeparator={" "}
             displayType="text"
-            decimalScale={2}
             suffix={" GVT"}
           />
         </StatisticItem>
