@@ -35,6 +35,9 @@
 
   &__link {
     color: $main-color;
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
   }
 
   &__icon {
