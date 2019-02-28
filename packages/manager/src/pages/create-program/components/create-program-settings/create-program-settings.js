@@ -256,6 +256,16 @@ class CreateProgramSettings extends React.Component {
                 autoComplete="off"
                 decimalScale={4}
               />
+              <Hint
+                content={t(
+                  "manager.create-program-page.settings.hints.stop-out-level"
+                )}
+                className="create-program-settings__fee-hint"
+                vertical={"bottom"}
+                tooltipContent={t(
+                  "manager.create-program-page.settings.hints.stop-out-level-description"
+                )}
+              />
             </div>
             <div className="create-program-settings__logo-title">
               {t("manager.create-program-page.settings.fields.upload-logo")}

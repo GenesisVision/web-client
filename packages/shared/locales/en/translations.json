@@ -1336,7 +1336,9 @@
           "entry-fee": "Description about entry fee is here",
           "entry-fee-description": "An entry fee is a fee charged to investors upon their investment to an investment program. The maximum entry fee is {{maxFee}} %",
           "success-fee": "Description about success fee is here",
-          "success-fee-description": "A success fee is paid to a manager at the end of the reporting period for successfully closing the period at a profit. The maximum success fee is {{maxFee}} %"
+          "success-fee-description": "A success fee is paid to a manager at the end of the reporting period for successfully closing the period at a profit. The maximum success fee is {{maxFee}} %",
+          "stop-out-level": "Description about Stop Out is here",
+          "stop-out-level-description": "Stop Out is the maximum drawdown level for the reporting period at which the program is stopped, and all investments return to investors."
         },
         "validation": {
           "stop-out-required": "Stop out is required",
