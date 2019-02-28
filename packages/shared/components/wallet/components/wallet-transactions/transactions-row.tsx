@@ -9,7 +9,7 @@ import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import TransactionDetailsPopup from "shared/modules/transaction-details/transaction-details-popup";
 import filesService from "shared/services/file-service";
-import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
+import { formatCurrencyValue } from "shared/utils/formatter";
 
 export interface ITransactionRowProps {
   transaction: MultiWalletTransaction;
@@ -123,7 +123,7 @@ class TransactionsRow extends React.Component<
             </TableCell>
           )}
           <TableCell className="wallet-transactions__cell wallet-transactions__cell--date">
-            {moment(transaction.date).format("DD-MM-YYYY, hh:mm a")}
+            {moment(transaction.date).format("lll")}
           </TableCell>
           <TableCell className="wallet-transactions__cell wallet-transactions__cell--type">
             <Status

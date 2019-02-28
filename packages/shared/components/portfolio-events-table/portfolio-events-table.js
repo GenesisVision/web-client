@@ -90,7 +90,7 @@ class PortfolioEventsTable extends Component {
           renderBodyRow={event => (
             <TableRow className="portfolio-events-all-table__row">
               <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--date">
-                {moment(event.date).format("DD-MM-YYYY, hh:mm a")}
+                {moment(event.date).format("lll")}
               </TableCell>
               {/*<TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--type">
                 {PORTFOLIO_EVENTS_TYPES_ENUM[event.type] &&
