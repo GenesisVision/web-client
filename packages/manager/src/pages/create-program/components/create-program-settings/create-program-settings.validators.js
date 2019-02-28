@@ -104,7 +104,7 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) =>
           0.01,
           t("manager.create-program-page.settings.validation.entry-fee-min")
         )
-        .max(
+        .lessThan(
           props.programsInfo.managerMaxEntryFee,
           "Entry fee must be less than  " +
             props.programsInfo.managerMaxEntryFee +
@@ -120,7 +120,7 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) =>
             "manager.create-program-page.settings.validation.success-fee-required"
           )
         )
-        .max(
+        .lessThan(
           props.programsInfo.managerMaxSuccessFee,
           "Success fee must be less than  " +
             props.programsInfo.managerMaxSuccessFee +
@@ -149,7 +149,7 @@ export const signalSuccessFeeShape = (t, managerMaxSuccessFee) => {
     .required(
       t("manager.create-program-page.settings.validation.success-fee-required")
     )
-    .max(
+    .lessThan(
       managerMaxSuccessFee,
       `Success fee must be less than ${managerMaxSuccessFee} %`
     );
@@ -168,7 +168,7 @@ export const signalEntryFeeShape = (t, managerMaxEntryFee) => {
         "manager.create-program-page.settings.validation.signal-subscription-fee-min"
       )
     )
-    .max(
+    .lessThan(
       managerMaxEntryFee,
       `Monthly subscription fee must be less than ${managerMaxEntryFee} GVT`
     );

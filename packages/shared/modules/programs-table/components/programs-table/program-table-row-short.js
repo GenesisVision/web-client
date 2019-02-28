@@ -107,9 +107,9 @@ const ProgramTableRowShort = ({
           />
         </Tooltip>
       </TableCell>
-      <TableCell className="programs-table__cell programs-table__cell--currency">
+      {/*<TableCell className="programs-table__cell programs-table__cell--currency">
         {currency}
-      </TableCell>
+      </TableCell>*/}
       <TableCell className="programs-table__cell programs-table__cell--investors">
         {statistic.investorsCount}
       </TableCell>
