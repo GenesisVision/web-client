@@ -43,19 +43,16 @@
     align-items: center;
     flex-direction: row;
     justify-content: stretch;
-
-    & .action-button {
-      cursor: pointer;
-      margin-right: 25px;
-      border-radius: 19.5px;
-      height: 18px;
-      line-height: 18px;
-      padding: 0 12px;
-      background: rgba(255, 255, 255, 0.4);
-      color: white;
-    }
     img {
       margin-left: 20px;
+    }
+  }
+  &__action-button {
+    &.gv-btn {
+      padding: 4px 12px;
+      border-radius: 12px;
+      box-shadow: none;
+      margin-right: 25px;
     }
   }
   &__wallet {

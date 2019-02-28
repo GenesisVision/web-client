@@ -32,7 +32,8 @@
     "delete": "Delete",
     "edit": "Edit",
     "save": "Save",
-    "verify": "Verify"
+    "verify": "Verify",
+    "resend-email": "Resend email"
   },
   "filters": {
     "level": {

@@ -9,6 +9,7 @@ import ArrowIcon from "shared/media/arrow-up-thin.svg";
 import { ITransactionDetailsProps } from "shared/modules/transaction-details/transaction-details";
 import filesService from "shared/services/file-service";
 import { formatCurrencyValue } from "shared/utils/formatter";
+import ActionButton from "shared/components/action-button/action-button";
 
 const ExternalWithdrawal = (props: ITransactionDetailsProps) => {
   const { data, t, handleCancel, handleResend } = props;
@@ -83,14 +84,14 @@ const ExternalWithdrawal = (props: ITransactionDetailsProps) => {
             <Status status={data.status} />
           </div>{" "}
         </StatisticItem>
-        {data.externalTransactionDetails.isEnableActions && (
+        {/*{data.externalTransactionDetails.isEnableActions && (*/}
+        {true && (
           <div className="external-transaction__actions">
-            <div className="action-button" onClick={handleCancel}>
-              Cancel
-            </div>
-            <div className="action-button" onClick={handleResend}>
-              Resend email
-            </div>
+            <ActionButton onClick={handleCancel} text={t("buttons.cancel")} />
+            <ActionButton
+              onClick={handleResend}
+              text={t("buttons.resend-email")}
+            />
           </div>
         )}
       </div>
