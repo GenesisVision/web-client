@@ -9,7 +9,6 @@ import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-fund
 import WalletTransferPopup from "shared/modules/wallet-transfer/wallet-transfer-popup";
 import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
 import RootState from "shared/reducers/root-reducer";
-import filesService from "shared/services/file-service";
 
 import WalletImage from "../../avatar/wallet-image/wallet-image";
 import WalletBalanceButtons from "./wallet-balance/wallet-balance-buttons";
