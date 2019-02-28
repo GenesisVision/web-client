@@ -1,6 +1,7 @@
 import { GVButton } from "gv-react-components";
 import * as React from "react";
 import NumberFormat from "react-number-format";
+import ActionButton from "shared/components/action-button/action-button";
 import CopyIcon from "shared/components/icon/copy-icon";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Status from "shared/components/status/status";
@@ -9,7 +10,6 @@ import ArrowIcon from "shared/media/arrow-up-thin.svg";
 import { ITransactionDetailsProps } from "shared/modules/transaction-details/transaction-details";
 import filesService from "shared/services/file-service";
 import { formatCurrencyValue } from "shared/utils/formatter";
-import ActionButton from "shared/components/action-button/action-button";
 
 const ExternalWithdrawal = (props: ITransactionDetailsProps) => {
   const { data, t, handleCancel, handleResend } = props;
@@ -84,8 +84,7 @@ const ExternalWithdrawal = (props: ITransactionDetailsProps) => {
             <Status status={data.status} />
           </div>{" "}
         </StatisticItem>
-        {/*{data.externalTransactionDetails.isEnableActions && (*/}
-        {true && (
+        {data.externalTransactionDetails.isEnableActions && (
           <div className="external-transaction__actions">
             <ActionButton onClick={handleCancel} text={t("buttons.cancel")} />
             <ActionButton
