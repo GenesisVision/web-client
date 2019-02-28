@@ -1,8 +1,6 @@
 import { boolean, lazy, mixed, number, object, string } from "yup";
 import { formatCurrencyValue } from "shared/utils/formatter";
-import {
-  convertToCurrency
-} from "shared/utils/currency-converter";
+import { convertToCurrency } from "shared/utils/currency-converter";
 
 const createProgramSettingsValidationSchema = ({ t, ...props }) =>
   lazy(values =>

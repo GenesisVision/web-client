@@ -55,7 +55,6 @@ class CreateProgramSettings extends React.Component {
   };
   fetchRate = (fromCurrency, toCurrency) => {
     rateApi.v10RateByFromByToGet(fromCurrency, toCurrency).then(rate => {
-      console.log(rate, this.props.values.rate);
       if (rate !== this.props.values.rate)
         this.props.setFieldValue("rate", rate);
     });
