@@ -100,7 +100,7 @@ class TransactionDetailsDialog extends React.Component<
         authService.getAuthArg()
       )
       .then((res: any) => {
-        // console.log(res);
+        this.props.close();
       })
       .catch((errorMessage: IError) => {
         this.props.error(errorMessage.errorMessage);
