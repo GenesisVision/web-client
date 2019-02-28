@@ -1166,6 +1166,9 @@
     }
   },
   "manager": {
+    "program-make-signal": {
+      "success-alert-message": "Your program is a signal provider now"
+    },
     "app": {
       "title": "Manager Portal: "
     },
@@ -1340,7 +1343,7 @@
           "entry-fee-levels": "The entry fee is disabled for programs that have not reached level 3. It will be charged only for programs with level 3 or higher.",
           "entry-fee": "Description about entry fee is here",
           "entry-fee-description": "A fee charged upon each investment in the program.",
-          "success-fee": "Desuccess-fee-descriptionscription about success fee is here",
+          "success-fee": "Description about success fee is here",
           "success-fee-description": "A fee charged upon the total profit made within the reporting period.",
           "subscription-fee": "Description about subscription fee is here",
           "subscription-fee-description": "A fee for the subscription to the signal provider services.",
@@ -1371,7 +1374,7 @@
           "success-fee-required": "Success fee is required",
           "success-fee-min": "Success fee must be greater than 0.01 % ",
           "signal-subscription-fee-required": "Subscription fee is required",
-          "signal-subscription-fee-min": "Subscription fee must be greater than 0.01 % ",
+          "signal-subscription-fee-min": "Subscription fee must be greater than 0.01 GVT",
           "account-type-required": "Account type is required",
           "image-resolution-incorrect": "The resolution of the uploaded image is too low.",
           "image-file-is-large": "The uploaded image file is too large."
