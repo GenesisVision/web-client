@@ -1,5 +1,6 @@
 import { CopyTradingAccountInfo } from "gv-api-web";
 import { GVButton } from "gv-react-components";
+import CopytradingTablesSection from "modules/copytrading-tables/components/copytrading-tables-section";
 import React, { Component, ComponentType, Fragment } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
@@ -15,11 +16,14 @@ import RootState from "shared/reducers/root-reducer";
 import { fetchWalletCopytradingAccount } from "../services/wallet-copytrading.service";
 import WalletCopytradingBalance from "./wallet-copytrading-balance";
 
-interface IWalletCopytradingAccountProps {
+interface IWalletCopytradingAccountOwnProps {
   preferredCurrency: string;
   walletCurrency: string;
 }
 
+interface IWalletCopytradingAccountProps
+  extends IWalletCopytradingAccountOwnProps,
+    InjectedTranslateProps {}
 interface IWalletCopytradingAccountState {
   wallet?: CopyTradingAccountInfo;
   isPending: boolean;
@@ -27,10 +31,10 @@ interface IWalletCopytradingAccountState {
 }
 
 class WalletCopytradingAccount extends Component<
-  IWalletCopytradingAccountProps & InjectedTranslateProps,
+  IWalletCopytradingAccountProps,
   IWalletCopytradingAccountState
 > {
-  constructor(props: IWalletCopytradingAccountProps & InjectedTranslateProps) {
+  constructor(props: IWalletCopytradingAccountProps) {
     super(props);
     this.state = {
       wallet: undefined,
@@ -95,6 +99,7 @@ class WalletCopytradingAccount extends Component<
           </div>
           <WalletCopytradingBalance wallet={wallet} />
         </div>
+        <CopytradingTablesSection title={t("wallet-copytrading-page.title")} />
       </Page>
     );
   }
