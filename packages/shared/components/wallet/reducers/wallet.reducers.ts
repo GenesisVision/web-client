@@ -3,21 +3,22 @@ import { combineReducers } from "redux";
 import apiReducerFactory, {
   IApiReducerFactory
 } from "shared/reducers/api-reducer/api-reducer";
-import { DeepReadonly } from "utility-types";
 
-import {
-  WALLET_BALANCE,
-  WALLET_TRANSACTIONS_FILTERS
-} from "../actions/wallet.actions";
+import { WALLET_BALANCE } from "../actions/wallet.actions";
+import walletLastUpdateReducer, {
+  WalletLastUpdateState
+} from "./wallet-last-update";
 
-export type WalletState = DeepReadonly<{
+export type WalletState = Readonly<{
   info: IApiReducerFactory<WalletMultiSummary>;
+  lastUpdate: WalletLastUpdateState;
 }>;
 
 const walletReducer = combineReducers<WalletState>({
   info: apiReducerFactory<WalletMultiSummary>({
     apiType: WALLET_BALANCE
-  })
+  }),
+  lastUpdate: walletLastUpdateReducer
 });
 
 export default walletReducer;
