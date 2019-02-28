@@ -4,7 +4,7 @@ import { Fragment } from "react";
 import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { formatValue } from "shared/utils/formatter";
+import { formatCurrencyValue } from "shared/utils/formatter";
 
 import InputAmountField from "../input-amount-field/input-amount-field";
 
@@ -38,7 +38,7 @@ const FundWithdrawEnterPercentStep = props => {
       />
       <div className="invest-popup__currency">
         <NumberFormat
-          value={formatValue(valueInCurrency)}
+          value={formatCurrencyValue(valueInCurrency, "GVT")}
           prefix="&asymp; "
           suffix={` GVT`}
           displayType="text"
@@ -53,7 +53,7 @@ const FundWithdrawEnterPercentStep = props => {
             <span className="dialog-list__value">
               {exitFee} %{" "}
               <NumberFormat
-                value={formatValue(feeInCurrency)}
+                value={formatCurrencyValue(feeInCurrency, "GVT")}
                 prefix=" &asymp; "
                 suffix={" GVT"}
                 displayType="text"
@@ -66,7 +66,7 @@ const FundWithdrawEnterPercentStep = props => {
             </span>
             <span className="dialog-list__value">
               <NumberFormat
-                value={formatValue(withdrawAmount)}
+                value={formatCurrencyValue(withdrawAmount, "GVT")}
                 prefix=" &asymp; "
                 suffix={" GVT"}
                 displayType="text"
