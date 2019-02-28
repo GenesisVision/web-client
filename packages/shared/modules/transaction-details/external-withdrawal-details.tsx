@@ -66,9 +66,11 @@ const ExternalWithdrawal = (props: ITransactionDetailsProps) => {
                     }
                     variant="text"
                   >
-                    <CopyIcon primary />
-                    &nbsp;
-                    {t("buttons.copy")}
+                    <React.Fragment>
+                      <CopyIcon primary />
+                      &nbsp;
+                      {t("buttons.copy")}
+                    </React.Fragment>
                   </GVButton>
                 )}
               </Copy>

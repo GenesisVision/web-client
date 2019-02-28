@@ -16,6 +16,7 @@ import ProfitDetails from "shared/modules/transaction-details/profit-details";
 import WithdrawalTransaction from "shared/modules/transaction-details/withdrawal-details";
 import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
+import { IError } from "shared/constants/constants";
 
 const Types = {
   Investing: InvestingTransaction,
@@ -73,7 +74,7 @@ class TransactionDetailsDialog extends React.Component<
       .then((data: TransactionDetails) =>
         this.setState({ data, isPending: false })
       )
-      .catch(errorMessage => {
+      .catch((errorMessage: IError) => {
         this.props.error(errorMessage.errorMessage);
         this.props.close();
       });
@@ -85,12 +86,11 @@ class TransactionDetailsDialog extends React.Component<
         this.props.transactionId,
         authService.getAuthArg()
       )
-      .then((res: any) => {
+      .then(() => {
         this.props.onAction();
       })
-      .catch(errorMessage => {
+      .catch((errorMessage: IError) => {
         this.props.error(errorMessage.errorMessage);
-        // this.props.close();
       });
   };
   resendEmail = () => {
@@ -99,12 +99,11 @@ class TransactionDetailsDialog extends React.Component<
         this.props.transactionId,
         authService.getAuthArg()
       )
-      .then((res: any) => {
-        // console.log(res);
+      .then(() => {
+        this.props.close();
       })
-      .catch(errorMessage => {
+      .catch((errorMessage: IError) => {
         this.props.error(errorMessage.errorMessage);
-        // this.props.close();
       });
   };
 
