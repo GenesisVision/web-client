@@ -1340,7 +1340,9 @@
           "subscription-fee": "Description about subscription fee is here",
           "subscription-fee-description": "A fee for the subscription to the signal provider services.",
           "signal-success-fee": "Description about signal success fee is here",
-          "signal-success-fee-description": "A fee charged for the profit made from copied successful trades."
+          "signal-success-fee-description": "A fee charged for the profit made from copied successful trades.",
+          "stop-out-level": "Description about Stop Out is here",
+          "stop-out-level-description": "Stop Out is the maximum drawdown level for the reporting period at which the program is stopped, and all investments return to investors."
         },
         "validation": {
           "stop-out-required": "Stop out is required",
