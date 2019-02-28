@@ -86,7 +86,7 @@ class TransactionDetailsDialog extends React.Component<
         this.props.transactionId,
         authService.getAuthArg()
       )
-      .then((res: any) => {
+      .then(() => {
         this.props.onAction();
       })
       .catch((errorMessage: IError) => {
@@ -99,7 +99,7 @@ class TransactionDetailsDialog extends React.Component<
         this.props.transactionId,
         authService.getAuthArg()
       )
-      .then((res: any) => {
+      .then(() => {
         this.props.close();
       })
       .catch((errorMessage: IError) => {
