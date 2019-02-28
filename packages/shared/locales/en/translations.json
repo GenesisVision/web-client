@@ -743,10 +743,10 @@
   "gvt-fees": {
     "title": "Fees and Discounts",
     "section": {
-      "text-1": "Any Genesis Markets user who holds a certain amount of GVT for 7 days receives a discount for transaction fees. The size of a discount can vary and depends on the amount of GVT that is being held. The regular trading fee is 0.3%, and the information on the tiered discount system can be found in the Genesis Markets Trading Conditions section.",
-      "text-2": "Users of the Genesis Vision copy trading feature who hold any GVT on the Genesis Markets balance are eligible for discounts and also have the platform success fee of 10% for both investment programs and copy trading signals reduced by 1% for each 1000 GVT held."
+      "text-1": "Any Genesis Vision user who holds a certain amount of GVT for 7 days receives a discount for transaction fees. The size of a discount can vary and depends on the amount of GVT that is being held. The regular trading fee is 0.3%, and the information on the tiered discount system can be found in the Genesis Markets Trading Conditions section.",
+      "text-2": "Users of the Genesis Vision copy trading feature who hold any GVT on the Genesis Vision balance are eligible for discounts and also have the platform success fee of 10% for both investment programs and copy trading signals reduced by 1% for each 1000 GVT held."
     },
-    "note": "* Please note that to be eligible for a discount tier you should hold GVT on your Genesis Markets wallet for at least 7 days",
+    "note": "* Please note that to be eligible for a discount tier you should hold GVT on your Genesis Vision wallet for at least 7 days",
     "table-header": {
       "amount": "Amount held for 7 days*",
       "discount": "Discount",
@@ -1309,7 +1309,7 @@
         "fields": {
           "min-deposit": "Min. deposit",
           "provide-signals": "Provide signals",
-          "monthly-subscription-fee": "Subscription fee",
+          "subscription-fee": "Subscription fee",
           "stop-out-level": "Stop out level",
           "name": "Name",
           "name-requirements": "Requirement from 4 to 20 symbols",
@@ -1334,9 +1334,13 @@
         "hints": {
           "entry-fee-levels": "The entry fee is disabled for programs that have not reached level 3. It will be charged only for programs with level 3 or higher.",
           "entry-fee": "Description about entry fee is here",
-          "entry-fee-description": "An entry fee is a fee charged to investors upon their investment to an investment program. The maximum entry fee is {{maxFee}} %",
-          "success-fee": "Description about success fee is here",
-          "success-fee-description": "A success fee is paid to a manager at the end of the reporting period for successfully closing the period at a profit. The maximum success fee is {{maxFee}} %",
+          "entry-fee-description": "A fee charged upon each investment in the program.",
+          "success-fee": "Desuccess-fee-descriptionscription about success fee is here",
+          "success-fee-description": "A fee charged upon the total profit made within the reporting period.",
+          "subscription-fee": "Description about subscription fee is here",
+          "subscription-fee-description": "A fee for the subscription to the signal provider services.",
+          "signal-success-fee": "Description about signal success fee is here",
+          "signal-success-fee-description": "A fee charged for the profit made from copied successful trades.",
           "stop-out-level": "Description about Stop Out is here",
           "stop-out-level-description": "Stop Out is the maximum drawdown level for the reporting period at which the program is stopped, and all investments return to investors."
         },
@@ -1361,8 +1365,8 @@
           "entry-fee-min": "Entry fee must be greater than 0.01 % ",
           "success-fee-required": "Success fee is required",
           "success-fee-min": "Success fee must be greater than 0.01 % ",
-          "signal-subscription-fee-required": "Monthly subscription fee is required",
-          "signal-subscription-fee-min": "Must be greater than 0.01 % ",
+          "signal-subscription-fee-required": "Subscription fee is required",
+          "signal-subscription-fee-min": "Subscription fee must be greater than 0.01 % ",
           "account-type-required": "Account type is required",
           "image-resolution-incorrect": "The resolution of the uploaded image is too low.",
           "image-file-is-large": "The uploaded image file is too large."
