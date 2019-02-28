@@ -7,7 +7,7 @@ import Calendar from "react-calendar";
 import { translate } from "react-i18next";
 import Popover from "shared/components/popover/popover";
 
-export const DATE_FORMAT = "DD-MM-YYYY";
+export const DATE_FORMAT = "ll";
 
 class GVDatePicker extends Component {
   state = {

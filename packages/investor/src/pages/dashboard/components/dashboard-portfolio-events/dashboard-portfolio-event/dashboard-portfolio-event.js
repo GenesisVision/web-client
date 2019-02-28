@@ -19,7 +19,7 @@ const formatDate = date => {
   const dayDifference = moment(now).diff(eventCreationDate, "days");
   const isShowFullDate = dayDifference > 1;
 
-  if (isShowFullDate) return eventCreationDate.format("DD MMM YYYY, HH:MM a");
+  if (isShowFullDate) return eventCreationDate.format("lll");
 
   return eventCreationDate.fromNow();
 };

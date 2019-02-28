@@ -53,7 +53,7 @@ class DateRangeFilterValues extends Component {
         return (
           <Fragment>
             {this.renderFirstInput(
-              new moment().subtract(1, "month").format("MMM Do YY")
+              new moment().subtract(1, "month").format("ll")
             )}
             {this.renderSecondInput()}
           </Fragment>
@@ -62,7 +62,7 @@ class DateRangeFilterValues extends Component {
         return (
           <Fragment>
             {this.renderFirstInput(
-              new moment().subtract(1, "week").format("MMM Do YY")
+              new moment().subtract(1, "week").format("ll")
             )}
             {this.renderSecondInput()}
           </Fragment>
