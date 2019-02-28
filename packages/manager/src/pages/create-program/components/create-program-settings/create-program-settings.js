@@ -116,6 +116,7 @@ class CreateProgramSettings extends React.Component {
 
     const onSubmit = () => {
       createProgramSettingsValidationSchema({
+        minimumDepositsAmount,
         t,
         wallets,
         programsInfo
