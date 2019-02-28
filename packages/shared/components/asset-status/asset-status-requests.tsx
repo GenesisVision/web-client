@@ -2,8 +2,7 @@ import { ProgramRequest } from "gv-api-web";
 import React, { Fragment, PureComponent } from "react";
 import { TranslationFunction, translate } from "react-i18next";
 import { connect } from "react-redux";
-import { Dispatch } from "react-redux";
-import { bindActionCreators, compose } from "redux";
+import { Dispatch, bindActionCreators, compose } from "redux";
 
 import { ActionType, IDispatchable } from "../../utils/types";
 import DashboardRequest from "../dashboard/dashboard-portfolio-chart-section/dashboard-in-requests/dashboard-request";

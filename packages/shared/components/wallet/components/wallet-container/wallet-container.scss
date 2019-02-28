@@ -1,0 +1,44 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
+
+.wallet-container {
+  @include adaptive-margin(top, $padding-xxsmall);
+
+  .gv-tab {
+    white-space: nowrap;
+  }
+
+  .gv-tab--disabled {
+    pointer-events: none;
+    cursor: default;
+  }
+
+  &__header {
+    padding-left: $padding-xsmall;
+    padding-right: $padding-xsmall;
+  }
+
+  &__subheading {
+    @include font-size($font-size-paragraph);
+    letter-spacing: 0.2px;
+    font-weight: 600;
+  }
+
+  &__search-container {
+    @include adaptive-margin(left, $padding-medium);
+    line-height: 0;
+
+    .icon {
+      height: 14px;
+      padding: 6px 0;
+    }
+  }
+
+  @include media-breakpoint-landscape-phone() {
+    &__header {
+      padding-left: $padding-small;
+      padding-right: $padding-small;
+    }
+  }
+}

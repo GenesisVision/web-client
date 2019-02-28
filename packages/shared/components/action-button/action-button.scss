@@ -1,0 +1,13 @@
+@import "~shared/styles/_sizes.scss";
+
+.action-button.gv-btn {
+  font-size: $font-size-common;
+  padding: 4px 12px;
+  border-radius: 12px;
+  box-shadow: none;
+  margin-right: 25px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}

@@ -11,7 +11,9 @@ class SelectFilter extends Component {
   renderValueText = value => {
     const { t } = this.props;
     const selectedValue = this.props.values.find(x => x.value === value);
-    if (selectedValue.labelKey !== undefined) return t(selectedValue.labelKey);
+    if (!selectedValue) return null;
+    else if (selectedValue.labelKey !== undefined)
+      return t(selectedValue.labelKey);
 
     return selectedValue.label;
   };

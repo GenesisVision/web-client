@@ -16,7 +16,7 @@ import TableCell from "shared/components/table/components/table-cell";
 import TableModule from "shared/components/table/components/table-module";
 import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
-import { formatValue } from "shared/utils/formatter";
+import { formatCurrencyValue } from "shared/utils/formatter";
 
 import {
   PORTFOLIO_EVENTS_COLUMNS,
@@ -90,7 +90,7 @@ class PortfolioEventsTable extends Component {
           renderBodyRow={event => (
             <TableRow className="portfolio-events-all-table__row">
               <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--date">
-                {moment(event.date).format("DD-MM-YYYY, hh:mm a")}
+                {moment(event.date).format("lll")}
               </TableCell>
               {/*<TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--type">
                 {PORTFOLIO_EVENTS_TYPES_ENUM[event.type] &&
@@ -105,9 +105,10 @@ class PortfolioEventsTable extends Component {
               </TableCell>
               <TableCell className="portfolio-events-all-table__cell portfolio-events-all-table__cell--amount">
                 {isUseProfitability(event) ? (
-                  <Profitability value={formatValue(event.value)} prefix="sign">
+                  <Profitability value={event.value} prefix="sign">
                     <NumberFormat
-                      value={formatValue(event.value, null, true)}
+                      value={formatCurrencyValue(event.value, event.currency)}
+                      allowNegative={false}
                       thousandSeparator=" "
                       displayType="text"
                       suffix={" " + event.currency}
@@ -115,7 +116,7 @@ class PortfolioEventsTable extends Component {
                   </Profitability>
                 ) : (
                   <NumberFormat
-                    value={formatValue(event.value)}
+                    value={formatCurrencyValue(event.value, event.currency)}
                     thousandSeparator=" "
                     displayType="text"
                     suffix={" " + event.currency}

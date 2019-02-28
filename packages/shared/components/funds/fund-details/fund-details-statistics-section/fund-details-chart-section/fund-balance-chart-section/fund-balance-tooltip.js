@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import ChartTooltip from "shared/components/chart/chart-tooltip/chart-tooltip";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { formatValue } from "shared/utils/formatter";
+import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 const TooltipBody = ({ managersFunds, investorsFunds, profit }) => {
   return (
@@ -25,9 +25,13 @@ const FundBalanceTooltip = ({
 }) => {
   if (!active || !payload[0]) return null;
 
-  const managersFunds = `${formatValue(payload[0].payload.managerFunds)} GVT`;
-  const investorsFunds = `${formatValue(
-    payload[0].payload.investorsFunds
+  const managersFunds = `${formatCurrencyValue(
+    payload[0].payload.managerFunds,
+    "GVT"
+  )} GVT`;
+  const investorsFunds = `${formatCurrencyValue(
+    payload[0].payload.investorsFunds,
+    "GVT"
   )} GVT`;
   const profit = `${payload[0].payload.profit} ${payload[0].unit}`;
 

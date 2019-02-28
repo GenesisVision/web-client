@@ -14,3 +14,14 @@ export const newWithdrawRequest = data => (dispatch, getState) => {
       return response;
     });
 };
+
+//@todo возможно нужно перенести в services of wallet-transfer
+export const walletTransferRequest = data => {
+  return walletApi.v10WalletTransferPost(authService.getAuthArg(), {
+    request: {
+      ...data,
+      sourceType: "Wallet",
+      destinationType: "Wallet"
+    }
+  });
+};

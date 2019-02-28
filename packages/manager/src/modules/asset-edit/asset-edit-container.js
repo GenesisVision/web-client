@@ -1,23 +1,16 @@
-import AssetEditPopup from "modules/asset-edit/components/asset-edit-popup";
-import { editAsset } from "modules/asset-edit/services/asset-edit.services";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Dialog from "shared/components/dialog/dialog";
 
+import AssetEditPopup from "./components/asset-edit-popup";
+import { editAsset } from "./services/asset-edit.services";
+
 class AssetEditContainer extends Component {
   state = { serverError: "" };
   render() {
-    const {
-      service,
-      info,
-      onApply,
-      submitInfo,
-      open,
-      onClose,
-      type
-    } = this.props;
+    const { service, info, onApply, open, onClose, type } = this.props;
     const handleClose = () => {
       this.setState({ serverError: "" });
       onClose();
@@ -39,7 +32,6 @@ class AssetEditContainer extends Component {
       <Dialog open={open} onClose={handleClose}>
         <AssetEditPopup
           type={type}
-          submitInfo={submitInfo}
           info={info}
           edit={handleEdit}
           serverError={this.state.serverError}
@@ -63,10 +55,6 @@ AssetEditContainer.propTypes = {
   })
 };
 
-const mapStateToProps = state => ({
-  submitInfo: state.assetEdit.submit
-});
-
 const mapDispatchToProps = dispatch => ({
   service: bindActionCreators(
     {
@@ -77,6 +65,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(
-  mapStateToProps,
+  undefined,
   mapDispatchToProps
 )(AssetEditContainer);

@@ -12,11 +12,13 @@ import Profitability from "shared/components/profitability/profitability";
 import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
 import GVScroll from "shared/components/scroll/gvscroll";
 import TableRow from "shared/components/table/components/table-row";
+import TagProgramContainer from "shared/components/tag-program/tag-program-container";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { composeManagerDetailsUrl } from "shared/utils/compose-url";
-import { formatValue } from "shared/utils/formatter";
+import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 import ProgramBigChart from "./program-big-chart/program-big-chart";
+import Tooltip from "shared/components/tooltip/tooltip";
 
 class ProgramTableRowDetailed extends Component {
   state = {
@@ -90,6 +92,7 @@ class ProgramTableRowDetailed extends Component {
                         {program.manager.username}
                       </Link>
                     </div>
+                    <TagProgramContainer tags={program.tags} />
                   </div>
                 </div>
                 <div className="program-detailed__strategy">
@@ -117,10 +120,30 @@ class ProgramTableRowDetailed extends Component {
                 <div className="program-detailed__statistic-data">
                   <div>
                     <div className="program-detailed__statistic-data--label">
-                      {t("programs-page.programs-header.balance")}
+                      {t("programs-page.programs-header.equity")}
                     </div>
                     <div className="program-detailed__statistic-data--value">
-                      {(+program.statistic.balanceGVT.amount).toFixed(0)} GVT
+                      <Tooltip
+                        render={() => (
+                          <div>
+                            {formatCurrencyValue(
+                              program.statistic.balanceGVT.amount,
+                              "GVT"
+                            )}{" "}
+                            {"GVT"}
+                          </div>
+                        )}
+                      >
+                        <NumberFormat
+                          value={formatCurrencyValue(
+                            program.statistic.balanceBase.amount,
+                            program.currency
+                          )}
+                          suffix={` ${program.currency}`}
+                          decimalScale={0}
+                          displayType="text"
+                        />
+                      </Tooltip>
                     </div>
                   </div>
                   <div>
@@ -144,7 +167,10 @@ class ProgramTableRowDetailed extends Component {
                       {t("programs-page.programs-header.available-to-invest")}
                     </div>
                     <div className="program-detailed__statistic-data--value">
-                      {formatValue(program.availableInvestment, 2)} GVT
+                      {`${formatCurrencyValue(
+                        program.availableInvestmentBase,
+                        program.currency
+                      )} ${program.currency}`}
                     </div>
                   </div>
                   <div>
@@ -187,7 +213,7 @@ class ProgramTableRowDetailed extends Component {
                     </div>
                     <div className="program-detailed__statistic-data--value">
                       <Profitability
-                        value={program.statistic.profitPercent}
+                        value={formatValue(program.statistic.profitPercent, 2)}
                         prefix="sign"
                       >
                         <NumberFormat

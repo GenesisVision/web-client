@@ -1,0 +1,105 @@
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+@import "~shared/styles/_sizes.scss";
+
+.wallet-copytrading {
+  &__row:nth-child(2n + 1) {
+    background-color: $table-background-subcolor;
+  }
+
+  &__cell {
+    @include adaptive-padding(right, $padding-xsmall, 2);
+    color: $text-light-color;
+
+    &--information {
+      min-width: 350px;
+      white-space: normal;
+    }
+
+    &--actions {
+      padding-right: 0;
+      text-align: right;
+    }
+  }
+
+  & .table__cell:last-child {
+    text-align: right;
+  }
+
+  &__icon {
+    @include adaptive-margin(right, $padding-xsmall);
+    display: inline-block;
+    vertical-align: middle;
+    width: 24px;
+    height: 24px;
+  }
+
+  & .filter {
+    &__label {
+      color: $short-statistic-notice-color;
+    }
+
+    &__value {
+      color: $text-light-color;
+    }
+  }
+
+  & .icon.icon--actions-circle {
+    cursor: pointer;
+  }
+
+  @include media-breakpoint-landscape-phone() {
+    &__cell {
+      &--wallet {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+
+      &--actions {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+    }
+  }
+}
+.wallet-copytrading-actions {
+  .chip {
+    @include adaptive-margin(left, $padding-xsmall);
+    font-weight: normal;
+  }
+}
+
+.empty-transactions {
+  padding: $padding-xsmall-mobile $padding-small-mobile;
+  @include media-breakpoint-landscape-phone() {
+    padding: $padding-xsmall $padding-small;
+  }
+  &__subtitle {
+    font-weight: 600;
+    font-size: $font-size-h3-mobile;
+    padding: $padding-xsmall-mobile 0;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-h3;
+      padding: $padding-xsmall 0;
+    }
+  }
+  &__disclaimer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: $padding-big-mobile 0;
+    @include media-breakpoint-landscape-phone() {
+      padding: $padding-big 0;
+    }
+  }
+  &__text {
+    font-size: $font-size-paragraph-mobile;
+    font-weight: 500;
+    opacity: 0.4;
+    padding: $padding-xsmall-mobile 0;
+    @include media-breakpoint-landscape-phone() {
+      font-size: $font-size-paragraph;
+      padding: $padding-xsmall 0;
+    }
+  }
+}

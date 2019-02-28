@@ -6,6 +6,7 @@ import { Table } from "shared/components/table/components";
 import ProgramCard from "./program-card";
 import ProgramTableHeaderCell from "./program-table-header-cell";
 import ProgramTableRow from "./program-table-row";
+import ProgramTableSortingValue from "./program-table-sorting";
 import { PROGRAMS_COLUMNS } from "./programs.constants";
 
 const ProgramsTable = ({
@@ -41,10 +42,16 @@ const ProgramsTable = ({
       updatePaging={updatePaging}
       columns={columns || PROGRAMS_COLUMNS}
       items={data.programs}
-      isPending={isPending || data.isPending}
+      // isPending={isPending || data.isPending}
       renderFilters={renderFilters}
       renderHeader={column => (
         <ProgramTableHeaderCell
+          column={column}
+          isAuthenticated={isAuthenticated}
+        />
+      )}
+      renderSorting={column => (
+        <ProgramTableSortingValue
           column={column}
           isAuthenticated={isAuthenticated}
         />

@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import NumberFormat from "react-number-format";
 import ChartTooltip from "shared/components/chart/chart-tooltip/chart-tooltip";
 import Profitability from "shared/components/profitability/profitability";
-import { formatValue } from "shared/utils/formatter";
+import { formatCurrencyValue } from "shared/utils/formatter";
 
 import { BAR_COLORS } from "./dashboard-chart.constants";
 
@@ -17,8 +17,9 @@ const AssetsTooltipBody = ({ assets }) => {
         />
         <div className="asset__stats">
           <div className="asset__asset-title">{assets[x].asset.title}</div>
-          <div className="asset__asset-value">{`${formatValue(
-            assets[x].asset.value
+          <div className="asset__asset-value">{`${formatCurrencyValue(
+            assets[x].asset.value,
+            "GVT"
           )} GVT`}</div>
         </div>
         <div className="asset__change">
@@ -38,8 +39,9 @@ const AssetsTooltipBody = ({ assets }) => {
                   />
                 </Profitability>
               </div>
-              <div className="asset__change-value">{`${formatValue(
-                assets[x].asset.changeValue
+              <div className="asset__change-value">{`${formatCurrencyValue(
+                assets[x].asset.changeValue,
+                "GVT"
               )} GVT`}</div>
             </Fragment>
           )}
@@ -56,7 +58,7 @@ const DasboardPortfolioTooltip = ({ active, label, payload, date }) => {
     return (
       <ChartTooltip
         heading="Total balance"
-        body={`${formatValue(data.value)} GVT`}
+        body={`${formatCurrencyValue(data.value, "GVT")} GVT`}
         date={new Date(label)}
       />
     );

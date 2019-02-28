@@ -9,7 +9,7 @@ import Profitability from "shared/components/profitability/profitability";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Surface from "shared/components/surface/surface";
 import { PROGRAM } from "shared/constants/constants";
-import { formatValue, roundPercents } from "shared/utils/formatter";
+import { formatCurrencyValue, roundPercents } from "shared/utils/formatter";
 
 class DetailsInvestment extends PureComponent {
   state = {
@@ -32,7 +32,6 @@ class DetailsInvestment extends PureComponent {
   render() {
     const {
       t,
-      role,
       asset,
       notice,
       WithdrawContainer,
@@ -56,14 +55,14 @@ class DetailsInvestment extends PureComponent {
 
     return (
       <Surface className="surface--horizontal-paddings details-investment">
-        <h3>{t("fund-details-page.description.yourInvestment")}</h3>
+        <h3>{t(`fund-details-page.description.yourInvestment.${asset}`)}</h3>
         <div className="details-investment__short-statistic">
           <StatisticItem
             accent
             label={t("fund-details-page.description.value")}
           >
             <NumberFormat
-              value={formatValue(value)}
+              value={formatCurrencyValue(value, balanceCurrency)}
               suffix={` ${balanceCurrency}`}
               displayType="text"
             />
@@ -75,12 +74,13 @@ class DetailsInvestment extends PureComponent {
             >
               <Profitability value={value - invested} prefix="sign">
                 <NumberFormat
-                  value={formatValue(value - invested, null, true)}
+                  value={formatCurrencyValue(value - invested, balanceCurrency)}
                   suffix={` ${balanceCurrency}`}
+                  allowNegative={false}
                   displayType="text"
                 />
               </Profitability>
-              <Profitability value={formatValue(profit)} variant="chips">
+              <Profitability value={profit} variant="chips">
                 {roundPercents(profit)}
               </Profitability>
             </StatisticItem>
@@ -92,7 +92,6 @@ class DetailsInvestment extends PureComponent {
             <AssetStatus
               status={status}
               id={id}
-              role={role}
               asset={asset}
               onCancel={this.handleOnCancelRequest}
             />
@@ -103,7 +102,7 @@ class DetailsInvestment extends PureComponent {
               label={t("fund-details-page.description.pending-input")}
             >
               <NumberFormat
-                value={formatValue(pendingInput)}
+                value={formatCurrencyValue(pendingInput, balanceCurrency)}
                 suffix={` ${balanceCurrency}`}
                 displayType="text"
               />
@@ -123,7 +122,7 @@ class DetailsInvestment extends PureComponent {
               label={t("fund-details-page.description.pending-output")}
             >
               <NumberFormat
-                value={formatValue(pendingOutput)}
+                value={formatCurrencyValue(pendingOutput, balanceCurrency)}
                 suffix={` ${balanceCurrency}`}
                 displayType="text"
               />

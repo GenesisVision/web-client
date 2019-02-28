@@ -54,14 +54,6 @@ class FundNotificationsGeneral extends Component {
           removeNotification={this.handleRemove}
         />
         <GeneralNotification
-          name="FundEndOfPeriod"
-          label={t("notifications-page.fund.general.end-of-period")}
-          assetId={assetId}
-          setting={settings.FundEndOfPeriod}
-          addNotification={this.handleAdd}
-          removeNotification={this.handleRemove}
-        />
-        <GeneralNotification
           name="FundRebalancing"
           label={t("notifications-page.fund.general.fund-rebalancing")}
           assetId={assetId}

@@ -9,8 +9,8 @@ export const getDepositProgramInfoById = (id, currency) => dispatch => {
   return dispatch(fetchDepositProgramInfoById(id, currency));
 };
 
-export const investServiceInvestById = ({ id, amount }) => dispatch => {
-  return dispatch(investToProgramById(id, amount)).then(() => {
+export const investServiceInvestById = ({ id, amount, opts }) => dispatch => {
+  return dispatch(investToProgramById(id, amount, opts)).then(() => {
     dispatch(
       alertMessageActions.success(
         "deposit-asset.program.success-alert-message",

@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import NumberFormat from "react-number-format";
 import ChartPeriod from "shared/components/chart/chart-period/chart-period";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { formatValue } from "shared/utils/formatter";
+import { formatCurrencyValue } from "shared/utils/formatter";
 
 import FundBalanceChart from "./fund-balance-chart";
 
@@ -24,19 +24,12 @@ const ProgramBalanceChartSection = ({
           accent
         >
           <NumberFormat
-            value={formatValue(balanceChart.gvtBalance)}
+            value={formatCurrencyValue(balanceChart.gvtBalance, "GVT")}
             thousandSeparator={" "}
             displayType="text"
             suffix={" GVT"}
           />
         </StatisticItem>
-        {/* <StatisticItem
-          heading={"Change"}
-          value={changeValue}
-          equivalent={"???"}
-          currency={"???"}
-          className="details-chart__stat-item"
-        /> */}
       </div>
       <ChartPeriod onChange={onPeriodChange} period={period} />
       <div className="details-chart__profit">

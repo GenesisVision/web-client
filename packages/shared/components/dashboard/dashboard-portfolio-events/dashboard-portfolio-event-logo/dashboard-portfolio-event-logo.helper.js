@@ -1,7 +1,7 @@
 export const EventLogoType = {
   assetStarted: "AssetStarted",
   assetFinished: "AssetFinished",
-  programPeriodStars: "ProgramPeriodStats",
+  ProgramPeriodStarts: "ProgramPeriodStarts",
   programPeriodEnds: "ProgramPeriodEnds",
   investorInvest: "InvestorInvest",
   investorWithdraw: "InvestorWithdraw",

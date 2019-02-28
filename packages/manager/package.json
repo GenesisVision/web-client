@@ -50,9 +50,12 @@
     "redux-thunk": "^2.2.0",
     "reselect": "^3.0.1",
     "typescript": "^3.2.2",
+    "utility-types": "^3.4.1",
     "yup": "^0.26.6"
   },
   "devDependencies": {
+    "@types/uuid": "^3.4.4",
+    "@typescript-eslint/parser": "^1.1.1",
     "@types/classnames": "^2.2.7",
     "@types/jest": "^23.3.12",
     "@types/node": "^10.12.18",

@@ -166,6 +166,9 @@ export const programsChangeFilter = filter => (dispatch, getState) => {
   if (queryParams.page) {
     delete queryParams.page;
   }
-  const newUrl = routing.location.pathname + "?" + qs.stringify(queryParams);
+  const newUrl =
+    routing.location.pathname +
+    "?" +
+    qs.stringify(queryParams, { indices: false });
   dispatch(push(newUrl));
 };

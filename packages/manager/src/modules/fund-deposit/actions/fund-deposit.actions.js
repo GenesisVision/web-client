@@ -24,13 +24,14 @@ export const clearDepositFundInfo = () => {
   };
 };
 
-export const investToFundById = (id, amount) => {
+export const investToFundById = (id, amount, opts) => {
   return {
     type: INVEST_TO_FUND_BY_ID,
     payload: managerApi.v10ManagerFundsByIdInvestByAmountPost(
       id,
       amount,
-      authService.getAuthArg()
+      authService.getAuthArg(),
+      opts
     )
   };
 };

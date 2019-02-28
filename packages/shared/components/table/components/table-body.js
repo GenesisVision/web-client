@@ -5,6 +5,7 @@ import { CARDS_VIEW, TABLE_VIEW } from "../table.constants";
 import TableLoader from "./table-loader";
 
 const TableBody = ({
+  updateItems,
   t,
   items,
   children,
@@ -35,7 +36,9 @@ const TableBody = ({
       return <TableLoader view={view} />;
     if (items.length === 0) return setMessage(t("table.no-items"));
     return items.map((x, idx) => (
-      <Fragment key={x.id || idx}>{children(x, updateRow)}</Fragment>
+      <Fragment key={x.id || idx}>
+        {children(x, updateRow, updateItems)}
+      </Fragment>
     ));
   };
 

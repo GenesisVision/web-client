@@ -324,7 +324,7 @@ $asset-height-mobile: $asset-height/$divider-text;
 }
 
 .popover-add {
-  background: #1c2730;
+  background: $panel-background-color;
   &__regulator-indicator {
     display: flex;
     align-items: center;
@@ -442,4 +442,39 @@ $asset-height-mobile: $asset-height/$divider-text;
   font-size: 12px;
   line-height: 1.6;
   color: $text-light-color;
+}
+.deposit-details {
+  &__deposit-amount {
+    &-title {
+      color: $label-color;
+      margin-bottom: 14px;
+    }
+
+    &-value {
+      font-size: $font-size-h2;
+      letter-spacing: 0.4px;
+    }
+  }
+
+  &__available-amount {
+    font-size: $font-size-common;
+    margin-top: 4px;
+    letter-spacing: 0.4px;
+
+    &-value {
+      color: $text-accent-color;
+      margin-right: 8px;
+      margin-left: 4px;
+      font-weight: 600;
+      &--error {
+        color: #eb3b5a;
+      }
+    }
+
+    & .icon--refresh {
+      position: relative;
+      top: 6px;
+      cursor: pointer;
+    }
+  }
 }

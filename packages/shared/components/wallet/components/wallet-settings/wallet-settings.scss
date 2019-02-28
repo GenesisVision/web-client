@@ -1,0 +1,35 @@
+@import "~shared/styles/_sizes.scss";
+@import "~shared/styles/_colors.scss";
+
+.wallet-settings {
+  @include adaptive-padding(bottom, $padding-medium);
+  display: flex;
+  align-items: center;
+
+  .gv-switch-wrapper {
+    margin: 0 0 0 12px;
+  }
+
+  &__label {
+    @include font-size($font-size-common);
+    font-weight: 600;
+  }
+
+  &__question {
+    background: none;
+    padding: 0;
+    box-sizing: border-box;
+    width: 15px;
+    height: 15px;
+    border: 1px solid rgba($icon-color, 0.2);
+    border-radius: 50%;
+    color: rgba($icon-color, 0.2);
+    margin-right: 12px;
+    line-height: 15px;
+    text-align: center;
+    font-size: 8px;
+    font-weight: 700;
+    outline: none;
+    cursor: pointer;
+  }
+}

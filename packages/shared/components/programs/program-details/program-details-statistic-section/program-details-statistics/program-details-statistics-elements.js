@@ -6,7 +6,7 @@ import NumberFormat from "react-number-format";
 import { ChartPeriodType } from "shared/components/chart/chart-period/chart-period.helpers";
 import ProgramPeriodLine from "shared/components/program-period/program-period-line/program-period-line";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { formatValue } from "shared/utils/formatter";
+import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 const ProgramDetailsStatisticsElements = ({
   status,
@@ -20,12 +20,12 @@ const ProgramDetailsStatisticsElements = ({
       {t("program-details-page.statistics.current")}
     </div>
     <div className="details-statistics__particular-information">
-      <StatisticItem
-        label={t("program-details-page.statistics.balance")}
-        accent
-      >
+      <StatisticItem label={t("program-details-page.statistics.equity")} accent>
         <NumberFormat
-          value={formatValue(profitChart.balance)}
+          value={formatCurrencyValue(
+            profitChart.balance,
+            profitChart.programCurrency
+          )}
           thousandSeparator={" "}
           displayType="text"
           suffix={` ${profitChart.programCurrency}`}

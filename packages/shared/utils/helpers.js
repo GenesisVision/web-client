@@ -30,4 +30,13 @@ const getNumberWithoutSuffix = str => {
   return result;
 };
 
-export { merge, allowValuesNumberFormat, getNumberWithoutSuffix };
+const convertToArray = value => {
+  return Array.isArray(value) ? value : [value];
+};
+
+export {
+  merge,
+  allowValuesNumberFormat,
+  getNumberWithoutSuffix,
+  convertToArray
+};

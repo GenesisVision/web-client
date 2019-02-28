@@ -23,7 +23,7 @@ import {
   SETTINGS_ROUTE
 } from "shared/components/profile/profile.constants";
 import Sidebar from "shared/components/sidebar/sidebar";
-import { WALLET_PAGE_ROUTE } from "shared/components/wallet/wallet-page";
+import { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes";
 
 const NavigationMobile = ({
   t,
@@ -63,12 +63,6 @@ const NavigationMobile = ({
             {t("navigation.funds")}
           </NavigationItem>
           <NavigationItem
-            icon={<SearchIcon primary />}
-            href={GLOBAL_SEARCH_ROUTE}
-          >
-            {t("navigation.search")}
-          </NavigationItem>
-          <NavigationItem
             exact
             icon={<DetailsIcon primary />}
             href={PROFILE_ROUTE}
@@ -77,7 +71,7 @@ const NavigationMobile = ({
           </NavigationItem>
           <NavigationItem
             icon={<WalletIcon primary />}
-            href={WALLET_PAGE_ROUTE}
+            href={WALLET_TOTAL_PAGE_ROUTE}
           >
             {t("navigation.wallet")}
           </NavigationItem>

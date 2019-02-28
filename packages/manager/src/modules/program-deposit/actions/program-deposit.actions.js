@@ -24,13 +24,14 @@ export const clearDepositProgramInfo = () => {
   };
 };
 
-export const investToProgramById = (id, amount) => {
+export const investToProgramById = (id, amount, opts) => {
   return {
     type: INVEST_TO_PROGRAM_BY_ID,
     payload: managerApi.v10ManagerProgramsByIdInvestByAmountPost(
       id,
       amount,
-      authService.getAuthArg()
+      authService.getAuthArg(),
+      opts
     )
   };
 };

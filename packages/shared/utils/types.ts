@@ -1,5 +1,4 @@
-import { Dispatch } from "react-redux";
-import { Action } from "redux";
+import { Action, Dispatch } from "redux";
 
 export interface IDispatchable<T> {
   (dispatch: Dispatch<ActionType>): T;

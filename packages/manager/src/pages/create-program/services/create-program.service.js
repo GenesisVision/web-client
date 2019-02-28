@@ -22,6 +22,11 @@ export const fetchBrokers = () =>
     return { brokers: sortedBrokers };
   });
 
+export const fetchMinDepositsAmount = () =>
+  managerApi
+    .v10ManagerProgramsInvestmentAmountGet(authService.getAuthArg())
+    .then(investmentAmount => investmentAmount.minimumDepositsAmount);
+
 export const fetchBalance = () => dispatch =>
   dispatch(fetchProfileHeaderInfo());
 

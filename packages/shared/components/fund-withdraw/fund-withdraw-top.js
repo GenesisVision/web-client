@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { translate } from "react-i18next";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { formatValue } from "shared/utils/formatter";
+import { formatCurrencyValue } from "shared/utils/formatter";
 
 const FundWithdrawTop = ({ t, availableToWithdraw, title }) => {
   return (
@@ -13,7 +13,7 @@ const FundWithdrawTop = ({ t, availableToWithdraw, title }) => {
       </div>
       <div className="dialog-field">
         <StatisticItem label={t("withdraw-fund.available-to-withdraw")} big>
-          {formatValue(availableToWithdraw)} GVT
+          {formatCurrencyValue(availableToWithdraw, "GVT")} GVT
         </StatisticItem>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import classnames from "classnames";
 import React from "react";
 
-const TableRow = ({ className, children, ...other }) => {
+const TableRow = ({ className = "", children, ...other }) => {
   return (
     <tr className={classnames("table__row", className)} {...other}>
       {children}

@@ -7,9 +7,9 @@ import tableFiltersReducer from "./table-filters.reducer";
 const tableReducerFactory = ({
   type,
   paging,
-  sorting,
-  filtering,
-  defaultFilters,
+  sorting = undefined,
+  filtering = undefined,
+  defaultFilters = undefined,
   clearable = false,
   clearableActionType
 }) => {

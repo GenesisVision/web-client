@@ -3,8 +3,9 @@
   "workspaces": ["packages/*"],
   "dependencies": {
     "gv-api-web": "git+https://github.com/GenesisVision/gv-api-web.git#development",
-    "gv-react-components": "^0.0.33",
-    "scriptjs": "^2.5.9"
+    "gv-react-components": "^0.0.34",
+    "scriptjs": "^2.5.9",
+    "@juggle/resize-observer": "^1.1.1"
   },
   "devDependencies": {
     "husky": "^1.3.0"

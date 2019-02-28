@@ -14,7 +14,7 @@ export enum INVESTOR_EVENT_TYPE {
 export enum MANAGER_EVENT_TYPE {
   All = "All",
   AssetStarted = "AssetStarted",
-  ProgramPeriodStats = "ProgramPeriodStats",
+  ProgramPeriodStarts = "ProgramPeriodStarts",
   ProgramPeriodEnds = "ProgramPeriodEnds",
   InvestorInvest = "InvestorInvest",
   InvestorWithdraw = "InvestorWithdraw",

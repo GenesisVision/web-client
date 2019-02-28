@@ -78,33 +78,39 @@ $description-block-width: 250px;
     height: $program-height/1.2;
     flex-grow: 1;
   }
-  &__names {
-    width: 100%;
-    padding: 0 $padding/4;
+  &__main-info {
+    margin-left: $padding/4;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex-grow: 1;
   }
   &__actions {
     text-align: right;
+    cursor: pointer;
     svg {
       width: 30px;
       height: 30px;
     }
-    cursor: pointer;
   }
   &__title {
+    @include table-link($text-accent-color, $text-color);
     padding: 3px 0;
     font-size: $title-text-size/1.5;
     word-break: break-all;
-    & a {
-      color: $text-accent-color;
-    }
+    display: block;
+  }
+  &__title-wrapper {
+    max-width: calc(100% - 30px);
+    padding-right: $padding/4;
+    box-sizing: border-box;
   }
   &__name {
+    @include table-link($primary-color);
+    transition-property: color;
     font-size: $text-size/1.5;
-    color: $primary-color;
-    .gv-btn {
-      white-space: normal;
-      padding: 0;
-    }
+    margin-bottom: 10px;
+    display: block;
   }
   &__chart {
     width: $chart-width/1.5;
@@ -138,6 +144,9 @@ $description-block-width: 250px;
   .program-avatar {
     width: 40px;
     height: 40px;
+  }
+  .tag-program-container {
+    width: 100%;
   }
   @include media-breakpoint-phone() {
     .program-avatar {
@@ -214,7 +223,7 @@ $description-block-width: 250px;
       }
     }
   }
-  @media (min-width: 1360px) {
+  @media (min-width: 1400px) {
     &__card,
     &__card-loader {
       width: $program-width;
@@ -236,11 +245,12 @@ $description-block-width: 250px;
   }
   &--title {
     @include font-size($font-size-paragraph);
+    @include adaptive-padding(left, 15px);
     word-break: break-all;
     width: 170px;
-    div {
-      padding: $padding/10;
-    }
+  }
+  &--top {
+    padding-bottom: 3px;
   }
   &--link {
     @include table-link($text-accent-color, $text-color);
@@ -248,9 +258,6 @@ $description-block-width: 250px;
     text-overflow: ellipsis;
     overflow: hidden;
     display: block;
-  }
-  &--bottom {
-    opacity: 0.3;
   }
 
   &--name {
@@ -294,7 +301,7 @@ $description-block-width: 250px;
     background: $secondary-color;
     padding: $padding/1.5;
     border-radius: $border-radius 0 0 $border-radius;
-    min-width: 218px;
+    min-width: 255px;
   }
 
   &__collapse {
@@ -327,7 +334,7 @@ $description-block-width: 250px;
   &__title {
     font-size: $detailed-text;
     letter-spacing: 0.2px;
-    margin-bottom: $padding/2.5/1.5;
+    margin-bottom: $padding/3.75;
     word-break: break-word;
   }
 
@@ -340,6 +347,7 @@ $description-block-width: 250px;
     letter-spacing: 0.2px;
     color: $primary-color;
     word-break: break-all;
+    margin-bottom: $padding/3.75;
   }
 
   &__manager-link {

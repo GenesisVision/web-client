@@ -5,7 +5,7 @@ import { Fragment } from "react";
 import React from "react";
 import { translate } from "react-i18next";
 import FormError from "shared/components/form/form-error/form-error";
-import { formatValue } from "shared/utils/formatter";
+import { formatCurrencyValue } from "shared/utils/formatter";
 
 const WithdrawConfirmStep = props => {
   const {
@@ -22,13 +22,13 @@ const WithdrawConfirmStep = props => {
         <li className="dialog-list__item">
           {t("withdraw-program.withdrawing")}
           <span className="dialog-list__value">
-            {formatValue(amount)} {programCurrency}
+            {formatCurrencyValue(amount, programCurrency)} {programCurrency}
           </span>
         </li>
         <li className="dialog-list__item">
           {t("withdraw-program.payout-date")}
           <span className="dialog-list__value">
-            {moment(periodEnds).format("DD MMM YYYY hh:mm")}
+            {moment(periodEnds).format("lll")}
           </span>
         </li>
       </ul>

@@ -8,12 +8,19 @@ class LevelFilterPopover extends Component {
     value: this.props.value
   };
 
+  marks = new Array(7).fill(0).reduce((prev, curr, idx) => {
+    prev[idx + 1] = idx + 1;
+    return prev;
+  }, {});
+
   handleChange = e => {
     this.setState({ value: e });
   };
   handleSubmit = e => {
     this.props.changeFilter(this.state.value);
   };
+
+  mapValueToNumber = values => values.map(x => parseInt(x));
 
   render() {
     const { t } = this.props;
@@ -23,11 +30,8 @@ class LevelFilterPopover extends Component {
           dots
           min={1}
           max={7}
-          marks={new Array(7).fill(0).reduce((prev, curr, idx) => {
-            prev[idx + 1] = idx + 1;
-            return prev;
-          }, {})}
-          value={this.state.value}
+          marks={this.marks}
+          value={this.mapValueToNumber(this.state.value)}
           onChange={this.handleChange}
           pushable
         />

@@ -6,10 +6,6 @@
   align-items: center;
   padding: 5px;
 
-  & + & {
-    padding-left: 1.5rem;
-  }
-
   &__label {
     opacity: 0.5;
     letter-spacing: 0.2px;
@@ -23,9 +19,24 @@
   }
 
   &__arrow {
-    stroke: #d8d8d8;
+    stroke: $icon-color;
     &__is-open {
       stroke: $primary-color;
+    }
+  }
+
+  &--tags {
+    cursor: default;
+    display: flex;
+    flex-wrap: wrap;
+
+    .filter__value {
+      padding-left: 0;
+    }
+
+    .tag-button {
+      margin-top: 2.5px;
+      margin-bottom: 2.5px;
     }
   }
 }

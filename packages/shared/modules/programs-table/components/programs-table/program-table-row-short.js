@@ -1,5 +1,6 @@
 import classnames from "classnames";
 import React from "react";
+import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
@@ -10,11 +11,11 @@ import ProgramPeriodPie from "shared/components/program-period/program-period-pi
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
+import TagProgramContainer from "shared/components/tag-program/tag-program-container";
 import Tooltip from "shared/components/tooltip/tooltip";
-import { composeProgramDetailsUrl } from "shared/utils/compose-url";
-import { formatValue } from "shared/utils/formatter";
 import { STATUS } from "shared/constants/constants";
-import { translate } from "react-i18next";
+import { composeProgramDetailsUrl } from "shared/utils/compose-url";
+import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 const ProgramTableRowShort = ({
   t,
@@ -28,6 +29,7 @@ const ProgramTableRowShort = ({
   const {
     status,
     availableInvestment,
+    availableInvestmentBase,
     statistic,
     logo,
     level,
@@ -83,16 +85,9 @@ const ProgramTableRowShort = ({
                 {program.title}
               </Link>
             </div>
-            {/*{tags && (
-              <div className="programs-table__cell--bottom">
-                {tags.map((tag, index) => (
-                  <span key={tag.name} style={{ color: tag.color }}>
-                    {tag.name}
-                    {index < tags.length - 1 && ", "}
-                  </span>
-                ))}
-              </div>
-            )}*/}
+            <div className="programs-table__cell--bottom">
+              <TagProgramContainer tags={tags} />
+            </div>
           </div>
         </div>
       </TableCell>
@@ -100,26 +95,26 @@ const ProgramTableRowShort = ({
         <Tooltip
           render={() => (
             <div>
-              {formatValue(statistic.balanceBase.amount)} {currency}
+              {formatCurrencyValue(statistic.balanceGVT.amount, "GVT")} {"GVT"}
             </div>
           )}
         >
           <NumberFormat
-            value={statistic.balanceGVT.amount}
-            suffix=" GVT"
+            value={formatCurrencyValue(statistic.balanceBase.amount, currency)}
+            suffix={` ${currency}`}
             decimalScale={0}
             displayType="text"
           />
         </Tooltip>
       </TableCell>
-      <TableCell className="programs-table__cell programs-table__cell--currency">
+      {/*<TableCell className="programs-table__cell programs-table__cell--currency">
         {currency}
-      </TableCell>
+      </TableCell>*/}
       <TableCell className="programs-table__cell programs-table__cell--investors">
         {statistic.investorsCount}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--available-to-invest">
-        {formatValue(availableInvestment)} GVT
+        {formatCurrencyValue(availableInvestmentBase, currency)} {currency}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--period">
         {periodStarts &&
@@ -139,7 +134,10 @@ const ProgramTableRowShort = ({
         />
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--profit">
-        <Profitability value={statistic.profitPercent} prefix="sign">
+        <Profitability
+          value={formatValue(statistic.profitPercent, 2)}
+          prefix="sign"
+        >
           <NumberFormat
             value={formatValue(statistic.profitPercent, 2)}
             suffix="%"

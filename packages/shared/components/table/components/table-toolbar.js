@@ -24,7 +24,7 @@ class TableToolbar extends Component {
       columns,
       sorting,
       updateSorting,
-      renderHeader,
+      renderSorting,
       isViewSwitchEnabled
     } = this.props;
     return (
@@ -36,7 +36,7 @@ class TableToolbar extends Component {
               sorting={sorting}
               columns={columns}
               updateSorting={updateSorting}
-              renderValueText={renderHeader}
+              renderValueText={renderSorting}
             />
           )}
           {renderFilters && renderFilters(updateFilter, filtering)}
@@ -44,10 +44,16 @@ class TableToolbar extends Component {
         </div>
         {isViewSwitchEnabled && (
           <div className="table__toggle">
-            <div onClick={this.handleIconClick(CARDS_VIEW)}>
+            <div
+              className="table__toggle-icon"
+              onClick={this.handleIconClick(CARDS_VIEW)}
+            >
               <CardsIcon primary={view === CARDS_VIEW} />
             </div>
-            <div onClick={this.handleIconClick(TABLE_VIEW)}>
+            <div
+              className="table__toggle-icon"
+              onClick={this.handleIconClick(TABLE_VIEW)}
+            >
               <TableIcon primary={view === TABLE_VIEW} />
             </div>
           </div>

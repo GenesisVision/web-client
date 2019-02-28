@@ -1,0 +1,17 @@
+@import "~shared/styles/_sizes.scss";
+@import "~shared/styles/_colors.scss";
+@import "~shared/styles/_breakpoint.scss";
+
+.signal-provider {
+  &__disclaimer {
+    color: $short-statistic-notice-color;
+    line-height: $font-size-h3-mobile;
+    font-size: $font-size-small-mobile;
+    letter-spacing: 0.15px;
+    margin-top: 10px;
+    @include media-breakpoint-landscape-phone() {
+      line-height: $font-size-h3;
+      font-size: $font-size-small;
+    }
+  }
+}

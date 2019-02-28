@@ -5,17 +5,57 @@
 .wallet-balance {
   padding: 0 $padding-xsmall;
 
-  &__statistic {
-    @include adaptive-padding(top, $padding-xxsmall);
+  &__title {
+    @include adaptive-padding(right, $padding-medium);
+
+    span {
+      font-weight: 300;
+    }
+  }
+
+  &__title-icon {
+    width: 30px;
+    height: 30px;
+    margin-left: 15px;
+    vertical-align: middle;
+    display: inline-block;
+  }
+
+  &__wrapper {
     display: flex;
     flex-wrap: wrap;
-    & > * {
-      margin-right: $padding-small-mobile;
+    align-items: center;
+    padding-bottom: $padding-xsmall;
+  }
+
+  &__statistic {
+    @include adaptive-padding(top, $padding-xxsmall);
+    padding-left: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__statistic-item {
+    @include adaptive-margin(bottom, $padding-medium);
+    margin-right: $padding-small;
+    display: flex;
+    align-items: flex-end;
+    box-sizing: border-box;
+    min-width: 140px;
+
+    .pie-container {
+      @include adaptive-margin(right, 25px);
     }
-    @include media-breakpoint-landscape-phone() {
-      & > * {
-        margin-right: $padding-small;
-      }
+
+    .statistics-item {
+      padding: 0;
+    }
+
+    &:first-child {
+      @include adaptive-padding(right, $padding-small);
+      border-right: 1px solid rgba($text-dark-color, 0.3);
+      align-items: flex-start;
     }
   }
 
@@ -35,27 +75,21 @@
     display: block;
   }
 
-  &__add-funds {
-    box-sizing: border-box;
-    height: 42px;
-    width: 129px;
-    letter-spacing: 0.3px;
-    font-size: $font-size-common;
-    margin-bottom: 30px;
-    margin-right: 12px;
-  }
+  &__button-icon {
+    display: inline-block;
+    margin-right: 10px;
+    height: 8px;
 
-  &__withdraw {
-    box-sizing: border-box;
-    height: 42px;
-    width: 129px;
-    letter-spacing: 0.3px;
-    font-size: $font-size-common;
+    &--sign {
+      height: auto;
+    }
   }
 
   &__loader-row {
+    @include adaptive-padding(top, $padding-xxsmall);
     display: flex;
     flex-wrap: wrap;
+    padding-bottom: $padding-xsmall;
 
     .svg-loader {
       width: 100%;
@@ -64,13 +98,10 @@
   }
 
   &__loader-stat {
-    @include adaptive-margin(right, $padding-small);
-    padding-bottom: $padding-xsmall;
+    @include adaptive-margin(bottom, $padding-medium);
+    margin-right: $padding-small;
     width: 130px;
-
-    &:last-child {
-      margin-right: 0;
-    }
+    line-height: 0;
   }
 
   &__loader-button {
@@ -84,15 +115,33 @@
     }
   }
 
+  &__buttons {
+    .gv-btn {
+      margin-right: $padding-small;
+      margin-bottom: $padding-medium-mobile;
+      font-weight: 600;
+      font-size: $font-size-common;
+      min-height: 45px;
+    }
+  }
+
   @include media-breakpoint-landscape-phone() {
-    display: block;
     padding: 0;
+
+    &__wrapper,
+    &__loader-row {
+      padding-bottom: 0;
+    }
 
     &__statistic {
       &:first-child {
         width: auto;
         margin-bottom: 0;
       }
+    }
+
+    &__statistic-item {
+      margin-right: $padding-medium;
     }
 
     &__total-balance-value {
@@ -103,14 +152,6 @@
 
     &__footer {
       display: block;
-    }
-
-    &__add-funds {
-      margin-right: 30px;
-      margin-bottom: 0;
-      font-weight: 600;
-      width: 150px;
-      height: 50px;
     }
 
     &__loader-button {
@@ -124,16 +165,20 @@
       width: auto;
     }
 
-    &__withdraw {
-      font-weight: 600;
-      width: 150px;
-      height: 50px;
+    &__buttons {
+      .gv-btn {
+        margin-bottom: 45px;
+        min-height: 50px;
+      }
     }
-  }
 
-  @include media-breakpoint-tablet() {
-    &__loader-stat {
-      padding-top: 10px;
+    &__button-icon {
+      height: 12px;
+
+      &--sign {
+        font-size: 18px;
+        height: auto;
+      }
     }
   }
 }

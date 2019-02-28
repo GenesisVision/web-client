@@ -1,6 +1,5 @@
 import "shared/components/details/details.scss";
 
-import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
 import { toggleReinvesting } from "modules/program-reinvesting/services/program-reinvesting.service";
 import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
@@ -21,10 +20,10 @@ import {
   getProgramStatistic
 } from "shared/components/programs/program-details/services/program-details.service";
 import { INVESTOR_EVENT_TYPE_FILTER_VALUES } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
-import { INVESTOR } from "shared/constants/constants";
 
 import { LOGIN_ROUTE } from "../../auth/login/login.routes";
 import { fetchPortfolioEvents } from "../../dashboard/services/dashboard-events.services";
+import ProgramControls from "./components/program-controls";
 import { fetchHistoryCounts } from "./services/program-details.service";
 
 export const ProgramDetailContext = React.createContext({
@@ -108,16 +107,14 @@ class ProgramDetailsPage extends PureComponent {
             <div className="details__section">
               <ProgramDetailsDescriptionSection
                 toggleReinvesting={toggleReinvesting}
-                ProgramDepositContainer={ProgramDepositContainer}
                 AboutLevelsContainerComponent={AboutLevelsContainerComponent}
-                ProgramDetailContext={ProgramDetailContext}
                 ProgramWithdrawContainer={ProgramWithdrawContainer}
                 ProgramReinvestingWidget={ProgramReinvestingWidget}
                 programDescription={this.description}
                 isAuthenticated={isAuthenticated}
                 redirectToLogin={service.redirectToLogin}
                 onChangeInvestmentStatus={this.changeInvestmentStatus}
-                role={INVESTOR}
+                ProgramControls={ProgramControls}
               />
             </div>
             <div className="details__section">

@@ -5,7 +5,7 @@ import React from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import FormError from "shared/components/form/form-error/form-error";
-import { formatValue } from "shared/utils/formatter";
+import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 const WithdrawConfirmStep = props => {
   const {
@@ -23,7 +23,9 @@ const WithdrawConfirmStep = props => {
       <ul className="dialog-list">
         <li className="dialog-list__item">
           {t("withdraw-fund.withdrawing")}
-          <span className="dialog-list__value">{formatValue(percent)} %</span>
+          <span className="dialog-list__value">
+            {formatValue(percent, 2)} %
+          </span>
         </li>
         {exitFee !== 0 && (
           <li className="dialog-list__item">
@@ -33,7 +35,7 @@ const WithdrawConfirmStep = props => {
             <span className="dialog-list__value">
               {exitFee} %{" "}
               <NumberFormat
-                value={formatValue(feeInCurrency)}
+                value={formatCurrencyValue(feeInCurrency, "GVT")}
                 prefix=" &asymp; "
                 suffix={" GVT"}
                 displayType="text"
@@ -47,7 +49,7 @@ const WithdrawConfirmStep = props => {
           </span>
           <span className="dialog-list__value">
             <NumberFormat
-              value={formatValue(withdrawAmount)}
+              value={formatCurrencyValue(withdrawAmount, "GVT")}
               prefix=" &asymp; "
               suffix={" GVT"}
               displayType="text"

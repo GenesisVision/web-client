@@ -34,7 +34,7 @@ class ReallocateContainer extends Component {
   }
 
   render() {
-    const { service, id, remainder, submitInfo, open, onClose } = this.props;
+    const { service, id, remainder, open, onClose } = this.props;
     const { assets } = this.state;
     const handleApply = values => {
       service
@@ -57,7 +57,6 @@ class ReallocateContainer extends Component {
           assets={assets}
           remainder={remainder}
           reallocate={handleApply}
-          submitInfo={submitInfo}
           errorMessage={this.state.errorMessage}
         />
       </Dialog>
@@ -73,10 +72,6 @@ ReallocateContainer.propTypes = {
   id: PropTypes.string
 };
 
-const mapStateToProps = state => ({
-  submitInfo: state.assetEdit.submit
-});
-
 const mapDispatchToProps = dispatch => ({
   service: bindActionCreators(
     {
@@ -87,6 +82,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(
-  mapStateToProps,
+  undefined,
   mapDispatchToProps
 )(ReallocateContainer);

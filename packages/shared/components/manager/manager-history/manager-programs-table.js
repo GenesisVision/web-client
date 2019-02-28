@@ -5,10 +5,8 @@ import React, { Component } from "react";
 import { translate } from "react-i18next";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import TableModule from "shared/components/table/components/table-module";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { toggleFavoriteProgram } from "shared/modules/favorite-asset/services/favorite-program.service";
-import ProgramTableRow from "shared/modules/programs-table/components/programs-table/program-table-row";
 
 import ProgramTableModule from "../../../modules/programs-table/components/programs-table/programs-table-module";
 import {
@@ -38,7 +36,6 @@ class ManagerPrograms extends Component {
 
   render() {
     const { t, title, isAuthenticated } = this.props;
-
     return (
       <ProgramTableModule
         disableTitle

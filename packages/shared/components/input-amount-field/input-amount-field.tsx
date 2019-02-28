@@ -1,5 +1,5 @@
 import { GVButton, GVFormikField } from "gv-react-components";
-import React, { Component } from "react";
+import * as React from "react";
 import { TranslationFunction, translate } from "react-i18next";
 
 import GVNumberFiled from "../gv-number-field/gv-number-field";
@@ -9,15 +9,27 @@ export interface IInputAmountFieldProps {
   name: string;
   label: string;
   currency: string;
-  isAllow: boolean;
+  isAllow?: (values?: any) => boolean;
   setMax(): void;
+  autoFocus?: boolean;
+  onChange?(event: string | number): void;
 }
 
-class InputAmountField extends Component<IInputAmountFieldProps> {
+class InputAmountField extends React.Component<IInputAmountFieldProps> {
   render() {
-    const { t, name, label, currency, isAllow, setMax } = this.props;
+    const {
+      onChange,
+      t,
+      name,
+      label,
+      currency,
+      isAllow,
+      setMax,
+      autoFocus = true
+    } = this.props;
     return (
       <GVFormikField
+        onChange={onChange}
         name={name}
         label={label}
         component={GVNumberFiled}
@@ -32,7 +44,7 @@ class InputAmountField extends Component<IInputAmountFieldProps> {
           </GVButton>
         }
         autoComplete="off"
-        autoFocus
+        autoFocus={autoFocus}
         suffix={` ${currency}`}
         allowNegative={false}
         isAllowed={isAllow}
