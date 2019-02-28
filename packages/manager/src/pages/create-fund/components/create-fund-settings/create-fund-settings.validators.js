@@ -7,7 +7,7 @@ const createFundSettingsValidationSchema = ({ t, ...props }) =>
         .required(
           t("manager.create-program-page.settings.validation.amount-required")
         )
-        .moreThan(
+        .min(
           50,
           t(
             "manager.create-program-page.settings.validation.amount-is-zero",
