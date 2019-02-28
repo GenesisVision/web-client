@@ -509,7 +509,7 @@ export default translate()(
       brokerAccountTypeId: "",
       entryFee: "",
       signalSubscriptionFee: props.broker.isSignalsAvailable ? "" : 0,
-      currency: "",
+      currency: props.broker.name === "Genesis Markets" ? "BTC" : "",
       accountType: ""
     }),
     validationSchema: createProgramSettingsValidationSchema,
