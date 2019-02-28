@@ -2,6 +2,8 @@ import "./wallet-transactions.scss";
 
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
+import { connect } from "react-redux";
+import { compose } from "redux";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import {
   DATE_RANGE_FILTER_NAME,
@@ -29,6 +31,14 @@ const DEFAULT_FILTERS = [
 ];
 
 class WalletTransactions extends Component {
+  componentDidUpdate(prevProps) {
+    if (this.props.updateTime !== prevProps.updateTime) {
+      this.ref.current.updateItems();
+    }
+  }
+
+  ref = React.createRef();
+
   fetch = filters => {
     return walletApi
       .v10WalletMultiTransactionsGet(authService.getAuthArg(), {
@@ -49,6 +59,7 @@ class WalletTransactions extends Component {
     return (
       <div className="wallet-transactions">
         <TableModule
+          ref={this.ref}
           defaultFilters={DEFAULT_FILTERS}
           paging={DEFAULT_PAGING}
           filtering={{
@@ -93,4 +104,11 @@ class WalletTransactions extends Component {
   }
 }
 
-export default translate()(WalletTransactions);
+const mapStateToProps = state => ({
+  updateTime: state.wallet.lastUpdate.timestamp
+});
+
+export default compose(
+  translate(),
+  connect(mapStateToProps)
+)(WalletTransactions);
