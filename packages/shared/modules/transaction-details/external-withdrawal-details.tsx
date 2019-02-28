@@ -1,6 +1,7 @@
 import { GVButton } from "gv-react-components";
 import * as React from "react";
 import NumberFormat from "react-number-format";
+import ActionButton from "shared/components/action-button/action-button";
 import CopyIcon from "shared/components/icon/copy-icon";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Status from "shared/components/status/status";
@@ -85,12 +86,11 @@ const ExternalWithdrawal = (props: ITransactionDetailsProps) => {
         </StatisticItem>
         {data.externalTransactionDetails.isEnableActions && (
           <div className="external-transaction__actions">
-            <div className="action-button" onClick={handleCancel}>
-              Cancel
-            </div>
-            <div className="action-button" onClick={handleResend}>
-              Resend email
-            </div>
+            <ActionButton onClick={handleCancel} text={t("buttons.cancel")} />
+            <ActionButton
+              onClick={handleResend}
+              text={t("buttons.resend-email")}
+            />
           </div>
         )}
       </div>
