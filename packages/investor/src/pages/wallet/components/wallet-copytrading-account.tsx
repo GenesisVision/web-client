@@ -8,11 +8,11 @@ import { compose } from "redux";
 import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
 import NotFoundPage from "shared/components/not-found/not-found";
 import Page from "shared/components/page/page";
+import WalletBalanceLoader from "shared/components/wallet/components/wallet-balance/wallet-balance-loader";
 import ConvertIcon from "shared/media/convert.svg";
 import RootState from "shared/reducers/root-reducer";
 
-import { fetchWalletCopytradingAccount } from "../../services/wallet-copytrading.service";
-import WalletBalanceLoader from "../wallet-balance/wallet-balance-loader";
+import { fetchWalletCopytradingAccount } from "../services/wallet-copytrading.service";
 import WalletCopytradingBalance from "./wallet-copytrading-balance";
 
 interface IWalletCopytradingAccountProps {
@@ -30,7 +30,7 @@ class WalletCopytradingAccount extends Component<
   IWalletCopytradingAccountProps & InjectedTranslateProps,
   IWalletCopytradingAccountState
 > {
-  constructor(props) {
+  constructor(props: IWalletCopytradingAccountProps & InjectedTranslateProps) {
     super(props);
     this.state = {
       wallet: undefined,
@@ -71,7 +71,7 @@ class WalletCopytradingAccount extends Component<
               {wallet.currency}
               <span>&nbsp;{t("wallet-copytrading-page.title")}&nbsp;</span>
               <WalletImage
-                url={wallet.logo}
+                url={"" /*wallet.logo*/}
                 imageClassName="wallet-transactions__icon"
                 alt={wallet.currency}
               />
