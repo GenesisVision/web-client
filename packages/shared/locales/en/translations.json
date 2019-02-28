@@ -1309,7 +1309,7 @@
         "fields": {
           "min-deposit": "Min. deposit",
           "provide-signals": "Provide signals",
-          "monthly-subscription-fee": "Subscription fee",
+          "subscription-fee": "Subscription fee",
           "stop-out-level": "Stop out level",
           "name": "Name",
           "name-requirements": "Requirement from 4 to 20 symbols",
@@ -1334,9 +1334,13 @@
         "hints": {
           "entry-fee-levels": "The entry fee is disabled for programs that have not reached level 3. It will be charged only for programs with level 3 or higher.",
           "entry-fee": "Description about entry fee is here",
-          "entry-fee-description": "An entry fee is a fee charged to investors upon their investment to an investment program. The maximum entry fee is {{maxFee}} %",
-          "success-fee": "Description about success fee is here",
-          "success-fee-description": "A success fee is paid to a manager at the end of the reporting period for successfully closing the period at a profit. The maximum success fee is {{maxFee}} %"
+          "entry-fee-description": "A fee charged upon each investment in the program.",
+          "success-fee": "Desuccess-fee-descriptionscription about success fee is here",
+          "success-fee-description": "A fee charged upon the total profit made within the reporting period.",
+          "subscription-fee": "Description about subscription fee is here",
+          "subscription-fee-description": "A fee for the subscription to the signal provider services.",
+          "signal-success-fee": "Description about signal success fee is here",
+          "signal-success-fee-description": "A fee charged for the profit made from copied successful trades."
         },
         "validation": {
           "stop-out-required": "Stop out is required",

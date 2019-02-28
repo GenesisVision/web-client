@@ -32,7 +32,7 @@ const SignalsFeeFormPartial: FunctionComponent<
         <GVFormikField
           name={subscriptionFeeFieldName}
           label={t(
-            "manager.create-program-page.settings.fields.monthly-subscription-fee"
+            "manager.create-program-page.settings.fields.subscription-fee"
           )}
           adornment="GVT"
           component={GVTextField}
@@ -42,19 +42,14 @@ const SignalsFeeFormPartial: FunctionComponent<
           autoFocus={hasSubscriptionFeeAutofocus}
         />
         <Hint
-          content={t("manager.create-program-page.settings.hints.entry-fee")}
+          content={t(
+            "manager.create-program-page.settings.hints.subscription-fee"
+          )}
           className="create-program-settings__fee-hint"
           vertical={"bottom"}
-          tooltipContent={`
-          ${t(
-            "manager.create-program-page.settings.hints.entry-fee-description",
-            {
-              maxFee: maxEntryFee
-            }
-          )}. ${t(
-            "manager.create-program-page.settings.hints.entry-fee-levels"
+          tooltipContent={t(
+            "manager.create-program-page.settings.hints.subscription-fee-description"
           )}
-          `}
         />
       </div>
       <div className="create-program-settings__fee">
@@ -70,14 +65,13 @@ const SignalsFeeFormPartial: FunctionComponent<
           decimalScale={4}
         />
         <Hint
-          content={t("manager.create-program-page.settings.hints.success-fee")}
+          content={t(
+            "manager.create-program-page.settings.hints.signal-success-fee"
+          )}
           className="create-program-settings__fee-hint"
           vertical={"bottom"}
           tooltipContent={t(
-            "manager.create-program-page.settings.hints.success-fee-description",
-            {
-              maxFee: maxSuccessFee
-            }
+            "manager.create-program-page.settings.hints.signal-success-fee-description"
           )}
         />
       </div>
