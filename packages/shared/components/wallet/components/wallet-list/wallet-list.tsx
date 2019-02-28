@@ -10,6 +10,7 @@ import Table from "shared/components/table/components/table";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
+import Tooltip from "shared/components/tooltip/tooltip";
 import { composeWalletCurrencytUrl } from "shared/components/wallet/wallet.routes";
 import ArrowIcon from "shared/media/arrow-up.svg";
 import ConvertIcon from "shared/media/convert.svg";
@@ -143,27 +144,57 @@ class WalletList extends React.Component<IWalletListProps, IWalletListState> {
                   />
                 </TableCell>
                 <TableCell className="wallet-list__cell wallet-list__cell--buttons">
-                  <Chip
-                    className="wallet-list__button-transfer"
-                    onClick={this.handleOpenTransferPopup(wallet)}
+                  <Tooltip
+                    render={() => (
+                      <div className="wallet-list__tooltip-button">
+                        {t("wallet-page.buttons.internal-transfer")}
+                      </div>
+                    )}
                   >
-                    <img src={ConvertIcon} alt="Convert Icon" />
-                  </Chip>
-                  <Chip
-                    className="wallet-list__withdraw"
-                    onClick={this.handleOpenWithdrawPopup(wallet)}
-                    disabled={wallet.isWithdrawalEnabled === false}
+                    <div className="wallet-list__button">
+                      <Chip
+                        className="wallet-list__button-transfer"
+                        onClick={this.handleOpenTransferPopup(wallet)}
+                      >
+                        <img src={ConvertIcon} alt="Convert Icon" />
+                      </Chip>
+                    </div>
+                  </Tooltip>
+                  <Tooltip
+                    render={() => (
+                      <div className="wallet-list__tooltip-button">
+                        {t("wallet-page.buttons.deposit")}
+                      </div>
+                    )}
                   >
-                    <img src={ArrowIcon} alt="Arrow Icon" />
-                  </Chip>
-                  <Chip
-                    className="wallet-list__button-add-funds"
-                    type="positive"
-                    onClick={this.handleOpenAddFundsPopup(wallet)}
-                    disabled={wallet.isDepositEnabled === false}
+                    <div className="wallet-list__button">
+                      <Chip
+                        className="wallet-list__withdraw"
+                        onClick={this.handleOpenWithdrawPopup(wallet)}
+                        disabled={wallet.isWithdrawalEnabled === false}
+                      >
+                        <img src={ArrowIcon} alt="Arrow Icon" />
+                      </Chip>
+                    </div>
+                  </Tooltip>
+                  <Tooltip
+                    render={() => (
+                      <div className="wallet-list__tooltip-button">
+                        {t("wallet-page.buttons.withdrawal")}
+                      </div>
+                    )}
                   >
-                    +
-                  </Chip>
+                    <div className="wallet-list__button">
+                      <Chip
+                        className="wallet-list__button-add-funds"
+                        type="positive"
+                        onClick={this.handleOpenAddFundsPopup(wallet)}
+                        disabled={wallet.isDepositEnabled === false}
+                      >
+                        +
+                      </Chip>
+                    </div>
+                  </Tooltip>
                 </TableCell>
               </TableRow>
             );

@@ -716,6 +716,11 @@
       "pending": "Pending",
       "buttons": ""
     },
+    "buttons": {
+      "internal-transfer": "Internal transfer",
+      "deposit": "Deposit",
+      "withdrawal": "Withdrawal"
+    },
     "transaction-actions": {
       "resend-email": "Resend confirmation email",
       "cancel-request": "Cancel request"

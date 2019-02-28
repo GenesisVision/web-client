@@ -12,9 +12,17 @@
         @include adaptive-margin(left, $padding-xsmall);
         width: 32px;
         height: 32px;
-        vertical-align: middle;
       }
     }
+  }
+
+  &__button {
+    display: inline-flex;
+    vertical-align: middle;
+  }
+
+  &__tooltip-button {
+    font-size: 13px;
   }
 
   &__button-add-funds {
