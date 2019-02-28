@@ -37,6 +37,7 @@ class TwoFactorCodeForm extends React.Component<
   checkTwoFactor = () => {
     if (this.props.isSubmitting) return;
     this.setState({ isChecking: true });
+    this.props.setSubmitting(true);
     const req = this.props.onSubmit(
       this.props.values.twoFactorCode,
       this.props.setSubmitting
@@ -62,7 +63,6 @@ class TwoFactorCodeForm extends React.Component<
   render() {
     {
       const { t, handleSubmit, error, isSubmitting } = this.props;
-
       return (
         <form
           id="twoFactorForm"
