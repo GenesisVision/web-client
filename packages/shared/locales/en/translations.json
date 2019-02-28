@@ -1369,7 +1369,7 @@
           "success-fee-required": "Success fee is required",
           "success-fee-min": "Success fee must be greater than 0.01 % ",
           "signal-subscription-fee-required": "Subscription fee is required",
-          "signal-subscription-fee-min": "Subscription fee must be greater than 0.01 GVT ",
+          "signal-subscription-fee-min": "Subscription fee must be greater than 0.01 GVT",
           "account-type-required": "Account type is required",
           "image-resolution-incorrect": "The resolution of the uploaded image is too low.",
           "image-file-is-large": "The uploaded image file is too large."
