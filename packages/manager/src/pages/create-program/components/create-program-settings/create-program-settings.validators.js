@@ -145,7 +145,7 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) =>
       isSignalProgram: boolean(),
       signalSubscriptionFee: mixed().when("isSignalProgram", {
         is: true,
-        then: signalEntryFeeShape(t, props.programsInfo.managerMaxEntryFee)
+        then: signalEntryFeeShape(t, 100)
       }),
       signalSuccessFee: mixed().when("isSignalProgram", {
         is: true,
