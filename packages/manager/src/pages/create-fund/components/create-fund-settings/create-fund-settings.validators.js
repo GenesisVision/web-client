@@ -9,7 +9,10 @@ const createFundSettingsValidationSchema = ({ t, ...props }) =>
         )
         .moreThan(
           50,
-          t("manager.create-program-page.settings.validation.amount-is-zero")
+          t(
+            "manager.create-program-page.settings.validation.amount-is-zero",
+            50
+          )
         )
         .max(
           props.wallets.find(
