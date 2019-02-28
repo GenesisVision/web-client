@@ -8,7 +8,7 @@ const createFundSettingsValidationSchema = ({ t, ...props }) =>
           t("manager.create-program-page.settings.validation.amount-required")
         )
         .moreThan(
-          0,
+          50,
           t("manager.create-program-page.settings.validation.amount-is-zero")
         )
         .max(
@@ -69,8 +69,8 @@ const createFundSettingsValidationSchema = ({ t, ...props }) =>
         .required(
           t("manager.create-fund-page.settings.validation.entry-fee-required")
         )
-        .min(0.01, "Entry fee must be greater than 0.01 % ")
-        .max(
+        .moreThan(0.01, "Entry fee must be greater than 0.01 % ")
+        .lessThan(
           props.programsInfo.managerMaxEntryFee,
           "Entry fee must be less than  " +
             props.programsInfo.managerMaxEntryFee +
@@ -80,8 +80,8 @@ const createFundSettingsValidationSchema = ({ t, ...props }) =>
         .required(
           t("manager.create-fund-page.settings.validation.exit-fee-required")
         )
-        .min(0.01, "Exit fee must be greater than 0.01 % ")
-        .max(
+        .moreThan(0.01, "Exit fee must be greater than 0.01 % ")
+        .lessThan(
           props.programsInfo.managerMaxExitFee,
           "Exit fee must be less than  " +
             props.programsInfo.managerMaxExitFee +
