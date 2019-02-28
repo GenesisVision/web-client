@@ -9,11 +9,7 @@ import Profitability from "shared/components/profitability/profitability";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Surface from "shared/components/surface/surface";
 import { PROGRAM } from "shared/constants/constants";
-import {
-  formatCurrencyValue,
-  formatValue,
-  roundPercents
-} from "shared/utils/formatter";
+import { formatCurrencyValue, roundPercents } from "shared/utils/formatter";
 
 class DetailsInvestment extends PureComponent {
   state = {
