@@ -1,6 +1,5 @@
 import investorApi from "shared/services/api-client/investor-api";
 import signalApi from "shared/services/api-client/signal-api";
-import { Nullable } from "shared/utils/types";
 
 export const DASHBOARD_PROGRAMS = "DASHBOARD_PROGRAMS";
 export const DASHBOARD_FUNDS = "DASHBOARD_FUNDS";
@@ -11,11 +10,8 @@ export const DASHBOARD_IN_REQUESTS = "DASHBOARD_IN_REQUESTS";
 export const DASHBOARD_CANCEL_FUND_REQUESTS = "DASHBOARD_CANCEL_FUND_REQUESTS";
 export const DASHBOARD_CANCEL_PROGRAM_REQUESTS =
   "DASHBOARD_CANCEL_PROGRAM_REQUESTS";
-export const DASHBOARD_OPEN_TRADES = "DASHBOARD_OPEN_TRADES";
-export const DASHBOARD_TRADES_HISTORY = "DASHBOARD_TRADES_HISTORY";
 
 export const CLEAR_DASHBOARD_ASSETS_TABLE = "CLEAR_DASHBOARD_ASSETS_TABLE";
-export const CLEAR_DASHBOARD_TRADES_TABLE = "CLEAR_DASHBOARD_TRADES_TABLE";
 
 export const fetchDashboardPrograms = (auth: string, filters: any) => {
   return {
@@ -69,21 +65,3 @@ export const cancelProgramRequest = (auth: string, id: string) => {
 export const clearDashboardAssetsTable = () => ({
   type: CLEAR_DASHBOARD_ASSETS_TABLE
 });
-
-export const clearDashboardTradesTable = () => ({
-  type: CLEAR_DASHBOARD_TRADES_TABLE
-});
-
-export const fetchDashboardOpenTrades = (auth: string, filters: any) => {
-  return {
-    type: DASHBOARD_OPEN_TRADES,
-    payload: signalApi.v10SignalTradesOpenGet(auth, filters)
-  };
-};
-
-export const fetchDashboardTradesHistory = (auth: string, filters: any) => {
-  return {
-    type: DASHBOARD_OPEN_TRADES,
-    payload: signalApi.v10SignalTradesGet(auth, filters)
-  };
-};

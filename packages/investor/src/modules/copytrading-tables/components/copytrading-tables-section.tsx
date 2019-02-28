@@ -1,12 +1,12 @@
 import { GVTab, GVTabs } from "gv-react-components";
 import React, { Component } from "react";
-import { TranslationFunction, translate } from "react-i18next";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import Surface from "shared/components/surface/surface";
 
 import {
-  IDashboardTradesCounts,
-  fetchTradesCount
-} from "../../services/dashboard.service";
+  ICopytradingTradesCounts,
+  fetchCopytradingTradesCount
+} from "../services/copytrading-tables.service";
 import OpenTradesTable from "./open-trades-table";
 import TradesHistoryTable from "./trades-history-table";
 
@@ -15,18 +15,17 @@ enum TRADES_TABS {
   HISTORY = "HISTORY"
 }
 
-interface IDashboardTradesSectionProps {
+interface ICopytradingTablesSectionProps {
   title: string;
-  t: TranslationFunction;
 }
 
-interface IDashboardTradesSectionState extends IDashboardTradesCounts {
+interface ICopytradingTablesSectionState extends ICopytradingTradesCounts {
   tab: TRADES_TABS;
 }
 
-class DashboardTradesSection extends Component<
-  IDashboardTradesSectionProps,
-  IDashboardTradesSectionState
+class ICopytradingTablesSection extends Component<
+  ICopytradingTablesSectionProps & InjectedTranslateProps,
+  ICopytradingTablesSectionState
 > {
   state = {
     tab: TRADES_TABS.OPEN_TRADES,
@@ -35,7 +34,7 @@ class DashboardTradesSection extends Component<
   };
 
   componentDidMount() {
-    fetchTradesCount().then(data => {
+    fetchCopytradingTradesCount().then(data => {
       this.setState({ ...data });
     });
   }
@@ -50,16 +49,16 @@ class DashboardTradesSection extends Component<
     return (
       <Surface>
         <div className="dashboard-assets__head">
-          <h3>{t("investor.dashboard-page.trades.title")}</h3>
+          <h3>{t("investor.copytrading-tables.title")}</h3>
           <GVTabs value={tab} onChange={this.handleTabChange}>
             <GVTab
               value={TRADES_TABS.OPEN_TRADES}
-              label={t("investor.dashboard-page.trades.open-trades")}
+              label={t("investor.copytrading-tables.open-trades")}
               count={openTradesCount}
             />
             <GVTab
               value={TRADES_TABS.HISTORY}
-              label={t("investor.dashboard-page.trades.history")}
+              label={t("investor.copytrading-tables.history")}
               count={historyCount}
             />
           </GVTabs>
@@ -73,4 +72,4 @@ class DashboardTradesSection extends Component<
   }
 }
 
-export default translate()(DashboardTradesSection);
+export default translate()(ICopytradingTablesSection);

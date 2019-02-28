@@ -1,16 +1,16 @@
 import { InvestorRootState } from "reducers";
 import { tableSelectorCreator } from "shared/components/table/helpers/table.selector";
 
-const dashboardOpenTradesSelector = (state: InvestorRootState) =>
-  state.dashboard.openTrades;
+const copytradingOpenTradesSelector = (state: InvestorRootState) =>
+  state.copytradingTables.openTrades;
 export const dashboardOpenTradesTableSelector = tableSelectorCreator(
-  dashboardOpenTradesSelector,
+  copytradingOpenTradesSelector,
   "trades"
 );
 
-const dashboardTradesHistorySelector = (state: InvestorRootState) =>
-  state.dashboard.tradesHistory;
+const copytradingTradesHistorySelector = (state: InvestorRootState) =>
+  state.copytradingTables.tradesHistory;
 export const dashboardTradesHistoryTableSelector = tableSelectorCreator(
-  dashboardTradesHistorySelector,
+  copytradingTradesHistorySelector,
   "trades"
 );

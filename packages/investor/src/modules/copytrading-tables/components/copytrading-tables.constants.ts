@@ -4,7 +4,7 @@ import {
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { composeDefaultDateRangeFilter } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 
-export const DASHBOARD_OPEN_TRADES_COLUMNS = [
+export const COPYTRADING_OPEN_TRADES_COLUMNS = [
   {
     name: "program"
   },
@@ -31,7 +31,7 @@ export const DASHBOARD_OPEN_TRADES_COLUMNS = [
   }
 ];
 
-export const DASHBOARD_TRADES_HISTORY_COLUMNS = [
+export const COPYTRADING_TRADES_HISTORY_COLUMNS = [
   {
     name: "program"
   },
@@ -64,7 +64,7 @@ export const DASHBOARD_TRADES_HISTORY_COLUMNS = [
   }
 ];
 
-export const DASHBOARD_TRADES_HISTORY_FILTERS = [
+export const COPYTRADING_TRADES_HISTORY_FILTERS = [
   {
     ...composeDefaultDateRangeFilter({
       defaultValue: {
@@ -75,7 +75,7 @@ export const DASHBOARD_TRADES_HISTORY_FILTERS = [
   }
 ];
 
-export const DASHBOARD_TRADES_HISTORY_DEFAULT_FILTERING = {
+export const COPYTRADING_TRADES_HISTORY_DEFAULT_FILTERING = {
   dateRange: {
     ...DEFAULT_DATE_RANGE_FILTER_VALUE,
     type: DateRangeFilterTypes.lastMonth

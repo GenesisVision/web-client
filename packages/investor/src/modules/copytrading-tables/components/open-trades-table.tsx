@@ -3,7 +3,6 @@ import "./open-trades-table.scss";
 import { OrderOpenSignalSlaveModel } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import moment from "moment";
-import { closeTrade } from "pages/dashboard/services/dashboard.service";
 import React, { Component, ComponentType } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -26,10 +25,13 @@ import {
 import { formatValue } from "shared/utils/formatter";
 import { formatPercent } from "shared/utils/formatter";
 
-import { clearDashboardTradesTable } from "../../actions/dashboard.actions";
-import { getDashboardOpenTrades } from "../../services/dashboard-trades.service";
-import { DASHBOARD_OPEN_TRADES_COLUMNS } from "./dashboard-trades.constants";
-import { dashboardOpenTradesTableSelector } from "./dashboard-trades.selectors";
+import { clearCopytradingTable } from "../actions/copytrading-tables.actions";
+import {
+  closeCopytradingTrade,
+  getCopytradingOpenTrades
+} from "../services/copytrading-tables.service";
+import { COPYTRADING_OPEN_TRADES_COLUMNS } from "./copytrading-tables.constants";
+import { dashboardOpenTradesTableSelector } from "./copytrading-tables.selectors";
 
 interface IOpenTradesTableOwnProps {
   title: string;
@@ -37,8 +39,8 @@ interface IOpenTradesTableOwnProps {
 
 interface IOpenTradesDispatchProps {
   service: {
-    clearDashboardTradesTable(): void;
-    closeTrade(id: string, onSuccess: () => void): void;
+    clearCopytradingTable(): void;
+    closeCopytradingTrade(id: string, onSuccess: () => void): void;
   };
 }
 
@@ -55,7 +57,7 @@ class OpenTradesTable extends Component<
   };
 
   componentWillUnmount() {
-    this.props.service.clearDashboardTradesTable();
+    this.props.service.clearCopytradingTable();
   }
 
   openConfirmPopup = () => {
@@ -67,7 +69,7 @@ class OpenTradesTable extends Component<
   };
 
   closeTrade = (id: string, onSuccess: any) => () => {
-    this.props.service.closeTrade(id, onSuccess);
+    this.props.service.closeCopytradingTrade(id, onSuccess);
     this.closeConfirmPopup();
   };
 
@@ -77,12 +79,12 @@ class OpenTradesTable extends Component<
     return (
       <TableContainer
         className="open-trades-table"
-        getItems={getDashboardOpenTrades}
+        getItems={getCopytradingOpenTrades}
         dataSelector={dashboardOpenTradesTableSelector}
         isFetchOnMount={true}
-        columns={DASHBOARD_OPEN_TRADES_COLUMNS}
+        columns={COPYTRADING_OPEN_TRADES_COLUMNS}
         renderHeader={(column: Column) =>
-          t(`investor.dashboard-page.open-trades-header.${column.name}`)
+          t(`investor.copytrading-tables.open-trades-header.${column.name}`)
         }
         renderBodyRow={(
           signalTrade: OrderOpenSignalSlaveModel,
@@ -174,10 +176,10 @@ class OpenTradesTable extends Component<
                 onClose={this.closeConfirmPopup}
                 onApply={this.closeTrade(signalTrade.id, updateRow)}
                 header={t(
-                  "investor.dashboard-page.trades.close-trade-confirm.header"
+                  "investor.copytrading-tables.close-trade-confirm.header"
                 )}
                 body={t(
-                  "investor.dashboard-page.trades.close-trade-confirm.body",
+                  "investor.copytrading-tables.close-trade-confirm.body",
                   {
                     symbol: signalTrade.symbol,
                     volume: formatValue(signalTrade.volume)
@@ -195,7 +197,7 @@ class OpenTradesTable extends Component<
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
   service: bindActionCreators(
-    { clearDashboardTradesTable, closeTrade },
+    { clearCopytradingTable, closeCopytradingTrade },
     dispatch
   )
 });

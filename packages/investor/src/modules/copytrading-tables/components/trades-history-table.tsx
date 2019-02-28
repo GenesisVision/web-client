@@ -25,10 +25,10 @@ import {
 import { formatValue } from "shared/utils/formatter";
 import { formatPercent } from "shared/utils/formatter";
 
-import { clearDashboardTradesTable } from "../../actions/dashboard.actions";
-import { getDashboardTradesHistory } from "../../services/dashboard-trades.service";
-import { DASHBOARD_TRADES_HISTORY_COLUMNS } from "./dashboard-trades.constants";
-import { dashboardTradesHistoryTableSelector } from "./dashboard-trades.selectors";
+import { clearCopytradingTable } from "../actions/copytrading-tables.actions";
+import { getCopytradingTradesHistory } from "../services/copytrading-tables.service";
+import { COPYTRADING_TRADES_HISTORY_COLUMNS } from "./copytrading-tables.constants";
+import { dashboardTradesHistoryTableSelector } from "./copytrading-tables.selectors";
 
 interface ITradesHistoryTableOwnProps {
   title: string;
@@ -36,7 +36,7 @@ interface ITradesHistoryTableOwnProps {
 
 interface ITradesHistoryDispatchProps {
   service: {
-    clearDashboardTradesTable(): void;
+    clearCopytradingTable(): void;
   };
 }
 
@@ -46,16 +46,16 @@ class TradesHistoryTable extends Component<
     ITradesHistoryDispatchProps
 > {
   componentWillUnmount() {
-    this.props.service.clearDashboardTradesTable();
+    this.props.service.clearCopytradingTable();
   }
   render() {
     const { t, title } = this.props;
     return (
       <TableContainer
-        getItems={getDashboardTradesHistory}
+        getItems={getCopytradingTradesHistory}
         dataSelector={dashboardTradesHistoryTableSelector}
         isFetchOnMount={true}
-        columns={DASHBOARD_TRADES_HISTORY_COLUMNS}
+        columns={COPYTRADING_TRADES_HISTORY_COLUMNS}
         renderFilters={(updateFilter: IUpdateFilterFunc, filtering: any) => (
           <Fragment>
             <DateRangeFilter
@@ -67,7 +67,7 @@ class TradesHistoryTable extends Component<
           </Fragment>
         )}
         renderHeader={(column: Column) =>
-          t(`investor.dashboard-page.trades-history-header.${column.name}`)
+          t(`investor.copytrading-tables.trades-history-header.${column.name}`)
         }
         renderBodyRow={(signalTrade: OrderClosedSignalSlaveModel) => (
           <TableRow>
@@ -167,7 +167,7 @@ class TradesHistoryTable extends Component<
 }
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
-  service: bindActionCreators({ clearDashboardTradesTable }, dispatch)
+  service: bindActionCreators({ clearCopytradingTable }, dispatch)
 });
 
 export default compose<ComponentType<ITradesHistoryTableOwnProps>>(

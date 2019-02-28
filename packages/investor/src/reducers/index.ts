@@ -1,3 +1,6 @@
+import copytradingTablesReducer, {
+  CopytradingTablesState
+} from "modules/copytrading-tables/reducers/copytrading-tables.reducer";
 import fundDepositReducer, {
   FundDepositState
 } from "modules/fund-deposit/reducer/fund-deposit.reducer";
@@ -50,6 +53,7 @@ type State = {
   loginData: LoginState;
   passwordRestoreData: PasswordState;
   dashboard: DashboardState;
+  copytradingTables: CopytradingTablesState;
 };
 
 export type InvestorRootState = State & RootState;
@@ -78,7 +82,8 @@ const rootReducer = combineReducers<InvestorRootState>({
   manager: managerReducer,
   wallet: walletReducer,
   accountSettings: accountSettingsReducer,
-  ui: uiReducer
+  ui: uiReducer,
+  copytradingTables: copytradingTablesReducer
 });
 
 export default rootReducer;

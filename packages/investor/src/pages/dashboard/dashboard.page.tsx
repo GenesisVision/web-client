@@ -10,7 +10,7 @@ import Surface from "shared/components/surface/surface";
 import DashboardAssetsSection from "./components/dashboard-assets/dashboard-assets-section";
 import DashboardChartSection from "./components/dashboard-portfolio-chart-section/dashboard-portfolio-chart-section";
 import DashboardPortfolioEventsSection from "./components/dashboard-portfolio-events/dashboard-portfolio-events-section";
-import DashboardTradesSection from "./components/dashboard-trades/dashboard-trades-section";
+import DashboardTrades from "./components/dashboard-trades/dashboard-trades";
 
 interface IDashboardPageProps {
   t: TranslationFunction;
@@ -34,9 +34,9 @@ const DashboardPage: React.FunctionComponent<IDashboardPageProps> = ({ t }) => {
         <div className="dashboard__table-section">
           <DashboardAssetsSection title={title} />
         </div>
-        {/*<div className="dashboard__table-section">
-          <DashboardTradesSection title={title} />
-        </div>*/}
+        <div className="dashboard__table-section">
+          <DashboardTrades title={title} />
+        </div>
       </div>
     </Page>
   );
