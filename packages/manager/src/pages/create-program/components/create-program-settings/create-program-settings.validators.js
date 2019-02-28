@@ -21,7 +21,7 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) =>
         .required(
           t("manager.create-program-page.settings.validation.amount-required")
         )
-        .moreThan(
+        .min(
           formatCurrencyValue(
             convertToCurrency(
               props.minimumDepositsAmount[values.currency],
