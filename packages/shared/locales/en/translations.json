@@ -1350,7 +1350,7 @@
           "stop-out-is-zero": "Must be more than 0",
           "amount-required": "Amount out is required",
           "amount-is-large": "Must be less than available in wallet",
-          "amount-is-zero": "Must be more than 0",
+          "amount-is-zero": "Amount must be greater than {{min}}",
           "title-required": "Title is required",
           "title-is-long": "Title is too long",
           "title-is-short": "Title is too short",

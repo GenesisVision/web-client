@@ -33,9 +33,13 @@ import ProgramDefaultImage from "./program-default-image";
 import SignalsFeeFormPartial from "./signals-fee-form.partial";
 
 class CreateProgramSettings extends React.Component {
-  state = {
-    rate: 1
-  };
+  componentDidMount() {
+    this.fetchRate(
+      this.props.values.depositWalletCurrency,
+      this.props.values.currency
+    );
+  }
+
   allowEntryFee = values => {
     const { managerMaxEntryFee } = this.props.programsInfo;
 
@@ -51,7 +55,8 @@ class CreateProgramSettings extends React.Component {
   };
   fetchRate = (fromCurrency, toCurrency) => {
     rateApi.v10RateByFromByToGet(fromCurrency, toCurrency).then(rate => {
-      if (rate !== this.state.rate) this.setState({ rate });
+      if (rate !== this.props.values.rate)
+        this.props.setFieldValue("rate", rate);
     });
   };
   onChangeDepositWallet = (name, target) => {
@@ -94,8 +99,8 @@ class CreateProgramSettings extends React.Component {
       isValid
     } = this.props;
     if (!wallets) return;
-    const { rate } = this.state;
     const {
+      rate,
       depositWalletCurrency,
       depositAmount,
       isSignalProgram,
@@ -487,6 +492,7 @@ export default translate()(
   withFormik({
     displayName: "CreateProgramSettingsForm",
     mapPropsToValues: props => ({
+      rate: 1,
       stopOutLevel: "100",
       depositWalletCurrency: "GVT",
       depositWalletId: props.wallets.find(item => item.currency === "GVT").id,
