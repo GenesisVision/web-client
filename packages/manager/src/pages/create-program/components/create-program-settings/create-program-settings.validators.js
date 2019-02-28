@@ -165,7 +165,7 @@ export const signalSuccessFeeShape = (t, managerMaxSuccessFee) => {
     .required(
       t("manager.create-program-page.settings.validation.success-fee-required")
     )
-    .lessThan(
+    .max(
       managerMaxSuccessFee,
       `Success fee must be less than ${managerMaxSuccessFee} %`
     );
@@ -184,7 +184,7 @@ export const signalEntryFeeShape = (t, managerMaxEntryFee) => {
         "manager.create-program-page.settings.validation.signal-subscription-fee-min"
       )
     )
-    .lessThan(
+    .max(
       managerMaxEntryFee,
       `Subscription fee must be less than ${managerMaxEntryFee} GVT`
     );
