@@ -1,6 +1,6 @@
-import { boolean, lazy, mixed, number, object, string } from "yup";
-import { formatCurrencyValue } from "shared/utils/formatter";
 import { convertToCurrency } from "shared/utils/currency-converter";
+import { formatCurrencyValue } from "shared/utils/formatter";
+import { boolean, lazy, mixed, number, object, string } from "yup";
 
 const createProgramSettingsValidationSchema = ({ t, ...props }) =>
   lazy(values =>
@@ -186,7 +186,7 @@ export const signalEntryFeeShape = (t, managerMaxEntryFee) => {
     )
     .lessThan(
       managerMaxEntryFee,
-      `Monthly subscription fee must be less than ${managerMaxEntryFee} GVT`
+      `Subscription fee must be less than ${managerMaxEntryFee} GVT`
     );
 };
 
