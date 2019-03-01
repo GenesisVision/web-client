@@ -41,16 +41,19 @@ class ProgramMakeSignalContainer extends Component<
     values: IMakeSignalFormValues,
     setSubmitting: (isSubmitting: boolean) => void
   ) => {
-    const { id, service, onClose } = this.props;
+    const { id, service, onClose, onApply } = this.props;
 
     service
       .programMakeSignal(id, values.successFee!, values.subscriptionFee!)
       .then(() => {
         onClose();
+        onApply();
       })
       .catch((error: any) => {
         setSubmitting(false);
         this.setState({ errorMessage: error.errorMessage });
+        console.log(error.errorMessage);
+        onApply();
       });
   };
 

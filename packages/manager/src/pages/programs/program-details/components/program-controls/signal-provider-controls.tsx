@@ -45,44 +45,47 @@ class SignalProviderControls extends Component<
   };
 
   applyChanges = (updateDetails: any) => () => {
+    console.log("updateDetails");
     updateDetails();
   };
 
   render() {
     const { t, programDescription } = this.props;
     const { isOpenCreateSignalPopup } = this.state;
-    if (programDescription.isSignalProgram) {
-      return <SignalProgramInfo programDescription={programDescription} />;
-    }
+    console.log(programDescription.isSignalProgram);
+    // if (programDescription.isSignalProgram) {
+    //   return <SignalProgramInfo programDescription={programDescription} />;
+    // }
     return (
-      <Fragment>
-        <div className="signal-provider">
-          <div>
-            {t("program-details-page.description.signal-provider.title")}
-          </div>
-          <div className="signal-provider__disclaimer">
-            {t("program-details-page.description.signal-provider.disclaimer")}
-          </div>
-          <div className="program-details-description__button-container">
-            <GVButton onClick={this.openPopup}>
-              {t("program-details-page.description.signal-provider.title")}
-            </GVButton>
-          </div>
-        </div>
-        <ProgramDetailContext.Consumer>
-          {({ updateDetails }: any) => (
-            <Fragment>
-              <ProgramMakeSignalContainer
-                programName={programDescription.title}
-                open={isOpenCreateSignalPopup}
-                id={programDescription.id}
-                onClose={this.closePopup}
-                onApply={this.applyChanges(updateDetails)}
-              />
-            </Fragment>
-          )}
-        </ProgramDetailContext.Consumer>
-      </Fragment>
+      <ProgramDetailContext.Consumer>
+        {({ updateDetails }: any) => (
+          <Fragment>
+            <div className="signal-provider">
+              <div>
+                {t("program-details-page.description.signal-provider.title")}
+              </div>
+              <div className="signal-provider__disclaimer">
+                {t(
+                  "program-details-page.description.signal-provider.disclaimer"
+                )}
+              </div>
+              <div className="program-details-description__button-container">
+                <GVButton onClick={this.openPopup}>
+                  {t("program-details-page.description.signal-provider.title")}
+                </GVButton>
+              </div>
+            </div>
+
+            <ProgramMakeSignalContainer
+              programName={programDescription.title}
+              open={isOpenCreateSignalPopup}
+              id={programDescription.id}
+              onClose={this.closePopup}
+              onApply={this.applyChanges(updateDetails)}
+            />
+          </Fragment>
+        )}
+      </ProgramDetailContext.Consumer>
     );
   }
 }
