@@ -13,7 +13,7 @@ export const getProgramWithdrawInfo = id => (dispatch, getState) => {
 
 export const withdrawProgramById = (id, amount) => {
   return investorApi
-    .v10InvestorProgramsByIdWithdrawByAmountPost(
+    .v10InvestorProgramsByIdWithdrawMultiByAmountPost(
       id,
       amount,
       authService.getAuthArg()
