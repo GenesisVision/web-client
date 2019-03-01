@@ -706,7 +706,7 @@
       "amount": "Amount",
       "equity": "Equity",
       "free-margin": "Free-margin",
-      "actions": "Actions"
+      "actions": ""
     },
     "list": {
       "currency": "Currency",
@@ -718,8 +718,8 @@
     },
     "buttons": {
       "internal-transfer": "Internal transfer",
-      "add-funds": "Add funds",
-      "withdraw": "Withdraw"
+      "deposit": "Deposit",
+      "withdrawal": "Withdrawal"
     },
     "transaction-actions": {
       "resend-email": "Resend confirmation email",
@@ -744,6 +744,12 @@
     "settings": {
       "label": "Using GVT to pay for fees"
     }
+  },
+  "wallet-copytrading-page": {
+    "title": "Copytrading account",
+    "balance": "Balance",
+    "equity": "Equity",
+    "profit": "Profit"
   },
   "gvt-fees": {
     "title": "Fees and Discounts",
@@ -1040,6 +1046,40 @@
         "author": "Aya Laraya"
       }
     },
+    "copytrading-tables": {
+      "title": "Trades",
+      "open-trades": "Open trades",
+      "history": "Trades History",
+      "close-trade-confirm": {
+        "header": "Closing the trade",
+        "body": "Are you sure you want to close {{symbol}} trade in volume {{volume}}?",
+        "success-message": "The trade has been successfully closed",
+        "error-message": "An error occurred while closing the trade"
+      },
+      "open-trades-header": {
+        "program": "Program",
+        "manager": "Manager",
+        "symbol": "Symbol",
+        "open-date": "Open Date",
+        "volume": "Volume",
+        "open-price": "Open Price",
+        "price": "Price",
+        "profit": "Current Profit",
+        "close": "Close"
+      },
+      "trades-history-header": {
+        "program": "Program",
+        "manager": "Manager",
+        "direction": "Dir",
+        "open-date": "Open Date",
+        "close-date": "Close Date",
+        "symbol": "Symbol",
+        "volume": "Volume",
+        "open-price": "Open Price",
+        "close-price": "Close Price",
+        "profit": "Profit"
+      }
+    },
     "dashboard-page": {
       "title": "Dashboard",
       "chart-section": {
@@ -1055,17 +1095,7 @@
         "funds": "Funds",
         "copytrading": "Copytrading"
       },
-      "trades": {
-        "title": "Trades",
-        "open-trades": "Open trades",
-        "history": "Trades History",
-        "close-trade-confirm": {
-          "header": "Closing the trade",
-          "body": "Are you sure you want to close {{symbol}} trade in volume {{volume}}?",
-          "success-message": "The trade has been successfully closed",
-          "error-message": "An error occurred while closing the trade"
-        }
-      },
+
       "programs-header": {
         "title": "Name",
         "share": "Share",
@@ -1095,29 +1125,7 @@
         "profit": "Profit",
         "chart": "Chart"
       },
-      "open-trades-header": {
-        "program": "Program",
-        "manager": "Manager",
-        "symbol": "Symbol",
-        "open-date": "Open Date",
-        "volume": "Volume",
-        "open-price": "Open Price",
-        "price": "Price",
-        "profit": "Current Profit",
-        "close": "Close"
-      },
-      "trades-history-header": {
-        "program": "Program",
-        "manager": "Manager",
-        "direction": "Dir",
-        "open-date": "Open Date",
-        "close-date": "Close Date",
-        "symbol": "Symbol",
-        "volume": "Volume",
-        "open-price": "Open Price",
-        "close-price": "Close Price",
-        "profit": "Profit"
-      },
+
       "get-started": {
         "title": "Get started",
         "text-1": "There's no data right now.",
@@ -1166,6 +1174,9 @@
     }
   },
   "manager": {
+    "program-make-signal": {
+      "success-alert-message": "Your program is a signal provider now"
+    },
     "app": {
       "title": "Manager Portal: "
     },
@@ -1339,8 +1350,8 @@
         "hints": {
           "entry-fee-levels": "The entry fee is disabled for programs that have not reached level 3. It will be charged only for programs with level 3 or higher.",
           "entry-fee": "Description about entry fee is here",
-          "entry-fee-description": "A fee wallet-page.charged upon each investment in the program.",
-          "success-fee": "Desuccess-fee-descriptionscription about success fee is here",
+          "entry-fee-description": "A fee charged upon each investment in the program.",
+          "success-fee": "Description about success fee is here",
           "success-fee-description": "A fee charged upon the total profit made within the reporting period.",
           "subscription-fee": "Description about subscription fee is here",
           "subscription-fee-description": "A fee for the subscription to the signal provider services.",
@@ -1355,7 +1366,7 @@
           "stop-out-is-zero": "Must be more than 0",
           "amount-required": "Amount out is required",
           "amount-is-large": "Must be less than available in wallet",
-          "amount-is-zero": "Must be more than 0",
+          "amount-is-zero": "Amount must be greater or equal {{min}}",
           "title-required": "Title is required",
           "title-is-long": "Title is too long",
           "title-is-short": "Title is too short",
@@ -1371,7 +1382,7 @@
           "success-fee-required": "Success fee is required",
           "success-fee-min": "Success fee must be greater than 0.01 % ",
           "signal-subscription-fee-required": "Subscription fee is required",
-          "signal-subscription-fee-min": "Subscription fee must be greater than 0.01 % ",
+          "signal-subscription-fee-min": "Subscription fee must be greater than 0.01 GVT",
           "account-type-required": "Account type is required",
           "image-resolution-incorrect": "The resolution of the uploaded image is too low.",
           "image-file-is-large": "The uploaded image file is too large."

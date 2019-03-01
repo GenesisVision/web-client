@@ -34,6 +34,8 @@
   }
 
   &__link {
+    display: flex;
+    align-items: center;
     color: $main-color;
     display: inline-flex;
     align-items: center;

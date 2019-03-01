@@ -28,7 +28,7 @@ const WithdrawConfirmStep = props => {
         <li className="dialog-list__item">
           {t("withdraw-program.payout-date")}
           <span className="dialog-list__value">
-            {moment(periodEnds).format("DD MMM YYYY hh:mm")}
+            {moment(periodEnds).format("lll")}
           </span>
         </li>
       </ul>

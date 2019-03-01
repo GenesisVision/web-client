@@ -12,10 +12,10 @@ import ProgramPeriodPie from "shared/components/program-period/program-period-pi
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import TagProgramContainer from "shared/components/tag-program/tag-program-container";
+import Tooltip from "shared/components/tooltip/tooltip";
 import { composeManagerDetailsUrl } from "shared/utils/compose-url";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
-import Tooltip from "shared/components/tooltip/tooltip";
 
 class ProgramCard extends Component {
   state = {
@@ -170,7 +170,6 @@ class ProgramCard extends Component {
                     program.currency
                   )}
                   suffix={` ${program.currency}`}
-                  decimalScale={0}
                   displayType="text"
                 />
               </Tooltip>

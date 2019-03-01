@@ -32,7 +32,7 @@ const ExternalWithdrawal = (props: ITransactionDetailsProps) => {
               </div>
             </div>
             <div className="external-transaction__address">
-              <p>{data.currencyName}</p>
+              {data.currencyName}
             </div>
           </div>
         </StatisticItem>
@@ -55,10 +55,7 @@ const ExternalWithdrawal = (props: ITransactionDetailsProps) => {
             </div>
             <div className="external-transaction__address">
               {data.externalTransactionDetails.fromAddress}
-              <Copy
-                errorMessage={t("transactions-details.copy.error")}
-                successMessage={t("transactions-details.copy.success")}
-              >
+              <Copy>
                 {({ copy }) => (
                   <GVButton
                     color="secondary"

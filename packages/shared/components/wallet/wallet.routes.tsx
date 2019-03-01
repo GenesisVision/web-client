@@ -2,32 +2,35 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
-import replaceParams from "shared/utils/replace-params";
 
+import { composeUrl } from "../../utils/compose-url";
 import WalletCurrency from "./components/wallet-currency";
 import WalletTotal from "./components/wallet-total";
 import { fetchWallets } from "./services/wallet.services";
 
 export const WALLET_TOTAL_PAGE_ROUTE = "/wallet";
+export const WALLET_COPYTRADING_PAGE_ROUTE = `${WALLET_TOTAL_PAGE_ROUTE}/copytrading`;
 export const CURRENCY_SLUG = "currency";
 export const WALLET_CURRENCY_PAGE_ROUTE = `${WALLET_TOTAL_PAGE_ROUTE}/:${CURRENCY_SLUG}`;
+export const WALLET_COPYTRADING_CURRENCY_PAGE_ROUTE = `${WALLET_COPYTRADING_PAGE_ROUTE}/:${CURRENCY_SLUG}`;
 
-export const composeWalletCurrencytUrl = (url: string): string =>
-  replaceParams(WALLET_CURRENCY_PAGE_ROUTE, {
-    [`:${CURRENCY_SLUG}`]: url
-  });
+export const composeWalletCurrencyUrl = composeUrl(
+  WALLET_CURRENCY_PAGE_ROUTE,
+  CURRENCY_SLUG
+);
+
+export const composeWalletCopytradingCurrencyUrl = composeUrl(
+  WALLET_COPYTRADING_CURRENCY_PAGE_ROUTE,
+  CURRENCY_SLUG
+);
 
 interface IWalletDispatchToProps {
   fetchWallets(): void;
 }
 
 class WalletRoutes extends React.Component<IWalletDispatchToProps, any> {
-  getWallets = () => {
-    this.props.fetchWallets();
-  };
-
   componentDidMount() {
-    this.getWallets();
+    this.props.fetchWallets();
   }
 
   render() {

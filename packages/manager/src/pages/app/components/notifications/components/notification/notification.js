@@ -27,9 +27,7 @@ const Notification = ({ date, text, isUnread, type }) => {
     >
       <div className="notification__content">
         <div className="notification__description">{text}</div>
-        <div className="notification__date">
-          {moment(date).format("hh:mm a")}
-        </div>
+        <div className="notification__date">{moment(date).format("LT")}</div>
       </div>
     </div>
   );

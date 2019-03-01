@@ -48,7 +48,7 @@ class ProgramOpenPositions extends Component {
           return (
             <TableRow className="details-trades__row">
               <TableCell className="details-trades__cell program-details-trades__cell--date">
-                {moment(position.date).format("DD-MM-YYYY, hh:mm a")}
+                {moment(position.date).format("lll")}
               </TableCell>
               <TableCell className="details-trades__cell program-details-trades__cell--symbol">
                 {position.symbol}

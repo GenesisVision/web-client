@@ -5,6 +5,7 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import { IError } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import ConvertingDetails from "shared/modules/transaction-details/converting-details";
 import ExternalDeposit from "shared/modules/transaction-details/external-deposit-details";
@@ -16,7 +17,6 @@ import ProfitDetails from "shared/modules/transaction-details/profit-details";
 import WithdrawalTransaction from "shared/modules/transaction-details/withdrawal-details";
 import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
-import { IError } from "shared/constants/constants";
 
 const Types = {
   Investing: InvestingTransaction,

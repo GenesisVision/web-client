@@ -98,7 +98,7 @@ class ProgramTrades extends Component {
               </Profitability>
             </TableCell>
             <TableCell className="details-trades__cell program-details-trades__cell--date">
-              {moment(trade.date).format("DD-MM-YYYY, hh:mm a")}
+              {moment(trade.date).format("lll")}
             </TableCell>
             <TableCell className="details-trades__cell program-details-trades__cell--ticket">
               {trade.ticket}

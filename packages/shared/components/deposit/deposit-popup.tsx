@@ -4,14 +4,14 @@ import { ProgramInvestInfo, WalletData } from "gv-api-web";
 import React, { Fragment } from "react";
 import translate from "react-i18next/src/translate";
 import { connect } from "react-redux";
-import { bindActionCreators, compose, Dispatch } from "redux";
+import { Dispatch, bindActionCreators, compose } from "redux";
+import * as WalletServices from "shared/components/wallet/services/wallet.services";
 import { ASSET, ROLE } from "shared/constants/constants";
 import RootState from "shared/reducers/root-reducer";
+import { ActionType } from "shared/utils/types";
 
 import DepositForm from "./deposit-form";
 import DepositTop from "./deposit-top";
-import * as WalletServices from "shared/components/wallet/services/wallet.services";
-import { ActionType } from "shared/utils/types";
 
 export type SubmitInfo = {
   code: any;

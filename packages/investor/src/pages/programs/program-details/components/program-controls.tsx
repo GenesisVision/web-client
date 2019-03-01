@@ -28,7 +28,7 @@ class ProgramControls extends Component<
             redirectToLogin={redirectToLogin}
           />
         </div>
-        {/*{isAvailableFollowingTrades ? (
+        {/*{isAvailableFollowingTrades && isAuthenticated ? (
           <div className="program-details-description__col program-details-description__col--small-size">
             <SignalProviderControls
               programDescription={programDescription}

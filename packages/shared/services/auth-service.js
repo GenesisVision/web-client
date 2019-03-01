@@ -28,7 +28,7 @@ const getTokenData = () => decodeToken(getToken());
 const getAuthArg = () => {
   const token = getToken();
   if (token === null) {
-    return null;
+    return "";
   }
 
   return `Bearer ${token}`;

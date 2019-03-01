@@ -1,4 +1,4 @@
-import { array, number, object, string, lazy } from "yup";
+import { array, lazy, number, object, string } from "yup";
 
 const createFundSettingsValidationSchema = ({ t, ...props }) =>
   lazy(values =>
@@ -7,9 +7,12 @@ const createFundSettingsValidationSchema = ({ t, ...props }) =>
         .required(
           t("manager.create-program-page.settings.validation.amount-required")
         )
-        .moreThan(
-          0,
-          t("manager.create-program-page.settings.validation.amount-is-zero")
+        .min(
+          50,
+          t(
+            "manager.create-program-page.settings.validation.amount-is-zero",
+            50
+          )
         )
         .max(
           props.wallets.find(
@@ -69,8 +72,8 @@ const createFundSettingsValidationSchema = ({ t, ...props }) =>
         .required(
           t("manager.create-fund-page.settings.validation.entry-fee-required")
         )
-        .min(0.01, "Entry fee must be greater than 0.01 % ")
-        .max(
+        .moreThan(0.01, "Entry fee must be greater than 0.01 % ")
+        .lessThan(
           props.programsInfo.managerMaxEntryFee,
           "Entry fee must be less than  " +
             props.programsInfo.managerMaxEntryFee +
@@ -80,8 +83,8 @@ const createFundSettingsValidationSchema = ({ t, ...props }) =>
         .required(
           t("manager.create-fund-page.settings.validation.exit-fee-required")
         )
-        .min(0.01, "Exit fee must be greater than 0.01 % ")
-        .max(
+        .moreThan(0.01, "Exit fee must be greater than 0.01 % ")
+        .lessThan(
           props.programsInfo.managerMaxExitFee,
           "Exit fee must be less than  " +
             props.programsInfo.managerMaxExitFee +

@@ -5,15 +5,15 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
+import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
 import Table from "shared/components/table/components/table";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
-import { composeWalletCurrencytUrl } from "shared/components/wallet/wallet.routes";
+import { composeWalletCurrencyUrl } from "shared/components/wallet/wallet.routes";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
 import WalletTransferPopup from "shared/modules/wallet-transfer/wallet-transfer-popup";
 import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
-import filesService from "shared/services/file-service";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 import { walletTableTransactionsSelector } from "../wallet-transactions/wallet-transactions.selector";
@@ -92,16 +92,16 @@ class WalletList extends React.Component<IWalletListProps, IWalletListState> {
                   <Link
                     className="wallet-list__link"
                     to={{
-                      pathname: composeWalletCurrencytUrl(
+                      pathname: composeWalletCurrencyUrl(
                         wallet.currency.toLowerCase()
                       ),
                       state: "Wallet"
                     }}
                   >
-                    <img
-                      src={filesService.getFileUrl(wallet.logo)}
-                      className="wallet-list__icon"
-                      alt="Icon"
+                    <WalletImage
+                      url={wallet.logo}
+                      imageClassName="wallet-list__icon"
+                      alt={wallet.currency}
                     />
                     {wallet.currency}
                   </Link>
