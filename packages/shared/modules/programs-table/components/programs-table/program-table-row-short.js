@@ -15,7 +15,7 @@ import TagProgramContainer from "shared/components/tag-program/tag-program-conta
 import Tooltip from "shared/components/tooltip/tooltip";
 import { STATUS } from "shared/constants/constants";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
-import { formatValue } from "shared/utils/formatter";
+import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 const ProgramTableRowShort = ({
   t,
@@ -29,6 +29,7 @@ const ProgramTableRowShort = ({
   const {
     status,
     availableInvestment,
+    availableInvestmentBase,
     statistic,
     logo,
     level,
@@ -94,26 +95,25 @@ const ProgramTableRowShort = ({
         <Tooltip
           render={() => (
             <div>
-              {formatValue(statistic.balanceBase.amount)} {currency}
+              {formatCurrencyValue(statistic.balanceGVT.amount, "GVT")} {"GVT"}
             </div>
           )}
         >
           <NumberFormat
-            value={statistic.balanceGVT.amount}
-            suffix=" GVT"
-            decimalScale={0}
+            value={formatCurrencyValue(statistic.balanceBase.amount, currency)}
+            suffix={` ${currency}`}
             displayType="text"
           />
         </Tooltip>
       </TableCell>
-      <TableCell className="programs-table__cell programs-table__cell--currency">
+      {/*<TableCell className="programs-table__cell programs-table__cell--currency">
         {currency}
-      </TableCell>
+      </TableCell>*/}
       <TableCell className="programs-table__cell programs-table__cell--investors">
         {statistic.investorsCount}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--available-to-invest">
-        {formatValue(availableInvestment)} GVT
+        {formatCurrencyValue(availableInvestmentBase, currency)} {currency}
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--period">
         {periodStarts &&

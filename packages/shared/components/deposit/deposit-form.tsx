@@ -124,23 +124,25 @@ class DepositForm extends React.Component<OwnProps> {
       });
   };
   getMaxAmount = () => {
-    const { setFieldValue, info, wallets, values, asset } = this.props;
+    const { setFieldValue, info, wallets, values, asset, role } = this.props;
     const { walletCurrency, rate } = values;
-    const { availableToInvest } = info;
+    const { availableToInvestBase } = info;
     const wallet = wallets.find(wallet => wallet.currency === walletCurrency);
     const maxFromWallet = wallet ? wallet.available : 0;
 
     let maxAvailable = Number.MAX_SAFE_INTEGER;
-    if (availableToInvest !== undefined)
-      maxAvailable =
-        (availableToInvest /
+    if (availableToInvestBase !== undefined)
+      maxAvailable = availableToInvestBase;
+    /*(availableToInvestBase /
           (100 -
             (asset === ASSET.PROGRAM ? info.gvCommission : 0) -
             this.composeEntryFee(info.entryFee))) *
-        100;
+        100;*/
     const maxAvailableInWalletCurrency = convertToCurrency(maxAvailable, rate);
     const maxInvest = formatCurrencyValue(
-      Math.min(maxFromWallet, maxAvailableInWalletCurrency),
+      role === ROLE.INVESTOR
+        ? Math.min(maxFromWallet, maxAvailableInWalletCurrency)
+        : maxFromWallet,
       walletCurrency
     );
     if (+maxInvest !== +values.maxAmount) setFieldValue("maxAmount", maxInvest);
@@ -154,6 +156,7 @@ class DepositForm extends React.Component<OwnProps> {
   render() {
     this.getMaxAmount();
     const {
+      role,
       wallets,
       t,
       asset,
@@ -220,63 +223,63 @@ class DepositForm extends React.Component<OwnProps> {
             />
           )}
         </div>
-        <ul className="dialog-list">
-          {entryFee && (
+        {role === ROLE.INVESTOR && (
+          <ul className="dialog-list">
+            {entryFee && (
+              <li className="dialog-list__item">
+                <span className="dialog-list__title">
+                  {t("deposit-asset.entry-fee")}
+                </span>
+                <span className="dialog-list__value">
+                  {info.entryFee} %{" "}
+                  <NumberFormat
+                    value={formatCurrencyValue(
+                      this.entryFee(convertFromCurrency(values.amount, rate)),
+                      currency
+                    )}
+                    prefix=" ("
+                    suffix={` ${currency})`}
+                    displayType="text"
+                  />
+                </span>
+              </li>
+            )}
+            {asset === ASSET.PROGRAM && (
+              <li className="dialog-list__item">
+                <span className="dialog-list__title">
+                  {t("deposit-asset.gv-commission")}
+                </span>
+                <span className="dialog-list__value">
+                  {info.gvCommission} %
+                  <NumberFormat
+                    value={formatCurrencyValue(
+                      this.gvFee(convertFromCurrency(values.amount, rate)),
+                      currency
+                    )}
+                    prefix={" ("}
+                    suffix={` ${currency})`}
+                    displayType="text"
+                  />
+                </span>
+              </li>
+            )}
             <li className="dialog-list__item">
               <span className="dialog-list__title">
-                {asset === ASSET.PROGRAM
-                  ? t("deposit-asset.entry-fee")
-                  : t("deposit-asset.entry-fee")}
+                {t("deposit-asset.investment-amount")}
               </span>
               <span className="dialog-list__value">
-                {info.entryFee} %{" "}
                 <NumberFormat
                   value={formatCurrencyValue(
-                    this.entryFee(values.amount),
-                    walletCurrency
+                    this.investAmount(convertFromCurrency(values.amount, rate)),
+                    currency
                   )}
-                  prefix=" ("
-                  suffix={` ${walletCurrency})`}
+                  suffix={` ${currency}`}
                   displayType="text"
                 />
               </span>
             </li>
-          )}
-          {asset === ASSET.PROGRAM && (
-            <li className="dialog-list__item">
-              <span className="dialog-list__title">
-                {t("deposit-asset.gv-commission")}
-              </span>
-              <span className="dialog-list__value">
-                {info.gvCommission} %
-                <NumberFormat
-                  value={formatCurrencyValue(
-                    this.gvFee(values.amount),
-                    walletCurrency
-                  )}
-                  prefix={" ("}
-                  suffix={` ${walletCurrency})`}
-                  displayType="text"
-                />
-              </span>
-            </li>
-          )}
-          <li className="dialog-list__item">
-            <span className="dialog-list__title">
-              {t("deposit-asset.investment-amount")}
-            </span>
-            <span className="dialog-list__value">
-              <NumberFormat
-                value={formatCurrencyValue(
-                  this.investAmount(values.amount),
-                  walletCurrency
-                )}
-                suffix={` ${walletCurrency}`}
-                displayType="text"
-              />
-            </span>
-          </li>
-        </ul>
+          </ul>
+        )}
         <div className="form-error">
           <FormError error={errorMessage} />
         </div>
@@ -323,8 +326,13 @@ export default compose<React.ComponentType<IDepositFormOwnProps>>(
                 values.walletCurrency
               ),
               t("deposit-asset.validation.amount-min-value", {
-                min: info.minInvestmentAmount,
-                currency
+                min: formatCurrencyValue(info.minInvestmentAmount, currency),
+                currency,
+                walletMin: formatCurrencyValue(
+                  convertToCurrency(info.minInvestmentAmount, values.rate),
+                  values.walletCurrency
+                ),
+                walletCurrency: values.walletCurrency
               })
             )
             .max(

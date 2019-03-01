@@ -20,12 +20,11 @@ const FundDetailsStatisticsElements = ({ t, statistic, period }) => (
             value={formatCurrencyValue(statistic.balance, "GVT")}
             thousandSeparator={" "}
             displayType="text"
-            decimalScale={2}
             suffix={" GVT"}
           />
         </StatisticItem>
         <StatisticItem label={t("fund-details-page.statistics.start-day")}>
-          {moment(statistic.creationDate).format("D MMM YYYY")}
+          {moment(statistic.creationDate).format("ll")}
         </StatisticItem>
       </div>
       <div className="details-statistics__vertical-info-block">

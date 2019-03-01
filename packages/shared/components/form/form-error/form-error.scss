@@ -1,5 +1,7 @@
 @import "~shared/styles/_colors.scss";
+@import "~shared/styles/_sizes.scss";
 
 .form-error {
+  @include font-size($font-size-h4);
   color: $negative-color;
 }

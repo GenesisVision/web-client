@@ -5,6 +5,7 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import { IError } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import ConvertingDetails from "shared/modules/transaction-details/converting-details";
 import ExternalDeposit from "shared/modules/transaction-details/external-deposit-details";
@@ -33,6 +34,7 @@ export interface ITransactionDetailsDialogProps extends InjectedTranslateProps {
   transactionId: string;
   error(message: string): void;
   close(): void;
+  onAction(): void;
 }
 
 export interface ITransactionDetailsState {
@@ -43,6 +45,8 @@ export interface ITransactionDetailsState {
 
 export interface ITransactionDetailsProps extends InjectedTranslateProps {
   data: TransactionDetails;
+  handleCancel?(): void;
+  handleResend?(): void;
 }
 
 class TransactionDetailsDialog extends React.Component<
@@ -70,9 +74,36 @@ class TransactionDetailsDialog extends React.Component<
       .then((data: TransactionDetails) =>
         this.setState({ data, isPending: false })
       )
-      .catch(errorMessage => {
+      .catch((errorMessage: IError) => {
         this.props.error(errorMessage.errorMessage);
         this.props.close();
+      });
+  };
+
+  cancel = () => {
+    walletApi
+      .v10WalletWithdrawRequestCancelByTxIdPost(
+        this.props.transactionId,
+        authService.getAuthArg()
+      )
+      .then(() => {
+        this.props.onAction();
+      })
+      .catch((errorMessage: IError) => {
+        this.props.error(errorMessage.errorMessage);
+      });
+  };
+  resendEmail = () => {
+    walletApi
+      .v10WalletWithdrawRequestResendByTxIdPost(
+        this.props.transactionId,
+        authService.getAuthArg()
+      )
+      .then(() => {
+        this.props.close();
+      })
+      .catch((errorMessage: IError) => {
+        this.props.error(errorMessage.errorMessage);
       });
   };
 
@@ -84,7 +115,14 @@ class TransactionDetailsDialog extends React.Component<
       function() {
         return <p>type isn't define</p>;
       };
-    return <Component t={this.props.t} data={this.state.data} />;
+    return (
+      <Component
+        t={this.props.t}
+        data={this.state.data}
+        handleCancel={this.cancel}
+        handleResend={this.resendEmail}
+      />
+    );
   }
 }
 

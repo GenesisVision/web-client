@@ -146,6 +146,7 @@ class TableModule extends React.Component<
         updatePaging={this.handleUpdatePaging}
         updateFilter={this.handleUpdateFilter}
         updateRow={this.handleUpdateRow}
+        updateItems={this.updateItems}
       />
     );
   }

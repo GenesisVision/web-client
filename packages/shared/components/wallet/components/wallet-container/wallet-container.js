@@ -52,10 +52,11 @@ class WalletContainer extends PureComponent {
             <WalletTransactions
               filters={filters.transactionType}
               columns={WALLET_TRANSACTIONS_COLUMNS}
-              renderBodyRow={transaction => (
+              renderBodyRow={(transaction, updateRow, updateItems) => (
                 <TransactionsRow
                   transaction={transaction}
                   walletCurrency={currency}
+                  update={updateItems}
                 />
               )}
               currency={currency}
@@ -65,8 +66,11 @@ class WalletContainer extends PureComponent {
             <WalletDepositsWithdrawals
               columns={WALLET_DEPOSITS_WITHDRAWALS_COLUMNS}
               filters={filters.externalTransactionType}
-              renderBodyRow={transaction => (
-                <DepositsWithdrawalsRow transaction={transaction} />
+              renderBodyRow={(transaction, updateRow, updateItems) => (
+                <DepositsWithdrawalsRow
+                  transaction={transaction}
+                  update={updateItems}
+                />
               )}
               currency={currency}
             />

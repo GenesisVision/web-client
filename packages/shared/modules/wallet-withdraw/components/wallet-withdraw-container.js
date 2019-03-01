@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { updateWalletTimestamp } from "shared/components/wallet/actions/wallet.actions";
 
 import * as walletWithdrawService from "../services/wallet-withdraw.services";
 import WalletWithdrawForm from "./wallet-withdraw-form";
@@ -22,6 +23,7 @@ class WalletWithdrawContainer extends Component {
           isPending: false,
           success: true
         });
+        this.props.service.updateWalletTimestamp();
       })
       .catch(error => {
         this.setState({
@@ -60,7 +62,10 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  service: bindActionCreators(walletWithdrawService, dispatch)
+  service: bindActionCreators(
+    { ...walletWithdrawService, updateWalletTimestamp },
+    dispatch
+  )
 });
 
 export default connect(

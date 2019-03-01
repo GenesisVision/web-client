@@ -26,7 +26,7 @@ const InvestingTransaction = (props: ITransactionDetailsProps) => {
               </div>
             </div>
             <div className="external-transaction__address">
-              <p>{data.currencyName}</p>
+              {data.currencyName}
             </div>
           </div>
         </StatisticItem>

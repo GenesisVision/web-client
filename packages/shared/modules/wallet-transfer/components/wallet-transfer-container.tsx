@@ -1,7 +1,8 @@
 import { WalletData } from "gv-api-web";
-import React, { Component } from "react";
+import * as React from "react";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators } from "redux";
+import { updateWalletTimestamp } from "shared/components/wallet/actions/wallet.actions";
 import { fetchWallets } from "shared/components/wallet/services/wallet.services";
 import { walletTransferRequest } from "shared/modules/wallet-withdraw/services/wallet-withdraw.services";
 import RootState from "shared/reducers/root-reducer";
@@ -20,6 +21,7 @@ interface IWalletTransferContainerDispatchToProps {
   service: {
     walletTransferRequest(props: ITransferFormValues): Promise<any>;
     fetchWallets(): void;
+    updateWalletTimestamp(): void;
   };
 }
 
@@ -35,7 +37,7 @@ interface IWalletTransferContainerState {
   errorMessage?: string;
 }
 
-class WalletTransferContainer extends Component<
+class WalletTransferContainer extends React.Component<
   IWalletTransferContainerProps,
   IWalletTransferContainerState
 > {
@@ -48,7 +50,11 @@ class WalletTransferContainer extends Component<
     this.setState({ isPending: true });
     walletTransferRequest({ ...values })
       .then(() => {
-        this.setState({ isPending: false }, () => this.props.onClose());
+        this.setState({ isPending: false }, () => {
+          this.props.onClose();
+          this.props.service.fetchWallets();
+          this.props.service.updateWalletTimestamp();
+        });
       })
       .catch((error: any) => {
         this.setState({
@@ -86,7 +92,10 @@ const mapStateToProps = (
 };
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  service: bindActionCreators({ walletTransferRequest, fetchWallets }, dispatch)
+  service: bindActionCreators(
+    { walletTransferRequest, fetchWallets, updateWalletTimestamp },
+    dispatch
+  )
 });
 
 export default connect<

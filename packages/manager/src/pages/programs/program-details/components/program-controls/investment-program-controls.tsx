@@ -1,3 +1,4 @@
+import { ProgramDetailsFull } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import AssetEditContainer from "modules/asset-edit/asset-edit-container";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
@@ -23,7 +24,7 @@ interface IInvestmentProgramControlsOwnProps {
 
   canCloseProgram: boolean;
   isOwnProgram: boolean;
-  programDescription: any;
+  programDescription: ProgramDetailsFull;
 }
 
 interface IInvestmentProgramControlsState {
@@ -69,8 +70,8 @@ class InvestmentProgramControls extends Component<
   render() {
     const { popups } = this.state;
     const { t, canCloseProgram, isOwnProgram, programDescription } = this.props;
-
     const composeEditInfo = {
+      stopOutLevel: programDescription.stopOutLevel,
       id: programDescription.id,
       title: programDescription.title,
       description: programDescription.description,
@@ -80,7 +81,10 @@ class InvestmentProgramControls extends Component<
     };
     return (
       <Fragment>
-        <InvestmentProgramInfo programDescription={programDescription} />
+        <InvestmentProgramInfo
+          isOwnProgram={isOwnProgram}
+          programDescription={programDescription}
+        />
         {isOwnProgram && (
           <div className="program-details-description__button-container">
             <GVButton

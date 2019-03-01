@@ -7,6 +7,7 @@ interface ITransactionDetailsProps {
   transactionId: string;
   open: boolean;
   onClose(): void;
+  onAction(): void;
 }
 
 class TransactionDetailsPopup extends React.Component<
@@ -22,6 +23,7 @@ class TransactionDetailsPopup extends React.Component<
         <TransactionDetailsDialog
           transactionId={this.props.transactionId}
           close={this.props.onClose}
+          onAction={this.props.onAction}
         />
       </Dialog>
     );

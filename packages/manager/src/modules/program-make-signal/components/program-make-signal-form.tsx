@@ -43,6 +43,8 @@ const MakeSignalForm: FunctionComponent<MakeSignalFormProps> = ({
           <h2>{t("program-details-page.description.signal-provider.title")}</h2>
           <p>{programName}</p>
         </div>
+      </div>
+      <div className="dialog__bottom">
         <SignalsFeeFormPartial
           subscriptionFeeFieldName={FORM_FIELDS.subscriptionFee}
           successFeeFieldName={FORM_FIELDS.successFee}
@@ -50,8 +52,6 @@ const MakeSignalForm: FunctionComponent<MakeSignalFormProps> = ({
           maxSuccessFee={50}
           hasSubscriptionFeeAutofocus={true}
         />
-      </div>
-      <div className="dialog__bottom">
         <div className="form-error">{errorMessage}</div>
         <div className="dialog__buttons">
           <GVButton

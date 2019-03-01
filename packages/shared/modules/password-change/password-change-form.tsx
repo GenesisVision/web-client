@@ -1,15 +1,33 @@
 import classnames from "classnames";
-import { withFormik } from "formik";
+import { FormikProps, withFormik } from "formik";
+import { ChangePasswordViewModel } from "gv-api-web";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
-import PropTypes from "prop-types";
-import React from "react";
-import { translate } from "react-i18next";
+import React, { ComponentType } from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
-import { passwordValidator } from "shared/utils/validators/validators";
-import { object, ref, string } from "yup";
 
-const PasswordChangeForm = props => {
-  const { t, touched, values, errors, handleSubmit, isValid, dirty } = props;
+import { passwordChangeValidationSchema } from "./password-change.validators";
+
+interface IPasswordChangeFormOwnProps {
+  errorMessage?: string | null;
+  isPending: boolean;
+  onSubmit(values: ChangePasswordViewModel): void;
+}
+
+type PasswordChangeFormProps = InjectedTranslateProps &
+  IPasswordChangeFormOwnProps &
+  FormikProps<ChangePasswordViewModel>;
+const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({
+  t,
+  touched,
+  values,
+  errorMessage,
+  errors,
+  isPending,
+  handleSubmit,
+  isValid,
+  dirty
+}) => {
   const className = classnames({
     "change-password__equal":
       !errors.password &&
@@ -49,38 +67,25 @@ const PasswordChangeForm = props => {
           name="confirmPassword"
           autoComplete="new-password"
         />
+        <div className="form-error">{errorMessage}</div>
       </div>
-      <div className="form-error">{props.errorMessage}</div>
-      <GVButton type="submit" disabled={props.isPending || !isValid || !dirty}>
+      <GVButton type="submit" disabled={isPending || !isValid || !dirty}>
         {t("buttons.confirm")}
       </GVButton>
     </form>
   );
 };
 
-PasswordChangeForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  errorMessage: PropTypes.string,
-  isPending: PropTypes.bool
-};
-
-export default compose(
+export default compose<ComponentType<IPasswordChangeFormOwnProps>>(
   translate(),
-  withFormik({
+  withFormik<IPasswordChangeFormOwnProps, ChangePasswordViewModel>({
     displayName: "change-password",
     mapPropsToValues: () => ({
       oldPassword: "",
       password: "",
       confirmPassword: ""
     }),
-    validationSchema: ({ t }) =>
-      object().shape({
-        oldPassword: string().required(t("Password is required")),
-        password: passwordValidator,
-        confirmPassword: string()
-          .oneOf([ref("password")], t("Passwords don't match."))
-          .required(t("Confirm Password is required"))
-      }),
+    validationSchema: passwordChangeValidationSchema,
     handleSubmit: (values, { props }) => props.onSubmit(values)
   })
 )(PasswordChangeForm);

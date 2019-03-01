@@ -13,9 +13,10 @@ import ProgramPeriodPie from "shared/components/program-period/program-period-pi
 import GVScroll from "shared/components/scroll/gvscroll";
 import TableRow from "shared/components/table/components/table-row";
 import TagProgramContainer from "shared/components/tag-program/tag-program-container";
+import Tooltip from "shared/components/tooltip/tooltip";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { composeManagerDetailsUrl } from "shared/utils/compose-url";
-import { formatValue } from "shared/utils/formatter";
+import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 import ProgramBigChart from "./program-big-chart/program-big-chart";
 
@@ -122,7 +123,26 @@ class ProgramTableRowDetailed extends Component {
                       {t("programs-page.programs-header.equity")}
                     </div>
                     <div className="program-detailed__statistic-data--value">
-                      {(+program.statistic.balanceGVT.amount).toFixed(0)} GVT
+                      <Tooltip
+                        render={() => (
+                          <div>
+                            {formatCurrencyValue(
+                              program.statistic.balanceGVT.amount,
+                              "GVT"
+                            )}{" "}
+                            {"GVT"}
+                          </div>
+                        )}
+                      >
+                        <NumberFormat
+                          value={formatCurrencyValue(
+                            program.statistic.balanceBase.amount,
+                            program.currency
+                          )}
+                          suffix={` ${program.currency}`}
+                          displayType="text"
+                        />
+                      </Tooltip>
                     </div>
                   </div>
                   <div>
@@ -146,7 +166,10 @@ class ProgramTableRowDetailed extends Component {
                       {t("programs-page.programs-header.available-to-invest")}
                     </div>
                     <div className="program-detailed__statistic-data--value">
-                      {formatValue(program.availableInvestment, 2)} GVT
+                      {`${formatCurrencyValue(
+                        program.availableInvestmentBase,
+                        program.currency
+                      )} ${program.currency}`}
                     </div>
                   </div>
                   <div>

@@ -17,7 +17,7 @@ import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
 import { FUND } from "shared/constants/constants";
 import { composeFundsDetailsUrl } from "shared/utils/compose-url";
-import { formatValue } from "shared/utils/formatter";
+import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 import AssetStatus from "../../../asset-status/asset-status";
 import {
@@ -109,7 +109,7 @@ const DashboardFunds: FunctionComponent<
             </div>
           </TableCell>
           <TableCell className="funds-table__cell funds-table__cell--amount">
-            {formatValue(fund.statistic.balanceGVT.amount)} GVT
+            {formatCurrencyValue(fund.statistic.balanceGVT.amount, "GVT")} GVT
           </TableCell>
           <TableCell className="funds-table__cell">
             <FundAssetContainer
@@ -121,7 +121,7 @@ const DashboardFunds: FunctionComponent<
           </TableCell>
           <TableCell className="funds-table__cell funds-table__cell--value">
             <NumberFormat
-              value={formatValue(fund.personalDetails.value, 4)}
+              value={formatCurrencyValue(fund.personalDetails.value, "GVT")}
               suffix=" GVT"
               displayType="text"
             />

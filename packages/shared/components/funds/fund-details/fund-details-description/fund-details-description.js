@@ -234,9 +234,7 @@ class FundDetailsDescription extends PureComponent {
                               {t(
                                 "fund-details-page.description.disable-reallocation-message"
                               )}{" "}
-                              {moment(possibleReallocationTime).format(
-                                "D MMM YYYY, hh:mm a"
-                              )}
+                              {moment(possibleReallocationTime).format("lll")}
                             </div>
                           )}
                       </div>

@@ -57,7 +57,9 @@ export const twoFactorLogin = (code, type, setSubmitting) => (
     model.recoveryCode = code;
   }
 
-  return dispatch(loginUser(model))
+  const request = dispatch(loginUser(model));
+
+  request
     .then(response => {
       authService.storeToken(response.value);
       dispatch(authActions.updateToken());
@@ -65,6 +67,8 @@ export const twoFactorLogin = (code, type, setSubmitting) => (
       dispatch(push(from));
     })
     .catch(() => setSubmitting(false));
+
+  return request;
 };
 
 export const logout = () => dispatch => {

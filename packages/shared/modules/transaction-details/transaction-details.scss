@@ -37,11 +37,12 @@
 .external-transaction {
   display: flex;
   flex-direction: row;
-  &__status {
+  &__status,
+  &__actions {
     display: flex;
     align-items: center;
     flex-direction: row;
-
+    justify-content: stretch;
     img {
       margin-left: 20px;
     }
@@ -60,6 +61,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: center;
     word-break: break-all;
     white-space: normal;
 

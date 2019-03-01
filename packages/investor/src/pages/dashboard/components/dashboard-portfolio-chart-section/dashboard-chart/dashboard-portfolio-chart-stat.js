@@ -3,7 +3,7 @@ import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import Profitability from "shared/components/profitability/profitability";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { formatValue } from "shared/utils/formatter";
+import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 const DashboardPortfolioChartStat = ({
   t,
@@ -17,7 +17,7 @@ const DashboardPortfolioChartStat = ({
   const renderChange = () => (
     <Fragment>
       <NumberFormat
-        value={formatValue(changeValue)}
+        value={formatCurrencyValue(changeValue, "GVT")}
         thousandSeparator={" "}
         displayType="text"
         suffix={" GVT"}
@@ -47,11 +47,11 @@ const DashboardPortfolioChartStat = ({
         big
         accent
         label={"Value"}
-        equivalent={formatValue(valueCurrency)}
+        equivalent={formatCurrencyValue(valueCurrency, currency)}
         equivalentCurrency={currency}
       >
         <NumberFormat
-          value={formatValue(value)}
+          value={formatCurrencyValue(value, "GVT")}
           thousandSeparator={" "}
           displayType="text"
           suffix={" GVT"}
@@ -59,7 +59,7 @@ const DashboardPortfolioChartStat = ({
       </StatisticItem>
       <StatisticItem
         label={"Change"}
-        equivalent={formatValue(changeValueCurrency)}
+        equivalent={formatCurrencyValue(changeValueCurrency, currency)}
         equivalentCurrency={currency}
         big
       >

@@ -11,10 +11,10 @@ interface IWalletRoutesProps {}
 const WalletRoutes: FunctionComponent<IWalletRoutesProps> = () => {
   return (
     <Switch>
-      <Route
+      {/* <Route
         path={WALLET_COPYTRADING_CURRENCY_PAGE_ROUTE}
         component={WalletCopytradingAccount}
-      />
+      /> */}
       <Route path={WALLET_TOTAL_PAGE_ROUTE} component={WalletRoutesCommon} />
     </Switch>
   );

@@ -49,7 +49,7 @@ const WithdrawEnterAmountStep = ({
               convertFromCurrency(amount, rate),
               accountCurrency
             )}
-            prefix="= "
+            prefix="≈ "
             suffix={` ${accountCurrency}`}
             displayType="text"
           />

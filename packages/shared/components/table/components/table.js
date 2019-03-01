@@ -39,6 +39,7 @@ class Table extends Component {
   render() {
     const { view } = this.state;
     const {
+      updateItems,
       className,
       disableTitle,
       items,
@@ -111,6 +112,7 @@ class Table extends Component {
                 tag="tbody"
                 view={TABLE_VIEW}
                 updateRow={updateRow}
+                updateItems={updateItems}
               >
                 {renderBodyRow}
               </TableBody>

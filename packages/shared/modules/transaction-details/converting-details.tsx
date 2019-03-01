@@ -28,7 +28,7 @@ const ConvertingDetails = (props: ITransactionDetailsProps) => {
               </div>
             </div>
             <div className="external-transaction__address">
-              <p>{data.currencyName}</p>
+              {data.currencyName}
             </div>
           </div>
         </StatisticItem>
@@ -56,7 +56,7 @@ const ConvertingDetails = (props: ITransactionDetailsProps) => {
               </div>
             </div>
             <div className="external-transaction__address">
-              <p>{data.convertingDetails.currencyToName}</p>
+              {data.convertingDetails.currencyToName}
             </div>
           </div>
         </StatisticItem>
@@ -74,7 +74,7 @@ const ConvertingDetails = (props: ITransactionDetailsProps) => {
         <StatisticItem label={"   "} className={"external-transaction__rate"}>
           <NumberFormat
             value={1}
-            suffix={`${data.currency} = `}
+            suffix={` ${data.currency} = `}
             allowNegative={true}
             displayType="text"
           />
@@ -83,7 +83,7 @@ const ConvertingDetails = (props: ITransactionDetailsProps) => {
               data.convertingDetails.rateValue,
               data.convertingDetails.currencyTo
             )}
-            suffix={`${data.convertingDetails.currencyTo}`}
+            suffix={` ${data.convertingDetails.currencyTo}`}
             allowNegative={true}
             displayType="text"
           />

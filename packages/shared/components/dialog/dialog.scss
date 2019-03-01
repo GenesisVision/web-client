@@ -246,4 +246,26 @@
     width: auto;
     max-width: none;
   }
+
+  .create-program-settings__row {
+    width: 100%;
+    max-width: none;
+
+    .gv-text-field__wrapper:first-child {
+      margin-right: 0;
+    }
+
+    .gv-text-field {
+      width: 100%;
+    }
+  }
+
+  .create-program-settings__fee {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .create-program-settings__row-title {
+    margin-top: 0;
+  }
 }

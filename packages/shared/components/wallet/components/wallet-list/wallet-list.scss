@@ -16,6 +16,15 @@
     }
   }
 
+  &__button {
+    display: inline-flex;
+    vertical-align: middle;
+  }
+
+  &__tooltip-button {
+    font-size: 13px;
+  }
+
   &__button-add-funds {
     font-size: 18px;
   }
@@ -28,6 +37,9 @@
     display: flex;
     align-items: center;
     color: $main-color;
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
   }
 
   &__icon {

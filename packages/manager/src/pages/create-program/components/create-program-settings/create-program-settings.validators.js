@@ -1,3 +1,5 @@
+import { convertToCurrency } from "shared/utils/currency-converter";
+import { formatCurrencyValue } from "shared/utils/formatter";
 import { boolean, lazy, mixed, number, object, string } from "yup";
 
 const createProgramSettingsValidationSchema = ({ t, ...props }) =>
@@ -19,9 +21,23 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) =>
         .required(
           t("manager.create-program-page.settings.validation.amount-required")
         )
-        .moreThan(
-          0,
-          t("manager.create-program-page.settings.validation.amount-is-zero")
+        .min(
+          formatCurrencyValue(
+            convertToCurrency(
+              props.minimumDepositsAmount[values.currency],
+              values.rate
+            ),
+            values.currency
+          ),
+          t("manager.create-program-page.settings.validation.amount-is-zero", {
+            min: formatCurrencyValue(
+              convertToCurrency(
+                props.minimumDepositsAmount[values.currency],
+                values.rate
+              ),
+              values.currency
+            )
+          })
         )
         .max(
           props.wallets.find(
@@ -100,18 +116,18 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) =>
             "manager.create-program-page.settings.validation.entry-fee-required"
           )
         )
-        .min(
+        .moreThan(
           0.01,
           t("manager.create-program-page.settings.validation.entry-fee-min")
         )
-        .max(
+        .lessThan(
           props.programsInfo.managerMaxEntryFee,
           "Entry fee must be less than  " +
             props.programsInfo.managerMaxEntryFee +
             " %"
         ),
       successFee: number()
-        .min(
+        .moreThan(
           0.01,
           t("manager.create-program-page.settings.validation.success-fee-min")
         )
@@ -120,7 +136,7 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) =>
             "manager.create-program-page.settings.validation.success-fee-required"
           )
         )
-        .max(
+        .lessThan(
           props.programsInfo.managerMaxSuccessFee,
           "Success fee must be less than  " +
             props.programsInfo.managerMaxSuccessFee +
@@ -129,7 +145,7 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) =>
       isSignalProgram: boolean(),
       signalSubscriptionFee: mixed().when("isSignalProgram", {
         is: true,
-        then: signalEntryFeeShape(t, props.programsInfo.managerMaxEntryFee)
+        then: signalEntryFeeShape(t, 100)
       }),
       signalSuccessFee: mixed().when("isSignalProgram", {
         is: true,
@@ -170,7 +186,7 @@ export const signalEntryFeeShape = (t, managerMaxEntryFee) => {
     )
     .max(
       managerMaxEntryFee,
-      `Monthly subscription fee must be less than ${managerMaxEntryFee} GVT`
+      `Subscription fee must be less than ${managerMaxEntryFee} GVT`
     );
 };
 

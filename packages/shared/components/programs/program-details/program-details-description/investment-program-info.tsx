@@ -1,17 +1,27 @@
+import { ProgramDetailsFull } from "gv-api-web";
 import React, { FunctionComponent } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import Hint from "shared/components/hint/hint";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { formatValue } from "shared/utils/formatter";
+import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 interface IInvestmentProgramInfoProps {
-  programDescription: any;
+  isOwnProgram?: boolean;
+  programDescription: ProgramDetailsFull;
 }
 
 const InvestmentProgramInfo: FunctionComponent<
   InjectedTranslateProps & IInvestmentProgramInfoProps
-> = ({ t, programDescription }) => {
+> = ({ t, programDescription, isOwnProgram }) => {
+  const {
+    availableInvestmentBase,
+    currency,
+    entryFeeSelected,
+    entryFeeCurrent,
+    successFee,
+    stopOutLevel
+  } = programDescription;
   return (
     <div className="program-details-description__statistic-container">
       <StatisticItem
@@ -20,9 +30,9 @@ const InvestmentProgramInfo: FunctionComponent<
         accent
       >
         <NumberFormat
-          value={formatValue(programDescription.availableInvestment, 2)}
+          value={formatCurrencyValue(availableInvestmentBase, currency)}
           displayType="text"
-          suffix={` GVT`}
+          suffix={` ${currency}`}
         />
       </StatisticItem>
       <StatisticItem
@@ -30,14 +40,13 @@ const InvestmentProgramInfo: FunctionComponent<
         className="program-details-description__short-statistic-item"
         accent
       >
-        {programDescription.entryFeeSelected !==
-        programDescription.entryFeeCurrent ? (
+        {entryFeeSelected !== entryFeeCurrent ? (
           <Hint
             content={
               <NumberFormat
-                value={formatValue(programDescription.entryFeeSelected, 2)}
+                value={formatValue(entryFeeSelected, 2)}
                 displayType="text"
-                prefix={`${programDescription.entryFeeCurrent} % (`}
+                prefix={`${entryFeeCurrent} % (`}
                 suffix=" %)"
               />
             }
@@ -49,7 +58,7 @@ const InvestmentProgramInfo: FunctionComponent<
           />
         ) : (
           <NumberFormat
-            value={formatValue(programDescription.entryFeeCurrent, 2)}
+            value={formatValue(entryFeeCurrent, 2)}
             displayType="text"
             suffix=" %"
           />
@@ -61,11 +70,24 @@ const InvestmentProgramInfo: FunctionComponent<
         accent
       >
         <NumberFormat
-          value={formatValue(programDescription.successFee, 2)}
+          value={formatValue(successFee, 2)}
           displayType="text"
           suffix=" %"
         />
       </StatisticItem>
+      {isOwnProgram && (
+        <StatisticItem
+          label={t("program-details-page.description.stop-out-level")}
+          className="program-details-description__short-statistic-item"
+          accent
+        >
+          <NumberFormat
+            value={formatValue(stopOutLevel, 2)}
+            displayType="text"
+            suffix=" %"
+          />
+        </StatisticItem>
+      )}
     </div>
   );
 };

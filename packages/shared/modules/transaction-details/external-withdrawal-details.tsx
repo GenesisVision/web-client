@@ -1,6 +1,7 @@
 import { GVButton } from "gv-react-components";
 import * as React from "react";
 import NumberFormat from "react-number-format";
+import ActionButton from "shared/components/action-button/action-button";
 import CopyIcon from "shared/components/icon/copy-icon";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Status from "shared/components/status/status";
@@ -11,7 +12,7 @@ import filesService from "shared/services/file-service";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 const ExternalWithdrawal = (props: ITransactionDetailsProps) => {
-  const { data, t } = props;
+  const { data, t, handleCancel, handleResend } = props;
   return (
     <React.Fragment>
       <div className="dialog__top">
@@ -31,7 +32,7 @@ const ExternalWithdrawal = (props: ITransactionDetailsProps) => {
               </div>
             </div>
             <div className="external-transaction__address">
-              <p>{data.currencyName}</p>
+              {data.currencyName}
             </div>
           </div>
         </StatisticItem>
@@ -54,10 +55,7 @@ const ExternalWithdrawal = (props: ITransactionDetailsProps) => {
             </div>
             <div className="external-transaction__address">
               {data.externalTransactionDetails.fromAddress}
-              <Copy
-                errorMessage={t("transactions-details.copy.error")}
-                successMessage={t("transactions-details.copy.success")}
-              >
+              <Copy>
                 {({ copy }) => (
                   <GVButton
                     color="secondary"
@@ -66,9 +64,11 @@ const ExternalWithdrawal = (props: ITransactionDetailsProps) => {
                     }
                     variant="text"
                   >
-                    <CopyIcon primary />
-                    &nbsp;
-                    {t("buttons.copy")}
+                    <React.Fragment>
+                      <CopyIcon primary />
+                      &nbsp;
+                      {t("buttons.copy")}
+                    </React.Fragment>
                   </GVButton>
                 )}
               </Copy>
@@ -81,6 +81,15 @@ const ExternalWithdrawal = (props: ITransactionDetailsProps) => {
             <Status status={data.status} />
           </div>{" "}
         </StatisticItem>
+        {data.externalTransactionDetails.isEnableActions && (
+          <div className="external-transaction__actions">
+            <ActionButton onClick={handleCancel} text={t("buttons.cancel")} />
+            <ActionButton
+              onClick={handleResend}
+              text={t("buttons.resend-email")}
+            />
+          </div>
+        )}
       </div>
     </React.Fragment>
   );

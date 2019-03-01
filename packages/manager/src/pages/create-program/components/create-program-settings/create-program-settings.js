@@ -33,9 +33,13 @@ import ProgramDefaultImage from "./program-default-image";
 import SignalsFeeFormPartial from "./signals-fee-form.partial";
 
 class CreateProgramSettings extends React.Component {
-  state = {
-    rate: 1
-  };
+  componentDidMount() {
+    this.fetchRate(
+      this.props.values.depositWalletCurrency,
+      this.props.values.currency
+    );
+  }
+
   allowEntryFee = values => {
     const { managerMaxEntryFee } = this.props.programsInfo;
 
@@ -51,7 +55,8 @@ class CreateProgramSettings extends React.Component {
   };
   fetchRate = (fromCurrency, toCurrency) => {
     rateApi.v10RateByFromByToGet(fromCurrency, toCurrency).then(rate => {
-      if (rate !== this.state.rate) this.setState({ rate });
+      if (rate !== this.props.values.rate)
+        this.props.setFieldValue("rate", rate);
     });
   };
   onChangeDepositWallet = (name, target) => {
@@ -94,8 +99,8 @@ class CreateProgramSettings extends React.Component {
       isValid
     } = this.props;
     if (!wallets) return;
-    const { rate } = this.state;
     const {
+      rate,
       depositWalletCurrency,
       depositAmount,
       isSignalProgram,
@@ -111,6 +116,7 @@ class CreateProgramSettings extends React.Component {
 
     const onSubmit = () => {
       createProgramSettingsValidationSchema({
+        minimumDepositsAmount,
         t,
         wallets,
         programsInfo
@@ -256,6 +262,16 @@ class CreateProgramSettings extends React.Component {
                 autoComplete="off"
                 decimalScale={4}
               />
+              <Hint
+                content={t(
+                  "manager.create-program-page.settings.hints.stop-out-level"
+                )}
+                className="create-program-settings__fee-hint"
+                vertical={"bottom"}
+                tooltipContent={t(
+                  "manager.create-program-page.settings.hints.stop-out-level-description"
+                )}
+              />
             </div>
             <div className="create-program-settings__logo-title">
               {t("manager.create-program-page.settings.fields.upload-logo")}
@@ -337,16 +353,9 @@ class CreateProgramSettings extends React.Component {
                   )}
                   className="create-program-settings__fee-hint"
                   vertical={"bottom"}
-                  tooltipContent={`
-                    ${t(
-                      "manager.create-program-page.settings.hints.entry-fee-description",
-                      {
-                        maxFee: programsInfo.managerMaxEntryFee
-                      }
-                    )}. ${t(
-                    "manager.create-program-page.settings.hints.entry-fee-levels"
+                  tooltipContent={t(
+                    "manager.create-program-page.settings.hints.entry-fee-description"
                   )}
-                    `}
                 />
               </div>
               <div className="create-program-settings__fee">
@@ -368,10 +377,7 @@ class CreateProgramSettings extends React.Component {
                   className="create-program-settings__fee-hint"
                   vertical={"bottom"}
                   tooltipContent={t(
-                    "manager.create-program-page.settings.hints.success-fee-description",
-                    {
-                      maxFee: programsInfo.managerMaxSuccessFee
-                    }
+                    "manager.create-program-page.settings.hints.success-fee-description"
                   )}
                 />
               </div>
@@ -428,7 +434,7 @@ class CreateProgramSettings extends React.Component {
                       convertFromCurrency(depositAmount, rate),
                       currency
                     )}
-                    prefix="= "
+                    prefix="≈ "
                     suffix={` ${currency}`}
                     displayType="text"
                   />
@@ -487,6 +493,7 @@ export default translate()(
   withFormik({
     displayName: "CreateProgramSettingsForm",
     mapPropsToValues: props => ({
+      rate: 1,
       stopOutLevel: "100",
       depositWalletCurrency: "GVT",
       depositWalletId: props.wallets.find(item => item.currency === "GVT").id,
@@ -509,7 +516,7 @@ export default translate()(
       brokerAccountTypeId: "",
       entryFee: "",
       signalSubscriptionFee: props.broker.isSignalsAvailable ? "" : 0,
-      currency: "",
+      currency: props.broker.name === "Genesis Markets" ? "BTC" : "",
       accountType: ""
     }),
     validationSchema: createProgramSettingsValidationSchema,

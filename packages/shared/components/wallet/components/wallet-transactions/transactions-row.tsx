@@ -3,17 +3,18 @@ import * as moment from "moment";
 import * as React from "react";
 import { Fragment } from "react";
 import NumberFormat from "react-number-format";
+import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
 import Profitability from "shared/components/profitability/profitability";
 import Status from "shared/components/status/status";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import TransactionDetailsPopup from "shared/modules/transaction-details/transaction-details-popup";
 import { formatCurrencyValue } from "shared/utils/formatter";
-import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
 
 export interface ITransactionRowProps {
   transaction: MultiWalletTransaction;
   walletCurrency?: string;
+  update?(): void;
 }
 
 export interface ITransactionRowState {
@@ -89,6 +90,10 @@ class TransactionsRow extends React.Component<
   closePopup = () => {
     this.setState({ isOpen: false });
   };
+  handleAction = () => {
+    if (this.props.update) this.props.update();
+    this.closePopup();
+  };
   render() {
     const { transaction, walletCurrency } = this.props;
     const isConvertAction = transaction.type === "Converting";
@@ -98,6 +103,7 @@ class TransactionsRow extends React.Component<
           transactionId={transaction.id}
           open={this.state.isOpen}
           onClose={this.closePopup}
+          onAction={this.handleAction}
         />
         <TableRow className="wallet-transactions__row" onClick={this.openPopup}>
           {!walletCurrency && (
@@ -119,7 +125,7 @@ class TransactionsRow extends React.Component<
             </TableCell>
           )}
           <TableCell className="wallet-transactions__cell wallet-transactions__cell--date">
-            {moment(transaction.date).format("DD-MM-YYYY, hh:mm a")}
+            {moment(transaction.date).format("lll")}
           </TableCell>
           <TableCell className="wallet-transactions__cell wallet-transactions__cell--type">
             <Status
