@@ -140,7 +140,6 @@ class ProgramTableRowDetailed extends Component {
                             program.currency
                           )}
                           suffix={` ${program.currency}`}
-                          decimalScale={0}
                           displayType="text"
                         />
                       </Tooltip>
