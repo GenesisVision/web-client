@@ -718,8 +718,8 @@
     },
     "buttons": {
       "internal-transfer": "Internal transfer",
-      "deposit": "Deposit",
-      "withdrawal": "Withdrawal"
+      "add-funds": "Add funds",
+      "withdraw": "Withdraw"
     },
     "transaction-actions": {
       "resend-email": "Resend confirmation email",
@@ -1339,7 +1339,7 @@
         "hints": {
           "entry-fee-levels": "The entry fee is disabled for programs that have not reached level 3. It will be charged only for programs with level 3 or higher.",
           "entry-fee": "Description about entry fee is here",
-          "entry-fee-description": "A fee charged upon each investment in the program.",
+          "entry-fee-description": "A fee wallet-page.charged upon each investment in the program.",
           "success-fee": "Desuccess-fee-descriptionscription about success fee is here",
           "success-fee-description": "A fee charged upon the total profit made within the reporting period.",
           "subscription-fee": "Description about subscription fee is here",
