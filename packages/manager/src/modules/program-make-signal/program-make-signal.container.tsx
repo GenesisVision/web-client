@@ -52,8 +52,6 @@ class ProgramMakeSignalContainer extends Component<
       .catch((error: any) => {
         setSubmitting(false);
         this.setState({ errorMessage: error.errorMessage });
-        console.log(error.errorMessage);
-        onApply();
       });
   };
 
