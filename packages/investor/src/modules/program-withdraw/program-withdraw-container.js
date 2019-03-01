@@ -19,7 +19,7 @@ class ProgramWithdrawContainer extends PureComponent {
 
   handleWithdraw = (id, percent) => {
     return investorApi
-      .v10InvestorProgramsByIdWithdrawByAmountPost(
+      .v10InvestorProgramsByIdWithdrawMultiByAmountPost(
         id,
         percent,
         authService.getAuthArg()
