@@ -1,3 +1,4 @@
+import { routerReducer } from "connected-react-router";
 import fundDepositReducer, {
   FundDepositState
 } from "modules/fund-deposit/reducer/fund-deposit.reducer";
@@ -23,7 +24,6 @@ import managerReducer, {
   ManagerState
 } from "pages/manager/reducers/manager.reducers";
 import { loadingBarReducer } from "react-redux-loading-bar";
-import { routerReducer } from "react-router-redux";
 import { combineReducers } from "redux";
 import programsRatingReducer from "shared/components/programs-rating/reducers/programs-rating.reducers";
 import walletReducer from "shared/components/wallet/reducers/wallet.reducers";

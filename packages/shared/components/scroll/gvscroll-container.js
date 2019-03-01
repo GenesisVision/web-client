@@ -17,7 +17,7 @@ class GVScrollContainer extends Component {
 
   componentDidUpdate() {
     const scroll = this.scroll.current.getScrollTop();
-    this.props.services.handleScroll(scroll);
+    // this.props.services.handleScroll(scroll);
   }
 
   getResizer = () => {

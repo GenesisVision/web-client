@@ -1,5 +1,5 @@
+import { routerMiddleware } from "connected-react-router";
 import { loadingBarMiddleware } from "react-redux-loading-bar";
-import { routerMiddleware } from "react-router-redux";
 import { applyMiddleware, compose, createStore } from "redux";
 import debounceMiddleware from "redux-debounced";
 import promiseMiddleware from "redux-promise-middleware";

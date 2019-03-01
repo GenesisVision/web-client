@@ -1,5 +1,5 @@
+import { push } from "connected-react-router";
 import { ChangePasswordViewModel } from "gv-api-web";
-import { push } from "react-router-redux";
 import { Dispatch } from "redux";
 import authActions from "shared/actions/auth-actions";
 import { SETTINGS_ROUTE } from "shared/components/profile/profile.constants";

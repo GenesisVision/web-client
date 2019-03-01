@@ -1,12 +1,12 @@
 import "shared/components/details/details.scss";
 
+import { push } from "connected-react-router";
 import AssetEditContainer from "modules/asset-edit/asset-edit-container";
 import FundDepositContainer from "modules/fund-deposit/fund-deposit-container";
 import FundWithdrawContainer from "modules/fund-withdraw/fund-withdraw-container";
 import ReallocateContainer from "modules/reallocate/reallocate-container";
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import { push } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
 import FundDetailsDescriptionSection from "shared/components/funds/fund-details/fund-details-description/fund-details-description-section";
 import FundDetailsHistorySection from "shared/components/funds/fund-details/fund-details-history-section/fund-details-history-section";
