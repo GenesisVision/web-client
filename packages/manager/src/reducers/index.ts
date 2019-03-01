@@ -1,4 +1,4 @@
-import { routerReducer } from "connected-react-router";
+import { connectRouter } from "connected-react-router";
 import fundDepositReducer, {
   FundDepositState
 } from "modules/fund-deposit/reducer/fund-deposit.reducer";
@@ -40,6 +40,7 @@ import headerReducer from "shared/reducers/header-reducer";
 import platformReducer from "shared/reducers/platform-reducer";
 import RootState from "shared/reducers/root-reducer";
 import uiReducer from "shared/reducers/ui-reducer";
+import history from "shared/utils/history";
 
 type State = {
   programDeposit: ProgramsDepositState;
@@ -64,7 +65,7 @@ export default combineReducers<ManagerRootState>({
   programsData: programsReducer,
   programsRating: programsRatingReducer,
   fundsData: fundsReducer,
-  routing: routerReducer,
+  router: connectRouter(history),
   loadingBar: loadingBarReducer,
   platformData: platformReducer,
   alertMessages: alertMessagesReducer,
