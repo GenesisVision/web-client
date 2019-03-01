@@ -2,19 +2,26 @@ import {
   PROGRAM_DETAILS_ROUTE,
   PROGRAM_SLUG_URL_PARAM_NAME
 } from "pages/programs/programs.routes";
+import { Dispatch } from "redux";
 import { getDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
+import RootState from "shared/reducers/root-reducer";
 import managerApi from "shared/services/api-client/manager-api";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
 
-export const getProgramDescription = () => (dispatch, getState) => {
+import { ProgramStatisticResult } from "./program-details.types";
+
+export const getProgramDescription = () => (
+  dispatch: Dispatch,
+  getState: () => RootState
+) => {
   const authorization = authService.getAuthArg();
   const { routing } = getState();
 
   const programSlugUrl = getParams(
-    routing.location.pathname,
+    routing!.location!.pathname,
     PROGRAM_DETAILS_ROUTE
   )[PROGRAM_SLUG_URL_PARAM_NAME];
 
@@ -22,10 +29,10 @@ export const getProgramDescription = () => (dispatch, getState) => {
 };
 
 export const getProgramStatistic = (
-  programId,
-  currency,
+  programId: string,
+  currency = "",
   period = getDefaultPeriod()
-) => {
+): Promise<ProgramStatisticResult> => {
   const chartFilter = {
     currency,
     dateFrom: period.start,

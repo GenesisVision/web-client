@@ -5,7 +5,7 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import InvestmentProgramInfo from "shared/components/programs/program-details/program-details-description/investment-program-info";
 import { PROGRAM } from "shared/constants/constants";
 
-import { ProgramDetailContext } from "../program-details.page";
+import { ProgramDetailContext } from "../helpers/program-details-context";
 
 interface IInvestmentProgramControlsOwnProps {
   isAuthenticated: boolean;
