@@ -109,7 +109,9 @@ const GVTFees: React.FC<IGVTFees & InjectedTranslateProps> = ({
               </tr>
             </tbody>
           </table>
-          <p className="gvt-fees__paragraph">{t("gvt-fees.note")}</p>
+          <p className="gvt-fees__paragraph gvt-fees__paragraph--mute">
+            {t("gvt-fees.note")}
+          </p>
         </div>
       </div>
     </Dialog>
