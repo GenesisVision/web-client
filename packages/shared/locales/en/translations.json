@@ -706,7 +706,7 @@
       "amount": "Amount",
       "equity": "Equity",
       "free-margin": "Free-margin",
-      "actions": "Actions"
+      "actions": ""
     },
     "list": {
       "currency": "Currency",
@@ -744,6 +744,12 @@
     "settings": {
       "label": "Using GVT to pay for fees"
     }
+  },
+  "wallet-copytrading-page": {
+    "title": "Copytrading account",
+    "balance": "Balance",
+    "equity": "Equity",
+    "profit": "Profit"
   },
   "gvt-fees": {
     "title": "Fees and Discounts",
@@ -1040,6 +1046,40 @@
         "author": "Aya Laraya"
       }
     },
+    "copytrading-tables": {
+      "title": "Trades",
+      "open-trades": "Open trades",
+      "history": "Trades History",
+      "close-trade-confirm": {
+        "header": "Closing the trade",
+        "body": "Are you sure you want to close {{symbol}} trade in volume {{volume}}?",
+        "success-message": "The trade has been successfully closed",
+        "error-message": "An error occurred while closing the trade"
+      },
+      "open-trades-header": {
+        "program": "Program",
+        "manager": "Manager",
+        "symbol": "Symbol",
+        "open-date": "Open Date",
+        "volume": "Volume",
+        "open-price": "Open Price",
+        "price": "Price",
+        "profit": "Current Profit",
+        "close": "Close"
+      },
+      "trades-history-header": {
+        "program": "Program",
+        "manager": "Manager",
+        "direction": "Dir",
+        "open-date": "Open Date",
+        "close-date": "Close Date",
+        "symbol": "Symbol",
+        "volume": "Volume",
+        "open-price": "Open Price",
+        "close-price": "Close Price",
+        "profit": "Profit"
+      }
+    },
     "dashboard-page": {
       "title": "Dashboard",
       "chart-section": {
@@ -1055,17 +1095,7 @@
         "funds": "Funds",
         "copytrading": "Copytrading"
       },
-      "trades": {
-        "title": "Trades",
-        "open-trades": "Open trades",
-        "history": "Trades History",
-        "close-trade-confirm": {
-          "header": "Closing the trade",
-          "body": "Are you sure you want to close {{symbol}} trade in volume {{volume}}?",
-          "success-message": "The trade has been successfully closed",
-          "error-message": "An error occurred while closing the trade"
-        }
-      },
+
       "programs-header": {
         "title": "Name",
         "share": "Share",
@@ -1095,29 +1125,7 @@
         "profit": "Profit",
         "chart": "Chart"
       },
-      "open-trades-header": {
-        "program": "Program",
-        "manager": "Manager",
-        "symbol": "Symbol",
-        "open-date": "Open Date",
-        "volume": "Volume",
-        "open-price": "Open Price",
-        "price": "Price",
-        "profit": "Current Profit",
-        "close": "Close"
-      },
-      "trades-history-header": {
-        "program": "Program",
-        "manager": "Manager",
-        "direction": "Dir",
-        "open-date": "Open Date",
-        "close-date": "Close Date",
-        "symbol": "Symbol",
-        "volume": "Volume",
-        "open-price": "Open Price",
-        "close-price": "Close Price",
-        "profit": "Profit"
-      },
+
       "get-started": {
         "title": "Get started",
         "text-1": "There's no data right now.",

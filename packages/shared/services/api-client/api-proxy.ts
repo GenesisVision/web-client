@@ -1,6 +1,6 @@
 import handleErrorResponse from "shared/utils/handle-error-response";
 
-const withApiProxy = api => {
+const withApiProxy = (api: any) => {
   return new Proxy(api, {
     get(target, property) {
       const originalMethod = target[property];

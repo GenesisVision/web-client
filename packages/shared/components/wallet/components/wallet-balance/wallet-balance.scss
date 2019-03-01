@@ -8,6 +8,7 @@
   &__title {
     @include adaptive-padding(right, $padding-medium);
 
+    display: flex;
     span {
       font-weight: 300;
     }
