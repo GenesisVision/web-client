@@ -12,6 +12,7 @@
     "debounce": "^1.2.0",
     "dom-css": "^2.1.0",
     "formik": "^1.0.2",
+    "history": "^4.7.2",
     "i18next": "^11.2.3",
     "i18next-browser-languagedetector": "^2.2.0",
     "i18next-xhr-backend": "^1.5.1",
@@ -37,7 +38,6 @@
     "react-popper": "^0.10.1",
     "react-pose": "^4.0.2",
     "react-redux": "^6.0.1",
-    "react-redux-loading-bar": "^4.0.3",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^2.1.1",
     "react-select": "^1.2.1",
@@ -79,7 +79,7 @@
     "react-app-rewire-yarn-workspaces": "^1.0.3",
     "react-app-rewired": "^1.6.2",
     "react-test-renderer": "^16.2.0",
-    "redux-devtools": "^3.4.1"
+    "redux-devtools": "^3.5.0"
   },
   "scripts": {
     "start": "yarn copy && react-app-rewired start",

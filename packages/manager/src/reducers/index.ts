@@ -23,7 +23,6 @@ import dashboardReducer, {
 import managerReducer, {
   ManagerState
 } from "pages/manager/reducers/manager.reducers";
-import { loadingBarReducer } from "react-redux-loading-bar";
 import { combineReducers } from "redux";
 import programsRatingReducer from "shared/components/programs-rating/reducers/programs-rating.reducers";
 import walletReducer from "shared/components/wallet/reducers/wallet.reducers";
@@ -66,7 +65,6 @@ export default combineReducers<ManagerRootState>({
   programsRating: programsRatingReducer,
   fundsData: fundsReducer,
   router: connectRouter(history),
-  loadingBar: loadingBarReducer,
   platformData: platformReducer,
   alertMessages: alertMessagesReducer,
   loginData: loginReducer,

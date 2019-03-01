@@ -1,4 +1,3 @@
-import { Reducer } from "redux";
 import { RouterState } from "connected-react-router";
 import { ProgramsRatingState } from "shared/components/programs-rating/reducers/programs-rating.reducers";
 import { WalletState } from "shared/components/wallet/reducers/wallet.reducers";
@@ -19,7 +18,6 @@ import { HeaderState } from "./header-reducer";
 type RootState = Readonly<{
   profileHeader: HeaderState;
   notificationSettings: NotificationSettingsState;
-  loadingBar: Reducer<any>;
   platformData: PlatformState;
   programsData: ProgramsListState;
   programsRating: ProgramsRatingState;

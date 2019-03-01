@@ -26,7 +26,6 @@ import dashboardReducer, {
 import managerReducer, {
   ManagerState
 } from "pages/manager/reducers/manager.reducers";
-import { loadingBarReducer } from "react-redux-loading-bar";
 import { combineReducers } from "redux";
 import programsRatingReducer from "shared/components/programs-rating/reducers/programs-rating.reducers";
 import walletReducer from "shared/components/wallet/reducers/wallet.reducers";
@@ -61,7 +60,6 @@ export type InvestorRootState = State & RootState;
 
 const rootReducer = combineReducers<InvestorRootState>({
   router: connectRouter(history),
-  loadingBar: loadingBarReducer,
   platformData: platformReducer,
   programsData: programsReducer,
   programsRating: programsRatingReducer,
