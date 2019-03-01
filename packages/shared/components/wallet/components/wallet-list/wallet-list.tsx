@@ -5,21 +5,19 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
-import Chip from "shared/components/chip/chip";
+import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
 import Table from "shared/components/table/components/table";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
-import { composeWalletCurrencytUrl } from "shared/components/wallet/wallet.routes";
-import ArrowIcon from "shared/media/arrow-up.svg";
-import ConvertIcon from "shared/media/convert.svg";
+import { composeWalletCurrencyUrl } from "shared/components/wallet/wallet.routes";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
 import WalletTransferPopup from "shared/modules/wallet-transfer/wallet-transfer-popup";
 import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
-import filesService from "shared/services/file-service";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 import { walletTableTransactionsSelector } from "../wallet-transactions/wallet-transactions.selector";
+import WalletListButton from "./wallet-list-button";
 import { WALLET_LIST_COLUMNS } from "./wallet-list.constants";
 
 interface IWalletListProps extends InjectedTranslateProps {
@@ -94,16 +92,16 @@ class WalletList extends React.Component<IWalletListProps, IWalletListState> {
                   <Link
                     className="wallet-list__link"
                     to={{
-                      pathname: composeWalletCurrencytUrl(
+                      pathname: composeWalletCurrencyUrl(
                         wallet.currency.toLowerCase()
                       ),
                       state: "Wallet"
                     }}
                   >
-                    <img
-                      src={filesService.getFileUrl(wallet.logo)}
-                      className="wallet-list__icon"
-                      alt="Icon"
+                    <WalletImage
+                      url={wallet.logo}
+                      imageClassName="wallet-list__icon"
+                      alt={wallet.currency}
                     />
                     {wallet.currency}
                   </Link>
@@ -143,27 +141,12 @@ class WalletList extends React.Component<IWalletListProps, IWalletListState> {
                   />
                 </TableCell>
                 <TableCell className="wallet-list__cell wallet-list__cell--buttons">
-                  <Chip
-                    className="wallet-list__button-transfer"
-                    onClick={this.handleOpenTransferPopup(wallet)}
-                  >
-                    <img src={ConvertIcon} alt="Convert Icon" />
-                  </Chip>
-                  <Chip
-                    className="wallet-list__withdraw"
-                    onClick={this.handleOpenWithdrawPopup(wallet)}
-                    disabled={wallet.isWithdrawalEnabled === false}
-                  >
-                    <img src={ArrowIcon} alt="Arrow Icon" />
-                  </Chip>
-                  <Chip
-                    className="wallet-list__button-add-funds"
-                    type="positive"
-                    onClick={this.handleOpenAddFundsPopup(wallet)}
-                    disabled={wallet.isDepositEnabled === false}
-                  >
-                    +
-                  </Chip>
+                  <WalletListButton
+                    wallet={wallet}
+                    handleOpenTransferPopup={this.handleOpenTransferPopup}
+                    handleOpenWithdrawPopup={this.handleOpenWithdrawPopup}
+                    handleOpenAddFundsPopup={this.handleOpenAddFundsPopup}
+                  />
                 </TableCell>
               </TableRow>
             );

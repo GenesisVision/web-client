@@ -20,80 +20,26 @@ import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.re
 import { reduceFilters } from "shared/components/wallet/components/wallet-transactions/wallet-transaction-type-filter.helpers";
 import GVTIcon from "shared/media/currency/GVT.svg";
 import TransactionDetailsPopup from "shared/modules/transaction-details/transaction-details-popup";
-import { walletApi } from "shared/services/api-client/wallet-api";
-import authService from "shared/services/auth-service";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
+import { fetchCopytradingAccounts } from "../../services/wallet.services";
 import AllDepositsWithdrawalsRow from "../wallet-deposits-withdrawals/all-deposits-withdrawals-row";
 import WalletCopytradingActions from "./wallet-copytrading-action-cell";
 import WalletCopytradingRow from "./wallet-copytrading-row";
 import { WALLET_COPYTRADING_COLUMNS } from "./wallet-copytrading.constants";
 
-const TRANSACTIONS_FILTERS = {
-  dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE
-};
-
-const DEFAULT_FILTERS = [
-  { ...composeDefaultDateRangeFilter() },
-  {
-    name: "type",
-    type: FilterType.general
-  }
-];
-
 class WalletCopytrading extends Component {
-  state = {
-    isOpen: false
-  };
-  openPopup = () => {
-    this.setState({ isOpen: true });
-  };
-  closePopup = () => {
-    this.setState({ isOpen: false });
-  };
-  fetch = filters => {
-    return walletApi
-      .v10WalletMultiTransactionsExternalGet(authService.getAuthArg(), {
-        ...filters,
-        currency: this.props.currency
-      })
-      .then(data => ({ total: 8, items: [1, 2, 3, 4, 5] }));
-    // .then(data => ({ total: data.total, items: data.transactions }));
+  fetchCopytradingAccounts = () => {
+    return fetchCopytradingAccounts();
   };
 
   render() {
-    const { t, createButtonToolbar, filters } = this.props;
+    const { t } = this.props;
     return (
       <div className="wallet-copytrading">
         <TableModule
-          defaultFilters={DEFAULT_FILTERS}
           paging={DEFAULT_PAGING}
-          filtering={{
-            ...TRANSACTIONS_FILTERS
-          }}
-          createButtonToolbar={createButtonToolbar}
-          getItems={this.fetch}
-          /*renderFilters={(updateFilter, filtering) => {
-          return (
-            <Fragment>
-              <SelectFilter
-                name={"type"}
-                label="Type"
-                value={filtering["type"]}
-                values={reduceFilters(
-                  filters.multiWalletExternalTransactionType
-                )}
-                onChange={updateFilter}
-              />
-              <DateRangeFilter
-                name={DATE_RANGE_FILTER_NAME}
-                value={filtering["dateRange"]}
-                onChange={updateFilter}
-                startLabel={t("filters.date-range.account-creation")}
-              />
-            </Fragment>
-          );
-        }}*/
+          getItems={this.fetchCopytradingAccounts}
           columns={WALLET_COPYTRADING_COLUMNS}
           renderHeader={column => (
             <span
@@ -104,9 +50,7 @@ class WalletCopytrading extends Component {
               {t(`wallet-page.copytrading.${column.name}`)}
             </span>
           )}
-          renderBodyRow={transaction => (
-            <WalletCopytradingRow transaction={transaction} />
-          )}
+          renderBodyRow={wallet => <WalletCopytradingRow wallet={wallet} />}
         />
       </div>
     );

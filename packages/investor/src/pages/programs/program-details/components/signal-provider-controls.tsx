@@ -60,13 +60,14 @@ class SignalProviderControls extends Component<
   };
 
   render() {
-    const { t, programDescription } = this.props;
+    const { t, programDescription, isAuthenticated } = this.props;
     const { popups } = this.state;
     return (
       <Fragment>
         <SignalProgramInfo programDescription={programDescription} />
         <div className="program-details-description__button-container">
-          {programDescription.personalProgramDetails.isFollowSignals ? (
+          {programDescription.personalProgramDetails &&
+          programDescription.personalProgramDetails.isFollowSignals ? (
             <GVButton
               className="program-details-description__invest-btn"
               onClick={this.openPopup(SIGNAL_POPUP.UNFOLLOW)}
@@ -77,6 +78,7 @@ class SignalProviderControls extends Component<
             <GVButton
               className="program-details-description__invest-btn"
               onClick={this.openPopup(SIGNAL_POPUP.FOLLOW)}
+              disabled={!isAuthenticated}
             >
               {t("program-details-page.description.follow-trade")}
             </GVButton>

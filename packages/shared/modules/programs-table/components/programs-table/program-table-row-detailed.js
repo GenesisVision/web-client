@@ -13,12 +13,12 @@ import ProgramPeriodPie from "shared/components/program-period/program-period-pi
 import GVScroll from "shared/components/scroll/gvscroll";
 import TableRow from "shared/components/table/components/table-row";
 import TagProgramContainer from "shared/components/tag-program/tag-program-container";
+import Tooltip from "shared/components/tooltip/tooltip";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { composeManagerDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 import ProgramBigChart from "./program-big-chart/program-big-chart";
-import Tooltip from "shared/components/tooltip/tooltip";
 
 class ProgramTableRowDetailed extends Component {
   state = {
@@ -140,7 +140,6 @@ class ProgramTableRowDetailed extends Component {
                             program.currency
                           )}
                           suffix={` ${program.currency}`}
-                          decimalScale={0}
                           displayType="text"
                         />
                       </Tooltip>

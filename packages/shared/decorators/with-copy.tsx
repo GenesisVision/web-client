@@ -1,6 +1,5 @@
 import copy from "copy-to-clipboard";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
@@ -20,18 +19,18 @@ interface IDispatchMap {
   error(string: string): void;
 }
 
-type IOwnProps = InjectedTranslateProps & ICopyProps & IDispatchMap;
+type IOwnProps = ICopyProps & IDispatchMap;
+
+const voidFunction = (): void => {};
 
 class CopyHOC extends React.Component<IOwnProps> {
   onCopy = (message: string): void => {
-    const { t, error, success, errorMessage, successMessage } = this.props;
-    const sMessage = successMessage || t("copy.success");
-    const eMessage = errorMessage || t("copy.error");
+    const { error, success, errorMessage, successMessage } = this.props;
     try {
       copy(message);
-      success(sMessage);
+      successMessage ? success(successMessage) : voidFunction();
     } catch (e) {
-      error(eMessage);
+      errorMessage ? error(errorMessage) : voidFunction();
     }
   };
 
@@ -49,8 +48,7 @@ const Copy = compose<React.FunctionComponent<ICopyProps>>(
   connect<undefined, IDispatchMap, IOwnProps>(
     undefined,
     mapDispatchToProps
-  ),
-  translate()
+  )
 )(CopyHOC);
 
 export default Copy;

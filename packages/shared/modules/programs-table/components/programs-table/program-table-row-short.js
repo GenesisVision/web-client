@@ -102,7 +102,6 @@ const ProgramTableRowShort = ({
           <NumberFormat
             value={formatCurrencyValue(statistic.balanceBase.amount, currency)}
             suffix={` ${currency}`}
-            decimalScale={0}
             displayType="text"
           />
         </Tooltip>

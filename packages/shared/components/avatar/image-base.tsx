@@ -1,42 +1,32 @@
 import React, { Component } from "react";
 import withUrl from "shared/decorators/with-url";
 
-export interface ImageBaseProps {
+export interface IImageProps {
   url: string;
   alt: string;
-  defaultImage: string;
   className?: string;
   imageClassName?: string;
 }
 
-interface ImageBaseState {
-  imageLoadError: boolean;
+interface IImageBaseProps extends ImageBase {
+  defaultImage: string;
 }
 
-class ImageBase extends Component<ImageBaseProps, ImageBaseState> {
-  private readonly image: React.RefObject<any>;
+interface IImageBaseState {
+  error: boolean;
+}
 
-  constructor(props: ImageBaseProps) {
-    super(props);
-    this.image = React.createRef();
-  }
-
+class ImageBase extends Component<IImageBaseProps, IImageBaseState> {
   state = {
-    imageLoadError: false
+    error: false
   };
-
-  handleImageError = (event: any) => {
-    event.target.onerror = null;
-    this.setState({ imageLoadError: true });
+  handleError = (e: any) => {
+    e.target.onerror = null;
+    this.setState({ error: true });
   };
-
-  componentDidMount() {
-    this.image.current.onerror = this.handleImageError;
-  }
-
   render() {
     const { url, alt, defaultImage, className, imageClassName } = this.props;
-    const currentSrc = this.state.imageLoadError || !url ? defaultImage : url;
+    const currentSrc = this.state.error || !url ? defaultImage : url;
 
     return (
       <div className={className}>
@@ -44,7 +34,7 @@ class ImageBase extends Component<ImageBaseProps, ImageBaseState> {
           alt={alt}
           className={imageClassName}
           src={currentSrc}
-          ref={this.image}
+          onError={this.handleError}
         />
       </div>
     );

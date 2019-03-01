@@ -1,10 +1,7 @@
-import "./open-trades-table.scss";
-
-import { OrderOpenSignalSlaveModel } from "gv-api-web";
+import { OrderClosedSignalSlaveModel } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import moment from "moment";
-import { closeTrade } from "pages/dashboard/services/dashboard.service";
-import React, { Component, ComponentType } from "react";
+import React, { Component, ComponentType, Fragment } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { connect } from "react-redux";
@@ -12,13 +9,15 @@ import { Link } from "react-router-dom";
 import { Action, Dispatch, bindActionCreators, compose } from "redux";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
-import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
-import { CloseIcon } from "shared/components/icon/close-icon";
+import BaseProfitability from "shared/components/profitability/base-profitability";
 import Profitability from "shared/components/profitability/profitability";
 import { TableCell } from "shared/components/table/components";
+import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
+import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
 import { Column } from "shared/components/table/components/table.types";
+import { IUpdateFilterFunc } from "shared/components/table/components/table.types";
 import {
   composeManagerDetailsUrl,
   composeProgramDetailsUrl
@@ -26,68 +25,52 @@ import {
 import { formatValue } from "shared/utils/formatter";
 import { formatPercent } from "shared/utils/formatter";
 
-import { clearDashboardTradesTable } from "../../actions/dashboard.actions";
-import { getDashboardOpenTrades } from "../../services/dashboard-trades.service";
-import { DASHBOARD_OPEN_TRADES_COLUMNS } from "./dashboard-trades.constants";
-import { dashboardOpenTradesTableSelector } from "./dashboard-trades.selectors";
+import { clearCopytradingTable } from "../actions/copytrading-tables.actions";
+import { getCopytradingTradesHistory } from "../services/copytrading-tables.service";
+import { COPYTRADING_TRADES_HISTORY_COLUMNS } from "./copytrading-tables.constants";
+import { dashboardTradesHistoryTableSelector } from "./copytrading-tables.selectors";
 
-interface IOpenTradesTableOwnProps {
+interface ITradesHistoryTableOwnProps {
   title: string;
+  currency?: string;
 }
 
-interface IOpenTradesDispatchProps {
+interface ITradesHistoryDispatchProps {
   service: {
-    clearDashboardTradesTable(): void;
-    closeTrade(id: string, onSuccess: () => void): void;
+    clearCopytradingTable(): void;
   };
 }
 
-interface IOpenTradesTableState {
-  isConfirmPopupOpen: boolean;
-}
-
-class OpenTradesTable extends Component<
-  IOpenTradesTableOwnProps & InjectedTranslateProps & IOpenTradesDispatchProps,
-  IOpenTradesTableState
+class TradesHistoryTable extends Component<
+  ITradesHistoryTableOwnProps &
+    InjectedTranslateProps &
+    ITradesHistoryDispatchProps
 > {
-  state = {
-    isConfirmPopupOpen: false
-  };
-
   componentWillUnmount() {
-    this.props.service.clearDashboardTradesTable();
+    this.props.service.clearCopytradingTable();
   }
-
-  openConfirmPopup = () => {
-    this.setState({ isConfirmPopupOpen: true });
-  };
-
-  closeConfirmPopup = () => {
-    this.setState({ isConfirmPopupOpen: false });
-  };
-
-  closeTrade = (id: string, onSuccess: any) => () => {
-    this.props.service.closeTrade(id, onSuccess);
-    this.closeConfirmPopup();
-  };
-
   render() {
-    const { t, title } = this.props;
-    const { isConfirmPopupOpen } = this.state;
+    const { t, title, currency } = this.props;
     return (
       <TableContainer
-        className="open-trades-table"
-        getItems={getDashboardOpenTrades}
-        dataSelector={dashboardOpenTradesTableSelector}
+        getItems={getCopytradingTradesHistory(currency)}
+        dataSelector={dashboardTradesHistoryTableSelector}
         isFetchOnMount={true}
-        columns={DASHBOARD_OPEN_TRADES_COLUMNS}
+        columns={COPYTRADING_TRADES_HISTORY_COLUMNS}
+        renderFilters={(updateFilter: IUpdateFilterFunc, filtering: any) => (
+          <Fragment>
+            <DateRangeFilter
+              name={DATE_RANGE_FILTER_NAME}
+              value={filtering[DATE_RANGE_FILTER_NAME]}
+              onChange={updateFilter}
+              startLabel={t("filters.date-range.program-start")}
+            />
+          </Fragment>
+        )}
         renderHeader={(column: Column) =>
-          t(`investor.dashboard-page.open-trades-header.${column.name}`)
+          t(`investor.copytrading-tables.trades-history-header.${column.name}`)
         }
-        renderBodyRow={(
-          signalTrade: OrderOpenSignalSlaveModel,
-          updateRow: any
-        ) => (
+        renderBodyRow={(signalTrade: OrderClosedSignalSlaveModel) => (
           <TableRow>
             <TableCell className="programs-table__cell dashboard-programs__cell--title">
               <div className="dashboard-programs__cell--avatar-title">
@@ -131,6 +114,15 @@ class OpenTradesTable extends Component<
                 </GVButton>
               </Link>
             </TableCell>
+            <TableCell>
+              <BaseProfitability
+                isPositive={signalTrade.direction === "Buy"}
+                isNegative={signalTrade.direction === "Sell"}
+              >
+                {signalTrade.direction}
+              </BaseProfitability>
+            </TableCell>
+            <TableCell>{moment(signalTrade.date).format("lll")}</TableCell>
             <TableCell>{moment(signalTrade.date).format("lll")}</TableCell>
             <TableCell>{signalTrade.symbol}</TableCell>
             <TableCell>
@@ -148,43 +140,25 @@ class OpenTradesTable extends Component<
               />
             </TableCell>
             <TableCell>
+              <NumberFormat
+                value={formatValue(signalTrade.priceClose)}
+                displayType="text"
+                thousandSeparator=" "
+              />
+            </TableCell>
+            <TableCell>
               <Profitability
                 value={+formatPercent(signalTrade.profit)}
                 prefix="sign"
               >
                 <NumberFormat
                   value={formatPercent(signalTrade.profit)}
-                  allowNegative={false}
                   thousandSeparator=" "
                   displayType="text"
+                  allowNegative={false}
                   suffix=" %"
                 />
               </Profitability>
-            </TableCell>
-            <TableCell>
-              <GVButton
-                className="gv-btn--no-padding close-btn"
-                color="secondary"
-                onClick={this.openConfirmPopup}
-              >
-                <CloseIcon />
-              </GVButton>
-              <ConfirmPopup
-                open={isConfirmPopupOpen}
-                onClose={this.closeConfirmPopup}
-                onApply={this.closeTrade(signalTrade.id, updateRow)}
-                header={t(
-                  "investor.dashboard-page.trades.close-trade-confirm.header"
-                )}
-                body={t(
-                  "investor.dashboard-page.trades.close-trade-confirm.body",
-                  {
-                    symbol: signalTrade.symbol,
-                    volume: formatValue(signalTrade.volume)
-                  }
-                )}
-                applyButtonText={t("buttons.confirm")}
-              />
             </TableCell>
           </TableRow>
         )}
@@ -194,16 +168,13 @@ class OpenTradesTable extends Component<
 }
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
-  service: bindActionCreators(
-    { clearDashboardTradesTable, closeTrade },
-    dispatch
-  )
+  service: bindActionCreators({ clearCopytradingTable }, dispatch)
 });
 
-export default compose<ComponentType<IOpenTradesTableOwnProps>>(
+export default compose<ComponentType<ITradesHistoryTableOwnProps>>(
   translate(),
   connect(
     null,
     mapDispatchToProps
   )
-)(OpenTradesTable);
+)(TradesHistoryTable);
