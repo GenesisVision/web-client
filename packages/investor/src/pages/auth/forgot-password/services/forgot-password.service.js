@@ -1,9 +1,9 @@
+import { push } from "connected-react-router";
 import { HOME_ROUTE } from "pages/app/app.routes";
 import {
   EMAIL_PENDING_ROUTE,
   PASSWORD_RESTORE_ROUTE
 } from "pages/auth/forgot-password/forgot-password.routes";
-import { push } from "react-router-redux";
 import authActions from "shared/actions/auth-actions";
 import clearDataActionFactory from "shared/actions/clear-data.factory";
 import { EMAIL_PENDING } from "shared/actions/email-pending-actions";

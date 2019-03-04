@@ -1,6 +1,6 @@
+import { replace } from "connected-react-router";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { replace } from "react-router-redux";
 import { NOT_FOUND_PAGE_ROUTE } from "shared/components/not-found/not-found.routes";
 
 import TwoFactorCodeForm from "./two-factor-code-form";

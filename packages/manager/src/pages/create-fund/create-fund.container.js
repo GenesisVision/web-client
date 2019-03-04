@@ -1,13 +1,13 @@
+import { goBack } from "connected-react-router";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
-import { goBack } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
+import * as WalletServices from "shared/components/wallet/services/wallet.services";
 
 import CreateFundSettings from "./components/create-fund-settings/create-fund-settings";
 import * as createFundService from "./services/create-fund.service";
-import * as WalletServices from "shared/components/wallet/services/wallet.services";
 
 class CreateFundContainer extends Component {
   state = {

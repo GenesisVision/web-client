@@ -1,6 +1,6 @@
+import { replace } from "connected-react-router";
 import { PureComponent } from "react";
 import { connect } from "react-redux";
-import { replace } from "react-router-redux";
 import { bindActionCreators } from "redux";
 import { NOT_FOUND_PAGE_ROUTE } from "shared/components/not-found/not-found.routes";
 
