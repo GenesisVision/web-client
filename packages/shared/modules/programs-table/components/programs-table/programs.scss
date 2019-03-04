@@ -111,6 +111,7 @@ $description-block-width: 250px;
     font-size: $text-size/1.5;
     margin-bottom: 10px;
     display: block;
+    word-break: break-all;
   }
   &__chart {
     width: $chart-width/1.5;
