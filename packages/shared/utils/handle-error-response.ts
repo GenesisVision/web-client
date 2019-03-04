@@ -36,9 +36,4 @@ const handleErrorResponse: IHandleErrorResponseFunc = response => {
   };
 };
 
-export interface IError {
-  errorMessage: string;
-  code: string;
-}
-
 export default handleErrorResponse;
