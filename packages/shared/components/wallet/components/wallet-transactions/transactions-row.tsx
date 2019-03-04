@@ -26,23 +26,25 @@ const ConvertTransaction: React.FunctionComponent<ITransactionRowProps> = ({
 }) => {
   return (
     <Fragment>
-      <span className="wallet-transactions__col">
+      <div className="wallet-transactions__col">
         <WalletImage
           url={transaction.logoFrom}
           imageClassName="wallet-transactions__icon"
           alt={transaction.currencyFrom}
+          className="wallet-transactions__icon-container"
         />
         {transaction.currencyFrom}
-      </span>
-      <span className="wallet-transactions__back-arrow">&rarr;</span>
-      <span className="wallet-transactions__col">
+      </div>
+      <div className="wallet-transactions__back-arrow">&rarr;</div>
+      <div className="wallet-transactions__col">
         <WalletImage
           url={transaction.logoTo}
           imageClassName="wallet-transactions__icon"
           alt={transaction.currencyTo}
+          className="wallet-transactions__icon-container"
         />
         {transaction.currencyTo}
-      </span>
+      </div>
     </Fragment>
   );
 };
