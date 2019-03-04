@@ -15,7 +15,14 @@ import TagProgramContainer from "shared/components/tag-program/tag-program-conta
 import Tooltip from "shared/components/tooltip/tooltip";
 import { composeManagerDetailsUrl } from "shared/utils/compose-url";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
-import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
+import {
+  formatCurrencyValue,
+  formatValue,
+  formatValueDifferentDecimalScale
+} from "shared/utils/formatter";
+
+const DECIMAL_SCALE_SMALL_VALUE = 4;
+const DECIMAL_SCALE_BIG_VALUE = 2;
 
 class ProgramCard extends Component {
   state = {
@@ -165,9 +172,10 @@ class ProgramCard extends Component {
                 )}
               >
                 <NumberFormat
-                  value={formatCurrencyValue(
+                  value={formatValueDifferentDecimalScale(
                     program.statistic.balanceBase.amount,
-                    program.currency
+                    DECIMAL_SCALE_SMALL_VALUE,
+                    DECIMAL_SCALE_BIG_VALUE
                   )}
                   suffix={` ${program.currency}`}
                   displayType="text"
@@ -202,9 +210,10 @@ class ProgramCard extends Component {
               label={t("programs-page.programs-header.available-to-invest")}
             >
               <NumberFormat
-                value={formatCurrencyValue(
+                value={formatValueDifferentDecimalScale(
                   program.availableInvestmentBase,
-                  program.currency
+                  DECIMAL_SCALE_SMALL_VALUE,
+                  DECIMAL_SCALE_BIG_VALUE
                 )}
                 displayType="text"
                 suffix={` ${program.currency}`}

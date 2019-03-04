@@ -67,9 +67,14 @@ const formatCurrencyValue = (value: number, currency: string): string =>
     CURRENCY_FRACTIONS(currency)
   );
 
-const formatSmallValue = (value: number, decimalScale: number) => {
-  if (value < 1 && value > -1) return formatValue(value, decimalScale);
-  return formatValue(value);
+const formatValueDifferentDecimalScale = (
+  value: number,
+  decimalScaleSmallValue: number,
+  decimalScaleBigValue: number
+) => {
+  if (value < 1 && value > -1)
+    return formatValue(value, decimalScaleSmallValue);
+  return formatValue(value, decimalScaleBigValue);
 };
 
 export {
@@ -78,5 +83,5 @@ export {
   validateFraction,
   formatCurrencyValue,
   roundPercents,
-  formatSmallValue
+  formatValueDifferentDecimalScale
 };
