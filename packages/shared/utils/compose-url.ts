@@ -20,41 +20,37 @@ export const composeUrl = (route, slugParamName) => slugUrl =>
     [`:${slugParamName}`]: slugUrl
   });
 
-export const composeProgramDetailsUrl = slugUrl =>
+export const composeProgramDetailsUrl = (slugUrl: string): string =>
   replaceParams(PROGRAM_DETAILS_ROUTE, {
     [`:${PROGRAM_SLUG_URL_PARAM_NAME}`]: slugUrl
   });
 
-export const composeManagerDetailsUrl = slugUrl =>
+export const composeManagerDetailsUrl = (slugUrl: string): string =>
   replaceParams(MANAGER_DETAILS_ROUTE, {
     [`:${MANAGER_SLUG_URL_PARAM_NAME}`]: slugUrl
   });
 
-export const composeFundsDetailsUrl = slugUrl =>
+export const composeFundsDetailsUrl = (slugUrl: string): string =>
   replaceParams(FUND_DETAILS_ROUTE, {
     [`:${FUNDS_SLUG_URL_PARAM_NAME}`]: slugUrl
   });
 
-export const composeProgramNotificationsUrl = url => {
-  return replaceParams(PROGRAM_NOTIFICATIONS_ROUTE, {
+export const composeProgramNotificationsUrl = (url: string): string =>
+  replaceParams(PROGRAM_NOTIFICATIONS_ROUTE, {
     ":id": url
   });
-};
 
-export const composeFundNotificationsUrl = url => {
-  return replaceParams(FUND_NOTIFICATIONS_ROUTE, {
+export const composeFundNotificationsUrl = (url: string): string =>
+  replaceParams(FUND_NOTIFICATIONS_ROUTE, {
     ":id": url
   });
-};
 
-export const composeProgramFacetUrl = url => {
-  return replaceParams(PROGRAMS_FACET_ROUTE, {
+export const composeProgramFacetUrl = (url: string): string =>
+  replaceParams(PROGRAMS_FACET_ROUTE, {
     [`:${PROGRAM_SLUG_URL_PARAM_NAME}`]: url
   });
-};
 
-export const composeFundFacetUrl = url => {
-  return replaceParams(FUNDS_FACET_ROUTE, {
+export const composeFundFacetUrl = (url: string): string =>
+  replaceParams(FUNDS_FACET_ROUTE, {
     [`:${FUNDS_SLUG_URL_PARAM_NAME}`]: url
   });
-};
