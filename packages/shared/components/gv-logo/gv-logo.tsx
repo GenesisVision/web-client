@@ -1,8 +1,8 @@
 import "./gv-logo.scss";
 
-import React from "react";
+import * as React from "react";
 
-const GVLogo = () => {
+const GVLogo: React.FC = () => {
   return <i className="gv-logo" />;
 };
 
