@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { windowScroll } from "shared/actions/ui-actions";
 import GVScroll from "shared/components/scroll/gvscroll";
+import debounce from "debounce";
 
 class GVScrollContainer extends Component {
   scroll = React.createRef();
@@ -17,7 +18,9 @@ class GVScrollContainer extends Component {
 
   componentDidUpdate() {
     const scroll = this.scroll.current.getScrollTop();
-    this.props.services.handleScroll(scroll);
+    debounce(() => {
+      this.props.services.handleScroll(scroll);
+    }, 166);
   }
 
   getResizer = () => {
