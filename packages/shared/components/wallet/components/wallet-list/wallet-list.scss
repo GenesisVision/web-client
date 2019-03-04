@@ -35,17 +35,16 @@
 
   &__link {
     color: $main-color;
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    vertical-align: middle;
   }
 
   &__icon {
     @include adaptive-margin(right, $padding-xsmall);
     display: inline-block;
-    vertical-align: middle;
     width: 24px;
     height: 24px;
+    vertical-align: middle;
   }
 
   &__button-transfer {

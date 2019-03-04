@@ -24,9 +24,10 @@ export const attachToSignal = (
 export const updateAttachToSignal = (
   programId: string,
   requestParams: IRequestParams
-) =>
-  signalApi.v10SignalUpdatePost(
-    programId,
-    authService.getAuthArg(),
-    requestParams
-  );
+) => {
+  const params = {
+    ...requestParams,
+    id: programId
+  };
+  return signalApi.v10SignalUpdatePost(authService.getAuthArg(), params);
+};

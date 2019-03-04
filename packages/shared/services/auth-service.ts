@@ -1,5 +1,6 @@
 import * as jwt_decode from "jwt-decode";
 import { AUTH_TOKEN } from "utils/constants";
+
 import { Nullable } from "../utils/types";
 
 const canParseToken = (token: string): boolean => {
@@ -29,7 +30,7 @@ const getTokenData = () => decodeToken(getToken() || "");
 const getAuthArg = (): Nullable<string> => {
   const token = getToken();
   if (token === null) {
-    return null;
+    return "";
   }
 
   return `Bearer ${token}`;

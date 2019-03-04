@@ -11,10 +11,10 @@ import getParams from "shared/utils/get-params";
 
 export const getProgramDescription = () => (dispatch, getState) => {
   const authorization = authService.getAuthArg();
-  const { routing } = getState();
+  const { router } = getState();
 
   const programSlugUrl = getParams(
-    routing.location.pathname,
+    router.location.pathname,
     PROGRAM_DETAILS_ROUTE
   )[PROGRAM_SLUG_URL_PARAM_NAME];
 

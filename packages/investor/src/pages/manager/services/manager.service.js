@@ -8,10 +8,10 @@ import { MANAGER_SLUG_URL_PARAM_NAME } from "../manager.page";
 import { MANAGER_DETAILS_ROUTE } from "../manager.page.js";
 
 export const fetchManagerProfile = () => (dispatch, getState) => {
-  const { routing } = getState();
+  const { router } = getState();
 
   const managerSlugUrl = getParams(
-    routing.location.pathname,
+    router.location.pathname,
     MANAGER_DETAILS_ROUTE
   )[MANAGER_SLUG_URL_PARAM_NAME];
 

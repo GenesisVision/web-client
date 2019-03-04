@@ -1,10 +1,10 @@
+import { push } from "connected-react-router";
 import {
   FUNDS_FACET_ROUTE,
   FUNDS_FAVORITES_TAB_NAME,
   FUNDS_TAB_ROUTE
 } from "pages/funds/funds.routes";
 import qs from "qs";
-import { push } from "react-router-redux";
 import { composeFilters } from "shared/components/table/helpers/filtering.helpers";
 import {
   calculateSkipAndTake,
@@ -51,17 +51,17 @@ const composeRequestFilters = () => (dispatch, getState) => {
   const existingFilters = dispatch(getFundsFilters());
   let { page } = existingFilters;
 
-  const { routing } = getState();
+  const { router } = getState();
   const { currency } = getState().accountSettings;
 
   let filters = { currencySecondary: currency };
 
-  const { tab } = getParams(routing.location.pathname, FUNDS_TAB_ROUTE);
+  const { tab } = getParams(router.location.pathname, FUNDS_TAB_ROUTE);
   if (tab === FUNDS_FAVORITES_TAB_NAME) {
     filters.isFavorite = true;
   }
 
-  const { facetId } = getParams(routing.location.pathname, FUNDS_FACET_ROUTE);
+  const { facetId } = getParams(router.location.pathname, FUNDS_FACET_ROUTE);
   if (facetId) {
     filters.facet = facetId;
     itemsOnPage = 100;
@@ -90,8 +90,8 @@ const composeRequestFilters = () => (dispatch, getState) => {
 };
 
 export const getFundsFilters = () => (dispatch, getState) => {
-  const { routing, fundsData } = getState();
-  const queryParams = qs.parse(routing.location.search.slice(1));
+  const { router, fundsData } = getState();
+  const queryParams = qs.parse(router.location.search.slice(1));
 
   let pages = 0;
   let page = +queryParams.page || 1;
@@ -131,25 +131,25 @@ export const getFundsFilters = () => (dispatch, getState) => {
 };
 
 export const fundsChangePage = nextPage => (dispatch, getState) => {
-  const { routing } = getState();
-  const queryParams = qs.parse(routing.location.search.slice(1));
+  const { router } = getState();
+  const queryParams = qs.parse(router.location.search.slice(1));
   const page = nextPage + 1 || 1;
   queryParams.page = page;
-  const newUrl = routing.location.pathname + "?" + qs.stringify(queryParams);
+  const newUrl = router.location.pathname + "?" + qs.stringify(queryParams);
   dispatch(push(newUrl));
 };
 
 export const fundsChangeSorting = sorting => (dispatch, getState) => {
-  const { routing } = getState();
-  const queryParams = qs.parse(routing.location.search.slice(1));
+  const { router } = getState();
+  const queryParams = qs.parse(router.location.search.slice(1));
   queryParams.sorting = sorting;
-  const newUrl = routing.location.pathname + "?" + qs.stringify(queryParams);
+  const newUrl = router.location.pathname + "?" + qs.stringify(queryParams);
   dispatch(push(newUrl));
 };
 
 export const fundsChangeFilter = filter => (dispatch, getState) => {
-  const { routing } = getState();
-  const queryParams = qs.parse(routing.location.search.slice(1));
+  const { router } = getState();
+  const queryParams = qs.parse(router.location.search.slice(1));
   if (filter.value === undefined) {
     delete queryParams[filter.name];
   } else {
@@ -158,6 +158,6 @@ export const fundsChangeFilter = filter => (dispatch, getState) => {
   if (queryParams.page) {
     delete queryParams.page;
   }
-  const newUrl = routing.location.pathname + "?" + qs.stringify(queryParams);
+  const newUrl = router.location.pathname + "?" + qs.stringify(queryParams);
   dispatch(push(newUrl));
 };

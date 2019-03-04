@@ -1,5 +1,5 @@
+import { push } from "connected-react-router";
 import { HOME_ROUTE } from "pages/app/app.routes";
-import { push } from "react-router-redux";
 import authActions from "shared/actions/auth-actions";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import authApi from "shared/services/api-client/auth-api";

@@ -5,12 +5,12 @@ import {
 import getParams from "shared/utils/get-params";
 
 export const getCurrentFacet = () => (dispatch, getState) => {
-  const { routing, platformData } = getState();
+  const { router, platformData } = getState();
 
   if (!platformData.data) return { isPending: true };
 
   const { programsFacets } = platformData.data;
-  const facetUrl = getParams(routing.location.pathname, PROGRAMS_FACET_ROUTE)[
+  const facetUrl = getParams(router.location.pathname, PROGRAMS_FACET_ROUTE)[
     PROGRAM_SLUG_URL_PARAM_NAME
   ];
   const facet = programsFacets.find(x => x.url === facetUrl);

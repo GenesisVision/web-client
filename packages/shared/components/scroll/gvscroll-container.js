@@ -1,4 +1,5 @@
 import ResizeObserver from "@juggle/resize-observer";
+import debounce from "debounce";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { connect } from "react-redux";
@@ -17,7 +18,9 @@ class GVScrollContainer extends Component {
 
   componentDidUpdate() {
     const scroll = this.scroll.current.getScrollTop();
-    this.props.services.handleScroll(scroll);
+    debounce(() => {
+      this.props.services.handleScroll(scroll);
+    }, 166);
   }
 
   getResizer = () => {

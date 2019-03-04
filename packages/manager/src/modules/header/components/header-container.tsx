@@ -67,7 +67,7 @@ const mapStateToProps = (
 ): IHeaderContainerStateProps => ({
   info: state.profileHeader.info.data,
   isAuthenticated: state.authData.isAuthenticated,
-  backPath: state.routing.location ? state.routing.location.pathname : undefined
+  backPath: state.router.location ? state.router.location.pathname : undefined
 });
 
 export default connect(

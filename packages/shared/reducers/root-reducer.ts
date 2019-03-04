@@ -1,5 +1,4 @@
-import { RouterState } from "react-router-redux";
-import { Reducer } from "redux";
+import { RouterState } from "connected-react-router";
 import { ProgramsRatingState } from "shared/components/programs-rating/reducers/programs-rating.reducers";
 import { WalletState } from "shared/components/wallet/reducers/wallet.reducers";
 import { AlertMessagesState } from "shared/modules/alert-message/reducers/alert-message-reducers";
@@ -19,7 +18,6 @@ import { HeaderState } from "./header-reducer";
 type RootState = Readonly<{
   profileHeader: HeaderState;
   notificationSettings: NotificationSettingsState;
-  loadingBar: Reducer<any>;
   platformData: PlatformState;
   programsData: ProgramsListState;
   programsRating: ProgramsRatingState;
@@ -28,7 +26,7 @@ type RootState = Readonly<{
   programNotifications: ProgramNotificationsState;
   fundNotifications: FundNotificationsState;
   authData: AuthState;
-  routing: RouterState;
+  router: RouterState;
   alertMessages: AlertMessagesState;
   accountSettings: AccountSettingsState;
   wallet: WalletState;

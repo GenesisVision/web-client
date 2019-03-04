@@ -1,7 +1,6 @@
-import { WalletData } from "gv-api-web";
-import { IState } from "manager-web-portal/src/reducers";
+import { MultiWalletFilters, WalletData } from "gv-api-web";
 import * as React from "react";
-import { translate } from "react-i18next";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
@@ -10,8 +9,8 @@ import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-fund
 import WalletTransferPopup from "shared/modules/wallet-transfer/wallet-transfer-popup";
 import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
 import RootState from "shared/reducers/root-reducer";
-import filesService from "shared/services/file-service";
 
+import WalletImage from "../../avatar/wallet-image/wallet-image";
 import WalletBalanceButtons from "./wallet-balance/wallet-balance-buttons";
 import WalletBalanceElements from "./wallet-balance/wallet-balance-elements";
 import WalletBalanceLoader from "./wallet-balance/wallet-balance-loader";
@@ -20,10 +19,12 @@ import WalletContainer from "./wallet-container/wallet-container";
 interface IWalletProps {
   info?: WalletData;
   isPending: boolean;
-  t(str: string): string;
+  filters: MultiWalletFilters[];
 }
 
-class WalletCurrency extends React.Component<IWalletProps> {
+class WalletCurrency extends React.Component<
+  IWalletProps & InjectedTranslateProps
+> {
   state = {
     isOpenAddFundsPopup: false,
     isOpenWithdrawPopup: false,
@@ -68,11 +69,11 @@ class WalletCurrency extends React.Component<IWalletProps> {
           <div className="wallet-balance__wrapper">
             <h1 className="wallet-balance__title">
               {info.title}
-              <span> {t("wallet-page.wallet")}</span>
-              <img
-                src={filesService.getFileUrl(info.logo)}
-                className="wallet-balance__title-icon"
-                alt="Icon"
+              <span>&nbsp;{t("wallet-page.wallet")}</span>
+              <WalletImage
+                url={info.logo}
+                imageClassName="wallet-balance__title-icon"
+                alt={info.currency}
               />
             </h1>
             <WalletBalanceButtons

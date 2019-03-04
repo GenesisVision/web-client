@@ -1,4 +1,4 @@
-import { array, number, object, string, lazy } from "yup";
+import { array, lazy, number, object, string } from "yup";
 
 const createFundSettingsValidationSchema = ({ t, ...props }) =>
   lazy(values =>
