@@ -15,12 +15,13 @@ import investorApi from "shared/services/api-client/investor-api";
 import authService from "shared/services/auth-service";
 
 class FundWithdrawContainer extends PureComponent {
-  handleWithdraw = (id, percent) => {
+  handleWithdraw = id => ({ percent, currency }) => {
     return investorApi
       .v10InvestorFundsByIdWithdrawByPercentPost(
         id,
         percent,
-        authService.getAuthArg()
+        authService.getAuthArg(),
+        { currency }
       )
       .then(res => {
         this.props.onClose();
@@ -33,22 +34,18 @@ class FundWithdrawContainer extends PureComponent {
       });
   };
 
+  getFundWithdrawInfo = id => () => {
+    return this.props.services.getFundWithdrawInfo(id);
+  };
+
   render() {
-    const {
-      open,
-      onClose,
-      services,
-      id,
-      assetCurrency,
-      accountCurrency
-    } = this.props;
+    const { open, onClose, id, accountCurrency } = this.props;
     return (
       <Dialog open={open} onClose={onClose}>
         <FundWithdrawPopup
-          fundCurrency={assetCurrency}
           accountCurrency={accountCurrency}
-          fetchInfo={() => services.getFundWithdrawInfo(id)}
-          withdraw={percent => this.handleWithdraw(id, percent)}
+          fetchInfo={this.getFundWithdrawInfo(id)}
+          withdraw={this.handleWithdraw(id)}
         />
       </Dialog>
     );

@@ -18,6 +18,7 @@
     "generate": "Generate",
     "apply": "Apply",
     "cancel": "Cancel",
+    "next": "Next",
     "back": "Back",
     "close": "Close",
     "copy": "Copy",
@@ -290,15 +291,12 @@
     "withdraw-amount": "Withdraw amount",
     "available-to-withdraw": "Available for withdrawing",
     "amount-to-withdraw": "Amount to withdraw",
-    "next": "Next",
-    "info": "Amount of withdrawals can be changed depending on the exchange rate or the success of the Manager",
     "withdrawing": "Withdrawing",
-    "payout-date": "Payout date",
-    "back": "Back",
-    "submit": "Submit",
+    "wallet": "Wallet",
     "success-alert-message": "Request to withdrawal sent successfully.",
     "validation": {
-      "amount-more-than-available": "Amount is more than available for withdraw"
+      "required": "Amount is required",
+      "min-value": "Amount must be greater than or equal to 0.01"
     }
   },
   "not-found-page": {
