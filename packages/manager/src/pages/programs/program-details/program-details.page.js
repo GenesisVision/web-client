@@ -1,9 +1,9 @@
 import "shared/components/details/details.scss";
 
+import { push } from "connected-react-router";
 import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import { push } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
 import AboutLevelsContainerComponent from "shared/components/about-levels/about-levels-container";
 import NotFoundPage from "shared/components/not-found/not-found.routes";

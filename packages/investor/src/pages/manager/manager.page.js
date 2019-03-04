@@ -1,9 +1,9 @@
 import "./manager.page.scss";
 
+import { goBack } from "connected-react-router";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
-import { goBack } from "react-router-redux";
 import { bindActionCreators } from "redux";
 import ManagerDescription from "shared/components/manager/manager-description/manager-description";
 import ManagerHistorySection from "shared/components/manager/manager-history/manager-history-section";

@@ -1,10 +1,10 @@
 import "./back-button.scss";
 
+import { goBack } from "connected-react-router";
 import { GVButton } from "gv-react-components";
 import React from "react";
 import { translate } from "react-i18next";
 import connect from "react-redux/es/connect/connect";
-import { goBack } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
 
 const BackButton = ({ t, service, backPath }) => {
@@ -27,7 +27,7 @@ const BackButton = ({ t, service, backPath }) => {
 };
 
 const mapStateToProps = state => ({
-  backPath: state.routing.location.state
+  backPath: state.router.location.state
 });
 
 const mapDispatchToProps = dispatch => ({
