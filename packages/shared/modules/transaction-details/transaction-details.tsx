@@ -16,7 +16,7 @@ import ProfitDetails from "shared/modules/transaction-details/profit-details";
 import WithdrawalTransaction from "shared/modules/transaction-details/withdrawal-details";
 import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
-import { IError } from "shared/constants/constants";
+import { IError } from "shared/utils/handle-error-response";
 
 const Types = {
   Investing: InvestingTransaction,

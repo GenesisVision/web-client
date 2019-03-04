@@ -1,13 +1,13 @@
 import authService from "shared/services/auth-service";
 export const SERVER_CONNECTION_ERROR_CODE = "ServerConnectionError";
 
-const handleErrorResponse = response => {
+const handleErrorResponse = (response: any): IError => {
   if (response) {
     if (response.body !== null) {
       return {
         errorMessage: response.body.errors
-          .filter(x => !x.property)
-          .map(x => x.message)
+          .filter((x: any) => !x.property)
+          .map((x: any) => x.message)
           .join(", "),
         code: response.body.code
       };
@@ -17,13 +17,17 @@ const handleErrorResponse = response => {
       window.location.reload();
     }
   }
-  const error = {
+
+  return {
     errorMessage:
       "Server error occurred. Please try again later or contact the support department.",
     code: SERVER_CONNECTION_ERROR_CODE
   };
-
-  return error;
 };
+
+export interface IError {
+  errorMessage: string;
+  code: string;
+}
 
 export default handleErrorResponse;
