@@ -27,7 +27,7 @@ const getToken = (): Nullable<string> => {
 
 const getTokenData = () => decodeToken(getToken() || "");
 
-const getAuthArg = (): Nullable<string> => {
+const getAuthArg = (): string => {
   const token = getToken();
   if (token === null) {
     return "";
