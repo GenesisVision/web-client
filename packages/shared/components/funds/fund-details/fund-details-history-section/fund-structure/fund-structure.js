@@ -78,7 +78,7 @@ class FundStructure extends Component {
             </TableCell>
             <TableCell className="details-structure__cell fund-details-structure__cell">
               <NumberFormat
-                value={formatValue(item.current)}
+                value={formatValue(item.current, 2)}
                 suffix={"%"}
                 displayType="text"
               />

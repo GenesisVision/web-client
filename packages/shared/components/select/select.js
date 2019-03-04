@@ -62,7 +62,7 @@ class Select extends Component {
     if (value && value.length) return;
     const children = React.Children.toArray(this.props.children);
     const child = children[0];
-    if (child) {
+    if (child && children.length === 1) {
       const event = {
         target: { value: child.props.value, name }
       };

@@ -1,3 +1,4 @@
+import { push } from "connected-react-router";
 import {
   PROGRAMS_FACET_ROUTE,
   PROGRAMS_FAVORITES_TAB_NAME,
@@ -5,7 +6,6 @@ import {
   PROGRAM_SLUG_URL_PARAM_NAME
 } from "pages/programs/programs.routes";
 import qs from "qs";
-import { push } from "react-router-redux";
 import { composeFilters } from "shared/components/table/helpers/filtering.helpers";
 import {
   calculateSkipAndTake,
@@ -57,17 +57,17 @@ const composeRequestFilters = () => (dispatch, getState) => {
   const existingFilters = dispatch(getProgramsFilters());
   let { page } = existingFilters;
 
-  const { routing } = getState();
+  const { router } = getState();
   const { currency } = getState().accountSettings;
 
   let filters = { currencySecondary: currency };
 
-  const { tab } = getParams(routing.location.pathname, PROGRAMS_TAB_ROUTE);
+  const { tab } = getParams(router.location.pathname, PROGRAMS_TAB_ROUTE);
   if (tab === PROGRAMS_FAVORITES_TAB_NAME) {
     filters.isFavorite = true;
   }
 
-  const facetId = getParams(routing.location.pathname, PROGRAMS_FACET_ROUTE)[
+  const facetId = getParams(router.location.pathname, PROGRAMS_FACET_ROUTE)[
     PROGRAM_SLUG_URL_PARAM_NAME
   ];
   if (facetId) {
@@ -98,8 +98,8 @@ const composeRequestFilters = () => (dispatch, getState) => {
 };
 
 export const getProgramsFilters = () => (dispatch, getState) => {
-  const { routing, programsData } = getState();
-  const queryParams = qs.parse(routing.location.search.slice(1));
+  const { router, programsData } = getState();
+  const queryParams = qs.parse(router.location.search.slice(1));
 
   let pages = 0;
   let page = +queryParams.page || 1;
@@ -139,25 +139,25 @@ export const getProgramsFilters = () => (dispatch, getState) => {
 };
 
 export const programsChangePage = nextPage => (dispatch, getState) => {
-  const { routing } = getState();
-  const queryParams = qs.parse(routing.location.search.slice(1));
+  const { router } = getState();
+  const queryParams = qs.parse(router.location.search.slice(1));
   const page = nextPage + 1 || 1;
   queryParams.page = page;
-  const newUrl = routing.location.pathname + "?" + qs.stringify(queryParams);
+  const newUrl = router.location.pathname + "?" + qs.stringify(queryParams);
   dispatch(push(newUrl));
 };
 
 export const programsChangeSorting = sorting => (dispatch, getState) => {
-  const { routing } = getState();
-  const queryParams = qs.parse(routing.location.search.slice(1));
+  const { router } = getState();
+  const queryParams = qs.parse(router.location.search.slice(1));
   queryParams.sorting = sorting;
-  const newUrl = routing.location.pathname + "?" + qs.stringify(queryParams);
+  const newUrl = router.location.pathname + "?" + qs.stringify(queryParams);
   dispatch(push(newUrl));
 };
 
 export const programsChangeFilter = filter => (dispatch, getState) => {
-  const { routing } = getState();
-  const queryParams = qs.parse(routing.location.search.slice(1));
+  const { router } = getState();
+  const queryParams = qs.parse(router.location.search.slice(1));
   if (filter.value === undefined) {
     delete queryParams[filter.name];
   } else {
@@ -167,7 +167,7 @@ export const programsChangeFilter = filter => (dispatch, getState) => {
     delete queryParams.page;
   }
   const newUrl =
-    routing.location.pathname +
+    router.location.pathname +
     "?" +
     qs.stringify(queryParams, { indices: false });
   dispatch(push(newUrl));

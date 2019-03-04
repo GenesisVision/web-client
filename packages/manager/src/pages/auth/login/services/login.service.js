@@ -1,6 +1,6 @@
+import { push } from "connected-react-router";
 import { HOME_ROUTE } from "pages/app/app.routes";
 import { LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "pages/auth/login/login.routes";
-import { push } from "react-router-redux";
 import { setTwoFactorRequirement } from "shared/actions/2fa-actions";
 import authActions from "shared/actions/auth-actions";
 import clearDataActionFactory from "shared/actions/clear-data.factory";

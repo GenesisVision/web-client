@@ -1,12 +1,12 @@
 import "shared/components/details/details.scss";
 
+import { push } from "connected-react-router";
 import { ProgramBalanceChart, ProgramDetailsFull } from "gv-api-web";
 import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
 import { toggleReinvesting } from "modules/program-reinvesting/services/program-reinvesting.service";
 import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
 import React, { ComponentType, PureComponent } from "react";
 import { connect } from "react-redux";
-import { push } from "react-router-redux";
 import { InvestorRootState } from "reducers";
 import { Dispatch, bindActionCreators, compose } from "redux";
 import AboutLevelsContainerComponent from "shared/components/about-levels/about-levels-container";

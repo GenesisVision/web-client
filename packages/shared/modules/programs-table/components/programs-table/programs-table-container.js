@@ -1,9 +1,9 @@
+import { push } from "connected-react-router";
 import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
 import React, { Component, Fragment } from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { push } from "react-router-redux";
 import { bindActionCreators, compose } from "redux";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";

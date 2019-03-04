@@ -43,7 +43,7 @@ const WalletListButton: React.FC<
     <Tooltip
       render={() => (
         <div className="wallet-list__tooltip-button">
-          {t("wallet-page.buttons.withdrawal")}
+          {t("wallet-page.buttons.withdraw")}
         </div>
       )}
     >
@@ -60,7 +60,7 @@ const WalletListButton: React.FC<
     <Tooltip
       render={() => (
         <div className="wallet-list__tooltip-button">
-          {t("wallet-page.buttons.deposit")}
+          {t("wallet-page.buttons.add-funds")}
         </div>
       )}
     >

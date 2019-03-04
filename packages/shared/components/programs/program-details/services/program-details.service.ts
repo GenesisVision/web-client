@@ -18,10 +18,10 @@ export const getProgramDescription = () => (
   getState: () => RootState
 ) => {
   const authorization = authService.getAuthArg();
-  const { routing } = getState();
+  const { router } = getState();
 
   const programSlugUrl = getParams(
-    routing!.location!.pathname,
+    router.location.pathname,
     PROGRAM_DETAILS_ROUTE
   )[PROGRAM_SLUG_URL_PARAM_NAME];
 
@@ -69,7 +69,9 @@ export const getProgramStatistic = (
   });
 };
 
-export const closeProgram = (programId, opts) => dispatch => {
+export const closeProgram = (programId: string, opts: any) => (
+  dispatch: Dispatch
+) => {
   const authorization = authService.getAuthArg();
 
   return managerApi.v10ManagerProgramsByIdClosePost(
@@ -79,7 +81,9 @@ export const closeProgram = (programId, opts) => dispatch => {
   );
 };
 
-export const closePeriod = (programId, onSuccess) => dispatch => {
+export const closePeriod = (programId: string, onSuccess: () => void) => (
+  dispatch: Dispatch
+) => {
   const authorization = authService.getAuthArg();
   return managerApi
     .v10ManagerProgramsByIdPeriodClosePost(programId, authorization)
@@ -97,7 +101,11 @@ export const closePeriod = (programId, onSuccess) => dispatch => {
     });
 };
 
-export const fetchProgramTrades = (id, filters, currency) => {
+export const fetchProgramTrades = (
+  id: string,
+  filters: any,
+  currency: string
+) => {
   return programsApi
     .v10ProgramsByIdTradesGet(id, {
       ...filters,
@@ -111,7 +119,7 @@ export const fetchProgramTrades = (id, filters, currency) => {
     });
 };
 
-export const fetchOpenPositions = (id, filters) => {
+export const fetchOpenPositions = (id: string, filters: any) => {
   return programsApi
     .v10ProgramsByIdTradesOpenGet(id, { sorting: filters.sorting })
     .then(data => {

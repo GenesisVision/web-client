@@ -718,8 +718,8 @@
     },
     "buttons": {
       "internal-transfer": "Internal transfer",
-      "deposit": "Deposit",
-      "withdrawal": "Withdrawal"
+      "add-funds": "Add funds",
+      "withdraw": "Withdraw"
     },
     "transaction-actions": {
       "resend-email": "Resend confirmation email",
@@ -893,7 +893,7 @@
         "title": "GENERAL",
         "news-updates": "Fund news and updates",
         "end-of-period": "Notifications for the end of the period",
-        "fund-rebalancing": "Fund rebalancing",
+        "fund-rebalancing": "Fund structure changing",
         "FundRebalancing": {
           "disabled-alert": "Disabled fund rebalancing notifications",
           "enabled-alert": "Enabled fund rebalancing notifications"
