@@ -5,7 +5,7 @@ import NumberFormat from "react-number-format";
 import Hint from "shared/components/hint/hint";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
-import { HINT_POSITION } from "shared/components/hint/hint";
+import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
 
 interface IInvestmentProgramInfoProps {
   isOwnProgram?: boolean;
@@ -52,7 +52,7 @@ const InvestmentProgramInfo: React.FunctionComponent<
               />
             }
             className="program-details-description__short-statistic-hint"
-            vertical={HINT_POSITION.BOTTOM}
+            vertical={VERTICAL_POPOVER_POS.BOTTOM}
             tooltipContent={t(
               "program-details-page.description.entry-fee-levels"
             )}
