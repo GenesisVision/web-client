@@ -7,6 +7,7 @@ import Tooltip from "shared/components/tooltip/tooltip";
 import Profitability from "../profitability/profitability";
 import TagProgramItem from "./tag-program-item";
 import TagProgramTooltip from "./tag-program-tooltip";
+import { PROFITABILITY_VARIANT } from "shared/components/profitability/profitability.helper";
 
 const MAX_VISIBLE_TAGS = 2;
 
@@ -33,7 +34,7 @@ class TagProgramContainer extends React.Component<ITagProgramContainerProps> {
               <Profitability
                 className="tag-button"
                 value={reminder}
-                variant="chips"
+                variant={PROFITABILITY_VARIANT.CHIPS}
               >
                 + {reminder}
               </Profitability>
