@@ -7,7 +7,7 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import DetailsFavorite from "shared/components/details/details-description-section/details-description/details-favorite";
-import DetailsNotification from "shared/components/details/details-description-section/details-description/details-notificaton";
+import DetailsNotification from "shared/components/details/details-description-section/details-description/details-notification";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS,

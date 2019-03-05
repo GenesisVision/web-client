@@ -8,7 +8,7 @@ import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import DetailsFavorite from "shared/components/details/details-description-section/details-description/details-favorite";
-import DetailsNotification from "shared/components/details/details-description-section/details-description/details-notificaton";
+import DetailsNotification from "shared/components/details/details-description-section/details-description/details-notification";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
