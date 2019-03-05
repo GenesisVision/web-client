@@ -1,4 +1,5 @@
-import "shared/components/table/components/table.scss";
+import "./table.scss";
+import "./table-cards.scss";
 
 import classnames from "classnames";
 import React, { Component } from "react";
@@ -88,7 +89,7 @@ class Table extends Component {
             <div className={classnames("table", className)}>
               <TableBody
                 items={items}
-                className="programs-cards"
+                className="table-cards"
                 tag="div"
                 view={CARDS_VIEW}
               >

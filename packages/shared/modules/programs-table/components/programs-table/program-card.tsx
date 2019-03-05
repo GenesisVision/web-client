@@ -1,6 +1,6 @@
 import { ProgramDetails } from "gv-api-web";
 import { GVButton } from "gv-react-components";
-import React from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
@@ -36,8 +36,6 @@ const DECIMAL_SCALE_SMALL_VALUE = 4;
 const DECIMAL_SCALE_BIG_VALUE = 2;
 
 interface IProgramCardState {
-  isOpenInvestmentPopup: boolean;
-  isOpenWithdrawalPopup: boolean;
   anchor: Nullable<EventTarget>;
 }
 
@@ -46,9 +44,7 @@ class ProgramCard extends React.Component<
   IProgramCardState
 > {
   state = {
-    anchor: null,
-    isOpenInvestmentPopup: false,
-    isOpenWithdrawalPopup: false
+    anchor: null
   };
   handleOpenDropdown = (event: React.ChangeEvent<HTMLInputElement>) =>
     this.setState({ anchor: event.currentTarget });
@@ -59,9 +55,9 @@ class ProgramCard extends React.Component<
       toggleFavorite(program.id, program.personalDetails.isFavorite);
     };
     return (
-      <div className="programs-cards__card">
-        <div className="programs-cards__row">
-          <div className="programs-cards__avatar">
+      <div className="table-cards__card">
+        <div className="table-cards__row">
+          <div className="table-cards__avatar">
             <Link
               to={{
                 pathname: composeProgramDetailsUrl(program.url),
@@ -83,10 +79,10 @@ class ProgramCard extends React.Component<
               />
             </Link>
           </div>
-          <div className="programs-cards__main-info">
-            <div className="programs-cards__title-wrapper">
+          <div className="table-cards__main-info">
+            <div className="table-cards__title-wrapper">
               <Link
-                className="programs-cards__title"
+                className="table-cards__title"
                 to={{
                   pathname: composeProgramDetailsUrl(program.url),
                   state: `/ ${title}`
@@ -95,7 +91,7 @@ class ProgramCard extends React.Component<
                 {program.title}
               </Link>
               <Link
-                className="programs-cards__name"
+                className="table-cards__name"
                 to={{
                   pathname: composeManagerDetailsUrl(program.manager.url),
                   state: `/ ${title}`
@@ -104,7 +100,7 @@ class ProgramCard extends React.Component<
                 {program.manager.username}
               </Link>
             </div>
-            <div className="programs-cards__actions">
+            <div className="table-cards__actions">
               <ActionsCircleIcon
                 primary={!!this.state.anchor}
                 onClick={this.handleOpenDropdown}
@@ -157,12 +153,12 @@ class ProgramCard extends React.Component<
             <TagProgramContainer tags={program.tags} />
           </div>
         </div>
-        <div className="programs-cards__row">
-          <div className="programs-cards__chart">
+        <div className="table-cards__row">
+          <div className="table-cards__chart">
             <ProgramSimpleChart data={program.chart} programId={program.id} />
           </div>
-          <div className="programs-cards__chart-info">
-            <div className="programs-cards__profit">
+          <div className="table-cards__chart-info">
+            <div className="table-cards__profit">
               <Profitability
                 value={program.statistic.profitPercent}
                 variant="chips"
@@ -178,8 +174,8 @@ class ProgramCard extends React.Component<
             </div>
           </div>
         </div>
-        <div className="programs-cards__table">
-          <div className="programs-cards__table-column">
+        <div className="table-cards__table">
+          <div className="table-cards__table-column">
             <StatisticItem label={t("programs-page.programs-header.equity")}>
               <Tooltip
                 vertical={VERTICAL_POPOVER_POS.TOP}
@@ -211,7 +207,7 @@ class ProgramCard extends React.Component<
               />
             </StatisticItem>
           </div>
-          <div className="programs-cards__table-column">
+          <div className="table-cards__table-column">
             <StatisticItem label={t("programs-page.programs-header.investors")}>
               <NumberFormat
                 value={program.statistic.investorsCount}
@@ -227,7 +223,7 @@ class ProgramCard extends React.Component<
               />
             </StatisticItem>
           </div>
-          <div className="programs-cards__table-column">
+          <div className="table-cards__table-column">
             <StatisticItem
               label={t("programs-page.programs-header.available-to-invest")}
             >
