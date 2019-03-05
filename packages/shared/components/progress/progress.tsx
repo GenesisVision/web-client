@@ -1,18 +1,32 @@
 import "./progress.css";
 
-import React from "react";
+import * as React from "react";
 
-const Progress = ({ value, min, max, labelMin, labelMax }) => {
+interface IProgressProps {
+  value: number;
+  min: number;
+  max: number;
+  labelMin: string;
+  labelMax: string;
+}
+
+const Progress: React.FC<IProgressProps> = ({
+  value,
+  min,
+  max,
+  labelMin,
+  labelMax
+}) => {
   const minValue = min || 0;
   const maxValue = max || 100;
   const val = ((value - minValue) / (maxValue - minValue || 1)) * 100;
-  const renderLabelMin = () => {
+  const renderLabelMin = (): JSX.Element => {
     if (!labelMin) {
       return null;
     }
     return <div>{labelMin}</div>;
   };
-  const renderLabelMax = () => {
+  const renderLabelMax = (): JSX.Element => {
     if (!labelMax) {
       return null;
     }

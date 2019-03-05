@@ -8,7 +8,7 @@ import Portal from "shared/components/portal/portal";
 interface IModal {
   onClose?(event: React.MouseEvent<HTMLElement>): void;
   open: boolean;
-  disableBackdropClick: boolean;
+  disableBackdropClick?: boolean;
   transparentBackdrop: boolean;
   fixed?: boolean;
 }

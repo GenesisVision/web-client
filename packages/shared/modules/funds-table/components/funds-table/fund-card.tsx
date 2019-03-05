@@ -1,4 +1,4 @@
-import { ProgramDetails } from "gv-api-web";
+import { FundDetails } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -6,57 +6,44 @@ import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
-import LevelTooltip from "shared/components/level-tooltip/level-tooltip";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
 } from "shared/components/popover/popover";
 import Profitability from "shared/components/profitability/profitability";
-import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import TagProgramContainer from "shared/components/tag-program/tag-program-container";
-import Tooltip from "shared/components/tooltip/tooltip";
 import { composeManagerDetailsUrl } from "shared/utils/compose-url";
-import { composeProgramDetailsUrl } from "shared/utils/compose-url";
-import {
-  formatCurrencyValue,
-  formatValue,
-  formatValueDifferentDecimalScale
-} from "shared/utils/formatter";
+import { composeFundsDetailsUrl } from "shared/utils/compose-url";
+import { formatValue } from "shared/utils/formatter";
 import { Nullable } from "shared/utils/types";
 
+import FundAssetContainer from "../../../../components/fund-asset/fund-asset-container";
+
 interface IProgramCardProps {
-  program: ProgramDetails;
+  fund: FundDetails;
   toggleFavorite(programId: string, isFavorite: boolean): void;
   title: string;
 }
 
-const DECIMAL_SCALE_SMALL_VALUE = 4;
-const DECIMAL_SCALE_BIG_VALUE = 2;
-
 interface IProgramCardState {
-  isOpenInvestmentPopup: boolean;
-  isOpenWithdrawalPopup: boolean;
   anchor: Nullable<EventTarget>;
 }
 
-class ProgramCard extends React.Component<
+class FundCard extends React.Component<
   IProgramCardProps & InjectedTranslateProps,
   IProgramCardState
 > {
   state = {
-    anchor: null,
-    isOpenInvestmentPopup: false,
-    isOpenWithdrawalPopup: false
+    anchor: null
   };
   handleOpenDropdown = (event: React.ChangeEvent<HTMLInputElement>) =>
     this.setState({ anchor: event.currentTarget });
   handleCloseDropdown = () => this.setState({ anchor: null });
   render() {
-    const { t, program, toggleFavorite, title } = this.props;
+    const { t, fund, toggleFavorite, title } = this.props;
     const handleToggleFavorite = () => {
-      toggleFavorite(program.id, program.personalDetails.isFavorite);
+      toggleFavorite(fund.id, fund.personalDetails.isFavorite);
     };
     return (
       <div className="programs-cards__card">
@@ -64,22 +51,15 @@ class ProgramCard extends React.Component<
           <div className="programs-cards__avatar">
             <Link
               to={{
-                pathname: composeProgramDetailsUrl(program.url),
+                pathname: composeFundsDetailsUrl(fund.url),
                 state: `/ ${title}`
               }}
             >
               <AssetAvatar
-                url={program.logo}
-                level={program.level}
-                alt={program.title}
-                color={program.color}
+                url={fund.logo}
+                alt={fund.title}
+                color={fund.color}
                 size="medium"
-                tooltip={
-                  <LevelTooltip
-                    level={program.level}
-                    canLevelUp={program.rating.canLevelUp}
-                  />
-                }
               />
             </Link>
           </div>
@@ -88,20 +68,20 @@ class ProgramCard extends React.Component<
               <Link
                 className="programs-cards__title"
                 to={{
-                  pathname: composeProgramDetailsUrl(program.url),
+                  pathname: composeFundsDetailsUrl(fund.url),
                   state: `/ ${title}`
                 }}
               >
-                {program.title}
+                {fund.title}
               </Link>
               <Link
                 className="programs-cards__name"
                 to={{
-                  pathname: composeManagerDetailsUrl(program.manager.url),
+                  pathname: composeManagerDetailsUrl(fund.manager.url),
                   state: `/ ${title}`
                 }}
               >
-                {program.manager.username}
+                {fund.manager.username}
               </Link>
             </div>
             <div className="programs-cards__actions">
@@ -119,7 +99,7 @@ class ProgramCard extends React.Component<
                 <div className="popover-list">
                   <Link
                     to={{
-                      pathname: composeProgramDetailsUrl(program.url),
+                      pathname: composeFundsDetailsUrl(fund.url),
                       state: `/ ${title}`
                     }}
                   >
@@ -131,45 +111,42 @@ class ProgramCard extends React.Component<
                       {t("program-actions.details")}
                     </GVButton>
                   </Link>
-                  {program.personalDetails &&
-                    !program.personalDetails.isFavorite && (
-                      <GVButton
-                        variant="text"
-                        color="secondary"
-                        onClick={handleToggleFavorite}
-                      >
-                        {t("program-actions.add-to-favorites")}
-                      </GVButton>
-                    )}
-                  {program.personalDetails &&
-                    program.personalDetails.isFavorite && (
-                      <GVButton
-                        variant="text"
-                        color="secondary"
-                        onClick={handleToggleFavorite}
-                      >
-                        {t("program-actions.remove-from-favorites")}
-                      </GVButton>
-                    )}
+                  {fund.personalDetails && !fund.personalDetails.isFavorite && (
+                    <GVButton
+                      variant="text"
+                      color="secondary"
+                      onClick={handleToggleFavorite}
+                    >
+                      {t("program-actions.add-to-favorites")}
+                    </GVButton>
+                  )}
+                  {fund.personalDetails && fund.personalDetails.isFavorite && (
+                    <GVButton
+                      variant="text"
+                      color="secondary"
+                      onClick={handleToggleFavorite}
+                    >
+                      {t("program-actions.remove-from-favorites")}
+                    </GVButton>
+                  )}
                 </div>
               </Popover>
             </div>
-            <TagProgramContainer tags={program.tags} />
           </div>
         </div>
         <div className="programs-cards__row">
           <div className="programs-cards__chart">
-            <ProgramSimpleChart data={program.chart} programId={program.id} />
+            <ProgramSimpleChart data={fund.chart} programId={fund.id} />
           </div>
           <div className="programs-cards__chart-info">
             <div className="programs-cards__profit">
               <Profitability
-                value={program.statistic.profitPercent}
+                value={formatValue(fund.statistic.profitPercent, 2)}
                 variant="chips"
                 prefix="arrow"
               >
                 <NumberFormat
-                  value={formatValue(program.statistic.profitPercent, 2)}
+                  value={formatValue(fund.statistic.profitPercent, 2)}
                   suffix="%"
                   allowNegative={false}
                   displayType="text"
@@ -181,73 +158,39 @@ class ProgramCard extends React.Component<
         <div className="programs-cards__table">
           <div className="programs-cards__table-column">
             <StatisticItem label={t("programs-page.programs-header.equity")}>
-              <Tooltip
-                vertical={VERTICAL_POPOVER_POS.TOP}
-                render={() => (
-                  <div>
-                    {formatCurrencyValue(
-                      program.statistic.balanceGVT.amount,
-                      "GVT"
-                    )}{" "}
-                    {"GVT"}
-                  </div>
-                )}
-              >
-                <NumberFormat
-                  value={formatValueDifferentDecimalScale(
-                    program.statistic.balanceBase.amount,
-                    DECIMAL_SCALE_SMALL_VALUE,
-                    DECIMAL_SCALE_BIG_VALUE
-                  )}
-                  suffix={` ${program.currency}`}
-                  displayType="text"
-                />
-              </Tooltip>
-            </StatisticItem>
-            <StatisticItem label={t("programs-page.programs-header.period")}>
-              <ProgramPeriodPie
-                start={program.periodStarts}
-                end={program.periodEnds}
+              <NumberFormat
+                value={formatValue(fund.statistic.balanceGVT.amount)}
+                suffix=" GVT"
+                decimalScale={0}
+                displayType="text"
               />
             </StatisticItem>
           </div>
           <div className="programs-cards__table-column">
             <StatisticItem label={t("programs-page.programs-header.investors")}>
               <NumberFormat
-                value={program.statistic.investorsCount}
-                displayType="text"
-                decimalScale={0}
-              />
-            </StatisticItem>
-            <StatisticItem label={t("programs-page.programs-header.trades")}>
-              <NumberFormat
-                value={program.statistic.tradesCount}
+                value={fund.statistic.investorsCount}
                 displayType="text"
                 decimalScale={0}
               />
             </StatisticItem>
           </div>
           <div className="programs-cards__table-column">
-            <StatisticItem
-              label={t("programs-page.programs-header.available-to-invest")}
-            >
-              <NumberFormat
-                value={formatValueDifferentDecimalScale(
-                  program.availableInvestmentBase,
-                  DECIMAL_SCALE_SMALL_VALUE,
-                  DECIMAL_SCALE_BIG_VALUE
-                )}
-                displayType="text"
-                suffix={` ${program.currency}`}
-              />
-            </StatisticItem>
             <StatisticItem label={t("programs-page.programs-header.drawdown")}>
               <NumberFormat
-                value={formatValue(program.statistic.drawdownPercent, 2)}
+                value={formatValue(fund.statistic.drawdownPercent, 2)}
                 displayType="text"
                 suffix="%"
               />
             </StatisticItem>
+          </div>
+          <div className="programs-cards__table-row">
+            <FundAssetContainer
+              assets={fund.topFundAssets}
+              type={"short"}
+              size={3}
+              length={fund.totalAssetsCount}
+            />
           </div>
         </div>
       </div>
@@ -255,4 +198,4 @@ class ProgramCard extends React.Component<
   }
 }
 
-export default translate()(ProgramCard);
+export default translate()(FundCard);
