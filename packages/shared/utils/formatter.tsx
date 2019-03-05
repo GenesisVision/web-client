@@ -71,7 +71,7 @@ const formatValueDifferentDecimalScale = (
   value: number,
   decimalScaleSmallValue: number,
   decimalScaleBigValue: number
-) => {
+): string => {
   if (value < 1 && value > -1)
     return formatValue(value, decimalScaleSmallValue);
   return formatValue(value, decimalScaleBigValue);
