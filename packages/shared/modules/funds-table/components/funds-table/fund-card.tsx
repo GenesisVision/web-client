@@ -16,8 +16,15 @@ import ProgramSimpleChart from "shared/components/program-simple-chart/program-s
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { composeManagerDetailsUrl } from "shared/utils/compose-url";
 import { composeFundsDetailsUrl } from "shared/utils/compose-url";
-import { formatValue, formatValueDifferentDecimalScale } from "shared/utils/formatter";
+import {
+  formatValue,
+  formatValueDifferentDecimalScale
+} from "shared/utils/formatter";
 import { Nullable } from "shared/utils/types";
+import {
+  PROFITABILITY_PREFIX,
+  PROFITABILITY_VARIANT
+} from "shared/components/profitability/profitability.helper";
 
 const DECIMAL_SCALE_SMALL_VALUE = 4;
 const DECIMAL_SCALE_BIG_VALUE = 2;
@@ -144,8 +151,8 @@ class FundCard extends React.Component<
             <div className="table-cards__profit">
               <Profitability
                 value={formatValue(fund.statistic.profitPercent, 2)}
-                variant="chips"
-                prefix="arrow"
+                variant={PROFITABILITY_VARIANT.CHIPS}
+                prefix={PROFITABILITY_PREFIX.ARROW}
               >
                 <NumberFormat
                   value={formatValue(fund.statistic.profitPercent, 2)}
