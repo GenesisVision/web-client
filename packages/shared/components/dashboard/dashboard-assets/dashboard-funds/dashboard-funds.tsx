@@ -19,13 +19,14 @@ import { FUND } from "shared/constants/constants";
 import { composeFundsDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
-import AssetStatus from "../../../asset-status/asset-status";
+import AssetStatus from "shared/components/asset-status/asset-status";
 import {
   Column,
   IUpdateFilterFunc
 } from "../../../table/components/table.types";
 import { DASHBOARD_FUNDS_COLUMNS } from "../../dashboard.constants";
 import dashboardFundsTableSelector from "./dashboard-funds.selector";
+import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 
 interface IDashboardFundsProps {
   title: string;
@@ -136,7 +137,7 @@ const DashboardFunds: FunctionComponent<
           <TableCell className="funds-table__cell funds-table__cell--profit">
             <Profitability
               value={formatValue(fund.statistic.profitPercent, 2)}
-              prefix="sign"
+              prefix={PROFITABILITY_PREFIX.SIGN}
             >
               <NumberFormat
                 value={formatValue(fund.statistic.profitPercent, 2)}

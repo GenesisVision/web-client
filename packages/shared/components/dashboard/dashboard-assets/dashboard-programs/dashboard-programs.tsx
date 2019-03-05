@@ -32,6 +32,7 @@ import {
 } from "shared/components/table/components/table.types";
 import dashboardProgramsTableSelector from "./dashboard-programs.selector";
 import Profitability from "shared/components/profitability/profitability";
+import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 
 interface IDashboardProgramsProps {
   role: string;
@@ -136,7 +137,7 @@ const DashboardPrograms: FunctionComponent<
           <TableCell className="programs-table__cell dashboard-programs__cell--profit">
             <Profitability
               value={formatValue(program.statistic.profitPercent, 2)}
-              prefix="sign"
+              prefix={PROFITABILITY_PREFIX.SIGN}
             >
               <NumberFormat
                 value={formatValue(program.statistic.profitPercent, 2)}
