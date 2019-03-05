@@ -147,9 +147,9 @@ $program-height: 372px;
   }
   .fund-assets {
     flex-wrap: nowrap;
-    &:nth-child(3) {
-      margin-right: 0;
-    }
+  }
+  .fund-asset:nth-child(3) {
+    margin-right: 0;
   }
   @include media-breakpoint-phone() {
     .program-avatar {
