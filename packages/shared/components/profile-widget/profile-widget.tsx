@@ -1,35 +1,51 @@
 import "./profile-widget.scss";
 
-import classnames from "classnames";
+import classNames from "classnames";
 import { GVButton } from "gv-react-components";
-import PropTypes from "prop-types";
-import React, { Component } from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
 import { DetailsIcon } from "shared/components/icon/details-icon";
 import { LogoutIcon } from "shared/components/icon/logout-icon";
 import { SettingsIcon } from "shared/components/icon/settings-icon";
-import Popover from "shared/components/popover/popover";
+import Popover, {
+  HORIZONTAL_POPOVER_POS
+} from "shared/components/popover/popover";
 import {
   PROFILE_ROUTE,
   SETTINGS_ROUTE
 } from "shared/components/profile/profile.constants";
 import FilterArrowIcon from "shared/components/table/components/filtering/filter-arrow-icon";
+import { Nullable } from "shared/utils/types";
 
-class ProfileWidget extends Component {
+interface IProfileWidgetProps {
+  avatar?: string;
+  logout(): void;
+  email: string;
+  className?: string;
+}
+interface IProfileWidgetState {
+  anchor: Nullable<EventTarget>;
+}
+
+class ProfileWidget extends React.Component<
+  IProfileWidgetProps & InjectedTranslateProps,
+  IProfileWidgetState
+> {
   state = {
     anchor: null
   };
 
-  handleOpen = event => this.setState({ anchor: event.currentTarget });
+  handleOpen = (event: React.MouseEvent<HTMLDivElement>): void =>
+    this.setState({ anchor: event.currentTarget });
 
-  handleClose = () => this.setState({ anchor: null });
+  handleClose = (): void => this.setState({ anchor: null });
 
   render() {
-    const { t, avatar, email, logout, className } = this.props;
+    const { t, avatar, email = "", logout, className } = this.props;
     return (
-      <div className={classnames("profile-widget", className)}>
+      <div className={classNames("profile-widget", className)}>
         <div className="profile-widget__content" onClick={this.handleOpen}>
           <ProfileAvatar
             url={avatar}
@@ -42,7 +58,7 @@ class ProfileWidget extends Component {
         <Popover
           anchorEl={this.state.anchor}
           onClose={this.handleClose}
-          horizontal={"right"}
+          horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
         >
           <div className="profile-menu">
             <div className="profile-menu__header">{email}</div>
@@ -72,16 +88,5 @@ class ProfileWidget extends Component {
     );
   }
 }
-
-ProfileWidget.propTypes = {
-  avatar: PropTypes.string,
-  logout: PropTypes.func.isRequired,
-  email: PropTypes.string.isRequired,
-  className: PropTypes.string
-};
-
-ProfileWidget.defaultProps = {
-  email: ""
-};
 
 export default translate()(ProfileWidget);

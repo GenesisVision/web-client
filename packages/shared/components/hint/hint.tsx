@@ -5,14 +5,14 @@ import * as React from "react";
 import Tooltip from "shared/components/tooltip/tooltip";
 import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
 
-interface IHint {
-  content: React.ComponentType;
-  tooltipContent: React.ComponentType;
+interface IHintProps {
+  content: JSX.Element;
+  tooltipContent: JSX.Element;
   className: string;
   vertical: VERTICAL_POPOVER_POS;
 }
 
-const Hint: React.FC<IHint> = ({
+const Hint: React.FC<IHintProps> = ({
   content,
   tooltipContent,
   className,

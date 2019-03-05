@@ -1,12 +1,23 @@
 import "./pager.scss";
 
 import classNames from "classnames";
-import PropTypes from "prop-types";
-import React, { PureComponent } from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
 
-class Pager extends PureComponent {
-  generateVisiblePages = (first, count) => {
+interface IPagerProps {
+  total: number;
+  current: number;
+  countVisiblePages: number;
+  onPageChanged(page: number): void;
+}
+
+interface IPagerButton {
+  page: number;
+  label?: string;
+  key?: string | number;
+}
+
+class Pager extends React.Component<IPagerProps> {
+  generateVisiblePages = (first: number, count: number): number[] => {
     const pages = [];
     for (let i = first; i < first + count; i++) pages.push(i);
     return pages;
@@ -14,9 +25,11 @@ class Pager extends PureComponent {
 
   render() {
     const { total, current, countVisiblePages, onPageChanged } = this.props;
-    const handleChange = page => () => onPageChanged(page);
-    const PagerSeparator = () => <div className="pager__separator">...</div>;
-    const PagerButton = ({ page, label }) => (
+    const handleChange = (page: number) => (): void => onPageChanged(page);
+    const PagerSeparator = (): JSX.Element => (
+      <div className="pager__separator">...</div>
+    );
+    const PagerButton: React.FC<IPagerButton> = ({ page, label }) => (
       <div
         className={classNames("pager__button", {
           "pager__button--current": page === current
@@ -62,11 +75,4 @@ class Pager extends PureComponent {
   }
 }
 
-Pager.propTypes = {
-  total: PropTypes.number.isRequired,
-  current: PropTypes.number.isRequired,
-  countVisiblePages: PropTypes.number.isRequired,
-  onPageChanged: PropTypes.func.isRequired
-};
-
-export default translate()(Pager);
+export default Pager;

@@ -9,7 +9,7 @@ import {
 import { Nullable } from "shared/utils/types";
 
 interface ITooltipProps {
-  component?: React.ComponentType;
+  component?: JSX.Element;
   title?: string;
   render: Function;
   horizontal?: HORIZONTAL_POPOVER_POS;
