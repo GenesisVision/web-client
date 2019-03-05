@@ -9,6 +9,8 @@ import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filte
 import FundsTableRow from "./fund-table-row";
 import FundsTableHeaderCell from "./funds-table-header-cell";
 import { FUNDS_TABLE_COLUMNS } from "./funds-table.constants";
+import FundCard from "./fund-card";
+import ProgramTableSortingValue from "../../../programs-table/components/programs-table/program-table-sorting";
 
 const FundsTable = ({
   t,
@@ -34,6 +36,7 @@ const FundsTable = ({
       columns={FUNDS_TABLE_COLUMNS}
       items={data.funds}
       isPending={data.isPending}
+      showSwitchView
       renderFilters={() => (
         <Fragment>
           <DateRangeFilter
@@ -50,6 +53,12 @@ const FundsTable = ({
           isAuthenticated={isAuthenticated}
         />
       )}
+      renderSorting={column => (
+        <ProgramTableSortingValue
+          column={column}
+          isAuthenticated={isAuthenticated}
+        />
+      )}
       renderBodyRow={fund => (
         <FundsTableRow
           title={title}
@@ -57,6 +66,9 @@ const FundsTable = ({
           toggleFavorite={toggleFavorite}
           isAuthenticated={isAuthenticated}
         />
+      )}
+      renderBodyCard={fund => (
+        <FundCard title={title} fund={fund} toggleFavorite={toggleFavorite} />
       )}
     />
   );
