@@ -1,23 +1,31 @@
 import "./modal.scss";
 
-import classnames from "classnames";
-import PropTypes from "prop-types";
-import React, { Component } from "react";
+import classNames from "classnames";
+import * as React from "react";
 import EventListener from "react-event-listener";
 import Portal from "shared/components/portal/portal";
 
-class Modal extends Component {
-  handleKeyPress = event => {
+interface IModal {
+  onClose: Function;
+  open: boolean;
+  disableBackdropClick: boolean;
+  transparentBackdrop: boolean;
+  fixed: boolean;
+}
+
+class Modal extends React.Component<IModal> {
+  handleKeyPress = (
+    event: KeyboardEvent & React.MouseEvent<HTMLElement>
+  ): void => {
     if (event.keyCode !== 27) return;
-
     this.handleClose(event);
   };
 
-  handleBackdropClick = event => {
+  handleBackdropClick = (event: React.MouseEvent<HTMLElement>): void => {
     this.handleClose(event);
   };
 
-  handleClose = event => {
+  handleClose = (event: React.MouseEvent<HTMLElement>): void => {
     if (this.props.onClose) {
       this.props.onClose(event);
     }
@@ -34,7 +42,7 @@ class Modal extends Component {
     return (
       <Portal open={open}>
         <div
-          className={classnames("modal", {
+          className={classNames("modal", {
             "modal--position-absolute": !disableBackdropClick && !fixed,
             "modal--position-fixed": fixed
           })}
@@ -42,7 +50,7 @@ class Modal extends Component {
           {disableBackdropClick || (
             <EventListener target={document} onKeyUp={this.handleKeyPress}>
               <div
-                className={classnames("modal__backdrop", {
+                className={classNames("modal__backdrop", {
                   "modal__backdrop--transparent": transparentBackdrop
                 })}
                 onClick={this.handleBackdropClick}
@@ -55,13 +63,5 @@ class Modal extends Component {
     );
   }
 }
-
-Modal.propTypes = {
-  onClose: PropTypes.func,
-  open: PropTypes.bool,
-  disableBackdropClick: PropTypes.bool,
-  transparentBackdrop: PropTypes.bool,
-  fixed: PropTypes.bool
-};
 
 export default Modal;
