@@ -1,14 +1,25 @@
 import "./program-avatar.css";
 
-import classnames from "classnames";
-import PropTypes from "prop-types";
-import React from "react";
+import classNames from "classnames";
+import * as React from "react";
 
-import avatarStub from "../../shared/media/manager-avatar.png";
+import avatarStub from "shared/media/manager-avatar.png";
 
-const ProgramAvatar = ({ url, level, isTournament, className }) => {
+interface IProgramAvatarProps {
+  url: string;
+  level: number;
+  isTournament?: boolean;
+  className?: string;
+}
+
+const ProgramAvatar: React.FC<IProgramAvatarProps> = ({
+  url,
+  level,
+  isTournament,
+  className
+}) => {
   return (
-    <div className={classnames("program-avatar", className)}>
+    <div className={classNames("program-avatar", className)}>
       {isTournament && (
         <span className="program-avatar__label program-avatar__label--tournament">
           <i className="fas fa-trophy" />
@@ -24,13 +35,6 @@ const ProgramAvatar = ({ url, level, isTournament, className }) => {
       </span>
     </div>
   );
-};
-
-ProgramAvatar.protoTypes = {
-  url: PropTypes.string.isRequired,
-  level: PropTypes.number.isRequired,
-  isTournament: PropTypes.bool,
-  className: PropTypes.string
 };
 
 export default ProgramAvatar;
