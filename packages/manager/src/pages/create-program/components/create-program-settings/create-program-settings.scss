@@ -54,12 +54,9 @@
       letter-spacing: 0.4px;
       position: absolute;
       top: 86px;
-      left: 0px;
+      left: 0;
       cursor: pointer;
-
-      & .hint__content {
-        width: 237px;
-      }
+      width: 100%;
     }
   }
 
@@ -235,6 +232,7 @@
     font-size: $font-size-small;
     letter-spacing: 0.4px;
     margin: $padding-xsmall 0 $padding-xxsmall;
+    width: 100%;
   }
   &__row {
     display: flex;
