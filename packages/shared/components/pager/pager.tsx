@@ -29,9 +29,8 @@ class Pager extends React.Component<IPagerProps> {
     const PagerSeparator = (): JSX.Element => (
       <div className="pager__separator">...</div>
     );
-    const PagerButton: React.FC<IPagerButton> = ({ page, label, key }) => (
+    const PagerButton: React.FC<IPagerButton> = ({ page, label }) => (
       <div
-        key={key}
         className={classNames("pager__button", {
           "pager__button--current": page === current
         })}
