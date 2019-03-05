@@ -1,10 +1,11 @@
 import { FundDetails } from "gv-api-web";
 import { GVButton } from "gv-react-components";
-import React from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
@@ -15,24 +16,25 @@ import ProgramSimpleChart from "shared/components/program-simple-chart/program-s
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { composeManagerDetailsUrl } from "shared/utils/compose-url";
 import { composeFundsDetailsUrl } from "shared/utils/compose-url";
-import { formatValue } from "shared/utils/formatter";
+import { formatValue, formatValueDifferentDecimalScale } from "shared/utils/formatter";
 import { Nullable } from "shared/utils/types";
 
-import FundAssetContainer from "../../../../components/fund-asset/fund-asset-container";
+const DECIMAL_SCALE_SMALL_VALUE = 4;
+const DECIMAL_SCALE_BIG_VALUE = 2;
 
-interface IProgramCardProps {
+interface IFundCardProps {
   fund: FundDetails;
   toggleFavorite(programId: string, isFavorite: boolean): void;
   title: string;
 }
 
-interface IProgramCardState {
+interface IFundCardState {
   anchor: Nullable<EventTarget>;
 }
 
 class FundCard extends React.Component<
-  IProgramCardProps & InjectedTranslateProps,
-  IProgramCardState
+  IFundCardProps & InjectedTranslateProps,
+  IFundCardState
 > {
   state = {
     anchor: null
@@ -46,9 +48,9 @@ class FundCard extends React.Component<
       toggleFavorite(fund.id, fund.personalDetails.isFavorite);
     };
     return (
-      <div className="programs-cards__card">
-        <div className="programs-cards__row">
-          <div className="programs-cards__avatar">
+      <div className="table-cards__card">
+        <div className="table-cards__row">
+          <div className="table-cards__avatar">
             <Link
               to={{
                 pathname: composeFundsDetailsUrl(fund.url),
@@ -63,10 +65,10 @@ class FundCard extends React.Component<
               />
             </Link>
           </div>
-          <div className="programs-cards__main-info">
-            <div className="programs-cards__title-wrapper">
+          <div className="table-cards__main-info">
+            <div className="table-cards__title-wrapper">
               <Link
-                className="programs-cards__title"
+                className="table-cards__title"
                 to={{
                   pathname: composeFundsDetailsUrl(fund.url),
                   state: `/ ${title}`
@@ -75,7 +77,7 @@ class FundCard extends React.Component<
                 {fund.title}
               </Link>
               <Link
-                className="programs-cards__name"
+                className="table-cards__name"
                 to={{
                   pathname: composeManagerDetailsUrl(fund.manager.url),
                   state: `/ ${title}`
@@ -84,7 +86,7 @@ class FundCard extends React.Component<
                 {fund.manager.username}
               </Link>
             </div>
-            <div className="programs-cards__actions">
+            <div className="table-cards__actions">
               <ActionsCircleIcon
                 primary={!!this.state.anchor}
                 onClick={this.handleOpenDropdown}
@@ -108,7 +110,7 @@ class FundCard extends React.Component<
                       color="secondary"
                       onClick={this.handleCloseDropdown}
                     >
-                      {t("program-actions.details")}
+                      {t("fund-actions.details")}
                     </GVButton>
                   </Link>
                   {fund.personalDetails && !fund.personalDetails.isFavorite && (
@@ -117,7 +119,7 @@ class FundCard extends React.Component<
                       color="secondary"
                       onClick={handleToggleFavorite}
                     >
-                      {t("program-actions.add-to-favorites")}
+                      {t("fund-actions.add-to-favorites")}
                     </GVButton>
                   )}
                   {fund.personalDetails && fund.personalDetails.isFavorite && (
@@ -126,7 +128,7 @@ class FundCard extends React.Component<
                       color="secondary"
                       onClick={handleToggleFavorite}
                     >
-                      {t("program-actions.remove-from-favorites")}
+                      {t("fund-actions.remove-from-favorites")}
                     </GVButton>
                   )}
                 </div>
@@ -134,12 +136,12 @@ class FundCard extends React.Component<
             </div>
           </div>
         </div>
-        <div className="programs-cards__row">
-          <div className="programs-cards__chart">
+        <div className="table-cards__row">
+          <div className="table-cards__chart">
             <ProgramSimpleChart data={fund.chart} programId={fund.id} />
           </div>
-          <div className="programs-cards__chart-info">
-            <div className="programs-cards__profit">
+          <div className="table-cards__chart-info">
+            <div className="table-cards__profit">
               <Profitability
                 value={formatValue(fund.statistic.profitPercent, 2)}
                 variant="chips"
@@ -155,19 +157,22 @@ class FundCard extends React.Component<
             </div>
           </div>
         </div>
-        <div className="programs-cards__table">
-          <div className="programs-cards__table-column">
-            <StatisticItem label={t("programs-page.programs-header.equity")}>
+        <div className="table-cards__table table-cards__table--flex-wrap">
+          <div className="table-cards__table-column">
+            <StatisticItem label={t("funds-page.funds-header.balance")}>
               <NumberFormat
-                value={formatValue(fund.statistic.balanceGVT.amount)}
+                value={formatValueDifferentDecimalScale(
+                  fund.statistic.balanceGVT.amount,
+                  DECIMAL_SCALE_SMALL_VALUE,
+                  DECIMAL_SCALE_BIG_VALUE
+                )}
                 suffix=" GVT"
-                decimalScale={0}
                 displayType="text"
               />
             </StatisticItem>
           </div>
-          <div className="programs-cards__table-column">
-            <StatisticItem label={t("programs-page.programs-header.investors")}>
+          <div className="table-cards__table-column">
+            <StatisticItem label={t("funds-page.funds-header.investors")}>
               <NumberFormat
                 value={fund.statistic.investorsCount}
                 displayType="text"
@@ -175,8 +180,8 @@ class FundCard extends React.Component<
               />
             </StatisticItem>
           </div>
-          <div className="programs-cards__table-column">
-            <StatisticItem label={t("programs-page.programs-header.drawdown")}>
+          <div className="table-cards__table-column">
+            <StatisticItem label={t("funds-page.funds-header.drawdown")}>
               <NumberFormat
                 value={formatValue(fund.statistic.drawdownPercent, 2)}
                 displayType="text"
@@ -184,7 +189,7 @@ class FundCard extends React.Component<
               />
             </StatisticItem>
           </div>
-          <div className="programs-cards__table-row">
+          <div className="table-cards__table-row">
             <FundAssetContainer
               assets={fund.topFundAssets}
               type={"short"}

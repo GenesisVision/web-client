@@ -6,9 +6,9 @@ import { Table } from "shared/components/table/components";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 
-import ProgramTableSortingValue from "../../../programs-table/components/programs-table/program-table-sorting";
 import FundCard from "./fund-card";
 import FundsTableRow from "./fund-table-row";
+import FundTableSortingValue from "./fund-table-sorting";
 import FundsTableHeaderCell from "./funds-table-header-cell";
 import { FUNDS_TABLE_COLUMNS } from "./funds-table.constants";
 
@@ -54,7 +54,7 @@ const FundsTable = ({
         />
       )}
       renderSorting={column => (
-        <ProgramTableSortingValue
+        <FundTableSortingValue
           column={column}
           isAuthenticated={isAuthenticated}
         />
