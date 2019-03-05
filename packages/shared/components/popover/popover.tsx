@@ -27,10 +27,10 @@ interface IPopoverProps {
   horizontal: HORIZONTAL_POPOVER_POS;
   vertical?: VERTICAL_POPOVER_POS;
   anchorEl: Nullable<anchorElType>;
-  noPadding: boolean;
+  noPadding?: boolean;
   disableBackdropClick?: boolean;
   className?: string;
-  scrollTop: number;
+  scrollTop?: number;
 }
 interface IPopoverState {
   windowWidth: number;
