@@ -3,7 +3,7 @@ import React, { FunctionComponent } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import Hint from "shared/components/hint/hint";
-import { HINT_POSITION } from "shared/components/hint/hint";
+import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
 
 interface ISignalsFeeFormPartialProps {
   subscriptionFeeFieldName: string;
@@ -47,7 +47,7 @@ const SignalsFeeFormPartial: FunctionComponent<
             "manager.create-program-page.settings.hints.subscription-fee"
           )}
           className="create-program-settings__fee-hint"
-          vertical={HINT_POSITION.BOTTOM}
+          vertical={VERTICAL_POPOVER_POS.BOTTOM}
           tooltipContent={t(
             "manager.create-program-page.settings.hints.subscription-fee-description"
           )}
@@ -70,7 +70,7 @@ const SignalsFeeFormPartial: FunctionComponent<
             "manager.create-program-page.settings.hints.signal-success-fee"
           )}
           className="create-program-settings__fee-hint"
-          vertical={HINT_POSITION.BOTTOM}
+          vertical={VERTICAL_POPOVER_POS.BOTTOM}
           tooltipContent={t(
             "manager.create-program-page.settings.hints.signal-success-fee-description"
           )}
