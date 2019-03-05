@@ -1,17 +1,18 @@
 import { ProgramDetailsFull } from "gv-api-web";
-import React, { FunctionComponent } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import Hint from "shared/components/hint/hint";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
+import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
 
 interface IInvestmentProgramInfoProps {
   isOwnProgram?: boolean;
   programDescription: ProgramDetailsFull;
 }
 
-const InvestmentProgramInfo: FunctionComponent<
+const InvestmentProgramInfo: React.FunctionComponent<
   InjectedTranslateProps & IInvestmentProgramInfoProps
 > = ({ t, programDescription, isOwnProgram }) => {
   const {
@@ -51,7 +52,7 @@ const InvestmentProgramInfo: FunctionComponent<
               />
             }
             className="program-details-description__short-statistic-hint"
-            vertical={"bottom"}
+            vertical={VERTICAL_POPOVER_POS.BOTTOM}
             tooltipContent={t(
               "program-details-page.description.entry-fee-levels"
             )}

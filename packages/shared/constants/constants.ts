@@ -40,7 +40,3 @@ export enum ASSET {
   PROGRAM = "PROGRAM",
   FUND = "FUND"
 }
-export interface IError {
-  errorMessage: string;
-  code: string;
-}

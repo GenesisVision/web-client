@@ -67,10 +67,21 @@ const formatCurrencyValue = (value: number, currency: string): string =>
     CURRENCY_FRACTIONS(currency)
   );
 
+const formatValueDifferentDecimalScale = (
+  value: number,
+  decimalScaleSmallValue: number,
+  decimalScaleBigValue: number
+): string => {
+  if (value < 1 && value > -1)
+    return formatValue(value, decimalScaleSmallValue);
+  return formatValue(value, decimalScaleBigValue);
+};
+
 export {
   formatValue,
   formatPercent,
   validateFraction,
   formatCurrencyValue,
-  roundPercents
+  roundPercents,
+  formatValueDifferentDecimalScale
 };
