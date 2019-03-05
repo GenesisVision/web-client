@@ -1,11 +1,11 @@
 import ResizeObserver from "@juggle/resize-observer";
+import debounce from "debounce";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { windowScroll } from "shared/actions/ui-actions";
 import GVScroll from "shared/components/scroll/gvscroll";
-import debounce from "debounce";
 
 class GVScrollContainer extends Component {
   scroll = React.createRef();

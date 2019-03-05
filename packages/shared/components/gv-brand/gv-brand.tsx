@@ -1,8 +1,8 @@
 import "./gv-brand.scss";
 
-import React from "react";
+import * as React from "react";
 
-const GVBrand = () => {
+const GVBrand: React.FC = () => {
   return <i className={"gv-brand"} />;
 };
 

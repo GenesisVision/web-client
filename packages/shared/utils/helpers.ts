@@ -1,16 +1,24 @@
-const merge = function() {
-  const args = [...arguments];
+import { Nullable } from "./types";
+
+const merge = function(): object {
+  const args: object[] = [...arguments];
 
   let result = {};
 
-  args.forEach(obj => {
+  args.forEach((obj: object) => {
     result = { ...result, ...obj };
   });
 
   return result;
 };
 
-const allowValuesNumberFormat = ({ from, to }) => values => {
+const allowValuesNumberFormat = ({
+  from,
+  to
+}: {
+  from: number;
+  to: number;
+}) => (values: { floatValue: number; formattedValue: string }): boolean => {
   const { formattedValue, floatValue } = values;
   return (
     formattedValue === "" ||
@@ -19,7 +27,7 @@ const allowValuesNumberFormat = ({ from, to }) => values => {
   );
 };
 
-const getNumberWithoutSuffix = str => {
+const getNumberWithoutSuffix = (str: string): Nullable<number> => {
   let result = null;
   let coincidence = str.match(/^[^\d]*(\d+)/);
 
@@ -30,9 +38,8 @@ const getNumberWithoutSuffix = str => {
   return result;
 };
 
-const convertToArray = value => {
-  return Array.isArray(value) ? value : [value];
-};
+const convertToArray = (value: any[] | any): any[] =>
+  Array.isArray(value) ? value : [value];
 
 export {
   merge,
