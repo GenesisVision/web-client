@@ -3,18 +3,13 @@ import "./hint.scss";
 import classNames from "classnames";
 import * as React from "react";
 import Tooltip from "shared/components/tooltip/tooltip";
-
-export enum HINT_POSITION {
-  TOP = "top",
-  BOTTOM = "bottom",
-  CENTER = "center"
-}
+import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
 
 interface IHint {
-  content: JSX.Element;
-  tooltipContent: JSX.Element;
+  content: React.ComponentType;
+  tooltipContent: React.ComponentType;
   className: string;
-  vertical: HINT_POSITION;
+  vertical: VERTICAL_POPOVER_POS;
 }
 
 const Hint: React.FC<IHint> = ({
