@@ -2,11 +2,24 @@ import "./gv-qr.scss";
 
 import classnames from "classnames";
 import { GVColors } from "gv-react-components";
-import PropTypes from "prop-types";
 import QRCode from "qrcode.react";
-import React from "react";
+import * as React from "react";
 
-const GVqr = ({ value, size, figureColor, backgroundColor, className }) => (
+interface IGVqr {
+  value: number | string;
+  size?: number;
+  figureColor?: string;
+  backgroundColor?: string;
+  className?: string;
+}
+
+const GVqr: React.FC<IGVqr> = ({
+  value,
+  size = 180,
+  figureColor = GVColors.$backgroundColor,
+  backgroundColor = "white",
+  className
+}) => (
   <div
     className={classnames("gv-qr", className)}
     style={{
@@ -26,18 +39,5 @@ const GVqr = ({ value, size, figureColor, backgroundColor, className }) => (
     ) : null}
   </div>
 );
-GVqr.propTypes = {
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  size: PropTypes.number,
-  figureColor: PropTypes.string,
-  backgroundColor: PropTypes.string,
-  className: PropTypes.string
-};
-
-GVqr.defaultProps = {
-  size: 180,
-  figureColor: GVColors.$backgroundColor,
-  backgroundColor: "white"
-};
 
 export default GVqr;
