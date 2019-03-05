@@ -6,11 +6,11 @@ import EventListener from "react-event-listener";
 import Portal from "shared/components/portal/portal";
 
 interface IModal {
-  onClose: Function;
+  onClose?(event: React.MouseEvent<HTMLElement>): void;
   open: boolean;
   disableBackdropClick: boolean;
   transparentBackdrop: boolean;
-  fixed: boolean;
+  fixed?: boolean;
 }
 
 class Modal extends React.Component<IModal> {

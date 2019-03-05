@@ -35,6 +35,7 @@ class Tooltip extends React.Component<ITooltipProps, ITooltipState> {
   render() {
     const child = React.Children.only(this.props.children);
     const { component, title, render } = this.props;
+    const { anchor } = this.state;
     return (
       <React.Fragment>
         <child.type
@@ -47,7 +48,7 @@ class Tooltip extends React.Component<ITooltipProps, ITooltipState> {
         <Popover
           disableBackdropClick
           noPadding
-          anchorEl={this.state.anchor}
+          anchorEl={anchor}
           className="tooltip__popover"
           vertical={this.props.vertical || VERTICAL_POPOVER_POS.TOP}
           horizontal={this.props.horizontal || HORIZONTAL_POPOVER_POS.CENTER}

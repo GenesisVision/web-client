@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import Modal from "shared/components/modal/modal";
 import { RefObject } from "react";
 import RootState from "shared/reducers/root-reducer";
+import { Nullable } from "shared/utils/types";
 
 export enum VERTICAL_POPOVER_POS {
   TOP = "top",
@@ -22,10 +23,10 @@ export enum HORIZONTAL_POPOVER_POS {
 export type anchorElType = { [keys: string]: any } | Function;
 
 interface IPopoverProps {
-  onClose?(): void;
+  onClose?(event: React.MouseEvent<HTMLElement>): void;
   horizontal: HORIZONTAL_POPOVER_POS;
   vertical: VERTICAL_POPOVER_POS;
-  anchorEl: anchorElType;
+  anchorEl: Nullable<anchorElType>;
   noPadding: boolean;
   disableBackdropClick: boolean;
   className: string;
@@ -38,28 +39,38 @@ interface IPopoverState {
 
 const MARGIN_OFFSET = 10;
 
-const getAnchorEl = (el: anchorElType) => {
+const getAnchorEl = (el: Nullable<anchorElType>) => {
   return typeof el === "function" ? el() : el;
 };
 
 class Popover extends React.Component<IPopoverProps, IPopoverState> {
   popover: RefObject<HTMLDivElement>;
+  constructor(props: IPopoverProps) {
+    super(props);
+    this.state = {
+      windowWidth: 0,
+      windowHeight: 0
+    };
+    this.popover = React.createRef();
+  }
+
+  componentDidUpdate() {
+    if (this.popover.current) {
+      const left = this.getLeft();
+      const top = this.getTop();
+      const width = this.getAnchorBounds().width;
+      this.popover.current.style.left = left;
+      this.popover.current.style.top = top;
+      this.popover.current.style.minWidth = `${width}px`;
+    }
+  }
+
   static getDerivedStateFromProps() {
     return {
       windowWidth: window.innerWidth,
       windowHeight: window.innerHeight
     };
   }
-
-  constructor(props: IPopoverProps) {
-    super(props);
-    this.state = {
-      windowWidth: null,
-      windowHeight: null
-    };
-    this.popover = React.createRef();
-  }
-
   getAnchorBounds = (): ClientRect => {
     const anchorEl = getAnchorEl(this.props.anchorEl);
     const box = anchorEl.getBoundingClientRect();
@@ -153,17 +164,6 @@ class Popover extends React.Component<IPopoverProps, IPopoverState> {
         </div>
       </Modal>
     );
-  }
-
-  componentDidUpdate() {
-    if (this.popover.current) {
-      const left = this.getLeft();
-      const top = this.getTop();
-      const width = this.getAnchorBounds().width;
-      this.popover.current.style.left = left;
-      this.popover.current.style.top = top;
-      this.popover.current.style.minWidth = `${width}px`;
-    }
   }
 }
 
