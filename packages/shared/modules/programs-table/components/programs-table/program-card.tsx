@@ -1,3 +1,4 @@
+import { ProgramDetails } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -19,12 +20,10 @@ import Tooltip from "shared/components/tooltip/tooltip";
 import { composeManagerDetailsUrl } from "shared/utils/compose-url";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
-import { ProgramDetails } from "gv-api-web";
 import { Nullable } from "shared/utils/types";
 
 interface IProgramCardProps {
   program: ProgramDetails;
-  onExpandClick(): void;
   toggleFavorite(programId: string, isFavorite: boolean): void;
   title: string;
 }
@@ -48,16 +47,12 @@ class ProgramCard extends React.Component<
     this.setState({ anchor: event.currentTarget });
   handleCloseDropdown = () => this.setState({ anchor: null });
   render() {
-    const { t, program, onExpandClick, toggleFavorite, title } = this.props;
-    console.log(this.props);
+    const { t, program, toggleFavorite, title } = this.props;
     const handleToggleFavorite = () => {
-      console.log(
-        toggleFavorite(program.id, program.personalDetails.isFavorite)
-      );
       toggleFavorite(program.id, program.personalDetails.isFavorite);
     };
     return (
-      <div onClick={onExpandClick} className="programs-cards__card">
+      <div className="programs-cards__card">
         <div className="programs-cards__row">
           <div className="programs-cards__avatar">
             <Link
@@ -108,8 +103,6 @@ class ProgramCard extends React.Component<
                 onClick={this.handleOpenDropdown}
               />
               <Popover
-                className=""
-                disableBackdropClick={false}
                 horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
                 vertical={VERTICAL_POPOVER_POS.BOTTOM}
                 anchorEl={this.state.anchor}
