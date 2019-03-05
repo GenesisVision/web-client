@@ -1,3 +1,4 @@
+import { ProgramsLevelsInfo } from "gv-api-web";
 import {
   PROGRAM_DETAILS_ROUTE,
   PROGRAM_SLUG_URL_PARAM_NAME
@@ -7,6 +8,7 @@ import { getDefaultPeriod } from "shared/components/chart/chart-period/chart-per
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import RootState from "shared/reducers/root-reducer";
 import managerApi from "shared/services/api-client/manager-api";
+import platformApi from "shared/services/api-client/platform-api";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
@@ -128,4 +130,10 @@ export const fetchOpenPositions = (id: string, filters: any) => {
         items: data.trades
       });
     });
+};
+
+export const fetchInvestmentsLevels = (
+  currency: string
+): Promise<ProgramsLevelsInfo> => {
+  return platformApi.v10PlatformLevelsGet({ currency });
 };

@@ -17,23 +17,16 @@ import {
 } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
 
+import InvestmentLimitsPopover from "./investment-limits-popover";
+
 class ProgramDetailsDescriptionMain extends Component {
   state = {
     isOpenAboutLevels: false,
     anchor: null
   };
-  handleOpenAboutLevels = () => {
-    this.setState({ isOpenAboutLevels: true });
-    this.handleCloseDropdown();
-  };
-  handleCloseAboutLevels = () => this.setState({ isOpenAboutLevels: false });
+
   handleOpenDropdown = event => this.setState({ anchor: event.currentTarget });
   handleCloseDropdown = () => this.setState({ anchor: null });
-  getCurrentLimit(currentLevel) {
-    return this.props.investmentsLimits.find(
-      LevelInfo => LevelInfo.level === currentLevel
-    ).investmentLimit;
-  }
 
   render() {
     const { anchor, isOpenAboutLevels } = this.state;
@@ -65,53 +58,13 @@ class ProgramDetailsDescriptionMain extends Component {
             noPadding
             onClose={this.handleCloseDropdown}
           >
-            <div className="popover-levels">
-              <div className="popover-levels__block">
-                <h4 className="popover-levels__title">
-                  {t("program-details-page.popover.genesis-level")}{" "}
-                  {programDescription.level}
-                </h4>
-                {programDescription.rating.canLevelUp && (
-                  <StatisticItem accent label={t("level-tooltip.level-up")}>
-                    {t("level-tooltip.top10")}
-                  </StatisticItem>
-                )}
-
-                {investmentsLimits.length && (
-                  <StatisticItem
-                    accent
-                    label={t("program-details-page.popover.invest-limit")}
-                  >
-                    <NumberFormat
-                      value={formatValue(
-                        this.getCurrentLimit(programDescription.level)
-                      )}
-                      thousandSeparator={" "}
-                      displayType="text"
-                      suffix={` GVT`}
-                    />
-                  </StatisticItem>
-                )}
-              </div>
-              <div className="popover-levels__block popover-levels__text-block">
-                <div className="popover-levels__text">
-                  {t("program-details-page.popover.text")}
-                </div>
-                <GVButton
-                  variant="text"
-                  onClick={this.handleOpenAboutLevels}
-                  color="secondary"
-                  className="popover-levels__about"
-                >
-                  {t("program-details-page.popover.about-levels")} &#8250;
-                </GVButton>
-              </div>
-            </div>
+            <InvestmentLimitsPopover
+              currency={programDescription.currency}
+              level={programDescription.level}
+              canLevelUp={programDescription.rating.canLevelUp}
+              closePopover={this.handleCloseDropdown}
+            />
           </Popover>
-          <AboutLevelsContainerComponent
-            open={isOpenAboutLevels}
-            onClose={this.handleCloseAboutLevels}
-          />
         </div>
         <div className="program-details-description__info">
           <h1 className="title-small-padding">{programDescription.title}</h1>
