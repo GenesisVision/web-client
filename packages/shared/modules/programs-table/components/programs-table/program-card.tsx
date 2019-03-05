@@ -1,12 +1,15 @@
 import { GVButton } from "gv-react-components";
-import React, { Component } from "react";
-import { translate } from "react-i18next";
+import React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
 import LevelTooltip from "shared/components/level-tooltip/level-tooltip";
-import Popover from "shared/components/popover/popover";
+import Popover, {
+  HORIZONTAL_POPOVER_POS,
+  VERTICAL_POPOVER_POS
+} from "shared/components/popover/popover";
 import Profitability from "shared/components/profitability/profitability";
 import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
@@ -16,18 +19,41 @@ import Tooltip from "shared/components/tooltip/tooltip";
 import { composeManagerDetailsUrl } from "shared/utils/compose-url";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
+import { ProgramDetails } from "gv-api-web";
+import { Nullable } from "shared/utils/types";
 
-class ProgramCard extends Component {
+interface IProgramCardProps {
+  program: ProgramDetails;
+  onExpandClick(): void;
+  toggleFavorite(programId: string, isFavorite: boolean): void;
+  title: string;
+}
+
+interface IProgramCardState {
+  isOpenInvestmentPopup: boolean;
+  isOpenWithdrawalPopup: boolean;
+  anchor: Nullable<EventTarget>;
+}
+
+class ProgramCard extends React.Component<
+  IProgramCardProps & InjectedTranslateProps,
+  IProgramCardState
+> {
   state = {
     anchor: null,
     isOpenInvestmentPopup: false,
     isOpenWithdrawalPopup: false
   };
-  handleOpenDropdown = event => this.setState({ anchor: event.currentTarget });
+  handleOpenDropdown = (event: React.ChangeEvent<HTMLInputElement>) =>
+    this.setState({ anchor: event.currentTarget });
   handleCloseDropdown = () => this.setState({ anchor: null });
   render() {
     const { t, program, onExpandClick, toggleFavorite, title } = this.props;
+    console.log(this.props);
     const handleToggleFavorite = () => {
+      console.log(
+        toggleFavorite(program.id, program.personalDetails.isFavorite)
+      );
       toggleFavorite(program.id, program.personalDetails.isFavorite);
     };
     return (
@@ -82,8 +108,10 @@ class ProgramCard extends Component {
                 onClick={this.handleOpenDropdown}
               />
               <Popover
-                horizontal="right"
-                vertical="bottom"
+                className=""
+                disableBackdropClick={false}
+                horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
+                vertical={VERTICAL_POPOVER_POS.BOTTOM}
                 anchorEl={this.state.anchor}
                 noPadding
                 onClose={this.handleCloseDropdown}
@@ -154,6 +182,7 @@ class ProgramCard extends Component {
           <div className="programs-cards__table-column">
             <StatisticItem label={t("programs-page.programs-header.equity")}>
               <Tooltip
+                vertical={VERTICAL_POPOVER_POS.TOP}
                 render={() => (
                   <div>
                     {formatCurrencyValue(
