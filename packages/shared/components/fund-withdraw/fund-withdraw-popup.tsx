@@ -21,18 +21,23 @@ enum FUND_WITHDRAW_FORM {
   CONFIRM = "CONFIRM"
 }
 
+type FundWithdrawalInfoResponse = {
+  withdrawalInfo: FundWithdrawInfo;
+  wallets: WalletData[];
+};
+
 interface IFundWithdrawPopupOwnProps {
-  fetchInfo(): Promise<FundWithdrawInfo>;
+  fetchInfo(): Promise<FundWithdrawalInfoResponse>;
   withdraw(value: FundWithdraw): Promise<void>;
 }
 
 interface IFundWithdrawPopupProps extends IFundWithdrawPopupOwnProps {
-  wallets?: WalletData[];
   accountCurrency: string;
 }
 
 interface IFundWithdrawPopupState {
   withdrawalInfo?: FundWithdrawInfo;
+  wallets?: WalletData[];
   isPending: boolean;
   errorMessage?: string;
   enteredValue?: FundWithdraw;
@@ -47,6 +52,7 @@ class FundWithdrawPopup extends Component<
     super(props);
     this.state = {
       withdrawalInfo: undefined,
+      wallets: undefined,
       isPending: false,
       errorMessage: undefined,
       enteredValue: undefined,
@@ -59,7 +65,7 @@ class FundWithdrawPopup extends Component<
     this.setState({ isPending: true });
     fetchInfo()
       .then(data => {
-        this.setState({ withdrawalInfo: data, isPending: false });
+        this.setState({ ...data, isPending: false });
       })
       .catch((e: ResponseError) =>
         this.setState({ errorMessage: e.errorMessage, isPending: false })
@@ -95,7 +101,7 @@ class FundWithdrawPopup extends Component<
   };
 
   getRate = (currency: string) => {
-    const { wallets } = this.props;
+    const { wallets } = this.state;
 
     if (!wallets) return 1;
 
@@ -103,9 +109,10 @@ class FundWithdrawPopup extends Component<
   };
 
   render() {
-    const { wallets, accountCurrency } = this.props;
+    const { accountCurrency } = this.props;
     const {
       withdrawalInfo,
+      wallets,
       enteredValue,
       errorMessage,
       isPending,
@@ -159,8 +166,8 @@ class FundWithdrawPopup extends Component<
 }
 
 const mapStateToProps = (state: RootState) => ({
-  accountCurrency: state.accountSettings.currency,
-  wallets: state.wallet.info.data ? state.wallet.info.data.wallets : undefined
+  accountCurrency: state.accountSettings.currency
+  //wallets: state.wallet.info.data ? state.wallet.info.data.wallets : undefined
 });
 
 export default connect(mapStateToProps)(FundWithdrawPopup);
