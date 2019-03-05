@@ -3,7 +3,9 @@ import "./tag-filter.scss";
 import { ProgramTag } from "gv-api-web";
 import * as React from "react";
 import { Fragment } from "react";
-import Popover from "shared/components/popover/popover";
+import Popover, {
+  HORIZONTAL_POPOVER_POS
+} from "shared/components/popover/popover";
 import TagProgramItem from "shared/components/tag-program/tag-program-item";
 
 import TagFilterButton from "./tag-filter-button";
@@ -80,7 +82,7 @@ class TagFilter extends React.Component<ITagFilterProps, ITagFilterState> {
         <Popover
           anchorEl={anchor}
           onClose={this.handleClosePopover}
-          horizontal={"right"}
+          horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
           noPadding
         >
           <TagFilterPopover

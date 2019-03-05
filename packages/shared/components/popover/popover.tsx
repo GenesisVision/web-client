@@ -25,11 +25,11 @@ export type anchorElType = { [keys: string]: any } | Function;
 interface IPopoverProps {
   onClose?(event: React.MouseEvent<HTMLElement>): void;
   horizontal: HORIZONTAL_POPOVER_POS;
-  vertical: VERTICAL_POPOVER_POS;
+  vertical?: VERTICAL_POPOVER_POS;
   anchorEl: Nullable<anchorElType>;
   noPadding: boolean;
-  disableBackdropClick: boolean;
-  className: string;
+  disableBackdropClick?: boolean;
+  className?: string;
   scrollTop: number;
 }
 interface IPopoverState {
