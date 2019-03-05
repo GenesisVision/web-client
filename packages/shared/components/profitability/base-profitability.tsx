@@ -5,7 +5,7 @@ import { PROFITABILITY_VARIANT } from "./profitability.helper";
 
 interface IBaseProfitabilityProps {
   className?: string;
-  children: JSX.Element;
+  children: JSX.Element | string;
   isPositive: boolean;
   isNegative: boolean;
   variant?: PROFITABILITY_VARIANT;

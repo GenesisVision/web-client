@@ -14,14 +14,16 @@ import DateRangeFilter from "shared/components/table/components/filtering/date-r
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
-import { Column } from "shared/components/table/components/table.types";
-import { IUpdateFilterFunc } from "shared/components/table/components/table.types";
+import {
+  Column,
+  IUpdateFilterFunc
+} from "shared/components/table/components/table.types";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatPercent } from "shared/utils/formatter";
-import { formatValue } from "shared/utils/formatter";
 
 import { DASHBOARD_COPYTRADING_COLUMNS } from "./dashboard-copytrading.constants";
 import { dashboardCopytradingTableSelector } from "./dashboard-copytrading.selectors";
+import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 
 interface IDashboardCopytradingProps {
   title: string;
@@ -87,7 +89,7 @@ class DashboardCopytrading extends Component<
             <TableCell>
               <Profitability
                 value={+formatPercent(signal.personalDetails.investorProfit)}
-                prefix="sign"
+                prefix={PROFITABILITY_PREFIX.SIGN}
               >
                 <NumberFormat
                   value={formatPercent(signal.personalDetails.investorProfit)}
