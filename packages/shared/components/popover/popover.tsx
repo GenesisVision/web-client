@@ -2,9 +2,9 @@ import "./popover.scss";
 
 import classNames from "classnames";
 import * as React from "react";
+import { RefObject } from "react";
 import { connect } from "react-redux";
 import Modal from "shared/components/modal/modal";
-import { RefObject } from "react";
 import RootState from "shared/reducers/root-reducer";
 import { Nullable } from "shared/utils/types";
 
@@ -22,14 +22,16 @@ export enum HORIZONTAL_POPOVER_POS {
 
 export type anchorElType = { [keys: string]: any } | Function;
 
-interface IPopoverProps {
-  onClose?(event: React.MouseEvent<HTMLElement>): void;
+interface IPopoverOwnProps {
   horizontal: HORIZONTAL_POPOVER_POS;
   vertical: VERTICAL_POPOVER_POS;
   anchorEl: Nullable<anchorElType>;
   noPadding: boolean;
-  disableBackdropClick: boolean;
-  className: string;
+  disableBackdropClick?: boolean;
+  className?: string;
+  onClose?(event: React.MouseEvent<HTMLElement>): void;
+}
+interface IPopoverProps extends IPopoverOwnProps {
   scrollTop: number;
 }
 interface IPopoverState {

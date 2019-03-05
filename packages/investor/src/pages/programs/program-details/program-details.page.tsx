@@ -10,7 +10,7 @@ import { InvestorRootState } from "reducers";
 import { Dispatch, bindActionCreators, compose } from "redux";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
 import Page from "shared/components/page/page";
-import ProgramDetailsDescription from "shared/components/programs/program-details/program-details-description/program-details-description";
+import ProgramDetailsDescriptionSection from "shared/components/programs/program-details/program-details-description/program-details-description-section";
 import ProgramDetailsStatisticSection from "shared/components/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import ProgramDetailsHistorySection from "shared/components/programs/program-details/program-trades/program-details-history-section";
 import {
@@ -124,7 +124,7 @@ class ProgramDetailsPage extends PureComponent<
         >
           <div className="details">
             <div className="details__section">
-              <ProgramDetailsDescription
+              <ProgramDetailsDescriptionSection
                 programDescription={description}
                 isAuthenticated={isAuthenticated}
                 redirectToLogin={service.redirectToLogin}

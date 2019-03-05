@@ -1,44 +1,59 @@
 import "./program-details-description.scss";
 
+import { ProgramDetailsFull } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import React, { Component } from "react";
-import { translate } from "react-i18next";
-import NumberFormat from "react-number-format";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import DetailsFavorite from "shared/components/details/details-description-section/details-description/details-favorite";
 import DetailsNotification from "shared/components/details/details-description-section/details-description/details-notificaton";
-import Popover from "shared/components/popover/popover";
-import StatisticItem from "shared/components/statistic-item/statistic-item";
+import Popover, {
+  HORIZONTAL_POPOVER_POS,
+  VERTICAL_POPOVER_POS,
+  anchorElType
+} from "shared/components/popover/popover";
 import TagProgramItem from "shared/components/tag-program/tag-program-item";
 import {
   composeManagerDetailsUrl,
   composeProgramNotificationsUrl
 } from "shared/utils/compose-url";
-import { formatValue } from "shared/utils/formatter";
+import { Nullable } from "shared/utils/types";
 
 import InvestmentLimitsPopover from "./investment-limits-popover";
 
-class ProgramDetailsDescriptionMain extends Component {
-  state = {
-    isOpenAboutLevels: false,
-    anchor: null
-  };
+interface IIProgramDetailsDescriptionMainOwnProps {
+  programDescription: ProgramDetailsFull;
+}
 
-  handleOpenDropdown = event => this.setState({ anchor: event.currentTarget });
+interface IProgramDetailsDescriptionMainProps
+  extends IIProgramDetailsDescriptionMainOwnProps,
+    InjectedTranslateProps {}
+
+interface IProgramDetailsDescriptionMainState {
+  anchor: Nullable<anchorElType>;
+}
+
+class ProgramDetailsDescriptionMain extends Component<
+  IProgramDetailsDescriptionMainProps,
+  IProgramDetailsDescriptionMainState
+> {
+  constructor(props: IProgramDetailsDescriptionMainProps) {
+    super(props);
+
+    this.state = {
+      anchor: null
+    };
+  }
+
+  handleOpenDropdown = (event: React.MouseEvent<HTMLElement>) =>
+    this.setState({ anchor: event.currentTarget });
   handleCloseDropdown = () => this.setState({ anchor: null });
 
   render() {
-    const { anchor, isOpenAboutLevels } = this.state;
-    const {
-      t,
-      programDescription,
-      AboutLevelsContainerComponent,
-      isFavorite,
-      onFavoriteClick,
-      hasNotifications,
-      investmentsLimits
-    } = this.props;
+    const { anchor } = this.state;
+    const { t, programDescription } = this.props;
+    const personalDetails = programDescription.personalProgramDetails;
 
     return (
       <div className="program-details-description__main">
@@ -52,8 +67,8 @@ class ProgramDetailsDescriptionMain extends Component {
             onClickLevel={this.handleOpenDropdown}
           />
           <Popover
-            horizontal="left"
-            vertical="bottom"
+            horizontal={HORIZONTAL_POPOVER_POS.LEFT}
+            vertical={VERTICAL_POPOVER_POS.BOTTOM}
             anchorEl={anchor}
             noPadding
             onClose={this.handleCloseDropdown}
@@ -98,13 +113,14 @@ class ProgramDetailsDescriptionMain extends Component {
         <div className="program-details-description__settings">
           <DetailsFavorite
             id={programDescription.id}
-            isFavorite={isFavorite}
-            toggleFavorite={onFavoriteClick}
+            isFavorite={personalDetails && personalDetails.isFavorite}
           />
           <DetailsNotification
             title={programDescription.title}
             url={composeProgramNotificationsUrl(programDescription.url)}
-            hasNotifications={hasNotifications}
+            hasNotifications={
+              personalDetails && personalDetails.hasNotifications
+            }
           />
         </div>
       </div>
