@@ -1,31 +1,49 @@
 import "./popover.scss";
 
-import classnames from "classnames";
-import PropTypes from "prop-types";
-import React, { Component } from "react";
+import classNames from "classnames";
+import * as React from "react";
 import { connect } from "react-redux";
 import Modal from "shared/components/modal/modal";
+import { RefObject } from "react";
+import RootState from "shared/reducers/root-reducer";
+
+export enum VERTICAL_POPOVER_POS {
+  TOP = "top",
+  BOTTOM = "bottom",
+  CENTER = "center"
+}
+
+export enum HORIZONTAL_POPOVER_POS {
+  LEFT = "left",
+  RIGHT = "right",
+  CENTER = "center"
+}
+
+export type anchorElType = { [keys: string]: any } | Function;
+
+interface IPopoverProps {
+  onClose?(): void;
+  horizontal: HORIZONTAL_POPOVER_POS;
+  vertical: VERTICAL_POPOVER_POS;
+  anchorEl: anchorElType;
+  noPadding: boolean;
+  disableBackdropClick: boolean;
+  className: string;
+  scrollTop: number;
+}
+interface IPopoverState {
+  windowWidth: number;
+  windowHeight: number;
+}
 
 const MARGIN_OFFSET = 10;
 
-const VERTICAL_TOP_POSITION = "top";
-const VERTICAL_BOTTOM_POSITION = "bottom";
-const VERTICAL_CENTER_POSITION = "center";
-
-const HORIZONTAL_LEFT_POSITION = "left";
-const HORIZONTAL_RIGHT_POSITION = "right";
-const HORIZONTAL_CENTER_POSITION = "center";
-
-const getAnchorEl = el => {
+const getAnchorEl = (el: anchorElType) => {
   return typeof el === "function" ? el() : el;
 };
 
-class Popover extends Component {
-  state = {
-    windowWidth: undefined,
-    windowHeight: undefined
-  };
-
+class Popover extends React.Component<IPopoverProps, IPopoverState> {
+  popover: RefObject<HTMLDivElement>;
   static getDerivedStateFromProps() {
     return {
       windowWidth: window.innerWidth,
@@ -33,26 +51,32 @@ class Popover extends Component {
     };
   }
 
-  constructor(props) {
+  constructor(props: IPopoverProps) {
     super(props);
+    this.state = {
+      windowWidth: null,
+      windowHeight: null
+    };
     this.popover = React.createRef();
   }
 
-  getAnchorBounds = () => {
+  getAnchorBounds = (): ClientRect => {
     const anchorEl = getAnchorEl(this.props.anchorEl);
     const box = anchorEl.getBoundingClientRect();
     return {
       width: box.width,
       height: box.height,
       top: box.top + this.props.scrollTop,
-      left: box.left
+      left: box.left,
+      bottom: box.bottom,
+      right: box.right
     };
   };
 
-  getPopoverBounds = () => {
+  getPopoverBounds = (): ClientRect => {
     return this.popover.current
       ? this.popover.current.getBoundingClientRect()
-      : {};
+      : { bottom: 0, height: 0, left: 0, right: 0, top: 0, width: 0 };
   };
 
   getTop = () => {
@@ -60,13 +84,13 @@ class Popover extends Component {
     const popoverBounds = this.getPopoverBounds();
     const vertical = this.getVerticalPosition();
 
-    if (vertical === VERTICAL_CENTER_POSITION) {
+    if (vertical === VERTICAL_POPOVER_POS.CENTER) {
       const aCenter = anchorBounds.top + anchorBounds.height / 2;
       const popoverOffset = popoverBounds.height / 2;
       return `${aCenter - popoverOffset}px`;
     }
 
-    if (vertical === VERTICAL_TOP_POSITION) {
+    if (vertical === VERTICAL_POPOVER_POS.TOP) {
       return `${anchorBounds.top - popoverBounds.height - MARGIN_OFFSET}px`;
     }
 
@@ -78,12 +102,12 @@ class Popover extends Component {
     const popoverBounds = this.getPopoverBounds();
     const horizontal = this.getHorizontalPosition();
 
-    if (horizontal === HORIZONTAL_CENTER_POSITION) {
+    if (horizontal === HORIZONTAL_POPOVER_POS.CENTER) {
       const aCenter = anchorBounds.left + anchorBounds.width / 2;
       const popoverOffset = popoverBounds.width / 2;
       return `${aCenter - popoverOffset}px`;
     }
-    if (horizontal === HORIZONTAL_RIGHT_POSITION) {
+    if (horizontal === HORIZONTAL_POPOVER_POS.RIGHT) {
       const left = Math.max(
         MARGIN_OFFSET,
         anchorBounds.left + anchorBounds.width - popoverBounds.width
@@ -94,7 +118,7 @@ class Popover extends Component {
     return `${anchorBounds.left}px`;
   };
 
-  getVerticalPosition = () => {
+  getVerticalPosition = (): VERTICAL_POPOVER_POS => {
     const anchorBounds = this.getAnchorBounds();
     const popoverBounds = this.getPopoverBounds();
     if (
@@ -106,13 +130,13 @@ class Popover extends Component {
         popoverBounds.height &&
       anchorBounds.top + MARGIN_OFFSET > popoverBounds.height
     ) {
-      return VERTICAL_TOP_POSITION;
+      return VERTICAL_POPOVER_POS.TOP;
     }
     return this.props.vertical;
   };
 
-  getHorizontalPosition = () => {
-    return this.props.horizontal;
+  getHorizontalPosition = (): HORIZONTAL_POPOVER_POS => {
+    return this.props.horizontal || HORIZONTAL_POPOVER_POS.LEFT;
   };
 
   render() {
@@ -120,7 +144,7 @@ class Popover extends Component {
     return (
       <Modal open={Boolean(anchorEl)} transparentBackdrop {...props}>
         <div
-          className={classnames("popover", className, {
+          className={classNames("popover", className, {
             "popover--no-padding": noPadding
           })}
           ref={this.popover}
@@ -143,31 +167,7 @@ class Popover extends Component {
   }
 }
 
-Popover.propTypes = {
-  onClose: PropTypes.func,
-  horizontal: PropTypes.oneOf([
-    HORIZONTAL_CENTER_POSITION,
-    HORIZONTAL_LEFT_POSITION,
-    HORIZONTAL_RIGHT_POSITION
-  ]),
-  vertical: PropTypes.oneOf([
-    VERTICAL_TOP_POSITION,
-    VERTICAL_CENTER_POSITION,
-    VERTICAL_BOTTOM_POSITION
-  ]),
-  anchorEl: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-  noPadding: PropTypes.bool,
-  disabledBackdrop: PropTypes.bool,
-  className: PropTypes.string,
-  scrollTop: PropTypes.number.isRequired
-};
-
-Popover.defaultProps = {
-  horizontal: "left",
-  vertical: "bottom"
-};
-
-const mapStateToProps = state => ({
+const mapStateToProps = (state: RootState) => ({
   scrollTop: state.ui.scrollTop
 });
 
