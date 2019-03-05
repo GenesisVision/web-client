@@ -43,21 +43,19 @@ class FundAssetContainer extends Component {
                   <FundAssetTooltip name={asset.name} currency={asset.asset} />
                 )}
               >
-                <div>
-                  <FundAsset
-                    icon={asset.icon}
-                    percent={asset.percent}
-                    currency={asset.asset}
-                    name={asset.name}
-                    type={type}
-                    last={idx === assets.length - 1}
-                    removable={removable}
-                    removeHandle={removeHandle}
-                    className={
-                      hoveringAsset === asset.asset && "fund-asset--hover"
-                    }
-                  />
-                </div>
+                <FundAsset
+                  icon={asset.icon}
+                  percent={asset.percent}
+                  currency={asset.asset}
+                  name={asset.name}
+                  type={type}
+                  last={idx === assets.length - 1}
+                  removable={removable}
+                  removeHandle={removeHandle}
+                  className={
+                    hoveringAsset === asset.asset && "fund-asset--hover"
+                  }
+                />
               </Tooltip>
             )
         )}
