@@ -13,12 +13,12 @@ interface IDepositButtonProps {
   deposit: number;
   available: number;
   title: string;
+  children: JSX.Element;
 }
 
 const DepositButton: React.FC<
   IDepositButtonProps & IDepositButtonStateProps
-> = props => {
-  const { onSubmit, children, title, disabled } = props;
+> = ({ onSubmit, children, title, disabled }) => {
   return (
     <GVButton
       title={title}
