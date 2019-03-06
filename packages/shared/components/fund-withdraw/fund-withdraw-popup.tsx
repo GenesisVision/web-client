@@ -5,11 +5,10 @@ import RootState from "shared/reducers/root-reducer";
 import { ResponseError } from "shared/utils/types";
 
 import { convertFromCurrency } from "../../utils/currency-converter";
-import FundWithdrawAmountForm, {
-  FundWithdrawAmountFormValues
-} from "./fund-withdraw-amount-form";
+import FundWithdrawAmountForm from "./fund-withdraw-amount-form";
 import FundWithdrawConfirmForm from "./fund-withdraw-confirm-form";
 import FundWithdrawTop from "./fund-withdraw-top";
+import FundWithdrawWallet from "./fund-withdraw-wallet";
 
 export type FundWithdraw = {
   percent: number;
@@ -40,8 +39,10 @@ interface IFundWithdrawPopupState {
   wallets?: WalletData[];
   isPending: boolean;
   errorMessage?: string;
-  enteredValue?: FundWithdraw;
   step: FUND_WITHDRAW_FORM;
+
+  wallet?: WalletData;
+  percent?: number;
 }
 
 class FundWithdrawPopup extends Component<
@@ -55,17 +56,22 @@ class FundWithdrawPopup extends Component<
       wallets: undefined,
       isPending: false,
       errorMessage: undefined,
-      enteredValue: undefined,
-      step: FUND_WITHDRAW_FORM.ENTER_AMOUNT
+      step: FUND_WITHDRAW_FORM.ENTER_AMOUNT,
+
+      wallet: undefined,
+      percent: undefined
     };
   }
 
   componentDidMount() {
-    const { fetchInfo } = this.props;
+    const { fetchInfo, accountCurrency } = this.props;
     this.setState({ isPending: true });
     fetchInfo()
       .then(data => {
-        this.setState({ ...data, isPending: false });
+        const { wallets, withdrawalInfo } = data;
+        const wallet =
+          wallets.find(x => x.currency === accountCurrency) || wallets[0];
+        this.setState({ wallets, wallet, withdrawalInfo, isPending: false });
       })
       .catch((e: ResponseError) =>
         this.setState({ errorMessage: e.errorMessage, isPending: false })
@@ -74,22 +80,22 @@ class FundWithdrawPopup extends Component<
 
   handleSubmit = () => {
     const { withdraw } = this.props;
-    const { enteredValue } = this.state;
+    const { percent, wallet } = this.state;
     this.setState({ isPending: true });
 
-    if (!enteredValue) return;
-    return withdraw(enteredValue).catch((e: ResponseError) => {
+    if (!percent || !wallet) return;
+    return withdraw({
+      percent: percent,
+      currency: wallet.currency
+    }).catch((e: ResponseError) => {
       this.setState({ isPending: false, errorMessage: e.errorMessage });
     });
   };
 
-  handleEnterAmountSubmit = (values: FundWithdrawAmountFormValues) => {
+  handleEnterAmountSubmit = (percent?: number) => {
     this.setState({
       step: FUND_WITHDRAW_FORM.CONFIRM,
-      enteredValue: {
-        currency: values.walletCurrency,
-        percent: values.percent || 0
-      }
+      percent: percent || 0
     });
   };
 
@@ -100,29 +106,24 @@ class FundWithdrawPopup extends Component<
     });
   };
 
-  getRate = (currency: string) => {
+  handleWalletChange = (walletCurrency: string) => {
     const { wallets } = this.state;
-
-    if (!wallets) return 1;
-
-    return wallets.find(x => x.currency === currency)!.rateToGVT;
+    const wallet = wallets!.find(x => x.currency === walletCurrency);
+    this.setState({ wallet });
   };
 
   render() {
-    const { accountCurrency } = this.props;
     const {
       withdrawalInfo,
       wallets,
-      enteredValue,
+      wallet,
+      percent,
       errorMessage,
       isPending,
       step
     } = this.state;
 
-    if (!withdrawalInfo || !wallets) return null;
-
-    const wallet =
-      wallets.find(x => x.currency === accountCurrency) || wallets[0];
+    if (!withdrawalInfo || !wallets || !wallet) return null;
 
     return (
       <Fragment>
@@ -130,30 +131,38 @@ class FundWithdrawPopup extends Component<
           title={withdrawalInfo.title}
           availableToWithdraw={convertFromCurrency(
             withdrawalInfo.availableToWithdraw,
-            withdrawalInfo.rate
+            wallet.rateToGVT
           )}
-          currency={accountCurrency}
+          currency={wallet.currency}
         />
         <div className="dialog__bottom">
           {step === FUND_WITHDRAW_FORM.ENTER_AMOUNT && (
-            <FundWithdrawAmountForm
-              wallets={wallets}
-              wallet={wallet}
-              availableToWithdraw={withdrawalInfo.availableToWithdraw}
-              exitFee={withdrawalInfo.exitFee}
-              enteredValue={enteredValue}
-              onSubmit={this.handleEnterAmountSubmit}
-            />
+            <Fragment>
+              <FundWithdrawWallet
+                wallets={wallets}
+                value={wallet.currency}
+                onChange={this.handleWalletChange}
+              />
+              <FundWithdrawAmountForm
+                wallets={wallets}
+                wallet={wallet}
+                availableToWithdraw={withdrawalInfo.availableToWithdraw}
+                exitFee={withdrawalInfo.exitFee}
+                percent={percent}
+                onSubmit={this.handleEnterAmountSubmit}
+              />
+            </Fragment>
           )}
-          {step === FUND_WITHDRAW_FORM.CONFIRM && enteredValue && (
+          {step === FUND_WITHDRAW_FORM.CONFIRM && percent && (
             <FundWithdrawConfirmForm
               errorMessage={errorMessage}
               isPending={isPending}
               availableToWithdraw={convertFromCurrency(
                 withdrawalInfo.availableToWithdraw,
-                this.getRate(enteredValue.currency)
+                wallet.rateToGVT
               )}
-              enteredValue={enteredValue}
+              percent={percent}
+              currency={wallet.currency}
               exitFee={withdrawalInfo.exitFee}
               onSubmit={this.handleSubmit}
               onBackClick={this.goToEnterAmountStep}
@@ -167,7 +176,6 @@ class FundWithdrawPopup extends Component<
 
 const mapStateToProps = (state: RootState) => ({
   accountCurrency: state.accountSettings.currency
-  //wallets: state.wallet.info.data ? state.wallet.info.data.wallets : undefined
 });
 
 export default connect(mapStateToProps)(FundWithdrawPopup);

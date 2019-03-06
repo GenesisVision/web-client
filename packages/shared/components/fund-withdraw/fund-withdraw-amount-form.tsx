@@ -1,29 +1,24 @@
 import { InjectedFormikProps, withFormik } from "formik";
 import { WalletData } from "gv-api-web";
-import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
+import { GVButton } from "gv-react-components";
 import { ComponentType, PureComponent } from "react";
 import React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
-import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
-import Select from "shared/components/select/select";
-import {
-  calculatePercentage,
-  convertFromCurrency
-} from "shared/utils/currency-converter";
+import { convertFromCurrency } from "shared/utils/currency-converter";
+import { calculatePercentage } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
 import { number, object } from "yup";
 
-import { FundWithdraw } from "./fund-withdraw-popup";
 import FundWithdrawResult from "./fund-withdraw-result";
 
 interface IFundWithdrawAmountFormOwnProps {
   wallets: WalletData[];
   wallet: WalletData;
-  enteredValue?: FundWithdraw;
-  onSubmit(values: FundWithdrawAmountFormValues): void;
+  percent?: number;
+  onSubmit(percent: number): void;
   exitFee: number;
   availableToWithdraw: number;
 }
@@ -34,7 +29,6 @@ interface IFundWithdrawAmountFormProps
 
 interface FundWithdrawAmountFormValues {
   percent?: number;
-  walletCurrency: string;
 }
 
 class FundWithdrawAmountForm extends PureComponent<
@@ -48,31 +42,22 @@ class FundWithdrawAmountForm extends PureComponent<
     (values.floatValue >= 0.01 && values.floatValue <= 100);
 
   setMaxAmount = () => {
-    this.props.setFieldValue("percent", 100);
-  };
-
-  wallet = () => {
-    const { wallets, wallet, values } = this.props;
-    const selectedWallet = wallets.find(
-      wallet => wallet.currency === values.walletCurrency
-    );
-    return selectedWallet || wallet;
+    this.props.setFieldValue("percent", "100");
   };
 
   render() {
     const {
       t,
-      wallets,
+      wallet,
       availableToWithdraw,
       exitFee,
       handleSubmit,
       values
     } = this.props;
 
-    const selectedWallet = this.wallet();
     const availableToWithdrawCcy = convertFromCurrency(
       availableToWithdraw,
-      selectedWallet.rateToGVT
+      wallet.rateToGVT
     );
     const amountToWithdrawCcy = calculatePercentage(
       availableToWithdrawCcy,
@@ -80,25 +65,6 @@ class FundWithdrawAmountForm extends PureComponent<
     );
     return (
       <form id="withdraw-form" onSubmit={handleSubmit}>
-        <GVFormikField
-          name="walletCurrency"
-          component={GVTextField}
-          label={t("withdraw-fund.wallet")}
-          InputComponent={Select}
-        >
-          {wallets.map(wallet => {
-            return (
-              <option value={wallet.currency} key={wallet.currency}>
-                <WalletImage
-                  imageClassName="wallet-transfer-popup__icon"
-                  alt={wallet.currency}
-                  url={wallet.logo}
-                />
-                {`${wallet.title} | ${wallet.currency}`}
-              </option>
-            );
-          })}
-        </GVFormikField>
         <InputAmountField
           name="percent"
           label={t("withdraw-fund.amount-to-withdraw")}
@@ -109,19 +75,16 @@ class FundWithdrawAmountForm extends PureComponent<
         />
         <div className="invest-popup__currency">
           <NumberFormat
-            value={formatCurrencyValue(
-              amountToWithdrawCcy,
-              selectedWallet.currency
-            )}
+            value={formatCurrencyValue(amountToWithdrawCcy, wallet.currency)}
             prefix="&asymp; "
-            suffix={` ${selectedWallet.currency}`}
+            suffix={` ${wallet.currency}`}
             displayType="text"
           />
         </div>
         {exitFee !== 0 && (
           <FundWithdrawResult
             availableToWithdraw={availableToWithdrawCcy}
-            currency={selectedWallet.currency}
+            currency={wallet.currency}
             percent={values.percent || 0}
             exitFee={exitFee}
           />
@@ -140,9 +103,8 @@ export default compose<ComponentType<IFundWithdrawAmountFormOwnProps>>(
   translate(),
   withFormik<IFundWithdrawAmountFormProps, FundWithdrawAmountFormValues>({
     displayName: "withdraw-form",
-    mapPropsToValues: ({ wallet, enteredValue }) => ({
-      percent: enteredValue ? enteredValue.percent : undefined,
-      walletCurrency: enteredValue ? enteredValue.currency : wallet.currency
+    mapPropsToValues: ({ percent }) => ({
+      percent: percent
     }),
     validationSchema: ({ t }: IFundWithdrawAmountFormProps) =>
       object().shape({
@@ -151,7 +113,8 @@ export default compose<ComponentType<IFundWithdrawAmountFormOwnProps>>(
           .min(0.01, t("withdraw-fund.validation.min-value"))
       }),
     handleSubmit: (values, { props }) => {
-      props.onSubmit(values);
+      if (!values.percent) return;
+      props.onSubmit(values.percent);
     }
   })
 )(FundWithdrawAmountForm);

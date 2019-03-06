@@ -63,7 +63,7 @@ const mapStateToProps = state => ({
   accountCurrency: state.accountSettings.currency
 });
 
-const mapDispathToProps = dispatch => ({
+const mapDispatchToProps = dispatch => ({
   services: bindActionCreators(
     {
       getFundWithdrawInfo,
@@ -77,6 +77,6 @@ export default compose(
   translate(),
   connect(
     mapStateToProps,
-    mapDispathToProps
+    mapDispatchToProps
   )
 )(FundWithdrawContainer);

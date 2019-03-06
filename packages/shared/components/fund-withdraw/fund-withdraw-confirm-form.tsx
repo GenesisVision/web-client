@@ -1,18 +1,18 @@
 import { InjectedFormikProps, withFormik } from "formik";
 import { GVButton } from "gv-react-components";
-import { ComponentType, Fragment, PureComponent } from "react";
+import { ComponentType, PureComponent } from "react";
 import React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
 import { formatValue } from "shared/utils/formatter";
 
 import FormError from "../form/form-error/form-error";
-import { FundWithdraw } from "./fund-withdraw-popup";
 import FundWithdrawResult from "./fund-withdraw-result";
 
 interface IFundWithdrawConfirmFormOwnProps {
   availableToWithdraw: number;
-  enteredValue: FundWithdraw;
+  percent: number;
+  currency: string;
   exitFee: number;
   isPending: boolean;
   errorMessage?: string;
@@ -31,7 +31,8 @@ class FundWithdrawConfirmForm extends PureComponent<
     const {
       t,
       availableToWithdraw,
-      enteredValue,
+      percent,
+      currency,
       exitFee,
       isPending,
       errorMessage,
@@ -44,13 +45,13 @@ class FundWithdrawConfirmForm extends PureComponent<
         <div className="dialog-list__item">
           {t("withdraw-fund.withdrawing")}
           <span className="dialog-list__value">
-            {formatValue(enteredValue.percent, 2)} %
+            {formatValue(percent, 2)} %
           </span>
         </div>
         <FundWithdrawResult
           availableToWithdraw={availableToWithdraw}
-          percent={enteredValue.percent}
-          currency={enteredValue.currency}
+          percent={percent}
+          currency={currency}
           exitFee={exitFee}
         />
         <div className="form-error">
