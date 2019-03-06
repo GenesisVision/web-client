@@ -1,8 +1,9 @@
 import "./details-investment.scss";
 
+import { ProgramDetailsFull } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import React, { PureComponent } from "react";
-import { translate } from "react-i18next";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import AssetStatus from "shared/components/asset-status/asset-status";
 import Profitability from "shared/components/profitability/profitability";
@@ -11,47 +12,78 @@ import Surface from "shared/components/surface/surface";
 import { PROGRAM } from "shared/constants/constants";
 import { formatCurrencyValue, roundPercents } from "shared/utils/formatter";
 
-class DetailsInvestment extends PureComponent {
-  state = {
-    isOpenWithdrawalPopup: false
-  };
+interface IDetailsInvestmentOwnProps {
+  asset: string;
+  notice: string;
+  programDetails: ProgramDetailsFull;
+  WithdrawContainer: any;
+  ProgramReinvestingWidget: any;
+}
+
+interface IDetailsInvestmentProps
+  extends IDetailsInvestmentOwnProps,
+    InjectedTranslateProps {}
+interface IDetailsInvestmentState {
+  isOpenWithdrawalPopup: boolean;
+}
+
+class DetailsInvestment extends PureComponent<
+  IDetailsInvestmentProps,
+  IDetailsInvestmentState
+> {
+  constructor(props: IDetailsInvestmentProps) {
+    super(props);
+    this.state = {
+      isOpenWithdrawalPopup: false
+    };
+  }
 
   handleOpenWithdrawalPopup = () => {
     this.setState({ isOpenWithdrawalPopup: true });
   };
 
   handleCloseWithdrawalPopup = () => {
-    this.props.onChangeInvestmentStatus();
+    //this.props.onChangeInvestmentStatus();
     this.setState({ isOpenWithdrawalPopup: false });
   };
 
   handleOnCancelRequest = () => {
-    this.props.onChangeInvestmentStatus();
+    //this.props.onChangeInvestmentStatus();
   };
 
   render() {
     const {
       t,
+      programDetails,
       asset,
       notice,
       WithdrawContainer,
-      canWithdraw,
-      assetCurrency,
-      id,
-      balanceCurrency,
-      status,
-      value,
-      pendingInput,
-      pendingOutput,
-      profit,
-      invested,
-      isInvested,
-      canInvest,
-      ProgramReinvestingWidget,
-      onReinvestingClick,
-      isReinvestPending,
-      isReinvest
+      ProgramReinvestingWidget
     } = this.props;
+
+    const { statistic, personalProgramDetails } = programDetails;
+
+    const canWithdraw =
+      personalProgramDetails && personalProgramDetails.canWithdraw;
+    const canInvest =
+      personalProgramDetails && personalProgramDetails.canInvest;
+    const isInvested =
+      personalProgramDetails && personalProgramDetails.isInvested;
+    const isReinvest =
+      personalProgramDetails && personalProgramDetails.isReinvest;
+    const pendingInput =
+      personalProgramDetails && personalProgramDetails.pendingInput;
+    const pendingOutput =
+      personalProgramDetails && personalProgramDetails.pendingOutput;
+    const value = personalProgramDetails && personalProgramDetails.value;
+    const invested = personalProgramDetails && personalProgramDetails.value;
+    const profitPercent =
+      personalProgramDetails && personalProgramDetails.profit;
+    const profit = value - invested;
+
+    const assetCurrency = programDetails.currency;
+    const id = programDetails.id;
+    const status = programDetails.status;
 
     return (
       <Surface className="surface--horizontal-paddings details-investment">
@@ -62,8 +94,8 @@ class DetailsInvestment extends PureComponent {
             label={t("fund-details-page.description.value")}
           >
             <NumberFormat
-              value={formatCurrencyValue(value, balanceCurrency)}
-              suffix={` ${balanceCurrency}`}
+              value={formatCurrencyValue(value, assetCurrency)}
+              suffix={` ${assetCurrency}`}
               displayType="text"
             />
           </StatisticItem>
@@ -72,16 +104,16 @@ class DetailsInvestment extends PureComponent {
               accent
               label={t("fund-details-page.description.profit")}
             >
-              <Profitability value={value - invested} prefix="sign">
+              <Profitability value={profit} prefix="sign">
                 <NumberFormat
-                  value={formatCurrencyValue(value - invested, balanceCurrency)}
-                  suffix={` ${balanceCurrency}`}
+                  value={formatCurrencyValue(profit, assetCurrency)}
+                  suffix={` ${assetCurrency}`}
                   allowNegative={false}
                   displayType="text"
                 />
               </Profitability>
-              <Profitability value={profit} variant="chips">
-                {roundPercents(profit)}
+              <Profitability value={profitPercent} variant="chips">
+                {roundPercents(profitPercent)}
               </Profitability>
             </StatisticItem>
           ) : null}
@@ -102,8 +134,8 @@ class DetailsInvestment extends PureComponent {
               label={t("fund-details-page.description.pending-input")}
             >
               <NumberFormat
-                value={formatCurrencyValue(pendingInput, balanceCurrency)}
-                suffix={` ${balanceCurrency}`}
+                value={formatCurrencyValue(pendingInput, assetCurrency)}
+                suffix={` ${assetCurrency}`}
                 displayType="text"
               />
             </StatisticItem>
@@ -111,9 +143,7 @@ class DetailsInvestment extends PureComponent {
           {ProgramReinvestingWidget && isInvested && canInvest && (
             <ProgramReinvestingWidget
               className="details-description__reinvest"
-              toggleReinvesting={onReinvestingClick}
               isReinvesting={isReinvest}
-              disabled={isReinvestPending}
             />
           )}
           {pendingOutput !== undefined && pendingOutput !== 0 && (
@@ -122,8 +152,8 @@ class DetailsInvestment extends PureComponent {
               label={t("fund-details-page.description.pending-output")}
             >
               <NumberFormat
-                value={formatCurrencyValue(pendingOutput, balanceCurrency)}
-                suffix={` ${balanceCurrency}`}
+                value={formatCurrencyValue(pendingOutput, assetCurrency)}
+                suffix={` ${assetCurrency}`}
                 displayType="text"
               />
             </StatisticItem>

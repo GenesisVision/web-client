@@ -84,16 +84,13 @@ class ProgramDetailsDescriptionSection extends PureComponent<
         {isAuthenticated && status !== STATUS.ENDED && (
           <div className="program-details-description__additionally">
             <DetailsInvestment
-              isInvested={personalDetails && personalDetails.isInvested}
               notice={t(
                 "program-details-page.description.withdraw-notice-text"
               )}
-              canWithdraw={personalDetails && personalDetails.canWithdraw}
-              assetCurrency={programDescription.currency}
               asset={PROGRAM}
+              programDetails={programDescription}
               ProgramReinvestingWidget={ProgramReinvestingWidget}
               WithdrawContainer={ProgramWithdrawContainer}
-              // {...investmentData}
             />
           </div>
         )}
