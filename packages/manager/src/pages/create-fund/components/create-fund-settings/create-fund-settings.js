@@ -128,7 +128,7 @@ class CreateFundSettings extends React.Component {
     const { anchor, assets, remainder, rate } = this.state;
     const {
       currency,
-      wallets,
+      wallets = [],
       t,
       navigateBack,
       author,
@@ -453,7 +453,9 @@ export default translate()(
     mapPropsToValues: props => {
       return {
         depositWalletCurrency: "GVT",
-        depositWalletId: props.wallets.find(item => item.currency === "GVT").id,
+        depositWalletId: Array.isArray(props.wallets)
+          ? props.wallets.find(item => item.currency === "GVT").id
+          : null,
         assets: [],
         remainder: 100,
         exitFee: "",

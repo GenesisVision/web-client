@@ -1,28 +1,40 @@
 import "./gv-checkbox.scss";
 
-import classnames from "classnames";
-import React, { Component } from "react";
+import classNames from "classnames";
+import * as React from "react";
+import { RefObject } from "react";
 
-class GVCheckbox extends Component {
-  checkbox;
+interface IGVCheckboxProps {
+  name: string;
+  className?: string;
+  color: string;
+  value: any;
+  touched: boolean;
+  disabled: boolean;
+  error: any;
+  label: string;
+}
+
+class GVCheckbox extends React.Component<IGVCheckboxProps> {
+  checkbox: RefObject<HTMLInputElement>;
 
   constructor(props) {
     super(props);
     this.checkbox = React.createRef();
   }
 
-  handleClick = e => {
+  handleClick = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     if (this.checkbox.current !== null) {
       e.stopPropagation();
       this.checkbox.current.click();
     }
   };
 
-  handleInputClick = e => {
+  handleInputClick = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
     e.stopPropagation();
   };
 
-  renderLabel = () => {
+  renderLabel = (): JSX.Element => {
     const { label } = this.props;
     if (!label) return null;
 
@@ -33,7 +45,7 @@ class GVCheckbox extends Component {
     );
   };
 
-  renderError = () => {
+  renderError = (): JSX.Element => {
     const { touched, error } = this.props;
     if (!touched || !error) return null;
 
@@ -41,19 +53,11 @@ class GVCheckbox extends Component {
   };
 
   render() {
-    const {
-      name,
-      className,
-      color,
-      value,
-      touched,
-      disabled,
-      ...other
-    } = this.props;
+    const { name, className, color, value, disabled, ...other } = this.props;
     return (
       <span className={"gv-checkbox-wrapper"}>
         <span
-          className={classnames("gv-checkbox", className, {
+          className={classNames("gv-checkbox", className, {
             "gv-checkbox--checked": value,
             "gv-checkbox--primary": color === "primary",
             "gv-checkbox--secondary": color === "secondary",
@@ -69,7 +73,7 @@ class GVCheckbox extends Component {
               ref={this.checkbox}
               type="checkbox"
               name={name}
-              className={classnames("gv-checkbox__input")}
+              className={classNames("gv-checkbox__input")}
               checked={value}
               onClick={this.handleInputClick}
               disabled={disabled}
