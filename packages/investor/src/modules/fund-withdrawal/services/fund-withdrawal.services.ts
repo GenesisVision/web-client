@@ -1,14 +1,28 @@
+import { FundWithdrawInfo, WalletData } from "gv-api-web";
+import { Dispatch } from "redux";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import investorApi from "shared/services/api-client/investor-api";
 import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
 
-export const getFundWithdrawInfo = (id, currency) => (dispatch, getState) => {
-  const { accountSettings } = getState();
+export type FundWithdraw = {
+  percent: number;
+  currency: string;
+};
+
+export type FundWithdrawalInfoResponse = {
+  withdrawalInfo: FundWithdrawInfo;
+  wallets: WalletData[];
+};
+
+export const getFundWithdrawInfo = (
+  id: string,
+  currency: string
+) => (): Promise<FundWithdrawalInfoResponse> => {
   return Promise.all([
     investorApi.v10InvestorFundsByIdWithdrawInfoByCurrencyGet(
       id,
-      accountSettings.currency,
+      currency,
       authService.getAuthArg()
     ),
     walletApi.v10WalletMultiByCurrencyGet(currency, authService.getAuthArg())
@@ -17,18 +31,21 @@ export const getFundWithdrawInfo = (id, currency) => (dispatch, getState) => {
   });
 };
 
-export const withdrawFundById = (id, percent) => {
+export const withdrawFund = (id: string, onClose: () => void) => (
+  value: FundWithdraw
+) => (dispatch: Dispatch) => {
   return investorApi
     .v10InvestorFundsByIdWithdrawByPercentPost(
       id,
-      percent,
-      authService.getAuthArg()
+      value.percent,
+      authService.getAuthArg(),
+      { currency: value.currency }
     )
     .then(response => {
-      alertMessageActions.success("fund-withdraw.success-alert-message", true);
+      onClose();
+      dispatch(
+        alertMessageActions.success("withdraw-fund.success-alert-message", true)
+      );
       return response;
     });
 };
-
-export const alert = (type, text, translate = false) => dispatch =>
-  dispatch(alertMessageActions[type](text, translate));

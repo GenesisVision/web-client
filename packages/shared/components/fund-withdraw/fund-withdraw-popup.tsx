@@ -1,7 +1,9 @@
 import { FundWithdrawInfo, WalletData } from "gv-api-web";
+import {
+  FundWithdraw,
+  FundWithdrawalInfoResponse
+} from "modules/fund-withdraw/services/fund-withdraw.services";
 import React, { Component, Fragment } from "react";
-import { connect } from "react-redux";
-import RootState from "shared/reducers/root-reducer";
 import { ResponseError } from "shared/utils/types";
 
 import { convertFromCurrency } from "../../utils/currency-converter";
@@ -10,28 +12,15 @@ import FundWithdrawConfirmForm from "./fund-withdraw-confirm-form";
 import FundWithdrawTop from "./fund-withdraw-top";
 import FundWithdrawWallet from "./fund-withdraw-wallet";
 
-export type FundWithdraw = {
-  percent: number;
-  currency: string;
-};
-
 enum FUND_WITHDRAW_FORM {
   ENTER_AMOUNT = "ENTER_AMOUNT",
   CONFIRM = "CONFIRM"
 }
 
-type FundWithdrawalInfoResponse = {
-  withdrawalInfo: FundWithdrawInfo;
-  wallets: WalletData[];
-};
-
-interface IFundWithdrawPopupOwnProps {
+export interface IFundWithdrawPopupProps {
+  accountCurrency: string;
   fetchInfo(): Promise<FundWithdrawalInfoResponse>;
   withdraw(value: FundWithdraw): Promise<void>;
-}
-
-interface IFundWithdrawPopupProps extends IFundWithdrawPopupOwnProps {
-  accountCurrency: string;
 }
 
 interface IFundWithdrawPopupState {
@@ -174,8 +163,4 @@ class FundWithdrawPopup extends Component<
   }
 }
 
-const mapStateToProps = (state: RootState) => ({
-  accountCurrency: state.accountSettings.currency
-});
-
-export default connect(mapStateToProps)(FundWithdrawPopup);
+export default FundWithdrawPopup;

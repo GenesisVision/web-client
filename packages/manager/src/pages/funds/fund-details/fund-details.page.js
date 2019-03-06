@@ -3,7 +3,7 @@ import "shared/components/details/details.scss";
 import { push } from "connected-react-router";
 import AssetEditContainer from "modules/asset-edit/asset-edit-container";
 import FundDepositContainer from "modules/fund-deposit/fund-deposit-container";
-import FundWithdrawContainer from "modules/fund-withdraw/fund-withdraw-container";
+import FundWithdrawalContainer from "modules/fund-withdrawal/fund-withdrawal-container";
 import ReallocateContainer from "modules/reallocate/reallocate-container";
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
@@ -104,7 +104,7 @@ class FundDetailsPage extends PureComponent {
                 AssetEditContainer={AssetEditContainer}
                 FUND={FUND}
                 FundDepositContainer={FundDepositContainer}
-                FundWithdrawContainer={FundWithdrawContainer}
+                FundWithdrawContainer={FundWithdrawalContainer}
                 ReallocateContainer={ReallocateContainer}
                 FundDetailContext={FundDetailContext}
                 fundDescription={this.description}
