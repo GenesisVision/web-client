@@ -2,7 +2,7 @@ import "shared/components/details/details.scss";
 
 import { push } from "connected-react-router";
 import { ProgramBalanceChart, ProgramDetailsFull } from "gv-api-web";
-import ProgramReinvestingWidget from "modules/program-reinvesting/components/program-reinvesting-widget";
+import ProgramReinvestingContainer from "modules/program-reinvesting/components/program-reinvesting-container";
 import ProgramWithdrawContainer from "modules/program-withdraw/program-withdraw-container";
 import React, { ComponentType, PureComponent } from "react";
 import { connect } from "react-redux";
@@ -130,7 +130,7 @@ class ProgramDetailsPage extends PureComponent<
                 redirectToLogin={service.redirectToLogin}
                 ProgramControls={ProgramControls}
                 ProgramWithdrawContainer={ProgramWithdrawContainer}
-                ProgramReinvestingWidget={ProgramReinvestingWidget}
+                ProgramReinvestingWidget={ProgramReinvestingContainer}
               />
             </div>
             <div className="details__section">

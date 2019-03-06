@@ -148,7 +148,7 @@ class DetailsInvestment extends PureComponent<
           )}
           {ProgramReinvestingWidget && isInvested && canInvest && (
             <ProgramReinvestingWidget
-              className="details-description__reinvest"
+              programId={id}
               isReinvesting={isReinvest}
             />
           )}
