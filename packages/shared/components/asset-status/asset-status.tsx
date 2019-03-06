@@ -26,13 +26,16 @@ const getStatusClassName = (status: STATUS, className?: string) => {
   });
 };
 
-interface IAssetStatusProps {
+interface IAssetStatusOwnProps {
   className?: string;
-  status: STATUS;
+  status: STATUS | string;
   id: string;
-  role: ROLE;
   asset: any;
   onCancel: any;
+}
+
+interface IAssetStatusProps extends IAssetStatusOwnProps {
+  role: ROLE;
 }
 
 interface IAssetStatusState {
@@ -97,7 +100,7 @@ const mapStateToProps = (state: RootState) => ({
     ? state.profileHeader.info.data.userType
     : null
 });
-export default compose(
+export default compose<React.ComponentType<IAssetStatusOwnProps>>(
   translate(),
   connect(mapStateToProps)
 )(AssetStatus);

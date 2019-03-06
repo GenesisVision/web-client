@@ -7,9 +7,13 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import AssetStatus from "shared/components/asset-status/asset-status";
 import Profitability from "shared/components/profitability/profitability";
+import {
+  PROFITABILITY_PREFIX,
+  PROFITABILITY_VARIANT
+} from "shared/components/profitability/profitability.helper";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Surface from "shared/components/surface/surface";
-import { PROGRAM } from "shared/constants/constants";
+import { PROGRAM, STATUS } from "shared/constants/constants";
 import { formatCurrencyValue, roundPercents } from "shared/utils/formatter";
 
 interface IDetailsInvestmentOwnProps {
@@ -43,7 +47,6 @@ class DetailsInvestment extends PureComponent<
   };
 
   handleCloseWithdrawalPopup = () => {
-    //this.props.onChangeInvestmentStatus();
     this.setState({ isOpenWithdrawalPopup: false });
   };
 
@@ -61,7 +64,7 @@ class DetailsInvestment extends PureComponent<
       ProgramReinvestingWidget
     } = this.props;
 
-    const { statistic, personalProgramDetails } = programDetails;
+    const { personalProgramDetails } = programDetails;
 
     const canWithdraw =
       personalProgramDetails && personalProgramDetails.canWithdraw;
@@ -104,7 +107,7 @@ class DetailsInvestment extends PureComponent<
               accent
               label={t("fund-details-page.description.profit")}
             >
-              <Profitability value={profit} prefix="sign">
+              <Profitability value={profit} prefix={PROFITABILITY_PREFIX.SIGN}>
                 <NumberFormat
                   value={formatCurrencyValue(profit, assetCurrency)}
                   suffix={` ${assetCurrency}`}
@@ -112,7 +115,10 @@ class DetailsInvestment extends PureComponent<
                   displayType="text"
                 />
               </Profitability>
-              <Profitability value={profitPercent} variant="chips">
+              <Profitability
+                value={profitPercent}
+                variant={PROFITABILITY_VARIANT.CHIPS}
+              >
                 {roundPercents(profitPercent)}
               </Profitability>
             </StatisticItem>
