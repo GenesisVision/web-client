@@ -128,7 +128,7 @@ class CreateFundSettings extends React.Component {
     const { anchor, assets, remainder, rate } = this.state;
     const {
       currency,
-      wallets,
+      wallets = [],
       t,
       navigateBack,
       author,
