@@ -9,13 +9,13 @@ import PortfolioEventLogo from "shared/components/dashboard/dashboard-portfolio-
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-import { CancelReqestType } from "../../../asset-status/services/asset-status.service";
+import { CancelRequestType } from "../../../asset-status/services/asset-status.service";
 
 export interface IDashboardRequestProps {
   role: string;
   asset: string;
   request: ProgramRequest;
-  cancelRequest(x: CancelReqestType): void;
+  cancelRequest(x: CancelRequestType): void;
   onApplyCancelRequest(): void;
   t: TranslationFunction;
 }
