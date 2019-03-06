@@ -12,17 +12,12 @@ $remove-button-color: #293842;
 
 .fund-assets {
   display: flex;
-  flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   flex-wrap: wrap;
 
   @include media-breakpoint-landscape-phone() {
     align-items: center;
-    flex-direction: row;
-  }
-  &--text {
-    flex-direction: row;
   }
 }
 

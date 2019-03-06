@@ -1,8 +1,8 @@
 import "./add-button.scss";
 
-import React from "react";
+import * as React from "react";
 
-const AddButton = () => {
+const AddButton: React.FC = () => {
   return (
     <div className="add-button">
       <div className="add-button__button">+</div>

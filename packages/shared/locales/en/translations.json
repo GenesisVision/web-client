@@ -128,6 +128,11 @@
     "close-program": "Close Program",
     "close-period": "Close Period"
   },
+  "fund-actions": {
+    "remove-from-favorites": "Remove from favorites",
+    "add-to-favorites": "Add to favorites",
+    "details": "Details"
+  },
   "wallet-widget": {
     "total-balance": "Total balance",
     "invested-value": "Invested",

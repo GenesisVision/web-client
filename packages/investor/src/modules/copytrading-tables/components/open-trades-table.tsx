@@ -8,7 +8,7 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { Action, Dispatch, bindActionCreators, compose } from "redux";
+import { Action, bindActionCreators, compose, Dispatch } from "redux";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
@@ -22,8 +22,7 @@ import {
   composeManagerDetailsUrl,
   composeProgramDetailsUrl
 } from "shared/utils/compose-url";
-import { formatValue } from "shared/utils/formatter";
-import { formatPercent } from "shared/utils/formatter";
+import { formatPercent, formatValue } from "shared/utils/formatter";
 
 import { clearCopytradingTable } from "../actions/copytrading-tables.actions";
 import {
@@ -32,6 +31,7 @@ import {
 } from "../services/copytrading-tables.service";
 import { COPYTRADING_OPEN_TRADES_COLUMNS } from "./copytrading-tables.constants";
 import { dashboardOpenTradesTableSelector } from "./copytrading-tables.selectors";
+import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 
 interface IOpenTradesTableOwnProps {
   title: string;
@@ -153,7 +153,7 @@ class OpenTradesTable extends Component<
             <TableCell>
               <Profitability
                 value={+formatPercent(signalTrade.profit)}
-                prefix="sign"
+                prefix={PROFITABILITY_PREFIX.SIGN}
               >
                 <NumberFormat
                   value={formatPercent(signalTrade.profit)}

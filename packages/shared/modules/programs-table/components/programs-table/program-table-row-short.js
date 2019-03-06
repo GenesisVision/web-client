@@ -13,7 +13,7 @@ import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import TagProgramContainer from "shared/components/tag-program/tag-program-container";
 import Tooltip from "shared/components/tooltip/tooltip";
-import { STATUS } from "shared/constants/constants";
+import { STATUS_OLD } from "shared/constants/constants";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
@@ -117,7 +117,7 @@ const ProgramTableRowShort = ({
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--period">
         {periodStarts &&
-          ((status !== STATUS.CLOSED && (
+          ((status !== STATUS_OLD.CLOSED && (
             <ProgramPeriodPie start={periodStarts} end={periodEnds} />
           )) ||
             t("program-period.program-closed"))}

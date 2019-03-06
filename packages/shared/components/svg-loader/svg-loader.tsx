@@ -1,9 +1,14 @@
 import "./svg-loader.scss";
 
-import React from "react";
-import uuid from "uuid";
+import * as React from "react";
+import * as uuid from "uuid";
 
-const SvgLoader = ({ width, height, children }) => {
+interface ISvgLoaderProps {
+  width: number;
+  height: number;
+}
+
+const SvgLoader: React.FC<ISvgLoaderProps> = ({ width, height, children }) => {
   const id = uuid.v4();
   return (
     <svg

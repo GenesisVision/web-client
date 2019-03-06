@@ -2,7 +2,6 @@ import "./program-avatar.css";
 
 import classNames from "classnames";
 import * as React from "react";
-
 import avatarStub from "shared/media/manager-avatar.png";
 
 interface IProgramAvatarProps {
