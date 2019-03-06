@@ -1,18 +1,26 @@
 import "./deposit-details.scss";
 
-import classnames from "classnames";
-import * as PropTypes from "prop-types";
-import React from "react";
-import { translate } from "react-i18next";
+import classNames from "classnames";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { RefreshIcon } from "shared/components/icon/refresh-icon";
 
-const DepositDetails = props => {
-  const { t, available, service, deposit, className, titleClassName } = props;
+interface IDepositDetailsProps {
+  deposit: number;
+  available: number;
+  service?: { fetchProfileHeaderInfo(): void };
+  className?: string;
+  titleClassName?: string;
+}
+
+const DepositDetails: React.FC<
+  IDepositDetailsProps & InjectedTranslateProps
+> = ({ t, available, service, deposit, className, titleClassName }) => {
   return (
-    <div className={classnames("deposit-details", className)}>
+    <div className={classNames("deposit-details", className)}>
       <div
-        className={classnames(
+        className={classNames(
           "deposit-details__deposit-amount-title",
           titleClassName
         )}
@@ -23,7 +31,7 @@ const DepositDetails = props => {
       <div className="deposit-details__available-amount">
         {t("manager.create-fund-page.settings.fields.available-in-wallet")}
         <span
-          className={classnames("deposit-details__available-amount-value", {
+          className={classNames("deposit-details__available-amount-value", {
             "deposit-details__available-amount-value--error":
               available < deposit
           })}
@@ -39,16 +47,6 @@ const DepositDetails = props => {
       </div>
     </div>
   );
-};
-
-DepositDetails.propTypes = {
-  deposit: PropTypes.number.isRequired,
-  available: PropTypes.number.isRequired,
-  service: PropTypes.shape({
-    fetchProfileHeaderInfo: PropTypes.func.isRequired
-  }),
-  className: PropTypes.string,
-  titleClassName: PropTypes.string
 };
 
 export default translate()(DepositDetails);
