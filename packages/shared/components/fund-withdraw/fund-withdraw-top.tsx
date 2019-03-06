@@ -1,10 +1,17 @@
-import PropTypes from "prop-types";
-import React from "react";
-import { translate } from "react-i18next";
+import React, { FunctionComponent } from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-const FundWithdrawTop = ({ t, availableToWithdraw, title }) => {
+interface IFundWithdrawTopProps {
+  availableToWithdraw: number;
+  currency: string;
+  title: string;
+}
+
+const FundWithdrawTop: FunctionComponent<
+  IFundWithdrawTopProps & InjectedTranslateProps
+> = ({ t, availableToWithdraw, title, currency }) => {
   return (
     <div className="dialog__top">
       <div className="dialog__header">
@@ -13,16 +20,11 @@ const FundWithdrawTop = ({ t, availableToWithdraw, title }) => {
       </div>
       <div className="dialog-field">
         <StatisticItem label={t("withdraw-fund.available-to-withdraw")} big>
-          {formatCurrencyValue(availableToWithdraw, "GVT")} GVT
+          {formatCurrencyValue(availableToWithdraw, currency)} {currency}
         </StatisticItem>
       </div>
     </div>
   );
-};
-
-FundWithdrawTop.propTypes = {
-  availableToWithdraw: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired
 };
 
 export default translate()(FundWithdrawTop);
