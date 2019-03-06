@@ -453,7 +453,9 @@ export default translate()(
     mapPropsToValues: props => {
       return {
         depositWalletCurrency: "GVT",
-        depositWalletId: props.wallets.find(item => item.currency === "GVT").id,
+        depositWalletId: props.wallets
+          ? props.wallets.find(item => item.currency === "GVT").id
+          : null,
         assets: [],
         remainder: 100,
         exitFee: "",
