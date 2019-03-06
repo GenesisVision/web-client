@@ -3,7 +3,7 @@ import "./program-details-description.scss";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
-import { STATUS } from "shared/constants/constants";
+import { STATUS_OLD } from "shared/constants/constants";
 import platformApi from "shared/services/api-client/platform-api";
 
 import ProgramDetailsDescriptionMain from "./program-details-description-main";
@@ -70,25 +70,26 @@ class ProgramDetailsDescription extends PureComponent {
           isAuthenticated={isAuthenticated}
           redirectToLogin={redirectToLogin}
         />
-        {programDescription.personalProgramDetails && status !== STATUS.ENDED && (
-          <div className="program-details-description__additionally">
-            <DetailsInvestment
-              ProgramReinvestingWidget={ProgramReinvestingWidget}
-              onReinvestingClick={onReinvestingClick}
-              isReinvestPending={isReinvestPending}
-              isInvested={isInvested}
-              WithdrawContainer={ProgramWithdrawContainer}
-              notice={t(
-                "program-details-page.description.withdraw-notice-text"
-              )}
-              canWithdraw={canWithdraw}
-              assetCurrency={programDescription.currency}
-              onChangeInvestmentStatus={onChangeInvestmentStatus}
-              asset={PROGRAM}
-              {...investmentData}
-            />
-          </div>
-        )}
+        {programDescription.personalProgramDetails &&
+          status !== STATUS_OLD.ENDED && (
+            <div className="program-details-description__additionally">
+              <DetailsInvestment
+                ProgramReinvestingWidget={ProgramReinvestingWidget}
+                onReinvestingClick={onReinvestingClick}
+                isReinvestPending={isReinvestPending}
+                isInvested={isInvested}
+                WithdrawContainer={ProgramWithdrawContainer}
+                notice={t(
+                  "program-details-page.description.withdraw-notice-text"
+                )}
+                canWithdraw={canWithdraw}
+                assetCurrency={programDescription.currency}
+                onChangeInvestmentStatus={onChangeInvestmentStatus}
+                asset={PROGRAM}
+                {...investmentData}
+              />
+            </div>
+          )}
       </div>
     );
   }

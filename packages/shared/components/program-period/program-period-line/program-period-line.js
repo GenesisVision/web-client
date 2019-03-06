@@ -5,7 +5,7 @@ import { GVProgramPeriod } from "gv-react-components";
 import moment from "moment";
 import React from "react";
 import { translate } from "react-i18next";
-import { STATUS } from "shared/constants/constants";
+import { STATUS_OLD } from "shared/constants/constants";
 
 const calcDuration = (start, end) => {
   const dateStart = moment(start);
@@ -28,7 +28,7 @@ const ProgramPeriodLine = ({ t, start, end, className, status }) => {
       <div className="program-period-line__description">
         <div>{duration}</div>
         <div>
-          {status === STATUS.CLOSED
+          {status === STATUS_OLD.CLOSED
             ? t("program-period.program-closed")
             : timeLeft && `${timeLeft} ${t("program-period.left")}`}{" "}
         </div>

@@ -9,7 +9,7 @@ interface IModal {
   onClose?(event: React.MouseEvent<HTMLElement>): void;
   open: boolean;
   disableBackdropClick?: boolean;
-  transparentBackdrop: boolean;
+  transparentBackdrop?: boolean;
   fixed?: boolean;
 }
 

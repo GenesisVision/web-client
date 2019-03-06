@@ -2,7 +2,18 @@ export const MANAGER = "Manager";
 export const INVESTOR = "Investor";
 export const PROGRAM = "PROGRAM";
 export const FUND = "FUND";
-export const STATUS = {
+
+export enum STATUS {
+  ACTIVE = "Active",
+  INVESTING = "Investing",
+  WITHDRAWING = "Withdrawing",
+  ENDED = "Ended",
+  CLOSED = "Closed",
+  ARCHIVED = "Archived",
+  PENDING = "Pending"
+}
+
+export const STATUS_OLD = {
   ACTIVE: "Active",
   INVESTING: "Investing",
   WITHDRAWING: "Withdrawing",
