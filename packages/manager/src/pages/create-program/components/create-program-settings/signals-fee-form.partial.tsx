@@ -29,7 +29,7 @@ const SignalsFeeFormPartial: FunctionComponent<
       <div className="create-program-settings__row-title">
         {t("manager.create-program-page.settings.signal-provider-fees")}
       </div>
-      <div className="create-program-settings__item">
+      <div className="create-program-settings__item create-program-settings__item--wider">
         <GVFormikField
           name={subscriptionFeeFieldName}
           label={t(
@@ -53,7 +53,7 @@ const SignalsFeeFormPartial: FunctionComponent<
           )}
         />
       </div>
-      <div className="create-program-settings__item">
+      <div className="create-program-settings__item create-program-settings__item--wider">
         <GVFormikField
           name={successFeeFieldName}
           label={t(

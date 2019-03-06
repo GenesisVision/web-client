@@ -446,29 +446,31 @@ class CreateProgramSettings extends React.Component {
                   />
                 </div>
               )}
-              <div className="deposit-details__available-amount">
-                {t("manager.create-program-page.settings.fields.min-deposit")}
-                <span className={"deposit-details__available-amount-value"}>
-                  <NumberFormat
-                    value={minimumDepositsAmount[currency]}
-                    thousandSeparator=" "
-                    displayType="text"
-                    suffix={` ${currency}`}
-                  />
-                </span>
-              </div>
-              <div className="deposit-details__available-amount">
-                {t(
-                  "manager.create-fund-page.settings.fields.available-in-wallet"
-                )}
-                <span className={"deposit-details__available-amount-value"}>
-                  <NumberFormat
-                    value={selectedWallet.available}
-                    thousandSeparator=" "
-                    displayType="text"
-                    suffix={values ? ` ${depositWalletCurrency}` : " GVT"}
-                  />
-                </span>
+              <div className="deposit-details__available-list">
+                <div className="deposit-details__available-amount">
+                  {t("manager.create-program-page.settings.fields.min-deposit")}
+                  <span className={"deposit-details__available-amount-value"}>
+                    <NumberFormat
+                      value={minimumDepositsAmount[currency]}
+                      thousandSeparator=" "
+                      displayType="text"
+                      suffix={` ${currency}`}
+                    />
+                  </span>
+                </div>
+                <div className="deposit-details__available-amount">
+                  {t(
+                    "manager.create-fund-page.settings.fields.available-in-wallet"
+                  )}
+                  <span className={"deposit-details__available-amount-value"}>
+                    <NumberFormat
+                      value={selectedWallet.available}
+                      thousandSeparator=" "
+                      displayType="text"
+                      suffix={values ? ` ${depositWalletCurrency}` : " GVT"}
+                    />
+                  </span>
+                </div>
               </div>
             </div>
           </div>
