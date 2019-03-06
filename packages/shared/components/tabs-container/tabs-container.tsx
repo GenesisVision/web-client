@@ -1,11 +1,28 @@
 import { GVTab, GVTabs } from "gv-react-components";
-import React, { Component } from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 import GVScroll from "shared/components/scroll/gvscroll";
 
-class TabsContainer extends Component {
+export interface ITab {
+  name: string;
+  label: JSX.Element;
+  count: number;
+}
+
+interface ITabsContainerProps {
+  tabs: ITab[];
+  tab: ITab;
+  handleTabChange(
+    event: React.SyntheticEvent<EventTarget>,
+    value: string
+  ): void;
+}
+
+class TabsContainer extends React.Component<
+  ITabsContainerProps & InjectedTranslateProps
+> {
   render() {
     const { tabs, tab, handleTabChange } = this.props;
     return (
