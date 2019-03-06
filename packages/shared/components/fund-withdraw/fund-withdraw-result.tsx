@@ -1,9 +1,8 @@
 import React, { FunctionComponent } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { calculatePercentage } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
-
-import { calculatePercentage } from "../../utils/currency-converter";
 
 interface IFundWithdrawResultProps {
   availableToWithdraw: number;

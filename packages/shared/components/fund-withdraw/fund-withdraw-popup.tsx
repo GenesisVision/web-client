@@ -4,9 +4,9 @@ import {
   FundWithdrawalInfoResponse
 } from "modules/fund-withdraw/services/fund-withdraw.services";
 import React, { Component, Fragment } from "react";
+import { convertFromCurrency } from "shared/utils/currency-converter";
 import { ResponseError } from "shared/utils/types";
 
-import { convertFromCurrency } from "../../utils/currency-converter";
 import FundWithdrawAmountForm from "./fund-withdraw-amount-form";
 import FundWithdrawConfirmForm from "./fund-withdraw-confirm-form";
 import FundWithdrawTop from "./fund-withdraw-top";
