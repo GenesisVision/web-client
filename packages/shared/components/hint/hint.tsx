@@ -2,8 +2,8 @@ import "./hint.scss";
 
 import classNames from "classnames";
 import * as React from "react";
-import Tooltip from "shared/components/tooltip/tooltip";
 import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
+import Tooltip from "shared/components/tooltip/tooltip";
 
 interface IHintProps {
   content: JSX.Element;

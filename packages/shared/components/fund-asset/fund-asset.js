@@ -23,11 +23,12 @@ class FundAsset extends Component {
       removable,
       removeHandle,
       icon,
-      className
+      className,
+      ...other
     } = this.props;
     return (
       (type === FUND_ASSET_TYPE.text && (
-        <div>
+        <div {...other}>
           {currency}
           &nbsp;
           <NumberFormat value={percent} suffix="%" displayType="text" />
@@ -35,6 +36,7 @@ class FundAsset extends Component {
         </div>
       )) || (
         <div
+          {...other}
           className={classnames(
             "fund-asset",
             "fund-asset--default",

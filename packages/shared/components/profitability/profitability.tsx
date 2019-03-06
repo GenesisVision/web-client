@@ -4,9 +4,9 @@ import * as React from "react";
 
 import BaseProfitability from "./base-profitability";
 import {
-  composeProfitabilityPrefix,
   PROFITABILITY_PREFIX,
-  PROFITABILITY_VARIANT
+  PROFITABILITY_VARIANT,
+  composeProfitabilityPrefix
 } from "./profitability.helper";
 
 interface IProfitabilityProps {

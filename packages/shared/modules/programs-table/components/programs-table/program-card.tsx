@@ -1,12 +1,16 @@
+import { ProgramDetails } from "gv-api-web";
 import { GVButton } from "gv-react-components";
-import React, { Component } from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
 import LevelTooltip from "shared/components/level-tooltip/level-tooltip";
-import Popover from "shared/components/popover/popover";
+import Popover, {
+  HORIZONTAL_POPOVER_POS,
+  VERTICAL_POPOVER_POS
+} from "shared/components/popover/popover";
 import Profitability from "shared/components/profitability/profitability";
 import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
@@ -20,27 +24,40 @@ import {
   formatValue,
   formatValueDifferentDecimalScale
 } from "shared/utils/formatter";
+import { Nullable } from "shared/utils/types";
+
+interface IProgramCardProps {
+  program: ProgramDetails;
+  toggleFavorite(programId: string, isFavorite: boolean): void;
+  title: string;
+}
 
 const DECIMAL_SCALE_SMALL_VALUE = 4;
 const DECIMAL_SCALE_BIG_VALUE = 2;
 
-class ProgramCard extends Component {
+interface IProgramCardState {
+  anchor: Nullable<EventTarget>;
+}
+
+class ProgramCard extends React.Component<
+  IProgramCardProps & InjectedTranslateProps,
+  IProgramCardState
+> {
   state = {
-    anchor: null,
-    isOpenInvestmentPopup: false,
-    isOpenWithdrawalPopup: false
+    anchor: null
   };
-  handleOpenDropdown = event => this.setState({ anchor: event.currentTarget });
+  handleOpenDropdown = (event: React.ChangeEvent<HTMLInputElement>) =>
+    this.setState({ anchor: event.currentTarget });
   handleCloseDropdown = () => this.setState({ anchor: null });
   render() {
-    const { t, program, onExpandClick, toggleFavorite, title } = this.props;
+    const { t, program, toggleFavorite, title } = this.props;
     const handleToggleFavorite = () => {
       toggleFavorite(program.id, program.personalDetails.isFavorite);
     };
     return (
-      <div onClick={onExpandClick} className="programs-cards__card">
-        <div className="programs-cards__row">
-          <div className="programs-cards__avatar">
+      <div className="table-cards__card">
+        <div className="table-cards__row">
+          <div className="table-cards__avatar">
             <Link
               to={{
                 pathname: composeProgramDetailsUrl(program.url),
@@ -62,10 +79,10 @@ class ProgramCard extends Component {
               />
             </Link>
           </div>
-          <div className="programs-cards__main-info">
-            <div className="programs-cards__title-wrapper">
+          <div className="table-cards__main-info">
+            <div className="table-cards__title-wrapper">
               <Link
-                className="programs-cards__title"
+                className="table-cards__title"
                 to={{
                   pathname: composeProgramDetailsUrl(program.url),
                   state: `/ ${title}`
@@ -74,7 +91,7 @@ class ProgramCard extends Component {
                 {program.title}
               </Link>
               <Link
-                className="programs-cards__name"
+                className="table-cards__name"
                 to={{
                   pathname: composeManagerDetailsUrl(program.manager.url),
                   state: `/ ${title}`
@@ -83,14 +100,14 @@ class ProgramCard extends Component {
                 {program.manager.username}
               </Link>
             </div>
-            <div className="programs-cards__actions">
+            <div className="table-cards__actions">
               <ActionsCircleIcon
                 primary={!!this.state.anchor}
                 onClick={this.handleOpenDropdown}
               />
               <Popover
-                horizontal="right"
-                vertical="bottom"
+                horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
+                vertical={VERTICAL_POPOVER_POS.BOTTOM}
                 anchorEl={this.state.anchor}
                 noPadding
                 onClose={this.handleCloseDropdown}
@@ -136,12 +153,12 @@ class ProgramCard extends Component {
             <TagProgramContainer tags={program.tags} />
           </div>
         </div>
-        <div className="programs-cards__row">
-          <div className="programs-cards__chart">
+        <div className="table-cards__row">
+          <div className="table-cards__chart">
             <ProgramSimpleChart data={program.chart} programId={program.id} />
           </div>
-          <div className="programs-cards__chart-info">
-            <div className="programs-cards__profit">
+          <div className="table-cards__chart-info">
+            <div className="table-cards__profit">
               <Profitability
                 value={program.statistic.profitPercent}
                 variant="chips"
@@ -157,10 +174,11 @@ class ProgramCard extends Component {
             </div>
           </div>
         </div>
-        <div className="programs-cards__table">
-          <div className="programs-cards__table-column">
+        <div className="table-cards__table">
+          <div className="table-cards__table-column">
             <StatisticItem label={t("programs-page.programs-header.equity")}>
               <Tooltip
+                vertical={VERTICAL_POPOVER_POS.TOP}
                 render={() => (
                   <div>
                     {formatCurrencyValue(
@@ -189,7 +207,7 @@ class ProgramCard extends Component {
               />
             </StatisticItem>
           </div>
-          <div className="programs-cards__table-column">
+          <div className="table-cards__table-column">
             <StatisticItem label={t("programs-page.programs-header.investors")}>
               <NumberFormat
                 value={program.statistic.investorsCount}
@@ -205,7 +223,7 @@ class ProgramCard extends Component {
               />
             </StatisticItem>
           </div>
-          <div className="programs-cards__table-column">
+          <div className="table-cards__table-column">
             <StatisticItem
               label={t("programs-page.programs-header.available-to-invest")}
             >

@@ -70,7 +70,6 @@ const ProgramsTable = ({
           title={title}
           program={program}
           toggleFavorite={toggleFavorite}
-          isAuthenticated={isAuthenticated}
         />
       )}
     />
