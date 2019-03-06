@@ -1,0 +1,164 @@
+import "./gv-datepicker.scss";
+
+import * as moment from "moment";
+import * as React from "react";
+import { RefObject } from "react";
+import Calendar from "react-calendar";
+import { translate } from "react-i18next";
+import Popover, {
+  HORIZONTAL_POPOVER_POS,
+  VERTICAL_POPOVER_POS
+} from "shared/components/popover/popover";
+import { Nullable } from "shared/utils/types";
+
+export const DATE_FORMAT = "ll";
+
+interface IGVDatePickerProps {
+  value?: Date | string | Object;
+  onChange(event: {
+    persist(): void;
+    target: {
+      value: string;
+      name: string;
+    };
+  }): void;
+  minDate?: Date | string | Object;
+  maxDate?: Date | string | Object;
+  horizontal?: HORIZONTAL_POPOVER_POS;
+  disabled: boolean;
+  onFocus(
+    event:
+      | React.FocusEvent<HTMLButtonElement>
+      | React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ): void;
+  onBlur(target: {
+    target: {
+      name: string;
+    };
+  }): void;
+  name: string;
+  lng: string;
+}
+
+interface IGVDatePickerState {
+  anchorEl: Nullable<EventTarget>;
+}
+
+class GVDatePicker extends React.Component<
+  IGVDatePickerProps,
+  IGVDatePickerState
+> {
+  state = {
+    anchorEl: null
+  };
+
+  input: RefObject<HTMLButtonElement> = React.createRef();
+
+  handleChange = (data: Date) => {
+    if (this.props.onChange) {
+      this.props.onChange({
+        persist: () => {},
+        target: {
+          value: data && moment(data).format(),
+          name: this.props.name
+        }
+      });
+      this.handleClose();
+    }
+  };
+
+  handleBlur = (): void => {
+    const { disabled, onBlur, name } = this.props;
+    if (disabled || this.state.anchorEl) return;
+    if (onBlur) {
+      onBlur({
+        target: {
+          name
+        }
+      });
+    }
+  };
+
+  handleOpen = (anchorEl: EventTarget) => {
+    this.setState({ anchorEl });
+  };
+
+  handleClose = (): void => {
+    this.setState({ anchorEl: null }, this.handleBlur);
+  };
+
+  handleFocus = (
+    event:
+      | React.FocusEvent<HTMLButtonElement>
+      | React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ): void => {
+    const { disabled, onFocus } = this.props;
+    if (disabled) return;
+    if (onFocus) {
+      onFocus(event);
+    }
+  };
+
+  handleClick = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ): void => {
+    this.handleOpen(event.target);
+    this.handleFocus(event);
+  };
+
+  render() {
+    const {
+      value,
+      minDate,
+      maxDate,
+      name,
+      disabled,
+      horizontal,
+      lng
+    } = this.props;
+    const innerDate = value && moment(value).format(DATE_FORMAT);
+
+    const innerValue = value && moment(value).toDate();
+
+    const innerMinDate =
+      minDate && (minDate instanceof Date ? minDate : moment(minDate).toDate());
+
+    const innerMaxDate =
+      maxDate && (maxDate instanceof Date ? maxDate : moment(maxDate).toDate());
+
+    return (
+      <div className="gv-datepicker">
+        <button
+          type="button"
+          ref={this.input}
+          name={name}
+          value={innerDate}
+          onClick={this.handleClick}
+          onFocus={this.handleFocus}
+          className="gv-text-field__input"
+          onBlur={this.handleBlur}
+          disabled={disabled}
+        >
+          {innerDate}
+        </button>
+        <Popover
+          anchorEl={this.state.anchorEl}
+          onClose={this.handleClose}
+          horizontal={horizontal}
+          vertical={VERTICAL_POPOVER_POS.BOTTOM}
+        >
+          <Calendar
+            className="gv-datepicker__calendar"
+            value={innerValue}
+            onChange={this.handleChange}
+            locale={lng}
+            minDate={innerMinDate}
+            maxDate={innerMaxDate}
+          />
+        </Popover>
+      </div>
+    );
+  }
+}
+
+export default translate()(GVDatePicker);

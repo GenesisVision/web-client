@@ -6,9 +6,11 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import { Action } from "redux";
+import AssetStatus from "shared/components/asset-status/asset-status";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
 import Profitability from "shared/components/profitability/profitability";
+import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
@@ -19,7 +21,6 @@ import { FUND } from "shared/constants/constants";
 import { composeFundsDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
-import AssetStatus from "../../../asset-status/asset-status";
 import {
   Column,
   IUpdateFilterFunc
@@ -136,7 +137,7 @@ const DashboardFunds: FunctionComponent<
           <TableCell className="funds-table__cell funds-table__cell--profit">
             <Profitability
               value={formatValue(fund.statistic.profitPercent, 2)}
-              prefix="sign"
+              prefix={PROFITABILITY_PREFIX.SIGN}
             >
               <NumberFormat
                 value={formatValue(fund.statistic.profitPercent, 2)}

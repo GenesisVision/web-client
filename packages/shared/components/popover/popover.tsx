@@ -22,17 +22,14 @@ export enum HORIZONTAL_POPOVER_POS {
 
 export type anchorElType = { [keys: string]: any } | Function;
 
-interface IPopoverOwnProps {
+interface IPopoverProps {
   horizontal: HORIZONTAL_POPOVER_POS;
-  vertical: VERTICAL_POPOVER_POS;
+  vertical?: VERTICAL_POPOVER_POS;
   anchorEl: Nullable<anchorElType>;
-  noPadding: boolean;
+  noPadding?: boolean;
   disableBackdropClick?: boolean;
   className?: string;
-  onClose?(event: React.MouseEvent<HTMLElement>): void;
-}
-interface IPopoverProps extends IPopoverOwnProps {
-  scrollTop: number;
+  scrollTop?: number;
 }
 interface IPopoverState {
   windowWidth: number;

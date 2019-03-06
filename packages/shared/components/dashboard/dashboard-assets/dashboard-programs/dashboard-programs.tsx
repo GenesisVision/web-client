@@ -11,6 +11,8 @@ import AssetStatus from "shared/components/asset-status/asset-status";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import { DASHBOARD_PROGRAMS_COLUMNS } from "shared/components/dashboard/dashboard.constants";
 import LevelTooltip from "shared/components/level-tooltip/level-tooltip";
+import Profitability from "shared/components/profitability/profitability";
+import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import ProgramPeriodEnd from "shared/components/program-period/program-period-end/program-period-end";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
@@ -18,6 +20,10 @@ import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filte
 import TableCell from "shared/components/table/components/table-cell";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
+import {
+  Column,
+  IUpdateFilterFunc
+} from "shared/components/table/components/table.types";
 import { PROGRAM } from "shared/constants/constants";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import {
@@ -26,12 +32,7 @@ import {
   formatValue
 } from "shared/utils/formatter";
 
-import {
-  Column,
-  IUpdateFilterFunc
-} from "shared/components/table/components/table.types";
 import dashboardProgramsTableSelector from "./dashboard-programs.selector";
-import Profitability from "shared/components/profitability/profitability";
 
 interface IDashboardProgramsProps {
   role: string;
@@ -136,7 +137,7 @@ const DashboardPrograms: FunctionComponent<
           <TableCell className="programs-table__cell dashboard-programs__cell--profit">
             <Profitability
               value={formatValue(program.statistic.profitPercent, 2)}
-              prefix="sign"
+              prefix={PROFITABILITY_PREFIX.SIGN}
             >
               <NumberFormat
                 value={formatValue(program.statistic.profitPercent, 2)}

@@ -12,7 +12,7 @@ import DetailsNotification from "shared/components/details/details-description-s
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { STATUS } from "shared/constants/constants";
+import { STATUS_OLD } from "shared/constants/constants";
 import {
   composeFundNotificationsUrl,
   composeManagerDetailsUrl
@@ -228,8 +228,8 @@ class FundDetailsDescription extends PureComponent {
                         </GVButton>
                         {!canReallocate &&
                           possibleReallocationTime &&
-                          fundDescription.status !== STATUS.CLOSED &&
-                          fundDescription.status !== STATUS.ARCHIVED && (
+                          fundDescription.status !== STATUS_OLD.CLOSED &&
+                          fundDescription.status !== STATUS_OLD.ARCHIVED && (
                             <div className="details-description__reallocate-message">
                               {t(
                                 "fund-details-page.description.disable-reallocation-message"
@@ -289,17 +289,18 @@ class FundDetailsDescription extends PureComponent {
                 </div>
               </Fragment>
             )}
-            {fundDescription.personalFundDetails && status !== STATUS.ENDED && (
-              <DetailsInvestment
-                WithdrawContainer={FundWithdrawContainer}
-                canWithdraw={canWithdraw}
-                assetCurrency={"GVT"}
-                {...investmentData}
-                onChangeInvestmentStatus={onChangeInvestmentStatus}
-                asset={FUND}
-                role={role}
-              />
-            )}
+            {fundDescription.personalFundDetails &&
+              status !== STATUS_OLD.ENDED && (
+                <DetailsInvestment
+                  WithdrawContainer={FundWithdrawContainer}
+                  canWithdraw={canWithdraw}
+                  assetCurrency={"GVT"}
+                  {...investmentData}
+                  onChangeInvestmentStatus={onChangeInvestmentStatus}
+                  asset={FUND}
+                  role={role}
+                />
+              )}
           </div>
         </div>
         <div className="details-description__right">

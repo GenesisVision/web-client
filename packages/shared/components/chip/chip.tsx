@@ -9,12 +9,12 @@ export enum CHIP_TYPE {
   WARNING = "warning"
 }
 interface IChipProps {
-  disabled: boolean;
+  disabled?: boolean;
   children: () => void | { [keys: string]: any } | JSX.Element;
   className: string;
-  rounded: boolean;
+  rounded?: boolean;
   type: CHIP_TYPE;
-  onClick(event: React.MouseEvent<HTMLElement>): void | undefined;
+  onClick?(event: React.MouseEvent<HTMLElement>): void | undefined;
 }
 class Chip extends React.Component<IChipProps> {
   handleClick = (event: React.MouseEvent<HTMLElement>) => {

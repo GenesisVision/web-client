@@ -14,6 +14,7 @@ import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avata
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import { CloseIcon } from "shared/components/icon/close-icon";
 import Profitability from "shared/components/profitability/profitability";
+import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import { TableCell } from "shared/components/table/components";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
@@ -22,8 +23,7 @@ import {
   composeManagerDetailsUrl,
   composeProgramDetailsUrl
 } from "shared/utils/compose-url";
-import { formatValue } from "shared/utils/formatter";
-import { formatPercent } from "shared/utils/formatter";
+import { formatPercent, formatValue } from "shared/utils/formatter";
 
 import { clearCopytradingTable } from "../actions/copytrading-tables.actions";
 import {
@@ -153,7 +153,7 @@ class OpenTradesTable extends Component<
             <TableCell>
               <Profitability
                 value={+formatPercent(signalTrade.profit)}
-                prefix="sign"
+                prefix={PROFITABILITY_PREFIX.SIGN}
               >
                 <NumberFormat
                   value={formatPercent(signalTrade.profit)}

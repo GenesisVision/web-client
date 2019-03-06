@@ -10,7 +10,7 @@ import ProgramSimpleChart from "shared/components/program-simple-chart/program-s
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import { composeFundsDetailsUrl } from "shared/utils/compose-url";
-import { formatValue } from "shared/utils/formatter";
+import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 class FundsTableRow extends Component {
   constructor(props) {
@@ -54,9 +54,8 @@ class FundsTableRow extends Component {
         </TableCell>
         <TableCell className="funds-table__cell funds-table__cell--amount">
           <NumberFormat
-            value={formatValue(fund.statistic.balanceGVT.amount)}
+            value={formatCurrencyValue(fund.statistic.balanceGVT.amount, "GVT")}
             suffix=" GVT"
-            decimalScale={0}
             displayType="text"
           />
         </TableCell>
