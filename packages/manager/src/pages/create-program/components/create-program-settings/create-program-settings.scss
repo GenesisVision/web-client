@@ -14,24 +14,102 @@
     margin-top: 60px;
   }
 
-  &__name {
-    padding-bottom: $padding-small;
-    display: inline-flex;
+  &__row {
+    display: flex;
+    flex-wrap: wrap;
+    //margin-bottom: 8px;
+    width: auto;
+    max-width: 230px;
     position: relative;
-    width: 230px;
-    margin-right: 24px;
+    justify-content: space-between;
 
-    @include media-breakpoint-landscape-phone() {
-      padding-bottom: $padding-xsmall;
+    & .gv-text-field__error {
+      white-space: nowrap;
     }
 
-    &-requirements {
+    //&--description {
+    //  & .gv-text-field,
+    //  & .gv-text-field__wrapper {
+    //    width: 100%;
+    //  }
+    //}
+
+    .gv-text-field__wrapper,
+    .gv-checkbox-wrapper {
+      margin: 0;
+    }
+
+    //& .gv-text-field__wrapper:first-child {
+    //  margin: 16px 24px 16px 0;
+    //}
+
+    .select--disabled .select__value {
+      color: $text-light-color;
+    }
+
+    @include media-breakpoint-landscape-phone() {
+      max-width: 484px;
+    }
+  }
+
+  &__item {
+    position: relative;
+    margin-bottom: 40px;
+    max-width: 230px;
+
+    //&:last-child {
+    //  margin-bottom: 0;
+    //}
+
+    .gv-text-field,
+    .gv-text-field__wrapper {
+      width: 230px;
+    }
+
+    &.deposit-details {
+      max-width: 280px;
+
+      .gv-text-field,
+      .gv-text-field__wrapper {
+        width: 280px;
+      }
+    }
+
+    .invest-popup__currency {
+      margin-bottom: 0;
+    }
+
+    &-caption {
+      padding-top: $padding-small;
       font-size: 12px;
       color: $label-color;
       letter-spacing: 0.4px;
-      position: absolute;
-      top: 80px;
-      left: 0;
+      width: 100%;
+
+      @include media-breakpoint-landscape-phone() {
+        padding-top: $padding-xsmall;
+      }
+
+      &.hint {
+        cursor: pointer;
+      }
+    }
+
+    &-caption-tooltip-content {
+      width: 248px;
+      font-size: 12px;
+      line-height: 1.6;
+      color: $text-light-color;
+    }
+
+    &--wider {
+      max-width: 100%;
+      width: 100%;
+
+      .gv-text-field,
+      .gv-text-field__wrapper {
+        width: 100%;
+      }
     }
   }
 
@@ -80,7 +158,7 @@
 
   &__fill-block {
     padding-top: 16px;
-    padding-bottom: $padding-medium;
+    padding-bottom: $padding-medium - 24px;
 
     &:last-child {
       padding-bottom: 0;
@@ -88,7 +166,7 @@
 
     @include media-breakpoint-tablet() {
       padding-left: 87px;
-      padding-bottom: 60px;
+      padding-bottom: $padding-big - 24px;
 
       &--with-border {
         border-left: 2px solid $secondary-color;
@@ -108,12 +186,10 @@
   }
 
   &__description {
-    &-info {
-      margin-top: 4px;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-    }
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
 
     &-requirements {
       font-size: 12px;
@@ -137,7 +213,6 @@
   }
 
   &__logo-title {
-    margin-top: 44px;
     margin-bottom: 8px;
     font-size: $font-size-common;
     letter-spacing: 0.3px;
@@ -152,7 +227,6 @@
   }
 
   &__logo-section {
-    margin-top: 30px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -231,52 +305,8 @@
     font-weight: 500;
     font-size: $font-size-small;
     letter-spacing: 0.4px;
-    margin: $padding-xsmall 0 $padding-xxsmall;
+    margin-bottom: 24px;
     width: 100%;
-  }
-  &__row {
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 8px;
-    width: auto;
-    max-width: 230px;
-    position: relative;
-
-    & .gv-text-field {
-      width: 230px;
-      &__error {
-        white-space: nowrap;
-      }
-    }
-
-    &--description {
-      & .gv-text-field,
-      & .gv-text-field__wrapper {
-        width: 100%;
-      }
-    }
-
-    & .gv-text-field__wrapper {
-      margin: 16px 0;
-    }
-
-    & .gv-checkbox-wrapper {
-      margin: $padding-big 0 0;
-    }
-
-    & .gv-text-field__wrapper:first-child {
-      margin: 16px 24px 16px 0;
-    }
-
-    &
-      .create-program-settings__leverage.gv-text-field--disabled
-      .select__value {
-      color: $text-light-color;
-    }
-
-    @include media-breakpoint-landscape-phone() {
-      max-width: 484px;
-    }
   }
 
   &__navigation {
@@ -298,13 +328,6 @@
   }
 }
 
-.create-program-settings__fee-hint-tooltip-content {
-  width: 248px;
-  font-size: 12px;
-  line-height: 1.6;
-  color: $text-light-color;
-}
-
 .deposit-details {
   &__deposit-amount {
     &-title {
@@ -316,6 +339,10 @@
       font-size: $font-size-h2;
       letter-spacing: 0.4px;
     }
+  }
+
+  &__available-list {
+    margin-top: 30px;
   }
 
   &__available-amount {
@@ -339,7 +366,8 @@
       cursor: pointer;
     }
   }
-  & .gv-text-field__wrapper {
+
+  .gv-text-field__wrapper {
     margin-left: 0;
   }
 }
