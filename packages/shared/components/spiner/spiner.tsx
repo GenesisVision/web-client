@@ -1,9 +1,12 @@
 import "./spinner.scss";
 
-import PropTypes from "prop-types";
-import React from "react";
+import * as React from "react";
 
-const Spinner = ({ isShown }) =>
+interface ISpinnerProps {
+  isShown?: boolean;
+}
+
+const Spinner: React.FC<ISpinnerProps> = ({ isShown }) =>
   isShown ? (
     <div className="gv-spinner__wrapper">
       <div className="gv-spinner">
@@ -22,9 +25,5 @@ const Spinner = ({ isShown }) =>
       </div>
     </div>
   ) : null;
-
-Spinner.propTypes = {
-  isShown: PropTypes.bool
-};
 
 export default Spinner;
