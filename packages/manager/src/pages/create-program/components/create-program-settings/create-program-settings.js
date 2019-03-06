@@ -140,7 +140,7 @@ class CreateProgramSettings extends React.Component {
           </div>
           <div className="create-program-settings__fill-block create-program-settings__fill-block--with-border">
             <div className="create-program-settings__row">
-              <div className="create-program-settings__name">
+              <div className="create-program-settings__item">
                 <GVFormikField
                   type="text"
                   name="title"
@@ -148,181 +148,189 @@ class CreateProgramSettings extends React.Component {
                   autoComplete="off"
                   component={GVTextField}
                 />
-                <div className="create-program-settings__name-requirements">
+                <div className="create-program-settings__item-caption">
                   {t(
                     "manager.create-program-page.settings.fields.name-requirements"
                   )}
                 </div>
               </div>
-              <AccountTypeField
-                accountTypes={getAccountTypes(broker)}
-                label={t(
-                  "manager.create-program-page.settings.fields.account-type"
-                )}
-                setLeverageChooseAvailable={setLeverageChooseAvailable}
-                setFieldValue={setFieldValue}
-                broker={broker}
-              />
-            </div>
-            <div className="create-program-settings__row">
-              <GVFormikField
-                name="currency"
-                component={GVTextField}
-                label={t(
-                  "manager.create-program-page.settings.fields.currency"
-                )}
-                InputComponent={Select}
-                disabled={!accountType}
-                onChange={this.onChangeCurrency}
-              >
-                {getCurrencies(broker, accountType).map(currency => {
-                  return (
-                    <option value={currency} key={currency}>
-                      {currency}
-                    </option>
-                  );
-                })}
-              </GVFormikField>
-            </div>
-            <div className="create-program-settings__row create-program-settings__row--description">
-              <GVFormikField
-                type="textarea"
-                name="description"
-                label={t(
-                  "manager.create-program-page.settings.fields.description"
-                )}
-                component={GVTextField}
-              />
-              <div className="create-program-settings__description-info">
-                <span className="create-program-settings__description-requirements">
-                  {t(
-                    "manager.create-program-page.settings.fields.description-requirements"
+              <div className="create-program-settings__item">
+                <AccountTypeField
+                  accountTypes={getAccountTypes(broker)}
+                  label={t(
+                    "manager.create-program-page.settings.fields.account-type"
                   )}
-                </span>
-                {description.length > 0 && (
-                  <span className="create-program-settings__description-chars">
-                    {description.length}
-                    <GVProgramPeriod
-                      start={0}
-                      end={500}
-                      value={description.length}
-                    />
-                  </span>
-                )}
+                  setLeverageChooseAvailable={setLeverageChooseAvailable}
+                  setFieldValue={setFieldValue}
+                  broker={broker}
+                />
               </div>
-            </div>
-            <div className="create-program-settings__row create-program-settings__row--couple-field">
-              <GVFormikField
-                name="leverage"
-                component={GVTextField}
-                label={t(
-                  "manager.create-program-page.settings.fields.brokers-leverage"
-                )}
-                InputComponent={Select}
-                disabled={!accountType || !isLeverageChooseAvailable}
-                className="create-program-settings__leverage"
-              >
-                {getLeverages(broker, accountType).map(leverage => {
-                  return (
-                    <option value={leverage.toString()} key={leverage}>
-                      {leverage}
-                    </option>
-                  );
-                })}
-              </GVFormikField>
-              <GVFormikField
-                name="periodLength"
-                component={GVTextField}
-                label={t("manager.create-program-page.settings.fields.period")}
-                InputComponent={Select}
-              >
-                {programsInfo.periods.map(period => {
-                  return (
-                    <option value={period.toString()} key={period}>
-                      {period +
-                        " " +
-                        t(
-                          "manager.create-program-page.settings.fields.period-option-notation.day",
-                          { count: period }
+              <div className="create-program-settings__item">
+                <GVFormikField
+                  name="currency"
+                  component={GVTextField}
+                  label={t(
+                    "manager.create-program-page.settings.fields.currency"
+                  )}
+                  InputComponent={Select}
+                  disabled={!accountType}
+                  onChange={this.onChangeCurrency}
+                >
+                  {getCurrencies(broker, accountType).map(currency => {
+                    return (
+                      <option value={currency} key={currency}>
+                        {currency}
+                      </option>
+                    );
+                  })}
+                </GVFormikField>
+              </div>
+              <div className="create-program-settings__item create-program-settings__item--wider">
+                <GVFormikField
+                  type="textarea"
+                  name="description"
+                  label={t(
+                    "manager.create-program-page.settings.fields.description"
+                  )}
+                  component={GVTextField}
+                />
+                <div className="create-program-settings__item-caption create-program-settings__description">
+                  <span className="create-program-settings__description-requirements">
+                    {t(
+                      "manager.create-program-page.settings.fields.description-requirements"
+                    )}
+                  </span>
+                  {description.length > 0 && (
+                    <span className="create-program-settings__description-chars">
+                      {description.length}
+                      <GVProgramPeriod
+                        start={0}
+                        end={500}
+                        value={description.length}
+                      />
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className="create-program-settings__item">
+                <GVFormikField
+                  name="leverage"
+                  component={GVTextField}
+                  label={t(
+                    "manager.create-program-page.settings.fields.brokers-leverage"
+                  )}
+                  InputComponent={Select}
+                  disabled={!accountType || !isLeverageChooseAvailable}
+                  className="create-program-settings__leverage"
+                >
+                  {getLeverages(broker, accountType).map(leverage => {
+                    return (
+                      <option value={leverage.toString()} key={leverage}>
+                        {leverage}
+                      </option>
+                    );
+                  })}
+                </GVFormikField>
+              </div>
+              <div className="create-program-settings__item">
+                <GVFormikField
+                  name="periodLength"
+                  component={GVTextField}
+                  label={t(
+                    "manager.create-program-page.settings.fields.period"
+                  )}
+                  InputComponent={Select}
+                >
+                  {programsInfo.periods.map(period => {
+                    return (
+                      <option value={period.toString()} key={period}>
+                        {period +
+                          " " +
+                          t(
+                            "manager.create-program-page.settings.fields.period-option-notation.day",
+                            { count: period }
+                          )}
+                      </option>
+                    );
+                  })}
+                </GVFormikField>
+              </div>
+              <div className="create-program-settings__item">
+                <GVFormikField
+                  name="stopOutLevel"
+                  label={t(
+                    "manager.create-program-page.settings.fields.stop-out-level"
+                  )}
+                  adornment="%"
+                  component={GVTextField}
+                  InputComponent={NumberFormat}
+                  autoComplete="off"
+                  decimalScale={4}
+                />
+                <Hint
+                  content={t(
+                    "manager.create-program-page.settings.hints.stop-out-level"
+                  )}
+                  className="create-program-settings__item-caption"
+                  vertical={"bottom"}
+                  tooltipContent={t(
+                    "manager.create-program-page.settings.hints.stop-out-level-description"
+                  )}
+                />
+              </div>
+              <div className="create-program-settings__item create-program-settings__item--wider">
+                <div className="create-program-settings__logo-title">
+                  {t("manager.create-program-page.settings.fields.upload-logo")}
+                </div>
+                <div className="create-program-settings__logo-notice">
+                  {t(
+                    "manager.create-program-page.settings.fields.upload-logo-rules"
+                  )}
+                </div>
+              </div>
+              <div className="create-program-settings__item create-program-settings__item--wider create-program-settings__logo-section">
+                <div className="create-program-settings__file-field-container">
+                  <Field
+                    name="logo"
+                    render={({ field, form }) => (
+                      <InputImage
+                        {...field}
+                        defaultImage={ProgramDefaultImage}
+                        onChange={setFieldValue}
+                        notifyError={notifyError}
+                        alt="Program logo"
+                        error={imageInputError}
+                      />
+                    )}
+                  />
+                </div>
+                <div className="create-program-settings__image-info">
+                  <div className="create-program-settings__image-title">
+                    {title}
+                  </div>
+                  <div className="create-program-settings__image-author">
+                    {author}
+                  </div>
+                </div>
+              </div>
+              {broker.isSignalsAvailable && (
+                <div className="create-program-settings__item">
+                  <GVFormikField
+                    type="checkbox"
+                    color="primary"
+                    name="isSignalProgram"
+                    label={
+                      <span>
+                        {t(
+                          "manager.create-program-page.settings.fields.provide-signals"
                         )}
-                    </option>
-                  );
-                })}
-              </GVFormikField>
-            </div>
-            <div className="create-program-settings__row">
-              <GVFormikField
-                name="stopOutLevel"
-                label={t(
-                  "manager.create-program-page.settings.fields.stop-out-level"
-                )}
-                adornment="%"
-                component={GVTextField}
-                InputComponent={NumberFormat}
-                autoComplete="off"
-                decimalScale={4}
-              />
-              <Hint
-                content={t(
-                  "manager.create-program-page.settings.hints.stop-out-level"
-                )}
-                className="create-program-settings__fee-hint"
-                vertical={"bottom"}
-                tooltipContent={t(
-                  "manager.create-program-page.settings.hints.stop-out-level-description"
-                )}
-              />
-            </div>
-            <div className="create-program-settings__logo-title">
-              {t("manager.create-program-page.settings.fields.upload-logo")}
-            </div>
-            <div className="create-program-settings__logo-notice">
-              {t(
-                "manager.create-program-page.settings.fields.upload-logo-rules"
+                      </span>
+                    }
+                    component={GVCheckbox}
+                  />
+                </div>
               )}
             </div>
-            <div className="create-program-settings__logo-section">
-              <div className="create-program-settings__file-field-container">
-                <Field
-                  name="logo"
-                  render={({ field, form }) => (
-                    <InputImage
-                      {...field}
-                      defaultImage={ProgramDefaultImage}
-                      onChange={setFieldValue}
-                      notifyError={notifyError}
-                      alt="Program logo"
-                      error={imageInputError}
-                    />
-                  )}
-                />
-              </div>
-              <div className="create-program-settings__image-info">
-                <div className="create-program-settings__image-title">
-                  {title}
-                </div>
-                <div className="create-program-settings__image-author">
-                  {author}
-                </div>
-              </div>
-            </div>
-            {broker.isSignalsAvailable && (
-              <div className="create-program-settings__row create-program-settings__row--provide-signals">
-                <GVFormikField
-                  type="checkbox"
-                  color="primary"
-                  name="isSignalProgram"
-                  label={
-                    <span>
-                      {t(
-                        "manager.create-program-page.settings.fields.provide-signals"
-                      )}
-                    </span>
-                  }
-                  component={GVCheckbox}
-                />
-              </div>
-            )}
           </div>
           <div className="create-program-settings__subheading">
             <span className="create-program-settings__block-number">02</span>
@@ -335,7 +343,7 @@ class CreateProgramSettings extends React.Component {
                   "manager.create-program-page.settings.investment-program-fees"
                 )}
               </div>
-              <div className="create-program-settings__fee">
+              <div className="create-program-settings__item">
                 <GVFormikField
                   name="entryFee"
                   label={t(
@@ -351,14 +359,14 @@ class CreateProgramSettings extends React.Component {
                   content={t(
                     "manager.create-program-page.settings.hints.entry-fee"
                   )}
-                  className="create-program-settings__fee-hint"
+                  className="create-program-settings__item-caption"
                   vertical={"bottom"}
                   tooltipContent={t(
                     "manager.create-program-page.settings.hints.entry-fee-description"
                   )}
                 />
               </div>
-              <div className="create-program-settings__fee">
+              <div className="create-program-settings__item">
                 <GVFormikField
                   name="successFee"
                   label={t(
@@ -374,7 +382,7 @@ class CreateProgramSettings extends React.Component {
                   content={t(
                     "manager.create-program-page.settings.hints.success-fee"
                   )}
-                  className="create-program-settings__fee-hint"
+                  className="create-program-settings__item-caption"
                   vertical={"bottom"}
                   tooltipContent={t(
                     "manager.create-program-page.settings.hints.success-fee-description"
@@ -398,7 +406,7 @@ class CreateProgramSettings extends React.Component {
           <div
             className={"deposit-details create-program-settings__fill-block"}
           >
-            <div className="deposit-details__wallets">
+            <div className="create-program-settings__item deposit-details">
               <GVFormikField
                 name="depositWalletCurrency" // value={"GVT"}
                 component={GVTextField}
@@ -419,8 +427,6 @@ class CreateProgramSettings extends React.Component {
                   );
                 })}
               </GVFormikField>
-            </div>
-            <div className="deposit-details__amount">
               <InputAmountField
                 autoFocus={false}
                 name="depositAmount"
@@ -440,30 +446,30 @@ class CreateProgramSettings extends React.Component {
                   />
                 </div>
               )}
-            </div>
-            <div className="deposit-details__available-amount">
-              {t("manager.create-program-page.settings.fields.min-deposit")}
-              <span className={"deposit-details__available-amount-value"}>
-                <NumberFormat
-                  value={minimumDepositsAmount[currency]}
-                  thousandSeparator=" "
-                  displayType="text"
-                  suffix={` ${currency}`}
-                />
-              </span>
-            </div>
-            <div className="deposit-details__available-amount">
-              {t(
-                "manager.create-fund-page.settings.fields.available-in-wallet"
-              )}
-              <span className={"deposit-details__available-amount-value"}>
-                <NumberFormat
-                  value={selectedWallet.available}
-                  thousandSeparator=" "
-                  displayType="text"
-                  suffix={values ? ` ${depositWalletCurrency}` : " GVT"}
-                />
-              </span>
+              <div className="deposit-details__available-amount">
+                {t("manager.create-program-page.settings.fields.min-deposit")}
+                <span className={"deposit-details__available-amount-value"}>
+                  <NumberFormat
+                    value={minimumDepositsAmount[currency]}
+                    thousandSeparator=" "
+                    displayType="text"
+                    suffix={` ${currency}`}
+                  />
+                </span>
+              </div>
+              <div className="deposit-details__available-amount">
+                {t(
+                  "manager.create-fund-page.settings.fields.available-in-wallet"
+                )}
+                <span className={"deposit-details__available-amount-value"}>
+                  <NumberFormat
+                    value={selectedWallet.available}
+                    thousandSeparator=" "
+                    displayType="text"
+                    suffix={values ? ` ${depositWalletCurrency}` : " GVT"}
+                  />
+                </span>
+              </div>
             </div>
           </div>
         </form>
