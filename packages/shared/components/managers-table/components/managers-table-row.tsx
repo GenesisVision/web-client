@@ -1,16 +1,22 @@
 import "./managers-table.scss";
 
 import { GVButton } from "gv-react-components";
-import moment from "moment";
-import React from "react";
-import { translate } from "react-i18next";
+import * as moment from "moment";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import { composeManagerDetailsUrl } from "shared/utils/compose-url";
-
-const ManagersTableRow = ({ t, manager, title }) => {
+import { ManagerProfile } from "gv-api-web";
+interface IManagersTableRowProps {
+  manager: ManagerProfile;
+  title: any;
+}
+const ManagersTableRow: React.FC<
+  IManagersTableRowProps & InjectedTranslateProps
+> = ({ t, manager, title }) => {
   return (
     <TableRow className="managers-table__row">
       <TableCell className="managers-table__cell--username">
