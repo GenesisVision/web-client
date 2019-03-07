@@ -1,18 +1,40 @@
 import "./fund-asset.scss";
 
-import classnames from "classnames";
-import React, { Component } from "react";
+import classNames from "classnames";
+import * as React from "react";
 import NumberFormat from "react-number-format";
 import FundAssetImage from "shared/components/avatar/fund-asset-image/fund-asset-image";
 import { CURRENCY_VALUES } from "shared/modules/currency-select/currency-select.constants";
+import { FundAssetPartWithIcon } from "gv-api-web";
 
-export const FUND_ASSET_TYPE = {
+export const FUND_ASSET_TYPE_old = {
   large: "large",
   middle: "middle",
   short: "short",
   text: "text"
 };
-class FundAsset extends Component {
+
+export enum FUND_ASSET_TYPE {
+  LARGE = "large",
+  MIDDLE = "middle",
+  SHORT = "short",
+  TEXT = "text"
+}
+
+interface IFundAssetProps {
+  currency?: string;
+  type: FUND_ASSET_TYPE;
+  last: boolean;
+  removable: boolean;
+  removeHandle(
+    currency: string
+  ): (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  className: string;
+}
+
+class FundAsset extends React.Component<
+  IFundAssetProps & FundAssetPartWithIcon
+> {
   render() {
     const {
       name,
@@ -27,7 +49,7 @@ class FundAsset extends Component {
       ...other
     } = this.props;
     return (
-      (type === FUND_ASSET_TYPE.text && (
+      (type === FUND_ASSET_TYPE.TEXT && (
         <div {...other}>
           {currency}
           &nbsp;
@@ -37,12 +59,12 @@ class FundAsset extends Component {
       )) || (
         <div
           {...other}
-          className={classnames(
+          className={classNames(
             "fund-asset",
             "fund-asset--default",
             className,
             {
-              "fund-asset--large": type === FUND_ASSET_TYPE.large
+              "fund-asset--large": type === FUND_ASSET_TYPE.LARGE
             }
           )}
         >
@@ -50,12 +72,12 @@ class FundAsset extends Component {
 
           {currency && (
             <div className="fund-asset__currencies">
-              {type === FUND_ASSET_TYPE.large && (
+              {type === FUND_ASSET_TYPE.LARGE && (
                 <div className="fund-asset__currency-full">
                   {name || CURRENCY_VALUES[currency]}
                 </div>
               )}
-              {type !== FUND_ASSET_TYPE.short && (
+              {type !== FUND_ASSET_TYPE.SHORT && (
                 <div className="fund-asset__currency-short">{currency}</div>
               )}
             </div>

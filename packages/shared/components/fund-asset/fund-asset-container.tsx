@@ -1,14 +1,35 @@
 import "./fund-asset.scss";
 
-import classnames from "classnames";
-import React, { Component } from "react";
+import classNames from "classnames";
+import * as React from "react";
 import NumberFormat from "react-number-format";
 import Tooltip from "shared/components/tooltip/tooltip";
 
 import FundAsset, { FUND_ASSET_TYPE } from "./fund-asset";
 import FundAssetTooltip from "./fund-asset-tooltip/fund-asset-tooltip";
+import { FundAssetPartWithIcon } from "gv-api-web";
 
-class FundAssetContainer extends Component {
+interface IFundAssetContainerProps {
+  size: number;
+  assets: FundAssetPartWithIcon[];
+  type: FUND_ASSET_TYPE;
+  length: number;
+  removable: boolean;
+  removeHandle(
+    currency: string
+  ): (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  remainder: number;
+  hoveringAsset: string;
+}
+
+interface IFundAssetContainerState {
+  size: number;
+}
+
+class FundAssetContainer extends React.Component<
+  IFundAssetContainerProps,
+  IFundAssetContainerState
+> {
   state = {
     size: this.props.size
   };
@@ -30,8 +51,8 @@ class FundAssetContainer extends Component {
     const { size } = this.state;
     return (
       <div
-        className={classnames("fund-assets", {
-          "fund-assets--text": type === FUND_ASSET_TYPE.text
+        className={classNames("fund-assets", {
+          "fund-assets--text": type === FUND_ASSET_TYPE.TEXT
         })}
       >
         {assets.map(
@@ -44,10 +65,8 @@ class FundAssetContainer extends Component {
                 )}
               >
                 <FundAsset
-                  icon={asset.icon}
-                  percent={asset.percent}
+                  {...asset}
                   currency={asset.asset}
-                  name={asset.name}
                   type={type}
                   last={idx === assets.length - 1}
                   removable={removable}
@@ -60,7 +79,7 @@ class FundAssetContainer extends Component {
             )
         )}
         {size < (length || assets.length) &&
-          ((type === FUND_ASSET_TYPE.text && (
+          ((type === FUND_ASSET_TYPE.TEXT && (
             <div>... +{assets.length - size}</div>
           )) || (
             <div
