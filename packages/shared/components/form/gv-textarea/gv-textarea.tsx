@@ -2,15 +2,15 @@ import "./gv-textarea.css";
 
 import classNames from "classnames";
 import * as React from "react";
-import { FormikActions, FormikState } from "formik";
+import { FieldProps, FormikActions, FormikState } from "formik";
 
 interface IGVTextareaProps {
-  field: { name: string; value: any }; // { name, value, onChange, onBlur }
+  // field: { name: string; value: any }; // { name, value, onChange, onBlur }
   label: any;
-  form: FormikState<any> & FormikActions<any>;
+  // form: FormikState<any> & FormikActions<any>;
 }
 
-const GVTextarea: React.FC<IGVTextareaProps> = ({
+const GVTextarea: React.FC<IGVTextareaProps & FieldProps> = ({
   field, // { name, value, onChange, onBlur }
   label,
   form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.

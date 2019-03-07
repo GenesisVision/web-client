@@ -1,10 +1,38 @@
 import "./general-notification.scss";
 
 import { GVSwitch } from "gv-react-components";
-import PropTypes from "prop-types";
-import React, { Component } from "react";
+import * as React from "react";
 
-class GeneralNotification extends Component {
+interface IGeneralNotificationProps {
+  setting: {
+    id: string;
+    assetId: string;
+    managerId: string;
+    type: string;
+    conditionType: string;
+    conditionAmount: number;
+  };
+  name: string;
+  label: string;
+  assetId: string;
+  addNotification(opts?: {
+    assetId?: string;
+    managerId?: string;
+    type?: string;
+    conditionType?: string;
+    conditionAmount?: number;
+  }): Promise<any>;
+  removeNotification(opts?: { id: string; assetId: string }): Promise<any>;
+}
+
+interface IGeneralNotificationState {
+  isPending: boolean;
+}
+
+class GeneralNotification extends React.Component<
+  IGeneralNotificationProps,
+  IGeneralNotificationState
+> {
   state = {
     isPending: false
   };
@@ -34,8 +62,8 @@ class GeneralNotification extends Component {
     this.props
       .removeNotification({
         id: this.props.setting.id,
-        assetId: this.props.assetId,
-        type: this.props.name
+        assetId: this.props.assetId
+        // type: this.props.name
       })
       .then(() => this.setState({ isPending: false }))
       .catch(() => this.setState({ isPending: false }));
@@ -58,14 +86,5 @@ class GeneralNotification extends Component {
     );
   }
 }
-
-GeneralNotification.propTypes = {
-  setting: PropTypes.object,
-  name: PropTypes.string,
-  label: PropTypes.string,
-  assetId: PropTypes.string,
-  addNotification: PropTypes.func,
-  removeNotification: PropTypes.func
-};
 
 export default GeneralNotification;
