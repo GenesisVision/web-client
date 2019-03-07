@@ -1,10 +1,17 @@
 import "./fund-asset-tooltip.scss";
 
-import React from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import { CURRENCY_VALUES } from "shared/modules/currency-select/currency-select.constants";
 
-const FundAssetTooltip = ({ t, name, currency }) => {
+interface IFundAssetTooltipProps {
+  name: string;
+  currency: string;
+}
+
+const FundAssetTooltip: React.FC<
+  IFundAssetTooltipProps & InjectedTranslateProps
+> = ({ t, name, currency }) => {
   return (
     <div className="fund-asset-tooltip">
       <div className="fund-asset-tooltip__content">

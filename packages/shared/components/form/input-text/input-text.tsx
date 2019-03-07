@@ -2,17 +2,17 @@ import "./input-text.css";
 
 import * as React from "react";
 import NumberFormat from "react-number-format";
-import { FormikActions, FormikState } from "formik";
+import { FieldProps, FormikActions, FormikState } from "formik";
 
 interface IInputTextProps {
-  field: { name: string; value: any }; // { name, value, onChange, onBlur }
+  // field: { name: string; value: any }; // { name, value, onChange, onBlur }
   addon: string;
   number: boolean;
   controllClass: string;
-  form: FormikState<any> & FormikActions<any>;
+  // form: FormikState<any> & FormikActions<any>;
 }
 
-const InputText: React.FC<IInputTextProps> = ({
+const InputText: React.FC<IInputTextProps & FieldProps> = ({
   field, // { name, value, onChange, onBlur }
   addon,
   number,

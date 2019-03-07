@@ -1,17 +1,26 @@
 import "./fund-assets-ratio.scss";
 
-import classnames from "classnames";
-import PropTypes from "prop-types";
-import React from "react";
+import classNames from "classnames";
+import * as React from "react";
+import { FundAssetPartWithIcon } from "gv-api-web";
 
 export interface GVProgramPeriodProps {
   start: Date | number;
   end: Date | number;
   className?: string;
   valueClassName?: string;
+  values: FundAssetPartWithIcon[];
+  handleHover(
+    asset: string
+  ): (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  handleLeave(): void;
 }
 
-export const calcPercent = (value: number, start: number, end: number) => {
+export const calcPercent = (
+  value: number,
+  start: number,
+  end: number
+): number => {
   let duration = end - start;
   let progress = value - start;
   if (duration === 0 || progress < 0) return 0;
@@ -19,7 +28,7 @@ export const calcPercent = (value: number, start: number, end: number) => {
   return (progress * 100) / duration;
 };
 
-const FundAssetRatio: React.SFC<GVProgramPeriodProps> = ({
+const FundAssetRatio: React.FC<GVProgramPeriodProps> = ({
   start,
   end,
   values,
@@ -33,25 +42,25 @@ const FundAssetRatio: React.SFC<GVProgramPeriodProps> = ({
   return (
     <div className="fund-asset-ratio-container">
       <div
-        className={classnames(
+        className={classNames(
           "fund-asset-ratio fund-asset-ratio--line",
           className
         )}
       >
-        {values.map((item, idx) => {
+        {values.map((item: FundAssetPartWithIcon, idx: number) => {
           newLevel += item.percent;
           ZIndex--;
           return (
             <div
               key={idx}
-              className={classnames(
+              className={classNames(
                 "fund-asset-ratio--item-line",
                 valueClassName
               )}
               onMouseOver={handleHover(item.asset)}
               onMouseLeave={handleLeave}
               style={{
-                width: `${calcPercent(newLevel, start, end)}%`,
+                width: `${calcPercent(newLevel, +start, +end)}%`,
                 background: item.color,
                 zIndex: ZIndex
               }}
@@ -62,9 +71,13 @@ const FundAssetRatio: React.SFC<GVProgramPeriodProps> = ({
       <div className="fund-asset-ratio__values">
         <div className="fund-asset-ratio__value">0%</div>
         <div
-          className={classnames("fund-asset-ratio__value", {
+          className={classNames("fund-asset-ratio__value", {
             "fund-asset-ratio__value--full":
-              values.reduce((sum, item) => sum + item.percent, 0) === 100
+              values.reduce(
+                (sum: number, item: FundAssetPartWithIcon): number =>
+                  sum + item.percent,
+                0
+              ) === 100
           })}
         >
           100%
@@ -72,13 +85,6 @@ const FundAssetRatio: React.SFC<GVProgramPeriodProps> = ({
       </div>
     </div>
   );
-};
-
-FundAssetRatio.propTypes = {
-  start: PropTypes.number.isRequired,
-  end: PropTypes.number.isRequired,
-  className: PropTypes.string,
-  valueClassName: PropTypes.string
 };
 
 export default FundAssetRatio;
