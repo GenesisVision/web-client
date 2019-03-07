@@ -2,17 +2,14 @@ import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
 import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import { FUNDS_ROUTE } from "pages/funds/funds.routes";
 import { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
-import PropTypes from "prop-types";
-import React from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
-import { GLOBAL_SEARCH_ROUTE } from "shared/components/global-search/global-search.routes";
 import { DashboardIcon } from "shared/components/icon/dashboard-icon";
 import { DetailsIcon } from "shared/components/icon/details-icon";
 import { FundsIcon } from "shared/components/icon/funds-icon";
 import { LogoutIcon } from "shared/components/icon/logout-icon";
 import { ProgramsIcon } from "shared/components/icon/programs-icon";
-import { SearchIcon } from "shared/components/icon/search-icon";
 import { SettingsIcon } from "shared/components/icon/settings-icon";
 import { WalletIcon } from "shared/components/icon/wallet-icon";
 import NavigationItem, {
@@ -25,7 +22,19 @@ import {
 import Sidebar from "shared/components/sidebar/sidebar";
 import { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes";
 
-const NavigationMobile = ({
+interface INavigationMobileProps {
+  backPath: string;
+  isAuthenticated: boolean;
+  email: string;
+  avatar: string;
+  isOpenNavigation: boolean;
+  onClose(): void;
+  logout(): void;
+}
+
+const NavigationMobile: React.FC<
+  INavigationMobileProps & InjectedTranslateProps
+> = ({
   t,
   isAuthenticated,
   email,
@@ -94,15 +103,6 @@ const NavigationMobile = ({
       </div>
     </Sidebar>
   );
-};
-
-NavigationMobile.propTypes = {
-  isAuthenticated: PropTypes.bool,
-  email: PropTypes.string,
-  avatar: PropTypes.string,
-  isOpenNavigation: PropTypes.bool,
-  onClose: PropTypes.func,
-  logout: PropTypes.func
 };
 
 export default translate()(NavigationMobile);

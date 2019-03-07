@@ -1,20 +1,30 @@
 import "./navigation.scss";
 
-import classnames from "classnames";
+import classNames from "classnames";
 import { HOME_ROUTE } from "pages/app/app.routes";
 import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import { FUNDS_ROUTE } from "pages/funds/funds.routes";
 import { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
-import React, { Component, Fragment } from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import GVLogo from "shared/components/gv-logo/gv-logo";
 import { DashboardIcon } from "shared/components/icon/dashboard-icon";
 import { ProgramsIcon } from "shared/components/icon/programs-icon";
 import NavigationItem from "shared/components/navigation/navigation-item";
+import { FundsIcon } from "shared/components/icon/funds-icon";
 
-import { FundsIcon } from "../icon/funds-icon";
+interface INavigationProps {
+  className?: string;
+}
 
-class Navigation extends Component {
+interface INavigationState {
+  isOpen: boolean;
+}
+
+class Navigation extends React.Component<
+  INavigationProps & InjectedTranslateProps,
+  INavigationState
+> {
   state = {
     isOpen: false
   };
@@ -22,8 +32,8 @@ class Navigation extends Component {
   render() {
     const { t, className } = this.props;
     return (
-      <Fragment>
-        <div className={classnames("navigation", className)}>
+      <React.Fragment>
+        <div className={classNames("navigation", className)}>
           <NavigationItem icon={<GVLogo />} href={HOME_ROUTE} />
           <NavigationItem
             icon={<DashboardIcon primary />}
@@ -38,7 +48,7 @@ class Navigation extends Component {
             {t("navigation.funds")}
           </NavigationItem>
         </div>
-      </Fragment>
+      </React.Fragment>
     );
   }
 }
