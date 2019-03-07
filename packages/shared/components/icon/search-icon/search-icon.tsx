@@ -1,9 +1,9 @@
 import "./search-icon.scss";
 
-import classnames from "classnames";
-import React from "react";
+import classNames from "classnames";
+import * as React from "react";
 
-const SearchIcon = ({ primary }) => {
+const SearchIcon: React.FC<{ primary: boolean }> = ({ primary }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -11,7 +11,7 @@ const SearchIcon = ({ primary }) => {
       height="18"
       viewBox="0 0 18 18"
       fill="none"
-      className={classnames("search-icon", { "search-icon--primary": primary })}
+      className={classNames("search-icon", { "search-icon--primary": primary })}
     >
       <path
         fillRule="evenodd"
