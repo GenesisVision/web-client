@@ -47,9 +47,14 @@ const InvestingTransaction = (props: ITransactionDetailsProps) => {
         <StatisticItem label={t(`transactions-details.gv-fee`)}>
           {data.gvCommissionPercent} %
           <NumberFormat
-            value={formatCurrencyValue(data.gvCommission, data.currency)}
+            value={formatCurrencyValue(
+              data.gvCommission,
+              data.gvCommissionCurrency
+            )}
             prefix={" ("}
-            suffix={` ${data.currency})`}
+            suffix={
+              data.gvCommissionCurrency ? ` ${data.gvCommissionCurrency})` : ")"
+            }
             displayType="text"
           />
         </StatisticItem>
