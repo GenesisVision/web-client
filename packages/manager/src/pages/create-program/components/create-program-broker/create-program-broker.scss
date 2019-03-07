@@ -63,7 +63,7 @@
   }
 
   &__info-text {
-    font-size: 14px;
+    @include font-size($font-size-paragraph);
     line-height: 1.9;
     letter-spacing: 0.3px;
     color: $text-light-color;

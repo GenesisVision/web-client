@@ -10,10 +10,8 @@ export const convertFromCurrency = (
 export const convertToCurrency = (value: number = 0, rate: number): number =>
   value / rate;
 
-export const calculateValueOfEntryFee = (
-  value: number = 0,
-  percentage: number
-) => (value * percentage) / 100;
+export const calculatePercentage = (value: number = 0, percentage: number) =>
+  (value * percentage) / 100;
 
 export const CURRENCY_FRACTIONS = (currency: string): number => {
   switch (currency) {

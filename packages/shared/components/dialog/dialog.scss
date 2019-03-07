@@ -107,10 +107,6 @@
     .gv-text-field__wrapper:first-child {
       margin-top: 0;
     }
-
-    .create-program-settings__logo-title {
-      margin-top: 0;
-    }
   }
 
   &__close {
@@ -260,12 +256,8 @@
     }
   }
 
-  .create-program-settings__fee {
+  .create-program-settings__item {
     width: 100%;
     margin-right: 0;
-  }
-
-  .create-program-settings__row-title {
-    margin-top: 0;
   }
 }

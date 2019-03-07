@@ -9,6 +9,7 @@ export interface IInputAmountFieldProps {
   name: string;
   label: string;
   currency: string;
+  placeholder?: string;
   isAllow?: (values?: any) => boolean;
   setMax(): void;
   autoFocus?: boolean;
@@ -25,6 +26,7 @@ class InputAmountField extends React.Component<IInputAmountFieldProps> {
       currency,
       isAllow,
       setMax,
+      placeholder,
       autoFocus = true
     } = this.props;
     return (
@@ -32,6 +34,7 @@ class InputAmountField extends React.Component<IInputAmountFieldProps> {
         onChange={onChange}
         name={name}
         label={label}
+        placeholder={placeholder}
         component={GVNumberFiled}
         adornment={
           <GVButton

@@ -11,12 +11,13 @@ import SelectItem from "shared/components/select/select-item";
 import FilterArrowIcon from "shared/components/table/components/filtering/filter-arrow-icon";
 import { Nullable } from "shared/utils/types";
 
+export type OnChangeEvent = {
+  target: { value: string; name: string };
+};
+
 interface ISelectProps {
   value: string;
-  onChange(
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    child: JSX.Element
-  ): void;
+  onChange(event: OnChangeEvent, child: JSX.Element): void;
   name?: string;
   className?: string;
   fullWidthPopover?: boolean;
@@ -62,9 +63,11 @@ class Select extends React.Component<ISelectProps, ISelectState> {
     const { value } = child.props;
     if (!isSelected) {
       event.persist();
-      event.target = { value, name };
+      const ChangeEvent = {
+        target: { value, name }
+      };
       if (onChange) {
-        onChange(event, child);
+        onChange(ChangeEvent, child);
       }
     }
 
