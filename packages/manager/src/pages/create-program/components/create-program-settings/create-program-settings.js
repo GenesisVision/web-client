@@ -1,3 +1,5 @@
+import "shared/components/deposit-details/deposit-details.scss";
+
 import "./create-program-settings.scss";
 
 import { Field, withFormik } from "formik";

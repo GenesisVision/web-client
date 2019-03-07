@@ -1,4 +1,5 @@
 import "./create-fund-settings.scss";
+import "shared/components/deposit-details/deposit-details.scss";
 
 import { Field, withFormik } from "formik";
 import {
@@ -176,76 +177,86 @@ class CreateFundSettings extends React.Component {
             {t("manager.create-fund-page.settings.main-settings")}
           </div>
           <div className="create-fund-settings__fill-block create-fund-settings__fill-block--with-border">
-            <div className="create-fund-settings__row create-fund-settings__row--description">
-              <GVFormikField
-                type="text"
-                name="title"
-                label={t("manager.create-fund-page.settings.fields.name")}
-                autoComplete="off"
-                component={GVTextField}
-              />
-              <div className="create-fund-settings__description-info">
-                <span className="create-fund-settings__description create-fund-settings__description-requirements">
-                  {t(
-                    "manager.create-fund-page.settings.fields.name-requirements"
-                  )}
-                </span>
+            <div className="create-fund-settings__row">
+              <div className="create-fund-settings__item create-fund-settings__item--wider">
+                <GVFormikField
+                  type="text"
+                  name="title"
+                  label={t("manager.create-fund-page.settings.fields.name")}
+                  autoComplete="off"
+                  component={GVTextField}
+                />
+                <div className="create-fund-settings__item-caption">
+                  <span className="create-fund-settings__description create-fund-settings__description-requirements">
+                    {t(
+                      "manager.create-fund-page.settings.fields.name-requirements"
+                    )}
+                  </span>
+                </div>
               </div>
-            </div>
-            <div className="create-fund-settings__row create-fund-settings__row--description">
-              <GVFormikField
-                type="textarea"
-                name="description"
-                label={t(
-                  "manager.create-fund-page.settings.fields.description"
-                )}
-                component={GVTextField}
-              />
-              <div className="create-fund-settings__description-info">
-                <span className="create-fund-settings__description create-fund-settings__description-requirements">
-                  {t(
-                    "manager.create-fund-page.settings.fields.description-requirements"
+              <div className="create-fund-settings__item create-fund-settings__item--wider">
+                <GVFormikField
+                  type="textarea"
+                  name="description"
+                  label={t(
+                    "manager.create-fund-page.settings.fields.description"
                   )}
-                </span>
-                {description.length > 0 && (
-                  <div className="create-fund-settings__description-chars">
-                    <div className="create-fund-settings__description-chars-value">
-                      {description.length}
+                  component={GVTextField}
+                />
+                <div className="create-fund-settings__item-caption create-fund-settings__description">
+                  <span className="create-fund-settings__description-requirements">
+                    {t(
+                      "manager.create-fund-page.settings.fields.description-requirements"
+                    )}
+                  </span>
+                  {description.length > 0 && (
+                    <div className="create-fund-settings__description-chars">
+                      <div className="create-fund-settings__description-chars-value">
+                        {description.length}
+                      </div>
+                      <GVProgramPeriod
+                        start={0}
+                        end={500}
+                        value={description.length}
+                      />
                     </div>
-                    <GVProgramPeriod
-                      start={0}
-                      end={500}
-                      value={description.length}
+                  )}
+                </div>
+              </div>
+              <div className="create-fund-settings__item">
+                <div className="create-fund-settings__logo-title">
+                  {t("manager.create-fund-page.settings.fields.upload-logo")}
+                </div>
+                <div className="create-fund-settings__logo-notice">
+                  {t(
+                    "manager.create-fund-page.settings.fields.upload-logo-rules"
+                  )}
+                </div>
+              </div>
+              <div className="create-fund-settings__item create-fund-settings__item--wider">
+                <div className="create-fund-settings__logo-section">
+                  <div className="create-fund-settings__file-field-container">
+                    <Field
+                      name="logo"
+                      render={({ field, form }) => (
+                        <InputImage
+                          {...field}
+                          defaultImage={FundDefaultImage}
+                          onChange={setFieldValue}
+                          alt="Fund logo"
+                          error={imageInputError}
+                        />
+                      )}
                     />
                   </div>
-                )}
-              </div>
-            </div>
-            <div className="create-fund-settings__logo-title">
-              {t("manager.create-fund-page.settings.fields.upload-logo")}
-            </div>
-            <div className="create-fund-settings__logo-notice">
-              {t("manager.create-fund-page.settings.fields.upload-logo-rules")}
-            </div>
-            <div className="create-fund-settings__logo-section">
-              <div className="create-fund-settings__file-field-container">
-                <Field
-                  name="logo"
-                  render={({ field, form }) => (
-                    <InputImage
-                      {...field}
-                      defaultImage={FundDefaultImage}
-                      onChange={setFieldValue}
-                      alt="Fund logo"
-                      error={imageInputError}
-                    />
-                  )}
-                />
-              </div>
-              <div className="create-fund-settings__image-info">
-                <div className="create-fund-settings__image-title">{title}</div>
-                <div className="create-fund-settings__image-author">
-                  {author}
+                  <div className="create-fund-settings__image-info">
+                    <div className="create-fund-settings__image-title">
+                      {title}
+                    </div>
+                    <div className="create-fund-settings__image-author">
+                      {author}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -290,7 +301,7 @@ class CreateFundSettings extends React.Component {
           </div>
           <div className="create-fund-settings__fill-block create-fund-settings__fill-block--with-border">
             <div className="create-fund-settings__row">
-              <div className="create-fund-settings__fee">
+              <div className="create-fund-settings__item">
                 <GVFormikField
                   name="entryFee"
                   label={t(
@@ -307,7 +318,7 @@ class CreateFundSettings extends React.Component {
                   content={t(
                     "manager.create-program-page.settings.hints.entry-fee"
                   )}
-                  className="create-fund-settings__fee-hint"
+                  className="create-fund-settings__item-caption"
                   vertical={"bottom"}
                   tooltipContent={t(
                     "manager.create-fund-page.settings.hints.entry-fee-description",
@@ -315,7 +326,7 @@ class CreateFundSettings extends React.Component {
                   )}
                 />
               </div>
-              <div className="create-fund-settings__fee">
+              <div className="create-fund-settings__item">
                 <GVFormikField
                   name="exitFee"
                   label={t("manager.create-fund-page.settings.fields.exit-fee")}
@@ -330,7 +341,7 @@ class CreateFundSettings extends React.Component {
                   content={t(
                     "manager.create-fund-page.settings.hints.exit-fee"
                   )}
-                  className="create-fund-settings__fee-hint"
+                  className="create-fund-settings__item-caption"
                   vertical={"bottom"}
                   tooltipContent={t(
                     "manager.create-fund-page.settings.hints.exit-fee-description",
@@ -347,7 +358,7 @@ class CreateFundSettings extends React.Component {
             {t("manager.create-fund-page.settings.deposit-details")}
           </div>
           <div className={"deposit-details create-fund-settings__fill-block"}>
-            <div className="deposit-details__wallets">
+            <div className="create-program-settings__item deposit-details">
               <GVFormikField
                 name="depositWalletCurrency" // value={"GVT"}
                 component={GVTextField}
@@ -368,8 +379,6 @@ class CreateFundSettings extends React.Component {
                   );
                 })}
               </GVFormikField>
-            </div>
-            <div className="deposit-details__amount">
               <InputAmountField
                 autoFocus={false}
                 name="depositAmount"
@@ -389,30 +398,32 @@ class CreateFundSettings extends React.Component {
                   />
                 </div>
               )}
-            </div>
-            <div className="deposit-details__available-amount">
-              {t("manager.create-program-page.settings.fields.min-deposit")}
-              <span className={"deposit-details__available-amount-value"}>
-                <NumberFormat
-                  value={50}
-                  thousandSeparator=" "
-                  displayType="text"
-                  suffix={` ${currency}`}
-                />
-              </span>
-            </div>
-            <div className="deposit-details__available-amount">
-              {t(
-                "manager.create-fund-page.settings.fields.available-in-wallet"
-              )}
-              <span className={"deposit-details__available-amount-value"}>
-                <NumberFormat
-                  value={selectedWallet.available}
-                  thousandSeparator=" "
-                  displayType="text"
-                  suffix={values ? ` ${depositWalletCurrency}` : " GVT"}
-                />
-              </span>
+              <div className="deposit-details__available-list">
+                <div className="deposit-details__available-amount">
+                  {t("manager.create-program-page.settings.fields.min-deposit")}
+                  <span className={"deposit-details__available-amount-value"}>
+                    <NumberFormat
+                      value={50}
+                      thousandSeparator=" "
+                      displayType="text"
+                      suffix={` ${currency}`}
+                    />
+                  </span>
+                </div>
+                <div className="deposit-details__available-amount">
+                  {t(
+                    "manager.create-fund-page.settings.fields.available-in-wallet"
+                  )}
+                  <span className={"deposit-details__available-amount-value"}>
+                    <NumberFormat
+                      value={selectedWallet.available}
+                      thousandSeparator=" "
+                      displayType="text"
+                      suffix={values ? ` ${depositWalletCurrency}` : " GVT"}
+                    />
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </form>

@@ -14,6 +14,10 @@
     }
   }
 
+  &__available-list {
+    margin-top: 30px;
+  }
+
   &__available-amount {
     font-size: $font-size-common;
     margin-top: 4px;
@@ -34,5 +38,9 @@
       top: 6px;
       cursor: pointer;
     }
+  }
+
+  .gv-text-field__wrapper {
+    margin-left: 0;
   }
 }

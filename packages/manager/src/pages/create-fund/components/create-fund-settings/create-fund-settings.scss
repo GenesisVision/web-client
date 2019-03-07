@@ -9,12 +9,63 @@ $asset-height-mobile: $asset-height/$divider-text;
 .create-fund-settings {
   @include adaptive-padding(bottom, $padding-large);
 
-  & .gv-text-field__input {
-    font-size: $font-size-h4-mobile;
-    @include media-breakpoint-landscape-phone() {
-      font-size: $font-size-h4;
+  &__item {
+    position: relative;
+    margin-bottom: 40px;
+    max-width: 230px;
+
+    .gv-text-field,
+    .gv-text-field__wrapper {
+      width: 230px;
+    }
+
+    &.deposit-details {
+      max-width: 280px;
+
+      .gv-text-field,
+      .gv-text-field__wrapper {
+        width: 280px;
+      }
+    }
+
+    .invest-popup__currency {
+      margin-bottom: 0;
+    }
+
+    &-caption {
+      padding-top: $padding-small;
+      font-size: 12px;
+      color: $label-color;
+      letter-spacing: 0.4px;
+      width: 100%;
+
+      @include media-breakpoint-landscape-phone() {
+        padding-top: $padding-xsmall;
+      }
+
+      &.hint {
+        cursor: pointer;
+      }
+    }
+
+    &-caption-tooltip-content {
+      width: 248px;
+      font-size: 12px;
+      line-height: 1.6;
+      color: $text-light-color;
+    }
+
+    &--wider {
+      max-width: 100%;
+      width: 100%;
+
+      .gv-text-field,
+      .gv-text-field__wrapper {
+        width: 100%;
+      }
     }
   }
+
   & .fund-assets {
     flex-direction: row;
   }
@@ -59,6 +110,7 @@ $asset-height-mobile: $asset-height/$divider-text;
   }
   &__add-assets {
     display: flex;
+    margin-bottom: 24px;
   }
   &__add-assets-button {
     display: flex;
@@ -98,22 +150,20 @@ $asset-height-mobile: $asset-height/$divider-text;
   &__subheading {
     text-transform: uppercase;
     font-weight: 600;
-    font-size: $font-size-small-mobile;
+    font-size: $font-size-common;
     letter-spacing: 0.4px;
 
-    padding-top: $padding-xxsmall-mobile;
+    margin-bottom: 16px;
+    margin-top: 16px;
 
     &:first-child {
       margin-left: 2px;
     }
-    @include media-breakpoint-landscape-phone() {
-      padding-top: $padding-xxsmall;
-      font-size: $font-size-small;
-    }
   }
 
   &__fill-block {
-    padding-bottom: $padding-medium;
+    padding-top: 16px;
+    padding-bottom: $padding-medium - 24px;
 
     &:last-child {
       padding-bottom: 0;
@@ -121,7 +171,7 @@ $asset-height-mobile: $asset-height/$divider-text;
 
     @include media-breakpoint-tablet() {
       padding-left: $padding-large;
-      padding-bottom: 60px;
+      padding-bottom: $padding-big - 24px;
 
       &--with-border {
         border-left: 2px solid $secondary-color;
@@ -143,20 +193,10 @@ $asset-height-mobile: $asset-height/$divider-text;
   }
 
   &__description {
-    font-size: $font-size-small-mobile;
-    &-info {
-      margin-top: 4px;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      width: 250px;
-      @include media-breakpoint-phone() {
-        width: 300px;
-      }
-      @include media-breakpoint-landscape-phone() {
-        width: 500px;
-      }
-    }
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    line-height: 20px;
 
     &-requirements {
       color: $label-color;
@@ -164,24 +204,17 @@ $asset-height-mobile: $asset-height/$divider-text;
     }
 
     &-chars {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       color: $text-light-color;
-      font-size: $font-size-small-mobile;
-      @include media-breakpoint-landscape-phone() {
-        font-size: $font-size-small;
+
+      .gv-program-period {
+        margin-left: 15px;
       }
-    }
-    &-chars-value {
-      padding: 0 $padding-xxsmall;
-    }
-    @include media-breakpoint-landscape-phone() {
-      font-size: $font-size-small;
     }
   }
 
   &__logo-title {
-    margin-top: 44px;
     margin-bottom: 8px;
     font-size: $font-size-common;
     letter-spacing: 0.3px;
@@ -197,7 +230,6 @@ $asset-height-mobile: $asset-height/$divider-text;
   }
 
   &__logo-section {
-    margin-top: 30px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -210,43 +242,6 @@ $asset-height-mobile: $asset-height/$divider-text;
 
   &__file-field-container {
     position: relative;
-  }
-
-  &__fee {
-    display: inline-flex;
-    position: relative;
-    top: 3px;
-    width: 250px;
-    margin-right: 24px;
-
-    &:last-child {
-      margin-right: 0;
-    }
-
-    &:first-child {
-      margin-bottom: 16px;
-    }
-
-    &-hint {
-      font-size: 12px;
-      color: $label-color;
-      letter-spacing: 0.4px;
-      position: absolute;
-      top: 86px;
-      left: 0px;
-      cursor: pointer;
-
-      & .hint__content {
-        width: 237px;
-      }
-    }
-
-    @include media-breakpoint-phone() {
-      width: 300px;
-    }
-    @include media-breakpoint-landscape-phone() {
-      width: 500px;
-    }
   }
 
   &__image {
@@ -276,27 +271,19 @@ $asset-height-mobile: $asset-height/$divider-text;
   }
 
   &__row {
-    & .gv-text-field {
-      width: 250px;
+    display: flex;
+    flex-wrap: wrap;
+    width: auto;
+    max-width: 230px;
+    position: relative;
+    justify-content: space-between;
+
+    .gv-text-field__wrapper {
+      margin: 0;
     }
 
-    & .gv-text-field__wrapper {
-      margin: 16px 0;
-    }
-
-    & .gv-text-field__wrapper:first-child {
-      margin: 16px 24px 16px 0;
-    }
-
-    @include media-breakpoint-phone() {
-      & .gv-text-field {
-        width: 300px;
-      }
-    }
     @include media-breakpoint-landscape-phone() {
-      & .gv-text-field {
-        width: 500px;
-      }
+      max-width: 484px;
     }
   }
 
@@ -434,47 +421,5 @@ $asset-height-mobile: $asset-height/$divider-text;
     font-weight: 600;
     line-height: 1.67;
     letter-spacing: 0.3px;
-  }
-}
-
-.create-fund-settings__fee-hint-tooltip-content {
-  width: 248px;
-  font-size: 12px;
-  line-height: 1.6;
-  color: $text-light-color;
-}
-.deposit-details {
-  &__deposit-amount {
-    &-title {
-      color: $label-color;
-      margin-bottom: 14px;
-    }
-
-    &-value {
-      font-size: $font-size-h2;
-      letter-spacing: 0.4px;
-    }
-  }
-
-  &__available-amount {
-    font-size: $font-size-common;
-    margin-top: 4px;
-    letter-spacing: 0.4px;
-
-    &-value {
-      color: $text-accent-color;
-      margin-right: 8px;
-      margin-left: 4px;
-      font-weight: 600;
-      &--error {
-        color: #eb3b5a;
-      }
-    }
-
-    & .icon--refresh {
-      position: relative;
-      top: 6px;
-      cursor: pointer;
-    }
   }
 }
