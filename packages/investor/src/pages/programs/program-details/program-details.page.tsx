@@ -69,10 +69,10 @@ class ProgramDetailsPage extends PureComponent<
   }
 
   componentDidMount() {
-    this.updateDetails();
+    this.getDetails();
   }
 
-  refreshProgramDescription = () => {
+  updateDetails = () => {
     const { service } = this.props;
     this.setState({ isPending: true });
     return service
@@ -86,8 +86,8 @@ class ProgramDetailsPage extends PureComponent<
       });
   };
 
-  updateDetails = () => {
-    this.refreshProgramDescription()
+  getDetails = () => {
+    this.updateDetails()
       .then(() => {
         this.setState({ isPending: true });
         return getProgramStatistic(this.state.description!.id);

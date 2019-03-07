@@ -1,5 +1,9 @@
 import classnames from "classnames";
 import { GVSwitch } from "gv-react-components";
+import {
+  IProgramDetailContext,
+  ProgramDetailContext
+} from "pages/programs/program-details/helpers/program-details-context";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 
@@ -30,37 +34,46 @@ class ProgramReinvestingContainer extends React.PureComponent<
       isPending: false
     };
   }
-  toggleReinvesting = (value: boolean) => {
+  toggleReinvesting = (updateDetails: any) => (value: boolean) => {
     const { programId } = this.props;
     this.setState({ isPending: true, isReinvesting: value });
     toggleReinvesting(programId, value)
-      .then(() => this.setState({ isPending: false }))
-      .catch(() => this.setState({ isPending: false, isReinvesting: !value }));
+      .then(() => {
+        this.setState({ isPending: false });
+        updateDetails();
+      })
+      .catch(() => {
+        this.setState({ isPending: false, isReinvesting: !value });
+      });
   };
 
-  onReinvestingLabelClick = () =>
-    this.toggleReinvesting(!this.state.isReinvesting);
+  onReinvestingLabelClick = (updateDetails: any) => () =>
+    this.toggleReinvesting(updateDetails)(!this.state.isReinvesting);
 
   render() {
     const { t } = this.props;
     const { isReinvesting, isPending } = this.state;
     return (
-      <span
-        className={classnames("reinvesting-widget", {
-          "reinvesting-widget--active": isReinvesting
-        })}
-        onClick={this.onReinvestingLabelClick}
-      >
-        <GVSwitch
-          name="reinvesting"
-          touched={false}
-          value={isReinvesting}
-          color="primary"
-          onChange={this.onReinvestingLabelClick}
-          label={t("program-details-page.description.reinvest")}
-          disabled={isPending}
-        />
-      </span>
+      <ProgramDetailContext.Consumer>
+        {({ updateDetails }: IProgramDetailContext) => (
+          <span
+            className={classnames("reinvesting-widget", {
+              "reinvesting-widget--active": isReinvesting
+            })}
+            onClick={this.onReinvestingLabelClick(updateDetails)}
+          >
+            <GVSwitch
+              name="reinvesting"
+              touched={false}
+              value={isReinvesting}
+              color="primary"
+              onChange={this.onReinvestingLabelClick(updateDetails)}
+              label={t("program-details-page.description.reinvest")}
+              disabled={isPending}
+            />
+          </span>
+        )}
+      </ProgramDetailContext.Consumer>
     );
   }
 }

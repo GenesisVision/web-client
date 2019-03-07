@@ -28,7 +28,7 @@ const getStatusClassName = (status: STATUS, className?: string) => {
 
 interface IAssetStatusOwnProps {
   className?: string;
-  status: STATUS | string;
+  status: STATUS;
   id: string;
   asset: any;
   onCancel: any;
@@ -69,7 +69,7 @@ class AssetStatus extends React.Component<
           className={getStatusClassName(status, className)}
           onClick={this.handleOpenDropdown}
         >
-          {status ? t(`program-statuses.${status}`) : ""}
+          {t(`program-statuses.${status}`)}
         </span>
         <Popover
           horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
