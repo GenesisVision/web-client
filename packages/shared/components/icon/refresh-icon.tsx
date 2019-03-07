@@ -1,7 +1,7 @@
-import React from "react";
-import { Icon } from "shared/components/icon/icon";
+import * as React from "react";
+import { Icon, IIconProps } from "shared/components/icon/icon";
 
-export const RefreshIcon = props => (
+export const RefreshIcon: React.FC<IIconProps> = props => (
   <Icon type={"refresh"} {...props}>
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -12,7 +12,7 @@ export const RefreshIcon = props => (
       viewBox="0 0 491.236 491.236"
       style={{
         backgroundColor: "transparent",
-        enableBackground: "new 0 0 491.236 491.236",
+        // enableBackground: "new 0 0 491.236 491.236",
         color: "black",
         width: "16px"
       }}
