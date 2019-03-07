@@ -3,10 +3,12 @@ import ProgramFollowContainer from "modules/program-follow/program-follow-contai
 import ProgramUnfollowContainer from "modules/program-unfollow/program-unfollow-container";
 import React, { Component, Fragment } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import {
+  IProgramDetailContext,
+  ProgramDetailContext
+} from "shared/components/details/helpers/details-context";
 import SignalProgramInfo from "shared/components/programs/program-details/program-details-description/signal-program-info";
 import { FOLLOW_TYPE } from "shared/constants/constants";
-
-import { ProgramDetailContext } from "../helpers/program-details-context";
 
 enum SIGNAL_POPUP {
   FOLLOW = "FOLLOW",
@@ -85,7 +87,7 @@ class SignalProviderControls extends Component<
           )}
         </div>
         <ProgramDetailContext.Consumer>
-          {({ updateDetails }: any) => (
+          {({ updateDetails }: IProgramDetailContext) => (
             <Fragment>
               <ProgramFollowContainer
                 programName={programDescription.title}

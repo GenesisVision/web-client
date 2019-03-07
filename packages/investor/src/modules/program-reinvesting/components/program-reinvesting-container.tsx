@@ -1,11 +1,11 @@
 import classnames from "classnames";
 import { GVSwitch } from "gv-react-components";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import {
   IProgramDetailContext,
   ProgramDetailContext
-} from "pages/programs/program-details/helpers/program-details-context";
-import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+} from "shared/components/details/helpers/details-context";
 
 import { toggleReinvesting } from "../services/program-reinvesting.service";
 

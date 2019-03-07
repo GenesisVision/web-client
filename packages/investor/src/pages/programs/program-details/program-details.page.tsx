@@ -8,6 +8,7 @@ import React, { ComponentType, PureComponent } from "react";
 import { connect } from "react-redux";
 import { InvestorRootState } from "reducers";
 import { Dispatch, bindActionCreators, compose } from "redux";
+import { ProgramDetailContext } from "shared/components/details/helpers/details-context";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
 import Page from "shared/components/page/page";
 import ProgramDetailsDescriptionSection from "shared/components/programs/program-details/program-details-description/program-details-description-section";
@@ -29,12 +30,9 @@ import { ResponseError } from "shared/utils/types";
 import { LOGIN_ROUTE } from "../../auth/login/login.routes";
 import { fetchPortfolioEvents } from "../../dashboard/services/dashboard-events.services";
 import ProgramControls from "./components/program-controls";
-import { ProgramDetailContext } from "./helpers/program-details-context";
 import { fetchHistoryCounts } from "./services/program-details.service";
 
-interface IProgramDetailsPageOwnProps {}
-
-interface IProgramDetailsPageProps extends IProgramDetailsPageOwnProps {
+interface IProgramDetailsPageProps {
   isAuthenticated: boolean;
   currency: string;
   service: {
@@ -187,7 +185,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   )
 });
 
-export default compose<ComponentType<IProgramDetailsPageOwnProps>>(
+export default compose<ComponentType<IProgramDetailsPageProps>>(
   connect(
     mapStateToProps,
     mapDispatchToProps
