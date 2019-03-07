@@ -1,9 +1,22 @@
 import "./gv-select.css";
 
-import React from "react";
+import * as React from "react";
 import Select from "react-select";
 
-const GVSelect = ({ field, setFieldValue, onChange, onBlur, ...other }) => {
+interface IGVSelectProps {
+  field: { name: string; value: string | number };
+  setFieldValue(field: string, value: any, shouldValidate?: boolean): void;
+  onChange(value: any): void;
+  onBlur(value: any, flag: boolean): void;
+}
+
+const GVSelect: React.FC<IGVSelectProps> = ({
+  field,
+  setFieldValue,
+  onChange,
+  onBlur,
+  ...other
+}) => {
   const handleChange = value => {
     setFieldValue(field.name, value);
     const newValue = value ? value.value : "";
