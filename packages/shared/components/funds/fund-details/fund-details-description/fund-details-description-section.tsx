@@ -1,0 +1,324 @@
+import "shared/components/details/details-description-section/details-description/details-description.scss";
+
+import { GVButton } from "gv-react-components";
+import moment from "moment";
+import * as React from "react";
+import { translate } from "react-i18next";
+import NumberFormat from "react-number-format";
+import { Link } from "react-router-dom";
+import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import DetailsDescription from "shared/components/details/details-description-section/details-description/details-description";
+import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
+import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
+import { STATUS_OLD } from "shared/constants/constants";
+import {
+  composeFundNotificationsUrl,
+  composeManagerDetailsUrl
+} from "shared/utils/compose-url";
+import { formatValue } from "shared/utils/formatter";
+
+interface IFundDetailsDescriptionProps {
+  CloseFundContainer: any;
+  role: any;
+  AssetEditContainer: any;
+  FundDepositContainer: any;
+  FundWithdrawContainer: any;
+  ReallocateContainer: any;
+  fundDescription: any;
+  isAuthenticated: any;
+  redirectToLogin: any;
+}
+
+class FundDetailsDescription extends React.PureComponent<
+  IFundDetailsDescriptionProps,
+  any
+> {
+  state = {
+    isOpenCloseFundPopup: false,
+    isOpenInvestmentPopup: false,
+    isOpenAboutLevels: false,
+    isOpenEditFundPopup: false,
+    isOpenReallocateFundPopup: false,
+    anchor: null
+  };
+
+  handleOpenInvestmentPopup = () => {
+    const { isAuthenticated, redirectToLogin } = this.props;
+    if (isAuthenticated) {
+      this.setState({ isOpenInvestmentPopup: true });
+    } else {
+      redirectToLogin();
+    }
+  };
+
+  handleCloseInvestmentPopup = () => {
+    this.setState({ isOpenInvestmentPopup: false });
+  };
+  handleOpenEditFundPopup = () => {
+    this.setState({ isOpenEditFundPopup: true });
+  };
+  handleCloseEditFundPopup = () => {
+    this.setState({ isOpenEditFundPopup: false });
+  };
+  handleApplyEditFundPopup = (updateDetails: any) => () => {
+    updateDetails();
+  };
+  handleOpenReallocateFundPopup = () => {
+    this.setState({ isOpenReallocateFundPopup: true });
+  };
+  handleCloseReallocateFundPopup = (updateDetails: any) => () => {
+    this.setState({ isOpenReallocateFundPopup: false });
+    updateDetails();
+  };
+  handleOpenCloseFundPopup = () => {
+    this.setState({ isOpenCloseFundPopup: true });
+  };
+  handleCloseCloseFundPopup = () => {
+    this.setState({ isOpenCloseFundPopup: false });
+  };
+  handleApplyCloseFundPopup = (updateDetails: any) => () => {
+    updateDetails();
+  };
+  render() {
+    const {
+      isOpenCloseFundPopup,
+      isOpenInvestmentPopup,
+      isOpenEditFundPopup,
+      isOpenReallocateFundPopup
+    } = this.state;
+    const {
+      t,
+      CloseFundContainer,
+      role,
+      possibleReallocationTime,
+      canReallocate,
+      status,
+      isFavorite,
+      canCloseProgram,
+      hasNotifications,
+      isOwnProgram,
+      FUND,
+      ReallocateContainer,
+      AssetEditContainer,
+      FundDetailContext,
+      FundDepositContainer,
+      FundWithdrawContainer,
+      canWithdraw,
+      fundDescription,
+      onFavoriteClick,
+      isFavoritePending,
+      investmentData,
+      onChangeInvestmentStatus,
+      canInvest
+    } = this.props;
+
+    const composeEditInfo = {
+      id: fundDescription.id,
+      title: fundDescription.title,
+      description: fundDescription.description,
+      logo: {
+        src: fundDescription.logo
+      }
+    };
+
+    const assetDescription = {
+      id: fundDescription.id,
+      title: fundDescription.title,
+      description: fundDescription.description,
+      logo: fundDescription.logo,
+      notificationsUrl: composeFundNotificationsUrl(fundDescription.url),
+      isFavorite: fundDescription.personalFundDetails.isFavorite,
+      hasNotifications: fundDescription.personalFundDetails.hasNotifications,
+      managerUrl: fundDescription.manager.url,
+      managerName: fundDescription.manager.username
+    };
+
+    return (
+      <React.Fragment>
+        <DetailsDescription
+          assetDescription={assetDescription}
+          AssetDetailsAvatar={() => (
+            <div className="details-description__avatar">
+              <AssetAvatar
+                url={fundDescription.logo}
+                level={fundDescription.level}
+                alt={fundDescription.title}
+                size="big"
+                color={fundDescription.color}
+              />
+            </div>
+          )}
+          AssetDetailsExtraBlock={() => (
+            <div className="details-description__info-block">
+              <h4 className="details-description__subheading">
+                {t("fund-details-page.description.assets")}
+              </h4>
+              <div>
+                <FundAssetContainer
+                  type={"large"}
+                  assets={fundDescription.currentAssets}
+                  size={7}
+                />
+              </div>
+            </div>
+          )}
+        />
+        <div className="program-details-description__controls">
+          <div className="program-details-description__col">
+            <div className="details-description__short-statistic">
+              <StatisticItem
+                label={t("fund-details-page.description.entryFee")}
+                className={"details-description__short-statistic-item"}
+                accent
+              >
+                <NumberFormat
+                  value={formatValue(fundDescription.entryFee)}
+                  displayType="text"
+                  suffix=" %"
+                />
+              </StatisticItem>
+              <StatisticItem
+                label={t("fund-details-page.description.exitFee")}
+                className={"details-description__short-statistic-item"}
+                accent
+              >
+                <NumberFormat
+                  value={formatValue(fundDescription.exitFee)}
+                  displayType="text"
+                  suffix=" %"
+                />
+              </StatisticItem>
+            </div>
+          </div>
+        </div>
+      </React.Fragment>
+
+      //       {(isOwnProgram || canInvest) && (
+      //         <Fragment>
+      //           <div className="details-description__invest-button-container">
+      //             <GVButton
+      //               className="details-description__invest-btn"
+      //               onClick={this.handleOpenInvestmentPopup}
+      //               disabled={!canInvest}
+      //             >
+      //               {t("fund-details-page.description.invest")}
+      //             </GVButton>
+      //             {isOwnProgram && (
+      //               <Fragment>
+      //                 <GVButton
+      //                   className="details-description__invest-btn"
+      //                   color="secondary"
+      //                   variant="outlined"
+      //                   onClick={this.handleOpenEditFundPopup}
+      //                   disabled={!canCloseProgram}
+      //                 >
+      //                   {t("fund-details-page.description.edit-fund")}
+      //                 </GVButton>
+      //                 {CloseFundContainer && (
+      //                   <GVButton
+      //                     className="details-description__invest-btn"
+      //                     color="secondary"
+      //                     variant="outlined"
+      //                     onClick={this.handleOpenCloseFundPopup}
+      //                     disabled={
+      //                       !fundDescription.personalFundDetails.canCloseProgram
+      //                     }
+      //                   >
+      //                     {t("fund-details-page.description.close-fund")}
+      //                   </GVButton>
+      //                 )}
+      //                 <div className="details-description__reallocate-container">
+      //                   <GVButton
+      //                     className="details-description__invest-btn"
+      //                     color="secondary"
+      //                     variant="outlined"
+      //                     onClick={this.handleOpenReallocateFundPopup}
+      //                     disabled={!canReallocate}
+      //                   >
+      //                     {t("fund-details-page.description.reallocate")}
+      //                   </GVButton>
+      //                   {!canReallocate &&
+      //                     possibleReallocationTime &&
+      //                     fundDescription.status !== STATUS_OLD.CLOSED &&
+      //                     fundDescription.status !== STATUS_OLD.ARCHIVED && (
+      //                       <div className="details-description__reallocate-message">
+      //                         {t(
+      //                           "fund-details-page.description.disable-reallocation-message"
+      //                         )}{" "}
+      //                         {moment(possibleReallocationTime).format("lll")}
+      //                       </div>
+      //                     )}
+      //                 </div>
+      //               </Fragment>
+      //             )}
+      //             <FundDetailContext.Consumer>
+      //               {({ updateDetails }) => (
+      //                 <Fragment>
+      //                   <FundDepositContainer
+      //                     open={isOpenInvestmentPopup}
+      //                     id={fundDescription.id}
+      //                     type={"fund"}
+      //                     onClose={this.handleCloseInvestmentPopup}
+      //                     onInvest={updateDetails}
+      //                   />
+      //                   {CloseFundContainer && (
+      //                     <CloseFundContainer
+      //                       open={isOpenCloseFundPopup}
+      //                       onClose={this.handleCloseCloseFundPopup}
+      //                       onCancel={this.handleCloseCloseFundPopup}
+      //                       onApply={this.handleApplyCloseFundPopup(
+      //                         updateDetails
+      //                       )}
+      //                       id={fundDescription.id}
+      //                     />
+      //                   )}
+      //                   {AssetEditContainer && (
+      //                     <AssetEditContainer
+      //                       open={isOpenEditFundPopup}
+      //                       info={composeEditInfo}
+      //                       onClose={this.handleCloseEditFundPopup}
+      //                       onApply={this.handleApplyEditFundPopup(
+      //                         updateDetails
+      //                       )}
+      //                       type={FUND}
+      //                     />
+      //                   )}
+      //                   {ReallocateContainer && (
+      //                     <ReallocateContainer
+      //                       key={isOpenReallocateFundPopup}
+      //                       id={fundDescription.id}
+      //                       open={isOpenReallocateFundPopup}
+      //                       onClose={this.handleCloseReallocateFundPopup(
+      //                         updateDetails
+      //                       )}
+      //                       assets={fundDescription.currentAssets}
+      //                     />
+      //                   )}
+      //                 </Fragment>
+      //               )}
+      //             </FundDetailContext.Consumer>
+      //           </div>
+      //         </Fragment>
+      //       )}
+      //       {fundDescription.personalFundDetails &&
+      //         status !== STATUS_OLD.ENDED && (
+      //           <DetailsInvestment
+      //             WithdrawContainer={FundWithdrawContainer}
+      //             canWithdraw={canWithdraw}
+      //             assetCurrency={"GVT"}
+      //             {...investmentData}
+      //             onChangeInvestmentStatus={onChangeInvestmentStatus}
+      //             asset={FUND}
+      //             role={role}
+      //           />
+      //         )}
+      //     </div>
+      //   </div>
+
+      //</div>
+    );
+  }
+}
+
+export default translate()(FundDetailsDescription);
