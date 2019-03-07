@@ -13,7 +13,7 @@ interface ITooltipProps {
   title?: string;
   render: Function;
   horizontal?: HORIZONTAL_POPOVER_POS;
-  vertical: VERTICAL_POPOVER_POS;
+  vertical?: VERTICAL_POPOVER_POS;
 }
 interface ITooltipState {
   anchor: Nullable<EventTarget>;
