@@ -1,23 +1,28 @@
 import "./facet-cards.scss";
+import * as React from "react";
+import FacetCard from "./facet-card";
+import { Facet } from "gv-api-web";
+import { RefObject } from "react";
 
-import PropTypes from "prop-types";
-import React, { Component } from "react";
+interface IFacetCardsProps {
+  facets: Facet[];
+  composeFacetUrl(url: string): string;
+  title: string;
+}
 
-import FacetCard, { facetShape } from "./facet-card";
+class FacetCards extends React.Component<IFacetCardsProps> {
+  scroll: RefObject<HTMLDivElement> = React.createRef();
+  facetList: RefObject<HTMLDivElement> = React.createRef();
 
-class FacetCards extends Component {
-  scroll = React.createRef();
-  facetList = React.createRef();
-
-  handleScroll = () => {
+  handleScroll = (): void => {
     this.updateClassList();
   };
 
-  componentDidMount() {
+  componentDidMount = (): void => {
     this.updateClassList();
-  }
+  };
 
-  updateClassList = () => {
+  updateClassList = (): void => {
     const node = this.scroll.current;
     const list = this.facetList.current;
 
@@ -39,23 +44,17 @@ class FacetCards extends Component {
   };
 
   render() {
-    const {
-      facets,
-      composeFacetUrl,
-      PROGRAMS_RATING_ROUTE,
-      title
-    } = this.props;
+    const { facets, composeFacetUrl, title } = this.props;
     return (
       <div className="facets__wrapper facets__shadow" ref={this.facetList}>
         <div className="facets" ref={this.scroll} onScroll={this.handleScroll}>
           <div className="facets__carousel">
-            {facets.map(x => (
+            {facets.map((x: Facet) => (
               <FacetCard
                 title={title}
                 key={x.id}
                 facet={x}
                 composeFacetUrl={composeFacetUrl}
-                PROGRAMS_RATING_ROUTE={PROGRAMS_RATING_ROUTE}
               />
             ))}
           </div>
@@ -64,9 +63,5 @@ class FacetCards extends Component {
     );
   }
 }
-
-FacetCards.propTypes = {
-  facet: PropTypes.arrayOf(facetShape)
-};
 
 export default FacetCards;
