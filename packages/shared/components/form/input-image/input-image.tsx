@@ -2,14 +2,38 @@ import "cropperjs/dist/cropper.css";
 
 import "./input-image.scss";
 
-import classnames from "classnames";
-import React, { Component } from "react";
+import classNames from "classnames";
+import * as React from "react";
 import Cropper from "react-cropper";
 import Dropzone from "react-dropzone";
-
 import InputImageDefault from "./input-image-default";
 
-class InputImage extends Component {
+interface IInputImageProps {
+  className: string;
+  value: { [keys: string]: any };
+  defaultImage: any;
+  error: string;
+  onChange(
+    name: string,
+    data: {
+      cropped?: any;
+      src?: string | ArrayBuffer;
+      filename?: string;
+      filetype?: any;
+      isNew?: boolean;
+      isDefault?: boolean;
+      width?: number;
+      height?: number;
+      size?: number;
+    }
+  ): void;
+  name: string;
+}
+
+class InputImage extends React.Component<IInputImageProps> {
+  rootElement;
+  dropzone;
+  cropper;
   constructor(props) {
     super(props);
     const { onChange, value, name } = this.props;
@@ -88,7 +112,7 @@ class InputImage extends Component {
     const { onDrop, onCrop, clear } = this;
     return (
       <div
-        className={classnames("input-image", className, {
+        className={classNames("input-image", className, {
           "input-image--error": error
         })}
         ref={rootElement => {
