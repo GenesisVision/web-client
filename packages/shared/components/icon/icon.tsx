@@ -4,7 +4,7 @@ import classNames from "classnames";
 import * as React from "react";
 
 export interface IIconProps {
-  type: string;
+  type?: string;
   primary?: boolean;
   secondary?: boolean;
   rotate?: boolean;
