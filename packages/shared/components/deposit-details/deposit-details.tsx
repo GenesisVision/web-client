@@ -16,7 +16,14 @@ interface IDepositDetailsProps {
 
 const DepositDetails: React.FC<
   IDepositDetailsProps & InjectedTranslateProps
-> = ({ t, available, service, deposit, className, titleClassName }) => {
+> = ({
+  t,
+  available,
+  service,
+  deposit,
+  className = "",
+  titleClassName = ""
+}) => {
   return (
     <div className={classNames("deposit-details", className)}>
       <div

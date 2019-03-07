@@ -1,23 +1,31 @@
-import classnames from "classnames";
-import PropTypes from "prop-types";
-import React, { Component } from "react";
+import classNames from "classnames";
+import * as React from "react";
 import { Link } from "react-router-dom";
 import ImageBase from "shared/components/avatar/image-base";
 import Surface from "shared/components/surface/surface";
-
 import facetImg from "./facet.png";
+import { Facet } from "gv-api-web";
 
-class FacetCard extends Component {
-  facet = React.createRef();
+interface IFacetCardProps {
+  title: string;
+  facet: Facet;
+  composeFacetUrl?(url: string): string;
+}
+
+interface IFacetCardState {
+  isHovered: boolean;
+}
+
+class FacetCard extends React.Component<IFacetCardProps, IFacetCardState> {
   state = {
     isHovered: false
   };
 
-  handleMouseEnter = () => {
+  handleMouseEnter = (): void => {
     this.setState({ isHovered: true });
   };
 
-  handleMouseLeave = () => {
+  handleMouseLeave = (): void => {
     this.setState({ isHovered: false });
   };
 
@@ -25,7 +33,7 @@ class FacetCard extends Component {
     const { facet, composeFacetUrl, title } = this.props;
     return (
       <Surface
-        className={classnames("surface--without-paddings facet", {
+        className={classNames("surface--without-paddings facet", {
           "facet--hovered": this.state.isHovered
         })}
         onMouseEnter={this.handleMouseEnter}
@@ -55,16 +63,5 @@ class FacetCard extends Component {
     );
   }
 }
-
-export const facetShape = PropTypes.shape({
-  id: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  logo: PropTypes.string
-});
-
-FacetCard.propTypes = {
-  facet: facetShape
-};
 
 export default FacetCard;

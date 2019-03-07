@@ -1,9 +1,27 @@
-import classnames from "classnames";
-import React, { PureComponent } from "react";
-import DatePicker from "react-datepicker";
+import classNames from "classnames";
+import * as React from "react";
+import * as DatePicker from "react-datepicker";
 import { UncontrolledTooltip } from "reactstrap";
+import { Nullable } from "shared/utils/types";
+import { FormikActions, FormikState } from "formik";
 
-class GVDatePicker extends PureComponent {
+interface IGVDatePickerProps {
+  material: boolean;
+  field: { name: string; value: string | number };
+  label: any;
+  helpMessage: string;
+  onChange(): void;
+  form: FormikState<any> & FormikActions<any>;
+}
+
+interface IGVDatePickerState {
+  isOpen: boolean;
+}
+
+class GVDatePicker extends React.Component<
+  IGVDatePickerProps,
+  IGVDatePickerState
+> {
   state = { isOpen: false };
   render() {
     const {
@@ -11,14 +29,13 @@ class GVDatePicker extends PureComponent {
       field,
       label,
       helpMessage,
-      onChange,
       form: { touched, errors, setFieldValue },
       ...other
     } = this.props;
 
     const { isOpen } = this.state;
 
-    const handleChange = value => {
+    const handleChange = (value: string | number) => {
       setFieldValue(field.name, value);
       this.setState({
         isOpen: false
@@ -39,13 +56,13 @@ class GVDatePicker extends PureComponent {
 
     const hasError = touched[field.name] && errors[field.name];
 
-    const showError = () =>
+    const showError = (): JSX.Element =>
       touched[field.name] &&
       errors[field.name] && (
         <div className="gv-datepicker__invalid">{errors[field.name]}</div>
       );
 
-    const renderHelpIcon = () => {
+    const renderHelpIcon = (): Nullable<JSX.Element> => {
       if (!helpMessage) return null;
       return (
         <span className="gv-datepicker__help">
@@ -59,7 +76,7 @@ class GVDatePicker extends PureComponent {
 
     return (
       <div
-        className={classnames(
+        className={classNames(
           "gv-datepicker",
           { "gv-datepicker--material": material },
           { "gv-datepicker--is-open": isOpen },
@@ -69,7 +86,7 @@ class GVDatePicker extends PureComponent {
       >
         {renderHelpIcon()}
         <label
-          className={classnames(
+          className={classNames(
             "gv-datepicker__label",
             { "gv-datepicker__label--material": material },
             {
@@ -93,7 +110,7 @@ class GVDatePicker extends PureComponent {
         {material && <hr className="gv-datepicker__hr-placeholder" />}
         {material && (
           <hr
-            className={classnames(
+            className={classNames(
               "gv-datepicker__hr",
               hasError
                 ? "gv-datepicker__hr--error"

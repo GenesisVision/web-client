@@ -1,9 +1,18 @@
 import "./input-text.css";
 
-import React from "react";
+import * as React from "react";
 import NumberFormat from "react-number-format";
+import { FormikActions, FormikState } from "formik";
 
-const InputText = ({
+interface IInputTextProps {
+  field: { name: string; value: any }; // { name, value, onChange, onBlur }
+  addon: string;
+  number: boolean;
+  controllClass: string;
+  form: FormikState<any> & FormikActions<any>;
+}
+
+const InputText: React.FC<IInputTextProps> = ({
   field, // { name, value, onChange, onBlur }
   addon,
   number,
@@ -11,13 +20,13 @@ const InputText = ({
   form: { touched, errors, setFieldValue }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
   ...props
 }) => {
-  const showError = () =>
+  const showError = (): JSX.Element =>
     touched[field.name] &&
     errors[field.name] && (
       <div className="field-input__invalid">{errors[field.name]}</div>
     );
 
-  const renderAddon = () => {
+  const renderAddon = (): JSX.Element => {
     if (addon) {
       return (
         <div className="input-group-prepend">
@@ -35,7 +44,7 @@ const InputText = ({
       : "is-valid"
     : "";
 
-  const renderInput = () => {
+  const renderInput = (): JSX.Element => {
     if (number) {
       return (
         <NumberFormat

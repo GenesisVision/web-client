@@ -1,6 +1,12 @@
-import React from "react";
+import * as React from "react";
 
-const InputImageDefault = ({ defaultImage }) => {
+interface IInputImageDefaultProps {
+  defaultImage: any;
+}
+
+const InputImageDefault: React.FC<IInputImageDefaultProps> = ({
+  defaultImage
+}) => {
   if (defaultImage.type === "svg") return defaultImage;
   else
     return (

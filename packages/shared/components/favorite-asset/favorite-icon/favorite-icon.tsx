@@ -1,12 +1,19 @@
 import "./favorite-icon.scss";
 
-import React, { Component } from "react";
+import * as React from "react";
 
-import { Icon } from "../../icon/icon";
+import { Icon } from "shared/components/icon/icon";
 import { ReactComponent as Favorite } from "./favorite.svg";
 
-class FavoriteIcon extends Component {
-  handleClick = e => {
+interface IFavoriteIconProps {
+  id: string;
+  onClick(id: string, selected: boolean): void;
+  selected: boolean;
+  className: string;
+}
+
+class FavoriteIcon extends React.Component<IFavoriteIconProps> {
+  handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation();
     if (this.props.onClick) {
       this.props.onClick(this.props.id, this.props.selected);

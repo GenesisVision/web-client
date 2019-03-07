@@ -1,13 +1,18 @@
 import "./gv-textarea.css";
 
-import classnames from "classnames";
-import React from "react";
+import classNames from "classnames";
+import * as React from "react";
+import { FormikActions, FormikState } from "formik";
 
-const GVTextarea = ({
+interface IGVTextareaProps {
+  field: { name: string; value: any }; // { name, value, onChange, onBlur }
+  label: any;
+  form: FormikState<any> & FormikActions<any>;
+}
+
+const GVTextarea: React.FC<IGVTextareaProps> = ({
   field, // { name, value, onChange, onBlur }
-  addon,
   label,
-  controllClass,
   form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
   ...props
 }) => {
@@ -16,8 +21,8 @@ const GVTextarea = ({
   return (
     <div className="gv-textarea">
       <textarea
-        rows="4"
-        className={classnames(
+        rows={4}
+        className={classNames(
           "gv-textarea__textarea",
           { "gv-textarea__textarea--filled": field.value.length > 0 },
           { "gv-textarea__textarea--error": hasError }
@@ -27,7 +32,7 @@ const GVTextarea = ({
         {...props}
       />
       <label
-        className={classnames(
+        className={classNames(
           "gv-textarea__label",
           {
             "gv-textarea__label--regular":
@@ -40,7 +45,7 @@ const GVTextarea = ({
       </label>
       <hr className="gv-textarea__hr-placeholder" />
       <hr
-        className={classnames(
+        className={classNames(
           "gv-textarea__hr",
           hasError ? "gv-textarea__hr--error" : "gv-textarea__hr--regular"
         )}
