@@ -1,14 +1,15 @@
 import { NotificationViewModel } from "gv-api-web";
+import { combineReducers } from "redux";
 import {
   ADD_NOTIFICATIONS,
   ADD_TOTAL_NOTIFICATIONS,
   CLEAR_NOTIFICATIONS,
-  SET_NOTIFICATIONS_OPTIONS
-} from "pages/app/components/notifications/actions/notifications.actions";
-import isOpenReducer from "pages/app/components/notifications/reducers/is-open.reducer";
-import { TAKE_COUNT } from "pages/app/components/notifications/services/notifications.services";
-import { combineReducers } from "redux";
+  SET_NOTIFICATIONS_OPTIONS,
+  TAKE_COUNT
+} from "shared/components/notifications/actions/notifications.actions";
 import { DeepReadonly } from "utility-types";
+
+import isOpenReducer from "./is-open.reducer";
 
 type SkipTake = {
   skip: number;

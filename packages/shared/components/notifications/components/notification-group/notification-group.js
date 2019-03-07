@@ -1,9 +1,6 @@
-import Notification, {
-  notificationProps
-} from "pages/app/components/notifications/components/notification/notification";
-import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
+import Notification from "shared/components/notifications/components/notification/notification";
 
 class NotificationsGroup extends Component {
   renderNotifications = notification => (
@@ -20,9 +17,9 @@ class NotificationsGroup extends Component {
   }
 }
 
-NotificationsGroup.propTypes = {
-  title: PropTypes.string.isRequired,
-  notifications: PropTypes.arrayOf(PropTypes.shape(notificationProps))
-};
+// NotificationsGroup.propTypes = {
+//   title: PropTypes.string.isRequired,
+//   notifications: PropTypes.arrayOf(PropTypes.shape(notificationProps))
+// };
 
 export default translate()(NotificationsGroup);

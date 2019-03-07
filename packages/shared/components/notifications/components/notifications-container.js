@@ -1,12 +1,12 @@
-import { notificationsToggle } from "pages/app/components/notifications/actions/notifications.actions";
-import Notifications from "pages/app/components/notifications/components/notifications";
-import {
-  serviceClearNotifications,
-  serviceGetNotifications
-} from "pages/app/components/notifications/services/notifications.services";
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { notificationsToggle } from "shared/components/notifications/actions/notifications.actions";
+import Notifications from "shared/components/notifications/components/notifications";
+import {
+  serviceClearNotifications,
+  serviceGetNotifications
+} from "shared/components/notifications/services/notifications.services";
 import Sidebar from "shared/components/sidebar/sidebar";
 
 const NotificationsContainer = ({

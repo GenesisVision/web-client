@@ -1,10 +1,7 @@
 import "./notifications.scss";
 
 import moment from "moment";
-import NotificationsGroup from "pages/app/components/notifications/components/notification-group/notification-group";
-import { notificationProps } from "pages/app/components/notifications/components/notification/notification";
 import { NOTIFICATIONS_ROUTE } from "pages/notifications/notifications.routes";
-import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -12,6 +9,7 @@ import Chip from "shared/components/chip/chip";
 import { Icon } from "shared/components/icon/icon";
 import { RingIcon } from "shared/components/icon/ring-icon";
 import InfinityScroll from "shared/components/infinity-scroll/inifinity-scroll";
+import NotificationsGroup from "shared/components/notifications/components/notification-group/notification-group";
 import Spinner from "shared/components/spiner/spiner";
 
 class Notifications extends Component {
@@ -101,15 +99,15 @@ class Notifications extends Component {
     );
   }
 }
-
-Notifications.propTypes = {
-  fetchNotifications: PropTypes.func.isRequired,
-  clearNotifications: PropTypes.func.isRequired,
-  count: PropTypes.number,
-  notifications: PropTypes.arrayOf(PropTypes.shape(notificationProps)),
-  total: PropTypes.number,
-  closeNotifications: PropTypes.func
-};
+//
+// Notifications.propTypes = {
+//   fetchNotifications: PropTypes.func.isRequired,
+//   clearNotifications: PropTypes.func.isRequired,
+//   count: PropTypes.number,
+//   notifications: PropTypes.arrayOf(PropTypes.shape(notificationProps)),
+//   total: PropTypes.number,
+//   closeNotifications: PropTypes.func
+// };
 
 Notifications.defaultProps = {
   notifications: [],

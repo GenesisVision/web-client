@@ -6,10 +6,12 @@ export interface IDispatchable<T> {
   (dispatch: Dispatch<ActionType>): T;
 }
 
-export interface ActionType extends Action {
+export interface ActionType<T = any> extends Action {
   type: string;
-  payload?: any;
+  payload?: T;
 }
+
+export type ApiAction<T> = ActionType<Promise<T>>;
 
 export interface DispatchType<R> {
   (asyncAction: ActionType): R;

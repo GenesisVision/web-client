@@ -1,4 +1,5 @@
 import { RouterState } from "connected-react-router";
+import { NotificationsState } from "shared/components/notifications/reducers/notifications.reducers";
 import { ProgramsRatingState } from "shared/components/programs-rating/reducers/programs-rating.reducers";
 import { WalletState } from "shared/components/wallet/reducers/wallet.reducers";
 import { AlertMessagesState } from "shared/modules/alert-message/reducers/alert-message-reducers";
@@ -16,6 +17,7 @@ import { IUiState } from "shared/reducers/ui-reducer";
 import { HeaderState } from "./header-reducer";
 
 type RootState = Readonly<{
+  notifications: NotificationsState;
   profileHeader: HeaderState;
   notificationSettings: NotificationSettingsState;
   platformData: PlatformState;
