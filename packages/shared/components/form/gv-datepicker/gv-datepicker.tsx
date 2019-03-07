@@ -3,15 +3,15 @@ import * as React from "react";
 import * as DatePicker from "react-datepicker";
 import { UncontrolledTooltip } from "reactstrap";
 import { Nullable } from "shared/utils/types";
-import { FormikActions, FormikState } from "formik";
+import { FieldProps, FormikActions, FormikState } from "formik";
 
 interface IGVDatePickerProps {
   material: boolean;
-  field: { name: string; value: string | number };
+  // field: { name: string; value: string | number };
   label: any;
   helpMessage: string;
   onChange(): void;
-  form: FormikState<any> & FormikActions<any>;
+  // form: FormikState<any> & FormikActions<any>;
 }
 
 interface IGVDatePickerState {
@@ -19,7 +19,7 @@ interface IGVDatePickerState {
 }
 
 class GVDatePicker extends React.Component<
-  IGVDatePickerProps,
+  IGVDatePickerProps & FieldProps,
   IGVDatePickerState
 > {
   state = { isOpen: false };
