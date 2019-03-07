@@ -1,7 +1,7 @@
-import { FormikActions, FormikProps, withFormik } from "formik";
+import { FormikProps, withFormik } from "formik";
 import { ProgramInvestInfo, WalletData } from "gv-api-web";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
-import React from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
@@ -11,14 +11,15 @@ import Select from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { ASSET, ROLE } from "shared/constants/constants";
 import rateApi from "shared/services/api-client/rate-api";
-import filesService from "shared/services/file-service";
 import {
-  calculateValueOfEntryFee,
+  calculatePercentage,
   convertFromCurrency,
   convertToCurrency
 } from "shared/utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { lazy, number, object } from "yup";
+
+import WalletImage from "../avatar/wallet-image/wallet-image";
 
 interface IDepositFormOwnProps {
   wallets: WalletData[];
@@ -49,7 +50,6 @@ export interface FormValues {
 type OwnProps = InjectedTranslateProps &
   IDepositFormOwnProps &
   IDepositFormProps &
-  FormikActions<FormValues> &
   FormikProps<FormValues>;
 
 class DepositForm extends React.Component<OwnProps> {
@@ -64,14 +64,12 @@ class DepositForm extends React.Component<OwnProps> {
 
   entryFee = (amount: number): number => {
     const { info } = this.props;
-    return this.composeEntryFee(
-      calculateValueOfEntryFee(amount, info.entryFee)
-    );
+    return this.composeEntryFee(calculatePercentage(amount, info.entryFee));
   };
 
   gvFee = (amount: number): number => {
     const { info } = this.props;
-    return calculateValueOfEntryFee(amount, info.gvCommission);
+    return calculatePercentage(amount, info.gvCommission);
   };
 
   investAmount = (amount: number): number => {
@@ -184,10 +182,10 @@ class DepositForm extends React.Component<OwnProps> {
           {wallets.map((wallet: WalletData) => {
             return (
               <option value={wallet.currency} key={wallet.currency}>
-                <img
-                  src={filesService.getFileUrl(wallet.logo)}
-                  className="wallet-transfer-popup__icon"
+                <WalletImage
+                  imageClassName="wallet-transfer-popup__icon"
                   alt={wallet.currency}
+                  url={wallet.logo}
                 />
                 {`${wallet.title} | ${wallet.currency}`}
               </option>

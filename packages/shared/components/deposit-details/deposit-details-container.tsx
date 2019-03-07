@@ -43,13 +43,6 @@ const mapDispatchToProps = (
   service: bindActionCreators({ fetchProfileHeaderInfo }, dispatch)
 });
 
-/*
-DepositDetailsContainer.defaultProps = {
-  className: "",
-  titleClassName: ""
-};
-*/
-
 export default connect(
   mapStateToProps,
   mapDispatchToProps

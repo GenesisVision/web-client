@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import * as React from "react";
 import withUrl from "shared/decorators/with-url";
 
 export interface IImageProps {
@@ -8,7 +8,7 @@ export interface IImageProps {
   imageClassName?: string;
 }
 
-interface IImageBaseProps extends ImageBase {
+interface IImageBaseProps {
   defaultImage: string;
 }
 
@@ -16,7 +16,10 @@ interface IImageBaseState {
   error: boolean;
 }
 
-class ImageBase extends Component<IImageBaseProps, IImageBaseState> {
+class ImageBase extends React.Component<
+  IImageBaseProps & IImageProps,
+  IImageBaseState
+> {
   state = {
     error: false
   };

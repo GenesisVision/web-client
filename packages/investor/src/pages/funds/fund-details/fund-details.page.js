@@ -2,7 +2,7 @@ import "shared/components/details/details.scss";
 
 import { push } from "connected-react-router";
 import FundDepositContainer from "modules/fund-deposit/fund-deposit-container";
-import FundWithdrawContainer from "modules/fund-withdraw/fund-withdraw-container";
+import FundWithdrawalContainer from "modules/fund-withdrawal/fund-withdrawal-container";
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
@@ -96,7 +96,7 @@ class FundDetailsPage extends PureComponent {
           <div className="details">
             <div className="details__section">
               <FundDetailsDescriptionSection
-                FundWithdrawContainer={FundWithdrawContainer}
+                FundWithdrawContainer={FundWithdrawalContainer}
                 FundDepositContainer={FundDepositContainer}
                 FundDetailContext={FundDetailContext}
                 fundDescription={this.description}
