@@ -11,7 +11,7 @@ export enum CHIP_TYPE {
 interface IChipProps {
   disabled?: boolean;
   // children: () => void | { [keys: string]: any } | JSX.Element;
-  className: string;
+  className?: string;
   rounded?: boolean;
   type: CHIP_TYPE;
   onClick?(event: React.MouseEvent<HTMLElement>): void | undefined;
