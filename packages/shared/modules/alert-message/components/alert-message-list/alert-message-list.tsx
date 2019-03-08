@@ -1,14 +1,26 @@
 import "./alert-message-list.scss";
 
 import { GVButton } from "gv-react-components";
-import React, { Component } from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import posed, { PoseGroup } from "react-pose";
 import { connect } from "react-redux";
 import AlertMessage from "shared/modules/alert-message/components/alert-message-list/alert-message";
 import history from "shared/utils/history";
-
 import { alertMessageActions } from "../../actions/alert-message-actions";
+import RootState from "shared/reducers/root-reducer";
+import { Dispatch } from "redux";
+import { ActionType } from "shared/utils/types";
+import { AlertMessagesState } from "../../reducers/alert-message-reducers";
+
+interface IAlertMessageListProps {}
+interface IAlertMessageListStateProps {
+  messages: AlertMessagesState;
+}
+interface IAlertMessageListDispatchProps {
+  removeMessage(id: string): void;
+  clearAllMessages(): void;
+}
 
 const AlertBox = posed.div({
   enter: {
@@ -19,9 +31,14 @@ const AlertBox = posed.div({
   }
 });
 
-export class AlertMessageList extends Component {
+export class AlertMessageList extends React.Component<
+  IAlertMessageListProps &
+    InjectedTranslateProps &
+    IAlertMessageListStateProps &
+    IAlertMessageListDispatchProps
+> {
   componentDidMount() {
-    history.listen((location, action) => {
+    history.listen(() => {
       this.props.clearAllMessages();
     });
   }
@@ -40,24 +57,30 @@ export class AlertMessageList extends Component {
     return (
       <div className="alert-message-list">
         <PoseGroup animateOnMount>
-          {messages.map(message => (
-            <AlertBox key={message.id}>
-              <AlertMessage message={message} onClick={removeMessage} />
-            </AlertBox>
-          ))}
-          {renderClearAllButton}
+          <React.Fragment>
+            {messages.map(message => (
+              <AlertBox key={message.id}>
+                <AlertMessage message={message} onClick={removeMessage} />
+              </AlertBox>
+            ))}
+            {renderClearAllButton}
+          </React.Fragment>
         </PoseGroup>
       </div>
     );
   }
 }
 
-export const mapStateToProps = state => {
+export const mapStateToProps = (
+  state: RootState
+): IAlertMessageListStateProps => {
   const messages = state.alertMessages;
   return { messages };
 };
 
-export const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = (
+  dispatch: Dispatch<ActionType>
+): IAlertMessageListDispatchProps => ({
   removeMessage: id => {
     dispatch(alertMessageActions.remove(id));
   },

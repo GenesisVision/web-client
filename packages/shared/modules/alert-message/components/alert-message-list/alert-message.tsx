@@ -1,13 +1,27 @@
-import classnames from "classnames";
-import React, { Component } from "react";
-import { translate } from "react-i18next";
+import classNames from "classnames";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
+import { IMessage } from "../../reducers/alert-message-reducers";
 
-class AlertMessage extends Component {
+interface IAlertMessageProps {
+  onClick(id: string): void;
+  message: IMessage;
+}
+
+class AlertMessage extends React.Component<
+  IAlertMessageProps & InjectedTranslateProps
+> {
   handleClick = () => {
     this.props.onClick(this.props.message.id);
   };
 
-  getMessageText = ({ text, isUseLocalization }) => {
+  getMessageText = ({
+    text,
+    isUseLocalization
+  }: {
+    text: string;
+    isUseLocalization: boolean;
+  }): string => {
     let result = text;
 
     if (isUseLocalization) {
@@ -19,7 +33,7 @@ class AlertMessage extends Component {
   render() {
     const { message } = this.props;
     return (
-      <div className={classnames("alert-message", message.className)}>
+      <div className={classNames("alert-message", message.className)}>
         <div className="alert-message-list__text">
           {this.getMessageText(message)}
         </div>
@@ -30,7 +44,5 @@ class AlertMessage extends Component {
     );
   }
 }
-
-AlertMessage.propTypes = {};
 
 export default translate()(AlertMessage);
