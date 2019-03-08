@@ -1,12 +1,29 @@
 import { replace } from "connected-react-router";
-import { PureComponent } from "react";
+import * as React from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import { bindActionCreators, Dispatch } from "redux";
 import { NOT_FOUND_PAGE_ROUTE } from "shared/components/not-found/not-found.routes";
 
 import * as walletWithdrawConfirmService from "./services/wallet-withdraw-confirm.services";
+import { ActionType } from "shared/utils/types";
 
-class EmailConfirmContainer extends PureComponent {
+interface IEmailConfirmContainerProps {
+  queryParams: any;
+}
+
+interface IEmailConfirmContainerDispatchProps {
+  service: {
+    confirmWithdraw(
+      requestId?: string,
+      code?: string
+    ): (dispatch: Dispatch<ActionType>) => Promise<any>;
+    showNotFoundPage(): void;
+  };
+}
+
+class EmailConfirmContainer extends React.Component<
+  IEmailConfirmContainerProps & IEmailConfirmContainerDispatchProps
+> {
   componentDidMount() {
     const { queryParams, service } = this.props;
     if (queryParams.requestId && queryParams.code) {
@@ -21,7 +38,9 @@ class EmailConfirmContainer extends PureComponent {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (
+  dispatch: Dispatch<ActionType>
+): IEmailConfirmContainerDispatchProps => ({
   service: bindActionCreators(
     {
       ...walletWithdrawConfirmService,
