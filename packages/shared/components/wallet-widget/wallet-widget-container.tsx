@@ -35,6 +35,7 @@ class WalletWidgetContainer extends React.Component<
 
   render() {
     const { className, info } = this.props;
+    if (!info) return null;
     const {
       currencyCcy,
       availableCcy,
