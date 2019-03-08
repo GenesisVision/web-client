@@ -24,7 +24,7 @@ export type anchorElType = { [keys: string]: any } | Function;
 
 interface IPopoverProps {
   onClose?(event: React.MouseEvent<HTMLElement>): void;
-  horizontal: HORIZONTAL_POPOVER_POS;
+  horizontal?: HORIZONTAL_POPOVER_POS;
   vertical?: VERTICAL_POPOVER_POS;
   anchorEl: Nullable<anchorElType>;
   noPadding?: boolean;

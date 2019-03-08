@@ -1,8 +1,8 @@
 import "./dialog.scss";
 
-import classnames from "classnames";
+import classNames from "classnames";
 import { GVButton } from "gv-react-components";
-import React, { Fragment } from "react";
+import * as React from "react";
 import EventListener from "react-event-listener";
 import { InjectedTranslateProps } from "react-i18next";
 import { translate } from "react-i18next";
@@ -38,16 +38,16 @@ class Dialog extends React.Component<IDialogProps & InjectedTranslateProps> {
             <GVButton
               variant="text"
               color="secondary"
-              className={classnames("dialog__close dialog__close--outside", {
+              className={classNames("dialog__close dialog__close--outside", {
                 "dialog__close--wider": wider
               })}
               onClick={onClose}
             >
-              <Fragment>
+              <React.Fragment>
                 <CloseIcon /> {t("buttons.close")}
-              </Fragment>
+              </React.Fragment>
             </GVButton>
-            <div className={classnames("dialog", className)}>
+            <div className={classNames("dialog", className)}>
               <GVButton
                 variant="text"
                 color="secondary"
