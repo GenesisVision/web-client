@@ -18,7 +18,7 @@ export interface IDialogProps {
   wider?: boolean;
 }
 class Dialog extends React.Component<IDialogProps & InjectedTranslateProps> {
-  handleKeyPress = (event: any) => {
+  handleKeyPress = (event: KeyboardEvent) => {
     const { onClose } = this.props;
 
     //Esc
