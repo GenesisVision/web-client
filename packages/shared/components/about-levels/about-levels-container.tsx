@@ -1,40 +1,52 @@
 import "./about-level.scss";
 
-import React, { Component } from "react";
+import * as React from "react";
 import { CURRENCY_VALUES } from "shared/modules/currency-select/currency-select.constants";
 import platformApi from "shared/services/api-client/platform-api";
-
 import AboutLevelsComponent from "./about-levels";
+import { LevelInfo } from "gv-api-web";
 
 const CURRENCY_FILTER_VALUES = Object.keys(CURRENCY_VALUES);
 
-class AboutLevelsContainerComponent extends Component {
+interface IAboutLevelsContainerComponentProps {
+  open: boolean;
+  onClose(param?: any): void;
+  currency?: string;
+}
+
+interface IAboutLevelsContainerComponentState {
+  currency: string;
+  investmentsLimits: LevelInfo[];
+}
+
+class AboutLevelsContainerComponent extends React.Component<
+  IAboutLevelsContainerComponentProps,
+  IAboutLevelsContainerComponentState
+> {
   state = {
-    currency: CURRENCY_FILTER_VALUES[0],
-    investmentsLimits: {}
+    currency: this.props.currency || CURRENCY_FILTER_VALUES[0],
+    investmentsLimits: []
   };
-  getInvestmentsLimits() {
+
+  getInvestmentsLimits = () => {
     platformApi
       .v10PlatformLevelsGet({ currency: this.state.currency })
       .then(data => {
         this.setState({ investmentsLimits: data.levels });
       });
-  }
-  componentDidMount() {
-    this.getInvestmentsLimits();
-  }
-  handlerCurrencyChange = e => {
-    this.setState({ currency: e.target.value }, this.getInvestmentsLimits);
   };
+
+  componentDidMount = () => {
+    this.getInvestmentsLimits();
+  };
+
   render() {
     return (
       <AboutLevelsComponent
         open={this.props.open}
         onClose={this.props.onClose}
-        className="about-levels__dialog"
         investmentsLimits={this.state.investmentsLimits}
         currency={this.state.currency}
-        currencyChange={this.handlerCurrencyChange}
       />
     );
   }

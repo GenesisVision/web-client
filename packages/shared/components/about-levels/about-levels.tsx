@@ -1,16 +1,25 @@
 import "./about-level.scss";
 
-import React, { Component } from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import {
+  InjectedTranslateProps,
+  translate,
+  TranslationFunction
+} from "react-i18next";
 import NumberFormat from "react-number-format";
 import Dialog from "shared/components/dialog/dialog";
 
-import { formatValue } from "../../utils/formatter";
-import StatisticItem from "../statistic-item/statistic-item";
+import { formatValue } from "shared/utils/formatter";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
+import { LevelInfo } from "gv-api-web";
 
-const renderLimits = (t, investmentsLimits, currency) => {
-  return investmentsLimits.map(levelInfo => {
-    return (
+const RenderLimits = (
+  t: TranslationFunction,
+  investmentsLimits: LevelInfo[],
+  currency: string
+): JSX.Element => (
+  <React.Fragment>
+    {investmentsLimits.map((levelInfo: LevelInfo) => (
       <div key={levelInfo.level} className="about-levels__limit">
         <div
           className={`about-levels__icon about-levels__icon--${
@@ -28,11 +37,20 @@ const renderLimits = (t, investmentsLimits, currency) => {
           />
         </StatisticItem>
       </div>
-    );
-  });
-};
+    ))}
+  </React.Fragment>
+);
 
-class AboutLevelsComponent extends Component {
+interface IAboutLevelsComponentProps {
+  open: boolean;
+  onClose(param?: any): void;
+  investmentsLimits: LevelInfo[];
+  currency: string;
+}
+
+class AboutLevelsComponent extends React.Component<
+  IAboutLevelsComponentProps & InjectedTranslateProps
+> {
   render() {
     const { t, open, onClose, investmentsLimits, currency } = this.props;
     return (
@@ -82,7 +100,7 @@ class AboutLevelsComponent extends Component {
               </h4>
               <div className="about-levels__limits">
                 {investmentsLimits.length &&
-                  renderLimits(t, investmentsLimits, currency)}
+                  RenderLimits(t, investmentsLimits, currency)}
               </div>
             </div>
           </div>
