@@ -1,16 +1,31 @@
-import PropTypes from "prop-types";
-import React, { Component } from "react";
+import * as React from "react";
 import authApi from "shared/services/api-client/auth-api";
 import authService from "shared/services/auth-service";
 
 import PhoneVerificationForm from "./phone-verification-form";
+import { Nullable } from "shared/utils/types";
 
-class PhoneVerification extends Component {
+interface IPhoneVerificationProps {
+  phoneNumber: string;
+  onVerify?(): void;
+}
+
+interface IPhoneVerificationState {
+  errorMessage: Nullable<string>;
+  data: number;
+  disabledResend: boolean;
+}
+
+class PhoneVerification extends React.Component<
+  IPhoneVerificationProps,
+  IPhoneVerificationState
+> {
   state = {
     errorMessage: null,
     data: 0,
     disabledResend: false
   };
+  timeout: any;
 
   sendCode = () => {
     authApi
@@ -19,7 +34,7 @@ class PhoneVerification extends Component {
       .catch(data => this.setState({ data }));
   };
 
-  verifyCode = code => {
+  verifyCode = (code: string) => {
     authApi
       .v10AuthPhoneVerifyPost(authService.getAuthArg(), {
         code
@@ -61,10 +76,5 @@ class PhoneVerification extends Component {
     );
   }
 }
-
-PhoneVerification.propTypes = {
-  phoneNumber: PropTypes.string.isRequired,
-  onVerify: PropTypes.func
-};
 
 export default PhoneVerification;
