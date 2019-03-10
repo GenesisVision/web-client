@@ -1,6 +1,6 @@
 import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { composeDefaultDateRangeFilter } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
-import { composeRequestValue } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
+import { composeRequestValueFunc } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 
 const SERVER_DATE_RANGE_MIN_FILTER_NAME = "dateFrom";
 const SERVER_DATE_RANGE_MAX_FILTER_NAME = "dateTo";
@@ -69,7 +69,7 @@ export const PROGRAM_OPEN_POSITIONS_COLUMNS = [
 export const PROGRAM_TRADES_DEFAULT_FILTERS = [
   {
     ...composeDefaultDateRangeFilter({
-      composeApiRequestValue: composeRequestValue(
+      composeApiRequestValue: composeRequestValueFunc(
         SERVER_DATE_RANGE_MIN_FILTER_NAME,
         SERVER_DATE_RANGE_MAX_FILTER_NAME
       )

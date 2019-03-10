@@ -1,76 +1,89 @@
 import { GVTextField } from "gv-react-components";
-import moment from "moment";
-import React, { Component, Fragment } from "react";
-import { translate } from "react-i18next";
+import * as moment from "moment";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import GVDatePicker from "shared/components/gv-datepicker/gv-datepicker";
+import {
+  DATA_RANGE_FILTER_TYPES,
+  DateRangeFilterTypes,
+  IDataRangeFilterValue
+} from "./date-range-filter.constants";
 
-import { DateRangeFilterTypes } from "./date-range-filter.constants";
+interface IDateRangeFilterValuesProps {
+  onChange(type: keyof IDataRangeFilterValue, date: string): void;
+  type: DATA_RANGE_FILTER_TYPES;
+  dateStart: Date | number | string;
+  dateEnd: Date | number | string;
+  startLabel: string;
+}
 
-class DateRangeFilterValues extends Component {
-  handleOnChange = type => e => {
+class DateRangeFilterValues extends React.Component<
+  IDateRangeFilterValuesProps & InjectedTranslateProps
+> {
+  handleOnChange = (type: keyof IDataRangeFilterValue) => (
+    e: React.ChangeEvent<any>
+  ) => {
     this.props.onChange(type, e.target.value);
   };
 
-  renderFirstInput = value => {
-    const { t } = this.props;
-    return (
-      <GVTextField
-        wrapperClassName="date-range-filter__date-input"
-        type="text"
-        name="startDate"
-        label={t("filters.date-range.start")}
-        value={value}
-        disabled
-      />
-    );
-  };
+  renderFirstInput = (value: string): JSX.Element => (
+    <GVTextField
+      wrapperClassName="date-range-filter__date-input"
+      type="text"
+      name="startDate"
+      label={this.props.t("filters.date-range.start")}
+      value={value}
+      disabled
+    />
+  );
 
-  renderSecondInput = () => {
-    const { t } = this.props;
-    return (
-      <GVTextField
-        wrapperClassName="date-range-filter__date-input"
-        type="text"
-        name="endDate"
-        label={t("filters.date-range.end")}
-        value={t("filters.date-range.today")}
-        disabled
-      />
-    );
-  };
+  renderSecondInput = (): JSX.Element => (
+    <GVTextField
+      wrapperClassName="date-range-filter__date-input"
+      type="text"
+      name="endDate"
+      label={this.props.t("filters.date-range.end")}
+      value={this.props.t("filters.date-range.today")}
+      disabled
+    />
+  );
 
   render() {
     const { t, type, dateStart, dateEnd, startLabel } = this.props;
     switch (type) {
       case DateRangeFilterTypes.all:
         return (
-          <Fragment>
+          <React.Fragment>
             {this.renderFirstInput(startLabel)}
             {this.renderSecondInput()}
-          </Fragment>
+          </React.Fragment>
         );
       case DateRangeFilterTypes.lastMonth:
         return (
-          <Fragment>
+          <React.Fragment>
             {this.renderFirstInput(
-              new moment().subtract(1, "month").format("ll")
+              moment()
+                .subtract(1, "month")
+                .format("ll")
             )}
             {this.renderSecondInput()}
-          </Fragment>
+          </React.Fragment>
         );
       case DateRangeFilterTypes.lastWeek:
         return (
-          <Fragment>
+          <React.Fragment>
             {this.renderFirstInput(
-              new moment().subtract(1, "week").format("ll")
+              moment()
+                .subtract(1, "week")
+                .format("ll")
             )}
             {this.renderSecondInput()}
-          </Fragment>
+          </React.Fragment>
         );
       case DateRangeFilterTypes.custom:
       default:
         return (
-          <Fragment>
+          <React.Fragment>
             <GVTextField
               wrapperClassName="date-range-filter__date-input"
               type="text"
@@ -94,7 +107,7 @@ class DateRangeFilterValues extends Component {
               maxDate={new Date()}
               onChange={this.handleOnChange("dateEnd")}
             />
-          </Fragment>
+          </React.Fragment>
         );
     }
   }
