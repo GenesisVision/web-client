@@ -57,7 +57,8 @@ class ProgramDetailsDescriptionMain extends Component<
     const {
       t,
       programDescription,
-      ChangePasswordTradingAccountControl
+      ChangePasswordTradingAccountControl,
+      isOwnProgram
     } = this.props;
     const personalDetails = programDescription.personalProgramDetails;
 
@@ -117,7 +118,7 @@ class ProgramDetailsDescriptionMain extends Component<
           </div>
         </div>
         <div className="program-details-description__settings">
-          {ChangePasswordTradingAccountControl && (
+          {ChangePasswordTradingAccountControl && isOwnProgram && (
             <ChangePasswordTradingAccountControl
               programDescription={programDescription}
             />
