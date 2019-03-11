@@ -1,9 +1,9 @@
 import * as React from "react";
 import authApi from "shared/services/api-client/auth-api";
 import authService from "shared/services/auth-service";
+import { Nullable } from "shared/utils/types";
 
 import PhoneVerificationForm from "./phone-verification-form";
-import { Nullable } from "shared/utils/types";
 
 interface IPhoneVerificationProps {
   phoneNumber: string;

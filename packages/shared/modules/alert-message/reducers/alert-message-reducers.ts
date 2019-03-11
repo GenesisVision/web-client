@@ -1,8 +1,8 @@
 import { DeepReadonly } from "utility-types";
 import * as uuid from "uuid";
 
-import { ALERT_MESSAGE } from "../actions/alert-message-actions.constants";
 import { IAlertAction } from "../actions/alert-message-actions";
+import { ALERT_MESSAGE } from "../actions/alert-message-actions.constants";
 
 export type IMessage = DeepReadonly<{
   id: string;

@@ -1,14 +1,14 @@
 import { NotificationViewModel } from "gv-api-web";
+import { combineReducers } from "redux";
 import {
   ADD_NOTIFICATIONS,
   ADD_TOTAL_NOTIFICATIONS,
   CLEAR_NOTIFICATIONS,
-  SET_NOTIFICATIONS_OPTIONS
-} from "pages/app/components/notifications/actions/notifications.actions";
-import isOpenReducer from "pages/app/components/notifications/reducers/is-open.reducer";
-import { TAKE_COUNT } from "pages/app/components/notifications/services/notifications.services";
-import { combineReducers } from "redux";
-import { DeepReadonly } from "utility-types";
+  SET_NOTIFICATIONS_OPTIONS,
+  TAKE_COUNT
+} from "shared/components/notifications/actions/notifications.actions";
+
+import isOpenReducer from "./is-open.reducer";
 
 type SkipTake = {
   skip: number;
@@ -27,9 +27,9 @@ const optionsReducer = (
 
 // TODO: добавить нормализацию, когда буду уникальные ID
 const addNotificationsReducer = (
-  notifications: DeepReadonly<NotificationViewModel[]> = [],
+  notifications: NotificationViewModel[] = [],
   action: any
-): DeepReadonly<NotificationViewModel[]> => {
+): NotificationViewModel[] => {
   switch (action.type) {
     case ADD_NOTIFICATIONS:
       return [...notifications, ...action.notifications];
@@ -47,7 +47,7 @@ const addTotalCount = (total: number = 0, action: any): number => {
   return total;
 };
 
-export type NotificationsState = DeepReadonly<{
+export type NotificationsState = Readonly<{
   notifications: NotificationViewModel[];
   isOpen: boolean;
   total: number;

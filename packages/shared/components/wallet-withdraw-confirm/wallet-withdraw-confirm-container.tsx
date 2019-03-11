@@ -1,11 +1,11 @@
 import { replace } from "connected-react-router";
 import * as React from "react";
 import { connect } from "react-redux";
-import { bindActionCreators, Dispatch } from "redux";
+import { Dispatch, bindActionCreators } from "redux";
 import { NOT_FOUND_PAGE_ROUTE } from "shared/components/not-found/not-found.routes";
+import { ActionType } from "shared/utils/types";
 
 import * as walletWithdrawConfirmService from "./services/wallet-withdraw-confirm.services";
-import { ActionType } from "shared/utils/types";
 
 interface IEmailConfirmContainerProps {
   queryParams: any;

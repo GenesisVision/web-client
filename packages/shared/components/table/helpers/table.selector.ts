@@ -1,4 +1,4 @@
-import { createSelector, ParametricSelector } from "reselect";
+import { ParametricSelector, createSelector } from "reselect";
 
 const defaultData = {
   items: [],
