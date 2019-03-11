@@ -1,11 +1,12 @@
 import "./signal-provider-controls.scss";
 
+import { ProgramDetailsFull } from "gv-api-web";
 import ChangePasswordTradingAccountPopup from "modules/change-password-trading-account/change-password-trading-account-popup";
 import React, { Component, Fragment } from "react";
-import DetailsChangePassword from "shared/components/details/details-description-section/details-description/details-change-password";
+import DetailsChangePassword from "shared/components/details/details-description-section/details-description/controls/details-change-password";
 
 interface ChangePasswordTradingAccountControlProps {
-  programDescription: any;
+  programDescription: ProgramDetailsFull;
 }
 
 interface IChangePasswordTradingAccountControlState {
