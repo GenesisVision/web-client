@@ -17,7 +17,6 @@
   &__row {
     display: flex;
     flex-wrap: wrap;
-    //margin-bottom: 8px;
     width: auto;
     max-width: 230px;
     position: relative;
@@ -27,21 +26,10 @@
       white-space: nowrap;
     }
 
-    //&--description {
-    //  & .gv-text-field,
-    //  & .gv-text-field__wrapper {
-    //    width: 100%;
-    //  }
-    //}
-
     .gv-text-field__wrapper,
     .gv-checkbox-wrapper {
       margin: 0;
     }
-
-    //& .gv-text-field__wrapper:first-child {
-    //  margin: 16px 24px 16px 0;
-    //}
 
     .select--disabled .select__value {
       color: $text-light-color;
@@ -56,10 +44,6 @@
     position: relative;
     margin-bottom: 40px;
     max-width: 230px;
-
-    //&:last-child {
-    //  margin-bottom: 0;
-    //}
 
     .gv-text-field,
     .gv-text-field__wrapper {
@@ -190,24 +174,20 @@
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
+    line-height: 20px;
 
     &-requirements {
-      font-size: 12px;
       color: $label-color;
       letter-spacing: 0.4px;
     }
 
     &-chars {
-      width: 30px;
       color: $text-light-color;
-      font-size: 12px;
-      position: relative;
-      left: -15px;
+      display: inline-flex;
+      align-items: center;
 
-      & .gv-program-period {
-        position: absolute;
-        top: -4px;
-        left: 25px;
+      .gv-program-period {
+        margin-left: 15px;
       }
     }
   }
@@ -216,6 +196,7 @@
     margin-bottom: 8px;
     font-size: $font-size-common;
     letter-spacing: 0.3px;
+    font-weight: 600;
   }
 
   &__logo-notice {
@@ -325,49 +306,5 @@
         margin-top: 70px;
       }
     }
-  }
-}
-
-.deposit-details {
-  &__deposit-amount {
-    &-title {
-      color: $label-color;
-      margin-bottom: 14px;
-    }
-
-    &-value {
-      font-size: $font-size-h2;
-      letter-spacing: 0.4px;
-    }
-  }
-
-  &__available-list {
-    margin-top: 30px;
-  }
-
-  &__available-amount {
-    font-size: $font-size-common;
-    margin-top: 4px;
-    letter-spacing: 0.4px;
-
-    &-value {
-      color: $text-accent-color;
-      margin-right: 8px;
-      margin-left: 4px;
-      font-weight: 600;
-      &--error {
-        color: #eb3b5a;
-      }
-    }
-
-    & .icon--refresh {
-      position: relative;
-      top: 6px;
-      cursor: pointer;
-    }
-  }
-
-  .gv-text-field__wrapper {
-    margin-left: 0;
   }
 }

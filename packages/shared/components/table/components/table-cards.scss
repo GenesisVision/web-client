@@ -148,8 +148,8 @@ $program-height: 372px;
   .fund-assets {
     flex-wrap: nowrap;
   }
-  .fund-asset:nth-child(3) {
-    margin-right: 0;
+  .fund-asset {
+    @include font-size($font-size-small);
   }
   @include media-breakpoint-phone() {
     .program-avatar {

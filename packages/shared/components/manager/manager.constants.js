@@ -4,7 +4,7 @@ import {
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import {
   composeDefaultDateRangeFilter,
-  composeRequestValue,
+  composeRequestValueFunc,
   validateDateRange
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 import {
@@ -16,7 +16,7 @@ import { DateRangeFilterTypes } from "../table/components/filtering/date-range-f
 
 export const MANAGER_TABLE_DATE_RANGE_FILTER = {
   ...composeDefaultDateRangeFilter({
-    composeApiRequestValue: composeRequestValue(
+    composeApiRequestValue: composeRequestValueFunc(
       SERVER_DATE_RANGE_MIN_FILTER_NAME,
       SERVER_DATE_RANGE_MAX_FILTER_NAME
     )

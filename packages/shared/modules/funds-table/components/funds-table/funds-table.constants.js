@@ -1,6 +1,6 @@
 import {
   composeDefaultDateRangeFilter,
-  composeRequestValue,
+  composeRequestValueFunc,
   validateDateRange
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 
@@ -20,7 +20,7 @@ export const SORTING_FILTER_VALUE = "ByProfitDesc";
 export const FUNDS_TABLE_FILTERS = [
   {
     ...composeDefaultDateRangeFilter({
-      composeApiRequestValue: composeRequestValue(
+      composeApiRequestValue: composeRequestValueFunc(
         SERVER_DATE_RANGE_MIN_FILTER_NAME,
         SERVER_DATE_RANGE_MAX_FILTER_NAME
       ),
