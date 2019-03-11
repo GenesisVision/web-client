@@ -36,7 +36,7 @@ class TagFilter extends React.Component<ITagFilterProps, ITagFilterState> {
     arr.filter(
       item =>
         this.props.value &&
-        this.props.value.find(choose => item.name === choose.name)
+        this.props.value.find(select => item.name === select.name)
     );
   renderValueText = value => value;
   handleOpenPopover = (

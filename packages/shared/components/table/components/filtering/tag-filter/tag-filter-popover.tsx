@@ -4,7 +4,7 @@ import * as React from "react";
 import TagProgramItem from "shared/components/tag-program/tag-program-item";
 
 interface ITagFilterPopoverState {
-  choosed: ProgramTag[];
+  selected: ProgramTag[];
   filteredTags: ProgramTag[];
 }
 
@@ -21,25 +21,28 @@ class TagFilterPopover extends React.Component<
     super(props);
     const { value, values } = this.props;
     this.state = {
-      choosed: value,
+      selected: value,
       filteredTags: values
     };
   }
   componentDidMount() {
     this.setState({
-      filteredTags: this.removeChoosed(this.props.values, this.state.choosed)
+      filteredTags: this.removeSelected(this.props.values, this.state.selected)
     });
   }
   search = (e: React.ChangeEvent<any>) => {
     this.setState({
-      filteredTags: this.removeChoosed(
+      filteredTags: this.removeSelected(
         this.filtering(e.target.value, this.props.values),
-        this.state.choosed
+        this.state.selected
       )
     });
   };
-  removeChoosed = (arr: ProgramTag[], choosedArr: ProgramTag[]): ProgramTag[] =>
-    arr.filter(item => !choosedArr.find(choose => item.name === choose.name));
+  removeSelected = (
+    arr: ProgramTag[],
+    selectedArr: ProgramTag[]
+  ): ProgramTag[] =>
+    arr.filter(item => !selectedArr.find(select => item.name === select.name));
   filtering = (searchValue: string, array: ProgramTag[]): ProgramTag[] =>
     searchValue
       ? array.filter(
@@ -49,10 +52,10 @@ class TagFilterPopover extends React.Component<
       : array;
 
   handleSubmit = (value: ProgramTag) => () => {
-    const { choosed } = this.state;
-    if (choosed.includes(value)) return;
-    const newValue = [...choosed, value];
-    this.setState({ choosed: newValue });
+    const { selected } = this.state;
+    if (selected.includes(value)) return;
+    const newValue = [...selected, value];
+    this.setState({ selected: newValue });
     this.props.changeFilter(newValue);
   };
 
