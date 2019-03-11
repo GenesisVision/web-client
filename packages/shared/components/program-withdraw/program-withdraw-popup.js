@@ -55,7 +55,7 @@ ProgramWithdrawPopup.propTypes = {
   fetchInfo: PropTypes.func,
   withdraw: PropTypes.func,
   accountCurrency: PropTypes.string.isRequired,
-  programCurrency: PropTypes.string.isRequired
+  assetCurrency: PropTypes.string.isRequired
 };
 
 export default ProgramWithdrawPopup;
