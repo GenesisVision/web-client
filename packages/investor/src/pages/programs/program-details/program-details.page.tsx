@@ -123,6 +123,7 @@ class ProgramDetailsPage extends PureComponent<
           <div className="details">
             <div className="details__section">
               <ProgramDetailsDescriptionSection
+                accountCurrency={currency}
                 programDescription={description}
                 isAuthenticated={isAuthenticated}
                 redirectToLogin={service.redirectToLogin}
