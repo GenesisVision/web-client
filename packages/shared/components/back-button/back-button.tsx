@@ -5,7 +5,7 @@ import { GVButton } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
-import { bindActionCreators, compose, Dispatch } from "redux";
+import { Dispatch, bindActionCreators, compose } from "redux";
 import RootState from "shared/reducers/root-reducer";
 import { ActionType } from "shared/utils/types";
 

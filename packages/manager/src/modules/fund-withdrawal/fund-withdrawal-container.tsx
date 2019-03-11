@@ -10,23 +10,28 @@ import {
 
 interface IFundWithdrawDialogOwnProps extends IDialogProps {
   id: string;
-  assetCurrency: string;
+  accountCurrency: string;
+  onSubmit(): void;
 }
 
 const mapDispatchToProps = (
   dispatch: Dispatch<any>,
   ownProps: IFundWithdrawDialogOwnProps
 ) => {
-  const { id, assetCurrency, onClose } = ownProps;
+  const { id, accountCurrency, onSubmit, onClose } = ownProps;
+  const onSubmitWithdrawal = () => {
+    onClose();
+    onSubmit();
+  };
   const service = bindActionCreators(
     {
-      withdrawFund: withdrawFund(id, onClose)
+      withdrawFund: withdrawFund(id, onSubmitWithdrawal)
     },
     dispatch
   );
   return {
-    accountCurrency: assetCurrency,
-    fetchInfo: getFundWithdrawInfo(id, assetCurrency),
+    accountCurrency: accountCurrency,
+    fetchInfo: getFundWithdrawInfo(id, accountCurrency),
     withdraw: service.withdrawFund
   };
 };

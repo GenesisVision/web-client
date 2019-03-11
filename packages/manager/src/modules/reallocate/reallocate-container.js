@@ -34,13 +34,14 @@ class ReallocateContainer extends Component {
   }
 
   render() {
-    const { service, id, remainder, open, onClose } = this.props;
+    const { service, id, remainder, open, onClose, onApply } = this.props;
     const { assets } = this.state;
     const handleApply = values => {
       service
         .updateAssets(id, values)
         .then(() => {
-          onClose();
+          handleClose();
+          onApply();
         })
         .catch(error => {
           this.setState({ errorMessage: error.errorMessage });
