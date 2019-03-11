@@ -1,3 +1,4 @@
+import { TranslationFunction } from "i18next";
 import { InjectedTranslateProps } from "react-i18next";
 import { object, ref, string } from "yup";
 
@@ -5,7 +6,7 @@ interface IChangePasswordTradingAccountValidationSchema {
   twoFactorEnabled: boolean;
 }
 
-const twoFactorvalidator = (
+const twoFactorValidator = (
   params: InjectedTranslateProps & IChangePasswordTradingAccountValidationSchema
 ) => {
   const { t, twoFactorEnabled } = params;
@@ -19,23 +20,35 @@ const twoFactorvalidator = (
         .matches(/^\d{6}$/, t("wallet-withdraw.validation.two-factor-6digits"));
 };
 
+const passwordValidator = ({ t }: InjectedTranslateProps) => {
+  return string()
+    .min(8, t("password-change-trading-account.validators.password-is-short"))
+    .max(32, t("password-change-trading-account.validators.password-is-long"))
+    .matches(
+      /^(?=.*[a-zA-Z])[a-zA-Z0-9]+$/,
+      t("password-change-trading-account.validators.password-weak")
+    )
+    .required(
+      t("password-change-trading-account.validators.password-required")
+    );
+};
+
 export const ChangePasswordTradingAccountValidationSchema = (
   params: InjectedTranslateProps & IChangePasswordTradingAccountValidationSchema
 ) =>
   object().shape({
-    twoFactorCode: twoFactorvalidator(params),
-    password: string()
-      .matches(
-        /^(?=.*[a-zA-Z])[a-zA-Z0-9]{8,32}$/,
-        params.t("auth.password-change.validators.password-weak")
-      )
-      .required(params.t("auth.password-change.validators.password-required")),
+    twoFactorCode: twoFactorValidator(params),
+    password: passwordValidator({ t: params.t }),
     confirmPassword: string()
       .oneOf(
         [ref("password")],
-        params.t("auth.password-change.validators.password-dont-match")
+        params.t(
+          "password-change-trading-account.validators.password-dont-match"
+        )
       )
       .required(
-        params.t("auth.password-change.validators.confirm-password-required")
+        params.t(
+          "password-change-trading-account.validators.confirm-password-required"
+        )
       )
   });
