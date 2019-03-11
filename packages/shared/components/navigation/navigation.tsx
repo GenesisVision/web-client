@@ -9,9 +9,9 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import GVLogo from "shared/components/gv-logo/gv-logo";
 import { DashboardIcon } from "shared/components/icon/dashboard-icon";
+import { FundsIcon } from "shared/components/icon/funds-icon";
 import { ProgramsIcon } from "shared/components/icon/programs-icon";
 import NavigationItem from "shared/components/navigation/navigation-item";
-import { FundsIcon } from "shared/components/icon/funds-icon";
 
 interface INavigationProps {
   className?: string;

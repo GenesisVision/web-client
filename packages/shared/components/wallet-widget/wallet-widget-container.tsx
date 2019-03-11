@@ -1,9 +1,9 @@
+import { WalletsGrandTotal } from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
 import WalletWidget from "shared/components/wallet-widget/wallet-widget";
 import { fetchWallets } from "shared/components/wallet/services/wallet.services";
 import RootState from "shared/reducers/root-reducer";
-import { WalletsGrandTotal } from "gv-api-web";
 
 interface IWalletWidgetContainerProps {
   className?: string;

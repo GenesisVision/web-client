@@ -1,5 +1,6 @@
-import "./create-fund-settings.scss";
 import "shared/components/deposit-details/deposit-details.scss";
+
+import "./create-fund-settings.scss";
 
 import { Field, withFormik } from "formik";
 import {

@@ -1,20 +1,10 @@
 import classnames from "classnames";
+import { NotificationViewModel } from "gv-api-web";
 import moment from "moment";
-import PropTypes from "prop-types";
 import React from "react";
 
-export const notificationProps = {
-  date: PropTypes.instanceOf(Date),
-  logo: PropTypes.string,
-  managerId: PropTypes.string,
-  programId: PropTypes.string,
-  text: PropTypes.string,
-  type: PropTypes.string,
-  id: PropTypes.string,
-  isUnread: PropTypes.bool
-};
-
-const Notification = ({ date, text, isUnread, type }) => {
+const Notification: React.FunctionComponent<NotificationViewModel> = props => {
+  const { date, text, isUnread, type } = props;
   return (
     <div
       className={classnames(
@@ -32,7 +22,5 @@ const Notification = ({ date, text, isUnread, type }) => {
     </div>
   );
 };
-
-Notification.propTypes = notificationProps;
 
 export default Notification;

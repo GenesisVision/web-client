@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Icon, IIconProps } from "shared/components/icon/icon";
+import { IIconProps, Icon } from "shared/components/icon/icon";
 
 export const CloseIcon: React.FC<IIconProps> = props => (
   <Icon type="close" {...props}>

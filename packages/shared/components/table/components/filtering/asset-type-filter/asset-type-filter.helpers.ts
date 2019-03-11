@@ -1,9 +1,9 @@
 import { FILTER_TYPE } from "../../../helpers/filtering.helpers";
+import { IComposeDefaultFilter } from "../../table.types";
 import {
   ASSET_TYPE_FILTER_DEFAULT_VALUE,
   ASSET_TYPE_FILTER_NAME
 } from "./asset-type-filter.constants";
-import { IComposeDefaultFilter } from "../../table.types";
 
 export const composeDefaultAssetTypeFilter = (): IComposeDefaultFilter => ({
   name: ASSET_TYPE_FILTER_NAME,

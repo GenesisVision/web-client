@@ -5,9 +5,6 @@ import fundDepositReducer, {
 import programDepositReducer, {
   ProgramsDepositState
 } from "modules/program-deposit/reducer/program-deposit.reducer";
-import notificationsReducer, {
-  NotificationsState
-} from "pages/app/components/notifications/reducers/notifications.reducers";
 import passwordRestoreReducer, {
   PasswordState
 } from "pages/auth/forgot-password/reducers/password-restore-reducers";
@@ -24,6 +21,9 @@ import managerReducer, {
   ManagerState
 } from "pages/manager/reducers/manager.reducers";
 import { combineReducers } from "redux";
+import notificationsReducer, {
+  NotificationsState
+} from "shared/components/notifications/reducers/notifications.reducers";
 import programsRatingReducer from "shared/components/programs-rating/reducers/programs-rating.reducers";
 import walletReducer from "shared/components/wallet/reducers/wallet.reducers";
 import alertMessagesReducer from "shared/modules/alert-message/reducers/alert-message-reducers";

@@ -3,16 +3,17 @@ import "./currency-select.scss";
 import classNames from "classnames";
 import * as React from "react";
 import { connect } from "react-redux";
-import { bindActionCreators, Dispatch } from "redux";
+import { Dispatch, bindActionCreators } from "redux";
+import { OnChangeEvent } from "shared/components/select/select";
+import RootState from "shared/reducers/root-reducer";
+import { ActionType } from "shared/utils/types";
+
 import {
   CURRENCY_VALUES_ENUM,
   HEADER_CURRENCY_VALUES
 } from "../currency-select.constants";
 import { updateCurrency } from "../services/currency-select.service";
 import CurrencySelect from "./currency-select";
-import RootState from "shared/reducers/root-reducer";
-import { ActionType } from "shared/utils/types";
-import { OnChangeEvent } from "shared/components/select/select";
 
 interface ICurrencySelectContainerProps {
   className?: string;

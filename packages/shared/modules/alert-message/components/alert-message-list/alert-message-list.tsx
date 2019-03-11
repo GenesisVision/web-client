@@ -5,12 +5,13 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import posed, { PoseGroup } from "react-pose";
 import { connect } from "react-redux";
-import AlertMessage from "shared/modules/alert-message/components/alert-message-list/alert-message";
-import history from "shared/utils/history";
-import { alertMessageActions } from "../../actions/alert-message-actions";
-import RootState from "shared/reducers/root-reducer";
 import { Dispatch } from "redux";
+import AlertMessage from "shared/modules/alert-message/components/alert-message-list/alert-message";
+import RootState from "shared/reducers/root-reducer";
+import history from "shared/utils/history";
 import { ActionType } from "shared/utils/types";
+
+import { alertMessageActions } from "../../actions/alert-message-actions";
 import { AlertMessagesState } from "../../reducers/alert-message-reducers";
 
 interface IAlertMessageListProps {}
