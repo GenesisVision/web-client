@@ -2,19 +2,19 @@ import "./asset-status.scss";
 
 import classNames from "classnames";
 import * as React from "react";
-import { connect } from "react-redux";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import { connect } from "react-redux";
 import { compose } from "redux";
-import GVScroll from "shared/components/scroll/gvscroll";
-import { ROLE, STATUS } from "shared/constants/constants";
-
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
 } from "shared/components/popover/popover";
-import AssetStatusRequests from "./asset-status-requests";
+import GVScroll from "shared/components/scroll/gvscroll";
+import { ROLE, STATUS } from "shared/constants/constants";
 import RootState from "shared/reducers/root-reducer";
 import { Nullable } from "shared/utils/types";
+
+import AssetStatusRequests from "./asset-status-requests";
 
 const getStatusClassName = (status: STATUS, className?: string) => {
   return classNames("asset-status", className, {
@@ -26,13 +26,16 @@ const getStatusClassName = (status: STATUS, className?: string) => {
   });
 };
 
-interface IAssetStatusProps {
+interface IAssetStatusOwnProps {
   className?: string;
   status: STATUS;
   id: string;
-  role: ROLE;
   asset: any;
   onCancel: any;
+}
+
+interface IAssetStatusProps extends IAssetStatusOwnProps {
+  role: ROLE;
 }
 
 interface IAssetStatusState {
@@ -66,7 +69,7 @@ class AssetStatus extends React.Component<
           className={getStatusClassName(status, className)}
           onClick={this.handleOpenDropdown}
         >
-          {status ? t(`program-statuses.${status}`) : ""}
+          {t(`program-statuses.${status}`)}
         </span>
         <Popover
           horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
@@ -97,7 +100,7 @@ const mapStateToProps = (state: RootState) => ({
     ? state.profileHeader.info.data.userType
     : null
 });
-export default compose(
+export default compose<React.ComponentType<IAssetStatusOwnProps>>(
   translate(),
   connect(mapStateToProps)
 )(AssetStatus);

@@ -1,11 +1,11 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { bindActionCreators, Dispatch } from "redux";
+import { Dispatch, bindActionCreators } from "redux";
 import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
+import RootState from "shared/reducers/root-reducer";
+import { ActionType } from "shared/utils/types";
 
 import DepositDetails from "./deposit-details";
-import { ActionType } from "shared/utils/types";
-import RootState from "shared/reducers/root-reducer";
 
 interface IDepositDetailsDispatchProps {
   service?: { fetchProfileHeaderInfo(): void };

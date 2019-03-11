@@ -27,17 +27,17 @@ class ProgramWithdrawPopup extends Component {
 
   render() {
     if (!this.state.data) return null;
-    const { programCurrency, accountCurrency, errorMessage } = this.props;
+    const { assetCurrency, accountCurrency, errorMessage } = this.props;
     const { title, availableToWithdraw, periodEnds, rate } = this.state.data;
     return (
       <Fragment>
         <ProgramWithdrawTop
           title={title}
           availableToWithdraw={availableToWithdraw}
-          programCurrency={programCurrency}
+          programCurrency={assetCurrency}
         />
         <ProgramWithdrawForm
-          programCurrency={programCurrency}
+          programCurrency={assetCurrency}
           accountCurrency={accountCurrency}
           availableToWithdraw={availableToWithdraw}
           periodEnds={periodEnds}

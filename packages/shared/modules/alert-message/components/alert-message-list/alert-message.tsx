@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+
 import { IMessage } from "../../reducers/alert-message-reducers";
 
 interface IAlertMessageProps {

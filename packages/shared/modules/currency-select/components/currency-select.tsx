@@ -3,6 +3,7 @@ import "./currency-select.scss";
 import classNames from "classnames";
 import * as React from "react";
 import Select, { OnChangeEvent } from "shared/components/select/select";
+
 import { CURRENCY_VALUES_ENUM } from "../currency-select.constants";
 
 interface ICurrencySelectProps {

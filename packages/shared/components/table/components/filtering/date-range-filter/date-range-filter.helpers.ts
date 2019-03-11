@@ -1,16 +1,16 @@
 import * as moment from "moment";
+import { DurationInputArg2 } from "moment";
 
 import { FILTER_TYPE } from "../../../helpers/filtering.helpers";
+import { IComposeDefaultFilter } from "../../table.types";
 import {
+  DATA_RANGE_FILTER_TYPES,
   DATE_RANGE_FILTER_NAME,
   DEFAULT_DATE_RANGE_FILTER_VALUE,
+  IDataRangeFilterValue,
   SERVER_DATE_RANGE_MAX_FILTER_NAME,
-  SERVER_DATE_RANGE_MIN_FILTER_NAME,
-  DATA_RANGE_FILTER_TYPES,
-  IDataRangeFilterValue
+  SERVER_DATE_RANGE_MIN_FILTER_NAME
 } from "./date-range-filter.constants";
-import { IComposeDefaultFilter } from "../../table.types";
-import { DurationInputArg2 } from "moment";
 
 export const validateDateRange = (value: IDataRangeFilterValue): boolean => {
   if (

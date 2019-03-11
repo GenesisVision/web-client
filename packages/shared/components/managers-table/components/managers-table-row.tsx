@@ -1,5 +1,6 @@
 import "./managers-table.scss";
 
+import { ManagerProfile } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import * as moment from "moment";
 import * as React from "react";
@@ -9,7 +10,7 @@ import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avata
 import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import { composeManagerDetailsUrl } from "shared/utils/compose-url";
-import { ManagerProfile } from "gv-api-web";
+
 interface IManagersTableRowProps {
   manager: ManagerProfile;
   title: any;

@@ -6,7 +6,6 @@ import ManagerPage, {
 import NotificationRoutes, {
   NOTIFICATIONS_ROUTE
 } from "pages/notifications/notifications.routes";
-import PrivateRoute from "pages/private-route";
 import ProfileRoutes from "pages/profile/profile.routes";
 import ProgramsRoutes, { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
 import WalletRoutes from "pages/wallet/wallet.routes";
@@ -15,6 +14,7 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import GlobalSearchPage from "shared/components/global-search/global-search.page";
 import { GLOBAL_SEARCH_ROUTE } from "shared/components/global-search/global-search.routes";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
+import PrivateRoute from "shared/components/private-route/private-route";
 import { PROFILE_ROUTE } from "shared/components/profile/profile.constants";
 import WalletWithdrawConfirmPage, {
   WALLET_WITHDRAW_CONFIRM_ROUTE

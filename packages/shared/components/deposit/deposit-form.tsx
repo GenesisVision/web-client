@@ -5,6 +5,7 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
+import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
 import FormError from "shared/components/form/form-error/form-error";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import Select from "shared/components/select/select";
@@ -18,8 +19,6 @@ import {
 } from "shared/utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { lazy, number, object } from "yup";
-
-import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
 
 interface IDepositFormOwnProps {
   wallets: WalletData[];
