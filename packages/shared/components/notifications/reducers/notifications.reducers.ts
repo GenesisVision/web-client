@@ -7,7 +7,6 @@ import {
   SET_NOTIFICATIONS_OPTIONS,
   TAKE_COUNT
 } from "shared/components/notifications/actions/notifications.actions";
-import { DeepReadonly } from "utility-types";
 
 import isOpenReducer from "./is-open.reducer";
 
@@ -28,9 +27,9 @@ const optionsReducer = (
 
 // TODO: добавить нормализацию, когда буду уникальные ID
 const addNotificationsReducer = (
-  notifications: DeepReadonly<NotificationViewModel[]> = [],
+  notifications: NotificationViewModel[] = [],
   action: any
-): DeepReadonly<NotificationViewModel[]> => {
+): NotificationViewModel[] => {
   switch (action.type) {
     case ADD_NOTIFICATIONS:
       return [...notifications, ...action.notifications];
@@ -48,7 +47,7 @@ const addTotalCount = (total: number = 0, action: any): number => {
   return total;
 };
 
-export type NotificationsState = DeepReadonly<{
+export type NotificationsState = Readonly<{
   notifications: NotificationViewModel[];
   isOpen: boolean;
   total: number;

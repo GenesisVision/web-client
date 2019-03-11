@@ -1,9 +1,15 @@
-import React, { Component } from "react";
+import { NotificationViewModel } from "gv-api-web";
+import * as React from "react";
 import { translate } from "react-i18next";
 import Notification from "shared/components/notifications/components/notification/notification";
 
-class NotificationsGroup extends Component {
-  renderNotifications = notification => (
+interface Props {
+  title: string;
+  notifications: NotificationViewModel[];
+}
+
+class NotificationsGroup extends React.Component<Props> {
+  renderNotifications = (notification: NotificationViewModel) => (
     <Notification key={notification.id} {...notification} />
   );
   render() {
@@ -16,10 +22,5 @@ class NotificationsGroup extends Component {
     );
   }
 }
-
-// NotificationsGroup.propTypes = {
-//   title: PropTypes.string.isRequired,
-//   notifications: PropTypes.arrayOf(PropTypes.shape(notificationProps))
-// };
 
 export default translate()(NotificationsGroup);

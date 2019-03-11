@@ -1,10 +1,5 @@
-import { NotificationList, NotificationViewModel } from "gv-api-web";
-import notificationsApi from "shared/services/api-client/notifications-api";
-import authService from "shared/services/auth-service";
+import { NotificationViewModel } from "gv-api-web";
 
-import { ApiAction } from "../../../utils/types";
-
-export const NOTIFICATIONS = "NOTIFICATIONS";
 export const NOTIFICATIONS_TOGGLE = "NOTIFICATIONS_TOGGLE";
 export const ADD_NOTIFICATIONS = "ADD_NOTIFICATIONS";
 export const SET_NOTIFICATIONS_OPTIONS = "SET_NOTIFICATIONS_OPTIONS";
@@ -67,16 +62,6 @@ export const setNotificationsOptions = (
 ): SetNotificationsOptionsAction => ({
   type: SET_NOTIFICATIONS_OPTIONS,
   options
-});
-
-export const notificationsFetch = (
-  options: SkipTake
-): ApiAction<NotificationList> => ({
-  type: NOTIFICATIONS,
-  payload: notificationsApi.v10NotificationsGet(
-    authService.getAuthArg(),
-    options
-  )
 });
 
 export const calculateOptions = (

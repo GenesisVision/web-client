@@ -1,41 +1,71 @@
 import "./notifications.scss";
 
+import { NotificationList, NotificationViewModel } from "gv-api-web";
 import moment from "moment";
 import { NOTIFICATIONS_ROUTE } from "pages/notifications/notifications.routes";
-import React, { Component } from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
-import Chip from "shared/components/chip/chip";
+import Chip, { CHIP_TYPE } from "shared/components/chip/chip";
 import { Icon } from "shared/components/icon/icon";
 import { RingIcon } from "shared/components/icon/ring-icon";
 import InfinityScroll from "shared/components/infinity-scroll/inifinity-scroll";
 import NotificationsGroup from "shared/components/notifications/components/notification-group/notification-group";
 import Spinner from "shared/components/spiner/spiner";
 
-class Notifications extends Component {
+type OwnProps = {
+  fetchNotifications(): Promise<NotificationList>;
+  clearNotifications(): void;
+  closeNotifications(): void;
+  count: number;
+  total: number;
+  notifications: NotificationViewModel[];
+};
+
+type Props = OwnProps & InjectedTranslateProps;
+
+type NotificationGroups = { [name: number]: NotificationViewModel[] };
+
+class Notifications extends React.Component<Props> {
   state = {
     isPending: false
+  };
+
+  static defaultProps = {
+    notifications: [],
+    total: 0
+  };
+
+  parseDate = (unix: number): string => {
+    const { t } = this.props;
+    return moment
+      .unix(unix)
+      .calendar(undefined, {
+        sameDay: `[${t("notifications-aside.today")}], DD MMMM`,
+        lastDay: `[${t("notifications-aside.yesterday")}], DD MMMM`,
+        lastWeek: "dddd, DD MMMM",
+        sameElse: "dddd, DD MMMM"
+      })
+      .toUpperCase();
   };
 
   fetchNotification = () => {
     if (this.state.isPending) return;
     this.setState({ isPending: true });
-    this.props.fetchNotifications().then(() => {
-      this.setState({ isPending: false });
-    });
+    this.props
+      .fetchNotifications()
+      .then(() => {
+        this.setState({ isPending: false });
+      })
+      .catch(() => this.setState({ isPending: false }));
   };
 
-  getGroups = notifications => {
-    const { t } = this.props;
-    return notifications.reduce((acc, notification) => {
+  getGroups = (notifications: NotificationViewModel[]) => {
+    return notifications.reduce<NotificationGroups>((acc, notification) => {
       const key = moment(notification.date)
-        .calendar(null, {
-          sameDay: `[${t("notifications-aside.today")}], DD MMMM`,
-          lastDay: `[${t("notifications-aside.yesterday")}], DD MMMM`,
-          lastWeek: "dddd, DD MMMM",
-          sameElse: "dddd, DD MMMM"
-        })
-        .toUpperCase();
+        .startOf("day")
+        .unix();
+
       if (!Array.isArray(acc[key])) {
         acc[key] = [];
       }
@@ -44,15 +74,17 @@ class Notifications extends Component {
     }, {});
   };
 
-  renderGroups = groups => group => (
+  renderGroups = (groups: NotificationGroups) => (
+    group: string
+  ): React.ReactNode => (
     <NotificationsGroup
       key={group}
-      title={group}
-      notifications={groups[group]}
+      title={this.parseDate(parseInt(group))}
+      notifications={groups[parseInt(group)]}
     />
   );
 
-  sortGroups = (a, b) => b - a;
+  sortGroups = (a: string, b: string) => parseInt(b) - parseInt(a);
 
   componentDidMount() {
     this.fetchNotification();
@@ -77,7 +109,9 @@ class Notifications extends Component {
             </div>
             {t("notifications-aside.header")}
             <div className="notifications__count">
-              <Chip type={hasNotifications ? "negative" : null}>{count}</Chip>
+              <Chip type={hasNotifications ? CHIP_TYPE.NEGATIVE : undefined}>
+                {count}
+              </Chip>
             </div>
             <Link
               to={NOTIFICATIONS_ROUTE}
@@ -91,7 +125,7 @@ class Notifications extends Component {
           <div className="notifications__content">
             {Object.keys(groups)
               .sort(this.sortGroups)
-              .map(this.renderGroups(groups))}
+              .map<React.ReactNode>(this.renderGroups(groups))}
             <Spinner isShown={this.state.isPending} />
           </div>
         </InfinityScroll>
@@ -99,19 +133,5 @@ class Notifications extends Component {
     );
   }
 }
-//
-// Notifications.propTypes = {
-//   fetchNotifications: PropTypes.func.isRequired,
-//   clearNotifications: PropTypes.func.isRequired,
-//   count: PropTypes.number,
-//   notifications: PropTypes.arrayOf(PropTypes.shape(notificationProps)),
-//   total: PropTypes.number,
-//   closeNotifications: PropTypes.func
-// };
-
-Notifications.defaultProps = {
-  notifications: [],
-  total: 0
-};
 
 export default translate()(Notifications);

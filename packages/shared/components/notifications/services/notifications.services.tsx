@@ -1,36 +1,32 @@
 import { NotificationList } from "gv-api-web";
-import { Dispatch, MiddlewareAPI } from "redux";
-import { ThunkAction, ThunkMiddleware } from "redux-thunk";
 import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
 import {
   addNotifications,
   addTotalNotifications,
   calculateOptions,
   clearNotifications,
-  notificationsFetch,
   setNotificationsOptions
 } from "shared/components/notifications/actions/notifications.actions";
+import notificationsApi from "shared/services/api-client/notifications-api";
+import authService from "shared/services/auth-service";
+import { RootThunkAction } from "shared/utils/types";
 
-import RootState from "../../../reducers/root-reducer";
-import { ApiAction } from "../../../utils/types";
-
-export const serviceGetNotifications = (): ThunkAction<
-  void,
-  RootState,
-  any,
-  any
-> => (dispatch, getState) => {
+export const serviceGetNotifications = (): RootThunkAction<
+  Promise<NotificationList>
+> => (dispatch, getState): Promise<NotificationList> => {
   const { notifications } = getState();
-  const { take, skip } = notifications.options;
-  return dispatch(notificationsFetch({ skip, take })).then(response => {
-    const options = calculateOptions({ skip, take }, response.total);
-    dispatch(addTotalNotifications(response.total));
-    dispatch(addNotifications(response.notifications));
-    dispatch(setNotificationsOptions(options));
-  });
+  return notificationsApi
+    .v10NotificationsGet(authService.getAuthArg(), notifications.options)
+    .then(response => {
+      const options = calculateOptions(notifications.options, response.total);
+      dispatch(addTotalNotifications(response.total));
+      dispatch(addNotifications(response.notifications));
+      dispatch(setNotificationsOptions(options));
+      return response;
+    });
 };
 
-export const serviceClearNotifications = () => dispatch => {
+export const serviceClearNotifications = (): RootThunkAction => dispatch => {
   dispatch(clearNotifications());
   dispatch(addTotalNotifications(0));
   dispatch(setNotificationsOptions(calculateOptions()));
