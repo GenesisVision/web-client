@@ -2,26 +2,18 @@ import { Dispatch } from "redux";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
+import { ProgramPwdUpdate } from "gv-api-web";
+import { ResponseError } from "shared/utils/types";
 
-export interface IProgramMakeSignalRequest {
-  programId: string;
-  subscriptionFee: number;
-  successFee: number;
-}
-
-export const programMakeSignal = (
+export const changePasswordTradingAccount = (
   id: string,
-  successFee: number,
-  subscriptionFee: number
+  opts?: {
+    model?: ProgramPwdUpdate;
+  }
 ): any => (dispatch: Dispatch) => {
   const authorization = authService.getAuthArg();
-  const requestData = {
-    programId: id,
-    successFee: successFee,
-    subscriptionFee: subscriptionFee
-  };
   return managerApi
-    .v10ManagerSignalCreatePost(authorization, requestData)
+    .v10ManagerProgramsByIdPasswordChangePost(id, authorization, opts)
     .then(() => {
       dispatch(
         alertMessageActions.success(
@@ -30,5 +22,8 @@ export const programMakeSignal = (
         )
       );
       return;
+    })
+    .catch((error: ResponseError) => {
+      dispatch(alertMessageActions.error(error.errorMessage, true));
     });
 };
