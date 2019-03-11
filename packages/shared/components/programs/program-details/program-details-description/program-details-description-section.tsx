@@ -11,6 +11,7 @@ import ProgramDetailsDescriptionMain from "./program-details-description-main";
 
 interface IProgramDetailsDescriptionSectionProps
   extends InjectedTranslateProps {
+  accountCurrency: string;
   programDescription: ProgramDetailsFull;
   isAuthenticated: boolean;
   redirectToLogin(): void;
@@ -25,6 +26,7 @@ class ProgramDetailsDescriptionSection extends PureComponent<
   render() {
     const {
       t,
+      accountCurrency,
       programDescription,
       isAuthenticated,
       redirectToLogin,
@@ -59,7 +61,8 @@ class ProgramDetailsDescriptionSection extends PureComponent<
               )}
               asset={PROGRAM}
               id={programDescription.id}
-              currency={programDescription.currency}
+              assetCurrency={programDescription.currency}
+              accountCurrency={accountCurrency}
               personalDetails={personalDetails}
               ProgramReinvestingWidget={ProgramReinvestingWidget}
               WithdrawContainer={ProgramWithdrawContainer}

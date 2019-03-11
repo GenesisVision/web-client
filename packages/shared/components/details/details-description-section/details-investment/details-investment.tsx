@@ -25,7 +25,8 @@ interface IDetailsInvestmentOwnProps {
   asset: string;
   notice?: string;
   id: string;
-  currency: string;
+  accountCurrency: string;
+  assetCurrency: string;
   personalDetails: InvestmentDetails;
   WithdrawContainer: any;
   ProgramReinvestingWidget?: any;
@@ -61,7 +62,8 @@ class DetailsInvestment extends PureComponent<
     const {
       t,
       id,
-      currency,
+      assetCurrency,
+      accountCurrency,
       asset,
       notice,
       personalDetails,
@@ -84,8 +86,11 @@ class DetailsInvestment extends PureComponent<
                 label={t("fund-details-page.description.value")}
               >
                 <NumberFormat
-                  value={formatCurrencyValue(personalDetails.value, currency)}
-                  suffix={` ${currency}`}
+                  value={formatCurrencyValue(
+                    personalDetails.value,
+                    assetCurrency
+                  )}
+                  suffix={` ${assetCurrency}`}
                   displayType="text"
                 />
               </StatisticItem>
@@ -99,8 +104,8 @@ class DetailsInvestment extends PureComponent<
                     prefix={PROFITABILITY_PREFIX.SIGN}
                   >
                     <NumberFormat
-                      value={formatCurrencyValue(profitValue, currency)}
-                      suffix={` ${currency}`}
+                      value={formatCurrencyValue(profitValue, assetCurrency)}
+                      suffix={` ${assetCurrency}`}
                       allowNegative={false}
                       displayType="text"
                     />
@@ -133,9 +138,9 @@ class DetailsInvestment extends PureComponent<
                     <NumberFormat
                       value={formatCurrencyValue(
                         personalDetails.pendingInput,
-                        currency
+                        assetCurrency
                       )}
-                      suffix={` ${currency}`}
+                      suffix={` ${assetCurrency}`}
                       displayType="text"
                     />
                   </StatisticItem>
@@ -157,9 +162,9 @@ class DetailsInvestment extends PureComponent<
                     <NumberFormat
                       value={formatCurrencyValue(
                         personalDetails.pendingOutput,
-                        currency
+                        assetCurrency
                       )}
-                      suffix={` ${currency}`}
+                      suffix={` ${assetCurrency}`}
                       displayType="text"
                     />
                   </StatisticItem>
@@ -180,9 +185,10 @@ class DetailsInvestment extends PureComponent<
               <WithdrawContainer
                 open={this.state.isOpenWithdrawalPopup}
                 id={id}
+                accountCurrency={accountCurrency}
+                assetCurrency={assetCurrency}
                 onClose={this.handleCloseWithdrawalPopup}
                 onSubmit={updateDetails}
-                currency={currency}
               />
             </div>
           </Surface>

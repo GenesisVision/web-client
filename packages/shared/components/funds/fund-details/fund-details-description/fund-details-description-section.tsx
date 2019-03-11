@@ -27,6 +27,7 @@ class FundDetailsDescription extends React.PureComponent<
   render() {
     const {
       t,
+      accountCurrency,
       isAuthenticated,
       redirectToLogin,
       fundDescription,
@@ -88,7 +89,8 @@ class FundDetailsDescription extends React.PureComponent<
             <DetailsInvestment
               asset={FUND}
               id={fundDescription.id}
-              currency={"GVT" /*accountCurrency*/}
+              assetCurrency={"GVT"}
+              accountCurrency={accountCurrency}
               personalDetails={personalFundDetails}
               WithdrawContainer={FundWithdrawContainer}
             />
