@@ -1,14 +1,23 @@
-import classnames from "classnames";
+import classNames from "classnames";
 import { GVButton } from "gv-react-components";
-import React, { Component } from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
+import { IManagerEventFilterValue } from "../filter.type";
 
-class SelectFilterPopover extends Component {
-  handleClick = (selected, value) => e => {
+interface ISelectFilterPopoverProps {
+  changeFilter?(value: any): void;
+  values?: IManagerEventFilterValue<any>[];
+  value?: any;
+}
+
+class SelectFilterPopover extends React.Component<
+  ISelectFilterPopoverProps & InjectedTranslateProps
+> {
+  handleClick = value => () => {
     return this.props.changeFilter(value);
   };
 
-  renderLabel = item => {
+  renderLabel = (item: IManagerEventFilterValue<any>): string => {
     const { t } = this.props;
     if (item.labelKey !== undefined) return t(item.labelKey);
     return item.label;
@@ -16,7 +25,6 @@ class SelectFilterPopover extends Component {
 
   render() {
     const { values, value } = this.props;
-
     return (
       <div className="select-filter">
         {values.map((x, idx) => {
@@ -24,12 +32,12 @@ class SelectFilterPopover extends Component {
           return (
             <GVButton
               variant="text"
-              color={classnames({
+              color={classNames({
                 primary: selected,
                 secondary: !selected
               })}
               key={idx}
-              onClick={this.handleClick(selected, x.value)}
+              onClick={this.handleClick(x.value)}
             >
               {this.renderLabel(x)}
             </GVButton>
