@@ -1,25 +1,16 @@
 import "./about-level.scss";
 
-import * as React from "react";
-import {
-  InjectedTranslateProps,
-  translate,
-  TranslationFunction
-} from "react-i18next";
+import React, { Component } from "react";
+import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import Dialog from "shared/components/dialog/dialog";
 
-import { formatValue } from "shared/utils/formatter";
-import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { LevelInfo } from "gv-api-web";
+import { formatValue } from "../../utils/formatter";
+import StatisticItem from "../statistic-item/statistic-item";
 
-const RenderLimits = (
-  t: TranslationFunction,
-  investmentsLimits: LevelInfo[],
-  currency: string
-): JSX.Element => (
-  <React.Fragment>
-    {investmentsLimits.map((levelInfo: LevelInfo) => (
+const renderLimits = (t, investmentsLimits, currency) => {
+  return investmentsLimits.map(levelInfo => {
+    return (
       <div key={levelInfo.level} className="about-levels__limit">
         <div
           className={`about-levels__icon about-levels__icon--${
@@ -37,20 +28,11 @@ const RenderLimits = (
           />
         </StatisticItem>
       </div>
-    ))}
-  </React.Fragment>
-);
+    );
+  });
+};
 
-interface IAboutLevelsComponentProps {
-  open: boolean;
-  onClose(param?: any): void;
-  investmentsLimits: LevelInfo[];
-  currency: string;
-}
-
-class AboutLevelsComponent extends React.Component<
-  IAboutLevelsComponentProps & InjectedTranslateProps
-> {
+class AboutLevelsComponent extends Component {
   render() {
     const { t, open, onClose, investmentsLimits, currency } = this.props;
     return (
@@ -100,7 +82,7 @@ class AboutLevelsComponent extends React.Component<
               </h4>
               <div className="about-levels__limits">
                 {investmentsLimits.length &&
-                  RenderLimits(t, investmentsLimits, currency)}
+                  renderLimits(t, investmentsLimits, currency)}
               </div>
             </div>
           </div>
