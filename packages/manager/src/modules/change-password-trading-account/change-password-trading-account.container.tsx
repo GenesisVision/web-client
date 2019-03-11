@@ -5,7 +5,7 @@ import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
 
 import MakeSignalForm, {
   IMakeSignalFormValues
-} from "./components/program-make-signal-form";
+} from "./components/change-password-trading-account-form";
 import { programMakeSignal } from "./services/program-make-signal.service";
 
 interface IChangePasswordTradingAccountOwnProps extends IDialogProps {
