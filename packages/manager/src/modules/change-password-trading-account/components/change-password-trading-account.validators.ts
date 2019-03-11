@@ -1,6 +1,5 @@
 import { InjectedTranslateProps } from "react-i18next";
 import { object, ref, string } from "yup";
-import { passwordValidator } from "shared/utils/validators/validators";
 
 interface IChangePasswordTradingAccountValidationSchema {
   twoFactorEnabled: boolean;
@@ -25,8 +24,18 @@ export const ChangePasswordTradingAccountValidationSchema = (
 ) =>
   object().shape({
     twoFactorCode: twoFactorvalidator(params),
-    password: passwordValidator,
+    password: string()
+      .matches(
+        /^(?=.*[a-zA-Z])[a-zA-Z0-9]{8,32}$/,
+        params.t("auth.password-change.validators.password-weak")
+      )
+      .required(params.t("auth.password-change.validators.password-required")),
     confirmPassword: string()
-      .oneOf([ref("password")], params.t("Passwords don't match."))
-      .required(params.t("Confirm Password is required"))
+      .oneOf(
+        [ref("password")],
+        params.t("auth.password-change.validators.password-dont-match")
+      )
+      .required(
+        params.t("auth.password-change.validators.confirm-password-required")
+      )
   });
