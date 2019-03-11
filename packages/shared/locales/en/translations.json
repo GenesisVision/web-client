@@ -198,6 +198,20 @@
       "amount-is-zero": "Amount must be greater than zero"
     }
   },
+  "password-change-trading-account": {
+    "title": "Change password trading account",
+    "new-password": "New password",
+    "confirm-password": "Confirm password",
+    "success-alert": "Password was changed",
+    "validators": {
+      "password-weak": "Password must be contain at least one letter.",
+      "password-is-short": "Password must be at least 8 characters.",
+      "password-is-long": "Password must be no more than 32 characters.",
+      "password-required": "Password is required.",
+      "password-dont-match": "Passwords don't match.",
+      "confirm-password-required": "Confirm password is required"
+    }
+  },
   "profile-widget": {
     "personal-details": "Personal details",
     "settings": "Settings",
@@ -1007,13 +1021,7 @@
       "password": "Password",
       "confirm-password": "Confirm password",
       "new-password": "New password",
-      "success-alert": "Password was changed",
-      "validators": {
-        "password-weak": "The password must be from 8 to 32 characters, and contain at least one letter.",
-        "password-required": "Password is required.",
-        "password-dont-match": "Passwords don't match.",
-        "confirm-password-required": "Confirm password is required"
-      }
+      "success-alert": "Password was changed"
     },
     "email-confirm": {
       "title": "Email confirm",
