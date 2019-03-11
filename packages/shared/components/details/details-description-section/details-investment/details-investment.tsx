@@ -1,6 +1,6 @@
 import "./details-investment.scss";
 
-import { ProgramDetailsFull } from "gv-api-web";
+import { FundDetailsFull, ProgramDetailsFull } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import React, { PureComponent } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -24,7 +24,7 @@ import {
 interface IDetailsInvestmentOwnProps {
   asset: string;
   notice: string;
-  programDetails: ProgramDetailsFull;
+  programDetails: ProgramDetailsFull | FundDetailsFull;
   WithdrawContainer: any;
   ProgramReinvestingWidget: any;
 }

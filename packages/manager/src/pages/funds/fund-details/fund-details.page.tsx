@@ -2,10 +2,7 @@ import "shared/components/details/details.scss";
 
 import { push } from "connected-react-router";
 import { FundDetailsFull } from "gv-api-web";
-import AssetEditContainer from "modules/asset-edit/asset-edit-container";
-import FundDepositContainer from "modules/fund-deposit/fund-deposit-container";
 import FundWithdrawalContainer from "modules/fund-withdrawal/fund-withdrawal-container";
-import ReallocateContainer from "modules/reallocate/reallocate-container";
 import React, { ComponentType, PureComponent } from "react";
 import { connect } from "react-redux";
 import { ManagerRootState } from "reducers";
@@ -21,11 +18,10 @@ import {
 } from "shared/components/funds/fund-details/services/fund-details.service";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
 import Page from "shared/components/page/page";
-import { FUND, MANAGER } from "shared/constants/constants";
 import { ResponseError } from "shared/utils/types";
 
 import { LOGIN_ROUTE } from "../../auth/login/login.routes";
-import CloseFundContainer from "./close-fund/close-fund-container";
+import FundControls from "./components/fund-controls";
 
 interface IFundDetailsPageProps {
   isAuthenticated: boolean;
@@ -118,15 +114,11 @@ class FundDetailsPage extends PureComponent<
           <div className="details">
             <div className="details__section">
               <FundDetailsDescriptionSection
-                CloseFundContainer={CloseFundContainer}
-                role={MANAGER}
-                AssetEditContainer={AssetEditContainer}
-                FundDepositContainer={FundDepositContainer}
-                FundWithdrawContainer={FundWithdrawalContainer}
-                ReallocateContainer={ReallocateContainer}
                 fundDescription={description}
                 isAuthenticated={isAuthenticated}
                 redirectToLogin={service.redirectToLogin}
+                FundControls={FundControls}
+                FundWithdrawContainer={FundWithdrawalContainer}
               />
             </div>
             <div className="details__section">
