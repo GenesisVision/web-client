@@ -19,39 +19,9 @@ interface IProgramDetailsDescriptionSectionProps
   ProgramWithdrawContainer: ComponentType<any>;
 }
 
-interface IProgramDetailsDescriptionSectionState {
-  investmentsLimits: any;
-}
-
 class ProgramDetailsDescriptionSection extends PureComponent<
-  IProgramDetailsDescriptionSectionProps,
-  IProgramDetailsDescriptionSectionState
+  IProgramDetailsDescriptionSectionProps
 > {
-  state = {
-    investmentsLimits: {}
-  };
-
-  constructor(props: IProgramDetailsDescriptionSectionProps) {
-    super(props);
-    this.state = {
-      investmentsLimits: {}
-    };
-  }
-
-  componentDidMount() {}
-
-  // composeInvestmentData = (programDetails: any) => {
-  //   const { statistic, personalProgramDetails } = programDetails;
-  //   const { balanceBase, profitPercent } = statistic;
-  //   return {
-  //     id: programDetails.id,
-  //     balanceAmount: balanceBase.amount,
-  //     balanceCurrency: balanceBase.currency,
-  //     profitPercent,
-  //     ...personalProgramDetails
-  //   };
-  // };
-
   render() {
     const {
       t,
@@ -88,7 +58,9 @@ class ProgramDetailsDescriptionSection extends PureComponent<
                 "program-details-page.description.withdraw-notice-text"
               )}
               asset={PROGRAM}
-              programDetails={programDescription}
+              id={programDescription.id}
+              currency={programDescription.currency}
+              personalDetails={personalDetails}
               ProgramReinvestingWidget={ProgramReinvestingWidget}
               WithdrawContainer={ProgramWithdrawContainer}
             />

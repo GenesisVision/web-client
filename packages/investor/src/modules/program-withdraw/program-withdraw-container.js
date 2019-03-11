@@ -26,6 +26,7 @@ class ProgramWithdrawContainer extends PureComponent {
       )
       .then(() => {
         this.props.onClose();
+        this.props.onSubmit();
         this.props.services.alert(
           "success",
           "withdraw-program.success-alert-message",

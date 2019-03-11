@@ -25,6 +25,7 @@ class ProgramWithdrawContainer extends PureComponent {
       )
       .then(() => {
         this.props.onClose();
+        this.props.onSubmit();
         this.props.services.alert(
           "success",
           "withdraw-program.success-alert-message",
@@ -42,13 +43,13 @@ class ProgramWithdrawContainer extends PureComponent {
       onClose,
       services,
       id,
-      assetCurrency,
+      programCurrency,
       accountCurrency
     } = this.props;
     return (
       <Dialog open={open} onClose={onClose}>
         <ProgramWithdrawPopup
-          programCurrency={assetCurrency}
+          programCurrency={programCurrency}
           accountCurrency={accountCurrency}
           fetchInfo={() => services.getProgramWithdrawInfo(id)}
           withdraw={amount => this.handleWithdraw(id, amount)}

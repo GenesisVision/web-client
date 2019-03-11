@@ -70,7 +70,7 @@ class InvestmentFundControls extends Component<
     const { t, fundDescription } = this.props;
     const { personalFundDetails } = fundDescription;
     const canCloseProgram =
-      personalFundDetails && personalFundDetails.canClosePeriod;
+      personalFundDetails && personalFundDetails.canCloseProgram;
     const canInvest = personalFundDetails && personalFundDetails.canInvest;
     const isOwnProgram =
       personalFundDetails && personalFundDetails.isOwnProgram;
@@ -166,10 +166,10 @@ class InvestmentFundControls extends Component<
                 type={FUND}
               />
               <ReallocateContainer
-                key={`${popups[INVESTMENT_POPUP.REALLOCATE]}`}
                 id={fundDescription.id}
                 open={popups[INVESTMENT_POPUP.REALLOCATE]}
-                onClose={this.applyChanges(updateDetails)}
+                onClose={this.closePopup(INVESTMENT_POPUP.REALLOCATE)}
+                onApply={this.applyChanges(updateDetails)}
                 assets={fundDescription.currentAssets}
               />
             </Fragment>

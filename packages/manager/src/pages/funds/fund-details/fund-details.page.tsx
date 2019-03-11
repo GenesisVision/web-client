@@ -116,6 +116,7 @@ class FundDetailsPage extends PureComponent<
               <FundDetailsDescriptionSection
                 fundDescription={description}
                 isAuthenticated={isAuthenticated}
+                accountCurrency={currency}
                 redirectToLogin={service.redirectToLogin}
                 FundControls={FundControls}
                 FundWithdrawContainer={FundWithdrawalContainer}

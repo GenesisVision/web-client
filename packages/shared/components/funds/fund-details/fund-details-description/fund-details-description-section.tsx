@@ -1,5 +1,6 @@
 import "shared/components/details/details-description-section/details-description/details-description.scss";
 
+import { FundDetailsFull } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
@@ -8,16 +9,16 @@ import DetailsInvestment from "shared/components/details/details-description-sec
 import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
 import { STATUS } from "shared/constants/constants";
+import { FUND } from "shared/constants/constants";
 import { composeFundNotificationsUrl } from "shared/utils/compose-url";
 
-import { FUND } from "../../../../constants/constants";
-
 interface IFundDetailsDescriptionProps {
-  fundDescription: any;
-  isAuthenticated: any;
-  redirectToLogin: any;
+  fundDescription: FundDetailsFull;
+  isAuthenticated: boolean;
+  redirectToLogin(): void;
   FundControls: React.ComponentType<any>;
   FundWithdrawContainer: React.ComponentType<any>;
+  accountCurrency: string;
 }
 
 class FundDetailsDescription extends React.PureComponent<
@@ -32,6 +33,8 @@ class FundDetailsDescription extends React.PureComponent<
       FundControls,
       FundWithdrawContainer
     } = this.props;
+
+    const { personalFundDetails } = fundDescription;
 
     const assetDescription = {
       id: fundDescription.id,
@@ -53,7 +56,6 @@ class FundDetailsDescription extends React.PureComponent<
             <div className="details-description__avatar">
               <AssetAvatar
                 url={fundDescription.logo}
-                level={fundDescription.level}
                 alt={fundDescription.title}
                 size="big"
                 color={fundDescription.color}
@@ -81,12 +83,14 @@ class FundDetailsDescription extends React.PureComponent<
           redirectToLogin={redirectToLogin}
         />
 
-        {fundDescription.personalFundDetails && status !== STATUS.ENDED && (
+        {personalFundDetails && personalFundDetails.status !== STATUS.ENDED && (
           <div className="program-details-description__additionally">
             <DetailsInvestment
-              WithdrawContainer={FundWithdrawContainer}
-              programDetails={fundDescription}
               asset={FUND}
+              id={fundDescription.id}
+              currency={"GVT" /*accountCurrency*/}
+              personalDetails={personalFundDetails}
+              WithdrawContainer={FundWithdrawContainer}
             />
           </div>
         )}

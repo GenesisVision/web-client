@@ -30,18 +30,18 @@ class DetailsFavorite extends PureComponent<
   constructor(props: IDetailsFavoriteProps) {
     super(props);
     this.state = {
-      isFavorite: false,
+      isFavorite: props.isFavorite,
       isPending: false
     };
   }
   handleFavoriteClickOnButton = (id: string, isFavorite: boolean) => {
     this.setState({ isFavorite: !isFavorite, isPending: true });
-    toggleFavoriteProgram(id, !isFavorite)
+    toggleFavoriteProgram(id, isFavorite)
       .then(() => {
         this.setState({ isPending: false });
       })
       .catch(() => {
-        this.setState({ isFavorite: isFavorite, isPending: false });
+        this.setState({ isFavorite, isPending: false });
       });
   };
 

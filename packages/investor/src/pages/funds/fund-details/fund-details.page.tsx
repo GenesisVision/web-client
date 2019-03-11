@@ -119,6 +119,7 @@ class FundDetailsPage extends PureComponent<
                 redirectToLogin={service.redirectToLogin}
                 FundControls={FundControls}
                 FundWithdrawContainer={FundWithdrawalContainer}
+                accountCurrency={currency}
               />
             </div>
             <div className="details__section">
