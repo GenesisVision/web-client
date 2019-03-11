@@ -12,6 +12,7 @@ import { changePasswordTradingAccount } from "./services/change-password-trading
 
 interface IChangePasswordTradingAccountPopupOwnProps extends IDialogProps {
   id: string;
+  programName: string;
 }
 
 interface IChangePasswordTradingAccountPopupOtherProps {
@@ -66,11 +67,12 @@ class ChangePasswordTradingAccountPopup extends Component<
   };
 
   render() {
-    const { open, twoFactorEnabled } = this.props;
+    const { open, twoFactorEnabled, programName } = this.props;
     const { errorMessage } = this.state;
     return (
       <Dialog open={open} onClose={this.handleClose}>
         <ChangePasswordTradingAccountForm
+          programName={programName}
           twoFactorEnabled={twoFactorEnabled}
           errorMessage={errorMessage}
           onSubmit={this.handleApply}

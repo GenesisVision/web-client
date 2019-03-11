@@ -9,6 +9,7 @@ import { ChangePasswordTradingAccountValidationSchema } from "./change-password-
 interface IChangePasswordTradingAccountFormOwnProps {
   twoFactorEnabled: boolean;
   errorMessage: string;
+  programName: string;
   onSubmit(
     values: IChangePasswordTradingAccountFormValues,
     setSubmitting: (isSubmitting: boolean) => void
@@ -33,12 +34,21 @@ type ChangePasswordTradingAccountFormProps = InjectedTranslateProps &
 
 const ChangePasswordTradingAccountForm: FunctionComponent<
   ChangePasswordTradingAccountFormProps
-> = ({ t, dirty, isValid, handleSubmit, errorMessage, twoFactorEnabled }) => {
+> = ({
+  t,
+  dirty,
+  isValid,
+  programName,
+  handleSubmit,
+  errorMessage,
+  twoFactorEnabled
+}) => {
   return (
     <form id="change-password-trading-account" onSubmit={handleSubmit}>
       <div className="dialog__top">
         <div className="dialog__header">
           <h2>{t("password-change-trading-account.title")}</h2>
+          <p>{programName}</p>
         </div>
       </div>
       <div className="dialog__bottom">
