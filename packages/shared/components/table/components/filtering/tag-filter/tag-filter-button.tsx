@@ -4,7 +4,7 @@ import * as React from "react";
 
 export interface ITagFilterButton {
   isActive: boolean;
-  onClickHandle?(name: string): void;
+  onClickHandle?(e: React.MouseEvent<HTMLDivElement, MouseEvent>): void;
 }
 
 const TagFilterButton: React.FC<ITagFilterButton> = ({
