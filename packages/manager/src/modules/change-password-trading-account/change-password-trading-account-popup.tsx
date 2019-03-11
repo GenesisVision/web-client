@@ -1,3 +1,4 @@
+import { ProgramPwdUpdate } from "gv-api-web";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators } from "redux";
@@ -8,13 +9,13 @@ import ChangePasswordTradingAccountForm, {
   IChangePasswordTradingAccountFormValues
 } from "./components/change-password-trading-account-form";
 import { changePasswordTradingAccount } from "./services/change-password-trading-account.service";
-import { ProgramPwdUpdate } from "gv-api-web";
 
-interface IChangePasswordTradingAccountOwnProps extends IDialogProps {
+interface IChangePasswordTradingAccountPopupOwnProps extends IDialogProps {
   id: string;
 }
 
-interface IChangePasswordTradingAccountDispatchProps {
+interface IChangePasswordTradingAccountPopupOtherProps {
+  twoFactorEnabled: boolean;
   service: {
     changePasswordTradingAccount(
       id: string,
@@ -23,21 +24,16 @@ interface IChangePasswordTradingAccountDispatchProps {
   };
 }
 
-interface IChangePasswordTradingAccountStateProps {
-  twoFactorEnabled: boolean;
-}
+type IChangePasswordTradingAccountPopupProps = IChangePasswordTradingAccountPopupOwnProps &
+  IChangePasswordTradingAccountPopupOtherProps;
 
-type IChangePasswordTradingAccountProps = IChangePasswordTradingAccountOwnProps &
-  IChangePasswordTradingAccountDispatchProps &
-  IChangePasswordTradingAccountStateProps;
-
-interface IChangePasswordTradingAccountState {
+interface IChangePasswordTradingAccountPopupState {
   errorMessage: string;
 }
 
-class ChangePasswordTradingAccountContainer extends Component<
-  IChangePasswordTradingAccountProps,
-  IChangePasswordTradingAccountState
+class ChangePasswordTradingAccountPopup extends Component<
+  IChangePasswordTradingAccountPopupProps,
+  IChangePasswordTradingAccountPopupState
 > {
   state = {
     errorMessage: ""
@@ -104,4 +100,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ChangePasswordTradingAccountContainer);
+)(ChangePasswordTradingAccountPopup);
