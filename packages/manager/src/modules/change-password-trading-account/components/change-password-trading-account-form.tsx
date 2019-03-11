@@ -8,7 +8,7 @@ import { compose } from "redux";
 import { ChangePasswordTradingAccountValidationSchema } from "./change-password-trading-account.validators";
 
 interface IChangePasswordTradingAccountFormOwnProps {
-  programName: string;
+  twoFactorEnabled: boolean;
   errorMessage: string;
   onSubmit(
     values: IChangePasswordTradingAccountFormValues,
@@ -17,37 +17,32 @@ interface IChangePasswordTradingAccountFormOwnProps {
 }
 
 enum FORM_FIELDS {
-  successFee = "successFee",
-  subscriptionFee = "subscriptionFee"
+  password = "password",
+  confirmPassword = "confirmPassword",
+  twoFactorCode = "twoFactorCode"
 }
 
 export interface IChangePasswordTradingAccountFormValues {
-  [FORM_FIELDS.successFee]?: number;
-  [FORM_FIELDS.subscriptionFee]?: number;
+  [FORM_FIELDS.password]?: string;
+  [FORM_FIELDS.confirmPassword]?: string;
+  [FORM_FIELDS.twoFactorCode]?: string;
 }
 
 type ChangePasswordTradingAccountFormProps = InjectedTranslateProps &
   IChangePasswordTradingAccountFormOwnProps &
   FormikProps<IChangePasswordTradingAccountFormValues>;
+
 const ChangePasswordTradingAccountForm: FunctionComponent<
   ChangePasswordTradingAccountFormProps
-> = ({ t, dirty, handleSubmit, programName, errorMessage }) => {
+> = ({ t, dirty, handleSubmit, errorMessage }) => {
   return (
     <form id="change-password-trading-account" onSubmit={handleSubmit}>
       <div className="dialog__top">
         <div className="dialog__header">
           <h2>{t("program-details-page.description.signal-provider.title")}</h2>
-          <p>{programName}</p>
         </div>
       </div>
       <div className="dialog__bottom">
-        <SignalsFeeFormPartial
-          subscriptionFeeFieldName={FORM_FIELDS.subscriptionFee}
-          successFeeFieldName={FORM_FIELDS.successFee}
-          maxEntryFee={100}
-          maxSuccessFee={50}
-          hasSubscriptionFeeAutofocus={true}
-        />
         <div className="form-error">{errorMessage}</div>
         <div className="dialog__buttons">
           <GVButton
@@ -73,8 +68,9 @@ export default compose<
   >({
     displayName: "make-signal-form",
     mapPropsToValues: () => ({
-      [FORM_FIELDS.successFee]: undefined,
-      [FORM_FIELDS.subscriptionFee]: undefined
+      [FORM_FIELDS.password]: undefined,
+      [FORM_FIELDS.confirmPassword]: undefined,
+      [FORM_FIELDS.twoFactorCode]: undefined
     }),
     validationSchema: ChangePasswordTradingAccountValidationSchema,
     handleSubmit: (values, { props, setSubmitting }) => {
