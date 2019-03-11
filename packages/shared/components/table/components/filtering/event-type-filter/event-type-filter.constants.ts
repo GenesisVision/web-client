@@ -25,11 +25,21 @@ export enum MANAGER_EVENT_TYPE {
   ExitFee = "ExitFee"
 }
 
-export const INVESTOR_EVENT_TYPE_FILTER_VALUES = Object.keys(
+interface IINVESTOR_EVENT_TYPE_FILTER_VALUES {
+  value: INVESTOR_EVENT_TYPE;
+  label: INVESTOR_EVENT_TYPE;
+}
+
+interface IMANAGER_EVENT_TYPE_FILTER_VALUES {
+  value: MANAGER_EVENT_TYPE;
+  labelKey: string;
+}
+
+export const INVESTOR_EVENT_TYPE_FILTER_VALUES: IINVESTOR_EVENT_TYPE_FILTER_VALUES[] = Object.values(
   INVESTOR_EVENT_TYPE
 ).map(x => ({ value: x, label: x }));
 
-export const MANAGER_EVENT_TYPE_FILTER_VALUES = Object.keys(
+export const MANAGER_EVENT_TYPE_FILTER_VALUES: IMANAGER_EVENT_TYPE_FILTER_VALUES[] = Object.values(
   MANAGER_EVENT_TYPE
 ).map(x => ({
   value: x,
