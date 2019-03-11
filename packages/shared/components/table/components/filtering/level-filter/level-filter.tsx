@@ -5,11 +5,12 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 
 import Filter from "../filter";
 import LevelFilterPopover from "./level-filter-popover";
+import { TFilter } from "../filter.type";
 
 interface ILevelFilterProps {
   name: string;
-  value: number;
-  onChange(value: number): void;
+  value: number[];
+  onChange(value: TFilter<any>): void;
 }
 
 class LevelFilter extends React.Component<
@@ -18,14 +19,14 @@ class LevelFilter extends React.Component<
   renderValueText = value => `${value[0]}-${value[1]}`;
 
   render() {
-    const { t } = this.props;
+    const { t, name, value, onChange } = this.props;
     return (
       <Filter
         label={t("filters.level.label")}
-        name={this.props.name}
+        name={name}
         renderValueText={this.renderValueText}
-        value={this.props.value}
-        updateFilter={this.props.onChange}
+        value={value}
+        updateFilter={onChange}
       >
         <LevelFilterPopover {...this.props} />
       </Filter>

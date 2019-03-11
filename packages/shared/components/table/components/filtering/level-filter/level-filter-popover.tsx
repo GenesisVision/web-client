@@ -4,13 +4,13 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 
 interface ILevelFilterPopoverProps {
-  value: number;
+  value: number[];
   cancel?(): void;
-  changeFilter?(value: number): void;
+  changeFilter?(value: number[]): void;
 }
 
 interface ILevelFilterPopoverState {
-  value: number;
+  value: number[];
 }
 
 class LevelFilterPopover extends React.Component<
@@ -26,7 +26,7 @@ class LevelFilterPopover extends React.Component<
     return prev;
   }, {});
 
-  handleChange = (e: number) => {
+  handleChange = (e: number[]) => {
     this.setState({ value: e });
   };
   handleSubmit = () => {
@@ -36,7 +36,7 @@ class LevelFilterPopover extends React.Component<
   mapValueToNumber = values => values.map(x => parseInt(x));
 
   render() {
-    const { t } = this.props;
+    const { t, cancel } = this.props;
     return (
       <div className="level-filter">
         <Range
@@ -60,7 +60,7 @@ class LevelFilterPopover extends React.Component<
             className="level-filter__btn"
             variant="text"
             color="secondary"
-            onClick={this.props.cancel}
+            onClick={cancel}
           >
             {t("buttons.cancel")}
           </GVButton>
