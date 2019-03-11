@@ -28,6 +28,7 @@ import { ResponseError } from "shared/utils/types";
 
 import { LOGIN_ROUTE } from "../../auth/login/login.routes";
 import { fetchPortfolioEvents } from "../../dashboard/services/dashboard-events.services";
+import ChangePasswordTradingAccountControl from "./components/program-controls/change-password-trading-account-contol";
 import ProgramControls from "./components/program-controls/program-controls";
 import { fetchHistoryCounts } from "./service/program-details.service";
 
@@ -126,6 +127,9 @@ class ProgramDetailsPage extends PureComponent<
                 redirectToLogin={service.redirectToLogin}
                 ProgramControls={ProgramControls}
                 ProgramWithdrawContainer={ProgramWithdrawContainer}
+                ChangePasswordTradingAccountControl={
+                  ChangePasswordTradingAccountControl
+                }
                 ProgramReinvestingWidget={() => null}
               />
             </div>
