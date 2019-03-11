@@ -18,6 +18,8 @@ import {
 } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
 
+import ChangePasswordTradingAccountContainer from "manager/src/modules/change-password-trading-account/change-password-trading-account-container";
+
 class ProgramDetailsDescriptionMain extends Component {
   state = {
     isOpenAboutLevels: false,
@@ -27,6 +29,8 @@ class ProgramDetailsDescriptionMain extends Component {
   handleOpenChangePassword = () => {
     this.setState({ isOpenChangePassword: true });
   };
+  handleCloseChangePassword = () =>
+    this.setState({ isOpenChangePassword: false });
   handleOpenAboutLevels = () => {
     this.setState({ isOpenAboutLevels: true });
     this.handleCloseDropdown();
@@ -41,7 +45,7 @@ class ProgramDetailsDescriptionMain extends Component {
   }
 
   render() {
-    const { anchor, isOpenAboutLevels } = this.state;
+    const { anchor, isOpenAboutLevels, isOpenChangePassword } = this.state;
     const {
       t,
       programDescription,
@@ -163,6 +167,11 @@ class ProgramDetailsDescriptionMain extends Component {
             hasNotifications={hasNotifications}
           />
         </div>
+        <ChangePasswordTradingAccountContainer
+          open={isOpenChangePassword}
+          id={programDescription.id}
+          onClose={this.handleCloseChangePassword}
+        />
       </div>
     );
   }
