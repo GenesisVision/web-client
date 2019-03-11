@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import DetailsFavorite from "shared/components/details/details-description-section/details-description/details-favorite";
 import DetailsNotification from "shared/components/details/details-description-section/details-description/details-notificaton";
-import DetailsChangePassword from "shared/components/details/details-description-section/details-description/details-change-password";
 import Popover from "shared/components/popover/popover";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import TagProgramItem from "shared/components/tag-program/tag-program-item";
@@ -18,19 +17,11 @@ import {
 } from "shared/utils/compose-url";
 import { formatValue } from "shared/utils/formatter";
 
-import ChangePasswordTradingAccountContainer from "manager/src/modules/change-password-trading-account/change-password-trading-account-container";
-
 class ProgramDetailsDescriptionMain extends Component {
   state = {
     isOpenAboutLevels: false,
-    isOpenChangePassword: false,
     anchor: null
   };
-  handleOpenChangePassword = () => {
-    this.setState({ isOpenChangePassword: true });
-  };
-  handleCloseChangePassword = () =>
-    this.setState({ isOpenChangePassword: false });
   handleOpenAboutLevels = () => {
     this.setState({ isOpenAboutLevels: true });
     this.handleCloseDropdown();
@@ -45,7 +36,7 @@ class ProgramDetailsDescriptionMain extends Component {
   }
 
   render() {
-    const { anchor, isOpenAboutLevels, isOpenChangePassword } = this.state;
+    const { anchor, isOpenAboutLevels } = this.state;
     const {
       t,
       programDescription,
@@ -152,10 +143,6 @@ class ProgramDetailsDescriptionMain extends Component {
           </div>
         </div>
         <div className="program-details-description__settings">
-          <DetailsChangePassword
-            id={programDescription.id}
-            onClick={this.handleOpenChangePassword}
-          />
           <DetailsFavorite
             id={programDescription.id}
             isFavorite={isFavorite}
@@ -167,11 +154,6 @@ class ProgramDetailsDescriptionMain extends Component {
             hasNotifications={hasNotifications}
           />
         </div>
-        <ChangePasswordTradingAccountContainer
-          open={isOpenChangePassword}
-          id={programDescription.id}
-          onClose={this.handleCloseChangePassword}
-        />
       </div>
     );
   }
