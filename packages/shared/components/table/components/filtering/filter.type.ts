@@ -1,4 +1,4 @@
-export type Filter<T> = {
+export type TFilter<T> = {
   name: string;
   value: T;
 };
