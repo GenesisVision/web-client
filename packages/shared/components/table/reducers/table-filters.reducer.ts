@@ -1,10 +1,16 @@
 const FILTER_ACTION_SUFFIX = "FILTER";
 export const composeFiltersActionType = (
-  actionType,
-  suffix = FILTER_ACTION_SUFFIX
+  actionType: string,
+  suffix: string = FILTER_ACTION_SUFFIX
 ) => `${actionType}_${suffix}`;
 
-const tableFiltersReducer = ({ type, filters = {} }) => {
+const tableFiltersReducer = ({
+  type,
+  filters = {}
+}: {
+  type: string;
+  filters: Object;
+}) => {
   const initialState = { ...filters };
   const filterActionType = composeFiltersActionType(type);
   return (state = initialState, action) => {
