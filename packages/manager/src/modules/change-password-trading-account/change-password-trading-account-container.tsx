@@ -7,10 +7,8 @@ import RootState from "shared/reducers/root-reducer";
 import ChangePasswordTradingAccountForm, {
   IChangePasswordTradingAccountFormValues
 } from "./components/change-password-trading-account-form";
-import {
-  IchangePasswordTradingAccount,
-  changePasswordTradingAccount
-} from "./services/change-password-trading-account.service";
+import { changePasswordTradingAccount } from "./services/change-password-trading-account.service";
+import { ProgramPwdUpdate } from "gv-api-web";
 
 interface IChangePasswordTradingAccountOwnProps extends IDialogProps {
   id: string;
@@ -18,10 +16,10 @@ interface IChangePasswordTradingAccountOwnProps extends IDialogProps {
 
 interface IChangePasswordTradingAccountDispatchProps {
   service: {
-    changePasswordTradingAccount({
-       id,
-       opts
-     }: IchangePasswordTradingAccount): Promise<void>;
+    changePasswordTradingAccount(
+      id: string,
+      model?: ProgramPwdUpdate
+    ): Promise<void>;
   };
 }
 
@@ -30,7 +28,8 @@ interface IChangePasswordTradingAccountStateProps {
 }
 
 type IChangePasswordTradingAccountProps = IChangePasswordTradingAccountOwnProps &
-  IChangePasswordTradingAccountDispatchProps & IChangePasswordTradingAccountStateProps;
+  IChangePasswordTradingAccountDispatchProps &
+  IChangePasswordTradingAccountStateProps;
 
 interface IChangePasswordTradingAccountState {
   errorMessage: string;
@@ -49,18 +48,13 @@ class ChangePasswordTradingAccountContainer extends Component<
     setSubmitting: (isSubmitting: boolean) => void
   ) => {
     const { id, service, onClose } = this.props;
-    const {password} = values;
-
-    const opts = values.twoFactorCode ? {
-      password,
+    const model = {
+      password: values.password,
       twoFactorCode: values.twoFactorCode
-    } : {
-      password
     };
 
-    // @ts-ignore
     service
-      .changePasswordTradingAccount(id, opts)
+      .changePasswordTradingAccount(id, model)
       .then(() => {
         onClose();
       })
@@ -92,8 +86,9 @@ class ChangePasswordTradingAccountContainer extends Component<
 
 const mapStateToProps = (state: RootState) => {
   if (!state.accountSettings) return;
-  // @ts-ignore
-  const { twoFactorEnabled } = state.accountSettings.twoFactorAuth.data;
+  const twoFactorEnabled = state.accountSettings.twoFactorAuth.data
+    ? state.accountSettings.twoFactorAuth.data.twoFactorEnabled
+    : false;
   return { twoFactorEnabled };
 };
 
