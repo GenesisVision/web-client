@@ -1006,7 +1006,14 @@
       "current-password": "Current password",
       "password": "Password",
       "confirm-password": "Confirm password",
-      "success-alert": "Password was changed"
+      "new-password": "New password",
+      "success-alert": "Password was changed",
+      "validators": {
+        "password-weak": "The password must be from 8 to 32 characters, and contain at least one letter.",
+        "password-required": "Password is required.",
+        "password-dont-match": "Passwords don't match.",
+        "confirm-password-required": "Confirm password is required"
+      }
     },
     "email-confirm": {
       "title": "Email confirm",
