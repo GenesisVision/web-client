@@ -1,31 +1,27 @@
 import "./details-description-control.scss";
 
-import { GVButton } from "gv-react-components";
 import React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
-import { compose } from "redux";
-import isAuthenticated from "shared/decorators/is-authenticated";
+import { MoreIcon } from "shared/components/icon/more-icon";
+import DetailsDescriptionControl from "./details-description-control";
 
 export interface IDetailsChangePassword {
-  id: string;
   onClick(): void;
 }
 
-const DetailsChangePassword: React.FC<InjectedTranslateProps & IDetailsChangePassword> = ({ t, id, onClick }) => {
+const DetailsChangePassword: React.FC<
+  InjectedTranslateProps & IDetailsChangePassword
+> = ({ t, onClick }) => {
   return (
-    <GVButton
-      variant="text"
-      color="secondary"
-      className={"profile-settings__password"}
+    <DetailsDescriptionControl
+      tag="button"
+      className="details-description-control--button"
       onClick={onClick}
+      text={t("program-details-page.description.change-password")}
     >
-      {`${t("profile-page.settings.change-password")} `}
-      <span className="profile-settings__password-arrow">&#8250;</span>
-    </GVButton>
+      <MoreIcon className="details-description-control__icon" />
+    </DetailsDescriptionControl>
   );
 };
 
-export default compose<React.FunctionComponent>(
-  translate(),
-  isAuthenticated
-)(DetailsChangePassword);
+export default translate()(DetailsChangePassword);
