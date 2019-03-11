@@ -3,25 +3,21 @@ import "./general-notification.scss";
 import { GVSwitch } from "gv-react-components";
 import * as React from "react";
 
+export type Setting = {
+  id?: string;
+  assetId?: string;
+  managerId?: string;
+  type?: string;
+  conditionType?: string;
+  conditionAmount?: number;
+};
+
 interface IGeneralNotificationProps {
-  setting: {
-    id: string;
-    assetId: string;
-    managerId: string;
-    type: string;
-    conditionType: string;
-    conditionAmount: number;
-  };
+  setting: Setting;
   name: string;
   label: string;
   assetId: string;
-  addNotification(opts?: {
-    assetId?: string;
-    managerId?: string;
-    type?: string;
-    conditionType?: string;
-    conditionAmount?: number;
-  }): Promise<any>;
+  addNotification(opts?: Setting): Promise<any>;
   removeNotification(opts?: { id: string; assetId: string }): Promise<any>;
 }
 

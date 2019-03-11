@@ -12,20 +12,20 @@ export enum SIDEBAR_POSITION {
 interface ISidebarProps {
   open: boolean;
   onClose?(event: React.MouseEvent<HTMLElement>): void;
-  position: SIDEBAR_POSITION;
+  position?: SIDEBAR_POSITION;
 }
 
 class Sidebar extends React.Component<ISidebarProps> {
   render() {
-    const { open, onClose, position, children } = this.props;
+    const {
+      open,
+      onClose,
+      position = SIDEBAR_POSITION.LEFT,
+      children
+    } = this.props;
     return (
       <Modal open={open} onClose={onClose}>
-        <div
-          className={classNames(
-            "sidebar",
-            `sidebar--${position || SIDEBAR_POSITION.LEFT}`
-          )}
-        >
+        <div className={classNames("sidebar", `sidebar--${position}`)}>
           {children}
         </div>
       </Modal>

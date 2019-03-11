@@ -19,7 +19,7 @@ import {
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { lazy, number, object } from "yup";
 
-import WalletImage from "../avatar/wallet-image/wallet-image";
+import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
 
 interface IDepositFormOwnProps {
   wallets: WalletData[];
@@ -33,13 +33,6 @@ interface IDepositFormOwnProps {
   onSubmit: (amount: any, currency: object) => {};
 }
 
-interface IDepositFormProps {
-  errors?: any;
-  isValid?: boolean;
-  dirty?: boolean;
-  values?: FormValues;
-}
-
 export interface FormValues {
   rate: number;
   maxAmount: number;
@@ -49,7 +42,6 @@ export interface FormValues {
 
 type OwnProps = InjectedTranslateProps &
   IDepositFormOwnProps &
-  IDepositFormProps &
   FormikProps<FormValues>;
 
 class DepositForm extends React.Component<OwnProps> {
@@ -117,12 +109,12 @@ class DepositForm extends React.Component<OwnProps> {
         params.currencyFrom || values.walletCurrency,
         params.currencyTo || currency
       )
-      .then((rate: number) => {
+      .then((rate: "Number") => {
         setFieldValue("rate", rate);
       });
   };
   getMaxAmount = () => {
-    const { setFieldValue, info, wallets, values, asset, role } = this.props;
+    const { setFieldValue, info, wallets, values, role } = this.props;
     const { walletCurrency, rate } = values;
     const { availableToInvestBase } = info;
     const wallet = wallets.find(wallet => wallet.currency === walletCurrency);

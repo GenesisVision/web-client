@@ -4,7 +4,7 @@ import {
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import {
   composeDefaultDateRangeFilter,
-  composeRequestValue,
+  composeRequestValueFunc,
   validateDateRange
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 import { programsTagFilter } from "shared/components/table/components/filtering/tag-filter/tag-filter.helpers";
@@ -49,7 +49,7 @@ const programsCurrencyFilter = {
 
 export const programsDateRangeFilter = {
   ...composeDefaultDateRangeFilter({
-    composeApiRequestValue: composeRequestValue(
+    composeApiRequestValue: composeRequestValueFunc(
       SERVER_DATE_RANGE_MIN_FILTER_NAME,
       SERVER_DATE_RANGE_MAX_FILTER_NAME
     ),

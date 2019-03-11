@@ -4,7 +4,7 @@ import { GVButton } from "gv-react-components";
 import React, { Component } from "react";
 
 import {
-  SortingDirection,
+  SortingDirection_old,
   getSortingColumnName,
   getSortingDirection
 } from "../../../helpers/sorting.helpers";
@@ -25,13 +25,14 @@ class SortingFilter extends Component {
 
   isAsc = () => {
     const { sorting } = this.props;
-    return getSortingDirection(sorting) === SortingDirection.asc;
+    return getSortingDirection(sorting) === SortingDirection_old.asc;
   };
 
   handleOnSelectChange = ({ value }) => {
     const { updateSorting } = this.props;
     updateSorting(
-      value + (this.isAsc() ? SortingDirection.asc : SortingDirection.desc)
+      value +
+        (this.isAsc() ? SortingDirection_old.asc : SortingDirection_old.desc)
     );
   };
 
@@ -39,7 +40,7 @@ class SortingFilter extends Component {
     const { updateSorting } = this.props;
     updateSorting(
       this.composeSortingColumnName() +
-        (isAsc ? SortingDirection.asc : SortingDirection.desc)
+        (isAsc ? SortingDirection_old.asc : SortingDirection_old.desc)
     );
   };
 
