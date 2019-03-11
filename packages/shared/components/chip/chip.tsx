@@ -10,7 +10,7 @@ export enum CHIP_TYPE {
 }
 interface IChipProps {
   disabled?: boolean;
-  children: React.ReactNode;
+  // children: () => void | { [keys: string]: any } | JSX.Element;
   className?: string;
   rounded?: boolean;
   type?: CHIP_TYPE;

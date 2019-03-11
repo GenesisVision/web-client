@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import {
-  SortingDirection,
+  SortingDirection_old,
   getSortingColumnName,
   getSortingDirection
 } from "../helpers/sorting.helpers";
@@ -12,7 +12,7 @@ class TableHeader extends Component {
   sortingName = () => getSortingColumnName(this.props.sorting);
 
   getSortingDirection = sortingName => {
-    if (sortingName !== this.sortingName()) return SortingDirection.none;
+    if (sortingName !== this.sortingName()) return SortingDirection_old.none;
     return getSortingDirection(this.props.sorting);
   };
 
@@ -21,12 +21,12 @@ class TableHeader extends Component {
   handleSorting = sortingName => e => {
     if (
       sortingName !== this.sortingName() ||
-      SortingDirection.asc === getSortingDirection(this.props.sorting)
+      SortingDirection_old.asc === getSortingDirection(this.props.sorting)
     ) {
-      return this.props.updateSorting(sortingName + SortingDirection.desc);
+      return this.props.updateSorting(sortingName + SortingDirection_old.desc);
     }
 
-    return this.props.updateSorting(sortingName + SortingDirection.asc);
+    return this.props.updateSorting(sortingName + SortingDirection_old.asc);
   };
 
   renderColumns = () => {
