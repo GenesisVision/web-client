@@ -7,12 +7,25 @@ export const FilterType = {
   custom: "custom"
 };
 
-export const composeFilteringActionType = actionType =>
+export enum FILTER_TYPE {
+  GENERAL = "general",
+  RANGE = "range",
+  CUSTOM = "custom"
+}
+
+export interface IFilter {
+  name: string;
+  value: any;
+  composeRequestValue?(value: any): any;
+  type?: FILTER_TYPE;
+}
+
+export const composeFilteringActionType = (actionType: string): string =>
   `${actionType}_FILTERING`;
 
-export const composeFilters = (allFilters, filtering) => {
+export const composeFilters = (allFilters: any, filtering: any): any => {
   if (!allFilters) return {};
-  const composedFilters = allFilters.reduce((accum, cur) => {
+  return allFilters.reduce((accum, cur) => {
     const { name, type, composeRequestValue } = cur;
     const processedFilterValue = processFilterValue({
       name,
@@ -26,13 +39,12 @@ export const composeFilters = (allFilters, filtering) => {
 
     return accum;
   }, {});
-  return composedFilters;
 };
 
-const processFilterValue = filter => {
+const processFilterValue = (filter: IFilter): Object => {
   let requestValue = undefined;
   switch (filter.type) {
-    case FilterType.range:
+    case FILTER_TYPE.RANGE:
       if (filter.value !== undefined) {
         requestValue = {
           [`${filter.name}Min`]: filter.value[0],
@@ -40,7 +52,7 @@ const processFilterValue = filter => {
         };
       }
       break;
-    case FilterType.custom:
+    case FILTER_TYPE.CUSTOM:
       const requestValues = filter.composeRequestValue(filter.value);
       if (requestValues !== undefined) {
         if (Array.isArray(requestValues))
@@ -48,7 +60,7 @@ const processFilterValue = filter => {
         else requestValue = { ...requestValues };
       }
       break;
-    case FilterType.general:
+    case FILTER_TYPE.GENERAL:
       requestValue = { [filter.name]: filter.value };
       break;
     default:

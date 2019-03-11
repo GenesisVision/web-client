@@ -1,7 +1,7 @@
 import classnames from "classnames";
 import React from "react";
 
-import { SortingDirection } from "../helpers/sorting.helpers";
+import { SortingDirection_old } from "../helpers/sorting.helpers";
 
 const TableHeadCell = ({
   sortable,
@@ -20,9 +20,9 @@ const TableHeadCell = ({
       <span
         className={classnames({
           "table__cell--sortable-asc":
-            sortingDirection === SortingDirection.asc,
+            sortingDirection === SortingDirection_old.asc,
           "table__cell--sortable-desc":
-            sortingDirection === SortingDirection.desc
+            sortingDirection === SortingDirection_old.desc
         })}
       >
         {children}

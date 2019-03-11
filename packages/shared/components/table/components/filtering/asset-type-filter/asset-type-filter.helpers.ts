@@ -1,12 +1,13 @@
-import { FilterType } from "../../../helpers/filtering.helpers";
+import { FILTER_TYPE } from "../../../helpers/filtering.helpers";
 import {
   ASSET_TYPE_FILTER_DEFAULT_VALUE,
   ASSET_TYPE_FILTER_NAME
 } from "./asset-type-filter.constants";
+import { IComposeDefaultFilter } from "../../table.types";
 
-export const composeDefaultAssetTypeFilter = () => ({
+export const composeDefaultAssetTypeFilter = (): IComposeDefaultFilter => ({
   name: ASSET_TYPE_FILTER_NAME,
   composeRequestValue: value => value,
   defaultValue: ASSET_TYPE_FILTER_DEFAULT_VALUE,
-  type: FilterType.general
+  type: FILTER_TYPE.GENERAL
 });

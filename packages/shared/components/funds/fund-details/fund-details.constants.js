@@ -1,6 +1,6 @@
 import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { composeDefaultDateRangeFilter } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
-import { composeRequestValue } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
+import { composeRequestValueFunc } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 
 export const FUND_STRUCTURE_COLUMNS = [
   {
@@ -34,7 +34,7 @@ export const FUND_REBALANCING_COLUMNS = [
 export const FUND_REBALANCING_DEFAULT_FILTERS = [
   {
     ...composeDefaultDateRangeFilter({
-      composeApiRequestValue: composeRequestValue(
+      composeApiRequestValue: composeRequestValueFunc(
         SERVER_DATE_RANGE_MIN_FILTER_NAME,
         SERVER_DATE_RANGE_MAX_FILTER_NAME
       )

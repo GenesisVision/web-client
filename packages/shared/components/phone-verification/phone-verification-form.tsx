@@ -1,15 +1,31 @@
 import "./phone-verification.scss";
 
-import { withFormik } from "formik";
+import { FormikProps, withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
-import PropTypes from "prop-types";
-import React, { Component } from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import { number, object } from "yup";
 
-class PhoneVerificationForm extends Component {
+export interface IPhoneVerificationFormValues {
+  code: string;
+}
+
+export interface IPhoneVerificationFormProps {
+  phoneNumber: string;
+  errorMessage?: string;
+  onResendClick?(): void;
+  disabledResend?: boolean;
+  onSubmit(code: string): void;
+}
+
+class PhoneVerificationForm extends React.Component<
+  IPhoneVerificationFormProps &
+    InjectedTranslateProps &
+    IPhoneVerificationFormValues &
+    FormikProps<IPhoneVerificationFormValues>
+> {
   componentDidMount() {
     this.props.onResendClick();
   }
@@ -67,15 +83,7 @@ class PhoneVerificationForm extends Component {
   }
 }
 
-PhoneVerificationForm.propTypes = {
-  phoneNumber: PropTypes.string.isRequired,
-  onSubmit: PropTypes.func,
-  onResendClick: PropTypes.func,
-  errorMessage: PropTypes.string,
-  disabledResend: PropTypes.bool
-};
-
-export default compose(
+export default compose<React.ComponentType<IPhoneVerificationFormProps>>(
   translate(),
   withFormik({
     displayName: "phone-verification",
@@ -86,7 +94,10 @@ export default compose(
       object().shape({
         code: number().required(t("profile-page.verification.phone.required"))
       }),
-    handleSubmit: (values, { props }) => {
+    handleSubmit: (
+      values,
+      { props }: { props: IPhoneVerificationFormProps }
+    ) => {
       props.onSubmit(values.code);
     }
   })
