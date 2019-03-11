@@ -1,14 +1,32 @@
-import {
-  signalEntryFeeShape,
-  signalSuccessFeeShape
-} from "pages/create-program/components/create-program-settings/create-program-settings.validators";
 import { InjectedTranslateProps } from "react-i18next";
-import { object } from "yup";
+import { object, ref, string } from "yup";
+import { passwordValidator } from "shared/utils/validators/validators";
 
-export const ChangePasswordTradingAccountValidationSchema = ({
-  t
-}: InjectedTranslateProps) =>
+interface IChangePasswordTradingAccountValidationSchema {
+  twoFactorEnabled: boolean;
+}
+
+const twoFactorvalidator = (
+  params: InjectedTranslateProps & IChangePasswordTradingAccountValidationSchema
+) => {
+  const { t, twoFactorEnabled } = params;
+  return twoFactorEnabled
+    ? string()
+        .trim()
+        .matches(/^\d{6}$/, t("wallet-withdraw.validation.two-factor-6digits"))
+        .required(t("wallet-withdraw.validation.two-factor-required"))
+    : string()
+        .trim()
+        .matches(/^\d{6}$/, t("wallet-withdraw.validation.two-factor-6digits"));
+};
+
+export const ChangePasswordTradingAccountValidationSchema = (
+  params: InjectedTranslateProps & IChangePasswordTradingAccountValidationSchema
+) =>
   object().shape({
-    successFee: signalSuccessFeeShape(t, 50),
-    subscriptionFee: signalEntryFeeShape(t, 100)
+    twoFactorCode: twoFactorvalidator(params),
+    password: passwordValidator,
+    confirmPassword: string()
+      .oneOf([ref("password")], params.t("Passwords don't match."))
+      .required(params.t("Confirm Password is required"))
   });
