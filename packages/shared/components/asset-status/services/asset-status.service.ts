@@ -1,11 +1,11 @@
 import { ProgramRequest, ProgramRequests } from "gv-api-web";
+import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
 import { ASSET, ROLE } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import investorApi from "shared/services/api-client/investor-api";
 import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
 
-import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
 import {
   ICancelRequest,
   cancelInvestorProgramRequest,

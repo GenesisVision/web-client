@@ -4,11 +4,12 @@ import classnames from "classnames";
 import H from "history";
 import React from "react";
 
-export interface IDetailsDescriptionControlProps {
+interface IDetailsDescriptionControlProps {
   text: string;
   className?: string;
   onClick?(): void;
   to?: H.LocationDescriptor;
+  disabled?: boolean;
   tag: React.ComponentType<any> | string;
 }
 const DetailsDescriptionControl: React.SFC<IDetailsDescriptionControlProps> = ({

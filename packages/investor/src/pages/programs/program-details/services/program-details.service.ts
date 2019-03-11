@@ -3,7 +3,7 @@ import authService from "shared/services/auth-service";
 
 import { fetchPortfolioEvents } from "../../../dashboard/services/dashboard-events.services";
 
-export const fetchHistoryCounts = id => {
+export const fetchHistoryCounts = (id: string) => {
   const isAuthenticated = authService.isAuthenticated();
   const filtering = { take: 0 };
   const tradesCountPromise = programsApi.v10ProgramsByIdTradesGet(

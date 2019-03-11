@@ -1,13 +1,18 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
 
-import * as PropTypes from "prop-types";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
 import Surface from "shared/components/surface/surface";
 
 import FundStructure from "./fund-structure/fund-structure";
 
-class FundDetailsHistorySection extends PureComponent {
+interface IFundDetailsHistorySectionProps {
+  id: string;
+  fetchFundStructure(): void;
+}
+class FundDetailsHistorySection extends React.PureComponent<
+  IFundDetailsHistorySectionProps
+> {
   render() {
     const { t, id, fetchFundStructure } = this.props;
     return (
@@ -24,10 +29,5 @@ class FundDetailsHistorySection extends PureComponent {
     );
   }
 }
-
-FundDetailsHistorySection.propTypes = {
-  id: PropTypes.string.isRequired,
-  fetchFundStructure: PropTypes.func.isRequired
-};
 
 export default translate()(FundDetailsHistorySection);

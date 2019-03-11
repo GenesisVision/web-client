@@ -4,10 +4,13 @@ import AssetEditContainer from "modules/asset-edit/asset-edit-container";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import React, { Component, Fragment } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import {
+  IProgramDetailContext,
+  ProgramDetailContext
+} from "shared/components/details/helpers/details-context";
 import InvestmentProgramInfo from "shared/components/programs/program-details/program-details-description/investment-program-info";
 import { PROGRAM } from "shared/constants/constants";
 
-import { ProgramDetailContext } from "../../program-details.page";
 import ClosePeriodContainer from "../close-period/close-period-container";
 import CloseProgramContainer from "../close-program/close-program-container";
 
@@ -131,7 +134,7 @@ class InvestmentProgramControls extends Component<
           </div>
         )}
         <ProgramDetailContext.Consumer>
-          {({ updateDetails }: any) => (
+          {({ updateDetails }: IProgramDetailContext) => (
             <Fragment>
               <ProgramDepositContainer
                 currency={programDescription.currency}

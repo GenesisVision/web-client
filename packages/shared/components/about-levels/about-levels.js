@@ -4,8 +4,8 @@ import React, { Component } from "react";
 import { translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import Dialog from "shared/components/dialog/dialog";
+import { formatCurrencyValue } from "shared/utils/formatter";
 
-import { formatValue } from "../../utils/formatter";
 import StatisticItem from "../statistic-item/statistic-item";
 
 const renderLimits = (t, investmentsLimits, currency) => {
@@ -21,7 +21,7 @@ const renderLimits = (t, investmentsLimits, currency) => {
         </div>
         <StatisticItem accent label={t("about-levels-page.titles.limit")}>
           <NumberFormat
-            value={formatValue(levelInfo.investmentLimit)}
+            value={formatCurrencyValue(levelInfo.investmentLimit, currency)}
             thousandSeparator={" "}
             displayType="text"
             suffix={` ${currency}`}
