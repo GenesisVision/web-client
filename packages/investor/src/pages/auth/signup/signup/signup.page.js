@@ -1,7 +1,7 @@
 import "./signup.scss";
 
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 import AuthTabs from "../../components/auth-tabs/auth-tabs";
 import { SIGNUP_ROUTE } from "../signup.routes";
@@ -17,4 +17,4 @@ const SignUpPage = ({ t }) => {
   );
 };
 
-export default translate()(SignUpPage);
+export default withTranslation()(SignUpPage);

@@ -3,7 +3,7 @@ import { FormikProps } from "formik";
 import { WalletData } from "gv-api-web";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
-import { TranslationFunction, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
@@ -27,7 +27,6 @@ interface IFollowCreateAccountProps {
   errors?: any;
   isValid?: boolean;
   dirty?: boolean;
-  t: TranslationFunction;
   values?: FormValues;
   setFieldValue?: any;
 }
@@ -44,7 +43,8 @@ export interface FormValues {
 
 type OwnProps = IFollowCreateAccountOwnProps &
   IFollowCreateAccountProps &
-  FormikProps<FormValues>;
+  FormikProps<FormValues> &
+  WithTranslation;
 
 class FollowCreateAccount extends React.Component<
   OwnProps,
@@ -190,7 +190,7 @@ class FollowCreateAccount extends React.Component<
 }
 
 export default compose<React.ComponentType<IFollowCreateAccountOwnProps>>(
-  translate(),
+  withTranslation(),
   withFormik({
     displayName: "follow-create-account",
     mapPropsToValues: (props: { [key: string]: any }) => {
@@ -206,7 +206,7 @@ export default compose<React.ComponentType<IFollowCreateAccountOwnProps>>(
       }
       return { initialDepositCurrency, initialDepositAmount: "" };
     },
-    validationSchema: (params: TranslationFunction & OwnProps) => {
+    validationSchema: (params: WithTranslation & OwnProps) => {
       const getAvailable = (currency: string): number => {
         const wallet = params.wallets.find(
           (wallet: WalletData) => wallet.currency == currency

@@ -1,6 +1,6 @@
 import { GVTab, GVTabs } from "gv-react-components";
 import React, { Component } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import Surface from "shared/components/surface/surface";
 
 import {
@@ -25,7 +25,7 @@ interface ICopytradingTablesSectionState extends ICopytradingTradesCounts {
 }
 
 class ICopytradingTablesSection extends Component<
-  ICopytradingTablesSectionProps & InjectedTranslateProps,
+  ICopytradingTablesSectionProps & WithTranslation,
   ICopytradingTablesSectionState
 > {
   state = {
@@ -77,4 +77,4 @@ class ICopytradingTablesSection extends Component<
   }
 }
 
-export default translate()(ICopytradingTablesSection);
+export default withTranslation()(ICopytradingTablesSection);

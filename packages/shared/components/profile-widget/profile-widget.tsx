@@ -3,7 +3,7 @@ import "./profile-widget.scss";
 import classNames from "classnames";
 import { GVButton } from "gv-react-components";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
 import { DetailsIcon } from "shared/components/icon/details-icon";
@@ -30,7 +30,7 @@ interface IProfileWidgetState {
 }
 
 class ProfileWidget extends React.Component<
-  IProfileWidgetProps & InjectedTranslateProps,
+  IProfileWidgetProps & WithTranslation,
   IProfileWidgetState
 > {
   state = {
@@ -89,4 +89,4 @@ class ProfileWidget extends React.Component<
   }
 }
 
-export default translate()(ProfileWidget);
+export default withTranslation()(ProfileWidget);

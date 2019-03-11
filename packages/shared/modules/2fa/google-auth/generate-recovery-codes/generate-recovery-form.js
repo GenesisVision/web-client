@@ -2,7 +2,7 @@ import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import PropTypes from "prop-types";
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { compose } from "redux";
 import { object, string } from "yup";
 
@@ -42,7 +42,7 @@ const GenerateRecoveryForm = ({ t, handleSubmit, errorMessage, disabled }) => {
 };
 
 const GenerateRecoveryWithFormik = compose(
-  translate(),
+  withTranslation(),
   withFormik({
     displayName: "generate-recovery-form",
     mapPropsToValues: () => ({

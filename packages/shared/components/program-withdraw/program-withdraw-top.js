@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
@@ -31,4 +31,4 @@ ProgramWithdrawTop.propTypes = {
   title: PropTypes.string.isRequired
 };
 
-export default translate()(ProgramWithdrawTop);
+export default withTranslation()(ProgramWithdrawTop);

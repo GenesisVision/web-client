@@ -2,7 +2,7 @@ import "shared/components/details/details-description-section/details-statistic-
 
 import { GVTab, GVTabs } from "gv-react-components";
 import React, { Fragment, PureComponent } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import DetailsChartLoader from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-chart-loader";
 import Surface from "shared/components/surface/surface";
 
@@ -66,4 +66,4 @@ class ProgramDetailsChartSection extends PureComponent {
   }
 }
 
-export default translate()(ProgramDetailsChartSection);
+export default withTranslation()(ProgramDetailsChartSection);

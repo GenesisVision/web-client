@@ -1,6 +1,6 @@
 import { GVTab, GVTabs } from "gv-react-components";
 import React, { PureComponent } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import Surface from "shared/components/surface/surface";
 
 import FundsTable from "./funds-table";
@@ -87,4 +87,4 @@ const SearchResultTable = ({ data, children, t }) =>
     <div className="global-search-result__loading">{t("table.loading")}</div>
   );
 
-export default translate()(GlobalSearchResult);
+export default withTranslation()(GlobalSearchResult);

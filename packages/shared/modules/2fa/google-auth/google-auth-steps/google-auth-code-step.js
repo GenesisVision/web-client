@@ -1,7 +1,7 @@
 import classnames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import GVqr from "shared/components/gv-qr/gv-qr";
 
 const GoogleStep2 = ({ t, authenticatorUri, sharedKey, className }) => {
@@ -23,6 +23,6 @@ GoogleStep2.propTypes = {
   sharedKey: PropTypes.string.isRequired
 };
 
-const GoogleCodeStep = translate()(GoogleStep2);
+const GoogleCodeStep = withTranslation()(GoogleStep2);
 
 export default GoogleCodeStep;

@@ -1,17 +1,17 @@
 import { ProgramRequest } from "gv-api-web";
 import * as React from "react";
-import { translate, InjectedTranslateProps } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators, compose } from "redux";
-
-import { ActionType, IDispatchable } from "shared/utils/types";
 import DashboardRequest from "shared/components/dashboard/dashboard-portfolio-chart-section/dashboard-in-requests/dashboard-request";
+import { ASSET, ROLE } from "shared/constants/constants";
+import { ActionType, IDispatchable } from "shared/utils/types";
+
 import {
   CancelRequestType,
   cancelRequestDispatch,
   getAssetRequests
 } from "./services/asset-status.service";
-import { ASSET, ROLE } from "shared/constants/constants";
 
 export interface IAssetStatusRequestsOwnProps {
   id: string;
@@ -33,7 +33,7 @@ export interface IAssetStatusRequestsState {
 
 class AssetStatusRequests extends React.Component<
   IAssetStatusRequestsOwnProps &
-    InjectedTranslateProps &
+    WithTranslation &
     IAssetStatusRequestsDispatchProps,
   IAssetStatusRequestsState
 > {
@@ -93,5 +93,5 @@ export default compose<React.ComponentType<IAssetStatusRequestsOwnProps>>(
     null,
     mapDispatchToProps
   ),
-  translate()
+  withTranslation()
 )(AssetStatusRequests);

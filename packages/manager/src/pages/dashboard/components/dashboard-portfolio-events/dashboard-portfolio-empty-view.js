@@ -1,5 +1,5 @@
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { EvenLogoIcon } from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
 import { EventLogoType } from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo.helper";
 
@@ -65,4 +65,4 @@ const DashboardPortfolioEmptyView = ({ t }) => (
   </div>
 );
 
-export default translate()(DashboardPortfolioEmptyView);
+export default withTranslation()(DashboardPortfolioEmptyView);

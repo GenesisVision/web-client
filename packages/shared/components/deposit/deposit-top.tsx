@@ -1,6 +1,6 @@
 import { ProgramInvestInfo } from "gv-api-web";
 import React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { ASSET, ROLE } from "shared/constants/constants";
 import { formatCurrencyValue } from "shared/utils/formatter";
@@ -11,7 +11,7 @@ export interface IDepositTop {
   asset: ASSET;
   role: ROLE;
 }
-const DepositTop: React.FC<IDepositTop & InjectedTranslateProps> = ({
+const DepositTop: React.FC<IDepositTop & WithTranslation> = ({
   currency,
   info,
   t,
@@ -41,4 +41,4 @@ const DepositTop: React.FC<IDepositTop & InjectedTranslateProps> = ({
   );
 };
 
-export default translate()(DepositTop);
+export default withTranslation()(DepositTop);

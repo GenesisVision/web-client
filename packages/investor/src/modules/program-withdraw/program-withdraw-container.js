@@ -5,7 +5,7 @@ import {
 } from "modules/program-withdraw/servives/program-withdraw.services";
 import PropTypes from "prop-types";
 import React, { PureComponent } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { bindActionCreators } from "redux";
@@ -82,7 +82,7 @@ const mapDispathToProps = dispatch => ({
 });
 
 export default compose(
-  translate(),
+  withTranslation(),
   connect(
     mapStateToProps,
     mapDispathToProps

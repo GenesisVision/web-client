@@ -3,7 +3,7 @@ import moment from "moment";
 import PropTypes from "prop-types";
 import { Fragment } from "react";
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import FormError from "shared/components/form/form-error/form-error";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
@@ -60,4 +60,4 @@ WithdrawConfirmStep.propTypes = {
   disabled: PropTypes.bool
 };
 
-export default translate()(WithdrawConfirmStep);
+export default withTranslation()(WithdrawConfirmStep);

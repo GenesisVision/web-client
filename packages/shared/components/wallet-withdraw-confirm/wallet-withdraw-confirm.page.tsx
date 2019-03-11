@@ -1,6 +1,6 @@
 import * as qs from "qs";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import Page from "shared/components/page/page";
 
 import WalletWithdrawConfirmContainer from "./wallet-withdraw-confirm-container";
@@ -8,7 +8,7 @@ import WalletWithdrawConfirmContainer from "./wallet-withdraw-confirm-container"
 export const WALLET_WITHDRAW_CONFIRM_ROUTE = `/wallet-withdraw-confirm`;
 
 const WalletWithdrawConfirmPage: React.FC<
-  { location: Location } & InjectedTranslateProps
+  { location: Location } & WithTranslation
 > = ({ t, location }) => {
   const queryParams = qs.parse(location.search.slice(1));
 
@@ -19,4 +19,4 @@ const WalletWithdrawConfirmPage: React.FC<
   );
 };
 
-export default translate()(WalletWithdrawConfirmPage);
+export default withTranslation()(WalletWithdrawConfirmPage);

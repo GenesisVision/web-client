@@ -1,7 +1,7 @@
 import "shared/components/programs-rating/programs-rating.scss";
 
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { compose } from "redux";
 import Page from "shared/components/page/page";
 import ProgramsRatingContainer from "shared/components/programs-rating/programs-rating-container";
@@ -20,4 +20,4 @@ class ProgramsRatingPage extends Component {
   }
 }
 
-export default compose(translate())(ProgramsRatingPage);
+export default compose(withTranslation())(ProgramsRatingPage);

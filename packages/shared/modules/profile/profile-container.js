@@ -1,6 +1,6 @@
 import pickBy from "lodash.pickby";
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import profileApi from "shared/services/api-client/profile-api";
 import authService from "shared/services/auth-service";
@@ -62,4 +62,4 @@ class ProfileContainer extends Component {
   }
 }
 
-export default translate()(ProfileContainer);
+export default withTranslation()(ProfileContainer);

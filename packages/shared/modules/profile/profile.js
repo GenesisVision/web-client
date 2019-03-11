@@ -2,7 +2,7 @@ import "./profile.scss";
 
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import GVScroll from "shared/components/scroll/gvscroll";
 import VerificationStatus from "shared/components/verification-status/verification-status";
 
@@ -88,4 +88,4 @@ Profile.propTypes = {
   })
 };
 
-export default translate()(Profile);
+export default withTranslation()(Profile);

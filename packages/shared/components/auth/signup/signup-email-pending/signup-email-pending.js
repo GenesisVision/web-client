@@ -2,7 +2,7 @@ import "./signup-email-pending.scss";
 
 import { GVButton } from "gv-react-components";
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 const SignupEmailPending = ({ t, service }) => {
   return (
@@ -18,4 +18,4 @@ const SignupEmailPending = ({ t, service }) => {
   );
 };
 
-export default translate()(SignupEmailPending);
+export default withTranslation()(SignupEmailPending);

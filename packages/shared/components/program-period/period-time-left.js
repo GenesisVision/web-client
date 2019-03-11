@@ -1,6 +1,6 @@
 import moment from "moment";
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 export const PeriodTimeLeft = ({ t, periodEnds, className }) => {
   const now = moment();
@@ -19,4 +19,4 @@ export const PeriodTimeLeft = ({ t, periodEnds, className }) => {
   return <div className={className}>{renderTimeLeft()}</div>;
 };
 
-export default translate()(PeriodTimeLeft);
+export default withTranslation()(PeriodTimeLeft);

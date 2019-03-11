@@ -4,7 +4,7 @@ import { GVButton } from "gv-react-components";
 import { ProgramDetailContext } from "manager-web-portal/src/pages/programs/program-details/program-details.page";
 import ProgramMakeSignalContainer from "modules/program-make-signal/program-make-signal.container";
 import React, { Component, Fragment } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import SignalProgramInfo from "shared/components/programs/program-details/program-details-description/signal-program-info";
 
 interface ISignalProviderControlOwnProps {
@@ -18,7 +18,7 @@ interface ISignalProviderControlState {
 }
 
 type SignalProviderControlsProps = ISignalProviderControlOwnProps &
-  InjectedTranslateProps;
+  WithTranslation;
 
 class SignalProviderControls extends Component<
   SignalProviderControlsProps,
@@ -91,4 +91,4 @@ class SignalProviderControls extends Component<
   }
 }
 
-export default translate()(SignalProviderControls);
+export default withTranslation()(SignalProviderControls);

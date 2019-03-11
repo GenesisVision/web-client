@@ -2,7 +2,7 @@ import "./wallet-widget.scss";
 
 import classNames from "classnames";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import Chip, { CHIP_TYPE } from "shared/components/chip/chip";
 import { WalletIcon } from "shared/components/icon/wallet-icon";
@@ -28,7 +28,7 @@ interface IWalletWidgetState {
 }
 
 class WalletWidget extends React.Component<
-  IWalletWidgetProps & InjectedTranslateProps,
+  IWalletWidgetProps & WithTranslation,
   IWalletWidgetState
 > {
   state = {
@@ -127,4 +127,4 @@ class WalletWidget extends React.Component<
   }
 }
 
-export default translate()(WalletWidget);
+export default withTranslation()(WalletWidget);

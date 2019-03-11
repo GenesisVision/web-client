@@ -1,7 +1,7 @@
 import "./program-period-tooltip.scss";
 
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 import PeriodTimeLeft from "../period-time-left";
 
@@ -18,4 +18,4 @@ const ProgramPeriodTooltip = ({ t, end }) => {
   );
 };
 
-export default translate()(ProgramPeriodTooltip);
+export default withTranslation()(ProgramPeriodTooltip);

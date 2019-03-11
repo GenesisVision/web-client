@@ -3,7 +3,7 @@ import "./follow-popup.scss";
 import { CopyTradingAccountInfo, WalletData, WalletInfo } from "gv-api-web";
 import * as React from "react";
 import { Fragment } from "react";
-import { TranslationFunction, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 
 import FollowCreateAccount from "./follow-popup-create-account";
 import FollowParams from "./follow-popup-params";
@@ -26,7 +26,6 @@ export interface IFollowFormProps {
   wallets: WalletData[];
   currency: string;
   programName: string;
-  t: TranslationFunction;
 }
 interface IFollowFormState {
   step: TABS;
@@ -42,7 +41,10 @@ export interface IRequestParams {
   initialDepositCurrency?: string;
   initialDepositAmount?: number;
 }
-class FollowForm extends React.Component<IFollowFormProps, IFollowFormState> {
+class FollowForm extends React.Component<
+  IFollowFormProps & WithTranslation,
+  IFollowFormState
+> {
   state = {
     requestParams: {},
     step: TABS.CREATE_ACCOUNT,
@@ -111,4 +113,4 @@ class FollowForm extends React.Component<IFollowFormProps, IFollowFormState> {
   }
 }
 
-export default translate()(FollowForm);
+export default withTranslation()(FollowForm);

@@ -2,7 +2,7 @@ import { GVButton } from "gv-react-components";
 import PropTypes from "prop-types";
 import { Fragment } from "react";
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { convertFromCurrency } from "shared/utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
@@ -78,4 +78,4 @@ WithdrawEnterAmountStep.propTypes = {
   disabled: PropTypes.bool
 };
 
-export default translate()(WithdrawEnterAmountStep);
+export default withTranslation()(WithdrawEnterAmountStep);

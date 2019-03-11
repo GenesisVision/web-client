@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 
 class DashboardChartAsset extends Component {
@@ -32,4 +32,4 @@ class DashboardChartAsset extends Component {
   }
 }
 
-export default translate()(DashboardChartAsset);
+export default withTranslation()(DashboardChartAsset);

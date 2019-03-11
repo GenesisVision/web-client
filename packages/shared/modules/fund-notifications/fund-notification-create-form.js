@@ -1,7 +1,7 @@
 import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import Select from "shared/components/select/select";
@@ -69,7 +69,7 @@ class FundNotificationCreateForm extends Component {
 FundNotificationCreateForm.propTypes = {};
 
 export default compose(
-  translate(),
+  withTranslation(),
   withFormik({
     displayName: "create-notification",
     mapPropsToValues: () => ({

@@ -1,7 +1,7 @@
 import { GVTextField } from "gv-react-components";
 import * as moment from "moment";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import GVDatePicker from "shared/components/gv-datepicker/gv-datepicker";
 
 import {
@@ -19,7 +19,7 @@ interface IDateRangeFilterValuesProps {
 }
 
 class DateRangeFilterValues extends React.Component<
-  IDateRangeFilterValuesProps & InjectedTranslateProps
+  IDateRangeFilterValuesProps & WithTranslation
 > {
   handleOnChange = (type: keyof IDataRangeFilterValue) => (
     e: React.ChangeEvent<any>
@@ -114,4 +114,4 @@ class DateRangeFilterValues extends React.Component<
   }
 }
 
-export default translate()(DateRangeFilterValues);
+export default withTranslation()(DateRangeFilterValues);

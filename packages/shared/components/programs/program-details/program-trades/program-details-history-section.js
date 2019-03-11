@@ -3,7 +3,7 @@ import "shared/components/details/details-description-section/details-statistic-
 import { GVTab, GVTabs } from "gv-react-components";
 import * as PropTypes from "prop-types";
 import React, { PureComponent } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import connect from "react-redux/es/connect/connect";
 import { compose } from "redux";
 import PortfolioEventsTable from "shared/components/portfolio-events-table/portfolio-events-table";
@@ -122,6 +122,6 @@ const mapStateToProps = state => {
   return { isAuthenticated };
 };
 
-export default translate()(
+export default withTranslation()(
   compose(connect(mapStateToProps))(ProgramDetailsHistorySection)
 );

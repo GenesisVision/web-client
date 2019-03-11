@@ -1,5 +1,5 @@
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import Page from "shared/components/page/page";
 import ProgramNotificationsContainer from "shared/modules/program-notifications/program-notifications-container";
 const ProgramNotificationPage = ({ t, match }) => {
@@ -16,4 +16,4 @@ const ProgramNotificationPage = ({ t, match }) => {
   );
 };
 
-export default translate()(ProgramNotificationPage);
+export default withTranslation()(ProgramNotificationPage);

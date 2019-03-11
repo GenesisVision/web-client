@@ -1,7 +1,7 @@
 import { GVButton } from "gv-react-components";
 import { Range } from "rc-slider";
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 class LevelFilterPopover extends Component {
   state = {
@@ -57,4 +57,4 @@ class LevelFilterPopover extends Component {
   }
 }
 
-export default translate()(LevelFilterPopover);
+export default withTranslation()(LevelFilterPopover);

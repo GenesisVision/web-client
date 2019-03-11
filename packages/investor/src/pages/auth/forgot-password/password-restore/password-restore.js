@@ -2,7 +2,7 @@ import "shared/components/auth/forgot-password/password-restore/password-restore
 
 import qs from "qs";
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import PasswordRestoreContainer from "shared/components/auth/forgot-password/password-restore/password-restore-container";
 
 import forgotPasswordService from "../services/forgot-password.service";
@@ -22,4 +22,4 @@ const PasswordRestore = ({ location, t }) => {
   );
 };
 
-export default translate()(PasswordRestore);
+export default withTranslation()(PasswordRestore);

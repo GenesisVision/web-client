@@ -1,16 +1,12 @@
 import * as React from "react";
 import DocumentTitle from "react-document-title";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import BackButton from "shared/components/back-button/back-button";
 
 interface IPage {
   title: string;
 }
-const Page: React.FC<IPage & InjectedTranslateProps> = ({
-  t,
-  title,
-  children
-}) => {
+const Page: React.FC<IPage & WithTranslation> = ({ t, title, children }) => {
   return (
     <DocumentTitle
       title={t(`${process.env.REACT_APP_PLATFORM}.app.title`) + title}
@@ -23,4 +19,4 @@ const Page: React.FC<IPage & InjectedTranslateProps> = ({
   );
 };
 
-export default translate()(Page);
+export default withTranslation()(Page);

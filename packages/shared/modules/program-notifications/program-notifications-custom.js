@@ -1,7 +1,7 @@
 import { GVButton } from "gv-react-components";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 import Chip from "shared/components/chip/chip";
@@ -91,7 +91,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default compose(
-  translate(),
+  withTranslation(),
   connect(
     mapStateToProps,
     mapDispatchToProps

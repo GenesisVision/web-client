@@ -3,7 +3,7 @@ import { FormikProps, withFormik } from "formik";
 import { ChangePasswordViewModel } from "gv-api-web";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import React, { ComponentType } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { compose } from "redux";
 
 import { passwordChangeValidationSchema } from "./password-change.validators";
@@ -14,7 +14,7 @@ interface IPasswordChangeFormOwnProps {
   onSubmit(values: ChangePasswordViewModel): void;
 }
 
-type PasswordChangeFormProps = InjectedTranslateProps &
+type PasswordChangeFormProps = WithTranslation &
   IPasswordChangeFormOwnProps &
   FormikProps<ChangePasswordViewModel>;
 const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({
@@ -77,7 +77,7 @@ const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({
 };
 
 export default compose<ComponentType<IPasswordChangeFormOwnProps>>(
-  translate(),
+  withTranslation(),
   withFormik<IPasswordChangeFormOwnProps, ChangePasswordViewModel>({
     displayName: "change-password",
     mapPropsToValues: () => ({

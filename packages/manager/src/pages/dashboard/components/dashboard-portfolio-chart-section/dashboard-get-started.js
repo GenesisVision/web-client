@@ -1,6 +1,6 @@
 import { GVButton } from "gv-react-components";
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes";
 
@@ -46,4 +46,4 @@ const DashboardGetStarted = ({ t }) => {
   );
 };
 
-export default translate()(DashboardGetStarted);
+export default withTranslation()(DashboardGetStarted);

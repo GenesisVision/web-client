@@ -1,7 +1,7 @@
 import "./gvt-fees.scss";
 
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import Dialog from "shared/components/dialog/dialog";
 import { ROLE } from "shared/constants/constants";
 
@@ -11,7 +11,7 @@ interface IGVTFees {
   role: string;
 }
 
-const GVTFees: React.FC<IGVTFees & InjectedTranslateProps> = ({
+const GVTFees: React.FC<IGVTFees & WithTranslation> = ({
   t,
   open,
   onClose,
@@ -117,4 +117,4 @@ const GVTFees: React.FC<IGVTFees & InjectedTranslateProps> = ({
     </Dialog>
   );
 };
-export default translate()(GVTFees);
+export default withTranslation()(GVTFees);

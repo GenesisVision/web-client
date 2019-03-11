@@ -5,7 +5,7 @@ import { GVFormikField, GVTextField } from "gv-react-components";
 import moment from "moment";
 import PropTypes from "prop-types";
 import React, { Component, Fragment } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import GVScroll from "shared/components/scroll/gvscroll";
 import VerificationStatus from "shared/components/verification-status/verification-status";
 import About from "shared/modules/about/about";
@@ -145,4 +145,4 @@ const ProfileForm = withFormik({
   }
 })(Profile);
 
-export default translate()(ProfileForm);
+export default withTranslation()(ProfileForm);

@@ -2,7 +2,7 @@ import { FormikProps, withFormik } from "formik";
 import { ProgramInvestInfo, WalletData } from "gv-api-web";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
@@ -39,7 +39,7 @@ export interface FormValues {
   walletCurrency: string;
 }
 
-type OwnProps = InjectedTranslateProps &
+type OwnProps = WithTranslation &
   IDepositFormOwnProps &
   FormikProps<FormValues>;
 
@@ -292,7 +292,7 @@ class DepositForm extends React.Component<OwnProps> {
 }
 
 export default compose<React.ComponentType<IDepositFormOwnProps>>(
-  translate(),
+  withTranslation(),
   withFormik({
     displayName: "invest-form",
     mapPropsToValues: () => ({
@@ -301,7 +301,7 @@ export default compose<React.ComponentType<IDepositFormOwnProps>>(
       amount: "",
       walletCurrency: "GVT"
     }),
-    validationSchema: (params: InjectedTranslateProps & OwnProps) => {
+    validationSchema: (params: WithTranslation & OwnProps) => {
       const { info, t, currency } = params;
       return lazy((values: any) =>
         object().shape({

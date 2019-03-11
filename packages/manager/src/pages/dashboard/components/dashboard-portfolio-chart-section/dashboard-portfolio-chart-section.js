@@ -1,7 +1,7 @@
 import "./dashboard-portfolio-chart-section.scss";
 
 import React, { Component, Fragment } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { compose } from "redux";
@@ -60,7 +60,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default compose(
-  translate(),
+  withTranslation(),
   connect(
     mapStateToProps,
     mapDispatchToProps

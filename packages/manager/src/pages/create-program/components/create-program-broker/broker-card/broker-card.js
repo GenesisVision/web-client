@@ -2,7 +2,7 @@ import "./broker-card.scss";
 
 import classnames from "classnames";
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 import { BrokerCardState } from "./broker-card.constants";
 import { getBrokerCardImage, slugBrokerName } from "./broker-card.helpers";
@@ -50,4 +50,4 @@ const BrokerCard = ({
   );
 };
 
-export default translate()(BrokerCard);
+export default withTranslation()(BrokerCard);

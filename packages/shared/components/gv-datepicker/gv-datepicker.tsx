@@ -2,14 +2,14 @@ import "./gv-datepicker.scss";
 
 import * as moment from "moment";
 import * as React from "react";
+import { RefObject } from "react";
 import Calendar from "react-calendar";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
 } from "shared/components/popover/popover";
 import { Nullable } from "shared/utils/types";
-import { RefObject } from "react";
 
 export const DATE_FORMAT = "ll";
 
@@ -161,4 +161,4 @@ class GVDatePicker extends React.Component<
   }
 }
 
-export default translate()(GVDatePicker);
+export default withTranslation()(GVDatePicker);

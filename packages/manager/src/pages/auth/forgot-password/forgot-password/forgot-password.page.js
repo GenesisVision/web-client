@@ -1,7 +1,7 @@
 import "shared/components/auth/forgot-password/forgot-password/forgot-password.scss";
 
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import ForgotPasswordContainer from "shared/components/auth/forgot-password/forgot-password/forgot-password-container";
 
 import { LOGIN_ROUTE } from "../../login/login.routes";
@@ -21,4 +21,4 @@ const ForgotPasswordPage = ({ t }) => {
   );
 };
 
-export default translate()(ForgotPasswordPage);
+export default withTranslation()(ForgotPasswordPage);

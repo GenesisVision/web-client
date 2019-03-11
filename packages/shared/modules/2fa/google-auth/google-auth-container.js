@@ -1,7 +1,7 @@
 import "./google-auth.scss";
 
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 import authApi from "shared/services/api-client/auth-api";
@@ -65,7 +65,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default compose(
-  translate(),
+  withTranslation(),
   connect(
     null,
     mapDispatchToProps

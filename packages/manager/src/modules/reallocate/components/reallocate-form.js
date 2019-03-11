@@ -1,7 +1,7 @@
 import { withFormik } from "formik";
 import { GVButton } from "gv-react-components";
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { compose } from "redux";
 import ErrorMessage, {
   OVER
@@ -122,7 +122,7 @@ class ReallocateForm extends Component {
   }
 }
 export default compose(
-  translate(),
+  withTranslation(),
   withFormik({
     displayName: "reallocate",
     enableReinitialize: true,

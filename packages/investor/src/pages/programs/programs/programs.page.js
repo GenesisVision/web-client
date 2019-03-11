@@ -1,5 +1,5 @@
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import FacetCardsContainer from "shared/components/facet-cards/faset-cards-container";
 import NavigationTabsContainer from "shared/components/navigation-tabs/navigation-tabs-container";
 import Page from "shared/components/page/page";
@@ -34,4 +34,4 @@ const ProgramsPage = ({ t }) => {
   );
 };
 
-export default translate()(ProgramsPage);
+export default withTranslation()(ProgramsPage);

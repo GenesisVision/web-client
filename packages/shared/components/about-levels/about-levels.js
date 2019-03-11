@@ -1,7 +1,7 @@
 import "./about-level.scss";
 
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import Dialog from "shared/components/dialog/dialog";
 
@@ -91,4 +91,4 @@ class AboutLevelsComponent extends Component {
     );
   }
 }
-export default translate()(AboutLevelsComponent);
+export default withTranslation()(AboutLevelsComponent);

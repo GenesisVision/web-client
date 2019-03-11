@@ -3,7 +3,7 @@ import "./navigation-back-button.scss";
 import { goBack } from "connected-react-router";
 import { GVButton } from "gv-react-components";
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import connect from "react-redux/es/connect/connect";
 import { bindActionCreators, compose } from "redux";
 
@@ -23,7 +23,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const NavigationBackButton = compose(
-  translate(),
+  withTranslation(),
   connect(
     null,
     mapDispatchToProps,

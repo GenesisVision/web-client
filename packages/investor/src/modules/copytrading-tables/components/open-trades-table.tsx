@@ -4,16 +4,17 @@ import { OrderOpenSignalSlaveModel } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import moment from "moment";
 import React, { Component, ComponentType } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { Action, bindActionCreators, compose, Dispatch } from "redux";
+import { Action, Dispatch, bindActionCreators, compose } from "redux";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import { CloseIcon } from "shared/components/icon/close-icon";
 import Profitability from "shared/components/profitability/profitability";
+import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import { TableCell } from "shared/components/table/components";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
@@ -31,7 +32,6 @@ import {
 } from "../services/copytrading-tables.service";
 import { COPYTRADING_OPEN_TRADES_COLUMNS } from "./copytrading-tables.constants";
 import { dashboardOpenTradesTableSelector } from "./copytrading-tables.selectors";
-import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 
 interface IOpenTradesTableOwnProps {
   title: string;
@@ -50,7 +50,7 @@ interface IOpenTradesTableState {
 }
 
 class OpenTradesTable extends Component<
-  IOpenTradesTableOwnProps & InjectedTranslateProps & IOpenTradesDispatchProps,
+  IOpenTradesTableOwnProps & WithTranslation & IOpenTradesDispatchProps,
   IOpenTradesTableState
 > {
   state = {
@@ -204,7 +204,7 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
 });
 
 export default compose<ComponentType<IOpenTradesTableOwnProps>>(
-  translate(),
+  withTranslation(),
   connect(
     null,
     mapDispatchToProps

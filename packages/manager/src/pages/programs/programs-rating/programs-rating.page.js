@@ -1,7 +1,7 @@
 import "shared/components/programs-rating/programs-rating.scss";
 
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import connect from "react-redux/es/connect/connect";
 import { compose } from "redux";
 import Page from "shared/components/page/page";
@@ -28,6 +28,6 @@ const mapStateToProps = state => {
 };
 
 export default compose(
-  translate(),
+  withTranslation(),
   connect(mapStateToProps)
 )(ProgramsRatingPage);

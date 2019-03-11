@@ -1,7 +1,6 @@
 import { WalletData } from "gv-api-web";
 import React from "react";
-import { InjectedTranslateProps } from "react-i18next";
-import translate from "react-i18next/src/translate";
+import { WithTranslation, withTranslation } from "react-i18next";
 import Chip from "shared/components/chip/chip";
 import Tooltip from "shared/components/tooltip/tooltip";
 import ArrowIcon from "shared/media/arrow-up.svg";
@@ -14,9 +13,7 @@ interface IWalletListButton {
   handleOpenAddFundsPopup(wallet: WalletData): void;
 }
 
-const WalletListButton: React.FC<
-  IWalletListButton & InjectedTranslateProps
-> = ({
+const WalletListButton: React.FC<IWalletListButton & WithTranslation> = ({
   t,
   wallet,
   handleOpenTransferPopup,
@@ -78,4 +75,4 @@ const WalletListButton: React.FC<
   </React.Fragment>
 );
 
-export default translate()(WalletListButton);
+export default withTranslation()(WalletListButton);

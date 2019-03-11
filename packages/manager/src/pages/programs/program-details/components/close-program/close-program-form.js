@@ -2,7 +2,7 @@ import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import PropTypes from "prop-types";
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { compose } from "redux";
 import { object, string } from "yup";
 
@@ -69,7 +69,7 @@ const twoFactorvalidator = (t, twoFactorEnabled) => {
 };
 
 export default compose(
-  translate(),
+  withTranslation(),
   withFormik({
     displayName: "close-program",
     mapPropsToValues: props => {

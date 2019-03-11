@@ -2,7 +2,7 @@ import "shared/components/details/details-description-section/details-statistic-
 
 import * as PropTypes from "prop-types";
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import FundAssetImage from "shared/components/avatar/fund-asset-image/fund-asset-image";
 import { FUND_STRUCTURE_COLUMNS } from "shared/components/funds/fund-details/fund-details.constants";
@@ -95,4 +95,4 @@ FundStructure.propTypes = {
   fetchStructure: PropTypes.func.isRequired
 };
 
-export default translate()(FundStructure);
+export default withTranslation()(FundStructure);

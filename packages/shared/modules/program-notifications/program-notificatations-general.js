@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 import GeneralNotification from "shared/components/general-notification/general-notification";
@@ -90,7 +90,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default compose(
-  translate(),
+  withTranslation(),
   connect(
     undefined,
     mapDispatchToProps

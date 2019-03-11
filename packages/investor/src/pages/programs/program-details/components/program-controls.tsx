@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 
 import InvestmentProgramControls from "./investment-program-controls";
 import SignalProviderControls from "./signal-provider-controls";
@@ -12,7 +12,7 @@ interface IProgramControlsProps {
 }
 
 class ProgramControls extends Component<
-  IProgramControlsProps & InjectedTranslateProps
+  IProgramControlsProps & WithTranslation
 > {
   render() {
     const { programDescription, isAuthenticated, redirectToLogin } = this.props;
@@ -42,4 +42,4 @@ class ProgramControls extends Component<
   }
 }
 
-export default translate()(ProgramControls);
+export default withTranslation()(ProgramControls);

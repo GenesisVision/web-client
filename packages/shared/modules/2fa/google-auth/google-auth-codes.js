@@ -2,7 +2,7 @@ import copy from "copy-to-clipboard";
 import { GVButton } from "gv-react-components";
 import PropTypes from "prop-types";
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import CopyIcon from "shared/components/icon/copy-icon";
@@ -54,7 +54,7 @@ const GoogleAuth = ({ t, codes, notifySuccess, notifyError }) => {
 };
 
 const GoogleAuthCodes = compose(
-  translate(),
+  withTranslation(),
   connect(
     undefined,
     dispatch => ({

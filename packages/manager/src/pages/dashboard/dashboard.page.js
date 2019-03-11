@@ -1,7 +1,7 @@
 import "shared/components/dashboard/dashboard.scss";
 
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import Page from "shared/components/page/page";
 import Surface from "shared/components/surface/surface";
 
@@ -32,4 +32,4 @@ const DashboardPage = ({ t }) => {
   );
 };
 
-export default translate()(DashboardPage);
+export default withTranslation()(DashboardPage);

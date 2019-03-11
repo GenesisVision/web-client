@@ -1,7 +1,7 @@
 import "./programs-rating.scss";
 
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import Profitability from "shared/components/profitability/profitability";
@@ -33,4 +33,4 @@ const ProgramsRatingStats = ({ t, levelData }) => (
   </div>
 );
 
-export default compose(translate())(ProgramsRatingStats);
+export default compose(withTranslation())(ProgramsRatingStats);

@@ -1,6 +1,6 @@
 import { GVFormikField, GVTextField } from "gv-react-components";
 import React, { FunctionComponent } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import Hint from "shared/components/hint/hint";
 import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
@@ -15,7 +15,7 @@ interface ISignalsFeeFormPartialProps {
 }
 
 const SignalsFeeFormPartial: FunctionComponent<
-  ISignalsFeeFormPartialProps & InjectedTranslateProps
+  ISignalsFeeFormPartialProps & WithTranslation
 > = ({
   t,
   successFeeFieldName,
@@ -80,4 +80,4 @@ const SignalsFeeFormPartial: FunctionComponent<
   );
 };
 
-export default translate()(SignalsFeeFormPartial);
+export default withTranslation()(SignalsFeeFormPartial);

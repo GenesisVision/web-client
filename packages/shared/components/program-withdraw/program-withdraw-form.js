@@ -1,7 +1,7 @@
 import { withFormik } from "formik";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { compose } from "redux";
 import { number, object } from "yup";
 
@@ -83,7 +83,7 @@ ProgramWithdrawForm.propTypes = {
 };
 
 export default compose(
-  translate(),
+  withTranslation(),
   withFormik({
     displayName: "withdraw-form",
     mapPropsToValues: () => ({

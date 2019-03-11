@@ -4,7 +4,7 @@ import classnames from "classnames";
 import { GVProgramPeriod } from "gv-react-components";
 import moment from "moment";
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { STATUS_OLD } from "shared/constants/constants";
 
 const calcDuration = (start, end) => {
@@ -37,4 +37,4 @@ const ProgramPeriodLine = ({ t, start, end, className, status }) => {
   );
 };
 
-export default translate()(ProgramPeriodLine);
+export default withTranslation()(ProgramPeriodLine);

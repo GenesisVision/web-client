@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { calculatePercentage } from "shared/utils/currency-converter";
 import { formatCurrencyValue } from "shared/utils/formatter";
@@ -12,7 +12,7 @@ interface IFundWithdrawResultProps {
 }
 
 const FundWithdrawResult: FunctionComponent<
-  InjectedTranslateProps & IFundWithdrawResultProps
+  WithTranslation & IFundWithdrawResultProps
 > = ({ t, exitFee, availableToWithdraw, percent, currency }) => {
   const amountToWithdraw = calculatePercentage(availableToWithdraw, percent);
   const feeInCurrency = calculatePercentage(amountToWithdraw, exitFee);
@@ -55,4 +55,4 @@ const FundWithdrawResult: FunctionComponent<
   );
 };
 
-export default translate()(FundWithdrawResult);
+export default withTranslation()(FundWithdrawResult);

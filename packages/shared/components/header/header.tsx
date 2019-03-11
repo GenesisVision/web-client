@@ -3,7 +3,7 @@ import "./header.scss";
 import { ProfileHeaderViewModel } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import * as React from "react";
-import { TranslationFunction, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Icon } from "shared/components/icon/icon";
 import { SearchIcon } from "shared/components/icon/search-icon";
@@ -14,23 +14,24 @@ import ProfileWidget from "shared/components/profile-widget/profile-widget";
 import WalletWidgetContainer from "shared/components/wallet-widget/wallet-widget-container";
 import CurrencySelectContainer from "shared/modules/currency-select/components/currency-select-container";
 
-interface IHeaderState {
+type State = {
   isOpenNavigation: boolean;
-}
+};
 
-export interface IHeaderProps {
+type OwnProps = {
   profileHeader?: ProfileHeaderViewModel;
   isAuthenticated: boolean;
   LOGIN_ROUTE: string;
   SIGNUP_ROUTE: string;
   GLOBAL_SEARCH_ROUTE: string;
   backPath: string | undefined;
-  t: TranslationFunction;
   logout(): void;
   openNotifications(): void;
-}
+};
 
-class Header extends React.Component<IHeaderProps, IHeaderState> {
+type Props = OwnProps & WithTranslation;
+
+class Header extends React.Component<Props, State> {
   static defaultProps = {
     profileHeader: {} as ProfileHeaderViewModel
   };
@@ -124,4 +125,4 @@ class Header extends React.Component<IHeaderProps, IHeaderState> {
   }
 }
 
-export default translate()(Header);
+export default withTranslation()(Header);

@@ -3,7 +3,7 @@ import "./dashboard-portfolio-event.scss";
 import * as moment from "moment";
 import PropTypes from "prop-types";
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import PortfolioEventLogo from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
 import Profitability from "shared/components/profitability/profitability";
@@ -86,4 +86,4 @@ DashboardPortfolioEvent.propTypes = {
   event: DashboardPortfolioEventShape
 };
 
-export default translate()(DashboardPortfolioEvent);
+export default withTranslation()(DashboardPortfolioEvent);

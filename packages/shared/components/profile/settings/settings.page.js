@@ -2,7 +2,7 @@ import "./settings.scss";
 
 import { GVButton } from "gv-react-components";
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import ProfileLayout from "shared/components/profile/profile-layout";
 import { PASSWORD_ROUTE } from "shared/components/profile/profile.constants";
@@ -46,4 +46,4 @@ const SettingsPage = ({ t }) => {
   );
 };
 
-export default translate()(SettingsPage);
+export default withTranslation()(SettingsPage);

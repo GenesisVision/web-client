@@ -2,7 +2,7 @@ import "./create-program-broker.scss";
 
 import { GVButton } from "gv-react-components";
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import Surface from "shared/components/surface/surface";
 
 import BrokerCard from "./broker-card/broker-card";
@@ -131,4 +131,4 @@ const CreateProgramBroker = ({
   </div>
 );
 
-export default translate()(CreateProgramBroker);
+export default withTranslation()(CreateProgramBroker);

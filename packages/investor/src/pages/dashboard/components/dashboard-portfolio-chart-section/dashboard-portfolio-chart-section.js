@@ -1,7 +1,7 @@
 import "./dashboard-portfolio-chart-section.scss";
 
 import React, { Component, Fragment } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import connect from "react-redux/es/connect/connect";
 import { compose } from "redux";
 import DashboardInRequestsContainer from "shared/components/dashboard/dashboard-portfolio-chart-section/dashboard-in-requests/dashboard-in-requests-container";
@@ -42,6 +42,6 @@ const mapStateToProps = state => {
 };
 
 export default compose(
-  translate(),
+  withTranslation(),
   connect(mapStateToProps)
 )(DashboardPortfolioChartSection);

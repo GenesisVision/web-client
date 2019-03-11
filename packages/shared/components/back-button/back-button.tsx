@@ -3,9 +3,9 @@ import "./back-button.scss";
 import { CallHistoryMethodAction, goBack } from "connected-react-router";
 import { GVButton } from "gv-react-components";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { connect } from "react-redux";
-import { bindActionCreators, compose, Dispatch } from "redux";
+import { Dispatch, bindActionCreators, compose } from "redux";
 import RootState from "shared/reducers/root-reducer";
 import { ActionType } from "shared/utils/types";
 
@@ -20,9 +20,7 @@ export interface IAssetStatusRequestsDispatchProps {
 }
 
 const BackButton: React.FC<
-  IBackButtonStateProps &
-    InjectedTranslateProps &
-    IAssetStatusRequestsDispatchProps
+  IBackButtonStateProps & WithTranslation & IAssetStatusRequestsDispatchProps
 > = ({ t, service, backPath }) => {
   if (!backPath) return null;
 
@@ -55,7 +53,7 @@ const mapDispatchToProps = (
 });
 
 export default compose(
-  translate(),
+  withTranslation(),
   connect(
     mapStateToProps,
     mapDispatchToProps

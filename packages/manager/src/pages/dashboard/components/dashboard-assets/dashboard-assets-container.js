@@ -2,7 +2,7 @@ import { GVButton } from "gv-react-components";
 import { CREATE_FUND_PAGE_ROUTE } from "pages/create-fund/create-fund.constants";
 import { CREATE_PROGRAM_PAGE_ROUTE } from "pages/create-program/create-program.routes";
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { bindActionCreators, compose } from "redux";
@@ -115,7 +115,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default compose(
-  translate(),
+  withTranslation(),
   connect(
     null,
     mapDispatchToProps

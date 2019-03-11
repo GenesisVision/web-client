@@ -2,15 +2,16 @@ import { OrderClosedSignalSlaveModel } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import moment from "moment";
 import React, { Component, ComponentType, Fragment } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { Action, bindActionCreators, compose, Dispatch } from "redux";
+import { Action, Dispatch, bindActionCreators, compose } from "redux";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
 import BaseProfitability from "shared/components/profitability/base-profitability";
 import Profitability from "shared/components/profitability/profitability";
+import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import { TableCell } from "shared/components/table/components";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
@@ -30,7 +31,6 @@ import { clearCopytradingTable } from "../actions/copytrading-tables.actions";
 import { getCopytradingTradesHistory } from "../services/copytrading-tables.service";
 import { COPYTRADING_TRADES_HISTORY_COLUMNS } from "./copytrading-tables.constants";
 import { dashboardTradesHistoryTableSelector } from "./copytrading-tables.selectors";
-import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 
 interface ITradesHistoryTableOwnProps {
   title: string;
@@ -44,9 +44,7 @@ interface ITradesHistoryDispatchProps {
 }
 
 class TradesHistoryTable extends Component<
-  ITradesHistoryTableOwnProps &
-    InjectedTranslateProps &
-    ITradesHistoryDispatchProps
+  ITradesHistoryTableOwnProps & WithTranslation & ITradesHistoryDispatchProps
 > {
   componentWillUnmount() {
     this.props.service.clearCopytradingTable();
@@ -174,7 +172,7 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
 });
 
 export default compose<ComponentType<ITradesHistoryTableOwnProps>>(
-  translate(),
+  withTranslation(),
   connect(
     null,
     mapDispatchToProps

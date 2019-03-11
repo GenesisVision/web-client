@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 import { CARDS_VIEW, TABLE_VIEW } from "../table.constants";
 import TableLoader from "./table-loader";
@@ -45,4 +45,4 @@ const TableBody = ({
   return <Tag className={className}>{renderItems()}</Tag>;
 };
 
-export default translate()(TableBody);
+export default withTranslation()(TableBody);

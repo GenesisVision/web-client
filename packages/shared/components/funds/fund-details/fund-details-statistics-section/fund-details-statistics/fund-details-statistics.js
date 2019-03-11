@@ -1,7 +1,7 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.scss";
 
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import DetailsStatisticsLoader from "shared/components/details/details-description-section/details-statistic-section/details-loader/details-statistic-loader";
 import Surface from "shared/components/surface/surface";
 
@@ -20,4 +20,4 @@ const FundDetailsStatistics = ({ t, statistic, period }) => {
   );
 };
 
-export default translate()(FundDetailsStatistics);
+export default withTranslation()(FundDetailsStatistics);

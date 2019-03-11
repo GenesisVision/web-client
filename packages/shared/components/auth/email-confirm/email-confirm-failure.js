@@ -1,7 +1,7 @@
 import "./email-confirm-failure.scss";
 
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 const EmailConfirmFailure = ({ t, errorMessage }) => {
   return (
@@ -14,4 +14,4 @@ const EmailConfirmFailure = ({ t, errorMessage }) => {
   );
 };
 
-export default translate()(EmailConfirmFailure);
+export default withTranslation()(EmailConfirmFailure);

@@ -2,7 +2,7 @@ import "./manager-history.scss";
 
 import { GVTab, GVTabs } from "gv-react-components";
 import React, { PureComponent } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import Surface from "shared/components/surface/surface";
 
 import { fetchManagerAssetsCount } from "../services/manager.service";
@@ -75,4 +75,4 @@ class ManagerHistorySection extends PureComponent {
   }
 }
 
-export default translate()(ManagerHistorySection);
+export default withTranslation()(ManagerHistorySection);

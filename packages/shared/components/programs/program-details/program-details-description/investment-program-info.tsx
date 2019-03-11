@@ -1,11 +1,11 @@
 import { ProgramDetailsFull } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import Hint from "shared/components/hint/hint";
+import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
-import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
 
 interface IInvestmentProgramInfoProps {
   isOwnProgram?: boolean;
@@ -13,7 +13,7 @@ interface IInvestmentProgramInfoProps {
 }
 
 const InvestmentProgramInfo: React.FunctionComponent<
-  InjectedTranslateProps & IInvestmentProgramInfoProps
+  WithTranslation & IInvestmentProgramInfoProps
 > = ({ t, programDescription, isOwnProgram }) => {
   const {
     availableInvestmentBase,
@@ -93,4 +93,4 @@ const InvestmentProgramInfo: React.FunctionComponent<
   );
 };
 
-export default translate()(InvestmentProgramInfo);
+export default withTranslation()(InvestmentProgramInfo);

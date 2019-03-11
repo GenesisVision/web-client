@@ -1,6 +1,6 @@
 import { MultiWalletFilters, WalletData } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
@@ -22,9 +22,7 @@ interface IWalletProps {
   filters: MultiWalletFilters[];
 }
 
-class WalletCurrency extends React.Component<
-  IWalletProps & InjectedTranslateProps
-> {
+class WalletCurrency extends React.Component<IWalletProps & WithTranslation> {
   state = {
     isOpenAddFundsPopup: false,
     isOpenWithdrawPopup: false,
@@ -132,5 +130,5 @@ const mapStateToProps = (state: RootState, ownProps) => {
 
 export default compose(
   connect(mapStateToProps),
-  translate()
+  withTranslation()
 )(WalletCurrency);

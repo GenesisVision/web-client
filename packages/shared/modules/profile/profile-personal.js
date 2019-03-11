@@ -1,7 +1,7 @@
 import { GVButton, GVTextField } from "gv-react-components";
 import { Component, Fragment } from "react";
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import { PROFILE_EDIT_ROUTE } from "../../components/profile/profile.constants";
@@ -66,4 +66,4 @@ class ProfilePersonal extends Component {
     );
   }
 }
-export default translate()(ProfilePersonal);
+export default withTranslation()(ProfilePersonal);

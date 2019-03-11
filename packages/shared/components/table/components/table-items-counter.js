@@ -1,5 +1,5 @@
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 const ItemsCounter = ({
   totalPages,
@@ -18,4 +18,4 @@ const ItemsCounter = ({
   );
 };
 
-export default translate()(ItemsCounter);
+export default withTranslation()(ItemsCounter);

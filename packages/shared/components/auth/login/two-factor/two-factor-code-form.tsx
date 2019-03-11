@@ -4,7 +4,7 @@ import { FormikProps, withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import { LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE } from "pages/auth/login/login.routes";
 import React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
 import FormError from "shared/components/form/form-error/form-error";
@@ -14,7 +14,7 @@ interface ITwoFactorValues {
   twoFactorCode: string;
 }
 
-interface ITwoFactorFormProps extends InjectedTranslateProps {
+interface ITwoFactorFormProps extends WithTranslation {
   onSubmit(
     twoFactor: string,
     setSubmitting: (isSubmitting: boolean) => void
@@ -110,7 +110,7 @@ class TwoFactorCodeForm extends React.Component<
 }
 
 export default compose<React.FunctionComponent<ITwoFactorFormProps>>(
-  translate(),
+  withTranslation(),
   withFormik<ITwoFactorFormProps, ITwoFactorValues>({
     displayName: "twoFactorForm",
     mapPropsToValues: () => ({

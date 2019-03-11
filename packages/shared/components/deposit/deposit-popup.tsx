@@ -2,9 +2,8 @@ import "./deposit.scss";
 
 import { ProgramInvestInfo, WalletData } from "gv-api-web";
 import React, { Fragment } from "react";
-import translate from "react-i18next/src/translate";
 import { connect } from "react-redux";
-import { Dispatch, bindActionCreators, compose } from "redux";
+import { Dispatch, bindActionCreators } from "redux";
 import * as WalletServices from "shared/components/wallet/services/wallet.services";
 import { ASSET, ROLE } from "shared/constants/constants";
 import RootState from "shared/reducers/root-reducer";
@@ -35,6 +34,7 @@ export interface IDepositPopupProps {
 export interface IDepositPopupDispatchProps {
   service: any;
 }
+
 class DepositPopup extends React.Component<
   IDepositPopupProps & IDepositPopupDispatchProps
 > {
@@ -92,10 +92,7 @@ const mapStateToProps = (state: RootState) => ({
     : null
 });
 
-export default compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
-  translate()
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
 )(DepositPopup);

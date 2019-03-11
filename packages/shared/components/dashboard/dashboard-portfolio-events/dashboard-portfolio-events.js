@@ -3,7 +3,7 @@ import "./dashboard-portfolio-events.scss";
 import { GVButton } from "gv-react-components";
 import * as PropTypes from "prop-types";
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { compose } from "redux";
 import GVScroll from "shared/components/scroll/gvscroll";
@@ -80,4 +80,4 @@ DashboardPortfolioEvents.propTypes = {
   eventView: PropTypes.oneOfType([PropTypes.object, PropTypes.func]).isRequired
 };
 
-export default compose(translate())(DashboardPortfolioEvents);
+export default compose(withTranslation())(DashboardPortfolioEvents);

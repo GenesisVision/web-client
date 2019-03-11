@@ -2,7 +2,7 @@ import "./deposit-details.scss";
 
 import classNames from "classnames";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { RefreshIcon } from "shared/components/icon/refresh-icon";
 
@@ -14,9 +14,7 @@ interface IDepositDetailsProps {
   titleClassName?: string;
 }
 
-const DepositDetails: React.FC<
-  IDepositDetailsProps & InjectedTranslateProps
-> = ({
+const DepositDetails: React.FC<IDepositDetailsProps & WithTranslation> = ({
   t,
   available,
   service,
@@ -56,4 +54,4 @@ const DepositDetails: React.FC<
   );
 };
 
-export default translate()(DepositDetails);
+export default withTranslation()(DepositDetails);

@@ -10,7 +10,7 @@ import {
   GVTextField
 } from "gv-react-components";
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import DepositButtonContainer from "shared/components/deposit-button-submit/deposit-button";
 import InputImage from "shared/components/form/input-image/input-image";
@@ -458,7 +458,7 @@ class CreateFundSettings extends React.Component {
   }
 }
 
-export default translate()(
+export default withTranslation()(
   withFormik({
     displayName: "CreateFundSettingsForm",
     enableReinitialize: true,

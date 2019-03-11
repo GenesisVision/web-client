@@ -4,7 +4,7 @@ import { NotificationList, NotificationViewModel } from "gv-api-web";
 import moment from "moment";
 import { NOTIFICATIONS_ROUTE } from "pages/notifications/notifications.routes";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import Chip, { CHIP_TYPE } from "shared/components/chip/chip";
 import { Icon } from "shared/components/icon/icon";
@@ -22,7 +22,7 @@ type OwnProps = {
   notifications: NotificationViewModel[];
 };
 
-type Props = OwnProps & InjectedTranslateProps;
+type Props = OwnProps & WithTranslation;
 
 type NotificationGroups = { [name: number]: NotificationViewModel[] };
 
@@ -134,4 +134,4 @@ class Notifications extends React.Component<Props> {
   }
 }
 
-export default translate()(Notifications);
+export default withTranslation()(Notifications);

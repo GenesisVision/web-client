@@ -3,7 +3,7 @@ import "shared/components/details/details-description-section/details-statistic-
 import moment from "moment";
 import * as PropTypes from "prop-types";
 import React, { Component, Fragment } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import BaseProfitability from "shared/components/profitability/base-profitability";
 import Profitability from "shared/components/profitability/profitability";
@@ -120,4 +120,4 @@ ProgramTrades.propTypes = {
   fetchTrades: PropTypes.func.isRequired
 };
 
-export default translate()(ProgramTrades);
+export default withTranslation()(ProgramTrades);

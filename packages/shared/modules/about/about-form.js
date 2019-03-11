@@ -2,7 +2,7 @@ import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import PropTypes from "prop-types";
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { compose } from "redux";
 import GVScroll from "shared/components/scroll/gvscroll";
 
@@ -74,7 +74,7 @@ AboutForm.propTypes = {
 };
 
 export default compose(
-  translate(),
+  withTranslation(),
   withFormik({
     displayName: "about-manager",
     mapPropsToValues: props => ({

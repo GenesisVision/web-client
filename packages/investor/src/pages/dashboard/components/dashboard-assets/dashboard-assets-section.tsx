@@ -6,7 +6,7 @@ import {
   getDashboardPrograms
 } from "pages/dashboard/services/dashboard-assets.service";
 import React, { Component, ComponentType } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { Action, Dispatch, bindActionCreators, compose } from "redux";
 import DashboardFunds from "shared/components/dashboard/dashboard-assets/dashboard-funds/dashboard-funds";
@@ -42,7 +42,7 @@ interface IDashboardAssetsState extends IDashboardAssetsCounts {
 }
 
 class DashboardAssetsSection extends Component<
-  IDashboardOwnProps & IDashboardAssetsProps & InjectedTranslateProps,
+  IDashboardOwnProps & IDashboardAssetsProps & WithTranslation,
   IDashboardAssetsState
 > {
   state = {
@@ -125,7 +125,7 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
 });
 
 export default compose<ComponentType<IDashboardOwnProps>>(
-  translate(),
+  withTranslation(),
   connect(
     null,
     mapDispatchToProps

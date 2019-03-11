@@ -1,6 +1,6 @@
 import moment from "moment";
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 const PropgramPeriodEndTooltip = ({ t, periodEnds }) => {
   const renderTime = () => {
@@ -19,4 +19,4 @@ const PropgramPeriodEndTooltip = ({ t, periodEnds }) => {
   );
 };
 
-export default translate()(PropgramPeriodEndTooltip);
+export default withTranslation()(PropgramPeriodEndTooltip);

@@ -3,7 +3,7 @@ import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { compose } from "redux";
 import GVqr from "shared/components/gv-qr/gv-qr";
 import CopyIcon from "shared/components/icon/copy-icon";
@@ -97,7 +97,7 @@ WalletAddFundsForm.propTypes = {
 };
 
 export default compose(
-  translate(),
+  withTranslation(),
   withFormik({
     displayName: "add-funds",
     mapPropsToValues: props => {

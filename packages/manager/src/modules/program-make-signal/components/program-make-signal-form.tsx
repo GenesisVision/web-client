@@ -2,7 +2,7 @@ import { FormikProps, withFormik } from "formik";
 import { GVButton } from "gv-react-components";
 import SignalsFeeFormPartial from "pages/create-program/components/create-program-settings/signals-fee-form.partial";
 import React, { ComponentType, FunctionComponent } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { compose } from "redux";
 
 import { makeSignalValidationSchema } from "./program-make-signal.validators";
@@ -26,7 +26,7 @@ export interface IMakeSignalFormValues {
   [FORM_FIELDS.subscriptionFee]?: number;
 }
 
-type MakeSignalFormProps = InjectedTranslateProps &
+type MakeSignalFormProps = WithTranslation &
   IMakeSignalFormOwnProps &
   FormikProps<IMakeSignalFormValues>;
 const MakeSignalForm: FunctionComponent<MakeSignalFormProps> = ({
@@ -68,7 +68,7 @@ const MakeSignalForm: FunctionComponent<MakeSignalFormProps> = ({
 };
 
 export default compose<ComponentType<IMakeSignalFormOwnProps>>(
-  translate(),
+  withTranslation(),
   withFormik<IMakeSignalFormOwnProps, IMakeSignalFormValues>({
     displayName: "make-signal-form",
     mapPropsToValues: () => ({

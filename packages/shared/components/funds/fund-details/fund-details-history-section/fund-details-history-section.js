@@ -2,7 +2,7 @@ import "shared/components/details/details-description-section/details-statistic-
 
 import * as PropTypes from "prop-types";
 import React, { PureComponent } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import Surface from "shared/components/surface/surface";
 
 import FundStructure from "./fund-structure/fund-structure";
@@ -30,4 +30,4 @@ FundDetailsHistorySection.propTypes = {
   fetchFundStructure: PropTypes.func.isRequired
 };
 
-export default translate()(FundDetailsHistorySection);
+export default withTranslation()(FundDetailsHistorySection);

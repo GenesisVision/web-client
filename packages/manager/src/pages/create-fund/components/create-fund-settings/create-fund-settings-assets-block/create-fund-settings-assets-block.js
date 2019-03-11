@@ -1,7 +1,7 @@
 import "../create-fund-settings.scss";
 
 import React, { Fragment } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import AddButton from "shared/components/add-button/add-button";
 import FundAssetRatio from "shared/components/fund-asset-ratio/fund-asset-ratio";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
@@ -60,4 +60,4 @@ class CreateFundSettingsAssetsComponent extends React.Component {
     );
   }
 }
-export default translate()(CreateFundSettingsAssetsComponent);
+export default withTranslation()(CreateFundSettingsAssetsComponent);

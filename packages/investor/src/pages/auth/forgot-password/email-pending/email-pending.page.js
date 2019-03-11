@@ -1,7 +1,7 @@
 import "shared/components/auth/forgot-password/email-pending/email-pending.scss";
 
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import EmailPendingContainer from "shared/components/auth/forgot-password/email-pending/email-pending-container";
 
 import forgotPasswordService from "../services/forgot-password.service";
@@ -23,4 +23,4 @@ const EmailPendingPage = ({ t }) => {
   );
 };
 
-export default translate()(EmailPendingPage);
+export default withTranslation()(EmailPendingPage);

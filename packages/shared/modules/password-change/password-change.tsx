@@ -2,7 +2,7 @@ import "./password-change.scss";
 
 import { ChangePasswordViewModel } from "gv-api-web";
 import * as React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators, compose } from "redux";
 
@@ -61,7 +61,7 @@ const PasswordChangeContainer = compose(
     null,
     mapDispatchToProps
   ),
-  translate()
+  withTranslation()
 )(PasswordChange);
 
 export default PasswordChangeContainer;

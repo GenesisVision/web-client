@@ -1,7 +1,7 @@
 import { HOME_ROUTE } from "pages/app/app.routes";
 import { SIGNUP_ROUTE } from "pages/auth/signup/signup.routes";
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { Route, Switch } from "react-router-dom";
 import AuthLayout from "shared/components/auth/components/auth-layout/auth-layout";
 import LoginFooter from "shared/components/auth/components/login-footer/login-footer";
@@ -32,4 +32,4 @@ const LoginRoutes = ({ t }) => (
   </AuthLayout>
 );
 
-export default translate()(LoginRoutes);
+export default withTranslation()(LoginRoutes);

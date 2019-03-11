@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatValue } from "shared/utils/formatter";
@@ -9,7 +9,7 @@ interface ISignalProgramInfoProps {
 }
 
 const SignalProgramInfo: FunctionComponent<
-  InjectedTranslateProps & ISignalProgramInfoProps
+  WithTranslation & ISignalProgramInfoProps
 > = ({ t, programDescription }) => {
   return (
     <div className="program-details-description__statistic-container">
@@ -39,4 +39,4 @@ const SignalProgramInfo: FunctionComponent<
   );
 };
 
-export default translate()(SignalProgramInfo);
+export default withTranslation()(SignalProgramInfo);

@@ -1,7 +1,6 @@
 import "./pie-container.scss";
 
 import React from "react";
-import { translate } from "react-i18next";
 
 import Pie, { PIE_DIRECTION } from "./pie";
 
@@ -32,4 +31,4 @@ const PieContainer: React.FunctionComponent<IPieContainer> = ({
   );
 };
 
-export default translate()(PieContainer);
+export default PieContainer;

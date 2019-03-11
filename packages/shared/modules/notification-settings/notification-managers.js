@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import replaceParams from "shared/utils/replace-params";
 
 import NotificationEntity from "./notification-entity";
@@ -45,4 +45,4 @@ NotificationManagers.propTypes = {
   )
 };
 
-export default translate()(NotificationManagers);
+export default withTranslation()(NotificationManagers);

@@ -2,7 +2,7 @@ import "./select-filter.scss";
 
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 import Filter from "../filter";
 import SelectFilterPopover from "./select-filter-popover";
@@ -41,4 +41,4 @@ SelectFilter.propTypes = {
   onChange: PropTypes.func
 };
 
-export default translate()(SelectFilter);
+export default withTranslation()(SelectFilter);

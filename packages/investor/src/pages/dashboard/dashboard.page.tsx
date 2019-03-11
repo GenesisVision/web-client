@@ -3,7 +3,7 @@ import "shared/components/dashboard/dashboard.scss";
 import "./dashboard.scss";
 
 import React from "react";
-import { TranslationFunction, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import Page from "shared/components/page/page";
 import Surface from "shared/components/surface/surface";
 
@@ -12,11 +12,7 @@ import DashboardChartSection from "./components/dashboard-portfolio-chart-sectio
 import DashboardPortfolioEventsSection from "./components/dashboard-portfolio-events/dashboard-portfolio-events-section";
 import DashboardTrades from "./components/dashboard-trades/dashboard-trades";
 
-interface IDashboardPageProps {
-  t: TranslationFunction;
-}
-
-const DashboardPage: React.FunctionComponent<IDashboardPageProps> = ({ t }) => {
+const DashboardPage: React.FunctionComponent<WithTranslation> = ({ t }) => {
   const title = t(`${process.env.REACT_APP_PLATFORM}.dashboard-page.title`);
   return (
     <Page title={title}>
@@ -42,4 +38,4 @@ const DashboardPage: React.FunctionComponent<IDashboardPageProps> = ({ t }) => {
   );
 };
 
-export default translate()(DashboardPage);
+export default withTranslation()(DashboardPage);

@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 import ProgramsRatingStats from "./programs-rating-stats";
 import ProgramsRatingTable from "./programs-rating-table";
@@ -18,4 +18,4 @@ const ProgramsRatingTables = ({ t, id, tab, title }) => (
   </Fragment>
 );
 
-export default translate()(ProgramsRatingTables);
+export default withTranslation()(ProgramsRatingTables);

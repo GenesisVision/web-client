@@ -1,5 +1,5 @@
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 const ProgramTableHeaderCell = ({ t, column, isAuthenticated }) => {
   if (!isAuthenticated && column.name === "favorite") return null;
@@ -12,4 +12,4 @@ const ProgramTableHeaderCell = ({ t, column, isAuthenticated }) => {
   );
 };
 
-export default translate()(ProgramTableHeaderCell);
+export default withTranslation()(ProgramTableHeaderCell);

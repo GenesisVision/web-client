@@ -2,7 +2,7 @@ import "./details-investment.scss";
 
 import { GVButton } from "gv-react-components";
 import React, { PureComponent } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import AssetStatus from "shared/components/asset-status/asset-status";
 import Profitability from "shared/components/profitability/profitability";
@@ -153,4 +153,4 @@ class DetailsInvestment extends PureComponent {
   }
 }
 
-export default translate()(DetailsInvestment);
+export default withTranslation()(DetailsInvestment);

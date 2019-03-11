@@ -1,10 +1,9 @@
 import { GVButton } from "gv-react-components";
-import React from "react";
-import { TranslationFunction, translate } from "react-i18next";
+import * as React from "react";
+import { WithTranslation, withTranslation } from "react-i18next";
 import Dialog from "shared/components/dialog/dialog";
 
 export interface IConfirmPopupProps {
-  t: TranslationFunction;
   open: boolean;
   onClose(): void;
   onApply(): void;
@@ -17,7 +16,9 @@ export interface IConfirmPopupProps {
   disabled?: boolean;
 }
 
-const ConfirmPopup: React.SFC<IConfirmPopupProps> = ({
+const ConfirmPopup: React.FunctionComponent<
+  IConfirmPopupProps & WithTranslation
+> = ({
   t,
   open,
   onClose,
@@ -54,4 +55,4 @@ const ConfirmPopup: React.SFC<IConfirmPopupProps> = ({
   );
 };
 
-export default translate()(ConfirmPopup);
+export default withTranslation()(ConfirmPopup);

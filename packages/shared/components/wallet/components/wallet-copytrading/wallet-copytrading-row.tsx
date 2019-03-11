@@ -1,6 +1,6 @@
 import { CopyTradingAccountInfo } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
@@ -17,7 +17,7 @@ export interface ITransactionRowProps {
 }
 
 class WalletCopytradingRow extends React.Component<
-  ITransactionRowProps & InjectedTranslateProps
+  ITransactionRowProps & WithTranslation
 > {
   render() {
     const { t, wallet } = this.props;
@@ -78,4 +78,4 @@ class WalletCopytradingRow extends React.Component<
   }
 }
 
-export default translate()(WalletCopytradingRow);
+export default withTranslation()(WalletCopytradingRow);

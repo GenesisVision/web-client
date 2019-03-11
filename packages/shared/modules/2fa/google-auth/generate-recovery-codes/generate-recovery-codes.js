@@ -1,7 +1,7 @@
 import { GVButton } from "gv-react-components";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import Dialog from "shared/components/dialog/dialog";
 import authApi from "shared/services/api-client/auth-api";
 import authService from "shared/services/auth-service";
@@ -59,4 +59,4 @@ GenerateRecoveryCode.propTypes = {
   disabled: PropTypes.bool
 };
 
-export default translate()(GenerateRecoveryCode);
+export default withTranslation()(GenerateRecoveryCode);

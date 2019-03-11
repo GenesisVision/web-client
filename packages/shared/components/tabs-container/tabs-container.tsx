@@ -1,6 +1,6 @@
 import { GVTab, GVTabs } from "gv-react-components";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 import GVScroll from "shared/components/scroll/gvscroll";
@@ -21,7 +21,7 @@ interface ITabsContainerProps {
 }
 
 class TabsContainer extends React.Component<
-  ITabsContainerProps & InjectedTranslateProps
+  ITabsContainerProps & WithTranslation
 > {
   render() {
     const { tabs, tab, handleTabChange } = this.props;
@@ -43,6 +43,6 @@ class TabsContainer extends React.Component<
 }
 
 export default compose(
-  translate(),
+  withTranslation(),
   withRouter
 )(TabsContainer);

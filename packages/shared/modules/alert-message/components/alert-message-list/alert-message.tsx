@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 
 import { IMessage } from "../../reducers/alert-message-reducers";
 
@@ -10,7 +10,7 @@ interface IAlertMessageProps {
 }
 
 class AlertMessage extends React.Component<
-  IAlertMessageProps & InjectedTranslateProps
+  IAlertMessageProps & WithTranslation
 > {
   handleClick = () => {
     this.props.onClick(this.props.message.id);
@@ -46,4 +46,4 @@ class AlertMessage extends React.Component<
   }
 }
 
-export default translate()(AlertMessage);
+export default withTranslation()(AlertMessage);

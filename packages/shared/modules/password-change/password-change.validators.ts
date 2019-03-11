@@ -1,8 +1,8 @@
-import { InjectedTranslateProps } from "react-i18next";
+import { WithTranslation } from "react-i18next";
 import { passwordValidator } from "shared/utils/validators/validators";
 import { object, ref, string } from "yup";
 
-export const passwordChangeValidationSchema = ({ t }: InjectedTranslateProps) =>
+export const passwordChangeValidationSchema = ({ t }: WithTranslation) =>
   object().shape({
     oldPassword: string().required(t("Password is required")),
     password: passwordValidator,

@@ -1,7 +1,7 @@
 import { push } from "connected-react-router";
 import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
 import React, { Component, Fragment } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { bindActionCreators, compose } from "redux";
@@ -152,7 +152,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 
 export default compose(
   withRouter,
-  translate(),
+  withTranslation(),
   connect(
     mapStateToProps,
     mapDispatchToProps,

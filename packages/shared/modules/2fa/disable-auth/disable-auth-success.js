@@ -1,5 +1,5 @@
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 const DisableSuccess = ({ t }) => {
   return (
@@ -12,6 +12,6 @@ const DisableSuccess = ({ t }) => {
   );
 };
 
-const DisableAuthSuccess = translate()(DisableSuccess);
+const DisableAuthSuccess = withTranslation()(DisableSuccess);
 
 export default DisableAuthSuccess;

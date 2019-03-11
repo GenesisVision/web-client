@@ -6,7 +6,7 @@ import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import { FUNDS_ROUTE } from "pages/funds/funds.routes";
 import { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import GVLogo from "shared/components/gv-logo/gv-logo";
 import { DashboardIcon } from "shared/components/icon/dashboard-icon";
 import { FundsIcon } from "shared/components/icon/funds-icon";
@@ -22,7 +22,7 @@ interface INavigationState {
 }
 
 class Navigation extends React.Component<
-  INavigationProps & InjectedTranslateProps,
+  INavigationProps & WithTranslation,
   INavigationState
 > {
   state = {
@@ -53,4 +53,4 @@ class Navigation extends React.Component<
   }
 }
 
-export default translate()(Navigation);
+export default withTranslation()(Navigation);

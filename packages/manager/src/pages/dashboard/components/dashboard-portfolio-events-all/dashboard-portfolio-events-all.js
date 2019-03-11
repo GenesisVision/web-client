@@ -1,5 +1,5 @@
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import Page from "shared/components/page/page";
 import PortfolioEventsTableContainerComponent from "shared/components/portfolio-events-table/portfolio-events-table-container";
 import { MANAGER_EVENT_TYPE_FILTER_VALUES } from "shared/components/table/components/filtering/event-type-filter/event-type-filter.constants";
@@ -33,4 +33,4 @@ const PortfolioEventsAllComponent = ({ t }) => {
   );
 };
 
-export default translate()(PortfolioEventsAllComponent);
+export default withTranslation()(PortfolioEventsAllComponent);

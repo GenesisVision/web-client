@@ -1,6 +1,6 @@
 import { GVButton } from "gv-react-components";
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
@@ -91,7 +91,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default compose(
-  translate(),
+  withTranslation(),
   connect(
     null,
     mapDispatchToProps

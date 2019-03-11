@@ -4,7 +4,7 @@ import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
@@ -193,7 +193,7 @@ const twoFactorvalidator = (t, twoFactorEnabled) => {
 };
 
 export default compose(
-  translate(),
+  withTranslation(),
   withFormik({
     displayName: "wallet-withdraw",
     mapPropsToValues: props => {

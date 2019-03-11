@@ -2,19 +2,19 @@ import "./asset-status.scss";
 
 import classNames from "classnames";
 import * as React from "react";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { connect } from "react-redux";
-import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
-import GVScroll from "shared/components/scroll/gvscroll";
-import { ROLE, STATUS } from "shared/constants/constants";
-
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
 } from "shared/components/popover/popover";
-import AssetStatusRequests from "./asset-status-requests";
+import GVScroll from "shared/components/scroll/gvscroll";
+import { ROLE, STATUS } from "shared/constants/constants";
 import RootState from "shared/reducers/root-reducer";
 import { Nullable } from "shared/utils/types";
+
+import AssetStatusRequests from "./asset-status-requests";
 
 const getStatusClassName = (status: STATUS, className?: string) => {
   return classNames("asset-status", className, {
@@ -40,7 +40,7 @@ interface IAssetStatusState {
 }
 
 class AssetStatus extends React.Component<
-  IAssetStatusProps & InjectedTranslateProps,
+  IAssetStatusProps & WithTranslation,
   IAssetStatusState
 > {
   state = {
@@ -98,6 +98,6 @@ const mapStateToProps = (state: RootState) => ({
     : null
 });
 export default compose(
-  translate(),
+  withTranslation(),
   connect(mapStateToProps)
 )(AssetStatus);

@@ -1,7 +1,7 @@
 import "./level-tooltip.scss";
 
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 
 interface ILevelTooltip {
@@ -9,7 +9,7 @@ interface ILevelTooltip {
   canLevelUp: boolean;
 }
 
-const LevelTooltip: React.FC<ILevelTooltip & InjectedTranslateProps> = ({
+const LevelTooltip: React.FC<ILevelTooltip & WithTranslation> = ({
   t,
   level,
   canLevelUp
@@ -25,4 +25,4 @@ const LevelTooltip: React.FC<ILevelTooltip & InjectedTranslateProps> = ({
     )}
   </div>
 );
-export default translate()(LevelTooltip);
+export default withTranslation()(LevelTooltip);

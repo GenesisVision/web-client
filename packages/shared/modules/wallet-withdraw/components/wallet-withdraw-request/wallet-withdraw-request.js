@@ -1,7 +1,7 @@
 import "./wallet-withdraw-request.scss";
 
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import PaperPlan from "shared/media/paper-plane.svg";
 
 const WalletWithdrawRequest = ({ t }) => {
@@ -17,4 +17,4 @@ const WalletWithdrawRequest = ({ t }) => {
   );
 };
 
-export default translate()(WalletWithdrawRequest);
+export default withTranslation()(WalletWithdrawRequest);

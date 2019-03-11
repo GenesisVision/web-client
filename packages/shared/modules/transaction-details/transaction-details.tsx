@@ -2,7 +2,7 @@ import "./transaction-details.scss";
 
 import { TransactionDetails } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
@@ -30,7 +30,7 @@ const Types = {
   PlatformFee: FeeDetails
 };
 
-export interface ITransactionDetailsDialogProps extends InjectedTranslateProps {
+export interface ITransactionDetailsDialogProps extends WithTranslation {
   transactionId: string;
   error(message: string): void;
   close(): void;
@@ -43,7 +43,7 @@ export interface ITransactionDetailsState {
   errorMessage?: string;
 }
 
-export interface ITransactionDetailsProps extends InjectedTranslateProps {
+export interface ITransactionDetailsProps extends WithTranslation {
   data: TransactionDetails;
   handleCancel?(): void;
   handleResend?(): void;
@@ -131,7 +131,7 @@ const mapDispatchToProps = {
 };
 
 export default compose(
-  translate(),
+  withTranslation(),
   connect(
     null,
     mapDispatchToProps

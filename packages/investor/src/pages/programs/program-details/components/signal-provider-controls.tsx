@@ -2,7 +2,7 @@ import { GVButton } from "gv-react-components";
 import ProgramFollowContainer from "modules/program-follow/program-follow-container";
 import ProgramUnfollowContainer from "modules/program-unfollow/program-unfollow-container";
 import React, { Component, Fragment } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import SignalProgramInfo from "shared/components/programs/program-details/program-details-description/signal-program-info";
 import { FOLLOW_TYPE } from "shared/constants/constants";
 
@@ -24,7 +24,7 @@ interface ISignalProviderControlState {
 }
 
 type SignalProviderControlsProps = ISignalProviderControlOwnProps &
-  InjectedTranslateProps;
+  WithTranslation;
 
 class SignalProviderControls extends Component<
   SignalProviderControlsProps,
@@ -110,4 +110,4 @@ class SignalProviderControls extends Component<
   }
 }
 
-export default translate()(SignalProviderControls);
+export default withTranslation()(SignalProviderControls);

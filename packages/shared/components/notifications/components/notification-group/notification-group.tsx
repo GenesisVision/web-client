@@ -1,6 +1,6 @@
 import { NotificationViewModel } from "gv-api-web";
 import * as React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import Notification from "shared/components/notifications/components/notification/notification";
 
 interface Props {
@@ -23,4 +23,4 @@ class NotificationsGroup extends React.Component<Props> {
   }
 }
 
-export default translate()(NotificationsGroup);
+export default withTranslation()(NotificationsGroup);

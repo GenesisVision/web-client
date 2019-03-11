@@ -3,7 +3,7 @@ import "./portfolio-events.scss";
 
 import moment from "moment";
 import React, { Component, Fragment } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { isUseProfitability } from "shared/components/dashboard/helpers/dashboard-portfolio.helpers";
 import Profitability from "shared/components/profitability/profitability";
@@ -135,4 +135,4 @@ PortfolioEventsTable.defaultProps = {
   filtering: PORTFOLIO_EVENTS_DEFAULT_FILTERING
 };
 
-export default translate()(PortfolioEventsTable);
+export default withTranslation()(PortfolioEventsTable);

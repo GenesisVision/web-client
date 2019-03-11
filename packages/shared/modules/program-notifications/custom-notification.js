@@ -3,7 +3,7 @@ import "./custom-notification.scss";
 import { GVButton, GVSwitch, GVTextField } from "gv-react-components";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
@@ -116,7 +116,7 @@ const mapStateToProps = dispatch => ({
 });
 
 export default compose(
-  translate(),
+  withTranslation(),
   connect(
     undefined,
     mapStateToProps

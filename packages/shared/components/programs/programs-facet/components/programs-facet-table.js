@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { toggleFavoriteProgram } from "shared/modules/favorite-asset/services/favorite-program.service";
@@ -51,4 +51,4 @@ class ProgramsFacetTable extends Component {
   }
 }
 
-export default translate()(ProgramsFacetTable);
+export default withTranslation()(ProgramsFacetTable);

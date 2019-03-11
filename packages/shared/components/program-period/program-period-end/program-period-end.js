@@ -1,5 +1,5 @@
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import Tooltip from "shared/components/tooltip/tooltip";
 
 import PeriodTimeLeft from "../period-time-left";
@@ -17,4 +17,4 @@ const ProgramPeriodEnd = ({ t, periodEnds }) => {
   );
 };
 
-export default translate()(ProgramPeriodEnd);
+export default withTranslation()(ProgramPeriodEnd);

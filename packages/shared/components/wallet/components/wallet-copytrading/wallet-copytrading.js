@@ -2,7 +2,7 @@ import "./wallet-copytrading.scss";
 
 import moment from "moment";
 import React, { Component, Fragment } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import Profitability from "shared/components/profitability/profitability";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
@@ -57,4 +57,4 @@ class WalletCopytrading extends Component {
   }
 }
 
-export default translate()(WalletCopytrading);
+export default withTranslation()(WalletCopytrading);

@@ -3,7 +3,7 @@ import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
 import { FUNDS_ROUTE } from "pages/funds/funds.routes";
 import { PROGRAMS_ROUTE } from "pages/programs/programs.routes";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
 import { DashboardIcon } from "shared/components/icon/dashboard-icon";
 import { DetailsIcon } from "shared/components/icon/details-icon";
@@ -32,9 +32,7 @@ interface INavigationMobileProps {
   logout(): void;
 }
 
-const NavigationMobile: React.FC<
-  INavigationMobileProps & InjectedTranslateProps
-> = ({
+const NavigationMobile: React.FC<INavigationMobileProps & WithTranslation> = ({
   t,
   isAuthenticated,
   email,
@@ -105,4 +103,4 @@ const NavigationMobile: React.FC<
   );
 };
 
-export default translate()(NavigationMobile);
+export default withTranslation()(NavigationMobile);

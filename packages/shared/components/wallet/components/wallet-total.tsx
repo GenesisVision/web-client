@@ -1,6 +1,6 @@
 import { MultiWalletFilters, WalletsGrandTotal, WalletsInfo } from "gv-api-web";
 import * as React from "react";
-import { translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { ROLE } from "shared/constants/constants";
@@ -12,16 +12,17 @@ import WalletBalanceLoader from "./wallet-balance/wallet-balance-loader";
 import WalletContainerTotal from "./wallet-container/wallet-container-total";
 import WalletSettingsContainer from "./wallet-settings/wallet-settings-container";
 
-interface IWalletProps {
-  t(str: string): string;
+type StateProps = {
   info?: WalletsGrandTotal;
   filters?: MultiWalletFilters;
   isPayFeesWithGvt?: boolean;
   wallets?: WalletsInfo;
   role?: ROLE;
-}
+};
 
-class WalletTotal extends React.Component<IWalletProps> {
+type Props = StateProps & WithTranslation;
+
+class WalletTotal extends React.Component<Props> {
   render() {
     const { t, info, wallets, filters, role, isPayFeesWithGvt } = this.props;
     if (!info) return <WalletBalanceLoader />;
@@ -66,5 +67,5 @@ const mapStateToProps = (state: RootState) => ({
 
 export default compose(
   connect(mapStateToProps),
-  translate()
+  withTranslation()
 )(WalletTotal);

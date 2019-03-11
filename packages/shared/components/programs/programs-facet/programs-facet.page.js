@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import FacetContainer from "shared/components/facet-container/facet-container";
 import Page from "shared/components/page/page";
 import Surface from "shared/components/surface/surface";
@@ -30,4 +30,4 @@ class ProgramsFacetPage extends Component {
     );
   }
 }
-export default translate()(ProgramsFacetPage);
+export default withTranslation()(ProgramsFacetPage);

@@ -1,7 +1,7 @@
 import { GVButton } from "gv-react-components";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import React, { Component, Fragment } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import InvestmentProgramInfo from "shared/components/programs/program-details/program-details-description/investment-program-info";
 import { PROGRAM } from "shared/constants/constants";
 
@@ -18,7 +18,7 @@ interface IInvestmentProgramControlsState {
   isOpenInvestmentPopup: boolean;
 }
 
-type InvestmentProgramControlsProps = InjectedTranslateProps &
+type InvestmentProgramControlsProps = WithTranslation &
   IInvestmentProgramControlsOwnProps;
 
 class InvestmentProgramControls extends Component<
@@ -82,4 +82,4 @@ class InvestmentProgramControls extends Component<
   }
 }
 
-export default translate()(InvestmentProgramControls);
+export default withTranslation()(InvestmentProgramControls);

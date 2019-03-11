@@ -3,7 +3,7 @@ import "./phone-verification.scss";
 import { FormikProps, withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import { number, object } from "yup";
@@ -22,7 +22,7 @@ export interface IPhoneVerificationFormProps {
 
 class PhoneVerificationForm extends React.Component<
   IPhoneVerificationFormProps &
-    InjectedTranslateProps &
+    WithTranslation &
     IPhoneVerificationFormValues &
     FormikProps<IPhoneVerificationFormValues>
 > {
@@ -84,7 +84,7 @@ class PhoneVerificationForm extends React.Component<
 }
 
 export default compose<React.ComponentType<IPhoneVerificationFormProps>>(
-  translate(),
+  withTranslation(),
   withFormik({
     displayName: "phone-verification",
     mapPropsToValues: () => ({

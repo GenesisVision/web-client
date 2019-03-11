@@ -3,7 +3,7 @@ import "./2fa.scss";
 import classnames from "classnames";
 import { GVTextField } from "gv-react-components";
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 import { fetchTwoFactor } from "shared/actions/2fa-actions";
@@ -79,7 +79,7 @@ const mapDispatchToProps = dispatch => ({
   services: bindActionCreators({ fetchTwoFactor }, dispatch)
 });
 export default compose(
-  translate(),
+  withTranslation(),
   connect(
     mapStateToProps,
     mapDispatchToProps

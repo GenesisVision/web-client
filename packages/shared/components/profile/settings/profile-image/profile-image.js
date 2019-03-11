@@ -2,7 +2,7 @@ import "./profile-image.scss";
 
 import { GVButton } from "gv-react-components";
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import UserIcon from "shared/media/user-avatar.svg";
 
 import ProfileInputImage from "./profile-input-image/profile-input-image";
@@ -110,4 +110,4 @@ class ProfileImage extends Component {
   }
 }
 
-export default translate()(ProfileImage);
+export default withTranslation()(ProfileImage);

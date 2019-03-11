@@ -1,6 +1,6 @@
 import { GVButton } from "gv-react-components";
 import React, { Fragment } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 const SignUpFooter = ({ t, ROUTE }) => (
@@ -14,4 +14,4 @@ const SignUpFooter = ({ t, ROUTE }) => (
   </Fragment>
 );
 
-export default translate()(SignUpFooter);
+export default withTranslation()(SignUpFooter);

@@ -1,5 +1,5 @@
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import Page from "shared/components/page/page";
 
 import GlobalSearchResultConatiner from "./components/global-search-result/global-search-result-conatiner";
@@ -13,4 +13,4 @@ const GlobalSearchPage = ({ t }) => {
   );
 };
 
-export default translate()(GlobalSearchPage);
+export default withTranslation()(GlobalSearchPage);

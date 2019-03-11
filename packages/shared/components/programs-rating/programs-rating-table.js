@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import connect from "react-redux/es/connect/connect";
 import { bindActionCreators, compose } from "redux";
 import ProgramsTable from "shared/modules/programs-table/components/programs-table/programs-table";
@@ -72,7 +72,7 @@ const mapDispatchToProps = dispatch => ({
   service: bindActionCreators({ getProgramsRating }, dispatch)
 });
 export default compose(
-  translate(),
+  withTranslation(),
   connect(
     mapStateToProps,
     mapDispatchToProps

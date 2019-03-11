@@ -1,7 +1,7 @@
 import "./program-details-description.scss";
 
 import React, { PureComponent } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import { STATUS_OLD } from "shared/constants/constants";
 import platformApi from "shared/services/api-client/platform-api";
@@ -95,4 +95,4 @@ class ProgramDetailsDescription extends PureComponent {
   }
 }
 
-export default translate()(ProgramDetailsDescription);
+export default withTranslation()(ProgramDetailsDescription);

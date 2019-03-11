@@ -2,7 +2,7 @@ import "./alert-message-list.scss";
 
 import { GVButton } from "gv-react-components";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import posed, { PoseGroup } from "react-pose";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
@@ -34,7 +34,7 @@ const AlertBox = posed.div({
 
 export class AlertMessageList extends React.Component<
   IAlertMessageListProps &
-    InjectedTranslateProps &
+    WithTranslation &
     IAlertMessageListStateProps &
     IAlertMessageListDispatchProps
 > {
@@ -88,7 +88,7 @@ export const mapDispatchToProps = (
   }
 });
 
-export default translate()(
+export default withTranslation()(
   connect(
     mapStateToProps,
     mapDispatchToProps

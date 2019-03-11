@@ -1,7 +1,7 @@
 import { GVButton } from "gv-react-components";
 import * as moment from "moment";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 
 import DateRangeFilterValues from "./date-range-filter-values";
 import {
@@ -17,7 +17,7 @@ interface IDateRangeFilterPopoverProps {
 }
 
 class DateRangeFilterPopover extends React.Component<
-  IDateRangeFilterPopoverProps & InjectedTranslateProps,
+  IDateRangeFilterPopoverProps & WithTranslation,
   IDataRangeFilterValue & { [key: string]: any }
 > {
   state = {
@@ -119,4 +119,4 @@ class DateRangeFilterPopover extends React.Component<
   }
 }
 
-export default translate()(DateRangeFilterPopover);
+export default withTranslation()(DateRangeFilterPopover);

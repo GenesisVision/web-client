@@ -1,7 +1,7 @@
 import classnames from "classnames";
 import { GVButton } from "gv-react-components";
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 class SelectFilterPopover extends Component {
   handleClick = (selected, value) => e => {
@@ -40,4 +40,4 @@ class SelectFilterPopover extends Component {
   }
 }
 
-export default translate()(SelectFilterPopover);
+export default withTranslation()(SelectFilterPopover);

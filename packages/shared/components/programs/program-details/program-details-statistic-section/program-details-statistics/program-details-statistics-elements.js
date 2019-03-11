@@ -1,7 +1,7 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.scss";
 
 import React, { Fragment } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { ChartPeriodType } from "shared/components/chart/chart-period/chart-period.helpers";
 import ProgramPeriodLine from "shared/components/program-period/program-period-line/program-period-line";
@@ -139,4 +139,4 @@ const ProgramDetailsStatisticsElements = ({
   </Fragment>
 );
 
-export default translate()(ProgramDetailsStatisticsElements);
+export default withTranslation()(ProgramDetailsStatisticsElements);

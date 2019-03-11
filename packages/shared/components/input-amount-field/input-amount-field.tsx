@@ -1,11 +1,10 @@
 import { GVButton, GVFormikField } from "gv-react-components";
 import * as React from "react";
-import { TranslationFunction, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 
 import GVNumberFiled from "../gv-number-field/gv-number-field";
 
 export interface IInputAmountFieldProps {
-  t: TranslationFunction;
   name: string;
   label: string;
   currency: string;
@@ -16,7 +15,9 @@ export interface IInputAmountFieldProps {
   onChange?(event: string | number): void;
 }
 
-class InputAmountField extends React.Component<IInputAmountFieldProps> {
+class InputAmountField extends React.Component<
+  IInputAmountFieldProps & WithTranslation
+> {
   render() {
     const {
       onChange,
@@ -56,4 +57,4 @@ class InputAmountField extends React.Component<IInputAmountFieldProps> {
   }
 }
 
-export default translate()(InputAmountField);
+export default withTranslation()(InputAmountField);

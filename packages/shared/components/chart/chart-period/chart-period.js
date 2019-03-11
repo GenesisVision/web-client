@@ -5,7 +5,7 @@ import { GVButton } from "gv-react-components";
 import moment from "moment";
 import PropTypes from "prop-types";
 import React, { PureComponent } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 import { ChartPeriodType, getPeriodStartDate } from "./chart-period.helpers";
 
@@ -64,4 +64,4 @@ ChartPeriod.propTypes = {
   onChange: PropTypes.func
 };
 
-export default translate()(ChartPeriod);
+export default withTranslation()(ChartPeriod);

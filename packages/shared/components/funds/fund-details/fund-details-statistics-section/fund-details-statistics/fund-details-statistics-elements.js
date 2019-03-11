@@ -2,7 +2,7 @@ import "shared/components/details/details-description-section/details-statistic-
 
 import moment from "moment";
 import React, { Fragment } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { ChartPeriodType } from "shared/components/chart/chart-period/chart-period.helpers";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
@@ -109,4 +109,4 @@ const FundDetailsStatisticsElements = ({ t, statistic, period }) => (
   </Fragment>
 );
 
-export default translate()(FundDetailsStatisticsElements);
+export default withTranslation()(FundDetailsStatisticsElements);

@@ -1,7 +1,7 @@
 import "./verification-status.scss";
 
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import Chip, { CHIP_TYPE } from "shared/components/chip/chip";
 
 export enum VERIFICATION_STATUS {
@@ -16,7 +16,7 @@ interface IStatusProps {
   verificationStatus: VERIFICATION_STATUS;
 }
 
-const VerificationStatus: React.FC<IStatusProps & InjectedTranslateProps> = ({
+const VerificationStatus: React.FC<IStatusProps & WithTranslation> = ({
   t,
   checked,
   verificationStatus = VERIFICATION_STATUS.NOT_VERIFED
@@ -51,4 +51,4 @@ const VerificationStatus: React.FC<IStatusProps & InjectedTranslateProps> = ({
   );
 };
 
-export default translate()(VerificationStatus);
+export default withTranslation()(VerificationStatus);

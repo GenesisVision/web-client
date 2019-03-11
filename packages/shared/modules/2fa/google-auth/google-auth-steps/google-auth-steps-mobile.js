@@ -1,7 +1,7 @@
 import { GVButton } from "gv-react-components";
 import { Component } from "react";
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 import GoogleActivateStep from "./google-auth-activate-step";
 import GoogleCodeStep from "./google-auth-code-step";
@@ -54,5 +54,5 @@ class GoogleAuth extends Component {
   }
 }
 
-const GoogleAuthMobile = translate()(GoogleAuth);
+const GoogleAuthMobile = withTranslation()(GoogleAuth);
 export default GoogleAuthMobile;

@@ -1,7 +1,7 @@
 import "shared/components/auth/signup/signup-email-pending.scss";
 
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import SignupEmailPendingContainer from "shared/components/auth/signup/signup-email-pending/signup-email-pending-container";
 
 import { sendConfirmationLink } from "../services/signup-email-pending.service";
@@ -20,4 +20,4 @@ const EmailPending = ({ t }) => {
   );
 };
 
-export default translate()(EmailPending);
+export default withTranslation()(EmailPending);

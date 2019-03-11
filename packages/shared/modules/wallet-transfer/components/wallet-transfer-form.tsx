@@ -4,7 +4,7 @@ import { FormikProps, withFormik } from "formik";
 import { WalletData } from "gv-api-web";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { compose } from "redux";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import Select from "shared/components/select/select";
@@ -35,7 +35,7 @@ export interface ITransferFormValues {
   amount: string;
 }
 
-type IWalletTransferForm = InjectedTranslateProps &
+type IWalletTransferForm = WithTranslation &
   FormikProps<ITransferFormValues> &
   DeepReadonly<{
     wallets: Array<WalletData>;
@@ -218,7 +218,7 @@ class WalletTransferForm extends React.Component<IWalletTransferForm> {
 }
 
 export default compose<React.FunctionComponent<IWalletTransferForm>>(
-  translate(),
+  withTranslation(),
   withFormik<IWalletTransferForm, ITransferFormValues>({
     displayName: "wallet-transfer",
     mapPropsToValues: props => {

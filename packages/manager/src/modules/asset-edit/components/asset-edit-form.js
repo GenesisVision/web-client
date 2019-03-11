@@ -7,7 +7,7 @@ import {
 } from "gv-react-components";
 import ProgramDefaultImage from "pages/create-program/components/create-program-settings/program-default-image";
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import InputImage from "shared/components/form/input-image/input-image";
@@ -128,7 +128,7 @@ const AssetEditForm = ({
 };
 
 export default compose(
-  translate(),
+  withTranslation(),
   withFormik({
     displayName: "edit-form",
     mapPropsToValues: props => {

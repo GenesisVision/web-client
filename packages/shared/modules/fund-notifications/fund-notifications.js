@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 import FundNotificationsGeneral from "./fund-notificatations-general";
 
@@ -56,4 +56,4 @@ FundNotifications.propTypes = {
   })
 };
 
-export default translate()(FundNotifications);
+export default withTranslation()(FundNotifications);

@@ -1,7 +1,7 @@
 import { FundDetails } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
@@ -12,6 +12,10 @@ import Popover, {
   VERTICAL_POPOVER_POS
 } from "shared/components/popover/popover";
 import Profitability from "shared/components/profitability/profitability";
+import {
+  PROFITABILITY_PREFIX,
+  PROFITABILITY_VARIANT
+} from "shared/components/profitability/profitability.helper";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { composeManagerDetailsUrl } from "shared/utils/compose-url";
@@ -21,10 +25,6 @@ import {
   formatValueDifferentDecimalScale
 } from "shared/utils/formatter";
 import { Nullable } from "shared/utils/types";
-import {
-  PROFITABILITY_PREFIX,
-  PROFITABILITY_VARIANT
-} from "shared/components/profitability/profitability.helper";
 
 const DECIMAL_SCALE_SMALL_VALUE = 4;
 const DECIMAL_SCALE_BIG_VALUE = 2;
@@ -40,7 +40,7 @@ interface IFundCardState {
 }
 
 class FundCard extends React.Component<
-  IFundCardProps & InjectedTranslateProps,
+  IFundCardProps & WithTranslation,
   IFundCardState
 > {
   state = {
@@ -210,4 +210,4 @@ class FundCard extends React.Component<
   }
 }
 
-export default translate()(FundCard);
+export default withTranslation()(FundCard);

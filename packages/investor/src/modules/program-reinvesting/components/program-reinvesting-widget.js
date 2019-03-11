@@ -1,7 +1,7 @@
 import classnames from "classnames";
 import { GVSwitch } from "gv-react-components";
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 const ProgramReinvestingWidget = ({
   t,
@@ -24,4 +24,4 @@ const ProgramReinvestingWidget = ({
   </span>
 );
 
-export default translate()(ProgramReinvestingWidget);
+export default withTranslation()(ProgramReinvestingWidget);

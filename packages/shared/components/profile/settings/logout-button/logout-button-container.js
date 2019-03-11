@@ -1,6 +1,6 @@
 import { GVButton } from "gv-react-components";
 import React, { PureComponent } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 
@@ -37,7 +37,7 @@ const mapDispatchToProps = (dispatch, props) => ({
 });
 
 export default compose(
-  translate(),
+  withTranslation(),
   connect(
     null,
     mapDispatchToProps

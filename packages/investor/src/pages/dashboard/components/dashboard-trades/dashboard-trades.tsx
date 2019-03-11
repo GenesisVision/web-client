@@ -1,6 +1,6 @@
 import CopytradingTablesSection from "modules/copytrading-tables/components/copytrading-tables-section";
 import React, { ComponentType, FunctionComponent } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { Action, Dispatch, bindActionCreators, compose } from "redux";
 
@@ -19,7 +19,7 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
 });
 
 export default compose<ComponentType<IDashboardTradesProps>>(
-  translate(),
+  withTranslation(),
   connect(
     null,
     mapDispatchToProps

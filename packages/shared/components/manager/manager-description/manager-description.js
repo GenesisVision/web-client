@@ -2,7 +2,7 @@ import "./manager-description.scss";
 
 import moment from "moment";
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
 
@@ -51,4 +51,4 @@ const ManagerDescription = ({ t, managerProfile }) => {
   );
 };
 
-export default translate()(ManagerDescription);
+export default withTranslation()(ManagerDescription);

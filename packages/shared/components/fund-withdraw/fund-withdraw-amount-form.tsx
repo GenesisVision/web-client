@@ -3,7 +3,7 @@ import { WalletData } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import { ComponentType, PureComponent } from "react";
 import React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
@@ -24,7 +24,7 @@ interface IFundWithdrawAmountFormOwnProps {
 }
 
 interface IFundWithdrawAmountFormProps
-  extends InjectedTranslateProps,
+  extends WithTranslation,
     IFundWithdrawAmountFormOwnProps {}
 
 interface FundWithdrawAmountFormValues {
@@ -100,7 +100,7 @@ class FundWithdrawAmountForm extends PureComponent<
 }
 
 export default compose<ComponentType<IFundWithdrawAmountFormOwnProps>>(
-  translate(),
+  withTranslation(),
   withFormik<IFundWithdrawAmountFormProps, FundWithdrawAmountFormValues>({
     displayName: "withdraw-form",
     mapPropsToValues: ({ percent }) => ({

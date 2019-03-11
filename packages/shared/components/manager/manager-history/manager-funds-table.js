@@ -2,7 +2,7 @@ import "shared/components/details/details-description-section/details-statistic-
 
 import * as PropTypes from "prop-types";
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
@@ -64,4 +64,4 @@ ManagerFunds.propTypes = {
   managerId: PropTypes.string.isRequired
 };
 
-export default translate()(ManagerFunds);
+export default withTranslation()(ManagerFunds);

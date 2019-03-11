@@ -2,7 +2,7 @@ import "./level-filter.scss";
 
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 import Filter from "../filter";
 import LevelFilterPopover from "./level-filter-popover";
@@ -32,4 +32,4 @@ LevelFilter.propTypes = {
   onChange: PropTypes.func
 };
 
-export default translate()(LevelFilter);
+export default withTranslation()(LevelFilter);

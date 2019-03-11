@@ -1,7 +1,7 @@
 import { GVTab, GVTabs } from "gv-react-components";
 import PropTypes from "prop-types";
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import Page from "shared/components/page/page";
 
@@ -42,4 +42,4 @@ ProfileLayout.propTypes = {
   route: PropTypes.string
 };
 
-export default translate()(ProfileLayout);
+export default withTranslation()(ProfileLayout);

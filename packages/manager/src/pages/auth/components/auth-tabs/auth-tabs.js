@@ -1,6 +1,6 @@
 import { GVTab, GVTabs } from "gv-react-components";
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 const Tabs = ({ t, authPartUrl }) => {
   return (
@@ -18,5 +18,5 @@ const Tabs = ({ t, authPartUrl }) => {
   );
 };
 
-const AuthTabs = translate()(Tabs);
+const AuthTabs = withTranslation()(Tabs);
 export default AuthTabs;

@@ -2,7 +2,7 @@ import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import PropTypes from "prop-types";
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import { number, object, string } from "yup";
@@ -47,7 +47,7 @@ export const GoogleStep3 = ({ t, handleSubmit, errorMessage, disabled }) => {
 };
 
 const GoogleActivateStep = compose(
-  translate(),
+  withTranslation(),
   withFormik({
     displayName: "google-auth",
     mapPropsToValues: () => ({

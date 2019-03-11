@@ -3,7 +3,7 @@ import "shared/components/details/details-description-section/details-descriptio
 import { GVButton } from "gv-react-components";
 import moment from "moment";
 import React, { Fragment, PureComponent } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
@@ -321,4 +321,4 @@ class FundDetailsDescription extends PureComponent {
   }
 }
 
-export default translate()(FundDetailsDescription);
+export default withTranslation()(FundDetailsDescription);

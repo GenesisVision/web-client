@@ -1,6 +1,6 @@
 import { CopyTradingAccountInfo } from "gv-api-web";
 import React, { FunctionComponent } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatCurrencyValue } from "shared/utils/formatter";
@@ -10,7 +10,7 @@ interface IWalletCopytradingBalanceProps {
 }
 
 const WalletCopytradingBalance: FunctionComponent<
-  IWalletCopytradingBalanceProps & InjectedTranslateProps
+  IWalletCopytradingBalanceProps & WithTranslation
 > = ({ t, wallet }) => {
   return (
     <div className="wallet-balance__wrapper">
@@ -59,4 +59,4 @@ const WalletCopytradingBalance: FunctionComponent<
   );
 };
 
-export default translate()(WalletCopytradingBalance);
+export default withTranslation()(WalletCopytradingBalance);

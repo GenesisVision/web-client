@@ -2,7 +2,7 @@ import "./wallet-list.scss";
 
 import { WalletData } from "gv-api-web";
 import * as React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
@@ -20,7 +20,7 @@ import { walletTableTransactionsSelector } from "../wallet-transactions/wallet-t
 import WalletListButton from "./wallet-list-button";
 import { WALLET_LIST_COLUMNS } from "./wallet-list.constants";
 
-interface IWalletListProps extends InjectedTranslateProps {
+interface IWalletListProps extends WithTranslation {
   wallets: WalletData[];
   createButtonToolbar(): void;
 }
@@ -172,4 +172,4 @@ class WalletList extends React.Component<IWalletListProps, IWalletListState> {
   }
 }
 
-export default translate()(WalletList);
+export default withTranslation()(WalletList);

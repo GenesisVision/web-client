@@ -1,7 +1,7 @@
 import { FormikProps, withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
-import { TranslationFunction, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { compose } from "redux";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import Select from "shared/components/select/select";
@@ -23,7 +23,6 @@ const modes: { [key: string]: mode } = {
 interface IFollowParamsProps {
   errors?: any;
   values?: FormValues;
-  t: TranslationFunction;
 }
 
 interface FormValues {
@@ -41,10 +40,7 @@ interface IFollowParamsOwnProps {
 type OwnProps = IFollowParamsOwnProps &
   IFollowParamsProps &
   FormikProps<FormValues>;
-class FollowParams extends React.Component<OwnProps> {
-  constructor(props: OwnProps) {
-    super(props);
-  }
+class FollowParams extends React.Component<OwnProps & WithTranslation> {
   handleSubmit = () => {
     const { onClick, values } = this.props;
     onClick(values);
@@ -143,7 +139,7 @@ class FollowParams extends React.Component<OwnProps> {
 }
 
 export default compose<React.ComponentType<IFollowParamsOwnProps>>(
-  translate(),
+  withTranslation(),
   withFormik({
     displayName: "follow-params",
     mapPropsToValues: () => {
@@ -154,7 +150,7 @@ export default compose<React.ComponentType<IFollowParamsOwnProps>>(
         percent: "10"
       };
     },
-    validationSchema: ({ t }: { t: TranslationFunction }) =>
+    validationSchema: ({ t }: WithTranslation) =>
       object().shape({
         fixedVolume: number()
           .min(0, t("follow-program.params.validation.fixedVolume-min"))

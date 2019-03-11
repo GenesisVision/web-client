@@ -2,7 +2,7 @@ import { withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import PropTypes from "prop-types";
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import { number, object, string } from "yup";
@@ -50,7 +50,7 @@ const DisableAuth = ({ t, handleSubmit, errorMessage, disabled }) => {
 };
 
 const DisableAuthForm = compose(
-  translate(),
+  withTranslation(),
   withFormik({
     displayName: "disable-auth",
     mapPropsToValues: () => ({

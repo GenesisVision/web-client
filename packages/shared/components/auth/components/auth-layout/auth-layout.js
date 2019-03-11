@@ -2,7 +2,7 @@ import "./auth-layout.scss";
 
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 import GvBrand from "shared/components/gv-brand/gv-brand";
 import GvLogo from "shared/components/gv-logo/gv-logo";
@@ -82,4 +82,4 @@ AuthLayout.propTypes = {
   title: PropTypes.string
 };
 
-export default translate()(AuthLayout);
+export default withTranslation()(AuthLayout);

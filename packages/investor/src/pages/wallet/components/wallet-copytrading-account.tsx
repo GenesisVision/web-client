@@ -2,7 +2,7 @@ import { CopyTradingAccountInfo } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import CopytradingTablesSection from "modules/copytrading-tables/components/copytrading-tables-section";
 import React, { Component, ComponentType, Fragment } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import { compose } from "redux";
@@ -23,7 +23,7 @@ interface IWalletCopytradingAccountOwnProps {
 
 interface IWalletCopytradingAccountProps
   extends IWalletCopytradingAccountOwnProps,
-    InjectedTranslateProps {}
+    WithTranslation {}
 interface IWalletCopytradingAccountState {
   wallet?: CopyTradingAccountInfo;
   isPending: boolean;
@@ -120,5 +120,5 @@ const mapStateToProps = (
 
 export default compose<ComponentType<void>>(
   connect(mapStateToProps),
-  translate()
+  withTranslation()
 )(WalletCopytradingAccount);

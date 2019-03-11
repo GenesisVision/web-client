@@ -1,7 +1,7 @@
 import "shared/components/programs-rating/programs-rating.scss";
 
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import connect from "react-redux/es/connect/connect";
 import { bindActionCreators, compose } from "redux";
 import ProgramsRatingTables from "shared/components/programs-rating/programs-rating-tables";
@@ -75,7 +75,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default compose(
-  translate(),
+  withTranslation(),
   connect(
     mapStateToProps,
     mapDispatchToProps

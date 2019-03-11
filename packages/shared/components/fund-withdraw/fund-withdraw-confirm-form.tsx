@@ -2,7 +2,7 @@ import { InjectedFormikProps, withFormik } from "formik";
 import { GVButton } from "gv-react-components";
 import { ComponentType, PureComponent } from "react";
 import React from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import { WithTranslation, withTranslation } from "react-i18next";
 import { compose } from "redux";
 import { formatValue } from "shared/utils/formatter";
 
@@ -21,7 +21,7 @@ interface IFundWithdrawConfirmFormOwnProps {
 }
 
 interface IFundWithdrawConfirmFormProps
-  extends InjectedTranslateProps,
+  extends WithTranslation,
     IFundWithdrawConfirmFormOwnProps {}
 
 class FundWithdrawConfirmForm extends PureComponent<
@@ -80,7 +80,7 @@ class FundWithdrawConfirmForm extends PureComponent<
 }
 
 export default compose<ComponentType<IFundWithdrawConfirmFormOwnProps>>(
-  translate(),
+  withTranslation(),
   withFormik<IFundWithdrawConfirmFormProps, {}>({
     displayName: "withdraw-form",
     handleSubmit: (_, { props }) => {

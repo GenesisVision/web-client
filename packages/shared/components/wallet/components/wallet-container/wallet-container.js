@@ -2,7 +2,7 @@ import "./wallet-container.scss";
 
 import { GVTab, GVTabs } from "gv-react-components";
 import React, { PureComponent } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import Surface from "shared/components/surface/surface";
 
 import GVScroll from "../../../scroll/gvscroll";
@@ -81,4 +81,4 @@ class WalletContainer extends PureComponent {
   }
 }
 
-export default translate()(WalletContainer);
+export default withTranslation()(WalletContainer);

@@ -1,5 +1,5 @@
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import GooglePlay from "shared/media/badge-android.png";
 import AppStore from "shared/media/badge-ios.png";
 
@@ -23,6 +23,6 @@ export const GoogleStep1 = ({ t }) => {
   );
 };
 
-const GoogleDownloadStep = translate()(GoogleStep1);
+const GoogleDownloadStep = withTranslation()(GoogleStep1);
 
 export default GoogleDownloadStep;

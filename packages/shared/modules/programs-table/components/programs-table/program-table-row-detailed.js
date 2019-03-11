@@ -1,7 +1,7 @@
 import classnames from "classnames";
 import { GVButton } from "gv-react-components";
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
@@ -271,4 +271,4 @@ class ProgramTableRowDetailed extends Component {
   }
 }
 
-export default translate()(ProgramTableRowDetailed);
+export default withTranslation()(ProgramTableRowDetailed);

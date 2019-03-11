@@ -1,7 +1,7 @@
 import "./create-program.page.scss";
 
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import Page from "shared/components/page/page";
 
 import CreateProgramContainer from "./components/create-program.container";
@@ -19,4 +19,4 @@ const CreateProgramPage = ({ t }) => (
   </Page>
 );
 
-export default translate()(CreateProgramPage);
+export default withTranslation()(CreateProgramPage);

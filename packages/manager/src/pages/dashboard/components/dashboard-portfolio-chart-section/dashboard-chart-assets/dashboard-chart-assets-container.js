@@ -1,7 +1,7 @@
 import "./dashboard-chart-assets.scss";
 
 import React, { PureComponent } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 import { DashboardChartAssetsLoader } from "shared/components/dashboard/dashboard-chart-loader/dashboard-chart-loaders";
@@ -104,7 +104,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default compose(
-  translate(),
+  withTranslation(),
   connect(
     mapStateToProps,
     mapDispatchToProps

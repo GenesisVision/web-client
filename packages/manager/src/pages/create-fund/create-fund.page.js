@@ -1,7 +1,7 @@
 import "./create-fund.page.scss";
 
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import Page from "shared/components/page/page";
 
 import CreateFundContainer from "./create-fund.container";
@@ -15,4 +15,4 @@ const CreateFundPage = ({ t }) => (
   </Page>
 );
 
-export default translate()(CreateFundPage);
+export default withTranslation()(CreateFundPage);

@@ -2,7 +2,7 @@ import "./wallet-balance.scss";
 
 import { GVColors } from "gv-react-components";
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import * as InnerColors from "shared/components/gv-styles/color";
 import PieContainer from "shared/components/pie-container/pie-container";
@@ -98,4 +98,4 @@ const WalletBalanceElements = (props: IWalletBalanceElement) => {
   );
 };
 
-export default translate()(WalletBalanceElements);
+export default withTranslation()(WalletBalanceElements);
