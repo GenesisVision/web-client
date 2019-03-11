@@ -1,13 +1,20 @@
 import "./level-filter.scss";
 
-import PropTypes from "prop-types";
-import React, { Component } from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 
 import Filter from "../filter";
 import LevelFilterPopover from "./level-filter-popover";
 
-class LevelFilter extends Component {
+interface ILevelFilterProps {
+  name: string;
+  value: number;
+  onChange(value: number): void;
+}
+
+class LevelFilter extends React.Component<
+  ILevelFilterProps & InjectedTranslateProps
+> {
   renderValueText = value => `${value[0]}-${value[1]}`;
 
   render() {
@@ -20,16 +27,10 @@ class LevelFilter extends Component {
         value={this.props.value}
         updateFilter={this.props.onChange}
       >
-        <LevelFilterPopover values={this.props.values} />
+        <LevelFilterPopover {...this.props} />
       </Filter>
     );
   }
 }
-
-LevelFilter.propTypes = {
-  name: PropTypes.string.isRequired,
-  value: PropTypes.any,
-  onChange: PropTypes.func
-};
 
 export default translate()(LevelFilter);
