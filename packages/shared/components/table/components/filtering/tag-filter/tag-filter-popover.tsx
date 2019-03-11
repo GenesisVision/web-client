@@ -11,7 +11,7 @@ interface ITagFilterPopoverState {
 export interface ITagFilterPopoverProps {
   value: ProgramTag[];
   values: ProgramTag[];
-  changeFilter(value: any[]): void;
+  changeFilter(value: ProgramTag[]): void;
 }
 class TagFilterPopover extends React.Component<
   ITagFilterPopoverProps,
@@ -30,7 +30,7 @@ class TagFilterPopover extends React.Component<
       filteredTags: this.removeChoosed(this.props.values, this.state.choosed)
     });
   }
-  search = (e: any) => {
+  search = (e: React.ChangeEvent<any>) => {
     this.setState({
       filteredTags: this.removeChoosed(
         this.filtering(e.target.value, this.props.values),
@@ -42,7 +42,7 @@ class TagFilterPopover extends React.Component<
     arr.filter(
       item => !choosedArr.find((choose: any) => item.name === choose.name)
     );
-  filtering = (searchValue: string, array: ProgramTag[]) =>
+  filtering = (searchValue: string, array: ProgramTag[]): ProgramTag[] =>
     searchValue
       ? array.filter(
           (item: ProgramTag) =>
