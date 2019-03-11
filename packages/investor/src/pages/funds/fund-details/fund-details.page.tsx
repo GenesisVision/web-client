@@ -1,11 +1,13 @@
 import "shared/components/details/details.scss";
 
 import { push } from "connected-react-router";
-import FundDepositContainer from "modules/fund-deposit/fund-deposit-container";
+import { FundDetailsFull } from "gv-api-web";
 import FundWithdrawalContainer from "modules/fund-withdrawal/fund-withdrawal-container";
-import React, { PureComponent } from "react";
+import React, { ComponentType, PureComponent } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators, compose } from "redux";
+import { InvestorRootState } from "reducers";
+import { Dispatch, bindActionCreators, compose } from "redux";
+import { ProgramDetailContext } from "shared/components/details/helpers/details-context";
 import FundDetailsDescriptionSection from "shared/components/funds/fund-details/fund-details-description/fund-details-description-section";
 import FundDetailsHistorySection from "shared/components/funds/fund-details/fund-details-history-section/fund-details-history-section";
 import FundDetailsStatisticSection from "shared/components/funds/fund-details/fund-details-statistics-section/fund-details-statistic-section";
@@ -16,79 +18,95 @@ import {
 } from "shared/components/funds/fund-details/services/fund-details.service";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
 import Page from "shared/components/page/page";
-import { INVESTOR } from "shared/constants/constants";
+import { ResponseError } from "shared/utils/types";
 
 import { LOGIN_ROUTE } from "../../auth/login/login.routes";
+import FundControls from "./components/fund-controls";
 
-export const FundDetailContext = React.createContext({
-  updateDetails: () => {}
-});
-
-class FundDetailsPage extends PureComponent {
-  state = {
-    errorCode: null,
-    isPending: false
+interface IFundDetailsPageProps {
+  isAuthenticated: boolean;
+  currency: string;
+  service: {
+    getFundDescription(): Promise<FundDetailsFull>;
+    redirectToLogin(): void;
   };
+}
 
-  constructor(props) {
+interface IFundDetailsPageState {
+  isPending: boolean;
+  hasError: boolean;
+  description?: FundDetailsFull;
+  profitChart?: any;
+  balanceChart?: any;
+  statistic?: any;
+}
+
+class FundDetailsPage extends PureComponent<
+  IFundDetailsPageProps,
+  IFundDetailsPageState
+> {
+  constructor(props: IFundDetailsPageProps) {
     super(props);
-    this.description = null;
-    this.profitChart = null;
-    this.balanceChart = null;
-    this.statistic = null;
+    this.state = {
+      hasError: false,
+      isPending: false,
+      description: undefined,
+      profitChart: undefined,
+      balanceChart: undefined,
+      statistic: undefined
+    };
   }
 
-  changeInvestmentStatus = () => {
-    this.setState({ isPending: true });
-    this.props.service.getFundDescription(this.description.id).then(data => {
-      this.description = data;
-      this.setState({ isPending: false });
-    });
-  };
-
   componentDidMount() {
-    this.updateDetails();
+    this.getDetails();
   }
 
   updateDetails = () => {
     const { service } = this.props;
     this.setState({ isPending: true });
-    service
+    return service
       .getFundDescription()
       .then(data => {
-        this.description = data;
-        this.setState({ isPending: false });
+        this.setState({ isPending: false, description: data });
       })
-      .catch(e => {
-        const errorCode = e.code;
-        this.setState({ errorCode });
-      })
+      .catch((e: ResponseError) => {
+        this.setState({ hasError: true });
+        throw e;
+      });
+  };
+
+  getDetails = () => {
+    this.updateDetails()
       .then(() => {
         this.setState({ isPending: true });
-        return getFundStatistic(this.description.id);
+        return getFundStatistic(this.state.description!.id);
       })
       .then(data => {
-        this.profitChart = data.profitChart;
-        this.balanceChart = data.balanceChart;
-        this.statistic = data.statistic;
-        this.setState({ isPending: false });
+        this.setState({ isPending: false, ...data });
       })
-      .catch(e => {
+      .catch(() => {
         this.setState({ isPending: false });
       });
   };
 
   render() {
     const { currency, service, isAuthenticated } = this.props;
-    const { errorCode } = this.state;
-    if (errorCode) {
+    const {
+      hasError,
+      description,
+      statistic,
+      profitChart,
+      balanceChart
+    } = this.state;
+
+    if (hasError) {
       return <NotFoundPage />;
     }
 
-    if (!this.description) return null;
+    if (!description) return null;
     return (
-      <Page title={this.description.title}>
-        <FundDetailContext.Provider
+      <Page title={description.title}>
+        <ProgramDetailContext.Provider
           value={{
             updateDetails: this.updateDetails
           }}
@@ -96,40 +114,37 @@ class FundDetailsPage extends PureComponent {
           <div className="details">
             <div className="details__section">
               <FundDetailsDescriptionSection
-                FundWithdrawContainer={FundWithdrawalContainer}
-                FundDepositContainer={FundDepositContainer}
-                FundDetailContext={FundDetailContext}
-                fundDescription={this.description}
+                fundDescription={description}
                 isAuthenticated={isAuthenticated}
                 redirectToLogin={service.redirectToLogin}
-                onChangeInvestmentStatus={this.changeInvestmentStatus}
-                role={INVESTOR}
+                FundControls={FundControls}
+                FundWithdrawContainer={FundWithdrawalContainer}
               />
             </div>
             <div className="details__section">
               <FundDetailsStatisticSection
                 getFundStatistic={getFundStatistic}
-                programId={this.description.id}
+                programId={description.id}
                 currency={currency}
-                statistic={this.statistic}
-                profitChart={this.profitChart}
-                balanceChart={this.balanceChart}
+                statistic={statistic}
+                profitChart={profitChart}
+                balanceChart={balanceChart}
               />
             </div>
             <div className="details__history">
               <FundDetailsHistorySection
-                id={this.description.id}
+                id={description.id}
                 fetchFundStructure={fetchFundStructure}
               />
             </div>
           </div>
-        </FundDetailContext.Provider>
+        </ProgramDetailContext.Provider>
       </Page>
     );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: InvestorRootState) => {
   const { accountSettings, authData } = state;
 
   return {
@@ -138,14 +153,14 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch: Dispatch) => ({
   service: bindActionCreators(
     { getFundDescription, redirectToLogin: () => push(LOGIN_ROUTE) },
     dispatch
   )
 });
 
-export default compose(
+export default compose<ComponentType<IFundDetailsPageProps>>(
   connect(
     mapStateToProps,
     mapDispatchToProps
