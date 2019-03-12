@@ -5,6 +5,10 @@ export interface IPaging {
   currentPage: number;
   totalPages: number;
 }
+export interface ISkipAndTake {
+  skip: number;
+  take: number;
+}
 
 export const composePagingActionType = (actionType: string): string =>
   `${actionType}_PAGING`;
@@ -19,7 +23,7 @@ export const calculateTotalPages = (
 
 export const calculateSkipAndTake = (
   paging: IPaging
-): { skip: number; take: number } => {
+): ISkipAndTake => {
   const skip = paging.itemsOnPage * (paging.currentPage - 1);
   const take = paging.itemsOnPage;
   return { skip, take };

@@ -3,13 +3,18 @@ export type TFilter<T> = {
   value: T;
 };
 
-export interface IInvestorEventFilterValue<T> {
+export interface FilterValue<T = any> {
   value: T;
   label: T;
 }
 
-export interface IManagerEventFilterValue<T> {
-  value: T;
+export interface IInvestorEventFilterValue<T> extends FilterValue {}
+
+export interface IManagerEventFilterValue<T> extends FilterValue {
   labelKey: string;
-  label?: string;
+}
+
+export interface SortingColumn {
+  name: string;
+  sortingName: string;
 }

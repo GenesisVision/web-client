@@ -2,10 +2,10 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import fundsFacetPage from "shared/components/funds/funds-facet/funds-facet.page";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
+import PrivateRoute from "shared/components/private-route/private-route";
 import { SLUG_URL_REGEXP } from "shared/utils/constants";
 import replaceParams from "shared/utils/replace-params";
 
-import PrivateRoute from "../private-route";
 import FundDetailsPage from "./fund-details/fund-details.page";
 import FundsPage from "./funds/funds.page";
 

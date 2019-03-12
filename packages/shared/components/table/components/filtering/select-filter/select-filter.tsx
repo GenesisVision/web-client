@@ -11,7 +11,7 @@ interface ISelectFilterProps {
   label: string;
   value?: any;
   values?: any[];
-  onChange(value: TFilter<number>): void;
+  onChange(value: TFilter<any>): void;
 }
 
 class SelectFilter extends React.Component<

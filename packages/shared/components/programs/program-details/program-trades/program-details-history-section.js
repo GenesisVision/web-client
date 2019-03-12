@@ -122,6 +122,7 @@ const mapStateToProps = state => {
   return { isAuthenticated };
 };
 
-export default translate()(
-  compose(connect(mapStateToProps))(ProgramDetailsHistorySection)
-);
+export default compose(
+  translate(),
+  connect(mapStateToProps)
+)(ProgramDetailsHistorySection);
