@@ -5,12 +5,12 @@ import { LIST_VIEW } from "../table.constants";
 import TableLoader from "./table-loader";
 
 interface ITableBodyProps {
-  children(x: any, updateRow: any, updateItems: any): JSX.Element;
-  updateRow(row: any): void;
-  updateItems(): void;
+  children(x: any, updateRow?: any, updateItems?: any): JSX.Element;
+  updateRow?(row: any): void;
+  updateItems?(): void;
   items: any[];
-  tag: React.ComponentType<{ className: string }>;
-  isPending: boolean;
+  tag: React.ComponentType<{ className: string }> | string;
+  isPending?: boolean;
   view: LIST_VIEW;
   className?: string;
 }
