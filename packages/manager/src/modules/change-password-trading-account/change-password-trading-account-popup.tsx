@@ -89,10 +89,9 @@ class ChangePasswordTradingAccountPopup extends Component<
 const mapStateToProps = (
   state: ManagerRootState
 ): IChangePasswordTradingAccountPopupStateProps => {
-  const twoFactorEnabled =
-    state.accountSettings && state.accountSettings.twoFactorAuth.data
-      ? state.accountSettings.twoFactorAuth.data.twoFactorEnabled
-      : false;
+  const twoFactorEnabled = state.accountSettings.twoFactorAuth.data
+    ? state.accountSettings.twoFactorAuth.data.twoFactorEnabled
+    : false;
   return { twoFactorEnabled };
 };
 
