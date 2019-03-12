@@ -9,9 +9,12 @@ interface ITableToolbarProps {
   disableTitle: boolean;
   createButtonToolbar: JSX.Element;
   title: JSX.Element | string;
-  renderFilters(updateFilter: any, filtering: any): JSX.Element;
-  updateFilter: any;
-  filtering: any;
+  renderFilters(
+    updateFilter: (filter: any) => void,
+    filtering: Object
+  ): JSX.Element;
+  updateFilter(filter: any): void;
+  filtering: Object;
   view: LIST_VIEW;
   columns: SortingColumn[];
   sorting: string;
