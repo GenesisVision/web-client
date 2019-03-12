@@ -15,8 +15,16 @@ interface ITableContainerProps {
   isFetchOnMount: boolean;
   renderHeader?(column: SortingColumn): JSX.Element;
   renderSorting?(value: SortingColumn): string;
-  renderBodyCard?(x: any, updateRow?: any, updateItems?: any): JSX.Element;
-  renderBodyRow?(x: any, updateRow?: any, updateItems?: any): JSX.Element;
+  renderBodyCard?(
+    x: any,
+    updateRow?: (row: any) => void,
+    updateItems?: () => void
+  ): JSX.Element;
+  renderBodyRow?(
+    x: any,
+    updateRow?: (row: any) => void,
+    updateItems?: () => void
+  ): JSX.Element;
   renderFilters?(
     updateFilter: (filter: any) => void,
     filtering: Object

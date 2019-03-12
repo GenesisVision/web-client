@@ -32,8 +32,16 @@ interface ITableProps {
     filtering: Object
   ): JSX.Element;
   updateItems?(): void;
-  renderBodyCard?(x: any, updateRow?: any, updateItems?: any): JSX.Element;
-  renderBodyRow?(x: any, updateRow?: any, updateItems?: any): JSX.Element;
+  renderBodyCard?(
+    x: any,
+    updateRow?: (row: any) => void,
+    updateItems?: () => void
+  ): JSX.Element;
+  renderBodyRow?(
+    x: any,
+    updateRow?: (row: any) => void,
+    updateItems?: () => void
+  ): JSX.Element;
   isPending?: boolean;
   emptyMessage?: JSX.Element | string;
   showSwitchView?: boolean;

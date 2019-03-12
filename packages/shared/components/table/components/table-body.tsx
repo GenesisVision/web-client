@@ -5,7 +5,11 @@ import { LIST_VIEW } from "../table.constants";
 import TableLoader from "./table-loader";
 
 interface ITableBodyProps {
-  children(x: any, updateRow?: any, updateItems?: any): JSX.Element;
+  children(
+    x: any,
+    updateRow?: (row: any) => void,
+    updateItems?: () => void
+  ): JSX.Element;
   updateRow?(row: any): void;
   updateItems?(): void;
   items: any[];
