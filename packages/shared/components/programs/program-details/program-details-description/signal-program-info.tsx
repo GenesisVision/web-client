@@ -19,7 +19,7 @@ const SignalProgramInfo: FunctionComponent<
         accent
       >
         <NumberFormat
-          value={formatValue(programDescription.signalSuccessFee, 2)}
+          value={programDescription.signalSuccessFee}
           displayType="text"
           suffix=" %"
         />
@@ -30,7 +30,7 @@ const SignalProgramInfo: FunctionComponent<
         accent
       >
         <NumberFormat
-          value={formatValue(programDescription.signalSubscriptionFee, 2)}
+          value={programDescription.signalSubscriptionFee}
           displayType="text"
           suffix=" GVT"
         />
