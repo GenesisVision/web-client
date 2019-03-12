@@ -7,6 +7,7 @@ import React, { ComponentType, PureComponent } from "react";
 import { connect } from "react-redux";
 import { InvestorRootState } from "reducers";
 import { Dispatch, bindActionCreators, compose } from "redux";
+import { LOGIN_ROUTE } from "shared/components/auth/login/constants";
 import { ProgramDetailContext } from "shared/components/details/helpers/details-context";
 import FundDetailsDescriptionSection from "shared/components/funds/fund-details/fund-details-description/fund-details-description-section";
 import FundDetailsHistorySection from "shared/components/funds/fund-details/fund-details-history-section/fund-details-history-section";
@@ -20,7 +21,6 @@ import NotFoundPage from "shared/components/not-found/not-found.routes";
 import Page from "shared/components/page/page";
 import { ResponseError } from "shared/utils/types";
 
-import { LOGIN_ROUTE } from "../../auth/login/login.routes";
 import FundControls from "./components/fund-controls";
 
 interface IFundDetailsPageProps {

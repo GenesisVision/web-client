@@ -6,13 +6,9 @@ import {
   IProgramDetailContext,
   ProgramDetailContext
 } from "shared/components/details/helpers/details-context";
+import { IProgramReinvestingContainerOwnProps } from "shared/components/programs/program-details/program-details.types";
 
 import { toggleReinvesting } from "../services/program-reinvesting.service";
-
-interface IProgramReinvestingContainerOwnProps {
-  programId: string;
-  isReinvesting: boolean;
-}
 
 interface IProgramReinvestingContainerProps
   extends IProgramReinvestingContainerOwnProps,

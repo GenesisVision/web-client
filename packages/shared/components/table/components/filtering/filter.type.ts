@@ -5,14 +5,13 @@ export type TFilter<T> = {
 
 export interface FilterValue<T = any> {
   value: T;
-  label: T;
+  label?: T;
+  labelKey?: T;
 }
 
-export interface IInvestorEventFilterValue<T> extends FilterValue {}
+export interface IInvestorEventFilterValue extends FilterValue {}
 
-export interface IManagerEventFilterValue<T> extends FilterValue {
-  labelKey: string;
-}
+export interface IManagerEventFilterValue extends FilterValue {}
 
 export interface SortingColumn {
   name: string;

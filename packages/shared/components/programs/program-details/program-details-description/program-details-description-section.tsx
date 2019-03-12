@@ -16,7 +16,7 @@ interface IProgramDetailsDescriptionSectionProps
   isAuthenticated: boolean;
   redirectToLogin(): void;
   ProgramControls: ComponentType<any>;
-  ProgramReinvestingWidget: ComponentType<any>;
+  ProgramReinvestingWidget?: ComponentType<any>;
   ProgramWithdrawContainer: ComponentType<any>;
 }
 

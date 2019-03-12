@@ -1,9 +1,10 @@
+import { HistoryCountsType } from "shared/components/programs/program-details/program-details.types";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 
 import { fetchPortfolioEvents } from "../../../dashboard/services/dashboard-events.services";
 
-export const fetchHistoryCounts = (id: string) => {
+export const fetchHistoryCounts = (id: string): Promise<HistoryCountsType> => {
   const isAuthenticated = authService.isAuthenticated();
   const filtering = { take: 0 };
   const tradesCountPromise = programsApi.v10ProgramsByIdTradesGet(
