@@ -2,12 +2,10 @@ import "./paging.scss";
 
 import * as React from "react";
 import Pager from "shared/components/pager/pager";
+import { IPaging } from "shared/components/table/helpers/paging.helpers";
 
 interface IPagingProps {
-  paging: {
-    total: number;
-    current: number;
-  };
+  paging: IPaging;
   hidden: boolean;
   updatePaging(opts: { currentPage: number }): void;
 }
@@ -15,12 +13,12 @@ interface IPagingProps {
 class Paging extends React.Component<IPagingProps> {
   render() {
     const { paging, hidden, updatePaging } = this.props;
-    if (hidden || paging.total === 0) return null;
+    if (hidden || paging.totalPages === 0) return null;
 
     return (
       <Pager
-        total={paging.total}
-        current={paging.current}
+        total={paging.totalPages}
+        current={paging.currentPage}
         countVisiblePages={3}
         onPageChanged={(nextPage: number) =>
           updatePaging({ currentPage: nextPage - 1 })
