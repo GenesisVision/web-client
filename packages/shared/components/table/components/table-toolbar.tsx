@@ -6,17 +6,17 @@ import { LIST_VIEW } from "../table.constants";
 import { SortingColumn } from "./filtering/filter.type";
 
 interface ITableToolbarProps {
-  disableTitle: boolean;
+  disableTitle?: boolean;
   createButtonToolbar: JSX.Element;
-  title: JSX.Element | string;
-  renderFilters(
+  title?: JSX.Element | string;
+  renderFilters?(
     updateFilter: (filter: any) => void,
     filtering: Object
   ): JSX.Element;
   updateFilter(filter: any): void;
   filtering: Object;
   view: LIST_VIEW;
-  columns: SortingColumn[];
+  columns?: SortingColumn[];
   sorting: string;
   updateSorting(value: string): void;
   renderSorting(value: SortingColumn): string;
