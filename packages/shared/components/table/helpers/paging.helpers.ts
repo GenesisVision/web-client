@@ -1,9 +1,10 @@
 import { DEFAULT_PAGING } from "../reducers/table-paging.reducer";
 
 export interface IPaging {
-  itemsOnPage: number;
   currentPage: number;
   totalPages: number;
+  totalItems: number;
+  itemsOnPage: number;
 }
 export interface ISkipAndTake {
   skip: number;
@@ -21,9 +22,7 @@ export const calculateTotalPages = (
   return Math.ceil(itemsCount / itemsOnPage);
 };
 
-export const calculateSkipAndTake = (
-  paging: IPaging
-): ISkipAndTake => {
+export const calculateSkipAndTake = (paging: IPaging): ISkipAndTake => {
   const skip = paging.itemsOnPage * (paging.currentPage - 1);
   const take = paging.itemsOnPage;
   return { skip, take };
