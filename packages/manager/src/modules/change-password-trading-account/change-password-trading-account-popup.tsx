@@ -3,20 +3,23 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators } from "redux";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
-import RootState from "shared/reducers/root-reducer";
 
 import ChangePasswordTradingAccountForm, {
   IChangePasswordTradingAccountFormValues
 } from "./components/change-password-trading-account-form";
 import { changePasswordTradingAccount } from "./services/change-password-trading-account.service";
+import { ManagerRootState } from "../../reducers";
 
 interface IChangePasswordTradingAccountPopupOwnProps extends IDialogProps {
   id: string;
   programName: string;
 }
 
-interface IChangePasswordTradingAccountPopupOtherProps {
+interface IChangePasswordTradingAccountPopupStateProps {
   twoFactorEnabled: boolean;
+}
+
+interface IChangePasswordTradingAccountPopupDispatchProps {
   service: {
     changePasswordTradingAccount(
       id: string,
@@ -26,7 +29,8 @@ interface IChangePasswordTradingAccountPopupOtherProps {
 }
 
 type IChangePasswordTradingAccountPopupProps = IChangePasswordTradingAccountPopupOwnProps &
-  IChangePasswordTradingAccountPopupOtherProps;
+  IChangePasswordTradingAccountPopupStateProps &
+  IChangePasswordTradingAccountPopupDispatchProps;
 
 interface IChangePasswordTradingAccountPopupState {
   errorMessage: string;
@@ -82,15 +86,19 @@ class ChangePasswordTradingAccountPopup extends Component<
   }
 }
 
-const mapStateToProps = (state: RootState) => {
-  if (!state.accountSettings) return;
-  const twoFactorEnabled = state.accountSettings.twoFactorAuth.data
-    ? state.accountSettings.twoFactorAuth.data.twoFactorEnabled
-    : false;
+const mapStateToProps = (
+  state: ManagerRootState
+): IChangePasswordTradingAccountPopupStateProps => {
+  const twoFactorEnabled =
+    state.accountSettings && state.accountSettings.twoFactorAuth.data
+      ? state.accountSettings.twoFactorAuth.data.twoFactorEnabled
+      : false;
   return { twoFactorEnabled };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
+const mapDispatchToProps = (
+  dispatch: Dispatch
+): IChangePasswordTradingAccountPopupDispatchProps => ({
   service: bindActionCreators(
     {
       changePasswordTradingAccount
