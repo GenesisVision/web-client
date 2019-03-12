@@ -1,20 +1,20 @@
-import React, { Fragment } from "react";
+import * as React from "react";
 
-import { CARDS_VIEW, TABLE_VIEW } from "../table.constants";
+import { LIST_VIEW } from "../table.constants";
 import TableLoaderCardRow from "./table-loader-card-row";
 import TableLoaderTableRow from "./table-loader-table-row";
 
-const TableLoader = ({ view }) => {
+const TableLoader: React.FC<{ view: LIST_VIEW }> = ({ view }) => {
   switch (view) {
-    case CARDS_VIEW:
+    case LIST_VIEW.CARDS:
       return <TableLoaderCardRow />;
-    case TABLE_VIEW:
+    case LIST_VIEW.TABLE:
     default:
       return (
-        <Fragment>
+        <React.Fragment>
           <TableLoaderTableRow />
           <TableLoaderTableRow />
-        </Fragment>
+        </React.Fragment>
       );
   }
 };

@@ -1,7 +1,7 @@
-import React from "react";
+import * as React from "react";
 import SvgLoader from "shared/components/svg-loader/svg-loader";
 
-const TableLoaderTableRow = () => {
+const TableLoaderTableRow: React.FC = () => {
   return (
     <tr>
       <td className="table__cell programs-table__cell programs-table__cell--name">
@@ -16,9 +16,9 @@ const TableLoaderTableRow = () => {
     </tr>
   );
 };
-const TableLoaderCell = ({ width }) => (
+const TableLoaderCell: React.FC<{ width: number }> = ({ width }) => (
   <div style={{ width: width }}>
-    <SvgLoader height="20" width={width}>
+    <SvgLoader height={20} width={width}>
       <rect x="0" y="0" rx="8" ry="8" width={width} height="20" />
     </SvgLoader>
   </div>
