@@ -17,31 +17,31 @@ import { SortingColumn } from "./filtering/filter.type";
 import { IPaging } from "../helpers/paging.helpers";
 
 interface ITableProps {
-  updateItems?(): void;
-  className: string;
-  disableTitle: boolean;
+  updateFilter(filter: any): void;
+  updateSorting(opt: string): () => void;
+  updatePaging(page: number): void;
   items: any[];
-  title: JSX.Element | string;
-  renderFilters(
+  filtering: Object;
+  sorting: string;
+  paging: IPaging;
+  renderHeader?(column: SortingColumn): JSX.Element;
+  renderSorting?(value: SortingColumn): string;
+  updateRow?(row: any): void;
+  renderFilters?(
     updateFilter: (filter: any) => void,
     filtering: Object
   ): JSX.Element;
-  updateFilter(filter: any): void;
-  filtering: Object;
-  columns: SortingColumn[];
-  sorting: string;
-  updateSorting(opt: string): () => void;
-  renderHeader(column: SortingColumn): JSX.Element;
-  renderSorting(value: SortingColumn): string;
-  createButtonToolbar: JSX.Element;
-  renderBodyCard(x: any, updateRow?: any, updateItems?: any): JSX.Element;
-  renderBodyRow(x: any, updateRow?: any, updateItems?: any): JSX.Element;
-  paging: IPaging;
-  updatePaging(page: number): void;
+  updateItems?(): void;
+  renderBodyCard?(x: any, updateRow?: any, updateItems?: any): JSX.Element;
+  renderBodyRow?(x: any, updateRow?: any, updateItems?: any): JSX.Element;
   isPending?: boolean;
   emptyMessage?: JSX.Element | string;
-  updateRow?(row: any): void;
-  showSwitchView: boolean;
+  showSwitchView?: boolean;
+  columns?: SortingColumn[];
+  title?: JSX.Element | string;
+  className?: string;
+  disableTitle?: boolean;
+  createButtonToolbar?: JSX.Element;
 }
 
 interface ITableState {
@@ -66,9 +66,9 @@ class Table extends React.Component<ITableProps, ITableState> {
   };
 
   isViewSwitchEnabled =
-    this.props.showSwitchView &&
     this.props.renderBodyRow !== undefined &&
-    this.props.renderBodyCard !== undefined;
+    this.props.renderBodyCard !== undefined &&
+    !!this.props.showSwitchView;
 
   renderTrackVertical = (): JSX.Element => (
     <span className="table__vertical-track" />
