@@ -21,11 +21,6 @@ export interface IProgramWithdrawalContainerProps {
   accountCurrency: string;
 }
 
-export interface IProgramReinvestingContainerOwnProps {
-  programId: string;
-  isReinvesting: boolean;
-}
-
 export interface IDescriptionSection {
   ProgramControls: React.ComponentType<IProgramControlsProps>;
   ProgramWithdrawContainer: React.ComponentType<
@@ -33,6 +28,9 @@ export interface IDescriptionSection {
   >;
   ProgramReinvestingWidget?: React.ComponentType<
     IProgramReinvestingContainerOwnProps
+  >;
+  ChangePasswordTradingAccount?: React.ComponentType<
+    IChangePasswordTradingAccountProps
   >;
 }
 
@@ -48,4 +46,12 @@ export interface IHistorySection {
   ): Promise<TableItems<DashboardPortfolioEvent | ManagerPortfolioEvent>>;
   fetchHistoryCounts(id: string): Promise<HistoryCountsType>;
   eventTypeFilterValues: FilterValue[];
+}
+
+export interface IProgramReinvestingContainerOwnProps {
+  programId: string;
+  isReinvesting: boolean;
+}
+export interface IChangePasswordTradingAccountProps {
+  programDescription: ProgramDetailsFull;
 }

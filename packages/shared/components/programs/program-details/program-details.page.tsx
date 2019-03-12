@@ -143,6 +143,9 @@ class ProgramDetailsPage extends PureComponent<
                 isAuthenticated={isAuthenticated}
                 redirectToLogin={service.redirectToLogin}
                 ProgramControls={descriptionSection.ProgramControls}
+                ChangePasswordTradingAccount={
+                  descriptionSection.ChangePasswordTradingAccount
+                }
                 ProgramWithdrawContainer={
                   descriptionSection.ProgramWithdrawContainer
                 }
