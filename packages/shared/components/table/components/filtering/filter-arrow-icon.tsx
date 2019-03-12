@@ -1,10 +1,10 @@
-import classnames from "classnames";
-import React from "react";
+import classNames from "classnames";
+import * as React from "react";
 
-const FilterArrowIcon = ({ isOpen }) => {
+const FilterArrowIcon: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
   return (
     <svg
-      className={classnames("filter__arrow", {
+      className={classNames("filter__arrow", {
         "filter__arrow__is-open": isOpen
       })}
       width="6"

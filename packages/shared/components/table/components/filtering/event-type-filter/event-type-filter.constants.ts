@@ -1,3 +1,8 @@
+import {
+  IInvestorEventFilterValue,
+  IManagerEventFilterValue
+} from "../filter.type";
+
 export const EVENT_TYPE_FILTER_NAME = "type";
 
 export enum INVESTOR_EVENT_TYPE {
@@ -25,13 +30,13 @@ export enum MANAGER_EVENT_TYPE {
   ExitFee = "ExitFee"
 }
 
-export const INVESTOR_EVENT_TYPE_FILTER_VALUES = Object.keys(
+export const INVESTOR_EVENT_TYPE_FILTER_VALUES: IInvestorEventFilterValue<
   INVESTOR_EVENT_TYPE
-).map(x => ({ value: x, label: x }));
+>[] = Object.values(INVESTOR_EVENT_TYPE).map(x => ({ value: x, label: x }));
 
-export const MANAGER_EVENT_TYPE_FILTER_VALUES = Object.keys(
-  MANAGER_EVENT_TYPE
-).map(x => ({
+export const MANAGER_EVENT_TYPE_FILTER_VALUES: IManagerEventFilterValue<
+  INVESTOR_EVENT_TYPE
+>[] = Object.values(MANAGER_EVENT_TYPE).map(x => ({
   value: x,
   labelKey: `manager.dashboard-page.portfolio-events.types.${x}`
 }));
