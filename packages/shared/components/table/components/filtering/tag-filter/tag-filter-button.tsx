@@ -1,10 +1,10 @@
-import classnames from "classnames";
+import classNames from "classnames";
 import { GVButton } from "gv-react-components";
 import * as React from "react";
 
 export interface ITagFilterButton {
   isActive: boolean;
-  onClickHandle?(name: string): void;
+  onClickHandle?(e: React.MouseEvent<HTMLDivElement, MouseEvent>): void;
 }
 
 const TagFilterButton: React.FC<ITagFilterButton> = ({
@@ -15,7 +15,7 @@ const TagFilterButton: React.FC<ITagFilterButton> = ({
     <GVButton
       variant="text"
       color="secondary"
-      className={classnames("tag-filter__button tag-button", {
+      className={classNames("tag-filter__button tag-button", {
         "tag-filter__button--active": isActive
       })}
       onClick={onClickHandle}

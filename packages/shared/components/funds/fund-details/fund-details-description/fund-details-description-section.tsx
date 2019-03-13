@@ -12,12 +12,17 @@ import { STATUS } from "shared/constants/constants";
 import { FUND } from "shared/constants/constants";
 import { composeFundNotificationsUrl } from "shared/utils/compose-url";
 
+import {
+  IFundControlsProps,
+  IFundWithdrawalContainerProps
+} from "../fund-details.types";
+
 interface IFundDetailsDescriptionProps {
   fundDescription: FundDetailsFull;
   isAuthenticated: boolean;
   redirectToLogin(): void;
-  FundControls: React.ComponentType<any>;
-  FundWithdrawContainer: React.ComponentType<any>;
+  FundControls: React.ComponentType<IFundControlsProps>;
+  FundWithdrawContainer: React.ComponentType<IFundWithdrawalContainerProps>;
   accountCurrency: string;
 }
 

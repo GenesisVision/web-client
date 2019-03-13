@@ -1,19 +1,12 @@
-import { FundWithdrawInfo, WalletData } from "gv-api-web";
 import { Dispatch } from "redux";
+import {
+  FundWithdraw,
+  FundWithdrawalInfoResponse
+} from "shared/components/fund-withdraw/fund-withdraw.types";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import managerApi from "shared/services/api-client/manager-api";
 import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
-
-export type FundWithdraw = {
-  percent: number;
-  currency: string;
-};
-
-export type FundWithdrawalInfoResponse = {
-  withdrawalInfo: FundWithdrawInfo;
-  wallets: WalletData[];
-};
 
 export const getFundWithdrawInfo = (
   id: string,
@@ -33,7 +26,7 @@ export const getFundWithdrawInfo = (
 
 export const withdrawFund = (id: string, onClose: () => void) => (
   value: FundWithdraw
-) => (dispatch: Dispatch) => {
+): any => (dispatch: Dispatch) => {
   return managerApi
     .v10ManagerFundsByIdWithdrawByPercentPost(
       id,

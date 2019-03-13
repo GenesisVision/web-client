@@ -1,11 +1,5 @@
 export const composeSortingActionType = actionType => `${actionType}_SORTING`;
 
-export const SortingDirection_old = {
-  none: "None",
-  asc: "Asc",
-  desc: "Desc"
-};
-
 export enum SORTING_DIRECTION {
   NONE = "None",
   ASC = "Asc",

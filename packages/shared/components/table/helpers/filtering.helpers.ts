@@ -1,3 +1,5 @@
+import { IComposeDefaultFilter } from "../components/table.types";
+
 export const RANGE_FILTER_TYPE = "RANGE_FILTER_TYPE";
 export const GENERAL_FILTER_TYPE = "GENERAL_FILTER_TYPE";
 
@@ -23,7 +25,10 @@ export interface IFilter {
 export const composeFilteringActionType = (actionType: string): string =>
   `${actionType}_FILTERING`;
 
-export const composeFilters = (allFilters: any, filtering: any): any => {
+export const composeFilters = (
+  allFilters: IComposeDefaultFilter[],
+  filtering: { [keys: string]: Object }
+): any => {
   if (!allFilters) return {};
   return allFilters.reduce((accum, cur) => {
     const { name, type, composeRequestValue } = cur;

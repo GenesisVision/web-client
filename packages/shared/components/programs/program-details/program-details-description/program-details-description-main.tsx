@@ -2,7 +2,7 @@ import "./program-details-description.scss";
 
 import { ProgramDetailsFull } from "gv-api-web";
 import { GVButton } from "gv-react-components";
-import React, { Component } from "react";
+import React, { Component, ComponentType } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
@@ -20,10 +20,15 @@ import {
 } from "shared/utils/compose-url";
 import { Nullable } from "shared/utils/types";
 
+import { IChangePasswordTradingAccountProps } from "../program-details.types";
 import InvestmentLimitsPopover from "./investment-limits-popover";
 
 interface IIProgramDetailsDescriptionMainOwnProps {
   programDescription: ProgramDetailsFull;
+  ChangePasswordTradingAccount?: ComponentType<
+    IChangePasswordTradingAccountProps
+  >;
+  isOwnProgram: boolean;
 }
 
 interface IProgramDetailsDescriptionMainProps
@@ -52,7 +57,12 @@ class ProgramDetailsDescriptionMain extends Component<
 
   render() {
     const { anchor } = this.state;
-    const { t, programDescription } = this.props;
+    const {
+      t,
+      programDescription,
+      ChangePasswordTradingAccount,
+      isOwnProgram
+    } = this.props;
     const personalDetails = programDescription.personalProgramDetails;
 
     return (
@@ -111,6 +121,11 @@ class ProgramDetailsDescriptionMain extends Component<
           </div>
         </div>
         <div className="program-details-description__settings">
+          {ChangePasswordTradingAccount && isOwnProgram && (
+            <ChangePasswordTradingAccount
+              programDescription={programDescription}
+            />
+          )}
           <DetailsFavorite
             id={programDescription.id}
             isFavorite={personalDetails && personalDetails.isFavorite}

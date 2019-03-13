@@ -13,7 +13,7 @@ interface IChipProps {
   // children: () => void | { [keys: string]: any } | JSX.Element;
   className?: string;
   rounded?: boolean;
-  type: CHIP_TYPE;
+  type?: CHIP_TYPE;
   onClick?(event: React.MouseEvent<HTMLElement>): void | undefined;
 }
 class Chip extends React.Component<IChipProps> {
