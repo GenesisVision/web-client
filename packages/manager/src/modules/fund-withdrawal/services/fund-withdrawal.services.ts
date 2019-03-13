@@ -26,7 +26,7 @@ export const getFundWithdrawInfo = (
 
 export const withdrawFund = (id: string, onClose: () => void) => (
   value: FundWithdraw
-) => (dispatch: Dispatch) => {
+): any => (dispatch: Dispatch) => {
   return managerApi
     .v10ManagerFundsByIdWithdrawByPercentPost(
       id,
