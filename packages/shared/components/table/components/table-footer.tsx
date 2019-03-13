@@ -4,7 +4,7 @@ import Paging from "./paging/paging";
 import { IPaging } from "../helpers/paging.helpers";
 
 const TableFooter: React.FC<{
-  isPending: boolean;
+  isPending?: boolean;
   paging: IPaging;
   updatePaging(page: number): void;
 }> = ({ isPending, paging, updatePaging }) => {

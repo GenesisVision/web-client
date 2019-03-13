@@ -12,7 +12,7 @@ import { SortingColumn } from "./filtering/filter.type";
 interface ITableHeaderProps {
   sorting: string;
   updateSorting(opt: string): () => void;
-  columns: SortingColumn[];
+  columns?: SortingColumn[];
   children(column: SortingColumn): JSX.Element;
 }
 
@@ -38,7 +38,7 @@ class TableHeader extends React.Component<ITableHeaderProps> {
   };
 
   renderColumns = (): JSX.Element[] =>
-    this.props.columns.map(column => {
+    (this.props.columns || []).map(column => {
       return (
         <TableHeadCell
           key={column.name}

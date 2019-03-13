@@ -17,15 +17,15 @@ import {
 
 interface ISortingFilterProps {
   sorting: string;
-  columns: SortingColumn[];
+  columns?: SortingColumn[];
   renderValueText(value: SortingColumn): string;
   onChange?(): void;
-  updateSorting?(value: string): void;
+  updateSorting(value: string): void;
 }
 
 class SortingFilter extends React.Component<ISortingFilterProps> {
   composeSortingColumnValues = (): FilterValue[] =>
-    this.props.columns
+    (this.props.columns || [])
       .filter(x => x.sortingName)
       .map(x => ({
         value: x.sortingName,

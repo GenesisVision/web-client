@@ -6,7 +6,7 @@ import { IPaging } from "shared/components/table/helpers/paging.helpers";
 
 interface IPagingProps {
   paging: IPaging;
-  hidden: boolean;
+  hidden?: boolean;
   updatePaging(opts: { currentPage: number }): void;
 }
 
