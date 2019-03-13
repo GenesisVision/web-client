@@ -7,15 +7,15 @@ import React from "react";
 import { FilterValue } from "shared/components/table/components/filtering/filter.type";
 import { TableItems } from "shared/components/table/helpers/mapper";
 
+import { IDialogProps } from "../../dialog/dialog";
+
 export interface IProgramControlsProps {
   isAuthenticated: boolean;
   redirectToLogin(): void;
   programDescription: ProgramDetailsFull;
 }
 
-export interface IProgramWithdrawalContainerProps {
-  open: boolean;
-  onClose(): void;
+export interface IProgramWithdrawalContainerProps extends IDialogProps {
   id: string;
   assetCurrency: string;
   accountCurrency: string;
