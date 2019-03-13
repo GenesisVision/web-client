@@ -2,6 +2,7 @@ import "./dashboard-portfolio-event-logo.scss";
 
 import classnames from "classnames";
 import React from "react";
+import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import EventCancelledIconRed from "shared/media/event-cancelled-red.svg";
 import EventCancelledIcon from "shared/media/event-cancelled.svg";
@@ -18,6 +19,7 @@ import EventReinvestIcon from "shared/media/event-reinvest.svg";
 import EventStartedIcon from "shared/media/event-started.svg";
 import EventWithdrawIcon from "shared/media/event-withdraw.svg";
 
+import { composeProgramDetailsUrl } from "../../../../utils/compose-url";
 import { EventLogoType } from "./dashboard-portfolio-event-logo.helper";
 
 export const EvenLogoIcon = ({ type }) => {
@@ -66,14 +68,20 @@ const PortfolioEventLogo = ({ type, logo, color }) => {
 
   return (
     <div className={className}>
-      <div className="portfolio-event-logo__photo">
+      <Link
+        to={{
+          // pathname: composeProgramDetailsUrl(url),
+          state: `/ ${type}`
+        }}
+        className="portfolio-event-logo__photo"
+      >
         <AssetAvatar
           url={logo}
           alt={type}
           className="portfolio-event-logo__logo"
           color={color}
         />
-      </div>
+      </Link>
       <div className={"portfolio-event-logo__type"}>
         <EvenLogoIcon type={type} />
       </div>
