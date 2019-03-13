@@ -14,4 +14,5 @@ export interface IComposeDefaultFilter {
   composeApiRequestValue?(value: any): Object; // temp
   defaultValue?: any;
   type?: FILTER_TYPE;
+  validate?(value: any): boolean;
 }
