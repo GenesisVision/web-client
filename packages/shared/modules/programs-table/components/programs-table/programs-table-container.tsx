@@ -1,10 +1,10 @@
 import { push } from "connected-react-router";
 import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
-import React, { Component, Fragment } from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { bindActionCreators, compose } from "redux";
+import { bindActionCreators, compose, Dispatch } from "redux";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import LevelFilter from "shared/components/table/components/filtering/level-filter/level-filter";
@@ -18,8 +18,51 @@ import * as programsService from "../../services/programs-table.service";
 import { composeCurrencyFilter } from "./program-table.helpers";
 import ProgramsTable from "./programs-table";
 import { CURRENCY_FILTER_NAME, LEVEL_FILTER_NAME } from "./programs.constants";
+import RootState from "shared/reducers/root-reducer";
+import { ProgramsList, ProgramTag } from "gv-api-web";
+import { TFilter } from "shared/components/table/components/filtering/filter.type";
 
-class ProgramsTableContainer extends Component {
+interface IProgramsTableContainerProps {
+  isLocationChanged(location: string): boolean;
+  defaultFilters: any;
+  showSwitchView: boolean;
+  filters: { [keys: string]: any };
+  title: string;
+}
+
+interface IProgramsTableContainerStateProps {
+  isPending: boolean;
+  data: any;
+  isAuthenticated: boolean;
+  currencies: string[];
+  programTags: ProgramTag[];
+}
+
+interface IProgramsTableContainerDispatchProps {
+  service: {
+    toggleFavoriteProgram(programId: string, isFavorite: boolean): void;
+    redirectToLogin(): void;
+    getPrograms(filters: Object): void;
+    fetchPrograms(filters: { [keys: string]: any }): Promise<ProgramsList>;
+    getProgramsFilters(): (dispatch: any, getState: any) => Object;
+    programsChangePage(
+      nextPage: number
+    ): (dispatch: any, getState: any) => void;
+    programsChangeSorting(
+      sorting: string
+    ): (dispatch: any, getState: any) => void;
+    programsChangeFilter(
+      filter: TFilter<any>
+    ): (dispatch: any, getState: any) => void;
+  };
+}
+
+class ProgramsTableContainer extends React.Component<
+  IProgramsTableContainerProps &
+    IProgramsTableContainerStateProps &
+    IProgramsTableContainerDispatchProps &
+    InjectedTranslateProps
+> {
   componentDidMount() {
     const { service, defaultFilters } = this.props;
     service.getPrograms(defaultFilters);
@@ -68,7 +111,7 @@ class ProgramsTableContainer extends Component {
         updateFilter={service.programsChangeFilter}
         renderFilters={(updateFilter, filtering) => {
           return (
-            <Fragment>
+            <React.Fragment>
               <TagFilter
                 name={TAG_FILTER_NAME}
                 value={tagsFilterValue(filtering[TAG_FILTER_NAME])}
@@ -93,7 +136,7 @@ class ProgramsTableContainer extends Component {
                 onChange={updateFilter}
                 startLabel={t("filters.date-range.program-start")}
               />
-            </Fragment>
+            </React.Fragment>
           );
         }}
         paging={{
@@ -112,7 +155,9 @@ class ProgramsTableContainer extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (
+  state: RootState
+): IProgramsTableContainerStateProps => {
   const { isAuthenticated } = state.authData;
   const { isPending, data } = state.programsData.items;
   const currencies = state.platformData.data
@@ -124,7 +169,9 @@ const mapStateToProps = state => {
   return { isPending, data, isAuthenticated, currencies, programTags };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (
+  dispatch: Dispatch
+): IProgramsTableContainerDispatchProps => ({
   service: bindActionCreators(
     {
       ...programsService,
