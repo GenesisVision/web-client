@@ -1,41 +1,86 @@
 import "./table.scss";
 import "./table-cards.scss";
 
-import classnames from "classnames";
-import React, { Component } from "react";
+import classNames from "classnames";
+import * as React from "react";
 import GVScroll from "shared/components/scroll/gvscroll";
 import TableBody from "shared/components/table/components/table-body";
 import TableFooter from "shared/components/table/components/table-footer";
 import TableHeader from "shared/components/table/components/table-header";
 import TableToolbar from "shared/components/table/components/table-toolbar";
 import {
-  CARDS_VIEW,
-  PROGRAMS_VIEW,
-  TABLE_VIEW
+  LIST_VIEW,
+  PROGRAMS_VIEW
 } from "shared/components/table/table.constants";
 import { loadData, saveData } from "shared/utils/localstorage";
+import { SortingColumn } from "./filtering/filter.type";
+import { IPaging } from "../helpers/paging.helpers";
 
-class Table extends Component {
+interface ITableProps {
+  updateFilter(filter: any): void;
+  updateSorting(opt: string): () => void;
+  updatePaging(page: number): void;
+  items: any[];
+  filtering: Object;
+  sorting: string;
+  paging: IPaging;
+  renderHeader?(column: SortingColumn): JSX.Element;
+  renderSorting?(value: SortingColumn): string;
+  updateRow?(row: any): void;
+  renderFilters?(
+    updateFilter: (filter: any) => void,
+    filtering: Object
+  ): JSX.Element;
+  updateItems?(): void;
+  renderBodyCard?(
+    x: any,
+    updateRow?: (row: any) => void,
+    updateItems?: () => void
+  ): JSX.Element;
+  renderBodyRow?(
+    x: any,
+    updateRow?: (row: any) => void,
+    updateItems?: () => void
+  ): JSX.Element;
+  isPending?: boolean;
+  emptyMessage?: JSX.Element | string;
+  showSwitchView?: boolean;
+  columns?: SortingColumn[];
+  title?: JSX.Element | string;
+  className?: string;
+  disableTitle?: boolean;
+  createButtonToolbar?: JSX.Element;
+}
+
+interface ITableState {
+  view: LIST_VIEW;
+}
+
+class Table extends React.Component<ITableProps, ITableState> {
   state = {
-    view: TABLE_VIEW
+    view: LIST_VIEW.TABLE
   };
 
   componentDidMount() {
     if (this.isViewSwitchEnabled)
-      this.setState({ view: loadData(PROGRAMS_VIEW) || TABLE_VIEW });
+      this.setState({
+        view: (loadData(PROGRAMS_VIEW) as LIST_VIEW) || LIST_VIEW.TABLE
+      });
   }
 
-  changeView = view => {
+  changeView = (view: LIST_VIEW) => {
     saveData(PROGRAMS_VIEW, view);
     this.setState({ view });
   };
 
   isViewSwitchEnabled =
-    this.props.showSwitchView &&
     this.props.renderBodyRow !== undefined &&
-    this.props.renderBodyCard !== undefined;
+    this.props.renderBodyCard !== undefined &&
+    !!this.props.showSwitchView;
 
-  renderTrackVertical = () => <span className="table__vertical-track" />;
+  renderTrackVertical = (): JSX.Element => (
+    <span className="table__vertical-track" />
+  );
 
   render() {
     const { view } = this.state;
@@ -85,20 +130,20 @@ class Table extends Component {
           autoHeightMax={14000}
           renderTrackVertical={this.renderTrackVertical}
         >
-          {view === CARDS_VIEW && (
-            <div className={classnames("table", className)}>
+          {view === LIST_VIEW.CARDS && (
+            <div className={classNames("table", className)}>
               <TableBody
                 items={items}
                 className="table-cards"
                 tag="div"
-                view={CARDS_VIEW}
+                view={LIST_VIEW.CARDS}
               >
                 {renderBodyCard}
               </TableBody>
             </div>
           )}
-          {view === TABLE_VIEW && (
-            <table className={classnames("table", className)}>
+          {view === LIST_VIEW.TABLE && (
+            <table className={classNames("table", className)}>
               <TableHeader
                 columns={columns}
                 sorting={sorting}
@@ -111,7 +156,7 @@ class Table extends Component {
                 items={items}
                 className="table__body"
                 tag="tbody"
-                view={TABLE_VIEW}
+                view={LIST_VIEW.TABLE}
                 updateRow={updateRow}
                 updateItems={updateItems}
               >
