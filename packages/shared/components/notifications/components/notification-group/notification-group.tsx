@@ -6,11 +6,16 @@ import Notification from "shared/components/notifications/components/notificatio
 interface Props {
   title: string;
   notifications: NotificationViewModel[];
+  closeNotifications(): void;
 }
 
 class NotificationsGroup extends React.Component<Props> {
   renderNotifications = (notification: NotificationViewModel) => (
-    <Notification key={notification.id} {...notification} />
+    <Notification
+      key={notification.id}
+      {...notification}
+      closeNotifications={this.props.closeNotifications}
+    />
   );
   render() {
     const { notifications, title } = this.props;

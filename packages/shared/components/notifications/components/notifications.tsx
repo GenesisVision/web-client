@@ -1,7 +1,7 @@
 import "./notifications.scss";
 
 import { NotificationList, NotificationViewModel } from "gv-api-web";
-import moment from "moment";
+import * as moment from "moment";
 import { NOTIFICATIONS_ROUTE } from "pages/notifications/notifications.routes";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -81,6 +81,7 @@ class Notifications extends React.Component<Props> {
       key={group}
       title={this.parseDate(parseInt(group))}
       notifications={groups[parseInt(group)]}
+      closeNotifications={this.props.closeNotifications}
     />
   );
 
