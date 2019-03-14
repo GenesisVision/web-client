@@ -1,9 +1,10 @@
+import { Facet } from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
+import RootState from "shared/reducers/root-reducer";
+
 import FacetCards from "./facet-cards";
 import FacetCardsStub from "./facet-cards-stub";
-import { Facet } from "gv-api-web";
-import RootState from "shared/reducers/root-reducer";
 
 interface IFacetCardsContainerStateProps {
   isPending: boolean;
@@ -12,7 +13,8 @@ interface IFacetCardsContainerStateProps {
 
 interface IFacetCardsContainerProps {
   title: string;
-  composeFacetUrl?(url: string): string;
+  composeFacetUrl(url: string): string;
+  assetsFacets: "fundsFacets" | "programsFacets";
 }
 
 class FacetCardsContainer extends React.Component<
@@ -20,7 +22,7 @@ class FacetCardsContainer extends React.Component<
 > {
   render() {
     const { isPending, facets, title, composeFacetUrl } = this.props;
-    if (!facets || isPending) return <FacetCardsStub />;
+    if (!facets.length || isPending) return <FacetCardsStub />;
     return (
       <FacetCards
         title={title}
@@ -33,10 +35,10 @@ class FacetCardsContainer extends React.Component<
 
 const mapStateToProps = (
   state: RootState,
-  props
+  props: IFacetCardsContainerProps
 ): IFacetCardsContainerStateProps => {
   const { isPending, data } = state.platformData;
-  let facets = null;
+  let facets: Facet[] = [];
   if (data) facets = data[props.assetsFacets];
   return { isPending, facets };
 };
