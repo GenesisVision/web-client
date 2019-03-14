@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React, { Component, Fragment } from "react";
-import DialogLoader from "shared/components/dialog/dialog-loader";
+import { DialogLoader } from "shared/components/dialog/dialog-loader";
 
 import ProgramWithdrawForm from "./program-withdraw-form";
 import ProgramWithdrawTop from "./program-withdraw-top";

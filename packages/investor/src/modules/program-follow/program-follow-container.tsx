@@ -3,7 +3,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Dialog from "shared/components/dialog/dialog";
-import DialogLoader from "shared/components/dialog/dialog-loader";
+import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { FOLLOW_TYPE } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import authService from "shared/services/auth-service";
