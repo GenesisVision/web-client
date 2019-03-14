@@ -9,8 +9,7 @@ import {
   serviceGetNotifications
 } from "shared/components/notifications/services/notifications.services";
 import Sidebar, { SIDEBAR_POSITION } from "shared/components/sidebar/sidebar";
-
-import RootState from "../../../reducers/root-reducer";
+import RootState from "shared/reducers/root-reducer";
 
 type StateProps = {
   count: number;
@@ -79,7 +78,7 @@ const mapDispatchToProps = (
   }
 });
 
-export default connect<StateProps, DispatchProps, {}>(
+export default connect<StateProps, DispatchProps, null, RootState>(
   mapStateToProps,
   mapDispatchToProps
 )(NotificationsContainer);
