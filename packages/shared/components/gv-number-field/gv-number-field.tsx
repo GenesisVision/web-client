@@ -5,7 +5,10 @@ import * as React from "react";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 
 class GVNumberFiled extends React.Component<
-  GVTextFieldProps & { form: FormikActions<void> }
+  GVTextFieldProps & {
+    form: FormikActions<void>;
+    onChange(value: string): void;
+  }
 > {
   handleOnChange = (value: NumberFormatValues) => {
     const { form, name, onChange } = this.props;

@@ -16,12 +16,7 @@ interface IGVCheckboxProps {
 }
 
 class GVCheckbox extends React.Component<IGVCheckboxProps> {
-  checkbox: RefObject<HTMLInputElement>;
-
-  constructor(props) {
-    super(props);
-    this.checkbox = React.createRef();
-  }
+  checkbox: RefObject<HTMLInputElement> = React.createRef();
 
   handleClick = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     if (this.checkbox.current !== null) {
@@ -34,7 +29,7 @@ class GVCheckbox extends React.Component<IGVCheckboxProps> {
     e.stopPropagation();
   };
 
-  renderLabel = (): JSX.Element => {
+  renderLabel = (): React.ReactNode => {
     const { label } = this.props;
     if (!label) return null;
 
@@ -45,7 +40,7 @@ class GVCheckbox extends React.Component<IGVCheckboxProps> {
     );
   };
 
-  renderError = (): JSX.Element => {
+  renderError = (): React.ReactNode => {
     const { touched, error } = this.props;
     if (!touched || !error) return null;
 

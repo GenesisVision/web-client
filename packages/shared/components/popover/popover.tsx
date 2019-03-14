@@ -30,7 +30,7 @@ interface IPopoverProps {
   noPadding?: boolean;
   disableBackdropClick?: boolean;
   className?: string;
-  scrollTop?: number;
+  scrollTop: number;
 }
 interface IPopoverState {
   windowWidth: number;
@@ -143,7 +143,7 @@ class Popover extends React.Component<IPopoverProps, IPopoverState> {
     ) {
       return VERTICAL_POPOVER_POS.TOP;
     }
-    return this.props.vertical;
+    return this.props.vertical || VERTICAL_POPOVER_POS.TOP;
   };
 
   getHorizontalPosition = (): HORIZONTAL_POPOVER_POS => {

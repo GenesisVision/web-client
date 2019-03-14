@@ -1,6 +1,6 @@
 import "./gv-datepicker.scss";
 
-import * as moment from "moment";
+import moment from "moment";
 import * as React from "react";
 import { RefObject } from "react";
 import Calendar from "react-calendar";
@@ -54,12 +54,13 @@ class GVDatePicker extends React.Component<
 
   input: RefObject<HTMLButtonElement> = React.createRef();
 
-  handleChange = (data: Date) => {
+  handleChange = (date: Date | Date[]) => {
     if (this.props.onChange) {
+      const newDate = Array.isArray(date) ? date[0] : date;
       this.props.onChange({
         persist: () => {},
         target: {
-          value: data && moment(data).format(),
+          value: newDate && moment(newDate).format(),
           name: this.props.name
         }
       });
@@ -116,15 +117,21 @@ class GVDatePicker extends React.Component<
       horizontal,
       lng
     } = this.props;
-    const innerDate = value && moment(value).format(DATE_FORMAT);
+    const innerDate = value ? moment(value).format(DATE_FORMAT) : undefined;
 
-    const innerValue = value && moment(value).toDate();
+    const innerValue = value ? moment(value).toDate() : undefined;
 
-    const innerMinDate =
-      minDate && (minDate instanceof Date ? minDate : moment(minDate).toDate());
+    const innerMinDate = minDate
+      ? minDate instanceof Date
+        ? minDate
+        : moment(minDate).toDate()
+      : undefined;
 
-    const innerMaxDate =
-      maxDate && (maxDate instanceof Date ? maxDate : moment(maxDate).toDate());
+    const innerMaxDate = maxDate
+      ? maxDate instanceof Date
+        ? maxDate
+        : moment(maxDate).toDate()
+      : undefined;
 
     return (
       <div className="gv-datepicker">
