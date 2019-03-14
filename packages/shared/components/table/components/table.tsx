@@ -15,22 +15,22 @@ import {
 import { loadData, saveData } from "shared/utils/localstorage";
 
 import { IPaging } from "../helpers/paging.helpers";
-import { SortingColumn } from "./filtering/filter.type";
+import { FilteringType, SortingColumn } from "./filtering/filter.type";
 
 interface ITableProps {
   updateFilter(filter: any): void;
-  updateSorting(opt: string): () => void;
+  updateSorting(opt: string): ((dispatch: any, getState: any) => void) | void;
   updatePaging(page: number): void;
   items: any[];
-  filtering: Object;
+  filtering: FilteringType;
   sorting: string;
   paging: IPaging;
   renderHeader?(column: SortingColumn): JSX.Element;
-  renderSorting?(value: SortingColumn): string;
+  renderSorting?(value: SortingColumn): JSX.Element | string;
   updateRow?(row: any): void;
   renderFilters?(
     updateFilter: (filter: any) => void,
-    filtering: Object
+    filtering: FilteringType
   ): JSX.Element;
   updateItems?(): void;
   renderBodyCard?(

@@ -18,7 +18,7 @@ import SelectFilter from "../../filtering/select-filter/select-filter";
 interface ISortingFilterProps {
   sorting: string;
   columns?: SortingColumn[];
-  renderValueText(value: SortingColumn): string;
+  renderValueText?(value: SortingColumn): JSX.Element | string;
   onChange?(): void;
   updateSorting(value: string): void;
 }
@@ -29,7 +29,7 @@ class SortingFilter extends React.Component<ISortingFilterProps> {
       .filter(x => x.sortingName)
       .map(x => ({
         value: x.sortingName,
-        label: this.props.renderValueText(x)
+        label: this.props.renderValueText && this.props.renderValueText(x)
       }));
 
   composeSortingColumnName = (): string =>

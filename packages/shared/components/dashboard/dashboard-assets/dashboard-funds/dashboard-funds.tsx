@@ -14,6 +14,7 @@ import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitabil
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import TableCell from "shared/components/table/components/table-cell";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
@@ -33,8 +34,8 @@ interface IDashboardFundsProps {
   role: string;
   getDashboardFunds(filters: any): Action;
   onChangeStatus?(): void;
-  createButtonToolbar?(text: string, route: string): JSX.Element;
-  createFund?(): void;
+  createButtonToolbar?: JSX.Element;
+  createFund?: JSX.Element;
 }
 
 const DashboardFunds: FunctionComponent<
@@ -56,7 +57,10 @@ const DashboardFunds: FunctionComponent<
       dataSelector={dashboardFundsTableSelector}
       isFetchOnMount={true}
       columns={DASHBOARD_FUNDS_COLUMNS}
-      renderFilters={(updateFilter: IUpdateFilterFunc, filtering: any) => (
+      renderFilters={(
+        updateFilter: IUpdateFilterFunc,
+        filtering: FilteringType
+      ) => (
         <Fragment>
           <DateRangeFilter
             name={DATE_RANGE_FILTER_NAME}

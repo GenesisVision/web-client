@@ -1,15 +1,15 @@
 import "./favorite-icon.scss";
 
 import * as React from "react";
-
 import { Icon } from "shared/components/icon/icon";
+
 import { ReactComponent as Favorite } from "./favorite.svg";
 
 interface IFavoriteIconProps {
   id: string;
   onClick(id: string, selected: boolean): void;
   selected: boolean;
-  className: string;
+  className?: string;
 }
 
 class FavoriteIcon extends React.Component<IFavoriteIconProps> {

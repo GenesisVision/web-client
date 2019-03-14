@@ -1,29 +1,46 @@
-import React from "react";
-import { calculateTotalPages } from "shared/components/table//helpers/paging.helpers";
+import * as React from "react";
+import {
+  IPaging,
+  calculateTotalPages
+} from "shared/components/table//helpers/paging.helpers";
 import { updateFilter } from "shared/components/table/helpers/filtering.helpers";
-import { IDataModel, IPaging } from "shared/constants/constants";
+import { IDataModel } from "shared/constants/constants";
 
 import { composeRequestFilters } from "../services/table.service";
+import { FilteringType, SortingColumn } from "./filtering/filter.type";
 import Table from "./table";
 
 const defaultData: IDataModel = { items: null, total: 0 };
-
-interface ITableModuleState {
-  paging: IPaging;
-  sorting: Object;
-  filtering: Object;
-  data: IDataModel;
-  isPending: boolean;
-}
 
 export interface ITableModuleProps {
   loader: boolean;
   paging: IPaging;
   sorting: string;
-  filtering: Object;
+  filtering: FilteringType;
   defaultFilters: any[];
   getItems: Function;
+  data?: IDataModel;
+  disableTitle?: boolean;
+  renderFilters?(
+    updateFilter: (filter: any) => void,
+    filtering: FilteringType
+  ): JSX.Element;
+  title?: string;
+  columns?: SortingColumn[];
+  renderHeader?(column: SortingColumn): JSX.Element;
+  renderBodyRow?(
+    x: any,
+    updateRow?: (row: any) => void,
+    updateItems?: () => void
+  ): JSX.Element;
+}
+
+interface ITableModuleState {
+  paging: IPaging;
+  sorting: string;
+  filtering: FilteringType;
   data: IDataModel;
+  isPending: boolean;
 }
 
 class TableModule extends React.Component<
@@ -86,7 +103,7 @@ class TableModule extends React.Component<
       });
   };
 
-  handleUpdateSorting = (sorting: Object) => {
+  handleUpdateSorting = (sorting: string) => {
     this.setState(
       prevState => ({
         sorting: sorting,

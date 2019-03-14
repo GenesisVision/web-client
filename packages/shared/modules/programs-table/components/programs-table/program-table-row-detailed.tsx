@@ -1,7 +1,7 @@
-import classnames from "classnames";
-import { GVButton } from "gv-react-components";
-import React, { Component } from "react";
-import { translate } from "react-i18next";
+import classNames from "classnames";
+import { ProgramDetails } from "gv-api-web";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
@@ -9,18 +9,36 @@ import FavoriteIcon from "shared/components/favorite-asset/favorite-icon/favorit
 import { Icon } from "shared/components/icon/icon";
 import LevelTooltip from "shared/components/level-tooltip/level-tooltip";
 import Profitability from "shared/components/profitability/profitability";
+import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
 import GVScroll from "shared/components/scroll/gvscroll";
 import TableRow from "shared/components/table/components/table-row";
 import TagProgramContainer from "shared/components/tag-program/tag-program-container";
 import Tooltip from "shared/components/tooltip/tooltip";
-import { composeProgramDetailsUrl } from "shared/utils/compose-url";
-import { composeManagerDetailsUrl } from "shared/utils/compose-url";
+import {
+  composeManagerDetailsUrl,
+  composeProgramDetailsUrl
+} from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 import ProgramBigChart from "./program-big-chart/program-big-chart";
 
-class ProgramTableRowDetailed extends Component {
+interface IProgramTableRowDetailedProps {
+  title: string;
+  program: ProgramDetails;
+  isAuthenticated: boolean;
+  toggleFavorite(programId: string, isFavorite: boolean): void;
+  onCollapseClick(): void;
+}
+
+interface IProgramTableRowDetailedState {
+  isOpenInvestToProgramPopup: boolean;
+}
+
+class ProgramTableRowDetailed extends React.Component<
+  IProgramTableRowDetailedProps & InjectedTranslateProps,
+  IProgramTableRowDetailedState
+> {
   state = {
     isOpenInvestToProgramPopup: false
   };
@@ -38,10 +56,10 @@ class ProgramTableRowDetailed extends Component {
     return (
       <TableRow>
         <td
-          className={classnames("program-detailed", {
+          className={classNames("program-detailed", {
             "program-detailed--pretender": program.rating.canLevelUp
           })}
-          colSpan="11"
+          colSpan={11}
         >
           <div className="program-detailed__container program-detailed__container--outer">
             <div className="program-detailed__container program-detailed__container--inner">
@@ -213,7 +231,7 @@ class ProgramTableRowDetailed extends Component {
                     <div className="program-detailed__statistic-data--value">
                       <Profitability
                         value={formatValue(program.statistic.profitPercent, 2)}
-                        prefix="sign"
+                        prefix={PROFITABILITY_PREFIX.SIGN}
                       >
                         <NumberFormat
                           value={formatValue(

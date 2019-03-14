@@ -17,14 +17,21 @@ import ProgramSimpleChart from "shared/components/program-simple-chart/program-s
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import TagProgramContainer from "shared/components/tag-program/tag-program-container";
 import Tooltip from "shared/components/tooltip/tooltip";
-import { composeManagerDetailsUrl } from "shared/utils/compose-url";
-import { composeProgramDetailsUrl } from "shared/utils/compose-url";
+import {
+  composeManagerDetailsUrl,
+  composeProgramDetailsUrl
+} from "shared/utils/compose-url";
 import {
   formatCurrencyValue,
   formatValue,
   formatValueDifferentDecimalScale
 } from "shared/utils/formatter";
 import { Nullable } from "shared/utils/types";
+
+import {
+  PROFITABILITY_PREFIX,
+  PROFITABILITY_VARIANT
+} from "../../../../components/profitability/profitability.helper";
 
 interface IProgramCardProps {
   program: ProgramDetails;
@@ -46,8 +53,9 @@ class ProgramCard extends React.Component<
   state = {
     anchor: null
   };
-  handleOpenDropdown = (event: React.ChangeEvent<HTMLInputElement>) =>
-    this.setState({ anchor: event.currentTarget });
+  handleOpenDropdown = (
+    event: React.MouseEvent<HTMLInputElement, MouseEvent>
+  ) => this.setState({ anchor: event.currentTarget });
   handleCloseDropdown = () => this.setState({ anchor: null });
   render() {
     const { t, program, toggleFavorite, title } = this.props;
@@ -161,8 +169,8 @@ class ProgramCard extends React.Component<
             <div className="table-cards__profit">
               <Profitability
                 value={program.statistic.profitPercent}
-                variant="chips"
-                prefix="arrow"
+                variant={PROFITABILITY_VARIANT.CHIPS}
+                prefix={PROFITABILITY_PREFIX.ARROW}
               >
                 <NumberFormat
                   value={formatValue(program.statistic.profitPercent, 2)}

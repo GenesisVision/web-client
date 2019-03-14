@@ -4,23 +4,23 @@ import { TableIcon } from "shared/components/icon/table-icon";
 import SortingFilter from "shared/components/table/components/sorting/sorting-filter/sorting-filter";
 
 import { LIST_VIEW } from "../table.constants";
-import { SortingColumn } from "./filtering/filter.type";
+import { FilteringType, SortingColumn } from "./filtering/filter.type";
 
 interface ITableToolbarProps {
   disableTitle?: boolean;
-  createButtonToolbar: JSX.Element;
+  createButtonToolbar?: JSX.Element;
   title?: JSX.Element | string;
   renderFilters?(
     updateFilter: (filter: any) => void,
-    filtering: Object
+    filtering: FilteringType
   ): JSX.Element;
   updateFilter(filter: any): void;
-  filtering: Object;
+  filtering: FilteringType;
   view: LIST_VIEW;
   columns?: SortingColumn[];
   sorting: string;
   updateSorting(value: string): void;
-  renderSorting(value: SortingColumn): string;
+  renderSorting?(value: SortingColumn): JSX.Element | string;
   isViewSwitchEnabled: boolean;
   onChange(view: LIST_VIEW): any;
 }

@@ -6,13 +6,14 @@ import RootState from "shared/reducers/root-reducer";
 
 import { IPaging } from "../helpers/paging.helpers";
 import { getItems, updateFilters } from "../services/table.service";
-import { SortingColumn } from "./filtering/filter.type";
+import { FilteringType, SortingColumn } from "./filtering/filter.type";
 import Table from "./table";
 
 interface ITableContainerProps {
-  getItems(): void;
+  getItems: any;
   dataSelector: any;
   isFetchOnMount: boolean;
+  className?: string;
   renderHeader?(column: SortingColumn): JSX.Element;
   renderSorting?(value: SortingColumn): string;
   renderBodyCard?(
@@ -27,10 +28,11 @@ interface ITableContainerProps {
   ): JSX.Element;
   renderFilters?(
     updateFilter: (filter: any) => void,
-    filtering: Object
+    filtering: FilteringType
   ): JSX.Element;
   columns?: SortingColumn[];
   createButtonToolbar?: JSX.Element;
+  emptyMessage?: string | JSX.Element;
 }
 
 interface ITableContainerStateProps {
@@ -38,7 +40,7 @@ interface ITableContainerStateProps {
   isPending: boolean;
   sorting: string;
   paging: IPaging;
-  filtering: Object;
+  filtering: FilteringType;
   fetchItems(): void;
   defaults: any;
 }
@@ -58,8 +60,8 @@ interface ITableContainerDispatchProps {
 
 class TableContainer extends React.Component<
   ITableContainerProps &
-    ITableContainerStateProps &
-    ITableContainerDispatchProps
+    ITableContainerDispatchProps &
+    ITableContainerStateProps
 > {
   componentDidMount() {
     const { isFetchOnMount } = this.props;
@@ -123,7 +125,7 @@ class TableContainer extends React.Component<
 
 const mapStateToProps = (
   state: RootState,
-  props: ITableContainerProps & ITableContainerDispatchProps
+  props: ITableContainerProps
 ): ITableContainerStateProps => {
   const selector = props.dataSelector(state);
   const { itemsData, filters, defaults } = selector;
@@ -141,9 +143,9 @@ const mapStateToProps = (
 
 const mapDispatchToProps = (
   dispatch: Dispatch
-): ITableContainerDispatchProps => {
-  return { service: bindActionCreators({ getItems, updateFilters }, dispatch) };
-};
+): ITableContainerDispatchProps => ({
+  service: bindActionCreators({ getItems, updateFilters }, dispatch)
+});
 
 export default connect(
   mapStateToProps,

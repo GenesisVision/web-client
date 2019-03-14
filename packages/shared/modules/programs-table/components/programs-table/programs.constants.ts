@@ -7,8 +7,14 @@ import {
   composeRequestValueFunc,
   validateDateRange
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
+import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
 import { programsTagFilter } from "shared/components/table/components/filtering/tag-filter/tag-filter.helpers";
-import { FilterType } from "shared/components/table/helpers/filtering.helpers";
+import {
+  FILTER_TYPE,
+  FilterType
+} from "shared/components/table/helpers/filtering.helpers";
+
+import { IComposeDefaultFilter } from "../../../../components/table/components/table.types";
 
 export const LEVEL_FILTER_NAME = "level";
 export const CURRENCY_FILTER_NAME = "programCurrency";
@@ -28,7 +34,7 @@ export const CURRENCY_FILTER_VALUE = undefined;
 
 const programsLevelFilter = {
   name: LEVEL_FILTER_NAME,
-  type: FilterType.range,
+  type: FILTER_TYPE.RANGE,
   defaultValue: [LEVEL_MIN_FILTER_VALUE, LEVEL_MAX_FILTER_VALUE],
   validate: value => {
     const levelRegex = /[0-7]/;
@@ -42,7 +48,7 @@ const programsLevelFilter = {
 
 const programsCurrencyFilter = {
   name: CURRENCY_FILTER_NAME,
-  type: FilterType.general,
+  type: FILTER_TYPE.GENERAL,
   defaultValue: CURRENCY_FILTER_VALUE
   //validate: value => CURRENCY_FILTER_VALUES.includes(value) <--fetched from server
 };
@@ -61,14 +67,14 @@ export const programsDateRangeFilter = {
   validate: validateDateRange
 };
 
-export const PROGRAMS_TABLE_FILTERS = [
+export const PROGRAMS_TABLE_FILTERS: IComposeDefaultFilter[] = [
   programsTagFilter,
   programsLevelFilter,
   programsCurrencyFilter,
   programsDateRangeFilter
 ];
 
-export const PROGRAMS_COLUMNS = [
+export const PROGRAMS_COLUMNS: SortingColumn[] = [
   {
     name: "title"
   },

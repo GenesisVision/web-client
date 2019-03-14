@@ -1,15 +1,28 @@
-import React, { Component } from "react";
+import { ProgramDetails } from "gv-api-web";
+import * as React from "react";
 
 import ProgramTableRowDetailed from "./program-table-row-detailed";
 import ProgramTableRowShort from "./program-table-row-short";
 
-class ProgramTableRow extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isDetailed: false
-    };
-  }
+interface IProgramTableRowProps {
+  title: string;
+  showRating: boolean;
+  program: ProgramDetails;
+  isAuthenticated: boolean;
+  toggleFavorite(programId: string, isFavorite: boolean): void;
+}
+
+interface IProgramTableRowState {
+  isDetailed: boolean;
+}
+
+class ProgramTableRow extends React.Component<
+  IProgramTableRowProps,
+  IProgramTableRowState
+> {
+  state = {
+    isDetailed: false
+  };
 
   openProgramDetail = () => {
     this.setState({ isDetailed: true });

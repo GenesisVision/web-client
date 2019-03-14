@@ -9,9 +9,9 @@ import { Nullable } from "shared/utils/types";
 
 interface IAssetAvatarProps {
   tooltip: boolean;
-  click: boolean;
-  vertical: VERTICAL_POPOVER_POS;
-  horizontal: HORIZONTAL_POPOVER_POS;
+  click?: boolean;
+  vertical?: VERTICAL_POPOVER_POS;
+  horizontal?: HORIZONTAL_POPOVER_POS;
   onClickLevel?: (e: any) => void;
 }
 
