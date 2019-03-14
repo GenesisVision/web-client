@@ -8,7 +8,7 @@ import { IDataModel } from "shared/constants/constants";
 
 import { composeRequestFilters } from "../services/table.service";
 import Table from "./table";
-import { SortingColumn } from "./filtering/filter.type";
+import { FilteringType, SortingColumn } from "./filtering/filter.type";
 
 const defaultData: IDataModel = { items: null, total: 0 };
 
@@ -16,14 +16,14 @@ export interface ITableModuleProps {
   loader: boolean;
   paging: IPaging;
   sorting: string;
-  filtering: { [keys: string]: Object };
+  filtering: FilteringType;
   defaultFilters: any[];
   getItems: Function;
   data?: IDataModel;
   disableTitle?: boolean;
   renderFilters?(
     updateFilter: (filter: any) => void,
-    filtering: Object
+    filtering: FilteringType
   ): JSX.Element;
   title?: string;
   columns?: SortingColumn[];
@@ -38,7 +38,7 @@ export interface ITableModuleProps {
 interface ITableModuleState {
   paging: IPaging;
   sorting: string;
-  filtering: { [keys: string]: Object };
+  filtering: FilteringType;
   data: IDataModel;
   isPending: boolean;
 }

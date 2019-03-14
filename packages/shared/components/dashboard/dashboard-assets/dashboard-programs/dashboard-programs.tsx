@@ -33,6 +33,7 @@ import {
 } from "shared/utils/formatter";
 
 import dashboardProgramsTableSelector from "./dashboard-programs.selector";
+import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 
 interface IDashboardProgramsProps {
   role: string;
@@ -60,7 +61,10 @@ const DashboardPrograms: FunctionComponent<
       dataSelector={dashboardProgramsTableSelector}
       isFetchOnMount={true}
       columns={DASHBOARD_PROGRAMS_COLUMNS}
-      renderFilters={(updateFilter: IUpdateFilterFunc, filtering: any) => (
+      renderFilters={(
+        updateFilter: IUpdateFilterFunc,
+        filtering: FilteringType
+      ) => (
         <Fragment>
           <DateRangeFilter
             name={DATE_RANGE_FILTER_NAME}

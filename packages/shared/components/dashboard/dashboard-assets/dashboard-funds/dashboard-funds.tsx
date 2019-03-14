@@ -27,6 +27,7 @@ import {
 } from "../../../table/components/table.types";
 import { DASHBOARD_FUNDS_COLUMNS } from "../../dashboard.constants";
 import dashboardFundsTableSelector from "./dashboard-funds.selector";
+import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 
 interface IDashboardFundsProps {
   title: string;
@@ -56,7 +57,10 @@ const DashboardFunds: FunctionComponent<
       dataSelector={dashboardFundsTableSelector}
       isFetchOnMount={true}
       columns={DASHBOARD_FUNDS_COLUMNS}
-      renderFilters={(updateFilter: IUpdateFilterFunc, filtering: any) => (
+      renderFilters={(
+        updateFilter: IUpdateFilterFunc,
+        filtering: FilteringType
+      ) => (
         <Fragment>
           <DateRangeFilter
             name={DATE_RANGE_FILTER_NAME}

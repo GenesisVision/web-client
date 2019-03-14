@@ -26,3 +26,5 @@ export const DEFAULT_DATE_RANGE_FILTER_VALUE: IDataRangeFilterValue = {
   dateStart: undefined,
   dateEnd: undefined
 };
+
+export type DateRangeFilterType = IDataRangeFilterValue;

@@ -11,3 +11,5 @@ export const ASSET_TYPE_FILTER_VALUES = [...Object.keys(ASSETS_TYPES)].map(
 );
 
 export const ASSET_TYPE_FILTER_DEFAULT_VALUE = "All";
+
+export type AssetFilterType = ASSETS_TYPES;

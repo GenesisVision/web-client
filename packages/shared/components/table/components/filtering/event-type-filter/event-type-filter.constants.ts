@@ -42,3 +42,5 @@ export const MANAGER_EVENT_TYPE_FILTER_VALUES: IManagerEventFilterValue<
 }));
 
 export const EVENT_TYPE_FILTER_DEFAULT_VALUE = "All";
+
+export type EventTypeFilterType = INVESTOR_EVENT_TYPE & MANAGER_EVENT_TYPE;

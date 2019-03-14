@@ -7,7 +7,7 @@ import { getItems, updateFilters } from "../services/table.service";
 import Table from "./table";
 import RootState from "shared/reducers/root-reducer";
 import { IPaging } from "../helpers/paging.helpers";
-import { SortingColumn } from "./filtering/filter.type";
+import { FilteringType, SortingColumn } from "./filtering/filter.type";
 
 interface ITableContainerProps {
   getItems: any;
@@ -28,7 +28,7 @@ interface ITableContainerProps {
   ): JSX.Element;
   renderFilters?(
     updateFilter: (filter: any) => void,
-    filtering: Object
+    filtering: FilteringType
   ): JSX.Element;
   columns?: SortingColumn[];
   createButtonToolbar?: JSX.Element;
@@ -39,7 +39,7 @@ interface ITableContainerStateProps {
   isPending: boolean;
   sorting: string;
   paging: IPaging;
-  filtering: Object;
+  filtering: FilteringType;
   fetchItems(): void;
   defaults: any;
 }
