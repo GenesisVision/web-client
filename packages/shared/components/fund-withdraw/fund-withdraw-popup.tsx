@@ -7,6 +7,7 @@ import React, { Component, Fragment } from "react";
 import { convertFromCurrency } from "shared/utils/currency-converter";
 import { ResponseError } from "shared/utils/types";
 
+import DialogLoader from "../dialog/dialog-loader";
 import FundWithdrawAmountForm from "./fund-withdraw-amount-form";
 import FundWithdrawConfirmForm from "./fund-withdraw-confirm-form";
 import FundWithdrawTop from "./fund-withdraw-top";
@@ -112,7 +113,7 @@ class FundWithdrawPopup extends Component<
       step
     } = this.state;
 
-    if (!withdrawalInfo || !wallets || !wallet) return null;
+    if (!withdrawalInfo || !wallets || !wallet) return <DialogLoader />;
 
     return (
       <Fragment>
