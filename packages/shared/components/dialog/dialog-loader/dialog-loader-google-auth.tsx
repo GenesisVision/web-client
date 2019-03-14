@@ -10,7 +10,7 @@ import {
   DialogLoaderinput
 } from "./dialog-loader-elements";
 
-export const DialogLoaderGoogleAuth = () => (
+export const DialogLoaderGoogleAuthDesktop = () => (
   <div className="google-auth google-auth--desktop">
     <div className="dialog__header">
       <DialogLoaderHeaderGoogleAuth />
@@ -42,7 +42,13 @@ export const DialogLoaderGoogleAuth = () => (
   </div>
 );
 
-export const DialogLoaderGoogleAuthFirstStep = () => (
+export const DialogLoaderGoogleAuthMobile = () => (
+  <div className="google-auth google-auth--mobile">
+    <DialogLoaderGoogleAuthFirstStep />
+  </div>
+);
+
+const DialogLoaderGoogleAuthFirstStep = () => (
   <div className="google-auth__step">
     <div className="dialog__wrapper">
       <DialogLoaderShortStat />
