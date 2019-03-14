@@ -1,3 +1,4 @@
+import { FILTER_TYPE } from "../../helpers/filtering.helpers";
 import { AssetFilterType } from "./asset-type-filter/asset-type-filter.constants";
 import { DateRangeFilterType } from "./date-range-filter/date-range-filter.constants";
 import { EventTypeFilterType } from "./event-type-filter/event-type-filter.constants";
@@ -8,17 +9,14 @@ import { TagFilterType } from "./tag-filter/tag-filter.constants";
 export type TFilter<T> = {
   name: string;
   value: T;
+  composeRequestValue?(value: any): any;
+  type?: FILTER_TYPE;
 };
 
-export interface FilterValue<T = any> {
-  value: T;
+export interface SelectFilterValue<T = any> {
+  value: T | undefined;
   label: T;
-}
-
-export interface IInvestorEventFilterValue<T> extends FilterValue {}
-
-export interface IManagerEventFilterValue<T> extends FilterValue {
-  labelKey: string;
+  labelKey?: string;
 }
 
 export interface SortingColumn {

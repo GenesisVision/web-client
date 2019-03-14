@@ -9,7 +9,7 @@ import {
   getSortingDirection
 } from "../../../helpers/sorting.helpers";
 import {
-  FilterValue,
+  SelectFilterValue,
   SortingColumn,
   TFilter
 } from "../../filtering/filter.type";
@@ -24,7 +24,7 @@ interface ISortingFilterProps {
 }
 
 class SortingFilter extends React.Component<ISortingFilterProps> {
-  composeSortingColumnValues = (): FilterValue[] =>
+  composeSortingColumnValues = (): SelectFilterValue[] =>
     (this.props.columns || [])
       .filter(x => x.sortingName)
       .map(x => ({
