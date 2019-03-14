@@ -39,8 +39,8 @@ interface IDashboardProgramsProps {
   role: string;
   title: string;
   getDashboardPrograms(filters: any): Action;
-  createButtonToolbar?(text: string, route: string): JSX.Element;
-  createProgram?(): void;
+  createButtonToolbar?: JSX.Element;
+  createProgram?: JSX.Element;
 }
 
 const DashboardPrograms: FunctionComponent<

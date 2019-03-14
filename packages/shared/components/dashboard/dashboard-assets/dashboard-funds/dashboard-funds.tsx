@@ -34,8 +34,8 @@ interface IDashboardFundsProps {
   role: string;
   getDashboardFunds(filters: any): Action;
   onChangeStatus?(): void;
-  createButtonToolbar?(text: string, route: string): JSX.Element;
-  createFund?(): void;
+  createButtonToolbar?: JSX.Element;
+  createFund?: JSX.Element;
 }
 
 const DashboardFunds: FunctionComponent<
