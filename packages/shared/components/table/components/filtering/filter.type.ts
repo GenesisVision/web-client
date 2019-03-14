@@ -11,7 +11,7 @@ export type TFilter<T> = {
 };
 
 export interface FilterValue<T = any> {
-  value: T;
+  value: T | undefined;
   label: T;
 }
 
