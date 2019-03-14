@@ -6,6 +6,7 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import DetailsDescription from "shared/components/details/details-description-section/details-description/details-description";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
+import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
 import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
 import { STATUS } from "shared/constants/constants";
@@ -91,7 +92,7 @@ class FundDetailsDescription extends React.PureComponent<
               id={fundDescription.id}
               assetCurrency={"GVT"}
               accountCurrency={accountCurrency}
-              personalDetails={personalFundDetails}
+              personalDetails={personalFundDetails as InvestmentDetails}
               WithdrawContainer={FundWithdrawContainer}
             />
           </div>

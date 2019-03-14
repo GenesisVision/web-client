@@ -2,7 +2,7 @@ import { FundWithdrawInfo, WalletData } from "gv-api-web";
 import {
   FundWithdraw,
   FundWithdrawalInfoResponse
-} from "modules/fund-withdraw/services/fund-withdraw.services";
+} from "modules/fund-withdrawal/services/fund-withdrawal.services";
 import React, { Component, Fragment } from "react";
 import { convertFromCurrency } from "shared/utils/currency-converter";
 import { ResponseError } from "shared/utils/types";
