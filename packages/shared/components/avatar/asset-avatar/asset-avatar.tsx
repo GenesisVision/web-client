@@ -13,6 +13,7 @@ interface IAssetAvatarProps {
   vertical?: VERTICAL_POPOVER_POS;
   horizontal?: HORIZONTAL_POPOVER_POS;
   onClickLevel?: (e: any) => void;
+  alt: string;
 }
 
 interface IAssetAvatarState {
