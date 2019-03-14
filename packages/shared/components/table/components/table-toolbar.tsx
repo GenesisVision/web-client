@@ -7,7 +7,7 @@ import { FilteringType, SortingColumn } from "./filtering/filter.type";
 
 interface ITableToolbarProps {
   disableTitle?: boolean;
-  createButtonToolbar: JSX.Element;
+  createButtonToolbar?: JSX.Element;
   title?: JSX.Element | string;
   renderFilters?(
     updateFilter: (filter: any) => void,
@@ -19,7 +19,7 @@ interface ITableToolbarProps {
   columns?: SortingColumn[];
   sorting: string;
   updateSorting(value: string): void;
-  renderSorting(value: SortingColumn): JSX.Element | string;
+  renderSorting?(value: SortingColumn): JSX.Element | string;
   isViewSwitchEnabled: boolean;
   onChange(view: LIST_VIEW): any;
 }

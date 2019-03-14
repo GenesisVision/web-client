@@ -32,6 +32,7 @@ interface ITableContainerProps {
   ): JSX.Element;
   columns?: SortingColumn[];
   createButtonToolbar?: JSX.Element;
+  emptyMessage?: string | JSX.Element;
 }
 
 interface ITableContainerStateProps {
