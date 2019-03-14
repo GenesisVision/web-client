@@ -2,7 +2,7 @@ import "./asset-edit.scss";
 
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { DialogLoader } from "shared/components/dialog/dialog-loader";
+import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 
 import AssetEditForm from "./asset-edit-form";
 

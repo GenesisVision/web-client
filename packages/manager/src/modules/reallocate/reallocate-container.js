@@ -5,7 +5,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Dialog from "shared/components/dialog/dialog";
-import { DialogLoader } from "shared/components/dialog/dialog-loader";
+import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 
 import * as createFundService from "../../pages/create-fund/services/create-fund.service";
 import ReallocatePopup from "./components/reallocate-popup";
