@@ -65,23 +65,24 @@ export const EvenLogoIcon = ({ type }) => {
 
 const PortfolioEventLogo = ({ type, logo, color, url }) => {
   const className = classnames("portfolio-event-logo");
+  const Tag = url ? Link : "div";
+  const to = url
+    ? {
+        pathname: composeProgramDetailsUrl(url),
+        state: `/ ${type}`
+      }
+    : null;
 
   return (
     <div className={className}>
-      <Link
-        to={{
-          pathname: composeProgramDetailsUrl(url),
-          state: `/ ${type}`
-        }}
-        className="portfolio-event-logo__photo"
-      >
+      <Tag to={to} className="portfolio-event-logo__photo">
         <AssetAvatar
           url={logo}
           alt={type}
           className="portfolio-event-logo__logo"
           color={color}
         />
-      </Link>
+      </Tag>
       <div className={"portfolio-event-logo__type"}>
         <EvenLogoIcon type={type} />
       </div>
