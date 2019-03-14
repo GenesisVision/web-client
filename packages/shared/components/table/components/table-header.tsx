@@ -11,22 +11,24 @@ import { SortingColumn } from "./filtering/filter.type";
 
 interface ITableHeaderProps {
   sorting: string;
-  updateSorting(opt: string): () => void;
+  updateSorting(opt: string): ((dispatch: any, getState: any) => void) | void;
   columns?: SortingColumn[];
-  children(column: SortingColumn): JSX.Element;
+  children?(column: SortingColumn): JSX.Element;
 }
 
 class TableHeader extends React.Component<ITableHeaderProps> {
   sortingName = (): string => getSortingColumnName(this.props.sorting);
 
-  getSortingDirection = (sortingName: string): SORTING_DIRECTION => {
+  getSortingDirection = (sortingName?: string): SORTING_DIRECTION => {
     if (sortingName !== this.sortingName()) return SORTING_DIRECTION.NONE;
     return getSortingDirection(this.props.sorting);
   };
 
-  isSortable = (sortingName: string): boolean => sortingName !== undefined;
+  isSortable = (sortingName?: string): boolean => sortingName !== undefined;
 
-  handleSorting = (sortingName: string) => (): (() => void) => {
+  handleSorting = (sortingName?: string) => ():
+    | ((dispatch: any, getState: any) => void)
+    | void => {
     if (
       sortingName !== this.sortingName() ||
       getSortingDirection(this.props.sorting) === SORTING_DIRECTION.ASC
@@ -48,7 +50,7 @@ class TableHeader extends React.Component<ITableHeaderProps> {
           onClick={this.handleSorting(column.sortingName)}
           sortingDirection={this.getSortingDirection(column.sortingName)}
         >
-          {this.props.children(column)}
+          {this.props.children && this.props.children(column)}
         </TableHeadCell>
       );
     });

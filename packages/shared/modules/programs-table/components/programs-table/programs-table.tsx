@@ -1,6 +1,6 @@
 import "./programs.scss";
 
-import React from "react";
+import * as React from "react";
 import { Table } from "shared/components/table/components";
 
 import ProgramCard from "./program-card";
@@ -8,8 +8,38 @@ import ProgramTableHeaderCell from "./program-table-header-cell";
 import ProgramTableRow from "./program-table-row";
 import ProgramTableSortingValue from "./program-table-sorting";
 import { PROGRAMS_COLUMNS } from "./programs.constants";
+import {
+  FilteringType,
+  SortingColumn
+} from "shared/components/table/components/filtering/filter.type";
+import { IPaging } from "shared/components/table/helpers/paging.helpers";
+import { ProgramDetails, ProgramsList } from "gv-api-web";
 
-const ProgramsTable = ({
+interface IProgramsTableProps {
+  disableTitle?: boolean;
+  columns?: SortingColumn[];
+  showRating?: boolean;
+  showSwitchView?: boolean;
+  currencies: string[];
+  data: ProgramsList;
+  isPending?: boolean;
+  sorting: string;
+  updateSorting(opt: string): (dispatch: any, getState: any) => void;
+  filtering: FilteringType;
+  updateFilter(filter: any): void;
+  renderFilters?(
+    updateFilter: (filter: any) => void,
+    filtering: FilteringType
+  ): JSX.Element;
+  paging: IPaging;
+  updatePaging(page: number): void;
+  toggleFavorite(programId: string, isFavorite: boolean): void;
+  isAuthenticated?: boolean;
+  title?: string;
+  redirectToLogin?(): void;
+}
+
+const ProgramsTable: React.FC<IProgramsTableProps> = ({
   disableTitle,
   columns,
   showRating,
@@ -25,7 +55,6 @@ const ProgramsTable = ({
   paging,
   updatePaging,
   toggleFavorite,
-  redirectToLogin,
   isAuthenticated,
   title
 }) => {
@@ -56,7 +85,7 @@ const ProgramsTable = ({
           isAuthenticated={isAuthenticated}
         />
       )}
-      renderBodyRow={program => (
+      renderBodyRow={(program: ProgramDetails) => (
         <ProgramTableRow
           showRating={showRating}
           title={title}
@@ -65,7 +94,7 @@ const ProgramsTable = ({
           isAuthenticated={isAuthenticated}
         />
       )}
-      renderBodyCard={program => (
+      renderBodyCard={(program: ProgramDetails) => (
         <ProgramCard
           title={title}
           program={program}
