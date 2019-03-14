@@ -1,17 +1,17 @@
+import { Dispatch } from "redux";
 import { composeFilters } from "shared/components/table/helpers/filtering.helpers";
 import {
+  IPaging,
   calculateSkipAndTake,
-  calculateTotalPages,
-  IPaging
+  calculateTotalPages
 } from "shared/components/table/helpers/paging.helpers";
 
 import { updateFilters as updateFiltersActionCreator } from "../actions/table.actions";
 import { IComposeDefaultFilter } from "../components/table.types";
-import { Dispatch } from "redux";
 
 interface IComposeRequestFiltersProps {
   paging: IPaging;
-  sorting: string;
+  sorting: string | Object;
   filtering: { [keys: string]: Object };
   defaultFilters: IComposeDefaultFilter[];
 }

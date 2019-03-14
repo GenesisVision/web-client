@@ -2,21 +2,25 @@ import * as React from "react";
 import { CardsIcon } from "shared/components/icon/cards-icon";
 import { TableIcon } from "shared/components/icon/table-icon";
 import SortingFilter from "shared/components/table/components/sorting/sorting-filter/sorting-filter";
+
 import { LIST_VIEW } from "../table.constants";
-import { SortingColumn } from "./filtering/filter.type";
+import { FilteringType, SortingColumn } from "./filtering/filter.type";
 
 interface ITableToolbarProps {
-  disableTitle: boolean;
-  createButtonToolbar: JSX.Element;
-  title: JSX.Element | string;
-  renderFilters(updateFilter: any, filtering: any): JSX.Element;
-  updateFilter: any;
-  filtering: any;
+  disableTitle?: boolean;
+  createButtonToolbar?: JSX.Element;
+  title?: JSX.Element | string;
+  renderFilters?(
+    updateFilter: (filter: any) => void,
+    filtering: FilteringType
+  ): JSX.Element;
+  updateFilter(filter: any): void;
+  filtering: FilteringType;
   view: LIST_VIEW;
-  columns: SortingColumn[];
+  columns?: SortingColumn[];
   sorting: string;
   updateSorting(value: string): void;
-  renderSorting(value: SortingColumn): string;
+  renderSorting?(value: SortingColumn): JSX.Element | string;
   isViewSwitchEnabled: boolean;
   onChange(view: LIST_VIEW): any;
 }

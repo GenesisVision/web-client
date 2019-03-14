@@ -8,28 +8,28 @@ import {
   getSortingColumnName,
   getSortingDirection
 } from "../../../helpers/sorting.helpers";
-import SelectFilter from "../../filtering/select-filter/select-filter";
 import {
   FilterValue,
   SortingColumn,
   TFilter
 } from "../../filtering/filter.type";
+import SelectFilter from "../../filtering/select-filter/select-filter";
 
 interface ISortingFilterProps {
   sorting: string;
-  columns: SortingColumn[];
-  renderValueText(value: SortingColumn): string;
+  columns?: SortingColumn[];
+  renderValueText?(value: SortingColumn): JSX.Element | string;
   onChange?(): void;
-  updateSorting?(value: string): void;
+  updateSorting(value: string): void;
 }
 
 class SortingFilter extends React.Component<ISortingFilterProps> {
   composeSortingColumnValues = (): FilterValue[] =>
-    this.props.columns
+    (this.props.columns || [])
       .filter(x => x.sortingName)
       .map(x => ({
         value: x.sortingName,
-        label: this.props.renderValueText(x)
+        label: this.props.renderValueText && this.props.renderValueText(x)
       }));
 
   composeSortingColumnName = (): string =>

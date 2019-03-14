@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import * as React from "react";
 
-const TableRow: React.FC<{ className?: string }> = ({
+const TableRow: React.FC<{ onClick?(e: any): void; className?: string }> = ({
   className = "",
   children,
   ...other

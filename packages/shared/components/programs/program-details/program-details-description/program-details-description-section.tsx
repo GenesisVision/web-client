@@ -18,6 +18,7 @@ interface IProgramDetailsDescriptionSectionProps
   ProgramControls: ComponentType<any>;
   ProgramReinvestingWidget: ComponentType<any>;
   ProgramWithdrawContainer: ComponentType<any>;
+  ChangePasswordTradingAccountControl?: ComponentType<any>;
 }
 
 class ProgramDetailsDescriptionSection extends PureComponent<
@@ -31,15 +32,21 @@ class ProgramDetailsDescriptionSection extends PureComponent<
       isAuthenticated,
       redirectToLogin,
       ProgramControls,
+      ChangePasswordTradingAccountControl,
       ProgramReinvestingWidget,
       ProgramWithdrawContainer
     } = this.props;
 
     const personalDetails = programDescription.personalProgramDetails;
+    const isOwnProgram = personalDetails && personalDetails.isOwnProgram;
     return (
       <div className="program-details-description">
         <ProgramDetailsDescriptionMain
           programDescription={programDescription}
+          isOwnProgram={isOwnProgram}
+          ChangePasswordTradingAccountControl={
+            ChangePasswordTradingAccountControl
+          }
         />
         <ProgramControls
           programDescription={programDescription}
@@ -47,7 +54,7 @@ class ProgramDetailsDescriptionSection extends PureComponent<
           canMakeSignalProvider={
             personalDetails && personalDetails.canMakeSignalProvider
           }
-          isOwnProgram={personalDetails && personalDetails.isOwnProgram}
+          isOwnProgram={isOwnProgram}
           canInvest={personalDetails && personalDetails.canInvest}
           canWithdraw={personalDetails && personalDetails.canWithdraw}
           isAuthenticated={isAuthenticated}

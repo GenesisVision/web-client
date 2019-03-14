@@ -114,6 +114,12 @@
     width: 14px;
   }
 
+  &--more {
+    svg {
+      fill: none;
+    }
+  }
+
   &--selected {
     svg {
       fill: $primary-color;

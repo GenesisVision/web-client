@@ -198,6 +198,20 @@
       "amount-is-zero": "Amount must be greater than zero"
     }
   },
+  "password-change-trading-account": {
+    "title": "Change trading account password",
+    "new-password": "New password",
+    "confirm-password": "Confirm password",
+    "success-alert-message": "Password for the trading account was changed",
+    "validators": {
+      "password-weak": "New password must contain at least one letter.",
+      "password-is-short": "New password must be at least 8 characters.",
+      "password-is-long": "New password must be shorter than 32 characters.",
+      "password-required": "New password is required.",
+      "password-dont-match": "Passwords don't match.",
+      "confirm-password-required": "Password confirmation is required."
+    }
+  },
   "profile-widget": {
     "personal-details": "Personal details",
     "settings": "Settings",
@@ -484,6 +498,7 @@
         "title": "Make a signal provider",
         "disclaimer": "Parameters can not be changed in the future"
       },
+      "change-password": "Change password",
       "close-program-notification": "Investment program will be closed after this reporting period. Current investment requests will be cancelled and new requests won’t be accepted. Profit and funds from the trading account will be deposited to investors and manager according to their shares.",
       "close-program-notification-success": "Request to close the program was sent successfully.",
       "requests-completed": "All requests completed successfully"
@@ -1006,6 +1021,7 @@
       "current-password": "Current password",
       "password": "Password",
       "confirm-password": "Confirm password",
+      "new-password": "New password",
       "success-alert": "Password was changed"
     },
     "email-confirm": {
