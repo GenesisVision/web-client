@@ -2,6 +2,7 @@ import { WalletData } from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators } from "redux";
+import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { updateWalletTimestamp } from "shared/components/wallet/actions/wallet.actions";
 import { fetchWallets } from "shared/components/wallet/services/wallet.services";
 import { walletTransferRequest } from "shared/modules/wallet-withdraw/services/wallet-withdraw.services";
@@ -67,6 +68,7 @@ class WalletTransferContainer extends React.Component<
   render() {
     const { twoFactorEnabled, currentWallet, wallets } = this.props;
 
+    if (!wallets.length) return <DialogLoader />;
     return (
       <WalletTransferForm
         wallets={wallets}
