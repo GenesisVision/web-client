@@ -1,6 +1,6 @@
-import classnames from "classnames";
-import React from "react";
-import { translate } from "react-i18next";
+import classNames from "classnames";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
@@ -13,11 +13,24 @@ import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import TagProgramContainer from "shared/components/tag-program/tag-program-container";
 import Tooltip from "shared/components/tooltip/tooltip";
-import { STATUS_OLD } from "shared/constants/constants";
+import { STATUS } from "shared/constants/constants";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
+import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
+import { ProgramDetails } from "gv-api-web";
 
-const ProgramTableRowShort = ({
+interface IProgramTableRowShortProps {
+  title: string;
+  showRating: boolean;
+  program: ProgramDetails;
+  isAuthenticated: boolean;
+  toggleFavorite(programId: string, isFavorite: boolean): void;
+  onExpandClick(): void;
+}
+
+const ProgramTableRowShort: React.FC<
+  IProgramTableRowShortProps & InjectedTranslateProps
+> = ({
   t,
   title,
   showRating,
@@ -28,7 +41,6 @@ const ProgramTableRowShort = ({
 }) => {
   const {
     status,
-    availableInvestment,
     availableInvestmentBase,
     statistic,
     logo,
@@ -47,7 +59,7 @@ const ProgramTableRowShort = ({
   const stopPropagationEvent = event => event.stopPropagation();
   return (
     <TableRow
-      className={classnames({
+      className={classNames({
         "table__row--pretender": rating.canLevelUp
       })}
       onClick={onExpandClick}
@@ -117,7 +129,7 @@ const ProgramTableRowShort = ({
       </TableCell>
       <TableCell className="programs-table__cell programs-table__cell--period">
         {periodStarts &&
-          ((status !== STATUS_OLD.CLOSED && (
+          ((status !== STATUS.CLOSED && (
             <ProgramPeriodPie start={periodStarts} end={periodEnds} />
           )) ||
             t("program-period.program-closed"))}
@@ -135,7 +147,7 @@ const ProgramTableRowShort = ({
       <TableCell className="programs-table__cell programs-table__cell--profit">
         <Profitability
           value={formatValue(statistic.profitPercent, 2)}
-          prefix="sign"
+          prefix={PROFITABILITY_PREFIX.SIGN}
         >
           <NumberFormat
             value={formatValue(statistic.profitPercent, 2)}

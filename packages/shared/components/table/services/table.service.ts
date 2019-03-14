@@ -11,7 +11,7 @@ import { Dispatch } from "redux";
 
 interface IComposeRequestFiltersProps {
   paging: IPaging;
-  sorting: string;
+  sorting: string | Object;
   filtering: { [keys: string]: Object };
   defaultFilters: IComposeDefaultFilter[];
 }

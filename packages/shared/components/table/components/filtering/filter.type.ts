@@ -16,5 +16,5 @@ export interface IManagerEventFilterValue<T> extends FilterValue {
 
 export interface SortingColumn {
   name: string;
-  sortingName: string;
+  sortingName?: string;
 }

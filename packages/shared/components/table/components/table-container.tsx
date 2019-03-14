@@ -10,9 +10,10 @@ import { IPaging } from "../helpers/paging.helpers";
 import { SortingColumn } from "./filtering/filter.type";
 
 interface ITableContainerProps {
-  getItems(): void;
+  getItems: any;
   dataSelector: any;
   isFetchOnMount: boolean;
+  className?: string;
   renderHeader?(column: SortingColumn): JSX.Element;
   renderSorting?(value: SortingColumn): string;
   renderBodyCard?(
@@ -58,8 +59,8 @@ interface ITableContainerDispatchProps {
 
 class TableContainer extends React.Component<
   ITableContainerProps &
-    ITableContainerStateProps &
-    ITableContainerDispatchProps
+    ITableContainerDispatchProps &
+    ITableContainerStateProps
 > {
   componentDidMount() {
     const { isFetchOnMount } = this.props;
@@ -123,7 +124,7 @@ class TableContainer extends React.Component<
 
 const mapStateToProps = (
   state: RootState,
-  props: ITableContainerProps & ITableContainerDispatchProps
+  props: ITableContainerProps
 ): ITableContainerStateProps => {
   const selector = props.dataSelector(state);
   const { itemsData, filters, defaults } = selector;
@@ -141,9 +142,9 @@ const mapStateToProps = (
 
 const mapDispatchToProps = (
   dispatch: Dispatch
-): ITableContainerDispatchProps => {
-  return { service: bindActionCreators({ getItems, updateFilters }, dispatch) };
-};
+): ITableContainerDispatchProps => ({
+  service: bindActionCreators({ getItems, updateFilters }, dispatch)
+});
 
 export default connect(
   mapStateToProps,

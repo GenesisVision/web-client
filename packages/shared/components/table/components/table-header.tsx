@@ -11,7 +11,7 @@ import { SortingColumn } from "./filtering/filter.type";
 
 interface ITableHeaderProps {
   sorting: string;
-  updateSorting(opt: string): () => void;
+  updateSorting(opt: string): ((dispatch: any, getState: any) => void) | void;
   columns?: SortingColumn[];
   children(column: SortingColumn): JSX.Element;
 }
@@ -26,7 +26,9 @@ class TableHeader extends React.Component<ITableHeaderProps> {
 
   isSortable = (sortingName: string): boolean => sortingName !== undefined;
 
-  handleSorting = (sortingName: string) => (): (() => void) => {
+  handleSorting = (sortingName: string) => ():
+    | ((dispatch: any, getState: any) => void)
+    | void => {
     if (
       sortingName !== this.sortingName() ||
       getSortingDirection(this.props.sorting) === SORTING_DIRECTION.ASC

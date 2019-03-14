@@ -1,11 +1,32 @@
-import React, { Component } from "react";
+import * as React from "react";
 import TableModule from "shared/components/table/components/table-module";
 
 import ProgramTableHeaderCell from "./program-table-header-cell";
 import ProgramTableRow from "./program-table-row";
 import { PROGRAMS_COLUMNS } from "./programs.constants";
+import { IPaging } from "shared/components/table/helpers/paging.helpers";
 
-class ProgramTableModule extends Component {
+interface IProgramTableModuleProps {
+  getItems(): void;
+  renderFilters?(
+    updateFilter: (filter: any) => void,
+    filtering: Object
+  ): JSX.Element;
+  sorting: string;
+  filtering: { [keys: string]: Object };
+  defaultFilters: any[];
+  paging: IPaging;
+  isAuthenticated: boolean;
+  showRating: boolean;
+  title?: string;
+  disableTitle?: boolean;
+  toggleFavorite(
+    programId: string,
+    updateRow: (row: any) => void
+  ): (programId: string, isFavorite: boolean) => void;
+}
+
+class ProgramTableModule extends React.Component<IProgramTableModuleProps> {
   render() {
     const {
       getItems,

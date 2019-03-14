@@ -5,7 +5,7 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 
 interface ILevelTooltip {
-  level: string;
+  level: number;
   canLevelUp: boolean;
 }
 
