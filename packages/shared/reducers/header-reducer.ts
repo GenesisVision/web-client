@@ -6,7 +6,7 @@ import apiReducerFactory, {
 } from "shared/reducers/api-reducer/api-reducer";
 import { DeepReadonly } from "utility-types";
 
-export type HeaderState = DeepReadonly<{
+export type HeaderState = Readonly<{
   info: IApiReducerFactory<ProfileHeaderViewModel>;
 }>;
 
