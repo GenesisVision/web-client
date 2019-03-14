@@ -1,6 +1,6 @@
 import "./phone-verification.scss";
 
-import { FormikProps, withFormik } from "formik";
+import { FormikBag, FormikProps, withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -15,14 +15,15 @@ export interface IPhoneVerificationFormValues {
 export interface IPhoneVerificationFormProps {
   phoneNumber: string;
   errorMessage?: string;
-  onResendClick?(): void;
+  onResendClick(): void;
   disabledResend?: boolean;
   onSubmit(code: string): void;
 }
 
+export type Props = InjectedTranslateProps & IPhoneVerificationFormProps;
+
 class PhoneVerificationForm extends React.Component<
-  IPhoneVerificationFormProps &
-    InjectedTranslateProps &
+  Props &
     IPhoneVerificationFormValues &
     FormikProps<IPhoneVerificationFormValues>
 > {
@@ -85,20 +86,22 @@ class PhoneVerificationForm extends React.Component<
 
 export default compose<React.ComponentType<IPhoneVerificationFormProps>>(
   translate(),
-  withFormik({
+  withFormik<Props, IPhoneVerificationFormValues>({
     displayName: "phone-verification",
     mapPropsToValues: () => ({
       code: ""
     }),
-    validationSchema: ({ t }) =>
+    validationSchema: (props: Props) =>
       object().shape({
-        code: number().required(t("profile-page.verification.phone.required"))
+        code: number().required(
+          props.t("profile-page.verification.phone.required")
+        )
       }),
     handleSubmit: (
       values,
-      { props }: { props: IPhoneVerificationFormProps }
+      bag: FormikBag<Props, IPhoneVerificationFormValues>
     ) => {
-      props.onSubmit(values.code);
+      bag.props.onSubmit(values.code);
     }
   })
 )(PhoneVerificationForm);

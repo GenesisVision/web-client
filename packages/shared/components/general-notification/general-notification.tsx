@@ -18,7 +18,7 @@ interface IGeneralNotificationProps {
   label: string;
   assetId: string;
   addNotification(opts?: Setting): Promise<any>;
-  removeNotification(opts?: { id: string; assetId: string }): Promise<any>;
+  removeNotification(opts?: { id?: string; assetId: string }): Promise<any>;
 }
 
 interface IGeneralNotificationState {
@@ -70,6 +70,7 @@ class GeneralNotification extends React.Component<
     return (
       <span className="notification-setting">
         <GVSwitch
+          touched={false}
           className="notification-setting__switch"
           name={name}
           value={Boolean(setting)}

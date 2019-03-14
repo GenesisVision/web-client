@@ -17,8 +17,10 @@ export const NavigationButton: React.FC<INavigationButtonProps> = ({
 }) => {
   return (
     <GVButton className="navigation__button" variant="text" onClick={onClick}>
-      {<icon.type {...icon.props} className="navigation__icon" />}
-      <span className="navigation__link">{children}</span>
+      <React.Fragment>
+        {<icon.type {...icon.props} className="navigation__icon" />}
+        <span className="navigation__link">{children}</span>
+      </React.Fragment>
     </GVButton>
   );
 };

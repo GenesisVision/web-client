@@ -11,9 +11,9 @@ enum ITEM {
 }
 
 export interface IFollowStatisticItemProps {
-  label: string;
+  label: string | React.ReactNode;
   equivalent?: string | number;
-  equivalentCurrency?: string;
+  equivalentCurrency: string;
   small?: boolean;
   big?: boolean;
   large?: boolean;
