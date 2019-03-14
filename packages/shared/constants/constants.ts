@@ -32,11 +32,6 @@ export interface IDataModel {
   items: any;
   total: number;
 }
-export interface IPaging {
-  currentPage: number;
-  itemsOnPage: number;
-  totalPages: number;
-}
 
 export enum FOLLOW_TYPE {
   CREATE = "CREATE",

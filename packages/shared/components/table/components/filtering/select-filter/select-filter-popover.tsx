@@ -2,11 +2,11 @@ import classNames from "classnames";
 import { GVButton } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
-import { IManagerEventFilterValue } from "../filter.type";
+import { SelectFilterValue } from "../filter.type";
 
 interface ISelectFilterPopoverProps {
   changeFilter?(value: any): void;
-  values?: IManagerEventFilterValue<any>[];
+  values?: SelectFilterValue<any>[];
   value?: any;
 }
 
@@ -17,11 +17,8 @@ class SelectFilterPopover extends React.Component<
     return this.props.changeFilter(value);
   };
 
-  renderLabel = (item: IManagerEventFilterValue<any>): string => {
-    const { t } = this.props;
-    if (item.labelKey !== undefined) return t(item.labelKey);
-    return item.label;
-  };
+  renderLabel = (item: SelectFilterValue<any>): string =>
+    item.labelKey ? this.props.t(item.labelKey) : item.label;
 
   render() {
     const { values, value } = this.props;

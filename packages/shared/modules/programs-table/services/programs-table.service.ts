@@ -21,7 +21,7 @@ import {
   PROGRAMS_TABLE_FILTERS,
   SORTING_FILTER_VALUE
 } from "../components/programs-table/programs.constants";
-import { TFilter } from "../../../components/table/components/filtering/filter.type";
+import { TFilter } from "shared/components/table/components/filtering/filter.type";
 import { ProgramsList } from "gv-api-web";
 
 const DEFAULT_ITEMS_ON_PAGE = 12;
