@@ -10,7 +10,7 @@ import {
 } from "../../../helpers/sorting.helpers";
 import SelectFilter from "../../filtering/select-filter/select-filter";
 import {
-  FilterValue,
+  SelectFilterValue,
   SortingColumn,
   TFilter
 } from "../../filtering/filter.type";
@@ -24,7 +24,7 @@ interface ISortingFilterProps {
 }
 
 class SortingFilter extends React.Component<ISortingFilterProps> {
-  composeSortingColumnValues = (): FilterValue[] =>
+  composeSortingColumnValues = (): SelectFilterValue[] =>
     (this.props.columns || [])
       .filter(x => x.sortingName)
       .map(x => ({

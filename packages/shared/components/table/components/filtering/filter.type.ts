@@ -10,15 +10,10 @@ export type TFilter<T> = {
   value: T;
 };
 
-export interface FilterValue<T = any> {
+export interface SelectFilterValue<T = any> {
   value: T | undefined;
   label: T;
-}
-
-export interface IInvestorEventFilterValue<T> extends FilterValue {}
-
-export interface IManagerEventFilterValue<T> extends FilterValue {
-  labelKey: string;
+  labelKey?: string;
 }
 
 export interface SortingColumn {
