@@ -4,10 +4,13 @@ import { EventTypeFilterType } from "./event-type-filter/event-type-filter.const
 import { LevelFilterType } from "./level-filter/level-filter.constants";
 import { SelectFilterType } from "./select-filter/select-filter.constants";
 import { TagFilterType } from "./tag-filter/tag-filter.constants";
+import { FILTER_TYPE } from "../../helpers/filtering.helpers";
 
 export type TFilter<T> = {
   name: string;
   value: T;
+  composeRequestValue?(value: any): any;
+  type?: FILTER_TYPE;
 };
 
 export interface SelectFilterValue<T = any> {
