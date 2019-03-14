@@ -1,7 +1,7 @@
 import "./notifications.scss";
 
 import { NotificationList, NotificationViewModel } from "gv-api-web";
-import * as moment from "moment";
+import moment from "moment";
 import { NOTIFICATIONS_ROUTE } from "pages/notifications/notifications.routes";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";

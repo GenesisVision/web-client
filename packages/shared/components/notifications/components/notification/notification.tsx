@@ -1,6 +1,6 @@
 import classnames from "classnames";
 import { NotificationViewModel } from "gv-api-web";
-import * as moment from "moment";
+import moment from "moment";
 import * as React from "react";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
@@ -13,7 +13,7 @@ enum TYPE {
   PLATFORM = "platform"
 }
 
-const getStaticIconUrl = type => {
+const getStaticIconUrl = (type: string) => {
   return type.indexOf(TYPE.PROFILE) !== -1
     ? RedUserIcon
     : type.indexOf(TYPE.PLATFORM) !== -1
