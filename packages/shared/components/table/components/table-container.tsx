@@ -124,7 +124,7 @@ class TableContainer extends React.Component<
 
 const mapStateToProps = (
   state: RootState,
-  props: ITableContainerProps & ITableContainerDispatchProps
+  props: ITableContainerProps
 ): ITableContainerStateProps => {
   const selector = props.dataSelector(state);
   const { itemsData, filters, defaults } = selector;
@@ -142,9 +142,9 @@ const mapStateToProps = (
 
 const mapDispatchToProps = (
   dispatch: Dispatch
-): ITableContainerDispatchProps => {
-  service: bindActionCreators({ getItems, updateFilters }, dispatch);
-};
+): ITableContainerDispatchProps => ({
+  service: bindActionCreators({ getItems, updateFilters }, dispatch)
+});
 
 export default connect(
   mapStateToProps,
