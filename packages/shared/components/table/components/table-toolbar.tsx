@@ -19,7 +19,7 @@ interface ITableToolbarProps {
   columns?: SortingColumn[];
   sorting: string;
   updateSorting(value: string): void;
-  renderSorting(value: SortingColumn): string;
+  renderSorting(value: SortingColumn): JSX.Element | string;
   isViewSwitchEnabled: boolean;
   onChange(view: LIST_VIEW): any;
 }

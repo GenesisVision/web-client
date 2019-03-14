@@ -9,7 +9,7 @@ interface IFavoriteIconProps {
   id: string;
   onClick(id: string, selected: boolean): void;
   selected: boolean;
-  className: string;
+  className?: string;
 }
 
 class FavoriteIcon extends React.Component<IFavoriteIconProps> {

@@ -1,11 +1,11 @@
 import { push } from "connected-react-router";
 import {
+  PROGRAM_SLUG_URL_PARAM_NAME,
   PROGRAMS_FACET_ROUTE,
   PROGRAMS_FAVORITES_TAB_NAME,
-  PROGRAMS_TAB_ROUTE,
-  PROGRAM_SLUG_URL_PARAM_NAME
+  PROGRAMS_TAB_ROUTE
 } from "pages/programs/programs.routes";
-import qs from "qs";
+import * as qs from "qs";
 import { composeFilters } from "shared/components/table/helpers/filtering.helpers";
 import {
   calculateSkipAndTake,
@@ -21,6 +21,8 @@ import {
   PROGRAMS_TABLE_FILTERS,
   SORTING_FILTER_VALUE
 } from "../components/programs-table/programs.constants";
+import { TFilter } from "../../../components/table/components/filtering/filter.type";
+import { ProgramsList } from "gv-api-web";
 
 const DEFAULT_ITEMS_ON_PAGE = 12;
 
@@ -28,7 +30,9 @@ const sortableColums = PROGRAMS_COLUMNS.filter(
   x => x.sortingName !== undefined
 ).map(x => x.sortingName);
 
-export const getPrograms = filters => (dispatch, getState) => {
+export const getPrograms = (filters: Object) => (
+  dispatch: any // temp to declare Dispatch type
+) => {
   let requestFilters = dispatch(composeRequestFilters());
   if (authService.getAuthArg()) {
     requestFilters.authorization = authService.getAuthArg();
@@ -40,7 +44,9 @@ export const getPrograms = filters => (dispatch, getState) => {
   dispatch(programTableActions.fetchPrograms(requestFilters));
 };
 
-export const fetchPrograms = filters => {
+export const fetchPrograms = (filters: {
+  [keys: string]: any;
+}): Promise<ProgramsList> => {
   const requestFilters = { ...filters };
   if (authService.getAuthArg()) {
     requestFilters.authorization = authService.getAuthArg();
@@ -52,7 +58,7 @@ export const fetchPrograms = filters => {
     });
 };
 
-const composeRequestFilters = () => (dispatch, getState) => {
+const composeRequestFilters = () => (dispatch: any, getState: any): Object => {
   let itemsOnPage = DEFAULT_ITEMS_ON_PAGE;
   const existingFilters = dispatch(getProgramsFilters());
   let { page } = existingFilters;
@@ -60,7 +66,7 @@ const composeRequestFilters = () => (dispatch, getState) => {
   const { router } = getState();
   const { currency } = getState().accountSettings;
 
-  let filters = { currencySecondary: currency };
+  let filters: { [keys: string]: any } = { currencySecondary: currency };
 
   const { tab } = getParams(router.location.pathname, PROGRAMS_TAB_ROUTE);
   if (tab === PROGRAMS_FAVORITES_TAB_NAME) {
@@ -86,18 +92,19 @@ const composeRequestFilters = () => (dispatch, getState) => {
     existingFilters.filtering
   );
 
-  filters = {
+  return {
     ...filters,
     skip,
     take,
     sorting: existingFilters.sorting,
     ...filtering
   };
-
-  return filters;
 };
 
-export const getProgramsFilters = () => (dispatch, getState) => {
+export const getProgramsFilters = () => (
+  dispatch: any,
+  getState: any
+): Object => {
   const { router, programsData } = getState();
   const queryParams = qs.parse(router.location.search.slice(1));
 
@@ -128,17 +135,19 @@ export const getProgramsFilters = () => (dispatch, getState) => {
     return accum;
   }, {});
 
-  const filters = {
+  return {
     page,
     pages,
     sorting,
     filtering,
     itemsOnPage: DEFAULT_ITEMS_ON_PAGE
   };
-  return filters;
 };
 
-export const programsChangePage = nextPage => (dispatch, getState) => {
+export const programsChangePage = (nextPage: number) => (
+  dispatch: any,
+  getState: any
+) => {
   const { router } = getState();
   const queryParams = qs.parse(router.location.search.slice(1));
   const page = nextPage + 1 || 1;
@@ -147,7 +156,10 @@ export const programsChangePage = nextPage => (dispatch, getState) => {
   dispatch(push(newUrl));
 };
 
-export const programsChangeSorting = sorting => (dispatch, getState) => {
+export const programsChangeSorting = (sorting: string) => (
+  dispatch: any,
+  getState: any
+) => {
   const { router } = getState();
   const queryParams = qs.parse(router.location.search.slice(1));
   queryParams.sorting = sorting;
@@ -155,7 +167,10 @@ export const programsChangeSorting = sorting => (dispatch, getState) => {
   dispatch(push(newUrl));
 };
 
-export const programsChangeFilter = filter => (dispatch, getState) => {
+export const programsChangeFilter = (filter: TFilter<any>) => (
+  dispatch: any,
+  getState: any
+) => {
   const { router } = getState();
   const queryParams = qs.parse(router.location.search.slice(1));
   if (filter.value === undefined) {

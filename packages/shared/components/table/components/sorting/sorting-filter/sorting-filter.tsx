@@ -18,7 +18,7 @@ import {
 interface ISortingFilterProps {
   sorting: string;
   columns?: SortingColumn[];
-  renderValueText(value: SortingColumn): string;
+  renderValueText(value: SortingColumn): JSX.Element | string;
   onChange?(): void;
   updateSorting(value: string): void;
 }

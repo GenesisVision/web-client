@@ -1,5 +1,5 @@
-import React, { Component, Fragment } from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { toggleFavoriteProgram } from "shared/modules/favorite-asset/services/favorite-program.service";
@@ -12,7 +12,13 @@ import {
   PROGRAMS_FACET_TABLE_SORTING
 } from "./programs-facet.constants";
 
-class ProgramsFacetTable extends Component {
+interface IProgramsFacetTableProps {
+  title: string;
+}
+
+class ProgramsFacetTable extends React.Component<
+  IProgramsFacetTableProps & InjectedTranslateProps
+> {
   toggleFavorite = (program, updateRow) => () => {
     const isFavorite = program.personalDetails.isFavorite;
     const newProgram = {
@@ -30,14 +36,14 @@ class ProgramsFacetTable extends Component {
     return (
       <ProgramTableModule
         renderFilters={(updateFilter, filtering) => (
-          <Fragment>
+          <React.Fragment>
             <DateRangeFilter
               name={DATE_RANGE_FILTER_NAME}
               value={filtering[DATE_RANGE_FILTER_NAME]}
               onChange={updateFilter}
               startLabel={t("filters.date-range.program-start")}
             />
-          </Fragment>
+          </React.Fragment>
         )}
         title={title}
         paging={PROGRAMS_FACET_PAGING}
