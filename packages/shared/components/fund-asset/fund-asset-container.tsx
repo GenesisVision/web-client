@@ -1,25 +1,26 @@
 import "./fund-asset.scss";
 
 import classNames from "classnames";
+import { FundAssetPartWithIcon } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import Tooltip from "shared/components/tooltip/tooltip";
 
+import { CURRENCIES } from "../../modules/currency-select/currency-select.constants";
 import FundAsset, { FUND_ASSET_TYPE } from "./fund-asset";
 import FundAssetTooltip from "./fund-asset-tooltip/fund-asset-tooltip";
-import { FundAssetPartWithIcon } from "gv-api-web";
 
 interface IFundAssetContainerProps {
   size: number;
   assets: FundAssetPartWithIcon[];
   type: FUND_ASSET_TYPE;
-  length: number;
-  removable: boolean;
-  removeHandle(
+  length?: number;
+  removable?: boolean;
+  removeHandle?(
     currency: string
   ): (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-  remainder: number;
-  hoveringAsset: string;
+  remainder?: number;
+  hoveringAsset?: string;
 }
 
 interface IFundAssetContainerState {
@@ -45,7 +46,7 @@ class FundAssetContainer extends React.Component<
       length,
       removable,
       removeHandle,
-      remainder,
+      remainder = 0,
       hoveringAsset
     } = this.props;
     const { size } = this.state;
@@ -61,18 +62,23 @@ class FundAssetContainer extends React.Component<
               <Tooltip
                 key={idx}
                 render={() => (
-                  <FundAssetTooltip name={asset.name} currency={asset.asset} />
+                  <FundAssetTooltip
+                    name={asset.name}
+                    currency={asset.asset as CURRENCIES}
+                  />
                 )}
               >
                 <FundAsset
                   {...asset}
-                  currency={asset.asset}
+                  currency={asset.asset as CURRENCIES}
                   type={type}
                   last={idx === assets.length - 1}
                   removable={removable}
                   removeHandle={removeHandle}
                   className={
-                    hoveringAsset === asset.asset && "fund-asset--hover"
+                    hoveringAsset === asset.asset
+                      ? "fund-asset--hover"
+                      : undefined
                   }
                 />
               </Tooltip>

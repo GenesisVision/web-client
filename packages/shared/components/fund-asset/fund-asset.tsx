@@ -1,11 +1,14 @@
 import "./fund-asset.scss";
 
 import classNames from "classnames";
+import { FundAssetPartWithIcon } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import FundAssetImage from "shared/components/avatar/fund-asset-image/fund-asset-image";
-import { CURRENCY_VALUES } from "shared/modules/currency-select/currency-select.constants";
-import { FundAssetPartWithIcon } from "gv-api-web";
+import {
+  CURRENCIES,
+  CURRENCY_VALUES
+} from "shared/modules/currency-select/currency-select.constants";
 
 export const FUND_ASSET_TYPE_old = {
   large: "large",
@@ -22,14 +25,14 @@ export enum FUND_ASSET_TYPE {
 }
 
 interface IFundAssetProps {
-  currency?: string;
+  currency: CURRENCIES;
   type: FUND_ASSET_TYPE;
   last: boolean;
-  removable: boolean;
-  removeHandle(
-    currency: string
+  removable?: boolean;
+  removeHandle?(
+    currency: CURRENCIES
   ): (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-  className: string;
+  className?: string;
 }
 
 class FundAsset extends React.Component<
@@ -85,7 +88,7 @@ class FundAsset extends React.Component<
           <div className="fund-asset__percent">
             <NumberFormat value={percent} suffix="%" displayType="text" />
           </div>
-          {removable && (
+          {removable && removeHandle && (
             <div
               className="fund-asset__remove-button"
               onClick={removeHandle(currency)}
