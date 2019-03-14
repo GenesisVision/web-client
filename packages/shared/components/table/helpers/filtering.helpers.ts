@@ -19,7 +19,10 @@ export enum FILTER_TYPE {
 export const composeFilteringActionType = (actionType: string): string =>
   `${actionType}_FILTERING`;
 
-export const composeFilters = (allFilters: IComposeDefaultFilter[], filtering: { [keys: string]: Object }): any => {
+export const composeFilters = (
+  allFilters: IComposeDefaultFilter[],
+  filtering: FilteringType
+): any => {
   if (!allFilters) return {};
   return allFilters.reduce((accum, cur) => {
     const { name, type, composeRequestValue } = cur;

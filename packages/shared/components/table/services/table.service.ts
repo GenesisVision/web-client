@@ -8,11 +8,12 @@ import {
 import { updateFilters as updateFiltersActionCreator } from "../actions/table.actions";
 import { IComposeDefaultFilter } from "../components/table.types";
 import { Dispatch } from "redux";
+import { FilteringType } from "../components/filtering/filter.type";
 
 interface IComposeRequestFiltersProps {
   paging: IPaging;
   sorting: string | Object;
-  filtering: { [keys: string]: Object };
+  filtering: FilteringType;
   defaultFilters: IComposeDefaultFilter[];
 }
 export const composeRequestFilters = ({
