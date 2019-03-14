@@ -6,6 +6,7 @@ import investorApi from "shared/services/api-client/investor-api";
 import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
 
+import { MiddlewareDispatch } from "../../../utils/types";
 import {
   ICancelRequest,
   cancelInvestorProgramRequest,
@@ -30,11 +31,8 @@ export const getAssetRequests = (
     case ROLE.INVESTOR + ASSET.PROGRAM:
       method = investorApi.v10InvestorProgramsByIdRequestsBySkipByTakeGet;
       break;
-    case ROLE.INVESTOR + ASSET.FUND:
-      method = investorApi.v10InvestorFundsByIdRequestsBySkipByTakeGet;
-      break;
     default:
-      method = null;
+      method = investorApi.v10InvestorFundsByIdRequestsBySkipByTakeGet;
   }
   return method(id, 0, 10, authorization).then(
     (response: ProgramRequests) => response.requests
@@ -56,11 +54,8 @@ export const cancelRequest = (
     case ROLE.MANAGER + ASSET.FUND:
       method = managerApi.v10ManagerFundsRequestsByIdCancelPost;
       break;
-    case ROLE.INVESTOR + ASSET.PROGRAM:
-      method = investorApi.v10InvestorProgramsRequestsByIdCancelPost;
-      break;
     default:
-      method = null;
+      method = investorApi.v10InvestorProgramsRequestsByIdCancelPost;
   }
   return method(id, authorization);
 };
@@ -78,7 +73,7 @@ export const cancelRequestDispatch = ({
   role,
   asset,
   onFinally
-}: CancelRequestType) => dispatch => {
+}: CancelRequestType) => (dispatch: MiddlewareDispatch): Promise<void> => {
   const authorization = authService.getAuthArg();
   let actionCreator: ICancelRequest;
 

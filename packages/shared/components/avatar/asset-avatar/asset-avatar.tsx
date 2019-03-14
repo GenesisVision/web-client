@@ -27,7 +27,7 @@ class AssetAvatar extends React.Component<
     anchor: null
   };
 
-  handleClick = event => {
+  handleClick = (event: React.SyntheticEvent) => {
     this.setState({ anchor: event.currentTarget });
   };
 
