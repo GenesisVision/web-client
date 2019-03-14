@@ -1,3 +1,5 @@
+import { Nullable } from "shared/utils/types";
+
 export const DATE_RANGE_FILTER_NAME = "dateRange";
 
 export const SERVER_DATE_RANGE_MIN_FILTER_NAME = "from";
@@ -17,14 +19,14 @@ export enum DATA_RANGE_FILTER_TYPES {
 
 export interface IDataRangeFilterValue {
   type: DATA_RANGE_FILTER_TYPES;
-  dateStart: Date | number | string;
-  dateEnd: Date | number | string;
+  dateStart: Nullable<Date | number | string>;
+  dateEnd: Nullable<Date | number | string>;
 }
 
 export const DEFAULT_DATE_RANGE_FILTER_VALUE: IDataRangeFilterValue = {
   type: DATA_RANGE_FILTER_TYPES.ALL,
-  dateStart: undefined,
-  dateEnd: undefined
+  dateStart: null,
+  dateEnd: null
 };
 
 export type DateRangeFilterType = IDataRangeFilterValue;
