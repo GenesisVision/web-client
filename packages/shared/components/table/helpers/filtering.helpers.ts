@@ -52,7 +52,7 @@ const processFilterValue = (filter: TFilter<any>): Object => {
       }
       break;
     case FILTER_TYPE.CUSTOM:
-      const requestValues = filter.composeRequestValue(filter.value);
+      const requestValues = filter.composeRequestValue && filter.composeRequestValue(filter.value);
       if (requestValues !== undefined) {
         if (Array.isArray(requestValues))
           requestValue = { [filter.name]: requestValues };
