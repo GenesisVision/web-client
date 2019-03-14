@@ -5,15 +5,16 @@ import ProgramTableHeaderCell from "./program-table-header-cell";
 import ProgramTableRow from "./program-table-row";
 import { PROGRAMS_COLUMNS } from "./programs.constants";
 import { IPaging } from "shared/components/table/helpers/paging.helpers";
+import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 
 interface IProgramTableModuleProps {
   getItems(): void;
   renderFilters?(
     updateFilter: (filter: any) => void,
-    filtering: Object
+    filtering: FilteringType
   ): JSX.Element;
   sorting: string;
-  filtering: { [keys: string]: Object };
+  filtering: FilteringType;
   defaultFilters: any[];
   paging: IPaging;
   isAuthenticated: boolean;

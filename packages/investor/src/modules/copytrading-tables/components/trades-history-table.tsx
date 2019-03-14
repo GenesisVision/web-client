@@ -31,6 +31,7 @@ import { clearCopytradingTable } from "../actions/copytrading-tables.actions";
 import { getCopytradingTradesHistory } from "../services/copytrading-tables.service";
 import { COPYTRADING_TRADES_HISTORY_COLUMNS } from "./copytrading-tables.constants";
 import { dashboardTradesHistoryTableSelector } from "./copytrading-tables.selectors";
+import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 
 interface ITradesHistoryTableOwnProps {
   title: string;
@@ -59,7 +60,10 @@ class TradesHistoryTable extends Component<
         dataSelector={dashboardTradesHistoryTableSelector}
         isFetchOnMount={true}
         columns={COPYTRADING_TRADES_HISTORY_COLUMNS}
-        renderFilters={(updateFilter: IUpdateFilterFunc, filtering: any) => (
+        renderFilters={(
+          updateFilter: IUpdateFilterFunc,
+          filtering: FilteringType
+        ) => (
           <Fragment>
             <DateRangeFilter
               name={DATE_RANGE_FILTER_NAME}

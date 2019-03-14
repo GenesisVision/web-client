@@ -8,7 +8,10 @@ import ProgramTableHeaderCell from "./program-table-header-cell";
 import ProgramTableRow from "./program-table-row";
 import ProgramTableSortingValue from "./program-table-sorting";
 import { PROGRAMS_COLUMNS } from "./programs.constants";
-import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
+import {
+  FilteringType,
+  SortingColumn
+} from "shared/components/table/components/filtering/filter.type";
 import { IPaging } from "shared/components/table/helpers/paging.helpers";
 import { ProgramDetails, ProgramsList } from "gv-api-web";
 
@@ -22,11 +25,11 @@ interface IProgramsTableProps {
   isPending?: boolean;
   sorting: string;
   updateSorting(opt: string): (dispatch: any, getState: any) => void;
-  filtering: Object;
+  filtering: FilteringType;
   updateFilter(filter: any): void;
   renderFilters?(
     updateFilter: (filter: any) => void,
-    filtering: Object
+    filtering: FilteringType
   ): JSX.Element;
   paging: IPaging;
   updatePaging(page: number): void;

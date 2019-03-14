@@ -13,7 +13,7 @@ import {
   PROGRAMS_VIEW
 } from "shared/components/table/table.constants";
 import { loadData, saveData } from "shared/utils/localstorage";
-import { SortingColumn } from "./filtering/filter.type";
+import { FilteringType, SortingColumn } from "./filtering/filter.type";
 import { IPaging } from "../helpers/paging.helpers";
 
 interface ITableProps {
@@ -21,7 +21,7 @@ interface ITableProps {
   updateSorting(opt: string): ((dispatch: any, getState: any) => void) | void;
   updatePaging(page: number): void;
   items: any[];
-  filtering: Object;
+  filtering: FilteringType;
   sorting: string;
   paging: IPaging;
   renderHeader?(column: SortingColumn): JSX.Element;
@@ -29,7 +29,7 @@ interface ITableProps {
   updateRow?(row: any): void;
   renderFilters?(
     updateFilter: (filter: any) => void,
-    filtering: Object
+    filtering: FilteringType
   ): JSX.Element;
   updateItems?(): void;
   renderBodyCard?(

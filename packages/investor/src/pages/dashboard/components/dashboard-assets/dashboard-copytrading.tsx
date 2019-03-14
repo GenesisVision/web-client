@@ -24,6 +24,7 @@ import { formatPercent } from "shared/utils/formatter";
 
 import { DASHBOARD_COPYTRADING_COLUMNS } from "./dashboard-copytrading.constants";
 import { dashboardCopytradingTableSelector } from "./dashboard-copytrading.selectors";
+import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 
 interface IDashboardCopytradingProps {
   title: string;
@@ -40,7 +41,10 @@ class DashboardCopytrading extends Component<
         dataSelector={dashboardCopytradingTableSelector}
         isFetchOnMount={true}
         columns={DASHBOARD_COPYTRADING_COLUMNS}
-        renderFilters={(updateFilter: IUpdateFilterFunc, filtering: any) => (
+        renderFilters={(
+          updateFilter: IUpdateFilterFunc,
+          filtering: FilteringType
+        ) => (
           <Fragment>
             <DateRangeFilter
               name={DATE_RANGE_FILTER_NAME}

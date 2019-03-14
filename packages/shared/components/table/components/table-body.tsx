@@ -5,7 +5,7 @@ import { LIST_VIEW } from "../table.constants";
 import TableLoader from "./table-loader";
 
 interface ITableBodyProps {
-  children(
+  children?(
     x: any,
     updateRow?: (row: any) => void,
     updateItems?: () => void
@@ -13,7 +13,7 @@ interface ITableBodyProps {
   updateRow?(row: any): void;
   updateItems?(): void;
   items: any[];
-  tag: React.ComponentType<{ className: string }> | string;
+  tag: React.ComponentType<{ className?: string }> | string;
   isPending?: boolean;
   view: LIST_VIEW;
   className?: string;
@@ -52,7 +52,7 @@ const TableBody: React.FC<ITableBodyProps & InjectedTranslateProps> = ({
     if (items.length === 0) return setMessage(t("table.no-items"));
     return items.map((x, idx: number) => (
       <React.Fragment key={x.id || idx}>
-        {children(x, updateRow, updateItems)}
+        {children && children(x, updateRow, updateItems)}
       </React.Fragment>
     ));
   };

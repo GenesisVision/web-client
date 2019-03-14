@@ -8,3 +8,5 @@ export enum TAG_NAME_TYPE {
   CRYPTO = "Crypto",
   HIGH_RISK = "HighRisk"
 }
+
+export type TagFilterType = TAG_NAME_TYPE[];

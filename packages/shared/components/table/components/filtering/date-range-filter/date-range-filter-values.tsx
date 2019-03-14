@@ -90,7 +90,7 @@ class DateRangeFilterValues extends React.Component<
               type="text"
               name="dateStart"
               label={t("filters.date-range.start")}
-              value={dateStart}
+              value={String(dateStart)}
               InputComponent={GVDatePicker}
               horizontal="right"
               maxDate={new Date()}
@@ -101,7 +101,7 @@ class DateRangeFilterValues extends React.Component<
               type="text"
               name="dateEnd"
               label={t("filters.date-range.end")}
-              value={dateEnd}
+              value={String(dateEnd)}
               horizontal="right"
               InputComponent={GVDatePicker}
               minDate={dateStart}
