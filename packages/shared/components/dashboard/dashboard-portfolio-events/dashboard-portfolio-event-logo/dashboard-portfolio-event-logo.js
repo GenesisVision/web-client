@@ -63,14 +63,14 @@ export const EvenLogoIcon = ({ type }) => {
   }
 };
 
-const PortfolioEventLogo = ({ type, logo, color }) => {
+const PortfolioEventLogo = ({ type, logo, color, url }) => {
   const className = classnames("portfolio-event-logo");
 
   return (
     <div className={className}>
       <Link
         to={{
-          // pathname: composeProgramDetailsUrl(url),
+          pathname: composeProgramDetailsUrl(url),
           state: `/ ${type}`
         }}
         className="portfolio-event-logo__photo"
