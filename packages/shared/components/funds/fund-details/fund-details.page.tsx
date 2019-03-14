@@ -1,6 +1,6 @@
 import "shared/components/details/details.scss";
 
-import { FundDetailsFull } from "gv-api-web";
+import { FundBalanceChart, FundDetailsFull } from "gv-api-web";
 import React, { ComponentType, PureComponent } from "react";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators, compose } from "redux";
@@ -20,27 +20,38 @@ import RootState from "shared/reducers/root-reducer";
 import { ResponseError } from "shared/utils/types";
 
 import { IDescriptionSection } from "./fund-details.types";
+import {
+  FundDetailsProfitChart,
+  FundDetailsStatistic
+} from "./services/fund-details.types";
 
 interface IFundDetailsPageOwnProps {
   descriptionSection: IDescriptionSection;
 }
 
-interface IFundDetailsPageProps extends IFundDetailsPageOwnProps {
+interface IFundDetailsStateProps {
   isAuthenticated: boolean;
   currency: string;
+}
+
+interface IFundDetailsDispatchProps {
   service: {
     getFundDescription(): Promise<FundDetailsFull>;
     redirectToLogin(): void;
   };
 }
 
+interface IFundDetailsPageProps
+  extends IFundDetailsPageOwnProps,
+    IFundDetailsStateProps,
+    IFundDetailsDispatchProps {}
 interface IFundDetailsPageState {
   isPending: boolean;
   hasError: boolean;
   description?: FundDetailsFull;
-  profitChart?: any;
-  balanceChart?: any;
-  statistic?: any;
+  profitChart?: FundDetailsProfitChart;
+  balanceChart?: FundBalanceChart;
+  statistic?: FundDetailsStatistic;
 }
 
 class FundDetailsPage extends PureComponent<
@@ -63,7 +74,7 @@ class FundDetailsPage extends PureComponent<
     this.getDetails();
   }
 
-  updateDetails = () => {
+  updateDetails = (): Promise<void> => {
     const { service } = this.props;
     this.setState({ isPending: true });
     return service
@@ -77,11 +88,14 @@ class FundDetailsPage extends PureComponent<
       });
   };
 
-  getDetails = () => {
+  getDetails = (): void => {
     this.updateDetails()
       .then(() => {
         this.setState({ isPending: true });
-        return getFundStatistic(this.state.description!.id);
+        return getFundStatistic(
+          this.state.description!.id,
+          this.props.currency
+        );
       })
       .then(data => {
         this.setState({ isPending: false, ...data });
@@ -154,7 +168,7 @@ class FundDetailsPage extends PureComponent<
   }
 }
 
-const mapStateToProps = (state: RootState) => {
+const mapStateToProps = (state: RootState): IFundDetailsStateProps => {
   const { accountSettings, authData } = state;
 
   return {
@@ -163,7 +177,7 @@ const mapStateToProps = (state: RootState) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
+const mapDispatchToProps = (dispatch: Dispatch): IFundDetailsDispatchProps => ({
   service: bindActionCreators({ getFundDescription, redirectToLogin }, dispatch)
 });
 

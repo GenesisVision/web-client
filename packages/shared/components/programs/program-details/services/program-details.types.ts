@@ -18,7 +18,6 @@ export type ProgramDetailsProfitChart = {
   timeFrameGvtProfit: number;
   programCurrency: string;
   profitChangePercent: number;
-  pnLChart: ChartSimple[];
   equityChart: ChartSimple[];
 };
 

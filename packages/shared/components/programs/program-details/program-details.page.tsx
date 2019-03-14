@@ -31,14 +31,22 @@ interface IProgramDetailsPageOwnProps {
   descriptionSection: IDescriptionSection;
 }
 
-interface IProgramDetailsPageProps extends IProgramDetailsPageOwnProps {
+interface IProgramDetailsPageStateProps {
   isAuthenticated: boolean;
   currency: string;
+}
+
+interface IProgramDetailsPageDispatchProps {
   service: {
     getProgramDescription(): Promise<ProgramDetailsFull>;
     redirectToLogin(): void;
   };
 }
+
+interface IProgramDetailsPageProps
+  extends IProgramDetailsPageOwnProps,
+    IProgramDetailsPageStateProps,
+    IProgramDetailsPageDispatchProps {}
 
 interface IProgramDetailsPageState {
   isPending: boolean;
@@ -185,7 +193,7 @@ class ProgramDetailsPage extends PureComponent<
   }
 }
 
-const mapStateToProps = (state: RootState) => {
+const mapStateToProps = (state: RootState): IProgramDetailsPageStateProps => {
   const { accountSettings, authData } = state;
   return {
     currency: accountSettings.currency,
@@ -193,7 +201,9 @@ const mapStateToProps = (state: RootState) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
+const mapDispatchToProps = (
+  dispatch: Dispatch
+): IProgramDetailsPageDispatchProps => ({
   service: bindActionCreators(
     { getProgramDescription, redirectToLogin },
     dispatch

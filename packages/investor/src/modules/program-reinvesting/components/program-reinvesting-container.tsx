@@ -30,7 +30,7 @@ class ProgramReinvestingContainer extends React.PureComponent<
       isPending: false
     };
   }
-  toggleReinvesting = (updateDetails: any) => (value: boolean) => {
+  toggleReinvesting = (updateDetails: () => void) => (value: boolean) => {
     const { programId } = this.props;
     this.setState({ isPending: true, isReinvesting: value });
     toggleReinvesting(programId, value)
@@ -43,7 +43,7 @@ class ProgramReinvestingContainer extends React.PureComponent<
       });
   };
 
-  onReinvestingLabelClick = (updateDetails: any) => () =>
+  onReinvestingLabelClick = (updateDetails: () => void) => () =>
     this.toggleReinvesting(updateDetails)(!this.state.isReinvesting);
 
   render() {
