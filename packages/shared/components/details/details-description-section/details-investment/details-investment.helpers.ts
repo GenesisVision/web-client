@@ -2,9 +2,8 @@ import {
   PersonalFundDetailsFull,
   PersonalProgramDetailsFull
 } from "gv-api-web";
-export type InvestmentDetails =
-  | PersonalFundDetailsFull
-  | PersonalProgramDetailsFull;
+export type InvestmentDetails = PersonalFundDetailsFull &
+  PersonalProgramDetailsFull;
 
 export const composeInvestmentDetails = (
   personalDetails: PersonalFundDetailsFull | PersonalProgramDetailsFull
