@@ -17,6 +17,7 @@ import ProgramPeriodEnd from "shared/components/program-period/program-period-en
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import TableCell from "shared/components/table/components/table-cell";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
@@ -60,7 +61,10 @@ const DashboardPrograms: FunctionComponent<
       dataSelector={dashboardProgramsTableSelector}
       isFetchOnMount={true}
       columns={DASHBOARD_PROGRAMS_COLUMNS}
-      renderFilters={(updateFilter: IUpdateFilterFunc, filtering: any) => (
+      renderFilters={(
+        updateFilter: IUpdateFilterFunc,
+        filtering: FilteringType
+      ) => (
         <Fragment>
           <DateRangeFilter
             name={DATE_RANGE_FILTER_NAME}

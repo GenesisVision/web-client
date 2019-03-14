@@ -1,32 +1,32 @@
 import * as React from "react";
 
 import {
+  SORTING_DIRECTION,
   getSortingColumnName,
-  getSortingDirection,
-  SORTING_DIRECTION
+  getSortingDirection
 } from "../helpers/sorting.helpers";
+import { SortingColumn } from "./filtering/filter.type";
 import TableHeadCell from "./table-head-cell";
 import TableRow from "./table-row";
-import { SortingColumn } from "./filtering/filter.type";
 
 interface ITableHeaderProps {
   sorting: string;
   updateSorting(opt: string): ((dispatch: any, getState: any) => void) | void;
   columns?: SortingColumn[];
-  children(column: SortingColumn): JSX.Element;
+  children?(column: SortingColumn): JSX.Element;
 }
 
 class TableHeader extends React.Component<ITableHeaderProps> {
   sortingName = (): string => getSortingColumnName(this.props.sorting);
 
-  getSortingDirection = (sortingName: string): SORTING_DIRECTION => {
+  getSortingDirection = (sortingName?: string): SORTING_DIRECTION => {
     if (sortingName !== this.sortingName()) return SORTING_DIRECTION.NONE;
     return getSortingDirection(this.props.sorting);
   };
 
-  isSortable = (sortingName: string): boolean => sortingName !== undefined;
+  isSortable = (sortingName?: string): boolean => sortingName !== undefined;
 
-  handleSorting = (sortingName: string) => ():
+  handleSorting = (sortingName?: string) => ():
     | ((dispatch: any, getState: any) => void)
     | void => {
     if (
@@ -50,7 +50,7 @@ class TableHeader extends React.Component<ITableHeaderProps> {
           onClick={this.handleSorting(column.sortingName)}
           sortingDirection={this.getSortingDirection(column.sortingName)}
         >
-          {this.props.children(column)}
+          {this.props.children && this.props.children(column)}
         </TableHeadCell>
       );
     });
