@@ -1,23 +1,23 @@
 import * as React from "react";
 import {
-  calculateTotalPages,
-  IPaging
+  IPaging,
+  calculateTotalPages
 } from "shared/components/table//helpers/paging.helpers";
 import { updateFilter } from "shared/components/table/helpers/filtering.helpers";
 import { IDataModel } from "shared/constants/constants";
 
 import { composeRequestFilters } from "../services/table.service";
-import Table from "./table";
 import { SortingColumn } from "./filtering/filter.type";
+import Table from "./table";
 
 const defaultData: IDataModel = { items: null, total: 0 };
 
 export interface ITableModuleProps {
-  loader: boolean;
+  loader?: boolean;
   paging: IPaging;
-  sorting: string;
-  filtering: { [keys: string]: Object };
-  defaultFilters: any[];
+  sorting?: string;
+  filtering?: { [keys: string]: Object };
+  defaultFilters?: any[];
   getItems: Function;
   data?: IDataModel;
   disableTitle?: boolean;
