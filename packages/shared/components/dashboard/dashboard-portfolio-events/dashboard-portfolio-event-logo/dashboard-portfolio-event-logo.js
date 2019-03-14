@@ -18,8 +18,8 @@ import EventProfitIconGreen from "shared/media/event-profit-green.svg";
 import EventReinvestIcon from "shared/media/event-reinvest.svg";
 import EventStartedIcon from "shared/media/event-started.svg";
 import EventWithdrawIcon from "shared/media/event-withdraw.svg";
+import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 
-import { composeProgramDetailsUrl } from "../../../../utils/compose-url";
 import { EventLogoType } from "./dashboard-portfolio-event-logo.helper";
 
 export const EvenLogoIcon = ({ type }) => {
