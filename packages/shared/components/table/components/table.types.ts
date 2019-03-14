@@ -11,7 +11,7 @@ export interface IUpdateFilterFunc {
 }
 
 export interface IComposeDefaultFilter {
-  name: string;
+  name?: string;
   composeRequestValue?(value: any): Object;
   composeApiRequestValue?(value: any): Object; // temp
   defaultValue?: any;

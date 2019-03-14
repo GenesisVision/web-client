@@ -66,7 +66,7 @@ export const COPYTRADING_TRADES_HISTORY_COLUMNS = [
 
 export const COPYTRADING_TRADES_HISTORY_FILTERS = [
   {
-    ...composeDefaultDateRangeFilter({
+    ...composeDefaultDateRangeFilter({ // add name prop to fix crush
       defaultValue: {
         ...DEFAULT_DATE_RANGE_FILTER_VALUE,
         type: DateRangeFilterTypes.lastMonth
