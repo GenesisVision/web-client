@@ -17,10 +17,11 @@ import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filte
 import TableCell from "shared/components/table/components/table-cell";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
-import { FUND } from "shared/constants/constants";
+import { FUND, ROLE } from "shared/constants/constants";
 import { composeFundsDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
+import { FUND_ASSET_TYPE } from "../../../fund-asset/fund-asset";
 import {
   Column,
   IUpdateFilterFunc
@@ -30,11 +31,11 @@ import dashboardFundsTableSelector from "./dashboard-funds.selector";
 
 interface IDashboardFundsProps {
   title: string;
-  role: string;
+  role: ROLE;
   getDashboardFunds(filters: any): Action;
   onChangeStatus?(): void;
-  createButtonToolbar?(text: string, route: string): JSX.Element;
-  createFund?(): void;
+  createButtonToolbar(text: string, route: string): JSX.Element;
+  createFund?(): JSX.Element;
 }
 
 const DashboardFunds: FunctionComponent<
@@ -115,7 +116,7 @@ const DashboardFunds: FunctionComponent<
           <TableCell className="funds-table__cell">
             <FundAssetContainer
               assets={fund.topFundAssets}
-              type={"short"}
+              type={FUND_ASSET_TYPE.SHORT}
               size={3}
               length={fund.totalAssetsCount}
             />
@@ -154,7 +155,6 @@ const DashboardFunds: FunctionComponent<
             <AssetStatus
               status={fund.personalDetails.status}
               id={fund.id}
-              role={role}
               asset={FUND}
               onCancel={onChangeStatus}
             />

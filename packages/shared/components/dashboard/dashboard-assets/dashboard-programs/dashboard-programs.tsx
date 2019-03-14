@@ -24,7 +24,7 @@ import {
   Column,
   IUpdateFilterFunc
 } from "shared/components/table/components/table.types";
-import { PROGRAM } from "shared/constants/constants";
+import { PROGRAM, ROLE } from "shared/constants/constants";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import {
   formatCurrencyValue,
@@ -35,11 +35,11 @@ import {
 import dashboardProgramsTableSelector from "./dashboard-programs.selector";
 
 interface IDashboardProgramsProps {
-  role: string;
+  role: ROLE;
   title: string;
   getDashboardPrograms(filters: any): Action;
   createButtonToolbar?(text: string, route: string): JSX.Element;
-  createProgram?(): void;
+  createProgram?(): JSX.Element;
 }
 
 const DashboardPrograms: FunctionComponent<
@@ -154,7 +154,6 @@ const DashboardPrograms: FunctionComponent<
             <AssetStatus
               status={program.personalDetails.status}
               id={program.id}
-              role={role}
               asset={PROGRAM}
               onCancel={updateRow}
             />
