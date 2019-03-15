@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { isTablet } from "shared/utils/breakpoints";
-
 import {
-  DialogLoaderGoogleAuthMobile,
-  DialogLoaderGoogleAuthDesktop
+  DialogLoaderGoogleAuthDesktop,
+  DialogLoaderGoogleAuthMobile
 } from "shared/components/dialog/dialog-loader/dialog-loader-google-auth";
-import { IUiState } from "shared/reducers/ui-reducer";
+import RootState from "shared/reducers/root-reducer";
+import { isTablet } from "shared/utils/breakpoints";
 
 interface IDialogLoaderGoogleAuthStepsStateProps {
   innerWidth: number;
@@ -26,9 +25,7 @@ class DialogLoaderGoogleAuthSteps extends Component<
 
 const mapStateToProps = ({
   ui
-}: {
-  ui: IUiState;
-}): IDialogLoaderGoogleAuthStepsStateProps => ({
+}: RootState): IDialogLoaderGoogleAuthStepsStateProps => ({
   innerWidth: ui.innerWidth
 });
 

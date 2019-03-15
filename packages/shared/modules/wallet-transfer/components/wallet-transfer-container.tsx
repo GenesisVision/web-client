@@ -66,7 +66,7 @@ class WalletTransferContainer extends React.Component<
   };
 
   render() {
-    const { twoFactorEnabled, currentWallet, wallets } = this.props;
+    const { currentWallet, wallets } = this.props;
 
     if (!wallets.length) return <DialogLoader />;
     return (
