@@ -1,9 +1,31 @@
-import { AssetFilterType } from "./asset-type-filter/asset-type-filter.constants";
-import { DateRangeFilterType } from "./date-range-filter/date-range-filter.constants";
-import { EventTypeFilterType } from "./event-type-filter/event-type-filter.constants";
-import { LevelFilterType } from "./level-filter/level-filter.constants";
+import {
+  AssetFilterType,
+  ComposedRequestAssetName,
+  ComposedRequestAssetValue
+} from "./asset-type-filter/asset-type-filter.constants";
+import {
+  ComposedRequestDataRangeNames,
+  ComposedRequestDataRangeValue,
+  ComposedRequestDataRangeValues,
+  DateRangeFilterType
+} from "./date-range-filter/date-range-filter.constants";
+import {
+  ComposedRequestEventTypeName,
+  ComposedRequestEventTypeValue,
+  EventTypeFilterType
+} from "./event-type-filter/event-type-filter.constants";
+import {
+  ComposedRequestLevelFilterNames,
+  ComposedRequestLevelFilterValue,
+  ComposedRequestLevelFilterValues,
+  LevelFilterType
+} from "./level-filter/level-filter.constants";
 import { SelectFilterType } from "./select-filter/select-filter.constants";
-import { TagFilterType } from "./tag-filter/tag-filter.constants";
+import {
+  ComposedRequestTagName,
+  ComposedRequestTagValue,
+  TagFilterType
+} from "./tag-filter/tag-filter.constants";
 import { FILTER_TYPE } from "../../helpers/filtering.helpers";
 
 export type TFilter<T> = {

@@ -10,3 +10,6 @@ export enum TAG_NAME_TYPE {
 }
 
 export type TagFilterType = TAG_NAME_TYPE[];
+
+export type ComposedRequestTagName = "tags";
+export type ComposedRequestTagValue = TagFilterType;

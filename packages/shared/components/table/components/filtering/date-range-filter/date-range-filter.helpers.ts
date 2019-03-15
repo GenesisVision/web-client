@@ -4,6 +4,7 @@ import { DurationInputArg2 } from "moment";
 import { FILTER_TYPE } from "../../../helpers/filtering.helpers";
 import { IComposeDefaultFilter } from "../../table.types";
 import {
+  ComposedRequestDataRange,
   DATA_RANGE_FILTER_TYPES,
   DATE_RANGE_FILTER_NAME,
   DEFAULT_DATE_RANGE_FILTER_VALUE,
@@ -44,7 +45,7 @@ const dateTo = (): string =>
 export const composeRequestValueFunc = (
   fromFilterName: string = SERVER_DATE_RANGE_MIN_FILTER_NAME,
   toFilterName: string = SERVER_DATE_RANGE_MAX_FILTER_NAME
-) => (value: IDataRangeFilterValue): Object => {
+) => (value: IDataRangeFilterValue): ComposedRequestDataRange => {
   switch (value.type) {
     case DATA_RANGE_FILTER_TYPES.ALL:
       return {
