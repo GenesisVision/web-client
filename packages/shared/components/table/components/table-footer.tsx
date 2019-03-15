@@ -9,10 +9,13 @@ const TableFooter: React.FC<{
   paging: IPaging;
   updatePaging(page: number): void;
 }> = ({ isPending, paging, updatePaging }) => {
+  //@ts-ignore
   if (paging.totalPages < 2) return null;
 
   return (
     <div className="table__footer">
+      {/*
+      //@ts-ignore TODO fix types*/}
       <ItemsCounter {...paging} />
       <Paging
         paging={paging}

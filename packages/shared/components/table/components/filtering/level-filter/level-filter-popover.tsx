@@ -35,7 +35,7 @@ class LevelFilterPopover extends React.Component<
     }
   };
 
-  mapValueToNumber = (values: Array<number | string>): Array<number> =>
+  mapValueToNumber = (values: Array<number | string>): number[] =>
     values.map(x => (typeof x === "number" ? x : parseInt(x)));
 
   render() {

@@ -23,7 +23,7 @@ export interface ITableModuleProps {
   disableTitle?: boolean;
   renderFilters?(
     updateFilter: (filter: any) => void,
-    filtering: Object
+    filtering: FilteringType
   ): JSX.Element;
   title?: string;
   columns?: SortingColumn[];
