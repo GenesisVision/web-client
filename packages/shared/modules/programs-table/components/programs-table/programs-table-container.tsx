@@ -98,9 +98,10 @@ class ProgramsTableContainer extends React.Component<Props> {
       //TODO Fix any
       if (!programTags.length) return [];
       return convertToArray(value).map(tag => {
-        const { color } = programTags.filter(
+        const programTag = programTags.find(
           programTag => programTag.name === tag
-        )[0];
+        );
+        const color = programTag!.color;
         return { name: tag, color };
       });
     };

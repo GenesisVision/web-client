@@ -3,10 +3,14 @@ export type TableItems<T> = {
   items: T[];
 };
 
-export const mapToTableItems = <T>(propertyName: string) => (data: {
+export type DefaultTableState = {
   total: number;
   [propertyName: string]: any;
-}): TableItems<T> => ({
+};
+
+export const mapToTableItems = <T>(propertyName: string) => (
+  data: DefaultTableState
+): TableItems<T> => ({
   total: data.total,
   items: data[propertyName] as T[]
 });
