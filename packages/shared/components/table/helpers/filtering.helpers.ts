@@ -1,3 +1,4 @@
+import { FilteringType, TFilter } from "../components/filtering/filter.type";
 import { IComposeDefaultFilter } from "../components/table.types";
 
 export const RANGE_FILTER_TYPE = "RANGE_FILTER_TYPE";
@@ -15,19 +16,12 @@ export enum FILTER_TYPE {
   CUSTOM = "custom"
 }
 
-export interface IFilter {
-  name: string;
-  value: any;
-  composeRequestValue?(value: any): any;
-  type?: FILTER_TYPE;
-}
-
 export const composeFilteringActionType = (actionType: string): string =>
   `${actionType}_FILTERING`;
 
 export const composeFilters = (
   allFilters: IComposeDefaultFilter[],
-  filtering: { [keys: string]: Object }
+  filtering: FilteringType
 ): any => {
   if (!allFilters) return {};
   return allFilters.reduce((accum, cur) => {
@@ -46,7 +40,7 @@ export const composeFilters = (
   }, {});
 };
 
-const processFilterValue = (filter: IFilter): Object => {
+const processFilterValue = (filter: TFilter<any>): Object => {
   let requestValue = undefined;
   switch (filter.type) {
     case FILTER_TYPE.RANGE:
@@ -58,7 +52,8 @@ const processFilterValue = (filter: IFilter): Object => {
       }
       break;
     case FILTER_TYPE.CUSTOM:
-      const requestValues = filter.composeRequestValue(filter.value);
+      const requestValues =
+        filter.composeRequestValue && filter.composeRequestValue(filter.value);
       if (requestValues !== undefined) {
         if (Array.isArray(requestValues))
           requestValue = { [filter.name]: requestValues };
@@ -76,7 +71,10 @@ const processFilterValue = (filter: IFilter): Object => {
   return requestValue;
 };
 
-export const updateFilter = (oldFilters, newFilter) => {
+export const updateFilter = (
+  oldFilters: FilteringType,
+  newFilter: TFilter<any>
+) => {
   const { name, value } = newFilter;
   const existingFilterValue = oldFilters[name];
   if (JSON.stringify(existingFilterValue !== JSON.stringify(value))) {
