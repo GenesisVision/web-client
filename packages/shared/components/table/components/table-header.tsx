@@ -1,13 +1,13 @@
 import * as React from "react";
 
 import {
+  SORTING_DIRECTION,
   getSortingColumnName,
-  getSortingDirection,
-  SORTING_DIRECTION
+  getSortingDirection
 } from "../helpers/sorting.helpers";
+import { SortingColumn } from "./filtering/filter.type";
 import TableHeadCell from "./table-head-cell";
 import TableRow from "./table-row";
-import { SortingColumn } from "./filtering/filter.type";
 
 interface ITableHeaderProps {
   sorting: string;

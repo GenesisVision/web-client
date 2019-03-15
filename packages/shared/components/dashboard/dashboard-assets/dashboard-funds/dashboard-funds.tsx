@@ -14,6 +14,7 @@ import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitabil
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import TableCell from "shared/components/table/components/table-cell";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
@@ -27,7 +28,6 @@ import {
 } from "../../../table/components/table.types";
 import { DASHBOARD_FUNDS_COLUMNS } from "../../dashboard.constants";
 import dashboardFundsTableSelector from "./dashboard-funds.selector";
-import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 
 interface IDashboardFundsProps {
   title: string;

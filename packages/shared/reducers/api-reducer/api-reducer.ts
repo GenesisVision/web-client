@@ -5,14 +5,14 @@ export const REQUEST_SUFFIX = "REQUEST";
 export const SUCCESS_SUFFIX = "SUCCESS";
 export const FAILURE_SUFFIX = "FAILURE";
 
-export type IApiReducerFactory<T> = {
+export type IApiState<T> = {
   readonly isPending: boolean;
   readonly errorMessage: string;
   readonly code: null;
   readonly data?: T;
 };
 
-const initialState: IApiReducerFactory<any> = {
+const initialState: IApiState<any> = {
   isPending: false,
   errorMessage: "",
   code: null
@@ -29,7 +29,7 @@ const apiReducerFactory = <T>(
     suffixes: [REQUEST_SUFFIX, SUCCESS_SUFFIX, FAILURE_SUFFIX]
   },
   subReducer?: any
-) => (state = initialState, action: any): IApiReducerFactory<T> => {
+) => (state = initialState, action: any): IApiState<T> => {
   const apiType = config.apiType || API_TYPE;
   const suffixes = config.suffixes || [
     REQUEST_SUFFIX,

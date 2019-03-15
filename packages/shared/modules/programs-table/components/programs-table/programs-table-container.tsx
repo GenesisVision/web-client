@@ -1,26 +1,26 @@
 import { push } from "connected-react-router";
+import { ProgramTag, ProgramsList } from "gv-api-web";
 import { LOGIN_ROUTE } from "pages/auth/login/login.routes";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { bindActionCreators, compose, Dispatch } from "redux";
+import { Dispatch, bindActionCreators, compose } from "redux";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { TFilter } from "shared/components/table/components/filtering/filter.type";
 import LevelFilter from "shared/components/table/components/filtering/level-filter/level-filter";
 import SelectFilter from "shared/components/table/components/filtering/select-filter/select-filter";
 import TagFilter from "shared/components/table/components/filtering/tag-filter/tag-filter";
 import { TAG_FILTER_NAME } from "shared/components/table/components/filtering/tag-filter/tag-filter.constants";
 import { toggleFavoriteProgramDispatchable } from "shared/modules/favorite-asset/services/favorite-program.service";
+import RootState from "shared/reducers/root-reducer";
 import { convertToArray } from "shared/utils/helpers";
 
 import * as programsService from "../../services/programs-table.service";
 import { composeCurrencyFilter } from "./program-table.helpers";
 import ProgramsTable from "./programs-table";
 import { CURRENCY_FILTER_NAME, LEVEL_FILTER_NAME } from "./programs.constants";
-import RootState from "shared/reducers/root-reducer";
-import { ProgramsList, ProgramTag } from "gv-api-web";
-import { TFilter } from "shared/components/table/components/filtering/filter.type";
 
 interface IProgramsTableContainerProps {
   isLocationChanged(location: string): boolean;

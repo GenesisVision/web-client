@@ -15,6 +15,7 @@ import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitabil
 import { TableCell } from "shared/components/table/components";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
 import {
@@ -31,7 +32,6 @@ import { clearCopytradingTable } from "../actions/copytrading-tables.actions";
 import { getCopytradingTradesHistory } from "../services/copytrading-tables.service";
 import { COPYTRADING_TRADES_HISTORY_COLUMNS } from "./copytrading-tables.constants";
 import { dashboardTradesHistoryTableSelector } from "./copytrading-tables.selectors";
-import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 
 interface ITradesHistoryTableOwnProps {
   title: string;
