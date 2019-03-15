@@ -12,7 +12,7 @@ import { FilteringType } from "../components/filtering/filter.type";
 
 interface IComposeRequestFiltersProps {
   paging: IPaging;
-  sorting: string | Object;
+  sorting: string;
   filtering: FilteringType;
   defaultFilters: IComposeDefaultFilter[];
 }
