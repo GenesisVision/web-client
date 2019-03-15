@@ -1013,6 +1013,21 @@
   resolved "https://registry.yarnpkg.com/@types/qs/-/qs-6.5.2.tgz#7f347062655056662845ba4bb79dcbfdc382cd61"
   integrity sha512-47kAAs3yV/hROraCTQYDMh4p/6zI9+gtssjD0kq9OWsGdLcBge59rl49FnCuJ+iWxEKiqFz6KXzeGH5DRVjNJA==
 
+"@types/rc-slider@^8.6.3":
+  version "8.6.3"
+  resolved "https://registry.yarnpkg.com/@types/rc-slider/-/rc-slider-8.6.3.tgz#69ab5d5533259d878ee2775e6d3a8a8a50873562"
+  integrity sha512-RRjV1PnR3h9soQkUX/RB0QjbutJqfwkCEbOqy/2ZP3TU9W1l7cjo306wSeWgYugcCSMD5anUK3YLD9m1voc3aw==
+  dependencies:
+    "@types/rc-tooltip" "*"
+    "@types/react" "*"
+
+"@types/rc-tooltip@*":
+  version "3.7.1"
+  resolved "https://registry.yarnpkg.com/@types/rc-tooltip/-/rc-tooltip-3.7.1.tgz#20bde0f9c872f824c1dea86d0fc741dfd9aca3d7"
+  integrity sha512-H+pW9+H42rlb3PBjcxuXhQre1ldr0gdDVbVfCj0Pf4Mdjd1plti9ekt1yJ+gGig3bRFLpCknWDmfOkAjKY+S+Q==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-cropper@^0.10.4":
   version "0.10.4"
   resolved "https://registry.yarnpkg.com/@types/react-cropper/-/react-cropper-0.10.4.tgz#c0a5128a0fe5446fac50dd9f5b95ba41ce616651"
@@ -9817,10 +9832,10 @@ rc-animate@2.x:
     raf "^3.4.0"
     react-lifecycles-compat "^3.0.4"
 
-rc-slider@^8.6.1:
-  version "8.6.3"
-  resolved "https://registry.yarnpkg.com/rc-slider/-/rc-slider-8.6.3.tgz#1ca0e0bd2863252741de75e7bf8c9f2cfcffccb7"
-  integrity sha512-kQaq3SJdb5EifYZxvMDotgClOJKIuAiidFr67hxNEeBv0GwUcwAToYmSWrP0B2ZCb5IYlr2csyiH0+xNomLDoA==
+rc-slider@^8.6.3:
+  version "8.6.7"
+  resolved "https://registry.yarnpkg.com/rc-slider/-/rc-slider-8.6.7.tgz#fa0cbbd0251394c7cda8dd1b62d10bb7e9b1b840"
+  integrity sha512-QIFWMnK1VLc4TtJSZJgjhI6UOhN8eg53EM2La+eRa8rSPZwJT3rIWfZnTZs7OV7zXG/AiLWN4G+oGxuMcEFpsg==
   dependencies:
     babel-runtime "6.x"
     classnames "^2.2.5"
@@ -9828,7 +9843,7 @@ rc-slider@^8.6.1:
     rc-tooltip "^3.7.0"
     rc-util "^4.0.4"
     shallowequal "^1.0.1"
-    warning "^3.0.0"
+    warning "^4.0.3"
 
 rc-tooltip@^3.7.0:
   version "3.7.3"
@@ -12255,6 +12270,13 @@ warning@^4.0.1:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/warning/-/warning-4.0.2.tgz#aa6876480872116fa3e11d434b0d0d8d91e44607"
   integrity sha512-wbTp09q/9C+jJn4KKJfJfoS6VleK/Dti0yqWSm6KMvJ4MRCXFQNapHuJXutJIrWV0Cf4AhTdeIe4qdKHR1+Hug==
+  dependencies:
+    loose-envify "^1.0.0"
+
+warning@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/warning/-/warning-4.0.3.tgz#16e9e077eb8a86d6af7d64aa1e05fd85b4678ca3"
+  integrity sha512-rpJyN222KWIvHJ/F53XSZv0Zl/accqHR8et1kpaMTD/fLCRxtV8iX8czMzY7sVZupTI3zcUTg8eycS2kNF9l6w==
   dependencies:
     loose-envify "^1.0.0"
 
