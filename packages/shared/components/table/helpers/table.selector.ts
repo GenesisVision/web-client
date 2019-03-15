@@ -14,7 +14,8 @@ export const tableSelectorCreator = <State, TableState, ItemsType>(
 ) =>
   createSelector(selector, (table: ITableState<TableState>) => {
     const data = table.itemsData.data
-      ? mapToTableItems<ItemsType>(itemName)(table.itemsData.data)
+      ? //@ts-ignore
+        mapToTableItems<ItemsType>(itemName)(table.itemsData.data)
       : defaultData;
     return {
       ...table,
