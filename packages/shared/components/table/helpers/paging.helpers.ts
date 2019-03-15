@@ -1,10 +1,10 @@
 import { DEFAULT_PAGING } from "../reducers/table-paging.reducer";
 
 export interface IPaging {
-  currentPage?: number;
-  totalPages?: number;
-  totalItems?: number;
-  itemsOnPage?: number;
+  currentPage: number;
+  totalPages: number;
+  totalItems: number;
+  itemsOnPage: number;
 }
 export interface ISkipAndTake {
   skip: number;

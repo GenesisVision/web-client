@@ -16,6 +16,7 @@ import WalletTransferPopup from "shared/modules/wallet-transfer/wallet-transfer-
 import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
+import { CurrentWallet } from "../../../../modules/wallet-add-funds/components/wallet-add-funds-container";
 import { walletTableTransactionsSelector } from "../wallet-transactions/wallet-transactions.selector";
 import WalletListButton from "./wallet-list-button";
 import { WALLET_LIST_COLUMNS } from "./wallet-list.constants";
@@ -40,7 +41,7 @@ class WalletList extends React.Component<IWalletListProps, IWalletListState> {
     currentWallet: {}
   };
 
-  handleOpenAddFundsPopup = wallet => () => {
+  handleOpenAddFundsPopup = (wallet: CurrentWallet) => () => {
     const { currency, available } = wallet;
     this.setState({
       isOpenAddFundsPopup: true,
@@ -52,7 +53,7 @@ class WalletList extends React.Component<IWalletListProps, IWalletListState> {
     this.setState({ isOpenAddFundsPopup: false, currentWallet: {} });
   };
 
-  handleOpenWithdrawPopup = wallet => () => {
+  handleOpenWithdrawPopup = (wallet: CurrentWallet) => () => {
     this.setState({ isOpenWithdrawPopup: true, currentWallet: wallet });
   };
 
@@ -60,7 +61,7 @@ class WalletList extends React.Component<IWalletListProps, IWalletListState> {
     this.setState({ isOpenWithdrawPopup: false, currentWallet: {} });
   };
 
-  handleOpenTransferPopup = wallet => () => {
+  handleOpenTransferPopup = (wallet: CurrentWallet) => () => {
     this.setState({ isOpenTransferPopup: true, currentWallet: wallet });
   };
 
@@ -72,8 +73,12 @@ class WalletList extends React.Component<IWalletListProps, IWalletListState> {
     const { t, createButtonToolbar, wallets } = this.props;
     return (
       <div className="wallet-list">
+        {/*
+        //@ts-ignore */}
         <Table
+          //@ts-ignore
           paging={DEFAULT_PAGING}
+          //@ts-ignore
           createButtonToolbar={createButtonToolbar}
           items={wallets}
           dataSelector={walletTableTransactionsSelector}
@@ -153,6 +158,7 @@ class WalletList extends React.Component<IWalletListProps, IWalletListState> {
           }}
         />
         <WalletAddFundsPopup
+          //@ts-ignore
           currentWallet={this.state.currentWallet}
           open={this.state.isOpenAddFundsPopup}
           onClose={this.handleCloseAddFundsPopup}

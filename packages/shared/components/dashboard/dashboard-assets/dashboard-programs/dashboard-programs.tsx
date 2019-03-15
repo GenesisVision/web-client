@@ -39,8 +39,8 @@ interface IDashboardProgramsProps {
   role: ROLE;
   title: string;
   getDashboardPrograms(filters: any): Action;
-  createButtonToolbar?(text: string, route: string): JSX.Element;
-  createProgram?(): JSX.Element;
+  createButtonToolbar: JSX.Element;
+  createProgram: JSX.Element;
 }
 
 const DashboardPrograms: FunctionComponent<
@@ -54,6 +54,7 @@ const DashboardPrograms: FunctionComponent<
   title
 }) => {
   return (
+    //@ts-ignore
     <TableContainer
       createButtonToolbar={createButtonToolbar}
       emptyMessage={createProgram}

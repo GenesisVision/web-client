@@ -1,4 +1,6 @@
 import { ProgramRequest, ProgramRequests } from "gv-api-web";
+import { AnyAction } from "redux";
+import { ThunkAction, ThunkMiddleware } from "redux-thunk";
 import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
 import { ASSET, ROLE } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
@@ -73,7 +75,9 @@ export const cancelRequestDispatch = ({
   role,
   asset,
   onFinally
-}: CancelRequestType) => (dispatch: MiddlewareDispatch): Promise<void> => {
+}: CancelRequestType) => (
+  dispatch: MiddlewareDispatch<AnyAction>
+): Promise<void> => {
   const authorization = authService.getAuthArg();
   let actionCreator: ICancelRequest;
 

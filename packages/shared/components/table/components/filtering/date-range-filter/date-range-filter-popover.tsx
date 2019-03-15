@@ -1,5 +1,5 @@
 import { GVButton } from "gv-react-components";
-import * as moment from "moment";
+import moment from "moment";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 
@@ -12,19 +12,21 @@ import {
 interface IDateRangeFilterPopoverProps {
   value?: IDataRangeFilterValue;
   changeFilter?(value: IDataRangeFilterValue): void;
-  startLabel?: string;
+  startLabel: string;
   cancel?(): void;
 }
 
-class DateRangeFilterPopover extends React.Component<
-  IDateRangeFilterPopoverProps & InjectedTranslateProps,
-  IDataRangeFilterValue & { [key: string]: any }
-> {
-  state = {
-    type: this.props.value.type,
-    dateStart: this.props.value.dateStart,
-    dateEnd: this.props.value.dateEnd
-  };
+type Props = IDateRangeFilterPopoverProps & InjectedTranslateProps;
+type State = IDataRangeFilterValue & { [key: string]: any };
+
+class DateRangeFilterPopover extends React.Component<Props, State> {
+  state: State = {
+    type: this.props.value
+      ? this.props.value.type
+      : DATA_RANGE_FILTER_TYPES.ALL,
+    dateStart: this.props.value ? this.props.value.dateStart : undefined,
+    dateEnd: this.props.value ? this.props.value.dateEnd : undefined
+  } as State;
 
   handleChangeType = (type: DATA_RANGE_FILTER_TYPES) => () => {
     this.setState({
@@ -39,7 +41,9 @@ class DateRangeFilterPopover extends React.Component<
     this.setState({ [type]: date });
   };
   handleSubmit = () => {
-    this.props.changeFilter(this.state);
+    if (this.props.changeFilter) {
+      this.props.changeFilter(this.state);
+    }
   };
 
   render() {

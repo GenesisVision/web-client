@@ -54,8 +54,10 @@ class FundStructure extends React.Component<
     };
 
     return (
+      //@ts-ignore TODO fix tables
       <TableModule
         data={data}
+        //@ts-ignore TODO
         paging={{
           ...DEFAULT_PAGING,
           itemsOnPage: data.total

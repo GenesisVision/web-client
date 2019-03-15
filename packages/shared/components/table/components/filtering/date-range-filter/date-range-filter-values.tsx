@@ -1,5 +1,5 @@
 import { GVTextField } from "gv-react-components";
-import * as moment from "moment";
+import moment, { MomentInput } from "moment";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import GVDatePicker from "shared/components/gv-datepicker/gv-datepicker";
@@ -13,8 +13,8 @@ import {
 interface IDateRangeFilterValuesProps {
   onChange(type: keyof IDataRangeFilterValue, date: string): void;
   type: DATA_RANGE_FILTER_TYPES;
-  dateStart: Date | number | string;
-  dateEnd: Date | number | string;
+  dateStart: MomentInput;
+  dateEnd: MomentInput;
   startLabel: string;
 }
 
@@ -28,6 +28,7 @@ class DateRangeFilterValues extends React.Component<
   };
 
   renderFirstInput = (value: string): JSX.Element => (
+    //@ts-ignore TODO сделать фикс GVTextField
     <GVTextField
       wrapperClassName="date-range-filter__date-input"
       type="text"
@@ -39,6 +40,7 @@ class DateRangeFilterValues extends React.Component<
   );
 
   renderSecondInput = (): JSX.Element => (
+    //@ts-ignore TODO сделать фикс GVTextField
     <GVTextField
       wrapperClassName="date-range-filter__date-input"
       type="text"

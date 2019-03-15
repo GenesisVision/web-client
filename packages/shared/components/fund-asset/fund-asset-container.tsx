@@ -1,7 +1,7 @@
 import "./fund-asset.scss";
 
 import classNames from "classnames";
-import { FundAssetPartWithIcon } from "gv-api-web";
+import { FundAssetPercent } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import Tooltip from "shared/components/tooltip/tooltip";
@@ -12,7 +12,7 @@ import FundAssetTooltip from "./fund-asset-tooltip/fund-asset-tooltip";
 
 interface IFundAssetContainerProps {
   size: number;
-  assets: FundAssetPartWithIcon[];
+  assets: FundAssetPercent[];
   type: FUND_ASSET_TYPE;
   length?: number;
   removable?: boolean;

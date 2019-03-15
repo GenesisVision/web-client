@@ -13,17 +13,17 @@ import Table from "./table";
 const defaultData: IDataModel = { items: null, total: 0 };
 
 export interface ITableModuleProps {
-  loader?: boolean;
+  loader: boolean;
   paging: IPaging;
-  sorting?: string;
-  filtering?: FilteringType;
-  defaultFilters?: any[];
+  sorting: string;
+  filtering: FilteringType;
+  defaultFilters: any[];
   getItems: Function;
   data?: IDataModel;
   disableTitle?: boolean;
   renderFilters?(
     updateFilter: (filter: any) => void,
-    filtering: FilteringType
+    filtering: Object
   ): JSX.Element;
   title?: string;
   columns?: SortingColumn[];
@@ -153,6 +153,7 @@ class TableModule extends React.Component<
     const { data, isPending, paging } = this.state;
     const newPaging = { ...paging, totalItems: data.total ? data.total : 0 };
     return (
+      //@ts-ignore
       <Table
         {...this.props}
         {...this.state}

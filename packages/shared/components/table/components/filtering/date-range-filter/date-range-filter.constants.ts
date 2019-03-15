@@ -1,3 +1,4 @@
+import { MomentInput } from "moment";
 import { Nullable } from "shared/utils/types";
 
 export const DATE_RANGE_FILTER_NAME = "dateRange";
@@ -19,14 +20,14 @@ export enum DATA_RANGE_FILTER_TYPES {
 
 export interface IDataRangeFilterValue {
   type: DATA_RANGE_FILTER_TYPES;
-  dateStart: Nullable<Date | number | string>;
-  dateEnd: Nullable<Date | number | string>;
+  dateStart: MomentInput;
+  dateEnd: MomentInput;
 }
 
 export const DEFAULT_DATE_RANGE_FILTER_VALUE: IDataRangeFilterValue = {
   type: DATA_RANGE_FILTER_TYPES.ALL,
-  dateStart: null,
-  dateEnd: null
+  dateStart: undefined,
+  dateEnd: undefined
 };
 
 export type DateRangeFilterType = IDataRangeFilterValue;

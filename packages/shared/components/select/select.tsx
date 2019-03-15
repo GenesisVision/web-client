@@ -7,23 +7,33 @@ import Popover, {
   HORIZONTAL_POPOVER_POS
 } from "shared/components/popover/popover";
 import GVScroll from "shared/components/scroll/gvscroll";
-import SelectItem from "shared/components/select/select-item";
 import FilterArrowIcon from "shared/components/table/components/filtering/filter-arrow-icon";
 import { Nullable } from "shared/utils/types";
+
+import SelectItem from "./select-item";
 
 export type OnChangeEvent = {
   target: { value: string; name: string };
 };
 
+interface ChildOwnProps {
+  value: string;
+  key: string;
+  children: string;
+}
+
+type SelectChild = React.ReactElement<ChildOwnProps>;
+
 interface ISelectProps {
   value: string;
   onChange(event: OnChangeEvent, child: JSX.Element): void;
-  name?: string;
+  name: string;
   className?: string;
   fullWidthPopover?: boolean;
   onFocus?(event: React.FocusEvent<HTMLButtonElement>): void;
   onBlur?(event: React.FocusEvent<HTMLButtonElement>): void;
   disabled?: boolean;
+  children: SelectChild[];
 }
 interface ISelectState {
   anchor: Nullable<EventTarget>;
@@ -48,11 +58,11 @@ class Select extends React.Component<ISelectProps, ISelectState> {
   ): void => {
     event.preventDefault();
     if (this.props.disabled) return;
-    this.input.current.focus();
+    this.input.current && this.input.current.focus();
     this.setState({ anchor: event.currentTarget });
   };
 
-  handleChildClick = (child: JSX.Element) => ({
+  handleChildClick = (child: SelectChild) => ({
     event,
     isSelected
   }: {
@@ -63,7 +73,7 @@ class Select extends React.Component<ISelectProps, ISelectState> {
     const { value } = child.props;
     if (!isSelected) {
       event.persist();
-      const ChangeEvent = {
+      const ChangeEvent: OnChangeEvent = {
         target: { value, name }
       };
       if (onChange) {
@@ -97,10 +107,10 @@ class Select extends React.Component<ISelectProps, ISelectState> {
   setDefaultValue(): void {
     const { name, onChange, value } = this.props;
     if (value && value.length) return;
-    const children = React.Children.toArray(this.props.children);
+    const children = this.props.children;
     const child = children[0];
     if (child && children.length === 1) {
-      const event = {
+      const event: OnChangeEvent = {
         target: { value: child.props.value, name }
       };
       onChange(event, child);
@@ -109,26 +119,24 @@ class Select extends React.Component<ISelectProps, ISelectState> {
 
   render() {
     let displayValue = this.props.value;
-    const items = React.Children.map(
-      this.props.children,
-      (child: JSX.Element) => {
-        const isSelected =
-          child.props.value.toString().toLowerCase() ===
-          this.props.value.toString().toLowerCase();
-        if (isSelected) displayValue = child.props.children;
-        const { name } = this.props;
-        return (
-          <SelectItem
-            isSelected={isSelected}
-            onClick={this.handleChildClick(child)}
-            {...child.props}
-            name={name}
-          >
-            {child.props.children}
-          </SelectItem>
-        );
-      }
-    );
+
+    const items = this.props.children.map(child => {
+      const isSelected =
+        child.props.value.toString().toLowerCase() ===
+        this.props.value.toString().toLowerCase();
+      if (isSelected) displayValue = child.props.children;
+      const { name } = this.props;
+      return (
+        <SelectItem
+          isSelected={isSelected}
+          onClick={this.handleChildClick(child)}
+          {...child.props}
+          name={name}
+        >
+          {child.props.children}
+        </SelectItem>
+      );
+    });
     return (
       <div
         className={classNames("select", this.props.className, {

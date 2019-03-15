@@ -1,5 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
+import { RouteComponentProps } from "react-router";
 import { Route, Switch } from "react-router-dom";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
 
@@ -27,6 +28,12 @@ export const composeWalletCopytradingCurrencyUrl = composeUrl(
 interface IWalletDispatchToProps {
   fetchWallets(): void;
 }
+
+type RouteProps = {
+  currency: string;
+};
+
+export type WalletRouteProps = RouteComponentProps<RouteProps>;
 
 class WalletRoutes extends React.Component<IWalletDispatchToProps, any> {
   componentDidMount() {

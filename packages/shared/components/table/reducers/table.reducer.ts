@@ -2,8 +2,8 @@ import { combineReducers } from "redux";
 import apiReducerFactory from "shared/reducers/api-reducer/api-reducer";
 import clearableReducer from "shared/reducers/clearable.reducer";
 
-import tableFiltersReducer from "./table-filters.reducer";
 import { IPaging } from "../helpers/paging.helpers";
+import tableFiltersReducer from "./table-filters.reducer";
 
 interface ITableReducerFactory {
   type: string;
@@ -24,8 +24,8 @@ const tableReducerFactory = ({
   clearable = false,
   clearableActionType
 }: ITableReducerFactory) => {
-  const clearableWrapper = clearable ? clearableReducer : f => f;
-
+  const clearableWrapper = clearable ? clearableReducer : (f: any) => f;
+  //@ts-ignore
   return clearableWrapper(
     combineReducers({
       itemsData: apiReducerFactory({

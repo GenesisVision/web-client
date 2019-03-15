@@ -7,12 +7,12 @@ import Popover, {
   HORIZONTAL_POPOVER_POS
 } from "shared/components/popover/popover";
 import TagProgramItem from "shared/components/tag-program/tag-program-item";
+import { Nullable } from "shared/utils/types";
 
+import { TFilter } from "../filter.type";
 import TagFilterButton from "./tag-filter-button";
 import TagFilterPopover from "./tag-filter-popover";
 import { TAG_NAME_TYPE } from "./tag-filter.constants";
-import { Nullable } from "shared/utils/types";
-import { TFilter } from "../filter.type";
 
 interface ITagFilterState {
   anchor: Nullable<EventTarget>;
@@ -38,7 +38,7 @@ class TagFilter extends React.Component<ITagFilterProps, ITagFilterState> {
         this.props.value &&
         this.props.value.find(select => item.name === select.name)
     );
-  renderValueText = value => value;
+
   handleOpenPopover = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ): void => this.setState({ anchor: event.currentTarget });
@@ -78,7 +78,7 @@ class TagFilter extends React.Component<ITagFilterProps, ITagFilterState> {
             ))}
           </div>
           <TagFilterButton
-            isActive={anchor}
+            isActive={Boolean(anchor)}
             onClickHandle={this.handleOpenPopover}
           />
         </div>

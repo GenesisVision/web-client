@@ -7,10 +7,11 @@ import AboutLevelsComponent from "shared/components/about-levels/about-levels";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
+import { CURRENCIES } from "../../../../modules/currency-select/currency-select.constants";
 import { fetchInvestmentsLevels } from "../services/program-details.service";
 
 interface IInvestmentLimitsPopoverOwnProps {
-  currency: string;
+  currency: CURRENCIES;
   level: number;
   canLevelUp: boolean;
   closePopover(): void;

@@ -6,7 +6,7 @@ import RootState from "shared/reducers/root-reducer";
 
 import { IPaging } from "../helpers/paging.helpers";
 import { getItems, updateFilters } from "../services/table.service";
-import { FilteringType, SortingColumn } from "./filtering/filter.type";
+import { SortingColumn } from "./filtering/filter.type";
 import Table from "./table";
 
 interface ITableContainerProps {
@@ -28,11 +28,10 @@ interface ITableContainerProps {
   ): JSX.Element;
   renderFilters?(
     updateFilter: (filter: any) => void,
-    filtering: FilteringType
+    filtering: Object
   ): JSX.Element;
   columns?: SortingColumn[];
-  createButtonToolbar?(text: string, route: string): JSX.Element;
-  emptyMessage?(): JSX.Element;
+  createButtonToolbar?: JSX.Element;
 }
 
 interface ITableContainerStateProps {
@@ -40,7 +39,7 @@ interface ITableContainerStateProps {
   isPending: boolean;
   sorting: string;
   paging: IPaging;
-  filtering: FilteringType;
+  filtering: Object;
   fetchItems(): void;
   defaults: any;
 }
@@ -109,6 +108,7 @@ class TableContainer extends React.Component<
     const { data, isPending, paging, ...otherProps } = this.props;
     const newPaging = { ...paging, totalItems: data ? data.total : 0 };
     return (
+      //@ts-ignore
       <Table
         {...otherProps}
         updateRow={this.updateItems}

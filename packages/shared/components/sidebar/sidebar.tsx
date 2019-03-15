@@ -1,6 +1,6 @@
 import "./sidebar.scss";
 
-import * as classNames from "classnames";
+import classnames from "classnames";
 import * as React from "react";
 import Modal from "shared/components/modal/modal";
 
@@ -25,7 +25,7 @@ class Sidebar extends React.Component<ISidebarProps> {
     } = this.props;
     return (
       <Modal open={open} onClose={onClose}>
-        <div className={classNames("sidebar", `sidebar--${position}`)}>
+        <div className={classnames("sidebar", `sidebar--${position}`)}>
           {children}
         </div>
       </Modal>

@@ -35,8 +35,8 @@ interface IDashboardFundsProps {
   role: ROLE;
   getDashboardFunds(filters: any): Action;
   onChangeStatus?(): void;
-  createButtonToolbar(text: string, route: string): JSX.Element;
-  createFund?(): JSX.Element;
+  createButtonToolbar: JSX.Element;
+  createFund: JSX.Element;
 }
 
 const DashboardFunds: FunctionComponent<
@@ -51,6 +51,7 @@ const DashboardFunds: FunctionComponent<
   title
 }) => {
   return (
+    //@ts-ignore
     <TableContainer
       createButtonToolbar={createButtonToolbar}
       emptyMessage={createFund}

@@ -1,4 +1,5 @@
-export const composeSortingActionType = actionType => `${actionType}_SORTING`;
+export const composeSortingActionType = (actionType: string) =>
+  `${actionType}_SORTING`;
 
 export enum SORTING_DIRECTION {
   NONE = "None",
@@ -7,6 +8,7 @@ export enum SORTING_DIRECTION {
 }
 
 export const getSortingColumnName = (value: string): string => {
+  //@ts-ignore TODO
   if (value === undefined) return undefined;
   const sortableRegExp = `(.*)${SORTING_DIRECTION.ASC}|${
     SORTING_DIRECTION.DESC

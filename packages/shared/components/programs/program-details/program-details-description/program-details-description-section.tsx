@@ -7,6 +7,7 @@ import DetailsInvestment from "shared/components/details/details-description-sec
 import { STATUS } from "shared/constants/constants";
 import { PROGRAM } from "shared/constants/constants";
 
+import { InvestmentDetails } from "../../../details/details-description-section/details-investment/details-investment.helpers";
 import ProgramDetailsDescriptionMain from "./program-details-description-main";
 
 interface IProgramDetailsDescriptionSectionProps
@@ -70,7 +71,7 @@ class ProgramDetailsDescriptionSection extends PureComponent<
               id={programDescription.id}
               assetCurrency={programDescription.currency}
               accountCurrency={accountCurrency}
-              personalDetails={personalDetails}
+              personalDetails={personalDetails as InvestmentDetails} // TODO fix type InvestmentDetails
               ProgramReinvestingWidget={ProgramReinvestingWidget}
               WithdrawContainer={ProgramWithdrawContainer}
             />

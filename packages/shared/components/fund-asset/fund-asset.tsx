@@ -1,7 +1,7 @@
 import "./fund-asset.scss";
 
 import classNames from "classnames";
-import { FundAssetPartWithIcon } from "gv-api-web";
+import { FundAssetPercent } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import FundAssetImage from "shared/components/avatar/fund-asset-image/fund-asset-image";
@@ -35,9 +35,7 @@ interface IFundAssetProps {
   className?: string;
 }
 
-class FundAsset extends React.Component<
-  IFundAssetProps & FundAssetPartWithIcon
-> {
+class FundAsset extends React.Component<IFundAssetProps & FundAssetPercent> {
   render() {
     const {
       name,

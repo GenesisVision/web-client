@@ -25,6 +25,7 @@ class FundWithdrawWallet extends Component<
         </label>
         <div className="gv-text-field">
           <Select
+            name="wallet"
             className="gv-text-field__input"
             value={value}
             onChange={this.handleChange}

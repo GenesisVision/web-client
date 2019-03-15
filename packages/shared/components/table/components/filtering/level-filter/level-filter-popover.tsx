@@ -30,10 +30,13 @@ class LevelFilterPopover extends React.Component<
     this.setState({ value: e });
   };
   handleSubmit = () => {
-    this.props.changeFilter(this.state.value);
+    if (this.props.changeFilter) {
+      this.props.changeFilter(this.state.value);
+    }
   };
 
-  mapValueToNumber = values => values.map(x => parseInt(x));
+  mapValueToNumber = (values: Array<number | string>): Array<number> =>
+    values.map(x => (typeof x === "number" ? x : parseInt(x)));
 
   render() {
     const { t, cancel } = this.props;

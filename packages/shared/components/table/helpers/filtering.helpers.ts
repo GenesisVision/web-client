@@ -25,14 +25,19 @@ export interface IFilter {
 export const composeFilteringActionType = (actionType: string): string =>
   `${actionType}_FILTERING`;
 
-export const composeFilters = (allFilters: IComposeDefaultFilter[], filtering: { [keys: string]: Object }): any => {
+export const composeFilters = (
+  allFilters: IComposeDefaultFilter[],
+  filtering: { [keys: string]: Object }
+): any => {
   if (!allFilters) return {};
   return allFilters.reduce((accum, cur) => {
     const { name, type, composeRequestValue } = cur;
     const processedFilterValue = processFilterValue({
+      //@ts-ignore
       name,
       type,
       composeRequestValue,
+      //@ts-ignore
       value: filtering[name]
     });
     if (processedFilterValue !== undefined) {
@@ -55,6 +60,7 @@ const processFilterValue = (filter: IFilter): Object => {
       }
       break;
     case FILTER_TYPE.CUSTOM:
+      //@ts-ignore
       const requestValues = filter.composeRequestValue(filter.value);
       if (requestValues !== undefined) {
         if (Array.isArray(requestValues))
@@ -72,7 +78,7 @@ const processFilterValue = (filter: IFilter): Object => {
   }
   return requestValue;
 };
-
+//@ts-ignore
 export const updateFilter = (oldFilters, newFilter) => {
   const { name, value } = newFilter;
   const existingFilterValue = oldFilters[name];

@@ -20,6 +20,7 @@ import {
 } from "shared/utils/compose-url";
 import { Nullable } from "shared/utils/types";
 
+import { CURRENCIES } from "../../../../modules/currency-select/currency-select.constants";
 import InvestmentLimitsPopover from "./investment-limits-popover";
 
 interface IIProgramDetailsDescriptionMainOwnProps {
@@ -81,7 +82,7 @@ class ProgramDetailsDescriptionMain extends Component<
             onClose={this.handleCloseDropdown}
           >
             <InvestmentLimitsPopover
-              currency={programDescription.currency}
+              currency={programDescription.currency as CURRENCIES}
               level={programDescription.level}
               canLevelUp={programDescription.rating.canLevelUp}
               closePopover={this.handleCloseDropdown}

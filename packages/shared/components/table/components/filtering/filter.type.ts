@@ -12,7 +12,7 @@ export type TFilter<T> = {
 
 export interface FilterValue<T = any> {
   value: T;
-  label: T;
+  label?: T;
 }
 
 export interface IInvestorEventFilterValue<T> extends FilterValue {}
