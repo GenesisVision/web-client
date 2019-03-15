@@ -37,7 +37,7 @@ export type TFilter<T> = {
 
 export interface SelectFilterValue<T = any> {
   value: T | undefined;
-  label: T;
+  label?: T;
   labelKey?: string;
 }
 
@@ -55,4 +55,33 @@ export type FilteringType = {
     | SelectFilterType
     | TagFilterType
     | undefined;
+};
+
+export type ComposeFiltersType = {
+  [keys in
+    | ComposedRequestAssetName
+    | ComposedRequestDataRangeNames
+    | ComposedRequestEventTypeName
+    | ComposedRequestLevelFilterNames
+    | ComposedRequestTagName]?:
+    | ComposedRequestAssetValue
+    | ComposedRequestEventTypeValue
+    | ComposedRequestTagValue
+    | ComposedRequestDataRangeValue
+    | ComposedRequestLevelFilterValue
+    | string
+};
+
+export type ComposeFiltersTypeFlat = {
+  [keys in
+    | ComposedRequestAssetName
+    | ComposedRequestDataRangeNames
+    | ComposedRequestEventTypeName
+    | ComposedRequestLevelFilterNames
+    | ComposedRequestTagName]?:
+    | ComposedRequestAssetValue
+    | ComposedRequestEventTypeValue
+    | ComposedRequestTagValue
+    | ComposedRequestDataRangeValues
+    | ComposedRequestLevelFilterValues
 };
