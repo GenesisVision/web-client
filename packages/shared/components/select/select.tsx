@@ -128,6 +128,7 @@ class Select extends React.Component<ISelectProps, ISelectState> {
       const { name } = this.props;
       return (
         <SelectItem
+          key={child.props.value}
           isSelected={isSelected}
           onClick={this.handleChildClick(child)}
           {...child.props}

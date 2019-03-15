@@ -36,7 +36,7 @@ const programsLevelFilter = {
   name: LEVEL_FILTER_NAME,
   type: FILTER_TYPE.RANGE,
   defaultValue: [LEVEL_MIN_FILTER_VALUE, LEVEL_MAX_FILTER_VALUE],
-  validate: value => {
+  validate: (value: string[]) => {
     const levelRegex = /[0-7]/;
     if (Array.isArray(value) && value.length === 2) {
       const [a, b] = value;

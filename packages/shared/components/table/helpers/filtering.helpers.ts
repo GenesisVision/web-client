@@ -1,3 +1,4 @@
+import { FilteringType, TFilter } from "../components/filtering/filter.type";
 import { IComposeDefaultFilter } from "../components/table.types";
 
 export const RANGE_FILTER_TYPE = "RANGE_FILTER_TYPE";

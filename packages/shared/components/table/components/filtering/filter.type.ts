@@ -15,7 +15,7 @@ export type TFilter<T> = {
 
 export interface SelectFilterValue<T = any> {
   value: T | undefined;
-  label: T;
+  label?: T;
   labelKey?: string;
 }
 

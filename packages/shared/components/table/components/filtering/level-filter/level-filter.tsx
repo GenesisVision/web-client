@@ -16,7 +16,7 @@ interface ILevelFilterProps {
 class LevelFilter extends React.Component<
   ILevelFilterProps & InjectedTranslateProps
 > {
-  renderValueText = (value: Array<number>): string => `${value[0]}-${value[1]}`;
+  renderValueText = (value: any) => `${value[0]}-${value[1]}`;
 
   render() {
     const { t, name, value, onChange } = this.props;

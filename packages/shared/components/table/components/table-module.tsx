@@ -7,7 +7,7 @@ import { updateFilter } from "shared/components/table/helpers/filtering.helpers"
 import { IDataModel } from "shared/constants/constants";
 
 import { composeRequestFilters } from "../services/table.service";
-import { FilteringType, SortingColumn } from "./filtering/filter.type";
+import { FilteringType, SortingColumn, TFilter } from "./filtering/filter.type";
 import Table from "./table";
 
 const defaultData: IDataModel = { items: null, total: 0 };
@@ -116,7 +116,7 @@ class TableModule extends React.Component<
     );
   };
 
-  handleUpdateFilter = (filter: Object) => {
+  handleUpdateFilter = (filter: TFilter<any>) => {
     this.setState(prevState => {
       return {
         filtering: updateFilter(prevState.filtering, filter),

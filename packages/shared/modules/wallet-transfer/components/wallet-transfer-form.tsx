@@ -35,16 +35,19 @@ export interface ITransferFormValues {
   amount: string;
 }
 
+type OwnProps = {
+  onSubmit(values: ITransferFormValues): void;
+  disabled: boolean;
+  errorMessage?: string;
+  twoFactorEnabled: boolean;
+} & DeepReadonly<{
+  wallets: Array<WalletData>;
+  currentWallet: WalletData;
+}>;
+
 type IWalletTransferForm = InjectedTranslateProps &
   FormikProps<ITransferFormValues> &
-  DeepReadonly<{
-    wallets: Array<WalletData>;
-    currentWallet: WalletData;
-  }> & {
-    onSubmit(values: ITransferFormValues): void;
-    disabled: boolean;
-    errorMessage?: string;
-  };
+  OwnProps;
 
 class WalletTransferForm extends React.Component<IWalletTransferForm> {
   onChangeSourceId = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -217,7 +220,7 @@ class WalletTransferForm extends React.Component<IWalletTransferForm> {
   }
 }
 
-export default compose<React.FunctionComponent<IWalletTransferForm>>(
+export default compose<React.FunctionComponent<OwnProps>>(
   translate(),
   withFormik<IWalletTransferForm, ITransferFormValues>({
     displayName: "wallet-transfer",

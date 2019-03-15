@@ -143,7 +143,7 @@ class Popover extends React.Component<IPopoverProps, IPopoverState> {
     ) {
       return VERTICAL_POPOVER_POS.TOP;
     }
-    return this.props.vertical || VERTICAL_POPOVER_POS.TOP;
+    return this.props.vertical || VERTICAL_POPOVER_POS.BOTTOM;
   };
 
   getHorizontalPosition = (): HORIZONTAL_POPOVER_POS => {

@@ -35,7 +35,7 @@ interface IProgramsTableProps {
   updatePaging(page: number): void;
   toggleFavorite(programId: string, isFavorite: boolean): void;
   isAuthenticated?: boolean;
-  title?: string;
+  title: string;
   redirectToLogin?(): void;
 }
 
@@ -76,22 +76,22 @@ const ProgramsTable: React.FC<IProgramsTableProps> = ({
       renderHeader={column => (
         <ProgramTableHeaderCell
           column={column}
-          isAuthenticated={isAuthenticated}
+          isAuthenticated={Boolean(isAuthenticated)}
         />
       )}
       renderSorting={column => (
         <ProgramTableSortingValue
           column={column}
-          isAuthenticated={isAuthenticated}
+          isAuthenticated={Boolean(isAuthenticated)}
         />
       )}
       renderBodyRow={(program: ProgramDetails) => (
         <ProgramTableRow
-          showRating={showRating}
+          showRating={Boolean(showRating)}
           title={title}
           program={program}
           toggleFavorite={toggleFavorite}
-          isAuthenticated={isAuthenticated}
+          isAuthenticated={Boolean(isAuthenticated)}
         />
       )}
       renderBodyCard={(program: ProgramDetails) => (
