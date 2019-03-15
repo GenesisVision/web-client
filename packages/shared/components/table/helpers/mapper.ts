@@ -3,9 +3,10 @@ export type TableItems<T> = {
   items: T[];
 };
 
-export const mapToTableItems = <T>(propertyName: string) => (
-  data: any
-): TableItems<T> => ({
+export const mapToTableItems = <T>(propertyName: string) => (data: {
+  total: number;
+  [propertyName: string]: any;
+}): TableItems<T> => ({
   total: data.total,
-  items: data[propertyName]
+  items: data[propertyName] as T[]
 });

@@ -9,7 +9,7 @@ import FundStructure from "./fund-structure/fund-structure";
 
 interface IFundDetailsHistorySectionProps {
   id: string;
-  fetchFundStructure(id: string): Promise<FundAssetsListInfo>;
+  fetchFundStructure(fundId: string): Promise<FundAssetsListInfo>;
 }
 class FundDetailsHistorySection extends React.PureComponent<
   IFundDetailsHistorySectionProps & InjectedTranslateProps

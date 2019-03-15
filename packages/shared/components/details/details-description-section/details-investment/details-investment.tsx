@@ -10,11 +10,13 @@ import {
   PROFITABILITY_PREFIX,
   PROFITABILITY_VARIANT
 } from "shared/components/profitability/profitability.helper";
+import { IProgramReinvestingContainerOwnProps } from "shared/components/programs/program-details/program-details.types";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Surface from "shared/components/surface/surface";
 import { PROGRAM, STATUS } from "shared/constants/constants";
 import { formatCurrencyValue, roundPercents } from "shared/utils/formatter";
 
+import { IFundWithdrawalContainerProps } from "../../../funds/fund-details/fund-details.types";
 import {
   IProgramDetailContext,
   ProgramDetailContext
@@ -28,8 +30,10 @@ interface IDetailsInvestmentOwnProps {
   accountCurrency: string;
   assetCurrency: string;
   personalDetails: InvestmentDetails;
-  WithdrawContainer: any;
-  ProgramReinvestingWidget?: any;
+  WithdrawContainer: React.ComponentType<IFundWithdrawalContainerProps>;
+  ProgramReinvestingWidget?: React.ComponentType<
+    IProgramReinvestingContainerOwnProps
+  >;
 }
 
 interface IDetailsInvestmentProps

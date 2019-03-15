@@ -1,17 +1,11 @@
 import React, { Component } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import { IFundControlsProps } from "shared/components/funds/fund-details/fund-details.types";
 
 import InvestmentFundControls from "./investment-fund-controls";
 
-interface IProgramControlsProps {
-  isAuthenticated: boolean;
-  redirectToLogin(): void;
-
-  fundDescription: any;
-}
-
-class ProgramControls extends Component<
-  IProgramControlsProps & InjectedTranslateProps
+class FundControls extends Component<
+  IFundControlsProps & InjectedTranslateProps
 > {
   render() {
     const { fundDescription, isAuthenticated, redirectToLogin } = this.props;
@@ -30,4 +24,4 @@ class ProgramControls extends Component<
   }
 }
 
-export default translate()(ProgramControls);
+export default translate()(FundControls);

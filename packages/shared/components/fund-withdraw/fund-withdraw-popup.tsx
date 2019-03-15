@@ -1,8 +1,4 @@
 import { FundWithdrawInfo, WalletData } from "gv-api-web";
-import {
-  FundWithdraw,
-  FundWithdrawalInfoResponse
-} from "modules/fund-withdrawal/services/fund-withdrawal.services";
 import React, { Component, Fragment } from "react";
 import { convertFromCurrency } from "shared/utils/currency-converter";
 import { ResponseError } from "shared/utils/types";
@@ -11,6 +7,10 @@ import FundWithdrawAmountForm from "./fund-withdraw-amount-form";
 import FundWithdrawConfirmForm from "./fund-withdraw-confirm-form";
 import FundWithdrawTop from "./fund-withdraw-top";
 import FundWithdrawWallet from "./fund-withdraw-wallet";
+import {
+  FundWithdraw,
+  FundWithdrawalInfoResponse
+} from "./fund-withdraw.types";
 
 enum FUND_WITHDRAW_FORM {
   ENTER_AMOUNT = "ENTER_AMOUNT",

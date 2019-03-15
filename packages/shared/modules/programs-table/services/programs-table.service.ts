@@ -19,6 +19,7 @@ import RootState from "shared/reducers/root-reducer";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
 
+import { TFilter } from "../../../components/table/components/filtering/filter.type";
 import * as programTableActions from "../actions/programs-table.actions";
 import {
   PROGRAMS_COLUMNS,

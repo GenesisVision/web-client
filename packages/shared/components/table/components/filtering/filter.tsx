@@ -1,12 +1,14 @@
 import "rc-slider/assets/index.css";
+
 import "./filter.scss";
 
 import * as React from "react";
 import Popover, {
   HORIZONTAL_POPOVER_POS
 } from "shared/components/popover/popover";
-import FilterArrowIcon from "./filter-arrow-icon";
 import { Nullable } from "shared/utils/types";
+
+import FilterArrowIcon from "./filter-arrow-icon";
 import { TFilter } from "./filter.type";
 
 interface IFilterProps {
