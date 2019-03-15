@@ -128,8 +128,9 @@ export const getProgramsFilters = () => (
     ? queryParams.sorting
     : SORTING_FILTER_VALUE;
 
-  const filtering = PROGRAMS_TABLE_FILTERS.reduce((accum: any, cur) => {
-    const { name: any, defaultValue, validate = () => true } = cur; // TODO fix any types
+  const filtering = PROGRAMS_TABLE_FILTERS.reduce((accum: any, cur: any) => {
+    // TODO fix any types
+    const { name, defaultValue, validate = (value: any) => true } = cur; // TODO fix any types
     if (!queryParams[name] || !validate(queryParams[name])) {
       accum[name] = defaultValue;
     } else {
