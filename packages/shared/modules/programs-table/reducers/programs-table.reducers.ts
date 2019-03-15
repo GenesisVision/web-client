@@ -1,7 +1,7 @@
 import { ProgramsList } from "gv-api-web";
 import { combineReducers } from "redux";
 import apiReducerFactory, {
-  IApiReducerFactory
+  IApiState
 } from "shared/reducers/api-reducer/api-reducer";
 import { DeepReadonly } from "utility-types";
 
@@ -9,7 +9,7 @@ import { PROGRAMS } from "../actions/programs-table.actions";
 import programsFavoritesReducer from "./programs-favorites.reducer";
 
 export type ProgramsListState = DeepReadonly<{
-  items: IApiReducerFactory<ProgramsList>;
+  items: IApiState<ProgramsList>;
 }>;
 
 const programsReducer = combineReducers<ProgramsListState>({

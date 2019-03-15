@@ -1,34 +1,44 @@
-import { combineReducers } from "redux";
-import apiReducerFactory from "shared/reducers/api-reducer/api-reducer";
+import { Reducer, combineReducers } from "redux";
+import apiReducerFactory, {
+  IApiState
+} from "shared/reducers/api-reducer/api-reducer";
 import clearableReducer from "shared/reducers/clearable.reducer";
 
-import tableFiltersReducer from "./table-filters.reducer";
 import { IPaging } from "../helpers/paging.helpers";
+import tableFiltersReducer from "./table-filters.reducer";
 
-interface ITableReducerFactory {
+export interface ITableState<ItemsType> {
+  itemsData: IApiState<ItemsType>;
+  filters: any;
+  defaults: { defaultFilters: any; type: string };
+}
+
+interface ITableReducerFactoryParams {
   type: string;
   paging: IPaging;
   sorting?: string;
   filtering?: Object;
   defaultFilters?: Object;
-  clearable?: boolean;
+  clearable: boolean;
   clearableActionType: string;
 }
 
-const tableReducerFactory = ({
+const tableReducerFactory = <ItemsType>({
   type,
   paging,
-  sorting = undefined,
-  filtering = undefined,
-  defaultFilters = undefined,
-  clearable = false,
+  sorting,
+  filtering,
+  defaultFilters,
+  clearable,
   clearableActionType
-}: ITableReducerFactory) => {
-  const clearableWrapper = clearable ? clearableReducer : f => f;
-
+}: ITableReducerFactoryParams): Reducer<ITableState<ItemsType>> => {
+  const clearableWrapper: (
+    f: Reducer,
+    clearActionType?: string
+  ) => Reducer = clearable ? clearableReducer : f => f;
   return clearableWrapper(
     combineReducers({
-      itemsData: apiReducerFactory({
+      itemsData: apiReducerFactory<ItemsType>({
         apiType: type
       }),
       filters: tableFiltersReducer({
