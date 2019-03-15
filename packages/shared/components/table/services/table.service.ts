@@ -5,8 +5,8 @@ import {
   calculateSkipAndTake,
   calculateTotalPages
 } from "shared/components/table/helpers/paging.helpers";
+import RootState from "shared/reducers/root-reducer";
 
-import RootState from "../../../reducers/root-reducer";
 import { updateFilters as updateFiltersActionCreator } from "../actions/table.actions";
 import { FilteringType } from "../components/filtering/filter.type";
 import { IComposeDefaultFilter } from "../components/table.types";

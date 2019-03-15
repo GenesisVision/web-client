@@ -11,12 +11,12 @@ import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { composeWalletCurrencyUrl } from "shared/components/wallet/wallet.routes";
+import { CurrentWallet } from "shared/modules/wallet-add-funds/components/wallet-add-funds-container";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
 import WalletTransferPopup from "shared/modules/wallet-transfer/wallet-transfer-popup";
 import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-import { CurrentWallet } from "../../../../modules/wallet-add-funds/components/wallet-add-funds-container";
 import { walletTableTransactionsSelector } from "../wallet-transactions/wallet-transactions.selector";
 import WalletListButton from "./wallet-list-button";
 import { WALLET_LIST_COLUMNS } from "./wallet-list.constants";

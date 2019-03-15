@@ -3,12 +3,12 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import { toggleFavoriteProgram } from "shared/modules/favorite-asset/services/favorite-program.service";
 import ProgramTableModule, {
   TableToggleFavorite
 } from "shared/modules/programs-table/components/programs-table/programs-table-module";
 
-import { FilteringType } from "../../../table/components/filtering/filter.type";
 import {
   PROGRAMS_FACET_PAGING,
   PROGRAMS_FACET_TABLE_FILTERING,

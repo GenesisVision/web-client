@@ -4,13 +4,12 @@ import moment from "moment";
 import * as React from "react";
 import { TranslationFunction, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { CancelRequestType } from "shared/components/asset-status/services/asset-status.service";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import PortfolioEventLogo from "shared/components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { ASSET, ROLE } from "shared/constants/constants";
 import { formatCurrencyValue } from "shared/utils/formatter";
-
-import { CancelRequestType } from "../../../asset-status/services/asset-status.service";
 
 export interface IDashboardRequestProps {
   role: ROLE;

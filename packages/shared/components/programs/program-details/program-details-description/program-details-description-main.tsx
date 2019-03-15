@@ -14,13 +14,13 @@ import Popover, {
   anchorElType
 } from "shared/components/popover/popover";
 import TagProgramItem from "shared/components/tag-program/tag-program-item";
+import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import {
   composeManagerDetailsUrl,
   composeProgramNotificationsUrl
 } from "shared/utils/compose-url";
 import { Nullable } from "shared/utils/types";
 
-import { CURRENCIES } from "../../../../modules/currency-select/currency-select.constants";
 import { IChangePasswordTradingAccountProps } from "../program-details.types";
 import InvestmentLimitsPopover from "./investment-limits-popover";
 

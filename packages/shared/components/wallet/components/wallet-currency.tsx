@@ -5,12 +5,12 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
 import Page from "shared/components/page/page";
+import { CurrentWallet } from "shared/modules/wallet-add-funds/components/wallet-add-funds-container";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
 import WalletTransferPopup from "shared/modules/wallet-transfer/wallet-transfer-popup";
 import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
 import RootState from "shared/reducers/root-reducer";
 
-import { CurrentWallet } from "../../../modules/wallet-add-funds/components/wallet-add-funds-container";
 import WalletImage from "../../avatar/wallet-image/wallet-image";
 import { WalletRouteProps } from "../wallet.routes";
 import WalletBalanceButtons from "./wallet-balance/wallet-balance-buttons";

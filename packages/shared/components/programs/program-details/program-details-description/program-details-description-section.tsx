@@ -4,10 +4,10 @@ import { ProgramDetailsFull } from "gv-api-web";
 import React, { ComponentType, PureComponent } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
+import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
 import { STATUS } from "shared/constants/constants";
 import { PROGRAM } from "shared/constants/constants";
 
-import { InvestmentDetails } from "../../../details/details-description-section/details-investment/details-investment.helpers";
 import ProgramDetailsDescriptionMain from "./program-details-description-main";
 
 interface IProgramDetailsDescriptionSectionProps

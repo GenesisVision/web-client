@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { Action } from "redux";
 import AssetStatus from "shared/components/asset-status/asset-status";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
 import Profitability from "shared/components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
@@ -18,15 +19,14 @@ import { FilteringType } from "shared/components/table/components/filtering/filt
 import TableCell from "shared/components/table/components/table-cell";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
+import {
+  Column,
+  IUpdateFilterFunc
+} from "shared/components/table/components/table.types";
 import { FUND, ROLE } from "shared/constants/constants";
 import { composeFundsDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
-import { FUND_ASSET_TYPE } from "../../../fund-asset/fund-asset";
-import {
-  Column,
-  IUpdateFilterFunc
-} from "../../../table/components/table.types";
 import { DASHBOARD_FUNDS_COLUMNS } from "../../dashboard.constants";
 import dashboardFundsTableSelector from "./dashboard-funds.selector";
 
