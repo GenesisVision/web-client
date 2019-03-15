@@ -20,11 +20,14 @@ import {
 } from "shared/utils/compose-url";
 import { Nullable } from "shared/utils/types";
 
+import { IChangePasswordTradingAccountProps } from "../program-details.types";
 import InvestmentLimitsPopover from "./investment-limits-popover";
 
 interface IIProgramDetailsDescriptionMainOwnProps {
   programDescription: ProgramDetailsFull;
-  ChangePasswordTradingAccountControl?: ComponentType<any>;
+  ChangePasswordTradingAccount?: ComponentType<
+    IChangePasswordTradingAccountProps
+  >;
   isOwnProgram: boolean;
 }
 
@@ -57,7 +60,7 @@ class ProgramDetailsDescriptionMain extends Component<
     const {
       t,
       programDescription,
-      ChangePasswordTradingAccountControl,
+      ChangePasswordTradingAccount,
       isOwnProgram
     } = this.props;
     const personalDetails = programDescription.personalProgramDetails;
@@ -118,8 +121,8 @@ class ProgramDetailsDescriptionMain extends Component<
           </div>
         </div>
         <div className="program-details-description__settings">
-          {ChangePasswordTradingAccountControl && isOwnProgram && (
-            <ChangePasswordTradingAccountControl
+          {ChangePasswordTradingAccount && isOwnProgram && (
+            <ChangePasswordTradingAccount
               programDescription={programDescription}
             />
           )}

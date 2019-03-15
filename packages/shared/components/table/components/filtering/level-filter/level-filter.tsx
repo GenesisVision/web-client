@@ -4,8 +4,8 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 
 import Filter from "../filter";
-import LevelFilterPopover from "./level-filter-popover";
 import { TFilter } from "../filter.type";
+import LevelFilterPopover from "./level-filter-popover";
 
 interface ILevelFilterProps {
   name: string;

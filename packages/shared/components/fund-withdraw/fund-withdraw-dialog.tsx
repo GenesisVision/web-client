@@ -6,7 +6,7 @@ import FundWithdrawPopup, {
   IFundWithdrawPopupProps
 } from "./fund-withdraw-popup";
 
-interface IFundWithdrawDialogProps
+export interface IFundWithdrawDialogProps
   extends IDialogProps,
     IFundWithdrawPopupProps {}
 

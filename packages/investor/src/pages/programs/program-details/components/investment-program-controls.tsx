@@ -1,3 +1,4 @@
+import { ProgramDetailsFull } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import React, { Component, Fragment } from "react";
@@ -10,7 +11,7 @@ interface IInvestmentProgramControlsOwnProps {
   isAuthenticated: boolean;
   redirectToLogin(): void;
 
-  programDescription: any;
+  programDescription: ProgramDetailsFull;
 }
 
 interface IInvestmentProgramControlsState {

@@ -7,12 +7,12 @@ import Popover, {
   HORIZONTAL_POPOVER_POS
 } from "shared/components/popover/popover";
 import TagProgramItem from "shared/components/tag-program/tag-program-item";
+import { Nullable } from "shared/utils/types";
 
+import { TFilter } from "../filter.type";
 import TagFilterButton from "./tag-filter-button";
 import TagFilterPopover from "./tag-filter-popover";
 import { TAG_NAME_TYPE } from "./tag-filter.constants";
-import { Nullable } from "shared/utils/types";
-import { TFilter } from "../filter.type";
 
 interface ITagFilterState {
   anchor: Nullable<EventTarget>;

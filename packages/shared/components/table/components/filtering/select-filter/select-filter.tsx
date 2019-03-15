@@ -2,9 +2,10 @@ import "./select-filter.scss";
 
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+
 import Filter from "../filter";
-import SelectFilterPopover from "./select-filter-popover";
 import { TFilter } from "../filter.type";
+import SelectFilterPopover from "./select-filter-popover";
 
 interface ISelectFilterProps {
   name: string;

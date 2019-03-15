@@ -1,8 +1,8 @@
 import { Action, Dispatch } from "redux";
+import { ThunkAction } from "redux-thunk";
 
 import ErrorMessage from "../components/error-message/error-message";
 import RootState from "../reducers/root-reducer";
-import { ThunkAction } from "redux-thunk";
 
 export interface IDispatchable<T> {
   (dispatch: Dispatch<ActionType>): T;

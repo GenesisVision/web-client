@@ -1,41 +1,23 @@
 import React, { Component } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import { IProgramControlsProps } from "shared/components/programs/program-details/program-details.types";
 
 import InvestmentProgramControls from "./investment-program-controls";
 import SignalProviderControls from "./signal-provider-controls";
 
-interface IProgramControlsProps {
-  isAuthenticated: boolean;
-  redirectToLogin(): void;
-
-  canCloseProgram: boolean;
-  canMakeSignalProvider: boolean;
-  isOwnProgram: boolean;
-  programDescription: any;
-}
-
-interface IProgramControlsState {}
-
 class ProgramControls extends Component<
-  IProgramControlsProps & InjectedTranslateProps,
-  IProgramControlsState
+  IProgramControlsProps & InjectedTranslateProps
 > {
-  state = {
-    isOpenInvestmentPopup: false,
-    isOpenCloseProgramPopup: false,
-    isOpenEditProgramPopup: false,
-    isOpenClosePeriodPopup: false
-  };
-
   render() {
-    const {
-      canCloseProgram,
-      canMakeSignalProvider,
-      isOwnProgram,
-      programDescription,
-      isAuthenticated,
-      redirectToLogin
-    } = this.props;
+    const { programDescription, isAuthenticated, redirectToLogin } = this.props;
+
+    const personalProgramDetails = programDescription.personalProgramDetails;
+    const canCloseProgram =
+      personalProgramDetails && personalProgramDetails.canCloseProgram;
+    const canMakeSignalProvider =
+      personalProgramDetails && personalProgramDetails.canMakeSignalProvider;
+    const isOwnProgram =
+      personalProgramDetails && personalProgramDetails.isOwnProgram;
 
     return (
       <div className="program-details-description__controls">
