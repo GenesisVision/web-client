@@ -2,7 +2,7 @@ import classnames from "classnames";
 import { NotificationViewModel } from "gv-api-web";
 import moment from "moment";
 import * as React from "react";
-import { Link } from "react-router-dom";
+import { Link, LinkProps } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import NewsIcon from "shared/media/news.svg";
 import RedUserIcon from "shared/media/red-user.svg";
@@ -13,7 +13,7 @@ enum TYPE {
   PLATFORM = "platform"
 }
 
-const getStaticIconUrl = (type: string) => {
+const getStaticIconUrl = (type: string): string | null => {
   return type.indexOf(TYPE.PROFILE) !== -1
     ? RedUserIcon
     : type.indexOf(TYPE.PLATFORM) !== -1
@@ -21,23 +21,35 @@ const getStaticIconUrl = (type: string) => {
     : null;
 };
 
-interface INotificationProps {
+const renderAssetAvatar = (props: INotificationProps) => {
+  const { type, logo, url, color, closeNotifications } = props;
+  const Tag: React.ComponentType<LinkProps | any> | string = url ? Link : "div";
+  const to = url
+    ? {
+        pathname: composeProgramDetailsUrl(url),
+        state: `/ ${type}`
+      }
+    : null;
+  return (
+    <Tag to={to} onClick={closeNotifications} className="notification__icon">
+      <AssetAvatar
+        url={logo}
+        alt={type}
+        className="notification__icon-logo"
+        color={color}
+      />
+    </Tag>
+  );
+};
+
+interface INotificationOwnProps {
   closeNotifications(): void;
 }
 
-const Notification: React.FunctionComponent<
-  NotificationViewModel & INotificationProps
-> = props => {
-  const {
-    date,
-    text,
-    isUnread,
-    type,
-    logo,
-    url,
-    color,
-    closeNotifications
-  } = props;
+type INotificationProps = NotificationViewModel & INotificationOwnProps;
+
+const Notification: React.FunctionComponent<INotificationProps> = props => {
+  const { date, text, isUnread, type } = props;
   const staticIconUrl = getStaticIconUrl(type.toLowerCase());
   return (
     <div
@@ -58,21 +70,7 @@ const Notification: React.FunctionComponent<
           />
         </div>
       ) : (
-        <Link
-          to={{
-            pathname: composeProgramDetailsUrl(url),
-            state: `/ ${type}`
-          }}
-          onClick={closeNotifications}
-          className="notification__icon"
-        >
-          <AssetAvatar
-            url={logo}
-            alt={type}
-            className="notification__icon-logo"
-            color={color}
-          />
-        </Link>
+        renderAssetAvatar(props)
       )}
 
       <div className="notification__content">
