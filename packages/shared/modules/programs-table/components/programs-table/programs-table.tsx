@@ -1,19 +1,19 @@
 import "./programs.scss";
 
+import { ProgramDetails, ProgramsList } from "gv-api-web";
 import * as React from "react";
 import { Table } from "shared/components/table/components";
+import {
+  FilteringType,
+  SortingColumn
+} from "shared/components/table/components/filtering/filter.type";
+import { IPaging } from "shared/components/table/helpers/paging.helpers";
 
 import ProgramCard from "./program-card";
 import ProgramTableHeaderCell from "./program-table-header-cell";
 import ProgramTableRow from "./program-table-row";
 import ProgramTableSortingValue from "./program-table-sorting";
 import { PROGRAMS_COLUMNS } from "./programs.constants";
-import {
-  FilteringType,
-  SortingColumn
-} from "shared/components/table/components/filtering/filter.type";
-import { IPaging } from "shared/components/table/helpers/paging.helpers";
-import { ProgramDetails, ProgramsList } from "gv-api-web";
 
 interface IProgramsTableProps {
   disableTitle?: boolean;

@@ -2,6 +2,7 @@ import classNames from "classnames";
 import { GVButton } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+
 import { SelectFilterValue } from "../filter.type";
 
 interface ISelectFilterPopoverProps {

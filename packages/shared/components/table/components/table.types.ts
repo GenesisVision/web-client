@@ -19,4 +19,8 @@ export interface IComposeDefaultFilter {
   validate?(value: any): boolean;
 }
 
-export type FiltersType = { paging?: IPaging; filtering?: FilteringType; sorting?: string };
+export type FiltersType = {
+  paging?: IPaging;
+  filtering?: FilteringType;
+  sorting?: string;
+};

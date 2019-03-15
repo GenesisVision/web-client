@@ -13,8 +13,9 @@ import {
   PROGRAMS_VIEW
 } from "shared/components/table/table.constants";
 import { loadData, saveData } from "shared/utils/localstorage";
-import { FilteringType, SortingColumn } from "./filtering/filter.type";
+
 import { IPaging } from "../helpers/paging.helpers";
+import { FilteringType, SortingColumn } from "./filtering/filter.type";
 
 interface ITableProps {
   updateFilter(filter: any): void;

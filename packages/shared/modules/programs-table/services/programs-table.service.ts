@@ -1,11 +1,13 @@
 import { push } from "connected-react-router";
+import { ProgramsList } from "gv-api-web";
 import {
-  PROGRAM_SLUG_URL_PARAM_NAME,
   PROGRAMS_FACET_ROUTE,
   PROGRAMS_FAVORITES_TAB_NAME,
-  PROGRAMS_TAB_ROUTE
+  PROGRAMS_TAB_ROUTE,
+  PROGRAM_SLUG_URL_PARAM_NAME
 } from "pages/programs/programs.routes";
 import * as qs from "qs";
+import { TFilter } from "shared/components/table/components/filtering/filter.type";
 import { composeFilters } from "shared/components/table/helpers/filtering.helpers";
 import {
   calculateSkipAndTake,
@@ -21,8 +23,6 @@ import {
   PROGRAMS_TABLE_FILTERS,
   SORTING_FILTER_VALUE
 } from "../components/programs-table/programs.constants";
-import { TFilter } from "shared/components/table/components/filtering/filter.type";
-import { ProgramsList } from "gv-api-web";
 
 const DEFAULT_ITEMS_ON_PAGE = 12;
 

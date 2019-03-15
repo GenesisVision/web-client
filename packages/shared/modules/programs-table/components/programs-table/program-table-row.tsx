@@ -1,8 +1,8 @@
+import { ProgramDetails } from "gv-api-web";
 import * as React from "react";
 
 import ProgramTableRowDetailed from "./program-table-row-detailed";
 import ProgramTableRowShort from "./program-table-row-short";
-import { ProgramDetails } from "gv-api-web";
 
 interface IProgramTableRowProps {
   title: string;

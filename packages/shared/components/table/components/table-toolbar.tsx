@@ -2,6 +2,7 @@ import * as React from "react";
 import { CardsIcon } from "shared/components/icon/cards-icon";
 import { TableIcon } from "shared/components/icon/table-icon";
 import SortingFilter from "shared/components/table/components/sorting/sorting-filter/sorting-filter";
+
 import { LIST_VIEW } from "../table.constants";
 import { FilteringType, SortingColumn } from "./filtering/filter.type";
 

@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import { ProgramDetails } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -8,6 +9,7 @@ import FavoriteIcon from "shared/components/favorite-asset/favorite-icon/favorit
 import { Icon } from "shared/components/icon/icon";
 import LevelTooltip from "shared/components/level-tooltip/level-tooltip";
 import Profitability from "shared/components/profitability/profitability";
+import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
 import GVScroll from "shared/components/scroll/gvscroll";
 import TableRow from "shared/components/table/components/table-row";
@@ -18,9 +20,8 @@ import {
   composeProgramDetailsUrl
 } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
+
 import ProgramBigChart from "./program-big-chart/program-big-chart";
-import { ProgramDetails } from "gv-api-web";
-import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 
 interface IProgramTableRowDetailedProps {
   title: string;

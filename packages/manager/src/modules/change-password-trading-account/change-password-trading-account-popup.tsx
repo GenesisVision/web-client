@@ -4,11 +4,11 @@ import { connect } from "react-redux";
 import { Dispatch, bindActionCreators } from "redux";
 import Dialog, { IDialogProps } from "shared/components/dialog/dialog";
 
+import { ManagerRootState } from "../../reducers";
 import ChangePasswordTradingAccountForm, {
   IChangePasswordTradingAccountFormValues
 } from "./components/change-password-trading-account-form";
 import { changePasswordTradingAccount } from "./services/change-password-trading-account.service";
-import { ManagerRootState } from "../../reducers";
 
 interface IChangePasswordTradingAccountPopupOwnProps extends IDialogProps {
   id: string;

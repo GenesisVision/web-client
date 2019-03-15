@@ -1,13 +1,13 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { bindActionCreators, Dispatch } from "redux";
+import { Dispatch, bindActionCreators } from "redux";
 import { updateFilter } from "shared/components/table/helpers/filtering.helpers";
-
-import { getItems, updateFilters } from "../services/table.service";
-import Table from "./table";
 import RootState from "shared/reducers/root-reducer";
+
 import { IPaging } from "../helpers/paging.helpers";
+import { getItems, updateFilters } from "../services/table.service";
 import { FilteringType, SortingColumn } from "./filtering/filter.type";
+import Table from "./table";
 
 interface ITableContainerProps {
   getItems: any;

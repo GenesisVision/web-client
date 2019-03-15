@@ -1,5 +1,5 @@
-import { IComposeDefaultFilter } from "../components/table.types";
 import { FilteringType, TFilter } from "../components/filtering/filter.type";
+import { IComposeDefaultFilter } from "../components/table.types";
 
 export const RANGE_FILTER_TYPE = "RANGE_FILTER_TYPE";
 export const GENERAL_FILTER_TYPE = "GENERAL_FILTER_TYPE";
@@ -52,7 +52,8 @@ const processFilterValue = (filter: TFilter<any>): Object => {
       }
       break;
     case FILTER_TYPE.CUSTOM:
-      const requestValues = filter.composeRequestValue && filter.composeRequestValue(filter.value);
+      const requestValues =
+        filter.composeRequestValue && filter.composeRequestValue(filter.value);
       if (requestValues !== undefined) {
         if (Array.isArray(requestValues))
           requestValue = { [filter.name]: requestValues };
