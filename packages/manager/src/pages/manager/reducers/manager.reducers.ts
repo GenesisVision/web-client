@@ -1,11 +1,11 @@
 import { ManagerProfile } from "gv-api-web";
 import apiReducerFactory, {
-  IApiReducerFactory
+  IApiState
 } from "shared/reducers/api-reducer/api-reducer";
 
 import { MANAGER_PROFILE } from "../actions/manager.actions";
 
-export type ManagerState = IApiReducerFactory<ManagerProfile>; //TODO the same Manager in the InvestorApp
+export type ManagerState = IApiState<ManagerProfile>; //TODO the same Manager in the InvestorApp
 
 const managerReducer = apiReducerFactory<ManagerProfile>({
   apiType: MANAGER_PROFILE

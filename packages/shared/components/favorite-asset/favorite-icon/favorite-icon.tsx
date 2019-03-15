@@ -1,8 +1,8 @@
 import "./favorite-icon.scss";
 
 import * as React from "react";
-
 import { Icon } from "shared/components/icon/icon";
+
 import { ReactComponent as Favorite } from "./favorite.svg";
 
 interface IFavoriteIconProps {

@@ -1,7 +1,4 @@
-import {
-  IInvestorEventFilterValue,
-  IManagerEventFilterValue
-} from "../filter.type";
+import { SelectFilterValue } from "../filter.type";
 
 export const EVENT_TYPE_FILTER_NAME = "type";
 
@@ -30,11 +27,11 @@ export enum MANAGER_EVENT_TYPE {
   ExitFee = "ExitFee"
 }
 
-export const INVESTOR_EVENT_TYPE_FILTER_VALUES: IInvestorEventFilterValue<
+export const INVESTOR_EVENT_TYPE_FILTER_VALUES: SelectFilterValue<
   INVESTOR_EVENT_TYPE
 >[] = Object.values(INVESTOR_EVENT_TYPE).map(x => ({ value: x, label: x }));
 
-export const MANAGER_EVENT_TYPE_FILTER_VALUES: IManagerEventFilterValue<
+export const MANAGER_EVENT_TYPE_FILTER_VALUES: SelectFilterValue<
   INVESTOR_EVENT_TYPE
 >[] = Object.values(MANAGER_EVENT_TYPE).map(x => ({
   value: x,

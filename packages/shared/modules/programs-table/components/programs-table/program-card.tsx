@@ -27,6 +27,7 @@ import {
   formatValueDifferentDecimalScale
 } from "shared/utils/formatter";
 import { Nullable } from "shared/utils/types";
+
 import {
   PROFITABILITY_PREFIX,
   PROFITABILITY_VARIANT

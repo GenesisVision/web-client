@@ -81,6 +81,7 @@ class Notifications extends React.Component<Props> {
       key={group}
       title={this.parseDate(parseInt(group))}
       notifications={groups[parseInt(group)]}
+      closeNotifications={this.props.closeNotifications}
     />
   );
 

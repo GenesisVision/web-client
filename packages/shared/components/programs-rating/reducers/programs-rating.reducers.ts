@@ -1,7 +1,7 @@
 import { LevelUpSummary, ProgramsList } from "gv-api-web";
 import { combineReducers } from "redux";
 import apiReducerFactory, {
-  IApiReducerFactory
+  IApiState
 } from "shared/reducers/api-reducer/api-reducer";
 import { DeepReadonly } from "utility-types";
 
@@ -22,9 +22,9 @@ const levelupSummaryReducer = apiReducerFactory<LevelUpSummary>({
 });
 
 export type ProgramsRatingState = DeepReadonly<{
-  readonly programs: IApiReducerFactory<ProgramsList>;
-  readonly selfPrograms: IApiReducerFactory<ProgramsList>;
-  readonly levelupSummary: IApiReducerFactory<LevelUpSummary>;
+  readonly programs: IApiState<ProgramsList>;
+  readonly selfPrograms: IApiState<ProgramsList>;
+  readonly levelupSummary: IApiState<LevelUpSummary>;
 }>;
 
 const programsRatingReducer = combineReducers<ProgramsRatingState>({

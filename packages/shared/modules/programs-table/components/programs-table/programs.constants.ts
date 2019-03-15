@@ -7,12 +7,13 @@ import {
   composeRequestValueFunc,
   validateDateRange
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
+import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
 import { programsTagFilter } from "shared/components/table/components/filtering/tag-filter/tag-filter.helpers";
 import {
   FILTER_TYPE,
   FilterType
 } from "shared/components/table/helpers/filtering.helpers";
-import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
+
 import { IComposeDefaultFilter } from "../../../../components/table/components/table.types";
 
 export const LEVEL_FILTER_NAME = "level";

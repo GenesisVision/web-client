@@ -13,9 +13,9 @@ import { IComposeDefaultFilter } from "../components/table.types";
 
 interface IComposeRequestFiltersProps {
   paging: IPaging;
-  sorting?: string | Object;
-  filtering?: FilteringType;
-  defaultFilters?: IComposeDefaultFilter[];
+  sorting: string | Object;
+  filtering: FilteringType;
+  defaultFilters: IComposeDefaultFilter[];
 }
 export const composeRequestFilters = ({
   paging,
@@ -51,7 +51,7 @@ export const updateFiltersDispatch = (
 
 export const getItems = (
   fetchItems: any,
-  dataSelector: (opts?: RootState) => { [keys: string]: any } // TODO opts any
+  dataSelector: (opts?: RootState) => { [keys: string]: any }
 ) => (dispatch: Dispatch, getState: () => RootState) => {
   const { filters, defaults } = dataSelector(getState());
   const requestFilters = composeRequestFilters({

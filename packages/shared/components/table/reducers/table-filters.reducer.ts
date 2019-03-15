@@ -1,3 +1,5 @@
+import { FiltersType } from "../components/table.types";
+
 const FILTER_ACTION_SUFFIX = "FILTER";
 export const composeFiltersActionType = (
   actionType: string,
@@ -9,7 +11,7 @@ const tableFiltersReducer = ({
   filters = {}
 }: {
   type: string;
-  filters: Object;
+  filters: FiltersType;
 }) => {
   const initialState = { ...filters };
   const filterActionType = composeFiltersActionType(type);
