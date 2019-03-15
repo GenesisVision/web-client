@@ -76,7 +76,6 @@ class WalletTransferContainer extends React.Component<
         disabled={this.state.isPending}
         errorMessage={this.state.errorMessage}
         onSubmit={this.handleSubmit}
-        twoFactorEnabled={twoFactorEnabled}
       />
     );
   }
