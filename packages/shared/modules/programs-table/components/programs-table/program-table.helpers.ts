@@ -2,7 +2,7 @@ import { FilterValue } from "shared/components/table/components/filtering/filter
 
 export const composeCurrencyFilter = (
   currencies?: string[]
-): FilterValue<string>[] => [
+): FilterValue<string | undefined>[] => [
   { value: undefined, label: "All" },
   ...(currencies || []).map(x => ({ value: x, label: x }))
 ];

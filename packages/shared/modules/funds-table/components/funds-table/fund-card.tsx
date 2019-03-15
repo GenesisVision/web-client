@@ -18,13 +18,17 @@ import {
 } from "shared/components/profitability/profitability.helper";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { composeManagerDetailsUrl } from "shared/utils/compose-url";
-import { composeFundsDetailsUrl } from "shared/utils/compose-url";
+import {
+  composeFundsDetailsUrl,
+  composeManagerDetailsUrl
+} from "shared/utils/compose-url";
 import {
   formatValue,
   formatValueDifferentDecimalScale
 } from "shared/utils/formatter";
 import { Nullable } from "shared/utils/types";
+
+import { FUND_ASSET_TYPE } from "../../../../components/fund-asset/fund-asset";
 
 const DECIMAL_SCALE_SMALL_VALUE = 4;
 const DECIMAL_SCALE_BIG_VALUE = 2;
@@ -46,8 +50,9 @@ class FundCard extends React.Component<
   state = {
     anchor: null
   };
-  handleOpenDropdown = (event: React.ChangeEvent<HTMLInputElement>) =>
-    this.setState({ anchor: event.currentTarget });
+  handleOpenDropdown = (
+    event: React.MouseEvent<HTMLSpanElement, MouseEvent>
+  ): void => this.setState({ anchor: event.currentTarget });
   handleCloseDropdown = () => this.setState({ anchor: null });
   render() {
     const { t, fund, toggleFavorite, title } = this.props;
@@ -199,7 +204,7 @@ class FundCard extends React.Component<
           <div className="table-cards__table-row">
             <FundAssetContainer
               assets={fund.topFundAssets}
-              type={"short"}
+              type={FUND_ASSET_TYPE.SHORT}
               size={3}
               length={fund.totalAssetsCount}
             />

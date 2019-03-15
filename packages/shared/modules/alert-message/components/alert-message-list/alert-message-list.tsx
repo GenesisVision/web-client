@@ -58,12 +58,14 @@ export class AlertMessageList extends React.Component<
     return (
       <div className="alert-message-list">
         <PoseGroup animateOnMount>
-          {messages.map(message => (
-            <AlertBox key={message.id}>
-              <AlertMessage message={message} onClick={removeMessage} />
-            </AlertBox>
-          ))}
-          {renderClearAllButton}
+          <React.Fragment>
+            {messages.map(message => (
+              <AlertBox key={message.id}>
+                <AlertMessage message={message} onClick={removeMessage} />
+              </AlertBox>
+            ))}
+            {renderClearAllButton}
+          </React.Fragment>
         </PoseGroup>
       </div>
     );
