@@ -12,9 +12,9 @@ import { Nullable } from "shared/utils/types";
 
 import SelectItem from "./select-item";
 
-export type OnChangeEvent = {
+export interface OnChangeEvent {
   target: { value: string; name: string };
-};
+}
 
 interface ChildOwnProps {
   value: string;
@@ -22,7 +22,7 @@ interface ChildOwnProps {
   children: string;
 }
 
-type SelectChild = React.ReactElement<ChildOwnProps>;
+interface SelectChild extends React.ReactElement<ChildOwnProps> {}
 
 interface ISelectProps {
   value: string;

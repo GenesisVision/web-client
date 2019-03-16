@@ -1,12 +1,12 @@
-export type TableItems<T> = {
+export interface TableItems<T> {
   total: number;
   items: T[];
-};
+}
 
-export type DefaultTableState = {
+export interface DefaultTableState {
   total: number;
   [propertyName: string]: any;
-};
+}
 
 export const mapToTableItems = <T>(propertyName: string) => (
   data: DefaultTableState

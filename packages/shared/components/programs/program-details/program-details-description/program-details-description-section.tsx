@@ -1,7 +1,8 @@
 import "./program-details-description.scss";
 
 import { ProgramDetailsFull } from "gv-api-web";
-import React, { ComponentType, PureComponent } from "react";
+import * as React from "react";
+import { ComponentType, PureComponent } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
 import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";

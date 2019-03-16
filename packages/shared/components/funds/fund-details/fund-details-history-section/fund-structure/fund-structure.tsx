@@ -13,15 +13,15 @@ import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { formatValue } from "shared/utils/formatter";
 
-type Props = {
+interface Props {
   id: string;
   fetchStructure(id: string): Promise<FundAssetsListInfo>;
-};
+}
 
-type State = {
+interface State {
   isPending: boolean;
   data?: FundAssetsListInfo;
-};
+}
 
 class FundStructure extends React.Component<
   Props & InjectedTranslateProps,

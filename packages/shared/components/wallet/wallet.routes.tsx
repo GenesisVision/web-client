@@ -25,17 +25,17 @@ export const composeWalletCopytradingCurrencyUrl = composeUrl(
   CURRENCY_SLUG
 );
 
-interface IWalletDispatchToProps {
+interface DispatchProps {
   fetchWallets(): void;
 }
 
-type RouteProps = {
+interface RouteProps {
   currency: string;
-};
+}
 
-export type WalletRouteProps = RouteComponentProps<RouteProps>;
+export interface WalletRouteProps extends RouteComponentProps<RouteProps> {}
 
-class WalletRoutes extends React.Component<IWalletDispatchToProps, any> {
+class WalletRoutes extends React.Component<DispatchProps, any> {
   componentDidMount() {
     this.props.fetchWallets();
   }
@@ -51,7 +51,7 @@ class WalletRoutes extends React.Component<IWalletDispatchToProps, any> {
   }
 }
 
-export default connect(
+export default connect<undefined, DispatchProps>(
   undefined,
   { fetchWallets }
 )(WalletRoutes);

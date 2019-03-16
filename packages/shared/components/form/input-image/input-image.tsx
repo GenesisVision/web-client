@@ -10,7 +10,7 @@ import Dropzone, { FileWithPreview } from "react-dropzone";
 
 import InputImageDefault from "./input-image-default";
 
-type InputFileData = {
+interface InputFileData {
   cropped?: any;
   src: string | ArrayBuffer | null;
   filename?: string;
@@ -20,9 +20,9 @@ type InputFileData = {
   width?: number;
   height?: number;
   size?: number;
-};
+}
 
-interface IInputImageProps {
+interface InputImageProps {
   className: string;
   value: InputFileData;
   defaultImage: any;
@@ -31,12 +31,12 @@ interface IInputImageProps {
   name: string;
 }
 
-class InputImage extends React.Component<IInputImageProps> {
+class InputImage extends React.Component<InputImageProps> {
   rootElement: React.RefObject<HTMLDivElement> = React.createRef();
   dropzone: React.RefObject<Dropzone> = React.createRef();
   cropper: React.RefObject<cropperjs> = React.createRef();
 
-  constructor(props: IInputImageProps) {
+  constructor(props: InputImageProps) {
     super(props);
     const { onChange, value, name } = this.props;
 

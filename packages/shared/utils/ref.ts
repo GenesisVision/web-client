@@ -1,9 +1,9 @@
 import { getCookie } from "./cookie";
 import { loadData } from "./localstorage";
 
-type RefType = {
+interface RefType {
   value: string;
-};
+}
 
 export const getRef = (): string | undefined => {
   const ref = loadData<RefType>("ref");
