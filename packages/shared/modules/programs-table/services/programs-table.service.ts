@@ -7,11 +7,12 @@ import {
   PROGRAM_SLUG_URL_PARAM_NAME
 } from "pages/programs/programs.routes";
 import * as qs from "qs";
+import { TFilter } from "shared/components/table/components/filtering/filter.type";
 import { composeFilters } from "shared/components/table/helpers/filtering.helpers";
 import {
-  IPaging,
   calculateSkipAndTake,
-  calculateTotalPages
+  calculateTotalPages,
+  IPaging
 } from "shared/components/table/helpers/paging.helpers";
 import { getSortingColumnName } from "shared/components/table/helpers/sorting.helpers";
 import RootState from "shared/reducers/root-reducer";
