@@ -8,11 +8,13 @@ import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import { number, object } from "yup";
 
-export interface IPhoneVerificationFormValues {
+interface FormValues {
   code: string;
 }
 
-export interface IPhoneVerificationFormProps {
+interface FormProps extends FormikProps<FormValues> {}
+
+interface OwnProps {
   phoneNumber: string;
   errorMessage?: string;
   onResendClick(): void;
@@ -20,13 +22,9 @@ export interface IPhoneVerificationFormProps {
   onSubmit(code: string): void;
 }
 
-export type Props = InjectedTranslateProps & IPhoneVerificationFormProps;
+interface Props extends InjectedTranslateProps, OwnProps, FormProps {}
 
-class PhoneVerificationForm extends React.Component<
-  Props &
-    IPhoneVerificationFormValues &
-    FormikProps<IPhoneVerificationFormValues>
-> {
+class PhoneVerificationForm extends React.Component<Props> {
   componentDidMount() {
     this.props.onResendClick();
   }
@@ -84,9 +82,9 @@ class PhoneVerificationForm extends React.Component<
   }
 }
 
-export default compose<React.ComponentType<IPhoneVerificationFormProps>>(
+export default compose<React.ComponentType<OwnProps>>(
   translate(),
-  withFormik<Props, IPhoneVerificationFormValues>({
+  withFormik<Props, FormValues>({
     displayName: "phone-verification",
     mapPropsToValues: () => ({
       code: ""
@@ -97,10 +95,7 @@ export default compose<React.ComponentType<IPhoneVerificationFormProps>>(
           props.t("profile-page.verification.phone.required")
         )
       }),
-    handleSubmit: (
-      values,
-      bag: FormikBag<Props, IPhoneVerificationFormValues>
-    ) => {
+    handleSubmit: (values, bag) => {
       bag.props.onSubmit(values.code);
     }
   })

@@ -14,20 +14,20 @@ export interface CurrentWallet {
   available: number;
 }
 
-type OwnProps = {
+interface OwnProps {
   currentWallet: CurrentWallet;
-};
+}
 
-type StateProps = {
+interface StateProps {
   wallets?: WalletData[];
-};
+}
 
-type DispatchProps = {
+interface DispatchProps {
   notifySuccess(x: string): void;
   notifyError(x: string): void;
-};
+}
 
-type Props = OwnProps & StateProps & DispatchProps;
+interface Props extends OwnProps, StateProps, DispatchProps {}
 
 class WalletAddFundsContainer extends React.Component<Props> {
   render() {

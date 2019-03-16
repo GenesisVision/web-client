@@ -12,44 +12,42 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import TransferRate from "shared/modules/wallet-transfer/components/transfer-rate";
 import filesService from "shared/services/file-service";
 import { formatCurrencyValue } from "shared/utils/formatter";
-import { DeepReadonly } from "utility-types";
 import { Schema, boolean, lazy, number, object } from "yup";
 
 const getWalletsTo = (
-  wallets: DeepReadonly<WalletData[]>,
+  wallets: WalletData[],
   sourceId: string
 ): WalletData[] => {
   return wallets.filter(wallet => wallet.id !== sourceId);
 };
 
 const getSelectedWallet = (
-  wallets: DeepReadonly<WalletData[]>,
+  wallets: WalletData[],
   currentWalletId: string
 ): WalletData =>
   wallets.find(wallet => wallet.id === currentWalletId) || ({} as WalletData);
 
-export interface ITransferFormValues {
+export interface TransferFormValues {
   transferAll: boolean;
   sourceId: string;
   destinationId: string;
   amount: string;
 }
 
-type OwnProps = {
-  onSubmit(values: ITransferFormValues): void;
+interface FormProps extends FormikProps<TransferFormValues> {}
+
+interface OwnProps {
+  onSubmit(values: TransferFormValues): void;
   disabled: boolean;
   errorMessage?: string;
   twoFactorEnabled: boolean;
-} & DeepReadonly<{
   wallets: Array<WalletData>;
   currentWallet: WalletData;
-}>;
+}
 
-type IWalletTransferForm = InjectedTranslateProps &
-  FormikProps<ITransferFormValues> &
-  OwnProps;
+interface Props extends InjectedTranslateProps, FormProps, OwnProps {}
 
-class WalletTransferForm extends React.Component<IWalletTransferForm> {
+class WalletTransferForm extends React.Component<Props> {
   onChangeSourceId = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { setFieldValue, values } = this.props;
     const currencyFromNew = event.target.value;
@@ -222,7 +220,7 @@ class WalletTransferForm extends React.Component<IWalletTransferForm> {
 
 export default compose<React.FunctionComponent<OwnProps>>(
   translate(),
-  withFormik<IWalletTransferForm, ITransferFormValues>({
+  withFormik<OwnProps, TransferFormValues>({
     displayName: "wallet-transfer",
     mapPropsToValues: props => {
       const { currentWallet, wallets } = props;
@@ -231,9 +229,9 @@ export default compose<React.FunctionComponent<OwnProps>>(
       const destinationId = walletTo[0].id;
       return { sourceId, amount: "", destinationId, transferAll: false };
     },
-    validationSchema: (params: IWalletTransferForm) => {
+    validationSchema: (params: Props) => {
       return lazy(
-        (values: ITransferFormValues): Schema<any> => {
+        (values: TransferFormValues): Schema<any> => {
           const selectedWallet = getSelectedWallet(
             params.wallets,
             values.sourceId
