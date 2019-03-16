@@ -27,7 +27,7 @@ import { composeCurrencyFilter } from "./program-table.helpers";
 import ProgramsTable from "./programs-table";
 import { CURRENCY_FILTER_NAME, LEVEL_FILTER_NAME } from "./programs.constants";
 
-interface IProgramsTableContainerProps {
+interface OwnProps {
   isLocationChanged(location: Location): boolean;
   defaultFilters: any;
   showSwitchView: boolean;
@@ -35,7 +35,7 @@ interface IProgramsTableContainerProps {
   title: string;
 }
 
-interface IProgramsTableContainerStateProps {
+interface StateProps {
   isPending: boolean;
   data: any;
   isAuthenticated: boolean;
@@ -43,7 +43,7 @@ interface IProgramsTableContainerStateProps {
   programTags: ProgramTag[];
 }
 
-interface IProgramsTableContainerDispatchProps {
+interface DispatchProps {
   service: {
     toggleFavoriteProgram(programId: string, isFavorite: boolean): void;
     redirectToLogin(): void;
@@ -62,11 +62,12 @@ interface IProgramsTableContainerDispatchProps {
   };
 }
 
-type Props = IProgramsTableContainerProps &
-  IProgramsTableContainerStateProps &
-  IProgramsTableContainerDispatchProps &
-  InjectedTranslateProps &
-  RouteComponentProps;
+interface Props
+  extends OwnProps,
+    StateProps,
+    DispatchProps,
+    InjectedTranslateProps,
+    RouteComponentProps {}
 
 class ProgramsTableContainer extends React.Component<Props> {
   componentDidMount() {
@@ -163,9 +164,7 @@ class ProgramsTableContainer extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (
-  state: RootState
-): IProgramsTableContainerStateProps => {
+const mapStateToProps = (state: RootState): StateProps => {
   const { isAuthenticated } = state.authData;
   const { isPending, data } = state.programsData.items;
   const currencies = state.platformData.data
@@ -183,9 +182,7 @@ const mapStateToProps = (
   };
 };
 
-const mapDispatchToProps = (
-  dispatch: Dispatch
-): IProgramsTableContainerDispatchProps => ({
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   service: bindActionCreators(
     {
       ...programsService,
@@ -197,8 +194,8 @@ const mapDispatchToProps = (
 });
 
 const mergeProps = (
-  stateProps: IProgramsTableContainerStateProps,
-  dispatchProps: IProgramsTableContainerDispatchProps,
+  stateProps: StateProps,
+  dispatchProps: DispatchProps,
   ownProps: RouteComponentProps
 ) => {
   const { location } = ownProps;
@@ -215,7 +212,7 @@ const mergeProps = (
   };
 };
 
-export default compose(
+export default compose<React.FunctionComponent<OwnProps>>(
   withRouter,
   translate(),
   connect(

@@ -6,10 +6,10 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Status from "shared/components/status/status";
 import Copy from "shared/decorators/with-copy";
 import ArrowIcon from "shared/media/arrow-up-thin.svg";
-import { ITransactionDetailsProps } from "shared/modules/transaction-details/transaction-details";
+import { TransactionDetailsProps } from "shared/modules/transaction-details/transaction-details";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-const ExternalDeposit = (props: ITransactionDetailsProps) => {
+const ExternalDeposit = (props: TransactionDetailsProps) => {
   const { data, t } = props;
   return (
     <React.Fragment>

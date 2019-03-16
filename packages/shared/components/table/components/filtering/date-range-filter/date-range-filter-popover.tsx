@@ -9,15 +9,17 @@ import {
   IDataRangeFilterValue
 } from "./date-range-filter.constants";
 
-interface IDateRangeFilterPopoverProps {
+interface OwnProps {
   value?: IDataRangeFilterValue;
   changeFilter?(value: IDataRangeFilterValue): void;
   startLabel: string;
   cancel?(): void;
 }
 
-type Props = IDateRangeFilterPopoverProps & InjectedTranslateProps;
-type State = IDataRangeFilterValue & { [key: string]: any };
+interface Props extends OwnProps, InjectedTranslateProps {}
+interface State extends IDataRangeFilterValue {
+  [key: string]: any;
+}
 
 class DateRangeFilterPopover extends React.Component<Props, State> {
   state: State = {

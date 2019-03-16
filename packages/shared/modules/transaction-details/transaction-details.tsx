@@ -30,11 +30,17 @@ const Types = {
   PlatformFee: FeeDetails
 };
 
-type OwnProps = {
+export interface TransactionDetailsProps extends InjectedTranslateProps {
+  data: TransactionDetails;
+  handleCancel?(): void;
+  handleResend?(): void;
+}
+
+interface OwnProps {
   transactionId: string;
   close(): void;
   onAction(): void;
-};
+}
 
 interface DispatchProps {
   error(message: string): void;
@@ -46,13 +52,7 @@ interface State {
   errorMessage?: string;
 }
 
-export interface ITransactionDetailsProps extends InjectedTranslateProps {
-  data: TransactionDetails;
-  handleCancel?(): void;
-  handleResend?(): void;
-}
-
-type Props = OwnProps & DispatchProps & InjectedTranslateProps;
+interface Props extends OwnProps, DispatchProps, InjectedTranslateProps {}
 
 class TransactionDetailsDialog extends React.Component<Props, State> {
   constructor(props: Props) {
