@@ -3,10 +3,10 @@ import * as React from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import Page from "shared/components/page/page";
 import { ROLE } from "shared/constants/constants";
 import RootState from "shared/reducers/root-reducer";
 
-import Page from "../../page/page";
 import { WalletRouteProps } from "../wallet.routes";
 import WalletBalanceElements from "./wallet-balance/wallet-balance-elements";
 import WalletBalanceLoader from "./wallet-balance/wallet-balance-loader";

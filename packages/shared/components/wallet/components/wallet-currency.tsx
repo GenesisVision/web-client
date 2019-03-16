@@ -3,6 +3,7 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
 import Page from "shared/components/page/page";
 import { CurrentWallet } from "shared/modules/wallet-add-funds/components/wallet-add-funds-container";
@@ -11,7 +12,6 @@ import WalletTransferPopup from "shared/modules/wallet-transfer/wallet-transfer-
 import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
 import RootState from "shared/reducers/root-reducer";
 
-import WalletImage from "../../avatar/wallet-image/wallet-image";
 import { WalletRouteProps } from "../wallet.routes";
 import WalletBalanceButtons from "./wallet-balance/wallet-balance-buttons";
 import WalletBalanceElements from "./wallet-balance/wallet-balance-elements";

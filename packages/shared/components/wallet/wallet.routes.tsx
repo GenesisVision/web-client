@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router";
 import { Route, Switch } from "react-router-dom";
 import NotFoundPage from "shared/components/not-found/not-found.routes";
+import { composeUrl } from "shared/utils/compose-url";
 
-import { composeUrl } from "../../utils/compose-url";
 import WalletCurrency from "./components/wallet-currency";
 import WalletTotal from "./components/wallet-total";
 import { fetchWallets } from "./services/wallet.services";

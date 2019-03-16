@@ -6,9 +6,9 @@ import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import Dialog from "shared/components/dialog/dialog";
+import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-import { CURRENCIES } from "../../modules/currency-select/currency-select.constants";
 import StatisticItem from "../statistic-item/statistic-item";
 
 const renderLimits = (
