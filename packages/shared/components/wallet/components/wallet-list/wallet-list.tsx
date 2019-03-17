@@ -11,6 +11,7 @@ import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { composeWalletCurrencyUrl } from "shared/components/wallet/wallet.routes";
+import { CurrentWallet } from "shared/modules/wallet-add-funds/components/wallet-add-funds-container";
 import WalletAddFundsPopup from "shared/modules/wallet-add-funds/wallet-add-funds-popup";
 import WalletTransferPopup from "shared/modules/wallet-transfer/wallet-transfer-popup";
 import WalletWithdrawPopup from "shared/modules/wallet-withdraw/wallet-withdraw-popup";
@@ -40,7 +41,7 @@ class WalletList extends React.Component<IWalletListProps, IWalletListState> {
     currentWallet: {}
   };
 
-  handleOpenAddFundsPopup = wallet => () => {
+  handleOpenAddFundsPopup = (wallet: CurrentWallet) => () => {
     const { currency, available } = wallet;
     this.setState({
       isOpenAddFundsPopup: true,
@@ -52,7 +53,7 @@ class WalletList extends React.Component<IWalletListProps, IWalletListState> {
     this.setState({ isOpenAddFundsPopup: false, currentWallet: {} });
   };
 
-  handleOpenWithdrawPopup = wallet => () => {
+  handleOpenWithdrawPopup = (wallet: CurrentWallet) => () => {
     this.setState({ isOpenWithdrawPopup: true, currentWallet: wallet });
   };
 
@@ -60,7 +61,7 @@ class WalletList extends React.Component<IWalletListProps, IWalletListState> {
     this.setState({ isOpenWithdrawPopup: false, currentWallet: {} });
   };
 
-  handleOpenTransferPopup = wallet => () => {
+  handleOpenTransferPopup = (wallet: CurrentWallet) => () => {
     this.setState({ isOpenTransferPopup: true, currentWallet: wallet });
   };
 
@@ -72,8 +73,12 @@ class WalletList extends React.Component<IWalletListProps, IWalletListState> {
     const { t, createButtonToolbar, wallets } = this.props;
     return (
       <div className="wallet-list">
+        {/*
+        //@ts-ignore */}
         <Table
+          //@ts-ignore
           paging={DEFAULT_PAGING}
+          //@ts-ignore
           createButtonToolbar={createButtonToolbar}
           items={wallets}
           dataSelector={walletTableTransactionsSelector}
@@ -153,6 +158,7 @@ class WalletList extends React.Component<IWalletListProps, IWalletListState> {
           }}
         />
         <WalletAddFundsPopup
+          //@ts-ignore
           currentWallet={this.state.currentWallet}
           open={this.state.isOpenAddFundsPopup}
           onClose={this.handleCloseAddFundsPopup}

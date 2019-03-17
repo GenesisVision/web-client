@@ -27,9 +27,11 @@ export const composeFilters = (
   return allFilters.reduce((accum, cur) => {
     const { name, type, composeRequestValue } = cur;
     const processedFilterValue = processFilterValue({
+      //@ts-ignore
       name,
       type,
       composeRequestValue,
+      //@ts-ignore
       value: filtering[name]
     });
     if (processedFilterValue !== undefined) {
@@ -52,6 +54,7 @@ const processFilterValue = (filter: TFilter<any>): Object => {
       }
       break;
     case FILTER_TYPE.CUSTOM:
+      //@ts-ignore
       const requestValues =
         filter.composeRequestValue && filter.composeRequestValue(filter.value);
       if (requestValues !== undefined) {
@@ -70,7 +73,7 @@ const processFilterValue = (filter: TFilter<any>): Object => {
   }
   return requestValue;
 };
-
+//@ts-ignore
 export const updateFilter = (
   oldFilters: FilteringType,
   newFilter: TFilter<any>

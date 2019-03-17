@@ -3,11 +3,14 @@ import "./form-error.scss";
 import * as React from "react";
 
 interface IFormErrorProps {
-  error: string;
+  error?: string;
 }
 
-const FormError: React.FC<IFormErrorProps> = ({ error }) => (
-  <div className="form-error">{error && error}</div>
-);
+const FormError: React.FunctionComponent<IFormErrorProps> = ({ error }) => {
+  if (error) {
+    return <div className="form-error">{error}</div>;
+  }
+  return null;
+};
 
 export default FormError;

@@ -25,7 +25,7 @@ const NorificationsWidget: React.FC<INorificationsWidgetProps> = ({
       <RingIcon className="notifications-widget__ring" />
       <Chip
         className="notifications-widget__count"
-        type={hasNotifications ? CHIP_TYPE.NEGATIVE : null}
+        type={hasNotifications ? CHIP_TYPE.NEGATIVE : undefined}
       >
         {notificationsCount}
       </Chip>

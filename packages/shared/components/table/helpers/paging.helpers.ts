@@ -23,7 +23,9 @@ export const calculateTotalPages = (
 };
 
 export const calculateSkipAndTake = (paging: IPaging): ISkipAndTake => {
+  //@ts-ignore TODO fix types
   const skip = paging.itemsOnPage * (paging.currentPage - 1);
   const take = paging.itemsOnPage;
+  //@ts-ignore TODO fix types
   return { skip, take };
 };

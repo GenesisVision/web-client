@@ -14,6 +14,7 @@ import Popover, {
   anchorElType
 } from "shared/components/popover/popover";
 import TagProgramItem from "shared/components/tag-program/tag-program-item";
+import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import {
   composeManagerDetailsUrl,
   composeProgramNotificationsUrl
@@ -84,7 +85,7 @@ class ProgramDetailsDescriptionMain extends Component<
             onClose={this.handleCloseDropdown}
           >
             <InvestmentLimitsPopover
-              currency={programDescription.currency}
+              currency={programDescription.currency as CURRENCIES}
               level={programDescription.level}
               canLevelUp={programDescription.rating.canLevelUp}
               closePopover={this.handleCloseDropdown}

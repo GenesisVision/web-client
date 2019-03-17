@@ -10,15 +10,15 @@ import SelectFilterPopover from "./select-filter-popover";
 interface ISelectFilterProps {
   name: string;
   label: string;
-  value?: any;
-  values?: any[];
+  value: any;
+  values: any[];
   onChange(value: TFilter<any>): void;
 }
 
 class SelectFilter extends React.Component<
   ISelectFilterProps & InjectedTranslateProps
 > {
-  renderValueText = value => {
+  renderValueText = (value: any) => {
     const { t, values } = this.props;
     const selectedValue = values.find(x => x.value === value);
     if (!selectedValue) return null;

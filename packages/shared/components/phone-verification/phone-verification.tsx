@@ -1,7 +1,7 @@
 import * as React from "react";
 import authApi from "shared/services/api-client/auth-api";
 import authService from "shared/services/auth-service";
-import { Nullable } from "shared/utils/types";
+import { Nullable, ResponseError } from "shared/utils/types";
 
 import PhoneVerificationForm from "./phone-verification-form";
 
@@ -11,7 +11,7 @@ interface IPhoneVerificationProps {
 }
 
 interface IPhoneVerificationState {
-  errorMessage: Nullable<string>;
+  errorMessage?: string;
   data: number;
   disabledResend: boolean;
 }
@@ -20,8 +20,8 @@ class PhoneVerification extends React.Component<
   IPhoneVerificationProps,
   IPhoneVerificationState
 > {
-  state = {
-    errorMessage: null,
+  state: IPhoneVerificationState = {
+    errorMessage: undefined,
     data: 0,
     disabledResend: false
   };
@@ -30,8 +30,10 @@ class PhoneVerification extends React.Component<
   sendCode = () => {
     authApi
       .v10AuthPhoneCodePost(authService.getAuthArg())
-      .then(data => this.setState({ data }))
-      .catch(data => this.setState({ data }));
+      .then(data => this.setState({ data: (data as unknown) as number }))
+      .catch((data: ResponseError) =>
+        this.setState({ errorMessage: data.errorMessage as string })
+      );
   };
 
   verifyCode = (code: string) => {
@@ -44,7 +46,9 @@ class PhoneVerification extends React.Component<
           this.props.onVerify();
         }
       })
-      .catch(data => this.setState({ data }));
+      .catch((data: ResponseError) =>
+        this.setState({ errorMessage: data.errorMessage })
+      );
   };
 
   startTimer() {

@@ -1,21 +1,35 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/structure.scss";
 
-import * as PropTypes from "prop-types";
-import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { FundAssetInfo, FundAssetsListInfo } from "gv-api-web";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import FundAssetImage from "shared/components/avatar/fund-asset-image/fund-asset-image";
 import { FUND_STRUCTURE_COLUMNS } from "shared/components/funds/fund-details/fund-details.constants";
+import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
 import TableCell from "shared/components/table/components/table-cell";
 import TableModule from "shared/components/table/components/table-module";
 import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { formatValue } from "shared/utils/formatter";
 
-class FundStructure extends Component {
-  state = {
+interface Props {
+  id: string;
+  fetchStructure(id: string): Promise<FundAssetsListInfo>;
+}
+
+interface State {
+  isPending: boolean;
+  data?: FundAssetsListInfo;
+}
+
+class FundStructure extends React.Component<
+  Props & InjectedTranslateProps,
+  State
+> {
+  state: State = {
     isPending: false,
-    data: null
+    data: undefined
   };
 
   fetchFundStructure = () => {
@@ -23,7 +37,7 @@ class FundStructure extends Component {
     const { id, fetchStructure } = this.props;
     return fetchStructure(id)
       .then(data => this.setState({ data, isPending: false }))
-      .catch(error => this.setState({ isPending: false }));
+      .catch(() => this.setState({ isPending: false }));
   };
 
   componentDidMount() {
@@ -38,16 +52,19 @@ class FundStructure extends Component {
       items: this.state.data.assets,
       total: this.state.data.assets.length
     };
+
     return (
+      //@ts-ignore TODO fix tables
       <TableModule
         data={data}
+        //@ts-ignore TODO
         paging={{
           ...DEFAULT_PAGING,
           itemsOnPage: data.total
         }}
         getItems={this.fetchFundStructure}
         columns={FUND_STRUCTURE_COLUMNS}
-        renderHeader={column => (
+        renderHeader={(column: SortingColumn) => (
           <span
             className={`details-structure__head-cell fund-details-structure__cell--${
               column.name
@@ -56,7 +73,7 @@ class FundStructure extends Component {
             {t(`fund-details-page.history.structure.${column.name}`)}
           </span>
         )}
-        renderBodyRow={item => (
+        renderBodyRow={(item: FundAssetInfo) => (
           <TableRow className="details-structure__row">
             <TableCell className="details-structure__cell fund-details-structure__cell">
               {item.asset}
@@ -89,10 +106,5 @@ class FundStructure extends Component {
     );
   }
 }
-
-FundStructure.propTypes = {
-  id: PropTypes.string.isRequired,
-  fetchStructure: PropTypes.func.isRequired
-};
 
 export default translate()(FundStructure);

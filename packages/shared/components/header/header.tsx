@@ -24,7 +24,7 @@ export interface IHeaderProps {
   LOGIN_ROUTE: string;
   SIGNUP_ROUTE: string;
   GLOBAL_SEARCH_ROUTE: string;
-  backPath: string | undefined;
+  backPath: string;
   t: TranslationFunction;
   logout(): void;
   openNotifications(): void;

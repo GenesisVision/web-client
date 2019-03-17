@@ -4,7 +4,7 @@ import {
   ProgramDetailsFull
 } from "gv-api-web";
 import React from "react";
-import { FilterValue } from "shared/components/table/components/filtering/filter.type";
+import { TFilter } from "shared/components/table/components/filtering/filter.type";
 import { TableItems } from "shared/components/table/helpers/mapper";
 
 import { IDialogProps } from "../../dialog/dialog";
@@ -45,7 +45,7 @@ export interface IHistorySection {
     filters: any
   ): Promise<TableItems<DashboardPortfolioEvent | ManagerPortfolioEvent>>;
   fetchHistoryCounts(id: string): Promise<HistoryCountsType>;
-  eventTypeFilterValues: FilterValue[];
+  eventTypeFilterValues: TFilter<any>;
 }
 
 export interface IProgramReinvestingContainerOwnProps {

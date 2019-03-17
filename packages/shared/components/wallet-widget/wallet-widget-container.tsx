@@ -11,7 +11,7 @@ interface IWalletWidgetContainerProps {
 }
 interface IWalletWidgetContainerStateProps {
   currency: string;
-  info: WalletsGrandTotal;
+  info?: WalletsGrandTotal;
 }
 
 class WalletWidgetContainer extends React.Component<
@@ -61,7 +61,7 @@ const mapStateToProps = (
 ): IWalletWidgetContainerStateProps => {
   return {
     currency: state.accountSettings.currency,
-    info: state.wallet.info.data ? state.wallet.info.data.grandTotal : null
+    info: state.wallet.info.data ? state.wallet.info.data.grandTotal : undefined
   };
 };
 

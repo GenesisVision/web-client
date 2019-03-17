@@ -5,12 +5,13 @@ export const REQUEST_SUFFIX = "REQUEST";
 export const SUCCESS_SUFFIX = "SUCCESS";
 export const FAILURE_SUFFIX = "FAILURE";
 
-export type IApiState<T> = {
-  readonly isPending: boolean;
-  readonly errorMessage: string;
-  readonly code: null;
-  readonly data?: T;
-};
+export interface IApiState<T>
+  extends Readonly<{
+      isPending: boolean;
+      errorMessage: string;
+      code: null;
+      data?: T;
+    }> {}
 
 const initialState: IApiState<any> = {
   isPending: false,

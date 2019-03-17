@@ -5,6 +5,7 @@ import React, { PureComponent } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import AssetStatus from "shared/components/asset-status/asset-status";
+import { IFundWithdrawalContainerProps } from "shared/components/funds/fund-details/fund-details.types";
 import Profitability from "shared/components/profitability/profitability";
 import {
   PROFITABILITY_PREFIX,
@@ -13,10 +14,9 @@ import {
 import { IProgramReinvestingContainerOwnProps } from "shared/components/programs/program-details/program-details.types";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Surface from "shared/components/surface/surface";
-import { PROGRAM } from "shared/constants/constants";
+import { PROGRAM, STATUS } from "shared/constants/constants";
 import { formatCurrencyValue, roundPercents } from "shared/utils/formatter";
 
-import { IFundWithdrawalContainerProps } from "../../../funds/fund-details/fund-details.types";
 import {
   IProgramDetailContext,
   ProgramDetailContext
@@ -127,7 +127,7 @@ class DetailsInvestment extends PureComponent<
                 label={t("fund-details-page.description.status")}
               >
                 <AssetStatus
-                  status={personalDetails.status}
+                  status={personalDetails.status as STATUS}
                   id={id}
                   asset={asset}
                   onCancel={updateDetails}

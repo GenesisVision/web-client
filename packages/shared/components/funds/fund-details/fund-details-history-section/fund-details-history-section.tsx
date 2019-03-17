@@ -1,8 +1,8 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
 
 import { FundAssetsListInfo } from "gv-api-web";
-import React, { PureComponent } from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import Surface from "shared/components/surface/surface";
 
 import FundStructure from "./fund-structure/fund-structure";
@@ -12,7 +12,7 @@ interface IFundDetailsHistorySectionProps {
   fetchFundStructure(fundId: string): Promise<FundAssetsListInfo>;
 }
 class FundDetailsHistorySection extends React.PureComponent<
-  IFundDetailsHistorySectionProps
+  IFundDetailsHistorySectionProps & InjectedTranslateProps
 > {
   render() {
     const { t, id, fetchFundStructure } = this.props;

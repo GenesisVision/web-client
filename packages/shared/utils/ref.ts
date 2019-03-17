@@ -1,8 +1,12 @@
 import { getCookie } from "./cookie";
 import { loadData } from "./localstorage";
 
-export const getRef = (): string => {
-  const ref = loadData("ref");
+interface RefType {
+  value: string;
+}
+
+export const getRef = (): string | undefined => {
+  const ref = loadData<RefType>("ref");
   if (ref && ref.value) {
     return ref.value;
   }

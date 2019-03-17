@@ -1,9 +1,11 @@
 import "./program-details-description.scss";
 
 import { ProgramDetailsFull } from "gv-api-web";
-import React, { ComponentType, PureComponent } from "react";
+import * as React from "react";
+import { ComponentType, PureComponent } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
+import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
 import { STATUS } from "shared/constants/constants";
 import { PROGRAM } from "shared/constants/constants";
 
@@ -68,7 +70,7 @@ class ProgramDetailsDescriptionSection extends PureComponent<
               id={programDescription.id}
               assetCurrency={programDescription.currency}
               accountCurrency={accountCurrency}
-              personalDetails={personalDetails}
+              personalDetails={personalDetails as InvestmentDetails} // TODO fix type InvestmentDetails
               ProgramReinvestingWidget={ProgramReinvestingWidget}
               WithdrawContainer={ProgramWithdrawContainer}
             />

@@ -63,7 +63,7 @@ export const EvenLogoIcon = ({ type }) => {
   }
 };
 
-const PortfolioEventLogo = ({ type, logo, color, url }) => {
+const PortfolioEventLogo = ({ type, logo, color, url = undefined }) => {
   const className = classnames("portfolio-event-logo");
   const Tag = url ? Link : "div";
   const to = url

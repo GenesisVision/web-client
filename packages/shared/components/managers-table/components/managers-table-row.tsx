@@ -2,7 +2,7 @@ import "./managers-table.scss";
 
 import { ManagerProfile } from "gv-api-web";
 import { GVButton } from "gv-react-components";
-import * as moment from "moment";
+import moment from "moment";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { Link } from "react-router-dom";

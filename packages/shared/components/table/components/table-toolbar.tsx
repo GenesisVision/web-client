@@ -15,7 +15,7 @@ interface ITableToolbarProps {
     filtering: FilteringType
   ): JSX.Element;
   updateFilter(filter: any): void;
-  filtering: FilteringType;
+  filtering?: FilteringType;
   view: LIST_VIEW;
   columns?: SortingColumn[];
   sorting: string;
@@ -54,9 +54,12 @@ class TableToolbar extends React.Component<ITableToolbarProps> {
               sorting={sorting}
               columns={columns}
               updateSorting={updateSorting}
+              //@ts-ignore
               renderValueText={renderSorting}
             />
           )}
+          {/*
+            // @ts-ignore */}
           {renderFilters && renderFilters(updateFilter, filtering)}
           {createButtonToolbar}
         </div>

@@ -24,12 +24,7 @@ interface IFollowCreateAccountOwnProps {
 }
 
 interface IFollowCreateAccountProps {
-  errors?: any;
-  isValid?: boolean;
-  dirty?: boolean;
   t: TranslationFunction;
-  values?: FormValues;
-  setFieldValue?: any;
 }
 
 interface IFollowCreateAccountState {

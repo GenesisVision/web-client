@@ -57,6 +57,8 @@ export class AlertMessageList extends React.Component<
 
     return (
       <div className="alert-message-list">
+        {/*
+        //@ts-ignore */}
         <PoseGroup animateOnMount>
           {messages.map(message => (
             <AlertBox key={message.id}>

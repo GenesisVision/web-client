@@ -37,7 +37,7 @@ const renderDurationText = (t, start, end) => {
   })}`;
 };
 
-const ProgramPeriodPie = ({ t, start, end, className }) => {
+const ProgramPeriodPie = ({ t, start, end, className = "" }) => {
   return (
     <Tooltip render={() => <ProgramPeriodTooltip start={start} end={end} />}>
       <div className={classnames("program-period-pie", className)}>

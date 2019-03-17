@@ -3,9 +3,9 @@ import "./wallet-add-funds-form.scss";
 import { WalletData } from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
+import { Dispatch, bindActionCreators } from "redux";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import RootState from "shared/reducers/root-reducer";
-import { IDispatchable } from "shared/utils/types";
 
 import WalletAddFundsForm from "./wallet-add-funds-form.js";
 
@@ -14,21 +14,25 @@ export interface CurrentWallet {
   available: number;
 }
 
-interface IWalletAddFundsContainerProps {
+interface OwnProps {
   currentWallet: CurrentWallet;
-  wallets: WalletData[];
 }
 
-interface IWalletAddFundsContainerDispatchProps {
-  notifySuccess(x: string): IDispatchable<void>;
-  notifyError(x: string): IDispatchable<void>;
+interface StateProps {
+  wallets?: WalletData[];
 }
 
-class WalletAddFundsContainer extends React.Component<
-  IWalletAddFundsContainerProps & IWalletAddFundsContainerDispatchProps
-> {
+interface DispatchProps {
+  notifySuccess(x: string): void;
+  notifyError(x: string): void;
+}
+
+interface Props extends OwnProps, StateProps, DispatchProps {}
+
+class WalletAddFundsContainer extends React.Component<Props> {
   render() {
     const { currentWallet, notifySuccess, notifyError, wallets } = this.props;
+    if (!wallets) return null;
     const enabledWallets = wallets.filter(wallet => wallet.isDepositEnabled);
     return (
       <WalletAddFundsForm
@@ -41,17 +45,17 @@ class WalletAddFundsContainer extends React.Component<
   }
 }
 
-const mapStateToProps = (state: RootState) => {
-  if (!state.wallet.info.data) return;
+const mapStateToProps = (state: RootState): StateProps => {
+  if (!state.wallet.info.data) return {};
   return { wallets: state.wallet.info.data.wallets };
 };
 
-const mapDispatchToProps = dispatch => ({
-  notifySuccess: text => dispatch(alertMessageActions.success(text)),
-  notifyError: text => dispatch(alertMessageActions.error(text))
-});
+const mapDispatchToProps: DispatchProps = {
+  notifySuccess: alertMessageActions.success,
+  notifyError: alertMessageActions.error
+};
 
-export default connect(
+export default connect<StateProps, DispatchProps, OwnProps, RootState>(
   mapStateToProps,
   mapDispatchToProps
 )(WalletAddFundsContainer);

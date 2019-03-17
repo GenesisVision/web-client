@@ -56,7 +56,8 @@ const ProgramTableRowShort: React.FC<
     tags,
     rating
   } = program;
-  const stopPropagationEvent = event => event.stopPropagation();
+  const stopPropagationEvent = (event: React.MouseEvent) =>
+    event.stopPropagation();
   return (
     <TableRow
       className={classNames({

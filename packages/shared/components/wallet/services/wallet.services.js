@@ -73,10 +73,7 @@ export const resendWithdrawRequest = txId => (dispatch, getState) => {
     });
 };
 
-export const fetchMultiTransactionsExternal = (
-  currency: string,
-  filters: any
-) => {
+export const fetchMultiTransactionsExternal = (currency, filters) => {
   const authorization = authService.getAuthArg();
   const filtering = {
     ...filters,
@@ -87,7 +84,7 @@ export const fetchMultiTransactionsExternal = (
     .then(mapToTableItems("transactions"));
 };
 
-export const fetchMultiTransactions = (currency: string, filters: any) => {
+export const fetchMultiTransactions = (currency, filters) => {
   const authorization = authService.getAuthArg();
   const filtering = {
     ...filters,

@@ -11,9 +11,11 @@ import { TFilter } from "shared/components/table/components/filtering/filter.typ
 import { composeFilters } from "shared/components/table/helpers/filtering.helpers";
 import {
   calculateSkipAndTake,
-  calculateTotalPages
+  calculateTotalPages,
+  IPaging
 } from "shared/components/table/helpers/paging.helpers";
 import { getSortingColumnName } from "shared/components/table/helpers/sorting.helpers";
+import RootState from "shared/reducers/root-reducer";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
 
@@ -53,7 +55,8 @@ export const fetchPrograms = (filters: {
   }
   return programTableActions
     .fetchPrograms(requestFilters)
-    .payload.then(data => {
+    .payload.then((data: any) => {
+      // TODO fix any
       return { programs: data.programs, total: data.total };
     });
 };
@@ -85,7 +88,7 @@ const composeRequestFilters = () => (dispatch: any, getState: any): Object => {
   const { skip, take } = calculateSkipAndTake({
     itemsOnPage: itemsOnPage,
     currentPage: page
-  });
+  } as IPaging);
 
   const filtering = composeFilters(
     PROGRAMS_TABLE_FILTERS,
@@ -103,7 +106,7 @@ const composeRequestFilters = () => (dispatch: any, getState: any): Object => {
 
 export const getProgramsFilters = () => (
   dispatch: any,
-  getState: any
+  getState: () => RootState
 ): Object => {
   const { router, programsData } = getState();
   const queryParams = qs.parse(router.location.search.slice(1));
@@ -125,8 +128,9 @@ export const getProgramsFilters = () => (
     ? queryParams.sorting
     : SORTING_FILTER_VALUE;
 
-  const filtering = PROGRAMS_TABLE_FILTERS.reduce((accum, cur) => {
-    const { name, defaultValue, validate = value => true } = cur;
+  const filtering = PROGRAMS_TABLE_FILTERS.reduce((accum: any, cur: any) => {
+    // TODO fix any types
+    const { name, defaultValue, validate = (value: any) => true } = cur; // TODO fix any types
     if (!queryParams[name] || !validate(queryParams[name])) {
       accum[name] = defaultValue;
     } else {

@@ -38,7 +38,7 @@ class TagFilter extends React.Component<ITagFilterProps, ITagFilterState> {
         this.props.value &&
         this.props.value.find(select => item.name === select.name)
     );
-  renderValueText = value => value;
+
   handleOpenPopover = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ): void => this.setState({ anchor: event.currentTarget });
@@ -78,7 +78,7 @@ class TagFilter extends React.Component<ITagFilterProps, ITagFilterState> {
             ))}
           </div>
           <TagFilterButton
-            isActive={anchor}
+            isActive={Boolean(anchor)}
             onClickHandle={this.handleOpenPopover}
           />
         </div>
