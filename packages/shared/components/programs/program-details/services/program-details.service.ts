@@ -17,6 +17,8 @@ import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
 
+import { TFilter2 } from "../../../table/components/filtering/filter.type";
+import { PROGRAM_TRADES_FILTERS_TYPE } from "../program-details.constants";
 import { ProgramStatisticResult } from "./program-details.types";
 
 export const getProgramDescription = () => (
@@ -112,14 +114,10 @@ export const closePeriod = (programId: string, onSuccess: () => void) => (
 
 export const fetchProgramTrades = (
   id: string,
-  filters: any,
-  currency: string
+  filters: any
 ): Promise<TableItems<OrderModel>> => {
   return programsApi
-    .v10ProgramsByIdTradesGet(id, {
-      ...filters,
-      currency
-    })
+    .v10ProgramsByIdTradesGet(id, filters)
     .then(mapToTableItems<OrderModel>("trades"));
 };
 

@@ -1,3 +1,4 @@
+import { FILTER_TYPE } from "../../helpers/filtering.helpers";
 import {
   AssetFilterType,
   ComposedRequestAssetName,
@@ -26,7 +27,13 @@ import {
   ComposedRequestTagValue,
   TagFilterType
 } from "./tag-filter/tag-filter.constants";
-import { FILTER_TYPE } from "../../helpers/filtering.helpers";
+
+export type TFilter2<T> = {
+  name: keyof T;
+  value: T;
+  composeRequestValue?(value: any): any;
+  type?: FILTER_TYPE;
+};
 
 export type TFilter<T> = {
   name: string;
@@ -34,6 +41,8 @@ export type TFilter<T> = {
   composeRequestValue?(value: any): any;
   type?: FILTER_TYPE;
 };
+
+export type IFilters<T extends string> = { [key in T]: any };
 
 export interface SelectFilterValue<T = any> {
   value: T | undefined;

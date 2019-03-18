@@ -2,7 +2,9 @@ import {
   ComposeFiltersType,
   ComposeFiltersTypeFlat,
   FilteringType,
-  TFilter
+  IFilters,
+  TFilter,
+  TFilter2
 } from "../components/filtering/filter.type";
 import { IComposeDefaultFilter } from "../components/table.types";
 
@@ -24,9 +26,9 @@ export enum FILTER_TYPE {
 export const composeFilteringActionType = (actionType: string): string =>
   `${actionType}_FILTERING`;
 
-export const composeFilters = (
+export const composeFilters = <IFiltering extends string>(
   allFilters: IComposeDefaultFilter[],
-  filtering: FilteringType
+  filtering: IFilters<IFiltering>
 ): ComposeFiltersTypeFlat => {
   if (!allFilters) return {};
   return allFilters.reduce((accum: ComposeFiltersType, cur) => {
@@ -46,7 +48,9 @@ export const composeFilters = (
   }, {});
 };
 
-const processFilterValue = (filter: TFilter<any>): ComposeFiltersType => {
+const processFilterValue = <IFiltering extends any>(
+  filter: TFilter2<IFiltering>
+): ComposeFiltersType => {
   let requestValue = undefined;
   switch (filter.type) {
     case FILTER_TYPE.RANGE:
@@ -79,9 +83,9 @@ const processFilterValue = (filter: TFilter<any>): ComposeFiltersType => {
 };
 //@ts-ignore
 export const updateFilter = (
-  oldFilters: FilteringType,
+  oldFilters: IFilters<string>,
   newFilter: TFilter<any>
-): FilteringType => {
+): IFilters<any> => {
   const { name, value } = newFilter;
   const existingFilterValue = oldFilters[name];
   if (JSON.stringify(existingFilterValue !== JSON.stringify(value))) {

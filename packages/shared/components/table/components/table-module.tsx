@@ -7,23 +7,28 @@ import { updateFilter } from "shared/components/table/helpers/filtering.helpers"
 import { IDataModel } from "shared/constants/constants";
 
 import { composeRequestFilters } from "../services/table.service";
-import { FilteringType, SortingColumn, TFilter } from "./filtering/filter.type";
+import {
+  FilteringType,
+  IFilters,
+  SortingColumn,
+  TFilter
+} from "./filtering/filter.type";
 import Table from "./table";
 
 const defaultData: IDataModel = { items: null, total: 0 };
 
-export interface ITableModuleProps {
-  loader: boolean;
+export interface ITableModuleProps<TFiltering extends string> {
+  loader?: boolean;
   paging: IPaging;
-  sorting: string;
-  filtering: FilteringType;
+  sorting?: string;
+  filtering?: IFilters<TFiltering>;
   defaultFilters: any[];
   getItems: Function;
   data?: IDataModel;
   disableTitle?: boolean;
   renderFilters?(
     updateFilter: (filter: any) => void,
-    filtering: FilteringType
+    filtering: IFilters<TFiltering>
   ): JSX.Element;
   title?: string;
   columns?: SortingColumn[];
@@ -35,22 +40,22 @@ export interface ITableModuleProps {
   ): JSX.Element;
 }
 
-interface ITableModuleState {
+interface ITableModuleState<TFiltering extends string> {
   paging: IPaging;
-  sorting: string;
-  filtering: FilteringType;
+  sorting?: string;
+  filtering?: IFilters<TFiltering>;
   data: IDataModel;
   isPending: boolean;
 }
 
-class TableModule extends React.Component<
-  ITableModuleProps,
-  ITableModuleState
+class TableModule<TFiltering extends string> extends React.Component<
+  ITableModuleProps<TFiltering>,
+  ITableModuleState<TFiltering>
 > {
   static defaultProps = {
     loader: true
   };
-  constructor(props: ITableModuleProps) {
+  constructor(props: ITableModuleProps<TFiltering>) {
     super(props);
 
     const { paging, sorting, filtering } = this.props;
@@ -119,7 +124,7 @@ class TableModule extends React.Component<
   handleUpdateFilter = (filter: TFilter<any>) => {
     this.setState(prevState => {
       return {
-        filtering: updateFilter(prevState.filtering, filter),
+        filtering: updateFilter(prevState.filtering!, filter),
         paging: {
           ...prevState.paging,
           currentPage: 1

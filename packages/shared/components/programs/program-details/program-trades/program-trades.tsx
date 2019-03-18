@@ -1,29 +1,44 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/trades.scss";
 
 import moment from "moment";
-import * as PropTypes from "prop-types";
-import React, { Component, Fragment } from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import BaseProfitability from "shared/components/profitability/base-profitability";
 import Profitability from "shared/components/profitability/profitability";
 import {
   PROGRAM_TRADES_COLUMNS,
   PROGRAM_TRADES_DEFAULT_FILTERS,
-  PROGRAM_TRADES_FILTERS
+  PROGRAM_TRADES_FILTERS,
+  PROGRAM_TRADES_FILTERS_TYPE
 } from "shared/components/programs/program-details/program-details.constants";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { TFilter2 } from "shared/components/table/components/filtering/filter.type";
 import TableCell from "shared/components/table/components/table-cell";
 import TableModule from "shared/components/table/components/table-module";
 import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { formatValue } from "shared/utils/formatter";
 
+import { PROFITABILITY_PREFIX } from "../../../profitability/profitability.helper";
+
 const DECIMAL_SCALE = 8;
 
-class ProgramTrades extends Component {
-  fetchProgramTrades = filters => {
+interface IOwnProps {
+  currency: string;
+  programId: string;
+  fetchTrades(
+    programId: string,
+    filters: TFilter2<PROGRAM_TRADES_FILTERS_TYPE>[],
+    currency: string
+  ): void;
+}
+
+class ProgramTrades extends React.Component<
+  IOwnProps & InjectedTranslateProps
+> {
+  fetchProgramTrades = (filters: TFilter2<PROGRAM_TRADES_FILTERS_TYPE>[]) => {
     const { currency, programId, fetchTrades } = this.props;
     return fetchTrades(programId, filters, currency);
   };
@@ -37,14 +52,14 @@ class ProgramTrades extends Component {
         defaultFilters={PROGRAM_TRADES_DEFAULT_FILTERS}
         filtering={PROGRAM_TRADES_FILTERS}
         renderFilters={(updateFilter, filtering) => (
-          <Fragment>
+          <>
             <DateRangeFilter
               name={DATE_RANGE_FILTER_NAME}
               value={filtering[DATE_RANGE_FILTER_NAME]}
               onChange={updateFilter}
               startLabel={t("filters.date-range.program-start")}
             />
-          </Fragment>
+          </>
         )}
         paging={DEFAULT_PAGING}
         columns={PROGRAM_TRADES_COLUMNS}
@@ -87,7 +102,7 @@ class ProgramTrades extends Component {
             <TableCell className="details-trades__cell program-details-trades__cell--profit">
               <Profitability
                 value={+formatValue(trade.profit, DECIMAL_SCALE)}
-                prefix="sign"
+                prefix={PROFITABILITY_PREFIX.SIGN}
               >
                 <NumberFormat
                   value={formatValue(trade.profit, DECIMAL_SCALE)}
@@ -113,11 +128,5 @@ class ProgramTrades extends Component {
     );
   }
 }
-
-ProgramTrades.propTypes = {
-  programId: PropTypes.string.isRequired,
-  currency: PropTypes.string.isRequired,
-  fetchTrades: PropTypes.func.isRequired
-};
 
 export default translate()(ProgramTrades);
