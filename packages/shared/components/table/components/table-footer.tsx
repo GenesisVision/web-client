@@ -7,7 +7,7 @@ import ItemsCounter from "./table-items-counter";
 const TableFooter: React.FC<{
   isPending?: boolean;
   paging: IPaging;
-  updatePaging(page: number): void;
+  updatePaging?(page: number): void;
 }> = ({ isPending, paging, updatePaging }) => {
   //@ts-ignore
   if (paging.totalPages < 2) return null;
@@ -20,7 +20,7 @@ const TableFooter: React.FC<{
       <Paging
         paging={paging}
         hidden={isPending}
-        updatePaging={next => updatePaging(next.currentPage)}
+        updatePaging={next => updatePaging && updatePaging(next.currentPage)}
       />
     </div>
   );
