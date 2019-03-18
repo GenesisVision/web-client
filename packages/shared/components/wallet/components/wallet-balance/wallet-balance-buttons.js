@@ -20,7 +20,7 @@ const WalletBalanceButtons = ({
         <span className="wallet-balance__button-icon wallet-balance__button-icon--sign">
           +
         </span>
-        {t("wallet-page.add-funds")}
+        {t("wallet-page.deposit")}
       </GVButton>
       <GVButton
         color="secondary"
