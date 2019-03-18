@@ -3,7 +3,7 @@ import "./wallet-transfer-form.scss";
 import { FormikProps, withFormik } from "formik";
 import { WalletData } from "gv-api-web";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
-import React, { ComponentType } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { compose } from "redux";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
@@ -219,7 +219,7 @@ class WalletTransferForm extends React.Component<IWalletTransferForm> {
   }
 }
 
-export default compose<ComponentType<IWalletTransferFormOwnProps>>(
+export default compose<React.ComponentType<IWalletTransferFormOwnProps>>(
   translate(),
   withFormik<IWalletTransferForm, ITransferFormValues>({
     displayName: "wallet-transfer",
