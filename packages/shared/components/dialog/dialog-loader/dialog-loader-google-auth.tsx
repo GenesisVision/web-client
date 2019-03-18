@@ -5,12 +5,12 @@ import * as React from "react";
 import {
   DialogLoaderHeaderGoogleAuth,
   DialogLoaderImage,
+  DialogLoaderInput,
   DialogLoaderShortButton,
-  DialogLoaderShortStat,
-  DialogLoaderinput
+  DialogLoaderShortStat
 } from "./dialog-loader-elements";
 
-export const DialogLoaderGoogleAuthDesktop = () => (
+export const DialogLoaderGoogleAuthDesktop: React.FC = () => (
   <div className="google-auth google-auth--desktop">
     <div className="dialog__header">
       <DialogLoaderHeaderGoogleAuth />
@@ -23,16 +23,16 @@ export const DialogLoaderGoogleAuthDesktop = () => (
           <DialogLoaderImage />
         </div>
         <div className="dialog__top-wrapper">
-          <DialogLoaderinput />
+          <DialogLoaderInput />
         </div>
       </div>
       <div className="google-auth__step">
         <DialogLoaderShortStat />
         <div className="dialog__wrapper">
-          <DialogLoaderinput />
+          <DialogLoaderInput />
         </div>
         <div className="dialog__wrapper">
-          <DialogLoaderinput />
+          <DialogLoaderInput />
         </div>
         <div className="dialog__buttons">
           <DialogLoaderShortButton />
@@ -42,13 +42,13 @@ export const DialogLoaderGoogleAuthDesktop = () => (
   </div>
 );
 
-export const DialogLoaderGoogleAuthMobile = () => (
+export const DialogLoaderGoogleAuthMobile: React.FC = () => (
   <div className="google-auth google-auth--mobile">
     <DialogLoaderGoogleAuthFirstStep />
   </div>
 );
 
-const DialogLoaderGoogleAuthFirstStep = () => (
+const DialogLoaderGoogleAuthFirstStep: React.FC = () => (
   <div className="google-auth__step">
     <div className="dialog__wrapper">
       <DialogLoaderShortStat />
