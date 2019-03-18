@@ -8,7 +8,6 @@ import { IDataModel } from "shared/constants/constants";
 
 import { composeRequestFilters } from "../services/table.service";
 import { FilteringType, SortingColumn, TFilter } from "./filtering/filter.type";
-import { FilteringType, SortingColumn, TFilter } from "./filtering/filter.type";
 import Table from "./table";
 
 const defaultData: IDataModel = { items: null, total: 0 };
