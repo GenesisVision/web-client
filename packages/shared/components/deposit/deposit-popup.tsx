@@ -10,6 +10,7 @@ import { ASSET, ROLE } from "shared/constants/constants";
 import RootState from "shared/reducers/root-reducer";
 import { ActionType } from "shared/utils/types";
 
+import { DialogLoader } from "../dialog/dialog-loader/dialog-loader";
 import DepositForm from "./deposit-form";
 import DepositTop from "./deposit-top";
 
@@ -55,7 +56,7 @@ class DepositPopup extends React.Component<
       asset,
       role
     } = this.props;
-    if (!info) return null;
+    if (!info) return <DialogLoader />;
     return (
       <Fragment>
         <DepositTop info={info} asset={asset} role={role} currency={currency} />

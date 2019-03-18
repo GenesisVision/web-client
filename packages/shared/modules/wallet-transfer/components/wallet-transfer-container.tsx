@@ -2,6 +2,7 @@ import { WalletData } from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators } from "redux";
+import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { updateWalletTimestamp } from "shared/components/wallet/actions/wallet.actions";
 import { fetchWallets } from "shared/components/wallet/services/wallet.services";
 import { walletTransferRequest } from "shared/modules/wallet-withdraw/services/wallet-withdraw.services";
@@ -11,7 +12,6 @@ import WalletTransferForm, { TransferFormValues } from "./wallet-transfer-form";
 
 interface StateProps {
   wallets: WalletData[];
-  twoFactorEnabled: boolean;
 }
 
 interface DispatchProps {
@@ -59,7 +59,8 @@ class WalletTransferContainer extends React.Component<Props, State> {
   };
 
   render() {
-    const { twoFactorEnabled, currentWallet, wallets } = this.props;
+    const { currentWallet, wallets } = this.props;
+    if (!wallets.length) return <DialogLoader />;
 
     return (
       <WalletTransferForm
@@ -68,19 +69,15 @@ class WalletTransferContainer extends React.Component<Props, State> {
         disabled={this.state.isPending}
         errorMessage={this.state.errorMessage}
         onSubmit={this.handleSubmit}
-        twoFactorEnabled={Boolean(twoFactorEnabled)}
       />
     );
   }
 }
 
 const mapStateToProps = (state: RootState): StateProps => {
-  if (!state.accountSettings) return { twoFactorEnabled: false, wallets: [] };
+  if (!state.accountSettings) return { wallets: [] };
   const wallets = state.wallet.info.data ? state.wallet.info.data.wallets : [];
-  const twoFactorEnabled = state.accountSettings.twoFactorAuth.data
-    ? state.accountSettings.twoFactorAuth.data.twoFactorEnabled
-    : false;
-  return { twoFactorEnabled, wallets };
+  return { wallets };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

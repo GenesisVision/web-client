@@ -3,7 +3,7 @@ import "./wallet-add-funds-form.scss";
 import { WalletData } from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
-import { Dispatch, bindActionCreators } from "redux";
+import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import RootState from "shared/reducers/root-reducer";
 
@@ -19,7 +19,7 @@ interface OwnProps {
 }
 
 interface StateProps {
-  wallets?: WalletData[];
+  wallets: WalletData[];
 }
 
 interface DispatchProps {
@@ -32,7 +32,7 @@ interface Props extends OwnProps, StateProps, DispatchProps {}
 class WalletAddFundsContainer extends React.Component<Props> {
   render() {
     const { currentWallet, notifySuccess, notifyError, wallets } = this.props;
-    if (!wallets) return null;
+    if (!wallets.length) return <DialogLoader />;
     const enabledWallets = wallets.filter(wallet => wallet.isDepositEnabled);
     return (
       <WalletAddFundsForm
@@ -46,8 +46,9 @@ class WalletAddFundsContainer extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: RootState): StateProps => {
-  if (!state.wallet.info.data) return {};
-  return { wallets: state.wallet.info.data.wallets };
+  if (!state.accountSettings) return { wallets: [] };
+  const wallets = state.wallet.info.data ? state.wallet.info.data.wallets : [];
+  return { wallets };
 };
 
 const mapDispatchToProps: DispatchProps = {
