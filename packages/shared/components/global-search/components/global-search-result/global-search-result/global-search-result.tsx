@@ -7,6 +7,8 @@ import FundsTable from "./funds-table";
 import ManagersTable from "./managers-table";
 import ProgramsTable from "./programs-table";
 import { SyntheticEvent } from "react";
+import { SearchViewModel } from "gv-api-web";
+import SearchResultTable from "./search-result-table";
 
 export enum SEARCH_TABS {
   PROGRAMS = "investors",
@@ -14,13 +16,13 @@ export enum SEARCH_TABS {
   MANAGERS = "manages"
 }
 
-export interface SearchTableProps {
+export interface SearchTableProps<T> {
   title: string;
-  data: any;
+  data: T;
 }
 
 interface Props {
-  data: any;
+  data: SearchViewModel;
   title: string;
 }
 
@@ -46,19 +48,19 @@ class GlobalSearchResult extends React.Component<
     switch (tab) {
       case SEARCH_TABS.MANAGERS:
         return (
-          <SearchResultTable t={t} data={data.managers}>
+          <SearchResultTable data={Boolean(data.managers)}>
             <ManagersTable title={title} data={data.managers} />
           </SearchResultTable>
         );
       case SEARCH_TABS.FUNDS:
         return (
-          <SearchResultTable t={t} data={data.funds}>
+          <SearchResultTable data={Boolean(data.funds)}>
             <FundsTable title={title} data={data.funds} />
           </SearchResultTable>
         );
       case SEARCH_TABS.PROGRAMS:
         return (
-          <SearchResultTable t={t} data={data.programs}>
+          <SearchResultTable data={Boolean(data.programs)}>
             <ProgramsTable title={title} data={data.programs} />
           </SearchResultTable>
         );
@@ -99,19 +101,5 @@ class GlobalSearchResult extends React.Component<
     );
   }
 }
-
-const SearchResultTable: React.FC<{ data: any } & InjectedTranslateProps> = ({
-  data,
-  children,
-  t
-}) => (
-  <React.Fragment>
-    {data ? (
-      children
-    ) : (
-      <div className="global-search-result__loading">{t("table.loading")}</div>
-    )}
-  </React.Fragment>
-);
 
 export default translate()(GlobalSearchResult);
