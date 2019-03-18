@@ -3,6 +3,7 @@
   "workspaces": ["packages/*"],
   "dependencies": {
     "@juggle/resize-observer": "^1.1.1",
+    "@types/debounce": "^1.2.0",
     "@types/qrcode.react": "^0.8.2",
     "@types/qs": "^6.5.2",
     "@types/rc-slider": "^8.6.3",
