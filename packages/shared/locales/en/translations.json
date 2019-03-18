@@ -1,7 +1,7 @@
 {
   "table": {
     "loading": "Loading...",
-    "no-items": "There are no items.",
+    "no-items": "There are no items to display.",
     "items-counter": "Showing {{from}}-{{to}} of {{total}}"
   },
   "alerts": {
@@ -10,7 +10,7 @@
   },
   "verification-status": {
     "verified": "Verified",
-    "not-verified": "Not verified",
+    "not-verified": "Not Verified",
     "under-review": "Under Review",
     "rejected": "Rejected"
   },
@@ -25,7 +25,7 @@
     "confirm": "Confirm",
     "activate": "Activate",
     "disable": "Disable",
-    "create-program": "Create program",
+    "create-program": "Create Program",
     "continue": "Continue",
     "create-fund": "Create Fund",
     "add-assets": "Add assets",
@@ -44,7 +44,7 @@
       "label": "Currency"
     },
     "date-range": {
-      "label": "Date range",
+      "label": "Date Range",
       "all-time": "All time",
       "last-month": "Last month",
       "last-week": "Last week",
@@ -66,7 +66,7 @@
     "minute_plural": "minutes",
     "second": "second",
     "second_plural": "seconds",
-    "waiting-period-start": "Waiting for the period start",
+    "waiting-period-start": "Waiting for the period to start",
     "period-is-over": "The period is over.",
     "time-left": "Time left",
     "period-ends": "Period ends",
@@ -98,10 +98,10 @@
     "programs": "Programs",
     "funds": "Funds",
     "search": "Search",
-    "personal-details": "Personal details",
+    "personal-details": "Personal Details",
     "wallet": "Wallet",
     "settings": "Settings",
-    "logout": "Log out",
+    "logout": "Logout",
     "login": "Login"
   },
   "notifications-aside": {
@@ -117,8 +117,8 @@
     "Pending": "Pending"
   },
   "program-actions": {
-    "remove-from-favorites": "Remove from favorites",
-    "add-to-favorites": "Add to favorites",
+    "remove-from-favorites": "Remove from Favourites",
+    "add-to-favorites": "Add to Favourites",
     "details": "Details",
     "invest": "Invest",
     "withdraw": "Withdraw",
@@ -129,19 +129,19 @@
     "close-period": "Close Period"
   },
   "fund-actions": {
-    "remove-from-favorites": "Remove from favorites",
-    "add-to-favorites": "Add to favorites",
+    "remove-from-favorites": "Remove from Favourites",
+    "add-to-favorites": "Add to Favourites",
     "details": "Details"
   },
   "wallet-widget": {
-    "total-balance": "Total balance",
+    "total-balance": "Total Balance",
     "invested-value": "Invested",
     "pending-value": "Pending",
     "available": "Available",
     "details": "Details"
   },
-  "wallet-add-funds": {
-    "title": "Add funds",
+  "wallet-deposit": {
+    "title": "Deposit",
     "select-currency": "Select a wallet currency",
     "will-send": "You will send",
     "will-get": "Approximate amount",
@@ -150,7 +150,7 @@
     "external": "External address",
     "deposit-address": "Deposit address",
     "copy-to-clipboard-success": "Address is copied to the clipboard",
-    "copy-to-clipboard-error": "Failed to copy data to the clipboard.",
+    "copy-to-clipboard-error": "Failed to copy the data to the clipboard.",
     "disclaimer": "After processing the {{currency}} transaction, your transferred funds will be converted to GVT, according to the current market price. The exact amount of GVT received will be determined at the time of conversion in the market.",
     "warning": "Send only {{currency}} to this deposit address. Sending any other coin or token to this address may result in the loss of your deposit."
   },
@@ -160,33 +160,33 @@
     "select-currency": "Select a wallet currency",
     "amount": "Enter correct amount",
     "will-get": "You'll get",
-    "address": "Withdraw address",
+    "address": "Withdrawal address",
     "to": "To",
     "fee": "Fee",
     "withdrawing": "Withdrawing",
-    "info": "Amount of withdrawals can be changed depending on the exchange rate.",
+    "info": "Amount of withdrawal can vary depending on the fluctuating exchange rate.",
     "withdraw-request": "Please approve the withdrawal request via the link in the confirmation email.",
-    "two-factor-code-label": "Two factor code",
+    "two-factor-code-label": "Two factor authentication code",
     "confirmation": {
-      "page-title": "Wallet withdraw confirm",
+      "page-title": "Wallet withdrawal confirmed",
       "error": "An error occurred during confirmation of email: ",
-      "success": "Withdrawal request is confirmed"
+      "success": "Withdrawal request has been confirmed"
     },
     "validation": {
-      "amount-more-than-available": "Amount is more than available in your wallet",
-      "address-is-required": "Address is required.",
-      "two-factor-6digits": "Authentication code should contain 6 digits.",
+      "amount-more-than-available": "Amount requested is more than currently available in your wallet",
+      "address-is-required": "An address is required.",
+      "two-factor-6digits": "Authentication code should contain at least 6 digits.",
       "two-factor-required": "Authentication code is required."
     }
   },
   "wallet-transfer": {
     "title": "Transfer",
-    "availableTo": "Available in wallet",
-    "availableFrom": "Available in wallet",
+    "availableTo": "Available in Wallet",
+    "availableFrom": "Available in Wallet",
     "to": "To",
     "from": "From",
     "amount": "Enter correct amount",
-    "info": "The funds will be converted according to the current market price (Market order on Binance).",
+    "info": "The funds will be converted according to the current market price (via market order on Binance).",
     "two-factor-code-label": "Two factor code",
     "confirmation": {
       "page-title": "Wallet withdraw confirm",
@@ -194,7 +194,7 @@
       "success": "Withdrawal request is confirmed"
     },
     "validation": {
-      "amount-more-than-available": "Amount is more than available in your wallet",
+      "amount-more-than-available": "Amount is greater than the account balance",
       "amount-is-zero": "Amount must be greater than zero"
     }
   },
@@ -213,7 +213,7 @@
     }
   },
   "profile-widget": {
-    "personal-details": "Personal details",
+    "personal-details": "Personal Details",
     "settings": "Settings",
     "logout": "Log out"
   },
@@ -229,10 +229,10 @@
     "amount": "Amount to invest",
     "entry-fee": "Entry fee",
     "investment-amount": "Investment amount",
-    "disclaimer": "After clicking the \"Confirm\" button, the invested GVT will be immediately converted to {{currency}}. Accrual of {{currency}} to the account manager will only occur at the end of the reporting period.",
+    "disclaimer": "After clicking the \"Confirm\" button, the invested GVT will be immediately converted to {{currency}}. The transfer of {{currency}} over to the account manager will only occur at the end of the current reporting period.",
     "confirm": "Confirm",
     "validation": {
-      "amount-more-than-available": "Amount is more than available in your wallet",
+      "amount-more-than-available": "Amount is more than available in your Wallet",
       "amount-min-value": "Min amount is {{min}} {{currency}} ( ≈ {{walletMin}} {{walletCurrency}})"
     },
     "program": {
@@ -247,7 +247,7 @@
   },
   "withdraw-program": {
     "title": "Withdraw",
-    "available-to-withdraw": "Available for withdrawing",
+    "available-to-withdraw": "Available for withdrawal",
     "amount-to-withdraw": "Amount to withdraw",
     "next": "Next",
     "info": "Your request will be processed at the end of the reporting period.",
@@ -259,36 +259,36 @@
     "invested": "Invested",
     "how-much-withdraw": "How much would you like to withdraw?",
     "enter-amount": "Enter {{token}} amount",
-    "withdraw-all": "Withdraw all invested tokens",
-    "success-alert-message": "Request to withdrawal sent successfully.",
+    "withdraw-all": "Withdraw all invested Tokens",
+    "success-alert-message": "Request to withdraw sent successfully.",
     "validation": {
       "amount-is-zero": "Amount must be greater than zero",
-      "amount-more-than-available": "Amount is more than available for withdraw"
+      "amount-more-than-available": "Amount is greater than the account balance"
     }
   },
   "unfollow-program": {
-    "title": "Unfollow trades",
+    "title": "Unfollow Trades",
     "text": "Do you really want to unsubscribe?",
     "success-alert-message": "You have been unsubscribed."
   },
   "follow-program": {
     "create-account": {
       "title": "Account creation",
-      "available": "Available for creating",
-      "amount": "Amount for creating",
+      "available": "Available for creation",
+      "amount": "Amount for creation",
       "from": "From",
       "next": "Next",
       "validation": {
-        "amount-required": "Amount is required field",
+        "amount-required": "Amount is a required field",
         "amount-is-zero": "Amount must be greater than zero",
-        "amount-more-than-available": "Amount is more than available for creating"
+        "amount-more-than-available": "Amount is greater than the account balance"
       }
     },
     "params": {
       "title": "Trading settings",
       "type": "Type",
-      "tolerance-percent": "Tolerance percent",
-      "volume-percent": "Volume percent",
+      "tolerance-percent": "Tolerance percentage",
+      "volume-percent": "Volume percentage",
       "usd-equivalent": "USD equivalent",
       "back": "Back",
       "submit": "Submit",
@@ -312,7 +312,7 @@
     "amount-to-withdraw": "Amount to withdraw",
     "withdrawing": "Withdrawing",
     "wallet": "Wallet",
-    "success-alert-message": "Request to withdrawal sent successfully.",
+    "success-alert-message": "Withdrawal request sent successfully.",
     "validation": {
       "required": "Amount is required",
       "min-value": "Amount must be greater than or equal to 0.01"
@@ -326,7 +326,7 @@
     "title": "Programs",
     "tabs": {
       "explore": "Explore",
-      "favorites": "Favorites"
+      "favorites": "Favourites"
     },
     "programs-table": "All programs",
     "programs-header": {
@@ -348,7 +348,7 @@
     "title": "Funds",
     "tabs": {
       "explore": "Explore",
-      "favorites": "Favorites"
+      "favorites": "Favourites"
     },
     "funds-header": {
       "title": "Name",
@@ -369,12 +369,12 @@
     },
     "list": {
       "subtitle": "Further levels are given according to the algorithm:",
-      "list-item-1": "All of the managers are levelled up only on the first day of each month.",
-      "list-item-2": "A manager can go up only one level at a time.",
-      "list-item-3": "In order to level-up, you need to end up in the top 10% of investment programs ranked by profit among all of the other competing programs of the same level.",
+      "list-item-1": "All managers are levelled up only on the first day of each month.",
+      "list-item-2": "A manager can only progress one level at a time.",
+      "list-item-3": "In order to level up, you need to end up in the top 10% of investment programs ranked by profit among all of the other competing programs of the same level.",
       "list-item-4": "Profit is calculated as a percentage and is calculated over a certain period. The general rule of thumb is that the period of time is calculated as “managers’ level — 1 month”. For example: if your current level is 4, then the last three months of your trading will be counted.",
       "list-item-5": "All programs that have completed at least one trade participate in the rating.",
-      "list-item-6": "Each level needs to have a minimum of ten participators. You can’t level up if fewer than ten people are competing against you.",
+      "list-item-6": "Each level needs to have a minimum of ten participants. You can’t level up if fewer than ten people are competing against you.",
       "list-item-7": "The higher a manager’s level is — the more funds he can attract."
     },
     "table-header": {
@@ -384,10 +384,10 @@
       "total-profit": "Total profit"
     },
     "titles": {
-      "main": "About levels",
-      "table": "Requirements for levels",
-      "limits": "Levels limits",
-      "limit": "Invest limit"
+      "main": "About Levels",
+      "table": "Requirements for Levels",
+      "limits": "Level limits",
+      "limit": "Investment limits"
     },
     "select": "Show in:"
   },
@@ -399,7 +399,7 @@
       "edit-fund": "Edit details",
       "strategy": "Strategy",
       "assets": "Assets",
-      "addToFavorites": "Add to favorites",
+      "addToFavorites": "Add to favourites",
       "notifications": "Notifications",
       "avToInvest": "Av. to invest",
       "entryFee": "Entry fee",
@@ -417,8 +417,8 @@
       "profit": "Profit",
       "status": "Status",
       "withdraw": "Withdraw",
-      "close-fund": "Close fund",
-      "close-fund-notification": "You are about to close the fund. After you confirm this, all your funds will be withdrawn, no one will be able to invest in the fund anymore, investors will still be able to withdraw their funds with a zero commission.",
+      "close-fund": "Close Fund",
+      "close-fund-notification": "You are about to close the fund. After you confirm this, all your funds will be withdrawn, no one will be able to invest in the fund anymore, but investors will still be able to withdraw their funds with a zero commission.",
       "close-fund-notification-success": "Request to close the fund was sent successfully.",
       "withdraw-notice-text": "You can withdraw only the invested funds, the profit will be withdrawn to your account at the end of the period automatically"
     },
@@ -467,13 +467,13 @@
     "close-period": {
       "title": "Close Period",
       "body": "Do you really want to restart current period?",
-      "notification-success": "Request to close the period was sent successfully."
+      "notification-success": "Request to restart the period was sent successfully."
     },
     "description": {
       "stop-out-level": "Stop out",
       "entry-fee-levels": "The entry fee is disabled for programs that have not reached level 3. It will be charged only for programs with level 3 or higher.",
       "strategy": "Strategy",
-      "addToFavorites": "Add to favorites",
+      "addToFavorites": "Add to favourites",
       "notifications": "Notifications",
       "avToInvest": "Av. to invest",
       "entryFee": "Entry fee",
@@ -489,17 +489,17 @@
       "profit": "Profit",
       "status": "Status",
       "withdraw": "Withdraw",
-      "withdraw-notice-text": "You can withdraw only the invested funds, the profit will be withdrawn to your account at the end of the period automatically",
+      "withdraw-notice-text": "You can only withdraw the invested funds, the profit will be withdrawn to your account at the end of the period automatically",
       "edit-program": "Edit Program",
       "close-program": "Close Program",
-      "follow-trade": "Follow trades",
+      "follow-trade": "Follow Trades",
       "unfollow": "Unfollow",
       "signal-provider": {
         "title": "Make a signal provider",
-        "disclaimer": "Parameters can not be changed in the future"
+        "disclaimer": "Parameters cannot be changed in the future."
       },
       "change-password": "Change password",
-      "close-program-notification": "Investment program will be closed after this reporting period. Current investment requests will be cancelled and new requests won’t be accepted. Profit and funds from the trading account will be deposited to investors and manager according to their shares.",
+      "close-program-notification": "Investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be deposited to investors and manager according to their shares.",
       "close-program-notification-success": "Request to close the program was sent successfully.",
       "requests-completed": "All requests completed successfully"
     },
@@ -619,7 +619,7 @@
     "settings": {
       "title": "Settings",
       "profile-image": "Profile image",
-      "image-requirements": "At least 300 x 300px PNG or JPG file. The maximum file size is 2MB.",
+      "image-requirements": "Image resolution should be at least 300 x 300px PNG or JPG file. The maximum file size is 2MB.",
       "save-photo": "Save photo",
       "image-success-save-message": "The photo has just been successfully changed.",
       "logout-from-another-devices": "Logout from other devices",
@@ -639,8 +639,8 @@
     "deposit": "Deposit",
     "converting": {
       "title": "Converting",
-      "from": "Written off wallet",
-      "to": "Credited to the wallet"
+      "from": "Converting from",
+      "to": "Converting to"
     },
     "profit": "Profit program",
     "copy": {
@@ -690,7 +690,7 @@
     "invested-value": "Invested",
     "available": "Available",
     "pending": "Pending",
-    "add-funds": "Add funds",
+    "deposit": "Deposit",
     "withdraw": "Withdraw",
     "transfer": "Transfer",
     "tabs": {
@@ -736,7 +736,7 @@
     },
     "buttons": {
       "internal-transfer": "Internal transfer",
-      "add-funds": "Add funds",
+      "deposit": "Deposit",
       "withdraw": "Withdraw"
     },
     "transaction-actions": {
@@ -756,8 +756,8 @@
       "Cancelled": "Cancelled"
     },
     "alert-messages": {
-      "resend-email-success": "A withdrawal confirmation letter has just been resent to your email address.",
-      "cancel-request-success": "The withdrawal request was successfully canceled"
+      "resend-email-success": "A withdrawal confirmation letter was resent to your email address.",
+      "cancel-request-success": "The withdrawal request was successfully cancelled."
     },
     "settings": {
       "label": "Using GVT to pay for fees"
@@ -817,7 +817,7 @@
   },
   "rating-page": {
     "title": "Rating",
-    "pretendents-title": "Pretendents",
+    "pretendents-title": "Contenders",
     "self-pretendents-title": "Your programs",
     "programCounts": "All programs",
     "quota": "Quota",
@@ -830,7 +830,7 @@
     "type": "Type",
     "download-app": "Download App",
     "scan-code": "Scan code",
-    "enter-code": "Enter the 6-digit code it gives you here to activate:",
+    "enter-code": "Enter the 6-digit authentication code:",
     "alt-code": "Or enter this secret key into your Google Authenticator device:",
     "google-code": "6-digit code",
     "password": "Enter your password",
@@ -838,15 +838,15 @@
     "password-required": "Password is required",
     "disable": {
       "title": "Disable two-factor authentication",
-      "success": "You have successfully disabled the two factor authentication. However, we strongly recommend you keep it enabled. This can protect your funds from being stolen."
+      "success": "You have successfully disabled the two-factor authentication. However, we strongly recommend you keep it enabled. This can protect your funds from being stolen."
     },
     "codes": {
-      "copy-success": "Recovery codes was copied to the clipboard successfully.",
+      "copy-success": "Recovery codes were successfully copied to the clipboard.",
       "copy-error": "Failed to copy data to the clipboard.",
       "generate-recovery-codes": "Generate recovery codes",
       "title": "Please read carefully",
-      "successfully": "You have just successfully configured the two factor authentication. We will ask you for the 2FA Code in any potentially dangerous situation, such as logging in or withdrawing funds.",
-      "recovery_codes": "You can find your recovery codes below. You can use them in case you lost your 2FA key or lost your phone with the 2FA application installed. Each recovery code can be used only once. Save these codes on paper and put it in a safe place. If you are not sure that you can provide a secure place for the recovery codes, it would be safier to just ignore these codes.",
+      "successfully": "You have just successfully configured the two-factor authentication. We will ask you for the 2FA Code in any potentially dangerous situation, such as logging in or withdrawing funds.",
+      "recovery_codes": "You can find your recovery codes below. You can use them in case you lost your 2FA key or lost your phone with the 2FA application installed. Each recovery code can be used only once. Save these codes on paper and put it in a safe place. If you are not sure that you can provide a secure place for the recovery codes, it would be safer to ignore these codes.",
       "warning": "WARNING: We do not store your recovery codes. If you lost the access to your 2FA, it is most likely that we couldn't help you to return the access to your account."
     }
   },
@@ -937,7 +937,7 @@
     },
     "signup": {
       "username-field-text": "Username",
-      "footer-text": "Have an account already?",
+      "footer-text": "Already have an account?",
       "title": "Sign up",
       "email-field-text": "Email address",
       "password-field-text": "Password",
@@ -984,10 +984,10 @@
     },
     "password-restore": {
       "title": "Restore password",
-      "success-alert-message": "Your password changed successfully!",
+      "success-alert-message": "Your password was successfully changed!",
       "resend-email-alert-message": "Information has been re-sent to your email address.",
       "forgot-password": {
-        "text": "Just enter the email address you used to create your account.",
+        "text": "Just enter the email address you've used to create your account.",
         "email-field-text": "Email address",
         "confirm-button-text": "Restore",
         "back-button-text": "Back"
@@ -1010,7 +1010,7 @@
       "email-pending": {
         "text-section-1": "If a user with this email address exists, we sent an email with a link to reset your password.",
         "text-section-2": "Please check your inbox for a confirmation email. Click the link in the email to create a new password.",
-        "text-section-3": "If you didn't receive the email, please check the spam folder. Or recheck the email you specified for password resetting.",
+        "text-section-3": "If you didn't receive the email, please check your spam folder. Or recheck the email you specified for the password reset.",
         "email-resend-button-text": "Resend email",
         "confirm-button-text": "Continue",
         "back-button-text": "Back"
@@ -1022,12 +1022,12 @@
       "password": "Password",
       "confirm-password": "Confirm password",
       "new-password": "New password",
-      "success-alert": "Password was changed"
+      "success-alert": "Password was successfully changed"
     },
     "email-confirm": {
       "title": "Email confirm",
       "success-alert-message": "Email address successfully verified",
-      "error-during-confirmation": "An error occurred during confirmation of email:"
+      "error-during-confirmation": "An error occurred during the confirmation of email:"
     }
   },
   "level-tooltip": {
@@ -1147,13 +1147,13 @@
 
       "get-started": {
         "title": "Get started",
-        "text-1": "There's no data right now.",
+        "text-1": "There's no such data right now.",
         "text-2": "Find the program or the fund to invest or make a deposit first",
         "deposit": "Deposit",
         "programs": "Go to the programs"
       },
       "portfolio": "Portfolio",
-      "favorite-programs": "Favorite programs",
+      "favorite-programs": "Favourite programs",
       "portfolio-events": {
         "title": "Portfolio Events",
         "see-all-button": "See All",
@@ -1184,7 +1184,7 @@
           "ManagerInvest": "Manager invest",
           "EntranceFee": "Entrance fee",
           "AssetStarted": "Asset started",
-          "InvestorInvest": "Investor invest",
+          "InvestorInvest": "Investor investment",
           "AssetFinished": "Asset finished",
           "ProgramPeriodStarts": "Program period starts",
           "ProgramPeriodEnds": "Program period ends"
@@ -1202,7 +1202,7 @@
     "auth-quotes": {
       "0": {
         "quote": "Rule No. 1: Never lose money. Rule No. 2: Never forget rule No.1",
-        "author": "Warren Buffet"
+        "author": "Warren Buffett"
       },
       "1": {
         "quote": "Successful investing is about managing risk, not avoiding it.",
@@ -1230,7 +1230,7 @@
       "programs": "Programs",
       "pending-tooltip": "The program is being created.",
       "portfolio": "Portfolio",
-      "favorite-programs": "Favorite programs",
+      "favorite-programs": "Favourite programs",
       "create-program-text": "Do not have any programs yet",
       "create-fund-text": "Do not have any fund yet",
       "chart-section": {
@@ -1267,7 +1267,7 @@
       },
       "get-started": {
         "title": "Get started",
-        "text-1": "There's no data right now.",
+        "text-1": "There's no such data right now.",
         "text-2": "Create your first program or fund",
         "deposit": "Deposit"
       },
@@ -1316,7 +1316,7 @@
     },
     "create-program-page": {
       "title": "Create Program",
-      "navigation-back-text": "All data will be deleted. Do you want to continue?",
+      "navigation-back-text": "All of the data will be deleted. Do you want to continue?",
       "tabs": {
         "select-broker": "Select broker",
         "settings": "Settings"
@@ -1380,11 +1380,11 @@
           "stop-out-level-description": "Stop Out is the maximum drawdown level for the reporting period at which the program is stopped, and all investments return to investors."
         },
         "validation": {
-          "stop-out-required": "Stop out is required",
+          "stop-out-required": "Stop Out is required",
           "stop-out-is-large": "Must be less than 100",
           "stop-out-is-zero": "Must be more than 0",
-          "amount-required": "Amount out is required",
-          "amount-is-large": "Must be less than available in wallet",
+          "amount-required": "Amount is required",
+          "amount-is-large": "Amount must be available in Wallet",
           "amount-is-zero": "Amount must be greater or equal {{min}}",
           "title-required": "Title is required",
           "title-is-long": "Title is too long",
@@ -1408,15 +1408,15 @@
         }
       },
       "notifications": {
-        "create-success": "Successful program creating.",
+        "create-success": "Program was successfully created.",
         "validate-error": "Please fix all the errors on the screen before proceeding"
       }
     },
     "create-fund-page": {
       "title": "Create Fund",
-      "navigation-back-text": "All data will be deleted. Do you want to continue?",
+      "navigation-back-text": "All of the data will be deleted. Do you want to continue?",
       "notifications": {
-        "create-success": "Successful program creating.",
+        "create-success": "Program was successfully created.",
         "validate-error": "Please fix all the errors on the screen before proceeding"
       },
       "tabs": {
@@ -1445,13 +1445,13 @@
           "description-requirements": "Requirement from 20 to 500 symbols",
           "brokers-leverage": "Broker's leverage",
           "period": "Period",
-          "upload-logo": "Upload fund logo",
+          "upload-logo": "Upload the fund logo",
           "upload-logo-rules": "At least 300 x 300px PNG or JPG file. The maximum file size is 2MB.",
           "entry-fee": "Entry fee",
           "success-fee": "Success fee",
           "exit-fee": "Exit fee",
           "deposit-amount": "Deposit amount",
-          "available-in-wallet": "Available in wallet"
+          "available-in-wallet": "Available in the wallet"
         },
         "validation": {
           "title-required": "Title is required",
@@ -1540,13 +1540,13 @@
         }
       },
       "notifications": {
-        "edit-success": "Successful fund editing."
+        "edit-success": "Fund was successfully edited."
       }
     },
     "reallocate": {
       "title": "Reallocate",
       "apply": "Confirm",
-      "success-alert-message": "Your assets reallocated successfully!"
+      "success-alert-message": "Your assets were successfully reallocated!"
     }
   }
 }
