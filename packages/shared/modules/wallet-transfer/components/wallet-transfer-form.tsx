@@ -67,7 +67,6 @@ class WalletTransferForm extends React.Component<Props> {
     if (amount === availableToWithdrawalFrom)
       setFieldValue("transferAll", true);
     else setFieldValue("transferAll", false);
-    setFieldValue("amount", amount);
   };
 
   onChangeDestinationId = (event: React.ChangeEvent<HTMLInputElement>) => {
