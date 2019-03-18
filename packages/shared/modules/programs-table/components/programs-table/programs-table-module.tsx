@@ -1,3 +1,4 @@
+import { ProgramDetails } from "gv-api-web";
 import * as React from "react";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import TableModule from "shared/components/table/components/table-module";
@@ -6,7 +7,6 @@ import { IPaging } from "shared/components/table/helpers/paging.helpers";
 import ProgramTableHeaderCell from "./program-table-header-cell";
 import ProgramTableRow from "./program-table-row";
 import { PROGRAMS_COLUMNS } from "./programs.constants";
-import { ProgramDetails } from "gv-api-web";
 
 export interface TableToggleFavorite {
   (program: ProgramDetails, updateRow: (row: any) => void): (

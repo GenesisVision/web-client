@@ -5,6 +5,9 @@ export const DATE_RANGE_FILTER_NAME = "dateRange";
 
 export const SERVER_DATE_RANGE_MIN_FILTER_NAME = "from";
 export const SERVER_DATE_RANGE_MAX_FILTER_NAME = "to";
+
+export type SERVER_DATE_NAME = "from" | "to" | "dateFrom" | "dateTo";
+
 export const DateRangeFilterTypes = {
   all: "all",
   lastMonth: "lastMonth",
@@ -31,3 +34,9 @@ export const DEFAULT_DATE_RANGE_FILTER_VALUE: IDataRangeFilterValue = {
 };
 
 export type DateRangeFilterType = IDataRangeFilterValue;
+
+export type ComposedRequestDataRangeNames = SERVER_DATE_NAME;
+export type ComposedRequestDataRangeValues = string | Date;
+export type ComposedRequestDataRangeValue = {
+  [key in SERVER_DATE_NAME]?: ComposedRequestDataRangeValues
+};

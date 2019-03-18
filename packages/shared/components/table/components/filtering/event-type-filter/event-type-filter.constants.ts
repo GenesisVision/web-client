@@ -41,3 +41,6 @@ export const MANAGER_EVENT_TYPE_FILTER_VALUES: SelectFilterValue<
 export const EVENT_TYPE_FILTER_DEFAULT_VALUE = "All";
 
 export type EventTypeFilterType = INVESTOR_EVENT_TYPE & MANAGER_EVENT_TYPE;
+
+export type ComposedRequestEventTypeName = "type";
+export type ComposedRequestEventTypeValue = EventTypeFilterType;

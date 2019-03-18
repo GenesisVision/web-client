@@ -13,7 +13,7 @@ import { IComposeDefaultFilter } from "../components/table.types";
 
 interface IComposeRequestFiltersProps {
   paging: IPaging;
-  sorting: string | Object;
+  sorting: string;
   filtering: FilteringType;
   defaultFilters: IComposeDefaultFilter[];
 }
