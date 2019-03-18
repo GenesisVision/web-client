@@ -10,7 +10,7 @@ import authService from "shared/services/auth-service";
 import GoogleAuthCodes from "../google-auth/google-auth-codes";
 import GoogleAuthStepsContainer from "../google-auth/google-auth-steps/google-auth-steps";
 import * as twoFactorServices from "../services/2fa.service.js";
-import DialogLoaderGoogleAuthStepsContainer from "./google-auth-steps/dialog-loader-google-auth-steps";
+import DialogLoaderGoogleAuthSteps from "./google-auth-steps/dialog-loader-google-auth-steps";
 
 class GoogleAuthContainer extends Component {
   state = {
@@ -45,7 +45,7 @@ class GoogleAuthContainer extends Component {
   };
 
   render() {
-    if (!this.state.data) return <DialogLoaderGoogleAuthStepsContainer />;
+    if (!this.state.data) return <DialogLoaderGoogleAuthSteps />;
     const { authenticatorUri, sharedKey, codes } = this.state.data;
     return !codes ? (
       <GoogleAuthStepsContainer

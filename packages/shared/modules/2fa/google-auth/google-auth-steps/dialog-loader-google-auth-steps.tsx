@@ -29,8 +29,4 @@ const mapStateToProps = ({
   innerWidth: ui.innerWidth
 });
 
-const DialogLoaderGoogleAuthStepsContainer = connect(mapStateToProps)(
-  DialogLoaderGoogleAuthSteps
-);
-
-export default DialogLoaderGoogleAuthStepsContainer;
+export default connect(mapStateToProps)(DialogLoaderGoogleAuthSteps);
