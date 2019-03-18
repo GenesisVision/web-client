@@ -1,4 +1,9 @@
-import { FilteringType, TFilter } from "../components/filtering/filter.type";
+import {
+  ComposeFiltersType,
+  ComposeFiltersTypeFlat,
+  FilteringType,
+  TFilter
+} from "../components/filtering/filter.type";
 import { IComposeDefaultFilter } from "../components/table.types";
 
 export const RANGE_FILTER_TYPE = "RANGE_FILTER_TYPE";
@@ -22,25 +27,26 @@ export const composeFilteringActionType = (actionType: string): string =>
 export const composeFilters = (
   allFilters: IComposeDefaultFilter[],
   filtering: FilteringType
-): any => {
+): ComposeFiltersTypeFlat => {
   if (!allFilters) return {};
-  return allFilters.reduce((accum, cur) => {
-    const { name, type, composeRequestValue } = cur;
+  return allFilters.reduce((accum: ComposeFiltersType, cur) => {
+    const { name = "", type, composeRequestValue } = cur;
     const processedFilterValue = processFilterValue({
+      //@ts-ignore
       name,
       type,
       composeRequestValue,
+      //@ts-ignore
       value: filtering[name]
     });
     if (processedFilterValue !== undefined) {
       accum = { ...accum, ...processedFilterValue };
     }
-
     return accum;
   }, {});
 };
 
-const processFilterValue = (filter: TFilter<any>): Object => {
+const processFilterValue = (filter: TFilter<any>): ComposeFiltersType => {
   let requestValue = undefined;
   switch (filter.type) {
     case FILTER_TYPE.RANGE:
@@ -52,6 +58,7 @@ const processFilterValue = (filter: TFilter<any>): Object => {
       }
       break;
     case FILTER_TYPE.CUSTOM:
+      //@ts-ignore
       const requestValues =
         filter.composeRequestValue && filter.composeRequestValue(filter.value);
       if (requestValues !== undefined) {
@@ -70,11 +77,11 @@ const processFilterValue = (filter: TFilter<any>): Object => {
   }
   return requestValue;
 };
-
+//@ts-ignore
 export const updateFilter = (
   oldFilters: FilteringType,
   newFilter: TFilter<any>
-) => {
+): FilteringType => {
   const { name, value } = newFilter;
   const existingFilterValue = oldFilters[name];
   if (JSON.stringify(existingFilterValue !== JSON.stringify(value))) {

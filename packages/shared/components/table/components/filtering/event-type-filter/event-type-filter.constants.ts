@@ -32,7 +32,7 @@ export const INVESTOR_EVENT_TYPE_FILTER_VALUES: SelectFilterValue<
 >[] = Object.values(INVESTOR_EVENT_TYPE).map(x => ({ value: x, label: x }));
 
 export const MANAGER_EVENT_TYPE_FILTER_VALUES: SelectFilterValue<
-  INVESTOR_EVENT_TYPE
+  MANAGER_EVENT_TYPE
 >[] = Object.values(MANAGER_EVENT_TYPE).map(x => ({
   value: x,
   labelKey: `manager.dashboard-page.portfolio-events.types.${x}`
@@ -41,3 +41,6 @@ export const MANAGER_EVENT_TYPE_FILTER_VALUES: SelectFilterValue<
 export const EVENT_TYPE_FILTER_DEFAULT_VALUE = "All";
 
 export type EventTypeFilterType = INVESTOR_EVENT_TYPE & MANAGER_EVENT_TYPE;
+
+export type ComposedRequestEventTypeName = "type";
+export type ComposedRequestEventTypeValue = EventTypeFilterType;

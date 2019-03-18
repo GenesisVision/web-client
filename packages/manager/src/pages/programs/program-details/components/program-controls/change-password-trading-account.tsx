@@ -1,23 +1,19 @@
 import "./signal-provider-controls.scss";
 
-import { ProgramDetailsFull } from "gv-api-web";
 import ChangePasswordTradingAccountPopup from "modules/change-password-trading-account/change-password-trading-account-popup";
 import React, { Component, Fragment } from "react";
 import DetailsChangePassword from "shared/components/details/details-description-section/details-description/controls/details-change-password";
+import { IChangePasswordTradingAccountProps } from "shared/components/programs/program-details/program-details.types";
 
-interface ChangePasswordTradingAccountControlProps {
-  programDescription: ProgramDetailsFull;
-}
-
-interface IChangePasswordTradingAccountControlState {
+interface IChangePasswordTradingAccountState {
   isOpenChangePasswordTradingAccountPopup: boolean;
 }
 
-class ChangePasswordTradingAccountControl extends Component<
-  ChangePasswordTradingAccountControlProps,
-  IChangePasswordTradingAccountControlState
+class ChangePasswordTradingAccount extends Component<
+  IChangePasswordTradingAccountProps,
+  IChangePasswordTradingAccountState
 > {
-  constructor(props: ChangePasswordTradingAccountControlProps) {
+  constructor(props: IChangePasswordTradingAccountProps) {
     super(props);
     this.state = {
       isOpenChangePasswordTradingAccountPopup: false
@@ -50,4 +46,4 @@ class ChangePasswordTradingAccountControl extends Component<
   }
 }
 
-export default ChangePasswordTradingAccountControl;
+export default ChangePasswordTradingAccount;

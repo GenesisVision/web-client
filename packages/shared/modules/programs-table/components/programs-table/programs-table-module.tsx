@@ -1,3 +1,4 @@
+import { ProgramDetails } from "gv-api-web";
 import * as React from "react";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import TableModule from "shared/components/table/components/table-module";
@@ -6,6 +7,13 @@ import { IPaging } from "shared/components/table/helpers/paging.helpers";
 import ProgramTableHeaderCell from "./program-table-header-cell";
 import ProgramTableRow from "./program-table-row";
 import { PROGRAMS_COLUMNS } from "./programs.constants";
+
+export interface TableToggleFavorite {
+  (program: ProgramDetails, updateRow: (row: any) => void): (
+    programId: string,
+    isFavorite: boolean
+  ) => void;
+}
 
 interface IProgramTableModuleProps {
   getItems(): void;
@@ -19,12 +27,9 @@ interface IProgramTableModuleProps {
   paging: IPaging;
   isAuthenticated: boolean;
   showRating: boolean;
-  title?: string;
+  title: string;
   disableTitle?: boolean;
-  toggleFavorite(
-    programId: string,
-    updateRow: (row: any) => void
-  ): (programId: string, isFavorite: boolean) => void;
+  toggleFavorite: TableToggleFavorite;
 }
 
 class ProgramTableModule extends React.Component<IProgramTableModuleProps> {
@@ -60,7 +65,10 @@ class ProgramTableModule extends React.Component<IProgramTableModuleProps> {
             isAuthenticated={isAuthenticated}
           />
         )}
-        renderBodyRow={(program, updateRow) => (
+        renderBodyRow={(
+          program,
+          updateRow: any //TODO fix updateRow
+        ) => (
           <ProgramTableRow
             showRating={showRating}
             title={title}

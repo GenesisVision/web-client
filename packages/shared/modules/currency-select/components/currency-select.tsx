@@ -18,6 +18,7 @@ class CurrencySelect extends React.Component<ICurrencySelectProps> {
     const { value, onChange, className, currencyValues } = this.props;
     return (
       <Select
+        name="currency"
         className={classNames("currency-select", className)}
         value={value}
         onChange={onChange}

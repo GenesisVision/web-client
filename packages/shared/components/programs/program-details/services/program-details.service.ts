@@ -1,10 +1,14 @@
-import { ProgramsLevelsInfo } from "gv-api-web";
+import { OrderModel, ProgramsLevelsInfo, TradesViewModel } from "gv-api-web";
 import {
   PROGRAM_DETAILS_ROUTE,
   PROGRAM_SLUG_URL_PARAM_NAME
 } from "pages/programs/programs.routes";
 import { Dispatch } from "redux";
 import { getDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
+import {
+  TableItems,
+  mapToTableItems
+} from "shared/components/table/helpers/mapper";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import RootState from "shared/reducers/root-reducer";
 import managerApi from "shared/services/api-client/manager-api";
@@ -71,9 +75,12 @@ export const getProgramStatistic = (
   });
 };
 
-export const closeProgram = (programId: string, opts: any) => (
-  dispatch: Dispatch
-) => {
+export const closeProgram = (
+  programId: string,
+  opts?: {
+    twoFactorCode?: string | undefined;
+  }
+): Promise<void> => {
   const authorization = authService.getAuthArg();
 
   return managerApi.v10ManagerProgramsByIdClosePost(
@@ -85,7 +92,7 @@ export const closeProgram = (programId: string, opts: any) => (
 
 export const closePeriod = (programId: string, onSuccess: () => void) => (
   dispatch: Dispatch
-) => {
+): Promise<void> => {
   const authorization = authService.getAuthArg();
   return managerApi
     .v10ManagerProgramsByIdPeriodClosePost(programId, authorization)
@@ -107,29 +114,22 @@ export const fetchProgramTrades = (
   id: string,
   filters: any,
   currency: string
-) => {
+): Promise<TableItems<OrderModel>> => {
   return programsApi
     .v10ProgramsByIdTradesGet(id, {
       ...filters,
       currency
     })
-    .then(data => {
-      return Promise.resolve({
-        total: data.total,
-        items: data.trades
-      });
-    });
+    .then(mapToTableItems<OrderModel>("trades"));
 };
 
-export const fetchOpenPositions = (id: string, filters: any) => {
+export const fetchOpenPositions = (
+  id: string,
+  filters: any
+): Promise<TableItems<OrderModel>> => {
   return programsApi
     .v10ProgramsByIdTradesOpenGet(id, { sorting: filters.sorting })
-    .then(data => {
-      return Promise.resolve({
-        total: data.total,
-        items: data.trades
-      });
-    });
+    .then(mapToTableItems<OrderModel>("trades"));
 };
 
 export const fetchInvestmentsLevels = (

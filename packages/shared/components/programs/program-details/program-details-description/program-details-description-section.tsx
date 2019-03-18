@@ -1,9 +1,11 @@
 import "./program-details-description.scss";
 
 import { ProgramDetailsFull } from "gv-api-web";
-import React, { ComponentType, PureComponent } from "react";
+import * as React from "react";
+import { ComponentType, PureComponent } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import DetailsInvestment from "shared/components/details/details-description-section/details-investment/details-investment";
+import { InvestmentDetails } from "shared/components/details/details-description-section/details-investment/details-investment.helpers";
 import { STATUS } from "shared/constants/constants";
 import { PROGRAM } from "shared/constants/constants";
 
@@ -16,9 +18,9 @@ interface IProgramDetailsDescriptionSectionProps
   isAuthenticated: boolean;
   redirectToLogin(): void;
   ProgramControls: ComponentType<any>;
-  ProgramReinvestingWidget: ComponentType<any>;
   ProgramWithdrawContainer: ComponentType<any>;
-  ChangePasswordTradingAccountControl?: ComponentType<any>;
+  ProgramReinvestingWidget?: ComponentType<any>;
+  ChangePasswordTradingAccount?: ComponentType<any>;
 }
 
 class ProgramDetailsDescriptionSection extends PureComponent<
@@ -32,7 +34,7 @@ class ProgramDetailsDescriptionSection extends PureComponent<
       isAuthenticated,
       redirectToLogin,
       ProgramControls,
-      ChangePasswordTradingAccountControl,
+      ChangePasswordTradingAccount,
       ProgramReinvestingWidget,
       ProgramWithdrawContainer
     } = this.props;
@@ -44,9 +46,7 @@ class ProgramDetailsDescriptionSection extends PureComponent<
         <ProgramDetailsDescriptionMain
           programDescription={programDescription}
           isOwnProgram={isOwnProgram}
-          ChangePasswordTradingAccountControl={
-            ChangePasswordTradingAccountControl
-          }
+          ChangePasswordTradingAccount={ChangePasswordTradingAccount}
         />
         <ProgramControls
           programDescription={programDescription}
@@ -70,7 +70,7 @@ class ProgramDetailsDescriptionSection extends PureComponent<
               id={programDescription.id}
               assetCurrency={programDescription.currency}
               accountCurrency={accountCurrency}
-              personalDetails={personalDetails}
+              personalDetails={personalDetails as InvestmentDetails} // TODO fix type InvestmentDetails
               ProgramReinvestingWidget={ProgramReinvestingWidget}
               WithdrawContainer={ProgramWithdrawContainer}
             />

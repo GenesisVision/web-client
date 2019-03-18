@@ -2,52 +2,45 @@ import { WalletData } from "gv-api-web";
 import * as React from "react";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators } from "redux";
-import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { updateWalletTimestamp } from "shared/components/wallet/actions/wallet.actions";
 import { fetchWallets } from "shared/components/wallet/services/wallet.services";
 import { walletTransferRequest } from "shared/modules/wallet-withdraw/services/wallet-withdraw.services";
 import RootState from "shared/reducers/root-reducer";
-import { DeepReadonly } from "utility-types";
 
-import WalletTransferForm, {
-  ITransferFormValues
-} from "./wallet-transfer-form";
+import WalletTransferForm, { TransferFormValues } from "./wallet-transfer-form";
 
-type IWalletTransferContainerStateToProps = DeepReadonly<{
+interface StateProps {
   wallets: WalletData[];
   twoFactorEnabled: boolean;
-}>;
+}
 
-interface IWalletTransferContainerDispatchToProps {
+interface DispatchProps {
   service: {
-    walletTransferRequest(props: ITransferFormValues): Promise<any>;
+    walletTransferRequest(props: TransferFormValues): Promise<any>;
     fetchWallets(): void;
     updateWalletTimestamp(): void;
   };
 }
 
-type IWalletTransferContainerProps = IWalletTransferContainerStateToProps &
-  IWalletTransferContainerDispatchToProps &
-  DeepReadonly<{
-    currentWallet: WalletData;
-    onClose(): void;
-  }>;
+interface OwnProps {
+  currentWallet: WalletData;
+  onClose(): void;
+}
 
-interface IWalletTransferContainerState {
+interface Props extends StateProps, DispatchProps, OwnProps {}
+
+interface State {
   isPending: boolean;
   errorMessage?: string;
 }
 
-class WalletTransferContainer extends React.Component<
-  IWalletTransferContainerProps,
-  IWalletTransferContainerState
-> {
+class WalletTransferContainer extends React.Component<Props, State> {
   state = {
     isPending: false,
     errorMessage: undefined
   };
 
-  handleSubmit = (values: ITransferFormValues) => {
+  handleSubmit = (values: TransferFormValues) => {
     this.setState({ isPending: true });
     walletTransferRequest({ ...values })
       .then(() => {
@@ -66,9 +59,8 @@ class WalletTransferContainer extends React.Component<
   };
 
   render() {
-    const { currentWallet, wallets } = this.props;
+    const { twoFactorEnabled, currentWallet, wallets } = this.props;
 
-    if (!wallets.length) return <DialogLoader />;
     return (
       <WalletTransferForm
         wallets={wallets}
@@ -76,14 +68,13 @@ class WalletTransferContainer extends React.Component<
         disabled={this.state.isPending}
         errorMessage={this.state.errorMessage}
         onSubmit={this.handleSubmit}
+        twoFactorEnabled={Boolean(twoFactorEnabled)}
       />
     );
   }
 }
 
-const mapStateToProps = (
-  state: RootState
-): IWalletTransferContainerStateToProps => {
+const mapStateToProps = (state: RootState): StateProps => {
   if (!state.accountSettings) return { twoFactorEnabled: false, wallets: [] };
   const wallets = state.wallet.info.data ? state.wallet.info.data.wallets : [];
   const twoFactorEnabled = state.accountSettings.twoFactorAuth.data
@@ -99,12 +90,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   )
 });
 
-export default connect<
-  IWalletTransferContainerStateToProps,
-  IWalletTransferContainerDispatchToProps,
-  IWalletTransferContainerProps,
-  RootState
->(
+export default connect<StateProps, DispatchProps, OwnProps, RootState>(
   mapStateToProps,
   mapDispatchToProps
 )(WalletTransferContainer);

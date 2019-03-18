@@ -24,7 +24,7 @@ const addMessage = (
     text: action.text,
     className: action.className,
     isUseLocalization: action.isUseLocalization
-  };
+  } as IMessage;
   return [...state.slice(-2), newMessage];
 };
 

@@ -11,7 +11,7 @@ enum ITEM {
 }
 
 export interface IFollowStatisticItemProps {
-  label: string;
+  label: string | React.ReactNode;
   equivalent?: string | number;
   equivalentCurrency?: string;
   small?: boolean;
@@ -73,7 +73,7 @@ const StatisticItem: React.FC<IFollowStatisticItemProps> = ({
         </div>
       )}
       <div className={generateClasses(ITEM.VALUE, invert)}>{children}</div>
-      {equivalent !== undefined ? (
+      {equivalent !== undefined && equivalentCurrency !== undefined ? (
         <div className="statistics-item__equivalent">
           {
             <NumberFormat

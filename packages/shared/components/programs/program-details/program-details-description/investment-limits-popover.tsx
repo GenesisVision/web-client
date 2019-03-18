@@ -1,16 +1,17 @@
 import { LevelInfo } from "gv-api-web";
 import { GVButton } from "gv-react-components";
-import React, { Fragment, PureComponent } from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import AboutLevelsComponent from "shared/components/about-levels/about-levels";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
+import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 import { fetchInvestmentsLevels } from "../services/program-details.service";
 
 interface IInvestmentLimitsPopoverOwnProps {
-  currency: string;
+  currency: CURRENCIES;
   level: number;
   canLevelUp: boolean;
   closePopover(): void;
@@ -25,7 +26,7 @@ interface IInvestmentLimitsPopoverState {
   isOpenAboutLevels: boolean;
 }
 
-class InvestmentLimitsPopover extends PureComponent<
+class InvestmentLimitsPopover extends React.PureComponent<
   IInvestmentLimitsPopoverProps,
   IInvestmentLimitsPopoverState
 > {
@@ -64,7 +65,7 @@ class InvestmentLimitsPopover extends PureComponent<
     )!.investmentLimit;
 
     return (
-      <Fragment>
+      <React.Fragment>
         <div className="popover-levels">
           <div className="popover-levels__block">
             <h4 className="popover-levels__title">
@@ -98,9 +99,9 @@ class InvestmentLimitsPopover extends PureComponent<
               color="secondary"
               className="popover-levels__about"
             >
-              <Fragment>
+              <React.Fragment>
                 {t("program-details-page.popover.about-levels")} &#8250;
-              </Fragment>
+              </React.Fragment>
             </GVButton>
           </div>
         </div>
@@ -110,7 +111,7 @@ class InvestmentLimitsPopover extends PureComponent<
           currency={currency}
           investmentsLimits={investmentsLimits}
         />
-      </Fragment>
+      </React.Fragment>
     );
   }
 }

@@ -1,6 +1,6 @@
 import "./phone-verification.scss";
 
-import { FormikProps, withFormik } from "formik";
+import { FormikBag, FormikProps, withFormik } from "formik";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -8,24 +8,23 @@ import NumberFormat from "react-number-format";
 import { compose } from "redux";
 import { number, object } from "yup";
 
-export interface IPhoneVerificationFormValues {
+interface FormValues {
   code: string;
 }
 
-export interface IPhoneVerificationFormProps {
+interface FormProps extends FormikProps<FormValues> {}
+
+interface OwnProps {
   phoneNumber: string;
   errorMessage?: string;
-  onResendClick?(): void;
+  onResendClick(): void;
   disabledResend?: boolean;
   onSubmit(code: string): void;
 }
 
-class PhoneVerificationForm extends React.Component<
-  IPhoneVerificationFormProps &
-    InjectedTranslateProps &
-    IPhoneVerificationFormValues &
-    FormikProps<IPhoneVerificationFormValues>
-> {
+interface Props extends InjectedTranslateProps, OwnProps, FormProps {}
+
+class PhoneVerificationForm extends React.Component<Props> {
   componentDidMount() {
     this.props.onResendClick();
   }
@@ -83,22 +82,21 @@ class PhoneVerificationForm extends React.Component<
   }
 }
 
-export default compose<React.ComponentType<IPhoneVerificationFormProps>>(
+export default compose<React.ComponentType<OwnProps>>(
   translate(),
-  withFormik({
+  withFormik<Props, FormValues>({
     displayName: "phone-verification",
     mapPropsToValues: () => ({
       code: ""
     }),
-    validationSchema: ({ t }) =>
+    validationSchema: (props: Props) =>
       object().shape({
-        code: number().required(t("profile-page.verification.phone.required"))
+        code: number().required(
+          props.t("profile-page.verification.phone.required")
+        )
       }),
-    handleSubmit: (
-      values,
-      { props }: { props: IPhoneVerificationFormProps }
-    ) => {
-      props.onSubmit(values.code);
+    handleSubmit: (values, bag) => {
+      bag.props.onSubmit(values.code);
     }
   })
 )(PhoneVerificationForm);

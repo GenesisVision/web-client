@@ -15,7 +15,9 @@ export const FUND_NOTIFICATIONS_ROUTE = `${NOTIFICATIONS_ROUTE}/fund/:id`;
 export const PROGRAMS_FACET_ROUTE = `${PROGRAMS_ROUTE}/facets/:${PROGRAM_SLUG_URL_PARAM_NAME}`;
 export const FUNDS_FACET_ROUTE = `${FUNDS_ROUTE}/facets/:${FUNDS_SLUG_URL_PARAM_NAME}`;
 
-export const composeUrl = (route, slugParamName) => slugUrl =>
+export const composeUrl = (route: string, slugParamName: string) => (
+  slugUrl: string
+) =>
   replaceParams(route, {
     [`:${slugParamName}`]: slugUrl
   });

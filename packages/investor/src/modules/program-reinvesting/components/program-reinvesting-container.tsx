@@ -6,13 +6,9 @@ import {
   IProgramDetailContext,
   ProgramDetailContext
 } from "shared/components/details/helpers/details-context";
+import { IProgramReinvestingContainerOwnProps } from "shared/components/programs/program-details/program-details.types";
 
 import { toggleReinvesting } from "../services/program-reinvesting.service";
-
-interface IProgramReinvestingContainerOwnProps {
-  programId: string;
-  isReinvesting: boolean;
-}
 
 interface IProgramReinvestingContainerProps
   extends IProgramReinvestingContainerOwnProps,
@@ -34,7 +30,7 @@ class ProgramReinvestingContainer extends React.PureComponent<
       isPending: false
     };
   }
-  toggleReinvesting = (updateDetails: any) => (value: boolean) => {
+  toggleReinvesting = (updateDetails: () => void) => (value: boolean) => {
     const { programId } = this.props;
     this.setState({ isPending: true, isReinvesting: value });
     toggleReinvesting(programId, value)
@@ -47,7 +43,7 @@ class ProgramReinvestingContainer extends React.PureComponent<
       });
   };
 
-  onReinvestingLabelClick = (updateDetails: any) => () =>
+  onReinvestingLabelClick = (updateDetails: () => void) => () =>
     this.toggleReinvesting(updateDetails)(!this.state.isReinvesting);
 
   render() {

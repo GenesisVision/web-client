@@ -5,9 +5,9 @@ import Status from "shared/components/status/status";
 import filesService from "shared/services/file-service";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-import { ITransactionDetailsProps } from "./transaction-details";
+import { TransactionDetailsProps } from "./transaction-details";
 
-const ConvertingDetails = (props: ITransactionDetailsProps) => {
+const ConvertingDetails = (props: TransactionDetailsProps) => {
   const { data, t } = props;
   return (
     <React.Fragment>

@@ -2,11 +2,14 @@ import "./fund-asset-tooltip.scss";
 
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
-import { CURRENCY_VALUES } from "shared/modules/currency-select/currency-select.constants";
+import {
+  CURRENCIES,
+  CURRENCY_VALUES
+} from "shared/modules/currency-select/currency-select.constants";
 
 interface IFundAssetTooltipProps {
   name: string;
-  currency: string;
+  currency: CURRENCIES;
 }
 
 const FundAssetTooltip: React.FC<

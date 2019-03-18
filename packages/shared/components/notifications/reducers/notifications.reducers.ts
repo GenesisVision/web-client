@@ -16,7 +16,7 @@ type SkipTake = {
 };
 
 const optionsReducer = (
-  options: SkipTake = { take: TAKE_COUNT, skip: 0 },
+  options: SkipTake = { take: TAKE_COUNT, skip: 0 } as SkipTake,
   action: any
 ) => {
   if (action.type === SET_NOTIFICATIONS_OPTIONS) {
@@ -27,7 +27,7 @@ const optionsReducer = (
 
 // TODO: добавить нормализацию, когда буду уникальные ID
 const addNotificationsReducer = (
-  notifications: NotificationViewModel[] = [],
+  notifications: NotificationViewModel[] = [] as NotificationViewModel[],
   action: any
 ): NotificationViewModel[] => {
   switch (action.type) {

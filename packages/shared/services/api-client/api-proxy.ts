@@ -5,8 +5,9 @@ const withApiProxy = (api: any) => {
     get(target, property) {
       const originalMethod = target[property];
       if (typeof originalMethod !== "function") return originalMethod;
-      return (...args) => {
-        return originalMethod.apply(target, args).catch(ex => {
+      return (...args: any[]) => {
+        // TODO fix types
+        return originalMethod.apply(target, args).catch((ex: any) => {
           return Promise.reject({
             ...handleErrorResponse(ex.response)
           });

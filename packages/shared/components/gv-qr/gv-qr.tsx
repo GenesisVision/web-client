@@ -30,8 +30,7 @@ const GVqr: React.FC<IGVqr> = ({
   >
     {value ? (
       <QRCode
-        className="gv-qr__code"
-        value={value}
+        value={value.toString()}
         bgColor={backgroundColor}
         fgColor={figureColor}
         size={size}

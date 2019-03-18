@@ -1,9 +1,10 @@
-import * as moment from "moment";
+import moment from "moment";
 import { DurationInputArg2 } from "moment";
 
 import { FILTER_TYPE } from "../../../helpers/filtering.helpers";
 import { IComposeDefaultFilter } from "../../table.types";
 import {
+  ComposedRequestDataRangeValue,
   DATA_RANGE_FILTER_TYPES,
   DATE_RANGE_FILTER_NAME,
   DEFAULT_DATE_RANGE_FILTER_VALUE,
@@ -27,7 +28,7 @@ export const validateDateRange = (value: IDataRangeFilterValue): boolean => {
 };
 
 const dateFrom = (
-  subtract: DurationInputArg2,
+  subtract?: DurationInputArg2,
   date: moment.MomentInput = new Date()
 ): string =>
   moment(date)
@@ -44,11 +45,11 @@ const dateTo = (): string =>
 export const composeRequestValueFunc = (
   fromFilterName: string = SERVER_DATE_RANGE_MIN_FILTER_NAME,
   toFilterName: string = SERVER_DATE_RANGE_MAX_FILTER_NAME
-) => (value: IDataRangeFilterValue): Object => {
+) => (value: IDataRangeFilterValue): ComposedRequestDataRangeValue => {
   switch (value.type) {
     case DATA_RANGE_FILTER_TYPES.ALL:
       return {
-        [fromFilterName]: dateFrom(null, 20181001),
+        [fromFilterName]: dateFrom(undefined, 20181001),
         [toFilterName]: dateTo()
       };
     case DATA_RANGE_FILTER_TYPES.LAST_MOUTH:

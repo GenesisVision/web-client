@@ -3,38 +3,40 @@ import "cropperjs/dist/cropper.css";
 import "./input-image.scss";
 
 import classNames from "classnames";
+import cropperjs from "cropperjs";
 import * as React from "react";
 import Cropper from "react-cropper";
-import Dropzone from "react-dropzone";
+import Dropzone, { FileWithPreview } from "react-dropzone";
+
 import InputImageDefault from "./input-image-default";
 
-interface IInputImageProps {
+interface InputFileData {
+  cropped?: any;
+  src: string | ArrayBuffer | null;
+  filename?: string;
+  filetype?: any;
+  isNew?: boolean;
+  isDefault?: boolean;
+  width?: number;
+  height?: number;
+  size?: number;
+}
+
+interface InputImageProps {
   className: string;
-  value: { [keys: string]: any };
+  value: InputFileData;
   defaultImage: any;
   error: string;
-  onChange(
-    name: string,
-    data: {
-      cropped?: any;
-      src?: string | ArrayBuffer;
-      filename?: string;
-      filetype?: any;
-      isNew?: boolean;
-      isDefault?: boolean;
-      width?: number;
-      height?: number;
-      size?: number;
-    }
-  ): void;
+  onChange(name: string, data: InputFileData): void;
   name: string;
 }
 
-class InputImage extends React.Component<IInputImageProps> {
-  rootElement;
-  dropzone;
-  cropper;
-  constructor(props) {
+class InputImage extends React.Component<InputImageProps> {
+  rootElement: React.RefObject<HTMLDivElement> = React.createRef();
+  dropzone: React.RefObject<Dropzone> = React.createRef();
+  cropper: React.RefObject<cropperjs> = React.createRef();
+
+  constructor(props: InputImageProps) {
     super(props);
     const { onChange, value, name } = this.props;
 
@@ -43,7 +45,7 @@ class InputImage extends React.Component<IInputImageProps> {
     }
   }
 
-  onDrop = files => {
+  onDrop = (files: FileWithPreview[]) => {
     const { name, onChange } = this.props;
     if (files.length === 0) return;
 
@@ -65,33 +67,26 @@ class InputImage extends React.Component<IInputImageProps> {
   onCrop = () => {
     const { name, value, onChange } = this.props;
     const cropper = this.cropper;
-
     if (!cropper) return;
-
-    const croppedCanvas = cropper.getCroppedCanvas();
-
+    const croppedCanvas = cropper.current && cropper.current.getCroppedCanvas();
     if (!croppedCanvas) return;
-
     croppedCanvas.toBlob(blob => {
-      if (blob !== null) {
-        blob.name = value.filename;
-      }
       const img = {
         ...value,
-        cropped: blob,
+        cropped: { ...blob, name: value.filename },
         width: croppedCanvas.width,
         height: croppedCanvas.height,
-        size: blob.size
+        size: blob ? blob.size : 0
       };
       onChange(name, img);
     }, value.filetype);
   };
 
   openFileDialog = () => {
-    this.dropzone.open();
+    this.dropzone.current && this.dropzone.current.open();
   };
 
-  clear = event => {
+  clear = (event: React.SyntheticEvent) => {
     const { onChange, name } = this.props;
     onChange(name, {
       cropped: null,
@@ -115,18 +110,14 @@ class InputImage extends React.Component<IInputImageProps> {
         className={classNames("input-image", className, {
           "input-image--error": error
         })}
-        ref={rootElement => {
-          this.rootElement = rootElement;
-        }}
+        ref={this.rootElement}
       >
         <Dropzone
           disableClick
           className="input-image__dropzone"
           activeClassName="input-image__dropzone--active"
           accept="image/jpeg, image/png"
-          ref={dropzone => {
-            this.dropzone = dropzone;
-          }}
+          ref={this.dropzone}
           onDrop={onDrop}
         >
           <div className="input-image__dropzone-helper">Drop files...</div>
@@ -134,9 +125,7 @@ class InputImage extends React.Component<IInputImageProps> {
             <div className="input-image__image-container">
               {isNew && (
                 <Cropper
-                  ref={cropper => {
-                    this.cropper = cropper;
-                  }}
+                  ref={(this.cropper as unknown) as React.RefObject<Cropper>}
                   src={src}
                   aspectRatio={1}
                   autoCropArea={1}

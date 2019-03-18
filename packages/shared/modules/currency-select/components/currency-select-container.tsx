@@ -49,7 +49,7 @@ class CurrencySelectContainer extends React.Component<
         className={classNames("currency-select", className)}
         value={currency}
         onChange={this.handleChange}
-        currencyValues={currencyValues}
+        currencyValues={currencyValues as CURRENCY_VALUES_ENUM[]}
       />
     );
   }
