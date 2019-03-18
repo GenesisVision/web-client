@@ -1,8 +1,10 @@
 //@ts-ignore TODO fix types
 import * as jwt_decode from "jwt-decode";
-import { AUTH_TOKEN } from "utils/constants";
 
+import { getTokenName } from "../utils/get-token-name";
 import { Nullable } from "../utils/types";
+
+const AUTH_TOKEN = getTokenName();
 
 const canParseToken = (token: string): boolean => {
   try {

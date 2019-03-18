@@ -40,7 +40,6 @@ interface OwnProps {
   onSubmit(values: TransferFormValues): void;
   disabled: boolean;
   errorMessage?: string;
-  twoFactorEnabled: boolean;
   wallets: Array<WalletData>;
   currentWallet: WalletData;
 }

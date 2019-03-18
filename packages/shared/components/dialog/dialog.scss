@@ -96,6 +96,10 @@
     }
   }
 
+  &__wrapper {
+    margin-bottom: 16px;
+  }
+
   &__top-wrapper {
     margin-top: 30px;
   }
@@ -264,5 +268,9 @@
     .gv-text-field__wrapper {
       width: 100%;
     }
+  }
+
+  .svg-loader {
+    max-width: 100%;
   }
 }
