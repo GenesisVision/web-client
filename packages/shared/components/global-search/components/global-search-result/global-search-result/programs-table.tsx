@@ -1,10 +1,15 @@
-import React from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import { Table } from "shared/components/table/components";
 import ProgramTableRowShort from "shared/modules/programs-table/components/programs-table/program-table-row-short";
 import { PROGRAMS_COLUMNS } from "shared/modules/programs-table/components/programs-table/programs.constants";
+import { SearchTableProps } from "./global-search-result";
 
-const ProgramsTable = ({ t, isPending, data, title }) => {
+const ProgramsTable: React.FC<SearchTableProps & InjectedTranslateProps> = ({
+  t,
+  data,
+  title
+}) => {
   return (
     <Table
       columns={PROGRAMS_COLUMNS}

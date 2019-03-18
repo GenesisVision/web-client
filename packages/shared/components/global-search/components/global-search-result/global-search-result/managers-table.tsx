@@ -1,10 +1,15 @@
-import React from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import ManagersTableRow from "shared/components/managers-table/components/managers-table-row";
 import { MANAGERS_TABLE_COLUMNS } from "shared/components/managers-table/managers-table.constants";
 import { Table } from "shared/components/table/components";
+import { SearchTableProps } from "./global-search-result";
 
-const ManagersTable = ({ t, isPending, data, title }) => {
+const ManagersTable: React.FC<SearchTableProps & InjectedTranslateProps> = ({
+  t,
+  data,
+  title
+}) => {
   return (
     <Table
       columns={MANAGERS_TABLE_COLUMNS}
