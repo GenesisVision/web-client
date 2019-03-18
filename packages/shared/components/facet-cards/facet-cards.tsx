@@ -1,8 +1,10 @@
 import "./facet-cards.scss";
-import * as React from "react";
-import FacetCard from "./facet-card";
+
 import { Facet } from "gv-api-web";
+import * as React from "react";
 import { RefObject } from "react";
+
+import FacetCard from "./facet-card";
 
 interface IFacetCardsProps {
   facets: Facet[];
@@ -26,20 +28,20 @@ class FacetCards extends React.Component<IFacetCardsProps> {
     const node = this.scroll.current;
     const list = this.facetList.current;
 
-    const scrollLeft = node.scrollLeft;
-    const scrollWidth = node.scrollWidth;
-    const { width } = node.getBoundingClientRect();
+    const scrollLeft = node ? node.scrollLeft : 0;
+    const scrollWidth = node ? node.scrollWidth : 0;
+    const { width = 0 } = node ? node.getBoundingClientRect() : {};
 
     if (scrollLeft > 0) {
-      list.classList.add("facets__shadow--left");
+      list && list.classList.add("facets__shadow--left");
     } else if (scrollLeft <= 0) {
-      list.classList.remove("facets__shadow--left");
+      list && list.classList.remove("facets__shadow--left");
     }
 
     if (scrollWidth - scrollLeft > width) {
-      list.classList.add("facets__shadow--right");
+      list && list.classList.add("facets__shadow--right");
     } else if (scrollWidth - scrollLeft <= width) {
-      list.classList.remove("facets__shadow--right");
+      list && list.classList.remove("facets__shadow--right");
     }
   };
 

@@ -2,13 +2,13 @@ import { ProfileHeaderViewModel } from "gv-api-web";
 import { combineReducers } from "redux";
 import { PROFILE_HEADER } from "shared/components/header/header.constants";
 import apiReducerFactory, {
-  IApiReducerFactory
+  IApiState
 } from "shared/reducers/api-reducer/api-reducer";
-import { DeepReadonly } from "utility-types";
 
-export type HeaderState = DeepReadonly<{
-  info: IApiReducerFactory<ProfileHeaderViewModel>;
-}>;
+export interface HeaderState
+  extends Readonly<{
+      info: IApiState<ProfileHeaderViewModel>;
+    }> {}
 
 const headerReducer = combineReducers<HeaderState>({
   info: apiReducerFactory({

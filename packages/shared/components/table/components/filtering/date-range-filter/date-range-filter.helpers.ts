@@ -1,4 +1,4 @@
-import * as moment from "moment";
+import moment from "moment";
 import { DurationInputArg2 } from "moment";
 
 import { FILTER_TYPE } from "../../../helpers/filtering.helpers";
@@ -28,7 +28,7 @@ export const validateDateRange = (value: IDataRangeFilterValue): boolean => {
 };
 
 const dateFrom = (
-  subtract: DurationInputArg2,
+  subtract?: DurationInputArg2,
   date: moment.MomentInput = new Date()
 ): string =>
   moment(date)
@@ -49,7 +49,7 @@ export const composeRequestValueFunc = (
   switch (value.type) {
     case DATA_RANGE_FILTER_TYPES.ALL:
       return {
-        [fromFilterName]: dateFrom(null, 20181001),
+        [fromFilterName]: dateFrom(undefined, 20181001),
         [toFilterName]: dateTo()
       };
     case DATA_RANGE_FILTER_TYPES.LAST_MOUTH:

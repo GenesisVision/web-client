@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import { ProgramDetails } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -7,6 +8,7 @@ import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import FavoriteIcon from "shared/components/favorite-asset/favorite-icon/favorite-icon";
 import LevelTooltip from "shared/components/level-tooltip/level-tooltip";
 import Profitability from "shared/components/profitability/profitability";
+import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import TableCell from "shared/components/table/components/table-cell";
@@ -16,8 +18,6 @@ import Tooltip from "shared/components/tooltip/tooltip";
 import { STATUS } from "shared/constants/constants";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
-import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
-import { ProgramDetails } from "gv-api-web";
 
 interface IProgramTableRowShortProps {
   title: string;
@@ -56,7 +56,8 @@ const ProgramTableRowShort: React.FC<
     tags,
     rating
   } = program;
-  const stopPropagationEvent = event => event.stopPropagation();
+  const stopPropagationEvent = (event: React.MouseEvent) =>
+    event.stopPropagation();
   return (
     <TableRow
       className={classNames({

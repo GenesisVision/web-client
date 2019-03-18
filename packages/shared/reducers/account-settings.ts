@@ -7,7 +7,7 @@ import { DeepReadonly } from "utility-types";
 
 import { ITwoFactorReducer } from "./2fa-reducer";
 
-const initialCurrency = loadData(ACCOUNT_CURRENCY_KEY) || "BTC";
+const initialCurrency = (loadData(ACCOUNT_CURRENCY_KEY) as string) || "BTC";
 
 const accountCurrencyReducer = (
   currency: string = initialCurrency,

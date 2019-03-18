@@ -1,7 +1,7 @@
 import { LoginViewModel } from "gv-api-web";
 import { combineReducers } from "redux";
 import apiReducerFactory, {
-  IApiReducerFactory
+  IApiState
 } from "shared/reducers/api-reducer/api-reducer";
 import { DeepReadonly } from "utility-types";
 
@@ -9,7 +9,7 @@ import { LOGIN } from "../actions/login.actions";
 import twoFactorReducer, { ITwoFactorReducer } from "./two-factor.reducer";
 
 export type LoginState = DeepReadonly<{
-  login: IApiReducerFactory<LoginViewModel>;
+  login: IApiState<LoginViewModel>;
   twoFactor: ITwoFactorReducer;
 }>;
 

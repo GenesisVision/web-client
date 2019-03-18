@@ -12,6 +12,10 @@ import Popover, {
   VERTICAL_POPOVER_POS
 } from "shared/components/popover/popover";
 import Profitability from "shared/components/profitability/profitability";
+import {
+  PROFITABILITY_PREFIX,
+  PROFITABILITY_VARIANT
+} from "shared/components/profitability/profitability.helper";
 import ProgramPeriodPie from "shared/components/program-period/program-period-pie/program-period-pie";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
@@ -27,10 +31,6 @@ import {
   formatValueDifferentDecimalScale
 } from "shared/utils/formatter";
 import { Nullable } from "shared/utils/types";
-import {
-  PROFITABILITY_PREFIX,
-  PROFITABILITY_VARIANT
-} from "../../../../components/profitability/profitability.helper";
 
 interface IProgramCardProps {
   program: ProgramDetails;

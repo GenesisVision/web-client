@@ -2,10 +2,10 @@ import { ProgramRequest } from "gv-api-web";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
-import { Dispatch, bindActionCreators, compose } from "redux";
+import { compose } from "redux";
 import DashboardRequest from "shared/components/dashboard/dashboard-portfolio-chart-section/dashboard-in-requests/dashboard-request";
 import { ASSET, ROLE } from "shared/constants/constants";
-import { ActionType, IDispatchable } from "shared/utils/types";
+import { MiddlewareDispatch } from "shared/utils/types";
 
 import {
   CancelRequestType,
@@ -23,7 +23,7 @@ export interface IAssetStatusRequestsOwnProps {
 
 export interface IAssetStatusRequestsDispatchProps {
   service: {
-    cancelRequestDispatch(x: CancelRequestType): IDispatchable<void>;
+    cancelRequestDispatch(x: CancelRequestType): Promise<any>;
   };
 }
 
@@ -81,10 +81,13 @@ class AssetStatusRequests extends React.Component<
 }
 
 const mapDispatchToProps = (
-  dispatch: Dispatch<ActionType>
+  dispatch: MiddlewareDispatch<any>
 ): IAssetStatusRequestsDispatchProps => {
   return {
-    service: bindActionCreators({ cancelRequestDispatch }, dispatch)
+    service: {
+      cancelRequestDispatch: (x: CancelRequestType) =>
+        dispatch(cancelRequestDispatch(x))
+    }
   };
 };
 

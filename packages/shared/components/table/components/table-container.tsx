@@ -1,13 +1,13 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { bindActionCreators, Dispatch } from "redux";
+import { Dispatch, bindActionCreators } from "redux";
 import { updateFilter } from "shared/components/table/helpers/filtering.helpers";
-
-import { getItems, updateFilters } from "../services/table.service";
-import Table from "./table";
 import RootState from "shared/reducers/root-reducer";
+
 import { IPaging } from "../helpers/paging.helpers";
-import { FilteringType, SortingColumn } from "./filtering/filter.type";
+import { getItems, updateFilters } from "../services/table.service";
+import { FilteringType, SortingColumn, TFilter } from "./filtering/filter.type";
+import Table from "./table";
 
 interface ITableContainerProps {
   getItems: any;
@@ -84,7 +84,7 @@ class TableContainer extends React.Component<
     });
   };
 
-  handleUpdateFilter = (filter: string) => {
+  handleUpdateFilter = (filter: TFilter<string>) => {
     let changedFilters = {
       filtering: updateFilter(this.props.filtering, filter),
       paging: {
@@ -109,6 +109,7 @@ class TableContainer extends React.Component<
     const { data, isPending, paging, ...otherProps } = this.props;
     const newPaging = { ...paging, totalItems: data ? data.total : 0 };
     return (
+      //@ts-ignore
       <Table
         {...otherProps}
         updateRow={this.updateItems}

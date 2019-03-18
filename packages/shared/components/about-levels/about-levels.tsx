@@ -1,14 +1,21 @@
 import "./about-level.scss";
 
-import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { LevelInfo } from "gv-api-web";
+import { TranslationFunction } from "i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import Dialog from "shared/components/dialog/dialog";
+import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
 import StatisticItem from "../statistic-item/statistic-item";
 
-const renderLimits = (t, investmentsLimits, currency) => {
+const renderLimits = (
+  t: TranslationFunction,
+  investmentsLimits: LevelInfo[],
+  currency: CURRENCIES
+) => {
   return investmentsLimits.map(levelInfo => {
     return (
       <div key={levelInfo.level} className="about-levels__limit">
@@ -32,7 +39,16 @@ const renderLimits = (t, investmentsLimits, currency) => {
   });
 };
 
-class AboutLevelsComponent extends Component {
+interface OwnProps {
+  open: boolean;
+  onClose(): void;
+  investmentsLimits: LevelInfo[];
+  currency: CURRENCIES;
+}
+
+interface Props extends OwnProps, InjectedTranslateProps {}
+
+class AboutLevelsComponent extends React.Component<Props> {
   render() {
     const { t, open, onClose, investmentsLimits, currency } = this.props;
     return (

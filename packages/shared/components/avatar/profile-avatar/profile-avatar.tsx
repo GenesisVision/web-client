@@ -7,7 +7,7 @@ import UserIcon from "shared/media/user-avatar.svg";
 import ImageBase from "../image-base";
 
 interface IProfileAvatarProps {
-  url: string;
+  url?: string;
   alt?: string;
   className?: string;
   imageClassName?: string;

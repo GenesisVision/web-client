@@ -1,34 +1,26 @@
-import React, { Component } from "react";
-import { InjectedTranslateProps, translate } from "react-i18next";
+import React from "react";
+import { IProgramControlsProps } from "shared/components/programs/program-details/program-details.types";
 
 import InvestmentProgramControls from "./investment-program-controls";
 import SignalProviderControls from "./signal-provider-controls";
 
-interface IProgramControlsProps {
-  isAuthenticated: boolean;
-  redirectToLogin(): void;
+const ProgramControls: React.FC<IProgramControlsProps> = ({
+  programDescription,
+  isAuthenticated,
+  redirectToLogin
+}) => {
+  const isAvailableFollowingTrades = programDescription.isSignalProgram;
 
-  programDescription: any;
-}
-
-class ProgramControls extends Component<
-  IProgramControlsProps & InjectedTranslateProps
-> {
-  render() {
-    const { programDescription, isAuthenticated, redirectToLogin } = this.props;
-
-    const isAvailableFollowingTrades = programDescription.isSignalProgram;
-
-    return (
-      <div className="program-details-description__controls">
-        <div className="program-details-description__col">
-          <InvestmentProgramControls
-            programDescription={programDescription}
-            isAuthenticated={isAuthenticated}
-            redirectToLogin={redirectToLogin}
-          />
-        </div>
-        {/*{isAvailableFollowingTrades && isAuthenticated ? (
+  return (
+    <div className="program-details-description__controls">
+      <div className="program-details-description__col">
+        <InvestmentProgramControls
+          programDescription={programDescription}
+          isAuthenticated={isAuthenticated}
+          redirectToLogin={redirectToLogin}
+        />
+      </div>
+      {/*{isAvailableFollowingTrades && isAuthenticated ? (
           <div className="program-details-description__col program-details-description__col--small-size">
             <SignalProviderControls
               programDescription={programDescription}
@@ -37,9 +29,8 @@ class ProgramControls extends Component<
             />
           </div>
         ) : null}*/}
-      </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
-export default translate()(ProgramControls);
+export default ProgramControls;

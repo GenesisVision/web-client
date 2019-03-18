@@ -1,20 +1,22 @@
-import classNames from "classnames";
 import { GVButton } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+
 import { SelectFilterValue } from "../filter.type";
 
 interface ISelectFilterPopoverProps {
-  changeFilter?(value: any): void;
-  values?: SelectFilterValue<any>[];
+  changeFilter?(value: SelectFilterValue<any>): void;
+  values: SelectFilterValue<any>[];
   value?: any;
 }
 
 class SelectFilterPopover extends React.Component<
   ISelectFilterPopoverProps & InjectedTranslateProps
 > {
-  handleClick = value => () => {
-    return this.props.changeFilter(value);
+  handleClick = (value: SelectFilterValue<any>) => () => {
+    if (this.props.changeFilter) {
+      this.props.changeFilter(value);
+    }
   };
 
   renderLabel = (item: SelectFilterValue<any>): string =>
@@ -29,10 +31,7 @@ class SelectFilterPopover extends React.Component<
           return (
             <GVButton
               variant="text"
-              color={classNames({
-                primary: selected,
-                secondary: !selected
-              })}
+              color={selected ? "primary" : "secondary"}
               key={idx}
               onClick={this.handleClick(x.value)}
             >

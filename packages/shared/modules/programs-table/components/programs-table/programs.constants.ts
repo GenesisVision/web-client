@@ -7,12 +7,13 @@ import {
   composeRequestValueFunc,
   validateDateRange
 } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.helpers";
+import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
 import { programsTagFilter } from "shared/components/table/components/filtering/tag-filter/tag-filter.helpers";
 import {
   FILTER_TYPE,
   FilterType
 } from "shared/components/table/helpers/filtering.helpers";
-import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
+
 import { IComposeDefaultFilter } from "../../../../components/table/components/table.types";
 
 export const LEVEL_FILTER_NAME = "level";
@@ -35,7 +36,7 @@ const programsLevelFilter = {
   name: LEVEL_FILTER_NAME,
   type: FILTER_TYPE.RANGE,
   defaultValue: [LEVEL_MIN_FILTER_VALUE, LEVEL_MAX_FILTER_VALUE],
-  validate: value => {
+  validate: (value: string[]) => {
     const levelRegex = /[0-7]/;
     if (Array.isArray(value) && value.length === 2) {
       const [a, b] = value;

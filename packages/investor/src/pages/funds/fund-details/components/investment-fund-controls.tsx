@@ -53,7 +53,7 @@ class InvestmentFundControls extends Component<
     this.setState({ popups });
   };
 
-  applyChanges = (updateDetails: any) => () => {
+  applyChanges = (updateDetails: () => void) => () => {
     updateDetails();
   };
 

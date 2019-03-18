@@ -1,14 +1,25 @@
+import { FundAssetsListInfo, FundDetailsFull } from "gv-api-web";
 import {
   FUNDS_SLUG_URL_PARAM_NAME,
   FUND_DETAILS_ROUTE
 } from "pages/funds/funds.routes";
-import { getDefaultPeriod } from "shared/components/chart/chart-period/chart-period.helpers";
+import { Dispatch } from "redux";
+import {
+  ChartDefaultPeriod,
+  getDefaultPeriod
+} from "shared/components/chart/chart-period/chart-period.helpers";
+import RootState from "shared/reducers/root-reducer";
 import fundsApi from "shared/services/api-client/funds-api";
 import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
 
-export const getFundDescription = () => (dispatch, getState) => {
+import { FundStatisticResult } from "./fund-details.types";
+
+export const getFundDescription = () => (
+  dispatch: Dispatch,
+  getState: () => RootState
+): Promise<FundDetailsFull> => {
   const authorization = authService.getAuthArg();
   const { router } = getState();
 
@@ -23,10 +34,10 @@ export const getFundDescription = () => (dispatch, getState) => {
 };
 
 export const getFundStatistic = (
-  fundId,
-  currency,
-  period = getDefaultPeriod()
-) => {
+  fundId: string,
+  currency: string,
+  period: ChartDefaultPeriod = getDefaultPeriod()
+): Promise<FundStatisticResult> => {
   const chartFilter = {
     currency,
     dateFrom: period.start,
@@ -42,9 +53,6 @@ export const getFundStatistic = (
       profitChangePercent: profitChart.profitChangePercent,
       rebalances: profitChart.rebalances,
       balance: profitChart.balance,
-      trades: profitChart.trades,
-      successTradesPercent: profitChart.successTradesPercent,
-      profitFactor: profitChart.profitFactor,
       investors: profitChart.investors,
       sharpeRatio: profitChart.sharpeRatio,
       sortinoRatio: profitChart.sortinoRatio,
@@ -55,7 +63,6 @@ export const getFundStatistic = (
       timeFrameGvtProfit: profitChart.timeframeGvtProfit,
       timeFrameUsdProfit: profitChart.timeframeUsdProfit,
       profitChangePercent: profitChart.profitChangePercent,
-      pnLChart: profitChart.pnLChart,
       equityChart: profitChart.equityChart
     };
 
@@ -63,11 +70,13 @@ export const getFundStatistic = (
   });
 };
 
-export const fetchFundStructure = fundId => {
+export const fetchFundStructure = (
+  fundId: string
+): Promise<FundAssetsListInfo> => {
   return fundsApi.v10FundsByIdAssetsGet(fundId);
 };
 
-export const closeFund = (id, opts) => dispatch => {
+export const closeFund = (id: string, opts: any): Promise<void> => {
   const authorization = authService.getAuthArg();
 
   return managerApi.v10ManagerFundsByIdClosePost(id, authorization, opts);

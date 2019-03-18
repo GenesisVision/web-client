@@ -30,7 +30,7 @@ const WalletBalanceElements = (props: IWalletBalanceElement) => {
       <div className="wallet-balance__statistic-item">
         <StatisticItem label={t("wallet-page.total-balance")} big accent>
           <NumberFormat
-            value={formatCurrencyValue(props.total)}
+            value={formatCurrencyValue(props.total, props.currency)}
             thousandSeparator={" "}
             displayType="text"
             suffix={` ${props.currency}`}
@@ -49,7 +49,7 @@ const WalletBalanceElements = (props: IWalletBalanceElement) => {
           accent
         >
           <NumberFormat
-            value={formatCurrencyValue(props.available)}
+            value={formatCurrencyValue(props.available, props.currency)}
             thousandSeparator={" "}
             displayType="text"
             suffix={` ${props.currency}`}
@@ -68,7 +68,7 @@ const WalletBalanceElements = (props: IWalletBalanceElement) => {
           accent
         >
           <NumberFormat
-            value={formatCurrencyValue(props.invested)}
+            value={formatCurrencyValue(props.invested, props.currency)}
             thousandSeparator={" "}
             displayType="text"
             suffix={` ${props.currency}`}

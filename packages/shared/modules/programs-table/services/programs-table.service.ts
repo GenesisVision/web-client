@@ -1,17 +1,21 @@
 import { push } from "connected-react-router";
+import { ProgramsList } from "gv-api-web";
 import {
-  PROGRAM_SLUG_URL_PARAM_NAME,
   PROGRAMS_FACET_ROUTE,
   PROGRAMS_FAVORITES_TAB_NAME,
-  PROGRAMS_TAB_ROUTE
+  PROGRAMS_TAB_ROUTE,
+  PROGRAM_SLUG_URL_PARAM_NAME
 } from "pages/programs/programs.routes";
 import * as qs from "qs";
+import { TFilter } from "shared/components/table/components/filtering/filter.type";
 import { composeFilters } from "shared/components/table/helpers/filtering.helpers";
 import {
+  IPaging,
   calculateSkipAndTake,
   calculateTotalPages
 } from "shared/components/table/helpers/paging.helpers";
 import { getSortingColumnName } from "shared/components/table/helpers/sorting.helpers";
+import RootState from "shared/reducers/root-reducer";
 import authService from "shared/services/auth-service";
 import getParams from "shared/utils/get-params";
 
@@ -21,8 +25,6 @@ import {
   PROGRAMS_TABLE_FILTERS,
   SORTING_FILTER_VALUE
 } from "../components/programs-table/programs.constants";
-import { TFilter } from "shared/components/table/components/filtering/filter.type";
-import { ProgramsList } from "gv-api-web";
 
 const DEFAULT_ITEMS_ON_PAGE = 12;
 
@@ -53,7 +55,8 @@ export const fetchPrograms = (filters: {
   }
   return programTableActions
     .fetchPrograms(requestFilters)
-    .payload.then(data => {
+    .payload.then((data: any) => {
+      // TODO fix any
       return { programs: data.programs, total: data.total };
     });
 };
@@ -85,7 +88,7 @@ const composeRequestFilters = () => (dispatch: any, getState: any): Object => {
   const { skip, take } = calculateSkipAndTake({
     itemsOnPage: itemsOnPage,
     currentPage: page
-  });
+  } as IPaging);
 
   const filtering = composeFilters(
     PROGRAMS_TABLE_FILTERS,
@@ -103,7 +106,7 @@ const composeRequestFilters = () => (dispatch: any, getState: any): Object => {
 
 export const getProgramsFilters = () => (
   dispatch: any,
-  getState: any
+  getState: () => RootState
 ): Object => {
   const { router, programsData } = getState();
   const queryParams = qs.parse(router.location.search.slice(1));
@@ -125,8 +128,9 @@ export const getProgramsFilters = () => (
     ? queryParams.sorting
     : SORTING_FILTER_VALUE;
 
-  const filtering = PROGRAMS_TABLE_FILTERS.reduce((accum, cur) => {
-    const { name, defaultValue, validate = value => true } = cur;
+  const filtering = PROGRAMS_TABLE_FILTERS.reduce((accum: any, cur: any) => {
+    // TODO fix any types
+    const { name, defaultValue, validate = (value: any) => true } = cur; // TODO fix any types
     if (!queryParams[name] || !validate(queryParams[name])) {
       accum[name] = defaultValue;
     } else {

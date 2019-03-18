@@ -11,6 +11,8 @@ export const HEADER_CURRENCY_VALUES = {
   DOGE: "Dogecoin"
 };
 
+export type CURRENCIES = keyof typeof HEADER_CURRENCY_VALUES;
+
 export const CURRENCY_VALUES = {
   GVT: "Genesis Vision Token",
   ...HEADER_CURRENCY_VALUES

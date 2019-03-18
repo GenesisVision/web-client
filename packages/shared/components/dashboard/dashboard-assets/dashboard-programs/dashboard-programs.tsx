@@ -17,6 +17,7 @@ import ProgramPeriodEnd from "shared/components/program-period/program-period-en
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import TableCell from "shared/components/table/components/table-cell";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
@@ -24,7 +25,7 @@ import {
   Column,
   IUpdateFilterFunc
 } from "shared/components/table/components/table.types";
-import { PROGRAM } from "shared/constants/constants";
+import { PROGRAM, ROLE } from "shared/constants/constants";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import {
   formatCurrencyValue,
@@ -33,14 +34,13 @@ import {
 } from "shared/utils/formatter";
 
 import dashboardProgramsTableSelector from "./dashboard-programs.selector";
-import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 
 interface IDashboardProgramsProps {
-  role: string;
+  role: ROLE;
   title: string;
   getDashboardPrograms(filters: any): Action;
-  createButtonToolbar?: JSX.Element;
-  createProgram?: JSX.Element;
+  createButtonToolbar: JSX.Element;
+  createProgram: JSX.Element;
 }
 
 const DashboardPrograms: FunctionComponent<
@@ -54,6 +54,7 @@ const DashboardPrograms: FunctionComponent<
   title
 }) => {
   return (
+    //@ts-ignore
     <TableContainer
       createButtonToolbar={createButtonToolbar}
       emptyMessage={createProgram}
@@ -158,7 +159,6 @@ const DashboardPrograms: FunctionComponent<
             <AssetStatus
               status={program.personalDetails.status}
               id={program.id}
-              role={role}
               asset={PROGRAM}
               onCancel={updateRow}
             />

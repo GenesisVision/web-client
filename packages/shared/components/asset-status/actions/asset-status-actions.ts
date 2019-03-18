@@ -10,7 +10,7 @@ export const CANCEL_INVESTOR_PROGRAM_REQUESTS =
   "CANCEL_INVESTOR_PROGRAM_REQUESTS";
 
 export interface ICancelRequest {
-  (id: string, auth: Nullable<string>): ActionType;
+  (id: string, auth: string): ActionType;
 }
 
 export const cancelInvestorProgramRequest: ICancelRequest = (id, auth) => {

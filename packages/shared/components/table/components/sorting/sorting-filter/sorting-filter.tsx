@@ -8,12 +8,12 @@ import {
   getSortingColumnName,
   getSortingDirection
 } from "../../../helpers/sorting.helpers";
-import SelectFilter from "../../filtering/select-filter/select-filter";
 import {
   SelectFilterValue,
   SortingColumn,
   TFilter
 } from "../../filtering/filter.type";
+import SelectFilter from "../../filtering/select-filter/select-filter";
 
 interface ISortingFilterProps {
   sorting: string;

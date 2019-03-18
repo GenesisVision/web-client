@@ -15,6 +15,7 @@ const tableFiltersReducer = ({
 }) => {
   const initialState = { ...filters };
   const filterActionType = composeFiltersActionType(type);
+  //@ts-ignore
   return (state = initialState, action) => {
     switch (action.type) {
       case filterActionType: {

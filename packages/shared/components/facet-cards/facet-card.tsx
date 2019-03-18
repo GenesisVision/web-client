@@ -1,15 +1,16 @@
 import classNames from "classnames";
+import { Facet } from "gv-api-web";
 import * as React from "react";
 import { Link } from "react-router-dom";
 import ImageBase from "shared/components/avatar/image-base";
 import Surface from "shared/components/surface/surface";
+
 import facetImg from "./facet.png";
-import { Facet } from "gv-api-web";
 
 interface IFacetCardProps {
   title: string;
   facet: Facet;
-  composeFacetUrl?(url: string): string;
+  composeFacetUrl(url: string): string;
 }
 
 interface IFacetCardState {

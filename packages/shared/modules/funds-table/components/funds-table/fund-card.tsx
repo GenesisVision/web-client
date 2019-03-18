@@ -5,6 +5,7 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
 import { ActionsCircleIcon } from "shared/components/icon/actions-circle-icon";
 import Popover, {
@@ -18,8 +19,10 @@ import {
 } from "shared/components/profitability/profitability.helper";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
-import { composeManagerDetailsUrl } from "shared/utils/compose-url";
-import { composeFundsDetailsUrl } from "shared/utils/compose-url";
+import {
+  composeFundsDetailsUrl,
+  composeManagerDetailsUrl
+} from "shared/utils/compose-url";
 import {
   formatValue,
   formatValueDifferentDecimalScale
@@ -46,8 +49,9 @@ class FundCard extends React.Component<
   state = {
     anchor: null
   };
-  handleOpenDropdown = (event: React.ChangeEvent<HTMLInputElement>) =>
-    this.setState({ anchor: event.currentTarget });
+  handleOpenDropdown = (
+    event: React.MouseEvent<HTMLSpanElement, MouseEvent>
+  ): void => this.setState({ anchor: event.currentTarget });
   handleCloseDropdown = () => this.setState({ anchor: null });
   render() {
     const { t, fund, toggleFavorite, title } = this.props;
@@ -199,7 +203,7 @@ class FundCard extends React.Component<
           <div className="table-cards__table-row">
             <FundAssetContainer
               assets={fund.topFundAssets}
-              type={"short"}
+              type={FUND_ASSET_TYPE.SHORT}
               size={3}
               length={fund.totalAssetsCount}
             />

@@ -1,10 +1,10 @@
-import { IComposeDefaultFilter } from "../components/table.types";
 import {
   ComposeFiltersType,
   ComposeFiltersTypeFlat,
   FilteringType,
   TFilter
 } from "../components/filtering/filter.type";
+import { IComposeDefaultFilter } from "../components/table.types";
 
 export const RANGE_FILTER_TYPE = "RANGE_FILTER_TYPE";
 export const GENERAL_FILTER_TYPE = "GENERAL_FILTER_TYPE";
@@ -32,9 +32,11 @@ export const composeFilters = (
   return allFilters.reduce((accum: ComposeFiltersType, cur) => {
     const { name = "", type, composeRequestValue } = cur;
     const processedFilterValue = processFilterValue({
+      //@ts-ignore
       name,
       type,
       composeRequestValue,
+      //@ts-ignore
       value: filtering[name]
     });
     if (processedFilterValue !== undefined) {
@@ -56,6 +58,7 @@ const processFilterValue = (filter: TFilter<any>): ComposeFiltersType => {
       }
       break;
     case FILTER_TYPE.CUSTOM:
+      //@ts-ignore
       const requestValues =
         filter.composeRequestValue && filter.composeRequestValue(filter.value);
       if (requestValues !== undefined) {
@@ -74,7 +77,7 @@ const processFilterValue = (filter: TFilter<any>): ComposeFiltersType => {
   }
   return requestValue;
 };
-
+//@ts-ignore
 export const updateFilter = (
   oldFilters: FilteringType,
   newFilter: TFilter<any>

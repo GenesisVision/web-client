@@ -77,8 +77,10 @@ class ProfileWidget extends React.Component<
               </div>
               <div className="profile-menu__item profile-menu__item--logout">
                 <GVButton variant="text" onClick={logout}>
-                  <LogoutIcon />
-                  {t("profile-widget.logout")}
+                  <React.Fragment>
+                    <LogoutIcon />
+                    {t("profile-widget.logout")}
+                  </React.Fragment>
                 </GVButton>
               </div>
             </div>

@@ -13,15 +13,16 @@ import {
   PROGRAMS_VIEW
 } from "shared/components/table/table.constants";
 import { loadData, saveData } from "shared/utils/localstorage";
-import { FilteringType, SortingColumn } from "./filtering/filter.type";
+
 import { IPaging } from "../helpers/paging.helpers";
+import { FilteringType, SortingColumn } from "./filtering/filter.type";
 
 interface ITableProps {
   updateFilter(filter: any): void;
   updateSorting(opt: string): ((dispatch: any, getState: any) => void) | void;
   updatePaging(page: number): void;
   items: any[];
-  filtering: FilteringType;
+  filtering?: FilteringType;
   sorting: string;
   paging: IPaging;
   renderHeader?(column: SortingColumn): JSX.Element;
@@ -64,11 +65,13 @@ class Table extends React.Component<ITableProps, ITableState> {
   componentDidMount() {
     if (this.isViewSwitchEnabled)
       this.setState({
+        //@ts-ignore TODO
         view: (loadData(PROGRAMS_VIEW) as LIST_VIEW) || LIST_VIEW.TABLE
       });
   }
 
   changeView = (view: LIST_VIEW) => {
+    //@ts-ignore TODO
     saveData(PROGRAMS_VIEW, view);
     this.setState({ view });
   };
@@ -132,6 +135,8 @@ class Table extends React.Component<ITableProps, ITableState> {
         >
           {view === LIST_VIEW.CARDS && (
             <div className={classNames("table", className)}>
+              {/*
+            // @ts-ignore TODO*/}
               <TableBody
                 items={items}
                 className="table-cards"
@@ -147,10 +152,13 @@ class Table extends React.Component<ITableProps, ITableState> {
               <TableHeader
                 columns={columns}
                 sorting={sorting}
+                //@ts-ignore
                 updateSorting={updateSorting}
               >
                 {renderHeader}
               </TableHeader>
+              {/*
+            // @ts-ignore */}
               <TableBody
                 isPending={isPending}
                 items={items}

@@ -1,28 +1,24 @@
-import { ParametricSelector, createSelector } from "reselect";
+import { createSelector } from "reselect";
+
+import { ITableState } from "../reducers/table.reducer";
+import { DefaultTableState, mapToTableItems } from "./mapper";
 
 const defaultData = {
   items: [],
   total: 0
 };
 
-export type table = {
-  itemsData: { data: any };
-};
-
-/*
-Temp to declare selectors types
-
-export const tableSelectorCreator = <S, P, T>(
-  selector: ParametricSelector<S, P, table>[],
+export const tableSelectorCreator = <
+  State,
+  TableState extends DefaultTableState,
+  ItemsType
+>(
+  selector: ((state: State) => ITableState<TableState>),
   itemName: string
-) =>*/
-export const tableSelectorCreator = (selector: any, itemName: string) =>
-  createSelector(selector, (table: any) => {
+) =>
+  createSelector(selector, (table: ITableState<TableState>) => {
     const data = table.itemsData.data
-      ? {
-          total: table.itemsData.data.total,
-          items: table.itemsData.data[itemName]
-        }
+      ? mapToTableItems<ItemsType>(itemName)(table.itemsData.data)
       : defaultData;
     return {
       ...table,

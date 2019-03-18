@@ -1,3 +1,4 @@
+import { TradesHistorySignalSlaveViewModel } from "gv-api-web";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import tableReducerFactory from "shared/components/table/reducers/table.reducer";
 
@@ -6,7 +7,9 @@ import {
   COPYTRADING_OPEN_TRADES
 } from "../actions/copytrading-tables.actions";
 
-const copytradingOpenTradesReducer = tableReducerFactory({
+const copytradingOpenTradesReducer = tableReducerFactory<
+  TradesHistorySignalSlaveViewModel
+>({
   type: COPYTRADING_OPEN_TRADES,
   paging: DEFAULT_PAGING,
   clearable: true,

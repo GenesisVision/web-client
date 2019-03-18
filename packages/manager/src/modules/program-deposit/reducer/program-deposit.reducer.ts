@@ -5,7 +5,7 @@ import {
 } from "modules/program-deposit/program-deposit.constants";
 import { combineReducers } from "redux";
 import apiReducerFactory, {
-  IApiReducerFactory
+  IApiState
 } from "shared/reducers/api-reducer/api-reducer";
 import { DeepReadonly } from "utility-types";
 
@@ -18,8 +18,8 @@ const investSubmitReducer = apiReducerFactory<any>({
 });
 
 export type ProgramsDepositState = DeepReadonly<{
-  info: IApiReducerFactory<ProgramInvestInfo>;
-  submit: IApiReducerFactory<any>;
+  info: IApiState<ProgramInvestInfo>;
+  submit: IApiState<any>;
 }>;
 
 export default combineReducers<ProgramsDepositState>({

@@ -1,14 +1,15 @@
+import { Dispatch } from "redux";
 import { composeFilters } from "shared/components/table/helpers/filtering.helpers";
 import {
+  IPaging,
   calculateSkipAndTake,
-  calculateTotalPages,
-  IPaging
+  calculateTotalPages
 } from "shared/components/table/helpers/paging.helpers";
+import RootState from "shared/reducers/root-reducer";
 
 import { updateFilters as updateFiltersActionCreator } from "../actions/table.actions";
-import { IComposeDefaultFilter } from "../components/table.types";
-import { Dispatch } from "redux";
 import { FilteringType } from "../components/filtering/filter.type";
+import { IComposeDefaultFilter } from "../components/table.types";
 
 interface IComposeRequestFiltersProps {
   paging: IPaging;
@@ -23,7 +24,7 @@ export const composeRequestFilters = ({
   defaultFilters
 }: IComposeRequestFiltersProps): { [keys: string]: any } => {
   const { skip, take } = calculateSkipAndTake(paging);
-
+  //@ts-ignore
   const composedFiltering = composeFilters(defaultFilters, filtering);
 
   return {
@@ -50,14 +51,15 @@ export const updateFiltersDispatch = (
 
 export const getItems = (
   fetchItems: any,
-  dataSelector: (opts?: any) => { [keys: string]: any }
-) => (dispatch: Dispatch, getState: any) => {
+  dataSelector: (opts?: RootState) => { [keys: string]: any }
+) => (dispatch: Dispatch, getState: () => RootState) => {
   const { filters, defaults } = dataSelector(getState());
   const requestFilters = composeRequestFilters({
     ...filters,
     defaultFilters: defaults.defaultFilters
   });
   dispatch(fetchItems(requestFilters)).then((response: any) => {
+    //TODO any response
     const totalPages = calculateTotalPages(
       response.value.total,
       filters.paging.itemsOnPage

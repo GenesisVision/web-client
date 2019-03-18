@@ -1,11 +1,11 @@
 import * as React from "react";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Status from "shared/components/status/status";
-import { ITransactionDetailsProps } from "shared/modules/transaction-details/transaction-details";
+import { TransactionDetailsProps } from "shared/modules/transaction-details/transaction-details";
 import filesService from "shared/services/file-service";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-const InvestingTransaction = (props: ITransactionDetailsProps) => {
+const InvestingTransaction = (props: TransactionDetailsProps) => {
   const { data, t } = props;
   return (
     <React.Fragment>

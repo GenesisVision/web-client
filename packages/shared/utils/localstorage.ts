@@ -1,13 +1,9 @@
-import { Nullable } from "./types";
-
-export const loadData = (
-  key: string
-): Nullable<{ [keys: string]: any } | string> => {
+export const loadData = <T>(key: string): T | undefined => {
   try {
     const serializedSettings = localStorage.getItem(key);
     return JSON.parse(serializedSettings || "");
   } catch (e) {
-    return null;
+    return undefined;
   }
 };
 

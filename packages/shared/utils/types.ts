@@ -1,8 +1,7 @@
-import { Action, Dispatch } from "redux";
-
-import ErrorMessage from "../components/error-message/error-message";
-import RootState from "../reducers/root-reducer";
+import { Action, AnyAction, Dispatch } from "redux";
 import { ThunkAction } from "redux-thunk";
+
+import RootState from "../reducers/root-reducer";
 
 export interface IDispatchable<T> {
   (dispatch: Dispatch<ActionType>): T;
@@ -19,6 +18,10 @@ export type RootThunkAction<R = any> = ThunkAction<R, RootState, any, any>;
 
 export interface DispatchType<R> {
   (asyncAction: ActionType): R;
+}
+
+export interface MiddlewareDispatch<A extends Action = AnyAction> {
+  <T extends A>(action: T): Promise<T>;
 }
 
 export type Nullable<T> = T | null;

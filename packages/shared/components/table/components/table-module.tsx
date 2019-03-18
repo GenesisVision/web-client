@@ -1,14 +1,15 @@
 import * as React from "react";
 import {
-  calculateTotalPages,
-  IPaging
+  IPaging,
+  calculateTotalPages
 } from "shared/components/table//helpers/paging.helpers";
 import { updateFilter } from "shared/components/table/helpers/filtering.helpers";
 import { IDataModel } from "shared/constants/constants";
 
 import { composeRequestFilters } from "../services/table.service";
-import Table from "./table";
 import { FilteringType, SortingColumn, TFilter } from "./filtering/filter.type";
+import { FilteringType, SortingColumn, TFilter } from "./filtering/filter.type";
+import Table from "./table";
 
 const defaultData: IDataModel = { items: null, total: 0 };
 
@@ -153,6 +154,7 @@ class TableModule extends React.Component<
     const { data, isPending, paging } = this.state;
     const newPaging = { ...paging, totalItems: data.total ? data.total : 0 };
     return (
+      //@ts-ignore
       <Table
         {...this.props}
         {...this.state}
