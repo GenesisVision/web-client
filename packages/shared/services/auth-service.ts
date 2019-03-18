@@ -2,7 +2,7 @@
 import * as jwt_decode from "jwt-decode";
 import { AUTH_TOKEN } from "utils/constants";
 
-import { Nullable } from "../utils/types";
+import { Nullable } from "shared/utils/types";
 
 const canParseToken = (token: string): boolean => {
   try {
