@@ -1,3 +1,4 @@
+import { FILTER_TYPE } from "../../helpers/filtering.helpers";
 import {
   AssetFilterType,
   ComposedRequestAssetName,
@@ -26,7 +27,6 @@ import {
   ComposedRequestTagValue,
   TagFilterType
 } from "./tag-filter/tag-filter.constants";
-import { FILTER_TYPE } from "../../helpers/filtering.helpers";
 
 export type TFilter<T> = {
   name: string;

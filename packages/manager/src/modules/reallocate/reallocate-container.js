@@ -5,6 +5,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Dialog from "shared/components/dialog/dialog";
+import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 
 import * as createFundService from "../../pages/create-fund/services/create-fund.service";
 import ReallocatePopup from "./components/reallocate-popup";
@@ -51,15 +52,18 @@ class ReallocateContainer extends Component {
       this.setState({ errorMessage: "" });
       onClose();
     };
-    if (!assets.length) return null;
     return (
       <Dialog open={open} onClose={handleClose}>
-        <ReallocatePopup
-          assets={assets}
-          remainder={remainder}
-          reallocate={handleApply}
-          errorMessage={this.state.errorMessage}
-        />
+        {assets.length ? (
+          <ReallocatePopup
+            assets={assets}
+            remainder={remainder}
+            reallocate={handleApply}
+            errorMessage={this.state.errorMessage}
+          />
+        ) : (
+          <DialogLoader />
+        )}
       </Dialog>
     );
   }

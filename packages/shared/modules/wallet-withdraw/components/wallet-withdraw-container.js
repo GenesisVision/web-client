@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { updateWalletTimestamp } from "shared/components/wallet/actions/wallet.actions";
 
 import * as walletWithdrawService from "../services/wallet-withdraw.services";
@@ -37,6 +38,9 @@ class WalletWithdrawContainer extends Component {
   render() {
     const { isPending, errorMessage, success } = this.state;
     const { twoFactorEnabled, wallets, currentWallet } = this.props;
+
+    if (!wallets.length) return <DialogLoader />;
+
     const enabledWallets = wallets.filter(wallet => wallet.isWithdrawalEnabled);
 
     return success ? (
@@ -55,9 +59,11 @@ class WalletWithdrawContainer extends Component {
 }
 
 const mapStateToProps = state => {
-  if (!state.accountSettings && !state.wallet.info.data) return;
-  const { twoFactorEnabled } = state.accountSettings.twoFactorAuth.data;
-  const { wallets } = state.wallet.info.data;
+  if (!state.accountSettings) return { twoFactorEnabled: false, wallets: [] };
+  const wallets = state.wallet.info.data ? state.wallet.info.data.wallets : [];
+  const twoFactorEnabled = state.accountSettings.twoFactorAuth.data
+    ? state.accountSettings.twoFactorAuth.data.twoFactorEnabled
+    : false;
   return { twoFactorEnabled, wallets };
 };
 
