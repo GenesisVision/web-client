@@ -9,7 +9,7 @@ import Dialog from "shared/components/dialog/dialog";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-import StatisticItem from "../statistic-item/statistic-item";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
 
 const renderLimits = (
   t: TranslationFunction,
