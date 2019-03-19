@@ -5,9 +5,9 @@ import { Dispatch, bindActionCreators } from "redux";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { updateWalletTimestamp } from "shared/components/wallet/actions/wallet.actions";
 import { fetchWallets } from "shared/components/wallet/services/wallet.services";
-import { walletTransferRequest } from "shared/modules/wallet-withdraw/services/wallet-withdraw.services";
 import RootState from "shared/reducers/root-reducer";
 
+import { walletTransferRequest } from "../services/wallet-transfer.services";
 import WalletTransferForm, {
   TransferFormValuesType
 } from "./wallet-transfer-form";
