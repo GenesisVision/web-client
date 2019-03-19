@@ -26,7 +26,7 @@ interface IProgramTableModuleProps {
   defaultFilters: any[];
   paging: IPaging;
   isAuthenticated: boolean;
-  showRating: boolean;
+  showRating?: boolean;
   title: string;
   disableTitle?: boolean;
   toggleFavorite: TableToggleFavorite;
