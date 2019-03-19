@@ -1,32 +1,47 @@
 import "./manager-history.scss";
 
 import { GVTab, GVTabs } from "gv-react-components";
-import React, { PureComponent } from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import Surface from "shared/components/surface/surface";
 
 import { fetchManagerAssetsCount } from "../services/manager.service";
 import ManagerFunds from "./manager-funds-table";
 import ManagerPrograms from "./manager-programs-table";
+import { MANAGER_HISTORY_TAB } from "../manager.constants";
 
-const PROGRAMS_TAB = "programs";
-const FUNDS_TAB = "funds";
+interface Props {
+  managerId: string;
+  title: string;
+  isAuthenticated: boolean;
+}
 
-class ManagerHistorySection extends PureComponent {
+interface State {
+  tab: MANAGER_HISTORY_TAB;
+  programsCount: number;
+  fundsCount: number;
+}
+
+class ManagerHistorySection extends React.Component<
+  Props & InjectedTranslateProps,
+  State
+> {
   state = {
-    tab: PROGRAMS_TAB,
+    tab: MANAGER_HISTORY_TAB.PROGRAMS,
     programsCount: undefined,
     fundsCount: undefined
   };
 
   componentDidMount() {
-    const { managerId } = this.props;
-    fetchManagerAssetsCount(managerId).then(assetsCounts => {
+    fetchManagerAssetsCount(this.props.managerId).then(assetsCounts => {
       this.setState({ ...assetsCounts });
     });
   }
 
-  handleTabChange = (e, tab) => {
+  handleTabChange = (
+    e: React.SyntheticEvent<EventTarget>,
+    tab: MANAGER_HISTORY_TAB
+  ) => {
     this.setState({ tab });
   };
 
@@ -55,14 +70,14 @@ class ManagerHistorySection extends PureComponent {
         </div>
 
         <div>
-          {tab === PROGRAMS_TAB && (
+          {tab === MANAGER_HISTORY_TAB.PROGRAMS && (
             <ManagerPrograms
               title={title}
               managerId={managerId}
               isAuthenticated={isAuthenticated}
             />
           )}
-          {tab === FUNDS_TAB && (
+          {tab === MANAGER_HISTORY_TAB.FUNDS && (
             <ManagerFunds
               title={title}
               managerId={managerId}
