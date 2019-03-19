@@ -1,28 +1,40 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/trades.scss";
 
-import * as PropTypes from "prop-types";
-import React, { Component } from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { toggleFavoriteFund } from "shared/modules/favorite-asset/services/favorite-fund.service";
 import { FUNDS_TABLE_COLUMNS } from "shared/modules/funds-table/components/funds-table/funds-table.constants";
 
-import FundsTableModule from "../../../modules/funds-table/components/funds-table/funds-table-modulle";
+import FundsTableModule from "shared/modules/funds-table/components/funds-table/funds-table-modulle";
 import {
   MANAGER_DEFAULT_FILTERS,
   MANAGER_FILTERING
 } from "../manager.constants";
 import { fetchManagerFunds } from "../services/manager.service";
+import { FilteringType } from "shared/components/table/components/filtering/filter.type";
+import { FundDetails } from "gv-api-web";
+import {
+  IUpdateFilterFunc,
+  IUpdateRowFunc
+} from "shared/components/table/components/table.types";
+import { IDataModel } from "shared/constants/constants";
 
-class ManagerFunds extends Component {
-  fetchManagerFunds = filters => {
+interface Props {
+  managerId: string;
+  title: string;
+  isAuthenticated: boolean;
+}
+
+class ManagerFunds extends React.Component<Props & InjectedTranslateProps> {
+  fetchManagerFunds = (filters: FilteringType): Promise<IDataModel> => {
     const { managerId } = this.props;
     return fetchManagerFunds({ ...filters, managerId });
   };
 
-  toggleFavorite = (fund, updateRow) => () => {
+  toggleFavorite = (fund: FundDetails, updateRow: IUpdateRowFunc) => () => {
     const isFavorite = fund.personalDetails.isFavorite;
     const newProgram = {
       ...fund,
@@ -45,7 +57,10 @@ class ManagerFunds extends Component {
         filtering={MANAGER_FILTERING}
         paging={DEFAULT_PAGING}
         columns={FUNDS_TABLE_COLUMNS}
-        renderFilters={(updateFilter, filtering) => (
+        renderFilters={(
+          updateFilter: IUpdateFilterFunc,
+          filtering: FilteringType
+        ) => (
           <DateRangeFilter
             name={DATE_RANGE_FILTER_NAME}
             value={filtering[DATE_RANGE_FILTER_NAME]}
@@ -59,9 +74,5 @@ class ManagerFunds extends Component {
     );
   }
 }
-
-ManagerFunds.propTypes = {
-  managerId: PropTypes.string.isRequired
-};
 
 export default translate()(ManagerFunds);
