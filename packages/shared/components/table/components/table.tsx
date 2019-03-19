@@ -18,13 +18,13 @@ import { IPaging } from "../helpers/paging.helpers";
 import { FilteringType, SortingColumn } from "./filtering/filter.type";
 
 interface ITableProps {
-  updateFilter(filter: any): void;
-  updateSorting(opt: string): ((dispatch: any, getState: any) => void) | void;
-  updatePaging(page: number): void;
   items: any[];
   filtering?: FilteringType;
-  sorting: string;
-  paging: IPaging;
+  sorting?: string;
+  paging?: IPaging;
+  updateFilter?(filter: any): void;
+  updateSorting?(opt: string): ((dispatch: any, getState: any) => void) | void;
+  updatePaging?(page: number): void;
   renderHeader?(column: SortingColumn): JSX.Element;
   renderSorting?(value: SortingColumn): JSX.Element | string;
   updateRow?(row: any): void;

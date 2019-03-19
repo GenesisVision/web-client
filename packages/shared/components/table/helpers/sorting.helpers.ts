@@ -7,7 +7,7 @@ export enum SORTING_DIRECTION {
   DESC = "Desc"
 }
 
-export const getSortingColumnName = (value: string): string => {
+export const getSortingColumnName = (value?: string): string => {
   //@ts-ignore TODO
   if (value === undefined) return undefined;
   const sortableRegExp = `(.*)${SORTING_DIRECTION.ASC}|${
@@ -16,11 +16,12 @@ export const getSortingColumnName = (value: string): string => {
   return value.replace(new RegExp(sortableRegExp), "$1");
 };
 
-export const getSortingDirection = (value: string): SORTING_DIRECTION => {
+export const getSortingDirection = (value?: string): SORTING_DIRECTION => {
   const isAscRegExp = `.*${SORTING_DIRECTION.ASC}$`;
   const isDescRegExp = `.*${SORTING_DIRECTION.DESC}$`;
 
-  if (new RegExp(isAscRegExp).test(value)) return SORTING_DIRECTION.ASC;
+  if (value === undefined || new RegExp(isAscRegExp).test(value))
+    return SORTING_DIRECTION.ASC;
   if (new RegExp(isDescRegExp).test(value)) return SORTING_DIRECTION.DESC;
   return SORTING_DIRECTION.NONE;
 };
