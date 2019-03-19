@@ -8,7 +8,9 @@ import { fetchWallets } from "shared/components/wallet/services/wallet.services"
 import { walletTransferRequest } from "shared/modules/wallet-withdraw/services/wallet-withdraw.services";
 import RootState from "shared/reducers/root-reducer";
 
-import WalletTransferForm, { TransferFormValues } from "./wallet-transfer-form";
+import WalletTransferForm, {
+  TransferFormValuesType
+} from "./wallet-transfer-form";
 
 interface StateProps {
   wallets: WalletData[];
@@ -16,7 +18,7 @@ interface StateProps {
 
 interface DispatchProps {
   service: {
-    walletTransferRequest(props: TransferFormValues): Promise<any>;
+    walletTransferRequest(props: TransferFormValuesType): Promise<any>;
     fetchWallets(): void;
     updateWalletTimestamp(): void;
   };
@@ -40,7 +42,7 @@ class WalletTransferContainer extends React.Component<Props, State> {
     errorMessage: undefined
   };
 
-  handleSubmit = (values: TransferFormValues) => {
+  handleSubmit = (values: TransferFormValuesType) => {
     this.setState({ isPending: true });
     walletTransferRequest({ ...values })
       .then(() => {
