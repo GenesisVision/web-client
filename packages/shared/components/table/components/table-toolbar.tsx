@@ -14,12 +14,12 @@ interface ITableToolbarProps {
     updateFilter: (filter: any) => void,
     filtering: FilteringType
   ): JSX.Element;
-  updateFilter(filter: any): void;
+  updateFilter?(filter: any): void;
   filtering?: FilteringType;
   view: LIST_VIEW;
   columns?: SortingColumn[];
-  sorting: string;
-  updateSorting(value: string): void;
+  sorting?: string;
+  updateSorting?(value: string): void;
   renderSorting?(value: SortingColumn): JSX.Element | string;
   isViewSwitchEnabled: boolean;
   onChange(view: LIST_VIEW): any;

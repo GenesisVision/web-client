@@ -65,42 +65,8 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) =>
           )
         )
       }),
-      title: string()
-        .required(
-          t("manager.create-program-page.settings.validation.title-required")
-        )
-        .min(
-          4,
-          t("manager.create-program-page.settings.validation.title-is-short")
-        )
-        .max(
-          20,
-          t("manager.create-program-page.settings.validation.title-is-long")
-        )
-        .matches(
-          /^[-a-zA-Z0-9\s]{4,20}$/,
-          t(
-            "manager.create-program-page.settings.validation.title-is-latin-and-numbers"
-          )
-        ),
-      description: string()
-        .required(
-          t(
-            "manager.create-program-page.settings.validation.description-required"
-          )
-        )
-        .min(
-          20,
-          t(
-            "manager.create-program-page.settings.validation.description-is-short"
-          )
-        )
-        .max(
-          500,
-          t(
-            "manager.create-program-page.settings.validation.description-is-long"
-          )
-        ),
+      title: assetTitleShape(t),
+      description: assetDescriptionShape(t),
       currency: string().required(
         t("manager.create-program-page.settings.validation.currency-required")
       ),
@@ -158,6 +124,38 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) =>
       )
     })
   );
+
+export const assetTitleShape = t => {
+  return string()
+    .trim()
+    .required(
+      t("manager.create-program-page.settings.validation.title-required")
+    )
+    .min(4, t("manager.create-program-page.settings.validation.title-is-short"))
+    .max(20, t("manager.create-program-page.settings.validation.title-is-long"))
+    .matches(
+      /^[-a-zA-Z0-9\s]{4,20}$/,
+      t(
+        "manager.create-program-page.settings.validation.title-is-latin-and-numbers"
+      )
+    );
+};
+
+export const assetDescriptionShape = t => {
+  return string()
+    .trim()
+    .required(
+      t("manager.create-program-page.settings.validation.description-required")
+    )
+    .min(
+      20,
+      t("manager.create-program-page.settings.validation.description-is-short")
+    )
+    .max(
+      500,
+      t("manager.create-program-page.settings.validation.description-is-long")
+    );
+};
 
 export const signalSuccessFeeShape = (t, managerMaxSuccessFee) => {
   return number()

@@ -13,6 +13,7 @@ import {
 const dashboardProgramsReducer = tableReducerFactory({
   type: DASHBOARD_PROGRAMS,
   paging: DEFAULT_PAGING,
+  //@ts-ignore
   filtering: DASHBOARD_PROGRAMS_DEFAULT_FILTERING,
   defaultFilters: DASHBOARD_PROGRAMS_FILTERS,
   clearable: true,

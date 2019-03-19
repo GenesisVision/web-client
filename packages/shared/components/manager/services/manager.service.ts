@@ -1,8 +1,13 @@
 import fundsApi from "shared/services/api-client/funds-api";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
+import { FilteringType } from "shared/components/table/components/filtering/filter.type";
+import { IDataModel } from "shared/constants/constants";
 
-export const fetchManagerPrograms = filter => {
+export const fetchManagerPrograms = (
+  filter: FilteringType
+): Promise<IDataModel> => {
+  console.log(filter);
   return programsApi
     .v10ProgramsGet({ ...filter, authorization: authService.getAuthArg() })
     .then(data => ({
@@ -11,7 +16,9 @@ export const fetchManagerPrograms = filter => {
     }));
 };
 
-export const fetchManagerFunds = filter => {
+export const fetchManagerFunds = (
+  filter: FilteringType
+): Promise<IDataModel> => {
   return fundsApi
     .v10FundsGet({ ...filter, authorization: authService.getAuthArg() })
     .then(data => ({
@@ -20,14 +27,21 @@ export const fetchManagerFunds = filter => {
     }));
 };
 
-export const fetchManagerAssetsCount = managerId => {
+export const fetchManagerAssetsCount = (
+  managerId: string
+): Promise<IAssetsCountModel> => {
   const authorization = authService.getAuthArg();
   const filtering = { managerId, take: 0 };
   return Promise.all([
-    programsApi.v10ProgramsGet(filtering, authorization),
-    fundsApi.v10FundsGet(filtering, authorization)
+    programsApi.v10ProgramsGet({ ...filtering, authorization }),
+    fundsApi.v10FundsGet({ ...filtering, authorization })
   ]).then(([programsData, fundsData]) => ({
     programsCount: programsData.total,
     fundsCount: fundsData.total
   }));
 };
+
+export interface IAssetsCountModel {
+  programsCount: number;
+  fundsCount: number;
+}

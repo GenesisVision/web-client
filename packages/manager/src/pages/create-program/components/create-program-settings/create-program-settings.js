@@ -70,6 +70,7 @@ class CreateProgramSettings extends React.Component {
       wallets.find(item => item.currency === (values && depositWalletCurrency))
         .id
     );
+    setFieldValue("depositAmount", "");
     fetchWallets();
     this.fetchRate(depositWalletCurrency, values.currency);
   };
@@ -78,6 +79,10 @@ class CreateProgramSettings extends React.Component {
     const currency = target.props.value;
     setFieldValue("currency", currency);
     this.fetchRate(values.depositWalletCurrency, currency);
+  };
+  setMaxAmount = (available, currency) => () => {
+    const { setFieldValue } = this.props;
+    setFieldValue("depositAmount", formatCurrencyValue(available, currency));
   };
   render() {
     const {
@@ -111,6 +116,7 @@ class CreateProgramSettings extends React.Component {
       title,
       currency
     } = values;
+    const descriptionTrimmedLength = description.trim().length;
     const imageInputError =
       errors &&
       errors.logo &&
@@ -202,13 +208,13 @@ class CreateProgramSettings extends React.Component {
                       "manager.create-program-page.settings.fields.description-requirements"
                     )}
                   </span>
-                  {description.length > 0 && (
+                  {descriptionTrimmedLength > 0 && (
                     <span className="create-program-settings__description-chars">
-                      {description.length}
+                      {descriptionTrimmedLength}
                       <GVProgramPeriod
                         start={0}
                         end={500}
-                        value={description.length}
+                        value={descriptionTrimmedLength}
                       />
                     </span>
                   )}
@@ -434,6 +440,10 @@ class CreateProgramSettings extends React.Component {
                 name="depositAmount"
                 label={t("wallet-transfer.amount")}
                 currency={depositWalletCurrency}
+                setMax={this.setMaxAmount(
+                  selectedWallet.available,
+                  selectedWallet.currency
+                )}
               />
               {currency !== depositWalletCurrency && (
                 <div className="invest-popup__currency">

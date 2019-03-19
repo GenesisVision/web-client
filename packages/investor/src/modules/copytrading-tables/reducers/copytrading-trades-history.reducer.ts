@@ -16,6 +16,7 @@ const copytradingTradesHistoryReducer = tableReducerFactory<
 >({
   type: COPYTRADING_TRADES_HISTORY,
   paging: DEFAULT_PAGING,
+  //@ts-ignore
   filtering: COPYTRADING_TRADES_HISTORY_DEFAULT_FILTERING,
   defaultFilters: COPYTRADING_TRADES_HISTORY_FILTERS,
   clearable: true,

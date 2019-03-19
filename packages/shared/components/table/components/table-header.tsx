@@ -10,7 +10,7 @@ import TableHeadCell from "./table-head-cell";
 import TableRow from "./table-row";
 
 interface ITableHeaderProps {
-  sorting: string;
+  sorting?: string;
   updateSorting(opt: string): ((dispatch: any, getState: any) => void) | void;
   columns?: SortingColumn[];
   children?(column: SortingColumn): JSX.Element;
