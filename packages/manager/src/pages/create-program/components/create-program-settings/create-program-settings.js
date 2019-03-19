@@ -70,6 +70,7 @@ class CreateProgramSettings extends React.Component {
       wallets.find(item => item.currency === (values && depositWalletCurrency))
         .id
     );
+    setFieldValue("depositAmount", "");
     fetchWallets();
     this.fetchRate(depositWalletCurrency, values.currency);
   };
@@ -78,6 +79,10 @@ class CreateProgramSettings extends React.Component {
     const currency = target.props.value;
     setFieldValue("currency", currency);
     this.fetchRate(values.depositWalletCurrency, currency);
+  };
+  setMaxAmount = (available, currency) => () => {
+    const { setFieldValue } = this.props;
+    setFieldValue("depositAmount", formatCurrencyValue(available, currency));
   };
   render() {
     const {
@@ -434,6 +439,10 @@ class CreateProgramSettings extends React.Component {
                 name="depositAmount"
                 label={t("wallet-transfer.amount")}
                 currency={depositWalletCurrency}
+                setMax={this.setMaxAmount(
+                  selectedWallet.available,
+                  selectedWallet.currency
+                )}
               />
               {currency !== depositWalletCurrency && (
                 <div className="invest-popup__currency">
