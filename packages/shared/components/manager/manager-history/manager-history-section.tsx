@@ -28,8 +28,8 @@ class ManagerHistorySection extends React.Component<
 > {
   state = {
     tab: MANAGER_HISTORY_TAB.PROGRAMS,
-    programsCount: undefined,
-    fundsCount: undefined
+    programsCount: 0,
+    fundsCount: 0
   };
 
   componentDidMount() {
@@ -38,11 +38,8 @@ class ManagerHistorySection extends React.Component<
     });
   }
 
-  handleTabChange = (
-    e: React.SyntheticEvent<EventTarget>,
-    tab: MANAGER_HISTORY_TAB
-  ) => {
-    this.setState({ tab });
+  handleTabChange = (e: React.SyntheticEvent<EventTarget>, tab: string) => {
+    this.setState({ tab: tab as MANAGER_HISTORY_TAB });
   };
 
   render() {

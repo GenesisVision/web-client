@@ -6,7 +6,7 @@ import ProgramTableRowShort from "./program-table-row-short";
 
 interface IProgramTableRowProps {
   title: string;
-  showRating: boolean;
+  showRating?: boolean;
   program: ProgramDetails;
   isAuthenticated: boolean;
   toggleFavorite(programId: string, isFavorite: boolean): void;

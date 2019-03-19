@@ -21,7 +21,7 @@ interface ITableContainerProps {
   isFetchOnMount: boolean;
   className?: string;
   renderHeader?(column: SortingColumn): JSX.Element;
-  renderSorting?(value: SortingColumn): string;
+  renderSorting?(column: SortingColumn): string;
   renderBodyCard?(
     x: any,
     updateRow?: UpdateRowFuncType,
