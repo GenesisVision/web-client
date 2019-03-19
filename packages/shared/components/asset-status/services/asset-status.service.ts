@@ -11,7 +11,6 @@ import { MiddlewareDispatch } from "shared/utils/types";
 import {
   ICancelRequest,
   cancelInvestorProgramRequest,
-  cancelManagerFundRequest,
   cancelManagerProgramRequest
 } from "../actions/asset-status-actions";
 
@@ -52,9 +51,6 @@ export const cancelRequest = (
     case ROLE.MANAGER + ASSET.PROGRAM:
       method = managerApi.v10ManagerProgramsRequestsByIdCancelPost;
       break;
-    case ROLE.MANAGER + ASSET.FUND:
-      method = managerApi.v10ManagerFundsRequestsByIdCancelPost;
-      break;
     default:
       method = investorApi.v10InvestorProgramsRequestsByIdCancelPost;
   }
@@ -83,9 +79,6 @@ export const cancelRequestDispatch = ({
   switch (role + asset) {
     case ROLE.MANAGER + ASSET.PROGRAM:
       actionCreator = cancelManagerProgramRequest;
-      break;
-    case ROLE.MANAGER + ASSET.FUND:
-      actionCreator = cancelManagerFundRequest;
       break;
     case ROLE.INVESTOR + ASSET.PROGRAM:
       actionCreator = cancelInvestorProgramRequest;

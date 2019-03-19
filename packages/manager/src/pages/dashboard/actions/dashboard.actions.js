@@ -55,13 +55,6 @@ export const updateDashboardFundsFilters = filters => ({
   payload: filters
 });
 
-export const cancelFundRequest = (auth, id) => {
-  return {
-    type: DASHBOARD_CANCEL_FUND_REQUESTS,
-    payload: managerApi.v10ManagerFundsRequestsByIdCancelPost(id, auth)
-  };
-};
-
 export const cancelProgramRequest = (auth, id) => {
   return {
     type: DASHBOARD_CANCEL_PROGRAM_REQUESTS,
