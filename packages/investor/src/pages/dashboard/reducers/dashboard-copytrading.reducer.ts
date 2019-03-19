@@ -13,6 +13,7 @@ import {
 const dashboardCopytradingReducer = tableReducerFactory({
   type: DASHBOARD_COPYTRADING,
   paging: DEFAULT_PAGING,
+  //@ts-ignore
   filtering: DASHBOARD_COPYTRADING_DEFAULT_FILTERING,
   defaultFilters: DASHBOARD_COPYTRADING_FILTERS,
   clearable: true,

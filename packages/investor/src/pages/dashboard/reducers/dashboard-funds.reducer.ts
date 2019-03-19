@@ -13,6 +13,7 @@ import {
 const dashboardFundsReducer = tableReducerFactory({
   type: DASHBOARD_FUNDS,
   paging: DEFAULT_PAGING,
+  //@ts-ignore
   filtering: DASHBOARD_FUNDS_DEFAULT_FILTERING,
   defaultFilters: DASHBOARD_FUNDS_FILTERS,
   clearable: true,
