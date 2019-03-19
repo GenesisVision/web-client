@@ -14,10 +14,10 @@ import {
   MANAGER_SORTING
 } from "../manager.constants";
 import { fetchManagerPrograms } from "../services/manager.service";
-import { FilteringType } from "shared/components/table/components/filtering/filter.type";
-import { FundDetails } from "gv-api-web";
-import { IUpdateRowFunc } from "shared/components/table/components/table.types";
-import { IDataModel } from "shared/constants/constants";
+import {
+  GetItemsFuncType,
+  TableToggleFavoriteType
+} from "shared/components/table/components/table.types";
 
 interface Props {
   managerId: string;
@@ -26,12 +26,12 @@ interface Props {
 }
 
 class ManagerPrograms extends React.Component<Props & InjectedTranslateProps> {
-  fetchManagerPrograms = (filters: FilteringType): Promise<IDataModel> => {
+  fetchManagerPrograms: GetItemsFuncType = filters => {
     const { managerId } = this.props;
     return fetchManagerPrograms({ ...filters, managerId });
   };
 
-  toggleFavorite = (program: FundDetails, updateRow: IUpdateRowFunc) => () => {
+  toggleFavorite: TableToggleFavoriteType = (program, updateRow) => () => {
     const isFavorite = program.personalDetails.isFavorite;
     const newProgram = {
       ...program,

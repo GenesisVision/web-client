@@ -1,6 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { Dispatch, bindActionCreators } from "redux";
+import { bindActionCreators, Dispatch } from "redux";
 import { updateFilter } from "shared/components/table/helpers/filtering.helpers";
 import RootState from "shared/reducers/root-reducer";
 
@@ -8,9 +8,15 @@ import { IPaging } from "../helpers/paging.helpers";
 import { getItems, updateFilters } from "../services/table.service";
 import { FilteringType, SortingColumn, TFilter } from "./filtering/filter.type";
 import Table from "./table";
+import { IDataModel } from "shared/constants/constants";
+import {
+  GetItemsFuncActionType,
+  IUpdateFilterFunc,
+  UpdateRowFuncType
+} from "./table.types";
 
 interface ITableContainerProps {
-  getItems: any;
+  getItems: GetItemsFuncActionType;
   dataSelector: any;
   isFetchOnMount: boolean;
   className?: string;
@@ -18,16 +24,16 @@ interface ITableContainerProps {
   renderSorting?(value: SortingColumn): string;
   renderBodyCard?(
     x: any,
-    updateRow?: (row: any) => void,
+    updateRow?: UpdateRowFuncType,
     updateItems?: () => void
   ): JSX.Element;
   renderBodyRow?(
     x: any,
-    updateRow?: (row: any) => void,
+    updateRow?: UpdateRowFuncType,
     updateItems?: () => void
   ): JSX.Element;
   renderFilters?(
-    updateFilter: (filter: any) => void,
+    updateFilter: IUpdateFilterFunc,
     filtering: FilteringType
   ): JSX.Element;
   columns?: SortingColumn[];
@@ -36,19 +42,19 @@ interface ITableContainerProps {
 }
 
 interface ITableContainerStateProps {
-  data: { items: any[]; total: number };
+  data: IDataModel;
   isPending: boolean;
   sorting: string;
   paging: IPaging;
   filtering: FilteringType;
-  fetchItems(): void;
+  fetchItems: GetItemsFuncActionType;
   defaults: any;
 }
 
 interface ITableContainerDispatchProps {
   service: {
     getItems(
-      fetchItems: any,
+      fetchItems: GetItemsFuncActionType,
       dataSelector: (opts?: any) => { [keys: string]: any }
     ): (dispatch: Dispatch, getState: any) => void;
     updateFilters(

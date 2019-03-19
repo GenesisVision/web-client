@@ -17,10 +17,10 @@ import { fetchManagerFunds } from "../services/manager.service";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import { FundDetails } from "gv-api-web";
 import {
+  GetItemsFuncType,
   IUpdateFilterFunc,
-  IUpdateRowFunc
+  UpdateRowFuncType
 } from "shared/components/table/components/table.types";
-import { IDataModel } from "shared/constants/constants";
 
 interface Props {
   managerId: string;
@@ -29,12 +29,12 @@ interface Props {
 }
 
 class ManagerFunds extends React.Component<Props & InjectedTranslateProps> {
-  fetchManagerFunds = (filters: FilteringType): Promise<IDataModel> => {
+  fetchManagerFunds: GetItemsFuncType = filters => {
     const { managerId } = this.props;
     return fetchManagerFunds({ ...filters, managerId });
   };
 
-  toggleFavorite = (fund: FundDetails, updateRow: IUpdateRowFunc) => () => {
+  toggleFavorite = (fund: FundDetails, updateRow: UpdateRowFuncType) => () => {
     const isFavorite = fund.personalDetails.isFavorite;
     const newProgram = {
       ...fund,
