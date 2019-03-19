@@ -111,6 +111,7 @@ class CreateProgramSettings extends React.Component {
       title,
       currency
     } = values;
+    const descriptionTrimmedLength = description.trim().length;
     const imageInputError =
       errors &&
       errors.logo &&
@@ -202,13 +203,13 @@ class CreateProgramSettings extends React.Component {
                       "manager.create-program-page.settings.fields.description-requirements"
                     )}
                   </span>
-                  {description.length > 0 && (
+                  {descriptionTrimmedLength > 0 && (
                     <span className="create-program-settings__description-chars">
-                      {description.length}
+                      {descriptionTrimmedLength}
                       <GVProgramPeriod
                         start={0}
                         end={500}
-                        value={description.length}
+                        value={descriptionTrimmedLength}
                       />
                     </span>
                   )}
