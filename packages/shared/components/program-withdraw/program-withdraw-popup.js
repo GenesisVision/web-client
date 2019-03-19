@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import React, { Component, Fragment } from "react";
+import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 
 import ProgramWithdrawForm from "./program-withdraw-form";
 import ProgramWithdrawTop from "./program-withdraw-top";
@@ -26,7 +27,7 @@ class ProgramWithdrawPopup extends Component {
   };
 
   render() {
-    if (!this.state.data) return null;
+    if (!this.state.data) return <DialogLoader />;
     const { assetCurrency, accountCurrency, errorMessage } = this.props;
     const { title, availableToWithdraw, periodEnds, rate } = this.state.data;
     return (

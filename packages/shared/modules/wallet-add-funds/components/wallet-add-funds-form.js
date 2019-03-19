@@ -24,9 +24,9 @@ class WalletAddFundsForm extends Component {
     const onCopy = () => {
       try {
         copy(depositAddress);
-        notifySuccess(t("wallet-add-funds.copy-to-clipboard-success"));
+        notifySuccess(t("wallet-deposit.copy-to-clipboard-success"));
       } catch (error) {
-        notifyError(t("wallet-add-funds.copy-to-clipboard-error"));
+        notifyError(t("wallet-deposit.copy-to-clipboard-error"));
       }
     };
 
@@ -34,13 +34,13 @@ class WalletAddFundsForm extends Component {
       <form id="add-funds" className="wallet-add-funds-popup">
         <div className="dialog__top">
           <div className="dialog__header">
-            <h2>{t("wallet-add-funds.title")}</h2>
+            <h2>{t("wallet-deposit.title")}</h2>
           </div>
           <div className="dialog-field">
             <GVFormikField
               name="currency"
               component={GVTextField}
-              label={t("wallet-add-funds.select-currency")}
+              label={t("wallet-deposit.select-currency")}
               InputComponent={Select}
               onChange={this.onChangeCurrency}
             >
@@ -64,7 +64,7 @@ class WalletAddFundsForm extends Component {
           <GVqr className="wallet-add-funds-popup__qr" value={depositAddress} />
           <StatisticItem
             className="wallet-add-funds-popup__address"
-            label={t("wallet-add-funds.deposit-address")}
+            label={t("wallet-deposit.deposit-address")}
           >
             {depositAddress}
           </StatisticItem>
