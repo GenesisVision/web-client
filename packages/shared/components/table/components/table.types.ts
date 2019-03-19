@@ -7,7 +7,7 @@ export type Column = {
 };
 
 export interface IUpdateFilterFunc {
-  (filer: any): void;
+  (filter: any): void;
 }
 
 export interface IComposeDefaultFilter {
