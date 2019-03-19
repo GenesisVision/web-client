@@ -7,7 +7,7 @@ import { ReactComponent as Favorite } from "./favorite.svg";
 
 interface IFavoriteIconProps {
   id: string;
-  onClick(id: string, selected: boolean): void;
+  onClick?(id: string, selected: boolean): void;
   selected: boolean;
   className?: string;
 }

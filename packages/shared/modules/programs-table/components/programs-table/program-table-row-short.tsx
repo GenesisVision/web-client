@@ -21,10 +21,10 @@ import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
 interface IProgramTableRowShortProps {
   title: string;
-  showRating: boolean;
+  showRating?: boolean;
   program: ProgramDetails;
-  isAuthenticated: boolean;
-  toggleFavorite(programId: string, isFavorite: boolean): void;
+  isAuthenticated?: boolean;
+  toggleFavorite?(programId: string, isFavorite: boolean): void;
   onExpandClick(): void;
 }
 

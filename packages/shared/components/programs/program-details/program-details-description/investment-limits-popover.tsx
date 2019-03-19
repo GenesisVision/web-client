@@ -3,7 +3,7 @@ import { GVButton } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
-import AboutLevelsComponent from "shared/components/about-levels/about-levels";
+import AboutLevelsComponent from "./about-levels/about-levels";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { CURRENCIES } from "shared/modules/currency-select/currency-select.constants";
 import { formatCurrencyValue } from "shared/utils/formatter";

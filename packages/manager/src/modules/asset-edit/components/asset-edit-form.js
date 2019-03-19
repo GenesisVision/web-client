@@ -35,6 +35,7 @@ const AssetEditForm = ({
     errors &&
     errors.logo &&
     (errors.logo.width || errors.logo.height || errors.logo.size);
+  const descriptionTrimmedLength = values.description.trim().length;
   return (
     <form id="edit-form" onSubmit={handleSubmit}>
       <div className="dialog__top">
@@ -59,13 +60,13 @@ const AssetEditForm = ({
             label={t("manager.create-program-page.settings.fields.description")}
             component={GVTextField}
           />
-          {values.description.length > 0 && (
+          {descriptionTrimmedLength > 0 && (
             <span className="create-program-settings__description-chars">
-              {values.description.length}
+              {descriptionTrimmedLength}
               <GVProgramPeriod
                 start={0}
                 end={500}
-                value={values.description.length}
+                value={descriptionTrimmedLength}
               />
             </span>
           )}

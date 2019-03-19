@@ -16,11 +16,11 @@ import {
 import SelectFilter from "../../filtering/select-filter/select-filter";
 
 interface ISortingFilterProps {
-  sorting: string;
+  sorting?: string;
   columns?: SortingColumn[];
   renderValueText?(value: SortingColumn): JSX.Element | string;
   onChange?(): void;
-  updateSorting(value: string): void;
+  updateSorting?(value: string): void;
 }
 
 class SortingFilter extends React.Component<ISortingFilterProps> {
@@ -39,11 +39,13 @@ class SortingFilter extends React.Component<ISortingFilterProps> {
     getSortingDirection(this.props.sorting) === SORTING_DIRECTION.ASC;
 
   handleOnSelectChange = ({ value }: TFilter<any>): void =>
+    this.props.updateSorting &&
     this.props.updateSorting(
       value + (this.isAsc() ? SORTING_DIRECTION.ASC : SORTING_DIRECTION.DESC)
     );
 
   handleOnDirectionChange = (isAsc: boolean) => (): void =>
+    this.props.updateSorting &&
     this.props.updateSorting(
       this.composeSortingColumnName() +
         (isAsc ? SORTING_DIRECTION.ASC : SORTING_DIRECTION.DESC)

@@ -1,4 +1,8 @@
-import { number, object, string } from "yup";
+import {
+  assetDescriptionShape,
+  assetTitleShape
+} from "pages/create-program/components/create-program-settings/create-program-settings.validators";
+import { number, object } from "yup";
 
 const editAssetSettingsValidationSchema = ({ t, ...props }) =>
   object().shape({
@@ -23,40 +27,8 @@ const editAssetSettingsValidationSchema = ({ t, ...props }) =>
         t("manager.create-program-page.settings.validation.image-file-is-large")
       )
     }),
-    title: string()
-      .required(
-        t("manager.create-program-page.settings.validation.title-required")
-      )
-      .min(
-        4,
-        t("manager.create-program-page.settings.validation.title-is-short")
-      )
-      .max(
-        20,
-        t("manager.create-program-page.settings.validation.title-is-long")
-      )
-      .matches(
-        /^[-a-zA-Z0-9\s]{4,20}$/,
-        t(
-          "manager.create-program-page.settings.validation.title-is-latin-and-numbers"
-        )
-      ),
-    description: string()
-      .required(
-        t(
-          "manager.create-program-page.settings.validation.description-required"
-        )
-      )
-      .min(
-        20,
-        t(
-          "manager.create-program-page.settings.validation.description-is-short"
-        )
-      )
-      .max(
-        500,
-        t("manager.create-program-page.settings.validation.description-is-long")
-      )
+    title: assetTitleShape(t),
+    description: assetDescriptionShape(t)
   });
 
 export default editAssetSettingsValidationSchema;
