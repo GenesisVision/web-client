@@ -33,3 +33,8 @@ export const MANAGER_FILTERING = {
 };
 
 export const MANAGER_SORTING = "ByProfitDesc";
+
+export enum MANAGER_HISTORY_TAB {
+  PROGRAMS = "programs",
+  FUNDS = "funds"
+}
