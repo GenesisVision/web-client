@@ -12,7 +12,7 @@ import { Action, Dispatch, bindActionCreators, compose } from "redux";
 import DashboardFunds from "shared/components/dashboard/dashboard-assets/dashboard-funds/dashboard-funds";
 import DashboardPrograms from "shared/components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs";
 import Surface from "shared/components/surface/surface";
-import { INVESTOR } from "shared/constants/constants";
+import { ROLE } from "shared/constants/constants";
 
 import { clearDashboardAssetsTable } from "../../actions/dashboard.actions";
 import {
@@ -98,18 +98,26 @@ class DashboardAssetsSection extends Component<
         </div>
         <div className="dashboard-assets__table">
           {tab === ASSET_TAB.PROGRAMS && (
-            <DashboardPrograms
-              getDashboardPrograms={getDashboardPrograms}
-              title={title}
-              role={INVESTOR}
-            />
+            <>
+              {/*
+            //@ts-ignore */}
+              <DashboardPrograms
+                getDashboardPrograms={getDashboardPrograms}
+                title={title}
+                role={ROLE.INVESTOR}
+              />
+            </>
           )}
           {tab === ASSET_TAB.FUNDS && (
-            <DashboardFunds
-              getDashboardFunds={getDashboardFunds}
-              title={title}
-              role={INVESTOR}
-            />
+            <>
+              {/*
+            //@ts-ignore */}
+              <DashboardFunds
+                getDashboardFunds={getDashboardFunds}
+                title={title}
+                role={ROLE.INVESTOR}
+              />
+            </>
           )}
           {/*{tab === ASSET_TAB.COPYTRADING && (
             <DashboardCopytrading title={title} />

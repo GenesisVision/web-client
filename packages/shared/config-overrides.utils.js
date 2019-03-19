@@ -1,9 +1,9 @@
-module.exports.getReportFiles = repoName => [
-  `../(${repoName}|shared)/**`,
-  `!../**/*.json`,
-  `!../**/__tests__/**`,
-  `!../**/?(*.)(spec|test).*`,
-  `!../**/src/setupProxy.*`,
-  `!../**/src/setupTests.*`,
-  `!../**/*.js`
+module.exports.getReportFiles = () => [
+  `../shared/**`,
+  `!../shared/**/*.json`,
+  `!../shared/**/__tests__/**`,
+  `!../shared/**/?(*.)(spec|test).*`,
+  `!../shared/**/src/setupProxy.*`,
+  `!../shared/**/src/setupTests.*`,
+  `!../shared/**/*.js`
 ];
