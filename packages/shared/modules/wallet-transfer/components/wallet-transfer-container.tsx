@@ -12,31 +12,10 @@ import WalletTransferForm, {
   TransferFormValuesType
 } from "./wallet-transfer-form";
 
-interface StateProps {
-  wallets: WalletData[];
-}
-
-interface DispatchProps {
-  service: {
-    walletTransferRequest(props: TransferFormValuesType): Promise<any>;
-    fetchWallets(): void;
-    updateWalletTimestamp(): void;
-  };
-}
-
-interface OwnProps {
-  currentWallet: WalletData;
-  onClose(): void;
-}
-
-interface Props extends StateProps, DispatchProps, OwnProps {}
-
-interface State {
-  isPending: boolean;
-  errorMessage?: string;
-}
-
-class WalletTransferContainer extends React.Component<Props, State> {
+class WalletTransferContainer extends React.Component<
+  StateProps & DispatchProps & OwnProps,
+  State
+> {
   state = {
     isPending: false,
     errorMessage: undefined
@@ -93,3 +72,25 @@ export default connect<StateProps, DispatchProps, OwnProps, RootState>(
   mapStateToProps,
   mapDispatchToProps
 )(WalletTransferContainer);
+
+interface StateProps {
+  wallets: WalletData[];
+}
+
+interface DispatchProps {
+  service: {
+    walletTransferRequest(props: TransferFormValuesType): Promise<any>;
+    fetchWallets(): void;
+    updateWalletTimestamp(): void;
+  };
+}
+
+interface OwnProps {
+  currentWallet: WalletData;
+  onClose(): void;
+}
+
+interface State {
+  isPending: boolean;
+  errorMessage?: string;
+}

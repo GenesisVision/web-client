@@ -27,26 +27,6 @@ const getSelectedWallet = (
 ): WalletData =>
   wallets.find(wallet => wallet.id === currentWalletId) || ({} as WalletData);
 
-export interface FormValues {
-  sourceId: string;
-  destinationId: string;
-  amount: string;
-}
-
-export type TransferFormValuesType = FormValues & { transferAll: boolean };
-
-interface FormProps extends FormikProps<FormValues> {}
-
-interface OwnProps {
-  onSubmit(values: TransferFormValuesType): void;
-  disabled: boolean;
-  errorMessage?: string;
-  wallets: Array<WalletData>;
-  currentWallet: WalletData;
-}
-
-interface Props extends InjectedTranslateProps, FormProps, OwnProps {}
-
 class WalletTransferForm extends React.Component<Props> {
   onChangeSourceId = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { setFieldValue, values } = this.props;
@@ -249,3 +229,21 @@ export default compose<React.FunctionComponent<OwnProps>>(
     }
   })
 )(WalletTransferForm);
+
+interface OwnProps {
+  onSubmit(values: TransferFormValuesType): void;
+  disabled: boolean;
+  errorMessage?: string;
+  wallets: Array<WalletData>;
+  currentWallet: WalletData;
+}
+
+interface FormValues {
+  sourceId: string;
+  destinationId: string;
+  amount: string;
+}
+
+type Props = InjectedTranslateProps & FormikProps<FormValues> & OwnProps;
+
+export type TransferFormValuesType = FormValues & { transferAll: boolean };
