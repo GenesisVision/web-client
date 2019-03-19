@@ -15,7 +15,7 @@ import { ManagerRootState } from "../../../reducers";
 export interface IHeaderContainerStateProps {
   isAuthenticated: boolean;
   info: ProfileHeaderViewModel | undefined;
-  backPath: string | undefined;
+  backPath: string;
 }
 export interface IHeaderContainerDispatchProps {
   fetchProfileHeaderInfo: any;
@@ -67,7 +67,7 @@ const mapStateToProps = (
 ): IHeaderContainerStateProps => ({
   info: state.profileHeader.info.data,
   isAuthenticated: state.authData.isAuthenticated,
-  backPath: state.router.location ? state.router.location.pathname : undefined
+  backPath: state.router.location ? state.router.location.pathname : ""
 });
 
 export default connect(

@@ -224,6 +224,7 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
     color: $text-color;
     padding-bottom: $padding-small;
     word-break: break-word;
+    white-space: pre-wrap;
     @include media-breakpoint-landscape-phone() {
       font-size: $font-size-paragraph;
       line-height: $font-size-paragraph * 2;

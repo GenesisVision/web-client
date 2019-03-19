@@ -24,6 +24,7 @@ const ProgramDetailsPage: React.FC = () => {
   return (
     <ProgramDetailsPageCommon
       descriptionSection={descriptionSection}
+      //@ts-ignore
       historySection={historySection}
     />
   );
