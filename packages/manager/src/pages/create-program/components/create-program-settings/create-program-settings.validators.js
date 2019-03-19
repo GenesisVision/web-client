@@ -116,18 +116,18 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) =>
             "manager.create-program-page.settings.validation.entry-fee-required"
           )
         )
-        .moreThan(
+        .min(
           0.01,
           t("manager.create-program-page.settings.validation.entry-fee-min")
         )
-        .lessThan(
+        .max(
           props.programsInfo.managerMaxEntryFee,
           "Entry fee must be less than  " +
             props.programsInfo.managerMaxEntryFee +
             " %"
         ),
       successFee: number()
-        .moreThan(
+        .min(
           0.01,
           t("manager.create-program-page.settings.validation.success-fee-min")
         )
@@ -136,7 +136,7 @@ const createProgramSettingsValidationSchema = ({ t, ...props }) =>
             "manager.create-program-page.settings.validation.success-fee-required"
           )
         )
-        .lessThan(
+        .max(
           props.programsInfo.managerMaxSuccessFee,
           "Success fee must be less than  " +
             props.programsInfo.managerMaxSuccessFee +
