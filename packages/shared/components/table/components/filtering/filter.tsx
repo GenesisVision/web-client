@@ -45,7 +45,7 @@ class Filter extends React.PureComponent<IFilterProps, IFilterState> {
       cancel: this.handleClosePopover
     });
     return (
-      <React.Fragment>
+      <>
         <div className="filter" onClick={this.handleOpenPopover}>
           <div className="filter__label">{label}</div>
           <div className="filter__value">{renderValueText(value)}</div>
@@ -59,7 +59,7 @@ class Filter extends React.PureComponent<IFilterProps, IFilterState> {
         >
           {child}
         </Popover>
-      </React.Fragment>
+      </>
     );
   }
 }

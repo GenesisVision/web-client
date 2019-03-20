@@ -2,7 +2,6 @@ import "./tag-filter.scss";
 
 import { ProgramTag } from "gv-api-web";
 import * as React from "react";
-import { Fragment } from "react";
 import Popover, {
   HORIZONTAL_POPOVER_POS
 } from "shared/components/popover/popover";
@@ -65,7 +64,7 @@ class TagFilter extends React.PureComponent<ITagFilterProps, ITagFilterState> {
     const { values, value } = this.props;
     const { anchor } = this.state;
     return (
-      <Fragment>
+      <>
         <div className="filter filter--tags">
           <div className="filter__value">
             {this.filterChoosed(values).map(tag => (
@@ -94,7 +93,7 @@ class TagFilter extends React.PureComponent<ITagFilterProps, ITagFilterState> {
             values={values}
           />
         </Popover>
-      </Fragment>
+      </>
     );
   }
 }

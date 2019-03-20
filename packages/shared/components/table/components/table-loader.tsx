@@ -11,12 +11,12 @@ const TableLoader: React.FC<{ view: LIST_VIEW }> = React.memo(({ view }) => {
     case LIST_VIEW.TABLE:
     default:
       return (
-        <React.Fragment>
+        <>
           <TableLoaderTableRow />
           <TableLoaderTableRow />
-        </React.Fragment>
+        </>
       );
   }
-};
+});
 
 export default React.memo(TableLoader);
