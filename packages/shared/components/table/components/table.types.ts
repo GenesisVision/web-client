@@ -12,6 +12,8 @@ export type Column = {
 export interface IUpdateFilterFunc {
   (filter: any): void;
 }
+export type UpdateItemsFuncType = () => void;
+
 export type UpdateRowFuncType = (row: any) => void;
 
 export type GetItemsFuncType = (filters?: FilteringType) => Promise<IDataModel>;
@@ -37,3 +39,14 @@ export type FiltersType = {
   filtering?: FilteringType;
   sorting?: string;
 };
+
+export type RenderBodyItemFuncType = (
+  item: any,
+  updateRow?: UpdateRowFuncType,
+  updateItems?: UpdateItemsFuncType
+) => JSX.Element;
+
+export type RenderFiltersFuncType = (
+  updateFilter: IUpdateFilterFunc,
+  filtering: FilteringType
+) => JSX.Element;
