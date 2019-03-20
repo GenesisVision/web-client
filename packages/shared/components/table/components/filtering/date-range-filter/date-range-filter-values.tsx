@@ -6,7 +6,6 @@ import GVDatePicker from "shared/components/gv-datepicker/gv-datepicker";
 
 import {
   DATA_RANGE_FILTER_TYPES,
-  DateRangeFilterTypes,
   IDataRangeFilterValue
 } from "./date-range-filter.constants";
 
@@ -54,39 +53,39 @@ class DateRangeFilterValues extends React.PureComponent<
   render() {
     const { t, type, dateStart, dateEnd, startLabel } = this.props;
     switch (type) {
-      case DateRangeFilterTypes.all:
+      case DATA_RANGE_FILTER_TYPES.ALL:
         return (
-          <React.Fragment>
+          <>
             {this.renderFirstInput(startLabel)}
             {this.renderSecondInput()}
-          </React.Fragment>
+          </>
         );
-      case DateRangeFilterTypes.lastMonth:
+      case DATA_RANGE_FILTER_TYPES.LAST_MOUTH:
         return (
-          <React.Fragment>
+          <>
             {this.renderFirstInput(
               moment()
                 .subtract(1, "month")
                 .format("ll")
             )}
             {this.renderSecondInput()}
-          </React.Fragment>
+          </>
         );
-      case DateRangeFilterTypes.lastWeek:
+      case DATA_RANGE_FILTER_TYPES.LAST_WEEK:
         return (
-          <React.Fragment>
+          <>
             {this.renderFirstInput(
               moment()
                 .subtract(1, "week")
                 .format("ll")
             )}
             {this.renderSecondInput()}
-          </React.Fragment>
+          </>
         );
-      case DateRangeFilterTypes.custom:
+      case DATA_RANGE_FILTER_TYPES.CUSTOM:
       default:
         return (
-          <React.Fragment>
+          <>
             <GVTextField
               wrapperClassName="date-range-filter__date-input"
               type="text"
@@ -110,7 +109,7 @@ class DateRangeFilterValues extends React.PureComponent<
               maxDate={new Date()}
               onChange={this.handleOnChange("dateEnd")}
             />
-          </React.Fragment>
+          </>
         );
     }
   }
