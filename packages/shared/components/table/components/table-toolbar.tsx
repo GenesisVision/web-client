@@ -57,13 +57,13 @@ class TableToolbar extends React.Component<
               sorting={sorting}
               columns={columns}
               updateSorting={updateSorting}
-              //@ts-ignore
               renderValueText={renderSorting}
             />
           )}
-          {/*
-            // @ts-ignore */}
-          {renderFilters && renderFilters(updateFilter, filtering)}
+          {renderFilters &&
+            updateFilter &&
+            filtering &&
+            renderFilters(updateFilter, filtering)}
           {createButtonToolbar}
         </div>
         {isViewSwitchEnabled && (

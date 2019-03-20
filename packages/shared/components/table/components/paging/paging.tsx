@@ -17,10 +17,8 @@ class Paging extends React.Component<IPagingProps> {
 
     return (
       <Pager
-        //@ts-ignore TODO fix types
-        total={paging.totalPages}
-        //@ts-ignore TODO fix types
-        current={paging.currentPage}
+        total={paging.totalPages || 0}
+        current={paging.currentPage || 1}
         countVisiblePages={3}
         onPageChanged={(nextPage: number) =>
           updatePaging({ currentPage: nextPage - 1 })

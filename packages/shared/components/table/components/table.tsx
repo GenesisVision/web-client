@@ -46,13 +46,11 @@ class Table extends React.Component<ITableProps, ITableState> {
   componentDidMount() {
     if (this.isViewSwitchEnabled)
       this.setState({
-        //@ts-ignore TODO
         view: (loadData(PROGRAMS_VIEW) as LIST_VIEW) || LIST_VIEW.TABLE
       });
   }
 
   changeView = (view: LIST_VIEW) => {
-    //@ts-ignore TODO
     saveData(PROGRAMS_VIEW, view);
     this.setState({ view });
   };
@@ -116,8 +114,6 @@ class Table extends React.Component<ITableProps, ITableState> {
         >
           {view === LIST_VIEW.CARDS && (
             <div className={classNames("table", className)}>
-              {/*
-            // @ts-ignore TODO*/}
               <TableBody
                 items={items}
                 className="table-cards"
@@ -132,12 +128,9 @@ class Table extends React.Component<ITableProps, ITableState> {
               <TableHeader
                 columns={columns}
                 sorting={sorting}
-                //@ts-ignore
                 updateSorting={updateSorting}
                 renderHeader={renderHeader}
               />
-              {/*
-            // @ts-ignore */}
               <TableBody
                 isPending={isPending}
                 items={items}

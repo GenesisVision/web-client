@@ -142,7 +142,6 @@ class TableModule extends React.Component<
     const { data, isPending, paging } = this.state;
     const newPaging = { ...paging, totalItems: data.total ? data.total : 0 };
     return (
-      //@ts-ignore
       <Table
         {...this.props}
         {...this.state}

@@ -12,16 +12,13 @@ export interface ITableFooterProps {
 
 const TableFooter: React.FC<ITableFooterProps> = ({
   isPending,
-  paging,
+  paging = {},
   updatePaging
 }) => {
-  //@ts-ignore
-  if (!paging || paging.totalPages < 2) return null;
+  if (!paging || (paging.totalPages && paging.totalPages < 2)) return null;
 
   return (
     <div className="table__footer">
-      {/*
-      //@ts-ignore TODO fix types*/}
       <ItemsCounter {...paging} />
       <Paging
         paging={paging}

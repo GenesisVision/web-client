@@ -91,7 +91,6 @@ class TableContainer extends React.Component<
     const { data, isPending, paging, ...otherProps } = this.props;
     const newPaging = { ...paging, totalItems: data ? data.total : 0 };
     return (
-      //@ts-ignore
       <Table
         {...otherProps}
         updateRow={this.updateItems}

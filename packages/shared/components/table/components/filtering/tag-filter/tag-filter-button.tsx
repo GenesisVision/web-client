@@ -18,10 +18,11 @@ const TagFilterButton: React.FC<ITagFilterButton> = ({
       className={classNames("tag-filter__button tag-button", {
         "tag-filter__button--active": isActive
       })}
-      //@ts-ignore
-      onClick={onClickHandle}
+      onClick={onClickHandle as () => void}
     >
-      <span className="tag-filter__button-plus">+</span>Tag
+      <>
+        <span className="tag-filter__button-plus">+</span>Tag
+      </>
     </GVButton>
   );
 };
