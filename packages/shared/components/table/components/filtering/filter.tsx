@@ -9,13 +9,13 @@ import Popover, {
 import { Nullable } from "shared/utils/types";
 
 import FilterArrowIcon from "./filter-arrow-icon";
-import { TFilter } from "./filter.type";
+import { IUpdateFilterFunc } from "../table.types";
 
 interface IFilterProps {
   label: string;
   value: any;
   renderValueText(value: any): string;
-  updateFilter?(filter: TFilter<any>): any;
+  updateFilter?: IUpdateFilterFunc;
   name: string;
 }
 
