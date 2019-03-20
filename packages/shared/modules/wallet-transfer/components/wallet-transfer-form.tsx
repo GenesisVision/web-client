@@ -5,6 +5,7 @@ import { WalletData } from "gv-api-web";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import Select from "shared/components/select/select";
@@ -41,6 +42,8 @@ class WalletTransferForm extends React.Component<Props> {
     const { setFieldValue } = this.props;
     setFieldValue("destinationId", event.target.value);
   };
+
+  isAllow = (values: NumberFormatValues) => values.value !== ".";
 
   render() {
     const {
@@ -148,7 +151,7 @@ class WalletTransferForm extends React.Component<Props> {
               label={t("wallet-transfer.amount")}
               currency={selectedFromWallet.currency}
               setMax={setMaxAmount}
-              isAllow={values => values.value !== "."}
+              isAllow={this.isAllow}
             />
           </div>
           <TransferRate
