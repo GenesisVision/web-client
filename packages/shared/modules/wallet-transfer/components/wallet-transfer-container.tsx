@@ -5,42 +5,23 @@ import { Dispatch, bindActionCreators } from "redux";
 import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 import { updateWalletTimestamp } from "shared/components/wallet/actions/wallet.actions";
 import { fetchWallets } from "shared/components/wallet/services/wallet.services";
-import { walletTransferRequest } from "shared/modules/wallet-withdraw/services/wallet-withdraw.services";
 import RootState from "shared/reducers/root-reducer";
 
-import WalletTransferForm, { TransferFormValues } from "./wallet-transfer-form";
+import { walletTransferRequest } from "../services/wallet-transfer.services";
+import WalletTransferForm, {
+  TransferFormValuesType
+} from "./wallet-transfer-form";
 
-interface StateProps {
-  wallets: WalletData[];
-}
-
-interface DispatchProps {
-  service: {
-    walletTransferRequest(props: TransferFormValues): Promise<any>;
-    fetchWallets(): void;
-    updateWalletTimestamp(): void;
-  };
-}
-
-interface OwnProps {
-  currentWallet: WalletData;
-  onClose(): void;
-}
-
-interface Props extends StateProps, DispatchProps, OwnProps {}
-
-interface State {
-  isPending: boolean;
-  errorMessage?: string;
-}
-
-class WalletTransferContainer extends React.Component<Props, State> {
+class WalletTransferContainer extends React.Component<
+  StateProps & DispatchProps & OwnProps,
+  State
+> {
   state = {
     isPending: false,
     errorMessage: undefined
   };
 
-  handleSubmit = (values: TransferFormValues) => {
+  handleSubmit = (values: TransferFormValuesType) => {
     this.setState({ isPending: true });
     walletTransferRequest({ ...values })
       .then(() => {
@@ -91,3 +72,25 @@ export default connect<StateProps, DispatchProps, OwnProps, RootState>(
   mapStateToProps,
   mapDispatchToProps
 )(WalletTransferContainer);
+
+interface StateProps {
+  wallets: WalletData[];
+}
+
+interface DispatchProps {
+  service: {
+    walletTransferRequest(props: TransferFormValuesType): Promise<any>;
+    fetchWallets(): void;
+    updateWalletTimestamp(): void;
+  };
+}
+
+interface OwnProps {
+  currentWallet: WalletData;
+  onClose(): void;
+}
+
+interface State {
+  isPending: boolean;
+  errorMessage?: string;
+}
