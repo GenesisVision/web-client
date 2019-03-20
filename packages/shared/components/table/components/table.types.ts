@@ -16,8 +16,6 @@ export type UpdateRowFuncType = (row: any) => void;
 
 export type GetItemsFuncType = (filters?: FilteringType) => Promise<IDataModel>;
 
-export type GetItemsFuncVoidType = (filters?: FilteringType) => void;
-
 export type GetItemsFuncActionType = (filters: FilteringType) => Action;
 
 export type TableToggleFavoriteType = (
