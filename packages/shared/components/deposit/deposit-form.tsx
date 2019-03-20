@@ -3,7 +3,7 @@ import { ProgramInvestInfo, WalletData } from "gv-api-web";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
-import NumberFormat from "react-number-format";
+import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
 import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
 import FormError from "shared/components/form/form-error/form-error";
@@ -50,12 +50,11 @@ class DepositForm extends React.Component<
     );
   };
 
-  isAllow = (values: any): boolean => {
-    const { floatValue, formattedValue, value, currency } = values;
-
+  isAllow = (currency: string) => (values: NumberFormatValues): boolean => {
+    const { formattedValue, value, floatValue } = values;
     return (
-      formattedValue === "" ||
-      (validateFraction(value, currency) && Boolean(floatValue))
+      (formattedValue === "" || validateFraction(value, currency)) &&
+      value !== "."
     );
   };
 
@@ -158,7 +157,7 @@ class DepositForm extends React.Component<
               : t("deposit-asset.amount")
           }
           currency={walletCurrency}
-          isAllow={this.isAllow}
+          isAllow={this.isAllow(walletCurrency)}
           setMax={this.setMaxAmount}
         />
 
