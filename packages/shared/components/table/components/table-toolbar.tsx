@@ -5,28 +5,30 @@ import SortingFilter from "shared/components/table/components/sorting/sorting-fi
 
 import { LIST_VIEW } from "../table.constants";
 import { FilteringType, SortingColumn } from "./filtering/filter.type";
-import { IUpdateFilterFunc } from "./table.types";
+import { IUpdateFilterFunc, RenderFiltersFuncType } from "./table.types";
 
-interface ITableToolbarProps {
-  disableTitle?: boolean;
-  createButtonToolbar?: JSX.Element;
-  title?: JSX.Element | string;
-  renderFilters?(
-    updateFilter: IUpdateFilterFunc,
-    filtering: FilteringType
-  ): JSX.Element;
-  updateFilter?: IUpdateFilterFunc;
-  filtering?: FilteringType;
+interface ITableToolbarInnerProps {
   view: LIST_VIEW;
-  columns?: SortingColumn[];
-  sorting?: string;
-  updateSorting?(value: string): void;
-  renderSorting?(value: SortingColumn): JSX.Element | string;
   isViewSwitchEnabled: boolean;
   onChange(view: LIST_VIEW): any;
 }
 
-class TableToolbar extends React.Component<ITableToolbarProps> {
+export interface ITableToolbarExternalProps {
+  disableTitle?: boolean;
+  createButtonToolbar?: JSX.Element;
+  title?: JSX.Element | string;
+  renderFilters?: RenderFiltersFuncType;
+  updateFilter?: IUpdateFilterFunc;
+  filtering?: FilteringType;
+  columns?: SortingColumn[];
+  sorting?: string;
+  updateSorting?(opt: string): ((dispatch: any, getState: any) => void) | void;
+  renderSorting?(value: SortingColumn): JSX.Element | string;
+}
+
+class TableToolbar extends React.Component<
+  ITableToolbarExternalProps & ITableToolbarInnerProps
+> {
   handleIconClick = (view: LIST_VIEW) => () => {
     this.props.onChange(view);
   };
