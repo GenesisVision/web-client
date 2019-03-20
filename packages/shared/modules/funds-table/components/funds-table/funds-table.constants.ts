@@ -7,10 +7,10 @@ import {
 import {
   DEFAULT_DATE_RANGE_FILTER_VALUE,
   DateRangeFilterTypes
-} from "../../../../components/table/components/filtering/date-range-filter/date-range-filter.constants";
+} from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { SortingColumn } from "shared/components/table/components/filtering/filter.type";
 
 export const DATE_RANGE_FILTER_NAME = "dateRange";
-export const SORTING_FILTER_NAME = "sorting";
 
 export const SERVER_DATE_RANGE_MIN_FILTER_NAME = "statisticDateFrom";
 export const SERVER_DATE_RANGE_MAX_FILTER_NAME = "statisticDateTo";
@@ -33,7 +33,7 @@ export const FUNDS_TABLE_FILTERS = [
   }
 ];
 
-export const FUNDS_TABLE_COLUMNS = [
+export const FUNDS_TABLE_COLUMNS: SortingColumn[] = [
   {
     name: "title"
   },
@@ -60,3 +60,9 @@ export const FUNDS_TABLE_COLUMNS = [
     name: "chart"
   }
 ];
+
+export const sortableColumns: string[] = FUNDS_TABLE_COLUMNS.filter(
+  x => !!x.sortingName
+).map(x => x.sortingName as string);
+
+export const DEFAULT_ITEMS_ON_PAGE = 12;
