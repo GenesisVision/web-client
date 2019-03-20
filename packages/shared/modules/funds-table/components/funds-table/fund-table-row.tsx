@@ -17,8 +17,8 @@ import { FundDetails } from "gv-api-web";
 
 interface Props {
   fund: FundDetails;
-  isAuthenticated: boolean;
-  toggleFavorite(id: string, selected: boolean): void;
+  isAuthenticated?: boolean;
+  toggleFavorite?(id: string, selected: boolean): void;
   title?: JSX.Element | string;
 }
 
@@ -27,12 +27,9 @@ interface State {
 }
 
 class FundsTableRow extends React.PureComponent<Props, State> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isDetailed: false
-    };
-  }
+  state = {
+    isDetailed: false
+  };
 
   render() {
     const { fund, isAuthenticated, toggleFavorite, title } = this.props;
