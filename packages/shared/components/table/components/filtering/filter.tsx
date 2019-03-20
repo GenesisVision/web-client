@@ -15,7 +15,7 @@ interface IFilterProps {
   label: string;
   value: any;
   renderValueText(value: any): string;
-  updateFilter(filter: TFilter<any>): any;
+  updateFilter?(filter: TFilter<any>): any;
   name: string;
 }
 
@@ -33,7 +33,8 @@ class Filter extends React.PureComponent<IFilterProps, IFilterState> {
   handleClosePopover = () => this.setState({ anchor: null });
   handleChangeFilter = (value: any) => {
     this.handleClosePopover();
-    this.props.updateFilter({ name: this.props.name, value });
+    this.props.updateFilter &&
+      this.props.updateFilter({ name: this.props.name, value });
   };
 
   render() {

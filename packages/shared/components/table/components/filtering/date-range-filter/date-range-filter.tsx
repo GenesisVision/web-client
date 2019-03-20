@@ -15,7 +15,7 @@ interface IDateRangeFilterProps {
   t: TranslationFunction;
   name: string;
   value: any;
-  onChange: IUpdateFilterFunc;
+  onChange?: IUpdateFilterFunc;
   startLabel: string;
 }
 
