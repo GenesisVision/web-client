@@ -32,7 +32,7 @@
 .wallet-details {
   color: white;
   padding: 30px 20px;
-  width: 170px;
+  min-width: 170px;
 
   &__item:last-child {
     margin-top: $padding-xsmall;

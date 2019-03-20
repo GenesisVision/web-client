@@ -21,7 +21,7 @@ import WalletContainer from "./wallet-container/wallet-container";
 interface IWalletProps {
   info?: WalletData;
   isPending: boolean;
-  filters: MultiWalletFilters[];
+  filters?: MultiWalletFilters[];
 }
 
 class WalletCurrency extends React.Component<
@@ -131,7 +131,7 @@ const mapStateToProps = (state: RootState, ownProps: WalletRouteProps) => {
     isPending,
     filters: state.platformData.data
       ? state.platformData.data.enums.multiWallet
-      : []
+      : undefined
   };
 };
 

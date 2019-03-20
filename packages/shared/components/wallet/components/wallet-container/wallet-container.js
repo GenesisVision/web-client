@@ -3,7 +3,10 @@ import "./wallet-container.scss";
 import { GVTab, GVTabs } from "gv-react-components";
 import React, { PureComponent } from "react";
 import { translate } from "react-i18next";
+import { Link, withRouter } from "react-router-dom";
+import { compose } from "redux";
 import Surface from "shared/components/surface/surface";
+import { WALLET_TOTAL_PAGE_ROUTE } from "shared/components/wallet/wallet.routes";
 
 import GVScroll from "../../../scroll/gvscroll";
 import DepositsWithdrawalsRow from "../wallet-deposits-withdrawals/deposits-withdrawals-row";
@@ -13,8 +16,8 @@ import TransactionsRow from "../wallet-transactions/transactions-row";
 import WalletTransactions from "../wallet-transactions/wallet-transactions";
 import { WALLET_TRANSACTIONS_COLUMNS } from "../wallet-transactions/wallet-transactions.constants";
 
-const TRANSACTIONS_TAB = "transactions";
-const EXTERNAL_TAB = "external";
+const TRANSACTIONS_TAB = "";
+const EXTERNAL_TAB = "#external";
 
 class WalletContainer extends PureComponent {
   state = {
@@ -25,8 +28,14 @@ class WalletContainer extends PureComponent {
     this.setState({ tab });
   };
 
+  static getDerivedStateFromProps(nextProps) {
+    return {
+      tab: nextProps.location.hash
+    };
+  }
+
   render() {
-    const { t, currency, filters } = this.props;
+    const { t, currency, filters, location } = this.props;
     const { tab } = this.state;
     return (
       <Surface className="wallet-container">
@@ -37,11 +46,31 @@ class WalletContainer extends PureComponent {
                 <GVTab
                   className={filters ? "gv-tab" : "gv-tab gv-tab--disabled"}
                   value={TRANSACTIONS_TAB} //TODO add disable prop
-                  label={t("wallet-page.tabs.transactions")}
+                  label={
+                    <Link
+                      to={{
+                        prevPath: WALLET_TOTAL_PAGE_ROUTE,
+                        pathname: location.pathname,
+                        state: t("wallet-page.title")
+                      }}
+                    >
+                      {t("wallet-page.tabs.transactions")}
+                    </Link>
+                  }
                 />
                 <GVTab
                   value={EXTERNAL_TAB}
-                  label={t("wallet-page.tabs.external")}
+                  label={
+                    <Link
+                      to={{
+                        prevPath: WALLET_TOTAL_PAGE_ROUTE,
+                        hash: EXTERNAL_TAB,
+                        state: t("wallet-page.title")
+                      }}
+                    >
+                      {t("wallet-page.tabs.external")}
+                    </Link>
+                  }
                 />
               </GVTabs>
             </GVScroll>
@@ -81,4 +110,7 @@ class WalletContainer extends PureComponent {
   }
 }
 
-export default translate()(WalletContainer);
+export default compose(
+  translate(),
+  withRouter
+)(WalletContainer);

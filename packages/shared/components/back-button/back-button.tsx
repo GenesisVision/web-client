@@ -1,6 +1,6 @@
 import "./back-button.scss";
 
-import { CallHistoryMethodAction, goBack } from "connected-react-router";
+import { CallHistoryMethodAction, goBack, push } from "connected-react-router";
 import { GVButton } from "gv-react-components";
 import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
@@ -9,28 +9,16 @@ import { Dispatch, bindActionCreators, compose } from "redux";
 import RootState from "shared/reducers/root-reducer";
 import { ActionType } from "shared/utils/types";
 
-interface IBackButtonStateProps {
-  backPath: string;
-}
-
-export interface IAssetStatusRequestsDispatchProps {
-  service: {
-    goBack(): CallHistoryMethodAction<[]>;
-  };
-}
-
 const BackButton: React.FC<
-  IBackButtonStateProps &
-    InjectedTranslateProps &
-    IAssetStatusRequestsDispatchProps
-> = ({ t, service, backPath }) => {
+  StateProps & InjectedTranslateProps & DispatchProps
+> = ({ t, service, backPath, prevPath }) => {
   if (!backPath) return null;
 
   return (
     <div className="back-button">
       <GVButton
         variant="text"
-        onClick={service.goBack}
+        onClick={prevPath ? () => service.push(prevPath) : service.goBack}
         color="secondary"
         className="back-button__container"
       >
@@ -44,14 +32,13 @@ const BackButton: React.FC<
   );
 };
 
-const mapStateToProps = (state: RootState): IBackButtonStateProps => ({
-  backPath: state.router.location.state
+const mapStateToProps = (state: RootState): StateProps => ({
+  backPath: state.router.location.state,
+  prevPath: state.router.location.prevPath
 });
 
-const mapDispatchToProps = (
-  dispatch: Dispatch<ActionType>
-): IAssetStatusRequestsDispatchProps => ({
-  service: bindActionCreators({ goBack }, dispatch)
+const mapDispatchToProps = (dispatch: Dispatch<ActionType>): DispatchProps => ({
+  service: bindActionCreators({ goBack, push }, dispatch)
 });
 
 export default compose<React.FunctionComponent>(
@@ -61,3 +48,15 @@ export default compose<React.FunctionComponent>(
     mapDispatchToProps
   )
 )(BackButton);
+
+interface StateProps {
+  backPath: string;
+  prevPath?: string;
+}
+
+interface DispatchProps {
+  service: {
+    goBack(): CallHistoryMethodAction<[]>;
+    push(route: string): void;
+  };
+}
