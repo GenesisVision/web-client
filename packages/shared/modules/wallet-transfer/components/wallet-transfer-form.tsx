@@ -66,13 +66,7 @@ class WalletTransferForm extends React.Component<Props> {
     const availableToWithdrawalTo = selectedToWallet.available;
 
     const setMaxAmount = () => {
-      setFieldValue(
-        "amount",
-        formatCurrencyValue(
-          availableToWithdrawalFrom,
-          selectedFromWallet.currency
-        )
-      );
+      setFieldValue("amount", availableToWithdrawalFrom);
     };
 
     const disableButton = disabled || !values.amount || !isValid || !dirty;
@@ -109,10 +103,7 @@ class WalletTransferForm extends React.Component<Props> {
             })}
           </GVFormikField>
           <StatisticItem label={t("wallet-transfer.availableFrom")}>
-            {`${formatCurrencyValue(
-              availableToWithdrawalFrom,
-              selectedFromWallet.currency
-            )} ${selectedFromWallet.currency}`}
+            {`${availableToWithdrawalFrom} ${selectedFromWallet.currency}`}
           </StatisticItem>
         </div>
         <div className="dialog__bottom">
@@ -137,10 +128,7 @@ class WalletTransferForm extends React.Component<Props> {
             })}
           </GVFormikField>
           <StatisticItem label={t("wallet-transfer.availableTo")}>
-            {`${formatCurrencyValue(
-              availableToWithdrawalTo,
-              selectedToWallet.currency
-            )} ${selectedToWallet.currency}`}
+            {`${availableToWithdrawalTo} ${selectedToWallet.currency}`}
           </StatisticItem>
           <div className="dialog-field">
             <InputAmountField
@@ -208,10 +196,7 @@ export default compose<React.FunctionComponent<OwnProps>>(
                 params.t("wallet-transfer.validation.amount-is-zero")
               )
               .max(
-                +formatCurrencyValue(
-                  selectedWallet.available,
-                  selectedWallet.currency
-                ),
+                +selectedWallet.available,
                 params.t(
                   "wallet-transfer.validation.amount-more-than-available"
                 )
