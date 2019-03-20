@@ -1,4 +1,3 @@
-import { RouterState } from "connected-react-router";
 import { NotificationsState } from "shared/components/notifications/reducers/notifications.reducers";
 import { ProgramsRatingState } from "shared/components/programs-rating/reducers/programs-rating.reducers";
 import { WalletState } from "shared/components/wallet/reducers/wallet.reducers";
@@ -15,6 +14,7 @@ import { PlatformState } from "shared/reducers/platform-reducer";
 import { IUiState } from "shared/reducers/ui-reducer";
 
 import { HeaderState } from "./header-reducer";
+import { RouterState } from "./router-reducer";
 
 type RootState = Readonly<{
   notifications: NotificationsState;

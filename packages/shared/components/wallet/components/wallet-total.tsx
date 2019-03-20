@@ -25,7 +25,7 @@ interface IWalletProps {
 class WalletTotal extends React.Component<IWalletProps & WalletRouteProps> {
   render() {
     const { t, info, wallets, filters, role, isPayFeesWithGvt } = this.props;
-    if (!info) return <WalletBalanceLoader />;
+    if (!info || !filters) return <WalletBalanceLoader />;
     return (
       <Page title={t("wallet-page.title")}>
         <div className="wallet-balance">
@@ -64,7 +64,7 @@ const mapStateToProps = (state: RootState) => ({
     : null,
   filters: state.platformData.data
     ? state.platformData.data.enums.multiWallet
-    : []
+    : undefined
 });
 
 export default compose<React.FunctionComponent<WalletRouteProps>>(
