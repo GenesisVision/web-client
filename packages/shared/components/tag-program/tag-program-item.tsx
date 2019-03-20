@@ -39,4 +39,4 @@ const TagProgramItem: React.FC<ProgramTag & IProgramTagItem> = ({
   );
 };
 
-export default TagProgramItem;
+export default React.memo(TagProgramItem);
