@@ -148,6 +148,7 @@ class WalletTransferForm extends React.Component<Props> {
               label={t("wallet-transfer.amount")}
               currency={selectedFromWallet.currency}
               setMax={setMaxAmount}
+              isAllow={values => values.value !== "."}
             />
           </div>
           <TransferRate
