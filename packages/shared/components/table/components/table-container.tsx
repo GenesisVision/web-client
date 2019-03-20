@@ -6,39 +6,15 @@ import RootState from "shared/reducers/root-reducer";
 
 import { IPaging } from "../helpers/paging.helpers";
 import { getItems, updateFilters } from "../services/table.service";
-import { FilteringType, SortingColumn, TFilter } from "./filtering/filter.type";
-import Table from "./table";
+import { FilteringType, TFilter } from "./filtering/filter.type";
+import Table, { ITableProps } from "./table";
 import { IDataModel } from "shared/constants/constants";
-import {
-  GetItemsFuncActionType,
-  IUpdateFilterFunc,
-  UpdateRowFuncType
-} from "./table.types";
+import { GetItemsFuncActionType } from "./table.types";
 
-interface ITableContainerProps {
+interface ITableContainerProps extends ITableProps {
   getItems: GetItemsFuncActionType;
   dataSelector: any;
   isFetchOnMount: boolean;
-  className?: string;
-  renderHeader?(column: SortingColumn): JSX.Element;
-  renderSorting?(column: SortingColumn): string;
-  renderBodyCard?(
-    x: any,
-    updateRow?: UpdateRowFuncType,
-    updateItems?: () => void
-  ): JSX.Element;
-  renderBodyRow?(
-    x: any,
-    updateRow?: UpdateRowFuncType,
-    updateItems?: () => void
-  ): JSX.Element;
-  renderFilters?(
-    updateFilter: IUpdateFilterFunc,
-    filtering: FilteringType
-  ): JSX.Element;
-  columns?: SortingColumn[];
-  createButtonToolbar?: JSX.Element;
-  emptyMessage?: string | JSX.Element;
 }
 
 interface ITableContainerStateProps {

@@ -4,54 +4,34 @@ import "./table-cards.scss";
 import classNames from "classnames";
 import * as React from "react";
 import GVScroll from "shared/components/scroll/gvscroll";
-import TableBody from "shared/components/table/components/table-body";
-import TableFooter from "shared/components/table/components/table-footer";
-import TableHeader from "shared/components/table/components/table-header";
-import TableToolbar from "shared/components/table/components/table-toolbar";
+import TableBody, {
+  ITableBodyExternalProps
+} from "shared/components/table/components/table-body";
+import TableFooter, {
+  ITableFooterProps
+} from "shared/components/table/components/table-footer";
+import TableHeader, {
+  ITableHeaderProps
+} from "shared/components/table/components/table-header";
+import TableToolbar, {
+  ITableToolbarExternalProps
+} from "shared/components/table/components/table-toolbar";
 import {
   LIST_VIEW,
   PROGRAMS_VIEW
 } from "shared/components/table/table.constants";
 import { loadData, saveData } from "shared/utils/localstorage";
+import { RenderBodyItemFuncType } from "./table.types";
 
-import { IPaging } from "../helpers/paging.helpers";
-import { FilteringType, SortingColumn } from "./filtering/filter.type";
-import { IUpdateFilterFunc, UpdateRowFuncType } from "./table.types";
-
-interface ITableProps {
-  items: any[];
-  filtering?: FilteringType;
-  sorting?: string;
-  paging?: IPaging;
-  updateFilter?: IUpdateFilterFunc;
-  updateSorting?(opt: string): ((dispatch: any, getState: any) => void) | void;
-  updatePaging?(page: number): void;
-  renderHeader?(column: SortingColumn): JSX.Element;
-  renderSorting?(value: SortingColumn): JSX.Element | string;
-  updateRow?: UpdateRowFuncType;
-  renderFilters?(
-    updateFilter: IUpdateFilterFunc,
-    filtering: FilteringType
-  ): JSX.Element;
-  updateItems?(): void;
-  renderBodyCard?(
-    x: any,
-    updateRow?: UpdateRowFuncType,
-    updateItems?: () => void
-  ): JSX.Element;
-  renderBodyRow?(
-    x: any,
-    updateRow?: UpdateRowFuncType,
-    updateItems?: () => void
-  ): JSX.Element;
-  isPending?: boolean;
+export interface ITableProps
+  extends ITableFooterProps,
+    ITableToolbarExternalProps,
+    ITableBodyExternalProps,
+    ITableHeaderProps {
+  renderBodyCard?: RenderBodyItemFuncType;
+  renderBodyRow?: RenderBodyItemFuncType;
   emptyMessage?: JSX.Element | string;
   showSwitchView?: boolean;
-  columns?: SortingColumn[];
-  title?: JSX.Element | string;
-  className?: string;
-  disableTitle?: boolean;
-  createButtonToolbar?: JSX.Element;
 }
 
 interface ITableState {
@@ -143,9 +123,8 @@ class Table extends React.Component<ITableProps, ITableState> {
                 className="table-cards"
                 tag="div"
                 view={LIST_VIEW.CARDS}
-              >
-                {renderBodyCard}
-              </TableBody>
+                renderBodyItem={renderBodyCard}
+              />
             </div>
           )}
           {view === LIST_VIEW.TABLE && (
@@ -155,9 +134,8 @@ class Table extends React.Component<ITableProps, ITableState> {
                 sorting={sorting}
                 //@ts-ignore
                 updateSorting={updateSorting}
-              >
-                {renderHeader}
-              </TableHeader>
+                renderHeader={renderHeader}
+              />
               {/*
             // @ts-ignore */}
               <TableBody
@@ -168,9 +146,8 @@ class Table extends React.Component<ITableProps, ITableState> {
                 view={LIST_VIEW.TABLE}
                 updateRow={updateRow}
                 updateItems={updateItems}
-              >
-                {renderBodyRow}
-              </TableBody>
+                renderBodyItem={renderBodyRow}
+              />
             </table>
           )}
         </GVScroll>
