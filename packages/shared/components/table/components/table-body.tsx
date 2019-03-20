@@ -3,14 +3,15 @@ import { InjectedTranslateProps, translate } from "react-i18next";
 
 import { LIST_VIEW } from "../table.constants";
 import TableLoader from "./table-loader";
+import { UpdateRowFuncType } from "./table.types";
 
 interface ITableBodyProps {
   children?(
     x: any,
-    updateRow?: (row: any) => void,
+    updateRow?: UpdateRowFuncType,
     updateItems?: () => void
   ): JSX.Element;
-  updateRow?(row: any): void;
+  updateRow?: UpdateRowFuncType;
   updateItems?(): void;
   items: any[];
   tag: React.ComponentType<{ className?: string }> | string;

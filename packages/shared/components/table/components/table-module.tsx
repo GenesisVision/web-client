@@ -1,7 +1,7 @@
 import * as React from "react";
 import {
-  IPaging,
-  calculateTotalPages
+  calculateTotalPages,
+  IPaging
 } from "shared/components/table//helpers/paging.helpers";
 import { updateFilter } from "shared/components/table/helpers/filtering.helpers";
 import { IDataModel } from "shared/constants/constants";
@@ -9,6 +9,11 @@ import { IDataModel } from "shared/constants/constants";
 import { composeRequestFilters } from "../services/table.service";
 import { FilteringType, SortingColumn, TFilter } from "./filtering/filter.type";
 import Table from "./table";
+import {
+  GetItemsFuncType,
+  IUpdateFilterFunc,
+  UpdateRowFuncType
+} from "./table.types";
 
 const defaultData: IDataModel = { items: null, total: 0 };
 
@@ -18,11 +23,11 @@ export interface ITableModuleProps {
   sorting: string;
   filtering: FilteringType;
   defaultFilters: any[];
-  getItems: Function;
+  getItems: GetItemsFuncType;
   data?: IDataModel;
   disableTitle?: boolean;
   renderFilters?(
-    updateFilter: (filter: any) => void,
+    updateFilter: IUpdateFilterFunc,
     filtering: FilteringType
   ): JSX.Element;
   title?: string;
@@ -30,7 +35,7 @@ export interface ITableModuleProps {
   renderHeader?(column: SortingColumn): JSX.Element;
   renderBodyRow?(
     x: any,
-    updateRow?: (row: any) => void,
+    updateRow?: UpdateRowFuncType,
     updateItems?: () => void
   ): JSX.Element;
 }
@@ -90,7 +95,7 @@ class TableModule extends React.Component<
       defaultFilters
     });
     getItems(filters)
-      .then((data: any) => {
+      .then((data: IDataModel) => {
         const totalPages = calculateTotalPages(data.total, paging.itemsOnPage);
         this.setState(prevState => ({
           data,

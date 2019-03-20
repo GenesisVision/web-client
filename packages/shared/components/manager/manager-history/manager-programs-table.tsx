@@ -1,50 +1,59 @@
 import "shared/components/details/details-description-section/details-statistic-section/details-history/trades.scss";
 
-import * as PropTypes from "prop-types";
-import React, { Component } from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
-import { toggleFavoriteFund } from "shared/modules/favorite-asset/services/favorite-fund.service";
-import { FUNDS_TABLE_COLUMNS } from "shared/modules/funds-table/components/funds-table/funds-table.constants";
+import { toggleFavoriteProgram } from "shared/modules/favorite-asset/services/favorite-program.service";
 
-import FundsTableModule from "../../../modules/funds-table/components/funds-table/funds-table-modulle";
+import ProgramTableModule from "shared/modules/programs-table/components/programs-table/programs-table-module";
 import {
   MANAGER_DEFAULT_FILTERS,
-  MANAGER_FILTERING
+  MANAGER_FILTERING,
+  MANAGER_SORTING
 } from "../manager.constants";
-import { fetchManagerFunds } from "../services/manager.service";
+import { fetchManagerPrograms } from "../services/manager.service";
+import {
+  GetItemsFuncType,
+  TableToggleFavoriteType
+} from "shared/components/table/components/table.types";
 
-class ManagerFunds extends Component {
-  fetchManagerFunds = filters => {
+interface Props {
+  managerId: string;
+  title: string;
+  isAuthenticated: boolean;
+}
+
+class ManagerPrograms extends React.Component<Props & InjectedTranslateProps> {
+  fetchManagerPrograms: GetItemsFuncType = filters => {
     const { managerId } = this.props;
-    return fetchManagerFunds({ ...filters, managerId });
+    return fetchManagerPrograms({ ...filters, managerId });
   };
 
-  toggleFavorite = (fund, updateRow) => () => {
-    const isFavorite = fund.personalDetails.isFavorite;
+  toggleFavorite: TableToggleFavoriteType = (program, updateRow) => () => {
+    const isFavorite = program.personalDetails.isFavorite;
     const newProgram = {
-      ...fund,
-      personalDetails: { ...fund.personalDetails, isFavorite: !isFavorite }
+      ...program,
+      personalDetails: { ...program.personalDetails, isFavorite: !isFavorite }
     };
     updateRow(newProgram);
-    toggleFavoriteFund(fund.id, isFavorite).catch(() => {
-      updateRow(fund);
+    toggleFavoriteProgram(program.id, isFavorite).catch(() => {
+      updateRow(program);
     });
   };
 
   render() {
     const { t, title, isAuthenticated } = this.props;
     return (
-      <FundsTableModule
+      <ProgramTableModule
         disableTitle
         title={title}
-        getItems={this.fetchManagerFunds}
+        getItems={this.fetchManagerPrograms}
         defaultFilters={MANAGER_DEFAULT_FILTERS}
         filtering={MANAGER_FILTERING}
         paging={DEFAULT_PAGING}
-        columns={FUNDS_TABLE_COLUMNS}
+        sorting={MANAGER_SORTING}
         renderFilters={(updateFilter, filtering) => (
           <DateRangeFilter
             name={DATE_RANGE_FILTER_NAME}
@@ -60,8 +69,4 @@ class ManagerFunds extends Component {
   }
 }
 
-ManagerFunds.propTypes = {
-  managerId: PropTypes.string.isRequired
-};
-
-export default translate()(ManagerFunds);
+export default translate()(ManagerPrograms);
