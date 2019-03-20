@@ -40,7 +40,6 @@ class WalletContainerTotal extends PureComponent {
   render() {
     const { tab } = this.state;
     const { t, wallets, filters, copytrading, location } = this.props;
-    console.info(filters);
     return (
       <Surface className="wallet-container">
         <div className="wallet-container__header">
@@ -77,7 +76,7 @@ class WalletContainerTotal extends PureComponent {
                         hash: EXTERNAL_TAB
                       }}
                     >
-                      {t("wallet-page.tabs.transactions")}
+                      {t("wallet-page.tabs.external")}
                     </Link>
                   }
                 />
