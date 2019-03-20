@@ -62,4 +62,4 @@ const TableBody: React.FC<
   return <Tag className={className}>{renderItems()}</Tag>;
 };
 
-export default translate()(TableBody);
+export default React.memo(translate()(TableBody));

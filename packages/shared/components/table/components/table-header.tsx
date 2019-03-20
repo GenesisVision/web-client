@@ -16,7 +16,7 @@ export interface ITableHeaderProps {
   renderHeader?(column: SortingColumn): JSX.Element;
 }
 
-class TableHeader extends React.Component<ITableHeaderProps> {
+class TableHeader extends React.PureComponent<ITableHeaderProps> {
   sortingName = (): string => getSortingColumnName(this.props.sorting);
 
   getSortingDirection = (sortingName?: string): SORTING_DIRECTION => {

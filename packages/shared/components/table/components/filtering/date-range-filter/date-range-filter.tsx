@@ -19,7 +19,7 @@ interface IDateRangeFilterProps {
   startLabel: string;
 }
 
-class DateRangeFilter extends React.Component<IDateRangeFilterProps> {
+class DateRangeFilter extends React.PureComponent<IDateRangeFilterProps> {
   renderValueText = (value: IDataRangeFilterValue): string => {
     const { t } = this.props;
     switch (value.type) {

@@ -18,7 +18,7 @@ interface IDateRangeFilterValuesProps {
   startLabel: string;
 }
 
-class DateRangeFilterValues extends React.Component<
+class DateRangeFilterValues extends React.PureComponent<
   IDateRangeFilterValuesProps & InjectedTranslateProps
 > {
   handleOnChange = (type: keyof IDataRangeFilterValue) => (

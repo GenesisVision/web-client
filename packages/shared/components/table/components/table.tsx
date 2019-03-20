@@ -38,7 +38,7 @@ interface ITableState {
   view: LIST_VIEW;
 }
 
-class Table extends React.Component<ITableProps, ITableState> {
+class Table extends React.PureComponent<ITableProps, ITableState> {
   state = {
     view: LIST_VIEW.TABLE
   };

@@ -40,7 +40,7 @@ interface ITableContainerDispatchProps {
   };
 }
 
-class TableContainer extends React.Component<
+class TableContainer extends React.PureComponent<
   ITableContainerProps &
     ITableContainerDispatchProps &
     ITableContainerStateProps

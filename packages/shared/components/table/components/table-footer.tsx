@@ -29,4 +29,4 @@ const TableFooter: React.FC<ITableFooterProps> = ({
   );
 };
 
-export default TableFooter;
+export default React.memo(TableFooter);

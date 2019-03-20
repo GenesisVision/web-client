@@ -19,4 +19,4 @@ const TableLoader: React.FC<{ view: LIST_VIEW }> = ({ view }) => {
   }
 };
 
-export default TableLoader;
+export default React.memo(TableLoader);

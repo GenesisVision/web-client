@@ -25,7 +25,7 @@ export interface ITagFilterProps {
   onChange(value: TFilter<string[]>): void;
 }
 
-class TagFilter extends React.Component<ITagFilterProps, ITagFilterState> {
+class TagFilter extends React.PureComponent<ITagFilterProps, ITagFilterState> {
   state = {
     anchor: null
   };

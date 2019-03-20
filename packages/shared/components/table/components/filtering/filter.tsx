@@ -23,7 +23,7 @@ interface IFilterState {
   anchor: Nullable<EventTarget>;
 }
 
-class Filter extends React.Component<IFilterProps, IFilterState> {
+class Filter extends React.PureComponent<IFilterProps, IFilterState> {
   state = {
     anchor: null
   };

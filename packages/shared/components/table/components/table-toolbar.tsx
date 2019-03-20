@@ -26,7 +26,7 @@ export interface ITableToolbarExternalProps {
   renderSorting?(value: SortingColumn): JSX.Element | string;
 }
 
-class TableToolbar extends React.Component<
+class TableToolbar extends React.PureComponent<
   ITableToolbarExternalProps & ITableToolbarInnerProps
 > {
   handleIconClick = (view: LIST_VIEW) => () => {

@@ -27,4 +27,4 @@ const TagFilterButton: React.FC<ITagFilterButton> = ({
   );
 };
 
-export default TagFilterButton;
+export default React.memo(TagFilterButton);

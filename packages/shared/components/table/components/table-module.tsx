@@ -28,7 +28,7 @@ interface ITableModuleState {
   isPending: boolean;
 }
 
-class TableModule extends React.Component<
+class TableModule extends React.PureComponent<
   ITableModuleProps,
   ITableModuleState
 > {
