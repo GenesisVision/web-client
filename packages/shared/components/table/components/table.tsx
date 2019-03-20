@@ -16,31 +16,32 @@ import { loadData, saveData } from "shared/utils/localstorage";
 
 import { IPaging } from "../helpers/paging.helpers";
 import { FilteringType, SortingColumn } from "./filtering/filter.type";
+import { IUpdateFilterFunc, UpdateRowFuncType } from "./table.types";
 
 interface ITableProps {
   items: any[];
   filtering?: FilteringType;
   sorting?: string;
   paging?: IPaging;
-  updateFilter?(filter: any): void;
+  updateFilter?: IUpdateFilterFunc;
   updateSorting?(opt: string): ((dispatch: any, getState: any) => void) | void;
   updatePaging?(page: number): void;
   renderHeader?(column: SortingColumn): JSX.Element;
   renderSorting?(value: SortingColumn): JSX.Element | string;
-  updateRow?(row: any): void;
+  updateRow?: UpdateRowFuncType;
   renderFilters?(
-    updateFilter: (filter: any) => void,
+    updateFilter: IUpdateFilterFunc,
     filtering: FilteringType
   ): JSX.Element;
   updateItems?(): void;
   renderBodyCard?(
     x: any,
-    updateRow?: (row: any) => void,
+    updateRow?: UpdateRowFuncType,
     updateItems?: () => void
   ): JSX.Element;
   renderBodyRow?(
     x: any,
-    updateRow?: (row: any) => void,
+    updateRow?: UpdateRowFuncType,
     updateItems?: () => void
   ): JSX.Element;
   isPending?: boolean;

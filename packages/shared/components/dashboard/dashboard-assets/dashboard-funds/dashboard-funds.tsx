@@ -5,7 +5,6 @@ import React, { Fragment, FunctionComponent } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
-import { Action } from "redux";
 import AssetStatus from "shared/components/asset-status/asset-status";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
@@ -21,6 +20,7 @@ import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
 import {
   Column,
+  GetItemsFuncActionType,
   IUpdateFilterFunc
 } from "shared/components/table/components/table.types";
 import { FUND, ROLE } from "shared/constants/constants";
@@ -33,7 +33,7 @@ import dashboardFundsTableSelector from "./dashboard-funds.selector";
 interface IDashboardFundsProps {
   title: string;
   role: ROLE;
-  getDashboardFunds(filters: any): Action;
+  getDashboardFunds: GetItemsFuncActionType;
   onChangeStatus?(): void;
   createButtonToolbar: JSX.Element;
   createFund: JSX.Element;

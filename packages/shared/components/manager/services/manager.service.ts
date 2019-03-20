@@ -7,7 +7,6 @@ import { IDataModel } from "shared/constants/constants";
 export const fetchManagerPrograms = (
   filter: FilteringType
 ): Promise<IDataModel> => {
-  console.log(filter);
   return programsApi
     .v10ProgramsGet({ ...filter, authorization: authService.getAuthArg() })
     .then(data => ({

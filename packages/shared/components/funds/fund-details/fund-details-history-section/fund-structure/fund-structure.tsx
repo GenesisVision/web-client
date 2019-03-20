@@ -12,6 +12,7 @@ import TableModule from "shared/components/table/components/table-module";
 import TableRow from "shared/components/table/components/table-row";
 import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.reducer";
 import { formatValue } from "shared/utils/formatter";
+import { GetItemsFuncType } from "shared/components/table/components/table.types";
 
 interface Props {
   id: string;
@@ -32,12 +33,13 @@ class FundStructure extends React.Component<
     data: undefined
   };
 
-  fetchFundStructure = () => {
+  fetchFundStructure: GetItemsFuncType = () => {
     this.setState({ isPending: true });
     const { id, fetchStructure } = this.props;
-    return fetchStructure(id)
-      .then(data => this.setState({ data, isPending: false }))
-      .catch(() => this.setState({ isPending: false }));
+    return fetchStructure(id).then(data => {
+      this.setState({ data, isPending: false });
+      return { items: data.assets, total: data.assets.length };
+    });
   };
 
   componentDidMount() {

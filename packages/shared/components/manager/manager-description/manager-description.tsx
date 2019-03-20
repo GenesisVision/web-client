@@ -1,14 +1,17 @@
 import "./manager-description.scss";
 
 import moment from "moment";
-import React from "react";
-import { translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import ProfileAvatar from "shared/components/avatar/profile-avatar/profile-avatar";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
+import StatisticItem from "shared/components/statistic-item/statistic-item";
+import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
+import { ManagerProfile } from "gv-api-web";
 
-import StatisticItem from "../../statistic-item/statistic-item";
-
-const ManagerDescription = ({ t, managerProfile }) => {
+const ManagerDescription: React.FC<
+  { managerProfile: ManagerProfile } & InjectedTranslateProps
+> = ({ t, managerProfile }) => {
   return (
     <div className="manager-description">
       <div className="manager-description__left">
@@ -37,9 +40,9 @@ const ManagerDescription = ({ t, managerProfile }) => {
               <StatisticItem label={t("manager-page.assets")}>
                 <FundAssetContainer
                   assets={managerProfile.assets.map(item => {
-                    return { asset: item };
+                    return { asset: item, name: item, percent: 0, icon: "" };
                   })}
-                  type={"text"}
+                  type={FUND_ASSET_TYPE.TEXT}
                   size={managerProfile.assets.length}
                 />
               </StatisticItem>
