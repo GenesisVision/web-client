@@ -5,16 +5,17 @@ import SortingFilter from "shared/components/table/components/sorting/sorting-fi
 
 import { LIST_VIEW } from "../table.constants";
 import { FilteringType, SortingColumn } from "./filtering/filter.type";
+import { IUpdateFilterFunc } from "./table.types";
 
 interface ITableToolbarProps {
   disableTitle?: boolean;
   createButtonToolbar?: JSX.Element;
   title?: JSX.Element | string;
   renderFilters?(
-    updateFilter: (filter: any) => void,
+    updateFilter: IUpdateFilterFunc,
     filtering: FilteringType
   ): JSX.Element;
-  updateFilter?(filter: any): void;
+  updateFilter?: IUpdateFilterFunc;
   filtering?: FilteringType;
   view: LIST_VIEW;
   columns?: SortingColumn[];

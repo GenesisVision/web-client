@@ -1,6 +1,5 @@
 import * as React from "react";
-
-import SvgLoader from "../../svg-loader/svg-loader";
+import SvgLoader from "shared/components/svg-loader/svg-loader";
 
 const TableLoaderCardRow: React.FC = () => {
   return (

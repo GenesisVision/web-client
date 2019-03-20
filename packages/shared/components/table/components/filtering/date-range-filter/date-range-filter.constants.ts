@@ -1,5 +1,4 @@
 import { MomentInput } from "moment";
-import { Nullable } from "shared/utils/types";
 
 export const DATE_RANGE_FILTER_NAME = "dateRange";
 
