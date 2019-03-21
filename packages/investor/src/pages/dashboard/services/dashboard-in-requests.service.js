@@ -1,4 +1,3 @@
-import { Dispatch } from "redux";
 import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import authService from "shared/services/auth-service";
@@ -9,14 +8,17 @@ import {
 } from "../actions/dashboard.actions";
 import { getTopPortfolioEvents } from "./dashboard-events.services";
 
-export const getInRequests = () => (dispatch: Dispatch) => {
+export const getInRequests = () => dispatch => {
   const authorization = authService.getAuthArg();
   dispatch(fetchInRequests(authorization, 0, 100));
 };
 
-export const cancelRequest = ({ id, type, onFinally, removeDisableBtn }) => (
-  dispatch: Dispatch
-) => {
+export const cancelRequest = ({
+  id,
+  type,
+  onFinally,
+  removeDisableBtn
+}) => dispatch => {
   const authorization = authService.getAuthArg();
   const action = cancelProgramRequest(authorization, id);
 
