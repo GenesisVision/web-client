@@ -37,9 +37,12 @@ class FundWithdrawAmountForm extends PureComponent<
     FundWithdrawAmountFormValues
   >
 > {
-  isAllow = (values: NumberFormatValues) =>
-    !values.floatValue ||
-    (values.floatValue >= 0.01 && values.floatValue <= 100);
+  isAllow = (values: NumberFormatValues) => {
+    const allow =
+      !values.floatValue ||
+      (values.floatValue >= 0.01 && values.floatValue <= 100);
+    return allow && values.value !== ".";
+  };
 
   setMaxAmount = () => {
     this.props.setFieldValue("percent", "100");
