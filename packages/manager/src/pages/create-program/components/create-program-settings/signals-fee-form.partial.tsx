@@ -3,6 +3,7 @@ import React, { FunctionComponent } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import Hint from "shared/components/hint/hint";
+import { VERTICAL_POPOVER_POS } from "shared/components/popover/popover";
 
 interface ISignalsFeeFormPartialProps {
   subscriptionFeeFieldName: string;
@@ -28,7 +29,7 @@ const SignalsFeeFormPartial: FunctionComponent<
       <div className="create-program-settings__row-title">
         {t("manager.create-program-page.settings.signal-provider-fees")}
       </div>
-      <div className="create-program-settings__fee">
+      <div className="create-program-settings__item">
         <GVFormikField
           name={subscriptionFeeFieldName}
           label={t(
@@ -45,14 +46,14 @@ const SignalsFeeFormPartial: FunctionComponent<
           content={t(
             "manager.create-program-page.settings.hints.subscription-fee"
           )}
-          className="create-program-settings__fee-hint"
-          vertical={"bottom"}
+          className="create-program-settings__item-caption"
+          vertical={VERTICAL_POPOVER_POS.BOTTOM}
           tooltipContent={t(
             "manager.create-program-page.settings.hints.subscription-fee-description"
           )}
         />
       </div>
-      <div className="create-program-settings__fee">
+      <div className="create-program-settings__item">
         <GVFormikField
           name={successFeeFieldName}
           label={t(
@@ -68,8 +69,8 @@ const SignalsFeeFormPartial: FunctionComponent<
           content={t(
             "manager.create-program-page.settings.hints.signal-success-fee"
           )}
-          className="create-program-settings__fee-hint"
-          vertical={"bottom"}
+          className="create-program-settings__item-caption"
+          vertical={VERTICAL_POPOVER_POS.BOTTOM}
           tooltipContent={t(
             "manager.create-program-page.settings.hints.signal-success-fee-description"
           )}

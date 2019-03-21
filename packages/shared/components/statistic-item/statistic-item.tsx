@@ -1,7 +1,7 @@
 import "./statistic-item.scss";
 
-import classnames from "classnames";
-import React from "react";
+import classNames from "classnames";
+import * as React from "react";
 import NumberFormat from "react-number-format";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
@@ -11,7 +11,7 @@ enum ITEM {
 }
 
 export interface IFollowStatisticItemProps {
-  label: string;
+  label: string | React.ReactNode;
   equivalent?: string | number;
   equivalentCurrency?: string;
   small?: boolean;
@@ -40,7 +40,7 @@ const StatisticItem: React.FC<IFollowStatisticItemProps> = ({
       (item === ITEM.VALUE && !invert) || (item === ITEM.LABEL && invert)
     ) {
       case true:
-        return classnames("statistics-item__value", {
+        return classNames("statistics-item__value", {
           "statistics-item__value--accent": accent,
           "statistics-item__value--small": small,
           "statistics-item__value--big": big,
@@ -54,7 +54,7 @@ const StatisticItem: React.FC<IFollowStatisticItemProps> = ({
 
   return (
     <div
-      className={classnames(
+      className={classNames(
         "statistics-item",
         {
           "statistics-item--half": half,
@@ -73,11 +73,11 @@ const StatisticItem: React.FC<IFollowStatisticItemProps> = ({
         </div>
       )}
       <div className={generateClasses(ITEM.VALUE, invert)}>{children}</div>
-      {equivalent !== undefined ? (
+      {equivalent !== undefined && equivalentCurrency !== undefined ? (
         <div className="statistics-item__equivalent">
           {
             <NumberFormat
-              value={formatCurrencyValue(equivalent, equivalentCurrency)}
+              value={formatCurrencyValue(+equivalent, equivalentCurrency)}
               thousandSeparator={" "}
               displayType="text"
               suffix={` ${equivalentCurrency}`}

@@ -5,35 +5,38 @@ import React, { Fragment, FunctionComponent } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
-import { Action } from "redux";
+import AssetStatus from "shared/components/asset-status/asset-status";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
+import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
 import FundAssetContainer from "shared/components/fund-asset/fund-asset-container";
 import Profitability from "shared/components/profitability/profitability";
+import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import TableCell from "shared/components/table/components/table-cell";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
-import { FUND } from "shared/constants/constants";
+import {
+  Column,
+  GetItemsFuncActionType,
+  IUpdateFilterFunc
+} from "shared/components/table/components/table.types";
+import { FUND, ROLE } from "shared/constants/constants";
 import { composeFundsDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
 
-import AssetStatus from "../../../asset-status/asset-status";
-import {
-  Column,
-  IUpdateFilterFunc
-} from "../../../table/components/table.types";
 import { DASHBOARD_FUNDS_COLUMNS } from "../../dashboard.constants";
 import dashboardFundsTableSelector from "./dashboard-funds.selector";
 
 interface IDashboardFundsProps {
   title: string;
-  role: string;
-  getDashboardFunds(filters: any): Action;
+  role: ROLE;
+  getDashboardFunds: GetItemsFuncActionType;
   onChangeStatus?(): void;
-  createButtonToolbar?(text: string, route: string): JSX.Element;
-  createFund?(): void;
+  createButtonToolbar: JSX.Element;
+  createFund: JSX.Element;
 }
 
 const DashboardFunds: FunctionComponent<
@@ -48,6 +51,7 @@ const DashboardFunds: FunctionComponent<
   title
 }) => {
   return (
+    //@ts-ignore
     <TableContainer
       createButtonToolbar={createButtonToolbar}
       emptyMessage={createFund}
@@ -55,7 +59,10 @@ const DashboardFunds: FunctionComponent<
       dataSelector={dashboardFundsTableSelector}
       isFetchOnMount={true}
       columns={DASHBOARD_FUNDS_COLUMNS}
-      renderFilters={(updateFilter: IUpdateFilterFunc, filtering: any) => (
+      renderFilters={(
+        updateFilter: IUpdateFilterFunc,
+        filtering: FilteringType
+      ) => (
         <Fragment>
           <DateRangeFilter
             name={DATE_RANGE_FILTER_NAME}
@@ -114,7 +121,7 @@ const DashboardFunds: FunctionComponent<
           <TableCell className="funds-table__cell">
             <FundAssetContainer
               assets={fund.topFundAssets}
-              type={"short"}
+              type={FUND_ASSET_TYPE.SHORT}
               size={3}
               length={fund.totalAssetsCount}
             />
@@ -136,7 +143,7 @@ const DashboardFunds: FunctionComponent<
           <TableCell className="funds-table__cell funds-table__cell--profit">
             <Profitability
               value={formatValue(fund.statistic.profitPercent, 2)}
-              prefix="sign"
+              prefix={PROFITABILITY_PREFIX.SIGN}
             >
               <NumberFormat
                 value={formatValue(fund.statistic.profitPercent, 2)}
@@ -153,7 +160,6 @@ const DashboardFunds: FunctionComponent<
             <AssetStatus
               status={fund.personalDetails.status}
               id={fund.id}
-              role={role}
               asset={FUND}
               onCancel={onChangeStatus}
             />

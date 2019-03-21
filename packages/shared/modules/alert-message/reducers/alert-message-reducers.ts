@@ -1,7 +1,8 @@
 import { DeepReadonly } from "utility-types";
-import uuid from "uuid";
+import * as uuid from "uuid";
 
-import * as actionTypes from "../actions/alert-message-actions.constants";
+import { IAlertAction } from "../actions/alert-message-actions";
+import { ALERT_MESSAGE } from "../actions/alert-message-actions.constants";
 
 export type IMessage = DeepReadonly<{
   id: string;
@@ -14,17 +15,23 @@ export type AlertMessagesState = DeepReadonly<IMessage[]>;
 
 const initialState: AlertMessagesState = [];
 
-const addMessage = (state: AlertMessagesState, action: any) => {
+const addMessage = (
+  state: AlertMessagesState,
+  action: IAlertAction
+): AlertMessagesState => {
   const newMessage = {
     id: uuid.v4(),
     text: action.text,
     className: action.className,
     isUseLocalization: action.isUseLocalization
-  };
+  } as IMessage;
   return [...state.slice(-2), newMessage];
 };
 
-const removeMessage = (state: AlertMessagesState, action: any) => {
+const removeMessage = (
+  state: AlertMessagesState,
+  action: IAlertAction
+): AlertMessagesState => {
   return state.filter(message => message.id !== action.id);
 };
 
@@ -34,16 +41,16 @@ const removeAllMessages = (): AlertMessagesState => {
 
 const alertMessagesReducer = (
   state: AlertMessagesState = initialState,
-  action: any
+  action: IAlertAction
 ): AlertMessagesState => {
   switch (action.type) {
-    case actionTypes.ALERT_MESSAGE_SUCCESS:
-    case actionTypes.ALERT_MESSAGE_WARNING:
-    case actionTypes.ALERT_MESSAGE_ERROR:
+    case ALERT_MESSAGE.SUCCESS:
+    case ALERT_MESSAGE.WARNING:
+    case ALERT_MESSAGE.ERROR:
       return addMessage(state, action);
-    case actionTypes.ALERT_MESSAGE_REMOVE_AT:
+    case ALERT_MESSAGE.REMOVE_AT:
       return removeMessage(state, action);
-    case actionTypes.ALERT_MESSAGE_CLEAR_ALL:
+    case ALERT_MESSAGE.CLEAR_ALL:
       return removeAllMessages();
     default:
       return state;

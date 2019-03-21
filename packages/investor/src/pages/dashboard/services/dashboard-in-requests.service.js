@@ -8,15 +8,17 @@ import {
 } from "../actions/dashboard.actions";
 import { getTopPortfolioEvents } from "./dashboard-events.services";
 
-export const getInRequests = () => (dispatch, getState) => {
+export const getInRequests = () => dispatch => {
   const authorization = authService.getAuthArg();
   dispatch(fetchInRequests(authorization, 0, 100));
 };
 
-export const cancelRequest = ({ id, type, onFinally, removeDisableBtn }) => (
-  dispatch,
-  getState
-) => {
+export const cancelRequest = ({
+  id,
+  type,
+  onFinally,
+  removeDisableBtn
+}) => dispatch => {
   const authorization = authService.getAuthArg();
   const action = cancelProgramRequest(authorization, id);
 
@@ -35,15 +37,8 @@ export const cancelRequest = ({ id, type, onFinally, removeDisableBtn }) => (
       );
       onFinally();
     })
-    .catch(ex => {
-      dispatch(
-        alertMessageActions.error(
-          `${
-            process.env.REACT_APP_PLATFORM
-          }.dashboard-page.requests.failure-cancel-request`,
-          true
-        )
-      );
+    .catch(error => {
+      dispatch(alertMessageActions.error(error.errorMessage));
       removeDisableBtn();
     });
 };

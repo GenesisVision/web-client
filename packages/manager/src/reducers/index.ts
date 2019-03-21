@@ -1,12 +1,10 @@
+import { connectRouter } from "connected-react-router";
 import fundDepositReducer, {
   FundDepositState
 } from "modules/fund-deposit/reducer/fund-deposit.reducer";
 import programDepositReducer, {
   ProgramsDepositState
 } from "modules/program-deposit/reducer/program-deposit.reducer";
-import notificationsReducer, {
-  NotificationsState
-} from "pages/app/components/notifications/reducers/notifications.reducers";
 import passwordRestoreReducer, {
   PasswordState
 } from "pages/auth/forgot-password/reducers/password-restore-reducers";
@@ -22,9 +20,10 @@ import dashboardReducer, {
 import managerReducer, {
   ManagerState
 } from "pages/manager/reducers/manager.reducers";
-import { loadingBarReducer } from "react-redux-loading-bar";
-import { routerReducer } from "react-router-redux";
 import { combineReducers } from "redux";
+import notificationsReducer, {
+  NotificationsState
+} from "shared/components/notifications/reducers/notifications.reducers";
 import programsRatingReducer from "shared/components/programs-rating/reducers/programs-rating.reducers";
 import walletReducer from "shared/components/wallet/reducers/wallet.reducers";
 import alertMessagesReducer from "shared/modules/alert-message/reducers/alert-message-reducers";
@@ -40,6 +39,7 @@ import headerReducer from "shared/reducers/header-reducer";
 import platformReducer from "shared/reducers/platform-reducer";
 import RootState from "shared/reducers/root-reducer";
 import uiReducer from "shared/reducers/ui-reducer";
+import history from "shared/utils/history";
 
 type State = {
   programDeposit: ProgramsDepositState;
@@ -64,8 +64,7 @@ export default combineReducers<ManagerRootState>({
   programsData: programsReducer,
   programsRating: programsRatingReducer,
   fundsData: fundsReducer,
-  routing: routerReducer,
-  loadingBar: loadingBarReducer,
+  router: connectRouter(history),
   platformData: platformReducer,
   alertMessages: alertMessagesReducer,
   loginData: loginReducer,

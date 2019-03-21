@@ -1,10 +1,10 @@
 import "./signal-provider-controls.scss";
 
 import { GVButton } from "gv-react-components";
-import { ProgramDetailContext } from "manager-web-portal/src/pages/programs/program-details/program-details.page";
 import ProgramMakeSignalContainer from "modules/program-make-signal/program-make-signal.container";
 import React, { Component, Fragment } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import { ProgramDetailContext } from "shared/components/details/helpers/details-context";
 import SignalProgramInfo from "shared/components/programs/program-details/program-details-description/signal-program-info";
 
 interface ISignalProviderControlOwnProps {
@@ -51,27 +51,31 @@ class SignalProviderControls extends Component<
   render() {
     const { t, programDescription } = this.props;
     const { isOpenCreateSignalPopup } = this.state;
-    if (programDescription.isSignalProgram) {
-      return <SignalProgramInfo programDescription={programDescription} />;
-    }
     return (
-      <Fragment>
-        <div className="signal-provider">
-          <div>
-            {t("program-details-page.description.signal-provider.title")}
-          </div>
-          <div className="signal-provider__disclaimer">
-            {t("program-details-page.description.signal-provider.disclaimer")}
-          </div>
-          <div className="program-details-description__button-container">
-            <GVButton onClick={this.openPopup}>
-              {t("program-details-page.description.signal-provider.title")}
-            </GVButton>
-          </div>
-        </div>
-        <ProgramDetailContext.Consumer>
-          {({ updateDetails }: any) => (
+      <ProgramDetailContext.Consumer>
+        {({ updateDetails }: any) =>
+          programDescription.isSignalProgram ? (
+            <SignalProgramInfo programDescription={programDescription} />
+          ) : (
             <Fragment>
+              <div className="signal-provider">
+                <div>
+                  {t("program-details-page.description.signal-provider.title")}
+                </div>
+                <div className="signal-provider__disclaimer">
+                  {t(
+                    "program-details-page.description.signal-provider.disclaimer"
+                  )}
+                </div>
+                <div className="program-details-description__button-container">
+                  <GVButton onClick={this.openPopup}>
+                    {t(
+                      "program-details-page.description.signal-provider.title"
+                    )}
+                  </GVButton>
+                </div>
+              </div>
+
               <ProgramMakeSignalContainer
                 programName={programDescription.title}
                 open={isOpenCreateSignalPopup}
@@ -80,9 +84,9 @@ class SignalProviderControls extends Component<
                 onApply={this.applyChanges(updateDetails)}
               />
             </Fragment>
-          )}
-        </ProgramDetailContext.Consumer>
-      </Fragment>
+          )
+        }
+      </ProgramDetailContext.Consumer>
     );
   }
 }

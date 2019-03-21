@@ -4,16 +4,16 @@ import * as React from "react";
 import TagProgramItem from "shared/components/tag-program/tag-program-item";
 
 interface ITagFilterPopoverState {
-  choosed: ProgramTag[];
+  selected: ProgramTag[];
   filteredTags: ProgramTag[];
 }
 
 export interface ITagFilterPopoverProps {
   value: ProgramTag[];
   values: ProgramTag[];
-  changeFilter(value: any[]): void;
+  changeFilter(value: ProgramTag[]): void;
 }
-class TagFilterPopover extends React.Component<
+class TagFilterPopover extends React.PureComponent<
   ITagFilterPopoverProps,
   ITagFilterPopoverState
 > {
@@ -21,28 +21,29 @@ class TagFilterPopover extends React.Component<
     super(props);
     const { value, values } = this.props;
     this.state = {
-      choosed: value,
+      selected: value,
       filteredTags: values
     };
   }
   componentDidMount() {
     this.setState({
-      filteredTags: this.removeChoosed(this.props.values, this.state.choosed)
+      filteredTags: this.removeSelected(this.props.values, this.state.selected)
     });
   }
-  search = (e: any) => {
+  search = (e: React.ChangeEvent<any>) => {
     this.setState({
-      filteredTags: this.removeChoosed(
+      filteredTags: this.removeSelected(
         this.filtering(e.target.value, this.props.values),
-        this.state.choosed
+        this.state.selected
       )
     });
   };
-  removeChoosed = (arr: ProgramTag[], choosedArr: ProgramTag[]): ProgramTag[] =>
-    arr.filter(
-      item => !choosedArr.find((choose: any) => item.name === choose.name)
-    );
-  filtering = (searchValue: string, array: ProgramTag[]) =>
+  removeSelected = (
+    arr: ProgramTag[],
+    selectedArr: ProgramTag[]
+  ): ProgramTag[] =>
+    arr.filter(item => !selectedArr.find(select => item.name === select.name));
+  filtering = (searchValue: string, array: ProgramTag[]): ProgramTag[] =>
     searchValue
       ? array.filter(
           (item: ProgramTag) =>
@@ -51,10 +52,10 @@ class TagFilterPopover extends React.Component<
       : array;
 
   handleSubmit = (value: ProgramTag) => () => {
-    const { choosed } = this.state;
-    if (choosed.includes(value)) return;
-    const newValue = [...choosed, value];
-    this.setState({ choosed: newValue });
+    const { selected } = this.state;
+    if (selected.includes(value)) return;
+    const newValue = [...selected, value];
+    this.setState({ selected: newValue });
     this.props.changeFilter(newValue);
   };
 
@@ -64,6 +65,7 @@ class TagFilterPopover extends React.Component<
       <div className="tag-filter">
         <div className="tag-filter__title">Add tag</div>
         <div className="tag-filter__search">
+          //@ts-ignore
           <GVTextField
             name="queryValue"
             wrapperClassName="popover-add__search-input"

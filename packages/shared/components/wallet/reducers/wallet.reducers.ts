@@ -1,7 +1,7 @@
 import { WalletMultiSummary } from "gv-api-web";
 import { combineReducers } from "redux";
 import apiReducerFactory, {
-  IApiReducerFactory
+  IApiState
 } from "shared/reducers/api-reducer/api-reducer";
 
 import { WALLET_BALANCE } from "../actions/wallet.actions";
@@ -10,7 +10,7 @@ import walletLastUpdateReducer, {
 } from "./wallet-last-update";
 
 export type WalletState = Readonly<{
-  info: IApiReducerFactory<WalletMultiSummary>;
+  info: IApiState<WalletMultiSummary>;
   lastUpdate: WalletLastUpdateState;
 }>;
 

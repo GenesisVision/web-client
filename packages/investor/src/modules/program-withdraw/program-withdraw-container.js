@@ -19,13 +19,14 @@ class ProgramWithdrawContainer extends PureComponent {
 
   handleWithdraw = (id, percent) => {
     return investorApi
-      .v10InvestorProgramsByIdWithdrawByAmountPost(
+      .v10InvestorProgramsByIdWithdrawMultiByAmountPost(
         id,
         percent,
         authService.getAuthArg()
       )
       .then(() => {
         this.props.onClose();
+        this.props.onSubmit();
         this.props.services.alert(
           "success",
           "withdraw-program.success-alert-message",
@@ -49,7 +50,7 @@ class ProgramWithdrawContainer extends PureComponent {
     return (
       <Dialog open={open} onClose={onClose}>
         <ProgramWithdrawPopup
-          programCurrency={assetCurrency}
+          assetCurrency={assetCurrency}
           accountCurrency={accountCurrency}
           fetchInfo={() => services.getProgramWithdrawInfo(id)}
           withdraw={amount => this.handleWithdraw(id, amount)}

@@ -16,7 +16,7 @@ import ProfitDetails from "shared/modules/transaction-details/profit-details";
 import WithdrawalTransaction from "shared/modules/transaction-details/withdrawal-details";
 import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
-import { IError } from "shared/constants/constants";
+import { ResponseError } from "shared/utils/types";
 
 const Types = {
   Investing: InvestingTransaction,
@@ -30,30 +30,32 @@ const Types = {
   PlatformFee: FeeDetails
 };
 
-export interface ITransactionDetailsDialogProps extends InjectedTranslateProps {
-  transactionId: string;
-  error(message: string): void;
-  close(): void;
-  onAction(): void;
-}
-
-export interface ITransactionDetailsState {
-  isPending: boolean;
-  data?: TransactionDetails;
-  errorMessage?: string;
-}
-
-export interface ITransactionDetailsProps extends InjectedTranslateProps {
+export interface TransactionDetailsProps extends InjectedTranslateProps {
   data: TransactionDetails;
   handleCancel?(): void;
   handleResend?(): void;
 }
 
-class TransactionDetailsDialog extends React.Component<
-  ITransactionDetailsDialogProps,
-  ITransactionDetailsState
-> {
-  constructor(props: ITransactionDetailsDialogProps) {
+interface OwnProps {
+  transactionId: string;
+  close(): void;
+  onAction(): void;
+}
+
+interface DispatchProps {
+  error(message: string): void;
+}
+
+interface State {
+  isPending: boolean;
+  data?: TransactionDetails;
+  errorMessage?: string;
+}
+
+interface Props extends OwnProps, DispatchProps, InjectedTranslateProps {}
+
+class TransactionDetailsDialog extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = {
       isPending: false
@@ -74,7 +76,7 @@ class TransactionDetailsDialog extends React.Component<
       .then((data: TransactionDetails) =>
         this.setState({ data, isPending: false })
       )
-      .catch((errorMessage: IError) => {
+      .catch((errorMessage: ResponseError) => {
         this.props.error(errorMessage.errorMessage);
         this.props.close();
       });
@@ -89,7 +91,7 @@ class TransactionDetailsDialog extends React.Component<
       .then(() => {
         this.props.onAction();
       })
-      .catch((errorMessage: IError) => {
+      .catch((errorMessage: ResponseError) => {
         this.props.error(errorMessage.errorMessage);
       });
   };
@@ -102,7 +104,7 @@ class TransactionDetailsDialog extends React.Component<
       .then(() => {
         this.props.close();
       })
-      .catch((errorMessage: IError) => {
+      .catch((errorMessage: ResponseError) => {
         this.props.error(errorMessage.errorMessage);
       });
   };
@@ -130,9 +132,9 @@ const mapDispatchToProps = {
   error: alertMessageActions.error
 };
 
-export default compose(
+export default compose<React.FunctionComponent<OwnProps>>(
   translate(),
-  connect(
+  connect<null, DispatchProps>(
     null,
     mapDispatchToProps
   )

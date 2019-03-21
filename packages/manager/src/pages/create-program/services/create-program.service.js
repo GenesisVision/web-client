@@ -1,5 +1,5 @@
+import { push } from "connected-react-router";
 import { DASHBOARD_ROUTE } from "pages/dashboard/dashboard.routes";
-import { push } from "react-router-redux";
 import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import brokersApi from "shared/services/api-client/brokers-api";

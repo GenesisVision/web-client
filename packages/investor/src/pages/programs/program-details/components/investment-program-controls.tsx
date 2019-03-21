@@ -1,17 +1,17 @@
+import { ProgramDetailsFull } from "gv-api-web";
 import { GVButton } from "gv-react-components";
 import ProgramDepositContainer from "modules/program-deposit/program-deposit-container";
 import React, { Component, Fragment } from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
+import { ProgramDetailContext } from "shared/components/details/helpers/details-context";
 import InvestmentProgramInfo from "shared/components/programs/program-details/program-details-description/investment-program-info";
 import { PROGRAM } from "shared/constants/constants";
-
-import { ProgramDetailContext } from "../program-details.page";
 
 interface IInvestmentProgramControlsOwnProps {
   isAuthenticated: boolean;
   redirectToLogin(): void;
 
-  programDescription: any;
+  programDescription: ProgramDetailsFull;
 }
 
 interface IInvestmentProgramControlsState {

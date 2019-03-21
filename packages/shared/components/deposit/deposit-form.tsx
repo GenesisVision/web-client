@@ -1,58 +1,28 @@
-import { FormikActions, FormikProps, withFormik } from "formik";
+import { FormikProps, withFormik } from "formik";
 import { ProgramInvestInfo, WalletData } from "gv-api-web";
 import { GVButton, GVFormikField, GVTextField } from "gv-react-components";
-import React from "react";
+import * as React from "react";
 import { InjectedTranslateProps, translate } from "react-i18next";
-import NumberFormat from "react-number-format";
+import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { compose } from "redux";
+import WalletImage from "shared/components/avatar/wallet-image/wallet-image";
 import FormError from "shared/components/form/form-error/form-error";
 import InputAmountField from "shared/components/input-amount-field/input-amount-field";
 import Select from "shared/components/select/select";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import { ASSET, ROLE } from "shared/constants/constants";
 import rateApi from "shared/services/api-client/rate-api";
-import filesService from "shared/services/file-service";
 import {
-  calculateValueOfEntryFee,
+  calculatePercentage,
   convertFromCurrency,
   convertToCurrency
 } from "shared/utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "shared/utils/formatter";
 import { lazy, number, object } from "yup";
 
-interface IDepositFormOwnProps {
-  wallets: WalletData[];
-  role: ROLE;
-  asset: ASSET;
-  entryFee: boolean;
-  info: ProgramInvestInfo;
-  currency: string;
-  disabled: boolean;
-  errorMessage: string;
-  onSubmit: (amount: any, currency: object) => {};
-}
-
-interface IDepositFormProps {
-  errors?: any;
-  isValid?: boolean;
-  dirty?: boolean;
-  values?: FormValues;
-}
-
-export interface FormValues {
-  rate: number;
-  maxAmount: number;
-  amount: number;
-  walletCurrency: string;
-}
-
-type OwnProps = InjectedTranslateProps &
-  IDepositFormOwnProps &
-  IDepositFormProps &
-  FormikActions<FormValues> &
-  FormikProps<FormValues>;
-
-class DepositForm extends React.Component<OwnProps> {
+class DepositForm extends React.Component<
+  InjectedTranslateProps & OwnProps & FormikProps<FormValues>
+> {
   componentDidMount(): void {
     this.fetchRate({ currencyFrom: this.props.values.walletCurrency });
   }
@@ -64,14 +34,12 @@ class DepositForm extends React.Component<OwnProps> {
 
   entryFee = (amount: number): number => {
     const { info } = this.props;
-    return this.composeEntryFee(
-      calculateValueOfEntryFee(amount, info.entryFee)
-    );
+    return this.composeEntryFee(calculatePercentage(amount, info.entryFee));
   };
 
   gvFee = (amount: number): number => {
     const { info } = this.props;
-    return calculateValueOfEntryFee(amount, info.gvCommission);
+    return calculatePercentage(amount, info.gvCommission);
   };
 
   investAmount = (amount: number): number => {
@@ -82,24 +50,11 @@ class DepositForm extends React.Component<OwnProps> {
     );
   };
 
-  isAllow = (values: any): boolean => {
-    const { role, info } = this.props;
-    const { floatValue, formattedValue, value } = values;
-    const { availableToInvest, availableInWallet } = info;
-
-    const isValidateFraction = validateFraction(value, "GVT");
-
-    const isAvailableInWallet =
-      availableInWallet >= this.investAmount(floatValue);
-
-    const isAvailableToInvest =
-      role === ROLE.MANAGER ||
-      availableToInvest === undefined ||
-      floatValue <= parseFloat(String(availableToInvest));
-
+  isAllow = (currency: string) => (values: NumberFormatValues): boolean => {
+    const { formattedValue, value, floatValue } = values;
     return (
-      formattedValue === "" ||
-      (isValidateFraction && isAvailableInWallet && isAvailableToInvest)
+      (formattedValue === "" || validateFraction(value, currency)) &&
+      value !== "."
     );
   };
 
@@ -119,12 +74,12 @@ class DepositForm extends React.Component<OwnProps> {
         params.currencyFrom || values.walletCurrency,
         params.currencyTo || currency
       )
-      .then((rate: number) => {
+      .then((rate: "Number") => {
         setFieldValue("rate", rate);
       });
   };
   getMaxAmount = () => {
-    const { setFieldValue, info, wallets, values, asset, role } = this.props;
+    const { setFieldValue, info, wallets, values, role } = this.props;
     const { walletCurrency, rate } = values;
     const { availableToInvestBase } = info;
     const wallet = wallets.find(wallet => wallet.currency === walletCurrency);
@@ -133,11 +88,7 @@ class DepositForm extends React.Component<OwnProps> {
     let maxAvailable = Number.MAX_SAFE_INTEGER;
     if (availableToInvestBase !== undefined)
       maxAvailable = availableToInvestBase;
-    /*(availableToInvestBase /
-          (100 -
-            (asset === ASSET.PROGRAM ? info.gvCommission : 0) -
-            this.composeEntryFee(info.entryFee))) *
-        100;*/
+
     const maxAvailableInWalletCurrency = convertToCurrency(maxAvailable, rate);
     const maxInvest = formatCurrencyValue(
       role === ROLE.INVESTOR
@@ -184,10 +135,10 @@ class DepositForm extends React.Component<OwnProps> {
           {wallets.map((wallet: WalletData) => {
             return (
               <option value={wallet.currency} key={wallet.currency}>
-                <img
-                  src={filesService.getFileUrl(wallet.logo)}
-                  className="wallet-transfer-popup__icon"
+                <WalletImage
+                  imageClassName="wallet-transfer-popup__icon"
                   alt={wallet.currency}
+                  url={wallet.logo}
                 />
                 {`${wallet.title} | ${wallet.currency}`}
               </option>
@@ -206,7 +157,7 @@ class DepositForm extends React.Component<OwnProps> {
               : t("deposit-asset.amount")
           }
           currency={walletCurrency}
-          // isAllow={this.isAllow}
+          isAllow={this.isAllow(walletCurrency)}
           setMax={this.setMaxAmount}
         />
 
@@ -302,7 +253,7 @@ class DepositForm extends React.Component<OwnProps> {
   }
 }
 
-export default compose<React.ComponentType<IDepositFormOwnProps>>(
+export default compose<React.ComponentType<OwnProps>>(
   translate(),
   withFormik({
     displayName: "invest-form",
@@ -348,3 +299,22 @@ export default compose<React.ComponentType<IDepositFormOwnProps>>(
     }
   })
 )(DepositForm);
+
+interface OwnProps {
+  wallets: WalletData[];
+  role: ROLE;
+  asset: ASSET;
+  entryFee: boolean;
+  info: ProgramInvestInfo;
+  currency: string;
+  disabled: boolean;
+  errorMessage: string;
+  onSubmit: (amount: any, currency: object) => {};
+}
+
+export interface FormValues {
+  rate: number;
+  maxAmount: number;
+  amount: number;
+  walletCurrency: string;
+}

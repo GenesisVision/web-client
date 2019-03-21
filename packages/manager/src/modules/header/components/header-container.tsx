@@ -5,8 +5,8 @@ import { fetchTwoFactor } from "shared/actions/2fa-actions";
 import { GLOBAL_SEARCH_ROUTE } from "shared/components/global-search/global-search.routes";
 import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
 import Header from "shared/components/header/header";
+import { notificationsToggle } from "shared/components/notifications/actions/notifications.actions";
 
-import { notificationsToggle } from "../../../pages/app/components/notifications/actions/notifications.actions";
 import { LOGIN_ROUTE } from "../../../pages/auth/login/login.routes";
 import { logout } from "../../../pages/auth/login/services/login.service";
 import { SIGNUP_ROUTE } from "../../../pages/auth/signup/signup.routes";
@@ -15,7 +15,7 @@ import { ManagerRootState } from "../../../reducers";
 export interface IHeaderContainerStateProps {
   isAuthenticated: boolean;
   info: ProfileHeaderViewModel | undefined;
-  backPath: string | undefined;
+  backPath: string;
 }
 export interface IHeaderContainerDispatchProps {
   fetchProfileHeaderInfo: any;
@@ -67,7 +67,7 @@ const mapStateToProps = (
 ): IHeaderContainerStateProps => ({
   info: state.profileHeader.info.data,
   isAuthenticated: state.authData.isAuthenticated,
-  backPath: state.routing.location ? state.routing.location.pathname : undefined
+  backPath: state.router.location ? state.router.location.pathname : ""
 });
 
 export default connect(

@@ -7,11 +7,11 @@ import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Status from "shared/components/status/status";
 import Copy from "shared/decorators/with-copy";
 import ArrowIcon from "shared/media/arrow-up-thin.svg";
-import { ITransactionDetailsProps } from "shared/modules/transaction-details/transaction-details";
+import { TransactionDetailsProps } from "shared/modules/transaction-details/transaction-details";
 import filesService from "shared/services/file-service";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-const ExternalWithdrawal = (props: ITransactionDetailsProps) => {
+const ExternalWithdrawal = (props: TransactionDetailsProps) => {
   const { data, t, handleCancel, handleResend } = props;
   return (
     <React.Fragment>
@@ -55,10 +55,7 @@ const ExternalWithdrawal = (props: ITransactionDetailsProps) => {
             </div>
             <div className="external-transaction__address">
               {data.externalTransactionDetails.fromAddress}
-              <Copy
-                errorMessage={t("transactions-details.copy.error")}
-                successMessage={t("transactions-details.copy.success")}
-              >
+              <Copy>
                 {({ copy }) => (
                   <GVButton
                     color="secondary"

@@ -1,46 +1,38 @@
-import { type } from "os";
-
 import { ProgramRequest, ProgramRequests } from "gv-api-web";
-import { Dispatch } from "react-redux";
-import { Action } from "redux";
-import { ThunkAction, ThunkDispatch } from "redux-thunk";
-import { FUND, INVESTOR, MANAGER, PROGRAM } from "shared/constants/constants";
+import { AnyAction } from "redux";
+import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
+import { ASSET, ROLE } from "shared/constants/constants";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
 import investorApi from "shared/services/api-client/investor-api";
 import managerApi from "shared/services/api-client/manager-api";
 import authService from "shared/services/auth-service";
+import { MiddlewareDispatch } from "shared/utils/types";
 
-import { ActionType, DispatchType } from "../../../utils/types";
-import { fetchProfileHeaderInfo } from "../../header/actions/header-actions";
 import {
   ICancelRequest,
   cancelInvestorProgramRequest,
-  cancelManagerFundRequest,
   cancelManagerProgramRequest
 } from "../actions/asset-status-actions";
 
 export const getAssetRequests = (
   id: string,
-  role: string,
-  asset: string
+  role: ROLE,
+  asset: ASSET
 ): Promise<Array<ProgramRequest>> => {
   const authorization = authService.getAuthArg();
   let method;
   switch (role + asset) {
-    case MANAGER + PROGRAM:
+    case ROLE.MANAGER + ASSET.PROGRAM:
       method = managerApi.v10ManagerProgramsByIdRequestsBySkipByTakeGet;
       break;
-    case MANAGER + FUND:
+    case ROLE.MANAGER + ASSET.FUND:
       method = managerApi.v10ManagerFundsByIdRequestsBySkipByTakeGet;
       break;
-    case INVESTOR + PROGRAM:
+    case ROLE.INVESTOR + ASSET.PROGRAM:
       method = investorApi.v10InvestorProgramsByIdRequestsBySkipByTakeGet;
       break;
-    case INVESTOR + FUND:
-      method = investorApi.v10InvestorFundsByIdRequestsBySkipByTakeGet;
-      break;
     default:
-      method = null;
+      method = investorApi.v10InvestorFundsByIdRequestsBySkipByTakeGet;
   }
   return method(id, 0, 10, authorization).then(
     (response: ProgramRequests) => response.requests
@@ -49,32 +41,26 @@ export const getAssetRequests = (
 
 export const cancelRequest = (
   id: string,
-  role: string,
-  asset: string
+  role: ROLE,
+  asset: ASSET
 ): Promise<void> => {
   const authorization = authService.getAuthArg();
   let method;
 
   switch (role + asset) {
-    case MANAGER + PROGRAM:
+    case ROLE.MANAGER + ASSET.PROGRAM:
       method = managerApi.v10ManagerProgramsRequestsByIdCancelPost;
       break;
-    case MANAGER + FUND:
-      method = managerApi.v10ManagerFundsRequestsByIdCancelPost;
-      break;
-    case INVESTOR + PROGRAM:
-      method = investorApi.v10InvestorProgramsRequestsByIdCancelPost;
-      break;
     default:
-      method = null;
+      method = investorApi.v10InvestorProgramsRequestsByIdCancelPost;
   }
   return method(id, authorization);
 };
 
-export type CancelReqestType = {
+export type CancelRequestType = {
   id: string;
-  role: string;
-  asset: string;
+  role: ROLE;
+  asset: ASSET;
   onFinally: Function;
   removeDisableBtn: Function;
 };
@@ -84,18 +70,17 @@ export const cancelRequestDispatch = ({
   role,
   asset,
   onFinally
-}: CancelReqestType) => dispatch => {
+}: CancelRequestType) => (
+  dispatch: MiddlewareDispatch<AnyAction>
+): Promise<void> => {
   const authorization = authService.getAuthArg();
   let actionCreator: ICancelRequest;
 
   switch (role + asset) {
-    case MANAGER + PROGRAM:
+    case ROLE.MANAGER + ASSET.PROGRAM:
       actionCreator = cancelManagerProgramRequest;
       break;
-    case MANAGER + FUND:
-      actionCreator = cancelManagerFundRequest;
-      break;
-    case INVESTOR + PROGRAM:
+    case ROLE.INVESTOR + ASSET.PROGRAM:
       actionCreator = cancelInvestorProgramRequest;
       break;
     default:
@@ -115,15 +100,8 @@ export const cancelRequestDispatch = ({
       );
       onFinally();
     })
-    .catch(() => {
-      dispatch(
-        alertMessageActions.error(
-          `${
-            process.env.REACT_APP_PLATFORM
-          }.dashboard-page.requests.failure-cancel-request`,
-          true
-        )
-      );
+    .catch(error => {
+      dispatch(alertMessageActions.error(error.errorMessage));
       onFinally();
     });
 };

@@ -1,33 +1,35 @@
 import "./date-range-filter.scss";
 
-import React, { Component } from "react";
+import * as React from "react";
 import { TranslationFunction, translate } from "react-i18next";
 
 import { IUpdateFilterFunc } from "../../table.types";
 import Filter from "../filter";
 import DateRangeFilterPopover from "./date-range-filter-popover";
-import { DateRangeFilterTypes } from "./date-range-filter.constants";
+import {
+  DATA_RANGE_FILTER_TYPES,
+  IDataRangeFilterValue
+} from "./date-range-filter.constants";
 
 interface IDateRangeFilterProps {
   t: TranslationFunction;
   name: string;
   value: any;
-  onChange: IUpdateFilterFunc;
-
+  onChange?: IUpdateFilterFunc;
   startLabel: string;
 }
 
-class DateRangeFilter extends Component<IDateRangeFilterProps> {
-  renderValueText = (value: any) => {
+class DateRangeFilter extends React.PureComponent<IDateRangeFilterProps> {
+  renderValueText = (value: IDataRangeFilterValue): string => {
     const { t } = this.props;
     switch (value.type) {
-      case DateRangeFilterTypes.all:
+      case DATA_RANGE_FILTER_TYPES.ALL:
         return t("filters.date-range.all-time");
-      case DateRangeFilterTypes.lastMonth:
+      case DATA_RANGE_FILTER_TYPES.LAST_MOUTH:
         return t("filters.date-range.last-month");
-      case DateRangeFilterTypes.lastWeek:
+      case DATA_RANGE_FILTER_TYPES.LAST_WEEK:
         return t("filters.date-range.last-week");
-      case DateRangeFilterTypes.custom:
+      case DATA_RANGE_FILTER_TYPES.CUSTOM:
       default:
         return t("filters.date-range.custom");
     }

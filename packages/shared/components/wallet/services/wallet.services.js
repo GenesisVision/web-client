@@ -1,8 +1,11 @@
+import { CopyTradingAccountInfo } from "gv-api-web";
 import { fetchProfileHeaderInfo } from "shared/components/header/actions/header-actions";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
+import signalApi from "shared/services/api-client/signal-api";
 import walletApi from "shared/services/api-client/wallet-api";
 import authService from "shared/services/auth-service";
 
+import { mapToTableItems } from "../../table/helpers/mapper";
 import * as actions from "../actions/wallet.actions";
 
 export const fetchWallets = () => (dispatch, getState) => {
@@ -12,7 +15,6 @@ export const fetchWallets = () => (dispatch, getState) => {
   const { currency } = getState().accountSettings;
 
   dispatch(actions.fetchWallets(currency, authorization));
-  dispatch(fetchProfileHeaderInfo());
 };
 
 export const fetchWalletTransactions = requestFilters => {
@@ -69,4 +71,46 @@ export const resendWithdrawRequest = txId => (dispatch, getState) => {
     .catch(err => {
       dispatch(alertMessageActions.error(err.errorMessage));
     });
+};
+
+export const fetchMultiTransactionsExternal = (currency, filters) => {
+  const authorization = authService.getAuthArg();
+  const filtering = {
+    ...filters,
+    currency
+  };
+  return walletApi
+    .v10WalletMultiTransactionsExternalGet(authorization, filtering)
+    .then(mapToTableItems("transactions"));
+};
+
+export const fetchMultiTransactions = (currency, filters) => {
+  const authorization = authService.getAuthArg();
+  const filtering = {
+    ...filters,
+    currency
+  };
+  return walletApi
+    .v10WalletMultiTransactionsGet(authorization, filtering)
+    .then(mapToTableItems("transactions"));
+};
+
+export const fetchCopytradingAccounts = () => {
+  const authorization = authService.getAuthArg();
+  return signalApi
+    .v10SignalAccountsGet(authorization)
+    .then(data => ({ ...mockCopytrading, total: 0 }))
+    .then(mapToTableItems("accounts"));
+};
+
+let mockCopytrading = {
+  accounts: [
+    {
+      currency: "GVT",
+      logo: "d3d2bc3e-eb20-4941-91e7-c8af00d0efe7",
+      balance: 100,
+      equity: 10,
+      freeMargin: 90
+    }
+  ]
 };

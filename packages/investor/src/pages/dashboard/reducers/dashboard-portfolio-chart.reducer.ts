@@ -1,13 +1,11 @@
 import { DashboardChartValue } from "gv-api-web";
 import apiReducerFactory, {
-  IApiReducerFactory
+  IApiState
 } from "shared/reducers/api-reducer/api-reducer";
 
 import { DASHBOARD_PORTFOLIO_CHART } from "../actions/dashboard.actions";
 
-export type DashboardPortfolioChartState = IApiReducerFactory<
-  DashboardChartValue
->;
+export type DashboardPortfolioChartState = IApiState<DashboardChartValue>;
 
 const dashboardPortfolioChartReducer = apiReducerFactory<DashboardChartValue>({
   apiType: DASHBOARD_PORTFOLIO_CHART

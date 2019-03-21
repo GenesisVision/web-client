@@ -1,4 +1,4 @@
-import { array, number, object, string, lazy } from "yup";
+import { array, lazy, number, object, string } from "yup";
 
 const createFundSettingsValidationSchema = ({ t, ...props }) =>
   lazy(values =>
@@ -9,10 +9,9 @@ const createFundSettingsValidationSchema = ({ t, ...props }) =>
         )
         .min(
           50,
-          t(
-            "manager.create-program-page.settings.validation.amount-is-zero",
-            50
-          )
+          t("manager.create-program-page.settings.validation.amount-is-zero", {
+            min: 50
+          })
         )
         .max(
           props.wallets.find(

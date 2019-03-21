@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import React, { Component, Fragment } from "react";
+import { DialogLoader } from "shared/components/dialog/dialog-loader/dialog-loader";
 
 import ProgramWithdrawForm from "./program-withdraw-form";
 import ProgramWithdrawTop from "./program-withdraw-top";
@@ -26,18 +27,18 @@ class ProgramWithdrawPopup extends Component {
   };
 
   render() {
-    if (!this.state.data) return null;
-    const { programCurrency, accountCurrency, errorMessage } = this.props;
+    if (!this.state.data) return <DialogLoader />;
+    const { assetCurrency, accountCurrency, errorMessage } = this.props;
     const { title, availableToWithdraw, periodEnds, rate } = this.state.data;
     return (
       <Fragment>
         <ProgramWithdrawTop
           title={title}
           availableToWithdraw={availableToWithdraw}
-          programCurrency={programCurrency}
+          programCurrency={assetCurrency}
         />
         <ProgramWithdrawForm
-          programCurrency={programCurrency}
+          programCurrency={assetCurrency}
           accountCurrency={accountCurrency}
           availableToWithdraw={availableToWithdraw}
           periodEnds={periodEnds}
@@ -55,7 +56,7 @@ ProgramWithdrawPopup.propTypes = {
   fetchInfo: PropTypes.func,
   withdraw: PropTypes.func,
   accountCurrency: PropTypes.string.isRequired,
-  programCurrency: PropTypes.string.isRequired
+  assetCurrency: PropTypes.string.isRequired
 };
 
 export default ProgramWithdrawPopup;

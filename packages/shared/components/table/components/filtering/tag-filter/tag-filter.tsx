@@ -2,26 +2,29 @@ import "./tag-filter.scss";
 
 import { ProgramTag } from "gv-api-web";
 import * as React from "react";
-import { Fragment } from "react";
-import Popover from "shared/components/popover/popover";
+import Popover, {
+  HORIZONTAL_POPOVER_POS
+} from "shared/components/popover/popover";
 import TagProgramItem from "shared/components/tag-program/tag-program-item";
+import { Nullable } from "shared/utils/types";
 
+import { TFilter } from "../filter.type";
 import TagFilterButton from "./tag-filter-button";
 import TagFilterPopover from "./tag-filter-popover";
 import { TAG_NAME_TYPE } from "./tag-filter.constants";
 
 interface ITagFilterState {
-  anchor: any;
+  anchor: Nullable<EventTarget>;
 }
 
 export interface ITagFilterProps {
   name: string;
   value: ProgramTag[];
   values: ProgramTag[];
-  onChange(value: { name: string; value: string[] }): void;
+  onChange(value: TFilter<string[]>): void;
 }
 
-class TagFilter extends React.Component<ITagFilterProps, ITagFilterState> {
+class TagFilter extends React.PureComponent<ITagFilterProps, ITagFilterState> {
   state = {
     anchor: null
   };
@@ -32,11 +35,12 @@ class TagFilter extends React.Component<ITagFilterProps, ITagFilterState> {
     arr.filter(
       item =>
         this.props.value &&
-        this.props.value.find(choose => item.name === choose.name)
+        this.props.value.find(select => item.name === select.name)
     );
-  renderValueText = value => value;
-  handleOpenPopover = (event: any): void =>
-    this.setState({ anchor: event.currentTarget });
+
+  handleOpenPopover = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ): void => this.setState({ anchor: event.currentTarget });
   handleClosePopover = (): void => this.setState({ anchor: null });
   handleChangeFilter = (value: ProgramTag[]): void => {
     this.handleClosePopover();
@@ -60,7 +64,7 @@ class TagFilter extends React.Component<ITagFilterProps, ITagFilterState> {
     const { values, value } = this.props;
     const { anchor } = this.state;
     return (
-      <Fragment>
+      <>
         <div className="filter filter--tags">
           <div className="filter__value">
             {this.filterChoosed(values).map(tag => (
@@ -73,14 +77,14 @@ class TagFilter extends React.Component<ITagFilterProps, ITagFilterState> {
             ))}
           </div>
           <TagFilterButton
-            isActive={anchor}
+            isActive={Boolean(anchor)}
             onClickHandle={this.handleOpenPopover}
           />
         </div>
         <Popover
           anchorEl={anchor}
           onClose={this.handleClosePopover}
-          horizontal={"right"}
+          horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
           noPadding
         >
           <TagFilterPopover
@@ -89,7 +93,7 @@ class TagFilter extends React.Component<ITagFilterProps, ITagFilterState> {
             values={values}
           />
         </Popover>
-      </Fragment>
+      </>
     );
   }
 }

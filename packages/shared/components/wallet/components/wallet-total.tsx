@@ -3,10 +3,11 @@ import * as React from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import Page from "shared/components/page/page";
 import { ROLE } from "shared/constants/constants";
 import RootState from "shared/reducers/root-reducer";
 
-import Page from "../../page/page";
+import { WalletRouteProps } from "../wallet.routes";
 import WalletBalanceElements from "./wallet-balance/wallet-balance-elements";
 import WalletBalanceLoader from "./wallet-balance/wallet-balance-loader";
 import WalletContainerTotal from "./wallet-container/wallet-container-total";
@@ -21,10 +22,10 @@ interface IWalletProps {
   role?: ROLE;
 }
 
-class WalletTotal extends React.Component<IWalletProps> {
+class WalletTotal extends React.Component<IWalletProps & WalletRouteProps> {
   render() {
     const { t, info, wallets, filters, role, isPayFeesWithGvt } = this.props;
-    if (!info) return <WalletBalanceLoader />;
+    if (!info || !filters) return <WalletBalanceLoader />;
     return (
       <Page title={t("wallet-page.title")}>
         <div className="wallet-balance">
@@ -40,6 +41,8 @@ class WalletTotal extends React.Component<IWalletProps> {
             currency={info.currencyCcy}
           />
         </div>
+        {/*
+        //@ts-ignore*/}
         <WalletContainerTotal
           wallets={wallets}
           filters={filters}
@@ -61,10 +64,10 @@ const mapStateToProps = (state: RootState) => ({
     : null,
   filters: state.platformData.data
     ? state.platformData.data.enums.multiWallet
-    : []
+    : undefined
 });
 
-export default compose(
+export default compose<React.FunctionComponent<WalletRouteProps>>(
   connect(mapStateToProps),
   translate()
 )(WalletTotal);

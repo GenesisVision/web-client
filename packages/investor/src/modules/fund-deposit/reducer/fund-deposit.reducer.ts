@@ -5,7 +5,7 @@ import {
 } from "modules/fund-deposit/fund-deposit.constants";
 import { combineReducers } from "redux";
 import apiReducerFactory, {
-  IApiReducerFactory
+  IApiState
 } from "shared/reducers/api-reducer/api-reducer";
 import { DeepReadonly } from "utility-types";
 
@@ -17,8 +17,8 @@ const investFundSubmitReducer = apiReducerFactory<any>({
 });
 
 export type FundDepositState = DeepReadonly<{
-  info: IApiReducerFactory<FundInvestInfo>;
-  submit: IApiReducerFactory<any>;
+  info: IApiState<FundInvestInfo>;
+  submit: IApiState<any>;
 }>;
 
 const fundDepositReducer = combineReducers<FundDepositState>({

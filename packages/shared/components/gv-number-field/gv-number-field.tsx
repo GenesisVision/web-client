@@ -1,15 +1,14 @@
 import { FormikActions } from "formik";
 import { GVTextField } from "gv-react-components";
 import { GVTextFieldProps } from "gv-react-components/dist/gv-text-field";
-import React, { Component } from "react";
+import * as React from "react";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 
-export interface IGVNumberProps {
-  [key: string]: any;
-}
-
-class GVNumberFiled extends Component<
-  GVTextFieldProps & { form: FormikActions<void> }
+class GVNumberFiled extends React.Component<
+  GVTextFieldProps & {
+    form: FormikActions<void>;
+    onChange(value: string): void;
+  }
 > {
   handleOnChange = (value: NumberFormatValues) => {
     const { form, name, onChange } = this.props;
@@ -17,11 +16,11 @@ class GVNumberFiled extends Component<
     form.setFieldValue(name, value.value);
   };
   render() {
-    const { onChange, form, ...props } = this.props;
+    const { name, ...props } = this.props;
     return (
       <GVTextField
         {...props}
-        name={props.name}
+        name={name}
         onValueChange={this.handleOnChange}
         InputComponent={NumberFormat}
       />

@@ -11,14 +11,21 @@ import AssetStatus from "shared/components/asset-status/asset-status";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import { DASHBOARD_PROGRAMS_COLUMNS } from "shared/components/dashboard/dashboard.constants";
 import LevelTooltip from "shared/components/level-tooltip/level-tooltip";
+import Profitability from "shared/components/profitability/profitability";
+import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
 import ProgramPeriodEnd from "shared/components/program-period/program-period-end/program-period-end";
 import ProgramSimpleChart from "shared/components/program-simple-chart/program-simple-chart";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import { FilteringType } from "shared/components/table/components/filtering/filter.type";
 import TableCell from "shared/components/table/components/table-cell";
 import TableContainer from "shared/components/table/components/table-container";
 import TableRow from "shared/components/table/components/table-row";
-import { PROGRAM } from "shared/constants/constants";
+import {
+  Column,
+  IUpdateFilterFunc
+} from "shared/components/table/components/table.types";
+import { PROGRAM, ROLE } from "shared/constants/constants";
 import { composeProgramDetailsUrl } from "shared/utils/compose-url";
 import {
   formatCurrencyValue,
@@ -26,19 +33,14 @@ import {
   formatValue
 } from "shared/utils/formatter";
 
-import {
-  Column,
-  IUpdateFilterFunc
-} from "shared/components/table/components/table.types";
 import dashboardProgramsTableSelector from "./dashboard-programs.selector";
-import Profitability from "shared/components/profitability/profitability";
 
 interface IDashboardProgramsProps {
-  role: string;
+  role: ROLE;
   title: string;
   getDashboardPrograms(filters: any): Action;
-  createButtonToolbar?(text: string, route: string): JSX.Element;
-  createProgram?(): void;
+  createButtonToolbar: JSX.Element;
+  createProgram: JSX.Element;
 }
 
 const DashboardPrograms: FunctionComponent<
@@ -52,6 +54,7 @@ const DashboardPrograms: FunctionComponent<
   title
 }) => {
   return (
+    //@ts-ignore
     <TableContainer
       createButtonToolbar={createButtonToolbar}
       emptyMessage={createProgram}
@@ -59,7 +62,10 @@ const DashboardPrograms: FunctionComponent<
       dataSelector={dashboardProgramsTableSelector}
       isFetchOnMount={true}
       columns={DASHBOARD_PROGRAMS_COLUMNS}
-      renderFilters={(updateFilter: IUpdateFilterFunc, filtering: any) => (
+      renderFilters={(
+        updateFilter: IUpdateFilterFunc,
+        filtering: FilteringType
+      ) => (
         <Fragment>
           <DateRangeFilter
             name={DATE_RANGE_FILTER_NAME}
@@ -136,7 +142,7 @@ const DashboardPrograms: FunctionComponent<
           <TableCell className="programs-table__cell dashboard-programs__cell--profit">
             <Profitability
               value={formatValue(program.statistic.profitPercent, 2)}
-              prefix="sign"
+              prefix={PROFITABILITY_PREFIX.SIGN}
             >
               <NumberFormat
                 value={formatValue(program.statistic.profitPercent, 2)}
@@ -153,7 +159,6 @@ const DashboardPrograms: FunctionComponent<
             <AssetStatus
               status={program.personalDetails.status}
               id={program.id}
-              role={role}
               asset={PROGRAM}
               onCancel={updateRow}
             />

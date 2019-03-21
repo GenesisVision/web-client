@@ -17,7 +17,7 @@ export interface IConfirmPopupProps {
   disabled?: boolean;
 }
 
-const ConfirmPopup: React.SFC<IConfirmPopupProps> = ({
+const ConfirmPopup: React.FunctionComponent<IConfirmPopupProps> = ({
   t,
   open,
   onClose,
@@ -25,13 +25,11 @@ const ConfirmPopup: React.SFC<IConfirmPopupProps> = ({
   onCancel,
   header,
   body,
-  applyButtonText,
-  cancelButtonText,
+  applyButtonText = t("buttons.apply"),
+  cancelButtonText = t("buttons.cancel"),
   className,
   disabled
 }) => {
-  applyButtonText = applyButtonText || t("buttons.apply");
-  cancelButtonText = cancelButtonText || t("buttons.cancel");
   return (
     <Dialog open={open} onClose={onClose} className={className}>
       <div className="dialog__top">

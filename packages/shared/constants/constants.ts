@@ -2,7 +2,18 @@ export const MANAGER = "Manager";
 export const INVESTOR = "Investor";
 export const PROGRAM = "PROGRAM";
 export const FUND = "FUND";
-export const STATUS = {
+
+export enum STATUS {
+  ACTIVE = "Active",
+  INVESTING = "Investing",
+  WITHDRAWING = "Withdrawing",
+  ENDED = "Ended",
+  CLOSED = "Closed",
+  ARCHIVED = "Archived",
+  PENDING = "Pending"
+}
+
+export const STATUS_OLD = {
   ACTIVE: "Active",
   INVESTING: "Investing",
   WITHDRAWING: "Withdrawing",
@@ -21,11 +32,6 @@ export interface IDataModel {
   items: any;
   total: number;
 }
-export interface IPaging {
-  currentPage: number;
-  itemsOnPage: number;
-  totalPages: number;
-}
 
 export enum FOLLOW_TYPE {
   CREATE = "CREATE",
@@ -39,8 +45,4 @@ export enum ROLE {
 export enum ASSET {
   PROGRAM = "PROGRAM",
   FUND = "FUND"
-}
-export interface IError {
-  errorMessage: string;
-  code: string;
 }

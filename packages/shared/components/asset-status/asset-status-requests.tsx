@@ -1,29 +1,29 @@
 import { ProgramRequest } from "gv-api-web";
-import React, { Fragment, PureComponent } from "react";
-import { TranslationFunction, translate } from "react-i18next";
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
 import { connect } from "react-redux";
-import { Dispatch, bindActionCreators, compose } from "redux";
+import { compose } from "redux";
+import DashboardRequest from "shared/components/dashboard/dashboard-portfolio-chart-section/dashboard-in-requests/dashboard-request";
+import { ASSET, ROLE } from "shared/constants/constants";
+import { MiddlewareDispatch } from "shared/utils/types";
 
-import { ActionType, IDispatchable } from "../../utils/types";
-import DashboardRequest from "../dashboard/dashboard-portfolio-chart-section/dashboard-in-requests/dashboard-request";
 import {
-  CancelReqestType,
+  CancelRequestType,
   cancelRequestDispatch,
   getAssetRequests
 } from "./services/asset-status.service";
 
 export interface IAssetStatusRequestsOwnProps {
   id: string;
-  role: string;
-  asset: string;
+  role: ROLE;
+  asset: ASSET;
   onCancel(): void;
   handleCloseDropdown(): void;
-  t: TranslationFunction;
 }
 
 export interface IAssetStatusRequestsDispatchProps {
   service: {
-    cancelRequestDispatch(x: CancelReqestType): IDispatchable<void>;
+    cancelRequestDispatch(x: CancelRequestType): Promise<any>;
   };
 }
 
@@ -31,8 +31,10 @@ export interface IAssetStatusRequestsState {
   requests?: Array<ProgramRequest>;
 }
 
-class AssetStatusRequests extends PureComponent<
-  IAssetStatusRequestsOwnProps & IAssetStatusRequestsDispatchProps,
+class AssetStatusRequests extends React.Component<
+  IAssetStatusRequestsOwnProps &
+    InjectedTranslateProps &
+    IAssetStatusRequestsDispatchProps,
   IAssetStatusRequestsState
 > {
   state: IAssetStatusRequestsState = {
@@ -62,7 +64,7 @@ class AssetStatusRequests extends PureComponent<
       );
     }
     return (
-      <Fragment>
+      <React.Fragment>
         {requests.map(x => (
           <DashboardRequest
             key={x.id}
@@ -73,23 +75,26 @@ class AssetStatusRequests extends PureComponent<
             onApplyCancelRequest={this.handleCancel}
           />
         ))}
-      </Fragment>
+      </React.Fragment>
     );
   }
 }
 
 const mapDispatchToProps = (
-  dispatch: Dispatch<ActionType>
+  dispatch: MiddlewareDispatch<any>
 ): IAssetStatusRequestsDispatchProps => {
   return {
-    service: bindActionCreators({ cancelRequestDispatch }, dispatch)
+    service: {
+      cancelRequestDispatch: (x: CancelRequestType) =>
+        dispatch(cancelRequestDispatch(x))
+    }
   };
 };
 
-export default compose(
-  translate(),
+export default compose<React.ComponentType<IAssetStatusRequestsOwnProps>>(
   connect(
     null,
     mapDispatchToProps
-  )
+  ),
+  translate()
 )(AssetStatusRequests);

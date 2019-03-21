@@ -33,16 +33,24 @@
     &--type {
       text-align: right;
     }
+    &--wallet-wrapper {
+      display: flex;
+      align-items: center;
+    }
   }
 
   & .table__cell:last-child {
     text-align: right;
   }
 
+  &__icon-container {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
   &__icon {
     @include adaptive-margin(right, $padding-xsmall);
     display: inline-block;
-    vertical-align: middle;
     width: 24px;
     height: 24px;
   }

@@ -1,0 +1,28 @@
+import * as React from "react";
+import { InjectedTranslateProps, translate } from "react-i18next";
+import ManagersTableRow from "shared/components/managers-table/components/managers-table-row";
+import { MANAGERS_TABLE_COLUMNS } from "shared/components/managers-table/managers-table.constants";
+import { Table } from "shared/components/table/components";
+import { SearchTableProps } from "./global-search-result";
+import { ManagersList } from "gv-api-web";
+
+const ManagersTable: React.FC<
+  SearchTableProps<ManagersList> & InjectedTranslateProps
+> = ({ t, data, title }) => {
+  return (
+    <Table
+      columns={MANAGERS_TABLE_COLUMNS}
+      items={data.managers}
+      renderHeader={column => (
+        <span className={`managers-table__cell--${column.name}`}>
+          {t(`managers-table.${column.name}`)}
+        </span>
+      )}
+      renderBodyRow={manager => (
+        <ManagersTableRow manager={manager} title={title} />
+      )}
+    />
+  );
+};
+
+export default translate()(ManagersTable);

@@ -10,8 +10,8 @@ export const WALLET_COPYTRADING_COLUMNS = [
   },
   {
     name: "free-margin"
-  }
-  /*{
+  },
+  {
     name: "actions"
-  }*/
+  }
 ];

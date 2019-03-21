@@ -5,7 +5,7 @@ import {
 } from "modules/program-withdraw/program-withdraw-constants";
 import { combineReducers } from "redux";
 import apiReducerFactory, {
-  IApiReducerFactory
+  IApiState
 } from "shared/reducers/api-reducer/api-reducer";
 import { DeepReadonly } from "utility-types";
 
@@ -18,8 +18,8 @@ const withdrawSubmitReducer = apiReducerFactory<any>({
 });
 
 export type IProgramWithdrawState = DeepReadonly<{
-  info: IApiReducerFactory<ProgramWithdrawInfo>;
-  submit: IApiReducerFactory<any>;
+  info: IApiState<ProgramWithdrawInfo>;
+  submit: IApiState<any>;
 }>;
 
 export default combineReducers<IProgramWithdrawState>({

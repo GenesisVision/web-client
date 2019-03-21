@@ -96,6 +96,10 @@
     }
   }
 
+  &__wrapper {
+    margin-bottom: 16px;
+  }
+
   &__top-wrapper {
     margin-top: 30px;
   }
@@ -105,10 +109,6 @@
     padding: $padding-small $padding-small 50px;
 
     .gv-text-field__wrapper:first-child {
-      margin-top: 0;
-    }
-
-    .create-program-settings__logo-title {
       margin-top: 0;
     }
   }
@@ -260,12 +260,17 @@
     }
   }
 
-  .create-program-settings__fee {
+  .create-program-settings__item {
+    max-width: 100%;
     width: 100%;
-    margin-right: 0;
+
+    .gv-text-field,
+    .gv-text-field__wrapper {
+      width: 100%;
+    }
   }
 
-  .create-program-settings__row-title {
-    margin-top: 0;
+  .svg-loader {
+    max-width: 100%;
   }
 }

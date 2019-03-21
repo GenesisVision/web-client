@@ -1,14 +1,17 @@
-import { FilterType } from "shared/components/table/helpers/filtering.helpers";
+import { FILTER_TYPE } from "shared/components/table/helpers/filtering.helpers";
 
+import { IComposeDefaultFilter } from "../../table.types";
 import {
+  ComposedRequestTagValue,
   TAG_FILTER_DEFAULT_VALUE,
-  TAG_FILTER_NAME
+  TAG_FILTER_NAME,
+  TagFilterType
 } from "./tag-filter.constants";
 
-export const programsTagFilter = {
+export const programsTagFilter: IComposeDefaultFilter = {
   name: TAG_FILTER_NAME,
-  composeRequestValue: (value: string[]) =>
+  composeRequestValue: (value: TagFilterType): ComposedRequestTagValue =>
     Array.isArray(value) ? [...value] : [value],
   defaultValue: TAG_FILTER_DEFAULT_VALUE,
-  type: FilterType.custom
+  type: FILTER_TYPE.CUSTOM
 };

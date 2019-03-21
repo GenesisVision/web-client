@@ -3,10 +3,10 @@ import NumberFormat from "react-number-format";
 import StatisticItem from "shared/components/statistic-item/statistic-item";
 import Status from "shared/components/status/status";
 import TransactionAsset from "shared/modules/transaction-details/details-asset";
-import { ITransactionDetailsProps } from "shared/modules/transaction-details/transaction-details";
+import { TransactionDetailsProps } from "shared/modules/transaction-details/transaction-details";
 import { formatCurrencyValue } from "shared/utils/formatter";
 
-const InvestingTransaction = (props: ITransactionDetailsProps) => {
+const InvestingTransaction = (props: TransactionDetailsProps) => {
   const { data, t } = props;
   return (
     <React.Fragment>
@@ -47,9 +47,14 @@ const InvestingTransaction = (props: ITransactionDetailsProps) => {
         <StatisticItem label={t(`transactions-details.gv-fee`)}>
           {data.gvCommissionPercent} %
           <NumberFormat
-            value={formatCurrencyValue(data.gvCommission, data.currency)}
+            value={formatCurrencyValue(
+              data.gvCommission,
+              data.gvCommissionCurrency
+            )}
             prefix={" ("}
-            suffix={` ${data.currency})`}
+            suffix={
+              data.gvCommissionCurrency ? ` ${data.gvCommissionCurrency})` : ")"
+            }
             displayType="text"
           />
         </StatisticItem>

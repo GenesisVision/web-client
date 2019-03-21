@@ -1,10 +1,10 @@
 import apiReducerFactory, {
-  IApiReducerFactory
+  IApiState
 } from "shared/reducers/api-reducer/api-reducer";
 
 import { SIGN_UP } from "../actions/signup.actions";
 
-export type SignUpState = IApiReducerFactory<any>;
+export type SignUpState = IApiState<any>;
 
 const signUpReducer = apiReducerFactory<any>({
   apiType: SIGN_UP

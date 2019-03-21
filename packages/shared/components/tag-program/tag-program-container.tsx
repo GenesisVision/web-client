@@ -2,6 +2,7 @@ import "./tag-program-container.scss";
 
 import { ProgramTag } from "gv-api-web";
 import * as React from "react";
+import { PROFITABILITY_VARIANT } from "shared/components/profitability/profitability.helper";
 import Tooltip from "shared/components/tooltip/tooltip";
 
 import Profitability from "../profitability/profitability";
@@ -33,7 +34,7 @@ class TagProgramContainer extends React.Component<ITagProgramContainerProps> {
               <Profitability
                 className="tag-button"
                 value={reminder}
-                variant="chips"
+                variant={PROFITABILITY_VARIANT.CHIPS}
               >
                 + {reminder}
               </Profitability>
