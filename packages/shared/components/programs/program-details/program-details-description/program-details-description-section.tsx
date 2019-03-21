@@ -60,22 +60,24 @@ class ProgramDetailsDescriptionSection extends PureComponent<
           isAuthenticated={isAuthenticated}
           redirectToLogin={redirectToLogin}
         />
-        {personalDetails && status !== STATUS.ENDED && (
-          <div className="program-details-description__additionally">
-            <DetailsInvestment
-              notice={t(
-                "program-details-page.description.withdraw-notice-text"
-              )}
-              asset={PROGRAM}
-              id={programDescription.id}
-              assetCurrency={programDescription.currency}
-              accountCurrency={accountCurrency}
-              personalDetails={personalDetails as InvestmentDetails} // TODO fix type InvestmentDetails
-              ProgramReinvestingWidget={ProgramReinvestingWidget}
-              WithdrawContainer={ProgramWithdrawContainer}
-            />
-          </div>
-        )}
+        {personalDetails &&
+          personalDetails.isInvested &&
+          personalDetails.status !== STATUS.ENDED && (
+            <div className="program-details-description__additionally">
+              <DetailsInvestment
+                notice={t(
+                  "program-details-page.description.withdraw-notice-text"
+                )}
+                asset={PROGRAM}
+                id={programDescription.id}
+                assetCurrency={programDescription.currency}
+                accountCurrency={accountCurrency}
+                personalDetails={personalDetails as InvestmentDetails} // TODO fix type InvestmentDetails
+                ProgramReinvestingWidget={ProgramReinvestingWidget}
+                WithdrawContainer={ProgramWithdrawContainer}
+              />
+            </div>
+          )}
       </div>
     );
   }
