@@ -6,7 +6,10 @@ import { Link, LinkProps } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
 import NewsIcon from "shared/media/news.svg";
 import RedUserIcon from "shared/media/red-user.svg";
-import { composeProgramDetailsUrl } from "shared/utils/compose-url";
+import {
+  composeFundsDetailsUrl,
+  composeProgramDetailsUrl
+} from "shared/utils/compose-url";
 
 enum TYPE {
   PROFILE = "profile",
@@ -22,11 +25,14 @@ const getStaticIconUrl = (type: string): string | null => {
 };
 
 const renderAssetAvatar = (props: INotificationProps) => {
-  const { type, logo, url, color, closeNotifications } = props;
+  const { type, url, logo, color, closeNotifications, assetType } = props;
   const Tag: React.ComponentType<LinkProps | any> | string = url ? Link : "div";
   const to = url
     ? {
-        pathname: composeProgramDetailsUrl(url),
+        pathname:
+          assetType === "Program"
+            ? composeProgramDetailsUrl(url)
+            : composeFundsDetailsUrl(url),
         state: `/ ${type}`
       }
     : null;
