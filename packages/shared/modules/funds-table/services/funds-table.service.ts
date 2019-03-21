@@ -4,7 +4,7 @@ import {
   FUNDS_FAVORITES_TAB_NAME,
   FUNDS_TAB_ROUTE
 } from "pages/funds/funds.routes";
-import qs from "qs";
+import * as qs from "qs";
 import { composeFilters } from "shared/components/table/helpers/filtering.helpers";
 import {
   calculateSkipAndTake,
@@ -16,18 +16,20 @@ import getParams from "shared/utils/get-params";
 
 import * as fundsTableActions from "../actions/funds-table.actions";
 import {
-  FUNDS_TABLE_COLUMNS,
+  DEFAULT_ITEMS_ON_PAGE,
   FUNDS_TABLE_FILTERS,
+  sortableColumns,
   SORTING_FILTER_VALUE
 } from "../components/funds-table/funds-table.constants";
+import { FundsList } from "gv-api-web";
+import {
+  ComposeFiltersAllType,
+  TFilter
+} from "shared/components/table/components/filtering/filter.type";
 
-const DEFAULT_ITEMS_ON_PAGE = 12;
-
-const sortableColums = FUNDS_TABLE_COLUMNS.filter(
-  x => x.sortingName !== undefined
-).map(x => x.sortingName);
-
-export const getFunds = filters => (dispatch, getState) => {
+export const getFunds = (filters: ComposeFiltersAllType) => (
+  dispatch: any // temp to declare Dispatch type
+) => {
   let requestFilters = dispatch(composeRequestFilters());
   if (authService.getAuthArg()) {
     requestFilters.authorization = authService.getAuthArg();
@@ -39,14 +41,19 @@ export const getFunds = filters => (dispatch, getState) => {
   dispatch(fundsTableActions.fetchFunds(requestFilters));
 };
 
-export const fetchFunds = filters => {
+export const fetchFunds = (
+  filters: ComposeFiltersAllType
+): Promise<FundsList> => {
   if (authService.getAuthArg()) {
     filters.authorization = authService.getAuthArg();
   }
   return fundsTableActions.fetchFunds(filters).payload;
 };
 
-const composeRequestFilters = () => (dispatch, getState) => {
+const composeRequestFilters = () => (
+  dispatch: any,
+  getState: any
+): ComposeFiltersAllType => {
   let itemsOnPage = DEFAULT_ITEMS_ON_PAGE;
   const existingFilters = dispatch(getFundsFilters());
   let { page } = existingFilters;
@@ -54,7 +61,7 @@ const composeRequestFilters = () => (dispatch, getState) => {
   const { router } = getState();
   const { currency } = getState().accountSettings;
 
-  let filters = { currencySecondary: currency };
+  let filters: ComposeFiltersAllType = { currencySecondary: currency };
 
   const { tab } = getParams(router.location.pathname, FUNDS_TAB_ROUTE);
   if (tab === FUNDS_FAVORITES_TAB_NAME) {
@@ -89,7 +96,10 @@ const composeRequestFilters = () => (dispatch, getState) => {
   return filters;
 };
 
-export const getFundsFilters = () => (dispatch, getState) => {
+export const getFundsFilters = () => (
+  dispatch: any,
+  getState: any
+): ComposeFiltersAllType => {
   const { router, fundsData } = getState();
   const queryParams = qs.parse(router.location.search.slice(1));
 
@@ -106,13 +116,13 @@ export const getFundsFilters = () => (dispatch, getState) => {
   }
 
   const sortingName = getSortingColumnName(queryParams.sorting || "");
-  const sorting = sortableColums.includes(sortingName)
+  const sorting = sortableColumns.includes(sortingName)
     ? queryParams.sorting
     : SORTING_FILTER_VALUE;
 
-  const filtering = FUNDS_TABLE_FILTERS.reduce((accum, cur) => {
-    const { name, defaultValue, validate = value => true } = cur;
-    if (!queryParams[name] || !validate(queryParams[name])) {
+  const filtering = FUNDS_TABLE_FILTERS.reduce((accum: any, cur: any) => {
+    const { name, defaultValue, validate = () => true } = cur;
+    if (name && (!queryParams[name] || !validate(queryParams[name]))) {
       accum[name] = defaultValue;
     } else {
       accum[name] = queryParams[name];
@@ -120,17 +130,19 @@ export const getFundsFilters = () => (dispatch, getState) => {
     return accum;
   }, {});
 
-  const filters = {
+  return {
     page,
     pages,
     sorting,
     filtering,
     itemsOnPage: DEFAULT_ITEMS_ON_PAGE
   };
-  return filters;
 };
 
-export const fundsChangePage = nextPage => (dispatch, getState) => {
+export const fundsChangePage = (nextPage: number) => (
+  dispatch: any,
+  getState: any
+) => {
   const { router } = getState();
   const queryParams = qs.parse(router.location.search.slice(1));
   const page = nextPage + 1 || 1;
@@ -139,7 +151,10 @@ export const fundsChangePage = nextPage => (dispatch, getState) => {
   dispatch(push(newUrl));
 };
 
-export const fundsChangeSorting = sorting => (dispatch, getState) => {
+export const fundsChangeSorting = (sorting: string) => (
+  dispatch: any,
+  getState: any
+) => {
   const { router } = getState();
   const queryParams = qs.parse(router.location.search.slice(1));
   queryParams.sorting = sorting;
@@ -147,7 +162,10 @@ export const fundsChangeSorting = sorting => (dispatch, getState) => {
   dispatch(push(newUrl));
 };
 
-export const fundsChangeFilter = filter => (dispatch, getState) => {
+export const fundsChangeFilter = (filter: TFilter<any>) => (
+  dispatch: any,
+  getState: any
+) => {
   const { router } = getState();
   const queryParams = qs.parse(router.location.search.slice(1));
   if (filter.value === undefined) {

@@ -9,13 +9,13 @@ import Popover, {
 import { Nullable } from "shared/utils/types";
 
 import FilterArrowIcon from "./filter-arrow-icon";
-import { TFilter } from "./filter.type";
+import { IUpdateFilterFunc } from "../table.types";
 
 interface IFilterProps {
   label: string;
   value: any;
   renderValueText(value: any): string;
-  updateFilter(filter: TFilter<any>): any;
+  updateFilter?: IUpdateFilterFunc;
   name: string;
 }
 
@@ -23,7 +23,7 @@ interface IFilterState {
   anchor: Nullable<EventTarget>;
 }
 
-class Filter extends React.Component<IFilterProps, IFilterState> {
+class Filter extends React.PureComponent<IFilterProps, IFilterState> {
   state = {
     anchor: null
   };
@@ -33,7 +33,8 @@ class Filter extends React.Component<IFilterProps, IFilterState> {
   handleClosePopover = () => this.setState({ anchor: null });
   handleChangeFilter = (value: any) => {
     this.handleClosePopover();
-    this.props.updateFilter({ name: this.props.name, value });
+    this.props.updateFilter &&
+      this.props.updateFilter({ name: this.props.name, value });
   };
 
   render() {
@@ -45,7 +46,7 @@ class Filter extends React.Component<IFilterProps, IFilterState> {
       cancel: this.handleClosePopover
     });
     return (
-      <React.Fragment>
+      <>
         <div className="filter" onClick={this.handleOpenPopover}>
           <div className="filter__label">{label}</div>
           <div className="filter__value">{renderValueText(value)}</div>
@@ -59,7 +60,7 @@ class Filter extends React.Component<IFilterProps, IFilterState> {
         >
           {child}
         </Popover>
-      </React.Fragment>
+      </>
     );
   }
 }

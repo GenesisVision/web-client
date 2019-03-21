@@ -21,7 +21,7 @@ interface State extends IDataRangeFilterValue {
   [key: string]: any;
 }
 
-class DateRangeFilterPopover extends React.Component<Props, State> {
+class DateRangeFilterPopover extends React.PureComponent<Props, State> {
   state: State = {
     type: this.props.value
       ? this.props.value.type

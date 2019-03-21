@@ -13,7 +13,7 @@ interface ILevelFilterProps {
   onChange(value: TFilter<any>): void;
 }
 
-class LevelFilter extends React.Component<
+class LevelFilter extends React.PureComponent<
   ILevelFilterProps & InjectedTranslateProps
 > {
   renderValueText = (value: number[]): string => `${value[0]}-${value[1]}`;

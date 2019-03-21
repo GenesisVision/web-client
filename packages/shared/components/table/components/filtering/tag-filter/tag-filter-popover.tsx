@@ -13,7 +13,7 @@ export interface ITagFilterPopoverProps {
   values: ProgramTag[];
   changeFilter(value: ProgramTag[]): void;
 }
-class TagFilterPopover extends React.Component<
+class TagFilterPopover extends React.PureComponent<
   ITagFilterPopoverProps,
   ITagFilterPopoverState
 > {
