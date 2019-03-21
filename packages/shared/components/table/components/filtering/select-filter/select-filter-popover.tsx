@@ -10,7 +10,7 @@ interface ISelectFilterPopoverProps {
   value?: any;
 }
 
-class SelectFilterPopover extends React.Component<
+class SelectFilterPopover extends React.PureComponent<
   ISelectFilterPopoverProps & InjectedTranslateProps
 > {
   handleClick = (value: SelectFilterValue<any>) => () => {

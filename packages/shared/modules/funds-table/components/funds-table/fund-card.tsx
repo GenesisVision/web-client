@@ -35,14 +35,14 @@ const DECIMAL_SCALE_BIG_VALUE = 2;
 interface IFundCardProps {
   fund: FundDetails;
   toggleFavorite(programId: string, isFavorite: boolean): void;
-  title: string;
+  title?: JSX.Element | string;
 }
 
 interface IFundCardState {
   anchor: Nullable<EventTarget>;
 }
 
-class FundCard extends React.Component<
+class FundCard extends React.PureComponent<
   IFundCardProps & InjectedTranslateProps,
   IFundCardState
 > {

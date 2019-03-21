@@ -15,11 +15,11 @@ interface IDateRangeFilterProps {
   t: TranslationFunction;
   name: string;
   value: any;
-  onChange: IUpdateFilterFunc;
+  onChange?: IUpdateFilterFunc;
   startLabel: string;
 }
 
-class DateRangeFilter extends React.Component<IDateRangeFilterProps> {
+class DateRangeFilter extends React.PureComponent<IDateRangeFilterProps> {
   renderValueText = (value: IDataRangeFilterValue): string => {
     const { t } = this.props;
     switch (value.type) {
