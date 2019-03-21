@@ -76,7 +76,7 @@ const InvestmentProgramInfo: React.FunctionComponent<
           suffix=" %"
         />
       </StatisticItem>
-      {isOwnProgram && (
+      {stopOutLevel && (
         <StatisticItem
           label={t("program-details-page.description.stop-out-level")}
           className="program-details-description__short-statistic-item"
