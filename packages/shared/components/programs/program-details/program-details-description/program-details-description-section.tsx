@@ -60,7 +60,7 @@ class ProgramDetailsDescriptionSection extends PureComponent<
           isAuthenticated={isAuthenticated}
           redirectToLogin={redirectToLogin}
         />
-        {isAuthenticated && status !== STATUS.ENDED && (
+        {personalDetails && status !== STATUS.ENDED && (
           <div className="program-details-description__additionally">
             <DetailsInvestment
               notice={t(
