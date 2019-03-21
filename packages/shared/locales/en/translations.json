@@ -1105,8 +1105,7 @@
         "in-requests": "In Requests"
       },
       "requests": {
-        "success-cancel-request": "Request canceled successfully",
-        "failure-cancel-request": "Failed to cancel request"
+        "success-cancel-request": "Request canceled successfully"
       },
       "assets": {
         "title": "Assets",
@@ -1241,8 +1240,7 @@
         "funds": "Funds"
       },
       "requests": {
-        "success-cancel-request": "Request canceled successfully",
-        "failure-cancel-request": "Failed to cancel request"
+        "success-cancel-request": "Request canceled successfully"
       },
       "programs-header": {
         "title": "Name",
