@@ -38,4 +38,4 @@ const TableHeadCell: React.FC<ITableHeadCellProps> = ({
   );
 };
 
-export default TableHeadCell;
+export default React.memo(TableHeadCell);

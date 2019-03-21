@@ -13,7 +13,7 @@ interface ILevelFilterPopoverState {
   value: number[];
 }
 
-class LevelFilterPopover extends React.Component<
+class LevelFilterPopover extends React.PureComponent<
   ILevelFilterPopoverProps & InjectedTranslateProps,
   ILevelFilterPopoverState
 > {
