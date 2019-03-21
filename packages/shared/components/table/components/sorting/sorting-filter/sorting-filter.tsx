@@ -23,7 +23,7 @@ interface ISortingFilterProps {
   updateSorting?(value: string): void;
 }
 
-class SortingFilter extends React.Component<ISortingFilterProps> {
+class SortingFilter extends React.PureComponent<ISortingFilterProps> {
   composeSortingColumnValues = (): SelectFilterValue[] =>
     (this.props.columns || [])
       .filter(x => x.sortingName)

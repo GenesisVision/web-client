@@ -23,4 +23,4 @@ const FilterArrowIcon: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
   );
 };
 
-export default FilterArrowIcon;
+export default React.memo(FilterArrowIcon);

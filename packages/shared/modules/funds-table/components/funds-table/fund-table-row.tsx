@@ -1,5 +1,5 @@
 import { GVButton } from "gv-react-components";
-import React, { Component } from "react";
+import * as React from "react";
 import NumberFormat from "react-number-format";
 import { Link } from "react-router-dom";
 import AssetAvatar from "shared/components/avatar/asset-avatar/asset-avatar";
@@ -11,14 +11,25 @@ import TableCell from "shared/components/table/components/table-cell";
 import TableRow from "shared/components/table/components/table-row";
 import { composeFundsDetailsUrl } from "shared/utils/compose-url";
 import { formatCurrencyValue, formatValue } from "shared/utils/formatter";
+import { FUND_ASSET_TYPE } from "shared/components/fund-asset/fund-asset";
+import { PROFITABILITY_PREFIX } from "shared/components/profitability/profitability.helper";
+import { FundDetails } from "gv-api-web";
 
-class FundsTableRow extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isDetailed: false
-    };
-  }
+interface Props {
+  fund: FundDetails;
+  isAuthenticated?: boolean;
+  toggleFavorite?(id: string, selected: boolean): void;
+  title?: JSX.Element | string;
+}
+
+interface State {
+  isDetailed: boolean;
+}
+
+class FundsTableRow extends React.PureComponent<Props, State> {
+  state = {
+    isDetailed: false
+  };
 
   render() {
     const { fund, isAuthenticated, toggleFavorite, title } = this.props;
@@ -62,7 +73,7 @@ class FundsTableRow extends Component {
         <TableCell className="funds-table__cell">
           <FundAssetContainer
             assets={fund.topFundAssets}
-            type={"short"}
+            type={FUND_ASSET_TYPE.SHORT}
             size={3}
             length={fund.totalAssetsCount}
           />
@@ -80,7 +91,7 @@ class FundsTableRow extends Component {
         <TableCell className="funds-table__cell funds-table__cell--profit">
           <Profitability
             value={formatValue(fund.statistic.profitPercent, 2)}
-            prefix="sign"
+            prefix={PROFITABILITY_PREFIX.SIGN}
           >
             <NumberFormat
               value={formatValue(fund.statistic.profitPercent, 2)}

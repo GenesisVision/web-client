@@ -4,19 +4,19 @@ import { LIST_VIEW } from "../table.constants";
 import TableLoaderCardRow from "./table-loader-card-row";
 import TableLoaderTableRow from "./table-loader-table-row";
 
-const TableLoader: React.FC<{ view: LIST_VIEW }> = ({ view }) => {
+const TableLoader: React.FC<{ view: LIST_VIEW }> = React.memo(({ view }) => {
   switch (view) {
     case LIST_VIEW.CARDS:
       return <TableLoaderCardRow />;
     case LIST_VIEW.TABLE:
     default:
       return (
-        <React.Fragment>
+        <>
           <TableLoaderTableRow />
           <TableLoaderTableRow />
-        </React.Fragment>
+        </>
       );
   }
-};
+});
 
-export default TableLoader;
+export default React.memo(TableLoader);

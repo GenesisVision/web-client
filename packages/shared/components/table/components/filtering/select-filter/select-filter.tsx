@@ -15,7 +15,7 @@ interface ISelectFilterProps {
   onChange(value: TFilter<any>): void;
 }
 
-class SelectFilter extends React.Component<
+class SelectFilter extends React.PureComponent<
   ISelectFilterProps & InjectedTranslateProps
 > {
   renderValueText = (value: any) => {
