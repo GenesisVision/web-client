@@ -56,7 +56,7 @@ class FundDetailsDescription extends React.PureComponent<
     };
 
     return (
-      <React.Fragment>
+      <div className="program-details-description">
         <DetailsDescription
           assetDescription={assetDescription}
           AssetDetailsAvatar={() => (
@@ -102,7 +102,7 @@ class FundDetailsDescription extends React.PureComponent<
             />
           </div>
         )}
-      </React.Fragment>
+      </div>
     );
   }
 }

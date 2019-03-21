@@ -120,22 +120,18 @@
   }
 
   &__invest-button-container {
-    @include adaptive-padding(bottom, $padding-xsmall);
-    & > button,
-    .details-description__reallocate-container {
-      margin-top: $padding-small-mobile;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 (-$padding-small-mobile/2);
+
+    .gv-btn {
+      @include adaptive-margin(top, $padding-small);
+      @include adaptive-margin(left, $padding-small/2);
+      @include adaptive-margin(right, $padding-small/2);
     }
-    & button:not(:last-child) {
-      margin-right: $padding-small-mobile;
-    }
-    @include media-breakpoint-landscape-phone() {
-      & > button,
-      .details-description__reallocate-container {
-        margin-top: $padding-small;
-      }
-      & button:not(:last-child) {
-        margin-right: $padding-small;
-      }
+
+    @include media-breakpoint-tablet() {
+      margin: 0 (-$padding-small/2);
     }
   }
 
