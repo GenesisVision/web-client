@@ -28,6 +28,16 @@ const getSelectedWallet = (
 ): WalletData =>
   wallets.find(wallet => wallet.id === currentWalletId) || ({} as WalletData);
 
+const getTransferAll = (values: FormValues, props: OwnProps) => {
+  const { amount, sourceId } = values;
+  const selectedSourceWallet = getSelectedWallet(props.wallets, sourceId);
+  const formattedAvailableSourceWallet = formatCurrencyValue(
+    selectedSourceWallet.available,
+    selectedSourceWallet.currency
+  );
+  return amount === formattedAvailableSourceWallet;
+};
+
 class WalletTransferForm extends React.Component<Props> {
   onChangeSourceId = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { setFieldValue, values } = this.props;
@@ -229,13 +239,7 @@ export default compose<React.FunctionComponent<OwnProps>>(
       );
     },
     handleSubmit: (values, { props }) => {
-      const { amount, sourceId } = values;
-      const selectedSourceWallet = getSelectedWallet(props.wallets, sourceId);
-      const formattedAvailableSourceWallet = formatCurrencyValue(
-        selectedSourceWallet.available,
-        selectedSourceWallet.currency
-      );
-      const transferAll = amount === formattedAvailableSourceWallet;
+      const transferAll = getTransferAll(values, props);
       props.onSubmit({ ...values, transferAll });
     }
   })
