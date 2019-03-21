@@ -49,8 +49,12 @@ class FundDetailsDescription extends React.PureComponent<
       description: fundDescription.description,
       logo: fundDescription.logo,
       notificationsUrl: composeFundNotificationsUrl(fundDescription.url),
-      isFavorite: fundDescription.personalFundDetails.isFavorite,
-      hasNotifications: fundDescription.personalFundDetails.hasNotifications,
+      isFavorite: fundDescription.personalFundDetails
+        ? fundDescription.personalFundDetails.isFavorite
+        : false,
+      hasNotifications: fundDescription.personalFundDetails
+        ? fundDescription.personalFundDetails.hasNotifications
+        : false,
       managerUrl: fundDescription.manager.url,
       managerName: fundDescription.manager.username
     };
