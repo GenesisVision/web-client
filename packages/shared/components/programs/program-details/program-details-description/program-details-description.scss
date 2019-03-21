@@ -8,7 +8,7 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
 .program-details-description {
   padding: 0 $padding-xsmall;
 
-  @include media-breakpoint-tablet() {
+  @include media-breakpoint-landscape-phone() {
     padding: 0;
   }
 
