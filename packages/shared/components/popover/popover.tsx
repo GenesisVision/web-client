@@ -43,7 +43,7 @@ const getAnchorEl = (el: Nullable<anchorElType>) => {
   return typeof el === "function" ? el() : el;
 };
 
-class Popover extends React.Component<IPopoverProps, IPopoverState> {
+class Popover extends React.PureComponent<IPopoverProps, IPopoverState> {
   popover: RefObject<HTMLDivElement>;
   constructor(props: IPopoverProps) {
     super(props);

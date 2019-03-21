@@ -7,48 +7,28 @@ import { updateFilter } from "shared/components/table/helpers/filtering.helpers"
 import { IDataModel } from "shared/constants/constants";
 
 import { composeRequestFilters } from "../services/table.service";
-import { FilteringType, SortingColumn, TFilter } from "./filtering/filter.type";
-import Table from "./table";
-import {
-  GetItemsFuncType,
-  IUpdateFilterFunc,
-  UpdateRowFuncType
-} from "./table.types";
+import { FilteringType, TFilter } from "./filtering/filter.type";
+import Table, { ITableProps } from "./table";
+import { GetItemsFuncType } from "./table.types";
 
 const defaultData: IDataModel = { items: null, total: 0 };
 
-export interface ITableModuleProps {
+export interface ITableModuleProps extends ITableProps {
   loader: boolean;
-  paging: IPaging;
-  sorting: string;
-  filtering: FilteringType;
   defaultFilters: any[];
   getItems: GetItemsFuncType;
   data?: IDataModel;
-  disableTitle?: boolean;
-  renderFilters?(
-    updateFilter: IUpdateFilterFunc,
-    filtering: FilteringType
-  ): JSX.Element;
-  title?: string;
-  columns?: SortingColumn[];
-  renderHeader?(column: SortingColumn): JSX.Element;
-  renderBodyRow?(
-    x: any,
-    updateRow?: UpdateRowFuncType,
-    updateItems?: () => void
-  ): JSX.Element;
 }
 
 interface ITableModuleState {
-  paging: IPaging;
-  sorting: string;
-  filtering: FilteringType;
+  paging?: IPaging;
+  sorting?: string;
+  filtering?: FilteringType;
   data: IDataModel;
   isPending: boolean;
 }
 
-class TableModule extends React.Component<
+class TableModule extends React.PureComponent<
   ITableModuleProps,
   ITableModuleState
 > {
@@ -71,7 +51,7 @@ class TableModule extends React.Component<
 
   componentDidMount() {
     const { data, paging } = this.props;
-    if (data) {
+    if (data && paging) {
       const totalPages = calculateTotalPages(data.total, paging.itemsOnPage);
       this.setState({
         data,
@@ -83,7 +63,7 @@ class TableModule extends React.Component<
   }
 
   updateItems = () => {
-    const { paging, sorting, filtering } = this.state;
+    const { paging = {}, sorting = "", filtering = {} } = this.state;
     const { defaultFilters, getItems, loader } = this.props;
 
     if (loader) this.setState({ isPending: true });
@@ -96,7 +76,10 @@ class TableModule extends React.Component<
     });
     getItems(filters)
       .then((data: IDataModel) => {
-        const totalPages = calculateTotalPages(data.total, paging.itemsOnPage);
+        const totalPages = calculateTotalPages(
+          data.total,
+          paging && paging.itemsOnPage
+        );
         this.setState(prevState => ({
           data,
           paging: { ...prevState.paging, totalPages },
@@ -123,6 +106,7 @@ class TableModule extends React.Component<
 
   handleUpdateFilter = (filter: TFilter<any>) => {
     this.setState(prevState => {
+      if (!prevState.filtering || !prevState.paging) return {};
       return {
         filtering: updateFilter(prevState.filtering, filter),
         paging: {
@@ -158,7 +142,6 @@ class TableModule extends React.Component<
     const { data, isPending, paging } = this.state;
     const newPaging = { ...paging, totalItems: data.total ? data.total : 0 };
     return (
-      //@ts-ignore
       <Table
         {...this.props}
         {...this.state}

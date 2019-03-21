@@ -9,14 +9,14 @@ import { SortingColumn } from "./filtering/filter.type";
 import TableHeadCell from "./table-head-cell";
 import TableRow from "./table-row";
 
-interface ITableHeaderProps {
+export interface ITableHeaderProps {
   sorting?: string;
-  updateSorting(opt: string): ((dispatch: any, getState: any) => void) | void;
+  updateSorting?(opt: string): ((dispatch: any, getState: any) => void) | void;
   columns?: SortingColumn[];
-  children?(column: SortingColumn): JSX.Element;
+  renderHeader?(column: SortingColumn): JSX.Element;
 }
 
-class TableHeader extends React.Component<ITableHeaderProps> {
+class TableHeader extends React.PureComponent<ITableHeaderProps> {
   sortingName = (): string => getSortingColumnName(this.props.sorting);
 
   getSortingDirection = (sortingName?: string): SORTING_DIRECTION => {
@@ -29,14 +29,17 @@ class TableHeader extends React.Component<ITableHeaderProps> {
   handleSorting = (sortingName?: string) => ():
     | ((dispatch: any, getState: any) => void)
     | void => {
+    const { sorting, updateSorting } = this.props;
     if (
       sortingName !== this.sortingName() ||
-      getSortingDirection(this.props.sorting) === SORTING_DIRECTION.ASC
+      getSortingDirection(sorting) === SORTING_DIRECTION.ASC
     ) {
-      return this.props.updateSorting(sortingName + SORTING_DIRECTION.DESC);
+      return (
+        updateSorting && updateSorting(sortingName + SORTING_DIRECTION.DESC)
+      );
     }
 
-    return this.props.updateSorting(sortingName + SORTING_DIRECTION.ASC);
+    return updateSorting && updateSorting(sortingName + SORTING_DIRECTION.ASC);
   };
 
   renderColumns = (): JSX.Element[] =>
@@ -50,7 +53,7 @@ class TableHeader extends React.Component<ITableHeaderProps> {
           onClick={this.handleSorting(column.sortingName)}
           sortingDirection={this.getSortingDirection(column.sortingName)}
         >
-          {this.props.children && this.props.children(column)}
+          {this.props.renderHeader && this.props.renderHeader(column)}
         </TableHeadCell>
       );
     });

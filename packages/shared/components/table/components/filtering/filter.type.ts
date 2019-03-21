@@ -57,6 +57,10 @@ export type FilteringType = {
     | undefined;
 };
 
+export type ComposeFiltersAllType ={
+  [keys: string]: any;
+}
+
 export type ComposeFiltersType = {
   [keys in
     | ComposedRequestAssetName

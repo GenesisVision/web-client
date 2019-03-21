@@ -10,17 +10,15 @@ interface IPagingProps {
   updatePaging(opts: { currentPage: number }): void;
 }
 
-class Paging extends React.Component<IPagingProps> {
+class Paging extends React.PureComponent<IPagingProps> {
   render() {
     const { paging, hidden, updatePaging } = this.props;
     if (hidden || paging.totalPages === 0) return null;
 
     return (
       <Pager
-        //@ts-ignore TODO fix types
-        total={paging.totalPages}
-        //@ts-ignore TODO fix types
-        current={paging.currentPage}
+        total={paging.totalPages || 0}
+        current={paging.currentPage || 1}
         countVisiblePages={3}
         onPageChanged={(nextPage: number) =>
           updatePaging({ currentPage: nextPage - 1 })
