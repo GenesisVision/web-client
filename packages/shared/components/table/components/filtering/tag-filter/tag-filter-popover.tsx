@@ -65,7 +65,8 @@ class TagFilterPopover extends React.PureComponent<
       <div className="tag-filter">
         <div className="tag-filter__title">Add tag</div>
         <div className="tag-filter__search">
-          //@ts-ignore
+          {/*
+          //@ts-ignore*/}
           <GVTextField
             name="queryValue"
             wrapperClassName="popover-add__search-input"
