@@ -10,13 +10,6 @@ import {
   CURRENCY_VALUES
 } from "shared/modules/currency-select/currency-select.constants";
 
-export const FUND_ASSET_TYPE_old = {
-  large: "large",
-  middle: "middle",
-  short: "short",
-  text: "text"
-};
-
 export enum FUND_ASSET_TYPE {
   LARGE = "large",
   MIDDLE = "middle",
@@ -53,8 +46,8 @@ class FundAsset extends React.Component<IFundAssetProps & FundAssetPercent> {
       (type === FUND_ASSET_TYPE.TEXT && (
         <div {...other}>
           {currency}
-          &nbsp;
-          <NumberFormat value={percent} suffix="%" displayType="text" />
+          {/* &nbsp;
+          <NumberFormat value={percent} suffix="%" displayType="text" />*/}
           {!last && <span>,&nbsp;</span>}
         </div>
       )) || (
