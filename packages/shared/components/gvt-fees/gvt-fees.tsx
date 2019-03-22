@@ -25,6 +25,9 @@ const GVTFees: React.FC<IGVTFees & InjectedTranslateProps> = ({
         {role === ROLE.INVESTOR ? (
           <p className="gvt-fees__paragraph">{t("gvt-fees.section.text-2")}</p>
         ) : null}
+        {role === ROLE.MANAGER ? (
+          <p className="gvt-fees__paragraph">{t("gvt-fees.section.text-3")}</p>
+        ) : null}
         <div className="gvt-fees__table-wrapper">
           <table className="gvt-fees__table">
             <thead>
