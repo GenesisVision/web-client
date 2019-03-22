@@ -27,9 +27,12 @@ import {
   TFilter
 } from "shared/components/table/components/filtering/filter.type";
 
-export const getFunds = (filters: ComposeFiltersAllType) => (
+export type GetFundsType = (
+  filters: ComposeFiltersAllType
+) => (
   dispatch: any // temp to declare Dispatch type
-) => {
+) => void;
+export const getFunds: GetFundsType = filters => dispatch => {
   let requestFilters = dispatch(composeRequestFilters());
   if (authService.getAuthArg()) {
     requestFilters.authorization = authService.getAuthArg();
@@ -41,9 +44,10 @@ export const getFunds = (filters: ComposeFiltersAllType) => (
   dispatch(fundsTableActions.fetchFunds(requestFilters));
 };
 
-export const fetchFunds = (
+export type FetchFundsType = (
   filters: ComposeFiltersAllType
-): Promise<FundsList> => {
+) => Promise<FundsList>;
+export const fetchFunds: FetchFundsType = filters => {
   if (authService.getAuthArg()) {
     filters.authorization = authService.getAuthArg();
   }
@@ -96,22 +100,26 @@ const composeRequestFilters = () => (
   return filters;
 };
 
-export const getFundsFilters = () => (
+export type GetFundsFiltersType = () => (
   dispatch: any,
   getState: any
-): ComposeFiltersAllType => {
+) => ComposeFiltersAllType;
+export const getFundsFilters: GetFundsFiltersType = () => (
+  dispatch,
+  getState
+) => {
   const { router, fundsData } = getState();
   const queryParams = qs.parse(router.location.search.slice(1));
 
-  let pages = 0;
-  let page = +queryParams.page || 1;
+  let totalPages = 0;
+  let currentPage = +queryParams.page || 1;
   if (fundsData.items && fundsData.items.data) {
-    pages = calculateTotalPages(
+    totalPages = calculateTotalPages(
       fundsData.items.data.total,
       DEFAULT_ITEMS_ON_PAGE
     );
-    if (page > pages) {
-      page = pages;
+    if (currentPage > totalPages) {
+      currentPage = totalPages;
     }
   }
 
@@ -131,17 +139,20 @@ export const getFundsFilters = () => (
   }, {});
 
   return {
-    page,
-    pages,
+    currentPage,
+    totalPages,
     sorting,
     filtering,
     itemsOnPage: DEFAULT_ITEMS_ON_PAGE
   };
 };
 
-export const fundsChangePage = (nextPage: number) => (
-  dispatch: any,
-  getState: any
+export type FundsChangePageType = (
+  nextPage: number
+) => (dispatch: any, getState: any) => void;
+export const fundsChangePage: FundsChangePageType = nextPage => (
+  dispatch,
+  getState
 ) => {
   const { router } = getState();
   const queryParams = qs.parse(router.location.search.slice(1));
@@ -151,9 +162,12 @@ export const fundsChangePage = (nextPage: number) => (
   dispatch(push(newUrl));
 };
 
-export const fundsChangeSorting = (sorting: string) => (
-  dispatch: any,
-  getState: any
+export type FundsChangeSortingType = (
+  sorting: string
+) => (dispatch: any, getState: any) => void;
+export const fundsChangeSorting: FundsChangeSortingType = sorting => (
+  dispatch,
+  getState
 ) => {
   const { router } = getState();
   const queryParams = qs.parse(router.location.search.slice(1));
@@ -162,9 +176,12 @@ export const fundsChangeSorting = (sorting: string) => (
   dispatch(push(newUrl));
 };
 
-export const fundsChangeFilter = (filter: TFilter<any>) => (
-  dispatch: any,
-  getState: any
+export type FundsChangeFilterType = (
+  filter: TFilter<any>
+) => (dispatch: any, getState: any) => void;
+export const fundsChangeFilter: FundsChangeFilterType = filter => (
+  dispatch,
+  getState
 ) => {
   const { router } = getState();
   const queryParams = qs.parse(router.location.search.slice(1));
