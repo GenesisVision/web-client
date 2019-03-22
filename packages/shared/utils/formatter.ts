@@ -78,6 +78,11 @@ const formatValueDifferentDecimalScale = (
 };
 
 export {
+  reverseString,
+  addOne,
+  cleanNulls,
+  sliceFraction,
+  checkEmptyFraction,
   formatValue,
   formatPercent,
   validateFraction,
