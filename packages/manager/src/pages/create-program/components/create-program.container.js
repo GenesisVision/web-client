@@ -6,6 +6,7 @@ import { bindActionCreators, compose } from "redux";
 import ConfirmPopup from "shared/components/confirm-popup/confirm-popup";
 import * as WalletServices from "shared/components/wallet/services/wallet.services";
 import { alertMessageActions } from "shared/modules/alert-message/actions/alert-message-actions";
+import { rateApi } from "shared/services/api-client/rate-api";
 
 import { checkIsModelFilled } from "../helpers/create-program.helpers";
 import * as createProgramService from "../services/create-program.service";
@@ -19,8 +20,7 @@ class CreateProgramContainer extends Component {
     choosedBroker: null,
     brokers: null,
     isPending: true,
-    isNavigationDialogVisible: false,
-    isLeverageChooseAvailable: false
+    isNavigationDialogVisible: false
   };
 
   componentDidMount() {
@@ -46,12 +46,12 @@ class CreateProgramContainer extends Component {
     this.setState({ tab: "broker", isNavigationDialogVisible: false });
   };
 
-  navigateToBroker = values => {
-    if (checkIsModelFilled(values)) {
-      this.setState({ isNavigationDialogVisible: true });
-    } else {
-      this.setState({ tab: "broker", isNavigationDialogVisible: false });
-    }
+  navigateToBroker = () => {
+    //if (checkIsModelFilled(values)) {
+    this.setState({ isNavigationDialogVisible: true });
+    //} else {
+    //  this.setState({ tab: "broker", isNavigationDialogVisible: false });
+    //}
   };
 
   navigateToSettings = () => {
@@ -73,8 +73,13 @@ class CreateProgramContainer extends Component {
     this.props.service.showValidationError();
   };
 
-  setLeverageChooseAvailable = isAvailable => {
-    this.setState({ isLeverageChooseAvailable: isAvailable });
+  fetchRate = (fromCurrency, toCurrency) => {
+    return rateApi
+      .v10RateByFromByToGet(fromCurrency, toCurrency)
+      .then((rate: any) => {
+        if (rate !== this.props.values.rate)
+          this.props.setFieldValue("rate", rate);
+      });
   };
 
   render() {
@@ -126,6 +131,7 @@ class CreateProgramContainer extends Component {
               <CreateProgramSettings
                 minimumDepositsAmount={minimumDepositsAmount}
                 fetchWallets={service.fetchWallets}
+                fetchRate={this.fetchRate}
                 wallets={wallets}
                 onValidateError={this.handleValidateError}
                 navigateBack={navigateToBroker}

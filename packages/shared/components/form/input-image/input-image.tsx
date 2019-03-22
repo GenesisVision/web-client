@@ -23,10 +23,10 @@ interface InputFileData {
 }
 
 interface InputImageProps {
-  className: string;
+  className?: string;
   value: InputFileData;
   defaultImage: any;
-  error: string;
+  error?: string;
   onChange(name: string, data: InputFileData): void;
   name: string;
 }

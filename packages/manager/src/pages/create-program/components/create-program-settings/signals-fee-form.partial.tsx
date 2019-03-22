@@ -11,7 +11,7 @@ interface ISignalsFeeFormPartialProps {
   maxEntryFee: number;
   maxSuccessFee: number;
 
-  hasSubscriptionFeeAutofocus: boolean;
+  hasSubscriptionFeeAutofocus?: boolean;
 }
 
 const SignalsFeeFormPartial: FunctionComponent<

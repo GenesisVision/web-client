@@ -1,30 +1,17 @@
+import { Broker, BrokerAccountType } from "gv-api-web";
 import managerAvatar from "shared/media/manager-avatar.png";
-import { getNumberWithoutSuffix } from "shared/utils/helpers";
 
-export const getDataWithoutSuffixes = (data, fields) => {
-  let result = { ...data };
-
-  fields.forEach(fieldName => {
-    let field = result[fieldName];
-
-    if (field) {
-      field = getNumberWithoutSuffix(field);
-
-      result[fieldName] = field;
-    }
-  });
-
-  return result;
-};
-
-export const getAccountTypes = broker =>
+export const getAccountTypes = (broker: Broker) =>
   broker.accountTypes.map(accountType => accountType.type);
 
-export const getAccountType = (broker, type) =>
+export const getAccountType = (
+  broker: Broker,
+  type: string
+): BrokerAccountType | undefined =>
   broker.accountTypes.find(accountType => accountType.type === type);
 
-export const getLeverages = (broker, type) => {
-  let result;
+export const getLeverages = (broker: Broker, type: string): number[] => {
+  let result: number[];
   let accountType = getAccountType(broker, type);
 
   if (accountType) {
@@ -35,8 +22,8 @@ export const getLeverages = (broker, type) => {
   return result;
 };
 
-export const getCurrencies = (broker, type) => {
-  let result;
+export const getCurrencies = (broker: Broker, type: string): string[] => {
+  let result: string[];
   let accountType = getAccountType(broker, type);
 
   if (accountType) {
@@ -47,7 +34,7 @@ export const getCurrencies = (broker, type) => {
   return result;
 };
 
-export const checkIsModelFilled = values => {
+export const checkIsModelFilled = (values: any) => {
   if (values.logo && values.logo.src !== managerAvatar) {
     return true;
   }
