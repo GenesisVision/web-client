@@ -35,15 +35,8 @@ export const cancelRequest = ({ id, type, onFinally, removeDisableBtn }) => (
       );
       onFinally();
     })
-    .catch(ex => {
-      dispatch(
-        alertMessageActions.error(
-          `${
-            process.env.REACT_APP_PLATFORM
-          }.dashboard-page.requests.failure-cancel-request`,
-          true
-        )
-      );
+    .catch(error => {
+      dispatch(alertMessageActions.error(error.errorMessage));
       removeDisableBtn();
     });
 };

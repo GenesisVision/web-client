@@ -100,15 +100,8 @@ export const cancelRequestDispatch = ({
       );
       onFinally();
     })
-    .catch(() => {
-      dispatch(
-        alertMessageActions.error(
-          `${
-            process.env.REACT_APP_PLATFORM
-          }.dashboard-page.requests.failure-cancel-request`,
-          true
-        )
-      );
+    .catch(error => {
+      dispatch(alertMessageActions.error(error.errorMessage));
       onFinally();
     });
 };
