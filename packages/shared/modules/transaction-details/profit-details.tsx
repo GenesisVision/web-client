@@ -25,7 +25,8 @@ const ProfitDetails = (props: TransactionDetailsProps) => {
           {data.programDetails.successFee} {data.currency})
         </StatisticItem>
         <StatisticItem label={t(`transactions-details.gv-fee`)}>
-          {data.gvCommissionPercent}% ({data.gvCommission} {data.currency})
+          {data.gvCommissionPercent}% ({data.gvCommission}{" "}
+          {data.gvCommissionCurrency ? data.gvCommissionCurrency : ""})
         </StatisticItem>
         <StatisticItem label={t("transactions-details.status.title")}>
           <div className="external-transaction__status">
