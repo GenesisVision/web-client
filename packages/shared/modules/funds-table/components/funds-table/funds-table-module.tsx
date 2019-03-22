@@ -1,11 +1,19 @@
-import React, { Component } from "react";
-import TableModule from "shared/components/table/components/table-module";
+import * as React from "react";
+import TableModule, {
+  ITableModuleProps
+} from "shared/components/table/components/table-module";
 
 import FundsTableRow from "./fund-table-row";
 import FundsTableHeaderCell from "./funds-table-header-cell";
 import { FUNDS_TABLE_COLUMNS } from "./funds-table.constants";
+import { TableToggleFavoriteType } from "shared/components/table/components/table.types";
 
-class FundsTableModule extends Component {
+interface Props extends ITableModuleProps {
+  isAuthenticated: boolean;
+  toggleFavorite: TableToggleFavoriteType;
+}
+
+class FundsTableModule extends React.PureComponent<Props> {
   render() {
     const {
       getItems,
@@ -37,7 +45,7 @@ class FundsTableModule extends Component {
             isAuthenticated={isAuthenticated}
           />
         )}
-        renderBodyRow={(fund, updateRow) => (
+        renderBodyRow={(fund, updateRow = () => {}) => (
           <FundsTableRow
             title={title}
             fund={fund}
