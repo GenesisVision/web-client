@@ -8,18 +8,17 @@ import { DEFAULT_PAGING } from "shared/components/table/reducers/table-paging.re
 import { toggleFavoriteFund } from "shared/modules/favorite-asset/services/favorite-fund.service";
 import { FUNDS_TABLE_COLUMNS } from "shared/modules/funds-table/components/funds-table/funds-table.constants";
 
-import FundsTableModule from "shared/modules/funds-table/components/funds-table/funds-table-modulle";
+import FundsTableModule from "shared/modules/funds-table/components/funds-table/funds-table-module";
 import {
   MANAGER_DEFAULT_FILTERS,
   MANAGER_FILTERING
 } from "../manager.constants";
 import { fetchManagerFunds } from "../services/manager.service";
 import { FilteringType } from "shared/components/table/components/filtering/filter.type";
-import { FundDetails } from "gv-api-web";
 import {
   GetItemsFuncType,
   IUpdateFilterFunc,
-  UpdateRowFuncType
+  TableToggleFavoriteType
 } from "shared/components/table/components/table.types";
 
 interface Props {
@@ -34,15 +33,15 @@ class ManagerFunds extends React.Component<Props & InjectedTranslateProps> {
     return fetchManagerFunds({ ...filters, managerId });
   };
 
-  toggleFavorite = (fund: FundDetails, updateRow: UpdateRowFuncType) => () => {
-    const isFavorite = fund.personalDetails.isFavorite;
+  toggleFavorite: TableToggleFavoriteType = (asset, updateRow) => () => {
+    const isFavorite = asset.personalDetails.isFavorite;
     const newProgram = {
-      ...fund,
-      personalDetails: { ...fund.personalDetails, isFavorite: !isFavorite }
+      ...asset,
+      personalDetails: { ...asset.personalDetails, isFavorite: !isFavorite }
     };
     updateRow(newProgram);
-    toggleFavoriteFund(fund.id, isFavorite).catch(() => {
-      updateRow(fund);
+    toggleFavoriteFund(asset.id, isFavorite).catch(() => {
+      updateRow(asset);
     });
   };
 
