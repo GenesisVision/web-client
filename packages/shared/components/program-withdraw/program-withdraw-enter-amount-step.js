@@ -22,7 +22,10 @@ const WithdrawEnterAmountStep = ({
 }) => {
   const isAllow = values => {
     const { formattedValue, value } = values;
-    return formattedValue === "" || validateFraction(value, programCurrency);
+    return (
+      (formattedValue === "" || validateFraction(value, programCurrency)) &&
+      values.value !== "."
+    );
   };
 
   const setMaxAmount = () => {
