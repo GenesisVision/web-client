@@ -3,7 +3,7 @@ import { translate } from "react-i18next";
 import DateRangeFilter from "shared/components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "shared/components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { toggleFavoriteFund } from "shared/modules/favorite-asset/services/favorite-fund.service";
-import FundsTableModule from "shared/modules/funds-table/components/funds-table/funds-table-modulle";
+import FundsTableModule from "shared/modules/funds-table/components/funds-table/funds-table-module";
 
 import {
   FUNDS_FACET_PAGING,
