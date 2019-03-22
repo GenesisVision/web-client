@@ -1381,6 +1381,8 @@
           "stop-out-required": "Stop Out is required",
           "stop-out-is-large": "Must be less than 100",
           "stop-out-is-zero": "Must be more than 0",
+          "stop-out-less-ten": "Level cannot be less than 10",
+          "stop-out-more-current": "Level cannot be more than a current value",
           "amount-required": "Amount is required",
           "amount-is-large": "Amount must be available in Wallet",
           "amount-is-zero": "Amount must be greater or equal {{min}}",
