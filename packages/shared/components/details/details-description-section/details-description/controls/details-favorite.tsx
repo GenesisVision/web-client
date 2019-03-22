@@ -36,7 +36,7 @@ class DetailsFavorite extends PureComponent<
   }
   handleFavoriteClickOnButton = (id: string, isFavorite: boolean) => {
     this.setState({ isFavorite: !isFavorite, isPending: true });
-    (toggleFavoriteProgram(id, isFavorite) as Promise<any>)
+    toggleFavoriteProgram(id, isFavorite)
       .then(() => {
         this.setState({ isPending: false });
       })

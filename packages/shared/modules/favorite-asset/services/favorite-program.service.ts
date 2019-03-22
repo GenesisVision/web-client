@@ -1,3 +1,4 @@
+import { Dispatch } from "redux";
 import programsApi from "shared/services/api-client/programs-api";
 import authService from "shared/services/auth-service";
 
@@ -7,9 +8,9 @@ import {
 } from "../actions/favorite-program.actions";
 
 export const toggleFavoriteProgramDispatchable = (
-  programId,
-  isFavorite
-) => dispatch => {
+  programId: string,
+  isFavorite: boolean
+) => (dispatch: Dispatch) => {
   if (!authService.getAuthArg()) return;
 
   const requestData = {
@@ -24,24 +25,31 @@ export const toggleFavoriteProgramDispatchable = (
   );
 };
 
-const addFavorite = ({ programId, authorization }) => {
+const addFavorite = (
+  programId: string,
+  authorization: string
+): Promise<any> => {
   return programsApi.v10ProgramsByIdFavoriteAddPost(programId, authorization);
 };
 
-const removeFavorite = ({ programId, authorization }) => {
+const removeFavorite = (
+  programId: string,
+  authorization: string
+): Promise<any> => {
   return programsApi.v10ProgramsByIdFavoriteRemovePost(
     programId,
     authorization
   );
 };
 
-export const toggleFavoriteProgram = (programId, isFavorite) => {
+export const toggleFavoriteProgram = (
+  programId: string,
+  isFavorite: boolean
+): Promise<any> => {
   if (!authService.getAuthArg()) return Promise.reject();
+  const authorization = authService.getAuthArg();
 
-  const requestData = {
-    programId,
-    authorization: authService.getAuthArg()
-  };
-
-  return isFavorite ? removeFavorite(requestData) : addFavorite(requestData);
+  return isFavorite
+    ? removeFavorite(programId, authorization)
+    : addFavorite(programId, authorization);
 };
