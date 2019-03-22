@@ -41,7 +41,7 @@ const GVTFees: React.FC<IGVTFees & InjectedTranslateProps> = ({
               </tr>
             </thead>
             <tbody>
-              <tr>
+              {/*<tr>
                 <td className="gvt-fees__table-value">
                   {t("gvt-fees.table-row-1.amount")}
                 </td>
@@ -51,7 +51,7 @@ const GVTFees: React.FC<IGVTFees & InjectedTranslateProps> = ({
                 <td className="gvt-fees__table-value">
                   {t("gvt-fees.table-row-1.fees")}
                 </td>
-              </tr>
+              </tr>*/}
               <tr>
                 <td className="gvt-fees__table-value">
                   {t("gvt-fees.table-row-2.amount")}
