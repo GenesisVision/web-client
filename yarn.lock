@@ -5464,8 +5464,8 @@ gud@^1.0.0:
   integrity sha512-zGEOVKFM5sVPPrYs7J5/hYEw2Pof8KCyOwyhG8sAF26mCAeUFAcYPu1mwB7hhpIP29zOIBaDqwuHdLp0jvZXjw==
 
 "gv-api-web@git+https://github.com/GenesisVision/gv-api-web.git#development":
-  version "1.0.398"
-  resolved "git+https://github.com/GenesisVision/gv-api-web.git#4113d56b4e6b47a089f0f142485f18c89b78531b"
+  version "1.0.412"
+  resolved "git+https://github.com/GenesisVision/gv-api-web.git#761af89879e7215e92e5ce25d0c0910aaa0cc882"
   dependencies:
     superagent "^3.8.3"
 
