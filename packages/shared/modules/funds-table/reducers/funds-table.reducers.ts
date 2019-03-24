@@ -8,7 +8,7 @@ import { DeepReadonly } from "utility-types";
 import { FUNDS_TABLE } from "../actions/funds-table.actions";
 import fundsFavoritesReducer from "./funds-table-favorites.reducer";
 
-export type FundsTableState = DeepReadonly<{
+export type FundsTableState = Readonly<{
   readonly items: IApiState<FundsList>;
 }>;
 

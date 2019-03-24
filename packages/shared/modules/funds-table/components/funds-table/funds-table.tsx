@@ -13,12 +13,12 @@ import FundsTableHeaderCell from "./funds-table-header-cell";
 import { FUNDS_TABLE_COLUMNS } from "./funds-table.constants";
 import { ITableProps } from "shared/components/table/components/table";
 import { FundsList } from "gv-api-web";
-import { IApiState } from "shared/reducers/api-reducer/api-reducer";
 
 interface Props extends ITableProps {
-  data: FundsList & IApiState<FundsList>;
+  data: FundsList;
   toggleFavorite(id: string, selected: boolean): void;
   isAuthenticated: boolean;
+  isPending: boolean;
 }
 
 const FundsTable: React.FC<Props & InjectedTranslateProps> = ({
@@ -44,7 +44,7 @@ const FundsTable: React.FC<Props & InjectedTranslateProps> = ({
       updatePaging={updatePaging}
       columns={FUNDS_TABLE_COLUMNS}
       items={data.funds}
-      isPending={data.isPending}
+      isPending={isPending}
       showSwitchView
       renderFilters={() => (
         <DateRangeFilter

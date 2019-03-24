@@ -3,19 +3,17 @@ import "./sidebar.scss";
 import classnames from "classnames";
 import * as React from "react";
 import Modal from "shared/components/modal/modal";
+import history from "shared/utils/history";
 
-export enum SIDEBAR_POSITION {
-  LEFT = "left",
-  RIGHT = "right"
-}
+class Sidebar extends React.PureComponent<Props> {
+  componentDidMount() {
+    history.listen(() => {
+      if (this.props.onClose && this.props.open) {
+        this.props.onClose();
+      }
+    });
+  }
 
-interface ISidebarProps {
-  open: boolean;
-  onClose?(event: React.MouseEvent<HTMLElement>): void;
-  position?: SIDEBAR_POSITION;
-}
-
-class Sidebar extends React.Component<ISidebarProps> {
   render() {
     const {
       open,
@@ -34,3 +32,14 @@ class Sidebar extends React.Component<ISidebarProps> {
 }
 
 export default Sidebar;
+
+export enum SIDEBAR_POSITION {
+  LEFT = "left",
+  RIGHT = "right"
+}
+
+interface Props {
+  open: boolean;
+  onClose?(event?: React.MouseEvent<HTMLElement>): void;
+  position?: SIDEBAR_POSITION;
+}
