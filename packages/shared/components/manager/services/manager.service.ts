@@ -11,7 +11,7 @@ export const fetchManagerPrograms = (
     .v10ProgramsGet({
       ...filter,
       authorization: authService.getAuthArg(),
-      hasInvestorsForAll: true
+      hasInvestorsForClosed: true
     })
     .then(data => ({
       items: data.programs,
