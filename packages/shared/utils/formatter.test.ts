@@ -56,7 +56,7 @@ describe("test formatter functions", () => {
     });
   });
   describe("test formatValue", () => {
-    it("should be ", () => {
+    it("should be round number by internal conditions", () => {
       expect(formatValue(1.000000001)).toEqual("1.00000001");
 
       expect(formatValue(1.123456789)).toEqual("1.12345678");
@@ -70,19 +70,19 @@ describe("test formatter functions", () => {
       expect(formatValue(1001.00001)).toEqual("1001.01");
 
       expect(formatValue(1001.0)).toEqual("1001");
-      expect(formatValue(1001.0000)).toEqual("1001");
+      expect(formatValue(1001.0)).toEqual("1001");
 
-      expect(formatValue(1.123456789,3)).toEqual("1.123");
-      expect(formatValue(11.123456789,3)).toEqual("11.123");
-      expect(formatValue(101.999999999,3)).toEqual("101.999");
-      expect(formatValue(1001.999999999,3)).toEqual("1001.999");
+      expect(formatValue(1.123456789, 3)).toEqual("1.123");
+      expect(formatValue(11.123456789, 3)).toEqual("11.123");
+      expect(formatValue(101.999999999, 3)).toEqual("101.999");
+      expect(formatValue(1001.999999999, 3)).toEqual("1001.999");
 
-      expect(formatValue(1.0000000001,3)).toEqual("1.001");
-      expect(formatValue(11.0000000001,3)).toEqual("11.001");
-      expect(formatValue(101.00001,3)).toEqual("101.001");
-      expect(formatValue(1001.00001,3)).toEqual("1001.001");
+      expect(formatValue(1.0000000001, 3)).toEqual("1.001");
+      expect(formatValue(11.0000000001, 3)).toEqual("11.001");
+      expect(formatValue(101.00001, 3)).toEqual("101.001");
+      expect(formatValue(1001.00001, 3)).toEqual("1001.001");
 
-      expect(formatValue(0.119,2)).toEqual("0.11");
+      expect(formatValue(0.119, 2)).toEqual("0.11");
     });
   });
   describe("test formatPercent", () => {
@@ -96,20 +96,20 @@ describe("test formatter functions", () => {
   });
   describe("test validateFraction", () => {
     it("should be ", () => {
-      expect(validateFraction("0.01","BTC")).toBe(true);
-      expect(validateFraction("0.00000001","BTC")).toBe(true);
-      expect(validateFraction("0.000000001","BTC")).toBe(false);
-      expect(validateFraction("0.01","ETH")).toBe(true);
-      expect(validateFraction("0.00000001","ETH")).toBe(true);
-      expect(validateFraction("0.000000001","ETH")).toBe(false);
+      expect(validateFraction("0.01", "BTC")).toBe(true);
+      expect(validateFraction("0.00000001", "BTC")).toBe(true);
+      expect(validateFraction("0.000000001", "BTC")).toBe(false);
+      expect(validateFraction("0.01", "ETH")).toBe(true);
+      expect(validateFraction("0.00000001", "ETH")).toBe(true);
+      expect(validateFraction("0.000000001", "ETH")).toBe(false);
 
-      expect(validateFraction("0.01","GVT")).toBe(true);
-      expect(validateFraction("0.0001","GVT")).toBe(true);
-      expect(validateFraction("0.00000001","GVT")).toBe(false);
+      expect(validateFraction("0.01", "GVT")).toBe(true);
+      expect(validateFraction("0.0001", "GVT")).toBe(true);
+      expect(validateFraction("0.00000001", "GVT")).toBe(false);
 
-      expect(validateFraction("0.01","USD")).toBe(true);
-      expect(validateFraction("0.0001","USD")).toBe(false);
-      expect(validateFraction("0.00000001","USD")).toBe(false);
+      expect(validateFraction("0.01", "USD")).toBe(true);
+      expect(validateFraction("0.0001", "USD")).toBe(false);
+      expect(validateFraction("0.00000001", "USD")).toBe(false);
     });
   });
 });
