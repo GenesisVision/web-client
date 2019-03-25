@@ -19,7 +19,7 @@ export const composeUrl = (route: string, slugParamName: string) => (
   slugUrl: string
 ) =>
   replaceParams(route, {
-    [`:${slugParamName}`]: slugUrl
+    [`${slugParamName}`]: slugUrl
   });
 
 export const composeProgramDetailsUrl = (slugUrl: string): string =>
